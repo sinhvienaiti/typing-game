@@ -1279,3 +1279,89 @@ Keep the Shooter learning rule: English only before success; VN + IPA + English 
 
 Prefer simple maintainable solutions and protect input responsiveness/performance.
 ~~~
+
+
+---
+
+# 43. Cross-game engagement and performance rule
+
+On 2026-09-19 the user expanded the product requirement beyond merely making game mechanics functional.
+
+For Vocabulary Shooter and future games, the expected design process is:
+
+~~~text
+learning goal
+→ analyze comparable game patterns
+→ improve the raw idea
+→ add purposeful audio/visual feedback
+→ preserve keyboard-first flow
+→ define results/metrics
+→ define a performance budget
+→ implement
+~~~
+
+The game must not feel visually flat or mechanically robotic.
+
+At the same time, attractive effects must never be allowed to materially damage typing latency or frame stability.
+
+The permanent cross-game principle is:
+
+~~~text
+engaging + attractive + smooth + performant
+~~~
+
+Background music, danger feedback and rewarding success effects are now considered part of the desired game experience when appropriate.
+
+Real audio assets must have a clear compatible license and attribution when required.
+
+---
+
+# 44. Vocabulary Shooter multi-mode direction
+
+Vocabulary Shooter is now planned as a multi-mode game.
+
+Confirmed modes/mechanics:
+
+~~~text
+Classic Survival
+→ current lives/falling-word gameplay becomes one explicit mode
+
+Bounce / Relax
+→ words move continuously by velocity
+→ wall impact reflects the velocity like billiards
+→ no random self-steering during motion
+→ configurable maximum active word count
+→ exceeding the cap loses the run
+
+Time Attack
+→ configurable fixed duration, including 100s
+→ no early lives-based game over
+→ missed words are counted
+→ final results show how many were correct/missed during the window
+
+Target Rush
+→ preselect a configurable pool such as 70 words
+→ highlight targets on a fixed cadence
+→ next target activates even when the old word is unfinished
+→ example timing: 3s spotlight + 2s dive
+→ unfinished old target dives toward the player during the extra 2s
+→ it remains typable during the dive
+→ impact with the player ends the run
+~~~
+
+All modes retain the learning contract:
+
+~~~text
+VN + IPA + English pronunciation
+only after the full English target is completed correctly
+~~~
+
+Shooter also requires a configurable keyboard quick-restart action using Tab or Escape.
+
+Detailed mode behavior, recommended settings, audio design, effects, performance budgets and implementation order are documented in:
+
+~~~text
+docs/design/VOCAB_SHOOTER_GAME_MODES.md
+~~~
+
+The design document distinguishes confirmed requirements from recommendations that can still be tuned before code implementation.

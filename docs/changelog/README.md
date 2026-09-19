@@ -25,7 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
-| 2026-09-19 | Established the multi-game local platform; created the parent/submodule Git structure; implemented Portal, .local routing, dev/play modes and Shooter MVP; documented Monkeytype EN-VN behavior; fixed pnpm 11/esbuild, Shooter Canvas text/header issues, and Monkeytype nginx/Vite/Turbo reverse-proxy problems. | [2026-09-19](./2026-09-19.md) |
+| 2026-09-19 | Established the multi-game local platform and Git/submodule structure; implemented Portal, .local routing, dev/play modes and Shooter MVP; fixed pnpm/esbuild, Shooter rendering and Monkeytype proxy issues; then defined Shooter multi-mode expansion (Classic, Bounce, Time Attack, Target Rush), quick restart, richer audio/effects and cross-game engagement/performance rules. | [2026-09-19](./2026-09-19.md) |
 
 ## Current repositories
 
