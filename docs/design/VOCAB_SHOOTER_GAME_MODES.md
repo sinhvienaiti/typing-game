@@ -11,9 +11,10 @@ Date created:
 Status:
 
 ~~~text
-Design analysis complete.
-Core requirements are confirmed.
-Mode names, exact default values and some secondary tuning remain adjustable before implementation.
+Initial multi-mode implementation completed on 2026-09-19.
+Core requirements are implemented.
+Shooter TypeScript/Vite CI is green at revision 8b1bebe8fc0b1f3e0392e2fd32039f29d317d39c.
+Gameplay tuning, final music composition and visual polish can continue after hands-on testing.
 ~~~
 
 This document defines the next major direction for Vocabulary Shooter.
@@ -1424,3 +1425,45 @@ All of the following should be true:
 ---
 
 # End of design
+
+
+---
+
+# 23. Implementation checkpoint
+
+Initial implementation now includes:
+
+~~~text
+Classic Survival
+Bounce / Relax
+Time Attack
+Target Rush
+~~~
+
+Implemented shared features:
+
+- mode tabs and mode-specific configuration,
+- settings migration,
+- Tab/Escape quick restart and alternate unlock key,
+- shared results dialog,
+- offline procedural base/danger audio and SFX,
+- bubble/liquid hit effect with quality-dependent particle budgets,
+- hidden-tab RAF pause and AudioContext suspension,
+- Target Rush top Learning Panel,
+- Target Rush fixed cadence + danger dive + late save,
+- dense board draw ordering/readability adjustments.
+
+Verification:
+
+~~~text
+vocab-shooter revision:
+8b1bebe8fc0b1f3e0392e2fd32039f29d317d39c
+
+CI:
+pnpm build
+→ tsc --noEmit
+→ vite build
+→ PASS
+~~~
+
+The implementation is ready for hands-on gameplay testing. Visual/music tuning is intentionally still open because those parts should be judged while actually playing rather than guessed only from code.

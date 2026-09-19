@@ -1404,3 +1404,251 @@ When the next target activates, the panel switches immediately to the new word a
 If the old word enters the danger/dive state, it may remain typable, but it must not take over the top Learning Panel from the new spotlight target.
 
 For Target Rush, success effects should normally not replay the pronunciation because it was already played at spotlight activation.
+
+
+---
+
+# 46. Offline-first core gameplay rule
+
+Core gameplay for every game in this platform must remain playable offline after the project has been installed/built locally.
+
+Permanent rule:
+
+~~~text
+core gameplay
+→ must work offline
+
+online services
+→ optional enhancement only
+→ must not be required to start or finish the main learning/game loop
+~~~
+
+Current implications:
+
+~~~text
+Portal
+→ local nginx/static files
+
+Vocabulary Shooter
+→ local static frontend
+→ IndexedDB/localStorage
+→ procedural local audio/SFX
+→ browser/system SpeechSynthesis
+
+Monkeytype custom local typing
+→ local frontend/static build
+→ custom EN-VN settings in localStorage
+~~~
+
+Some original Monkeytype account/cloud/leaderboard features can still require network access. Those are not allowed to become dependencies of the local custom typing workflow.
+
+For pronunciation, prefer a voice already installed in the browser/operating system so SpeechSynthesis remains available offline.
+
+---
+
+# 47. Vocabulary Shooter multi-mode implementation baseline
+
+The multi-mode Shooter design is no longer only a proposal. An initial implementation now exists in:
+
+~~~text
+sinhvienaiti/vocab-shooter
+branch main
+~~~
+
+Verified child revision:
+
+~~~text
+8b1bebe8fc0b1f3e0392e2fd32039f29d317d39c
+~~~
+
+The implementation includes:
+
+~~~text
+Classic Survival
+Bounce / Relax
+Time Attack
+Target Rush
+~~~
+
+It also includes:
+
+- per-mode settings with migration from the earlier settings shape,
+- configurable Tab/Escape quick restart,
+- common results screen,
+- Target Rush dedicated top VN/IPA Learning Panel,
+- immediate Target Rush pronunciation at spotlight activation,
+- fixed spotlight cadence and danger-dive behavior,
+- late-save feedback,
+- offline procedural background/danger audio and SFX,
+- water/bubble-style hit particles and expanding ring,
+- performance/balanced/quality particle/DPR budgets,
+- hidden-tab RAF pause and audio suspension,
+- dense Target Rush board rendering that draws dormant items first and active/danger targets above them,
+- larger readable active/danger Target Rush cards without making every dormant card expensive.
+
+Shooter CI runs:
+
+~~~text
+pnpm build
+→ tsc --noEmit
+→ vite build
+~~~
+
+The latest implementation/review revision above passed that CI.
+
+The procedural background audio is an offline-safe first implementation, not the final music-content polish. A later pass may replace/improve the musical composition with licensed local assets while keeping the same performance and offline rules.
+
+---
+
+# 48. Monkeytype corrected-error accuracy option
+
+Monkeytype now has an additional optional input setting:
+
+~~~text
+forgiveCorrectedErrors
+~~~
+
+UI label:
+
+~~~text
+forgive corrected errors
+~~~
+
+Default:
+
+~~~text
+false
+~~~
+
+It only changes behavior when:
+
+~~~text
+stop on error != off
+~~~
+
+The original Monkeytype scoring behavior remains unchanged when the option is disabled.
+
+## Letter stop-on-error behavior
+
+With:
+
+~~~text
+stop on error = letter
+forgive corrected errors = on
+~~~
+
+the first wrong attempt at a blocked character can be recorded, but additional wrong attempts at that same blocked character do not keep reducing accuracy.
+
+When the correct character is finally entered, the previous blocked error is forgiven for accuracy.
+
+Concept:
+
+~~~text
+target: hello
+
+x
+→ first blocked error
+
+y
+→ still blocked at the same character
+→ no additional accuracy penalty
+
+h
+→ blocked character corrected
+→ previous blocked accuracy penalty is removed
+~~~
+
+## Word stop-on-error behavior
+
+With:
+
+~~~text
+stop on error = word
+forgive corrected errors = on
+~~~
+
+the first error in the currently blocked word can count, but further errors while that same word remains incorrect do not repeatedly reduce accuracy.
+
+Once the word is corrected, the prior error for that blocked word is forgiven.
+
+Correction is detected both when:
+
+- normal correct typing makes the word text correct again, and
+- a deletion/backspace removes the bad input and leaves the current word exactly correct.
+
+This directly addresses the case where Stop on Error prevents advancing to the next word but extra keystrokes intended for later words would otherwise keep lowering accuracy.
+
+## Implementation
+
+Input events can carry:
+
+~~~text
+accuracyIgnored: true
+~~~
+
+Forgiven/repeated blocked errors remain in the event history for reproducibility/debugging but are excluded from accuracy calculations.
+
+The live accuracy cache is adjusted incrementally instead of rescanning the complete event history after each correction.
+
+Final accuracy and accuracy-related error history also ignore forgiven events.
+
+Main changed areas:
+
+~~~text
+packages/schemas/src/configs.ts
+frontend/src/ts/constants/default-config.ts
+frontend/src/ts/config/metadata.tsx
+frontend/src/ts/input/handlers/insert-text.ts
+frontend/src/ts/input/handlers/delete.ts
+frontend/src/ts/test/events/types.ts
+frontend/src/ts/test/events/data.ts
+frontend/src/ts/test/events/live-cache.ts
+frontend/src/ts/test/events/stats.ts
+frontend/__tests__/input/handlers/insert-text.spec.ts
+frontend/__tests__/test/events/stats.spec.ts
+~~~
+
+Current Monkeytype child revision:
+
+~~~text
+9ba873ac06411802979ac9fdf48b435db82eb071
+~~~
+
+Targeted unit tests were added for:
+
+- repeated blocked attempts,
+- restoring live/final accuracy after correction,
+- preserving original behavior when disabled,
+- word-level blocked-error forgiveness,
+- direct accuracy-stat handling of forgiven events.
+
+The fork's existing Monkey CI is configured for master and non-draft/forced pull-request CI. The code/tests are present in the feature branch; do not claim a full Monkeytype CI pass unless an actual workflow run or local test output confirms it.
+
+Detailed design/behavior is documented in:
+
+~~~text
+docs/design/MONKEYTYPE_CORRECTED_ERROR_ACCURACY.md
+~~~
+
+---
+
+# 49. Current pinned child revisions
+
+After the 2026-09-19 feature implementation/review work, the platform pins:
+
+~~~text
+games/vocab-shooter
+→ 8b1bebe8fc0b1f3e0392e2fd32039f29d317d39c
+
+games/monkeytype
+→ 9ba873ac06411802979ac9fdf48b435db82eb071
+~~~
+
+Use the parent repository plus:
+
+~~~bash
+git pull
+git submodule update --init --recursive
+~~~
+
+to reproduce those versions.

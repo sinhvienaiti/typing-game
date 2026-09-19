@@ -5,6 +5,7 @@ This folder contains design decisions that are larger than a daily changelog ent
 Current documents:
 
 - [Vocabulary Shooter - Game Modes and Engagement Design](./VOCAB_SHOOTER_GAME_MODES.md)
+- [Monkeytype - Corrected Error Accuracy](./MONKEYTYPE_CORRECTED_ERROR_ACCURACY.md)
 
 ## Status convention
 
