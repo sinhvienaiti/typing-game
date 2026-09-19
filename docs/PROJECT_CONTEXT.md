@@ -1275,7 +1275,9 @@ Every game is an independent repository mounted as a submodule.
 If you modify a child game, commit the child repo first and then update the submodule pointer in typing-game.
 
 Keep .local.
-Keep the Shooter learning rule: English only before success; VN + IPA + English TTS only after the entire English target is correct.
+Keep the Shooter learning rules:
+- Classic/Bounce/Time Attack: English only before success; VN + IPA + English TTS after full correct English.
+- Target Rush: when the spotlight activates, immediately show VN + IPA in the dedicated top Learning Panel and pronounce the English target. Do not attach VN/IPA to the glowing target itself.
 
 Prefer simple maintainable solutions and protect input responsiveness/performance.
 ~~~
@@ -1349,11 +1351,19 @@ Target Rush
 → impact with the player ends the run
 ~~~
 
-All modes retain the learning contract:
+Learning timing is mode-specific:
 
 ~~~text
-VN + IPA + English pronunciation
-only after the full English target is completed correctly
+Classic Survival / Bounce / Time Attack
+→ VN + IPA + English pronunciation only after full correct English
+
+Target Rush
+→ when the spotlight target activates:
+   show VN large in a dedicated top Learning Panel
+   show IPA below it
+   pronounce the English target immediately
+→ the glowing target itself remains English-only
+→ the panel follows the newest spotlight target, not older danger targets
 ~~~
 
 Shooter also requires a configurable keyboard quick-restart action using Tab or Escape.
@@ -1365,3 +1375,32 @@ docs/design/VOCAB_SHOOTER_GAME_MODES.md
 ~~~
 
 The design document distinguishes confirmed requirements from recommendations that can still be tuned before code implementation.
+
+
+---
+
+# 45. Target Rush dedicated learning panel
+
+Target Rush intentionally differs from the other Shooter modes.
+
+When a word becomes the active spotlight target:
+
+~~~text
+spotlight target activates
+→ dedicated top Learning Panel updates
+→ Vietnamese meaning is shown large and clear
+→ IPA is shown directly below
+→ English pronunciation plays immediately
+~~~
+
+The Learning Panel must occupy a reserved area above the target field.
+
+It must **not** behave like Monkeytype's per-word tooltip and must **not** place VN/IPA directly on the yellow/glowing target.
+
+The active board target remains English-focused.
+
+When the next target activates, the panel switches immediately to the new word and previous speech is cancelled before speaking the new target.
+
+If the old word enters the danger/dive state, it may remain typable, but it must not take over the top Learning Panel from the new spotlight target.
+
+For Target Rush, success effects should normally not replay the pronunciation because it was already played at spotlight activation.
