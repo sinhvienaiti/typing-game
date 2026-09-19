@@ -46,7 +46,7 @@ pnpm bootstrap
 pnpm setup:dev
 ```
 
-`pnpm setup:dev` ensures the Recall Typing host exists in `/etc/hosts` and regenerates the local mkcert certificate when the new hostname is not yet covered.
+`pnpm setup:dev` verifies all local platform hosts in `/etc/hosts`, ensures the mkcert local CA is installed, and regenerates the shared certificate whenever any required hostname is missing from the certificate.
 
 ## Development
 
