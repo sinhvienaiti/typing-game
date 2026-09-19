@@ -48,30 +48,34 @@ for port in "$@"; do
   done
 done
 
-for target in "${targets[@]}"; do
-  pid="${target%%:*}"
-  port="${target##*:}"
-  echo "Stopping stale typing-game process on port $port (PID $pid)..."
-  kill "$pid" 2>/dev/null || true
-done
-
-if [[ "$PROJECT_ONLY" == "true" ]]; then
+if [[ "${#targets[@]}" -gt 0 ]]; then
   for target in "${targets[@]}"; do
     pid="${target%%:*}"
     port="${target##*:}"
-
-    for _ in {1..30}; do
-      if ! lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
-        break
-      fi
-      sleep 0.1
-    done
-
-    if lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
-      echo "Typing-game process PID $pid is still listening on port $port."
-      exit 1
-    fi
+    echo "Stopping stale typing-game process on port $port (PID $pid)..."
+    kill "$pid" 2>/dev/null || true
   done
+fi
+
+if [[ "$PROJECT_ONLY" == "true" ]]; then
+  if [[ "${#targets[@]}" -gt 0 ]]; then
+    for target in "${targets[@]}"; do
+      pid="${target%%:*}"
+      port="${target##*:}"
+
+      for _ in {1..30}; do
+        if ! lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
+          break
+        fi
+        sleep 0.1
+      done
+
+      if lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
+        echo "Typing-game process PID $pid is still listening on port $port."
+        exit 1
+      fi
+    done
+  fi
   exit 0
 fi
 
