@@ -5,7 +5,7 @@
 ~~~text
 Initial implementation completed on 2026-09-19.
 Core MVP is implemented and integrated into the typing-game platform.
-CI passed at revision 054cd95eaba2952c806f67bf6431ce355331c5e1.
+CI passed at revision 35e69c6e7f2bc1c7868a979f779d58bb0121c5d8.
 ~~~
 
 ## 1. Product decision
@@ -405,12 +405,13 @@ MVP implementation exists in:
 ~~~text
 sinhvienaiti/recall-typing
 main
-054cd95eaba2952c806f67bf6431ce355331c5e1
+35e69c6e7f2bc1c7868a979f779d58bb0121c5d8
 ~~~
 
 Implemented:
 
 - progressive hidden-letter reveal,
+- clean underline blanks for unrevealed characters,
 - structural punctuation/space visibility,
 - Vietnamese/IPA hint panel,
 - browser/system English pronunciation,

@@ -1762,7 +1762,7 @@ branch main
 Initial reviewed/CI revision:
 
 ~~~text
-054cd95eaba2952c806f67bf6431ce355331c5e1
+35e69c6e7f2bc1c7868a979f779d58bb0121c5d8
 ~~~
 
 The child CI runs:
@@ -1794,6 +1794,7 @@ Implemented behavior:
 - JSON backup/import is supported.
 - Results include completed words, wrong attempts, accuracy, max streak, elapsed time and average word time.
 - The implementation is DOM/CSS based with no permanent RAF/render loop.
+- After review, hidden slots render as clean underline blanks without placeholder glyphs that could distract from recall.
 
 Platform integration:
 
