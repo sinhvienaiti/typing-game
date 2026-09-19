@@ -2130,7 +2130,7 @@ The current reviewed child revisions are:
 ~~~text
 Monkeytype
 feature/en-vn-translation
-516beff4451282c4fb74d203305ca5c7981924d5
+e1667b2aee0ee384a13e3c4189a96e9da4388dd7
 
 Vocabulary Shooter
 main
@@ -2301,37 +2301,88 @@ This improves perceived loading without keeping inactive game runtimes alive.
 
 ---
 
-# 62. Full-text reader recommendation
+# 62. Monkeytype full-text reader
 
-A full-text reader is a suitable future Monkeytype Custom Text option.
+The Monkeytype Custom Text settings now include a full-text reader.
 
-Preferred implementation:
+Technology:
 
 ~~~text
-existing browser/system SpeechSynthesis
-+
+browser/system SpeechSynthesis
 SpeechSynthesisUtterance
 ~~~
 
-Do not add a cloud TTS dependency or a large in-browser neural model for the first version.
+No external TTS library or remote/cloud audio pipeline is part of the feature.
 
-Recommended controls:
+Settings persisted in `personalEnVnTranslationSettings`:
 
-- enabled,
-- Auto / English / Vietnamese language,
-- local voice selection,
-- rate,
-- volume,
-- Play / Stop,
-- optional Pause / Resume.
+~~~text
+textReaderEnabled
+textReaderLanguage
+textReaderVoiceURI
+textReaderRate
+textReaderVolume
+~~~
 
-Long text should be split into sentence/short-paragraph chunks and queued one chunk at a time.
+Language options:
 
-Prefer local system voices for offline behavior and low latency.
+~~~text
+auto
+en-US
+vi-VN
+~~~
 
-If the operating system/browser does not expose a local Vietnamese voice, the UI should say so rather than silently introducing a network requirement.
+Auto detects Vietnamese-specific marks and otherwise uses English.
 
-This is a documented future option, not implemented in the 2026-09-20 code pass.
+Voice rule:
+
+~~~text
+only SpeechSynthesisVoice entries with localService === true
+~~~
+
+If no matching local voice exists, reading does not silently fall back to remote speech.
+
+Rate:
+
+~~~text
+0.5x → 2.0x
+~~~
+
+Volume:
+
+~~~text
+0 → 100
+~~~
+
+Runtime controls:
+
+~~~text
+Play / Restart
+Pause / Resume
+Stop
+~~~
+
+Long text is chunked before playback; oversized unbroken tokens are also bounded.
+
+The full-text reader and existing EN-VN word pronunciation intentionally share one browser speech queue. Starting word pronunciation stops the full-text reader and updates reader state before speaking the word.
+
+The modal stops full-text reading when it closes.
+
+Current reviewed Monkeytype revision:
+
+~~~text
+e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+~~~
+
+Verification:
+
+~~~text
+Custom EN-VN CI
+→ lint PASS
+→ stylelint PASS
+→ local-static production build PASS
+→ full frontend tests PASS
+~~~
 
 ---
 
@@ -2394,7 +2445,7 @@ The second word must not trigger a separate "injection" learning cue when it bel
 Current reviewed Monkeytype revision:
 
 ~~~text
-516beff4451282c4fb74d203305ca5c7981924d5
+e1667b2aee0ee384a13e3c4189a96e9da4388dd7
 ~~~
 
 ## Target Rush ultra-dense width
@@ -2462,3 +2513,67 @@ Once all static builds are current, repeated `./play.sh` runs should not invoke 
 
 The Portal still mounts only the selected game iframe. In Play mode, child apps are served as prebuilt static assets by nginx rather than Vite dev servers.
 
+
+
+---
+
+# 66. macOS Bash 3.2 empty cleanup compatibility
+
+Observed local failure:
+
+~~~text
+scripts/cleanup-dev-ports.sh: line 56: targets[0]: unbound variable
+~~~
+
+This occurred when `./dev.sh all` reached port cleanup and there were no old project-owned listeners to stop.
+
+The project uses:
+
+~~~text
+set -euo pipefail
+~~~
+
+macOS Bash 3.2 can treat an empty array expansion under nounset differently from the newer Bash used by CI.
+
+Portable rule:
+
+~~~text
+do not expand targets[@] when there are zero targets
+~~~
+
+Implementation uses a separate scalar:
+
+~~~text
+target_count
+~~~
+
+The array is expanded only when `target_count > 0`.
+
+Do not replace this with an unconditional empty-array loop merely because it works on a newer Bash.
+
+Platform CI also executes an empty project-only cleanup smoke test.
+
+---
+
+# 67. Current Monkeytype reader baseline
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+~~~
+
+This baseline includes:
+
+- EN-VN tooltip/top learning,
+- optional Monkeytype Recall mode,
+- English word/phrase pronunciation,
+- full Custom Text reader,
+- Auto/English/Vietnamese reader language,
+- local system voice selection,
+- rate and volume controls,
+- Play/Restart/Pause/Resume/Stop,
+- chunked long-text speech,
+- shared speech-queue coordination.
+
+No remote TTS dependency was added.

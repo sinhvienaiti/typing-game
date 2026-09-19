@@ -7,7 +7,7 @@ Implemented and reviewed on:
 ~~~text
 sinhvienaiti/monkeytype
 branch feature/en-vn-translation
-revision 516beff4451282c4fb74d203305ca5c7981924d5
+revision e1667b2aee0ee384a13e3c4189a96e9da4388dd7
 ~~~
 
 This mode is an optional extension of the existing Custom Text EN-VN learning feature.
@@ -216,7 +216,7 @@ only the two-word phrase starts a recall cue.
 Final reviewed revision:
 
 ~~~text
-516beff4451282c4fb74d203305ca5c7981924d5
+e1667b2aee0ee384a13e3c4189a96e9da4388dd7
 ~~~
 
 Dedicated Custom EN-VN CI is green at this revision.
