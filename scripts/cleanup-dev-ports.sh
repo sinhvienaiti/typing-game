@@ -2,9 +2,15 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+PROJECT_ONLY=false
+
+if [[ "${1:-}" == "--project-only" ]]; then
+  PROJECT_ONLY=true
+  shift
+fi
 
 if [[ "$#" -eq 0 ]]; then
-  echo "Usage: $0 <port> [port ...]"
+  echo "Usage: $0 [--project-only] <port> [port ...]"
   exit 1
 fi
 
@@ -27,6 +33,10 @@ for port in "$@"; do
     cwd="$(lsof -a -p "$pid" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p' | head -n 1)"
 
     if [[ "$cwd" != "$ROOT_DIR" && "$cwd" != "$ROOT_DIR/"* ]]; then
+      if [[ "$PROJECT_ONLY" == "true" ]]; then
+        continue
+      fi
+
       echo "Port $port is already used by a process outside this project."
       echo "PID: $pid"
       echo "cwd: ${cwd:-unknown}"
@@ -44,6 +54,26 @@ for target in "${targets[@]}"; do
   echo "Stopping stale typing-game process on port $port (PID $pid)..."
   kill "$pid" 2>/dev/null || true
 done
+
+if [[ "$PROJECT_ONLY" == "true" ]]; then
+  for target in "${targets[@]}"; do
+    pid="${target%%:*}"
+    port="${target##*:}"
+
+    for _ in {1..30}; do
+      if ! lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
+        break
+      fi
+      sleep 0.1
+    done
+
+    if lsof -a -p "$pid" -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then
+      echo "Typing-game process PID $pid is still listening on port $port."
+      exit 1
+    fi
+  done
+  exit 0
+fi
 
 for port in "$@"; do
   for _ in {1..30}; do

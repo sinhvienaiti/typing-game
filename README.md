@@ -94,18 +94,33 @@ pnpm dev:recall
 
 ## Daily / Play mode
 
+Recommended launcher:
+
+```bash
+./play.sh
+```
+
+Play mode is intentionally local-only and does **not** pull Git, update submodules, or install dependencies.
+
+It performs only the work needed to play:
+
+```text
+stop old typing-game dev servers
+→ check static outputs
+→ rebuild only apps whose local source is newer than their static build
+→ switch nginx to static Play mode if needed
+→ open https://typing-game.local
+```
+
+If every static build is already current, no Node/Vite development server is started and no rebuild is performed.
+
+Lower-level commands remain available when needed:
+
 ```bash
 pnpm build:local
 pnpm setup:play
-```
-
-After a static build exists, normal use only needs nginx and the browser:
-
-```bash
 pnpm play
 ```
-
-or simply open `https://typing-game.local` if nginx is already running.
 
 ## Submodules
 

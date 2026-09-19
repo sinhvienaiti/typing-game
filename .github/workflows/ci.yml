@@ -22,13 +22,21 @@ jobs:
           node-version: 24.11.0
 
       - name: Validate shell scripts
-        run: bash -n dev.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh
+        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh
 
       - name: Validate dev launcher arguments
         run: |
           bash dev.sh --help >/dev/null
           if bash dev.sh invalid-target >/dev/null 2>&1; then
             echo "dev.sh accepted an invalid target"
+            exit 1
+          fi
+
+      - name: Validate play launcher arguments
+        run: |
+          bash play.sh --help >/dev/null
+          if bash play.sh invalid-target >/dev/null 2>&1; then
+            echo "play.sh accepted an invalid argument"
             exit 1
           fi
 

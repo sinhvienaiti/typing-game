@@ -2411,3 +2411,54 @@ Current reviewed Shooter revision:
 
 Both child CI workflows are green at these revisions.
 
+---
+
+# 65. Root Play launcher
+
+Normal study/play startup is:
+
+~~~bash
+./play.sh
+~~~
+
+Play mode is deliberately separate from development mode.
+
+It must not:
+
+- run `git pull`,
+- update submodules,
+- install dependencies,
+- start Vite/Turbo watchers.
+
+Those responsibilities belong to `./dev.sh`.
+
+Play mode may rebuild a static app when its current local source is newer than its existing static output. This is a local compilation step, not a source update.
+
+Current flow:
+
+~~~text
+stop project-owned dev listeners
+→ selectively refresh stale static builds
+→ switch nginx to Play config if needed
+→ open https://typing-game.local
+~~~
+
+The four development ports are not required in Play mode:
+
+~~~text
+3000
+3001
+3002
+3100
+~~~
+
+Any old typing-game listeners on those ports are stopped before play so they do not keep consuming resources.
+
+The cleanup helper's `--project-only` option must never terminate or block on an unrelated application's listener.
+
+Build freshness is checked independently per app so changing Recall does not force a Monkeytype rebuild, and vice versa.
+
+Once all static builds are current, repeated `./play.sh` runs should not invoke pnpm builds.
+
+The Portal still mounts only the selected game iframe. In Play mode, child apps are served as prebuilt static assets by nginx rather than Vite dev servers.
+
