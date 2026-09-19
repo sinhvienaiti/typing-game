@@ -2130,11 +2130,11 @@ The current reviewed child revisions are:
 ~~~text
 Monkeytype
 feature/en-vn-translation
-39b611219d7d5e554c45a645c08ab5016e3bc1e9
+516beff4451282c4fb74d203305ca5c7981924d5
 
 Vocabulary Shooter
 main
-8ef47e41d4e0239c40a298001e2d5619c7bf638d
+7e23c1241360be8f08fce83b4733300dad12aa88
 
 Recall Typing
 main
@@ -2360,4 +2360,54 @@ Portal parent revision 2fbf31d...
 ~~~
 
 The final parent commit pins the reviewed child revisions and must itself pass Platform CI before this baseline is treated as closed.
+
+---
+
+# 64. Second-pass phrase/cell edge-case fixes
+
+Before the 2026-09-20 baseline was finally pinned, a second logic review found two additional edge cases.
+
+## Monkeytype overlapping phrases
+
+Recall rendering and recall learning cues must use the same greedy longest-match boundaries.
+
+Current implementation:
+
+~~~text
+dictionary scan during word rendering
+→ target indices + phrase-start indices
+→ phrase-start marker on rendered word
+→ active/started-word cue checks the marker
+~~~
+
+This prevents a shorter dictionary entry inside a longer phrase from becoming a second recall cue.
+
+Example:
+
+~~~text
+dependency injection = tiêm phụ thuộc
+injection = tiêm
+~~~
+
+The second word must not trigger a separate "injection" learning cue when it belongs to the already selected two-word phrase.
+
+Current reviewed Monkeytype revision:
+
+~~~text
+516beff4451282c4fb74d203305ca5c7981924d5
+~~~
+
+## Target Rush ultra-dense width
+
+Target Rush target width must not keep a minimum that is larger than the real grid cell on narrow/dense boards.
+
+The current renderer uses the actual cell-derived target width for text fitting and a smaller safe drawing floor.
+
+Current reviewed Shooter revision:
+
+~~~text
+7e23c1241360be8f08fce83b4733300dad12aa88
+~~~
+
+Both child CI workflows are green at these revisions.
 

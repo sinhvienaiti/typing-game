@@ -7,7 +7,7 @@ Implemented and reviewed on:
 ~~~text
 sinhvienaiti/monkeytype
 branch feature/en-vn-translation
-revision 39b611219d7d5e554c45a645c08ab5016e3bc1e9
+revision 516beff4451282c4fb74d203305ca5c7981924d5
 ~~~
 
 This mode is an optional extension of the existing Custom Text EN-VN learning feature.
@@ -185,3 +185,39 @@ PASS
 ~~~
 
 The review also fixed unrelated/pre-existing corrected-error test/type metadata issues found by the full branch checks rather than hiding or skipping them.
+
+---
+
+# 11. Overlapping phrase boundary guarantee
+
+Recall target hiding and recall learning cues use the same greedy longest-match boundaries.
+
+The render phase computes the recall phrase starts and marks only those start words.
+
+The active/started-word cue path reads that rendered marker instead of independently treating every dictionary-matching word as a fresh phrase start.
+
+This prevents a shorter entry inside a longer selected phrase from firing twice.
+
+Regression example:
+
+~~~text
+dependency injection = tiêm phụ thuộc
+injection = tiêm
+~~~
+
+For the text:
+
+~~~text
+dependency injection
+~~~
+
+only the two-word phrase starts a recall cue.
+
+Final reviewed revision:
+
+~~~text
+516beff4451282c4fb74d203305ca5c7981924d5
+~~~
+
+Dedicated Custom EN-VN CI is green at this revision.
+

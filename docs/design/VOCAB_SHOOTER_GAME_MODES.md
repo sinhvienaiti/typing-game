@@ -1475,7 +1475,7 @@ The implementation is ready for hands-on gameplay testing. Visual/music tuning i
 Reviewed revision:
 
 ~~~text
-8ef47e41d4e0239c40a298001e2d5619c7bf638d
+7e23c1241360be8f08fce83b4733300dad12aa88
 ~~~
 
 Target Rush presentation was refined for dense vocabulary pools.
@@ -1518,5 +1518,37 @@ Verification:
 GitHub Actions CI
 → TypeScript PASS
 → Vite build PASS
+~~~
+
+---
+
+# 25. Ultra-dense Target Rush cell-fit guarantee
+
+A follow-up review covered very large target pools on narrow viewports.
+
+The previous layout could still allow the target width floor to exceed the real grid cell width.
+
+Current rule:
+
+~~~text
+cell width is authoritative
+→ target width follows the cell
+→ font size is estimated from that width
+→ dormant draw max-width stays inside that width
+~~~
+
+The renderer may use very small dormant text for an extreme board rather than overlap neighboring targets.
+
+Final reviewed revision:
+
+~~~text
+7e23c1241360be8f08fce83b4733300dad12aa88
+~~~
+
+CI at this revision:
+
+~~~text
+TypeScript PASS
+Vite build PASS
 ~~~
 
