@@ -36,7 +36,6 @@ create_certificate() {
   echo "Creating local TLS certificate for all typing-game hosts..."
   local temp_dir
   temp_dir="$(mktemp -d)"
-  trap 'rm -rf "$temp_dir"' RETURN
 
   mkcert \
     -cert-file "$temp_dir/typing-game.local.pem" \
@@ -49,6 +48,7 @@ create_certificate() {
   sudo mkdir -p "$SSL_DIR"
   sudo cp "$temp_dir/typing-game.local.pem" "$CERT"
   sudo cp "$temp_dir/typing-game.local-key.pem" "$KEY"
+  rm -rf "$temp_dir"
 }
 
 ensure_hosts
