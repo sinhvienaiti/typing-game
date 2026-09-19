@@ -2049,3 +2049,74 @@ pnpm dev:recall
 ~~~
 
 Platform CI shell validation includes the cleanup script.
+
+
+---
+
+# 54. One-command development launcher
+
+Normal development startup is now centralized in the executable root script:
+
+~~~text
+./dev.sh
+~~~
+
+Default behavior:
+
+~~~text
+./dev.sh
+→ same as ./dev.sh all
+~~~
+
+Supported targets:
+
+~~~text
+all
+monkeytype
+shooter
+recall
+~~~
+
+Accepted convenience aliases:
+
+~~~text
+vocab-shooter
+recall-typing
+~~~
+
+The launcher intentionally does not hard-code the user's local absolute path. It resolves the repository root from the location of `dev.sh`.
+
+Flow:
+
+~~~text
+git pull --ff-only --recurse-submodules=no
+→ re-run the post-pull version of dev.sh
+→ bootstrap the selected scope
+→ git submodule sync/update to the revisions pinned by typing-game
+→ install/update platform + Portal dependencies
+→ install/update only the requested game dependencies, or every game for all
+→ pnpm setup:dev
+→ start the matching pnpm dev command
+~~~
+
+The post-pull re-exec is intentional: if `dev.sh` itself changes in the pulled revision, the newly pulled script controls the rest of that startup instead of continuing with stale in-memory instructions.
+
+Focused bootstrap is implemented in:
+
+~~~text
+scripts/bootstrap.sh [all|monkeytype|shooter|recall]
+~~~
+
+Common platform and Portal dependencies are always prepared because every browser-facing game route uses the Portal. A focused run prepares only its selected child game beyond those common dependencies.
+
+The launcher uses the child revisions pinned by the platform repository. It does not use `git submodule update --remote`, because the parent repository remains the integration source of truth.
+
+Examples:
+
+~~~bash
+./dev.sh
+./dev.sh all
+./dev.sh monkeytype
+./dev.sh shooter
+./dev.sh recall
+~~~
