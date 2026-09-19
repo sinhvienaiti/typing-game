@@ -24,8 +24,46 @@ button { font: inherit; }
 .game-copy h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
 .game-copy p { margin: 0; color: #798aa2; font-size: .8rem; line-height: 1.55; }
 .play { color: #7edfff; font-size: .7rem; font-weight: 900; letter-spacing: .11em; }
-.game-stage { min-height: 0; background: #05070c; }
-.game-frame { display: block; width: 100%; height: 100%; border: 0; background: #05070c; }
+.game-stage { position: relative; min-height: 0; background: #05070c; }
+.game-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #05070c;
+  opacity: 1;
+  transition: opacity .16s ease;
+}
+.game-frame.loading { opacity: 0; }
+.game-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: .45rem;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(90,129,255,.08), transparent 22rem),
+    #090d15;
+  color: #eaf3ff;
+  opacity: 1;
+  transition: opacity .16s ease;
+  pointer-events: none;
+}
+.game-loading.done { opacity: 0; }
+.game-loading strong { font-size: .92rem; }
+.game-loading span { color: #71839b; font-size: .72rem; }
+.game-loading-spinner {
+  width: 24px;
+  height: 24px;
+  margin-bottom: .2rem;
+  border: 2px solid rgba(128,151,185,.18);
+  border-top-color: #7bdfff;
+  border-radius: 50%;
+  animation: game-loading-spin .7s linear infinite;
+}
+@keyframes game-loading-spin { to { transform: rotate(360deg); } }
 .not-found { display: grid; place-content: center; text-align: center; }
 .not-found p { color: #7f8ea4; }
 @media (max-width:650px) { .global-nav { gap:.25rem; padding-inline:.35rem; } .home { padding:2rem 1rem; } }
