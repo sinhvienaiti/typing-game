@@ -25,7 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
-| 2026-09-19 | Established the multi-game local platform and submodule architecture; fixed local nginx/Vite/Turbo setup; implemented and CI-reviewed Shooter Classic/Bounce/Time Attack/Target Rush; added offline-first rules and Monkeytype corrected-error accuracy forgiveness; separated the hidden-word recall/spelling concept into Recall Typing, implemented it as an independent game, then completed a review pass that fixed restart/bulk/import/validation issues, added 9 unit tests, added Platform CI, fixed a Portal TypeScript issue found by CI, and left Recall + focused platform integration green. | [2026-09-19](./2026-09-19.md) |
+| 2026-09-19 | Established the multi-game local platform and submodule architecture; fixed local nginx/Vite/Turbo setup; implemented and CI-reviewed Shooter Classic/Bounce/Time Attack/Target Rush; added offline-first rules and Monkeytype corrected-error accuracy forgiveness; separated Recall Typing into its own game and completed its review/test pass; added Platform CI; then hardened repeated dev startup by safely clearing stale project-owned listeners on ports 3000/3001/3002/3100 without killing unrelated processes. | [2026-09-19](./2026-09-19.md) |
 
 ## Current repositories
 
