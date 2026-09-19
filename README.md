@@ -98,3 +98,14 @@ For Monkeytype development:
 ```bash
 git -C games/monkeytype switch feature/en-vn-translation
 ```
+
+
+## Project documentation
+
+The persistent project handoff and engineering history live under docs:
+
+- [Project context](./docs/PROJECT_CONTEXT.md) - current architecture, requirements, repositories, runtime modes, important implementation rules, and known technical decisions.
+- [Change log overview](./docs/changelog/README.md) - chronological index by day.
+- [2026-09-19 detail](./docs/changelog/2026-09-19.md) - detailed initial platform integration history.
+
+For future work, meaningful implementation or infrastructure changes should update the current day's change-log file and the change-log overview in the same Git workflow.
