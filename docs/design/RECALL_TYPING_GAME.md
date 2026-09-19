@@ -478,3 +478,53 @@ Vite production build
 ~~~
 
 The platform integration also has focused CI for shell syntax, registry JSON, Portal build and Recall build/test. That workflow caught and led to a fix for an unrelated pre-existing Portal nullability error before the integration was considered clean.
+
+---
+
+# 18. Interaction and responsive-layout refinement
+
+Reviewed revision:
+
+~~~text
+3beb3ceea3d23688d027134d945b33b8daceb894
+~~~
+
+The keyboard restart flow is now:
+
+~~~text
+Escape by default for new settings
+→ reset to Ready
+→ next normal key
+→ 3-second countdown
+→ start
+~~~
+
+An existing saved Tab/Escape preference is preserved by settings normalization.
+
+The reset path clears transition/countdown timers, speech and transient visual state before a new countdown begins.
+
+Game focus returns to the study stage so the user does not need to click before continuing.
+
+Long words and phrases use a responsive slot scale instead of one fixed large glyph size.
+
+The slot renderer adjusts:
+
+~~~text
+--slot-size
+--slot-gap
+~~~
+
+based on available width and target length, and recalculates on resize.
+
+Settings also include compact explanatory help indicators.
+
+Verification for this revision:
+
+~~~text
+GitHub Actions CI
+→ 2 test files PASS
+→ 9 tests PASS
+→ TypeScript PASS
+→ Vite build PASS
+~~~
+

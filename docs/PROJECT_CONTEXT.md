@@ -2120,3 +2120,244 @@ Examples:
 ./dev.sh shooter
 ./dev.sh recall
 ~~~
+
+---
+
+# 55. Cross-game interaction refinement baseline - 2026-09-20
+
+The current reviewed child revisions are:
+
+~~~text
+Monkeytype
+feature/en-vn-translation
+39b611219d7d5e554c45a645c08ab5016e3bc1e9
+
+Vocabulary Shooter
+main
+8ef47e41d4e0239c40a298001e2d5619c7bf638d
+
+Recall Typing
+main
+3beb3ceea3d23688d027134d945b33b8daceb894
+~~~
+
+For new Shooter and Recall settings, Escape is now the default quick-restart key.
+
+Migration must preserve an existing user-selected Tab/Escape value rather than silently replacing it.
+
+The keyboard restart interaction for both games is:
+
+~~~text
+quick restart key
+→ clean ready state
+→ next normal key
+→ 3-second countdown
+→ start
+~~~
+
+The Start / Restart button may begin the countdown directly.
+
+Restart must clear stale timers/transitions/speech and return keyboard focus to the game.
+
+---
+
+# 56. Monkeytype EN-VN three-line viewport rule
+
+The EN-VN learning extension must not disable Monkeytype's normal line-window behavior.
+
+Root cause of the 2026-09-20 expansion regression:
+
+~~~text
+core wrapper height was correct
++
+custom learning overflow exposed content below that height
+~~~
+
+Current rule:
+
+~~~text
+Monkeytype core controls typing viewport height
+translation UI may extend above / slightly outside horizontally
+typing content below the viewport remains clipped
+~~~
+
+Current custom wrapper uses a clip path with extra top/side allowance for translation tooltips.
+
+Do not restore a plain unrestricted overflow rule on the learning wrapper.
+
+Comfortable/wide EN-VN line spacing is intentionally larger than normal spacing so held Vietnamese tooltips have room without covering adjacent text.
+
+---
+
+# 57. Monkeytype optional Recall Typing mode
+
+The existing Custom Text EN-VN feature now has:
+
+~~~text
+recallModeEnabled
+~~~
+
+Default:
+
+~~~text
+false
+~~~
+
+Scope:
+
+~~~text
+Config.mode === custom
+EN-VN feature enabled
+dictionary contains a matching word/phrase
+~~~
+
+Behavior:
+
+- dictionary-matched English letters are hidden before typing,
+- non-matched text remains normal Monkeytype text,
+- structural punctuation remains visible,
+- correct/corrected letters progressively reveal,
+- wrong target letters do not reveal the answer,
+- the learning cue is presented when the recall target becomes active,
+- top display hides the English source while Recall mode is enabled,
+- English pronunciation still follows the existing pronunciation settings,
+- restart clears shown-match and speech state.
+
+Longest phrase matching is centralized in the dictionary helper.
+
+Do not implement a second independent phrase matcher in the render/input code.
+
+Recall-target classes are attached during normal word rendering so the answer does not flash before the first keypress.
+
+---
+
+# 58. Monkeytype Custom Text settings baseline
+
+The custom text/EN-VN settings UI is intentionally compact.
+
+The text and dictionary editors use bounded heights and internal scrolling.
+
+Small question-mark help controls explain EN-VN display, tooltip, spacing and pronunciation options without permanently expanding the sidebar.
+
+The Recall Typing control belongs to this EN-VN settings group and remains opt-in.
+
+---
+
+# 59. Vocabulary Shooter Target Rush presentation baseline
+
+Target Rush currently uses text-first targets without rectangular word boxes.
+
+Board rules:
+
+~~~text
+maximum rows = 4
+extra targets increase the column count
+font size adapts to cell width and phrase length
+~~~
+
+Dormant targets stay subdued.
+
+Spotlight, danger, active and error states use glow/color to carry emphasis.
+
+Dense/long phrases may use a small font rather than overlap neighboring cells.
+
+The dedicated top Learning Panel remains the source of VN/IPA for the current spotlight target.
+
+Do not move VN/IPA onto the target text itself.
+
+---
+
+# 60. Recall Typing responsive target presentation
+
+Recall Typing calculates slot font size/gap from the available width and target length.
+
+Short targets remain large.
+
+Long phrases can wrap into compact rows without extreme letter gaps.
+
+The scale is recalculated on viewport resize.
+
+Structural spaces/punctuation remain visible while recallable English characters reveal progressively.
+
+---
+
+# 61. Portal game-loading rule
+
+The Portal continues to mount only one selected game iframe.
+
+Do not keep all games mounted merely to make navigation feel instant; that would increase memory/CPU usage and violate the existing platform performance rule.
+
+The current compromise is:
+
+~~~text
+preconnect child origin
+→ lightweight Loading game overlay
+→ iframe load
+→ fade game in
+→ remove loader
+~~~
+
+This improves perceived loading without keeping inactive game runtimes alive.
+
+---
+
+# 62. Full-text reader recommendation
+
+A full-text reader is a suitable future Monkeytype Custom Text option.
+
+Preferred implementation:
+
+~~~text
+existing browser/system SpeechSynthesis
++
+SpeechSynthesisUtterance
+~~~
+
+Do not add a cloud TTS dependency or a large in-browser neural model for the first version.
+
+Recommended controls:
+
+- enabled,
+- Auto / English / Vietnamese language,
+- local voice selection,
+- rate,
+- volume,
+- Play / Stop,
+- optional Pause / Resume.
+
+Long text should be split into sentence/short-paragraph chunks and queued one chunk at a time.
+
+Prefer local system voices for offline behavior and low latency.
+
+If the operating system/browser does not expose a local Vietnamese voice, the UI should say so rather than silently introducing a network requirement.
+
+This is a documented future option, not implemented in the 2026-09-20 code pass.
+
+---
+
+# 63. Verification baseline - 2026-09-20
+
+Automated review status before the final parent integration commit:
+
+~~~text
+Monkeytype custom branch
+→ lint PASS
+→ stylelint PASS
+→ local-static production build PASS
+→ full frontend tests PASS
+
+Vocabulary Shooter
+→ TypeScript PASS
+→ Vite build PASS
+
+Recall Typing
+→ 2 test files / 9 tests PASS
+→ TypeScript PASS
+→ Vite build PASS
+
+Portal parent revision 2fbf31d...
+→ Platform CI PASS
+~~~
+
+The final parent commit pins the reviewed child revisions and must itself pass Platform CI before this baseline is treated as closed.
+

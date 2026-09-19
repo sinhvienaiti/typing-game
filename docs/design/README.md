@@ -6,6 +6,7 @@ Current documents:
 
 - [Vocabulary Shooter - Game Modes and Engagement Design](./VOCAB_SHOOTER_GAME_MODES.md)
 - [Monkeytype - Corrected Error Accuracy](./MONKEYTYPE_CORRECTED_ERROR_ACCURACY.md)
+- [Monkeytype - Optional Recall Typing Mode](./MONKEYTYPE_RECALL_MODE.md)
 - [Recall Typing - Hidden Word / Spelling Game](./RECALL_TYPING_GAME.md)
 
 ## Status convention

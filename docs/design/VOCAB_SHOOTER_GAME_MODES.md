@@ -1467,3 +1467,56 @@ pnpm build
 ~~~
 
 The implementation is ready for hands-on gameplay testing. Visual/music tuning is intentionally still open because those parts should be judged while actually playing rather than guessed only from code.
+
+---
+
+# 24. Target Rush and restart interaction refinement
+
+Reviewed revision:
+
+~~~text
+8ef47e41d4e0239c40a298001e2d5619c7bf638d
+~~~
+
+Target Rush presentation was refined for dense vocabulary pools.
+
+Current board rules:
+
+~~~text
+maximum 4 rows
+additional targets create more columns
+targets are text-first rather than rectangular cards
+font size adapts to available width and English phrase length
+~~~
+
+Dormant words are subdued.
+
+Spotlight, danger, active and error states are emphasized through glow/color.
+
+Dense phrases may shrink further instead of overlapping adjacent cells.
+
+The universal restart interaction was also refined:
+
+~~~text
+Escape default for a new settings profile
+→ quick restart resets to Ready
+→ next normal key starts a 3-second countdown
+→ game begins
+~~~
+
+Existing saved Tab/Escape preference is preserved during migration.
+
+Shortcut handling belongs to the UI layer; the Game engine no longer duplicates quick-restart orchestration.
+
+Restart is ignored while editing settings/vocabulary dialogs.
+
+Small help controls were added for general and per-mode settings.
+
+Verification:
+
+~~~text
+GitHub Actions CI
+→ TypeScript PASS
+→ Vite build PASS
+~~~
+
