@@ -3,8 +3,9 @@ import "./styles.css";
 type Game = { id: string; name: string; description: string; path: string; appUrl: string; icon: string };
 type Registry = { games: Game[] };
 
-const app = document.querySelector<HTMLDivElement>("#app");
-if (app === null) throw new Error("#app not found");
+const appElement = document.querySelector<HTMLDivElement>("#app");
+if (appElement === null) throw new Error("#app not found");
+const app: HTMLDivElement = appElement;
 
 const response = await fetch("/games.json", { cache: "no-store" });
 if (!response.ok) throw new Error("Could not load game registry");
