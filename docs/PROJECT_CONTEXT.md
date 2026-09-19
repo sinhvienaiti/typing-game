@@ -1652,3 +1652,95 @@ git submodule update --init --recursive
 ~~~
 
 to reproduce those versions.
+
+
+---
+
+# 50. Recall Typing becomes a separate game
+
+The hidden-word / recall-spelling idea is now treated as a **new game**, not as another Monkeytype setting or Monkeytype mode.
+
+Reason:
+
+- it has a different learning goal from normal speed typing,
+- it needs its own hint area and interaction model,
+- it should be directly selectable from the platform Game Library,
+- it avoids overloading Monkeytype with unrelated game behavior,
+- it follows the platform rule that distinct learning experiences should become separate game repositories.
+
+Working game name:
+
+~~~text
+Recall Typing
+~~~
+
+A better final product name can be chosen later without changing the architecture.
+
+Planned public route:
+
+~~~text
+https://typing-game.local/recall-typing
+~~~
+
+Planned internal origin:
+
+~~~text
+https://recall.typing-game.local
+~~~
+
+Planned repository model:
+
+~~~text
+sinhvienaiti/recall-typing
+→ independent game repository
+
+typing-game/games/recall-typing
+→ Git submodule
+~~~
+
+Monkeytype keeps its existing custom EN-VN learning features and corrected-error accuracy option. Recall Typing should not be implemented inside Monkeytype.
+
+Core Recall Typing behavior:
+
+~~~text
+word/phrase target exists internally
+
+before typing:
+→ unrevealed English letters are hidden
+
+correct character:
+→ reveal that character immediately
+
+wrong character:
+→ do not reveal the target character
+
+new active word:
+→ pronunciation cue can play
+→ Vietnamese hint can be shown when available
+
+spaces and punctuation:
+→ remain structurally visible where useful
+
+complete word:
+→ full English word is visible
+→ success feedback
+→ continue to next target
+~~~
+
+Recommended learning panel:
+
+~~~text
+Vietnamese meaning
+IPA
+speaker / replay pronunciation
+~~~
+
+The main typing area remains focused on recalling the hidden English spelling.
+
+This game should use the platform's offline-first rule and remain playable without Internet after local setup/build.
+
+Detailed design lives in:
+
+~~~text
+docs/design/RECALL_TYPING_GAME.md
+~~~
