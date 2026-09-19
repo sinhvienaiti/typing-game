@@ -50,28 +50,45 @@ pnpm setup:dev
 
 ## Development
 
-All games:
+Recommended launcher:
+
+```bash
+./dev.sh
+```
+
+No argument means `all`. The launcher performs the normal update/start flow automatically:
+
+```text
+git pull --ff-only
+→ sync/update pinned submodules
+→ install/update platform + required app dependencies
+→ switch nginx to dev mode
+→ start Portal + selected game(s)
+```
+
+Focused runs:
+
+```bash
+./dev.sh monkeytype
+./dev.sh shooter
+./dev.sh recall
+```
+
+Explicit all:
+
+```bash
+./dev.sh all
+```
+
+Aliases `vocab-shooter` and `recall-typing` are also accepted.
+
+The lower-level commands remain available when needed:
 
 ```bash
 pnpm setup:dev
 pnpm dev
-```
-
-Only Portal + Monkeytype:
-
-```bash
 pnpm dev:monkeytype
-```
-
-Only Portal + Shooter:
-
-```bash
 pnpm dev:shooter
-```
-
-Only Portal + Recall Typing:
-
-```bash
 pnpm dev:recall
 ```
 
