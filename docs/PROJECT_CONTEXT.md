@@ -2130,7 +2130,7 @@ The current reviewed child revisions are:
 ~~~text
 Monkeytype
 feature/en-vn-translation
-e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+943b4d9dd60f6e4f870cba3588538b8b06745210
 
 Vocabulary Shooter
 main
@@ -2371,7 +2371,7 @@ The modal stops full-text reading when it closes.
 Current reviewed Monkeytype revision:
 
 ~~~text
-e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 Verification:
@@ -2445,7 +2445,7 @@ The second word must not trigger a separate "injection" learning cue when it bel
 Current reviewed Monkeytype revision:
 
 ~~~text
-e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 ## Target Rush ultra-dense width
@@ -2560,7 +2560,7 @@ Platform CI also executes an empty project-only cleanup smoke test.
 ~~~text
 sinhvienaiti/monkeytype
 feature/en-vn-translation
-e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 This baseline includes:
@@ -2577,3 +2577,123 @@ This baseline includes:
 - shared speech-queue coordination.
 
 No remote TTS dependency was added.
+
+
+---
+
+# 68. Monkeytype post-test visual/reader/settings fixes
+
+A browser review on 2026-09-20 found four remaining Monkeytype issues.
+
+## Held tooltip collision
+
+Symptoms:
+
+- first-line held tooltips could cover mini live stats,
+- second-line held tooltips could overlap text from the previous typing line.
+
+Fix:
+
+~~~text
+compact tooltip bubble
++
+safe vertical line margins for normal/comfortable/wide
++
+2.15rem learning lane above #wordsWrapper
+~~~
+
+The wrapper lane separates first-line bubbles from Monkeytype's h-0/negative-margin mini statistics.
+
+The top EN-VN panel was moved slightly higher.
+
+## Custom Text modal empty space
+
+Root cause:
+
+~~~text
+left editor column shared the row height of the much taller settings sidebar
++
+its internal grid used normal stretch behavior
+~~~
+
+Fix:
+
+~~~text
+content-start
+self-start
+~~~
+
+are now applied to the editor/settings grids, with slightly smaller settings gaps.
+
+This keeps the text editor, dictionary editor and OK button grouped near the top instead of being stretched down the full sidebar height.
+
+## Full-text reader gameplay start
+
+The settings button is now labeled:
+
+~~~text
+Preview
+~~~
+
+because it is only a configuration preview.
+
+When enabled, real gameplay automatically starts reading on the first actual typing key.
+
+Source:
+
+~~~text
+current generated TestWords
+~~~
+
+rather than stale modal text.
+
+Only one automatic reader start occurs per test; restart resets it.
+
+While the reader is playing or paused, dictionary learning tooltips/top cues still appear but per-word pronunciation is suppressed so it cannot cancel the full-text narration.
+
+## Corrected-error setting visibility
+
+The existing:
+
+~~~text
+forgiveCorrectedErrors
+~~~
+
+logic and tests were already present.
+
+The Settings page had accidentally omitted:
+
+~~~text
+<SearchableAutoSetting key="forgiveCorrectedErrors" />
+~~~
+
+It is now visible directly after Stop on Error in Settings -> Input.
+
+Current behavior remains:
+
+~~~text
+Stop on Error = letter
+→ first wrong blocked attempt may count
+→ repeated wrong attempts at same blocked position do not add accuracy penalties
+→ correcting the character forgives the blocked accuracy error
+
+Stop on Error = word
+→ first error in the blocked word may count
+→ later wrong attempts in that same unresolved word do not add accuracy penalties
+→ correcting the word forgives the blocked accuracy error
+~~~
+
+Final reviewed Monkeytype revision:
+
+~~~text
+943b4d9dd60f6e4f870cba3588538b8b06745210
+~~~
+
+Custom EN-VN CI:
+
+~~~text
+lint PASS
+stylelint PASS
+local-static production build PASS
+full frontend tests PASS
+~~~

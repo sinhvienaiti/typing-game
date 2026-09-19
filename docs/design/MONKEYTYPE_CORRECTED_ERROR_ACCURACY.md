@@ -219,18 +219,34 @@ final accuracy is restored
 
 ---
 
-# 9. Current revision
+# 9. Current revision and UI location
 
 ~~~text
 sinhvienaiti/monkeytype
 feature/en-vn-translation
 
-9ba873ac06411802979ac9fdf48b435db82eb071
+943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
-The existing upstream-derived Monkey CI workflow is limited to master/non-draft or forced PR runs. No actual full CI run was produced for this feature branch during this implementation session, so verification should not be overstated.
+The option is now visibly rendered in:
 
-A local follow-up can run the relevant frontend tests/build before final acceptance.
+~~~text
+Settings
+→ Input
+→ stop on error
+→ forgive corrected errors
+~~~
+
+The implementation logic already existed before this UI fix; the missing piece was that SettingsPage did not include the setting component, so users could not discover/toggle it normally.
+
+Dedicated Custom EN-VN CI at the revision above verifies:
+
+~~~text
+lint PASS
+stylelint PASS
+local-static frontend build PASS
+full frontend tests PASS
+~~~
 
 ---
 

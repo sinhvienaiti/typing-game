@@ -7,7 +7,7 @@ Implemented and reviewed on:
 ~~~text
 sinhvienaiti/monkeytype
 branch feature/en-vn-translation
-revision e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+revision 943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 This mode is an optional extension of the existing Custom Text EN-VN learning feature.
@@ -216,8 +216,37 @@ only the two-word phrase starts a recall cue.
 Final reviewed revision:
 
 ~~~text
-e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 Dedicated Custom EN-VN CI is green at this revision.
 
+
+
+---
+
+# 12. Tooltip and learning-panel spacing refinement
+
+The held tooltip remains attached to the word element through CSS pseudo-elements, but it now uses a more compact bubble.
+
+Line spacing is treated as a real safety gap rather than only a cosmetic preference:
+
+~~~text
+normal      → safe minimum learning gap
+comfortable → larger gap
+wide        → largest gap
+~~~
+
+The learning wrapper also reserves space above the first typing line so held tooltips do not cover Monkeytype's mini timer/WPM/accuracy row.
+
+The dedicated top EN-VN learning panel was moved slightly higher so it leaves more visual room between itself and the typing lines.
+
+The three-line clipping rule remains authoritative.
+
+Final reviewed revision for this refinement:
+
+~~~text
+943b4d9dd60f6e4f870cba3588538b8b06745210
+~~~
+
+Dedicated Custom EN-VN CI is green at this revision.

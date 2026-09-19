@@ -7,7 +7,7 @@ Implemented and reviewed on:
 ~~~text
 sinhvienaiti/monkeytype
 branch feature/en-vn-translation
-revision e1667b2aee0ee384a13e3c4189a96e9da4388dd7
+revision 943b4d9dd60f6e4f870cba3588538b8b06745210
 ~~~
 
 ---
@@ -104,15 +104,31 @@ Volume range:
 
 ---
 
-# 6. Controls
+# 6. Controls and automatic start
+
+The settings modal uses:
 
 ~~~text
-Play / Restart
+Preview / Restart
 Pause / Resume
 Stop
 ~~~
 
-Closing the Custom Text modal stops reading.
+The Preview button exists only to test the selected language/voice/rate while configuring the reader.
+
+During a real Custom Text test:
+
+~~~text
+first real typing key
+→ start the full-text reader automatically
+→ read the actual generated test words
+~~~
+
+This means shuffle/repeat/limit generation is respected instead of reading stale editor text.
+
+Only one automatic start is attempted per test. Restart clears that state.
+
+Closing the Custom Text modal stops preview reading.
 
 Disabling the reader also stops active reading.
 
@@ -138,16 +154,19 @@ This keeps browser speech queues responsive for long Custom Text input.
 
 The full-text reader and EN-VN word pronunciation use the same browser speech engine.
 
-Rule:
+During an active full-text read:
 
 ~~~text
-starting word pronunciation
-→ stop full-text reader
-→ normalize paused state
-→ speak word/phrase
+reader state = playing / paused
+→ keep tooltip/top learning cues
+→ suppress per-word pronunciation
 ~~~
 
-Starting the full-text reader similarly clears older queued speech before beginning.
+This prevents a matching dictionary word from immediately cancelling the full-text narration that just started.
+
+When the reader is idle, normal per-word pronunciation works as before.
+
+Starting a reader preview or a new full-text read still clears older queued speech before beginning.
 
 This avoids overlapping speech and stale queued pronunciation.
 
@@ -200,7 +219,7 @@ Focused unit tests cover:
 - oversized token splitting,
 - blank input.
 
-Dedicated Custom EN-VN CI at revision e1667b2...:
+Dedicated Custom EN-VN CI at revision 943b4d9...:
 
 ~~~text
 lint PASS

@@ -25,7 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
-| 2026-09-20 | Refined Monkeytype EN-VN/Recall UI, added a local EN/VI full-text reader with speed/voice controls, improved Shooter/Recall UX, added static `./play.sh`, fixed macOS Bash 3.2 empty-port cleanup, completed multi-pass review/CI, and pinned reviewed child revisions. | [2026-09-20](./2026-09-20.md) |
+| 2026-09-20 | Refined Monkeytype EN-VN/Recall layout, fixed tooltip/settings spacing, added automatic local EN/VI full-text narration, exposed corrected-error accuracy settings, improved Shooter/Recall UX, added static `./play.sh`, fixed macOS Bash 3.2 cleanup, and completed multi-pass review/CI. | [2026-09-20](./2026-09-20.md) |
 | 2026-09-19 | Established the multi-game local platform and submodule architecture; fixed local nginx/Vite/Turbo setup; implemented and CI-reviewed Shooter Classic/Bounce/Time Attack/Target Rush; added offline-first rules and Monkeytype corrected-error accuracy forgiveness; separated Recall Typing into its own game and completed its review/test pass; added Platform CI; hardened stale dev-port cleanup; and added an executable `./dev.sh` launcher for pull/bootstrap/nginx/start with all or focused-game targets. | [2026-09-19](./2026-09-19.md) |
 
 ## Current repositories
