@@ -11,6 +11,19 @@ const response = await fetch("/games.json", { cache: "no-store" });
 if (!response.ok) throw new Error("Could not load game registry");
 const registry = (await response.json()) as Registry;
 
+for (const game of registry.games) {
+  const origin = new URL(game.appUrl).origin;
+  if (document.head.querySelector(`link[data-game-origin="${origin}"]`) !== null) {
+    continue;
+  }
+
+  const link = document.createElement("link");
+  link.rel = "preconnect";
+  link.href = origin;
+  link.dataset["gameOrigin"] = origin;
+  document.head.append(link);
+}
+
 function navigate(path: string): void {
   if (location.pathname !== path) history.pushState({}, "", path);
   render();
@@ -79,12 +92,29 @@ function renderHome(): void {
 function renderGame(game: Game): void {
   const stage = document.createElement("main");
   stage.className = "game-stage";
+
+  const loading = document.createElement("div");
+  loading.className = "game-loading";
+  loading.innerHTML =
+    '<div class="game-loading-spinner" aria-hidden="true"></div><strong>Loading game...</strong><span>Preparing the local game.</span>';
+
   const frame = document.createElement("iframe");
-  frame.className = "game-frame";
+  frame.className = "game-frame loading";
   frame.src = game.appUrl;
   frame.title = game.name;
   frame.allow = "autoplay; clipboard-read; clipboard-write";
-  stage.append(frame);
+
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.classList.remove("loading");
+      loading.classList.add("done");
+      window.setTimeout(() => loading.remove(), 180);
+    },
+    { once: true },
+  );
+
+  stage.append(frame, loading);
   renderShell(stage);
 }
 
