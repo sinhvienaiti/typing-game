@@ -1994,3 +1994,58 @@ b18c8825905b2a4e5027634bd5595a32e867755c
 ~~~
 
 This does not claim that no future browser/runtime edge case can ever exist; it means the known review findings were fixed and the current unit, type, build and focused integration checks are clean.
+
+
+---
+
+# 53. Development port cleanup
+
+A repeated local development start can leave old Vite listeners alive on the platform ports:
+
+~~~text
+3000 → Monkeytype
+3001 → Vocabulary Shooter
+3002 → Recall Typing
+3100 → Portal
+~~~
+
+When that happened, Vite failed with messages such as:
+
+~~~text
+Port 3001 is already in use
+Port 3100 is already in use
+~~~
+
+Because the top-level development command uses `concurrently -k`, one child failure caused the other game processes to receive SIGTERM even when those games had started correctly.
+
+The platform now runs:
+
+~~~text
+scripts/cleanup-dev-ports.sh
+~~~
+
+before the full or focused development commands.
+
+Safety rule:
+
+- only listeners whose current working directory is inside the current `typing-game` repository may be stopped automatically,
+- a listener from another project/application is never killed automatically,
+- if an external listener owns a required port, startup stops and reports the PID/cwd so the conflict can be handled intentionally.
+
+Current wrappers:
+
+~~~text
+pnpm dev
+→ cleanup 3000 3001 3002 3100
+
+pnpm dev:monkeytype
+→ cleanup 3000 3100
+
+pnpm dev:shooter
+→ cleanup 3001 3100
+
+pnpm dev:recall
+→ cleanup 3002 3100
+~~~
+
+Platform CI shell validation includes the cleanup script.
