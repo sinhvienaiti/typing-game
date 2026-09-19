@@ -3,16 +3,18 @@
   "private": true,
   "version": "0.1.0",
   "packageManager": "pnpm@11.21.0",
-  "engines": { "node": ">=24.0.0 <25" },
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
   "scripts": {
     "bootstrap": "bash scripts/bootstrap.sh",
-    "dev": "concurrently -k -n portal,monkeytype,shooter,recall \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\"",
+    "dev": "bash scripts/cleanup-dev-ports.sh 3000 3001 3002 3100 && concurrently -k -n portal,monkeytype,shooter,recall \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\"",
     "dev:portal": "pnpm --dir portal dev",
-    "dev:monkeytype": "concurrently -k -n portal,monkeytype \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\"",
+    "dev:monkeytype": "bash scripts/cleanup-dev-ports.sh 3000 3100 && concurrently -k -n portal,monkeytype \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\"",
     "dev:monkeytype:app": "cd games/monkeytype && SERVER_OPEN=false DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=monkeytype.typing-game.local DEV_HMR_HOST=monkeytype.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev-fe",
-    "dev:shooter": "concurrently -k -n portal,shooter \"pnpm dev:portal\" \"pnpm dev:shooter:app\"",
+    "dev:shooter": "bash scripts/cleanup-dev-ports.sh 3001 3100 && concurrently -k -n portal,shooter \"pnpm dev:portal\" \"pnpm dev:shooter:app\"",
     "dev:shooter:app": "pnpm --dir games/vocab-shooter dev",
-    "dev:recall": "concurrently -k -n portal,recall \"pnpm dev:portal\" \"pnpm dev:recall:app\"",
+    "dev:recall": "bash scripts/cleanup-dev-ports.sh 3002 3100 && concurrently -k -n portal,recall \"pnpm dev:portal\" \"pnpm dev:recall:app\"",
     "dev:recall:app": "cd games/recall-typing && DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=recall.typing-game.local DEV_HMR_HOST=recall.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev",
     "build:portal": "pnpm --dir portal build",
     "build:shooter": "pnpm --dir games/vocab-shooter build",
@@ -23,5 +25,7 @@
     "setup:play": "bash scripts/setup-nginx.sh play",
     "play": "bash scripts/play.sh"
   },
-  "devDependencies": { "concurrently": "^9.2.1" }
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
 }
