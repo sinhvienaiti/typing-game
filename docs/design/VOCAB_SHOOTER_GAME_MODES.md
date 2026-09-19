@@ -32,9 +32,9 @@ The current lives-based falling-word mode becomes only one mode.
 
 Vocabulary Shooter should support several modes with genuinely different pressure and pacing.
 
-## 1.2 Learning behavior remains consistent
+## 1.2 Learning behavior is mode-specific
 
-For every mode:
+For Classic Survival, Bounce / Relax and Time Attack:
 
 ~~~text
 before a word is completed correctly
@@ -49,7 +49,25 @@ after the word is completed correctly
 → play the mode-appropriate successful hit/removal effect
 ~~~
 
-A mode may visually highlight or mark an English target, but it must not leak the VN/IPA answer before success.
+**Target Rush is an intentional exception.**
+
+When a Target Rush word becomes the current spotlight target:
+
+~~~text
+spotlight activates
+→ immediately update a dedicated Learning Panel at the top
+→ show the Vietnamese meaning large and clear
+→ show the English IPA/pronunciation text below it
+→ immediately pronounce that target's English word
+~~~
+
+This information must be shown in a reserved top panel, not attached to the glowing/yellow target itself.
+
+The highlighted target in the board remains the English typing target.
+
+When the spotlight moves to the next target, the top Learning Panel must switch to the new target immediately and old speech should be cancelled before the new pronunciation starts.
+
+Danger/late-save targets must not steal the Learning Panel back from the current spotlight target.
 
 ## 1.3 Keyboard-first gameplay
 
@@ -522,6 +540,64 @@ The target sequence is shuffled without replacement.
 
 Each selected entry should become the active spotlight target once.
 
+## 7.2A Dedicated Learning Panel
+
+Target Rush has a dedicated learning display that is different from Monkeytype tooltips.
+
+The game layout must reserve a clear panel above the target field.
+
+Concept:
+
+~~~text
+┌──────────────────────────────────────────────┐
+│              Vietnamese meaning              │
+│                  /IPA/                       │
+└──────────────────────────────────────────────┘
+                 target field
+~~~
+
+Requirements:
+
+- the panel is always in a fixed top area,
+- it must not cover moving/active targets,
+- Vietnamese is the primary line and should be large, bold and easy to read,
+- IPA is directly below it and visually secondary but still very clear,
+- pronunciation plays when the spotlight target activates,
+- the panel updates on every spotlight change,
+- the panel belongs to the **current spotlight target**, not to an older danger target,
+- the glowing target itself should stay visually focused on English typing and should not carry Vietnamese/IPA like a Monkeytype word tooltip.
+
+Recommended presentation:
+
+~~~text
+Vietnamese:
+large, high-contrast, 24-34px equivalent depending on viewport
+
+IPA:
+medium, 15-20px equivalent
+
+Panel:
+fixed height, centered, subtle glass/dark surface,
+no heavy blur animation,
+very small transition (fade/slide 100-180ms)
+~~~
+
+The panel should remain readable during intense Target Rush play. Avoid animated transformations that make the meaning or IPA move around while the user is trying to type.
+
+Pronunciation behavior:
+
+~~~text
+new spotlight
+→ speechSynthesis.cancel()
+→ speak new entry.en
+~~~
+
+This prevents a 3-second spotlight cadence from building a stale pronunciation queue.
+
+Because Target Rush intentionally reveals the learning hint at spotlight time, completing the target should not replay the full pronunciation by default. The success action should focus on shooting/explosion/reward feedback. A future setting may optionally allow replay-on-success if the user asks for it.
+
+---
+
 ## 7.2 Board layout
 
 A large count such as 70 or 100 cannot be placed as large free-floating cards without creating visual clutter.
@@ -595,10 +671,10 @@ If the player completes the target inside the initial focus window:
 
 ~~~text
 word is destroyed
-→ pronunciation
-→ VN + IPA reveal
 → success effect
 ~~~
+
+The current target's Vietnamese meaning, IPA and English pronunciation were already presented in the dedicated top Learning Panel when the spotlight activated.
 
 The next scheduled spotlight still follows the global cadence.
 
@@ -639,10 +715,10 @@ If a danger word is completed during the dive:
 
 ~~~text
 destroy it before impact
-→ pronunciation
-→ VN + IPA reveal
 → stronger "clutch save" effect
 ~~~
+
+Do not replace the Learning Panel with this old danger word. The panel must continue to show the newest spotlight target.
 
 Track this separately as:
 
@@ -1327,8 +1403,10 @@ This order keeps the game testable after every phase.
 All of the following should be true:
 
 - all four modes can be selected and replayed without mouse dependency,
-- no mode reveals VN/IPA before full correct English,
-- pronunciation stays synchronized with successful targets,
+- Classic/Bounce/Time Attack reveal VN/IPA only after full correct English,
+- Target Rush reveals VN + IPA and plays English pronunciation immediately when the spotlight activates, using the dedicated top Learning Panel,
+- Target Rush never attaches VN/IPA directly to the glowing board target,
+- pronunciation stays synchronized with the intended mode event and never queues stale targets,
 - the configured mode timing is exact,
 - Target Rush changes spotlight on schedule even if the old word is unfinished,
 - the old Target Rush word remains savable during its dive window,
