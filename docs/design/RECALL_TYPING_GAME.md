@@ -5,7 +5,7 @@
 ~~~text
 Initial implementation completed on 2026-09-19.
 Core MVP is implemented and integrated into the typing-game platform.
-CI passed at revision 35e69c6e7f2bc1c7868a979f779d58bb0121c5d8.
+CI passed at revision 99d05c7cd72b47deae0f7700d7e168d529ebcc49.
 ~~~
 
 ## 1. Product decision
@@ -405,7 +405,7 @@ MVP implementation exists in:
 ~~~text
 sinhvienaiti/recall-typing
 main
-35e69c6e7f2bc1c7868a979f779d58bb0121c5d8
+99d05c7cd72b47deae0f7700d7e168d529ebcc49
 ~~~
 
 Implemented:
@@ -431,9 +431,50 @@ Verification:
 
 ~~~text
 GitHub Actions CI
+
+pnpm test
+→ 2 test files PASS
+→ 9 tests PASS
+
 pnpm build
 → TypeScript PASS
 → Vite build PASS
 ~~~
 
 The next iteration should be driven by hands-on use: visual slot spacing, hint balance, scoring feel, pronunciation ergonomics and future Review Mistakes/Listening variants can be tuned after real practice.
+
+
+---
+
+# 17. Review fixes and final MVP baseline
+
+A dedicated self-review was completed after the initial MVP.
+
+The reviewed child baseline is:
+
+~~~text
+99d05c7cd72b47deae0f7700d7e168d529ebcc49
+~~~
+
+Important review fixes:
+
+- cancel stale word-transition timers when restarting,
+- clear stale transition/error CSS state on new runs,
+- keep Bulk Import changes in the editor until Save,
+- reject targets with no recallable English characters,
+- share recall target validation instead of duplicating it,
+- harden malformed/duplicate-ID backup imports,
+- remove placeholder bullet glyphs from hidden letters,
+- add focused unit tests for recall mechanics and vocabulary parsing.
+
+Automated verification:
+
+~~~text
+2 test files
+9 tests
+TypeScript check
+Vite production build
+→ all PASS
+~~~
+
+The platform integration also has focused CI for shell syntax, registry JSON, Portal build and Recall build/test. That workflow caught and led to a fix for an unrelated pre-existing Portal nullability error before the integration was considered clean.

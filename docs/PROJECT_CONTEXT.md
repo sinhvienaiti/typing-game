@@ -1642,6 +1642,9 @@ games/vocab-shooter
 
 games/monkeytype
 → 9ba873ac06411802979ac9fdf48b435db82eb071
+
+games/recall-typing
+→ 99d05c7cd72b47deae0f7700d7e168d529ebcc49
 ~~~
 
 Use the parent repository plus:
@@ -1762,13 +1765,16 @@ branch main
 Initial reviewed/CI revision:
 
 ~~~text
-35e69c6e7f2bc1c7868a979f779d58bb0121c5d8
+99d05c7cd72b47deae0f7700d7e168d529ebcc49
 ~~~
 
 The child CI runs:
 
 ~~~text
 pnpm install
+pnpm test
+→ 2 test files / 9 tests
+
 pnpm build
 → tsc --noEmit
 → vite build
@@ -1820,8 +1826,171 @@ Full `pnpm dev`, `pnpm build:local`, bootstrap and static Play mode also include
 
 The nginx setup script now:
 
-1. ensures `recall.typing-game.local` exists in /etc/hosts,
-2. checks whether the existing mkcert certificate contains that hostname,
-3. regenerates the local certificate for all typing-game hosts when needed.
+1. verifies every required typing-game hostname in /etc/hosts,
+2. checks the shared certificate for every required SAN,
+3. runs `mkcert -install` before certificate regeneration,
+4. regenerates one certificate covering Portal, Monkeytype, Shooter and Recall Typing when needed.
 
 Core Recall Typing remains offline-first.
+
+
+---
+
+# 52. Recall Typing review and cleanup baseline
+
+After the first Recall Typing implementation, a dedicated self-review and verification pass was completed before treating the game as the baseline.
+
+Final reviewed child revision:
+
+~~~text
+sinhvienaiti/recall-typing
+main
+99d05c7cd72b47deae0f7700d7e168d529ebcc49
+~~~
+
+## Review findings and fixes
+
+The review found and fixed several real issues:
+
+### Quick-restart transition race
+
+A completed word schedules a short transition to the next target.
+
+Without cleanup, pressing quick restart during that transition could allow the old timeout to fire inside the new run and advance the new session unexpectedly.
+
+Fix:
+
+~~~text
+track transition timer
+→ cancel it on restart / finish
+→ clear old success/error classes before a new run
+~~~
+
+### Bulk editor changed live vocabulary before Save
+
+The Bulk Import button originally assigned parsed entries directly to the live `vocabulary` variable before the user pressed Save.
+
+That meant:
+
+~~~text
+Apply bulk
+→ close dialog without Save
+→ in-memory game vocabulary had already changed
+~~~
+
+Fix:
+
+~~~text
+Apply bulk
+→ update editor table only
+
+Save vocabulary
+→ commit table rows to IndexedDB and live game state
+~~~
+
+The vocabulary editor is now transactional.
+
+### Invalid recall targets
+
+Entries containing no recallable letter/number could create a target that could never be completed.
+
+Fix:
+
+~~~text
+shared validation
+→ English must contain at least one recallable letter/number
+→ invalid punctuation-only targets are rejected
+~~~
+
+The same validator is reused by session building and bulk import to avoid duplicate rules.
+
+### Backup import robustness
+
+Backup import previously assumed every array item had the expected object shape.
+
+The review hardened it to:
+
+- reject null/non-object entries safely,
+- validate English/Vietnamese field types,
+- normalize text,
+- replace missing IDs,
+- replace duplicate IDs,
+- reject a backup with no usable vocabulary.
+
+### Hidden-answer presentation
+
+The initial hidden state used placeholder bullet glyphs.
+
+Those were removed so unrevealed characters are clean underline blanks and do not provide unnecessary visual noise.
+
+### Core logic extraction
+
+Small reusable recall rules were extracted to:
+
+~~~text
+src/game/recall.ts
+~~~
+
+This keeps session construction, structural-character skipping, case matching and target validation out of the large UI file.
+
+## Automated tests
+
+Added:
+
+~~~text
+src/game/recall.spec.ts
+src/ui/vocabulary-editor.spec.ts
+~~~
+
+Coverage includes:
+
+- letters/numbers versus structural spaces and punctuation,
+- skipping apostrophes, hyphens and phrase spaces,
+- case-insensitive and exact-case matching,
+- invalid punctuation-only targets,
+- non-mutating session selection/shuffle,
+- normal word/phrase bulk parsing,
+- invalid bulk-row rejection,
+- blank IPA round-trip.
+
+Verified CI result:
+
+~~~text
+2 test files passed
+9 tests passed
+TypeScript passed
+Vite production build passed
+~~~
+
+## Platform integration review
+
+A Platform CI workflow was added to validate:
+
+- shell script syntax,
+- game registry JSON,
+- submodule checkout,
+- Recall Typing tests,
+- Portal TypeScript/build,
+- Recall Typing TypeScript/build.
+
+The first Platform CI run exposed a pre-existing Portal TypeScript narrowing issue:
+
+~~~text
+portal/src/main.ts
+'app' is possibly 'null'
+~~~
+
+That was corrected by keeping a verified non-null root element for render functions.
+
+The reviewed platform integration then passed Platform CI.
+
+The platform also hardened local environment setup so all four local hosts and all certificate SANs are checked instead of only the newly added Recall hostname.
+
+Current reviewed parent code baseline before documentation-only commits:
+
+~~~text
+b18c8825905b2a4e5027634bd5595a32e867755c
+→ Platform CI PASS
+~~~
+
+This does not claim that no future browser/runtime edge case can ever exist; it means the known review findings were fixed and the current unit, type, build and focused integration checks are clean.
