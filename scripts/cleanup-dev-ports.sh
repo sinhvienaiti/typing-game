@@ -20,6 +20,7 @@ if ! command -v lsof >/dev/null 2>&1; then
 fi
 
 targets=()
+target_count=0
 
 for port in "$@"; do
   if [[ ! "$port" =~ ^[0-9]+$ ]]; then
@@ -45,10 +46,11 @@ for port in "$@"; do
     fi
 
     targets+=("$pid:$port")
+    target_count=$((target_count + 1))
   done
 done
 
-if [[ "${#targets[@]}" -gt 0 ]]; then
+if [[ "$target_count" -gt 0 ]]; then
   for target in "${targets[@]}"; do
     pid="${target%%:*}"
     port="${target##*:}"
@@ -58,7 +60,7 @@ if [[ "${#targets[@]}" -gt 0 ]]; then
 fi
 
 if [[ "$PROJECT_ONLY" == "true" ]]; then
-  if [[ "${#targets[@]}" -gt 0 ]]; then
+  if [[ "$target_count" -gt 0 ]]; then
     for target in "${targets[@]}"; do
       pid="${target%%:*}"
       port="${target##*:}"
