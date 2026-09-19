@@ -22,7 +22,7 @@ jobs:
           node-version: 24.11.0
 
       - name: Validate shell scripts
-        run: bash -n scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh
+        run: bash -n scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
