@@ -1,33 +1,69 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+TARGET="${1:-all}"
+
+case "$TARGET" in
+  all|monkeytype|shooter|recall)
+    ;;
+  *)
+    echo "Usage: $0 [all|monkeytype|shooter|recall]"
+    exit 1
+    ;;
+esac
+
 cd "$ROOT_DIR"
 
+git submodule sync --recursive
 git submodule update --init --recursive
 
-echo "[1/5] Installing platform tools..."
+echo "Installing platform tools..."
 pnpm install
 
-echo "[2/5] Installing portal..."
+echo "Installing portal..."
 pnpm --dir portal install
 
-echo "[3/5] Installing Vocabulary Shooter..."
-pnpm --dir games/vocab-shooter install
+install_shooter() {
+  echo "Installing Vocabulary Shooter..."
+  pnpm --dir games/vocab-shooter install
+}
 
-echo "[4/5] Installing Recall Typing..."
-pnpm --dir games/recall-typing install
+install_recall() {
+  echo "Installing Recall Typing..."
+  pnpm --dir games/recall-typing install
+}
 
-echo "[5/5] Installing Monkeytype..."
-(
-  cd games/monkeytype
-  pnpm install
+install_monkeytype() {
+  echo "Installing Monkeytype..."
+  (
+    cd games/monkeytype
+    pnpm install
 
-  FIREBASE_CONFIG="frontend/src/ts/constants/firebase-config.ts"
-  FIREBASE_EXAMPLE="frontend/src/ts/constants/firebase-config-example.ts"
-  if [[ ! -f "$FIREBASE_CONFIG" && -f "$FIREBASE_EXAMPLE" ]]; then
-    cp "$FIREBASE_EXAMPLE" "$FIREBASE_CONFIG"
-    echo "Created local Firebase placeholder config."
-  fi
-)
+    FIREBASE_CONFIG="frontend/src/ts/constants/firebase-config.ts"
+    FIREBASE_EXAMPLE="frontend/src/ts/constants/firebase-config-example.ts"
+    if [[ ! -f "$FIREBASE_CONFIG" && -f "$FIREBASE_EXAMPLE" ]]; then
+      cp "$FIREBASE_EXAMPLE" "$FIREBASE_CONFIG"
+      echo "Created local Firebase placeholder config."
+    fi
+  )
+}
 
-echo "Bootstrap complete."
+case "$TARGET" in
+  all)
+    install_shooter
+    install_recall
+    install_monkeytype
+    ;;
+  monkeytype)
+    install_monkeytype
+    ;;
+  shooter)
+    install_shooter
+    ;;
+  recall)
+    install_recall
+    ;;
+esac
+
+echo "Bootstrap complete for: $TARGET"
