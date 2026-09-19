@@ -14,17 +14,35 @@ SSL_DIR="/usr/local/etc/nginx/ssl/typing-game.local"
 CERT="$SSL_DIR/typing-game.local.pem"
 KEY="$SSL_DIR/typing-game.local-key.pem"
 
+HOSTS=(
+  "typing-game.local"
+  "monkeytype.typing-game.local"
+  "shooter.typing-game.local"
+  "recall.typing-game.local"
+)
+
 ensure_hosts() {
-  if ! grep -qE '(^|[[:space:]])recall\.typing-game\.local([[:space:]]|$)' /etc/hosts; then
-    echo "Adding recall.typing-game.local to /etc/hosts..."
-    echo "127.0.0.1 recall.typing-game.local" | sudo tee -a /etc/hosts >/dev/null
-  fi
+  local host
+  for host in "${HOSTS[@]}"; do
+    if ! grep -qE "(^|[[:space:]])${host//./\\.}([[:space:]]|$)" /etc/hosts; then
+      echo "Adding $host to /etc/hosts..."
+      echo "127.0.0.1 $host" | sudo tee -a /etc/hosts >/dev/null
+    fi
+  done
 }
 
-certificate_has_recall_host() {
-  [[ -f "$CERT" ]] &&
-    openssl x509 -in "$CERT" -noout -text 2>/dev/null |
-      grep -q "DNS:recall.typing-game.local"
+certificate_has_all_hosts() {
+  [[ -f "$CERT" ]] || return 1
+
+  local certificate_text
+  certificate_text="$(openssl x509 -in "$CERT" -noout -text 2>/dev/null)" || return 1
+
+  local host
+  for host in "${HOSTS[@]}"; do
+    if ! grep -q "DNS:$host" <<<"$certificate_text"; then
+      return 1
+    fi
+  done
 }
 
 create_certificate() {
@@ -33,6 +51,9 @@ create_certificate() {
     exit 1
   fi
 
+  echo "Ensuring the local mkcert CA is installed..."
+  mkcert -install
+
   echo "Creating local TLS certificate for all typing-game hosts..."
   local temp_dir
   temp_dir="$(mktemp -d)"
@@ -40,10 +61,7 @@ create_certificate() {
   mkcert \
     -cert-file "$temp_dir/typing-game.local.pem" \
     -key-file "$temp_dir/typing-game.local-key.pem" \
-    typing-game.local \
-    monkeytype.typing-game.local \
-    shooter.typing-game.local \
-    recall.typing-game.local
+    "${HOSTS[@]}"
 
   sudo mkdir -p "$SSL_DIR"
   sudo cp "$temp_dir/typing-game.local.pem" "$CERT"
@@ -52,7 +70,8 @@ create_certificate() {
 }
 
 ensure_hosts
-if [[ ! -f "$CERT" || ! -f "$KEY" ]] || ! certificate_has_recall_host; then
+
+if [[ ! -f "$KEY" ]] || ! certificate_has_all_hosts; then
   create_certificate
 fi
 
