@@ -1,0 +1,43 @@
+name: Platform CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Validate shell scripts
+        run: bash -n scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh
+
+      - name: Validate game registry
+        run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
+
+      - name: Install platform and focused app dependencies
+        run: |
+          pnpm install
+          pnpm --dir portal install
+          pnpm --dir games/recall-typing install
+
+      - name: Test Recall Typing
+        run: pnpm --dir games/recall-typing test
+
+      - name: Build Portal
+        run: pnpm build:portal
+
+      - name: Build Recall Typing
+        run: pnpm build:recall
