@@ -3,9 +3,9 @@
 ## Status
 
 ~~~text
-Architecture decision confirmed on 2026-09-19.
-Design baseline defined.
-Implementation has not started yet.
+Initial implementation completed on 2026-09-19.
+Core MVP is implemented and integrated into the typing-game platform.
+CI passed at revision 054cd95eaba2952c806f67bf6431ce355331c5e1.
 ~~~
 
 ## 1. Product decision
@@ -23,19 +23,19 @@ Vocabulary Shooter
 Recall Typing
 ~~~
 
-Planned route:
+Route:
 
 ~~~text
 https://typing-game.local/recall-typing
 ~~~
 
-Planned internal origin:
+Internal origin:
 
 ~~~text
 https://recall.typing-game.local
 ~~~
 
-Planned repository:
+Repository:
 
 ~~~text
 sinhvienaiti/recall-typing
@@ -274,8 +274,8 @@ The game should support:
 Tab or Escape
 → configurable quick restart
 
-R or speaker shortcut
-→ optional pronunciation replay
+F2 or speaker button
+→ pronunciation replay
 ~~~
 
 Exact shortcut selection can be tuned during implementation.
@@ -394,3 +394,45 @@ Recall Typing
 A separate game gives the user one-click selection from the Game Library and keeps each codebase focused.
 
 This decision also reduces custom divergence in the Monkeytype fork.
+
+
+---
+
+# 16. Implementation checkpoint
+
+MVP implementation exists in:
+
+~~~text
+sinhvienaiti/recall-typing
+main
+054cd95eaba2952c806f67bf6431ce355331c5e1
+~~~
+
+Implemented:
+
+- progressive hidden-letter reveal,
+- structural punctuation/space visibility,
+- Vietnamese/IPA hint panel,
+- browser/system English pronunciation,
+- F2 replay,
+- quick restart,
+- local vocabulary editor,
+- bulk import,
+- IndexedDB persistence,
+- settings persistence,
+- backup/restore,
+- result metrics,
+- responsive DOM/CSS UI,
+- Vite dev server on port 3002,
+- offline-first static build.
+
+Verification:
+
+~~~text
+GitHub Actions CI
+pnpm build
+→ TypeScript PASS
+→ Vite build PASS
+~~~
+
+The next iteration should be driven by hands-on use: visual slot spacing, hint balance, scoring feel, pronunciation ergonomics and future Review Mistakes/Listening variants can be tuned after real practice.

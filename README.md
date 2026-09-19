@@ -1,6 +1,6 @@
 # Typing Game
 
-Local platform for Monkeytype, Vocabulary Shooter and future learning games.
+Local platform for Monkeytype, Vocabulary Shooter, Recall Typing and future learning games.
 
 Each game is an independent Git repository mounted under `games/` as a submodule.
 
@@ -14,7 +14,8 @@ typing-game/
 ├── shared/
 └── games/
     ├── monkeytype/       -> sinhvienaiti/monkeytype
-    └── vocab-shooter/    -> sinhvienaiti/vocab-shooter
+    ├── vocab-shooter/    -> sinhvienaiti/vocab-shooter
+    └── recall-typing/    -> sinhvienaiti/recall-typing
 ```
 
 ## URLs
@@ -23,6 +24,7 @@ typing-game/
 https://typing-game.local/
 https://typing-game.local/monkeytype
 https://typing-game.local/vocab-shooter
+https://typing-game.local/recall-typing
 ```
 
 Internal origins:
@@ -30,6 +32,7 @@ Internal origins:
 ```text
 https://monkeytype.typing-game.local
 https://shooter.typing-game.local
+https://recall.typing-game.local
 ```
 
 ## First setup
@@ -40,17 +43,14 @@ git clone --recurse-submodules https://github.com/sinhvienaiti/typing-game.git
 cd typing-game
 nvm use
 pnpm bootstrap
+pnpm setup:dev
 ```
 
-Add to `/etc/hosts`:
-
-```text
-127.0.0.1 typing-game.local monkeytype.typing-game.local shooter.typing-game.local
-```
-
-Create one mkcert certificate for all three hosts, then use `pnpm setup:dev` or `pnpm setup:play`.
+`pnpm setup:dev` ensures the Recall Typing host exists in `/etc/hosts` and regenerates the local mkcert certificate when the new hostname is not yet covered.
 
 ## Development
+
+All games:
 
 ```bash
 pnpm setup:dev
@@ -67,6 +67,12 @@ Only Portal + Shooter:
 
 ```bash
 pnpm dev:shooter
+```
+
+Only Portal + Recall Typing:
+
+```bash
+pnpm dev:recall
 ```
 
 ## Daily / Play mode
@@ -99,13 +105,13 @@ For Monkeytype development:
 git -C games/monkeytype switch feature/en-vn-translation
 ```
 
-
 ## Project documentation
 
 The persistent project handoff and engineering history live under docs:
 
-- [Project context](./docs/PROJECT_CONTEXT.md) - current architecture, requirements, repositories, runtime modes, important implementation rules, and known technical decisions.
-- [Change log overview](./docs/changelog/README.md) - chronological index by day.
-- [2026-09-19 detail](./docs/changelog/2026-09-19.md) - detailed initial platform integration history.
+- [Project context](./docs/PROJECT_CONTEXT.md)
+- [Change log overview](./docs/changelog/README.md)
+- [2026-09-19 detail](./docs/changelog/2026-09-19.md)
+- [Recall Typing design](./docs/design/RECALL_TYPING_GAME.md)
 
-For future work, meaningful implementation or infrastructure changes should update the current day's change-log file and the change-log overview in the same Git workflow.
+Meaningful implementation or infrastructure changes should update the current day's changelog and the project context in the same Git workflow.

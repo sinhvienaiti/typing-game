@@ -1676,19 +1676,19 @@ Recall Typing
 
 A better final product name can be chosen later without changing the architecture.
 
-Planned public route:
+Implemented public route:
 
 ~~~text
 https://typing-game.local/recall-typing
 ~~~
 
-Planned internal origin:
+Internal origin:
 
 ~~~text
 https://recall.typing-game.local
 ~~~
 
-Planned repository model:
+Repository model:
 
 ~~~text
 sinhvienaiti/recall-typing
@@ -1744,3 +1744,83 @@ Detailed design lives in:
 ~~~text
 docs/design/RECALL_TYPING_GAME.md
 ~~~
+
+
+---
+
+# 51. Recall Typing implementation baseline
+
+Recall Typing has been implemented as its own repository and integrated into the platform.
+
+Child repository:
+
+~~~text
+sinhvienaiti/recall-typing
+branch main
+~~~
+
+Initial reviewed/CI revision:
+
+~~~text
+054cd95eaba2952c806f67bf6431ce355331c5e1
+~~~
+
+The child CI runs:
+
+~~~text
+pnpm install
+pnpm build
+→ tsc --noEmit
+→ vite build
+~~~
+
+and passed for the revision above.
+
+Implemented behavior:
+
+- English answer is hidden before typing.
+- Correct letters reveal immediately.
+- Wrong letters do not reveal and do not advance.
+- Spaces and structural punctuation remain visible.
+- Vietnamese + IPA can be shown in a fixed hint panel.
+- English pronunciation can auto-play when a new target starts.
+- F2 replays pronunciation without stealing normal letter keys.
+- Hint styles support full, audio-only and meaning-focused recall.
+- Tab/Escape is configurable as quick restart.
+- Vocabulary editor supports English / Vietnamese / IPA.
+- Bulk import uses `English | Vietnamese | IPA`.
+- Vocabulary is stored in IndexedDB.
+- Settings are stored in localStorage.
+- JSON backup/import is supported.
+- Results include completed words, wrong attempts, accuracy, max streak, elapsed time and average word time.
+- The implementation is DOM/CSS based with no permanent RAF/render loop.
+
+Platform integration:
+
+~~~text
+Game Library route:
+https://typing-game.local/recall-typing
+
+internal app origin:
+https://recall.typing-game.local
+
+dev port:
+3002
+~~~
+
+The platform scripts now include:
+
+~~~text
+pnpm dev:recall
+pnpm build:recall
+~~~
+
+Full `pnpm dev`, `pnpm build:local`, bootstrap and static Play mode also include Recall Typing.
+
+The nginx setup script now:
+
+1. ensures `recall.typing-game.local` exists in /etc/hosts,
+2. checks whether the existing mkcert certificate contains that hostname,
+3. regenerates the local certificate for all typing-game hosts when needed.
+
+Core Recall Typing remains offline-first.

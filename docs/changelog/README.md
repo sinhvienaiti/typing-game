@@ -25,7 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
-| 2026-09-19 | Established the multi-game local platform and submodule architecture; fixed local nginx/Vite/Turbo setup; implemented and CI-reviewed Shooter Classic/Bounce/Time Attack/Target Rush; added offline-first rules and Monkeytype corrected-error accuracy forgiveness; then separated the hidden-word recall/spelling concept into its own future Recall Typing game/repository instead of overloading Monkeytype. | [2026-09-19](./2026-09-19.md) |
+| 2026-09-19 | Established the multi-game local platform and submodule architecture; fixed local nginx/Vite/Turbo setup; implemented and CI-reviewed Shooter Classic/Bounce/Time Attack/Target Rush; added offline-first rules and Monkeytype corrected-error accuracy forgiveness; separated the hidden-word recall/spelling concept into Recall Typing, then implemented it as an independent CI-verified game and integrated its submodule, route, port 3002, nginx, bootstrap and static Play mode. | [2026-09-19](./2026-09-19.md) |
 
 ## Current repositories
 
@@ -40,6 +40,10 @@ branch feature/en-vn-translation
 
 Vocabulary Shooter:
 sinhvienaiti/vocab-shooter
+branch main
+
+Recall Typing:
+sinhvienaiti/recall-typing
 branch main
 ~~~
 
