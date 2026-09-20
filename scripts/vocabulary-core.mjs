@@ -4,7 +4,7 @@ import path from "node:path";
 export const PLANNED_LEVELS = 100;
 
 export function normalizeEnglish(value) {
-  return value.normalize("NFKC").trim().toLowerCase().replace(/\\s+/g, " ");
+  return value.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
 }
 
 export async function readLevels(vocabularyDir) {
@@ -65,14 +65,28 @@ export function validateLevels(documents) {
         continue;
       }
 
+      const allowedFields = new Set(["id", "en", "vi", "ipa"]);
+      for (const field of Object.keys(entry)) {
+        if (!allowedFields.has(field)) {
+          errors.push(`${at}: unsupported field ${field}`);
+        }
+      }
+
       for (const field of ["id", "en", "vi", "ipa"]) {
         if (typeof entry[field] !== "string" || entry[field].trim() === "") {
           errors.push(`${at}: ${field} is required`);
         }
       }
 
-      if (typeof entry.id === "string" && !/^L\d{3}-\d{3,}$/.test(entry.id)) {
-        errors.push(`${at}: id must match Lxxx-xxx`);
+      if (typeof entry.id === "string") {
+        if (!/^L\d{3}-\d{3,}$/.test(entry.id)) {
+          errors.push(`${at}: id must match Lxxx-xxx`);
+        } else {
+          const expectedPrefix = `L${String(expectedLevel).padStart(3, "0")}-`;
+          if (!entry.id.startsWith(expectedPrefix)) {
+            errors.push(`${at}: id must start with ${expectedPrefix}`);
+          }
+        }
       }
       if (
         typeof entry.ipa === "string" &&
