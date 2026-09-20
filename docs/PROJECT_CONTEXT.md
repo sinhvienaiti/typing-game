@@ -2845,3 +2845,148 @@ Shooter CI:
 TypeScript PASS
 Vite build PASS
 ~~~
+
+
+---
+
+# 71. Shared leveled vocabulary library
+
+The platform now has one canonical built-in vocabulary library shared by Monkeytype, Vocabulary Shooter and Recall Typing.
+
+Source of truth:
+
+~~~text
+shared/vocabulary/levels/*.json
+~~~
+
+There is intentionally no second giant 15k-20k Monkeytype vocabulary copy.
+
+Every official entry requires:
+
+~~~text
+id
+en
+vi
+ipa
+~~~
+
+Example:
+
+~~~json
+{
+  "id": "L003-025",
+  "en": "cache",
+  "vi": "bộ nhớ đệm",
+  "ipa": "/kæʃ/"
+}
+~~~
+
+Current implementation is only a pipeline/sample baseline:
+
+~~~text
+001.json → 30 entries
+002.json → 30 entries
+003.json → 30 entries
+
+90 sample entries total
+planned levels → 100
+final target → roughly 15k-20k useful words/phrases
+~~~
+
+The 90 sample entries are not the final vocabulary curriculum.
+
+Generated artifacts:
+
+~~~text
+shared/vocabulary/index.json
+shared/vocabulary/lookup.json
+~~~
+
+They are generated/validated from the level files and must not become a second hand-maintained source of truth.
+
+Commands:
+
+~~~bash
+pnpm vocab:generate
+pnpm vocab:validate
+~~~
+
+Platform CI validates the dataset, runs the generator and verifies that generated index/lookup files produce no Git diff.
+
+Local HTTP contract:
+
+~~~text
+https://typing-game.local/vocabulary/index.json
+https://typing-game.local/vocabulary/lookup.json
+https://typing-game.local/vocabulary/levels/NNN.json
+~~~
+
+Dev and Play nginx both expose the same files with CORS for child subdomains.
+
+Shooter:
+
+~~~text
+Vocabulary
+→ Class / Custom
+
+Class
+→ select one available level
+→ load that level only
+
+Custom
+→ existing IndexedDB vocabulary
+~~~
+
+Recall:
+
+~~~text
+Vocabulary
+→ Class / Custom
+
+Class
+→ select one available level
+→ load that level only
+
+Custom
+→ existing IndexedDB vocabulary
+~~~
+
+Class mode never overwrites the user's Custom dataset.
+
+Monkeytype Custom Text EN-VN dictionary:
+
+~~~text
+Library / Custom
+~~~
+
+Library mode does not expose a level selector.
+
+It uses `lookup.json` against the current Custom Text, discovers the referenced levels, loads only those level files, and feeds the resulting entries into the existing dictionary/longest-phrase matching pipeline.
+
+Final child revisions for this feature:
+
+~~~text
+Monkeytype
+fede711b4316f8abe2d04ecc45c9bbf6a1e0c99a
+
+Vocabulary Shooter
+0f4e114fa003fffc67b72de9cb5ab3943c877087
+
+Recall Typing
+7e03fafe040814cd0e7cfd3f1a0033202133b996
+~~~
+
+Verification before parent pin:
+
+~~~text
+Monkeytype Custom EN-VN CI → PASS
+Shooter CI                 → PASS
+Recall CI                  → PASS
+Platform vocabulary CI     → PASS
+~~~
+
+Detailed contract:
+
+~~~text
+docs/design/SHARED_VOCABULARY_LIBRARY.md
+~~~

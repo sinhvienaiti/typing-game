@@ -9,6 +9,7 @@ Current documents:
 - [Monkeytype - Optional Recall Typing Mode](./MONKEYTYPE_RECALL_MODE.md)
 - [Monkeytype - Full Text Reader](./MONKEYTYPE_TEXT_READER.md)
 - [Recall Typing - Hidden Word / Spelling Game](./RECALL_TYPING_GAME.md)
+- [Shared Leveled Vocabulary Library](./SHARED_VOCABULARY_LIBRARY.md)
 
 ## Status convention
 
