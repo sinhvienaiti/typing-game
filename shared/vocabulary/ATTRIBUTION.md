@@ -2,7 +2,7 @@
 
 The editable vocabulary data in `shared/vocabulary/levels/*.json` and the generated
 `index.json` / `lookup.json` artifacts are a modified dataset distributed under
-**CC BY-SA 4.0** because the first production batch is derived from thichhoc-dict.
+**CC BY-SA 4.0** because the production library derives from share-alike vocabulary data.
 
 ## English-Vietnamese dictionary data
 
@@ -12,12 +12,28 @@ https://github.com/thichhoc-org/thichhoc-dict
 Nguồn gốc: WordNet 3.1 (Princeton), CMUdict (CMU), Wiktionary.
 Đã chỉnh sửa dữ liệu.
 
-The production batch uses the source as candidate/enrichment data only. Entries are
-selected and simplified for this typing curriculum; source data is not copied blindly.
+The production pipeline uses thichhoc-dict as enrichment data for Vietnamese meanings
+and pronunciation metadata. Automatic promotion requires Wiktionary plus CMUdict
+provenance; ambiguous/multi-pronunciation records are excluded from the bulk path.
+
+## English frequency ranking
+
+Automatic bulk selection is ranked with wordfreq 3.1.1 by Robyn Speer:
+
+https://pypi.org/project/wordfreq/3.1.1/
+https://github.com/rspeer/wordfreq
+
+wordfreq combines multiple usage sources and provides the English frequency ranking used
+to keep the bulk library focused on common single-word headwords instead of arbitrary
+dictionary phrases or obscure named entities.
+
+wordfreq code is Apache-2.0. Its included frequency data is redistributable under the
+licensing/attribution terms documented in the upstream LICENSE.txt and NOTICE.md, including
+CC BY-SA 4.0 data sources and required source acknowledgements. Credit: Robyn Speer.
 
 ## CEFR reference
 
-Level review uses the CEFR-J Vocabulary Profile as a difficulty reference:
+Difficulty ordering uses the CEFR-J Vocabulary Profile as a reference:
 
 The CEFR-J Wordlist Version 1.5. Compiled by Yukio Tono,
 Tokyo University of Foreign Studies.
@@ -32,8 +48,8 @@ and commercial purposes without charge when the dataset is properly cited.
 The library standard is **General American IPA**.
 
 The source pipeline primarily derives IPA from CMUdict. Heteronyms are not accepted
-blindly: the selected part of speech and intended learner meaning must match the
-pronunciation before an entry is promoted into `levels/*.json`.
+blindly: candidates with multiple trusted pronunciations are excluded from bulk promotion.
+The already-reviewed Levels 001-003 remain preserved.
 
 ## Important license scope
 

@@ -57,8 +57,7 @@ const LEVEL_RANGE = {
 
 function hasTrustedProvenance(option) {
   const source = String(option?.source ?? "").toLowerCase();
-  return source.includes("cmudict") &&
-    (source.includes("wordnet") || source.includes("wiktionary"));
+  return source.includes("cmudict") && source.includes("wiktionary");
 }
 
 function parseCsv(text) {
@@ -126,8 +125,16 @@ function earliestCefr(values) {
     .sort((a, b) => CEFR_RANK[a] - CEFR_RANK[b])[0] ?? null;
 }
 
+function keepEarlier(map, key, cefr) {
+  const previous = map.get(key);
+  if (previous === undefined || CEFR_RANK[cefr] < CEFR_RANK[previous]) {
+    map.set(key, cefr);
+  }
+}
+
 async function loadCefr(files) {
-  const map = new Map();
+  const byPos = new Map();
+  const byHeadword = new Map();
   for (const file of files) {
     let raw;
     try {
@@ -151,17 +158,14 @@ async function loadCefr(files) {
       const pos = (row[posIndex] ?? "").trim().toLowerCase();
       const cefr = (row[cefrIndex] ?? "").trim().toUpperCase();
       if (!headword || !pos || CEFR_RANK[cefr] === undefined) continue;
-      const key = `${headword}\t${pos}`;
-      const previous = map.get(key);
-      if (previous === undefined || CEFR_RANK[cefr] < CEFR_RANK[previous]) {
-        map.set(key, cefr);
-      }
+      keepEarlier(byPos, `${headword}\t${pos}`, cefr);
+      keepEarlier(byHeadword, headword, cefr);
     }
   }
-  return map;
+  return { byPos, byHeadword };
 }
 
-async function loadDictionary(cefrMap) {
+async function loadDictionary(cefrByPos) {
   const names = (await fs.readdir(dictionaryDir))
     .filter((name) => name.endsWith(".jsonl"))
     .sort();
@@ -193,7 +197,9 @@ async function loadDictionary(cefrMap) {
       if (!ipa.startsWith("/") || !ipa.endsWith("/") || senses.length === 0) continue;
 
       const cefrPos = POS_TO_CEFR[pos];
-      const cefr = cefrPos === undefined ? null : cefrMap.get(`${en}\t${cefrPos}`) ?? null;
+      const cefr = cefrPos === undefined
+        ? null
+        : cefrByPos.get(`${en}\t${cefrPos}`) ?? null;
       const option = {
         pos,
         vi: senses.slice(0, 3),
@@ -211,11 +217,12 @@ async function loadDictionary(cefrMap) {
   return grouped;
 }
 
-function buildCandidates(grouped) {
+function buildCandidates(grouped, cefrByHeadword) {
   const candidates = [];
   for (const [en, options] of grouped) {
     options.sort((a, b) => b.frequency - a.frequency || a.pos.localeCompare(b.pos));
     const cefr = earliestCefr(options.map((option) => option.cefr));
+    const referenceCefr = cefrByHeadword.get(en) ?? null;
     const frequency = Math.max(...options.map((option) => option.frequency));
     const spelling = spellingDifficulty(en);
     const pronunciation = Math.min(
@@ -227,15 +234,19 @@ function buildCandidates(grouped) {
     );
     const reviewReasons = [];
     if (trustedOptions.length === 0) {
-      reviewReasons.push("missing trusted lexical/pronunciation provenance");
+      reviewReasons.push("missing Wiktionary/CMUdict provenance");
     }
     if (trustedPronunciations.size > 1) {
       reviewReasons.push("multiple trusted pronunciations");
+    }
+    if (referenceCefr !== null && cefr === null) {
+      reviewReasons.push("CEFR headword/POS mismatch");
     }
 
     candidates.push({
       en,
       cefr,
+      referenceCefr,
       frequency,
       spellingDifficulty: spelling,
       pronunciationDifficulty: pronunciation,
@@ -243,7 +254,7 @@ function buildCandidates(grouped) {
       reviewRequired: reviewReasons.length > 0,
       reviewReasons,
       reviewChecks: reviewReasons.length > 0
-        ? ["source provenance", "IPA/heteronym"]
+        ? ["source provenance", "IPA/heteronym", "CEFR/POS"]
         : [],
       options,
     });
@@ -278,19 +289,19 @@ function buildCandidates(grouped) {
   });
 }
 
-const cefrMap = await loadCefr([cefrFile, advancedCefrFile]);
-const grouped = await loadDictionary(cefrMap);
-const candidates = buildCandidates(grouped);
+const cefrMaps = await loadCefr([cefrFile, advancedCefrFile]);
+const grouped = await loadDictionary(cefrMaps.byPos);
+const candidates = buildCandidates(grouped, cefrMaps.byHeadword);
 
 await fs.mkdir(path.dirname(outputFile), { recursive: true });
 await fs.writeFile(
   outputFile,
   JSON.stringify(
     {
-      version: 2,
+      version: 3,
       generatedAt: new Date().toISOString(),
       note:
-        "Preparation artifact. Trusted non-ambiguous candidates may be promoted automatically; reviewRequired entries stay exception-only.",
+        "Trusted single-pronunciation candidates may be promoted automatically. CEFR/POS mismatches and pronunciation exceptions remain review-only.",
       sources: {
         dictionary: dictionaryDir,
         cefr: cefrFile,
