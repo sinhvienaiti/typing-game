@@ -177,14 +177,13 @@ If continuing after interruption, trust committed production files on main first
 When continuing this work in another chat:
 
 1. Read this file first.
-2. Read `docs/design/TYPING_TEXT_CORPUS_PLAN.md`.
-3. Read `scripts/typing-text-core.mjs`, `scripts/validate-typing-texts.mjs`, and `scripts/generate-typing-text-index.mjs`.
-4. Check the current `main` HEAD and latest Platform CI.
-5. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
-6. Resume from the first missing or failing level.
-7. Do not regenerate already committed passing levels unless QA finds a real defect.
-8. Keep the 10-level batch rule and update this file in every completed batch push.
-9. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
+2. Read `scripts/typing-text-core.mjs` and `scripts/validate-typing-texts.mjs`.
+3. Check the current `main` HEAD and latest Platform CI.
+4. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
+5. Resume from the first missing or failing level.
+6. Do not regenerate already committed passing levels unless QA finds a real defect.
+7. Keep the 10-level batch rule and update this file in every completed batch push.
+8. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
 
 ## Next action
 
