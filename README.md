@@ -1,6 +1,6 @@
 # Typing Game
 
-Local platform for Monkeytype, Vocabulary Shooter, Recall Typing and future learning games.
+Local platform for Monkeytype, Vocabulary Shooter, Recall Typing, Karaoke Typing and future learning games.
 
 Each game is an independent Git repository mounted under `games/` as a submodule.
 
@@ -25,6 +25,7 @@ https://typing-game.local/
 https://typing-game.local/monkeytype
 https://typing-game.local/vocab-shooter
 https://typing-game.local/recall-typing
+https://typing-game.local/karaoke-typing
 ```
 
 Internal origins:
@@ -33,6 +34,7 @@ Internal origins:
 https://monkeytype.typing-game.local
 https://shooter.typing-game.local
 https://recall.typing-game.local
+https://karaoke.typing-game.local
 ```
 
 ## First setup
@@ -72,6 +74,7 @@ Focused runs:
 ./dev.sh monkeytype
 ./dev.sh shooter
 ./dev.sh recall
+./dev.sh karaoke
 ```
 
 Explicit all:
@@ -80,7 +83,7 @@ Explicit all:
 ./dev.sh all
 ```
 
-Aliases `vocab-shooter` and `recall-typing` are also accepted.
+Aliases `vocab-shooter`, `recall-typing` and `karaoke-typing` are also accepted.
 
 The lower-level commands remain available when needed:
 
@@ -90,6 +93,7 @@ pnpm dev
 pnpm dev:monkeytype
 pnpm dev:shooter
 pnpm dev:recall
+pnpm dev:karaoke
 ```
 
 ## Daily / Play mode
@@ -145,5 +149,6 @@ The persistent project handoff and engineering history live under docs:
 - [Change log overview](./docs/changelog/README.md)
 - [2026-09-19 detail](./docs/changelog/2026-09-19.md)
 - [Recall Typing design](./docs/design/RECALL_TYPING_GAME.md)
+- [Karaoke Typing design](./docs/design/KARAOKE_TYPING_GAME.md)
 
 Meaningful implementation or infrastructure changes should update the current day's changelog and the project context in the same Git workflow.
