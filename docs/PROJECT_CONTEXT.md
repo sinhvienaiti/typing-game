@@ -3203,3 +3203,113 @@ The generated local report is:
 
 The committed level files remain the runtime source of truth for all three games.
 The bulk pipeline is the reproducible way to rebuild/expand those files from approved sources.
+
+---
+
+# 76. Production 18k vocabulary library completed
+
+The shared vocabulary expansion is now complete at the requested production scale.
+
+Current committed dataset:
+
+~~~text
+100 levels
+18,000 total entries
+450 reviewed entries preserved in Levels 001-003
+17,550 automatically generated entries in Levels 004-100
+average 180 entries/level
+~~~
+
+Final generated-data commit:
+
+~~~text
+e18fbcae8713afaa0a0b5f2cf2df53a41c3f18e4
+~~~
+
+The automatic pipeline is no longer a dictionary-wide bulk import.
+
+Final source/selection order:
+
+~~~text
+wordfreq 3.1.1
+-> common-English usefulness/ranking
+
+ESDB / SCOWL size 70, American English
+-> lexical whitelist
+-> abbreviations/special categories excluded
+-> lowercase alphabetic headwords only
+
+thichhoc-dict
+-> Vietnamese meanings
+-> IPA/pronunciation metadata
+-> CMUdict + WordNet/Wiktionary provenance
+
+CEFR-J
+-> difficulty anchor where available
+-> CEFR/POS mismatch protection
+~~~
+
+Pinned source revisions:
+
+~~~text
+thichhoc-org/thichhoc-dict
+4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b
+
+openlanguageprofiles/olp-en-cefrj
+d4e45b75b38f27b30dfc5c44d8c571aec7e7092f
+
+en-wl/wordlist
+1e5b7d3a72f47a71da5d28686c1dd4b397178485
+
+wordfreq package
+3.1.1
+~~~
+
+Final production build statistics:
+
+~~~text
+normalized candidates        = 83,617
+wordfreq ranking headwords   = 57,449
+SCOWL words                  = 126,423
+trusted common candidates    = 23,474
+selected automatic entries   = 17,550
+selected maximum source rank = 35,609
+final total                  = 18,000
+~~~
+
+Quality fixes made during full-build review:
+
+~~~text
+dictionary-wide phrases/proper names
+-> replaced with wordfreq + SCOWL selection
+
+proper-name-like Vietnamese sense chunks
+-> skipped when a normal learner meaning is available
+
+multiple trusted pronunciations
+-> excluded from automatic promotion
+
+CEFR headword/POS mismatch
+-> review-only
+
+unknown-CEFR level placement
+-> normalized against the selected 18k library
+   instead of the entire upstream frequency list
+~~~
+
+This last change prevents useful but clearly intermediate words from drifting into A1 only
+because they are common relative to the complete upstream corpus.
+
+Platform integration PASS and full vocabulary build PASS.
+
+Runtime remains unchanged:
+
+~~~text
+shared/vocabulary/levels/*.json
+-> source of truth
+
+index.json / lookup.json
+-> generated artifacts
+~~~
+
+Monkeytype, Vocabulary Shooter and Recall Typing continue to consume the same shared library.
