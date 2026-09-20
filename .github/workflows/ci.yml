@@ -71,3 +71,40 @@ jobs:
 
       - name: Build Recall Typing
         run: pnpm build:recall
+
+  vocabulary-full-build:
+    if: contains(github.event.head_commit.message, '[vocab-full]')
+    needs: integration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Build full trusted vocabulary library
+        run: |
+          bash scripts/setup-vocabulary-sources.sh
+          node scripts/prepare-vocabulary-candidates.mjs
+          node scripts/build-vocabulary-library.mjs --target 18000 --minimum 15000
+          node scripts/validate-vocabulary.mjs
+
+      - name: Commit generated vocabulary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add shared/vocabulary/levels shared/vocabulary/index.json shared/vocabulary/lookup.json
+
+          if git diff --cached --quiet; then
+            echo "Vocabulary library is already up to date."
+            exit 0
+          fi
+
+          git commit -m "data: generate trusted vocabulary library [skip ci]"
+          git push origin HEAD:main
