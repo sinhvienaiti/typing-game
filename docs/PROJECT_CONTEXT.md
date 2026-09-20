@@ -3381,3 +3381,84 @@ Each completed level should be checkpointed locally. A batch is pushed only afte
 The corpus uses strict typing rules, CEFR-aware difficulty, coverage-aware target vocabulary selection, topic/style diversity, research for better writing quality, originality protection, automated similarity checks and editorial anti-repetition review.
 
 This section is only the implementation handoff summary. The detailed rules in docs/design/LEVELED_TYPING_TEXT_LIBRARY.md are authoritative.
+
+
+---
+
+# 78. Karaoke Typing game
+
+A fourth independent game has been added:
+
+~~~text
+sinhvienaiti/karaoke-typing
+~~~
+
+Platform integration:
+
+~~~text
+games/karaoke-typing
+-> Git submodule
+-> branch main
+
+public route
+-> https://typing-game.local/karaoke-typing
+
+internal origin
+-> https://karaoke.typing-game.local
+
+dev port
+-> 3003
+~~~
+
+Karaoke Typing is a clean TypeScript/Vite implementation inspired by the gameplay model of TypingMania NEO. It does not copy TypingMania source code and does not modify Monkeytype, Vocabulary Shooter or Recall Typing source.
+
+Current media sources:
+
+~~~text
+YouTube URL / video ID
+local browser-supported audio
+local browser-supported video
+~~~
+
+Local media uses browser object URLs and is never uploaded by the game.
+
+Lyrics:
+
+~~~text
+standard LRC
+enhanced LRC word timing
+runtime offset -5s to +5s
+~~~
+
+Current gameplay modes:
+
+~~~text
+Normal
+Easy
+Blind
+Blank
+~~~
+
+The game includes score, combo, normal/typing accuracy, completed/skipped lines, skipped characters, result screen and restart.
+
+Child verification is owned by the Karaoke Typing repository:
+
+~~~text
+pnpm test
+pnpm build
+~~~
+
+Important CI caveat:
+
+~~~text
+karaoke-typing is currently private
+existing Monkeytype / Shooter / Recall repositories are public
+~~~
+
+The parent GitHub Actions token is not assumed to have access to a private sibling repository. Parent CI therefore leaves the private Karaoke gitlink uninitialized, verifies that the gitlink exists, and continues initializing/testing the existing public Recall submodule. Karaoke source correctness is enforced by its own child CI.
+
+Authoritative design:
+
+~~~text
+docs/design/KARAOKE_TYPING_GAME.md
+~~~
