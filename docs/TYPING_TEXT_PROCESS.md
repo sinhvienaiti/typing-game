@@ -144,7 +144,10 @@ Committed checkpoint on the corpus branch:
 - Level 007: 15 passages, 4312 words, vocabulary coverage 65.7 percent, duplicate/similarity warnings 0.
 - Level 008: 15 passages, 3987 words, vocabulary coverage 59.7 percent, duplicate/similarity warnings 0.
 - Level 009: 15 passages, 4275 words, vocabulary coverage 58.6 percent, duplicate/similarity warnings 0.
-- Next level: 010.
+- Level 010: 15 passages, 3910 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
+- Level 011: 15 passages, 3870 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
+- Levels 001-011 are complete and reviewed.
+- Next level: 012.
 - Main remains reserved for completed 30-level production batches.
 
 If continuing after interruption, trust committed level files on the corpus branch and this status file.
@@ -165,4 +168,4 @@ When continuing this work in another chat:
 
 ## Next action
 
-Continue Level 010 through 030 without stopping. After all 30 files pass per-level and batch-wide QA, fast-forward the completed batch to main, update this file with the final batch commit and QA totals, report completion, and immediately start Batch 031-060.
+Continue Level 012 through 030 without stopping. After all 30 files pass per-level and batch-wide QA, fast-forward the completed batch to main, update this file with the final batch commit and QA totals, report completion, and immediately start Batch 031-060.
