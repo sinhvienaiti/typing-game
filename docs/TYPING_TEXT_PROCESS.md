@@ -156,8 +156,9 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 011: 15 passages, 3870 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
 - Level 012: 15 passages, 3832 words, vocabulary coverage 52.5 percent, duplicate/similarity warnings 0.
 - Level 013: 15 passages, 3799 words, vocabulary coverage 65.2 percent, duplicate/similarity warnings 0.
-- Levels 011-013 are complete and reviewed on the checkpoint branch.
-- Next active level: 014.
+- Level 014: 15 passages, 3846 words, vocabulary coverage 58.6 percent, duplicate/similarity warnings 0.
+- Levels 011-014 are complete and reviewed on the checkpoint branch.
+- Next active level: 015.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -178,7 +179,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Continue Level 014 through 020 without stopping. Levels 011-013 are already complete on the checkpoint branch.
+Continue Level 015 through 020 without stopping. Levels 011-014 are already complete on the checkpoint branch.
 
 After Levels 011-020 all pass per-level and batch-wide QA:
 
