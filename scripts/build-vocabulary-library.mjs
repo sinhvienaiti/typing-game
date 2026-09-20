@@ -60,8 +60,8 @@ function trusted(option) {
 function isProperLikeMeaning(value) {
   const meaning = clean(value);
   if (!meaning) return true;
-  return /^[A-Z][A-Za-z.'-]*(?:\\s+[A-Z][A-Za-z.'-]*)*(?:\\s|$|\\()/.test(meaning) ||
-    /^[A-Z]{2,}(?:\\s|$|\\()/.test(meaning);
+  return /^[A-Z][A-Za-z.'-]*(?:\s+[A-Z][A-Za-z.'-]*)*(?:\s|$|\()/.test(meaning) ||
+    /^[A-Z]{2,}(?:\s|$|\()/.test(meaning);
 }
 
 function meaningParts(option) {
