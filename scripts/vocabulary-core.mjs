@@ -25,6 +25,7 @@ export function validateLevels(documents) {
   const errors = [];
   const ids = new Map();
   const english = new Map();
+  const seenLevels = new Set();
   let totalEntries = 0;
 
   for (const { file, data } of documents) {
@@ -37,8 +38,14 @@ export function validateLevels(documents) {
     if (data.version !== 1) errors.push(`${file}: version must be 1`);
     if (!Number.isInteger(data.level) || data.level < 1 || data.level > PLANNED_LEVELS) {
       errors.push(`${file}: level must be an integer from 1 to ${PLANNED_LEVELS}`);
-    } else if (data.level !== expectedLevel) {
-      errors.push(`${file}: level ${data.level} does not match filename ${expectedLevel}`);
+    } else {
+      if (data.level !== expectedLevel) {
+        errors.push(`${file}: level ${data.level} does not match filename ${expectedLevel}`);
+      }
+      if (seenLevels.has(data.level)) {
+        errors.push(`${file}: duplicate level ${data.level}`);
+      }
+      seenLevels.add(data.level);
     }
     if (typeof data.label !== "string" || data.label.trim() === "") {
       errors.push(`${file}: label is required`);
@@ -85,6 +92,15 @@ export function validateLevels(documents) {
         const existing = english.get(key);
         if (existing !== undefined) errors.push(`${at}: duplicate English "${entry.en}" (also ${existing})`);
         else english.set(key, at);
+      }
+    }
+  }
+
+  if (seenLevels.size > 0) {
+    const highestLevel = Math.max(...seenLevels);
+    for (let level = 1; level <= highestLevel; level++) {
+      if (!seenLevels.has(level)) {
+        errors.push(`missing level file for level ${level}`);
       }
     }
   }
