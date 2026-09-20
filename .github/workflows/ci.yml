@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Initialize public CI submodule
-        run: git submodule update --init games/recall-typing
+      - name: Initialize public CI submodules
+        run: git submodule update --init games/monkeytype games/vocab-shooter games/recall-typing
 
       - name: Validate Karaoke Typing gitlink
         run: |
