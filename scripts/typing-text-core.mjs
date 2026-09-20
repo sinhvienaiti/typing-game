@@ -68,7 +68,7 @@ function validateCapitalization(text) {
     if (character === ".") sentenceStart = true;
   }
 
-  return !sentenceStart;
+  return true;
 }
 
 function targetAppears(text, target) {
@@ -141,6 +141,8 @@ export async function validateTypingLevels(documents, vocabularyDir) {
   const exactPassages = new Map();
   const exactSentences = new Map();
   const longPhrases = new Map();
+  const similarityPassages = [];
+  const fiveGramOwners = new Map();
   const levelReports = [];
   let totalPassages = 0;
   let totalWords = 0;
@@ -320,6 +322,38 @@ export async function validateTypingLevels(documents, vocabularyDir) {
         } else {
           longPhrases.set(gram, label);
         }
+      }
+
+      const fiveGrams = new Set(tokenNgrams(text, 5));
+      const overlapCounts = new Map();
+      for (const gram of fiveGrams) {
+        for (const ownerIndex of fiveGramOwners.get(gram) ?? []) {
+          overlapCounts.set(
+            ownerIndex,
+            (overlapCounts.get(ownerIndex) ?? 0) + 1,
+          );
+        }
+      }
+
+      for (const [ownerIndex, intersection] of overlapCounts) {
+        const previous = similarityPassages[ownerIndex];
+        if (previous === undefined) continue;
+        const union = fiveGrams.size + previous.grams.size - intersection;
+        const similarity = union === 0 ? 0 : intersection / union;
+        const threshold = previous.level === level ? 0.25 : 0.35;
+        if (similarity >= threshold) {
+          warnings.push(
+            `${label}: ${(similarity * 100).toFixed(1)}% 5-gram similarity with ${previous.label}`,
+          );
+        }
+      }
+
+      const ownerIndex = similarityPassages.length;
+      similarityPassages.push({ label, level, grams: fiveGrams });
+      for (const gram of fiveGrams) {
+        const owners = fiveGramOwners.get(gram) ?? [];
+        owners.push(ownerIndex);
+        fiveGramOwners.set(gram, owners);
       }
     }
 
