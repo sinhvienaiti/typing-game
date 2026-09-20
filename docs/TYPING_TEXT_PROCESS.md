@@ -83,11 +83,8 @@ After all passages in one level pass:
 
 ## Batch workflow
 
-- Production batch size: 30 level files.
-- Batch 1: 001-030.
-- Batch 2: 031-060.
-- Batch 3: 061-090.
-- Batch 4: 091-100.
+- Production batch size: 10 level files.
+- Batches: 001-010, 011-020, 021-030, 031-040, 041-050, 051-060, 061-070, 071-080, 081-090, 091-100.
 - Work level by level.
 - Review and repair each level before starting the next.
 - After a batch is complete, run batch-wide validation and similarity checks.
@@ -151,8 +148,10 @@ Production status on main:
 - Level 009: 15 passages, 4275 words, vocabulary coverage 58.6 percent, duplicate/similarity warnings 0.
 - Level 010: 15 passages, 3910 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
 
-Checkpoint branch: `feature/typing-text-corpus`.
+Batch 011-020 production result:
 
+- Production commit: `344dae0235f5d0e6cf4fb53765c7a87566cc6b10`.
+- Batch QA: 150 passages, 38841 words, duplicate/similarity warnings 0.
 - Level 011: 15 passages, 3870 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
 - Level 012: 15 passages, 3832 words, vocabulary coverage 52.5 percent, duplicate/similarity warnings 0.
 - Level 013: 15 passages, 3799 words, vocabulary coverage 65.2 percent, duplicate/similarity warnings 0.
@@ -162,8 +161,13 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 017: 15 passages, 4099 words, vocabulary coverage 49.7 percent, duplicate/similarity warnings 0.
 - Level 018: 15 passages, 3980 words, vocabulary coverage 58.0 percent, duplicate/similarity warnings 0.
 - Level 019: 15 passages, 3833 words, vocabulary coverage 61.3 percent, duplicate/similarity warnings 0.
-- Levels 011-019 are complete and reviewed on the checkpoint branch.
-- Next active level: 020.
+- Level 020: 15 passages, 3969 words, vocabulary coverage 72.9 percent, duplicate/similarity warnings 0.
+- Index after Batch 011-020: 20 levels, 300 passages, 78318 words.
+
+Checkpoint branch: `feature/typing-text-corpus`.
+
+- Levels 011-020 are complete and reviewed.
+- Next active level: 021.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -173,24 +177,31 @@ If continuing after interruption, trust committed production files on main first
 When continuing this work in another chat:
 
 1. Read this file first.
-2. Read `docs/design/TYPING_TEXT_CORPUS_PLAN.md`.
-3. Read `scripts/typing-text-core.mjs`, `scripts/validate-typing-texts.mjs`, and `scripts/generate-typing-text-index.mjs`.
-4. Check the current `main` HEAD and latest Platform CI.
-5. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
-6. Resume from the first missing or failing level.
-7. Do not regenerate already committed passing levels unless QA finds a real defect.
-8. Keep the 10-level batch rule and update this file in every completed batch push.
-9. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
+2. Read `scripts/typing-text-core.mjs` and `scripts/validate-typing-texts.mjs`.
+3. Check the current `main` HEAD and latest Platform CI.
+4. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
+5. Resume from the first missing or failing level.
+6. Do not regenerate already committed passing levels unless QA finds a real defect.
+7. Keep the 10-level batch rule and update this file in every completed batch push.
+8. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
 
 ## Next action
 
-Continue Level 020 without stopping. Levels 011-019 are already complete on the checkpoint branch.
+Continue Batch 021-030 without stopping, starting exactly from Level 021.
 
-After Levels 011-020 all pass per-level and batch-wide QA:
+For each level:
 
-1. Push Batch 011-020 to main.
-2. Update this process file with the production commit and QA totals.
-3. Report one concise line that Batch 011-020 is complete.
-4. Immediately continue with Batch 021-030.
+1. Create or repair only the current missing or failing level.
+2. Run passage and per-level QA before moving on.
+3. Commit the passing level to `feature/typing-text-corpus` as a checkpoint.
+4. Update this process file often enough that the next active level is unambiguous.
 
-Do not wait until 30 files before publishing. The permanent batch size is 10 files to reduce loss risk during long runs.
+After Levels 021-030 all pass per-level and batch-wide QA:
+
+1. Push Batch 021-030 to main.
+2. Update the typing-text index.
+3. Update this process file with the production commit and QA totals.
+4. Report one concise line that Batch 021-030 is complete.
+5. Immediately continue with Batch 031-040.
+
+The permanent batch size is 10 files to reduce loss risk during long runs.
