@@ -2697,3 +2697,151 @@ stylelint PASS
 local-static production build PASS
 full frontend tests PASS
 ~~~
+
+
+---
+
+# 69. Monkeytype flexible Stop on Error policies
+
+Monkeytype now exposes three distinct accuracy/input behaviors around Stop on Error.
+
+## Original behavior
+
+With the new accuracy options disabled, original Monkeytype scoring remains authoritative.
+
+## Ignore repeated blocked errors
+
+~~~text
+ignoreRepeatedBlockedErrors = true
+~~~
+
+Behavior:
+
+~~~text
+first blocked error
+→ remains an accuracy penalty
+
+later wrong attempts at the same blocked character/word
+→ no additional accuracy penalty
+
+eventual correction
+→ original first penalty remains
+~~~
+
+This is the preferred mode for the user's fast-typing case where several extra keys may be pressed after a Stop on Error block is already active.
+
+## Forgive corrected errors
+
+~~~text
+forgiveCorrectedErrors = true
+~~~
+
+Behavior:
+
+~~~text
+first blocked error
+→ may count initially
+
+later repeated blocked attempts
+→ no additional accuracy penalty
+
+eventual correction
+→ original blocked accuracy penalty is forgiven
+~~~
+
+This existing feature remains available.
+
+The Settings UI makes these two scoring modes mutually exclusive.
+
+## Keep first wrong letter
+
+~~~text
+stopOnErrorKeepFirstError = true
+~~~
+
+With:
+
+~~~text
+stop on error = letter
+~~~
+
+the first wrong character remains visibly incorrect/red instead of being immediately removed.
+
+Further insertions are blocked until the wrong character is deleted.
+
+Backspace/delete behavior remains native Monkeytype behavior.
+
+UI location:
+
+~~~text
+Settings
+→ Input
+→ stop on error
+→ keep first wrong letter
+→ ignore repeated blocked errors
+→ forgive corrected errors
+~~~
+
+All three custom options default to off.
+
+Final reviewed Monkeytype child revision:
+
+~~~text
+9ca8c976d3883688705e58bb0e3f1626db7eae1b
+~~~
+
+Verification:
+
+~~~text
+Custom EN-VN CI
+→ lint PASS
+→ stylelint PASS
+→ local-static production build PASS
+→ full frontend tests PASS
+~~~
+
+The final review also added the two new config keys to command-line metadata after CI correctly reported the missing exhaustive entries.
+
+---
+
+# 70. Shooter active-target visual baseline
+
+Vocabulary Shooter now uses a red animated downward marker above the currently locked typing target.
+
+The marker:
+
+- is Canvas vector art,
+- has no external asset dependency,
+- uses rounded/chubby geometry,
+- has red glow/gradient,
+- bobs smoothly,
+- has subtle sway,
+- uses horizontal scale animation for a lightweight rotating-game-marker feel,
+- exists only for the active locked target.
+
+The post-success Vietnamese/IPA display no longer draws a rectangular border/card over the game field.
+
+Vietnamese is now heavier:
+
+~~~text
+font weight = 900
+~~~
+
+and uses a soft glow for readability.
+
+IPA remains secondary.
+
+The Target Rush fixed top Learning Panel remains separate and unchanged.
+
+Final reviewed Shooter revision:
+
+~~~text
+0e07b54171ac2d192178b0bcef65ebe9407bf36a
+~~~
+
+Shooter CI:
+
+~~~text
+TypeScript PASS
+Vite build PASS
+~~~

@@ -1552,3 +1552,93 @@ TypeScript PASS
 Vite build PASS
 ~~~
 
+
+
+---
+
+# 50. Active typing marker and border-free success reveal
+
+A browser review requested a clearer indication of which Shooter target is currently locked for typing.
+
+## Active target marker
+
+When:
+
+~~~text
+activeTargetId === target.id
+~~~
+
+the shared Canvas renderer draws one indicator directly above that target.
+
+Presentation:
+
+- downward-pointing red marker,
+- compact/moderate size,
+- rounded stem and soft/chubby arrow head,
+- red-to-pink gradient,
+- subtle glow,
+- smooth vertical bob,
+- small side sway,
+- horizontal squash/expand animation that gives a light rotating/3D game-marker impression,
+- always keeps the arrow head pointing at the active English target.
+
+The marker is vector-drawn in Canvas.
+
+No image, SVG download, video or additional asset is loaded.
+
+Because only the currently locked target gets the marker, the extra rendering cost is constant and small.
+
+The marker disappears automatically when the target is completed, removed or explicitly unlocked.
+
+This shared rule applies to:
+
+~~~text
+Classic
+Bounce
+Time Attack
+Target Rush
+~~~
+
+Target Rush's dedicated spotlight Learning Panel remains unchanged by this marker.
+
+## Post-success Vietnamese reveal
+
+The earlier post-success reveal used a dark rounded card with a cyan outline.
+
+That card/border has been removed.
+
+Current reveal:
+
+~~~text
+Vietnamese
+→ floating text
+→ font weight 900
+→ high-contrast warm text
+→ soft glow
+
+IPA
+→ smaller secondary line
+→ lower visual weight
+→ subtle dark shadow for readability
+~~~
+
+The goal is to keep the board visible and avoid a rectangular panel obscuring moving targets.
+
+The fixed Target Rush Learning Panel remains a separate feature and is not removed by this change.
+
+## Review cleanup
+
+After removing the reveal card, the now-unused Canvas `roundRect` helper was removed rather than left as dead code.
+
+Final reviewed Shooter revision:
+
+~~~text
+0e07b54171ac2d192178b0bcef65ebe9407bf36a
+~~~
+
+Shooter CI:
+
+~~~text
+TypeScript PASS
+Vite build PASS
+~~~
