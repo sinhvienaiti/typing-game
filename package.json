@@ -29,7 +29,10 @@
     "vocab:candidates": "node scripts/prepare-vocabulary-candidates.mjs",
     "vocab:sources": "bash scripts/setup-vocabulary-sources.sh",
     "vocab:build-library": "node scripts/build-vocabulary-library.mjs",
-    "vocab:refresh": "pnpm vocab:sources && pnpm vocab:candidates && pnpm vocab:build-library && pnpm vocab:validate"
+    "vocab:refresh": "pnpm vocab:sources && pnpm vocab:candidates && pnpm vocab:build-library && pnpm vocab:validate",
+    "typing-texts:generate": "node scripts/generate-typing-texts.mjs",
+    "typing-texts:validate": "node scripts/validate-typing-texts.mjs",
+    "typing-texts:report": "node scripts/report-typing-text-coverage.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Typing Game leveled typing-text file",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "level",
+    "cefr",
+    "passages"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "cefr": {
+      "enum": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2",
+        "Advanced"
+      ]
+    },
+    "passages": {
+      "type": "array",
+      "minItems": 15,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "topic",
+          "style",
+          "setting",
+          "tone",
+          "targetWords",
+          "wordCount",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^L\\\\d{3}-P\\\\d{3}$"
+          },
+          "topic": {
+            "type": "string",
+            "minLength": 1
+          },
+          "style": {
+            "type": "string",
+            "minLength": 1
+          },
+          "setting": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tone": {
+            "type": "string",
+            "minLength": 1
+          },
+          "targetWords": {
+            "type": "array",
+            "minItems": 20,
+            "maxItems": 30,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "wordCount": {
+            "type": "integer",
+            "minimum": 250,
+            "maximum": 300
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -49,10 +49,20 @@ jobs:
           pnpm vocab:generate
           git diff --exit-code -- shared/vocabulary/index.json shared/vocabulary/lookup.json
 
-      - name: Validate vocabulary pipeline syntax
+      - name: Validate shared typing texts
+        run: |
+          pnpm typing-texts:validate
+          pnpm typing-texts:generate
+          git diff --exit-code -- shared/typing-texts/index.json
+
+      - name: Validate data pipeline syntax
         run: |
           node --check scripts/prepare-vocabulary-candidates.mjs
           node --check scripts/build-vocabulary-library.mjs
+          node --check scripts/typing-text-core.mjs
+          node --check scripts/generate-typing-texts.mjs
+          node --check scripts/validate-typing-texts.mjs
+          node --check scripts/report-typing-text-coverage.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
