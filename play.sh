@@ -83,7 +83,7 @@ build_if_needed() {
 }
 
 echo "[1/4] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3100
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3100
 
 echo "[2/4] Checking static builds..."
 build_if_needed \
@@ -116,6 +116,16 @@ build_if_needed \
   "games/recall-typing/package.json" \
   "games/recall-typing/tsconfig.json" \
   "games/recall-typing/vite.config.ts"
+
+build_if_needed \
+  "Karaoke Typing" \
+  "games/karaoke-typing/dist/index.html" \
+  "build:karaoke" \
+  "games/karaoke-typing/src" \
+  "games/karaoke-typing/index.html" \
+  "games/karaoke-typing/package.json" \
+  "games/karaoke-typing/tsconfig.json" \
+  "games/karaoke-typing/vite.config.ts"
 
 build_if_needed \
   "Monkeytype" \
