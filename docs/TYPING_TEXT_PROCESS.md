@@ -194,7 +194,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Continue Batch 021-030 without stopping, starting exactly from Level 027. Levels 021-026 are complete on the checkpoint branch.
+Continue Batch 021-030 without stopping, starting exactly from Level 028. Levels 021-027 are complete on the checkpoint branch.
 
 For each level:
 
