@@ -9,6 +9,8 @@ THICHHOC_REV="4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b"
 CEFR_URL="https://github.com/openlanguageprofiles/olp-en-cefrj.git"
 CEFR_REV="d4e45b75b38f27b30dfc5c44d8c571aec7e7092f"
 WORDFREQ_VERSION="3.1.1"
+ESDB_URL="https://github.com/en-wl/wordlist.git"
+ESDB_REV="1e5b7d3a72f47a71da5d28686c1dd4b397178485"
 
 checkout_source() {
   url="$1"
@@ -45,9 +47,21 @@ PY
   curl -fsSL "https://raw.githubusercontent.com/rspeer/wordfreq/912caf64b657478d1dff1138efdc078947d54bb1/NOTICE.md" -o "$destination/NOTICE.md"
 }
 
+prepare_esdb() {
+  destination="$SOURCE_DIR/esdb"
+  checkout_source "$ESDB_URL" "$destination" "$ESDB_REV"
+
+  (
+    cd "$destination"
+    make >/dev/null
+    ./scowl --db scowl.db word-list 70 A 1 --deaccent --wo-poses=abbr --categories=
+  ) | awk '/^[a-z]+$/' | sort -u > "$destination/words.txt"
+}
+
 mkdir -p "$SOURCE_DIR"
 checkout_source "$THICHHOC_URL" "$SOURCE_DIR/thichhoc-dict" "$THICHHOC_REV"
 checkout_source "$CEFR_URL" "$SOURCE_DIR/olp-en-cefrj" "$CEFR_REV"
 prepare_wordfreq
+prepare_esdb
 
 echo "Vocabulary sources ready at pinned versions/revisions."

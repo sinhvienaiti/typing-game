@@ -31,6 +31,27 @@ wordfreq code is Apache-2.0. Its included frequency data is redistributable unde
 licensing/attribution terms documented in the upstream LICENSE.txt and NOTICE.md, including
 CC BY-SA 4.0 data sources and required source acknowledgements. Credit: Robyn Speer.
 
+## English lexical whitelist
+
+Bulk candidates are also intersected with the English Speller Database (ESDB),
+formerly SCOWL:
+
+https://github.com/en-wl/wordlist
+
+Pinned revision:
+
+~~~text
+1e5b7d3a72f47a71da5d28686c1dd4b397178485
+~~~
+
+The pipeline exports the American-English size-70 word list, excludes abbreviations
+and special categories, and keeps lowercase alphabetic entries only. This provides a
+lexical whitelist that removes proper names, acronyms, and arbitrary dictionary phrases
+while wordfreq still controls usefulness/frequency ranking.
+
+ESDB is derived from BSD-compatible sources and the combined work is distributed under
+the MIT-like terms in its Copyright file.
+
 ## CEFR reference
 
 Difficulty ordering uses the CEFR-J Vocabulary Profile as a reference:

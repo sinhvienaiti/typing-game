@@ -32,6 +32,7 @@ function pathArg(name, fallback) {
 const sourceRoot = path.join(root, ".cache", "vocabulary-sources");
 const inputFile = pathArg("--input", path.join(root, ".cache", "vocabulary-candidates.json"));
 const rankingFile = pathArg("--wordfreq", path.join(sourceRoot, "wordfreq", "ranking.tsv"));
+const scowlFile = pathArg("--scowl", path.join(sourceRoot, "esdb", "words.txt"));
 const target = numberArg("--target", 18000);
 const minimum = numberArg("--minimum", 15000);
 const preserveThrough = numberArg("--preserve-through", 3);
@@ -108,17 +109,21 @@ const preservedEnglish = new Set(
   preserved.flatMap(({ data }) => data.entries.map((entry) => normalizeEnglish(entry.en))),
 );
 const candidates = new Map(artifact.candidates.map((item) => [normalizeEnglish(item.en), item]));
+const scowlWords = new Set(
+  (await fs.readFile(scowlFile, "utf8")).split("\n").map((word) => normalizeEnglish(word)).filter(Boolean),
+);
 const ranking = (await fs.readFile(rankingFile, "utf8")).trim().split("\n").map((line) => {
   const [rank, zipf, en] = line.split("\t");
   return { rank: Number(rank), zipf: Number(zipf), en: normalizeEnglish(en) };
 });
 
 const eligible = [];
-const skipped = { preserved: 0, missingDictionary: 0, reviewRequired: 0, invalidEntry: 0 };
+const skipped = { notScowlWord: 0, preserved: 0, missingDictionary: 0, reviewRequired: 0, invalidEntry: 0 };
 
 for (let i = 0; i < ranking.length; i++) {
   const ranked = ranking[i];
   if (!/^[a-z]{2,}$/.test(ranked.en)) continue;
+  if (!scowlWords.has(ranked.en)) { skipped.notScowlWord++; continue; }
   if (preservedEnglish.has(ranked.en)) { skipped.preserved++; continue; }
 
   const candidate = candidates.get(ranked.en);
@@ -201,6 +206,7 @@ const report = {
   minimum,
   preservedEntries: preservedCount,
   rankingHeadwords: ranking.length,
+  scowlWords: scowlWords.size,
   trustedCommonCandidates: eligible.length,
   selectedAutomaticEntries: selected.length,
   totalEntries: total,
@@ -216,5 +222,5 @@ await fs.mkdir(path.dirname(reportFile), { recursive: true });
 await fs.writeFile(reportFile, stableJson(report));
 
 console.log(`Built ${total} trusted common-word entries across ${PLANNED_LEVELS} levels (${preservedCount} preserved, ${selected.length} automatic).`);
-console.log(`wordfreq ranking: ${ranking.length}; trusted matches: ${eligible.length}; selected max rank: ${report.selectedRankRange?.last ?? "n/a"}.`);
+console.log(`wordfreq ranking: ${ranking.length}; SCOWL words: ${scowlWords.size}; trusted matches: ${eligible.length}; selected max rank: ${report.selectedRankRange?.last ?? "n/a"}.`);
 console.log(`Build report: ${reportFile}`);
