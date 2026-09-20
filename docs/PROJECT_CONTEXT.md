@@ -3313,3 +3313,71 @@ index.json / lookup.json
 ~~~
 
 Monkeytype, Vocabulary Shooter and Recall Typing continue to consume the same shared library.
+
+
+---
+
+# 77. Leveled typing-text library and random practice plan
+
+The next major learning-content phase has been designed and approved.
+
+Authoritative design document:
+
+~~~text
+docs/design/LEVELED_TYPING_TEXT_LIBRARY.md
+~~~
+
+The scope is:
+
+~~~text
+Vocabulary Shooter
+-> randomized non-repeating vocabulary cycles
+
+Recall Typing
+-> randomized non-repeating vocabulary cycles
+
+Monkeytype
+-> new Level Passages text source
+-> Level 001-100 selector
+-> 1-15 passages per session
+-> randomized non-repeating passage cycles
+
+shared typing-text corpus
+-> 100 level files
+-> at least 15 passages per level
+-> 250-300 words per passage
+-> 20-30 target vocabulary entries per passage
+-> at least 1,500 passages total
+-> approximately 375,000-450,000 English words
+~~~
+
+The corpus must use the existing 18,000-entry shared vocabulary library rather than creating a second independent vocabulary system.
+
+Content production is explicitly quality-gated:
+
+~~~text
+one level
+-> generate passages
+-> automatic validation
+-> editorial self-review
+-> fix
+-> revalidate
+-> whole-level QA
+-> PASS
+-> only then continue to next level
+~~~
+
+Production batches are:
+
+~~~text
+001-030
+031-060
+061-090
+091-100
+~~~
+
+Each completed level should be checkpointed locally. A batch is pushed only after batch-wide QA passes. After each successful push, report the completed level range to the user and continue automatically.
+
+The corpus uses strict typing rules, CEFR-aware difficulty, coverage-aware target vocabulary selection, topic/style diversity, research for better writing quality, originality protection, automated similarity checks and editorial anti-repetition review.
+
+This section is only the implementation handoff summary. The detailed rules in docs/design/LEVELED_TYPING_TEXT_LIBRARY.md are authoritative.
