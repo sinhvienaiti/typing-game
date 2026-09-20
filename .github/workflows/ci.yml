@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: pnpm/action-setup@v4
         with:
@@ -20,6 +18,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+
+      - name: Initialize public CI submodule
+        run: git submodule update --init games/recall-typing
+
+      - name: Validate Karaoke Typing gitlink
+        run: |
+          git submodule status games/karaoke-typing
+          test "$(git ls-files --stage games/karaoke-typing | awk '{print $1}')" = "160000"
 
       - name: Validate shell scripts
         run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh
