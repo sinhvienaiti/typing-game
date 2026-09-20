@@ -49,6 +49,9 @@ jobs:
           pnpm vocab:generate
           git diff --exit-code -- shared/vocabulary/index.json shared/vocabulary/lookup.json
 
+      - name: Validate vocabulary candidate tool syntax
+        run: node --check scripts/prepare-vocabulary-candidates.mjs
+
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
 

@@ -3056,3 +3056,31 @@ shared/vocabulary/ATTRIBUTION.md
 The Portal includes a visible link to the vocabulary attribution.
 
 The JSON Schema ID regex was also corrected and validator/schema drift is now checked explicitly.
+
+
+---
+
+# 73. Production vocabulary QA polish
+
+A second manual QA pass refined learner-facing meanings and pronunciation in the first 300-entry production batch.
+
+Corrections include:
+
+~~~text
+dirty      -> bẩn; dơ
+show       -> cho thấy; chỉ ra
+first name -> tên
+card       -> thẻ
+create     -> /kɹiˈeɪt/
+outside    -> /aʊtˈsaɪd/
+~~~
+
+The pronunciation corrections were checked against English pronunciation references instead of trusting the source conversion blindly.
+
+Platform CI now also syntax-checks:
+
+~~~text
+scripts/prepare-vocabulary-candidates.mjs
+~~~
+
+This keeps the review-only candidate pipeline from silently breaking even though CI does not download third-party source datasets.

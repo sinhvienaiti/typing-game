@@ -456,3 +456,15 @@ The validator now also checks the critical schema contract itself so a broken
 escaped regex cannot silently drift away from runtime validation again.
 
 English entry text is additionally checked for NFKC/whitespace normalization.
+
+
+### Candidate-tool CI guard
+
+Platform CI syntax-checks the review-only candidate tool with:
+
+~~~bash
+node --check scripts/prepare-vocabulary-candidates.mjs
+~~~
+
+CI intentionally does not download or vendor the third-party source datasets.
+Actual candidate generation remains an explicit local data-preparation step.
