@@ -13,7 +13,7 @@ Nguồn gốc: WordNet 3.1 (Princeton), CMUdict (CMU), Wiktionary.
 Đã chỉnh sửa dữ liệu.
 
 The production pipeline uses thichhoc-dict as enrichment data for Vietnamese meanings
-and pronunciation metadata. Automatic promotion requires Wiktionary plus CMUdict
+and pronunciation metadata. Automatic promotion requires CMUdict plus Wiktionary or WordNet
 provenance; ambiguous/multi-pronunciation records are excluded from the bulk path.
 
 ## English frequency ranking

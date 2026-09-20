@@ -45,7 +45,8 @@ const clean = (value) => String(value ?? "").normalize("NFKC").trim().replace(/\
 
 function trusted(option) {
   const source = String(option?.source ?? "").toLowerCase();
-  return source.includes("cmudict") && source.includes("wiktionary");
+  return source.includes("cmudict") &&
+    (source.includes("wiktionary") || source.includes("wordnet"));
 }
 
 function buildEntry(candidate) {

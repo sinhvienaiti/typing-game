@@ -57,7 +57,8 @@ const LEVEL_RANGE = {
 
 function hasTrustedProvenance(option) {
   const source = String(option?.source ?? "").toLowerCase();
-  return source.includes("cmudict") && source.includes("wiktionary");
+  return source.includes("cmudict") &&
+    (source.includes("wiktionary") || source.includes("wordnet"));
 }
 
 function parseCsv(text) {
@@ -234,7 +235,7 @@ function buildCandidates(grouped, cefrByHeadword) {
     );
     const reviewReasons = [];
     if (trustedOptions.length === 0) {
-      reviewReasons.push("missing Wiktionary/CMUdict provenance");
+      reviewReasons.push("missing CMUdict + Wiktionary/WordNet provenance");
     }
     if (trustedPronunciations.size > 1) {
       reviewReasons.push("multiple trusted pronunciations");
