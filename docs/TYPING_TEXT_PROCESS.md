@@ -133,9 +133,17 @@ Completed and self-reviewed but not yet committed as production files at the tim
 - Level 002: 15 passages, 3829 words, vocabulary coverage 99.3 percent, duplicate/similarity warnings 0.
 - Level 003: 15 passages, 3786 words, vocabulary coverage 100 percent, duplicate/similarity warnings 0.
 - Level 004: 15 passages, 3838 words, safe/natural target coverage 65.7 percent, duplicate/similarity warnings 0.
-- Level 005: in progress. Thirteen of fifteen passages passed the latest per-passage QA. P011 and P014 each needed one additional natural same-level target.
+- Level 005: 15 passages, 3857 words, vocabulary coverage 67.4 percent, duplicate/similarity warnings 0.
 
-Important: intermediate accepted passage data was created as Git blobs during the active session but blobs are not treated as production state until a level file is committed. If continuing after interruption, trust committed level files and this status file, not unreferenced blobs.
+Checkpoint branch: `feature/typing-text-corpus`.
+
+Committed checkpoint on the corpus branch:
+
+- Levels 001-005 are complete and reviewed.
+- Next level: 006.
+- Main remains reserved for completed 30-level production batches.
+
+If continuing after interruption, trust committed level files on the corpus branch and this status file.
 
 ## Handoff instructions
 
@@ -153,4 +161,4 @@ When continuing this work in another chat:
 
 ## Next action
 
-Finish Level 005, then continue 006 through 030 without stopping. After all 30 files pass per-level and batch-wide QA, commit/push Batch 001-030, update this file, report completion, and immediately start Batch 031-060.
+Continue Level 006 through 030 without stopping. After all 30 files pass per-level and batch-wide QA, fast-forward the completed batch to main, update this file with the final batch commit and QA totals, report completion, and immediately start Batch 031-060.
