@@ -135,22 +135,31 @@ Completed and self-reviewed but not yet committed as production files at the tim
 - Level 004: 15 passages, 3838 words, safe/natural target coverage 65.7 percent, duplicate/similarity warnings 0.
 - Level 005: 15 passages, 3857 words, vocabulary coverage 67.4 percent, duplicate/similarity warnings 0.
 
-Checkpoint branch: `feature/typing-text-corpus`.
+Batch size: 10 level files.
 
-Committed checkpoint on the corpus branch:
+Production status on main:
 
-- Levels 001-009 are complete and reviewed.
+- Batch 001-010: complete and reviewed.
+- Level 001: 15 passages.
+- Level 002: 15 passages, 3829 words, vocabulary coverage 99.3 percent, duplicate/similarity warnings 0.
+- Level 003: 15 passages, 3786 words, vocabulary coverage 100 percent, duplicate/similarity warnings 0.
+- Level 004: 15 passages, 3838 words, safe/natural target coverage 65.7 percent, duplicate/similarity warnings 0.
+- Level 005: 15 passages, 3857 words, vocabulary coverage 67.4 percent, duplicate/similarity warnings 0.
 - Level 006: 15 passages, 3829 words, vocabulary coverage 74.0 percent, duplicate/similarity warnings 0.
 - Level 007: 15 passages, 4312 words, vocabulary coverage 65.7 percent, duplicate/similarity warnings 0.
 - Level 008: 15 passages, 3987 words, vocabulary coverage 59.7 percent, duplicate/similarity warnings 0.
 - Level 009: 15 passages, 4275 words, vocabulary coverage 58.6 percent, duplicate/similarity warnings 0.
 - Level 010: 15 passages, 3910 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
-- Level 011: 15 passages, 3870 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
-- Levels 001-011 are complete and reviewed.
-- Next level: 012.
-- Main remains reserved for completed 30-level production batches.
 
-If continuing after interruption, trust committed level files on the corpus branch and this status file.
+Checkpoint branch: `feature/typing-text-corpus`.
+
+- Level 011: 15 passages, 3870 words, vocabulary coverage 56.4 percent, duplicate/similarity warnings 0.
+- Level 012: 15 passages, 3832 words, vocabulary coverage 52.5 percent, duplicate/similarity warnings 0.
+- Levels 011-012 are complete and reviewed on the checkpoint branch.
+- Next active level: 013.
+- Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
+
+If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
 
 ## Handoff instructions
 
@@ -163,9 +172,18 @@ When continuing this work in another chat:
 5. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
 6. Resume from the first missing or failing level.
 7. Do not regenerate already committed passing levels unless QA finds a real defect.
-8. Keep the 30-level batch rule and update this file in every completed batch push.
-9. After each completed batch push, report the range and immediately continue with the next batch.
+8. Keep the 10-level batch rule and update this file in every completed batch push.
+9. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
 
 ## Next action
 
-Continue Level 012 through 030 without stopping. After all 30 files pass per-level and batch-wide QA, fast-forward the completed batch to main, update this file with the final batch commit and QA totals, report completion, and immediately start Batch 031-060.
+Continue Level 013 through 020 without stopping. Levels 011-012 are already complete on the checkpoint branch.
+
+After Levels 011-020 all pass per-level and batch-wide QA:
+
+1. Push Batch 011-020 to main.
+2. Update this process file with the production commit and QA totals.
+3. Report one concise line that Batch 011-020 is complete.
+4. Immediately continue with Batch 021-030.
+
+Do not wait until 30 files before publishing. The permanent batch size is 10 files to reduce loss risk during long runs.
