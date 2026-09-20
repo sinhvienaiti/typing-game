@@ -1,7 +1,8 @@
+import { isDeepStrictEqual } from "node:util";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildArtifacts, readLevels, stableJson, validateLevels } from "./vocabulary-core.mjs";
+import { buildArtifacts, readLevels, validateLevels } from "./vocabulary-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const vocabularyDir = path.join(root, "shared", "vocabulary");
@@ -15,8 +16,10 @@ if (result.errors.length > 0) {
 
 const artifacts = buildArtifacts(documents);
 for (const [name, expected] of [["index.json", artifacts.index], ["lookup.json", artifacts.lookup]]) {
-  const current = await fs.readFile(path.join(vocabularyDir, name), "utf8");
-  if (current !== stableJson(expected)) {
+  const current = JSON.parse(
+    await fs.readFile(path.join(vocabularyDir, name), "utf8"),
+  );
+  if (!isDeepStrictEqual(current, expected)) {
     console.error(`${name} is stale. Run: pnpm vocab:generate`);
     process.exit(1);
   }
