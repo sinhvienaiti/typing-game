@@ -28,8 +28,8 @@ Current production batch:
 
 ~~~text
 3 levels
-100 entries per level
-300 entries total
+150 entries per level
+450 entries total
 ~~~
 
 This is the first reviewed batch. The remaining levels must still be expanded gradually.
@@ -281,11 +281,11 @@ Do not manually edit `index.json` or `lookup.json` as primary data.
 The 90-entry sample has now been replaced by the first production-quality batch:
 
 ~~~text
-Level 001 -> 100 entries
-Level 002 -> 100 entries
-Level 003 -> 100 entries
+Level 001 -> 150 entries
+Level 002 -> 150 entries
+Level 003 -> 150 entries
 
-300 entries total
+450 entries total
 ~~~
 
 These are the first reviewed foundation levels, not a signal to bulk-generate the remaining library.
@@ -468,3 +468,17 @@ node --check scripts/prepare-vocabulary-candidates.mjs
 
 CI intentionally does not download or vendor the third-party source datasets.
 Actual candidate generation remains an explicit local data-preparation step.
+
+
+## Foundation density checkpoint
+
+After the initial 300-entry review passed, Levels 001-003 were expanded to 150 entries each.
+
+~~~text
+Level 001 -> 150
+Level 002 -> 150
+Level 003 -> 150
+total     -> 450
+~~~
+
+This density is closer to the long-term 15,000-20,000 / 100-level target while still keeping each change small enough for manual learner-quality review.

@@ -3001,11 +3001,11 @@ The sample vocabulary dataset was replaced with the first production batch.
 Current shared library:
 
 ~~~text
-Level 001 -> 100 reviewed foundation entries
-Level 002 -> 100 reviewed foundation entries
-Level 003 -> 100 reviewed foundation entries
+Level 001 -> 150 reviewed foundation entries
+Level 002 -> 150 reviewed foundation entries
+Level 003 -> 150 reviewed foundation entries
 
-total -> 300
+total -> 450
 ~~~
 
 The entries are source-backed and manually selected for usefulness rather than bulk-generated.
@@ -3084,3 +3084,38 @@ scripts/prepare-vocabulary-candidates.mjs
 ~~~
 
 This keeps the review-only candidate pipeline from silently breaking even though CI does not download third-party source datasets.
+
+
+---
+
+# 74. Foundation vocabulary expanded to 450 entries
+
+After the 300-entry batch passed manual QA and Platform CI, the same three foundation levels were expanded instead of creating Level 004 too early.
+
+Current density:
+
+~~~text
+001.json -> 150 entries
+002.json -> 150 entries
+003.json -> 150 entries
+
+total -> 450 unique English words/phrases
+~~~
+
+The additional 150 entries were selected from the same source-backed candidate pool:
+
+~~~text
+50 -> Level 001
+50 -> Level 002
+50 -> Level 003
+~~~
+
+Each promoted entry keeps the required:
+
+~~~text
+English
+Vietnamese
+General American IPA
+~~~
+
+The expansion remains intentionally incremental. The next levels should continue in reviewed batches rather than jumping directly to thousands of generated entries.
