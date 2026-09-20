@@ -5,10 +5,10 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
 
 case "$TARGET" in
-  all|monkeytype|shooter|recall)
+  all|monkeytype|shooter|recall|karaoke)
     ;;
   *)
-    echo "Usage: $0 [all|monkeytype|shooter|recall]"
+    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke]"
     exit 1
     ;;
 esac
@@ -34,6 +34,11 @@ install_recall() {
   pnpm --dir games/recall-typing install
 }
 
+install_karaoke() {
+  echo "Installing Karaoke Typing..."
+  pnpm --dir games/karaoke-typing install
+}
+
 install_monkeytype() {
   echo "Installing Monkeytype..."
   (
@@ -53,6 +58,7 @@ case "$TARGET" in
   all)
     install_shooter
     install_recall
+    install_karaoke
     install_monkeytype
     ;;
   monkeytype)
@@ -63,6 +69,9 @@ case "$TARGET" in
     ;;
   recall)
     install_recall
+    ;;
+  karaoke)
+    install_karaoke
     ;;
 esac
 
