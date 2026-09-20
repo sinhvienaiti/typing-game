@@ -11,7 +11,14 @@ import {
 } from "./vocabulary-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const CEFR_RANK = { A1: 1, A2: 2, B1: 3, B2: 4, C1: 5, C2: 6 };
+const CEFR_POSITION = {
+  A1: 0.06,
+  A2: 0.20,
+  B1: 0.37,
+  B2: 0.555,
+  C1: 0.735,
+  C2: 0.88,
+};
 
 function numberArg(name, fallback) {
   const i = process.argv.indexOf(name);
@@ -50,11 +57,25 @@ function trusted(option) {
     (source.includes("wiktionary") || source.includes("wordnet"));
 }
 
+function isProperLikeMeaning(value) {
+  const meaning = clean(value);
+  if (!meaning) return true;
+  return /^[A-Z][A-Za-z.'-]*(?:\\s+[A-Z][A-Za-z.'-]*)*(?:\\s|$|\\()/.test(meaning) ||
+    /^[A-Z]{2,}(?:\\s|$|\\()/.test(meaning);
+}
+
+function meaningParts(option) {
+  return (option.vi ?? [])
+    .flatMap((value) => clean(value).split(/[;；]/))
+    .map((value) => clean(value))
+    .filter((value) => value && !isProperLikeMeaning(value));
+}
+
 function buildEntry(candidate) {
   const options = (candidate.options ?? []).filter((option) => {
     const ipa = clean(option.ipa);
     return trusted(option) && ipa.startsWith("/") && ipa.endsWith("/") &&
-      Array.isArray(option.vi) && option.vi.some((value) => clean(value));
+      Array.isArray(option.vi) && meaningParts(option).length > 0;
   });
   if (!options.length) return null;
 
@@ -63,6 +84,8 @@ function buildEntry(candidate) {
 
   options.sort((a, b) =>
     Number(b.cefr === candidate.cefr) - Number(a.cefr === candidate.cefr) ||
+    Number(String(b.source).toLowerCase().includes("wiktionary")) -
+      Number(String(a.source).toLowerCase().includes("wiktionary")) ||
     Number(String(b.source).toLowerCase().includes("wordnet")) -
       Number(String(a.source).toLowerCase().includes("wordnet")) ||
     String(a.pos ?? "").localeCompare(String(b.pos ?? ""))
@@ -70,13 +93,19 @@ function buildEntry(candidate) {
 
   const meanings = [];
   for (const option of options) {
-    const meaning = clean(option.vi.find((value) => clean(value)));
-    if (meaning && !meanings.includes(meaning)) meanings.push(meaning);
+    for (const meaning of meaningParts(option)) {
+      if (!meanings.includes(meaning)) meanings.push(meaning);
+      if (meanings.length === 3) break;
+    }
     if (meanings.length === 3) break;
   }
   if (!meanings.length) return null;
 
-  return { en: normalizeEnglish(candidate.en), vi: meanings.join("; "), ipa: clean(options[0].ipa) };
+  return {
+    en: normalizeEnglish(candidate.en),
+    vi: meanings.join("; "),
+    ipa: clean(options[0].ipa),
+  };
 }
 
 function label(level) {
@@ -91,8 +120,7 @@ function label(level) {
 }
 
 function cefrPosition(cefr) {
-  const rank = CEFR_RANK[cefr];
-  return rank === undefined ? null : (rank - 0.5) / 6;
+  return CEFR_POSITION[cefr] ?? null;
 }
 
 const artifact = JSON.parse(await fs.readFile(inputFile, "utf8"));
@@ -133,14 +161,16 @@ for (let i = 0; i < ranking.length; i++) {
   const entry = buildEntry(candidate);
   if (!entry) { skipped.invalidEntry++; continue; }
 
-  const freqPosition = i / Math.max(1, ranking.length - 1);
-  const cefr = cefrPosition(candidate.cefr);
   const complexity = (Number(candidate.spellingDifficulty) || 0) +
     (Number(candidate.pronunciationDifficulty) || 0);
-  const difficulty = (cefr === null ? freqPosition : cefr * 0.7 + freqPosition * 0.3) +
-    Math.min(0.035, complexity * 0.00175);
 
-  eligible.push({ ...entry, wordfreqRank: ranked.rank, zipf: ranked.zipf, difficulty });
+  eligible.push({
+    ...entry,
+    cefr: candidate.cefr ?? null,
+    complexity,
+    wordfreqRank: ranked.rank,
+    zipf: ranked.zipf,
+  });
 }
 
 const preservedCount = preservedCheck.totalEntries;
@@ -150,6 +180,19 @@ const selectedByFrequency = eligible
 const total = preservedCount + selectedByFrequency.length;
 if (total < minimum) {
   throw new Error(`Only ${total} trusted common-word entries are available; minimum is ${minimum}.`);
+}
+
+const maxSelectedRank = Math.max(
+  1,
+  ...selectedByFrequency.map((entry) => entry.wordfreqRank),
+);
+for (const entry of selectedByFrequency) {
+  const freqPosition = Math.min(1, Math.max(0, (entry.wordfreqRank - 1) / maxSelectedRank));
+  const cefr = cefrPosition(entry.cefr);
+  const complexityBoost = Math.min(0.035, entry.complexity * 0.00175);
+  entry.difficulty = (cefr === null
+    ? freqPosition
+    : cefr * 0.82 + freqPosition * 0.18) + complexityBoost;
 }
 
 const selected = [...selectedByFrequency].sort((a, b) =>
