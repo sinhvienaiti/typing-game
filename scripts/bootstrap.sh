@@ -16,7 +16,24 @@ esac
 cd "$ROOT_DIR"
 
 git submodule sync --recursive
-git submodule update --init --recursive
+
+case "$TARGET" in
+  all)
+    git submodule update --init --recursive
+    ;;
+  monkeytype)
+    git submodule update --init --recursive games/monkeytype
+    ;;
+  shooter)
+    git submodule update --init --recursive games/vocab-shooter
+    ;;
+  recall)
+    git submodule update --init --recursive games/recall-typing
+    ;;
+  karaoke)
+    git submodule update --init --recursive games/karaoke-typing
+    ;;
+esac
 
 echo "Installing platform tools..."
 pnpm install
