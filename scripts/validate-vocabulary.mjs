@@ -1,4 +1,3 @@
-import { isDeepStrictEqual } from "node:util";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,7 +18,7 @@ for (const [name, expected] of [["index.json", artifacts.index], ["lookup.json",
   const current = JSON.parse(
     await fs.readFile(path.join(vocabularyDir, name), "utf8"),
   );
-  if (!isDeepStrictEqual(current, expected)) {
+  if (JSON.stringify(current) !== JSON.stringify(expected)) {
     console.error(`${name} is stale. Run: pnpm vocab:generate`);
     process.exit(1);
   }
