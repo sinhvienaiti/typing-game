@@ -10,7 +10,7 @@ export function normalizeEnglish(value) {
 export async function readLevels(vocabularyDir) {
   const levelsDir = path.join(vocabularyDir, "levels");
   const names = (await fs.readdir(levelsDir))
-    .filter((name) => /^\\d{3}\\.json$/.test(name))
+    .filter((name) => /^\d{3}\.json$/.test(name))
     .sort();
 
   const documents = [];
@@ -71,7 +71,7 @@ export function validateLevels(documents) {
         }
       }
 
-      if (typeof entry.id === "string" && !/^L\\d{3}-\\d{3,}$/.test(entry.id)) {
+      if (typeof entry.id === "string" && !/^L\d{3}-\d{3,}$/.test(entry.id)) {
         errors.push(`${at}: id must match Lxxx-xxx`);
       }
       if (
