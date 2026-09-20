@@ -15,13 +15,14 @@ jobs:
           ref: feature/typing-text-corpus
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
       - run: node scripts/generate-level-030.mjs
+      - run: node scripts/generate-typing-texts.mjs
       - run: node scripts/validate-typing-texts.mjs
       - run: |
           rm scripts/generate-level-030.mjs .github/workflows/generate-level-030.yml
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add shared/typing-texts/levels/030.json scripts/generate-level-030.mjs .github/workflows/generate-level-030.yml
+          git add shared/typing-texts/levels/030.json shared/typing-texts/index.json scripts/generate-level-030.mjs .github/workflows/generate-level-030.yml
           git commit -m "content: checkpoint typing text level 030"
           git push origin HEAD:feature/typing-text-corpus
