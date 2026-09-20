@@ -22,7 +22,7 @@ shared/vocabulary/levels/
 
 One level equals one JSON file.
 
-The final library is expected to grow to roughly 15,000-20,000 useful English words/phrases, but the current implementation intentionally contains only a small sample dataset while the pipeline is being validated.
+The final library is expected to contain roughly 15,000-20,000 useful English words/phrases. The current committed dataset is the 450-entry reviewed foundation checkpoint, while the automated bulk pipeline is the approved path for expansion.
 
 Current production batch:
 
@@ -425,9 +425,8 @@ source datasets
 -> calculate spelling/pronunciation heuristics
 -> propose a rough level
 -> output .cache/vocabulary-candidates.json
--> MANUAL REVIEW
--> edit shared/vocabulary/levels/*.json
--> pnpm vocab:generate
+-> filter trusted provenance and pronunciation exceptions
+-> pnpm vocab:build-library
 -> pnpm vocab:validate
 ~~~
 
@@ -440,8 +439,8 @@ NEVER writes official level files.
 
 The candidate file is temporary review material only.
 
-Unknown CEFR items do not receive an automatic final level.
-They require manual placement.
+Unknown CEFR items do not receive a CEFR-derived final level in the candidate artifact.
+The bulk builder estimates their relative placement from frequency plus spelling/pronunciation complexity.
 
 ## Schema hardening
 
@@ -482,3 +481,105 @@ total     -> 450
 ~~~
 
 This density is closer to the long-term 15,000-20,000 / 100-level target while still keeping each change small enough for manual learner-quality review.
+
+---
+
+## Automated full-library production policy
+
+The project no longer requires manual review of every vocabulary entry before promotion.
+That approach does not scale to the intended 15,000-20,000 entry library.
+
+The approved production flow is now:
+
+~~~text
+pinned trusted source revisions
+-> normalize and join source records
+-> reject weak provenance
+-> flag pronunciation/heteronym exceptions
+-> rank by frequency + CEFR + spelling/pronunciation difficulty
+-> preserve the already-reviewed Levels 001-003
+-> automatically distribute the remaining trusted entries across Levels 004-100
+-> generate index.json + lookup.json
+-> run structural validation
+-> spot-check exceptions only
+~~~
+
+One command performs the full refresh:
+
+~~~bash
+pnpm vocab:refresh
+~~~
+
+It runs:
+
+~~~text
+vocab:sources
+-> vocab:candidates
+-> vocab:build-library
+-> vocab:validate
+~~~
+
+Default target:
+
+~~~text
+18,000 entries
+minimum acceptable trusted total: 15,000
+planned levels: 100
+~~~
+
+The builder must never invent filler to hit the target. If the pinned sources cannot provide
+at least the configured minimum after provenance/exception filtering, the build fails.
+
+### Trusted automatic-promotion rule
+
+An automatically promoted dictionary option must contain provenance for:
+
+~~~text
+CMUdict
++
+WordNet or Wiktionary
+~~~
+
+CMUdict supplies the pronunciation chain. WordNet/Wiktionary supply lexical evidence.
+Entries without this provenance are not automatically promoted.
+
+Candidates with more than one trusted pronunciation are treated as heteronym/pronunciation
+exceptions and skipped by the bulk builder. They can be handled separately when useful.
+This keeps cases such as `read`, `live`, `close` and similar words from forcing manual review
+of thousands of ordinary entries.
+
+### Source revisions
+
+`pnpm vocab:sources` checks out fixed upstream revisions under the ignored local cache:
+
+~~~text
+thichhoc-org/thichhoc-dict
+4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b
+
+openlanguageprofiles/olp-en-cefrj
+d4e45b75b38f27b30dfc5c44d8c571aec7e7092f
+~~~
+
+Pinning revisions makes the bulk build reproducible instead of silently changing when an
+upstream repository changes.
+
+### Level assignment
+
+CEFR remains an anchor, not a requirement for every word.
+
+- Candidates with CEFR data keep the existing proposed CEFR-band level.
+- Candidates without CEFR are ranked automatically from frequency and spelling/pronunciation complexity.
+- The trusted selected set is then ordered by estimated learning difficulty and distributed across Levels 004-100.
+- Levels 001-003 remain preserved as the already-reviewed foundation checkpoint.
+
+The default 18,000-entry target therefore produces roughly 180 entries per level overall,
+while keeping the current 450 reviewed entries intact.
+
+The automatic builder writes a local ignored report at:
+
+~~~text
+.cache/vocabulary-build-report.json
+~~~
+
+Manual QA is now exception-oriented and statistical/spot-check based, not a mandatory
+word-by-word gate for the complete library.

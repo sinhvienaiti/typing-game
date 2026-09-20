@@ -3119,3 +3119,87 @@ General American IPA
 ~~~
 
 The expansion remains intentionally incremental. The next levels should continue in reviewed batches rather than jumping directly to thousands of generated entries.
+
+---
+
+# 75. Automated trusted-source vocabulary expansion
+
+The vocabulary production policy was changed after confirming that manual review of
+15,000-20,000 entries is not a scalable requirement.
+
+This section supersedes any earlier wording that implies every ordinary vocabulary entry
+must be manually reviewed before it can enter the official level files.
+
+The approved workflow is:
+
+~~~text
+pinned trusted source revisions
+-> prepare normalized candidates
+-> automatic provenance/exception filtering
+-> automatic difficulty ordering
+-> preserve reviewed Levels 001-003
+-> automatically build Levels 004-100
+-> regenerate index/lookup
+-> validate everything
+-> manually inspect only exceptions and samples
+~~~
+
+Normal command:
+
+~~~bash
+pnpm vocab:refresh
+~~~
+
+Subcommands:
+
+~~~text
+pnpm vocab:sources
+pnpm vocab:candidates
+pnpm vocab:build-library
+pnpm vocab:validate
+~~~
+
+Default library target:
+
+~~~text
+18,000 total entries
+minimum trusted total = 15,000
+100 levels
+~~~
+
+The builder never generates filler just to reach a number.
+
+Automatic promotion requires source provenance containing:
+
+~~~text
+CMUdict
++
+WordNet or Wiktionary
+~~~
+
+Candidates with multiple trusted pronunciations are treated as exceptions and skipped from
+the automatic bulk build. The existing reviewed entries in Levels 001-003 are preserved,
+including previously resolved heteronyms.
+
+Pinned source revisions:
+
+~~~text
+thichhoc-org/thichhoc-dict
+4d6e92e8bcf8e3e762410c2b0a9f98fea8e62e5b
+
+openlanguageprofiles/olp-en-cefrj
+d4e45b75b38f27b30dfc5c44d8c571aec7e7092f
+~~~
+
+CEFR remains a difficulty anchor. When a candidate has no CEFR match, the bulk builder uses
+frequency plus spelling/pronunciation complexity to estimate relative difficulty rather than
+requiring manual placement.
+
+The generated local report is:
+
+~~~text
+.cache/vocabulary-build-report.json
+~~~
+
+The committed level files remain the runtime source of truth for all three games.
+The bulk pipeline is the reproducible way to rebuild/expand those files from approved sources.

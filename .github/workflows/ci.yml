@@ -22,7 +22,7 @@ jobs:
           node-version: 24.11.0
 
       - name: Validate shell scripts
-        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh
+        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh
 
       - name: Validate dev launcher arguments
         run: |
@@ -49,8 +49,10 @@ jobs:
           pnpm vocab:generate
           git diff --exit-code -- shared/vocabulary/index.json shared/vocabulary/lookup.json
 
-      - name: Validate vocabulary candidate tool syntax
-        run: node --check scripts/prepare-vocabulary-candidates.mjs
+      - name: Validate vocabulary pipeline syntax
+        run: |
+          node --check scripts/prepare-vocabulary-candidates.mjs
+          node --check scripts/build-vocabulary-library.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"

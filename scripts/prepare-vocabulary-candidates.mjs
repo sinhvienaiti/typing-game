@@ -55,6 +55,12 @@ const LEVEL_RANGE = {
   C2: [83, 94],
 };
 
+function hasTrustedProvenance(option) {
+  const source = String(option?.source ?? "").toLowerCase();
+  return source.includes("cmudict") &&
+    (source.includes("wordnet") || source.includes("wiktionary"));
+}
+
 function parseCsv(text) {
   const rows = [];
   let row = [];
@@ -215,6 +221,17 @@ function buildCandidates(grouped) {
     const pronunciation = Math.min(
       ...options.map((option) => pronunciationDifficulty(option.ipa)),
     );
+    const trustedOptions = options.filter(hasTrustedProvenance);
+    const trustedPronunciations = new Set(
+      trustedOptions.map((option) => option.ipa),
+    );
+    const reviewReasons = [];
+    if (trustedOptions.length === 0) {
+      reviewReasons.push("missing trusted lexical/pronunciation provenance");
+    }
+    if (trustedPronunciations.size > 1) {
+      reviewReasons.push("multiple trusted pronunciations");
+    }
 
     candidates.push({
       en,
@@ -223,15 +240,11 @@ function buildCandidates(grouped) {
       spellingDifficulty: spelling,
       pronunciationDifficulty: pronunciation,
       proposedLevel: null,
-      reviewRequired: true,
-      reviewChecks: [
-        "usefulness",
-        "Vietnamese meaning",
-        "part of speech",
-        "IPA/heteronym",
-        "abstractness",
-        "technical vs general balance",
-      ],
+      reviewRequired: reviewReasons.length > 0,
+      reviewReasons,
+      reviewChecks: reviewReasons.length > 0
+        ? ["source provenance", "IPA/heteronym"]
+        : [],
       options,
     });
   }
@@ -274,10 +287,10 @@ await fs.writeFile(
   outputFile,
   JSON.stringify(
     {
-      version: 1,
+      version: 2,
       generatedAt: new Date().toISOString(),
       note:
-        "Review artifact only. Never copy candidates into level files without manual VI/IPA/POS/usefulness review.",
+        "Preparation artifact. Trusted non-ambiguous candidates may be promoted automatically; reviewRequired entries stay exception-only.",
       sources: {
         dictionary: dictionaryDir,
         cefr: cefrFile,

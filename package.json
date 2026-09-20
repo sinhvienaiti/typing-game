@@ -26,7 +26,10 @@
     "play": "bash scripts/play.sh",
     "vocab:generate": "node scripts/generate-vocabulary.mjs",
     "vocab:validate": "node scripts/validate-vocabulary.mjs",
-    "vocab:candidates": "node scripts/prepare-vocabulary-candidates.mjs"
+    "vocab:candidates": "node scripts/prepare-vocabulary-candidates.mjs",
+    "vocab:sources": "bash scripts/setup-vocabulary-sources.sh",
+    "vocab:build-library": "node scripts/build-vocabulary-library.mjs",
+    "vocab:refresh": "pnpm vocab:sources && pnpm vocab:candidates && pnpm vocab:build-library && pnpm vocab:validate"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
