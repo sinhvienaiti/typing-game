@@ -67,7 +67,10 @@ export function validateLevels(documents) {
       if (typeof entry.id === "string" && !/^L\\d{3}-\\d{3,}$/.test(entry.id)) {
         errors.push(`${at}: id must match Lxxx-xxx`);
       }
-      if (typeof entry.ipa === "string" && !/^\\/.+\\/$/.test(entry.ipa.trim())) {
+      if (
+        typeof entry.ipa === "string" &&
+        (!entry.ipa.trim().startsWith("/") || !entry.ipa.trim().endsWith("/"))
+      ) {
         errors.push(`${at}: ipa must be wrapped in /.../`);
       }
 
