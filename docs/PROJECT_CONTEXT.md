@@ -2990,3 +2990,69 @@ Detailed contract:
 ~~~text
 docs/design/SHARED_VOCABULARY_LIBRARY.md
 ~~~
+
+
+---
+
+# 72. First production shared-vocabulary batch
+
+The sample vocabulary dataset was replaced with the first production batch.
+
+Current shared library:
+
+~~~text
+Level 001 -> 100 reviewed foundation entries
+Level 002 -> 100 reviewed foundation entries
+Level 003 -> 100 reviewed foundation entries
+
+total -> 300
+~~~
+
+The entries are source-backed and manually selected for usefulness rather than bulk-generated.
+
+The production data policy is now explicit:
+
+~~~text
+frequency
++ CEFR reference
++ usefulness
++ spelling difficulty
++ pronunciation difficulty
++ abstractness
++ technical/general balance
+-> manual final level review
+~~~
+
+IPA convention:
+
+~~~text
+General American
+~~~
+
+The initial review found real heteronym problems in source pronunciations, including
+`read`, `live` and `close`, so pronunciation must remain POS/meaning-aware.
+
+A scalable review-only candidate tool was added:
+
+~~~bash
+pnpm vocab:candidates
+~~~
+
+It reads local cached open datasets and writes:
+
+~~~text
+.cache/vocabulary-candidates.json
+~~~
+
+It never writes `shared/vocabulary/levels/*.json`.
+
+Approved source strategy and license/attribution details are documented in:
+
+~~~text
+docs/design/SHARED_VOCABULARY_LIBRARY.md
+shared/vocabulary/ATTRIBUTION.md
+~~~
+
+The Portal includes a visible link to the vocabulary attribution.
+
+The JSON Schema ID regex was also corrected and validator/schema drift is now checked explicitly.

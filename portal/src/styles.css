@@ -24,6 +24,8 @@ button { font: inherit; }
 .game-copy h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
 .game-copy p { margin: 0; color: #798aa2; font-size: .8rem; line-height: 1.55; }
 .play { color: #7edfff; font-size: .7rem; font-weight: 900; letter-spacing: .11em; }
+.data-attribution { display: block; width: fit-content; margin: 1.25rem auto 0; color: #64758d; font-size: .68rem; text-decoration: none; }
+.data-attribution:hover { color: #a8bed9; text-decoration: underline; }
 .game-stage { position: relative; min-height: 0; background: #05070c; }
 .game-frame {
   display: block;

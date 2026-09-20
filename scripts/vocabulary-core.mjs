@@ -3,8 +3,12 @@ import path from "node:path";
 
 export const PLANNED_LEVELS = 100;
 
+export function normalizeSpacing(value) {
+  return value.normalize("NFKC").trim().replace(/\s+/g, " ");
+}
+
 export function normalizeEnglish(value) {
-  return value.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
+  return normalizeSpacing(value).toLowerCase();
 }
 
 export async function readLevels(vocabularyDir) {
@@ -75,7 +79,19 @@ export function validateLevels(documents) {
       for (const field of ["id", "en", "vi", "ipa"]) {
         if (typeof entry[field] !== "string" || entry[field].trim() === "") {
           errors.push(`${at}: ${field} is required`);
+          continue;
         }
+        if (entry[field] !== entry[field].trim()) {
+          errors.push(`${at}: ${field} must not have surrounding whitespace`);
+        }
+      }
+
+      if (
+        typeof entry.en === "string" &&
+        entry.en.trim() !== "" &&
+        entry.en !== entry.en.normalize("NFKC").trim().replace(/\s+/g, " ")
+      ) {
+        errors.push(`${at}: en must use NFKC and normalized whitespace`);
       }
 
       if (typeof entry.id === "string") {

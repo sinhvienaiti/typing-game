@@ -24,15 +24,15 @@ One level equals one JSON file.
 
 The final library is expected to grow to roughly 15,000-20,000 useful English words/phrases, but the current implementation intentionally contains only a small sample dataset while the pipeline is being validated.
 
-Current sample:
+Current production batch:
 
 ~~~text
 3 levels
-30 entries per level
-90 entries total
+100 entries per level
+300 entries total
 ~~~
 
-The sample is not the final vocabulary curriculum.
+This is the first reviewed batch. The remaining levels must still be expanded gradually.
 
 ## Required entry shape
 
@@ -272,3 +272,187 @@ Before expanding to the final 15k-20k library:
 6. resolve duplicates/invalid entries before commit.
 
 Do not manually edit `index.json` or `lookup.json` as primary data.
+
+
+---
+
+## Production vocabulary policy
+
+The 90-entry sample has now been replaced by the first production-quality batch:
+
+~~~text
+Level 001 -> 100 entries
+Level 002 -> 100 entries
+Level 003 -> 100 entries
+
+300 entries total
+~~~
+
+These are the first reviewed foundation levels, not a signal to bulk-generate the remaining library.
+
+### Difficulty model
+
+Final level placement is not based on word length alone.
+
+The review order is:
+
+1. frequency in real English,
+2. CEFR reference where available,
+3. usefulness for a Vietnamese English learner,
+4. spelling difficulty,
+5. pronunciation difficulty,
+6. abstractness,
+7. technical/general usefulness and balance.
+
+CEFR is a reference, not a one-to-one mapping to a single level.
+
+The intended broad bands are:
+
+~~~text
+001-012  -> A1-heavy foundation
+013-028  -> A2-heavy foundation
+029-046  -> B1-heavy intermediate
+047-065  -> B2-heavy upper intermediate
+066-082  -> C1-heavy advanced
+083-094  -> C2-heavy advanced
+095-100  -> manually selected very advanced / abstract / technical / rare-but-useful
+~~~
+
+Frequency and usefulness can move an item earlier than its nominal CEFR band.
+Spelling/pronunciation difficulty, abstractness and ambiguity can move it later.
+
+Technical vocabulary is allowed, but it must be useful and balanced against general English.
+It must not be used as filler.
+
+### Pronunciation convention
+
+Official library IPA is normalized around **General American** pronunciation.
+
+The source pipeline primarily obtains pronunciations from CMUdict through the
+thichhoc-dict dataset. A pronunciation is not accepted only because it exists.
+
+Heteronyms require the intended part of speech/meaning to match the IPA.
+
+The first production batch already needed manual corrections for cases such as:
+
+~~~text
+read  -> /rid/  for the verb "đọc"
+live  -> /lɪv/  for the verb "sống"
+close -> /kloʊz/ for the verb "đóng"
+~~~
+
+This is why bulk IPA import without review is prohibited.
+
+## Approved source strategy
+
+### English-Vietnamese + IPA + frequency candidates
+
+Primary enrichment/candidate source:
+
+~~~text
+thichhoc-org/thichhoc-dict
+~~~
+
+Its data license is CC BY-SA 4.0.
+
+Its own source chain includes WordNet 3.1, CMUdict, Wiktionary and wordfreq.
+The project explicitly warns that not every Vietnamese sense has been human-reviewed,
+therefore this platform treats it as a candidate source rather than unquestioned truth.
+
+### CEFR reference
+
+Difficulty reference:
+
+~~~text
+openlanguageprofiles/olp-en-cefrj
+CEFR-J Vocabulary Profile 1.5
+Octanove C1/C2 profile when advanced coverage is needed
+~~~
+
+CEFR-J permits research/commercial use with citation according to its published terms.
+The Octanove C1/C2 profile is CC BY-SA 4.0.
+
+### Attribution
+
+User-readable attribution is stored at:
+
+~~~text
+shared/vocabulary/ATTRIBUTION.md
+~~~
+
+The Portal exposes a visible link to it.
+
+The derived vocabulary dataset is distributed under CC BY-SA 4.0.
+Application source code remains separately licensed.
+
+## Scalable candidate workflow
+
+Raw third-party source data is not committed into the platform repository.
+
+Use a local ignored cache:
+
+~~~text
+.cache/vocabulary-sources/
+~~~
+
+Recommended source checkout:
+
+~~~bash
+mkdir -p .cache/vocabulary-sources
+
+git clone --depth 1 \
+  https://github.com/thichhoc-org/thichhoc-dict.git \
+  .cache/vocabulary-sources/thichhoc-dict
+
+git clone --depth 1 \
+  https://github.com/openlanguageprofiles/olp-en-cefrj.git \
+  .cache/vocabulary-sources/olp-en-cefrj
+~~~
+
+Then prepare review candidates:
+
+~~~bash
+pnpm vocab:candidates
+~~~
+
+Pipeline:
+
+~~~text
+source datasets
+-> normalize English
+-> group senses/POS/pronunciations
+-> attach CEFR/frequency
+-> calculate spelling/pronunciation heuristics
+-> propose a rough level
+-> output .cache/vocabulary-candidates.json
+-> MANUAL REVIEW
+-> edit shared/vocabulary/levels/*.json
+-> pnpm vocab:generate
+-> pnpm vocab:validate
+~~~
+
+Important:
+
+~~~text
+vocab:candidates
+NEVER writes official level files.
+~~~
+
+The candidate file is temporary review material only.
+
+Unknown CEFR items do not receive an automatic final level.
+They require manual placement.
+
+## Schema hardening
+
+The JSON Schema ID pattern was corrected so it now represents the same contract
+as the JavaScript validator:
+
+~~~text
+Lxxx-xxx
+~~~
+
+The validator now also checks the critical schema contract itself so a broken
+escaped regex cannot silently drift away from runtime validation again.
+
+English entry text is additionally checked for NFKC/whitespace normalization.

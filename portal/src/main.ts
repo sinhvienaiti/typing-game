@@ -85,7 +85,14 @@ function renderHome(): void {
     card.addEventListener("click", () => navigate(game.path));
     grid.append(card);
   }
-  main.append(hero, grid);
+  const attribution = document.createElement("a");
+  attribution.className = "data-attribution";
+  attribution.href = "/vocabulary/ATTRIBUTION.md";
+  attribution.target = "_blank";
+  attribution.rel = "noreferrer";
+  attribution.textContent = "Vocabulary data attribution";
+
+  main.append(hero, grid, attribution);
   renderShell(main);
 }
 
