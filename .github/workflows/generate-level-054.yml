@@ -2,7 +2,9 @@ name: Generate Level 054 Corpus
 on:
   push:
     branches: [feature/typing-text-corpus]
-    paths: [.github/workflows/generate-level-054.yml]
+    paths:
+      - scripts/generate-level-054.mjs
+      - .github/workflows/generate-level-054.yml
 permissions:
   contents: write
 jobs:
@@ -15,7 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: sed -e 's/level=53/level=54/' -e 's/053.json/054.json/g' -e 's/L053/L054/g' scripts/generate-level-053.mjs > scripts/generate-level-054.mjs
       - run: sed -e 's/053.json/054.json/g' -e 's/level===53/level===54/' -e 's/Level 053/Level 054/g' scripts/validate-level-053.mjs > scripts/validate-level-054.mjs
       - run: node scripts/generate-level-054.mjs
       - run: node scripts/validate-level-054.mjs
