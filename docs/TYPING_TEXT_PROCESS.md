@@ -269,6 +269,21 @@ Checkpoint branch: `feature/typing-text-corpus`.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
 
+## Full content improvement status
+
+- Content improvement completed through level 010.
+- Current improvement batch: 001-010 complete.
+- Passages processed: 150.
+- Passages changed: 48.
+- Structural QA: PASS.
+- Content QA: PASS.
+- Capitalization QA: PASS.
+- Duplicate sentence QA: PASS.
+- Repeated 8-word phrase QA: PASS.
+- 5-gram similarity QA: PASS using repository thresholds.
+- Batch commit: the squash commit containing this state. The exact SHA is recoverable from the branch history without creating a second metadata-only commit.
+- Next improvement level: 011.
+
 ## Handoff instructions
 
 When continuing this work in another chat:
