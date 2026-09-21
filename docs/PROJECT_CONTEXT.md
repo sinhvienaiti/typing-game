@@ -3537,3 +3537,29 @@ Current reviewed Vocabulary Shooter revision:
 ~~~text
 879104e875d571d5111d3c4a60c7a93e4f5fb572
 ~~~
+
+
+---
+
+# 81. Immediate Shooter learning feedback
+
+For Classic, Bounce and Time Attack, Vietnamese + IPA learning feedback starts at the exact gameplay event where the English target becomes complete.
+
+It must not wait for the visual projectile to reach the target.
+
+~~~text
+correct final key
+-> reveal VI + IPA immediately
+-> queue pronunciation
+-> projectile/explosion continue as visual feedback only
+~~~
+
+This keeps learning feedback readable for fast typists and prevents target distance on the canvas from adding an artificial delay.
+
+Reveal duration remains controlled by the existing Shooter setting.
+
+Current reviewed Vocabulary Shooter revision:
+
+~~~text
+1c9b612f937fce4d059636fb726c108ea433f07f
+~~~
