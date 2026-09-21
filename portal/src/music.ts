@@ -71,8 +71,9 @@ declare global {
 const STORAGE_KEY = "typingGameSharedMusic";
 const DEFAULT_VOLUME = 0.32;
 const DEFAULT_DUCKING_VOLUME = 0.18;
-const DUCK_RELEASE_MS = 180;
-const VOLUME_FADE_MS = 180;
+const DUCK_RELEASE_MS = 160;
+const DUCK_ATTACK_MS = 55;
+const VOLUME_RELEASE_MS = 220;
 let youtubeApiPromise: Promise<void> | null = null;
 
 function loadYouTubeApi(): Promise<void> {
@@ -805,9 +806,10 @@ export class SharedMusicPlayer {
 
     const start = this.audio.volume;
     const startedAt = performance.now();
+    const fadeMs = target < start ? DUCK_ATTACK_MS : VOLUME_RELEASE_MS;
     const update = (now: number): void => {
       const progress = smooth
-        ? Math.min(1, (now - startedAt) / VOLUME_FADE_MS)
+        ? Math.min(1, (now - startedAt) / fadeMs)
         : 1;
       const volume = start + (target - start) * progress;
       this.audio.volume = Math.min(1, Math.max(0, volume));
