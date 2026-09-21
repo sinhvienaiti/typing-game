@@ -3696,3 +3696,43 @@ games/vocab-shooter
 games/recall-typing
 4e007393e3fc61ce431392c70791015c5e3695cc
 ~~~
+
+
+---
+
+# 83. Portal full-height iframe contract
+
+The persistent Portal shell introduced for shared background music must keep a definite height chain from the Portal grid row to every child game iframe.
+
+Required contract:
+
+~~~text
+.portal-shell
+height: 100%
+grid-template-rows: 48px minmax(0, 1fr)
+
+.route-host
+height: 100%
+min-height: 0
+
+.game-stage
+height: 100%
+min-height: 0
+overflow: hidden
+
+.game-frame
+position: absolute
+inset: 0
+width: 100%
+height: 100%
+~~~
+
+Without this contract browsers may fall back to the default iframe height (about 150px), causing every game to appear clipped at the top with the remaining Portal area blank.
+
+Validation:
+
+~~~text
+node scripts/validate-portal-layout.mjs
+~~~
+
+Platform CI runs this validation before builds.
