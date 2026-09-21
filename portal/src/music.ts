@@ -489,7 +489,7 @@ export class SharedMusicPlayer {
   }
 
   isPlaying(): boolean {
-    return this.playing;
+    return this.desiredPlaying && !this.karaokePaused;
   }
 
   setKaraokeActive(active: boolean): void {
@@ -563,10 +563,10 @@ export class SharedMusicPlayer {
 
       const tracks = this.allTracks();
       if (
-        this.state.selectedId === "" ||
+        this.state.selectedId !== "" &&
         !tracks.some((track) => track.id === this.state.selectedId)
       ) {
-        this.state.selectedId = tracks[0]?.id ?? "";
+        this.state.selectedId = "";
         saveStoredState(this.state);
       }
       this.trackSelect.value = this.state.selectedId;
@@ -644,10 +644,13 @@ export class SharedMusicPlayer {
     }
 
     this.desiredPlaying = true;
+    this.emitPlaybackChange();
+    const requestedId = this.state.selectedId;
     try {
-      if (this.currentTrackId !== this.state.selectedId) {
+      if (this.currentTrackId !== requestedId) {
         await this.loadSelectedTrack(false);
       }
+      if (this.state.selectedId !== requestedId) return;
 
       const track = this.selectedTrack();
       if (track === null) return;
@@ -655,7 +658,10 @@ export class SharedMusicPlayer {
       if (track.source === "local") {
         await this.audio.play();
       } else {
-        this.youtubePlayer?.playVideo();
+        if (this.youtubePlayer === null) {
+          throw new Error("YouTube player is not ready");
+        }
+        this.youtubePlayer.playVideo();
       }
       this.playing = true;
       this.updatePlayButton();
@@ -697,6 +703,7 @@ export class SharedMusicPlayer {
       this.desiredPlaying = false;
       this.updatePlayButton();
       this.setStatus("Background music is off.");
+      this.emitPlaybackChange();
       return;
     }
 
@@ -847,6 +854,6 @@ export class SharedMusicPlayer {
   }
 
   private emitPlaybackChange(): void {
-    this.playbackListener(this.playing);
+    this.playbackListener(this.isPlaying());
   }
 }
