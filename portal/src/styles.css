@@ -8,7 +8,7 @@ button { font: inherit; }
 .global-nav { position: relative; z-index: 20; display: flex; align-items: center; gap: 1rem; padding: 0 .8rem; border-bottom: 1px solid rgba(255,255,255,.065); background: rgba(10,14,22,.96); }
 .brand,.nav-game { border: 0; color: #8190a6; background: transparent; cursor: pointer; }
 .brand { color: #e9f2ff; font-size: .76rem; font-weight: 800; }
-.nav-links { display: flex; align-items: center; gap: .22rem; overflow-x: auto; }
+.nav-links { min-width: 0; flex: 1 1 auto; display: flex; align-items: center; gap: .22rem; overflow-x: auto; }
 .nav-game { white-space: nowrap; padding: .48rem .72rem; border-radius: 8px; font-size: .72rem; font-weight: 650; }
 .nav-game:hover { color: #eaf5ff; background: rgba(255,255,255,.045); }
 .nav-game.active { color: #8de3ff; background: rgba(113,215,255,.08); }
