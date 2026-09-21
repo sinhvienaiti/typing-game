@@ -206,8 +206,9 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 051: 15 passages, 3813 words, duplicate/similarity warnings 0, checkpoint `a41c616136b7cf5bccf129001f446ef4885ae8ce`.
 - Level 052: 15 passages, 3916 words, duplicate/similarity warnings 0, checkpoint `7950cb0f4313d3af7c77c80ac1fa9515dc4f7940`.
 - Level 053: 15 passages, 3977 words, duplicate/similarity warnings 0, checkpoint `72725263ed058daeb0cccc92cc6d3bc01a6060ed`.
-- Levels 001-053 index: 53 levels, 795 passages, 207114 words.
-- Next active level: 054.
+- Level 054: 15 passages, 4051 words, per-level QA PASS, checkpoint `cfc83c03c33484607b10a534296d962ab6881ba1`.
+- Levels 001-054 index: 54 levels, 810 passages, 211165 words.
+- Next active level: 055.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -227,7 +228,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Batch 021-030 is complete on the checkpoint branch. Continue without stopping from Level 054 in Batch 051-060.
+Batch 021-030 is complete on the checkpoint branch. Continue without stopping from Level 055 in Batch 051-060.
 
 For each level:
 
