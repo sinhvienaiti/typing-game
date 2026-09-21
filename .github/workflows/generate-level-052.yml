@@ -25,13 +25,23 @@ jobs:
       - name: Generate level 052
         run: node scripts/generate-level-052.mjs
       - name: Validate corpus
-        run: node scripts/validate-typing-texts.mjs
-      - name: Commit generated level
+        id: validate
+        continue-on-error: true
+        run: node scripts/validate-typing-texts.mjs > /tmp/level-052-qa.log 2>&1
+      - name: Preserve diagnostics on failure
+        if: steps.validate.outcome == 'failure'
         run: |
-          if git diff --quiet -- shared/typing-texts/levels/052.json; then
-            echo "No generated change"
-            exit 0
-          fi
+          cat /tmp/level-052-qa.log
+          cp /tmp/level-052-qa.log docs/level-052-qa.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/level-052-qa.log
+          git commit -m "chore: capture level 052 QA diagnostics"
+          git push origin HEAD:feature/typing-text-corpus
+          exit 1
+      - name: Commit generated level
+        if: steps.validate.outcome == 'success'
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add shared/typing-texts/levels/052.json
