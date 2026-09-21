@@ -88,8 +88,8 @@ After all passages in one level pass:
 - Work level by level.
 - Review and repair each level before starting the next.
 - After a batch is complete, run batch-wide validation and similarity checks.
-- Push the completed batch to GitHub immediately.
-- Update this file in the same push with exact completed range, QA result, commit SHA, next level, and handoff notes.
+- Commit the completed ten-level batch to GitHub immediately as one batch commit.
+- Update this file in that same batch commit with the exact completed range, QA result, next level, and handoff notes. Report the resulting commit SHA after the commit is created.
 - Report completion to the user, then continue automatically to the next batch unless explicitly told to stop.
 
 ## Runtime features already completed
@@ -122,7 +122,7 @@ Platform CI for that integration passed.
 
 ## Corpus production status
 
-Current batch: 051-060.
+Current batch: 061-070.
 
 Completed and self-reviewed but not yet committed as production files at the time this process file was first created:
 
@@ -209,8 +209,13 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 054: 15 passages, 4051 words, per-level QA PASS, checkpoint `cfc83c03c33484607b10a534296d962ab6881ba1`.
 - Level 055: 15 passages, 4110 words, per-level QA PASS, checkpoint `c9fd873259b581f22196bc6b909dc58e960cd1fb`.
 - Level 056: 15 passages, 4017 words, per-level QA PASS, checkpoint `2349b327b24edc0677a565eab003c3ae20c42b9d`.
-- Levels 001-056 index: 56 levels, 840 passages, 219292 words.
-- Next active level: 057.
+- Level 057: 15 passages, 4049 words, per-level QA PASS.
+- Level 058: 15 passages, 3874 words, per-level QA PASS.
+- Level 059: 15 passages, 3838 words, per-level QA PASS.
+- Level 060: 15 passages, 3851 words, per-level QA PASS.
+- Batch 051-060: complete on checkpoint branch, batch QA PASS, 150 passages, 39496 words, duplicate/similarity warnings 0.
+- Levels 001-060 index: 60 levels, 900 passages, 234904 words.
+- Next active level: 061.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -225,26 +230,27 @@ When continuing this work in another chat:
 4. Check which `shared/typing-texts/levels/*.json` files are actually committed. Those files override any stale status line in this document.
 5. Resume from the first missing or failing level.
 6. Do not regenerate already committed passing levels unless QA finds a real defect.
-7. Keep the 10-level batch rule and update this file in every completed batch push.
-8. After each completed 10-level batch push, report the exact range and immediately continue with the next batch.
+7. Keep the 10-level batch rule. Do not commit individual level files. Prepare and QA all ten levels, then commit the ten level files together with the index and this process file in one batch commit.
+8. After each completed 10-level batch commit, report the exact range and immediately continue with the next batch.
 
 ## Next action
 
-Batch 021-030 is complete on the checkpoint branch. Continue without stopping from Level 057 in Batch 051-060.
+Batch 051-060 is complete on the checkpoint branch. Continue without stopping from Level 061 in Batch 061-070.
 
 For each level:
 
 1. Create or repair only the current missing or failing level.
 2. Run passage and per-level QA before moving on.
-3. Commit the passing level to `feature/typing-text-corpus` as a checkpoint.
-4. Update this process file often enough that the next active level is unambiguous.
+3. Do not create a commit for an individual passing level.
+4. Keep completed level content prepared for the current ten-level batch.
+5. After all ten levels pass, run batch-wide QA and create one batch commit containing all ten level files, the updated index, and this process file.
 
-After Levels 021-030 all pass per-level and batch-wide QA:
+After all ten levels in the current batch pass per-level and batch-wide QA:
 
-1. Push Batch 021-030 to main.
-2. Update the typing-text index.
-3. Update this process file with the production commit and QA totals.
-4. Report one concise line that Batch 021-030 is complete.
-5. Immediately continue with Batch 031-040.
+1. Update the typing-text index.
+2. Update this process file with the completed range and QA totals.
+3. Create one commit for the entire ten-level batch. Do not create per-level commits.
+4. Report one concise batch completion status with the commit SHA.
+5. Immediately continue with the next ten-level batch.
 
 The permanent batch size is 10 files to reduce loss risk during long runs.
