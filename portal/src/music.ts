@@ -451,11 +451,13 @@ export class SharedMusicPlayer {
         (track) => track.videoId === videoId,
       );
       if (existing !== undefined) {
+        const wasPlaying = this.desiredPlaying;
         this.state.selectedId = existing.id;
         this.renderTrackOptions();
         this.trackSelect.value = existing.id;
         saveStoredState(this.state);
         this.setStatus("YouTube track is already in the list.");
+        void this.loadSelectedTrack(wasPlaying);
         return;
       }
 
@@ -472,7 +474,9 @@ export class SharedMusicPlayer {
       this.trackSelect.value = track.id;
       this.youtubeUrlInput.value = "";
       this.youtubeTitleInput.value = "";
+      const wasPlaying = this.desiredPlaying;
       this.setStatus("YouTube track added.");
+      void this.loadSelectedTrack(wasPlaying);
     });
 
     this.renderSettingsValues();
