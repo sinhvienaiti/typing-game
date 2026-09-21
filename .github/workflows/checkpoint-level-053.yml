@@ -1,0 +1,25 @@
+name: Checkpoint Level 053 Metadata
+on:
+  push:
+    branches: [feature/typing-text-corpus]
+    paths: [.github/workflows/checkpoint-level-053.yml]
+permissions:
+  contents: write
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/typing-text-corpus
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/validate-level-053.mjs
+      - run: node scripts/checkpoint-level-053.mjs
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add shared/typing-texts/index.json docs/TYPING_TEXT_PROCESS.md
+          git commit -m "docs: checkpoint typing corpus level 053"
+          git push origin HEAD:feature/typing-text-corpus
