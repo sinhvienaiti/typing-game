@@ -1,18 +1,29 @@
 import "./styles.css";
+import { SharedMusicPlayer } from "./music";
 
-type Game = { id: string; name: string; description: string; path: string; appUrl: string; icon: string };
-type Registry = { games: Game[] };
+type Game = {
+  id: string;
+  name: string;
+  description: string;
+  path: string;
+  appUrl: string;
+  icon: string;
+};
+
+type Registry = {
+  games: Game[];
+};
 
 const appElement = document.querySelector<HTMLDivElement>("#app");
 if (appElement === null) throw new Error("#app not found");
-const app: HTMLDivElement = appElement;
+const app = appElement;
 
 const response = await fetch("/games.json", { cache: "no-store" });
 if (!response.ok) throw new Error("Could not load game registry");
 const registry = (await response.json()) as Registry;
+const gameOrigins = new Set(registry.games.map((game) => new URL(game.appUrl).origin));
 
-for (const game of registry.games) {
-  const origin = new URL(game.appUrl).origin;
+for (const origin of gameOrigins) {
   if (document.head.querySelector(`link[data-game-origin="${origin}"]`) !== null) {
     continue;
   }
@@ -24,53 +35,94 @@ for (const game of registry.games) {
   document.head.append(link);
 }
 
+const shell = document.createElement("div");
+shell.className = "portal-shell";
+
+const nav = document.createElement("nav");
+nav.className = "global-nav";
+
+const brand = document.createElement("button");
+brand.className = "brand";
+brand.textContent = "⌨ typing games";
+
+const links = document.createElement("div");
+links.className = "nav-links";
+
+const routeHost = document.createElement("div");
+routeHost.className = "route-host";
+
+const music = new SharedMusicPlayer();
+const navButtons = new Map<string, HTMLButtonElement>();
+let currentFrame: HTMLIFrameElement | null = null;
+let currentGame: Game | null = null;
+
+function normalizedPath(): string {
+  return location.pathname.replace(/\/$/, "") || "/";
+}
+
 function navigate(path: string): void {
-  if (location.pathname !== path) history.pushState({}, "", path);
-  render();
+  if (normalizedPath() !== path) history.pushState({}, "", path);
+  renderRoute();
 }
 
 function makeButton(label: string, path: string): HTMLButtonElement {
   const button = document.createElement("button");
   button.className = "nav-game";
   button.textContent = label;
-  if ((location.pathname.replace(/\/$/, "") || "/") === path) button.classList.add("active");
   button.addEventListener("click", () => navigate(path));
+  navButtons.set(path, button);
   return button;
 }
 
-function renderShell(content: HTMLElement): void {
-  app.replaceChildren();
-  const shell = document.createElement("div");
-  shell.className = "portal-shell";
-  const nav = document.createElement("nav");
-  nav.className = "global-nav";
-  const brand = document.createElement("button");
-  brand.className = "brand";
-  brand.textContent = "⌨ typing games";
-  brand.addEventListener("click", () => navigate("/"));
-  const links = document.createElement("div");
-  links.className = "nav-links";
-  links.append(makeButton("Home", "/"));
-  for (const game of registry.games) links.append(makeButton(game.name, game.path));
-  nav.append(brand, links);
-  shell.append(nav, content);
-  app.append(shell);
+function updateNavigation(path: string): void {
+  for (const [buttonPath, button] of navButtons) {
+    button.classList.toggle("active", path === buttonPath);
+  }
 }
 
-function renderHome(): void {
+function sendSharedMusicState(): void {
+  if (currentFrame?.contentWindow === null || currentGame === null) return;
+  currentFrame.contentWindow.postMessage(
+    {
+      type: "typing-game:shared-music",
+      playing: music.isPlaying(),
+    },
+    new URL(currentGame.appUrl).origin,
+  );
+}
+
+music.onPlaybackChange(() => {
+  sendSharedMusicState();
+});
+
+brand.addEventListener("click", () => navigate("/"));
+links.append(makeButton("Home", "/"));
+for (const game of registry.games) {
+  links.append(makeButton(game.name, game.path));
+}
+nav.append(brand, links, music.element);
+shell.append(nav, routeHost);
+app.replaceChildren(shell);
+
+function renderHome(): HTMLElement {
   const main = document.createElement("main");
   main.className = "home";
+
   const hero = document.createElement("section");
   hero.className = "hero";
-  hero.innerHTML = '<div class="eyebrow">LOCAL LEARNING ARCADE</div><h1>Choose a game.<br><span>Keep typing.</span></h1><p>Independent games, one clean local portal.</p>';
+  hero.innerHTML =
+    '<div class="eyebrow">LOCAL LEARNING ARCADE</div><h1>Choose a game.<br><span>Keep typing.</span></h1><p>Independent games, one clean local portal.</p>';
+
   const grid = document.createElement("section");
   grid.className = "game-grid";
   for (const game of registry.games) {
     const card = document.createElement("button");
     card.className = "game-card";
+
     const icon = document.createElement("div");
     icon.className = "game-icon";
     icon.textContent = game.icon;
+
     const copy = document.createElement("div");
     copy.className = "game-copy";
     const title = document.createElement("h2");
@@ -78,13 +130,16 @@ function renderHome(): void {
     const desc = document.createElement("p");
     desc.textContent = game.description;
     copy.append(title, desc);
+
     const play = document.createElement("div");
     play.className = "play";
     play.textContent = "PLAY →";
+
     card.append(icon, copy, play);
     card.addEventListener("click", () => navigate(game.path));
     grid.append(card);
   }
+
   const attribution = document.createElement("a");
   attribution.className = "data-attribution";
   attribution.href = "/vocabulary/ATTRIBUTION.md";
@@ -93,10 +148,10 @@ function renderHome(): void {
   attribution.textContent = "Vocabulary data attribution";
 
   main.append(hero, grid, attribution);
-  renderShell(main);
+  return main;
 }
 
-function renderGame(game: Game): void {
+function renderGame(game: Game): HTMLElement {
   const stage = document.createElement("main");
   stage.className = "game-stage";
 
@@ -111,30 +166,66 @@ function renderGame(game: Game): void {
   frame.title = game.name;
   frame.allow = "autoplay; clipboard-read; clipboard-write";
 
+  currentFrame = frame;
+  currentGame = game;
+
   frame.addEventListener(
     "load",
     () => {
       frame.classList.remove("loading");
       loading.classList.add("done");
+      sendSharedMusicState();
       window.setTimeout(() => loading.remove(), 180);
     },
     { once: true },
   );
 
   stage.append(frame, loading);
-  renderShell(stage);
+  return stage;
 }
 
-function render(): void {
-  const path = location.pathname.replace(/\/$/, "") || "/";
-  if (path === "/") return renderHome();
-  const game = registry.games.find((item) => item.path === path);
-  if (game !== undefined) return renderGame(game);
+function renderMissing(): HTMLElement {
   const missing = document.createElement("main");
   missing.className = "not-found";
-  missing.innerHTML = "<h1>Game not found</h1><p>The requested game is not registered.</p>";
-  renderShell(missing);
+  missing.innerHTML =
+    "<h1>Game not found</h1><p>The requested game is not registered.</p>";
+  return missing;
 }
 
-window.addEventListener("popstate", render);
-render();
+function renderRoute(): void {
+  const path = normalizedPath();
+  updateNavigation(path);
+
+  currentFrame = null;
+  currentGame = null;
+
+  if (path === "/") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(renderHome());
+    return;
+  }
+
+  const game = registry.games.find((item) => item.path === path);
+  if (game === undefined) {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(renderMissing());
+    return;
+  }
+
+  music.setKaraokeActive(game.id === "karaoke-typing");
+  routeHost.replaceChildren(renderGame(game));
+}
+
+window.addEventListener("message", (event: MessageEvent<unknown>) => {
+  if (!gameOrigins.has(event.origin)) return;
+  if (currentFrame === null || event.source !== currentFrame.contentWindow) return;
+  if (event.data === null || typeof event.data !== "object") return;
+
+  const data = event.data as Record<string, unknown>;
+  if (data["type"] !== "typing-game:speech") return;
+  if (typeof data["active"] !== "boolean") return;
+  music.setSpeechActive(data["active"]);
+});
+
+window.addEventListener("popstate", renderRoute);
+renderRoute();
