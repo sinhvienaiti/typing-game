@@ -440,6 +440,7 @@ export class SharedMusicPlayer {
             ? "auto-next"
             : "shuffle";
       this.shuffleQueue = [];
+      this.updatePlaybackModeUi();
       saveStoredState(this.state);
     });
 
@@ -498,6 +499,7 @@ export class SharedMusicPlayer {
     });
 
     this.renderSettingsValues();
+    this.updatePlaybackModeUi();
     this.renderTrackOptions();
     void this.loadLocalTracks();
   }
@@ -914,6 +916,11 @@ export class SharedMusicPlayer {
       }
     };
     this.volumeAnimation = requestAnimationFrame(update);
+  }
+
+  private updatePlaybackModeUi(): void {
+    this.nextButton.textContent =
+      this.state.playbackMode === "shuffle" ? "Shuffle →" : "Next →";
   }
 
   private renderSettingsValues(): void {
