@@ -623,6 +623,15 @@ export class SharedMusicPlayer {
   }
 
   private async togglePlayback(): Promise<void> {
+    if (this.karaokePaused && this.desiredPlaying) {
+      this.desiredPlaying = false;
+      this.resumeAfterKaraoke = false;
+      this.updatePlayButton();
+      this.setStatus("Shared music will stay paused after Karaoke.");
+      this.emitPlaybackChange();
+      return;
+    }
+
     if (this.playing) {
       this.pauseCurrent(true);
       return;
@@ -845,8 +854,12 @@ export class SharedMusicPlayer {
   }
 
   private updatePlayButton(): void {
-    this.playButton.textContent = this.playing ? "⏸ Pause" : "▶ Play";
-    this.toggleButton.classList.toggle("playing", this.playing);
+    if (this.karaokePaused && this.desiredPlaying) {
+      this.playButton.textContent = "■ Don't resume";
+    } else {
+      this.playButton.textContent = this.playing ? "⏸ Pause" : "▶ Play";
+    }
+    this.toggleButton.classList.toggle("playing", this.isPlaying());
   }
 
   private setStatus(message: string): void {
