@@ -81,8 +81,9 @@ function updateNavigation(path: string): void {
 }
 
 function sendSharedMusicState(): void {
-  if (currentFrame?.contentWindow === null || currentGame === null) return;
-  currentFrame.contentWindow.postMessage(
+  const frameWindow = currentFrame?.contentWindow;
+  if (frameWindow == null || currentGame === null) return;
+  frameWindow.postMessage(
     {
       type: "typing-game:shared-music",
       playing: music.isPlaying(),
@@ -196,6 +197,7 @@ function renderRoute(): void {
   const path = normalizedPath();
   updateNavigation(path);
 
+  music.setSpeechActive(false);
   currentFrame = null;
   currentGame = null;
 
