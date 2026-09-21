@@ -122,7 +122,7 @@ Platform CI for that integration passed.
 
 ## Corpus production status
 
-Current batch: 061-070.
+Current batch: 071-080.
 
 Completed and self-reviewed but not yet committed as production files at the time this process file was first created:
 
@@ -214,8 +214,20 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 059: 15 passages, 3838 words, per-level QA PASS.
 - Level 060: 15 passages, 3851 words, per-level QA PASS.
 - Batch 051-060: complete on checkpoint branch, batch QA PASS, 150 passages, 39496 words, duplicate/similarity warnings 0.
-- Levels 001-060 index: 60 levels, 900 passages, 234904 words.
-- Next active level: 061.
+- Level 061: 15 passages, 3950 words, per-level QA PASS.
+- Level 062: 15 passages, 3944 words, per-level QA PASS.
+- Level 063: 15 passages, 3999 words, per-level QA PASS.
+- Level 064: 15 passages, 3964 words, per-level QA PASS.
+- Level 065: 15 passages, 3979 words, per-level QA PASS.
+- Level 066: 15 passages, 3946 words, per-level QA PASS.
+- Level 067: 15 passages, 3917 words, per-level QA PASS.
+- Level 068: 15 passages, 4034 words, per-level QA PASS.
+- Level 069: 15 passages, 3930 words, per-level QA PASS.
+- Level 070: 15 passages, 3918 words, per-level QA PASS.
+- Batch 061-070: complete on checkpoint branch, batch QA PASS against Levels 001-070, 150 passages, 39581 words, duplicate/similarity warnings 0.
+- Levels 001-070 index: 70 levels, 1050 passages, 274485 words.
+- Next active level: 071.
+
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -235,7 +247,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Batch 051-060 is complete on the checkpoint branch. Continue without stopping from Level 061 in Batch 061-070.
+Batch 061-070 is complete on the checkpoint branch. Continue without stopping from Level 071 in Batch 071-080.
 
 For each level:
 
