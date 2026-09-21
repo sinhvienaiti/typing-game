@@ -122,7 +122,7 @@ Platform CI for that integration passed.
 
 ## Corpus production status
 
-Current batch: 001-030.
+Current batch: 031-040.
 
 Completed and self-reviewed but not yet committed as production files at the time this process file was first created:
 
@@ -185,7 +185,9 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 032: 15 passages, 3855 words, duplicate/similarity warnings 0.
 - Level 033: 15 passages, 3930 words, duplicate/similarity warnings 0.
 - Level 034: 15 passages, 3855 words, duplicate/similarity warnings 0.
-- Next active level: 035.
+- Level 035: 15 passages, 3804 words, duplicate/similarity warnings 0, checkpoint `8c1f2135ce6770035101ab2c6c1c607b8a90716d`.
+- Levels 001-035 index: 35 levels, 525 passages, 136550 words.
+- Next active level: 036.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
@@ -205,7 +207,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Batch 021-030 is complete on the checkpoint branch. Continue without stopping from Level 031 in Batch 031-040.
+Batch 021-030 is complete on the checkpoint branch. Continue without stopping from Level 036 in Batch 031-040.
 
 For each level:
 
