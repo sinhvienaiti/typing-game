@@ -1,0 +1,42 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { countWords, expectedCefr, stableJson } from "./typing-text-core.mjs";
+const level=54, root=process.cwd(), out=path.join(root,"shared/typing-texts/levels/054.json");
+const vocabulary=JSON.parse(await fs.readFile(path.join(root,"shared/vocabulary/levels/054.json"),"utf8")).entries.map(e=>e.en);
+const themes=[
+["mountain survey","field report","highland station","reflective","surveyors","terrain","instruments","expedition"],["coastal kitchen","feature","harbor cafe","hopeful","cooks","ingredients","meals","festival"],["mining archive","report","regional museum","careful","historians","industry","records","exhibition"],["wildlife clinic","explanation","research clinic","practical","clinicians","recovery","equipment","assessment"],["geometry workshop","case study","technical school","curious","students","measurement","models","lesson"],["emergency corridor","narrative","city hospital","calm","medics","response","supplies","drill"],["island ecology","report","marine reserve","optimistic","ecologists","habitat","samples","survey"],["heritage journey","travel note","mountain village","peaceful","walkers","history","landmarks","journey"],["startup planning","case study","business center","measured","founders","finance","proposals","launch"],["community recreation","feature","public park","warm","neighbors","activities","facilities","opening"],["laboratory safety","explanation","science center","careful","researchers","particles","instruments","experiment"],["rescue training","narrative","coastal station","urgent","crews","weather","radios","mission"],["transport review","analysis","regional office","thoughtful","planners","routes","systems","review"],["archive restoration","feature","old library","respectful","curators","records","collections","exhibition"],["public consultation","report","civic hall","constructive","officials","access","services","consultation"]];
+const verbs=["examined","mapped","discussed","tested","revised","documented","compared","organized","observed","improved","reviewed","explained","measured","recorded","planned"];
+const adverbs=["carefully","patiently","openly","methodically","quietly","practically","thoughtfully","steadily","responsibly","clearly","fairly","closely","calmly","jointly","deliberately"];
+const outcomes=["a useful next step","a clearer shared plan","better evidence for decisions","a safer routine for everyone","a more realistic timetable","stronger trust among participants","a practical change in procedure","a balanced public explanation","a workable solution for the next stage","a better understanding of local needs","a clearer record for future teams","a sensible way to test the idea","a practical basis for discussion","a more dependable working method","a useful question for later review"];
+const list=c=>`${c.slice(0,-1).join(", ")}, and ${c.at(-1)}`;
+function build(i){
+ const [topic,style,setting,tone,actors,focus,objects,event]=themes[i];
+ const targets=Array.from({length:20},(_,j)=>vocabulary[(i*11+j)%vocabulary.length]);
+ const chunks=Array.from({length:4},(_,j)=>targets.slice(j*5,j*5+5));
+ const s=[
+ `At the ${setting}, ${actors} began a ${topic} project about ${focus} and prepared carefully for the ${event}`,
+ `One working note used ${list(chunks[0])} as concrete examples while the group clarified unfamiliar language`,
+ `A second discussion introduced ${list(chunks[1])}, and the team connected each term with a practical situation`,
+ `Later records included ${list(chunks[2])}, which gave the ${actors} several different questions to examine`,
+ `Before the final review, ${actors} worked with ${list(chunks[3])} and checked that every example remained understandable`];
+ let k=0;
+ while(countWords(s.join(". ")+".")<250){
+   const v=verbs[(i*3+k)%verbs.length], a=adverbs[(i*5+k)%adverbs.length], o=outcomes[(i*7+k)%outcomes.length];
+   const n=k+1;
+   const variants=[
+    `In stage ${n} of the work, the ${actors} ${a} ${v} ${objects}, because evidence about ${focus} could support ${o}`,
+    `The ${setting} team then ${v} a fresh example, and ${actors} spoke ${a} about how it might affect ${focus} and the ${event}`,
+    `Instead of accepting the first idea, ${actors} ${a} ${v} details from ${objects} until the group had ${o}`,
+    `Another part of the ${topic} asked the ${actors} to compare ${objects} with recent observations, which produced ${o}`,
+    `As the ${event} approached, ${actors} ${v} their notes ${a} and kept the discussion of ${focus} tied to evidence`,
+    `The group also considered what could go wrong, then ${a} ${v} the plan so that ${objects} contributed to ${o}`,
+    `By the next review, ${actors} had ${v} enough material to explain ${focus} clearly without pretending that every uncertainty was settled`];
+   s.push(variants[(k+i)%variants.length]); k++;
+ }
+ const text=s.join(". ")+".";
+ return {id:`L054-P${String(i+1).padStart(3,"0")}`,topic,style,setting,tone,targetWords:targets,wordCount:countWords(text),text};
+}
+const passages=themes.map((_,i)=>build(i));
+for(const p of passages) if(p.wordCount<250||p.wordCount>300) throw new Error(`${p.id} word count ${p.wordCount}`);
+await fs.writeFile(out,stableJson({version:1,level,cefr:expectedCefr(level),passages}),"utf8");
+console.log(`Generated Level 054 v2 with ${passages.length} passages and ${passages.reduce((s,p)=>s+p.wordCount,0)} words.`);
