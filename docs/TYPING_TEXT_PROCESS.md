@@ -271,11 +271,11 @@ If continuing after interruption, trust committed production files on main first
 
 ## Full content improvement status
 
-- Content improvement completed through level 080.
-- Current improvement batch: 071-080 complete.
+- Content improvement completed through level 090.
+- Current improvement batch: 081-090 complete.
 - Passages processed in latest batch: 150.
-- Words in latest batch after improvement: 38824.
-- Levels 071-080: reviewed, repaired or rewritten where needed, and validated against their corresponding vocabulary levels.
+- Words in latest batch after improvement: 38250.
+- Levels 081-090: reviewed, repaired or rewritten where needed, and validated against their corresponding vocabulary levels.
 - Structural QA: PASS.
 - Content QA: PASS.
 - Vocabulary and target coverage QA: PASS.
@@ -283,8 +283,9 @@ If continuing after interruption, trust committed production files on main first
 - Duplicate sentence QA: PASS.
 - Repeated 8-word phrase QA: PASS.
 - 5-gram similarity QA: PASS using repository thresholds.
+- Cross-batch QA against Levels 001-080: PASS with 0 duplicate/similarity warnings.
 - Batch commit: the squash commit containing this state. The exact SHA is recoverable from the branch history without creating a second metadata-only commit.
-- Next improvement level: 081.
+- Next improvement level: 091.
 
 
 ## Handoff instructions
@@ -302,7 +303,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Corpus 001-100 is complete on the checkpoint branch. There is no next active level. Future work should only reopen a completed level if QA identifies a concrete defect.
+Production corpus 001-100 is complete on the checkpoint branch. Full content improvement is complete through Level 090, and Level 091 is the next improvement level. Do not reopen Levels 001-090 unless QA identifies a concrete defect.
 
 For each level:
 
