@@ -3505,3 +3505,35 @@ recall-typing
 ~~~
 
 Karaoke Typing is not part of this TTS rule because its audio source is the song/media player rather than per-word browser speech.
+
+
+---
+
+# 80. Vocabulary source confirmation UX
+
+Vocabulary Shooter's Vocabulary dialog separates browsing from applying a source.
+
+~~~text
+Class tab
+-> choose a level
+-> Use level
+-> Applying…
+-> load succeeds
+-> source is persisted
+-> game vocabulary is replaced
+-> dialog closes
+-> game returns to ready
+-> "Level NNN applied · X words" notice
+~~~
+
+Switching between the Class and Custom tabs does not itself change the active vocabulary source.
+
+Custom vocabulary becomes active only when Save vocabulary succeeds, and it also shows a success notice.
+
+The Class level select uses the same Shooter form-control colors, border, radius and focus treatment as the existing settings controls while retaining native select appearance/keyboard/accessibility behavior.
+
+Current reviewed Vocabulary Shooter revision:
+
+~~~text
+923682401d1c4b4d14795c96822668782b6d57bb
+~~~
