@@ -1,4 +1,4 @@
-export type MusicPlaybackMode = "auto-next" | "repeat-one";
+export type MusicPlaybackMode = "auto-next" | "shuffle" | "repeat-one";
 
 export type LocalMusicTrack = {
   id: string;
@@ -149,7 +149,7 @@ function loadStoredState(): StoredMusicState {
       return {
         selectedId: "",
         volume: DEFAULT_VOLUME,
-        playbackMode: "auto-next",
+        playbackMode: "shuffle",
         duckingEnabled: true,
         duckingVolume: DEFAULT_DUCKING_VOLUME,
         youtubeTracks: [],
@@ -176,7 +176,11 @@ function loadStoredState(): StoredMusicState {
           ? Math.min(1, Math.max(0, data.volume))
           : DEFAULT_VOLUME,
       playbackMode:
-        data.playbackMode === "repeat-one" ? "repeat-one" : "auto-next",
+        data.playbackMode === "repeat-one"
+          ? "repeat-one"
+          : data.playbackMode === "auto-next"
+            ? "auto-next"
+            : "shuffle",
       duckingEnabled:
         typeof data.duckingEnabled === "boolean" ? data.duckingEnabled : true,
       duckingVolume:
@@ -189,7 +193,7 @@ function loadStoredState(): StoredMusicState {
     return {
       selectedId: "",
       volume: DEFAULT_VOLUME,
-      playbackMode: "auto-next",
+      playbackMode: "shuffle",
       duckingEnabled: true,
       duckingVolume: DEFAULT_DUCKING_VOLUME,
       youtubeTracks: [],
@@ -240,6 +244,7 @@ export class SharedMusicPlayer {
   private speechReleaseTimer: number | null = null;
   private volumeAnimation: number | null = null;
   private loadToken = 0;
+  private shuffleQueue: string[] = [];
   private playbackListener: (playing: boolean) => void = () => {};
 
   constructor() {
@@ -308,7 +313,7 @@ export class SharedMusicPlayer {
     modeText.textContent = "When a track ends";
     this.playbackModeSelect = document.createElement("select");
     this.playbackModeSelect.innerHTML =
-      '<option value="auto-next">Auto next</option><option value="repeat-one">Repeat one</option>';
+      '<option value="shuffle">Shuffle</option><option value="auto-next">Auto next</option><option value="repeat-one">Repeat one</option>';
     this.playbackModeSelect.value = this.state.playbackMode;
     modeLabel.append(modeText, this.playbackModeSelect);
 
@@ -423,7 +428,10 @@ export class SharedMusicPlayer {
       this.state.playbackMode =
         this.playbackModeSelect.value === "repeat-one"
           ? "repeat-one"
-          : "auto-next";
+          : this.playbackModeSelect.value === "auto-next"
+            ? "auto-next"
+            : "shuffle";
+      this.shuffleQueue = [];
       saveStoredState(this.state);
     });
 
@@ -468,6 +476,7 @@ export class SharedMusicPlayer {
         title: this.youtubeTitleInput.value.trim() || `YouTube ${videoId}`,
       };
       this.state.youtubeTracks.push(track);
+      this.shuffleQueue = [];
       this.state.selectedId = track.id;
       saveStoredState(this.state);
       this.renderTrackOptions();
@@ -559,6 +568,7 @@ export class SharedMusicPlayer {
               source: "local" as const,
             }))
         : [];
+      this.shuffleQueue = [];
       this.renderTrackOptions();
 
       const tracks = this.allTracks();
@@ -648,8 +658,20 @@ export class SharedMusicPlayer {
     }
 
     if (this.selectedTrack() === null) {
-      this.setStatus("Choose a track first.");
-      return;
+      if (this.state.playbackMode !== "shuffle") {
+        this.setStatus("Choose a track first.");
+        return;
+      }
+
+      const randomTrack = this.takeShuffleTrack();
+      if (randomTrack === null) {
+        this.setStatus("No music tracks are available.");
+        return;
+      }
+
+      this.state.selectedId = randomTrack.id;
+      this.trackSelect.value = randomTrack.id;
+      saveStoredState(this.state);
     }
 
     this.desiredPlaying = true;
@@ -790,6 +812,37 @@ export class SharedMusicPlayer {
     void this.advanceTrack(false);
   }
 
+  private refillShuffleQueue(currentId: string): void {
+    const ids = this.allTracks()
+      .map((track) => track.id)
+      .filter((id) => id !== currentId);
+
+    for (let index = ids.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(Math.random() * (index + 1));
+      [ids[index], ids[swapIndex]] = [ids[swapIndex]!, ids[index]!];
+    }
+
+    this.shuffleQueue = ids;
+  }
+
+  private takeShuffleTrack(): MusicTrack | null {
+    const tracks = this.allTracks();
+    if (tracks.length === 0) return null;
+    if (tracks.length === 1) return tracks[0] ?? null;
+
+    const currentId = this.state.selectedId;
+    while (this.shuffleQueue.length > 0) {
+      const nextId = this.shuffleQueue.shift();
+      if (nextId === undefined || nextId === currentId) continue;
+      const track = tracks.find((item) => item.id === nextId);
+      if (track !== undefined) return track;
+    }
+
+    this.refillShuffleQueue(currentId);
+    const nextId = this.shuffleQueue.shift();
+    return tracks.find((item) => item.id === nextId) ?? null;
+  }
+
   private async advanceTrack(userRequested: boolean): Promise<void> {
     const tracks = this.allTracks();
     if (tracks.length === 0) {
@@ -797,11 +850,18 @@ export class SharedMusicPlayer {
       return;
     }
 
-    const currentIndex = tracks.findIndex(
-      (track) => track.id === this.state.selectedId,
-    );
-    const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % tracks.length;
-    this.state.selectedId = tracks[nextIndex]?.id ?? "";
+    if (this.state.playbackMode === "shuffle") {
+      const randomTrack = this.takeShuffleTrack();
+      if (randomTrack === null) return;
+      this.state.selectedId = randomTrack.id;
+    } else {
+      const currentIndex = tracks.findIndex(
+        (track) => track.id === this.state.selectedId,
+      );
+      const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % tracks.length;
+      this.state.selectedId = tracks[nextIndex]?.id ?? "";
+    }
+
     this.trackSelect.value = this.state.selectedId;
     saveStoredState(this.state);
 
