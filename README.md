@@ -187,13 +187,16 @@ Playback settings include:
 
 ~~~text
 Music volume
+Shuffle
 Auto next
 Repeat one
 Pronunciation ducking on/off
 Pronunciation music level
 ~~~
 
-`Auto next` is the default. It advances through the combined Local + YouTube list and wraps from the last track back to the first.
+`Shuffle` is the default. It uses a shuffled queue across the combined Local + YouTube list, avoids immediately repeating the current track when at least two tracks exist, and reshuffles after the current bag is exhausted. If Music is Off and you press Play while Shuffle is active, the player chooses a random first track automatically.
+
+`Auto next` keeps sequential playlist order. `Repeat one` replays the current track.
 
 When a game starts browser pronunciation, the shared music is lowered quickly and restored smoothly afterward. The ducking level is configurable in Music settings.
 
