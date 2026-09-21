@@ -3572,3 +3572,127 @@ Current reviewed Vocabulary Shooter revision:
 ~~~text
 9f8afde6b1c1fdf6748928e8937c0d5e6f0d1917
 ~~~
+
+
+---
+
+# 82. Shared background music
+
+Background music is a parent Portal responsibility, not a per-game feature.
+
+Persistent ownership:
+
+~~~text
+typing-game Portal
+└── SharedMusicPlayer
+    ├── Local audio
+    └── YouTube
+
+route content
+├── Monkeytype iframe
+├── Shooter iframe
+├── Recall iframe
+└── Karaoke iframe
+~~~
+
+The Portal shell is persistent while route content changes. Shared music therefore continues from the same timestamp when navigating between non-Karaoke games.
+
+Local library:
+
+~~~text
+shared/music/
+pnpm music:index
+-> shared/music/index.local.json
+~~~
+
+The local index is generated and ignored by Git. Audio files in `shared/music/` are ignored by Git. The tracked `shared/music/index.json` is the empty/fallback manifest.
+
+Supported indexed extensions:
+
+~~~text
+.mp3
+.m4a
+.aac
+.wav
+.ogg
+.webm
+~~~
+
+YouTube tracks are stored as metadata in Portal localStorage and played through the YouTube IFrame Player API.
+
+Playback modes:
+
+~~~text
+auto-next
+repeat-one
+~~~
+
+Auto-next is the default and wraps at the end of the combined Local + YouTube list.
+
+Music settings:
+
+~~~text
+music volume
+playback mode
+pronunciation ducking enabled/disabled
+pronunciation music level
+~~~
+
+Default audio-balance policy:
+
+~~~text
+normal music volume = 0.32
+ducking enabled = true
+ducked multiplier = 0.18
+duck attack = 55ms
+speech release debounce = 160ms
+restore fade = 220ms
+~~~
+
+Child speech events use:
+
+~~~text
+postMessage({
+  type: "typing-game:speech",
+  active: true|false
+})
+~~~
+
+The Portal validates the sender against the registered current game iframe before applying ducking.
+
+Shooter, Recall and Monkeytype EN-VN pronunciation send speech focus. Monkeytype Text Reader also signals playing/paused/idle state.
+
+Karaoke rule:
+
+~~~text
+enter Karaoke
+-> pause shared background music
+
+leave Karaoke
+-> resume only if shared music was active before Karaoke
+~~~
+
+Shooter rule:
+
+~~~text
+shared music active
+-> mute Shooter procedural BGM
+-> keep Shooter SFX
+-> keep pronunciation
+
+shared music inactive
+-> Shooter procedural BGM may run if its Fallback music setting is enabled
+~~~
+
+Current reviewed child revisions:
+
+~~~text
+games/monkeytype
+6227c28425b8f640e65b20b5f9371dc891369d03
+
+games/vocab-shooter
+15a5f4616acade800fc524fbd27b18ef70117387
+
+games/recall-typing
+4e007393e3fc61ce431392c70791015c5e3695cc
+~~~
