@@ -201,6 +201,7 @@ function loadStoredState(): StoredMusicState {
       selectedId: "",
       volume: DEFAULT_VOLUME,
       playbackMode: "shuffle",
+      playbackModeVersion: 2,
       duckingEnabled: true,
       duckingVolume: DEFAULT_DUCKING_VOLUME,
       youtubeTracks: [],
