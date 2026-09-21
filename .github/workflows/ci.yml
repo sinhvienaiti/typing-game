@@ -66,6 +66,9 @@ jobs:
           node -e "JSON.parse(require('fs').readFileSync('shared/music/index.json','utf8'))"
           node scripts/generate-music-index.mjs
 
+      - name: Validate portal layout contract
+        run: node scripts/validate-portal-layout.mjs
+
       - name: Validate data pipeline syntax
         run: |
           node --check scripts/prepare-vocabulary-candidates.mjs
@@ -75,6 +78,7 @@ jobs:
           node --check scripts/validate-typing-texts.mjs
           node --check scripts/report-typing-text-coverage.mjs
           node --check scripts/generate-music-index.mjs
+          node --check scripts/validate-portal-layout.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
