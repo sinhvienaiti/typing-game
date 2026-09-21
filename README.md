@@ -152,3 +152,59 @@ The persistent project handoff and engineering history live under docs:
 - [Karaoke Typing design](./docs/design/KARAOKE_TYPING_GAME.md)
 
 Meaningful implementation or infrastructure changes should update the current day's changelog and the project context in the same Git workflow.
+
+
+## Shared background music
+
+The parent portal owns one background-music player that stays alive while moving between games.
+
+Open **♫ Music** in the global navigation bar.
+
+Supported sources:
+
+~~~text
+Local audio files
+YouTube URL / video ID
+~~~
+
+Local music folder:
+
+~~~text
+shared/music/
+~~~
+
+Put browser-supported audio files there, then refresh the generated local index:
+
+~~~bash
+pnpm music:index
+~~~
+
+Both `./dev.sh` and `./play.sh` refresh the local music index automatically.
+
+Local audio files and `index.local.json` stay outside Git. The tracked `shared/music/index.json` is only the empty/fallback library definition.
+
+Playback settings include:
+
+~~~text
+Music volume
+Auto next
+Repeat one
+Pronunciation ducking on/off
+Pronunciation music level
+~~~
+
+`Auto next` is the default. It advances through the combined Local + YouTube list and wraps from the last track back to the first.
+
+When a game starts browser pronunciation, the shared music is lowered quickly and restored smoothly afterward. The ducking level is configurable in Music settings.
+
+Karaoke Typing has audio priority:
+
+~~~text
+enter Karaoke
+-> shared background music pauses
+
+leave Karaoke
+-> shared background music resumes if it was playing before
+~~~
+
+Vocabulary Shooter keeps its procedural background music only as a fallback. While shared music is active, Shooter procedural BGM is muted; Shooter SFX and pronunciation remain active.
