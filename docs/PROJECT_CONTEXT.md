@@ -3535,5 +3535,5 @@ The Class level select uses the same Shooter form-control colors, border, radius
 Current reviewed Vocabulary Shooter revision:
 
 ~~~text
-923682401d1c4b4d14795c96822668782b6d57bb
+879104e875d571d5111d3c4a60c7a93e4f5fb572
 ~~~
