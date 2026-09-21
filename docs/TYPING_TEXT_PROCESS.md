@@ -183,7 +183,8 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Levels 011-030 cross-check: 300 passages, 77744 words, duplicate/similarity warnings 0.
 - Level 031: 15 passages, 3885 words, duplicate/similarity warnings 0.
 - Level 032: 15 passages, 3855 words, duplicate/similarity warnings 0.
-- Next active level: 033.
+- Level 033: 15 passages, 3930 words, duplicate/similarity warnings 0.
+- Next active level: 034.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
 If continuing after interruption, trust committed production files on main first, then committed checkpoint files on the corpus branch, then this status file.
