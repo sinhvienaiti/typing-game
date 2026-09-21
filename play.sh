@@ -83,7 +83,7 @@ build_if_needed() {
 }
 
 echo "[1/4] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3100
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100
 
 echo "[2/4] Checking static builds..."
 node scripts/generate-music-index.mjs
@@ -127,6 +127,16 @@ build_if_needed \
   "games/karaoke-typing/package.json" \
   "games/karaoke-typing/tsconfig.json" \
   "games/karaoke-typing/vite.config.ts"
+
+build_if_needed \
+  "Space Typing" \
+  "games/space-typing/dist/index.html" \
+  "build:space" \
+  "games/space-typing/src" \
+  "games/space-typing/index.html" \
+  "games/space-typing/package.json" \
+  "games/space-typing/tsconfig.json" \
+  "games/space-typing/vite.config.ts"
 
 build_if_needed \
   "Monkeytype" \

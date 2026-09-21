@@ -5,10 +5,10 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
 
 case "$TARGET" in
-  all|monkeytype|shooter|recall|karaoke)
+  all|monkeytype|shooter|recall|karaoke|space)
     ;;
   *)
-    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke]"
+    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space]"
     exit 1
     ;;
 esac
@@ -33,6 +33,9 @@ case "$TARGET" in
   karaoke)
     git submodule update --init --recursive games/karaoke-typing
     ;;
+  space)
+    git submodule update --init --recursive games/space-typing
+    ;;
 esac
 
 echo "Installing platform tools..."
@@ -56,6 +59,11 @@ install_karaoke() {
   pnpm --dir games/karaoke-typing install
 }
 
+install_space() {
+  echo "Installing Space Typing..."
+  pnpm --dir games/space-typing install
+}
+
 install_monkeytype() {
   echo "Installing Monkeytype..."
   (
@@ -76,6 +84,7 @@ case "$TARGET" in
     install_shooter
     install_recall
     install_karaoke
+    install_space
     install_monkeytype
     ;;
   monkeytype)
@@ -89,6 +98,9 @@ case "$TARGET" in
     ;;
   karaoke)
     install_karaoke
+    ;;
+  space)
+    install_space
     ;;
 esac
 

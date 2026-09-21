@@ -8,7 +8,7 @@
   },
   "scripts": {
     "bootstrap": "bash scripts/bootstrap.sh",
-    "dev": "bash scripts/cleanup-dev-ports.sh 3000 3001 3002 3003 3100 && concurrently -k -n portal,monkeytype,shooter,recall,karaoke \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\" \"pnpm dev:karaoke:app\"",
+    "dev": "bash scripts/cleanup-dev-ports.sh 3000 3001 3002 3003 3004 3100 && concurrently -k -n portal,monkeytype,shooter,recall,karaoke,space \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\" \"pnpm dev:karaoke:app\" \"pnpm dev:space:app\"",
     "dev:portal": "pnpm --dir portal dev",
     "dev:monkeytype": "bash scripts/cleanup-dev-ports.sh 3000 3100 && concurrently -k -n portal,monkeytype \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\"",
     "dev:monkeytype:app": "cd games/monkeytype && SERVER_OPEN=false DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=monkeytype.typing-game.local DEV_HMR_HOST=monkeytype.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev-fe",
@@ -20,7 +20,7 @@
     "build:shooter": "pnpm --dir games/vocab-shooter build",
     "build:recall": "pnpm --dir games/recall-typing build",
     "build:monkeytype": "cd games/monkeytype && LOCAL_STATIC=true pnpm build-fe",
-    "build:local": "pnpm build:portal && pnpm build:shooter && pnpm build:recall && pnpm build:karaoke && pnpm build:monkeytype",
+    "build:local": "pnpm build:portal && pnpm build:shooter && pnpm build:recall && pnpm build:karaoke && pnpm build:space && pnpm build:monkeytype",
     "setup:dev": "bash scripts/setup-nginx.sh dev",
     "setup:play": "bash scripts/setup-nginx.sh play",
     "play": "bash scripts/play.sh",
@@ -36,7 +36,10 @@
     "dev:karaoke": "bash scripts/cleanup-dev-ports.sh 3003 3100 && concurrently -k -n portal,karaoke \"pnpm dev:portal\" \"pnpm dev:karaoke:app\"",
     "dev:karaoke:app": "cd games/karaoke-typing && DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=karaoke.typing-game.local DEV_HMR_HOST=karaoke.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev",
     "build:karaoke": "pnpm --dir games/karaoke-typing build",
-    "music:index": "node scripts/generate-music-index.mjs"
+    "music:index": "node scripts/generate-music-index.mjs",
+    "dev:space": "bash scripts/cleanup-dev-ports.sh 3004 3100 && concurrently -k -n portal,space \"pnpm dev:portal\" \"pnpm dev:space:app\"",
+    "dev:space:app": "pnpm --dir games/space-typing dev",
+    "build:space": "pnpm --dir games/space-typing build"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

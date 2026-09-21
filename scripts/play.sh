@@ -8,6 +8,7 @@ for path in \
   "$ROOT_DIR/games/vocab-shooter/dist/index.html" \
   "$ROOT_DIR/games/recall-typing/dist/index.html" \
   "$ROOT_DIR/games/karaoke-typing/dist/index.html" \
+  "$ROOT_DIR/games/space-typing/dist/index.html" \
   "$ROOT_DIR/games/monkeytype/frontend/dist/index.html"
 do
   if [[ ! -f "$path" ]]; then

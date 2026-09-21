@@ -3811,3 +3811,55 @@ If Shuffle is active and no track is selected, Play automatically chooses a rand
 Legacy Music state created before Shuffle is migrated once from the old default `auto-next` to `shuffle`. A version marker preserves explicit future choices of Auto next.
 
 The Music transport button shows `Shuffle →` in Shuffle mode.
+
+
+---
+
+# 86. Space Typing platform integration
+
+Space Typing is now integrated as an independent child repository.
+
+Repository and submodule:
+
+~~~text
+sinhvienaiti/space-typing
+games/space-typing
+branch: main
+~~~
+
+Platform route and internal origin:
+
+~~~text
+https://typing-game.local/space-typing
+https://space.typing-game.local
+~~~
+
+Development port:
+
+~~~text
+3004
+~~~
+
+Focused development command:
+
+~~~bash
+./dev.sh space
+~~~
+
+Normal Play mode includes Space Typing and rebuilds it when its static output is missing or stale:
+
+~~~bash
+./play.sh
+~~~
+
+The child game's authoritative product/design/implementation source of truth is:
+
+~~~text
+games/space-typing/docs/PROJECT_CONTEXT.md
+~~~
+
+When reviewing Space Typing, do not infer requirements from Monkeytype, Vocabulary Shooter,
+Recall Typing or Karaoke Typing except where the Space Typing context explicitly references a
+shared parent-platform contract such as vocabulary, typing texts, shared music or Portal routing.
+
+The parent pins a tested child commit through the normal Git submodule workflow.

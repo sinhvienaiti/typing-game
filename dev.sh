@@ -8,7 +8,7 @@ TARGET="${1:-all}"
 
 case "$TARGET" in
   -h|--help|help)
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
     echo
     echo "Default: all"
     exit 0
@@ -22,11 +22,14 @@ case "$TARGET" in
   karaoke-typing)
     TARGET="karaoke"
     ;;
-  all|monkeytype|shooter|recall|karaoke)
+  space-typing)
+    TARGET="space"
+    ;;
+  all|monkeytype|shooter|recall|karaoke|space)
     ;;
   *)
     echo "Unknown target: $TARGET"
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
     exit 1
     ;;
 esac
@@ -64,5 +67,8 @@ case "$TARGET" in
     ;;
   karaoke)
     exec pnpm dev:karaoke
+    ;;
+  space)
+    exec pnpm dev:space
     ;;
 esac

@@ -20,7 +20,7 @@ jobs:
           node-version: 24.11.0
 
       - name: Initialize public CI submodules
-        run: git submodule update --init games/monkeytype games/vocab-shooter games/recall-typing
+        run: git submodule update --init games/monkeytype games/vocab-shooter games/recall-typing games/space-typing
 
       - name: Validate Karaoke Typing gitlink
         run: |
@@ -88,9 +88,16 @@ jobs:
           pnpm install
           pnpm --dir portal install
           pnpm --dir games/recall-typing install
+          pnpm --dir games/space-typing install
 
       - name: Test Recall Typing
         run: pnpm --dir games/recall-typing test
+
+      - name: Test Space Typing
+        run: pnpm --dir games/space-typing test
+
+      - name: Build Space Typing
+        run: pnpm build:space
 
       - name: Build Portal
         run: pnpm build:portal
