@@ -29,6 +29,7 @@ type StoredMusicState = {
   selectedId: string;
   volume: number;
   playbackMode: MusicPlaybackMode;
+  playbackModeVersion: 2;
   duckingEnabled: boolean;
   duckingVolume: number;
   youtubeTracks: YouTubeMusicTrack[];
@@ -150,6 +151,7 @@ function loadStoredState(): StoredMusicState {
         selectedId: "",
         volume: DEFAULT_VOLUME,
         playbackMode: "shuffle",
+        playbackModeVersion: 2,
         duckingEnabled: true,
         duckingVolume: DEFAULT_DUCKING_VOLUME,
         youtubeTracks: [],
@@ -176,11 +178,16 @@ function loadStoredState(): StoredMusicState {
           ? Math.min(1, Math.max(0, data.volume))
           : DEFAULT_VOLUME,
       playbackMode:
-        data.playbackMode === "repeat-one"
-          ? "repeat-one"
-          : data.playbackMode === "auto-next"
-            ? "auto-next"
+        data.playbackModeVersion === 2
+          ? data.playbackMode === "repeat-one"
+            ? "repeat-one"
+            : data.playbackMode === "auto-next"
+              ? "auto-next"
+              : "shuffle"
+          : data.playbackMode === "repeat-one"
+            ? "repeat-one"
             : "shuffle",
+      playbackModeVersion: 2,
       duckingEnabled:
         typeof data.duckingEnabled === "boolean" ? data.duckingEnabled : true,
       duckingVolume:
@@ -405,6 +412,7 @@ export class SharedMusicPlayer {
     this.trackSelect.addEventListener("change", () => {
       const wasPlaying = this.desiredPlaying;
       this.state.selectedId = this.trackSelect.value;
+      this.shuffleQueue = [];
       saveStoredState(this.state);
       void this.loadSelectedTrack(wasPlaying);
     });
@@ -461,6 +469,7 @@ export class SharedMusicPlayer {
       if (existing !== undefined) {
         const wasPlaying = this.desiredPlaying;
         this.state.selectedId = existing.id;
+        this.shuffleQueue = [];
         this.renderTrackOptions();
         this.trackSelect.value = existing.id;
         saveStoredState(this.state);
