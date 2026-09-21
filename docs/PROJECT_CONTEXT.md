@@ -3736,3 +3736,38 @@ node scripts/validate-portal-layout.mjs
 ~~~
 
 Platform CI runs this validation before builds.
+
+
+---
+
+# 84. Recall vocabulary source confirmation UX
+
+Recall Typing uses the same Vocabulary source interaction contract as Vocabulary Shooter.
+
+~~~text
+Class tab
+-> choose a level
+-> Use level
+-> Applying…
+-> load succeeds
+-> persist Class source
+-> replace Recall vocabulary
+-> dialog closes
+-> Recall returns to ready
+-> success notice
+
+Custom tab
+-> edit/save vocabulary
+-> persist Custom source
+-> dialog closes
+-> Recall returns to ready
+-> success notice
+~~~
+
+Switching Class/Custom tabs alone never changes the active vocabulary source.
+
+Current reviewed Recall revision:
+
+~~~text
+c62a3ee9927fce9b27d7526df1972e1913866a83
+~~~
