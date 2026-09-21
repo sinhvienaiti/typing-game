@@ -7,6 +7,7 @@ on:
     paths:
       - scripts/generate-level-052.mjs
       - scripts/validate-level-052.mjs
+      - scripts/checkpoint-level-052.mjs
       - .github/workflows/generate-level-052.yml
   workflow_dispatch:
 
@@ -22,29 +23,23 @@ jobs:
           ref: feature/typing-text-corpus
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
       - name: Generate level 052
         run: node scripts/generate-level-052.mjs
       - name: Validate level 052
-        id: validate
-        continue-on-error: true
-        run: node scripts/validate-level-052.mjs > /tmp/level-052-focused-qa.txt 2>&1
-      - name: Preserve focused diagnostics
-        if: steps.validate.outcome == 'failure'
-        run: |
-          cat /tmp/level-052-focused-qa.txt
-          cp /tmp/level-052-focused-qa.txt docs/level-052-focused-qa.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f docs/level-052-focused-qa.txt
-          git commit -m "chore: capture focused level 052 QA diagnostics"
-          git push origin HEAD:feature/typing-text-corpus
-          exit 1
-      - name: Commit generated level
-        if: steps.validate.outcome == 'success'
+        run: node scripts/validate-level-052.mjs
+      - name: Refresh typing text index
+        run: node scripts/generate-typing-texts.mjs
+      - name: Update process checkpoint
+        run: node scripts/checkpoint-level-052.mjs
+      - name: Commit checkpoint
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add shared/typing-texts/levels/052.json
-          git commit -m "feat: add typing text corpus level 052"
+          git add shared/typing-texts/levels/052.json shared/typing-texts/index.json docs/TYPING_TEXT_PROCESS.md
+          if git diff --cached --quiet; then
+            echo "Level 052 checkpoint already synchronized"
+            exit 0
+          fi
+          git commit -m "docs: checkpoint typing corpus level 052"
           git push origin HEAD:feature/typing-text-corpus
