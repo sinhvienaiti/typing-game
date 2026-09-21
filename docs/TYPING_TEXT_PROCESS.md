@@ -271,11 +271,11 @@ If continuing after interruption, trust committed production files on main first
 
 ## Full content improvement status
 
-- Content improvement completed through level 070.
-- Current improvement batch: 061-070 complete.
+- Content improvement completed through level 080.
+- Current improvement batch: 071-080 complete.
 - Passages processed in latest batch: 150.
-- Words in latest batch after improvement: 39171.
-- Levels 061-070: reviewed, repaired or rewritten where needed, and validated against their corresponding vocabulary levels.
+- Words in latest batch after improvement: 38824.
+- Levels 071-080: reviewed, repaired or rewritten where needed, and validated against their corresponding vocabulary levels.
 - Structural QA: PASS.
 - Content QA: PASS.
 - Vocabulary and target coverage QA: PASS.
@@ -284,7 +284,8 @@ If continuing after interruption, trust committed production files on main first
 - Repeated 8-word phrase QA: PASS.
 - 5-gram similarity QA: PASS using repository thresholds.
 - Batch commit: the squash commit containing this state. The exact SHA is recoverable from the branch history without creating a second metadata-only commit.
-- Next improvement level: 071.
+- Next improvement level: 081.
+
 
 ## Handoff instructions
 
