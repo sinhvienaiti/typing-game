@@ -271,12 +271,11 @@ If continuing after interruption, trust committed production files on main first
 
 ## Full content improvement status
 
-- Content improvement completed through level 040.
-- Current improvement batch: 031-040 complete.
+- Content improvement completed through level 050.
+- Current improvement batch: 041-050 complete.
 - Passages processed in latest batch: 150.
-- Levels 031-034: full rewrite required because the original files reused templated sentence sets across nearly all passages.
-- Levels 035-037: target vocabulary mapping repaired with minimal content changes.
-- Levels 038-040: reviewed and retained where content already passed quality checks.
+- Level 044: target vocabulary mapping repaired, with targeted content cleanup to remove end-loaded target usage.
+- Levels 041-043 and 045-050: reviewed and retained where content already passed quality checks.
 - Structural QA: PASS.
 - Content QA: PASS.
 - Vocabulary and target coverage QA: PASS.
@@ -285,7 +284,7 @@ If continuing after interruption, trust committed production files on main first
 - Repeated 8-word phrase QA: PASS.
 - 5-gram similarity QA: PASS using repository thresholds.
 - Batch commit: the squash commit containing this state. The exact SHA is recoverable from the branch history without creating a second metadata-only commit.
-- Next improvement level: 041.
+- Next improvement level: 051.
 
 ## Handoff instructions
 
