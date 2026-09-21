@@ -1,10 +1,14 @@
 import fs from "node:fs/promises";
+import { buildIndex, readTypingLevels, stableJson } from "./typing-text-core.mjs";
 
-const levelPath = "shared/typing-texts/levels/052.json";
-const indexPath = "shared/typing-texts/index.json";
+const typingTextDir = "shared/typing-texts";
+const levelPath = `${typingTextDir}/levels/052.json`;
+const indexPath = `${typingTextDir}/index.json`;
 const processPath = "docs/TYPING_TEXT_PROCESS.md";
+const documents = await readTypingLevels(typingTextDir);
+const index = buildIndex(documents);
+await fs.writeFile(indexPath, stableJson(index), "utf8");
 const level = JSON.parse(await fs.readFile(levelPath, "utf8"));
-const index = JSON.parse(await fs.readFile(indexPath, "utf8"));
 const words = level.passages.reduce((sum, passage) => sum + passage.wordCount, 0);
 let process = await fs.readFile(processPath, "utf8");
 const checkpoint = "7950cb0f4313d3af7c77c80ac1fa9515dc4f7940";
