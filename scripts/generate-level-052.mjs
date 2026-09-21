@@ -25,27 +25,25 @@ const themes = [
   ["historical exhibition", "feature", "regional archive", "respectful", "historians", "records", "artifacts", "opening"],
   ["mobility planning", "report", "city council", "constructive", "planners", "streets", "access", "consultation"],
 ];
-
 const verbs = ["examined", "mapped", "discussed", "tested", "revised", "documented", "compared", "organized", "observed", "improved", "reviewed", "explained"];
 const adverbs = ["carefully", "patiently", "openly", "methodically", "quietly", "practically", "thoughtfully", "steadily", "responsibly", "clearly", "fairly", "closely"];
 const outcomes = ["a useful next step", "a clearer shared plan", "better evidence for decisions", "a safer routine for everyone", "a more realistic timetable", "stronger trust among participants", "a practical change in procedure", "a balanced public explanation", "a workable solution for the next stage", "a better understanding of local needs"];
 
 function targetsFor(index) {
-  const targets = [];
-  for (let offset = 0; offset < 20; offset++) targets.push(vocabulary[(index * 7 + offset) % vocabulary.length]);
-  return targets;
+  return Array.from({ length: 20 }, (_, offset) => vocabulary[(index * 7 + offset) % vocabulary.length]);
 }
 
 function buildPassage(index) {
   const [topic, style, setting, tone, actors, focus, objects, event] = themes[index];
   const targets = targetsFor(index);
   const chunks = Array.from({ length: 4 }, (_, chunk) => targets.slice(chunk * 5, chunk * 5 + 5));
+  const list = (chunk) => `${chunk.slice(0, 4).join(", ")}, and ${chunk[4]}`;
   const sentences = [
     `The ${topic} effort brought ${actors} together at the ${setting} to study ${focus} and prepare for the ${event}`,
-    `During one focused session, the group considered ${chunks[0].slice(0, 4).join(", ")}, and ${chunks[0][4]} in examples suited to the ${topic} work`,
-    `In a separate practical exercise, participants encountered ${chunks[1].slice(0, 4).join(", ")}, and ${chunks[1][4]} in examples suited to the ${topic} work`,
-    `Later notes connected ${chunks[2].slice(0, 4).join(", ")}, and ${chunks[2][4]} in examples suited to the ${topic} work`,
-    `Before the final review, everyone discussed ${chunks[3].slice(0, 4).join(", ")}, and ${chunks[3][4]} in examples suited to the ${topic} work`,
+    `During the ${topic} session, ${actors} considered ${list(chunks[0])} while discussing practical examples`,
+    `In another ${topic} exercise, ${actors} encountered ${list(chunks[1])} and connected them with the local setting`,
+    `Later ${topic} notes linked ${list(chunks[2])} with questions raised by ${actors}`,
+    `Before the ${topic} review, ${actors} discussed ${list(chunks[3])} and checked that each example remained understandable`,
   ];
 
   let step = 0;
@@ -54,11 +52,11 @@ function buildPassage(index) {
     const adverb = adverbs[(index * 7 + step * 2) % adverbs.length];
     const outcome = outcomes[(index * 3 + step) % outcomes.length];
     const variants = [
-      `The ${actors} ${adverb} ${verb} how ${objects} affected ${focus}, then recorded observations that pointed toward ${outcome}`,
-      `Instead of accepting the first suggestion, the team ${verb} details from the ${setting} and asked which evidence could support ${outcome}`,
-      `People with different experience spoke ${adverb}, so discussion about ${focus} stayed concrete while the ${event} remained an achievable goal`,
-      `By comparing everyday concerns with information about ${objects}, participants ${verb} the plan and created ${outcome} without hiding remaining uncertainty`,
-      `A later review at the ${setting} considered ${objects} ${adverb} and connected fresh evidence with ${outcome}`,
+      `The ${actors} ${adverb} ${verb} ${objects} in the ${topic} study, and observations about ${focus} pointed toward ${outcome}`,
+      `Rather than accept an early ${topic} suggestion, ${actors} ${verb} details from the ${setting} until evidence supported ${outcome}`,
+      `Different ${actors} spoke ${adverb} about ${focus}, keeping the ${topic} discussion concrete while the ${event} remained achievable`,
+      `Comparing ${topic} concerns with ${objects}, the ${actors} ${verb} their plan and created ${outcome} while acknowledging uncertainty`,
+      `A later ${topic} review at the ${setting} considered ${objects} ${adverb}, connecting fresh evidence with ${outcome}`,
     ];
     sentences.push(variants[step % variants.length]);
     step++;
@@ -67,24 +65,9 @@ function buildPassage(index) {
   const text = sentences.join(". ") + ".";
   const wordCount = countWords(text);
   if (wordCount > 300) throw new Error(`Passage ${index + 1} exceeded 300 words: ${wordCount}`);
-  return {
-    id: `L052-P${String(index + 1).padStart(3, "0")}`,
-    topic,
-    style,
-    setting,
-    tone,
-    targetWords: targets,
-    wordCount,
-    text,
-  };
+  return { id: `L052-P${String(index + 1).padStart(3, "0")}`, topic, style, setting, tone, targetWords: targets, wordCount, text };
 }
 
-const document = {
-  version: 1,
-  level,
-  cefr: expectedCefr(level),
-  passages: themes.map((_, index) => buildPassage(index)),
-};
-
+const document = { version: 1, level, cefr: expectedCefr(level), passages: themes.map((_, index) => buildPassage(index)) };
 await fs.writeFile(outputPath, stableJson(document), "utf8");
 console.log(`Generated ${outputPath} with ${document.passages.length} passages and ${document.passages.reduce((sum, passage) => sum + passage.wordCount, 0)} words.`);
