@@ -330,7 +330,7 @@ export class SharedMusicPlayer {
     this.duckingVolumeInput = document.createElement("input");
     this.duckingVolumeInput.type = "range";
     this.duckingVolumeInput.min = "0";
-    this.duckingVolumeInput.max = "0.6";
+    this.duckingVolumeInput.max = "1";
     this.duckingVolumeInput.step = "0.05";
     this.duckingVolumeInput.value = String(this.state.duckingVolume);
     duckingVolumeLabel.append(
