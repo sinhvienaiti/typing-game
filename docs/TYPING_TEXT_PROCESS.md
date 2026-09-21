@@ -202,7 +202,7 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 048: 15 passages, 3851 words, duplicate/similarity warnings 0, checkpoint `d2aa11ebe7fb7340101552d7efd9b9dd7ba694df`.
 - Level 049: 15 passages, 3819 words, duplicate/similarity warnings 0, checkpoint `dadb8f42be23c72ff6e3da7e7d5ebe01013e66b5`.
 - Level 050: 15 passages, 3826 words, duplicate/similarity warnings 0, checkpoint `f322785797799ea1366f24b40ebb2985220b2f85`.
-- Batch 041-050: complete on checkpoint branch, batch-wide QA pending.
+- Batch 041-050: complete on checkpoint branch, batch QA PASS, 150 passages, 39071 words, duplicate/similarity warnings 0.
 - Levels 001-050 index: 50 levels, 750 passages, 195408 words.
 - Next active level: 051.
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
