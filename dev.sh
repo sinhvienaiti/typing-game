@@ -42,6 +42,9 @@ fi
 echo "[2/4] Updating submodules and dependencies for: $TARGET"
 bash scripts/bootstrap.sh "$TARGET"
 
+echo "Indexing local background music..."
+pnpm music:index
+
 echo "[3/4] Switching nginx to development mode..."
 pnpm setup:dev
 
