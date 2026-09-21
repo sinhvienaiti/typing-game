@@ -808,13 +808,17 @@ export class SharedMusicPlayer {
       this.volumeAnimation = null;
     }
 
+    if (!smooth) {
+      this.audio.volume = target;
+      this.youtubePlayer?.setVolume(Math.round(target * 100));
+      return;
+    }
+
     const start = this.audio.volume;
     const startedAt = performance.now();
     const fadeMs = target < start ? DUCK_ATTACK_MS : VOLUME_RELEASE_MS;
     const update = (now: number): void => {
-      const progress = smooth
-        ? Math.min(1, (now - startedAt) / fadeMs)
-        : 1;
+      const progress = Math.min(1, (now - startedAt) / fadeMs);
       const volume = start + (target - start) * progress;
       this.audio.volume = Math.min(1, Math.max(0, volume));
       this.youtubePlayer?.setVolume(Math.round(volume * 100));
