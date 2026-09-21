@@ -3558,8 +3558,17 @@ This keeps learning feedback readable for fast typists and prevents target dista
 
 Reveal duration remains controlled by the existing Shooter setting.
 
+Projectile animation must remain visible but responsive. Current rule:
+
+~~~text
+SHOT_MIN_SPEED = 1800 px/s
+SHOT_MAX_TRAVEL_SECONDS = 0.22
+~~~
+
+Shot speed scales with target distance so distant targets do not create a long visual delay.
+
 Current reviewed Vocabulary Shooter revision:
 
 ~~~text
-1c9b612f937fce4d059636fb726c108ea433f07f
+9f8afde6b1c1fdf6748928e8937c0d5e6f0d1917
 ~~~
