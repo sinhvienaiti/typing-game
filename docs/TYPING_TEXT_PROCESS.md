@@ -122,7 +122,7 @@ Platform CI for that integration passed.
 
 ## Corpus production status
 
-Current batch: 071-080.
+Current batch: 081-090.
 
 Completed and self-reviewed but not yet committed as production files at the time this process file was first created:
 
@@ -225,8 +225,20 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 069: 15 passages, 3930 words, per-level QA PASS.
 - Level 070: 15 passages, 3918 words, per-level QA PASS.
 - Batch 061-070: complete on checkpoint branch, batch QA PASS against Levels 001-070, 150 passages, 39581 words, duplicate/similarity warnings 0.
-- Levels 001-070 index: 70 levels, 1050 passages, 274485 words.
-- Next active level: 071.
+- Level 071: 15 passages, 3948 words, per-level QA PASS.
+- Level 072: 15 passages, 3968 words, per-level QA PASS.
+- Level 073: 15 passages, 3986 words, per-level QA PASS.
+- Level 074: 15 passages, 3980 words, per-level QA PASS.
+- Level 075: 15 passages, 3985 words, per-level QA PASS.
+- Level 076: 15 passages, 3983 words, per-level QA PASS.
+- Level 077: 15 passages, 4030 words, per-level QA PASS.
+- Level 078: 15 passages, 4048 words, per-level QA PASS.
+- Level 079: 15 passages, 4016 words, per-level QA PASS.
+- Level 080: 15 passages, 4072 words, per-level QA PASS.
+- Batch 071-080: complete on checkpoint branch, batch QA PASS against Levels 001-080, 150 passages, 40016 words, duplicate/similarity warnings 0.
+- Levels 001-080 index: 80 levels, 1200 passages, 314501 words.
+- Next active level: 081.
+
 
 - Main receives each completed 10-level batch: 001-010, 011-020, 021-030, and so on.
 
@@ -247,7 +259,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Batch 061-070 is complete on the checkpoint branch. Continue without stopping from Level 071 in Batch 071-080.
+Batch 071-080 is complete on the checkpoint branch. Continue without stopping from Level 081 in Batch 081-090.
 
 For each level:
 
