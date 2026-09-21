@@ -86,6 +86,7 @@ echo "[1/4] Stopping typing-game development servers..."
 bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3100
 
 echo "[2/4] Checking static builds..."
+node scripts/generate-music-index.mjs
 build_if_needed \
   "Portal" \
   "portal/dist/index.html" \
