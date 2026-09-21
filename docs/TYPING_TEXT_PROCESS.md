@@ -122,7 +122,7 @@ Platform CI for that integration passed.
 
 ## Corpus production status
 
-Current batch: 091-100.
+Current batch: complete. Corpus 001-100 is finished.
 
 Completed and self-reviewed but not yet committed as production files at the time this process file was first created:
 
@@ -247,8 +247,21 @@ Checkpoint branch: `feature/typing-text-corpus`.
 - Level 089: 15 passages, 4056 words, per-level QA PASS.
 - Level 090: 15 passages, 4067 words, per-level QA PASS.
 - Batch 081-090: complete on checkpoint branch, batch QA PASS against Levels 001-090, 150 passages, 40230 words, duplicate/similarity warnings 0.
-- Levels 001-090 index: 90 levels, 1350 passages, 354731 words.
-- Next active level: 091.
+- Level 091: 15 passages, 3990 words, per-level QA PASS.
+- Level 092: 15 passages, 4021 words, per-level QA PASS.
+- Level 093: 15 passages, 4038 words, per-level QA PASS.
+- Level 094: 15 passages, 4015 words, per-level QA PASS.
+- Level 095: 15 passages, 4072 words, per-level QA PASS.
+- Level 096: 15 passages, 4073 words, per-level QA PASS.
+- Level 097: 15 passages, 4069 words, per-level QA PASS.
+- Level 098: 15 passages, 4092 words, per-level QA PASS.
+- Level 099: 15 passages, 4103 words, per-level QA PASS.
+- Level 100: 15 passages, 4098 words, per-level QA PASS.
+- Batch 091-100: complete on checkpoint branch, batch QA PASS against Levels 001-100, 150 passages, 40571 words, duplicate/similarity warnings 0.
+- Corpus 001-100: COMPLETE, 100 levels, 1500 passages, 395302 words.
+- Full corpus duplicate sentence, repeated 8-word phrase, and 5-gram similarity review warnings: 0.
+- Next active level: none.
+
 
 
 
@@ -271,7 +284,7 @@ When continuing this work in another chat:
 
 ## Next action
 
-Batch 081-090 is complete on the checkpoint branch. Continue without stopping from Level 091 in Batch 091-100.
+Corpus 001-100 is complete on the checkpoint branch. There is no next active level. Future work should only reopen a completed level if QA identifies a concrete defect.
 
 For each level:
 
@@ -281,7 +294,7 @@ For each level:
 4. Keep completed level content prepared for the current ten-level batch.
 5. After all ten levels pass, run batch-wide QA and create one batch commit containing all ten level files, the updated index, and this process file.
 
-After all ten levels in the current batch pass per-level and batch-wide QA:
+When producing any future replacement batch after a concrete QA defect:
 
 1. Update the typing-text index.
 2. Update this process file with the completed range and QA totals.
