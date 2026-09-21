@@ -3771,3 +3771,43 @@ Current reviewed Recall revision:
 ~~~text
 c62a3ee9927fce9b27d7526df1972e1913866a83
 ~~~
+
+
+---
+
+# 85. Shared music Shuffle mode
+
+Shared background music supports:
+
+~~~text
+shuffle
+auto-next
+repeat-one
+~~~
+
+Shuffle is the default playback mode.
+
+Shuffle uses a bag instead of choosing a completely independent random track every time.
+
+Rules:
+
+~~~text
+playlist size = 0
+-> no playback
+
+playlist size = 1
+-> the only track may repeat
+
+playlist size >= 2
+-> do not immediately choose the current track
+-> play each shuffled remaining track before refilling the bag
+-> refill with all tracks except the current track
+~~~
+
+The bag contains the merged Local + YouTube music library.
+
+If Shuffle is active and no track is selected, Play automatically chooses a random first track.
+
+Legacy Music state created before Shuffle is migrated once from the old default `auto-next` to `shuffle`. A version marker preserves explicit future choices of Auto next.
+
+The Music transport button shows `Shuffle →` in Shuffle mode.
