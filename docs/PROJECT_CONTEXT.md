@@ -3462,3 +3462,46 @@ Authoritative design:
 ~~~text
 docs/design/KARAOKE_TYPING_GAME.md
 ~~~
+
+
+---
+
+# 79. Rapid pronunciation queue
+
+Browser TTS pronunciation for the vocabulary-based games must preserve rapid consecutive words.
+
+Affected child games:
+
+~~~text
+Vocabulary Shooter
+Recall Typing
+Monkeytype EN-VN per-word pronunciation
+~~~
+
+Required behavior:
+
+~~~text
+first word is still speaking
+-> second completed word is queued
+-> first finishes
+-> second is spoken
+~~~
+
+Per-word speech must not call `speechSynthesis.cancel()` before every `speak()`.
+
+Explicit lifecycle cleanup is different and must continue cancelling speech when leaving/resetting a run so old queued words do not leak into a new session.
+
+Current reviewed child revisions:
+
+~~~text
+monkeytype
+9e4090b6212b71479e78f06d6c5bc2497a4343fb
+
+vocab-shooter
+71e2db77f5ec5229caf2501e8b0d48a8fe6c2650
+
+recall-typing
+277607d75972c776985e910c475eb8da4b9223b2
+~~~
+
+Karaoke Typing is not part of this TTS rule because its audio source is the song/media player rather than per-word browser speech.
