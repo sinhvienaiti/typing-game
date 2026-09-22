@@ -3863,3 +3863,18 @@ Recall Typing or Karaoke Typing except where the Space Typing context explicitly
 shared parent-platform contract such as vocabulary, typing texts, shared music or Portal routing.
 
 The parent pins a tested child commit through the normal Git submodule workflow.
+
+Current post-Step-68 child checkpoint for the final platform integration pass:
+
+~~~text
+cba924d14b47613439ae5ee1ccc2b7ffa19a21d2
+~~~
+
+Space Typing requires these shared-data routes on its own internal origin in both Dev and Play nginx modes:
+
+~~~text
+/vocabulary/             -> shared/vocabulary/
+/shared/typing-texts/    -> shared/typing-texts/
+~~~
+
+Platform CI runs `pnpm validate:space-integration` to protect all existing game routes/origins while validating the Space Typing integration contract.
