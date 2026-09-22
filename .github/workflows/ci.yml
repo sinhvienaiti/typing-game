@@ -69,6 +69,9 @@ jobs:
       - name: Validate portal layout contract
         run: node scripts/validate-portal-layout.mjs
 
+      - name: Validate Space Typing platform integration
+        run: pnpm validate:space-integration
+
       - name: Validate data pipeline syntax
         run: |
           node --check scripts/prepare-vocabulary-candidates.mjs
@@ -79,6 +82,7 @@ jobs:
           node --check scripts/report-typing-text-coverage.mjs
           node --check scripts/generate-music-index.mjs
           node --check scripts/validate-portal-layout.mjs
+          node --check scripts/validate-space-integration.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
