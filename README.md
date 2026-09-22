@@ -1,6 +1,6 @@
 # Typing Game
 
-Local platform for Monkeytype, Vocabulary Shooter, Recall Typing, Karaoke Typing and future learning games.
+Local platform for Monkeytype, Vocabulary Shooter, Recall Typing, Karaoke Typing, Space Typing and future learning games.
 
 Each game is an independent Git repository mounted under `games/` as a submodule.
 
@@ -15,7 +15,9 @@ typing-game/
 └── games/
     ├── monkeytype/       -> sinhvienaiti/monkeytype
     ├── vocab-shooter/    -> sinhvienaiti/vocab-shooter
-    └── recall-typing/    -> sinhvienaiti/recall-typing
+    ├── recall-typing/    -> sinhvienaiti/recall-typing
+    ├── karaoke-typing/   -> sinhvienaiti/karaoke-typing
+    └── space-typing/     -> sinhvienaiti/space-typing
 ```
 
 ## URLs
@@ -26,6 +28,7 @@ https://typing-game.local/monkeytype
 https://typing-game.local/vocab-shooter
 https://typing-game.local/recall-typing
 https://typing-game.local/karaoke-typing
+https://typing-game.local/space-typing
 ```
 
 Internal origins:
@@ -35,6 +38,7 @@ https://monkeytype.typing-game.local
 https://shooter.typing-game.local
 https://recall.typing-game.local
 https://karaoke.typing-game.local
+https://space.typing-game.local
 ```
 
 ## First setup
@@ -75,6 +79,7 @@ Focused runs:
 ./dev.sh shooter
 ./dev.sh recall
 ./dev.sh karaoke
+./dev.sh space
 ```
 
 Explicit all:
@@ -83,7 +88,7 @@ Explicit all:
 ./dev.sh all
 ```
 
-Aliases `vocab-shooter`, `recall-typing` and `karaoke-typing` are also accepted.
+Aliases `vocab-shooter`, `recall-typing`, `karaoke-typing` and `space-typing` are also accepted.
 
 The lower-level commands remain available when needed:
 
@@ -94,6 +99,7 @@ pnpm dev:monkeytype
 pnpm dev:shooter
 pnpm dev:recall
 pnpm dev:karaoke
+pnpm dev:space
 ```
 
 ## Daily / Play mode
