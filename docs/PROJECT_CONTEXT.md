@@ -3864,11 +3864,13 @@ shared parent-platform contract such as vocabulary, typing texts, shared music o
 
 The parent pins a tested child commit through the normal Git submodule workflow.
 
-Current post-Step-68 child checkpoint for the final platform integration pass:
+Current reviewed child gameplay checkpoint after Review Pass #1 and Review Pass #2:
 
 ~~~text
-cba924d14b47613439ae5ee1ccc2b7ffa19a21d2
+9b9367479b0d47216cb7a13a859a5c38f0511dc6
 ~~~
+
+Child push CI #131 passed on this exact checkpoint before the final parent pin update.
 
 Space Typing requires these shared-data routes on its own internal origin in both Dev and Play nginx modes:
 
