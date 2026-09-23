@@ -22,6 +22,9 @@ jobs:
       - name: Initialize public CI submodules
         run: git submodule update --init games/monkeytype games/vocab-shooter games/recall-typing games/space-typing
 
+      - name: Validate Monkeytype local Play build environment
+        run: node scripts/validate-monkeytype-play-mode.mjs
+
       - name: Validate Karaoke Typing gitlink
         run: |
           git submodule status games/karaoke-typing
