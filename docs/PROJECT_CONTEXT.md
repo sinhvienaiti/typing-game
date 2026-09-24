@@ -119,7 +119,19 @@ Sentence Builder checkpoint:
 - child revision: `7b939dec3b1c913e048c62a0876b489e4ba067ac`;
 - Custom EN-VN CI run 36008893127 PASS.
 
-Next active milestone: **L09 — Context / Cloze**.
+L09 Context / Cloze is complete.
+
+Context/Cloze checkpoint:
+
+- Monkeytype derives contextual exercises directly from shared typing-text passages and shared grammar signal metadata;
+- passage target words generate vocabulary cloze items; grammar signal tokens generate grammar cloze items;
+- no duplicate context corpus was created;
+- one bounded session interleaves vocabulary and grammar exercises with reveal-letter hints;
+- cloze events distinguish vocabulary spelling mistakes, grammar wrong-form mistakes and time-group wrong-tense mistakes;
+- child revision: `626b51766850f9de712ec0ae4c1fea2efaf7aba9`;
+- Custom EN-VN CI run 36010643624 PASS.
+
+Next active milestone: **L10 — Monkey Smart Review**.
 
 ---
 
