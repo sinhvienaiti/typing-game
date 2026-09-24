@@ -264,6 +264,17 @@ export function parseReviewPlan(input) {
     };
   });
 
+  for (const [index, item] of items.entries()) {
+    if (
+      item.compatibleGames.length === 0 ||
+      !supports(options.game, item, options.goal)
+    ) {
+      throw new TypeError(
+        `review item ${index} is incompatible with the stored plan`,
+      );
+    }
+  }
+
   const totalCandidates = requiredInteger(
     input.totalCandidates,
     "totalCandidates",
