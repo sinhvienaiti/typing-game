@@ -2,7 +2,7 @@
 
 ## Status
 
-**L02 COMPLETE / L03 NEXT**
+**L03 COMPLETE / L04 NEXT**
 
 Agreed on 2026-09-24.
 
