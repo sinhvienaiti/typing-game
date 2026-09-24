@@ -219,7 +219,20 @@ Mixed Review checkpoint:
 - completion time is deterministic from the persisted event timestamp;
 - Platform CI run 36025360289 PASS.
 
-Next active milestone: **L16 — Adaptive Mix**.
+L16 Adaptive Mix is complete.
+
+Adaptive Mix checkpoint:
+
+- Adaptive Mix is separate from neutral Mixed Review;
+- Quick Smart Review now defaults to Adaptive Mix;
+- review plans carry only bounded derived weakness signals, not unbounded raw history;
+- deterministic routing covers spelling, listening/replay, slow recognition, stale vocabulary, grammar and sentence/context weaknesses;
+- every assignment stays within the item's compatibility set and carries a visible reason;
+- Adaptive Mix reuses L15 concrete-game segments, persistence and child adapters;
+- thresholds are explicit/tested: slow response >= 3500 ms, stale exposure >= 7 days;
+- Platform CI run 36026159083 PASS.
+
+Next active milestone: **L17 — Export / Import / Reset**.
 
 ---
 
