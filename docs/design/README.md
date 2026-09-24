@@ -4,6 +4,7 @@ This folder contains design decisions that are larger than a daily changelog ent
 
 Current documents:
 
+- [Shared Learning System + Monkey Learning Expansion — Master Plan](./SHARED_LEARNING_SYSTEM_MASTER_PLAN.md)
 - [Vocabulary Shooter - Game Modes and Engagement Design](./VOCAB_SHOOTER_GAME_MODES.md)
 - [Monkeytype - Corrected Error Accuracy](./MONKEYTYPE_CORRECTED_ERROR_ACCURACY.md)
 - [Monkeytype - Optional Recall Typing Mode](./MONKEYTYPE_RECALL_MODE.md)
