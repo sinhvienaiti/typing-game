@@ -91,7 +91,11 @@ New metadata lives beside, not inside, the 18k level records:
 `shared/vocabulary/grammar/`
 `shared/vocabulary/curriculum/`
 
-Topic documents reference vocabulary IDs.
+Generated curriculum references use the existing normalized English lookup key plus its level hint, for example `{ "key": "airport", "level": 12 }`.
+
+This is intentionally more stable than persisting positional `Lxxx-xxx` IDs in curriculum metadata: a trusted full-library rebuild may rebalance entries across levels and therefore change positional IDs, while the normalized English key is already the canonical key used by `lookup.json`.
+
+The referenced level file remains authoritative for the actual `id/en/vi/ipa` record. Curriculum files never duplicate Vietnamese meanings or IPA.
 
 A single word may belong to multiple topics and may have different sense/POS uses.
 
@@ -315,7 +319,8 @@ Proposed topic document:
   "levels": ["A1", "A2", "B1"],
   "entries": [
     {
-      "vocabularyId": "Lxxx-xxx",
+      "key": "airport",
+      "level": 12,
       "roles": ["noun"],
       "priority": "core"
     }
@@ -327,9 +332,9 @@ Do not copy EN/VI/IPA into topic files.
 
 Generated indexes provide reverse lookup:
 
-- vocabulary ID -> topics
-- topic -> vocabulary IDs
-- POS -> vocabulary IDs
+- normalized vocabulary key -> topics
+- topic -> normalized vocabulary references + level hints
+- POS -> normalized vocabulary references + level hints
 - grammar module -> vocabulary/topic references
 
 ## 10. Coverage workflow
@@ -339,7 +344,7 @@ Generated indexes provide reverse lookup:
 3. Seed topic concepts from the educational references.
 4. Match existing vocabulary first.
 5. Measure topic coverage.
-6. Identify useful missing headwords/phrases.
+6. Identify useful missing headwords/phrases in a deterministic coverage-gap report.
 7. Only then run missing candidates through the existing trusted EN/VI/IPA/provenance pipeline.
 8. Never invent filler merely to make topic counts equal.
 9. Run validation and statistical spot checks.
