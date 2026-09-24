@@ -2,7 +2,7 @@
 
 ## Status
 
-**L00 COMPLETE / L01 NEXT**
+**L01 COMPLETE / L02 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1286,15 +1286,26 @@ The parent remains the only canonical calculator of mastery/review priority. Chi
 
 ## L01 — Shared Learning Core
 
-Implement in parent:
+**Status: COMPLETE — 2026-09-24**
 
-- learning event contract,
-- local persistent profile,
-- vocabulary/grammar/sentence schemas,
-- deterministic mastery calculation,
-- review-priority calculation,
-- bounded mistake history,
-- tests.
+Implemented in parent:
+
+- `shared/learning/core.mjs` as the canonical Learning Event/Profile v1 engine;
+- shared vocabulary-key normalization matching the existing 18k library contract;
+- vocabulary / grammar / sentence aggregate records;
+- deterministic mastery v1 and review-priority v1 calculations;
+- deterministic next-review timestamps;
+- bounded mistake and sentence-answer histories (8 samples per item);
+- parent-owned IndexedDB persistence in `shared/learning/browser-store.mjs`;
+- serialized store writes so concurrent operations cannot overwrite one another;
+- root `learning:check` / `learning:test` scripts;
+- Platform CI learning-core gate;
+- focused Node tests for validation, normalization, aggregates, bounded history, grammar classification and priority ordering.
+
+Local verification before push: 7/7 tests PASS.
+
+The core records completed learning attempts, not physical keystrokes, so it does not introduce per-key synchronous profile serialization.
+
 
 ## L02 — Parent messaging bridge
 
