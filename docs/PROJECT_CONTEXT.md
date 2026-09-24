@@ -67,7 +67,20 @@ Review orchestration checkpoint:
 - At Risk calculation is shared with the Dashboard rather than duplicated;
 - Platform CI #292 PASS.
 
-Next active milestone: **L05 — Monkeytype Vietnamese IME-aware input**.
+L05 Monkeytype Vietnamese IME-aware input is complete.
+
+IME checkpoint:
+
+- Input Language setting: Auto / English / Vietnamese;
+- existing browser composition lifecycle is reused; intermediate IME/Telex composition is not scored;
+- committed Vietnamese text + target comparison use Unicode NFC;
+- no custom Telex engine was introduced;
+- committed multi-character text is scored by Unicode code point;
+- English/direct input regression behavior remains unchanged outside Vietnamese handling;
+- child revision: `dd700f3e4f0fd33c6ca1259d4987bdfcc4465305`;
+- Custom EN-VN CI run 35999852048 PASS (lint, stylelint, local-static build, full frontend tests).
+
+Next active milestone: **L06 — Monkeytype Learning Memory integration**.
 
 ---
 
