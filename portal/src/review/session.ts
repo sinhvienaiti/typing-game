@@ -545,7 +545,8 @@ export class SmartReviewFlow {
 
     if (
       plan.options.game === "monkeytype" ||
-      plan.options.game === "recall-typing"
+      plan.options.game === "recall-typing" ||
+      plan.options.game === "vocab-shooter"
     ) {
       const gameLabel =
         GAME_LABELS[plan.options.game] ?? plan.options.game;
