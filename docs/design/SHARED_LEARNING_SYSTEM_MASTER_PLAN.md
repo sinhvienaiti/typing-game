@@ -2,7 +2,7 @@
 
 ## Status
 
-**L15 COMPLETE / L16 NEXT**
+**L16 COMPLETE / L17 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1774,9 +1774,38 @@ Verification:
 
 ## L16 — Adaptive Mix
 
-Use learning state to choose the activity best suited to the weakness.
+**Status: COMPLETE — 2026-09-24**
 
-Keep the algorithm transparent and deterministic enough to test.
+Adaptive Mix is implemented as a separate parent-owned orchestration mode; neutral Mixed Review remains available unchanged.
+
+Implemented:
+
+- Review Builder now offers both `Mixed Review` and `Adaptive Mix`;
+- Quick Smart Review uses Adaptive Mix by default while keeping the existing 15-minute / Due Now / mixed-content contract;
+- ReviewPlan items carry bounded derived weakness signals only: spelling-error count, listening-error count, context-error count, grammar-error count and stale-days;
+- raw unbounded learning history is not copied into the plan;
+- the adaptive selector is deterministic and emits an explicit human-readable reason for every assignment;
+- fixed routing signals:
+  - vocabulary spelling errors → Monkeytype direct typing;
+  - listening/replay weakness → Recall Typing audio recall;
+  - average response >= 3500 ms → Vocabulary Shooter recognition pressure;
+  - vocabulary not seen for >= 7 days → Space Typing repeated game exposure;
+  - grammar entities → Monkeytype Sentence Builder / Cloze-capable practice;
+  - sentence listening/replay weakness → Karaoke Typing contextual listen-and-type;
+  - low mastery / hint history → focused Recall Typing support;
+- only games already present in the item's compatibility set can receive the item;
+- score ties use a fixed game order, so the same learning state always produces the same assignment;
+- Adaptive Mix produces the same concrete segment shape used by L15 and therefore reuses the same persisted cross-game progress state and child adapters;
+- segment UI exposes a concise `Why` explanation for the active adaptive assignment;
+- pseudo modes `mixed-review` and `adaptive-mix` are excluded from concrete child-game segment types.
+
+Verification:
+
+- unit tests cover spelling, listening, slow recognition, stale exposure, grammar, contextual listening and deterministic grouping;
+- Quick Review test verifies Adaptive Mix is now the default and weakness signals are present;
+- Platform CI run 36026159083: PASS;
+- shared-learning tests/checks, Space tests/build, Recall tests/build and Portal TypeScript/Vite build PASS.
+
 
 ## L17 — Export / Import / Reset
 
