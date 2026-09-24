@@ -114,6 +114,43 @@ test("query parser enforces bounded pagination, filters and sort values", () => 
   );
 });
 
+test("expanded dashboard filters remain bounded and validated", () => {
+  const parsed = parseLearningQuery({
+    entityType: "vocabulary",
+    filters: {
+      lastSeenFrom: "2026-09-01T00:00:00.000Z",
+      lastSeenTo: "2026-09-30T23:59:59.999Z",
+      mistakeMin: 2,
+      hintMin: 1,
+      replayMin: 0,
+      responseMsMin: 5000,
+      correctStreakMax: 2,
+    },
+  });
+
+  assert.equal(parsed.filters.mistakeMin, 2);
+  assert.equal(parsed.filters.responseMsMin, 5000);
+  assert.throws(
+    () =>
+      parseLearningQuery({
+        entityType: "vocabulary",
+        filters: {
+          lastSeenFrom: "2026-09-30T00:00:00.000Z",
+          lastSeenTo: "2026-09-01T00:00:00.000Z",
+        },
+      }),
+    /lastSeenFrom/,
+  );
+  assert.throws(
+    () =>
+      parseLearningQuery({
+        entityType: "vocabulary",
+        filters: { responseMsMin: 700_000 },
+      }),
+    /responseMsMin/,
+  );
+});
+
 test("batched learning events preserve every event in order", () => {
   const events = [
     attempt("alpha", "correct", "2026-09-24T09:00:00.000Z"),
