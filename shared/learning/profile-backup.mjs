@@ -1,6 +1,7 @@
 import {
   createEmptyLearningProfile,
   migrateLearningProfile,
+  normalizeVocabularyKey,
 } from "./core.mjs";
 
 export const LEARNING_BACKUP_FORMAT = "typing-game-learning-profile";
@@ -125,10 +126,29 @@ function validateRecord(entityType, key, record) {
 }
 
 export function validateLearningProfile(profileInput) {
-  const profile = migrateLearningProfile(profileInput);
-  if (!Number.isFinite(Date.parse(profile.updatedAt))) {
+  if (!plainObject(profileInput)) {
+    throw new TypeError("learning profile must be an object");
+  }
+  if (profileInput.version !== 1) {
+    throw new TypeError(
+      `unsupported learning profile version: ${String(profileInput.version)}`,
+    );
+  }
+  if (
+    typeof profileInput.updatedAt !== "string" ||
+    !Number.isFinite(Date.parse(profileInput.updatedAt))
+  ) {
     throw new TypeError("learning profile updatedAt is invalid");
   }
+  for (const collectionName of ["vocabulary", "grammar", "sentences"]) {
+    if (!plainObject(profileInput[collectionName])) {
+      throw new TypeError(
+        `learning profile ${collectionName} is required`,
+      );
+    }
+  }
+
+  const profile = migrateLearningProfile(profileInput);
 
   for (const [entityType, collectionName] of [
     ["vocabulary", "vocabulary"],
@@ -140,8 +160,14 @@ export function validateLearningProfile(profileInput) {
       throw new TypeError(`learning profile ${collectionName} is invalid`);
     }
     for (const [key, record] of Object.entries(collection)) {
-      if (key.normalize("NFC").trim() !== key || key === "") {
-        throw new TypeError("learning profile contains an invalid entity key");
+      const canonicalKey =
+        entityType === "vocabulary"
+          ? normalizeVocabularyKey(key)
+          : key.normalize("NFC").trim();
+      if (canonicalKey !== key || key === "") {
+        throw new TypeError(
+          "learning profile contains a non-canonical entity key",
+        );
       }
       validateRecord(entityType, key, record);
     }
