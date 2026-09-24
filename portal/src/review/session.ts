@@ -9,6 +9,11 @@ import {
   type ReviewPlan,
   type ReviewPlanInput,
 } from "../../../shared/learning/review-session.mjs";
+import {
+  activeMixedReviewPlan,
+  clearMixedReview,
+  ensureMixedReview,
+} from "./mixed";
 
 type Navigate = (url: string) => void;
 type StartReview = (plan: ReviewPlan) => Promise<void>;
@@ -117,6 +122,7 @@ function onlyRequestedItem(
 }
 
 function storeSession(plan: ReviewPlan): void {
+  clearMixedReview();
   sessionStorage.setItem(
     SESSION_KEY,
     JSON.stringify({
@@ -454,6 +460,11 @@ export class SmartReviewFlow {
       return main;
     }
 
+    const mixedState =
+      plan.options.game === "mixed-review"
+        ? ensureMixedReview(plan)
+        : null;
+
     const heading = element("section", "review-flow-heading");
     const copy = element("div");
     copy.append(
@@ -482,6 +493,14 @@ export class SmartReviewFlow {
       ["Goal", plan.options.goal],
       ["Game", GAME_LABELS[plan.options.game] ?? plan.options.game],
       ["Items", String(plan.selectedCount)],
+      ...(mixedState === null
+        ? []
+        : [[
+            "Segments",
+            mixedState.completedSegments +
+              "/" +
+              mixedState.session.segments.length,
+          ]]),
     ]) {
       const box = element("div");
       box.append(
@@ -492,14 +511,34 @@ export class SmartReviewFlow {
     }
 
     const notice = element("div", "review-session-notice");
-    notice.append(
-      element("strong", undefined, "Session core is ready"),
-      element(
-        "p",
-        undefined,
-        "This parent plan owns ordering and compatibility. Each child-game milestone will attach its adapter to consume this exact queue without creating a second Smart Review engine.",
-      ),
-    );
+    if (mixedState !== null) {
+      const active = mixedState.activeSegment;
+      notice.append(
+        element(
+          "strong",
+          undefined,
+          active === null
+            ? "Mixed Review complete"
+            : "Mixed Review progress saved",
+        ),
+        element(
+          "p",
+          undefined,
+          active === null
+            ? `All ${mixedState.session.totalItems} items have produced persisted learning evidence.`
+            : `Next: ${GAME_LABELS[active.game] ?? active.game} · ${active.items.length} item${active.items.length === 1 ? "" : "s"}. Progress is stored by the parent and survives game transitions.`,
+        ),
+      );
+    } else {
+      notice.append(
+        element("strong", undefined, "Session core is ready"),
+        element(
+          "p",
+          undefined,
+          "The parent owns ordering, compatibility and learning state. The selected game consumes this bounded queue without creating a second Smart Review engine.",
+        ),
+      );
+    }
 
     const queue = element("div", "review-session-queue");
     queue.append(element("h2", undefined, "Review queue"));
@@ -543,7 +582,43 @@ export class SmartReviewFlow {
     rebuild.addEventListener("click", () => this.#navigate("/review/build"));
     footer.append(dashboard, rebuild);
 
-    if (
+    if (plan.options.game === "mixed-review") {
+      const segmentPlan = activeMixedReviewPlan(plan);
+      const active = mixedState?.activeSegment ?? null;
+      if (segmentPlan !== null && active !== null) {
+        const gameLabel = GAME_LABELS[active.game] ?? active.game;
+        const start = element(
+          "button",
+          "review-primary",
+          `Continue · ${gameLabel} · ${active.items.length}`,
+        );
+        start.addEventListener("click", () => {
+          start.disabled = true;
+          start.textContent = `Preparing ${gameLabel}…`;
+          void this.#startReview(segmentPlan).catch((error: unknown) => {
+            start.disabled = false;
+            start.textContent =
+              `Continue · ${gameLabel} · ${active.items.length}`;
+            notice.classList.add("error");
+            notice.replaceChildren(
+              element(
+                "strong",
+                undefined,
+                `Could not start ${gameLabel} segment`,
+              ),
+              element(
+                "p",
+                undefined,
+                error instanceof Error
+                  ? error.message
+                  : "The Mixed Review segment could not be prepared.",
+              ),
+            );
+          });
+        });
+        footer.append(start);
+      }
+    } else if (
       plan.options.game === "monkeytype" ||
       plan.options.game === "recall-typing" ||
       plan.options.game === "vocab-shooter" ||
