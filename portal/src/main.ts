@@ -34,7 +34,10 @@ import {
   queueKaraokeReview,
   readPendingKaraokeReview,
 } from "./review/karaoke-adapter";
-import { recordMixedLearningEvent } from "./review/mixed";
+import {
+  cancelMixedReviewSegmentStart,
+  recordMixedLearningEvent,
+} from "./review/mixed";
 import type { LearningEvent } from "../../shared/learning/core.mjs";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
@@ -119,6 +122,23 @@ const learningMaintenance = new LearningMaintenancePage(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
+}
+
+function clearPendingReviewForGame(
+  gameId: string,
+  requestId?: string,
+): void {
+  if (gameId === "monkeytype") {
+    clearPendingMonkeyReview(requestId);
+  } else if (gameId === "recall-typing") {
+    clearPendingRecallReview(requestId);
+  } else if (gameId === "vocab-shooter") {
+    clearPendingShooterReview(requestId);
+  } else if (gameId === "space-typing") {
+    clearPendingSpaceReview(requestId);
+  } else if (gameId === "karaoke-typing") {
+    clearPendingKaraokeReview(requestId);
+  }
 }
 
 function navigate(path: string): void {
@@ -342,6 +362,11 @@ function renderMissing(): HTMLElement {
 
 function renderRoute(): void {
   const path = normalizedPath();
+  const previousGame = currentGame;
+  if (previousGame !== null && path !== previousGame.path) {
+    clearPendingReviewForGame(previousGame.id);
+    cancelMixedReviewSegmentStart();
+  }
   updateNavigation(path);
 
   music.setSpeechActive(false);
@@ -425,16 +450,9 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
       pending !== null &&
       pending.requestId === requestId
     ) {
-      if (currentGame.id === "monkeytype") {
-        clearPendingMonkeyReview(requestId);
-      } else if (currentGame.id === "recall-typing") {
-        clearPendingRecallReview(requestId);
-      } else if (currentGame.id === "vocab-shooter") {
-        clearPendingShooterReview(requestId);
-      } else if (currentGame.id === "space-typing") {
-        clearPendingSpaceReview(requestId);
-      } else {
-        clearPendingKaraokeReview(requestId);
+      if (data["type"] === "typing-game:learning:v1:review-error") {
+        clearPendingReviewForGame(currentGame.id, requestId);
+        cancelMixedReviewSegmentStart();
       }
 
       if (currentReviewStatus !== null) {
