@@ -40,6 +40,10 @@ import {
 } from "./review/mixed";
 import type { LearningEvent } from "../../shared/learning/core.mjs";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
+import {
+  pendingReviewAction,
+  shouldAbandonReviewOnRouteChange,
+} from "../../shared/learning/review-lifecycle.mjs";
 
 type Game = {
   id: string;
@@ -363,7 +367,10 @@ function renderMissing(): HTMLElement {
 function renderRoute(): void {
   const path = normalizedPath();
   const previousGame = currentGame;
-  if (previousGame !== null && path !== previousGame.path) {
+  if (
+    previousGame !== null &&
+    shouldAbandonReviewOnRouteChange(previousGame.path, path)
+  ) {
     clearPendingReviewForGame(previousGame.id);
     cancelMixedReviewSegmentStart();
   }
@@ -450,7 +457,8 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
       pending !== null &&
       pending.requestId === requestId
     ) {
-      if (data["type"] === "typing-game:learning:v1:review-error") {
+      const pendingAction = pendingReviewAction(data["type"]);
+      if (pendingAction === "clear") {
         clearPendingReviewForGame(currentGame.id, requestId);
         cancelMixedReviewSegmentStart();
       }
