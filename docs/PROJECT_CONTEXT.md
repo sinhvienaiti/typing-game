@@ -53,7 +53,21 @@ Dashboard checkpoint:
 - vocabulary enrichment remains lazy and canonical EN/VI/IPA stays in the shared 18k library;
 - Platform CI #277 PASS.
 
-Next active milestone: **L04 — Smart Review Builder + Session Core**.
+L04 Smart Review Builder + Session Core is complete.
+
+Review orchestration checkpoint:
+
+- canonical planner: `shared/learning/review-session.mjs`;
+- Due / Today’s Mistakes / 7 Days / 30 Days / Weakest / At Risk / Custom;
+- content / count / source / goal / compatible-game selection;
+- Quick Smart Review has a 15-minute target;
+- Portal routes: `/review/build` and `/review/session`;
+- current review plan is parent-owned and session-persisted;
+- child adapters remain intentionally deferred to their integration milestones;
+- At Risk calculation is shared with the Dashboard rather than duplicated;
+- Platform CI #292 PASS.
+
+Next active milestone: **L05 — Monkeytype Vietnamese IME-aware input**.
 
 ---
 
