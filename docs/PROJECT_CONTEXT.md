@@ -106,7 +106,20 @@ Monkey learning checkpoint:
 - child revision: `637f607a23a44a62c4c1392297b7526526b34f27`;
 - Custom EN-VN CI run 36004240518 PASS.
 
-Next active milestone: **L08 — Sentence Builder V1**.
+L08 Sentence Builder V1 is complete.
+
+Sentence Builder checkpoint:
+
+- dedicated Monkeytype sentence-builder mode with shuffled word units + direct input;
+- multiple `acceptedAnswers[]` are accepted instead of one canonical-only answer;
+- Easy / Normal / Hard / Extreme difficulty presets are implemented;
+- reveal-next-word / grammar / structure hints are available;
+- authored grammar mistakes can be mapped to structured error types, with safe generic fallbacks;
+- each submission emits sentence state plus optional grammar state through the parent learning contract;
+- child revision: `7b939dec3b1c913e048c62a0876b489e4ba067ac`;
+- Custom EN-VN CI run 36008893127 PASS.
+
+Next active milestone: **L09 — Context / Cloze**.
 
 ---
 
