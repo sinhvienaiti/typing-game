@@ -190,7 +190,22 @@ Space Typing shared-learning checkpoint:
 - Space CI run 36022862848 PASS;
 - parent Platform CI run 36023259689 PASS.
 
-Next active milestone: **L14 — Karaoke Typing integration**.
+L14 Karaoke Typing integration is complete.
+
+Karaoke shared-learning checkpoint:
+
+- normal Karaoke records learning at word/lyric-line boundaries rather than per key;
+- reliable word-token mistakes become vocabulary evidence without penalizing unseen trailing words;
+- finalized lyric lines become sentence/context evidence with expected/typed text and timing;
+- parent Smart Review supports Karaoke Vocabulary/Sentence with Remember Words / Listening / Sentence Building / Mixed goals;
+- review context reuses retained expected lyric/sentence text where available and never fabricates missing context;
+- bounded no-media Smart Review reuses the existing GameEngine; Listening uses TTS with explicit replay tracking;
+- normal YouTube/local-media + LRC behavior remains intact;
+- child revision: `f2bd7ae55143d98cd270535d6e6c06d87a8742ec`;
+- Karaoke CI run 36024029825 PASS;
+- parent Platform CI run 36024382889 PASS.
+
+Next active milestone: **L15 — Mixed Review**.
 
 ---
 
