@@ -71,6 +71,7 @@ export function buildVocabularyCurriculum(source, lookup) {
         group: group.id,
         levels: topic.levels ?? [],
         count: entries.length,
+        keys: entries.map((entry) => entry.key),
       });
       topicCoverage.push({
         id: topic.id,
