@@ -43,7 +43,7 @@
     "dev:space": "bash scripts/cleanup-dev-ports.sh 3004 3100 && concurrently -k -n portal,space \"pnpm dev:portal\" \"pnpm dev:space:app\"",
     "dev:space:app": "pnpm --dir games/space-typing dev",
     "build:space": "pnpm --dir games/space-typing build",
-    "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs",
+    "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs",
     "learning:test": "node --test shared/learning/*.test.mjs"
   },
   "devDependencies": {
