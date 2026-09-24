@@ -913,6 +913,247 @@ Add lightweight contract tests/source assertions for these auxiliary message pat
 
 ---
 
+
+## F18 — Space Typing rejects valid v26 backup files even though v26 migration exists
+
+**Severity:** High  
+**Repository:** `sinhvienaiti/space-typing`  
+**Files:** `src/persistence/backup.ts`, `src/persistence/player-save.ts`  
+**Function/module:** `parsePlayerSaveJson()`, `migratePlayerSave()`
+
+### Problem
+
+The current player-save schema is v27 and `migratePlayerSave()` contains an explicit `raw.version === 26` migration path.
+
+However, `parsePlayerSaveJson()` accepts versions 1–25 and the current `PLAYER_SAVE_VERSION` only. Because the current version is 27, v26 is omitted from the accepted-version condition and is rejected as unsupported before migration can run.
+
+### Condition
+
+A user has a legitimate Space Typing backup exported while the save schema was v26 and attempts to restore it after updating to the current v27 build.
+
+### Impact
+
+A valid recent backup cannot be restored through the supported import UI.
+
+This directly weakens the backup/recovery path and can strand user progression even though the migration implementation required to recover it already exists.
+
+### Root cause
+
+Supported import versions are maintained as a long manual boolean chain separate from the migration switch. The two lists drifted when v27 was introduced.
+
+### Proposed fix
+
+Make backup-version acceptance and migration support share one source of truth.
+
+At minimum:
+
+- add v26 to the accepted backup versions;
+- validate every v26 field required by `PlayerSaveV26`, including equipment, progression, currencies, checkpoint/recovery state, route/upgrades/relic/codex/ascension/hotbar;
+- migrate it through the existing v26 → v27 path.
+
+Prefer replacing the repeated `version === ...` chains with explicit schema/version descriptors so a newly added migration cannot silently be omitted from backup import.
+
+Add regression tests that construct a valid v26 backup, import it, assert `ok: true`, assert `migrated: true`, and verify the resulting save is v27 with the original persistent state preserved.
+
+---
+
+## F19 — Space Typing backup validation has schema holes for v21 and v22
+
+**Severity:** High  
+**Repository:** `sinhvienaiti/space-typing`  
+**Files:** `src/persistence/backup.ts`, `src/persistence/player-save.ts`
+
+### Problem
+
+The backup parser accepts v21 and v22, but the per-field validation chains do not consistently include those versions.
+
+The mismatch is especially severe for v21:
+
+- `PlayerSaveV21` contains inventory, equipment, support spells, characters, luck pity, hidden discovery, credits, progression, expansion currencies, campaign expansion, checkpoint, crash recovery, stage-entry snapshot, shops and route;
+- the backup parser validates campaign and route for v21, while many of those other required fields are skipped.
+
+v22 is better covered but still has holes; for example current equipment, progression, expansion currencies, campaign expansion and shops are not all validated in the same way as the surrounding save versions.
+
+After those gaps, `migratePlayerSave()` sanitizes the raw values.
+
+### Condition
+
+A v21/v22 backup is syntactically valid JSON and has a valid campaign/required checked fields, but one of the skipped persistent-state fields is malformed or corrupted.
+
+### Impact
+
+Instead of rejecting the damaged backup before replacement, import can accept it and silently sanitize/reset part of the user's persistent state.
+
+That creates a data-loss mode in the recovery feature itself.
+
+### Root cause
+
+Each field owns a hand-maintained list of schema versions. Version additions were not applied consistently across every validation branch.
+
+### Proposed fix
+
+Define validation by schema version rather than repeated ad-hoc version lists.
+
+For each historical version:
+
+1. validate exactly the fields that version declares;
+2. reject malformed required fields;
+3. only then migrate/sanitize known-valid legacy shape.
+
+Add focused corruption fixtures for v21 and v22 covering at least inventory, equipment, support/characters, currencies/progression, checkpoint/recovery snapshots and shops. The expected result for malformed required data must be `ok: false`, not silent defaulting.
+
+---
+
+## F20 — Monkeytype dynamic word generation can erase an in-progress multi-word Learning Memory attempt
+
+**Severity:** High  
+**Repository:** `sinhvienaiti/monkeytype`  
+**Files:** `frontend/src/ts/learning/learning-memory.ts`, `frontend/src/ts/input/helpers/word-navigation.ts`, `frontend/src/ts/test/test-logic.ts`
+
+### Problem
+
+`learning-memory.ts` caches dictionary matches by the current `TestWords.words.length`.
+
+Whenever the word count changes, `rebuildMatchesIfNeeded()` rebuilds the maps **and resets `attemptStates` to a new empty Map**.
+
+A multi-word learning match intentionally stores partial state after the first component word and emits only after the last component word.
+
+But `goToNextWord()` calls `TestLogic.addWord()` between word completions. In long/custom-time tests the generator maintains the ahead buffer by appending words, which changes `TestWords.words.length`.
+
+Therefore an in-progress phrase can be reset between its component words.
+
+### Condition
+
+A dictionary phrase spans multiple Monkeytype words and the dynamic word generator appends another future word after the first phrase component is completed but before the final component is completed.
+
+### Impact
+
+The emitted phrase Learning Event can lose state from the earlier component words:
+
+- `userAnswer` can contain only the final component;
+- an error on the first component can be forgotten and the phrase can be reported correct;
+- hint/replay flags can be lost;
+- `responseMs` can be lost because `presentedAt` was reset.
+
+This pollutes Shared Learning mastery/review data while the existing unit test still passes because its mocked word list length stays static.
+
+### Root cause
+
+Match-cache invalidation and active-attempt lifetime are coupled. A harmless append to the future word buffer is treated like a full learning-session reset.
+
+### Proposed fix
+
+Separate these lifecycles:
+
+- cache the parsed dictionary independently by dictionary raw text;
+- when the word list grows, update/rebuild match maps without clearing active attempt state;
+- preserve `AttemptState` for still-valid match keys;
+- clear attempt state only on actual test restart, dictionary/source replacement, or a match that genuinely became invalid.
+
+Add a regression test that:
+
+1. starts a two-word phrase attempt;
+2. records the first component with an error/hint/timestamp;
+3. simulates appending an unrelated future word so `TestWords.words.length` changes;
+4. completes the second component;
+5. asserts one phrase event still contains both user parts, the wrong result, hint/replay state and original response timing.
+
+---
+
+## F21 — Monkeytype EN-VN matching performs repeated full rescans as the word buffer grows
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/monkeytype`  
+**Files:** `frontend/src/ts/test/test-ui.ts`, `frontend/src/ts/learning/learning-memory.ts`, `frontend/src/ts/custom/en-vn-translation/dictionary.ts`
+
+### Problem
+
+Two custom paths repeatedly rebuild phrase matching over the complete growing `TestWords.words` array:
+
+- `getRecallTargetInfo()` reparses the active dictionary and calls `findDictionaryMatches()` over every generated word each time `TestUI.addWord()` renders an appended word;
+- `rebuildMatchesIfNeeded()` does another full parse/full scan whenever `TestWords.words.length` changes.
+
+`TestWords.words` only grows during a test; it is not truncated as old words leave the visible area.
+
+### Condition
+
+A long custom/time learning session keeps generating one or more future words while EN-VN learning/recall/listen behavior is active.
+
+### Impact
+
+Matching work grows with the total historical word count rather than the small active/ahead window.
+
+Across a long run this becomes quadratic-style repeated work and unnecessary allocation/parsing, increasing the chance of typing/render stutter exactly in the modes that add translation/recall UI.
+
+### Root cause
+
+The implementation uses whole-test recomputation for an append-only stream even though only a small suffix can be affected by a newly appended word.
+
+### Proposed fix
+
+Use an incremental matcher:
+
+- parse/cache the dictionary once per dictionary change;
+- retain `maxWordCount`;
+- when a word is appended, recompute only starts within the trailing `maxWordCount - 1` boundary plus the new word;
+- update only affected match-map entries;
+- if a newly completed multi-word phrase changes the classification of a previously rendered boundary word, retag that word instead of rebuilding the entire test.
+
+Add a performance regression around several thousand appended words and assert dictionary parsing does not occur once per append and matching work stays bounded by the phrase-window size.
+
+---
+
+## F22 — Space Recall Bonus input is starved by the normal enemy target lock
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/space-typing`  
+**File:** `src/Game.ts`  
+**Function/module:** `handleKey()`, `currentTarget()`, `typeRecallBonus()`
+
+### Problem
+
+`handleKey()` resolves `currentTarget()` before considering Recall Bonus.
+
+If a normal enemy target is locked, every letter is sent to `typeTarget()` and the function returns immediately. A key that would correctly advance the Recall Bonus never reaches `typeRecallBonus()`.
+
+Even when there is no current lock, normal target acquisition runs before the final first-letter Recall Bonus fallback, so an enemy sharing the same initial key can take the lock first.
+
+Recall Bonus has a finite lifetime and can therefore expire while visible but practically unselectable.
+
+### Condition
+
+A Recall Bonus is active while:
+
+- a normal enemy target is already locked; or
+- no target is locked but an enemy competes for the same first key before the bonus starts.
+
+### Impact
+
+The bonus target can be displayed as an available learning/reward opportunity but the keyboard routing prevents the player from intentionally selecting it.
+
+This matches the user-observed U08 behavior.
+
+### Root cause
+
+The input router is a priority-ordered chain with the persistent enemy lock at the top. Recall Bonus is modeled as an auxiliary target rather than participating in a deliberate target-arbitration policy.
+
+### Proposed fix
+
+Introduce explicit target arbitration instead of another one-off conditional.
+
+The policy should preserve an already-valid typing sequence while making the bonus intentionally reachable. A safe direction is:
+
+- keep an already-progressed target when the pressed key is its expected next key;
+- otherwise allow an active special target whose expected next key matches to claim the key instead of recording an unrelated enemy miss;
+- once the player has started the Recall Bonus, keep that special-target lock until completion/cancel/expiry;
+- define deterministic tie behavior when two candidates expect the same key.
+
+If ambiguity remains unacceptable, add an explicit special-target selection action rather than silently stealing input.
+
+Add tests for locked enemy + bonus, shared first letter, bonus already partially typed, enemy expected-key precedence, bonus expiry, and no false enemy miss while intentionally typing the bonus.
+
+---
+
 # 4. Risks — not confirmed bugs
 
 These are intentionally not labeled as confirmed defects.
@@ -1034,7 +1275,7 @@ The confirmed reliability gap is stale/malformed persisted orchestration state (
 
 # 6. Data integrity review result
 
-Confirmed integrity defects are F01, F03, F04, F06 and F15.
+Confirmed integrity defects are F01, F03, F04, F06, F15, F18, F19 and F20.
 
 Additional observations:
 
@@ -1056,7 +1297,8 @@ Confirmed performance/lifecycle findings:
 
 - F02: repeated full-profile cloning inside event batches;
 - F12: deep cloning for read-only Dashboard/Builder operations;
-- F16: a reentrant Karaoke restart can create multiple RAF loops.
+- F16: a reentrant Karaoke restart can create multiple RAF loops;
+- F21: Monkeytype EN-VN phrase matching repeatedly rescans the complete growing test buffer.
 
 Space Typing's always-on non-gameplay RAF rendering is recorded as profiling risk R06 rather than a confirmed performance defect.
 
@@ -1075,7 +1317,8 @@ Confirmed UI/UX issues:
 - F10: stale debounced search callback after navigation;
 - F11: incomplete drawer keyboard/focus recovery;
 - F14: stale Smart Review success timer can remove the next game's status;
-- F16: Karaoke restart reentrancy can create duplicate animation loops.
+- F16: Karaoke restart reentrancy can create duplicate animation loops;
+- F22: Recall Bonus can be starved by the normal enemy target lock.
 
 Other reviewed Smart Review states include:
 
@@ -1142,6 +1385,11 @@ Regression tests recommended together with the eventual fixes:
 - Shooter backup import with duplicate IDs, blank rows and empty vocabulary;
 - Karaoke double restart with deferred media play;
 - auxiliary speech/shared-music origin checks;
+- Space v26 backup import compatibility;
+- Space v21/v22 malformed backup rejection;
+- Monkeytype multi-word attempt state surviving dynamic word-buffer growth;
+- bounded/incremental Monkeytype phrase matching for long custom-time runs;
+- Space Recall Bonus target arbitration against an active enemy lock;
 - Space pagehide recovery when a noncritical localStorage write throws;
 - parent CI matrix coverage for Shooter/Karaoke and bounded Monkeytype integration.
 
@@ -1159,11 +1407,15 @@ This is a recommended fix order, not implementation done by this review.
 6. F09 Mixed/Adaptive persisted-state validation.
 7. F05 bridge error-boundary correctness.
 8. F02 + F12 duplicate profile cloning/performance.
-9. F13 Monkeytype Learning Memory target origin + F17 auxiliary message origins.
-10. F15 Shooter backup import validation.
-11. F16 Karaoke restart generation/RAF ownership.
-12. F10 + F14 Portal route/timer lifecycle.
-13. F11 drawer keyboard/focus recovery.
+9. F18 + F19 Space backup version compatibility/validation.
+10. F20 Monkeytype multi-word attempt-state preservation.
+11. F13 Monkeytype Learning Memory target origin + F17 auxiliary message origins.
+12. F15 Shooter backup import validation.
+13. F16 Karaoke restart generation/RAF ownership.
+14. F21 Monkeytype incremental phrase matching/performance.
+15. F22 Space Recall Bonus target arbitration.
+16. F10 + F14 Portal route/timer lifecycle.
+17. F11 drawer keyboard/focus recovery.
 
 After each group:
 
@@ -1199,11 +1451,11 @@ The earlier review completed the planned Shared Learning / runtime passes, but t
 
 > Review is not complete until every project-owned/custom-added/custom-modified code surface has been inventoried and reviewed. No implementation fix starts before that exhaustive pass and a final self-review of both findings and proposed solutions.
 
-Therefore the previous **17 confirmed findings / 8 risks** remain valid review output, but they are **not the final total**.
+Therefore the review currently contains **22 confirmed findings / 8 risks**. The exhaustive pass is still open until the remaining user-observed/manual-verification items and the final independent self-review are closed.
 
-Current GitHub source-of-truth checkpoint when this exhaustive pass was reopened:
+Current GitHub source-of-truth checkpoint for this continued exhaustive pass:
 
-- Parent: `ead7641bb35ae01d1507adcf5aef3cc0fcce5904`
+- Parent: `b98a184ac661019f86965f681468ed6048945bc7`
 - Monkeytype pin: `01cca03b6f38c054f1fdd41ed5150160a6f3cd00`
 - Recall Typing pin: `59c1d6043a09c23108e2390a2e259bb1be23e83d`
 - Vocabulary Shooter pin: `b1721c43be075836a293fa6ba10ba908f4d06c22`
@@ -1238,15 +1490,17 @@ These observations are recorded now so they are not lost, but they do **not** au
 
 ## U01 — Space top IPA/Vietnamese banner overlaps combat space
 
-**Observed:** the fixed IPA/Vietnamese display occupies the same visual region enemies can enter, making target identification difficult.
+**Classification:** likely already corrected in the current pinned code; manual browser verification remains.
 
-**Required direction:**
+The current `kill-translation.css` places the learning strip in a dedicated first CSS-grid row and the `.game-shell`/battlefield in the second row. The code comment explicitly states that the battlefield is resized when the learning row is enabled/disabled, rather than overlaying the Canvas.
 
-- reserve HUD space outside the combat spawn/movement area;
-- enemies must not spawn/travel behind the learning banner;
-- verify responsive layouts and all enemy/boss/bonus spawn paths.
+Do not add another layout workaround unless current-browser verification still reproduces overlap. Verify desktop/mobile, bosses and bonus targets against the current pin.
 
 ## U02 — IPA display behavior must be configurable and persistent
+
+**Classification:** confirmed product/UX gap, not a regression bug.
+
+Current code has one top-strip queue with `enabled`, IPA/Vietnamese toggles, size and a forced 0.8–5.0 second duration. It does not provide killed-enemy-position / both modes and does not keep the last kill indefinitely.
 
 Current desired modes:
 
@@ -1261,9 +1515,17 @@ The old killed-enemy-position feedback should remain available instead of being 
 
 ## U03 — Stage result / measured report is too small
 
-**Required direction:** desktop result UI should become a large near-fullscreen report with enough width/height for combat, typing, learning and reward sections without cramped nested scrolling.
+**Classification:** current source has already been enlarged; keep as manual UX verification rather than a confirmed source bug.
+
+The pinned CSS now uses `width: min(1040px, calc(100vw - 24px))` and `max-height: min(92vh, 900px)` for the measured result card, with responsive grids. Verify the current browser result before making it larger again.
+
+If the current build still feels cramped, treat the next change as a UX sizing adjustment rather than a logic fix.
 
 ## U04 — Settings need explicit Save/Cancel and clear apply semantics
+
+**Classification:** confirmed UX/product-flow gap.
+
+Current settings controls are wired mostly as immediate `input`/`change` mutations that persist directly; the dialog does not provide a transactional draft with explicit Save/Cancel semantics.
 
 **Observed/requested:**
 
@@ -1278,6 +1540,10 @@ Any difficulty/combat-pacing setting that cannot safely update mid-stage must wa
 The exhaustive review must verify why current mid-game setting changes appear to have no runtime effect.
 
 ## U05 — Stage replay must preserve already-earned persistent progression
+
+**Classification:** confirmed product/spec change; the current checkpoint rollback behavior is intentional code, not an accidental hidden bug.
+
+Current death flow explicitly calls `ensureCheckpointRollback()`, restores `checkpointSnapshot`, rolls Campaign Expansion back to the checkpoint, and describes that behavior in the Game Over UI. `selectCompletedStageForReplay()` is also bounded by the existing checkpoint/progression ceiling.
 
 Requested product rule:
 
@@ -1309,9 +1575,11 @@ Keep the current information layout direction, but enlarge and clarify equipment
 
 ## U08 — Recall bonus target cannot be selected while the normal enemy lock owns input
 
-The review must inspect target acquisition/input dispatch precedence.
+**Classification:** confirmed bug — promoted to F22.
 
-Desired behavior: bonus targets must be intentionally typeable and should receive appropriate priority without corrupting an already-valid active typing sequence.
+Code verification shows `Game.handleKey()` routes to `currentTarget()` first and returns immediately, so a locked enemy starves Recall Bonus input. Even without a lock, normal enemy acquisition can win the bonus's first key.
+
+Desired behavior remains: bonus targets must be intentionally typeable and should receive appropriate priority without corrupting an already-valid active typing sequence. See F22 for the proposed arbitration and regression-test plan.
 
 ## U09 — Recall hidden-letter cells should be simplified
 
@@ -1319,13 +1587,15 @@ Keep the current outer frame/art direction, but replace the cramped small intern
 
 ## U10 — Map/background system needs verification and a test selector
 
-The exhaustive review must establish:
+**Classification:** the code assumption that later worlds have no distinct background is not supported by the current pinned implementation; remaining work is manual visual verification.
 
-- whether later maps/worlds already have distinct backgrounds;
-- whether the simple current background is intentionally only the early-map look;
-- whether every world/background is wired correctly.
+Verified in code:
 
-If multiple backgrounds exist, add a dev/test-lab selector to preview them after review; do not alter production progression rules solely for testing.
+- the World registry contains distinct environment profiles;
+- `Game.startStage()` resolves the world from the stage, replaces `worldEnvironment`, clears the cached background gradient and reseeds stars when the environment changes;
+- Test Lab already exposes world/environment selection infrastructure.
+
+Therefore this is not currently a confirmed missing-background bug. Keep it as a browser/manual QA item to verify that every registered environment is visually distinct and that the Test Lab selector exposes them correctly.
 
 ## U11 — Recall controls currently sit in the middle of gameplay
 
