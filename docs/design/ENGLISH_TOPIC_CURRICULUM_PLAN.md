@@ -517,11 +517,31 @@ T15 status after the first integration slice:
 - Topic selectors are grouped by curriculum area;
 - parent Platform CI #228 is green on the reviewed Topic integration.
 
-Remaining T15 work in the active pass:
+T15 curriculum integration is now feature-complete for the active games:
 
-- expose Word type selection from `parts-of-speech/index.json`;
-- expose Grammar selection from `grammar/index.json`, with Present / Past / Future visually first;
-- reuse one generic lazy key+level resolver per game instead of duplicating loaders;
-- preserve each game's existing Custom/Class/Library behavior and persisted selection;
-- keep Topic/POS/Grammar data lazy and do not preload all 18k entries;
-- complete cross-game QA, then run the requested second UI/UX + logic + performance review and fix confirmed findings.
+- Monkeytype: Library / Topic / Word type / Grammar / Custom;
+- Vocabulary Shooter: Class / Topic / Word type / Grammar / Custom;
+- Recall Typing: Class / Topic / Word type / Grammar / Custom;
+- Space Typing: Class / Topic / Word type / Grammar / Custom;
+- Present / Past / Future are the primary Grammar choices, followed by practical modules;
+- Grammar practice combines its real signal vocabulary with linked practical-topic context;
+- known zero-coverage POS/phrase views remain visible as gaps and are disabled rather than filled with invented data;
+- existing Custom data and persisted source choices remain intact;
+- all curriculum modes resolve back to the same 18k EN/VI/IPA source records.
+
+Reviewed child checkpoints for this integration:
+
+- Monkeytype: `30fca754d43ff23a03a920a2f6e20cde0440950b`;
+- Vocabulary Shooter: `bf813d0abe9ceb1d83156e0f71764a915d037809`;
+- Recall Typing: `9eed1f4a40bd1f4edf3162de4f939b05985d3504`;
+- Space Typing: `b633276f58587040153951ed26b63ad528cb3b50`.
+
+Next active work is T16 plus the explicitly requested second review pass:
+
+- run full parent cross-game Platform CI on the four reviewed gitlinks;
+- review UI/UX clarity and responsive behavior;
+- review source-mode persistence and failure recovery;
+- review lazy request behavior and remove redundant curriculum-index requests;
+- review Space Typing gameplay/retry/route state transitions;
+- review render/update hot paths for avoidable work without deleting visuals or mechanics;
+- fix every confirmed issue and repeat child + parent CI.
