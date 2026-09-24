@@ -256,6 +256,13 @@ test("persisted review plan validation rejects stale malformed session data", ()
     /compatibleGames is invalid/,
   );
 
+  const noCompatibleGame = structuredClone(valid);
+  noCompatibleGame.items[0].compatibleGames = [];
+  assert.throws(
+    () => parseReviewPlan(noCompatibleGame),
+    /incompatible with the stored plan/,
+  );
+
   const badCounts = structuredClone(valid);
   badCounts.selectedCount += 1;
   assert.throws(
