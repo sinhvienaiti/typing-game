@@ -52,6 +52,11 @@ jobs:
       - name: Validate empty project-port cleanup
         run: bash scripts/cleanup-dev-ports.sh --project-only 65431 65432
 
+      - name: Validate shared learning core
+        run: |
+          pnpm learning:check
+          pnpm learning:test
+
       - name: Validate shared vocabulary
         run: |
           pnpm vocab:validate
