@@ -576,7 +576,9 @@ export class SmartReviewDashboard {
     );
 
     const start = element("button", "review-primary", "Start Smart Review");
-    start.addEventListener("click", () => this.#setParam("quick", "due"));
+    start.addEventListener("click", () =>
+      this.#navigate("/review/build?mode=quick"),
+    );
     heading.append(copy, start);
 
     const all = [
@@ -1131,7 +1133,7 @@ export class SmartReviewDashboard {
       const params = new URLSearchParams();
       params.set("item", item.entityId);
       params.set("entity", item.entityType);
-      this.#navigate(`/review?quick=needs-review&${params.toString()}`);
+      this.#navigate(`/review/build?${params.toString()}`);
       backdrop.remove();
     });
 
