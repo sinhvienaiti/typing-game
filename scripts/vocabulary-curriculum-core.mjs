@@ -9,6 +9,21 @@ export function stableJson(value) {
   return JSON.stringify(value, null, 2) + "\n";
 }
 
+const POS_LABELS = {
+  noun: "Noun",
+  verb: "Verb",
+  adjective: "Adjective",
+  adverb: "Adverb",
+  pronoun: "Pronoun",
+  preposition: "Preposition",
+  conjunction: "Conjunction",
+  determiner: "Determiner",
+  "modal-auxiliary": "Modal / Auxiliary",
+  "phrasal-verb": "Phrasal Verb",
+  collocation: "Collocation",
+  "fixed-phrase": "Fixed Phrase",
+};
+
 function resolveTerms(terms, lookupEntries) {
   const seen = new Set();
   const entries = [];
@@ -94,6 +109,7 @@ export function buildVocabularyCurriculum(source, lookup) {
     const resolved = resolveTerms(terms, lookupEntries);
     return {
       id,
+      label: POS_LABELS[id] ?? id,
       tokens: [...new Set(terms.map(normalizeCurriculumKey))],
       entries: resolved.entries,
       missing: resolved.missing,
@@ -136,6 +152,65 @@ export function buildVocabularyCurriculum(source, lookup) {
     primaryTimeGroups: ["time.present", "time.past", "time.future"],
     modules: grammarModules,
   };
+  const studyItems = [
+    ...topicIndex.map((topic) => ({
+      id: "topic:" + topic.id,
+      kind: "topic",
+      sourceId: topic.id,
+      label: topic.label,
+      group: topic.group,
+      groupLabel: topic.groupLabel,
+      description: topic.levels,
+      count: topic.entries.length,
+      available: topic.entries.length > 0,
+      entries: topic.entries.map((entry) => ({ ...entry })),
+    })),
+    ...posCategories.map((category) => ({
+      id: "pos:" + category.id,
+      kind: "pos",
+      sourceId: category.id,
+      label: category.label,
+      group: "word-types",
+      groupLabel: "Word Types",
+      description: [],
+      count: category.entries.length,
+      available: category.entries.length > 0,
+      entries: category.entries.map((entry) => ({ ...entry })),
+    })),
+    ...grammarModules.map((module) => ({
+      id: "grammar:" + module.id,
+      kind: "grammar",
+      sourceId: module.id,
+      label: module.label,
+      group:
+        module.id === "time.present" ||
+        module.id === "time.past" ||
+        module.id === "time.future"
+          ? "primary-time"
+          : "practical-grammar",
+      groupLabel:
+        module.id === "time.present" ||
+        module.id === "time.past" ||
+        module.id === "time.future"
+          ? "Present / Past / Future"
+          : "Practical Grammar",
+      description: [...module.focus],
+      count: module.signalEntries.length,
+      available: module.signalEntries.length > 0,
+      entries: module.signalEntries.map((entry) => ({ ...entry })),
+    })),
+  ];
+  const studyIndex = {
+    version: 1,
+    totalItems: studyItems.length,
+    kinds: [
+      { id: "topic", label: "Topic" },
+      { id: "pos", label: "Word Type" },
+      { id: "grammar", label: "Grammar" },
+    ],
+    items: studyItems,
+  };
+
   const coverage = {
     version: 1,
     vocabularyTotal: lookup.totalEntries,
@@ -158,7 +233,15 @@ export function buildVocabularyCurriculum(source, lookup) {
     })),
   };
 
-  return { catalog, index, reverse, partsOfSpeech, grammar, coverage };
+  return {
+    catalog,
+    index,
+    reverse,
+    partsOfSpeech,
+    grammar,
+    studyIndex,
+    coverage,
+  };
 }
 
 export async function loadCurriculumInputs(root) {
@@ -180,6 +263,7 @@ export const CURRICULUM_ARTIFACTS = {
   "topics/reverse.json": "reverse",
   "parts-of-speech/index.json": "partsOfSpeech",
   "grammar/index.json": "grammar",
+  "curriculum/study-index.json": "studyIndex",
   "curriculum/coverage.json": "coverage",
 };
 
