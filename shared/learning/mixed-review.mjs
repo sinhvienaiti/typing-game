@@ -144,7 +144,7 @@ export function recordMixedReviewEvent(
   session,
   progressInput,
   event,
-  occurredAt = new Date().toISOString(),
+  occurredAt,
 ) {
   if (
     !isPlainObject(session) ||
@@ -169,6 +169,13 @@ export function recordMixedReviewEvent(
   ) {
     throw new TypeError("Mixed Review learning event is invalid");
   }
+
+  const completionAt =
+    typeof occurredAt === "string"
+      ? occurredAt
+      : typeof event.occurredAt === "string"
+        ? event.occurredAt
+        : new Date().toISOString();
 
   const progress = structuredClone(progressInput);
   if (progress.completedAt !== null) {
@@ -228,7 +235,7 @@ export function recordMixedReviewEvent(
   if (segmentCompleted) {
     progress.activeSegmentIndex += 1;
     if (progress.activeSegmentIndex >= session.segments.length) {
-      progress.completedAt = new Date(occurredAt).toISOString();
+      progress.completedAt = new Date(completionAt).toISOString();
     }
   }
 
