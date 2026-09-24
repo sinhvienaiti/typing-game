@@ -1,7 +1,7 @@
 import {
   calculateMastery,
   calculateReviewPriority,
-  migrateLearningProfile,
+  viewLearningProfile,
 } from "./core.mjs";
 
 export const REVIEW_SETS = new Set([
@@ -499,7 +499,7 @@ export function buildReviewPlan(
   input,
   now = new Date().toISOString(),
 ) {
-  const profile = migrateLearningProfile(profileInput);
+  const profile = viewLearningProfile(profileInput);
   const options = parseReviewPlanInput(input);
   const content = new Set(options.content);
 
