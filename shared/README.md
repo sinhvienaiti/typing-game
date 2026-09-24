@@ -29,3 +29,16 @@ pnpm vocab:validate
 ```
 
 Shooter and Recall load one selected level. Monkeytype uses `lookup.json` to discover and cache only the level files needed by the current Custom Text.
+
+## Shared Learning
+
+`shared/learning/` owns the parent canonical Learning Event/Profile contracts, deterministic mastery/review-priority logic and parent IndexedDB persistence.
+
+Commands:
+
+```bash
+pnpm learning:check
+pnpm learning:test
+```
+
+Child games emit attempts; they do not own competing canonical mastery calculations.
