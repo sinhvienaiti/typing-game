@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **PLAN COMPLETE / CONTENT IMPLEMENTATION DEFERRED UNTIL SPACE TYPING M22-M24 IS COMPLETE**
+Status: **ACTIVE IMPLEMENTATION — EXPLICIT USER OVERRIDE 2026-09-24**
 
 ## 1. Goal
 
@@ -91,7 +91,11 @@ New metadata lives beside, not inside, the 18k level records:
 `shared/vocabulary/grammar/`
 `shared/vocabulary/curriculum/`
 
-Topic documents reference vocabulary IDs.
+Generated curriculum references use the existing normalized English lookup key plus its level hint, for example `{ "key": "airport", "level": 12 }`.
+
+This is intentionally more stable than persisting positional `Lxxx-xxx` IDs in curriculum metadata: a trusted full-library rebuild may rebalance entries across levels and therefore change positional IDs, while the normalized English key is already the canonical key used by `lookup.json`.
+
+The referenced level file remains authoritative for the actual `id/en/vi/ipa` record. Curriculum files never duplicate Vietnamese meanings or IPA.
 
 A single word may belong to multiple topics and may have different sense/POS uses.
 
@@ -315,7 +319,8 @@ Proposed topic document:
   "levels": ["A1", "A2", "B1"],
   "entries": [
     {
-      "vocabularyId": "Lxxx-xxx",
+      "key": "airport",
+      "level": 12,
       "roles": ["noun"],
       "priority": "core"
     }
@@ -327,9 +332,9 @@ Do not copy EN/VI/IPA into topic files.
 
 Generated indexes provide reverse lookup:
 
-- vocabulary ID -> topics
-- topic -> vocabulary IDs
-- POS -> vocabulary IDs
+- normalized vocabulary key -> topics
+- topic -> normalized vocabulary references + level hints
+- POS -> normalized vocabulary references + level hints
 - grammar module -> vocabulary/topic references
 
 ## 10. Coverage workflow
@@ -339,7 +344,7 @@ Generated indexes provide reverse lookup:
 3. Seed topic concepts from the educational references.
 4. Match existing vocabulary first.
 5. Measure topic coverage.
-6. Identify useful missing headwords/phrases.
+6. Identify useful missing headwords/phrases in a deterministic coverage-gap report.
 7. Only then run missing candidates through the existing trusted EN/VI/IPA/provenance pipeline.
 8. Never invent filler merely to make topic counts equal.
 9. Run validation and statistical spot checks.
@@ -430,6 +435,59 @@ T16 — cross-game QA + docs
 
 ## 16. Sequencing rule
 
-The curriculum plan is approved now, but bulk topic-content implementation starts only after the current Space Typing acceptance roadmap reaches its existing M22-M24 completion condition, unless explicitly overridden later.
+The earlier defer-until-M22-M24 rule was explicitly overridden on 2026-09-24.
 
-This prevents the shared corpus project from hiding unresolved Space Typing audio/browser acceptance work.
+Implementation may now proceed in parallel with the remaining real-browser/audio Space Typing acceptance work, with these safeguards:
+
+- Space Typing M22-M24 status must not be falsely marked complete because curriculum work progressed;
+- the 18,000-entry EN/VI/IPA library remains unchanged unless a later coverage-gap review justifies trusted additions;
+- topic/POS/grammar metadata must be additive and reusable across games;
+- every generated curriculum artifact must be reproducible and validated in parent CI;
+- game integrations must lazy-load selected curriculum data rather than loading the entire curriculum at startup.
+
+## 17. Active implementation contract
+
+The implementation target for this pass is:
+
+1. T00 schemas/folder contracts;
+2. T01 complete top-level taxonomy with roughly 100 practical subtopics;
+3. T02 curated cross-cutting POS views;
+4. T03-T10 broad practical topic coverage from the existing 18k library;
+5. T11 Present/Past/Future learner-facing grammar groups;
+6. T12 practical supporting grammar modules;
+7. T13 deterministic coverage-gap reporting;
+8. parent CI generation/validation guards;
+9. T15 game integrations after the shared contract is stable;
+10. post-implementation review for UI/UX, logic and performance.
+
+The first pass must prefer exact normalized headword/phrase references already present in the 18k library. Missing terms are reported, not invented.
+
+## 18. Implementation checkpoint — shared curriculum foundation
+
+Implemented in the first active pass:
+
+- 15 practical top-level groups;
+- 101 learner-facing subtopics;
+- deterministic exact-key mapping against the existing 18k `lookup.json`;
+- 835 unique existing vocabulary keys referenced by topic metadata;
+- 98.7% exact match across requested topic references;
+- core noun / verb / adjective / adverb learning views;
+- additional function-word / phrase POS views with explicit gap reporting;
+- Present / Past / Future primary learner-facing grammar modules;
+- 13 supporting practical grammar modules;
+- generated reverse topic lookup for cross-game reuse;
+- deterministic coverage-gap report instead of fabricated lexical entries;
+- JSON schemas, generator, validator and parent CI drift guard.
+
+Known lexical gaps intentionally remain visible for later trusted enrichment, especially:
+
+- articles/pronouns/function words excluded from the current 18k production selection;
+- common phrasal verbs;
+- common collocations;
+- fixed phrases.
+
+These gaps do not block topic browsing. Grammar modules retain the real grammar tokens even
+when those tokens are not yet standalone EN/VI/IPA vocabulary records.
+
+Next implementation phase is T15: lazy topic/POS/grammar selection in the games, followed by
+cross-game QA and the requested second UI/UX + logic + performance review.

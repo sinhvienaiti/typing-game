@@ -26,6 +26,8 @@
     "play": "bash scripts/play.sh",
     "vocab:generate": "node scripts/generate-vocabulary.mjs",
     "vocab:validate": "node scripts/validate-vocabulary.mjs",
+    "curriculum:generate": "node scripts/generate-vocabulary-curriculum.mjs",
+    "curriculum:validate": "node scripts/validate-vocabulary-curriculum.mjs",
     "vocab:candidates": "node scripts/prepare-vocabulary-candidates.mjs",
     "vocab:sources": "bash scripts/setup-vocabulary-sources.sh",
     "vocab:build-library": "node scripts/build-vocabulary-library.mjs",

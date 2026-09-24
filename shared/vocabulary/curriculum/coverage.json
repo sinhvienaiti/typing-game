@@ -1,0 +1,993 @@
+{
+  "version": 1,
+  "vocabularyTotal": 18000,
+  "topicRequestedReferences": 1192,
+  "topicResolvedReferences": 1177,
+  "topicExactMatchRate": 0.9874,
+  "uniqueTopicVocabularyKeys": 835,
+  "topics": [
+    {
+      "id": "everyday.greetings",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "hi"
+      ]
+    },
+    {
+      "id": "everyday.routine",
+      "requested": 14,
+      "resolved": 14,
+      "missing": []
+    },
+    {
+      "id": "everyday.time",
+      "requested": 16,
+      "resolved": 16,
+      "missing": []
+    },
+    {
+      "id": "everyday.household",
+      "requested": 13,
+      "resolved": 12,
+      "missing": [
+        "chores"
+      ]
+    },
+    {
+      "id": "everyday.belongings",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "everyday.hobbies",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "people.family",
+      "requested": 16,
+      "resolved": 16,
+      "missing": []
+    },
+    {
+      "id": "people.friends",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "people.appearance",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "people.personality",
+      "requested": 14,
+      "resolved": 14,
+      "missing": []
+    },
+    {
+      "id": "people.emotions",
+      "requested": 14,
+      "resolved": 14,
+      "missing": []
+    },
+    {
+      "id": "people.relationships",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "home.rooms",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "home.furniture",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "home.appliances",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "air-conditioner"
+      ]
+    },
+    {
+      "id": "home.renting",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "home.repairs",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "home.neighborhood",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "food.ingredients",
+      "requested": 15,
+      "resolved": 15,
+      "missing": []
+    },
+    {
+      "id": "food.meals",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "food.cooking",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "food.restaurant",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "food.taste",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "food.nutrition",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "health.body",
+      "requested": 15,
+      "resolved": 15,
+      "missing": []
+    },
+    {
+      "id": "health.symptoms",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "health.care",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "health.exercise",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "health.sleep",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "health.wellbeing",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "wellbeing"
+      ]
+    },
+    {
+      "id": "education.school",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "education.classroom",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "education.university",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "education.study-skills",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "education.exams",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "education.research",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.jobs",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.office",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.meetings",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.email",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.projects",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.management",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.sales",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.finance",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.customer-service",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "work.interviews",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "travel.planning",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "travel.airport",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "check-in"
+      ]
+    },
+    {
+      "id": "travel.flights",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "travel.immigration",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "travel.hotel",
+      "requested": 12,
+      "resolved": 10,
+      "missing": [
+        "check-in",
+        "check-out"
+      ]
+    },
+    {
+      "id": "travel.sightseeing",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "travel.directions",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "travel.emergencies",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "stolen"
+      ]
+    },
+    {
+      "id": "transport.road",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "transport.public",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "transport.driving",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "transport.rail",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "transport.air",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "transport.sea",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.stores",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.products",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.prices",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.payments",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.banking",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.budgeting",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "shopping.online",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "technology.computers",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "technology.internet",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "technology.software",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "technology.phones",
+      "requested": 11,
+      "resolved": 10,
+      "missing": [
+        "app"
+      ]
+    },
+    {
+      "id": "technology.cybersecurity",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "encrypt"
+      ]
+    },
+    {
+      "id": "technology.ai",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "technology.programming",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "technology.devices",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "communication.conversation",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "communication.phone",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "communication.messaging",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "communication.email",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "communication.news",
+      "requested": 11,
+      "resolved": 10,
+      "missing": [
+        "media"
+      ]
+    },
+    {
+      "id": "communication.social-media",
+      "requested": 12,
+      "resolved": 11,
+      "missing": [
+        "media"
+      ]
+    },
+    {
+      "id": "communication.presentations",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "nature.weather",
+      "requested": 13,
+      "resolved": 13,
+      "missing": []
+    },
+    {
+      "id": "nature.animals",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "nature.plants",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "nature.geography",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "nature.climate",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "nature.environment",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "society.community",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "society.customs",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "society.entertainment",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "society.arts",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "society.sports",
+      "requested": 12,
+      "resolved": 12,
+      "missing": []
+    },
+    {
+      "id": "society.public-services",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "academic.argument",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "academic.cause-effect",
+      "requested": 10,
+      "resolved": 9,
+      "missing": [
+        "because"
+      ]
+    },
+    {
+      "id": "academic.comparison",
+      "requested": 11,
+      "resolved": 9,
+      "missing": [
+        "than",
+        "between"
+      ]
+    },
+    {
+      "id": "academic.data",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "academic.evidence",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "academic.trends",
+      "requested": 11,
+      "resolved": 11,
+      "missing": []
+    },
+    {
+      "id": "academic.analysis",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    }
+  ],
+  "partsOfSpeech": [
+    {
+      "id": "noun",
+      "requested": 55,
+      "resolved": 55,
+      "missing": []
+    },
+    {
+      "id": "verb",
+      "requested": 52,
+      "resolved": 49,
+      "missing": [
+        "be",
+        "have",
+        "do"
+      ]
+    },
+    {
+      "id": "adjective",
+      "requested": 37,
+      "resolved": 37,
+      "missing": []
+    },
+    {
+      "id": "adverb",
+      "requested": 32,
+      "resolved": 32,
+      "missing": []
+    },
+    {
+      "id": "pronoun",
+      "requested": 24,
+      "resolved": 1,
+      "missing": [
+        "i",
+        "you",
+        "he",
+        "she",
+        "we",
+        "they",
+        "me",
+        "him",
+        "her",
+        "us",
+        "them",
+        "myself",
+        "yourself",
+        "himself",
+        "herself",
+        "ourselves",
+        "themselves",
+        "someone",
+        "everyone",
+        "nobody",
+        "who",
+        "which",
+        "that"
+      ]
+    },
+    {
+      "id": "preposition",
+      "requested": 24,
+      "resolved": 13,
+      "missing": [
+        "at",
+        "to",
+        "from",
+        "with",
+        "without",
+        "for",
+        "of",
+        "by",
+        "under",
+        "between",
+        "during"
+      ]
+    },
+    {
+      "id": "conjunction",
+      "requested": 16,
+      "resolved": 5,
+      "missing": [
+        "and",
+        "but",
+        "or",
+        "because",
+        "although",
+        "if",
+        "unless",
+        "when",
+        "since",
+        "until",
+        "whether"
+      ]
+    },
+    {
+      "id": "determiner",
+      "requested": 19,
+      "resolved": 4,
+      "missing": [
+        "a",
+        "an",
+        "the",
+        "this",
+        "that",
+        "these",
+        "those",
+        "some",
+        "any",
+        "many",
+        "few",
+        "each",
+        "every",
+        "neither",
+        "another"
+      ]
+    },
+    {
+      "id": "modal-auxiliary",
+      "requested": 9,
+      "resolved": 3,
+      "missing": [
+        "could",
+        "might",
+        "must",
+        "shall",
+        "should",
+        "would"
+      ]
+    },
+    {
+      "id": "phrasal-verb",
+      "requested": 13,
+      "resolved": 0,
+      "missing": [
+        "wake up",
+        "check in",
+        "check out",
+        "log in",
+        "log out",
+        "turn on",
+        "turn off",
+        "look for",
+        "find out",
+        "pick up",
+        "give up",
+        "set up",
+        "carry on"
+      ]
+    },
+    {
+      "id": "collocation",
+      "requested": 10,
+      "resolved": 0,
+      "missing": [
+        "credit card",
+        "customer service",
+        "public transport",
+        "social media",
+        "machine learning",
+        "job interview",
+        "phone call",
+        "climate change",
+        "data analysis",
+        "project management"
+      ]
+    },
+    {
+      "id": "fixed-phrase",
+      "requested": 10,
+      "resolved": 0,
+      "missing": [
+        "thank you",
+        "excuse me",
+        "good morning",
+        "good night",
+        "see you",
+        "how much",
+        "of course",
+        "for example",
+        "in fact",
+        "as well"
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "time.present",
+      "requested": 10,
+      "resolved": 9,
+      "missing": [
+        "every"
+      ]
+    },
+    {
+      "id": "time.past",
+      "requested": 11,
+      "resolved": 7,
+      "missing": [
+        "was",
+        "were",
+        "did",
+        "had"
+      ]
+    },
+    {
+      "id": "time.future",
+      "requested": 10,
+      "resolved": 10,
+      "missing": []
+    },
+    {
+      "id": "grammar.questions",
+      "requested": 9,
+      "resolved": 2,
+      "missing": [
+        "who",
+        "what",
+        "when",
+        "where",
+        "why",
+        "how",
+        "which"
+      ]
+    },
+    {
+      "id": "grammar.negatives",
+      "requested": 6,
+      "resolved": 3,
+      "missing": [
+        "nothing",
+        "nobody",
+        "without"
+      ]
+    },
+    {
+      "id": "grammar.articles",
+      "requested": 3,
+      "resolved": 0,
+      "missing": [
+        "a",
+        "an",
+        "the"
+      ]
+    },
+    {
+      "id": "grammar.countability",
+      "requested": 6,
+      "resolved": 2,
+      "missing": [
+        "some",
+        "any",
+        "many",
+        "few"
+      ]
+    },
+    {
+      "id": "grammar.comparison",
+      "requested": 9,
+      "resolved": 8,
+      "missing": [
+        "than"
+      ]
+    },
+    {
+      "id": "grammar.quantity",
+      "requested": 10,
+      "resolved": 8,
+      "missing": [
+        "many",
+        "few"
+      ]
+    },
+    {
+      "id": "grammar.modals",
+      "requested": 8,
+      "resolved": 3,
+      "missing": [
+        "could",
+        "might",
+        "must",
+        "should",
+        "would"
+      ]
+    },
+    {
+      "id": "grammar.conditionals",
+      "requested": 6,
+      "resolved": 3,
+      "missing": [
+        "if",
+        "unless",
+        "when"
+      ]
+    },
+    {
+      "id": "grammar.passive",
+      "requested": 7,
+      "resolved": 5,
+      "missing": [
+        "created",
+        "called"
+      ]
+    },
+    {
+      "id": "grammar.relative-clauses",
+      "requested": 5,
+      "resolved": 0,
+      "missing": [
+        "who",
+        "which",
+        "that",
+        "where",
+        "whose"
+      ]
+    },
+    {
+      "id": "grammar.linkers",
+      "requested": 9,
+      "resolved": 5,
+      "missing": [
+        "and",
+        "but",
+        "because",
+        "although"
+      ]
+    },
+    {
+      "id": "grammar.word-order",
+      "requested": 7,
+      "resolved": 7,
+      "missing": []
+    },
+    {
+      "id": "grammar.prepositions",
+      "requested": 12,
+      "resolved": 4,
+      "missing": [
+        "at",
+        "to",
+        "from",
+        "with",
+        "for",
+        "by",
+        "under",
+        "between"
+      ]
+    }
+  ]
+}
