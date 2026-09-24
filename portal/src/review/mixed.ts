@@ -42,8 +42,9 @@ function validStoredMixedReview(value: unknown): value is StoredMixedReview {
     !plainObject(session) ||
     session["version"] !== 1 ||
     !Array.isArray(session["segments"]) ||
+    typeof session["totalItems"] !== "number" ||
     !Number.isInteger(session["totalItems"]) ||
-    (session["totalItems"] as number) < 0
+    session["totalItems"] < 0
   ) {
     return false;
   }
@@ -55,6 +56,7 @@ function validStoredMixedReview(value: unknown): value is StoredMixedReview {
       typeof segment["game"] !== "string" ||
       REVIEW_CAPABILITIES[segment["game"]] === undefined ||
       !Array.isArray(segment["items"]) ||
+      typeof segment["selectedCount"] !== "number" ||
       !Number.isInteger(segment["selectedCount"]) ||
       segment["selectedCount"] !== segment["items"].length
     ) {
@@ -65,9 +67,10 @@ function validStoredMixedReview(value: unknown): value is StoredMixedReview {
   if (
     !plainObject(progress) ||
     progress["version"] !== 1 ||
+    typeof progress["activeSegmentIndex"] !== "number" ||
     !Number.isInteger(progress["activeSegmentIndex"]) ||
-    (progress["activeSegmentIndex"] as number) < 0 ||
-    (progress["activeSegmentIndex"] as number) > session["segments"].length ||
+    progress["activeSegmentIndex"] < 0 ||
+    progress["activeSegmentIndex"] > session["segments"].length ||
     !plainObject(progress["completedBySegment"])
   ) {
     return false;
