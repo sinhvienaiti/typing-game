@@ -2,7 +2,7 @@
 
 ## Status
 
-**L07 COMPLETE / L08 NEXT**
+**L08 COMPLETE / L09 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1478,15 +1478,41 @@ Verification:
 
 ## L08 — Sentence Builder V1
 
-Implement:
+**Status: COMPLETE — 2026-09-24**
 
-- shuffled word units,
-- acceptedAnswers[],
-- basic normalization,
-- difficulty presets,
-- hints,
-- scoring,
-- grammar/sentence events.
+Implemented in Monkeytype as a dedicated learning surface rather than forcing sentence-order gameplay through the per-character typing scorer:
+
+- shuffled word/unit builder with click-to-compose plus direct text input;
+- `acceptedAnswers[]` supports multiple authored valid answers and records the actually matched valid answer;
+- normalization covers NFC, whitespace, capitalization and punctuation spacing while preserving punctuation correctness;
+- Easy / Normal / Hard / Extreme difficulty presets;
+- Easy keeps a sentence-start cue, Normal shuffles required units, Hard adds optional distractors, Extreme uses free production;
+- Reveal Next Word, Grammar Hint and Structure Hint controls;
+- custom exercise authoring in Custom Text settings with sentence ID, optional grammar ID, prompt/context, multiple accepted answers, difficulty, distractors and grammar hint;
+- optional authored mistake mappings use `answer => error-type` for reliable grammar cases such as wrong-tense;
+- generic fallbacks classify word-order / missing-word / extra-word / spelling / punctuation / wrong-form;
+- one sentence learning event is emitted per submission plus a grammar event when `grammarId` is present;
+- hint use, response time, user answer, expected answer and error type flow into the parent shared Learning Event contract;
+- normal Monkeytype word-learning UI is explicitly isolated from Sentence Builder mode;
+- no child-side mastery/review engine was introduced.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+7b939dec3b1c913e048c62a0876b489e4ba067ac
+~~~
+
+Verification:
+
+- Custom EN-VN CI run 36008893127: PASS;
+- type-aware frontend lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS;
+- tests cover alternative valid answers, authored grammar error mappings, normalization, all four difficulty presets, hints and sentence+grammar event output.
+
 
 ## L09 — Context / Cloze
 
