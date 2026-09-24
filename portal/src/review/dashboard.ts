@@ -8,6 +8,7 @@ import {
   queryLearningProfile,
   type LearningQueryItem,
 } from "../../../shared/learning/query.mjs";
+import { isAtRiskReviewItem } from "../../../shared/learning/review-session.mjs";
 import {
   ReviewVocabularyRepository,
   type ReviewOption,
@@ -178,19 +179,6 @@ function dayKey(value: string | null): string {
   ].join("-");
 }
 
-function isAtRisk(record: LearningRecord, now: string): boolean {
-  const mastery = calculateMastery(record, now);
-  const lastCorrect = record.lastCorrectAt === null
-    ? 0
-    : Date.parse(record.lastCorrectAt);
-  const lastWrong = record.lastWrongAt === null ? 0 : Date.parse(record.lastWrongAt);
-  const ageDays =
-    lastCorrect === 0 ? Number.POSITIVE_INFINITY : (Date.parse(now) - lastCorrect) / 86_400_000;
-  return (
-    (mastery >= 70 && ageDays >= 7) ||
-    (mastery >= 40 && lastWrong > lastCorrect)
-  );
-}
 
 function matchesQuick(
   record: LearningRecord,
@@ -209,7 +197,16 @@ function matchesQuick(
     if (record.lastSeenAt === null) return true;
     return Date.parse(now) - Date.parse(record.lastSeenAt) >= 7 * 86_400_000;
   }
-  if (quick === "at-risk") return isAtRisk(record, now);
+  if (quick === "at-risk") {
+    return isAtRiskReviewItem(
+      {
+        mastery,
+        lastCorrectAt: record.lastCorrectAt,
+        lastWrongAt: record.lastWrongAt,
+      },
+      now,
+    );
+  }
   if (quick === "due") {
     return record.nextReviewAt !== null && Date.parse(record.nextReviewAt) <= Date.parse(now);
   }
