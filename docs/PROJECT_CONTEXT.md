@@ -40,7 +40,20 @@ Current shared-learning transport:
 - review queries are bounded/paginated and flush prior pending attempts first;
 - production Portal TypeScript/Vite build passed Platform CI #264.
 
-Next active milestone: **L03 — Smart Review Dashboard V1**.
+L03 Smart Review Dashboard V1 is complete.
+
+Dashboard checkpoint:
+
+- parent route: `/review`;
+- full Words / Grammar / Sentences browsing;
+- summary, quick filters, search, sorting and 10/25/50/100 pagination;
+- full profile-metric/date filters plus Topic / Word type / Level / Grammar curriculum filters;
+- responsive table/card views;
+- detail drawer with Why Review and bounded mistake samples;
+- vocabulary enrichment remains lazy and canonical EN/VI/IPA stays in the shared 18k library;
+- Platform CI #277 PASS.
+
+Next active milestone: **L04 — Smart Review Builder + Session Core**.
 
 ---
 
