@@ -16,6 +16,24 @@ It is intentionally written so that a new ChatGPT tab, another AI assistant, or 
 - which bugs have already been diagnosed,
 - which implementation rules should not be changed without an explicit user request.
 
+## Shared Learning implementation checkpoint — L01
+
+The new roadmap has started. L00 contract audit and L01 Shared Learning Core are complete on parent `main`.
+
+Implemented foundation:
+
+- Learning Event/Profile schema version 1;
+- canonical vocabulary key normalization shared with the 18k library;
+- parent-owned vocabulary/grammar/sentence aggregates;
+- deterministic mastery, review priority and next-review calculations;
+- bounded recent mistakes/answers;
+- parent IndexedDB persistence (`typingGameLearning/state/profile`);
+- focused Node tests and Platform CI gate.
+
+Next active milestone: **L02 — Parent messaging bridge**.
+
+---
+
 ## Latest confirmed expansion — 2026-09-24
 
 The next platform-wide implementation roadmap is defined in:
