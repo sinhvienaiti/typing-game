@@ -17,6 +17,7 @@ Generated artifacts are:
 
 - `shared/vocabulary/topics/catalog.json`
 - `shared/vocabulary/topics/index.json`
+- `shared/vocabulary/topics/reverse.json`
 - `shared/vocabulary/parts-of-speech/index.json`
 - `shared/vocabulary/grammar/index.json`
 - `shared/vocabulary/curriculum/coverage.json`
@@ -51,3 +52,6 @@ level files referenced by the selected curriculum item. Do not preload all 18k e
 Topic index entries include normalized `key + level` hints generated from the authoritative
 18k lookup. Topic-mode clients must use those hints directly and should not download the
 full 18k `lookup.json` merely to rediscover the same level mapping.
+
+The reverse vocabulary-key -> topic mapping is kept in `topics/reverse.json` so normal
+Topic browsing does not pay for reverse-lookup data it does not use.
