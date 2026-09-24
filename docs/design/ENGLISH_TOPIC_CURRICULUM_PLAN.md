@@ -363,31 +363,52 @@ Generated indexes provide reverse lookup:
 
 ## 12. Game integration
 
+The learning selectors must expose all three curriculum dimensions, not only Topic:
+
+- Topic — practical life/work/travel/technology/etc. groups;
+- Word type — noun, verb, adjective, adverb and the additional POS/phrase views;
+- Grammar — Present / Past / Future first, then the supporting practical grammar modules.
+
+All modes resolve back to the same authoritative 18k EN/VI/IPA records and lazy-load only referenced level files.
+
 ### Monkeytype
 Allow:
 - Library
 - Topic
+- Word type
+- Grammar
 - Custom
 
-Topic mode selects one or more topic lists and builds the existing EN-VN dictionary/typing input from referenced shared entries.
+Each curriculum mode builds the existing EN-VN dictionary for the selected practice set without replacing Custom data.
 
 ### Vocabulary Shooter
 Allow:
 - Class/Level
 - Topic
+- Word type
+- Grammar
 - Custom
 
 ### Recall Typing
 Allow:
 - Class/Level
 - Topic
+- Word type
+- Grammar
 - Custom
 
 ### Space Typing
-Later allow topic-aware campaign/practice presets without changing Campaign progression semantics.
+Allow:
+- Class/Level
+- Topic
+- Word type
+- Grammar
+- Custom
+
+Curriculum selection changes the vocabulary pool only; Campaign progression, enemy budgets, rewards and stage semantics remain unchanged.
 
 ### Karaoke Typing
-Use topics primarily for learning metadata / optional practice content rather than forcing lyrics to a topic.
+Keep curriculum optional. Lyrics/audio remain authoritative; curriculum metadata may be used later for tagging or optional practice extraction, but must not force songs into an artificial vocabulary mode.
 
 ## 13. Performance
 
@@ -489,5 +510,18 @@ Known lexical gaps intentionally remain visible for later trusted enrichment, es
 These gaps do not block topic browsing. Grammar modules retain the real grammar tokens even
 when those tokens are not yet standalone EN/VI/IPA vocabulary records.
 
-Next implementation phase is T15: lazy topic/POS/grammar selection in the games, followed by
-cross-game QA and the requested second UI/UX + logic + performance review.
+T15 status after the first integration slice:
+
+- Topic selection is implemented in Monkeytype, Vocabulary Shooter, Recall Typing and Space Typing;
+- topic loading is lookup-free through embedded key/level hints;
+- Topic selectors are grouped by curriculum area;
+- parent Platform CI #228 is green on the reviewed Topic integration.
+
+Remaining T15 work in the active pass:
+
+- expose Word type selection from `parts-of-speech/index.json`;
+- expose Grammar selection from `grammar/index.json`, with Present / Past / Future visually first;
+- reuse one generic lazy key+level resolver per game instead of duplicating loaders;
+- preserve each game's existing Custom/Class/Library behavior and persisted selection;
+- keep Topic/POS/Grammar data lazy and do not preload all 18k entries;
+- complete cross-game QA, then run the requested second UI/UX + logic + performance review and fix confirmed findings.
