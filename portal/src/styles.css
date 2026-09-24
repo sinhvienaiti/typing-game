@@ -85,6 +85,26 @@ button { font: inherit; }
 }
 @keyframes game-loading-spin { to { transform: rotate(360deg); } }
 
+.game-review-status {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 3;
+  max-width: min(720px, calc(100% - 32px));
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  border: 1px solid rgba(123,223,255,.24);
+  border-radius: 10px;
+  background: rgba(8,14,24,.9);
+  color: #dcecff;
+  font-size: .72rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.24);
+}
+.game-review-status.error {
+  border-color: rgba(255,111,133,.36);
+  color: #ff9bad;
+}
+
 .shared-music {
   position: relative;
   margin-left: auto;
