@@ -145,7 +145,23 @@ Monkey Smart Review checkpoint:
 - Custom EN-VN CI run 36016126490 PASS;
 - parent L10 Platform CI before child pin PASS.
 
-Next active milestone: **L11 — Recall Typing integration**.
+L11 Recall Typing integration is complete.
+
+Recall shared-learning checkpoint:
+
+- normal Recall play emits one vocabulary Learning Event per completed word;
+- clean vs corrected-after-error completion, response time and explicit replay usage are retained;
+- activity type distinguishes recall / listening / explicit spelling review;
+- parent Smart Review accepts Recall-compatible vocabulary goals only;
+- review vocabulary resolves from the shared 18k library and preserves parent order;
+- Listening review uses audio-only hints without overwriting the user's normal setting;
+- manual vocabulary source selection exits review mode cleanly;
+- no child mastery/priority engine or local-storage migration was introduced;
+- child revision: `59c1d6043a09c23108e2390a2e259bb1be23e83d`;
+- Recall CI run 36017329739 PASS;
+- parent Platform CI run 36018360661 PASS.
+
+Next active milestone: **L12 — Vocabulary Shooter integration**.
 
 ---
 
