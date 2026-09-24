@@ -93,7 +93,20 @@ Learning Memory checkpoint:
 - child revision: `d4ffe3131153f93da8c1ee24a0161fed9c66c5ba`;
 - Custom EN-VN CI run 36000835083 PASS.
 
-Next active milestone: **L07 — Monkey Learn + Listen**.
+L07 Monkey Learn + Listen is complete.
+
+Monkey learning checkpoint:
+
+- Custom learning now exposes Normal / Learn / Recall / Listen;
+- Learn shows English, Vietnamese and shared-library IPA with item pronunciation;
+- Listen hides the English target/IPA and supports explicit Replay + Reveal Letter;
+- replay/hint use is included in shared learning events;
+- activity types distinguish typing / learn / recall / listen;
+- parent review vocabulary can be injected as a bounded, origin-checked dataset and is resolved from the shared 18k library;
+- child revision: `637f607a23a44a62c4c1392297b7526526b34f27`;
+- Custom EN-VN CI run 36004240518 PASS.
+
+Next active milestone: **L08 — Sentence Builder V1**.
 
 ---
 
