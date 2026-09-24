@@ -2,7 +2,7 @@
 
 ## Status
 
-**L17 COMPLETE / L18 NEXT**
+**L00 → L18 COMPLETE**
 
 Agreed on 2026-09-24.
 
@@ -1837,21 +1837,60 @@ Verification:
 
 ## L18 — Final cross-game review
 
-Review:
+**Status: COMPLETE — 2026-09-24**
 
-- correctness,
-- persistence,
-- migration,
-- UI/UX,
-- accessibility,
-- performance,
-- cross-game consistency,
-- stale-data behavior,
-- long-profile behavior,
-- browser refresh/navigation,
-- offline/static Play mode.
+Final audit covered correctness, persistence, migration/import safety, UI/UX, accessibility, performance, cross-game consistency, stale-data behavior, long-profile behavior, browser refresh/navigation and static Play mode.
 
-Fix confirmed issues rather than merely documenting them.
+Confirmed issues found and fixed:
+
+1. **Learning backup integrity**
+   - L17 import validation migrated before checking required collections, so a malformed v1 backup missing an entire collection could be silently normalized to an empty collection.
+   - Import now requires all v1 collections and a valid `updatedAt` before migration.
+   - Vocabulary keys must already match the canonical NFKC + collapsed-whitespace + lowercase key contract.
+   - Regression tests cover partial profiles and non-canonical vocabulary keys.
+
+2. **Smart Review browser refresh / stale segment state**
+   - Pending child review datasets were cleared as soon as a child returned `review-ready`.
+   - A full Portal refresh while still on the same game could therefore reload the child without the active review dataset; Mixed/Adaptive state could remain marked as launched.
+   - `review-ready` now retains the pending dataset so a full browser refresh can re-post it.
+   - `review-error` clears the pending dataset and cancels the launched Mixed/Adaptive segment.
+   - leaving the active game route through normal navigation or Back/Forward also clears the pending dataset and cancels an unfinished segment.
+   - the lifecycle rules are centralized in `shared/learning/review-lifecycle.mjs` with focused unit tests.
+
+3. **Static Play stale Portal bundle**
+   - `./play.sh` did not include `shared/learning` when deciding whether the Portal bundle was stale even though Portal imports those modules at build time.
+   - Play mode now rebuilds Portal when shared-learning code changes.
+   - `scripts/validate-play-mode.mjs` checks all six static app outputs, the shared-learning rebuild dependency, shared runtime vocabulary/typing-text/music routes and every local game host.
+   - Platform CI now gates this contract.
+
+4. **Review navigation consistency**
+   - Smart Review navigation was not visually active on `/review/build`, `/review/session` and `/review/data`.
+   - the parent nav now treats all `/review/*` routes as the Smart Review section.
+
+Additional audit coverage:
+
+- a 5,000-item Learning Profile query test verifies page-size bounding, last-page clamping and stable navigation without returning unbounded result pages;
+- the concrete cross-game capability matrix is locked to Monkeytype / Recall Typing / Vocabulary Shooter / Space Typing / Karaoke Typing;
+- pseudo orchestration modes `mixed-review` and `adaptive-mix` are explicitly excluded from concrete child executors;
+- exact child checkpoints were re-verified:
+  - Monkeytype `01cca03b6f38c054f1fdd41ed5150160a6f3cd00` — Custom EN-VN CI 36016126490 PASS;
+  - Recall Typing `59c1d6043a09c23108e2390a2e259bb1be23e83d` — CI 36017329739 PASS;
+  - Vocabulary Shooter `b1721c43be075836a293fa6ba10ba908f4d06c22` — CI 36019201874 PASS;
+  - Space Typing `a50dcfcb29d7ff27a365a8ebf093836aeae97d2b` — CI 36022862848 PASS;
+  - Karaoke Typing `f2bd7ae55143d98cd270535d6e6c06d87a8742ec` — CI 36024029825 PASS.
+
+Final parent verification before documentation commit:
+
+- Platform CI run 36029308661: PASS;
+- shared learning: **48/48 tests PASS**;
+- static Play mode contract: PASS;
+- Recall Typing: 5 test files PASS;
+- Space Typing: 150 test files / 758 tests PASS;
+- Space bundle budget remains PASS at the existing threshold;
+- Portal TypeScript + Vite build PASS;
+- Recall production build PASS.
+
+**Roadmap L00 → L18 is complete.**
 
 ---
 
