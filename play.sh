@@ -96,7 +96,8 @@ build_if_needed \
   "portal/index.html" \
   "portal/package.json" \
   "portal/tsconfig.json" \
-  "portal/vite.config.ts"
+  "portal/vite.config.ts" \
+  "shared/learning"
 
 build_if_needed \
   "Vocabulary Shooter" \
