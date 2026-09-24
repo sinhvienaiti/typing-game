@@ -23,6 +23,29 @@ for (const topic of expected.coverage.topics) {
   if (topic.resolved < 4) errors.push(topic.id + ": fewer than 4 resolved vocabulary keys");
 }
 
+for (const topic of expected.index.topics) {
+  if (typeof topic.groupLabel !== "string" || topic.groupLabel.trim() === "") {
+    errors.push(topic.id + ": missing group label");
+  }
+  if (
+    topic.count !== topic.entries.length ||
+    topic.count !== topic.keys.length
+  ) {
+    errors.push(topic.id + ": count / entries / keys drift");
+  }
+  if (
+    topic.entries.some(
+      (entry, index) =>
+        entry.key !== topic.keys[index] ||
+        !Number.isInteger(entry.level) ||
+        entry.level < 1 ||
+        entry.level > 100,
+    )
+  ) {
+    errors.push(topic.id + ": invalid embedded key/level hints");
+  }
+}
+
 for (const id of ["noun", "verb", "adjective", "adverb"]) {
   const category = expected.partsOfSpeech.categories.find((item) => item.id === id);
   if (!category || category.entries.length < 20) {
