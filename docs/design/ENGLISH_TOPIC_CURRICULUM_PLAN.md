@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **PLAN COMPLETE / CONTENT IMPLEMENTATION DEFERRED UNTIL SPACE TYPING M22-M24 IS COMPLETE**
+Status: **ACTIVE IMPLEMENTATION — EXPLICIT USER OVERRIDE 2026-09-24**
 
 ## 1. Goal
 
@@ -430,6 +430,29 @@ T16 — cross-game QA + docs
 
 ## 16. Sequencing rule
 
-The curriculum plan is approved now, but bulk topic-content implementation starts only after the current Space Typing acceptance roadmap reaches its existing M22-M24 completion condition, unless explicitly overridden later.
+The earlier defer-until-M22-M24 rule was explicitly overridden on 2026-09-24.
 
-This prevents the shared corpus project from hiding unresolved Space Typing audio/browser acceptance work.
+Implementation may now proceed in parallel with the remaining real-browser/audio Space Typing acceptance work, with these safeguards:
+
+- Space Typing M22-M24 status must not be falsely marked complete because curriculum work progressed;
+- the 18,000-entry EN/VI/IPA library remains unchanged unless a later coverage-gap review justifies trusted additions;
+- topic/POS/grammar metadata must be additive and reusable across games;
+- every generated curriculum artifact must be reproducible and validated in parent CI;
+- game integrations must lazy-load selected curriculum data rather than loading the entire curriculum at startup.
+
+## 17. Active implementation contract
+
+The implementation target for this pass is:
+
+1. T00 schemas/folder contracts;
+2. T01 complete top-level taxonomy with roughly 100 practical subtopics;
+3. T02 curated cross-cutting POS views;
+4. T03-T10 broad practical topic coverage from the existing 18k library;
+5. T11 Present/Past/Future learner-facing grammar groups;
+6. T12 practical supporting grammar modules;
+7. T13 deterministic coverage-gap reporting;
+8. parent CI generation/validation guards;
+9. T15 game integrations after the shared contract is stable;
+10. post-implementation review for UI/UX, logic and performance.
+
+The first pass must prefer exact normalized headword/phrase references already present in the 18k library. Missing terms are reported, not invented.
