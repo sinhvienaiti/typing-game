@@ -2,7 +2,7 @@
 
 ## Status
 
-**L09 COMPLETE / L10 NEXT**
+**L10 COMPLETE / L11 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1554,16 +1554,44 @@ Verification:
 
 ## L10 — Monkey Smart Review
 
-Monkey consumes parent-provided review datasets.
+**Status: COMPLETE — 2026-09-24**
 
-Support review goals:
+The parent remains the single Smart Review planner and Monkeytype now consumes its bounded review queue through the shared postMessage contract.
 
-- remember,
-- spelling,
-- listening,
-- grammar,
-- sentence building,
-- mixed.
+Implemented:
+
+- parent Review Session builds a versioned Monkey dataset from the parent-owned Learning Profile;
+- dataset carries goal, ordered items, mastery/review-priority display metadata, recent mistake context and remembered sentence accepted answers without copying mastery logic into Monkeytype;
+- Portal queues the dataset in session storage, launches Monkeytype, posts only to the child origin and handles ready/error acknowledgement;
+- child validates the parent `goal + items` contract and mirrors the same goal/entity compatibility boundary;
+- one dedicated Smart Review coordinator sequences the parent queue while leaving selection/order/mastery/review priority parent-owned;
+- remember/spelling/listening vocabulary items resolve through the shared 18k vocabulary library;
+- mixed vocabulary routing is deterministic: previous listening weakness → Listening, spelling error → Spelling, otherwise Recall;
+- Grammar review reuses recent expected-answer context when available and otherwise falls back to the existing shared grammar module signal tokens;
+- Sentence review reuses Sentence Builder validation and the accepted answers retained in shared learning memory;
+- Mixed Review inside Monkeytype can sequence vocabulary / grammar / sentence items without creating a child review-priority engine;
+- explicit reveal/replay usage, response time and the activity-specific result are emitted back through the standard Learning Event contract;
+- Smart Review uses a dedicated bounded UI surface and keeps normal Monkeytype / Learn / Recall / Listen / Sentence Builder / Context-Cloze behavior isolated.
+
+Parent checkpoint includes the L10 dataset builder, compatibility rules, Portal adapter, launch/status flow and tests.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+01cca03b6f38c054f1fdd41ed5150160a6f3cd00
+~~~
+
+Verification:
+
+- parent Platform CI at pre-pin L10 HEAD `783bcb80010dae7d4007bd64147e8d0e1ed14e09`: PASS;
+- Monkeytype Custom EN-VN CI run 36016126490: PASS;
+- child type-aware lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS;
+- tests cover goal/entity validation, mixed activity routing, shared vocabulary enrichment, grammar context/fallback, Sentence Builder accepted answers, event output and queue activation.
 
 ## L11 — Recall Typing integration
 
