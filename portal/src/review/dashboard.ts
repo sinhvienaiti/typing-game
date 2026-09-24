@@ -572,11 +572,17 @@ export class SmartReviewDashboard {
       ),
     );
 
+    const headingActions = element("div", "review-heading-actions");
+    const dataButton = element("button", "review-secondary", "Learning Data");
+    dataButton.addEventListener("click", () =>
+      this.#navigate("/review/data"),
+    );
     const start = element("button", "review-primary", "Start Smart Review");
     start.addEventListener("click", () =>
       this.#navigate("/review/build?mode=quick"),
     );
-    heading.append(copy, start);
+    headingActions.append(dataButton, start);
+    heading.append(copy, headingActions);
 
     const all = [
       ...Object.values(profile.vocabulary),
