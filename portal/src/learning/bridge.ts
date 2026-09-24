@@ -47,12 +47,17 @@ function errorText(error: unknown): string {
 
 export class ParentLearningBridge {
   readonly #store: BrowserLearningProfileStore;
+  readonly #onApplied: ((event: LearningEvent) => void) | null;
   #pending: PendingAttempt[] = [];
   #flushTimer: number | null = null;
   #flushPromise: Promise<void> | null = null;
 
-  constructor(store = new BrowserLearningProfileStore()) {
+  constructor(
+    store = new BrowserLearningProfileStore(),
+    onApplied: ((event: LearningEvent) => void) | null = null,
+  ) {
     this.#store = store;
+    this.#onApplied = onApplied;
   }
 
   handleMessage(
@@ -165,6 +170,7 @@ export class ParentLearningBridge {
       try {
         await this.#store.applyMany(batch.map((item) => item.event));
         for (const item of batch) {
+          this.#onApplied?.(item.event);
           this.#post(
             item.target,
             item.targetOrigin,
