@@ -2,7 +2,7 @@
 
 ## Status
 
-**L08 COMPLETE / L09 NEXT**
+**L09 COMPLETE / L10 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1516,9 +1516,41 @@ Verification:
 
 ## L09 — Context / Cloze
 
-Integrate shared typing text/curriculum data.
+**Status: COMPLETE — 2026-09-24**
 
-Implement contextual vocabulary and grammar exercises without duplicating source data.
+Implemented in Monkeytype from existing shared data only:
+
+- dedicated Context/Cloze learning mode and test panel;
+- selected shared Typing Text level + passage count is reused as the source context;
+- passage access now exposes the same cached/shuffle-bag-backed passage records used by normal typing-text mode rather than copying passages;
+- vocabulary cloze exercises are derived from each passage's existing `targetWords`;
+- grammar cloze exercises are derived from the existing shared grammar module `signalTokens`;
+- vocabulary and grammar exercises are interleaved in one bounded context session;
+- masking respects whole words/phrases and preserves the original surrounding sentence;
+- one submitted answer produces at most one learning event, preventing retry/event spam;
+- vocabulary mistakes emit `spelling`; grammar mistakes emit `wrong-form`, while Present/Past/Future time-group misses emit `wrong-tense`;
+- reveal-letter hint use and response timing are included in the shared Learning Event;
+- Context/Cloze remains scoped to Custom learning mode and is isolated from normal Monkeytype word rendering;
+- shared level JSON is cached for the session and grammar tokens are precomputed once per generated session;
+- no separate context sentence/exercise corpus and no child Smart Review engine were introduced.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+626b51766850f9de712ec0ae4c1fea2efaf7aba9
+~~~
+
+Verification:
+
+- Custom EN-VN CI run 36010643624: PASS;
+- type-aware frontend lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS;
+- tests cover whole-phrase masking, shared passage reuse/shuffle progress, vocabulary + grammar derivation, spelling/wrong-tense classification, hints and cloze Learning Events.
+
 
 ## L10 — Monkey Smart Review
 
