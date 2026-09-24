@@ -1,5 +1,6 @@
 import {
   applyLearningEvent,
+  applyLearningEvents,
   createEmptyLearningProfile,
   migrateLearningProfile,
 } from "./core.mjs";
@@ -83,6 +84,16 @@ export class BrowserLearningProfileStore {
     return this.enqueue(async () => {
       const current = await this.load();
       const next = applyLearningEvent(current, event);
+      await this.persist(next);
+      return next;
+    });
+  }
+
+  applyMany(events) {
+    if (!Array.isArray(events)) throw new TypeError("learning events must be an array");
+    return this.enqueue(async () => {
+      const current = await this.load();
+      const next = applyLearningEvents(current, events);
       await this.persist(next);
       return next;
     });
