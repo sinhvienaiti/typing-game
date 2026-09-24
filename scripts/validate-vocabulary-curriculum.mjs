@@ -65,6 +65,44 @@ for (const id of expected.grammar.primaryTimeGroups) {
   }
 }
 
+if (expected.studyIndex.totalItems !== expected.studyIndex.items.length) {
+  errors.push("study index totalItems drift");
+}
+if (
+  new Set(expected.studyIndex.items.map((item) => item.id)).size !==
+  expected.studyIndex.items.length
+) {
+  errors.push("study index contains duplicate ids");
+}
+for (const item of expected.studyIndex.items) {
+  if (
+    item.count !== item.entries.length ||
+    item.available !== (item.entries.length > 0) ||
+    typeof item.groupLabel !== "string" ||
+    item.groupLabel.trim() === ""
+  ) {
+    errors.push(item.id + ": invalid study item contract");
+  }
+  if (
+    item.entries.some(
+      (entry) =>
+        typeof entry.key !== "string" ||
+        entry.key.trim() === "" ||
+        !Number.isInteger(entry.level) ||
+        entry.level < 1 ||
+        entry.level > 100,
+    )
+  ) {
+    errors.push(item.id + ": invalid study entry mapping");
+  }
+}
+for (const id of ["grammar:time.present", "grammar:time.past", "grammar:time.future"]) {
+  const item = expected.studyIndex.items.find((entry) => entry.id === id);
+  if (!item || !item.available || item.count < 4) {
+    errors.push(id + ": primary time study item must be available");
+  }
+}
+
 for (const [key, topics] of Object.entries(expected.reverse.reverseTopics)) {
   const level = lookup.entries[key];
   if (!Number.isInteger(level) || level < 1 || level > 100) {
