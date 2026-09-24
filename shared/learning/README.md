@@ -124,3 +124,18 @@ Current query contract supports:
 - deterministic sorts including Smart Priority, mastery, mistakes, recency, review age, response speed, attempts and A-Z/Z-A.
 
 Child-specific adapters are added only in their integration milestones. L02 defines and validates the parent transport; it does not duplicate Smart Review logic in children.
+
+## Smart Review Dashboard
+
+The parent Portal exposes `/review` as the canonical Smart Review inspection screen.
+
+It queries the local parent profile with bounded pagination and supports:
+
+- Words / Grammar / Sentences;
+- quick and advanced profile filters;
+- Topic / Word type / Level / Grammar curriculum filters;
+- URL-persisted search/sort/filter/page state;
+- responsive desktop/mobile presentation;
+- item details and Why Review explanations.
+
+Vocabulary rows resolve EN/VI/IPA lazily from the existing shared vocabulary levels. The learning database stores only the canonical vocabulary key and learning history.
