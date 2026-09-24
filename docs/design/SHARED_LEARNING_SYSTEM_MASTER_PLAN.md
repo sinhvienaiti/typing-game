@@ -2,7 +2,7 @@
 
 ## Status
 
-**L12 COMPLETE / L13 NEXT**
+**L13 COMPLETE / L14 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1669,11 +1669,41 @@ Verification:
 
 ## L13 — Space Typing integration
 
-Emit shared vocabulary learning signals.
+**Status: COMPLETE — 2026-09-24**
 
-Allow Smart Review vocabulary runs while keeping Campaign/gameplay systems intact.
+Implemented while keeping the Campaign/combat stack intact:
 
-Do not cause spawn repetition that harms gameplay readability.
+- Combat emits one shared vocabulary Learning Event for each typed word completion, not for individual keys;
+- clean typed words are correct; corrected words are wrong with `spelling`;
+- skill/Nova kills that do not complete a typed word are not falsely recorded as learned vocabulary;
+- Recall mode emits one shared recall event from the existing Recall result, preserving response time, hint usage and replay usage;
+- parent Smart Review accepts Space-compatible Remember Words / Spelling / Mixed vocabulary queues only;
+- review keys resolve through the shared 18k vocabulary lookup, preserve parent order and fail closed if any item is unavailable;
+- Smart Review reuses the existing Campaign stage/gameplay systems instead of introducing a separate mini-game;
+- Remember Words routes through Space Recall; Spelling/Mixed route through Combat;
+- selected review vocabulary survives stage preparation and special-stage vocabulary logic cannot overwrite it;
+- existing stage word-variety/ledger behavior remains responsible for readable spawn distribution within the selected set;
+- manual gameplay-mode or vocabulary-source changes exit temporary review mode and restore the normal configured vocabulary/mode;
+- the parent remains the sole owner of mastery, due selection and review priority;
+- static UI markup was moved from the JS bundle into `index.html` without changing UI behavior, reducing JS raw size from 654.45 KiB to 612.83 KiB and restoring the existing 650 KiB performance gate.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/space-typing
+main
+a50dcfcb29d7ff27a365a8ebf093836aeae97d2b
+~~~
+
+Verification:
+
+- Space Typing CI run 36022862848: PASS;
+- 150 test files / 758 tests PASS;
+- TypeScript + Vite production build PASS;
+- bundle budget PASS at 612.83 KiB JS raw / 753.29 KiB total raw;
+- parent Platform CI run 36023259689: PASS;
+- shared-learning checks, Space test/build and Portal build PASS.
+
 
 ## L14 — Karaoke Typing integration
 
