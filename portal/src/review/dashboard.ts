@@ -10,6 +10,7 @@ import {
 } from "../../../shared/learning/query.mjs";
 import {
   ReviewVocabularyRepository,
+  type ReviewOption,
   type VocabularyEntry,
 } from "./vocabulary";
 
@@ -32,6 +33,14 @@ type ReviewState = {
   replayMin: number | null;
   responseMsMin: number | null;
   correctStreakMax: number | null;
+  topic: string;
+  wordType: string;
+  level: number | null;
+  grammarCategory: string;
+  lastSeenFrom: string;
+  lastSeenTo: string;
+  lastWrongFrom: string;
+  lastWrongTo: string;
 };
 
 type Navigate = (url: string) => void;
@@ -140,6 +149,14 @@ function parseState(): ReviewState {
     replayMin: optionalPositiveInt(params, "replays"),
     responseMsMin: optionalPositiveInt(params, "slowMs"),
     correctStreakMax: optionalPositiveInt(params, "streakMax"),
+    topic: params.get("topic") ?? "",
+    wordType: params.get("wordType") ?? "",
+    level: optionalPositiveInt(params, "level"),
+    grammarCategory: params.get("grammar") ?? "",
+    lastSeenFrom: params.get("seenFrom") ?? "",
+    lastSeenTo: params.get("seenTo") ?? "",
+    lastWrongFrom: params.get("wrongFrom") ?? "",
+    lastWrongTo: params.get("wrongTo") ?? "",
   };
 }
 
@@ -267,6 +284,21 @@ function select(
   return label;
 }
 
+function dateInput(
+  labelText: string,
+  value: string,
+  onChange: (value: string) => void,
+): HTMLLabelElement {
+  const label = element("label", "review-field");
+  label.append(element("span", undefined, labelText));
+  const input = document.createElement("input");
+  input.type = "date";
+  input.value = value;
+  input.addEventListener("change", () => onChange(input.value));
+  label.append(input);
+  return label;
+}
+
 function numberInput(
   labelText: string,
   value: number | null,
@@ -382,12 +414,42 @@ export class SmartReviewDashboard {
     const state = parseState();
     const now = new Date().toISOString();
     const entityType = entityTypeForTab(state.tab);
+    const [topicOptions, wordTypeOptions, grammarOptions] = await Promise.all([
+      entityType === "vocabulary" ? this.#vocabulary.topicOptions() : Promise.resolve([]),
+      entityType === "vocabulary" ? this.#vocabulary.wordTypeOptions() : Promise.resolve([]),
+      entityType === "grammar" ? this.#vocabulary.grammarOptions() : Promise.resolve([]),
+    ]);
 
     let workingProfile = scopedProfile(
       profile,
       entityType,
       (record) => matchesQuick(record, state.quick, now),
     );
+
+    if (
+      entityType === "vocabulary" &&
+      (state.topic !== "" || state.wordType !== "" || state.level !== null)
+    ) {
+      const learnedKeys = Object.keys(workingProfile.vocabulary);
+      const allowed = await this.#vocabulary.filterLearnedKeys(learnedKeys, {
+        ...(state.topic === "" ? {} : { topicId: state.topic }),
+        ...(state.wordType === "" ? {} : { wordTypeId: state.wordType }),
+        ...(state.level === null ? {} : { level: state.level }),
+      });
+      workingProfile = scopedProfile(
+        workingProfile,
+        entityType,
+        (record) => allowed.has(record.wordKey ?? ""),
+      );
+    }
+
+    if (entityType === "grammar" && state.grammarCategory !== "") {
+      workingProfile = scopedProfile(
+        workingProfile,
+        entityType,
+        (record) => record.grammarId === state.grammarCategory,
+      );
+    }
 
     let querySearch = state.search;
     if (state.search.trim() !== "") {
@@ -436,6 +498,18 @@ export class SmartReviewDashboard {
     if (state.dateRange === "today") filters["lastWrongFrom"] = dateStart(0);
     if (state.dateRange === "7d") filters["lastWrongFrom"] = dateStart(6);
     if (state.dateRange === "30d") filters["lastWrongFrom"] = dateStart(29);
+    if (state.lastSeenFrom !== "") {
+      filters["lastSeenFrom"] = new Date(`${state.lastSeenFrom}T00:00:00`).toISOString();
+    }
+    if (state.lastSeenTo !== "") {
+      filters["lastSeenTo"] = new Date(`${state.lastSeenTo}T23:59:59.999`).toISOString();
+    }
+    if (state.lastWrongFrom !== "") {
+      filters["lastWrongFrom"] = new Date(`${state.lastWrongFrom}T00:00:00`).toISOString();
+    }
+    if (state.lastWrongTo !== "") {
+      filters["lastWrongTo"] = new Date(`${state.lastWrongTo}T23:59:59.999`).toISOString();
+    }
     if (state.mastery === "needs") {
       filters["masteryMin"] = 0;
       filters["masteryMax"] = 39;
@@ -482,7 +556,7 @@ export class SmartReviewDashboard {
       this.#renderHeader(profile, now),
       this.#renderTabs(state),
       this.#renderQuickFilters(state),
-      this.#renderFilters(state),
+      this.#renderFilters(state, topicOptions, wordTypeOptions, grammarOptions),
       this.#renderResults(result, vocabulary, now),
     );
   }
@@ -592,7 +666,12 @@ export class SmartReviewDashboard {
     return wrap;
   }
 
-  #renderFilters(state: ReviewState): HTMLElement {
+  #renderFilters(
+    state: ReviewState,
+    topicOptions: ReviewOption[],
+    wordTypeOptions: ReviewOption[],
+    grammarOptions: ReviewOption[],
+  ): HTMLElement {
     const section = element("section", "review-filters");
     const searchLabel = element("label", "review-field review-search");
     searchLabel.append(element("span", undefined, "Search"));
@@ -671,12 +750,73 @@ export class SmartReviewDashboard {
       state.hintMin !== null ||
       state.replayMin !== null ||
       state.responseMsMin !== null ||
-      state.correctStreakMax !== null;
+      state.correctStreakMax !== null ||
+      state.topic !== "" ||
+      state.wordType !== "" ||
+      state.level !== null ||
+      state.grammarCategory !== "" ||
+      state.lastSeenFrom !== "" ||
+      state.lastSeenTo !== "" ||
+      state.lastWrongFrom !== "" ||
+      state.lastWrongTo !== "";
     advanced.open = hasAdvanced;
     const summary = document.createElement("summary");
     summary.textContent = "More filters";
     const advancedGrid = element("div", "review-filter-grid review-advanced");
+
+    if (state.tab === "words") {
+      advancedGrid.append(
+        select(
+          "Topic",
+          state.topic,
+          [["", "All topics"], ...topicOptions.map((option) => [option.id, option.label] as const)],
+          (value) => this.#setParam("topic", value),
+        ),
+        select(
+          "Word type",
+          state.wordType,
+          [["", "All word types"], ...wordTypeOptions.map((option) => [option.id, option.label] as const)],
+          (value) => this.#setParam("wordType", value),
+        ),
+        select(
+          "Library level",
+          state.level === null ? "" : String(state.level),
+          [
+            ["", "All levels"],
+            ...Array.from({ length: 100 }, (_, index) => {
+              const value = String(index + 1);
+              return [value, `Level ${value.padStart(3, "0")}`] as const;
+            }),
+          ],
+          (value) => this.#setParam("level", value),
+        ),
+      );
+    }
+
+    if (state.tab === "grammar") {
+      advancedGrid.append(
+        select(
+          "Grammar category",
+          state.grammarCategory,
+          [["", "All grammar"], ...grammarOptions.map((option) => [option.id, option.label] as const)],
+          (value) => this.#setParam("grammar", value),
+        ),
+      );
+    }
+
     advancedGrid.append(
+      dateInput("Last seen from", state.lastSeenFrom, (value) =>
+        this.#setParam("seenFrom", value),
+      ),
+      dateInput("Last seen to", state.lastSeenTo, (value) =>
+        this.#setParam("seenTo", value),
+      ),
+      dateInput("Last mistake from", state.lastWrongFrom, (value) =>
+        this.#setParam("wrongFrom", value),
+      ),
+      dateInput("Last mistake to", state.lastWrongTo, (value) =>
+        this.#setParam("wrongTo", value),
+      ),
       numberInput("Mistakes ≥", state.mistakeMin, "0", (value) =>
         this.#setNumberParam("mistakes", value),
       ),
