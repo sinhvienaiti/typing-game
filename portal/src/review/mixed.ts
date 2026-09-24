@@ -16,6 +16,7 @@ type StoredMixedReview = {
   sourcePlanCreatedAt: string;
   session: MixedReviewSession;
   progress: MixedReviewProgress;
+  launchedSegmentId: string | null;
 };
 
 export type MixedReviewState = StoredMixedReview & {
@@ -80,6 +81,7 @@ export function ensureMixedReview(plan: ReviewPlan): MixedReviewState {
     sourcePlanCreatedAt: plan.createdAt,
     session,
     progress: createMixedReviewProgress(session),
+    launchedSegmentId: null,
   });
 }
 
@@ -90,6 +92,32 @@ export function activeMixedReviewPlan(
   return state.activeSegment === null
     ? null
     : reviewPlanForMixedSegment(plan, state.activeSegment);
+}
+
+export function markMixedReviewSegmentStarted(
+  plan: ReviewPlan,
+): MixedReviewState {
+  const current = ensureMixedReview(plan);
+  if (current.activeSegment === null) return current;
+  return save({
+    version: 1,
+    sourcePlanCreatedAt: current.sourcePlanCreatedAt,
+    session: current.session,
+    progress: current.progress,
+    launchedSegmentId: current.activeSegment.id,
+  });
+}
+
+export function cancelMixedReviewSegmentStart(): MixedReviewState | null {
+  const current = readMixedReview();
+  if (current === null) return null;
+  return save({
+    version: 1,
+    sourcePlanCreatedAt: current.sourcePlanCreatedAt,
+    session: current.session,
+    progress: current.progress,
+    launchedSegmentId: null,
+  });
 }
 
 export function recordMixedLearningEvent(
@@ -106,6 +134,18 @@ export function recordMixedLearningEvent(
       matched: false,
       segmentCompleted: false,
       sessionCompleted: current?.progress.completedAt !== null,
+      state: current,
+    };
+  }
+
+  if (
+    current.activeSegment === null ||
+    current.launchedSegmentId !== current.activeSegment.id
+  ) {
+    return {
+      matched: false,
+      segmentCompleted: false,
+      sessionCompleted: false,
       state: current,
     };
   }
@@ -130,6 +170,9 @@ export function recordMixedLearningEvent(
     sourcePlanCreatedAt: current.sourcePlanCreatedAt,
     session: current.session,
     progress: result.progress,
+    launchedSegmentId: result.segmentCompleted
+      ? null
+      : current.launchedSegmentId,
   });
   return {
     matched: true,
