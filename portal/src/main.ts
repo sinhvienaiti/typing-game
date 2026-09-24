@@ -2,6 +2,7 @@ import "./styles.css";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
+import { SmartReviewFlow } from "./review/session";
 
 type Game = {
   id: string;
@@ -59,6 +60,7 @@ let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
 const learningBridge = new ParentLearningBridge();
 const reviewDashboard = new SmartReviewDashboard(navigate);
+const reviewFlow = new SmartReviewFlow(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -215,6 +217,18 @@ function renderRoute(): void {
   if (path === "/review") {
     music.setKaraokeActive(false);
     routeHost.replaceChildren(reviewDashboard.render());
+    return;
+  }
+
+  if (path === "/review/build") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(reviewFlow.renderBuilder());
+    return;
+  }
+
+  if (path === "/review/session") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(reviewFlow.renderSession());
     return;
   }
 
