@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD + ACTION-RACE REVIEWS COMPLETE / PARENT SYNC CI PENDING**
+Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD + ACTION-RACE REVIEWS COMPLETE / AUTOMATED CI GREEN**
 
 ## 1. Goal
 
@@ -651,4 +651,4 @@ Confirmed fixes:
 
 The implementation changes transaction control only. Recovery effects, item costs, Campaign progression, checkpoint semantics, audio, visuals and difficulty are unchanged.
 
-The parent gitlink is being updated to this child. Full Parent Platform CI is required before closing this follow-up.
+The parent gitlink is updated to this child. Parent Platform CI #236 passed the complete integration pipeline.
