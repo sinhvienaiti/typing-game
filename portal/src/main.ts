@@ -3,6 +3,7 @@ import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
 import { SmartReviewFlow } from "./review/session";
+import { LearningMaintenancePage } from "./review/maintenance";
 import {
   clearPendingMonkeyReview,
   postPendingMonkeyReview,
@@ -114,6 +115,7 @@ const learningBridge = new ParentLearningBridge(
 );
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
+const learningMaintenance = new LearningMaintenancePage(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -356,6 +358,12 @@ function renderRoute(): void {
   if (path === "/review") {
     music.setKaraokeActive(false);
     routeHost.replaceChildren(reviewDashboard.render());
+    return;
+  }
+
+  if (path === "/review/data") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(learningMaintenance.render());
     return;
   }
 
