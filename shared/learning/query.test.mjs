@@ -209,3 +209,51 @@ test("profile query filters, sorts and paginates bounded results", () => {
     result.items[0].reviewPriority >= result.items[1].reviewPriority,
   );
 });
+
+
+test("large learning profiles remain page-bounded and navigable", () => {
+  const profile = createEmptyLearningProfile(
+    "2026-09-24T10:00:00.000Z",
+  );
+
+  for (let index = 0; index < 5000; index += 1) {
+    const key = `word-${String(index).padStart(4, "0")}`;
+    profile.vocabulary[key] = {
+      wordKey: key,
+      attempts: 4,
+      correct: 2,
+      wrong: 2,
+      hints: index % 3 === 0 ? 1 : 0,
+      replays: index % 5 === 0 ? 1 : 0,
+      avgResponseMs: 1000 + (index % 8) * 750,
+      responseSamples: 4,
+      correctStreak: index % 2,
+      lastSeenAt: "2026-09-24T09:00:00.000Z",
+      lastCorrectAt: "2026-09-23T09:00:00.000Z",
+      lastWrongAt: "2026-09-24T09:00:00.000Z",
+      mastery: 50,
+      reviewPriority: 50,
+      nextReviewAt: "2026-09-24T09:00:00.000Z",
+      sourceGames: ["monkeytype"],
+      recentMistakes: [],
+    };
+  }
+
+  const lastPage = queryLearningProfile(
+    profile,
+    {
+      entityType: "vocabulary",
+      page: 999,
+      pageSize: 100,
+      sort: "a-z",
+    },
+    "2026-09-24T10:00:00.000Z",
+  );
+
+  assert.equal(lastPage.totalItems, 5000);
+  assert.equal(lastPage.totalPages, 50);
+  assert.equal(lastPage.page, 50);
+  assert.equal(lastPage.items.length, 100);
+  assert.equal(lastPage.items[0].entityId, "word-4900");
+  assert.equal(lastPage.items[99].entityId, "word-4999");
+});
