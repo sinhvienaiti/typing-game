@@ -2,7 +2,7 @@
 
 ## Status
 
-**L03 COMPLETE / L04 NEXT**
+**L04 COMPLETE / L05 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1349,20 +1349,31 @@ Implement:
 
 ## L04 — Smart Review Builder + Session Core
 
-Implement:
+**Status: COMPLETE — 2026-09-24**
 
-- Due Now,
-- Today,
-- 7 Days,
-- 30 Days,
-- Weakest,
-- At Risk,
-- Custom,
-- content selection,
-- count selection,
-- goal selection,
-- compatible-game selection,
-- Quick Review.
+Implemented one canonical parent review planner and session shell:
+
+- review sets: Due Now / Today’s Mistakes / Recent 7 Days / Recent 30 Days / Weakest / At Risk / Custom;
+- content selection: Vocabulary / Grammar / Sentences;
+- count selection: 10 / 20 / 30 / 50 / All;
+- source-game filter;
+- goals: remember words / spelling / listening / grammar / sentence building / mixed;
+- compatible-game capability matrix;
+- incompatible content is preserved/excluded instead of silently routed to an unsupported game;
+- Quick Smart Review uses a 15-minute target, Due Now, mixed content/goal and the shared mixed-review planner;
+- parent-only `/review/build` Review Builder;
+- parent-only `/review/session` persisted session shell using sessionStorage;
+- Dashboard Start Smart Review and item-level Practice Now now route into the Builder;
+- exact-item Practice Now scopes the plan to that entity/item;
+- shared At Risk logic is canonical in `review-session.mjs` and reused by the Dashboard;
+- child game adapters intentionally remain in their own later milestones; the parent session does not fabricate child integration before those adapters exist.
+
+Verification:
+
+- planner/unit coverage for set semantics, amount/source filtering, capability matching, Quick Review and At Risk rules;
+- a failing Recent-30-Days fixture was corrected because the roadmap defines date sets as recent **mistakes**, while the fixture had incorrectly created a successful attempt;
+- Platform CI #292: PASS, including shared-learning tests, Portal TypeScript/Vite build, Recall tests/build and Space tests/build.
+
 
 ## L05 — Monkeytype Vietnamese IME
 
