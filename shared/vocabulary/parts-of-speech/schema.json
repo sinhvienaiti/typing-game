@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/vocabulary/parts-of-speech/schema.json",
+  "title": "Generated Part-of-Speech Views",
+  "type": "object",
+  "required": [
+    "version",
+    "categories"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "tokens",
+          "entries",
+          "missing"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "level"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "level": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              }
+            }
+          },
+          "missing": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
