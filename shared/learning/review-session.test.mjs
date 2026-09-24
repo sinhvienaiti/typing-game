@@ -6,6 +6,7 @@ import {
   createEmptyLearningProfile,
 } from "./core.mjs";
 import {
+  REVIEW_CAPABILITIES,
   buildQuickReviewPlan,
   buildReviewPlan,
   compatibleGamesForItem,
@@ -214,4 +215,23 @@ test("Monkey goal compatibility narrows content before dataset launch", () => {
   assert.ok(
     sentences.items.every((item) => item.entityType === "sentence"),
   );
+});
+
+
+test("cross-game capability matrix exposes only concrete review executors", () => {
+  assert.deepEqual(Object.keys(REVIEW_CAPABILITIES), [
+    "monkeytype",
+    "recall-typing",
+    "vocab-shooter",
+    "space-typing",
+    "karaoke-typing",
+  ]);
+
+  const vocabularyGames = compatibleGamesForItem(
+    { entityType: "vocabulary" },
+    "mixed",
+  );
+  assert.ok(vocabularyGames.length >= 1);
+  assert.equal(vocabularyGames.includes("mixed-review"), false);
+  assert.equal(vocabularyGames.includes("adaptive-mix"), false);
 });
