@@ -1,4 +1,5 @@
 import "./styles.css";
+import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 
 type Game = {
@@ -55,6 +56,7 @@ const music = new SharedMusicPlayer();
 const navButtons = new Map<string, HTMLButtonElement>();
 let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
+const learningBridge = new ParentLearningBridge();
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -219,6 +221,8 @@ function renderRoute(): void {
 }
 
 window.addEventListener("message", (event: MessageEvent<unknown>) => {
+  if (learningBridge.handleMessage(event, currentFrame, currentGame)) return;
+
   if (!gameOrigins.has(event.origin)) return;
   if (currentFrame === null || event.source !== currentFrame.contentWindow) return;
   if (event.data === null || typeof event.data !== "object") return;
@@ -229,5 +233,8 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   music.setSpeechActive(data["active"]);
 });
 
+window.addEventListener("pagehide", () => {
+  void learningBridge.flush();
+});
 window.addEventListener("popstate", renderRoute);
 renderRoute();
