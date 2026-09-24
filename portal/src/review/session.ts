@@ -20,7 +20,7 @@ import {
 type Navigate = (url: string) => void;
 type StartReview = (plan: ReviewPlan) => Promise<void>;
 
-const SESSION_KEY = "typingGameReviewSessionV1";
+export const REVIEW_REVIEW_SESSION_KEY = "typingGameReviewSessionV1";
 
 const GAME_LABELS: Record<string, string> = {
   monkeytype: "Monkeytype",
@@ -127,7 +127,7 @@ function onlyRequestedItem(
 function storeSession(plan: ReviewPlan): void {
   clearMixedReview();
   sessionStorage.setItem(
-    SESSION_KEY,
+    REVIEW_SESSION_KEY,
     JSON.stringify({
       version: 1,
       savedAt: new Date().toISOString(),
@@ -136,8 +136,12 @@ function storeSession(plan: ReviewPlan): void {
   );
 }
 
+export function clearStoredReviewSession(): void {
+  sessionStorage.removeItem(REVIEW_SESSION_KEY);
+}
+
 function readSession(): ReviewPlan | null {
-  const raw = sessionStorage.getItem(SESSION_KEY);
+  const raw = sessionStorage.getItem(REVIEW_SESSION_KEY);
   if (raw === null) return null;
   try {
     const parsed = JSON.parse(raw) as {
