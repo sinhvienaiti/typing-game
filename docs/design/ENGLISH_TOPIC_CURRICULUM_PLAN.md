@@ -461,3 +461,33 @@ The implementation target for this pass is:
 10. post-implementation review for UI/UX, logic and performance.
 
 The first pass must prefer exact normalized headword/phrase references already present in the 18k library. Missing terms are reported, not invented.
+
+## 18. Implementation checkpoint — shared curriculum foundation
+
+Implemented in the first active pass:
+
+- 15 practical top-level groups;
+- 101 learner-facing subtopics;
+- deterministic exact-key mapping against the existing 18k `lookup.json`;
+- 835 unique existing vocabulary keys referenced by topic metadata;
+- 98.7% exact match across requested topic references;
+- core noun / verb / adjective / adverb learning views;
+- additional function-word / phrase POS views with explicit gap reporting;
+- Present / Past / Future primary learner-facing grammar modules;
+- 13 supporting practical grammar modules;
+- generated reverse topic lookup for cross-game reuse;
+- deterministic coverage-gap report instead of fabricated lexical entries;
+- JSON schemas, generator, validator and parent CI drift guard.
+
+Known lexical gaps intentionally remain visible for later trusted enrichment, especially:
+
+- articles/pronouns/function words excluded from the current 18k production selection;
+- common phrasal verbs;
+- common collocations;
+- fixed phrases.
+
+These gaps do not block topic browsing. Grammar modules retain the real grammar tokens even
+when those tokens are not yet standalone EN/VI/IPA vocabulary records.
+
+Next implementation phase is T15: lazy topic/POS/grammar selection in the games, followed by
+cross-game QA and the requested second UI/UX + logic + performance review.
