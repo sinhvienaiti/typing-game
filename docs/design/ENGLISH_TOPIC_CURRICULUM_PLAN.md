@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **T16 CROSS-GAME REVIEW FIXES IMPLEMENTED / PARENT INTEGRATION CI PENDING**
+Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD REVIEW IMPLEMENTED / PARENT SYNC CI PENDING**
 
 ## 1. Goal
 
@@ -609,3 +609,24 @@ The review did **not** reduce:
 Space Typing retry/checkpoint/route source flow was re-read during this pass. The current rollback path restores the committed frontier, exits Game's stale game-over phase before navigation, and intentionally opens Sector Briefing when a frontier route choice is required. No additional source-level retry defect was confirmed in this pass; real-browser interaction remains part of M22.
 
 Parent Platform CI is the final automated integration gate for this T16 checkpoint. Real-device Space Typing M22 audio/visual/performance acceptance remains separate and pending.
+
+
+## 20. Post-T16 Space Typing HUD follow-up — 2026-09-24
+
+After the T16 cross-game review was merged and Parent Platform CI #231 passed, a further Space Typing source review found additional avoidable HUD/main-thread work and one Route Map clarity issue.
+
+Reviewed child: `073bc02cb964876b3cfb451ff804017bfae7fec6`.
+
+Child CI #643: PASS.
+
+Confirmed fixes:
+
+- Combat Hotbar DOM nodes are cached instead of re-querying all slots and descendants on the 150 ms skill/status cadence.
+- Unchanged Hotbar slot states skip text/class/title/disabled DOM writes.
+- Boss stagger no longer emits boss-HUD callbacks every simulation frame; Canvas stagger presentation remains live and the DOM HUD updates on state transitions.
+- Boss HUD uses guarded text/width/class writes.
+- Route Map separates optional Shop/Station services from primary encounter navigation and names the target Stage directly.
+
+No gameplay, visual, enemy, projectile, particle, audio or curriculum feature was removed or reduced.
+
+The parent gitlink is being updated to this reviewed child. Full Parent Platform CI is the remaining automated gate for this follow-up. Space Typing M22 real-browser/audio/performance acceptance remains separate and pending.
