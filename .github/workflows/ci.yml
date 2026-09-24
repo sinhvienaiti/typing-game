@@ -58,6 +58,12 @@ jobs:
           pnpm vocab:generate
           git diff --exit-code -- shared/vocabulary/index.json shared/vocabulary/lookup.json
 
+      - name: Validate shared vocabulary curriculum
+        run: |
+          pnpm curriculum:validate
+          pnpm curriculum:generate
+          git diff --exit-code -- shared/vocabulary/topics shared/vocabulary/parts-of-speech shared/vocabulary/grammar shared/vocabulary/curriculum/coverage.json
+
       - name: Validate shared typing texts
         run: |
           pnpm typing-texts:validate
@@ -79,6 +85,9 @@ jobs:
         run: |
           node --check scripts/prepare-vocabulary-candidates.mjs
           node --check scripts/build-vocabulary-library.mjs
+          node --check scripts/vocabulary-curriculum-core.mjs
+          node --check scripts/generate-vocabulary-curriculum.mjs
+          node --check scripts/validate-vocabulary-curriculum.mjs
           node --check scripts/typing-text-core.mjs
           node --check scripts/generate-typing-texts.mjs
           node --check scripts/validate-typing-texts.mjs
