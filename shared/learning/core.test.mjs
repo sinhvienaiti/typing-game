@@ -200,3 +200,16 @@ test("batched learning updates keep the input profile immutable", () => {
   assert.notEqual(output, input);
   assert.equal(output.vocabulary.environment.attempts, 3);
 });
+
+
+test("prototype-like entity ids are stored as own learning records safely", () => {
+  const profile = applyLearningEvent(
+    createEmptyLearningProfile(),
+    event({ entityId: "__proto__" }),
+  );
+
+  assert.equal(Object.getPrototypeOf(profile.vocabulary), Object.prototype);
+  assert.equal(Object.hasOwn(profile.vocabulary, "__proto__"), true);
+  assert.equal(profile.vocabulary["__proto__"].wordKey, "__proto__");
+  assert.equal(profile.vocabulary["__proto__"].attempts, 1);
+});
