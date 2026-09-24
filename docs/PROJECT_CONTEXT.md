@@ -161,7 +161,21 @@ Recall shared-learning checkpoint:
 - Recall CI run 36017329739 PASS;
 - parent Platform CI run 36018360661 PASS.
 
-Next active milestone: **L12 — Vocabulary Shooter integration**.
+L12 Vocabulary Shooter integration is complete.
+
+Vocabulary Shooter shared-learning checkpoint:
+
+- one vocabulary Learning Event is emitted per resolved target, not per key;
+- corrected spelling errors and escaped/impact targets remain wrong learning attempts;
+- parent Smart Review supports Remember Words / Spelling / Mixed vocabulary runs;
+- review vocabulary resolves from the shared 18k library and reuses bounded Target Rush gameplay;
+- review settings remain temporary and normal Class/Topic/Word type/Grammar/Custom modes are preserved;
+- no child mastery/review-priority engine was introduced;
+- child revision: `b1721c43be075836a293fa6ba10ba908f4d06c22`;
+- Shooter CI run 36019201874 PASS;
+- parent Platform CI run 36019549335 PASS.
+
+Next active milestone: **L13 — Space Typing integration**.
 
 ---
 
