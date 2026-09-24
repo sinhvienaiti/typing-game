@@ -29,6 +29,7 @@ const GAME_LABELS: Record<string, string> = {
   "space-typing": "Space Typing",
   "karaoke-typing": "Karaoke Typing",
   "mixed-review": "Mixed Review",
+  "adaptive-mix": "Adaptive Mix",
 };
 
 const CONTENT_LABELS: Record<LearningEntityType, string> = {
@@ -301,6 +302,7 @@ export class SmartReviewFlow {
         ["space-typing", "Space Typing"],
         ["karaoke-typing", "Karaoke Typing"],
         ["mixed-review", "Mixed Review"],
+        ["adaptive-mix", "Adaptive Mix"],
       ],
       "mixed-review",
     );
@@ -463,7 +465,8 @@ export class SmartReviewFlow {
     }
 
     const mixedState =
-      plan.options.game === "mixed-review"
+      plan.options.game === "mixed-review" ||
+      plan.options.game === "adaptive-mix"
         ? ensureMixedReview(plan)
         : null;
 
@@ -474,8 +477,9 @@ export class SmartReviewFlow {
       element(
         "h1",
         undefined,
-        plan.options.game === "mixed-review"
-          ? "Mixed Review"
+        plan.options.game === "mixed-review" ||
+        plan.options.game === "adaptive-mix"
+          ? GAME_LABELS[plan.options.game]
           : GAME_LABELS[plan.options.game] ?? plan.options.game,
       ),
       element(
@@ -528,7 +532,13 @@ export class SmartReviewFlow {
           undefined,
           active === null
             ? `All ${mixedState.session.totalItems} items have produced persisted learning evidence.`
-            : `Next: ${GAME_LABELS[active.game] ?? active.game} · ${active.items.length} item${active.items.length === 1 ? "" : "s"}. Progress is stored by the parent and survives game transitions.`,
+            : `Next: ${GAME_LABELS[active.game] ?? active.game} · ${active.items.length} item${active.items.length === 1 ? "" : "s"}.` +
+              (plan.options.game === "adaptive-mix" &&
+              "reasons" in active &&
+              Array.isArray(active.reasons) &&
+              active.reasons.length > 0
+                ? ` Why: ${active.reasons[0]}`
+                : " Progress is stored by the parent and survives game transitions."),
         ),
       );
     } else {
@@ -584,7 +594,10 @@ export class SmartReviewFlow {
     rebuild.addEventListener("click", () => this.#navigate("/review/build"));
     footer.append(dashboard, rebuild);
 
-    if (plan.options.game === "mixed-review") {
+    if (
+      plan.options.game === "mixed-review" ||
+      plan.options.game === "adaptive-mix"
+    ) {
       const segmentPlan = activeMixedReviewPlan(plan);
       const active = mixedState?.activeSegment ?? null;
       if (segmentPlan !== null && active !== null) {
