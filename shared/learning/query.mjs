@@ -101,6 +101,14 @@ export function parseLearningQuery(input) {
     0,
     100,
   );
+  const lastSeenFrom = parseDate(
+    rawFilters.lastSeenFrom,
+    "filters.lastSeenFrom",
+  );
+  const lastSeenTo = parseDate(
+    rawFilters.lastSeenTo,
+    "filters.lastSeenTo",
+  );
   const lastWrongFrom = parseDate(
     rawFilters.lastWrongFrom,
     "filters.lastWrongFrom",
@@ -108,6 +116,36 @@ export function parseLearningQuery(input) {
   const lastWrongTo = parseDate(
     rawFilters.lastWrongTo,
     "filters.lastWrongTo",
+  );
+  const mistakeMin = optionalNumber(
+    rawFilters.mistakeMin,
+    "filters.mistakeMin",
+    0,
+    1_000_000,
+  );
+  const hintMin = optionalNumber(
+    rawFilters.hintMin,
+    "filters.hintMin",
+    0,
+    1_000_000,
+  );
+  const replayMin = optionalNumber(
+    rawFilters.replayMin,
+    "filters.replayMin",
+    0,
+    1_000_000,
+  );
+  const responseMsMin = optionalNumber(
+    rawFilters.responseMsMin,
+    "filters.responseMsMin",
+    0,
+    600_000,
+  );
+  const correctStreakMax = optionalNumber(
+    rawFilters.correctStreakMax,
+    "filters.correctStreakMax",
+    0,
+    1_000_000,
   );
 
   if (
@@ -123,6 +161,15 @@ export function parseLearningQuery(input) {
   ) {
     throw new TypeError(
       "filters.masteryMin must not exceed filters.masteryMax",
+    );
+  }
+  if (
+    lastSeenFrom !== undefined &&
+    lastSeenTo !== undefined &&
+    Date.parse(lastSeenFrom) > Date.parse(lastSeenTo)
+  ) {
+    throw new TypeError(
+      "filters.lastSeenFrom must not be after filters.lastSeenTo",
     );
   }
   if (
@@ -150,8 +197,15 @@ export function parseLearningQuery(input) {
       ...(rawFilters.dueOnly === undefined
         ? {}
         : { dueOnly: rawFilters.dueOnly }),
+      ...(lastSeenFrom === undefined ? {} : { lastSeenFrom }),
+      ...(lastSeenTo === undefined ? {} : { lastSeenTo }),
       ...(lastWrongFrom === undefined ? {} : { lastWrongFrom }),
       ...(lastWrongTo === undefined ? {} : { lastWrongTo }),
+      ...(mistakeMin === undefined ? {} : { mistakeMin }),
+      ...(hintMin === undefined ? {} : { hintMin }),
+      ...(replayMin === undefined ? {} : { replayMin }),
+      ...(responseMsMin === undefined ? {} : { responseMsMin }),
+      ...(correctStreakMax === undefined ? {} : { correctStreakMax }),
     },
   };
 }
@@ -275,6 +329,19 @@ export function queryLearningProfile(
         return false;
       }
       if (
+        filters.lastSeenFrom !== undefined &&
+        dateValue(item.lastSeenAt, -Infinity) <
+          Date.parse(filters.lastSeenFrom)
+      ) {
+        return false;
+      }
+      if (
+        filters.lastSeenTo !== undefined &&
+        dateValue(item.lastSeenAt, Infinity) > Date.parse(filters.lastSeenTo)
+      ) {
+        return false;
+      }
+      if (
         filters.lastWrongFrom !== undefined &&
         dateValue(item.lastWrongAt, -Infinity) <
           Date.parse(filters.lastWrongFrom)
@@ -284,6 +351,27 @@ export function queryLearningProfile(
       if (
         filters.lastWrongTo !== undefined &&
         dateValue(item.lastWrongAt, Infinity) > Date.parse(filters.lastWrongTo)
+      ) {
+        return false;
+      }
+      if (filters.mistakeMin !== undefined && item.wrong < filters.mistakeMin) {
+        return false;
+      }
+      if (filters.hintMin !== undefined && item.hints < filters.hintMin) {
+        return false;
+      }
+      if (filters.replayMin !== undefined && item.replays < filters.replayMin) {
+        return false;
+      }
+      if (
+        filters.responseMsMin !== undefined &&
+        (item.avgResponseMs ?? 0) < filters.responseMsMin
+      ) {
+        return false;
+      }
+      if (
+        filters.correctStreakMax !== undefined &&
+        item.correctStreak > filters.correctStreakMax
       ) {
         return false;
       }
