@@ -13,11 +13,13 @@ function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
-function assertNonEmptyString(value, field) {
+function assertNonEmptyString(value, field, maxLength = 2000) {
   if (typeof value !== "string" || value.trim() === "") {
     throw new TypeError(`${field} must be a non-empty string`);
   }
-  return value.trim();
+  const normalized = value.trim();
+  if (normalized.length > maxLength) throw new TypeError(`${field} is too long`);
+  return normalized;
 }
 
 function parseOptionalBoolean(value, field) {
@@ -26,10 +28,11 @@ function parseOptionalBoolean(value, field) {
   return value;
 }
 
-function parseOptionalString(value, field) {
+function parseOptionalString(value, field, maxLength = 2000) {
   if (value === undefined || value === null) return undefined;
   if (typeof value !== "string") throw new TypeError(`${field} must be a string`);
   const normalized = value.normalize("NFC").trim();
+  if (normalized.length > maxLength) throw new TypeError(`${field} is too long`);
   return normalized === "" ? undefined : normalized;
 }
 
@@ -46,14 +49,14 @@ export function parseLearningEvent(input) {
     throw new TypeError(`learning event version must be ${LEARNING_EVENT_VERSION}`);
   }
 
-  const entityType = assertNonEmptyString(input.entityType, "entityType");
+  const entityType = assertNonEmptyString(input.entityType, "entityType", 32);
   if (!ENTITY_TYPES.has(entityType)) throw new TypeError("entityType is not supported");
 
-  let entityId = assertNonEmptyString(input.entityId, "entityId");
+  let entityId = assertNonEmptyString(input.entityId, "entityId", 200);
   entityId = entityType === "vocabulary" ? normalizeVocabularyKey(entityId) : entityId;
   if (entityId === "") throw new TypeError("entityId must not normalize to an empty value");
 
-  const result = assertNonEmptyString(input.result, "result");
+  const result = assertNonEmptyString(input.result, "result", 16);
   if (!RESULTS.has(result)) throw new TypeError("result must be correct or wrong");
 
   let responseMs;
@@ -66,14 +69,14 @@ export function parseLearningEvent(input) {
 
   const userAnswer = parseOptionalString(input.userAnswer, "userAnswer");
   const expectedAnswer = parseOptionalString(input.expectedAnswer, "expectedAnswer");
-  const errorType = parseOptionalString(input.errorType, "errorType");
+  const errorType = parseOptionalString(input.errorType, "errorType", 64);
 
   return {
     version: LEARNING_EVENT_VERSION,
     entityType,
     entityId,
-    gameId: assertNonEmptyString(input.gameId, "gameId"),
-    activityType: assertNonEmptyString(input.activityType, "activityType"),
+    gameId: assertNonEmptyString(input.gameId, "gameId", 64),
+    activityType: assertNonEmptyString(input.activityType, "activityType", 64),
     result,
     occurredAt: parseOccurredAt(input.occurredAt),
     ...(responseMs === undefined ? {} : { responseMs }),
@@ -278,4 +281,12 @@ export function applyLearningEvent(profileInput, eventInput) {
   next[collectionName][event.entityId] = record;
   next.updatedAt = event.occurredAt;
   return next;
+}
+
+export function applyLearningEvents(profileInput, eventInputs) {
+  if (!Array.isArray(eventInputs)) throw new TypeError("learning events must be an array");
+  return eventInputs.reduce(
+    (profile, event) => applyLearningEvent(profile, event),
+    migrateLearningProfile(profileInput),
+  );
 }
