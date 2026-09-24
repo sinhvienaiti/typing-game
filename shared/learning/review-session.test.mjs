@@ -39,7 +39,7 @@ function profile() {
       entityId: "beta",
       gameId: "space-typing",
       occurredAt: "2026-09-20T09:00:00.000Z",
-      result: "correct",
+      result: "wrong",
     }),
   );
   result = applyLearningEvent(
