@@ -2,7 +2,7 @@
 
 ## Status
 
-**L13 COMPLETE / L14 NEXT**
+**L14 COMPLETE / L15 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1707,9 +1707,39 @@ Verification:
 
 ## L14 — Karaoke Typing integration
 
-Capture vocabulary/phrase/context mistakes where reliable.
+**Status: COMPLETE — 2026-09-24**
 
-Support compatible contextual review datasets.
+Implemented while preserving the existing YouTube/local-media + LRC game flow:
+
+- normal Karaoke emits shared learning evidence at word/line boundaries rather than per keypress;
+- wrong character input is mapped only to the English word token containing that character when the token boundary is reliable;
+- completed lyric words emit at most one vocabulary event; corrected word errors remain wrong with `spelling`;
+- skipped/unfinished lines do not mark untouched trailing words as wrong; only an affected wrong word or partially typed word can emit vocabulary failure evidence;
+- each finalized lyric line can emit one sentence/context event with the typed answer, expected lyric, response time and spelling/skipped-line classification;
+- lyric lines serve as the existing phrase/context unit instead of inventing a new unsupported `phrase` entity type;
+- parent Smart Review accepts Karaoke-compatible Vocabulary/Sentence items and Remember Words / Listening / Sentence Building / Mixed goals;
+- parent review datasets recover reliable original text from recent `expectedAnswer` / sentence answer history when available and otherwise fall back to the canonical entity id rather than fabricating context;
+- Smart Review reuses the existing `GameEngine` with a bounded synthetic lyric-line queue and does not require a YouTube/local media file;
+- Listening review uses browser English TTS and records only explicit Replay presses as `replayUsed`;
+- Sentence Building / Mixed reuse hidden/blind lyric presentation while the normal media-driven Karaoke modes remain unchanged;
+- parent remains the sole owner of mastery, review priority and queue selection.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/karaoke-typing
+main
+f2bd7ae55143d98cd270535d6e6c06d87a8742ec
+~~~
+
+Verification:
+
+- Karaoke Typing CI run 36024029825: PASS;
+- child shared-learning tests PASS;
+- child TypeScript check + Vite production build PASS;
+- parent Platform CI run 36024382889: PASS;
+- parent shared-learning checks, child integration validation and Portal build PASS.
+
 
 ## L15 — Mixed Review
 
