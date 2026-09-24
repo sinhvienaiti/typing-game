@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/vocabulary/grammar/schema.json",
+  "title": "Generated Grammar Curriculum",
+  "type": "object",
+  "required": [
+    "version",
+    "primaryTimeGroups",
+    "modules"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "primaryTimeGroups": {
+      "const": [
+        "time.present",
+        "time.past",
+        "time.future"
+      ]
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "group",
+          "focus",
+          "topicIds",
+          "signalTokens",
+          "signalEntries",
+          "missingSignalKeys"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string"
+          },
+          "focus": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "topicIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "signalTokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "signalEntries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "key",
+                "level"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "level": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 100
+                }
+              }
+            }
+          },
+          "missingSignalKeys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
