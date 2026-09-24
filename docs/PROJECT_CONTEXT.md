@@ -80,7 +80,20 @@ IME checkpoint:
 - child revision: `dd700f3e4f0fd33c6ca1259d4987bdfcc4465305`;
 - Custom EN-VN CI run 35999852048 PASS (lint, stylelint, local-static build, full frontend tests).
 
-Next active milestone: **L06 — Monkeytype Learning Memory integration**.
+L06 Monkeytype Learning Memory integration is complete.
+
+Learning Memory checkpoint:
+
+- Monkeytype emits parent-contract vocabulary attempts only at item/phrase completion, not on every keypress;
+- greedy dictionary phrases are one attempt;
+- normal EN-VN learning typing and existing Recall mode are distinguished by activity type;
+- response time starts when the learning cue is presented;
+- explicit hint/replay flags are supported while automatic pronunciation is not misclassified as replay;
+- no child persistence/mastery/review engine was added; parent remains the single learning-state owner;
+- child revision: `d4ffe3131153f93da8c1ee24a0161fed9c66c5ba`;
+- Custom EN-VN CI run 36000835083 PASS.
+
+Next active milestone: **L07 — Monkey Learn + Listen**.
 
 ---
 
