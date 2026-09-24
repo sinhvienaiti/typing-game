@@ -1,6 +1,7 @@
 import "./styles.css";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
+import { SmartReviewDashboard } from "./review/dashboard";
 
 type Game = {
   id: string;
@@ -57,6 +58,7 @@ const navButtons = new Map<string, HTMLButtonElement>();
 let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
 const learningBridge = new ParentLearningBridge();
+const reviewDashboard = new SmartReviewDashboard(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -100,6 +102,7 @@ music.onPlaybackChange(() => {
 
 brand.addEventListener("click", () => navigate("/"));
 links.append(makeButton("Home", "/"));
+links.append(makeButton("Smart Review", "/review"));
 for (const game of registry.games) {
   links.append(makeButton(game.name, game.path));
 }
@@ -206,6 +209,12 @@ function renderRoute(): void {
   if (path === "/") {
     music.setKaraokeActive(false);
     routeHost.replaceChildren(renderHome());
+    return;
+  }
+
+  if (path === "/review") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(reviewDashboard.render());
     return;
   }
 
