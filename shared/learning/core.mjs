@@ -220,23 +220,28 @@ function updateAverage(previousAverage, previousMeasuredAttempts, responseMs) {
   return Math.round((previousAverage * previousMeasuredAttempts + responseMs) / (previousMeasuredAttempts + 1));
 }
 
-export function migrateLearningProfile(raw) {
+export function viewLearningProfile(raw) {
   if (raw == null) return createEmptyLearningProfile();
   if (!isPlainObject(raw)) throw new TypeError("learning profile must be an object");
   if (raw.version !== LEARNING_PROFILE_VERSION) {
     throw new TypeError(`unsupported learning profile version: ${String(raw.version)}`);
   }
 
-  const profile = createEmptyLearningProfile(
-    typeof raw.updatedAt === "string" && Number.isFinite(Date.parse(raw.updatedAt))
-      ? raw.updatedAt
-      : new Date(0).toISOString(),
-  );
+  return {
+    version: LEARNING_PROFILE_VERSION,
+    updatedAt:
+      typeof raw.updatedAt === "string" &&
+      Number.isFinite(Date.parse(raw.updatedAt))
+        ? new Date(raw.updatedAt).toISOString()
+        : new Date(0).toISOString(),
+    vocabulary: isPlainObject(raw.vocabulary) ? raw.vocabulary : {},
+    grammar: isPlainObject(raw.grammar) ? raw.grammar : {},
+    sentences: isPlainObject(raw.sentences) ? raw.sentences : {},
+  };
+}
 
-  for (const key of ["vocabulary", "grammar", "sentences"]) {
-    if (isPlainObject(raw[key])) profile[key] = structuredClone(raw[key]);
-  }
-  return profile;
+export function migrateLearningProfile(raw) {
+  return structuredClone(viewLearningProfile(raw));
 }
 
 function applyParsedLearningEvent(next, event) {
