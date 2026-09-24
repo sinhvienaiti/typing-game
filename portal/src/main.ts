@@ -9,6 +9,12 @@ import {
   queueMonkeyReview,
   readPendingMonkeyReview,
 } from "./review/monkey-adapter";
+import {
+  clearPendingRecallReview,
+  postPendingRecallReview,
+  queueRecallReview,
+  readPendingRecallReview,
+} from "./review/recall-adapter";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
@@ -80,17 +86,31 @@ function navigate(path: string): void {
 }
 
 async function startReview(plan: ReviewPlan): Promise<void> {
-  if (plan.options.game !== "monkeytype") {
-    throw new Error("This review adapter is not implemented for the selected game yet.");
+  if (plan.options.game === "monkeytype") {
+    const monkeytype = registry.games.find((game) => game.id === "monkeytype");
+    if (monkeytype === undefined) {
+      throw new Error("Monkeytype is not registered in the local portal.");
+    }
+
+    await queueMonkeyReview(plan);
+    navigate(monkeytype.path);
+    return;
   }
 
-  const monkeytype = registry.games.find((game) => game.id === "monkeytype");
-  if (monkeytype === undefined) {
-    throw new Error("Monkeytype is not registered in the local portal.");
+  if (plan.options.game === "recall-typing") {
+    const recall = registry.games.find((game) => game.id === "recall-typing");
+    if (recall === undefined) {
+      throw new Error("Recall Typing is not registered in the local portal.");
+    }
+
+    queueRecallReview(plan);
+    navigate(recall.path);
+    return;
   }
 
-  await queueMonkeyReview(plan);
-  navigate(monkeytype.path);
+  throw new Error(
+    "This review adapter is not implemented for the selected game yet.",
+  );
 }
 
 function makeButton(label: string, path: string): HTMLButtonElement {
@@ -211,13 +231,16 @@ function renderGame(game: Game): HTMLElement {
       loading.classList.add("done");
       sendSharedMusicState();
 
-      if (game.id === "monkeytype") {
-        const pending = postPendingMonkeyReview(frame, game.appUrl);
-        if (pending !== null) {
-          reviewStatus.hidden = false;
-          reviewStatus.textContent =
-            `Starting Smart Review · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"} · ${pending.goal}`;
-        }
+      const pending =
+        game.id === "monkeytype"
+          ? postPendingMonkeyReview(frame, game.appUrl)
+          : game.id === "recall-typing"
+            ? postPendingRecallReview(frame, game.appUrl)
+            : null;
+      if (pending !== null) {
+        reviewStatus.hidden = false;
+        reviewStatus.textContent =
+          `Starting Smart Review · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"} · ${pending.goal}`;
       }
 
       window.setTimeout(() => loading.remove(), 180);
@@ -291,19 +314,28 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   const data = event.data as Record<string, unknown>;
 
   if (
-    currentGame?.id === "monkeytype" &&
+    (currentGame?.id === "monkeytype" ||
+      currentGame?.id === "recall-typing") &&
     (data["type"] === "typing-game:learning:v1:review-ready" ||
       data["type"] === "typing-game:learning:v1:review-error")
   ) {
     const requestId =
       typeof data["requestId"] === "string" ? data["requestId"] : undefined;
-    const pending = readPendingMonkeyReview();
+    const pending =
+      currentGame.id === "monkeytype"
+        ? readPendingMonkeyReview()
+        : readPendingRecallReview();
     if (
       requestId !== undefined &&
       pending !== null &&
       pending.requestId === requestId
     ) {
-      clearPendingMonkeyReview(requestId);
+      if (currentGame.id === "monkeytype") {
+        clearPendingMonkeyReview(requestId);
+      } else {
+        clearPendingRecallReview(requestId);
+      }
+
       if (currentReviewStatus !== null) {
         currentReviewStatus.hidden = false;
         if (data["type"] === "typing-game:learning:v1:review-ready") {
