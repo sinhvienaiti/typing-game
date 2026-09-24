@@ -11,6 +11,7 @@ import {
 } from "../../../shared/learning/review-session.mjs";
 
 type Navigate = (url: string) => void;
+type StartReview = (plan: ReviewPlan) => Promise<void>;
 
 const SESSION_KEY = "typingGameReviewSessionV1";
 
@@ -145,9 +146,11 @@ function readSession(): ReviewPlan | null {
 export class SmartReviewFlow {
   #store = new BrowserLearningProfileStore();
   #navigate: Navigate;
+  #startReview: StartReview;
 
-  constructor(navigate: Navigate) {
+  constructor(navigate: Navigate, startReview: StartReview) {
     this.#navigate = navigate;
+    this.#startReview = startReview;
   }
 
   renderBuilder(): HTMLElement {
@@ -536,9 +539,33 @@ export class SmartReviewFlow {
     const footer = element("div", "review-session-footer");
     const dashboard = element("button", "review-secondary", "Finish for now");
     dashboard.addEventListener("click", () => this.#navigate("/review"));
-    const rebuild = element("button", "review-primary", "Change activity");
+    const rebuild = element("button", "review-secondary", "Change activity");
     rebuild.addEventListener("click", () => this.#navigate("/review/build"));
     footer.append(dashboard, rebuild);
+
+    if (plan.options.game === "monkeytype") {
+      const start = element("button", "review-primary", "Start Monkeytype");
+      start.addEventListener("click", () => {
+        start.disabled = true;
+        start.textContent = "Preparing Monkeytype…";
+        void this.#startReview(plan).catch((error: unknown) => {
+          start.disabled = false;
+          start.textContent = "Start Monkeytype";
+          notice.classList.add("error");
+          notice.replaceChildren(
+            element("strong", undefined, "Could not start Monkeytype review"),
+            element(
+              "p",
+              undefined,
+              error instanceof Error
+                ? error.message
+                : "The review dataset could not be prepared.",
+            ),
+          );
+        });
+      });
+      footer.append(start);
+    }
 
     shell.append(summary, notice, queue, footer);
     main.append(heading, shell);
