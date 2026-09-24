@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **ACTIVE IMPLEMENTATION — EXPLICIT USER OVERRIDE 2026-09-24**
+Status: **T16 CROSS-GAME REVIEW FIXES IMPLEMENTED / PARENT INTEGRATION CI PENDING**
 
 ## 1. Goal
 
@@ -545,3 +545,67 @@ Next active work is T16 plus the explicitly requested second review pass:
 - review Space Typing gameplay/retry/route state transitions;
 - review render/update hot paths for avoidable work without deleting visuals or mechanics;
 - fix every confirmed issue and repeat child + parent CI.
+
+
+## 19. T16 second review checkpoint — 2026-09-24
+
+The explicitly requested second review pass was run after Topic / Word type / Grammar integration.
+
+### Confirmed cross-game findings and fixes
+
+#### Space Typing
+
+- fixed eager loading of all four shared curriculum indexes when opening the Vocabulary dialog;
+- isolated source-load failures to the selected source instead of writing one failure across all panels;
+- added session caching for referenced vocabulary level JSON documents with failed-promise eviction for retry;
+- deduplicated Grammar + linked-topic references before deriving the representative difficulty level;
+- balanced the five source tabs responsively and exposed `aria-pressed`;
+- moved repeated particle exponential damping calculation out of the per-particle loop without reducing particle count;
+- prewarmed the complete bounded sampled-SFX pools before combat so first use no longer allocates new `Audio` elements during combat.
+
+Reviewed child: `7e7a81769675911d2418682cc5c52e60ae505ea2`.
+Child CI #638: PASS.
+
+#### Vocabulary Shooter
+
+- Vocabulary dialog now loads only the active curriculum source instead of all indexes together;
+- shared level documents are session-cached and failed loads remain retryable;
+- source tabs expose `aria-pressed`.
+
+Reviewed child: `71c77330a3d54ac0a09bb7de9d88923850387ff0`.
+Child CI #57: PASS.
+
+#### Recall Typing
+
+- Vocabulary dialog now loads only the active curriculum source instead of all indexes together;
+- shared level documents are session-cached and failed loads remain retryable;
+- source tabs expose `aria-pressed`.
+
+Reviewed child: `7f4b1b2b676a0eb302e512393b8092847a275a93`.
+Child CI #40: PASS.
+
+#### Monkeytype
+
+- existing active-source index loading was already lazy and was retained;
+- shared level documents are now session-cached across Library / Topic / Word type / Grammar preparation;
+- failed level promises are evicted so retry remains possible;
+- Custom dictionary persistence remains unchanged.
+
+Reviewed child: `610fbb8c03697b3c86ca61470f11d2b56484d715`.
+Custom EN-VN CI #74: PASS (lint, local static build and frontend tests).
+
+### Review conclusions
+
+Confirmed inefficiencies were fixed by removing redundant work, not by removing learning/gameplay features.
+
+The review did **not** reduce:
+
+- the 18,000-word lexical library;
+- Topic / Word type / Grammar choices;
+- particles, enemies, projectiles or visual quality modes;
+- Space Typing sampled/synthesized SFX;
+- Campaign logic, rewards or difficulty.
+
+Space Typing retry/checkpoint/route source flow was re-read during this pass. The current rollback path restores the committed frontier, exits Game's stale game-over phase before navigation, and intentionally opens Sector Briefing when a frontier route choice is required. No additional source-level retry defect was confirmed in this pass; real-browser interaction remains part of M22.
+
+Parent Platform CI is the final automated integration gate for this T16 checkpoint. Real-device Space Typing M22 audio/visual/performance acceptance remains separate and pending.
