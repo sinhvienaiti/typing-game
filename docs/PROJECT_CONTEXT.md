@@ -30,7 +30,17 @@ Implemented foundation:
 - parent IndexedDB persistence (`typingGameLearning/state/profile`);
 - focused Node tests and Platform CI gate.
 
-Next active milestone: **L02 — Parent messaging bridge**.
+L02 Parent Messaging Bridge is also complete.
+
+Current shared-learning transport:
+
+- `typing-game:learning:v1` Attempt/Query protocol;
+- parent validates the active iframe, exact child origin and matching game ID;
+- writes are batched and serialized in the parent IndexedDB profile;
+- review queries are bounded/paginated and flush prior pending attempts first;
+- production Portal TypeScript/Vite build passed Platform CI #264.
+
+Next active milestone: **L03 — Smart Review Dashboard V1**.
 
 ---
 
