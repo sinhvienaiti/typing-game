@@ -21,6 +21,12 @@ import {
   queueShooterReview,
   readPendingShooterReview,
 } from "./review/shooter-adapter";
+import {
+  clearPendingSpaceReview,
+  postPendingSpaceReview,
+  queueSpaceReview,
+  readPendingSpaceReview,
+} from "./review/space-adapter";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
@@ -122,6 +128,17 @@ async function startReview(plan: ReviewPlan): Promise<void> {
 
     queueShooterReview(plan);
     navigate(shooter.path);
+    return;
+  }
+
+  if (plan.options.game === "space-typing") {
+    const space = registry.games.find((game) => game.id === "space-typing");
+    if (space === undefined) {
+      throw new Error("Space Typing is not registered in the local portal.");
+    }
+
+    queueSpaceReview(plan);
+    navigate(space.path);
     return;
   }
 
@@ -255,7 +272,9 @@ function renderGame(game: Game): HTMLElement {
             ? postPendingRecallReview(frame, game.appUrl)
             : game.id === "vocab-shooter"
               ? postPendingShooterReview(frame, game.appUrl)
-              : null;
+              : game.id === "space-typing"
+                ? postPendingSpaceReview(frame, game.appUrl)
+                : null;
       if (pending !== null) {
         reviewStatus.hidden = false;
         reviewStatus.textContent =
@@ -335,7 +354,8 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   if (
     (currentGame?.id === "monkeytype" ||
       currentGame?.id === "recall-typing" ||
-      currentGame?.id === "vocab-shooter") &&
+      currentGame?.id === "vocab-shooter" ||
+      currentGame?.id === "space-typing") &&
     (data["type"] === "typing-game:learning:v1:review-ready" ||
       data["type"] === "typing-game:learning:v1:review-error")
   ) {
@@ -346,7 +366,9 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
         ? readPendingMonkeyReview()
         : currentGame.id === "recall-typing"
           ? readPendingRecallReview()
-          : readPendingShooterReview();
+          : currentGame.id === "vocab-shooter"
+            ? readPendingShooterReview()
+            : readPendingSpaceReview();
     if (
       requestId !== undefined &&
       pending !== null &&
@@ -356,8 +378,10 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
         clearPendingMonkeyReview(requestId);
       } else if (currentGame.id === "recall-typing") {
         clearPendingRecallReview(requestId);
-      } else {
+      } else if (currentGame.id === "vocab-shooter") {
         clearPendingShooterReview(requestId);
+      } else {
+        clearPendingSpaceReview(requestId);
       }
 
       if (currentReviewStatus !== null) {
