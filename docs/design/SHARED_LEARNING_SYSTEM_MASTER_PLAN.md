@@ -2,7 +2,7 @@
 
 ## Status
 
-**L11 COMPLETE / L12 NEXT**
+**L12 COMPLETE / L13 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1633,9 +1633,39 @@ Verification:
 
 ## L12 — Vocabulary Shooter integration
 
-Emit shared vocabulary events.
+**Status: COMPLETE — 2026-09-24**
 
-Support review runs using selected weak/due words while preserving normal Class/Custom modes.
+Implemented while preserving the existing Shooter modes and vocabulary source workflow:
+
+- gameplay emits one shared vocabulary Learning Event per resolved target, never per keypress;
+- a target completed without wrong keys is recorded as correct;
+- a target completed after corrected key errors is recorded as wrong with `spelling`;
+- a target that escapes/impacts is recorded as wrong with `missed-word`;
+- response timing is measured from target presentation/Target Rush spotlight activation;
+- parent Smart Review accepts Shooter-compatible Remember Words / Spelling / Mixed vocabulary queues only;
+- selected review keys resolve through the shared 18k library, preserve the parent-selected set and fail closed if a key is missing;
+- review execution reuses the existing Target Rush gameplay as a bounded run with `targetCount` equal to the selected review set;
+- the temporary review mode/settings are not persisted over the user's normal Shooter settings;
+- manual mode or Class / Topic / Word type / Grammar / Custom selection exits review mode and restores normal settings;
+- normal Class/Custom/curriculum modes remain intact;
+- the parent remains the sole owner of weak/due selection, mastery and review priority.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/vocab-shooter
+main
+b1721c43be075836a293fa6ba10ba908f4d06c22
+~~~
+
+Verification:
+
+- Vocabulary Shooter CI run 36019201874: PASS;
+- child tests PASS;
+- child TypeScript check + production build PASS;
+- parent Platform CI run 36019549335: PASS;
+- shared learning tests/checks, Portal build and platform integration checks PASS.
+
 
 ## L13 — Space Typing integration
 
