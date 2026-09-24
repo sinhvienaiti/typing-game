@@ -10,6 +10,7 @@ import {
   buildQuickReviewPlan,
   buildReviewPlan,
   compatibleGamesForItem,
+  parseReviewPlan,
   parseReviewPlanInput,
 } from "./review-session.mjs";
 
@@ -234,4 +235,31 @@ test("cross-game capability matrix exposes only concrete review executors", () =
   assert.ok(vocabularyGames.length >= 1);
   assert.equal(vocabularyGames.includes("mixed-review"), false);
   assert.equal(vocabularyGames.includes("adaptive-mix"), false);
+});
+
+
+test("persisted review plan validation rejects stale malformed session data", () => {
+  const valid = buildQuickReviewPlan(profile(), NOW);
+  assert.deepEqual(parseReviewPlan(structuredClone(valid)), valid);
+
+  const missingOptions = structuredClone(valid);
+  delete missingOptions.options;
+  assert.throws(
+    () => parseReviewPlan(missingOptions),
+    /review plan input must be an object/,
+  );
+
+  const badItems = structuredClone(valid);
+  badItems.items[0].compatibleGames = "monkeytype";
+  assert.throws(
+    () => parseReviewPlan(badItems),
+    /compatibleGames is invalid/,
+  );
+
+  const badCounts = structuredClone(valid);
+  badCounts.selectedCount += 1;
+  assert.throws(
+    () => parseReviewPlan(badCounts),
+    /counts are inconsistent/,
+  );
 });
