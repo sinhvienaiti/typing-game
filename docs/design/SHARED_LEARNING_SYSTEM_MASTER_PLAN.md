@@ -2,7 +2,7 @@
 
 ## Status
 
-**L06 COMPLETE / L07 NEXT**
+**L07 COMPLETE / L08 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1441,13 +1441,40 @@ Normal Monkeytype mode remains compatible.
 
 ## L07 — Monkey Learn + Listen
 
-Implement:
+**Status: COMPLETE — 2026-09-24**
 
-- Learn mode,
-- Listen mode,
-- replay/reveal behavior,
-- shared learning event output,
-- review dataset input.
+Implemented on the existing Monkeytype learning surface without replacing normal typing:
+
+- explicit Normal / Learn / Recall / Listen modes;
+- Learn presents English + Vietnamese + shared-library IPA and auto-pronounces the active vocabulary item;
+- Recall keeps the existing hidden-English behavior rather than creating a second recall implementation;
+- Listen hides the English target and IPA while using item-level pronunciation;
+- Listen provides explicit Replay and Reveal Letter controls;
+- Reveal Letter exposes a cumulative prefix cue without mutating Monkeytype's core per-character scorer;
+- explicit replay/hint actions feed `replayUsed` / `hintUsed` into the shared Learning Event;
+- learning attempts now identify `typing`, `learn`, `recall` and `listen` activity types;
+- a bounded parent-review dataset input accepts 1–100 vocabulary items from `https://typing-game.local`, canonicalizes/deduplicates them and rejects non-vocabulary content;
+- review datasets resolve through the shared 18k vocabulary source, keep parent ordering, construct one bounded Custom test and fail closed when any requested item cannot be resolved;
+- review vocabulary is cached as a distinct source so Custom / Library / Topic / Word type / Grammar state remains intact;
+- no child-side mastery, priority or Smart Review engine was introduced.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+637f607a23a44a62c4c1392297b7526526b34f27
+~~~
+
+Verification:
+
+- Custom EN-VN CI run 36004240518: PASS;
+- frontend lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS;
+- regression coverage includes Learn/Listen activity labels, review-dataset validation, multi-word review input, unresolved-item failure and shared IPA metadata.
+
 
 ## L08 — Sentence Builder V1
 
