@@ -1193,19 +1193,186 @@ Monkeytype's active reviewed implementation remains the original parent-pinned r
 
 The temporary verification history remains visible in Git history for audit evidence, but the fixes listed in this report must be treated as **proposed work**, not completed work.
 
-## Review completion note
+## Review status — REOPENED for exhaustive custom-code coverage
 
-This continuation completed the remaining planned source-review passes over:
+The earlier review completed the planned Shared Learning / runtime passes, but the completion criterion has now been tightened:
 
-- child runtime lifecycle and media handling;
-- child backup/import boundaries;
-- custom Monkeytype learning/translation/speech/storage surfaces;
-- Space persistence/recovery and hot runtime surfaces;
-- parent launchers, static Play staleness checks and CI coverage;
-- a final overlap/severity pass so source-only suspicions remain labeled as risks.
+> Review is not complete until every project-owned/custom-added/custom-modified code surface has been inventoried and reviewed. No implementation fix starts before that exhaustive pass and a final self-review of both findings and proposed solutions.
 
-Final confirmed finding count in this report: **17**.
+Therefore the previous **17 confirmed findings / 8 risks** remain valid review output, but they are **not the final total**.
 
-Final explicitly non-confirmed risk count: **8**.
+Current GitHub source-of-truth checkpoint when this exhaustive pass was reopened:
 
-No source implementation fix is included in this report commit.
+- Parent: `ead7641bb35ae01d1507adcf5aef3cc0fcce5904`
+- Monkeytype pin: `01cca03b6f38c054f1fdd41ed5150160a6f3cd00`
+- Recall Typing pin: `59c1d6043a09c23108e2390a2e259bb1be23e83d`
+- Vocabulary Shooter pin: `b1721c43be075836a293fa6ba10ba908f4d06c22`
+- Space Typing pin: `a50dcfcb29d7ff27a365a8ebf093836aeae97d2b`
+- Karaoke Typing pin: `f2bd7ae55143d98cd270535d6e6c06d87a8742ec`
+
+### Custom-code inventory gate
+
+The following inventory now defines the review boundary:
+
+- Parent platform: **68 source-like files**, about **375 KB**, covering Portal, Shared Learning/data code, scripts, launchers and CI.
+- Recall Typing: **17 source-like files**; the game is project-owned, so its full runtime/storage/audio/UI/test surface is in scope.
+- Vocabulary Shooter: **22 source-like files**; the full game runtime/storage/audio/UI/test surface is in scope.
+- Karaoke Typing: **13 source-like files**; the full game runtime/media/LRC/learning/UI/test surface is in scope.
+- Space Typing: **320 source-like/test files**, about **2.15 MB**, including **164 `src` files** and **150 tests**. This is the largest remaining exhaustive-review surface.
+- Monkeytype: compare of project fork baseline `master@91bd24bb8513785c7364cbea29296ff7adafac41` to the parent-pinned custom revision `01cca03b6f38c054f1fdd41ed5150160a6f3cd00` identifies exactly **58 changed/added files**, **10,492 additions** and **98 deletions**. These 58 files are the exhaustive Monkeytype custom review scope, including:
+  - 10 custom modules;
+  - 9 learning modules;
+  - 7 input-pipeline modifications;
+  - 14 related frontend tests;
+  - upstream UI/config integration changes;
+  - test-runtime hooks;
+  - schema/build/CI changes.
+
+The review remains **REVIEW ONLY**. Source code and submodule pins must not be changed while this gate is open.
+
+---
+
+# 13. User-observed issues and requested product corrections — backlog for verification
+
+These observations are recorded now so they are not lost, but they do **not** automatically become confirmed code findings until the exhaustive code pass verifies the relevant implementation path.
+
+## U01 — Space top IPA/Vietnamese banner overlaps combat space
+
+**Observed:** the fixed IPA/Vietnamese display occupies the same visual region enemies can enter, making target identification difficult.
+
+**Required direction:**
+
+- reserve HUD space outside the combat spawn/movement area;
+- enemies must not spawn/travel behind the learning banner;
+- verify responsive layouts and all enemy/boss/bonus spawn paths.
+
+## U02 — IPA display behavior must be configurable and persistent
+
+Current desired modes:
+
+- top banner;
+- killed-enemy position;
+- both;
+- off.
+
+The top banner should keep the latest killed target's IPA/meaning until another kill replaces it; it should not auto-hide after a few seconds.
+
+The old killed-enemy-position feedback should remain available instead of being silently replaced by the new banner.
+
+## U03 — Stage result / measured report is too small
+
+**Required direction:** desktop result UI should become a large near-fullscreen report with enough width/height for combat, typing, learning and reward sections without cramped nested scrolling.
+
+## U04 — Settings need explicit Save/Cancel and clear apply semantics
+
+**Observed/requested:**
+
+- explicit Save button;
+- Cancel/close without accidental changes;
+- successful-save feedback;
+- dirty/unsaved state;
+- clear distinction between immediate, next-stage and stage-reload settings.
+
+Any difficulty/combat-pacing setting that cannot safely update mid-stage must warn the user on Save and, when accepted, reload/restart that stage with the newly saved configuration.
+
+The exhaustive review must verify why current mid-game setting changes appear to have no runtime effect.
+
+## U05 — Stage replay must preserve already-earned persistent progression
+
+Requested product rule:
+
+- clearing a stage commits earned persistent progression/rewards;
+- replaying an already-cleared stage must not roll back previously earned equipment, XP, loot, unlocks or other persistent progression;
+- replay should be usable for farming XP/items;
+- remove the old death behavior that sends the player back to checkpoint blocks such as 10/20/30;
+- keep only the special in-stage diamond revive that resumes the current encounter after death.
+
+The review must inspect current checkpoint/recovery/replay/reward code before proposing the migration plan.
+
+## U06 — Rage / ship signature skill system needs a clearer model
+
+Requested product direction:
+
+- rage meter split into five visible segments;
+- each usable segment can power a rage action according to the final design;
+- full/usable rage must have a strong glow/burning visual state;
+- each ship has signature rage/ultimate behavior bound to that ship, not replaceable equipment;
+- rage/ultimate kills should grant appropriate gameplay kill/score/reward credit;
+- however Shared Learning credit must only claim a typing success when actual typing evidence exists;
+- multi-layer enemy armor/HP must obey the final rage-skill rules rather than being unconditionally deleted by a generic screen clear.
+
+The exhaustive pass must first inventory the current per-ship ultimate/rage implementation and kill/reward attribution paths.
+
+## U07 — Equipment artwork is visually undersized
+
+Keep the current information layout direction, but enlarge and clarify equipment imagery/iconography so the visual hierarchy is balanced against item name/description text.
+
+## U08 — Recall bonus target cannot be selected while the normal enemy lock owns input
+
+The review must inspect target acquisition/input dispatch precedence.
+
+Desired behavior: bonus targets must be intentionally typeable and should receive appropriate priority without corrupting an already-valid active typing sequence.
+
+## U09 — Recall hidden-letter cells should be simplified
+
+Keep the current outer frame/art direction, but replace the cramped small internal boxes with a simpler letter/underscore presentation such as `M _ _ _`, plus a readable glow/border state.
+
+## U10 — Map/background system needs verification and a test selector
+
+The exhaustive review must establish:
+
+- whether later maps/worlds already have distinct backgrounds;
+- whether the simple current background is intentionally only the early-map look;
+- whether every world/background is wired correctly.
+
+If multiple backgrounds exist, add a dev/test-lab selector to preview them after review; do not alter production progression rules solely for testing.
+
+## U11 — Recall controls currently sit in the middle of gameplay
+
+`Recall clues`, `Replay` and `Reveal letter` should be moved into a dedicated HUD/control cluster at an edge/corner rather than obscuring the combat field.
+
+## U12 — Monkeytype project-added settings need a visible Codex marker
+
+Because upstream Monkeytype already has a very large settings surface, settings introduced by this project should be easy to identify, e.g. `Forgive corrected errors — Codex`.
+
+The exhaustive Monkeytype pass must inventory every project-added setting so labeling is consistent rather than applied to only one option.
+
+## U13 — Monkeytype Vietnamese composed input is broken
+
+Observed reproduction includes Vietnamese composition where typing sequences that should form characters such as `ô` cause earlier text to move/replace incorrectly and produce false error state.
+
+This is a **high-priority verification target** in the seven modified Monkeytype input-pipeline files.
+
+Likely solution family to validate against the actual code:
+
+- IME/composition-aware input handling;
+- `beforeinput` / `input` / composition lifecycle correctness;
+- NFC normalization of expected and committed text;
+- grapheme-safe cursor/delete/validation behavior.
+
+Do not implement the solution until the actual modified input code and its tests prove the root cause.
+
+---
+
+# 14. Exhaustive review completion criteria
+
+No fix phase may start until all of the following are complete:
+
+1. Inventory every parent custom source/config/script and mark it reviewed.
+2. Review the complete project-owned Recall Typing source/test surface.
+3. Review the complete project-owned Vocabulary Shooter source/test surface.
+4. Review the complete project-owned Karaoke Typing source/test surface.
+5. Review all Space Typing modules by subsystem, including gameplay, enemy/boss, recall, skills/rage, rewards, progression, replay/checkpoint/revive, persistence, UI, audio, backgrounds/test-lab and performance hot paths.
+6. Review all 58 Monkeytype files changed from the fork baseline, with special attention to the seven input-pipeline modifications and every project-added setting.
+7. Cross-check parent↔child contracts after the per-game reviews.
+8. Verify each user-observed U01–U13 item against code and classify it as:
+   - confirmed bug;
+   - confirmed UX issue;
+   - product/spec change;
+   - risk;
+   - not reproducible / incorrect assumption.
+9. For every confirmed item, write root cause, impact, concrete solution and regression-test plan.
+10. Perform a second independent pass over the completed findings to remove duplicates, correct severity, and challenge the proposed solution for unintended regressions.
+11. Only after this report is final and internally self-reviewed may implementation begin.
+
+No source implementation fix is included in this report update.
