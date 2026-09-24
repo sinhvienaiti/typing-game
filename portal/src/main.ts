@@ -33,6 +33,8 @@ import {
   queueKaraokeReview,
   readPendingKaraokeReview,
 } from "./review/karaoke-adapter";
+import { recordMixedLearningEvent } from "./review/mixed";
+import type { LearningEvent } from "../../shared/learning/core.mjs";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
@@ -90,7 +92,26 @@ const navButtons = new Map<string, HTMLButtonElement>();
 let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
 let currentReviewStatus: HTMLDivElement | null = null;
-const learningBridge = new ParentLearningBridge();
+function handlePersistedLearningEvent(event: LearningEvent): void {
+  const result = recordMixedLearningEvent(event);
+  if (!result.matched || !result.segmentCompleted) return;
+
+  if (currentReviewStatus !== null) {
+    currentReviewStatus.hidden = false;
+    currentReviewStatus.textContent = result.sessionCompleted
+      ? "Mixed Review complete · returning to session"
+      : "Segment complete · loading next Mixed Review activity";
+  }
+
+  window.setTimeout(() => {
+    navigate("/review/session");
+  }, 250);
+}
+
+const learningBridge = new ParentLearningBridge(
+  undefined,
+  handlePersistedLearningEvent,
+);
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
 
