@@ -245,9 +245,10 @@ function applyParsedLearningEvent(next, event) {
     : event.entityType === "grammar"
       ? "grammar"
       : "sentences";
-  const existing =
-    next[collectionName][event.entityId] ??
-    createRecord(event.entityType, event.entityId);
+  const collection = next[collectionName];
+  const existing = Object.hasOwn(collection, event.entityId)
+    ? collection[event.entityId]
+    : createRecord(event.entityType, event.entityId);
   const record = { ...existing };
   const previousLastSeenAt = record.lastSeenAt;
   const isNewestEvent =
@@ -326,7 +327,12 @@ function applyParsedLearningEvent(next, event) {
   record.reviewPriority = calculateReviewPriority(record, metricTime);
   record.nextReviewAt = calculateNextReviewAt(record, metricTime);
 
-  next[collectionName][event.entityId] = record;
+  Object.defineProperty(collection, event.entityId, {
+    value: record,
+    enumerable: true,
+    configurable: true,
+    writable: true,
+  });
   next.updatedAt = laterIso(next.updatedAt, event.occurredAt);
   return next;
 }
