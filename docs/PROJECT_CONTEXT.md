@@ -131,7 +131,21 @@ Context/Cloze checkpoint:
 - child revision: `626b51766850f9de712ec0ae4c1fea2efaf7aba9`;
 - Custom EN-VN CI run 36010643624 PASS.
 
-Next active milestone: **L10 — Monkey Smart Review**.
+L10 Monkey Smart Review is complete.
+
+Monkey Smart Review checkpoint:
+
+- parent owns review selection, ordering, mastery and priority; Monkeytype is only an activity executor;
+- parent dataset contract now carries `goal + ordered items` with bounded learning-memory context;
+- Portal queues, launches, origin-targets and acknowledges Monkeytype Smart Review datasets;
+- Monkeytype consumes remember / spelling / listening / grammar / sentence-building / mixed goals;
+- vocabulary resolves from the shared 18k library; grammar reuses shared curriculum metadata; sentence review reuses Sentence Builder accepted-answer validation;
+- mixed activity routing is deterministic and emits normal shared Learning Events;
+- child revision: `01cca03b6f38c054f1fdd41ed5150160a6f3cd00`;
+- Custom EN-VN CI run 36016126490 PASS;
+- parent L10 Platform CI before child pin PASS.
+
+Next active milestone: **L11 — Recall Typing integration**.
 
 ---
 
