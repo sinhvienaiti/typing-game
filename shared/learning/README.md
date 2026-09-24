@@ -139,3 +139,11 @@ It queries the local parent profile with bounded pagination and supports:
 - item details and Why Review explanations.
 
 Vocabulary rows resolve EN/VI/IPA lazily from the existing shared vocabulary levels. The learning database stores only the canonical vocabulary key and learning history.
+
+## Review Planner and Session Core
+
+`review-session.mjs` is the single parent Smart Review planner.
+
+It owns review-set semantics, ordering, capability matching, item limits, source filters and the canonical At Risk rule. The Portal uses it from `/review/build` and persists the current plan in parent session storage for `/review/session`.
+
+Child games do not implement their own Smart Review planner. Their later adapters only consume parent-selected review material and emit normal Learning Events back to the parent.
