@@ -5,7 +5,10 @@ import type {
   ReviewPlanItem,
 } from "./review-session.mjs";
 
-export type ConcreteReviewGame = Exclude<ReviewGame, "mixed-review">;
+export type ConcreteReviewGame = Exclude<
+  ReviewGame,
+  "mixed-review" | "adaptive-mix"
+>;
 
 export type MixedReviewSegment = {
   id: string;
