@@ -2,7 +2,7 @@
 
 ## Status
 
-**CONFIRMED DESIGN / IMPLEMENTATION NOT STARTED**
+**L00 COMPLETE / L01 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1232,12 +1232,57 @@ Destructive reset must require confirmation.
 
 ## L00 — Reconstruct and contract audit
 
-- Re-read parent and child repository state from GitHub.
-- Map current Portal/iframe communication.
-- Inspect current Monkeytype EN-VN/Recall implementation.
-- Inspect current shared vocabulary/curriculum contracts.
-- Define exact event/profile versioning.
-- No speculative rewrite.
+**Status: COMPLETE — 2026-09-24**
+
+Audit findings:
+
+- Parent `main` reconstructed from GitHub at `28f0cf60c3c820b6194373b444422ae366504f1a` before implementation work.
+- Portal currently owns iframe lifecycle and already has a narrow cross-origin `postMessage` bridge for shared music state and child speech activity; Shared Learning must extend this existing parent-owned boundary instead of introducing a second competing bridge.
+- Child origins are registry-driven and the Portal validates both `event.origin` and the active iframe `event.source`; L02 must preserve and extend that trust model with versioned payload validation.
+- Shared vocabulary remains canonical in `shared/vocabulary/levels/*.json`; normalized vocabulary keys use NFKC + trimmed/collapsed whitespace + lowercase, matching `scripts/vocabulary-core.mjs#normalizeEnglish`.
+- Curriculum/topic/POS/grammar metadata remains additive and references the same 18,000-word library rather than duplicating EN/VI/IPA values.
+- Monkeytype Recall/EN-VN already has shared greedy longest-match phrase selection, Recall start markers, pronunciation hooks and local settings. Later learning modes must reuse those hooks instead of rebuilding Recall or dictionary matching.
+- Vocabulary Shooter, Recall Typing and Space Typing already consume the shared curriculum/library contracts; Karaoke remains primarily lyric/audio driven.
+- No existing parent Shared Learning Profile, mastery engine, Smart Review engine or learning-event persistence layer was found.
+
+Versioning contract fixed for implementation:
+
+~~~text
+Learning Event schema version: 1
+Learning Profile schema version: 1
+Parent learning database: typingGameLearning
+Parent profile store: state
+Canonical profile key: profile
+Recent sample bound: 8 per item
+Reserved learning message namespace for L02: typing-game:learning:v1
+~~~
+
+Learning Event v1 requires:
+
+~~~text
+version
+entityType: vocabulary | grammar | sentence
+entityId
+gameId
+activityType
+result: correct | wrong
+occurredAt
+~~~
+
+Optional event fields:
+
+~~~text
+responseMs
+hintUsed
+replayUsed
+userAnswer
+expectedAnswer
+errorType
+~~~
+
+For `entityType=vocabulary`, `entityId` is normalized using the same canonical vocabulary key rule above. Grammar and sentence IDs remain stable authored identifiers.
+
+The parent remains the only canonical calculator of mastery/review priority. Child games emit events; they must not persist divergent mastery scores of their own.
 
 ## L01 — Shared Learning Core
 
