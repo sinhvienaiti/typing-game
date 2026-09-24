@@ -65,7 +65,7 @@ for (const id of expected.grammar.primaryTimeGroups) {
   }
 }
 
-for (const [key, topics] of Object.entries(expected.index.reverseTopics)) {
+for (const [key, topics] of Object.entries(expected.reverse.reverseTopics)) {
   const level = lookup.entries[key];
   if (!Number.isInteger(level) || level < 1 || level > 100) {
     errors.push("reverse topic key is not in vocabulary lookup: " + key);
