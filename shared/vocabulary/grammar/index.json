@@ -1,0 +1,819 @@
+{
+  "version": 1,
+  "primaryTimeGroups": [
+    "time.present",
+    "time.past",
+    "time.future"
+  ],
+  "modules": [
+    {
+      "id": "time.present",
+      "label": "Present",
+      "group": "present",
+      "focus": [
+        "current states",
+        "habits and routines",
+        "facts",
+        "actions happening now"
+      ],
+      "topicIds": [
+        "everyday.routine",
+        "work.office",
+        "education.school"
+      ],
+      "signalTokens": [
+        "now",
+        "today",
+        "usually",
+        "often",
+        "always",
+        "sometimes",
+        "never",
+        "every",
+        "current",
+        "currently"
+      ],
+      "signalEntries": [
+        {
+          "key": "now",
+          "level": 1
+        },
+        {
+          "key": "today",
+          "level": 1
+        },
+        {
+          "key": "usually",
+          "level": 5
+        },
+        {
+          "key": "often",
+          "level": 2
+        },
+        {
+          "key": "always",
+          "level": 2
+        },
+        {
+          "key": "sometimes",
+          "level": 2
+        },
+        {
+          "key": "never",
+          "level": 2
+        },
+        {
+          "key": "current",
+          "level": 25
+        },
+        {
+          "key": "currently",
+          "level": 26
+        }
+      ],
+      "missingSignalKeys": [
+        "every"
+      ]
+    },
+    {
+      "id": "time.past",
+      "label": "Past",
+      "group": "past",
+      "focus": [
+        "completed events",
+        "previous states",
+        "stories and background",
+        "past experience"
+      ],
+      "topicIds": [
+        "travel.planning",
+        "people.relationships",
+        "education.school"
+      ],
+      "signalTokens": [
+        "yesterday",
+        "ago",
+        "last",
+        "previous",
+        "before",
+        "formerly",
+        "past",
+        "was",
+        "were",
+        "did",
+        "had"
+      ],
+      "signalEntries": [
+        {
+          "key": "yesterday",
+          "level": 6
+        },
+        {
+          "key": "ago",
+          "level": 4
+        },
+        {
+          "key": "last",
+          "level": 24
+        },
+        {
+          "key": "previous",
+          "level": 26
+        },
+        {
+          "key": "before",
+          "level": 1
+        },
+        {
+          "key": "formerly",
+          "level": 50
+        },
+        {
+          "key": "past",
+          "level": 4
+        }
+      ],
+      "missingSignalKeys": [
+        "was",
+        "were",
+        "did",
+        "had"
+      ]
+    },
+    {
+      "id": "time.future",
+      "label": "Future",
+      "group": "future",
+      "focus": [
+        "plans",
+        "intentions",
+        "predictions",
+        "schedules"
+      ],
+      "topicIds": [
+        "travel.planning",
+        "work.projects",
+        "transport.public"
+      ],
+      "signalTokens": [
+        "tomorrow",
+        "next",
+        "soon",
+        "later",
+        "will",
+        "plan",
+        "expect",
+        "intend",
+        "schedule",
+        "future"
+      ],
+      "signalEntries": [
+        {
+          "key": "tomorrow",
+          "level": 6
+        },
+        {
+          "key": "next",
+          "level": 2
+        },
+        {
+          "key": "soon",
+          "level": 1
+        },
+        {
+          "key": "later",
+          "level": 1
+        },
+        {
+          "key": "will",
+          "level": 45
+        },
+        {
+          "key": "plan",
+          "level": 2
+        },
+        {
+          "key": "expect",
+          "level": 12
+        },
+        {
+          "key": "intend",
+          "level": 32
+        },
+        {
+          "key": "schedule",
+          "level": 14
+        },
+        {
+          "key": "future",
+          "level": 1
+        }
+      ],
+      "missingSignalKeys": []
+    },
+    {
+      "id": "grammar.questions",
+      "label": "Questions",
+      "group": "practical",
+      "focus": [
+        "asking for information",
+        "yes/no questions",
+        "wh- questions"
+      ],
+      "topicIds": [
+        "communication.conversation",
+        "travel.directions"
+      ],
+      "signalTokens": [
+        "who",
+        "what",
+        "when",
+        "where",
+        "why",
+        "how",
+        "which",
+        "question",
+        "ask"
+      ],
+      "signalEntries": [
+        {
+          "key": "question",
+          "level": 1
+        },
+        {
+          "key": "ask",
+          "level": 2
+        }
+      ],
+      "missingSignalKeys": [
+        "who",
+        "what",
+        "when",
+        "where",
+        "why",
+        "how",
+        "which"
+      ]
+    },
+    {
+      "id": "grammar.negatives",
+      "label": "Negatives",
+      "group": "practical",
+      "focus": [
+        "not",
+        "no/none",
+        "negative statements"
+      ],
+      "topicIds": [
+        "communication.conversation"
+      ],
+      "signalTokens": [
+        "not",
+        "no",
+        "never",
+        "nothing",
+        "nobody",
+        "without"
+      ],
+      "signalEntries": [
+        {
+          "key": "not",
+          "level": 1
+        },
+        {
+          "key": "no",
+          "level": 1
+        },
+        {
+          "key": "never",
+          "level": 2
+        }
+      ],
+      "missingSignalKeys": [
+        "nothing",
+        "nobody",
+        "without"
+      ]
+    },
+    {
+      "id": "grammar.articles",
+      "label": "Articles",
+      "group": "practical",
+      "focus": [
+        "a/an",
+        "the",
+        "generic reference"
+      ],
+      "topicIds": [
+        "everyday.belongings",
+        "home.rooms"
+      ],
+      "signalTokens": [
+        "a",
+        "an",
+        "the"
+      ],
+      "signalEntries": [],
+      "missingSignalKeys": [
+        "a",
+        "an",
+        "the"
+      ]
+    },
+    {
+      "id": "grammar.countability",
+      "label": "Countable & Uncountable",
+      "group": "practical",
+      "focus": [
+        "countable nouns",
+        "uncountable nouns",
+        "some/any"
+      ],
+      "topicIds": [
+        "food.ingredients",
+        "shopping.products"
+      ],
+      "signalTokens": [
+        "some",
+        "any",
+        "much",
+        "many",
+        "few",
+        "little"
+      ],
+      "signalEntries": [
+        {
+          "key": "much",
+          "level": 4
+        },
+        {
+          "key": "little",
+          "level": 1
+        }
+      ],
+      "missingSignalKeys": [
+        "some",
+        "any",
+        "many",
+        "few"
+      ]
+    },
+    {
+      "id": "grammar.comparison",
+      "label": "Comparatives & Superlatives",
+      "group": "practical",
+      "focus": [
+        "comparing people and things",
+        "more/less",
+        "best/worst"
+      ],
+      "topicIds": [
+        "shopping.prices",
+        "academic.comparison"
+      ],
+      "signalTokens": [
+        "more",
+        "less",
+        "better",
+        "worse",
+        "best",
+        "worst",
+        "than",
+        "same",
+        "different"
+      ],
+      "signalEntries": [
+        {
+          "key": "more",
+          "level": 24
+        },
+        {
+          "key": "less",
+          "level": 2
+        },
+        {
+          "key": "better",
+          "level": 1
+        },
+        {
+          "key": "worse",
+          "level": 12
+        },
+        {
+          "key": "best",
+          "level": 4
+        },
+        {
+          "key": "worst",
+          "level": 12
+        },
+        {
+          "key": "same",
+          "level": 2
+        },
+        {
+          "key": "different",
+          "level": 2
+        }
+      ],
+      "missingSignalKeys": [
+        "than"
+      ]
+    },
+    {
+      "id": "grammar.quantity",
+      "label": "Quantity",
+      "group": "practical",
+      "focus": [
+        "amount",
+        "number",
+        "enough",
+        "too much/too many"
+      ],
+      "topicIds": [
+        "shopping.budgeting",
+        "academic.data"
+      ],
+      "signalTokens": [
+        "much",
+        "many",
+        "few",
+        "little",
+        "enough",
+        "more",
+        "less",
+        "total",
+        "amount",
+        "number"
+      ],
+      "signalEntries": [
+        {
+          "key": "much",
+          "level": 4
+        },
+        {
+          "key": "little",
+          "level": 1
+        },
+        {
+          "key": "enough",
+          "level": 2
+        },
+        {
+          "key": "more",
+          "level": 24
+        },
+        {
+          "key": "less",
+          "level": 2
+        },
+        {
+          "key": "total",
+          "level": 25
+        },
+        {
+          "key": "amount",
+          "level": 25
+        },
+        {
+          "key": "number",
+          "level": 2
+        }
+      ],
+      "missingSignalKeys": [
+        "many",
+        "few"
+      ]
+    },
+    {
+      "id": "grammar.modals",
+      "label": "Modal Meaning",
+      "group": "practical",
+      "focus": [
+        "ability",
+        "permission",
+        "advice",
+        "obligation",
+        "possibility"
+      ],
+      "topicIds": [
+        "travel.emergencies",
+        "work.meetings"
+      ],
+      "signalTokens": [
+        "can",
+        "could",
+        "may",
+        "might",
+        "must",
+        "should",
+        "will",
+        "would"
+      ],
+      "signalEntries": [
+        {
+          "key": "can",
+          "level": 11
+        },
+        {
+          "key": "may",
+          "level": 4
+        },
+        {
+          "key": "will",
+          "level": 45
+        }
+      ],
+      "missingSignalKeys": [
+        "could",
+        "might",
+        "must",
+        "should",
+        "would"
+      ]
+    },
+    {
+      "id": "grammar.conditionals",
+      "label": "Basic If",
+      "group": "practical",
+      "focus": [
+        "conditions",
+        "likely results",
+        "simple hypothetical situations"
+      ],
+      "topicIds": [
+        "work.projects",
+        "travel.emergencies"
+      ],
+      "signalTokens": [
+        "if",
+        "unless",
+        "when",
+        "then",
+        "result",
+        "condition"
+      ],
+      "signalEntries": [
+        {
+          "key": "then",
+          "level": 1
+        },
+        {
+          "key": "result",
+          "level": 2
+        },
+        {
+          "key": "condition",
+          "level": 14
+        }
+      ],
+      "missingSignalKeys": [
+        "if",
+        "unless",
+        "when"
+      ]
+    },
+    {
+      "id": "grammar.passive",
+      "label": "Passive Recognition",
+      "group": "practical",
+      "focus": [
+        "focus on action/result",
+        "formal instructions and reports"
+      ],
+      "topicIds": [
+        "academic.research",
+        "technology.software"
+      ],
+      "signalTokens": [
+        "made",
+        "built",
+        "created",
+        "used",
+        "called",
+        "known",
+        "given"
+      ],
+      "signalEntries": [
+        {
+          "key": "made",
+          "level": 4
+        },
+        {
+          "key": "built",
+          "level": 4
+        },
+        {
+          "key": "used",
+          "level": 11
+        },
+        {
+          "key": "known",
+          "level": 46
+        },
+        {
+          "key": "given",
+          "level": 12
+        }
+      ],
+      "missingSignalKeys": [
+        "created",
+        "called"
+      ]
+    },
+    {
+      "id": "grammar.relative-clauses",
+      "label": "Relative Clauses",
+      "group": "practical",
+      "focus": [
+        "who",
+        "which",
+        "that"
+      ],
+      "topicIds": [
+        "people.family",
+        "technology.devices"
+      ],
+      "signalTokens": [
+        "who",
+        "which",
+        "that",
+        "where",
+        "whose"
+      ],
+      "signalEntries": [],
+      "missingSignalKeys": [
+        "who",
+        "which",
+        "that",
+        "where",
+        "whose"
+      ]
+    },
+    {
+      "id": "grammar.linkers",
+      "label": "Linking Words",
+      "group": "practical",
+      "focus": [
+        "addition",
+        "contrast",
+        "reason",
+        "result"
+      ],
+      "topicIds": [
+        "academic.argument",
+        "academic.cause-effect"
+      ],
+      "signalTokens": [
+        "and",
+        "but",
+        "because",
+        "so",
+        "although",
+        "therefore",
+        "however",
+        "also",
+        "while"
+      ],
+      "signalEntries": [
+        {
+          "key": "so",
+          "level": 2
+        },
+        {
+          "key": "therefore",
+          "level": 14
+        },
+        {
+          "key": "however",
+          "level": 12
+        },
+        {
+          "key": "also",
+          "level": 1
+        },
+        {
+          "key": "while",
+          "level": 24
+        }
+      ],
+      "missingSignalKeys": [
+        "and",
+        "but",
+        "because",
+        "although"
+      ]
+    },
+    {
+      "id": "grammar.word-order",
+      "label": "Word Order",
+      "group": "practical",
+      "focus": [
+        "subject-verb-object",
+        "adverb placement",
+        "question order"
+      ],
+      "topicIds": [
+        "communication.conversation",
+        "education.study-skills"
+      ],
+      "signalTokens": [
+        "subject",
+        "verb",
+        "object",
+        "order",
+        "first",
+        "next",
+        "then"
+      ],
+      "signalEntries": [
+        {
+          "key": "subject",
+          "level": 6
+        },
+        {
+          "key": "verb",
+          "level": 19
+        },
+        {
+          "key": "object",
+          "level": 27
+        },
+        {
+          "key": "order",
+          "level": 2
+        },
+        {
+          "key": "first",
+          "level": 1
+        },
+        {
+          "key": "next",
+          "level": 2
+        },
+        {
+          "key": "then",
+          "level": 1
+        }
+      ],
+      "missingSignalKeys": []
+    },
+    {
+      "id": "grammar.prepositions",
+      "label": "Common Preposition Patterns",
+      "group": "practical",
+      "focus": [
+        "time",
+        "place",
+        "movement"
+      ],
+      "topicIds": [
+        "travel.directions",
+        "everyday.time",
+        "home.rooms"
+      ],
+      "signalTokens": [
+        "in",
+        "on",
+        "at",
+        "to",
+        "from",
+        "with",
+        "for",
+        "by",
+        "under",
+        "over",
+        "between",
+        "through"
+      ],
+      "signalEntries": [
+        {
+          "key": "in",
+          "level": 2
+        },
+        {
+          "key": "on",
+          "level": 2
+        },
+        {
+          "key": "over",
+          "level": 2
+        },
+        {
+          "key": "through",
+          "level": 25
+        }
+      ],
+      "missingSignalKeys": [
+        "at",
+        "to",
+        "from",
+        "with",
+        "for",
+        "by",
+        "under",
+        "between"
+      ]
+    }
+  ]
+}
