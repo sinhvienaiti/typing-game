@@ -2,7 +2,7 @@
 
 ## Status
 
-**L01 COMPLETE / L02 NEXT**
+**L02 COMPLETE / L03 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1309,15 +1309,29 @@ The core records completed learning attempts, not physical keystrokes, so it doe
 
 ## L02 — Parent messaging bridge
 
-Implement cross-origin communication between parent and child games.
+**Status: COMPLETE — 2026-09-24**
 
-Requirements:
+Implemented cross-origin communication between parent and child games:
 
-- versioned message contract,
-- validation,
-- no trust in arbitrary message payloads,
-- batched persistence,
-- read/query APIs for review datasets.
+- versioned `typing-game:learning:v1` message namespace;
+- validated Attempt and Query requests plus Ack / Query Result / Error responses;
+- exact active iframe source + child origin validation;
+- Attempt `gameId` must match the active registry game;
+- bounded request IDs, strings, page sizes and filter ranges;
+- parent batching at up to 32 events with a short 150 ms persistence debounce;
+- atomic serialized `applyMany()` persistence so concurrent batches cannot overwrite one another;
+- read-after-write consistency by flushing pending attempts before a query;
+- bounded parent query API with page/pageSize/search/filter/sort;
+- TypeScript declarations for the shared ESM contracts;
+- Portal integration that preserves the existing shared music/speech bridge behavior;
+- page-hide best-effort flush without introducing per-keystroke persistence.
+
+Verification:
+
+- learning contract/query tests PASS;
+- Platform CI #264 PASS, including Portal TypeScript/Vite build with the production bridge;
+- Platform CI #265 passed the expanded Shared Learning validation step after `learning:check` and `learning:test` were widened to all current shared-learning modules.
+
 
 ## L03 — Smart Review Dashboard V1
 
