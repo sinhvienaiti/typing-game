@@ -543,17 +543,30 @@ export class SmartReviewFlow {
     rebuild.addEventListener("click", () => this.#navigate("/review/build"));
     footer.append(dashboard, rebuild);
 
-    if (plan.options.game === "monkeytype") {
-      const start = element("button", "review-primary", "Start Monkeytype");
+    if (
+      plan.options.game === "monkeytype" ||
+      plan.options.game === "recall-typing"
+    ) {
+      const gameLabel =
+        GAME_LABELS[plan.options.game] ?? plan.options.game;
+      const start = element(
+        "button",
+        "review-primary",
+        `Start ${gameLabel}`,
+      );
       start.addEventListener("click", () => {
         start.disabled = true;
-        start.textContent = "Preparing Monkeytype…";
+        start.textContent = `Preparing ${gameLabel}…`;
         void this.#startReview(plan).catch((error: unknown) => {
           start.disabled = false;
-          start.textContent = "Start Monkeytype";
+          start.textContent = `Start ${gameLabel}`;
           notice.classList.add("error");
           notice.replaceChildren(
-            element("strong", undefined, "Could not start Monkeytype review"),
+            element(
+              "strong",
+              undefined,
+              `Could not start ${gameLabel} review`,
+            ),
             element(
               "p",
               undefined,
