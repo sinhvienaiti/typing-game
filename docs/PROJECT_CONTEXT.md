@@ -175,7 +175,22 @@ Vocabulary Shooter shared-learning checkpoint:
 - Shooter CI run 36019201874 PASS;
 - parent Platform CI run 36019549335 PASS.
 
-Next active milestone: **L13 — Space Typing integration**.
+L13 Space Typing integration is complete.
+
+Space Typing shared-learning checkpoint:
+
+- one vocabulary Learning Event is emitted per completed typed word, never per key;
+- skill/Nova kills without typed completion are excluded from learning evidence;
+- Recall events preserve response time, hint and replay usage;
+- parent Smart Review supports Remember Words / Spelling / Mixed vocabulary runs while retaining Campaign gameplay;
+- review vocabulary resolves from the shared 18k library and cannot be overwritten by special-stage vocabulary preparation;
+- manual mode/source changes exit temporary review mode cleanly;
+- static Space UI markup was moved out of the JS bundle, reducing JS raw from 654.45 KiB to 612.83 KiB with behavior unchanged;
+- child revision: `a50dcfcb29d7ff27a365a8ebf093836aeae97d2b`;
+- Space CI run 36022862848 PASS;
+- parent Platform CI run 36023259689 PASS.
+
+Next active milestone: **L14 — Karaoke Typing integration**.
 
 ---
 
