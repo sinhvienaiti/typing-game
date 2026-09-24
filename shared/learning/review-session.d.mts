@@ -21,7 +21,8 @@ export type ReviewGame =
   | "vocab-shooter"
   | "space-typing"
   | "karaoke-typing"
-  | "mixed-review";
+  | "mixed-review"
+  | "adaptive-mix";
 export type ReviewAmount = 10 | 20 | 30 | 50 | "all";
 
 export type ReviewPlanInput = {
@@ -58,6 +59,13 @@ export type ReviewPlanItem = {
   nextReviewAt: string | null;
   sourceGames: string[];
   compatibleGames: string[];
+  weaknessSignals: {
+    spellingErrors: number;
+    listeningErrors: number;
+    contextErrors: number;
+    grammarErrors: number;
+    staleDays: number | null;
+  };
 };
 
 export type ReviewPlan = {
