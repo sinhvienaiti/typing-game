@@ -271,6 +271,19 @@ function matchesSet(item, reviewSet, now, custom) {
   return true;
 }
 
+function monkeySupportsGoalEntity(entityType, goal) {
+  if (
+    goal === "remember-words" ||
+    goal === "spelling" ||
+    goal === "listening"
+  ) {
+    return entityType === "vocabulary";
+  }
+  if (goal === "grammar") return entityType === "grammar";
+  if (goal === "sentence-building") return entityType === "sentence";
+  return goal === "mixed";
+}
+
 function supports(game, item, goal) {
   if (game === "mixed-review") {
     return Object.entries(REVIEW_CAPABILITIES).some(([candidate]) =>
@@ -279,11 +292,15 @@ function supports(game, item, goal) {
   }
 
   const capability = REVIEW_CAPABILITIES[game];
-  return (
-    capability !== undefined &&
-    capability.entities.includes(item.entityType) &&
-    capability.goals.includes(goal)
-  );
+  if (
+    capability === undefined ||
+    !capability.entities.includes(item.entityType) ||
+    !capability.goals.includes(goal)
+  ) {
+    return false;
+  }
+
+  return game !== "monkeytype" || monkeySupportsGoalEntity(item.entityType, goal);
 }
 
 export function compatibleGamesForItem(item, goal = "mixed") {
