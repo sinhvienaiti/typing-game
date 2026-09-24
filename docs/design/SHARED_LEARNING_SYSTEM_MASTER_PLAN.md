@@ -2,7 +2,7 @@
 
 ## Status
 
-**L04 COMPLETE / L05 NEXT**
+**L05 COMPLETE / L06 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1377,24 +1377,33 @@ Verification:
 
 ## L05 — Monkeytype Vietnamese IME
 
-Implement and test:
+**Status: COMPLETE — 2026-09-24**
 
-- input language option,
-- composition-aware input,
-- NFC normalization,
-- committed-character accuracy,
-- English regression behavior,
-- Vietnamese test cases.
+Implemented in `sinhvienaiti/monkeytype` on `feature/en-vn-translation`:
 
-Minimum Vietnamese regression examples should include characters/words such as:
+- user-facing Input Language option: Auto / English / Vietnamese;
+- existing browser compositionstart / compositionupdate / compositionend flow remains authoritative, so intermediate Telex/IME physical keys are not scored as committed characters;
+- Vietnamese committed text and target comparison use Unicode NFC without introducing a second Telex engine;
+- multi-character commits are replayed through the normal scorer by Unicode code point rather than UTF-16 code unit;
+- Auto enables Vietnamese IME normalization for Vietnamese test languages while English/direct input keeps existing behavior;
+- composition quick-end comparison uses the same canonical committed/target form;
+- regression coverage includes `ấ`, `ộ`, `ường`, `nghiêng`, decomposed Vietnamese targets, Auto mode and explicit English behavior.
+
+Child checkpoint:
 
 ~~~text
-ấ
-ộ
-ường
-nghiêng
-Việt Nam
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+dd700f3e4f0fd33c6ca1259d4987bdfcc4465305
 ~~~
+
+Verification:
+
+- Custom EN-VN CI run 35999852048: PASS;
+- frontend lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS.
 
 ## L06 — Monkeytype Learning Memory integration
 
