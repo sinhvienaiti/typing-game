@@ -2,7 +2,7 @@
 
 ## Status
 
-**L10 COMPLETE / L11 NEXT**
+**L11 COMPLETE / L12 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1595,9 +1595,41 @@ Verification:
 
 ## L11 — Recall Typing integration
 
-Emit learning events and accept compatible vocabulary/listening review datasets.
+**Status: COMPLETE — 2026-09-24**
 
-Avoid duplicating the existing Recall-specific local memory logic without an explicit migration plan.
+Implemented without replacing Recall Typing's existing local vocabulary/settings behavior:
+
+- normal Recall sessions now emit one shared vocabulary Learning Event per completed word rather than per keypress;
+- response time begins when each hidden word becomes active;
+- a word completed after one or more wrong letter attempts is recorded as a wrong spelling attempt, while clean completion is recorded as correct;
+- explicit F2/speaker replay is tracked as `replayUsed`; automatic pronunciation is not misclassified as replay;
+- normal audio-only Recall sessions emit listening activity, normal meaning/full hint sessions emit recall activity, and explicit spelling review emits typing activity;
+- child accepts only origin-checked parent review datasets from `https://typing-game.local`;
+- compatible review goals are Remember Words / Spelling / Listening / Mixed and dataset items must be vocabulary;
+- review words resolve from the existing shared 18k vocabulary library, preserve the parent queue order and fail closed when any requested key is missing;
+- Listening review forces the existing audio-only hint style while preserving the user's stored setting for normal play;
+- review runs consume the full selected parent queue instead of re-randomizing it through the normal Recall session bag;
+- selecting Class / Topic / Word type / Grammar / Custom manually exits review mode cleanly;
+- no child mastery / review-priority engine and no migration of Recall's existing local vocabulary storage were introduced;
+- parent Portal now creates/stores/launches Recall review datasets, posts only to the child origin and handles ready/error acknowledgement.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/recall-typing
+main
+59c1d6043a09c23108e2390a2e259bb1be23e83d
+~~~
+
+Verification:
+
+- Recall Typing CI run 36017329739: PASS;
+- parent Platform CI run 36018360661: PASS;
+- parent shared-learning tests/checks PASS;
+- Recall tests PASS;
+- Portal build PASS;
+- Recall production build PASS.
+
 
 ## L12 — Vocabulary Shooter integration
 
