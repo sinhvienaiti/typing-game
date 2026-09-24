@@ -222,7 +222,11 @@ function makeButton(label: string, path: string): HTMLButtonElement {
 
 function updateNavigation(path: string): void {
   for (const [buttonPath, button] of navButtons) {
-    button.classList.toggle("active", path === buttonPath);
+    const active =
+      buttonPath === "/review"
+        ? path === "/review" || path.startsWith("/review/")
+        : path === buttonPath;
+    button.classList.toggle("active", active);
   }
 }
 
