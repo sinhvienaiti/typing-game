@@ -2,7 +2,7 @@
 
 ## Status
 
-**L16 COMPLETE / L17 NEXT**
+**L17 COMPLETE / L18 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1809,7 +1809,31 @@ Verification:
 
 ## L17 — Export / Import / Reset
 
-Add local profile backup and maintenance controls.
+**Status: COMPLETE — 2026-09-24**
+
+Implemented parent-owned local learning-data maintenance without adding cloud storage:
+
+- Smart Review Dashboard exposes a dedicated `/review/data` maintenance page;
+- Export downloads a versioned JSON envelope containing the complete shared Learning Profile;
+- backup format/version/export timestamp are explicit and the export path validates profile structure before serialization;
+- Import accepts the versioned backup envelope and a validated raw Learning Profile v1 recovery file;
+- malformed JSON, unsupported backup versions and invalid record shapes/counters/dates/IDs/history bounds are rejected before IndexedDB replacement;
+- Import shows the incoming Words / Grammar / Sentences counts and requires explicit confirmation before replacing the current profile;
+- Reset Selected supports independent Words / Grammar / Sentences selection and leaves unselected collections unchanged;
+- Reset All clears all three shared learning collections while preserving game settings and canonical vocabulary/curriculum files;
+- both selected and full resets require destructive confirmation;
+- after Import or Reset, parent review-plan state, Mixed/Adaptive progress and all pending child review datasets are cleared so stale queues cannot run against the new profile;
+- the maintenance UI shows current profile counts, responsive controls and status/error feedback;
+- backup/reset logic is in a shared pure module with Node tests rather than being embedded only in DOM code.
+
+Verification:
+
+- tests cover JSON round-trip, raw-v1 recovery import, malformed-profile rejection, selective reset immutability and full reset;
+- first L17 Platform CI run 36028001037 exposed a typo in the exported review-session storage key during Portal TypeScript build;
+- the declaration was corrected without changing behavior;
+- final Platform CI run 36028198375: PASS;
+- shared-learning tests/checks, Space tests/build, Recall tests/build and Portal TypeScript/Vite build PASS.
+
 
 ## L18 — Final cross-game review
 
