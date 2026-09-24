@@ -205,7 +205,21 @@ Karaoke shared-learning checkpoint:
 - Karaoke CI run 36024029825 PASS;
 - parent Platform CI run 36024382889 PASS.
 
-Next active milestone: **L15 — Mixed Review**.
+L15 Mixed Review is complete.
+
+Mixed Review checkpoint:
+
+- parent converts the mixed plan into deterministic balanced concrete-game segments;
+- weakness/error history is deliberately not used in L15; that belongs to L16 Adaptive Mix;
+- each segment reuses the existing bounded child adapter for its assigned game;
+- parent stores progress across iframe/game transitions and reloads;
+- only a segment explicitly launched from Mixed Review can consume progress;
+- progress advances only from Learning Events that the parent bridge has persisted successfully;
+- segment completion returns to the Review Session and exposes the next activity;
+- completion time is deterministic from the persisted event timestamp;
+- Platform CI run 36025360289 PASS.
+
+Next active milestone: **L16 — Adaptive Mix**.
 
 ---
 
