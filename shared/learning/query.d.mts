@@ -18,8 +18,15 @@ export type LearningQuery = {
     masteryMin?: number;
     masteryMax?: number;
     dueOnly?: boolean;
+    lastSeenFrom?: string;
+    lastSeenTo?: string;
     lastWrongFrom?: string;
     lastWrongTo?: string;
+    mistakeMin?: number;
+    hintMin?: number;
+    replayMin?: number;
+    responseMsMin?: number;
+    correctStreakMax?: number;
   };
 };
 
