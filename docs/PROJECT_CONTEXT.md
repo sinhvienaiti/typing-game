@@ -261,49 +261,6 @@ Final Shared Learning audit checkpoint:
 - exact child CI checkpoints all remain PASS;
 - final parent Platform CI run 36029308661 PASS with 48/48 shared-learning tests, Space 758 tests, Recall tests, static Play validation and Portal/child builds.
 
-## Post-L18 full code review — 2026-09-25
-
-A fresh three-pass review was performed from GitHub source of truth, starting at parent
-`6cc291a78986ac034d0eb9eca2c040a9b73660da`, across the parent Shared Learning /
-Smart Review implementation and the pinned Monkeytype, Recall Typing, Vocabulary Shooter,
-Space Typing and Karaoke Typing integrations.
-
-Confirmed implementation issues fixed during the review:
-
-- batched Learning Events no longer deep-clone the full Learning Profile for every event;
-- out-of-order event timestamps no longer roll current learning timestamps/streak state backward;
-- IndexedDB Learning Profile read-modify-write is atomic in one readwrite transaction, preventing multi-tab last-write-wins loss;
-- prototype-like vocabulary keys such as `__proto__` are stored as own records without prototype semantics;
-- a post-persistence Mixed/Adaptive callback failure can no longer be misreported to a child as `persist-failed`;
-- backup import now rejects internally inconsistent counters, out-of-range scores and impossible error totals;
-- stale/malformed Smart Review and Mixed/Adaptive sessionStorage is validated and discarded safely instead of reaching crashing runtime states;
-- Dashboard debounced search cannot navigate back into Smart Review after the user has already left the route;
-- Smart Review drawer now has dialog semantics, Escape-to-close and focus restoration;
-- read-only dashboard/planner paths use non-cloning profile views; a 50,000-record query is covered by regression tests;
-- Monkeytype Learning Memory events now target only `https://typing-game.local` instead of wildcard `postMessage("*")`.
-
-Reviewed Monkeytype revision:
-`9f47deacd2755f200661c51a4f7d2c5e9d349709`
-(Custom EN-VN CI `36032617372` PASS), and the parent gitlink is pinned to it.
-
-Final code checkpoint before this documentation update:
-`1ff13ec25106fe3902e2062bebb3bac551736063`.
-
-Platform CI `36033619469` PASS at that checkpoint:
-
-- Shared Learning: 55/55 tests;
-- Recall Typing: 25/25 tests;
-- Space Typing: 758/758 tests;
-- static Play-mode contract PASS;
-- Portal, Space Typing and Recall Typing builds PASS.
-
-Remaining review risks are intentionally not mislabeled as confirmed bugs:
-
-- request IDs are not persisted as idempotency keys; current children emit once and do not retry ACK failures, so duplicate delivery is a future-contract risk rather than an observed current duplicate path;
-- extremely large imported backup files are structurally validated after reading but have no explicit file-byte cap;
-- a very late event from an older persisted batch cannot reconstruct a mathematically exact historical correct-streak without retaining a full event log; current logic prevents stale events from rolling the live streak/timestamps backward;
-- there is no browser E2E harness that truly kills/reloads tabs while asserting IndexedDB and iframe recovery; current coverage is unit/integration/build plus source-level lifecycle review.
-
 **Shared Learning roadmap L00 → L18 is complete.**
 
 There is no remaining milestone in `SHARED_LEARNING_SYSTEM_MASTER_PLAN.md` after L18.

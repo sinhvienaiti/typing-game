@@ -1,7 +1,7 @@
 import {
   calculateMastery,
   calculateReviewPriority,
-  viewLearningProfile,
+  migrateLearningProfile,
 } from "./core.mjs";
 
 export const REVIEW_SORTS = new Set([
@@ -276,7 +276,7 @@ export function queryLearningProfile(
   queryInput,
   now = new Date().toISOString(),
 ) {
-  const profile = viewLearningProfile(profileInput);
+  const profile = migrateLearningProfile(profileInput);
   const query = parseLearningQuery(queryInput);
   const nowMs = Date.parse(now);
   const source = Object.values(collectionFor(profile, query.entityType));

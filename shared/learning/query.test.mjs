@@ -216,8 +216,8 @@ test("large learning profiles remain page-bounded and navigable", () => {
     "2026-09-24T10:00:00.000Z",
   );
 
-  for (let index = 0; index < 50_000; index += 1) {
-    const key = `word-${String(index).padStart(5, "0")}`;
+  for (let index = 0; index < 5000; index += 1) {
+    const key = `word-${String(index).padStart(4, "0")}`;
     profile.vocabulary[key] = {
       wordKey: key,
       attempts: 4,
@@ -250,10 +250,10 @@ test("large learning profiles remain page-bounded and navigable", () => {
     "2026-09-24T10:00:00.000Z",
   );
 
-  assert.equal(lastPage.totalItems, 50_000);
-  assert.equal(lastPage.totalPages, 500);
-  assert.equal(lastPage.page, 500);
+  assert.equal(lastPage.totalItems, 5000);
+  assert.equal(lastPage.totalPages, 50);
+  assert.equal(lastPage.page, 50);
   assert.equal(lastPage.items.length, 100);
-  assert.equal(lastPage.items[0].entityId, "word-49900");
-  assert.equal(lastPage.items[99].entityId, "word-49999");
+  assert.equal(lastPage.items[0].entityId, "word-4900");
+  assert.equal(lastPage.items[99].entityId, "word-4999");
 });

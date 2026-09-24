@@ -200,65 +200,42 @@ function boundedAppend(items, value) {
   return next.length > MAX_RECENT_SAMPLES ? next.slice(next.length - MAX_RECENT_SAMPLES) : next;
 }
 
-function boundedAppendChronological(items, value) {
-  const next = [...items, value].sort(
-    (left, right) => Date.parse(left.occurredAt) - Date.parse(right.occurredAt),
-  );
-  return next.length > MAX_RECENT_SAMPLES
-    ? next.slice(next.length - MAX_RECENT_SAMPLES)
-    : next;
-}
-
-function laterIso(current, candidate) {
-  if (current == null) return candidate;
-  return Date.parse(candidate) >= Date.parse(current) ? candidate : current;
-}
-
 function updateAverage(previousAverage, previousMeasuredAttempts, responseMs) {
   if (responseMs === undefined) return previousAverage;
   if (previousAverage == null || previousMeasuredAttempts <= 0) return responseMs;
   return Math.round((previousAverage * previousMeasuredAttempts + responseMs) / (previousMeasuredAttempts + 1));
 }
 
-export function viewLearningProfile(raw) {
+function cloneProfile(profile) {
+  return structuredClone(profile);
+}
+
+export function migrateLearningProfile(raw) {
   if (raw == null) return createEmptyLearningProfile();
   if (!isPlainObject(raw)) throw new TypeError("learning profile must be an object");
   if (raw.version !== LEARNING_PROFILE_VERSION) {
     throw new TypeError(`unsupported learning profile version: ${String(raw.version)}`);
   }
 
-  return {
-    version: LEARNING_PROFILE_VERSION,
-    updatedAt:
-      typeof raw.updatedAt === "string" &&
-      Number.isFinite(Date.parse(raw.updatedAt))
-        ? new Date(raw.updatedAt).toISOString()
-        : new Date(0).toISOString(),
-    vocabulary: isPlainObject(raw.vocabulary) ? raw.vocabulary : {},
-    grammar: isPlainObject(raw.grammar) ? raw.grammar : {},
-    sentences: isPlainObject(raw.sentences) ? raw.sentences : {},
-  };
+  const profile = createEmptyLearningProfile(
+    typeof raw.updatedAt === "string" && Number.isFinite(Date.parse(raw.updatedAt))
+      ? raw.updatedAt
+      : new Date(0).toISOString(),
+  );
+
+  for (const key of ["vocabulary", "grammar", "sentences"]) {
+    if (isPlainObject(raw[key])) profile[key] = structuredClone(raw[key]);
+  }
+  return profile;
 }
 
-export function migrateLearningProfile(raw) {
-  return structuredClone(viewLearningProfile(raw));
-}
-
-function applyParsedLearningEvent(next, event) {
-  const collectionName = event.entityType === "vocabulary"
-    ? "vocabulary"
-    : event.entityType === "grammar"
-      ? "grammar"
-      : "sentences";
-  const collection = next[collectionName];
-  const existing = Object.hasOwn(collection, event.entityId)
-    ? collection[event.entityId]
-    : createRecord(event.entityType, event.entityId);
+export function applyLearningEvent(profileInput, eventInput) {
+  const profile = migrateLearningProfile(profileInput);
+  const event = parseLearningEvent(eventInput);
+  const next = cloneProfile(profile);
+  const collectionName = event.entityType === "vocabulary" ? "vocabulary" : event.entityType === "grammar" ? "grammar" : "sentences";
+  const existing = next[collectionName][event.entityId] ?? createRecord(event.entityType, event.entityId);
   const record = { ...existing };
-  const previousLastSeenAt = record.lastSeenAt;
-  const isNewestEvent =
-    previousLastSeenAt == null ||
-    Date.parse(event.occurredAt) >= Date.parse(previousLastSeenAt);
 
   const priorResponseCount = record.responseSamples ?? 0;
   record.attempts += 1;
@@ -266,104 +243,50 @@ function applyParsedLearningEvent(next, event) {
   record.wrong += event.result === "wrong" ? 1 : 0;
   record.hints += event.hintUsed ? 1 : 0;
   record.replays += event.replayUsed ? 1 : 0;
-  record.avgResponseMs = updateAverage(
-    record.avgResponseMs,
-    priorResponseCount,
-    event.responseMs,
-  );
-  record.responseSamples =
-    priorResponseCount + (event.responseMs === undefined ? 0 : 1);
-  if (isNewestEvent) {
-    record.correctStreak =
-      event.result === "correct" ? record.correctStreak + 1 : 0;
-  }
-  record.lastSeenAt = laterIso(record.lastSeenAt, event.occurredAt);
-  if (event.result === "correct") {
-    record.lastCorrectAt = laterIso(record.lastCorrectAt, event.occurredAt);
-  }
-  if (event.result === "wrong") {
-    record.lastWrongAt = laterIso(record.lastWrongAt, event.occurredAt);
-  }
-  if (!record.sourceGames.includes(event.gameId)) {
-    record.sourceGames = [...record.sourceGames, event.gameId];
-  }
+  record.avgResponseMs = updateAverage(record.avgResponseMs, priorResponseCount, event.responseMs);
+  record.responseSamples = priorResponseCount + (event.responseMs === undefined ? 0 : 1);
+  record.correctStreak = event.result === "correct" ? record.correctStreak + 1 : 0;
+  record.lastSeenAt = event.occurredAt;
+  if (event.result === "correct") record.lastCorrectAt = event.occurredAt;
+  if (event.result === "wrong") record.lastWrongAt = event.occurredAt;
+  if (!record.sourceGames.includes(event.gameId)) record.sourceGames = [...record.sourceGames, event.gameId];
 
   if (event.result === "wrong") {
-    record.recentMistakes = boundedAppendChronological(
-      record.recentMistakes ?? [],
-      {
-        occurredAt: event.occurredAt,
-        ...(event.userAnswer === undefined
-          ? {}
-          : { userAnswer: event.userAnswer }),
-        ...(event.expectedAnswer === undefined
-          ? {}
-          : { expectedAnswer: event.expectedAnswer }),
-        ...(event.errorType === undefined
-          ? {}
-          : { errorType: event.errorType }),
-        activityType: event.activityType,
-        gameId: event.gameId,
-      },
-    );
-    if (
-      (event.entityType === "grammar" || event.entityType === "sentence") &&
-      event.errorType !== undefined
-    ) {
+    record.recentMistakes = boundedAppend(record.recentMistakes ?? [], {
+      occurredAt: event.occurredAt,
+      ...(event.userAnswer === undefined ? {} : { userAnswer: event.userAnswer }),
+      ...(event.expectedAnswer === undefined ? {} : { expectedAnswer: event.expectedAnswer }),
+      ...(event.errorType === undefined ? {} : { errorType: event.errorType }),
+      activityType: event.activityType,
+      gameId: event.gameId,
+    });
+    if ((event.entityType === "grammar" || event.entityType === "sentence") && event.errorType !== undefined) {
       record.errorTypes = { ...(record.errorTypes ?? {}) };
-      record.errorTypes[event.errorType] =
-        (record.errorTypes[event.errorType] ?? 0) + 1;
+      record.errorTypes[event.errorType] = (record.errorTypes[event.errorType] ?? 0) + 1;
     }
   }
 
   if (event.entityType === "sentence" && event.userAnswer !== undefined) {
-    record.recentAnswers = boundedAppendChronological(
-      record.recentAnswers ?? [],
-      {
-        occurredAt: event.occurredAt,
-        answer: event.userAnswer,
-        result: event.result,
-      },
-    );
+    record.recentAnswers = boundedAppend(record.recentAnswers ?? [], {
+      occurredAt: event.occurredAt,
+      answer: event.userAnswer,
+      result: event.result,
+    });
   }
 
-  const metricTime = record.lastSeenAt ?? event.occurredAt;
-  record.mastery = calculateMastery(record, metricTime);
-  record.reviewPriority = calculateReviewPriority(record, metricTime);
-  record.nextReviewAt = calculateNextReviewAt(record, metricTime);
+  record.mastery = calculateMastery(record, event.occurredAt);
+  record.reviewPriority = calculateReviewPriority(record, event.occurredAt);
+  record.nextReviewAt = calculateNextReviewAt(record, event.occurredAt);
 
-  Object.defineProperty(collection, event.entityId, {
-    value: record,
-    enumerable: true,
-    configurable: true,
-    writable: true,
-  });
-  next.updatedAt = laterIso(next.updatedAt, event.occurredAt);
+  next[collectionName][event.entityId] = record;
+  next.updatedAt = event.occurredAt;
   return next;
-}
-
-export function applyLearningEvent(profileInput, eventInput) {
-  const next = migrateLearningProfile(profileInput);
-  return applyParsedLearningEvent(next, parseLearningEvent(eventInput));
 }
 
 export function applyLearningEvents(profileInput, eventInputs) {
-  if (!Array.isArray(eventInputs)) {
-    throw new TypeError("learning events must be an array");
-  }
-
-  const next = migrateLearningProfile(profileInput);
-  const events = eventInputs
-    .map((event) => parseLearningEvent(event))
-    .map((event, index) => ({ event, index }))
-    .sort(
-      (left, right) =>
-        Date.parse(left.event.occurredAt) - Date.parse(right.event.occurredAt) ||
-        left.index - right.index,
-    );
-
-  for (const { event } of events) {
-    applyParsedLearningEvent(next, event);
-  }
-  return next;
+  if (!Array.isArray(eventInputs)) throw new TypeError("learning events must be an array");
+  return eventInputs.reduce(
+    (profile, event) => applyLearningEvent(profile, event),
+    migrateLearningProfile(profileInput),
+  );
 }

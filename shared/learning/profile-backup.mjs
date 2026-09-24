@@ -8,7 +8,7 @@ export const LEARNING_BACKUP_FORMAT = "typing-game-learning-profile";
 export const LEARNING_BACKUP_VERSION = 1;
 
 const ENTITY_TYPES = new Set(["vocabulary", "grammar", "sentence"]);
-const REQUIRED_COUNTERS = [
+const REQUIRED_NUMBERS = [
   "attempts",
   "correct",
   "wrong",
@@ -16,6 +16,8 @@ const REQUIRED_COUNTERS = [
   "replays",
   "responseSamples",
   "correctStreak",
+  "mastery",
+  "reviewPriority",
 ];
 
 function plainObject(value) {
@@ -27,19 +29,12 @@ function validIsoOrNull(value) {
     (typeof value === "string" && Number.isFinite(Date.parse(value)));
 }
 
-function requireNonNegativeInteger(record, field) {
-  const value = record[field];
-  if (!Number.isInteger(value) || value < 0) {
-    throw new TypeError(`learning record ${field} is invalid`);
-  }
-}
-
-function requireBoundedScore(record, field) {
+function requireFiniteNonNegative(record, field) {
   const value = record[field];
   if (
-    !Number.isInteger(value) ||
-    value < 0 ||
-    value > 100
+    typeof value !== "number" ||
+    !Number.isFinite(value) ||
+    value < 0
   ) {
     throw new TypeError(`learning record ${field} is invalid`);
   }
@@ -64,24 +59,8 @@ function validateRecord(entityType, key, record) {
     throw new TypeError(`learning record ${key} is invalid`);
   }
 
-  for (const field of REQUIRED_COUNTERS) {
-    requireNonNegativeInteger(record, field);
-  }
-  requireBoundedScore(record, "mastery");
-  requireBoundedScore(record, "reviewPriority");
-
-  if (record.correct + record.wrong !== record.attempts) {
-    throw new TypeError(
-      "learning record correct + wrong must equal attempts",
-    );
-  }
-  if (
-    record.hints > record.attempts ||
-    record.replays > record.attempts ||
-    record.responseSamples > record.attempts ||
-    record.correctStreak > record.correct
-  ) {
-    throw new TypeError("learning record counters are inconsistent");
+  for (const field of REQUIRED_NUMBERS) {
+    requireFiniteNonNegative(record, field);
   }
 
   if (
@@ -136,12 +115,11 @@ function validateRecord(entityType, key, record) {
     (entityType === "grammar" || entityType === "sentence") &&
     (!plainObject(record.errorTypes) ||
       Object.values(record.errorTypes).some(
-        (count) => !Number.isInteger(count) || count < 0,
-      ) ||
-      Object.values(record.errorTypes).reduce(
-        (sum, count) => sum + count,
-        0,
-      ) > record.wrong)
+        (count) =>
+          typeof count !== "number" ||
+          !Number.isFinite(count) ||
+          count < 0,
+      ))
   ) {
     throw new TypeError("learning record errorTypes is invalid");
   }

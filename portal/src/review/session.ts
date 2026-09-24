@@ -6,7 +6,6 @@ import { BrowserLearningProfileStore } from "../../../shared/learning/browser-st
 import {
   buildQuickReviewPlan,
   buildReviewPlan,
-  parseReviewPlan,
   type ReviewPlan,
   type ReviewPlanInput,
 } from "../../../shared/learning/review-session.mjs";
@@ -147,14 +146,12 @@ function readSession(): ReviewPlan | null {
   try {
     const parsed = JSON.parse(raw) as {
       version?: unknown;
-      plan?: unknown;
+      plan?: ReviewPlan;
     };
-    if (parsed.version !== 1) {
-      throw new TypeError("stored review session version is invalid");
-    }
-    return parseReviewPlan(parsed.plan);
+    return parsed.version === 1 && parsed.plan?.version === 1
+      ? parsed.plan
+      : null;
   } catch {
-    sessionStorage.removeItem(REVIEW_SESSION_KEY);
     return null;
   }
 }

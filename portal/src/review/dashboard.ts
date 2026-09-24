@@ -692,11 +692,7 @@ export class SmartReviewDashboard {
     let timer = 0;
     search.addEventListener("input", () => {
       window.clearTimeout(timer);
-      timer = window.setTimeout(() => {
-        const path = location.pathname.replace(/\/$/, "") || "/";
-        if (!search.isConnected || path !== "/review") return;
-        this.#setParam("q", search.value);
-      }, 280);
+      timer = window.setTimeout(() => this.#setParam("q", search.value), 280);
     });
     searchLabel.append(search);
 
@@ -1051,19 +1047,9 @@ export class SmartReviewDashboard {
   ): void {
     document.querySelector(".review-drawer-backdrop")?.remove();
 
-    const previousFocus =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
     const backdrop = element("div", "review-drawer-backdrop");
     const drawer = element("aside", "review-drawer");
-    drawer.setAttribute("role", "dialog");
-    drawer.setAttribute("aria-modal", "true");
     drawer.setAttribute("aria-label", "Learning item details");
-    const closeDrawer = (): void => {
-      backdrop.remove();
-      if (previousFocus?.isConnected) previousFocus.focus();
-    };
 
     const top = element("div", "review-drawer-top");
     const title = element("div");
@@ -1079,7 +1065,7 @@ export class SmartReviewDashboard {
     }
     const close = element("button", "review-drawer-close", "×");
     close.setAttribute("aria-label", "Close details");
-    close.addEventListener("click", closeDrawer);
+    close.addEventListener("click", () => backdrop.remove());
     top.append(title, close);
 
     const metrics = element("div", "review-detail-grid");
@@ -1151,16 +1137,13 @@ export class SmartReviewDashboard {
       params.set("item", item.entityId);
       params.set("entity", item.entityType);
       this.#navigate(`/review/build?${params.toString()}`);
-      closeDrawer();
+      backdrop.remove();
     });
 
     drawer.append(top, metrics, reasonSection, mistakeSection, practice);
     backdrop.append(drawer);
     backdrop.addEventListener("click", (event) => {
-      if (event.target === backdrop) closeDrawer();
-    });
-    backdrop.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeDrawer();
+      if (event.target === backdrop) backdrop.remove();
     });
     document.body.append(backdrop);
     close.focus();
