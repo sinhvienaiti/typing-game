@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD REVIEW IMPLEMENTED / PARENT SYNC CI PENDING**
+Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD REVIEW COMPLETE / AUTOMATED CI GREEN**
 
 ## 1. Goal
 
@@ -629,4 +629,4 @@ Confirmed fixes:
 
 No gameplay, visual, enemy, projectile, particle, audio or curriculum feature was removed or reduced.
 
-The parent gitlink is being updated to this reviewed child. Full Parent Platform CI is the remaining automated gate for this follow-up. Space Typing M22 real-browser/audio/performance acceptance remains separate and pending.
+The parent gitlink is updated to this reviewed child. Parent Platform CI #233 passed the complete integration pipeline. Space Typing M22 real-browser/audio/performance acceptance remains separate and pending.
