@@ -2,7 +2,7 @@
 
 ## Status
 
-**L05 COMPLETE / L06 NEXT**
+**L06 COMPLETE / L07 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1407,13 +1407,35 @@ Verification:
 
 ## L06 — Monkeytype Learning Memory integration
 
-Monkey emits shared events for:
+**Status: COMPLETE — 2026-09-24**
 
-- normal learning typing,
-- existing recall mode,
-- pronunciation/replay where relevant,
-- hints where relevant,
-- response timing.
+Monkeytype now emits the parent-owned shared learning contract for dictionary-backed learning attempts:
+
+- one vocabulary event per completed learning item/phrase rather than per keypress;
+- greedy multi-word dictionary matches stay one canonical vocabulary attempt;
+- normal EN-VN learning typing emits `activityType=typing`;
+- existing Recall mode emits `activityType=recall` without reimplementing Recall;
+- response time is measured from learning-cue presentation to item completion;
+- event output includes user answer, expected answer, correctness, hint/replay dependence flags and canonical Monkeytype game ID;
+- helper hooks exist for explicit hint/replay actions; automatic pronunciation is not falsely counted as a user replay;
+- matching is cached per test/dictionary and completion uses the current word snapshot, avoiding synchronous per-keystroke persistence/history rescans;
+- child only posts the shared event; parent bridge remains the sole owner of validation, batching, persistence, mastery and review priority.
+
+Child checkpoint:
+
+~~~text
+sinhvienaiti/monkeytype
+feature/en-vn-translation
+d4ffe3131153f93da8c1ee24a0161fed9c66c5ba
+~~~
+
+Verification:
+
+- Custom EN-VN CI run 36000835083: PASS;
+- frontend lint PASS;
+- changed-style lint PASS;
+- local-static production build PASS;
+- full frontend test suite PASS, including single-word, greedy multi-word, Recall, hint/replay and non-learning-mode regression coverage.
 
 Normal Monkeytype mode remains compatible.
 
