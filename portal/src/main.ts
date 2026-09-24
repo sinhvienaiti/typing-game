@@ -15,6 +15,12 @@ import {
   queueRecallReview,
   readPendingRecallReview,
 } from "./review/recall-adapter";
+import {
+  clearPendingShooterReview,
+  postPendingShooterReview,
+  queueShooterReview,
+  readPendingShooterReview,
+} from "./review/shooter-adapter";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
@@ -105,6 +111,17 @@ async function startReview(plan: ReviewPlan): Promise<void> {
 
     queueRecallReview(plan);
     navigate(recall.path);
+    return;
+  }
+
+  if (plan.options.game === "vocab-shooter") {
+    const shooter = registry.games.find((game) => game.id === "vocab-shooter");
+    if (shooter === undefined) {
+      throw new Error("Vocabulary Shooter is not registered in the local portal.");
+    }
+
+    queueShooterReview(plan);
+    navigate(shooter.path);
     return;
   }
 
@@ -236,7 +253,9 @@ function renderGame(game: Game): HTMLElement {
           ? postPendingMonkeyReview(frame, game.appUrl)
           : game.id === "recall-typing"
             ? postPendingRecallReview(frame, game.appUrl)
-            : null;
+            : game.id === "vocab-shooter"
+              ? postPendingShooterReview(frame, game.appUrl)
+              : null;
       if (pending !== null) {
         reviewStatus.hidden = false;
         reviewStatus.textContent =
@@ -315,7 +334,8 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
 
   if (
     (currentGame?.id === "monkeytype" ||
-      currentGame?.id === "recall-typing") &&
+      currentGame?.id === "recall-typing" ||
+      currentGame?.id === "vocab-shooter") &&
     (data["type"] === "typing-game:learning:v1:review-ready" ||
       data["type"] === "typing-game:learning:v1:review-error")
   ) {
@@ -324,7 +344,9 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
     const pending =
       currentGame.id === "monkeytype"
         ? readPendingMonkeyReview()
-        : readPendingRecallReview();
+        : currentGame.id === "recall-typing"
+          ? readPendingRecallReview()
+          : readPendingShooterReview();
     if (
       requestId !== undefined &&
       pending !== null &&
@@ -332,8 +354,10 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
     ) {
       if (currentGame.id === "monkeytype") {
         clearPendingMonkeyReview(requestId);
-      } else {
+      } else if (currentGame.id === "recall-typing") {
         clearPendingRecallReview(requestId);
+      } else {
+        clearPendingShooterReview(requestId);
       }
 
       if (currentReviewStatus !== null) {
