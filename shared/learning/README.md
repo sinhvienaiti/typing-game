@@ -89,3 +89,38 @@ pnpm learning:test
 ```
 
 The tests cover event validation, vocabulary key normalization, deterministic aggregates, bounded history, grammar error classification, sentence answer history and review-priority ordering.
+
+## Cross-origin bridge
+
+The Portal is the only canonical Shared Learning owner.
+
+Child games communicate through the versioned namespace:
+
+```text
+typing-game:learning:v1:attempt
+typing-game:learning:v1:query
+
+typing-game:learning:v1:ack
+typing-game:learning:v1:query-result
+typing-game:learning:v1:error
+```
+
+The Portal accepts a request only when:
+
+- the sender is the currently mounted iframe;
+- the origin exactly matches that game's registry `appUrl` origin;
+- the message passes the shared schema parser;
+- Attempt `gameId` matches the active game.
+
+Attempt persistence is batched (maximum 32 per write, short debounce) and serialized through the parent IndexedDB store. Query requests flush older pending attempts first so review reads do not miss acknowledged learning work.
+
+Current query contract supports:
+
+- `entityType`: vocabulary / grammar / sentence;
+- `page`;
+- `pageSize`: 10 / 25 / 50 / 100;
+- `search`;
+- filters for status, source game, mastery range, due-only and last-mistake date range;
+- deterministic sorts including Smart Priority, mastery, mistakes, recency, review age, response speed, attempts and A-Z/Z-A.
+
+Child-specific adapters are added only in their integration milestones. L02 defines and validates the parent transport; it does not duplicate Smart Review logic in children.
