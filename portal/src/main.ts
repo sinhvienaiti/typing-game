@@ -27,6 +27,12 @@ import {
   queueSpaceReview,
   readPendingSpaceReview,
 } from "./review/space-adapter";
+import {
+  clearPendingKaraokeReview,
+  postPendingKaraokeReview,
+  queueKaraokeReview,
+  readPendingKaraokeReview,
+} from "./review/karaoke-adapter";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
@@ -139,6 +145,17 @@ async function startReview(plan: ReviewPlan): Promise<void> {
 
     queueSpaceReview(plan);
     navigate(space.path);
+    return;
+  }
+
+  if (plan.options.game === "karaoke-typing") {
+    const karaoke = registry.games.find((game) => game.id === "karaoke-typing");
+    if (karaoke === undefined) {
+      throw new Error("Karaoke Typing is not registered in the local portal.");
+    }
+
+    await queueKaraokeReview(plan);
+    navigate(karaoke.path);
     return;
   }
 
@@ -274,7 +291,9 @@ function renderGame(game: Game): HTMLElement {
               ? postPendingShooterReview(frame, game.appUrl)
               : game.id === "space-typing"
                 ? postPendingSpaceReview(frame, game.appUrl)
-                : null;
+                : game.id === "karaoke-typing"
+                  ? postPendingKaraokeReview(frame, game.appUrl)
+                  : null;
       if (pending !== null) {
         reviewStatus.hidden = false;
         reviewStatus.textContent =
@@ -355,7 +374,8 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
     (currentGame?.id === "monkeytype" ||
       currentGame?.id === "recall-typing" ||
       currentGame?.id === "vocab-shooter" ||
-      currentGame?.id === "space-typing") &&
+      currentGame?.id === "space-typing" ||
+      currentGame?.id === "karaoke-typing") &&
     (data["type"] === "typing-game:learning:v1:review-ready" ||
       data["type"] === "typing-game:learning:v1:review-error")
   ) {
@@ -368,7 +388,9 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
           ? readPendingRecallReview()
           : currentGame.id === "vocab-shooter"
             ? readPendingShooterReview()
-            : readPendingSpaceReview();
+            : currentGame.id === "space-typing"
+              ? readPendingSpaceReview()
+              : readPendingKaraokeReview();
     if (
       requestId !== undefined &&
       pending !== null &&
@@ -380,8 +402,10 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
         clearPendingRecallReview(requestId);
       } else if (currentGame.id === "vocab-shooter") {
         clearPendingShooterReview(requestId);
-      } else {
+      } else if (currentGame.id === "space-typing") {
         clearPendingSpaceReview(requestId);
+      } else {
+        clearPendingKaraokeReview(requestId);
       }
 
       if (currentReviewStatus !== null) {
