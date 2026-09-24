@@ -177,6 +177,130 @@ export function parseReviewPlanInput(input) {
   };
 }
 
+
+function requiredInteger(value, field, min = 0, max = Number.MAX_SAFE_INTEGER) {
+  if (!Number.isInteger(value) || value < min || value > max) {
+    throw new TypeError(`${field} is invalid`);
+  }
+  return value;
+}
+
+export function parseReviewPlan(input) {
+  if (!plainObject(input) || input.version !== 1) {
+    throw new TypeError("review plan is invalid");
+  }
+
+  const createdAt = optionalDate(input.createdAt, "createdAt");
+  if (createdAt === undefined) {
+    throw new TypeError("createdAt is required");
+  }
+  const durationMinutes = optionalNumber(
+    input.durationMinutes,
+    "durationMinutes",
+    0,
+    24 * 60,
+  );
+  if (durationMinutes === undefined) {
+    throw new TypeError("durationMinutes is required");
+  }
+
+  const options = parseReviewPlanInput(input.options);
+  if (!Array.isArray(input.items)) {
+    throw new TypeError("review plan items must be an array");
+  }
+
+  const items = input.items.map((item, index) => {
+    if (!plainObject(item)) {
+      throw new TypeError(`review item ${index} is invalid`);
+    }
+    const entityType = nonEmptyString(
+      item.entityType,
+      `items[${index}].entityType`,
+      32,
+    );
+    if (!REVIEW_CONTENT.has(entityType)) {
+      throw new TypeError(`review item ${index} entityType is invalid`);
+    }
+    const entityIdValue = nonEmptyString(
+      item.entityId,
+      `items[${index}].entityId`,
+      200,
+    );
+    const mastery = optionalNumber(
+      item.mastery,
+      `items[${index}].mastery`,
+      0,
+      100,
+    );
+    const reviewPriority = optionalNumber(
+      item.reviewPriority,
+      `items[${index}].reviewPriority`,
+      0,
+      100,
+    );
+    if (mastery === undefined || reviewPriority === undefined) {
+      throw new TypeError(`review item ${index} scores are required`);
+    }
+    if (
+      !Array.isArray(item.compatibleGames) ||
+      item.compatibleGames.some(
+        (game) =>
+          typeof game !== "string" ||
+          REVIEW_CAPABILITIES[game] === undefined,
+      )
+    ) {
+      throw new TypeError(
+        `review item ${index} compatibleGames is invalid`,
+      );
+    }
+
+    return {
+      ...item,
+      entityType,
+      entityId: entityIdValue,
+      mastery,
+      reviewPriority,
+      compatibleGames: [...new Set(item.compatibleGames)],
+    };
+  });
+
+  const totalCandidates = requiredInteger(
+    input.totalCandidates,
+    "totalCandidates",
+  );
+  const compatibleCount = requiredInteger(
+    input.compatibleCount,
+    "compatibleCount",
+  );
+  const excludedCount = requiredInteger(
+    input.excludedCount,
+    "excludedCount",
+  );
+  const selectedCount = requiredInteger(
+    input.selectedCount,
+    "selectedCount",
+  );
+  if (
+    selectedCount !== items.length ||
+    compatibleCount < selectedCount ||
+    totalCandidates < compatibleCount + excludedCount
+  ) {
+    throw new TypeError("review plan counts are inconsistent");
+  }
+
+  return {
+    version: 1,
+    createdAt,
+    durationMinutes,
+    options,
+    items,
+    totalCandidates,
+    compatibleCount,
+    excludedCount,
+    selectedCount,
+  };
+}
+
 function dayKey(value) {
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) return "";
