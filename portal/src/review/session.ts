@@ -11,8 +11,10 @@ import {
 } from "../../../shared/learning/review-session.mjs";
 import {
   activeMixedReviewPlan,
+  cancelMixedReviewSegmentStart,
   clearMixedReview,
   ensureMixedReview,
+  markMixedReviewSegmentStarted,
 } from "./mixed";
 
 type Navigate = (url: string) => void;
@@ -595,7 +597,9 @@ export class SmartReviewFlow {
         start.addEventListener("click", () => {
           start.disabled = true;
           start.textContent = `Preparing ${gameLabel}…`;
+          markMixedReviewSegmentStarted(plan);
           void this.#startReview(segmentPlan).catch((error: unknown) => {
+            cancelMixedReviewSegmentStart();
             start.disabled = false;
             start.textContent =
               `Continue · ${gameLabel} · ${active.items.length}`;
