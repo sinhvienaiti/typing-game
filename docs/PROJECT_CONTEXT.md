@@ -16,6 +16,31 @@ It is intentionally written so that a new ChatGPT tab, another AI assistant, or 
 - which bugs have already been diagnosed,
 - which implementation rules should not be changed without an explicit user request.
 
+## Latest confirmed expansion — 2026-09-24
+
+The next platform-wide implementation roadmap is defined in:
+
+~~~text
+docs/design/SHARED_LEARNING_SYSTEM_MASTER_PLAN.md
+~~~
+
+This master plan is confirmed and includes the complete newly agreed scope:
+
+- one Shared Learning Profile / Learning Memory across games,
+- Smart Review Dashboard with pagination, search, filter and sort,
+- Smart Review Review Builder / Review Session,
+- Due Now / date-range / Weakest / At Risk review sets,
+- cross-game review selection and future Mixed Review,
+- Monkeytype Learn / Recall / Listen / Sentence Builder / Context-Cloze / Smart Review / Adaptive Mix,
+- grammar and sentence mastery instead of treating every error as a word error,
+- Vietnamese IME-aware Monkeytype input and committed-text accuracy,
+- shared event contracts and local-first cross-subdomain persistence,
+- staged integration into Recall Typing, Vocabulary Shooter, Space Typing and Karaoke Typing.
+
+Future continuation must read that master plan directly from GitHub and implement from its first incomplete milestone rather than reconstructing the design from chat history.
+
+---
+
 The chronological engineering history is kept separately under:
 
 ~~~text
