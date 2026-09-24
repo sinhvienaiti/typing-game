@@ -102,6 +102,30 @@ test("import rejects malformed records before IndexedDB replacement", () => {
   );
 });
 
+test("import rejects partial v1 profiles instead of silently filling collections", () => {
+  const partial = structuredClone(profile());
+  delete partial.sentences;
+
+  assert.throws(
+    () => parseLearningProfileBackup(partial),
+    /sentences is required/,
+  );
+});
+
+test("import rejects non-canonical vocabulary keys", () => {
+  const malformed = structuredClone(profile());
+  malformed.vocabulary.Airport = {
+    ...malformed.vocabulary.airport,
+    wordKey: "Airport",
+  };
+  delete malformed.vocabulary.airport;
+
+  assert.throws(
+    () => parseLearningProfileBackup(malformed),
+    /non-canonical entity key/,
+  );
+});
+
 test("selected reset clears only requested collections", () => {
   const original = profile();
   const next = resetLearningProfileSelection(
