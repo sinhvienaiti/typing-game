@@ -232,7 +232,21 @@ Adaptive Mix checkpoint:
 - thresholds are explicit/tested: slow response >= 3500 ms, stale exposure >= 7 days;
 - Platform CI run 36026159083 PASS.
 
-Next active milestone: **L17 — Export / Import / Reset**.
+L17 Export / Import / Reset is complete.
+
+Learning-data maintenance checkpoint:
+
+- parent route `/review/data` provides local Export / Import / Reset controls;
+- exports are versioned JSON backups of the canonical shared Learning Profile;
+- imports are structurally validated before replacing IndexedDB data and require confirmation;
+- Reset Selected supports Words / Grammar / Sentences independently;
+- Reset All clears shared learning history but does not remove game settings or canonical vocabulary data;
+- destructive resets require confirmation;
+- Import/Reset clear review sessions, Mixed/Adaptive progress and pending child review datasets to avoid stale queues;
+- shared backup/reset tests cover round-trip, malformed input and selective/full reset behavior;
+- Platform CI run 36028198375 PASS.
+
+Next active milestone: **L18 — Final cross-game review**.
 
 ---
 
