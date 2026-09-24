@@ -1,6 +1,6 @@
 # English Topic Curriculum Plan
 
-Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD REVIEW COMPLETE / AUTOMATED CI GREEN**
+Status: **T16 CROSS-GAME REVIEW COMPLETE / POST-T16 SPACE TYPING HUD + ACTION-RACE REVIEWS COMPLETE / PARENT SYNC CI PENDING**
 
 ## 1. Goal
 
@@ -630,3 +630,25 @@ Confirmed fixes:
 No gameplay, visual, enemy, projectile, particle, audio or curriculum feature was removed or reduced.
 
 The parent gitlink is updated to this reviewed child. Parent Platform CI #233 passed the complete integration pipeline. Space Typing M22 real-browser/audio/performance acceptance remains separate and pending.
+
+
+## 21. Post-T16 async-action race follow-up — 2026-09-24
+
+A further interaction lifecycle review after the HUD hot-path pass found two confirmed race conditions in Space Typing.
+
+Reviewed child: `d28ccd927166dfa2fb98fb3f67e7916a6b89dad4`.
+
+Child CI #646: PASS.
+
+Confirmed fixes:
+
+- Campaign Map Start/Replay now owns an async action gate while the Stage selection autosave is in flight, preventing double-click save/navigation overlap.
+- Campaign Map selection controls are frozen for the duration of that transaction so the saved Stage cannot change underneath the pending action.
+- Checkpoint navigation and all game-over recovery-item actions share one mutually exclusive gate.
+- Salvage Anchor and Stage Revival Core can no longer consume multiple copies from rapid repeated clicks while persistence is pending.
+- failed or incomplete game-over transactions re-render the current valid recovery choices instead of leaving stale disabled/enabled controls.
+- Phoenix Core uses the same action gate so all death-resolution paths have one consistent lifecycle.
+
+The implementation changes transaction control only. Recovery effects, item costs, Campaign progression, checkpoint semantics, audio, visuals and difficulty are unchanged.
+
+The parent gitlink is being updated to this child. Full Parent Platform CI is required before closing this follow-up.
