@@ -3,6 +3,13 @@ import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
 import { SmartReviewFlow } from "./review/session";
+import {
+  clearPendingMonkeyReview,
+  postPendingMonkeyReview,
+  queueMonkeyReview,
+  readPendingMonkeyReview,
+} from "./review/monkey-adapter";
+import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
 
 type Game = {
   id: string;
@@ -58,9 +65,10 @@ const music = new SharedMusicPlayer();
 const navButtons = new Map<string, HTMLButtonElement>();
 let currentFrame: HTMLIFrameElement | null = null;
 let currentGame: Game | null = null;
+let currentReviewStatus: HTMLDivElement | null = null;
 const learningBridge = new ParentLearningBridge();
 const reviewDashboard = new SmartReviewDashboard(navigate);
-const reviewFlow = new SmartReviewFlow(navigate);
+const reviewFlow = new SmartReviewFlow(navigate, startReview);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -69,6 +77,20 @@ function normalizedPath(): string {
 function navigate(path: string): void {
   if (normalizedPath() !== path) history.pushState({}, "", path);
   renderRoute();
+}
+
+async function startReview(plan: ReviewPlan): Promise<void> {
+  if (plan.options.game !== "monkeytype") {
+    throw new Error("This review adapter is not implemented for the selected game yet.");
+  }
+
+  const monkeytype = registry.games.find((game) => game.id === "monkeytype");
+  if (monkeytype === undefined) {
+    throw new Error("Monkeytype is not registered in the local portal.");
+  }
+
+  await queueMonkeyReview(plan);
+  navigate(monkeytype.path);
 }
 
 function makeButton(label: string, path: string): HTMLButtonElement {
@@ -163,6 +185,11 @@ function renderGame(game: Game): HTMLElement {
   const stage = document.createElement("main");
   stage.className = "game-stage";
 
+  const reviewStatus = document.createElement("div");
+  reviewStatus.className = "game-review-status";
+  reviewStatus.hidden = true;
+  currentReviewStatus = reviewStatus;
+
   const loading = document.createElement("div");
   loading.className = "game-loading";
   loading.innerHTML =
@@ -183,12 +210,22 @@ function renderGame(game: Game): HTMLElement {
       frame.classList.remove("loading");
       loading.classList.add("done");
       sendSharedMusicState();
+
+      if (game.id === "monkeytype") {
+        const pending = postPendingMonkeyReview(frame, game.appUrl);
+        if (pending !== null) {
+          reviewStatus.hidden = false;
+          reviewStatus.textContent =
+            `Starting Smart Review · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"} · ${pending.goal}`;
+        }
+      }
+
       window.setTimeout(() => loading.remove(), 180);
     },
     { once: true },
   );
 
-  stage.append(frame, loading);
+  stage.append(frame, loading, reviewStatus);
   return stage;
 }
 
@@ -207,6 +244,7 @@ function renderRoute(): void {
   music.setSpeechActive(false);
   currentFrame = null;
   currentGame = null;
+  currentReviewStatus = null;
 
   if (path === "/") {
     music.setKaraokeActive(false);
@@ -251,6 +289,42 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   if (event.data === null || typeof event.data !== "object") return;
 
   const data = event.data as Record<string, unknown>;
+
+  if (
+    currentGame?.id === "monkeytype" &&
+    (data["type"] === "typing-game:learning:v1:review-ready" ||
+      data["type"] === "typing-game:learning:v1:review-error")
+  ) {
+    const requestId =
+      typeof data["requestId"] === "string" ? data["requestId"] : undefined;
+    const pending = readPendingMonkeyReview();
+    if (
+      requestId !== undefined &&
+      pending !== null &&
+      pending.requestId === requestId
+    ) {
+      clearPendingMonkeyReview(requestId);
+      if (currentReviewStatus !== null) {
+        currentReviewStatus.hidden = false;
+        if (data["type"] === "typing-game:learning:v1:review-ready") {
+          currentReviewStatus.textContent =
+            `Smart Review ready · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"}`;
+          window.setTimeout(() => {
+            currentReviewStatus?.remove();
+            currentReviewStatus = null;
+          }, 1800);
+        } else {
+          currentReviewStatus.classList.add("error");
+          currentReviewStatus.textContent =
+            typeof data["message"] === "string"
+              ? `Smart Review error: ${data["message"]}`
+              : "Smart Review dataset could not be applied.";
+        }
+      }
+    }
+    return;
+  }
+
   if (data["type"] !== "typing-game:speech") return;
   if (typeof data["active"] !== "boolean") return;
   music.setSpeechActive(data["active"]);
