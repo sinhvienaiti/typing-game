@@ -69,8 +69,10 @@ export function buildVocabularyCurriculum(source, lookup) {
         id: topic.id,
         label: topic.label,
         group: group.id,
+        groupLabel: group.label,
         levels: topic.levels ?? [],
         count: entries.length,
+        entries: resolved.entries.map((entry) => ({ ...entry })),
         keys: entries.map((entry) => entry.key),
       });
       topicCoverage.push({
@@ -123,6 +125,9 @@ export function buildVocabularyCurriculum(source, lookup) {
     totalTopics: topicIndex.length,
     uniqueVocabularyKeys: uniqueTopicKeys,
     topics: topicIndex,
+  };
+  const reverse = {
+    version: 1,
     reverseTopics,
   };
   const partsOfSpeech = { version: 1, categories: posCategories };
@@ -153,7 +158,7 @@ export function buildVocabularyCurriculum(source, lookup) {
     })),
   };
 
-  return { catalog, index, partsOfSpeech, grammar, coverage };
+  return { catalog, index, reverse, partsOfSpeech, grammar, coverage };
 }
 
 export async function loadCurriculumInputs(root) {
@@ -172,6 +177,7 @@ export async function loadCurriculumInputs(root) {
 export const CURRICULUM_ARTIFACTS = {
   "topics/catalog.json": "catalog",
   "topics/index.json": "index",
+  "topics/reverse.json": "reverse",
   "parts-of-speech/index.json": "partsOfSpeech",
   "grammar/index.json": "grammar",
   "curriculum/coverage.json": "coverage",
