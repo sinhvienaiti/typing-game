@@ -36,6 +36,7 @@ export const REVIEW_GAMES = new Set([
   "space-typing",
   "karaoke-typing",
   "mixed-review",
+  "adaptive-mix",
 ]);
 
 const AMOUNTS = new Set([10, 20, 30, 50, "all"]);
@@ -192,6 +193,57 @@ function entityId(record, entityType) {
   return record.sentenceId;
 }
 
+function weaknessSignals(record, now) {
+  const recent = Array.isArray(record.recentMistakes)
+    ? record.recentMistakes
+    : [];
+  let spellingErrors = 0;
+  let listeningErrors = 0;
+  let contextErrors = 0;
+  let grammarErrors = 0;
+
+  for (const sample of recent) {
+    if (!plainObject(sample)) continue;
+    const errorType =
+      typeof sample.errorType === "string" ? sample.errorType : "";
+    const activityType =
+      typeof sample.activityType === "string" ? sample.activityType : "";
+
+    if (errorType === "spelling") spellingErrors += 1;
+    if (activityType === "listening") listeningErrors += 1;
+    if (
+      activityType === "cloze" ||
+      activityType === "karaoke-line" ||
+      activityType === "sentence-builder"
+    ) {
+      contextErrors += 1;
+    }
+    if (
+      errorType === "wrong-tense" ||
+      errorType === "wrong-form" ||
+      errorType === "word-order"
+    ) {
+      grammarErrors += 1;
+    }
+  }
+
+  const nowMs = Date.parse(now);
+  const lastSeenMs =
+    record.lastSeenAt == null ? Number.NaN : Date.parse(record.lastSeenAt);
+  const staleDays =
+    Number.isFinite(nowMs) && Number.isFinite(lastSeenMs)
+      ? Math.max(0, Math.floor((nowMs - lastSeenMs) / 86_400_000))
+      : null;
+
+  return {
+    spellingErrors,
+    listeningErrors,
+    contextErrors,
+    grammarErrors,
+    staleDays,
+  };
+}
+
 function allItems(profile, now) {
   const groups = [
     ["vocabulary", profile.vocabulary],
@@ -217,6 +269,7 @@ function allItems(profile, now) {
       lastWrongAt: record.lastWrongAt,
       nextReviewAt: record.nextReviewAt,
       sourceGames: [...record.sourceGames],
+      weaknessSignals: weaknessSignals(record, now),
     })),
   );
 }
@@ -285,7 +338,7 @@ function monkeySupportsGoalEntity(entityType, goal) {
 }
 
 function supports(game, item, goal) {
-  if (game === "mixed-review") {
+  if (game === "mixed-review" || game === "adaptive-mix") {
     return Object.entries(REVIEW_CAPABILITIES).some(([candidate]) =>
       supports(candidate, item, goal),
     );
@@ -374,7 +427,7 @@ export function buildQuickReviewPlan(
       amount: 20,
       sourceGame: "",
       goal: "mixed",
-      game: "mixed-review",
+      game: "adaptive-mix",
     },
     now,
   );
