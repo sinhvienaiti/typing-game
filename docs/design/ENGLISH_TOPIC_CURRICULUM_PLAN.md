@@ -652,3 +652,27 @@ Confirmed fixes:
 The implementation changes transaction control only. Recovery effects, item costs, Campaign progression, checkpoint semantics, audio, visuals and difficulty are unchanged.
 
 The parent gitlink is updated to this child. Parent Platform CI #236 passed the complete integration pipeline.
+
+
+## 22. Space Typing M25 parent integration — 2026-09-24
+
+Space Typing expansion Reviews #1/#2 and Recall follow-ups have been integrated back into the parent platform.
+
+Pinned child:
+- Space Typing: `7030ed539aeb3972ce5e6c3b5e8a46cc9c09ad21`;
+- child M24 final CI #680: PASS;
+- 149 test files / 752 tests;
+- JS/CSS, audio asset and Ship V3 guards remain within unchanged limits.
+
+Parent integration validation:
+- PR #43 changes only `games/space-typing`;
+- Platform CI #239: PASS;
+- existing Monkeytype play-mode contract: PASS;
+- shared vocabulary / curriculum / typing-text / music validation: PASS;
+- Portal layout and game registry validation: PASS;
+- Space Typing platform integration contract: PASS;
+- Recall Typing tests/build: PASS;
+- Space Typing tests/build: PASS;
+- Portal build: PASS.
+
+No other child gitlink, route, launcher or shared learning-data contract was changed by this integration.
