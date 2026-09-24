@@ -1,5 +1,9 @@
 import type { LearningEvent } from "../../../shared/learning/core.mjs";
 import {
+  buildAdaptiveReviewSession,
+  type AdaptiveReviewSession,
+} from "../../../shared/learning/adaptive-mix.mjs";
+import {
   buildMixedReviewSession,
   createMixedReviewProgress,
   recordMixedReviewEvent,
@@ -14,7 +18,7 @@ const MIXED_KEY = "typingGameMixedReviewV1";
 type StoredMixedReview = {
   version: 1;
   sourcePlanCreatedAt: string;
-  session: MixedReviewSession;
+  session: MixedReviewSession | AdaptiveReviewSession;
   progress: MixedReviewProgress;
   launchedSegmentId: string | null;
 };
@@ -68,14 +72,22 @@ export function readMixedReview(): MixedReviewState | null {
 }
 
 export function ensureMixedReview(plan: ReviewPlan): MixedReviewState {
-  if (plan.options.game !== "mixed-review") {
-    throw new TypeError("Mixed Review state requires a mixed-review plan");
+  if (
+    plan.options.game !== "mixed-review" &&
+    plan.options.game !== "adaptive-mix"
+  ) {
+    throw new TypeError(
+      "Review orchestration state requires mixed-review or adaptive-mix",
+    );
   }
 
   const current = readMixedReview();
   if (current?.sourcePlanCreatedAt === plan.createdAt) return current;
 
-  const session = buildMixedReviewSession(plan);
+  const session =
+    plan.options.game === "adaptive-mix"
+      ? buildAdaptiveReviewSession(plan)
+      : buildMixedReviewSession(plan);
   return save({
     version: 1,
     sourcePlanCreatedAt: plan.createdAt,
