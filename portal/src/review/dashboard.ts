@@ -692,7 +692,11 @@ export class SmartReviewDashboard {
     let timer = 0;
     search.addEventListener("input", () => {
       window.clearTimeout(timer);
-      timer = window.setTimeout(() => this.#setParam("q", search.value), 280);
+      timer = window.setTimeout(() => {
+        const path = location.pathname.replace(/\/$/, "") || "/";
+        if (!search.isConnected || path !== "/review") return;
+        this.#setParam("q", search.value);
+      }, 280);
     });
     searchLabel.append(search);
 
