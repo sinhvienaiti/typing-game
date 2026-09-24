@@ -158,3 +158,53 @@ test("compatibility helper keeps grammar on capable games only", () => {
   );
   assert.deepEqual(games, ["monkeytype"]);
 });
+
+test("Monkey goal compatibility narrows content before dataset launch", () => {
+  const learningProfile = profile();
+
+  const listening = buildReviewPlan(
+    learningProfile,
+    {
+      reviewSet: "30d",
+      content: ["vocabulary", "grammar", "sentence"],
+      amount: "all",
+      goal: "listening",
+      game: "monkeytype",
+    },
+    NOW,
+  );
+  assert.ok(listening.items.length >= 1);
+  assert.ok(
+    listening.items.every((item) => item.entityType === "vocabulary"),
+  );
+
+  const grammar = buildReviewPlan(
+    learningProfile,
+    {
+      reviewSet: "30d",
+      content: ["vocabulary", "grammar", "sentence"],
+      amount: "all",
+      goal: "grammar",
+      game: "monkeytype",
+    },
+    NOW,
+  );
+  assert.ok(grammar.items.length >= 1);
+  assert.ok(grammar.items.every((item) => item.entityType === "grammar"));
+
+  const sentences = buildReviewPlan(
+    learningProfile,
+    {
+      reviewSet: "30d",
+      content: ["vocabulary", "grammar", "sentence"],
+      amount: "all",
+      goal: "sentence-building",
+      game: "monkeytype",
+    },
+    NOW,
+  );
+  assert.ok(sentences.items.length >= 1);
+  assert.ok(
+    sentences.items.every((item) => item.entityType === "sentence"),
+  );
+});
