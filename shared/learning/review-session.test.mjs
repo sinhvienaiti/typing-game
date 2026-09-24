@@ -143,12 +143,19 @@ test("source filter and amount limit are deterministic", () => {
   assert.equal(plan.items[0].entityId, "beta");
 });
 
-test("Quick Review uses a 15-minute mixed-review plan", () => {
+test("Quick Review uses a 15-minute Adaptive Mix plan", () => {
   const plan = buildQuickReviewPlan(profile(), NOW);
   assert.equal(plan.durationMinutes, 15);
   assert.equal(plan.options.reviewSet, "due");
-  assert.equal(plan.options.game, "mixed-review");
+  assert.equal(plan.options.game, "adaptive-mix");
   assert.equal(plan.options.goal, "mixed");
+  assert.ok(
+    plan.items.every(
+      (item) =>
+        typeof item.weaknessSignals.spellingErrors === "number" &&
+        "staleDays" in item.weaknessSignals,
+    ),
+  );
 });
 
 test("compatibility helper keeps grammar on capable games only", () => {
