@@ -29,12 +29,21 @@ Reviewed areas:
 - UI/UX and keyboard recovery in Smart Review
 - Security boundaries for imported JSON and cross-frame messaging
 - Static Play/build dependency logic and current tests
+- Child-game runtime lifecycle: timers, requestAnimationFrame loops, event listeners, audio/TTS and media cleanup
+- Child backup/import and per-game local persistence boundaries
+- Project launchers, Play-mode stale-build detection and Platform CI coverage
+- Project-owned/custom Monkeytype translation, speech, typing-text and learning modules
 
-The review used three passes:
+The review used six passes:
 
 1. Correctness, cross-game contracts and data integrity.
 2. Performance, lifecycle/recovery, UI/UX and security.
-3. Regression review of the findings and proposed solutions.
+3. Regression review of the initial findings and proposed solutions.
+4. Child-game runtime review across Recall, Shooter, Space and Karaoke.
+5. Project-owned/custom Monkeytype plus launcher/build/CI review.
+6. Final cross-check for overlapping findings, severity inflation and source-only suspicions.
+
+For Monkeytype, the review targets this project's custom/fork-specific code and integration surfaces. It does not claim a fresh line-by-line audit of unrelated upstream Monkeytype code.
 
 ## 2. Baseline CI state
 
@@ -57,6 +66,14 @@ The baseline child checkpoints documented by the parent also had passing CI:
 - Karaoke Typing: CI `36024029825` — PASS
 
 Important: CI PASS is not treated as proof that the implementation has no bugs. The findings below are code-path issues not fully covered by the existing baseline test suite.
+
+The review-only report commit that restored the active tree to baseline code plus this document was also verified:
+
+- Parent report-only HEAD before this continuation: `949065314b98a1fbfe8c5dc13586ad1839285c6f`
+- Platform CI run: `36034579893`
+- Result: PASS
+
+That later PASS confirms the review-only repository state builds/tests under the current Platform CI, not that the findings below are fixed.
 
 ---
 
@@ -695,6 +712,207 @@ Add a focused test or source-level contract assertion that the Learning Memory s
 
 ---
 
+
+## F14 — A stale Smart Review success timer can remove the next game's status UI
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/typing-game`  
+**File:** `portal/src/main.ts`  
+**Function/module:** review-ready message handling / `currentReviewStatus`
+
+### Problem
+
+After a child reports `review-ready`, Portal schedules a 1.8-second timeout that later executes:
+
+`currentReviewStatus?.remove(); currentReviewStatus = null;`
+
+The callback reads the mutable global `currentReviewStatus` when it fires instead of retaining the status element that belonged to the game that scheduled the timeout.
+
+### Condition
+
+1. Game A reports Smart Review ready.
+2. Portal schedules the success-status removal timer.
+3. Before 1.8 seconds elapse, the user navigates to Game B.
+4. `renderRoute()` clears globals and `renderGame(Game B)` assigns Game B's status element to `currentReviewStatus`.
+5. Game A's old timeout fires.
+
+### Impact
+
+The stale timeout can remove Game B's current Smart Review status element and then null the global reference.
+
+This is a UI lifecycle race and can hide useful "starting/ready/error" feedback for the newly opened game.
+
+### Root cause
+
+The timeout is bound to a mutable global rather than the route/game generation or the concrete status element that initiated it.
+
+### Proposed fix
+
+Capture the concrete element/token at scheduling time and only clear it if it is still current, for example:
+
+- capture `const status = currentReviewStatus`;
+- on timeout, remove `status`;
+- set the global to null only when `currentReviewStatus === status`.
+
+Alternatively use a route-generation token and invalidate route-owned timers on navigation.
+
+Add a fake-timer regression:
+
+- receive ready for Game A;
+- navigate to Game B before 1.8 seconds;
+- advance timers;
+- assert Game B's status remains intact.
+
+---
+
+## F15 — Vocabulary Shooter backup import can silently persist fewer entries than it shows in memory
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/vocab-shooter`  
+**Files:** `src/main.ts`, `src/storage/db.ts`  
+**Function/module:** backup import / `replaceVocabulary()`
+
+### Problem
+
+Shooter backup import accepts vocabulary rows when `en` and `vi` are merely strings and then keeps any existing non-empty `id` without checking uniqueness.
+
+It does not apply the stricter usable-entry validation that Recall Typing already uses.
+
+The IndexedDB store uses `keyPath: "id"` and persists entries with `put()`.
+
+### Condition
+
+A syntactically valid backup contains, for example:
+
+- two different entries with the same non-empty `id`;
+- English or Vietnamese values that are empty/whitespace strings;
+- an empty vocabulary array.
+
+### Impact
+
+Duplicate IDs are both retained in the in-memory `customVocabulary` array, but later `put()` calls overwrite earlier rows with the same key in IndexedDB.
+
+The running game can therefore see a different item count/content from the next reload.
+
+Whitespace-only targets can also enter the runtime. An imported empty array clears the store; the next normal load then reseeds defaults, so the restored state is not stable across reload.
+
+### Root cause
+
+Backup import has its own weak parser instead of reusing one canonical vocabulary validator/normalizer and duplicate-ID policy.
+
+### Proposed fix
+
+Before replacing storage:
+
+- require each row to be a plain object;
+- trim/normalize `en`, `vi` and optional `ipa`;
+- reject unusable rows;
+- guarantee unique IDs, regenerating missing/duplicate IDs or rejecting duplicates consistently;
+- reject a backup with zero valid vocabulary entries;
+- only then call `replaceVocabulary()`.
+
+Prefer one shared parser used by custom editor/bulk import/backup restore.
+
+Add regression tests for:
+
+- duplicate IDs;
+- blank/whitespace text;
+- malformed rows;
+- empty vocabulary;
+- import → IndexedDB reload preserving exact count/content.
+
+---
+
+## F16 — Karaoke Typing restart is not reentrancy-safe and can create multiple RAF loops
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/karaoke-typing`  
+**File:** `src/main.ts`  
+**Function/module:** `restartGame()`, `tick()`
+
+### Problem
+
+`restartGame()` cancels the currently stored frame, resets shared game state, then awaits `controller.play()` before starting a new `requestAnimationFrame(tick)`.
+
+Restart buttons call it with `void restartGame()` and are not guarded/disabled while that asynchronous restart is pending.
+
+### Condition
+
+With local media, two restart actions can enter `restartGame()` before the first `HTMLMediaElement.play()` promise resolves.
+
+Both invocations cancel the same old frame and then await. When both promises resolve, each schedules a new RAF callback. Only the most recently assigned RAF id remains in the single `frameId` variable.
+
+### Impact
+
+Two independent `tick()` chains can run against the same engine/controller state.
+
+That can cause duplicate rendering/timeline work, racey line transitions and unnecessary CPU use. Later cancellation by one stored `frameId` is not sufficient to identify every already-created loop.
+
+### Root cause
+
+The async restart path has no generation token, in-flight guard or stale-continuation check after `await controller.play()`.
+
+### Proposed fix
+
+Use a restart/loop generation token:
+
+- increment generation at the start of every restart/return;
+- capture the generation locally;
+- after every async boundary, abort if the captured generation is stale;
+- schedule `tick(generation)` only for the active generation;
+- have `tick` stop immediately when its generation is stale.
+
+Optionally disable Restart controls while restart is in flight for UX clarity, but the generation guard should remain the correctness mechanism.
+
+Add a test with a deferred fake media `play()` promise, invoke restart twice, resolve both promises, and assert only one active RAF chain remains.
+
+---
+
+## F17 — Auxiliary cross-frame media messages do not consistently use the trusted parent origin
+
+**Severity:** Low  
+**Repositories:** Monkeytype, Recall Typing, Vocabulary Shooter, Space Typing  
+**Files:** child speech/audio-focus modules and Shooter `src/main.ts`
+
+### Problem
+
+The main Shared Learning / Smart Review contracts use the fixed parent origin `https://typing-game.local`, but auxiliary media coordination is less strict:
+
+- Monkeytype `audio-focus.ts` posts `typing-game:speech` with target origin `"*"`;
+- Recall `src/audio/speech.ts` does the same;
+- Shooter `src/audio/speech.ts` does the same;
+- Space `src/speech.ts` does the same;
+- Shooter accepts `typing-game:shared-music` from `window.parent` without also checking `event.origin === PARENT_ORIGIN`.
+
+### Condition
+
+A game is embedded by an unintended parent origin rather than the local Portal.
+
+### Impact
+
+The outgoing wildcard messages disclose only speech-active state, not vocabulary/event payloads, so the confidentiality impact is small.
+
+For Shooter, an unintended embedding parent can also toggle the internal "shared music is playing" state and affect its built-in music behavior.
+
+This is lower impact than F13, but it is a real trust-boundary inconsistency.
+
+### Root cause
+
+Auxiliary audio coordination predates or bypasses the stricter origin contract used by Shared Learning.
+
+### Proposed fix
+
+Use the same explicit `PARENT_ORIGIN` for outgoing speech messages.
+
+For Shooter's incoming shared-music message, require both:
+
+- `event.source === window.parent`;
+- `event.origin === PARENT_ORIGIN`.
+
+Add lightweight contract tests/source assertions for these auxiliary message paths.
+
+---
+
 # 4. Risks — not confirmed bugs
 
 These are intentionally not labeled as confirmed defects.
@@ -734,6 +952,48 @@ The current coverage is strong at unit/integration/build level, but there is no 
 
 **Recommendation:** add a small Playwright-style lifecycle suite only if the project is ready to maintain browser E2E infrastructure. Until then, keep focused deterministic tests around storage and lifecycle boundaries.
 
+
+## R05 — Space page-lifecycle recovery begins with an unguarded noncritical localStorage write
+
+`persistPageLifecycleRecovery()` calls `saveRecallMemory()` before its guarded player-recovery write. `saveRecallMemory()` directly calls `localStorage.setItem()`.
+
+If that first write throws because storage is unavailable/quota-limited, execution can exit before the more important player recovery mirror and queued autosave are attempted.
+
+No normal-path failure was reproduced from source alone, so this remains a reliability risk rather than a confirmed user-visible defect.
+
+**Recommendation:** isolate the recall-memory write in its own try/catch so a failure cannot prevent player recovery. Add a test with a throwing storage adapter/window stub.
+
+## R06 — Space keeps a full RAF draw loop active outside active gameplay
+
+`Game.frame()` continuously advances effects and draws the scene on every animation frame, including non-playing phases. Adaptive render-scale observation is only applied while the phase is `playing`.
+
+This can be intentional for animated title/menus, and source inspection alone cannot prove unacceptable CPU/GPU cost.
+
+**Recommendation:** profile title, pause and stage-clear screens on the target Mac hardware. If idle cost is meaningful, reduce non-gameplay draw cadence or suspend expensive layers without removing visual features.
+
+## R07 — Parent Platform CI is not a full five-game build/test gate
+
+The parent Platform CI currently:
+
+- initializes Monkeytype, Shooter, Recall and Space submodules;
+- validates the Karaoke gitlink but does not initialize/build/test Karaoke;
+- tests Recall and Space;
+- builds Portal, Recall and Space;
+- does not parent-build/test Shooter;
+- does not parent-build Monkeytype, although a Play-mode environment validator runs.
+
+Each reviewed child revision has its own passing checkpoint CI, so this is not evidence of a current broken build.
+
+**Recommendation:** add a pragmatic parent integration matrix: initialize all pinned children and at minimum build/test Shooter + Karaoke, plus a bounded Monkeytype custom/integration smoke check if full upstream build cost is too high.
+
+## R08 — Space Typing's two largest runtime files carry high change-risk
+
+At the reviewed revision, `src/main.ts` is roughly 8.4k lines and `src/Game.ts` roughly 9.2k lines.
+
+The test suite is extensive, which reduces risk, but very large orchestration/runtime files make lifecycle ownership, listener/timer review and safe refactoring harder.
+
+**Recommendation:** do not refactor solely for line count. When future features touch stable boundaries, extract cohesive subsystems (route/UI orchestration, review integration, persistence coordination, rendering layers) with tests preserved before and after extraction.
+
 ---
 
 # 5. Cross-game review result
@@ -760,7 +1020,9 @@ No confirmed duplicate-per-keypress regression was found in the currently pinned
 
 Current child listeners validate parent source/origin before accepting review datasets in Recall, Shooter, Space and Karaoke. Monkeytype Smart Review dataset intake also uses the fixed parent origin.
 
-The confirmed security inconsistency is specifically Monkeytype's *normal Learning Memory attempt sender* using wildcard target origin (F13).
+The higher-impact confirmed security inconsistency is Monkeytype's *normal Learning Memory attempt sender* using wildcard target origin (F13).
+
+Auxiliary speech/music coordination also has weaker origin handling across several children (F17), although those messages carry much less sensitive state.
 
 ## Mixed / Adaptive progress
 
@@ -772,7 +1034,7 @@ The confirmed reliability gap is stale/malformed persisted orchestration state (
 
 # 6. Data integrity review result
 
-Confirmed integrity defects are F01, F03, F04 and F06.
+Confirmed integrity defects are F01, F03, F04, F06 and F15.
 
 Additional observations:
 
@@ -784,14 +1046,19 @@ Additional observations:
 
 No additional confirmed silent-delete path was found in selective reset beyond the findings listed above.
 
+Outside Shared Learning, Vocabulary Shooter backup restore has a separate duplicate-ID persistence mismatch (F15).
+
 ---
 
 # 7. Performance review result
 
-Confirmed performance findings:
+Confirmed performance/lifecycle findings:
 
 - F02: repeated full-profile cloning inside event batches;
-- F12: deep cloning for read-only Dashboard/Builder operations.
+- F12: deep cloning for read-only Dashboard/Builder operations;
+- F16: a reentrant Karaoke restart can create multiple RAF loops.
+
+Space Typing's always-on non-gameplay RAF rendering is recorded as profiling risk R06 rather than a confirmed performance defect.
 
 The architecture still performs full collection filtering/sorting for many Dashboard operations. That is expected for the current local profile model and is not by itself classified as a bug.
 
@@ -806,7 +1073,9 @@ For 5,000–10,000 records the existing approach is reasonable after removing du
 Confirmed UI/UX issues:
 
 - F10: stale debounced search callback after navigation;
-- F11: incomplete drawer keyboard/focus recovery.
+- F11: incomplete drawer keyboard/focus recovery;
+- F14: stale Smart Review success timer can remove the next game's status;
+- F16: Karaoke restart reentrancy can create duplicate animation loops.
 
 Other reviewed Smart Review states include:
 
@@ -821,7 +1090,7 @@ Other reviewed Smart Review states include:
 - destructive confirmation;
 - review session resume messaging.
 
-No additional confirmed broken-button or overflow defect was established from source evidence alone in this pass.
+No additional confirmed broken-button or overflow defect was established from source evidence alone in these passes.
 
 Visual responsive verification remains best done in a browser/E2E pass rather than labeling source-only suspicions as bugs.
 
@@ -833,7 +1102,8 @@ Confirmed boundary issues:
 
 - F04: prototype-like collection keys;
 - F06: insufficient backup invariants;
-- F13: wildcard Monkeytype attempt target origin.
+- F13: wildcard Monkeytype attempt target origin;
+- F17: weaker origin handling in auxiliary speech/shared-music messages.
 
 Positive existing controls:
 
@@ -867,7 +1137,13 @@ Regression tests recommended together with the eventual fixes:
 - route change before Dashboard debounce fires;
 - drawer Escape + focus restoration;
 - Monkeytype trusted target origin;
-- multi-tab IndexedDB read-modify-write behavior.
+- multi-tab IndexedDB read-modify-write behavior;
+- stale Smart Review success timer across route/game navigation;
+- Shooter backup import with duplicate IDs, blank rows and empty vocabulary;
+- Karaoke double restart with deferred media play;
+- auxiliary speech/shared-music origin checks;
+- Space pagehide recovery when a noncritical localStorage write throws;
+- parent CI matrix coverage for Shooter/Karaoke and bounded Monkeytype integration.
 
 ---
 
@@ -883,9 +1159,11 @@ This is a recommended fix order, not implementation done by this review.
 6. F09 Mixed/Adaptive persisted-state validation.
 7. F05 bridge error-boundary correctness.
 8. F02 + F12 duplicate profile cloning/performance.
-9. F13 Monkeytype target origin.
-10. F10 Dashboard debounce lifecycle.
-11. F11 drawer keyboard/focus recovery.
+9. F13 Monkeytype Learning Memory target origin + F17 auxiliary message origins.
+10. F15 Shooter backup import validation.
+11. F16 Karaoke restart generation/RAF ownership.
+12. F10 + F14 Portal route/timer lifecycle.
+13. F11 drawer keyboard/focus recovery.
 
 After each group:
 
@@ -914,3 +1192,20 @@ Monkeytype's active reviewed implementation remains the original parent-pinned r
 `01cca03b6f38c054f1fdd41ed5150160a6f3cd00`
 
 The temporary verification history remains visible in Git history for audit evidence, but the fixes listed in this report must be treated as **proposed work**, not completed work.
+
+## Review completion note
+
+This continuation completed the remaining planned source-review passes over:
+
+- child runtime lifecycle and media handling;
+- child backup/import boundaries;
+- custom Monkeytype learning/translation/speech/storage surfaces;
+- Space persistence/recovery and hot runtime surfaces;
+- parent launchers, static Play staleness checks and CI coverage;
+- a final overlap/severity pass so source-only suspicions remain labeled as risks.
+
+Final confirmed finding count in this report: **17**.
+
+Final explicitly non-confirmed risk count: **8**.
+
+No source implementation fix is included in this report commit.
