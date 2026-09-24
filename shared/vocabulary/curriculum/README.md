@@ -47,3 +47,7 @@ pipeline when provenance and EN/VI/IPA quality are available.
 
 Games should fetch the compact topic/POS/grammar index first and only load the vocabulary
 level files referenced by the selected curriculum item. Do not preload all 18k entries.
+
+Topic index entries include normalized `key + level` hints generated from the authoritative
+18k lookup. Topic-mode clients must use those hints directly and should not download the
+full 18k `lookup.json` merely to rediscover the same level mapping.
