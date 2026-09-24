@@ -82,7 +82,14 @@ export const REVIEW_CAPABILITIES: Readonly<Record<string, {
 }>>;
 
 export function parseReviewPlanInput(input: unknown): ReviewPlanInput;
-export function isAtRiskReviewItem(item: ReviewPlanItem, now?: string): boolean;
+export function isAtRiskReviewItem(
+  item: {
+    mastery: number;
+    lastCorrectAt: string | null;
+    lastWrongAt: string | null;
+  },
+  now?: string,
+): boolean;
 export function compatibleGamesForItem(
   item: { entityType: string },
   goal?: string,
