@@ -20,7 +20,7 @@ import {
 type Navigate = (url: string) => void;
 type StartReview = (plan: ReviewPlan) => Promise<void>;
 
-export const REVIEW_REVIEW_SESSION_KEY = "typingGameReviewSessionV1";
+export const REVIEW_SESSION_KEY = "typingGameReviewSessionV1";
 
 const GAME_LABELS: Record<string, string> = {
   monkeytype: "Monkeytype",
