@@ -169,14 +169,6 @@ export class ParentLearningBridge {
       const batch = this.#pending.splice(0, MAX_BATCH_SIZE);
       try {
         await this.#store.applyMany(batch.map((item) => item.event));
-        for (const item of batch) {
-          this.#onApplied?.(item.event);
-          this.#post(
-            item.target,
-            item.targetOrigin,
-            makeLearningAck(item.requestId),
-          );
-        }
       } catch (error) {
         for (const item of batch) {
           this.#post(
@@ -188,6 +180,25 @@ export class ParentLearningBridge {
               errorText(error),
             ),
           );
+        }
+        continue;
+      }
+
+      for (const item of batch) {
+        try {
+          this.#onApplied?.(item.event);
+        } catch (error) {
+          console.error("Persisted learning event callback failed", error);
+        }
+
+        try {
+          this.#post(
+            item.target,
+            item.targetOrigin,
+            makeLearningAck(item.requestId),
+          );
+        } catch (error) {
+          console.error("Could not acknowledge persisted learning event", error);
         }
       }
     }
