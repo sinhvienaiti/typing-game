@@ -2,7 +2,7 @@
 
 ## Status
 
-**L14 COMPLETE / L15 NEXT**
+**L15 COMPLETE / L16 NEXT**
 
 Agreed on 2026-09-24.
 
@@ -1743,9 +1743,34 @@ Verification:
 
 ## L15 — Mixed Review
 
-Implement multi-activity/multi-game session orchestration.
+**Status: COMPLETE — 2026-09-24**
 
-The parent should track session progress across transitions.
+Mixed Review is now a parent-owned multi-game session rather than a label on a single-game plan.
+
+Implemented:
+
+- the existing `mixed-review` plan is converted into deterministic concrete game segments;
+- L15 allocation intentionally does **not** inspect weakness/error history; compatible items are balanced by current bucket size with a fixed game-order tie break, leaving weakness-aware selection to L16;
+- every item is assigned only to a concrete game listed in its existing compatibility set;
+- each segment is converted back into a normal bounded `ReviewPlan`, so the already-tested Monkey / Recall / Shooter / Space / Karaoke adapters remain the only child launch paths;
+- Mixed Review progress is persisted separately in sessionStorage and is associated with the source plan timestamp;
+- a segment is marked active only when the user launches it from the Mixed Review session;
+- normal/manual gameplay outside that launched segment cannot consume Mixed Review progress;
+- parent `ParentLearningBridge` reports Learning Events to orchestration only **after** the batch has been persisted successfully;
+- progress advances on distinct entity type + entity id matches from the active concrete game, not on raw keypresses or child UI state;
+- vocabulary matching is NFC/lowercase/whitespace normalized; grammar/sentence ids retain their canonical form;
+- after every segment completes, the Portal returns to `/review/session`, shows saved segment progress and offers the next compatible activity;
+- session completion is timestamped from the persisted Learning Event rather than wall-clock runner time;
+- refreshes and game transitions retain the parent session/progress state.
+
+Verification:
+
+- shared tests cover deterministic balanced allocation, concrete segment-plan generation, wrong-game event rejection, entity normalization and full multi-segment completion;
+- Platform CI run 36025239413 correctly failed a nondeterministic completion timestamp assertion;
+- the root cause was fixed by defaulting completion time to `event.occurredAt`;
+- final Platform CI run 36025360289: PASS;
+- shared-learning tests/checks, Space tests/build, Recall tests/build and Portal TypeScript/Vite build PASS.
+
 
 ## L16 — Adaptive Mix
 
