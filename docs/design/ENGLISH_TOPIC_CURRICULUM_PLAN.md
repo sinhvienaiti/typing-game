@@ -363,31 +363,52 @@ Generated indexes provide reverse lookup:
 
 ## 12. Game integration
 
+The learning selectors must expose all three curriculum dimensions, not only Topic:
+
+- Topic — practical life/work/travel/technology/etc. groups;
+- Word type — noun, verb, adjective, adverb and the additional POS/phrase views;
+- Grammar — Present / Past / Future first, then the supporting practical grammar modules.
+
+All modes resolve back to the same authoritative 18k EN/VI/IPA records and lazy-load only referenced level files.
+
 ### Monkeytype
 Allow:
 - Library
 - Topic
+- Word type
+- Grammar
 - Custom
 
-Topic mode selects one or more topic lists and builds the existing EN-VN dictionary/typing input from referenced shared entries.
+Each curriculum mode builds the existing EN-VN dictionary for the selected practice set without replacing Custom data.
 
 ### Vocabulary Shooter
 Allow:
 - Class/Level
 - Topic
+- Word type
+- Grammar
 - Custom
 
 ### Recall Typing
 Allow:
 - Class/Level
 - Topic
+- Word type
+- Grammar
 - Custom
 
 ### Space Typing
-Later allow topic-aware campaign/practice presets without changing Campaign progression semantics.
+Allow:
+- Class/Level
+- Topic
+- Word type
+- Grammar
+- Custom
+
+Curriculum selection changes the vocabulary pool only; Campaign progression, enemy budgets, rewards and stage semantics remain unchanged.
 
 ### Karaoke Typing
-Use topics primarily for learning metadata / optional practice content rather than forcing lyrics to a topic.
+Keep curriculum optional. Lyrics/audio remain authoritative; curriculum metadata may be used later for tagging or optional practice extraction, but must not force songs into an artificial vocabulary mode.
 
 ## 13. Performance
 
@@ -489,5 +510,38 @@ Known lexical gaps intentionally remain visible for later trusted enrichment, es
 These gaps do not block topic browsing. Grammar modules retain the real grammar tokens even
 when those tokens are not yet standalone EN/VI/IPA vocabulary records.
 
-Next implementation phase is T15: lazy topic/POS/grammar selection in the games, followed by
-cross-game QA and the requested second UI/UX + logic + performance review.
+T15 status after the first integration slice:
+
+- Topic selection is implemented in Monkeytype, Vocabulary Shooter, Recall Typing and Space Typing;
+- topic loading is lookup-free through embedded key/level hints;
+- Topic selectors are grouped by curriculum area;
+- parent Platform CI #228 is green on the reviewed Topic integration.
+
+T15 curriculum integration is now feature-complete for the active games:
+
+- Monkeytype: Library / Topic / Word type / Grammar / Custom;
+- Vocabulary Shooter: Class / Topic / Word type / Grammar / Custom;
+- Recall Typing: Class / Topic / Word type / Grammar / Custom;
+- Space Typing: Class / Topic / Word type / Grammar / Custom;
+- Present / Past / Future are the primary Grammar choices, followed by practical modules;
+- Grammar practice combines its real signal vocabulary with linked practical-topic context;
+- known zero-coverage POS/phrase views remain visible as gaps and are disabled rather than filled with invented data;
+- existing Custom data and persisted source choices remain intact;
+- all curriculum modes resolve back to the same 18k EN/VI/IPA source records.
+
+Reviewed child checkpoints for this integration:
+
+- Monkeytype: `30fca754d43ff23a03a920a2f6e20cde0440950b`;
+- Vocabulary Shooter: `bf813d0abe9ceb1d83156e0f71764a915d037809`;
+- Recall Typing: `9eed1f4a40bd1f4edf3162de4f939b05985d3504`;
+- Space Typing: `b633276f58587040153951ed26b63ad528cb3b50`.
+
+Next active work is T16 plus the explicitly requested second review pass:
+
+- run full parent cross-game Platform CI on the four reviewed gitlinks;
+- review UI/UX clarity and responsive behavior;
+- review source-mode persistence and failure recovery;
+- review lazy request behavior and remove redundant curriculum-index requests;
+- review Space Typing gameplay/retry/route state transitions;
+- review render/update hot paths for avoidable work without deleting visuals or mechanics;
+- fix every confirmed issue and repeat child + parent CI.
