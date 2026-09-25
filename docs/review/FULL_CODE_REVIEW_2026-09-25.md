@@ -1154,6 +1154,101 @@ Add tests for locked enemy + bonus, shared first letter, bonus already partially
 
 ---
 
+
+## F23 — Monkeytype Vietnamese IME handling assumes composition payloads are append-only committed text
+
+**Severity:** High  
+**Repository:** `sinhvienaiti/monkeytype`  
+**Files:** `frontend/src/ts/input/listeners/composition.ts`, `frontend/src/ts/input/listeners/input.ts`, `frontend/src/ts/input/handlers/insert-text.ts`, `frontend/src/ts/input/helpers/util.ts`
+
+### Problem
+
+The custom Vietnamese path normalizes `compositionend.data` and sends it directly through `onInsertText()` as though it were only the newly appended committed suffix.
+
+That assumption is not guaranteed by browser/OS IME composition. An IME can replace the current composition range in the hidden input while `compositionend.data` represents the final composition string, and the input element may already contain that replacement.
+
+The current multi-character branch then removes `options.data.length` characters from the end of the input and replays the payload character-by-character. This can remove an earlier committed prefix or replay characters against a different event-log position.
+
+The existing Vietnamese unit tests call `onInsertText()` directly through a helper. They do **not** exercise real `compositionstart → compositionupdate/input → compositionend` DOM replacement semantics, so they cannot catch the user-observed sequence where a previously typed letter moves/disappears when `o + o` composes `ô`.
+
+### Condition
+
+A Vietnamese IME commits by replacing an active composition range rather than behaving as a simple appended character stream.
+
+### Impact
+
+Correct Vietnamese input can be scored as wrong, previously committed text can be visually displaced, and the hidden input/event log can diverge.
+
+### Root cause
+
+The custom implementation treats `CompositionEvent.data` as an insertion delta instead of deriving the committed delta from the input value and the composition range/snapshot.
+
+### Proposed fix
+
+Make the composition listener own an explicit snapshot:
+
+1. on `compositionstart`, capture the normalized committed prefix/input state and active word/index;
+2. during composition, do not score transient `insertCompositionText` updates;
+3. on `compositionend`, read the **actual input element value**, normalize NFC when Vietnamese handling is enabled, and derive the committed replacement/delta relative to the captured pre-composition value;
+4. reconcile the hidden input with the event-log-derived committed prefix before replaying only the true committed delta through the scorer;
+5. use Unicode code points/grapheme-safe operations for the derived delta;
+6. abort/restart safely if the active word changed during composition.
+
+Add browser-shaped regression tests that set realistic input values across composition lifecycle events for at least:
+
+- `T` then Vietnamese composition producing `ô`;
+- decomposed `o + combining circumflex`;
+- multi-character Vietnamese commits such as `ường`;
+- backspace/cancel during composition;
+- composition followed by separator/word commit.
+
+---
+
+## F24 — Space Typing still creates killed-enemy learning echo state but no longer renders it
+
+**Severity:** Medium  
+**Repository:** `sinhvienaiti/space-typing`  
+**File:** `src/Game.ts`
+
+### Problem
+
+Typed enemy completion still assigns `this.learningEcho` with the killed enemy's vocabulary entry, world position and 1.1-second lifetime.
+
+The update loop also continues moving/decrementing that state.
+
+However, the render path has no corresponding draw call for `learningEcho`. The old killed-enemy-position feedback therefore became orphan state/dead rendering logic when the separate top learning strip was introduced.
+
+### Impact
+
+The earlier local-at-kill learning feedback disappears even though the game still pays the update-state cost and the user expects it to remain available.
+
+This exactly explains the observed regression behind U02.
+
+### Root cause
+
+The top-strip feature was added as a replacement presentation while the old runtime state was retained but its render step was removed/not reconnected.
+
+### Proposed fix
+
+Do not simply restore an unconditional duplicate.
+
+Add a persisted presentation mode:
+
+- `off`;
+- `top`;
+- `kill-position`;
+- `both`.
+
+For `top`, keep the latest killed item's IPA/meaning visible until another typed kill replaces it; remove the forced auto-hide timer.
+
+For `kill-position`/ `both`, restore a bounded Canvas draw for `learningEcho` at the kill location and keep its short fade lifetime.
+
+Only **typed** word completions should create learning feedback. Skill/Nova kills must not fabricate typing/learning evidence.
+
+Add tests for mode sanitization and source-level/runtime tests that typed kills populate the correct presentation paths while skill kills do not.
+
+---
+
 # 4. Risks — not confirmed bugs
 
 These are intentionally not labeled as confirmed defects.
@@ -1451,7 +1546,7 @@ The earlier review completed the planned Shared Learning / runtime passes, but t
 
 > Review is not complete until every project-owned/custom-added/custom-modified code surface has been inventoried and reviewed. No implementation fix starts before that exhaustive pass and a final self-review of both findings and proposed solutions.
 
-Therefore the review currently contains **22 confirmed findings / 8 risks**. The exhaustive pass is still open until the remaining user-observed/manual-verification items and the final independent self-review are closed.
+Therefore the review contains **24 confirmed findings / 8 risks** after the exhaustive pass. The independent self-review verdict is recorded below.
 
 Current GitHub source-of-truth checkpoint for this continued exhaustive pass:
 
@@ -1557,6 +1652,14 @@ The review must inspect current checkpoint/recovery/replay/reward code before pr
 
 ## U06 — Rage / ship signature skill system needs a clearer model
 
+**Classification:** confirmed product redesign plus a verified gameplay-consistency gap.
+
+Current code already has a distinct ultimate branch for every ship, but every 100%-charge activation also runs the same shared `releaseNovaPulse()`. That shared pulse clears every regular/elite enemy regardless of remaining word layers, while only a subset of normal typed-kill reward/death-trait paths are executed.
+
+The requested redesign should preserve the existing ship identities rather than replacing them: use five 20% Rage segments and make each ship's bound signature Rage ability usable from one filled segment, scaling with the number of segments consumed. At five segments it reaches that ship's full ultimate form. Remove the generic unconditional screen-clear from every ship.
+
+Gameplay reward attribution should go through a shared kill-resolution primitive so score/kill/reward rules are explicit, while Shared Learning and typed-word metrics remain reserved for actual typing evidence.
+
 Requested product direction:
 
 - rage meter split into five visible segments;
@@ -1571,7 +1674,11 @@ The exhaustive pass must first inventory the current per-ship ultimate/rage impl
 
 ## U07 — Equipment artwork is visually undersized
 
-Keep the current information layout direction, but enlarge and clarify equipment imagery/iconography so the visual hierarchy is balanced against item name/description text.
+**Classification:** confirmed UX issue.
+
+The equipment renderer adds an `equipment-card-icon` class, but the pinned styles do not define it; the icon falls back to the generic `.local-item-icon` height of 42px. That explains the weak visual hierarchy against the card text.
+
+Keep the current information layout direction, but give equipment cards a dedicated larger artwork slot with responsive sizing and clear containment.
 
 ## U08 — Recall bonus target cannot be selected while the normal enemy lock owns input
 
@@ -1583,7 +1690,11 @@ Desired behavior remains: bonus targets must be intentionally typeable and shoul
 
 ## U09 — Recall hidden-letter cells should be simplified
 
-Keep the current outer frame/art direction, but replace the cramped small internal boxes with a simpler letter/underscore presentation such as `M _ _ _`, plus a readable glow/border state.
+**Classification:** already implemented in the current pinned source; manual visual verification only.
+
+`recallBonusMask()` currently renders a space-separated character/underscore string such as `M _ _ _`, and `drawRecallBonus()` draws that string as one text line rather than one tiny box per hidden character.
+
+Keep the current outer frame/art direction. Do not reimplement individual cells. If the current build still looks cramped, adjust only the containing mask plate/glow dimensions.
 
 ## U10 — Map/background system needs verification and a test selector
 
@@ -1599,30 +1710,90 @@ Therefore this is not currently a confirmed missing-background bug. Keep it as a
 
 ## U11 — Recall controls currently sit in the middle of gameplay
 
-`Recall clues`, `Replay` and `Reveal letter` should be moved into a dedicated HUD/control cluster at an edge/corner rather than obscuring the combat field.
+**Classification:** confirmed UX issue.
+
+`recallAssistBar` reuses `.boss-hud`, which is absolutely positioned at horizontal center; its override only changes `top` and enables pointer events. It therefore occupies the central combat sightline.
+
+Move Recall assist controls into a dedicated compact edge HUD (desktop top/right or side rail; responsive bottom/edge on narrow screens) instead of inheriting boss positioning.
 
 ## U12 — Monkeytype project-added settings need a visible Codex marker
 
-Because upstream Monkeytype already has a very large settings surface, settings introduced by this project should be easy to identify, e.g. `Forgive corrected errors — Codex`.
+**Classification:** confirmed UX/discoverability issue.
 
-The exhaustive Monkeytype pass must inventory every project-added setting so labeling is consistent rather than applied to only one option.
+The custom settings currently use normal Monkeytype labels such as `keep first wrong letter`, `ignore repeated blocked errors`, `forgive corrected errors` and `input language`, with no project marker.
+
+Add a consistent `— Codex` suffix (or equivalent small badge rendered by metadata) to every project-added setting, not just one item, while leaving upstream settings unchanged.
 
 ## U13 — Monkeytype Vietnamese composed input is broken
 
-Observed reproduction includes Vietnamese composition where typing sequences that should form characters such as `ô` cause earlier text to move/replace incorrectly and produce false error state.
+**Classification:** confirmed bug — promoted to F23.
 
-This is a **high-priority verification target** in the seven modified Monkeytype input-pipeline files.
+The exhaustive input review confirmed that the custom composition path assumes `compositionend.data` is append-only committed text and its tests bypass the real browser composition lifecycle. That assumption can desynchronize the hidden input and event-log position when an IME replaces a composition range.
 
-Likely solution family to validate against the actual code:
-
-- IME/composition-aware input handling;
-- `beforeinput` / `input` / composition lifecycle correctness;
-- NFC normalization of expected and committed text;
-- grapheme-safe cursor/delete/validation behavior.
-
-Do not implement the solution until the actual modified input code and its tests prove the root cause.
+See F23 for the root cause, replacement/delta-based solution and browser-shaped regression tests.
 
 ---
+
+
+# 15. Independent self-review verdict
+
+A second pass challenged every confirmed finding against the pinned source instead of assuming that the first review was correct.
+
+## Verdict by finding
+
+- **F01 KEEP / High** — event application order can regress timestamps/streaks; fix must preserve monotonic live state without adding an unbounded event log.
+- **F02 KEEP / Medium** — repeated full-profile cloning in one batch is real and avoidable; solve together with F12.
+- **F03 KEEP / High** — per-tab JS serialization does not make IndexedDB read-modify-write atomic across tabs.
+- **F04 KEEP / High** — plain-object entity collections are unsafe for prototype-like user keys; preserve legitimate vocabulary strings rather than banning them.
+- **F05 KEEP / Medium** — persistence success and post-persist callback failure are currently conflated.
+- **F06 KEEP / High** — structural backup checks omit important cross-field invariants.
+- **F07 KEEP / High** — persisted ReviewPlan nested data is trusted after shallow version checks.
+- **F08 KEEP / Medium** — structurally valid stale items can still violate the plan/game compatibility contract.
+- **F09 KEEP / High** — Mixed/Adaptive persisted state validation is too shallow for its nested progress indices and segment data.
+- **F10 KEEP / Medium** — the delayed Dashboard search callback has no route/liveness guard.
+- **F11 KEEP / Low** — this is accessibility/UX rather than data correctness, but Escape/focus restoration and dialog semantics are still warranted.
+- **F12 KEEP / Medium** — read-only paths clone the complete profile; merge the implementation work with F02.
+- **F13 KEEP / Medium** — wildcard Learning Memory target origin exposes learning payloads to an unintended embedding parent. Severity remains above F17 because the payload is richer.
+- **F14 KEEP / Medium** — the delayed success callback dereferences the global status element after navigation and can remove the next game's status element.
+- **F15 KEEP / High** — Shooter can hold duplicate IDs in memory while IndexedDB `put()` collapses them, so visible/imported count can diverge from reloaded data.
+- **F16 KEEP / Medium** — asynchronous restart has no generation guard; two unresolved `play()` calls can start two RAF chains.
+- **F17 KEEP / Low** — auxiliary speech/shared-music origin handling is inconsistent. Fix is small and should ride with F13, not become a separate security subsystem.
+- **F18 KEEP / High** — v26 migration exists but backup parser rejects v26 before migration.
+- **F19 KEEP / High** — v21/v22 validation lists do not match their declared save schemas and can accept malformed required state that migration sanitizes.
+- **F20 KEEP / High** — dynamic word-buffer growth resets active multi-word attempt state because match-cache invalidation clears `attemptStates`.
+- **F21 KEEP / Medium** — full rescans on an append-only growing word list are real; implement incrementally while fixing F20.
+- **F22 KEEP / Medium** — target-routing order demonstrably starves Recall Bonus behind a normal enemy lock.
+- **F23 KEEP / High** — direct helper tests do not cover real IME replacement semantics; fix must derive a committed delta from composition snapshots rather than add more normalization patches.
+- **F24 KEEP / Medium** — `learningEcho` is written and updated but never drawn; reconnect it only through the new presentation-mode contract.
+
+## Items that should NOT be treated as bugs
+
+The self-review explicitly rejected several tempting fixes:
+
+- **U01:** current pinned CSS already reserves a separate grid row for the top learning strip; do not add another battlefield-offset hack unless current-browser QA still reproduces overlap.
+- **U03:** current result card is already up to 1040px wide / 92vh; further enlargement is a UX preference after visual QA, not a confirmed logic defect.
+- **U09:** current Recall Bonus mask already uses `M _ _ _` style text; do not rebuild per-letter cells.
+- **U10:** multiple world environment profiles are wired into stage start and Test Lab; this remains visual QA, not a missing-background code bug.
+
+## Product/spec changes to implement separately from bug fixes
+
+- **U04:** transactional Settings Save/Cancel, dirty state, saved confirmation and stage-reload warning.
+- **U05:** remove checkpoint rollback-on-death and legacy recovery consumables; keep only in-encounter diamond/Phoenix-style revive; cleared-stage replay must preserve/farm persistent progression.
+- **U06:** five-segment Rage + ship-bound scalable Rage/ultimate behavior; remove the generic unconditional Nova clear and centralize non-learning kill rewards.
+- **U07:** larger dedicated equipment artwork.
+- **U11:** move Recall controls out of the central battlefield.
+- **U12:** mark every project-added Monkeytype setting with Codex identity.
+
+## Final review state
+
+The exhaustive custom-code review and second-pass self-review are **COMPLETE** at this checkpoint.
+
+Implementation may now start. The fix phase must preserve this distinction:
+
+- correctness/security/data/performance findings F01–F24 receive regression coverage where practical;
+- product changes U04/U05/U06/U07/U11/U12 receive behavior/UX tests appropriate to their scope;
+- U01/U03/U09/U10 are not to be "fixed" blindly unless current-build visual QA still reproduces the problem.
+
 
 # 14. Exhaustive review completion criteria
 
@@ -1645,4 +1816,4 @@ No fix phase may start until all of the following are complete:
 10. Perform a second independent pass over the completed findings to remove duplicates, correct severity, and challenge the proposed solution for unintended regressions.
 11. Only after this report is final and internally self-reviewed may implementation begin.
 
-No source implementation fix is included in this report update.
+No source implementation fix is included up to this review-finalization checkpoint. The following commits may begin implementation only after this report commit.
