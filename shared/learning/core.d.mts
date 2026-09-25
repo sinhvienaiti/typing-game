@@ -56,6 +56,7 @@ export const MAX_RECENT_SAMPLES: number;
 export function normalizeVocabularyKey(value: string): string;
 export function parseLearningEvent(input: unknown): LearningEvent;
 export function createEmptyLearningProfile(updatedAt?: string): LearningProfile;
+export function viewLearningProfile(raw: unknown): LearningProfile;
 export function migrateLearningProfile(raw: unknown): LearningProfile;
 export function applyLearningEvent(
   profileInput: unknown,

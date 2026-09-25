@@ -11,7 +11,10 @@ import {
   type MixedReviewProgress,
   type MixedReviewSession,
 } from "../../../shared/learning/mixed-review.mjs";
-import type { ReviewPlan } from "../../../shared/learning/review-session.mjs";
+import {
+  REVIEW_CAPABILITIES,
+  type ReviewPlan,
+} from "../../../shared/learning/review-session.mjs";
 
 const MIXED_KEY = "typingGameMixedReviewV1";
 
@@ -22,6 +25,81 @@ type StoredMixedReview = {
   progress: MixedReviewProgress;
   launchedSegmentId: string | null;
 };
+
+
+function plainObject(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function validStoredMixedReview(value: unknown): value is StoredMixedReview {
+  if (!plainObject(value) || value["version"] !== 1) return false;
+  if (typeof value["sourcePlanCreatedAt"] !== "string") return false;
+
+  const session = value["session"];
+  const progress = value["progress"];
+  const launchedSegmentId = value["launchedSegmentId"];
+  if (
+    !plainObject(session) ||
+    session["version"] !== 1 ||
+    !Array.isArray(session["segments"]) ||
+    typeof session["totalItems"] !== "number" ||
+    !Number.isInteger(session["totalItems"]) ||
+    session["totalItems"] < 0
+  ) {
+    return false;
+  }
+
+  for (const segment of session["segments"]) {
+    if (
+      !plainObject(segment) ||
+      typeof segment["id"] !== "string" ||
+      typeof segment["game"] !== "string" ||
+      REVIEW_CAPABILITIES[segment["game"]] === undefined ||
+      !Array.isArray(segment["items"]) ||
+      typeof segment["selectedCount"] !== "number" ||
+      !Number.isInteger(segment["selectedCount"]) ||
+      segment["selectedCount"] !== segment["items"].length
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    !plainObject(progress) ||
+    progress["version"] !== 1 ||
+    typeof progress["activeSegmentIndex"] !== "number" ||
+    !Number.isInteger(progress["activeSegmentIndex"]) ||
+    progress["activeSegmentIndex"] < 0 ||
+    progress["activeSegmentIndex"] > session["segments"].length ||
+    !plainObject(progress["completedBySegment"])
+  ) {
+    return false;
+  }
+
+  for (const completed of Object.values(progress["completedBySegment"])) {
+    if (
+      !Array.isArray(completed) ||
+      completed.some((key) => typeof key !== "string")
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    progress["completedAt"] !== null &&
+    (typeof progress["completedAt"] !== "string" ||
+      !Number.isFinite(Date.parse(progress["completedAt"])))
+  ) {
+    return false;
+  }
+  if (
+    launchedSegmentId !== null &&
+    typeof launchedSegmentId !== "string"
+  ) {
+    return false;
+  }
+  return true;
+}
 
 export type MixedReviewState = StoredMixedReview & {
   activeSegment:
@@ -56,17 +134,13 @@ export function readMixedReview(): MixedReviewState | null {
   if (raw === null) return null;
 
   try {
-    const value = JSON.parse(raw) as StoredMixedReview;
-    if (
-      value.version !== 1 ||
-      typeof value.sourcePlanCreatedAt !== "string" ||
-      value.session?.version !== 1 ||
-      value.progress?.version !== 1
-    ) {
-      return null;
+    const value: unknown = JSON.parse(raw);
+    if (!validStoredMixedReview(value)) {
+      throw new TypeError("stored Mixed Review state is invalid");
     }
     return enrich(value);
   } catch {
+    sessionStorage.removeItem(MIXED_KEY);
     return null;
   }
 }

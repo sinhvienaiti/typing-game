@@ -66,6 +66,53 @@ export class BrowserLearningProfileStore {
     await transactionDone(transaction);
   }
 
+  async updateProfile(update) {
+    const database = await this.database();
+
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(this.storeName, "readwrite");
+      const store = transaction.objectStore(this.storeName);
+      let nextProfile;
+      let operationError = null;
+
+      transaction.onerror = () => {
+        reject(
+          operationError ??
+            transaction.error ??
+            new Error("Learning database transaction failed"),
+        );
+      };
+      transaction.onabort = () => {
+        reject(
+          operationError ??
+            transaction.error ??
+            new Error("Learning database transaction aborted"),
+        );
+      };
+      transaction.oncomplete = () => resolve(nextProfile);
+
+      const request = store.get(LEARNING_PROFILE_KEY);
+      request.onerror = () => {
+        operationError =
+          request.error ?? new Error("Learning database request failed");
+        transaction.abort();
+      };
+      request.onsuccess = () => {
+        try {
+          const current =
+            request.result == null
+              ? createEmptyLearningProfile()
+              : migrateLearningProfile(request.result);
+          nextProfile = update(current);
+          store.put(nextProfile, LEARNING_PROFILE_KEY);
+        } catch (error) {
+          operationError = error;
+          transaction.abort();
+        }
+      };
+    });
+  }
+
   enqueue(operation) {
     const task = this.operationChain.catch(() => undefined).then(operation);
     this.operationChain = task.then(() => undefined, () => undefined);
@@ -81,21 +128,17 @@ export class BrowserLearningProfileStore {
   }
 
   apply(event) {
-    return this.enqueue(async () => {
-      const current = await this.load();
-      const next = applyLearningEvent(current, event);
-      await this.persist(next);
-      return next;
-    });
+    return this.enqueue(() =>
+      this.updateProfile((current) => applyLearningEvent(current, event)),
+    );
   }
 
   applyMany(events) {
-    if (!Array.isArray(events)) throw new TypeError("learning events must be an array");
-    return this.enqueue(async () => {
-      const current = await this.load();
-      const next = applyLearningEvents(current, events);
-      await this.persist(next);
-      return next;
-    });
+    if (!Array.isArray(events)) {
+      throw new TypeError("learning events must be an array");
+    }
+    return this.enqueue(() =>
+      this.updateProfile((current) => applyLearningEvents(current, events)),
+    );
   }
 }

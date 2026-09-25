@@ -90,6 +90,7 @@ export const REVIEW_CAPABILITIES: Readonly<Record<string, {
 }>>;
 
 export function parseReviewPlanInput(input: unknown): ReviewPlanInput;
+export function parseReviewPlan(input: unknown): ReviewPlan;
 export function isAtRiskReviewItem(
   item: {
     mastery: number;

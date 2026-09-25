@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   MAX_RECENT_SAMPLES,
   applyLearningEvent,
+  applyLearningEvents,
   calculateMastery,
   calculateReviewPriority,
   createEmptyLearningProfile,
@@ -131,4 +132,84 @@ test("weak and stale records receive higher review priority", () => {
   };
   assert.ok(calculateReviewPriority(weak, baseTime) > calculateReviewPriority(strong, baseTime));
   assert.ok(calculateMastery(strong, baseTime) > calculateMastery(weak, baseTime));
+});
+
+
+test("batched events are applied in event-time order without rolling current state backward", () => {
+  const profile = applyLearningEvents(createEmptyLearningProfile(), [
+    event({
+      occurredAt: "2026-09-24T10:10:00.000Z",
+      result: "correct",
+    }),
+    event({
+      occurredAt: "2026-09-24T10:05:00.000Z",
+      result: "wrong",
+      userAnswer: "enviroment",
+      errorType: "spelling",
+    }),
+    event({
+      occurredAt: "2026-09-24T10:15:00.000Z",
+      result: "correct",
+    }),
+  ]);
+
+  const record = profile.vocabulary.environment;
+  assert.equal(record.attempts, 3);
+  assert.equal(record.correctStreak, 2);
+  assert.equal(record.lastSeenAt, "2026-09-24T10:15:00.000Z");
+  assert.equal(record.lastWrongAt, "2026-09-24T10:05:00.000Z");
+  assert.equal(profile.updatedAt, "2026-09-24T10:15:00.000Z");
+
+  const withLateEvent = applyLearningEvent(profile, event({
+    occurredAt: "2026-09-24T10:01:00.000Z",
+    result: "wrong",
+    userAnswer: "late-old-error",
+    errorType: "spelling",
+  }));
+  const lateRecord = withLateEvent.vocabulary.environment;
+
+  assert.equal(lateRecord.attempts, 4);
+  assert.equal(lateRecord.correctStreak, 2);
+  assert.equal(lateRecord.lastSeenAt, "2026-09-24T10:15:00.000Z");
+  assert.equal(lateRecord.lastWrongAt, "2026-09-24T10:05:00.000Z");
+  assert.equal(withLateEvent.updatedAt, "2026-09-24T10:15:00.000Z");
+  assert.deepEqual(
+    lateRecord.recentMistakes.map((sample) => sample.userAnswer),
+    ["late-old-error", "enviroment"],
+  );
+});
+
+test("batched learning updates keep the input profile immutable", () => {
+  const input = applyLearningEvent(createEmptyLearningProfile(), event());
+  const snapshot = structuredClone(input);
+
+  const output = applyLearningEvents(input, [
+    event({
+      occurredAt: "2026-09-24T10:01:00.000Z",
+      gameId: "recall-typing",
+    }),
+    event({
+      occurredAt: "2026-09-24T10:02:00.000Z",
+      result: "wrong",
+      userAnswer: "enviroment",
+      errorType: "spelling",
+    }),
+  ]);
+
+  assert.deepEqual(input, snapshot);
+  assert.notEqual(output, input);
+  assert.equal(output.vocabulary.environment.attempts, 3);
+});
+
+
+test("prototype-like entity ids are stored as own learning records safely", () => {
+  const profile = applyLearningEvent(
+    createEmptyLearningProfile(),
+    event({ entityId: "__proto__" }),
+  );
+
+  assert.equal(Object.getPrototypeOf(profile.vocabulary), Object.prototype);
+  assert.equal(Object.hasOwn(profile.vocabulary, "__proto__"), true);
+  assert.equal(profile.vocabulary["__proto__"].wordKey, "__proto__");
+  assert.equal(profile.vocabulary["__proto__"].attempts, 1);
 });
