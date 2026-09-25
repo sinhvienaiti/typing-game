@@ -4156,3 +4156,73 @@ Space Typing requires these shared-data routes on its own internal origin in bot
 ~~~
 
 Platform CI runs `pnpm validate:space-integration` to protect all existing game routes/origins while validating the Space Typing integration contract.
+
+
+---
+
+# 87. Post-review implementation checkpoint
+
+This section supersedes the older review checkpoint recorded in section 86 for current reconstruction.
+
+The exhaustive 2026-09-25 review has moved through implementation and integration. Parent `main` now pins the reviewed child fixes and the completed Space Typing product corrections.
+
+Current child pins at the validated integration checkpoint:
+
+~~~text
+games/monkeytype
+8e49127c1eb51000323bbda3b750d3a292fbf567
+
+games/vocab-shooter
+4618f3bcdeb5f72bde8e28587ae23d3567bdb05d
+
+games/recall-typing
+27ded35809c1d2e37eabc1a91c34b907b95c2219
+
+games/karaoke-typing
+d88d64f01e66fd41ed1eef1a4cf743b76bb0bbe3
+
+games/space-typing
+d7ec4858a0c046799b49eb246f6fa7d875fc7b1b
+~~~
+
+Parent integration commit immediately before this documentation checkpoint:
+
+~~~text
+2e921e38d38b0433f8cc54938fab17102ea92b4f
+~~~
+
+Validated product corrections from the review pass include:
+
+- configurable Space kill-learning display modes with persistent top feedback and killed-enemy-position feedback;
+- transactional Space Settings Save/Cancel semantics and stage reload handling;
+- defeat/replay progression preservation with Phoenix Core as the only generated in-encounter revive item;
+- five-segment ship-specific Rage with scalable effects and no generic unconditional Nova screen clear;
+- centralized non-typing kill reward attribution without false Shared Learning typing credit;
+- larger Space equipment artwork;
+- Recall assist controls moved away from the central combat sightline;
+- Recall Bonus input priority fix;
+- Monkeytype Codex markers for project-added settings;
+- Monkeytype Vietnamese IME composition replacement fix;
+- reviewed trusted-parent-origin handling across affected children.
+
+Items U01, U03, U09 and U10 remain intentionally classified as manual/current-browser QA rather than source bugs; do not add speculative fixes unless they reproduce on the current pinned build.
+
+Validation at the code checkpoint:
+
+~~~text
+Space Typing CI
+tests: PASS
+TypeScript: PASS
+Vite build: PASS
+CSS raw bundle: 59.99 KiB / 60.00 KiB budget
+Ship V3 art budget: PASS
+
+Parent Platform CI
+submodule initialization: PASS
+shared platform contracts: PASS
+Recall tests/build: PASS
+Space tests/build: PASS
+Portal build: PASS
+~~~
+
+For future continuation, reconstruct from parent `main` and these gitlinks rather than any older SHA in this document.

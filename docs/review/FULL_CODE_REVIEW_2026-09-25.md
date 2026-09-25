@@ -1817,3 +1817,54 @@ No fix phase may start until all of the following are complete:
 11. Only after this report is final and internally self-reviewed may implementation begin.
 
 No source implementation fix is included up to this review-finalization checkpoint. The following commits may begin implementation only after this report commit.
+
+
+---
+
+# 16. Post-review implementation completion
+
+The implementation phase following this review is complete for the accepted review fixes and requested product corrections covered by this pass.
+
+Validated integrated child revisions:
+
+~~~text
+Monkeytype      8e49127c1eb51000323bbda3b750d3a292fbf567
+Vocabulary      4618f3bcdeb5f72bde8e28587ae23d3567bdb05d
+Recall          27ded35809c1d2e37eabc1a91c34b907b95c2219
+Karaoke         d88d64f01e66fd41ed1eef1a4cf743b76bb0bbe3
+Space           d7ec4858a0c046799b49eb246f6fa7d875fc7b1b
+~~~
+
+Parent integration checkpoint before this documentation commit:
+
+~~~text
+2e921e38d38b0433f8cc54938fab17102ea92b4f
+~~~
+
+The implementation includes the confirmed correctness/security/data/performance fixes from the review batch and the verified user-requested corrections implemented during this phase, including U02/U04/U05/U06/U07/U08/U11/U12/U13.
+
+U01/U03/U09/U10 were deliberately not changed merely because they appeared in the user-observed list: the independent review found the current source already contains the relevant layout/result/mask/background behavior, so they remain current-build manual visual QA items.
+
+Important U05 compatibility rule:
+
+- old `salvage-anchor` and `stage-revival-core` IDs remain readable for save/schema compatibility;
+- they are no longer generated as current shop death-recovery stock and are no longer offered by the Game Over flow;
+- Phoenix Core remains the generated in-encounter revive path;
+- normal defeat/replay preserves persistent progression instead of rolling back to checkpoint blocks.
+
+Important U06 rule:
+
+- Rage has five 20% segments;
+- SPACE spends the currently completed segments and scales the selected ship's signature Rage;
+- a five-segment activation is the full ship ultimate;
+- the generic unconditional Nova screen clear is no longer attached to every ship ultimate;
+- Nova Bomb remains its own consumable;
+- skill/consumable kills receive explicit gameplay reward attribution without being reported as typed Shared Learning success.
+
+Validation:
+
+- Space Typing standalone CI passed tests, TypeScript, Vite build, bundle budget and ship-art budget at `d7ec4858a0c046799b49eb246f6fa7d875fc7b1b`.
+- CSS raw output was `59.99 KiB` against the existing `60.00 KiB` budget; the budget was not raised.
+- Parent Platform CI passed at `2e921e38d38b0433f8cc54938fab17102ea92b4f`, including platform contracts, Recall tests/build, Space tests/build and Portal build.
+
+Future review or implementation must start from the current parent `main` and pinned child gitlinks, not from the pre-fix review checkpoint.
