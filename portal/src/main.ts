@@ -472,8 +472,10 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
         if (data["type"] === "typing-game:learning:v1:review-ready") {
           currentReviewStatus.textContent =
             `Smart Review ready · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"}`;
+          const statusToClear = currentReviewStatus;
           window.setTimeout(() => {
-            currentReviewStatus?.remove();
+            if (currentReviewStatus !== statusToClear) return;
+            statusToClear.remove();
             currentReviewStatus = null;
           }, 1800);
         } else {
