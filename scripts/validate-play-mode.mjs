@@ -6,6 +6,13 @@ const nginx = await readFile(
   "utf8",
 );
 
+const setupNginx = await readFile("scripts/setup-nginx.sh", "utf8");
+const leafPlay = await readFile("scripts/play.sh", "utf8");
+const devNginx = await readFile(
+  "infra/nginx/typing-game.local.dev.conf",
+  "utf8",
+);
+
 const failures = [];
 
 for (const output of [
@@ -44,6 +51,46 @@ for (const host of [
   if (!nginx.includes(`server_name ${host}`) &&
       !nginx.includes(` ${host}`)) {
     failures.push(`Play nginx is missing host: ${host}`);
+  }
+}
+
+
+for (const [name, config] of [
+  ["play", nginx],
+  ["dev", devNginx],
+]) {
+  if (config.includes("/Users/jokerit/")) {
+    failures.push(`${name} nginx config still hard-codes the old macOS project path`);
+  }
+  if (!config.includes("__ROOT_DIR__")) {
+    failures.push(`${name} nginx config is missing the runtime project-root token`);
+  }
+  if (!config.includes("__SSL_CERT__") || !config.includes("__SSL_KEY__")) {
+    failures.push(`${name} nginx config is missing portable TLS tokens`);
+  }
+}
+
+for (const required of [
+  'PLATFORM="macos"',
+  'PLATFORM="linux"',
+  'NGINX_BASE="/etc/nginx"',
+  'NGINX_BASE="/usr/local/etc/nginx"',
+  "render_config",
+  "sudo nginx -t",
+  "brew services restart nginx",
+]) {
+  if (!setupNginx.includes(required)) {
+    failures.push(`setup-nginx.sh is missing cross-platform contract: ${required}`);
+  }
+}
+
+if (!play.includes("bash scripts/setup-nginx.sh play")) {
+  failures.push("Top-level play.sh does not use the platform-aware nginx setup.");
+}
+
+for (const opener of ["open", "wslview", "cmd.exe", "powershell.exe", "xdg-open"]) {
+  if (!leafPlay.includes(opener)) {
+    failures.push(`scripts/play.sh is missing URL opener fallback: ${opener}`);
   }
 }
 
