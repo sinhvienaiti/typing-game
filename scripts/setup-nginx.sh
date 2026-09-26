@@ -9,8 +9,26 @@ fi
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOURCE="$ROOT_DIR/infra/nginx/typing-game.local.$MODE.conf"
-TARGET="/usr/local/etc/nginx/servers/typing-game.local.conf"
-SSL_DIR="/usr/local/etc/nginx/ssl/typing-game.local"
+
+case "$(uname -s)" in
+  Darwin)
+    PLATFORM="macos"
+    NGINX_BASE="/usr/local/etc/nginx"
+    TARGET="$NGINX_BASE/servers/typing-game.local.conf"
+    SSL_DIR="$NGINX_BASE/ssl/typing-game.local"
+    ;;
+  Linux)
+    PLATFORM="linux"
+    NGINX_BASE="/etc/nginx"
+    TARGET="$NGINX_BASE/conf.d/typing-game.local.conf"
+    SSL_DIR="$NGINX_BASE/ssl/typing-game.local"
+    ;;
+  *)
+    echo "Unsupported platform: $(uname -s)"
+    exit 1
+    ;;
+esac
+
 CERT="$SSL_DIR/typing-game.local.pem"
 KEY="$SSL_DIR/typing-game.local-key.pem"
 
@@ -50,6 +68,7 @@ certificate_has_all_hosts() {
 create_certificate() {
   if ! command -v mkcert >/dev/null 2>&1; then
     echo "mkcert is not installed or not in PATH."
+    echo "Install mkcert, then rerun ./play.sh."
     exit 1
   fi
 
@@ -65,10 +84,46 @@ create_certificate() {
     -key-file "$temp_dir/typing-game.local-key.pem" \
     "${HOSTS[@]}"
 
-  sudo mkdir -p "$SSL_DIR"
-  sudo cp "$temp_dir/typing-game.local.pem" "$CERT"
-  sudo cp "$temp_dir/typing-game.local-key.pem" "$KEY"
+  if [[ "$PLATFORM" == "linux" ]]; then
+    sudo mkdir -p "$SSL_DIR"
+    sudo cp "$temp_dir/typing-game.local.pem" "$CERT"
+    sudo cp "$temp_dir/typing-game.local-key.pem" "$KEY"
+    sudo chown root:root "$CERT" "$KEY"
+    sudo chmod 644 "$CERT"
+    sudo chmod 600 "$KEY"
+  else
+    mkdir -p "$SSL_DIR"
+    cp "$temp_dir/typing-game.local.pem" "$CERT"
+    cp "$temp_dir/typing-game.local-key.pem" "$KEY"
+    chmod 644 "$CERT"
+    chmod 600 "$KEY"
+  fi
+
   rm -rf "$temp_dir"
+}
+
+render_config() {
+  local destination="$1"
+  sed \
+    -e "s|__ROOT_DIR__|$ROOT_DIR|g" \
+    -e "s|__SSL_CERT__|$CERT|g" \
+    -e "s|__SSL_KEY__|$KEY|g" \
+    "$SOURCE" > "$destination"
+}
+
+restart_nginx() {
+  if [[ "$PLATFORM" == "macos" ]]; then
+    nginx -t
+    brew services restart nginx
+    return
+  fi
+
+  sudo nginx -t
+  if command -v systemctl >/dev/null 2>&1; then
+    sudo systemctl restart nginx 2>/dev/null || sudo service nginx restart
+  else
+    sudo service nginx restart
+  fi
 }
 
 ensure_hosts
@@ -77,15 +132,29 @@ if [[ ! -f "$KEY" ]] || ! certificate_has_all_hosts; then
   create_certificate
 fi
 
-sudo mkdir -p "$(dirname "$TARGET")"
-sudo cp "$SOURCE" "$TARGET"
+temp_config="$(mktemp)"
+trap 'rm -f "$temp_config"' EXIT
+render_config "$temp_config"
 
-NGINX_BIN="$(command -v nginx || true)"
-if [[ -z "$NGINX_BIN" ]]; then
-  echo "nginx is not installed or not in PATH."
-  exit 1
+if [[ "$PLATFORM" == "linux" ]]; then
+  sudo mkdir -p "$(dirname "$TARGET")"
+  if ! sudo test -f "$TARGET" || ! sudo cmp -s "$temp_config" "$TARGET"; then
+    sudo cp "$temp_config" "$TARGET"
+    restart_nginx
+    echo "nginx switched to $MODE mode ($PLATFORM)."
+  else
+    sudo nginx -t >/dev/null
+    sudo service nginx start >/dev/null 2>&1 || true
+    echo "nginx is already in $MODE mode ($PLATFORM)."
+  fi
+else
+  mkdir -p "$(dirname "$TARGET")"
+  if [[ ! -f "$TARGET" ]] || ! cmp -s "$temp_config" "$TARGET"; then
+    cp "$temp_config" "$TARGET"
+    restart_nginx
+    echo "nginx switched to $MODE mode ($PLATFORM)."
+  else
+    brew services start nginx >/dev/null 2>&1 || true
+    echo "nginx is already in $MODE mode ($PLATFORM)."
+  fi
 fi
-
-"$NGINX_BIN" -t
-brew services restart nginx
-echo "nginx switched to $MODE mode."
