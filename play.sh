@@ -154,15 +154,7 @@ build_if_needed \
   "games/monkeytype/turbo.json"
 
 echo "[3/4] Switching nginx to static Play mode..."
-PLAY_NGINX_SOURCE="$ROOT_DIR/infra/nginx/typing-game.local.play.conf"
-NGINX_TARGET="/usr/local/etc/nginx/servers/typing-game.local.conf"
-
-if [[ -f "$NGINX_TARGET" ]] && cmp -s "$PLAY_NGINX_SOURCE" "$NGINX_TARGET"; then
-  brew services start nginx >/dev/null 2>&1 || true
-  echo "nginx is already in Play mode."
-else
-  bash scripts/setup-nginx.sh play
-fi
+bash scripts/setup-nginx.sh play
 
 echo "[4/4] Opening typing games..."
 bash scripts/play.sh
