@@ -65,6 +65,27 @@ certificate_has_all_hosts() {
   done
 }
 
+migrate_legacy_linux_certificate() {
+  [[ "$PLATFORM" == "linux" ]] || return 1
+
+  local legacy_dir="/usr/local/etc/nginx/ssl/typing-game.local"
+  local legacy_cert="$legacy_dir/typing-game.local.pem"
+  local legacy_key="$legacy_dir/typing-game.local-key.pem"
+
+  if ! sudo test -f "$legacy_cert" || ! sudo test -f "$legacy_key"; then
+    return 1
+  fi
+
+  echo "Migrating existing typing-game TLS certificate into Linux nginx path..."
+  sudo mkdir -p "$SSL_DIR"
+  sudo cp "$legacy_cert" "$CERT"
+  sudo cp "$legacy_key" "$KEY"
+  sudo chown root:root "$CERT" "$KEY"
+  sudo chmod 644 "$CERT"
+  sudo chmod 600 "$KEY"
+  return 0
+}
+
 create_certificate() {
   if ! command -v mkcert >/dev/null 2>&1; then
     echo "mkcert is not installed or not in PATH."
@@ -129,7 +150,9 @@ restart_nginx() {
 ensure_hosts
 
 if [[ ! -f "$KEY" ]] || ! certificate_has_all_hosts; then
-  create_certificate
+  if ! migrate_legacy_linux_certificate || ! certificate_has_all_hosts; then
+    create_certificate
+  fi
 fi
 
 temp_config="$(mktemp)"
