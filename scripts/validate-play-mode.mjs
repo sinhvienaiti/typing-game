@@ -76,6 +76,7 @@ for (const required of [
   'NGINX_BASE="/etc/nginx"',
   'NGINX_BASE="/usr/local/etc/nginx"',
   "render_config",
+  "migrate_legacy_linux_certificate",
   "sudo nginx -t",
   "brew services restart nginx",
 ]) {
