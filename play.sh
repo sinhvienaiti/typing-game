@@ -11,7 +11,8 @@ case "${1:-}" in
     echo "Usage: ./play.sh"
     echo
     echo "Play mode does not pull Git, update submodules, or install dependencies."
-    echo "It only refreshes stale static builds, switches nginx to static Play mode,"
+    echo "It automatically refreshes local Space Typing source art when needed,"
+    echo "refreshes stale static builds, switches nginx to static Play mode,"
     echo "and opens https://typing-game.local."
     exit 0
     ;;
@@ -82,10 +83,37 @@ build_if_needed() {
   pnpm "$script"
 }
 
-echo "[1/4] Stopping typing-game development servers..."
+prepare_space_art() {
+  local game_dir="$ROOT_DIR/games/space-typing"
+  local package_file="$game_dir/package.json"
+
+  if [[ ! -f "$package_file" ]]; then
+    echo "Space Typing package is missing: $package_file"
+    exit 1
+  fi
+  if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+    echo "Node and pnpm are required to refresh local Space Typing art."
+    exit 1
+  fi
+  if ! node -e '
+    const p = require(process.argv[1]);
+    process.exit(p.scripts?.["art:prepare"] ? 0 : 1);
+  ' "$package_file"; then
+    echo "Space Typing is too old: package.json has no art:prepare script."
+    echo "Apply the latest Space Typing update before running ./play.sh."
+    exit 1
+  fi
+
+  pnpm --dir "$game_dir" art:prepare
+}
+
+echo "[1/5] Stopping typing-game development servers..."
 bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100
 
-echo "[2/4] Checking static builds..."
+echo "[2/5] Refreshing local Space Typing art..."
+prepare_space_art
+
+echo "[3/5] Checking static builds..."
 node scripts/generate-music-index.mjs
 build_if_needed \
   "Portal" \
@@ -134,9 +162,13 @@ build_if_needed \
   "games/space-typing/dist/index.html" \
   "build:space" \
   "games/space-typing/src" \
+  "games/space-typing/public" \
+  "games/space-typing/art-src" \
+  "games/space-typing/scripts" \
   "games/space-typing/index.html" \
   "games/space-typing/package.json" \
   "games/space-typing/tsconfig.json" \
+  "games/space-typing/tsconfig.server.json" \
   "games/space-typing/vite.config.ts"
 
 build_if_needed \
@@ -153,8 +185,8 @@ build_if_needed \
   "games/monkeytype/pnpm-lock.yaml" \
   "games/monkeytype/turbo.json"
 
-echo "[3/4] Switching nginx to static Play mode..."
+echo "[4/5] Switching nginx to static Play mode..."
 bash scripts/setup-nginx.sh play
 
-echo "[4/4] Opening typing games..."
+echo "[5/5] Opening typing games..."
 bash scripts/play.sh
