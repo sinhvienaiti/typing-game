@@ -19,7 +19,7 @@ test("parses a MultiWOZ 2.2 dialogue into a bounded turn model",()=>{
     ]
   });
   assert.deepEqual(parsed?.services,["hotel"]);
-  assert.equal(parsed?.turns[0]?.utterance,"I need a quiet hotel.");
+  assert.equal(parsed?.turns[0]?.utterance,"I need a quiet hotel near the centre for a short weekend stay.");
   assert.equal(isLearningDialogue(parsed),true);
 });
 
