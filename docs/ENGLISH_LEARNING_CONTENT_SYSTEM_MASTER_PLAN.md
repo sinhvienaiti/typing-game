@@ -150,6 +150,20 @@ Space Typing:
 - emits vocabulary typing/recall attempts;
 - combat should stay fast, so grammar-heavy activities belong in bounded events, boss/challenge phases or contextual side activities rather than every enemy.
 
+### 3.5 Exact inspected child-repository pins
+
+These are the child commits actually referenced by the parent baseline inspected for this plan:
+
+| Game | Commit |
+|---|---|
+| Monkeytype fork | 236f64ebf10c45d2859028aee71d12d2df407f4e |
+| Vocabulary Shooter | 4618f3bcdeb5f72bde8e28587ae23d3567bdb05d |
+| Recall Typing | 27ded35809c1d2e37eabc1a91c34b907b95c2219 |
+| Karaoke Typing | d88d64f01e66fd41ed1eef1a4cf743b76bb0bbe3 |
+| Space Typing | 0583b34552d00194012068ca4cbce497291e509e |
+
+Future implementation sessions MUST re-read parent gitlinks before modifying a child. These pins are a review snapshot, not permanent branch names.
+
 ## 4. Architecture principles
 
 ### 4.1 Preserve the legacy vocabulary ABI
@@ -325,6 +339,51 @@ Runtime manifest example:
 Target shard guideline: normally 0.5-2 MB uncompressed. Measure actual browser/network performance before locking a hard limit.
 
 ## 7. Core schemas
+
+
+### 7.0 Schema catalog and contract rules
+
+Phase E01 must implement JSON Schema Draft 2020-12 contracts, not ad-hoc TypeScript-only validation.
+
+Planned schema files:
+
+~~~
+shared/schemas/english-content/
+├── common.schema.json
+├── provenance.schema.json
+├── source-manifest.schema.json
+├── lexeme.schema.json
+├── sense.schema.json
+├── morphology.schema.json
+├── usage.schema.json
+├── collocation.schema.json
+├── verb-pattern.schema.json
+├── phrase.schema.json
+├── grammar-topic.schema.json
+├── sentence.schema.json
+├── translation-pair.schema.json
+├── dialogue.schema.json
+├── exercise.schema.json
+├── common-mistake.schema.json
+├── curriculum.schema.json
+└── runtime-manifest.schema.json
+~~~
+
+Contract rules:
+
+- schemas use Draft 2020-12 and stable $id values under the project namespace;
+- published canonical records use additionalProperties=false unless a deliberately open metadata extension object is defined;
+- draft/import records may carry a dedicated extensions/raw object rather than leaking unknown fields into published records;
+- all IDs validate against type-specific patterns;
+- all CEFR values use one enum: A1, A2, B1, B2, C1, C2;
+- license identifiers use SPDX-style IDs where a suitable identifier exists, plus a controlled LicenseRef value for project-original/uncleared material;
+- provenance is required for imported/derived content;
+- quality state is required for anything entering the publication pipeline;
+- cross-file references are validated semantically after JSON Schema validation;
+- schema files define structure; business rules such as "a cloze blank must resolve to its target" belong in semantic validators;
+- runtime compact views may have separate schemas from canonical authoring records, but the generator is the only supported bridge between them.
+
+This plan intentionally specifies record contracts rather than freezing every final JSON property before E01 pilots. E01 must convert these contracts into executable schemas before any large batch is generated.
 
 ### 7.1 Provenance object
 
@@ -649,6 +708,22 @@ Only published content ships in normal game manifests. Draft/review queues never
 ## 9. Source and license strategy
 
 This section is an engineering strategy, not legal advice. Every importer must pin the exact upstream terms/snapshot used.
+
+
+### 9.0 Source-to-content coverage and publication policy
+
+| Source | Primary use | Can directly publish derived data? | Required handling |
+|---|---|---|---|
+| Open English WordNet | senses, definitions, POS, semantic relations | Yes, subject to CC BY 4.0 | attribution, source IDs, modification notice |
+| Wiktionary via Wiktextract/Kaikki | IPA, forms, morphology, usage, phrases | Yes only under applicable Wiktionary terms | preserve CC BY-SA/GFDL provenance; isolate license-aware derivatives |
+| Tatoeba | supplementary sentences/translation pairs | Yes when record license permits | retain sentence/source attribution; filter quality; treat audio separately |
+| VerbNet | verb classes/frames/pattern discovery | NO by default in this plan | publication gate stays closed until exact version rights are verified |
+| Cambridge EGP/EVP | taxonomy/CEFR reference | No copying into repo | reference manually; do not scrape/redistribute proprietary entries/examples |
+| Current shared vocabulary | legacy EN/VI/IPA targets | Already published under existing attribution | do not change its license or schema through this project |
+| Project-authored content | Vietnamese explanation, lessons, controlled examples, exercises | Yes after owner/license policy + QA | mark PROJECT-ORIGINAL/LicenseRef until explicit distribution license is chosen |
+
+Coverage gaps are expected. No external source above provides the whole requested system. In particular, high-quality Vietnamese explanations, controlled grammar lessons, common mistakes, accepted-answer sets, transformations, sentence-building tasks and game-specific contextual practice are primarily project-authored datasets.
+
 
 ### 9.1 Open English WordNet
 
@@ -2209,6 +2284,27 @@ A scaled dataset is accepted only when:
 - performance remains acceptable in static Play mode.
 
 ## 38. Self-review of this plan
+
+
+### 38.0 Mechanical audit performed after the first plan commit
+
+The committed plan was re-read from GitHub and mechanically audited before finalization:
+
+- curriculum rows found: 300;
+- A1/A2/B1/B2/C1/C2 counts: 45/50/60/60/50/35;
+- duplicate topic IDs: 0;
+- duplicate normalized titles: 0;
+- duplicate normalized learning objectives: 0;
+- required master-plan sections from the task: all present.
+
+Similarity review deliberately examined expected close pairs such as:
+
+- B1 Present Perfect Simple vs Continuous vs B2 nuanced perfect aspect;
+- A2 basic defining relatives vs B1 fuller defining relatives;
+- A2 basic phrasal object position vs B1 separability;
+- A2 may/might possibility vs B1 graded modal possibility.
+
+These are retained because the learning decisions differ and the later topics deepen the earlier objectives. During authoring, prerequisite/contrast metadata and example overlap reports must prove that progression remains real rather than becoming duplicated content.
 
 ### 38.1 Missing categories
 
