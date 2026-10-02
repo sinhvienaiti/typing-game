@@ -77,6 +77,18 @@
         "type": "string",
         "pattern": "^sent\\."
       }
+    },
+    "register": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 60
+      }
+    },
+    "notesVi": {
+      "type": "string",
+      "maxLength": 2000
     }
   }
 }

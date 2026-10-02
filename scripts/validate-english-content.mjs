@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -109,6 +109,51 @@ if (exercisePilot) {
   }
 }
 
+
+
+const collocationPilot=await validateFile("content/english/phrases/pilot-collocations.json","collocation-set.schema.json");
+const verbPatternPilot=await validateFile("content/english/phrases/pilot-verb-patterns.json","verb-pattern-set.schema.json");
+const phrasePilot=await validateFile("content/english/phrases/pilot-phrases.json","phrase-set.schema.json");
+function requireUnique(records,key,label) {
+  const seen=new Set();
+  for (const record of records??[]) {
+    const value=String(record?.[key]??"").normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (!value) { errors.push(label+": empty "+key+" on "+(record?.id??"unknown")); continue; }
+    if (seen.has(value)) errors.push(label+": duplicate "+key+" "+value);
+    seen.add(value);
+  }
+}
+if (collocationPilot) {
+  if (collocationPilot.records.length!==100) errors.push("E04 collocation pilot must contain exactly 100 records");
+  requireUnique(collocationPilot.records,"id","collocations");
+  requireUnique(collocationPilot.records,"text","collocations");
+  for (const record of collocationPilot.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 collocation must remain draft before review");
+    if (!(record.headwordKeys??[]).some(key=>Number.isInteger(vocabLookup.entries?.[key]))) errors.push(record.id+": no headwordKey resolves to legacy vocabulary");
+  }
+}
+if (verbPatternPilot) {
+  if (verbPatternPilot.records.length!==50) errors.push("E04 verb-pattern pilot must contain exactly 50 records");
+  requireUnique(verbPatternPilot.records,"id","verb patterns");
+  const combo=new Set();
+  for (const record of verbPatternPilot.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 verb pattern must remain draft before review");
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": lemma is missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (combo.has(key)) errors.push(record.id+": duplicate lemma/frame");
+    combo.add(key);
+  }
+}
+if (phrasePilot) {
+  if (phrasePilot.records.length!==100) errors.push("E04 phrase pilot must contain exactly 100 records (50 phrasal verbs + 50 chunks/idioms)");
+  requireUnique(phrasePilot.records,"id","phrases");
+  requireUnique(phrasePilot.records,"key","phrases");
+  const pvCount=phrasePilot.records.filter(record=>record.type==="phrasal-verb").length;
+  const chunkIdiomCount=phrasePilot.records.filter(record=>record.type==="chunk"||record.type==="idiom").length;
+  if (pvCount!==50) errors.push("E04 phrase pilot must contain exactly 50 phrasal verbs");
+  if (chunkIdiomCount!==50) errors.push("E04 phrase pilot must contain exactly 50 chunks/idioms");
+  for (const record of phrasePilot.records) if (record.quality?.state!=="draft") errors.push(record.id+": E04 phrase must remain draft before review");
+}
 
 const oewnQueuePath=path.join(root,"content","english","review-queues","oewn-pilot.json");
 try {

@@ -82,9 +82,10 @@ jobs:
           pnpm english-content:test
           pnpm english-content:dedupe
           pnpm english-content:pilot
+          pnpm english-content:e04
           pnpm english-content:generate
           pnpm english-content:publish
-          git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences
+          git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
 
 
       - name: Validate shared music
@@ -126,7 +127,11 @@ jobs:
           node --check scripts/report-english-content-pilot.mjs
           node --check scripts/import-oewn-pilot.mjs
           node --check scripts/publish-english-content.mjs
+          node --check scripts/report-english-content-e04.mjs
           node --check shared/english-content/query.mjs
+          node --check shared/english-content/runtime-loader.mjs
+          node --check shared/english-content/capabilities.mjs
+          node --check shared/english-content/review-item.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"

@@ -46,10 +46,14 @@ const lexemes=await loadRecords("content/english/dictionary/lexeme-seed-pilot.js
 const topics=await loadRecords("content/english/grammar/pilot-topics.json");
 const sentences=await loadRecords("content/english/sentences/pilot-sentences.json");
 const exercises=await loadRecords("content/english/sentences/pilot-exercises.json");
+const collocations=await loadRecords("content/english/phrases/pilot-collocations.json");
+const verbPatterns=await loadRecords("content/english/phrases/pilot-verb-patterns.json");
+const phrases=await loadRecords("content/english/phrases/pilot-phrases.json");
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","sentences"),{recursive:true});
+await fs.mkdir(path.join(root,"shared","phrases"),{recursive:true});
 
 const results=[];
 results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictionary",groups:[{id:"lexemes",dir:"lexemes",records:lexemes}]}));
@@ -57,6 +61,11 @@ results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",gr
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:sentences},
   {id:"exercises",dir:"exercises",records:exercises}
+]}));
+results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
+  {id:"collocations",dir:"collocations",records:collocations},
+  {id:"verb-patterns",dir:"verb-patterns",records:verbPatterns},
+  {id:"phrases",dir:"items",records:phrases}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));

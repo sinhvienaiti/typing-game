@@ -52,11 +52,12 @@
     "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
     "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
     "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
-    "english-content:check": "pnpm english-content:validate && pnpm english-content:test && pnpm english-content:licenses && pnpm english-content:dedupe && pnpm english-content:pilot && pnpm english-content:publish",
+    "english-content:check": "pnpm english-content:validate && pnpm english-content:test && pnpm english-content:licenses && pnpm english-content:dedupe && pnpm english-content:pilot && pnpm english-content:e04 && pnpm english-content:publish",
     "english-content:pilot": "node scripts/report-english-content-pilot.mjs",
     "english-content:import:oewn": "node scripts/import-oewn-pilot.mjs",
     "english-content:publish": "node scripts/publish-english-content.mjs",
-    "english-content:import:oewn:live": "node scripts/import-oewn-pilot.mjs --allow-live-api"
+    "english-content:import:oewn:live": "node scripts/import-oewn-pilot.mjs --allow-live-api",
+    "english-content:e04": "node scripts/report-english-content-e04.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

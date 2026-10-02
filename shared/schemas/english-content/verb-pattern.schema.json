@@ -47,6 +47,26 @@
         "type": "string",
         "pattern": "^sent\\."
       }
+    },
+    "cefr": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/cefr"
+    },
+    "register": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 60
+      }
+    },
+    "prepositions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 40
+      }
     }
   }
 }
