@@ -55,7 +55,8 @@
     "english-content:check": "pnpm english-content:validate && pnpm english-content:test && pnpm english-content:licenses && pnpm english-content:dedupe && pnpm english-content:pilot && pnpm english-content:publish",
     "english-content:pilot": "node scripts/report-english-content-pilot.mjs",
     "english-content:import:oewn": "node scripts/import-oewn-pilot.mjs",
-    "english-content:publish": "node scripts/publish-english-content.mjs"
+    "english-content:publish": "node scripts/publish-english-content.mjs",
+    "english-content:import:oewn:live": "node scripts/import-oewn-pilot.mjs --allow-live-api"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
