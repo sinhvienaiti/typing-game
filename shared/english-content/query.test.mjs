@@ -19,7 +19,7 @@ test("client fetches bounded curriculum data and searches",async()=>{
     const body=input.endsWith("topic-catalog.json")?catalog:{schemaVersion:1,cefr:"A1",topicIds:["gr.a1.present-simple-routines"]};
     return {ok:true,status:200,json:async()=>body};
   };
-  const client=createEnglishContentClient({fetcher,baseUrl:"https://typing-game.local/shared/"});
+  const client=createEnglishContentClient({fetcher,baseUrl:"https://typing-game.local/english-content/"});
   assert.equal((await client.getGrammarTopic("gr.a2.first-conditional")).cefr,"A2");
   assert.equal((await client.listGrammarTopics({search:"routines"})).length,1);
   assert.equal((await client.listCurriculumTopics("A1")).length,1);

@@ -1,4 +1,4 @@
-const DEFAULT_BASE="/shared";
+const DEFAULT_BASE="https://typing-game.local/english-content";
 const DATASETS=Object.freeze(["dictionary","grammar","sentences","phrases"]);
 function cleanBase(value){const trimmed=String(value||DEFAULT_BASE).replace(/\/+$/,"");return trimmed||DEFAULT_BASE;}
 function isObject(value){return value!==null&&typeof value==="object"&&!Array.isArray(value);}

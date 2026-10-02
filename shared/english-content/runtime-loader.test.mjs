@@ -11,8 +11,8 @@ test("runtime manifest validates counts",()=>{
 test("runtime loader caches bounded manifest and shard",async()=>{
   const calls=[];
   const payloads={
-    "/shared/phrases/manifest.json":{schemaVersion:1,contentVersion:"2026.10.0",dataset:"phrases",count:1,shards:[{id:"phrases-000",path:"items/000.json",count:1}]},
-    "/shared/phrases/items/000.json":{schemaVersion:1,records:[{id:"pv.00000001",text:"get up"}]}
+    "https://typing-game.local/english-content/phrases/manifest.json":{schemaVersion:1,contentVersion:"2026.10.0",dataset:"phrases",count:1,shards:[{id:"phrases-000",path:"items/000.json",count:1}]},
+    "https://typing-game.local/english-content/phrases/items/000.json":{schemaVersion:1,records:[{id:"pv.00000001",text:"get up"}]}
   };
   const fetcher=async input=>{calls.push(input);return {ok:true,status:200,json:async()=>payloads[input]};};
   const loader=createEnglishRuntimeLoader({fetcher});

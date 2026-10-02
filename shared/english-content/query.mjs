@@ -1,4 +1,4 @@
-const DEFAULT_BASE="/shared";
+const DEFAULT_BASE="https://typing-game.local/english-content";
 
 function cleanBase(value) {
   const trimmed=String(value||DEFAULT_BASE).replace(/\/+$/,"");
