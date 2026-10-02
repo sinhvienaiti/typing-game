@@ -75,6 +75,16 @@ jobs:
           pnpm typing-texts:generate
           git diff --exit-code -- shared/typing-texts/index.json
 
+      - name: Validate rich English learning content
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:generate
+          git diff --exit-code -- shared/curriculum
+
+
       - name: Validate shared music
         run: |
           node -e "JSON.parse(require('fs').readFileSync('shared/music/index.json','utf8'))"
@@ -104,6 +114,13 @@ jobs:
           node --check scripts/validate-portal-layout.mjs
           node --check scripts/validate-space-integration.mjs
           node --check scripts/validate-play-mode.mjs
+          node --check scripts/english-content-core.mjs
+          node --check scripts/generate-english-content.mjs
+          node --check scripts/validate-english-content.mjs
+          node --check scripts/check-english-content-licenses.mjs
+          node --check scripts/report-english-content-dedup.mjs
+          node --check scripts/report-english-content-coverage.mjs
+          node --check scripts/allocate-english-content-id.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
