@@ -11,7 +11,16 @@ const [dialogueDoc,report,pin]=await Promise.all([
 const records=dialogueDoc.records??[];
 const errors=[];
 if (records.length!==100) errors.push("MultiWOZ E06 must contain exactly 100 dialogues");
-if (report.observedBlobSha1!==pin.blobSha1) errors.push("MultiWOZ observed blob SHA does not match source pin");
+const expectedFiles=[
+  {path:pin.path,blobSha1:pin.blobSha1},
+  ...(pin.additionalFiles??[]),
+];
+for (const expected of expectedFiles) {
+  const observed=report.observedFiles?.find(item=>item.path===expected.path);
+  if (!observed||observed.blobSha1!==expected.blobSha1) {
+    errors.push("MultiWOZ observed blob SHA does not match source pin: "+expected.path);
+  }
+}
 const ids=new Set(),dialogueKeys=new Set(),scenarioCounts={};
 for (const record of records) {
   if (ids.has(record.id)) errors.push(record.id+": duplicate id");
@@ -31,7 +40,7 @@ for (const record of records) {
 console.log(JSON.stringify({
   selectedDialogues:records.length,
   candidateDialogues:report.candidateDialogues,
-  observedBlobSha1:report.observedBlobSha1,
+  observedFiles:report.observedFiles,
   scenarioCounts,
 },null,2));
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }
