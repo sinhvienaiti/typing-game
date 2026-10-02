@@ -32,7 +32,10 @@ if (!Array.isArray(seedDoc.records)||seedDoc.records.length!==300) {
 const hash=crypto.createHash("sha256");
 for await (const chunk of fs.createReadStream(input)) hash.update(chunk);
 const sourceSha256=hash.digest("hex");
-if (source.checksumSha256&&source.checksumSha256!==sourceSha256) {
+if (!source.checksumSha256) {
+  throw new Error("Vietnamese Wiktionary source must have a pinned SHA-256 before import");
+}
+if (source.checksumSha256!==sourceSha256) {
   throw new Error("Vietnamese Wiktionary source checksum mismatch. Expected "+source.checksumSha256+", got "+sourceSha256);
 }
 
@@ -91,8 +94,8 @@ for await (const line of lines) {
         checks:{
           schema:{status:"pass",method:"viwiktionary-import-v1"},
           sourcePin:{
-            status:source.checksumSha256?"pass":"pending",
-            method:source.checksumSha256?"sha256-manifest-v1":"checksum-probe-required",
+            status:"pass",
+            method:"sha256-manifest-v1",
           },
           senseAlignment:{status:"pending",method:"oewn-viwiktionary-editor-alignment-required"},
           translation:{status:"pending",method:"bilingual-review-required"},
