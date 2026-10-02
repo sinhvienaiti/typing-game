@@ -2440,3 +2440,41 @@ to a connected learning experience:
 - and how performance feeds one shared Smart Review profile across the games.
 
 The platform should gain depth without sacrificing the fast typing/game experience or breaking the current 18k library.
+
+
+---
+
+## 42. Implementation checkpoint — 2026-10-03
+
+Branch: `feature/english-learning-content-system`
+
+Implemented after the original master-plan commit:
+
+- **E00 COMPLETE** — final master plan and exact 300-topic framework.
+- **E01 COMPLETE** — executable Draft 2020-12 schema catalog, source/provenance contracts, stable ID registry/allocator, runtime manifests and directory architecture.
+- **E02 COMPLETE** — validation, source/license gates, referential integrity, exact/near duplicate infrastructure, semantic cloze/translation source checks, CI integration and reviewed-only publication gate.
+- **Machine-readable curriculum COMPLETE** — `content/english/grammar/topic-catalog.json` plus generated `shared/curriculum/a1.json ... c2.json`, exactly 45/50/60/60/50/35.
+- **Lexical pilot foundation COMPLETE** — 300 legacy-compatible lexeme seeds with stable `lex.en.*` IDs, all kept in `candidate` state; no invented senses/POS.
+- **OEWN import foundation COMPLETE** — official lemma-API importer, review-queue schema and a guard that marks live-API output as unpinned/non-publishable. Pinned 2025 release remains the publication-grade source.
+- **E05 pilot authored** — 12 grammar topics, exactly 2 per CEFR, with EN/VI concepts, formulae, usage, examples, prerequisites/contrasts and exercise refs. State remains `draft`.
+- **E06 pilot authored** — 36 controlled example sentences + 24 cloze/VI→EN exercises with reference and semantic validation. State remains `draft`.
+- **E07 foundation COMPLETE** — parent-side `shared/english-content/query.mjs` lazily loads the 300-topic catalog and one CEFR curriculum at a time.
+- **Runtime publication gate COMPLETE** — `pnpm english-content:publish` emits only records whose quality state is exactly `published`. Candidate/draft/reviewed data cannot accidentally ship.
+
+Verification:
+
+- Platform CI #501: PASS after the initial foundation/query work.
+- Platform CI #503 correctly rejected five pilot exercises whose source-sentence references did not contain their accepted answers.
+- The five data references were corrected; the validator was not weakened.
+- Platform CI #504 rich-content and syntax stages passed after the correction; full run status is tracked on draft PR #48.
+
+Current intentionally unfinished work:
+
+- populate/review the OEWN 300-word enrichment using a release-grade pinned source;
+- Wiktionary/Wiktextract morphology/usage import;
+- phrase/collocation/verb-pattern pilots;
+- promote the 12 grammar/36 sentence/24 exercise pilot records only after grammar, bilingual, naturalness and CEFR review;
+- full Monkeytype rich-content UI/executor integration, then suitable integrations for Recall/Shooter/Karaoke/Space;
+- controlled batch scale-up toward the long-term corpus targets.
+
+These items are not blockers waiting for architecture decisions. They are the subsequent content-production/integration phases and must use the now-implemented gates rather than bypassing them.
