@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/multiwoz-source-report.schema.json",
+  "title": "MultiWOZ E06 source report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "version",
+    "commit",
+    "path",
+    "observedBlobSha1",
+    "candidateDialogues",
+    "selectedDialogues"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "multiwoz"
+    },
+    "version": {
+      "const": "2.2"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "observedBlobSha1": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "candidateDialogues": {
+      "type": "integer",
+      "minimum": 100
+    },
+    "selectedDialogues": {
+      "const": 100
+    }
+  }
+}

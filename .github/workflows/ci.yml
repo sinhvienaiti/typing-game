@@ -137,6 +137,33 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Checkout pinned MultiWOZ dialogue source
+        uses: actions/checkout@v4
+        with:
+          repository: budzianowski/multiwoz
+          ref: fe0c8e65cfcd8462bd33c86e35f21addc84ca82b
+          path: .cache/english-content/multiwoz
+          fetch-depth: 1
+          sparse-checkout: |
+            data/MultiWOZ_2.2/train/dialogues_001.json
+            LICENSE
+          sparse-checkout-cone-mode: false
+
+      - name: Build MultiWOZ E06 dialogue pilot
+        run: |
+          pnpm english-content:import:multiwoz -- --source-dir=.cache/english-content/multiwoz
+          pnpm english-content:e06:dialogue
+
+      - name: Upload MultiWOZ E06 dialogue pilot
+        uses: actions/upload-artifact@v4
+        with:
+          name: multiwoz-e06-dialogues-${{ github.sha }}
+          path: |
+            content/english/review-queues/multiwoz-e06-dialogues.json
+            content/english/review-queues/multiwoz-e06-source-report.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Checkout pinned Open English WordNet source
         uses: actions/checkout@v4
         with:
@@ -241,6 +268,9 @@ jobs:
           node --check scripts/tatoeba-pair-core.mjs
           node --check scripts/import-tatoeba-e06-translations.mjs
           node --check scripts/report-english-content-tatoeba.mjs
+          node --check scripts/multiwoz-dialogue-core.mjs
+          node --check scripts/import-multiwoz-e06-dialogues.mjs
+          node --check scripts/report-english-content-multiwoz.mjs
           node --check shared/english-content/query.mjs
           node --check shared/english-content/runtime-loader.mjs
           node --check shared/english-content/capabilities.mjs

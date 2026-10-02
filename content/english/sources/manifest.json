@@ -54,6 +54,20 @@
       "releaseUrl": "https://downloads.tatoeba.org/exports/per_language/"
     },
     {
+      "id": "multiwoz",
+      "name": "MultiWOZ 2.2 human-human task-oriented dialogues",
+      "url": "https://github.com/budzianowski/multiwoz",
+      "license": "MIT",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+      "notes": "E06 dialogue pilot is pinned to MultiWOZ repository commit fe0c8e65cfcd8462bd33c86e35f21addc84ca82b and a specific train dialogue blob. Dialogue text remains candidate until learning-suitability review.",
+      "releaseUrl": "https://github.com/budzianowski/multiwoz/tree/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2",
+      "sourceRepository": "budzianowski/multiwoz",
+      "sourceCommit": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b"
+    },
+    {
       "id": "verbnet",
       "name": "VerbNet",
       "url": "https://verbs.colorado.edu/verbnet/",

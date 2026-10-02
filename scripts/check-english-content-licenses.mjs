@@ -14,6 +14,10 @@ for (const id of ["verbnet","cambridge-profile","viwiktionary-en"]) {
   const source=manifest.sources.find(item=>item.id===id);
   if (!source||source.publishAllowed!==false) errors.push(id+": publish gate must be false");
 }
+const multiwozSource=manifest.sources.find(item=>item.id==="multiwoz");
+if (!multiwozSource||multiwozSource.license!=="MIT"||multiwozSource.publishAllowed!==true||multiwozSource.attributionRequired!==true||!multiwozSource.sourceCommit) {
+  errors.push("multiwoz: pinned MIT source with attribution is required");
+}
 const tatoebaSource=manifest.sources.find(item=>item.id==="tatoeba");
 if (!tatoebaSource||tatoebaSource.publishAllowed!==true||tatoebaSource.attributionRequired!==true) {
   errors.push("tatoeba: publication must require attribution");

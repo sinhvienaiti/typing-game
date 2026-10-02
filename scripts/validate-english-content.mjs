@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -28,6 +28,7 @@ async function validateFile(relative,schemaName) {
 }
 const sources=await validateFile("content/english/sources/manifest.json","source-manifest.schema.json");
 await validateFile("content/english/sources/tatoeba-eng-vie-pilot.json","tatoeba-source-pin.schema.json");
+await validateFile("content/english/sources/multiwoz-e06-dialogue.json","multiwoz-source-pin.schema.json");
 const authorCatalog=await validateFile("content/english/grammar/topic-catalog.json","topic-catalog.schema.json");
 const sharedCatalog=await validateFile("shared/curriculum/topic-catalog.json","topic-catalog.schema.json");
 const expectedCounts={A1:45,A2:50,B1:60,B2:60,C1:50,C2:35};
@@ -154,6 +155,20 @@ if (phrasePilot) {
   if (pvCount!==50) errors.push("E04 phrase pilot must contain exactly 50 phrasal verbs");
   if (chunkIdiomCount!==50) errors.push("E04 phrase pilot must contain exactly 50 chunks/idioms");
   for (const record of phrasePilot.records) if (record.quality?.state!=="draft") errors.push(record.id+": E04 phrase must remain draft before review");
+}
+
+const multiwozDialoguePath=path.join(root,"content","english","review-queues","multiwoz-e06-dialogues.json");
+try {
+  await fs.access(multiwozDialoguePath);
+  const dialogues=await validateFile("content/english/review-queues/multiwoz-e06-dialogues.json","dialogue-set.schema.json");
+  await validateFile("content/english/review-queues/multiwoz-e06-source-report.json","multiwoz-source-report.schema.json");
+  if (dialogues?.records.length!==100) errors.push("E06 MultiWOZ pilot must contain exactly 100 dialogues");
+  for (const record of dialogues?.records??[]) {
+    if (record.quality?.state!=="candidate") errors.push(record.id+": E06 dialogue must remain candidate");
+    if (record.turns.length<4||record.turns.length>10) errors.push(record.id+": E06 dialogue turn count outside 4..10");
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("E06 MultiWOZ validation failed: "+error.message);
 }
 
 const grammarCorrectionPath=path.join(root,"content","english","review-queues","grammar-e06-corrections.json");
