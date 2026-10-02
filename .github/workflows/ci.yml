@@ -81,8 +81,10 @@ jobs:
           pnpm english-content:licenses
           pnpm english-content:test
           pnpm english-content:dedupe
+          pnpm english-content:pilot
           pnpm english-content:generate
-          git diff --exit-code -- shared/curriculum
+          pnpm english-content:publish
+          git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences
 
 
       - name: Validate shared music
@@ -123,6 +125,7 @@ jobs:
           node --check scripts/allocate-english-content-id.mjs
           node --check scripts/report-english-content-pilot.mjs
           node --check scripts/import-oewn-pilot.mjs
+          node --check scripts/publish-english-content.mjs
           node --check shared/english-content/query.mjs
 
       - name: Validate game registry

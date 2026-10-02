@@ -2,7 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { listJsonFiles, nearDuplicatePairs, normalizeSentenceKey, readJson } from "./english-content-core.mjs";
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const files=await listJsonFiles(path.join(root,"shared","sentences")); const records=[];
+const files=[...(await listJsonFiles(path.join(root,"shared","sentences"))),path.join(root,"content","english","sentences","pilot-sentences.json")]; const records=[];
 for (const file of files) {
   if (file.endsWith("manifest.json")) continue;
   const doc=await readJson(file);

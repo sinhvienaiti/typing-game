@@ -129,5 +129,28 @@ try {
   if (error?.code!=="ENOENT") errors.push("OEWN review queue validation failed: "+error.message);
 }
 
+
+function normalizedText(value) {
+  return String(value).normalize("NFC").trim().replace(/\s+/g," ").replace(/\s+([,.;:!?])/g,"$1").toLocaleLowerCase("en-US");
+}
+const sentenceById=new Map((sentencePilot?.records??[]).map(item=>[item.id,item]));
+if (exercisePilot) {
+  for (const exercise of exercisePilot.records) {
+    if (exercise.type==="cloze") {
+      if (!exercise.prompt.includes("___")) errors.push(exercise.id+": cloze prompt must contain ___");
+      const source=sentenceById.get(exercise.sourceSentenceIds?.[0]);
+      if (source&&!exercise.acceptedAnswers.some(answer=>normalizedText(source.text).includes(normalizedText(answer)))) {
+        errors.push(exercise.id+": no accepted cloze answer occurs in its source sentence");
+      }
+    }
+    if (exercise.type==="translation") {
+      const sourceTexts=(exercise.sourceSentenceIds??[]).map(id=>sentenceById.get(id)?.text).filter(Boolean).map(normalizedText);
+      if (sourceTexts.length>0&&!exercise.acceptedAnswers.some(answer=>sourceTexts.includes(normalizedText(answer)))) {
+        errors.push(exercise.id+": translation accepted answer does not match any linked English source sentence");
+      }
+    }
+  }
+}
+
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }
 else console.log("English content PASS: "+expectedSchemas.length+" schemas, 300 curriculum topics, legacy vocabulary ABI preserved.");
