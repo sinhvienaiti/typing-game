@@ -17,24 +17,56 @@ cd "$ROOT_DIR"
 
 git submodule sync --recursive
 
+update_submodule_branch() {
+  local name="$1"
+  local path="$2"
+  local branch
+
+  git submodule update --init --recursive "$path"
+
+  branch="$(git config -f .gitmodules --get "submodule.$name.branch" || true)"
+  if [[ -z "$branch" ]]; then
+    echo "  ✓ $path is pinned to the platform gitlink."
+    return
+  fi
+
+  echo "  → Updating $path from origin/$branch..."
+  git -C "$path" fetch origin "$branch"
+
+  if git -C "$path" show-ref --verify --quiet "refs/heads/$branch"; then
+    git -C "$path" checkout "$branch"
+  else
+    git -C "$path" checkout -b "$branch" --track "origin/$branch"
+  fi
+
+  git -C "$path" pull --ff-only origin "$branch"
+  git -C "$path" submodule update --init --recursive
+
+  echo "  ✓ $path: $(git -C "$path" rev-parse --short HEAD) ($branch)"
+}
+
 case "$TARGET" in
   all)
-    git submodule update --init --recursive
+    update_submodule_branch "games/monkeytype" "games/monkeytype"
+    update_submodule_branch "games/vocab-shooter" "games/vocab-shooter"
+    update_submodule_branch "games/recall-typing" "games/recall-typing"
+    update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
+    update_submodule_branch "games/space-typing" "games/space-typing"
     ;;
   monkeytype)
-    git submodule update --init --recursive games/monkeytype
+    update_submodule_branch "games/monkeytype" "games/monkeytype"
     ;;
   shooter)
-    git submodule update --init --recursive games/vocab-shooter
+    update_submodule_branch "games/vocab-shooter" "games/vocab-shooter"
     ;;
   recall)
-    git submodule update --init --recursive games/recall-typing
+    update_submodule_branch "games/recall-typing" "games/recall-typing"
     ;;
   karaoke)
-    git submodule update --init --recursive games/karaoke-typing
+    update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
     ;;
   space)
-    git submodule update --init --recursive games/space-typing
+    update_submodule_branch "games/space-typing" "games/space-typing"
     ;;
 esac
 
