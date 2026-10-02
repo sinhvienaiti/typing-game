@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -107,6 +107,26 @@ if (exercisePilot) {
     for (const id of exercise.targetIds??[]) if (id.startsWith("gr.")&&!allIds.has(id)) errors.push(exercise.id+": unknown grammar target "+id);
     for (const id of exercise.sourceSentenceIds??[]) if (!pilotSentenceIds.has(id)) errors.push(exercise.id+": unknown source sentence "+id);
   }
+}
+
+
+const oewnQueuePath=path.join(root,"content","english","review-queues","oewn-pilot.json");
+try {
+  await fs.access(oewnQueuePath);
+  const oewnQueue=await validateFile("content/english/review-queues/oewn-pilot.json","oewn-review-queue.schema.json");
+  if (oewnQueue) {
+    if (oewnQueue.source!=="oewn") errors.push("OEWN review queue source must be oewn");
+    if (oewnQueue.snapshot.startsWith("live-api") && oewnQueue.records.some(record=>record.synsets.length===0)) {
+      // Empty synset lists are allowed for lookup misses; keep them visible for review rather than inventing senses.
+    }
+    const queueLexemeIds=new Set();
+    for (const record of oewnQueue.records) {
+      if (queueLexemeIds.has(record.lexemeId)) errors.push(record.lexemeId+": duplicate OEWN review-queue lexeme");
+      queueLexemeIds.add(record.lexemeId);
+    }
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("OEWN review queue validation failed: "+error.message);
 }
 
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }

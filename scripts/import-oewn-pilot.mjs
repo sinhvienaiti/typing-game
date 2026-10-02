@@ -18,7 +18,10 @@ if (!Number.isInteger(concurrency)||concurrency<1||concurrency>8) throw new Erro
 const sourceManifest=await readJson(path.join(root,"content","english","sources","manifest.json"));
 const source=sourceManifest.sources.find(item=>item.id==="oewn");
 if (!source||typeof source.apiTemplate!=="string"||!source.apiTemplate.includes("{lemma}")) throw new Error("OEWN apiTemplate is not configured");
-if (!source.snapshot) throw new Error("OEWN source snapshot is not pinned");
+if (!source.snapshot) throw new Error("OEWN release snapshot is not pinned");
+if (!process.argv.includes("--allow-live-api")) {
+  throw new Error("The OEWN lemma API is a live endpoint, not the pinned 2025 release. Re-run with --allow-live-api to create a non-publishable review queue, or use the pinned full-release importer when publication is required.");
+}
 
 const pilot=await readJson(path.join(root,"content","english","dictionary","lexeme-seed-pilot.json"));
 const seeds=pilot.records.slice(0,limit);
@@ -92,7 +95,7 @@ await Promise.all(Array.from({length:Math.min(concurrency,seeds.length)},()=>wor
 const output={
   schemaVersion:1,
   source:"oewn",
-  snapshot:source.snapshot,
+  snapshot:"live-api-unpinned",
   records:records.filter(Boolean),
   errors:errors.sort((a,b)=>a.lexemeId.localeCompare(b.lexemeId))
 };
