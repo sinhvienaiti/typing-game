@@ -27,9 +27,10 @@ for (const sentence of sentences) {
   sentenceKeys.add(key);
   sentenceById.set(sentence.id,sentence);
   if (sentence.quality?.state!=="candidate") errors.push(sentence.id+": candidate corpus must remain candidate");
-  if (!Array.isArray(sentence.lexicalIds)||sentence.lexicalIds.length===0) errors.push(sentence.id+": missing lexicalIds");
   for (const id of sentence.lexicalIds??[]) if (!String(id).startsWith("lex.en.")) errors.push(sentence.id+": non-stable lexical target "+id);
 }
+const stableTargetSentences=sentences.filter(sentence=>(sentence.lexicalIds??[]).length>0).length;
+if (stableTargetSentences<300) errors.push("E06 sentence corpus must retain at least 300 stable-target sentences");
 const exerciseIds=new Set();
 for (const exercise of exercises) {
   if (exerciseIds.has(exercise.id)) errors.push("duplicate exercise id: "+exercise.id);
@@ -56,6 +57,7 @@ console.log(JSON.stringify({
   sentences:sentences.length,
   clozeExercises:exercises.length,
   byCefr,
+  stableTargetSentences,
   nearDuplicatePairsAt092:nearPairs
 },null,2));
 if (nearPairs>50) errors.push("E06 candidate corpus has too many very-near duplicates at 0.92: "+nearPairs);

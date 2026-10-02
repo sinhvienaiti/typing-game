@@ -211,9 +211,12 @@ try {
     if (derivedSentences.records.length!==1000) errors.push("derived E06 corpus must contain exactly 1000 sentences");
     if (derivedExercises.records.length!==300) errors.push("derived E06 corpus must contain exactly 300 exercises");
     const derivedById=new Map(derivedSentences.records.map(item=>[item.id,item]));
+    let stableTargetSentenceCount=0;
     for (const sentence of derivedSentences.records) {
       if (sentence.quality?.state!=="candidate") errors.push(sentence.id+": derived E06 sentence must remain candidate");
+      if ((sentence.lexicalIds??[]).length>0) stableTargetSentenceCount++;
     }
+    if (stableTargetSentenceCount<300) errors.push("derived E06 corpus must retain at least 300 stable-target sentences");
     for (const exercise of derivedExercises.records) {
       if (exercise.quality?.state!=="candidate") errors.push(exercise.id+": derived E06 exercise must remain candidate");
       if (exercise.type!=="cloze"||!exercise.prompt.includes("___")) errors.push(exercise.id+": derived E06 exercise must be cloze");

@@ -101,7 +101,6 @@ for (const levelMeta of index.levels??[]) {
         const match=targetMatch(text,target);
         if (match) matches.push({target,lexemeId:lexemeByKey.get(target),...match});
       }
-      if (matches.length===0) continue;
       seenText.add(textKey);
       const sourceStem=String(passage.id).toLocaleLowerCase("en-US");
       const sentenceId="sent.tt."+sourceStem+"."+String(sentenceIndex+1).padStart(3,"0");
@@ -115,7 +114,7 @@ for (const levelMeta of index.levels??[]) {
           cefr:doc.cefr,
           contexts,
           register:["neutral"],
-          lexicalIds,
+          ...(lexicalIds.length===0?{}:{lexicalIds}),
           quality:quality(),
           provenance:provenance(file,passage.id,sentenceIndex)
         },
@@ -128,14 +127,47 @@ for (const levelMeta of index.levels??[]) {
   }
 }
 if (candidates.length<sentenceLimit) {
-  throw new Error("Typing-text corpus produced only "+candidates.length+" target-bearing unique sentences; need "+sentenceLimit);
+  throw new Error("Typing-text corpus produced only "+candidates.length+" unique training sentences; need "+sentenceLimit);
+}
+const targetBearing=candidates.filter(candidate=>candidate.matches.length>0);
+if (targetBearing.length<exerciseLimit) {
+  throw new Error("Typing-text corpus produced only "+targetBearing.length+" stable-target sentences; need "+exerciseLimit+" for cloze");
 }
 
-const selected=candidates.slice(0,sentenceLimit);
+const candidateByLevel=new Map();
+for (const candidate of candidates) {
+  if (!candidateByLevel.has(candidate.level)) candidateByLevel.set(candidate.level,[]);
+  candidateByLevel.get(candidate.level).push(candidate);
+}
+for (const group of candidateByLevel.values()) {
+  group.sort((left,right)=>
+    Number(right.matches.length>0)-Number(left.matches.length>0)||
+    left.passageId.localeCompare(right.passageId)||
+    left.sentenceIndex-right.sentenceIndex
+  );
+}
+const selected=[];
+let sentenceRound=0;
+while (selected.length<sentenceLimit) {
+  let added=false;
+  for (const level of [...candidateByLevel.keys()].sort((a,b)=>a-b)) {
+    const candidate=candidateByLevel.get(level)?.[sentenceRound];
+    if (!candidate) continue;
+    selected.push(candidate);
+    added=true;
+    if (selected.length>=sentenceLimit) break;
+  }
+  if (!added) break;
+  sentenceRound++;
+}
 const selectedByLevel=new Map();
-for (const candidate of selected) {
+for (const candidate of selected.filter(item=>item.matches.length>0)) {
   if (!selectedByLevel.has(candidate.level)) selectedByLevel.set(candidate.level,[]);
   selectedByLevel.get(candidate.level).push(candidate);
+}
+const selectedTargetCount=[...selectedByLevel.values()].reduce((sum,group)=>sum+group.length,0);
+if (selectedTargetCount<exerciseLimit) {
+  throw new Error("Selected 1000-sentence corpus retained only "+selectedTargetCount+" stable-target sentences; need "+exerciseLimit);
 }
 const exerciseCandidates=[];
 let round=0;
@@ -193,6 +225,8 @@ const byCefr=Object.fromEntries(
 console.log("E06 typing-text candidates:",JSON.stringify({
   sourceLevels:index.availableLevels,
   availableCandidateSentences:candidates.length,
+  stableTargetSentences:targetBearing.length,
+  selectedStableTargetSentences:selectedTargetCount,
   sentences:selected.length,
   clozeExercises:exercises.length,
   byCefr
