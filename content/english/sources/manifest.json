@@ -10,10 +10,12 @@
       "attributionRequired": true,
       "status": "reference",
       "snapshot": "2025-12-31",
-      "notes": "Pinned Open English WordNet 2025 release (2025-12-31). The pilot importer uses the official lemma JSON API and writes candidate review data only. Full-release publication must pin and verify the release SHA-256 first.",
+      "notes": "Open English WordNet 2025 source is pinned to immutable commit dc343f2683279ecbb13fab4e2fd778d7b162d287 for reproducible E03 imports. Live lemma API remains review-only. Publication-grade imports must come from this pinned checkout or a later explicitly reviewed pin.",
       "releaseUrl": "https://en-word.net/static/english-wordnet-2025-json.zip",
       "apiTemplate": "https://en-word.net/api/lemma/{lemma}",
-      "checksumSha256": null
+      "checksumSha256": null,
+      "sourceRepository": "globalwordnet/english-wordnet",
+      "sourceCommit": "dc343f2683279ecbb13fab4e2fd778d7b162d287"
     },
     {
       "id": "wiktionary",

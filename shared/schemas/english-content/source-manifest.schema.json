@@ -89,6 +89,17 @@
               "null"
             ],
             "pattern": "^[a-f0-9]{64}$"
+          },
+          "sourceRepository": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "sourceCommit": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{40}$"
           }
         }
       }

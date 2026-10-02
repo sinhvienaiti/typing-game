@@ -48,7 +48,7 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "english-content:generate": "node scripts/generate-english-content.mjs",
     "english-content:validate": "node scripts/validate-english-content.mjs",
-    "english-content:test": "node --test scripts/english-content-core.test.mjs shared/english-content/*.test.mjs",
+    "english-content:test": "node --test scripts/english-content-core.test.mjs scripts/oewn-pinned-core.test.mjs shared/english-content/*.test.mjs",
     "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
     "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
     "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
@@ -57,7 +57,9 @@
     "english-content:import:oewn": "node scripts/import-oewn-pilot.mjs",
     "english-content:publish": "node scripts/publish-english-content.mjs",
     "english-content:import:oewn:live": "node scripts/import-oewn-pilot.mjs --allow-live-api",
-    "english-content:e04": "node scripts/report-english-content-e04.mjs"
+    "english-content:e04": "node scripts/report-english-content-e04.mjs",
+    "english-content:import:oewn:pinned": "node scripts/import-oewn-pinned-pilot.mjs",
+    "english-content:e03": "node scripts/report-english-content-e03.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

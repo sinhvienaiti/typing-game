@@ -75,6 +75,27 @@ jobs:
           pnpm typing-texts:generate
           git diff --exit-code -- shared/typing-texts/index.json
 
+      - name: Checkout pinned Open English WordNet source
+        uses: actions/checkout@v4
+        with:
+          repository: globalwordnet/english-wordnet
+          ref: dc343f2683279ecbb13fab4e2fd778d7b162d287
+          path: .cache/english-content/oewn
+          fetch-depth: 1
+
+      - name: Build pinned OEWN E03 pilot
+        run: |
+          pnpm english-content:import:oewn:pinned -- --source-dir=.cache/english-content/oewn
+          pnpm english-content:e03 -- --require-mapped=0.98
+
+      - name: Upload pinned OEWN E03 pilot
+        uses: actions/upload-artifact@v4
+        with:
+          name: oewn-e03-pilot-${{ github.sha }}
+          path: content/english/review-queues/oewn-2025-pilot.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Validate rich English learning content
         run: |
           pnpm english-content:validate
@@ -128,6 +149,9 @@ jobs:
           node --check scripts/import-oewn-pilot.mjs
           node --check scripts/publish-english-content.mjs
           node --check scripts/report-english-content-e04.mjs
+          node --check scripts/oewn-pinned-core.mjs
+          node --check scripts/import-oewn-pinned-pilot.mjs
+          node --check scripts/report-english-content-e03.mjs
           node --check shared/english-content/query.mjs
           node --check shared/english-content/runtime-loader.mjs
           node --check shared/english-content/capabilities.mjs
