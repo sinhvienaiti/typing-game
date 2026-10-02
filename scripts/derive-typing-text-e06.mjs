@@ -134,59 +134,66 @@ if (targetBearing.length<exerciseLimit) {
   throw new Error("Typing-text corpus produced only "+targetBearing.length+" stable-target sentences; need "+exerciseLimit+" for cloze");
 }
 
-const candidateByLevel=new Map();
-for (const candidate of candidates) {
-  if (!candidateByLevel.has(candidate.level)) candidateByLevel.set(candidate.level,[]);
-  candidateByLevel.get(candidate.level).push(candidate);
+function roundRobinTake(byLevel,limit,alreadySelected=new Set()) {
+  const result=[];
+  let round=0;
+  while (result.length<limit) {
+    let added=false;
+    for (const level of [...byLevel.keys()].sort((a,b)=>a-b)) {
+      const group=(byLevel.get(level)??[]).filter(candidate=>!alreadySelected.has(candidate));
+      const candidate=group[round];
+      if (!candidate) continue;
+      result.push(candidate);
+      added=true;
+      if (result.length>=limit) break;
+    }
+    if (!added) break;
+    round++;
+  }
+  return result;
 }
-for (const group of candidateByLevel.values()) {
+
+const targetByLevel=new Map();
+for (const candidate of targetBearing) {
+  if (!targetByLevel.has(candidate.level)) targetByLevel.set(candidate.level,[]);
+  targetByLevel.get(candidate.level).push(candidate);
+}
+for (const group of targetByLevel.values()) {
   group.sort((left,right)=>
-    Number(right.matches.length>0)-Number(left.matches.length>0)||
     left.passageId.localeCompare(right.passageId)||
     left.sentenceIndex-right.sentenceIndex
   );
 }
-const selected=[];
-let sentenceRound=0;
-while (selected.length<sentenceLimit) {
-  let added=false;
-  for (const level of [...candidateByLevel.keys()].sort((a,b)=>a-b)) {
-    const candidate=candidateByLevel.get(level)?.[sentenceRound];
-    if (!candidate) continue;
-    selected.push(candidate);
-    added=true;
-    if (selected.length>=sentenceLimit) break;
-  }
-  if (!added) break;
-  sentenceRound++;
+const requiredTargetSelection=roundRobinTake(targetByLevel,exerciseLimit);
+if (requiredTargetSelection.length<exerciseLimit) {
+  throw new Error("Unable to select "+exerciseLimit+" stable-target sentences");
 }
-const selectedByLevel=new Map();
-for (const candidate of selected.filter(item=>item.matches.length>0)) {
-  if (!selectedByLevel.has(candidate.level)) selectedByLevel.set(candidate.level,[]);
-  selectedByLevel.get(candidate.level).push(candidate);
+
+const selectedSet=new Set(requiredTargetSelection);
+const remainingByLevel=new Map();
+for (const candidate of candidates) {
+  if (selectedSet.has(candidate)) continue;
+  if (!remainingByLevel.has(candidate.level)) remainingByLevel.set(candidate.level,[]);
+  remainingByLevel.get(candidate.level).push(candidate);
 }
-const selectedTargetCount=[...selectedByLevel.values()].reduce((sum,group)=>sum+group.length,0);
+for (const group of remainingByLevel.values()) {
+  group.sort((left,right)=>
+    left.passageId.localeCompare(right.passageId)||
+    left.sentenceIndex-right.sentenceIndex
+  );
+}
+const selected=[
+  ...requiredTargetSelection,
+  ...roundRobinTake(remainingByLevel,sentenceLimit-requiredTargetSelection.length,selectedSet)
+];
+if (selected.length!==sentenceLimit) {
+  throw new Error("Unable to select exactly "+sentenceLimit+" candidate sentences");
+}
+const selectedTargetCount=selected.filter(item=>item.matches.length>0).length;
 if (selectedTargetCount<exerciseLimit) {
-  throw new Error("Selected 1000-sentence corpus retained only "+selectedTargetCount+" stable-target sentences; need "+exerciseLimit);
+  throw new Error("Selected corpus retained only "+selectedTargetCount+" stable-target sentences; need "+exerciseLimit);
 }
-const exerciseCandidates=[];
-let round=0;
-while (exerciseCandidates.length<exerciseLimit) {
-  let added=false;
-  for (const level of [...selectedByLevel.keys()].sort((a,b)=>a-b)) {
-    const group=selectedByLevel.get(level);
-    const candidate=group?.[round];
-    if (!candidate) continue;
-    exerciseCandidates.push(candidate);
-    added=true;
-    if (exerciseCandidates.length>=exerciseLimit) break;
-  }
-  if (!added) break;
-  round++;
-}
-if (exerciseCandidates.length<exerciseLimit) {
-  throw new Error("Unable to spread "+exerciseLimit+" cloze exercises across selected sentence corpus");
-}
+const exerciseCandidates=[...requiredTargetSelection];
 
 const exercises=exerciseCandidates.map(candidate=>{
   const best=[...candidate.matches].sort((a,b)=>
