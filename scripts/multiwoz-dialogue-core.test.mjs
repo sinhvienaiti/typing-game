@@ -12,10 +12,10 @@ test("parses a MultiWOZ 2.2 dialogue into a bounded turn model",()=>{
     dialogue_id:"D1",
     services:["hotel"],
     turns:[
-      {speaker:"USER",utterance:" I need a quiet hotel. "},
-      {speaker:"SYSTEM",utterance:"Which area would you prefer?"},
-      {speaker:"USER",utterance:"Somewhere near the centre, please."},
-      {speaker:"SYSTEM",utterance:"I can help with that."}
+      {speaker:"USER",utterance:" I need a quiet hotel near the centre for a short weekend stay. "},
+      {speaker:"SYSTEM",utterance:"Which price range would you prefer for the hotel, and do you need free parking?"},
+      {speaker:"USER",utterance:"I would prefer a moderate price, and free parking would be helpful for our trip."},
+      {speaker:"SYSTEM",utterance:"I can help with that and suggest a suitable hotel near the centre."}
     ]
   });
   assert.deepEqual(parsed?.services,["hotel"]);
