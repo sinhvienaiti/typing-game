@@ -199,6 +199,35 @@ if (exercisePilot) {
 
 
 
+
+const typingTextSentencePath=path.join(root,"content","english","review-queues","typing-text-e06-sentences.json");
+const typingTextExercisePath=path.join(root,"content","english","review-queues","typing-text-e06-exercises.json");
+try {
+  await fs.access(typingTextSentencePath);
+  await fs.access(typingTextExercisePath);
+  const derivedSentences=await validateFile("content/english/review-queues/typing-text-e06-sentences.json","sentence-set.schema.json");
+  const derivedExercises=await validateFile("content/english/review-queues/typing-text-e06-exercises.json","exercise-set.schema.json");
+  if (derivedSentences&&derivedExercises) {
+    if (derivedSentences.records.length!==1000) errors.push("derived E06 corpus must contain exactly 1000 sentences");
+    if (derivedExercises.records.length!==300) errors.push("derived E06 corpus must contain exactly 300 exercises");
+    const derivedById=new Map(derivedSentences.records.map(item=>[item.id,item]));
+    for (const sentence of derivedSentences.records) {
+      if (sentence.quality?.state!=="candidate") errors.push(sentence.id+": derived E06 sentence must remain candidate");
+    }
+    for (const exercise of derivedExercises.records) {
+      if (exercise.quality?.state!=="candidate") errors.push(exercise.id+": derived E06 exercise must remain candidate");
+      if (exercise.type!=="cloze"||!exercise.prompt.includes("___")) errors.push(exercise.id+": derived E06 exercise must be cloze");
+      const source=derivedById.get(exercise.sourceSentenceIds?.[0]);
+      if (!source) errors.push(exercise.id+": derived E06 source sentence is missing");
+      else if (!exercise.acceptedAnswers.some(answer=>normalizedText(source.text).includes(normalizedText(answer)))) {
+        errors.push(exercise.id+": derived E06 accepted answer is absent from source sentence");
+      }
+    }
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("derived E06 validation failed: "+error.message);
+}
+
 const oewnPinnedPilotPath=path.join(root,"content","english","review-queues","oewn-2025-pilot.json");
 try {
   await fs.access(oewnPinnedPilotPath);

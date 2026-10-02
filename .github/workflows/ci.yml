@@ -75,6 +75,21 @@ jobs:
           pnpm typing-texts:generate
           git diff --exit-code -- shared/typing-texts/index.json
 
+      - name: Build E06 typing-text candidate corpus
+        run: |
+          pnpm english-content:derive:typing-texts
+          pnpm english-content:e06-scale
+
+      - name: Upload E06 typing-text candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: typing-text-e06-candidates-${{ github.sha }}
+          path: |
+            content/english/review-queues/typing-text-e06-sentences.json
+            content/english/review-queues/typing-text-e06-exercises.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Checkout pinned Open English WordNet source
         uses: actions/checkout@v4
         with:
@@ -152,6 +167,8 @@ jobs:
           node --check scripts/oewn-pinned-core.mjs
           node --check scripts/import-oewn-pinned-pilot.mjs
           node --check scripts/report-english-content-e03.mjs
+          node --check scripts/derive-typing-text-e06.mjs
+          node --check scripts/report-english-content-e06-scale.mjs
           node --check shared/english-content/query.mjs
           node --check shared/english-content/runtime-loader.mjs
           node --check shared/english-content/capabilities.mjs
