@@ -156,6 +156,25 @@ if (phrasePilot) {
   for (const record of phrasePilot.records) if (record.quality?.state!=="draft") errors.push(record.id+": E04 phrase must remain draft before review");
 }
 
+const grammarCorrectionPath=path.join(root,"content","english","review-queues","grammar-e06-corrections.json");
+try {
+  await fs.access(grammarCorrectionPath);
+  const corrections=await validateFile("content/english/review-queues/grammar-e06-corrections.json","exercise-set.schema.json");
+  const transformations=await validateFile("content/english/review-queues/grammar-e06-transformations.json","exercise-set.schema.json");
+  if (corrections?.records.length!==100) errors.push("E06 grammar corrections must contain exactly 100 records");
+  if (transformations?.records.length!==100) errors.push("E06 grammar transformations must contain exactly 100 records");
+  for (const record of corrections?.records??[]) {
+    if (record.type!=="error-correction") errors.push(record.id+": E06 correction type mismatch");
+    if (record.quality?.state!=="candidate") errors.push(record.id+": E06 correction must remain candidate");
+  }
+  for (const record of transformations?.records??[]) {
+    if (record.type!=="transformation") errors.push(record.id+": E06 transformation type mismatch");
+    if (record.quality?.state!=="candidate") errors.push(record.id+": E06 transformation must remain candidate");
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("E06 grammar candidate validation failed: "+error.message);
+}
+
 const tatoebaSentencePath=path.join(root,"content","english","review-queues","tatoeba-e06-sentences.json");
 try {
   await fs.access(tatoebaSentencePath);

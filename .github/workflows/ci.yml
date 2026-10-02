@@ -90,6 +90,21 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Build E06 grammar correction and transformation candidates
+        run: |
+          pnpm english-content:derive:grammar-e06
+          pnpm english-content:e06:grammar
+
+      - name: Upload E06 grammar candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: grammar-e06-candidates-${{ github.sha }}
+          path: |
+            content/english/review-queues/grammar-e06-corrections.json
+            content/english/review-queues/grammar-e06-transformations.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Probe Tatoeba EN-VI translation source
         run: |
           mkdir -p .cache/english-content/tatoeba
@@ -221,6 +236,8 @@ jobs:
           node --check scripts/report-english-content-viwiktionary.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
+          node --check scripts/derive-grammar-e06.mjs
+          node --check scripts/report-english-content-e06-grammar.mjs
           node --check scripts/tatoeba-pair-core.mjs
           node --check scripts/import-tatoeba-e06-translations.mjs
           node --check scripts/report-english-content-tatoeba.mjs
