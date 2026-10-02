@@ -17,25 +17,32 @@ const args=new Map(process.argv.slice(2).filter(value=>value.startsWith("--")).m
 }));
 const pin=await readJson(path.join(root,"content","english","sources","multiwoz-e06-dialogue.json"));
 const sourceDir=path.resolve(root,args.get("--source-dir")??".cache/english-content/multiwoz");
-const sourceFile=path.join(sourceDir,pin.path);
+const sourceSpecs=[
+  {path:pin.path,blobSha1:pin.blobSha1},
+  ...(pin.additionalFiles??[]),
+];
 const output=path.resolve(root,args.get("--output")??"content/english/review-queues/multiwoz-e06-dialogues.json");
 const reportOutput=path.resolve(root,args.get("--report")??"content/english/review-queues/multiwoz-e06-source-report.json");
-const observedBlobSha1=await gitBlobSha1(sourceFile);
-if (observedBlobSha1!==pin.blobSha1) {
-  throw new Error("MultiWOZ source blob mismatch. Expected "+pin.blobSha1+", got "+observedBlobSha1);
-}
-
-const raw=JSON.parse(await fs.readFile(sourceFile,"utf8"));
-if (!Array.isArray(raw)) throw new TypeError("MultiWOZ dialogue file must be an array");
+const observedFiles=[];
 const candidates=[];
 const seenDialogueText=new Set();
-for (const item of raw) {
-  const dialogue=parseMultiwozDialogue(item);
-  if (dialogue===null||!isLearningDialogue(dialogue)) continue;
-  const key=dialogue.turns.map(turn=>normalizeDialogueText(turn.utterance)).join("\u0000");
-  if (seenDialogueText.has(key)) continue;
-  seenDialogueText.add(key);
-  candidates.push(dialogue);
+for (const sourceSpec of sourceSpecs) {
+  const sourceFile=path.join(sourceDir,sourceSpec.path);
+  const observedBlobSha1=await gitBlobSha1(sourceFile);
+  if (observedBlobSha1!==sourceSpec.blobSha1) {
+    throw new Error("MultiWOZ source blob mismatch for "+sourceSpec.path+". Expected "+sourceSpec.blobSha1+", got "+observedBlobSha1);
+  }
+  observedFiles.push({path:sourceSpec.path,blobSha1:observedBlobSha1});
+  const raw=JSON.parse(await fs.readFile(sourceFile,"utf8"));
+  if (!Array.isArray(raw)) throw new TypeError("MultiWOZ dialogue file must be an array: "+sourceSpec.path);
+  for (const item of raw) {
+    const dialogue=parseMultiwozDialogue(item);
+    if (dialogue===null||!isLearningDialogue(dialogue)) continue;
+    const key=dialogue.turns.map(turn=>normalizeDialogueText(turn.utterance)).join("\u0000");
+    if (seenDialogueText.has(key)) continue;
+    seenDialogueText.add(key);
+    candidates.push({...dialogue,sourcePath:sourceSpec.path});
+  }
 }
 candidates.sort((a,b)=>a.dialogueId.localeCompare(b.dialogueId));
 const selected=selectEvenly(candidates,100);
@@ -67,7 +74,7 @@ const records=selected.map(dialogue=>({
     sources:[{
       dataset:"multiwoz",
       sourceId:dialogue.dialogueId,
-      sourceUrl:"https://github.com/"+pin.repository+"/blob/"+pin.commit+"/"+pin.path,
+      sourceUrl:"https://github.com/"+pin.repository+"/blob/"+pin.commit+"/"+dialogue.sourcePath,
       snapshot:pin.commit,
       license:pin.license,
       attribution:pin.attribution,
@@ -85,8 +92,7 @@ await Promise.all([
     source:"multiwoz",
     version:pin.version,
     commit:pin.commit,
-    path:pin.path,
-    observedBlobSha1,
+    observedFiles,
     candidateDialogues:candidates.length,
     selectedDialogues:records.length,
   }),"utf8"),
@@ -94,5 +100,5 @@ await Promise.all([
 console.log("MultiWOZ E06 dialogue pilot:",JSON.stringify({
   candidateDialogues:candidates.length,
   selectedDialogues:records.length,
-  observedBlobSha1,
+  observedFiles,
 }));
