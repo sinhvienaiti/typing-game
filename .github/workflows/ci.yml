@@ -90,6 +90,38 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Probe Tatoeba EN-VI translation source
+        run: |
+          mkdir -p .cache/english-content/tatoeba
+          curl -fL --retry 3 --retry-all-errors \
+            https://downloads.tatoeba.org/exports/per_language/eng/eng_sentences.tsv.bz2 \
+            -o .cache/english-content/tatoeba/eng_sentences.tsv.bz2
+          curl -fL --retry 3 --retry-all-errors \
+            https://downloads.tatoeba.org/exports/per_language/vie/vie_sentences.tsv.bz2 \
+            -o .cache/english-content/tatoeba/vie_sentences.tsv.bz2
+          curl -fL --retry 3 --retry-all-errors \
+            https://downloads.tatoeba.org/exports/per_language/eng/eng-vie_links.tsv.bz2 \
+            -o .cache/english-content/tatoeba/eng-vie_links.tsv.bz2
+          bunzip2 -kc .cache/english-content/tatoeba/eng_sentences.tsv.bz2 > .cache/english-content/tatoeba/eng_sentences.tsv
+          bunzip2 -kc .cache/english-content/tatoeba/vie_sentences.tsv.bz2 > .cache/english-content/tatoeba/vie_sentences.tsv
+          bunzip2 -kc .cache/english-content/tatoeba/eng-vie_links.tsv.bz2 > .cache/english-content/tatoeba/eng-vie_links.tsv
+          pnpm english-content:import:tatoeba -- \
+            --eng=.cache/english-content/tatoeba/eng_sentences.tsv \
+            --vie=.cache/english-content/tatoeba/vie_sentences.tsv \
+            --links=.cache/english-content/tatoeba/eng-vie_links.tsv
+          pnpm english-content:e06:translation
+
+      - name: Upload Tatoeba E06 translation pilot
+        uses: actions/upload-artifact@v4
+        with:
+          name: tatoeba-e06-translation-${{ github.sha }}
+          path: |
+            content/english/review-queues/tatoeba-e06-sentences.json
+            content/english/review-queues/tatoeba-e06-translations.json
+            content/english/review-queues/tatoeba-e06-source-report.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Checkout pinned Open English WordNet source
         uses: actions/checkout@v4
         with:
@@ -189,6 +221,9 @@ jobs:
           node --check scripts/report-english-content-viwiktionary.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
+          node --check scripts/tatoeba-pair-core.mjs
+          node --check scripts/import-tatoeba-e06-translations.mjs
+          node --check scripts/report-english-content-tatoeba.mjs
           node --check shared/english-content/query.mjs
           node --check shared/english-content/runtime-loader.mjs
           node --check shared/english-content/capabilities.mjs

@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -27,6 +27,7 @@ async function validateFile(relative,schemaName) {
   return data;
 }
 const sources=await validateFile("content/english/sources/manifest.json","source-manifest.schema.json");
+await validateFile("content/english/sources/tatoeba-eng-vie-pilot.json","tatoeba-source-pin.schema.json");
 const authorCatalog=await validateFile("content/english/grammar/topic-catalog.json","topic-catalog.schema.json");
 const sharedCatalog=await validateFile("shared/curriculum/topic-catalog.json","topic-catalog.schema.json");
 const expectedCounts={A1:45,A2:50,B1:60,B2:60,C1:50,C2:35};
@@ -153,6 +154,25 @@ if (phrasePilot) {
   if (pvCount!==50) errors.push("E04 phrase pilot must contain exactly 50 phrasal verbs");
   if (chunkIdiomCount!==50) errors.push("E04 phrase pilot must contain exactly 50 chunks/idioms");
   for (const record of phrasePilot.records) if (record.quality?.state!=="draft") errors.push(record.id+": E04 phrase must remain draft before review");
+}
+
+const tatoebaSentencePath=path.join(root,"content","english","review-queues","tatoeba-e06-sentences.json");
+try {
+  await fs.access(tatoebaSentencePath);
+  const tatoebaSentences=await validateFile("content/english/review-queues/tatoeba-e06-sentences.json","sentence-set.schema.json");
+  const tatoebaExercises=await validateFile("content/english/review-queues/tatoeba-e06-translations.json","exercise-set.schema.json");
+  await validateFile("content/english/review-queues/tatoeba-e06-source-report.json","tatoeba-source-report.schema.json");
+  if (tatoebaSentences?.records.length!==300) errors.push("Tatoeba E06 must contain 300 English sentences");
+  if (tatoebaExercises?.records.length!==300) errors.push("Tatoeba E06 must contain 300 translation exercises");
+  for (const record of tatoebaSentences?.records??[]) {
+    if (record.quality?.state!=="candidate") errors.push(record.id+": Tatoeba sentence must remain candidate");
+  }
+  for (const record of tatoebaExercises?.records??[]) {
+    if (record.type!=="translation") errors.push(record.id+": Tatoeba exercise must be translation");
+    if (record.quality?.state!=="candidate") errors.push(record.id+": Tatoeba translation must remain candidate");
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("Tatoeba E06 validation failed: "+error.message);
 }
 
 const oewnQueuePath=path.join(root,"content","english","review-queues","oewn-pilot.json");

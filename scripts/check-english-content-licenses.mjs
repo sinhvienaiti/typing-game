@@ -14,6 +14,10 @@ for (const id of ["verbnet","cambridge-profile","viwiktionary-en"]) {
   const source=manifest.sources.find(item=>item.id===id);
   if (!source||source.publishAllowed!==false) errors.push(id+": publish gate must be false");
 }
+const tatoebaSource=manifest.sources.find(item=>item.id==="tatoeba");
+if (!tatoebaSource||tatoebaSource.publishAllowed!==true||tatoebaSource.attributionRequired!==true) {
+  errors.push("tatoeba: publication must require attribution");
+}
 const viSource=manifest.sources.find(item=>item.id==="viwiktionary-en");
 if (!viSource?.checksumSha256||!/^[a-f0-9]{64}$/.test(viSource.checksumSha256)) {
   errors.push("viwiktionary-en: pinned checksum is required");
