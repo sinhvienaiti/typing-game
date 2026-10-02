@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/sense.schema.json",
+  "title": "sense",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "quality",
+    "provenance",
+    "lexemeId",
+    "partOfSpeech",
+    "definitionEn",
+    "explanationVi"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^sense\\.[a-z0-9._-]+$"
+    },
+    "quality": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+    },
+    "provenance": {
+      "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+    },
+    "lexemeId": {
+      "type": "string",
+      "pattern": "^lex\\.en\\."
+    },
+    "partOfSpeech": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "definitionEn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "explanationVi": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 3000
+    },
+    "register": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 60
+      }
+    },
+    "exampleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sent\\."
+      }
+    }
+  }
+}

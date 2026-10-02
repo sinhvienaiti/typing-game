@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/phrase.schema.json",
+  "title": "phrase",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "quality",
+    "provenance",
+    "type",
+    "text",
+    "key",
+    "meaningVi"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(pv|idiom|chunk)\\.[a-z0-9._-]+$"
+    },
+    "quality": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+    },
+    "provenance": {
+      "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "phrasal-verb",
+        "idiom",
+        "chunk"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 300
+    },
+    "key": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/normalizedEnglishKey"
+    },
+    "meaningVi": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1500
+    },
+    "cefr": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/cefr"
+    },
+    "transitivity": {
+      "type": "string",
+      "enum": [
+        "transitive",
+        "intransitive",
+        "both",
+        "not-applicable"
+      ]
+    },
+    "separability": {
+      "type": "string",
+      "enum": [
+        "separable",
+        "inseparable",
+        "both",
+        "not-applicable"
+      ]
+    },
+    "exampleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sent\\."
+      }
+    }
+  }
+}

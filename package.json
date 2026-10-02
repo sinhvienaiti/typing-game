@@ -45,7 +45,14 @@
     "dev:space:app": "pnpm --dir games/space-typing dev",
     "build:space": "pnpm --dir games/space-typing build",
     "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs && node --check shared/learning/profile-backup.mjs && node --check shared/learning/review-lifecycle.mjs",
-    "learning:test": "node --test shared/learning/*.test.mjs"
+    "learning:test": "node --test shared/learning/*.test.mjs",
+    "english-content:generate": "node scripts/generate-english-content.mjs",
+    "english-content:validate": "node scripts/validate-english-content.mjs",
+    "english-content:test": "node --test scripts/english-content-core.test.mjs",
+    "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
+    "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
+    "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
+    "english-content:check": "pnpm english-content:validate && pnpm english-content:test && pnpm english-content:licenses && pnpm english-content:dedupe"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

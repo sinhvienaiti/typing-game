@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/lexeme.schema.json",
+  "title": "lexeme",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "quality",
+    "provenance",
+    "headword",
+    "headwordKey"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^lex\\.en\\.[a-z0-9._-]+$"
+    },
+    "quality": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+    },
+    "provenance": {
+      "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+    },
+    "headword": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "headwordKey": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/normalizedEnglishKey"
+    },
+    "legacyVocabularyRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      }
+    },
+    "partsOfSpeech": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 40
+      }
+    },
+    "senseIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sense\\."
+      }
+    },
+    "forms": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 300
+      }
+    },
+    "usageRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^usage\\."
+      }
+    }
+  }
+}

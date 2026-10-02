@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "oewn",
+      "name": "Open English WordNet",
+      "url": "https://en-word.net/",
+      "license": "CC-BY-4.0",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": null,
+      "notes": "Enable imports only after pinning an exact snapshot/checksum."
+    },
+    {
+      "id": "wiktionary",
+      "name": "English Wiktionary via Wiktextract/Kaikki",
+      "url": "https://en.wiktionary.org/",
+      "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": null,
+      "notes": "Content license is separate from Wiktextract software license; media/audio handled separately."
+    },
+    {
+      "id": "tatoeba",
+      "name": "Tatoeba sentence corpus",
+      "url": "https://tatoeba.org/en/downloads",
+      "license": "CC-BY-2.0-FR-or-record-specific",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": null,
+      "notes": "Preserve sentence-level license/attribution. Audio is separate."
+    },
+    {
+      "id": "verbnet",
+      "name": "VerbNet",
+      "url": "https://verbs.colorado.edu/verbnet/",
+      "license": "LicenseRef-VerbNet-Permission-Required",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "blocked",
+      "snapshot": null,
+      "notes": "Publication blocked until exact redistribution rights for the chosen version are verified."
+    },
+    {
+      "id": "cambridge-profile",
+      "name": "Cambridge English Grammar/Vocabulary Profile",
+      "url": "https://englishprofile.org/",
+      "license": "LicenseRef-Proprietary-Reference-Only",
+      "publishAllowed": false,
+      "attributionRequired": false,
+      "status": "blocked",
+      "snapshot": null,
+      "notes": "Reference only. Do not copy/scrape proprietary entries/examples."
+    },
+    {
+      "id": "legacy-vocabulary",
+      "name": "Typing Game shared vocabulary",
+      "url": "shared/vocabulary/ATTRIBUTION.md",
+      "license": "CC-BY-SA-4.0",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "import-enabled",
+      "snapshot": "parent-baseline-9edbba00",
+      "notes": "Existing 18k EN/VI/IPA library; schema remains unchanged."
+    },
+    {
+      "id": "project-original",
+      "name": "Typing Game project-authored English learning content",
+      "url": "content/english/",
+      "license": "LicenseRef-Project-Original",
+      "publishAllowed": true,
+      "attributionRequired": false,
+      "status": "import-enabled",
+      "snapshot": "2026-10",
+      "notes": "Original project content; no broader redistribution license is asserted by this identifier."
+    }
+  ]
+}

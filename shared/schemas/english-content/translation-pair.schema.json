@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/translation-pair.schema.json",
+  "title": "translation-pair",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "quality",
+    "provenance",
+    "sourceLanguage",
+    "targetLanguage",
+    "sourceText",
+    "targetText",
+    "acceptedAlternatives"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^trans\\.[a-z0-9._-]+$"
+    },
+    "quality": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+    },
+    "provenance": {
+      "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+    },
+    "sourceLanguage": {
+      "type": "string",
+      "enum": [
+        "en",
+        "vi"
+      ]
+    },
+    "targetLanguage": {
+      "type": "string",
+      "enum": [
+        "en",
+        "vi"
+      ]
+    },
+    "sourceText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "targetText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "acceptedAlternatives": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1200
+      }
+    },
+    "grammarIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^gr\\."
+      }
+    }
+  }
+}

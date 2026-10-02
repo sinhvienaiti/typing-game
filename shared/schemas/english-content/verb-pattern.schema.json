@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/verb-pattern.schema.json",
+  "title": "verb-pattern",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "quality",
+    "provenance",
+    "lemma",
+    "frame",
+    "explanationVi"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^pat\\.[a-z0-9._-]+$"
+    },
+    "quality": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+    },
+    "provenance": {
+      "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+    },
+    "lemma": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/normalizedEnglishKey"
+    },
+    "frame": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 300
+    },
+    "explanationVi": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "exampleIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^sent\\."
+      }
+    }
+  }
+}
