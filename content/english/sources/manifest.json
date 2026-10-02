@@ -10,7 +10,10 @@
       "attributionRequired": true,
       "status": "reference",
       "snapshot": "2025-12-31",
-      "notes": "Pinned reference release: Open English WordNet 2025, released 2025-12-31. Import code must still verify the downloaded file checksum before enabling publication."
+      "notes": "Pinned Open English WordNet 2025 release (2025-12-31). The pilot importer uses the official lemma JSON API and writes candidate review data only. Full-release publication must pin and verify the release SHA-256 first.",
+      "releaseUrl": "https://en-word.net/static/english-wordnet-2025-json.zip",
+      "apiTemplate": "https://en-word.net/api/lemma/{lemma}",
+      "checksumSha256": null
     },
     {
       "id": "wiktionary",

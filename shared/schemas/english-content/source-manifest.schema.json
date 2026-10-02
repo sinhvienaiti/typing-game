@@ -72,6 +72,23 @@
           "notes": {
             "type": "string",
             "maxLength": 2000
+          },
+          "releaseUrl": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "apiTemplate": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "checksumSha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
           }
         }
       }

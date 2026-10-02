@@ -48,12 +48,13 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "english-content:generate": "node scripts/generate-english-content.mjs",
     "english-content:validate": "node scripts/validate-english-content.mjs",
-    "english-content:test": "node --test scripts/english-content-core.test.mjs",
+    "english-content:test": "node --test scripts/english-content-core.test.mjs shared/english-content/*.test.mjs",
     "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
     "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
     "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
     "english-content:check": "pnpm english-content:validate && pnpm english-content:test && pnpm english-content:licenses && pnpm english-content:dedupe && pnpm english-content:pilot",
-    "english-content:pilot": "node scripts/report-english-content-pilot.mjs"
+    "english-content:pilot": "node scripts/report-english-content-pilot.mjs",
+    "english-content:import:oewn": "node scripts/import-oewn-pilot.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
