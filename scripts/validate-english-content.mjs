@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -229,6 +229,24 @@ try {
   }
 } catch (error) {
   if (error?.code!=="ENOENT") errors.push("derived E06 validation failed: "+error.message);
+}
+
+
+const viWiktionaryQueuePath=path.join(root,"content","english","review-queues","viwiktionary-en-pilot.json");
+try {
+  await fs.access(viWiktionaryQueuePath);
+  const viQueue=await validateFile("content/english/review-queues/viwiktionary-en-pilot.json","viwiktionary-review-queue.schema.json");
+  if (viQueue) {
+    if (viQueue.records.length+viQueue.misses.length!==300) errors.push("Vietnamese Wiktionary queue must account for 300 lexical seeds");
+    const source=sources?.sources?.find(item=>item.id==="viwiktionary-en");
+    if (source?.checksumSha256&&source.checksumSha256!==viQueue.sourceSha256) errors.push("Vietnamese Wiktionary queue checksum does not match source manifest");
+    for (const record of viQueue.records) {
+      if (record.quality?.state!=="candidate") errors.push(record.lexemeId+": Vietnamese Wiktionary import must remain candidate");
+      if (!Number.isInteger(vocabLookup.entries?.[record.headwordKey])) errors.push(record.lexemeId+": Vietnamese Wiktionary headword missing from legacy lookup");
+    }
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("Vietnamese Wiktionary queue validation failed: "+error.message);
 }
 
 const oewnPinnedPilotPath=path.join(root,"content","english","review-queues","oewn-2025-pilot.json");

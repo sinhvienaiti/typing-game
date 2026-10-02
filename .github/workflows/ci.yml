@@ -111,6 +111,24 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Probe Vietnamese Wiktionary English gloss source
+        run: |
+          mkdir -p .cache/english-content/viwiktionary
+          curl -fL --retry 3 --retry-all-errors \
+            https://kaikki.org/viwiktionary/raw-wiktextract-data.jsonl.gz \
+            -o .cache/english-content/viwiktionary/raw-wiktextract-data.jsonl.gz
+          gzip -t .cache/english-content/viwiktionary/raw-wiktextract-data.jsonl.gz
+          pnpm english-content:import:viwiktionary -- --input=.cache/english-content/viwiktionary/raw-wiktextract-data.jsonl.gz
+          pnpm english-content:e03:vi
+
+      - name: Upload Vietnamese Wiktionary E03 probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: viwiktionary-e03-pilot-${{ github.sha }}
+          path: content/english/review-queues/viwiktionary-en-pilot.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Validate rich English learning content
         run: |
           pnpm english-content:validate
@@ -167,6 +185,8 @@ jobs:
           node --check scripts/oewn-pinned-core.mjs
           node --check scripts/import-oewn-pinned-pilot.mjs
           node --check scripts/report-english-content-e03.mjs
+          node --check scripts/import-viwiktionary-pilot.mjs
+          node --check scripts/report-english-content-viwiktionary.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
           node --check shared/english-content/query.mjs

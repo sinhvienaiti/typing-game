@@ -61,7 +61,9 @@
     "english-content:import:oewn:pinned": "node scripts/import-oewn-pinned-pilot.mjs",
     "english-content:e03": "node scripts/report-english-content-e03.mjs",
     "english-content:derive:typing-texts": "node scripts/derive-typing-text-e06.mjs",
-    "english-content:e06-scale": "node scripts/report-english-content-e06-scale.mjs"
+    "english-content:e06-scale": "node scripts/report-english-content-e06-scale.mjs",
+    "english-content:import:viwiktionary": "node scripts/import-viwiktionary-pilot.mjs",
+    "english-content:e03:vi": "node scripts/report-english-content-viwiktionary.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
