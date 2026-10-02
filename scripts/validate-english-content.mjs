@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -285,6 +285,20 @@ try {
   if (error?.code!=="ENOENT") errors.push("derived E06 validation failed: "+error.message);
 }
 
+
+const e03SenseReviewPath=path.join(root,"content","english","review-queues","e03-sense-alignment-review.json");
+try {
+  await fs.access(e03SenseReviewPath);
+  const packet=await validateFile("content/english/review-queues/e03-sense-alignment-review.json","e03-sense-review.schema.json");
+  if (packet?.records.length!==300) errors.push("E03 sense review packet must contain exactly 300 records");
+  if ((packet?.metrics?.bothSources??0)<290) errors.push("E03 bilingual source coverage below 290/300");
+  for (const record of packet?.records??[]) {
+    if (record.quality?.state!=="candidate") errors.push(record.lexemeId+": E03 sense review must remain candidate");
+    if (record.quality?.checks?.senseAlignment?.status!=="pending") errors.push(record.lexemeId+": E03 sense alignment must remain pending");
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("E03 sense review validation failed: "+error.message);
+}
 
 const viWiktionaryQueuePath=path.join(root,"content","english","review-queues","viwiktionary-en-pilot.json");
 try {

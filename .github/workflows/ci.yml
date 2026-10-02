@@ -204,6 +204,17 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Build E03 bilingual sense review packet
+        run: pnpm english-content:e03:sense-review
+
+      - name: Upload E03 bilingual sense review packet
+        uses: actions/upload-artifact@v4
+        with:
+          name: e03-sense-review-${{ github.sha }}
+          path: content/english/review-queues/e03-sense-alignment-review.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Validate rich English learning content
         run: |
           pnpm english-content:validate
@@ -262,6 +273,8 @@ jobs:
           node --check scripts/report-english-content-e03.mjs
           node --check scripts/import-viwiktionary-pilot.mjs
           node --check scripts/report-english-content-viwiktionary.mjs
+          node --check scripts/build-e03-sense-review.mjs
+          node --check scripts/report-english-content-e03-sense-review.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
           node --check scripts/derive-grammar-e06.mjs

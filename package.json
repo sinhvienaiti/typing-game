@@ -69,7 +69,8 @@
     "english-content:derive:grammar-e06": "node scripts/derive-grammar-e06.mjs",
     "english-content:e06:grammar": "node scripts/report-english-content-e06-grammar.mjs",
     "english-content:import:multiwoz": "node scripts/import-multiwoz-e06-dialogues.mjs",
-    "english-content:e06:dialogue": "node scripts/report-english-content-multiwoz.mjs"
+    "english-content:e06:dialogue": "node scripts/report-english-content-multiwoz.mjs",
+    "english-content:e03:sense-review": "node scripts/build-e03-sense-review.mjs && node scripts/report-english-content-e03-sense-review.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
