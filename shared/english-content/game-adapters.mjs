@@ -24,6 +24,20 @@ function firstForm(record){
   }
   return null;
 }
+function grammarTopicItem(record){
+  const answer=firstForm(record);
+  if(answer===null) throw new TypeError(record.id+": grammar topic has no playable form");
+  return {
+    contentId:text(record.id,"grammar id"),
+    entityType:"grammar",
+    entityId:text(record.id,"grammar id"),
+    promptText:text(record.title,"grammar title")+" — "+text(record.objective,"grammar objective"),
+    answerText:text(answer,"grammar answer"),
+    ...(typeof record.concept?.vi==="string"&&record.concept.vi.trim()!==""
+      ?{meaningVi:text(record.concept.vi,"grammar concept.vi")}
+      :{}),
+  };
+}
 function exerciseItem(record){
   const answer=Array.isArray(record.acceptedAnswers)
     ?record.acceptedAnswers.find(value=>typeof value==="string"&&value.trim()!=="")
@@ -59,7 +73,7 @@ export function englishActivityItemsFromRecords(activity,records,options={}){
       });
       continue;
     }
-    if(activity==="phrasal-verb"||activity==="chunk"){
+    if(activity==="phrasal-verb"||activity==="chunk"||activity==="idiom"){
       if(record.type!==activity) throw new TypeError(record.id+": phrase type does not match "+activity);
       items.push({
         contentId:text(record.id,"phrase id"),
@@ -72,6 +86,11 @@ export function englishActivityItemsFromRecords(activity,records,options={}){
       continue;
     }
     if(activity==="example-typing"||activity==="listening-typing"){
+      if(activity==="listening-typing"&&record.type==="listening-typing"){
+        const item=exerciseItem(record);
+        items.push({...item,audioText:item.answerText});
+        continue;
+      }
       const sentenceText=text(record.text,"sentence text");
       items.push({
         contentId:text(record.id,"sentence id"),
@@ -83,31 +102,49 @@ export function englishActivityItemsFromRecords(activity,records,options={}){
       });
       continue;
     }
-    if(activity==="translation"||activity==="contextual-usage"){
-      const item=exerciseItem(record);
-      if(activity==="translation"&&record.type!=="translation") {
-        throw new TypeError(record.id+": translation adapter requires translation exercise");
+    if(
+      activity==="translation"||
+      activity==="contextual-usage"||
+      activity==="cloze"||
+      activity==="error-correction"||
+      activity==="sentence-building"||
+      activity==="transformation"
+    ){
+      const expectedType={
+        translation:"translation",
+        "contextual-usage":"contextual-usage",
+        cloze:"cloze",
+        "error-correction":"error-correction",
+        "sentence-building":"sentence-building",
+        transformation:"transformation",
+      }[activity];
+      if(record.type!==expectedType) {
+        throw new TypeError(record.id+": "+activity+" adapter requires "+expectedType+" exercise");
       }
-      if(activity==="contextual-usage"&&record.type!=="contextual-usage") {
-        throw new TypeError(record.id+": contextual adapter requires contextual-usage exercise");
+      items.push(exerciseItem(record));
+      continue;
+    }
+    if(activity==="grammar-topic"){
+      if(typeof record.id!=="string"||!record.id.startsWith("gr.")) {
+        throw new TypeError("grammar-topic requires a grammar topic");
       }
-      items.push(item);
+      items.push(grammarTopicItem(record));
+      continue;
+    }
+    if(activity==="verb-pattern"){
+      items.push({
+        contentId:text(record.id,"verb pattern id"),
+        entityType:"sentence",
+        entityId:text(record.id,"verb pattern id"),
+        promptText:text(record.explanationVi,"verb pattern explanationVi"),
+        answerText:text(record.lemma,"verb pattern lemma")+" · "+text(record.frame,"verb pattern frame"),
+        meaningVi:text(record.explanationVi,"verb pattern explanationVi"),
+      });
       continue;
     }
     if(activity==="grammar-challenge"){
       if(typeof record.id==="string"&&record.id.startsWith("gr.")){
-        const answer=firstForm(record);
-        if(answer===null) throw new TypeError(record.id+": grammar topic has no playable form");
-        items.push({
-          contentId:text(record.id,"grammar id"),
-          entityType:"grammar",
-          entityId:text(record.id,"grammar id"),
-          promptText:text(record.title,"grammar title")+" — "+text(record.objective,"grammar objective"),
-          answerText:text(answer,"grammar answer"),
-          ...(typeof record.concept?.vi==="string"&&record.concept.vi.trim()!==""
-            ?{meaningVi:text(record.concept.vi,"grammar concept.vi")}
-            :{}),
-        });
+        items.push(grammarTopicItem(record));
         continue;
       }
       if(record.type==="grammar-typing"){

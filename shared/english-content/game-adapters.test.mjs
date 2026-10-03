@@ -105,3 +105,69 @@ test("does not let draft or candidate content enter a runtime activity by defaul
     1,
   );
 });
+
+test("adapts Monkeytype grammar-topic and cloze smoke records",()=>{
+  const grammar=buildGameEnglishActivityDataset(
+    "monkeytype",
+    "grammar-topic",
+    [{
+      id:"gr.a1.present-simple-routines",
+      title:"Present Simple",
+      objective:"Describe repeated routines.",
+      forms:{positive:["I work at home."]},
+      quality:published,
+    }],
+    "monkey-grammar",
+  );
+  assert.equal(grammar.items[0].entityType,"grammar");
+  assert.equal(grammar.items[0].entityId,"gr.a1.present-simple-routines");
+
+  const cloze=buildGameEnglishActivityDataset(
+    "monkeytype",
+    "cloze",
+    [{
+      id:"ex.cloze.1",
+      type:"cloze",
+      prompt:"She ___ the bus every morning.",
+      acceptedAnswers:["takes"],
+      sourceSentenceIds:["sent.1"],
+      quality:published,
+    }],
+    "monkey-cloze",
+  );
+  assert.equal(cloze.items[0].entityType,"sentence");
+  assert.equal(cloze.items[0].entityId,"sent.1");
+  assert.equal(cloze.items[0].answerText,"takes");
+});
+
+test("adapts Monkeytype verb patterns and idioms without inventing mastery entity types",()=>{
+  const pattern=buildGameEnglishActivityDataset(
+    "monkeytype",
+    "verb-pattern",
+    [{
+      id:"pat.1",
+      lemma:"want",
+      frame:"verb + to-infinitive",
+      explanationVi:"Dùng want + to V để diễn tả điều muốn làm.",
+      quality:published,
+    }],
+    "monkey-pattern",
+  );
+  assert.equal(pattern.items[0].entityType,"sentence");
+  assert.match(pattern.items[0].answerText,/want/);
+
+  const idiom=buildGameEnglishActivityDataset(
+    "monkeytype",
+    "idiom",
+    [{
+      id:"idiom.1",
+      type:"idiom",
+      text:"break the ice",
+      meaningVi:"phá tan sự ngượng ngùng ban đầu",
+      quality:published,
+    }],
+    "monkey-idiom",
+  );
+  assert.equal(idiom.items[0].entityType,"sentence");
+  assert.equal(idiom.items[0].answerText,"break the ice");
+});
