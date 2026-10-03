@@ -56,20 +56,20 @@ const sentenceRecords=await loadRuntime(sentenceManifest,path.join("shared","sen
 const examples=sentenceRecords.filter(record=>String(record.id??"").startsWith("sent."));
 const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith("ex."));
 
-if (dictionaryManifest.count!==20) errors.push("published dictionary runtime must contain 20 E03 records");
-if (lexemes.length!==10||senses.length!==10) errors.push("published E03 runtime split must be 10 lexemes + 10 senses");
+if (dictionaryManifest.count!==40) errors.push("published dictionary runtime must contain 40 E03 records");
+if (lexemes.length!==20||senses.length!==20) errors.push("published E03 runtime split must be 20 lexemes + 20 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==156) errors.push("published sentence runtime must contain 156 reviewed records");
-if (topics.length!==12||examples.length!==60||exercises.length!==96) {
-  errors.push("published runtime split must be 12 topics + 60 examples + 96 exercises");
+if (sentenceManifest.count!==204) errors.push("published sentence runtime must contain 204 reviewed records");
+if (topics.length!==12||examples.length!==60||exercises.length!==144) {
+  errors.push("published runtime split must be 12 topics + 60 examples + 144 exercises");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
 if (tatoebaExamples.length!==24||tatoebaTranslations.length!==24) errors.push("published Tatoeba slice must expose 24 sentences + 24 translations");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
-if (correctionExercises.length!==24||transformationExercises.length!==24) {
-  errors.push("published E06 reviewed slice must expose 24 correction + 24 transformation exercises");
+if (correctionExercises.length!==48||transformationExercises.length!==48) {
+  errors.push("published E06 reviewed slice must expose 48 correction + 48 transformation exercises");
 }
 
 const senseIds=new Set(senses.map(record=>record.id));

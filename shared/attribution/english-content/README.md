@@ -2,10 +2,10 @@
 
 The reviewed rich runtime currently includes:
 
-- E03 lexical slice: 10 lexemes + 10 normalized senses;
+- E03 lexical slices: 20 lexemes + 20 normalized senses;
 - E04 phrase/pattern slice: 250 records;
 - E05 grammar slice: 12 topics + 36 examples + 24 exercises;
-- E06 grammar exercise slice: 24 error-correction + 24 transformation exercises;
+- E06 grammar exercise slices: 48 error-correction + 48 transformation exercises;
 - E06 translation slice: 24 attributed Tatoeba English sentences + 24 Vietnamese-to-English exercises.
 
 Published attributed sources:

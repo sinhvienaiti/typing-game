@@ -2498,7 +2498,7 @@ This section supersedes the historical checkpoint above.
 
 ### 43.2 E03 lexical enrichment pilot
 
-Pipeline status: **IMPLEMENTED; EDITORIAL ALIGNMENT PENDING**.
+Pipeline status: **IMPLEMENTED; EDITORIAL PROMOTION IN PROGRESS**.
 
 - 300/300 lexeme seeds map to pinned Open English WordNet.
 - 3,334 OEWN senses imported; 3,334/3,334 have English definitions.
@@ -2508,7 +2508,7 @@ Pipeline status: **IMPLEMENTED; EDITORIAL ALIGNMENT PENDING**.
 - Bilingual sense-alignment packet contains 300 records; 294 have both sources and POS overlap.
 - OEWN uses immutable Git commit `dc343f2683279ecbb13fab4e2fd778d7b162d287`.
 - Vietnamese Wiktionary source bytes are pinned by SHA-256.
-- Sense alignment, bilingual wording, naturalness and CEFR decisions remain `pending`; no source importer is allowed to invent those reviews.
+- Editorial promotion has now published **20 reviewed lexemes + 20 normalized primary senses** in two controlled slices. The remaining pilot senses still require manual alignment; no source importer is allowed to invent those reviews.
 
 ### 43.3 E04 phrase / pattern pilot
 
@@ -2535,7 +2535,7 @@ Pilot status: **FIRST REVIEWED VERTICAL SLICE PUBLISHED**.
 
 ### 43.5 E06 sentence / exercise pilot
 
-Pipeline status: **TARGET PILOT COUNTS IMPLEMENTED; REVIEW PENDING**.
+Pipeline status: **TARGET PILOT COUNTS IMPLEMENTED; EDITORIAL PROMOTION IN PROGRESS**.
 
 Current deterministic/reproducible candidate outputs:
 
@@ -2547,7 +2547,7 @@ Current deterministic/reproducible candidate outputs:
 - 100 MultiWOZ 2.2 human-human dialogues selected from 124 candidates after quality filters; both source blobs are pinned.
 - 100 common-mistake candidates derived from the controlled correction pilot rather than from random artificial errors.
 
-Candidate/draft records are not runtime-published.
+Candidate/draft records are not runtime-published. The reviewed E06 grammar overlay now publishes **48 error-correction + 48 transformation exercises**, while the reviewed Tatoeba overlay remains **24 English sentences + 24 translation exercises**.
 
 ### 43.6 E07 parent runtime
 
@@ -2563,7 +2563,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-The first published runtime slice is now non-empty: `shared/grammar` contains 12 topics and `shared/sentences` contains 36 examples + 24 exercises. Dictionary runtime remains empty until lexical sense alignment passes its editorial gate. Phrase runtime is now non-empty after the reviewed E04 promotion.
+Current published runtime: `shared/dictionary` contains **20 lexemes + 20 senses (40)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **60 examples + 144 exercises (204)**; and `shared/phrases` contains **250 phrase/pattern records**. Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2620,7 +2620,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for 3,522 authoring/candidate records: 3,200 candidate + 322 draft. E05 publication is represented by the review ledger/runtime overlay rather than mutating the authoring source state.
+The current controlled E03-E06 manifest accounts for **3,590 authoring/candidate records: 3,200 candidate + 390 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2656,7 +2656,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains the reviewed E05 and E04 slices: 12 grammar records + 60 sentence/exercise records + 250 phrase/pattern records = 322 published rich records. Dictionary runtime remains zero while E03 lexical sense alignment is pending. The attribution runtime remains zero because every currently published E05 record is `project-original`; the E12 audit now derives attribution requirements from provenance of the records actually published, not merely from the existence of third-party sources in the source catalog.
+The rich runtime now contains **506 published rich records**: dictionary 40, grammar 12, sentences 204 and phrases 250. Attribution runtime contains **3 sources** (legacy vocabulary, OEWN and Tatoeba), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2672,6 +2672,7 @@ Important green platform runs:
 - #554 — E04 publication-license gate plus the current E03-E12 pipeline passed together.
 - #555 — published activity-source routing and adapter tests passed.
 - #556 — English Practice portal launcher, runtime routing, full content pipelines and Portal build passed together.
+- #568 — first E03 lexical slice, reviewed E06 grammar slice and reviewed Tatoeba translation slice passed the full Platform CI together.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
@@ -2679,9 +2680,9 @@ Child repositories also passed their relevant CI after E09 integration, includin
 
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
-- review/align OEWN ↔ Vietnamese Wiktionary senses for the 300 lexical pilot;
-- independently review grammar, Vietnamese wording, naturalness and CEFR for E04 phrase/pattern records and E06 candidate corpora;
-- continue promotion in small reviewed slices; E05 has completed the first 72-record `reviewed → published` vertical slice;
+- continue review/alignment of the remaining E03 lexical pilot after the first **20 lexemes + 20 senses** have been promoted;
+- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 48 corrections, 48 transformations and 24 Tatoeba pairs;
+- continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
