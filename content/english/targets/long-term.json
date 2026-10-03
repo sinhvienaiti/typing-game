@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 1,
+  "targets": [
+    {
+      "id": "grammar-topics",
+      "label": "Grammar / usage learning topics",
+      "minimum": 300,
+      "maximum": 320,
+      "sources": [
+        {
+          "path": "content/english/grammar/topic-catalog.json",
+          "collection": "topics"
+        }
+      ]
+    },
+    {
+      "id": "verb-patterns",
+      "label": "Verb patterns",
+      "minimum": 500,
+      "maximum": 1000,
+      "sources": [
+        {
+          "path": "content/english/phrases/pilot-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-02-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-03-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-04-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-05-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-06-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-07-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-08-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-09-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-11-verb-patterns.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-12-verb-patterns.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "collocations",
+      "label": "Collocations",
+      "minimum": 5000,
+      "sources": [
+        {
+          "path": "content/english/phrases/pilot-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-02-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-03-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-04-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-05-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-06-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-07-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-08-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-09-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-11-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-12-collocations.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "phrasal-verbs",
+      "label": "Phrasal verbs",
+      "minimum": 1000,
+      "sources": [
+        {
+          "path": "content/english/phrases/pilot-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-02-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-03-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-04-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-05-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-06-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-07-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-08-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-11-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-12-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idioms-chunks",
+      "label": "Idioms / chunks",
+      "minimum": 2000,
+      "sources": [
+        {
+          "path": "content/english/phrases/pilot-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-02-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-03-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-04-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-05-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-06-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-07-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-08-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-11-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-12-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes",
+      "label": "Common mistakes",
+      "minimum": 2000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/grammar-e06-common-mistakes.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "example-sentences",
+      "label": "Example sentences",
+      "minimum": 100000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/typing-text-e06-sentences.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "translation-pairs",
+      "label": "Translation pairs",
+      "minimum": 20000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/tatoeba-e06-translations.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "cloze-exercises",
+      "label": "Cloze exercises",
+      "minimum": 30000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/typing-text-e06-exercises.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "sentence-transformations",
+      "label": "Sentence transformations",
+      "minimum": 10000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/grammar-e06-transformations.json",
+          "collection": "records"
+        }
+      ]
+    },
+    {
+      "id": "dialogue-examples",
+      "label": "Dialogue examples",
+      "minimum": 10000,
+      "sources": [
+        {
+          "path": "content/english/review-queues/multiwoz-e06-dialogues.json",
+          "collection": "records"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "oewn",
+      "name": "Open English WordNet",
+      "url": "https://en-word.net/",
+      "license": "CC-BY-4.0",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "2025-12-31",
+      "notes": "Open English WordNet 2025 source is pinned to immutable commit dc343f2683279ecbb13fab4e2fd778d7b162d287 for reproducible E03 imports. Live lemma API remains review-only. Publication-grade imports must come from this pinned checkout or a later explicitly reviewed pin.",
+      "releaseUrl": "https://en-word.net/static/english-wordnet-2025-json.zip",
+      "apiTemplate": "https://en-word.net/api/lemma/{lemma}",
+      "checksumSha256": null,
+      "sourceRepository": "globalwordnet/english-wordnet",
+      "sourceCommit": "dc343f2683279ecbb13fab4e2fd778d7b162d287"
+    },
+    {
+      "id": "wiktionary",
+      "name": "English Wiktionary via Wiktextract/Kaikki",
+      "url": "https://en.wiktionary.org/",
+      "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": null,
+      "notes": "Content license is separate from Wiktextract software license; media/audio handled separately."
+    },
+    {
+      "id": "simplewiktionary-en",
+      "name": "Simple English Wiktionary via Wiktextract/Kaikki",
+      "url": "https://simple.wiktionary.org/",
+      "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "simplewiktionary-dump-2026-09-01;kaikki-extract-2026-09-28",
+      "notes": "Pinned E03 morphology/usage review source: Simple English Wiktionary dump 2026-09-01, extracted by Kaikki/Wiktextract on 2026-09-28. Raw compressed snapshot SHA-256 is pinned. Publication remains blocked until lexicographer review of forms/usage labels and normal content review are complete.",
+      "releaseUrl": "https://kaikki.org/simplewiktionary/raw-wiktextract-data.jsonl.gz",
+      "checksumSha256": "ea4342525a35eb32e70f5d9945398f06d4f6160af25b0c340fc84662d27efcdf"
+    },
+    {
+      "id": "viwiktionary-en",
+      "name": "Vietnamese Wiktionary English entries via Wiktextract/Kaikki",
+      "url": "https://vi.wiktionary.org/",
+      "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "viwiktionary-dump-2026-09-01;kaikki-extract-2026-09-28",
+      "notes": "Pinned E03 review source: Vietnamese Wiktionary dump 2026-09-01, extracted by Kaikki/Wiktextract on 2026-09-28. On 2026-10-03 the mutable Kaikki raw URL returned a new compressed-source SHA-256, so an explicit E03 source-refresh review batch was opened. No already-published lexical record is auto-upgraded; future promotions remain blocked until the new normalized candidate output is compared with the previous reviewed snapshot.",
+      "releaseUrl": "https://kaikki.org/viwiktionary/raw-wiktextract-data.jsonl.gz",
+      "checksumSha256": "106d8bd9d1161eef6c9097be4eb8c8c41c3cfd4c8747cf5f78aa541e0759895e"
+    },
+    {
+      "id": "tatoeba",
+      "name": "Tatoeba sentence corpus",
+      "url": "https://tatoeba.org/en/downloads",
+      "license": "CC-BY-2.0-FR-or-record-specific",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "weekly-export-observed-2026-10-03",
+      "notes": "Published E06 Tatoeba records retain their original per-record weekly-export-2026-09-26 provenance. On 2026-10-03 CI observed checksum drift only in eng_sentences.tsv; the Vietnamese sentence and EN↔VI link files remained byte-identical. The explicit refresh review compared CI #577 vs #581 artifacts and found the same 16,267 filtered candidates and the exact same 300 selected pair IDs/texts in the same order. The refreshed English checksum is accepted for future candidate generation without mutating already-published pairs.",
+      "releaseUrl": "https://downloads.tatoeba.org/exports/per_language/"
+    },
+    {
+      "id": "multiwoz",
+      "name": "MultiWOZ 2.2 human-human task-oriented dialogues",
+      "url": "https://github.com/budzianowski/multiwoz",
+      "license": "MIT",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+      "notes": "E06 dialogue pilot is pinned to MultiWOZ repository commit fe0c8e65cfcd8462bd33c86e35f21addc84ca82b and a specific train dialogue blob. Dialogue text remains candidate until learning-suitability review.",
+      "releaseUrl": "https://github.com/budzianowski/multiwoz/tree/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2",
+      "sourceRepository": "budzianowski/multiwoz",
+      "sourceCommit": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b"
+    },
+    {
+      "id": "verbnet",
+      "name": "VerbNet",
+      "url": "https://verbs.colorado.edu/verbnet/",
+      "license": "LicenseRef-VerbNet-Permission-Required",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "blocked",
+      "snapshot": null,
+      "notes": "Publication blocked until exact redistribution rights for the chosen version are verified."
+    },
+    {
+      "id": "cambridge-profile",
+      "name": "Cambridge English Grammar/Vocabulary Profile",
+      "url": "https://englishprofile.org/",
+      "license": "LicenseRef-Proprietary-Reference-Only",
+      "publishAllowed": false,
+      "attributionRequired": false,
+      "status": "blocked",
+      "snapshot": null,
+      "notes": "Reference only. Do not copy/scrape proprietary entries/examples."
+    },
+    {
+      "id": "legacy-vocabulary",
+      "name": "Typing Game shared vocabulary",
+      "url": "shared/vocabulary/ATTRIBUTION.md",
+      "license": "CC-BY-SA-4.0",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "import-enabled",
+      "snapshot": "parent-baseline-9edbba00",
+      "notes": "Existing 18k EN/VI/IPA library; schema remains unchanged."
+    },
+    {
+      "id": "project-original",
+      "name": "Typing Game project-authored English learning content",
+      "url": "content/english/",
+      "license": "LicenseRef-Project-Original",
+      "publishAllowed": true,
+      "attributionRequired": false,
+      "status": "import-enabled",
+      "snapshot": "2026-10",
+      "notes": "Original project content; no broader redistribution license is asserted by this identifier."
+    }
+  ]
+}

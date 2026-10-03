@@ -1,0 +1,2405 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "batches": [
+    {
+      "id": "e03.lexical-enrichment",
+      "phase": "E03",
+      "category": "dictionary",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "lexeme-seeds",
+          "path": "content/english/dictionary/lexeme-seed-pilot.json",
+          "expectedCount": 300,
+          "generated": false,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": []
+        },
+        {
+          "id": "morphology-usage",
+          "path": "content/english/review-queues/simplewiktionary-en-pilot.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "morphologyUsageReview",
+            "naturalness"
+          ]
+        },
+        {
+          "id": "sense-alignment-review",
+          "path": "content/english/review-queues/e03-sense-alignment-review.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "posGrouping",
+            "senseAlignment",
+            "translation",
+            "naturalness"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "sense-alignment",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "morphology-usage-review"
+      ],
+      "gameSmokes": []
+    },
+    {
+      "id": "e03.lexical-reviewed-slice",
+      "phase": "E03",
+      "category": "dictionary",
+      "cefr": [
+        "A1",
+        "A2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-lexemes",
+          "path": "content/english/dictionary/e03-reviewed-lexemes.json",
+          "expectedCount": 40,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "legacyJoin",
+            "sourcePin",
+            "senseAlignment",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-senses",
+          "path": "content/english/dictionary/e03-reviewed-senses.json",
+          "expectedCount": 40,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "legacyJoin",
+            "sourcePin",
+            "senseAlignment",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "sense-alignment",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-pilot",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "collocations",
+          "path": "content/english/phrases/pilot-collocations.json",
+          "expectedCount": 100,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "verb-patterns",
+          "path": "content/english/phrases/pilot-verb-patterns.json",
+          "expectedCount": 50,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "phrases",
+          "path": "content/english/phrases/pilot-phrases.json",
+          "expectedCount": 100,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        }
+      ]
+    },
+    {
+      "id": "e05.grammar-topic-pilot",
+      "phase": "E05",
+      "category": "grammar",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/pilot-topics.json",
+          "expectedCount": 12,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "pilot-sentences",
+          "path": "content/english/sentences/pilot-sentences.json",
+          "expectedCount": 36,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "pilot-exercises",
+          "path": "content/english/sentences/pilot-exercises.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "space-typing",
+          "activity": "grammar-challenge",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 4
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "grammar-topic",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 4
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "example-typing",
+          "recordSetId": "pilot-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "cloze",
+          "recordSetId": "pilot-exercises",
+          "sampleCount": 4,
+          "recordType": "cloze"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "translation",
+          "recordSetId": "pilot-exercises",
+          "sampleCount": 4,
+          "recordType": "translation"
+        }
+      ]
+    },
+    {
+      "id": "e06.sentence-exercise-scale",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "examples",
+          "path": "content/english/review-queues/typing-text-e06-sentences.json",
+          "expectedCount": 1000,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "cloze",
+          "path": "content/english/review-queues/typing-text-e06-exercises.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "translation-sentences",
+          "path": "content/english/review-queues/tatoeba-e06-sentences.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "translations",
+          "path": "content/english/review-queues/tatoeba-e06-translations.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "corrections",
+          "path": "content/english/review-queues/grammar-e06-corrections.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "naturalness",
+            "semanticEquivalence"
+          ]
+        },
+        {
+          "id": "transformations",
+          "path": "content/english/review-queues/grammar-e06-transformations.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "naturalness",
+            "semanticEquivalence"
+          ]
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/review-queues/grammar-e06-common-mistakes.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness"
+          ]
+        },
+        {
+          "id": "dialogues",
+          "path": "content/english/review-queues/multiwoz-e06-dialogues.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "dialogueStructure",
+            "identifierSafety",
+            "naturalness",
+            "cefr"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedupe-review",
+        "common-mistake-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "listening-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "listening-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "translation",
+          "recordSetId": "translations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "dialogue",
+          "recordSetId": "dialogues",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
+      "id": "e06.grammar-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-exercises",
+          "path": "content/english/sentences/e06-reviewed-exercises.json",
+          "expectedCount": 144,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "grammar",
+            "naturalness",
+            "semanticEquivalence",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "target-structure-review",
+        "naturalness-review",
+        "semantic-equivalence-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "error-correction",
+          "recordSetId": "reviewed-exercises",
+          "sampleCount": 6,
+          "recordType": "error-correction"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "transformation",
+          "recordSetId": "reviewed-exercises",
+          "sampleCount": 6,
+          "recordType": "transformation"
+        }
+      ]
+    },
+    {
+      "id": "e06.translation-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-translation-sentences",
+          "path": "content/english/sentences/e06-reviewed-translation-sentences.json",
+          "expectedCount": 72,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-translations",
+          "path": "content/english/sentences/e06-reviewed-translations.json",
+          "expectedCount": 72,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "translation",
+          "recordSetId": "reviewed-translations",
+          "sampleCount": 6,
+          "recordType": "translation"
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "translation",
+          "recordSetId": "reviewed-translations",
+          "sampleCount": 6,
+          "recordType": "translation"
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-translation-sentences",
+          "sampleCount": 6
+        }
+      ]
+    },
+    {
+      "id": "e06.typing-text-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-typing-text-sentences",
+          "path": "content/english/sentences/e06-reviewed-typing-text-sentences.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-cloze",
+          "path": "content/english/sentences/e06-reviewed-cloze.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "dedup-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-typing-text-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-typing-text-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "cloze",
+          "recordSetId": "reviewed-cloze",
+          "sampleCount": 6,
+          "recordType": "cloze"
+        }
+      ]
+    },
+    {
+      "id": "e03.viwiktionary-source-refresh-2026-10-03",
+      "phase": "E03",
+      "category": "mixed",
+      "cefr": [],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/viwiktionary-refresh-2026-10-03.json",
+          "expectedCount": 1,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "upstreamMetadata",
+            "license",
+            "derivedComparison"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ],
+      "gameSmokes": []
+    },
+    {
+      "id": "e06.dialogue-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A2",
+        "B1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-dialogues",
+          "path": "content/english/sentences/e06-reviewed-dialogues.json",
+          "expectedCount": 10,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "dialogueStructure",
+            "identifierSafety",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "dialogue-structure-review",
+        "identifier-safety-review",
+        "dedupe-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "karaoke-typing",
+          "activity": "dialogue",
+          "recordSetId": "reviewed-dialogues",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
+      "id": "e06.tatoeba-source-refresh-2026-10-03",
+      "phase": "E06",
+      "category": "mixed",
+      "cefr": [],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/tatoeba-refresh-2026-10-03.json",
+          "expectedCount": 1,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "upstreamMetadata",
+            "license",
+            "derivedComparison"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ],
+      "gameSmokes": []
+    },
+    {
+      "id": "e06.common-mistake-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-common-mistakes",
+          "path": "content/english/sentences/e06-reviewed-common-mistakes.json",
+          "expectedCount": 100,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "error-correction",
+          "recordSetId": "reviewed-common-mistakes",
+          "sampleCount": 5
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-01",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-01-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-01-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-02",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-02-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-02-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-02-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-03",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-03-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-03-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-03-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-04",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-04-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-04-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-04-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-05",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-05-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-05-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-05-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-06",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-06-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-06-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-06-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-07",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-07-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-07-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-07-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-08",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-08-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-08-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-08-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-09",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-09-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-09-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-10",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-10-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-10-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-11",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-11-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-11-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-11-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-12",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-12-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-12-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-12-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
+    }
+  ]
+}

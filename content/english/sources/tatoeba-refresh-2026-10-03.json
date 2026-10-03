@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "source-refresh.tatoeba.2026-10-03",
+      "sourceId": "tatoeba",
+      "previousSnapshot": "weekly-export-2026-09-26",
+      "proposedSnapshot": "weekly-export-observed-2026-10-03",
+      "observedAt": "2026-10-03",
+      "files": {
+        "engSentences": {
+          "previousContentSha256": "029328ff36f4d2b4384da8bf40525775de708d268d6872479cdd581fc458033e",
+          "observedContentSha256": "f0772a134c700e01eceef6d33c54531de26f9ea5af64fe00c56c5c49665f281c",
+          "changed": true
+        },
+        "vieSentences": {
+          "previousContentSha256": "40ce7f0ec9120583a35c10fab8c8508fd17dfd24f04a6a12e4654872ad1fbb03",
+          "observedContentSha256": "40ce7f0ec9120583a35c10fab8c8508fd17dfd24f04a6a12e4654872ad1fbb03",
+          "changed": false
+        },
+        "links": {
+          "previousContentSha256": "ea51773a96e4e88bd61ad106afa9ffa1a6b515686fb7c1134b3a5dbc6fb2557d",
+          "observedContentSha256": "ea51773a96e4e88bd61ad106afa9ffa1a6b515686fb7c1134b3a5dbc6fb2557d",
+          "changed": false
+        }
+      },
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "sourcePin": {
+            "status": "pass",
+            "method": "ci-observed-content-sha256-v1"
+          },
+          "upstreamMetadata": {
+            "status": "pass",
+            "method": "tatoeba-live-export-observed-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-cc-by-2.0-fr-review-v1"
+          },
+          "derivedComparison": {
+            "status": "pass",
+            "method": "normalized-300-pair-exact-comparison-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "per-language-export",
+            "sourceUrl": "https://downloads.tatoeba.org/exports/per_language/",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba Project",
+            "modified": false
+          }
+        ],
+        "note": "Operational source-refresh review metadata only. This record is never published as learner content."
+      },
+      "comparison": {
+        "previousArtifactRun": 577,
+        "refreshedArtifactRun": 581,
+        "candidatePairsBefore": 16267,
+        "candidatePairsAfter": 16267,
+        "selectedPairsBefore": 300,
+        "selectedPairsAfter": 300,
+        "selectedIdsSameOrder": true,
+        "learnerVisibleContentChanged": 0,
+        "removedSelectedPairs": 0,
+        "addedSelectedPairs": 0,
+        "note": "The refreshed English Tatoeba export produced the exact same 300 selected EN-VI pairs and learner-visible content. Only source checksum/snapshot metadata changed."
+      }
+    }
+  ]
+}
