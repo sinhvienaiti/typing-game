@@ -84,6 +84,9 @@ const phrases=await loadRecords("content/english/phrases/pilot-phrases.json");
 const scaleCollocations=await loadRecords("content/english/phrases/e04-scale-01-collocations.json");
 const scaleVerbPatterns=await loadRecords("content/english/phrases/e04-scale-01-verb-patterns.json");
 const scalePhrases=await loadRecords("content/english/phrases/e04-scale-01-phrases.json");
+const scale02Collocations=await loadRecords("content/english/phrases/e04-scale-02-collocations.json");
+const scale02VerbPatterns=await loadRecords("content/english/phrases/e04-scale-02-verb-patterns.json");
+const scale02Phrases=await loadRecords("content/english/phrases/e04-scale-02-phrases.json");
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
@@ -103,9 +106,9 @@ results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences
   {id:"mistakes",dir:"mistakes",records:reviewedCommonMistakes}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
-  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations]},
-  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns]},
-  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases]}
+  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations]},
+  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns]},
+  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases]}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));

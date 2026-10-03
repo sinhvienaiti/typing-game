@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==120) {
-    errors.push("published Recall collocation activity must expose 120 reviewed records");
+  if(recallCollocations!==140) {
+    errors.push("published Recall collocation activity must expose 140 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==70) errors.push("published verb-pattern activity must expose 70 reviewed records");
-  if(phrasalVerbCount!==60) errors.push("published phrasal-verb activity must expose 60 reviewed records");
-  if(chunkCount!==45) errors.push("published chunk activity must expose 45 reviewed records");
-  if(idiomCount!==15) errors.push("published idiom activity must expose 15 reviewed records");
+  if(verbPatternCount!==90) errors.push("published verb-pattern activity must expose 90 reviewed records");
+  if(phrasalVerbCount!==70) errors.push("published phrasal-verb activity must expose 70 reviewed records");
+  if(chunkCount!==50) errors.push("published chunk activity must expose 50 reviewed records");
+  if(idiomCount!==20) errors.push("published idiom activity must expose 20 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:120,
-    verbPatterns:70,
-    phrasalVerbs:60,
-    chunks:45,
-    idioms:15,
+    recallCollocations:140,
+    verbPatterns:90,
+    phrasalVerbs:70,
+    chunks:50,
+    idioms:20,
   },
 };
 console.log(JSON.stringify(report,null,2));
