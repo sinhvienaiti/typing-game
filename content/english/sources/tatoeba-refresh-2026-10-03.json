@@ -25,7 +25,7 @@
         }
       },
       "quality": {
-        "state": "candidate",
+        "state": "draft",
         "checks": {
           "sourcePin": {
             "status": "pass",
@@ -40,8 +40,8 @@
             "method": "tatoeba-cc-by-2.0-fr-review-v1"
           },
           "derivedComparison": {
-            "status": "pending",
-            "method": "previous-vs-refreshed-normalized-pair-review-required"
+            "status": "pass",
+            "method": "normalized-300-pair-exact-comparison-v1"
           }
         }
       },
@@ -58,6 +58,19 @@
           }
         ],
         "note": "Operational source-refresh review metadata only. This record is never published as learner content."
+      },
+      "comparison": {
+        "previousArtifactRun": 577,
+        "refreshedArtifactRun": 581,
+        "candidatePairsBefore": 16267,
+        "candidatePairsAfter": 16267,
+        "selectedPairsBefore": 300,
+        "selectedPairsAfter": 300,
+        "selectedIdsSameOrder": true,
+        "learnerVisibleContentChanged": 0,
+        "removedSelectedPairs": 0,
+        "addedSelectedPairs": 0,
+        "note": "The refreshed English Tatoeba export produced the exact same 300 selected EN-VI pairs and learner-visible content. Only source checksum/snapshot metadata changed."
       }
     }
   ]

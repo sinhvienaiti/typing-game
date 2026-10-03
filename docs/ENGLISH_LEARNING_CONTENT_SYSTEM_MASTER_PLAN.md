@@ -2543,7 +2543,7 @@ Current deterministic/reproducible candidate outputs:
 - 1,000 example sentences derived from existing project typing texts.
 - 300 cloze exercises.
 - 300 EN↔VI Tatoeba translation exercises from 16,267 filtered source candidates; all three source files are checksum-pinned.
-- On 2026-10-03 CI detected a Tatoeba source refresh: only the English sentence TSV changed checksum (`029328ff…` → `f0772a13…`); Vietnamese sentences and EN↔VI links remain byte-identical. A candidate-only source-refresh review is open, and published pairs remain on their 2026-09-26 provenance until normalized-output comparison passes.
+- On 2026-10-03 CI detected a Tatoeba source refresh: only the English sentence TSV changed checksum (`029328ff…` → `f0772a13…`); Vietnamese sentences and EN↔VI links remained byte-identical. The explicit refresh review compared CI #577 vs #581 artifacts: filtered candidates stayed at 16,267, all 300 selected pair IDs remained in the same order, and learner-visible sentence/prompt/answer content was unchanged. The refreshed English pin is accepted for future candidate generation without mutating already-published pairs.
 - 100 controlled error-correction exercises.
 - 100 controlled sentence-transformation exercises.
 - 100 MultiWOZ 2.2 human-human dialogues selected from 124 candidates after quality filters; both source blobs are pinned.
@@ -2622,7 +2622,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **3,862 authoring/candidate records: 3,201 candidate + 661 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **3,862 authoring/candidate records: 3,200 candidate + 662 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2677,6 +2677,7 @@ Important green platform runs:
 - #568 — first E03 lexical slice, reviewed E06 grammar slice and reviewed Tatoeba translation slice passed the full Platform CI together.
 - #575 — refreshed 602-record runtime/release snapshot passed the full Platform CI before the third E06 grammar promotion.
 - #577 — third E06 grammar promotion (650 rich runtime records) plus the explicit Vietnamese Wiktionary source-refresh pin passed full Platform CI; normalized viwiktionary candidate output matched #574 exactly.
+- #581 — regenerated the refreshed Tatoeba candidate artifact successfully; the 300 selected pairs were then compared against #577 and found identical before closing the refresh review.
 - #578 — closed Vietnamese Wiktionary source-refresh review passed full Platform CI on the 650-record runtime baseline before MultiWOZ dialogue promotion.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
@@ -2692,6 +2693,6 @@ The architecture, parent launcher and child integrations are no longer waiting f
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
 - continue future Vietnamese Wiktionary refreshes only through explicit source-refresh review; the 2026-10-03 refresh is closed after an exact normalized-output comparison.
-- close the 2026-10-03 Tatoeba source-refresh review by comparing the regenerated 300-pair normalized queue against the last green pinned artifact before using the refreshed export for new promotions.
+- continue future Tatoeba refreshes only through explicit source-refresh review; the 2026-10-03 refresh is closed after exact comparison of the 300 selected normalized pairs.
 
 The project must not bulk-generate 100k records merely to raise readiness percentages.

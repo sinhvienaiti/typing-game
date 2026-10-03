@@ -62,8 +62,8 @@
       "publishAllowed": true,
       "attributionRequired": true,
       "status": "reference",
-      "snapshot": "weekly-export-2026-09-26",
-      "notes": "Published E06 Tatoeba records retain their original weekly-export-2026-09-26 provenance. On 2026-10-03 CI observed checksum drift only in eng_sentences.tsv while vie_sentences.tsv and eng-vie_links.tsv remained byte-identical to their prior pins. A candidate-only source-refresh review is open; no published translation pair is auto-upgraded until normalized-output comparison passes.",
+      "snapshot": "weekly-export-observed-2026-10-03",
+      "notes": "Published E06 Tatoeba records retain their original per-record weekly-export-2026-09-26 provenance. On 2026-10-03 CI observed checksum drift only in eng_sentences.tsv; the Vietnamese sentence and EN↔VI link files remained byte-identical. The explicit refresh review compared CI #577 vs #581 artifacts and found the same 16,267 filtered candidates and the exact same 300 selected pair IDs/texts in the same order. The refreshed English checksum is accepted for future candidate generation without mutating already-published pairs.",
       "releaseUrl": "https://downloads.tatoeba.org/exports/per_language/"
     },
     {
