@@ -28,6 +28,12 @@ async function validateFile(relative,schemaName) {
 }
 const sources=await validateFile("content/english/sources/manifest.json","source-manifest.schema.json");
 const batchManifest=await validateFile("content/english/batches/manifest.json","batch-manifest.schema.json");
+function batchExpectedCount(batchId,recordSetId) {
+  const batch=batchManifest?.batches?.find(item=>item.id===batchId);
+  const recordSet=batch?.recordSets?.find(item=>item.id===recordSetId);
+  return Number.isInteger(recordSet?.expectedCount)?recordSet.expectedCount:null;
+}
+
 await validateFile("content/english/targets/long-term.json","long-term-targets.schema.json");
 await validateFile("content/english/migrations/deprecations.json","deprecation-map.schema.json");
 await validateFile("content/english/releases/2026.10.0.json","content-release.schema.json");
@@ -91,8 +97,11 @@ if (lexemePilot) {
   }
 }
 if (reviewedLexemes&&reviewedSenses) {
-  if (reviewedLexemes.records.length!==10) errors.push("E03 reviewed lexeme slice must contain exactly 10 records");
-  if (reviewedSenses.records.length!==10) errors.push("E03 reviewed sense slice must contain exactly 10 records");
+  const expectedReviewedLexemes=batchExpectedCount("e03.lexical-reviewed-slice","reviewed-lexemes");
+  const expectedReviewedSenses=batchExpectedCount("e03.lexical-reviewed-slice","reviewed-senses");
+  if (expectedReviewedLexemes===null||reviewedLexemes.records.length!==expectedReviewedLexemes) errors.push("E03 reviewed lexeme slice must match the controlled batch expectedCount");
+  if (expectedReviewedSenses===null||reviewedSenses.records.length!==expectedReviewedSenses) errors.push("E03 reviewed sense slice must match the controlled batch expectedCount");
+  if (expectedReviewedLexemes!==expectedReviewedSenses) errors.push("E03 reviewed lexeme/sense controlled counts must stay paired");
   const senseIds=new Set(reviewedSenses.records.map(item=>item.id));
   const reviewedKeys=new Set();
   for (const record of reviewedLexemes.records) {
@@ -133,7 +142,14 @@ if (sentencePilot) {
   }
 }
 if (reviewedTranslationSentences&&reviewedTranslations) {
-  if (reviewedTranslationSentences.records.length!==24||reviewedTranslations.records.length!==24) errors.push("E06 reviewed translation slice must contain 24 sentences + 24 exercises");
+  const expectedTranslationSentences=batchExpectedCount("e06.translation-reviewed-slice","reviewed-translation-sentences");
+  const expectedTranslations=batchExpectedCount("e06.translation-reviewed-slice","reviewed-translations");
+  if (expectedTranslationSentences===null||expectedTranslations===null||
+      reviewedTranslationSentences.records.length!==expectedTranslationSentences||
+      reviewedTranslations.records.length!==expectedTranslations) {
+    errors.push("E06 reviewed translation slice must match the controlled batch expectedCount");
+  }
+  if (expectedTranslationSentences!==expectedTranslations) errors.push("E06 reviewed translation sentence/exercise counts must stay paired");
   const sentenceIds=new Set(reviewedTranslationSentences.records.map(item=>item.id));
   for (const sentence of reviewedTranslationSentences.records) {
     if (sentence.quality?.state!=="draft") errors.push(sentence.id+": reviewed translation sentence must remain draft; publication is ledger-overlay only");
@@ -149,7 +165,8 @@ if (reviewedTranslationSentences&&reviewedTranslations) {
   }
 }
 if (reviewedE06Exercises) {
-  if (reviewedE06Exercises.records.length!==48) errors.push("E06 reviewed exercise slice must contain exactly 48 records");
+  const expectedReviewedExercises=batchExpectedCount("e06.grammar-reviewed-slice","reviewed-exercises");
+  if (expectedReviewedExercises===null||reviewedE06Exercises.records.length!==expectedReviewedExercises) errors.push("E06 reviewed exercise slice must match the controlled batch expectedCount");
   const ids=new Set();
   const topicCounts=new Map();
   let corrections=0,transformations=0;
@@ -165,8 +182,14 @@ if (reviewedE06Exercises) {
     else topicCounts.set(grammarId,(topicCounts.get(grammarId)??0)+1);
     for (const id of exercise.sourceSentenceIds??[]) if (!pilotSentenceIds.has(id)) errors.push(exercise.id+": source must be a published pilot sentence "+id);
   }
-  if (corrections!==24||transformations!==24) errors.push("E06 reviewed slice must split 24 corrections + 24 transformations");
-  for (const topic of grammarPilot?.records??[]) if ((topicCounts.get(topic.id)??0)!==4) errors.push("E06 reviewed slice must contain 4 exercises for "+topic.id);
+  const expectedPerType=expectedReviewedExercises===null?null:expectedReviewedExercises/2;
+  if (!Number.isInteger(expectedPerType)||corrections!==expectedPerType||transformations!==expectedPerType) {
+    errors.push("E06 reviewed slice must remain evenly split between corrections and transformations");
+  }
+  const topicTotal=grammarPilot?.records?.length??0;
+  const expectedPerTopic=expectedReviewedExercises===null||topicTotal===0?null:expectedReviewedExercises/topicTotal;
+  if (!Number.isInteger(expectedPerTopic)) errors.push("E06 reviewed slice controlled count must divide evenly across published grammar topics");
+  else for (const topic of grammarPilot?.records??[]) if ((topicCounts.get(topic.id)??0)!==expectedPerTopic) errors.push("E06 reviewed slice must contain "+expectedPerTopic+" exercises for "+topic.id);
 }
 if (exercisePilot) {
   if (exercisePilot.records.length!==24) errors.push("exercise pilot must contain exactly 24 records");
