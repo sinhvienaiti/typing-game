@@ -83,7 +83,8 @@
     "english-content:e06:common-mistakes": "node scripts/report-english-content-e06-common-mistakes.mjs",
     "english-content:import:simplewiktionary": "node scripts/import-simplewiktionary-pilot.mjs",
     "english-content:e03:morphology": "node scripts/report-english-content-simplewiktionary.mjs",
-    "english-content:review:validate": "node scripts/validate-english-content-reviews.mjs"
+    "english-content:review:validate": "node scripts/validate-english-content-reviews.mjs",
+    "english-content:runtime:smoke": "node scripts/smoke-published-english-content.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

@@ -293,6 +293,9 @@ jobs:
           git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
 
 
+      - name: Smoke published rich English runtime
+        run: pnpm english-content:runtime:smoke
+
       - name: Run E12 English-content maintenance audit
         run: |
           pnpm english-content:e12
@@ -365,6 +368,7 @@ jobs:
           node --check scripts/report-english-content-e11-readiness.mjs
           node --check scripts/generate-english-content-release.mjs
           node --check scripts/audit-english-content-maintenance.mjs
+          node --check scripts/smoke-published-english-content.mjs
           node --check scripts/sample-english-content-quality.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
