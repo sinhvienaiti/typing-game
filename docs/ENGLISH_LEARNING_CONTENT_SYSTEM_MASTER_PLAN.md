@@ -2549,7 +2549,7 @@ Current deterministic/reproducible candidate outputs:
 - 100 MultiWOZ 2.2 human-human dialogues selected from 124 candidates after quality filters; both source blobs are pinned.
 - 100 common-mistake candidates derived from the controlled correction pilot rather than from random artificial errors.
 
-Candidate/draft records are not runtime-published. The reviewed E06 grammar overlay now publishes **72 error-correction + 72 transformation exercises**, completing two reviewed exercises of each type for all 36 published E05 source sentences; the reviewed Tatoeba overlay publishes **48 English sentences + 48 translation exercises**; and the first reviewed MultiWOZ slice publishes **10 A2–B1 dialogues / 68 turns**, enabling real Karaoke Dialogue runtime content.
+Candidate/draft records are not runtime-published. The reviewed E06 grammar overlay now publishes **72 error-correction + 72 transformation exercises**, completing two reviewed exercises of each type for all 36 published E05 source sentences; the reviewed Tatoeba overlay now publishes **72 English sentences + 72 translation exercises** across three controlled slices; and the first reviewed MultiWOZ slice publishes **10 A2–B1 dialogues / 68 turns**, enabling real Karaoke Dialogue runtime content.
 
 ### 43.6 E07 parent runtime
 
@@ -2565,7 +2565,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **20 lexemes + 20 senses (40)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **108 examples + 240 exercises + 10 dialogues (358)**; and `shared/phrases` contains **250 phrase/pattern records**. Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **20 lexemes + 20 senses (40)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **132 examples + 264 exercises + 10 dialogues (406)**; and `shared/phrases` contains **250 phrase/pattern records**. Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2622,7 +2622,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **3,862 authoring/candidate records: 3,200 candidate + 662 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **3,910 authoring/candidate records: 3,200 candidate + 710 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **660 published rich records**: dictionary 40, grammar 12, sentences 358 and phrases 250. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **708 published rich records**: dictionary 40, grammar 12, sentences 406 and phrases 250. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2678,6 +2678,7 @@ Important green platform runs:
 - #575 — refreshed 602-record runtime/release snapshot passed the full Platform CI before the third E06 grammar promotion.
 - #577 — third E06 grammar promotion (650 rich runtime records) plus the explicit Vietnamese Wiktionary source-refresh pin passed full Platform CI; normalized viwiktionary candidate output matched #574 exactly.
 - #581 — regenerated the refreshed Tatoeba candidate artifact successfully; the 300 selected pairs were then compared against #577 and found identical before closing the refresh review.
+- #582 — closed the Tatoeba source-refresh review with full Platform CI green before the third translation promotion.
 - #578 — closed Vietnamese Wiktionary source-refresh review passed full Platform CI on the 650-record runtime baseline before MultiWOZ dialogue promotion.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
@@ -2687,7 +2688,7 @@ Child repositories also passed their relevant CI after E09 integration, includin
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - continue review/alignment of the remaining E03 lexical pilot after the first **20 lexemes + 20 senses** have been promoted;
-- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, 48 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
+- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, 72 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
