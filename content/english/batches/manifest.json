@@ -879,6 +879,64 @@
         "derived-output-comparison"
       ],
       "gameSmokes": []
+    },
+    {
+      "id": "e06.common-mistake-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-common-mistakes",
+          "path": "content/english/sentences/e06-reviewed-common-mistakes.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "error-correction",
+          "recordSetId": "reviewed-common-mistakes",
+          "sampleCount": 5
+        }
+      ]
     }
   ]
 }

@@ -77,6 +77,7 @@ const reviewedTranslations=await loadRecords("content/english/sentences/e06-revi
 const reviewedTypingTextSentences=await loadRecords("content/english/sentences/e06-reviewed-typing-text-sentences.json");
 const reviewedCloze=await loadRecords("content/english/sentences/e06-reviewed-cloze.json");
 const reviewedDialogues=await loadRecords("content/english/sentences/e06-reviewed-dialogues.json");
+const reviewedCommonMistakes=await loadRecords("content/english/sentences/e06-reviewed-common-mistakes.json");
 const collocations=await loadRecords("content/english/phrases/pilot-collocations.json");
 const verbPatterns=await loadRecords("content/english/phrases/pilot-verb-patterns.json");
 const phrases=await loadRecords("content/english/phrases/pilot-phrases.json");
@@ -95,7 +96,8 @@ results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",gr
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:[...sentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
   {id:"exercises",dir:"exercises",records:[...exercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
-  {id:"dialogues",dir:"dialogues",records:reviewedDialogues}
+  {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
+  {id:"mistakes",dir:"mistakes",records:reviewedCommonMistakes}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
   {id:"collocations",dir:"collocations",records:collocations},

@@ -17,7 +17,10 @@ const RECORD_SOURCES=Object.freeze({
   ],
   translation:[{dataset:"sentences",prefix:"exercises-",type:"translation"}],
   cloze:[{dataset:"sentences",prefix:"exercises-",type:"cloze"}],
-  "error-correction":[{dataset:"sentences",prefix:"exercises-",type:"error-correction"}],
+  "error-correction":[
+    {dataset:"sentences",prefix:"exercises-",type:"error-correction"},
+    {dataset:"sentences",prefix:"mistakes-"},
+  ],
   "sentence-building":[{dataset:"sentences",prefix:"exercises-",type:"sentence-building"}],
   transformation:[{dataset:"sentences",prefix:"exercises-",type:"transformation"}],
   "contextual-usage":[{dataset:"sentences",prefix:"exercises-",type:"contextual-usage"}],

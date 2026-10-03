@@ -56,13 +56,14 @@ const sentenceRecords=await loadRuntime(sentenceManifest,path.join("shared","sen
 const examples=sentenceRecords.filter(record=>String(record.id??"").startsWith("sent."));
 const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith("ex."));
 const dialogues=sentenceRecords.filter(record=>String(record.id??"").startsWith("dlg."));
+const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").startsWith("err."));
 
 if (dictionaryManifest.count!==60) errors.push("published dictionary runtime must contain 60 E03 records");
 if (lexemes.length!==30||senses.length!==30) errors.push("published E03 runtime split must be 30 lexemes + 30 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==406) errors.push("published sentence runtime must contain 406 reviewed records");
-if (topics.length!==12||examples.length!==132||exercises.length!==264||dialogues.length!==10) {
-  errors.push("published runtime split must be 12 topics + 132 examples + 264 exercises + 10 dialogues");
+if (sentenceManifest.count!==430) errors.push("published sentence runtime must contain 430 reviewed records");
+if (topics.length!==12||examples.length!==132||exercises.length!==264||dialogues.length!==10||commonMistakes.length!==24) {
+  errors.push("published runtime split must be 12 topics + 132 examples + 264 exercises + 10 dialogues + 24 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -91,7 +92,7 @@ const topicIds=new Set(topics.map(record=>record.id));
 const exampleIds=new Set(examples.map(record=>record.id));
 const exerciseIds=new Set(exercises.map(record=>record.id));
 
-for (const record of [...topics,...examples,...exercises,...dialogues]) {
+for (const record of [...topics,...examples,...exercises,...dialogues,...commonMistakes]) {
   if (record.quality?.state!=="published") errors.push(record.id+": runtime record is not published");
   for (const [name,check] of Object.entries(record.quality?.checks??{})) {
     if (check?.status==="pending"||check?.status==="fail") {
@@ -109,6 +110,10 @@ for (const sentence of examples) {
 for (const exercise of exercises) {
   for (const id of exercise.sourceSentenceIds??[]) if (!exampleIds.has(id)) errors.push(exercise.id+": missing runtime source "+id);
   for (const id of exercise.targetIds??[]) if (id.startsWith("gr.")&&!topicIds.has(id)) errors.push(exercise.id+": missing runtime grammar target "+id);
+}
+for (const mistake of commonMistakes) {
+  for (const id of mistake.targetIds??[]) if (id.startsWith("gr.")&&!topicIds.has(id)) errors.push(mistake.id+": missing runtime grammar target "+id);
+  if (!Array.isArray(mistake.corrections)||mistake.corrections.length!==1) errors.push(mistake.id+": runtime common mistake requires one correction");
 }
 
 try {
@@ -130,6 +135,10 @@ try {
   );
   buildGameEnglishActivityDataset(
     "monkeytype","error-correction",correctionExercises.slice(0,2),"runtime-smoke-monkey-correction",
+    {createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  buildGameEnglishActivityDataset(
+    "monkeytype","error-correction",commonMistakes.slice(0,2),"runtime-smoke-monkey-common-mistake",
     {createdAt:"2026-10-03T00:00:00.000Z"},
   );
   buildGameEnglishActivityDataset(
@@ -181,6 +190,8 @@ try {
     errors.push("published activity source must return 5 bounded Karaoke translation items");
   }
 
+  const monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
+  if(monkeyCorrectionCount!==96) errors.push("published Monkeytype error-correction activity must expose 72 corrections + 24 common mistakes");
   const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
     {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
@@ -255,6 +266,7 @@ const report={
   corrections:correctionExercises.length,
   transformations:transformationExercises.length,
   dialogues:dialogues.length,
+  commonMistakes:commonMistakes.length,
   tatoebaExamples:tatoebaExamples.length,
   tatoebaTranslations:tatoebaTranslations.length,
   typingTextExamples:typingTextExamples.length,
@@ -268,6 +280,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
+    monkeyCorrectionRecords:96,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,

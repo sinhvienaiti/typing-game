@@ -88,6 +88,7 @@ const reviewedTranslations=await validateFile("content/english/sentences/e06-rev
 const reviewedTypingTextSentences=await validateFile("content/english/sentences/e06-reviewed-typing-text-sentences.json","sentence-set.schema.json");
 const reviewedCloze=await validateFile("content/english/sentences/e06-reviewed-cloze.json","exercise-set.schema.json");
 const reviewedDialogues=await validateFile("content/english/sentences/e06-reviewed-dialogues.json","dialogue-set.schema.json");
+const reviewedCommonMistakes=await validateFile("content/english/sentences/e06-reviewed-common-mistakes.json","common-mistake-set.schema.json");
 const vocabLookup=await readJson(path.join(root,"shared","vocabulary","lookup.json"));
 if (lexemePilot) {
   if (lexemePilot.records.length!==300) errors.push("lexeme seed pilot must contain exactly 300 records");
@@ -238,6 +239,32 @@ if (reviewedE06Exercises) {
   const expectedPerTopic=expectedReviewedExercises===null||topicTotal===0?null:expectedReviewedExercises/topicTotal;
   if (!Number.isInteger(expectedPerTopic)) errors.push("E06 reviewed slice controlled count must divide evenly across published grammar topics");
   else for (const topic of grammarPilot?.records??[]) if ((topicCounts.get(topic.id)??0)!==expectedPerTopic) errors.push("E06 reviewed slice must contain "+expectedPerTopic+" exercises for "+topic.id);
+}
+if (reviewedCommonMistakes) {
+  const expected=batchExpectedCount("e06.common-mistake-reviewed-slice","reviewed-common-mistakes");
+  if (expected===null||reviewedCommonMistakes.records.length!==expected) errors.push("E06 reviewed common-mistake slice count mismatch");
+  const topicCounts=new Map(),ids=new Set(),forms=new Set();
+  for (const record of reviewedCommonMistakes.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": reviewed common mistake must remain draft");
+    if (ids.has(record.id)) errors.push(record.id+": duplicate reviewed common-mistake id");
+    ids.add(record.id);
+    const form=String(record.incorrect??"").normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (forms.has(form)) errors.push(record.id+": duplicate reviewed common-mistake form");
+    forms.add(form);
+    if (record.corrections?.length!==1) errors.push(record.id+": one canonical correction is required");
+    if (record.evidenceType!=="pedagogical") errors.push(record.id+": pedagogical evidenceType is required");
+    if (!String(record.explanationVi??"").trim()) errors.push(record.id+": Vietnamese explanation is required");
+    const grammarId=record.targetIds?.[0];
+    if (!grammarId||!allIds.has(grammarId)) errors.push(record.id+": invalid grammar target");
+    else topicCounts.set(grammarId,(topicCounts.get(grammarId)??0)+1);
+  }
+  if (expected!==null&&grammarPilot?.records?.length) {
+    const perTopic=expected/grammarPilot.records.length;
+    if (!Number.isInteger(perTopic)) errors.push("E06 reviewed common-mistake count must divide across grammar topics");
+    else for (const topic of grammarPilot.records) if ((topicCounts.get(topic.id)??0)!==perTopic) {
+      errors.push("E06 reviewed common-mistake topic coverage mismatch: "+topic.id);
+    }
+  }
 }
 if (exercisePilot) {
   if (exercisePilot.records.length!==24) errors.push("exercise pilot must contain exactly 24 records");

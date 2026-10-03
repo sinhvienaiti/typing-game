@@ -103,6 +103,23 @@ export function englishActivityItemsFromRecords(activity,records,options={}){
       continue;
     }
     if(
+      activity==="error-correction"&&
+      typeof record.id==="string"&&record.id.startsWith("err.")&&
+      Array.isArray(record.corrections)
+    ){
+      const answer=record.corrections.find(value=>typeof value==="string"&&value.trim()!=="");
+      if(answer===undefined) throw new TypeError(record.id+": common mistake has no correction");
+      items.push({
+        contentId:text(record.id,"common mistake id"),
+        entityType:"sentence",
+        entityId:text(record.id,"common mistake id"),
+        promptText:text(record.incorrect,"common mistake incorrect"),
+        answerText:text(answer,"common mistake correction"),
+        meaningVi:text(record.explanationVi,"common mistake explanationVi"),
+      });
+      continue;
+    }
+    if(
       activity==="translation"||
       activity==="contextual-usage"||
       activity==="cloze"||
