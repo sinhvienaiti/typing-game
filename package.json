@@ -78,7 +78,9 @@
     "english-content:e12:release": "node scripts/generate-english-content-release.mjs",
     "english-content:e12:audit": "node scripts/audit-english-content-maintenance.mjs",
     "english-content:e12:sample": "node scripts/sample-english-content-quality.mjs",
-    "english-content:e12": "pnpm english-content:e12:release && pnpm english-content:e12:audit && pnpm english-content:e12:sample"
+    "english-content:e12": "pnpm english-content:e12:release && pnpm english-content:e12:audit && pnpm english-content:e12:sample",
+    "english-content:derive:common-mistakes": "node scripts/derive-common-mistakes-e06.mjs",
+    "english-content:e06:common-mistakes": "node scripts/report-english-content-e06-common-mistakes.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

@@ -105,6 +105,19 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Build E06 common-mistake candidates
+        run: |
+          pnpm english-content:derive:common-mistakes
+          pnpm english-content:e06:common-mistakes
+
+      - name: Upload E06 common-mistake candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: common-mistakes-e06-${{ github.sha }}
+          path: content/english/review-queues/grammar-e06-common-mistakes.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Probe Tatoeba EN-VI translation source
         run: |
           mkdir -p .cache/english-content/tatoeba
@@ -322,6 +335,8 @@ jobs:
           node --check scripts/report-english-content-e06-scale.mjs
           node --check scripts/derive-grammar-e06.mjs
           node --check scripts/report-english-content-e06-grammar.mjs
+          node --check scripts/derive-common-mistakes-e06.mjs
+          node --check scripts/report-english-content-e06-common-mistakes.mjs
           node --check scripts/tatoeba-pair-core.mjs
           node --check scripts/import-tatoeba-e06-translations.mjs
           node --check scripts/report-english-content-tatoeba.mjs

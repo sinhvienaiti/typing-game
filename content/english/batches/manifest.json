@@ -307,6 +307,23 @@
           ]
         },
         {
+          "id": "common-mistakes",
+          "path": "content/english/review-queues/grammar-e06-common-mistakes.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "exactDuplicate",
+            "grammar",
+            "translation",
+            "naturalness"
+          ]
+        },
+        {
           "id": "dialogues",
           "path": "content/english/review-queues/multiwoz-e06-dialogues.json",
           "expectedCount": 100,
@@ -330,7 +347,8 @@
         "bilingual-review",
         "naturalness-review",
         "cefr-review",
-        "dedupe-review"
+        "dedupe-review",
+        "common-mistake-review"
       ],
       "gameSmokes": [
         {
