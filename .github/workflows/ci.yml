@@ -269,6 +269,17 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Validate editorial review ledger
+        run: pnpm english-content:review:validate
+
+      - name: Upload editorial review ledger report
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-content-review-ledger-${{ github.sha }}
+          path: content/english/reports/e10-review-ledger.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Validate rich English learning content
         run: |
           pnpm english-content:validate
@@ -345,6 +356,8 @@ jobs:
           node --check scripts/wiktextract-enrichment-core.mjs
           node --check scripts/import-simplewiktionary-pilot.mjs
           node --check scripts/report-english-content-simplewiktionary.mjs
+          node --check scripts/english-review-core.mjs
+          node --check scripts/validate-english-content-reviews.mjs
           node --check scripts/build-e03-sense-review.mjs
           node --check scripts/report-english-content-e03-sense-review.mjs
           node --check scripts/validate-english-content-batches.mjs

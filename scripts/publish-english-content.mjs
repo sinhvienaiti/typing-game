@@ -2,16 +2,29 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
+import { overlayEnglishReviewDecisions } from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const batchManifest=await readJson(path.join(root,"content","english","batches","manifest.json"));
+const [batchManifest,reviewLedger]=await Promise.all([
+  readJson(path.join(root,"content","english","batches","manifest.json")),
+  readJson(path.join(root,"content","english","reviews","decisions.json")),
+]);
 const contentVersion=batchManifest.contentVersion;
+const batchSetsByPath=new Map();
+for (const batch of batchManifest.batches??[]) {
+  for (const set of batch.recordSets??[]) {
+    batchSetsByPath.set(set.path,{batchId:batch.id,recordSetId:set.id,requiredChecks:set.requiredChecks??[]});
+  }
+}
 const shardSize=500;
 
 async function loadRecords(relative) {
   const doc=await readJson(path.join(root,relative));
   if (!Array.isArray(doc.records)) throw new Error(relative+" must contain records[]");
-  return doc.records;
+  const context=batchSetsByPath.get(relative);
+  return context===undefined
+    ?doc.records
+    :overlayEnglishReviewDecisions(doc.records,reviewLedger,context);
 }
 function published(records,label) {
   const result=[];
