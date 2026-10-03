@@ -58,6 +58,10 @@
         {
           "path": "content/english/phrases/e04-scale-09-verb-patterns.json",
           "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-verb-patterns.json",
+          "collection": "records"
         }
       ]
     },
@@ -104,6 +108,10 @@
         },
         {
           "path": "content/english/phrases/e04-scale-09-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-collocations.json",
           "collection": "records"
         }
       ]
@@ -187,6 +195,14 @@
         },
         {
           "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
           "collection": "records",
           "filterField": "type",
           "filterValues": [
@@ -283,6 +299,15 @@
         },
         {
           "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
           "collection": "records",
           "filterField": "type",
           "filterValues": [

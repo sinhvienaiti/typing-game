@@ -108,6 +108,9 @@ const scale08Phrases=await loadRecords("content/english/phrases/e04-scale-08-phr
 const scale09Collocations=await loadRecords("content/english/phrases/e04-scale-09-collocations.json");
 const scale09VerbPatterns=await loadRecords("content/english/phrases/e04-scale-09-verb-patterns.json");
 const scale09Phrases=await loadRecords("content/english/phrases/e04-scale-09-phrases.json");
+const scale10Collocations=await loadRecords("content/english/phrases/e04-scale-10-collocations.json");
+const scale10VerbPatterns=await loadRecords("content/english/phrases/e04-scale-10-verb-patterns.json");
+const scale10Phrases=await loadRecords("content/english/phrases/e04-scale-10-phrases.json");
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
@@ -127,9 +130,9 @@ results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences
   {id:"mistakes",dir:"mistakes",records:reviewedCommonMistakes}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
-  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations]},
-  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns,...scale03VerbPatterns,...scale04VerbPatterns,...scale05VerbPatterns,...scale06VerbPatterns,...scale07VerbPatterns,...scale08VerbPatterns,...scale09VerbPatterns]},
-  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases,...scale03Phrases,...scale04Phrases,...scale05Phrases,...scale06Phrases,...scale07Phrases,...scale08Phrases,...scale09Phrases]}
+  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations]},
+  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns,...scale03VerbPatterns,...scale04VerbPatterns,...scale05VerbPatterns,...scale06VerbPatterns,...scale07VerbPatterns,...scale08VerbPatterns,...scale09VerbPatterns,...scale10VerbPatterns]},
+  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases,...scale03Phrases,...scale04Phrases,...scale05Phrases,...scale06Phrases,...scale07Phrases,...scale08Phrases,...scale09Phrases,...scale10Phrases]}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));
