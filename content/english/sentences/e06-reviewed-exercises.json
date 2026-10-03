@@ -3168,6 +3168,3750 @@
         ],
         "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000002.01",
+      "type": "error-correction",
+      "prompt": "She take the bus to work on weekdays.",
+      "targetIds": [
+        "gr.a1.present-simple-routines"
+      ],
+      "acceptedAnswers": [
+        "She takes the bus to work on weekdays."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000002:ex.correction.e06.00000002.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000002.02",
+      "type": "error-correction",
+      "prompt": "She does takes the bus to work on weekdays.",
+      "targetIds": [
+        "gr.a1.present-simple-routines"
+      ],
+      "acceptedAnswers": [
+        "She takes the bus to work on weekdays."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000002:ex.correction.e06.00000002.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.002.a",
+      "type": "transformation",
+      "prompt": "Rewrite as a Present Simple question.\nSource: She takes the bus to work on weekdays.",
+      "targetIds": [
+        "gr.a1.present-simple-routines"
+      ],
+      "acceptedAnswers": [
+        "Does she take the bus to work on weekdays?"
+      ],
+      "sourceSentenceIds": [
+        "sent.00000002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000002:ex.transformation.e06.002.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.002.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.a1.present-simple-routines).\nSource: Does she take the bus to work on weekdays?",
+      "targetIds": [
+        "gr.a1.present-simple-routines"
+      ],
+      "acceptedAnswers": [
+        "She takes the bus to work on weekdays."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000002:ex.transformation.e06.002.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000005.01",
+      "type": "error-correction",
+      "prompt": "They discussing the new schedule.",
+      "targetIds": [
+        "gr.a1.present-continuous-now"
+      ],
+      "acceptedAnswers": [
+        "They are discussing the new schedule."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000005:ex.correction.e06.00000005.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000005.02",
+      "type": "error-correction",
+      "prompt": "They is discussing the new schedule.",
+      "targetIds": [
+        "gr.a1.present-continuous-now"
+      ],
+      "acceptedAnswers": [
+        "They are discussing the new schedule."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000005:ex.correction.e06.00000005.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.005.a",
+      "type": "transformation",
+      "prompt": "Rewrite as a Present Continuous question.\nSource: They are discussing the new schedule.",
+      "targetIds": [
+        "gr.a1.present-continuous-now"
+      ],
+      "acceptedAnswers": [
+        "Are they discussing the new schedule?"
+      ],
+      "sourceSentenceIds": [
+        "sent.00000005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000005:ex.transformation.e06.005.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.005.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.a1.present-continuous-now).\nSource: Are they discussing the new schedule?",
+      "targetIds": [
+        "gr.a1.present-continuous-now"
+      ],
+      "acceptedAnswers": [
+        "They are discussing the new schedule."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000005:ex.transformation.e06.005.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000008.01",
+      "type": "error-correction",
+      "prompt": "Has you ever worked with an international team?",
+      "targetIds": [
+        "gr.a2.present-perfect-experience"
+      ],
+      "acceptedAnswers": [
+        "Have you ever worked with an international team?"
+      ],
+      "sourceSentenceIds": [
+        "sent.00000008"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000008:ex.correction.e06.00000008.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000008.02",
+      "type": "error-correction",
+      "prompt": "Have you ever work with an international team?",
+      "targetIds": [
+        "gr.a2.present-perfect-experience"
+      ],
+      "acceptedAnswers": [
+        "Have you ever worked with an international team?"
+      ],
+      "sourceSentenceIds": [
+        "sent.00000008"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000008:ex.correction.e06.00000008.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.008.a",
+      "type": "transformation",
+      "prompt": "Rewrite as an affirmative Present Perfect statement.\nSource: Have you ever worked with an international team?",
+      "targetIds": [
+        "gr.a2.present-perfect-experience"
+      ],
+      "acceptedAnswers": [
+        "You have worked with an international team."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000008"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000008:ex.transformation.e06.008.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.008.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.a2.present-perfect-experience).\nSource: You have worked with an international team.",
+      "targetIds": [
+        "gr.a2.present-perfect-experience"
+      ],
+      "acceptedAnswers": [
+        "Have you ever worked with an international team?"
+      ],
+      "sourceSentenceIds": [
+        "sent.00000008"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000008:ex.transformation.e06.008.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000011.01",
+      "type": "error-correction",
+      "prompt": "If you will finish the report today, I will review it tomorrow.",
+      "targetIds": [
+        "gr.a2.first-conditional"
+      ],
+      "acceptedAnswers": [
+        "If you finish the report today, I will review it tomorrow."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000011"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000011:ex.correction.e06.00000011.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000011.02",
+      "type": "error-correction",
+      "prompt": "If you finish the report today, I would review it tomorrow.",
+      "targetIds": [
+        "gr.a2.first-conditional"
+      ],
+      "acceptedAnswers": [
+        "If you finish the report today, I will review it tomorrow."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000011"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000011:ex.correction.e06.00000011.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.011.a",
+      "type": "transformation",
+      "prompt": "Move the result clause before the if-clause without changing the condition.\nSource: If you finish the report today, I will review it tomorrow.",
+      "targetIds": [
+        "gr.a2.first-conditional"
+      ],
+      "acceptedAnswers": [
+        "I will review it tomorrow if you finish the report today."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000011"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000011:ex.transformation.e06.011.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.011.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.a2.first-conditional).\nSource: I will review it tomorrow if you finish the report today.",
+      "targetIds": [
+        "gr.a2.first-conditional"
+      ],
+      "acceptedAnswers": [
+        "If you finish the report today, I will review it tomorrow."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000011"
+      ],
+      "cefr": "A2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000011:ex.transformation.e06.011.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000014.01",
+      "type": "error-correction",
+      "prompt": "I has been writing emails for two hours.",
+      "targetIds": [
+        "gr.b1.present-perfect-simple-vs-continuous"
+      ],
+      "acceptedAnswers": [
+        "I have been writing emails for two hours."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000014"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000014:ex.correction.e06.00000014.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000014.02",
+      "type": "error-correction",
+      "prompt": "I have writing emails for two hours.",
+      "targetIds": [
+        "gr.b1.present-perfect-simple-vs-continuous"
+      ],
+      "acceptedAnswers": [
+        "I have been writing emails for two hours."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000014"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000014:ex.correction.e06.00000014.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.014.a",
+      "type": "transformation",
+      "prompt": "Rewrite as a negative Present Perfect Continuous sentence.\nSource: I have been writing emails for two hours.",
+      "targetIds": [
+        "gr.b1.present-perfect-simple-vs-continuous"
+      ],
+      "acceptedAnswers": [
+        "I have not been writing emails for two hours."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000014"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000014:ex.transformation.e06.014.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.014.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.b1.present-perfect-simple-vs-continuous).\nSource: I have not been writing emails for two hours.",
+      "targetIds": [
+        "gr.b1.present-perfect-simple-vs-continuous"
+      ],
+      "acceptedAnswers": [
+        "I have been writing emails for two hours."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000014"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000014:ex.transformation.e06.014.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000017.01",
+      "type": "error-correction",
+      "prompt": "If we live closer to the office, we would walk to work.",
+      "targetIds": [
+        "gr.b1.second-conditional"
+      ],
+      "acceptedAnswers": [
+        "If we lived closer to the office, we would walk to work."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000017"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000017:ex.correction.e06.00000017.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000017.02",
+      "type": "error-correction",
+      "prompt": "If we lived closer to the office, we would walked to work.",
+      "targetIds": [
+        "gr.b1.second-conditional"
+      ],
+      "acceptedAnswers": [
+        "If we lived closer to the office, we would walk to work."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000017"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000017:ex.correction.e06.00000017.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.017.a",
+      "type": "transformation",
+      "prompt": "Move the result clause before the if-clause.\nSource: If we lived closer to the office, we would walk to work.",
+      "targetIds": [
+        "gr.b1.second-conditional"
+      ],
+      "acceptedAnswers": [
+        "We would walk to work if we lived closer to the office."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000017"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000017:ex.transformation.e06.017.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.017.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.b1.second-conditional).\nSource: We would walk to work if we lived closer to the office.",
+      "targetIds": [
+        "gr.b1.second-conditional"
+      ],
+      "acceptedAnswers": [
+        "If we lived closer to the office, we would walk to work."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000017"
+      ],
+      "cefr": "B1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000017:ex.transformation.e06.017.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000020.01",
+      "type": "error-correction",
+      "prompt": "If I have known about the deadline, I would have submitted the form yesterday.",
+      "targetIds": [
+        "gr.b2.third-conditional"
+      ],
+      "acceptedAnswers": [
+        "If I had known about the deadline, I would have submitted the form yesterday."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000020"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000020:ex.correction.e06.00000020.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000020.02",
+      "type": "error-correction",
+      "prompt": "If I had known about the deadline, I would submitted the form yesterday.",
+      "targetIds": [
+        "gr.b2.third-conditional"
+      ],
+      "acceptedAnswers": [
+        "If I had known about the deadline, I would have submitted the form yesterday."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000020"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000020:ex.correction.e06.00000020.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.020.a",
+      "type": "transformation",
+      "prompt": "Move the result clause before the if-clause.\nSource: If I had known about the deadline, I would have submitted the form yesterday.",
+      "targetIds": [
+        "gr.b2.third-conditional"
+      ],
+      "acceptedAnswers": [
+        "I would have submitted the form yesterday if I had known about the deadline."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000020"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000020:ex.transformation.e06.020.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.020.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.b2.third-conditional).\nSource: I would have submitted the form yesterday if I had known about the deadline.",
+      "targetIds": [
+        "gr.b2.third-conditional"
+      ],
+      "acceptedAnswers": [
+        "If I had known about the deadline, I would have submitted the form yesterday."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000020"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000020:ex.transformation.e06.020.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000023.01",
+      "type": "error-correction",
+      "prompt": "The device believed to be safe under normal conditions.",
+      "targetIds": [
+        "gr.b2.reporting-passive"
+      ],
+      "acceptedAnswers": [
+        "The device is believed to be safe under normal conditions."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000023"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000023:ex.correction.e06.00000023.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000023.02",
+      "type": "error-correction",
+      "prompt": "The device is believe to be safe under normal conditions.",
+      "targetIds": [
+        "gr.b2.reporting-passive"
+      ],
+      "acceptedAnswers": [
+        "The device is believed to be safe under normal conditions."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000023"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000023:ex.correction.e06.00000023.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.023.a",
+      "type": "transformation",
+      "prompt": "Rewrite the reporting passive with an impersonal it-clause.\nSource: The device is believed to be safe under normal conditions.",
+      "targetIds": [
+        "gr.b2.reporting-passive"
+      ],
+      "acceptedAnswers": [
+        "It is believed that the device is safe under normal conditions."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000023"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000023:ex.transformation.e06.023.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.023.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.b2.reporting-passive).\nSource: It is believed that the device is safe under normal conditions.",
+      "targetIds": [
+        "gr.b2.reporting-passive"
+      ],
+      "acceptedAnswers": [
+        "The device is believed to be safe under normal conditions."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000023"
+      ],
+      "cefr": "B2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000023:ex.transformation.e06.023.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000026.01",
+      "type": "error-correction",
+      "prompt": "Not until the meeting ended I understood the problem.",
+      "targetIds": [
+        "gr.c1.negative-inversion"
+      ],
+      "acceptedAnswers": [
+        "Not until the meeting ended did I understand the problem."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000026"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000026:ex.correction.e06.00000026.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000026.02",
+      "type": "error-correction",
+      "prompt": "Not until the meeting ended did I understood the problem.",
+      "targetIds": [
+        "gr.c1.negative-inversion"
+      ],
+      "acceptedAnswers": [
+        "Not until the meeting ended did I understand the problem."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000026"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000026:ex.correction.e06.00000026.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.026.a",
+      "type": "transformation",
+      "prompt": "Rewrite the inversion in neutral word order.\nSource: Not until the meeting ended did I understand the problem.",
+      "targetIds": [
+        "gr.c1.negative-inversion"
+      ],
+      "acceptedAnswers": [
+        "I did not understand the problem until the meeting ended."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000026"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000026:ex.transformation.e06.026.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.026.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.c1.negative-inversion).\nSource: I did not understand the problem until the meeting ended.",
+      "targetIds": [
+        "gr.c1.negative-inversion"
+      ],
+      "acceptedAnswers": [
+        "Not until the meeting ended did I understand the problem."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000026"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000026:ex.transformation.e06.026.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000029.01",
+      "type": "error-correction",
+      "prompt": "Their decide to postpone the launch reduced the immediate risk.",
+      "targetIds": [
+        "gr.c1.nominalisation"
+      ],
+      "acceptedAnswers": [
+        "Their decision to postpone the launch reduced the immediate risk."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000029"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000029:ex.correction.e06.00000029.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000029.02",
+      "type": "error-correction",
+      "prompt": "Their decision to postpone the launch reduce the immediate risk.",
+      "targetIds": [
+        "gr.c1.nominalisation"
+      ],
+      "acceptedAnswers": [
+        "Their decision to postpone the launch reduced the immediate risk."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000029"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000029:ex.correction.e06.00000029.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.029.a",
+      "type": "transformation",
+      "prompt": "Rewrite the nominalisation with a finite verb.\nSource: Their decision to postpone the launch reduced the immediate risk.",
+      "targetIds": [
+        "gr.c1.nominalisation"
+      ],
+      "acceptedAnswers": [
+        "They decided to postpone the launch, which reduced the immediate risk."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000029"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000029:ex.transformation.e06.029.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.029.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.c1.nominalisation).\nSource: They decided to postpone the launch, which reduced the immediate risk.",
+      "targetIds": [
+        "gr.c1.nominalisation"
+      ],
+      "acceptedAnswers": [
+        "Their decision to postpone the launch reduced the immediate risk."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000029"
+      ],
+      "cefr": "C1",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000029:ex.transformation.e06.029.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000032.01",
+      "type": "error-correction",
+      "prompt": "All visitors must wears a badge.",
+      "targetIds": [
+        "gr.c2.modal-ambiguity"
+      ],
+      "acceptedAnswers": [
+        "All visitors must wear a badge."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000032"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000032:ex.correction.e06.00000032.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000032.02",
+      "type": "error-correction",
+      "prompt": "All visitors must to wear a badge.",
+      "targetIds": [
+        "gr.c2.modal-ambiguity"
+      ],
+      "acceptedAnswers": [
+        "All visitors must wear a badge."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000032"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000032:ex.correction.e06.00000032.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.032.a",
+      "type": "transformation",
+      "prompt": "Paraphrase the obligation meaning without must.\nSource: All visitors must wear a badge.",
+      "targetIds": [
+        "gr.c2.modal-ambiguity"
+      ],
+      "acceptedAnswers": [
+        "All visitors are required to wear a badge."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000032"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000032:ex.transformation.e06.032.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.032.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.c2.modal-ambiguity).\nSource: All visitors are required to wear a badge.",
+      "targetIds": [
+        "gr.c2.modal-ambiguity"
+      ],
+      "acceptedAnswers": [
+        "All visitors must wear a badge."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000032"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000032:ex.transformation.e06.032.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000035.01",
+      "type": "error-correction",
+      "prompt": "Into room walked the last guest.",
+      "targetIds": [
+        "gr.c2.marked-word-order-rhetoric"
+      ],
+      "acceptedAnswers": [
+        "Into the room walked the last guest."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000035"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000035:ex.correction.e06.00000035.01",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.correction.e06.00000035.02",
+      "type": "error-correction",
+      "prompt": "Into the room did walked the last guest.",
+      "targetIds": [
+        "gr.c2.marked-word-order-rhetoric"
+      ],
+      "acceptedAnswers": [
+        "Into the room walked the last guest."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000035"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000035:ex.correction.e06.00000035.02",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.035.a",
+      "type": "transformation",
+      "prompt": "Rewrite the marked word order in neutral subject-verb order.\nSource: Into the room walked the last guest.",
+      "targetIds": [
+        "gr.c2.marked-word-order-rhetoric"
+      ],
+      "acceptedAnswers": [
+        "The last guest walked into the room."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000035"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000035:ex.transformation.e06.035.a",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.transformation.e06.035.b",
+      "type": "transformation",
+      "prompt": "Rewrite this alternative back into the pilot target form (gr.c2.marked-word-order-rhetoric).\nSource: The last guest walked into the room.",
+      "targetIds": [
+        "gr.c2.marked-word-order-rhetoric"
+      ],
+      "acceptedAnswers": [
+        "Into the room walked the last guest."
+      ],
+      "sourceSentenceIds": [
+        "sent.00000035"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-reviewed-slice-authoring-v2"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "published-pilot-sentence-link-v1"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "grammar-editor-review-required"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-grammar-task"
+          },
+          "exactDuplicate": {
+            "status": "pending",
+            "method": "normalized-prompt-answer-review-required"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "prompt-answer-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "semanticEquivalence": {
+            "status": "pending",
+            "method": "independent-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "license-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "sent.00000035:ex.transformation.e06.035.b",
+            "sourceUrl": "content/english/sentences/pilot-sentences.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed E06 grammar slice derived from a published pilot sentence; source record remains draft and publication is review-ledger only."
+      }
     }
   ]
 }
