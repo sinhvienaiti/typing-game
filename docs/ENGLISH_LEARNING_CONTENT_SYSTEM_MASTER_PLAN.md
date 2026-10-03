@@ -2508,6 +2508,7 @@ Pipeline status: **IMPLEMENTED; EDITORIAL PROMOTION IN PROGRESS**.
 - Bilingual sense-alignment packet contains 300 records; 294 have both sources and POS overlap.
 - OEWN uses immutable Git commit `dc343f2683279ecbb13fab4e2fd778d7b162d287`.
 - Vietnamese Wiktionary source bytes are pinned by SHA-256.
+- On 2026-10-03 CI detected upstream checksum drift at the mutable Kaikki raw URL (`6981e225…` → `106d8bd9…`) while the advertised dump/extraction metadata remained 2026-09-01 / 2026-09-28. An explicit candidate-only source-refresh review batch is open; published lexical records are not auto-upgraded until normalized-output comparison passes.
 - Editorial promotion has now published **20 reviewed lexemes + 20 normalized primary senses** in two controlled slices. The remaining pilot senses still require manual alignment; no source importer is allowed to invent those reviews.
 
 ### 43.3 E04 phrase / pattern pilot
@@ -2620,7 +2621,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **3,850 authoring/candidate records: 3,200 candidate + 650 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **3,851 authoring/candidate records: 3,201 candidate + 650 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2687,5 +2688,6 @@ The architecture, parent launcher and child integrations are no longer waiting f
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
+- close the explicit Vietnamese Wiktionary source-refresh review by comparing the regenerated 300-record normalized queue against the prior pinned review snapshot before using the refreshed source for any new lexical promotion.
 
 The project must not bulk-generate 100k records merely to raise readiness percentages.

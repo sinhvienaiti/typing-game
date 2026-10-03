@@ -766,6 +766,36 @@
           "recordType": "cloze"
         }
       ]
+    },
+    {
+      "id": "e03.viwiktionary-source-refresh-2026-10-03",
+      "phase": "E03",
+      "category": "mixed",
+      "cefr": [],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/viwiktionary-refresh-2026-10-03.json",
+          "expectedCount": 1,
+          "generated": false,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "upstreamMetadata",
+            "license",
+            "derivedComparison"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ],
+      "gameSmokes": []
     }
   ]
 }

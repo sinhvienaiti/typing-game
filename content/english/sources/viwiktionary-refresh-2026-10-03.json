@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "id": "source-refresh.viwiktionary-en.2026-10-03",
+      "sourceId": "viwiktionary-en",
+      "previousChecksumSha256": "6981e225b18b161d3fde85ae8ccfd3335e520bd5b760fcbd7fb9868206361f7d",
+      "proposedChecksumSha256": "106d8bd9d1161eef6c9097be4eb8c8c41c3cfd4c8747cf5f78aa541e0759895e",
+      "sourceSnapshot": "viwiktionary-dump-2026-09-01;kaikki-extract-2026-09-28",
+      "observedAt": "2026-10-03",
+      "quality": {
+        "state": "candidate",
+        "checks": {
+          "sourcePin": {
+            "status": "pass",
+            "method": "ci-observed-sha256-v1"
+          },
+          "upstreamMetadata": {
+            "status": "pass",
+            "method": "kaikki-rawdata-page-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "wiktionary-license-review-v1"
+          },
+          "derivedComparison": {
+            "status": "pending",
+            "method": "previous-vs-refreshed-normalized-candidate-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "viwiktionary-en",
+            "sourceId": "raw-wiktextract-data.jsonl.gz",
+            "sourceUrl": "https://kaikki.org/viwiktionary/raw-wiktextract-data.jsonl.gz",
+            "snapshot": "viwiktionary-dump-2026-09-01;kaikki-extract-2026-09-28",
+            "license": "CC-BY-SA-4.0 AND GFDL-1.3-or-later",
+            "attribution": "Vietnamese Wiktionary via Wiktextract/Kaikki",
+            "modified": false
+          }
+        ],
+        "note": "Operational source-refresh review metadata only. This record is never published as learner content."
+      }
+    }
+  ]
+}
