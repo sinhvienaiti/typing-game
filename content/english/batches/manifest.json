@@ -544,6 +544,65 @@
           "sampleCount": 3
         }
       ]
+    },
+    {
+      "id": "e06.grammar-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-exercises",
+          "path": "content/english/sentences/e06-reviewed-exercises.json",
+          "expectedCount": 48,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "grammar",
+            "naturalness",
+            "semanticEquivalence",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "target-structure-review",
+        "naturalness-review",
+        "semantic-equivalence-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "error-correction",
+          "recordSetId": "reviewed-exercises",
+          "sampleCount": 6,
+          "recordType": "error-correction"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "transformation",
+          "recordSetId": "reviewed-exercises",
+          "sampleCount": 6,
+          "recordType": "transformation"
+        }
+      ]
     }
   ]
 }

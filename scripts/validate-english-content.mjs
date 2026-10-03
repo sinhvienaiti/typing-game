@@ -76,6 +76,7 @@ const reviewedSenses=await validateFile("content/english/dictionary/e03-reviewed
 const grammarPilot=await validateFile("content/english/grammar/pilot-topics.json","grammar-topic-set.schema.json");
 const sentencePilot=await validateFile("content/english/sentences/pilot-sentences.json","sentence-set.schema.json");
 const exercisePilot=await validateFile("content/english/sentences/pilot-exercises.json","exercise-set.schema.json");
+const reviewedE06Exercises=await validateFile("content/english/sentences/e06-reviewed-exercises.json","exercise-set.schema.json");
 const vocabLookup=await readJson(path.join(root,"shared","vocabulary","lookup.json"));
 if (lexemePilot) {
   if (lexemePilot.records.length!==300) errors.push("lexeme seed pilot must contain exactly 300 records");
@@ -128,6 +129,26 @@ if (sentencePilot) {
     if (sentence.quality?.state==="published") errors.push(sentence.id+": pilot sentence must remain non-published until review");
     for (const id of sentence.grammarIds??[]) if (!allIds.has(id)) errors.push(sentence.id+": unknown grammar target "+id);
   }
+}
+if (reviewedE06Exercises) {
+  if (reviewedE06Exercises.records.length!==48) errors.push("E06 reviewed exercise slice must contain exactly 48 records");
+  const ids=new Set();
+  const topicCounts=new Map();
+  let corrections=0,transformations=0;
+  for (const exercise of reviewedE06Exercises.records) {
+    if (exercise.quality?.state!=="draft") errors.push(exercise.id+": E06 reviewed source must remain draft; publication is ledger-overlay only");
+    if (ids.has(exercise.id)) errors.push(exercise.id+": duplicate E06 reviewed exercise id");
+    ids.add(exercise.id);
+    if (exercise.type==="error-correction") corrections++;
+    else if (exercise.type==="transformation") transformations++;
+    else errors.push(exercise.id+": E06 reviewed slice supports correction/transformation only");
+    const grammarId=(exercise.targetIds??[]).find(id=>id.startsWith("gr."));
+    if (!grammarId||!allIds.has(grammarId)) errors.push(exercise.id+": invalid grammar target");
+    else topicCounts.set(grammarId,(topicCounts.get(grammarId)??0)+1);
+    for (const id of exercise.sourceSentenceIds??[]) if (!pilotSentenceIds.has(id)) errors.push(exercise.id+": source must be a published pilot sentence "+id);
+  }
+  if (corrections!==24||transformations!==24) errors.push("E06 reviewed slice must split 24 corrections + 24 transformations");
+  for (const topic of grammarPilot?.records??[]) if ((topicCounts.get(topic.id)??0)!==4) errors.push("E06 reviewed slice must contain 4 exercises for "+topic.id);
 }
 if (exercisePilot) {
   if (exercisePilot.records.length!==24) errors.push("exercise pilot must contain exactly 24 records");

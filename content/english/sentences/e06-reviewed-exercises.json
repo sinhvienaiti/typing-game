@@ -3,1566 +3,6 @@
   "records": [
     {
       "schemaVersion": 1,
-      "id": "ex.cloze.00000001",
-      "type": "cloze",
-      "prompt": "She ___ the bus to work on weekdays.",
-      "targetIds": [
-        "gr.a1.present-simple-routines"
-      ],
-      "acceptedAnswers": [
-        "takes"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000002"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000001",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000001",
-      "type": "translation",
-      "prompt": "Tôi kiểm tra email mỗi sáng.",
-      "targetIds": [
-        "gr.a1.present-simple-routines"
-      ],
-      "acceptedAnswers": [
-        "I check my email every morning."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000001"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000001",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000002",
-      "type": "cloze",
-      "prompt": "I ___ for the train now.",
-      "targetIds": [
-        "gr.a1.present-continuous-now"
-      ],
-      "acceptedAnswers": [
-        "am waiting"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000004"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000002",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000002",
-      "type": "translation",
-      "prompt": "Tôi đang đợi tàu ngay bây giờ.",
-      "targetIds": [
-        "gr.a1.present-continuous-now"
-      ],
-      "acceptedAnswers": [
-        "I am waiting for the train now."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000004"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000002",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000003",
-      "type": "cloze",
-      "prompt": "I ___ Singapore twice.",
-      "targetIds": [
-        "gr.a2.present-perfect-experience"
-      ],
-      "acceptedAnswers": [
-        "have visited"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000007"
-      ],
-      "cefr": "A2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000003",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000003",
-      "type": "translation",
-      "prompt": "Dịch bằng Hiện tại hoàn thành để nói về trải nghiệm: Tôi đã đến Singapore hai lần.",
-      "targetIds": [
-        "gr.a2.present-perfect-experience"
-      ],
-      "acceptedAnswers": [
-        "I have visited Singapore twice."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000007"
-      ],
-      "cefr": "A2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000003",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000004",
-      "type": "cloze",
-      "prompt": "If it rains, we ___ a taxi.",
-      "targetIds": [
-        "gr.a2.first-conditional"
-      ],
-      "acceptedAnswers": [
-        "will take"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000010"
-      ],
-      "cefr": "A2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000004",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000004",
-      "type": "translation",
-      "prompt": "Nếu trời mưa, chúng tôi sẽ đi taxi.",
-      "targetIds": [
-        "gr.a2.first-conditional"
-      ],
-      "acceptedAnswers": [
-        "If it rains, we will take a taxi."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000010"
-      ],
-      "cefr": "A2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000004",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000005",
-      "type": "cloze",
-      "prompt": "I ___ emails for two hours.",
-      "targetIds": [
-        "gr.b1.present-perfect-simple-vs-continuous"
-      ],
-      "acceptedAnswers": [
-        "have been writing"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000014"
-      ],
-      "cefr": "B1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000005",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000005",
-      "type": "translation",
-      "prompt": "Dịch bằng Hiện tại hoàn thành tiếp diễn: Tôi đã viết email liên tục suốt hai giờ rồi.",
-      "targetIds": [
-        "gr.b1.present-perfect-simple-vs-continuous"
-      ],
-      "acceptedAnswers": [
-        "I have been writing emails for two hours."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000014"
-      ],
-      "cefr": "B1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000005",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000006",
-      "type": "cloze",
-      "prompt": "If I had more time, I ___ another language.",
-      "targetIds": [
-        "gr.b1.second-conditional"
-      ],
-      "acceptedAnswers": [
-        "would learn"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000016"
-      ],
-      "cefr": "B1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000006",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000006",
-      "type": "translation",
-      "prompt": "Dịch bằng câu điều kiện loại 2: Nếu tôi có nhiều thời gian hơn, tôi sẽ học thêm một ngôn ngữ.",
-      "targetIds": [
-        "gr.b1.second-conditional"
-      ],
-      "acceptedAnswers": [
-        "If I had more time, I would learn another language."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000016"
-      ],
-      "cefr": "B1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000006",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000007",
-      "type": "cloze",
-      "prompt": "If we had left earlier, we ___ the train.",
-      "targetIds": [
-        "gr.b2.third-conditional"
-      ],
-      "acceptedAnswers": [
-        "would have caught"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000019"
-      ],
-      "cefr": "B2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000007",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000007",
-      "type": "translation",
-      "prompt": "Dịch bằng câu điều kiện loại 3: Nếu lúc đó chúng ta rời đi sớm hơn, chúng ta đã bắt kịp chuyến tàu rồi.",
-      "targetIds": [
-        "gr.b2.third-conditional"
-      ],
-      "acceptedAnswers": [
-        "If we had left earlier, we would have caught the train."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000019"
-      ],
-      "cefr": "B2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000007",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000008",
-      "type": "cloze",
-      "prompt": "The new policy ___ to reduce waiting times.",
-      "targetIds": [
-        "gr.b2.reporting-passive"
-      ],
-      "acceptedAnswers": [
-        "is expected"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000022"
-      ],
-      "cefr": "B2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000008",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000008",
-      "type": "translation",
-      "prompt": "Dịch bằng cấu trúc bị động tường thuật: Chính sách mới được kỳ vọng sẽ giảm thời gian chờ.",
-      "targetIds": [
-        "gr.b2.reporting-passive"
-      ],
-      "acceptedAnswers": [
-        "The new policy is expected to reduce waiting times."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000022"
-      ],
-      "cefr": "B2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000008",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000009",
-      "type": "cloze",
-      "prompt": "Rarely ___ such a clear improvement in one week.",
-      "targetIds": [
-        "gr.c1.negative-inversion"
-      ],
-      "acceptedAnswers": [
-        "do we see"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000025"
-      ],
-      "cefr": "C1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000009",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000009",
-      "type": "translation",
-      "prompt": "Dịch bằng cấu trúc đảo ngữ để nhấn mạnh: Hiếm khi chúng ta thấy sự cải thiện rõ ràng như vậy chỉ trong một tuần.",
-      "targetIds": [
-        "gr.c1.negative-inversion"
-      ],
-      "acceptedAnswers": [
-        "Rarely do we see such a clear improvement in one week."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000025"
-      ],
-      "cefr": "C1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000009",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000010",
-      "type": "cloze",
-      "prompt": "The rapid ___ of the service created new staffing needs.",
-      "targetIds": [
-        "gr.c1.nominalisation"
-      ],
-      "acceptedAnswers": [
-        "expansion"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000028"
-      ],
-      "cefr": "C1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000010",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000010",
-      "type": "translation",
-      "prompt": "Dịch bằng cấu trúc danh từ hóa: Sự mở rộng nhanh chóng của dịch vụ tạo ra nhu cầu nhân sự mới.",
-      "targetIds": [
-        "gr.c1.nominalisation"
-      ],
-      "acceptedAnswers": [
-        "The rapid expansion of the service created new staffing needs."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000028"
-      ],
-      "cefr": "C1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000010",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000011",
-      "type": "cloze",
-      "prompt": "All visitors ___ a badge.",
-      "targetIds": [
-        "gr.c2.modal-ambiguity"
-      ],
-      "acceptedAnswers": [
-        "must wear"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000032"
-      ],
-      "cefr": "C2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000011",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000011",
-      "type": "translation",
-      "prompt": "Dịch với modal diễn tả nghĩa vụ: Tất cả khách tham quan bắt buộc phải đeo thẻ.",
-      "targetIds": [
-        "gr.c2.modal-ambiguity"
-      ],
-      "acceptedAnswers": [
-        "All visitors must wear a badge."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000032"
-      ],
-      "cefr": "C2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000011",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.00000012",
-      "type": "cloze",
-      "prompt": "At the end of the corridor ___ a narrow wooden door.",
-      "targetIds": [
-        "gr.c2.marked-word-order-rhetoric"
-      ],
-      "acceptedAnswers": [
-        "stood"
-      ],
-      "sourceSentenceIds": [
-        "sent.00000034"
-      ],
-      "cefr": "C2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-cloze-exercise"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.cloze.00000012",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.translation.00000012",
-      "type": "translation",
-      "prompt": "Dịch theo trật tự từ đánh dấu để tạo hiệu ứng miêu tả: Ở cuối hành lang sừng sững một cánh cửa gỗ hẹp.",
-      "targetIds": [
-        "gr.c2.marked-word-order-rhetoric"
-      ],
-      "acceptedAnswers": [
-        "At the end of the corridor stood a narrow wooden door."
-      ],
-      "sourceSentenceIds": [
-        "sent.00000034"
-      ],
-      "cefr": "C2",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "pilot-authoring-v1"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
-          },
-          "translation": {
-            "status": "pass",
-            "method": "bilingual-en-vi-editorial-review-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "stable-id-v1"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "linked-target-review-v1"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-provenance-review-v1"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "ex.translation.00000012",
-            "sourceUrl": "content/english/sentences/pilot-exercises.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ]
-      }
-    },
-    {
-      "schemaVersion": 1,
       "id": "ex.correction.e06.00000001.01",
       "type": "error-correction",
       "prompt": "I checks my email every morning.",
@@ -1577,7 +17,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1588,28 +28,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1643,7 +83,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1654,28 +94,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1709,7 +149,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1720,28 +160,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1775,7 +215,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1786,28 +226,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1841,7 +281,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1852,28 +292,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1907,7 +347,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1918,28 +358,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -1973,7 +413,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -1984,28 +424,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2039,7 +479,7 @@
       ],
       "cefr": "A1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2050,28 +490,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2105,7 +545,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2116,28 +556,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2171,7 +611,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2182,28 +622,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2237,7 +677,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2248,28 +688,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2303,7 +743,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2314,28 +754,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2369,7 +809,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2380,28 +820,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2435,7 +875,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2446,28 +886,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2501,7 +941,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2512,28 +952,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2567,7 +1007,7 @@
       ],
       "cefr": "A2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2578,28 +1018,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2633,7 +1073,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2644,28 +1084,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2699,7 +1139,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2710,28 +1150,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2765,7 +1205,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2776,28 +1216,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2831,7 +1271,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2842,28 +1282,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2897,7 +1337,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2908,28 +1348,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -2963,7 +1403,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -2974,28 +1414,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3029,7 +1469,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3040,28 +1480,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3095,7 +1535,7 @@
       ],
       "cefr": "B1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3106,28 +1546,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3161,7 +1601,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3172,28 +1612,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3227,7 +1667,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3238,28 +1678,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3293,7 +1733,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3304,28 +1744,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3359,7 +1799,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3370,28 +1810,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3425,7 +1865,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3436,28 +1876,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3491,7 +1931,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3502,28 +1942,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3557,7 +1997,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3568,28 +2008,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3623,7 +2063,7 @@
       ],
       "cefr": "B2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3634,28 +2074,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3689,7 +2129,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3700,28 +2140,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3755,7 +2195,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3766,28 +2206,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3821,7 +2261,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3832,28 +2272,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3887,7 +2327,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3898,28 +2338,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -3953,7 +2393,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -3964,28 +2404,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4019,7 +2459,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4030,28 +2470,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4085,7 +2525,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4096,28 +2536,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4151,7 +2591,7 @@
       ],
       "cefr": "C1",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4162,28 +2602,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4217,7 +2657,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4228,28 +2668,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4283,7 +2723,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4294,28 +2734,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4349,7 +2789,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4360,28 +2800,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4415,7 +2855,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4426,28 +2866,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4481,7 +2921,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4492,28 +2932,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4547,7 +2987,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4558,28 +2998,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "not-applicable",
-            "method": "correction-restoration-task"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4613,7 +3053,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4624,28 +3064,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },
@@ -4679,7 +3119,7 @@
       ],
       "cefr": "C2",
       "quality": {
-        "state": "published",
+        "state": "draft",
         "checks": {
           "schema": {
             "status": "pass",
@@ -4690,28 +3130,28 @@
             "method": "published-pilot-sentence-link-v1"
           },
           "targetStructure": {
-            "status": "pass",
-            "method": "editorial-target-structure-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v1"
+            "status": "pending",
+            "method": "grammar-editor-review-required"
           },
           "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v1"
+            "status": "pending",
+            "method": "editor-review-required"
           },
           "semanticEquivalence": {
-            "status": "pass",
-            "method": "editorial-semantic-equivalence-review-v1"
+            "status": "pending",
+            "method": "independent-review-required"
           },
           "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v1"
+            "status": "pending",
+            "method": "cefr-review-required"
           },
           "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v1"
+            "status": "pending",
+            "method": "license-review-required"
           }
         }
       },

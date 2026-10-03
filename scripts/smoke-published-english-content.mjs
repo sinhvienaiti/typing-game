@@ -59,9 +59,14 @@ const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith(
 if (dictionaryManifest.count!==20) errors.push("published dictionary runtime must contain 20 E03 records");
 if (lexemes.length!==10||senses.length!==10) errors.push("published E03 runtime split must be 10 lexemes + 10 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==60) errors.push("published sentence runtime must contain 60 E05 records");
-if (topics.length!==12||examples.length!==36||exercises.length!==24) {
-  errors.push("published E05 runtime split must be 12 topics + 36 examples + 24 exercises");
+if (sentenceManifest.count!==108) errors.push("published sentence runtime must contain 108 reviewed records");
+if (topics.length!==12||examples.length!==36||exercises.length!==72) {
+  errors.push("published runtime split must be 12 topics + 36 examples + 72 exercises");
+}
+const correctionExercises=exercises.filter(record=>record.type==="error-correction");
+const transformationExercises=exercises.filter(record=>record.type==="transformation");
+if (correctionExercises.length!==24||transformationExercises.length!==24) {
+  errors.push("published E06 reviewed slice must expose 24 correction + 24 transformation exercises");
 }
 
 const senseIds=new Set(senses.map(record=>record.id));
@@ -116,6 +121,14 @@ try {
     "monkeytype","translation",exercises.filter(record=>record.type==="translation").slice(0,2),"runtime-smoke-monkey-translation",
     {createdAt:"2026-10-03T00:00:00.000Z"},
   );
+  buildGameEnglishActivityDataset(
+    "monkeytype","error-correction",correctionExercises.slice(0,2),"runtime-smoke-monkey-correction",
+    {createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  buildGameEnglishActivityDataset(
+    "monkeytype","transformation",transformationExercises.slice(0,2),"runtime-smoke-monkey-transformation",
+    {createdAt:"2026-10-03T00:00:00.000Z"},
+  );
 } catch (error) {
   errors.push("published runtime activity smoke failed: "+error.message);
 }
@@ -156,6 +169,17 @@ try {
   if(karaokeTranslation.items.length!==5) {
     errors.push("published activity source must return 5 bounded Karaoke translation items");
   }
+
+  const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(monkeyCorrection.items.length!==5) errors.push("published activity source must return 5 Monkeytype correction items");
+  const monkeyTransformation=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,"monkeytype","monkeytype","transformation","runtime-source-monkey-transformation",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(monkeyTransformation.items.length!==5) errors.push("published activity source must return 5 Monkeytype transformation items");
 
   const karaokeExamples=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -198,6 +222,8 @@ const report={
   grammarTopics:topics.length,
   examples:examples.length,
   exercises:exercises.length,
+  corrections:correctionExercises.length,
+  transformations:transformationExercises.length,
   grammarManifestCount:grammarManifest.count,
   sentenceManifestCount:sentenceManifest.count,
   runtimeActivitySource:{
@@ -206,6 +232,8 @@ const report={
     spaceVocabulary:5,
     spaceGrammar:5,
     karaokeTranslation:5,
+    monkeyCorrection:5,
+    monkeyTransformation:5,
     karaokeExamples:5,
     recallCollocations:100,
   },
