@@ -19,11 +19,25 @@ const runtimeFiles=[
   "shared/attribution/english-content/manifest.json",
 ];
 const runtime=[];
+const publishedSourceIds=new Set();
 for (const relative of runtimeFiles) {
   const manifest=await readJson(path.join(root,relative));
   runtime.push({path:relative,dataset:manifest.dataset,count:manifest.count,contentVersion:manifest.contentVersion});
   if (manifest.contentVersion!==batches.contentVersion) {
     errors.push(relative+": stale contentVersion "+manifest.contentVersion);
+  }
+  if (manifest.dataset!=="attribution.english-content") {
+    const baseDir=path.dirname(relative);
+    for (const shard of manifest.shards??[]) {
+      const shardDoc=await readJson(path.join(root,baseDir,shard.path));
+      for (const record of shardDoc.records??[]) {
+        for (const source of record?.provenance?.sources??[]) {
+          if (typeof source?.dataset==="string"&&source.dataset!=="") {
+            publishedSourceIds.add(source.dataset);
+          }
+        }
+      }
+    }
   }
 }
 const runtimePublished=runtime
@@ -32,8 +46,18 @@ const runtimePublished=runtime
 if (runtimePublished===0&&attribution.count!==0) {
   errors.push("attribution runtime must be empty when no rich records are published");
 }
-if (runtimePublished>0&&sources.sources.some(source=>source.publishAllowed&&source.attributionRequired)&&attribution.count===0) {
-  errors.push("published rich content requires a non-empty attribution runtime");
+const sourceById=new Map((sources.sources??[]).map(source=>[source.id,source]));
+const attributionRequiredSourceIds=[...publishedSourceIds]
+  .filter(id=>sourceById.get(id)?.attributionRequired===true)
+  .sort();
+if (attributionRequiredSourceIds.length>0&&attribution.count===0) {
+  errors.push(
+    "published rich content requires attribution for runtime sources: "+
+    attributionRequiredSourceIds.join(", ")
+  );
+}
+if (runtimePublished>0&&attributionRequiredSourceIds.length===0&&attribution.count!==0) {
+  errors.push("attribution runtime contains entries although published records require no attribution");
 }
 
 const sourceAudit=sources.sources.map(source=>{
@@ -80,6 +104,8 @@ const audit={
   contentVersion:batches.contentVersion,
   runtime,
   runtimePublished,
+  publishedSourceIds:[...publishedSourceIds].sort(),
+  attributionRequiredSourceIds,
   sourceAudit,
   deprecations:{count:deprecations.mappings?.length??0,replacementIds:[...replacementIds].sort()},
 };
