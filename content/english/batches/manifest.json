@@ -849,6 +849,36 @@
           "sampleCount": 3
         }
       ]
+    },
+    {
+      "id": "e06.tatoeba-source-refresh-2026-10-03",
+      "phase": "E06",
+      "category": "mixed",
+      "cefr": [],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/tatoeba-refresh-2026-10-03.json",
+          "expectedCount": 1,
+          "generated": false,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "upstreamMetadata",
+            "license",
+            "derivedComparison"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ],
+      "gameSmokes": []
     }
   ]
 }

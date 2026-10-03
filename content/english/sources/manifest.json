@@ -63,7 +63,7 @@
       "attributionRequired": true,
       "status": "reference",
       "snapshot": "weekly-export-2026-09-26",
-      "notes": "E06 EN↔VI translation pilot uses the Tatoeba weekly export dated 2026-09-26. Sentence text is CC-BY 2.0 FR by default; attribution and sentence IDs are retained. Exact content hashes are stored in content/english/sources/tatoeba-eng-vie-pilot.json after probe.",
+      "notes": "Published E06 Tatoeba records retain their original weekly-export-2026-09-26 provenance. On 2026-10-03 CI observed checksum drift only in eng_sentences.tsv while vie_sentences.tsv and eng-vie_links.tsv remained byte-identical to their prior pins. A candidate-only source-refresh review is open; no published translation pair is auto-upgraded until normalized-output comparison passes.",
       "releaseUrl": "https://downloads.tatoeba.org/exports/per_language/"
     },
     {
