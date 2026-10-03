@@ -187,6 +187,7 @@ build_if_needed \
 
 echo "[4/5] Switching nginx to static Play mode..."
 bash scripts/setup-nginx.sh play
+node games/space-typing/scripts/local-duel.mjs start
 
 echo "[5/5] Opening typing games..."
 bash scripts/play.sh
