@@ -74,7 +74,11 @@
     "english-content:e10:validate": "node scripts/validate-english-content-batches.mjs",
     "english-content:e10:smoke": "node scripts/smoke-english-content-batches.mjs",
     "english-content:e10": "pnpm english-content:e10:validate && pnpm english-content:e10:smoke",
-    "english-content:e11": "node scripts/report-english-content-e11-readiness.mjs"
+    "english-content:e11": "node scripts/report-english-content-e11-readiness.mjs",
+    "english-content:e12:release": "node scripts/generate-english-content-release.mjs",
+    "english-content:e12:audit": "node scripts/audit-english-content-maintenance.mjs",
+    "english-content:e12:sample": "node scripts/sample-english-content-quality.mjs",
+    "english-content:e12": "pnpm english-content:e12:release && pnpm english-content:e12:audit && pnpm english-content:e12:sample"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
