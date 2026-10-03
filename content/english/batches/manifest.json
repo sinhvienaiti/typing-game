@@ -188,7 +188,46 @@
             "translation",
             "exactDuplicate",
             "naturalness",
-            "targetPresence"
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "pilot-sentences",
+          "path": "content/english/sentences/pilot-sentences.json",
+          "expectedCount": 36,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "pilot-exercises",
+          "path": "content/english/sentences/pilot-exercises.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
           ]
         }
       ],
@@ -204,6 +243,30 @@
           "gameId": "space-typing",
           "activity": "grammar-challenge",
           "recordSetId": "grammar-topics",
+          "sampleCount": 4
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "grammar-topic",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 4
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "example-typing",
+          "recordSetId": "pilot-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "cloze",
+          "recordSetId": "pilot-exercises",
+          "sampleCount": 4
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "translation",
+          "recordSetId": "pilot-exercises",
           "sampleCount": 4
         }
       ]
