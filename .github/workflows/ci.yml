@@ -207,8 +207,7 @@ jobs:
             -o .cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz
           gzip -t .cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz
           pnpm english-content:import:simplewiktionary -- \
-            --input=.cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz \
-            --allow-unpinned=true
+            --input=.cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz
           pnpm english-content:e03:morphology
 
       - name: Upload Simple Wiktionary E03 morphology pilot

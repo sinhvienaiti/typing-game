@@ -10,7 +10,7 @@ for (const source of manifest.sources??[]) {
   if (source.publishAllowed&&source.status==="blocked") errors.push(source.id+": blocked source cannot be publishAllowed");
   if (!source.publishAllowed&&source.status==="import-enabled") errors.push(source.id+": non-publishable source cannot be import-enabled");
 }
-for (const id of ["verbnet","cambridge-profile","viwiktionary-en"]) {
+for (const id of ["verbnet","cambridge-profile","viwiktionary-en","simplewiktionary-en"]) {
   const source=manifest.sources.find(item=>item.id===id);
   if (!source||source.publishAllowed!==false) errors.push(id+": publish gate must be false");
 }
@@ -21,6 +21,10 @@ if (!multiwozSource||multiwozSource.license!=="MIT"||multiwozSource.publishAllow
 const tatoebaSource=manifest.sources.find(item=>item.id==="tatoeba");
 if (!tatoebaSource||tatoebaSource.publishAllowed!==true||tatoebaSource.attributionRequired!==true) {
   errors.push("tatoeba: publication must require attribution");
+}
+const simpleSource=manifest.sources.find(item=>item.id==="simplewiktionary-en");
+if (!simpleSource?.checksumSha256||!/^[a-f0-9]{64}$/.test(simpleSource.checksumSha256)) {
+  errors.push("simplewiktionary-en: pinned checksum is required");
 }
 const viSource=manifest.sources.find(item=>item.id==="viwiktionary-en");
 if (!viSource?.checksumSha256||!/^[a-f0-9]{64}$/.test(viSource.checksumSha256)) {

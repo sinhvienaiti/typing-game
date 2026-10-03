@@ -2504,6 +2504,7 @@ Pipeline status: **IMPLEMENTED; EDITORIAL ALIGNMENT PENDING**.
 - 3,334 OEWN senses imported; 3,334/3,334 have English definitions.
 - 294/300 pilot lexemes also map to pinned Vietnamese Wiktionary English entries.
 - Vietnamese Wiktionary pilot contains 2,779 candidate Vietnamese sense glosses and 274/300 records with IPA.
+- Simple English Wiktionary/Wiktextract morphology/usage pilot maps 300/300 lexemes: 522 POS entries, 1,512 forms, 1,151 senses, 290/300 with forms, 193/300 with usage labels and 298/300 with IPA. The raw source is pinned by SHA-256 `ea4342525a35eb32e70f5d9945398f06d4f6160af25b0c340fc84662d27efcdf`.
 - Bilingual sense-alignment packet contains 300 records; 294 have both sources and POS overlap.
 - OEWN uses immutable Git commit `dc343f2683279ecbb13fab4e2fd778d7b162d287`.
 - Vietnamese Wiktionary source bytes are pinned by SHA-256.
