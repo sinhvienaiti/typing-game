@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==180) {
-    errors.push("published Recall collocation activity must expose 180 reviewed records");
+  if(recallCollocations!==200) {
+    errors.push("published Recall collocation activity must expose 200 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==130) errors.push("published verb-pattern activity must expose 130 reviewed records");
-  if(phrasalVerbCount!==90) errors.push("published phrasal-verb activity must expose 90 reviewed records");
-  if(chunkCount!==60) errors.push("published chunk activity must expose 60 reviewed records");
-  if(idiomCount!==30) errors.push("published idiom activity must expose 30 reviewed records");
+  if(verbPatternCount!==150) errors.push("published verb-pattern activity must expose 150 reviewed records");
+  if(phrasalVerbCount!==100) errors.push("published phrasal-verb activity must expose 100 reviewed records");
+  if(chunkCount!==65) errors.push("published chunk activity must expose 65 reviewed records");
+  if(idiomCount!==35) errors.push("published idiom activity must expose 35 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -289,15 +289,15 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
-    monkeyCorrectionRecords:168,
+    monkeyCorrectionRecords:172,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:180,
-    verbPatterns:130,
-    phrasalVerbs:90,
-    chunks:60,
-    idioms:30,
+    recallCollocations:200,
+    verbPatterns:150,
+    phrasalVerbs:100,
+    chunks:65,
+    idioms:35,
   },
 };
 console.log(JSON.stringify(report,null,2));

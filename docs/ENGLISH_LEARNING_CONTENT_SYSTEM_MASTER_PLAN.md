@@ -2565,7 +2565,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **30 lexemes + 30 senses (60)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **132 examples + 264 exercises + 10 dialogues + 100 reviewed common mistakes (506)**; and `shared/phrases` contains **490 phrase/pattern records** (180 collocations + 130 verb patterns + 90 phrasal verbs + 60 chunks + 30 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **30 lexemes + 30 senses (60)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **132 examples + 264 exercises + 10 dialogues + 100 reviewed common mistakes (506)**; and `shared/phrases` contains **550 phrase/pattern records** (200 collocations + 150 verb patterns + 100 phrasal verbs + 65 chunks + 35 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2622,19 +2622,19 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **4,270 authoring/candidate records: 3,200 candidate + 1,070 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **4,330 authoring/candidate records: 3,200 candidate + 1,130 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
 Status: **TARGET CONTRACT + READINESS REPORT COMPLETE; BULK CORPUS NOT CLAIMED COMPLETE**.
 
-Current readiness measurements after E04 scale batch 04:
+Current readiness measurements after E04 scale batch 05:
 
 - grammar topics: 300 / minimum 300 (framework target reached);
-- verb patterns: 130 / 500 minimum;
-- collocations: 180 / 5,000 minimum;
-- phrasal verbs: 90 / 1,000 minimum;
-- idioms/chunks: 90 / 2,000 minimum;
+- verb patterns: 150 / 500 minimum;
+- collocations: 200 / 5,000 minimum;
+- phrasal verbs: 100 / 1,000 minimum;
+- idioms/chunks: 100 / 2,000 minimum;
 - common mistakes: 100 / 2,000 minimum in the candidate pipeline; **all 100 pilot records are now individually reviewed/published for runtime practice**;
 - example sentences: 1,000 / 100,000 minimum;
 - translation pairs: 300 / 20,000 minimum;
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **1,068 published rich records**: dictionary 60, grammar 12, sentences 506 and phrases 490. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **1,128 published rich records**: dictionary 60, grammar 12, sentences 506 and phrases 550. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2687,6 +2687,7 @@ Important green platform runs:
 - #590 — third reviewed common-mistake slice plus E04 phrase-pattern scale batch 03 reached 1,004 rich runtime records and passed full Platform CI.
 - #591 — E04 phrase-pattern scale batch 04 (+60 reviewed records; 1,064 rich runtime records) passed full Platform CI before closing the common-mistake pilot.
 - #578 — closed Vietnamese Wiktionary source-refresh review passed full Platform CI on the 650-record runtime baseline before MultiWOZ dialogue promotion.
+- #593 — completed the 100-record common-mistake pilot and corrected the coverage validator to honor the source contract (at least six records per grammar topic); full Platform CI passed.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
@@ -2697,7 +2698,7 @@ The architecture, parent launcher and child integrations are no longer waiting f
 - continue review/alignment of the remaining E03 lexical pilot after the first **30 lexemes + 30 senses** have been promoted;
 - continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **100/100 reviewed common mistakes**, 72 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
-- continue E04 controlled scale-up beyond the first four +60 reviewed batches; current published phrase runtime is 490, still far below the long-term targets.
+- continue E04 controlled scale-up beyond the first five +60 reviewed batches; current published phrase runtime is 550, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
