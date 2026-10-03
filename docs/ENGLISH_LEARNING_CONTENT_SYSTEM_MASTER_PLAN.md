@@ -2512,13 +2512,15 @@ Pipeline status: **IMPLEMENTED; EDITORIAL ALIGNMENT PENDING**.
 
 ### 43.3 E04 phrase / pattern pilot
 
-Pilot status: **AUTHORED AS DRAFT; REVIEW PENDING**.
+Pilot status: **FIRST REVIEWED PHRASE SLICE PUBLISHED**.
 
 - 100 collocations.
 - 50 verb patterns.
 - 50 phrasal verbs.
 - 50 idiom/chunk records.
-- Cross-game E09 adapters can route compatible phrase activities to Recall, Shooter and Space without pretending phrase IDs are vocabulary IDs.
+- All 250 records were reviewed for English form/pattern, Vietnamese meaning/explanation, naturalness, pilot CEFR placement and project-original provenance.
+- Review decisions are digest-bound in the shared editorial ledger; source authoring records remain `draft`, while only the reviewed overlay is runtime-published.
+- Published phrase runtime now unlocks compatible Collocation/Phrasal/Chunk activities in Recall, Shooter and Space without pretending phrase IDs are vocabulary IDs.
 
 ### 43.4 E05 grammar-topic pilot
 
@@ -2561,7 +2563,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-The first published runtime slice is now non-empty: `shared/grammar` contains 12 topics and `shared/sentences` contains 36 examples + 24 exercises. Dictionary and phrase runtime manifests remain empty until their own editorial gates pass.
+The first published runtime slice is now non-empty: `shared/grammar` contains 12 topics and `shared/sentences` contains 36 examples + 24 exercises. Dictionary runtime remains empty until lexical sense alignment passes its editorial gate. Phrase runtime is now non-empty after the reviewed E04 promotion.
 
 ### 43.7 E08 Monkeytype
 
@@ -2654,7 +2656,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime is now intentionally non-zero after the first reviewed E05 promotion: 12 grammar records + 60 sentence/exercise records = 72 published rich records. Dictionary and phrase runtime counts remain zero. The attribution runtime remains zero because every currently published E05 record is `project-original`; the E12 audit now derives attribution requirements from provenance of the records actually published, not merely from the existence of third-party sources in the source catalog.
+The rich runtime now contains the reviewed E05 and E04 slices: 12 grammar records + 60 sentence/exercise records + 250 phrase/pattern records = 322 published rich records. Dictionary runtime remains zero while E03 lexical sense alignment is pending. The attribution runtime remains zero because every currently published E05 record is `project-original`; the E12 audit now derives attribution requirements from provenance of the records actually published, not merely from the existence of third-party sources in the source catalog.
 
 ### 43.12 Verified CI checkpoints
 

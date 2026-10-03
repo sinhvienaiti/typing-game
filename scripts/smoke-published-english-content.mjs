@@ -144,30 +144,22 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==0) {
-    errors.push("Recall collocation activity must remain unavailable until phrase records are published");
+  if(recallCollocations!==100) {
+    errors.push("published Recall collocation activity must expose 100 reviewed records");
   }
-  await assertUnavailableRecallCollocation();
+  const recallDataset=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,
+    "recall-typing",
+    "recall",
+    "collocation",
+    "runtime-source-recall-collocation",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(recallDataset.items.length!==5) {
+    errors.push("published activity source must return 5 bounded Recall collocation items");
+  }
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
-}
-
-async function assertUnavailableRecallCollocation() {
-  try {
-    await buildPublishedGameEnglishActivityDataset(
-      fileRuntimeLoader,
-      "recall-typing",
-      "recall",
-      "collocation",
-      "runtime-source-recall-collocation",
-      {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
-    );
-    errors.push("Recall collocation activity unexpectedly launched with zero published phrase records");
-  } catch (error) {
-    if(!String(error?.message??error).includes("No published English content")) {
-      throw error;
-    }
-  }
 }
 
 const report={
@@ -180,7 +172,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     karaokeExamples:5,
-    recallCollocations:0,
+    recallCollocations:100,
   },
 };
 console.log(JSON.stringify(report,null,2));
