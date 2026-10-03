@@ -70,7 +70,10 @@
     "english-content:e06:grammar": "node scripts/report-english-content-e06-grammar.mjs",
     "english-content:import:multiwoz": "node scripts/import-multiwoz-e06-dialogues.mjs",
     "english-content:e06:dialogue": "node scripts/report-english-content-multiwoz.mjs",
-    "english-content:e03:sense-review": "node scripts/build-e03-sense-review.mjs && node scripts/report-english-content-e03-sense-review.mjs"
+    "english-content:e03:sense-review": "node scripts/build-e03-sense-review.mjs && node scripts/report-english-content-e03-sense-review.mjs",
+    "english-content:e10:validate": "node scripts/validate-english-content-batches.mjs",
+    "english-content:e10:smoke": "node scripts/smoke-english-content-batches.mjs",
+    "english-content:e10": "pnpm english-content:e10:validate && pnpm english-content:e10:smoke"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

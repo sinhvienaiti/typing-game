@@ -4,7 +4,8 @@ import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const contentVersion="2026.10.0";
+const batchManifest=await readJson(path.join(root,"content","english","batches","manifest.json"));
+const contentVersion=batchManifest.contentVersion;
 const shardSize=500;
 
 async function loadRecords(relative) {
@@ -12,8 +13,18 @@ async function loadRecords(relative) {
   if (!Array.isArray(doc.records)) throw new Error(relative+" must contain records[]");
   return doc.records;
 }
-function published(records) {
-  return records.filter(record=>record?.quality?.state==="published");
+function published(records,label) {
+  const result=[];
+  for (const record of records) {
+    if (record?.quality?.state!=="published") continue;
+    const checks=Object.values(record?.quality?.checks??{});
+    const unfinished=checks.find(check=>check?.status==="pending"||check?.status==="fail");
+    if (unfinished) {
+      throw new Error(label+": published record "+String(record?.id??record?.lexemeId??"<unknown>")+" has unfinished quality checks");
+    }
+    result.push(record);
+  }
+  return result;
 }
 async function resetDir(relative) {
   const target=path.join(root,relative);
@@ -24,7 +35,7 @@ async function publishDataset({dataset,baseDir,groups}) {
   const shards=[];
   let count=0;
   for (const group of groups) {
-    const records=published(group.records);
+    const records=published(group.records,dataset+"/"+group.id);
     count+=records.length;
     const dir=path.join(root,baseDir,group.dir);
     await fs.rm(dir,{recursive:true,force:true});

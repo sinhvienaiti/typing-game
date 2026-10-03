@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -27,6 +27,7 @@ async function validateFile(relative,schemaName) {
   return data;
 }
 const sources=await validateFile("content/english/sources/manifest.json","source-manifest.schema.json");
+const batchManifest=await validateFile("content/english/batches/manifest.json","batch-manifest.schema.json");
 await validateFile("content/english/sources/tatoeba-eng-vie-pilot.json","tatoeba-source-pin.schema.json");
 await validateFile("content/english/sources/multiwoz-e06-dialogue.json","multiwoz-source-pin.schema.json");
 const authorCatalog=await validateFile("content/english/grammar/topic-catalog.json","topic-catalog.schema.json");
@@ -58,6 +59,7 @@ for (const cefr of Object.keys(expectedCounts)) {
   }
 }
 if (total!==300) errors.push("curriculum level files must reference exactly 300 topics");
+if (batchManifest?.contentVersion!=="2026.10.0") errors.push("controlled batch contentVersion must remain 2026.10.0 until an explicit release bump");
 for (const relative of ["shared/dictionary/manifest.json","shared/phrases/manifest.json","shared/grammar/manifest.json","shared/sentences/manifest.json","shared/curriculum/manifest.json","shared/attribution/english-content/manifest.json"]) await validateFile(relative,"runtime-manifest.schema.json");
 const legacy=await readJson(path.join(root,"shared","vocabulary","schema.json"));
 if (legacy?.properties?.version?.const!==1||legacy?.properties?.entries?.items?.additionalProperties!==false) errors.push("legacy vocabulary v1 ABI changed unexpectedly");

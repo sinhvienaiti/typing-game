@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "batches": [
+    {
+      "id": "e03.lexical-enrichment",
+      "phase": "E03",
+      "category": "dictionary",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "lexeme-seeds",
+          "path": "content/english/dictionary/lexeme-seed-pilot.json",
+          "expectedCount": 300,
+          "generated": false,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": []
+        },
+        {
+          "id": "sense-alignment-review",
+          "path": "content/english/review-queues/e03-sense-alignment-review.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "sourcePin",
+            "posGrouping",
+            "senseAlignment",
+            "translation",
+            "naturalness"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "sense-alignment",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review"
+      ],
+      "gameSmokes": []
+    },
+    {
+      "id": "e04.phrase-pattern-pilot",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "collocations",
+          "path": "content/english/phrases/pilot-collocations.json",
+          "expectedCount": 100,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate"
+          ]
+        },
+        {
+          "id": "verb-patterns",
+          "path": "content/english/phrases/pilot-verb-patterns.json",
+          "expectedCount": 50,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate"
+          ]
+        },
+        {
+          "id": "phrases",
+          "path": "content/english/phrases/pilot-phrases.json",
+          "expectedCount": 100,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "exactDuplicate"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "collocation",
+          "recordSetId": "collocations",
+          "sampleCount": 5
+        }
+      ]
+    },
+    {
+      "id": "e05.grammar-topic-pilot",
+      "phase": "E05",
+      "category": "grammar",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/pilot-topics.json",
+          "expectedCount": 12,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "naturalness",
+            "targetPresence"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "space-typing",
+          "activity": "grammar-challenge",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 4
+        }
+      ]
+    },
+    {
+      "id": "e06.sentence-exercise-scale",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C2"
+      ],
+      "state": "candidate",
+      "recordSets": [
+        {
+          "id": "examples",
+          "path": "content/english/review-queues/typing-text-e06-sentences.json",
+          "expectedCount": 1000,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "cloze",
+          "path": "content/english/review-queues/typing-text-e06-exercises.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "translation-sentences",
+          "path": "content/english/review-queues/tatoeba-e06-sentences.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "translations",
+          "path": "content/english/review-queues/tatoeba-e06-translations.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr"
+          ]
+        },
+        {
+          "id": "corrections",
+          "path": "content/english/review-queues/grammar-e06-corrections.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "naturalness",
+            "semanticEquivalence"
+          ]
+        },
+        {
+          "id": "transformations",
+          "path": "content/english/review-queues/grammar-e06-transformations.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceLink",
+            "targetStructure",
+            "naturalness",
+            "semanticEquivalence"
+          ]
+        },
+        {
+          "id": "dialogues",
+          "path": "content/english/review-queues/multiwoz-e06-dialogues.json",
+          "expectedCount": 100,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "dialogueStructure",
+            "identifierSafety",
+            "naturalness",
+            "cefr"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedupe-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "listening-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "listening-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "translation",
+          "recordSetId": "translations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "dialogue",
+          "recordSetId": "dialogues",
+          "sampleCount": 3
+        }
+      ]
+    }
+  ]
+}
