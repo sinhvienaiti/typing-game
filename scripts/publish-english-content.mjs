@@ -135,6 +135,21 @@ const scale17Phrases=await loadRecords("content/english/phrases/e04-scale-17-phr
 const scale18Collocations=await loadRecords("content/english/phrases/e04-scale-18-collocations.json");
 const scale18VerbPatterns=await loadRecords("content/english/phrases/e04-scale-18-verb-patterns.json");
 const scale18Phrases=await loadRecords("content/english/phrases/e04-scale-18-phrases.json");
+const scale19Collocations=await loadRecords("content/english/phrases/e04-scale-19-collocations.json");
+const scale19VerbPatterns=await loadRecords("content/english/phrases/e04-scale-19-verb-patterns.json");
+const scale19Phrases=await loadRecords("content/english/phrases/e04-scale-19-phrases.json");
+const scale20Collocations=await loadRecords("content/english/phrases/e04-scale-20-collocations.json");
+const scale20VerbPatterns=await loadRecords("content/english/phrases/e04-scale-20-verb-patterns.json");
+const scale20Phrases=await loadRecords("content/english/phrases/e04-scale-20-phrases.json");
+const scale21Collocations=await loadRecords("content/english/phrases/e04-scale-21-collocations.json");
+const scale21VerbPatterns=await loadRecords("content/english/phrases/e04-scale-21-verb-patterns.json");
+const scale21Phrases=await loadRecords("content/english/phrases/e04-scale-21-phrases.json");
+const scale22Collocations=await loadRecords("content/english/phrases/e04-scale-22-collocations.json");
+const scale22VerbPatterns=await loadRecords("content/english/phrases/e04-scale-22-verb-patterns.json");
+const scale22Phrases=await loadRecords("content/english/phrases/e04-scale-22-phrases.json");
+const scale23Collocations=await loadRecords("content/english/phrases/e04-scale-23-collocations.json");
+const scale23VerbPatterns=await loadRecords("content/english/phrases/e04-scale-23-verb-patterns.json");
+const scale23Phrases=await loadRecords("content/english/phrases/e04-scale-23-phrases.json");
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
@@ -154,9 +169,9 @@ results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences
   {id:"mistakes",dir:"mistakes",records:reviewedCommonMistakes}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
-  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations,...scale11Collocations,...scale12Collocations,...scale13Collocations,...scale14Collocations,...scale15Collocations,...scale16Collocations,...scale17Collocations,...scale18Collocations]},
-  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns,...scale03VerbPatterns,...scale04VerbPatterns,...scale05VerbPatterns,...scale06VerbPatterns,...scale07VerbPatterns,...scale08VerbPatterns,...scale09VerbPatterns,...scale10VerbPatterns,...scale11VerbPatterns,...scale12VerbPatterns,...scale13VerbPatterns,...scale14VerbPatterns,...scale15VerbPatterns,...scale16VerbPatterns,...scale17VerbPatterns,...scale18VerbPatterns]},
-  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases,...scale03Phrases,...scale04Phrases,...scale05Phrases,...scale06Phrases,...scale07Phrases,...scale08Phrases,...scale09Phrases,...scale10Phrases,...scale11Phrases,...scale12Phrases,...scale13Phrases,...scale14Phrases,...scale15Phrases,...scale16Phrases,...scale17Phrases,...scale18Phrases]}
+  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations,...scale11Collocations,...scale12Collocations,...scale13Collocations,...scale14Collocations,...scale15Collocations,...scale16Collocations,...scale17Collocations,...scale18Collocations,...scale19Collocations,...scale20Collocations,...scale21Collocations,...scale22Collocations,...scale23Collocations]},
+  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns,...scale03VerbPatterns,...scale04VerbPatterns,...scale05VerbPatterns,...scale06VerbPatterns,...scale07VerbPatterns,...scale08VerbPatterns,...scale09VerbPatterns,...scale10VerbPatterns,...scale11VerbPatterns,...scale12VerbPatterns,...scale13VerbPatterns,...scale14VerbPatterns,...scale15VerbPatterns,...scale16VerbPatterns,...scale17VerbPatterns,...scale18VerbPatterns,...scale19VerbPatterns,...scale20VerbPatterns,...scale21VerbPatterns,...scale22VerbPatterns,...scale23VerbPatterns]},
+  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases,...scale03Phrases,...scale04Phrases,...scale05Phrases,...scale06Phrases,...scale07Phrases,...scale08Phrases,...scale09Phrases,...scale10Phrases,...scale11Phrases,...scale12Phrases,...scale13Phrases,...scale14Phrases,...scale15Phrases,...scale16Phrases,...scale17Phrases,...scale18Phrases,...scale19Phrases,...scale20Phrases,...scale21Phrases,...scale22Phrases,...scale23Phrases]}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));

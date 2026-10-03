@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==460) {
-    errors.push("published Recall collocation activity must expose 460 reviewed records");
+  if(recallCollocations!==560) {
+    errors.push("published Recall collocation activity must expose 560 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==410) errors.push("published verb-pattern activity must expose 410 reviewed records");
-  if(phrasalVerbCount!==230) errors.push("published phrasal-verb activity must expose 230 reviewed records");
-  if(chunkCount!==130) errors.push("published chunk activity must expose 130 reviewed records");
-  if(idiomCount!==100) errors.push("published idiom activity must expose 100 reviewed records");
+  if(verbPatternCount!==510) errors.push("published verb-pattern activity must expose 510 reviewed records");
+  if(phrasalVerbCount!==280) errors.push("published phrasal-verb activity must expose 280 reviewed records");
+  if(chunkCount!==155) errors.push("published chunk activity must expose 155 reviewed records");
+  if(idiomCount!==125) errors.push("published idiom activity must expose 125 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:460,
-    verbPatterns:410,
-    phrasalVerbs:230,
-    chunks:130,
-    idioms:100,
+    recallCollocations:560,
+    verbPatterns:510,
+    phrasalVerbs:280,
+    chunks:155,
+    idioms:125,
   },
 };
 console.log(JSON.stringify(report,null,2));

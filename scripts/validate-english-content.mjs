@@ -344,6 +344,21 @@ const scale17Phrases=await validateFile("content/english/phrases/e04-scale-17-ph
 const scale18Collocations=await validateFile("content/english/phrases/e04-scale-18-collocations.json","collocation-set.schema.json");
 const scale18VerbPatterns=await validateFile("content/english/phrases/e04-scale-18-verb-patterns.json","verb-pattern-set.schema.json");
 const scale18Phrases=await validateFile("content/english/phrases/e04-scale-18-phrases.json","phrase-set.schema.json");
+const scale19Collocations=await validateFile("content/english/phrases/e04-scale-19-collocations.json","collocation-set.schema.json");
+const scale19VerbPatterns=await validateFile("content/english/phrases/e04-scale-19-verb-patterns.json","verb-pattern-set.schema.json");
+const scale19Phrases=await validateFile("content/english/phrases/e04-scale-19-phrases.json","phrase-set.schema.json");
+const scale20Collocations=await validateFile("content/english/phrases/e04-scale-20-collocations.json","collocation-set.schema.json");
+const scale20VerbPatterns=await validateFile("content/english/phrases/e04-scale-20-verb-patterns.json","verb-pattern-set.schema.json");
+const scale20Phrases=await validateFile("content/english/phrases/e04-scale-20-phrases.json","phrase-set.schema.json");
+const scale21Collocations=await validateFile("content/english/phrases/e04-scale-21-collocations.json","collocation-set.schema.json");
+const scale21VerbPatterns=await validateFile("content/english/phrases/e04-scale-21-verb-patterns.json","verb-pattern-set.schema.json");
+const scale21Phrases=await validateFile("content/english/phrases/e04-scale-21-phrases.json","phrase-set.schema.json");
+const scale22Collocations=await validateFile("content/english/phrases/e04-scale-22-collocations.json","collocation-set.schema.json");
+const scale22VerbPatterns=await validateFile("content/english/phrases/e04-scale-22-verb-patterns.json","verb-pattern-set.schema.json");
+const scale22Phrases=await validateFile("content/english/phrases/e04-scale-22-phrases.json","phrase-set.schema.json");
+const scale23Collocations=await validateFile("content/english/phrases/e04-scale-23-collocations.json","collocation-set.schema.json");
+const scale23VerbPatterns=await validateFile("content/english/phrases/e04-scale-23-verb-patterns.json","verb-pattern-set.schema.json");
+const scale23Phrases=await validateFile("content/english/phrases/e04-scale-23-phrases.json","phrase-set.schema.json");
 function requireUnique(records,key,label) {
   const seen=new Set();
   for (const record of records??[]) {
@@ -1299,6 +1314,261 @@ if (scale18Collocations&&scale18VerbPatterns&&scale18Phrases) {
   if (scale18Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 18 phrases must contain 10 phrasal verbs");
   if (scale18Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 18 phrases must contain 5 chunks");
   if (scale18Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 18 phrases must contain 5 idioms");
+}
+
+
+if (scale19Collocations&&scale19VerbPatterns&&scale19Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-19","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-19","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-19","scale-phrases");
+  if (scale19Collocations.records.length!==expectedCollocations) errors.push("E04 scale 19 collocation count mismatch");
+  if (scale19VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 19 verb-pattern count mismatch");
+  if (scale19Phrases.records.length!==expectedPhrases) errors.push("E04 scale 19 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[]),...(scale12Collocations?.records??[]),...(scale13Collocations?.records??[]),...(scale14Collocations?.records??[]),...(scale15Collocations?.records??[]),...(scale16Collocations?.records??[]),...(scale17Collocations?.records??[]),...(scale18Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale19Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 19 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 19 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[]),...(scale12VerbPatterns?.records??[]),...(scale13VerbPatterns?.records??[]),...(scale14VerbPatterns?.records??[]),...(scale15VerbPatterns?.records??[]),...(scale16VerbPatterns?.records??[]),...(scale17VerbPatterns?.records??[]),...(scale18VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale19VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 19 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 19 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[]),...(scale12Phrases?.records??[]),...(scale13Phrases?.records??[]),...(scale14Phrases?.records??[]),...(scale15Phrases?.records??[]),...(scale16Phrases?.records??[]),...(scale17Phrases?.records??[]),...(scale18Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale19Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 19 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale19Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 19 phrases must contain 10 phrasal verbs");
+  if (scale19Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 19 phrases must contain 5 chunks");
+  if (scale19Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 19 phrases must contain 5 idioms");
+}
+
+
+if (scale20Collocations&&scale20VerbPatterns&&scale20Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-20","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-20","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-20","scale-phrases");
+  if (scale20Collocations.records.length!==expectedCollocations) errors.push("E04 scale 20 collocation count mismatch");
+  if (scale20VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 20 verb-pattern count mismatch");
+  if (scale20Phrases.records.length!==expectedPhrases) errors.push("E04 scale 20 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[]),...(scale12Collocations?.records??[]),...(scale13Collocations?.records??[]),...(scale14Collocations?.records??[]),...(scale15Collocations?.records??[]),...(scale16Collocations?.records??[]),...(scale17Collocations?.records??[]),...(scale18Collocations?.records??[]),...(scale19Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale20Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 20 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 20 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[]),...(scale12VerbPatterns?.records??[]),...(scale13VerbPatterns?.records??[]),...(scale14VerbPatterns?.records??[]),...(scale15VerbPatterns?.records??[]),...(scale16VerbPatterns?.records??[]),...(scale17VerbPatterns?.records??[]),...(scale18VerbPatterns?.records??[]),...(scale19VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale20VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 20 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 20 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[]),...(scale12Phrases?.records??[]),...(scale13Phrases?.records??[]),...(scale14Phrases?.records??[]),...(scale15Phrases?.records??[]),...(scale16Phrases?.records??[]),...(scale17Phrases?.records??[]),...(scale18Phrases?.records??[]),...(scale19Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale20Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 20 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale20Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 20 phrases must contain 10 phrasal verbs");
+  if (scale20Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 20 phrases must contain 5 chunks");
+  if (scale20Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 20 phrases must contain 5 idioms");
+}
+
+
+if (scale21Collocations&&scale21VerbPatterns&&scale21Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-21","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-21","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-21","scale-phrases");
+  if (scale21Collocations.records.length!==expectedCollocations) errors.push("E04 scale 21 collocation count mismatch");
+  if (scale21VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 21 verb-pattern count mismatch");
+  if (scale21Phrases.records.length!==expectedPhrases) errors.push("E04 scale 21 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[]),...(scale12Collocations?.records??[]),...(scale13Collocations?.records??[]),...(scale14Collocations?.records??[]),...(scale15Collocations?.records??[]),...(scale16Collocations?.records??[]),...(scale17Collocations?.records??[]),...(scale18Collocations?.records??[]),...(scale19Collocations?.records??[]),...(scale20Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale21Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 21 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 21 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[]),...(scale12VerbPatterns?.records??[]),...(scale13VerbPatterns?.records??[]),...(scale14VerbPatterns?.records??[]),...(scale15VerbPatterns?.records??[]),...(scale16VerbPatterns?.records??[]),...(scale17VerbPatterns?.records??[]),...(scale18VerbPatterns?.records??[]),...(scale19VerbPatterns?.records??[]),...(scale20VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale21VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 21 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 21 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[]),...(scale12Phrases?.records??[]),...(scale13Phrases?.records??[]),...(scale14Phrases?.records??[]),...(scale15Phrases?.records??[]),...(scale16Phrases?.records??[]),...(scale17Phrases?.records??[]),...(scale18Phrases?.records??[]),...(scale19Phrases?.records??[]),...(scale20Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale21Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 21 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale21Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 21 phrases must contain 10 phrasal verbs");
+  if (scale21Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 21 phrases must contain 5 chunks");
+  if (scale21Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 21 phrases must contain 5 idioms");
+}
+
+
+if (scale22Collocations&&scale22VerbPatterns&&scale22Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-22","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-22","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-22","scale-phrases");
+  if (scale22Collocations.records.length!==expectedCollocations) errors.push("E04 scale 22 collocation count mismatch");
+  if (scale22VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 22 verb-pattern count mismatch");
+  if (scale22Phrases.records.length!==expectedPhrases) errors.push("E04 scale 22 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[]),...(scale12Collocations?.records??[]),...(scale13Collocations?.records??[]),...(scale14Collocations?.records??[]),...(scale15Collocations?.records??[]),...(scale16Collocations?.records??[]),...(scale17Collocations?.records??[]),...(scale18Collocations?.records??[]),...(scale19Collocations?.records??[]),...(scale20Collocations?.records??[]),...(scale21Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale22Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 22 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 22 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[]),...(scale12VerbPatterns?.records??[]),...(scale13VerbPatterns?.records??[]),...(scale14VerbPatterns?.records??[]),...(scale15VerbPatterns?.records??[]),...(scale16VerbPatterns?.records??[]),...(scale17VerbPatterns?.records??[]),...(scale18VerbPatterns?.records??[]),...(scale19VerbPatterns?.records??[]),...(scale20VerbPatterns?.records??[]),...(scale21VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale22VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 22 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 22 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[]),...(scale12Phrases?.records??[]),...(scale13Phrases?.records??[]),...(scale14Phrases?.records??[]),...(scale15Phrases?.records??[]),...(scale16Phrases?.records??[]),...(scale17Phrases?.records??[]),...(scale18Phrases?.records??[]),...(scale19Phrases?.records??[]),...(scale20Phrases?.records??[]),...(scale21Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale22Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 22 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale22Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 22 phrases must contain 10 phrasal verbs");
+  if (scale22Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 22 phrases must contain 5 chunks");
+  if (scale22Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 22 phrases must contain 5 idioms");
+}
+
+
+if (scale23Collocations&&scale23VerbPatterns&&scale23Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-23","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-23","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-23","scale-phrases");
+  if (scale23Collocations.records.length!==expectedCollocations) errors.push("E04 scale 23 collocation count mismatch");
+  if (scale23VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 23 verb-pattern count mismatch");
+  if (scale23Phrases.records.length!==expectedPhrases) errors.push("E04 scale 23 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[]),...(scale12Collocations?.records??[]),...(scale13Collocations?.records??[]),...(scale14Collocations?.records??[]),...(scale15Collocations?.records??[]),...(scale16Collocations?.records??[]),...(scale17Collocations?.records??[]),...(scale18Collocations?.records??[]),...(scale19Collocations?.records??[]),...(scale20Collocations?.records??[]),...(scale21Collocations?.records??[]),...(scale22Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale23Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 23 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 23 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[]),...(scale12VerbPatterns?.records??[]),...(scale13VerbPatterns?.records??[]),...(scale14VerbPatterns?.records??[]),...(scale15VerbPatterns?.records??[]),...(scale16VerbPatterns?.records??[]),...(scale17VerbPatterns?.records??[]),...(scale18VerbPatterns?.records??[]),...(scale19VerbPatterns?.records??[]),...(scale20VerbPatterns?.records??[]),...(scale21VerbPatterns?.records??[]),...(scale22VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale23VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 23 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 23 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[]),...(scale12Phrases?.records??[]),...(scale13Phrases?.records??[]),...(scale14Phrases?.records??[]),...(scale15Phrases?.records??[]),...(scale16Phrases?.records??[]),...(scale17Phrases?.records??[]),...(scale18Phrases?.records??[]),...(scale19Phrases?.records??[]),...(scale20Phrases?.records??[]),...(scale21Phrases?.records??[]),...(scale22Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale23Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 23 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale23Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 23 phrases must contain 10 phrasal verbs");
+  if (scale23Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 23 phrases must contain 5 chunks");
+  if (scale23Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 23 phrases must contain 5 idioms");
 }
 
 const multiwozDialoguePath=path.join(root,"content","english","review-queues","multiwoz-e06-dialogues.json");
