@@ -29,12 +29,23 @@ const observed={
   links:await sha256File(linksFile),
 };
 let sourcePinned=true;
+const checksumMismatches=[];
 for (const key of Object.keys(observed)) {
   const expected=pin.files?.[key]?.contentSha256;
-  if (!expected) sourcePinned=false;
-  else if (expected!==observed[key]) {
-    throw new Error("Tatoeba "+key+" content checksum mismatch. Expected "+expected+", got "+observed[key]);
+  if (!expected) {
+    sourcePinned=false;
+    checksumMismatches.push(key+": missing expected checksum; observed "+observed[key]);
+  } else if (expected!==observed[key]) {
+    sourcePinned=false;
+    checksumMismatches.push(key+": expected "+expected+", observed "+observed[key]);
   }
+}
+if (checksumMismatches.length>0) {
+  throw new Error(
+    "Tatoeba content checksum mismatch(s):\n"+
+    checksumMismatches.join("\n")+
+    "\nObserved content SHA-256: "+JSON.stringify(observed)
+  );
 }
 
 const [english,vietnamese,links]=await Promise.all([
