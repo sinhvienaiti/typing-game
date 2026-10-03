@@ -22,6 +22,10 @@
         {
           "path": "content/english/phrases/pilot-verb-patterns.json",
           "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-verb-patterns.json",
+          "collection": "records"
         }
       ]
     },
@@ -32,6 +36,10 @@
       "sources": [
         {
           "path": "content/english/phrases/pilot-collocations.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-collocations.json",
           "collection": "records"
         }
       ]
@@ -48,6 +56,14 @@
           "filterValues": [
             "phrasal-verb"
           ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "phrasal-verb"
+          ]
         }
       ]
     },
@@ -58,6 +74,15 @@
       "sources": [
         {
           "path": "content/english/phrases/pilot-phrases.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "idiom",
+            "chunk"
+          ]
+        },
+        {
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
           "collection": "records",
           "filterField": "type",
           "filterValues": [
