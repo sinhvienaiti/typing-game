@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==240) {
-    errors.push("published Recall collocation activity must expose 240 reviewed records");
+  if(recallCollocations!==260) {
+    errors.push("published Recall collocation activity must expose 260 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==190) errors.push("published verb-pattern activity must expose 190 reviewed records");
-  if(phrasalVerbCount!==120) errors.push("published phrasal-verb activity must expose 120 reviewed records");
-  if(chunkCount!==75) errors.push("published chunk activity must expose 75 reviewed records");
-  if(idiomCount!==45) errors.push("published idiom activity must expose 45 reviewed records");
+  if(verbPatternCount!==210) errors.push("published verb-pattern activity must expose 210 reviewed records");
+  if(phrasalVerbCount!==130) errors.push("published phrasal-verb activity must expose 130 reviewed records");
+  if(chunkCount!==80) errors.push("published chunk activity must expose 80 reviewed records");
+  if(idiomCount!==50) errors.push("published idiom activity must expose 50 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:240,
-    verbPatterns:190,
-    phrasalVerbs:120,
-    chunks:75,
-    idioms:45,
+    recallCollocations:260,
+    verbPatterns:210,
+    phrasalVerbs:130,
+    chunks:80,
+    idioms:50,
   },
 };
 console.log(JSON.stringify(report,null,2));
