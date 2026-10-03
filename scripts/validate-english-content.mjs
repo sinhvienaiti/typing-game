@@ -38,6 +38,17 @@ await validateFile("content/english/targets/long-term.json","long-term-targets.s
 await validateFile("content/english/migrations/deprecations.json","deprecation-map.schema.json");
 await validateFile("content/english/releases/2026.10.0.json","content-release.schema.json");
 await validateFile("content/english/reviews/decisions.json","review-ledger.schema.json");
+const reviewShardDir=path.join(root,"content","english","reviews","decisions.d");
+try {
+  const reviewShardNames=(await fs.readdir(reviewShardDir))
+    .filter(name=>name.endsWith(".json"))
+    .sort((a,b)=>a.localeCompare(b,"en"));
+  for (const name of reviewShardNames) {
+    await validateFile("content/english/reviews/decisions.d/"+name,"review-ledger.schema.json");
+  }
+} catch (error) {
+  if (error?.code!=="ENOENT") errors.push("review ledger shard validation failed: "+error.message);
+}
 await validateFile("content/english/sources/tatoeba-eng-vie-pilot.json","tatoeba-source-pin.schema.json");
 await validateFile("content/english/sources/multiwoz-e06-dialogue.json","multiwoz-source-pin.schema.json");
 const authorCatalog=await validateFile("content/english/grammar/topic-catalog.json","topic-catalog.schema.json");

@@ -8,12 +8,13 @@ import {
   englishContentRecordDigest,
   englishContentRecordId,
   englishContentReviewSourceDigest,
+  readEnglishReviewLedger,
 } from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [batchManifest,ledger]=await Promise.all([
   readJson(path.join(root,"content","english","batches","manifest.json")),
-  readJson(path.join(root,"content","english","reviews","decisions.json")),
+  readEnglishReviewLedger(root),
 ]);
 const errors=[];
 try { buildEnglishReviewDecisionIndex(ledger); } catch (error) { errors.push(error.message); }

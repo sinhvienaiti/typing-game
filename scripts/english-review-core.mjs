@@ -1,5 +1,7 @@
 import crypto from "node:crypto";
-import { stableJson } from "./english-content-core.mjs";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { readJson, stableJson } from "./english-content-core.mjs";
 
 const STATE_RANK=Object.freeze({
   candidate:0,
@@ -28,6 +30,32 @@ export function englishContentReviewSourceDigest(record) {
     delete checks.license;
   }
   return englishContentRecordDigest(normalized);
+}
+
+export async function readEnglishReviewLedger(root) {
+  const basePath=path.join(root,"content","english","reviews","decisions.json");
+  const shardDir=path.join(root,"content","english","reviews","decisions.d");
+  const base=await readJson(basePath);
+  const decisions=[...(base.decisions??[])];
+  let names=[];
+  try {
+    names=(await fs.readdir(shardDir))
+      .filter(name=>name.endsWith(".json"))
+      .sort((a,b)=>a.localeCompare(b,"en"));
+  } catch (error) {
+    if (error?.code!=="ENOENT") throw error;
+  }
+  for (const name of names) {
+    const shard=await readJson(path.join(shardDir,name));
+    if (shard.schemaVersion!==base.schemaVersion) {
+      throw new TypeError("review ledger shard schemaVersion mismatch: "+name);
+    }
+    if (!Array.isArray(shard.decisions)) {
+      throw new TypeError("review ledger shard must contain decisions[]: "+name);
+    }
+    decisions.push(...shard.decisions);
+  }
+  return {...base,decisions};
 }
 
 export function buildEnglishReviewDecisionIndex(ledger) {

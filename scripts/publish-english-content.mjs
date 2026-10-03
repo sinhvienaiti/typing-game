@@ -2,12 +2,12 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
-import { overlayEnglishReviewDecisions } from "./english-review-core.mjs";
+import { overlayEnglishReviewDecisions, readEnglishReviewLedger } from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [batchManifest,reviewLedger]=await Promise.all([
   readJson(path.join(root,"content","english","batches","manifest.json")),
-  readJson(path.join(root,"content","english","reviews","decisions.json")),
+  readEnglishReviewLedger(root),
 ]);
 const contentVersion=batchManifest.contentVersion;
 const batchSetsByPath=new Map();
