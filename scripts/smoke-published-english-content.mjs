@@ -61,9 +61,9 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==60) errors.push("published dictionary runtime must contain 60 E03 records");
 if (lexemes.length!==30||senses.length!==30) errors.push("published E03 runtime split must be 30 lexemes + 30 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==454) errors.push("published sentence runtime must contain 454 reviewed records");
-if (topics.length!==12||examples.length!==132||exercises.length!==264||dialogues.length!==10||commonMistakes.length!==48) {
-  errors.push("published runtime split must be 12 topics + 132 examples + 264 exercises + 10 dialogues + 48 common mistakes");
+if (sentenceManifest.count!==502) errors.push("published sentence runtime must contain 502 reviewed records");
+if (topics.length!==12||examples.length!==132||exercises.length!==264||dialogues.length!==10||commonMistakes.length!==96) {
+  errors.push("published runtime split must be 12 topics + 132 examples + 264 exercises + 10 dialogues + 96 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -191,7 +191,7 @@ try {
   }
 
   const monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
-  if(monkeyCorrectionCount!==120) errors.push("published Monkeytype error-correction activity must expose 72 corrections + 48 common mistakes");
+  if(monkeyCorrectionCount!==168) errors.push("published Monkeytype error-correction activity must expose 72 corrections + 96 common mistakes");
   const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
     {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
@@ -289,7 +289,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
-    monkeyCorrectionRecords:120,
+    monkeyCorrectionRecords:168,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
