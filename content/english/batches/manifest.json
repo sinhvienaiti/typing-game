@@ -2888,6 +2888,128 @@
           "recordType": "idiom"
         }
       ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-17",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-17-verb-patterns.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-17-collocations.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-17-phrases.json",
+          "expectedCount": 20,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "verb-pattern",
+          "recordSetId": "scale-verb-patterns",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
     }
   ]
 }

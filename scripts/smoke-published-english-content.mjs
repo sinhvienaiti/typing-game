@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==420) {
-    errors.push("published Recall collocation activity must expose 420 reviewed records");
+  if(recallCollocations!==440) {
+    errors.push("published Recall collocation activity must expose 440 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==370) errors.push("published verb-pattern activity must expose 370 reviewed records");
-  if(phrasalVerbCount!==210) errors.push("published phrasal-verb activity must expose 210 reviewed records");
-  if(chunkCount!==120) errors.push("published chunk activity must expose 120 reviewed records");
-  if(idiomCount!==90) errors.push("published idiom activity must expose 90 reviewed records");
+  if(verbPatternCount!==390) errors.push("published verb-pattern activity must expose 390 reviewed records");
+  if(phrasalVerbCount!==220) errors.push("published phrasal-verb activity must expose 220 reviewed records");
+  if(chunkCount!==125) errors.push("published chunk activity must expose 125 reviewed records");
+  if(idiomCount!==95) errors.push("published idiom activity must expose 95 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:420,
-    verbPatterns:370,
-    phrasalVerbs:210,
-    chunks:120,
-    idioms:90,
+    recallCollocations:440,
+    verbPatterns:390,
+    phrasalVerbs:220,
+    chunks:125,
+    idioms:95,
   },
 };
 console.log(JSON.stringify(report,null,2));
