@@ -2,6 +2,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson } from "./english-content-core.mjs";
 import { buildGameEnglishActivityDataset } from "../shared/english-content/game-adapters.mjs";
+import {
+  buildPublishedGameEnglishActivityDataset,
+  countPublishedEnglishActivityRecords,
+} from "../shared/english-content/activity-source.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [grammarManifest,sentenceManifest]=await Promise.all([
@@ -9,6 +13,23 @@ const [grammarManifest,sentenceManifest]=await Promise.all([
   readJson(path.join(root,"shared","sentences","manifest.json")),
 ]);
 const errors=[];
+
+const fileRuntimeLoader={
+  async loadDataset(dataset,{prefix}={}){
+    const baseDir=path.join("shared",dataset);
+    const manifest=await readJson(path.join(root,baseDir,"manifest.json"));
+    const records=[];
+    for(const shard of manifest.shards??[]){
+      if(prefix!==undefined&&!String(shard.id).startsWith(prefix)) continue;
+      const doc=await readJson(path.join(root,baseDir,shard.path));
+      if(!Array.isArray(doc.records)||doc.records.length!==shard.count) {
+        throw new Error(baseDir+"/"+shard.path+": invalid runtime shard");
+      }
+      records.push(...doc.records);
+    }
+    return records;
+  },
+};
 
 async function loadRuntime(manifest,baseDir) {
   const records=[];
@@ -82,12 +103,85 @@ try {
   errors.push("published runtime activity smoke failed: "+error.message);
 }
 
+try {
+  const spaceGrammar=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,
+    "space-typing",
+    "space",
+    "grammar-challenge",
+    "runtime-source-space-grammar",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(spaceGrammar.items.length!==5) {
+    errors.push("published activity source must return 5 bounded Space grammar items");
+  }
+
+  const karaokeTranslation=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,
+    "karaoke-typing",
+    "karaoke",
+    "translation",
+    "runtime-source-karaoke-translation",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(karaokeTranslation.items.length!==5) {
+    errors.push("published activity source must return 5 bounded Karaoke translation items");
+  }
+
+  const karaokeExamples=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,
+    "karaoke-typing",
+    "karaoke",
+    "example-typing",
+    "runtime-source-karaoke-examples",
+    {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(karaokeExamples.items.length!==5) {
+    errors.push("published activity source must return 5 bounded Karaoke example items");
+  }
+
+  const recallCollocations=await countPublishedEnglishActivityRecords(
+    fileRuntimeLoader,
+    "collocation",
+  );
+  if(recallCollocations!==0) {
+    errors.push("Recall collocation activity must remain unavailable until phrase records are published");
+  }
+  await assertUnavailableRecallCollocation();
+} catch (error) {
+  errors.push("published activity source routing smoke failed: "+error.message);
+}
+
+async function assertUnavailableRecallCollocation() {
+  try {
+    await buildPublishedGameEnglishActivityDataset(
+      fileRuntimeLoader,
+      "recall-typing",
+      "recall",
+      "collocation",
+      "runtime-source-recall-collocation",
+      {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+    );
+    errors.push("Recall collocation activity unexpectedly launched with zero published phrase records");
+  } catch (error) {
+    if(!String(error?.message??error).includes("No published English content")) {
+      throw error;
+    }
+  }
+}
+
 const report={
   grammarTopics:topics.length,
   examples:examples.length,
   exercises:exercises.length,
   grammarManifestCount:grammarManifest.count,
   sentenceManifestCount:sentenceManifest.count,
+  runtimeActivitySource:{
+    spaceGrammar:5,
+    karaokeTranslation:5,
+    karaokeExamples:5,
+    recallCollocations:0,
+  },
 };
 console.log(JSON.stringify(report,null,2));
 if (errors.length) {
