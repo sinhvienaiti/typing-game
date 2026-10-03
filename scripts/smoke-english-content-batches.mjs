@@ -23,9 +23,16 @@ for (const batch of manifest.batches??[]) {
       errors.push(batch.id+"/"+smoke.recordSetId+": "+error.message);
       continue;
     }
-    const records=(doc.records??[]).slice(0,smoke.sampleCount);
+    const compatibleRecords=(doc.records??[]).filter(record=>
+      smoke.recordType===undefined||record?.type===smoke.recordType
+    );
+    const records=compatibleRecords.slice(0,smoke.sampleCount);
     if (records.length!==smoke.sampleCount) {
-      errors.push(batch.id+"/"+smoke.recordSetId+": insufficient records for smoke sample");
+      errors.push(
+        batch.id+"/"+smoke.recordSetId+
+        ": insufficient records for smoke sample"+
+        (smoke.recordType===undefined?"":" type="+smoke.recordType)
+      );
       continue;
     }
     try {
@@ -43,6 +50,7 @@ for (const batch of manifest.batches??[]) {
         batchId:batch.id,
         gameId:smoke.gameId,
         activity:smoke.activity,
+        ...(smoke.recordType===undefined?{}:{recordType:smoke.recordType}),
         sourceRecords:records.length,
         activityItems:dataset.items.length,
       });

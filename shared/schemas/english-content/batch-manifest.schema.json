@@ -163,6 +163,11 @@
                   "type": "integer",
                   "minimum": 1,
                   "maximum": 20
+                },
+                "recordType": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
                 }
               }
             }
