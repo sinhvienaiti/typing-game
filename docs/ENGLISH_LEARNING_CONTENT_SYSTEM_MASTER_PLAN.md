@@ -2444,7 +2444,7 @@ The platform should gain depth without sacrificing the fast typing/game experien
 
 ---
 
-## 42. Implementation checkpoint — 2026-10-03
+## 42. Historical implementation checkpoint — early 2026-10-03
 
 Branch: `feature/english-learning-content-system`
 
@@ -2468,7 +2468,7 @@ Verification:
 - The five data references were corrected; the validator was not weakened.
 - Platform CI #504 rich-content and syntax stages passed after the correction; full run status is tracked on draft PR #48.
 
-Current intentionally unfinished work:
+At that checkpoint, intentionally unfinished work was:
 
 - populate/review the OEWN 300-word enrichment using a release-grade pinned source;
 - Wiktionary/Wiktextract morphology/usage import;
@@ -2478,3 +2478,191 @@ Current intentionally unfinished work:
 - controlled batch scale-up toward the long-term corpus targets.
 
 These items are not blockers waiting for architecture decisions. They are the subsequent content-production/integration phases and must use the now-implemented gates rather than bypassing them.
+
+
+---
+
+## 43. Current implementation checkpoint — 2026-10-03
+
+Branch: `feature/english-learning-content-system`
+
+This section supersedes the historical checkpoint above.
+
+### 43.1 Foundation and contracts
+
+- **E00 COMPLETE** — master plan and exact 300-topic curriculum framework.
+- **E01 COMPLETE** — Draft 2020-12 schema catalog, stable IDs, provenance/source contracts, runtime manifests and directory architecture.
+- **E02 COMPLETE** — schema/reference validation, license gates, exact/near dedup infrastructure, semantic exercise checks and reviewed-only publication gate.
+- **Curriculum framework COMPLETE** — exactly 300 machine-readable topics with distribution A1/A2/B1/B2/C1/C2 = 45/50/60/60/50/35.
+- Legacy `shared/vocabulary/levels/*.json` remains the compatibility ABI; rich content is sidecar data.
+
+### 43.2 E03 lexical enrichment pilot
+
+Pipeline status: **IMPLEMENTED; EDITORIAL ALIGNMENT PENDING**.
+
+- 300/300 lexeme seeds map to pinned Open English WordNet.
+- 3,334 OEWN senses imported; 3,334/3,334 have English definitions.
+- 294/300 pilot lexemes also map to pinned Vietnamese Wiktionary English entries.
+- Vietnamese Wiktionary pilot contains 2,779 candidate Vietnamese sense glosses and 274/300 records with IPA.
+- Bilingual sense-alignment packet contains 300 records; 294 have both sources and POS overlap.
+- OEWN uses immutable Git commit `dc343f2683279ecbb13fab4e2fd778d7b162d287`.
+- Vietnamese Wiktionary source bytes are pinned by SHA-256.
+- Sense alignment, bilingual wording, naturalness and CEFR decisions remain `pending`; no source importer is allowed to invent those reviews.
+
+### 43.3 E04 phrase / pattern pilot
+
+Pilot status: **AUTHORED AS DRAFT; REVIEW PENDING**.
+
+- 100 collocations.
+- 50 verb patterns.
+- 50 phrasal verbs.
+- 50 idiom/chunk records.
+- Cross-game E09 adapters can route compatible phrase activities to Recall, Shooter and Space without pretending phrase IDs are vocabulary IDs.
+
+### 43.4 E05 grammar-topic pilot
+
+Pilot status: **AUTHORED AS DRAFT; REVIEW PENDING**.
+
+- 12 rich grammar topics, exactly 2 per CEFR level.
+- EN/VI concept fields, formulae, forms, contrasts/prerequisites, examples and exercise references are present.
+- The full 300-topic framework is a curriculum/taxonomy; the 12 pilot topic bodies remain the proof set for rich lesson authoring.
+
+### 43.5 E06 sentence / exercise pilot
+
+Pipeline status: **TARGET PILOT COUNTS IMPLEMENTED; REVIEW PENDING**.
+
+Current deterministic/reproducible candidate outputs:
+
+- 1,000 example sentences derived from existing project typing texts.
+- 300 cloze exercises.
+- 300 EN↔VI Tatoeba translation exercises from 16,267 filtered source candidates; all three source files are checksum-pinned.
+- 100 controlled error-correction exercises.
+- 100 controlled sentence-transformation exercises.
+- 100 MultiWOZ 2.2 human-human dialogues selected from 124 candidates after quality filters; both source blobs are pinned.
+- 100 common-mistake candidates derived from the controlled correction pilot rather than from random artificial errors.
+
+Candidate/draft records are not runtime-published.
+
+### 43.6 E07 parent runtime
+
+Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
+
+- bounded runtime routes under `/english-content/{curriculum,dictionary,grammar,sentences,phrases,attribution}`;
+- shard loader/cache;
+- curriculum/query API;
+- capability routing;
+- review-item resolver;
+- published-record adapters;
+- parent-to-child rich activity dataset contract.
+
+The entire `shared/` tree is not publicly exposed.
+
+### 43.7 E08 Monkeytype
+
+Status: **INTEGRATED AND CHILD CI GREEN**.
+
+Implemented modes/adapters:
+
+- grammar lesson;
+- corpus-backed Context Cloze with legacy fallback;
+- Sentence Builder with published-content fallback;
+- Vietnamese → English translation;
+- error correction;
+- sentence transformation;
+- sentence listening;
+- stable grammar/sentence learning events feeding Shared Learning.
+
+The integration was repeatedly rebased/synced with the Vietnamese IME fixes so English-content work does not overwrite the separate IME workstream.
+
+### 43.8 E09 Recall / Shooter / Karaoke / Space
+
+Status: **INTEGRATED AND CHILD CI GREEN**.
+
+The parent emits bounded `typing-game:english-content:v1:activity-dataset` messages.
+
+Capability routing remains game-specific:
+
+- Recall: vocabulary, collocation, phrasal verb, chunk, listening typing, contextual usage.
+- Vocabulary Shooter: vocabulary, collocation, phrasal verb, chunk, contextual usage.
+- Karaoke: example typing, dialogue, listening typing, translation.
+- Space: vocabulary, collocation, phrasal verb, chunk, grammar challenge, contextual usage.
+
+Results still write only the canonical Shared Learning entity families `vocabulary | grammar | sentence`; child games do not own separate mastery engines.
+
+### 43.9 E10 controlled scale-up
+
+Status: **FOUNDATION COMPLETE; CI VERIFIED**.
+
+`content/english/batches/manifest.json` now enforces per batch:
+
+1. exact expected counts;
+2. generated vs committed record sets;
+3. allowed quality states;
+4. required quality-check presence;
+5. publication readiness;
+6. cross-game smoke tests.
+
+A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks.
+
+Current E10 report before the common-mistake addition accounted for 3,062 records across the E03-E06 controlled sets (2,800 candidate + 262 draft). The common-mistake record set adds another 100 candidate records once its CI run is accepted.
+
+### 43.10 E11 long-term readiness
+
+Status: **TARGET CONTRACT + READINESS REPORT COMPLETE; BULK CORPUS NOT CLAIMED COMPLETE**.
+
+Locked readiness measurements before the common-mistake addition:
+
+- grammar topics: 300 / minimum 300 (framework target reached);
+- verb patterns: 50 / 500 minimum;
+- collocations: 100 / 5,000 minimum;
+- phrasal verbs: 50 / 1,000 minimum;
+- idioms/chunks: 50 / 2,000 minimum;
+- common mistakes: 0 / 2,000 minimum (now an additional 100-record candidate pilot is implemented);
+- example sentences: 1,000 / 100,000 minimum;
+- translation pairs: 300 / 20,000 minimum;
+- cloze exercises: 300 / 30,000 minimum;
+- transformations: 100 / 10,000 minimum;
+- dialogues: 100 / 10,000 minimum.
+
+These numbers intentionally expose what is not yet scaled. E11 does not allow target counts to be treated as completed work.
+
+### 43.11 E12 audit and maintenance
+
+Status: **FOUNDATION COMPLETE; CI VERIFIED**.
+
+Implemented:
+
+- centralized `contentVersion`;
+- generated release note contract;
+- source/license/attribution maintenance audit;
+- explicit deprecation/replacement map with cycle detection;
+- source update policy forbidding silent refreshes;
+- deterministic hash-based QA sample queue;
+- runtime/attribution version consistency checks.
+
+Current rich runtime count is intentionally zero because no draft/candidate pilot has been promoted through editorial review.
+
+### 43.12 Verified CI checkpoints
+
+Important green platform runs:
+
+- #530 — full E03/E06 source pipelines and validation after MultiWOZ fixture correction.
+- #533 — E09 parent + all pinned child integrations.
+- #534 — E10 controlled batches and cross-game smoke tests.
+- #535 — E11 readiness target/report pipeline.
+- #536 — E12 release/audit/sample maintenance pipeline.
+
+Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes.
+
+### 43.13 What remains intentionally unfinished
+
+The architecture/pipelines are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
+
+- review/align OEWN ↔ Vietnamese Wiktionary senses for the 300 lexical pilot;
+- independently review grammar, Vietnamese wording, naturalness and CEFR for phrase/grammar/sentence pilots;
+- promote accepted records through `validated → reviewed → published`;
+- expand E10 batches gradually by CEFR/category;
+- grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
+- add further source-specific importers only after license/provenance rules are pinned.
+
+The project must not bulk-generate 100k records merely to raise readiness percentages.
