@@ -2622,7 +2622,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **4,146 authoring/candidate records: 3,200 candidate + 946 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **4,206 authoring/candidate records: 3,200 candidate + 1,006 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **944 published rich records**: dictionary 60, grammar 12, sentences 502 and phrases 370. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **1,004 published rich records**: dictionary 60, grammar 12, sentences 502 and phrases 430. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2695,7 +2695,7 @@ The architecture, parent launcher and child integrations are no longer waiting f
 - continue review/alignment of the remaining E03 lexical pilot after the first **30 lexemes + 30 senses** have been promoted;
 - continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **96 reviewed common mistakes**, 72 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
-- continue E04 controlled scale-up beyond the first two +60 reviewed batches; current published phrase runtime is 370, still far below the long-term targets.
+- continue E04 controlled scale-up beyond the first three +60 reviewed batches; current published phrase runtime is 430, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
