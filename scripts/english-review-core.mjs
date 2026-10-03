@@ -20,6 +20,16 @@ export function englishContentRecordDigest(record) {
   return crypto.createHash("sha256").update(stableJson(record)).digest("hex");
 }
 
+export function englishContentReviewSourceDigest(record) {
+  const normalized=structuredClone(record);
+  const checks=normalized?.quality?.checks;
+  if (checks&&typeof checks==="object"&&!Array.isArray(checks)) {
+    delete checks.cefr;
+    delete checks.license;
+  }
+  return englishContentRecordDigest(normalized);
+}
+
 export function buildEnglishReviewDecisionIndex(ledger) {
   const result=new Map();
   for (const decision of ledger?.decisions??[]) {
@@ -38,7 +48,7 @@ export function applyEnglishReviewDecision(record,decision,options={}) {
   if (!decision) return structuredClone(record);
   const id=englishContentRecordId(record);
   if (id!==decision.recordId) throw new TypeError("review decision recordId mismatch: "+decision.id);
-  const digest=englishContentRecordDigest(record);
+  const digest=englishContentReviewSourceDigest(record);
   if (digest!==decision.sourceDigest) {
     throw new TypeError(decision.id+": sourceDigest is stale; expected "+digest+", got "+decision.sourceDigest);
   }

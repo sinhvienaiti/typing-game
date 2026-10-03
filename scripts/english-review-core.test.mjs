@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import {
   applyEnglishReviewDecision,
   englishContentRecordDigest,
+  englishContentReviewSourceDigest,
   overlayEnglishReviewDecisions,
 } from "./english-review-core.mjs";
 
@@ -85,4 +86,20 @@ test("ledger targets one batch record without mutating peers",()=>{
   });
   assert.equal(result[0].quality.state,"validated");
   assert.equal(result[1].quality.state,"candidate");
+});
+
+test("review source digest ignores CEFR/license gate metadata but still binds learning content",()=>{
+  const record=sourceRecord();
+  const baseline=englishContentReviewSourceDigest(record);
+  record.quality.checks.cefr={
+    status:"pending",
+    method:"cefr-review-required",
+  };
+  record.quality.checks.license={
+    status:"pass",
+    method:"project-original-provenance-v1",
+  };
+  assert.equal(englishContentReviewSourceDigest(record),baseline);
+  record.text="I work from home.";
+  assert.notEqual(englishContentReviewSourceDigest(record),baseline);
 });

@@ -7,6 +7,7 @@ import {
   buildEnglishReviewDecisionIndex,
   englishContentRecordDigest,
   englishContentRecordId,
+  englishContentReviewSourceDigest,
 } from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
@@ -37,7 +38,7 @@ for (const decision of ledger.decisions??[]) {
     continue;
   }
   const record=matches[0];
-  const digest=englishContentRecordDigest(record);
+  const digest=englishContentReviewSourceDigest(record);
   if (digest!==decision.sourceDigest) {
     errors.push(decision.id+": stale source digest; current="+digest);
     continue;
