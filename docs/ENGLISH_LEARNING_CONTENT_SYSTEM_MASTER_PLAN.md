@@ -2622,7 +2622,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **4,014 authoring/candidate records: 3,200 candidate + 814 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **4,038 authoring/candidate records: 3,200 candidate + 838 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2635,7 +2635,7 @@ Locked readiness measurements before the common-mistake addition:
 - collocations: 120 / 5,000 minimum;
 - phrasal verbs: 60 / 1,000 minimum;
 - idioms/chunks: 60 / 2,000 minimum;
-- common mistakes: 100 / 2,000 minimum in the candidate pipeline; **24 balanced records (2 per published grammar topic) are reviewed/published for runtime error-correction practice**;
+- common mistakes: 100 / 2,000 minimum in the candidate pipeline; **48 balanced records (4 per published grammar topic) are reviewed/published for runtime error-correction practice**;
 - example sentences: 1,000 / 100,000 minimum;
 - translation pairs: 300 / 20,000 minimum;
 - cloze exercises: 300 / 30,000 minimum;
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **812 published rich records**: dictionary 60, grammar 12, sentences 430 and phrases 310. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **836 published rich records**: dictionary 60, grammar 12, sentences 454 and phrases 310. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2682,6 +2682,7 @@ Important green platform runs:
 - #583 — third reviewed Tatoeba slice (72 pairs; 708 rich runtime records) passed full Platform CI before the third lexical promotion.
 - #584 — third reviewed lexical slice (30 lexemes + 30 senses; 728 rich runtime records) passed full Platform CI before the first common-mistake promotion.
 - #585 — first reviewed common-mistake slice (24 records; 752 rich runtime records) passed full Platform CI before E04 scale batch 01.
+- #586 — E04 phrase-pattern scale batch 01 (+20 verb patterns, +20 collocations, +20 phrase items; 812 rich runtime records) passed full Platform CI before common-mistake slice 02.
 - #578 — closed Vietnamese Wiktionary source-refresh review passed full Platform CI on the 650-record runtime baseline before MultiWOZ dialogue promotion.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
@@ -2691,7 +2692,7 @@ Child repositories also passed their relevant CI after E09 integration, includin
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - continue review/alignment of the remaining E03 lexical pilot after the first **30 lexemes + 30 senses** have been promoted;
-- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **24 reviewed common mistakes**, 72 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
+- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **48 reviewed common mistakes**, 72 Tatoeba pairs, 24 reviewed typing-text examples + 24 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - continue E04 controlled scale-up beyond the first +60 reviewed records; current published phrase runtime is 310, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
