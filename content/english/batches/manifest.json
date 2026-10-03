@@ -25,6 +25,21 @@
           "requiredChecks": []
         },
         {
+          "id": "morphology-usage",
+          "path": "content/english/review-queues/simplewiktionary-en-pilot.json",
+          "expectedCount": 300,
+          "generated": true,
+          "allowedQualityStates": [
+            "candidate"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "morphologyUsageReview",
+            "naturalness"
+          ]
+        },
+        {
           "id": "sense-alignment-review",
           "path": "content/english/review-queues/e03-sense-alignment-review.json",
           "expectedCount": 300,
@@ -46,7 +61,8 @@
         "sense-alignment",
         "bilingual-review",
         "naturalness-review",
-        "cefr-review"
+        "cefr-review",
+        "morphology-usage-review"
       ],
       "gameSmokes": []
     },

@@ -199,6 +199,26 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Probe Simple Wiktionary morphology and usage source
+        run: |
+          mkdir -p .cache/english-content/simplewiktionary
+          curl -fL --retry 3 --retry-all-errors \
+            https://kaikki.org/simplewiktionary/raw-wiktextract-data.jsonl.gz \
+            -o .cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz
+          gzip -t .cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz
+          pnpm english-content:import:simplewiktionary -- \
+            --input=.cache/english-content/simplewiktionary/raw-wiktextract-data.jsonl.gz \
+            --allow-unpinned=true
+          pnpm english-content:e03:morphology
+
+      - name: Upload Simple Wiktionary E03 morphology pilot
+        uses: actions/upload-artifact@v4
+        with:
+          name: simplewiktionary-e03-pilot-${{ github.sha }}
+          path: content/english/review-queues/simplewiktionary-en-pilot.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Probe Vietnamese Wiktionary English gloss source
         run: |
           mkdir -p .cache/english-content/viwiktionary
@@ -323,6 +343,9 @@ jobs:
           node --check scripts/report-english-content-e03.mjs
           node --check scripts/import-viwiktionary-pilot.mjs
           node --check scripts/report-english-content-viwiktionary.mjs
+          node --check scripts/wiktextract-enrichment-core.mjs
+          node --check scripts/import-simplewiktionary-pilot.mjs
+          node --check scripts/report-english-content-simplewiktionary.mjs
           node --check scripts/build-e03-sense-review.mjs
           node --check scripts/report-english-content-e03-sense-review.mjs
           node --check scripts/validate-english-content-batches.mjs
