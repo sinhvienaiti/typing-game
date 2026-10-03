@@ -167,6 +167,9 @@ echo "[4/5] Switching nginx to development mode..."
 pnpm setup:dev
 
 echo "[5/5] Starting development services for: $TARGET"
+if [[ "$TARGET" == "all" || "$TARGET" == "space" ]]; then
+  node games/space-typing/scripts/local-duel.mjs start
+fi
 case "$TARGET" in
   all)
     exec pnpm dev
