@@ -2522,11 +2522,14 @@ Pilot status: **AUTHORED AS DRAFT; REVIEW PENDING**.
 
 ### 43.4 E05 grammar-topic pilot
 
-Pilot status: **AUTHORED AS DRAFT; REVIEW PENDING**.
+Pilot status: **FIRST REVIEWED VERTICAL SLICE PUBLISHED**.
 
-- 12 rich grammar topics, exactly 2 per CEFR level.
-- EN/VI concept fields, formulae, forms, contrasts/prerequisites, examples and exercise references are present.
-- The full 300-topic framework is a curriculum/taxonomy; the 12 pilot topic bodies remain the proof set for rich lesson authoring.
+- Source authoring files remain `draft` so the original authored records and editorial workflow stay auditable.
+- A digest-bound review ledger overlays 72 accepted records and promotes only those reviewed records at publication time.
+- Published E05 runtime currently contains 12 rich grammar topics, 36 controlled example sentences and 24 exercises.
+- The 12 grammar topics remain exactly 2 per CEFR level and include EN/VI concepts, formulae, forms, contrasts/prerequisites, examples and exercise references.
+- All 72 publication decisions have completed grammar/naturalness/target/CEFR/license checks; translation is either `pass` or explicitly `not-applicable`.
+- The full 300-topic framework is still the curriculum/taxonomy; only the reviewed 12-topic body slice is runtime-published.
 
 ### 43.5 E06 sentence / exercise pilot
 
@@ -2557,6 +2560,8 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 - parent-to-child rich activity dataset contract.
 
 The entire `shared/` tree is not publicly exposed.
+
+The first published runtime slice is now non-empty: `shared/grammar` contains 12 topics and `shared/sentences` contains 36 examples + 24 exercises. Dictionary and phrase runtime manifests remain empty until their own editorial gates pass.
 
 ### 43.7 E08 Monkeytype
 
@@ -2603,9 +2608,9 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 5. publication readiness;
 6. cross-game smoke tests.
 
-A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks.
+A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-Current E10 report before the common-mistake addition accounted for 3,062 records across the E03-E06 controlled sets (2,800 candidate + 262 draft). The common-mistake record set adds another 100 candidate records once its CI run is accepted.
+The current controlled E03-E06 manifest accounts for 3,522 authoring/candidate records: 3,200 candidate + 322 draft. E05 publication is represented by the review ledger/runtime overlay rather than mutating the authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2641,7 +2646,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-Current rich runtime count is intentionally zero because no draft/candidate pilot has been promoted through editorial review.
+The rich runtime is now intentionally non-zero after the first reviewed E05 promotion: 12 grammar records + 60 sentence/exercise records = 72 published rich records. Dictionary and phrase runtime counts remain zero. The attribution runtime remains zero because every currently published E05 record is `project-original`; the E12 audit now derives attribution requirements from provenance of the records actually published, not merely from the existence of third-party sources in the source catalog.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2652,16 +2657,18 @@ Important green platform runs:
 - #534 — E10 controlled batches and cross-game smoke tests.
 - #535 — E11 readiness target/report pipeline.
 - #536 — E12 release/audit/sample maintenance pipeline.
+- #548 — E10 typed smoke filtering, editorial review ledger, rich-content validation and E12 maintenance gates all passed together before first publication.
+- #549 — attribution audit based on actual published provenance passed before the E05 promotion.
 
-Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes.
+Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
 ### 43.13 What remains intentionally unfinished
 
 The architecture/pipelines are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - review/align OEWN ↔ Vietnamese Wiktionary senses for the 300 lexical pilot;
-- independently review grammar, Vietnamese wording, naturalness and CEFR for phrase/grammar/sentence pilots;
-- promote accepted records through `validated → reviewed → published`;
+- independently review grammar, Vietnamese wording, naturalness and CEFR for E04 phrase/pattern records and E06 candidate corpora;
+- continue promotion in small reviewed slices; E05 has completed the first 72-record `reviewed → published` vertical slice;
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
