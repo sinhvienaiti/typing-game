@@ -55,13 +55,14 @@ const topics=await loadRuntime(grammarManifest,path.join("shared","grammar"));
 const sentenceRecords=await loadRuntime(sentenceManifest,path.join("shared","sentences"));
 const examples=sentenceRecords.filter(record=>String(record.id??"").startsWith("sent."));
 const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith("ex."));
+const dialogues=sentenceRecords.filter(record=>String(record.id??"").startsWith("dlg."));
 
 if (dictionaryManifest.count!==40) errors.push("published dictionary runtime must contain 40 E03 records");
 if (lexemes.length!==20||senses.length!==20) errors.push("published E03 runtime split must be 20 lexemes + 20 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==348) errors.push("published sentence runtime must contain 348 reviewed records");
-if (topics.length!==12||examples.length!==108||exercises.length!==240) {
-  errors.push("published runtime split must be 12 topics + 108 examples + 240 exercises");
+if (sentenceManifest.count!==358) errors.push("published sentence runtime must contain 358 reviewed records");
+if (topics.length!==12||examples.length!==108||exercises.length!==240||dialogues.length!==10) {
+  errors.push("published runtime split must be 12 topics + 108 examples + 240 exercises + 10 dialogues");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -90,7 +91,7 @@ const topicIds=new Set(topics.map(record=>record.id));
 const exampleIds=new Set(examples.map(record=>record.id));
 const exerciseIds=new Set(exercises.map(record=>record.id));
 
-for (const record of [...topics,...examples,...exercises]) {
+for (const record of [...topics,...examples,...exercises,...dialogues]) {
   if (record.quality?.state!=="published") errors.push(record.id+": runtime record is not published");
   for (const [name,check] of Object.entries(record.quality?.checks??{})) {
     if (check?.status==="pending"||check?.status==="fail") {
@@ -133,6 +134,10 @@ try {
   );
   buildGameEnglishActivityDataset(
     "monkeytype","transformation",transformationExercises.slice(0,2),"runtime-smoke-monkey-transformation",
+    {createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  buildGameEnglishActivityDataset(
+    "karaoke-typing","dialogue",dialogues.slice(0,2),"runtime-smoke-karaoke-dialogue",
     {createdAt:"2026-10-03T00:00:00.000Z"},
   );
 } catch (error) {
@@ -199,6 +204,25 @@ try {
     errors.push("published activity source must return 5 bounded Karaoke example items");
   }
 
+  const karaokeDialogueCount=await countPublishedEnglishActivityRecords(
+    fileRuntimeLoader,
+    "dialogue",
+  );
+  if(karaokeDialogueCount!==10) {
+    errors.push("published Karaoke dialogue activity must expose 10 reviewed dialogues");
+  }
+  const karaokeDialogue=await buildPublishedGameEnglishActivityDataset(
+    fileRuntimeLoader,
+    "karaoke-typing",
+    "karaoke",
+    "dialogue",
+    "runtime-source-karaoke-dialogue",
+    {limit:3,createdAt:"2026-10-03T00:00:00.000Z"},
+  );
+  if(karaokeDialogue.items.length===0||karaokeDialogue.items.length>100) {
+    errors.push("published activity source must return a bounded Karaoke dialogue dataset");
+  }
+
   const recallCollocations=await countPublishedEnglishActivityRecords(
     fileRuntimeLoader,
     "collocation",
@@ -230,6 +254,7 @@ const report={
   exercises:exercises.length,
   corrections:correctionExercises.length,
   transformations:transformationExercises.length,
+  dialogues:dialogues.length,
   tatoebaExamples:tatoebaExamples.length,
   tatoebaTranslations:tatoebaTranslations.length,
   typingTextExamples:typingTextExamples.length,
@@ -245,6 +270,7 @@ const report={
     monkeyCorrection:5,
     monkeyTransformation:5,
     karaokeExamples:5,
+    karaokeDialogues:10,
     recallCollocations:100,
   },
 };

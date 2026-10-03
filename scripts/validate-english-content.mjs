@@ -87,6 +87,7 @@ const reviewedTranslationSentences=await validateFile("content/english/sentences
 const reviewedTranslations=await validateFile("content/english/sentences/e06-reviewed-translations.json","exercise-set.schema.json");
 const reviewedTypingTextSentences=await validateFile("content/english/sentences/e06-reviewed-typing-text-sentences.json","sentence-set.schema.json");
 const reviewedCloze=await validateFile("content/english/sentences/e06-reviewed-cloze.json","exercise-set.schema.json");
+const reviewedDialogues=await validateFile("content/english/sentences/e06-reviewed-dialogues.json","dialogue-set.schema.json");
 const vocabLookup=await readJson(path.join(root,"shared","vocabulary","lookup.json"));
 if (lexemePilot) {
   if (lexemePilot.records.length!==300) errors.push("lexeme seed pilot must contain exactly 300 records");
@@ -187,6 +188,28 @@ if (reviewedTypingTextSentences&&reviewedCloze) {
     const targetId=exercise.targetIds?.[0];
     if (!seedLexemeIds.has(targetId)) errors.push(exercise.id+": reviewed cloze target is not a stable E03 seed lexeme "+String(targetId));
     if (!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": reviewed cloze prompt must contain the blank marker");
+  }
+}
+if (reviewedDialogues) {
+  const expectedReviewedDialogues=batchExpectedCount("e06.dialogue-reviewed-slice","reviewed-dialogues");
+  if (expectedReviewedDialogues===null||reviewedDialogues.records.length!==expectedReviewedDialogues) errors.push("E06 reviewed dialogue slice must match the controlled batch expectedCount");
+  const ids=new Set(),normalized=new Set();
+  for (const dialogue of reviewedDialogues.records) {
+    if (dialogue.quality?.state!=="draft") errors.push(dialogue.id+": reviewed dialogue must remain draft; publication is ledger-overlay only");
+    if (ids.has(dialogue.id)) errors.push(dialogue.id+": duplicate reviewed dialogue id");
+    ids.add(dialogue.id);
+    if (dialogue.turns.length<4||dialogue.turns.length>10) errors.push(dialogue.id+": reviewed dialogue turn count outside 4..10");
+    let previous="";
+    for (const turn of dialogue.turns) {
+      if (turn.speaker===previous) errors.push(dialogue.id+": reviewed dialogue speakers must alternate");
+      previous=turn.speaker;
+    }
+    const key=dialogue.turns.map(turn=>String(turn.text).normalize("NFKC").trim().replace(/\s+/gu," ").toLocaleLowerCase("en-US")).join("\u0000");
+    if (normalized.has(key)) errors.push(dialogue.id+": duplicate normalized reviewed dialogue");
+    normalized.add(key);
+    if (!(dialogue.provenance?.sources??[]).some(source=>source.dataset==="multiwoz"&&source.snapshot==="fe0c8e65cfcd8462bd33c86e35f21addc84ca82b"&&source.license==="MIT")) {
+      errors.push(dialogue.id+": reviewed dialogue must retain pinned MultiWOZ MIT provenance");
+    }
   }
 }
 if (reviewedE06Exercises) {

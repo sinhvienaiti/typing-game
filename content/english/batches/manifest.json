@@ -796,6 +796,59 @@
         "derived-output-comparison"
       ],
       "gameSmokes": []
+    },
+    {
+      "id": "e06.dialogue-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A2",
+        "B1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-dialogues",
+          "path": "content/english/sentences/e06-reviewed-dialogues.json",
+          "expectedCount": 10,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "dialogueStructure",
+            "identifierSafety",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "dialogue-structure-review",
+        "identifier-safety-review",
+        "dedupe-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "karaoke-typing",
+          "activity": "dialogue",
+          "recordSetId": "reviewed-dialogues",
+          "sampleCount": 3
+        }
+      ]
     }
   ]
 }
