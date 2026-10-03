@@ -1,0 +1,99 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { readJson, stableJson } from "./english-content-core.mjs";
+
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const targetDoc=await readJson(path.join(root,"content","english","targets","long-term.json"));
+const errors=[];
+const rows=[];
+const seenTargets=new Set();
+
+function recordKey(record,index) {
+  const id=record?.id??record?.lexemeId;
+  return typeof id==="string"&&id.trim()!==""?id:"#"+String(index+1);
+}
+function selectCollection(doc,source) {
+  const values=doc?.[source.collection];
+  if (!Array.isArray(values)) throw new TypeError(source.path+" does not contain "+source.collection+"[]");
+  if (source.filterField===undefined) return values;
+  const wanted=new Set(source.filterValues??[]);
+  return values.filter(item=>wanted.has(String(item?.[source.filterField])));
+}
+
+for (const target of targetDoc.targets??[]) {
+  if (seenTargets.has(target.id)) errors.push("duplicate long-term target id: "+target.id);
+  seenTargets.add(target.id);
+  if (target.maximum!==undefined&&target.maximum<target.minimum) {
+    errors.push(target.id+": maximum is below minimum");
+  }
+  const unique=new Set();
+  const sourceCounts=[];
+  for (const source of target.sources??[]) {
+    let doc;
+    try {
+      doc=await readJson(path.join(root,source.path));
+    } catch (error) {
+      errors.push(target.id+": "+error.message);
+      continue;
+    }
+    let records;
+    try {
+      records=selectCollection(doc,source);
+    } catch (error) {
+      errors.push(target.id+": "+error.message);
+      continue;
+    }
+    records.forEach((record,index)=>unique.add(recordKey(record,index)+"@"+source.path));
+    sourceCounts.push({path:source.path,count:records.length});
+  }
+  const current=unique.size;
+  if (target.maximum!==undefined&&current>target.maximum) {
+    errors.push(target.id+": current count "+current+" exceeds maximum "+target.maximum);
+  }
+  rows.push({
+    id:target.id,
+    label:target.label,
+    current,
+    minimum:target.minimum,
+    ...(target.maximum===undefined?{}:{maximum:target.maximum}),
+    completionPercent:target.minimum===0?100:Number(Math.min(100,(current/target.minimum)*100).toFixed(2)),
+    minimumReached:current>=target.minimum,
+    sourceCounts,
+  });
+}
+
+const expected={
+  "grammar-topics":[300,320],
+  "verb-patterns":[500,1000],
+  "collocations":[5000,null],
+  "phrasal-verbs":[1000,null],
+  "idioms-chunks":[2000,null],
+  "common-mistakes":[2000,null],
+  "example-sentences":[100000,null],
+  "translation-pairs":[20000,null],
+  "cloze-exercises":[30000,null],
+  "sentence-transformations":[10000,null],
+  "dialogue-examples":[10000,null],
+};
+for (const [id,[minimum,maximum]] of Object.entries(expected)) {
+  const target=targetDoc.targets?.find(item=>item.id===id);
+  if (!target) errors.push("missing locked long-term target: "+id);
+  else {
+    if (target.minimum!==minimum) errors.push(id+": minimum drifted from locked master-plan target");
+    if ((target.maximum??null)!==maximum) errors.push(id+": maximum drifted from locked master-plan target");
+  }
+}
+
+const output={schemaVersion:1,targets:rows};
+await fs.mkdir(path.join(root,"content","english","reports"),{recursive:true});
+await fs.writeFile(
+  path.join(root,"content","english","reports","e11-readiness.json"),
+  stableJson(output),
+  "utf8",
+);
+console.log(JSON.stringify(output,null,2));
+if (errors.length) {
+  console.error(errors.join("\n"));
+  process.exitCode=1;
+}

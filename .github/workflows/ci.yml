@@ -226,6 +226,17 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      - name: Report E11 long-term corpus readiness
+        run: pnpm english-content:e11
+
+      - name: Upload E11 readiness report
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-content-e11-readiness-${{ github.sha }}
+          path: content/english/reports/e11-readiness.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Validate rich English learning content
         run: |
           pnpm english-content:validate
@@ -288,6 +299,7 @@ jobs:
           node --check scripts/report-english-content-e03-sense-review.mjs
           node --check scripts/validate-english-content-batches.mjs
           node --check scripts/smoke-english-content-batches.mjs
+          node --check scripts/report-english-content-e11-readiness.mjs
           node --check scripts/derive-typing-text-e06.mjs
           node --check scripts/report-english-content-e06-scale.mjs
           node --check scripts/derive-grammar-e06.mjs

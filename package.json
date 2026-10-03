@@ -73,7 +73,8 @@
     "english-content:e03:sense-review": "node scripts/build-e03-sense-review.mjs && node scripts/report-english-content-e03-sense-review.mjs",
     "english-content:e10:validate": "node scripts/validate-english-content-batches.mjs",
     "english-content:e10:smoke": "node scripts/smoke-english-content-batches.mjs",
-    "english-content:e10": "pnpm english-content:e10:validate && pnpm english-content:e10:smoke"
+    "english-content:e10": "pnpm english-content:e10:validate && pnpm english-content:e10:smoke",
+    "english-content:e11": "node scripts/report-english-content-e11-readiness.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
