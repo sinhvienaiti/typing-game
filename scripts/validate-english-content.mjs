@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","sense-set.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -71,6 +71,8 @@ if (!sources?.sources?.some(source=>source.id==="verbnet"&&source.publishAllowed
 if (!sources?.sources?.some(source=>source.id==="cambridge-profile"&&source.publishAllowed===false)) errors.push("Cambridge source must remain reference-only");
 
 const lexemePilot=await validateFile("content/english/dictionary/lexeme-seed-pilot.json","lexeme-set.schema.json");
+const reviewedLexemes=await validateFile("content/english/dictionary/e03-reviewed-lexemes.json","lexeme-set.schema.json");
+const reviewedSenses=await validateFile("content/english/dictionary/e03-reviewed-senses.json","sense-set.schema.json");
 const grammarPilot=await validateFile("content/english/grammar/pilot-topics.json","grammar-topic-set.schema.json");
 const sentencePilot=await validateFile("content/english/sentences/pilot-sentences.json","sentence-set.schema.json");
 const exercisePilot=await validateFile("content/english/sentences/pilot-exercises.json","exercise-set.schema.json");
@@ -83,6 +85,25 @@ if (lexemePilot) {
     if (lexIds.has(record.id)) errors.push(record.id+": duplicate lexeme id"); lexIds.add(record.id);
     if (keys.has(record.headwordKey)) errors.push(record.id+": duplicate headwordKey"); keys.add(record.headwordKey);
     if (!Number.isInteger(vocabLookup.entries?.[record.headwordKey])) errors.push(record.id+": headwordKey is missing from legacy vocabulary lookup");
+  }
+}
+if (reviewedLexemes&&reviewedSenses) {
+  if (reviewedLexemes.records.length!==10) errors.push("E03 reviewed lexeme slice must contain exactly 10 records");
+  if (reviewedSenses.records.length!==10) errors.push("E03 reviewed sense slice must contain exactly 10 records");
+  const senseIds=new Set(reviewedSenses.records.map(item=>item.id));
+  const reviewedKeys=new Set();
+  for (const record of reviewedLexemes.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E03 reviewed-source lexeme must remain draft; publication is ledger-overlay only");
+    if (!record.vi||!record.ipa||!record.cefr) errors.push(record.id+": reviewed lexeme requires vi/ipa/cefr display metadata");
+    if (reviewedKeys.has(record.headwordKey)) errors.push(record.id+": duplicate reviewed headwordKey");
+    reviewedKeys.add(record.headwordKey);
+    for (const id of record.senseIds??[]) if (!senseIds.has(id)) errors.push(record.id+": missing reviewed sense "+id);
+  }
+  const reviewedLexIds=new Set(reviewedLexemes.records.map(item=>item.id));
+  for (const sense of reviewedSenses.records) {
+    if (sense.quality?.state!=="draft") errors.push(sense.id+": E03 reviewed-source sense must remain draft; publication is ledger-overlay only");
+    if (!reviewedLexIds.has(sense.lexemeId)) errors.push(sense.id+": unknown reviewed lexeme "+sense.lexemeId);
+    if (!sense.cefr) errors.push(sense.id+": reviewed sense requires CEFR");
   }
 }
 const pilotSentenceIds=new Set((sentencePilot?.records??[]).map(item=>item.id));

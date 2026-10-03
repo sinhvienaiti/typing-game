@@ -67,6 +67,84 @@
       "gameSmokes": []
     },
     {
+      "id": "e03.lexical-reviewed-slice",
+      "phase": "E03",
+      "category": "dictionary",
+      "cefr": [
+        "A1",
+        "A2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-lexemes",
+          "path": "content/english/dictionary/e03-reviewed-lexemes.json",
+          "expectedCount": 10,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "legacyJoin",
+            "sourcePin",
+            "senseAlignment",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-senses",
+          "path": "content/english/dictionary/e03-reviewed-senses.json",
+          "expectedCount": 10,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "legacyJoin",
+            "sourcePin",
+            "senseAlignment",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "sense-alignment",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "vocabulary",
+          "recordSetId": "reviewed-lexemes",
+          "sampleCount": 5
+        }
+      ]
+    },
+    {
       "id": "e04.phrase-pattern-pilot",
       "phase": "E04",
       "category": "phrases",

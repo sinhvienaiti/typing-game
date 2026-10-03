@@ -66,7 +66,8 @@ async function publishDataset({dataset,baseDir,groups}) {
   return {dataset,count,shards:shards.length};
 }
 
-const lexemes=await loadRecords("content/english/dictionary/lexeme-seed-pilot.json");
+const lexemes=await loadRecords("content/english/dictionary/e03-reviewed-lexemes.json");
+const senses=await loadRecords("content/english/dictionary/e03-reviewed-senses.json");
 const topics=await loadRecords("content/english/grammar/pilot-topics.json");
 const sentences=await loadRecords("content/english/sentences/pilot-sentences.json");
 const exercises=await loadRecords("content/english/sentences/pilot-exercises.json");
@@ -80,7 +81,10 @@ await fs.mkdir(path.join(root,"shared","sentences"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","phrases"),{recursive:true});
 
 const results=[];
-results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictionary",groups:[{id:"lexemes",dir:"lexemes",records:lexemes}]}));
+results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictionary",groups:[
+  {id:"lexemes",dir:"lexemes",records:lexemes},
+  {id:"senses",dir:"senses",records:senses}
+]}));
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:topics}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:sentences},

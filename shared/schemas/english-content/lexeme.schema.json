@@ -76,6 +76,19 @@
         "type": "string",
         "pattern": "^usage\\."
       }
+    },
+    "vi": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "ipa": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    },
+    "cefr": {
+      "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/cefr"
     }
   }
 }
