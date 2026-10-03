@@ -681,6 +681,91 @@
           "sampleCount": 6
         }
       ]
+    },
+    {
+      "id": "e06.typing-text-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-typing-text-sentences",
+          "path": "content/english/sentences/e06-reviewed-typing-text-sentences.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-cloze",
+          "path": "content/english/sentences/e06-reviewed-cloze.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourceText",
+            "targetPresence",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "dedup-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-typing-text-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-typing-text-sentences",
+          "sampleCount": 6
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "cloze",
+          "recordSetId": "reviewed-cloze",
+          "sampleCount": 6,
+          "recordType": "cloze"
+        }
+      ]
     }
   ]
 }

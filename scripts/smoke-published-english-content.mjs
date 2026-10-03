@@ -59,13 +59,16 @@ const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith(
 if (dictionaryManifest.count!==40) errors.push("published dictionary runtime must contain 40 E03 records");
 if (lexemes.length!==20||senses.length!==20) errors.push("published E03 runtime split must be 20 lexemes + 20 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==252) errors.push("published sentence runtime must contain 252 reviewed records");
-if (topics.length!==12||examples.length!==84||exercises.length!==168) {
-  errors.push("published runtime split must be 12 topics + 84 examples + 168 exercises");
+if (sentenceManifest.count!==300) errors.push("published sentence runtime must contain 300 reviewed records");
+if (topics.length!==12||examples.length!==108||exercises.length!==192) {
+  errors.push("published runtime split must be 12 topics + 108 examples + 192 exercises");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
 if (tatoebaExamples.length!==48||tatoebaTranslations.length!==48) errors.push("published Tatoeba slices must expose 48 sentences + 48 translations");
+const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
+const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
+if (typingTextExamples.length!==24||typingTextCloze.length!==24) errors.push("published typing-text slice must expose 24 examples + 24 cloze exercises");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
 if (correctionExercises.length!==48||transformationExercises.length!==48) {
@@ -229,6 +232,8 @@ const report={
   transformations:transformationExercises.length,
   tatoebaExamples:tatoebaExamples.length,
   tatoebaTranslations:tatoebaTranslations.length,
+  typingTextExamples:typingTextExamples.length,
+  typingTextCloze:typingTextCloze.length,
   grammarManifestCount:grammarManifest.count,
   sentenceManifestCount:sentenceManifest.count,
   runtimeActivitySource:{

@@ -2563,7 +2563,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **20 lexemes + 20 senses (40)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **84 examples + 168 exercises (252)**; and `shared/phrases` contains **250 phrase/pattern records**. Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **20 lexemes + 20 senses (40)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **108 examples + 192 exercises (300)**; and `shared/phrases` contains **250 phrase/pattern records**. Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2620,7 +2620,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **3,590 authoring/candidate records: 3,200 candidate + 390 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest accounts for **3,802 authoring/candidate records: 3,200 candidate + 602 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2656,7 +2656,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **554 published rich records**: dictionary 40, grammar 12, sentences 252 and phrases 250. Attribution runtime contains **3 sources** (legacy vocabulary, OEWN and Tatoeba), derived from provenance actually present in published runtime records.
+The rich runtime now contains **602 published rich records**: dictionary 40, grammar 12, sentences 300 and phrases 250. Attribution runtime contains **3 sources** (legacy vocabulary, OEWN and Tatoeba), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2681,7 +2681,7 @@ Child repositories also passed their relevant CI after E09 integration, includin
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - continue review/alignment of the remaining E03 lexical pilot after the first **20 lexemes + 20 senses** have been promoted;
-- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 48 corrections, 48 transformations and 48 Tatoeba pairs;
+- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 48 corrections, 48 transformations, 48 Tatoeba pairs, plus 24 reviewed typing-text examples and 24 linked cloze exercises;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;

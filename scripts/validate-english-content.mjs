@@ -85,6 +85,8 @@ const exercisePilot=await validateFile("content/english/sentences/pilot-exercise
 const reviewedE06Exercises=await validateFile("content/english/sentences/e06-reviewed-exercises.json","exercise-set.schema.json");
 const reviewedTranslationSentences=await validateFile("content/english/sentences/e06-reviewed-translation-sentences.json","sentence-set.schema.json");
 const reviewedTranslations=await validateFile("content/english/sentences/e06-reviewed-translations.json","exercise-set.schema.json");
+const reviewedTypingTextSentences=await validateFile("content/english/sentences/e06-reviewed-typing-text-sentences.json","sentence-set.schema.json");
+const reviewedCloze=await validateFile("content/english/sentences/e06-reviewed-cloze.json","exercise-set.schema.json");
 const vocabLookup=await readJson(path.join(root,"shared","vocabulary","lookup.json"));
 if (lexemePilot) {
   if (lexemePilot.records.length!==300) errors.push("lexeme seed pilot must contain exactly 300 records");
@@ -162,6 +164,29 @@ if (reviewedTranslationSentences&&reviewedTranslations) {
     const sourceId=exercise.sourceSentenceIds?.[0];
     if (!sentenceIds.has(sourceId)) errors.push(exercise.id+": reviewed translation source is missing "+sourceId);
     if (exercise.targetIds?.[0]!==sourceId) errors.push(exercise.id+": translation target must be its source sentence id");
+  }
+}
+if (reviewedTypingTextSentences&&reviewedCloze) {
+  const expectedTypingSentences=batchExpectedCount("e06.typing-text-reviewed-slice","reviewed-typing-text-sentences");
+  const expectedTypingCloze=batchExpectedCount("e06.typing-text-reviewed-slice","reviewed-cloze");
+  if (expectedTypingSentences===null||reviewedTypingTextSentences.records.length!==expectedTypingSentences) errors.push("E06 reviewed typing-text sentence slice must match controlled batch expectedCount");
+  if (expectedTypingCloze===null||reviewedCloze.records.length!==expectedTypingCloze) errors.push("E06 reviewed cloze slice must match controlled batch expectedCount");
+  if (expectedTypingSentences!==expectedTypingCloze) errors.push("E06 reviewed typing-text sentence/cloze counts must stay paired");
+  const typingSentenceIds=new Set(reviewedTypingTextSentences.records.map(item=>item.id));
+  const seedLexemeIds=new Set((lexemePilot?.records??[]).map(item=>item.id));
+  for (const sentence of reviewedTypingTextSentences.records) {
+    if (sentence.quality?.state!=="draft") errors.push(sentence.id+": reviewed typing-text sentence must remain draft; publication is ledger-overlay only");
+    if (sentence.cefr!=="A1") errors.push(sentence.id+": first reviewed typing-text slice is intentionally A1-only");
+    if (!(sentence.provenance?.sources??[]).some(source=>source.dataset==="project-original")) errors.push(sentence.id+": reviewed typing-text sentence must retain project-original provenance");
+  }
+  for (const exercise of reviewedCloze.records) {
+    if (exercise.quality?.state!=="draft") errors.push(exercise.id+": reviewed cloze must remain draft; publication is ledger-overlay only");
+    if (exercise.type!=="cloze") errors.push(exercise.id+": reviewed typing-text exercise must be cloze");
+    const sourceId=exercise.sourceSentenceIds?.[0];
+    if (!typingSentenceIds.has(sourceId)) errors.push(exercise.id+": reviewed cloze source sentence is missing "+sourceId);
+    const targetId=exercise.targetIds?.[0];
+    if (!seedLexemeIds.has(targetId)) errors.push(exercise.id+": reviewed cloze target is not a stable E03 seed lexeme "+String(targetId));
+    if (!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": reviewed cloze prompt must contain the blank marker");
   }
 }
 if (reviewedE06Exercises) {

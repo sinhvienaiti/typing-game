@@ -12216,6 +12216,1878 @@
         "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
       },
       "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.001",
+      "type": "cloze",
+      "prompt": "___ begins quietly in a small house near the edge of town.",
+      "targetIds": [
+        "lex.en.00000021"
+      ],
+      "acceptedAnswers": [
+        "morning"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.001"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:1",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.001",
+      "type": "cloze",
+      "prompt": "A ___ morning routine can make a busy day feel easier.",
+      "targetIds": [
+        "lex.en.00000165"
+      ],
+      "acceptedAnswers": [
+        "simple"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.001"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:1",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.002",
+      "type": "cloze",
+      "prompt": "A ___ child wakes first and walks from the room to the kitchen.",
+      "targetIds": [
+        "lex.en.00000006"
+      ],
+      "acceptedAnswers": [
+        "young"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:2",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.002",
+      "type": "cloze",
+      "prompt": "Some people wake early every day, while others often stay in bed until the last ___ minute.",
+      "targetIds": [
+        "lex.en.00000164"
+      ],
+      "acceptedAnswers": [
+        "possible"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.002"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:2",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.003",
+      "type": "cloze",
+      "prompt": "The floor feels ___, but the water in a cup is not too cold to drink.",
+      "targetIds": [
+        "lex.en.00000011"
+      ],
+      "acceptedAnswers": [
+        "cold"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.003"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:3",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.003",
+      "type": "cloze",
+      "prompt": "Being ___ can create stress before work or school even begins.",
+      "targetIds": [
+        "lex.en.00000152"
+      ],
+      "acceptedAnswers": [
+        "late"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.003"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:3",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.005",
+      "type": "cloze",
+      "prompt": "She says that the day looks ___.",
+      "targetIds": [
+        "lex.en.00000001"
+      ],
+      "acceptedAnswers": [
+        "good"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:5",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.004",
+      "type": "cloze",
+      "prompt": "One useful idea is to prepare ___ things the night before.",
+      "targetIds": [
+        "lex.en.00000162"
+      ],
+      "acceptedAnswers": [
+        "important"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.004"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:4",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.006",
+      "type": "cloze",
+      "prompt": "The father is already awake, and he is making food for the ___.",
+      "targetIds": [
+        "lex.en.00000034"
+      ],
+      "acceptedAnswers": [
+        "family"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.006"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:6",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.005",
+      "type": "cloze",
+      "prompt": "A bag can be full and ready, a water bottle can be clean, and an ___ lunch box can sit beside the food that will go inside it.",
+      "targetIds": [
+        "lex.en.00000170"
+      ],
+      "acceptedAnswers": [
+        "empty"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.005"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:5",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.007",
+      "type": "cloze",
+      "prompt": "The ___ pan is hot, so the child keeps a hand away from it.",
+      "targetIds": [
+        "lex.en.00000005"
+      ],
+      "acceptedAnswers": [
+        "old"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.007"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:7",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.007",
+      "type": "cloze",
+      "prompt": "Life is ___ different, and a person may need to change the plan.",
+      "targetIds": [
+        "lex.en.00000156"
+      ],
+      "acceptedAnswers": [
+        "sometimes"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.007"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:7",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.008",
+      "type": "cloze",
+      "prompt": "A big plate holds bread and fruit, while a ___ bowl holds eggs.",
+      "targetIds": [
+        "lex.en.00000004"
+      ],
+      "acceptedAnswers": [
+        "small"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.008"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:8",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.009",
+      "type": "cloze",
+      "prompt": "The family likes simple food in the ___.",
+      "targetIds": [
+        "lex.en.00000021"
+      ],
+      "acceptedAnswers": [
+        "morning"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.009"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:9",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.010",
+      "type": "cloze",
+      "prompt": "The brother feels ___ because he has a new book for school.",
+      "targetIds": [
+        "lex.en.00000008"
+      ],
+      "acceptedAnswers": [
+        "happy"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.010"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:10",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.011",
+      "type": "cloze",
+      "prompt": "Families can also prepare ___.",
+      "targetIds": [
+        "lex.en.00000157"
+      ],
+      "acceptedAnswers": [
+        "together"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.011"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:11",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.011",
+      "type": "cloze",
+      "prompt": "The sister looks ___ because she cannot find one shoe.",
+      "targetIds": [
+        "lex.en.00000009"
+      ],
+      "acceptedAnswers": [
+        "sad"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.011"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:11",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.013",
+      "type": "cloze",
+      "prompt": "If a task was ___ finished the night before, there is no need to do it again.",
+      "targetIds": [
+        "lex.en.00000159"
+      ],
+      "acceptedAnswers": [
+        "already"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.013"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:13",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.013",
+      "type": "cloze",
+      "prompt": "Finding the shoe is ___ after the mother sees it near the door.",
+      "targetIds": [
+        "lex.en.00000012"
+      ],
+      "acceptedAnswers": [
+        "easy"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.013"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:13",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.014",
+      "type": "cloze",
+      "prompt": "People who ___ dislike rushing may find this especially helpful.",
+      "targetIds": [
+        "lex.en.00000161"
+      ],
+      "acceptedAnswers": [
+        "really"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.014"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:14",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.014",
+      "type": "cloze",
+      "prompt": "The child laughs because the shoe was in the ___ place all the time, but the sister had looked in the wrong room.",
+      "targetIds": [
+        "lex.en.00000014"
+      ],
+      "acceptedAnswers": [
+        "right"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.014"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:14",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.015",
+      "type": "cloze",
+      "prompt": "Before anyone leaves ___, the father asks if each person has a bag, a phone, and water.",
+      "targetIds": [
+        "lex.en.00000028"
+      ],
+      "acceptedAnswers": [
+        "home"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.015"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:15",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l002-p001.016",
+      "type": "cloze",
+      "prompt": "No routine will ___ work, and a good plan should never feel like a strict rule.",
+      "targetIds": [
+        "lex.en.00000153"
+      ],
+      "acceptedAnswers": [
+        "always"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l002-p001.016"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L002-P001:sentence:16",
+            "sourceUrl": "shared/typing-texts/levels/002.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.tt.l001-p001.016",
+      "type": "cloze",
+      "prompt": "Some days are hard when people are late, but this ___ feels calm.",
+      "targetIds": [
+        "lex.en.00000021"
+      ],
+      "acceptedAnswers": [
+        "morning"
+      ],
+      "sourceSentenceIds": [
+        "sent.tt.l001-p001.016"
+      ],
+      "cefr": "A1",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-typing-text-reviewed-slice-authoring-v1"
+          },
+          "sourceText": {
+            "status": "pass",
+            "method": "project-typing-text-source"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "whole-phrase-boundary-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-sentence-key-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-runtime-token-overlap-review-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-content"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v1"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "cloze-target-structure-review-v1"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "L001-P001:sentence:16",
+            "sourceUrl": "shared/typing-texts/levels/001.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
+      }
     }
   ]
 }
