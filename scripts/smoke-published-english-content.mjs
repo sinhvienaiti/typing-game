@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==160) {
-    errors.push("published Recall collocation activity must expose 160 reviewed records");
+  if(recallCollocations!==180) {
+    errors.push("published Recall collocation activity must expose 180 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==110) errors.push("published verb-pattern activity must expose 110 reviewed records");
-  if(phrasalVerbCount!==80) errors.push("published phrasal-verb activity must expose 80 reviewed records");
-  if(chunkCount!==55) errors.push("published chunk activity must expose 55 reviewed records");
-  if(idiomCount!==25) errors.push("published idiom activity must expose 25 reviewed records");
+  if(verbPatternCount!==130) errors.push("published verb-pattern activity must expose 130 reviewed records");
+  if(phrasalVerbCount!==90) errors.push("published phrasal-verb activity must expose 90 reviewed records");
+  if(chunkCount!==60) errors.push("published chunk activity must expose 60 reviewed records");
+  if(idiomCount!==30) errors.push("published idiom activity must expose 30 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:160,
-    verbPatterns:110,
-    phrasalVerbs:80,
-    chunks:55,
-    idioms:25,
+    recallCollocations:180,
+    verbPatterns:130,
+    phrasalVerbs:90,
+    chunks:60,
+    idioms:30,
   },
 };
 console.log(JSON.stringify(report,null,2));
