@@ -8,7 +8,8 @@ import {
 } from "../shared/english-content/activity-source.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const [grammarManifest,sentenceManifest]=await Promise.all([
+const [dictionaryManifest,grammarManifest,sentenceManifest]=await Promise.all([
+  readJson(path.join(root,"shared","dictionary","manifest.json")),
   readJson(path.join(root,"shared","grammar","manifest.json")),
   readJson(path.join(root,"shared","sentences","manifest.json")),
 ]);
@@ -47,17 +48,33 @@ async function loadRuntime(manifest,baseDir) {
   return records;
 }
 
+const dictionaryRecords=await loadRuntime(dictionaryManifest,path.join("shared","dictionary"));
+const lexemes=dictionaryRecords.filter(record=>String(record.id??"").startsWith("lex.en."));
+const senses=dictionaryRecords.filter(record=>String(record.id??"").startsWith("sense."));
 const topics=await loadRuntime(grammarManifest,path.join("shared","grammar"));
 const sentenceRecords=await loadRuntime(sentenceManifest,path.join("shared","sentences"));
 const examples=sentenceRecords.filter(record=>String(record.id??"").startsWith("sent."));
 const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith("ex."));
 
+if (dictionaryManifest.count!==20) errors.push("published dictionary runtime must contain 20 E03 records");
+if (lexemes.length!==10||senses.length!==10) errors.push("published E03 runtime split must be 10 lexemes + 10 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
 if (sentenceManifest.count!==60) errors.push("published sentence runtime must contain 60 E05 records");
 if (topics.length!==12||examples.length!==36||exercises.length!==24) {
   errors.push("published E05 runtime split must be 12 topics + 36 examples + 24 exercises");
 }
 
+const senseIds=new Set(senses.map(record=>record.id));
+for (const record of [...lexemes,...senses]) {
+  if (record.quality?.state!=="published") errors.push(record.id+": dictionary runtime record is not published");
+  for (const [name,check] of Object.entries(record.quality?.checks??{})) {
+    if (check?.status==="pending"||check?.status==="fail") errors.push(record.id+": unfinished dictionary quality check "+name+"="+check.status);
+  }
+}
+for (const lexeme of lexemes) {
+  if (!lexeme.vi||!lexeme.ipa||!lexeme.cefr) errors.push(lexeme.id+": published lexeme is missing vi/ipa/cefr");
+  for (const id of lexeme.senseIds??[]) if (!senseIds.has(id)) errors.push(lexeme.id+": missing runtime sense "+id);
+}
 const topicIds=new Set(topics.map(record=>record.id));
 const exampleIds=new Set(examples.map(record=>record.id));
 const exerciseIds=new Set(exercises.map(record=>record.id));
@@ -104,6 +121,18 @@ try {
 }
 
 try {
+  for (const [gameId,capability] of [["recall-typing","recall"],["vocab-shooter","shooter"],["space-typing","space"]]) {
+    const vocabulary=await buildPublishedGameEnglishActivityDataset(
+      fileRuntimeLoader,
+      gameId,
+      capability,
+      "vocabulary",
+      "runtime-source-"+gameId+"-vocabulary",
+      {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
+    );
+    if (vocabulary.items.length!==5) errors.push(gameId+": published vocabulary source must return 5 items");
+  }
+
   const spaceGrammar=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
     "space-typing",
@@ -163,12 +192,18 @@ try {
 }
 
 const report={
+  dictionaryLexemes:lexemes.length,
+  dictionarySenses:senses.length,
+  dictionaryManifestCount:dictionaryManifest.count,
   grammarTopics:topics.length,
   examples:examples.length,
   exercises:exercises.length,
   grammarManifestCount:grammarManifest.count,
   sentenceManifestCount:sentenceManifest.count,
   runtimeActivitySource:{
+    recallVocabulary:5,
+    shooterVocabulary:5,
+    spaceVocabulary:5,
     spaceGrammar:5,
     karaokeTranslation:5,
     karaokeExamples:5,
