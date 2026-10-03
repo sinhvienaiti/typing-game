@@ -323,6 +323,9 @@ const scale10Phrases=await validateFile("content/english/phrases/e04-scale-10-ph
 const scale11Collocations=await validateFile("content/english/phrases/e04-scale-11-collocations.json","collocation-set.schema.json");
 const scale11VerbPatterns=await validateFile("content/english/phrases/e04-scale-11-verb-patterns.json","verb-pattern-set.schema.json");
 const scale11Phrases=await validateFile("content/english/phrases/e04-scale-11-phrases.json","phrase-set.schema.json");
+const scale12Collocations=await validateFile("content/english/phrases/e04-scale-12-collocations.json","collocation-set.schema.json");
+const scale12VerbPatterns=await validateFile("content/english/phrases/e04-scale-12-verb-patterns.json","verb-pattern-set.schema.json");
+const scale12Phrases=await validateFile("content/english/phrases/e04-scale-12-phrases.json","phrase-set.schema.json");
 function requireUnique(records,key,label) {
   const seen=new Set();
   for (const record of records??[]) {
@@ -920,6 +923,57 @@ if (scale11Collocations&&scale11VerbPatterns&&scale11Phrases) {
   if (scale11Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 11 phrases must contain 10 phrasal verbs");
   if (scale11Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 11 phrases must contain 5 chunks");
   if (scale11Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 11 phrases must contain 5 idioms");
+}
+
+
+if (scale12Collocations&&scale12VerbPatterns&&scale12Phrases) {
+  const expectedCollocations=batchExpectedCount("e04.phrase-pattern-scale-12","scale-collocations");
+  const expectedVerbPatterns=batchExpectedCount("e04.phrase-pattern-scale-12","scale-verb-patterns");
+  const expectedPhrases=batchExpectedCount("e04.phrase-pattern-scale-12","scale-phrases");
+  if (scale12Collocations.records.length!==expectedCollocations) errors.push("E04 scale 12 collocation count mismatch");
+  if (scale12VerbPatterns.records.length!==expectedVerbPatterns) errors.push("E04 scale 12 verb-pattern count mismatch");
+  if (scale12Phrases.records.length!==expectedPhrases) errors.push("E04 scale 12 phrase count mismatch");
+
+  const priorCollocations=[...(collocationPilot?.records??[]),...(scaleCollocations?.records??[]),...(scale02Collocations?.records??[]),...(scale03Collocations?.records??[]),...(scale04Collocations?.records??[]),...(scale05Collocations?.records??[]),...(scale06Collocations?.records??[]),...(scale07Collocations?.records??[]),...(scale08Collocations?.records??[]),...(scale09Collocations?.records??[]),...(scale10Collocations?.records??[]),...(scale11Collocations?.records??[])];
+  const collocationTexts=new Set(priorCollocations.map(record=>record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const collocationIds=new Set(priorCollocations.map(record=>record.id));
+  for (const record of scale12Collocations.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 12 collocation must remain draft");
+    if (collocationIds.has(record.id)) errors.push(record.id+": duplicate collocation id across E04 batches");
+    collocationIds.add(record.id);
+    const key=record.text.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (collocationTexts.has(key)) errors.push(record.id+": duplicate collocation text across E04 batches");
+    collocationTexts.add(key);
+    if (!(record.headwordKeys??[]).some(headword=>Number.isInteger(vocabLookup.entries?.[headword]))) errors.push(record.id+": scale 12 collocation has no legacy vocabulary headword");
+  }
+
+  const priorPatterns=[...(verbPatternPilot?.records??[]),...(scaleVerbPatterns?.records??[]),...(scale02VerbPatterns?.records??[]),...(scale03VerbPatterns?.records??[]),...(scale04VerbPatterns?.records??[]),...(scale05VerbPatterns?.records??[]),...(scale06VerbPatterns?.records??[]),...(scale07VerbPatterns?.records??[]),...(scale08VerbPatterns?.records??[]),...(scale09VerbPatterns?.records??[]),...(scale10VerbPatterns?.records??[]),...(scale11VerbPatterns?.records??[])];
+  const patternKeys=new Set(priorPatterns.map(record=>record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US")));
+  const patternIds=new Set(priorPatterns.map(record=>record.id));
+  for (const record of scale12VerbPatterns.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 12 verb pattern must remain draft");
+    if (patternIds.has(record.id)) errors.push(record.id+": duplicate verb-pattern id across E04 batches");
+    patternIds.add(record.id);
+    if (!Number.isInteger(vocabLookup.entries?.[record.lemma])) errors.push(record.id+": scale 12 verb-pattern lemma missing from legacy vocabulary: "+record.lemma);
+    const key=record.lemma+"\u0000"+record.frame.toLocaleLowerCase("en-US");
+    if (patternKeys.has(key)) errors.push(record.id+": duplicate lemma/frame across E04 batches");
+    patternKeys.add(key);
+  }
+
+  const priorPhrases=[...(phrasePilot?.records??[]),...(scalePhrases?.records??[]),...(scale02Phrases?.records??[]),...(scale03Phrases?.records??[]),...(scale04Phrases?.records??[]),...(scale05Phrases?.records??[]),...(scale06Phrases?.records??[]),...(scale07Phrases?.records??[]),...(scale08Phrases?.records??[]),...(scale09Phrases?.records??[]),...(scale10Phrases?.records??[]),...(scale11Phrases?.records??[])];
+  const phraseKeys=new Set(priorPhrases.map(record=>record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US")));
+  const phraseIds=new Set(priorPhrases.map(record=>record.id));
+  for (const record of scale12Phrases.records) {
+    if (record.quality?.state!=="draft") errors.push(record.id+": E04 scale 12 phrase must remain draft");
+    if (phraseIds.has(record.id)) errors.push(record.id+": duplicate phrase id across E04 batches");
+    phraseIds.add(record.id);
+    const key=record.key.normalize("NFKC").trim().toLocaleLowerCase("en-US");
+    if (phraseKeys.has(key)) errors.push(record.id+": duplicate phrase key across E04 batches");
+    phraseKeys.add(key);
+  }
+  if (scale12Phrases.records.filter(record=>record.type==="phrasal-verb").length!==10) errors.push("E04 scale 12 phrases must contain 10 phrasal verbs");
+  if (scale12Phrases.records.filter(record=>record.type==="chunk").length!==5) errors.push("E04 scale 12 phrases must contain 5 chunks");
+  if (scale12Phrases.records.filter(record=>record.type==="idiom").length!==5) errors.push("E04 scale 12 phrases must contain 5 idioms");
 }
 
 

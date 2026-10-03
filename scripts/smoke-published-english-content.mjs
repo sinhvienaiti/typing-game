@@ -238,8 +238,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==320) {
-    errors.push("published Recall collocation activity must expose 320 reviewed records");
+  if(recallCollocations!==340) {
+    errors.push("published Recall collocation activity must expose 340 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -257,10 +257,10 @@ try {
   const phrasalVerbCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"phrasal-verb");
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
-  if(verbPatternCount!==270) errors.push("published verb-pattern activity must expose 270 reviewed records");
-  if(phrasalVerbCount!==160) errors.push("published phrasal-verb activity must expose 160 reviewed records");
-  if(chunkCount!==95) errors.push("published chunk activity must expose 95 reviewed records");
-  if(idiomCount!==65) errors.push("published idiom activity must expose 65 reviewed records");
+  if(verbPatternCount!==290) errors.push("published verb-pattern activity must expose 290 reviewed records");
+  if(phrasalVerbCount!==170) errors.push("published phrasal-verb activity must expose 170 reviewed records");
+  if(chunkCount!==100) errors.push("published chunk activity must expose 100 reviewed records");
+  if(idiomCount!==70) errors.push("published idiom activity must expose 70 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
@@ -293,11 +293,11 @@ const report={
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:10,
-    recallCollocations:320,
-    verbPatterns:270,
-    phrasalVerbs:160,
-    chunks:95,
-    idioms:65,
+    recallCollocations:340,
+    verbPatterns:290,
+    phrasalVerbs:170,
+    chunks:100,
+    idioms:70,
   },
 };
 console.log(JSON.stringify(report,null,2));
