@@ -2403,22 +2403,22 @@ Yes. The parent owns canonical content querying/routing; games implement capabil
 13. Quality checks store method/status, not misleading booleans alone.
 14. Bulk scale-up begins only after schemas and validators pass pilots.
 
-## 40. Immediate next implementation work
+## 40. Current continuation order
 
-Next session should start E01/E02, not bulk generation.
+The original E01/E02 bootstrap described in earlier revisions is complete. New sessions must **not** restart scaffolding or bulk-generate records merely to increase totals.
 
-Recommended order:
+Continue in this order:
 
-1. create shared/schemas/english-content common schemas;
-2. create source-manifest + provenance schema;
-3. implement stable ID allocator and normalization library;
-4. create empty manifests/directory skeleton;
-5. implement english-content:validate and license gates;
-6. implement reference-integrity + exact dedup;
-7. implement near-duplicate review report;
-8. encode these 300 curriculum records into machine-readable shared/curriculum files;
-9. create 2-3 representative topic fixtures per CEFR;
-10. only then begin lexical/sentence pilots.
+1. keep the committed schemas, stable-ID registry, provenance/license gates and validation pipeline as the contract;
+2. finish editorial alignment/review for candidate E03/E04/E06 batches;
+3. promote only digest-bound reviewed slices through the publication ledger;
+4. use the `/english` parent launcher and game capability matrix to smoke-test each newly published activity in the child game whose UX fits it;
+5. extend E10 controlled batches by CEFR/category only after validation, review, publish and runtime smoke all pass;
+6. monitor E11 long-term readiness without treating target counts as completed records;
+7. run E12 license/attribution/staleness/sample audits on every release;
+8. keep legacy `shared/vocabulary/levels/*.json` unchanged unless a separate compatibility migration is explicitly approved.
+
+The implementation is therefore in **controlled content production/editorial promotion**, not architecture bootstrap.
 
 ## 41. Definition of success
 
@@ -2582,9 +2582,15 @@ The integration was repeatedly rebased/synced with the Vietnamese IME fixes so E
 
 ### 43.8 E09 Recall / Shooter / Karaoke / Space
 
-Status: **INTEGRATED AND CHILD CI GREEN**.
+Status: **END-TO-END INTEGRATED; CHILD/PARENT CI VERIFIED**.
 
-The parent emits bounded `typing-game:english-content:v1:activity-dataset` messages.
+The parent emits bounded `typing-game:english-content:v1:activity-dataset` messages and now owns the complete runtime launch path:
+
+- `shared/english-content/activity-source.mjs` maps activity types to bounded **published-only** runtime shards;
+- `shared/english-content/game-adapters.mjs` converts canonical records into game-safe activity items;
+- the portal exposes an **English Practice** route at `/english`;
+- the route reports published availability, disables empty/unreviewed activities, lets the learner choose 5/10/20/40/100 items and posts the dataset to the selected child iframe;
+- ready/error acknowledgements use the existing parent/child lifecycle; candidate/draft data is never substituted when an activity has zero published records.
 
 Capability routing remains game-specific:
 
@@ -2592,6 +2598,8 @@ Capability routing remains game-specific:
 - Vocabulary Shooter: vocabulary, collocation, phrasal verb, chunk, contextual usage.
 - Karaoke: example typing, dialogue, listening typing, translation.
 - Space: vocabulary, collocation, phrasal verb, chunk, grammar challenge, contextual usage.
+
+Recall, Shooter and Karaoke are pinned to their rich-activity child commits. Space is applied on a **clean branch based on the exact parent gitlink** so unrelated Duel/BGV work is not pulled into this content integration.
 
 Results still write only the canonical Shared Learning entity families `vocabulary | grammar | sentence`; child games do not own separate mastery engines.
 
@@ -2659,12 +2667,15 @@ Important green platform runs:
 - #536 — E12 release/audit/sample maintenance pipeline.
 - #548 — E10 typed smoke filtering, editorial review ledger, rich-content validation and E12 maintenance gates all passed together before first publication.
 - #549 — attribution audit based on actual published provenance passed before the E05 promotion.
+- #554 — E04 publication-license gate plus the current E03-E12 pipeline passed together.
+- #555 — published activity-source routing and adapter tests passed.
+- #556 — English Practice portal launcher, runtime routing, full content pipelines and Portal build passed together.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
 ### 43.13 What remains intentionally unfinished
 
-The architecture/pipelines are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
+The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - review/align OEWN ↔ Vietnamese Wiktionary senses for the 300 lexical pilot;
 - independently review grammar, Vietnamese wording, naturalness and CEFR for E04 phrase/pattern records and E06 candidate corpora;
