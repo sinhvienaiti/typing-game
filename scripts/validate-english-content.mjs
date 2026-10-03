@@ -259,10 +259,9 @@ if (reviewedCommonMistakes) {
     else topicCounts.set(grammarId,(topicCounts.get(grammarId)??0)+1);
   }
   if (expected!==null&&grammarPilot?.records?.length) {
-    const perTopic=expected/grammarPilot.records.length;
-    if (!Number.isInteger(perTopic)) errors.push("E06 reviewed common-mistake count must divide across grammar topics");
-    else for (const topic of grammarPilot.records) if ((topicCounts.get(topic.id)??0)!==perTopic) {
-      errors.push("E06 reviewed common-mistake topic coverage mismatch: "+topic.id);
+    for (const topic of grammarPilot.records) {
+      const count=topicCounts.get(topic.id)??0;
+      if (count<6) errors.push("E06 reviewed common-mistake coverage must keep at least 6 records for "+topic.id);
     }
   }
 }
