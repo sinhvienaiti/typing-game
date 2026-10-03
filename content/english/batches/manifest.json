@@ -611,14 +611,15 @@
       "cefr": [
         "A1",
         "A2",
-        "B1"
+        "B1",
+        "B2"
       ],
       "state": "draft",
       "recordSets": [
         {
           "id": "reviewed-translation-sentences",
           "path": "content/english/sentences/e06-reviewed-translation-sentences.json",
-          "expectedCount": 24,
+          "expectedCount": 48,
           "generated": false,
           "allowedQualityStates": [
             "draft"
@@ -636,7 +637,7 @@
         {
           "id": "reviewed-translations",
           "path": "content/english/sentences/e06-reviewed-translations.json",
-          "expectedCount": 24,
+          "expectedCount": 48,
           "generated": false,
           "allowedQualityStates": [
             "draft"
