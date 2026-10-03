@@ -6816,6 +6816,290 @@
         ],
         "note": "Editorially reviewed common mistake derived from the controlled E06 correction pilot; incorrect form, canonical correction and Vietnamese explanation are review-gated before runtime publication."
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.e06.017",
+      "incorrect": "She is pack her suitcase at the moment.",
+      "corrections": [
+        "She is packing her suitcase at the moment."
+      ],
+      "explanationVi": "Sau am/is/are trong Hiện tại tiếp diễn phải dùng V-ing: is packing, không dùng is pack.",
+      "targetIds": [
+        "gr.a1.present-continuous-now"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-common-mistake-reviewed-slice-authoring-v4"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "correction-exercise-link-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-incorrect-v5"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-topic-near-dedup-editorial-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "independent-grammar-editorial-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-vietnamese-explanation-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "grammar-target-structure-review-v4"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "target-grammar-cefr-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "ex.correction.e06.00000006.03",
+            "sourceUrl": "content/english/review-queues/grammar-e06-corrections.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Editorially reviewed common mistake derived from the controlled E06 correction pilot; incorrect form, canonical correction and Vietnamese explanation are review-gated before runtime publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.e06.042",
+      "incorrect": "She has repairing the printer, so we can use it again.",
+      "corrections": [
+        "She has repaired the printer, so we can use it again."
+      ],
+      "explanationVi": "Sau has trong Hiện tại hoàn thành đơn phải dùng quá khứ phân từ repaired; ở đây câu nhấn mạnh kết quả đã hoàn tất nên không dùng has repairing.",
+      "targetIds": [
+        "gr.b1.present-perfect-simple-vs-continuous"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-common-mistake-reviewed-slice-authoring-v4"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "correction-exercise-link-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-incorrect-v5"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-topic-near-dedup-editorial-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "independent-grammar-editorial-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-vietnamese-explanation-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "grammar-target-structure-review-v4"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "target-grammar-cefr-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "ex.correction.e06.00000015.03",
+            "sourceUrl": "content/english/review-queues/grammar-e06-corrections.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Editorially reviewed common mistake derived from the controlled E06 correction pilot; incorrect form, canonical correction and Vietnamese explanation are review-gated before runtime publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.e06.067",
+      "incorrect": "The company are reported to have opened a new office.",
+      "corrections": [
+        "The company is reported to have opened a new office."
+      ],
+      "explanationVi": "Chủ ngữ The company là số ít nên cấu trúc bị động tường thuật phải dùng is reported, không dùng are reported.",
+      "targetIds": [
+        "gr.b2.reporting-passive"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-common-mistake-reviewed-slice-authoring-v4"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "correction-exercise-link-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-incorrect-v5"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-topic-near-dedup-editorial-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "independent-grammar-editorial-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-vietnamese-explanation-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "grammar-target-structure-review-v4"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "target-grammar-cefr-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "ex.correction.e06.00000024.03",
+            "sourceUrl": "content/english/review-queues/grammar-e06-corrections.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Editorially reviewed common mistake derived from the controlled E06 correction pilot; incorrect form, canonical correction and Vietnamese explanation are review-gated before runtime publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.e06.092",
+      "incorrect": "You may using this room after six.",
+      "corrections": [
+        "You may use this room after six."
+      ],
+      "explanationVi": "Sau động từ khuyết thiếu may phải dùng động từ nguyên mẫu không to: may use, không dùng may using.",
+      "targetIds": [
+        "gr.c2.modal-ambiguity"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-common-mistake-reviewed-slice-authoring-v4"
+          },
+          "sourceLink": {
+            "status": "pass",
+            "method": "correction-exercise-link-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-incorrect-v5"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-topic-near-dedup-editorial-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "independent-grammar-editorial-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-vietnamese-explanation-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "grammar-target-structure-review-v4"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "target-grammar-cefr-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "ex.correction.e06.00000033.03",
+            "sourceUrl": "content/english/review-queues/grammar-e06-corrections.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": true
+          }
+        ],
+        "note": "Editorially reviewed common mistake derived from the controlled E06 correction pilot; incorrect form, canonical correction and Vietnamese explanation are review-gated before runtime publication."
+      }
     }
   ]
 }
