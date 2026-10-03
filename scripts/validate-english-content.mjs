@@ -77,6 +77,8 @@ const grammarPilot=await validateFile("content/english/grammar/pilot-topics.json
 const sentencePilot=await validateFile("content/english/sentences/pilot-sentences.json","sentence-set.schema.json");
 const exercisePilot=await validateFile("content/english/sentences/pilot-exercises.json","exercise-set.schema.json");
 const reviewedE06Exercises=await validateFile("content/english/sentences/e06-reviewed-exercises.json","exercise-set.schema.json");
+const reviewedTranslationSentences=await validateFile("content/english/sentences/e06-reviewed-translation-sentences.json","sentence-set.schema.json");
+const reviewedTranslations=await validateFile("content/english/sentences/e06-reviewed-translations.json","exercise-set.schema.json");
 const vocabLookup=await readJson(path.join(root,"shared","vocabulary","lookup.json"));
 if (lexemePilot) {
   if (lexemePilot.records.length!==300) errors.push("lexeme seed pilot must contain exactly 300 records");
@@ -128,6 +130,22 @@ if (sentencePilot) {
   for (const sentence of sentencePilot.records) {
     if (sentence.quality?.state==="published") errors.push(sentence.id+": pilot sentence must remain non-published until review");
     for (const id of sentence.grammarIds??[]) if (!allIds.has(id)) errors.push(sentence.id+": unknown grammar target "+id);
+  }
+}
+if (reviewedTranslationSentences&&reviewedTranslations) {
+  if (reviewedTranslationSentences.records.length!==24||reviewedTranslations.records.length!==24) errors.push("E06 reviewed translation slice must contain 24 sentences + 24 exercises");
+  const sentenceIds=new Set(reviewedTranslationSentences.records.map(item=>item.id));
+  for (const sentence of reviewedTranslationSentences.records) {
+    if (sentence.quality?.state!=="draft") errors.push(sentence.id+": reviewed translation sentence must remain draft; publication is ledger-overlay only");
+    if (!sentence.cefr) errors.push(sentence.id+": reviewed translation sentence requires CEFR");
+  }
+  for (const exercise of reviewedTranslations.records) {
+    if (exercise.quality?.state!=="draft") errors.push(exercise.id+": reviewed translation exercise must remain draft; publication is ledger-overlay only");
+    if (exercise.type!=="translation") errors.push(exercise.id+": reviewed translation exercise type mismatch");
+    if (!exercise.cefr) errors.push(exercise.id+": reviewed translation exercise requires CEFR");
+    const sourceId=exercise.sourceSentenceIds?.[0];
+    if (!sentenceIds.has(sourceId)) errors.push(exercise.id+": reviewed translation source is missing "+sourceId);
+    if (exercise.targetIds?.[0]!==sourceId) errors.push(exercise.id+": translation target must be its source sentence id");
   }
 }
 if (reviewedE06Exercises) {

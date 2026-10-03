@@ -603,6 +603,83 @@
           "recordType": "transformation"
         }
       ]
+    },
+    {
+      "id": "e06.translation-reviewed-slice",
+      "phase": "E06",
+      "category": "sentences",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-translation-sentences",
+          "path": "content/english/sentences/e06-reviewed-translation-sentences.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "reviewed-translations",
+          "path": "content/english/sentences/e06-reviewed-translations.json",
+          "expectedCount": 24,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "exactDuplicate",
+            "translation",
+            "naturalness",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "monkeytype",
+          "activity": "translation",
+          "recordSetId": "reviewed-translations",
+          "sampleCount": 6,
+          "recordType": "translation"
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "translation",
+          "recordSetId": "reviewed-translations",
+          "sampleCount": 6,
+          "recordType": "translation"
+        },
+        {
+          "gameId": "karaoke-typing",
+          "activity": "example-typing",
+          "recordSetId": "reviewed-translation-sentences",
+          "sampleCount": 6
+        }
+      ]
     }
   ]
 }

@@ -72,6 +72,8 @@ const topics=await loadRecords("content/english/grammar/pilot-topics.json");
 const sentences=await loadRecords("content/english/sentences/pilot-sentences.json");
 const exercises=await loadRecords("content/english/sentences/pilot-exercises.json");
 const reviewedE06Exercises=await loadRecords("content/english/sentences/e06-reviewed-exercises.json");
+const reviewedTranslationSentences=await loadRecords("content/english/sentences/e06-reviewed-translation-sentences.json");
+const reviewedTranslations=await loadRecords("content/english/sentences/e06-reviewed-translations.json");
 const collocations=await loadRecords("content/english/phrases/pilot-collocations.json");
 const verbPatterns=await loadRecords("content/english/phrases/pilot-verb-patterns.json");
 const phrases=await loadRecords("content/english/phrases/pilot-phrases.json");
@@ -88,8 +90,8 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 ]}));
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:topics}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
-  {id:"examples",dir:"examples",records:sentences},
-  {id:"exercises",dir:"exercises",records:[...exercises,...reviewedE06Exercises]}
+  {id:"examples",dir:"examples",records:[...sentences,...reviewedTranslationSentences]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...reviewedE06Exercises,...reviewedTranslations]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
   {id:"collocations",dir:"collocations",records:collocations},
