@@ -9,7 +9,7 @@
       "sourceSnapshot": "viwiktionary-dump-2026-09-01;kaikki-extract-2026-09-28",
       "observedAt": "2026-10-03",
       "quality": {
-        "state": "candidate",
+        "state": "draft",
         "checks": {
           "sourcePin": {
             "status": "pass",
@@ -24,8 +24,8 @@
             "method": "wiktionary-license-review-v1"
           },
           "derivedComparison": {
-            "status": "pending",
-            "method": "previous-vs-refreshed-normalized-candidate-review-required"
+            "status": "pass",
+            "method": "normalized-review-queue-exact-comparison-v1"
           }
         }
       },
@@ -42,6 +42,22 @@
           }
         ],
         "note": "Operational source-refresh review metadata only. This record is never published as learner content."
+      },
+      "comparison": {
+        "previousArtifactRun": 574,
+        "refreshedArtifactRun": 577,
+        "recordsIdentical": true,
+        "missesIdentical": true,
+        "metricsIdentical": true,
+        "metrics": {
+          "requested": 300,
+          "mapped": 294,
+          "mappedRate": 0.98,
+          "entries": 701,
+          "senses": 2779,
+          "withIpa": 274
+        },
+        "note": "The refreshed Kaikki gzip produced the same normalized E03 Vietnamese Wiktionary review queue as the prior pinned artifact. Only the compressed-source SHA-256 changed."
       }
     }
   ]
