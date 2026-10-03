@@ -3,8 +3,8 @@
   "contentVersion": "2026.10.0",
   "runtimeCounts": {
     "dictionary": 0,
-    "grammar": 0,
-    "sentences": 0,
+    "grammar": 12,
+    "sentences": 60,
     "phrases": 0,
     "attribution": 0
   },
@@ -14,7 +14,7 @@
   },
   "migrationCount": 0,
   "notes": [
-    "Rich-content architecture and pilot pipelines are versioned, but no rich records are published in this release.",
-    "Legacy shared/vocabulary remains the production vocabulary ABI and is unchanged by this release."
+    "Runtime counts reflect records that passed the reviewed-only publication gate.",
+    "Legacy shared/vocabulary remains backward compatible; rich content ships as sidecar datasets."
   ]
 }
