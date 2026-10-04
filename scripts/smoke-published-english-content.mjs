@@ -61,9 +61,9 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==1414) errors.push("published sentence runtime must contain 1414 reviewed records");
-if (topics.length!==12||examples.length!==576||exercises.length!==708||dialogues.length!==30||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 576 examples + 708 exercises + 30 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==1424) errors.push("published sentence runtime must contain 1424 reviewed records");
+if (topics.length!==12||examples.length!==576||exercises.length!==708||dialogues.length!==40||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 576 examples + 708 exercises + 40 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
