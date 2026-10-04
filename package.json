@@ -45,7 +45,10 @@
     "dev:space:app": "pnpm --dir games/space-typing dev",
     "build:space": "pnpm --dir games/space-typing build",
     "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs && node --check shared/learning/profile-backup.mjs && node --check shared/learning/review-lifecycle.mjs",
-    "learning:test": "node --test shared/learning/*.test.mjs"
+    "learning:test": "node --test shared/learning/*.test.mjs",
+    "voice:test": "node --test shared/voice/*.test.mjs",
+    "voice:sync": "node scripts/sync-space-voice-contract.mjs",
+    "voice:check": "node scripts/sync-space-voice-contract.mjs --check"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
