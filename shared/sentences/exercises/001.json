@@ -4056,6 +4056,2022 @@
         ],
         "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8040669.13380109",
+      "type": "translation",
+      "prompt": "Tom hôn Mary lúc nửa đêm.",
+      "targetIds": [
+        "sent.tatoeba.8040669"
+      ],
+      "acceptedAnswers": [
+        "Tom kissed Mary at midnight."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8040669"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8040669",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8040669",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8040669",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13380109",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13380109",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13380109",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8108672.3538058",
+      "type": "translation",
+      "prompt": "Tại sao bây giờ bạn mới đến?",
+      "targetIds": [
+        "sent.tatoeba.8108672"
+      ],
+      "acceptedAnswers": [
+        "Why have you only arrived now?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8108672"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8108672",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8108672",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8108672",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "3538058",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/3538058",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #3538058",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8326202.13380085",
+      "type": "translation",
+      "prompt": "Tom rời đi sau nửa đêm.",
+      "targetIds": [
+        "sent.tatoeba.8326202"
+      ],
+      "acceptedAnswers": [
+        "Tom left after midnight."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8326202"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8326202",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8326202",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8326202",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13380085",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13380085",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13380085",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8395970.11429627",
+      "type": "translation",
+      "prompt": "Bạn là người cao nhất lớp, phải không?",
+      "targetIds": [
+        "sent.tatoeba.8395970"
+      ],
+      "acceptedAnswers": [
+        "You're the tallest kid in your class, aren't you?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8395970"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8395970",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8395970",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8395970",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11429627",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11429627",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11429627",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8513818.9067304",
+      "type": "translation",
+      "prompt": "Cô ấy không thể đi với anh ấy.",
+      "targetIds": [
+        "sent.tatoeba.8513818"
+      ],
+      "acceptedAnswers": [
+        "She can't go with him."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8513818"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8513818",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8513818",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8513818",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9067304",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9067304",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9067304",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8842287.11371139",
+      "type": "translation",
+      "prompt": "Tôi làm việc nhiều giờ như Tom.",
+      "targetIds": [
+        "sent.tatoeba.8842287"
+      ],
+      "acceptedAnswers": [
+        "I work as many hours as Tom does."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8842287"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8842287",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8842287",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8842287",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11371139",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11371139",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11371139",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8952471.11442535",
+      "type": "translation",
+      "prompt": "Chúng tôi không biết liệu Tom có đến hay không.",
+      "targetIds": [
+        "sent.tatoeba.8952471"
+      ],
+      "acceptedAnswers": [
+        "We didn't know if Tom would come."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8952471"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8952471",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8952471",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8952471",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11442535",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11442535",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11442535",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8991665.14028743",
+      "type": "translation",
+      "prompt": "Anh ấy không hề béo chút nào.",
+      "targetIds": [
+        "sent.tatoeba.8991665"
+      ],
+      "acceptedAnswers": [
+        "He is not fat at all."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8991665"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8991665",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8991665",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8991665",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "14028743",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/14028743",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #14028743",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.9048775.10265847",
+      "type": "translation",
+      "prompt": "Tom sẽ không qua đêm ở đây.",
+      "targetIds": [
+        "sent.tatoeba.9048775"
+      ],
+      "acceptedAnswers": [
+        "Tom won't spend the night here."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.9048775"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9048775",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9048775",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9048775",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "10265847",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/10265847",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #10265847",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.9198564.11204785",
+      "type": "translation",
+      "prompt": "Tom tự học toán vi phân.",
+      "targetIds": [
+        "sent.tatoeba.9198564"
+      ],
+      "acceptedAnswers": [
+        "Tom taught himself differential calculus."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.9198564"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9198564",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9198564",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9198564",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11204785",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11204785",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11204785",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.9337294.13344022",
+      "type": "translation",
+      "prompt": "Có con mèo nào ở dưới bàn không?",
+      "targetIds": [
+        "sent.tatoeba.9337294"
+      ],
+      "acceptedAnswers": [
+        "Are there any cats under the table?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.9337294"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9337294",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9337294",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9337294",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13344022",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13344022",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13344022",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.9460467.9712816",
+      "type": "translation",
+      "prompt": "Có rất nhiều vệ tinh bay theo quỹ đạo quanh Trái Đất.",
+      "targetIds": [
+        "sent.tatoeba.9460467"
+      ],
+      "acceptedAnswers": [
+        "A great many satellites orbit the Earth."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.9460467"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9460467",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9460467",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9460467",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9712816",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9712816",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9712816",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.9696063.9736764",
+      "type": "translation",
+      "prompt": "Em trai tôi học tiếng Anh.",
+      "targetIds": [
+        "sent.tatoeba.9696063"
+      ],
+      "acceptedAnswers": [
+        "My brother studies English."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.9696063"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9696063",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9696063",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9696063",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9736764",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9736764",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9736764",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.10020369.13477313",
+      "type": "translation",
+      "prompt": "Yanni kiểm tra căn hộ.",
+      "targetIds": [
+        "sent.tatoeba.10020369"
+      ],
+      "acceptedAnswers": [
+        "Yanni inspected the apartment."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.10020369"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "10020369",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/10020369",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #10020369",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13477313",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13477313",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13477313",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.10140984.13334133",
+      "type": "translation",
+      "prompt": "Tôi đang học cách tạo cơ sở dữ liệu.",
+      "targetIds": [
+        "sent.tatoeba.10140984"
+      ],
+      "acceptedAnswers": [
+        "I'm learning to make databases."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.10140984"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "10140984",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/10140984",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #10140984",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13334133",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13334133",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13334133",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.10288745.13271025",
+      "type": "translation",
+      "prompt": "Tôi muốn dành thêm thời gian cho gia đình mình.",
+      "targetIds": [
+        "sent.tatoeba.10288745"
+      ],
+      "acceptedAnswers": [
+        "I'd like to spend some more time with my family."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.10288745"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "10288745",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/10288745",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #10288745",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13271025",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13271025",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13271025",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.10723976.11264777",
+      "type": "translation",
+      "prompt": "Tom không thể khiến Mary thay đổi ý định.",
+      "targetIds": [
+        "sent.tatoeba.10723976"
+      ],
+      "acceptedAnswers": [
+        "Tom couldn't get Mary to change her mind."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.10723976"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "10723976",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/10723976",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #10723976",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11264777",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11264777",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11264777",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11175773.12132370",
+      "type": "translation",
+      "prompt": "Tôi đã ăn sáng ở hiên nhà.",
+      "targetIds": [
+        "sent.tatoeba.11175773"
+      ],
+      "acceptedAnswers": [
+        "I had breakfast on my porch."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11175773"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11175773",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11175773",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11175773",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "12132370",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/12132370",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #12132370",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11263483.11263484",
+      "type": "translation",
+      "prompt": "Các sinh viên khác đến từ Việt Nam.",
+      "targetIds": [
+        "sent.tatoeba.11263483"
+      ],
+      "acceptedAnswers": [
+        "Other students are from Vietnam."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11263483"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11263483",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11263483",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11263483",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11263484",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11263484",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11263484",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11273288.11273292",
+      "type": "translation",
+      "prompt": "Tôi đọc báo trong lúc uống cà phê mỗi sáng.",
+      "targetIds": [
+        "sent.tatoeba.11273288"
+      ],
+      "acceptedAnswers": [
+        "I read the newspaper with my coffee every morning."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11273288"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11273288",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11273288",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11273288",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11273292",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11273292",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11273292",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11276058.11276059",
+      "type": "translation",
+      "prompt": "Anh ấy đã trồng nhiều bông hoa đẹp trong vườn.",
+      "targetIds": [
+        "sent.tatoeba.11276058"
+      ],
+      "acceptedAnswers": [
+        "He has planted many beautiful flowers in his garden."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11276058"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11276058",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11276058",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11276058",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11276059",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11276059",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11276059",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11278012.11278013",
+      "type": "translation",
+      "prompt": "Chính sách của công ty bạn là gì?",
+      "targetIds": [
+        "sent.tatoeba.11278012"
+      ],
+      "acceptedAnswers": [
+        "What is your company's policy?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11278012"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11278012",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11278012",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11278012",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11278013",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11278013",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11278013",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11295296.11295299",
+      "type": "translation",
+      "prompt": "Con rùa chậm rãi bò ra biển.",
+      "targetIds": [
+        "sent.tatoeba.11295296"
+      ],
+      "acceptedAnswers": [
+        "The turtle moves slowly to the sea."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11295296"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11295296",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11295296",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11295296",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11295299",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11295299",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11295299",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11303179.11303182",
+      "type": "translation",
+      "prompt": "Họ đã đợi khoảng một tiếng.",
+      "targetIds": [
+        "sent.tatoeba.11303179"
+      ],
+      "acceptedAnswers": [
+        "They waited for about an hour."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11303179"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v9"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v9"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v9"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v9"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v9"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v9"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v9"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v9"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11303179",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11303179",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11303179",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11303182",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11303182",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11303182",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A1"
     }
   ]
 }

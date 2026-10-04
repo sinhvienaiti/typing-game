@@ -61,13 +61,13 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==1082) errors.push("published sentence runtime must contain 1082 reviewed records");
-if (topics.length!==12||examples.length!==420||exercises.length!==552||dialogues.length!==10||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 420 examples + 552 exercises + 10 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==1140) errors.push("published sentence runtime must contain 1140 reviewed records");
+if (topics.length!==12||examples.length!==444||exercises.length!==576||dialogues.length!==20||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 444 examples + 576 exercises + 20 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
-if (tatoebaExamples.length!==192||tatoebaTranslations.length!==192) errors.push("published Tatoeba slices must expose 192 sentences + 192 translations");
+if (tatoebaExamples.length!==216||tatoebaTranslations.length!==216) errors.push("published Tatoeba slices must expose 216 sentences + 216 translations");
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
 if (typingTextExamples.length!==192||typingTextCloze.length!==192) errors.push("published typing-text slice must expose 192 examples + 192 cloze exercises");
@@ -219,8 +219,8 @@ try {
     fileRuntimeLoader,
     "dialogue",
   );
-  if(karaokeDialogueCount!==10) {
-    errors.push("published Karaoke dialogue activity must expose 10 reviewed dialogues");
+  if(karaokeDialogueCount!==20) {
+    errors.push("published Karaoke dialogue activity must expose 20 reviewed dialogues");
   }
   const karaokeDialogue=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -292,7 +292,7 @@ const report={
     monkeyCorrectionRecords:172,
     monkeyTransformation:5,
     karaokeExamples:5,
-    karaokeDialogues:10,
+    karaokeDialogues:20,
     recallCollocations:560,
     verbPatterns:510,
     phrasalVerbs:280,
