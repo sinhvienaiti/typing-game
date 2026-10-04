@@ -2525,14 +2525,14 @@ Pilot status: **PUBLISHED; CONTROLLED SCALE-UP IN PROGRESS**.
 
 ### 43.4 E05 grammar-topic pilot
 
-Pilot status: **FIRST REVIEWED VERTICAL SLICE PUBLISHED**.
+Pilot status: **FIRST REVIEWED VERTICAL SLICE PUBLISHED; CONTROLLED A1 BODY SCALE STARTED**.
 
 - Source authoring files remain `draft` so the original authored records and editorial workflow stay auditable.
 - A digest-bound review ledger overlays 72 accepted records and promotes only those reviewed records at publication time.
-- Published E05 runtime currently contains 12 rich grammar topics, 36 controlled example sentences and 24 exercises.
-- The 12 grammar topics remain exactly 2 per CEFR level and include EN/VI concepts, formulae, forms, contrasts/prerequisites, examples and exercise references.
-- All 72 publication decisions have completed grammar/naturalness/target/CEFR/license checks; translation is either `pass` or explicitly `not-applicable`.
-- The full 300-topic framework is still the curriculum/taxonomy; only the reviewed 12-topic body slice is runtime-published.
+- Published E05 runtime now contains **20 rich grammar topics**: the original 12-topic cross-CEFR pilot plus the first controlled A1 body slice of 8 additional topics. Grammar-linked authoring now includes **60 controlled example sentences, 40 exercises and 8 linked common mistakes**.
+- The original 12-topic pilot remains exactly 2 per CEFR level. The new A1 slice adds `be` identification/negative/questions, subject pronouns, possessive adjectives, demonstratives, there is/are and a/an; each new topic includes EN/VI concepts, formulae, use cases, forms/variations, contrasts/prerequisites, 3 examples, 2 exercises and 1 common mistake.
+- The original 72 publication decisions remain intact. The A1 scale adds **56 digest-bound publication decisions** (8 topics + 24 examples + 16 exercises + 8 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
+- The full 300-topic framework remains the curriculum/taxonomy; **20/300 topics now have reviewed rich runtime bodies**. Further expansion must continue as controlled CEFR slices rather than generating the remaining topics in bulk.
 
 ### 43.5 E06 sentence / exercise pilot
 
@@ -2565,7 +2565,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **1,660 records** = **636 examples + 824 exercises + 100 dialogues + 100 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **20 topics**; `shared/sentences` contains **1,708 records** = **660 examples + 840 exercises + 100 dialogues + 108 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2622,7 +2622,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The current controlled E03-E06 manifest accounts for **6,286 authoring/candidate records: 3,200 candidate + 3,086 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The current controlled E03-E06 manifest plus the first E05 A1 scale slice accounts for **6,342 authoring/candidate records: 3,200 candidate + 3,142 draft**. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2630,13 +2630,13 @@ Status: **TARGET CONTRACT + READINESS REPORT COMPLETE; BULK CORPUS NOT CLAIMED C
 
 Current readiness measurements after E04 scale batch 23:
 
-- grammar topics: 300 / minimum 300 (framework target reached);
+- grammar topics: **300/300 framework entries**, with **20/300 reviewed rich topic bodies** currently published;
 - verb patterns: 510 / 500 minimum (**minimum crossed**);
 - collocations: 560 / 5,000 minimum;
 - phrasal verbs: 280 / 1,000 minimum;
 - idioms/chunks: 280 / 2,000 minimum;
-- common mistakes: 100 / 2,000 minimum in the candidate pipeline; **all 100 pilot records are now individually reviewed/published for runtime practice**;
-- example sentences: candidate/source pipeline remains far below 100,000; current published runtime contains **636 examples** (36 E05 + 300 typing-text + 300 Tatoeba);
+- common mistakes: **108 / 2,000 minimum in published runtime** = the closed 100-record E06 pilot plus 8 reviewed A1 grammar-scale mistakes;
+- example sentences: candidate/source pipeline remains far below 100,000; current published runtime contains **660 examples** (60 E05 grammar-linked + 300 typing-text + 300 Tatoeba);
 - translation pairs: **300 / 20,000 minimum**, and the full 300-pair pilot is reviewed/published;
 - cloze exercises: **300 / 30,000 minimum**, and the full 300-item typing-text cloze pilot is reviewed/published;
 - transformations: **100/100 pilot records reviewed/published** against a 10,000 long-term minimum;
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **3,902 published rich records**: dictionary 600, grammar 12, sentences 1,660 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **3,958 published rich records**: dictionary 600, grammar 20, sentences 1,708 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2714,6 +2714,7 @@ Important green platform runs:
 - #701 — completed the controlled E03 lexical pilot: **300 lexemes + 300 linked primary senses (600 dictionary records)** passed full Platform CI with digest-bound review overlays and runtime reproducibility green.
 - #702 — seventh reviewed Tatoeba slice passed full Platform CI; Tatoeba runtime reached **168 sentence/translation pairs**, sentence runtime reached 842 records, and rich runtime reached **3,084 records**.
 - #740 — **PASS** on HEAD `fbc94abc178d2ef3c5ca43bf4e6f1452585398b2`; the finalized typing-text pilot reached **300/300 examples + 300/300 linked cloze**, Tatoeba reached **300/300 pairs**, sentence runtime reached **1,544**, dictionary remained **600**, grammar **12**, phrases **1,630**, and attribution **4**.
+- #745 — **PASS** on HEAD `6473ef323a6dd920cfb5cec1ec44fe68436b5f0b`; E06 correction/transformation/dialogue pilots are closed at **100/100 + 100/100 + 100/100**, with sentence runtime at **1,660** before grammar-body scale-up.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
@@ -2723,7 +2724,7 @@ The architecture, parent launcher and child integrations are no longer waiting f
 
 - the controlled **300-lexeme E03 pilot is complete**: all 300 lexemes and 300 linked primary senses are digest-reviewed and published; any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;
 - the controlled E06 pilots are now closed: Tatoeba **300/300**, typing-text examples/cloze **300/300 + 300/300**, common mistakes **100/100**, correction/transformation **100/100 + 100/100**, and MultiWOZ dialogues **100/100**; future E06 growth must use new controlled batches rather than silently extending these pilots;
-- continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
+- continue grammar-body promotion in small reviewed CEFR slices; the first new A1 slice adds 8 rich topics and 48 linked sentence-domain records, while E03, E04, E05 and E06 publication still uses digest-bound `draft → published` overlays;
 - continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;

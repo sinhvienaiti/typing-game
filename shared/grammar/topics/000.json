@@ -1174,6 +1174,834 @@
           }
         ]
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.be-identification-description",
+      "cefr": "A1",
+      "title": "Be: identification and description",
+      "objective": "Use am/is/are to identify people/things and give simple descriptions.",
+      "concept": {
+        "en": "Use am, is and are to identify people or things and to give simple descriptions.",
+        "vi": "Dùng am, is và are để xác định người/vật hoặc đưa ra mô tả đơn giản."
+      },
+      "formulae": [
+        "I + am + complement.",
+        "He/She/It + is + complement.",
+        "You/We/They + are + complement."
+      ],
+      "whenToUse": [
+        "Say who or what someone/something is.",
+        "Give a simple description, condition or location with be."
+      ],
+      "forms": {
+        "positive": [
+          "I am a student in this class.",
+          "Leo is tall and friendly.",
+          "We are ready for the lesson."
+        ]
+      },
+      "variations": [
+        "Use contracted forms I'm, he's, she's, it's, we're, you're and they're in common speech and informal writing."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.01.1",
+        "sent.gra1.01.01.2",
+        "sent.gra1.01.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.01"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.be-negative",
+        "gr.a1.be-questions-short-answers"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.01",
+        "ex.translation.gra1.01.01"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.be-identification-description",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.be-negative",
+      "cefr": "A1",
+      "title": "Be: negatives",
+      "objective": "Make negative statements with am not/isn't/aren't.",
+      "concept": {
+        "en": "Put not after am, is or are to make a negative statement with be.",
+        "vi": "Đặt not sau am, is hoặc are để tạo câu phủ định với động từ be."
+      },
+      "formulae": [
+        "I + am not + complement.",
+        "He/She/It + is not (isn't) + complement.",
+        "You/We/They + are not (aren't) + complement."
+      ],
+      "whenToUse": [
+        "Say that an identity, description, state or location is not true."
+      ],
+      "forms": {
+        "negative": [
+          "I am not tired this morning.",
+          "The small shop isn't open yet.",
+          "They aren't late for class."
+        ]
+      },
+      "variations": [
+        "Amn't is not standard in most varieties of English; use am not."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.02.1",
+        "sent.gra1.01.02.2",
+        "sent.gra1.01.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.02"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.be-questions-short-answers"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.02",
+        "ex.translation.gra1.01.02"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.be-negative",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.be-questions-short-answers",
+      "cefr": "A1",
+      "title": "Be: yes/no questions and short answers",
+      "objective": "Ask and answer basic yes/no questions with be.",
+      "concept": {
+        "en": "Move am, is or are before the subject to make a yes/no question, and answer with the matching form of be.",
+        "vi": "Đưa am, is hoặc are lên trước chủ ngữ để tạo câu hỏi yes/no và trả lời ngắn bằng đúng dạng của be."
+      },
+      "formulae": [
+        "Am/Is/Are + subject + complement?",
+        "Yes, subject pronoun + am/is/are.",
+        "No, subject pronoun + am/is/are + not."
+      ],
+      "whenToUse": [
+        "Check identity, description, state or location.",
+        "Give a short yes/no answer without repeating the whole sentence."
+      ],
+      "forms": {
+        "question": [
+          "Are you ready for the lesson?",
+          "Is Maya at home this evening?",
+          "Are they students in this class?"
+        ]
+      },
+      "variations": [
+        "In negative short answers, isn't and aren't are common: No, he isn't. No, they aren't."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.03.1",
+        "sent.gra1.01.03.2",
+        "sent.gra1.01.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.03"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.be-negative"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.03",
+        "ex.translation.gra1.01.03"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.be-questions-short-answers",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.subject-pronouns",
+      "cefr": "A1",
+      "title": "Subject pronouns",
+      "objective": "Choose I/you/he/she/it/we/they correctly as subjects.",
+      "concept": {
+        "en": "Use subject pronouns before the verb to show who or what performs the action or has the state.",
+        "vi": "Dùng đại từ chủ ngữ trước động từ để chỉ người/vật thực hiện hành động hoặc mang trạng thái."
+      },
+      "formulae": [
+        "I / you / he / she / it / we / they + verb or be form."
+      ],
+      "whenToUse": [
+        "Avoid repeating a known person's or thing's name.",
+        "Choose a pronoun that matches person and number."
+      ],
+      "forms": {
+        "positive": [
+          "She is my sister Anna.",
+          "They live near this station.",
+          "It is very small but useful."
+        ]
+      },
+      "variations": [
+        "Use it for one thing, animal or situation when gender is not relevant; use they for plural people or things."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.04.1",
+        "sent.gra1.01.04.2",
+        "sent.gra1.01.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.04"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.object-pronouns"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.04",
+        "ex.translation.gra1.01.04"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.subject-pronouns",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.possessive-adjectives",
+      "cefr": "A1",
+      "title": "Possessive adjectives",
+      "objective": "Use my/your/his/her/its/our/their before nouns.",
+      "concept": {
+        "en": "Use a possessive adjective before a noun to show who the noun belongs or relates to.",
+        "vi": "Dùng tính từ sở hữu trước danh từ để chỉ danh từ đó thuộc về hoặc có liên hệ với ai."
+      },
+      "formulae": [
+        "my/your/his/her/its/our/their + noun"
+      ],
+      "whenToUse": [
+        "Show ownership or a close relationship before a noun."
+      ],
+      "forms": {
+        "positive": [
+          "My phone is new this week.",
+          "His name is Daniel Park.",
+          "Our classroom is upstairs on the left."
+        ]
+      },
+      "variations": [
+        "Possessive adjectives do not take an article before them: my bag, not the my bag."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.05.1",
+        "sent.gra1.01.05.2",
+        "sent.gra1.01.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.05"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.possessive-s"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.subject-pronouns"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.05",
+        "ex.translation.gra1.01.05"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.possessive-adjectives",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.demonstratives",
+      "cefr": "A1",
+      "title": "This/that/these/those",
+      "objective": "Choose demonstratives for singular/plural and near/far reference.",
+      "concept": {
+        "en": "Use this/these for things that feel near and that/those for things that feel farther away; match singular and plural.",
+        "vi": "Dùng this/these cho vật ở gần và that/those cho vật ở xa hơn; đồng thời chọn đúng dạng số ít hoặc số nhiều."
+      },
+      "formulae": [
+        "this + singular noun",
+        "that + singular noun",
+        "these + plural noun",
+        "those + plural noun"
+      ],
+      "whenToUse": [
+        "Point to or identify people and things by distance and number."
+      ],
+      "forms": {
+        "positive": [
+          "This book is useful for beginners.",
+          "That bus is full this morning.",
+          "These apples are fresh today."
+        ]
+      },
+      "variations": [
+        "This and that are singular; these and those are plural."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.06.1",
+        "sent.gra1.01.06.2",
+        "sent.gra1.01.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.06"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.06",
+        "ex.translation.gra1.01.06"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.demonstratives",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.there-is-are",
+      "cefr": "A1",
+      "title": "There is / there are",
+      "objective": "Introduce the existence and location of people and things.",
+      "concept": {
+        "en": "Use there is for one thing and there are for more than one thing when introducing what exists in a place or situation.",
+        "vi": "Dùng there is với một vật và there are với nhiều vật để giới thiệu sự tồn tại của người/vật trong một nơi hoặc tình huống."
+      },
+      "formulae": [
+        "There is + singular noun phrase.",
+        "There are + plural noun phrase.",
+        "Is there ...? / Are there ...?"
+      ],
+      "whenToUse": [
+        "Say that something exists or is present.",
+        "Introduce things in a place before giving more detail."
+      ],
+      "forms": {
+        "positive": [
+          "There is a bank near this station.",
+          "There are two large windows in this classroom."
+        ],
+        "negative": [
+          "There isn't a bus stop on this street."
+        ],
+        "question": [
+          "Is there a pharmacy near this station?",
+          "Are there any free seats in this room?"
+        ]
+      },
+      "variations": [
+        "Use there's as a common contraction of there is."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.07.1",
+        "sent.gra1.01.07.2",
+        "sent.gra1.01.07.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.07"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description",
+        "gr.a1.noun-number"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.07",
+        "ex.translation.gra1.01.07"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.there-is-are",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.articles-a-an",
+      "cefr": "A1",
+      "title": "A/an for classification and first mention",
+      "objective": "Use a/an with singular count nouns for non-specific reference.",
+      "concept": {
+        "en": "Use a or an before one non-specific singular count noun; choose an before a vowel sound and a before a consonant sound.",
+        "vi": "Dùng a hoặc an trước một danh từ đếm được số ít chưa xác định; dùng an trước âm nguyên âm và a trước âm phụ âm."
+      },
+      "formulae": [
+        "a + singular count noun beginning with a consonant sound",
+        "an + singular count noun beginning with a vowel sound"
+      ],
+      "whenToUse": [
+        "Classify a person or thing.",
+        "Mention one non-specific singular count noun for the first time."
+      ],
+      "forms": {
+        "positive": [
+          "She is a doctor at this clinic.",
+          "I have an umbrella in my bag.",
+          "We have a small apartment near the station."
+        ]
+      },
+      "variations": [
+        "Choose a/an by sound, not simply by the first written letter."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.01.08.1",
+        "sent.gra1.01.08.2",
+        "sent.gra1.01.08.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.01.08"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.article-the-basic"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.be-identification-description",
+        "gr.a1.noun-number"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.01.08",
+        "ex.translation.gra1.01.08"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "editorial-schema-review-a1-01"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-a1-01"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "editorial-exactDuplicate-review-a1-01"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "editorial-nearDuplicate-review-a1-01"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-a1-01"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "editorial-cefr-review-a1-01"
+          },
+          "license": {
+            "status": "pass",
+            "method": "editorial-license-review-a1-01"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "editorial-translation-review-a1-01"
+          },
+          "targetPresence": {
+            "status": "pass",
+            "method": "editorial-targetPresence-review-a1-01"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.articles-a-an",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
     }
   ]
 }
