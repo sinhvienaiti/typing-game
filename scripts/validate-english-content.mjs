@@ -234,6 +234,7 @@ if (reviewedE06Exercises) {
     if (exercise.quality?.state!=="draft") errors.push(exercise.id+": E06 reviewed source must remain draft; publication is ledger-overlay only");
     if (ids.has(exercise.id)) errors.push(exercise.id+": duplicate E06 reviewed exercise id");
     ids.add(exercise.id);
+    const grammarId=(exercise.targetIds??[]).find(id=>id.startsWith("gr."));
     if (exercise.type==="error-correction") {
       corrections++;
       if (grammarId) correctionTopicCounts.set(grammarId,(correctionTopicCounts.get(grammarId)??0)+1);
@@ -242,7 +243,6 @@ if (reviewedE06Exercises) {
       if (grammarId) transformationTopicCounts.set(grammarId,(transformationTopicCounts.get(grammarId)??0)+1);
     }
     else errors.push(exercise.id+": E06 reviewed slice supports correction/transformation only");
-    const grammarId=(exercise.targetIds??[]).find(id=>id.startsWith("gr."));
     if (!grammarId||!allIds.has(grammarId)) errors.push(exercise.id+": invalid grammar target");
     else topicCounts.set(grammarId,(topicCounts.get(grammarId)??0)+1);
     for (const id of exercise.sourceSentenceIds??[]) if (!pilotSentenceIds.has(id)) errors.push(exercise.id+": source must be a published pilot sentence "+id);
