@@ -220,7 +220,7 @@ if (grammarScaleA101&&grammarScaleA101Sentences&&grammarScaleA101Exercises&&gram
     if (mistake.quality?.state!=="draft") errors.push(mistake.id+": E05 A1 scale common mistake must remain draft");
     if ((mistake.targetIds??[]).length!==1||!topicIds.has(mistake.targetIds[0])) errors.push(mistake.id+": common mistake must target exactly one A1 scale topic");
     if (mistake.evidenceType!=="pedagogical") errors.push(mistake.id+": common mistake must use pedagogical evidence");
-    if ((mistake.corrections??[]).length<1||!String(mistake.explanationVi??"").trim()) errors.push(mistake.id+": correction and Vietnamese explanation are required");
+    if ((mistake.corrections??[]).length!==1||!String(mistake.explanationVi??"").trim()) errors.push(mistake.id+": exactly one canonical correction and a Vietnamese explanation are required");
     const grammarId=mistake.targetIds?.[0];
     if (grammarId) mistakeCounts.set(grammarId,(mistakeCounts.get(grammarId)??0)+1);
   }
