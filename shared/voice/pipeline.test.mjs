@@ -45,6 +45,14 @@ test("final lexical spans match their capture snapshot across target churn", () 
   assert.equal(result[0].snapshotId, "one");
   assert.equal(result.length, 1); // planet no longer existed when its own audio started
 });
+test("fast warmup may have a negative decoder origin but mapped live timestamps remain valid", () => {
+  const s = snapshot();
+  const matches = matchFinalWords([word("one", 1.1, 1.3)], [s], -8000, 16000);
+  assert.equal(matches.length, 1);
+  assert.equal(matches[0].audioStartSample, 9600);
+  assert.equal(matches[0].audioEndSample, 12800);
+  assert.deepEqual(matchFinalWords([word("one", 0.1, 0.2)], [s], -8000, 16000), []);
+});
 test("low confidence, overlapping or malformed timing, partial words and unsupported targets cannot commit", () => {
   const s = snapshot();
   for (const words of [
@@ -129,6 +137,35 @@ test("downsampling rejects high-frequency aliasing rather than skipping every th
   };
   assert.ok(amplitude(1000) > 0.65);
   assert.ok(amplitude(12000) < 0.025);
+});
+test("cached FIR coefficients match the original direct formula and remain bounded", () => {
+  class DirectResampler extends StreamingResampler {
+    kernel(fraction) {
+      const weights = new Float64Array(this.taps), half = this.taps / 2;
+      let sum = 0;
+      for (let i = 0; i < this.taps; i++) {
+        const distance = i - half + 1 - fraction, x = 2 * this.cutoff * distance;
+        const sinc = Math.abs(x) < 1e-9 ? 1 : Math.sin(Math.PI * x) / (Math.PI * x);
+        sum += weights[i] = 2 * this.cutoff * sinc * (0.5 + 0.5 * Math.cos(Math.PI * distance / half));
+      }
+      return weights.map(value => value / sum);
+    }
+  }
+  for (const rate of [16000, 44100, 48000, 47999.123]) {
+    const cached = new StreamingResampler(rate), direct = new DirectResampler(rate);
+    for (let offset = 0; offset < rate; offset += 128) {
+      const block = Float32Array.from({ length: 128 }, (_, i) => Math.sin((offset + i) * 0.137));
+      const actual = cached.push(block), expected = direct.push(block);
+      assert.equal(actual.length, expected.length);
+      assert.ok(actual.every((value, i) => Math.abs(value - expected[i]) < 1e-6));
+    }
+    assert.ok(cached.kernels.size <= 512);
+    if (rate === 48000) assert.equal(cached.kernels.size, 1);
+  }
+});
+test("resampler rejects odd tap counts and nonfinite output rates", () => {
+  for (const [rate, output, taps] of [[48000, NaN, 32], [48000, Infinity, 32], [48000, 16000, 17]])
+    assert.throws(() => new StreamingResampler(rate, output, taps), RangeError);
 });
 test("vocabulary preflight messages are bounded and cannot carry audio", () => {
   const message = {

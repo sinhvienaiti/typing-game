@@ -4272,3 +4272,30 @@ compatibility case, not a confirmed diagnosis of the user's Mac stage.
 Latest checks: 1,626 game tests, 115 shared Voice/Learning tests, both builds,
 canonical contract, real Worker/WASM decoding and Node VM worklet smoke tests
 passed. Native microphone/browser acceptance remains unverified; Warp is unchanged.
+
+## Local Voice/Warp investigation (2026-10-04, working-tree fixes)
+
+Confirmed on this Mac: Vite served the pinned `.tar.gz` as HTTP gzip encoding,
+causing browser auto-inflation and a checksum mismatch despite valid disk bytes.
+Dev/preview now serve the archive unchanged; invalid asset cache entries retry
+once with full pin verification. Space Typing also replaces unsupported built-in
+boss counter `unbind` with `unlock` and shows Warp on the pilot card with a depot
+dialog. Browser deployment verified 100→90; Practice retained 100.
+
+Voice now connects through Portal and recognizes synthetic spoken words in a
+standalone real browser pipeline. Same-recognizer warmup and bounded 1-second
+audio backpressure mitigate startup bursts, but Portal + combat still reproduced
+ASR overload under current machine load. **Do not mark full Voice combat PASS.**
+See `games/space-typing/docs/VOICE_WARP_FIX_REVIEW_2026-10-04.md` for evidence,
+limitations and remaining performance work. No user's save was reset or edited.
+
+Follow-up review on the same date: cached bounded FIR coefficients eliminate
+repeated resampler trig work; host runtime errors are generation-fenced and release
+the mic immediately, including while suspended. Concurrent warmup/resume and close
+races are covered. Warp queued requests snapshot caller-owned data; Refuel shows
+cost, affordability and Active/Reserve allocation. 77 parent Voice tests and 134
+targeted game tests pass; both TypeScript checks and direct Vite builds pass.
+Real speech fixtures still overflow in two Portal+combat runs (standalone speech
+passes). Do not replace this result with the silence-only run that passed.
+Full game suite has an unrelated VFX alpha failure and two timing failures that
+pass in isolated reruns. See the review for exact evidence; media was not changed.

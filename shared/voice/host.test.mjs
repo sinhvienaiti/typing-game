@@ -13,6 +13,38 @@ function setup(changes = {}) {
   const h = new VoiceHost({ requestMicrophone: async () => stream, createRuntime: async () => runtime, createSessionId: () => "session", onEvent: (e) => events.push(e), waitTail: async () => {}, ...changes });
   return { h, events, counts, stream, runtime, setNow: (n) => { now = n; } };
 }
+test("runtime failure while suspended releases microphone immediately, reports once and fences old errors", async () => {
+  const callbacks = [], closing = deferred();
+  const s = setup({ createRuntime: async (_stream, options) => { callbacks.push(options); return s.runtime; } });
+  await s.h.start(0);
+  await s.h.suspend(1);
+  s.runtime.close = async () => { s.counts.closed++; await closing.promise; };
+  assert.equal(callbacks[0].onError("device disconnected"), true);
+  assert.equal(s.h.state, "ERROR");
+  assert.equal(s.h.session, null);
+  assert.equal(s.counts.stopped, 1);
+  assert.equal(s.counts.closed, 1);
+  assert.equal(callbacks[0].onError("duplicate worker failure"), false);
+  assert.equal(s.events.filter(e => e.type === "error").length, 1);
+  await s.h.start(2);
+  assert.equal(callbacks[0].onError("old decoder error"), false);
+  assert.equal(s.h.state, "READY");
+  closing.resolve(); await tick();
+  assert.equal(s.h.state, "READY");
+  await s.h.stop();
+});
+test("runtime error during preparation disposes late runtime without announcing ready", async () => {
+  const preparation = deferred(); let callbacks;
+  const s = setup({ createRuntime: async (_stream, options) => { callbacks = options; return preparation.promise; } });
+  const start = s.h.start(0); await tick();
+  callbacks.onError("worker failed");
+  assert.equal(s.counts.stopped, 1);
+  preparation.resolve(s.runtime);
+  assert.equal(await start, false);
+  assert.equal(s.counts.closed, 1);
+  assert.equal(s.h.state, "ERROR");
+  assert.equal(s.events.some(e => e.type === "ready"), false);
+});
 test("permission/model readiness alone cannot start recognition before target ACK", async () => {
   const { h, events, counts, setNow, runtime } = setup(); assert.equal(await h.start(0), true);
   assert.equal(h.state, "READY"); assert.equal(counts.resumed, 0);

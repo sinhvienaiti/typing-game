@@ -93,15 +93,7 @@ export function createBrowserVoiceHost(
           throw new Error("Microphone preparation cancelled");
         runtime = await BrowserVoiceRuntime.create(
           stream,
-          {
-            ...callbacks,
-            onError: (message) =>
-              onEvent({
-                type: "error",
-                code: "microphone-runtime-failed",
-                message,
-              }),
-          },
+          callbacks,
           controller.signal,
         );
       } finally {

@@ -10,6 +10,17 @@ export class VoiceHost {
   }
   current(generation) { return generation === this.generation; }
   emit(event) { this.onEvent(event); }
+  runtimeError(message, generation) {
+    if (!this.current(generation) || !this.session) return false;
+    const runtime = this.runtime, stream = this.stream;
+    // Invalidate callbacks before teardown; even a hung decoder cannot hold the mic.
+    ++this.generation;
+    this.session = null; this.runtime = null; this.stream = null; this.state = "ERROR";
+    this.cancelMicrophone();
+    void this.dispose(runtime, stream).catch(() => {});
+    this.emit({ type: "error", code: "microphone-runtime-failed", message: String(message).slice(0, 300) });
+    return true;
+  }
   stopTracks(stream) { for (const track of stream?.getTracks() ?? []) track.stop(); }
   async dispose(runtime, stream) {
     // Release the device before waiting for decoder teardown; a stuck worker must not keep the mic live.
@@ -44,7 +55,7 @@ export class VoiceHost {
       stream = await this.requestMicrophone();
       if (!this.current(generation)) { this.stopTracks(stream); return false; }
       this.stream = stream; this.state = "PREPARING";
-      runtime = await this.createRuntime(stream, { sessionId, onStatus: (stage, message) => { if (this.current(generation) && this.state === "PREPARING") this.emit({ type: "preparing", inputEpoch, stage, message }); }, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation), onClock: (sample) => { if (this.current(generation) && this.session && this.runtime && Number.isSafeInteger(sample) && sample >= 0) this.emit({ type: "clock", ...this.session, sample }); } });
+      runtime = await this.createRuntime(stream, { sessionId, onError: (message) => this.runtimeError(message, generation), onStatus: (stage, message) => { if (this.current(generation) && this.state === "PREPARING") this.emit({ type: "preparing", inputEpoch, stage, message }); }, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation), onClock: (sample) => { if (this.current(generation) && this.session && this.runtime && Number.isSafeInteger(sample) && sample >= 0) this.emit({ type: "clock", ...this.session, sample }); } });
       if (!this.current(generation)) { await this.dispose(runtime, stream); return false; }
       // Capture owns a monotonic sample clock even when inference is suspended.
       parseSnapshot({ ...this.session, snapshotId: "ready", registryRevision: 0, publishedAtSample: runtime.nowSample(), sampleRate: runtime.sampleRate, targets: [] });

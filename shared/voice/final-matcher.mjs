@@ -11,8 +11,7 @@ export function matchFinalWords(
   if (
     !Array.isArray(words) ||
     words.length > 128 ||
-    !Number.isSafeInteger(baseSample) ||
-    baseSample < 0
+    !Number.isSafeInteger(baseSample)
   )
     return [];
   const matches = [];
@@ -27,6 +26,9 @@ export function matchFinalWords(
     )
       continue;
     const start = baseSample + Math.floor(first.start * sampleRate);
+    // Warmup advances decoder time, not the capture clock. Its origin may be
+    // negative when preparation finishes quickly; only mapped live spans matter.
+    if (!Number.isSafeInteger(start) || start < 0) continue;
     const snapshot = [...snapshots]
       .reverse()
       .find((s) => s.publishedAtSample <= start);

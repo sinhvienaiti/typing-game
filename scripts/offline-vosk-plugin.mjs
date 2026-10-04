@@ -3,10 +3,11 @@ import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { voiceModelMiddleware } from "./voice-model-middleware.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-/** Pin the upstream Worker and replace only its redundant IndexedDB extraction cache. */
+/** Pin upstream before applying the reviewed cache/readiness/cancellation bindings. */
 export function loadOfflineVoskWorker() {
   const require = createRequire(resolve(root, "portal/package.json"));
   const bundle = readFileSync(require.resolve("vosk-browser"), "utf8");
@@ -22,6 +23,10 @@ export function loadOfflineVoskWorker() {
   )
     throw new Error("Vosk worker changed; review its binding before upgrading");
   for (const [before, after] of [
+    [
+      "this.logger.debug(JSON.stringify(message));",
+      "/* Do not serialize PCM for disabled debug logging. */ this.logger.debug(message.action);",
+    ],
     [
       "this.Vosk.FS.mount(this.Vosk.IDBFS, {}, storagePath);",
       "/* Verified archive is cached by the host; extracted files stay in Worker MEMFS. */",
@@ -42,6 +47,17 @@ export function loadOfflineVoskWorker() {
     (_, gap, indent) =>
       `this.createRecognizer(message)${gap}.then(() => {${indent}ctx.postMessage({ event: "recognizer-ready", recognizerId: message.recognizerId });`,
   );
+  // The binding unregisters a removed recognizer synchronously: its final is
+  // deliberately unusable across the pause/epoch barrier. Skip that decoder
+  // work, but retain upstream buffer/model ownership and disposal semantics.
+  const removalStart = source.indexOf("        removeRecognizer(recognizerId) {");
+  const removalEnd = source.indexOf("        terminate() {", removalStart);
+  const removal = source.slice(removalStart, removalEnd);
+  const finalCall = "const finalResult = recognizer.recognizer.FinalResult();";
+  if (removalStart < 0 || removalEnd < 0 || removal.split(finalCall).length !== 2)
+    throw new Error("Unexpected Vosk cancellation binding");
+  source = source.slice(0, removalStart) + removal.replace(finalCall,
+    'const finalResult = \'{"text":"","result":[]}\';') + source.slice(removalEnd);
   const hash = createHash("sha256").update(source).digest("hex");
   return {
     source,
@@ -52,6 +68,7 @@ export function loadOfflineVoskWorker() {
 
 export function offlineVoskPlugin() {
   const worker = loadOfflineVoskWorker();
+  const spec = JSON.parse(readFileSync(resolve(root, "shared/voice/model-manifest.json"), "utf8"));
   const id = "\0offline-vosk-worker";
   let building = false;
   return {
@@ -75,6 +92,7 @@ export function offlineVoskPlugin() {
       });
     },
     configureServer(server) {
+      server.middlewares.use(voiceModelMiddleware(server.config.publicDir, spec.modelId));
       server.middlewares.use((request, response, next) => {
         if (request.url?.split("?")[0] !== "/" + worker.fileName) {
           next();
@@ -84,6 +102,11 @@ export function offlineVoskPlugin() {
         response.setHeader("Cache-Control", "no-cache");
         response.end(worker.source);
       });
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use(voiceModelMiddleware(
+        resolve(server.config.root, server.config.build.outDir), spec.modelId,
+      ));
     },
   };
 }

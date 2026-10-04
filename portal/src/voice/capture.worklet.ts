@@ -1,4 +1,5 @@
 import { StreamingResampler } from "../../../shared/voice/audio-resampler.mjs";
+import { CAPTURE_BLOCK_SAMPLES, CAPTURE_MAX_PENDING } from "./capture-policy";
 declare const sampleRate: number;
 declare class AudioWorkletProcessor {
   port: MessagePort;
@@ -13,8 +14,8 @@ class VoiceCapture extends AudioWorkletProcessor {
   private clock = 0;
   private enabled = false;
   private generation = 0;
-  private credits = 3;
-  private buffer = new Float32Array(1600);
+  private credits = CAPTURE_MAX_PENDING;
+  private buffer = new Float32Array(CAPTURE_BLOCK_SAMPLES);
   private used = 0;
   constructor() {
     super();
@@ -23,10 +24,10 @@ class VoiceCapture extends AudioWorkletProcessor {
         this.enabled = data.enabled;
         this.generation = data.generation;
         this.used = 0;
-        this.credits = 3;
+        this.credits = CAPTURE_MAX_PENDING;
       }
       if (data.type === "credit" && data.generation === this.generation)
-        this.credits = Math.min(3, this.credits + 1);
+        this.credits = Math.min(CAPTURE_MAX_PENDING, this.credits + 1);
     };
   }
   process(inputs: Float32Array[][]): boolean {
@@ -36,7 +37,7 @@ class VoiceCapture extends AudioWorkletProcessor {
     for (const value of samples) {
       this.clock++;
       if (!this.enabled) {
-        if (this.clock % 1600 === 0)
+        if (this.clock % CAPTURE_BLOCK_SAMPLES === 0)
           this.port.postMessage({ type: "clock", sample: this.clock });
         continue;
       }
@@ -62,7 +63,7 @@ class VoiceCapture extends AudioWorkletProcessor {
         },
         [this.buffer.buffer],
       );
-      this.buffer = new Float32Array(1600);
+      this.buffer = new Float32Array(CAPTURE_BLOCK_SAMPLES);
       this.used = 0;
     }
     return true;

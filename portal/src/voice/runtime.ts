@@ -2,6 +2,8 @@ import { OfflineDecoder, type OfflineRecognizer } from "./decoder";
 import workletUrl from "./capture.worklet.ts?worker&url";
 import { loadVoiceModel } from "./model-cache";
 import { resumeVoiceAudio } from "./audio-activation.mjs";
+import { primeRecognizer, WARMUP_SAMPLES } from "./decoder-warmup.mjs";
+import { CAPTURE_MAX_PENDING } from "./capture-policy";
 import {
   matchFinalWords,
   type FinalWord,
@@ -27,7 +29,10 @@ export class BrowserVoiceRuntime {
   private generation = 0;
   private enabled = false;
   private closed = false;
+  private failed = false;
+  private resumeTask: Promise<void> | null = null;
   private recognizer: OfflineRecognizer | null = null;
+  private recognizerPreparation: AbortController | null = null;
   private baseSample: number | null = null;
   private pending: Pcm[] = [];
   private snapshots: VoiceSnapshot[] = [];
@@ -156,7 +161,8 @@ export class BrowserVoiceRuntime {
     return this.clock;
   }
   private fail(text: string): void {
-    if (this.closed || !this.enabled) return;
+    if (this.closed || this.failed) return;
+    this.failed = true;
     void this.suspend();
     this.callbacks.onError(text);
   }
@@ -171,7 +177,8 @@ export class BrowserVoiceRuntime {
       this.clock = Math.max(this.clock, message.sample!);
     this.callbacks.onClock(this.clock);
     if (message.type === "overflow") {
-      this.fail("Speech processing fell behind. Reconnect to continue.");
+      if (message.generation === this.generation)
+        this.fail("Offline speech processing overloaded. Close heavy game tabs, then reconnect.");
       return;
     }
     if (
@@ -182,11 +189,11 @@ export class BrowserVoiceRuntime {
       !this.recognizer
     )
       return;
-    if (this.pending.length >= 3) {
-      this.fail("Speech audio queue overflow. Reconnect to continue.");
+    if (this.pending.length >= CAPTURE_MAX_PENDING) {
+      this.fail("Offline speech processing overloaded. Close heavy game tabs, then reconnect.");
       return;
     }
-    this.baseSample ??= this.clock - message.data.length;
+    this.baseSample ??= this.clock - message.data.length - WARMUP_SAMPLES;
     this.pending.push(message as Pcm);
     this.recognizer.acceptWaveformFloat(message.data, this.sampleRate);
   }
@@ -207,10 +214,10 @@ export class BrowserVoiceRuntime {
       this.baseSample === null
     )
       return;
-    const words = result.result ?? [],
-      transcript = String(result.text ?? "")
-        .trim()
-        .slice(0, 200);
+    // Calibration is never user evidence, including a word crossing the gate.
+    const words = (result.result ?? []).filter(word =>
+      Number.isFinite(word.start) && word.start * this.sampleRate >= WARMUP_SAMPLES);
+    const transcript = words.map(word => word.word).join(" ").trim().slice(0, 200);
     // Empty Vosk endpoints without timestamped lexical evidence are silence, not a failed attempt.
     if (!words.length || !transcript) return;
     const context = this.context;
@@ -245,6 +252,7 @@ export class BrowserVoiceRuntime {
       this.baseSample + Math.ceil(words.at(-1)!.end * this.sampleRate);
     if (
       !Number.isSafeInteger(start) ||
+      start < 0 ||
       !Number.isSafeInteger(end) ||
       end <= start ||
       end > this.clock
@@ -301,7 +309,10 @@ export class BrowserVoiceRuntime {
   }
   async suspend(): Promise<void> {
     this.enabled = false;
+    this.resumeTask = null;
     this.generation++;
+    this.recognizerPreparation?.abort();
+    this.recognizerPreparation = null;
     this.capture.port.postMessage({
       type: "gate",
       enabled: false,
@@ -317,16 +328,38 @@ export class BrowserVoiceRuntime {
     this.snapshots = [];
     this.context = null;
   }
-  async resume(): Promise<void> {
-    if (this.closed || this.enabled) return;
+  resume(): Promise<void> {
+    if (this.closed || this.failed || this.enabled) return Promise.resolve();
+    if (this.resumeTask) return this.resumeTask;
+    const task = this.prepareAndResume();
+    this.resumeTask = task;
+    void task.finally(() => {
+      if (this.resumeTask === task) this.resumeTask = null;
+    }).catch(() => {});
+    return task;
+  }
+  private async prepareAndResume(): Promise<void> {
     const generation = ++this.generation;
-    this.recognizer = this.model.createRecognizer(this.sampleRate);
-    this.recognizer.on("error", (message) =>
-      this.fail(message.error ?? "Speech recognizer stopped"),
+    const recognizer = this.model.createRecognizer(this.sampleRate);
+    this.recognizer = recognizer;
+    const preparation = new AbortController();
+    this.recognizerPreparation = preparation;
+    try {
+      await primeRecognizer(recognizer, preparation.signal);
+    } catch (error) {
+      if (this.closed || generation !== this.generation) return;
+      await this.suspend();
+      throw error;
+    } finally {
+      if (this.recognizerPreparation === preparation) this.recognizerPreparation = null;
+    }
+    if (this.closed || generation !== this.generation) return;
+    recognizer.on("error", (message) =>
+      { if (generation === this.generation) this.fail(message.error ?? "Speech recognizer stopped"); },
     );
-    this.recognizer.setWords(true);
-    this.recognizer.on("partialresult", () => this.acknowledge(generation));
-    this.recognizer.on("result", (message) =>
+    recognizer.setWords(true);
+    recognizer.on("partialresult", () => this.acknowledge(generation));
+    recognizer.on("result", (message) =>
       this.final(
         ("result" in message ? message.result : {}) as {
           text?: string;
@@ -335,15 +368,14 @@ export class BrowserVoiceRuntime {
         generation,
       ),
     );
-    await this.recognizer.ready();
     if (this.closed || generation !== this.generation) return;
     this.enabled = true;
     this.capture.port.postMessage({ type: "gate", enabled: true, generation });
   }
   async close(): Promise<void> {
     if (this.closed) return;
-    await this.suspend();
     this.closed = true;
+    await this.suspend();
     if (this.trackEnded)
       this.tracks.forEach((track) =>
         track.removeEventListener("ended", this.trackEnded!),

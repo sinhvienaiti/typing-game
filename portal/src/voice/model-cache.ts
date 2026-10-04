@@ -1,4 +1,5 @@
 import spec from "../../../shared/voice/model-manifest.json";
+import { loadVerifiedAsset } from "../../../shared/voice/verified-asset.mjs";
 type ModelManifest = {
   schemaVersion: number;
   engineId: string;
@@ -59,61 +60,21 @@ export async function loadVoiceModel(
   } catch {
     /* Cache storage is optional; verified local assets still work. */
   }
-  let stored = await cache?.match(manifest.url);
-  const modelWasCached = !!stored;
-  if (!stored)
-    stored = await fetch(manifest.url, { cache: "no-store", signal });
-  if (!stored.ok)
-    throw new Error("Offline model unavailable. Run ./dev.sh space.");
-  const bytes = await stored.arrayBuffer();
-  signal?.throwIfAborted();
-  const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
-  if (bytes.byteLength !== manifest.bytes || hash !== manifest.sha256) {
-    await cache?.delete(manifest.url);
-    throw new Error("Offline model checksum failed. Prepare it again.");
-  }
-  // A partially downloaded or unverified model never becomes a ready cache entry.
-  try {
-    if (!modelWasCached) {
-      await cache?.put(
-        manifest.url,
-        new Response(bytes, {
-          headers: { "Content-Type": "application/gzip" },
-        }),
-      );
-    }
-  } catch {
-    /* Quota failure must not invalidate a verified in-memory model. */
-  }
+  const bytes = await loadVerifiedAsset({
+    url: manifest.url, bytes: manifest.bytes, sha256: manifest.sha256,
+    cache, signal, label: "Offline model",
+    onRetry: () => onStatus("Repairing cached offline model…"),
+  });
   const vocabularyUrl = "/assets/voice/vocabulary.json";
-  const cachedVocabulary = await cache?.match(vocabularyUrl);
-  const vocabularyResponse =
-    cachedVocabulary ??
-    (await fetch(vocabularyUrl, { cache: "no-store", signal }));
-  if (!vocabularyResponse.ok)
-    throw new Error("Offline model vocabulary missing. Run ./dev.sh space.");
-  const vocabularyBytes = await vocabularyResponse.arrayBuffer();
-  signal?.throwIfAborted();
-  const vocabularyHash = [
-    ...new Uint8Array(await crypto.subtle.digest("SHA-256", vocabularyBytes)),
-  ]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
-  if (
-    vocabularyBytes.byteLength !== spec.vocabularyBytes ||
-    vocabularyHash !== spec.vocabularySha256
-  ) {
-    await cache?.delete(vocabularyUrl);
-    throw new Error("Offline vocabulary checksum failed.");
-  }
+  const vocabularyBytes = await loadVerifiedAsset({
+    url: vocabularyUrl, bytes: spec.vocabularyBytes, sha256: spec.vocabularySha256,
+    cache, signal, label: "Offline vocabulary",
+    onRetry: () => onStatus("Repairing cached offline vocabulary…"),
+  });
   const vocabulary = new Set<string>(
     JSON.parse(new TextDecoder().decode(vocabularyBytes)) as string[],
   );
   try {
-    if (!cachedVocabulary)
-      await cache?.put(vocabularyUrl, new Response(vocabularyBytes));
     if (cache)
       for (const name of await caches.keys())
         if (name.startsWith("typing-voice-model-") && name !== cacheName)
