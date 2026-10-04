@@ -61,9 +61,9 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==1600) errors.push("published sentence runtime must contain 1600 reviewed records");
-if (topics.length!==12||examples.length!==636||exercises.length!==824||dialogues.length!==40||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 636 examples + 824 exercises + 40 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==1660) errors.push("published sentence runtime must contain 1660 reviewed records");
+if (topics.length!==12||examples.length!==636||exercises.length!==824||dialogues.length!==100||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 636 examples + 824 exercises + 100 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -219,8 +219,8 @@ try {
     fileRuntimeLoader,
     "dialogue",
   );
-  if(karaokeDialogueCount!==40) {
-    errors.push("published Karaoke dialogue activity must expose 40 reviewed dialogues");
+  if(karaokeDialogueCount!==100) {
+    errors.push("published Karaoke dialogue activity must expose 100 reviewed dialogues");
   }
   const karaokeDialogue=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -292,7 +292,7 @@ const report={
     monkeyCorrectionRecords:200,
     monkeyTransformation:5,
     karaokeExamples:5,
-    karaokeDialogues:40,
+    karaokeDialogues:100,
     recallCollocations:560,
     verbPatterns:510,
     phrasalVerbs:280,

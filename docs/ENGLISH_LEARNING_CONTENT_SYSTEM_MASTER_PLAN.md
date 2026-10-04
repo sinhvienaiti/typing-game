@@ -2549,7 +2549,7 @@ Current deterministic/reproducible candidate outputs:
 - 100 MultiWOZ 2.2 human-human dialogues selected from 124 candidates after quality filters; both source blobs are pinned.
 - 100 common-mistake candidates derived from the controlled correction pilot rather than from random artificial errors.
 
-Candidate/draft records are not runtime-published. Current reviewed E06 runtime coverage is **100/100 error-correction + 100/100 transformation exercises**, **300/300 Tatoeba English sentence + translation pairs**, **300/300 typing-text examples + 300/300 linked cloze exercises**, **100/100 common mistakes**, and **40/100 MultiWOZ dialogues**. The correction/transformation pilot is now closed at 100/100 each. The remaining P1 work is 60 dialogues, all of which must still pass digest-bound editorial review before publication.
+Candidate/draft records are not runtime-published. Current reviewed E06 runtime coverage is **100/100 error-correction + 100/100 transformation exercises**, **300/300 Tatoeba English sentence + translation pairs**, **300/300 typing-text examples + 300/300 linked cloze exercises**, **100/100 common mistakes**, and **100/100 MultiWOZ dialogues**. The E06 correction/transformation/dialogue pilot is now closed: 100/100 corrections, 100/100 transformations and 100/100 MultiWOZ dialogues are digest-reviewed and published.
 
 ### 43.6 E07 parent runtime
 
@@ -2565,7 +2565,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **1,600 records** = **636 examples + 824 exercises + 40 dialogues + 100 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **1,660 records** = **636 examples + 824 exercises + 100 dialogues + 100 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2640,7 +2640,7 @@ Current readiness measurements after E04 scale batch 23:
 - translation pairs: **300 / 20,000 minimum**, and the full 300-pair pilot is reviewed/published;
 - cloze exercises: **300 / 30,000 minimum**, and the full 300-item typing-text cloze pilot is reviewed/published;
 - transformations: **100/100 pilot records reviewed/published** against a 10,000 long-term minimum;
-- dialogues: **100 candidate / 10,000 minimum; 40 reviewed/published runtime dialogues** are now available.
+- dialogues: **100/100 pilot dialogues reviewed/published** against a 10,000 long-term minimum;
 
 These numbers intentionally expose what is not yet scaled. E11 does not allow target counts to be treated as completed work.
 
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **3,842 published rich records**: dictionary 600, grammar 12, sentences 1,600 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **3,902 published rich records**: dictionary 600, grammar 12, sentences 1,660 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2722,7 +2722,7 @@ Child repositories also passed their relevant CI after E09 integration, includin
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
 - the controlled **300-lexeme E03 pilot is complete**: all 300 lexemes and 300 linked primary senses are digest-reviewed and published; any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;
-- close the remaining E06 pilot gap: **60 MultiWOZ dialogues** still require review/publication; Tatoeba is **300/300**, typing-text examples/cloze are **300/300 + 300/300**, common mistakes are **100/100**, correction/transformation are **100/100 + 100/100**, and dialogues are **40/100**;
+- the controlled E06 pilots are now closed: Tatoeba **300/300**, typing-text examples/cloze **300/300 + 300/300**, common mistakes **100/100**, correction/transformation **100/100 + 100/100**, and MultiWOZ dialogues **100/100**; future E06 growth must use new controlled batches rather than silently extending these pilots;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
