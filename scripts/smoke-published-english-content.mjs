@@ -61,16 +61,16 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==1424) errors.push("published sentence runtime must contain 1424 reviewed records");
-if (topics.length!==12||examples.length!==576||exercises.length!==708||dialogues.length!==40||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 576 examples + 708 exercises + 40 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==1472) errors.push("published sentence runtime must contain 1472 reviewed records");
+if (topics.length!==12||examples.length!==600||exercises.length!==732||dialogues.length!==40||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 600 examples + 732 exercises + 40 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
 if (tatoebaExamples.length!==300||tatoebaTranslations.length!==300) errors.push("published Tatoeba slices must expose 300 sentences + 300 translations");
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
-if (typingTextExamples.length!==240||typingTextCloze.length!==240) errors.push("published typing-text slice must expose 240 examples + 240 cloze exercises");
+if (typingTextExamples.length!==264||typingTextCloze.length!==264) errors.push("published typing-text slice must expose 264 examples + 264 cloze exercises");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
 if (correctionExercises.length!==72||transformationExercises.length!==72) {
