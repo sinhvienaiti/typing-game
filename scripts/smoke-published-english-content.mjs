@@ -62,8 +62,8 @@ if (dictionaryManifest.count!==120) errors.push("published dictionary runtime mu
 if (lexemes.length!==60||senses.length!==60) errors.push("published E03 runtime split must be 60 lexemes + 60 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
 if (sentenceManifest.count!==650) errors.push("published sentence runtime must contain 650 reviewed records");
-if (topics.length!==12||examples.length!==180||exercises.length!==312||dialogues.length!==10||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 180 examples + 312 exercises + 10 dialogues + 100 common mistakes");
+if (topics.length!==12||examples.length!==204||exercises.length!==336||dialogues.length!==10||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 204 examples + 336 exercises + 10 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
