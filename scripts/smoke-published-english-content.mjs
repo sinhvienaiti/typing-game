@@ -292,7 +292,7 @@ const report={
     monkeyCorrectionRecords:172,
     monkeyTransformation:5,
     karaokeExamples:5,
-    karaokeDialogues:karaokeDialogueCount,
+    karaokeDialogues:40,
     recallCollocations:560,
     verbPatterns:510,
     phrasalVerbs:280,
