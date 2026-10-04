@@ -87,6 +87,7 @@ export function createBrowserVoiceHost(
       const controller = (preparation = new AbortController());
       let runtime;
       try {
+        callbacks.onStatus("model", "Loading offline speech engine…");
         const { BrowserVoiceRuntime } = await loadRuntime();
         if (epoch !== permissionEpoch)
           throw new Error("Microphone preparation cancelled");
@@ -100,7 +101,6 @@ export function createBrowserVoiceHost(
                 code: "microphone-runtime-failed",
                 message,
               }),
-            onStatus: () => {},
           },
           controller.signal,
         );

@@ -1,6 +1,7 @@
 import { OfflineDecoder, type OfflineRecognizer } from "./decoder";
 import workletUrl from "./capture.worklet.ts?worker&url";
 import { loadVoiceModel } from "./model-cache";
+import { resumeVoiceAudio } from "./audio-activation.mjs";
 import {
   matchFinalWords,
   type FinalWord,
@@ -13,7 +14,7 @@ type Callbacks = {
   onFeedback(value: Record<string, unknown>): void;
   onClock(sample: number): void;
   onError(text: string): void;
-  onStatus(text: string): void;
+  onStatus(stage: "model" | "audio", text: string): void;
 };
 type Pcm = { generation: number; sample: number; data: Float32Array };
 
@@ -49,11 +50,15 @@ export class BrowserVoiceRuntime {
     callbacks: Callbacks,
     signal?: AbortSignal,
   ): Promise<BrowserVoiceRuntime> {
-    const cached = await loadVoiceModel(callbacks.onStatus, signal);
+    const cached = await loadVoiceModel(
+      (text) => callbacks.onStatus("model", text),
+      signal,
+    );
     let model: OfflineDecoder | null = null,
       audio: AudioContext | null = null;
     try {
       signal?.throwIfAborted();
+      callbacks.onStatus("model", "Starting offline speech recognizer…");
       model = new OfflineDecoder(cached.url);
       const loading = model;
       await new Promise<void>((resolve, reject) => {
@@ -95,6 +100,7 @@ export class BrowserVoiceRuntime {
         });
       });
       signal?.throwIfAborted();
+      callbacks.onStatus("audio", "Starting microphone audio capture…");
       audio = new AudioContext();
       await audio.audioWorklet.addModule(workletUrl);
       signal?.throwIfAborted();
@@ -109,7 +115,7 @@ export class BrowserVoiceRuntime {
       source.connect(capture);
       capture.connect(mute);
       mute.connect(audio.destination);
-      await audio.resume();
+      await resumeVoiceAudio(audio, signal);
       signal?.throwIfAborted();
       const runtime = new BrowserVoiceRuntime(
         model,

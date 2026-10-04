@@ -9,7 +9,7 @@ export class VoiceHost {
   constructor(options: {
     requestMicrophone(): Promise<MediaStream>;
     cancelMicrophone?(): void;
-    createRuntime(stream: MediaStream, options: { sessionId: string; onDetection(value: unknown): boolean; onFeedback(value: unknown): boolean; onClock(sample: number): void }): Promise<LocalRuntime>;
+    createRuntime(stream: MediaStream, options: { sessionId: string; onStatus(stage: "permission" | "model" | "audio", message: string): void; onDetection(value: unknown): boolean; onFeedback(value: unknown): boolean; onClock(sample: number): void }): Promise<LocalRuntime>;
     createSessionId(): string; onEvent?(event: Record<string, unknown>): void;
     waitTail?(ms: number): Promise<void>; echoTailMs?: number;
   });

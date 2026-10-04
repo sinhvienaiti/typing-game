@@ -209,3 +209,17 @@ test("stop aborts model/decoder preparation without retaining the device or awai
     restore();
   }
 });
+
+test("the production factory reports permission and model/audio progress instead of silently discarding it", async () => {
+  const restore = environment(async () => stream(), new Locks());
+  const events = [];
+  const host = createBrowserVoiceHost(event => events.push(event), async () => ({ BrowserVoiceRuntime: { create: async (_stream, callbacks) => {
+    callbacks.onStatus("audio", "Starting audio capture…");
+    return runtime();
+  } } }));
+  try {
+    assert.equal(await host.start(4), true);
+    assert.deepEqual(events.filter(e => e.type === "preparing").map(e => [e.inputEpoch, e.stage]), [[4, "permission"], [4, "model"], [4, "audio"]]);
+    assert.equal(events.at(-1).type, "ready");
+  } finally { await host.stop(); restore(); }
+});

@@ -38,12 +38,13 @@ export class VoiceHost {
     this.session = { sessionId, inputEpoch, audioEpoch: 0 };
     this.outputGeneration = 0; this.outputClosedGeneration = 0; this.outputActive = false; this.applyQueue = Promise.resolve(); this.resuming = false;
     this.state = "REQUESTING_PERMISSION";
+    this.emit({ type: "preparing", inputEpoch, stage: "permission", message: "Waiting for microphone permission…" });
     let stream = null, runtime = null;
     try {
       stream = await this.requestMicrophone();
       if (!this.current(generation)) { this.stopTracks(stream); return false; }
       this.stream = stream; this.state = "PREPARING";
-      runtime = await this.createRuntime(stream, { sessionId, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation), onClock: (sample) => { if (this.current(generation) && this.session && this.runtime && Number.isSafeInteger(sample) && sample >= 0) this.emit({ type: "clock", ...this.session, sample }); } });
+      runtime = await this.createRuntime(stream, { sessionId, onStatus: (stage, message) => { if (this.current(generation) && this.state === "PREPARING") this.emit({ type: "preparing", inputEpoch, stage, message }); }, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation), onClock: (sample) => { if (this.current(generation) && this.session && this.runtime && Number.isSafeInteger(sample) && sample >= 0) this.emit({ type: "clock", ...this.session, sample }); } });
       if (!this.current(generation)) { await this.dispose(runtime, stream); return false; }
       // Capture owns a monotonic sample clock even when inference is suspended.
       parseSnapshot({ ...this.session, snapshotId: "ready", registryRevision: 0, publishedAtSample: runtime.nowSample(), sampleRate: runtime.sampleRate, targets: [] });

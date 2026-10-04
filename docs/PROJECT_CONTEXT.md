@@ -4259,3 +4259,16 @@ Real browser/microphone, visual/device acceptance, recognition corpus, negative
 audio, end-to-end latency and frame benchmarks remain unverified. Start from
 [local test instructions](./SPACE_VOICE_AND_WARP_LOCAL.md), then the child Voice/Warp
 status documents; do not infer release certification from the automated suite.
+
+## Voice timeout follow-up (2026-10-04)
+
+The feature branches now report separate Portal, permission, model, audio and
+recognizer timeouts, forward preparation progress and bound/cancel audio activation.
+Lazy import failures surface immediately and allow retry. Portal main currently
+has no Voice host: update the parent feature branch as well as its child gitlink,
+restart the launcher and reload the Portal tab after pulling. This is a confirmed
+compatibility case, not a confirmed diagnosis of the user's Mac stage.
+
+Latest checks: 1,626 game tests, 115 shared Voice/Learning tests, both builds,
+canonical contract, real Worker/WASM decoding and Node VM worklet smoke tests
+passed. Native microphone/browser acceptance remains unverified; Warp is unchanged.

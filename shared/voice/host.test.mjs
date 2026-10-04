@@ -18,7 +18,8 @@ test("permission/model readiness alone cannot start recognition before target AC
   assert.equal(h.state, "READY"); assert.equal(counts.resumed, 0);
   assert.equal(h.receiveDetection(detection(), h.generation), false);
   assert.equal(await h.applyTargets(snapshot()), true); assert.equal(h.state, "LISTENING");
-  assert.deepEqual(events.map((e) => e.type), ["ready", "targets-applied", "listening"]);
+  assert.deepEqual(events.map((e) => e.type), ["preparing", "ready", "targets-applied", "listening"]);
+  assert.equal(events[0].stage, "permission");
   setNow(3200); assert.equal(h.receiveDetection(detection(), h.generation), true);
   const closing = deferred(); runtime.close = async () => { counts.closed++; await closing.promise; };
   const stop = h.stop(); assert.equal(counts.stopped, 1); assert.equal(counts.closed, 1);
@@ -63,6 +64,25 @@ test("cancelling pending permission releases device ownership immediately and fe
   await s.h.stop(); assert.equal(owner, false); assert.ok(cancellations >= 2);
   permission.resolve(s.stream); assert.equal(await start, false); assert.equal(s.counts.stopped, 1);
   assert.equal(s.events.some(event => event.type === "ready"), false);
+});
+
+test("permission and model progress are explicit and cancelled preparation cannot emit late progress", async () => {
+  const preparation = deferred();
+  let status;
+  const s = setup({ createRuntime: async (_stream, callbacks) => {
+    status = callbacks.onStatus;
+    status("model", "Loading model…");
+    return preparation.promise;
+  } });
+  const start = s.h.start(3);
+  await tick();
+  assert.deepEqual(s.events.filter(e => e.type === "preparing").map(e => [e.inputEpoch, e.stage]), [[3, "permission"], [3, "model"]]);
+  await s.h.stop();
+  const count = s.events.length;
+  status("audio", "Late activation");
+  assert.equal(s.events.length, count);
+  preparation.resolve(s.runtime);
+  assert.equal(await start, false);
 });
 test("latest start wins before either permission request can race", async () => {
   let sessions = 0; const { h } = setup({ createSessionId: () => `session-${++sessions}` });

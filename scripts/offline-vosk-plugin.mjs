@@ -53,8 +53,12 @@ export function loadOfflineVoskWorker() {
 export function offlineVoskPlugin() {
   const worker = loadOfflineVoskWorker();
   const id = "\0offline-vosk-worker";
+  let building = false;
   return {
     name: "offline-vosk-worker",
+    configResolved(config) {
+      building = config.command === "build";
+    },
     resolveId(value) {
       if (value === "virtual:offline-vosk-worker") return id;
     },
@@ -63,6 +67,7 @@ export function offlineVoskPlugin() {
         return `export default ${JSON.stringify("/" + worker.fileName)};`;
     },
     buildStart() {
+      if (!building) return;
       this.emitFile({
         type: "asset",
         fileName: worker.fileName,

@@ -59,3 +59,17 @@ test("instance-scoped configure cancels a pending host before the child knows it
   s.send("configure", { mode: "typing", language: "en", policyVersion: "v2", inputEpoch: 2 });
   assert.equal(stops, 1); assert.equal(s.bridge.host, null);
 });
+
+test("preparation progress is forwarded only from the current host to its bound iframe", () => {
+  let callback;
+  const s = setup({ createHost: (cb) => { callback = cb; return { session: null, start: async () => {}, stop: async () => {} }; } });
+  s.send("hello", { versions: [1] });
+  s.send("configure", { mode: "voice", language: "en", policyVersion: "v2", inputEpoch: 1 });
+  s.send("start", { inputEpoch: 1 });
+  callback({ type: "preparing", inputEpoch: 1, stage: "model", message: "Loading offline model…" });
+  assert.equal(s.posted.at(-1).data.stage, "model");
+  s.bridge.reset();
+  const count = s.posted.length;
+  callback({ type: "preparing", inputEpoch: 1, stage: "audio", message: "Late audio" });
+  assert.equal(s.posted.length, count);
+});

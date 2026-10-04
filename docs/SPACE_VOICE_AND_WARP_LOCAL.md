@@ -42,6 +42,19 @@ If permission was denied, enable the microphone in the browser's permissions for
 `typing-game.local`, then reconnect. A second tab's mic session or economy writer
 can block activation/spending; close the other session and reload when needed.
 
+## Connection timeouts
+
+After pulling, restart `./dev.sh space` and reload the Portal tab with Cmd+Shift+R.
+Both feature branches are required: the current Portal `main` branch has no Voice
+host, so a child-only update can time out before requesting microphone permission.
+The reported Mac's exact failed stage has not been observed.
+
+The controls now distinguish Portal connection, permission, model loading, audio
+activation and recognizer readiness. Portal handshake has an 8-second deadline;
+preparation has 90 seconds, followed by a fresh 15-second recognizer deadline.
+Audio activation is abortable and bounded to 10 seconds. Model progress is shown
+in the existing compact control, and failed lazy imports can be retried.
+
 ## Warp behavior to test
 
 Campaign/replay/Ascension/each rewarded Hidden deployment costs 10. Active has a
@@ -57,9 +70,10 @@ the whole profile and may roll spending back; export a backup before testing it.
 
 ## Verification and remaining acceptance
 
-Space Typing: 1,623 tests across 253 files and build passed. Shared Voice/Learning:
-105 tests passed. Portal build, six-file canonical Voice contract and real Vosk
-Worker/WASM decoding with a WAV fixture passed. No real microphone/browser session
+Space Typing: 1,626 tests across 253 files and build passed. Shared Voice/Learning:
+115 tests passed. Portal build, six-file canonical Voice contract, real Vosk
+Worker/WASM decoding with a WAV fixture and worklet module smoke tests passed.
+The worklet smoke tests use a Node VM, not native browser capture. No real microphone/browser session
 or end-to-end latency/frame benchmark was possible in the implementation environment.
 
 Implementation details, economy bounds and exact remaining release gates:

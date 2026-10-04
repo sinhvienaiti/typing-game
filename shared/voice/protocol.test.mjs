@@ -34,3 +34,10 @@ test("namespace/version and raw-audio boundaries reject invalid iframe messages"
   for (const v of [envelope("hello", { versions: [] }), envelope("hello", { versions: [1, 1] }), envelope("hello", { versions: [1], pcm: new Float32Array(3) }), envelope("hello", { versions: [1], version: 2 }), envelope("unknown"), envelope("start", { inputEpoch: Infinity })]) assert.throws(() => parseVoiceMessage(v));
   assert.deepEqual(parseVoiceMessage(envelope("hello", { versions: [1] })).versions, [1]);
 });
+
+test("preparation progress has a bounded stage, detail and input epoch rather than accepting arbitrary status payloads", () => {
+  const progress = { inputEpoch: 2, stage: "model", message: "Loading offline model…" };
+  assert.equal(parseVoiceMessage(envelope("preparing", progress)).stage, "model");
+  for (const invalid of [{ stage: "unknown" }, { inputEpoch: -1 }, { message: "" }, { message: "x".repeat(301) }, { pcm: [1] }])
+    assert.throws(() => parseVoiceMessage(envelope("preparing", { ...progress, ...invalid })));
+});
