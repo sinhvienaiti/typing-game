@@ -7,7 +7,7 @@ export type LocalRuntime = {
 export class VoiceHost {
   constructor(options: {
     requestMicrophone(): Promise<MediaStream>;
-    createRuntime(stream: MediaStream, options: { sessionId: string; onDetection(value: unknown): boolean }): Promise<LocalRuntime>;
+    createRuntime(stream: MediaStream, options: { sessionId: string; onDetection(value: unknown): boolean; onFeedback(value: unknown): boolean }): Promise<LocalRuntime>;
     createSessionId(): string; onEvent?(event: Record<string, unknown>): void;
     waitTail?(ms: number): Promise<void>; echoTailMs?: number;
   });

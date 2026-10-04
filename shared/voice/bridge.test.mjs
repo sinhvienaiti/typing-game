@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { ParentVoiceBridge } from "./bridge.mjs";
-import { envelope } from "./fixtures.mjs";
+import { envelope, feedback } from "./fixtures.mjs";
 function setup(options) {
   const posted = [], source = { postMessage: (data, origin) => posted.push({ data, origin }) };
   const frame = { contentWindow: source }, game = { id: "space-typing", appUrl: "https://space.typing-game.local/game" };
@@ -22,6 +22,15 @@ test("production default honestly blocks Voice without any microphone or remote 
   const { send, posted } = setup(); send("hello", { versions: [1] }); assert.equal(posted[0].data.offlineEngineAvailable, false);
   send("configure", { mode: "voice", language: "en", policyVersion: "v2", inputEpoch: 0 }); send("start", { inputEpoch: 0 });
   assert.equal(posted.at(-1).data.code, "offline-engine-not-validated");
+});
+test("feedback forwards to the bound iframe only and dies with the host binding", () => {
+  let callback;
+  const s = setup({ createHost: (cb) => { callback = cb; return { session: { sessionId: "session", inputEpoch: 0 }, start: async () => {}, stop: async () => {} }; } });
+  s.send("hello", { versions: [1] }); s.send("configure", { mode: "voice", language: "en", policyVersion: "v2", inputEpoch: 0 }); s.send("start", { inputEpoch: 0 });
+  callback({ type: "feedback", ...feedback() });
+  assert.deepEqual(s.posted.at(-1), { data: envelope("feedback", feedback()), origin: "https://space.typing-game.local" });
+  s.bridge.reset(); const count = s.posted.length;
+  callback({ type: "feedback", ...feedback({ transcript: "late" }) }); assert.equal(s.posted.length, count);
 });
 test("Typing/start and unrelated messages cannot create a host", () => {
   let created = 0; const s = setup({ createHost: () => { created++; } }); s.send("hello", { versions: [1] }); s.send("start", { inputEpoch: 0 });

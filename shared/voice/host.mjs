@@ -1,4 +1,4 @@
-import { parseSnapshot, parseDetection } from "./protocol.mjs";
+import { parseSnapshot, parseDetection, parseFeedback } from "./protocol.mjs";
 
 /** Injected local capture/decoder only. There is deliberately no browser SpeechRecognition fallback. */
 export class VoiceHost {
@@ -41,7 +41,7 @@ export class VoiceHost {
       stream = await this.requestMicrophone();
       if (!this.current(generation)) { this.stopTracks(stream); return false; }
       this.stream = stream; this.state = "PREPARING";
-      runtime = await this.createRuntime(stream, { sessionId, onDetection: (d) => this.receiveDetection(d, generation) });
+      runtime = await this.createRuntime(stream, { sessionId, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation) });
       if (!this.current(generation)) { await this.dispose(runtime, stream); return false; }
       // Capture owns a monotonic sample clock even when inference is suspended.
       parseSnapshot({ ...this.session, snapshotId: "ready", registryRevision: 0, publishedAtSample: runtime.nowSample(), sampleRate: runtime.sampleRate, targets: [] });
@@ -67,6 +67,13 @@ export class VoiceHost {
     const detection = parseDetection(value), s = this.session;
     if (detection.sessionId !== s.sessionId || detection.inputEpoch !== s.inputEpoch || detection.audioEpoch !== s.audioEpoch || detection.engineId !== this.runtime.engineId || detection.modelId !== this.runtime.modelId || detection.audioEndSample > this.runtime.nowSample()) return false;
     this.emit({ type: "detection", ...detection }); return true;
+  }
+  receiveFeedback(value, generation) {
+    if (!this.current(generation) || this.state !== "LISTENING" || !this.session) return false;
+    let feedback; try { feedback = parseFeedback(value); } catch { return false; }
+    const s = this.session;
+    if (feedback.sessionId !== s.sessionId || feedback.inputEpoch !== s.inputEpoch || feedback.audioEpoch !== s.audioEpoch || feedback.engineId !== this.runtime.engineId || feedback.modelId !== this.runtime.modelId || feedback.audioEndSample > this.runtime.nowSample()) return false;
+    this.emit({ type: "feedback", ...feedback }); return true;
   }
   applyTargets(value) {
     const snapshot = parseSnapshot(value), generation = this.generation;

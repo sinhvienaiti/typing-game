@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { VoiceHost } from "./host.mjs";
-import { snapshot, detection } from "./fixtures.mjs";
+import { snapshot, detection, feedback } from "./fixtures.mjs";
 const deferred = () => { let resolve; const promise = new Promise((r) => { resolve = r; }); return { promise, resolve }; };
 const tick = () => new Promise((r) => setImmediate(r));
 function setup(changes = {}) {
@@ -24,6 +24,19 @@ test("permission/model readiness alone cannot start recognition before target AC
   const stop = h.stop(); assert.equal(counts.stopped, 1); assert.equal(counts.closed, 1);
   assert.equal(h.receiveDetection(detection(), h.generation - 1), false);
   closing.resolve(); await stop;
+});
+test("decoder feedback is gated, current-session metadata and never a combat detection", async () => {
+  let onFeedback; const s = setup({ createRuntime: async (_stream, options) => { onFeedback = options.onFeedback; return s.runtime; } });
+  await s.h.start(0); assert.equal(onFeedback(feedback()), false);
+  await s.h.applyTargets(snapshot()); s.setNow(3200);
+  for (const changes of [{ sessionId: "old" }, { inputEpoch: 1 }, { audioEpoch: 1 }, { engineId: "other" }, { modelId: "other" }, { audioEndSample: 3300 }, { evidence: "partial" }]) assert.equal(onFeedback(feedback(changes)), false);
+  assert.equal(onFeedback(feedback()), true);
+  assert.equal(s.events.at(-1).type, "feedback"); assert.equal(s.events.some((e) => e.type === "detection"), false);
+  await s.h.suspend(1); assert.equal(onFeedback(feedback()), false);
+  await s.h.resume(1); await s.h.applyTargets(snapshot({ inputEpoch: 1, audioEpoch: 1, snapshotId: "resume" }));
+  assert.equal(onFeedback(feedback()), false);
+  assert.equal(onFeedback(feedback({ inputEpoch: 1, audioEpoch: 1, result: "unrecognized", transcript: null })), true);
+  await s.h.stop(); assert.equal(onFeedback(feedback()), false);
 });
 test("stop while permission is pending disposes a late stream without preparing a decoder", async () => {
   const permission = deferred(); let prepared = 0;

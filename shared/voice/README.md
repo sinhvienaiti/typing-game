@@ -26,6 +26,38 @@ and freshness must use the same monotonically increasing capture-owned clock.
 The future real transport still needs explicit clock anchors; a child wall clock
 or a worker emission timestamp must never masquerade as capture sample time.
 
+## Small in-game feedback panel
+
+The child mounts a compact, non-interactive panel at the lower-right edge. It is
+hidden in Typing and outside combat. A validated `detection` first displays the
+heard keyword with **Checking…**; only the game's outgoing `resolution` may
+change that to **Accepted**. Rejected ownership/eligibility remains explicit.
+This presentation path never calls gameplay completion or records a learning miss.
+
+An injected decoder may call `onFeedback(value)` with the canonical `feedback`
+payload to expose its final transcript even when it found no target. This is
+diagnostic metadata, not a `detection`. Use `result=recognized` with the genuine
+transcript (at most 200 characters); include `detectionId` only if the same final
+utterance generated that candidate. Omitting it means the final mapping found
+no candidate, rather than a match still in progress. `result=unrecognized` requires
+`transcript=null` and `evidence=final-utterance` after a completed speech segment.
+Do not manufacture this event from a silence timeout or guess a nearby target.
+A keyword-only engine may show its genuine validated keyword; it must not invent
+a full ASR transcript. Partial hypotheses are not accepted by this contract.
+
+Feedback follows the same active host/session/input/audio/engine/model fences as
+detections, with ordered capture samples. The child ignores late/duplicate words,
+correlates resolution with the displayed candidate, and clears speech on pause,
+stop or mode change. After four seconds the word collapses to the small listening
+indicator. Text is rendered with `textContent`, announced politely, and kept out
+of save/learning data. Panel layout reserves space above controls on narrow views
+and moves the music toast above it.
+
+There is still no production decoder or enabled Voice selector. The mounted
+adapter does not probe or start automatically. Tests exercise injected final
+metadata and DOM rendering; real-microphone and browser visual acceptance remain
+part of the engine/gameplay release gates.
+
 ## Canonical child copies
 
 ```bash
