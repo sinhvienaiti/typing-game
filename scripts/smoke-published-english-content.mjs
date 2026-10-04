@@ -219,8 +219,8 @@ try {
     fileRuntimeLoader,
     "dialogue",
   );
-  if(karaokeDialogueCount!==20) {
-    errors.push("published Karaoke dialogue activity must expose 20 reviewed dialogues");
+  if(karaokeDialogueCount!==40) {
+    errors.push("published Karaoke dialogue activity must expose 40 reviewed dialogues");
   }
   const karaokeDialogue=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -292,7 +292,7 @@ const report={
     monkeyCorrectionRecords:172,
     monkeyTransformation:5,
     karaokeExamples:5,
-    karaokeDialogues:20,
+    karaokeDialogues:karaokeDialogueCount,
     recallCollocations:560,
     verbPatterns:510,
     phrasalVerbs:280,
