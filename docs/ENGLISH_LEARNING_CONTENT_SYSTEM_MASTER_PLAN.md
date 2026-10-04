@@ -2565,7 +2565,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **50 lexemes + 50 senses (100)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **180 examples + 312 exercises + 10 dialogues + 100 reviewed common mistakes (602)**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **70 lexemes + 70 senses (140)**; `shared/grammar` contains **12 topics**; `shared/sentences` contains **276 examples + 408 exercises + 10 dialogues + 100 reviewed common mistakes (794)**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2658,7 +2658,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **2,344 published rich records**: dictionary 100, grammar 12, sentences 602 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **2,576 published rich records**: dictionary 140, grammar 12, sentences 794 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2707,6 +2707,8 @@ Important green platform runs:
 - #628 — E04 scale batches 19–23 plus the publisher shard-boundary fix passed full Platform CI; phrase runtime is 1,630 and verb patterns reached 510.
 - #629 — fifth reviewed E03 lexical slice passed full Platform CI and raised dictionary runtime to 50 lexemes + 50 senses.
 - #631 — fourth reviewed Tatoeba slice and corrected runtime exercise ordering passed full Platform CI; Tatoeba runtime reached 96 sentence/translation pairs.
+- #636 — fifth reviewed Tatoeba slice plus the sixth reviewed lexical slice passed full Platform CI while preserving generated-runtime reproducibility.
+- #657 — sixth reviewed Tatoeba slice passed full Platform CI; runtime now contains 70 lexemes + 70 senses, 144 Tatoeba pairs, 96 typing-text/cloze pairs and 2,576 rich records total.
 
 Child repositories also passed their relevant CI after E09 integration, including the Monkeytype branch after synchronization with later Vietnamese IME fixes. A dedicated committed-runtime smoke now verifies the first published E05 shards and cross-game adapters in CI.
 
@@ -2714,8 +2716,8 @@ Child repositories also passed their relevant CI after E09 integration, includin
 
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
-- continue review/alignment of the remaining E03 lexical pilot after the first **50 lexemes + 50 senses** have been promoted;
-- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **100/100 reviewed common mistakes**, 96 Tatoeba pairs, 48 reviewed typing-text examples + 48 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
+- continue review/alignment of the remaining E03 lexical pilot after the first **70 lexemes + 70 senses** have been promoted;
+- continue independent grammar, Vietnamese wording, naturalness, CEFR and dedup review for E06 candidate corpora; current E06 promotions cover 72 corrections, 72 transformations, **100/100 reviewed common mistakes**, 144 Tatoeba pairs, 96 reviewed typing-text examples + 96 linked cloze exercises, and 10 reviewed MultiWOZ dialogues / 68 turns;
 - continue promotion in small reviewed slices; E03, E04, E05 and multiple E06 slices now have digest-bound `draft → published` overlays;
 - continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
