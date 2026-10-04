@@ -65,7 +65,7 @@ let voiceRouteGeneration = 0;
 async function handleVoiceMessage(event: MessageEvent<unknown>): Promise<void> {
   const frame = currentFrame, game = currentGame, generation = voiceRouteGeneration;
   if (game?.id !== "space-typing" || !frame?.contentWindow || event.source !== frame.contentWindow || event.origin !== new URL(game.appUrl).origin) return;
-  voiceBridgeLoading ??= import("../../shared/voice/bridge.mjs").then(({ ParentVoiceBridge }) => new ParentVoiceBridge());
+  voiceBridgeLoading ??= Promise.all([import("../../shared/voice/bridge.mjs"), import("./voice/host-factory.mjs")]).then(([{ ParentVoiceBridge }, { createBrowserVoiceHost }]) => new ParentVoiceBridge({ createHost: createBrowserVoiceHost }));
   const bridge = await voiceBridgeLoading;
   if (generation !== voiceRouteGeneration || frame !== currentFrame || game !== currentGame) return;
   voiceBridge = bridge; bridge.handleMessage(event, frame, game);

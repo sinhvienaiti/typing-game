@@ -160,6 +160,10 @@ fi
 echo "[3/5] Refreshing local Space Typing art..."
 prepare_space_art
 
+if [[ "$TARGET" == "all" || "$TARGET" == "space" ]]; then
+  pnpm voice:prepare
+fi
+
 echo "Indexing local background music..."
 pnpm music:index
 

@@ -113,6 +113,8 @@ bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100
 echo "[2/5] Refreshing local Space Typing art..."
 prepare_space_art
 
+pnpm voice:prepare
+
 echo "[3/5] Checking static builds..."
 node scripts/generate-music-index.mjs
 build_if_needed \
@@ -125,6 +127,7 @@ build_if_needed \
   "portal/package.json" \
   "portal/tsconfig.json" \
   "portal/vite.config.ts" \
+  "scripts/offline-vosk-plugin.mjs" \
   "shared/learning" \
   "shared/voice"
 

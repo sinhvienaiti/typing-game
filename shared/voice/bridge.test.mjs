@@ -50,3 +50,12 @@ test("stop replies with the old session ACK and old-session messages cannot oper
   s.send("stop", { sessionId: "session", inputEpoch: 1 }); await new Promise((r) => setImmediate(r));
   assert.equal(s.posted.at(-1).data.type, "typing-game:voice:v1:stopped"); assert.equal(stops, 1);
 });
+
+test("instance-scoped configure cancels a pending host before the child knows its session", () => {
+  let stops = 0; const s = setup({ createHost: () => ({ session: null, start: async () => {}, stop: async () => { stops++; } }) });
+  s.send("hello", { versions: [1] });
+  s.send("configure", { mode: "voice", language: "en", policyVersion: "v2", inputEpoch: 1 });
+  s.send("start", { inputEpoch: 1 });
+  s.send("configure", { mode: "typing", language: "en", policyVersion: "v2", inputEpoch: 2 });
+  assert.equal(stops, 1); assert.equal(s.bridge.host, null);
+});

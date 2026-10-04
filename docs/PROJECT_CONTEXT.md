@@ -4226,3 +4226,36 @@ Portal build: PASS
 ~~~
 
 For future continuation, reconstruct from parent `main` and these gitlinks rather than any older SHA in this document.
+
+
+---
+
+# 88. Space Voice and Warp Charge feature branches (2026-10-04)
+
+For this feature's continuation, use parent `feat/space-voice-platform` and its
+pinned `games/space-typing` commit from child `feat/bgv-integration-current`. This
+feature checkpoint supersedes the earlier foundation-only Voice status on those
+branches; it does not change the main-branch history recorded above.
+
+Offline English Voice/Hybrid, bottom-right mode/Mic controls, transcript feedback,
+semantic completion and separated speaking/profile credit are implemented. Portal
+owns capture and lazy inference. `./dev.sh space` and `./play.sh` prepare the pinned
+model; use https://typing-game.local/space-typing to activate recognition.
+
+Warp Charge V3 uses canonical transactional IndexedDB, a Web Lock writer and
+generation/fence/receipt checks. Active 100, Reserve 300, cost 10, regeneration
+6/12 minutes, opt-in Reserve deficit spending and 8/12/18 SC instant +20 refills
+(maximum three per 04:00 UTC+7 day) are implemented. Practice is free and learning
+only; Campaign economic mutations are isolated from its overlay. Save schema 28
+protects current/future/corrupt saves and supports explicit whole-profile recovery.
+
+Final automated checks: game 253 files / 1,623 tests; shared Voice/Learning 105
+tests; game and Portal builds; real Worker/WASM/model WAV decoding. Graphics
+High/Ultra remain intact. The economy audit has 104 production-formula scenarios
+and documents positive replay net: refills are daily limited acceleration rather
+than a proven SC sink.
+
+Real browser/microphone, visual/device acceptance, recognition corpus, negative
+audio, end-to-end latency and frame benchmarks remain unverified. Start from
+[local test instructions](./SPACE_VOICE_AND_WARP_LOCAL.md), then the child Voice/Warp
+status documents; do not infer release certification from the automated suite.

@@ -66,6 +66,7 @@ export class ParentVoiceBridge {
       void host.stop().then(() => { if (this.host === null) this.post(b, "stopped", { sessionId: session.sessionId, inputEpoch: session.inputEpoch }); }).catch(() => {});
     }
     else if (op === "targets") invoke(host.applyTargets(message));
+    else if (op === "vocabulary-check") host.checkVocabulary(message);
     else if (op === "audio-output-intent") invoke(host.audioOutputIntent(message.generation));
     else if (op === "audio-output-ended") invoke(host.audioOutputEnded(message.generation));
     // Child resolution is diagnostic; it never authorizes the parent to mutate a game.

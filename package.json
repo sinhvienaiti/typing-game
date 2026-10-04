@@ -48,7 +48,9 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "voice:test": "node --test shared/voice/*.test.mjs",
     "voice:sync": "node scripts/sync-space-voice-contract.mjs",
-    "voice:check": "node scripts/sync-space-voice-contract.mjs --check"
+    "voice:check": "node scripts/sync-space-voice-contract.mjs --check",
+    "voice:prepare": "node scripts/prepare-voice-model.mjs",
+    "voice:smoke": "node scripts/voice-worker-smoke.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

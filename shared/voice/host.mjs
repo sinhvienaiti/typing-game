@@ -2,11 +2,11 @@ import { parseSnapshot, parseDetection, parseFeedback } from "./protocol.mjs";
 
 /** Injected local capture/decoder only. There is deliberately no browser SpeechRecognition fallback. */
 export class VoiceHost {
-  constructor({ requestMicrophone, createRuntime, createSessionId, onEvent = () => {}, waitTail = (ms) => new Promise((r) => setTimeout(r, ms)), echoTailMs = 300 }) {
-    if (![requestMicrophone, createRuntime, createSessionId, onEvent, waitTail].every((f) => typeof f === "function") || !Number.isFinite(echoTailMs) || echoTailMs < 0) throw new TypeError("invalid local host dependencies");
-    Object.assign(this, { requestMicrophone, createRuntime, createSessionId, onEvent, waitTail, echoTailMs });
+  constructor({ requestMicrophone, createRuntime, createSessionId, cancelMicrophone = () => {}, onEvent = () => {}, waitTail = (ms) => new Promise((r) => setTimeout(r, ms)), echoTailMs = 300 }) {
+    if (![requestMicrophone, createRuntime, createSessionId, cancelMicrophone, onEvent, waitTail].every((f) => typeof f === "function") || !Number.isFinite(echoTailMs) || echoTailMs < 0) throw new TypeError("invalid local host dependencies");
+    Object.assign(this, { requestMicrophone, createRuntime, createSessionId, cancelMicrophone, onEvent, waitTail, echoTailMs });
     this.state = "IDLE"; this.generation = 0; this.session = null; this.runtime = null; this.stream = null;
-    this.applyQueue = Promise.resolve(); this.outputGeneration = 0; this.outputClosedGeneration = 0; this.outputActive = false; this.resuming = false;
+    this.applyQueue = Promise.resolve(); this.pendingTargets = 0; this.outputGeneration = 0; this.outputClosedGeneration = 0; this.outputActive = false; this.resuming = false;
   }
   current(generation) { return generation === this.generation; }
   emit(event) { this.onEvent(event); }
@@ -20,6 +20,7 @@ export class VoiceHost {
     const runtime = this.runtime, stream = this.stream, session = this.session;
     // Invalidate synchronously, before teardown can yield to late permission/results.
     this.session = null; this.runtime = null; this.stream = null; this.state = "STOPPING";
+    this.cancelMicrophone();
     try { await this.dispose(runtime, stream); }
     finally {
       if (this.current(generation)) { this.state = "IDLE"; if (session) this.emit({ type: "stopped", ...session }); }
@@ -30,6 +31,7 @@ export class VoiceHost {
     const generation = ++this.generation;
     const previousRuntime = this.runtime, previousStream = this.stream;
     this.session = null; this.runtime = null; this.stream = null; this.state = "STOPPING";
+    this.cancelMicrophone();
     await this.dispose(previousRuntime, previousStream);
     if (!this.current(generation)) return false;
     const sessionId = this.createSessionId();
@@ -41,7 +43,7 @@ export class VoiceHost {
       stream = await this.requestMicrophone();
       if (!this.current(generation)) { this.stopTracks(stream); return false; }
       this.stream = stream; this.state = "PREPARING";
-      runtime = await this.createRuntime(stream, { sessionId, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation) });
+      runtime = await this.createRuntime(stream, { sessionId, onDetection: (d) => this.receiveDetection(d, generation), onFeedback: (f) => this.receiveFeedback(f, generation), onClock: (sample) => { if (this.current(generation) && this.session && this.runtime && Number.isSafeInteger(sample) && sample >= 0) this.emit({ type: "clock", ...this.session, sample }); } });
       if (!this.current(generation)) { await this.dispose(runtime, stream); return false; }
       // Capture owns a monotonic sample clock even when inference is suspended.
       parseSnapshot({ ...this.session, snapshotId: "ready", registryRevision: 0, publishedAtSample: runtime.nowSample(), sampleRate: runtime.sampleRate, targets: [] });
@@ -60,7 +62,13 @@ export class VoiceHost {
     }
   }
   emitReady() {
-    this.emit({ type: "ready", ...this.session, engineId: this.runtime.engineId, modelId: this.runtime.modelId, sampleRate: this.runtime.sampleRate });
+    this.emit({ type: "ready", ...this.session, engineId: this.runtime.engineId, modelId: this.runtime.modelId, sampleRate: this.runtime.sampleRate, fromSample: this.runtime.nowSample() });
+  }
+  checkVocabulary(value) {
+    const s = this.session;
+    if (!s || !this.runtime || !["READY", "LISTENING", "SUSPENDED"].includes(this.state) || value.sessionId !== s.sessionId || value.inputEpoch !== s.inputEpoch || value.audioEpoch !== s.audioEpoch) return false;
+    const unsupported = this.runtime.unsupportedForms?.(value.forms) ?? value.forms;
+    this.emit({ type: "vocabulary-checked", ...s, requestId: value.requestId, unsupported }); return true;
   }
   receiveDetection(value, generation) {
     if (!this.current(generation) || this.state !== "LISTENING" || !this.session) return false;
@@ -77,6 +85,8 @@ export class VoiceHost {
   }
   applyTargets(value) {
     const snapshot = parseSnapshot(value), generation = this.generation;
+    if (this.pendingTargets >= 4) return Promise.reject(new Error("target-update-backpressure"));
+    this.pendingTargets++;
     const apply = async () => {
       const s = this.session;
       if (!this.current(generation) || !s || !["READY", "LISTENING"].includes(this.state) || snapshot.sessionId !== s.sessionId || snapshot.inputEpoch !== s.inputEpoch || snapshot.audioEpoch !== s.audioEpoch || snapshot.sampleRate !== this.runtime.sampleRate || snapshot.publishedAtSample > this.runtime.nowSample()) return false;
@@ -96,7 +106,7 @@ export class VoiceHost {
       }
       return true;
     };
-    const task = this.applyQueue.then(apply);
+    const task = this.applyQueue.then(apply).finally(() => { this.pendingTargets--; });
     // A failed compile does not poison the queue, nor silently make targets ready.
     this.applyQueue = task.catch(() => {}); return task;
   }

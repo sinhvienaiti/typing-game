@@ -52,6 +52,18 @@ test("stop during preparation disposes a late worker and cannot resurrect the se
   await h.stop(); preparation.resolve(runtime); assert.equal(await start, false);
   assert.equal(h.state, "IDLE"); assert.equal(counts.closed, 1);
 });
+
+test("cancelling pending permission releases device ownership immediately and fences late capture", async () => {
+  const permission = deferred(); let owner = false, cancellations = 0;
+  const s = setup({
+    requestMicrophone: () => { owner = true; return permission.promise; },
+    cancelMicrophone: () => { owner = false; cancellations++; },
+  });
+  const start = s.h.start(0); await tick(); assert.equal(owner, true);
+  await s.h.stop(); assert.equal(owner, false); assert.ok(cancellations >= 2);
+  permission.resolve(s.stream); assert.equal(await start, false); assert.equal(s.counts.stopped, 1);
+  assert.equal(s.events.some(event => event.type === "ready"), false);
+});
 test("latest start wins before either permission request can race", async () => {
   let sessions = 0; const { h } = setup({ createSessionId: () => `session-${++sessions}` });
   const a = h.start(0), b = h.start(1); assert.deepEqual(await Promise.all([a, b]), [false, true]);
