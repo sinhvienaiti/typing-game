@@ -58,8 +58,8 @@ const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith(
 const dialogues=sentenceRecords.filter(record=>String(record.id??"").startsWith("dlg."));
 const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").startsWith("err."));
 
-if (dictionaryManifest.count!==160) errors.push("published dictionary runtime must contain 160 E03 records");
-if (lexemes.length!==80||senses.length!==80) errors.push("published E03 runtime split must be 80 lexemes + 80 senses");
+if (dictionaryManifest.count!==180) errors.push("published dictionary runtime must contain 180 E03 records");
+if (lexemes.length!==90||senses.length!==90) errors.push("published E03 runtime split must be 90 lexemes + 90 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
 if (sentenceManifest.count!==794) errors.push("published sentence runtime must contain 794 reviewed records");
 if (topics.length!==12||examples.length!==276||exercises.length!==408||dialogues.length!==10||commonMistakes.length!==100) {
