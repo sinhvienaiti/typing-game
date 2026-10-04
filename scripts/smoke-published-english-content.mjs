@@ -61,13 +61,13 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==100) errors.push("published dictionary runtime must contain 100 E03 records");
 if (lexemes.length!==50||senses.length!==50) errors.push("published E03 runtime split must be 50 lexemes + 50 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==506) errors.push("published sentence runtime must contain 506 reviewed records");
-if (topics.length!==12||examples.length!==132||exercises.length!==264||dialogues.length!==10||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 132 examples + 264 exercises + 10 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==554) errors.push("published sentence runtime must contain 554 reviewed records");
+if (topics.length!==12||examples.length!==156||exercises.length!==288||dialogues.length!==10||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 156 examples + 288 exercises + 10 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
-if (tatoebaExamples.length!==72||tatoebaTranslations.length!==72) errors.push("published Tatoeba slices must expose 72 sentences + 72 translations");
+if (tatoebaExamples.length!==96||tatoebaTranslations.length!==96) errors.push("published Tatoeba slices must expose 96 sentences + 96 translations");
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
 if (typingTextExamples.length!==24||typingTextCloze.length!==24) errors.push("published typing-text slice must expose 24 examples + 24 cloze exercises");
