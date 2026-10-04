@@ -61,9 +61,9 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==12) errors.push("published grammar runtime must contain 12 E05 topics");
-if (sentenceManifest.count!==1544) errors.push("published sentence runtime must contain 1544 reviewed records");
-if (topics.length!==12||examples.length!==636||exercises.length!==768||dialogues.length!==40||commonMistakes.length!==100) {
-  errors.push("published runtime split must be 12 topics + 636 examples + 768 exercises + 40 dialogues + 100 common mistakes");
+if (sentenceManifest.count!==1600) errors.push("published sentence runtime must contain 1600 reviewed records");
+if (topics.length!==12||examples.length!==636||exercises.length!==824||dialogues.length!==40||commonMistakes.length!==100) {
+  errors.push("published runtime split must be 12 topics + 636 examples + 824 exercises + 40 dialogues + 100 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -73,8 +73,8 @@ const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith(
 if (typingTextExamples.length!==300||typingTextCloze.length!==300) errors.push("published typing-text slice must expose 300 examples + 300 cloze exercises");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
-if (correctionExercises.length!==72||transformationExercises.length!==72) {
-  errors.push("published E06 reviewed slice must expose 72 correction + 72 transformation exercises");
+if (correctionExercises.length!==100||transformationExercises.length!==100) {
+  errors.push("published E06 reviewed slice must expose 100 correction + 100 transformation exercises");
 }
 
 const senseIds=new Set(senses.map(record=>record.id));
@@ -191,7 +191,7 @@ try {
   }
 
   const monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
-  if(monkeyCorrectionCount!==172) errors.push("published Monkeytype error-correction activity must expose 72 corrections + 100 common mistakes");
+  if(monkeyCorrectionCount!==200) errors.push("published Monkeytype error-correction activity must expose 100 corrections + 100 common mistakes");
   const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
     {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
@@ -289,7 +289,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
-    monkeyCorrectionRecords:172,
+    monkeyCorrectionRecords:200,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:40,
