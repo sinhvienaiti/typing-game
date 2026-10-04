@@ -31,10 +31,16 @@ export class OfflineDecoder {
     listeners.push(listener);
     this.listeners.set(event, listeners);
   }
-  createRecognizer(sampleRate: number): OfflineRecognizer {
+  /**
+   * `grammar` limits recognition to these spoken phrases (plus "[unk]" for
+   * anything else). Without it Vosk searches its whole English vocabulary,
+   * which stalls up to ~1 s at each utterance end.
+   */
+  createRecognizer(sampleRate: number, grammar?: readonly string[]): OfflineRecognizer {
     const id = `recognizer:${++this.sequence}`;
     const recognizer = new OfflineRecognizer(this.worker, id, sampleRate, () =>
       this.recognizers.delete(id),
+      grammar !== undefined && grammar.length > 0 ? JSON.stringify([...grammar, "[unk]"]) : undefined,
     );
     this.recognizers.set(id, recognizer);
     return recognizer;
@@ -57,6 +63,7 @@ export class OfflineRecognizer {
     private id: string,
     sampleRate: number,
     private unregister: () => void,
+    grammar?: string,
   ) {
     this.readyPromise = new Promise((resolve, reject) => {
       this.readyResolve = resolve;
@@ -67,7 +74,12 @@ export class OfflineRecognizer {
       10000,
     );
     void this.readyPromise.catch(() => {});
-    worker.postMessage({ action: "create", recognizerId: id, sampleRate });
+    worker.postMessage({
+      action: "create",
+      recognizerId: id,
+      sampleRate,
+      ...(grammar === undefined ? {} : { grammar }),
+    });
   }
   setWords(value: boolean): void {
     this.worker.postMessage({

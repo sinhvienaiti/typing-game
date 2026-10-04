@@ -19,8 +19,8 @@ function setup() {
       signal.addEventListener("abort", () => reject(signal.reason), { once: true });
     }),
   });
-  const model = { terminate() {}, createRecognizer() {
-    const rec = { removed: 0, handlers: {}, on(name, cb) { this.handlers[name] = cb; }, setWords() {}, remove() { this.removed++; } };
+  const model = { terminate() {}, createRecognizer(_rate, grammar) {
+    const rec = { grammar, removed: 0, handlers: {}, on(name, cb) { this.handlers[name] = cb; }, setWords() {}, remove() { this.removed++; } };
     recognizers.push(rec); return rec;
   } };
   const audio = { close: async () => {} }, node = { disconnect() {} };
@@ -85,5 +85,80 @@ test("negative warmup origin accepts live words but never exports synthetic warm
   assert.equal(s.detections[0].audioStartSample, 9600);
   assert.equal(s.feedback.length, 1);
   assert.equal(s.feedback[0].transcript, "red");
+  await s.runtime.close();
+});
+
+const flushTurns = async () => { for (let i = 0; i < 6; i++) await Promise.resolve(); };
+
+test("recognizer listens only to the checked vocabulary and target words (grammar)", async () => {
+  const s = setup();
+  s.runtime.vocabulary = new Set(["red", "blue", "green"]);
+  s.runtime.addGrammarForms(["red", "blue", "purple"]);
+  const preparing = s.runtime.resume();
+  s.preparations[0].resolve(); await preparing;
+  assert.deepEqual([...s.recognizers[0].grammar], ["red", "blue"]);
+  await s.runtime.close();
+});
+
+test("a new word while listening rebuilds the recognizer, but never mid-utterance", async () => {
+  const s = setup();
+  s.runtime.vocabulary = new Set(["red", "blue", "green"]);
+  s.runtime.addGrammarForms(["red"]);
+  const preparing = s.runtime.resume();
+  s.preparations[0].resolve(); await preparing;
+  // The player is saying something: the rebuild waits.
+  s.recognizers[0].handlers.partialresult({ result: { partial: "re" } });
+  s.runtime.addGrammarForms(["green"]);
+  await flushTurns();
+  assert.equal(s.recognizers.length, 1);
+  // Utterance ends: now the recognizer is rebuilt with the new word.
+  s.recognizers[0].handlers.result({ result: { text: "", result: [] } });
+  await flushTurns();
+  assert.equal(s.recognizers.length, 2);
+  assert.equal(s.recognizers[0].removed, 1);
+  assert.deepEqual([...s.recognizers[1].grammar], ["red", "green"]);
+  s.preparations[1].resolve(); await flushTurns();
+  assert.equal(s.gates.at(-1).enabled, true);
+  await s.runtime.close();
+});
+
+test("an overload drops that utterance and restarts; only repeated overloads end the session", async () => {
+  const s = setup();
+  const preparing = s.runtime.resume();
+  s.preparations[0].resolve(); await preparing;
+  for (let i = 1; i <= 3; i++) {
+    s.runtime.captureMessage({ type: "overflow", generation: s.runtime.generation, sample: 1600 * i });
+    await flushTurns();
+    assert.equal(s.errors.length, 0, "overload " + i + " recovers");
+    assert.equal(s.recognizers.length, i + 1);
+    s.preparations[i].resolve(); await flushTurns();
+  }
+  s.runtime.captureMessage({ type: "overflow", generation: s.runtime.generation, sample: 99999 });
+  assert.equal(s.errors.length, 1);
+  assert.match(s.errors[0], /overloaded/);
+  await s.runtime.close();
+});
+
+test("overflow while paused is ignored", async () => {
+  const s = setup();
+  const preparing = s.runtime.resume();
+  s.preparations[0].resolve(); await preparing;
+  await s.runtime.suspend();
+  s.runtime.captureMessage({ type: "overflow", generation: s.runtime.generation, sample: 1600 });
+  await flushTurns();
+  assert.equal(s.errors.length, 0);
+  assert.equal(s.recognizers.length, 1);
+  await s.runtime.close();
+});
+
+test("grammar catch-all [unk] is never reported as a heard word", async () => {
+  const s = setup(), preparing = s.runtime.resume();
+  s.preparations[0].resolve(); await preparing;
+  await s.runtime.applyTargets(snapshot());
+  s.runtime.baseSample = 0;
+  s.runtime.clock = 40000;
+  s.runtime.final({ text: "[unk]", result: [{ word: "[unk]", start: 1.1, end: 1.3, conf: 1 }] }, s.runtime.generation);
+  assert.equal(s.feedback.length, 0);
+  assert.equal(s.detections.length, 0);
   await s.runtime.close();
 });

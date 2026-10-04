@@ -80,6 +80,9 @@ export class VoiceHost {
     const s = this.session;
     if (!s || !this.runtime || !["READY", "LISTENING", "SUSPENDED"].includes(this.state) || value.sessionId !== s.sessionId || value.inputEpoch !== s.inputEpoch || value.audioEpoch !== s.audioEpoch) return false;
     const unsupported = this.runtime.unsupportedForms?.(value.forms) ?? value.forms;
+    // The checked vocabulary becomes the recognizer grammar (fast, accurate decoding).
+    const rejected = new Set(unsupported);
+    this.runtime.addGrammarForms?.(value.forms.filter((form) => !rejected.has(form)));
     this.emit({ type: "vocabulary-checked", ...s, requestId: value.requestId, unsupported }); return true;
   }
   receiveDetection(value, generation) {

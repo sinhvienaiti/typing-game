@@ -73,6 +73,15 @@ byte into `games/space-typing/src/input/platform`, with a SHA-256 manifest. Do n
 edit these child files by hand. CI checks the pinned child against canonical
 parent source. Updating the parent requires the child commit and gitlink to agree.
 
+## Recognition grammar and overload policy
+
+The Portal runtime recognizes only the checked vocabulary and supported target
+forms (Vosk grammar plus `[unk]`); a new form rebuilds the recognizer after the
+current utterance. Capture allows 3 s of undecoded audio. An overflow drops that
+utterance and restarts the recognizer; more than 3 overloads in 20 s fail the
+session. Measurements and the end-to-end fake-microphone check (`pnpm voice:e2e`)
+are in `docs/SPACE_VOICE_AND_WARP_LOCAL.md`.
+
 ## Release gate
 
 Do not install a production engine factory until there is a pinned WASM/model/

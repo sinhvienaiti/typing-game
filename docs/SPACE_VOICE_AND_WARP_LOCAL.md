@@ -55,6 +55,38 @@ preparation has 90 seconds, followed by a fresh 15-second recognizer deadline.
 Audio activation is abortable and bounded to 10 seconds. Model progress is shown
 in the existing compact control, and failed lazy imports can be retried.
 
+## "Offline speech processing overloaded" fix (2026-10-05)
+
+Symptom: saying any word paused the game and showed "Offline speech processing
+overloaded. Close heavy game tabs, then reconnect."
+
+Root cause, measured with the pinned Vosk worker on a 16 kHz spoken-word fixture
+in 100 ms blocks:
+
+| Recognizer | Block decode p95 / worst | Peak backlog | Accuracy |
+|---|---|---|---|
+| Open vocabulary (before) | 214 ms / 951 ms | 12 blocks, over the 10-block cap | "comet" heard as "comment" |
+| Grammar of 154 game words (after) | 98 ms / 209 ms | 2 blocks | 15/15 |
+
+Open-vocabulary Vosk stalls up to ~1 s when it finalizes an utterance, so the
+1-second capture cap overflowed right after each spoken word. The runtime then
+failed hard, and `voice-session.ts` paused the game and stopped the mic.
+
+Fix:
+
+- **Grammar:** the recognizer only listens for the vocabulary the game checks
+  (`vocabulary-check`) plus every supported on-screen target, with `[unk]` as a
+  catch-all (`portal/src/voice/decoder.ts`, `runtime.ts`, `shared/voice/host.mjs`).
+  A target word outside the grammar rebuilds the recognizer, never in the middle
+  of an utterance. `[unk]` words are never reported.
+- **Backlog:** the cap is 3 s (`capture-policy.ts`, 30 blocks of 100 ms).
+- **Overload recovery:** an overflow drops that utterance and restarts the
+  recognizer. Only more than 3 overloads within 20 s end the session with the
+  old message.
+- **End-to-end check without a microphone:** `pnpm dev:portal`, then
+  `pnpm voice:e2e`. Add `-- --stress` to block the page main thread 30 ms of
+  every 40 ms. Both runs: 22–23 detections in 30 s, every word heard, no error.
+
 ## Warp behavior to test
 
 Campaign/replay/Ascension/each rewarded Hidden deployment costs 10. Active has a

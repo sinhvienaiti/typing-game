@@ -1,5 +1,6 @@
-// 100 ms blocks; one second is a hard outstanding-audio ceiling, not a batching
-// delay. Each block is dispatched immediately. Vosk decoding is bursty (notably
-// its first feature window); the old 3-block cap disconnected healthy startup.
+// 100 ms blocks, each dispatched immediately. Three seconds is the outstanding-
+// audio ceiling: decoding is bursty (the first feature window, and the final
+// lattice at each utterance end), and the runtime recovers from an overflow by
+// dropping that utterance and restarting the recognizer, not by failing.
 export const CAPTURE_BLOCK_SAMPLES = 1600;
-export const CAPTURE_MAX_PENDING = 10;
+export const CAPTURE_MAX_PENDING = 30;

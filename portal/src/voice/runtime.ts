@@ -20,6 +20,14 @@ type Callbacks = {
 };
 type Pcm = { generation: number; sample: number; data: Float32Array };
 
+/** Grammar size cap (a stage vocabulary is a few hundred forms). */
+const GRAMMAR_LIMIT = 4000;
+/** Overloads recovered by a fresh recognizer before the session gives up. */
+const OVERLOAD_LIMIT = 3;
+const OVERLOAD_WINDOW_MS = 20000;
+const OVERLOAD_MESSAGE =
+  "Offline speech processing overloaded. Close heavy game tabs, then reconnect.";
+
 /** Vosk owns its WASM Worker; the Portal only transports bounded capture blocks. */
 export class BrowserVoiceRuntime {
   readonly engineId = "vosk-browser-0.0.8-memoryfs-v1-asr";
@@ -41,6 +49,21 @@ export class BrowserVoiceRuntime {
   private modelRelease: (() => void) | null = null;
   private trackEnded: (() => void) | null = null;
   private vocabulary = new Set<string>();
+  /**
+   * Spoken forms the recognizer listens for: the stage vocabulary checked by
+   * the game plus every supported on-screen target. Recognizing only these
+   * keeps Vosk well under real time (measured: p95 98 ms per 100 ms block
+   * against 214 ms, worst 209 ms against 951 ms with the open vocabulary).
+   */
+  private grammar = new Set<string>();
+  private grammarRestart: Promise<void> | null = null;
+  /** Grammar grew while a rebuild ran, or while the player was mid-word. */
+  private grammarDirty = false;
+  /** The latest partial result had words (an utterance is in progress). */
+  private speaking = false;
+  /** The host wants audio decoded (between its resume and suspend). */
+  private wanted = false;
+  private overloads: number[] = [];
   private constructor(
     private model: OfflineDecoder,
     private audio: AudioContext,
@@ -166,6 +189,57 @@ export class BrowserVoiceRuntime {
     void this.suspend();
     this.callbacks.onError(text);
   }
+  /**
+   * Decoding fell behind: drop the backlog (that utterance) and continue with
+   * a fresh recognizer. Only repeated overloads end the session.
+   */
+  private overloaded(): void {
+    const now = performance.now();
+    this.overloads = this.overloads.filter((at) => now - at < OVERLOAD_WINDOW_MS);
+    this.overloads.push(now);
+    if (this.overloads.length > OVERLOAD_LIMIT) {
+      this.fail(OVERLOAD_MESSAGE);
+      return;
+    }
+    void this.restartRecognizer().catch(() => this.fail(OVERLOAD_MESSAGE));
+  }
+  /** Halts decoding now (synchronously) and, if still wanted, prepares a new recognizer. */
+  private async restartRecognizer(): Promise<void> {
+    if (this.closed || this.failed) return;
+    await this.halt();
+    if (!this.wanted || this.closed || this.failed) return;
+    await this.startDecoding();
+  }
+  /** Adds supported spoken forms to the grammar; a live recognizer is rebuilt to hear them. */
+  addGrammarForms(forms: readonly string[]): void {
+    let added = false;
+    for (const form of forms) {
+      if (this.grammar.size >= GRAMMAR_LIMIT) break;
+      if (this.grammar.has(form) || this.unsupportedForms([form]).length > 0) continue;
+      this.grammar.add(form);
+      added = true;
+    }
+    if (added && this.enabled) this.scheduleGrammarRestart();
+  }
+  /**
+   * One rebuild for every form added in this turn. Never cuts a word the
+   * player is saying: mid-utterance it waits for that utterance's result.
+   */
+  private scheduleGrammarRestart(): void {
+    if (this.grammarRestart || this.speaking) {
+      this.grammarDirty = true;
+      return;
+    }
+    this.grammarDirty = false;
+    const restart = Promise.resolve()
+      .then(() => this.restartRecognizer())
+      .catch(() => this.fail("Speech recognizer could not reload its vocabulary."))
+      .finally(() => {
+        if (this.grammarRestart === restart) this.grammarRestart = null;
+        if (this.grammarDirty && this.enabled) this.scheduleGrammarRestart();
+      });
+    this.grammarRestart = restart;
+  }
   private captureMessage(message: {
     type: string;
     sample?: number;
@@ -177,8 +251,7 @@ export class BrowserVoiceRuntime {
       this.clock = Math.max(this.clock, message.sample!);
     this.callbacks.onClock(this.clock);
     if (message.type === "overflow") {
-      if (message.generation === this.generation)
-        this.fail("Offline speech processing overloaded. Close heavy game tabs, then reconnect.");
+      if (message.generation === this.generation && this.enabled) this.overloaded();
       return;
     }
     if (
@@ -190,7 +263,7 @@ export class BrowserVoiceRuntime {
     )
       return;
     if (this.pending.length >= CAPTURE_MAX_PENDING) {
-      this.fail("Offline speech processing overloaded. Close heavy game tabs, then reconnect.");
+      this.overloaded();
       return;
     }
     this.baseSample ??= this.clock - message.data.length - WARMUP_SAMPLES;
@@ -215,8 +288,9 @@ export class BrowserVoiceRuntime {
     )
       return;
     // Calibration is never user evidence, including a word crossing the gate.
+    // "[unk]" is the grammar's catch-all for speech outside the target words.
     const words = (result.result ?? []).filter(word =>
-      Number.isFinite(word.start) && word.start * this.sampleRate >= WARMUP_SAMPLES);
+      word.word !== "[unk]" && Number.isFinite(word.start) && word.start * this.sampleRate >= WARMUP_SAMPLES);
     const transcript = words.map(word => word.word).join(" ").trim().slice(0, 200);
     // Empty Vosk endpoints without timestamped lexical evidence are silence, not a failed attempt.
     if (!words.length || !transcript) return;
@@ -291,6 +365,7 @@ export class BrowserVoiceRuntime {
       throw new Error("Voice target history overflow");
     const supports = (forms: string[]) =>
       this.unsupportedForms(forms).length === 0;
+    this.addGrammarForms(snapshot.targets.filter((t) => supports(t.forms)).flatMap((t) => t.forms));
     return {
       ready: snapshot.targets
         .filter((t) => supports(t.forms))
@@ -308,7 +383,13 @@ export class BrowserVoiceRuntime {
     );
   }
   async suspend(): Promise<void> {
+    this.wanted = false;
+    await this.halt();
+  }
+  /** Stops decoding without changing what the host asked for. */
+  private async halt(): Promise<void> {
     this.enabled = false;
+    this.speaking = false;
     this.resumeTask = null;
     this.generation++;
     this.recognizerPreparation?.abort();
@@ -329,6 +410,10 @@ export class BrowserVoiceRuntime {
     this.context = null;
   }
   resume(): Promise<void> {
+    this.wanted = true;
+    return this.startDecoding();
+  }
+  private startDecoding(): Promise<void> {
     if (this.closed || this.failed || this.enabled) return Promise.resolve();
     if (this.resumeTask) return this.resumeTask;
     const task = this.prepareAndResume();
@@ -340,7 +425,12 @@ export class BrowserVoiceRuntime {
   }
   private async prepareAndResume(): Promise<void> {
     const generation = ++this.generation;
-    const recognizer = this.model.createRecognizer(this.sampleRate);
+    const grammarSize = this.grammar.size;
+    this.grammarDirty = false;
+    const recognizer = this.model.createRecognizer(
+      this.sampleRate,
+      grammarSize > 0 ? [...this.grammar] : undefined,
+    );
     this.recognizer = recognizer;
     const preparation = new AbortController();
     this.recognizerPreparation = preparation;
@@ -358,19 +448,29 @@ export class BrowserVoiceRuntime {
       { if (generation === this.generation) this.fail(message.error ?? "Speech recognizer stopped"); },
     );
     recognizer.setWords(true);
-    recognizer.on("partialresult", () => this.acknowledge(generation));
-    recognizer.on("result", (message) =>
+    recognizer.on("partialresult", (message) => {
+      if (generation === this.generation)
+        this.speaking = Boolean((message.result as { partial?: string } | undefined)?.partial);
+      this.acknowledge(generation);
+    });
+    recognizer.on("result", (message) => {
       this.final(
         ("result" in message ? message.result : {}) as {
           text?: string;
           result?: FinalWord[];
         },
         generation,
-      ),
-    );
+      );
+      if (generation !== this.generation) return;
+      this.speaking = false;
+      // A grammar rebuild that waited for this utterance runs now.
+      if (this.grammarDirty && this.enabled) this.scheduleGrammarRestart();
+    });
     if (this.closed || generation !== this.generation) return;
     this.enabled = true;
     this.capture.port.postMessage({ type: "gate", enabled: true, generation });
+    // Words that arrived while this recognizer was warming up need a rebuild.
+    if (this.grammar.size !== grammarSize) this.scheduleGrammarRestart();
   }
   async close(): Promise<void> {
     if (this.closed) return;

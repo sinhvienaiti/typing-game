@@ -164,3 +164,16 @@ test("a duplicate TTS ended event cannot resume a subsequent gameplay pause", as
   await h.audioOutputIntent(1); await h.audioOutputEnded(1); await h.suspend(1);
   assert.equal(await h.audioOutputEnded(1), false); assert.equal(h.state, "SUSPENDED"); await h.stop();
 });
+
+test("checked vocabulary becomes the recognizer grammar (supported forms only)", async () => {
+  const s = setup();
+  const added = [];
+  s.runtime.unsupportedForms = (forms) => forms.filter((form) => form === "zzz");
+  s.runtime.addGrammarForms = (forms) => added.push(...forms);
+  await s.h.start(0);
+  const session = s.h.session;
+  assert.equal(s.h.checkVocabulary({ ...session, requestId: "v1", forms: ["red", "zzz", "blue"] }), true);
+  assert.deepEqual(added, ["red", "blue"]);
+  assert.deepEqual(s.events.at(-1).unsupported, ["zzz"]);
+  await s.h.stop();
+});

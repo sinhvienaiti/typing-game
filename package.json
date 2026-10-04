@@ -50,7 +50,8 @@
     "voice:sync": "node scripts/sync-space-voice-contract.mjs",
     "voice:check": "node scripts/sync-space-voice-contract.mjs --check",
     "voice:prepare": "node scripts/prepare-voice-model.mjs",
-    "voice:smoke": "node scripts/voice-worker-smoke.mjs"
+    "voice:smoke": "node scripts/voice-worker-smoke.mjs",
+    "voice:e2e": "node scripts/voice-e2e-fake-mic.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

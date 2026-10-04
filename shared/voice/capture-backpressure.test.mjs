@@ -20,7 +20,8 @@ function capture() {
   const audio = blocks => { for (let i = 0; i < blocks; i++) node.process([[new Float32Array(CAPTURE_BLOCK_SAMPLES)]]); };
   return { messages, send, audio };
 }
-test("capture tolerates bursty decode but has a hard one-second outstanding audio cap", () => {
+test("capture tolerates bursty decode but has a hard three-second outstanding audio cap", () => {
+  assert.equal(CAPTURE_MAX_PENDING * CAPTURE_BLOCK_SAMPLES, 3 * 16000);
   const c = capture();
   c.send({ type: "gate", generation: 1, enabled: true });
   c.audio(CAPTURE_MAX_PENDING + 1);
