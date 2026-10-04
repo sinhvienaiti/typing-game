@@ -228,14 +228,19 @@ if (reviewedE06Exercises) {
   const expectedReviewedExercises=batchExpectedCount("e06.grammar-reviewed-slice","reviewed-exercises");
   if (expectedReviewedExercises===null||reviewedE06Exercises.records.length!==expectedReviewedExercises) errors.push("E06 reviewed exercise slice must match the controlled batch expectedCount");
   const ids=new Set();
-  const topicCounts=new Map();
+  const topicCounts=new Map(),correctionTopicCounts=new Map(),transformationTopicCounts=new Map();
   let corrections=0,transformations=0;
   for (const exercise of reviewedE06Exercises.records) {
     if (exercise.quality?.state!=="draft") errors.push(exercise.id+": E06 reviewed source must remain draft; publication is ledger-overlay only");
     if (ids.has(exercise.id)) errors.push(exercise.id+": duplicate E06 reviewed exercise id");
     ids.add(exercise.id);
-    if (exercise.type==="error-correction") corrections++;
-    else if (exercise.type==="transformation") transformations++;
+    if (exercise.type==="error-correction") {
+      corrections++;
+      if (grammarId) correctionTopicCounts.set(grammarId,(correctionTopicCounts.get(grammarId)??0)+1);
+    } else if (exercise.type==="transformation") {
+      transformations++;
+      if (grammarId) transformationTopicCounts.set(grammarId,(transformationTopicCounts.get(grammarId)??0)+1);
+    }
     else errors.push(exercise.id+": E06 reviewed slice supports correction/transformation only");
     const grammarId=(exercise.targetIds??[]).find(id=>id.startsWith("gr."));
     if (!grammarId||!allIds.has(grammarId)) errors.push(exercise.id+": invalid grammar target");
@@ -246,10 +251,15 @@ if (reviewedE06Exercises) {
   if (!Number.isInteger(expectedPerType)||corrections!==expectedPerType||transformations!==expectedPerType) {
     errors.push("E06 reviewed slice must remain evenly split between corrections and transformations");
   }
-  const topicTotal=grammarPilot?.records?.length??0;
-  const expectedPerTopic=expectedReviewedExercises===null||topicTotal===0?null:expectedReviewedExercises/topicTotal;
-  if (!Number.isInteger(expectedPerTopic)) errors.push("E06 reviewed slice controlled count must divide evenly across published grammar topics");
-  else for (const topic of grammarPilot?.records??[]) if ((topicCounts.get(topic.id)??0)!==expectedPerTopic) errors.push("E06 reviewed slice must contain "+expectedPerTopic+" exercises for "+topic.id);
+  if (corrections!==100||transformations!==100) errors.push("E06 grammar pilot completion requires exactly 100 corrections and 100 transformations");
+  for (const topic of grammarPilot?.records??[]) {
+    const correctionCount=correctionTopicCounts.get(topic.id)??0;
+    const transformationCount=transformationTopicCounts.get(topic.id)??0;
+    const total=topicCounts.get(topic.id)??0;
+    if (correctionCount<6) errors.push("E06 reviewed correction coverage must keep at least 6 records for "+topic.id);
+    if (transformationCount<6) errors.push("E06 reviewed transformation coverage must keep at least 6 records for "+topic.id);
+    if (total<12) errors.push("E06 reviewed grammar coverage must keep at least 12 records for "+topic.id);
+  }
 }
 if (reviewedCommonMistakes) {
   const expected=batchExpectedCount("e06.common-mistake-reviewed-slice","reviewed-common-mistakes");
