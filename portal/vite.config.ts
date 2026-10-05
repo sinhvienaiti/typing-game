@@ -11,5 +11,11 @@ export default defineConfig({
       protocol: "wss",
       clientPort: 443,
     },
+    proxy: {
+      "/api/admin": {
+        target: "http://127.0.0.1:3199",
+        changeOrigin: false,
+      },
+    },
   },
 });

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "bootstrap": "bash scripts/bootstrap.sh",
-    "dev": "bash scripts/cleanup-dev-ports.sh 3000 3001 3002 3003 3004 3100 && concurrently -k -n portal,monkeytype,shooter,recall,karaoke,space \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\" \"pnpm dev:karaoke:app\" \"pnpm dev:space:app\"",
+    "dev": "bash scripts/cleanup-dev-ports.sh 3000 3001 3002 3003 3004 3100 3199 && concurrently -k -n admin,portal,monkeytype,shooter,recall,karaoke,space \"pnpm dev:admin\" \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\" \"pnpm dev:shooter:app\" \"pnpm dev:recall:app\" \"pnpm dev:karaoke:app\" \"pnpm dev:space:app\"",
     "dev:portal": "pnpm --dir portal dev",
     "dev:monkeytype": "bash scripts/cleanup-dev-ports.sh 3000 3100 && concurrently -k -n portal,monkeytype \"pnpm dev:portal\" \"pnpm dev:monkeytype:app\"",
     "dev:monkeytype:app": "cd games/monkeytype && SERVER_OPEN=false DEV_HOST=127.0.0.1 DEV_ALLOWED_HOSTS=monkeytype.typing-game.local DEV_HMR_HOST=monkeytype.typing-game.local DEV_HMR_PROTOCOL=wss DEV_HMR_CLIENT_PORT=443 pnpm dev-fe",
@@ -41,11 +41,14 @@
     "music:index": "node scripts/generate-music-index.mjs",
     "validate:space-integration": "node scripts/validate-space-integration.mjs",
     "validate:play-mode": "node scripts/validate-play-mode.mjs",
-    "dev:space": "bash scripts/cleanup-dev-ports.sh 3004 3100 && concurrently -k -n portal,space \"pnpm dev:portal\" \"pnpm dev:space:app\"",
+    "dev:space": "bash scripts/cleanup-dev-ports.sh 3004 3100 3199 && concurrently -k -n admin,portal,space \"pnpm dev:admin\" \"pnpm dev:portal\" \"pnpm dev:space:app\"",
     "dev:space:app": "pnpm --dir games/space-typing dev",
     "build:space": "pnpm --dir games/space-typing build",
     "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs && node --check shared/learning/profile-backup.mjs && node --check shared/learning/review-lifecycle.mjs",
-    "learning:test": "node --test shared/learning/*.test.mjs"
+    "learning:test": "node --test shared/learning/*.test.mjs",
+    "dev:admin": "node admin/server.mjs",
+    "admin:test": "node --test admin/store.test.mjs",
+    "admin:contract:validate": "node scripts/validate-space-admin-contract.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

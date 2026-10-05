@@ -1,4 +1,5 @@
 import "./styles.css";
+import { SpaceTypingAdmin } from "./admin/space-typing";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
@@ -123,6 +124,7 @@ const learningBridge = new ParentLearningBridge(
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
 const learningMaintenance = new LearningMaintenancePage(navigate);
+const spaceTypingAdmin = new SpaceTypingAdmin(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -225,7 +227,9 @@ function updateNavigation(path: string): void {
     const active =
       buttonPath === "/review"
         ? path === "/review" || path.startsWith("/review/")
-        : path === buttonPath;
+        : buttonPath === "/admin/space-typing"
+          ? path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")
+          : path === buttonPath;
     button.classList.toggle("active", active);
   }
 }
@@ -249,6 +253,7 @@ music.onPlaybackChange(() => {
 brand.addEventListener("click", () => navigate("/"));
 links.append(makeButton("Home", "/"));
 links.append(makeButton("Smart Review", "/review"));
+links.append(makeButton("Space Admin", "/admin/space-typing"));
 for (const game of registry.games) {
   links.append(makeButton(game.name, game.path));
 }
@@ -412,6 +417,12 @@ function renderRoute(): void {
   if (path === "/review/session") {
     music.setKaraokeActive(false);
     routeHost.replaceChildren(reviewFlow.renderSession());
+    return;
+  }
+
+  if (path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")) {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(spaceTypingAdmin.render(path));
     return;
   }
 
