@@ -1,0 +1,51 @@
+name: Finalize English A1
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/finalize-english-a1.yml
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/english-learning-content-system
+          fetch-depth: 1
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply A1 completion checkpoint
+        run: python3 scripts/finalize-english-a1.py
+      - name: Regenerate readiness report
+        run: pnpm english-content:e11
+      - name: Validate final A1 checkpoint
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:test
+          pnpm english-content:licenses
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e10:validate
+          pnpm english-content:e10:smoke
+          pnpm english-content:e12:audit
+      - name: Commit A1 completion checkpoint
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
+            scripts/report-english-content-e11-readiness.mjs \
+            content/english/reports/e11-readiness.json
+          git diff --cached --check
+          git commit -m "docs(content): close A1 grammar-body milestone"
+          git push origin HEAD:feature/english-learning-content-system
