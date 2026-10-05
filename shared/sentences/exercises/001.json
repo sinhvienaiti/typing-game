@@ -3,6 +3,2694 @@
   "records": [
     {
       "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.3177817.5767781",
+      "type": "translation",
+      "prompt": "Bạn ngủ không đủ giấc.",
+      "targetIds": [
+        "sent.tatoeba.3177817"
+      ],
+      "acceptedAnswers": [
+        "You're not sleeping enough."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.3177817"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "3177817",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/3177817",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #3177817",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "5767781",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/5767781",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #5767781",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.2872124.9132115",
+      "type": "translation",
+      "prompt": "Tại sao tôi không được thông báo?",
+      "targetIds": [
+        "sent.tatoeba.2872124"
+      ],
+      "acceptedAnswers": [
+        "Why wasn't I notified?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.2872124"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "2872124",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/2872124",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #2872124",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9132115",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9132115",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9132115",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.7814475.9034110",
+      "type": "translation",
+      "prompt": "Bạn có chơi bóng đá không?",
+      "targetIds": [
+        "sent.tatoeba.7814475"
+      ],
+      "acceptedAnswers": [
+        "Do you play football?"
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.7814475"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "7814475",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/7814475",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #7814475",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9034110",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9034110",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9034110",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.8555505.13513606",
+      "type": "translation",
+      "prompt": "Tôi chấp nhận thử thách.",
+      "targetIds": [
+        "sent.tatoeba.8555505"
+      ],
+      "acceptedAnswers": [
+        "I accept the challenge."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.8555505"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8555505",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8555505",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8555505",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13513606",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13513606",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13513606",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.13714258.13715089",
+      "type": "translation",
+      "prompt": "Con trai tôi sống ở Paris.",
+      "targetIds": [
+        "sent.tatoeba.13714258"
+      ],
+      "acceptedAnswers": [
+        "My son lives in Paris."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.13714258"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13714258",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13714258",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13714258",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13715089",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13715089",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13715089",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.11229235.11262233",
+      "type": "translation",
+      "prompt": "Đừng giả vờ ngủ nữa.",
+      "targetIds": [
+        "sent.tatoeba.11229235"
+      ],
+      "acceptedAnswers": [
+        "Stop pretending to be asleep."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.11229235"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11229235",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11229235",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11229235",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "11262233",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/11262233",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #11262233",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.7673586.13344178",
+      "type": "translation",
+      "prompt": "Mary mua cái này cho tôi.",
+      "targetIds": [
+        "sent.tatoeba.7673586"
+      ],
+      "acceptedAnswers": [
+        "Mary bought this for me."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.7673586"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "7673586",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/7673586",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #7673586",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "13344178",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/13344178",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #13344178",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.1938948.1838432",
+      "type": "translation",
+      "prompt": "Bạn hoàn toàn sai.",
+      "targetIds": [
+        "sent.tatoeba.1938948"
+      ],
+      "acceptedAnswers": [
+        "You are completely wrong."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.1938948"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1938948",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1938948",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1938948",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1838432",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1838432",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1838432",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.2821633.9067198",
+      "type": "translation",
+      "prompt": "Tom sẽ hối hận về điều này.",
+      "targetIds": [
+        "sent.tatoeba.2821633"
+      ],
+      "acceptedAnswers": [
+        "Tom will regret this."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.2821633"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "2821633",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/2821633",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #2821633",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9067198",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9067198",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9067198",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.3150606.5148094",
+      "type": "translation",
+      "prompt": "Tom mua cho Mary một chiếc xe.",
+      "targetIds": [
+        "sent.tatoeba.3150606"
+      ],
+      "acceptedAnswers": [
+        "Tom bought Mary a car."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.3150606"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v3"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v3"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v3"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v3"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v3"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v3"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v3"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v3"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "3150606",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/3150606",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #3150606",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "5148094",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/5148094",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #5148094",
+            "modified": false
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; source wording is retained with sentence-level provenance."
+      },
+      "cefr": "A1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.2083.12565576",
+      "type": "translation",
+      "prompt": "Tôi đã học được rất nhiều từ bạn.",
+      "targetIds": [
+        "sent.tatoeba.2083"
+      ],
+      "acceptedAnswers": [
+        "I learned a lot from you."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.2083"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "2083",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/2083",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #2083",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "12565576",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/12565576",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #12565576",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.27886.1541900",
+      "type": "translation",
+      "prompt": "Có rất ít nước trong giếng.",
+      "targetIds": [
+        "sent.tatoeba.27886"
+      ],
+      "acceptedAnswers": [
+        "There was little water in the well."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.27886"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "27886",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/27886",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #27886",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1541900",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1541900",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1541900",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.29270.1573217",
+      "type": "translation",
+      "prompt": "Khí hậu ở London khác với Tokyo.",
+      "targetIds": [
+        "sent.tatoeba.29270"
+      ],
+      "acceptedAnswers": [
+        "London is different from Tokyo climatically."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.29270"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "29270",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/29270",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #29270",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1573217",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1573217",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1573217",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.32961.563205",
+      "type": "translation",
+      "prompt": "Mike và em gái của cậu ấy biết nói tiếng Pháp, nhưng họ không biết nói tiếng Nhật.",
+      "targetIds": [
+        "sent.tatoeba.32961"
+      ],
+      "acceptedAnswers": [
+        "Mike and his sister can speak French, but they can't speak Japanese."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.32961"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "32961",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/32961",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #32961",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "563205",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/563205",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #563205",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.40584.9843973",
+      "type": "translation",
+      "prompt": "Có lẽ nhà máy sẽ đóng cửa vào tuần tới.",
+      "targetIds": [
+        "sent.tatoeba.40584"
+      ],
+      "acceptedAnswers": [
+        "Possibly the factory will be closed down next week."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.40584"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "40584",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/40584",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #40584",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9843973",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9843973",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9843973",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.60391.1541931",
+      "type": "translation",
+      "prompt": "Đây là cách vụ tai nạn đã xảy ra.",
+      "targetIds": [
+        "sent.tatoeba.60391"
+      ],
+      "acceptedAnswers": [
+        "This is how the accident happened."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.60391"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "60391",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/60391",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #60391",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1541931",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1541931",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1541931",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.69161.9722132",
+      "type": "translation",
+      "prompt": "Bạn nên đối mặt với thực tế phũ phàng.",
+      "targetIds": [
+        "sent.tatoeba.69161"
+      ],
+      "acceptedAnswers": [
+        "You ought to face the stark reality."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.69161"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "69161",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/69161",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #69161",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9722132",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9722132",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9722132",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.264395.9165645",
+      "type": "translation",
+      "prompt": "Tôi chán phải nghe điều đó rồi.",
+      "targetIds": [
+        "sent.tatoeba.264395"
+      ],
+      "acceptedAnswers": [
+        "I'm sick of hearing it."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.264395"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "264395",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/264395",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #264395",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9165645",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9165645",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9165645",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.267993.1549246",
+      "type": "translation",
+      "prompt": "Cậu bé quyết định quan sát và ghi chép chi tiết về ong mật.",
+      "targetIds": [
+        "sent.tatoeba.267993"
+      ],
+      "acceptedAnswers": [
+        "The boy decided to observe and record honeybees in detail."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.267993"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "267993",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/267993",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #267993",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1549246",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1549246",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1549246",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.278897.3228453",
+      "type": "translation",
+      "prompt": "Dự báo thời tiết nói rằng chiều nay trời sẽ mưa, nhưng trời đã không mưa.",
+      "targetIds": [
+        "sent.tatoeba.278897"
+      ],
+      "acceptedAnswers": [
+        "The weather forecast said that it would rain this afternoon, but it didn't."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.278897"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "278897",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/278897",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #278897",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "3228453",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/3228453",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #3228453",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.289574.1542187",
+      "type": "translation",
+      "prompt": "Anh ấy kéo khóa túi lại.",
+      "targetIds": [
+        "sent.tatoeba.289574"
+      ],
+      "acceptedAnswers": [
+        "He zipped his bag shut."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.289574"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "289574",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/289574",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #289574",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1542187",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1542187",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1542187",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.298868.516572",
+      "type": "translation",
+      "prompt": "Anh ấy thừa nhận mình có tội.",
+      "targetIds": [
+        "sent.tatoeba.298868"
+      ],
+      "acceptedAnswers": [
+        "He admitted his guilt."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.298868"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "298868",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/298868",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #298868",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "516572",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/516572",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #516572",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.305482.9001524",
+      "type": "translation",
+      "prompt": "Họ sắp di cư sang Mỹ.",
+      "targetIds": [
+        "sent.tatoeba.305482"
+      ],
+      "acceptedAnswers": [
+        "They are going to emigrate to America."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.305482"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "305482",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/305482",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #305482",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9001524",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9001524",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9001524",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.313574.9629943",
+      "type": "translation",
+      "prompt": "Tôi không nghĩ cô ấy hạnh phúc.",
+      "targetIds": [
+        "sent.tatoeba.313574"
+      ],
+      "acceptedAnswers": [
+        "I don't think she is happy."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.313574"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "313574",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/313574",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #313574",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9629943",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9629943",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9629943",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.323756.6535214",
+      "type": "translation",
+      "prompt": "Trong tầm mắt chỉ toàn là nước.",
+      "targetIds": [
+        "sent.tatoeba.323756"
+      ],
+      "acceptedAnswers": [
+        "There was nothing but water as far as the eye could reach."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.323756"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "323756",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/323756",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #323756",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "6535214",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/6535214",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #6535214",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.326085.9034193",
+      "type": "translation",
+      "prompt": "Khi mở tủ lạnh, tôi nhận ra thịt đã bị hỏng.",
+      "targetIds": [
+        "sent.tatoeba.326085"
+      ],
+      "acceptedAnswers": [
+        "Opening the refrigerator, I noticed the meat had spoiled."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.326085"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "326085",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/326085",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #326085",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9034193",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9034193",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9034193",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.329120.9017227",
+      "type": "translation",
+      "prompt": "Cả thế giới cần cùng nhau giải quyết vấn đề biến đổi khí hậu.",
+      "targetIds": [
+        "sent.tatoeba.329120"
+      ],
+      "acceptedAnswers": [
+        "The whole world needs to tackle the problem of climate change together."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.329120"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "329120",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/329120",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #329120",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9017227",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9017227",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9017227",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.681139.1543764",
+      "type": "translation",
+      "prompt": "Các bác sĩ tuyên thệ sẽ không làm hại bất kỳ ai.",
+      "targetIds": [
+        "sent.tatoeba.681139"
+      ],
+      "acceptedAnswers": [
+        "Doctors take an oath not to harm anyone."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.681139"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "681139",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/681139",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #681139",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1543764",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1543764",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1543764",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.898482.8957769",
+      "type": "translation",
+      "prompt": "Tôi tưởng họ giận tôi vì tôi không giúp họ rửa xe.",
+      "targetIds": [
+        "sent.tatoeba.898482"
+      ],
+      "acceptedAnswers": [
+        "I thought they were angry with me because I didn't help them wash the car."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.898482"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "898482",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/898482",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #898482",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "8957769",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/8957769",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #8957769",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.1092845.9033705",
+      "type": "translation",
+      "prompt": "Tom quét sàn bếp trong khi Mary rửa bát.",
+      "targetIds": [
+        "sent.tatoeba.1092845"
+      ],
+      "acceptedAnswers": [
+        "Tom swept the kitchen floor while Mary washed the dishes."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.1092845"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1092845",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1092845",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1092845",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9033705",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9033705",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9033705",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.1300130.9009606",
+      "type": "translation",
+      "prompt": "Đây là cái chuồng chó mà tôi tự làm.",
+      "targetIds": [
+        "sent.tatoeba.1300130"
+      ],
+      "acceptedAnswers": [
+        "This is the doghouse that I made myself."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.1300130"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1300130",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1300130",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1300130",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "9009606",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/9009606",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #9009606",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "A2"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.tatoeba.1345757.5772433",
+      "type": "translation",
+      "prompt": "Bob suy nghĩ kỹ về vấn đề đó.",
+      "targetIds": [
+        "sent.tatoeba.1345757"
+      ],
+      "acceptedAnswers": [
+        "Bob thought deeply about that matter."
+      ],
+      "sourceSentenceIds": [
+        "sent.tatoeba.1345757"
+      ],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e06-translation-reviewed-slice-authoring-v4"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "content-sha256-pin-v2"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-pair-v4"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "cross-slice-token-overlap-review-v4"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "bilingual-en-vi-editorial-review-v4"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "editorial-naturalness-review-v4"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "editorial-grammar-review-v4"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "translation-task"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "cefr-editorial-review-v4"
+          },
+          "license": {
+            "status": "pass",
+            "method": "tatoeba-attribution-license-review-v4"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "tatoeba",
+            "sourceId": "1345757",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/1345757",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #1345757",
+            "modified": false
+          },
+          {
+            "dataset": "tatoeba",
+            "sourceId": "5772433",
+            "sourceUrl": "https://tatoeba.org/en/sentences/show/5772433",
+            "snapshot": "weekly-export-observed-2026-10-03",
+            "license": "CC-BY-2.0-FR",
+            "attribution": "Tatoeba sentence #5772433",
+            "modified": true
+          }
+        ],
+        "note": "Reviewed Vietnamese-to-English Tatoeba pair; Vietnamese prompt was editorially normalized for grammar and naturalness while retaining the original Tatoeba sentence ID."
+      },
+      "cefr": "B1"
+    },
+    {
+      "schemaVersion": 1,
       "id": "ex.translation.tatoeba.1662824.13769738",
       "type": "translation",
       "prompt": "Tom đang xây một bức tường.",
@@ -37739,2502 +40427,6 @@
           }
         ],
         "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p010.003",
-      "type": "cloze",
-      "prompt": "At the ___, one person gives an idea for a music game.",
-      "targetIds": [
-        "lex.en.00000091"
-      ],
-      "acceptedAnswers": [
-        "start"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p010.003"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v12"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v12"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v12"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v12"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v12"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v12"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v12"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v12"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P010:sentence:3",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p010.009",
-      "type": "cloze",
-      "prompt": "For example, a language learner might spend part of the session on a new lesson, then use the rest to ___ older words.",
-      "targetIds": [
-        "lex.en.00000190"
-      ],
-      "acceptedAnswers": [
-        "remember"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p010.009"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v12"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v12"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v12"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v12"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v12"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v12"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v12"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v12"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P010:sentence:9",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p001.010",
-      "type": "cloze",
-      "prompt": "It helps to have ___ structure so that small problems do not disrupt the whole morning.",
-      "targetIds": [
-        "lex.en.00000166"
-      ],
-      "acceptedAnswers": [
-        "enough"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p001.010"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P001:sentence:10",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p001.015",
-      "type": "cloze",
-      "prompt": "A few ___ minutes in the morning can be used to sit quietly, read, or simply think about the day.",
-      "targetIds": [
-        "lex.en.00000168"
-      ],
-      "acceptedAnswers": [
-        "free"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p001.015"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P001:sentence:15",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p001.017",
-      "type": "cloze",
-      "prompt": "It should make life ___, not more difficult.",
-      "targetIds": [
-        "lex.en.00000165"
-      ],
-      "acceptedAnswers": [
-        "simple"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p001.017"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P001:sentence:17",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p001.020",
-      "type": "cloze",
-      "prompt": "A bad ___ can begin in a hurry, but today no one needs to rush or feel upset.",
-      "targetIds": [
-        "lex.en.00000021"
-      ],
-      "acceptedAnswers": [
-        "morning"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p001.020"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P001:sentence:20",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p002.011",
-      "type": "cloze",
-      "prompt": "One person may work ___, while another prefers to move slowly and check each corner.",
-      "targetIds": [
-        "lex.en.00000175"
-      ],
-      "acceptedAnswers": [
-        "fast"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p002.011"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P002:sentence:11",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p004.004",
-      "type": "cloze",
-      "prompt": "They will ___ early on Saturday morning, so everyone agrees to sleep at a good time the night before.",
-      "targetIds": [
-        "lex.en.00000222"
-      ],
-      "acceptedAnswers": [
-        "leave"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p004.004"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P004:sentence:4",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p004.013",
-      "type": "cloze",
-      "prompt": "This gives them a small chance to ___ respect for nature.",
-      "targetIds": [
-        "lex.en.00000229"
-      ],
-      "acceptedAnswers": [
-        "teach"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p004.013"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P004:sentence:13",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p004.014",
-      "type": "cloze",
-      "prompt": "During the trip, they may ___ at a viewpoint, turn onto a narrow path, or stop to rest.",
-      "targetIds": [
-        "lex.en.00000219"
-      ],
-      "acceptedAnswers": [
-        "stand"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p004.014"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P004:sentence:14",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p004.019",
-      "type": "cloze",
-      "prompt": "A little study, a clear plan, and careful choices can make ___ both relaxing and safe.",
-      "targetIds": [
-        "lex.en.00000230"
-      ],
-      "acceptedAnswers": [
-        "travel"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p004.019"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P004:sentence:19",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p005.011",
-      "type": "cloze",
-      "prompt": "They do not want the children to say ___ that school was fine.",
-      "targetIds": [
-        "lex.en.00000107"
-      ],
-      "acceptedAnswers": [
-        "only"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p005.011"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P005:sentence:11",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p005.014",
-      "type": "cloze",
-      "prompt": "There is no perfect ___ for everyone.",
-      "targetIds": [
-        "lex.en.00000242"
-      ],
-      "acceptedAnswers": [
-        "course"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p005.014"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P005:sentence:14",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p005.016",
-      "type": "cloze",
-      "prompt": "Taking a little time to compare options can prevent unnecessary expense and give the learner a better ___ of finishing the course.",
-      "targetIds": [
-        "lex.en.00000249"
-      ],
-      "acceptedAnswers": [
-        "chance"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p005.016"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P005:sentence:16",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p005.022",
-      "type": "cloze",
-      "prompt": "Still, this simple ___ of eating and talking together gives everyone time to share small things that might otherwise stay unsaid.",
-      "targetIds": [
-        "lex.en.00000110"
-      ],
-      "acceptedAnswers": [
-        "way"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p005.022"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P005:sentence:22",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p005.023",
-      "type": "cloze",
-      "prompt": "They ___ one final box for fruit, and the children tell their parents which pieces they want.",
-      "targetIds": [
-        "lex.en.00000093"
-      ],
-      "acceptedAnswers": [
-        "open"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p005.023"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P005:sentence:23",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p006.003",
-      "type": "cloze",
-      "prompt": "Most people do not think about the ___ when they turn on a light, but many parts work together behind the wall.",
-      "targetIds": [
-        "lex.en.00000269"
-      ],
-      "acceptedAnswers": [
-        "system"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p006.003"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P006:sentence:3",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p006.005",
-      "type": "cloze",
-      "prompt": "Some of the ___ goes directly to the building, while the rest can be stored for later.",
-      "targetIds": [
-        "lex.en.00000270"
-      ],
-      "acceptedAnswers": [
-        "power"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p006.005"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P006:sentence:5",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p006.006",
-      "type": "cloze",
-      "prompt": "He says ___ you and walks to a line of shelves near the back wall.",
-      "targetIds": [
-        "lex.en.00000131"
-      ],
-      "acceptedAnswers": [
-        "thank"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p006.006"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P006:sentence:6",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p006.007",
-      "type": "cloze",
-      "prompt": "The ___ does not produce the same amount every day.",
-      "targetIds": [
-        "lex.en.00000269"
-      ],
-      "acceptedAnswers": [
-        "system"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p006.007"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P006:sentence:7",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p006.012",
-      "type": "cloze",
-      "prompt": "He reads a ___ from each book before he makes a choice.",
-      "targetIds": [
-        "lex.en.00000119"
-      ],
-      "acceptedAnswers": [
-        "little"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p006.012"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P006:sentence:12",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p006.017",
-      "type": "cloze",
-      "prompt": "___ he leaves, he checks out both books.",
-      "targetIds": [
-        "lex.en.00000114"
-      ],
-      "acceptedAnswers": [
-        "before"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p006.017"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P006:sentence:17",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p006.016",
-      "type": "cloze",
-      "prompt": "Instead, solar energy is one useful part of a larger ___.",
-      "targetIds": [
-        "lex.en.00000269"
-      ],
-      "acceptedAnswers": [
-        "system"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p006.016"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P006:sentence:16",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p006.020",
-      "type": "cloze",
-      "prompt": "It is also a place to think, talk, ask, and use information in a ___ way.",
-      "targetIds": [
-        "lex.en.00000118"
-      ],
-      "acceptedAnswers": [
-        "better"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p006.020"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P006:sentence:20",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p006.018",
-      "type": "cloze",
-      "prompt": "In the next report, the town will state how much energy the ___ saved over the year.",
-      "targetIds": [
-        "lex.en.00000269"
-      ],
-      "acceptedAnswers": [
-        "system"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p006.018"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P006:sentence:18",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p007.005",
-      "type": "cloze",
-      "prompt": "The ___ becomes more serious when a case involves serious harm or death, so the speaker does not use dramatic details.",
-      "targetIds": [
-        "lex.en.00000279"
-      ],
-      "acceptedAnswers": [
-        "matter"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p007.005"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P007:sentence:5",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p007.016",
-      "type": "cloze",
-      "prompt": "On the way home, the girl tells her father that ___ can be fun when it is connected to real people.",
-      "targetIds": [
-        "lex.en.00000133"
-      ],
-      "acceptedAnswers": [
-        "history"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p007.016"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P007:sentence:16",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p007.015",
-      "type": "cloze",
-      "prompt": "The speaker says ___ not.",
-      "targetIds": [
-        "lex.en.00000283"
-      ],
-      "acceptedAnswers": [
-        "probably"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p007.015"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P007:sentence:15",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p007.017",
-      "type": "cloze",
-      "prompt": "She now has more than just a ___ of facts.",
-      "targetIds": [
-        "lex.en.00000142"
-      ],
-      "acceptedAnswers": [
-        "list"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p007.017"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P007:sentence:17",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p007.016",
-      "type": "cloze",
-      "prompt": "She would ___ see cooperation between governments, researchers, and communities.",
-      "targetIds": [
-        "lex.en.00000288"
-      ],
-      "acceptedAnswers": [
-        "rather"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p007.016"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P007:sentence:16",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l001-p007.018",
-      "type": "cloze",
-      "prompt": "She has a story about family, change, trouble, and hope in the same town where she lives ___.",
-      "targetIds": [
-        "lex.en.00000027"
-      ],
-      "acceptedAnswers": [
-        "today"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l001-p007.018"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-source"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L001-P007:sentence:18",
-            "sourceUrl": "shared/typing-texts/levels/001.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": false
-          }
-        ],
-        "note": "Reviewed deterministic cloze derived from the linked project-authored typing-text sentence; target word and source wording are retained."
-      }
-    },
-    {
-      "schemaVersion": 1,
-      "id": "ex.cloze.tt.l002-p008.003",
-      "type": "cloze",
-      "prompt": "At first, they think the location is ___ because many people pass through the building on Saturday.",
-      "targetIds": [
-        "lex.en.00000298"
-      ],
-      "acceptedAnswers": [
-        "perfect"
-      ],
-      "sourceSentenceIds": [
-        "sent.tt.l002-p008.003"
-      ],
-      "cefr": "A1",
-      "quality": {
-        "state": "published",
-        "checks": {
-          "schema": {
-            "status": "pass",
-            "method": "e06-typing-text-reviewed-slice-authoring-v13"
-          },
-          "sourceText": {
-            "status": "pass",
-            "method": "project-typing-text-editorial-normalization-v13"
-          },
-          "targetPresence": {
-            "status": "pass",
-            "method": "whole-phrase-boundary-v1"
-          },
-          "exactDuplicate": {
-            "status": "pass",
-            "method": "normalized-sentence-key-v13"
-          },
-          "nearDuplicate": {
-            "status": "pass",
-            "method": "cross-runtime-token-overlap-review-v13"
-          },
-          "grammar": {
-            "status": "pass",
-            "method": "editorial-grammar-review-v13"
-          },
-          "translation": {
-            "status": "not-applicable",
-            "method": "english-only-content"
-          },
-          "naturalness": {
-            "status": "pass",
-            "method": "editorial-naturalness-review-v13"
-          },
-          "targetStructure": {
-            "status": "pass",
-            "method": "cloze-target-structure-review-v13"
-          },
-          "cefr": {
-            "status": "pass",
-            "method": "cefr-editorial-review-v13"
-          },
-          "license": {
-            "status": "pass",
-            "method": "project-original-license-review-v13"
-          }
-        }
-      },
-      "provenance": {
-        "sources": [
-          {
-            "dataset": "project-original",
-            "sourceId": "L002-P008:sentence:3",
-            "sourceUrl": "shared/typing-texts/levels/002.json",
-            "snapshot": "2026-10",
-            "license": "LicenseRef-Project-Original",
-            "modified": true
-          }
-        ],
-        "note": "Editorially normalized cloze linked to the corrected project-authored sentence; the original learning target is retained."
       }
     }
   ]

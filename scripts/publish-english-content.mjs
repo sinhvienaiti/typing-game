@@ -71,44 +71,18 @@ const senses=await loadRecords("content/english/dictionary/e03-reviewed-senses.j
 const topics=await loadRecords("content/english/grammar/pilot-topics.json");
 const sentences=await loadRecords("content/english/sentences/pilot-sentences.json");
 const exercises=await loadRecords("content/english/sentences/pilot-exercises.json");
-const grammarScaleA101=await loadRecords("content/english/grammar/e05-scale-a1-01-topics.json");
-const grammarScaleA101Sentences=await loadRecords("content/english/sentences/e05-scale-a1-01-sentences.json");
-const grammarScaleA101Exercises=await loadRecords("content/english/sentences/e05-scale-a1-01-exercises.json");
-const grammarScaleA101Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-01-common-mistakes.json");
-const grammarScaleA102=await loadRecords("content/english/grammar/e05-scale-a1-02-topics.json");
-const grammarScaleA102Sentences=await loadRecords("content/english/sentences/e05-scale-a1-02-sentences.json");
-const grammarScaleA102Exercises=await loadRecords("content/english/sentences/e05-scale-a1-02-exercises.json");
-const grammarScaleA102Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-02-common-mistakes.json");
-const grammarScaleA103=await loadRecords("content/english/grammar/e05-scale-a1-03-topics.json");
-const grammarScaleA103Sentences=await loadRecords("content/english/sentences/e05-scale-a1-03-sentences.json");
-const grammarScaleA103Exercises=await loadRecords("content/english/sentences/e05-scale-a1-03-exercises.json");
-const grammarScaleA103Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-03-common-mistakes.json");
-const grammarScaleA104=await loadRecords("content/english/grammar/e05-scale-a1-04-topics.json");
-const grammarScaleA104Sentences=await loadRecords("content/english/sentences/e05-scale-a1-04-sentences.json");
-const grammarScaleA104Exercises=await loadRecords("content/english/sentences/e05-scale-a1-04-exercises.json");
-const grammarScaleA104Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-04-common-mistakes.json");
-const grammarScaleA105=await loadRecords("content/english/grammar/e05-scale-a1-05-topics.json");
-const grammarScaleA105Sentences=await loadRecords("content/english/sentences/e05-scale-a1-05-sentences.json");
-const grammarScaleA105Exercises=await loadRecords("content/english/sentences/e05-scale-a1-05-exercises.json");
-const grammarScaleA105Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-05-common-mistakes.json");
-const grammarScaleA106=await loadRecords("content/english/grammar/e05-scale-a1-06-topics.json");
-const grammarScaleA106Sentences=await loadRecords("content/english/sentences/e05-scale-a1-06-sentences.json");
-const grammarScaleA106Exercises=await loadRecords("content/english/sentences/e05-scale-a1-06-exercises.json");
-const grammarScaleA106Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-06-common-mistakes.json");
-const grammarScaleA2Slices=[];
-for (let index=1;index<=6;index++) {
-  const slice=String(index).padStart(2,"0");
-  grammarScaleA2Slices.push({
-    topics:await loadRecords("content/english/grammar/e05-scale-a2-"+slice+"-topics.json"),
-    sentences:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-sentences.json"),
-    exercises:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-exercises.json"),
-    mistakes:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-common-mistakes.json"),
-  });
+const grammarScaleTopics=[];
+const grammarScaleSentences=[];
+const grammarScaleExercises=[];
+const grammarScaleMistakes=[];
+const grammarScaleBatches=(batchManifest.batches??[]).filter(batch=>/^e05\.grammar-scale-[a-z][0-9]-[0-9]{2}$/u.test(batch.id)).sort((a,b)=>a.id.localeCompare(b.id,"en"));
+for (const batch of grammarScaleBatches) {
+  const sets=new Map((batch.recordSets??[]).map(set=>[set.id,set]));
+  grammarScaleTopics.push(...await loadRecords(sets.get("grammar-topics").path));
+  grammarScaleSentences.push(...await loadRecords(sets.get("examples").path));
+  grammarScaleExercises.push(...await loadRecords(sets.get("exercises").path));
+  grammarScaleMistakes.push(...await loadRecords(sets.get("common-mistakes").path));
 }
-const grammarScaleA2Topics=grammarScaleA2Slices.flatMap(slice=>slice.topics);
-const grammarScaleA2Sentences=grammarScaleA2Slices.flatMap(slice=>slice.sentences);
-const grammarScaleA2Exercises=grammarScaleA2Slices.flatMap(slice=>slice.exercises);
-const grammarScaleA2Mistakes=grammarScaleA2Slices.flatMap(slice=>slice.mistakes);
 const reviewedE06Exercises=await loadRecords("content/english/sentences/e06-reviewed-exercises.json");
 const reviewedTranslationSentences=await loadRecords("content/english/sentences/e06-reviewed-translation-sentences.json");
 const reviewedTranslations=await loadRecords("content/english/sentences/e06-reviewed-translations.json");
@@ -199,12 +173,12 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
   {id:"lexemes",dir:"lexemes",records:lexemes},
   {id:"senses",dir:"senses",records:senses}
 ]}));
-results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleA101,...grammarScaleA102,...grammarScaleA103,...grammarScaleA104,...grammarScaleA105,...grammarScaleA106,...grammarScaleA2Topics]}]}));
+results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
-  {id:"examples",dir:"examples",records:[...sentences,...grammarScaleA101Sentences,...grammarScaleA102Sentences,...grammarScaleA103Sentences,...grammarScaleA104Sentences,...grammarScaleA105Sentences,...grammarScaleA106Sentences,...grammarScaleA2Sentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
-  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleA101Exercises,...grammarScaleA102Exercises,...grammarScaleA103Exercises,...grammarScaleA104Exercises,...grammarScaleA105Exercises,...grammarScaleA106Exercises,...grammarScaleA2Exercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
+  {id:"examples",dir:"examples",records:[...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
   {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
-  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleA101Mistakes,...grammarScaleA102Mistakes,...grammarScaleA103Mistakes,...grammarScaleA104Mistakes,...grammarScaleA105Mistakes,...grammarScaleA106Mistakes,...grammarScaleA2Mistakes]}
+  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
   {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations,...scale11Collocations,...scale12Collocations,...scale13Collocations,...scale14Collocations,...scale15Collocations,...scale16Collocations,...scale17Collocations,...scale18Collocations,...scale19Collocations,...scale20Collocations,...scale21Collocations,...scale22Collocations,...scale23Collocations]},
