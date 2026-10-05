@@ -1,4 +1,4 @@
-name: Debug English Content
+name: Repair English Content Baseline
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
       - feature/english-learning-content-system
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  debug-rich-validation:
+  repair-rich-content:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,16 +25,46 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Capture dedupe diagnostics
+      - name: Repair duplicate B1 sentence
         shell: bash
         run: |
-          set +e
-          pnpm english-content:dedupe > english-dedupe.log 2>&1
-          status=$?
-          cat english-dedupe.log
-          if [ "$status" -ne 0 ]; then
-            while IFS= read -r line; do
-              printf '::error::%s\n' "$line"
-            done < english-dedupe.log
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('content/english/sentences/e05-scale-b1-07-sentences.json')
+          data = json.loads(path.read_text())
+          target = next(record for record in data['records'] if record['id'] == 'sent.grb1.07.07.2')
+          old = 'Please turn it off.'
+          new = 'Maya turned the office projector off after the meeting.'
+          if target['text'] == old:
+              target['text'] = new
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+          elif target['text'] != new:
+              raise SystemExit(f"Unexpected text for {target['id']}: {target['text']!r}")
+          PY
+
+      - name: Validate rich content suite
+        shell: bash
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:pilot
+          pnpm english-content:e04
+          pnpm english-content:generate
+          pnpm english-content:publish
+
+      - name: Commit repaired source and generated artifacts
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No repair changes to commit.'
+            exit 0
           fi
-          exit "$status"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
+          git commit -m 'fix(content): remove B1 sentence duplicate'
+          git push
