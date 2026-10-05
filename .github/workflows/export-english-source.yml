@@ -17,20 +17,20 @@ jobs:
         with:
           name: english-source-snapshot-${{ github.sha }}
           path: |
-            content/english/batches/manifest.json
-            content/english/releases/2026.10.0.json
-            content/english/reviews/decisions.json
-            content/english/reviews/decisions.d
-            content/english/grammar/e05-scale-a1-01-topics.json
-            content/english/sentences/e05-scale-a1-01-sentences.json
-            content/english/sentences/e05-scale-a1-01-exercises.json
-            content/english/sentences/e05-scale-a1-01-common-mistakes.json
-            scripts/validate-english-content.mjs
-            scripts/publish-english-content.mjs
-            scripts/smoke-published-english-content.mjs
-            scripts/english-review-core.mjs
-            shared/grammar/manifest.json
-            shared/sentences/manifest.json
+            package.json
+            content/english
             docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
+            docs/PROJECT_CONTEXT.md
+            docs/TYPING_TEXT_PROCESS.md
+            scripts
+            shared/english-content
+            shared/schemas/english-content
+            shared/curriculum
+            shared/dictionary
+            shared/grammar
+            shared/sentences
+            shared/phrases
+            shared/vocabulary/schema.json
+            shared/vocabulary/lookup.json
           if-no-files-found: error
           retention-days: 1
