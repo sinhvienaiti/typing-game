@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
+import { englishContentRecordId, englishContentReviewSourceDigest } from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const targetDoc=await readJson(path.join(root,"content","english","targets","long-term.json"));
@@ -19,6 +20,73 @@ function selectCollection(doc,source) {
   if (source.filterField===undefined) return values;
   const wanted=new Set(source.filterValues??[]);
   return values.filter(item=>wanted.has(String(item?.[source.filterField])));
+}
+function pendingChecks(record) {
+  return Object.entries(record?.quality?.checks??{})
+    .filter(([,check])=>check?.status==="pending")
+    .map(([name])=>name)
+    .sort((a,b)=>a.localeCompare(b,"en"));
+}
+function reviewPreview(record,recordSetId) {
+  if (recordSetId==="grammar-topics") return {
+    title:record.title,
+    objective:record.objective,
+    concept:record.concept,
+    formulae:record.formulae,
+  };
+  if (recordSetId==="examples") return {
+    text:record.text,
+    grammarIds:record.grammarIds,
+  };
+  if (recordSetId==="exercises") return {
+    type:record.type,
+    prompt:record.prompt,
+    acceptedAnswers:record.acceptedAnswers,
+    targetIds:record.targetIds,
+    sourceSentenceIds:record.sourceSentenceIds,
+  };
+  return {
+    incorrect:record.incorrect,
+    corrections:record.corrections,
+    explanationVi:record.explanationVi,
+    targetIds:record.targetIds,
+  };
+}
+async function buildGrammarReviewPacket(slice) {
+  const batchId="e05.grammar-scale-"+slice;
+  const sets=[
+    ["grammar-topics","content/english/grammar/e05-scale-"+slice+"-topics.json",8],
+    ["examples","content/english/sentences/e05-scale-"+slice+"-sentences.json",24],
+    ["exercises","content/english/sentences/e05-scale-"+slice+"-exercises.json",16],
+    ["common-mistakes","content/english/sentences/e05-scale-"+slice+"-common-mistakes.json",8],
+  ];
+  const recordSets=[];
+  for (const [recordSetId,relative,expectedCount] of sets) {
+    let doc;
+    try {
+      doc=await readJson(path.join(root,relative));
+    } catch (error) {
+      errors.push(batchId+": "+error.message);
+      continue;
+    }
+    const records=doc.records??[];
+    if (records.length!==expectedCount) {
+      errors.push(batchId+"/"+recordSetId+": expected "+expectedCount+" records, got "+records.length);
+    }
+    recordSets.push({
+      recordSetId,
+      path:relative,
+      expectedCount,
+      records:records.map((record,index)=>({
+        recordId:englishContentRecordId(record,index),
+        sourceDigest:englishContentReviewSourceDigest(record),
+        state:record?.quality?.state,
+        pendingChecks:pendingChecks(record),
+        preview:reviewPreview(record,recordSetId),
+      })),
+    });
+  }
+  return {batchId,slice,recordSets};
 }
 
 for (const target of targetDoc.targets??[]) {
@@ -85,7 +153,8 @@ for (const [id,[minimum,maximum]] of Object.entries(expected)) {
   }
 }
 
-const output={schemaVersion:1,targets:rows};
+const pendingGrammarReview=[await buildGrammarReviewPacket("a1-04")];
+const output={schemaVersion:1,targets:rows,pendingGrammarReview};
 await fs.mkdir(path.join(root,"content","english","reports"),{recursive:true});
 await fs.writeFile(
   path.join(root,"content","english","reports","e11-readiness.json"),
