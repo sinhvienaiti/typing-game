@@ -25,23 +25,30 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Repair duplicate B1 sentence
+      - name: Repair duplicate B1 sentence and linked exercise
         shell: bash
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
 
-          path = Path('content/english/sentences/e05-scale-b1-07-sentences.json')
-          data = json.loads(path.read_text())
-          target = next(record for record in data['records'] if record['id'] == 'sent.grb1.07.07.2')
+          sentence_path = Path('content/english/sentences/e05-scale-b1-07-sentences.json')
+          sentence_data = json.loads(sentence_path.read_text())
+          sentence = next(record for record in sentence_data['records'] if record['id'] == 'sent.grb1.07.07.2')
           old = 'Please turn it off.'
           new = 'Maya turned the office projector off after the meeting.'
-          if target['text'] == old:
-              target['text'] = new
-              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
-          elif target['text'] != new:
-              raise SystemExit(f"Unexpected text for {target['id']}: {target['text']!r}")
+          if sentence['text'] == old:
+              sentence['text'] = new
+              sentence_path.write_text(json.dumps(sentence_data, ensure_ascii=False, indent=2) + '\n')
+          elif sentence['text'] != new:
+              raise SystemExit(f"Unexpected text for {sentence['id']}: {sentence['text']!r}")
+
+          exercise_path = Path('content/english/sentences/e05-scale-b1-07-exercises.json')
+          exercise_data = json.loads(exercise_path.read_text())
+          exercise = next(record for record in exercise_data['records'] if record['id'] == 'ex.translation.grb1.07.07')
+          exercise['prompt'] = 'Dịch sang tiếng Anh: Maya đã tắt máy chiếu văn phòng sau cuộc họp.'
+          exercise['acceptedAnswers'] = [new]
+          exercise_path.write_text(json.dumps(exercise_data, ensure_ascii=False, indent=2) + '\n')
           PY
 
       - name: Validate rich content suite
