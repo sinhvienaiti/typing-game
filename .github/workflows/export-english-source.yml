@@ -1,0 +1,36 @@
+name: Export English Source Snapshot
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/export-english-source.yml
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload English source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-source-snapshot-${{ github.sha }}
+          path: |
+            content/english/batches/manifest.json
+            content/english/releases/2026.10.0.json
+            content/english/reviews/decisions.json
+            content/english/reviews/decisions.d
+            content/english/grammar/e05-scale-a1-01-topics.json
+            content/english/sentences/e05-scale-a1-01-sentences.json
+            content/english/sentences/e05-scale-a1-01-exercises.json
+            content/english/sentences/e05-scale-a1-01-common-mistakes.json
+            scripts/validate-english-content.mjs
+            scripts/publish-english-content.mjs
+            scripts/smoke-published-english-content.mjs
+            scripts/english-review-core.mjs
+            shared/grammar/manifest.json
+            shared/sentences/manifest.json
+            docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
+          if-no-files-found: error
+          retention-days: 1
