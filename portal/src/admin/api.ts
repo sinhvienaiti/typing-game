@@ -7,6 +7,29 @@ export type AudioDefaults = {
   announcer: number;
 };
 
+export type PlaylistSelectionMode = "shuffle-bag" | "ordered";
+
+export type PlaylistAssignment =
+  | { kind: "inherit" }
+  | { kind: "replace"; trackIds: string[]; selectionMode?: PlaylistSelectionMode };
+
+export type WorldMusicPolicyEntry = {
+  normal?: PlaylistAssignment;
+  boss?: {
+    common?: PlaylistAssignment;
+    mini?: PlaylistAssignment;
+    world?: PlaylistAssignment;
+    major?: PlaylistAssignment;
+  };
+};
+
+export type WorldMusicPolicy = {
+  configRevision: string;
+  disabledTrackIds?: string[];
+  worlds?: Record<string, WorldMusicPolicyEntry>;
+  global?: WorldMusicPolicyEntry;
+};
+
 export type SpaceTypingAdminConfig = {
   contractRevision: string;
   configSchemaVersion: number;
@@ -17,7 +40,8 @@ export type SpaceTypingAdminConfig = {
   };
   worldMusic: {
     policyRevision: string;
-    assignments: Record<string, unknown>;
+    assignments?: Record<string, unknown>;
+    publishedPolicy?: WorldMusicPolicy;
   };
 };
 
@@ -123,7 +147,7 @@ export class SpaceTypingAdminApi {
   }
 
   previewWorldMusic(input: {
-    publishedPolicy?: unknown;
+    publishedPolicy?: WorldMusicPolicy;
     musicMode?: "map" | "random";
   } = {}): Promise<WorldMusicPreview> {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {

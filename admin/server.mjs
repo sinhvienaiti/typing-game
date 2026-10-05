@@ -94,6 +94,16 @@ const server = createServer(async (request, response) => {
     }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
       const input = await body(request);
+      store.validateConfig(input.config);
+      const publishedPolicy = input.config?.worldMusic?.publishedPolicy;
+      if (publishedPolicy !== undefined) {
+        await runWorldMusicPreview({
+          rootDir: root,
+          contract,
+          publishedPolicy,
+          musicMode: "map",
+        });
+      }
       const revision = await store.createRevision(input);
       json(response, 201, revision);
       return;

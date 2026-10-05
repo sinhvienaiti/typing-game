@@ -1,4 +1,5 @@
 import contractJson from "./contracts/space-typing-admin.v1.json";
+import { renderWorldMusicEditor } from "./world-music-editor";
 import {
   AdminApiError,
   SpaceTypingAdminApi,
@@ -232,46 +233,17 @@ export class SpaceTypingAdmin {
     state: AdminStatePayload,
     preview: WorldMusicPreview,
   ): void {
-    panel.replaceChildren(this.renderHeader("World Music", "Canonical resolver preview for all 50 Worlds — no UI-side fallback guessing."));
-    const note = document.createElement("div");
-    note.className = "st-admin-note";
-    note.textContent = `Config ${preview.configRevision} · manifest ${preview.manifestRevision} · mode ${preview.musicMode} · active revision ${state.state.activeRevision}`;
-    panel.append(note);
-    const list = document.createElement("div");
-    list.className = "st-galaxy-list";
-    for (let galaxy = 1; galaxy <= contract.worldMusic.galaxyCount; galaxy += 1) {
-      const section = document.createElement("section");
-      section.className = "st-galaxy";
-      const title = document.createElement("h3");
-      title.textContent = `Galaxy ${String(galaxy).padStart(2, "0")}`;
-      const worlds = document.createElement("div");
-      worlds.className = "st-world-grid";
-      for (const world of preview.worlds.filter((item) => item.galaxy === galaxy)) {
-        const card = document.createElement("div");
-        card.className = "st-world";
-        const strong = document.createElement("strong");
-        strong.textContent = `${world.worldId} · ${world.name}`;
-        const range = document.createElement("small");
-        range.textContent = `Stages ${world.stageRange[0]}–${world.stageRange[1]} · normal ${world.states.normal.trackCount} · boss ${world.states.world.trackCount}`;
-        const badges = document.createElement("div");
-        badges.className = "st-world-badges";
-        for (const badge of [...new Set([...world.states.normal.badges, ...world.states.world.badges])]) {
-          const chip = document.createElement("span");
-          chip.className = "st-badge";
-          chip.textContent = badge;
-          badges.append(chip);
-        }
-        const source = document.createElement("div");
-        source.className = "st-world-source";
-        source.textContent = `normal: ${world.states.normal.resolvedFrom} · boss: ${world.states.world.resolvedFrom}`;
-        source.title = [...world.states.normal.fallbackTrace, ...world.states.world.fallbackTrace].join("\n");
-        card.append(strong, range, badges, source);
-        worlds.append(card);
-      }
-      section.append(title, worlds);
-      list.append(section);
-    }
-    panel.append(list);
+    renderWorldMusicEditor({
+      panel,
+      state,
+      preview,
+      api: this.api,
+      navigate: this.navigate,
+      header: this.renderHeader(
+        "World Music",
+        "Edit a canonical published policy, preview through the child resolver, then save an immutable draft.",
+      ),
+    });
   }
 
   private renderHistory(panel: HTMLElement, state: AdminStatePayload): void {
