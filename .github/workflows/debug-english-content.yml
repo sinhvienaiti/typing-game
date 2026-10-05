@@ -51,17 +51,23 @@ jobs:
           exercise_path.write_text(json.dumps(exercise_data, ensure_ascii=False, indent=2) + '\n')
           PY
 
-      - name: Validate rich content suite
+      - name: Validate source records
         shell: bash
         run: |
           pnpm english-content:validate
           pnpm english-content:licenses
           pnpm english-content:test
-          pnpm english-content:dedupe
           pnpm english-content:pilot
           pnpm english-content:e04
+
+      - name: Regenerate and publish runtime artifacts
+        shell: bash
+        run: |
           pnpm english-content:generate
           pnpm english-content:publish
+
+      - name: Validate dedupe after regeneration
+        run: pnpm english-content:dedupe
 
       - name: Commit repaired source and generated artifacts
         shell: bash
