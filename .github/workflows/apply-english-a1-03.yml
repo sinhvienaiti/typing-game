@@ -37,8 +37,10 @@ jobs:
         run: pnpm english-content:publish
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
-      - name: Validate controlled batches
-        run: pnpm english-content:e10
+      - name: Validate controlled batch metadata
+        run: pnpm english-content:e10:validate
+      - name: Smoke controlled batch adapters
+        run: pnpm english-content:e10:smoke
       - name: Commit reviewed A1-03 slice
         run: |
           git config user.name "github-actions[bot]"
