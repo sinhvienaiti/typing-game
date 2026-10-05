@@ -51,6 +51,52 @@ jobs:
           exercise_path.write_text(json.dumps(exercise_data, ensure_ascii=False, indent=2) + '\n')
           PY
 
+      - name: Refresh review digests for repaired records
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+          import { englishContentReviewSourceDigest } from './scripts/english-review-core.mjs';
+
+          const load = async file => JSON.parse(await fs.readFile(file, 'utf8'));
+          const sentenceFile = 'content/english/sentences/e05-scale-b1-07-sentences.json';
+          const exerciseFile = 'content/english/sentences/e05-scale-b1-07-exercises.json';
+          const sentenceDoc = await load(sentenceFile);
+          const exerciseDoc = await load(exerciseFile);
+          const sentence = sentenceDoc.records.find(record => record.id === 'sent.grb1.07.07.2');
+          const exercise = exerciseDoc.records.find(record => record.id === 'ex.translation.grb1.07.07');
+          if (!sentence || !exercise) throw new Error('repair targets missing');
+
+          const digests = new Map([
+            [sentence.id, englishContentReviewSourceDigest(sentence)],
+            [exercise.id, englishContentReviewSourceDigest(exercise)],
+          ]);
+          const reviewFiles = ['content/english/reviews/decisions.json'];
+          const shardDir = 'content/english/reviews/decisions.d';
+          for (const name of (await fs.readdir(shardDir)).filter(name => name.endsWith('.json')).sort()) {
+            reviewFiles.push(path.join(shardDir, name));
+          }
+
+          const found = new Set();
+          for (const file of reviewFiles) {
+            const doc = await load(file);
+            let changed = false;
+            for (const decision of doc.decisions ?? []) {
+              const digest = digests.get(decision.recordId);
+              if (!digest) continue;
+              decision.sourceDigest = digest;
+              found.add(decision.recordId);
+              changed = true;
+            }
+            if (changed) await fs.writeFile(file, JSON.stringify(doc, null, 2) + '\n');
+          }
+          for (const id of digests.keys()) {
+            if (!found.has(id)) throw new Error(`review decision not found for ${id}`);
+          }
+          console.log(Object.fromEntries(digests));
+          JS
+
       - name: Validate source records
         shell: bash
         run: |
