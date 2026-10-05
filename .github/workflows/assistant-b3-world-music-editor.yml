@@ -1,0 +1,68 @@
+name: Assistant B3 World Music Editor
+
+on:
+  push:
+    branches:
+      - stage-b3-editor-work
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-commit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stage-b3-editor-work
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Initialize Space Typing submodule
+        run: git submodule update --init games/space-typing
+
+      - name: Apply guarded B3 World Music editor patch
+        run: python scripts/assistant/apply-b3-world-music-editor.py
+
+      - name: Validate Admin service and revision store
+        run: |
+          node --check admin/store.mjs
+          node --check admin/server.mjs
+          node --check admin/store.test.mjs
+          node --check admin/world-music-preview.mjs
+          node --test admin/store.test.mjs
+
+      - name: Install focused dependencies
+        run: |
+          pnpm install
+          pnpm --dir portal install
+          pnpm --dir games/space-typing install
+
+      - name: Test canonical preview bridge
+        run: node --test admin/world-music-preview.test.mjs
+
+      - name: Build Portal
+        run: pnpm build:portal
+
+      - name: Diff safety
+        run: git diff --check
+
+      - name: Commit verified B3 World Music editor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add admin/store.mjs admin/store.test.mjs admin/server.mjs portal/src/admin/api.ts portal/src/admin/space-typing.ts portal/src/admin/world-music-editor.ts
+          if git diff --cached --quiet; then
+            echo "No B3 World Music editor changes to commit"
+            exit 0
+          fi
+          git commit -m "feat(admin): add canonical World Music draft editor"
+          git push origin HEAD:stage-b3-editor-work
