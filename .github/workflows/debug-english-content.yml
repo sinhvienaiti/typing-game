@@ -25,26 +25,29 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Capture rich English content validation
-        id: validate
-        shell: bash
-        run: |
-          set +e
-          pnpm english-content:validate > english-content-validation.log 2>&1
-          status=$?
-          cat english-content-validation.log
-          echo "status=$status" >> "$GITHUB_OUTPUT"
-          exit 0
+      - name: Validate rich records
+        run: pnpm english-content:validate
 
-      - name: Upload validation log
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: english-content-validation-log
-          path: english-content-validation.log
-          if-no-files-found: error
-          retention-days: 1
+      - name: Validate licenses
+        run: pnpm english-content:licenses
 
-      - name: Preserve validator status
-        shell: bash
-        run: exit "${{ steps.validate.outputs.status }}"
+      - name: Test English content
+        run: pnpm english-content:test
+
+      - name: Check dedupe
+        run: pnpm english-content:dedupe
+
+      - name: Check pilot
+        run: pnpm english-content:pilot
+
+      - name: Check E04
+        run: pnpm english-content:e04
+
+      - name: Generate published artifacts
+        run: pnpm english-content:generate
+
+      - name: Publish English content
+        run: pnpm english-content:publish
+
+      - name: Check generated artifacts are committed
+        run: git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
