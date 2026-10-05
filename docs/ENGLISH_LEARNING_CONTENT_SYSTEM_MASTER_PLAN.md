@@ -2525,14 +2525,14 @@ Pilot status: **PUBLISHED; CONTROLLED SCALE-UP IN PROGRESS**.
 
 ### 43.4 E05 grammar-topic pilot
 
-Pilot status: **A1 + A2 RICH GRAMMAR BODY COMPLETE — 95/95 A1-A2 TOPICS REVIEWED AND PUBLISHED**.
+Pilot status: **A1 + A2 + B1 RICH GRAMMAR BODY COMPLETE — 155/155 A1-B1 TOPICS REVIEWED AND PUBLISHED**.
 
 - Source authoring files remain `draft` so the original authored records and editorial workflow stay auditable.
-- The E05 grammar-body review ledger now overlays **709 digest-bound accepted records** and promotes only those reviewed records at publication time.
-- Published E05 runtime now contains **103 rich grammar topics**: the original 12-topic cross-CEFR pilot, six controlled A1 body slices and six controlled A2 body slices. A1 is **45/45** and A2 is **50/50** complete; the A2 scale contributes 48 additional rich topics beyond its 2 original pilot topics. Grammar-linked authoring now includes **309 controlled example sentences, 206 exercises and 91 linked common mistakes**.
+- The E05 grammar-body review ledger now overlays **1,115 digest-bound accepted records** and promotes only those reviewed records at publication time.
+- Published E05 runtime now contains **161 rich grammar topics**: the original 12-topic cross-CEFR pilot plus completed controlled A1, A2 and B1 bodies. A1 is **45/45**, A2 is **50/50** and B1 is **60/60** complete. Grammar-linked authoring now includes **483 controlled example sentences, 322 exercises and 149 linked common mistakes**.
 - The original 12-topic pilot remains exactly 2 per CEFR level. A1 slice 01 adds `be` identification/negative/questions, subject pronouns, possessive adjectives, demonstratives, there is/are and a/an. A1 slice 02 adds basic `the`, noun number, countability, some/any, have/has possession, possessive `'s`, Present Simple facts/states and third-person `-s`. A1 slice 03 adds Present Simple negatives/questions/wh-questions, frequency adverbs, can for ability, can for permission/requests, imperatives and object pronouns. A1 slice 04 adds likes/dislikes with nouns and -ing forms, want/need + to-infinitive, time/place/movement prepositions, adjective position, very/really and basic coordinators. A1 slice 05 adds because, temporary Present Continuous, Present Simple vs Continuous, was/were, regular/irregular Past Simple, Past Simple negatives/questions and going to intentions. A1 slice 06 closes the level with will, would like and basic word order. Every scale topic includes EN/VI concepts, formulae, use cases, forms/variations, contrasts/prerequisites, 3 examples, 2 exercises and 1 common mistake. A2 slices 01-06 cover past narrative forms, Present Perfect expansion, quantity/comparison, future forms, modals/conditionals, verb complements, relative clauses, articles/reference, adverbs/subordination and question tags.
-- The original 72 publication decisions remain intact. The six A1 scale slices add **301 digest-bound publication decisions** and the six A2 scale slices add **336** more (48 topics + 144 examples + 96 exercises + 48 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
-- The full 300-topic framework remains the curriculum/taxonomy; **103/300 topics now have reviewed rich runtime bodies**, including **45/45 A1** and **50/50 A2**. Further expansion proceeds from B1 upward as controlled CEFR slices rather than generating the remaining topics in bulk.
+- The original 72 publication decisions remain intact. The A1 scale adds **301**, A2 adds **336**, and the eight B1 scale slices add **406** digest-bound publication decisions (58 topics + 174 examples + 116 exercises + 58 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
+- The full 300-topic framework remains the curriculum/taxonomy; **161/300 topics now have reviewed rich runtime bodies**, including **45/45 A1**, **50/50 A2** and **60/60 B1**. Further expansion proceeds from B2 upward as controlled CEFR slices rather than generating the remaining topics in bulk.
 - Active batch metadata no longer references transient `content/english/review-queues/*` staging files. The superseded E03 lexical-enrichment and E06 sentence-exercise candidate batches were retired from the active manifest after their durable reviewed slices became the source of truth; E10 now validates only reproducible checked-in sources.
 
 ### 43.5 E06 sentence / exercise pilot
@@ -2566,7 +2566,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **103 topics**; `shared/sentences` contains **2,206 records** = **909 examples + 1,006 exercises + 100 dialogues + 191 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **161 topics**; `shared/sentences` contains **2,554 records** = **1,083 examples + 1,122 exercises + 100 dialogues + 249 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 
@@ -2623,7 +2623,7 @@ Status: **FOUNDATION COMPLETE; CI VERIFIED**.
 
 A batch marked `published` cannot contain non-published records or unfinished `pending/fail` checks. Mixed record sets can declare a smoke `recordType`, so cloze/translation samples are selected from the compatible exercise subtype rather than arbitrary file order.
 
-The active controlled manifest now accounts for **4,541 checked-in draft authoring/source records across 45 batches**; superseded transient candidate batches are intentionally retired from the active manifest. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
+The active controlled manifest now accounts for **4,947 checked-in draft authoring/source records across 53 batches**; superseded transient candidate batches are intentionally retired from the active manifest. Publication is represented by the digest-bound review ledger/runtime overlay rather than mutating authoring source state.
 
 ### 43.10 E11 long-term readiness
 
@@ -2631,13 +2631,13 @@ Status: **TARGET CONTRACT + READINESS REPORT COMPLETE; BULK CORPUS NOT CLAIMED C
 
 Current readiness measurements after E04 scale batch 23:
 
-- grammar topics: **300/300 framework entries**, with **103/300 reviewed rich topic bodies** currently published, including **45/45 A1** and **50/50 A2**;
+- grammar topics: **300/300 framework entries**, with **161/300 reviewed rich topic bodies** currently published, including **45/45 A1**, **50/50 A2** and **60/60 B1**;
 - verb patterns: 510 / 500 minimum (**minimum crossed**);
 - collocations: 560 / 5,000 minimum;
 - phrasal verbs: 280 / 1,000 minimum;
 - idioms/chunks: 280 / 2,000 minimum;
-- common mistakes: **191 / 2,000 minimum in published runtime** = the closed 100-record E06 pilot plus 91 reviewed A1-A2 grammar-scale mistakes;
-- example sentences: candidate/source pipeline remains far below 100,000; current published runtime contains **909 examples** (309 E05 grammar-linked + 300 typing-text + 300 Tatoeba);
+- common mistakes: **249 / 2,000 minimum in published runtime** = the closed 100-record E06 pilot plus 149 reviewed A1-B1 grammar-scale mistakes;
+- example sentences: candidate/source pipeline remains far below 100,000; current published runtime contains **1,083 examples** (483 E05 grammar-linked + 300 typing-text + 300 Tatoeba);
 - translation pairs: **300 / 20,000 minimum**, and the full 300-pair pilot is reviewed/published;
 - cloze exercises: **300 / 30,000 minimum**, and the full 300-item typing-text cloze pilot is reviewed/published;
 - transformations: **100/100 pilot records reviewed/published** against a 10,000 long-term minimum;
@@ -2726,7 +2726,7 @@ The architecture, parent launcher and child integrations are no longer waiting f
 
 - the controlled **300-lexeme E03 pilot is complete**: all 300 lexemes and 300 linked primary senses are digest-reviewed and published; any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;
 - the controlled E06 pilots are now closed: Tatoeba **300/300**, typing-text examples/cloze **300/300 + 300/300**, common mistakes **100/100**, correction/transformation **100/100 + 100/100**, and MultiWOZ dialogues **100/100**; future E06 growth must use new controlled batches rather than silently extending these pilots;
-- continue grammar-body promotion in small reviewed CEFR slices; A1 and A2 are now complete at 45/45 and 50/50 rich topics. The A1+A2 scale slices add 91 rich topics and 546 linked sentence-domain records; continue next with B1 while E03, E04, E05 and E06 publication still uses digest-bound `draft → published` overlays;
+- continue grammar-body promotion in small reviewed CEFR slices; A1, A2 and B1 are complete at 45/45, 50/50 and 60/60 rich topics. Their scale slices add 149 rich topics and 894 linked sentence-domain records; continue next with B2 while E03, E04, E05 and E06 publication still uses digest-bound `draft → published` overlays;
 - continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;

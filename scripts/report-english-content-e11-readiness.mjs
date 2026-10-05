@@ -103,10 +103,10 @@ for (const [id,[minimum,maximum]] of Object.entries(expected)) {
 const pendingGrammarReview=[];
 const snapshotPaths=[
   "content/english/batches/manifest.json",
-  "content/english/grammar/e05-scale-a2-06-topics.json",
-  "content/english/sentences/e05-scale-a2-06-sentences.json",
-  "content/english/sentences/e05-scale-a2-06-exercises.json",
-  "content/english/sentences/e05-scale-a2-06-common-mistakes.json",
+  "content/english/grammar/e05-scale-b1-08-topics.json",
+  "content/english/sentences/e05-scale-b1-08-sentences.json",
+  "content/english/sentences/e05-scale-b1-08-exercises.json",
+  "content/english/sentences/e05-scale-b1-08-common-mistakes.json",
   "scripts/publish-english-content.mjs",
   "scripts/smoke-published-english-content.mjs",
   "content/english/releases/2026.10.0.json",
