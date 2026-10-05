@@ -1,3 +1,10 @@
+import type {
+  QaEnvironment,
+  QaIssuedSession,
+  QaListedSession,
+  QaSessionOverrides,
+} from "./qa-session";
+
 export type AudioDefaults = {
   master: number;
   pronunciation: number;
@@ -144,6 +151,29 @@ export class SpaceTypingAdminApi {
 
   getState(): Promise<AdminStatePayload> {
     return this.request<AdminStatePayload>("/api/admin/space-typing/state");
+  }
+
+  listQaSessions(): Promise<{ sessions: QaListedSession[] }> {
+    return this.request<{ sessions: QaListedSession[] }>("/api/admin/space-typing/qa/sessions");
+  }
+
+  issueQaSession(input: {
+    targetSessionId: string;
+    environment: QaEnvironment;
+    ttlMs?: number;
+    overrides: QaSessionOverrides;
+  }): Promise<QaIssuedSession> {
+    return this.request<QaIssuedSession>("/api/admin/space-typing/qa/sessions", {
+      method: "POST",
+      body: JSON.stringify(input),
+    });
+  }
+
+  revokeQaSession(id: string): Promise<QaListedSession> {
+    return this.request<QaListedSession>(
+      `/api/admin/space-typing/qa/sessions/${encodeURIComponent(id)}/revoke`,
+      { method: "POST", body: "{}" },
+    );
   }
 
   previewWorldMusic(input: {
