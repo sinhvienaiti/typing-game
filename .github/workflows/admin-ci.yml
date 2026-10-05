@@ -1,0 +1,36 @@
+name: Space Typing Admin CI
+
+on:
+  pull_request:
+    paths:
+      - "admin/**"
+      - "portal/src/admin/**"
+      - "games/space-typing"
+      - "scripts/validate-space-admin-contract.mjs"
+      - ".github/workflows/admin-ci.yml"
+
+jobs:
+  admin-contract-and-store:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Initialize Space Typing submodule
+        run: git submodule update --init games/space-typing
+
+      - name: Validate Admin contract snapshot
+        run: node scripts/validate-space-admin-contract.mjs
+
+      - name: Validate Admin service syntax
+        run: |
+          node --check admin/store.mjs
+          node --check admin/default-config.mjs
+          node --check admin/server.mjs
+          node --check admin/store.test.mjs
+
+      - name: Test immutable revision and CAS semantics
+        run: node --test admin/store.test.mjs
