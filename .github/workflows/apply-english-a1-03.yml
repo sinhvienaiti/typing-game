@@ -33,11 +33,12 @@ jobs:
           pnpm english-content:test
           pnpm english-content:licenses
           pnpm english-content:dedupe
-      - name: Publish and smoke runtime
-        run: |
-          pnpm english-content:publish
-          pnpm english-content:runtime:smoke
-          pnpm english-content:e10
+      - name: Publish runtime
+        run: pnpm english-content:publish
+      - name: Smoke published runtime
+        run: pnpm english-content:runtime:smoke
+      - name: Validate controlled batches
+        run: pnpm english-content:e10
       - name: Commit reviewed A1-03 slice
         run: |
           git config user.name "github-actions[bot]"
