@@ -1,4 +1,4 @@
-name: Repair English Content Baseline
+name: Publish English B2 Slices 01-04
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  repair-rich-content:
+  publish-b2-01-04:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,105 +25,53 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Repair duplicate B1 sentence and linked exercise
+      - name: Apply reviewed B2 slices 01-04
         shell: bash
         run: |
+          if grep -q '"id": "e05.grammar-scale-b2-01"' content/english/batches/manifest.json; then
+            echo 'B2 slices 01-04 already present; skipping generator.'
+            exit 0
+          fi
           python3 - <<'PY'
-          import json
           from pathlib import Path
-
-          sentence_path = Path('content/english/sentences/e05-scale-b1-07-sentences.json')
-          sentence_data = json.loads(sentence_path.read_text())
-          sentence = next(record for record in sentence_data['records'] if record['id'] == 'sent.grb1.07.07.2')
-          old = 'Please turn it off.'
-          new = 'Maya turned the office projector off after the meeting.'
-          if sentence['text'] == old:
-              sentence['text'] = new
-              sentence_path.write_text(json.dumps(sentence_data, ensure_ascii=False, indent=2) + '\n')
-          elif sentence['text'] != new:
-              raise SystemExit(f"Unexpected text for {sentence['id']}: {sentence['text']!r}")
-
-          exercise_path = Path('content/english/sentences/e05-scale-b1-07-exercises.json')
-          exercise_data = json.loads(exercise_path.read_text())
-          exercise = next(record for record in exercise_data['records'] if record['id'] == 'ex.translation.grb1.07.07')
-          exercise['prompt'] = 'Dịch sang tiếng Anh: Maya đã tắt máy chiếu văn phòng sau cuộc họp.'
-          exercise['acceptedAnswers'] = [new]
-          exercise_path.write_text(json.dumps(exercise_data, ensure_ascii=False, indent=2) + '\n')
+          p = Path('scripts/apply-english-b2-01-04.py')
+          text = p.read_text()
+          old = ',""Will you use the car this evening? when politely checking an existing plan",'
+          new = ',"Will you use the car this evening? when politely checking an existing plan",'
+          if text.count(old) != 1:
+              raise SystemExit(f'Expected exactly one B2 syntax defect, found {text.count(old)}')
+          p.write_text(text.replace(old, new, 1))
           PY
+          python3 -m py_compile scripts/apply-english-b2-01-04.py
+          python3 scripts/apply-english-b2-01-04.py
 
-      - name: Refresh review digests for repaired records
-        shell: bash
-        run: |
-          node --input-type=module <<'JS'
-          import fs from 'node:fs/promises';
-          import path from 'node:path';
-          import { englishContentReviewSourceDigest } from './scripts/english-review-core.mjs';
-
-          const load = async file => JSON.parse(await fs.readFile(file, 'utf8'));
-          const sentenceFile = 'content/english/sentences/e05-scale-b1-07-sentences.json';
-          const exerciseFile = 'content/english/sentences/e05-scale-b1-07-exercises.json';
-          const sentenceDoc = await load(sentenceFile);
-          const exerciseDoc = await load(exerciseFile);
-          const sentence = sentenceDoc.records.find(record => record.id === 'sent.grb1.07.07.2');
-          const exercise = exerciseDoc.records.find(record => record.id === 'ex.translation.grb1.07.07');
-          if (!sentence || !exercise) throw new Error('repair targets missing');
-
-          const digests = new Map([
-            [sentence.id, englishContentReviewSourceDigest(sentence)],
-            [exercise.id, englishContentReviewSourceDigest(exercise)],
-          ]);
-          const reviewFiles = ['content/english/reviews/decisions.json'];
-          const shardDir = 'content/english/reviews/decisions.d';
-          for (const name of (await fs.readdir(shardDir)).filter(name => name.endsWith('.json')).sort()) {
-            reviewFiles.push(path.join(shardDir, name));
-          }
-
-          const found = new Set();
-          for (const file of reviewFiles) {
-            const doc = await load(file);
-            let changed = false;
-            for (const decision of doc.decisions ?? []) {
-              const digest = digests.get(decision.recordId);
-              if (!digest) continue;
-              decision.sourceDigest = digest;
-              found.add(decision.recordId);
-              changed = true;
-            }
-            if (changed) await fs.writeFile(file, JSON.stringify(doc, null, 2) + '\n');
-          }
-          for (const id of digests.keys()) {
-            if (!found.has(id)) throw new Error(`review decision not found for ${id}`);
-          }
-          console.log(Object.fromEntries(digests));
-          JS
-
-      - name: Validate source records
+      - name: Validate B2 source and review contracts
         shell: bash
         run: |
           pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
           pnpm english-content:licenses
           pnpm english-content:test
-          pnpm english-content:pilot
-          pnpm english-content:e04
 
-      - name: Regenerate and publish runtime artifacts
+      - name: Generate and publish B2 runtime artifacts
         shell: bash
         run: |
           pnpm english-content:generate
           pnpm english-content:publish
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
 
-      - name: Validate dedupe after regeneration
-        run: pnpm english-content:dedupe
-
-      - name: Commit repaired source and generated artifacts
+      - name: Commit B2 slices 01-04
         shell: bash
         run: |
-          if git diff --quiet; then
-            echo 'No repair changes to commit.'
-            exit 0
-          fi
+          git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
-          git commit -m 'fix(content): remove B1 sentence duplicate'
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs
+          if git diff --cached --quiet; then
+            echo 'No B2 publication changes to commit.'
+            exit 0
+          fi
+          git commit -m 'feat(content): publish reviewed B2 grammar slices 01-04'
           git push
