@@ -1,0 +1,66 @@
+name: Apply English A1-06
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/apply-english-a1-06.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/english-learning-content-system
+          fetch-depth: 1
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply reviewed A1-06 slice
+        run: python3 scripts/apply-english-a1-06.py
+      - name: Validate reviewed A1-06 source
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:test
+          pnpm english-content:licenses
+          pnpm english-content:dedupe
+      - name: Publish runtime
+        run: pnpm english-content:publish
+      - name: Smoke published runtime
+        run: pnpm english-content:runtime:smoke
+      - name: Validate controlled batch metadata
+        run: |
+          pnpm english-content:e10:validate
+          pnpm english-content:e10:smoke
+      - name: Refresh readiness and maintenance audit
+        run: |
+          pnpm english-content:e11
+          pnpm english-content:e12:audit
+      - name: Commit final reviewed A1 slice
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/english/batches/manifest.json \
+            content/english/grammar/e05-scale-a1-06-topics.json \
+            content/english/sentences/e05-scale-a1-06-sentences.json \
+            content/english/sentences/e05-scale-a1-06-exercises.json \
+            content/english/sentences/e05-scale-a1-06-common-mistakes.json \
+            content/english/reviews/decisions.d/e05-grammar-a1-06.json \
+            content/english/releases/2026.10.0.json \
+            scripts/publish-english-content.mjs \
+            scripts/validate-english-content.mjs \
+            scripts/smoke-published-english-content.mjs \
+            shared/grammar \
+            shared/sentences
+          git diff --cached --check
+          git commit -m "feat(content): publish final A1 grammar body slice"
+          git push origin HEAD:feature/english-learning-content-system
