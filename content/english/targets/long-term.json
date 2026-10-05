@@ -648,7 +648,23 @@
       "minimum": 2000,
       "sources": [
         {
-          "path": "content/english/review-queues/grammar-e06-common-mistakes.json",
+          "path": "content/english/sentences/e06-reviewed-common-mistakes.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-01-common-mistakes.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-02-common-mistakes.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-03-common-mistakes.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-04-common-mistakes.json",
           "collection": "records"
         }
       ]
@@ -659,7 +675,31 @@
       "minimum": 100000,
       "sources": [
         {
-          "path": "content/english/review-queues/typing-text-e06-sentences.json",
+          "path": "content/english/sentences/pilot-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-01-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-02-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-03-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e05-scale-a1-04-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e06-reviewed-typing-text-sentences.json",
+          "collection": "records"
+        },
+        {
+          "path": "content/english/sentences/e06-reviewed-translation-sentences.json",
           "collection": "records"
         }
       ]
@@ -670,7 +710,7 @@
       "minimum": 20000,
       "sources": [
         {
-          "path": "content/english/review-queues/tatoeba-e06-translations.json",
+          "path": "content/english/sentences/e06-reviewed-translations.json",
           "collection": "records"
         }
       ]
@@ -681,7 +721,7 @@
       "minimum": 30000,
       "sources": [
         {
-          "path": "content/english/review-queues/typing-text-e06-exercises.json",
+          "path": "content/english/sentences/e06-reviewed-cloze.json",
           "collection": "records"
         }
       ]
@@ -692,8 +732,12 @@
       "minimum": 10000,
       "sources": [
         {
-          "path": "content/english/review-queues/grammar-e06-transformations.json",
-          "collection": "records"
+          "path": "content/english/sentences/e06-reviewed-exercises.json",
+          "collection": "records",
+          "filterField": "type",
+          "filterValues": [
+            "transformation"
+          ]
         }
       ]
     },
@@ -703,7 +747,7 @@
       "minimum": 10000,
       "sources": [
         {
-          "path": "content/english/review-queues/multiwoz-e06-dialogues.json",
+          "path": "content/english/sentences/e06-reviewed-dialogues.json",
           "collection": "records"
         }
       ]

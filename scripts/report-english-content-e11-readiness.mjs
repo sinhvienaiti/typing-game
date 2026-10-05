@@ -100,7 +100,7 @@ for (const [id,[minimum,maximum]] of Object.entries(expected)) {
   }
 }
 
-const pendingGrammarReview=[await buildGrammarReviewPacket("a1-04")];
+const pendingGrammarReview=[];
 const snapshotPaths=[
   "content/english/batches/manifest.json",
   "content/english/grammar/e05-scale-a1-04-topics.json",
