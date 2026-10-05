@@ -1,0 +1,48 @@
+name: Debug English Content
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+
+permissions:
+  contents: read
+
+jobs:
+  debug-rich-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Capture rich English content validation
+        id: validate
+        shell: bash
+        run: |
+          set +e
+          npm run english-content:validate > english-content-validation.log 2>&1
+          status=$?
+          cat english-content-validation.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload validation log
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-content-validation-log
+          path: english-content-validation.log
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Preserve validator status
+        shell: bash
+        run: exit "${{ steps.validate.outputs.status }}"
