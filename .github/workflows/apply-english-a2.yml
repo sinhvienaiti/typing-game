@@ -1,0 +1,81 @@
+name: Apply English A2 Completion
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/apply-english-a2.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/english-learning-content-system
+          fetch-depth: 1
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Repair helper transcription and syntax-check
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/apply-english-a2.py')
+          s=p.read_text()
+          s=s.replace(',""Could you to open the window, please?"',',"Could you to open the window, please?"')
+          s=s.replace(',""You like coffee, aren\'t you?"',',"You like coffee, aren\'t you?"')
+          p.write_text(s)
+          PY
+          python3 -m py_compile scripts/apply-english-a2.py
+      - name: Generate and register six reviewed A2 slices
+        run: python3 scripts/apply-english-a2.py
+      - name: Validate controlled A2 authoring
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:test
+          pnpm english-content:licenses
+          pnpm english-content:dedupe
+      - name: Publish reviewed A2 runtime
+        run: pnpm english-content:publish
+      - name: Smoke published runtime
+        run: pnpm english-content:runtime:smoke
+      - name: Validate controlled batches
+        run: |
+          pnpm english-content:e10:validate
+          pnpm english-content:e10:smoke
+      - name: Refresh readiness and maintenance audit
+        run: |
+          pnpm english-content:e11
+          pnpm english-content:e12:audit
+      - name: Commit completed A2 grammar body
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            package.json \
+            docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
+            content/english/batches/manifest.json \
+            content/english/grammar/e05-scale-a2-*-topics.json \
+            content/english/sentences/e05-scale-a2-*-sentences.json \
+            content/english/sentences/e05-scale-a2-*-exercises.json \
+            content/english/sentences/e05-scale-a2-*-common-mistakes.json \
+            content/english/reviews/decisions.d/e05-grammar-a2-*.json \
+            content/english/releases/2026.10.0.json \
+            content/english/reports/e11-readiness.json \
+            scripts/publish-english-content.mjs \
+            scripts/smoke-published-english-content.mjs \
+            scripts/report-english-content-e11-readiness.mjs \
+            shared/grammar \
+            shared/sentences
+          git diff --cached --check
+          git commit -m "feat(content): complete reviewed A2 grammar body"
+          git push origin HEAD:feature/english-learning-content-system
