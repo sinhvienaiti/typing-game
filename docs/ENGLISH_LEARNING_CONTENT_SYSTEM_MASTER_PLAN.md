@@ -2525,14 +2525,15 @@ Pilot status: **PUBLISHED; CONTROLLED SCALE-UP IN PROGRESS**.
 
 ### 43.4 E05 grammar-topic pilot
 
-Pilot status: **SECOND CONTROLLED A1 BODY SLICE PUBLISHED LOCALLY; CONTINUING REVIEWED SCALE-UP**.
+Pilot status: **THIRD CONTROLLED A1 BODY SLICE PUBLISHED LOCALLY; CONTINUING REVIEWED SCALE-UP**.
 
 - Source authoring files remain `draft` so the original authored records and editorial workflow stay auditable.
-- A digest-bound review ledger overlays 72 accepted records and promotes only those reviewed records at publication time.
-- Published E05 runtime now contains **28 rich grammar topics**: the original 12-topic cross-CEFR pilot plus two controlled A1 body slices with 16 additional topics. Grammar-linked authoring now includes **84 controlled example sentences, 56 exercises and 16 linked common mistakes**.
-- The original 12-topic pilot remains exactly 2 per CEFR level. A1 slice 01 adds `be` identification/negative/questions, subject pronouns, possessive adjectives, demonstratives, there is/are and a/an. A1 slice 02 adds basic `the`, noun number, countability, some/any, have/has possession, possessive `'s`, Present Simple facts/states and third-person `-s`. Every scale topic includes EN/VI concepts, formulae, use cases, forms/variations, contrasts/prerequisites, 3 examples, 2 exercises and 1 common mistake.
-- The original 72 publication decisions remain intact. The two A1 scale slices add **112 digest-bound publication decisions** (16 topics + 48 examples + 32 exercises + 16 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
-- The full 300-topic framework remains the curriculum/taxonomy; **28/300 topics now have reviewed rich runtime bodies**. Further expansion must continue as controlled CEFR slices rather than generating the remaining topics in bulk.
+- The E05 grammar-body review ledger now overlays **240 digest-bound accepted records** and promotes only those reviewed records at publication time.
+- Published E05 runtime now contains **36 rich grammar topics**: the original 12-topic cross-CEFR pilot plus three controlled A1 body slices with 24 additional topics. Grammar-linked authoring now includes **108 controlled example sentences, 72 exercises and 24 linked common mistakes**.
+- The original 12-topic pilot remains exactly 2 per CEFR level. A1 slice 01 adds `be` identification/negative/questions, subject pronouns, possessive adjectives, demonstratives, there is/are and a/an. A1 slice 02 adds basic `the`, noun number, countability, some/any, have/has possession, possessive `'s`, Present Simple facts/states and third-person `-s`. A1 slice 03 adds Present Simple negatives/questions/wh-questions, frequency adverbs, can for ability, can for permission/requests, imperatives and object pronouns. Every scale topic includes EN/VI concepts, formulae, use cases, forms/variations, contrasts/prerequisites, 3 examples, 2 exercises and 1 common mistake.
+- The original 72 publication decisions remain intact. The three A1 scale slices add **168 digest-bound publication decisions** (24 topics + 72 examples + 48 exercises + 24 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
+- The full 300-topic framework remains the curriculum/taxonomy; **36/300 topics now have reviewed rich runtime bodies**. Further expansion must continue as controlled CEFR slices rather than generating the remaining topics in bulk.
+- Active batch metadata no longer references transient `content/english/review-queues/*` staging files. The superseded E03 lexical-enrichment and E06 sentence-exercise candidate batches were retired from the active manifest after their durable reviewed slices became the source of truth; E10 now validates only reproducible checked-in sources.
 
 ### 43.5 E06 sentence / exercise pilot
 
@@ -2565,7 +2566,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **28 topics**; `shared/sentences` contains **1,756 records** = **684 examples + 856 exercises + 100 dialogues + 116 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **36 topics**; `shared/sentences` contains **1,804 records** = **708 examples + 872 exercises + 100 dialogues + 124 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
 
 ### 43.7 E08 Monkeytype
 

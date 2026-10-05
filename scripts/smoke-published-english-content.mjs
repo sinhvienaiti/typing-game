@@ -60,10 +60,10 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
-if (grammarManifest.count!==28) errors.push("published grammar runtime must contain 28 reviewed grammar topics");
-if (sentenceManifest.count!==1756) errors.push("published sentence runtime must contain 1756 reviewed records");
-if (topics.length!==28||examples.length!==684||exercises.length!==856||dialogues.length!==100||commonMistakes.length!==116) {
-  errors.push("published runtime split must be 28 topics + 684 examples + 856 exercises + 100 dialogues + 116 common mistakes");
+if (grammarManifest.count!==36) errors.push("published grammar runtime must contain 36 reviewed grammar topics");
+if (sentenceManifest.count!==1804) errors.push("published sentence runtime must contain 1804 reviewed records");
+if (topics.length!==36||examples.length!==708||exercises.length!==872||dialogues.length!==100||commonMistakes.length!==124) {
+  errors.push("published runtime split must be 36 topics + 708 examples + 872 exercises + 100 dialogues + 124 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -191,7 +191,7 @@ try {
   }
 
   const monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
-  if(monkeyCorrectionCount!==216) errors.push("published Monkeytype error-correction activity must expose 100 corrections + 116 common mistakes");
+  if(monkeyCorrectionCount!==224) errors.push("published Monkeytype error-correction activity must expose 100 corrections + 124 common mistakes");
   const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
     {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
@@ -289,7 +289,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
-    monkeyCorrectionRecords:216,
+    monkeyCorrectionRecords:224,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:100,
