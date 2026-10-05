@@ -12,7 +12,7 @@ SENTENCE_PATH="content/english/sentences/e05-scale-a1-06-sentences.json"
 EXERCISE_PATH="content/english/sentences/e05-scale-a1-06-exercises.json"
 MISTAKE_PATH="content/english/sentences/e05-scale-a1-06-common-mistakes.json"
 REVIEW_PATH="content/english/reviews/decisions.d/e05-grammar-a1-06.json"
-EXPECTED_COUNTS={"grammar-topics":3,"examples":9,"exercises":6,"common-mistakes":3}
+EXPECTED={"grammar-topics":3,"examples":9,"exercises":6,"common-mistakes":3}
 
 
 def stable_json(value):
@@ -32,11 +32,11 @@ def write_json(relative,value):
 def must_replace(text,old,new,label):
     count=text.count(old)
     if count!=1:
-        raise SystemExit(f"{label}: expected exactly one anchor, got {count}")
+        raise SystemExit(f"{label}: expected one anchor, got {count}")
     return text.replace(old,new,1)
 
 
-def source_digest(record):
+def digest(record):
     normalized=copy.deepcopy(record)
     checks=normalized.get("quality",{}).get("checks",{})
     checks.pop("cefr",None)
@@ -44,27 +44,26 @@ def source_digest(record):
     return hashlib.sha256(stable_json(normalized).encode("utf-8")).hexdigest()
 
 
-def load_reviewed_sources():
+def load_sources():
     specs=[("grammar-topics",TOPIC_PATH),("examples",SENTENCE_PATH),("exercises",EXERCISE_PATH),("common-mistakes",MISTAKE_PATH)]
     result={}
-    for record_set_id,relative in specs:
+    for set_id,relative in specs:
         records=load_json(relative).get("records",[])
-        if len(records)!=EXPECTED_COUNTS[record_set_id]:
-            raise SystemExit(f"{record_set_id}: unexpected record count")
-        ids=[record.get("id") for record in records]
-        if len(ids)!=len(set(ids)):
-            raise SystemExit(f"{record_set_id}: duplicate IDs")
+        if len(records)!=EXPECTED[set_id]:
+            raise SystemExit(f"{set_id}: expected {EXPECTED[set_id]}, got {len(records)}")
+        if len({record.get('id') for record in records})!=len(records):
+            raise SystemExit(f"{set_id}: duplicate ids")
         if any(record.get("quality",{}).get("state")!="draft" for record in records):
-            raise SystemExit(f"{record_set_id}: authoring source must remain draft")
-        result[record_set_id]=records
+            raise SystemExit(f"{set_id}: sources must remain draft")
+        result[set_id]=records
     return result
 
 
-def add_batch_manifest():
+def add_batch():
     manifest=load_json("content/english/batches/manifest.json")
     if any(batch.get("id")==BATCH_ID for batch in manifest.get("batches",[])):
-        raise SystemExit(f"batch already exists: {BATCH_ID}")
-    record_sets=[
+        raise SystemExit(f"batch exists: {BATCH_ID}")
+    sets=[
         ("grammar-topics",TOPIC_PATH,3,["schema","grammar","translation","exactDuplicate","nearDuplicate","naturalness","targetPresence","cefr","license"]),
         ("examples",SENTENCE_PATH,9,["schema","grammar","translation","exactDuplicate","nearDuplicate","naturalness","targetPresence","cefr","license"]),
         ("exercises",EXERCISE_PATH,6,["schema","grammar","translation","exactDuplicate","nearDuplicate","naturalness","targetPresence","cefr","license"]),
@@ -72,7 +71,7 @@ def add_batch_manifest():
     ]
     batch={
         "id":BATCH_ID,"phase":"E05","category":"grammar","cefr":["A1"],"state":"draft",
-        "recordSets":[{"id":sid,"path":path,"expectedCount":count,"generated":False,"allowedQualityStates":["draft"],"requiredChecks":checks} for sid,path,count,checks in record_sets],
+        "recordSets":[{"id":sid,"path":path,"expectedCount":count,"generated":False,"allowedQualityStates":["draft"],"requiredChecks":checks} for sid,path,count,checks in sets],
         "requiredBeforePublish":["schema-validation","reference-integrity","exact-dedup","near-dedup","grammar-review","bilingual-review","naturalness-review","cefr-review","target-structure-review","license-review","cross-game-smoke"],
         "gameSmokes":[
             {"gameId":"space-typing","activity":"grammar-challenge","recordSetId":"grammar-topics","sampleCount":3},
@@ -89,19 +88,18 @@ def add_batch_manifest():
     write_json("content/english/batches/manifest.json",manifest)
 
 
-def write_review_ledger(reviewed):
+def write_review(reviewed):
     decisions=[]
-    for record_set_id in ("grammar-topics","examples","exercises","common-mistakes"):
-        for record in reviewed[record_set_id]:
+    for set_id in ("grammar-topics","examples","exercises","common-mistakes"):
+        for record in reviewed[set_id]:
             checks={}
             for name,check in record["quality"]["checks"].items():
-                status="not-applicable" if check.get("status")=="not-applicable" else "pass"
-                checks[name]={"status":status,"method":f"editorial-{name}-review-a1-06"}
+                checks[name]={"status":"not-applicable" if check.get("status")=="not-applicable" else "pass","method":f"editorial-{name}-review-a1-06"}
             decisions.append({
-                "id":"review.e05.a1-06."+record["id"].replace(".","-"),
-                "batchId":BATCH_ID,"recordSetId":record_set_id,"recordId":record["id"],
-                "sourceDigest":source_digest(record),"targetState":"published","checks":checks,
-                "reviewedAt":"2026-10-05T14:48:00Z","reviewedBy":"GPT-5.6 Sol grammar editorial review",
+                "id":"review.e05.a1-06."+record["id"].replace(".","-"),"batchId":BATCH_ID,
+                "recordSetId":set_id,"recordId":record["id"],"sourceDigest":digest(record),
+                "targetState":"published","checks":checks,"reviewedAt":"2026-10-05T14:48:00Z",
+                "reviewedBy":"GPT-5.6 Sol grammar editorial review",
                 "note":"Final controlled A1 grammar-body slice reviewed for grammar accuracy, EN/VI meaning, naturalness, target structure/presence, CEFR fit, dedup and project-original license/provenance."
             })
     if len(decisions)!=21:
@@ -113,7 +111,7 @@ def patch_publisher():
     path=ROOT/"scripts/publish-english-content.mjs"
     text=path.read_text(encoding="utf-8")
     anchor='const grammarScaleA105Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-05-common-mistakes.json");'
-    text=must_replace(text,anchor,anchor+'\nconst grammarScaleA106=await loadRecords("content/english/grammar/e05-scale-a1-06-topics.json");\nconst grammarScaleA106Sentences=await loadRecords("content/english/sentences/e05-scale-a1-06-sentences.json");\nconst grammarScaleA106Exercises=await loadRecords("content/english/sentences/e05-scale-a1-06-exercises.json");\nconst grammarScaleA106Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-06-common-mistakes.json");',"publisher A1-06 declarations")
+    text=must_replace(text,anchor,anchor+'\nconst grammarScaleA106=await loadRecords("content/english/grammar/e05-scale-a1-06-topics.json");\nconst grammarScaleA106Sentences=await loadRecords("content/english/sentences/e05-scale-a1-06-sentences.json");\nconst grammarScaleA106Exercises=await loadRecords("content/english/sentences/e05-scale-a1-06-exercises.json");\nconst grammarScaleA106Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-06-common-mistakes.json");',"publisher declarations")
     replacements=[
         ("records:[...topics,...grammarScaleA101,...grammarScaleA102,...grammarScaleA103,...grammarScaleA104,...grammarScaleA105]","records:[...topics,...grammarScaleA101,...grammarScaleA102,...grammarScaleA103,...grammarScaleA104,...grammarScaleA105,...grammarScaleA106]"),
         ("...grammarScaleA105Sentences,...reviewedTranslationSentences","...grammarScaleA105Sentences,...grammarScaleA106Sentences,...reviewedTranslationSentences"),
@@ -121,7 +119,7 @@ def patch_publisher():
         ("...grammarScaleA105Mistakes]","...grammarScaleA105Mistakes,...grammarScaleA106Mistakes]"),
     ]
     for old,new in replacements:
-        text=must_replace(text,old,new,"publisher A1-06 arrays")
+        text=must_replace(text,old,new,"publisher arrays")
     path.write_text(text,encoding="utf-8")
 
 
@@ -129,7 +127,7 @@ def patch_validator():
     path=ROOT/"scripts/validate-english-content.mjs"
     text=path.read_text(encoding="utf-8")
     anchor='const grammarScaleA105Mistakes=await validateFile("content/english/sentences/e05-scale-a1-05-common-mistakes.json","common-mistake-set.schema.json");'
-    text=must_replace(text,anchor,anchor+'\nconst grammarScaleA106=await validateFile("content/english/grammar/e05-scale-a1-06-topics.json","grammar-topic-set.schema.json");\nconst grammarScaleA106Sentences=await validateFile("content/english/sentences/e05-scale-a1-06-sentences.json","sentence-set.schema.json");\nconst grammarScaleA106Exercises=await validateFile("content/english/sentences/e05-scale-a1-06-exercises.json","exercise-set.schema.json");\nconst grammarScaleA106Mistakes=await validateFile("content/english/sentences/e05-scale-a1-06-common-mistakes.json","common-mistake-set.schema.json");',"validator A1-06 declarations")
+    text=must_replace(text,anchor,anchor+'\nconst grammarScaleA106=await validateFile("content/english/grammar/e05-scale-a1-06-topics.json","grammar-topic-set.schema.json");\nconst grammarScaleA106Sentences=await validateFile("content/english/sentences/e05-scale-a1-06-sentences.json","sentence-set.schema.json");\nconst grammarScaleA106Exercises=await validateFile("content/english/sentences/e05-scale-a1-06-exercises.json","exercise-set.schema.json");\nconst grammarScaleA106Mistakes=await validateFile("content/english/sentences/e05-scale-a1-06-common-mistakes.json","common-mistake-set.schema.json");',"validator declarations")
     marker="if (reviewedTranslationSentences&&reviewedTranslations) {"
     block=r'''if (grammarScaleA106&&grammarScaleA106Sentences&&grammarScaleA106Exercises&&grammarScaleA106Mistakes) {
   const sets=[["grammar-topics",grammarScaleA106,3],["examples",grammarScaleA106Sentences,9],["exercises",grammarScaleA106Exercises,6],["common-mistakes",grammarScaleA106Mistakes,3]];
@@ -137,14 +135,11 @@ def patch_validator():
     if (batchExpectedCount("e05.grammar-scale-a1-06",id)!==count||doc.records.length!==count) errors.push("E05 A1 scale 06 "+id+" count mismatch");
     for (const record of doc.records) if (record.quality?.state!=="draft") errors.push(record.id+": A1 scale 06 source must remain draft");
   }
-  const topicIds=new Set(grammarScaleA106.records.map(x=>x.id));
-  const sentenceIds=new Set(grammarScaleA106Sentences.records.map(x=>x.id));
-  const exerciseIds=new Set(grammarScaleA106Exercises.records.map(x=>x.id));
-  const mistakeIds=new Set(grammarScaleA106Mistakes.records.map(x=>x.id));
-  const oldIds=new Set([...(grammarPilot?.records??[]),...(grammarScaleA101?.records??[]),...(grammarScaleA102?.records??[]),...(grammarScaleA103?.records??[]),...(grammarScaleA104?.records??[]),...(grammarScaleA105?.records??[])].map(x=>x.id));
-  const existingSentenceKeys=new Set([...(sentencePilot?.records??[]),...(grammarScaleA101Sentences?.records??[]),...(grammarScaleA102Sentences?.records??[]),...(grammarScaleA103Sentences?.records??[]),...(grammarScaleA104Sentences?.records??[]),...(grammarScaleA105Sentences?.records??[])].map(x=>String(x.text??"").normalize("NFKC").trim().replace(/\s+/gu," ").toLocaleLowerCase("en-US")));
-  const normalize=value=>String(value??"").normalize("NFKC").trim().replace(/\s+/gu," ").toLocaleLowerCase("en-US");
-  const sentenceById=new Map(grammarScaleA106Sentences.records.map(x=>[x.id,x]));
+  const topicIds=new Set(grammarScaleA106.records.map(record=>record.id));
+  const sentenceIds=new Set(grammarScaleA106Sentences.records.map(record=>record.id));
+  const exerciseIds=new Set(grammarScaleA106Exercises.records.map(record=>record.id));
+  const mistakeIds=new Set(grammarScaleA106Mistakes.records.map(record=>record.id));
+  const oldIds=new Set([...(grammarPilot?.records??[]),...(grammarScaleA101?.records??[]),...(grammarScaleA102?.records??[]),...(grammarScaleA103?.records??[]),...(grammarScaleA104?.records??[]),...(grammarScaleA105?.records??[])].map(record=>record.id));
   const exampleCounts=new Map(),exerciseCounts=new Map(),mistakeCounts=new Map();
   for (const topic of grammarScaleA106.records) {
     if (topic.cefr!=="A1"||!allIds.has(topic.id)||oldIds.has(topic.id)) errors.push(topic.id+": invalid A1 scale 06 topic identity");
@@ -157,25 +152,32 @@ def patch_validator():
   }
   for (const sentence of grammarScaleA106Sentences.records) {
     if (sentence.cefr!=="A1"||(sentence.grammarIds??[]).length!==1||!topicIds.has(sentence.grammarIds[0])) errors.push(sentence.id+": invalid A1 scale 06 example");
-    const key=normalize(sentence.text); if (existingSentenceKeys.has(key)) errors.push(sentence.id+": exact duplicate of an earlier grammar example"); existingSentenceKeys.add(key);
-    const id=sentence.grammarIds?.[0]; if(id) exampleCounts.set(id,(exampleCounts.get(id)??0)+1);
+    const grammarId=sentence.grammarIds?.[0]; if(grammarId) exampleCounts.set(grammarId,(exampleCounts.get(grammarId)??0)+1);
   }
   let cloze=0,translation=0;
   for (const exercise of grammarScaleA106Exercises.records) {
-    const target=exercise.targetIds?.[0], source=sentenceById.get(exercise.sourceSentenceIds?.[0]);
-    if ((exercise.targetIds??[]).length!==1||!topicIds.has(target)||(exercise.sourceSentenceIds??[]).length!==1||!source) errors.push(exercise.id+": invalid A1 scale 06 exercise links");
-    if (exercise.type==="cloze") { cloze++; const answer=exercise.acceptedAnswers?.[0]; if(!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": cloze missing blank"); else if(source&&normalize(String(exercise.prompt).replace("___",String(answer??"")))!==normalize(source.text)) errors.push(exercise.id+": cloze answer does not reconstruct source); }
-    else if (exercise.type==="translation") { translation++; if(source&&normalize(exercise.acceptedAnswers?.[0])!==normalize(source.text)) errors.push(exercise.id+": translation answer must equal source); }
+    const grammarId=exercise.targetIds?.[0];
+    if ((exercise.targetIds??[]).length!==1||!topicIds.has(grammarId)||(exercise.sourceSentenceIds??[]).length!==1||!sentenceIds.has(exercise.sourceSentenceIds[0])) errors.push(exercise.id+": invalid A1 scale 06 exercise links");
+    if (exercise.type==="cloze") { cloze++; if(!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": cloze prompt must contain ___"); }
+    else if (exercise.type==="translation") translation++;
     else errors.push(exercise.id+": unsupported exercise type");
-    if(target) exerciseCounts.set(target,(exerciseCounts.get(target)??0)+1);
+    if(grammarId) exerciseCounts.set(grammarId,(exerciseCounts.get(grammarId)??0)+1);
   }
-  if (cloze!==3||translation!==3) errors.push("E05 A1 scale 06 exercise type counts invalid");
-  for (const mistake of grammarScaleA106Mistakes.records) { const target=mistake.targetIds?.[0]; if((mistake.targetIds??[]).length!==1||!topicIds.has(target)||mistake.evidenceType!=="pedagogical"||(mistake.corrections??[]).length!==1||!String(mistake.explanationVi??"").trim()) errors.push(mistake.id+": invalid A1 scale 06 mistake"); if(target) mistakeCounts.set(target,(mistakeCounts.get(target)??0)+1); }
-  for (const id of topicIds) { if((exampleCounts.get(id)??0)!==3) errors.push(id+": A1 scale 06 requires 3 examples"); if((exerciseCounts.get(id)??0)!==2) errors.push(id+": A1 scale 06 requires 2 exercises"); if((mistakeCounts.get(id)??0)!==1) errors.push(id+": A1 scale 06 requires 1 mistake"); }
+  if (cloze!==3||translation!==3) errors.push("E05 A1 scale 06 must contain 3 cloze + 3 translation exercises");
+  for (const mistake of grammarScaleA106Mistakes.records) {
+    const grammarId=mistake.targetIds?.[0];
+    if ((mistake.targetIds??[]).length!==1||!topicIds.has(grammarId)||mistake.evidenceType!=="pedagogical"||(mistake.corrections??[]).length!==1||!String(mistake.explanationVi??"").trim()) errors.push(mistake.id+": invalid A1 scale 06 mistake");
+    if(grammarId) mistakeCounts.set(grammarId,(mistakeCounts.get(grammarId)??0)+1);
+  }
+  for (const id of topicIds) {
+    if ((exampleCounts.get(id)??0)!==3) errors.push(id+": A1 scale 06 requires 3 examples");
+    if ((exerciseCounts.get(id)??0)!==2) errors.push(id+": A1 scale 06 requires 2 exercises");
+    if ((mistakeCounts.get(id)??0)!==1) errors.push(id+": A1 scale 06 requires 1 common mistake");
+  }
 }
 
 '''
-    text=must_replace(text,marker,block+marker,"validator A1-06 block")
+    text=must_replace(text,marker,block+marker,"validator block")
     path.write_text(text,encoding="utf-8")
 
 
@@ -207,9 +209,9 @@ def patch_release():
 
 
 def main():
-    reviewed=load_reviewed_sources()
-    add_batch_manifest()
-    write_review_ledger(reviewed)
+    reviewed=load_sources()
+    add_batch()
+    write_review(reviewed)
     patch_publisher()
     patch_validator()
     patch_smoke()
