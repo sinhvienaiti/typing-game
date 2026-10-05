@@ -5,6 +5,11 @@ import { fileURLToPath } from "node:url";
 import { RevisionStore, AdminConflictError, AdminValidationError } from "./store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
+import {
+  QaSessionNotFoundError,
+  QaSessionStore,
+  QaSessionValidationError,
+} from "./qa-sessions.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contractPath = resolve(root, "../games/space-typing/contracts/space-typing-admin.v1.json");
@@ -14,6 +19,7 @@ const store = new RevisionStore({
   contract,
 });
 await store.initialize(createDefaultSpaceTypingConfig(contract));
+const qaSessions = new QaSessionStore();
 
 const host = "127.0.0.1";
 const port = Number.parseInt(process.env.TYPING_GAME_ADMIN_PORT || "3199", 10);
@@ -49,6 +55,9 @@ function authorized(request) {
   return request.headers["x-typing-game-admin-token"] === token;
 }
 
+const QA_CONSUME_PATH = "/api/admin/space-typing/qa/consume";
+const QA_REVOKE_PATTERN = /^\/api\/admin\/space-typing\/qa\/sessions\/([^/]+)\/revoke$/;
+
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
@@ -56,6 +65,16 @@ const server = createServer(async (request, response) => {
       json(response, 404, { error: "not-found" });
       return;
     }
+
+    // Capability exchange is intentionally the only unauthenticated Admin-service
+    // endpoint. It still requires an unguessable bearer bound to runtime session
+    // and environment; the Admin token is never exposed to the game process.
+    if (request.method === "POST" && url.pathname === QA_CONSUME_PATH) {
+      const capability = qaSessions.consume(await body(request));
+      json(response, 200, capability);
+      return;
+    }
+
     if (!authorized(request)) {
       json(response, 401, { error: "unauthorized" });
       return;
@@ -77,6 +96,20 @@ const server = createServer(async (request, response) => {
         activeRevision: (await store.getState()).activeRevision,
         config: await store.getRuntimeConfig(),
       });
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/qa/sessions") {
+      json(response, 200, { sessions: qaSessions.list() });
+      return;
+    }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/qa/sessions") {
+      const issued = qaSessions.issue(await body(request), "admin:local");
+      json(response, 201, issued);
+      return;
+    }
+    const qaRevokeMatch = request.method === "POST" ? url.pathname.match(QA_REVOKE_PATTERN) : null;
+    if (qaRevokeMatch) {
+      json(response, 200, qaSessions.revoke(decodeURIComponent(qaRevokeMatch[1])));
       return;
     }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/world-music/preview") {
@@ -127,8 +160,12 @@ const server = createServer(async (request, response) => {
       json(response, 409, { error: "conflict", message: error.message });
       return;
     }
-    if (error instanceof AdminValidationError) {
+    if (error instanceof AdminValidationError || error instanceof QaSessionValidationError) {
       json(response, 400, { error: "validation", message: error.message });
+      return;
+    }
+    if (error instanceof QaSessionNotFoundError) {
+      json(response, 404, { error: "qa-session-unavailable", message: error.message });
       return;
     }
     if (error instanceof WorldMusicPreviewError) {
