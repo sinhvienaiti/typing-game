@@ -95,6 +95,20 @@ const grammarScaleA106=await loadRecords("content/english/grammar/e05-scale-a1-0
 const grammarScaleA106Sentences=await loadRecords("content/english/sentences/e05-scale-a1-06-sentences.json");
 const grammarScaleA106Exercises=await loadRecords("content/english/sentences/e05-scale-a1-06-exercises.json");
 const grammarScaleA106Mistakes=await loadRecords("content/english/sentences/e05-scale-a1-06-common-mistakes.json");
+const grammarScaleA2Slices=[];
+for (let index=1;index<=6;index++) {
+  const slice=String(index).padStart(2,"0");
+  grammarScaleA2Slices.push({
+    topics:await loadRecords("content/english/grammar/e05-scale-a2-"+slice+"-topics.json"),
+    sentences:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-sentences.json"),
+    exercises:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-exercises.json"),
+    mistakes:await loadRecords("content/english/sentences/e05-scale-a2-"+slice+"-common-mistakes.json"),
+  });
+}
+const grammarScaleA2Topics=grammarScaleA2Slices.flatMap(slice=>slice.topics);
+const grammarScaleA2Sentences=grammarScaleA2Slices.flatMap(slice=>slice.sentences);
+const grammarScaleA2Exercises=grammarScaleA2Slices.flatMap(slice=>slice.exercises);
+const grammarScaleA2Mistakes=grammarScaleA2Slices.flatMap(slice=>slice.mistakes);
 const reviewedE06Exercises=await loadRecords("content/english/sentences/e06-reviewed-exercises.json");
 const reviewedTranslationSentences=await loadRecords("content/english/sentences/e06-reviewed-translation-sentences.json");
 const reviewedTranslations=await loadRecords("content/english/sentences/e06-reviewed-translations.json");
@@ -185,12 +199,12 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
   {id:"lexemes",dir:"lexemes",records:lexemes},
   {id:"senses",dir:"senses",records:senses}
 ]}));
-results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleA101,...grammarScaleA102,...grammarScaleA103,...grammarScaleA104,...grammarScaleA105,...grammarScaleA106]}]}));
+results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleA101,...grammarScaleA102,...grammarScaleA103,...grammarScaleA104,...grammarScaleA105,...grammarScaleA106,...grammarScaleA2Topics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
-  {id:"examples",dir:"examples",records:[...sentences,...grammarScaleA101Sentences,...grammarScaleA102Sentences,...grammarScaleA103Sentences,...grammarScaleA104Sentences,...grammarScaleA105Sentences,...grammarScaleA106Sentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
-  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleA101Exercises,...grammarScaleA102Exercises,...grammarScaleA103Exercises,...grammarScaleA104Exercises,...grammarScaleA105Exercises,...grammarScaleA106Exercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
+  {id:"examples",dir:"examples",records:[...sentences,...grammarScaleA101Sentences,...grammarScaleA102Sentences,...grammarScaleA103Sentences,...grammarScaleA104Sentences,...grammarScaleA105Sentences,...grammarScaleA106Sentences,...grammarScaleA2Sentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleA101Exercises,...grammarScaleA102Exercises,...grammarScaleA103Exercises,...grammarScaleA104Exercises,...grammarScaleA105Exercises,...grammarScaleA106Exercises,...grammarScaleA2Exercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
   {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
-  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleA101Mistakes,...grammarScaleA102Mistakes,...grammarScaleA103Mistakes,...grammarScaleA104Mistakes,...grammarScaleA105Mistakes,...grammarScaleA106Mistakes]}
+  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleA101Mistakes,...grammarScaleA102Mistakes,...grammarScaleA103Mistakes,...grammarScaleA104Mistakes,...grammarScaleA105Mistakes,...grammarScaleA106Mistakes,...grammarScaleA2Mistakes]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
   {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations,...scale11Collocations,...scale12Collocations,...scale13Collocations,...scale14Collocations,...scale15Collocations,...scale16Collocations,...scale17Collocations,...scale18Collocations,...scale19Collocations,...scale20Collocations,...scale21Collocations,...scale22Collocations,...scale23Collocations]},
