@@ -1,0 +1,22 @@
+name: Cleanup English Temp Branches
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/cleanup-english-temp-branches.yml
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Remove accidental temporary branches
+        run: |
+          git push origin --delete tmp-do-not-use tmp-do-not-use-2 tmp-do-not-use-3
