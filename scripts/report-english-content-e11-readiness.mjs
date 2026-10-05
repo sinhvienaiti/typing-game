@@ -28,26 +28,10 @@ function pendingChecks(record) {
     .sort((a,b)=>a.localeCompare(b,"en"));
 }
 function reviewPreview(record,recordSetId) {
-  if (recordSetId==="grammar-topics") return {
-    title:record.title,
-    objective:record.objective,
-    concept:record.concept,
-    formulae:record.formulae,
-  };
+  if (recordSetId==="grammar-topics") return {title:record.title,objective:record.objective,concept:record.concept,formulae:record.formulae};
   if (recordSetId==="examples") return {text:record.text,grammarIds:record.grammarIds};
-  if (recordSetId==="exercises") return {
-    type:record.type,
-    prompt:record.prompt,
-    acceptedAnswers:record.acceptedAnswers,
-    targetIds:record.targetIds,
-    sourceSentenceIds:record.sourceSentenceIds,
-  };
-  return {
-    incorrect:record.incorrect,
-    corrections:record.corrections,
-    explanationVi:record.explanationVi,
-    targetIds:record.targetIds,
-  };
+  if (recordSetId==="exercises") return {type:record.type,prompt:record.prompt,acceptedAnswers:record.acceptedAnswers,targetIds:record.targetIds,sourceSentenceIds:record.sourceSentenceIds};
+  return {incorrect:record.incorrect,corrections:record.corrections,explanationVi:record.explanationVi,targetIds:record.targetIds};
 }
 async function buildGrammarReviewPacket(slice) {
   const batchId="e05.grammar-scale-"+slice;
@@ -65,23 +49,16 @@ async function buildGrammarReviewPacket(slice) {
     const records=doc.records??[];
     if (records.length!==expectedCount) errors.push(batchId+"/"+recordSetId+": expected "+expectedCount+" records, got "+records.length);
     recordSets.push({
-      recordSetId,
-      path:relative,
-      expectedCount,
+      recordSetId,path:relative,expectedCount,
       records:records.map((record,index)=>({
-        recordId:englishContentRecordId(record,index),
-        sourceDigest:englishContentReviewSourceDigest(record),
-        state:record?.quality?.state,
-        pendingChecks:pendingChecks(record),
-        preview:reviewPreview(record,recordSetId),
+        recordId:englishContentRecordId(record,index),sourceDigest:englishContentReviewSourceDigest(record),
+        state:record?.quality?.state,pendingChecks:pendingChecks(record),preview:reviewPreview(record,recordSetId),
       })),
     });
   }
   return {batchId,slice,recordSets};
 }
-async function readSnapshotText(relative) {
-  return fs.readFile(path.join(root,relative),"utf8");
-}
+async function readSnapshotText(relative) { return fs.readFile(path.join(root,relative),"utf8"); }
 
 for (const target of targetDoc.targets??[]) {
   if (seenTargets.has(target.id)) errors.push("duplicate long-term target id: "+target.id);
@@ -110,10 +87,9 @@ for (const target of targetDoc.targets??[]) {
 }
 
 const expected={
-  "grammar-topics":[300,320],"verb-patterns":[500,1000],"collocations":[5000,null],
-  "phrasal-verbs":[1000,null],"idioms-chunks":[2000,null],"common-mistakes":[2000,null],
-  "example-sentences":[100000,null],"translation-pairs":[20000,null],"cloze-exercises":[30000,null],
-  "sentence-transformations":[10000,null],"dialogue-examples":[10000,null],
+  "grammar-topics":[300,320],"verb-patterns":[500,1000],"collocations":[5000,null],"phrasal-verbs":[1000,null],
+  "idioms-chunks":[2000,null],"common-mistakes":[2000,null],"example-sentences":[100000,null],"translation-pairs":[20000,null],
+  "cloze-exercises":[30000,null],"sentence-transformations":[10000,null],"dialogue-examples":[10000,null],
 };
 for (const [id,[minimum,maximum]] of Object.entries(expected)) {
   const target=targetDoc.targets?.find(item=>item.id===id);
@@ -127,6 +103,10 @@ for (const [id,[minimum,maximum]] of Object.entries(expected)) {
 const pendingGrammarReview=[await buildGrammarReviewPacket("a1-04")];
 const snapshotPaths=[
   "content/english/batches/manifest.json",
+  "content/english/grammar/e05-scale-a1-04-topics.json",
+  "content/english/sentences/e05-scale-a1-04-sentences.json",
+  "content/english/sentences/e05-scale-a1-04-exercises.json",
+  "content/english/sentences/e05-scale-a1-04-common-mistakes.json",
   "scripts/publish-english-content.mjs",
   "scripts/smoke-published-english-content.mjs",
   "content/english/releases/2026.10.0.json",
