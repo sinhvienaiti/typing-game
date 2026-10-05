@@ -1011,6 +1011,150 @@
       ]
     },
     {
+      "id": "e05.grammar-scale-a1-06",
+      "phase": "E05",
+      "category": "grammar",
+      "cefr": [
+        "A1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-06-topics.json",
+          "expectedCount": 3,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "nearDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-06-sentences.json",
+          "expectedCount": 9,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "nearDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-06-exercises.json",
+          "expectedCount": 6,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "nearDuplicate",
+            "naturalness",
+            "targetPresence",
+            "cefr",
+            "license"
+          ]
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-06-common-mistakes.json",
+          "expectedCount": 3,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "exactDuplicate",
+            "nearDuplicate",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "space-typing",
+          "activity": "grammar-challenge",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 3
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "grammar-topic",
+          "recordSetId": "grammar-topics",
+          "sampleCount": 3
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "example-typing",
+          "recordSetId": "examples",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "cloze",
+          "recordSetId": "exercises",
+          "sampleCount": 3,
+          "recordType": "cloze"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "translation",
+          "recordSetId": "exercises",
+          "sampleCount": 3,
+          "recordType": "translation"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "error-correction",
+          "recordSetId": "common-mistakes",
+          "sampleCount": 3
+        }
+      ]
+    },
+    {
       "id": "e06.grammar-reviewed-slice",
       "phase": "E06",
       "category": "sentences",

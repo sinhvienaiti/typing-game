@@ -113,6 +113,10 @@ const grammarScaleA105=await validateFile("content/english/grammar/e05-scale-a1-
 const grammarScaleA105Sentences=await validateFile("content/english/sentences/e05-scale-a1-05-sentences.json","sentence-set.schema.json");
 const grammarScaleA105Exercises=await validateFile("content/english/sentences/e05-scale-a1-05-exercises.json","exercise-set.schema.json");
 const grammarScaleA105Mistakes=await validateFile("content/english/sentences/e05-scale-a1-05-common-mistakes.json","common-mistake-set.schema.json");
+const grammarScaleA106=await validateFile("content/english/grammar/e05-scale-a1-06-topics.json","grammar-topic-set.schema.json");
+const grammarScaleA106Sentences=await validateFile("content/english/sentences/e05-scale-a1-06-sentences.json","sentence-set.schema.json");
+const grammarScaleA106Exercises=await validateFile("content/english/sentences/e05-scale-a1-06-exercises.json","exercise-set.schema.json");
+const grammarScaleA106Mistakes=await validateFile("content/english/sentences/e05-scale-a1-06-common-mistakes.json","common-mistake-set.schema.json");
 const reviewedE06Exercises=await validateFile("content/english/sentences/e06-reviewed-exercises.json","exercise-set.schema.json");
 const reviewedTranslationSentences=await validateFile("content/english/sentences/e06-reviewed-translation-sentences.json","sentence-set.schema.json");
 const reviewedTranslations=await validateFile("content/english/sentences/e06-reviewed-translations.json","exercise-set.schema.json");
@@ -492,6 +496,53 @@ if (grammarScaleA105&&grammarScaleA105Sentences&&grammarScaleA105Exercises&&gram
   if (cloze!==8||translation!==8) errors.push("E05 A1 scale 05 exercise type counts invalid");
   for (const m of grammarScaleA105Mistakes.records) if ((m.targetIds??[]).length!==1||!topicIds.has(m.targetIds[0])||m.evidenceType!=="pedagogical"||(m.corrections??[]).length!==1) errors.push(m.id+": invalid A1 scale 05 mistake");
   for (const id of topicIds) if ((counts.get(id)??0)!==3) errors.push(id+": A1 scale 05 requires 3 examples");
+}
+
+if (grammarScaleA106&&grammarScaleA106Sentences&&grammarScaleA106Exercises&&grammarScaleA106Mistakes) {
+  const sets=[["grammar-topics",grammarScaleA106,3],["examples",grammarScaleA106Sentences,9],["exercises",grammarScaleA106Exercises,6],["common-mistakes",grammarScaleA106Mistakes,3]];
+  for (const [id,doc,count] of sets) {
+    if (batchExpectedCount("e05.grammar-scale-a1-06",id)!==count||doc.records.length!==count) errors.push("E05 A1 scale 06 "+id+" count mismatch");
+    for (const record of doc.records) if (record.quality?.state!=="draft") errors.push(record.id+": A1 scale 06 source must remain draft");
+  }
+  const topicIds=new Set(grammarScaleA106.records.map(record=>record.id));
+  const sentenceIds=new Set(grammarScaleA106Sentences.records.map(record=>record.id));
+  const exerciseIds=new Set(grammarScaleA106Exercises.records.map(record=>record.id));
+  const mistakeIds=new Set(grammarScaleA106Mistakes.records.map(record=>record.id));
+  const oldIds=new Set([...(grammarPilot?.records??[]),...(grammarScaleA101?.records??[]),...(grammarScaleA102?.records??[]),...(grammarScaleA103?.records??[]),...(grammarScaleA104?.records??[]),...(grammarScaleA105?.records??[])].map(record=>record.id));
+  const exampleCounts=new Map(),exerciseCounts=new Map(),mistakeCounts=new Map();
+  for (const topic of grammarScaleA106.records) {
+    if (topic.cefr!=="A1"||!allIds.has(topic.id)||oldIds.has(topic.id)) errors.push(topic.id+": invalid A1 scale 06 topic identity");
+    if ((topic.exampleIds??[]).length!==3||(topic.exerciseIds??[]).length!==2||(topic.commonMistakeIds??[]).length!==1) errors.push(topic.id+": invalid linked counts");
+    if (!String(topic.concept?.en??"").trim()||!String(topic.concept?.vi??"").trim()) errors.push(topic.id+": bilingual concept is required");
+    for (const id of topic.exampleIds??[]) if (!sentenceIds.has(id)) errors.push(topic.id+": missing example "+id);
+    for (const id of topic.exerciseIds??[]) if (!exerciseIds.has(id)) errors.push(topic.id+": missing exercise "+id);
+    for (const id of topic.commonMistakeIds??[]) if (!mistakeIds.has(id)) errors.push(topic.id+": missing mistake "+id);
+    for (const id of [...(topic.prerequisiteIds??[]),...(topic.contrastTopicIds??[])]) if (!allIds.has(id)) errors.push(topic.id+": unknown grammar reference "+id);
+  }
+  for (const sentence of grammarScaleA106Sentences.records) {
+    if (sentence.cefr!=="A1"||(sentence.grammarIds??[]).length!==1||!topicIds.has(sentence.grammarIds[0])) errors.push(sentence.id+": invalid A1 scale 06 example");
+    const grammarId=sentence.grammarIds?.[0]; if(grammarId) exampleCounts.set(grammarId,(exampleCounts.get(grammarId)??0)+1);
+  }
+  let cloze=0,translation=0;
+  for (const exercise of grammarScaleA106Exercises.records) {
+    const grammarId=exercise.targetIds?.[0];
+    if ((exercise.targetIds??[]).length!==1||!topicIds.has(grammarId)||(exercise.sourceSentenceIds??[]).length!==1||!sentenceIds.has(exercise.sourceSentenceIds[0])) errors.push(exercise.id+": invalid A1 scale 06 exercise links");
+    if (exercise.type==="cloze") { cloze++; if(!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": cloze prompt must contain ___"); }
+    else if (exercise.type==="translation") translation++;
+    else errors.push(exercise.id+": unsupported exercise type");
+    if(grammarId) exerciseCounts.set(grammarId,(exerciseCounts.get(grammarId)??0)+1);
+  }
+  if (cloze!==3||translation!==3) errors.push("E05 A1 scale 06 must contain 3 cloze + 3 translation exercises");
+  for (const mistake of grammarScaleA106Mistakes.records) {
+    const grammarId=mistake.targetIds?.[0];
+    if ((mistake.targetIds??[]).length!==1||!topicIds.has(grammarId)||mistake.evidenceType!=="pedagogical"||(mistake.corrections??[]).length!==1||!String(mistake.explanationVi??"").trim()) errors.push(mistake.id+": invalid A1 scale 06 mistake");
+    if(grammarId) mistakeCounts.set(grammarId,(mistakeCounts.get(grammarId)??0)+1);
+  }
+  for (const id of topicIds) {
+    if ((exampleCounts.get(id)??0)!==3) errors.push(id+": A1 scale 06 requires 3 examples");
+    if ((exerciseCounts.get(id)??0)!==2) errors.push(id+": A1 scale 06 requires 2 exercises");
+    if ((mistakeCounts.get(id)??0)!==1) errors.push(id+": A1 scale 06 requires 1 common mistake");
+  }
 }
 
 if (reviewedTranslationSentences&&reviewedTranslations) {
