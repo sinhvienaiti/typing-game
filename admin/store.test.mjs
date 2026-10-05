@@ -114,3 +114,57 @@ test("contract/schema drift is rejected before a revision is written", async (t)
     AdminValidationError,
   );
 });
+
+
+test("rejects invalid audio and World Music policy drafts", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+
+  const badAudio = structuredClone(active.config);
+  badAudio.audio.defaults.music = 1.5;
+  await assert.rejects(
+    store.createRevision({ baseRevision: active.revision, config: badAudio }),
+    AdminValidationError,
+  );
+
+  const badPolicy = structuredClone(active.config);
+  badPolicy.worldMusic.policyRevision = "admin-bad-v1";
+  badPolicy.worldMusic.publishedPolicy = {
+    configRevision: "admin-bad-v1",
+    worlds: {
+      "world-01": { normal: { kind: "replace", trackIds: [] } },
+    },
+  };
+  await assert.rejects(
+    store.createRevision({ baseRevision: active.revision, config: badPolicy }),
+    AdminValidationError,
+  );
+});
+
+test("accepts a canonical published World Music policy as an isolated draft", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+  const config = structuredClone(active.config);
+  config.worldMusic.policyRevision = "admin-world-music-v1";
+  config.worldMusic.publishedPolicy = {
+    configRevision: "admin-world-music-v1",
+    worlds: {
+      "world-01": {
+        normal: {
+          kind: "replace",
+          trackIds: ["signal-in-the-void"],
+          selectionMode: "ordered",
+        },
+      },
+    },
+  };
+  const draft = await store.createRevision({
+    baseRevision: active.revision,
+    config,
+    message: "World Music policy draft",
+  });
+  assert.equal(draft.config.worldMusic.publishedPolicy.configRevision, "admin-world-music-v1");
+  assert.equal((await store.getRuntimeConfig()).worldMusic.publishedPolicy, undefined);
+});
