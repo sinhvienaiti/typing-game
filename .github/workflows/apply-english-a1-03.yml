@@ -25,7 +25,9 @@ jobs:
         with:
           node-version: 24
       - name: Author, review and wire A1-03
-        run: python3 scripts/apply-english-a1-03.py
+        run: |
+          python3 scripts/apply-english-a1-03.py
+          python3 scripts/cleanup-english-transient-batches.py
       - name: Validate reviewed A1-03 source
         run: |
           pnpm english-content:validate
@@ -38,18 +40,7 @@ jobs:
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
       - name: Validate controlled batch metadata
-        id: e10validate
-        continue-on-error: true
-        run: pnpm english-content:e10:validate > /tmp/e10-validate.log 2>&1
-      - name: Upload E10 validator output
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: e10-validate-output
-          path: /tmp/e10-validate.log
-      - name: Stop on E10 validation failure
-        if: steps.e10validate.outcome != 'success'
-        run: exit 1
+        run: pnpm english-content:e10:validate
       - name: Smoke controlled batch adapters
         run: pnpm english-content:e10:smoke
       - name: Commit reviewed A1-03 slice
