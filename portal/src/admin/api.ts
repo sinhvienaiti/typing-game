@@ -1,0 +1,119 @@
+export type AudioDefaults = {
+  master: number;
+  pronunciation: number;
+  music: number;
+  ambient: number;
+  sfx: number;
+  announcer: number;
+};
+
+export type SpaceTypingAdminConfig = {
+  contractRevision: string;
+  configSchemaVersion: number;
+  worldMusicCatalogSchemaVersion: number;
+  audio: {
+    profileId: string;
+    defaults: AudioDefaults;
+  };
+  worldMusic: {
+    policyRevision: string;
+    assignments: Record<string, unknown>;
+  };
+};
+
+export type AdminRevision = {
+  revision: string;
+  parentRevision: string | null;
+  createdAt: string;
+  author: string;
+  message: string;
+  config: SpaceTypingAdminConfig;
+  active?: boolean;
+};
+
+export type AdminStatePayload = {
+  state: {
+    version: number;
+    activeRevision: string;
+    generation: number;
+    updatedAt: string;
+  };
+  active: AdminRevision;
+  history: AdminRevision[];
+};
+
+const TOKEN_KEY = "typing-game:space-admin-token";
+
+export class AdminApiError extends Error {
+  readonly status: number;
+
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+  }
+}
+
+export class SpaceTypingAdminApi {
+  private token = localStorage.getItem(TOKEN_KEY) ?? "local-dev";
+
+  getToken(): string {
+    return this.token;
+  }
+
+  setToken(token: string): void {
+    this.token = token.trim() || "local-dev";
+    localStorage.setItem(TOKEN_KEY, this.token);
+  }
+
+  private async request<T>(path: string, init?: RequestInit): Promise<T> {
+    const response = await fetch(path, {
+      ...init,
+      cache: "no-store",
+      headers: {
+        "content-type": "application/json",
+        "x-typing-game-admin-token": this.token,
+        ...(init?.headers ?? {}),
+      },
+    });
+    const payload = (await response.json().catch(() => ({}))) as Record<string, unknown>;
+    if (!response.ok) {
+      const message =
+        typeof payload["message"] === "string"
+          ? payload["message"]
+          : typeof payload["error"] === "string"
+            ? payload["error"]
+            : `Admin request failed (${response.status})`;
+      throw new AdminApiError(response.status, message);
+    }
+    return payload as T;
+  }
+
+  getState(): Promise<AdminStatePayload> {
+    return this.request<AdminStatePayload>("/api/admin/space-typing/state");
+  }
+
+  createRevision(input: {
+    baseRevision: string;
+    config: SpaceTypingAdminConfig;
+    message: string;
+  }): Promise<AdminRevision> {
+    return this.request<AdminRevision>("/api/admin/space-typing/revisions", {
+      method: "POST",
+      body: JSON.stringify(input),
+    });
+  }
+
+  publish(revision: string, expectedActiveRevision: string): Promise<AdminStatePayload["state"]> {
+    return this.request<AdminStatePayload["state"]>("/api/admin/space-typing/publish", {
+      method: "POST",
+      body: JSON.stringify({ revision, expectedActiveRevision }),
+    });
+  }
+
+  rollback(targetRevision: string, expectedActiveRevision: string): Promise<AdminStatePayload["state"]> {
+    return this.request<AdminStatePayload["state"]>("/api/admin/space-typing/rollback", {
+      method: "POST",
+      body: JSON.stringify({ targetRevision, expectedActiveRevision }),
+    });
+  }
+}
