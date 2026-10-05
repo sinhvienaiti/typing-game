@@ -41,6 +41,8 @@ jobs:
         run: |
           pnpm english-content:e10:validate
           pnpm english-content:e10:smoke
+      - name: Migrate retired E11 sources
+        run: python3 scripts/fix-english-e11-retired-sources.py
       - name: Refresh readiness and maintenance audit
         run: |
           pnpm english-content:e11
@@ -53,6 +55,7 @@ jobs:
             content/english/batches/manifest.json \
             content/english/reviews/decisions.d/e05-grammar-a1-04.json \
             content/english/releases/2026.10.0.json \
+            content/english/targets/long-term.json \
             docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
             scripts/publish-english-content.mjs \
             scripts/validate-english-content.mjs \
