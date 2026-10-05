@@ -25,9 +25,6 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
       - name: Capture rich English content validation
         id: validate
         shell: bash
