@@ -39,6 +39,8 @@ jobs:
           node --check admin/store.mjs
           node --check admin/default-config.mjs
           node --check admin/server.mjs
+          node --check admin/world-music-preview.mjs
+          node --check admin/world-music-preview.test.mjs
           node --check admin/store.test.mjs
 
       - name: Test immutable revision and CAS semantics
@@ -49,6 +51,9 @@ jobs:
           pnpm install
           pnpm --dir portal install
           pnpm --dir games/space-typing install
+
+      - name: Test canonical World Music Admin preview bridge
+        run: node --test admin/world-music-preview.test.mjs
 
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test
