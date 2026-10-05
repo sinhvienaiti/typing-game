@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 24
       - name: Apply digest-locked A1-04 review
-        run: python3 scripts/apply-english-a1-04-v2.py
+        run: python3 scripts/apply-english-a1-04-v3.py
       - name: Validate reviewed A1-04 source
         run: |
           pnpm english-content:validate
@@ -49,7 +49,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/english/batches/manifest.json \
+          git add content/english/grammar/e05-scale-a1-04-topics.json \
+            content/english/batches/manifest.json \
             content/english/reviews/decisions.d/e05-grammar-a1-04.json \
             content/english/releases/2026.10.0.json \
             docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
