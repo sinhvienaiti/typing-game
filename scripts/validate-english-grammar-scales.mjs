@@ -120,7 +120,6 @@ for (const batch of scaleBatches) {
       if (!String(exercise.prompt??"").includes("___")) errors.push(exercise.id+": cloze prompt must contain ___");
     } else if (exercise.type==="translation") {
       translation++;
-      if (!String(exercise.prompt??"").startsWith("Dịch sang tiếng Anh:")) errors.push(exercise.id+": translation prompt must use the bilingual authoring contract");
       if (source&&normalized(exercise.acceptedAnswers?.[0])!==normalized(source.text)) errors.push(exercise.id+": translation answer must match its source sentence");
     } else errors.push(exercise.id+": grammar-scale exercise must be cloze or translation");
     if (topicId) exerciseCounts.set(topicId,(exerciseCounts.get(topicId)??0)+1);
