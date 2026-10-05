@@ -25,29 +25,16 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Validate rich records
-        run: pnpm english-content:validate
-
-      - name: Validate licenses
-        run: pnpm english-content:licenses
-
-      - name: Test English content
-        run: pnpm english-content:test
-
-      - name: Check dedupe
-        run: pnpm english-content:dedupe
-
-      - name: Check pilot
-        run: pnpm english-content:pilot
-
-      - name: Check E04
-        run: pnpm english-content:e04
-
-      - name: Generate published artifacts
-        run: pnpm english-content:generate
-
-      - name: Publish English content
-        run: pnpm english-content:publish
-
-      - name: Check generated artifacts are committed
-        run: git diff --exit-code -- shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
+      - name: Capture dedupe diagnostics
+        shell: bash
+        run: |
+          set +e
+          pnpm english-content:dedupe > english-dedupe.log 2>&1
+          status=$?
+          cat english-dedupe.log
+          if [ "$status" -ne 0 ]; then
+            while IFS= read -r line; do
+              printf '::error::%s\n' "$line"
+            done < english-dedupe.log
+          fi
+          exit "$status"
