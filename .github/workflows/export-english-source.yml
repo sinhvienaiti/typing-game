@@ -1,4 +1,4 @@
-name: Export English Source Snapshot
+name: Apply English A1-02
 
 on:
   push:
@@ -7,30 +7,64 @@ on:
     paths:
       - .github/workflows/export-english-source.yml
 
+permissions:
+  contents: write
+
 jobs:
-  export:
+  apply:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Upload English source snapshot
-        uses: actions/upload-artifact@v4
         with:
-          name: english-source-snapshot-${{ github.sha }}
-          path: |
-            package.json
-            content/english
+          fetch-depth: 1
+      - name: Apply reviewed A1-02 source slice
+        shell: bash
+        run: |
+          printf '%s' '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' | base64 -d | gunzip > /tmp/apply-a102.py
+          python3 /tmp/apply-a102.py
+      - name: Validate reviewed source and ledger
+        run: |
+          node scripts/validate-english-content-reviews.mjs
+          node scripts/validate-english-content.mjs
+          node scripts/check-english-content-licenses.mjs
+          node --test scripts/english-content-core.test.mjs scripts/english-review-core.test.mjs scripts/oewn-pinned-core.test.mjs scripts/tatoeba-pair-core.test.mjs scripts/multiwoz-dialogue-core.test.mjs scripts/wiktextract-enrichment-core.test.mjs shared/english-content/*.test.mjs
+          node scripts/report-english-content-pilot.mjs
+          node scripts/report-english-content-e04.mjs
+      - name: Generate and verify runtime
+        shell: bash
+        run: |
+          node scripts/generate-english-content.mjs
+          git diff --exit-code -- shared/curriculum
+          node scripts/publish-english-content.mjs
+          node scripts/report-english-content-dedup.mjs
+          node scripts/smoke-published-english-content.mjs
+          node scripts/generate-english-content-release.mjs
+          node scripts/audit-english-content-maintenance.mjs
+          node scripts/sample-english-content-quality.mjs
+          find shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/runtime-before.sha
+          node scripts/publish-english-content.mjs
+          find shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases -type f -print0 | sort -z | xargs -0 sha256sum > /tmp/runtime-after.sha
+          diff -u /tmp/runtime-before.sha /tmp/runtime-after.sha
+      - name: Commit canonical A1-02 batch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            content/english/batches/manifest.json \
+            content/english/grammar/e05-scale-a1-02-topics.json \
+            content/english/sentences/e05-scale-a1-02-sentences.json \
+            content/english/sentences/e05-scale-a1-02-exercises.json \
+            content/english/sentences/e05-scale-a1-02-common-mistakes.json \
+            content/english/reviews/decisions.d/e05-grammar-a1-02.json \
+            content/english/releases/2026.10.0.json \
+            scripts/validate-english-content.mjs \
+            scripts/publish-english-content.mjs \
+            scripts/smoke-published-english-content.mjs \
+            shared/grammar \
+            shared/sentences \
             docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
-            docs/PROJECT_CONTEXT.md
-            docs/TYPING_TEXT_PROCESS.md
-            scripts
-            shared/english-content
-            shared/schemas/english-content
-            shared/curriculum
-            shared/dictionary
-            shared/grammar
-            shared/sentences
-            shared/phrases
-            shared/vocabulary/schema.json
-            shared/vocabulary/lookup.json
-          if-no-files-found: error
-          retention-days: 1
+          git diff --cached --stat
+          test -n "$(git diff --cached --name-only)"
+          git commit -m "feat(content): publish second A1 grammar body slice"
+          git push origin HEAD:feature/english-learning-content-system
