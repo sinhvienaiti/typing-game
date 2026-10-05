@@ -1,0 +1,82 @@
+name: Apply English B1 Slices 03-08
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - .github/workflows/apply-english-b1-03-08.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/english-learning-content-system
+          fetch-depth: 1
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Repair transcription and syntax-check helper
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/apply-english-b1-03-08.py')
+          s=p.read_text()
+          s=s.replace(',""Could you tell me where is the station?"',',"Could you tell me where is the station?"')
+          s=s.replace(',""You\'ve met Sara, don\'t you?"',',"You\'ve met Sara, don\'t you?"')
+          old='def rep(t,a,b,label):\n    if t.count(a)!=1: raise SystemExit(f"{label}: {t.count(a)}"); return t.replace(a,b,1)'
+          new='def rep(t,a,b,label):\n    if t.count(a)!=1:\n        raise SystemExit(f"{label}: {t.count(a)}")\n    return t.replace(a,b,1)'
+          if old not in s:
+              raise SystemExit('rep repair anchor missing')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+          PY
+          python3 -m py_compile scripts/apply-english-b1-03-08.py
+      - name: Generate reviewed remaining B1 slices
+        run: python3 scripts/apply-english-b1-03-08.py
+      - name: Validate complete B1 source and review overlay
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:test
+          pnpm english-content:licenses
+          pnpm english-content:dedupe
+      - name: Publish and smoke B1 runtime
+        run: |
+          pnpm english-content:publish
+          pnpm english-content:runtime:smoke
+      - name: Run E10 E11 E12 gates
+        run: |
+          pnpm english-content:e10:validate
+          pnpm english-content:e10:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12:audit
+      - name: Commit completed B1 grammar body
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
+            content/english/batches/manifest.json \
+            content/english/grammar/e05-scale-b1-0[3-8]-topics.json \
+            content/english/sentences/e05-scale-b1-0[3-8]-sentences.json \
+            content/english/sentences/e05-scale-b1-0[3-8]-exercises.json \
+            content/english/sentences/e05-scale-b1-0[3-8]-common-mistakes.json \
+            content/english/reviews/decisions.d/e05-grammar-b1-0[3-8].json \
+            content/english/releases/2026.10.0.json \
+            content/english/reports/e11-readiness.json \
+            scripts/report-english-content-e11-readiness.mjs \
+            scripts/smoke-published-english-content.mjs \
+            shared/grammar \
+            shared/sentences
+          git diff --cached --check
+          git commit -m "feat(content): complete reviewed B1 grammar body"
+          git push origin HEAD:feature/english-learning-content-system
