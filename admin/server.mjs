@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { RevisionStore, AdminConflictError, AdminValidationError } from "./store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
+import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contractPath = resolve(root, "../games/space-typing/contracts/space-typing-admin.v1.json");
@@ -78,6 +79,19 @@ const server = createServer(async (request, response) => {
       });
       return;
     }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/world-music/preview") {
+      const input = await body(request);
+      const activeConfig = await store.getRuntimeConfig();
+      const publishedPolicy = input.publishedPolicy ?? activeConfig.worldMusic?.publishedPolicy;
+      const preview = await runWorldMusicPreview({
+        rootDir: root,
+        contract,
+        publishedPolicy,
+        musicMode: input.musicMode ?? "map",
+      });
+      json(response, 200, preview);
+      return;
+    }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
       const input = await body(request);
       const revision = await store.createRevision(input);
@@ -105,6 +119,10 @@ const server = createServer(async (request, response) => {
     }
     if (error instanceof AdminValidationError) {
       json(response, 400, { error: "validation", message: error.message });
+      return;
+    }
+    if (error instanceof WorldMusicPreviewError) {
+      json(response, 502, { error: "preview-error", message: error.message });
       return;
     }
     console.error(error);

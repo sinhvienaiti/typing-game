@@ -42,6 +42,36 @@ export type AdminStatePayload = {
   history: AdminRevision[];
 };
 
+export type WorldMusicPreviewState = {
+  state: "normal" | "mini" | "world" | "major";
+  trackIds: string[];
+  tracks: Array<{ id: string; title: string; playbackKind: "single" | "stems" }>;
+  trackCount: number;
+  selectionMode: "shuffle-bag" | "ordered";
+  resolvedFrom: string;
+  fallbackTrace: string[];
+  badges: string[];
+};
+
+export type WorldMusicPreview = {
+  protocolVersion: 1;
+  configRevision: string;
+  manifestRevision: string;
+  musicMode: "map" | "random";
+  worlds: Array<{
+    worldId: string;
+    name: string;
+    galaxy: number;
+    stageRange: [number, number];
+    states: {
+      normal: WorldMusicPreviewState;
+      mini: WorldMusicPreviewState;
+      world: WorldMusicPreviewState;
+      major: WorldMusicPreviewState;
+    };
+  }>;
+};
+
 const TOKEN_KEY = "typing-game:space-admin-token";
 
 export class AdminApiError extends Error {
@@ -90,6 +120,16 @@ export class SpaceTypingAdminApi {
 
   getState(): Promise<AdminStatePayload> {
     return this.request<AdminStatePayload>("/api/admin/space-typing/state");
+  }
+
+  previewWorldMusic(input: {
+    publishedPolicy?: unknown;
+    musicMode?: "map" | "random";
+  } = {}): Promise<WorldMusicPreview> {
+    return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {
+      method: "POST",
+      body: JSON.stringify(input),
+    });
   }
 
   createRevision(input: {
