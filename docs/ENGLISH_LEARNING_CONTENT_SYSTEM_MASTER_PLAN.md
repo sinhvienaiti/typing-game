@@ -2659,7 +2659,7 @@ Implemented:
 - deterministic hash-based QA sample queue;
 - runtime/attribution version consistency checks.
 
-The rich runtime now contains **4,014 published rich records**: dictionary 600, grammar 28, sentences 1,756 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
+The rich runtime now contains **6,311 published rich records**: dictionary 900, grammar 300, sentences 3,401 and phrases 1,710. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.
 
 ### 43.12 Verified CI checkpoints
 
@@ -2724,10 +2724,10 @@ Child repositories also passed their relevant CI after E09 integration, includin
 
 The architecture, parent launcher and child integrations are no longer waiting for design decisions. Remaining work is primarily **content production and editorial promotion**:
 
-- the controlled **300-lexeme E03 pilot is complete**: all 300 lexemes and 300 linked primary senses are digest-reviewed and published; any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;
+- the controlled **300-lexeme E03 pilot plus usage graph are complete**: all 300 lexemes, 300 linked primary senses and 300 usage sidecars are digest-reviewed and published; every lexeme has a stable usage reference backed by reviewed sense/example evidence. Any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;
 - the controlled E06 pilots are now closed: Tatoeba **300/300**, typing-text examples/cloze **300/300 + 300/300**, common mistakes **100/100**, correction/transformation **100/100 + 100/100**, and MultiWOZ dialogues **100/100**; future E06 growth must use new controlled batches rather than silently extending these pilots;
-- continue grammar-body promotion in small reviewed CEFR slices; A1, A2 and B1 are complete at 45/45, 50/50 and 60/60 rich topics. Their scale slices add 149 rich topics and 894 linked sentence-domain records; continue next with B2 while E03, E04, E05 and E06 publication still uses digest-bound `draft → published` overlays;
-- continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.
+- grammar-body promotion is complete at **300/300 reviewed topics** across A1-C2 (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2). Further E05 work is maintenance and exercise/example enrichment; publication continues to use digest-bound `draft → published` overlays rather than reopening completed CEFR topic counts;
+- continue E04 through controlled, quality-first scale-up and example-link enrichment after focused batch 24; current published phrase runtime is **1,710** (600 collocations + 510 verb patterns + 300 phrasal verbs + 165 chunks + 135 idioms). Verb patterns have crossed the 500 minimum, while the other families remain below long-term targets; new growth must preserve review, provenance, dedupe and game-smoke gates rather than bulk-generating to inflate readiness percentages.
 - expand E10 batches gradually by CEFR/category;
 - grow the E11 counts toward the long-term targets only while QA error rates and game smoke tests remain stable;
 - add further source-specific importers only after license/provenance rules are pinned.
