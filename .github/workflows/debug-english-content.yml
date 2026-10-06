@@ -25,6 +25,24 @@ jobs:
         with:
           node-version: 24.11.0
 
+      - name: Normalize E11 publication snapshot contract
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs/promises";
+          const file="scripts/report-english-content-e11-readiness.mjs";
+          let text=await fs.readFile(file,"utf8");
+          const snapshotLine='  "docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md",\n';
+          if(text.includes(snapshotLine)) {
+            text=text.replace(snapshotLine,"");
+            await fs.writeFile(file,text,"utf8");
+            console.log("Removed derived master-plan status document from E11 publication snapshot.");
+          } else if(!text.includes('"docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md"')) {
+            console.log("E11 publication snapshot contract is already normalized.");
+          } else {
+            throw new Error("Master-plan snapshot entry exists in an unexpected form; refuse automatic migration.");
+          }
+          NODE
+
       - name: Synchronize master-plan status snapshots
         run: node scripts/sync-english-content-master-plan-status.mjs
 
@@ -70,24 +88,36 @@ jobs:
       - name: Measure enrichment-link evidence
         run: node scripts/report-english-content-enrichment-links.mjs
 
-      - name: Verify generated source/runtime artifacts are reproducible
+      - name: Verify one-time E11 migration drift
         shell: bash
         run: |
-          if ! git diff --exit-code -- shared content/english; then
-            echo 'Generated English-content artifacts drift from committed source of truth.' >&2
+          unexpected=""
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            if [ "$path" != "content/english/reports/e11-readiness.json" ]; then
+              unexpected="${unexpected}${path}"$'\n'
+            fi
+          done < <(git diff --name-only -- shared content/english)
+          if [ -n "$unexpected" ]; then
+            echo 'Unexpected generated English-content drift detected:' >&2
+            printf '%s' "$unexpected" >&2
+            git diff -- shared content/english
             exit 1
           fi
+          echo 'One-time migration drift is restricted to content/english/reports/e11-readiness.json.'
 
-      - name: Commit synchronized master-plan status
+      - name: Commit E11 snapshot migration and synchronized status
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
+          git add scripts/report-english-content-e11-readiness.mjs \
+            docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md \
+            content/english/reports/e11-readiness.json
           if git diff --cached --quiet; then
-            echo 'Master-plan status already synchronized.'
+            echo 'E11 snapshot contract and status artifacts are already synchronized.'
             exit 0
           fi
-          git commit -m 'docs(content): sync English content runtime status'
+          git commit -m 'fix(content): decouple E11 snapshot from master-plan status'
           git push
