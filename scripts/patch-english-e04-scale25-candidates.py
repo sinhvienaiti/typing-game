@@ -25,6 +25,9 @@ REPLACEMENTS = {
         '("reinforce safeguards", "verb + noun", "tăng cường các biện pháp bảo vệ nhằm ngăn ngừa rủi ro hoặc sai phạm", "C1")',
 }
 
+OLD_DIGEST = '''    return "sha256:" + hashlib.sha256(\n        json.dumps(review_source, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")\n    ).hexdigest()'''
+NEW_DIGEST = '''    payload = json.dumps(review_source, ensure_ascii=False, indent=2) + "\\n"\n    return hashlib.sha256(payload.encode("utf-8")).hexdigest()'''
+
 text = TARGET.read_text(encoding="utf-8")
 changed = []
 for old, new in REPLACEMENTS.items():
@@ -35,6 +38,14 @@ for old, new in REPLACEMENTS.items():
         changed.append(new.split('"', 2)[1])
     elif new not in text:
         raise RuntimeError(f"neither old nor replacement candidate exists: {old}")
+
+if OLD_DIGEST in text:
+    if text.count(OLD_DIGEST) != 1:
+        raise RuntimeError("legacy digest implementation is not unique")
+    text = text.replace(OLD_DIGEST, NEW_DIGEST, 1)
+    changed.append("review-source-digest")
+elif NEW_DIGEST not in text:
+    raise RuntimeError("neither legacy nor corrected digest implementation exists")
 
 TARGET.write_text(text, encoding="utf-8")
 print({"patched": changed, "count": len(changed)})
