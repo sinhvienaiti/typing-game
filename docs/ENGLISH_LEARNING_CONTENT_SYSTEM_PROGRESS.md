@@ -1,35 +1,35 @@
 # English Learning Content System — Progress
 
-Status: COMPLETE
+Status: SCALE_UP_ACTIVE
 
 ## Current checkpoint
 
 - Working branch: `feature/english-learning-content-system`
-- Current HEAD: resolve the branch HEAD from GitHub at the start of every run. This checkpoint intentionally does not hard-code its own commit SHA because changing this file changes HEAD; embedding the commit's own SHA would make the field self-stale.
-- Latest fully CI-verified HEAD before this checkpoint update: `3c3f73bf3685ff5d8146acb01aca8e7ba90dd758`
-- Current phase: E12 release/audit/maintenance foundation complete; mandatory implementation scope complete
+- Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
+- Latest fully CI-verified HEAD before this scale-up activation: `5aba144858554bbc32c3866452c6ced6638e27a1`
+- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
-- Latest verified CI for `3c3f73bf3685ff5d8146acb01aca8e7ba90dd758`:
-  - English Content Full Validation #52 — PASS (run `37508192744`)
-  - English Content Master Plan Acceptance #32 — PASS (run `37508195455`)
-  - Platform CI #1007 — PASS (run `37508195479`)
+- Latest verified CI for `5aba144858554bbc32c3866452c6ced6638e27a1`:
+  - English Content Full Validation #53 — PASS
+  - English Content Master Plan Acceptance #33 — PASS
+  - Platform CI #1008 — PASS
 
-The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub. If this checkpoint file itself is the newest commit, verify that commit's workflows in GitHub rather than creating another documentation-only commit merely to embed its own SHA/CI result.
+The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub before doing work. If a newer commit exists, adopt it, inspect its changes, preserve completed work, and never reset/revert/overwrite/duplicate it.
 
 ## Completed mandatory milestones
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern runtime: complete for the current mandatory architecture — 1,710 published records
+- E04 phrase/pattern architecture + current reviewed publication: complete — 1,710 published records
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
 - E10 controlled batch/review pipeline: complete and enforced
-- E11 readiness reporting: complete; long-term corpus scale goals remain intentionally outside the current mandatory publication phase
+- E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot
+## Published runtime snapshot before scale-up continuation
 
 - dictionary: 900 records
 - grammar: 300 records
@@ -39,28 +39,74 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - attribution runtime: 4 source records
 - editorial ledger: 6,311 decisions / 6,311 applied / 6,311 publish decisions
 
-## Quality gates
+## Approved scale-up targets
 
-The latest fully verified HEAD above passes the required publication gates represented by English Content Full Validation, English Content Master Plan Acceptance, and Platform CI, including strict schema/provenance/license/reference/dedup/reproducibility/runtime checks. Publication remains review-gated; candidate/authoring data must not bypass reviewed promotion.
+Current repository/master-plan data always outranks these checkpoint numbers. Recalculate from HEAD before every new batch.
 
-For any newer branch HEAD, completion remains valid only after the corresponding required workflows are checked and pass. Do not duplicate completed content work while a documentation-only checkpoint commit is being verified.
+Priority order:
+
+1. E04 evidence-backed example-link enrichment for existing collocations, verb patterns, phrasal verbs, idioms and chunks.
+2. E04 scale-up toward long-term lexical-unit targets while preserving reviewed provenance/license gates:
+   - verb patterns: 500–1,000 target range; current runtime already exceeds the 500 minimum at 510, so prioritize other under-target families unless valid reviewed evidence is ready;
+   - collocations: 5,000+;
+   - phrasal verbs: 1,000+;
+   - idioms/chunks: 2,000+ long-term scale target.
+3. E11 sentence/exercise corpus scale-up:
+   - example sentences: 100,000+;
+   - translation pairs: 20,000+;
+   - cloze exercises: 30,000+;
+   - transformations: 10,000+;
+   - dialogues: 10,000+;
+   - common mistakes: 2,000+.
+4. Add source-specific importers only when source snapshot/version/license/provenance obligations are pinned and validation support exists.
+5. Preserve the legacy `shared/vocabulary/levels/*.json` ABI unless a separately approved compatibility migration changes it.
+
+These are scale targets, not permission to bulk-generate unchecked content. Quality gates remain mandatory for every promoted record.
+
+## Mandatory anti-duplicate resume procedure
+
+Before creating or modifying any scale-up batch, the worker MUST perform this sequence:
+
+1. Resolve current remote HEAD for `feature/english-learning-content-system` and read newest commits since the previous checkpoint/run.
+2. Check workflows for that HEAD. If the same scope already has CI queued/in-progress, do not create duplicate work; only continue an independent safe unit.
+3. Read this progress file and the relevant E04/E10/E11/E12 sections of `docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md`.
+4. Read the current controlled batch manifest, target/readiness report, source/review manifests and runtime manifests relevant to the intended record type. Do not trust numeric counts copied from old prompts.
+5. Inspect the stable ID registry and existing source/candidate/review/runtime records for the intended scope.
+6. Before assigning a batch ID, record ID, source key or normalized text, verify it does not already exist in:
+   - active/superseded controlled batches;
+   - source/candidate authoring files;
+   - review queues and digest-bound review decisions;
+   - published `shared/**` runtime;
+   - stable ID registry;
+   - exact/near-dedupe reports.
+7. Recalculate the actual current target deficit from HEAD. If the target/family is already complete, skip it and move to the next first-unfinished target.
+8. Reuse existing generation/apply/publish tooling where available. Never recreate or regenerate unchanged completed slices merely to produce a new commit.
+9. For third-party-derived content, verify pinned source/version/checksum/license/attribution/provenance before generation. License-uncertain data cannot be promoted.
+10. Generate only a bounded next batch. Run schema/source/reference/exact-dedupe/near-dedupe validation before review.
+11. Review/promote only digest-bound records. Candidate/generated content must never bypass editorial review into runtime.
+12. Regenerate only affected runtime scope, then run publication reproducibility, runtime smoke, E10 batch validation, E11 readiness and E12 maintenance/audit gates.
+13. Commit/push valid changes, verify remote HEAD, then verify English Content Full Validation, Master Plan Acceptance and Platform CI for the resulting HEAD.
+14. If any gate fails, inspect the exact failed step/log, fix the source/generator/apply logic without weakening validators, and re-run.
+15. Update this checkpoint only when real state changes: completed batch, changed runtime counts, new blocker, changed next target, or verified new milestone. Never make timestamp-only or self-referential CI-refresh commits.
 
 ## Current milestone
 
-`COMPLETE` — no unfinished mandatory milestone remains in the current master-plan implementation phase.
+`E04/E11 SCALE-UP ACTIVE`
 
-## Remaining mandatory milestones
+Mandatory architecture/pilot implementation is complete. The active work is quality-first content expansion toward the approved long-term targets.
 
-None.
+## Current first-unfinished workstream
 
-## Intentional continuation / non-blocking scale work
+Start with E04 because it has the smallest, safest incremental units and already has controlled generators/review/runtime gates.
 
-These are quality-first continuation tracks, not blockers for the current mandatory implementation phase:
+1. Check whether any evidence-backed E04 enrichment candidates already exist but are not yet reviewed/published; promote only if the exact evidence and digest review are valid.
+2. If no safe pending enrichment exists, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
+3. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+4. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
-1. Improve E04 example linkage only when valid reviewed evidence exists; do not auto-link unsafe lemma-only candidates.
-2. Grow long-term E11 corpus scale targets gradually through new reviewed batches under the existing provenance/license/review/dedup/runtime gates.
-3. Add source-specific importers only after exact source/version/license obligations are pinned.
-4. Preserve the legacy `shared/vocabulary/levels/*.json` ABI unless a separate compatibility migration is explicitly approved.
+## Known non-blocking enrichment debt
+
+The latest verified acceptance state before scale-up activation reported large numbers of E04 items without `exampleIds`. These are not errors and must not be auto-filled from unsafe lemma-only matches. Treat them as an evidence/review queue: link only when whole-phrase/frame evidence is valid and reviewable.
 
 ## Blocker
 
@@ -68,4 +114,4 @@ None.
 
 ## Next actionable task
 
-No mandatory implementation task remains. Future content work should begin only from a newly approved reviewed batch, evidence-backed E04 enrichment, or an explicitly approved new master-plan scope. Every run must first verify the newest branch HEAD and CI, skip already completed artifacts, and must not create a documentation-only commit merely to refresh a self-referential HEAD/CI field.
+Inspect current E04 controlled batches, E04 generation/apply scripts, target/readiness report, review ledger and stable ID registry on latest HEAD. Select the first genuinely new bounded E04 scale/enrichment unit after proving that its batch IDs, record IDs and normalized content are not already present; then generate/validate/review/publish that unit and continue through CI.
