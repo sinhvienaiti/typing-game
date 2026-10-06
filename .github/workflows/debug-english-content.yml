@@ -36,15 +36,36 @@ jobs:
           from pathlib import Path
           p = Path('scripts/apply-english-b2-05-08.py')
           text = p.read_text(encoding='utf-8')
-          old = '        "at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
-          new = '        "arrived at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
-          if old in text:
-              if text.count(old) != 1:
-                  raise SystemExit(f'unexpected B2 final cloze source count: {text.count(old)}')
-              text = text.replace(old, new, 1)
-              p.write_text(text, encoding='utf-8')
-          elif new not in text:
+
+          old_cloze = '        "at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
+          new_cloze = '        "arrived at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
+          if old_cloze in text:
+              if text.count(old_cloze) != 1:
+                  raise SystemExit(f'unexpected B2 final cloze source count: {text.count(old_cloze)}')
+              text = text.replace(old_cloze, new_cloze, 1)
+          elif new_cloze not in text:
               raise SystemExit('B2 final cloze source pattern not found')
+
+          old_smokes = '''                    {"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": 5},
+                    {"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": 5},
+                    {"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": 5},
+                    {"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": 4, "recordType": "cloze"},
+                    {"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": 4, "recordType": "translation"},
+                    {"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": 4},'''
+          new_smokes = '''                    {"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))},
+                    {"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))},
+                    {"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": min(5, len(sets["examples"]))},
+                    {"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "cloze")), "recordType": "cloze"},
+                    {"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "translation")), "recordType": "translation"},
+                    {"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": min(4, len(sets["common-mistakes"]))},'''
+          if old_smokes in text:
+              if text.count(old_smokes) != 1:
+                  raise SystemExit(f'unexpected B2 smoke source block count: {text.count(old_smokes)}')
+              text = text.replace(old_smokes, new_smokes, 1)
+          elif new_smokes not in text:
+              raise SystemExit('B2 smoke source block not found')
+
+          p.write_text(text, encoding='utf-8')
           PY
           python3 -m py_compile scripts/apply-english-b2-05-08.py
           python3 scripts/apply-english-b2-05-08.py
