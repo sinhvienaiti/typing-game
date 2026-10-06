@@ -19,6 +19,27 @@ export type AudioDefaults = {
   categories?: Partial<AudioCategoryDefaults>;
 };
 
+export type PlaylistSelectionMode = "shuffle-bag" | "ordered";
+export type PlaylistAssignment =
+  | { kind: "inherit" }
+  | { kind: "replace"; trackIds: string[]; selectionMode?: PlaylistSelectionMode };
+export type WorldMusicBossPolicy = {
+  common?: PlaylistAssignment;
+  mini?: PlaylistAssignment;
+  world?: PlaylistAssignment;
+  major?: PlaylistAssignment;
+};
+export type WorldMusicPolicyEntry = {
+  normal?: PlaylistAssignment;
+  boss?: WorldMusicBossPolicy;
+};
+export type WorldMusicPolicy = {
+  configRevision: string;
+  disabledTrackIds?: string[];
+  worlds?: Record<string, WorldMusicPolicyEntry>;
+  global?: WorldMusicPolicyEntry;
+};
+
 export type GeneralSettingsConfig = {
   gameDefaults: {
     defaultMode: "campaign" | "recall" | "expedition";
@@ -61,6 +82,8 @@ export type SpaceTypingAdminConfig = {
   worldMusic: {
     policyRevision: string;
     assignments: Record<string, unknown>;
+    /** Additive B04.1 canonical policy. Child v1 currently supports Global + World only. */
+    publishedPolicy?: WorldMusicPolicy;
   };
   /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
   system?: GeneralSettingsConfig;
@@ -179,7 +202,7 @@ export class SpaceTypingAdminApi {
   }
 
   previewWorldMusic(input: {
-    publishedPolicy?: unknown;
+    publishedPolicy?: WorldMusicPolicy;
     musicMode?: "map" | "random";
   } = {}): Promise<WorldMusicPreview> {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {

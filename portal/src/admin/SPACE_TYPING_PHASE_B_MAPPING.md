@@ -65,6 +65,10 @@ The default profile is aligned with the pinned child runtime `RECOMMENDED_AUDIO`
 
 `spaceTypingSettingsV1` remains the player-owned preference source. Admin Publish only changes the fallback default for players without saved preferences. Existing players are never rewritten. Pronunciation duck calibration is currently hard-coded child mix/focus policy and is displayed read-only rather than falsely persisted.
 
+## B04.1 — World Music canonical scopes
+
+The Phase A editor exposed All → Galaxy → World → Stage, but the pinned child `WorldMusicPolicy` v1 only models `global` and `worlds`. B04.1 therefore wires only Global + World to real immutable revisions. Every draft is previewed through the child `music:admin-preview` resolver before save. Galaxy/Stage controls are blocked instead of persisting ignored JSON. B04.2 is the explicit child-contract expansion needed before those scopes can become writable.
+
 ## Apply boundaries
 
 The current mapping deliberately uses conservative boundaries:
@@ -84,7 +88,7 @@ No screen may be marked runtime-connected merely because a UI mock exists.
 1. **B01 — System + Feature Flags persistence**: canonical namespaces, validation, API typing, revision tests, route/domain matrix. **Implemented.**
 2. **B02 — Wire General Settings + Feature Flags UI**: hydrate active values, create immutable revisions on Save Draft, surface validation/error state, stale-active conflict protection, and never direct-publish. **Implemented.**
 3. **B03 — Audio Defaults**: real revision-backed default profile, child-aligned gains/categories, stale-active protection, and preserved player-preference override semantics. Ducking remains child-owned read-only policy until a validated published-policy consumer exists. **Implemented.**
-4. **B04 — World Music**: map Stage-level editor data into authored policy drafts and canonical preview validation; keep runtime apply at next-track/state.
+4. **B04 — World Music**: **B04.1 implemented** for canonical Global + World policy drafts, child preview validation, stale-active protection, and next-track/state apply boundary. Galaxy/Stage remain intentionally blocked because child WorldMusicPolicy v1 does not consume those scopes; B04.2 must extend child resolver + preview + runtime before enabling them.
 5. **B05 — History & Publish**: replace mock history/diff/status with real revision data, real validation gates and CAS conflicts.
 6. **B06 — Content registries**: Ships → Equipment → Skills → Enemies → Bosses → Worlds/Stages. Each domain requires child consumer discovery before runtime apply.
 7. **B07 — Economy**: Shop, Currencies, Rewards/Drops, Warp. Require impact validation and explicit dangerous-change confirmation.

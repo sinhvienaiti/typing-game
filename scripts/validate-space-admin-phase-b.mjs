@@ -9,6 +9,7 @@ const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
 const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
 const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
+const worldMusicPhaseB = await readFile(new URL("portal/src/admin/space-typing-world-music-phase-b.ts", root), "utf8");
 
 assert.equal(map.schemaVersion, 1);
 assert.equal(map.phase, "B");
@@ -19,11 +20,15 @@ const routes = map.screens.map((entry) => entry.route);
 assert.equal(new Set(routes).size, routes.length, "Phase B mapping routes must be unique");
 
 const audio = map.screens.find((entry) => entry.route === "/admin/space-typing/audio");
+const worldMusic = map.screens.find((entry) => entry.route === "/admin/space-typing/world-music");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
 assert.equal(audio?.domain, "audio");
 assert.equal(audio?.status, "phase-b-ui-wired");
 assert.equal(audio?.applyBoundary, "safe-boundary");
+assert.equal(worldMusic?.domain, "worldMusic");
+assert.equal(worldMusic?.status, "phase-b-ui-wired-global-world");
+assert.equal(worldMusic?.applyBoundary, "next-track-or-state");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
@@ -66,6 +71,14 @@ assert.doesNotMatch(audioPhaseB, /api\.publish/);
 assert.match(audioPhaseB, /spaceTypingSettingsV1/);
 assert.match(audioPhaseB, /PRONUNCIATION_DUCK/);
 assert.match(audioPhaseB, /assertStableActiveRevision/);
+assert.match(phaseB, /renderPhaseBWorldMusic/);
+assert.match(worldMusicPhaseB, /B04\.1 World Music Draft/);
+assert.match(worldMusicPhaseB, /api\.previewWorldMusic/);
+assert.match(worldMusicPhaseB, /api\.createRevision/);
+assert.doesNotMatch(worldMusicPhaseB, /api\.publish/);
+assert.match(worldMusicPhaseB, /GALAXY \/ STAGE BLOCKED/);
+assert.match(worldMusicPhaseB, /WorldMusicPolicy v1 has no galaxy\/stage keys/);
+assert.match(worldMusicPhaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
@@ -77,4 +90,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B03 revision-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B04.1 revision-backed domains ready).`);

@@ -246,3 +246,40 @@ test("B03 audio validation rejects out-of-range gain and category defaults", asy
   badMaster.audio.defaults.master = -0.01;
   await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badMaster }), AdminValidationError);
 });
+
+
+test("B04.1 World Music canonical Global/World draft stays isolated until publish", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+  const config = structuredClone(active.config);
+  config.worldMusic.publishedPolicy = {
+    configRevision: "admin-world-music-test-v1",
+    global: { normal: { kind: "replace", trackIds: ["signal-in-the-void"], selectionMode: "ordered" } },
+    worlds: { "world-01": { boss: { world: { kind: "replace", trackIds: ["world-01-boss-battle-theme-a"] } } } },
+  };
+  const draft = await store.createRevision({ baseRevision: active.revision, config, message: "B04.1 world music draft" });
+  assert.equal((await store.getRuntimeConfig()).worldMusic.publishedPolicy, undefined);
+  await store.publish({ revision: draft.revision, expectedActiveRevision: active.revision });
+  const runtime = await store.getRuntimeConfig();
+  assert.equal(runtime.worldMusic.publishedPolicy.configRevision, "admin-world-music-test-v1");
+  assert.deepEqual(runtime.worldMusic.publishedPolicy.global.normal.trackIds, ["signal-in-the-void"]);
+});
+
+test("B04.1 rejects unsupported Stage/Galaxy policy and unsafe replacement playlists", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+  const unsupportedStage = structuredClone(active.config);
+  unsupportedStage.worldMusic.publishedPolicy = { configRevision: "bad-stage", stages: { "1": {} } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: unsupportedStage }), AdminValidationError);
+  const unsupportedGalaxy = structuredClone(active.config);
+  unsupportedGalaxy.worldMusic.publishedPolicy = { configRevision: "bad-galaxy", galaxies: { "1": {} } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: unsupportedGalaxy }), AdminValidationError);
+  const emptyReplace = structuredClone(active.config);
+  emptyReplace.worldMusic.publishedPolicy = { configRevision: "bad-empty", worlds: { "world-01": { normal: { kind: "replace", trackIds: [] } } } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: emptyReplace }), AdminValidationError);
+  const badWorld = structuredClone(active.config);
+  badWorld.worldMusic.publishedPolicy = { configRevision: "bad-world", worlds: { "world-51": { normal: { kind: "inherit" } } } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badWorld }), AdminValidationError);
+});
