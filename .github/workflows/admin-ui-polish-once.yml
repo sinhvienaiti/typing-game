@@ -1,0 +1,87 @@
+name: Space Admin UI Polish Once
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+      - name: Wire icons command palette and stage music
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('portal/src/admin/space-typing.ts')
+          s = p.read_text()
+          anchor = 'import { renderExtendedAdminScreen } from "./space-typing-extended";\n'
+          imports = (
+              'import { adminNavIcon } from "./space-typing-icons";\n'
+              'import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";\n'
+              'import { renderWorldMusicV2 } from "./space-typing-world-music-v2";\n'
+              'import { renderDailyWeekly } from "./space-typing-daily-weekly";\n'
+          )
+          if imports not in s:
+              s = s.replace(anchor, anchor + imports)
+
+          old_live = '''    items: [\n      { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", phase: "ready" },\n      { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", phase: "ready" },'''
+          new_live = '''    items: [\n      { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", phase: "ready" },\n      { label: "Daily / Weekly", path: `${ADMIN_BASE}/daily-weekly`, icon: "◷", phase: "ready" },\n      { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", phase: "ready" },'''
+          if old_live in s:
+              s = s.replace(old_live, new_live)
+
+          s = s.replace(
+              '  constructor(private readonly navigate: (path: string) => void) {}',
+              '  constructor(private readonly navigate: (path: string) => void) {\n    installAdminCommandShortcut(this.navigate);\n  }',
+          )
+          s = s.replace(
+              '          element("span", "st-admin-nav-icon", item.icon),',
+              '          adminNavIcon(item.icon),',
+          )
+          s = s.replace(
+              '    bar.append(button("⌘K  Search command…", () => undefined, "st-admin-command"));',
+              '    bar.append(button("⌘K  Search command…", () => openAdminCommandPalette(this.navigate), "st-admin-command"));',
+          )
+          s = s.replace(
+              '    if (path === `${ADMIN_BASE}/world-music`) return this.renderWorldMusic();',
+              '    if (path === `${ADMIN_BASE}/world-music`) return renderWorldMusicV2(this.navigate);',
+          )
+          marker = '    if (path === `${ADMIN_BASE}/ships`) return this.renderShips();\n'
+          if 'daily-weekly`) return renderDailyWeekly()' not in s:
+              s = s.replace(marker, marker + '    if (path === `${ADMIN_BASE}/daily-weekly`) return renderDailyWeekly();\n')
+          s = s.replace('UI REV · A-HOLO-02', 'UI REV · A-HOLO-03')
+          p.write_text(s)
+
+          icon = Path('portal/src/admin/space-typing-icons.ts')
+          x = icon.read_text()
+          x = x.replace('svg.classList.add("st-admin-nav-svg");', 'svg.classList.add("st-admin-nav-svg", "st-admin-nav-icon");')
+          icon.write_text(x)
+
+          command = Path('portal/src/admin/space-typing-command.ts')
+          c = command.read_text()
+          if not c.startswith('import "./space-typing-command.css";'):
+              command.write_text('import "./space-typing-command.css";\n\n' + c)
+
+          world = Path('portal/src/admin/space-typing-world-music-v2.ts')
+          w = world.read_text()
+          if not w.startswith('import "./space-typing-world-music-v2.css";'):
+              world.write_text('import "./space-typing-world-music-v2.css";\n\n' + w)
+          PY
+      - name: Remove one-shot workflow
+        run: rm .github/workflows/admin-ui-polish-once.yml
+      - name: Commit polish
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "feat(admin-ui): complete Holo Command navigation and stage music UX"
+          git push origin HEAD:feat/space-typing-admin-uiux
