@@ -55,8 +55,25 @@ jobs:
       - name: Validate English review ledger
         run: pnpm english-content:review:validate
 
-      - name: Validate English E10 batch contracts
-        run: pnpm english-content:e10
+      - name: Validate English E10 batch schema
+        id: e10_validate
+        shell: bash
+        run: |
+          set +e
+          pnpm english-content:e10:validate 2>&1 | tee /tmp/e10-validate.log
+          status=${PIPESTATUS[0]}
+          echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
+          exit "$status"
+
+      - name: Smoke English E10 batch contracts
+        id: e10_smoke
+        shell: bash
+        run: |
+          set +e
+          pnpm english-content:e10:smoke 2>&1 | tee /tmp/e10-smoke.log
+          status=${PIPESTATUS[0]}
+          echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
+          exit "$status"
 
       - name: Validate English content licenses
         run: pnpm english-content:licenses
@@ -151,6 +168,8 @@ jobs:
         with:
           name: b2-05-08-diagnostics
           path: |
+            /tmp/e10-validate.log
+            /tmp/e10-smoke.log
             /tmp/english-content-dedupe.log
             /tmp/global-near-duplicates.json
             /tmp/b2-05-08-near-duplicates.json
