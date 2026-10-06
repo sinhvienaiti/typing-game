@@ -3,6 +3,14 @@ import { resolve } from "node:path";
 
 export class WorldMusicPreviewError extends Error {}
 
+export function parseWorldMusicPreviewOutput(output) {
+  const marker = output.match(/\{\s*"protocolVersion"\s*:/);
+  if (marker?.index === undefined) {
+    throw new Error("preview JSON payload marker not found");
+  }
+  return JSON.parse(output.slice(marker.index));
+}
+
 export async function runWorldMusicPreview({
   rootDir,
   contract,
@@ -67,7 +75,10 @@ export async function runWorldMusicPreview({
         return;
       }
       try {
-        const preview = JSON.parse(Buffer.concat(stdout).toString("utf8"));
+        // pnpm may print supply-chain verification/status text to stdout before
+        // the child CLI payload on a cold install. Anchor parsing at the
+        // protocol envelope instead of assuming stdout contains JSON only.
+        const preview = parseWorldMusicPreviewOutput(Buffer.concat(stdout).toString("utf8"));
         if (preview?.protocolVersion !== protocol.version || !Array.isArray(preview?.worlds)) {
           throw new Error("invalid preview payload");
         }
