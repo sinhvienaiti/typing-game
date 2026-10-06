@@ -37,6 +37,9 @@ jobs:
       - name: Apply B03 Audio mapping
         run: node scripts/apply-space-admin-phase-b-audio.mjs
 
+      - name: Keep permanent Admin CI wiring for direct connector commit
+        run: git restore --source=HEAD -- .github/workflows/admin-ci.yml
+
       - name: Remove one-shot tooling before validation
         run: rm scripts/apply-space-admin-phase-b-audio.mjs .github/workflows/admin-phase-b-audio-once.yml
 
