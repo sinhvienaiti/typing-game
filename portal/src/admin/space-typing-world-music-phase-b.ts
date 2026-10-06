@@ -7,7 +7,6 @@ import {
   type WorldMusicPolicy,
   type WorldMusicPolicyEntry,
   type WorldMusicPreview,
-  type WorldMusicPreviewState,
 } from "./api";
 
 const BASE = "/admin/space-typing";
@@ -17,6 +16,7 @@ type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type Scope = "global" | "world";
 type Slot = "normal" | "boss-common" | "mini" | "world" | "major";
+type PreviewStateName = keyof WorldMusicPreview["worlds"][number]["states"];
 
 type TrackOption = {
   id: string;
@@ -118,7 +118,7 @@ function writeAssignment(policy: WorldMusicPolicy, scope: Scope, worldId: string
   else root.boss[slot] = assignment;
 }
 
-function selectedPreviewStates(slot: Slot): readonly WorldMusicPreviewState[] {
+function selectedPreviewStates(slot: Slot): readonly PreviewStateName[] {
   if (slot === "boss-common") return ["mini", "world", "major"];
   if (slot === "normal") return ["normal"];
   return [slot];
