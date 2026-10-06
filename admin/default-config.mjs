@@ -11,7 +11,15 @@ export function createDefaultSpaceTypingConfig(contract) {
         music: 0.26,
         ambient: 0.08,
         sfx: 0.5,
-        announcer: 0.85
+        credit: 1,
+        announcer: 0.85,
+        categories: {
+          typing: 1,
+          combat: 1,
+          warnings: 1,
+          ui: 1,
+          rewards: 1
+        }
       }
     },
     worldMusic: {

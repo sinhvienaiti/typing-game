@@ -8,6 +8,7 @@ const exists = (file) => fs.existsSync(path.join(root, file));
 const mainFile = "portal/src/admin/space-typing.ts";
 const extendedFile = "portal/src/admin/space-typing-extended.ts";
 const worldMusicFile = "portal/src/admin/space-typing-world-music-v2.ts";
+const audioPhaseBFile = "portal/src/admin/space-typing-audio-phase-b.ts";
 const dailyWeeklyFile = "portal/src/admin/space-typing-daily-weekly.ts";
 const commandFile = "portal/src/admin/space-typing-command.ts";
 const iconFile = "portal/src/admin/space-typing-icons.ts";
@@ -16,13 +17,14 @@ const dialogCssFile = "portal/src/admin/space-typing-dialogs.css";
 const uiCssFile = "portal/src/admin/space-typing-ui.css";
 const packageFile = "portal/package.json";
 
-for (const file of [mainFile, extendedFile, worldMusicFile, dailyWeeklyFile, commandFile, iconFile, dialogFile, dialogCssFile, uiCssFile, packageFile]) {
+for (const file of [mainFile, extendedFile, worldMusicFile, audioPhaseBFile, dailyWeeklyFile, commandFile, iconFile, dialogFile, dialogCssFile, uiCssFile, packageFile]) {
   if (!exists(file)) throw new Error(`Required Admin UI file is missing: ${file}`);
 }
 
 const main = read(mainFile);
 const extended = read(extendedFile);
 const worldMusic = read(worldMusicFile);
+const audioPhaseB = read(audioPhaseBFile);
 const dailyWeekly = read(dailyWeeklyFile);
 const command = read(commandFile);
 const icons = read(iconFile);
@@ -107,7 +109,8 @@ assert(dialogs.includes("Validation Preview"), "Music upload validation preview 
 assert(dialogs.includes("I reviewed the validation result and change summary"), "Publish acknowledgement gate is missing");
 assert(dialogs.includes("I understand the active configuration will point to"), "Rollback acknowledgement gate is missing");
 
-assert(main.includes('control.setAttribute("aria-label", label)'), "Audio range aria-label is missing");
+assert(audioPhaseB.includes('input.setAttribute("aria-label", label)'), "Audio range aria-label is missing");
+assert(audioPhaseB.includes("Existing player settings in spaceTypingSettingsV1 always win"), "Audio default-only player-preference rule is missing");
 assert(main.includes('search.setAttribute("aria-label", "Search music library")'), "Music search aria-label is missing");
 assert(main.includes('type.setAttribute("aria-label", "Filter music by type")'), "Music type filter aria-label is missing");
 assert(main.includes('status.setAttribute("aria-label", "Filter music by status")'), "Music status filter aria-label is missing");

@@ -8,6 +8,7 @@ const store = await readFile(new URL("admin/store.mjs", root), "utf8");
 const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
 const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
 const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
+const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
 
 assert.equal(map.schemaVersion, 1);
 assert.equal(map.phase, "B");
@@ -17,8 +18,12 @@ assert.equal(map.screens.length, 30, "Phase B mapping must cover all 30 register
 const routes = map.screens.map((entry) => entry.route);
 assert.equal(new Set(routes).size, routes.length, "Phase B mapping routes must be unique");
 
+const audio = map.screens.find((entry) => entry.route === "/admin/space-typing/audio");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
+assert.equal(audio?.domain, "audio");
+assert.equal(audio?.status, "phase-b-ui-wired");
+assert.equal(audio?.applyBoundary, "safe-boundary");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
@@ -54,6 +59,13 @@ assert.match(phaseB, /Admin Phase B · Feature Flags draft/);
 assert.match(phaseB, /api\.createRevision/);
 assert.doesNotMatch(phaseB, /api\.publish/);
 assert.match(phaseB, /runtime unchanged/);
+assert.match(phaseB, /renderPhaseBAudio/);
+assert.match(audioPhaseB, /Admin Phase B · Audio Defaults draft/);
+assert.match(audioPhaseB, /api\.createRevision/);
+assert.doesNotMatch(audioPhaseB, /api\.publish/);
+assert.match(audioPhaseB, /spaceTypingSettingsV1/);
+assert.match(audioPhaseB, /PRONUNCIATION_DUCK/);
+assert.match(audioPhaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
@@ -65,4 +77,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01 persistence + B02 revision-backed UI ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B03 revision-backed domains ready).`);

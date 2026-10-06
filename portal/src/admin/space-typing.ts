@@ -9,8 +9,6 @@ import { openMusicUploadMockDialog } from "./space-typing-dialogs";
 import {
   alertFeed,
   audienceMetrics,
-  audioDefaults,
-  duckingDefaults,
   economyMetrics,
   modeSplit,
   musicTracks,
@@ -205,7 +203,6 @@ function shipImageUrl(shipId: string): string {
 export class SpaceTypingAdmin {
   private selectedTrackId = musicTracks[0]?.id ?? "";
   private selectedShipId = ships[0]?.id ?? "vanguard";
-  private audioChanges = 0;
 
   constructor(private readonly navigate: (path: string) => void) {
     installAdminCommandShortcut(this.navigate);
@@ -277,13 +274,12 @@ export class SpaceTypingAdmin {
 
   private renderPage(path: string): HTMLElement {
     if (path === ADMIN_BASE) return this.renderOverview();
-    if (path === `${ADMIN_BASE}/audio`) return this.renderAudio();
+    const phaseB = renderPhaseBAdminScreen(path, this.navigate);
+    if (phaseB !== null) return phaseB;
     if (path === `${ADMIN_BASE}/music-library`) return this.renderMusicLibrary();
     if (path === `${ADMIN_BASE}/world-music`) return renderWorldMusicV2(this.navigate);
     if (path === `${ADMIN_BASE}/ships`) return this.renderShips();
     if (path === `${ADMIN_BASE}/daily-weekly`) return renderDailyWeekly();
-    const phaseB = renderPhaseBAdminScreen(path, this.navigate);
-    if (phaseB !== null) return phaseB;
     return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);
   }
 
@@ -457,119 +453,6 @@ export class SpaceTypingAdmin {
     }
     root.append(alerts);
     return root;
-  }
-
-  private renderAudio(): HTMLElement {
-    const page = element("div");
-    page.append(pageHeader(
-      "Audio · Default Player Profile",
-      "Audio Defaults",
-      "Cấu hình mặc định dành cho người chơi chưa từng tự chỉnh Audio. Người chơi đã có preference riêng sẽ không bị UI này ghi đè khi backend được map ở phase sau.",
-      [statusBadge("DEFAULT PROFILE · recommended-v1", "info")],
-    ));
-    const banner = element("div", "st-admin-info-banner", "DEFAULT-ONLY RULE · Các giá trị dưới đây chỉ đại diện profile mặc định. Existing player preferences must remain untouched. UI milestone hiện dùng local mock state và chưa ghi backend.");
-    page.append(banner);
-
-    const layout = element("div", "st-admin-audio-layout");
-    const volumes = panel("Default Volume Profile", "11 nhóm âm thanh mặc định", true);
-    const list = element("div", "st-admin-audio-list");
-    for (const [label, initial] of audioDefaults) list.append(this.audioSlider(label, initial));
-    volumes.append(list);
-
-    const side = element("div", "st-admin-overview-stack");
-    const ducking = panel("Pronunciation Priority", "Ducking mặc định khi TTS phát", true);
-    const duckList = element("div", "st-admin-audio-list");
-    for (const [label, initial] of duckingDefaults) duckList.append(this.audioSlider(label, initial));
-    ducking.append(duckList);
-
-    const behavior = panel("Playback Behaviour", "Default behaviour policy", true);
-    const behaviorBody = element("div", "st-admin-panel-pad");
-    for (const [label, enabled] of [
-      ["Pronunciation priority", true],
-      ["Resume music after TTS", true],
-      ["Allow overlapping pronunciation", false],
-      ["Boss music priority", true],
-      ["Victory music priority", true],
-      ["Duel announcer priority", true],
-    ] as const) behaviorBody.append(this.toggleRow(label, enabled));
-    behavior.append(behaviorBody);
-
-    const preview = panel("Mix Preview", "UI-only preview actions", true);
-    const testGrid = element("div", "st-admin-test-grid");
-    for (const label of ["Pronunciation", "Typing", "Combat", "Warning", "Announcer", "All Mix"]) {
-      testGrid.append(button(`▶ ${label}`, () => this.flashPreview(preview, label)));
-    }
-    preview.append(testGrid);
-    side.append(ducking, behavior, preview);
-    layout.append(volumes, side);
-    page.append(layout, this.renderUnsavedBar());
-    return page;
-  }
-
-  private audioSlider(label: string, initial: number): HTMLElement {
-    const row = element("div", "st-admin-audio-row");
-    const control = element("input") as HTMLInputElement;
-    control.type = "range";
-    control.min = "0";
-    control.max = "100";
-    control.value = String(initial);
-    control.setAttribute("aria-label", label);
-    const value = element("span", "st-admin-audio-value", `${initial}%`);
-    control.addEventListener("input", () => {
-      value.textContent = `${control.value}%`;
-      this.audioChanges += 1;
-      this.updateUnsavedBars();
-    });
-    row.append(element("label", undefined, label), control, value);
-    return row;
-  }
-
-  private toggleRow(label: string, initial: boolean): HTMLElement {
-    const row = element("div", "st-admin-switch-row");
-    const toggle = element("button", `st-admin-switch${initial ? " on" : ""}`) as HTMLButtonElement;
-    toggle.type = "button";
-    toggle.setAttribute("aria-label", `Toggle ${label}`);
-    toggle.setAttribute("aria-pressed", String(initial));
-    toggle.append(element("i"));
-    toggle.addEventListener("click", () => {
-      toggle.classList.toggle("on");
-      toggle.setAttribute("aria-pressed", String(toggle.classList.contains("on")));
-      this.audioChanges += 1;
-      this.updateUnsavedBars();
-    });
-    row.append(element("span", undefined, label), toggle);
-    return row;
-  }
-
-  private flashPreview(root: HTMLElement, label: string): void {
-    let chip = root.querySelector<HTMLElement>(".st-admin-preview-status");
-    if (chip === null) {
-      chip = element("div", "st-admin-info-banner st-admin-preview-status");
-      root.append(chip);
-    }
-    chip.textContent = `UI preview trigger · ${label}. Audio engine mapping intentionally deferred to Phase B/C.`;
-  }
-
-  private renderUnsavedBar(): HTMLElement {
-    const bar = element("div", "st-admin-sticky-save");
-    bar.dataset["unsavedBar"] = "true";
-    bar.append(element("strong", undefined, this.audioChanges === 0 ? "No unsaved changes" : `${this.audioChanges} unsaved changes`), element("span", undefined, "UI mock only · no backend write"), element("div", "grow"));
-    bar.append(button("Discard", () => {
-      this.audioChanges = 0;
-      this.updateUnsavedBars();
-      this.navigate(`${ADMIN_BASE}/audio`);
-    }), button("Save Draft", () => {
-      this.audioChanges = 0;
-      this.updateUnsavedBars();
-    }, "st-admin-btn primary"));
-    return bar;
-  }
-
-  private updateUnsavedBars(): void {
-    for (const bar of document.querySelectorAll<HTMLElement>("[data-unsaved-bar='true']")) {
-      const strong = bar.querySelector("strong");
-      if (strong !== null) strong.textContent = this.audioChanges === 0 ? "No unsaved changes" : `${this.audioChanges} unsaved changes`;
-    }
   }
 
   private renderMusicLibrary(): HTMLElement {

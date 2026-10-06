@@ -59,6 +59,12 @@ The two screens now use the real Admin revision API instead of mock-only Save ac
 - maintenance/economy/competitive changes remain inactive until explicit History / Publish review;
 - stale-form protection rejects Save Draft when the active revision changed after hydration, preventing silent lost-update rebases.
 
+## B03 — Audio Defaults
+
+The default profile is aligned with the pinned child runtime `RECOMMENDED_AUDIO`: Master 1.0, Pronunciation 1.0, Music 0.26, Ambient 0.08, Global SFX 0.5, Credit 1.0, Announcer 0.85, plus `typing/combat/warnings/ui/rewards` category preferences at 1.0. Credit supports the child runtime range `0..2`; other persisted preferences use `0..1`.
+
+`spaceTypingSettingsV1` remains the player-owned preference source. Admin Publish only changes the fallback default for players without saved preferences. Existing players are never rewritten. Pronunciation duck calibration is currently hard-coded child mix/focus policy and is displayed read-only rather than falsely persisted.
+
 ## Apply boundaries
 
 The current mapping deliberately uses conservative boundaries:
@@ -77,7 +83,7 @@ No screen may be marked runtime-connected merely because a UI mock exists.
 
 1. **B01 — System + Feature Flags persistence**: canonical namespaces, validation, API typing, revision tests, route/domain matrix. **Implemented.**
 2. **B02 — Wire General Settings + Feature Flags UI**: hydrate active values, create immutable revisions on Save Draft, surface validation/error state, stale-active conflict protection, and never direct-publish. **Implemented.**
-3. **B03 — Audio Defaults**: replace local UI state with active/draft revision state while preserving player-preference semantics.
+3. **B03 — Audio Defaults**: real revision-backed default profile, child-aligned gains/categories, stale-active protection, and preserved player-preference override semantics. Ducking remains child-owned read-only policy until a validated published-policy consumer exists. **Implemented.**
 4. **B04 — World Music**: map Stage-level editor data into authored policy drafts and canonical preview validation; keep runtime apply at next-track/state.
 5. **B05 — History & Publish**: replace mock history/diff/status with real revision data, real validation gates and CAS conflicts.
 6. **B06 — Content registries**: Ships → Equipment → Skills → Enemies → Bosses → Worlds/Stages. Each domain requires child consumer discovery before runtime apply.

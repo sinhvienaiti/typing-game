@@ -67,6 +67,22 @@ function enumValue(value, path, allowed) {
   return value;
 }
 
+function validateAudio(audio) {
+  object(audio, "audio");
+  string(audio.profileId, "audio.profileId", { max: 80, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+  const defaults = object(audio.defaults, "audio.defaults");
+  for (const key of ["master", "pronunciation", "music", "ambient", "sfx", "announcer"]) {
+    number(defaults[key], `audio.defaults.${key}`, { min: 0, max: 1 });
+  }
+  if (defaults.credit !== undefined) number(defaults.credit, "audio.defaults.credit", { min: 0, max: 2 });
+  if (defaults.categories !== undefined) {
+    const categories = object(defaults.categories, "audio.defaults.categories");
+    for (const key of ["typing", "combat", "warnings", "ui", "rewards"]) {
+      number(categories[key], `audio.defaults.categories.${key}`, { min: 0, max: 1 });
+    }
+  }
+}
+
 function validateSystem(system) {
   object(system, "system");
   const gameDefaults = object(system.gameDefaults, "system.gameDefaults");
@@ -126,9 +142,7 @@ export class RevisionStore {
         throw new AdminValidationError(`${key} must equal ${JSON.stringify(expected)}.`);
       }
     }
-    if (config.audio === null || typeof config.audio !== "object") {
-      throw new AdminValidationError("audio config is required.");
-    }
+    validateAudio(config.audio);
     if (config.worldMusic === null || typeof config.worldMusic !== "object") {
       throw new AdminValidationError("worldMusic config is required.");
     }

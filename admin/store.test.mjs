@@ -195,3 +195,54 @@ test("contract/schema drift is rejected before a revision is written", async (t)
     AdminValidationError,
   );
 });
+
+
+test("B03 default audio profile matches runtime-backed gain fields", () => {
+  const config = createDefaultSpaceTypingConfig(contract);
+  assert.equal(config.audio.defaults.credit, 1);
+  assert.deepEqual(config.audio.defaults.categories, {
+    typing: 1,
+    combat: 1,
+    warnings: 1,
+    ui: 1,
+    rewards: 1,
+  });
+});
+
+test("B03 audio draft stays isolated until publish and preserves legacy compatibility", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+  const config = structuredClone(active.config);
+  config.audio.defaults.music = 0.2;
+  config.audio.defaults.credit = 1.25;
+  config.audio.defaults.categories.typing = 0.75;
+  const draft = await store.createRevision({ baseRevision: active.revision, config, message: "B03 audio draft" });
+  assert.equal((await store.getRuntimeConfig()).audio.defaults.music, 0.26);
+  await store.publish({ revision: draft.revision, expectedActiveRevision: active.revision });
+  const runtime = await store.getRuntimeConfig();
+  assert.equal(runtime.audio.defaults.music, 0.2);
+  assert.equal(runtime.audio.defaults.credit, 1.25);
+  assert.equal(runtime.audio.defaults.categories.typing, 0.75);
+
+  const legacy = structuredClone(runtime);
+  delete legacy.audio.defaults.credit;
+  delete legacy.audio.defaults.categories;
+  const legacyDraft = await store.createRevision({ baseRevision: draft.revision, config: legacy, message: "Legacy audio compatibility" });
+  assert.equal(legacyDraft.config.audio.defaults.credit, undefined);
+});
+
+test("B03 audio validation rejects out-of-range gain and category defaults", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const active = await store.getActiveRevision();
+  const badCredit = structuredClone(active.config);
+  badCredit.audio.defaults.credit = 2.01;
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badCredit }), AdminValidationError);
+  const badCategory = structuredClone(active.config);
+  badCategory.audio.defaults.categories.combat = 1.01;
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badCategory }), AdminValidationError);
+  const badMaster = structuredClone(active.config);
+  badMaster.audio.defaults.master = -0.01;
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badMaster }), AdminValidationError);
+});

@@ -1,10 +1,22 @@
+export type AudioCategoryDefaults = {
+  typing: number;
+  combat: number;
+  warnings: number;
+  ui: number;
+  rewards: number;
+};
+
 export type AudioDefaults = {
   master: number;
   pronunciation: number;
   music: number;
   ambient: number;
   sfx: number;
+  /** Legacy revisions may omit this B03 field. Child runtime supports 0..2. */
+  credit?: number;
   announcer: number;
+  /** Legacy revisions may omit these B03 category preferences. */
+  categories?: Partial<AudioCategoryDefaults>;
 };
 
 export type GeneralSettingsConfig = {
