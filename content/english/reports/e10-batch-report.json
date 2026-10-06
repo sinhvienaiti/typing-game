@@ -1,0 +1,4302 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "batches": [
+    {
+      "id": "e03.lexical-reviewed-slice",
+      "phase": "E03",
+      "state": "draft",
+      "category": "dictionary",
+      "records": 600,
+      "recordSets": [
+        {
+          "id": "reviewed-lexemes",
+          "path": "content/english/dictionary/e03-reviewed-lexemes.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "A1": 152,
+            "A2": 148
+          },
+          "digest": 986275
+        },
+        {
+          "id": "reviewed-senses",
+          "path": "content/english/dictionary/e03-reviewed-senses.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "A1": 152,
+            "A2": 148
+          },
+          "digest": 989920
+        }
+      ],
+      "byState": {
+        "draft": 600
+      },
+      "byCefr": {
+        "A1": 304,
+        "A2": 296
+      },
+      "requiredBeforePublish": [
+        "source-pin",
+        "sense-alignment",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-pilot",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 250,
+      "recordSets": [
+        {
+          "id": "collocations",
+          "path": "content/english/phrases/pilot-collocations.json",
+          "generated": false,
+          "expectedCount": 100,
+          "actualCount": 100,
+          "byState": {
+            "draft": 100
+          },
+          "byCefr": {
+            "A2": 54,
+            "A1": 20,
+            "B1": 22,
+            "B2": 4
+          },
+          "digest": 166662
+        },
+        {
+          "id": "verb-patterns",
+          "path": "content/english/phrases/pilot-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 50,
+          "actualCount": 50,
+          "byState": {
+            "draft": 50
+          },
+          "byCefr": {
+            "A1": 2,
+            "A2": 18,
+            "B1": 26,
+            "B2": 4
+          },
+          "digest": 84513
+        },
+        {
+          "id": "phrases",
+          "path": "content/english/phrases/pilot-phrases.json",
+          "generated": false,
+          "expectedCount": 100,
+          "actualCount": 100,
+          "byState": {
+            "draft": 100
+          },
+          "byCefr": {
+            "A1": 16,
+            "A2": 37,
+            "B1": 39,
+            "B2": 8
+          },
+          "digest": 182014
+        }
+      ],
+      "byState": {
+        "draft": 250
+      },
+      "byCefr": {
+        "A2": 109,
+        "A1": 38,
+        "B1": 87,
+        "B2": 16
+      },
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e05.grammar-topic-pilot",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 72,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/pilot-topics.json",
+          "generated": false,
+          "expectedCount": 12,
+          "actualCount": 12,
+          "byState": {
+            "draft": 12
+          },
+          "byCefr": {
+            "A1": 2,
+            "A2": 2,
+            "B1": 2,
+            "B2": 2,
+            "C1": 2,
+            "C2": 2
+          },
+          "digest": 38874
+        },
+        {
+          "id": "pilot-sentences",
+          "path": "content/english/sentences/pilot-sentences.json",
+          "generated": false,
+          "expectedCount": 36,
+          "actualCount": 36,
+          "byState": {
+            "draft": 36
+          },
+          "byCefr": {
+            "A1": 6,
+            "A2": 6,
+            "B1": 6,
+            "B2": 6,
+            "C1": 6,
+            "C2": 6
+          },
+          "digest": 70011
+        },
+        {
+          "id": "pilot-exercises",
+          "path": "content/english/sentences/pilot-exercises.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 4,
+            "A2": 4,
+            "B1": 4,
+            "B2": 4,
+            "C1": 4,
+            "C2": 4
+          },
+          "digest": 48383
+        }
+      ],
+      "byState": {
+        "draft": 72
+      },
+      "byCefr": {
+        "A1": 12,
+        "A2": 12,
+        "B1": 12,
+        "B2": 12,
+        "C1": 12,
+        "C2": 12
+      },
+      "requiredBeforePublish": [
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-01",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-01-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A1": 8
+          },
+          "digest": 26413
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-01-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 24
+          },
+          "digest": 49015
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-01-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A1": 16
+          },
+          "digest": 33983
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-01-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 17058
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-02",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-02-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A1": 8
+          },
+          "digest": 27295
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-02-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 24
+          },
+          "digest": 49065
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-02-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A1": 16
+          },
+          "digest": 33948
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-02-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 17034
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-03",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-03-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A1": 8
+          },
+          "digest": 27200
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-03-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 24
+          },
+          "digest": 49043
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-03-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A1": 16
+          },
+          "digest": 33990
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-03-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 17057
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-04",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-04-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A1": 8
+          },
+          "digest": 25807
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-04-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 24
+          },
+          "digest": 34594
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-04-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A1": 16
+          },
+          "digest": 25652
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-04-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 12813
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-05",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-05-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A1": 8
+          },
+          "digest": 26151
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-05-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A1": 24
+          },
+          "digest": 34830
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-05-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A1": 16
+          },
+          "digest": 25845
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-05-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 13006
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a1-06",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 21,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a1-06-topics.json",
+          "generated": false,
+          "expectedCount": 3,
+          "actualCount": 3,
+          "byState": {
+            "draft": 3
+          },
+          "byCefr": {
+            "A1": 3
+          },
+          "digest": 9942
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a1-06-sentences.json",
+          "generated": false,
+          "expectedCount": 9,
+          "actualCount": 9,
+          "byState": {
+            "draft": 9
+          },
+          "byCefr": {
+            "A1": 9
+          },
+          "digest": 13008
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a1-06-exercises.json",
+          "generated": false,
+          "expectedCount": 6,
+          "actualCount": 6,
+          "byState": {
+            "draft": 6
+          },
+          "byCefr": {
+            "A1": 6
+          },
+          "digest": 9680
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a1-06-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 3,
+          "actualCount": 3,
+          "byState": {
+            "draft": 3
+          },
+          "byCefr": {},
+          "digest": 4886
+        }
+      ],
+      "byState": {
+        "draft": 21
+      },
+      "byCefr": {
+        "A1": 18
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-01",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-01-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 25276
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-01-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39859
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-01-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29449
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-01-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 15012
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-02",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-02-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 25086
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-02-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39657
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-02-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29163
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-02-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14737
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-03",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-03-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 25327
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-03-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39768
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-03-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29303
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-03-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14800
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-04",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-04-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 24858
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-04-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39579
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-04-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29232
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-04-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14719
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-05",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-05-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 24922
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-05-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39666
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-05-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29223
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-05-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14724
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-a2-06",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-a2-06-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "A2": 8
+          },
+          "digest": 25548
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-a2-06-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "A2": 24
+          },
+          "digest": 39627
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-a2-06-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "A2": 16
+          },
+          "digest": 29191
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-a2-06-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14843
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "A2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-01",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-01-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24711
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-01-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39689
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-01-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29307
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-01-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 15059
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-02",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-02-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 25011
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-02-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39475
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-02-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29196
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-02-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14999
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-03",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-03-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24410
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-03-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39349
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-03-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29005
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-03-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14928
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-04",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-04-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24625
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-04-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39455
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-04-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29146
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-04-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14829
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-05",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-05-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24655
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-05-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39401
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-05-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29046
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-05-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14757
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-06",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-06-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24932
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-06-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39370
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-06-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29091
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-06-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14737
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-07",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-07-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B1": 8
+          },
+          "digest": 24637
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-07-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B1": 24
+          },
+          "digest": 39449
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-07-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B1": 16
+          },
+          "digest": 29069
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-07-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14629
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B1": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b1-08",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 14,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b1-08-topics.json",
+          "generated": false,
+          "expectedCount": 2,
+          "actualCount": 2,
+          "byState": {
+            "draft": 2
+          },
+          "byCefr": {
+            "B1": 2
+          },
+          "digest": 6356
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b1-08-sentences.json",
+          "generated": false,
+          "expectedCount": 6,
+          "actualCount": 6,
+          "byState": {
+            "draft": 6
+          },
+          "byCefr": {
+            "B1": 6
+          },
+          "digest": 9937
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b1-08-exercises.json",
+          "generated": false,
+          "expectedCount": 4,
+          "actualCount": 4,
+          "byState": {
+            "draft": 4
+          },
+          "byCefr": {
+            "B1": 4
+          },
+          "digest": 7371
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b1-08-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 2,
+          "actualCount": 2,
+          "byState": {
+            "draft": 2
+          },
+          "byCefr": {},
+          "digest": 3842
+        }
+      ],
+      "byState": {
+        "draft": 14
+      },
+      "byCefr": {
+        "B1": 12
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b2-01",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b2-01-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B2": 8
+          },
+          "digest": 25549
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b2-01-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B2": 24
+          },
+          "digest": 39772
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b2-01-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B2": 16
+          },
+          "digest": 29389
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b2-01-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 15040
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b2-02",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b2-02-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B2": 8
+          },
+          "digest": 24933
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b2-02-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B2": 24
+          },
+          "digest": 39528
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b2-02-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B2": 16
+          },
+          "digest": 29218
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b2-02-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14920
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b2-03",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b2-03-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B2": 8
+          },
+          "digest": 25489
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b2-03-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B2": 24
+          },
+          "digest": 39536
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b2-03-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B2": 16
+          },
+          "digest": 29173
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b2-03-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14837
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e05.grammar-scale-b2-04",
+      "phase": "E05",
+      "state": "draft",
+      "category": "grammar",
+      "records": 56,
+      "recordSets": [
+        {
+          "id": "grammar-topics",
+          "path": "content/english/grammar/e05-scale-b2-04-topics.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {
+            "B2": 8
+          },
+          "digest": 24906
+        },
+        {
+          "id": "examples",
+          "path": "content/english/sentences/e05-scale-b2-04-sentences.json",
+          "generated": false,
+          "expectedCount": 24,
+          "actualCount": 24,
+          "byState": {
+            "draft": 24
+          },
+          "byCefr": {
+            "B2": 24
+          },
+          "digest": 39477
+        },
+        {
+          "id": "exercises",
+          "path": "content/english/sentences/e05-scale-b2-04-exercises.json",
+          "generated": false,
+          "expectedCount": 16,
+          "actualCount": 16,
+          "byState": {
+            "draft": 16
+          },
+          "byCefr": {
+            "B2": 16
+          },
+          "digest": 29129
+        },
+        {
+          "id": "common-mistakes",
+          "path": "content/english/sentences/e05-scale-b2-04-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 8,
+          "actualCount": 8,
+          "byState": {
+            "draft": 8
+          },
+          "byCefr": {},
+          "digest": 14831
+        }
+      ],
+      "byState": {
+        "draft": 56
+      },
+      "byCefr": {
+        "B2": 48
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e06.grammar-reviewed-slice",
+      "phase": "E06",
+      "state": "draft",
+      "category": "sentences",
+      "records": 200,
+      "recordSets": [
+        {
+          "id": "reviewed-exercises",
+          "path": "content/english/sentences/e06-reviewed-exercises.json",
+          "generated": false,
+          "expectedCount": 200,
+          "actualCount": 200,
+          "byState": {
+            "draft": 200
+          },
+          "byCefr": {
+            "A1": 41,
+            "A2": 40,
+            "B1": 33,
+            "B2": 29,
+            "C1": 28,
+            "C2": 29
+          },
+          "digest": 478675
+        }
+      ],
+      "byState": {
+        "draft": 200
+      },
+      "byCefr": {
+        "A1": 41,
+        "A2": 40,
+        "B1": 33,
+        "B2": 29,
+        "C1": 28,
+        "C2": 29
+      },
+      "requiredBeforePublish": [
+        "grammar-review",
+        "target-structure-review",
+        "naturalness-review",
+        "semantic-equivalence-review",
+        "cefr-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e06.translation-reviewed-slice",
+      "phase": "E06",
+      "state": "draft",
+      "category": "sentences",
+      "records": 600,
+      "recordSets": [
+        {
+          "id": "reviewed-translation-sentences",
+          "path": "content/english/sentences/e06-reviewed-translation-sentences.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "B1": 97,
+            "A2": 137,
+            "A1": 58,
+            "B2": 8
+          },
+          "digest": 623310
+        },
+        {
+          "id": "reviewed-translations",
+          "path": "content/english/sentences/e06-reviewed-translations.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "B1": 97,
+            "A2": 137,
+            "A1": 58,
+            "B2": 8
+          },
+          "digest": 787354
+        }
+      ],
+      "byState": {
+        "draft": 600
+      },
+      "byCefr": {
+        "B1": 194,
+        "A2": 274,
+        "A1": 116,
+        "B2": 16
+      },
+      "requiredBeforePublish": [
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e06.typing-text-reviewed-slice",
+      "phase": "E06",
+      "state": "draft",
+      "category": "sentences",
+      "records": 600,
+      "recordSets": [
+        {
+          "id": "reviewed-typing-text-sentences",
+          "path": "content/english/sentences/e06-reviewed-typing-text-sentences.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "A1": 300
+          },
+          "digest": 723746
+        },
+        {
+          "id": "reviewed-cloze",
+          "path": "content/english/sentences/e06-reviewed-cloze.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {
+            "A1": 300
+          },
+          "digest": 710664
+        }
+      ],
+      "byState": {
+        "draft": 600
+      },
+      "byCefr": {
+        "A1": 600
+      },
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "dedup-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e03.viwiktionary-source-refresh-2026-10-03",
+      "phase": "E03",
+      "state": "draft",
+      "category": "mixed",
+      "records": 1,
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/viwiktionary-refresh-2026-10-03.json",
+          "generated": false,
+          "expectedCount": 1,
+          "actualCount": 1,
+          "byState": {
+            "draft": 1
+          },
+          "byCefr": {},
+          "digest": 2280
+        }
+      ],
+      "byState": {
+        "draft": 1
+      },
+      "byCefr": {},
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ]
+    },
+    {
+      "id": "e06.dialogue-reviewed-slice",
+      "phase": "E06",
+      "state": "draft",
+      "category": "sentences",
+      "records": 100,
+      "recordSets": [
+        {
+          "id": "reviewed-dialogues",
+          "path": "content/english/sentences/e06-reviewed-dialogues.json",
+          "generated": false,
+          "expectedCount": 100,
+          "actualCount": 100,
+          "byState": {
+            "draft": 100
+          },
+          "byCefr": {
+            "A2": 82,
+            "B1": 18
+          },
+          "digest": 338007
+        }
+      ],
+      "byState": {
+        "draft": 100
+      },
+      "byCefr": {
+        "A2": 82,
+        "B1": 18
+      },
+      "requiredBeforePublish": [
+        "source-pin",
+        "dialogue-structure-review",
+        "identifier-safety-review",
+        "dedupe-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e06.tatoeba-source-refresh-2026-10-03",
+      "phase": "E06",
+      "state": "draft",
+      "category": "mixed",
+      "records": 1,
+      "recordSets": [
+        {
+          "id": "source-refresh-review",
+          "path": "content/english/sources/tatoeba-refresh-2026-10-03.json",
+          "generated": false,
+          "expectedCount": 1,
+          "actualCount": 1,
+          "byState": {
+            "draft": 1
+          },
+          "byCefr": {},
+          "digest": 2833
+        }
+      ],
+      "byState": {
+        "draft": 1
+      },
+      "byCefr": {},
+      "requiredBeforePublish": [
+        "source-pin",
+        "license-review",
+        "derived-output-comparison"
+      ]
+    },
+    {
+      "id": "e06.common-mistake-reviewed-slice",
+      "phase": "E06",
+      "state": "draft",
+      "category": "sentences",
+      "records": 100,
+      "recordSets": [
+        {
+          "id": "reviewed-common-mistakes",
+          "path": "content/english/sentences/e06-reviewed-common-mistakes.json",
+          "generated": false,
+          "expectedCount": 100,
+          "actualCount": 100,
+          "byState": {
+            "draft": 100
+          },
+          "byCefr": {},
+          "digest": 241636
+        }
+      ],
+      "byState": {
+        "draft": 100
+      },
+      "byCefr": {},
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-01",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-01-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 10,
+            "B2": 9,
+            "A2": 1
+          },
+          "digest": 39171
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-01-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 10,
+            "B1": 9,
+            "B2": 1
+          },
+          "digest": 38412
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-01-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 5,
+            "B1": 8,
+            "B2": 7
+          },
+          "digest": 41713
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 27,
+        "B2": 17,
+        "A2": 16
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-02",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-02-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 7,
+            "B2": 12,
+            "C1": 1
+          },
+          "digest": 39287
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-02-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 3,
+            "B1": 13,
+            "B2": 4
+          },
+          "digest": 38379
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-02-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 4,
+            "B1": 10,
+            "B2": 6
+          },
+          "digest": 41713
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 30,
+        "B2": 22,
+        "C1": 1,
+        "A2": 7
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-03",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-03-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "C1": 2,
+            "B1": 3,
+            "A2": 4
+          },
+          "digest": 39425
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-03-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 7,
+            "B2": 11,
+            "A2": 1,
+            "C1": 1
+          },
+          "digest": 38564
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-03-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 10,
+            "B2": 8,
+            "A2": 1,
+            "C1": 1
+          },
+          "digest": 42190
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 30,
+        "C1": 4,
+        "B1": 20,
+        "A2": 6
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-04",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-04-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 6,
+            "B1": 11,
+            "A2": 3
+          },
+          "digest": 39467
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-04-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 3,
+            "B1": 11,
+            "B2": 6
+          },
+          "digest": 38451
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-04-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "B1": 7,
+            "C1": 2
+          },
+          "digest": 42406
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 23,
+        "B1": 29,
+        "A2": 6,
+        "C1": 2
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-05",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-05-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 13,
+            "A2": 2,
+            "B2": 5
+          },
+          "digest": 39870
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-05-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 14,
+            "B1": 6
+          },
+          "digest": 38651
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-05-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 15,
+            "B1": 2,
+            "C1": 3
+          },
+          "digest": 42408
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 21,
+        "A2": 2,
+        "B2": 34,
+        "C1": 3
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-06",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-06-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 5,
+            "A1": 1,
+            "B1": 12,
+            "B2": 2
+          },
+          "digest": 39680
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-06-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "B1": 9
+          },
+          "digest": 38667
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-06-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 8,
+            "B1": 6,
+            "A2": 1,
+            "C1": 5
+          },
+          "digest": 42348
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "A2": 6,
+        "A1": 1,
+        "B1": 27,
+        "B2": 21,
+        "C1": 5
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-07",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-07-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 12,
+            "A2": 3,
+            "B2": 5
+          },
+          "digest": 39903
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-07-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 11,
+            "B2": 9
+          },
+          "digest": 38654
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-07-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 12,
+            "A2": 1,
+            "B1": 7
+          },
+          "digest": 42284
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 30,
+        "A2": 4,
+        "B2": 26
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-08",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-08-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 4,
+            "B1": 7,
+            "B2": 9
+          },
+          "digest": 39702
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-08-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 6,
+            "A2": 2,
+            "B2": 12
+          },
+          "digest": 38606
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-08-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 7,
+            "B2": 11,
+            "A2": 1,
+            "C1": 1
+          },
+          "digest": 42436
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "A2": 7,
+        "B1": 20,
+        "B2": 32,
+        "C1": 1
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-09",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-09-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 7,
+            "B1": 10,
+            "B2": 3
+          },
+          "digest": 39769
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-09-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 6,
+            "B2": 13,
+            "C1": 1
+          },
+          "digest": 38644
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-09-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 12,
+            "B1": 4,
+            "C1": 4
+          },
+          "digest": 42701
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "A2": 7,
+        "B1": 20,
+        "B2": 28,
+        "C1": 5
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-10",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-10-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 3,
+            "B1": 10,
+            "B2": 7
+          },
+          "digest": 39957
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-10-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 15,
+            "B1": 5
+          },
+          "digest": 38628
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-10-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 1,
+            "B2": 17,
+            "C1": 2
+          },
+          "digest": 42642
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "A2": 3,
+        "B1": 16,
+        "B2": 39,
+        "C1": 2
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-11",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-11-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 12,
+            "B1": 4,
+            "C1": 4
+          },
+          "digest": 40317
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-11-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "B1": 3,
+            "C1": 4
+          },
+          "digest": 38699
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-11-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "B1": 2,
+            "C1": 5
+          },
+          "digest": 42593
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 38,
+        "B1": 9,
+        "C1": 13
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-12",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-12-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 8,
+            "B1": 6,
+            "C1": 3,
+            "A2": 3
+          },
+          "digest": 40452
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-12-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "C1": 9,
+            "B2": 10,
+            "B1": 1
+          },
+          "digest": 38767
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-12-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "C1": 9
+          },
+          "digest": 42720
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 29,
+        "B1": 7,
+        "C1": 21,
+        "A2": 3
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-13",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-13-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 8,
+            "C1": 2,
+            "B1": 10
+          },
+          "digest": 40058
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-13-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "C1": 5,
+            "B2": 8,
+            "B1": 7
+          },
+          "digest": 38641
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-13-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 10,
+            "C1": 10
+          },
+          "digest": 42777
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 26,
+        "C1": 17,
+        "B1": 17
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-14",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-14-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "B2": 11,
+            "C1": 1
+          },
+          "digest": 40136
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-14-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "C1": 4,
+            "B1": 3
+          },
+          "digest": 38745
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-14-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "B1": 1,
+            "C1": 8
+          },
+          "digest": 42702
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 12,
+        "B2": 35,
+        "C1": 13
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-15",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-15-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 10,
+            "B2": 7,
+            "A2": 3
+          },
+          "digest": 39694
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-15-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "B1": 9
+          },
+          "digest": 38874
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-15-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "B1": 7
+          },
+          "digest": 42528
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 26,
+        "B2": 31,
+        "A2": 3
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-16",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-16-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 16,
+            "B1": 4
+          },
+          "digest": 39959
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-16-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 15,
+            "B2": 5
+          },
+          "digest": 39149
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-16-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "B2": 12
+          },
+          "digest": 42663
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 33,
+        "B1": 27
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-17",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-17-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "A2": 2,
+            "B2": 10
+          },
+          "digest": 39481
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-17-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 11,
+            "B1": 9
+          },
+          "digest": 38992
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-17-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 12,
+            "B1": 8
+          },
+          "digest": 42688
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 25,
+        "A2": 2,
+        "B2": 33
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-18",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-18-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "A2": 1,
+            "B2": 11
+          },
+          "digest": 39517
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-18-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 10,
+            "B2": 7,
+            "A2": 2,
+            "C1": 1
+          },
+          "digest": 39130
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-18-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 10,
+            "B1": 10
+          },
+          "digest": 42577
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 28,
+        "A2": 3,
+        "B2": 28,
+        "C1": 1
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-19",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-19-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 5,
+            "B2": 14,
+            "C1": 1
+          },
+          "digest": 39633
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-19-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 10,
+            "B2": 10
+          },
+          "digest": 39174
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-19-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 8,
+            "B1": 8,
+            "A2": 2,
+            "C1": 2
+          },
+          "digest": 42539
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 23,
+        "B2": 32,
+        "C1": 3,
+        "A2": 2
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-20",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-20-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "A2": 5,
+            "B1": 2
+          },
+          "digest": 39470
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-20-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 2,
+            "B1": 3,
+            "B2": 14,
+            "C1": 1
+          },
+          "digest": 39138
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-20-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "B2": 12
+          },
+          "digest": 42582
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 39,
+        "A2": 7,
+        "B1": 13,
+        "C1": 1
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-21",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-21-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 8,
+            "B2": 8,
+            "A2": 4
+          },
+          "digest": 39392
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-21-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "A2": 2,
+            "B2": 13,
+            "B1": 5
+          },
+          "digest": 39160
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-21-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 6,
+            "B1": 9,
+            "A2": 1,
+            "C1": 4
+          },
+          "digest": 42457
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 22,
+        "B2": 27,
+        "A2": 7,
+        "C1": 4
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-22",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-22-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 7,
+            "B2": 10,
+            "A2": 3
+          },
+          "digest": 39537
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-22-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B1": 12,
+            "A2": 5,
+            "B2": 3
+          },
+          "digest": 38834
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-22-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 13,
+            "B1": 5,
+            "C1": 2
+          },
+          "digest": 42556
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B1": 24,
+        "B2": 26,
+        "A2": 8,
+        "C1": 2
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-23",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 60,
+      "recordSets": [
+        {
+          "id": "scale-verb-patterns",
+          "path": "content/english/phrases/e04-scale-23-verb-patterns.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 14,
+            "B1": 4,
+            "C1": 2
+          },
+          "digest": 39828
+        },
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-23-collocations.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 18,
+            "B1": 2
+          },
+          "digest": 39127
+        },
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-23-phrases.json",
+          "generated": false,
+          "expectedCount": 20,
+          "actualCount": 20,
+          "byState": {
+            "draft": 20
+          },
+          "byCefr": {
+            "B2": 12,
+            "B1": 3,
+            "A2": 1,
+            "C1": 4
+          },
+          "digest": 42645
+        }
+      ],
+      "byState": {
+        "draft": 60
+      },
+      "byCefr": {
+        "B2": 44,
+        "B1": 9,
+        "C1": 6,
+        "A2": 1
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "translation-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
+    }
+  ],
+  "totals": {
+    "records": 5171,
+    "byState": {
+      "draft": 5171
+    },
+    "byCefr": {
+      "A1": 1370,
+      "A2": 1201,
+      "B1": 1174,
+      "B2": 958,
+      "C1": 144,
+      "C2": 41
+    }
+  }
+}
