@@ -1,0 +1,96 @@
+name: Apply English E04 Scale 25
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - scripts/apply-english-e04-focused-scale-25.py
+      - .github/workflows/apply-english-e04-scale-25.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: english-e04-scale-25
+  cancel-in-progress: false
+
+jobs:
+  apply-scale-25:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Apply idempotent E04 scale 25 source batch
+        run: python3 scripts/apply-english-e04-focused-scale-25.py
+
+      - name: Validate review and controlled-batch contracts
+        run: |
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+
+      - name: Generate and publish reviewed runtime
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+
+      - name: Run full English-content quality gates
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+
+      - name: Stage reviewed source and generated runtime
+        shell: bash
+        run: |
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md scripts/smoke-published-english-content.mjs
+          git status --short
+          if git diff --cached --quiet; then
+            echo 'Scale 25 produced no state change; it may already be applied.' >&2
+            exit 1
+          fi
+
+      - name: Verify generation is deterministic
+        shell: bash
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/sync-english-content-master-plan-status.mjs
+          if ! git diff --exit-code -- shared content/english docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md scripts/smoke-published-english-content.mjs; then
+            echo 'Scale 25 artifacts are not reproducible from committed source/review state.' >&2
+            exit 1
+          fi
+
+      - name: Commit validated scale 25 artifacts
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(content): publish E04 collocation scale 25'
+          git push
