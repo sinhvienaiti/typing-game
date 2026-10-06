@@ -5,14 +5,16 @@ import { fileURLToPath } from "node:url";
 import { RevisionStore, AdminConflictError, AdminValidationError } from "./store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
+import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const contractPath = resolve(root, "../games/space-typing/contracts/space-typing-admin.v1.json");
+const contractPath = resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json");
 const contract = JSON.parse(await readFile(contractPath, "utf8"));
 const store = new RevisionStore({
-  rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, "../.local/admin/space-typing"),
+  rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing"),
   contract,
 });
+const musicAssets = new MusicAssetService({ rootDir: root });
 await store.initialize(createDefaultSpaceTypingConfig(contract));
 
 const host = "127.0.0.1";
@@ -29,20 +31,34 @@ function json(response, status, body) {
   response.end(data);
 }
 
-async function body(request) {
+async function readBody(request, maxBytes) {
   const chunks = [];
   let size = 0;
   for await (const chunk of request) {
     size += chunk.length;
-    if (size > 1024 * 1024) throw new AdminValidationError("Request body too large.");
+    if (size > maxBytes) throw new AdminValidationError("Request body too large.");
     chunks.push(chunk);
   }
-  if (chunks.length === 0) return {};
+  return Buffer.concat(chunks);
+}
+
+async function body(request) {
+  const buffer = await readBody(request, 1024 * 1024);
+  if (buffer.length === 0) return {};
   try {
-    return JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    return JSON.parse(buffer.toString("utf8"));
   } catch {
     throw new AdminValidationError("Request body must be valid JSON.");
   }
+}
+
+function header(request, name, required = false) {
+  const value = request.headers[name];
+  const text = Array.isArray(value) ? value[0] : value;
+  if (required && (typeof text !== "string" || text.trim().length === 0)) {
+    throw new AdminValidationError(`Missing ${name} header.`);
+  }
+  return typeof text === "string" ? text : undefined;
 }
 
 function authorized(request) {
@@ -77,6 +93,34 @@ const server = createServer(async (request, response) => {
         activeRevision: (await store.getState()).activeRevision,
         config: await store.getRuntimeConfig(),
       });
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/music/library") {
+      json(response, 200, await musicAssets.list());
+      return;
+    }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/music/upload") {
+      const bytes = await readBody(request, MAX_UPLOAD_BYTES + 1);
+      const result = await musicAssets.upload({
+        bytes,
+        fileName: header(request, "x-music-file-name", true),
+        contentType: header(request, "content-type"),
+        trackId: header(request, "x-music-track-id", true),
+        title: header(request, "x-music-title", true),
+        worldId: header(request, "x-music-world-id", true),
+        durationSeconds: header(request, "x-music-duration-seconds", true),
+        mixOutSeconds: header(request, "x-music-mix-out-seconds"),
+        mood: header(request, "x-music-mood"),
+      });
+      json(response, 201, result);
+      return;
+    }
+    if (
+      request.method === "DELETE" &&
+      url.pathname.startsWith("/api/admin/space-typing/music/tracks/")
+    ) {
+      const trackId = decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length));
+      json(response, 200, await musicAssets.remove(trackId));
       return;
     }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/world-music/preview") {
@@ -119,6 +163,10 @@ const server = createServer(async (request, response) => {
     }
     if (error instanceof AdminValidationError) {
       json(response, 400, { error: "validation", message: error.message });
+      return;
+    }
+    if (error instanceof MusicAssetError) {
+      json(response, error.status, { error: "music-asset", message: error.message });
       return;
     }
     if (error instanceof WorldMusicPreviewError) {
