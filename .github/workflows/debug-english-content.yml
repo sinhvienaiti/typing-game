@@ -25,6 +25,22 @@ jobs:
         with:
           node-version: 24.11.0
 
+      - name: Normalize scale-24 reviewed seed
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path=Path('scripts/apply-english-e04-focused-scale-24.py')
+          text=path.read_text(encoding='utf-8')
+          old='("exercise discretion","verb + noun","hành xử thận trọng và có quyền cân nhắc","C1"),'
+          new='("maintain impartiality","verb + noun","duy trì sự vô tư và khách quan khi đánh giá","C1"),'
+          if old in text:
+              text=text.replace(old,new,1)
+              path.write_text(text,encoding='utf-8')
+          elif new not in text:
+              raise SystemExit('scale-24 reviewed seed drift: replacement target missing')
+          PY
+
       - name: Apply focused E04 scale 24
         shell: bash
         run: |
