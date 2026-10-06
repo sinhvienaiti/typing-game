@@ -1,5 +1,6 @@
 import "./space-typing-ui.css";
 import { renderExtendedAdminScreen } from "./space-typing-extended";
+import { renderPhaseBAdminScreen } from "./space-typing-phase-b";
 import { adminNavIcon } from "./space-typing-icons";
 import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
 import { renderWorldMusicV2 } from "./space-typing-world-music-v2";
@@ -281,6 +282,8 @@ export class SpaceTypingAdmin {
     if (path === `${ADMIN_BASE}/world-music`) return renderWorldMusicV2(this.navigate);
     if (path === `${ADMIN_BASE}/ships`) return this.renderShips();
     if (path === `${ADMIN_BASE}/daily-weekly`) return renderDailyWeekly();
+    const phaseB = renderPhaseBAdminScreen(path, this.navigate);
+    if (phaseB !== null) return phaseB;
     return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);
   }
 

@@ -63,7 +63,7 @@ No screen may be marked runtime-connected merely because a UI mock exists.
 ## Ordered Phase B implementation
 
 1. **B01 — System + Feature Flags persistence**: canonical namespaces, validation, API typing, revision tests, route/domain matrix. **Implemented in this increment.**
-2. **B02 — Wire General Settings + Feature Flags UI**: hydrate active/draft values, create revisions on Save Draft, validation/error state, no direct publish.
+2. **B02 — Wire General Settings + Feature Flags UI**: hydrate active values, create immutable revisions on Save Draft, surface validation/error state, and never direct-publish. **Implemented.**
 3. **B03 — Audio Defaults**: replace local UI state with active/draft revision state while preserving player-preference semantics.
 4. **B04 — World Music**: map Stage-level editor data into authored policy drafts and canonical preview validation; keep runtime apply at next-track/state.
 5. **B05 — History & Publish**: replace mock history/diff/status with real revision data, real validation gates and CAS conflicts.

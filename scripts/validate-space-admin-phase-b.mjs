@@ -6,6 +6,8 @@ const map = JSON.parse(await readFile(new URL("admin/space-typing-phase-b-map.v1
 const defaultConfig = await readFile(new URL("admin/default-config.mjs", root), "utf8");
 const store = await readFile(new URL("admin/store.mjs", root), "utf8");
 const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
+const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
+const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 
 assert.equal(map.schemaVersion, 1);
 assert.equal(map.phase, "B");
@@ -18,10 +20,10 @@ assert.equal(new Set(routes).size, routes.length, "Phase B mapping routes must b
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
 assert.equal(settings?.domain, "system");
-assert.equal(settings?.status, "phase-b-persistence-ready");
+assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
 assert.equal(flags?.domain, "featureFlags");
-assert.equal(flags?.status, "phase-b-persistence-ready");
+assert.equal(flags?.status, "phase-b-ui-wired");
 assert.equal(flags?.applyBoundary, "new-session");
 
 for (const entry of map.screens) {
@@ -45,6 +47,13 @@ assert.match(store, /competitive/);
 assert.match(api, /export type GeneralSettingsConfig/);
 assert.match(api, /export type FeatureFlagConfig/);
 assert.match(api, /getRuntime\(\): Promise<AdminRuntimePayload>/);
+assert.match(main, /renderPhaseBAdminScreen/);
+assert.match(main, /if \(phaseB !== null\) return phaseB/);
+assert.match(phaseB, /Admin Phase B · General Settings draft/);
+assert.match(phaseB, /Admin Phase B · Feature Flags draft/);
+assert.match(phaseB, /api\.createRevision/);
+assert.doesNotMatch(phaseB, /api\.publish/);
+assert.match(phaseB, /runtime unchanged/);
 
 const dangerous = map.screens.filter((entry) =>
   entry.domain.startsWith("economy.") || entry.domain.startsWith("pvp.") || entry.domain === "system" || entry.domain === "featureFlags",
