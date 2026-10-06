@@ -290,7 +290,8 @@ function registryScreen(title: string, eyebrow: string, description: string, row
   };
   search.addEventListener("input", render); render();
   const record = rows.find((r) => r[0] === selectedId) ?? rows[0];
-  return Object.assign(page, { append: page.append(list, record ? detail(record) : panel("No selection"), actionBar()) });
+  page.append(list, record ? detail(record) : panel("No selection"), actionBar());
+  return page;
 }
 
 function renderEquipment(navigate: Navigate): HTMLElement {
