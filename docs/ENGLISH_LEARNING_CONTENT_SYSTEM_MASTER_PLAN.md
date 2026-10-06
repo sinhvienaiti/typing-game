@@ -2532,7 +2532,7 @@ Pilot status: **A1 + A2 + B1 RICH GRAMMAR BODY COMPLETE — 155/155 A1-B1 TOPICS
 - Published E05 runtime now contains **161 rich grammar topics**: the original 12-topic cross-CEFR pilot plus completed controlled A1, A2 and B1 bodies. A1 is **45/45**, A2 is **50/50** and B1 is **60/60** complete. Grammar-linked authoring now includes **483 controlled example sentences, 322 exercises and 149 linked common mistakes**.
 - The original 12-topic pilot remains exactly 2 per CEFR level. A1 slice 01 adds `be` identification/negative/questions, subject pronouns, possessive adjectives, demonstratives, there is/are and a/an. A1 slice 02 adds basic `the`, noun number, countability, some/any, have/has possession, possessive `'s`, Present Simple facts/states and third-person `-s`. A1 slice 03 adds Present Simple negatives/questions/wh-questions, frequency adverbs, can for ability, can for permission/requests, imperatives and object pronouns. A1 slice 04 adds likes/dislikes with nouns and -ing forms, want/need + to-infinitive, time/place/movement prepositions, adjective position, very/really and basic coordinators. A1 slice 05 adds because, temporary Present Continuous, Present Simple vs Continuous, was/were, regular/irregular Past Simple, Past Simple negatives/questions and going to intentions. A1 slice 06 closes the level with will, would like and basic word order. Every scale topic includes EN/VI concepts, formulae, use cases, forms/variations, contrasts/prerequisites, 3 examples, 2 exercises and 1 common mistake. A2 slices 01-06 cover past narrative forms, Present Perfect expansion, quantity/comparison, future forms, modals/conditionals, verb complements, relative clauses, articles/reference, adverbs/subordination and question tags.
 - The original 72 publication decisions remain intact. The A1 scale adds **301**, A2 adds **336**, and the eight B1 scale slices add **406** digest-bound publication decisions (58 topics + 174 examples + 116 exercises + 58 mistakes) with grammar, bilingual/naturalness, target, CEFR, dedup and license/provenance checks completed.
-- The full 300-topic framework remains the curriculum/taxonomy; **161/300 topics now have reviewed rich runtime bodies**, including **45/45 A1**, **50/50 A2** and **60/60 B1**. Further expansion proceeds from B2 upward as controlled CEFR slices rather than generating the remaining topics in bulk.
+- The full 300-topic framework is now also the reviewed rich runtime body set: **300/300 topics published**, distributed as **45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2**. Further grammar work is quality maintenance and exercise/content enrichment rather than filling missing framework topics.
 - Active batch metadata no longer references transient `content/english/review-queues/*` staging files. The superseded E03 lexical-enrichment and E06 sentence-exercise candidate batches were retired from the active manifest after their durable reviewed slices became the source of truth; E10 now validates only reproducible checked-in sources.
 
 ### 43.5 E06 sentence / exercise pilot
@@ -2566,7 +2566,7 @@ Status: **COMPLETE FOR CURRENT ARCHITECTURE**.
 
 The entire `shared/` tree is not publicly exposed.
 
-Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses (600)**; `shared/grammar` contains **161 topics**; `shared/sentences` contains **2,554 records** = **1,083 examples + 1,122 exercises + 100 dialogues + 249 reviewed common mistakes**; and `shared/phrases` contains **1,630 phrase/pattern records** (560 collocations + 510 verb patterns + 280 phrasal verbs + 155 chunks + 125 idioms). Candidate/draft records remain excluded from runtime.
+Current published runtime: `shared/dictionary` contains **300 lexemes + 300 senses + 300 usage sidecars (900)**; `shared/grammar` contains **300 reviewed topics**; `shared/sentences` contains **3,401 records** = **1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes**; and `shared/phrases` contains **1,710 phrase/pattern records** (600 collocations + 510 verb patterns + 300 phrasal verbs + 165 chunks + 135 idioms). Candidate/draft records remain excluded from runtime. The E03 usage sidecar reuses already-reviewed primary-sense explanation/register/example evidence and adds no new prose.
 
 ### 43.7 E08 Monkeytype
 
@@ -2629,15 +2629,15 @@ The active controlled manifest now accounts for **4,947 checked-in draft authori
 
 Status: **TARGET CONTRACT + READINESS REPORT COMPLETE; BULK CORPUS NOT CLAIMED COMPLETE**.
 
-Current readiness measurements after E04 scale batch 23:
+Current readiness measurements after E04 focused scale batch 24 plus the reviewed E03 usage sidecar:
 
-- grammar topics: **300/300 framework entries**, with **161/300 reviewed rich topic bodies** currently published, including **45/45 A1**, **50/50 A2** and **60/60 B1**;
+- grammar topics: **300/300 framework entries and 300/300 reviewed rich topic bodies published**, distributed as **45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2**;
 - verb patterns: 510 / 500 minimum (**minimum crossed**);
-- collocations: 560 / 5,000 minimum;
-- phrasal verbs: 280 / 1,000 minimum;
-- idioms/chunks: 280 / 2,000 minimum;
-- common mistakes: **249 / 2,000 minimum in published runtime** = the closed 100-record E06 pilot plus 149 reviewed A1-B1 grammar-scale mistakes;
-- example sentences: candidate/source pipeline remains far below 100,000; current published runtime contains **1,083 examples** (483 E05 grammar-linked + 300 typing-text + 300 Tatoeba);
+- collocations: 600 / 5,000 long-term target;
+- phrasal verbs: 300 / 1,000 long-term target;
+- idioms/chunks: 300 / 2,000 long-term target (165 chunks + 135 idioms);
+- common mistakes: **388 / 2,000 long-term target in published runtime** = the closed 100-record E06 pilot plus 288 reviewed grammar-linked mistakes;
+- example sentences: the long-term corpus target remains far above the controlled pilot; current published runtime contains **1,513 examples** (900 grammar-linked + 13 E03 sense-support examples + 300 typing-text + 300 Tatoeba);
 - translation pairs: **300 / 20,000 minimum**, and the full 300-pair pilot is reviewed/published;
 - cloze exercises: **300 / 30,000 minimum**, and the full 300-item typing-text cloze pilot is reviewed/published;
 - transformations: **100/100 pilot records reviewed/published** against a 10,000 long-term minimum;

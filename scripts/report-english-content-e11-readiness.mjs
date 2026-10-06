@@ -110,7 +110,6 @@ const snapshotPaths=[
   "scripts/publish-english-content.mjs",
   "scripts/smoke-published-english-content.mjs",
   "content/english/releases/2026.10.0.json",
-  "docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md",
   "shared/grammar/manifest.json",
   "shared/grammar/topics/000.json",
   "shared/sentences/manifest.json",
