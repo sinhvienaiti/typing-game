@@ -1,79 +1,60 @@
 # Space Typing Admin UI/UX Progress
 
 ## PROJECT STATE
-
 STATUS: IN_PROGRESS
 
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- HEAD before this checkpoint: `1f5d49206df88d0c1ab126389d9f47514c50db38`
+- HEAD before this checkpoint: `dcdb7e5cc33ffe11917a53f9c486ad570b6f8a47`
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Branch: `feat/admin-world-music-stage-policy`
-- HEAD: `80f8e984b005e961746b1617347570b7741d8513`
-- Parent child reference: still the previous B06.4 child revision; do not advance it until the B06.5 child slice is runtime-wired and validated.
+- HEAD: `9c2add4b1eca37c1efce2101fd4a5428f1381410`
+- Parent child reference remains the validated B06.4 revision until B06.5 child CI passes.
 
-Current milestone:
-- **B06.5 — Bosses Admin → Runtime**
+Current milestone: **B06.5 — Bosses Admin → Runtime**
 
 ## COMPLETED MILESTONES
-
-- **B06.1 — Ships Admin → Runtime** — DONE
-- **B06.2 — Equipment Admin → Runtime** — DONE
-- **B06.3 — Skills Admin → Runtime** — DONE
-- **B06.4 — Enemies Admin → Runtime** — DONE
+- B06.1 Ships — DONE
+- B06.2 Equipment — DONE
+- B06.3 Skills — DONE
+- B06.4 Enemies — DONE
 
 ## COMPLETED TASKS OF CURRENT MILESTONE
-
-- Audited canonical Boss identity/runtime model and real consumer path.
-- Confirmed 26 canonical Boss IDs: 10 Galaxy Tyrants, 8 Wardens, 8 Lieutenants.
-- Locked first safe authorable slice to `name` + `title`; HP/shield/armor/damage/speed/phase/reward fields remain unsupported until they have explicit canonical runtime consumers.
-- Added child `src/admin/boss-runtime-policy.ts` with:
-  - published runtime endpoint `/api/runtime/space-typing/bosses`
-  - `new-session` apply boundary
-  - strict canonical Boss ID allowlist
-  - strict `name` / `title` field allowlist
-  - normalization and deterministic bundled fallback
-  - unknown-ID filtering and malformed-policy fallback
-- Added `scripts/admin/boss-registry-preview.ts` and `pnpm bosses:admin-preview`.
-- Added child unit coverage in `tests/boss-runtime-policy.test.ts` for valid overrides, unknown IDs, unsupported fields, malformed apply boundary, and fetch failure fallback.
-- Child changes are committed/pushed through `80f8e984b005e961746b1617347570b7741d8513`.
+- Canonical 26 Boss IDs audited; safe authorable slice remains `name` + `title` only.
+- Child Boss published-policy loader, bundled fallback, preview command and policy unit tests exist.
+- Wired published Boss overrides into canonical `withRole()` identity materialization, so `galaxyTyrant()`, `bossIdentityForStage()`, `allBossIdentities()` and downstream `bossFullName()`/HUD receive the session-scoped published name/title.
+- Added Boss Admin contract capabilities (`bosses.read/write/preview`), `/admin/space-typing/bosses` route, 26 IDs, name/title constraints, preview protocol and `bossPolicy: new-session` boundary.
+- Extended child contract tests to lock Boss metadata and prohibit unsupported combat/visual fields.
+- Child commits pushed through `9c2add4b1eca37c1efce2101fd4a5428f1381410`.
 
 ## REMAINING TASKS
-
-- Wire published Boss `name` / `title` overrides into the canonical identity/runtime consumer used by `bossIdentityForStage()` / `bossFullName()` / boss HUD state.
-- Add Boss section/capabilities/route/apply-boundary metadata to child Admin contract.
-- Add/extend child contract and identity integration tests.
-- Run child targeted Boss tests, full tests, typecheck/build and child CI; fix any failures.
+- Wait for/check CI on current child HEAD and root-cause any failure; run/verify broader child gates through CI.
+- Add explicit identity integration test if current CI reveals coverage/type issues.
 - Mirror Boss contract in parent.
-- Add parent Boss validation, preview bridge, runtime envelope and `/api/admin/space-typing/bosses/preview` + `/api/runtime/space-typing/bosses` endpoints.
-- Replace mock Boss Admin screen with revision-backed editor; unsupported master-plan fields must remain read-only with explicit explanation.
-- Verify Draft -> Validate -> Publish -> runtime sees Boss identity change -> Rollback -> runtime returns prior identity.
-- Update Phase B mapping and Admin CI gates.
-- Only after child validation passes, update parent child reference to exact final B06.5 child SHA.
-- Run parent Admin CI, Platform CI and runtime smoke.
-- Then continue to the next mandatory milestone from the current master plan.
+- Add parent Boss validation, preview bridge, revision/publish runtime envelope, preview/runtime endpoints.
+- Replace mock Boss screen with revision-backed editor; unsupported fields stay read-only.
+- Verify Draft -> Validate -> Publish -> runtime identity changes -> Rollback restores previous identity.
+- Update Phase B/Admin CI mapping.
+- After child B06.5 validation PASS, update parent child reference to exact final child SHA.
+- Run parent Admin CI, Platform CI and runtime smoke, then continue next mandatory milestone.
 
 ## CURRENT BLOCKER
-
-- NONE
+NONE. Child CI is pending; do not duplicate commits solely for CI latency.
 
 ## NEXT ACTION
-
-- Continue B06.5 directly by wiring `ACTIVE_BOSS_RUNTIME_SESSION` into the canonical Boss identity/name path, then update the child contract and tests. Do not repeat the completed audit or recreate the runtime loader/preview/test files.
+Check CI for child HEAD `9c2add4b1eca37c1efce2101fd4a5428f1381410`; if PASS, begin parent Boss producer/editor integration and pin the validated child SHA at the appropriate sync point. If FAIL, inspect exact job logs and fix root cause first.
 
 ## QUALITY GATES
-
-- Unit: PARTIAL — Boss runtime policy tests added, execution not yet verified in this run.
-- Integration: PENDING — identity consumer wiring not complete.
-- Admin validation: PENDING for Boss.
-- Runtime validation: PARTIAL — loader implemented; real identity consumer wiring pending.
-- Contract tests: PENDING for Boss.
-- Build: PENDING after B06.5 child wiring.
-- Lint/typecheck: PENDING after B06.5 child wiring.
-- Child CI: PENDING for child HEAD `80f8e984b005e961746b1617347570b7741d8513`.
-- Parent Admin CI: previous B06.4 gate PASS; B06.5 pending.
-- Platform CI: previous B06.4 gate PASS; B06.5 pending.
-- Runtime smoke: PENDING for Boss.
+- Unit: PARTIAL — policy tests committed; current-head CI pending.
+- Integration: IMPLEMENTED — canonical Boss identity consumer now applies session policy; CI verification pending.
+- Admin validation: PENDING parent Boss producer.
+- Runtime validation: PARTIAL — child consumer wired; parent endpoint pending.
+- Contract tests: IMPLEMENTED on child; CI pending.
+- Build/typecheck: PENDING current-head CI.
+- Child CI: PENDING current HEAD `9c2add4b1eca37c1efce2101fd4a5428f1381410`.
+- Parent Admin CI: B06.5 PENDING.
+- Platform CI: B06.5 PENDING.
+- Runtime smoke: B06.5 PENDING.
