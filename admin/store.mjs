@@ -296,12 +296,44 @@ export class RevisionStore {
     const revisions = await Promise.all(
       names.map((name) => readJson(join(this.revisionsDir, name))),
     );
+    const byId = new Map(revisions.map((revision) => [revision.revision, revision]));
+    const ancestors = new Set();
+    let cursor = byId.get(state.activeRevision);
+    while (cursor?.parentRevision) {
+      ancestors.add(cursor.parentRevision);
+      cursor = byId.get(cursor.parentRevision);
+    }
     return revisions
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .map((revision) => ({
-        ...revision,
-        active: revision.revision === state.activeRevision,
-      }));
+      .map((revision) => {
+        const active = revision.revision === state.activeRevision;
+        const relation = active ? "active" : ancestors.has(revision.revision) ? "ancestor" : "draft";
+        return {
+          ...revision,
+          active,
+          relation,
+          publishable: relation === "draft" && revision.parentRevision === state.activeRevision,
+          rollbackEligible: relation === "ancestor",
+        };
+      });
+  }
+
+  async validateRevision(revision) {
+    const state = await this.getState();
+    const target = await this.getRevision(revision);
+    this.validateConfig(target.config);
+    const history = await this.listRevisions();
+    const entry = history.find((candidate) => candidate.revision === revision);
+    if (!entry) throw new AdminValidationError(`Revision ${revision} does not exist.`);
+    return {
+      revision,
+      valid: true,
+      activeRevision: state.activeRevision,
+      parentRevision: target.parentRevision,
+      relation: entry.relation,
+      publishable: entry.publishable,
+      rollbackEligible: entry.rollbackEligible,
+    };
   }
 
   async createRevision({ baseRevision, config, author = "local-admin", message = "Admin draft" }) {
@@ -335,6 +367,11 @@ export class RevisionStore {
       );
     }
     const target = await this.getRevision(revision);
+    if (target.parentRevision !== state.activeRevision) {
+      throw new AdminConflictError(
+        `Revision ${revision} was based on ${target.parentRevision ?? "no parent"}; active revision is ${state.activeRevision}. Create a fresh draft before publishing.`,
+      );
+    }
     this.validateConfig(target.config);
     const nextState = {
       version: 1,
@@ -347,6 +384,35 @@ export class RevisionStore {
   }
 
   async rollback({ targetRevision, expectedActiveRevision }) {
-    return this.publish({ revision: targetRevision, expectedActiveRevision });
+    const state = await this.getState();
+    if (state.activeRevision !== expectedActiveRevision) {
+      throw new AdminConflictError(
+        `Active revision changed from ${expectedActiveRevision} to ${state.activeRevision}.`,
+      );
+    }
+    let cursor = await this.getRevision(state.activeRevision);
+    let eligible = false;
+    while (cursor.parentRevision) {
+      if (cursor.parentRevision === targetRevision) {
+        eligible = true;
+        break;
+      }
+      cursor = await this.getRevision(cursor.parentRevision);
+    }
+    if (!eligible) {
+      throw new AdminValidationError(
+        `Rollback target ${targetRevision} must be a published ancestor of active revision ${state.activeRevision}.`,
+      );
+    }
+    const target = await this.getRevision(targetRevision);
+    this.validateConfig(target.config);
+    const nextState = {
+      version: 1,
+      activeRevision: targetRevision,
+      generation: state.generation + 1,
+      updatedAt: this.now().toISOString(),
+    };
+    await writeJsonAtomic(this.statePath, nextState);
+    return nextState;
   }
 }

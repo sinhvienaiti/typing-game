@@ -156,6 +156,42 @@ test("publish rejects stale expected active revisions", async (t) => {
   );
 });
 
+test("publish rejects a stale-base draft even when expected active is current", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+
+  const seed = await store.getActiveRevision();
+  const first = await store.createRevision({ baseRevision: seed.revision, config: seed.config, message: "First" });
+  const stale = await store.createRevision({ baseRevision: seed.revision, config: seed.config, message: "Stale sibling" });
+  await store.publish({ revision: first.revision, expectedActiveRevision: seed.revision });
+
+  await assert.rejects(
+    store.publish({ revision: stale.revision, expectedActiveRevision: first.revision }),
+    AdminConflictError,
+  );
+  const validation = await store.validateRevision(stale.revision);
+  assert.equal(validation.relation, "draft");
+  assert.equal(validation.publishable, false);
+});
+
+test("rollback rejects a draft that is not on the active ancestry", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+
+  const seed = await store.getActiveRevision();
+  const published = await store.createRevision({ baseRevision: seed.revision, config: seed.config, message: "Published" });
+  const siblingDraft = await store.createRevision({ baseRevision: seed.revision, config: seed.config, message: "Never published" });
+  await store.publish({ revision: published.revision, expectedActiveRevision: seed.revision });
+
+  await assert.rejects(
+    store.rollback({ targetRevision: siblingDraft.revision, expectedActiveRevision: published.revision }),
+    AdminValidationError,
+  );
+  const history = await store.listRevisions();
+  assert.equal(history.find((revision) => revision.revision === seed.revision)?.rollbackEligible, true);
+  assert.equal(history.find((revision) => revision.revision === siblingDraft.revision)?.rollbackEligible, false);
+});
+
 test("rollback is a CAS pointer change to an immutable prior revision", async (t) => {
   const { store, rootDir } = await fixture();
   t.after(() => rm(rootDir, { recursive: true, force: true }));

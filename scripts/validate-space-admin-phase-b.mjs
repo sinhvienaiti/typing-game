@@ -10,6 +10,8 @@ const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "
 const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
 const worldMusicPhaseB = await readFile(new URL("portal/src/admin/space-typing-world-music-phase-b.ts", root), "utf8");
+const historyPhaseB = await readFile(new URL("portal/src/admin/space-typing-history-phase-b.ts", root), "utf8");
+const server = await readFile(new URL("admin/server.mjs", root), "utf8");
 
 assert.equal(map.schemaVersion, 1);
 assert.equal(map.phase, "B");
@@ -23,6 +25,7 @@ const audio = map.screens.find((entry) => entry.route === "/admin/space-typing/a
 const worldMusic = map.screens.find((entry) => entry.route === "/admin/space-typing/world-music");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
+const history = map.screens.find((entry) => entry.route === "/admin/space-typing/history");
 assert.equal(audio?.domain, "audio");
 assert.equal(audio?.status, "phase-b-ui-wired");
 assert.equal(audio?.applyBoundary, "safe-boundary");
@@ -35,6 +38,9 @@ assert.equal(settings?.applyBoundary, "new-session");
 assert.equal(flags?.domain, "featureFlags");
 assert.equal(flags?.status, "phase-b-ui-wired");
 assert.equal(flags?.applyBoundary, "new-session");
+assert.equal(history?.domain, "revisions");
+assert.equal(history?.status, "phase-b-ui-wired");
+assert.equal(history?.applyBoundary, "cas-publish");
 
 for (const entry of map.screens) {
   assert.ok(entry.route.startsWith("/admin/space-typing"), `Invalid Admin route: ${entry.route}`);
@@ -85,6 +91,18 @@ assert.match(worldMusicPhaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
+assert.match(phaseB, /renderPhaseBHistory/);
+assert.match(historyPhaseB, /api\.validateRevision/);
+assert.match(historyPhaseB, /api\.publish/);
+assert.match(historyPhaseB, /api\.rollback/);
+assert.match(historyPhaseB, /window\.confirm/);
+assert.match(historyPhaseB, /publishable/);
+assert.match(historyPhaseB, /rollbackEligible/);
+assert.match(historyPhaseB, /diffValues/);
+assert.match(store, /target\.parentRevision !== state\.activeRevision/);
+assert.match(store, /must be a published ancestor/);
+assert.match(server, /validate-revision/);
+assert.match(api, /validateRevision\(revision: string\)/);
 
 const dangerous = map.screens.filter((entry) =>
   entry.domain.startsWith("economy.") || entry.domain.startsWith("pvp.") || entry.domain === "system" || entry.domain === "featureFlags",
@@ -93,4 +111,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B04.2 revision-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B05 revision-backed domains ready).`);

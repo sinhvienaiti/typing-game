@@ -137,6 +137,11 @@ const server = createServer(async (request, response) => {
       json(response, 200, preview);
       return;
     }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/validate-revision") {
+      const input = await body(request);
+      json(response, 200, await store.validateRevision(input.revision));
+      return;
+    }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
       const input = await body(request);
       const revision = await store.createRevision(input);

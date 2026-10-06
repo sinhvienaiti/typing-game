@@ -1,5 +1,6 @@
 import { renderPhaseBAudio } from "./space-typing-audio-phase-b";
 import { renderPhaseBWorldMusic } from "./space-typing-world-music-phase-b";
+import { renderPhaseBHistory } from "./space-typing-history-phase-b";
 import { SpaceTypingAdminApi, type FeatureFlagConfig, type FeatureFlagScope, type GeneralSettingsConfig, type SpaceTypingAdminConfig } from "./api";
 
 const BASE = "/admin/space-typing";
@@ -365,5 +366,6 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/world-music`) return renderPhaseBWorldMusic(navigate);
   if (path === `${BASE}/settings`) return renderSettings(navigate);
   if (path === `${BASE}/flags`) return renderFlags(navigate);
+  if (path === `${BASE}/history`) return renderPhaseBHistory(navigate);
   return null;
 }

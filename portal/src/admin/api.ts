@@ -93,6 +93,8 @@ export type SpaceTypingAdminConfig = {
   featureFlags?: Record<string, FeatureFlagConfig>;
 };
 
+export type AdminRevisionRelation = "active" | "ancestor" | "draft";
+
 export type AdminRevision = {
   revision: string;
   parentRevision: string | null;
@@ -101,6 +103,19 @@ export type AdminRevision = {
   message: string;
   config: SpaceTypingAdminConfig;
   active?: boolean;
+  relation?: AdminRevisionRelation;
+  publishable?: boolean;
+  rollbackEligible?: boolean;
+};
+
+export type AdminRevisionValidation = {
+  revision: string;
+  valid: true;
+  activeRevision: string;
+  parentRevision: string | null;
+  relation: AdminRevisionRelation;
+  publishable: boolean;
+  rollbackEligible: boolean;
 };
 
 export type AdminStatePayload = {
@@ -212,6 +227,13 @@ export class SpaceTypingAdminApi {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {
       method: "POST",
       body: JSON.stringify(input),
+    });
+  }
+
+  validateRevision(revision: string): Promise<AdminRevisionValidation> {
+    return this.request<AdminRevisionValidation>("/api/admin/space-typing/validate-revision", {
+      method: "POST",
+      body: JSON.stringify({ revision }),
     });
   }
 

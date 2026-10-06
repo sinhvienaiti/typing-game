@@ -73,6 +73,10 @@ B04.1 wired Global + World to real immutable revisions while Galaxy/Stage stayed
 
 The pinned child now models `stages`, `worlds`, `galaxies`, and `global`, with effective precedence Stage → World → Galaxy → Global (plus the explicit legacy World migration fallback). The parent editor can author all four scopes, persists only validated numeric Galaxy/Stage ids, forwards the selected Stage to the child preview protocol, and still saves immutable drafts without direct Publish. Random-normal playback keeps its legacy global/random-library semantics; map/boss preview uses the hierarchical resolver.
 
+## B05 — History & Publish
+
+History now renders the real immutable revision store instead of mock rows. The backend classifies each revision as active, published ancestor, or draft; only a fresh draft whose parent equals the current active revision is publishable. Rollback is restricted to published ancestors. Validate re-runs the current server schema before either pointer operation, and both Publish/Rollback still require expected-active CAS. The screen compares immutable config snapshots and surfaces changed top-level domains without mutating revisions.
+
 ## Apply boundaries
 
 The current mapping deliberately uses conservative boundaries:
@@ -93,7 +97,7 @@ No screen may be marked runtime-connected merely because a UI mock exists.
 2. **B02 — Wire General Settings + Feature Flags UI**: hydrate active values, create immutable revisions on Save Draft, surface validation/error state, stale-active conflict protection, and never direct-publish. **Implemented.**
 3. **B03 — Audio Defaults**: real revision-backed default profile, child-aligned gains/categories, stale-active protection, and preserved player-preference override semantics. Ducking remains child-owned read-only policy until a validated published-policy consumer exists. **Implemented.**
 4. **B04 — World Music**: **B04.1 + B04.2 implemented** for canonical Global + Galaxy + World + Stage policy drafts, child preview validation, effective fallback trace, stale-active protection, and next-track/state apply boundary. Production changes still require explicit History / Publish review.
-5. **B05 — History & Publish**: replace mock history/diff/status with real revision data, real validation gates and CAS conflicts.
+5. **B05 — History & Publish**: real immutable revision data, config diff, backend validation, fresh-draft publish guard, ancestor-only rollback, and CAS conflicts. **Implemented.**
 6. **B06 — Content registries**: Ships → Equipment → Skills → Enemies → Bosses → Worlds/Stages. Each domain requires child consumer discovery before runtime apply.
 7. **B07 — Economy**: Shop, Currencies, Rewards/Drops, Warp. Require impact validation and explicit dangerous-change confirmation.
 8. **B08 — Live Ops**: Missions, Daily/Weekly, Expedition, Events with scheduling validation/timezone rules.
