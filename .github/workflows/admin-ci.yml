@@ -23,119 +23,69 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
         with:
           version: 11.21.0
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
-
       - name: Initialize Space Typing submodule
         run: git submodule update --init games/space-typing
-
       - name: Validate Admin contract snapshot
         run: node scripts/validate-space-admin-contract.mjs
-
       - name: Validate complete Admin UI scope
         run: node scripts/validate-space-admin-ui.mjs
-
       - name: Validate Admin Phase B mapping
         run: node scripts/validate-space-admin-phase-b.mjs
-
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
-
       - name: Validate Admin service syntax
         run: |
-          node --check admin/store.mjs
-          node --check admin/space-typing-store.mjs
-          node --check admin/default-config.mjs
-          node --check admin/server.mjs
-          node --check admin/world-music-preview.mjs
-          node --check admin/world-music-preview.test.mjs
-          node --check admin/ship-policy.mjs
-          node --check admin/ship-policy.test.mjs
-          node --check admin/ship-registry-preview.mjs
-          node --check admin/ship-registry-preview.test.mjs
-          node --check admin/ship-runtime.mjs
-          node --check admin/ship-runtime.test.mjs
-          node --check admin/equipment-policy.mjs
-          node --check admin/equipment-policy.test.mjs
-          node --check admin/equipment-registry-preview.mjs
-          node --check admin/equipment-registry-preview.test.mjs
-          node --check admin/equipment-runtime.mjs
-          node --check admin/equipment-runtime.test.mjs
-          node --check admin/skill-policy.mjs
-          node --check admin/skill-policy.test.mjs
-          node --check admin/skill-registry-preview.mjs
-          node --check admin/skill-registry-preview.test.mjs
-          node --check admin/skill-runtime.mjs
-          node --check admin/skill-runtime.test.mjs
-          node --check admin/enemy-policy.mjs
-          node --check admin/enemy-policy.test.mjs
-          node --check admin/enemy-registry-preview.mjs
-          node --check admin/enemy-registry-preview.test.mjs
-          node --check admin/enemy-runtime.mjs
-          node --check admin/enemy-runtime.test.mjs
-          node --check admin/store.test.mjs
+          for file in admin/*.mjs; do node --check "$file"; done
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-audio.mjs
-
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
-
       - name: Test B06.1 Ships server validation
         run: node --test admin/ship-policy.test.mjs
-
       - name: Test B06.1 Ships runtime envelope
         run: node --test admin/ship-runtime.test.mjs
-
       - name: Test B06.2 Equipment server validation
         run: node --test admin/equipment-policy.test.mjs
-
       - name: Test B06.2 Equipment runtime envelope
         run: node --test admin/equipment-runtime.test.mjs
-
       - name: Test B06.3 Skills server validation
         run: node --test admin/skill-policy.test.mjs
-
       - name: Test B06.3 Skills runtime envelope
         run: node --test admin/skill-runtime.test.mjs
-
       - name: Test B06.4 Enemies server validation
         run: node --test admin/enemy-policy.test.mjs
-
       - name: Test B06.4 Enemies runtime envelope
         run: node --test admin/enemy-runtime.test.mjs
-
+      - name: Test B06.5 Bosses server validation
+        run: node --test admin/boss-policy.test.mjs
+      - name: Test B06.5 Bosses runtime envelope
+        run: node --test admin/boss-runtime.test.mjs
       - name: Install focused dependencies
         run: |
           pnpm install
           pnpm --dir portal install
           pnpm --dir games/space-typing install
-
       - name: Test canonical World Music Admin preview bridge
         run: node --test admin/world-music-preview.test.mjs
-
       - name: Test canonical Ships Admin preview bridge
         run: node --test admin/ship-registry-preview.test.mjs
-
       - name: Test canonical Equipment Admin preview bridge
         run: node --test admin/equipment-registry-preview.test.mjs
-
       - name: Test canonical Skills Admin preview bridge
         run: node --test admin/skill-registry-preview.test.mjs
-
       - name: Test canonical Enemies Admin preview bridge
         run: node --test admin/enemy-registry-preview.test.mjs
-
+      - name: Test canonical Bosses Admin preview bridge
+        run: node --test admin/boss-registry-preview.test.mjs
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test
-
       - name: Build Space Typing
         run: pnpm build:space
-
       - name: Build Portal
         run: pnpm build:portal
