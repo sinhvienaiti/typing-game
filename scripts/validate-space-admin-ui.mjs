@@ -11,10 +11,12 @@ const worldMusicFile = "portal/src/admin/space-typing-world-music-v2.ts";
 const dailyWeeklyFile = "portal/src/admin/space-typing-daily-weekly.ts";
 const commandFile = "portal/src/admin/space-typing-command.ts";
 const iconFile = "portal/src/admin/space-typing-icons.ts";
+const dialogFile = "portal/src/admin/space-typing-dialogs.ts";
+const dialogCssFile = "portal/src/admin/space-typing-dialogs.css";
 const uiCssFile = "portal/src/admin/space-typing-ui.css";
 const packageFile = "portal/package.json";
 
-for (const file of [mainFile, extendedFile, worldMusicFile, dailyWeeklyFile, commandFile, iconFile, uiCssFile, packageFile]) {
+for (const file of [mainFile, extendedFile, worldMusicFile, dailyWeeklyFile, commandFile, iconFile, dialogFile, dialogCssFile, uiCssFile, packageFile]) {
   if (!exists(file)) throw new Error(`Required Admin UI file is missing: ${file}`);
 }
 
@@ -24,10 +26,11 @@ const worldMusic = read(worldMusicFile);
 const dailyWeekly = read(dailyWeeklyFile);
 const command = read(commandFile);
 const icons = read(iconFile);
+const dialogs = read(dialogFile);
 const css = read(uiCssFile);
 const pkg = JSON.parse(read(packageFile));
 const rendererSource = [main, extended, worldMusic, dailyWeekly].join("\n");
-const allTs = [main, extended, worldMusic, dailyWeekly, command, icons].join("\n");
+const allTs = [main, extended, worldMusic, dailyWeekly, command, icons, dialogs].join("\n");
 
 const routes = [
   ["Overview", ""],
@@ -72,19 +75,35 @@ for (const [label, suffix] of routes) {
   } else {
     assert(rendererSource.includes(`\`${"${BASE}"}${suffix}\``) || rendererSource.includes(`\`${"${ADMIN_BASE}"}${suffix}\``), `Renderer registration is missing ${label} (${suffix})`);
   }
-  assert(command.includes(`"${label}"`) || label === "Daily / Weekly", `Command palette is missing ${label}`);
+  assert(command.includes(`"${label}"`), `Command palette is missing ${label}`);
 }
 
 assert(!main.includes('phase: "planned"'), "A declared Admin route is still marked PLANNED");
 assert(!allTs.includes("location.reload()"), "Admin UI still contains location.reload(), which resets mock interaction state");
 assert(!allTs.includes("Object.assign(page, { append:"), "Registry helper still overwrites HTMLElement.append");
 assert(!main.includes("renderPlanned("), "Stale planned-screen fallback remains in Admin renderer");
+assert(!main.includes("selectedWorldId"), "Stale legacy World Music state remains in Admin renderer");
+assert(!main.includes("selectedWorldState"), "Stale legacy World Music role state remains in Admin renderer");
+assert(!main.includes("READY_PATHS"), "Dead READY_PATHS route bookkeeping remains");
 assert(main.includes("renderUnknown("), "Unknown-route guard is missing");
+
 assert(worldMusic.includes("multi-file playlist"), "Stage-level World Music multi-track UX is missing");
 assert(worldMusic.includes("Stage Matrix"), "World Music matrix view is missing");
 assert(worldMusic.includes("Fallback chain"), "World Music effective fallback preview is missing");
+assert(worldMusic.includes("(world - 1) * 20 + 1"), "Selecting a World does not initialize its real first Stage");
 assert(command.includes("metaKey || event.ctrlKey"), "Cmd/Ctrl+K command shortcut is missing");
+assert(command.includes("currentCleanup"), "Command palette listener cleanup is missing");
 assert(icons.includes("createElementNS"), "Line SVG Admin icon renderer is missing");
+
+assert(main.includes("openMusicUploadMockDialog"), "Music Library upload mock workflow is not wired");
+assert(extended.includes("openPublishReviewDialog"), "History publish confirmation workflow is not wired");
+assert(extended.includes("openRollbackReviewDialog"), "History rollback confirmation workflow is not wired");
+assert(dialogs.includes('fileInput.multiple = true'), "Music upload workflow does not support multi-file selection");
+assert(dialogs.includes("Authored Metadata"), "Music upload metadata review is missing");
+assert(dialogs.includes("Validation Preview"), "Music upload validation preview is missing");
+assert(dialogs.includes("I reviewed the validation result and change summary"), "Publish acknowledgement gate is missing");
+assert(dialogs.includes("I understand the active configuration will point to"), "Rollback acknowledgement gate is missing");
+
 assert(css.includes("--holo-display: var(--st-admin-display)"), "Game Holo token aliases are missing");
 assert(css.includes(":focus-visible"), "Admin focus-visible accessibility style is missing");
 assert(css.includes("prefers-reduced-motion"), "Admin reduced-motion handling is missing");
@@ -107,4 +126,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Space Typing Admin UI contract: PASS (${routes.length} registered screens).`);
+console.log(`Space Typing Admin UI contract: PASS (${routes.length} registered screens + operational mock workflows).`);
