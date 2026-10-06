@@ -88,6 +88,7 @@ export function openAdminCommandPalette(navigate: Navigate): void {
 
 export function installAdminCommandShortcut(navigate: Navigate): () => void {
   const listener = (event: KeyboardEvent) => {
+    if (!location.pathname.startsWith(BASE)) return;
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
       openAdminCommandPalette(navigate);
