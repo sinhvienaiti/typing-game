@@ -104,6 +104,18 @@ assert(dialogs.includes("Validation Preview"), "Music upload validation preview 
 assert(dialogs.includes("I reviewed the validation result and change summary"), "Publish acknowledgement gate is missing");
 assert(dialogs.includes("I understand the active configuration will point to"), "Rollback acknowledgement gate is missing");
 
+assert(main.includes('control.setAttribute("aria-label", label)'), "Audio range aria-label is missing");
+assert(main.includes('search.setAttribute("aria-label", "Search music library")'), "Music search aria-label is missing");
+assert(main.includes('type.setAttribute("aria-label", "Filter music by type")'), "Music type filter aria-label is missing");
+assert(main.includes('status.setAttribute("aria-label", "Filter music by status")'), "Music status filter aria-label is missing");
+assert(main.includes('control.setAttribute("aria-pressed", String(index === 0))'), "Dashboard segmented aria state is missing");
+assert(extended.includes('input.setAttribute("aria-label", label)'), "Extended range aria-label is missing");
+assert(extended.includes('control.setAttribute("aria-pressed", String(enabled))'), "Extended toggle aria state is missing");
+assert(worldMusic.includes('stageBtn.setAttribute("aria-pressed", String(state.stages.has(stageNumber)))'), "World Music stage aria state is missing");
+assert(worldMusic.includes('replace.setAttribute("aria-pressed", "true")'), "World Music assignment segmented aria state is missing");
+assert(extended.includes('publish.disabled = selectedStatus !== "Draft"'), "History Publish must be limited to Draft revisions");
+assert(extended.includes('const rollbackEligible = selectedStatus === "Published" && uiState.selectedRevision !== "r127"'), "History Rollback must be limited to older Published revisions");
+
 assert(css.includes("--holo-display: var(--st-admin-display)"), "Game Holo token aliases are missing");
 assert(css.includes(":focus-visible"), "Admin focus-visible accessibility style is missing");
 assert(css.includes("prefers-reduced-motion"), "Admin reduced-motion handling is missing");

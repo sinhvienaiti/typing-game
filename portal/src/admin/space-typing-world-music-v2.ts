@@ -130,7 +130,21 @@ function assignmentEditor(): HTMLElement {
   root.append(tabs);
   const mode = el("div", "stx-music-assignment-head");
   const seg = el("div", "st-admin-seg");
-  seg.append(btn("Inherit"), btn("Replace", () => undefined, "active"));
+  const inherit = btn("Inherit", () => {
+    inherit.setAttribute("aria-pressed", "true");
+    replace.setAttribute("aria-pressed", "false");
+    inherit.classList.add("active");
+    replace.classList.remove("active");
+  });
+  const replace = btn("Replace", () => {
+    inherit.setAttribute("aria-pressed", "false");
+    replace.setAttribute("aria-pressed", "true");
+    inherit.classList.remove("active");
+    replace.classList.add("active");
+  }, "active");
+  inherit.setAttribute("aria-pressed", "false");
+  replace.setAttribute("aria-pressed", "true");
+  seg.append(inherit, replace);
   const strategy = el("select", "st-admin-select");
   strategy.setAttribute("aria-label", "Playlist selection strategy");
   ["Shuffle Bag", "Ordered", "Random", "Weighted Random"].forEach((value) => strategy.append(new Option(value, value)));

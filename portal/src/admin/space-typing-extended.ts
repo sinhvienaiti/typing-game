@@ -504,7 +504,8 @@ function renderHistory(navigate: Navigate): HTMLElement {
   const selectedRevision = revisions.find((row) => row[0] === uiState.selectedRevision);
   const selectedStatus = selectedRevision?.[1] ?? "Draft";
   const rollback = btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger");
-  rollback.disabled = selectedStatus === "Draft" || uiState.selectedRevision === "r127";
+  const rollbackEligible = selectedStatus === "Published" && uiState.selectedRevision !== "r127";
+  rollback.disabled = !rollbackEligible;
   rollback.title = rollback.disabled ? "Select an older published revision to preview rollback." : "Review rollback impact";
   const publish = btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary");
   publish.disabled = selectedStatus !== "Draft";
