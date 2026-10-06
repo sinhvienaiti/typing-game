@@ -10,17 +10,17 @@ const storePath = "admin/store.mjs";
 let store = fs.readFileSync(storePath, "utf8");
 const worldMusicValidation = `function rejectUnknownKeys(value, path, allowed) {
   for (const key of Object.keys(value)) {
-    if (!allowed.includes(key)) throw new AdminValidationError(\`${path}.\${key} is not supported by the current canonical schema.\`);
+    if (!allowed.includes(key)) throw new AdminValidationError(path + "." + key + " is not supported by the current canonical schema.");
   }
 }
 
 function validateTrackIds(value, path, { allowEmpty = true } = {}) {
-  if (!Array.isArray(value)) throw new AdminValidationError(\`${path} must be an array.\`);
-  if (!allowEmpty && value.length === 0) throw new AdminValidationError(\`${path} must contain at least one track id.\`);
+  if (!Array.isArray(value)) throw new AdminValidationError(path + " must be an array.");
+  if (!allowEmpty && value.length === 0) throw new AdminValidationError(path + " must contain at least one track id.");
   const seen = new Set();
   for (const [index, id] of value.entries()) {
-    string(id, \`${path}[\${index}]\`, { max: 160, pattern: /^[a-z0-9][a-z0-9._-]*$/ });
-    if (seen.has(id)) throw new AdminValidationError(\`${path} contains duplicate track id \${id}.\`);
+    string(id, path + "[" + index + "]", { max: 160, pattern: /^[a-z0-9][a-z0-9._-]*$/ });
+    if (seen.has(id)) throw new AdminValidationError(path + " contains duplicate track id " + id + ".");
     seen.add(id);
   }
 }
@@ -28,28 +28,28 @@ function validateTrackIds(value, path, { allowEmpty = true } = {}) {
 function validatePlaylistAssignment(value, path) {
   object(value, path);
   rejectUnknownKeys(value, path, ["kind", "trackIds", "selectionMode"]);
-  enumValue(value.kind, \`${path}.kind\`, ["inherit", "replace"]);
+  enumValue(value.kind, path + ".kind", ["inherit", "replace"]);
   if (value.kind === "inherit") {
     if (value.trackIds !== undefined || value.selectionMode !== undefined) {
-      throw new AdminValidationError(\`${path} inherit assignments cannot include trackIds/selectionMode.\`);
+      throw new AdminValidationError(path + " inherit assignments cannot include trackIds/selectionMode.");
     }
     return;
   }
-  validateTrackIds(value.trackIds, \`${path}.trackIds\`, { allowEmpty: false });
+  validateTrackIds(value.trackIds, path + ".trackIds", { allowEmpty: false });
   if (value.selectionMode !== undefined) {
-    enumValue(value.selectionMode, \`${path}.selectionMode\`, ["shuffle-bag", "ordered"]);
+    enumValue(value.selectionMode, path + ".selectionMode", ["shuffle-bag", "ordered"]);
   }
 }
 
 function validateWorldMusicEntry(value, path) {
   object(value, path);
   rejectUnknownKeys(value, path, ["normal", "boss"]);
-  if (value.normal !== undefined) validatePlaylistAssignment(value.normal, \`${path}.normal\`);
+  if (value.normal !== undefined) validatePlaylistAssignment(value.normal, path + ".normal");
   if (value.boss !== undefined) {
-    const boss = object(value.boss, \`${path}.boss\`);
-    rejectUnknownKeys(boss, \`${path}.boss\`, ["common", "mini", "world", "major"]);
+    const boss = object(value.boss, path + ".boss");
+    rejectUnknownKeys(boss, path + ".boss", ["common", "mini", "world", "major"]);
     for (const key of ["common", "mini", "world", "major"]) {
-      if (boss[key] !== undefined) validatePlaylistAssignment(boss[key], \`${path}.boss.\${key}\`);
+      if (boss[key] !== undefined) validatePlaylistAssignment(boss[key], path + ".boss." + key);
     }
   }
 }
@@ -68,7 +68,7 @@ function validateWorldMusic(worldMusic) {
     const worlds = object(policy.worlds, "worldMusic.publishedPolicy.worlds");
     for (const [worldId, entry] of Object.entries(worlds)) {
       string(worldId, "worldMusic world id", { max: 8, pattern: /^world-(?:0[1-9]|[1-4]\\d|50)$/ });
-      validateWorldMusicEntry(entry, \`worldMusic.publishedPolicy.worlds.\${worldId}\`);
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.worlds." + worldId);
     }
   }
 }
