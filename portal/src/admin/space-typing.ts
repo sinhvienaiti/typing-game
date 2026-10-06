@@ -1,4 +1,5 @@
 import "./space-typing-ui.css";
+import { renderExtendedAdminScreen } from "./space-typing-extended";
 import {
   alertFeed,
   audienceMetrics,
@@ -38,7 +39,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
     label: "Dashboard",
     items: [
       { label: "Overview", path: ADMIN_BASE, icon: "◫", phase: "ready" },
-      { label: "Analytics", path: `${ADMIN_BASE}/analytics`, icon: "⌁", phase: "planned" },
+      { label: "Analytics", path: `${ADMIN_BASE}/analytics`, icon: "⌁", phase: "ready" },
     ],
   },
   {
@@ -53,58 +54,58 @@ const NAV_GROUPS: readonly NavGroup[] = [
     label: "Game Content",
     items: [
       { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", phase: "ready" },
-      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", phase: "planned" },
-      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", phase: "planned" },
-      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", phase: "planned" },
-      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", phase: "planned" },
-      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", phase: "planned" },
-      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", phase: "planned" },
+      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", phase: "ready" },
+      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", phase: "ready" },
+      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", phase: "ready" },
+      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", phase: "ready" },
+      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", phase: "ready" },
+      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", phase: "ready" },
     ],
   },
   {
     label: "Economy",
     items: [
-      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▣", phase: "planned" },
-      { label: "Currencies", path: `${ADMIN_BASE}/currencies`, icon: "◈", phase: "planned" },
-      { label: "Rewards & Drops", path: `${ADMIN_BASE}/rewards`, icon: "✧", phase: "planned" },
-      { label: "Stamina / Warp", path: `${ADMIN_BASE}/warp`, icon: "⚡", phase: "planned" },
+      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▣", phase: "ready" },
+      { label: "Currencies", path: `${ADMIN_BASE}/currencies`, icon: "◈", phase: "ready" },
+      { label: "Rewards & Drops", path: `${ADMIN_BASE}/rewards`, icon: "✧", phase: "ready" },
+      { label: "Stamina / Warp", path: `${ADMIN_BASE}/warp`, icon: "⚡", phase: "ready" },
     ],
   },
   {
     label: "Live Ops",
     items: [
-      { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", phase: "planned" },
-      { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", phase: "planned" },
-      { label: "Events", path: `${ADMIN_BASE}/events`, icon: "◷", phase: "planned" },
+      { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", phase: "ready" },
+      { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", phase: "ready" },
+      { label: "Events", path: `${ADMIN_BASE}/events`, icon: "◷", phase: "ready" },
     ],
   },
   {
     label: "PvP",
     items: [
-      { label: "Duel Settings", path: `${ADMIN_BASE}/duel`, icon: "⚔", phase: "planned" },
-      { label: "Ranked", path: `${ADMIN_BASE}/ranked`, icon: "♜", phase: "planned" },
-      { label: "Alternative Modes", path: `${ADMIN_BASE}/alternative-modes`, icon: "⇄", phase: "planned" },
+      { label: "Duel Settings", path: `${ADMIN_BASE}/duel`, icon: "⚔", phase: "ready" },
+      { label: "Ranked", path: `${ADMIN_BASE}/ranked`, icon: "♜", phase: "ready" },
+      { label: "Alternative Modes", path: `${ADMIN_BASE}/alternative-modes`, icon: "⇄", phase: "ready" },
     ],
   },
   {
     label: "Visuals",
     items: [
-      { label: "Backgrounds", path: `${ADMIN_BASE}/backgrounds`, icon: "▧", phase: "planned" },
-      { label: "VFX", path: `${ADMIN_BASE}/vfx`, icon: "✺", phase: "planned" },
-      { label: "UI Assets", path: `${ADMIN_BASE}/ui-assets`, icon: "▦", phase: "planned" },
+      { label: "Backgrounds", path: `${ADMIN_BASE}/backgrounds`, icon: "▧", phase: "ready" },
+      { label: "VFX", path: `${ADMIN_BASE}/vfx`, icon: "✺", phase: "ready" },
+      { label: "UI Assets", path: `${ADMIN_BASE}/ui-assets`, icon: "▦", phase: "ready" },
     ],
   },
   {
     label: "System",
     items: [
-      { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", phase: "planned" },
-      { label: "Feature Flags", path: `${ADMIN_BASE}/flags`, icon: "⚑", phase: "planned" },
-      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", phase: "planned" },
+      { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", phase: "ready" },
+      { label: "Feature Flags", path: `${ADMIN_BASE}/flags`, icon: "⚑", phase: "ready" },
+      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", phase: "ready" },
     ],
   },
   {
     label: "Developer",
-    items: [{ label: "QA Sandbox", path: `${ADMIN_BASE}/qa`, icon: "⌬", phase: "planned" }],
+    items: [{ label: "QA Sandbox", path: `${ADMIN_BASE}/qa`, icon: "⌬", phase: "ready" }],
   },
 ];
 
@@ -269,7 +270,7 @@ export class SpaceTypingAdmin {
     bar.append(breadcrumb);
     bar.append(element("div", "st-admin-topbar-spacer"));
     bar.append(button("⌘K  Search command…", () => undefined, "st-admin-command"));
-    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-01"));
+    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-02"));
     bar.append(statusBadge("LOCAL", "good"));
     return bar;
   }
@@ -280,7 +281,7 @@ export class SpaceTypingAdmin {
     if (path === `${ADMIN_BASE}/music-library`) return this.renderMusicLibrary();
     if (path === `${ADMIN_BASE}/world-music`) return this.renderWorldMusic();
     if (path === `${ADMIN_BASE}/ships`) return this.renderShips();
-    return this.renderPlanned(path);
+    return renderExtendedAdminScreen(path, this.navigate) ?? this.renderPlanned(path);
   }
 
   private renderOverview(): HTMLElement {
@@ -842,7 +843,7 @@ export class SpaceTypingAdmin {
     page.append(pageHeader(
       "Space Typing Admin · UI Roadmap",
       item?.label ?? "Planned Screen",
-      "Màn này đã có trong Information Architecture nhưng chưa nằm trong milestone UI đầu tiên. Nó sẽ dùng cùng Holo Command component system sau khi 5 màn nền tảng được duyệt.",
+      "Route chưa có renderer UI. Đây là fallback guard; toàn bộ route trong master plan phải được render trước khi UI phase được coi là hoàn tất.",
       [statusBadge("PLANNED", "warn")],
     ));
     const planned = panel(undefined, undefined, true);
