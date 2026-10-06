@@ -67,17 +67,17 @@ const senseCandidates=new Map();
 for(const sense of senses) senseCandidates.set(sense.id,(examplesByLexeme.get(sense.lexemeId)??[]).slice(0,5));
 
 const missingLexemes=lexemes.filter(record=>(lexemeCandidates.get(record.id)?.length??0)===0);
-const fallbackHeadwordEvidence=missingLexemes.map(lexeme=>({
-  id:lexeme.id,
-  headword:lexeme.headword,
-  vi:lexeme.vi,
-  cefr:lexeme.cefr,
-  senseIds:lexeme.senseIds,
-  candidates:examples
-    .filter(example=>boundedContains(example.text,lexeme.headword))
-    .slice(0,10)
-    .map(example=>({id:example.id,text:example.text,cefr:example.cefr,lexicalIds:example.lexicalIds??[]})),
-}));
+const fallbackFormEvidence=missingLexemes.map(lexeme=>{
+  const forms=[lexeme.headword,...(lexeme.forms??[])].filter((value,index,values)=>typeof value==="string"&&value.trim()!==""&&values.indexOf(value)===index);
+  const candidates=[];
+  for(const example of examples){
+    const matchedForm=forms.find(form=>boundedContains(example.text,form));
+    if(!matchedForm) continue;
+    candidates.push({id:example.id,text:example.text,cefr:example.cefr,matchedForm,lexicalIds:example.lexicalIds??[]});
+    if(candidates.length===12) break;
+  }
+  return {id:lexeme.id,headword:lexeme.headword,forms,vi:lexeme.vi,cefr:lexeme.cefr,senseIds:lexeme.senseIds,candidates};
+});
 
 const collocationCandidates=new Map();
 for(const record of collocations){
@@ -112,14 +112,14 @@ const report={
   contentVersion:dictionary.manifest.contentVersion,
   method:{
     lexemeAndSense:"explicit published sentence.lexicalIds only",
-    fallbackLexemeEvidence:"whole-headword boundary match for manual review only",
+    fallbackFormEvidence:"whole-form boundary match for manual sense review only; includes inflected forms",
     collocationAndPhrase:"normalized whole-phrase boundary match against published examples",
     verbPattern:"lemma-only candidate discovery; NOT safe for automatic linking without frame review",
   },
   examplesScanned:examples.length,
   lexemes:summarize(lexemes,lexemeCandidates),
   senses:summarize(senses,senseCandidates),
-  e03FallbackHeadwordEvidence:fallbackHeadwordEvidence,
+  e03FallbackFormEvidence:fallbackFormEvidence,
   collocations:summarize(collocations,collocationCandidates),
   phraseItems:summarize(phraseItems,phraseCandidates),
   verbPatternsLemmaEvidence:summarize(verbPatterns,verbPatternLemmaCandidates),
