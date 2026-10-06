@@ -91,78 +91,17 @@ const reviewedTypingTextSentences=await loadRecords("content/english/sentences/e
 const reviewedCloze=await loadRecords("content/english/sentences/e06-reviewed-cloze.json");
 const reviewedDialogues=await loadRecords("content/english/sentences/e06-reviewed-dialogues.json");
 const reviewedCommonMistakes=await loadRecords("content/english/sentences/e06-reviewed-common-mistakes.json");
-const collocations=await loadRecords("content/english/phrases/pilot-collocations.json");
-const verbPatterns=await loadRecords("content/english/phrases/pilot-verb-patterns.json");
-const phrases=await loadRecords("content/english/phrases/pilot-phrases.json");
-const scaleCollocations=await loadRecords("content/english/phrases/e04-scale-01-collocations.json");
-const scaleVerbPatterns=await loadRecords("content/english/phrases/e04-scale-01-verb-patterns.json");
-const scalePhrases=await loadRecords("content/english/phrases/e04-scale-01-phrases.json");
-const scale02Collocations=await loadRecords("content/english/phrases/e04-scale-02-collocations.json");
-const scale02VerbPatterns=await loadRecords("content/english/phrases/e04-scale-02-verb-patterns.json");
-const scale02Phrases=await loadRecords("content/english/phrases/e04-scale-02-phrases.json");
-const scale03Collocations=await loadRecords("content/english/phrases/e04-scale-03-collocations.json");
-const scale03VerbPatterns=await loadRecords("content/english/phrases/e04-scale-03-verb-patterns.json");
-const scale03Phrases=await loadRecords("content/english/phrases/e04-scale-03-phrases.json");
-const scale04Collocations=await loadRecords("content/english/phrases/e04-scale-04-collocations.json");
-const scale04VerbPatterns=await loadRecords("content/english/phrases/e04-scale-04-verb-patterns.json");
-const scale04Phrases=await loadRecords("content/english/phrases/e04-scale-04-phrases.json");
-const scale05Collocations=await loadRecords("content/english/phrases/e04-scale-05-collocations.json");
-const scale05VerbPatterns=await loadRecords("content/english/phrases/e04-scale-05-verb-patterns.json");
-const scale05Phrases=await loadRecords("content/english/phrases/e04-scale-05-phrases.json");
-const scale06Collocations=await loadRecords("content/english/phrases/e04-scale-06-collocations.json");
-const scale06VerbPatterns=await loadRecords("content/english/phrases/e04-scale-06-verb-patterns.json");
-const scale06Phrases=await loadRecords("content/english/phrases/e04-scale-06-phrases.json");
-const scale07Collocations=await loadRecords("content/english/phrases/e04-scale-07-collocations.json");
-const scale07VerbPatterns=await loadRecords("content/english/phrases/e04-scale-07-verb-patterns.json");
-const scale07Phrases=await loadRecords("content/english/phrases/e04-scale-07-phrases.json");
-const scale08Collocations=await loadRecords("content/english/phrases/e04-scale-08-collocations.json");
-const scale08VerbPatterns=await loadRecords("content/english/phrases/e04-scale-08-verb-patterns.json");
-const scale08Phrases=await loadRecords("content/english/phrases/e04-scale-08-phrases.json");
-const scale09Collocations=await loadRecords("content/english/phrases/e04-scale-09-collocations.json");
-const scale09VerbPatterns=await loadRecords("content/english/phrases/e04-scale-09-verb-patterns.json");
-const scale09Phrases=await loadRecords("content/english/phrases/e04-scale-09-phrases.json");
-const scale10Collocations=await loadRecords("content/english/phrases/e04-scale-10-collocations.json");
-const scale10VerbPatterns=await loadRecords("content/english/phrases/e04-scale-10-verb-patterns.json");
-const scale10Phrases=await loadRecords("content/english/phrases/e04-scale-10-phrases.json");
-const scale11Collocations=await loadRecords("content/english/phrases/e04-scale-11-collocations.json");
-const scale11VerbPatterns=await loadRecords("content/english/phrases/e04-scale-11-verb-patterns.json");
-const scale11Phrases=await loadRecords("content/english/phrases/e04-scale-11-phrases.json");
-const scale12Collocations=await loadRecords("content/english/phrases/e04-scale-12-collocations.json");
-const scale12VerbPatterns=await loadRecords("content/english/phrases/e04-scale-12-verb-patterns.json");
-const scale12Phrases=await loadRecords("content/english/phrases/e04-scale-12-phrases.json");
-const scale13Collocations=await loadRecords("content/english/phrases/e04-scale-13-collocations.json");
-const scale13VerbPatterns=await loadRecords("content/english/phrases/e04-scale-13-verb-patterns.json");
-const scale13Phrases=await loadRecords("content/english/phrases/e04-scale-13-phrases.json");
-const scale14Collocations=await loadRecords("content/english/phrases/e04-scale-14-collocations.json");
-const scale14VerbPatterns=await loadRecords("content/english/phrases/e04-scale-14-verb-patterns.json");
-const scale14Phrases=await loadRecords("content/english/phrases/e04-scale-14-phrases.json");
-const scale15Collocations=await loadRecords("content/english/phrases/e04-scale-15-collocations.json");
-const scale15VerbPatterns=await loadRecords("content/english/phrases/e04-scale-15-verb-patterns.json");
-const scale15Phrases=await loadRecords("content/english/phrases/e04-scale-15-phrases.json");
-const scale16Collocations=await loadRecords("content/english/phrases/e04-scale-16-collocations.json");
-const scale16VerbPatterns=await loadRecords("content/english/phrases/e04-scale-16-verb-patterns.json");
-const scale16Phrases=await loadRecords("content/english/phrases/e04-scale-16-phrases.json");
-const scale17Collocations=await loadRecords("content/english/phrases/e04-scale-17-collocations.json");
-const scale17VerbPatterns=await loadRecords("content/english/phrases/e04-scale-17-verb-patterns.json");
-const scale17Phrases=await loadRecords("content/english/phrases/e04-scale-17-phrases.json");
-const scale18Collocations=await loadRecords("content/english/phrases/e04-scale-18-collocations.json");
-const scale18VerbPatterns=await loadRecords("content/english/phrases/e04-scale-18-verb-patterns.json");
-const scale18Phrases=await loadRecords("content/english/phrases/e04-scale-18-phrases.json");
-const scale19Collocations=await loadRecords("content/english/phrases/e04-scale-19-collocations.json");
-const scale19VerbPatterns=await loadRecords("content/english/phrases/e04-scale-19-verb-patterns.json");
-const scale19Phrases=await loadRecords("content/english/phrases/e04-scale-19-phrases.json");
-const scale20Collocations=await loadRecords("content/english/phrases/e04-scale-20-collocations.json");
-const scale20VerbPatterns=await loadRecords("content/english/phrases/e04-scale-20-verb-patterns.json");
-const scale20Phrases=await loadRecords("content/english/phrases/e04-scale-20-phrases.json");
-const scale21Collocations=await loadRecords("content/english/phrases/e04-scale-21-collocations.json");
-const scale21VerbPatterns=await loadRecords("content/english/phrases/e04-scale-21-verb-patterns.json");
-const scale21Phrases=await loadRecords("content/english/phrases/e04-scale-21-phrases.json");
-const scale22Collocations=await loadRecords("content/english/phrases/e04-scale-22-collocations.json");
-const scale22VerbPatterns=await loadRecords("content/english/phrases/e04-scale-22-verb-patterns.json");
-const scale22Phrases=await loadRecords("content/english/phrases/e04-scale-22-phrases.json");
-const scale23Collocations=await loadRecords("content/english/phrases/e04-scale-23-collocations.json");
-const scale23VerbPatterns=await loadRecords("content/english/phrases/e04-scale-23-verb-patterns.json");
-const scale23Phrases=await loadRecords("content/english/phrases/e04-scale-23-phrases.json");
+const e04Collocations=[];
+const e04VerbPatterns=[];
+const e04Phrases=[];
+const e04Batches=(batchManifest.batches??[]).filter(batch=>batch.phase==="E04"&&batch.category==="phrases").sort((a,b)=>a.id.localeCompare(b.id,"en"));
+for (const batch of e04Batches) {
+  for (const set of batch.recordSets??[]) {
+    if (set.id==="collocations"||set.id==="scale-collocations") e04Collocations.push(...await loadRecords(set.path));
+    else if (set.id==="verb-patterns"||set.id==="scale-verb-patterns") e04VerbPatterns.push(...await loadRecords(set.path));
+    else if (set.id==="phrases"||set.id==="scale-phrases") e04Phrases.push(...await loadRecords(set.path));
+  }
+}
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
@@ -182,9 +121,9 @@ results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
-  {id:"collocations",dir:"collocations",records:[...collocations,...scaleCollocations,...scale02Collocations,...scale03Collocations,...scale04Collocations,...scale05Collocations,...scale06Collocations,...scale07Collocations,...scale08Collocations,...scale09Collocations,...scale10Collocations,...scale11Collocations,...scale12Collocations,...scale13Collocations,...scale14Collocations,...scale15Collocations,...scale16Collocations,...scale17Collocations,...scale18Collocations,...scale19Collocations,...scale20Collocations,...scale21Collocations,...scale22Collocations,...scale23Collocations]},
-  {id:"verb-patterns",dir:"verb-patterns",records:[...verbPatterns,...scaleVerbPatterns,...scale02VerbPatterns,...scale03VerbPatterns,...scale04VerbPatterns,...scale05VerbPatterns,...scale06VerbPatterns,...scale07VerbPatterns,...scale08VerbPatterns,...scale09VerbPatterns,...scale10VerbPatterns,...scale11VerbPatterns,...scale12VerbPatterns,...scale13VerbPatterns,...scale14VerbPatterns,...scale15VerbPatterns,...scale16VerbPatterns,...scale17VerbPatterns,...scale18VerbPatterns,...scale19VerbPatterns,...scale20VerbPatterns,...scale21VerbPatterns,...scale22VerbPatterns,...scale23VerbPatterns]},
-  {id:"phrases",dir:"items",records:[...phrases,...scalePhrases,...scale02Phrases,...scale03Phrases,...scale04Phrases,...scale05Phrases,...scale06Phrases,...scale07Phrases,...scale08Phrases,...scale09Phrases,...scale10Phrases,...scale11Phrases,...scale12Phrases,...scale13Phrases,...scale14Phrases,...scale15Phrases,...scale16Phrases,...scale17Phrases,...scale18Phrases,...scale19Phrases,...scale20Phrases,...scale21Phrases,...scale22Phrases,...scale23Phrases]}
+  {id:"collocations",dir:"collocations",records:e04Collocations},
+  {id:"verb-patterns",dir:"verb-patterns",records:e04VerbPatterns},
+  {id:"phrases",dir:"items",records:e04Phrases}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));
