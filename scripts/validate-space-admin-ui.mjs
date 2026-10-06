@@ -112,7 +112,7 @@ assert(main.includes('control.setAttribute("aria-pressed", String(index === 0))'
 assert(extended.includes('input.setAttribute("aria-label", label)'), "Extended range aria-label is missing");
 assert(extended.includes('control.setAttribute("aria-pressed", String(enabled))'), "Extended toggle aria state is missing");
 assert(worldMusic.includes('stageBtn.setAttribute("aria-pressed", String(state.stages.has(stageNumber)))'), "World Music stage aria state is missing");
-assert(worldMusic.includes('replace.setAttribute("aria-pressed", "true")'), "World Music assignment segmented aria state is missing");
+assert(worldMusic.includes('inherit.setAttribute("aria-pressed", "false")') && worldMusic.includes('replace.setAttribute("aria-pressed", "true")'), "World Music assignment segmented aria state is missing");
 assert(extended.includes('publish.disabled = selectedStatus !== "Draft"'), "History Publish must be limited to Draft revisions");
 assert(extended.includes('const rollbackEligible = selectedStatus === "Published" && uiState.selectedRevision !== "r127"'), "History Rollback must be limited to older Published revisions");
 
@@ -129,7 +129,7 @@ if (fs.existsSync(workflowDir)) {
   }
 }
 for (const entry of fs.readdirSync(path.join(root, "scripts"))) {
-  assert(!/^wire-space-admin-.*\.mjs$/i.test(entry), `Temporary Admin wiring script remains: ${entry}`);
+    assert(!/^(?:wire|apply)-space-admin-.*\.mjs$/i.test(entry), `Temporary Admin one-shot script remains: ${entry}`);
 }
 
 if (failures.length > 0) {
@@ -138,4 +138,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Space Typing Admin UI contract: PASS (${routes.length} registered screens + operational mock workflows).`);
+console.log(`Space Typing Admin UI contract: PASS (${routes.length} registered screens + operational mock workflows + final A11y/state guards).`);
