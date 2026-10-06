@@ -32,6 +32,13 @@ jobs:
             echo 'B2 slices 01-04 already present; skipping generator.'
             exit 0
           fi
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/apply-english-b2-01-04.py')
+          text = p.read_text()
+          text = text.replace('""Will you use the car this evening? when politely checking an existing plan"', '"Will you use the car this evening? when politely checking an existing plan"', 1)
+          p.write_text(text)
+          PY
           python3 -m py_compile scripts/apply-english-b2-01-04.py
           python3 scripts/apply-english-b2-01-04.py
 
