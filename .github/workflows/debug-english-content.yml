@@ -32,6 +32,20 @@ jobs:
             echo 'B2 slices 05-08 already present; skipping generator.'
             exit 0
           fi
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/apply-english-b2-05-08.py')
+          text = p.read_text(encoding='utf-8')
+          old = '        "at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
+          new = '        "arrived at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
+          if old in text:
+              if text.count(old) != 1:
+                  raise SystemExit(f'unexpected B2 final cloze source count: {text.count(old)}')
+              text = text.replace(old, new, 1)
+              p.write_text(text, encoding='utf-8')
+          elif new not in text:
+              raise SystemExit('B2 final cloze source pattern not found')
+          PY
           python3 -m py_compile scripts/apply-english-b2-05-08.py
           python3 scripts/apply-english-b2-05-08.py
 
