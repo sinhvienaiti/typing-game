@@ -22,12 +22,12 @@ jobs:
           node-version: 24.11.0
       - name: Apply World Music mock-state fix
         run: node scripts/apply-space-admin-world-music-state.mjs
-      - name: Run Admin UI validator
-        run: node scripts/validate-space-admin-ui.mjs
-      - name: Remove one-shot tooling
+      - name: Remove one-shot tooling before validation
         run: |
           rm scripts/apply-space-admin-world-music-state.mjs
           rm .github/workflows/admin-ui-world-music-state-once.yml
+      - name: Run Admin UI validator
+        run: node scripts/validate-space-admin-ui.mjs
       - name: Commit World Music state consistency fix
         run: |
           git config user.name github-actions[bot]
