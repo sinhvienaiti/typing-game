@@ -11,6 +11,7 @@ on:
       - "shared/curriculum/**"
       - "shared/english-content/**"
       - "scripts/audit-english-content-master-plan.mjs"
+      - "scripts/report-english-content-enrichment-links.mjs"
       - ".github/workflows/english-content-acceptance.yml"
   workflow_dispatch:
 
@@ -24,17 +25,24 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Validate master-plan acceptance audit syntax
-        run: node --check scripts/audit-english-content-master-plan.mjs
+      - name: Validate acceptance scripts
+        run: |
+          node --check scripts/audit-english-content-master-plan.mjs
+          node --check scripts/report-english-content-enrichment-links.mjs
 
       - name: Audit mandatory English-content scope
         run: node scripts/audit-english-content-master-plan.mjs
 
-      - name: Upload master-plan acceptance report
+      - name: Measure safe enrichment-link evidence
+        run: node scripts/report-english-content-enrichment-links.mjs
+
+      - name: Upload English-content acceptance reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: english-content-master-plan-acceptance-${{ github.sha }}
-          path: content/english/reports/master-plan-acceptance.json
+          path: |
+            content/english/reports/master-plan-acceptance.json
+            content/english/reports/enrichment-link-evidence.json
           if-no-files-found: error
           retention-days: 7
