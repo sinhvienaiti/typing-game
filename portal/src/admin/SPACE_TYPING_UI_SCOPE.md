@@ -2,7 +2,9 @@
 
 Branch: `feat/space-typing-admin-uiux`
 
-This branch implements the UI/UX-first Holo Command Admin experience with mock data only. It intentionally does **not** write production config or mutate Space Typing runtime state.
+Current visual revision: `A-HOLO-04`
+
+This branch implements the complete UI/UX-first Holo Command Admin experience with mock data only. It intentionally does **not** write production config or mutate Space Typing runtime state.
 
 Implemented navigation/screens:
 
@@ -10,21 +12,36 @@ Implemented navigation/screens:
 - Audio & Music: Audio Defaults, Music Library, World / Stage Music
 - Game Content: Ships, Equipment, Skills, Enemies, Bosses, Worlds & Stages, Typing Content
 - Economy: Shop, Currencies, Rewards & Drops, Stamina / Warp
-- Live Ops: Missions, Expedition, Events
+- Live Ops: Missions, Daily / Weekly, Expedition, Events
 - PvP: Duel Settings, Ranked, Alternative Modes
 - Visuals: Backgrounds, VFX, UI Assets
 - System: General Settings, Feature Flags, History & Publish
 - Developer: QA Sandbox
 
+Cross-screen UX implemented:
+
+- Holo Command shell/sidebar/topbar
+- Exo 2 display font + Be Vietnam Pro body font
+- shared cyan → violet Holo tokens
+- chamfered glass/solid operation panels
+- real Space Typing galaxy background and ship/background assets where appropriate
+- line SVG navigation icons
+- global `Cmd/Ctrl + K` command palette
+- responsive desktop/laptop layouts
+- keyboard focus-visible treatment and reduced-motion handling
+- mock-only badges so fake telemetry is not presented as live production data
+- sticky draft/save patterns for editable screens
+- integrated preview patterns instead of standalone preview pages
+- detailed World Music hierarchy down to Stage, including multi-stage selection, multi-track assignment, matrix view, inheritance/fallback preview
+- revision diff/publish/rollback UX
+- dangerous-change warnings for economy/ranked/system domains
+
 Design direction:
 
 - Space Typing `A · Holo Command`
-- Exo 2 display font
-- Be Vietnam Pro body font
-- cyan → violet accents
-- chamfered glass/solid operation panels
-- dark space backgrounds
-- dense desktop-first operations UI
-- responsive fallback for narrower screens
+- dark space command-center appearance
+- dense game-operations information architecture
+- actual game assets reused where available
+- no generic SaaS visual language
 
-The next phase, after UI approval, is field-by-field mapping to schemas, APIs, persistence, validation, publish/apply boundaries, and runtime consumers.
+The next phase, only after UI approval, is field-by-field mapping to schemas, APIs, persistence, validation, publish/apply boundaries, and runtime consumers.
