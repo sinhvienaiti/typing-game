@@ -1,4 +1,4 @@
-name: Publish English C2 Slices 01-05
+name: Publish English E03 Example Links
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-c2-01-05:
+  publish-e03-example-links:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,15 +25,11 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply reviewed C2 slices 01-05
+      - name: Apply reviewed E03 example links
         shell: bash
         run: |
-          if grep -q '"id": "e05.grammar-scale-c2-01"' content/english/batches/manifest.json; then
-            echo 'C2 slices 01-05 already present; skipping generator.'
-            exit 0
-          fi
-          python3 -m py_compile scripts/apply-english-c2-01-05.py
-          python3 scripts/apply-english-c2-01-05.py
+          python3 -m py_compile scripts/apply-english-e03-example-links.py
+          python3 scripts/apply-english-e03-example-links.py
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -41,11 +37,8 @@ jobs:
       - name: Validate English review ledger
         run: pnpm english-content:review:validate
 
-      - name: Validate English E10 batch schema
-        run: pnpm english-content:e10:validate
-
-      - name: Smoke English E10 batch contracts
-        run: pnpm english-content:e10:smoke
+      - name: Validate English E10 batch contracts
+        run: pnpm english-content:e10
 
       - name: Validate English content licenses
         run: pnpm english-content:licenses
@@ -53,13 +46,13 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
-      - name: Generate C2 runtime artifacts
+      - name: Generate runtime artifacts
         run: pnpm english-content:generate
 
-      - name: Publish C2 runtime artifacts
+      - name: Publish runtime artifacts
         run: pnpm english-content:publish
 
-      - name: Collect sentence dedupe diagnostics
+      - name: Collect E03 near-duplicate diagnostics
         shell: bash
         run: |
           node --input-type=module <<'NODE'
@@ -67,112 +60,81 @@ jobs:
           import path from "node:path";
           import { listJsonFiles, nearDuplicatePairs, readJson } from "./scripts/english-content-core.mjs";
 
-          const files = [
-            ...(await listJsonFiles(path.resolve("shared/sentences"))),
-            path.resolve("content/english/sentences/pilot-sentences.json"),
-          ];
-          const records = [];
-          const seen = new Set();
-          for (const file of files) {
-            if (file.endsWith("manifest.json")) continue;
-            const doc = await readJson(file);
-            if (!Array.isArray(doc.records)) continue;
-            for (const record of doc.records) {
-              if (!record || typeof record.id !== "string" || typeof record.text !== "string") continue;
-              if (seen.has(record.id)) continue;
+          const records=[];
+          const seen=new Set();
+          for(const file of await listJsonFiles(path.resolve("shared/sentences"))){
+            if(file.endsWith("manifest.json")) continue;
+            const doc=await readJson(file);
+            for(const record of doc.records??[]){
+              if(!record||typeof record.id!=="string"||typeof record.text!=="string"||seen.has(record.id)) continue;
               seen.add(record.id);
               records.push(record);
             }
           }
-          const pairs = nearDuplicatePairs(records, 0.86);
-          const newPattern = /^sent\.grc2\./;
-          const newPairs = pairs.filter(({leftId, rightId}) => newPattern.test(leftId) || newPattern.test(rightId));
-          await fs.writeFile("/tmp/global-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: pairs.length, pairs}, null, 2)}\n`);
-          await fs.writeFile("/tmp/c2-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: newPairs.length, pairs: newPairs}, null, 2)}\n`);
-          console.log(JSON.stringify({globalNearCount: pairs.length, newC2NearCount: newPairs.length}, null, 2));
-          NODE
-
-      - name: Collect grammar coverage diagnostics
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE' > /tmp/grammar-coverage.json
-          import path from "node:path";
-          import { listJsonFiles, readJson } from "./scripts/english-content-core.mjs";
-
-          const catalog = await readJson(path.resolve("content/english/grammar/topic-catalog.json"));
-          const topics = Array.isArray(catalog.topics) ? catalog.topics : [];
-          const publishedIds = new Set();
-          for (const file of await listJsonFiles(path.resolve("shared/grammar/topics"))) {
-            if (file.endsWith("manifest.json")) continue;
-            const doc = await readJson(file);
-            for (const record of doc.records ?? []) {
-              if (typeof record?.id === "string") publishedIds.add(record.id);
-            }
-          }
-          const levels = {};
-          for (const cefr of ["A1", "A2", "B1", "B2", "C1", "C2"]) {
-            const expected = topics.filter((topic) => topic.cefr === cefr);
-            const missing = expected.filter((topic) => !publishedIds.has(topic.id));
-            levels[cefr] = {
-              catalog: expected.length,
-              published: expected.length - missing.length,
-              missing: missing.length,
-              missingTopics: missing,
-            };
-          }
-          console.log(JSON.stringify({catalogTotal: topics.length, publishedTotal: publishedIds.size, levels}, null, 2));
+          const pairs=nearDuplicatePairs(records,0.86);
+          const e03Pattern=/^sent\.e03\./u;
+          const e03Pairs=pairs.filter(({leftId,rightId})=>e03Pattern.test(leftId)||e03Pattern.test(rightId));
+          await fs.writeFile("/tmp/e03-near-duplicates.json",JSON.stringify({threshold:0.86,count:e03Pairs.length,pairs:e03Pairs},null,2)+"\n");
+          console.log(JSON.stringify({globalNearCount:pairs.length,e03NearCount:e03Pairs.length},null,2));
           NODE
 
       - name: Check runtime exact dedupe
-        id: dedupe
-        shell: bash
-        run: |
-          set +e
-          pnpm english-content:dedupe 2>&1 | tee /tmp/english-content-dedupe.log
-          status=${PIPESTATUS[0]}
-          echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
-          exit "$status"
+        run: pnpm english-content:dedupe
 
-      - name: Upload C2 diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: c2-01-05-diagnostics
-          path: |
-            /tmp/english-content-dedupe.log
-            /tmp/global-near-duplicates.json
-            /tmp/c2-near-duplicates.json
-            /tmp/grammar-coverage.json
-          if-no-files-found: warn
-          retention-days: 3
-
-      - name: Enforce C2 near-duplicate review
+      - name: Enforce E03 near-duplicate review
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs/promises";
-          const report = JSON.parse(await fs.readFile("/tmp/c2-near-duplicates.json", "utf8"));
-          if (report.count !== 0) {
-            console.error(`C2 near-duplicate audit failed: ${report.count} candidate(s)`);
-            console.error(JSON.stringify(report.pairs, null, 2));
+          const report=JSON.parse(await fs.readFile("/tmp/e03-near-duplicates.json","utf8"));
+          if(report.count!==0){
+            console.error(`E03 near-duplicate audit failed: ${report.count} candidate(s)`);
+            console.error(JSON.stringify(report.pairs,null,2));
             process.exit(1);
           }
-          console.log("C2 near-duplicate audit PASS: 0 candidates.");
+          console.log("E03 near-duplicate audit PASS: 0 candidates.");
           NODE
 
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
 
-      - name: Commit C2 slices 01-05
+      - name: Check E11 readiness
+        run: pnpm english-content:e11
+
+      - name: Run E12 release maintenance
+        run: pnpm english-content:e12
+
+      - name: Audit master-plan acceptance
+        run: node scripts/audit-english-content-master-plan.mjs
+
+      - name: Measure enrichment-link evidence
+        run: node scripts/report-english-content-enrichment-links.mjs
+
+      - name: Upload E03 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e03-example-link-diagnostics-${{ github.sha }}
+          path: |
+            /tmp/e03-near-duplicates.json
+            content/english/reports/master-plan-acceptance.json
+            content/english/reports/enrichment-link-evidence.json
+            content/english/reports/e10-review-ledger.json
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Commit reviewed E03 example links
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-c2-01-05.py
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases \
+            scripts/apply-english-e03-example-links.py scripts/publish-english-content.mjs \
+            scripts/smoke-published-english-content.mjs scripts/audit-english-content-master-plan.mjs
           if git diff --cached --quiet; then
-            echo 'No C2 publication changes to commit.'
+            echo 'No E03 enrichment changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish reviewed C2 grammar slices 01-05'
+          git commit -m 'feat(content): publish reviewed E03 example links'
           git push
