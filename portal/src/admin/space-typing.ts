@@ -629,14 +629,26 @@ export class SpaceTypingAdmin {
     const body = element("tbody");
     for (const track of tracks) {
       const row = element("tr", "clickable");
-      row.innerHTML = `<td>▶</td><td><span class="primary">${track.title}</span><br><small>${track.id}</small></td><td>${track.type}</td><td>${track.duration}</td><td>${track.format}</td><td>${track.bpm}</td><td>${track.mood}</td><td>${track.usage}</td>`;
+      const selectTrack = (): void => {
+        this.selectedTrackId = track.id;
+        onSelect();
+      };
+      row.innerHTML = `<td><span class="primary">${track.title}</span><br><small>${track.id}</small></td><td>${track.type}</td><td>${track.duration}</td><td>${track.format}</td><td>${track.bpm}</td><td>${track.mood}</td><td>${track.usage}</td>`;
+      const previewCell = element("td");
+      const preview = element("button", "st-admin-play", "▶") as HTMLButtonElement;
+      preview.type = "button";
+      preview.setAttribute("aria-label", `Open ${track.title} track details`);
+      preview.title = `Open ${track.title} track details`;
+      preview.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selectTrack();
+      });
+      previewCell.append(preview);
+      row.prepend(previewCell);
       const state = element("td");
       state.append(statusBadge(track.status, track.status === "READY" ? "good" : track.status === "UNUSED" ? "warn" : "bad"));
       row.append(state);
-      row.addEventListener("click", () => {
-        this.selectedTrackId = track.id;
-        onSelect();
-      });
+      row.addEventListener("click", selectTrack);
       body.append(row);
     }
     table.append(body);

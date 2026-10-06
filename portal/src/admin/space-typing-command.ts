@@ -17,16 +17,21 @@ const COMMANDS = [
 
 let current: HTMLElement | null = null;
 let currentCleanup: (() => void) | null = null;
+let previousFocus: HTMLElement | null = null;
 
 export function closeAdminCommandPalette(): void {
+  const focusTarget = previousFocus;
   currentCleanup?.();
   currentCleanup = null;
   current?.remove();
   current = null;
+  previousFocus = null;
+  focusTarget?.focus();
 }
 
 export function openAdminCommandPalette(navigate: Navigate): void {
   closeAdminCommandPalette();
+  previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
   const overlay = document.createElement("div");
   overlay.className = "stx-command-overlay";
   overlay.setAttribute("role", "dialog");
@@ -74,7 +79,23 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   input.addEventListener("input", render);
   overlay.addEventListener("mousedown", (event) => { if (event.target === overlay) closeAdminCommandPalette(); });
   const onKey = (event: KeyboardEvent) => {
-    if (event.key === "Escape") closeAdminCommandPalette();
+    if (event.key === "Escape") {
+      closeAdminCommandPalette();
+      return;
+    }
+    if (event.key === "Tab") {
+      const focusables: HTMLElement[] = [input, ...Array.from(results.querySelectorAll<HTMLButtonElement>("button:not([disabled])"))];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (first === undefined || last === undefined) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   };
   document.addEventListener("keydown", onKey);
   currentCleanup = () => document.removeEventListener("keydown", onKey);

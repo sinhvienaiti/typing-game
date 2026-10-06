@@ -95,6 +95,7 @@ assert(worldMusic.includes('previous.setAttribute("aria-label", "Previous track"
 assert(worldMusic.includes("(world - 1) * 20 + 1"), "Selecting a World does not initialize its real first Stage");
 assert(command.includes("metaKey || event.ctrlKey"), "Cmd/Ctrl+K command shortcut is missing");
 assert(command.includes("currentCleanup"), "Command palette listener cleanup is missing");
+assert(command.includes('event.key === "Tab"') && command.includes("previousFocus") && command.includes("focusTarget?.focus()"), "Command palette keyboard focus trap/restoration is missing");
 assert(icons.includes("createElementNS"), "Line SVG Admin icon renderer is missing");
 
 assert(main.includes("openMusicUploadMockDialog"), "Music Library upload mock workflow is not wired");
@@ -111,6 +112,7 @@ assert(main.includes('search.setAttribute("aria-label", "Search music library")'
 assert(main.includes('type.setAttribute("aria-label", "Filter music by type")'), "Music type filter aria-label is missing");
 assert(main.includes('status.setAttribute("aria-label", "Filter music by status")'), "Music status filter aria-label is missing");
 assert(main.includes('play.setAttribute("aria-label", "Play track preview")'), "Music Library symbol-only preview control needs an accessible name");
+assert(main.includes('preview.setAttribute("aria-label", `Open ${track.title} track details`)') && main.includes('event.stopPropagation()'), "Music Library table action is not keyboard accessible");
 assert(main.includes('control.setAttribute("aria-pressed", String(index === 0))'), "Dashboard segmented aria state is missing");
 assert(extended.includes('input.setAttribute("aria-label", label)'), "Extended range aria-label is missing");
 assert(extended.includes('control.setAttribute("aria-pressed", String(enabled))'), "Extended toggle aria state is missing");
