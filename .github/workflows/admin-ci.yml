@@ -67,6 +67,12 @@ jobs:
           node --check admin/equipment-registry-preview.test.mjs
           node --check admin/equipment-runtime.mjs
           node --check admin/equipment-runtime.test.mjs
+          node --check admin/skill-policy.mjs
+          node --check admin/skill-policy.test.mjs
+          node --check admin/skill-registry-preview.mjs
+          node --check admin/skill-registry-preview.test.mjs
+          node --check admin/skill-runtime.mjs
+          node --check admin/skill-runtime.test.mjs
           node --check admin/store.test.mjs
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-audio.mjs
@@ -86,6 +92,12 @@ jobs:
       - name: Test B06.2 Equipment runtime envelope
         run: node --test admin/equipment-runtime.test.mjs
 
+      - name: Test B06.3 Skills server validation
+        run: node --test admin/skill-policy.test.mjs
+
+      - name: Test B06.3 Skills runtime envelope
+        run: node --test admin/skill-runtime.test.mjs
+
       - name: Install focused dependencies
         run: |
           pnpm install
@@ -100,6 +112,9 @@ jobs:
 
       - name: Test canonical Equipment Admin preview bridge
         run: node --test admin/equipment-registry-preview.test.mjs
+
+      - name: Test canonical Skills Admin preview bridge
+        run: node --test admin/skill-registry-preview.test.mjs
 
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test

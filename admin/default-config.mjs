@@ -34,6 +34,10 @@ export function createDefaultSpaceTypingConfig(contract) {
       equipment: {
         configRevision: "equipment-admin-v1",
         equipment: {}
+      },
+      skills: {
+        configRevision: "skills-admin-v1",
+        skills: {}
       }
     },
     system: {

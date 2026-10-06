@@ -1,6 +1,7 @@
 import { AdminValidationError, RevisionStore } from "./store.mjs";
 import { ShipPolicyValidationError, validateShipPolicy } from "./ship-policy.mjs";
 import { EquipmentPolicyValidationError, validateEquipmentPolicy } from "./equipment-policy.mjs";
+import { SkillPolicyValidationError, validateSkillPolicy } from "./skill-policy.mjs";
 
 export class SpaceTypingRevisionStore extends RevisionStore {
   validateConfig(config) {
@@ -10,7 +11,7 @@ export class SpaceTypingRevisionStore extends RevisionStore {
       throw new AdminValidationError("content must be an object.");
     }
     for (const key of Object.keys(config.content)) {
-      if (key !== "ships" && key !== "equipment") {
+      if (key !== "ships" && key !== "equipment" && key !== "skills") {
         throw new AdminValidationError(`content.${key} is not supported by the current canonical schema.`);
       }
     }
@@ -29,6 +30,15 @@ export class SpaceTypingRevisionStore extends RevisionStore {
         validateEquipmentPolicy(config.content.equipment, this.contract.equipment);
       } catch (error) {
         if (error instanceof EquipmentPolicyValidationError) throw new AdminValidationError(error.message);
+        throw error;
+      }
+    }
+
+    if (config.content.skills !== undefined) {
+      try {
+        validateSkillPolicy(config.content.skills, this.contract.skills);
+      } catch (error) {
+        if (error instanceof SkillPolicyValidationError) throw new AdminValidationError(error.message);
         throw error;
       }
     }

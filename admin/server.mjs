@@ -8,8 +8,10 @@ import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
 import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
 import { runEquipmentRegistryPreview, EquipmentRegistryPreviewError } from "./equipment-registry-preview.mjs";
+import { runSkillRegistryPreview, SkillRegistryPreviewError } from "./skill-registry-preview.mjs";
 import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
 import { createEquipmentRuntimeEnvelope } from "./equipment-runtime.mjs";
+import { createSkillRuntimeEnvelope } from "./skill-runtime.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -84,6 +86,12 @@ const server = createServer(async (request, response) => {
       const state = await store.getState();
       const config = await store.getRuntimeConfig();
       json(response, 200, createEquipmentRuntimeEnvelope(state, config));
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/runtime/space-typing/skills") {
+      const state = await store.getState();
+      const config = await store.getRuntimeConfig();
+      json(response, 200, createSkillRuntimeEnvelope(state, config, contract));
       return;
     }
 
@@ -169,6 +177,14 @@ const server = createServer(async (request, response) => {
       json(response, 200, preview);
       return;
     }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/skills/preview") {
+      const input = await body(request);
+      const activeConfig = await store.getRuntimeConfig();
+      const policy = input.policy ?? activeConfig.content?.skills;
+      const preview = await runSkillRegistryPreview({ rootDir: root, contract, policy });
+      json(response, 200, preview);
+      return;
+    }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/validate-revision") {
       const input = await body(request);
       json(response, 200, await store.validateRevision(input.revision));
@@ -217,6 +233,10 @@ const server = createServer(async (request, response) => {
     }
     if (error instanceof EquipmentRegistryPreviewError) {
       json(response, 502, { error: "equipment-preview-error", message: error.message });
+      return;
+    }
+    if (error instanceof SkillRegistryPreviewError) {
+      json(response, 502, { error: "skills-preview-error", message: error.message });
       return;
     }
     console.error(error);
