@@ -22,6 +22,17 @@ async function loadDataset(name){
   }
   return {manifest,groups,records:Object.values(groups).flat()};
 }
+async function loadCurriculum(){
+  const base=path.join(root,"shared","curriculum");
+  const manifest=await readJson(path.join(base,"manifest.json"));
+  const topicIds=[];
+  for(const shard of manifest.shards??[]){
+    const doc=await readJson(path.join(base,shard.path));
+    if(!Array.isArray(doc.topicIds)) throw new Error("curriculum/"+shard.path+" must contain topicIds[]");
+    topicIds.push(...doc.topicIds);
+  }
+  return {manifest,topicIds};
+}
 function countBy(records,keyFn){
   const out={};
   for(const record of records){
@@ -49,7 +60,7 @@ const [dictionary,grammar,sentences,phrases,curriculum,release]=await Promise.al
   loadDataset("grammar"),
   loadDataset("sentences"),
   loadDataset("phrases"),
-  loadDataset("curriculum"),
+  loadCurriculum(),
   readJson(path.join(root,"content","english","releases","2026.10.0.json")),
 ]);
 const lexemes=dictionary.groups.lexemes??[];
@@ -67,8 +78,7 @@ const chunks=phraseItems.filter(record=>record.type==="chunk");
 const idioms=phraseItems.filter(record=>record.type==="idiom");
 const exerciseByType=countBy(exercises,record=>record.type);
 const topicsByCefr=Object.fromEntries(levels.map(level=>[level,topics.filter(topic=>topic.cefr===level).length]));
-const curriculumTopics=curriculum.groups.topics??[];
-const allRuntime=[...dictionary.records,...grammar.records,...sentences.records,...phrases.records,...curriculum.records];
+const allRuntime=[...dictionary.records,...grammar.records,...sentences.records,...phrases.records];
 
 const publishedStateCounts=countBy(allRuntime,record=>record?.quality?.state);
 const unfinishedPublishedChecks=[];
@@ -107,7 +117,7 @@ const verbPatternsWithoutExamples=verbPatterns.filter(noExamples);
 const phrasesWithoutExamples=phraseItems.filter(noExamples);
 const phrasalMissingMetadata=phrasalVerbs.filter(record=>!hasText(record.separability)||!hasText(record.transitivity));
 const grammarIds=new Set(topics.map(record=>record.id));
-const curriculumIds=new Set(curriculumTopics.map(record=>record.id));
+const curriculumIds=new Set(curriculum.topicIds);
 const grammarMissingFromCurriculum=[...grammarIds].filter(id=>!curriculumIds.has(id));
 const curriculumMissingRuntime=[...curriculumIds].filter(id=>!grammarIds.has(id));
 const topicsWithoutExamples=topics.filter(record=>!Array.isArray(record.exampleIds)||record.exampleIds.length===0);
