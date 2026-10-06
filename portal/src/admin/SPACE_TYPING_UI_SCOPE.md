@@ -48,6 +48,8 @@ Final UI review hardening already applied:
 - added accessible labels for range, search, filter and playlist-weight controls
 - added explicit `aria-pressed` state for segmented controls, toggles and Stage selection controls
 - connected World Music `Inherit / Replace` to persistent mock UI state so Effective Playlist and resolved-source preview stay consistent with the selected assignment mode
+- added accessible names/tooltips for symbol-only music preview controls
+- made World Music fallback traces scope-aware so the preview follows the effective Stage → World → Galaxy → Global hierarchy without duplicate/invalid scope hops
 - constrained History actions so only Draft revisions can Publish and only older Published revisions can Rollback
 - strengthened `validate-space-admin-ui.mjs` with final accessibility/state regression guards and one-shot workflow/script cleanup checks
 - removed all one-shot implementation workflows/scripts after they ran
