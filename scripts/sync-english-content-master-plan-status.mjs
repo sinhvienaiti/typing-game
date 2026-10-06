@@ -56,5 +56,29 @@ sync(
   "E11 example readiness",
 );
 
+sync(
+  "The rich runtime now contains **4,014 published rich records**: dictionary 600, grammar 28, sentences 1,756 and phrases 1,630. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.",
+  "The rich runtime now contains **6,311 published rich records**: dictionary 900, grammar 300, sentences 3,401 and phrases 1,710. Attribution runtime contains **4 sources** (legacy vocabulary, OEWN, Tatoeba and MultiWOZ), derived from provenance actually present in published runtime records.",
+  "E12 published runtime snapshot",
+);
+
+sync(
+  "- the controlled **300-lexeme E03 pilot is complete**: all 300 lexemes and 300 linked primary senses are digest-reviewed and published; any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;",
+  "- the controlled **300-lexeme E03 pilot plus usage graph are complete**: all 300 lexemes, 300 linked primary senses and 300 usage sidecars are digest-reviewed and published; every lexeme has a stable usage reference backed by reviewed sense/example evidence. Any lexical expansion beyond this pilot must enter as a new controlled batch rather than silently extending the pilot;",
+  "E03 remaining-work status",
+);
+
+sync(
+  "- continue grammar-body promotion in small reviewed CEFR slices; A1, A2 and B1 are complete at 45/45, 50/50 and 60/60 rich topics. Their scale slices add 149 rich topics and 894 linked sentence-domain records; continue next with B2 while E03, E04, E05 and E06 publication still uses digest-bound `draft → published` overlays;",
+  "- grammar-body promotion is complete at **300/300 reviewed topics** across A1-C2 (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2). Further E05 work is maintenance and exercise/example enrichment; publication continues to use digest-bound `draft → published` overlays rather than reopening completed CEFR topic counts;",
+  "E05 remaining-work status",
+);
+
+sync(
+  "- continue E04 controlled scale-up beyond the first twenty-three +60 reviewed batches; current published phrase runtime is 1,630; verb patterns have crossed the 500 minimum while collocations, phrasal verbs, and idioms/chunks remain below their long-term minimums, still far below the long-term targets.",
+  "- continue E04 through controlled, quality-first scale-up and example-link enrichment after focused batch 24; current published phrase runtime is **1,710** (600 collocations + 510 verb patterns + 300 phrasal verbs + 165 chunks + 135 idioms). Verb patterns have crossed the 500 minimum, while the other families remain below long-term targets; new growth must preserve review, provenance, dedupe and game-smoke gates rather than bulk-generating to inflate readiness percentages.",
+  "E04 remaining-work status",
+);
+
 await fs.writeFile(file,text,"utf8");
 console.log("English-content master-plan status snapshots are synchronized.");
