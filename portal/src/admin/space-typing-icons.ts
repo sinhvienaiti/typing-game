@@ -37,7 +37,7 @@ export function adminNavIcon(key: string): SVGSVGElement {
   svg.setAttribute("viewBox", "0 0 24 24");
   svg.setAttribute("aria-hidden", "true");
   svg.setAttribute("focusable", "false");
-  svg.classList.add("st-admin-nav-svg");
+  svg.classList.add("st-admin-nav-svg", "st-admin-nav-icon");
   for (const d of PATHS[key] ?? PATHS["◫"] ?? []) {
     const path = document.createElementNS(NS, "path");
     path.setAttribute("d", d);

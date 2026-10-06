@@ -1,3 +1,5 @@
+import "./space-typing-command.css";
+
 const BASE = "/admin/space-typing";
 
 type Navigate = (path: string) => void;

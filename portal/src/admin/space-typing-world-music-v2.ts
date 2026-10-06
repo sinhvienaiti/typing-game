@@ -1,3 +1,5 @@
+import "./space-typing-world-music-v2.css";
+
 const BASE = "/admin/space-typing";
 
 type Navigate = (path: string) => void;

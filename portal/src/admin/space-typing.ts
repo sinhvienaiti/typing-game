@@ -1,5 +1,9 @@
 import "./space-typing-ui.css";
 import { renderExtendedAdminScreen } from "./space-typing-extended";
+import { adminNavIcon } from "./space-typing-icons";
+import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
+import { renderWorldMusicV2 } from "./space-typing-world-music-v2";
+import { renderDailyWeekly } from "./space-typing-daily-weekly";
 import {
   alertFeed,
   audienceMetrics,
@@ -75,6 +79,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
     label: "Live Ops",
     items: [
       { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", phase: "ready" },
+      { label: "Daily / Weekly", path: `${ADMIN_BASE}/daily-weekly`, icon: "◷", phase: "ready" },
       { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", phase: "ready" },
       { label: "Events", path: `${ADMIN_BASE}/events`, icon: "◷", phase: "ready" },
     ],
@@ -209,7 +214,9 @@ export class SpaceTypingAdmin {
   private selectedShipId = ships[0]?.id ?? "vanguard";
   private audioChanges = 0;
 
-  constructor(private readonly navigate: (path: string) => void) {}
+  constructor(private readonly navigate: (path: string) => void) {
+    installAdminCommandShortcut(this.navigate);
+  }
 
   render(path: string): HTMLElement {
     const root = element("main", "st-admin");
@@ -249,7 +256,7 @@ export class SpaceTypingAdmin {
         );
         navButton.type = "button";
         navButton.append(
-          element("span", "st-admin-nav-icon", item.icon),
+          adminNavIcon(item.icon),
           element("span", "st-admin-nav-text", item.label),
           element("span", "st-admin-nav-phase", item.phase === "ready" ? "UI" : "plan"),
         );
@@ -269,8 +276,8 @@ export class SpaceTypingAdmin {
     breadcrumb.append(document.createTextNode("Space Typing / "), element("strong", undefined, item?.label ?? "Admin"));
     bar.append(breadcrumb);
     bar.append(element("div", "st-admin-topbar-spacer"));
-    bar.append(button("⌘K  Search command…", () => undefined, "st-admin-command"));
-    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-02"));
+    bar.append(button("⌘K  Search command…", () => openAdminCommandPalette(this.navigate), "st-admin-command"));
+    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-03"));
     bar.append(statusBadge("LOCAL", "good"));
     return bar;
   }
@@ -279,8 +286,9 @@ export class SpaceTypingAdmin {
     if (path === ADMIN_BASE) return this.renderOverview();
     if (path === `${ADMIN_BASE}/audio`) return this.renderAudio();
     if (path === `${ADMIN_BASE}/music-library`) return this.renderMusicLibrary();
-    if (path === `${ADMIN_BASE}/world-music`) return this.renderWorldMusic();
+    if (path === `${ADMIN_BASE}/world-music`) return renderWorldMusicV2(this.navigate);
     if (path === `${ADMIN_BASE}/ships`) return this.renderShips();
+    if (path === `${ADMIN_BASE}/daily-weekly`) return renderDailyWeekly();
     return renderExtendedAdminScreen(path, this.navigate) ?? this.renderPlanned(path);
   }
 
