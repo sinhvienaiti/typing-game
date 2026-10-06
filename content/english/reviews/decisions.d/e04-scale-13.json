@@ -2056,7 +2056,7 @@
       "batchId": "e04.phrase-pattern-scale-13",
       "recordSetId": "scale-phrases",
       "recordId": "chunk.00000101",
-      "sourceDigest": "37fd0c1a0112b2a5936a76c409544f48514d5c9544ef7d6178734fbc634be1f9",
+      "sourceDigest": "a13b7d214a2a29bc28ee2c943998c655a0122e1b751b81a7baa13c75e7c91edd",
       "targetState": "published",
       "checks": {
         "grammar": {
@@ -2086,11 +2086,15 @@
         "license": {
           "status": "pass",
           "method": "project-original-license-review-v1"
+        },
+        "exampleLink": {
+          "status": "pass",
+          "method": "published-whole-phrase-boundary-match-v1"
         }
       },
       "reviewedAt": "2026-10-03T17:30:00Z",
       "reviewedBy": "GPT-5.6 Sol bilingual editorial review",
-      "note": "Controlled E04 scale 13 reviewed for structure, grammar, Vietnamese meaning/explanation, naturalness, CEFR, exact/near dedup, legacy vocabulary references where applicable, separability/transitivity where applicable, and project-original provenance."
+      "note": "Controlled E04 scale 13 reviewed for structure, grammar, Vietnamese meaning/explanation, naturalness, CEFR, exact/near dedup, legacy vocabulary references where applicable, separability/transitivity where applicable, and project-original provenance. Example IDs added only from normalized whole-phrase boundary matches against already-published sentence examples."
     },
     {
       "id": "review.e04.scale-13.chunk-00000102",
