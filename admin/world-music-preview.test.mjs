@@ -3,12 +3,24 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
-import { runWorldMusicPreview } from "./world-music-preview.mjs";
+import { parseWorldMusicPreviewOutput, runWorldMusicPreview } from "./world-music-preview.mjs";
 
 const rootDir = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contract = JSON.parse(
   await readFile(resolve(rootDir, "games/space-typing/contracts/space-typing-admin.v1.json"), "utf8"),
 );
+
+test("World Music preview parser ignores package-manager stdout preamble", () => {
+  const payload = parseWorldMusicPreviewOutput(
+    "? Verifying lockfile against supply-chain policies...\n{\n  \"protocolVersion\": 1,\n  \"worlds\": []\n}\n",
+  );
+  assert.equal(payload.protocolVersion, 1);
+  assert.deepEqual(payload.worlds, []);
+  assert.throws(
+    () => parseWorldMusicPreviewOutput("verification only, no protocol payload"),
+    /payload marker not found/,
+  );
+});
 
 test("parent Admin invokes the child canonical World Music preview protocol", async () => {
   const preview = await runWorldMusicPreview({ rootDir, contract });
