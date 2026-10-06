@@ -337,7 +337,7 @@ R = [
         ["arrive at/in", "by + agent/method", "with + instrument", "for + beneficiary/purpose"],
         "Choose prepositions from the semantic relation and collocation rather than from a one-to-one translation equivalent.",
         ["We arrived at the station just before noon.", "The report was written by an independent consultant for the board.", "He solved the problem with a temporary workaround rather than by replacing the server."],
-        "at",
+        "arrived at",
         "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",
         "We arrived to the station just before noon.",
         "We arrived at the station just before noon.",
@@ -569,12 +569,12 @@ def add_manifest(slices):
                     "cross-game-smoke",
                 ],
                 "gameSmokes": [
-                    {"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": 5},
-                    {"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": 5},
-                    {"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": 5},
-                    {"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": 4, "recordType": "cloze"},
-                    {"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": 4, "recordType": "translation"},
-                    {"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": 4},
+                    {"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))},
+                    {"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))},
+                    {"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": min(5, len(sets["examples"]))},
+                    {"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "cloze")), "recordType": "cloze"},
+                    {"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "translation")), "recordType": "translation"},
+                    {"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": min(4, len(sets["common-mistakes"]))},
                 ],
             }
         )
