@@ -73,6 +73,69 @@ export type FeatureFlagConfig = {
   risk: FeatureFlagRisk;
 };
 
+export type CoreStatKey =
+  | "hull"
+  | "shield"
+  | "firepower"
+  | "armor"
+  | "energy"
+  | "reactor"
+  | "focus"
+  | "ward"
+  | "luck"
+  | "salvage";
+
+export type ShipVisualProfile = {
+  silhouette: "spear" | "fortress" | "arc" | "phantom" | "crown" | "blade";
+  primary: string;
+  secondary: string;
+  accent: string;
+  core: string;
+  engine: string;
+  glow: string;
+  wingSpan: number;
+  bodyLength: number;
+  engineCount: 1 | 2 | 3;
+};
+
+export type ShipAdminOverride = {
+  name?: string;
+  unlockStage?: number;
+  role?: string;
+  summary?: string;
+  passiveName?: string;
+  activeName?: string;
+  ultimateName?: string;
+  statBonus?: Partial<Record<CoreStatKey, number>>;
+  visual?: Partial<ShipVisualProfile>;
+};
+
+export type ShipAdminPolicy = {
+  configRevision: string;
+  ships?: Record<string, ShipAdminOverride>;
+};
+
+export type ShipAdminPreviewItem = {
+  id: string;
+  name: string;
+  unlockStage: number;
+  role: string;
+  summary: string;
+  passiveName: string;
+  activeName: string;
+  ultimateName: string;
+  statBonus: Partial<Record<CoreStatKey, number>>;
+  visual: ShipVisualProfile;
+  assetId: string;
+  overridden: boolean;
+};
+
+export type ShipAdminPreview = {
+  protocolVersion: 1;
+  configRevision: string;
+  ships: ShipAdminPreviewItem[];
+};
+
 export type SpaceTypingAdminConfig = {
   contractRevision: string;
   configSchemaVersion: number;
@@ -86,6 +149,10 @@ export type SpaceTypingAdminConfig = {
     assignments: Record<string, unknown>;
     /** Additive B04.2 canonical policy: Global + Galaxy + World + Stage. */
     publishedPolicy?: WorldMusicPolicy;
+  };
+  /** Additive B06 content namespace; legacy v1 revisions may omit it. */
+  content?: {
+    ships?: ShipAdminPolicy;
   };
   /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
   system?: GeneralSettingsConfig;
@@ -225,6 +292,13 @@ export class SpaceTypingAdminApi {
     stageNumber?: number;
   } = {}): Promise<WorldMusicPreview> {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {
+      method: "POST",
+      body: JSON.stringify(input),
+    });
+  }
+
+  previewShips(input: { policy?: ShipAdminPolicy } = {}): Promise<ShipAdminPreview> {
+    return this.request<ShipAdminPreview>("/api/admin/space-typing/ships/preview", {
       method: "POST",
       body: JSON.stringify(input),
     });
