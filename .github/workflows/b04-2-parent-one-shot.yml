@@ -1,0 +1,67 @@
+name: B04.2 Parent Integration One Shot
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - ".github/workflows/b04-2-parent-one-shot.yml"
+      - "scripts/b04-2-parent-patch.py"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+          submodules: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Patch B04.2 parent integration
+        run: |
+          python scripts/b04-2-parent-patch.py
+          git update-index --add --cacheinfo 160000,54e0e931e946f8a3193a0dfbd394d1d95b7acd8a,games/space-typing
+          git submodule update --init --force games/space-typing
+
+      - name: Install dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm --dir portal install --no-frozen-lockfile
+          pnpm --dir games/space-typing install --no-frozen-lockfile
+
+      - name: Validate B04.2
+        run: |
+          node scripts/validate-space-admin-contract.mjs
+          node scripts/validate-space-admin-ui.mjs
+          node scripts/validate-space-admin-phase-b.mjs
+          node scripts/validate-space-admin-audio.mjs
+          node --check admin/store.mjs
+          node --check admin/server.mjs
+          node --check admin/world-music-preview.mjs
+          node --check admin/world-music-preview.test.mjs
+          node --test admin/store.test.mjs
+          node --test admin/world-music-preview.test.mjs
+          pnpm --dir games/space-typing test
+          pnpm build:space
+          pnpm build:portal
+
+      - name: Commit verified integration and remove one-shot
+        run: |
+          git rm .github/workflows/b04-2-parent-one-shot.yml scripts/b04-2-parent-patch.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add admin portal/src/admin scripts/validate-space-admin-phase-b.mjs games/space-typing
+          git commit -m "feat(admin): unlock B04.2 galaxy stage music scopes"
+          git push origin HEAD:feat/space-typing-admin-uiux
