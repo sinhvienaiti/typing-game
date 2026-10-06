@@ -6,6 +6,7 @@ on:
       - feature/english-learning-content-system
     paths:
       - scripts/apply-english-e04-focused-scale-25.py
+      - scripts/check-english-e04-scale-25-candidates.py
       - .github/workflows/apply-english-e04-scale-25.yml
 
 permissions:
@@ -33,6 +34,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+
+      - name: Preflight all scale 25 candidates against current E04
+        run: python3 scripts/check-english-e04-scale-25-candidates.py
 
       - name: Apply idempotent E04 scale 25 source batch
         run: python3 scripts/apply-english-e04-focused-scale-25.py
