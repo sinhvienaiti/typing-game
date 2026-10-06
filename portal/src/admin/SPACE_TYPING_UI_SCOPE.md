@@ -36,6 +36,17 @@ Cross-screen UX implemented:
 - revision diff/publish/rollback UX
 - dangerous-change warnings for economy/ranked/system domains
 
+Final UI review hardening already applied:
+
+- removed the obsolete first-generation World Music renderer so only the Stage-level V2 editor remains
+- corrected World selection so the selected stage starts at that World's first real stage instead of Stage 001
+- unified `--st-admin-*` and game-style `--holo-*` design tokens
+- corrected Admin route scrolling inside the 48px parent portal shell
+- added focus-visible and reduced-motion accessibility handling
+- added line-SVG sidebar icons and global command search
+- cleaned command-palette keyboard listeners on every close path
+- removed all one-shot implementation workflows/scripts after they ran
+
 Design direction:
 
 - Space Typing `A · Holo Command`
