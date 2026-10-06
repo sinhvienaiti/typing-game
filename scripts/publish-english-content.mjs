@@ -3,11 +3,13 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
 import { overlayEnglishReviewDecisions, readEnglishReviewLedger } from "./english-review-core.mjs";
+import { applyEnglishExampleLinks, readEnglishExampleLinkLedger } from "./english-example-link-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const [batchManifest,reviewLedger]=await Promise.all([
+const [batchManifest,reviewLedger,exampleLinkLedger]=await Promise.all([
   readJson(path.join(root,"content","english","batches","manifest.json")),
   readEnglishReviewLedger(root),
+  readEnglishExampleLinkLedger(root),
 ]);
 const contentVersion=batchManifest.contentVersion;
 const batchSetsByPath=new Map();
@@ -104,6 +106,27 @@ for (const batch of e04Batches) {
   }
 }
 
+const allPublishedExamples=published(
+  [...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences],
+  "sentences/examples"
+);
+const verbPatternEnrichment=applyEnglishExampleLinks(e04VerbPatterns,exampleLinkLedger,{
+  targetType:"verb-pattern",
+  examples:allPublishedExamples,
+});
+const collocationEnrichment=applyEnglishExampleLinks(e04Collocations,exampleLinkLedger,{
+  targetType:"collocation",
+  examples:allPublishedExamples,
+});
+const phraseEnrichment=applyEnglishExampleLinks(e04Phrases,exampleLinkLedger,{
+  targetType:"phrase",
+  examples:allPublishedExamples,
+});
+const appliedExampleLinks=
+  verbPatternEnrichment.applied+
+  collocationEnrichment.applied+
+  phraseEnrichment.applied;
+
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","sentences"),{recursive:true});
@@ -117,15 +140,16 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 ]}));
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
-  {id:"examples",dir:"examples",records:[...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
+  {id:"examples",dir:"examples",records:allPublishedExamples},
   {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
   {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
-  {id:"collocations",dir:"collocations",records:e04Collocations},
-  {id:"verb-patterns",dir:"verb-patterns",records:e04VerbPatterns},
-  {id:"phrases",dir:"items",records:e04Phrases}
+  {id:"collocations",dir:"collocations",records:collocationEnrichment.records},
+  {id:"verb-patterns",dir:"verb-patterns",records:verbPatternEnrichment.records},
+  {id:"phrases",dir:"items",records:phraseEnrichment.records}
 ]}));
 
 console.log("Published English content:",results.map(result=>result.dataset+"="+result.count).join(", "));
+console.log("Applied reviewed E04 example links:",appliedExampleLinks);
