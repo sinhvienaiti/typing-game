@@ -27,6 +27,14 @@ validator = validator.replace(
   'const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");\nconst main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");\nconst phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");',
 );
 validator = validator.replace(
+  'assert.equal(settings?.status, "phase-b-persistence-ready");',
+  'assert.equal(settings?.status, "phase-b-ui-wired");',
+);
+validator = validator.replace(
+  'assert.equal(flags?.status, "phase-b-persistence-ready");',
+  'assert.equal(flags?.status, "phase-b-ui-wired");',
+);
+validator = validator.replace(
   'assert.match(api, /getRuntime\\(\\): Promise<AdminRuntimePayload>/);',
   'assert.match(api, /getRuntime\\(\\): Promise<AdminRuntimePayload>/);\nassert.match(main, /renderPhaseBAdminScreen/);\nassert.match(main, /if \\(phaseB !== null\\) return phaseB/);\nassert.match(phaseB, /Admin Phase B · General Settings draft/);\nassert.match(phaseB, /Admin Phase B · Feature Flags draft/);\nassert.match(phaseB, /api\\.createRevision/);\nassert.doesNotMatch(phaseB, /api\\.publish/);\nassert.match(phaseB, /runtime unchanged/);',
 );
