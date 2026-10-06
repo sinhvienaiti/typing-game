@@ -32,18 +32,6 @@ jobs:
             echo 'B2 slices 01-04 already present; skipping generator.'
             exit 0
           fi
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/apply-english-b2-01-04.py')
-          text = p.read_text()
-          bad = '""Will you use the car this evening? when politely checking an existing plan"'
-          good = '"Will you use the car this evening? when politely checking an existing plan"'
-          if bad in text:
-              text = text.replace(bad, good, 1)
-              p.write_text(text)
-          elif good not in text:
-              raise SystemExit('Could not locate the expected B2 Future Continuous correction target')
-          PY
           python3 -m py_compile scripts/apply-english-b2-01-04.py
           python3 scripts/apply-english-b2-01-04.py
 
@@ -56,13 +44,17 @@ jobs:
           pnpm english-content:licenses
           pnpm english-content:test
 
-      - name: Generate and publish B2 runtime artifacts
-        shell: bash
-        run: |
-          pnpm english-content:generate
-          pnpm english-content:publish
-          pnpm english-content:dedupe
-          pnpm english-content:runtime:smoke
+      - name: Generate B2 runtime artifacts
+        run: pnpm english-content:generate
+
+      - name: Publish B2 runtime artifacts
+        run: pnpm english-content:publish
+
+      - name: Check B2 runtime dedupe
+        run: pnpm english-content:dedupe
+
+      - name: Smoke B2 published runtime
+        run: pnpm english-content:runtime:smoke
 
       - name: Commit B2 slices 01-04
         shell: bash
