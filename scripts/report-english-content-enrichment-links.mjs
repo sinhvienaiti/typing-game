@@ -66,6 +66,19 @@ for(const lexeme of lexemes) lexemeCandidates.set(lexeme.id,(examplesByLexeme.ge
 const senseCandidates=new Map();
 for(const sense of senses) senseCandidates.set(sense.id,(examplesByLexeme.get(sense.lexemeId)??[]).slice(0,5));
 
+const missingLexemes=lexemes.filter(record=>(lexemeCandidates.get(record.id)?.length??0)===0);
+const fallbackHeadwordEvidence=missingLexemes.map(lexeme=>({
+  id:lexeme.id,
+  headword:lexeme.headword,
+  vi:lexeme.vi,
+  cefr:lexeme.cefr,
+  senseIds:lexeme.senseIds,
+  candidates:examples
+    .filter(example=>boundedContains(example.text,lexeme.headword))
+    .slice(0,10)
+    .map(example=>({id:example.id,text:example.text,cefr:example.cefr,lexicalIds:example.lexicalIds??[]})),
+}));
+
 const collocationCandidates=new Map();
 for(const record of collocations){
   const matches=[];
@@ -99,12 +112,14 @@ const report={
   contentVersion:dictionary.manifest.contentVersion,
   method:{
     lexemeAndSense:"explicit published sentence.lexicalIds only",
+    fallbackLexemeEvidence:"whole-headword boundary match for manual review only",
     collocationAndPhrase:"normalized whole-phrase boundary match against published examples",
     verbPattern:"lemma-only candidate discovery; NOT safe for automatic linking without frame review",
   },
   examplesScanned:examples.length,
   lexemes:summarize(lexemes,lexemeCandidates),
   senses:summarize(senses,senseCandidates),
+  e03FallbackHeadwordEvidence:fallbackHeadwordEvidence,
   collocations:summarize(collocations,collocationCandidates),
   phraseItems:summarize(phraseItems,phraseCandidates),
   verbPatternsLemmaEvidence:summarize(verbPatterns,verbPatternLemmaCandidates),
