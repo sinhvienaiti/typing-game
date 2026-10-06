@@ -2,15 +2,17 @@ import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { RevisionStore, AdminConflictError, AdminValidationError } from "./store.mjs";
+import { AdminConflictError, AdminValidationError } from "./store.mjs";
+import { SpaceTypingRevisionStore } from "./space-typing-store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
+import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contractPath = resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json");
 const contract = JSON.parse(await readFile(contractPath, "utf8"));
-const store = new RevisionStore({
+const store = new SpaceTypingRevisionStore({
   rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing"),
   contract,
 });
@@ -137,6 +139,14 @@ const server = createServer(async (request, response) => {
       json(response, 200, preview);
       return;
     }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/ships/preview") {
+      const input = await body(request);
+      const activeConfig = await store.getRuntimeConfig();
+      const policy = input.policy ?? activeConfig.content?.ships;
+      const preview = await runShipRegistryPreview({ rootDir: root, contract, policy });
+      json(response, 200, preview);
+      return;
+    }
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/validate-revision") {
       const input = await body(request);
       json(response, 200, await store.validateRevision(input.revision));
@@ -177,6 +187,10 @@ const server = createServer(async (request, response) => {
     }
     if (error instanceof WorldMusicPreviewError) {
       json(response, 502, { error: "preview-error", message: error.message });
+      return;
+    }
+    if (error instanceof ShipRegistryPreviewError) {
+      json(response, 502, { error: "ships-preview-error", message: error.message });
       return;
     }
     console.error(error);
