@@ -39,7 +39,7 @@ type EquipmentAdminPreviewItem = {
   icon: string;
   description: string;
   stats: Partial<Record<CoreStatKey, number>>;
-  perk?: string;
+  perk?: string | null;
   overridden: boolean;
 };
 type EquipmentAdminPreview = {
