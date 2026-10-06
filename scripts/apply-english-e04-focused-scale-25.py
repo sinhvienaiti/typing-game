@@ -18,7 +18,7 @@ EXPECTED = {"collocations": 600, "verbPatterns": 510, "phraseItems": 600}
 NEAR_DUP_THRESHOLD = 0.86
 
 COLLOCATIONS = [
-    ("exert pressure", "verb + noun", "gây hoặc tạo áp lực lên một người, tổ chức hay quá trình", "B2"),
+    ("wield considerable influence", "verb + noun", "có và sử dụng mức độ ảnh hưởng đáng kể đối với quyết định hoặc kết quả", "C1"),
     ("exercise discretion", "verb + noun", "vận dụng quyền cân nhắc để đưa ra quyết định phù hợp theo hoàn cảnh", "C1"),
     ("exercise caution", "verb + noun", "hành động thận trọng để hạn chế rủi ro hoặc sai sót", "B2"),
     ("pose a threat", "verb + noun", "tạo ra mối đe dọa hoặc nguy cơ đáng kể", "B2"),
