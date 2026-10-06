@@ -174,9 +174,9 @@ export const galaxyWorlds = Array.from({ length: 10 }, (_, galaxyIndex) => ({
 
 export const ships: readonly ShipMock[] = [
   { id: "vanguard", name: "Vanguard", className: "Interceptor", rarity: "Common", enabled: true, unlock: "Starter", price: "Free", hp: 100, shield: 82, armor: 46, speed: 92, fireRate: 78, damage: 64 },
-  { id: "phoenix", name: "Phoenix", className: "Assault", rarity: "Rare", enabled: true, unlock: "Stage 080", price: "24,000 Credits", hp: 118, shield: 74, armor: 52, speed: 84, fireRate: 86, damage: 79 },
-  { id: "raven", name: "Raven", className: "Stealth", rarity: "Epic", enabled: true, unlock: "Stage 220", price: "18 Rare Credits", hp: 88, shield: 62, armor: 38, speed: 100, fireRate: 93, damage: 83 },
-  { id: "aurora", name: "Aurora", className: "Guardian", rarity: "Legendary", enabled: false, unlock: "Stage 500 + Challenge", price: "42 Rare Credits", hp: 148, shield: 100, armor: 90, speed: 68, fireRate: 61, damage: 92 },
+  { id: "aegis", name: "Aegis", className: "Guardian", rarity: "Rare", enabled: true, unlock: "Stage 080", price: "24,000 Credits", hp: 132, shield: 96, armor: 78, speed: 70, fireRate: 68, damage: 72 },
+  { id: "reaper", name: "Reaper", className: "Assault", rarity: "Epic", enabled: true, unlock: "Stage 220", price: "18 Rare Credits", hp: 94, shield: 58, armor: 42, speed: 95, fireRate: 91, damage: 88 },
+  { id: "volt", name: "Volt", className: "Striker", rarity: "Legendary", enabled: false, unlock: "Stage 500 + Challenge", price: "42 Rare Credits", hp: 106, shield: 72, armor: 54, speed: 100, fireRate: 96, damage: 91 },
 ];
 
 export const recentChanges = [
