@@ -6,8 +6,9 @@ STATUS: IN_PROGRESS
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- Code HEAD before this checkpoint: `9cbaadc59d198d356a4f11d2420897e833b37afd`
+- Code HEAD before this checkpoint: `41d25c51893127ec5773d6532df5bf55b92a3d96`
 - PR: #49
+- Last fully verified parent head before new B06.5 lifecycle commits: `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; Admin CI `37542898908` PASS and Platform CI `37542898924` PASS.
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
@@ -26,36 +27,35 @@ Current milestone: **B06.5 — Bosses Admin → Runtime**
 
 ## COMPLETED TASKS OF CURRENT MILESTONE
 - Child Boss loader/fallback/preview, canonical identity application, 26-ID contract and tests are pushed and child CI PASS.
-- Parent now pins the validated B06.5 child SHA, so the Boss contract is available to the parent producer.
-- Added parent Boss validation for canonical IDs and authorable `name`/`title` only; unsupported combat/visual fields are rejected.
-- Added deterministic default Boss policy to new Admin stores.
-- Added Boss preview bridge using child `pnpm bosses:admin-preview` protocol with timeout/output limits.
-- Added published Boss runtime envelope and public `/api/runtime/space-typing/bosses` endpoint using `new-session` boundary.
-- Added authenticated `/api/admin/space-typing/bosses/preview` endpoint.
-- Added parent Boss policy/runtime unit tests.
+- Parent pins the validated B06.5 child SHA.
+- Parent Boss validation permits only canonical IDs and authorable `name`/`title`; unsupported combat/visual fields are rejected.
+- Deterministic default Boss policy, canonical preview bridge, published runtime envelope, public Boss runtime endpoint and authenticated Boss preview endpoint are implemented.
+- Parent Boss policy/runtime unit tests are implemented.
+- Fixed parent/child Boss contract snapshot drift; Admin CI and Platform CI both PASS on `aa0f4f0f`.
+- Added Boss preview parser coverage.
+- Added explicit B06.5 Admin CI gates for Boss policy, runtime envelope and preview bridge; Admin syntax gate now covers every `admin/*.mjs` file so new Boss files cannot silently escape syntax validation.
+- Added revision-store lifecycle coverage proving Boss Draft -> Validate -> Publish -> Runtime -> Rollback isolation and rejection of unknown IDs, unsupported fields and overlong names.
 
 ## REMAINING TASKS
-- Verify current parent Admin CI and Platform CI; fix exact failures if any.
-- Add/verify revision-store integration coverage for Boss invalid config and Draft -> Validate -> Publish -> Runtime -> Rollback.
+- Verify Admin CI and Platform CI on current lifecycle-test HEAD; root-cause any failure.
 - Replace mock Boss screen with revision-backed editor; unsupported fields stay read-only.
-- Update Phase B/Admin CI mapping if Boss files are not already covered by generic Admin test discovery.
-- Run runtime smoke against published Boss identity and rollback.
+- Run HTTP/runtime smoke against published Boss identity and rollback, including child session-start consumption.
 - When all B06.5 gates pass, mark B06.5 DONE and immediately begin the next mandatory master-plan milestone.
 
 ## CURRENT BLOCKER
-NONE. Parent CI is queued on the current code head; independent Boss integration work may continue without duplicate CI-only commits.
+NONE.
 
 ## NEXT ACTION
-Check parent CI for current HEAD. In parallel, inspect the existing Enemy revision/editor pattern and implement Boss revision-backed editor plus publish/rollback integration coverage; then run/verify Admin CI, Platform CI and runtime smoke.
+Verify CI for the current B06.5 lifecycle commits. Then inspect the existing revision-backed Enemy editor/API pattern and convert Bosses from mock presentation to revision-backed authoring of `name`/`title`; run Draft -> Validate -> Publish -> Runtime -> Rollback HTTP/runtime smoke and child session-start verification.
 
 ## QUALITY GATES
-- Unit: IMPLEMENTED parent + child; parent CI pending.
-- Integration: PARTIAL — child canonical identity consumer PASS; parent revision/editor smoke pending.
-- Admin validation: IMPLEMENTED; CI pending.
-- Runtime validation: IMPLEMENTED endpoint; end-to-end publish/rollback smoke pending.
-- Contract tests: PASS child.
-- Build/typecheck: PASS child; parent current-head CI pending.
+- Unit: PASS on prior parent head; current Boss lifecycle additions pending CI.
+- Integration: Boss revision lifecycle test implemented; editor + HTTP/child smoke pending.
+- Admin validation: IMPLEMENTED; explicit B06.5 CI gate added.
+- Runtime validation: endpoint implemented; HTTP + child session smoke pending.
+- Contract tests: PASS child; parent snapshot gate PASS on `aa0f4f0f`.
+- Build/typecheck: PASS child; parent Admin/Platform CI PASS on `aa0f4f0f`, current lifecycle head pending.
 - Child CI: PASS run `37529289382` on `9c2add4b1eca37c1efce2101fd4a5428f1381410`.
-- Parent Admin CI: QUEUED on code HEAD `9cbaadc59d198d356a4f11d2420897e833b37afd` (run `37536281764`).
-- Platform CI: PENDING/QUEUED for latest parent commits.
+- Parent Admin CI: PASS run `37542898908` on `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; current head pending.
+- Platform CI: PASS run `37542898924` on `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; current head pending.
 - Runtime smoke: B06.5 PENDING.
