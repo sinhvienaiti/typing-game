@@ -650,7 +650,10 @@ export class SpaceTypingAdmin {
     const root = panel("Track Detail", "Integrated preview · no standalone preview page", true);
     root.append(element("div", "st-admin-track-cover", "♫"));
     const player = element("div", "st-admin-player");
-    player.append(button("▶", () => undefined, "st-admin-play"));
+    const play = button("▶", () => undefined, "st-admin-play");
+    play.setAttribute("aria-label", "Play track preview");
+    play.title = "Play track preview";
+    player.append(play);
     const progress = element("span", "st-admin-player-track");
     progress.append(element("i"));
     player.append(progress, element("span", "st-admin-chip", `00:43 / ${track.duration}`));

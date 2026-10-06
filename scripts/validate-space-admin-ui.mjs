@@ -90,6 +90,8 @@ assert(main.includes("renderUnknown("), "Unknown-route guard is missing");
 assert(worldMusic.includes("multi-file playlist"), "Stage-level World Music multi-track UX is missing");
 assert(worldMusic.includes("Stage Matrix"), "World Music matrix view is missing");
 assert(worldMusic.includes("Fallback chain"), "World Music effective fallback preview is missing");
+assert(worldMusic.includes('const fallbackParts: string[] = []') && worldMusic.includes('const galaxyLabel = `Galaxy ${String(state.galaxy).padStart(2, "0")}`') && worldMusic.includes('fallbackParts.join(" → ")'), "World Music fallback trace is not scope-aware");
+assert(worldMusic.includes('previous.setAttribute("aria-label", "Previous track")') && worldMusic.includes('next.setAttribute("aria-label", "Next track")'), "World Music symbol-only preview controls need accessible names");
 assert(worldMusic.includes("(world - 1) * 20 + 1"), "Selecting a World does not initialize its real first Stage");
 assert(command.includes("metaKey || event.ctrlKey"), "Cmd/Ctrl+K command shortcut is missing");
 assert(command.includes("currentCleanup"), "Command palette listener cleanup is missing");
@@ -108,6 +110,7 @@ assert(main.includes('control.setAttribute("aria-label", label)'), "Audio range 
 assert(main.includes('search.setAttribute("aria-label", "Search music library")'), "Music search aria-label is missing");
 assert(main.includes('type.setAttribute("aria-label", "Filter music by type")'), "Music type filter aria-label is missing");
 assert(main.includes('status.setAttribute("aria-label", "Filter music by status")'), "Music status filter aria-label is missing");
+assert(main.includes('play.setAttribute("aria-label", "Play track preview")'), "Music Library symbol-only preview control needs an accessible name");
 assert(main.includes('control.setAttribute("aria-pressed", String(index === 0))'), "Dashboard segmented aria state is missing");
 assert(extended.includes('input.setAttribute("aria-label", label)'), "Extended range aria-label is missing");
 assert(extended.includes('control.setAttribute("aria-pressed", String(enabled))'), "Extended toggle aria state is missing");

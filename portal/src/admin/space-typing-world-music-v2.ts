@@ -183,10 +183,30 @@ function effective(): HTMLElement {
   });
   root.append(list);
   const fallback = el("div", "stx-fallback");
-  fallback.append(el("span", undefined, "Fallback chain"), el("code", undefined, `${label} → World ${String(state.world).padStart(2, "0")} ${state.role} → World Normal → Galaxy Default → Global ${state.role} → Global Normal`));
+  const fallbackParts: string[] = [];
+  const worldLabel = `World ${String(state.world).padStart(2, "0")}`;
+  const galaxyLabel = `Galaxy ${String(state.galaxy).padStart(2, "0")}`;
+  if (state.scope === "stage") fallbackParts.push(`${label} ${state.role}`);
+  if (state.scope === "stage" || state.scope === "world") {
+    fallbackParts.push(`${worldLabel} ${state.role}`);
+    if (state.role !== "Normal") fallbackParts.push(`${worldLabel} Normal`);
+  }
+  if (state.scope !== "all") {
+    fallbackParts.push(`${galaxyLabel} ${state.role}`);
+    if (state.role !== "Normal") fallbackParts.push(`${galaxyLabel} Normal`);
+  }
+  fallbackParts.push(`Global ${state.role}`);
+  if (state.role !== "Normal") fallbackParts.push("Global Normal");
+  fallback.append(el("span", undefined, "Fallback chain"), el("code", undefined, fallbackParts.join(" → ")));
   root.append(fallback);
   const player = el("div", "stx-music-player");
-  player.append(btn("◀"), btn("▶ Preview", () => undefined, "st-admin-btn primary"), btn("▶▶"), btn("Validate"));
+  const previous = btn("◀");
+  previous.setAttribute("aria-label", "Previous track");
+  previous.title = "Previous track";
+  const next = btn("▶▶");
+  next.setAttribute("aria-label", "Next track");
+  next.title = "Next track";
+  player.append(previous, btn("▶ Preview", () => undefined, "st-admin-btn primary"), next, btn("Validate"));
   root.append(player);
   return root;
 }
