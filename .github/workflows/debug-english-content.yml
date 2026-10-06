@@ -1,4 +1,4 @@
-name: Publish English E03 Example Links
+name: Publish English E04 Focused Scale 24
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-e03-example-links:
+  publish-e04-focused-scale-24:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,11 +25,11 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply reviewed E03 example links
+      - name: Apply focused E04 scale 24
         shell: bash
         run: |
-          python3 -m py_compile scripts/apply-english-e03-example-links.py
-          python3 scripts/apply-english-e03-example-links.py
+          python3 -m py_compile scripts/apply-english-e04-focused-scale-24.py
+          python3 scripts/apply-english-e04-focused-scale-24.py
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -52,7 +52,7 @@ jobs:
       - name: Publish runtime artifacts
         run: pnpm english-content:publish
 
-      - name: Collect E03 near-duplicate diagnostics
+      - name: Collect scale-24 near-duplicate diagnostics
         shell: bash
         run: |
           node --input-type=module <<'NODE'
@@ -62,7 +62,7 @@ jobs:
 
           const records=[];
           const seen=new Set();
-          for(const file of await listJsonFiles(path.resolve("shared/sentences"))){
+          for(const file of await listJsonFiles(path.resolve("shared/phrases"))){
             if(file.endsWith("manifest.json")) continue;
             const doc=await readJson(file);
             for(const record of doc.records??[]){
@@ -71,28 +71,33 @@ jobs:
               records.push(record);
             }
           }
+          const newIds=new Set([
+            ...Array.from({length:40},(_,i)=>"col."+String(561+i).padStart(8,"0")),
+            ...Array.from({length:20},(_,i)=>"pv."+String(281+i).padStart(8,"0")),
+            ...Array.from({length:10},(_,i)=>"chunk."+String(156+i).padStart(8,"0")),
+            ...Array.from({length:10},(_,i)=>"idiom."+String(126+i).padStart(8,"0")),
+          ]);
           const pairs=nearDuplicatePairs(records,0.86);
-          const e03Pattern=/^sent\.e03\./u;
-          const e03Pairs=pairs.filter(({leftId,rightId})=>e03Pattern.test(leftId)||e03Pattern.test(rightId));
-          await fs.writeFile("/tmp/e03-near-duplicates.json",JSON.stringify({threshold:0.86,count:e03Pairs.length,pairs:e03Pairs},null,2)+"\n");
-          console.log(JSON.stringify({globalNearCount:pairs.length,e03NearCount:e03Pairs.length},null,2));
+          const scale24Pairs=pairs.filter(({leftId,rightId})=>newIds.has(leftId)||newIds.has(rightId));
+          await fs.writeFile("/tmp/e04-scale-24-near-duplicates.json",JSON.stringify({threshold:0.86,count:scale24Pairs.length,pairs:scale24Pairs},null,2)+"\n");
+          console.log(JSON.stringify({globalNearCount:pairs.length,scale24NearCount:scale24Pairs.length},null,2));
           NODE
 
       - name: Check runtime exact dedupe
         run: pnpm english-content:dedupe
 
-      - name: Enforce E03 near-duplicate review
+      - name: Enforce scale-24 near-duplicate review
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs/promises";
-          const report=JSON.parse(await fs.readFile("/tmp/e03-near-duplicates.json","utf8"));
+          const report=JSON.parse(await fs.readFile("/tmp/e04-scale-24-near-duplicates.json","utf8"));
           if(report.count!==0){
-            console.error(`E03 near-duplicate audit failed: ${report.count} candidate(s)`);
+            console.error(`E04 scale-24 near-duplicate audit failed: ${report.count} candidate(s)`);
             console.error(JSON.stringify(report.pairs,null,2));
             process.exit(1);
           }
-          console.log("E03 near-duplicate audit PASS: 0 candidates.");
+          console.log("E04 scale-24 near-duplicate audit PASS: 0 candidates.");
           NODE
 
       - name: Smoke published runtime
@@ -107,34 +112,37 @@ jobs:
       - name: Audit master-plan acceptance
         run: node scripts/audit-english-content-master-plan.mjs
 
+      - name: Report E04 runtime coverage
+        run: node scripts/report-english-content-e04.mjs
+
       - name: Measure enrichment-link evidence
         run: node scripts/report-english-content-enrichment-links.mjs
 
-      - name: Upload E03 diagnostics
+      - name: Upload E04 scale-24 diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e03-example-link-diagnostics-${{ github.sha }}
+          name: e04-scale-24-diagnostics-${{ github.sha }}
           path: |
-            /tmp/e03-near-duplicates.json
+            /tmp/e04-scale-24-near-duplicates.json
             content/english/reports/master-plan-acceptance.json
             content/english/reports/enrichment-link-evidence.json
             content/english/reports/e10-review-ledger.json
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Commit reviewed E03 example links
+      - name: Commit reviewed E04 focused scale 24
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases \
-            scripts/apply-english-e03-example-links.py scripts/publish-english-content.mjs \
-            scripts/smoke-published-english-content.mjs scripts/audit-english-content-master-plan.mjs
+          git add content/english shared/phrases \
+            scripts/apply-english-e04-focused-scale-24.py scripts/publish-english-content.mjs \
+            scripts/smoke-published-english-content.mjs scripts/report-english-content-e04.mjs
           if git diff --cached --quiet; then
-            echo 'No E03 enrichment changes to commit.'
+            echo 'No E04 scale-24 changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish reviewed E03 example links'
+          git commit -m 'feat(content): publish reviewed E04 focused scale 24'
           git push
