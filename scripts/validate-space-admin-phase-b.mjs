@@ -10,6 +10,10 @@ const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "
 const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
 const worldMusicPhaseB = await readFile(new URL("portal/src/admin/space-typing-world-music-phase-b.ts", root), "utf8");
+const shipsPhaseB = await readFile(new URL("portal/src/admin/space-typing-ships-phase-b.ts", root), "utf8");
+const equipmentPhaseB = await readFile(new URL("portal/src/admin/space-typing-equipment-phase-b.ts", root), "utf8");
+const skillsPhaseB = await readFile(new URL("portal/src/admin/space-typing-skills-phase-b.ts", root), "utf8");
+const enemiesPhaseB = await readFile(new URL("portal/src/admin/space-typing-enemies-phase-b.ts", root), "utf8");
 const historyPhaseB = await readFile(new URL("portal/src/admin/space-typing-history-phase-b.ts", root), "utf8");
 const server = await readFile(new URL("admin/server.mjs", root), "utf8");
 
@@ -23,6 +27,10 @@ assert.equal(new Set(routes).size, routes.length, "Phase B mapping routes must b
 
 const audio = map.screens.find((entry) => entry.route === "/admin/space-typing/audio");
 const worldMusic = map.screens.find((entry) => entry.route === "/admin/space-typing/world-music");
+const ships = map.screens.find((entry) => entry.route === "/admin/space-typing/ships");
+const equipment = map.screens.find((entry) => entry.route === "/admin/space-typing/equipment");
+const skills = map.screens.find((entry) => entry.route === "/admin/space-typing/skills");
+const enemies = map.screens.find((entry) => entry.route === "/admin/space-typing/enemies");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
 const history = map.screens.find((entry) => entry.route === "/admin/space-typing/history");
@@ -32,6 +40,15 @@ assert.equal(audio?.applyBoundary, "safe-boundary");
 assert.equal(worldMusic?.domain, "worldMusic");
 assert.equal(worldMusic?.status, "phase-b-ui-wired-all-scopes");
 assert.equal(worldMusic?.applyBoundary, "next-track-or-state");
+for (const contentScreen of [ships, equipment, skills, enemies]) {
+  assert.equal(contentScreen?.status, "phase-b-ui-wired-runtime-backed");
+  assert.equal(contentScreen?.persistence, "immutable-revision-store");
+  assert.equal(contentScreen?.applyBoundary, "new-session");
+}
+assert.equal(ships?.domain, "content.ships");
+assert.equal(equipment?.domain, "content.equipment");
+assert.equal(skills?.domain, "content.skills");
+assert.equal(enemies?.domain, "content.enemies");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
@@ -53,6 +70,7 @@ for (const entry of map.screens) {
 
 assert.match(defaultConfig, /\bsystem:\s*\{/);
 assert.match(defaultConfig, /\bfeatureFlags:\s*\{/);
+assert.match(defaultConfig, /\benemies:\s*\{/);
 assert.match(store, /config\.system !== undefined/);
 assert.match(store, /validateSystem\(config\.system\)/);
 assert.match(store, /config\.featureFlags !== undefined/);
@@ -88,6 +106,31 @@ assert.match(worldMusicPhaseB, /policy\.galaxies/);
 assert.match(worldMusicPhaseB, /policy\.stages/);
 assert.match(worldMusicPhaseB, /stageNumber/);
 assert.match(worldMusicPhaseB, /assertStableActiveRevision/);
+
+assert.match(phaseB, /renderPhaseBShips/);
+assert.match(shipsPhaseB, /B06\.1/);
+assert.match(shipsPhaseB, /api\.createRevision/);
+assert.doesNotMatch(shipsPhaseB, /api\.publish/);
+assert.match(phaseB, /renderPhaseBEquipment/);
+assert.match(equipmentPhaseB, /B06\.2/);
+assert.match(equipmentPhaseB, /api\.createRevision/);
+assert.doesNotMatch(equipmentPhaseB, /api\.publish/);
+assert.match(phaseB, /renderPhaseBSkills/);
+assert.match(skillsPhaseB, /B06\.3/);
+assert.match(skillsPhaseB, /api\.createRevision/);
+assert.doesNotMatch(skillsPhaseB, /api\.publish/);
+assert.match(phaseB, /renderPhaseBEnemies/);
+assert.match(enemiesPhaseB, /B06\.4/);
+assert.match(enemiesPhaseB, /\/api\/admin\/space-typing\/enemies\/preview/);
+assert.match(enemiesPhaseB, /Minimum Stage/);
+assert.match(enemiesPhaseB, /minStage/);
+assert.match(enemiesPhaseB, /Admin Phase B · B06\.4 Enemy admission draft/);
+assert.match(enemiesPhaseB, /HP, Shield, Armor, Speed, Damage, AI, Spawn Weight, Skills, Projectiles, VFX, SFX, Drop Table and Enabled/);
+assert.match(enemiesPhaseB, /api\.createRevision/);
+assert.doesNotMatch(enemiesPhaseB, /api\.publish/);
+assert.match(server, /\/api\/runtime\/space-typing\/enemies/);
+assert.match(server, /\/api\/admin\/space-typing\/enemies\/preview/);
+
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
@@ -111,4 +154,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B05 revision-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.4 runtime-backed domains ready).`);
