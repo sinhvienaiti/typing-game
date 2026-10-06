@@ -16,6 +16,7 @@ export async function runWorldMusicPreview({
   contract,
   publishedPolicy,
   musicMode = "map",
+  stageNumber,
   timeoutMs = 10000,
 }) {
   const protocol = contract?.worldMusic?.previewProtocol;
@@ -24,6 +25,12 @@ export async function runWorldMusicPreview({
   }
   if (musicMode !== "map" && musicMode !== "random") {
     throw new WorldMusicPreviewError("musicMode must be map or random.");
+  }
+  if (
+    stageNumber !== undefined &&
+    (!Number.isInteger(stageNumber) || stageNumber < 1 || stageNumber > 1000)
+  ) {
+    throw new WorldMusicPreviewError("stageNumber must be an integer from 1 to 1000.");
   }
 
   const childDir = resolve(rootDir, "games/space-typing");
@@ -96,6 +103,7 @@ export async function runWorldMusicPreview({
   child.stdin.end(
     JSON.stringify({
       musicMode,
+      ...(stageNumber === undefined ? {} : { stageNumber }),
       ...(publishedPolicy === undefined ? {} : { publishedPolicy }),
     }),
   );

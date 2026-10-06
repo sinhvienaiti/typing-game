@@ -36,7 +36,9 @@ export type WorldMusicPolicyEntry = {
 export type WorldMusicPolicy = {
   configRevision: string;
   disabledTrackIds?: string[];
+  stages?: Record<string, WorldMusicPolicyEntry>;
   worlds?: Record<string, WorldMusicPolicyEntry>;
+  galaxies?: Record<string, WorldMusicPolicyEntry>;
   global?: WorldMusicPolicyEntry;
 };
 
@@ -82,7 +84,7 @@ export type SpaceTypingAdminConfig = {
   worldMusic: {
     policyRevision: string;
     assignments: Record<string, unknown>;
-    /** Additive B04.1 canonical policy. Child v1 currently supports Global + World only. */
+    /** Additive B04.2 canonical policy: Global + Galaxy + World + Stage. */
     publishedPolicy?: WorldMusicPolicy;
   };
   /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
@@ -133,6 +135,7 @@ export type WorldMusicPreview = {
   configRevision: string;
   manifestRevision: string;
   musicMode: "map" | "random";
+  stageNumber?: number;
   worlds: Array<{
     worldId: string;
     name: string;
@@ -204,6 +207,7 @@ export class SpaceTypingAdminApi {
   previewWorldMusic(input: {
     publishedPolicy?: WorldMusicPolicy;
     musicMode?: "map" | "random";
+    stageNumber?: number;
   } = {}): Promise<WorldMusicPreview> {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {
       method: "POST",

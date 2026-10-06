@@ -27,7 +27,7 @@ assert.equal(audio?.domain, "audio");
 assert.equal(audio?.status, "phase-b-ui-wired");
 assert.equal(audio?.applyBoundary, "safe-boundary");
 assert.equal(worldMusic?.domain, "worldMusic");
-assert.equal(worldMusic?.status, "phase-b-ui-wired-global-world");
+assert.equal(worldMusic?.status, "phase-b-ui-wired-all-scopes");
 assert.equal(worldMusic?.applyBoundary, "next-track-or-state");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
@@ -72,12 +72,15 @@ assert.match(audioPhaseB, /spaceTypingSettingsV1/);
 assert.match(audioPhaseB, /PRONUNCIATION_DUCK/);
 assert.match(audioPhaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /renderPhaseBWorldMusic/);
-assert.match(worldMusicPhaseB, /B04\.1 World Music Draft/);
+assert.match(worldMusicPhaseB, /B04\.2 World Music Draft/);
 assert.match(worldMusicPhaseB, /api\.previewWorldMusic/);
 assert.match(worldMusicPhaseB, /api\.createRevision/);
 assert.doesNotMatch(worldMusicPhaseB, /api\.publish/);
-assert.match(worldMusicPhaseB, /GALAXY \/ STAGE BLOCKED/);
-assert.match(worldMusicPhaseB, /WorldMusicPolicy v1 has no galaxy\/stage keys/);
+assert.doesNotMatch(worldMusicPhaseB, /GALAXY \/ STAGE BLOCKED/);
+assert.match(worldMusicPhaseB, /type Scope = "global" \| "galaxy" \| "world" \| "stage"/);
+assert.match(worldMusicPhaseB, /policy\.galaxies/);
+assert.match(worldMusicPhaseB, /policy\.stages/);
+assert.match(worldMusicPhaseB, /stageNumber/);
 assert.match(worldMusicPhaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
@@ -90,4 +93,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B04.1 revision-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B04.2 revision-backed domains ready).`);

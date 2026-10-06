@@ -132,6 +132,7 @@ const server = createServer(async (request, response) => {
         contract,
         publishedPolicy,
         musicMode: input.musicMode ?? "map",
+        stageNumber: input.stageNumber,
       });
       json(response, 200, preview);
       return;

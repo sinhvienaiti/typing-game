@@ -119,15 +119,29 @@ function validateWorldMusic(worldMusic) {
   object(worldMusic.assignments, "worldMusic.assignments");
   if (worldMusic.publishedPolicy === undefined) return;
   const policy = object(worldMusic.publishedPolicy, "worldMusic.publishedPolicy");
-  rejectUnknownKeys(policy, "worldMusic.publishedPolicy", ["configRevision", "disabledTrackIds", "worlds", "global"]);
+  rejectUnknownKeys(policy, "worldMusic.publishedPolicy", ["configRevision", "disabledTrackIds", "stages", "worlds", "galaxies", "global"]);
   string(policy.configRevision, "worldMusic.publishedPolicy.configRevision", { max: 160, pattern: /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/ });
   if (policy.disabledTrackIds !== undefined) validateTrackIds(policy.disabledTrackIds, "worldMusic.publishedPolicy.disabledTrackIds");
   if (policy.global !== undefined) validateWorldMusicEntry(policy.global, "worldMusic.publishedPolicy.global");
+  if (policy.stages !== undefined) {
+    const stages = object(policy.stages, "worldMusic.publishedPolicy.stages");
+    for (const [stageId, entry] of Object.entries(stages)) {
+      string(stageId, "worldMusic stage id", { max: 4, pattern: /^(?:[1-9]\d{0,2}|1000)$/ });
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.stages." + stageId);
+    }
+  }
   if (policy.worlds !== undefined) {
     const worlds = object(policy.worlds, "worldMusic.publishedPolicy.worlds");
     for (const [worldId, entry] of Object.entries(worlds)) {
       string(worldId, "worldMusic world id", { max: 8, pattern: /^world-(?:0[1-9]|[1-4]\d|50)$/ });
       validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.worlds." + worldId);
+    }
+  }
+  if (policy.galaxies !== undefined) {
+    const galaxies = object(policy.galaxies, "worldMusic.publishedPolicy.galaxies");
+    for (const [galaxyId, entry] of Object.entries(galaxies)) {
+      string(galaxyId, "worldMusic galaxy id", { max: 2, pattern: /^(?:[1-9]|10)$/ });
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.galaxies." + galaxyId);
     }
   }
 }

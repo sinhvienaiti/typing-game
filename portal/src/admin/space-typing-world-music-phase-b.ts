@@ -14,7 +14,7 @@ const api = new SpaceTypingAdminApi();
 
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
-type Scope = "global" | "world";
+type Scope = "global" | "galaxy" | "world" | "stage";
 type Slot = "normal" | "boss-common" | "mini" | "world" | "major";
 type PreviewStateName = keyof WorldMusicPreview["worlds"][number]["states"];
 
@@ -69,7 +69,7 @@ function cloneConfig(config: SpaceTypingAdminConfig): SpaceTypingAdminConfig {
 }
 
 function clonePolicy(policy: WorldMusicPolicy | undefined, activeRevision: string): WorldMusicPolicy {
-  return structuredClone(policy ?? { configRevision: `admin-${activeRevision}`, worlds: {} });
+  return structuredClone(policy ?? { configRevision: `admin-${activeRevision}`, stages: {}, worlds: {}, galaxies: {} });
 }
 
 function assertStableActiveRevision(loadedActiveRevision: string | null, currentActiveRevision: string): void {
@@ -81,34 +81,64 @@ function assertStableActiveRevision(loadedActiveRevision: string | null, current
   }
 }
 
-function worldEntry(policy: WorldMusicPolicy, worldId: string, create = false): WorldMusicPolicyEntry | undefined {
-  const current = policy.worlds?.[worldId];
-  if (current !== undefined || !create) return current;
-  policy.worlds ??= {};
-  const entry: WorldMusicPolicyEntry = {};
-  policy.worlds[worldId] = entry;
-  return entry;
-}
-
-function rootEntry(policy: WorldMusicPolicy, scope: Scope, worldId: string, create = false): WorldMusicPolicyEntry | undefined {
+function rootEntry(
+  policy: WorldMusicPolicy,
+  scope: Scope,
+  worldId: string,
+  galaxyId: number,
+  stageNumber: number,
+  create = false,
+): WorldMusicPolicyEntry | undefined {
   if (scope === "global") {
     if (policy.global !== undefined || !create) return policy.global;
     policy.global = {};
     return policy.global;
   }
-  return worldEntry(policy, worldId, create);
+
+  const key = scope === "world" ? worldId : String(scope === "galaxy" ? galaxyId : stageNumber);
+  const map = scope === "world" ? policy.worlds : scope === "galaxy" ? policy.galaxies : policy.stages;
+  const current = map?.[key];
+  if (current !== undefined || !create) return current;
+
+  const entry: WorldMusicPolicyEntry = {};
+  if (scope === "world") {
+    policy.worlds ??= {};
+    policy.worlds[key] = entry;
+  } else if (scope === "galaxy") {
+    policy.galaxies ??= {};
+    policy.galaxies[key] = entry;
+  } else {
+    policy.stages ??= {};
+    policy.stages[key] = entry;
+  }
+  return entry;
 }
 
-function readAssignment(policy: WorldMusicPolicy, scope: Scope, worldId: string, slot: Slot): PlaylistAssignment | undefined {
-  const root = rootEntry(policy, scope, worldId);
+function readAssignment(
+  policy: WorldMusicPolicy,
+  scope: Scope,
+  worldId: string,
+  galaxyId: number,
+  stageNumber: number,
+  slot: Slot,
+): PlaylistAssignment | undefined {
+  const root = rootEntry(policy, scope, worldId, galaxyId, stageNumber);
   if (root === undefined) return undefined;
   if (slot === "normal") return root.normal;
   if (slot === "boss-common") return root.boss?.common;
   return root.boss?.[slot];
 }
 
-function writeAssignment(policy: WorldMusicPolicy, scope: Scope, worldId: string, slot: Slot, assignment: PlaylistAssignment): void {
-  const root = rootEntry(policy, scope, worldId, true)!;
+function writeAssignment(
+  policy: WorldMusicPolicy,
+  scope: Scope,
+  worldId: string,
+  galaxyId: number,
+  stageNumber: number,
+  slot: Slot,
+  assignment: PlaylistAssignment,
+): void {
+  const root = rootEntry(policy, scope, worldId, galaxyId, stageNumber, true)!;
   if (slot === "normal") {
     root.normal = assignment;
     return;
@@ -142,7 +172,9 @@ function previewTracks(preview: WorldMusicPreview | null, policy: WorldMusicPoli
     }
   };
   collect(policy.global);
+  for (const entry of Object.values(policy.galaxies ?? {})) collect(entry);
   for (const entry of Object.values(policy.worlds ?? {})) collect(entry);
+  for (const entry of Object.values(policy.stages ?? {})) collect(entry);
   return [...tracks.entries()].map(([id, title]) => ({ id, title })).sort((a, b) => a.title.localeCompare(b.title));
 }
 
@@ -154,36 +186,40 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "Audio & Music · Canonical Policy · Phase B"),
     el("h1", undefined, "World / Stage Music"),
-    el("p", undefined, "B04.1 wires the scopes the pinned child resolver really supports today: Global and World. Save Draft creates an immutable revision; Publish applies the policy on the next track/state boundary."),
+    el("p", undefined, "B04.2 wires the full canonical hierarchy: Global → Galaxy → World → Stage → State. Save Draft creates an immutable revision; Publish remains an explicit review action."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(revisionBadge, badge("GLOBAL + WORLD LIVE", "good"), badge("GALAXY / STAGE BLOCKED", "warn"));
+  actions.append(revisionBadge, badge("GLOBAL + GALAXY + WORLD + STAGE", "good"), badge("CANONICAL PREVIEW", "info"));
   head.append(copy, actions);
   page.append(head);
 
   const runtimeStatus = notice("Loading active World Music policy and canonical child preview…", "info");
   page.append(runtimeStatus);
-  page.append(notice("Scope safety: the child WorldMusicPolicy v1 has no galaxy/stage keys. Galaxy and Stage authoring stay disabled until the child resolver, preview protocol and runtime consumer are extended together; Admin will not persist JSON that runtime silently ignores.", "warn"));
+  page.append(notice("B04.2 safety: every editable scope is persisted in the child-owned policy shape and previewed through the same canonical resolver before an immutable draft can be saved.", "info"));
 
   let loadedActiveRevision: string | null = null;
   let draftPolicy: WorldMusicPolicy = { configRevision: "loading", worlds: {} };
   let preview: WorldMusicPreview | null = null;
   let scope: Scope = "world";
   let worldId = "world-01";
+  let galaxyId = 1;
+  let stageNumber = 1;
   let slot: Slot = "normal";
 
-  const scopePanel = panel("Canonical Scope", "Only scopes represented by WorldMusicPolicy v1 can be saved");
+  const scopePanel = panel("Canonical Scope", "Global → Galaxy → World → Stage; State is selected in the assignment tabs");
   const scopeBody = el("div", "st-admin-panel-pad");
   const scopeSeg = el("div", "st-admin-seg");
   const globalButton = btn("Global");
+  const galaxyButton = btn("Galaxy");
   const worldButton = btn("World");
-  const galaxyButton = btn("Galaxy · blocked");
-  const stageButton = btn("Stage · blocked");
-  galaxyButton.disabled = true;
-  stageButton.disabled = true;
-  galaxyButton.title = "Blocked until the child resolver consumes galaxy policy.";
-  stageButton.title = "Blocked until the child resolver consumes stage policy.";
-  scopeSeg.append(globalButton, worldButton, galaxyButton, stageButton);
+  const stageButton = btn("Stage");
+  scopeSeg.append(globalButton, galaxyButton, worldButton, stageButton);
+
+  const galaxySelect = el("select", "st-admin-select") as HTMLSelectElement;
+  galaxySelect.setAttribute("aria-label", "World Music Galaxy scope");
+  for (let index = 1; index <= 10; index += 1) {
+    galaxySelect.append(new Option(`Galaxy ${String(index).padStart(2, "0")}`, String(index)));
+  }
 
   const worldSelect = el("select", "st-admin-select") as HTMLSelectElement;
   worldSelect.setAttribute("aria-label", "World Music World scope");
@@ -191,7 +227,16 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
     const id = `world-${String(index).padStart(2, "0")}`;
     worldSelect.append(new Option(`World ${String(index).padStart(2, "0")}`, id));
   }
-  scopeBody.append(scopeSeg, worldSelect);
+
+  const stageInput = el("input", "st-admin-select") as HTMLInputElement;
+  stageInput.type = "number";
+  stageInput.min = "1";
+  stageInput.max = "1000";
+  stageInput.step = "1";
+  stageInput.value = "1";
+  stageInput.setAttribute("aria-label", "World Music Stage scope");
+
+  scopeBody.append(scopeSeg, galaxySelect, worldSelect, stageInput);
   scopePanel.append(scopeBody);
 
   const editor = panel("Assignment Editor", "Canonical multi-file playlist · inherit or replace");
@@ -226,14 +271,39 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   layout.append(scopePanel, editor, effective);
   page.append(layout);
 
+  const syncWorldFromGalaxy = (): void => {
+    const representative = preview?.worlds.find((entry) => entry.galaxy === galaxyId);
+    const fallbackWorld = Math.min(50, (galaxyId - 1) * 5 + 1);
+    worldId = representative?.worldId ?? `world-${String(fallbackWorld).padStart(2, "0")}`;
+    worldSelect.value = worldId;
+  };
+
+  const syncWorldFromStage = (): void => {
+    const owner = preview?.worlds.find((entry) => stageNumber >= entry.stageRange[0] && stageNumber <= entry.stageRange[1]);
+    const fallbackWorld = Math.min(50, Math.max(1, Math.ceil(stageNumber / 20)));
+    worldId = owner?.worldId ?? `world-${String(fallbackWorld).padStart(2, "0")}`;
+    galaxyId = owner?.galaxy ?? Math.min(10, Math.max(1, Math.ceil(fallbackWorld / 5)));
+    worldSelect.value = worldId;
+    galaxySelect.value = String(galaxyId);
+  };
+
   const updateScopeState = (): void => {
-    globalButton.classList.toggle("active", scope === "global");
-    worldButton.classList.toggle("active", scope === "world");
-    globalButton.setAttribute("aria-pressed", String(scope === "global"));
-    worldButton.setAttribute("aria-pressed", String(scope === "world"));
-    worldSelect.disabled = scope === "global";
+    for (const [value, control] of [
+      ["global", globalButton],
+      ["galaxy", galaxyButton],
+      ["world", worldButton],
+      ["stage", stageButton],
+    ] as const) {
+      control.classList.toggle("active", scope === value);
+      control.setAttribute("aria-pressed", String(scope === value));
+    }
+    galaxySelect.disabled = scope !== "galaxy";
+    worldSelect.disabled = scope !== "world";
+    stageInput.disabled = scope !== "stage";
     inheritButton.disabled = scope === "global";
-    inheritButton.title = scope === "global" ? "Global has no parent scope to inherit from." : "Use generated/global fallback.";
+    inheritButton.title = scope === "global"
+      ? "Global has no parent scope to inherit from."
+      : "Inherit from the next broader canonical scope.";
   };
 
   const renderEffective = (): void => {
@@ -247,7 +317,14 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       effectiveBody.append(notice("No world preview returned by child resolver.", "bad"));
       return;
     }
-    effectiveBody.append(el("p", undefined, `${scope === "global" ? "Global policy representative preview" : world.name} · ${SLOT_LABELS[slot]}`));
+    const scopeLabel = scope === "global"
+      ? "Global policy representative preview"
+      : scope === "galaxy"
+        ? `Galaxy ${String(galaxyId).padStart(2, "0")} · ${world.name} representative`
+        : scope === "stage"
+          ? `Stage ${String(stageNumber).padStart(3, "0")} · ${world.name}`
+          : world.name;
+    effectiveBody.append(el("p", undefined, `${scopeLabel} · ${SLOT_LABELS[slot]}`));
     for (const stateName of selectedPreviewStates(slot)) {
       const statePreview = world.states[stateName];
       const row = el("div", "stx-effective-source");
@@ -277,7 +354,7 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       control.classList.toggle("active", slot === value);
       control.setAttribute("aria-pressed", String(slot === value));
     }
-    let assignment = readAssignment(draftPolicy, scope, worldId, slot);
+    let assignment = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
     if (scope === "global" && assignment?.kind !== "replace") assignment = undefined;
     const kind = assignment?.kind ?? (scope === "global" ? "replace" : "inherit");
     inheritButton.classList.toggle("active", kind === "inherit");
@@ -302,10 +379,10 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       const copy = el("span");
       copy.append(el("strong", undefined, option.title), el("small", undefined, option.id));
       input.addEventListener("change", () => {
-        const current = readAssignment(draftPolicy, scope, worldId, slot);
+        const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
         const ids = new Set(current?.kind === "replace" ? current.trackIds : []);
         if (input.checked) ids.add(option.id); else ids.delete(option.id);
-        writeAssignment(draftPolicy, scope, worldId, slot, {
+        writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, {
           kind: "replace",
           trackIds: [...ids],
           selectionMode: selectionMode.value as PlaylistSelectionMode,
@@ -321,24 +398,57 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   const validateDraft = async (): Promise<void> => {
     runtimeStatus.className = "st-admin-info-banner info";
     runtimeStatus.textContent = "Validating draft through child canonical World Music resolver…";
-    preview = await api.previewWorldMusic({ publishedPolicy: draftPolicy, musicMode: "map" });
+    preview = await api.previewWorldMusic({
+      publishedPolicy: draftPolicy,
+      musicMode: "map",
+      ...(scope === "stage" ? { stageNumber } : {}),
+    });
+    if (scope === "stage") syncWorldFromStage();
+    if (scope === "galaxy") syncWorldFromGalaxy();
     runtimeStatus.className = "st-admin-info-banner good";
     runtimeStatus.textContent = `Canonical preview OK · ${preview.configRevision} · ${preview.worlds.length} worlds · runtime unchanged`;
     syncEditor();
   };
 
-  globalButton.addEventListener("click", () => { scope = "global"; syncEditor(); });
-  worldButton.addEventListener("click", () => { scope = "world"; syncEditor(); });
-  worldSelect.addEventListener("change", () => { worldId = worldSelect.value; syncEditor(); });
+  const refreshScopePreview = (): void => {
+    void validateDraft().catch((error: unknown) => {
+      runtimeStatus.className = "st-admin-info-banner bad";
+      runtimeStatus.textContent = `Preview rejected: ${error instanceof Error ? error.message : String(error)}`;
+    });
+  };
+  globalButton.addEventListener("click", () => { scope = "global"; syncEditor(); refreshScopePreview(); });
+  galaxyButton.addEventListener("click", () => { scope = "galaxy"; syncWorldFromGalaxy(); syncEditor(); refreshScopePreview(); });
+  worldButton.addEventListener("click", () => { scope = "world"; syncEditor(); refreshScopePreview(); });
+  stageButton.addEventListener("click", () => { scope = "stage"; syncWorldFromStage(); syncEditor(); refreshScopePreview(); });
+  galaxySelect.addEventListener("change", () => {
+    galaxyId = Number.parseInt(galaxySelect.value, 10);
+    syncWorldFromGalaxy();
+    syncEditor();
+  });
+  worldSelect.addEventListener("change", () => {
+    worldId = worldSelect.value;
+    const selectedWorld = preview?.worlds.find((entry) => entry.worldId === worldId);
+    galaxyId = selectedWorld?.galaxy ?? Math.min(10, Math.max(1, Math.ceil(Number.parseInt(worldId.slice(6), 10) / 5)));
+    galaxySelect.value = String(galaxyId);
+    syncEditor();
+  });
+  stageInput.addEventListener("change", () => {
+    const next = Number.parseInt(stageInput.value, 10);
+    stageNumber = Number.isInteger(next) ? Math.min(1000, Math.max(1, next)) : 1;
+    stageInput.value = String(stageNumber);
+    syncWorldFromStage();
+    syncEditor();
+    refreshScopePreview();
+  });
   for (const [value, control] of slotButtons) control.addEventListener("click", () => { slot = value; syncEditor(); });
   inheritButton.addEventListener("click", () => {
     if (scope === "global") return;
-    writeAssignment(draftPolicy, scope, worldId, slot, { kind: "inherit" });
+    writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, { kind: "inherit" });
     syncEditor();
   });
   replaceButton.addEventListener("click", () => {
-    const current = readAssignment(draftPolicy, scope, worldId, slot);
-    writeAssignment(draftPolicy, scope, worldId, slot, {
+    const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
+    writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, {
       kind: "replace",
       trackIds: current?.kind === "replace" ? [...current.trackIds] : [],
       selectionMode: current?.kind === "replace" ? current.selectionMode ?? "shuffle-bag" : "shuffle-bag",
@@ -346,13 +456,13 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
     syncEditor();
   });
   selectionMode.addEventListener("change", () => {
-    const current = readAssignment(draftPolicy, scope, worldId, slot);
+    const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
     if (current?.kind !== "replace") return;
-    writeAssignment(draftPolicy, scope, worldId, slot, { ...current, selectionMode: selectionMode.value as PlaylistSelectionMode });
+    writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, { ...current, selectionMode: selectionMode.value as PlaylistSelectionMode });
   });
 
   const saveBar = el("div", "st-admin-sticky-save");
-  const saveStatus = el("span", undefined, "Save Draft validates and stores Global/World policy only · Publish remains explicit");
+  const saveStatus = el("span", undefined, "Save Draft validates Global/Galaxy/World/Stage policy · Publish remains explicit");
   const validateButton = btn("Validate Draft", () => void validateDraft().catch((error: unknown) => {
     runtimeStatus.className = "st-admin-info-banner bad";
     runtimeStatus.textContent = `Preview rejected: ${error instanceof Error ? error.message : String(error)}`;
@@ -368,13 +478,13 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       draftPolicy.configRevision = `admin-${payload.active.revision}-${Date.now().toString(36)}`;
       config.worldMusic = {
         ...config.worldMusic,
-        policyRevision: "phase-b-world-music-v1",
+        policyRevision: "phase-b-world-music-b04.2",
         publishedPolicy: structuredClone(draftPolicy),
       };
       const revision = await api.createRevision({
         baseRevision: payload.active.revision,
         config,
-        message: "Admin Phase B · World Music Global/World draft",
+        message: "Admin Phase B · World Music Global/Galaxy/World/Stage draft",
       });
       saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
       runtimeStatus.className = "st-admin-info-banner good";
@@ -388,7 +498,7 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       saveButton.disabled = false;
     }
   })(), "st-admin-btn primary");
-  saveBar.append(el("strong", undefined, "B04.1 World Music Draft"), saveStatus, el("div", "grow"), btn("Discard", () => navigate(`${BASE}/world-music`)), validateButton, saveButton);
+  saveBar.append(el("strong", undefined, "B04.2 World Music Draft"), saveStatus, el("div", "grow"), btn("Discard", () => navigate(`${BASE}/world-music`)), validateButton, saveButton);
   page.append(saveBar);
 
   void api.getState().then(async (payload) => {
@@ -398,7 +508,7 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
     preview = await api.previewWorldMusic({ publishedPolicy: payload.active.config.worldMusic.publishedPolicy, musicMode: "map" });
     runtimeStatus.className = "st-admin-info-banner good";
     runtimeStatus.textContent = payload.active.config.worldMusic.publishedPolicy === undefined
-      ? "Loaded generated/legacy World Music fallback. First B04.1 draft will add an additive publishedPolicy namespace."
+      ? "Loaded generated/legacy World Music fallback. First B04.2 draft can author Global/Galaxy/World/Stage scopes."
       : `Loaded active published World Music policy · ${payload.active.config.worldMusic.publishedPolicy.configRevision}`;
     syncEditor();
   }).catch((error: unknown) => {

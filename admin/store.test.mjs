@@ -248,7 +248,7 @@ test("B03 audio validation rejects out-of-range gain and category defaults", asy
 });
 
 
-test("B04.1 World Music canonical Global/World draft stays isolated until publish", async (t) => {
+test("B04.2 World Music canonical all-scope draft stays isolated until publish", async (t) => {
   const { store, rootDir } = await fixture();
   t.after(() => rm(rootDir, { recursive: true, force: true }));
   const active = await store.getActiveRevision();
@@ -256,7 +256,9 @@ test("B04.1 World Music canonical Global/World draft stays isolated until publis
   config.worldMusic.publishedPolicy = {
     configRevision: "admin-world-music-test-v1",
     global: { normal: { kind: "replace", trackIds: ["signal-in-the-void"], selectionMode: "ordered" } },
-    worlds: { "world-01": { boss: { world: { kind: "replace", trackIds: ["world-01-boss-battle-theme-a"] } } } },
+    galaxies: { "2": { normal: { kind: "replace", trackIds: ["signal-in-the-void"] } } },
+    worlds: { "world-06": { boss: { world: { kind: "replace", trackIds: ["world-01-boss-battle-theme-a"] } } } },
+    stages: { "101": { normal: { kind: "replace", trackIds: ["signal-in-the-void"], selectionMode: "ordered" } } },
   };
   const draft = await store.createRevision({ baseRevision: active.revision, config, message: "B04.1 world music draft" });
   assert.equal((await store.getRuntimeConfig()).worldMusic.publishedPolicy, undefined);
@@ -264,21 +266,27 @@ test("B04.1 World Music canonical Global/World draft stays isolated until publis
   const runtime = await store.getRuntimeConfig();
   assert.equal(runtime.worldMusic.publishedPolicy.configRevision, "admin-world-music-test-v1");
   assert.deepEqual(runtime.worldMusic.publishedPolicy.global.normal.trackIds, ["signal-in-the-void"]);
+  assert.deepEqual(runtime.worldMusic.publishedPolicy.galaxies["2"].normal.trackIds, ["signal-in-the-void"]);
+  assert.deepEqual(runtime.worldMusic.publishedPolicy.stages["101"].normal.trackIds, ["signal-in-the-void"]);
 });
 
-test("B04.1 rejects unsupported Stage/Galaxy policy and unsafe replacement playlists", async (t) => {
+test("B04.2 rejects malformed scope ids and unsafe replacement playlists", async (t) => {
   const { store, rootDir } = await fixture();
   t.after(() => rm(rootDir, { recursive: true, force: true }));
   const active = await store.getActiveRevision();
-  const unsupportedStage = structuredClone(active.config);
-  unsupportedStage.worldMusic.publishedPolicy = { configRevision: "bad-stage", stages: { "1": {} } };
-  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: unsupportedStage }), AdminValidationError);
-  const unsupportedGalaxy = structuredClone(active.config);
-  unsupportedGalaxy.worldMusic.publishedPolicy = { configRevision: "bad-galaxy", galaxies: { "1": {} } };
-  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: unsupportedGalaxy }), AdminValidationError);
+
+  const badStage = structuredClone(active.config);
+  badStage.worldMusic.publishedPolicy = { configRevision: "bad-stage", stages: { "0": {} } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badStage }), AdminValidationError);
+
+  const badGalaxy = structuredClone(active.config);
+  badGalaxy.worldMusic.publishedPolicy = { configRevision: "bad-galaxy", galaxies: { "11": {} } };
+  await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badGalaxy }), AdminValidationError);
+
   const emptyReplace = structuredClone(active.config);
   emptyReplace.worldMusic.publishedPolicy = { configRevision: "bad-empty", worlds: { "world-01": { normal: { kind: "replace", trackIds: [] } } } };
   await assert.rejects(store.createRevision({ baseRevision: active.revision, config: emptyReplace }), AdminValidationError);
+
   const badWorld = structuredClone(active.config);
   badWorld.worldMusic.publishedPolicy = { configRevision: "bad-world", worlds: { "world-51": { normal: { kind: "inherit" } } } };
   await assert.rejects(store.createRevision({ baseRevision: active.revision, config: badWorld }), AdminValidationError);
