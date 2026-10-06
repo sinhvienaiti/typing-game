@@ -12,6 +12,7 @@ on:
       - "portal/vite.config.ts"
       - "games/space-typing"
       - "scripts/validate-space-admin-contract.mjs"
+      - "scripts/validate-space-admin-ui.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -33,6 +34,9 @@ jobs:
 
       - name: Validate Admin contract snapshot
         run: node scripts/validate-space-admin-contract.mjs
+
+      - name: Validate complete Admin UI scope
+        run: node scripts/validate-space-admin-ui.mjs
 
       - name: Validate Admin service syntax
         run: |
