@@ -26,6 +26,12 @@ export function createDefaultSpaceTypingConfig(contract) {
       policyRevision: "b2-three-world-pilot-v1",
       assignments: {}
     },
+    content: {
+      ships: {
+        configRevision: "ships-admin-v1",
+        ships: {}
+      }
+    },
     system: {
       gameDefaults: {
         defaultMode: "campaign",
