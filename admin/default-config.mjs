@@ -38,6 +38,10 @@ export function createDefaultSpaceTypingConfig(contract) {
       skills: {
         configRevision: "skills-admin-v1",
         skills: {}
+      },
+      enemies: {
+        configRevision: "enemies-admin-v1",
+        enemies: {}
       }
     },
     system: {
