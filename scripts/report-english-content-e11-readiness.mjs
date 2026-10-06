@@ -6,6 +6,7 @@ import { englishContentRecordId, englishContentReviewSourceDigest } from "./engl
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const targetDoc=await readJson(path.join(root,"content","english","targets","long-term.json"));
+const batchManifest=await readJson(path.join(root,"content","english","batches","manifest.json"));
 const errors=[];
 const rows=[];
 const seenTargets=new Set();
@@ -20,6 +21,45 @@ function selectCollection(doc,source) {
   if (source.filterField===undefined) return values;
   const wanted=new Set(source.filterValues??[]);
   return values.filter(item=>wanted.has(String(item?.[source.filterField])));
+}
+function sourceKey(source) {
+  return [
+    source.path,
+    source.collection,
+    source.filterField??"",
+    [...(source.filterValues??[])].sort((a,b)=>String(a).localeCompare(String(b),"en")).join("\u0000"),
+  ].join("\u0001");
+}
+function e04ManifestSources(targetId) {
+  const sources=[];
+  for (const batch of batchManifest.batches??[]) {
+    if (batch?.phase!=="E04"||batch?.category!=="phrases") continue;
+    for (const set of batch.recordSets??[]) {
+      const setId=String(set?.id??"");
+      const relative=String(set?.path??"");
+      if (!relative) continue;
+      if (targetId==="collocations"&&(setId==="collocations"||setId==="scale-collocations")) {
+        sources.push({path:relative,collection:"records"});
+      } else if (targetId==="verb-patterns"&&(setId==="verb-patterns"||setId==="scale-verb-patterns")) {
+        sources.push({path:relative,collection:"records"});
+      } else if (targetId==="phrasal-verbs"&&(setId==="phrases"||setId==="scale-phrases")) {
+        sources.push({path:relative,collection:"records",filterField:"type",filterValues:["phrasal-verb"]});
+      } else if (targetId==="idioms-chunks"&&(setId==="phrases"||setId==="scale-phrases")) {
+        sources.push({path:relative,collection:"records",filterField:"type",filterValues:["idiom","chunk"]});
+      }
+    }
+  }
+  return sources;
+}
+function sourcesForTarget(target) {
+  const merged=[...(target.sources??[]),...e04ManifestSources(target.id)];
+  const seen=new Set();
+  return merged.filter(source=>{
+    const key=sourceKey(source);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 function pendingChecks(record) {
   return Object.entries(record?.quality?.checks??{})
@@ -66,7 +106,8 @@ for (const target of targetDoc.targets??[]) {
   if (target.maximum!==undefined&&target.maximum<target.minimum) errors.push(target.id+": maximum is below minimum");
   const unique=new Set();
   const sourceCounts=[];
-  for (const source of target.sources??[]) {
+  const targetSources=sourcesForTarget(target);
+  for (const source of targetSources) {
     let doc;
     try { doc=await readJson(path.join(root,source.path)); }
     catch (error) { errors.push(target.id+": "+error.message); continue; }
