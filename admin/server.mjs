@@ -7,6 +7,7 @@ import { SpaceTypingRevisionStore } from "./space-typing-store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
 import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
+import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -70,6 +71,20 @@ function authorized(request) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
+
+    // Read-only runtime bridge. This intentionally exposes only the current
+    // active Ships policy and never accepts writes. Gameplay materializes it
+    // once per page/game session, matching the contract's new-session boundary.
+    if (
+      request.method === "GET" &&
+      url.pathname === "/api/runtime/space-typing/ships"
+    ) {
+      const state = await store.getState();
+      const config = await store.getRuntimeConfig();
+      json(response, 200, createShipRuntimeEnvelope(state, config));
+      return;
+    }
+
     if (!url.pathname.startsWith("/api/admin/")) {
       json(response, 404, { error: "not-found" });
       return;

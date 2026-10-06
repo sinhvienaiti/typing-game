@@ -59,6 +59,8 @@ jobs:
           node --check admin/ship-policy.test.mjs
           node --check admin/ship-registry-preview.mjs
           node --check admin/ship-registry-preview.test.mjs
+          node --check admin/ship-runtime.mjs
+          node --check admin/ship-runtime.test.mjs
           node --check admin/store.test.mjs
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-audio.mjs
@@ -68,6 +70,9 @@ jobs:
 
       - name: Test B06.1 Ships server validation
         run: node --test admin/ship-policy.test.mjs
+
+      - name: Test B06.1 Ships runtime envelope
+        run: node --test admin/ship-runtime.test.mjs
 
       - name: Install focused dependencies
         run: |
