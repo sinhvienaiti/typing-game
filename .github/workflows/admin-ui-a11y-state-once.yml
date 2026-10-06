@@ -1,0 +1,120 @@
+name: Space Admin UI A11y State Once
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+      - name: Apply accessibility and state fixes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Extended screens: accessible sliders/search and revision action state.
+          p = Path('portal/src/admin/space-typing-extended.ts')
+          s = p.read_text()
+          old = '  input.value = String(value);\n  input.addEventListener("input", () => { valueLabel.textContent = `${input.value}${suffix}`; });'
+          new = '  input.value = String(value);\n  input.setAttribute("aria-label", label);\n  input.addEventListener("input", () => { valueLabel.textContent = `${input.value}${suffix}`; });'
+          if old not in s:
+              raise SystemExit('extended range target not found')
+          s = s.replace(old, new, 1)
+          old = 'const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = `Search ${title.toLowerCase()}…`; list.append(search);'
+          new = 'const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = `Search ${title.toLowerCase()}…`; search.setAttribute("aria-label", `Search ${title}`); list.append(search);'
+          if old not in s:
+              raise SystemExit('registry search target not found')
+          s = s.replace(old, new)
+          old = 'const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = "Search content ID, word, topic…"; filters.prepend(search); page.append(filters);'
+          new = 'const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = "Search content ID, word, topic…"; search.setAttribute("aria-label", "Search typing content"); filters.prepend(search); page.append(filters);'
+          if old in s:
+              s = s.replace(old, new)
+
+          old = 'detail.append(diff, el("div", "st-admin-page-actions")); const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!; actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger"), btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary")); page.append(editorShell(list, detail)); return page;'
+          new = '''detail.append(diff, el("div", "st-admin-page-actions"));
+  const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!;
+  const selectedRevision = revisions.find((row) => row[0] === uiState.selectedRevision);
+  const selectedStatus = selectedRevision?.[1] ?? "Draft";
+  const rollback = btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger");
+  rollback.disabled = selectedStatus === "Draft" || uiState.selectedRevision === "r127";
+  rollback.title = rollback.disabled ? "Select an older published revision to preview rollback." : "Review rollback impact";
+  const publish = btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary");
+  publish.disabled = selectedStatus !== "Draft";
+  publish.title = publish.disabled ? "Only draft revisions can be published." : "Review and publish draft";
+  actions.append(btn("Clone Draft"), btn("Validate"), rollback, publish);
+  page.append(editorShell(list, detail)); return page;'''
+          if old not in s:
+              raise SystemExit('history action target not found')
+          s = s.replace(old, new)
+          p.write_text(s)
+
+          # Core screens: accessible filters and segmented time range.
+          p = Path('portal/src/admin/space-typing.ts')
+          s = p.read_text()
+          old = '''      const control = button(label, () => {
+        for (const child of Array.from(seg.children)) child.classList.remove("active");
+        control.classList.add("active");
+      }, index === 0 ? "active" : "");
+      seg.append(control);'''
+          new = '''      const control = button(label, () => {
+        for (const child of Array.from(seg.children)) {
+          child.classList.remove("active");
+          child.setAttribute("aria-pressed", "false");
+        }
+        control.classList.add("active");
+        control.setAttribute("aria-pressed", "true");
+      }, index === 0 ? "active" : "");
+      control.setAttribute("aria-pressed", String(index === 0));
+      seg.append(control);'''
+          if old not in s:
+              raise SystemExit('time filters target not found')
+          s = s.replace(old, new)
+          s = s.replace('search.placeholder = "Search track ID, title, filename…";', 'search.placeholder = "Search track ID, title, filename…";\n    search.setAttribute("aria-label", "Search music library");')
+          s = s.replace('const type = element("select", "st-admin-select");\n    type.append', 'const type = element("select", "st-admin-select");\n    type.setAttribute("aria-label", "Filter music by type");\n    type.append')
+          s = s.replace('const status = element("select", "st-admin-select");\n    status.append', 'const status = element("select", "st-admin-select");\n    status.setAttribute("aria-label", "Filter music by status");\n    status.append')
+          p.write_text(s)
+
+          # World Music segmented controls and track weights.
+          p = Path('portal/src/admin/space-typing-world-music-v2.ts')
+          s = p.read_text()
+          old = 'for (const [value, label] of scopes) seg.append(btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : ""));'
+          new = '''for (const [value, label] of scopes) {
+    const control = btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : "");
+    control.setAttribute("aria-pressed", String(state.scope === value));
+    seg.append(control);
+  }'''
+          if old not in s:
+              raise SystemExit('World Music scope target not found')
+          s = s.replace(old, new)
+          old = 'for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) tabs.append(btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : ""));'
+          new = '''for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) {
+    const control = btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : "");
+    control.setAttribute("aria-pressed", String(state.role === role));
+    tabs.append(control);
+  }'''
+          if old not in s:
+              raise SystemExit('World Music role target not found')
+          s = s.replace(old, new)
+          s = s.replace('weight.max = "100";\n    row.append', 'weight.max = "100";\n    weight.setAttribute("aria-label", `${title} playlist weight`);\n    row.append')
+          s = s.replace('if (s === 20) stageBtn.title = "Boss stage";', 'stageBtn.setAttribute("aria-pressed", String(state.stages.has(stageNumber)));\n          if (s === 20) stageBtn.title = "Boss stage";')
+          p.write_text(s)
+          PY
+      - name: Remove one-shot workflow
+        run: rm .github/workflows/admin-ui-a11y-state-once.yml
+      - name: Commit fixes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "fix(admin-ui): complete accessibility names and revision action states"
+          git push origin HEAD:feat/space-typing-admin-uiux
