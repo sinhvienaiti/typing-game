@@ -89,7 +89,7 @@ function tree(): HTMLElement {
     for (let wOffset = 1; wOffset <= 5; wOffset++) {
       const world = (g - 1) * 5 + wOffset;
       const worldRow = el("div", "stx-music-world-block");
-      worldRow.append(btn(`World ${String(world).padStart(2, "0")}`, () => { state.galaxy = g; state.world = world; state.scope = "world"; state.stages = new Set([1]); currentNavigate(`${BASE}/world-music`); }, `stx-music-world ${world === state.world ? "active" : ""}`));
+      worldRow.append(btn(`World ${String(world).padStart(2, "0")}`, () => { state.galaxy = g; state.world = world; state.scope = "world"; state.stages = new Set([(world - 1) * 20 + 1]); currentNavigate(`${BASE}/world-music`); }, `stx-music-world ${world === state.world ? "active" : ""}`));
       if (world === state.world) {
         const stages = el("div", "stx-music-stage-list");
         for (let s = 1; s <= 20; s++) {
