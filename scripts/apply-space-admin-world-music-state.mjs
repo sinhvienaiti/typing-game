@@ -1,5 +1,6 @@
 import fs from "node:fs";
 
+const BASE = "${BASE}";
 const uiFile = "portal/src/admin/space-typing-world-music-v2.ts";
 let ui = fs.readFileSync(uiFile, "utf8");
 
