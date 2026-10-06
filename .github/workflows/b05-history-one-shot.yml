@@ -1,0 +1,60 @@
+name: B05 History Publish One Shot
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - ".github/workflows/b05-history-one-shot.yml"
+      - "scripts/b05-history-patch.py"
+      - "portal/src/admin/space-typing-history-phase-b.ts"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+          submodules: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Apply B05 patch
+        run: python scripts/b05-history-patch.py
+
+      - name: Install focused dependencies
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm --dir portal install --no-frozen-lockfile
+
+      - name: Validate B05
+        run: |
+          node scripts/validate-space-admin-contract.mjs
+          node scripts/validate-space-admin-ui.mjs
+          node scripts/validate-space-admin-phase-b.mjs
+          node --check admin/store.mjs
+          node --check admin/server.mjs
+          node --test admin/store.test.mjs
+          pnpm build:portal
+
+      - name: Commit verified B05 and remove one-shot helpers
+        run: |
+          git rm .github/workflows/b05-history-one-shot.yml scripts/b05-history-patch.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add admin/store.mjs admin/store.test.mjs admin/server.mjs admin/space-typing-phase-b-map.v1.json \
+            portal/src/admin/api.ts portal/src/admin/space-typing-phase-b.ts portal/src/admin/space-typing-history-phase-b.ts \
+            portal/src/admin/SPACE_TYPING_PHASE_B_MAPPING.md scripts/validate-space-admin-phase-b.mjs
+          git commit -m "feat(admin): wire B05 history publish workflow"
+          git push origin HEAD:feat/space-typing-admin-uiux
