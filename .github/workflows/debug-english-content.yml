@@ -32,13 +32,39 @@ jobs:
           from pathlib import Path
           path=Path('scripts/apply-english-e04-focused-scale-24.py')
           text=path.read_text(encoding='utf-8')
-          old='("exercise discretion","verb + noun","hành xử thận trọng và có quyền cân nhắc","C1"),'
-          new='("maintain impartiality","verb + noun","duy trì sự vô tư và khách quan khi đánh giá","C1"),'
-          if old in text:
-              text=text.replace(old,new,1)
-              path.write_text(text,encoding='utf-8')
-          elif new not in text:
-              raise SystemExit('scale-24 reviewed seed drift: replacement target missing')
+          replacements=[
+              ('("exercise discretion","verb + noun","hành xử thận trọng và có quyền cân nhắc","C1"),','("maintain impartiality","verb + noun","duy trì sự vô tư và khách quan khi đánh giá","C1"),'),
+              ('("brush up on","ôn lại hoặc cải thiện một kỹ năng/kiến thức đã học","B2","transitive","inseparable","Dùng với đối tượng sau on: brush up on your English."),','("batten down","cố định hoặc bảo vệ chắc chắn để chuẩn bị đối phó khó khăn","C1","transitive","separable","Có thể dùng với vật cần gia cố; ví dụ batten the hatches down."),'),
+              ('("clamp down on","siết chặt kiểm soát hoặc trấn áp một hoạt động","C1","transitive","inseparable","Đối tượng đứng sau on; không tách cụm."),','("blot out","che khuất hoàn toàn hoặc xóa khỏi ký ức hay tầm nhìn","C1","transitive","separable","Có thể nói blot the light out hoặc blot out a memory."),'),
+              ('("iron out","giải quyết các vấn đề nhỏ hoặc bất đồng còn tồn tại","B2","transitive","separable","Có thể nói iron the problems out hoặc iron out the problems."),','("bottle up","kìm nén cảm xúc thay vì bộc lộ hoặc xử lý chúng","B2","transitive","separable","Có thể nói bottle your feelings up."),'),
+              ('("phase in","đưa vào áp dụng dần dần","B2","transitive","separable","Thường dùng cho chính sách, hệ thống hoặc thay đổi mới."),','("carve out","tạo dựng một vị trí, vai trò hoặc cơ hội riêng bằng nỗ lực","C1","transitive","separable","Thường dùng với niche, role, career hoặc time."),'),
+              ('("phase out","loại bỏ dần dần","B2","transitive","separable","Thường dùng cho sản phẩm, quy định, công nghệ hoặc trợ cấp."),','("chime in","tham gia vào cuộc trò chuyện bằng một ý kiến hoặc nhận xét","B2","intransitive","inseparable","Có thể theo sau bởi with khi nêu ý kiến được thêm vào."),'),
+              ('("scale back","giảm quy mô, mức độ hoặc phạm vi","B2","transitive","separable","Có thể tách khi tân ngữ là danh từ hoặc đại từ."),','("crop up","xuất hiện bất ngờ, thường là một vấn đề hoặc tình huống mới","B2","intransitive","inseparable","Thường dùng cho problems, questions hoặc issues."),'),
+              ('("single out","chọn riêng một người/vật để chú ý, khen hoặc phê bình","B2","transitive","separable","Đại từ thường đứng giữa: single him out."),','("dole out","phân phát hoặc chia thứ gì thành từng phần nhỏ","B2","transitive","separable","Có thể nói dole the portions out hoặc dole out the portions."),'),
+              ('("step down","từ chức hoặc rời vị trí trách nhiệm","B2","intransitive","inseparable","Không có tân ngữ trực tiếp trong nghĩa từ chức."),','("fizzle out","yếu dần rồi chấm dứt mà không đạt kết quả đáng kể","C1","intransitive","inseparable","Thường dùng cho plans, protests, relationships hoặc efforts."),'),
+              ('("step up","tăng cường nỗ lực hoặc chủ động đảm nhận vai trò lớn hơn","B2","both","separable","Có thể step up efforts hoặc đơn giản step up."),','("hammer out","thảo luận hoặc thương lượng kỹ để đi đến thỏa thuận hay giải pháp","C1","transitive","separable","Có thể nói hammer an agreement out hoặc hammer out an agreement."),'),
+              ('("zero in on","tập trung chính xác vào một mục tiêu hoặc vấn đề","C1","transitive","inseparable","Đối tượng đứng sau on."),','("pare down","cắt giảm để chỉ giữ lại phần cần thiết hoặc cốt lõi","C1","transitive","separable","Có thể nói pare the list down hoặc pare down the list."),'),
+              ('("branch out","mở rộng sang lĩnh vực hoặc hoạt động mới","B2","intransitive","inseparable","Có thể theo sau bởi into khi nêu lĩnh vực mới."),','("pore over","đọc hoặc xem xét thứ gì rất kỹ và trong thời gian dài","C1","transitive","inseparable","Đối tượng đứng sau over; lưu ý pore khác pour."),'),
+              ('("buckle down","bắt đầu làm việc nghiêm túc và tập trung","B2","intransitive","inseparable","Thường đi với to + noun/gerund: buckle down to work."),','("reel off","nói, đọc hoặc liệt kê nhiều thứ rất nhanh và trôi chảy","C1","transitive","separable","Có thể nói reel the figures off hoặc reel off the figures."),'),
+              ('("carry over","tiếp tục ảnh hưởng hoặc chuyển sang giai đoạn khác","B2","both","both","Có thể dùng nội động hoặc với tân ngữ: carry unused leave over."),','("shake off","thoát khỏi hoặc loại bỏ một ảnh hưởng, cảm giác hay người bám theo","B2","transitive","separable","Có thể nói shake the feeling off hoặc shake off the feeling."),'),
+              ('("fall through","không thành công hoặc không diễn ra như dự định","B2","intransitive","inseparable","Thường dùng cho kế hoạch, thỏa thuận hoặc giao dịch."),','("trot out","đưa ra lại một lý do, ý tưởng hoặc lập luận quen thuộc, thường thiếu thuyết phục","C1","transitive","separable","Có thể nói trot the same excuse out hoặc trot out the same excuse."),'),
+              ('("for the time being","trong thời gian hiện tại, cho đến khi tình hình thay đổi","B2"),','("for present purposes","cho mục đích đang được xem xét trong ngữ cảnh hiện tại","C1"),'),
+              ('("at short notice","với rất ít thời gian báo trước hoặc chuẩn bị","B2"),','("from a practical standpoint","xét từ góc độ thực tế và khả năng áp dụng","C1"),'),
+              ('("in due course","vào thời điểm thích hợp sau khi quá trình cần thiết diễn ra","C1"),','("barring unforeseen circumstances","nếu không có tình huống bất ngờ nào xảy ra","C1"),'),
+              ('("as a last resort","như biện pháp cuối cùng khi các lựa chọn khác không hiệu quả","B2"),','("pending further review","trong khi chờ việc xem xét thêm trước khi có quyết định cuối cùng","C1"),'),
+              ('("take it with a grain of salt","đón nhận thông tin với sự hoài nghi nhất định","B2"),','("cut no ice","không tạo được ảnh hưởng hoặc không thuyết phục được ai","C1"),'),
+              ('("put the cart before the horse","làm mọi việc sai thứ tự hợp lý","B2"),','("move heaven and earth","nỗ lực hết sức và làm mọi điều có thể để đạt mục tiêu","C1"),'),
+              ('("keep the ball rolling","duy trì tiến độ hoặc động lực của một hoạt động","B2"),','("read the room","nhận biết đúng tâm trạng và tín hiệu xã hội của những người xung quanh","B2"),'),
+          ]
+          changed=0
+          for old,new in replacements:
+              if old in text:
+                  text=text.replace(old,new,1)
+                  changed+=1
+              elif new not in text:
+                  raise SystemExit(f'scale-24 reviewed seed drift: replacement target missing: {old}')
+          path.write_text(text,encoding='utf-8')
+          print(f'Normalized {changed} scale-24 reviewed seed entries.')
           PY
 
       - name: Audit all scale-24 seed duplicates
