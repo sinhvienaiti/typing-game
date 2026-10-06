@@ -4,14 +4,18 @@ Status: COMPLETE
 
 ## Current checkpoint
 
-- Current HEAD before this checkpoint: `76f6538006961d1cf784e0c6ef0311687e4eb760`
+- Working branch: `feature/english-learning-content-system`
+- Current HEAD: resolve the branch HEAD from GitHub at the start of every run. This checkpoint intentionally does not hard-code its own commit SHA because changing this file changes HEAD; embedding the commit's own SHA would make the field self-stale.
+- Latest fully CI-verified HEAD before this checkpoint update: `3c3f73bf3685ff5d8146acb01aca8e7ba90dd758`
 - Current phase: E12 release/audit/maintenance foundation complete; mandatory implementation scope complete
-- PR: #48 — open, draft
+- PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
-- Latest verified CI for the pre-checkpoint HEAD:
-  - English Content Full Validation #51 — PASS
-  - English Content Master Plan Acceptance #31 — PASS
-  - Platform CI #978 — PASS
+- Latest verified CI for `3c3f73bf3685ff5d8146acb01aca8e7ba90dd758`:
+  - English Content Full Validation #52 — PASS (run `37508192744`)
+  - English Content Master Plan Acceptance #32 — PASS (run `37508195455`)
+  - Platform CI #1007 — PASS (run `37508195479`)
+
+The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub. If this checkpoint file itself is the newest commit, verify that commit's workflows in GitHub rather than creating another documentation-only commit merely to embed its own SHA/CI result.
 
 ## Completed mandatory milestones
 
@@ -37,7 +41,9 @@ Status: COMPLETE
 
 ## Quality gates
 
-The latest verified pre-checkpoint HEAD passes the required publication gates represented by the English content validation/acceptance workflows and Platform CI, including strict schema/provenance/license/reference/dedup/reproducibility/runtime checks. Publication remains review-gated; candidate/authoring data must not bypass reviewed promotion.
+The latest fully verified HEAD above passes the required publication gates represented by English Content Full Validation, English Content Master Plan Acceptance, and Platform CI, including strict schema/provenance/license/reference/dedup/reproducibility/runtime checks. Publication remains review-gated; candidate/authoring data must not bypass reviewed promotion.
+
+For any newer branch HEAD, completion remains valid only after the corresponding required workflows are checked and pass. Do not duplicate completed content work while a documentation-only checkpoint commit is being verified.
 
 ## Current milestone
 
@@ -62,4 +68,4 @@ None.
 
 ## Next actionable task
 
-No mandatory implementation task remains. Future work should begin only from a newly approved reviewed batch, evidence-backed E04 enrichment, or an explicitly approved new master-plan scope. Every future run must first verify the latest branch HEAD and CI before doing work and must skip already completed artifacts.
+No mandatory implementation task remains. Future content work should begin only from a newly approved reviewed batch, evidence-backed E04 enrichment, or an explicitly approved new master-plan scope. Every run must first verify the newest branch HEAD and CI, skip already completed artifacts, and must not create a documentation-only commit merely to refresh a self-referential HEAD/CI field.
