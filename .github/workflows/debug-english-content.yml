@@ -32,6 +32,18 @@ jobs:
             echo 'B2 slices 01-04 already present; skipping generator.'
             exit 0
           fi
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('scripts/apply-english-b2-01-04.py')
+          text = p.read_text()
+          bad = '""Will you use the car this evening? when politely checking an existing plan"'
+          good = '"Will you use the car this evening? when politely checking an existing plan"'
+          if bad in text:
+              text = text.replace(bad, good, 1)
+              p.write_text(text)
+          elif good not in text:
+              raise SystemExit('Could not locate the expected B2 Future Continuous correction target')
+          PY
           python3 -m py_compile scripts/apply-english-b2-01-04.py
           python3 scripts/apply-english-b2-01-04.py
 
@@ -58,7 +70,7 @@ jobs:
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-b2-01-04.py
           if git diff --cached --quiet; then
             echo 'No B2 publication changes to commit.'
             exit 0
