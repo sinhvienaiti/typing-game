@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/space-typing-admin-mvp
+      - feat/space-typing-admin-uiux
   pull_request:
     paths:
       - "admin/**"
@@ -49,16 +50,24 @@ jobs:
       - name: Validate Admin service syntax
         run: |
           node --check admin/store.mjs
+          node --check admin/space-typing-store.mjs
           node --check admin/default-config.mjs
           node --check admin/server.mjs
           node --check admin/world-music-preview.mjs
           node --check admin/world-music-preview.test.mjs
+          node --check admin/ship-policy.mjs
+          node --check admin/ship-policy.test.mjs
+          node --check admin/ship-registry-preview.mjs
+          node --check admin/ship-registry-preview.test.mjs
           node --check admin/store.test.mjs
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-audio.mjs
 
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
+
+      - name: Test B06.1 Ships server validation
+        run: node --test admin/ship-policy.test.mjs
 
       - name: Install focused dependencies
         run: |
@@ -68,6 +77,9 @@ jobs:
 
       - name: Test canonical World Music Admin preview bridge
         run: node --test admin/world-music-preview.test.mjs
+
+      - name: Test canonical Ships Admin preview bridge
+        run: node --test admin/ship-registry-preview.test.mjs
 
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test
