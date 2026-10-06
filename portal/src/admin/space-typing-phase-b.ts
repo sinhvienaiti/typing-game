@@ -5,7 +5,6 @@ const api = new SpaceTypingAdminApi();
 
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
-
 type Control = HTMLInputElement | HTMLSelectElement;
 
 const DEFAULT_SYSTEM: GeneralSettingsConfig = {
@@ -141,6 +140,15 @@ function cloneConfig(config: SpaceTypingAdminConfig): SpaceTypingAdminConfig {
   return structuredClone(config);
 }
 
+function assertStableActiveRevision(loadedActiveRevision: string | null, currentActiveRevision: string): void {
+  if (loadedActiveRevision === null) {
+    throw new Error("Active revision has not finished loading. Reload this screen before saving.");
+  }
+  if (loadedActiveRevision !== currentActiveRevision) {
+    throw new Error(`Active revision changed from ${loadedActiveRevision} to ${currentActiveRevision}. Reload this screen before saving to avoid overwriting newer published changes.`);
+  }
+}
+
 function saveBar(navigate: Navigate, save: (button: HTMLButtonElement, status: HTMLElement) => Promise<void>): HTMLElement {
   const root = el("div", "st-admin-sticky-save stx-savebar");
   const status = el("span", undefined, "Revision-backed · Save Draft does not publish runtime");
@@ -170,6 +178,7 @@ function renderSettings(navigate: Navigate): HTMLElement {
     [revisionBadge],
   ));
 
+  let loadedActiveRevision: string | null = null;
   const state = structuredClone(DEFAULT_SYSTEM);
   const mode = field("Default Mode", state.gameDefaults.defaultMode, ["campaign", "recall", "expedition"]);
   const ship = field("Default Ship", state.gameDefaults.defaultShip);
@@ -211,6 +220,7 @@ function renderSettings(navigate: Navigate): HTMLElement {
   };
 
   void api.getState().then((payload) => {
+    loadedActiveRevision = payload.state.activeRevision;
     revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
     applySystem(payload.active.config.system ?? DEFAULT_SYSTEM);
     status.set(payload.active.config.system ? "Loaded canonical system config from active revision." : "Active revision predates Phase B system config; showing additive defaults until first draft is saved.", payload.active.config.system ? "good" : "warn");
@@ -221,6 +231,7 @@ function renderSettings(navigate: Navigate): HTMLElement {
     saveStatus.textContent = "Saving immutable draft…";
     try {
       const payload = await api.getState();
+      assertStableActiveRevision(loadedActiveRevision, payload.state.activeRevision);
       const config = cloneConfig(payload.active.config);
       config.system = {
         gameDefaults: {
@@ -270,6 +281,7 @@ function renderFlags(navigate: Navigate): HTMLElement {
     "Revision-backed rollouts. Economy/competitive flags remain publish-gated and use a new-session boundary; Save Draft never changes live admission.",
     [revisionBadge],
   ));
+  let loadedActiveRevision: string | null = null;
   const status = runtimeStatus();
   const host = el("div", "stx-flag-list");
   page.append(status.root, host);
@@ -309,6 +321,7 @@ function renderFlags(navigate: Navigate): HTMLElement {
   render(renderedFlags);
 
   void api.getState().then((payload) => {
+    loadedActiveRevision = payload.state.activeRevision;
     revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
     render(payload.active.config.featureFlags ?? DEFAULT_FLAGS);
     status.set(payload.active.config.featureFlags ? "Loaded canonical feature flags from active revision." : "Active revision predates Phase B flags; showing additive defaults until first draft is saved.", payload.active.config.featureFlags ? "good" : "warn");
@@ -319,6 +332,7 @@ function renderFlags(navigate: Navigate): HTMLElement {
     saveStatus.textContent = "Saving immutable rollout draft…";
     try {
       const payload = await api.getState();
+      assertStableActiveRevision(loadedActiveRevision, payload.state.activeRevision);
       const config = cloneConfig(payload.active.config);
       const nextFlags: Record<string, FeatureFlagConfig> = structuredClone(payload.active.config.featureFlags ?? renderedFlags);
       for (const [id, control] of controls) {

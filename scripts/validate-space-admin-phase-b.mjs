@@ -54,6 +54,9 @@ assert.match(phaseB, /Admin Phase B · Feature Flags draft/);
 assert.match(phaseB, /api\.createRevision/);
 assert.doesNotMatch(phaseB, /api\.publish/);
 assert.match(phaseB, /runtime unchanged/);
+assert.match(phaseB, /assertStableActiveRevision/);
+assert.match(phaseB, /loadedActiveRevision/);
+assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
 
 const dangerous = map.screens.filter((entry) =>
   entry.domain.startsWith("economy.") || entry.domain.startsWith("pvp.") || entry.domain === "system" || entry.domain === "featureFlags",
@@ -62,4 +65,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01 persistence foundation ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01 persistence + B02 revision-backed UI ready).`);
