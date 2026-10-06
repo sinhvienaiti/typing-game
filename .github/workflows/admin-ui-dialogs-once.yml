@@ -1,0 +1,59 @@
+name: Space Admin UI Dialogs Once
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+      - name: Wire upload and publish dialogs
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('portal/src/admin/space-typing.ts')
+          s = p.read_text()
+          anchor = 'import { renderDailyWeekly } from "./space-typing-daily-weekly";\n'
+          line = 'import { openMusicUploadMockDialog } from "./space-typing-dialogs";\n'
+          if line not in s:
+              s = s.replace(anchor, anchor + line)
+          old = '[button("Scan Library", () => undefined), button("Upload Files", () => undefined, "st-admin-btn primary")],'
+          new = '[button("Scan Library", () => undefined), button("Upload Files", openMusicUploadMockDialog, "st-admin-btn primary")],'
+          if old not in s:
+              raise SystemExit('Music upload button target not found')
+          s = s.replace(old, new)
+          p.write_text(s)
+
+          p = Path('portal/src/admin/space-typing-extended.ts')
+          s = p.read_text()
+          anchor = 'import "./space-typing-extended.css";\n'
+          line = 'import { openPublishReviewDialog, openRollbackReviewDialog } from "./space-typing-dialogs";\n'
+          if line not in s:
+              s = s.replace(anchor, anchor + line)
+          old = 'actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => undefined, "st-admin-btn danger"), btn("Publish", () => undefined, "st-admin-btn primary"));'
+          new = 'actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger"), btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary"));'
+          if old not in s:
+              raise SystemExit('History action target not found')
+          s = s.replace(old, new)
+          p.write_text(s)
+          PY
+      - name: Remove one-shot workflow
+        run: rm .github/workflows/admin-ui-dialogs-once.yml
+      - name: Commit dialog wiring
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "feat(admin-ui): complete upload publish and rollback mock workflows"
+          git push origin HEAD:feat/space-typing-admin-uiux
