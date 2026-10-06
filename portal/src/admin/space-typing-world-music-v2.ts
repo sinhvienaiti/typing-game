@@ -4,6 +4,8 @@ const BASE = "/admin/space-typing";
 
 type Navigate = (path: string) => void;
 
+let currentNavigate: Navigate = () => undefined;
+
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
   if (cls) node.className = cls;
@@ -60,7 +62,7 @@ function pageHeader(): HTMLElement {
     el("p", undefined, "Gán nhiều bài nhạc theo All Game → Galaxy → World → Stage → State. Scope thấp hơn override scope cao hơn; panel bên phải luôn cho biết Effective Playlist và nguồn fallback thực tế."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(btn(state.view === "tree" ? "Matrix View" : "Tree View", () => { state.view = state.view === "tree" ? "matrix" : "tree"; location.reload(); }), btn("Bulk Assign", () => undefined, "st-admin-btn primary"));
+  actions.append(btn(state.view === "tree" ? "Matrix View" : "Tree View", () => { state.view = state.view === "tree" ? "matrix" : "tree"; currentNavigate(`${BASE}/world-music`); }), btn("Bulk Assign", () => undefined, "st-admin-btn primary"));
   root.append(copy, actions);
   return root;
 }
@@ -69,7 +71,7 @@ function scopeToolbar(): HTMLElement {
   const bar = el("div", "st-admin-filterbar");
   const seg = el("div", "st-admin-seg");
   const scopes: Array<[typeof state.scope, string]> = [["all", "All Game"], ["galaxy", "Galaxy"], ["world", "World"], ["stage", "Stage"]];
-  for (const [value, label] of scopes) seg.append(btn(label, () => { state.scope = value; location.reload(); }, state.scope === value ? "active" : ""));
+  for (const [value, label] of scopes) seg.append(btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : ""));
   bar.append(seg, el("div", "st-admin-filter-spacer"), badge(`G${String(state.galaxy).padStart(2, "0")}`, "info"), badge(`WORLD ${String(state.world).padStart(2, "0")}`, "info"), badge(`${state.stages.size} STAGE SELECTED`, state.stages.size > 1 ? "warn" : "good"));
   return bar;
 }
@@ -77,7 +79,7 @@ function scopeToolbar(): HTMLElement {
 function tree(): HTMLElement {
   const root = panel("Scope Tree", "Select All, Galaxy, World, one or many stages");
   const body = el("div", "stx-music-tree");
-  body.append(btn("All Game", () => { state.scope = "all"; location.reload(); }, `stx-music-scope ${state.scope === "all" ? "active" : ""}`));
+  body.append(btn("All Game", () => { state.scope = "all"; currentNavigate(`${BASE}/world-music`); }, `stx-music-scope ${state.scope === "all" ? "active" : ""}`));
   for (let g = 1; g <= 10; g++) {
     const details = el("details", "stx-music-galaxy");
     if (g === state.galaxy) details.open = true;
@@ -87,7 +89,7 @@ function tree(): HTMLElement {
     for (let wOffset = 1; wOffset <= 5; wOffset++) {
       const world = (g - 1) * 5 + wOffset;
       const worldRow = el("div", "stx-music-world-block");
-      worldRow.append(btn(`World ${String(world).padStart(2, "0")}`, () => { state.galaxy = g; state.world = world; state.scope = "world"; state.stages = new Set([1]); location.reload(); }, `stx-music-world ${world === state.world ? "active" : ""}`));
+      worldRow.append(btn(`World ${String(world).padStart(2, "0")}`, () => { state.galaxy = g; state.world = world; state.scope = "world"; state.stages = new Set([1]); currentNavigate(`${BASE}/world-music`); }, `stx-music-world ${world === state.world ? "active" : ""}`));
       if (world === state.world) {
         const stages = el("div", "stx-music-stage-list");
         for (let s = 1; s <= 20; s++) {
@@ -96,7 +98,7 @@ function tree(): HTMLElement {
             if (state.stages.has(stageNumber)) state.stages.delete(stageNumber); else state.stages.add(stageNumber);
             if (state.stages.size === 0) state.stages.add(stageNumber);
             state.scope = "stage";
-            location.reload();
+            currentNavigate(`${BASE}/world-music`);
           }, `stx-music-stage ${state.stages.has(stageNumber) ? "active" : ""}`);
           if (s === 20) stageBtn.title = "Boss stage";
           stages.append(stageBtn);
@@ -115,7 +117,7 @@ function assignmentEditor(): HTMLElement {
   const selectedLabel = state.scope === "stage" ? `${state.stages.size} selected stage${state.stages.size === 1 ? "" : "s"}` : state.scope === "world" ? `World ${String(state.world).padStart(2, "0")}` : state.scope === "galaxy" ? `Galaxy ${String(state.galaxy).padStart(2, "0")}` : "All Game";
   const root = panel("Assignment Editor", `${selectedLabel} · multi-file playlist`);
   const tabs = el("div", "st-admin-state-tabs");
-  for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) tabs.append(btn(role, () => { state.role = role; location.reload(); }, state.role === role ? "active" : ""));
+  for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) tabs.append(btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : ""));
   root.append(tabs);
   const mode = el("div", "stx-music-assignment-head");
   const seg = el("div", "st-admin-seg");
@@ -187,7 +189,7 @@ function matrix(): HTMLElement {
 }
 
 export function renderWorldMusicV2(navigate: Navigate): HTMLElement {
-  void navigate;
+  currentNavigate = navigate;
   const page = el("div");
   page.append(pageHeader(), scopeToolbar());
   if (state.view === "matrix") {

@@ -16,8 +16,11 @@ const COMMANDS = [
 ] as const;
 
 let current: HTMLElement | null = null;
+let currentCleanup: (() => void) | null = null;
 
 export function closeAdminCommandPalette(): void {
+  currentCleanup?.();
+  currentCleanup = null;
   current?.remove();
   current = null;
 }
@@ -71,9 +74,10 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   input.addEventListener("input", render);
   overlay.addEventListener("mousedown", (event) => { if (event.target === overlay) closeAdminCommandPalette(); });
   const onKey = (event: KeyboardEvent) => {
-    if (event.key === "Escape") { closeAdminCommandPalette(); document.removeEventListener("keydown", onKey); }
+    if (event.key === "Escape") closeAdminCommandPalette();
   };
   document.addEventListener("keydown", onKey);
+  currentCleanup = () => document.removeEventListener("keydown", onKey);
   palette.append(head, results);
   overlay.append(palette);
   document.body.append(overlay);

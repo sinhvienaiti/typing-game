@@ -10,7 +10,6 @@ import {
   audioDefaults,
   duckingDefaults,
   economyMetrics,
-  galaxyWorlds,
   modeSplit,
   musicTracks,
   overviewMetrics,
@@ -277,7 +276,7 @@ export class SpaceTypingAdmin {
     bar.append(breadcrumb);
     bar.append(element("div", "st-admin-topbar-spacer"));
     bar.append(button("⌘K  Search command…", () => openAdminCommandPalette(this.navigate), "st-admin-command"));
-    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-03"));
+    bar.append(element("span", "st-admin-revision", "UI REV · A-HOLO-04"));
     bar.append(statusBadge("LOCAL", "good"));
     return bar;
   }
@@ -371,8 +370,25 @@ export class SpaceTypingAdmin {
     const lower = element("div", "st-admin-grid cols-2");
     lower.style.marginTop = "12px";
     lower.append(this.renderEconomyPanel(), this.renderAlertsPanel());
-    page.append(lower);
+    page.append(lower, this.renderRecentOperations());
     return page;
+  }
+
+  private renderRecentOperations(): HTMLElement {
+    const root = panel("Recent Operations", "Latest draft / publish / rollback activity", true);
+    const rows = element("div", "stx-revision-list");
+    for (const change of recentChanges) {
+      const row = element("div", "stx-revision");
+      row.append(
+        element("strong", undefined, change.revision),
+        statusBadge(change.tone.toUpperCase(), change.tone === "published" ? "good" : "warn"),
+        element("span", undefined, change.title),
+        element("small", undefined, `${change.author} · ${change.time}`),
+      );
+      rows.append(row);
+    }
+    root.append(rows);
+    return root;
   }
 
   private timeFilters(): HTMLElement {
@@ -869,4 +885,3 @@ export class SpaceTypingAdmin {
 }
 
 void READY_PATHS;
-void recentChanges;
