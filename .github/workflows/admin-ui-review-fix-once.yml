@@ -1,0 +1,96 @@
+name: Space Admin UI Review Fix Once
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+      - name: Apply review fixes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('portal/src/admin/space-typing.ts')
+          s = p.read_text()
+          # Dead state from removed legacy World Music editor.
+          s = s.replace('  private selectedWorldId = "world-01";\n', '')
+          s = s.replace('  private selectedWorldState = "Normal";\n', '')
+          # Dead ready-path set: every declared route is now UI-ready.
+          start = s.find('const READY_PATHS = new Set(\n')
+          if start != -1:
+              end = s.find('\n\nfunction element', start)
+              if end == -1:
+                  raise SystemExit('READY_PATHS end boundary not found')
+              s = s[:start] + s[end + 2:]
+          s = s.replace('\nvoid READY_PATHS;\n', '\n')
+          # Proper unknown-route guard instead of stale "planned" copy.
+          s = s.replace('return renderExtendedAdminScreen(path, this.navigate) ?? this.renderPlanned(path);', 'return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);')
+          s = s.replace('private renderPlanned(path: string): HTMLElement {', 'private renderUnknown(path: string): HTMLElement {')
+          s = s.replace('"Space Typing Admin · UI Roadmap",', '"Space Typing Admin · Route Guard",')
+          s = s.replace('item?.label ?? "Planned Screen",', 'item?.label ?? "Admin screen not found",')
+          s = s.replace('"Route chưa có renderer UI. Đây là fallback guard; toàn bộ route trong master plan phải được render trước khi UI phase được coi là hoàn tất.",', '"Route này không nằm trong Admin Information Architecture hiện tại. Dùng sidebar hoặc Command Search để mở một màn đã đăng ký.",')
+          s = s.replace('[statusBadge("PLANNED", "warn")],', '[statusBadge("NOT FOUND", "bad")],')
+          s = s.replace('item?.label ?? "Planned"', 'item?.label ?? "Unknown Route"')
+          s = s.replace('"Giữ route và vị trí navigation ngay từ đầu để review toàn bộ cấu trúc Admin, nhưng không giả lập tính năng chưa thiết kế xong. Sau khi Overview, Audio, Music Library, World Music và Ships được chốt, pattern sẽ được mở rộng sang màn này."', '"Màn này không được đăng ký. Không có route PLANNED nào còn lại trong UI scope đã chốt."')
+          # Select/range accessibility.
+          s = s.replace('tz.append(new Option("Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh"), new Option("UTC", "UTC"));', 'tz.setAttribute("aria-label", "Dashboard timezone");\n    tz.append(new Option("Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh"), new Option("UTC", "UTC"));')
+          s = s.replace('compare.append(new Option("Compare previous period", "previous"), new Option("No comparison", "none"));', 'compare.setAttribute("aria-label", "Dashboard comparison period");\n    compare.append(new Option("Compare previous period", "previous"), new Option("No comparison", "none"));')
+          s = s.replace('control.value = String(initial);\n    const value', 'control.value = String(initial);\n    control.setAttribute("aria-label", label);\n    const value')
+          s = s.replace('toggle.setAttribute("aria-label", `Toggle ${label}`);\n    toggle.append', 'toggle.setAttribute("aria-label", `Toggle ${label}`);\n    toggle.setAttribute("aria-pressed", String(initial));\n    toggle.append')
+          s = s.replace('toggle.classList.toggle("on");\n      this.audioChanges', 'toggle.classList.toggle("on");\n      toggle.setAttribute("aria-pressed", String(toggle.classList.contains("on")));\n      this.audioChanges')
+          p.write_text(s)
+
+          p = Path('portal/src/admin/space-typing-extended.ts')
+          s = p.read_text()
+          s = s.replace('  selectedShopItem: "warp-cell-50",\n', '')
+          s = s.replace('control.setAttribute("aria-label", `Toggle ${label}`);\n  control.append', 'control.setAttribute("aria-label", `Toggle ${label}`);\n  control.setAttribute("aria-pressed", String(enabled));\n  control.append')
+          s = s.replace('control.addEventListener("click", () => control.classList.toggle("on"));', 'control.addEventListener("click", () => {\n    control.classList.toggle("on");\n    control.setAttribute("aria-pressed", String(control.classList.contains("on")));\n  });')
+          old_tabs = 'for (const label of labels) root.append(btn(label, () => onSelect(label), label === active ? "active" : ""));'
+          new_tabs = '''for (const label of labels) {\n    const control = btn(label, () => onSelect(label), label === active ? "active" : "");\n    control.setAttribute("aria-pressed", String(label === active));\n    root.append(control);\n  }'''
+          if old_tabs not in s:
+              raise SystemExit('tabs helper target not found')
+          s = s.replace(old_tabs, new_tabs)
+          old_filters = 'filters.append(field("", "7 Days", "select", ["Today", "24 Hours", "7 Days", "30 Days", "90 Days"]).querySelector("select")!, field("", "All Players", "select", ["All Players", "New", "Returning", "Duel", "Campaign"]).querySelector("select")!, el("div", "st-admin-filter-spacer"), badge("COMPARE · PREVIOUS PERIOD", "info"));'
+          new_filters = '''const period = field("Time range", "7 Days", "select", ["Today", "24 Hours", "7 Days", "30 Days", "90 Days"]);\n  const cohort = field("Player cohort", "All Players", "select", ["All Players", "New", "Returning", "Duel", "Campaign"]);\n  period.classList.add("stx-compact-field");\n  cohort.classList.add("stx-compact-field");\n  filters.append(period, cohort, el("div", "st-admin-filter-spacer"), badge("COMPARE · PREVIOUS PERIOD", "info"));'''
+          if old_filters not in s:
+              raise SystemExit('analytics filters target not found')
+          s = s.replace(old_filters, new_filters)
+          # Typing Content filter selects: give each an accessible label from its first option.
+          old_loop = 'const select = el("select", "st-admin-select"); for (const option of config) select.append(new Option(option, option)); filters.append(select);'
+          new_loop = 'const select = el("select", "st-admin-select"); select.setAttribute("aria-label", config[0] ?? "Content filter"); for (const option of config) select.append(new Option(option, option)); filters.append(select);'
+          if old_loop in s:
+              s = s.replace(old_loop, new_loop)
+          p.write_text(s)
+
+          p = Path('portal/src/admin/space-typing-world-music-v2.ts')
+          s = p.read_text()
+          s = s.replace('const strategy = el("select", "st-admin-select");\n  ["Shuffle Bag"', 'const strategy = el("select", "st-admin-select");\n  strategy.setAttribute("aria-label", "Playlist selection strategy");\n  ["Shuffle Bag"')
+          p.write_text(s)
+
+          p = Path('portal/src/admin/space-typing-extended.css')
+          s = p.read_text()
+          if '.stx-compact-field' not in s:
+              s += '\n.stx-compact-field{display:grid;grid-template-columns:auto minmax(130px,1fr);gap:7px;align-items:center}.stx-compact-field>span{white-space:nowrap}\n'
+          p.write_text(s)
+          PY
+      - name: Remove one-shot workflow
+        run: rm .github/workflows/admin-ui-review-fix-once.yml
+      - name: Commit review fixes
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "fix(admin-ui): clean stale state and improve control accessibility"
+          git push origin HEAD:feat/space-typing-admin-uiux
