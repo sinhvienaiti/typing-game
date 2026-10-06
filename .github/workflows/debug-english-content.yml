@@ -41,6 +41,56 @@ jobs:
               raise SystemExit('scale-24 reviewed seed drift: replacement target missing')
           PY
 
+      - name: Audit all scale-24 seed duplicates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import importlib.util
+          import json
+          from pathlib import Path
+
+          root=Path.cwd()
+          spec=importlib.util.spec_from_file_location('scale24',root/'scripts/apply-english-e04-focused-scale-24.py')
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+
+          manifest=json.loads((root/'content/english/batches/manifest.json').read_text(encoding='utf-8'))
+          existing={'collocation':[],'phrase':[]}
+          for batch in manifest.get('batches',[]):
+              if batch.get('phase')!='E04' or batch.get('category')!='phrases':
+                  continue
+              for record_set in batch.get('recordSets',[]):
+                  sid=record_set.get('id')
+                  if sid not in {'collocations','scale-collocations','phrases','scale-phrases'}:
+                      continue
+                  doc=json.loads((root/record_set['path']).read_text(encoding='utf-8'))
+                  bucket='collocation' if sid in {'collocations','scale-collocations'} else 'phrase'
+                  existing[bucket].extend(doc.get('records',[]))
+
+          candidates=[]
+          candidates.extend(('collocation',text) for text,*_ in mod.COLLOCATIONS)
+          candidates.extend(('phrase',row[0]) for row in mod.PHRASAL)
+          candidates.extend(('phrase',row[0]) for row in mod.CHUNKS)
+          candidates.extend(('phrase',row[0]) for row in mod.IDIOMS)
+
+          collisions=[]
+          accepted=[]
+          for kind,text in candidates:
+              pool=[(r.get('id',''),r.get('text','')) for r in existing[kind]]+accepted
+              for oid,otext in pool:
+                  if mod.norm(text)==mod.norm(otext):
+                      collisions.append({'kind':kind,'candidate':text,'existingId':oid,'existingText':otext,'score':1.0,'type':'exact'})
+                  else:
+                      score=mod.jaccard(text,otext)
+                      if score>=0.86:
+                          collisions.append({'kind':kind,'candidate':text,'existingId':oid,'existingText':otext,'score':round(score,4),'type':'near'})
+              accepted.append((f'new:{kind}:{text}',text))
+
+          print(json.dumps({'threshold':0.86,'count':len(collisions),'collisions':collisions},ensure_ascii=False,indent=2))
+          if collisions:
+              raise SystemExit(f'scale-24 seed duplicate audit found {len(collisions)} collision(s)')
+          PY
+
       - name: Apply focused E04 scale 24
         shell: bash
         run: |
