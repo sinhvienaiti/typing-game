@@ -17,7 +17,6 @@ const uiState = {
   selectedEnemy: "prism-scout",
   selectedBoss: "celestial-warden",
   selectedStage: "314",
-  selectedShopItem: "warp-cell-50",
   selectedRevision: "r128",
 };
 
@@ -103,15 +102,23 @@ function toggle(label: string, enabled = true, description?: string): HTMLElemen
   const control = el("button", `st-admin-switch${enabled ? " on" : ""}`) as HTMLButtonElement;
   control.type = "button";
   control.setAttribute("aria-label", `Toggle ${label}`);
+  control.setAttribute("aria-pressed", String(enabled));
   control.append(el("i"));
-  control.addEventListener("click", () => control.classList.toggle("on"));
+  control.addEventListener("click", () => {
+    control.classList.toggle("on");
+    control.setAttribute("aria-pressed", String(control.classList.contains("on")));
+  });
   root.append(copy, control);
   return root;
 }
 
 function tabs(labels: readonly string[], active: string, onSelect: (value: string) => void): HTMLElement {
   const root = el("div", "st-admin-state-tabs stx-tabs");
-  for (const label of labels) root.append(btn(label, () => onSelect(label), label === active ? "active" : ""));
+  for (const label of labels) {
+    const control = btn(label, () => onSelect(label), label === active ? "active" : "");
+    control.setAttribute("aria-pressed", String(label === active));
+    root.append(control);
+  }
   return root;
 }
 
@@ -235,7 +242,11 @@ function renderAnalytics(navigate: Navigate): HTMLElement {
   page.append(header("Dashboard · Deep Intelligence", "Analytics", "Drill-down cho player, gameplay, stage, mode, retention, economy, performance và lỗi. Mock data giữ đúng information architecture trước khi nối telemetry.", [btn("Export View"), btn("Save View", () => undefined, "st-admin-btn primary")]));
   page.append(tabs(["Players", "Gameplay", "Stages", "Modes", "Retention", "Economy", "Performance", "Errors"], uiState.analyticsTab, rerender));
   const filters = el("div", "st-admin-filterbar");
-  filters.append(field("", "7 Days", "select", ["Today", "24 Hours", "7 Days", "30 Days", "90 Days"]).querySelector("select")!, field("", "All Players", "select", ["All Players", "New", "Returning", "Duel", "Campaign"]).querySelector("select")!, el("div", "st-admin-filter-spacer"), badge("COMPARE · PREVIOUS PERIOD", "info"));
+  const period = field("Time range", "7 Days", "select", ["Today", "24 Hours", "7 Days", "30 Days", "90 Days"]);
+  const cohort = field("Player cohort", "All Players", "select", ["All Players", "New", "Returning", "Duel", "Campaign"]);
+  period.classList.add("stx-compact-field");
+  cohort.classList.add("stx-compact-field");
+  filters.append(period, cohort, el("div", "st-admin-filter-spacer"), badge("COMPARE · PREVIOUS PERIOD", "info"));
   page.append(filters);
 
   if (uiState.analyticsTab === "Players") {
@@ -359,7 +370,7 @@ function renderTypingContent(navigate: Navigate): HTMLElement {
   page.append(tabs(["Vocabulary", "Typing Text", "Boss Text", "Recall", "Objectives"], uiState.contentTab, selectTab));
   const filters = el("div", "st-admin-filterbar");
   for (const config of [["All CEFR", "A1", "A2", "B1", "B2", "C1"], ["All Topics", "Space", "Daily", "Technology", "Business"], ["All Status", "Ready", "Draft", "Review"]]) {
-    const select = el("select", "st-admin-select"); for (const option of config) select.append(new Option(option, option)); filters.append(select);
+    const select = el("select", "st-admin-select"); select.setAttribute("aria-label", config[0] ?? "Content filter"); for (const option of config) select.append(new Option(option, option)); filters.append(select);
   }
   const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = "Search content ID, word, topic…"; filters.prepend(search); page.append(filters);
   page.append(makeTable(["ID", "Title / Item", "CEFR", "Topic", "Difficulty", "Used By", "Status"], [["lex-orbit-001", "orbit", "A2", "Space", "2/5", "18 stages", badge("READY", "good")], ["txt-b1-space-08", "Life aboard a research station", "B1", "Space", "3/5", "6 stages", badge("READY", "good")], ["boss-w16-01", "Prism Sovereign challenge", "B1", "Boss", "4/5", "Stage 320", badge("REVIEW", "warn")], ["recall-a2-14", "Travel & direction recall", "A2", "Daily", "2/5", "Recall", badge("READY", "good")]]));

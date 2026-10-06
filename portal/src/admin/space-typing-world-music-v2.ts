@@ -123,6 +123,7 @@ function assignmentEditor(): HTMLElement {
   const seg = el("div", "st-admin-seg");
   seg.append(btn("Inherit"), btn("Replace", () => undefined, "active"));
   const strategy = el("select", "st-admin-select");
+  strategy.setAttribute("aria-label", "Playlist selection strategy");
   ["Shuffle Bag", "Ordered", "Random", "Weighted Random"].forEach((value) => strategy.append(new Option(value, value)));
   mode.append(el("span", "st-admin-chip", "Assignment"), seg, el("div", "grow"), strategy);
   root.append(mode);

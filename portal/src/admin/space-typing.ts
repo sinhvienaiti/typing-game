@@ -113,12 +113,6 @@ const NAV_GROUPS: readonly NavGroup[] = [
   },
 ];
 
-const READY_PATHS = new Set(
-  NAV_GROUPS.flatMap((group) => group.items)
-    .filter((item) => item.phase === "ready")
-    .map((item) => item.path),
-);
-
 function element<K extends keyof HTMLElementTagNameMap>(
   tag: K,
   className?: string,
@@ -208,8 +202,6 @@ function shipImageUrl(shipId: string): string {
 
 export class SpaceTypingAdmin {
   private selectedTrackId = musicTracks[0]?.id ?? "";
-  private selectedWorldId = "world-01";
-  private selectedWorldState = "Normal";
   private selectedShipId = ships[0]?.id ?? "vanguard";
   private audioChanges = 0;
 
@@ -288,7 +280,7 @@ export class SpaceTypingAdmin {
     if (path === `${ADMIN_BASE}/world-music`) return renderWorldMusicV2(this.navigate);
     if (path === `${ADMIN_BASE}/ships`) return this.renderShips();
     if (path === `${ADMIN_BASE}/daily-weekly`) return renderDailyWeekly();
-    return renderExtendedAdminScreen(path, this.navigate) ?? this.renderPlanned(path);
+    return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);
   }
 
   private renderOverview(): HTMLElement {
@@ -404,8 +396,10 @@ export class SpaceTypingAdmin {
     }
     bar.append(seg, element("div", "st-admin-filter-spacer"));
     const tz = element("select", "st-admin-select");
+    tz.setAttribute("aria-label", "Dashboard timezone");
     tz.append(new Option("Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh"), new Option("UTC", "UTC"));
     const compare = element("select", "st-admin-select");
+    compare.setAttribute("aria-label", "Dashboard comparison period");
     compare.append(new Option("Compare previous period", "previous"), new Option("No comparison", "none"));
     bar.append(tz, compare, element("span", "st-admin-chip", "Updated 18s ago"));
     return bar;
@@ -510,6 +504,7 @@ export class SpaceTypingAdmin {
     control.min = "0";
     control.max = "100";
     control.value = String(initial);
+    control.setAttribute("aria-label", label);
     const value = element("span", "st-admin-audio-value", `${initial}%`);
     control.addEventListener("input", () => {
       value.textContent = `${control.value}%`;
@@ -525,9 +520,11 @@ export class SpaceTypingAdmin {
     const toggle = element("button", `st-admin-switch${initial ? " on" : ""}`) as HTMLButtonElement;
     toggle.type = "button";
     toggle.setAttribute("aria-label", `Toggle ${label}`);
+    toggle.setAttribute("aria-pressed", String(initial));
     toggle.append(element("i"));
     toggle.addEventListener("click", () => {
       toggle.classList.toggle("on");
+      toggle.setAttribute("aria-pressed", String(toggle.classList.contains("on")));
       this.audioChanges += 1;
       this.updateUnsavedBars();
     });
@@ -763,19 +760,19 @@ export class SpaceTypingAdmin {
     return field;
   }
 
-  private renderPlanned(path: string): HTMLElement {
+  private renderUnknown(path: string): HTMLElement {
     const item = NAV_GROUPS.flatMap((group) => group.items).find((candidate) => candidate.path === path);
     const page = element("div");
     page.append(pageHeader(
-      "Space Typing Admin · UI Roadmap",
-      item?.label ?? "Planned Screen",
-      "Route chưa có renderer UI. Đây là fallback guard; toàn bộ route trong master plan phải được render trước khi UI phase được coi là hoàn tất.",
-      [statusBadge("PLANNED", "warn")],
+      "Space Typing Admin · Route Guard",
+      item?.label ?? "Admin screen not found",
+      "Route này không nằm trong Admin Information Architecture hiện tại. Dùng sidebar hoặc Command Search để mở một màn đã đăng ký.",
+      [statusBadge("NOT FOUND", "bad")],
     ));
     const planned = panel(undefined, undefined, true);
     planned.classList.add("st-admin-planned");
     const box = element("div", "st-admin-planned-box");
-    box.append(element("div", "st-admin-planned-icon", item?.icon ?? "ST"), element("h2", undefined, item?.label ?? "Planned"), element("p", undefined, "Giữ route và vị trí navigation ngay từ đầu để review toàn bộ cấu trúc Admin, nhưng không giả lập tính năng chưa thiết kế xong. Sau khi Overview, Audio, Music Library, World Music và Ships được chốt, pattern sẽ được mở rộng sang màn này."));
+    box.append(element("div", "st-admin-planned-icon", item?.icon ?? "ST"), element("h2", undefined, item?.label ?? "Unknown Route"), element("p", undefined, "Màn này không được đăng ký. Không có route PLANNED nào còn lại trong UI scope đã chốt."));
     const statusRow = element("div", "st-admin-env-row");
     statusRow.style.justifyContent = "center";
     statusRow.append(statusBadge("HOLO COMMAND", "info"), statusBadge("UI ONLY", "warn"));
@@ -786,4 +783,3 @@ export class SpaceTypingAdmin {
   }
 }
 
-void READY_PATHS;
