@@ -66,6 +66,8 @@ jobs:
         run: node --test admin/boss-policy.test.mjs
       - name: Test B06.5 Bosses runtime envelope
         run: node --test admin/boss-runtime.test.mjs
+      - name: Test B06.5 Boss revision lifecycle
+        run: node --test admin/boss-revision-flow.test.mjs
       - name: Install focused dependencies
         run: |
           pnpm install
