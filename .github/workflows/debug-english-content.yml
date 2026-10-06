@@ -49,14 +49,20 @@ jobs:
           python3 -m py_compile scripts/apply-english-b2-05-08.py
           python3 scripts/apply-english-b2-05-08.py
 
-      - name: Validate B2 source and review contracts
-        shell: bash
-        run: |
-          pnpm english-content:validate
-          pnpm english-content:review:validate
-          pnpm english-content:e10
-          pnpm english-content:licenses
-          pnpm english-content:test
+      - name: Validate English content schemas
+        run: pnpm english-content:validate
+
+      - name: Validate English review ledger
+        run: pnpm english-content:review:validate
+
+      - name: Validate English E10 batch contracts
+        run: pnpm english-content:e10
+
+      - name: Validate English content licenses
+        run: pnpm english-content:licenses
+
+      - name: Run English content tests
+        run: pnpm english-content:test
 
       - name: Generate B2 runtime artifacts
         run: pnpm english-content:generate
