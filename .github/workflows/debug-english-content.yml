@@ -1,4 +1,4 @@
-name: Publish English B2 Slices 05-08
+name: Publish English C1 Slices 01-06
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-b2-05-08:
+  publish-c1-01-06:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,54 +25,15 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply reviewed B2 slices 05-08
+      - name: Apply reviewed C1 slices 01-06
         shell: bash
         run: |
-          if grep -q '"id": "e05.grammar-scale-b2-05"' content/english/batches/manifest.json; then
-            echo 'B2 slices 05-08 already present; skipping generator.'
+          if grep -q '"id": "e05.grammar-scale-c1-01"' content/english/batches/manifest.json; then
+            echo 'C1 slices 01-06 already present; skipping generator.'
             exit 0
           fi
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/apply-english-b2-05-08.py')
-          text = p.read_text(encoding='utf-8')
-
-          old_cloze = '        "at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
-          new_cloze = '        "arrived at",\n        "Dịch sang tiếng Anh: Báo cáo được viết bởi một chuyên gia tư vấn độc lập cho hội đồng quản trị.",'
-          if old_cloze in text:
-              if text.count(old_cloze) != 1:
-                  raise SystemExit(f'unexpected B2 final cloze source count: {text.count(old_cloze)}')
-              text = text.replace(old_cloze, new_cloze, 1)
-          elif new_cloze not in text:
-              raise SystemExit('B2 final cloze source pattern not found')
-
-          smoke_replacements = [
-              ('{"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": 5}', '{"gameId": "space-typing", "activity": "grammar-challenge", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))}'),
-              ('{"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": 5}', '{"gameId": "monkeytype", "activity": "grammar-topic", "recordSetId": "grammar-topics", "sampleCount": min(5, len(sets["grammar-topics"]))}'),
-              ('{"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": 5}', '{"gameId": "monkeytype", "activity": "example-typing", "recordSetId": "examples", "sampleCount": min(5, len(sets["examples"]))}'),
-              ('{"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": 4, "recordType": "cloze"}', '{"gameId": "monkeytype", "activity": "cloze", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "cloze")), "recordType": "cloze"}'),
-              ('{"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": 4, "recordType": "translation"}', '{"gameId": "monkeytype", "activity": "translation", "recordSetId": "exercises", "sampleCount": min(4, sum(1 for record in sets["exercises"] if record.get("type") == "translation")), "recordType": "translation"}'),
-              ('{"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": 4}', '{"gameId": "monkeytype", "activity": "error-correction", "recordSetId": "common-mistakes", "sampleCount": min(4, len(sets["common-mistakes"]))}'),
-          ]
-          changed = 0
-          already = 0
-          for old, new in smoke_replacements:
-              if old in text:
-                  if text.count(old) != 1:
-                      raise SystemExit(f'unexpected B2 smoke source count for {old}: {text.count(old)}')
-                  text = text.replace(old, new, 1)
-                  changed += 1
-              elif new in text:
-                  already += 1
-              else:
-                  raise SystemExit(f'B2 smoke source pattern not found: {old}')
-          if changed not in (0, 6) or already not in (0, 6):
-              raise SystemExit(f'inconsistent B2 smoke patch state: changed={changed}, already={already}')
-
-          p.write_text(text, encoding='utf-8')
-          PY
-          python3 -m py_compile scripts/apply-english-b2-05-08.py
-          python3 scripts/apply-english-b2-05-08.py
+          python3 -m py_compile scripts/apply-english-c1-01-06.py
+          python3 scripts/apply-english-c1-01-06.py
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -81,24 +42,10 @@ jobs:
         run: pnpm english-content:review:validate
 
       - name: Validate English E10 batch schema
-        id: e10_validate
-        shell: bash
-        run: |
-          set +e
-          pnpm english-content:e10:validate 2>&1 | tee /tmp/e10-validate.log
-          status=${PIPESTATUS[0]}
-          echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
-          exit "$status"
+        run: pnpm english-content:e10:validate
 
       - name: Smoke English E10 batch contracts
-        id: e10_smoke
-        shell: bash
-        run: |
-          set +e
-          pnpm english-content:e10:smoke 2>&1 | tee /tmp/e10-smoke.log
-          status=${PIPESTATUS[0]}
-          echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
-          exit "$status"
+        run: pnpm english-content:e10:smoke
 
       - name: Validate English content licenses
         run: pnpm english-content:licenses
@@ -106,10 +53,10 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
-      - name: Generate B2 runtime artifacts
+      - name: Generate C1 runtime artifacts
         run: pnpm english-content:generate
 
-      - name: Publish B2 runtime artifacts
+      - name: Publish C1 runtime artifacts
         run: pnpm english-content:publish
 
       - name: Collect sentence dedupe diagnostics
@@ -138,11 +85,11 @@ jobs:
             }
           }
           const pairs = nearDuplicatePairs(records, 0.86);
-          const newB2Pattern = /^sent\.grb2\.(05|06|07|08)\./;
-          const newB2Pairs = pairs.filter(({leftId, rightId}) => newB2Pattern.test(leftId) || newB2Pattern.test(rightId));
+          const newPattern = /^sent\.grc1\./;
+          const newPairs = pairs.filter(({leftId, rightId}) => newPattern.test(leftId) || newPattern.test(rightId));
           await fs.writeFile("/tmp/global-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: pairs.length, pairs}, null, 2)}\n`);
-          await fs.writeFile("/tmp/b2-05-08-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: newB2Pairs.length, pairs: newB2Pairs}, null, 2)}\n`);
-          console.log(JSON.stringify({globalNearCount: pairs.length, newB2NearCount: newB2Pairs.length}, null, 2));
+          await fs.writeFile("/tmp/c1-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: newPairs.length, pairs: newPairs}, null, 2)}\n`);
+          console.log(JSON.stringify({globalNearCount: pairs.length, newC1NearCount: newPairs.length}, null, 2));
           NODE
 
       - name: Collect grammar coverage diagnostics
@@ -162,7 +109,6 @@ jobs:
               if (typeof record?.id === "string") publishedIds.add(record.id);
             }
           }
-
           const levels = {};
           for (const cefr of ["A1", "A2", "B1", "B2", "C1", "C2"]) {
             const expected = topics.filter((topic) => topic.cefr === cefr);
@@ -177,7 +123,7 @@ jobs:
           console.log(JSON.stringify({catalogTotal: topics.length, publishedTotal: publishedIds.size, levels}, null, 2));
           NODE
 
-      - name: Check B2 runtime exact dedupe
+      - name: Check runtime exact dedupe
         id: dedupe
         shell: bash
         run: |
@@ -187,48 +133,46 @@ jobs:
           echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
           exit "$status"
 
-      - name: Upload B2 05-08 diagnostics
+      - name: Upload C1 diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: b2-05-08-diagnostics
+          name: c1-01-06-diagnostics
           path: |
-            /tmp/e10-validate.log
-            /tmp/e10-smoke.log
             /tmp/english-content-dedupe.log
             /tmp/global-near-duplicates.json
-            /tmp/b2-05-08-near-duplicates.json
+            /tmp/c1-near-duplicates.json
             /tmp/grammar-coverage.json
           if-no-files-found: warn
           retention-days: 3
 
-      - name: Enforce B2 05-08 near-duplicate review
+      - name: Enforce C1 near-duplicate review
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs/promises";
-          const report = JSON.parse(await fs.readFile("/tmp/b2-05-08-near-duplicates.json", "utf8"));
+          const report = JSON.parse(await fs.readFile("/tmp/c1-near-duplicates.json", "utf8"));
           if (report.count !== 0) {
-            console.error(`B2 05-08 near-duplicate audit failed: ${report.count} candidate(s)`);
+            console.error(`C1 near-duplicate audit failed: ${report.count} candidate(s)`);
             console.error(JSON.stringify(report.pairs, null, 2));
             process.exit(1);
           }
-          console.log("B2 05-08 near-duplicate audit PASS: 0 candidates.");
+          console.log("C1 near-duplicate audit PASS: 0 candidates.");
           NODE
 
-      - name: Smoke B2 published runtime
+      - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
 
-      - name: Commit B2 slices 05-08
+      - name: Commit C1 slices 01-06
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-b2-05-08.py
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-c1-01-06.py
           if git diff --cached --quiet; then
-            echo 'No B2 publication changes to commit.'
+            echo 'No C1 publication changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish remaining B2 grammar slices 05-08'
+          git commit -m 'feat(content): publish reviewed C1 grammar slices 01-06'
           git push
