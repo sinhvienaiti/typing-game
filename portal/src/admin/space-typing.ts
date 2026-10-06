@@ -4,6 +4,7 @@ import { adminNavIcon } from "./space-typing-icons";
 import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
 import { renderWorldMusicV2 } from "./space-typing-world-music-v2";
 import { renderDailyWeekly } from "./space-typing-daily-weekly";
+import { openMusicUploadMockDialog } from "./space-typing-dialogs";
 import {
   alertFeed,
   audienceMetrics,
@@ -569,7 +570,7 @@ export class SpaceTypingAdmin {
       "Audio & Music · Asset Operations",
       "Music Library",
       "Thư viện nhạc tập trung với metadata, trạng thái validation, usage và preview tích hợp. Upload/scan ở milestone này là UI-only để duyệt workflow.",
-      [button("Scan Library", () => undefined), button("Upload Files", () => undefined, "st-admin-btn primary")],
+      [button("Scan Library", () => undefined), button("Upload Files", openMusicUploadMockDialog, "st-admin-btn primary")],
     ));
 
     const filters = element("div", "st-admin-filterbar");

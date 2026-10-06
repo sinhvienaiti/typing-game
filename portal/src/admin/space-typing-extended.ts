@@ -1,4 +1,5 @@
 import "./space-typing-extended.css";
+import { openPublishReviewDialog, openRollbackReviewDialog } from "./space-typing-dialogs";
 
 const BASE = "/admin/space-typing";
 const ASSET = "https://space.typing-game.local/assets/space-typing";
@@ -497,7 +498,7 @@ function renderHistory(navigate: Navigate): HTMLElement {
   for (const row of revisions) { const item = el("button", `stx-revision${uiState.selectedRevision === row[0] ? " active" : ""}`) as HTMLButtonElement; item.type = "button"; item.append(el("strong", undefined, row[0]), badge(row[1], row[1] === "Published" ? "good" : row[1] === "Draft" ? "warn" : "bad"), el("span", undefined, row[3]), el("small", undefined, `${row[2]} · ${row[4]} · ${row[5]}`)); item.addEventListener("click", () => { uiState.selectedRevision = row[0]; navigate(`${BASE}/history`); }); host.append(item); } list.append(host);
   const detail = panel(`Revision ${uiState.selectedRevision}`, "Deep diff · mock"); detail.append(stats([["Added", "3", "changes", "good"], ["Modified", "8", "changes", "warn"], ["Removed", "1", "change", "bad"], ["Validation", "PASS", "UI mock", "good"]]));
   const diff = el("pre", "stx-diff"); diff.textContent = `World 05\n  Stage 091\n    Normal Music\n-   stellar-dawn\n+   silent-orbit\n+   deep-nebula\n\nAudio Defaults\n- Music 0.35\n+ Music 0.26\n\nVanguard\n- Shield 120\n+ Shield 135`;
-  detail.append(diff, el("div", "st-admin-page-actions")); const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!; actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => undefined, "st-admin-btn danger"), btn("Publish", () => undefined, "st-admin-btn primary")); page.append(editorShell(list, detail)); return page;
+  detail.append(diff, el("div", "st-admin-page-actions")); const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!; actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger"), btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary")); page.append(editorShell(list, detail)); return page;
 }
 
 function renderQa(): HTMLElement {
