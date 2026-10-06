@@ -9,6 +9,7 @@ import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-prev
 import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
 import { runEquipmentRegistryPreview, EquipmentRegistryPreviewError } from "./equipment-registry-preview.mjs";
 import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
+import { createEquipmentRuntimeEnvelope } from "./equipment-runtime.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -77,6 +78,12 @@ const server = createServer(async (request, response) => {
       const state = await store.getState();
       const config = await store.getRuntimeConfig();
       json(response, 200, createShipRuntimeEnvelope(state, config));
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/runtime/space-typing/equipment") {
+      const state = await store.getState();
+      const config = await store.getRuntimeConfig();
+      json(response, 200, createEquipmentRuntimeEnvelope(state, config));
       return;
     }
 
