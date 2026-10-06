@@ -33,12 +33,12 @@ const anchor = 'assert(worldMusic.includes("Fallback chain"), "World Music effec
 if (!validator.includes(anchor)) throw new Error("Validator fallback anchor missing");
 validator = validator.replace(
   anchor,
-  `${anchor}\nassert(worldMusic.includes('fallbackParts.join(" → ")') && worldMusic.includes('const galaxyLabel = \\`Galaxy \\${String(state.galaxy).padStart(2, "0")}\\`'), "World Music fallback trace is not scope-aware");\nassert(worldMusic.includes('previous.setAttribute("aria-label", "Previous track")') && worldMusic.includes('next.setAttribute("aria-label", "Next track")'), "World Music symbol-only preview controls need accessible names");`,
+  anchor + '\nassert(worldMusic.includes(\'const fallbackParts: string[] = []\') && worldMusic.includes(\'const galaxyLabel = `Galaxy ${String(state.galaxy).padStart(2, "0")}`\') && worldMusic.includes(\'fallbackParts.join(" → ")\'), "World Music fallback trace is not scope-aware");\nassert(worldMusic.includes(\'previous.setAttribute("aria-label", "Previous track")\') && worldMusic.includes(\'next.setAttribute("aria-label", "Next track")\'), "World Music symbol-only preview controls need accessible names");',
 );
 const mainAnchor = 'assert(main.includes(\'status.setAttribute("aria-label", "Filter music by status")\'), "Music status filter aria-label is missing");';
 if (!validator.includes(mainAnchor)) throw new Error("Validator Music Library a11y anchor missing");
 validator = validator.replace(
   mainAnchor,
-  `${mainAnchor}\nassert(main.includes('play.setAttribute("aria-label", "Play track preview")'), "Music Library symbol-only preview control needs an accessible name");`,
+  mainAnchor + '\nassert(main.includes(\'play.setAttribute("aria-label", "Play track preview")\'), "Music Library symbol-only preview control needs an accessible name");',
 );
 fs.writeFileSync(validatorFile, validator);
