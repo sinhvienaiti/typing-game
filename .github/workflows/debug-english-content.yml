@@ -1,4 +1,4 @@
-name: Publish English E04 Focused Scale 24
+name: Publish English E04 Safe Example Links
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-e04-focused-scale-24:
+  publish-e04-safe-example-links:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,103 +25,8 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Normalize scale-24 reviewed seed
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          path=Path('scripts/apply-english-e04-focused-scale-24.py')
-          text=path.read_text(encoding='utf-8')
-          replacements=[
-              ('("exercise discretion","verb + noun","hành xử thận trọng và có quyền cân nhắc","C1"),','("maintain impartiality","verb + noun","duy trì sự vô tư và khách quan khi đánh giá","C1"),'),
-              ('("brush up on","ôn lại hoặc cải thiện một kỹ năng/kiến thức đã học","B2","transitive","inseparable","Dùng với đối tượng sau on: brush up on your English."),','("batten down","cố định hoặc bảo vệ chắc chắn để chuẩn bị đối phó khó khăn","C1","transitive","separable","Có thể dùng với vật cần gia cố; ví dụ batten the hatches down."),'),
-              ('("clamp down on","siết chặt kiểm soát hoặc trấn áp một hoạt động","C1","transitive","inseparable","Đối tượng đứng sau on; không tách cụm."),','("blot out","che khuất hoàn toàn hoặc xóa khỏi ký ức hay tầm nhìn","C1","transitive","separable","Có thể nói blot the light out hoặc blot out a memory."),'),
-              ('("iron out","giải quyết các vấn đề nhỏ hoặc bất đồng còn tồn tại","B2","transitive","separable","Có thể nói iron the problems out hoặc iron out the problems."),','("bottle up","kìm nén cảm xúc thay vì bộc lộ hoặc xử lý chúng","B2","transitive","separable","Có thể nói bottle your feelings up."),'),
-              ('("phase in","đưa vào áp dụng dần dần","B2","transitive","separable","Thường dùng cho chính sách, hệ thống hoặc thay đổi mới."),','("carve out","tạo dựng một vị trí, vai trò hoặc cơ hội riêng bằng nỗ lực","C1","transitive","separable","Thường dùng với niche, role, career hoặc time."),'),
-              ('("phase out","loại bỏ dần dần","B2","transitive","separable","Thường dùng cho sản phẩm, quy định, công nghệ hoặc trợ cấp."),','("chime in","tham gia vào cuộc trò chuyện bằng một ý kiến hoặc nhận xét","B2","intransitive","inseparable","Có thể theo sau bởi with khi nêu ý kiến được thêm vào."),'),
-              ('("scale back","giảm quy mô, mức độ hoặc phạm vi","B2","transitive","separable","Có thể tách khi tân ngữ là danh từ hoặc đại từ."),','("crop up","xuất hiện bất ngờ, thường là một vấn đề hoặc tình huống mới","B2","intransitive","inseparable","Thường dùng cho problems, questions hoặc issues."),'),
-              ('("single out","chọn riêng một người/vật để chú ý, khen hoặc phê bình","B2","transitive","separable","Đại từ thường đứng giữa: single him out."),','("dole out","phân phát hoặc chia thứ gì thành từng phần nhỏ","B2","transitive","separable","Có thể nói dole the portions out hoặc dole out the portions."),'),
-              ('("step down","từ chức hoặc rời vị trí trách nhiệm","B2","intransitive","inseparable","Không có tân ngữ trực tiếp trong nghĩa từ chức."),','("fizzle out","yếu dần rồi chấm dứt mà không đạt kết quả đáng kể","C1","intransitive","inseparable","Thường dùng cho plans, protests, relationships hoặc efforts."),'),
-              ('("step up","tăng cường nỗ lực hoặc chủ động đảm nhận vai trò lớn hơn","B2","both","separable","Có thể step up efforts hoặc đơn giản step up."),','("hammer out","thảo luận hoặc thương lượng kỹ để đi đến thỏa thuận hay giải pháp","C1","transitive","separable","Có thể nói hammer an agreement out hoặc hammer out an agreement."),'),
-              ('("zero in on","tập trung chính xác vào một mục tiêu hoặc vấn đề","C1","transitive","inseparable","Đối tượng đứng sau on."),','("pare down","cắt giảm để chỉ giữ lại phần cần thiết hoặc cốt lõi","C1","transitive","separable","Có thể nói pare the list down hoặc pare down the list."),'),
-              ('("branch out","mở rộng sang lĩnh vực hoặc hoạt động mới","B2","intransitive","inseparable","Có thể theo sau bởi into khi nêu lĩnh vực mới."),','("pore over","đọc hoặc xem xét thứ gì rất kỹ và trong thời gian dài","C1","transitive","inseparable","Đối tượng đứng sau over; lưu ý pore khác pour."),'),
-              ('("buckle down","bắt đầu làm việc nghiêm túc và tập trung","B2","intransitive","inseparable","Thường đi với to + noun/gerund: buckle down to work."),','("reel off","nói, đọc hoặc liệt kê nhiều thứ rất nhanh và trôi chảy","C1","transitive","separable","Có thể nói reel the figures off hoặc reel off the figures."),'),
-              ('("carry over","tiếp tục ảnh hưởng hoặc chuyển sang giai đoạn khác","B2","both","both","Có thể dùng nội động hoặc với tân ngữ: carry unused leave over."),','("shake off","thoát khỏi hoặc loại bỏ một ảnh hưởng, cảm giác hay người bám theo","B2","transitive","separable","Có thể nói shake the feeling off hoặc shake off the feeling."),'),
-              ('("fall through","không thành công hoặc không diễn ra như dự định","B2","intransitive","inseparable","Thường dùng cho kế hoạch, thỏa thuận hoặc giao dịch."),','("trot out","đưa ra lại một lý do, ý tưởng hoặc lập luận quen thuộc, thường thiếu thuyết phục","C1","transitive","separable","Có thể nói trot the same excuse out hoặc trot out the same excuse."),'),
-              ('("for the time being","trong thời gian hiện tại, cho đến khi tình hình thay đổi","B2"),','("for present purposes","cho mục đích đang được xem xét trong ngữ cảnh hiện tại","C1"),'),
-              ('("at short notice","với rất ít thời gian báo trước hoặc chuẩn bị","B2"),','("from a practical standpoint","xét từ góc độ thực tế và khả năng áp dụng","C1"),'),
-              ('("in due course","vào thời điểm thích hợp sau khi quá trình cần thiết diễn ra","C1"),','("barring unforeseen circumstances","nếu không có tình huống bất ngờ nào xảy ra","C1"),'),
-              ('("as a last resort","như biện pháp cuối cùng khi các lựa chọn khác không hiệu quả","B2"),','("pending further review","trong khi chờ việc xem xét thêm trước khi có quyết định cuối cùng","C1"),'),
-              ('("take it with a grain of salt","đón nhận thông tin với sự hoài nghi nhất định","B2"),','("cut no ice","không tạo được ảnh hưởng hoặc không thuyết phục được ai","C1"),'),
-              ('("put the cart before the horse","làm mọi việc sai thứ tự hợp lý","B2"),','("move heaven and earth","nỗ lực hết sức và làm mọi điều có thể để đạt mục tiêu","C1"),'),
-              ('("keep the ball rolling","duy trì tiến độ hoặc động lực của một hoạt động","B2"),','("read the room","nhận biết đúng tâm trạng và tín hiệu xã hội của những người xung quanh","B2"),'),
-          ]
-          changed=0
-          for old,new in replacements:
-              if old in text:
-                  text=text.replace(old,new,1)
-                  changed+=1
-              elif new not in text:
-                  raise SystemExit(f'scale-24 reviewed seed drift: replacement target missing: {old}')
-          path.write_text(text,encoding='utf-8')
-          print(f'Normalized {changed} scale-24 reviewed seed entries.')
-          PY
-
-      - name: Audit all scale-24 seed duplicates
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          import importlib.util
-          import json
-          from pathlib import Path
-
-          root=Path.cwd()
-          spec=importlib.util.spec_from_file_location('scale24',root/'scripts/apply-english-e04-focused-scale-24.py')
-          mod=importlib.util.module_from_spec(spec)
-          spec.loader.exec_module(mod)
-
-          manifest=json.loads((root/'content/english/batches/manifest.json').read_text(encoding='utf-8'))
-          existing={'collocation':[],'phrase':[]}
-          for batch in manifest.get('batches',[]):
-              if batch.get('phase')!='E04' or batch.get('category')!='phrases':
-                  continue
-              for record_set in batch.get('recordSets',[]):
-                  sid=record_set.get('id')
-                  if sid not in {'collocations','scale-collocations','phrases','scale-phrases'}:
-                      continue
-                  doc=json.loads((root/record_set['path']).read_text(encoding='utf-8'))
-                  bucket='collocation' if sid in {'collocations','scale-collocations'} else 'phrase'
-                  existing[bucket].extend(doc.get('records',[]))
-
-          candidates=[]
-          candidates.extend(('collocation',text) for text,*_ in mod.COLLOCATIONS)
-          candidates.extend(('phrase',row[0]) for row in mod.PHRASAL)
-          candidates.extend(('phrase',row[0]) for row in mod.CHUNKS)
-          candidates.extend(('phrase',row[0]) for row in mod.IDIOMS)
-
-          collisions=[]
-          accepted=[]
-          for kind,text in candidates:
-              pool=[(r.get('id',''),r.get('text','')) for r in existing[kind]]+accepted
-              for oid,otext in pool:
-                  if mod.norm(text)==mod.norm(otext):
-                      collisions.append({'kind':kind,'candidate':text,'existingId':oid,'existingText':otext,'score':1.0,'type':'exact'})
-                  else:
-                      score=mod.jaccard(text,otext)
-                      if score>=0.86:
-                          collisions.append({'kind':kind,'candidate':text,'existingId':oid,'existingText':otext,'score':round(score,4),'type':'near'})
-              accepted.append((f'new:{kind}:{text}',text))
-
-          print(json.dumps({'threshold':0.86,'count':len(collisions),'collisions':collisions},ensure_ascii=False,indent=2))
-          if collisions:
-              raise SystemExit(f'scale-24 seed duplicate audit found {len(collisions)} collision(s)')
-          PY
-
-      - name: Apply focused E04 scale 24
-        shell: bash
-        run: |
-          python3 -m py_compile scripts/apply-english-e04-focused-scale-24.py
-          python3 scripts/apply-english-e04-focused-scale-24.py
+      - name: Apply safe E04 example links
+        run: node scripts/apply-english-e04-safe-example-links.mjs
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -144,53 +49,8 @@ jobs:
       - name: Publish runtime artifacts
         run: pnpm english-content:publish
 
-      - name: Collect scale-24 near-duplicate diagnostics
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          import fs from "node:fs/promises";
-          import path from "node:path";
-          import { listJsonFiles, nearDuplicatePairs, readJson } from "./scripts/english-content-core.mjs";
-
-          const records=[];
-          const seen=new Set();
-          for(const file of await listJsonFiles(path.resolve("shared/phrases"))){
-            if(file.endsWith("manifest.json")) continue;
-            const doc=await readJson(file);
-            for(const record of doc.records??[]){
-              if(!record||typeof record.id!=="string"||typeof record.text!=="string"||seen.has(record.id)) continue;
-              seen.add(record.id);
-              records.push(record);
-            }
-          }
-          const newIds=new Set([
-            ...Array.from({length:40},(_,i)=>"col."+String(561+i).padStart(8,"0")),
-            ...Array.from({length:20},(_,i)=>"pv."+String(281+i).padStart(8,"0")),
-            ...Array.from({length:10},(_,i)=>"chunk."+String(156+i).padStart(8,"0")),
-            ...Array.from({length:10},(_,i)=>"idiom."+String(126+i).padStart(8,"0")),
-          ]);
-          const pairs=nearDuplicatePairs(records,0.86);
-          const scale24Pairs=pairs.filter(({leftId,rightId})=>newIds.has(leftId)||newIds.has(rightId));
-          await fs.writeFile("/tmp/e04-scale-24-near-duplicates.json",JSON.stringify({threshold:0.86,count:scale24Pairs.length,pairs:scale24Pairs},null,2)+"\n");
-          console.log(JSON.stringify({globalNearCount:pairs.length,scale24NearCount:scale24Pairs.length},null,2));
-          NODE
-
       - name: Check runtime exact dedupe
         run: pnpm english-content:dedupe
-
-      - name: Enforce scale-24 near-duplicate review
-        shell: bash
-        run: |
-          node --input-type=module <<'NODE'
-          import fs from "node:fs/promises";
-          const report=JSON.parse(await fs.readFile("/tmp/e04-scale-24-near-duplicates.json","utf8"));
-          if(report.count!==0){
-            console.error(`E04 scale-24 near-duplicate audit failed: ${report.count} candidate(s)`);
-            console.error(JSON.stringify(report.pairs,null,2));
-            process.exit(1);
-          }
-          console.log("E04 scale-24 near-duplicate audit PASS: 0 candidates.");
-          NODE
 
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
@@ -204,37 +64,49 @@ jobs:
       - name: Audit master-plan acceptance
         run: node scripts/audit-english-content-master-plan.mjs
 
-      - name: Report E04 runtime coverage
-        run: node scripts/report-english-content-e04.mjs
-
       - name: Measure enrichment-link evidence
         run: node scripts/report-english-content-enrichment-links.mjs
 
-      - name: Upload E04 scale-24 diagnostics
+      - name: Enforce safe-link acceptance delta
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs/promises";
+          const acceptance=JSON.parse(await fs.readFile("content/english/reports/master-plan-acceptance.json","utf8"));
+          const links=JSON.parse(await fs.readFile("content/english/reports/e04-safe-example-links.json","utf8"));
+          const errors=[];
+          if(acceptance.status!=="pass") errors.push("master-plan acceptance must pass");
+          if(acceptance.e04?.collocationsWithoutExamples!==592) errors.push(`expected 592 collocations without examples, got ${acceptance.e04?.collocationsWithoutExamples}`);
+          if(acceptance.e04?.phraseItemsWithoutExamples!==574) errors.push(`expected 574 phrase items without examples, got ${acceptance.e04?.phraseItemsWithoutExamples}`);
+          if(acceptance.e04?.verbPatternsWithoutExamples!==510) errors.push(`verb-pattern auto-linking is forbidden; expected 510 unlinked, got ${acceptance.e04?.verbPatternsWithoutExamples}`);
+          if(links.linkedCollocations!==8||links.linkedPhraseItems!==26) errors.push("safe-link report must contain exactly 8 collocations + 26 phrase items");
+          if(errors.length){console.error(errors.join("\n"));process.exit(1);}
+          console.log(JSON.stringify({status:"pass",collocationsLinked:8,phraseItemsLinked:26,verbPatternsAutoLinked:0},null,2));
+          NODE
+
+      - name: Upload E04 linkage diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e04-scale-24-diagnostics-${{ github.sha }}
+          name: e04-safe-example-links-${{ github.sha }}
           path: |
-            /tmp/e04-scale-24-near-duplicates.json
+            content/english/reports/e04-safe-example-links.json
             content/english/reports/master-plan-acceptance.json
             content/english/reports/enrichment-link-evidence.json
             content/english/reports/e10-review-ledger.json
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Commit reviewed E04 focused scale 24
+      - name: Commit reviewed E04 safe example links
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/phrases \
-            scripts/apply-english-e04-focused-scale-24.py scripts/publish-english-content.mjs \
-            scripts/smoke-published-english-content.mjs scripts/report-english-content-e04.mjs
+          git add content/english shared/phrases scripts/apply-english-e04-safe-example-links.mjs
           if git diff --cached --quiet; then
-            echo 'No E04 scale-24 changes to commit.'
+            echo 'No E04 safe-link changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish reviewed E04 focused scale 24'
+          git commit -m 'feat(content): link verified E04 phrase examples'
           git push
