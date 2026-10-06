@@ -7,6 +7,7 @@ on:
     paths:
       - ".github/workflows/b04-2-parent-one-shot.yml"
       - "scripts/b04-2-parent-patch.py"
+      - "scripts/b04-2-parent-galaxy-test-fix.py"
 
 permissions:
   contents: write
@@ -32,20 +33,7 @@ jobs:
       - name: Patch B04.2 parent integration
         run: |
           python scripts/b04-2-parent-patch.py
-          python - <<'PY'
-          from pathlib import Path
-          p = Path("admin/world-music-preview.test.mjs")
-          text = p.read_text()
-          text = text.replace('''      galaxies: {
-        "2": {''', '''      galaxies: {
-        "3": {''', 1)
-          text = text.replace('''  const world06Galaxy = galaxyPreview.worlds.find((world) => world.worldId === "world-06");
-  assert.equal(world06Galaxy.states.normal.resolvedFrom, "galaxy-2.published.normal");
-  assert.ok(world06Galaxy.states.normal.badges.includes("GALAXY FALLBACK"));''', '''  const world11Galaxy = galaxyPreview.worlds.find((world) => world.worldId === "world-11");
-  assert.equal(world11Galaxy.states.normal.resolvedFrom, "galaxy-3.published.normal");
-  assert.ok(world11Galaxy.states.normal.badges.includes("GALAXY FALLBACK"));''', 1)
-          p.write_text(text)
-          PY
+          python scripts/b04-2-parent-galaxy-test-fix.py
           git update-index --add --cacheinfo 160000,54e0e931e946f8a3193a0dfbd394d1d95b7acd8a,games/space-typing
           git submodule update --init --force games/space-typing
 
@@ -73,7 +61,7 @@ jobs:
 
       - name: Commit verified integration and remove one-shot
         run: |
-          git rm .github/workflows/b04-2-parent-one-shot.yml scripts/b04-2-parent-patch.py
+          git rm .github/workflows/b04-2-parent-one-shot.yml scripts/b04-2-parent-patch.py scripts/b04-2-parent-galaxy-test-fix.py
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add admin portal/src/admin scripts/validate-space-admin-phase-b.mjs games/space-typing
