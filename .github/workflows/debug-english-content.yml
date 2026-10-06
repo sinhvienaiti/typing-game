@@ -62,7 +62,7 @@ jobs:
       - name: Publish B2 runtime artifacts
         run: pnpm english-content:publish
 
-      - name: Collect B2 near-duplicate diagnostics
+      - name: Collect global near-duplicate diagnostics
         shell: bash
         run: |
           node --input-type=module <<'NODE' > /tmp/b2-near-duplicates.json
@@ -90,9 +90,7 @@ jobs:
               records.push(record);
             }
           }
-          const pairs = nearDuplicatePairs(records, 0.86).filter(
-            ({leftId, rightId}) => leftId.startsWith("sent.grb2.") || rightId.startsWith("sent.grb2."),
-          );
+          const pairs = nearDuplicatePairs(records, 0.86);
           console.log(JSON.stringify({threshold: 0.86, count: pairs.length, pairs}, null, 2));
           NODE
 
