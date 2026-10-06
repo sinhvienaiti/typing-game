@@ -112,7 +112,9 @@ assert(main.includes('control.setAttribute("aria-pressed", String(index === 0))'
 assert(extended.includes('input.setAttribute("aria-label", label)'), "Extended range aria-label is missing");
 assert(extended.includes('control.setAttribute("aria-pressed", String(enabled))'), "Extended toggle aria state is missing");
 assert(worldMusic.includes('stageBtn.setAttribute("aria-pressed", String(state.stages.has(stageNumber)))'), "World Music stage aria state is missing");
-assert(worldMusic.includes('inherit.setAttribute("aria-pressed", "false")') && worldMusic.includes('replace.setAttribute("aria-pressed", "true")'), "World Music assignment segmented aria state is missing");
+assert(worldMusic.includes('assignment: "replace" as "inherit" | "replace"'), "World Music assignment mock state is missing");
+assert(worldMusic.includes('inherit.setAttribute("aria-pressed", String(state.assignment === "inherit"))') && worldMusic.includes('replace.setAttribute("aria-pressed", String(state.assignment === "replace"))'), "World Music assignment segmented aria state is missing");
+assert(worldMusic.includes('Configured: ${configured} · Effective source: ${resolvedSource}'), "World Music effective playlist does not reflect assignment state");
 assert(extended.includes('publish.disabled = selectedStatus !== "Draft"'), "History Publish must be limited to Draft revisions");
 assert(extended.includes('const rollbackEligible = selectedStatus === "Published" && uiState.selectedRevision !== "r127"'), "History Rollback must be limited to older Published revisions");
 

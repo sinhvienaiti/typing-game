@@ -42,6 +42,7 @@ const state = {
   role: "Normal",
   view: "tree" as "tree" | "matrix",
   scope: "stage" as "all" | "galaxy" | "world" | "stage",
+  assignment: "replace" as "inherit" | "replace",
 };
 
 const tracks = [
@@ -72,7 +73,7 @@ function scopeToolbar(): HTMLElement {
   const seg = el("div", "st-admin-seg");
   const scopes: Array<[typeof state.scope, string]> = [["all", "All Game"], ["galaxy", "Galaxy"], ["world", "World"], ["stage", "Stage"]];
   for (const [value, label] of scopes) {
-    const control = btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : "");
+    const control = btn(label, () => { state.scope = value; if (value === "all") state.assignment = "replace"; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : "");
     control.setAttribute("aria-pressed", String(state.scope === value));
     seg.append(control);
   }
@@ -83,7 +84,7 @@ function scopeToolbar(): HTMLElement {
 function tree(): HTMLElement {
   const root = panel("Scope Tree", "Select All, Galaxy, World, one or many stages");
   const body = el("div", "stx-music-tree");
-  body.append(btn("All Game", () => { state.scope = "all"; currentNavigate(`${BASE}/world-music`); }, `stx-music-scope ${state.scope === "all" ? "active" : ""}`));
+  body.append(btn("All Game", () => { state.scope = "all"; state.assignment = "replace"; currentNavigate(`${BASE}/world-music`); }, `stx-music-scope ${state.scope === "all" ? "active" : ""}`));
   for (let g = 1; g <= 10; g++) {
     const details = el("details", "stx-music-galaxy");
     if (g === state.galaxy) details.open = true;
@@ -130,20 +131,12 @@ function assignmentEditor(): HTMLElement {
   root.append(tabs);
   const mode = el("div", "stx-music-assignment-head");
   const seg = el("div", "st-admin-seg");
-  const inherit = btn("Inherit", () => {
-    inherit.setAttribute("aria-pressed", "true");
-    replace.setAttribute("aria-pressed", "false");
-    inherit.classList.add("active");
-    replace.classList.remove("active");
-  });
-  const replace = btn("Replace", () => {
-    inherit.setAttribute("aria-pressed", "false");
-    replace.setAttribute("aria-pressed", "true");
-    inherit.classList.remove("active");
-    replace.classList.add("active");
-  }, "active");
-  inherit.setAttribute("aria-pressed", "false");
-  replace.setAttribute("aria-pressed", "true");
+  const inherit = btn("Inherit", () => { state.assignment = "inherit"; currentNavigate(`${BASE}/world-music`); }, state.assignment === "inherit" ? "active" : "");
+  const replace = btn("Replace", () => { state.assignment = "replace"; currentNavigate(`${BASE}/world-music`); }, state.assignment === "replace" ? "active" : "");
+  inherit.disabled = state.scope === "all";
+  inherit.title = inherit.disabled ? "Global scope has no parent configuration to inherit from." : "Use the effective value from the parent scope.";
+  inherit.setAttribute("aria-pressed", String(state.assignment === "inherit"));
+  replace.setAttribute("aria-pressed", String(state.assignment === "replace"));
   seg.append(inherit, replace);
   const strategy = el("select", "st-admin-select");
   strategy.setAttribute("aria-label", "Playlist selection strategy");
@@ -177,7 +170,9 @@ function assignmentEditor(): HTMLElement {
 function effective(): HTMLElement {
   const root = panel("Effective Playlist", `${state.role} · preview after hierarchy resolution`);
   const label = state.scope === "stage" ? `Stage ${Array.from(state.stages).sort((a,b) => a-b).join(", ")}` : state.scope === "world" ? `World ${String(state.world).padStart(2, "0")}` : state.scope === "galaxy" ? `Galaxy ${String(state.galaxy).padStart(2, "0")}` : "All Game";
-  root.append(badge("REPLACED", "good"), el("div", "stx-effective-source", `Configured: Replace · Effective source: ${label} · ${state.role}`));
+  const configured = state.assignment === "replace" ? "Replace" : "Inherit";
+  const resolvedSource = state.assignment === "replace" ? label : state.scope === "stage" ? `World ${String(state.world).padStart(2, "0")}` : state.scope === "world" ? `Galaxy ${String(state.galaxy).padStart(2, "0")}` : "Global";
+  root.append(badge(state.assignment === "replace" ? "REPLACED" : "INHERIT", state.assignment === "replace" ? "good" : "info"), el("div", "stx-effective-source", `Configured: ${configured} · Effective source: ${resolvedSource} · ${state.role}`));
   const list = el("div", "stx-effective-tracks");
   tracks.slice(0, 3).forEach(([id, title, duration, mood], index) => {
     const row = el("div", "stx-effective-track");
