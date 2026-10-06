@@ -61,6 +61,10 @@ jobs:
           node --check admin/ship-registry-preview.test.mjs
           node --check admin/ship-runtime.mjs
           node --check admin/ship-runtime.test.mjs
+          node --check admin/equipment-policy.mjs
+          node --check admin/equipment-policy.test.mjs
+          node --check admin/equipment-registry-preview.mjs
+          node --check admin/equipment-registry-preview.test.mjs
           node --check admin/store.test.mjs
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-audio.mjs
@@ -74,6 +78,9 @@ jobs:
       - name: Test B06.1 Ships runtime envelope
         run: node --test admin/ship-runtime.test.mjs
 
+      - name: Test B06.2 Equipment server validation
+        run: node --test admin/equipment-policy.test.mjs
+
       - name: Install focused dependencies
         run: |
           pnpm install
@@ -85,6 +92,9 @@ jobs:
 
       - name: Test canonical Ships Admin preview bridge
         run: node --test admin/ship-registry-preview.test.mjs
+
+      - name: Test canonical Equipment Admin preview bridge
+        run: node --test admin/equipment-registry-preview.test.mjs
 
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test

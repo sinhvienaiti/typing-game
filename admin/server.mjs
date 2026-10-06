@@ -7,6 +7,7 @@ import { SpaceTypingRevisionStore } from "./space-typing-store.mjs";
 import { createDefaultSpaceTypingConfig } from "./default-config.mjs";
 import { runWorldMusicPreview, WorldMusicPreviewError } from "./world-music-preview.mjs";
 import { runShipRegistryPreview, ShipRegistryPreviewError } from "./ship-registry-preview.mjs";
+import { runEquipmentRegistryPreview, EquipmentRegistryPreviewError } from "./equipment-registry-preview.mjs";
 import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
@@ -72,13 +73,7 @@ const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
 
-    // Read-only runtime bridge. This intentionally exposes only the current
-    // active Ships policy and never accepts writes. Gameplay materializes it
-    // once per page/game session, matching the contract's new-session boundary.
-    if (
-      request.method === "GET" &&
-      url.pathname === "/api/runtime/space-typing/ships"
-    ) {
+    if (request.method === "GET" && url.pathname === "/api/runtime/space-typing/ships") {
       const state = await store.getState();
       const config = await store.getRuntimeConfig();
       json(response, 200, createShipRuntimeEnvelope(state, config));
@@ -132,10 +127,7 @@ const server = createServer(async (request, response) => {
       json(response, 201, result);
       return;
     }
-    if (
-      request.method === "DELETE" &&
-      url.pathname.startsWith("/api/admin/space-typing/music/tracks/")
-    ) {
+    if (request.method === "DELETE" && url.pathname.startsWith("/api/admin/space-typing/music/tracks/")) {
       const trackId = decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length));
       json(response, 200, await musicAssets.remove(trackId));
       return;
@@ -159,6 +151,14 @@ const server = createServer(async (request, response) => {
       const activeConfig = await store.getRuntimeConfig();
       const policy = input.policy ?? activeConfig.content?.ships;
       const preview = await runShipRegistryPreview({ rootDir: root, contract, policy });
+      json(response, 200, preview);
+      return;
+    }
+    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/equipment/preview") {
+      const input = await body(request);
+      const activeConfig = await store.getRuntimeConfig();
+      const policy = input.policy ?? activeConfig.content?.equipment;
+      const preview = await runEquipmentRegistryPreview({ rootDir: root, contract, policy });
       json(response, 200, preview);
       return;
     }
@@ -206,6 +206,10 @@ const server = createServer(async (request, response) => {
     }
     if (error instanceof ShipRegistryPreviewError) {
       json(response, 502, { error: "ships-preview-error", message: error.message });
+      return;
+    }
+    if (error instanceof EquipmentRegistryPreviewError) {
+      json(response, 502, { error: "equipment-preview-error", message: error.message });
       return;
     }
     console.error(error);

@@ -30,6 +30,10 @@ export function createDefaultSpaceTypingConfig(contract) {
       ships: {
         configRevision: "ships-admin-v1",
         ships: {}
+      },
+      equipment: {
+        configRevision: "equipment-admin-v1",
+        equipment: {}
       }
     },
     system: {
