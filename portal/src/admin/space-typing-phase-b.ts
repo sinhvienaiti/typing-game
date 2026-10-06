@@ -3,6 +3,7 @@ import { renderPhaseBWorldMusic } from "./space-typing-world-music-phase-b";
 import { renderPhaseBHistory } from "./space-typing-history-phase-b";
 import { renderPhaseBShips } from "./space-typing-ships-phase-b";
 import { renderPhaseBEquipment } from "./space-typing-equipment-phase-b";
+import { renderPhaseBSkills } from "./space-typing-skills-phase-b";
 import { SpaceTypingAdminApi, type FeatureFlagConfig, type FeatureFlagScope, type GeneralSettingsConfig, type SpaceTypingAdminConfig } from "./api";
 
 const BASE = "/admin/space-typing";
@@ -197,7 +198,6 @@ function renderSettings(navigate: Navigate): HTMLElement {
   const reconnectWindow = field("Reconnect Window (seconds)", String(state.network.reconnectWindowSeconds), undefined, "number");
   const offlinePlay = toggle("Offline Play", state.network.offlinePlay);
   const telemetry = toggle("Telemetry", state.network.telemetry);
-
   const maintenance = toggle("Maintenance Mode", state.maintenance.enabled, "Dangerous: becomes active only after Publish.");
   const maintenanceMessage = field("Maintenance Message", state.maintenance.message);
 
@@ -368,6 +368,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/world-music`) return renderPhaseBWorldMusic(navigate);
   if (path === `${BASE}/ships`) return renderPhaseBShips(navigate);
   if (path === `${BASE}/equipment`) return renderPhaseBEquipment(navigate);
+  if (path === `${BASE}/skills`) return renderPhaseBSkills(navigate);
   if (path === `${BASE}/settings`) return renderSettings(navigate);
   if (path === `${BASE}/flags`) return renderFlags(navigate);
   if (path === `${BASE}/history`) return renderPhaseBHistory(navigate);
