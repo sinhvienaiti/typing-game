@@ -1,0 +1,69 @@
+name: Space Admin Phase B Audio Once
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - "portal/src/admin/space-typing-audio-phase-b.ts"
+      - "scripts/apply-space-admin-phase-b-audio.mjs"
+      - "scripts/validate-space-admin-audio.mjs"
+      - ".github/workflows/admin-phase-b-audio-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/space-typing-admin-uiux
+          fetch-depth: 0
+          submodules: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Initialize pinned Space Typing child
+        run: git submodule update --init games/space-typing
+
+      - name: Apply B03 Audio mapping
+        run: node scripts/apply-space-admin-phase-b-audio.mjs
+
+      - name: Remove one-shot tooling before validation
+        run: rm scripts/apply-space-admin-phase-b-audio.mjs .github/workflows/admin-phase-b-audio-once.yml
+
+      - name: Validate Phase A and Phase B contracts
+        run: |
+          node scripts/validate-space-admin-contract.mjs
+          node scripts/validate-space-admin-ui.mjs
+          node scripts/validate-space-admin-phase-b.mjs
+          node scripts/validate-space-admin-audio.mjs
+
+      - name: Test immutable revisions and Audio validation
+        run: node --test admin/store.test.mjs
+
+      - name: Install Portal dependencies
+        run: pnpm --dir portal install
+
+      - name: Build Portal
+        run: pnpm build:portal
+
+      - name: Commit B03 Audio mapping
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No B03 Audio changes to commit"
+            exit 0
+          fi
+          git commit -m "feat(admin): wire Phase B audio defaults drafts"
+          git push origin HEAD:feat/space-typing-admin-uiux
