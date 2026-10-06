@@ -390,9 +390,14 @@ export class SpaceTypingAdmin {
     const labels = ["Today", "24h", "7d", "30d", "90d", "Custom"];
     for (const [index, label] of labels.entries()) {
       const control = button(label, () => {
-        for (const child of Array.from(seg.children)) child.classList.remove("active");
+        for (const child of Array.from(seg.children)) {
+          child.classList.remove("active");
+          child.setAttribute("aria-pressed", "false");
+        }
         control.classList.add("active");
+        control.setAttribute("aria-pressed", "true");
       }, index === 0 ? "active" : "");
+      control.setAttribute("aria-pressed", String(index === 0));
       seg.append(control);
     }
     bar.append(seg, element("div", "st-admin-filter-spacer"));
@@ -577,9 +582,12 @@ export class SpaceTypingAdmin {
     const search = element("input", "st-admin-search") as HTMLInputElement;
     search.type = "search";
     search.placeholder = "Search track ID, title, filename…";
+    search.setAttribute("aria-label", "Search music library");
     const type = element("select", "st-admin-select");
+    type.setAttribute("aria-label", "Filter music by type");
     type.append(new Option("All types", ""), ...["BGM", "Boss", "Ambient", "Victory", "Duel"].map((value) => new Option(value, value)));
     const status = element("select", "st-admin-select");
+    status.setAttribute("aria-label", "Filter music by status");
     status.append(new Option("All status", ""), new Option("Ready", "READY"), new Option("Unused", "UNUSED"), new Option("Warning", "WARNING"));
     filters.append(search, type, status, element("div", "st-admin-filter-spacer"), button("Find Unused", () => {
       search.value = "";

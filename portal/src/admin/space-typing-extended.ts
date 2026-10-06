@@ -90,6 +90,7 @@ function rangeField(label: string, value: number, min = 0, max = 100, suffix = "
   input.min = String(min);
   input.max = String(max);
   input.value = String(value);
+  input.setAttribute("aria-label", label);
   input.addEventListener("input", () => { valueLabel.textContent = `${input.value}${suffix}`; });
   root.append(top, input);
   return root;
@@ -287,7 +288,7 @@ function registryScreen(title: string, eyebrow: string, description: string, row
   const page = el("div");
   page.append(header(eyebrow, title, description, actions));
   const list = panel(`${title} Registry`, `${rows.length} mock records · searchable editor pattern`);
-  const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = `Search ${title.toLowerCase()}…`; list.append(search);
+  const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = `Search ${title.toLowerCase()}…`; search.setAttribute("aria-label", `Search ${title}`); list.append(search);
   const host = el("div", "stx-registry-list"); list.append(host);
   const render = () => {
     host.replaceChildren();
@@ -373,7 +374,7 @@ function renderTypingContent(navigate: Navigate): HTMLElement {
   for (const config of [["All CEFR", "A1", "A2", "B1", "B2", "C1"], ["All Topics", "Space", "Daily", "Technology", "Business"], ["All Status", "Ready", "Draft", "Review"]]) {
     const select = el("select", "st-admin-select"); select.setAttribute("aria-label", config[0] ?? "Content filter"); for (const option of config) select.append(new Option(option, option)); filters.append(select);
   }
-  const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = "Search content ID, word, topic…"; filters.prepend(search); page.append(filters);
+  const search = el("input", "st-admin-search") as HTMLInputElement; search.placeholder = "Search content ID, word, topic…"; search.setAttribute("aria-label", "Search typing content"); filters.prepend(search); page.append(filters);
   page.append(makeTable(["ID", "Title / Item", "CEFR", "Topic", "Difficulty", "Used By", "Status"], [["lex-orbit-001", "orbit", "A2", "Space", "2/5", "18 stages", badge("READY", "good")], ["txt-b1-space-08", "Life aboard a research station", "B1", "Space", "3/5", "6 stages", badge("READY", "good")], ["boss-w16-01", "Prism Sovereign challenge", "B1", "Boss", "4/5", "Stage 320", badge("REVIEW", "warn")], ["recall-a2-14", "Travel & direction recall", "A2", "Daily", "2/5", "Recall", badge("READY", "good")]]));
   return page;
 }
@@ -498,7 +499,18 @@ function renderHistory(navigate: Navigate): HTMLElement {
   for (const row of revisions) { const item = el("button", `stx-revision${uiState.selectedRevision === row[0] ? " active" : ""}`) as HTMLButtonElement; item.type = "button"; item.append(el("strong", undefined, row[0]), badge(row[1], row[1] === "Published" ? "good" : row[1] === "Draft" ? "warn" : "bad"), el("span", undefined, row[3]), el("small", undefined, `${row[2]} · ${row[4]} · ${row[5]}`)); item.addEventListener("click", () => { uiState.selectedRevision = row[0]; navigate(`${BASE}/history`); }); host.append(item); } list.append(host);
   const detail = panel(`Revision ${uiState.selectedRevision}`, "Deep diff · mock"); detail.append(stats([["Added", "3", "changes", "good"], ["Modified", "8", "changes", "warn"], ["Removed", "1", "change", "bad"], ["Validation", "PASS", "UI mock", "good"]]));
   const diff = el("pre", "stx-diff"); diff.textContent = `World 05\n  Stage 091\n    Normal Music\n-   stellar-dawn\n+   silent-orbit\n+   deep-nebula\n\nAudio Defaults\n- Music 0.35\n+ Music 0.26\n\nVanguard\n- Shield 120\n+ Shield 135`;
-  detail.append(diff, el("div", "st-admin-page-actions")); const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!; actions.append(btn("Clone Draft"), btn("Validate"), btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger"), btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary")); page.append(editorShell(list, detail)); return page;
+  detail.append(diff, el("div", "st-admin-page-actions"));
+  const actions = detail.querySelector<HTMLElement>(".st-admin-page-actions")!;
+  const selectedRevision = revisions.find((row) => row[0] === uiState.selectedRevision);
+  const selectedStatus = selectedRevision?.[1] ?? "Draft";
+  const rollback = btn("Rollback", () => openRollbackReviewDialog(uiState.selectedRevision), "st-admin-btn danger");
+  rollback.disabled = selectedStatus === "Draft" || uiState.selectedRevision === "r127";
+  rollback.title = rollback.disabled ? "Select an older published revision to preview rollback." : "Review rollback impact";
+  const publish = btn("Publish", () => openPublishReviewDialog(uiState.selectedRevision), "st-admin-btn primary");
+  publish.disabled = selectedStatus !== "Draft";
+  publish.title = publish.disabled ? "Only draft revisions can be published." : "Review and publish draft";
+  actions.append(btn("Clone Draft"), btn("Validate"), rollback, publish);
+  page.append(editorShell(list, detail)); return page;
 }
 
 function renderQa(): HTMLElement {

@@ -71,7 +71,11 @@ function scopeToolbar(): HTMLElement {
   const bar = el("div", "st-admin-filterbar");
   const seg = el("div", "st-admin-seg");
   const scopes: Array<[typeof state.scope, string]> = [["all", "All Game"], ["galaxy", "Galaxy"], ["world", "World"], ["stage", "Stage"]];
-  for (const [value, label] of scopes) seg.append(btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : ""));
+  for (const [value, label] of scopes) {
+    const control = btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : "");
+    control.setAttribute("aria-pressed", String(state.scope === value));
+    seg.append(control);
+  }
   bar.append(seg, el("div", "st-admin-filter-spacer"), badge(`G${String(state.galaxy).padStart(2, "0")}`, "info"), badge(`WORLD ${String(state.world).padStart(2, "0")}`, "info"), badge(`${state.stages.size} STAGE SELECTED`, state.stages.size > 1 ? "warn" : "good"));
   return bar;
 }
@@ -100,6 +104,7 @@ function tree(): HTMLElement {
             state.scope = "stage";
             currentNavigate(`${BASE}/world-music`);
           }, `stx-music-stage ${state.stages.has(stageNumber) ? "active" : ""}`);
+          stageBtn.setAttribute("aria-pressed", String(state.stages.has(stageNumber)));
           if (s === 20) stageBtn.title = "Boss stage";
           stages.append(stageBtn);
         }
@@ -117,7 +122,11 @@ function assignmentEditor(): HTMLElement {
   const selectedLabel = state.scope === "stage" ? `${state.stages.size} selected stage${state.stages.size === 1 ? "" : "s"}` : state.scope === "world" ? `World ${String(state.world).padStart(2, "0")}` : state.scope === "galaxy" ? `Galaxy ${String(state.galaxy).padStart(2, "0")}` : "All Game";
   const root = panel("Assignment Editor", `${selectedLabel} · multi-file playlist`);
   const tabs = el("div", "st-admin-state-tabs");
-  for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) tabs.append(btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : ""));
+  for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) {
+    const control = btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : "");
+    control.setAttribute("aria-pressed", String(state.role === role));
+    tabs.append(control);
+  }
   root.append(tabs);
   const mode = el("div", "stx-music-assignment-head");
   const seg = el("div", "st-admin-seg");
@@ -140,6 +149,7 @@ function assignmentEditor(): HTMLElement {
     weight.value = String(index === 0 ? 50 : index === 1 ? 30 : 20);
     weight.min = "0";
     weight.max = "100";
+    weight.setAttribute("aria-label", `${title} playlist weight`);
     row.append(input, copy, weight, badge(index < 3 ? "SELECTED" : "AVAILABLE", index < 3 ? "good" : "info"));
     playlist.append(row);
   });
