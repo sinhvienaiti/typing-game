@@ -1,102 +1,79 @@
 # Space Typing Admin UI/UX Progress
 
-## Current State
+## PROJECT STATE
 
-Status: IN_PROGRESS
+STATUS: IN_PROGRESS
 
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- HEAD: `7bed6f52279b055a25bc76d885c93e4640588fe8`
+- HEAD before this checkpoint: `1f5d49206df88d0c1ab126389d9f47514c50db38`
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Branch: `feat/admin-world-music-stage-policy`
-- HEAD: `ef337f682e6d6c554294a042568c43616b3b42a0`
+- HEAD: `80f8e984b005e961746b1617347570b7741d8513`
+- Parent child reference: still the previous B06.4 child revision; do not advance it until the B06.5 child slice is runtime-wired and validated.
 
 Current milestone:
 - **B06.5 — Bosses Admin → Runtime**
 
-Completed:
-- **B06.1 — Ships Admin → Runtime**
-  - Child canonical contract + preview protocol
-  - Parent validation + preview bridge
-  - Revision-backed Admin UI
-  - Runtime envelope + new-session apply boundary
-  - CI coverage
-- **B06.2 — Equipment Admin → Runtime**
-  - Child canonical contract + preview protocol
-  - Parent validation + preview bridge
-  - Revision-backed Admin UI
-  - Runtime envelope + new-session apply boundary
-  - CI coverage
-- **B06.3 — Skills Admin → Runtime**
-  - Child canonical contract + preview protocol
-  - Parent validation + preview bridge
-  - Revision-backed Admin UI
-  - Runtime envelope + new-session apply boundary
-  - CI coverage
-- **B06.4 — Enemies Admin → Runtime**
-  - Child Enemy Admin contract added
-  - 35 canonical Enemy IDs exposed
-  - Only canonical authorable runtime field persisted: `minStage`
-  - Child Enemy preview protocol + CLI added
-  - Child runtime Enemy policy loader added
-  - Enemy spawn admission now consumes published `minStage` overrides at new-session boundary
-  - Parent Enemy policy validation added
-  - Parent Enemy preview bridge added
-  - Parent Enemy runtime envelope added
-  - Parent revision store accepts `content.enemies`
-  - Parent `/api/admin/space-typing/enemies/preview` endpoint added
-  - Parent `/api/runtime/space-typing/enemies` endpoint added
-  - Revision-backed Enemy Admin editor added at `/admin/space-typing/enemies`
-  - Parent child-submodule pointer updated to the B06.4 child HEAD
-  - Admin CI updated with B06.4 gates
-  - Phase B mapping updated: Ships / Equipment / Skills / Enemies are runtime-backed
-  - Admin CI: PASS
-  - Platform CI: PASS
+## COMPLETED MILESTONES
 
-Current B06.5 discovery already reviewed:
-- Boss source of truth is child-owned under `src/boss/**`
-- Canonical boss identity model exists in `src/boss/identity.ts`
-- Boss runtime model exists in `src/boss/model.ts`
-- Boss visual mapping exists in `src/boss/visual-profile.ts`
-- Master Admin UI/UX plan requires a dedicated Boss editor with:
-  - Identity: ID, Name, World, Role, Family, Art
-  - Stats: HP, Shield, Armor, Damage, Speed
-  - Phase timeline: Phase 1 / Phase 2 / Phase 3-Enrage
-  - Per-phase attacks, skills, spawn, movement, music, VFX, announcer
-  - Rewards: credits, rare credits, equipment, drop table, first clear, repeat clear
+- **B06.1 — Ships Admin → Runtime** — DONE
+- **B06.2 — Equipment Admin → Runtime** — DONE
+- **B06.3 — Skills Admin → Runtime** — DONE
+- **B06.4 — Enemies Admin → Runtime** — DONE
 
-Important B06.5 constraint:
-- Do **not** blindly persist every field listed in the UI/UX master plan.
-- First identify which Boss fields already have a real canonical child runtime consumer.
-- Any field without a proven runtime consumer must remain read-only / preview-only until a safe canonical contract is added.
-- Keep Save Draft revision-backed and Publish-gated; no direct runtime mutation from the editor.
+## COMPLETED TASKS OF CURRENT MILESTONE
 
-Remaining:
-- Finish B06.5 child Boss runtime-consumer audit field by field
-- Decide minimal safe authorable Boss contract for the first runtime-backed slice
-- Add Boss child Admin contract section
-- Add Boss preview protocol + CLI
-- Add Boss runtime policy loader at a new-session boundary
-- Wire supported Boss policy into real boss runtime consumers
-- Add child Boss policy/preview/runtime tests
-- Mirror Boss contract in parent
-- Add parent Boss policy validation
-- Add parent Boss preview bridge
-- Add parent Boss runtime envelope + endpoints
-- Replace mock Boss Admin screen with revision-backed B06.5 editor
-- Keep unsupported Boss UI plan fields read-only with explicit explanation
-- Update Phase B mapping + validation scripts
-- Update parent submodule pointer to the exact final child HEAD
-- Run child CI
-- Run Admin CI
-- Run Platform CI
-- Review exact final parent + child HEADs before moving to B06.6 Worlds & Stages
+- Audited canonical Boss identity/runtime model and real consumer path.
+- Confirmed 26 canonical Boss IDs: 10 Galaxy Tyrants, 8 Wardens, 8 Lieutenants.
+- Locked first safe authorable slice to `name` + `title`; HP/shield/armor/damage/speed/phase/reward fields remain unsupported until they have explicit canonical runtime consumers.
+- Added child `src/admin/boss-runtime-policy.ts` with:
+  - published runtime endpoint `/api/runtime/space-typing/bosses`
+  - `new-session` apply boundary
+  - strict canonical Boss ID allowlist
+  - strict `name` / `title` field allowlist
+  - normalization and deterministic bundled fallback
+  - unknown-ID filtering and malformed-policy fallback
+- Added `scripts/admin/boss-registry-preview.ts` and `pnpm bosses:admin-preview`.
+- Added child unit coverage in `tests/boss-runtime-policy.test.ts` for valid overrides, unknown IDs, unsupported fields, malformed apply boundary, and fetch failure fallback.
+- Child changes are committed/pushed through `80f8e984b005e961746b1617347570b7741d8513`.
 
-Next action:
-- Continue **B06.5 — Bosses Admin → Runtime** by auditing `src/boss/identity.ts`, `src/boss/model.ts`, `src/boss/skills.ts`, `src/boss/typing-mechanics.ts`, `src/boss/visual-profile.ts`, and the actual Game/runtime call sites; then define the smallest safe Boss authorable contract instead of inventing unsupported fields.
+## REMAINING TASKS
 
-Blocker:
+- Wire published Boss `name` / `title` overrides into the canonical identity/runtime consumer used by `bossIdentityForStage()` / `bossFullName()` / boss HUD state.
+- Add Boss section/capabilities/route/apply-boundary metadata to child Admin contract.
+- Add/extend child contract and identity integration tests.
+- Run child targeted Boss tests, full tests, typecheck/build and child CI; fix any failures.
+- Mirror Boss contract in parent.
+- Add parent Boss validation, preview bridge, runtime envelope and `/api/admin/space-typing/bosses/preview` + `/api/runtime/space-typing/bosses` endpoints.
+- Replace mock Boss Admin screen with revision-backed editor; unsupported master-plan fields must remain read-only with explicit explanation.
+- Verify Draft -> Validate -> Publish -> runtime sees Boss identity change -> Rollback -> runtime returns prior identity.
+- Update Phase B mapping and Admin CI gates.
+- Only after child validation passes, update parent child reference to exact final B06.5 child SHA.
+- Run parent Admin CI, Platform CI and runtime smoke.
+- Then continue to the next mandatory milestone from the current master plan.
+
+## CURRENT BLOCKER
+
 - NONE
+
+## NEXT ACTION
+
+- Continue B06.5 directly by wiring `ACTIVE_BOSS_RUNTIME_SESSION` into the canonical Boss identity/name path, then update the child contract and tests. Do not repeat the completed audit or recreate the runtime loader/preview/test files.
+
+## QUALITY GATES
+
+- Unit: PARTIAL — Boss runtime policy tests added, execution not yet verified in this run.
+- Integration: PENDING — identity consumer wiring not complete.
+- Admin validation: PENDING for Boss.
+- Runtime validation: PARTIAL — loader implemented; real identity consumer wiring pending.
+- Contract tests: PENDING for Boss.
+- Build: PENDING after B06.5 child wiring.
+- Lint/typecheck: PENDING after B06.5 child wiring.
+- Child CI: PENDING for child HEAD `80f8e984b005e961746b1617347570b7741d8513`.
+- Parent Admin CI: previous B06.4 gate PASS; B06.5 pending.
+- Platform CI: previous B06.4 gate PASS; B06.5 pending.
+- Runtime smoke: PENDING for Boss.
