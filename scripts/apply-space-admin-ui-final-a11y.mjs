@@ -97,7 +97,7 @@ function replaceRequired(source, before, after, label) {
     source,
     'for (const [value, label] of scopes) seg.append(btn(label, () => { state.scope = value; currentNavigate(`${BASE}/world-music`); }, state.scope === value ? "active" : ""));',
     `for (const [value, label] of scopes) {
-    const control = btn(label, () => { state.scope = value; currentNavigate(\`${BASE}/world-music\`); }, state.scope === value ? "active" : "");
+    const control = btn(label, () => { state.scope = value; currentNavigate(\`\${BASE}/world-music\`); }, state.scope === value ? "active" : "");
     control.setAttribute("aria-pressed", String(state.scope === value));
     seg.append(control);
   }`,
@@ -108,7 +108,7 @@ function replaceRequired(source, before, after, label) {
     source,
     'for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) tabs.append(btn(role, () => { state.role = role; currentNavigate(`${BASE}/world-music`); }, state.role === role ? "active" : ""));',
     `for (const role of ["Normal", "Boss Common", "Mini Boss", "World Boss", "Major Boss"]) {
-    const control = btn(role, () => { state.role = role; currentNavigate(\`${BASE}/world-music\`); }, state.role === role ? "active" : "");
+    const control = btn(role, () => { state.role = role; currentNavigate(\`\${BASE}/world-music\`); }, state.role === role ? "active" : "");
     control.setAttribute("aria-pressed", String(state.role === role));
     tabs.append(control);
   }`,
