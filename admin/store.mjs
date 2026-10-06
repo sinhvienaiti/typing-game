@@ -31,6 +31,78 @@ async function writeJsonAtomic(path, value) {
   await rename(temporary, path);
 }
 
+function object(value, path) {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    throw new AdminValidationError(`${path} must be an object.`);
+  }
+  return value;
+}
+
+function string(value, path, { min = 1, max = 200, pattern } = {}) {
+  if (typeof value !== "string" || value.length < min || value.length > max) {
+    throw new AdminValidationError(`${path} must be a string between ${min} and ${max} characters.`);
+  }
+  if (pattern && !pattern.test(value)) {
+    throw new AdminValidationError(`${path} has an invalid format.`);
+  }
+  return value;
+}
+
+function boolean(value, path) {
+  if (typeof value !== "boolean") throw new AdminValidationError(`${path} must be boolean.`);
+  return value;
+}
+
+function number(value, path, { min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFINITY } = {}) {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < min || value > max) {
+    throw new AdminValidationError(`${path} must be a finite number between ${min} and ${max}.`);
+  }
+  return value;
+}
+
+function enumValue(value, path, allowed) {
+  if (!allowed.includes(value)) {
+    throw new AdminValidationError(`${path} must be one of: ${allowed.join(", ")}.`);
+  }
+  return value;
+}
+
+function validateSystem(system) {
+  object(system, "system");
+  const gameDefaults = object(system.gameDefaults, "system.gameDefaults");
+  enumValue(gameDefaults.defaultMode, "system.gameDefaults.defaultMode", ["campaign", "recall", "expedition"]);
+  string(gameDefaults.defaultShip, "system.gameDefaults.defaultShip", { max: 80, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+  enumValue(gameDefaults.difficulty, "system.gameDefaults.difficulty", ["easy", "normal", "hard"]);
+  boolean(gameDefaults.tutorialEnabled, "system.gameDefaults.tutorialEnabled");
+  boolean(gameDefaults.pronunciationDefault, "system.gameDefaults.pronunciationDefault");
+  boolean(gameDefaults.autoSave, "system.gameDefaults.autoSave");
+
+  const network = object(system.network, "system.network");
+  string(network.minimumVersion, "system.network.minimumVersion", { max: 40, pattern: /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/ });
+  number(network.autoSaveIntervalSeconds, "system.network.autoSaveIntervalSeconds", { min: 5, max: 3600 });
+  number(network.reconnectWindowSeconds, "system.network.reconnectWindowSeconds", { min: 1, max: 600 });
+  boolean(network.offlinePlay, "system.network.offlinePlay");
+  boolean(network.telemetry, "system.network.telemetry");
+
+  const maintenance = object(system.maintenance, "system.maintenance");
+  boolean(maintenance.enabled, "system.maintenance.enabled");
+  string(maintenance.message, "system.maintenance.message", { min: 0, max: 500 });
+}
+
+function validateFeatureFlags(featureFlags) {
+  object(featureFlags, "featureFlags");
+  const scopes = ["all", "new-players", "cohort", "environment", "accounts"];
+  const risks = ["normal", "economy", "competitive", "save"];
+  for (const [id, flag] of Object.entries(featureFlags)) {
+    string(id, "featureFlags id", { max: 100, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+    object(flag, `featureFlags.${id}`);
+    boolean(flag.enabled, `featureFlags.${id}.enabled`);
+    number(flag.rolloutPercent, `featureFlags.${id}.rolloutPercent`, { min: 0, max: 100 });
+    enumValue(flag.scope, `featureFlags.${id}.scope`, scopes);
+    enumValue(flag.risk, `featureFlags.${id}.risk`, risks);
+  }
+}
+
 export class RevisionStore {
   constructor({ rootDir, contract, now = () => new Date() }) {
     this.rootDir = rootDir;
@@ -60,6 +132,11 @@ export class RevisionStore {
     if (config.worldMusic === null || typeof config.worldMusic !== "object") {
       throw new AdminValidationError("worldMusic config is required.");
     }
+
+    // Phase B namespaces are additive to v1 so existing local revisions remain readable.
+    // Once present, they are strictly validated before a revision can be written/published.
+    if (config.system !== undefined) validateSystem(config.system);
+    if (config.featureFlags !== undefined) validateFeatureFlags(config.featureFlags);
     return config;
   }
 

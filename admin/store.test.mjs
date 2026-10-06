@@ -24,6 +24,15 @@ async function fixture() {
   return { store, rootDir };
 }
 
+test("default config seeds additive Phase B system and feature flag namespaces", () => {
+  const config = createDefaultSpaceTypingConfig(contract);
+  assert.equal(config.system.gameDefaults.defaultMode, "campaign");
+  assert.equal(config.system.network.minimumVersion, "0.1.0");
+  assert.equal(config.system.maintenance.enabled, false);
+  assert.equal(config.featureFlags["stamina"].risk, "economy");
+  assert.equal(config.featureFlags["new-boss-renderer"].rolloutPercent, 25);
+});
+
 test("draft revisions stay isolated from runtime until CAS publish", async (t) => {
   const { store, rootDir } = await fixture();
   t.after(() => rm(rootDir, { recursive: true, force: true }));
@@ -44,6 +53,78 @@ test("draft revisions stay isolated from runtime until CAS publish", async (t) =
     expectedActiveRevision: activeBefore.revision,
   });
   assert.equal((await store.getRuntimeConfig()).audio.defaults.music, 0.18);
+});
+
+test("Phase B system changes stay isolated until publish", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+
+  const active = await store.getActiveRevision();
+  const config = structuredClone(active.config);
+  config.system.maintenance.enabled = true;
+  config.system.maintenance.message = "Phase B maintenance test";
+  config.featureFlags["new-boss-renderer"].rolloutPercent = 50;
+
+  const draft = await store.createRevision({
+    baseRevision: active.revision,
+    config,
+    message: "Phase B system draft",
+  });
+
+  assert.equal((await store.getRuntimeConfig()).system.maintenance.enabled, false);
+  assert.equal((await store.getRuntimeConfig()).featureFlags["new-boss-renderer"].rolloutPercent, 25);
+
+  await store.publish({ revision: draft.revision, expectedActiveRevision: active.revision });
+  const runtime = await store.getRuntimeConfig();
+  assert.equal(runtime.system.maintenance.enabled, true);
+  assert.equal(runtime.system.maintenance.message, "Phase B maintenance test");
+  assert.equal(runtime.featureFlags["new-boss-renderer"].rolloutPercent, 50);
+});
+
+test("Phase B validation rejects unsafe malformed system and feature flag drafts", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+
+  const active = await store.getActiveRevision();
+
+  const badRollout = structuredClone(active.config);
+  badRollout.featureFlags["pvp-reflex"].rolloutPercent = 101;
+  await assert.rejects(
+    store.createRevision({ baseRevision: active.revision, config: badRollout }),
+    AdminValidationError,
+  );
+
+  const badVersion = structuredClone(active.config);
+  badVersion.system.network.minimumVersion = "latest";
+  await assert.rejects(
+    store.createRevision({ baseRevision: active.revision, config: badVersion }),
+    AdminValidationError,
+  );
+
+  const badMaintenance = structuredClone(active.config);
+  badMaintenance.system.maintenance.message = "x".repeat(501);
+  await assert.rejects(
+    store.createRevision({ baseRevision: active.revision, config: badMaintenance }),
+    AdminValidationError,
+  );
+});
+
+test("pre-Phase-B v1 revisions remain valid when additive namespaces are absent", async (t) => {
+  const { store, rootDir } = await fixture();
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+
+  const active = await store.getActiveRevision();
+  const legacy = structuredClone(active.config);
+  delete legacy.system;
+  delete legacy.featureFlags;
+
+  const draft = await store.createRevision({
+    baseRevision: active.revision,
+    config: legacy,
+    message: "Legacy v1 compatibility",
+  });
+  assert.equal(draft.config.system, undefined);
+  assert.equal(draft.config.featureFlags, undefined);
 });
 
 test("publish rejects stale expected active revisions", async (t) => {

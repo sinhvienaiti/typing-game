@@ -13,6 +13,7 @@ on:
       - "games/space-typing"
       - "scripts/validate-space-admin-contract.mjs"
       - "scripts/validate-space-admin-ui.mjs"
+      - "scripts/validate-space-admin-phase-b.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -38,6 +39,9 @@ jobs:
       - name: Validate complete Admin UI scope
         run: node scripts/validate-space-admin-ui.mjs
 
+      - name: Validate Admin Phase B mapping
+        run: node scripts/validate-space-admin-phase-b.mjs
+
       - name: Validate Admin service syntax
         run: |
           node --check admin/store.mjs
@@ -46,6 +50,7 @@ jobs:
           node --check admin/world-music-preview.mjs
           node --check admin/world-music-preview.test.mjs
           node --check admin/store.test.mjs
+          node --check scripts/validate-space-admin-phase-b.mjs
 
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs

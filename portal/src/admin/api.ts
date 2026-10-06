@@ -7,6 +7,37 @@ export type AudioDefaults = {
   announcer: number;
 };
 
+export type GeneralSettingsConfig = {
+  gameDefaults: {
+    defaultMode: "campaign" | "recall" | "expedition";
+    defaultShip: string;
+    difficulty: "easy" | "normal" | "hard";
+    tutorialEnabled: boolean;
+    pronunciationDefault: boolean;
+    autoSave: boolean;
+  };
+  network: {
+    minimumVersion: string;
+    autoSaveIntervalSeconds: number;
+    reconnectWindowSeconds: number;
+    offlinePlay: boolean;
+    telemetry: boolean;
+  };
+  maintenance: {
+    enabled: boolean;
+    message: string;
+  };
+};
+
+export type FeatureFlagScope = "all" | "new-players" | "cohort" | "environment" | "accounts";
+export type FeatureFlagRisk = "normal" | "economy" | "competitive" | "save";
+export type FeatureFlagConfig = {
+  enabled: boolean;
+  rolloutPercent: number;
+  scope: FeatureFlagScope;
+  risk: FeatureFlagRisk;
+};
+
 export type SpaceTypingAdminConfig = {
   contractRevision: string;
   configSchemaVersion: number;
@@ -19,6 +50,10 @@ export type SpaceTypingAdminConfig = {
     policyRevision: string;
     assignments: Record<string, unknown>;
   };
+  /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
+  system?: GeneralSettingsConfig;
+  /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
+  featureFlags?: Record<string, FeatureFlagConfig>;
 };
 
 export type AdminRevision = {
@@ -40,6 +75,11 @@ export type AdminStatePayload = {
   };
   active: AdminRevision;
   history: AdminRevision[];
+};
+
+export type AdminRuntimePayload = {
+  activeRevision: string;
+  config: SpaceTypingAdminConfig;
 };
 
 export type WorldMusicPreviewState = {
@@ -120,6 +160,10 @@ export class SpaceTypingAdminApi {
 
   getState(): Promise<AdminStatePayload> {
     return this.request<AdminStatePayload>("/api/admin/space-typing/state");
+  }
+
+  getRuntime(): Promise<AdminRuntimePayload> {
+    return this.request<AdminRuntimePayload>("/api/admin/space-typing/runtime");
   }
 
   previewWorldMusic(input: {
