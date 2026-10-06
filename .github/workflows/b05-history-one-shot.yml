@@ -30,6 +30,9 @@ jobs:
         with:
           node-version: 24.11.0
 
+      - name: Initialize Space Typing submodule
+        run: git submodule update --init --force games/space-typing
+
       - name: Apply B05 patch
         run: python scripts/b05-history-patch.py
 
