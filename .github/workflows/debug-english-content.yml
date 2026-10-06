@@ -70,6 +70,40 @@ jobs:
       - name: Measure enrichment-link evidence
         run: node scripts/report-english-content-enrichment-links.mjs
 
+      - name: Commit reviewed E04 example-link migration artifacts
+        shell: bash
+        run: |
+          mapfile -t changed < <(git diff --name-only -- shared content/english | sort)
+          if [ "${#changed[@]}" -eq 0 ]; then
+            echo 'Reviewed E04 example-link artifacts are already synchronized.'
+            exit 0
+          fi
+
+          for file in "${changed[@]}"; do
+            case "$file" in
+              shared/phrases/verb-patterns/000.json|content/english/reports/e11-readiness.json|content/english/reports/master-plan-acceptance.json)
+                ;;
+              *)
+                echo "Unexpected English-content drift during E04 example-link migration: $file" >&2
+                exit 1
+                ;;
+            esac
+          done
+
+          if ! printf '%s\n' "${changed[@]}" | grep -qx 'shared/phrases/verb-patterns/000.json'; then
+            echo 'Expected verb-pattern runtime shard drift was not produced.' >&2
+            exit 1
+          fi
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- \
+            shared/phrases/verb-patterns/000.json \
+            content/english/reports/e11-readiness.json \
+            content/english/reports/master-plan-acceptance.json
+          git commit -m 'feat(content): publish reviewed E04 verb-pattern example links'
+          git push
+
       - name: Verify generated source/runtime artifacts are reproducible
         shell: bash
         run: |
