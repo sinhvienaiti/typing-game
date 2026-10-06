@@ -32,16 +32,6 @@ jobs:
             echo 'B2 slices 01-04 already present; skipping generator.'
             exit 0
           fi
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/apply-english-b2-01-04.py')
-          text = p.read_text()
-          old = ',""Will you use the car this evening? when politely checking an existing plan",'
-          new = ',"Will you use the car this evening? when politely checking an existing plan",'
-          if text.count(old) != 1:
-              raise SystemExit(f'Expected exactly one B2 syntax defect, found {text.count(old)}')
-          p.write_text(text.replace(old, new, 1))
-          PY
           python3 -m py_compile scripts/apply-english-b2-01-04.py
           python3 scripts/apply-english-b2-01-04.py
 
