@@ -61,9 +61,9 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
 if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
-if (sentenceManifest.count!==3388) errors.push("published sentence runtime must contain 3388 reviewed records");
-if (topics.length!==300||examples.length!==1500||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
-  errors.push("published runtime split must be 300 topics + 1500 examples + 1400 exercises + 100 dialogues + 388 common mistakes");
+if (sentenceManifest.count!==3401) errors.push("published sentence runtime must contain 3401 reviewed records");
+if (topics.length!==300||examples.length!==1513||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
+  errors.push("published runtime split must be 300 topics + 1513 examples + 1400 exercises + 100 dialogues + 388 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -90,6 +90,12 @@ for (const lexeme of lexemes) {
 }
 const topicIds=new Set(topics.map(record=>record.id));
 const exampleIds=new Set(examples.map(record=>record.id));
+const e03Examples=examples.filter(record=>String(record.id??"").startsWith("sent.e03."));
+if (e03Examples.length!==13) errors.push("published E03 example enrichment must expose exactly 13 project-original examples");
+for (const sense of senses) {
+  if (!Array.isArray(sense.exampleIds)||sense.exampleIds.length===0) errors.push(sense.id+": published E03 sense is missing exampleIds");
+  for (const id of sense.exampleIds??[]) if (!exampleIds.has(id)) errors.push(sense.id+": missing runtime example "+id);
+}
 const exerciseIds=new Set(exercises.map(record=>record.id));
 
 for (const record of [...topics,...examples,...exercises,...dialogues,...commonMistakes]) {

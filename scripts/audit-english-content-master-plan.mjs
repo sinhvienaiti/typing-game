@@ -155,6 +155,7 @@ addCheck(errors,lexemesWithoutSenses.length===0,"E03 has lexemes with missing/br
 addCheck(errors,sensesWithoutLexeme.length===0,"E03 has senses with missing lexeme links: "+sensesWithoutLexeme.length);
 addCheck(errors,sensesWithoutVi.length===0,"E03 has senses without Vietnamese explanation: "+sensesWithoutVi.length);
 addCheck(errors,lexemesWithoutMorphology.length===0,"E03 has lexemes without POS/forms morphology coverage: "+lexemesWithoutMorphology.length);
+addCheck(errors,sensesWithoutExamples.length===0,"E03 has senses without reviewed example links: "+sensesWithoutExamples.length);
 addCheck(errors,topics.length===300,"E05 requires exactly 300 published grammar topics; got "+topics.length);
 for(const level of levels) addCheck(errors,topicsByCefr[level]===grammarTargets[level],"E05 "+level+" coverage must be "+grammarTargets[level]+"; got "+topicsByCefr[level]);
 addCheck(errors,grammarMissingFromCurriculum.length===0,"Published grammar topics missing from curriculum: "+grammarMissingFromCurriculum.length);
@@ -176,7 +177,6 @@ addCheck(errors,missingSourceLicense.length===0,"Published/runtime content has p
 addCheck(errors,Object.keys(missingCapabilities).length===0,"E07-E09 capability matrix is incomplete");
 
 if(lexemesWithoutUsageRefs.length) warnings.push("Lexemes without usageRefs: "+lexemesWithoutUsageRefs.length);
-if(sensesWithoutExamples.length) warnings.push("Senses without exampleIds: "+sensesWithoutExamples.length);
 if(collocationsWithoutExamples.length) warnings.push("Collocations without exampleIds: "+collocationsWithoutExamples.length);
 if(verbPatternsWithoutExamples.length) warnings.push("Verb patterns without exampleIds: "+verbPatternsWithoutExamples.length);
 if(phrasesWithoutExamples.length) warnings.push("Phrase items without exampleIds: "+phrasesWithoutExamples.length);

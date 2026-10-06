@@ -68,6 +68,7 @@ async function publishDataset({dataset,baseDir,groups}) {
 
 const lexemes=await loadRecords("content/english/dictionary/e03-reviewed-lexemes.json");
 const senses=await loadRecords("content/english/dictionary/e03-reviewed-senses.json");
+const e03Examples=await loadRecords("content/english/sentences/e03-reviewed-examples.json");
 const topics=await loadRecords("content/english/grammar/pilot-topics.json");
 const sentences=await loadRecords("content/english/sentences/pilot-sentences.json");
 const exercises=await loadRecords("content/english/sentences/pilot-exercises.json");
@@ -175,7 +176,7 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 ]}));
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
-  {id:"examples",dir:"examples",records:[...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
+  {id:"examples",dir:"examples",records:[...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences]},
   {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
   {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}

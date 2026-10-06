@@ -7,7 +7,7 @@
       "phase": "E03",
       "state": "draft",
       "category": "dictionary",
-      "records": 600,
+      "records": 613,
       "recordSets": [
         {
           "id": "reviewed-lexemes",
@@ -37,15 +37,30 @@
             "A1": 152,
             "A2": 148
           },
-          "digest": 989920
+          "digest": 1001568
+        },
+        {
+          "id": "reviewed-examples",
+          "path": "content/english/sentences/e03-reviewed-examples.json",
+          "generated": false,
+          "expectedCount": 13,
+          "actualCount": 13,
+          "byState": {
+            "draft": 13
+          },
+          "byCefr": {
+            "A1": 6,
+            "A2": 7
+          },
+          "digest": 24008
         }
       ],
       "byState": {
-        "draft": 600
+        "draft": 613
       },
       "byCefr": {
-        "A1": 304,
-        "A2": 296
+        "A1": 310,
+        "A2": 303
       },
       "requiredBeforePublish": [
         "source-pin",
@@ -5516,13 +5531,13 @@
     }
   ],
   "totals": {
-    "records": 5920,
+    "records": 5933,
     "byState": {
-      "draft": 5920
+      "draft": 5933
     },
     "byCefr": {
-      "A1": 1370,
-      "A2": 1201,
+      "A1": 1376,
+      "A2": 1208,
       "B1": 1174,
       "B2": 1114,
       "C1": 432,

@@ -49,6 +49,24 @@
             "cefr",
             "license"
           ]
+        },
+        {
+          "id": "reviewed-examples",
+          "path": "content/english/sentences/e03-reviewed-examples.json",
+          "expectedCount": 13,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "senseAlignment",
+            "naturalness",
+            "exactDuplicate",
+            "nearDuplicate",
+            "cefr",
+            "license"
+          ]
         }
       ],
       "requiredBeforePublish": [
