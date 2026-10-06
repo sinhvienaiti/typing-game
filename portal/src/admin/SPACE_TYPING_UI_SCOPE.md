@@ -45,6 +45,10 @@ Final UI review hardening already applied:
 - added focus-visible and reduced-motion accessibility handling
 - added line-SVG sidebar icons and global command search
 - cleaned command-palette keyboard listeners on every close path
+- added accessible labels for range, search, filter and playlist-weight controls
+- added explicit `aria-pressed` state for segmented controls, toggles and Stage selection controls
+- constrained History actions so only Draft revisions can Publish and only older Published revisions can Rollback
+- strengthened `validate-space-admin-ui.mjs` with final accessibility/state regression guards and one-shot workflow/script cleanup checks
 - removed all one-shot implementation workflows/scripts after they ran
 
 Design direction:
