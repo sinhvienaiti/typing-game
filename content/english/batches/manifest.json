@@ -9227,6 +9227,46 @@
           "recordType": "idiom"
         }
       ]
+    },
+    {
+      "id": "e03.usage-reviewed-sidecar",
+      "phase": "E03",
+      "category": "dictionary",
+      "cefr": [
+        "A1",
+        "A2",
+        "B1",
+        "B2"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-usages",
+          "path": "content/english/dictionary/e03-reviewed-usages.json",
+          "expectedCount": 300,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "referenceIntegrity",
+            "senseAlignment",
+            "naturalness",
+            "targetPresence",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "sense-alignment",
+        "naturalness-review",
+        "target-presence-review",
+        "license-review"
+      ],
+      "gameSmokes": []
     }
   ]
 }

@@ -22,7 +22,7 @@
             "A1": 152,
             "A2": 148
           },
-          "digest": 986275
+          "digest": 995875
         },
         {
           "id": "reviewed-senses",
@@ -5587,12 +5587,45 @@
         "license-review",
         "cross-game-smoke"
       ]
+    },
+    {
+      "id": "e03.usage-reviewed-sidecar",
+      "phase": "E03",
+      "state": "draft",
+      "category": "dictionary",
+      "records": 300,
+      "recordSets": [
+        {
+          "id": "reviewed-usages",
+          "path": "content/english/dictionary/e03-reviewed-usages.json",
+          "generated": false,
+          "expectedCount": 300,
+          "actualCount": 300,
+          "byState": {
+            "draft": 300
+          },
+          "byCefr": {},
+          "digest": 805484
+        }
+      ],
+      "byState": {
+        "draft": 300
+      },
+      "byCefr": {},
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "sense-alignment",
+        "naturalness-review",
+        "target-presence-review",
+        "license-review"
+      ]
     }
   ],
   "totals": {
-    "records": 6013,
+    "records": 6313,
     "byState": {
-      "draft": 6013
+      "draft": 6313
     },
     "byCefr": {
       "A1": 1376,

@@ -11,7 +11,7 @@
     "curriculum": "2026.10.0"
   },
   "runtimeCounts": {
-    "dictionary": 600,
+    "dictionary": 900,
     "grammar": 300,
     "sentences": 3401,
     "phrases": 1710,
@@ -20,11 +20,15 @@
   "e03": {
     "lexemes": 300,
     "senses": 300,
+    "usages": 300,
     "lexemesWithoutSenses": 0,
     "sensesWithoutLexeme": 0,
     "sensesWithoutVietnameseExplanation": 0,
     "lexemesWithoutMorphology": 0,
-    "lexemesWithoutUsageRefs": 300,
+    "lexemesWithoutUsageRefs": 0,
+    "lexemesWithBrokenUsageRefs": 0,
+    "usagesWithBrokenTargets": 0,
+    "usagesWithoutExamples": 0,
     "sensesWithoutExamples": 0
   },
   "e04": {
@@ -115,14 +119,13 @@
   },
   "quality": {
     "stateCounts": {
-      "published": 6011
+      "published": 6311
     },
     "unfinishedPublishedChecks": 0,
     "missingProvenance": 0,
     "missingSourceLicense": 0
   },
   "warnings": [
-    "Lexemes without usageRefs: 300",
     "Collocations without exampleIds: 592",
     "Verb patterns without exampleIds: 510",
     "Phrase items without exampleIds: 574"

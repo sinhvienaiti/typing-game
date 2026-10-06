@@ -10,7 +10,7 @@ const schemas=await Promise.all(schemaNames.map(name=>readJson(path.join(schemaD
 const schemaByName=new Map(schemaNames.map((name,index)=>[name,schemas[index]]));
 const {validate}=createSchemaValidator(schemas);
 const errors=[];
-const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","sense-set.schema.json","morphology.schema.json","usage.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json"];
+const expectedSchemas=["common.schema.json","provenance.schema.json","source-manifest.schema.json","runtime-manifest.schema.json","topic-catalog.schema.json","curriculum.schema.json","grammar-topic.schema.json","lexeme.schema.json","sense.schema.json","sense-set.schema.json","morphology.schema.json","usage.schema.json","usage-set.schema.json","collocation.schema.json","verb-pattern.schema.json","phrase.schema.json","sentence.schema.json","translation-pair.schema.json","dialogue.schema.json","exercise.schema.json","common-mistake.schema.json","lexeme-set.schema.json","grammar-topic-set.schema.json","sentence-set.schema.json","exercise-set.schema.json","oewn-review-queue.schema.json","collocation-set.schema.json","verb-pattern-set.schema.json","phrase-set.schema.json","oewn-pinned-pilot.schema.json","viwiktionary-review-queue.schema.json","tatoeba-source-pin.schema.json","tatoeba-source-report.schema.json","dialogue-set.schema.json","multiwoz-source-pin.schema.json","multiwoz-source-report.schema.json","e03-sense-review.schema.json","batch-manifest.schema.json","long-term-targets.schema.json","deprecation-map.schema.json","content-release.schema.json","common-mistake-set.schema.json","wiktextract-enrichment.schema.json","review-ledger.schema.json"];
 for (const name of expectedSchemas) {
   const schema=schemaByName.get(name);
   if (!schema) errors.push("missing schema: "+name);
@@ -90,6 +90,7 @@ if (!sources?.sources?.some(source=>source.id==="cambridge-profile"&&source.publ
 const lexemePilot=await validateFile("content/english/dictionary/lexeme-seed-pilot.json","lexeme-set.schema.json");
 const reviewedLexemes=await validateFile("content/english/dictionary/e03-reviewed-lexemes.json","lexeme-set.schema.json");
 const reviewedSenses=await validateFile("content/english/dictionary/e03-reviewed-senses.json","sense-set.schema.json");
+const reviewedUsages=await validateFile("content/english/dictionary/e03-reviewed-usages.json","usage-set.schema.json");
 const grammarPilot=await validateFile("content/english/grammar/pilot-topics.json","grammar-topic-set.schema.json");
 const sentencePilot=await validateFile("content/english/sentences/pilot-sentences.json","sentence-set.schema.json");
 const exercisePilot=await validateFile("content/english/sentences/pilot-exercises.json","exercise-set.schema.json");
@@ -155,6 +156,21 @@ if (reviewedLexemes&&reviewedSenses) {
     if (sense.quality?.state!=="draft") errors.push(sense.id+": E03 reviewed-source sense must remain draft; publication is ledger-overlay only");
     if (!reviewedLexIds.has(sense.lexemeId)) errors.push(sense.id+": unknown reviewed lexeme "+sense.lexemeId);
     if (!sense.cefr) errors.push(sense.id+": reviewed sense requires CEFR");
+  }
+}
+if (reviewedLexemes&&reviewedUsages) {
+  const expectedReviewedUsages=batchExpectedCount("e03.usage-reviewed-sidecar","reviewed-usages");
+  if (expectedReviewedUsages!==300||reviewedUsages.records.length!==300) errors.push("E03 reviewed usage sidecar must contain exactly 300 controlled records");
+  const lexemeIds=new Set(reviewedLexemes.records.map(item=>item.id));
+  const usageIds=new Set(reviewedUsages.records.map(item=>item.id));
+  for (const usage of reviewedUsages.records) {
+    if (usage.quality?.state!=="draft") errors.push(usage.id+": E03 usage source must remain draft; publication is ledger-overlay only");
+    if (!lexemeIds.has(usage.targetId)) errors.push(usage.id+": unknown usage target "+usage.targetId);
+    if (!usage.explanationVi||!Array.isArray(usage.exampleIds)||usage.exampleIds.length===0) errors.push(usage.id+": usage requires reviewed explanationVi + exampleIds");
+  }
+  for (const lexeme of reviewedLexemes.records) {
+    if (!Array.isArray(lexeme.usageRefs)||lexeme.usageRefs.length!==1) errors.push(lexeme.id+": reviewed lexeme must expose exactly one usageRef");
+    for (const id of lexeme.usageRefs??[]) if (!usageIds.has(id)) errors.push(lexeme.id+": unknown reviewed usage "+id);
   }
 }
 const pilotSentenceIds=new Set((sentencePilot?.records??[]).map(item=>item.id));

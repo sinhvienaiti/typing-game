@@ -51,6 +51,7 @@ async function loadRuntime(manifest,baseDir) {
 const dictionaryRecords=await loadRuntime(dictionaryManifest,path.join("shared","dictionary"));
 const lexemes=dictionaryRecords.filter(record=>String(record.id??"").startsWith("lex.en."));
 const senses=dictionaryRecords.filter(record=>String(record.id??"").startsWith("sense."));
+const usages=dictionaryRecords.filter(record=>String(record.id??"").startsWith("usage."));
 const topics=await loadRuntime(grammarManifest,path.join("shared","grammar"));
 const sentenceRecords=await loadRuntime(sentenceManifest,path.join("shared","sentences"));
 const examples=sentenceRecords.filter(record=>String(record.id??"").startsWith("sent."));
@@ -58,8 +59,8 @@ const exercises=sentenceRecords.filter(record=>String(record.id??"").startsWith(
 const dialogues=sentenceRecords.filter(record=>String(record.id??"").startsWith("dlg."));
 const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").startsWith("err."));
 
-if (dictionaryManifest.count!==600) errors.push("published dictionary runtime must contain 600 E03 records");
-if (lexemes.length!==300||senses.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses");
+if (dictionaryManifest.count!==900) errors.push("published dictionary runtime must contain 900 E03 records");
+if (lexemes.length!==300||senses.length!==300||usages.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
 if (sentenceManifest.count!==3401) errors.push("published sentence runtime must contain 3401 reviewed records");
 if (topics.length!==300||examples.length!==1513||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
@@ -78,7 +79,8 @@ if (correctionExercises.length!==100||transformationExercises.length!==100) {
 }
 
 const senseIds=new Set(senses.map(record=>record.id));
-for (const record of [...lexemes,...senses]) {
+const usageIds=new Set(usages.map(record=>record.id));
+for (const record of [...lexemes,...senses,...usages]) {
   if (record.quality?.state!=="published") errors.push(record.id+": dictionary runtime record is not published");
   for (const [name,check] of Object.entries(record.quality?.checks??{})) {
     if (check?.status==="pending"||check?.status==="fail") errors.push(record.id+": unfinished dictionary quality check "+name+"="+check.status);
@@ -87,6 +89,8 @@ for (const record of [...lexemes,...senses]) {
 for (const lexeme of lexemes) {
   if (!lexeme.vi||!lexeme.ipa||!lexeme.cefr) errors.push(lexeme.id+": published lexeme is missing vi/ipa/cefr");
   for (const id of lexeme.senseIds??[]) if (!senseIds.has(id)) errors.push(lexeme.id+": missing runtime sense "+id);
+  if (!Array.isArray(lexeme.usageRefs)||lexeme.usageRefs.length!==1) errors.push(lexeme.id+": published lexeme must expose exactly one usageRef");
+  for (const id of lexeme.usageRefs??[]) if (!usageIds.has(id)) errors.push(lexeme.id+": missing runtime usage "+id);
 }
 const topicIds=new Set(topics.map(record=>record.id));
 const exampleIds=new Set(examples.map(record=>record.id));
@@ -95,6 +99,11 @@ if (e03Examples.length!==13) errors.push("published E03 example enrichment must 
 for (const sense of senses) {
   if (!Array.isArray(sense.exampleIds)||sense.exampleIds.length===0) errors.push(sense.id+": published E03 sense is missing exampleIds");
   for (const id of sense.exampleIds??[]) if (!exampleIds.has(id)) errors.push(sense.id+": missing runtime example "+id);
+}
+for (const usage of usages) {
+  if (!lexemes.some(lexeme=>lexeme.id===usage.targetId)) errors.push(usage.id+": unknown runtime usage target "+usage.targetId);
+  if (!usage.explanationVi||!Array.isArray(usage.exampleIds)||usage.exampleIds.length===0) errors.push(usage.id+": runtime usage requires explanationVi + exampleIds");
+  for (const id of usage.exampleIds??[]) if (!exampleIds.has(id)) errors.push(usage.id+": missing runtime example "+id);
 }
 const exerciseIds=new Set(exercises.map(record=>record.id));
 
@@ -274,6 +283,7 @@ try {
 const report={
   dictionaryLexemes:lexemes.length,
   dictionarySenses:senses.length,
+  dictionaryUsages:usages.length,
   dictionaryManifestCount:dictionaryManifest.count,
   grammarTopics:topics.length,
   examples:examples.length,

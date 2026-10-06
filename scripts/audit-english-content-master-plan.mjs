@@ -65,6 +65,7 @@ const [dictionary,grammar,sentences,phrases,curriculum,release]=await Promise.al
 ]);
 const lexemes=dictionary.groups.lexemes??[];
 const senses=dictionary.groups.senses??[];
+const usages=dictionary.groups.usages??[];
 const topics=grammar.groups.topics??[];
 const examples=sentences.groups.examples??[];
 const exercises=sentences.groups.exercises??[];
@@ -106,11 +107,16 @@ for(const record of allRuntime){
 
 const lexemeIds=new Set(lexemes.map(record=>record.id));
 const senseIds=new Set(senses.map(record=>record.id));
+const usageIds=new Set(usages.map(record=>record.id));
+const exampleIds=new Set(examples.map(record=>record.id));
 const lexemesWithoutSenses=lexemes.filter(record=>!Array.isArray(record.senseIds)||record.senseIds.length===0||record.senseIds.some(id=>!senseIds.has(id)));
 const sensesWithoutLexeme=senses.filter(record=>!lexemeIds.has(record.lexemeId));
 const sensesWithoutVi=senses.filter(record=>!hasText(record.explanationVi));
 const lexemesWithoutMorphology=lexemes.filter(record=>!Array.isArray(record.forms)||record.forms.length===0||!Array.isArray(record.partsOfSpeech)||record.partsOfSpeech.length===0);
 const lexemesWithoutUsageRefs=lexemes.filter(record=>!Array.isArray(record.usageRefs)||record.usageRefs.length===0);
+const lexemesWithBrokenUsageRefs=lexemes.filter(record=>(record.usageRefs??[]).some(id=>!usageIds.has(id)));
+const usagesWithBrokenTargets=usages.filter(record=>!lexemeIds.has(record.targetId));
+const usagesWithoutExamples=usages.filter(record=>!Array.isArray(record.exampleIds)||record.exampleIds.length===0||record.exampleIds.some(id=>!exampleIds.has(id)));
 const sensesWithoutExamples=senses.filter(noExamples);
 const collocationsWithoutExamples=collocations.filter(noExamples);
 const verbPatternsWithoutExamples=verbPatterns.filter(noExamples);
@@ -156,6 +162,11 @@ addCheck(errors,sensesWithoutLexeme.length===0,"E03 has senses with missing lexe
 addCheck(errors,sensesWithoutVi.length===0,"E03 has senses without Vietnamese explanation: "+sensesWithoutVi.length);
 addCheck(errors,lexemesWithoutMorphology.length===0,"E03 has lexemes without POS/forms morphology coverage: "+lexemesWithoutMorphology.length);
 addCheck(errors,sensesWithoutExamples.length===0,"E03 has senses without reviewed example links: "+sensesWithoutExamples.length);
+addCheck(errors,usages.length===300,"E03 requires exactly 300 published usage sidecars; got "+usages.length);
+addCheck(errors,lexemesWithoutUsageRefs.length===0,"E03 has lexemes without usageRefs: "+lexemesWithoutUsageRefs.length);
+addCheck(errors,lexemesWithBrokenUsageRefs.length===0,"E03 has broken lexeme usageRefs: "+lexemesWithBrokenUsageRefs.length);
+addCheck(errors,usagesWithBrokenTargets.length===0,"E03 has usage records with broken targetId: "+usagesWithBrokenTargets.length);
+addCheck(errors,usagesWithoutExamples.length===0,"E03 has usage records with missing/broken exampleIds: "+usagesWithoutExamples.length);
 addCheck(errors,topics.length===300,"E05 requires exactly 300 published grammar topics; got "+topics.length);
 for(const level of levels) addCheck(errors,topicsByCefr[level]===grammarTargets[level],"E05 "+level+" coverage must be "+grammarTargets[level]+"; got "+topicsByCefr[level]);
 addCheck(errors,grammarMissingFromCurriculum.length===0,"Published grammar topics missing from curriculum: "+grammarMissingFromCurriculum.length);
@@ -198,11 +209,15 @@ const report={
   e03:{
     lexemes:lexemes.length,
     senses:senses.length,
+    usages:usages.length,
     lexemesWithoutSenses:lexemesWithoutSenses.length,
     sensesWithoutLexeme:sensesWithoutLexeme.length,
     sensesWithoutVietnameseExplanation:sensesWithoutVi.length,
     lexemesWithoutMorphology:lexemesWithoutMorphology.length,
     lexemesWithoutUsageRefs:lexemesWithoutUsageRefs.length,
+    lexemesWithBrokenUsageRefs:lexemesWithBrokenUsageRefs.length,
+    usagesWithBrokenTargets:usagesWithBrokenTargets.length,
+    usagesWithoutExamples:usagesWithoutExamples.length,
     sensesWithoutExamples:sensesWithoutExamples.length,
   },
   e04:{
