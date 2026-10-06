@@ -1,4 +1,4 @@
-name: Publish English C1 Slices 01-06
+name: Publish English C2 Slices 01-05
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-c1-01-06:
+  publish-c2-01-05:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,15 +25,15 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply reviewed C1 slices 01-06
+      - name: Apply reviewed C2 slices 01-05
         shell: bash
         run: |
-          if grep -q '"id": "e05.grammar-scale-c1-01"' content/english/batches/manifest.json; then
-            echo 'C1 slices 01-06 already present; skipping generator.'
+          if grep -q '"id": "e05.grammar-scale-c2-01"' content/english/batches/manifest.json; then
+            echo 'C2 slices 01-05 already present; skipping generator.'
             exit 0
           fi
-          python3 -m py_compile scripts/apply-english-c1-01-06.py
-          python3 scripts/apply-english-c1-01-06.py
+          python3 -m py_compile scripts/apply-english-c2-01-05.py
+          python3 scripts/apply-english-c2-01-05.py
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -53,10 +53,10 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
-      - name: Generate C1 runtime artifacts
+      - name: Generate C2 runtime artifacts
         run: pnpm english-content:generate
 
-      - name: Publish C1 runtime artifacts
+      - name: Publish C2 runtime artifacts
         run: pnpm english-content:publish
 
       - name: Collect sentence dedupe diagnostics
@@ -85,11 +85,11 @@ jobs:
             }
           }
           const pairs = nearDuplicatePairs(records, 0.86);
-          const newPattern = /^sent\.grc1\./;
+          const newPattern = /^sent\.grc2\./;
           const newPairs = pairs.filter(({leftId, rightId}) => newPattern.test(leftId) || newPattern.test(rightId));
           await fs.writeFile("/tmp/global-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: pairs.length, pairs}, null, 2)}\n`);
-          await fs.writeFile("/tmp/c1-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: newPairs.length, pairs: newPairs}, null, 2)}\n`);
-          console.log(JSON.stringify({globalNearCount: pairs.length, newC1NearCount: newPairs.length}, null, 2));
+          await fs.writeFile("/tmp/c2-near-duplicates.json", `${JSON.stringify({threshold: 0.86, count: newPairs.length, pairs: newPairs}, null, 2)}\n`);
+          console.log(JSON.stringify({globalNearCount: pairs.length, newC2NearCount: newPairs.length}, null, 2));
           NODE
 
       - name: Collect grammar coverage diagnostics
@@ -133,46 +133,46 @@ jobs:
           echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
           exit "$status"
 
-      - name: Upload C1 diagnostics
+      - name: Upload C2 diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: c1-01-06-diagnostics
+          name: c2-01-05-diagnostics
           path: |
             /tmp/english-content-dedupe.log
             /tmp/global-near-duplicates.json
-            /tmp/c1-near-duplicates.json
+            /tmp/c2-near-duplicates.json
             /tmp/grammar-coverage.json
           if-no-files-found: warn
           retention-days: 3
 
-      - name: Enforce C1 near-duplicate review
+      - name: Enforce C2 near-duplicate review
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs/promises";
-          const report = JSON.parse(await fs.readFile("/tmp/c1-near-duplicates.json", "utf8"));
+          const report = JSON.parse(await fs.readFile("/tmp/c2-near-duplicates.json", "utf8"));
           if (report.count !== 0) {
-            console.error(`C1 near-duplicate audit failed: ${report.count} candidate(s)`);
+            console.error(`C2 near-duplicate audit failed: ${report.count} candidate(s)`);
             console.error(JSON.stringify(report.pairs, null, 2));
             process.exit(1);
           }
-          console.log("C1 near-duplicate audit PASS: 0 candidates.");
+          console.log("C2 near-duplicate audit PASS: 0 candidates.");
           NODE
 
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
 
-      - name: Commit C1 slices 01-06
+      - name: Commit C2 slices 01-05
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-c1-01-06.py
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-c2-01-05.py
           if git diff --cached --quiet; then
-            echo 'No C1 publication changes to commit.'
+            echo 'No C2 publication changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish reviewed C1 grammar slices 01-06'
+          git commit -m 'feat(content): publish reviewed C2 grammar slices 01-05'
           git push
