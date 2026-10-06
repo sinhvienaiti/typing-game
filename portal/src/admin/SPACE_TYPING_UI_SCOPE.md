@@ -45,8 +45,10 @@ Final UI review hardening already applied:
 - added focus-visible and reduced-motion accessibility handling
 - added line-SVG sidebar icons and global command search
 - cleaned command-palette keyboard listeners on every close path
+- trapped `Tab` focus inside the command palette and restored focus to the invoking control on close
 - added accessible labels for range, search, filter and playlist-weight controls
 - added explicit `aria-pressed` state for segmented controls, toggles and Stage selection controls
+- made Music Library row actions keyboard-focusable through an explicit accessible preview/detail button
 - connected World Music `Inherit / Replace` to persistent mock UI state so Effective Playlist and resolved-source preview stay consistent with the selected assignment mode
 - added accessible names/tooltips for symbol-only music preview controls
 - made World Music fallback traces scope-aware so the preview follows the effective Stage → World → Galaxy → Global hierarchy without duplicate/invalid scope hops
