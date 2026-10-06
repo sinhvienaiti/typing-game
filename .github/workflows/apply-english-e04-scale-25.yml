@@ -83,18 +83,31 @@ jobs:
           fi
           git diff --cached --binary > /tmp/scale25-before.patch
 
-      - name: Verify generation is deterministic
+      - name: Verify full publication pipeline is deterministic
         shell: bash
         run: |
+          # Replay the same publication and gate sequence that produced the staged
+          # artifacts. Comparing a partial second pass is invalid because audit/report
+          # steps can legitimately materialize files after generation.
           pnpm english-content:generate
           pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
           pnpm english-content:e11
           pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
           node scripts/sync-english-content-master-plan-status.mjs
           git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-25.py
           git diff --cached --binary > /tmp/scale25-after.patch
           if ! cmp -s /tmp/scale25-before.patch /tmp/scale25-after.patch; then
-            echo 'Scale 25 artifacts are not reproducible from committed source/review state.' >&2
+            echo 'Scale 25 artifacts are not reproducible after replaying the full publication pipeline.' >&2
             diff -u /tmp/scale25-before.patch /tmp/scale25-after.patch || true
             exit 1
           fi
