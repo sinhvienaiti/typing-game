@@ -1,4 +1,4 @@
-name: Publish English E04 Safe Example Links
+name: Publish English E03 Usage Sidecar
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-e04-safe-example-links:
+  publish-e03-usage-sidecar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,8 +25,8 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply safe E04 example links
-        run: node scripts/apply-english-e04-safe-example-links.mjs
+      - name: Apply E03 usage sidecar
+        run: node scripts/apply-english-e03-usage-sidecar.mjs
 
       - name: Validate English content schemas
         run: pnpm english-content:validate
@@ -67,46 +67,56 @@ jobs:
       - name: Measure enrichment-link evidence
         run: node scripts/report-english-content-enrichment-links.mjs
 
-      - name: Enforce safe-link acceptance delta
+      - name: Enforce E03 usage-sidecar acceptance
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import fs from "node:fs/promises";
           const acceptance=JSON.parse(await fs.readFile("content/english/reports/master-plan-acceptance.json","utf8"));
-          const links=JSON.parse(await fs.readFile("content/english/reports/e04-safe-example-links.json","utf8"));
+          const release=JSON.parse(await fs.readFile("content/english/releases/2026.10.0.json","utf8"));
           const errors=[];
           if(acceptance.status!=="pass") errors.push("master-plan acceptance must pass");
-          if(acceptance.e04?.collocationsWithoutExamples!==592) errors.push(`expected 592 collocations without examples, got ${acceptance.e04?.collocationsWithoutExamples}`);
-          if(acceptance.e04?.phraseItemsWithoutExamples!==574) errors.push(`expected 574 phrase items without examples, got ${acceptance.e04?.phraseItemsWithoutExamples}`);
-          if(acceptance.e04?.verbPatternsWithoutExamples!==510) errors.push(`verb-pattern auto-linking is forbidden; expected 510 unlinked, got ${acceptance.e04?.verbPatternsWithoutExamples}`);
-          if(links.linkedCollocations!==8||links.linkedPhraseItems!==26) errors.push("safe-link report must contain exactly 8 collocations + 26 phrase items");
+          if(acceptance.runtimeCounts?.dictionary!==900) errors.push(`expected dictionary runtime 900, got ${acceptance.runtimeCounts?.dictionary}`);
+          if(release.runtimeCounts?.dictionary!==900) errors.push(`expected release dictionary runtime 900, got ${release.runtimeCounts?.dictionary}`);
+          if(acceptance.e03?.lexemes!==300||acceptance.e03?.senses!==300||acceptance.e03?.usages!==300) errors.push("E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
+          for(const [name,value] of Object.entries({
+            lexemesWithoutUsageRefs:acceptance.e03?.lexemesWithoutUsageRefs,
+            lexemesWithBrokenUsageRefs:acceptance.e03?.lexemesWithBrokenUsageRefs,
+            usagesWithBrokenTargets:acceptance.e03?.usagesWithBrokenTargets,
+            usagesWithoutExamples:acceptance.e03?.usagesWithoutExamples,
+          })) if(value!==0) errors.push(`${name} must be 0, got ${value}`);
+          if((acceptance.warnings??[]).some(item=>String(item).startsWith("Lexemes without usageRefs"))) errors.push("usageRefs warning must be closed");
           if(errors.length){console.error(errors.join("\n"));process.exit(1);}
-          console.log(JSON.stringify({status:"pass",collocationsLinked:8,phraseItemsLinked:26,verbPatternsAutoLinked:0},null,2));
+          console.log(JSON.stringify({status:"pass",dictionary:900,lexemes:300,senses:300,usages:300,usageGraphErrors:0},null,2));
           NODE
 
-      - name: Upload E04 linkage diagnostics
+      - name: Upload E03 usage diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e04-safe-example-links-${{ github.sha }}
+          name: e03-usage-sidecar-${{ github.sha }}
           path: |
-            content/english/reports/e04-safe-example-links.json
             content/english/reports/master-plan-acceptance.json
             content/english/reports/enrichment-link-evidence.json
             content/english/reports/e10-review-ledger.json
+            content/english/reports/e10-batch-report.json
+            content/english/releases/2026.10.0.json
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Commit reviewed E04 safe example links
+      - name: Commit reviewed E03 usage sidecar
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/phrases scripts/apply-english-e04-safe-example-links.mjs
+          git add content/english shared/dictionary shared/schemas/english-content \
+            scripts/apply-english-e03-usage-sidecar.mjs scripts/validate-english-content.mjs \
+            scripts/publish-english-content.mjs scripts/smoke-published-english-content.mjs \
+            scripts/audit-english-content-master-plan.mjs
           if git diff --cached --quiet; then
-            echo 'No E04 safe-link changes to commit.'
+            echo 'No E03 usage-sidecar changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): link verified E04 phrase examples'
+          git commit -m 'feat(content): publish reviewed E03 usage sidecar'
           git push
