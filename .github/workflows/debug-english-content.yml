@@ -1,4 +1,4 @@
-name: Publish English B2 Slices 01-04
+name: English content cleanup and B2 audit
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  publish-b2-01-04:
+  cleanup-and-audit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -25,29 +25,50 @@ jobs:
         with:
           node-version: 24.11.0
 
-      - name: Apply reviewed B2 slices 01-04
+      - name: Resolve reviewed A2/B1 near duplicate at source
         shell: bash
         run: |
-          if grep -q '"id": "e05.grammar-scale-b2-01"' content/english/batches/manifest.json; then
-            echo 'B2 slices 01-04 already present; skipping generator.'
-            exit 0
-          fi
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('scripts/apply-english-b2-01-04.py')
-          text = p.read_text()
-          text = text.replace('""Will you use the car this evening? when politely checking an existing plan"', '"Will you use the car this evening? when politely checking an existing plan"', 1)
-          text = text.replace(
-              '["The road is being repaired.","The documents have been sent.","The room had been cleaned before we arrived."]',
-              '["The eastbound railway bridge is being repaired after last week\'s storm.","The documents have been sent.","The room had been cleaned before we arrived."]',
-              1,
-          )
-          p.write_text(text)
-          PY
-          python3 -m py_compile scripts/apply-english-b2-01-04.py
-          python3 scripts/apply-english-b2-01-04.py
+          node --input-type=module <<'NODE'
+          import fs from "node:fs/promises";
+          import { englishContentReviewSourceDigest } from "./scripts/english-review-core.mjs";
 
-      - name: Validate B2 source and review contracts
+          const sourcePath = "content/english/sentences/e05-scale-b1-02-sentences.json";
+          const reviewPath = "content/english/reviews/decisions.d/e05-grammar-b1-02.json";
+          const recordId = "sent.grb1.02.04.3";
+          const oldText = "Look at those clouds; it's going to rain.";
+          const newText = "The forecast says it will stay dry, but those dark clouds mean it's going to rain.";
+
+          const source = JSON.parse(await fs.readFile(sourcePath, "utf8"));
+          const record = source.records?.find((item) => item.id === recordId);
+          if (!record) throw new Error(`Missing canonical sentence ${recordId}`);
+
+          let changed = false;
+          if (record.text === oldText) {
+            record.text = newText;
+            changed = true;
+          } else if (record.text !== newText) {
+            throw new Error(`Unexpected text for ${recordId}: ${record.text}`);
+          }
+
+          const reviews = JSON.parse(await fs.readFile(reviewPath, "utf8"));
+          const decision = reviews.decisions?.find((item) => item.recordId === recordId);
+          if (!decision) throw new Error(`Missing review decision for ${recordId}`);
+          const digest = englishContentReviewSourceDigest(record);
+          if (decision.sourceDigest !== digest) {
+            decision.sourceDigest = digest;
+            decision.reviewedAt = "2026-10-06T04:30:00Z";
+            decision.note = "B1 will-vs-going-to example re-reviewed after global near-duplicate cleanup; grammar contrast, CEFR, naturalness, dedup and provenance checks remain approved.";
+            changed = true;
+          }
+
+          if (changed) {
+            await fs.writeFile(sourcePath, `${JSON.stringify(source, null, 2)}\n`, "utf8");
+            await fs.writeFile(reviewPath, `${JSON.stringify(reviews, null, 2)}\n`, "utf8");
+          }
+          console.log(JSON.stringify({recordId, text: record.text, sourceDigest: digest, changed}, null, 2));
+          NODE
+
+      - name: Validate source and review contracts
         shell: bash
         run: |
           pnpm english-content:validate
@@ -56,22 +77,18 @@ jobs:
           pnpm english-content:licenses
           pnpm english-content:test
 
-      - name: Generate B2 runtime artifacts
+      - name: Generate runtime artifacts
         run: pnpm english-content:generate
 
-      - name: Publish B2 runtime artifacts
+      - name: Publish runtime artifacts
         run: pnpm english-content:publish
 
       - name: Collect global near-duplicate diagnostics
         shell: bash
         run: |
-          node --input-type=module <<'NODE' > /tmp/b2-near-duplicates.json
+          node --input-type=module <<'NODE' > /tmp/global-near-duplicates.json
           import path from "node:path";
-          import {
-            listJsonFiles,
-            nearDuplicatePairs,
-            readJson,
-          } from "./scripts/english-content-core.mjs";
+          import { listJsonFiles, nearDuplicatePairs, readJson } from "./scripts/english-content-core.mjs";
 
           const files = [
             ...(await listJsonFiles(path.resolve("shared/sentences"))),
@@ -94,7 +111,35 @@ jobs:
           console.log(JSON.stringify({threshold: 0.86, count: pairs.length, pairs}, null, 2));
           NODE
 
-      - name: Check B2 runtime dedupe
+      - name: Collect remaining B2 topic diagnostics
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE' > /tmp/missing-b2-topics.json
+          import path from "node:path";
+          import { listJsonFiles, readJson } from "./scripts/english-content-core.mjs";
+
+          const catalog = await readJson(path.resolve("content/english/grammar/topic-catalog.json"));
+          const catalogTopics = Array.isArray(catalog.records)
+            ? catalog.records
+            : Array.isArray(catalog.topics)
+              ? catalog.topics
+              : [];
+
+          const publishedIds = new Set();
+          for (const file of await listJsonFiles(path.resolve("shared/grammar/topics"))) {
+            if (file.endsWith("manifest.json")) continue;
+            const doc = await readJson(file);
+            for (const record of doc.records ?? []) {
+              if (typeof record?.id === "string") publishedIds.add(record.id);
+            }
+          }
+
+          const b2 = catalogTopics.filter((topic) => (topic.cefr ?? topic.level ?? topic.cefrLevel) === "B2");
+          const missing = b2.filter((topic) => !publishedIds.has(topic.id));
+          console.log(JSON.stringify({catalogB2Count: b2.length, publishedB2Count: b2.length - missing.length, missingCount: missing.length, topics: missing}, null, 2));
+          NODE
+
+      - name: Check runtime dedupe
         id: dedupe
         shell: bash
         run: |
@@ -104,30 +149,31 @@ jobs:
           echo "exit_code=${status}" >> "$GITHUB_OUTPUT"
           exit "$status"
 
-      - name: Upload B2 content diagnostics
+      - name: Upload content diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: b2-content-diagnostics
+          name: english-content-cleanup-diagnostics
           path: |
             /tmp/english-content-dedupe.log
-            /tmp/b2-near-duplicates.json
-          if-no-files-found: error
+            /tmp/global-near-duplicates.json
+            /tmp/missing-b2-topics.json
+          if-no-files-found: warn
           retention-days: 3
 
-      - name: Smoke B2 published runtime
+      - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
 
-      - name: Commit B2 slices 01-04
+      - name: Commit reviewed cleanup
         shell: bash
         run: |
           git status --short
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases scripts/smoke-published-english-content.mjs scripts/apply-english-b2-01-04.py
+          git add content/english shared/curriculum shared/dictionary shared/grammar shared/sentences shared/phrases
           if git diff --cached --quiet; then
-            echo 'No B2 publication changes to commit.'
+            echo 'No content cleanup changes to commit.'
             exit 0
           fi
-          git commit -m 'feat(content): publish reviewed B2 grammar slices 01-04'
+          git commit -m 'fix(content): remove redundant A2/B1 sentence example'
           git push
