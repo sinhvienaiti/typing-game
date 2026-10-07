@@ -81,7 +81,7 @@ export function createCurrencyCapabilityManifest() {
     },
     linkedRuntimeDomains: [
       { id: "shop", label: "Shop", route: "/admin/space-typing/shop", relationship: "buyShopStockEntry is a confirmed sink for the four runtime currency IDs." },
-      { id: "rewards-drops", label: "Rewards & Drops", route: "/admin/space-typing/rewards-drops", relationship: "Stage-clear reward functions are confirmed generation sources and are audited in the next slice." },
+      { id: "rewards", label: "Rewards & Drops", route: "/admin/space-typing/rewards", relationship: "Campaign, combat-credit and loot generation are now audited through the canonical Rewards runtime contract." },
     ],
   };
 }

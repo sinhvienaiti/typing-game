@@ -101,7 +101,7 @@ export function renderPhaseBCurrencies(navigate: Navigate): HTMLElement {
   actions.append(
     badge("RUNTIME-BACKED · READ ONLY", "good"),
     button("Shop", () => navigate("/admin/space-typing/shop")),
-    button("Rewards & Drops", () => navigate("/admin/space-typing/rewards-drops")),
+    button("Rewards & Drops", () => navigate("/admin/space-typing/rewards")),
   );
   header.append(copy, actions); page.append(header);
 

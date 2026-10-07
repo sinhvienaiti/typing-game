@@ -21,6 +21,7 @@ on:
       - "scripts/validate-space-admin-typing-content.mjs"
       - "scripts/validate-space-admin-shop.mjs"
       - "scripts/validate-space-admin-currencies.mjs"
+      - "scripts/validate-space-admin-rewards.mjs"
       - "scripts/validate-space-admin-audio.mjs"
       - ".github/workflows/admin-ci.yml"
 
@@ -51,6 +52,8 @@ jobs:
         run: node scripts/validate-space-admin-shop.mjs
       - name: Validate Currencies runtime ownership audit
         run: node scripts/validate-space-admin-currencies.mjs
+      - name: Validate Rewards & Drops runtime ownership audit
+        run: node scripts/validate-space-admin-rewards.mjs
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate Admin service syntax
@@ -61,6 +64,7 @@ jobs:
           node --check scripts/validate-space-admin-typing-content.mjs
           node --check scripts/validate-space-admin-shop.mjs
           node --check scripts/validate-space-admin-currencies.mjs
+          node --check scripts/validate-space-admin-rewards.mjs
           node --check scripts/validate-space-admin-audio.mjs
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
