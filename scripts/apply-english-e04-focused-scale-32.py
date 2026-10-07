@@ -41,7 +41,7 @@ COLLOCATIONS = [
     ('allocate scarce resources', 'verb + adjective + noun', 'phân bổ nguồn lực khan hiếm theo mức độ ưu tiên và nhu cầu chăm sóc', 'C1'),
     ('train frontline staff', 'verb + adjective + noun', 'đào tạo nhân viên tuyến đầu về quy trình, kỹ năng và biện pháp an toàn cần thiết', 'B2'),
     ('protect patient privacy', 'verb + noun phrase', 'bảo vệ quyền riêng tư của bệnh nhân khi thu thập, sử dụng và chia sẻ thông tin', 'B2'),
-    ('obtain informed consent', 'verb + adjective + noun', 'xin sự đồng ý sau khi người bệnh đã được cung cấp và hiểu thông tin cần thiết', 'C1'),
+    ('explain treatment alternatives', 'verb + noun phrase', 'giải thích các lựa chọn điều trị thay thế để người bệnh có thể cân nhắc trước khi quyết định', 'B2'),
     ('document clinical findings', 'verb + adjective + noun', 'ghi chép các phát hiện lâm sàng một cách rõ ràng và có thể kiểm tra', 'B2'),
     ('interpret diagnostic results', 'verb + adjective + noun', 'diễn giải kết quả chẩn đoán trong bối cảnh triệu chứng và dữ liệu lâm sàng', 'C1'),
     ('confirm laboratory diagnoses', 'verb + adjective + noun', 'xác nhận chẩn đoán bằng bằng chứng từ xét nghiệm phòng thí nghiệm', 'C1'),
@@ -57,7 +57,7 @@ COLLOCATIONS = [
     ('improve neonatal outcomes', 'verb + adjective + noun', 'cải thiện kết quả sức khỏe của trẻ sơ sinh thông qua chăm sóc phù hợp', 'C1'),
     ('promote healthy behaviors', 'verb + adjective + noun', 'khuyến khích các hành vi có lợi cho sức khỏe trong cá nhân và cộng đồng', 'B2'),
     ('deliver preventive care', 'verb + adjective + noun', 'cung cấp chăm sóc phòng ngừa như sàng lọc, tư vấn và tiêm chủng', 'B2'),
-    ('coordinate emergency response', 'verb + adjective + noun', 'phối hợp hoạt động ứng phó y tế trong tình huống khẩn cấp hoặc thảm họa', 'C1'),
+    ('activate emergency protocols', 'verb + adjective + noun', 'kích hoạt các quy trình khẩn cấp khi tình huống yêu cầu phản ứng y tế nhanh và có phối hợp', 'C1'),
     ('maintain essential services', 'verb + adjective + noun', 'duy trì các dịch vụ y tế thiết yếu trong giai đoạn gián đoạn hoặc nhu cầu tăng cao', 'B2'),
 ]
 
