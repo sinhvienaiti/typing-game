@@ -1,5 +1,6 @@
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
 import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
+import { renderPhaseBFeatureGates } from "./space-typing-feature-gates-phase-b";
 import { renderPhaseBMissions } from "./space-typing-missions-phase-b";
 import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
@@ -20,5 +21,6 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/rewards`) return renderPhaseBRewards(navigate);
   if (path === `${BASE}/warp`) return renderPhaseBWarp(navigate);
   if (path === `${BASE}/missions`) return renderPhaseBMissions(navigate);
+  if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();
   return renderPhaseBCoreAdminScreen(path, navigate);
 }
