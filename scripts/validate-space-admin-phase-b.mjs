@@ -7,7 +7,10 @@ const defaultConfig = await readFile(new URL("admin/default-config.mjs", root), 
 const store = await readFile(new URL("admin/store.mjs", root), "utf8");
 const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
 const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
-const phaseB = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
+const phaseBRouter = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
+const phaseBCore = await readFile(new URL("portal/src/admin/space-typing-phase-b-core.ts", root), "utf8");
+const phaseB = `${phaseBRouter}\n${phaseBCore}`;
+const stagesPhaseB = await readFile(new URL("portal/src/admin/space-typing-stages-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
 const worldMusicPhaseB = await readFile(new URL("portal/src/admin/space-typing-world-music-phase-b.ts", root), "utf8");
 const shipsPhaseB = await readFile(new URL("portal/src/admin/space-typing-ships-phase-b.ts", root), "utf8");
@@ -33,6 +36,7 @@ const equipment = map.screens.find((entry) => entry.route === "/admin/space-typi
 const skills = map.screens.find((entry) => entry.route === "/admin/space-typing/skills");
 const enemies = map.screens.find((entry) => entry.route === "/admin/space-typing/enemies");
 const bosses = map.screens.find((entry) => entry.route === "/admin/space-typing/bosses");
+const stages = map.screens.find((entry) => entry.route === "/admin/space-typing/stages");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
 const history = map.screens.find((entry) => entry.route === "/admin/space-typing/history");
@@ -52,6 +56,9 @@ assert.equal(equipment?.domain, "content.equipment");
 assert.equal(skills?.domain, "content.skills");
 assert.equal(enemies?.domain, "content.enemies");
 assert.equal(bosses?.domain, "content.bosses");
+assert.equal(stages?.domain, "content.stages");
+assert.equal(stages?.persistence, "immutable-revision-store");
+assert.equal(stages?.applyBoundary, "new-session");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
@@ -75,6 +82,7 @@ assert.match(defaultConfig, /\bsystem:\s*\{/);
 assert.match(defaultConfig, /\bfeatureFlags:\s*\{/);
 assert.match(defaultConfig, /\benemies:\s*\{/);
 assert.match(defaultConfig, /\bbosses:\s*\{/);
+assert.match(defaultConfig, /\bstages:\s*\{/);
 assert.match(store, /config\.system !== undefined/);
 assert.match(store, /validateSystem\(config\.system\)/);
 assert.match(store, /config\.featureFlags !== undefined/);
@@ -150,6 +158,18 @@ assert.doesNotMatch(bossesPhaseB, /api\.publish/);
 assert.match(server, /\/api\/runtime\/space-typing\/bosses/);
 assert.match(server, /\/api\/admin\/space-typing\/bosses\/preview/);
 
+assert.match(phaseBRouter, /renderPhaseBStages/);
+assert.match(phaseBRouter, /\$\{BASE\}\/stages/);
+assert.match(stagesPhaseB, /B06\.6/);
+assert.match(stagesPhaseB, /\/api\/admin\/space-typing\/stages\/preview/);
+assert.match(stagesPhaseB, /enemyBudget/);
+assert.match(stagesPhaseB, /eliteChance/);
+assert.match(stagesPhaseB, /modifierSlots/);
+assert.match(stagesPhaseB, /api\.createRevision/);
+assert.doesNotMatch(stagesPhaseB, /api\.publish/);
+assert.match(server, /\/api\/runtime\/space-typing\/stages/);
+assert.match(server, /\/api\/admin\/space-typing\/stages\/preview/);
+
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
@@ -173,4 +193,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.5 runtime-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.6 Stage runtime-backed domains ready).`);
