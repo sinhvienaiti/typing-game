@@ -67,12 +67,7 @@ The implementation audit confirmed that Space Typing already consumes the parent
 - Added canonical read-only Typing Content catalog service over `shared/vocabulary` and `shared/typing-texts`.
 - Added search/filter/pagination projection with source/consumer provenance and no duplicated records in Admin revision storage.
 - Added `/api/admin/space-typing/typing-content/catalog` authenticated endpoint.
-- Added dedicated `/admin/space-typing/typing-content` Phase B screen with required tabs:
-  - Vocabulary
-  - Typing Text
-  - Boss Text
-  - Recall
-  - Objectives
+- Added dedicated `/admin/space-typing/typing-content` Phase B screen with required tabs: Vocabulary, Typing Text, Boss Text, Recall, Objectives.
 - Vocabulary and Typing Text expose real canonical rows and filters; Boss Text / Recall / Objectives explicitly show their verified ownership/consumer boundary instead of mock records.
 - Added Typing Content contract/mapping validator and canonical catalog tests.
 - Admin CI is being extended to gate this integration.
