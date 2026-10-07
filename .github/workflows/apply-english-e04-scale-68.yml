@@ -32,6 +32,42 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+      - name: Apply scale 68 preflight conflict replacements
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-english-e04-focused-scale-68.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = [
+              (
+                  "    ('monitor gallery relative humidity', 'verb + noun phrase', 'theo dõi độ ẩm tương đối trong phòng trưng bày để giảm nguy cơ co giãn, nấm mốc hoặc ăn mòn vật liệu', 'C1'),",
+                  "    ('track display case humidity drift', 'verb + noun phrase', 'theo dõi xu hướng lệch độ ẩm trong tủ trưng bày để phát hiện sớm khi vi khí hậu rời khỏi khoảng bảo tồn mong muốn', 'C1'),",
+              ),
+              (
+                  "    ('calibrate environmental data loggers', 'verb + noun phrase', 'hiệu chuẩn thiết bị ghi dữ liệu môi trường để số đo nhiệt độ và độ ẩm có độ tin cậy phù hợp cho công tác bảo tồn', 'C1'),",
+                  "    ('verify conservation sensor calibration', 'verb + noun phrase', 'xác nhận các cảm biến dùng cho bảo tồn đã được hiệu chuẩn đúng để dữ liệu môi trường có thể tin cậy khi đánh giá rủi ro', 'C1'),",
+              ),
+              (
+                  "    ('replace saturated silica gel', 'verb + noun phrase', 'thay silica gel đã bão hòa để duy trì khả năng điều hòa độ ẩm bên trong tủ hoặc hộp bảo quản', 'B2'),",
+                  "    ('regenerate reusable desiccant packs', 'verb + noun phrase', 'tái hoạt hóa các gói hút ẩm có thể tái sử dụng theo quy trình phù hợp để khôi phục khả năng kiểm soát độ ẩm trong bao gói bảo tồn', 'B2'),",
+              ),
+              (
+                  "    ('encapsulate fragile documents', 'verb + noun phrase', 'bọc tài liệu mong manh trong lớp vật liệu trong suốt phù hợp để tăng hỗ trợ cơ học mà vẫn cho phép quan sát', 'C1'),",
+                  "    ('interleave fragile manuscript leaves', 'verb + noun phrase', 'chèn lớp vật liệu bảo tồn giữa các lá bản thảo mong manh để giảm ma sát và tiếp xúc trực tiếp trong lưu trữ hoặc thao tác', 'C1'),",
+              ),
+              (
+                  "    ('deploy insect monitoring traps', 'verb + noun phrase', 'bố trí bẫy giám sát côn trùng tại các vị trí chiến lược để theo dõi loài, số lượng và xu hướng hoạt động trong kho', 'B2'),",
+                  "    ('map pest activity hotspots', 'verb + noun phrase', 'lập bản đồ các điểm có hoạt động sinh vật gây hại cao từ dữ liệu giám sát để ưu tiên kiểm tra và biện pháp kiểm soát trong kho', 'C1'),",
+              ),
+          ]
+          for old, new in replacements:
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'expected one scale-68 replacement target, found {count}: {old[:60]}')
+              text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
       - name: Preflight all scale 68 candidates against current E04
         run: python3 scripts/check-english-e04-scale-68-candidates.py
       - name: Apply idempotent E04 scale 68 source batch
