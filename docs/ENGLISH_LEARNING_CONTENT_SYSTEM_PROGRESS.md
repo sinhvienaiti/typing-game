@@ -7,6 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-54 publication: `d3ceb1ce31075499283af412f2e338430f440fe3` — scale-53 publication state verified by English Content Master Plan Acceptance #134, English Content Full Validation #125 and Platform CI #1194; published output: `c6fdf79d94c4540bc2e3dffcd16b998a24e4509a`.
+- Current scale-54 publication awaiting checkpoint CI verification: `d9f363c56c17727c54049bf32309dbc59e409342`.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -89,11 +90,12 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-53 publication is fully verified at `d3ceb1ce31075499283af412f2e338430f440fe3`; do not duplicate scale-53 artifacts.
-2. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-3. Verify the resulting scale-54 publication commit and mandatory CI without regenerating completed artifacts.
-4. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
-5. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-6. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+2. Scale-54 publication is complete at `d9f363c56c17727c54049bf32309dbc59e409342`; do not regenerate scale-54 artifacts.
+3. Verify this normal-user scale-54 checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI.
+4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
+5. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
+6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -105,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-54 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001800` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
+Verify mandatory CI for the scale-54 publication checkpoint without regenerating completed artifacts. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001800` (scale-55 unless a newer worker already advanced the branch), or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch. Recalculate counts and run exact/near dedupe before every write.
