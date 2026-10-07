@@ -59,7 +59,11 @@ assert(!uiSource.includes('type = "range"'), "Events UI must not expose unsuppor
 assert(!uiSource.includes("Event Enabled"), "Events UI must not expose fake runtime enable toggles");
 assert(routerSource.includes("renderPhaseBEvents"), "Events renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/events`"), "Events route is not wired into Phase B");
-assert(shellSource.indexOf("renderPhaseBAdminScreen") < shellSource.indexOf("renderExtendedAdminScreen"), "Phase B must intercept Events before the legacy mock renderer");
+const phaseBCall = 'const phaseB = renderPhaseBAdminScreen(path, this.navigate);';
+const legacyFallbackCall = 'return renderExtendedAdminScreen(path, this.navigate)';
+assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
+assert(shellSource.includes(legacyFallbackCall), "Space Typing shell legacy fallback is missing");
+assert(shellSource.indexOf(phaseBCall) < shellSource.indexOf(legacyFallbackCall), "Phase B must intercept Events before the legacy mock renderer");
 assert(serverSource.includes("space-typing-admin-events.v1.json"), "Admin server must load Events from the pinned child contract");
 assert(serverSource.includes("/api/admin/space-typing/events/contract"), "Admin server Events contract endpoint is missing");
 assert(extendedSource.includes("function renderEvents()"), "Legacy Events mock guard missing; remove this assertion when the legacy renderer is deleted");
