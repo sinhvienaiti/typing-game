@@ -52,7 +52,20 @@ assert.equal(rewards.pity.mutationHook, "onLuckPityUpdate");
 for (const symbol of ["performanceReward", "sectorCheckpointReward", "precision", "flawless", "streak", "tempo", "objective"]) {
   assert(campaignSource.includes(symbol), `Missing campaign reward runtime evidence ${symbol}`);
 }
-for (const symbol of ["resolveCreditCrystalTier", "combatCreditWeight", "combatCreditStageBudget", "combatCreditReward", "settleCombatCreditStageBase", "canonicalWalletCommit", "typed-kill", "voice-kill", "skill-kill", "boss-kill"]) {
+for (const symbol of [
+  "resolveCreditCrystalTier",
+  "combatCreditWeight",
+  "combatCreditStageBudget",
+  "combatCreditReward",
+  "settleCombatCreditStageBase",
+  "CombatCreditWalletCommit",
+  "commitWallet",
+  "Real Combat Credit claims require a canonical wallet commit.",
+  "typed-kill",
+  "voice-kill",
+  "skill-kill",
+  "boss-kill",
+]) {
   assert(combatSource.includes(symbol), `Missing combat-credit runtime evidence ${symbol}`);
 }
 for (const symbol of ["stageClearCreditReward", "addCredits"]) assert(creditsSource.includes(symbol), `Missing Credits runtime evidence ${symbol}`);
