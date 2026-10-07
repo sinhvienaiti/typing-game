@@ -7,9 +7,10 @@ const UNSUPPORTED_FIELDS = ["Original Price", "Discount", "Daily Limit", "Weekly
 
 test("Shop capability manifest mirrors the master-plan surface and real runtime ownership", () => {
   const manifest = createShopCapabilityManifest();
-  assert.equal(manifest.protocolVersion, 2);
+  assert.equal(manifest.protocolVersion, 3);
   assert.equal(manifest.mode, "runtime-backed-readonly");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
+  assert.equal(manifest.auditedChildSha, "43557878fbd77b928a98eaa684be8404ba387baf");
   assert.deepEqual(manifest.tabs, ["Catalog", "Featured", "Daily", "Weekly", "Bundles", "History"]);
   assert.equal(SHOP_TABS.length, 6);
   assert.equal(SHOP_FIELDS.length, 15);
@@ -25,7 +26,7 @@ test("Shop capability manifest mirrors the master-plan surface and real runtime 
   assert.equal(manifest.authoring.persistence, "child-runtime-state");
 });
 
-test("Shop capabilities describe the real transaction runtime without inventing write/preview support", () => {
+test("Shop capabilities keep canonical currency IDs separate from runtime price state keys", () => {
   const manifest = createShopCapabilityManifest();
   assert.deepEqual(manifest.capabilities, {
     runtimeCatalogGeneration: true,
@@ -41,7 +42,8 @@ test("Shop capabilities describe the real transaction runtime without inventing 
     transactionHistory: false,
     preview: false,
   });
-  assert.deepEqual(manifest.runtime.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
+  assert.deepEqual(manifest.runtime.currencyIds, ["credits", "alloy", "star-crystal", "quantum-core"]);
+  assert.deepEqual(manifest.runtime.priceStateKeys, ["credits", "alloy", "starCrystal", "quantumCore"]);
   assert.deepEqual(manifest.runtime.shopTypes, ["normal", "station", "traveling", "black-market", "hidden", "event", "service"]);
   assert.deepEqual(manifest.runtime.stockKinds, ["item", "equipment"]);
   assert.equal(manifest.runtime.refreshBoundary, "sector-instance");

@@ -1,4 +1,4 @@
-export const SHOP_AUDITED_CHILD_SHA = "3ab7d9e49126ec98fdd3342451da023712e5b984";
+export const SHOP_AUDITED_CHILD_SHA = "43557878fbd77b928a98eaa684be8404ba387baf";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
@@ -45,7 +45,7 @@ const authoringReason = "Shop generation/pricing rules are source-owned in the c
 
 export function createShopCapabilityManifest() {
   return {
-    protocolVersion: 2,
+    protocolVersion: 3,
     mode: "runtime-backed-readonly",
     owner: "Space Typing shops/economy runtime",
     auditedChildSha: SHOP_AUDITED_CHILD_SHA,
@@ -79,7 +79,8 @@ export function createShopCapabilityManifest() {
         "src/economy/currencies.ts",
       ],
       shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
-      currencies: ["credits", "alloy", "starCrystal", "quantumCore"],
+      currencyIds: ["credits", "alloy", "star-crystal", "quantum-core"],
+      priceStateKeys: ["credits", "alloy", "starCrystal", "quantumCore"],
       stockKinds: ["item", "equipment"],
       transactionReasons: ["missing", "sold-out", "currency", "full", "duplicate"],
       refreshBoundary: "sector-instance",
@@ -88,7 +89,7 @@ export function createShopCapabilityManifest() {
     evidence: [
       { id: "catalog-owner", found: true, detail: "src/shops/state.ts owns deterministic stock generation and ShopInstance persistence." },
       { id: "purchase-owner", found: true, detail: "buyShopStockEntry validates stock/currency/inventory and applies purchase state." },
-      { id: "pricing-owner", found: true, detail: "ShopPrice supports Credits, Alloy, Star Crystal and Quantum Core; pricing is runtime-derived." },
+      { id: "pricing-owner", found: true, detail: "ShopPrice stores Credits/Alloy plus camelCase Star Crystal/Quantum Core balance keys while the contract exposes canonical hyphenated currency IDs." },
       { id: "availability-owner", found: true, detail: "shopAvailable gates black-market/hidden/event/traveling shops from discovery and luck." },
       { id: "service-owner", found: true, detail: "src/shops/service-shop.ts owns upgrade/repair/evolution/service purchase costs." },
       { id: "authoring-seam", found: false, detail: "No child config contract consumes admin-authored Shop policy yet; write capability stays disabled." },
