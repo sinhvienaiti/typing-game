@@ -9,6 +9,7 @@ const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
 const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
 const phaseBRouter = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 const phaseBCore = await readFile(new URL("portal/src/admin/space-typing-phase-b-core.ts", root), "utf8");
+const featureGatesPhaseB = await readFile(new URL("portal/src/admin/space-typing-feature-gates-phase-b.ts", root), "utf8");
 const phaseB = `${phaseBRouter}\n${phaseBCore}`;
 const stagesPhaseB = await readFile(new URL("portal/src/admin/space-typing-stages-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
@@ -38,7 +39,7 @@ const enemies = map.screens.find((entry) => entry.route === "/admin/space-typing
 const bosses = map.screens.find((entry) => entry.route === "/admin/space-typing/bosses");
 const stages = map.screens.find((entry) => entry.route === "/admin/space-typing/stages");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
-const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
+const featureGates = map.screens.find((entry) => entry.route === "/admin/space-typing/feature-gates");
 const history = map.screens.find((entry) => entry.route === "/admin/space-typing/history");
 assert.equal(audio?.domain, "audio");
 assert.equal(audio?.status, "phase-b-ui-wired");
@@ -62,9 +63,11 @@ assert.equal(stages?.applyBoundary, "new-session");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
-assert.equal(flags?.domain, "featureFlags");
-assert.equal(flags?.status, "phase-b-ui-wired");
-assert.equal(flags?.applyBoundary, "new-session");
+assert.equal(featureGates?.domain, "runtime.featureGates");
+assert.equal(featureGates?.status, "phase-b-ui-wired-runtime-backed-readonly");
+assert.equal(featureGates?.persistence, "child-browser-local-storage");
+assert.equal(featureGates?.applyBoundary, "none");
+assert.equal(featureGates?.legacyRouteAlias, "/admin/space-typing/flags");
 assert.equal(history?.domain, "revisions");
 assert.equal(history?.status, "phase-b-ui-wired");
 assert.equal(history?.applyBoundary, "cas-publish");
@@ -79,6 +82,8 @@ for (const entry of map.screens) {
 }
 
 assert.match(defaultConfig, /\bsystem:\s*\{/);
+// Legacy featureFlags remain schema-compatible for old revisions, but registered
+// Feature Gates routes no longer expose the revision-backed authoring surface.
 assert.match(defaultConfig, /\bfeatureFlags:\s*\{/);
 assert.match(defaultConfig, /\benemies:\s*\{/);
 assert.match(defaultConfig, /\bbosses:\s*\{/);
@@ -87,19 +92,26 @@ assert.match(store, /config\.system !== undefined/);
 assert.match(store, /validateSystem\(config\.system\)/);
 assert.match(store, /config\.featureFlags !== undefined/);
 assert.match(store, /validateFeatureFlags\(config\.featureFlags\)/);
-assert.match(store, /rolloutPercent/);
-assert.match(store, /new-players/);
-assert.match(store, /competitive/);
 assert.match(api, /export type GeneralSettingsConfig/);
 assert.match(api, /export type FeatureFlagConfig/);
 assert.match(api, /getRuntime\(\): Promise<AdminRuntimePayload>/);
 assert.match(main, /renderPhaseBAdminScreen/);
 assert.match(main, /if \(phaseB !== null\) return phaseB/);
 assert.match(phaseB, /Admin Phase B · General Settings draft/);
-assert.match(phaseB, /Admin Phase B · Feature Flags draft/);
 assert.match(phaseB, /api\.createRevision/);
-assert.doesNotMatch(phaseB, /api\.publish/);
+assert.doesNotMatch(phaseBRouter, /api\.publish/);
 assert.match(phaseB, /runtime unchanged/);
+assert.match(phaseBRouter, /renderPhaseBFeatureGates/);
+assert.match(phaseBRouter, /\$\{BASE\}\/feature-gates/);
+assert.match(phaseBRouter, /\$\{BASE\}\/flags/);
+assert.match(featureGatesPhaseB, /RUNTIME-BACKED · READ ONLY/);
+assert.match(featureGatesPhaseB, /NO REMOTE ROLLOUT/);
+assert.match(featureGatesPhaseB, /\/api\/admin\/space-typing\/contract/);
+assert.doesNotMatch(featureGatesPhaseB, /api\.createRevision/);
+assert.doesNotMatch(featureGatesPhaseB, /api\.publish/);
+assert.doesNotMatch(featureGatesPhaseB, /rolloutPercent/);
+assert.doesNotMatch(featureGatesPhaseB, /type\s*=\s*["']range["']/);
+
 assert.match(phaseB, /renderPhaseBAudio/);
 assert.match(audioPhaseB, /Admin Phase B · Audio Defaults draft/);
 assert.match(audioPhaseB, /api\.createRevision/);
@@ -187,10 +199,10 @@ assert.match(server, /validate-revision/);
 assert.match(api, /validateRevision\(revision: string\)/);
 
 const dangerous = map.screens.filter((entry) =>
-  entry.domain.startsWith("economy.") || entry.domain.startsWith("pvp.") || entry.domain === "system" || entry.domain === "featureFlags",
+  entry.domain.startsWith("economy.") || entry.domain.startsWith("pvp.") || entry.domain === "system" || entry.domain === "runtime.featureGates",
 );
 for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.6 Stage runtime-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, runtime-backed Feature Gates registered read-only).`);
