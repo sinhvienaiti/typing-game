@@ -1,4 +1,4 @@
-import { renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
+import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
 import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
 import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
