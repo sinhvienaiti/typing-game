@@ -6,10 +6,12 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-30 publication: `e8c94d8bc9a6d58896acee3b7d0f0fd7279ab6cf` — scale-29 publication state verified by English Content Master Plan Acceptance #54 and Platform CI #1074; published output: `e28d43daecc41c312d51a9a4e1382f5152e2af16`.
+- Latest published scale-up HEAD before this checkpoint: `cb1ae65a88181d25933f9ac0465382231b8d73d6` — `feat(content): publish E04 collocation scale 30`.
+- Latest fully CI-verified pre-publication HEAD: `cb00f341eabccaa43c19593001264e1100975580` — Apply English E04 Scale 30 #1, English Content Full Validation #70, English Content Master Plan Acceptance #55 and Platform CI #1075 all PASS.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
+- Scale-30 publication verification note: the publication commit was created by `github-actions[bot]`; its PR-triggered English Content Master Plan Acceptance #56 and Platform CI #1076 ended `action_required` before jobs ran, so this checkpoint intentionally re-triggers the same mandatory CI from a normal branch write without regenerating scale-30 content or weakening any gate.
 
 The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub before doing work. If a newer commit exists, adopt it, inspect its changes, preserve completed work, and never reset/revert/overwrite/duplicate it.
 
@@ -95,12 +97,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 Start with E04 because it has the smallest, safest incremental units and already has controlled generators/review/runtime gates.
 
-1. Scale-29 publication is fully verified; do not duplicate scale-29 artifacts.
-2. The Acceptance #54 enrichment evidence scan found whole-phrase candidates only for the already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-3. Verify the resulting scale-30 publication commit and mandatory CI without regenerating completed artifacts.
-4. If no safe pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
-5. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-6. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+1. Verify scale-30 publication state through the normal-user checkpoint CI; do not duplicate scale-30 artifacts.
+2. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
+3. If scale-30 checkpoint CI passes and no newer worker has claimed the next scope, create scale-31 as the next bounded collocation batch from frontier `col.00000840`.
+4. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+5. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -108,8 +109,8 @@ The latest verified acceptance state before scale-up activation reported large n
 
 ## Blocker
 
-None.
+No content/data blocker. Scale-30 publication HEAD's bot-authored PR workflow attempts ended `action_required` before any job started; this checkpoint re-triggers the same gates from a normal branch write so the publication state can be verified without regenerating content.
 
 ## Next actionable task
 
-Scale-30 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from the new frontier `col.00000840` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
+Wait for the CI attached to this checkpoint HEAD. If all mandatory gates PASS, record scale-30 as fully verified and continue immediately with the next genuinely new bounded collocation batch from frontier `col.00000840` (expected scale-31 range `col.00000841` through `col.00000880` if no newer worker has claimed it), or move to the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch. Recalculate counts and run exact/near dedupe before every write.
