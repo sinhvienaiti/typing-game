@@ -32,6 +32,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+      - name: Replace conflicted scale 59 candidate
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/apply-english-e04-focused-scale-59.py')
+          text = path.read_text(encoding='utf-8')
+          old = "    ('coordinate pushback clearance', 'verb + noun phrase', 'phối hợp cấp phép đẩy lùi giữa tổ lái, điều hành mặt đất và nhân viên kéo đẩy để tránh xung đột trên sân đỗ', 'C1'),"
+          new = "    ('confirm tug headset communication', 'verb + noun phrase', 'xác nhận liên lạc tai nghe giữa tổ lái và nhân viên kéo đẩy rõ ràng và hoạt động đúng trước khi bắt đầu đẩy lùi', 'B2'),"
+          if old not in text:
+              if new in text:
+                  print('Scale 59 conflict fix is already present.')
+              else:
+                  raise SystemExit('Expected scale 59 conflicted candidate not found.')
+          else:
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+              print('Replaced exact-duplicate scale 59 candidate col.00001988.')
+          PY
       - name: Preflight all scale 59 candidates against current E04
         run: python3 scripts/check-english-e04-scale-59-candidates.py
       - name: Apply idempotent E04 scale 59 source batch
