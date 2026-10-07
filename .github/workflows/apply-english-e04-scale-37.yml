@@ -35,6 +35,25 @@ jobs:
         with:
           node-version: 24.11.0
 
+      - name: Replace scale 37 exact-duplicate candidates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-english-e04-focused-scale-37.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              "('reduce carbon emissions',": "('cut operational carbon emissions',",
+              "('improve energy efficiency',": "('raise facility energy performance',",
+              "('increase recycling rates',": "('expand material recovery programs',",
+          }
+          for old, new in replacements.items():
+              if text.count(old) != 1:
+                  raise SystemExit(f'expected exactly one occurrence of {old!r}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
+
       - name: Preflight all scale 37 candidates against current E04
         run: python3 scripts/check-english-e04-scale-37-candidates.py
 
@@ -90,7 +109,7 @@ jobs:
       - name: Stage reviewed source and generated runtime
         shell: bash
         run: |
-          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-37.py
           git status --short
           if git diff --cached --quiet; then
             echo 'Scale 37 produced no state change; it may already be applied.' >&2
@@ -116,7 +135,7 @@ jobs:
           node scripts/report-english-content-e04.mjs
           node scripts/report-english-content-enrichment-links.mjs
           node scripts/sync-english-content-master-plan-status.mjs
-          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-37.py
           git diff --cached --binary > /tmp/scale37-after.patch
           if ! cmp -s /tmp/scale37-before.patch /tmp/scale37-after.patch; then
             echo 'Scale 37 artifacts are not reproducible after converging and replaying the full publication pipeline.' >&2
