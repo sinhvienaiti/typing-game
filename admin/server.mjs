@@ -21,6 +21,7 @@ import { createBossRuntimeEnvelope } from "./boss-runtime.mjs";
 import { createWorldRuntimeEnvelope } from "./world-runtime.mjs";
 import { createStageRuntimeEnvelope } from "./stage-runtime.mjs";
 import { queryTypingContentCatalog } from "./typing-content-catalog.mjs";
+import { createShopCapabilityManifest } from "./shop-capability.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -56,6 +57,7 @@ const server=createServer(async(request,response)=>{try{
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/state"){json(response,200,{state:await store.getState(),active:await store.getActiveRevision(),history:await store.listRevisions()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/runtime"){json(response,200,{activeRevision:(await store.getState()).activeRevision,config:await store.getRuntimeConfig()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/typing-content/catalog"){json(response,200,await queryTypingContentCatalog({rootDir:root,searchParams:url.searchParams}));return;}
+  if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/capabilities"){json(response,200,createShopCapabilityManifest());return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/music/library"){json(response,200,await musicAssets.list());return;}
   if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/music/upload"){const bytes=await readBody(request,MAX_UPLOAD_BYTES+1);json(response,201,await musicAssets.upload({bytes,fileName:header(request,"x-music-file-name",true),contentType:header(request,"content-type"),trackId:header(request,"x-music-track-id",true),title:header(request,"x-music-title",true),worldId:header(request,"x-music-world-id",true),durationSeconds:header(request,"x-music-duration-seconds",true),mixOutSeconds:header(request,"x-music-mix-out-seconds"),mood:header(request,"x-music-mood")}));return;}
   if(request.method==="DELETE"&&url.pathname.startsWith("/api/admin/space-typing/music/tracks/")){json(response,200,await musicAssets.remove(decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length))));return;}
