@@ -30,7 +30,7 @@
     {"route":"/admin/space-typing/missions","screen":"Missions","domain":"liveOps.missions","persistence":"child-player-progression-and-session","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/daily-weekly","screen":"Daily / Weekly","domain":"liveOps.dailyWeekly","persistence":"none","applyBoundary":"none","status":"ui-prototype-not-runtime-connected"},
     {"route":"/admin/space-typing/expedition","screen":"Expedition","domain":"liveOps.expedition","persistence":"immutable-revision-store","applyBoundary":"new-run","status":"mapped-awaiting-adapter"},
-    {"route":"/admin/space-typing/events","screen":"Events","domain":"liveOps.events","persistence":"immutable-revision-store","applyBoundary":"schedule-boundary","status":"mapped-awaiting-adapter"},
+    {"route":"/admin/space-typing/events","screen":"Events","domain":"runtime.events","persistence":"child-stage-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/duel","screen":"Duel Settings","domain":"pvp.duel","persistence":"immutable-revision-store","applyBoundary":"new-match","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/ranked","screen":"Ranked","domain":"pvp.ranked","persistence":"immutable-revision-store","applyBoundary":"new-match","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/alternative-modes","screen":"Alternative Modes","domain":"pvp.alternativeModes","persistence":"immutable-revision-store","applyBoundary":"new-match","status":"mapped-awaiting-adapter"},
