@@ -54,7 +54,7 @@ COLLOCATIONS = [
     ('perform exterior aircraft walkaround', 'verb + noun phrase', 'thực hiện vòng kiểm tra bên ngoài tàu bay để phát hiện hư hỏng, rò rỉ, vật lạ hoặc cấu hình bất thường trước chuyến bay', 'B2'),
     ('inspect tire pressure condition', 'verb + noun phrase', 'kiểm tra tình trạng áp suất lốp để phát hiện lốp non, hư hỏng hoặc dấu hiệu cần bảo dưỡng trước khai thác', 'B2'),
     ('check landing gear safety pins', 'verb + noun phrase', 'kiểm tra chốt an toàn càng đáp đã được lắp hoặc tháo đúng trạng thái yêu cầu trước khi tàu bay di chuyển', 'B2'),
-    ('coordinate pushback clearance', 'verb + noun phrase', 'phối hợp cấp phép đẩy lùi giữa tổ lái, điều hành mặt đất và nhân viên kéo đẩy để tránh xung đột trên sân đỗ', 'C1'),
+    ('confirm tug headset communication', 'verb + noun phrase', 'xác nhận liên lạc tai nghe giữa tổ lái và nhân viên kéo đẩy rõ ràng và hoạt động đúng trước khi bắt đầu đẩy lùi', 'B2'),
     ('verify towbar connection security', 'verb + noun phrase', 'xác nhận thanh kéo được nối chắc chắn với tàu bay và phương tiện kéo trước khi bắt đầu đẩy lùi hoặc kéo', 'B2'),
     ('monitor engine start clearance', 'verb + noun phrase', 'theo dõi điều kiện và quyền cho phép khởi động động cơ để bảo đảm khu vực luồng khí và hút vào đã an toàn', 'C1'),
     ('protect jet blast zones', 'verb + noun phrase', 'bảo vệ vùng chịu luồng phản lực bằng cách giữ người, thiết bị và phương tiện ngoài khu vực nguy hiểm khi động cơ hoạt động', 'C1'),
