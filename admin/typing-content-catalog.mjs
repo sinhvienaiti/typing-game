@@ -19,6 +19,14 @@ function boundedInteger(value, fallback, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, parsed));
 }
 
+function topicIdsForWord(reverseTopics, word) {
+  if (reverseTopics === null || typeof reverseTopics !== "object" || Array.isArray(reverseTopics)) return [];
+  const key = String(word).toLowerCase();
+  if (!Object.prototype.hasOwnProperty.call(reverseTopics, key)) return [];
+  const value = reverseTopics[key];
+  return Array.isArray(value) ? value.filter((topic) => typeof topic === "string" && topic.length > 0) : [];
+}
+
 async function loadCanonicalCatalog(rootDir) {
   const key = resolve(rootDir);
   let pending = cache.get(key);
@@ -44,7 +52,7 @@ async function loadCanonicalCatalog(rootDir) {
     for (const file of vocabularyLevels) {
       const cefr = vocabularyCefr(file.label);
       for (const entry of file.entries) {
-        const topics = topicReverse.reverseTopics?.[String(entry.en).toLowerCase()] ?? [];
+        const topics = topicIdsForWord(topicReverse.reverseTopics, entry.en);
         vocabulary.push({
           id: entry.id,
           title: entry.en,
