@@ -6,8 +6,7 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-54 publication: `d3ceb1ce31075499283af412f2e338430f440fe3` — scale-53 publication state verified by English Content Master Plan Acceptance #134, English Content Full Validation #125 and Platform CI #1194; published output: `c6fdf79d94c4540bc2e3dffcd16b998a24e4509a`.
-- Current scale-54 publication awaiting checkpoint CI verification: `d9f363c56c17727c54049bf32309dbc59e409342`.
+- Latest fully CI-verified scale-up checkpoint before scale-55 publication: `f0e25bc17c5dbb946467d2da61c49d4458bdcb37` — scale-54 publication state verified by English Content Master Plan Acceptance #137, English Content Full Validation #127 and Platform CI #1197; published output: `d9f363c56c17727c54049bf32309dbc59e409342`.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +17,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 2,910 published records after scale-54
+- E04 phrase/pattern architecture + current reviewed publication: complete — 2,950 published records after scale-55
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,16 +25,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-54 publication
+## Published runtime snapshot after E04 scale-55 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 2,910 records
-- total published rich records: 7,511
+- phrases: 2,950 records
+- total published rich records: 7,551
 - attribution runtime: 4 source records
-- editorial ledger: 7,511 decisions / 7,511 applied / 7,511 publish decisions
-- E04 collocation frontier: `col.00001800`
+- editorial ledger: 7,551 decisions / 7,551 applied / 7,551 publish decisions
+- E04 collocation frontier: `col.00001840`
 
 ## Approved scale-up targets
 
@@ -89,13 +88,12 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-53 publication is fully verified at `d3ceb1ce31075499283af412f2e338430f440fe3`; do not duplicate scale-53 artifacts.
-2. Scale-54 publication is complete at `d9f363c56c17727c54049bf32309dbc59e409342`; do not regenerate scale-54 artifacts.
-3. Verify this normal-user scale-54 checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI.
-4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
-6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+1. Scale-54 publication is fully verified at `f0e25bc17c5dbb946467d2da61c49d4458bdcb37`; do not duplicate scale-54 artifacts.
+2. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
+3. Verify the resulting scale-55 publication commit and mandatory CI without regenerating completed artifacts.
+4. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
+5. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+6. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -107,4 +105,4 @@ None.
 
 ## Next actionable task
 
-Verify mandatory CI for the scale-54 publication checkpoint without regenerating completed artifacts. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001800` (scale-55 unless a newer worker already advanced the branch), or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch. Recalculate counts and run exact/near dedupe before every write.
+Scale-55 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001840` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
