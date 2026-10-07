@@ -85,6 +85,8 @@ jobs:
         run: node --test admin/enemy-registry-preview.test.mjs
       - name: Test canonical Bosses Admin preview bridge
         run: node --test admin/boss-registry-preview.test.mjs
+      - name: Test B06.5 Boss HTTP publish/runtime/rollback smoke
+        run: node --test admin/boss-http-runtime-smoke.test.mjs
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test
       - name: Build Space Typing
