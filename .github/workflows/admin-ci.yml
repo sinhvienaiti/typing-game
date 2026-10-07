@@ -28,6 +28,7 @@ on:
       - "scripts/validate-space-admin-events.mjs"
       - "scripts/validate-space-admin-duel.mjs"
       - "scripts/validate-space-admin-ranked.mjs"
+      - "scripts/validate-space-admin-alternative-modes.mjs"
       - "scripts/validate-space-admin-audio.mjs"
       - ".github/workflows/admin-ci.yml"
 
@@ -72,6 +73,8 @@ jobs:
         run: node scripts/validate-space-admin-duel.mjs
       - name: Validate Ranked runtime ownership audit
         run: node scripts/validate-space-admin-ranked.mjs
+      - name: Validate Alternative Modes runtime ownership audit
+        run: node scripts/validate-space-admin-alternative-modes.mjs
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate Admin service syntax
@@ -89,6 +92,7 @@ jobs:
           node --check scripts/validate-space-admin-events.mjs
           node --check scripts/validate-space-admin-duel.mjs
           node --check scripts/validate-space-admin-ranked.mjs
+          node --check scripts/validate-space-admin-alternative-modes.mjs
           node --check scripts/validate-space-admin-audio.mjs
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
@@ -173,6 +177,8 @@ jobs:
         run: pnpm --dir games/space-typing duel:audit
       - name: Audit Space Typing Ranked contract
         run: pnpm --dir games/space-typing ranked:audit
+      - name: Audit Space Typing Alternative Modes contract
+        run: pnpm --dir games/space-typing alternative-modes:audit
       - name: Build Space Typing
         run: pnpm build:space
       - name: Build Portal
