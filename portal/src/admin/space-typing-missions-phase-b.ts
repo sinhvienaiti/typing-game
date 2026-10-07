@@ -6,15 +6,20 @@ type Tone = "good" | "warn" | "bad" | "info";
 type MissionsContract = {
   mode: "runtime-derived-readonly";
   runtimeSources: string[];
+  domains: string[];
   authorableFields: string[];
   runtimeDerivedFields: string[];
-  objectiveTypes: string[];
-  definitionFields: string[];
-  sourceFunctions: string[];
-  selectionOwner: string;
-  gameplayConsumer: string;
-  rewardIntegration: string;
-  persistenceOwner: string;
+  missionIds: string[];
+  missionCounterKeys: string[];
+  missionDefinitionFields: string[];
+  missionSourceFunctions: string[];
+  missionPersistenceOwner: string;
+  stageObjectiveTypes: string[];
+  stageObjectiveDefinitionFields: string[];
+  stageObjectiveSourceFunctions: string[];
+  stageObjectivePersistenceOwner: string;
+  gameplayConsumers: string[];
+  rewardIntegration: string[];
   unsupportedMasterPlanFields: string[];
   recurringMissionDefinitions: false;
   dailyWeeklyAuthoring: false;
@@ -70,7 +75,7 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "Live Ops · Runtime Contract"),
     el("h1", undefined, "Missions"),
-    el("p", undefined, "Inspect the canonical Stage Objective system that gameplay actually consumes. The current runtime does not own recurring Daily / Weekly mission definitions, rotation calendars or reward pools, so Admin authoring stays intentionally closed."),
+    el("p", undefined, "Inspect both canonical progression missions and per-stage objectives consumed by gameplay. Definitions are code-owned; Admin intentionally exposes diagnostics only and does not invent Daily / Weekly rotation authoring."),
   );
   const actions = el("div", "st-admin-page-actions");
   actions.append(
@@ -87,39 +92,42 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
     try {
       const missions = await fetchMissionsContract();
       status.className = "stx-notice good";
-      status.textContent = `${missions.objectiveTypes.length} canonical Stage Objective types · runtime session state · Admin writes closed.`;
+      status.textContent = `${missions.missionIds.length} canonical progression missions · ${missions.stageObjectiveTypes.length} Stage Objective types · Admin writes closed.`;
 
-      const types = panel("Runtime Objective Types", "Canonical StageObjectiveType values from src/events/objectives.ts");
-      types.append(listNotice("Objective types", missions.objectiveTypes, "good"));
-
-      const model = panel("Definition & Runtime State", "Fields exposed by the real objective definition/state model");
-      model.append(
-        listNotice("Definition fields", missions.definitionFields),
-        listNotice("Runtime state fields", missions.runtimeDerivedFields),
-        notice(`Persistence owner: ${missions.persistenceOwner}`, "good"),
+      const progression = panel("Progression Missions", "Canonical code-owned registry from src/progression/missions.ts");
+      progression.append(
+        listNotice("Mission IDs", missions.missionIds, "good"),
+        listNotice("Counters", missions.missionCounterKeys),
+        listNotice("Definition fields", missions.missionDefinitionFields),
+        notice(`Persistence owner: ${missions.missionPersistenceOwner}`, "good"),
+        notice("Claimed missions and counters are player progression state; mission rewards are issued by claimMission().", "info"),
       );
 
-      const integration = panel("Selection & Reward Integration", "Gameplay owns objective selection, progress reduction and reward factor application");
+      const objectives = panel("Stage Objectives", "Canonical per-stage objective runtime from src/events/objectives.ts");
+      objectives.append(
+        listNotice("Objective types", missions.stageObjectiveTypes, "good"),
+        listNotice("Definition fields", missions.stageObjectiveDefinitionFields),
+        notice(`Persistence owner: ${missions.stageObjectivePersistenceOwner}`, "info"),
+      );
+
+      const integration = panel("Runtime Integration", "Admin reads ownership metadata instead of cloning mission logic");
       integration.append(
-        notice(`Selection owner: ${missions.selectionOwner}`, "good"),
-        notice(`Gameplay consumer: ${missions.gameplayConsumer}`, "good"),
-        notice(`Reward integration: ${missions.rewardIntegration}`, "good"),
-        listNotice("Runtime functions", missions.sourceFunctions),
+        listNotice("Progression functions", missions.missionSourceFunctions),
+        listNotice("Objective functions", missions.stageObjectiveSourceFunctions),
+        listNotice("Gameplay consumers", missions.gameplayConsumers, "good"),
+        listNotice("Reward integration", missions.rewardIntegration, "good"),
+        listNotice("Canonical sources", missions.runtimeSources),
       );
 
-      const sources = panel("Canonical Sources", "Admin reads contract metadata; it does not clone mission logic");
-      sources.append(listNotice("Runtime sources", missions.runtimeSources));
-
-      const boundary = panel("Admin Boundary", "Do not promote UI-only recurring mission concepts into runtime configuration");
+      const boundary = panel("Admin Boundary", "Recurring authoring stays closed until a canonical runtime service exists");
       boundary.append(
         listNotice("Unsupported recurring-authoring fields", missions.unsupportedMasterPlanFields, "warn"),
-        notice("Recurring mission definitions: unavailable in the canonical runtime.", "warn"),
-        notice("Daily / Weekly authoring: unavailable. The existing Daily / Weekly screen is UI mock data only and is not a runtime control plane.", "warn"),
-        notice("Save Draft / Publish are intentionally unavailable because no canonical persistence/apply consumer exists for mission definitions.", "warn"),
-        notice("Preview is intentionally unavailable; Admin does not duplicate objective selection or progress reduction logic.", "info"),
+        notice("The five progression mission definitions are real, but they are code-owned and therefore read-only here.", "warn"),
+        notice("Daily / Weekly reset, rotation calendar and reward-pool authoring are unavailable in the canonical runtime.", "warn"),
+        notice("Save Draft / Publish / Preview are intentionally unavailable for Missions.", "info"),
       );
 
-      page.append(types, model, integration, sources, boundary);
+      page.append(progression, objectives, integration, boundary);
     } catch (error: unknown) {
       status.className = "stx-notice bad";
       status.textContent = `Missions contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
