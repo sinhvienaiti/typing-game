@@ -27,7 +27,7 @@
     {"route":"/admin/space-typing/currencies","screen":"Currencies","domain":"economy.currencies","persistence":"child-runtime-state","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/rewards","screen":"Rewards & Drops","domain":"economy.rewards","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/warp","screen":"Stamina / Warp","domain":"economy.warp","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
-    {"route":"/admin/space-typing/missions","screen":"Missions","domain":"liveOps.missions","persistence":"child-runtime-session","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
+    {"route":"/admin/space-typing/missions","screen":"Missions","domain":"liveOps.missions","persistence":"child-player-progression-and-session","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/daily-weekly","screen":"Daily / Weekly","domain":"liveOps.dailyWeekly","persistence":"none","applyBoundary":"none","status":"ui-prototype-not-runtime-connected"},
     {"route":"/admin/space-typing/expedition","screen":"Expedition","domain":"liveOps.expedition","persistence":"immutable-revision-store","applyBoundary":"new-run","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/events","screen":"Events","domain":"liveOps.events","persistence":"immutable-revision-store","applyBoundary":"schedule-boundary","status":"mapped-awaiting-adapter"},
@@ -38,7 +38,7 @@
     {"route":"/admin/space-typing/vfx","screen":"VFX","domain":"visuals.vfx","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/ui-assets","screen":"UI Assets","domain":"visuals.uiAssets","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/settings","screen":"General Settings","domain":"system","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired"},
-    {"route":"/admin/space-typing/flags","screen":"Feature Flags","domain":"featureFlags","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired"},
+    {"route":"/admin/space-typing/feature-gates","screen":"Feature Gates","domain":"runtime.featureGates","persistence":"child-browser-local-storage","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly","legacyRouteAlias":"/admin/space-typing/flags"},
     {"route":"/admin/space-typing/history","screen":"History & Publish","domain":"revisions","persistence":"immutable-revision-store","applyBoundary":"cas-publish","status":"phase-b-ui-wired"},
     {"route":"/admin/space-typing/qa","screen":"QA Sandbox","domain":"qa","persistence":"ephemeral-sandbox","applyBoundary":"new-qa-run","status":"mapped-awaiting-adapter"}
   ]
