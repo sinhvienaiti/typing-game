@@ -65,10 +65,10 @@ assert(uiSource.includes("/api/admin/space-typing/duel/contract"), "Duel UI must
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Duel UI must expose read-only Admin ownership");
 assert(uiSource.includes("ROOM OWNER CONFIG"), "Duel UI must distinguish room-owner config from Admin config");
 assert(uiSource.includes("Damage resolves on authority clock"), "Duel UI must explain authority timing");
-assert(!uiSource.includes("Save UI Draft"), "Duel Phase B UI must not expose synthetic revision writes");
 assert(!uiSource.includes('type = "range"'), "Duel Phase B UI must not expose free-form range controls");
 assert(!uiSource.includes("api.createRevision"), "Duel Phase B UI must not write Admin revisions");
 assert(!uiSource.includes("api.publish"), "Duel Phase B UI must not publish a synthetic Duel policy");
+assert(!uiSource.includes("api.rollback"), "Duel Phase B UI must not mutate the active Admin revision pointer");
 
 assert(routerSource.includes("renderPhaseBDuel"), "Duel renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/duel`"), "Duel route is not wired into Phase B");
