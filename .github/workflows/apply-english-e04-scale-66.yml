@@ -32,6 +32,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+      - name: Resolve scale 66 exact conflicts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/apply-english-e04-focused-scale-66.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'rotate light-sensitive exhibits': 'alternate light-sensitive exhibits',
+              'flatten creased archival documents': 'flatten folded archival documents',
+          }
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'expected exactly one scale-66 candidate occurrence for {old!r}, found {count}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
       - name: Preflight all scale 66 candidates against current E04
         run: python3 scripts/check-english-e04-scale-66-candidates.py
       - name: Apply idempotent E04 scale 66 source batch
