@@ -1,4 +1,4 @@
-export const SHOP_AUDITED_CHILD_SHA = "a56897559a16841eb4ac4fee207e22e2ef949734";
+export const SHOP_AUDITED_CHILD_SHA = "3ab7d9e49126ec98fdd3342451da023712e5b984";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
@@ -79,7 +79,7 @@ export function createShopCapabilityManifest() {
         "src/economy/currencies.ts",
       ],
       shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
-      currencies: ["credits", "alloy", "star-crystal", "quantum-core"],
+      currencies: ["credits", "alloy", "starCrystal", "quantumCore"],
       stockKinds: ["item", "equipment"],
       transactionReasons: ["missing", "sold-out", "currency", "full", "duplicate"],
       refreshBoundary: "sector-instance",

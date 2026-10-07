@@ -28,7 +28,7 @@ assert.ok(!contract.capabilities.includes("shop.write"), "Shop authoring must st
 assert.equal(contract.shop?.mode, "runtime-derived-readonly");
 assert.deepEqual(contract.shop?.authorableFields, []);
 assert.equal(contract.shop?.writeCapability, false);
-assert.deepEqual(contract.shop?.currencies, ["credits", "alloy", "star-crystal", "quantum-core"]);
+assert.deepEqual(contract.shop?.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
 assert.deepEqual(contract.shop?.runtimeSources, ["src/shops/state.ts", "src/shops/service-shop.ts", "src/economy/credits.ts", "src/economy/currencies.ts"]);
 
 assert.match(shopState, /export function resolveShopInstance/);
@@ -44,6 +44,7 @@ assert.match(currencies, /export const EXPANSION_CURRENCY_IDS/);
 assert.equal(manifest.mode, "runtime-backed-readonly");
 assert.equal(manifest.authoring.enabled, false);
 assert.equal(manifest.authoring.applyBoundary, "none");
+assert.deepEqual(manifest.runtime.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
 assert.equal(SHOP_TABS.length, 6);
 assert.equal(SHOP_FIELDS.length, 15);
 assert.equal(manifest.fields.filter((field) => field.runtimeBacked).length, 9);

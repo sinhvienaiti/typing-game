@@ -1,4 +1,5 @@
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
+import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
 import { renderPhaseBStages } from "./space-typing-stages-phase-b";
 import { renderPhaseBTypingContent } from "./space-typing-typing-content-phase-b";
@@ -12,5 +13,6 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);
   if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
   if (path === `${BASE}/shop`) return renderPhaseBShop(navigate);
+  if (path === `${BASE}/currencies`) return renderPhaseBCurrencies(navigate);
   return renderPhaseBCoreAdminScreen(path, navigate);
 }

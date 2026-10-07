@@ -41,7 +41,7 @@ test("Shop capabilities describe the real transaction runtime without inventing 
     transactionHistory: false,
     preview: false,
   });
-  assert.deepEqual(manifest.runtime.currencies, ["credits", "alloy", "star-crystal", "quantum-core"]);
+  assert.deepEqual(manifest.runtime.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
   assert.deepEqual(manifest.runtime.shopTypes, ["normal", "station", "traveling", "black-market", "hidden", "event", "service"]);
   assert.deepEqual(manifest.runtime.stockKinds, ["item", "equipment"]);
   assert.equal(manifest.runtime.refreshBoundary, "sector-instance");
