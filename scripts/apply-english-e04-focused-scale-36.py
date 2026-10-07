@@ -113,7 +113,7 @@ def update_progress():
     text = replace_once(
         text,
         '- Latest fully CI-verified scale-up checkpoint before scale-35 publication: `e7342759929cf624efb35fc56b09542bde7cd193` — scale-34 publication state verified by English Content Master Plan Acceptance #71, English Content Full Validation #81 and Platform CI #1097; published output: `8825d0158b036e87bfeaa9ef1749d5448a40ab32`.',
-        '- Latest fully CI-verified scale-up checkpoint before scale-36 publication: `964af3b7b1eaa6a5b08af5f5d693a22cc9d7adc2` — scale-35 publication state verified by English Content Master Plan Acceptance #74, English Content Full Validation #83 and Platform CI #1100; published output: `26fd71cb7df2308c612a949fa8215d6dca5792dc`.',
+        '- Latest fully CI-verified scale-up checkpoint before scale-36 publication: `964af3b7b1eaa6a5b08af5f5d693a22cc9d7adc2` — scale-35 publication state verified by English Content Master Plan Acceptance #74, English Content Full Validation #83 and Platform CI #1117; published output: `26fd71cb7df2308c612a949fa8215d6dca5792dc`.',
         'verified scale-35 checkpoint',
     )
     text = replace_once(text, '- Latest published scale-up HEAD before this checkpoint: `26fd71cb7df2308c612a949fa8215d6dca5792dc` — `feat(content): publish E04 collocation scale 35`.\n', '', 'remove scale-35 publication line')
