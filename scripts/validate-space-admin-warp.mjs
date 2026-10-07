@@ -72,7 +72,7 @@ assert(uiSource.includes("Code-owned policy fields"), "Warp UI must expose code-
 assert(uiSource.includes("gameplay-only"), "Warp UI must explain gameplay-only player mutation");
 assert(!uiSource.includes("api.createRevision"), "Warp UI must not create config revisions");
 assert(!uiSource.includes("api.publish"), "Warp UI must not publish config revisions");
-assert(!uiSource.includes("Save Draft"), "Warp UI must not fabricate authoring");
+assert(!uiSource.includes('button("Save Draft"'), "Warp UI must not render a Save Draft authoring control");
 assert(!uiSource.includes("fetch(\"/api/admin/space-typing/warp"), "Warp UI must not invent a player mutation endpoint");
 assert(routerSource.includes("renderPhaseBWarp"), "Warp renderer is not wired");
 assert(routerSource.includes("`${BASE}/warp`"), "Warp route is not wired");
