@@ -60,7 +60,10 @@ assert.doesNotMatch(server, /POST"&&url\.pathname==="\/api\/admin\/space-typing\
 assert.match(router, /renderPhaseBShop/);
 assert.match(router, /\/shop`\) return renderPhaseBShop/);
 assert.match(ui, /RUNTIME-BACKED · READ ONLY/);
-assert.match(ui, /9 runtime-derived fields/);
+assert.match(ui, /const runtimeCount = manifest\.fields\.filter\(\(field\) => field\.runtimeBacked\)\.length/);
+assert.match(ui, /const unsupportedCount = manifest\.fields\.length - runtimeCount/);
+assert.match(ui, /\$\{runtimeCount\} runtime-derived fields/);
+assert.match(ui, /\$\{unsupportedCount\} unsupported fields/);
 assert.match(ui, /Shop Preview/);
 const map = JSON.parse(phaseMap);
 const shop = map.screens.find((screen) => screen.route === "/admin/space-typing/shop");
