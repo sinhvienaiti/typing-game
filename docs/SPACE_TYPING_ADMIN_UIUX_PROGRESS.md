@@ -6,56 +6,56 @@ STATUS: IN_PROGRESS
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- Code HEAD before this checkpoint: `41d25c51893127ec5773d6532df5bf55b92a3d96`
-- PR: #49
-- Last fully verified parent head before new B06.5 lifecycle commits: `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; Admin CI `37542898908` PASS and Platform CI `37542898924` PASS.
+- Code HEAD before this checkpoint: `92e4494d307430e29f6099aa09ce38982528c03c`
+- PR: #49 — OPEN, DRAFT
+- Space Typing Admin CI run `37557591833`: PASS on `92e4494d307430e29f6099aa09ce38982528c03c`.
+- Platform CI run `37557591836`: PASS on `92e4494d307430e29f6099aa09ce38982528c03c`.
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Branch: `feat/admin-world-music-stage-policy`
-- HEAD: `9c2add4b1eca37c1efce2101fd4a5428f1381410`
-- Child CI run `37529289382`: PASS.
-- Parent child reference: `9c2add4b1eca37c1efce2101fd4a5428f1381410` (exact validated B06.5 child SHA).
+- HEAD: `f4b057d89f374ba01a5b89890a2f942e9a1cd077`
+- Child CI run `37557053845`: PASS.
+- Parent child reference: `f4b057d89f374ba01a5b89890a2f942e9a1cd077` (exact tested B06.5 child SHA).
 
-Current milestone: **B06.5 — Bosses Admin → Runtime**
+Current milestone: **B06.6 — Worlds & Stages Admin → Runtime**
 
 ## COMPLETED MILESTONES
 - B06.1 Ships — DONE
 - B06.2 Equipment — DONE
 - B06.3 Skills — DONE
 - B06.4 Enemies — DONE
+- B06.5 Bosses — DONE
 
 ## COMPLETED TASKS OF CURRENT MILESTONE
-- Child Boss loader/fallback/preview, canonical identity application, 26-ID contract and tests are pushed and child CI PASS.
-- Parent pins the validated B06.5 child SHA.
-- Parent Boss validation permits only canonical IDs and authorable `name`/`title`; unsupported combat/visual fields are rejected.
-- Deterministic default Boss policy, canonical preview bridge, published runtime envelope, public Boss runtime endpoint and authenticated Boss preview endpoint are implemented.
-- Parent Boss policy/runtime unit tests are implemented.
-- Fixed parent/child Boss contract snapshot drift; Admin CI and Platform CI both PASS on `aa0f4f0f`.
-- Added Boss preview parser coverage.
-- Added explicit B06.5 Admin CI gates for Boss policy, runtime envelope and preview bridge; Admin syntax gate now covers every `admin/*.mjs` file so new Boss files cannot silently escape syntax validation.
-- Added revision-store lifecycle coverage proving Boss Draft -> Validate -> Publish -> Runtime -> Rollback isolation and rejection of unknown IDs, unsupported fields and overlong names.
+- Master-plan scope for Worlds & Stages has been located: 1000-stage scale, world/stage lists and detail surfaces, preview/clone/validate actions, and runtime-safe world/stage fields.
+- Initial child runtime audit has started from the exact pinned child SHA; no B06.6 authorable schema is assumed until canonical stage/world consumers are identified.
 
 ## REMAINING TASKS
-- Verify Admin CI and Platform CI on current lifecycle-test HEAD; root-cause any failure.
-- Replace mock Boss screen with revision-backed editor; unsupported fields stay read-only.
-- Run HTTP/runtime smoke against published Boss identity and rollback, including child session-start consumption.
-- When all B06.5 gates pass, mark B06.5 DONE and immediately begin the next mandatory master-plan milestone.
+- Audit current child world/stage canonical sources and all runtime consumers; identify the smallest safe authorable B06.6 slice and apply boundary.
+- Add explicit child Admin contract/schema/types for the selected world/stage fields with deterministic fallback and negative tests.
+- Add child runtime policy loader/session materialization and wire it into actual stage/world consumers without per-frame config reads.
+- Add canonical child preview/test bridge for Admin validation.
+- Run targeted child tests, full child test/build and child CI; push and verify exact child SHA.
+- Add parent validation/defaults/revision/publish/runtime API and preview bridge for Worlds & Stages.
+- Replace the Worlds & Stages mock with revision-backed editor/list/detail flow for only proven runtime-backed fields; keep unsupported fields read-only.
+- Verify Draft -> Validate -> Publish -> Runtime -> Rollback with HTTP/child smoke, then pin exact tested child SHA and pass parent Admin CI + Platform CI.
 
 ## CURRENT BLOCKER
 NONE.
 
 ## NEXT ACTION
-Verify CI for the current B06.5 lifecycle commits. Then inspect the existing revision-backed Enemy editor/API pattern and convert Bosses from mock presentation to revision-backed authoring of `name`/`title`; run Draft -> Validate -> Publish -> Runtime -> Rollback HTTP/runtime smoke and child session-start verification.
+Continue B06.6 from the pinned child `f4b057d89f374ba01a5b89890a2f942e9a1cd077`: inspect canonical stage/world definitions and their gameplay consumers (including stage sequence/progression, boss/music/background/content/enemy selectors where applicable). Define only the smallest safe runtime-backed policy slice, then implement its child contract/loader/tests before changing parent Admin authoring.
 
 ## QUALITY GATES
-- Unit: PASS on prior parent head; current Boss lifecycle additions pending CI.
-- Integration: Boss revision lifecycle test implemented; editor + HTTP/child smoke pending.
-- Admin validation: IMPLEMENTED; explicit B06.5 CI gate added.
-- Runtime validation: endpoint implemented; HTTP + child session smoke pending.
-- Contract tests: PASS child; parent snapshot gate PASS on `aa0f4f0f`.
-- Build/typecheck: PASS child; parent Admin/Platform CI PASS on `aa0f4f0f`, current lifecycle head pending.
-- Child CI: PASS run `37529289382` on `9c2add4b1eca37c1efce2101fd4a5428f1381410`.
-- Parent Admin CI: PASS run `37542898908` on `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; current head pending.
-- Platform CI: PASS run `37542898924` on `aa0f4f0ff2c5762b6654bdc9c1ddaed4a0ed6370`; current head pending.
-- Runtime smoke: B06.5 PENDING.
+- Unit: B06.1-B06.5 PASS.
+- Integration: B06.1-B06.5 PASS, including Boss revision lifecycle and real HTTP publish/runtime/rollback smoke.
+- Admin validation: B06.1-B06.5 PASS.
+- Runtime validation: B06.1-B06.5 PASS; B06.5 published Boss identity is consumed by the pinned child preview/runtime path at the `new-session` boundary.
+- Contract tests: PASS for B06.1-B06.5 parent/child snapshot.
+- Build/typecheck: PASS on current B06.5 parent/child pair.
+- Child CI: PASS run `37557053845` on `f4b057d89f374ba01a5b89890a2f942e9a1cd077`.
+- Parent Admin CI: PASS run `37557591833` on `92e4494d307430e29f6099aa09ce38982528c03c`.
+- Platform CI: PASS run `37557591836` on `92e4494d307430e29f6099aa09ce38982528c03c`.
+- Runtime smoke: B06.5 PASS — Draft isolated before publish, Publish changes runtime and pinned child preview consumes the policy, Rollback restores the previous runtime state.
+- B06.6 gates: PENDING implementation.
