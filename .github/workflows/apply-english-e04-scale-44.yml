@@ -32,6 +32,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24.11.0
+      - name: Replace scale 44 exact-duplicate candidates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-english-e04-focused-scale-44.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              "('load checked baggage',": "('stow checked baggage',",
+              "('refuel parked aircraft',": "('uplift aviation fuel',",
+          }
+          for old, new in replacements.items():
+              if text.count(old) != 1:
+                  raise SystemExit(f'expected exactly one occurrence of {old!r}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
       - name: Preflight all scale 44 candidates against current E04
         run: python3 scripts/check-english-e04-scale-44-candidates.py
       - name: Apply idempotent E04 scale 44 source batch
