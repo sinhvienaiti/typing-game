@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-68 publication: `200511cb4fbd6d6248534d0b30445a76cce03a1d` — scale-67 publication state verified by English Content Master Plan Acceptance #178, English Content Full Validation #152 and Platform CI #1287; published output: `ec3fd17cc756bd31dad93361e6f2b04b94e0e066`.
-- Scale-67 publication checkpoint `200511cb4fbd6d6248534d0b30445a76cce03a1d` is fully verified; scale-68 is the current publication unit.
+- Latest fully CI-verified scale-up checkpoint before scale-68 checkpoint verification: `200511cb4fbd6d6248534d0b30445a76cce03a1d` — scale-67 publication state verified by English Content Master Plan Acceptance #178, English Content Full Validation #152 and Platform CI #1287; published output: `ec3fd17cc756bd31dad93361e6f2b04b94e0e066`.
+- Scale-68 publication is complete at `0b117abe1ccdede8b79cc4eaa2bb8c632613a547`; its bot-triggered PR workflows reached the known `action_required` state before job execution, so one normal-user checkpoint must verify the published state.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -90,8 +90,8 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-67 publication is fully verified at `200511cb4fbd6d6248534d0b30445a76cce03a1d`; do not duplicate scale-67 artifacts.
-2. Scale-68 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-68 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-68 publication is complete at `0b117abe1ccdede8b79cc4eaa2bb8c632613a547`; do not regenerate or duplicate scale-68 artifacts.
+3. Verify the normal-user scale-68 checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI; scale-68 becomes fully verified only when all three PASS.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. If no safer pending enrichment appears after the scale-68 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002360`, expected IDs `col.00002361`–`col.00002400`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-68 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002360` (expected next range `col.00002361`–`col.00002400`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Create/verify exactly one normal-user checkpoint for scale-68 publication `0b117abe1ccdede8b79cc4eaa2bb8c632613a547`. After English Content Full Validation, Master Plan Acceptance and Platform CI all PASS on that checkpoint, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002360` (expected next range `col.00002361`–`col.00002400`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
