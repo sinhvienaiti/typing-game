@@ -6,19 +6,18 @@ STATUS: IN_PROGRESS
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- Code HEAD before this checkpoint: `92e4494d307430e29f6099aa09ce38982528c03c`
+- Code HEAD before this checkpoint: `600ff476dc35faf54dfb8f0b5addade7613f4ccf`
 - PR: #49 — OPEN, DRAFT
-- Space Typing Admin CI run `37557591833`: PASS on `92e4494d307430e29f6099aa09ce38982528c03c`.
-- Platform CI run `37557591836`: PASS on `92e4494d307430e29f6099aa09ce38982528c03c`.
+- Space Typing Admin CI run `37569071966` (#245): PASS on `600ff476dc35faf54dfb8f0b5addade7613f4ccf`.
+- Platform CI run `37569071960` (#1093): PASS on `600ff476dc35faf54dfb8f0b5addade7613f4ccf`.
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Branch: `feat/admin-world-music-stage-policy`
-- HEAD: `f4b057d89f374ba01a5b89890a2f942e9a1cd077`
-- Child CI run `37557053845`: PASS.
-- Parent child reference: `f4b057d89f374ba01a5b89890a2f942e9a1cd077` (exact tested B06.5 child SHA).
-
-Current milestone: **B06.6 — Worlds & Stages Admin → Runtime**
+- HEAD: `6fa13b857990b1f7593b415557a837c505d6fc56`
+- Latest commit: `feat(admin): add runtime-backed World roster overrides`
+- Child CI run `37568268747` (#1697): PASS.
+- Parent `games/space-typing` is pinned to exact tested child SHA `6fa13b857990b1f7593b415557a837c505d6fc56`.
 
 ## COMPLETED MILESTONES
 - B06.1 Ships — DONE
@@ -26,36 +25,76 @@ Current milestone: **B06.6 — Worlds & Stages Admin → Runtime**
 - B06.3 Skills — DONE
 - B06.4 Enemies — DONE
 - B06.5 Bosses — DONE
+- B06.6 Worlds & Stages — DONE
 
-## COMPLETED TASKS OF CURRENT MILESTONE
-- Master-plan scope for Worlds & Stages has been located: 1000-stage scale, world/stage lists and detail surfaces, preview/clone/validate actions, and runtime-safe world/stage fields.
-- Initial child runtime audit has started from the exact pinned child SHA; no B06.6 authorable schema is assumed until canonical stage/world consumers are identified.
+## CURRENT MILESTONE
+Next mandatory Game Content slice from the retained master plan: **Typing Content Admin → canonical content catalog/references**.
+
+The master plan places `Typing Content` immediately after `Worlds & Stages` and explicitly says this screen must consume the existing English Learning Content System/content catalog rather than duplicate it. Initial implementation must therefore audit canonical content sources and stage/runtime references before adding any authoring schema.
+
+## COMPLETED TASKS
+### B06.6 Stage vertical slice
+- Audited canonical Stage lifecycle from `createStageConfig()` into gameplay and selected a resolver boundary before gameplay consumption rather than embedding Admin dependencies into core gameplay.
+- Child Admin contract exposes only verified gameplay-backed Stage fields:
+  - `enemyBudget`
+  - `eliteChance`
+  - `modifierSlots`
+- Preserved structural Stage fields:
+  - `stage`
+  - `galaxy`
+  - `stageInGalaxy`
+  - `role`
+  - `seed`
+- Added immutable new-session Stage runtime policy with deterministic bundled fallback.
+- Added `stages:admin-preview`; preview returns `pacingBudget`, proving authored `enemyBudget` reaches actual Stage pacing materialization.
+- Added parent validation/default/revision/runtime/preview bridge and revision-backed Stage editor.
+- Added real HTTP Draft -> Validate -> Publish -> Runtime/child preview -> Rollback smoke.
+
+### B06.6 World vertical slice
+- Audited canonical `WORLD_REGISTRY` and World enemy selector consumers.
+- Selected only `enemyRoster` as authorable because `worldRuntimeEnemyDefinitionId()` directly consumes it for gameplay enemy selection.
+- Preserved structural World fields:
+  - `id`
+  - `galaxy`
+  - `stageStart`
+  - `stageEnd`
+  - `enemyFamilies`
+- Child World resolver overlays the bundled `WORLD_REGISTRY`, filters `elitePool` against the effective roster, and keeps bundled fallback.
+- World policy rejects malformed/unsafe roster entries, including unknown World/enemy IDs, duplicates, boss/mini-boss entries, and enemies outside the bundled World family contract.
+- Added `worlds:admin-preview`; preview calls the actual gameplay-backed World selector and returns `sampleEnemyId` as consumption proof.
+- Added parent World validation/default/revision/runtime/preview bridge and revision-backed World roster editor.
+- Added real HTTP Draft -> Validate -> Publish -> Runtime -> child gameplay preview -> Rollback smoke.
+- `/admin/space-typing/stages` now opens the World roster editor; its Stage Overrides action opens the Stage editor at `/admin/space-typing/worlds-stages`.
+- Added dedicated B06.6 Worlds + Stages mapping validator.
 
 ## REMAINING TASKS
-- Audit current child world/stage canonical sources and all runtime consumers; identify the smallest safe authorable B06.6 slice and apply boundary.
-- Add explicit child Admin contract/schema/types for the selected world/stage fields with deterministic fallback and negative tests.
-- Add child runtime policy loader/session materialization and wire it into actual stage/world consumers without per-frame config reads.
-- Add canonical child preview/test bridge for Admin validation.
-- Run targeted child tests, full child test/build and child CI; push and verify exact child SHA.
-- Add parent validation/defaults/revision/publish/runtime API and preview bridge for Worlds & Stages.
-- Replace the Worlds & Stages mock with revision-backed editor/list/detail flow for only proven runtime-backed fields; keep unsupported fields read-only.
-- Verify Draft -> Validate -> Publish -> Runtime -> Rollback with HTTP/child smoke, then pin exact tested child SHA and pass parent Admin CI + Platform CI.
+- Audit the existing English Learning Content System and Space Typing content consumers/references for the Typing Content screen:
+  - Vocabulary
+  - Typing Text
+  - Boss Text
+  - Recall
+  - Objectives
+- Identify canonical catalog/reference boundaries and which fields, if any, are safe to author from Space Typing Admin.
+- Prefer read/reference integration over duplicating content owned by the English Learning Content System.
+- Implement the smallest end-to-end Typing Content slice only after a real consumer/reference path is proven.
+- Continue remaining mandatory master-plan screens after Typing Content in source order; do not mark the overall project complete until all mandatory scopes and relevant gates pass.
 
 ## CURRENT BLOCKER
 NONE.
 
 ## NEXT ACTION
-Continue B06.6 from the pinned child `f4b057d89f374ba01a5b89890a2f942e9a1cd077`: inspect canonical stage/world definitions and their gameplay consumers (including stage sequence/progression, boss/music/background/content/enemy selectors where applicable). Define only the smallest safe runtime-backed policy slice, then implement its child contract/loader/tests before changing parent Admin authoring.
+Fetch latest parent/child HEADs, then audit canonical Typing Content sources and Space Typing references. Start from the existing English Learning Content System/content catalog and trace how Space Typing chooses vocabulary/text/boss/recall/objective content. Define only the smallest safe catalog/reference adapter, then implement/test/commit it; do not copy or fork the learning-content dataset into the Admin config.
 
 ## QUALITY GATES
-- Unit: B06.1-B06.5 PASS.
-- Integration: B06.1-B06.5 PASS, including Boss revision lifecycle and real HTTP publish/runtime/rollback smoke.
-- Admin validation: B06.1-B06.5 PASS.
-- Runtime validation: B06.1-B06.5 PASS; B06.5 published Boss identity is consumed by the pinned child preview/runtime path at the `new-session` boundary.
-- Contract tests: PASS for B06.1-B06.5 parent/child snapshot.
-- Build/typecheck: PASS on current B06.5 parent/child pair.
-- Child CI: PASS run `37557053845` on `f4b057d89f374ba01a5b89890a2f942e9a1cd077`.
-- Parent Admin CI: PASS run `37557591833` on `92e4494d307430e29f6099aa09ce38982528c03c`.
-- Platform CI: PASS run `37557591836` on `92e4494d307430e29f6099aa09ce38982528c03c`.
-- Runtime smoke: B06.5 PASS — Draft isolated before publish, Publish changes runtime and pinned child preview consumes the policy, Rollback restores the previous runtime state.
-- B06.6 gates: PENDING implementation.
+- Child World/Stage tests/build: PASS.
+- Child CI: PASS run `37568268747` (#1697) on `6fa13b857990b1f7593b415557a837c505d6fc56`.
+- Parent Admin CI: PASS run `37569071966` (#245) on `600ff476dc35faf54dfb8f0b5addade7613f4ccf`.
+- Parent Platform CI: PASS run `37569071960` (#1093) on `600ff476dc35faf54dfb8f0b5addade7613f4ccf`.
+- Contract snapshot: PASS for Worlds + Stages child/parent contract pair.
+- Portal build: PASS.
+- Full Space Typing tests/build: PASS in both Admin and Platform gates.
+- Stage runtime smoke: PASS — draft isolation, publish, actual child pacing preview, rollback.
+- World runtime smoke: PASS — draft isolation, publish, actual child World enemy selector preview (`sampleEnemyId`), rollback.
+
+## STATUS
+`IN_PROGRESS` — B06.6 is complete; mandatory Typing Content integration is next.
