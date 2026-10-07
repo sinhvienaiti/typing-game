@@ -23,6 +23,7 @@ on:
       - "scripts/validate-space-admin-currencies.mjs"
       - "scripts/validate-space-admin-rewards.mjs"
       - "scripts/validate-space-admin-warp.mjs"
+      - "scripts/validate-space-admin-missions.mjs"
       - "scripts/validate-space-admin-audio.mjs"
       - ".github/workflows/admin-ci.yml"
 
@@ -57,6 +58,8 @@ jobs:
         run: node scripts/validate-space-admin-rewards.mjs
       - name: Validate Stamina / Warp runtime ownership audit
         run: node scripts/validate-space-admin-warp.mjs
+      - name: Validate Missions runtime ownership audit
+        run: node scripts/validate-space-admin-missions.mjs
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate Admin service syntax
@@ -69,6 +72,7 @@ jobs:
           node --check scripts/validate-space-admin-currencies.mjs
           node --check scripts/validate-space-admin-rewards.mjs
           node --check scripts/validate-space-admin-warp.mjs
+          node --check scripts/validate-space-admin-missions.mjs
           node --check scripts/validate-space-admin-audio.mjs
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
@@ -143,6 +147,8 @@ jobs:
         run: pnpm --dir games/space-typing test
       - name: Audit Space Typing Warp economy
         run: pnpm --dir games/space-typing stamina:audit
+      - name: Audit Space Typing Missions contract
+        run: pnpm --dir games/space-typing missions:audit
       - name: Build Space Typing
         run: pnpm build:space
       - name: Build Portal
