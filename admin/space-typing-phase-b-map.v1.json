@@ -33,7 +33,7 @@
     {"route":"/admin/space-typing/events","screen":"Events","domain":"runtime.events","persistence":"child-stage-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/duel","screen":"Duel Settings","domain":"runtime.duel","persistence":"child-duel-room-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/ranked","screen":"Ranked","domain":"runtime.ranked","persistence":"child-duel-server-profile-store","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
-    {"route":"/admin/space-typing/alternative-modes","screen":"Alternative Modes","domain":"pvp.alternativeModes","persistence":"immutable-revision-store","applyBoundary":"new-match","status":"mapped-awaiting-adapter"},
+    {"route":"/admin/space-typing/alternative-modes","screen":"Alternative Modes","domain":"runtime.alternativeModes","persistence":"none","applyBoundary":"none","status":"phase-b-ui-wired-runtime-absence-diagnostic"},
     {"route":"/admin/space-typing/backgrounds","screen":"Backgrounds","domain":"visuals.backgrounds","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/vfx","screen":"VFX","domain":"visuals.vfx","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/ui-assets","screen":"UI Assets","domain":"visuals.uiAssets","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
