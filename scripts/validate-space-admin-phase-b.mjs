@@ -14,6 +14,7 @@ const shipsPhaseB = await readFile(new URL("portal/src/admin/space-typing-ships-
 const equipmentPhaseB = await readFile(new URL("portal/src/admin/space-typing-equipment-phase-b.ts", root), "utf8");
 const skillsPhaseB = await readFile(new URL("portal/src/admin/space-typing-skills-phase-b.ts", root), "utf8");
 const enemiesPhaseB = await readFile(new URL("portal/src/admin/space-typing-enemies-phase-b.ts", root), "utf8");
+const bossesPhaseB = await readFile(new URL("portal/src/admin/space-typing-bosses-phase-b.ts", root), "utf8");
 const historyPhaseB = await readFile(new URL("portal/src/admin/space-typing-history-phase-b.ts", root), "utf8");
 const server = await readFile(new URL("admin/server.mjs", root), "utf8");
 
@@ -31,6 +32,7 @@ const ships = map.screens.find((entry) => entry.route === "/admin/space-typing/s
 const equipment = map.screens.find((entry) => entry.route === "/admin/space-typing/equipment");
 const skills = map.screens.find((entry) => entry.route === "/admin/space-typing/skills");
 const enemies = map.screens.find((entry) => entry.route === "/admin/space-typing/enemies");
+const bosses = map.screens.find((entry) => entry.route === "/admin/space-typing/bosses");
 const settings = map.screens.find((entry) => entry.route === "/admin/space-typing/settings");
 const flags = map.screens.find((entry) => entry.route === "/admin/space-typing/flags");
 const history = map.screens.find((entry) => entry.route === "/admin/space-typing/history");
@@ -40,7 +42,7 @@ assert.equal(audio?.applyBoundary, "safe-boundary");
 assert.equal(worldMusic?.domain, "worldMusic");
 assert.equal(worldMusic?.status, "phase-b-ui-wired-all-scopes");
 assert.equal(worldMusic?.applyBoundary, "next-track-or-state");
-for (const contentScreen of [ships, equipment, skills, enemies]) {
+for (const contentScreen of [ships, equipment, skills, enemies, bosses]) {
   assert.equal(contentScreen?.status, "phase-b-ui-wired-runtime-backed");
   assert.equal(contentScreen?.persistence, "immutable-revision-store");
   assert.equal(contentScreen?.applyBoundary, "new-session");
@@ -49,6 +51,7 @@ assert.equal(ships?.domain, "content.ships");
 assert.equal(equipment?.domain, "content.equipment");
 assert.equal(skills?.domain, "content.skills");
 assert.equal(enemies?.domain, "content.enemies");
+assert.equal(bosses?.domain, "content.bosses");
 assert.equal(settings?.domain, "system");
 assert.equal(settings?.status, "phase-b-ui-wired");
 assert.equal(settings?.applyBoundary, "new-session");
@@ -71,6 +74,7 @@ for (const entry of map.screens) {
 assert.match(defaultConfig, /\bsystem:\s*\{/);
 assert.match(defaultConfig, /\bfeatureFlags:\s*\{/);
 assert.match(defaultConfig, /\benemies:\s*\{/);
+assert.match(defaultConfig, /\bbosses:\s*\{/);
 assert.match(store, /config\.system !== undefined/);
 assert.match(store, /validateSystem\(config\.system\)/);
 assert.match(store, /config\.featureFlags !== undefined/);
@@ -131,6 +135,21 @@ assert.doesNotMatch(enemiesPhaseB, /api\.publish/);
 assert.match(server, /\/api\/runtime\/space-typing\/enemies/);
 assert.match(server, /\/api\/admin\/space-typing\/enemies\/preview/);
 
+assert.match(phaseB, /renderPhaseBBosses/);
+assert.match(phaseB, /\$\{BASE\}\/bosses/);
+assert.match(bossesPhaseB, /B06\.5/);
+assert.match(bossesPhaseB, /\/api\/admin\/space-typing\/bosses\/preview/);
+assert.match(bossesPhaseB, /Name/);
+assert.match(bossesPhaseB, /Title/);
+assert.match(bossesPhaseB, /name.*100/si);
+assert.match(bossesPhaseB, /title.*160/si);
+assert.match(bossesPhaseB, /Admin Phase B · B06\.5 Boss identity draft/);
+assert.match(bossesPhaseB, /HP, Shield, Armor, Damage, Speed/);
+assert.match(bossesPhaseB, /api\.createRevision/);
+assert.doesNotMatch(bossesPhaseB, /api\.publish/);
+assert.match(server, /\/api\/runtime\/space-typing\/bosses/);
+assert.match(server, /\/api\/admin\/space-typing\/bosses\/preview/);
+
 assert.match(phaseB, /assertStableActiveRevision/);
 assert.match(phaseB, /loadedActiveRevision/);
 assert.match(phaseB, /Reload this screen before saving to avoid overwriting newer published changes/);
@@ -154,4 +173,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.4 runtime-backed domains ready).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, B01-B06.5 runtime-backed domains ready).`);
