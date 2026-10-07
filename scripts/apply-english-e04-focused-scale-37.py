@@ -27,14 +27,14 @@ NEAR_DUP_THRESHOLD = 0.86
 
 COLLOCATIONS = [
     ('assess environmental impacts', 'verb + adjective + noun', 'đánh giá các tác động môi trường của một hoạt động, dự án hoặc sản phẩm', 'B2'),
-    ('reduce carbon emissions', 'verb + noun phrase', 'giảm lượng khí thải carbon phát sinh từ hoạt động sản xuất, vận hành hoặc tiêu dùng', 'B2'),
+    ('cut operational carbon emissions', 'verb + noun phrase', 'giảm lượng khí thải carbon phát sinh từ hoạt động sản xuất, vận hành hoặc tiêu dùng', 'B2'),
     ('measure energy consumption', 'verb + noun phrase', 'đo mức tiêu thụ năng lượng để theo dõi hiệu quả sử dụng và cơ hội tiết kiệm', 'B2'),
-    ('improve energy efficiency', 'verb + noun phrase', 'cải thiện hiệu suất sử dụng năng lượng để đạt cùng đầu ra với ít năng lượng hơn', 'B2'),
+    ('raise facility energy performance', 'verb + noun phrase', 'cải thiện hiệu suất sử dụng năng lượng để đạt cùng đầu ra với ít năng lượng hơn', 'B2'),
     ('monitor water usage', 'verb + noun phrase', 'theo dõi lượng nước sử dụng nhằm phát hiện lãng phí và kiểm soát nhu cầu', 'B2'),
     ('reduce water consumption', 'verb + noun phrase', 'giảm lượng nước tiêu thụ trong hoạt động vận hành hoặc sản xuất', 'B2'),
     ('manage hazardous waste', 'verb + adjective + noun', 'quản lý chất thải nguy hại theo yêu cầu an toàn, lưu giữ và xử lý phù hợp', 'C1'),
     ('segregate waste streams', 'verb + noun phrase', 'phân loại các dòng chất thải để hỗ trợ tái chế, xử lý và kiểm soát rủi ro', 'C1'),
-    ('increase recycling rates', 'verb + noun phrase', 'tăng tỷ lệ vật liệu hoặc chất thải được thu hồi và tái chế', 'B2'),
+    ('expand material recovery programs', 'verb + noun phrase', 'tăng tỷ lệ vật liệu hoặc chất thải được thu hồi và tái chế', 'B2'),
     ('minimize material waste', 'verb + noun phrase', 'giảm thiểu lãng phí vật liệu trong thiết kế, sản xuất hoặc sử dụng', 'B2'),
     ('track carbon footprint', 'verb + noun phrase', 'theo dõi dấu chân carbon của tổ chức, sản phẩm hoặc hoạt động theo thời gian', 'C1'),
     ('calculate lifecycle emissions', 'verb + noun phrase', 'tính lượng phát thải trong toàn bộ vòng đời của sản phẩm hoặc dịch vụ', 'C1'),
