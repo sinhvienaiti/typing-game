@@ -26,7 +26,7 @@
     {"route":"/admin/space-typing/shop","screen":"Shop","domain":"economy.shop","persistence":"child-runtime-state","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/currencies","screen":"Currencies","domain":"economy.currencies","persistence":"child-runtime-state","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/rewards","screen":"Rewards & Drops","domain":"economy.rewards","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
-    {"route":"/admin/space-typing/warp","screen":"Stamina / Warp","domain":"economy.warp","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"mapped-awaiting-adapter"},
+    {"route":"/admin/space-typing/warp","screen":"Stamina / Warp","domain":"economy.warp","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/missions","screen":"Missions","domain":"liveOps.missions","persistence":"immutable-revision-store","applyBoundary":"schedule-boundary","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/daily-weekly","screen":"Daily / Weekly","domain":"liveOps.dailyWeekly","persistence":"immutable-revision-store","applyBoundary":"schedule-boundary","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/expedition","screen":"Expedition","domain":"liveOps.expedition","persistence":"immutable-revision-store","applyBoundary":"new-run","status":"mapped-awaiting-adapter"},

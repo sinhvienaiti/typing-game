@@ -4,6 +4,7 @@ import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
 import { renderPhaseBStages } from "./space-typing-stages-phase-b";
 import { renderPhaseBTypingContent } from "./space-typing-typing-content-phase-b";
+import { renderPhaseBWarp } from "./space-typing-warp-phase-b";
 import { renderPhaseBWorlds } from "./space-typing-worlds-phase-b";
 
 const BASE = "/admin/space-typing";
@@ -16,5 +17,6 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/shop`) return renderPhaseBShop(navigate);
   if (path === `${BASE}/currencies`) return renderPhaseBCurrencies(navigate);
   if (path === `${BASE}/rewards`) return renderPhaseBRewards(navigate);
+  if (path === `${BASE}/warp`) return renderPhaseBWarp(navigate);
   return renderPhaseBCoreAdminScreen(path, navigate);
 }

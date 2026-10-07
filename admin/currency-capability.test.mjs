@@ -5,7 +5,7 @@ import { CURRENCIES_AUDITED_CHILD_SHA, CURRENCY_FIELDS, createCurrencyCapability
 test("Currencies capability is pinned to the tested child and remains read-only", () => {
   const manifest = createCurrencyCapabilityManifest();
   assert.equal(manifest.auditedChildSha, CURRENCIES_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "eb328650383e33a037426e868e1ed84c6a4220a5");
+  assert.equal(manifest.auditedChildSha, "2dfa04ce4231a79c9894589f2db5881726ff588e");
   assert.equal(manifest.mode, "runtime-backed-readonly");
   assert.equal(manifest.authoring.enabled, false);
   assert.equal(manifest.capabilities.balanceAuthoring, false);
