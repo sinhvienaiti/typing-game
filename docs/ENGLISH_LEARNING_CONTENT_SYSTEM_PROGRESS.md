@@ -7,7 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-62 publication: `034d6543bc070a760fe405c1a9bd9c15a9fd4107` — scale-61 publication state verified by English Content Master Plan Acceptance #159, English Content Full Validation #142 and Platform CI #1219; published output: `c48d5703c0161917da90f51ae9efb21e024e17e2`.
-- Scale-61 publication completed at `c48d5703c0161917da90f51ae9efb21e024e17e2`; this checkpoint update exists to verify the publication under a normal-user HEAD before opening scale-62.
+- Scale-62 publication completed at `8722e17746730344c8adc366c282a2b541401d56`; bot-triggered English Content Master Plan Acceptance #161 and Platform CI #1233 were `action_required`, so this normal-user checkpoint exists to verify the published state before opening scale-63.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -90,8 +90,8 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-61 publication is fully verified at `034d6543bc070a760fe405c1a9bd9c15a9fd4107`; do not duplicate scale-61 artifacts.
-2. Scale-62 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-62 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-62 publication completed at `8722e17746730344c8adc366c282a2b541401d56`; the current gate is normal-user checkpoint verification, not regeneration.
+3. Verify English Content Full Validation, English Content Master Plan Acceptance and Platform CI on this checkpoint. Only when all three PASS is scale-62 fully verified.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. If no safer pending enrichment appears after the scale-62 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002120`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-62 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002120` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
+Verify scale-62 publication `8722e17746730344c8adc366c282a2b541401d56` under the normal-user checkpoint. If English Content Full Validation, Master Plan Acceptance and Platform CI all PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002120` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
