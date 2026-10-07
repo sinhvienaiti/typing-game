@@ -38,7 +38,9 @@ assert.doesNotMatch(screen, /Save Draft/);
 assert.match(screen, /Editing is intentionally disabled here/);
 
 assert.match(childVocabulary, /\/vocabulary\/index\.json/);
-assert.match(childTypingText, /\/shared\/typing-texts\/index\.json/);
+assert.match(childTypingText, /const DEFAULT_BASE = "\/shared\/typing-texts\/"/);
+assert.match(childTypingText, /cleanBase\(base\) \+ "index\.json"/);
+assert.match(childTypingText, /loadTypingTextChallenge/);
 assert.match(childRecall, /VocabularyEntry/);
 assert.match(childBoss, /TypingMechanic/);
 
