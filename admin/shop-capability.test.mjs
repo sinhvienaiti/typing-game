@@ -10,7 +10,7 @@ test("Shop capability manifest mirrors the master-plan surface and real runtime 
   assert.equal(manifest.protocolVersion, 3);
   assert.equal(manifest.mode, "runtime-backed-readonly");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "57b56b4f239be74b698081638280305976639f5a");
+  assert.equal(manifest.auditedChildSha, "506dff2036aed67ecadba656594a1cd92d3c4f4b");
   assert.deepEqual(manifest.tabs, ["Catalog", "Featured", "Daily", "Weekly", "Bundles", "History"]);
   assert.equal(SHOP_TABS.length, 6);
   assert.equal(SHOP_FIELDS.length, 15);
