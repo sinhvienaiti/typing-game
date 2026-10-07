@@ -7,6 +7,8 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-44 publication: `3244214aadd7e7e8e86856d34b02f90f84d44a49` — scale-43 publication state verified by English Content Master Plan Acceptance #102, English Content Full Validation #103 and Platform CI #1146; published output: `08ec64f4c22b6f829a445e86894eb626b9cf5154`.
+- Scale-44 publication output: `bc0489659d3eaaea0ad400e6d9b01d859a285b79` — `feat(content): publish E04 collocation scale 44`; Apply English E04 Scale 44 #2 passed preflight, controlled review, full quality gates, converge, deterministic replay and bot commit/push.
+- Scale-44 publication verification note: because the publication commit was created by `github-actions[bot]`, its PR-triggered English Content Master Plan Acceptance #105 and Platform CI #1152 ended `action_required` before any job started. This normal-user checkpoint intentionally re-triggers the mandatory CI without regenerating scale-44 content or weakening any gate.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -89,11 +91,12 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-43 publication is fully verified; do not duplicate scale-43 artifacts.
-2. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-3. Verify the resulting scale-44 publication commit and mandatory CI without regenerating completed artifacts.
-4. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
-5. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-6. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+2. Scale-44 publication `bc0489659d3eaaea0ad400e6d9b01d859a285b79` is complete; do not regenerate or duplicate scale-44 artifacts.
+3. Verify scale-44 publication state through the CI attached to this normal-user checkpoint; the bot-authored PR workflow attempts #105/#1152 ended `action_required` before jobs ran.
+4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
+5. If scale-44 checkpoint CI passes and no newer worker has claimed the next scope, create scale-45 as the next bounded collocation batch from frontier `col.00001400`, expected IDs `col.00001401` through `col.00001440`, while preserving exact/near-dedupe threshold 0.86 and all E10/E11/E12 gates.
+6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -101,8 +104,8 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 
 ## Blocker
 
-None.
+No content/data blocker. Scale-44 publication HEAD's bot-authored PR workflow attempts ended `action_required` before any job started; this checkpoint re-triggers the same gates from a normal branch write so the publication state can be verified without regenerating content.
 
 ## Next actionable task
 
-Scale-44 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001400` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
+Wait for the CI attached to this checkpoint HEAD. If all mandatory gates PASS, record scale-44 as fully verified and continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001400` (expected scale-45 range `col.00001401` through `col.00001440` if no newer worker has claimed it), or move to the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch. Recalculate counts and run exact/near dedupe before every write.
