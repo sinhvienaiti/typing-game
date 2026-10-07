@@ -15,6 +15,7 @@ on:
       - "scripts/validate-space-admin-contract.mjs"
       - "scripts/validate-space-admin-ui.mjs"
       - "scripts/validate-space-admin-phase-b.mjs"
+      - "scripts/validate-space-admin-worlds.mjs"
       - "scripts/validate-space-admin-audio.mjs"
       - ".github/workflows/admin-ci.yml"
 
@@ -37,12 +38,15 @@ jobs:
         run: node scripts/validate-space-admin-ui.mjs
       - name: Validate Admin Phase B mapping
         run: node scripts/validate-space-admin-phase-b.mjs
+      - name: Validate B06.6 Worlds + Stages mapping
+        run: node scripts/validate-space-admin-worlds.mjs
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate Admin service syntax
         run: |
           for file in admin/*.mjs; do node --check "$file"; done
           node --check scripts/validate-space-admin-phase-b.mjs
+          node --check scripts/validate-space-admin-worlds.mjs
           node --check scripts/validate-space-admin-audio.mjs
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
@@ -101,6 +105,8 @@ jobs:
         run: node --test admin/boss-http-runtime-smoke.test.mjs
       - name: Test canonical Worlds Admin preview bridge
         run: node --test admin/world-registry-preview.test.mjs
+      - name: Test B06.6 World HTTP publish/runtime/rollback smoke
+        run: node --test admin/world-http-runtime-smoke.test.mjs
       - name: Test canonical Stages Admin preview bridge
         run: node --test admin/stage-config-preview.test.mjs
       - name: Test B06.6 Stage HTTP publish/runtime/rollback smoke
