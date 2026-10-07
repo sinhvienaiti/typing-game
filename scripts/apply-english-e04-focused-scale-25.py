@@ -19,28 +19,28 @@ NEAR_DUP_THRESHOLD = 0.86
 
 COLLOCATIONS = [
     ("wield considerable influence", "verb + noun", "có và sử dụng mức độ ảnh hưởng đáng kể đối với quyết định hoặc kết quả", "C1"),
-    ("exercise discretion", "verb + noun", "vận dụng quyền cân nhắc để đưa ra quyết định phù hợp theo hoàn cảnh", "C1"),
-    ("exercise caution", "verb + noun", "hành động thận trọng để hạn chế rủi ro hoặc sai sót", "B2"),
-    ("pose a threat", "verb + noun", "tạo ra mối đe dọa hoặc nguy cơ đáng kể", "B2"),
-    ("raise objections", "verb + noun", "nêu ra những phản đối đối với một đề xuất hoặc quyết định", "B2"),
-    ("reach consensus", "verb + noun", "đạt được sự đồng thuận giữa các bên", "B2"),
-    ("draw a distinction", "verb + noun", "chỉ ra sự khác biệt rõ ràng giữa hai khái niệm hoặc trường hợp", "C1"),
+    ("articulate a position", "verb + noun", "trình bày rõ ràng quan điểm hoặc lập trường về một vấn đề", "C1"),
+    ("clarify expectations", "verb + noun", "làm rõ những điều được mong đợi về kết quả, trách nhiệm hoặc hành vi", "B2"),
+    ("define parameters", "verb + noun", "xác định các giới hạn hoặc điều kiện chính của một kế hoạch hay quá trình", "C1"),
+    ("delineate responsibilities", "verb + noun", "phân định rõ trách nhiệm giữa các cá nhân hoặc đơn vị", "C1"),
+    ("coordinate efforts", "verb + noun", "phối hợp các nỗ lực của nhiều bên để đạt một mục tiêu chung", "B2"),
+    ("pool expertise", "verb + noun", "kết hợp chuyên môn của nhiều người hoặc tổ chức để xử lý một nhiệm vụ", "C1"),
     ("set a precedent", "verb + noun", "tạo ra tiền lệ có thể ảnh hưởng tới các quyết định sau này", "C1"),
     ("establish criteria", "verb + noun", "xác lập các tiêu chí dùng để đánh giá hoặc lựa chọn", "B2"),
     ("satisfy requirements", "verb + noun", "đáp ứng đầy đủ các yêu cầu đã đặt ra", "B2"),
     ("fulfill obligations", "verb + noun", "thực hiện đầy đủ các nghĩa vụ đã cam kết hoặc được quy định", "B2"),
     ("allocate funding", "verb + noun", "phân bổ nguồn kinh phí cho một mục đích hoặc chương trình", "B2"),
-    ("secure funding", "verb + noun", "đảm bảo có được nguồn kinh phí cần thiết", "B2"),
+    ("prioritize investment", "verb + noun", "ưu tiên nguồn đầu tư cho những lĩnh vực hoặc mục tiêu quan trọng hơn", "C1"),
     ("mobilize support", "verb + noun", "huy động sự ủng hộ cho một mục tiêu hoặc sáng kiến", "C1"),
     ("garner support", "verb + noun", "thu hút và tích lũy sự ủng hộ từ nhiều bên", "C1"),
     ("command respect", "verb + noun", "tạo được sự tôn trọng mạnh mẽ từ người khác", "C1"),
     ("invite scrutiny", "verb + noun", "khiến một vấn đề hoặc quyết định bị xem xét kỹ lưỡng", "C1"),
-    ("mitigate risk", "verb + noun", "giảm mức độ hoặc tác động của rủi ro", "B2"),
+    ("reduce exposure", "verb + noun", "giảm mức độ tiếp xúc hoặc phụ thuộc vào một nguồn rủi ro", "C1"),
     ("assess feasibility", "verb + noun", "đánh giá mức độ khả thi của một kế hoạch hoặc phương án", "C1"),
     ("demonstrate competence", "verb + noun", "thể hiện năng lực thực hiện công việc một cách đáng tin cậy", "C1"),
     ("demonstrate compliance", "verb + noun", "chứng minh việc tuân thủ quy định hoặc tiêu chuẩn", "C1"),
     ("ensure compliance", "verb + noun", "đảm bảo các quy định hoặc tiêu chuẩn được tuân thủ", "B2"),
-    ("impose restrictions", "verb + noun", "áp đặt các hạn chế đối với hoạt động hoặc hành vi", "B2"),
+    ("reinforce safeguards", "verb + noun", "tăng cường các biện pháp bảo vệ nhằm ngăn ngừa rủi ro hoặc sai phạm", "C1"),
     ("lift restrictions", "verb + noun", "dỡ bỏ các hạn chế đang được áp dụng", "B2"),
     ("enforce standards", "verb + noun", "buộc việc tuân thủ các tiêu chuẩn đã quy định", "C1"),
     ("uphold standards", "verb + noun", "duy trì và bảo vệ các tiêu chuẩn đã cam kết", "C1"),
@@ -94,9 +94,8 @@ def digest(record) -> str:
     checks = review_source.get("quality", {}).get("checks", {})
     checks.pop("cefr", None)
     checks.pop("license", None)
-    return "sha256:" + hashlib.sha256(
-        json.dumps(review_source, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    ).hexdigest()
+    payload = json.dumps(review_source, ensure_ascii=False, indent=2) + "\n"
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def replace_once(text: str, old: str, new: str, label: str) -> str:
