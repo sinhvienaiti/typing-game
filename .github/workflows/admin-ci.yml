@@ -68,6 +68,12 @@ jobs:
         run: node --test admin/boss-runtime.test.mjs
       - name: Test B06.5 Boss revision lifecycle
         run: node --test admin/boss-revision-flow.test.mjs
+      - name: Test B06.6 Stages server validation
+        run: node --test admin/stage-policy.test.mjs
+      - name: Test B06.6 Stages runtime envelope
+        run: node --test admin/stage-runtime.test.mjs
+      - name: Test B06.6 Stage revision lifecycle
+        run: node --test admin/stage-revision-flow.test.mjs
       - name: Install focused dependencies
         run: |
           pnpm install
@@ -87,6 +93,10 @@ jobs:
         run: node --test admin/boss-registry-preview.test.mjs
       - name: Test B06.5 Boss HTTP publish/runtime/rollback smoke
         run: node --test admin/boss-http-runtime-smoke.test.mjs
+      - name: Test canonical Stages Admin preview bridge
+        run: node --test admin/stage-config-preview.test.mjs
+      - name: Test B06.6 Stage HTTP publish/runtime/rollback smoke
+        run: node --test admin/stage-http-runtime-smoke.test.mjs
       - name: Test Space Typing
         run: pnpm --dir games/space-typing test
       - name: Build Space Typing

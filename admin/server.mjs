@@ -11,11 +11,13 @@ import { runEquipmentRegistryPreview, EquipmentRegistryPreviewError } from "./eq
 import { runSkillRegistryPreview, SkillRegistryPreviewError } from "./skill-registry-preview.mjs";
 import { runEnemyRegistryPreview, EnemyRegistryPreviewError } from "./enemy-registry-preview.mjs";
 import { runBossRegistryPreview, BossRegistryPreviewError } from "./boss-registry-preview.mjs";
+import { runStageConfigPreview, StageConfigPreviewError } from "./stage-config-preview.mjs";
 import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
 import { createEquipmentRuntimeEnvelope } from "./equipment-runtime.mjs";
 import { createSkillRuntimeEnvelope } from "./skill-runtime.mjs";
 import { createEnemyRuntimeEnvelope } from "./enemy-runtime.mjs";
 import { createBossRuntimeEnvelope } from "./boss-runtime.mjs";
+import { createStageRuntimeEnvelope } from "./stage-runtime.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -41,6 +43,7 @@ const server=createServer(async(request,response)=>{try{
     "/api/runtime/space-typing/skills":(s,c)=>createSkillRuntimeEnvelope(s,c,contract),
     "/api/runtime/space-typing/enemies":(s,c)=>createEnemyRuntimeEnvelope(s,c,contract),
     "/api/runtime/space-typing/bosses":(s,c)=>createBossRuntimeEnvelope(s,c,contract),
+    "/api/runtime/space-typing/stages":(s,c)=>createStageRuntimeEnvelope(s,c,contract),
   };
   if(request.method==="GET"&&runtimeHandlers[url.pathname]){const state=await store.getState();const config=await store.getRuntimeConfig();json(response,200,runtimeHandlers[url.pathname](state,config));return;}
   if(!url.pathname.startsWith("/api/admin/")){json(response,404,{error:"not-found"});return;}
@@ -58,6 +61,7 @@ const server=createServer(async(request,response)=>{try{
     "/api/admin/space-typing/skills/preview":[runSkillRegistryPreview,"skills"],
     "/api/admin/space-typing/enemies/preview":[runEnemyRegistryPreview,"enemies"],
     "/api/admin/space-typing/bosses/preview":[runBossRegistryPreview,"bosses"],
+    "/api/admin/space-typing/stages/preview":[runStageConfigPreview,"stages"],
   };
   if(request.method==="POST"&&previewHandlers[url.pathname]){const input=await body(request);const active=await store.getRuntimeConfig();const [run,key]=previewHandlers[url.pathname];json(response,200,await run({rootDir:root,contract,policy:input.policy??active.content?.[key]}));return;}
   if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/validate-revision"){const input=await body(request);json(response,200,await store.validateRevision(input.revision));return;}
@@ -69,7 +73,7 @@ const server=createServer(async(request,response)=>{try{
   if(error instanceof AdminConflictError){json(response,409,{error:"conflict",message:error.message});return;}
   if(error instanceof AdminValidationError){json(response,400,{error:"validation",message:error.message});return;}
   if(error instanceof MusicAssetError){json(response,error.status,{error:"music-asset",message:error.message});return;}
-  const previews=[[WorldMusicPreviewError,"preview-error"],[ShipRegistryPreviewError,"ships-preview-error"],[EquipmentRegistryPreviewError,"equipment-preview-error"],[SkillRegistryPreviewError,"skills-preview-error"],[EnemyRegistryPreviewError,"enemies-preview-error"],[BossRegistryPreviewError,"bosses-preview-error"]];
+  const previews=[[WorldMusicPreviewError,"preview-error"],[ShipRegistryPreviewError,"ships-preview-error"],[EquipmentRegistryPreviewError,"equipment-preview-error"],[SkillRegistryPreviewError,"skills-preview-error"],[EnemyRegistryPreviewError,"enemies-preview-error"],[BossRegistryPreviewError,"bosses-preview-error"],[StageConfigPreviewError,"stages-preview-error"]];
   for(const [Type,code] of previews){if(error instanceof Type){json(response,502,{error:code,message:error.message});return;}}
   console.error(error);json(response,500,{error:"internal-error"});
 }});

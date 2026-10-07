@@ -10,7 +10,8 @@ export function createDefaultSpaceTypingConfig(contract) {
       equipment: { configRevision: "equipment-admin-v1", equipment: {} },
       skills: { configRevision: "skills-admin-v1", skills: {} },
       enemies: { configRevision: "enemies-admin-v1", enemies: {} },
-      bosses: { configRevision: "bosses-admin-v1", bosses: {} }
+      bosses: { configRevision: "bosses-admin-v1", bosses: {} },
+      stages: { configRevision: "stages-admin-v1", stages: [] }
     },
     system: {
       gameDefaults: { defaultMode: "campaign", defaultShip: "vanguard", difficulty: "normal", tutorialEnabled: true, pronunciationDefault: true, autoSave: true },
