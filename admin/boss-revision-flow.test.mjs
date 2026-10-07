@@ -21,7 +21,12 @@ async function fixture() {
   const rootDir = await mkdtemp(join(tmpdir(), "typing-game-boss-flow-"));
   let tick = 0;
   const store = new SpaceTypingRevisionStore({ rootDir, contract, now: () => new Date(Date.UTC(2026, 9, 7, 0, 0, tick++)) });
-  await store.initialize(createDefaultSpaceTypingConfig(contract));
+  const seed = createDefaultSpaceTypingConfig(contract);
+  // This focused fixture intentionally exposes only the Boss namespace represented
+  // by the minimal contract above. Other content namespaces are covered by their
+  // own policy/lifecycle tests and require their corresponding contract sections.
+  seed.content = { bosses: seed.content.bosses };
+  await store.initialize(seed);
   return { store, rootDir };
 }
 
