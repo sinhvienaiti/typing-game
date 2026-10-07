@@ -1,4 +1,4 @@
-export const SHOP_AUDITED_CHILD_SHA = "6fa13b857990b1f7593b415557a837c505d6fc56";
+export const SHOP_AUDITED_CHILD_SHA = "a56897559a16841eb4ac4fee207e22e2ef949734";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
@@ -27,52 +27,86 @@ export const SHOP_FIELDS = Object.freeze([
   "Enabled",
 ]);
 
-const unavailableReason = "No canonical Shop transaction/catalog owner was found in the pinned Space Typing runtime tree. Authoring stays closed until a real consumer, validation boundary, and persistence owner exist.";
+const runtimeFieldNames = new Set([
+  "ID",
+  "Item",
+  "Category",
+  "Price",
+  "Currency",
+  "Purchase Limit",
+  "Availability",
+  "Requirement",
+  "Enabled",
+]);
+
+const runtimeReason = "Derived by the pinned Space Typing Shop runtime. It is inspectable here but not authorable because the current gameplay policy is source-owned and purchase state persists in PlayerSave.";
+const unsupportedReason = "The current Space Typing Shop runtime has no native concept for this master-plan field. Admin keeps the field visible but locked instead of fabricating behavior.";
+const authoringReason = "Shop generation/pricing rules are source-owned in the child runtime and transaction state persists in PlayerSave. No canonical admin-config consumer exists yet, so Shop authoring remains closed.";
 
 export function createShopCapabilityManifest() {
   return {
-    protocolVersion: 1,
-    mode: "runtime-audited-readonly",
-    owner: "Space Typing runtime audit",
+    protocolVersion: 2,
+    mode: "runtime-backed-readonly",
+    owner: "Space Typing shops/economy runtime",
     auditedChildSha: SHOP_AUDITED_CHILD_SHA,
     tabs: SHOP_TABS,
     fields: SHOP_FIELDS.map((name) => ({
       name,
+      runtimeBacked: runtimeFieldNames.has(name),
+      source: runtimeFieldNames.has(name) ? "runtime-derived" : "unsupported",
       authorable: false,
-      reason: unavailableReason,
+      reason: runtimeFieldNames.has(name) ? runtimeReason : unsupportedReason,
     })),
     capabilities: {
-      catalogRead: false,
+      runtimeCatalogGeneration: true,
+      purchaseTransaction: true,
+      pricing: true,
+      currencies: true,
+      stockRemaining: true,
+      availability: true,
+      serviceShop: true,
       catalogWrite: false,
-      purchaseTransaction: false,
-      pricing: false,
-      currencies: false,
-      limits: false,
       schedules: false,
       bundles: false,
       transactionHistory: false,
       preview: false,
     },
+    runtime: {
+      sources: [
+        "src/shops/state.ts",
+        "src/shops/service-shop.ts",
+        "src/economy/credits.ts",
+        "src/economy/currencies.ts",
+      ],
+      shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
+      currencies: ["credits", "alloy", "star-crystal", "quantum-core"],
+      stockKinds: ["item", "equipment"],
+      transactionReasons: ["missing", "sold-out", "currency", "full", "duplicate"],
+      refreshBoundary: "sector-instance",
+      persistenceOwner: "PlayerSave.shopState",
+    },
     evidence: [
-      { id: "shop-owner", found: false, detail: "No shop/economy/monetization module path in the audited child tree." },
-      { id: "purchase-owner", found: false, detail: "No purchase or wallet module path in the audited child tree." },
-      { id: "currency-owner", found: false, detail: "No canonical currency module path in the audited child tree." },
-      { id: "stamina-owner", found: false, detail: "No stamina module path in the audited child tree." },
+      { id: "catalog-owner", found: true, detail: "src/shops/state.ts owns deterministic stock generation and ShopInstance persistence." },
+      { id: "purchase-owner", found: true, detail: "buyShopStockEntry validates stock/currency/inventory and applies purchase state." },
+      { id: "pricing-owner", found: true, detail: "ShopPrice supports Credits, Alloy, Star Crystal and Quantum Core; pricing is runtime-derived." },
+      { id: "availability-owner", found: true, detail: "shopAvailable gates black-market/hidden/event/traveling shops from discovery and luck." },
+      { id: "service-owner", found: true, detail: "src/shops/service-shop.ts owns upgrade/repair/evolution/service purchase costs." },
+      { id: "authoring-seam", found: false, detail: "No child config contract consumes admin-authored Shop policy yet; write capability stays disabled." },
     ],
     linkedRuntimeDomains: [
-      { id: "ships", label: "Ships", route: "/admin/space-typing/ships", relationship: "runtime-backed content; not proven purchasable" },
-      { id: "equipment", label: "Equipment", route: "/admin/space-typing/equipment", relationship: "runtime-backed content; not proven purchasable" },
-      { id: "skills", label: "Skills", route: "/admin/space-typing/skills", relationship: "runtime-backed content; not proven purchasable" },
+      { id: "equipment", label: "Equipment", route: "/admin/space-typing/equipment", relationship: "Shop stock and service upgrades consume runtime equipment definitions/state." },
+      { id: "currencies", label: "Currencies", route: "/admin/space-typing/currencies", relationship: "Purchases spend Credits, Alloy, Star Crystal and Quantum Core." },
+      { id: "skills", label: "Skills", route: "/admin/space-typing/skills", relationship: "Service Shop can consume upgrade progression state; it is not a separate catalog authoring source." },
     ],
     authoring: {
       enabled: false,
       applyBoundary: "none",
-      persistence: "runtime-audit-manifest",
-      reason: unavailableReason,
+      persistence: "child-runtime-state",
+      reason: authoringReason,
     },
     preview: {
       available: false,
-      reason: "Shop Preview cannot be truthful until a canonical catalog and pricing/purchase consumer exist.",
+      reason: "Runtime generation is real, but the child contract does not expose an admin preview protocol yet. Admin does not reimplement the generator because that would create a second source of truth.",
     },
   };
 }
