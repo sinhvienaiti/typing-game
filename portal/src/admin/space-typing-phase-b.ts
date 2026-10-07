@@ -5,6 +5,7 @@ import { renderPhaseBShips } from "./space-typing-ships-phase-b";
 import { renderPhaseBEquipment } from "./space-typing-equipment-phase-b";
 import { renderPhaseBSkills } from "./space-typing-skills-phase-b";
 import { renderPhaseBEnemies } from "./space-typing-enemies-phase-b";
+import { renderPhaseBBosses } from "./space-typing-bosses-phase-b";
 import { SpaceTypingAdminApi, type FeatureFlagConfig, type FeatureFlagScope, type GeneralSettingsConfig, type SpaceTypingAdminConfig } from "./api";
 
 const BASE = "/admin/space-typing";
@@ -371,6 +372,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/equipment`) return renderPhaseBEquipment(navigate);
   if (path === `${BASE}/skills`) return renderPhaseBSkills(navigate);
   if (path === `${BASE}/enemies`) return renderPhaseBEnemies(navigate);
+  if (path === `${BASE}/bosses`) return renderPhaseBBosses(navigate);
   if (path === `${BASE}/settings`) return renderSettings(navigate);
   if (path === `${BASE}/flags`) return renderFlags(navigate);
   if (path === `${BASE}/history`) return renderPhaseBHistory(navigate);
