@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-73 publication: `97c1014c3183cde0eb8de3833939395c67361652` — scale-72 publication state verified by English Content Master Plan Acceptance #197, English Content Full Validation #170 and Platform CI #1340; published output: `a1ded70351a9241ad953cf8bf644e8a72dce9ea8`.
-- Scale-73 publication commit: `9aa62604732f29f7981cd08cea08eb72df6c946e`; bot-triggered English Content Master Plan Acceptance #200 and Platform CI #1343 ended `action_required` before jobs ran, so this normal-user checkpoint and its three mandatory CI gates are the current verification step.
+- Latest fully CI-verified scale-up checkpoint before scale-74 publication: `e24c6ab11c80014c4d89dd4a6873bc021fad6b46` — scale-73 publication state verified by English Content Master Plan Acceptance #201, English Content Full Validation #173 and Platform CI #1344; published output: `9aa62604732f29f7981cd08cea08eb72df6c946e`.
+- Scale-73 publication checkpoint `e24c6ab11c80014c4d89dd4a6873bc021fad6b46` is fully verified; scale-74 is the current publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +18,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 3,670 published records after scale-73
+- E04 phrase/pattern architecture + current reviewed publication: complete — 3,710 published records after scale-74
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,16 +26,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-73 publication
+## Published runtime snapshot after E04 scale-74 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 3,670 records
-- total published rich records: 8,271
+- phrases: 3,710 records
+- total published rich records: 8,311
 - attribution runtime: 4 source records
-- editorial ledger: 8,271 decisions / 8,271 applied / 8,271 publish decisions
-- E04 collocation frontier: `col.00002560`
+- editorial ledger: 8,311 decisions / 8,311 applied / 8,311 publish decisions
+- E04 collocation frontier: `col.00002600`
 
 ## Approved scale-up targets
 
@@ -89,11 +89,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-72 publication is fully verified at `97c1014c3183cde0eb8de3833939395c67361652`; do not duplicate scale-72 artifacts.
-2. Scale-73 publication is complete at `9aa62604732f29f7981cd08cea08eb72df6c946e`; do not regenerate or duplicate scale-73 artifacts.
-3. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on this normal-user checkpoint; do not begin the next collocation batch until all three finish.
+1. Scale-73 publication is fully verified at `e24c6ab11c80014c4d89dd4a6873bc021fad6b46`; do not duplicate scale-73 artifacts.
+2. Scale-74 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
+3. After the scale-74 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears after the scale-73 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002560`, expected IDs `col.00002561`–`col.00002600`, with fresh exact/near-dedupe preflight before any source apply.
+5. If no safer pending enrichment appears after the scale-74 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002600`, expected IDs `col.00002601`–`col.00002640`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Verify English Content Full Validation, Master Plan Acceptance and Platform CI for scale-73 publication `9aa62604732f29f7981cd08cea08eb72df6c946e` on this normal-user checkpoint. If all three PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002560` (expected next range `col.00002561`–`col.00002600`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Scale-74 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002600` (expected next range `col.00002601`–`col.00002640`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
