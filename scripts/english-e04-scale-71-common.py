@@ -4,7 +4,7 @@ import runpy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-base = runpy.run_path(str(ROOT / 'scripts/apply-english-e04-focused-scale-70.py'), run_name='e04_scale71_base')
+base = runpy.run_path(str(ROOT / 'scripts/english-e04-scale-70-common.py'), run_name='e04_scale71_base')
 read_json = base['read_json']
 write_json = base['write_json']
 normalized_key = base['normalized_key']
