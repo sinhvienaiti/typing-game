@@ -28,6 +28,7 @@ import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-as
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json"), "utf8"));
 const eventsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-events.v1.json"), "utf8"));
+const duelContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-duel.v1.json"), "utf8"));
 const store = new SpaceTypingRevisionStore({ rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing"), contract });
 const musicAssets = new MusicAssetService({ rootDir: root });
 await store.initialize(createDefaultSpaceTypingConfig(contract));
@@ -57,6 +58,7 @@ const server=createServer(async(request,response)=>{try{
   if(!authorized(request)){json(response,401,{error:"unauthorized"});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/contract"){json(response,200,contract);return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/events/contract"){json(response,200,eventsContract);return;}
+  if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/duel/contract"){json(response,200,duelContract);return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/state"){json(response,200,{state:await store.getState(),active:await store.getActiveRevision(),history:await store.listRevisions()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/runtime"){json(response,200,{activeRevision:(await store.getState()).activeRevision,config:await store.getRuntimeConfig()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/typing-content/catalog"){json(response,200,await queryTypingContentCatalog({rootDir:root,searchParams:url.searchParams}));return;}
