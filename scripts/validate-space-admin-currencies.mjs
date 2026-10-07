@@ -27,7 +27,7 @@ for (const id of contract.currencies.ids) assert.equal(contract.currencies.caps[
 
 assert(creditsSource.includes("MAX_CREDITS = 999_999_999"), "Credits cap owner missing");
 for (const symbol of ["stageClearCreditReward", "spendCredits"]) assert(creditsSource.includes(symbol), `Missing Credits runtime symbol ${symbol}`);
-for (const symbol of ["EXPANSION_CURRENCIES", "starCrystal", "quantumCore", "rewardExpansionCurrenciesOnStageClear", "999_999_999"]) assert(currenciesSource.includes(symbol), `Missing expansion currency runtime evidence ${symbol}`);
+for (const symbol of ["EXPANSION_CURRENCY_IDS", "starCrystal", "quantumCore", "rewardExpansionCurrenciesOnStageClear", "999_999_999"]) assert(currenciesSource.includes(symbol), `Missing expansion currency runtime evidence ${symbol}`);
 assert(shopSource.includes("buyShopStockEntry"), "Shop currency sink owner missing");
 
 assert(manifestSource.includes("3ab7d9e49126ec98fdd3342451da023712e5b984"), "Parent currency manifest must pin the tested child SHA");
