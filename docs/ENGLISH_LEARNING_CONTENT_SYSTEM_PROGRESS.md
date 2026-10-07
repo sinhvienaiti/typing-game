@@ -6,14 +6,15 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified HEAD before this scale-up activation: `5aba144858554bbc32c3866452c6ced6638e27a1`
+- Latest fully CI-verified scale-up prep HEAD: `a393e8351687c202be391935487b697d9597882d` — scale-26 publication workflow, Full Validation, Master Plan Acceptance and Platform CI all PASS; publication output: `0eb0bad34550866a067730d98ab1157da569b80b`.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
-- Latest verified CI for `5aba144858554bbc32c3866452c6ced6638e27a1`:
-  - English Content Full Validation #53 — PASS
-  - English Content Master Plan Acceptance #33 — PASS
-  - Platform CI #1008 — PASS
+- Latest verified scale-up gates before scale-27 publication:
+  - Apply English E04 Scale 26 #1 — PASS
+  - English Content Full Validation #64 — PASS
+  - English Content Master Plan Acceptance #45 — PASS
+  - Platform CI #1057 — PASS
 
 The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub before doing work. If a newer commit exists, adopt it, inspect its changes, preserve completed work, and never reset/revert/overwrite/duplicate it.
 
@@ -21,7 +22,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 1,710 published records
+- E04 phrase/pattern architecture + current reviewed publication: complete — 1,830 published records after scale-27
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -29,15 +30,15 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot before scale-up continuation
+## Published runtime snapshot after E04 scale-27 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 1,710 records
-- total published rich records: 6,311
+- phrases: 1,830 records
+- total published rich records: 6,431
 - attribution runtime: 4 source records
-- editorial ledger: 6,311 decisions / 6,311 applied / 6,311 publish decisions
+- editorial ledger: 6,431 decisions / 6,431 applied / 6,431 publish decisions
 
 ## Approved scale-up targets
 
@@ -114,4 +115,4 @@ None.
 
 ## Next actionable task
 
-Inspect current E04 controlled batches, E04 generation/apply scripts, target/readiness report, review ledger and stable ID registry on latest HEAD. Select the first genuinely new bounded E04 scale/enrichment unit after proving that its batch IDs, record IDs and normalized content are not already present; then generate/validate/review/publish that unit and continue through CI.
+Scale-26 and scale-27 collocation batches are complete after all publication gates pass. Resolve latest HEAD, verify scale-27 publication/CI, then continue immediately with the next genuinely new bounded collocation batch from the new ID frontier (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
