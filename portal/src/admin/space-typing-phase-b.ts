@@ -1,4 +1,5 @@
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
+import { renderPhaseBAlternativeModes } from "./space-typing-alternative-modes-phase-b";
 import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
 import { renderPhaseBDuel } from "./space-typing-duel-phase-b";
 import { renderPhaseBEvents } from "./space-typing-events-phase-b";
@@ -27,6 +28,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/events`) return renderPhaseBEvents();
   if (path === `${BASE}/duel`) return renderPhaseBDuel();
   if (path === `${BASE}/ranked`) return renderPhaseBRanked();
+  if (path === `${BASE}/alternative-modes`) return renderPhaseBAlternativeModes();
   if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();
   return renderPhaseBCoreAdminScreen(path, navigate);
 }
