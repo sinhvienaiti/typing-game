@@ -40,7 +40,7 @@ for (const symbol of ["stageClearCreditReward", "spendCredits"]) assert(creditsS
 for (const symbol of ["EXPANSION_CURRENCY_IDS", '"star-crystal"', '"quantum-core"', "starCrystal", "quantumCore", "stageClearExpansionCurrencyReward", "999_999_999"]) assert(currenciesSource.includes(symbol), `Missing expansion currency runtime evidence ${symbol}`);
 assert(shopSource.includes("buyShopStockEntry"), "Shop currency sink owner missing");
 
-assert(manifestSource.includes("eb328650383e33a037426e868e1ed84c6a4220a5"), "Parent currency manifest must pin the tested child SHA");
+assert(manifestSource.includes("2dfa04ce4231a79c9894589f2db5881726ff588e"), "Parent currency manifest must pin the tested child SHA");
 for (const id of canonicalIds) assert(manifestSource.includes(`\"${id}\"`), `Parent manifest missing canonical ID ${id}`);
 for (const key of ["starCrystal", "quantumCore"]) assert(manifestSource.includes(`\"${key}\"`), `Parent manifest missing save balance key ${key}`);
 assert(manifestSource.includes("stageClearExpansionCurrencyReward"), "Parent manifest must expose the canonical expansion reward source");
