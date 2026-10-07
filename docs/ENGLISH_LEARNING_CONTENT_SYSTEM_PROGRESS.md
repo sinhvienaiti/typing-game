@@ -7,7 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-73 publication: `97c1014c3183cde0eb8de3833939395c67361652` — scale-72 publication state verified by English Content Master Plan Acceptance #197, English Content Full Validation #170 and Platform CI #1340; published output: `a1ded70351a9241ad953cf8bf644e8a72dce9ea8`.
-- Scale-72 publication checkpoint `97c1014c3183cde0eb8de3833939395c67361652` is fully verified; scale-73 is the current publication unit.
+- Scale-73 publication commit: `9aa62604732f29f7981cd08cea08eb72df6c946e`; bot-triggered English Content Master Plan Acceptance #200 and Platform CI #1343 ended `action_required` before jobs ran, so this normal-user checkpoint and its three mandatory CI gates are the current verification step.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -56,7 +56,7 @@ Priority order:
    - transformations: 10,000+;
    - dialogues: 10,000+;
    - common mistakes: 2,000+.
-4. Add source-specific importers only when source snapshot/version/checksum/license/provenance obligations are pinned and validation support exists.
+4. Add source-specific importers only when source snapshot/version/license/provenance obligations are pinned and validation support exists.
 5. Preserve the legacy `shared/vocabulary/levels/*.json` ABI unless a separately approved compatibility migration changes it.
 
 These are scale targets, not permission to bulk-generate unchecked content. Quality gates remain mandatory for every promoted record.
@@ -90,8 +90,8 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-72 publication is fully verified at `97c1014c3183cde0eb8de3833939395c67361652`; do not duplicate scale-72 artifacts.
-2. Scale-73 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-73 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-73 publication is complete at `9aa62604732f29f7981cd08cea08eb72df6c946e`; do not regenerate or duplicate scale-73 artifacts.
+3. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on this normal-user checkpoint; do not begin the next collocation batch until all three finish.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. If no safer pending enrichment appears after the scale-73 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002560`, expected IDs `col.00002561`–`col.00002600`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-73 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002560` (expected next range `col.00002561`–`col.00002600`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Verify English Content Full Validation, Master Plan Acceptance and Platform CI for scale-73 publication `9aa62604732f29f7981cd08cea08eb72df6c946e` on this normal-user checkpoint. If all three PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002560` (expected next range `col.00002561`–`col.00002600`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
