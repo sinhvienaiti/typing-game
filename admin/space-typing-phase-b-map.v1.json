@@ -22,7 +22,7 @@
     {"route":"/admin/space-typing/enemies","screen":"Enemies","domain":"content.enemies","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired-runtime-backed"},
     {"route":"/admin/space-typing/bosses","screen":"Bosses","domain":"content.bosses","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired-runtime-backed"},
     {"route":"/admin/space-typing/stages","screen":"Worlds & Stages","domain":"content.stages","additionalDomains":["content.worlds"],"persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired-runtime-backed"},
-    {"route":"/admin/space-typing/typing-content","screen":"Typing Content","domain":"learning-content-references","persistence":"reference-manifest","applyBoundary":"new-session","status":"mapped-awaiting-adapter"},
+    {"route":"/admin/space-typing/typing-content","screen":"Typing Content","domain":"learning-content-references","persistence":"reference-manifest","applyBoundary":"new-session","status":"phase-b-ui-wired-canonical-readonly"},
     {"route":"/admin/space-typing/shop","screen":"Shop","domain":"economy.shop","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/currencies","screen":"Currencies","domain":"economy.currencies","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"mapped-awaiting-adapter"},
     {"route":"/admin/space-typing/rewards","screen":"Rewards & Drops","domain":"economy.rewards","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"mapped-awaiting-adapter"},

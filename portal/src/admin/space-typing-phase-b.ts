@@ -1,5 +1,6 @@
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
 import { renderPhaseBStages } from "./space-typing-stages-phase-b";
+import { renderPhaseBTypingContent } from "./space-typing-typing-content-phase-b";
 import { renderPhaseBWorlds } from "./space-typing-worlds-phase-b";
 
 const BASE = "/admin/space-typing";
@@ -8,5 +9,6 @@ type Navigate = (path: string) => void;
 export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLElement | null {
   if (path === `${BASE}/stages`) return renderPhaseBWorlds(navigate);
   if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);
+  if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
   return renderPhaseBCoreAdminScreen(path, navigate);
 }
