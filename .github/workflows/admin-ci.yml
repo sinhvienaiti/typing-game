@@ -68,6 +68,12 @@ jobs:
         run: node --test admin/boss-runtime.test.mjs
       - name: Test B06.5 Boss revision lifecycle
         run: node --test admin/boss-revision-flow.test.mjs
+      - name: Test B06.6 Worlds server validation
+        run: node --test admin/world-policy.test.mjs
+      - name: Test B06.6 Worlds runtime envelope
+        run: node --test admin/world-runtime.test.mjs
+      - name: Test B06.6 World revision lifecycle
+        run: node --test admin/world-revision-flow.test.mjs
       - name: Test B06.6 Stages server validation
         run: node --test admin/stage-policy.test.mjs
       - name: Test B06.6 Stages runtime envelope
@@ -93,6 +99,8 @@ jobs:
         run: node --test admin/boss-registry-preview.test.mjs
       - name: Test B06.5 Boss HTTP publish/runtime/rollback smoke
         run: node --test admin/boss-http-runtime-smoke.test.mjs
+      - name: Test canonical Worlds Admin preview bridge
+        run: node --test admin/world-registry-preview.test.mjs
       - name: Test canonical Stages Admin preview bridge
         run: node --test admin/stage-config-preview.test.mjs
       - name: Test B06.6 Stage HTTP publish/runtime/rollback smoke

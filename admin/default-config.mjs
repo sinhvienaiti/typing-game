@@ -11,6 +11,7 @@ export function createDefaultSpaceTypingConfig(contract) {
       skills: { configRevision: "skills-admin-v1", skills: {} },
       enemies: { configRevision: "enemies-admin-v1", enemies: {} },
       bosses: { configRevision: "bosses-admin-v1", bosses: {} },
+      worlds: { configRevision: "worlds-admin-v1", worlds: {} },
       stages: { configRevision: "stages-admin-v1", stages: [] }
     },
     system: {
