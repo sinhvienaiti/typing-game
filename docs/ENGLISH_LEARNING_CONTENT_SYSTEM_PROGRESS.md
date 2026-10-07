@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-67 publication: `39d1eeb559c13f88e563027d93b20075b46fc4c3` — scale-66 publication state verified by English Content Master Plan Acceptance #175, English Content Full Validation #151 and Platform CI #1277; published output: `e9e221c1caa5e660d845eff61fccdd3f3c8e5798`.
-- Scale-66 publication checkpoint `39d1eeb559c13f88e563027d93b20075b46fc4c3` is fully verified; scale-67 is the current publication unit.
+- Latest fully CI-verified scale-up checkpoint before scale-67 checkpoint verification: `39d1eeb559c13f88e563027d93b20075b46fc4c3` — scale-66 publication state verified by English Content Master Plan Acceptance #175, English Content Full Validation #151 and Platform CI #1277; published output: `e9e221c1caa5e660d845eff61fccdd3f3c8e5798`.
+- Scale-67 publication is complete at `ec3fd17cc756bd31dad93361e6f2b04b94e0e066`; its bot-triggered PR workflows reached the known `action_required` state before job execution, so one normal-user checkpoint must verify the published state.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -90,10 +90,10 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-66 publication is fully verified at `39d1eeb559c13f88e563027d93b20075b46fc4c3`; do not duplicate scale-66 artifacts.
-2. Scale-67 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-67 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-67 publication is complete at `ec3fd17cc756bd31dad93361e6f2b04b94e0e066`; do not regenerate or duplicate scale-67 artifacts.
+3. Verify the normal-user scale-67 checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI; scale-67 becomes fully verified only when all three PASS.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears after the scale-67 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002320`, with fresh exact/near-dedupe preflight before any source apply.
+5. If no safer pending enrichment appears after the scale-67 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002320`, expected IDs `col.00002321`–`col.00002360`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-67 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002320` (expected next range `col.00002321`–`col.00002360`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Create/verify exactly one normal-user checkpoint for scale-67 publication `ec3fd17cc756bd31dad93361e6f2b04b94e0e066`. After English Content Full Validation, Master Plan Acceptance and Platform CI all PASS on that checkpoint, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002320` (expected next range `col.00002321`–`col.00002360`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
