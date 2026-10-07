@@ -36,7 +36,9 @@ jobs:
           node-version: 24.11.0
 
       - name: Pin verified scale 35 checkpoint run numbers
-        run: sed -i 's/Platform CI #1100/Platform CI #1117/' scripts/apply-english-e04-focused-scale-36.py
+        shell: bash
+        run: |
+          sed -i 's/Platform CI #1100/Platform CI #1117/' scripts/apply-english-e04-focused-scale-36.py
 
       - name: Preflight all scale 36 candidates against current E04
         run: python3 scripts/check-english-e04-scale-36-candidates.py
