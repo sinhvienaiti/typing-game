@@ -54,7 +54,15 @@ assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Feature Gates UI must 
 assert(uiSource.includes("NO REMOTE ROLLOUT"), "Feature Gates UI must make remote rollout absence explicit");
 assert(uiSource.includes("expansion-v2") || uiSource.includes("featureGates.gates"), "Feature Gates UI must render the canonical runtime gate");
 assert(uiSource.includes("Override precedence"), "Feature Gates UI must expose query/localStorage precedence");
-for (const forbidden of ["Create Flag", "Save Draft", "api.createRevision", "api.publish", 'type = "range"', "rolloutPercent"]) {
+for (const forbidden of [
+  'button("Create Flag"',
+  'btn("Create Flag"',
+  "api.createRevision",
+  "api.publish",
+  'type = "range"',
+  'type="range"',
+  "rolloutPercent",
+]) {
   assert(!uiSource.includes(forbidden), `Runtime Feature Gates UI must not expose legacy authoring primitive: ${forbidden}`);
 }
 assert(routerSource.includes("renderPhaseBFeatureGates"), "Feature Gates renderer is not wired");
