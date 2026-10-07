@@ -1,4 +1,4 @@
-export const CURRENCIES_AUDITED_CHILD_SHA = "3ab7d9e49126ec98fdd3342451da023712e5b984";
+export const CURRENCIES_AUDITED_CHILD_SHA = "43557878fbd77b928a98eaa684be8404ba387baf";
 
 export const CURRENCY_FIELDS = Object.freeze([
   "ID",
@@ -10,12 +10,18 @@ export const CURRENCY_FIELDS = Object.freeze([
   "Enabled",
 ]);
 
-const RUNTIME_IDS = Object.freeze(["credits", "alloy", "starCrystal", "quantumCore"]);
+const RUNTIME_IDS = Object.freeze(["credits", "alloy", "star-crystal", "quantum-core"]);
 const RUNTIME_NAMES = Object.freeze({
   credits: "Credits",
   alloy: "Alloy",
-  starCrystal: "Star Crystal",
-  quantumCore: "Quantum Core",
+  "star-crystal": "Star Crystal",
+  "quantum-core": "Quantum Core",
+});
+const BALANCE_KEYS = Object.freeze({
+  credits: "credits",
+  alloy: "alloy",
+  "star-crystal": "starCrystal",
+  "quantum-core": "quantumCore",
 });
 const MAX_BALANCE = 999_999_999;
 const runtimeFieldNames = new Set(["ID", "Name", "Cap", "Display Precision"]);
@@ -38,6 +44,7 @@ export function createCurrencyCapabilityManifest() {
     currencies: RUNTIME_IDS.map((id) => ({
       id,
       name: RUNTIME_NAMES[id],
+      balanceKey: BALANCE_KEYS[id],
       cap: MAX_BALANCE,
       displayPrecision: 0,
       icon: null,
@@ -57,7 +64,8 @@ export function createCurrencyCapabilityManifest() {
     runtime: {
       sources: ["src/economy/credits.ts", "src/economy/currencies.ts", "src/shops/state.ts"],
       currencyIds: [...RUNTIME_IDS],
-      sourceFunctions: ["stageClearCreditReward", "rewardExpansionCurrenciesOnStageClear"],
+      balanceKeys: { ...BALANCE_KEYS },
+      sourceFunctions: ["stageClearCreditReward", "stageClearExpansionCurrencyReward"],
       sinkFunctions: ["buyShopStockEntry"],
       cap: MAX_BALANCE,
       displayPrecision: 0,

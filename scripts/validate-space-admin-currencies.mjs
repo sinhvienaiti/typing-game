@@ -15,11 +15,21 @@ const [creditsSource, currenciesSource, shopSource, manifestSource, uiSource, ro
   read("portal/src/admin/space-typing-phase-b.ts"),
 ]);
 
+const canonicalIds = ["credits", "alloy", "star-crystal", "quantum-core"];
+const balanceKeys = {
+  credits: "credits",
+  alloy: "alloy",
+  "star-crystal": "starCrystal",
+  "quantum-core": "quantumCore",
+};
+
 assert(contract.capabilities.includes("currencies.read"), "Currencies contract must expose currencies.read");
 assert(!contract.capabilities.includes("currencies.write"), "Currencies contract must not expose currencies.write");
 assert(contract.routes.some((route) => route.id === "currencies" && route.path === "/admin/space-typing/currencies"), "Currencies route missing from child contract");
-assert.deepEqual(contract.currencies.ids, ["credits", "alloy", "starCrystal", "quantumCore"]);
-assert.deepEqual(contract.shop.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
+assert.deepEqual(contract.currencies.ids, canonicalIds);
+assert.deepEqual(contract.shop.currencies, canonicalIds);
+assert.deepEqual(contract.currencies.balanceKeys, balanceKeys);
+assert.deepEqual(contract.shop.priceStateKeys, ["credits", "alloy", "starCrystal", "quantumCore"]);
 assert.equal(contract.currencies.writeCapability, false);
 assert.equal(contract.currencies.analytics.available, false);
 assert.equal(contract.currencies.displayPrecision, 0);
@@ -27,13 +37,13 @@ for (const id of contract.currencies.ids) assert.equal(contract.currencies.caps[
 
 assert(creditsSource.includes("MAX_CREDITS = 999_999_999"), "Credits cap owner missing");
 for (const symbol of ["stageClearCreditReward", "spendCredits"]) assert(creditsSource.includes(symbol), `Missing Credits runtime symbol ${symbol}`);
-for (const symbol of ["EXPANSION_CURRENCY_IDS", "starCrystal", "quantumCore", "rewardExpansionCurrenciesOnStageClear", "999_999_999"]) assert(currenciesSource.includes(symbol), `Missing expansion currency runtime evidence ${symbol}`);
+for (const symbol of ["EXPANSION_CURRENCY_IDS", '"star-crystal"', '"quantum-core"', "starCrystal", "quantumCore", "stageClearExpansionCurrencyReward", "999_999_999"]) assert(currenciesSource.includes(symbol), `Missing expansion currency runtime evidence ${symbol}`);
 assert(shopSource.includes("buyShopStockEntry"), "Shop currency sink owner missing");
 
-assert(manifestSource.includes("3ab7d9e49126ec98fdd3342451da023712e5b984"), "Parent currency manifest must pin the tested child SHA");
-for (const id of ["credits", "alloy", "starCrystal", "quantumCore"]) assert(manifestSource.includes(`\"${id}\"`), `Parent manifest missing ${id}`);
-assert(!manifestSource.includes("star-crystal"), "Parent manifest must not publish stale star-crystal ID");
-assert(!manifestSource.includes("quantum-core"), "Parent manifest must not publish stale quantum-core ID");
+assert(manifestSource.includes("43557878fbd77b928a98eaa684be8404ba387baf"), "Parent currency manifest must pin the tested child SHA");
+for (const id of canonicalIds) assert(manifestSource.includes(`\"${id}\"`), `Parent manifest missing canonical ID ${id}`);
+for (const key of ["starCrystal", "quantumCore"]) assert(manifestSource.includes(`\"${key}\"`), `Parent manifest missing save balance key ${key}`);
+assert(manifestSource.includes("stageClearExpansionCurrencyReward"), "Parent manifest must expose the canonical expansion reward source");
 
 assert(uiSource.includes("/api/admin/space-typing/currencies/capabilities"), "Currencies UI must use the authenticated capability endpoint");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Currencies UI must make its boundary explicit");
@@ -42,4 +52,4 @@ assert(!uiSource.includes("Save Draft"), "Currencies must remain read-only");
 assert(routerSource.includes("renderPhaseBCurrencies"), "Currencies renderer is not wired");
 assert(routerSource.includes("`${BASE}/currencies`"), "Currencies route is not wired");
 
-console.log("Space Typing Currencies Admin validation passed: runtime-backed, canonical IDs, read-only, no synthetic analytics.");
+console.log("Space Typing Currencies Admin validation passed: canonical IDs + balance-key mapping, runtime-backed, read-only, no synthetic analytics.");
