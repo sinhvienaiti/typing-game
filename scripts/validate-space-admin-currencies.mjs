@@ -22,7 +22,7 @@ const balanceKeys = {
   "star-crystal": "starCrystal",
   "quantum-core": "quantumCore",
 };
-const auditedChildSha = "7a14e1bf6d83b69b1f8f40eb69e50c8a92c79131";
+const auditedChildSha = "c975de0818f90db5632d6caa731bc038fb199e5c";
 
 assert(contract.capabilities.includes("currencies.read"), "Currencies contract must expose currencies.read");
 assert(!contract.capabilities.includes("currencies.write"), "Currencies contract must not expose currencies.write");
