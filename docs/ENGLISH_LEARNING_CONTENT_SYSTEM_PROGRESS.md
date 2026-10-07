@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-64 publication: `c39f556a3957f3ce0058b1990a831f2064475df9` — scale-63 publication state verified by English Content Master Plan Acceptance #165, English Content Full Validation #146 and Platform CI #1254; published output: `7d44880c65ef5eb8685df661d3ef5f4859f71720`.
-- Scale-64 publication completed at `cef8463d5e24b1f28eb5ae723cfdfd5320485f0a`; bot-triggered PR workflows follow the known `action_required` publication pattern, so this normal-user checkpoint exists to verify the published state before opening scale-65.
+- Latest fully CI-verified scale-up checkpoint before scale-65 publication: `88a3ecc183bce638542d63046f9a3c8123158657` — scale-64 publication state verified by English Content Master Plan Acceptance #168, English Content Full Validation #148 and Platform CI #1257; published output: `cef8463d5e24b1f28eb5ae723cfdfd5320485f0a`.
+- Scale-64 publication checkpoint `88a3ecc183bce638542d63046f9a3c8123158657` is fully verified; scale-65 is the current publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +18,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 3,310 published records after scale-64
+- E04 phrase/pattern architecture + current reviewed publication: complete — 3,350 published records after scale-65
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,16 +26,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-64 publication
+## Published runtime snapshot after E04 scale-65 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 3,310 records
-- total published rich records: 7,911
+- phrases: 3,350 records
+- total published rich records: 7,951
 - attribution runtime: 4 source records
-- editorial ledger: 7,911 decisions / 7,911 applied / 7,911 publish decisions
-- E04 collocation frontier: `col.00002200`
+- editorial ledger: 7,951 decisions / 7,951 applied / 7,951 publish decisions
+- E04 collocation frontier: `col.00002240`
 
 ## Approved scale-up targets
 
@@ -89,11 +89,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-63 publication is fully verified at `c39f556a3957f3ce0058b1990a831f2064475df9`; do not duplicate scale-63 artifacts.
-2. Scale-64 publication completed at `cef8463d5e24b1f28eb5ae723cfdfd5320485f0a`; the current gate is normal-user checkpoint verification, not regeneration.
-3. Verify English Content Full Validation, English Content Master Plan Acceptance and Platform CI on this checkpoint. Only when all three PASS is scale-64 fully verified.
+1. Scale-64 publication is fully verified at `88a3ecc183bce638542d63046f9a3c8123158657`; do not duplicate scale-64 artifacts.
+2. Scale-65 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
+3. After the scale-65 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears after the scale-64 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002200`, with fresh exact/near-dedupe preflight before any source apply.
+5. If no safer pending enrichment appears after the scale-65 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002240`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Verify scale-64 publication `cef8463d5e24b1f28eb5ae723cfdfd5320485f0a` under the normal-user checkpoint. If English Content Full Validation, Master Plan Acceptance and Platform CI all PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002200` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
+Scale-65 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002240` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
