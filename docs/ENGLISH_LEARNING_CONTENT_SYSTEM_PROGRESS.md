@@ -6,9 +6,7 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-52 verification: `23f896b9408996a12bf495f3da00e6f99125e9b3` — scale-51 publication state verified by English Content Master Plan Acceptance #128, English Content Full Validation #121 and Platform CI #1185; published output: `8984819e3e0671d8fc990b3356f4cbd9b52e6086`.
-- Scale-52 publication commit: `ae830459fb912231aed2ee12cc1c00fe9e447d1b` — E04 collocation scale-52 published with clean threshold-0.86 preflight; published frontier is `col.00001720`.
-- Scale-52 verification state: publication is complete, but the normal-user checkpoint verification is still required. Bot-triggered English Content Master Plan Acceptance #130 and Platform CI #1187 ended `action_required` before jobs ran, matching the known bot-publication pattern; do not regenerate scale-52.
+- Latest fully CI-verified scale-up checkpoint before scale-53 publication: `d12a87c7004bf5009b22ac2069f26c588ae0461a` — scale-52 publication state verified by English Content Master Plan Acceptance #131, English Content Full Validation #123 and Platform CI #1188; published output: `ae830459fb912231aed2ee12cc1c00fe9e447d1b`.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -19,7 +17,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 2,830 published records after scale-52
+- E04 phrase/pattern architecture + current reviewed publication: complete — 2,870 published records after scale-53
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -27,16 +25,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-52 publication
+## Published runtime snapshot after E04 scale-53 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 2,830 records
-- total published rich records: 7,431
+- phrases: 2,870 records
+- total published rich records: 7,471
 - attribution runtime: 4 source records
-- editorial ledger: 7,431 decisions / 7,431 applied / 7,431 publish decisions
-- E04 collocation frontier: `col.00001720`
+- editorial ledger: 7,471 decisions / 7,471 applied / 7,471 publish decisions
+- E04 collocation frontier: `col.00001760`
 
 ## Approved scale-up targets
 
@@ -90,13 +88,12 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-51 publication is fully verified at `23f896b9408996a12bf495f3da00e6f99125e9b3`; do not duplicate scale-51 artifacts.
-2. Scale-52 source/application/publication is complete at `ae830459fb912231aed2ee12cc1c00fe9e447d1b`; do not regenerate or republish it.
-3. Verify this normal-user checkpoint with all three mandatory workflows: English Content Master Plan Acceptance, English Content Full Validation and Platform CI. Scale-52 is not fully verified until all three PASS on the checkpoint.
-4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. After scale-52 is fully verified, re-resolve HEAD and recalculate deficits. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
-6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+1. Scale-52 publication is fully verified at `d12a87c7004bf5009b22ac2069f26c588ae0461a`; do not duplicate scale-52 artifacts.
+2. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
+3. Verify the resulting scale-53 publication commit and mandatory CI without regenerating completed artifacts.
+4. If no safer pending enrichment appears, create the next bounded E04 scale batch for the most under-target family with established source/license/generator support, preferring collocations before generating more verb patterns that already meet their minimum.
+5. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+6. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -108,4 +105,4 @@ None.
 
 ## Next actionable task
 
-Scale-52 publication is complete at `ae830459fb912231aed2ee12cc1c00fe9e447d1b`. Verify this normal-user checkpoint until English Content Master Plan Acceptance, English Content Full Validation and Platform CI all PASS. Do not create a second CI-refresh checkpoint. Once all three pass, mark scale-52 fully verified in the next real-state progress update associated with subsequent bounded work, then continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001720` (expected scale-53 range `col.00001721` through `col.00001760` if no newer worker has claimed it), or move to the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch. Recalculate counts and run exact/near dedupe before every write.
+Scale-53 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00001760` (or the next safer under-target E04 family if collocation preflight cannot produce a clean reviewed batch). Recalculate counts and run exact/near dedupe before every write.
