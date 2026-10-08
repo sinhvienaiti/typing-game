@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-99 publication: `3b6ee78f6b70bb7dd5930970271932f541d0680c` — scale-98 publication state verified by English Content Master Plan Acceptance #286, English Content Full Validation #233 and Platform CI #1437; published output: `e2365885d007e555763bbb567a48766153ed2a89`.
-- Scale-98 publication checkpoint `3b6ee78f6b70bb7dd5930970271932f541d0680c` is fully verified; scale-99 is the current publication unit.
+- Latest fully CI-verified scale-up checkpoint before scale-100 publication: `107b2225853afc6c6f2481fc274e5be60a965981` — scale-99 publication state verified by English Content Master Plan Acceptance #289, English Content Full Validation #235 and Platform CI #1440; published output: `7d2064d7f3c16bd3fbcd7868fa25b0652d9519ee`.
+- Scale-99 publication checkpoint `107b2225853afc6c6f2481fc274e5be60a965981` is fully verified; scale-100 is the current publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +18,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 4,710 published records after scale-99
+- E04 phrase/pattern architecture + current reviewed publication: complete — 4,750 published records after scale-100
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,16 +26,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-99 publication
+## Published runtime snapshot after E04 scale-100 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 4,710 records
-- total published rich records: 9,311
+- phrases: 4,750 records
+- total published rich records: 9,351
 - attribution runtime: 4 source records
-- editorial ledger: 9,311 decisions / 9,311 applied / 9,311 publish decisions
-- E04 collocation frontier: `col.00003600`
+- editorial ledger: 9,351 decisions / 9,351 applied / 9,351 publish decisions
+- E04 collocation frontier: `col.00003640`
 
 ## Approved scale-up targets
 
@@ -89,11 +89,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-98 publication is fully verified at `3b6ee78f6b70bb7dd5930970271932f541d0680c`; do not duplicate scale-98 artifacts.
-2. Scale-99 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-99 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+1. Scale-99 publication is fully verified at `107b2225853afc6c6f2481fc274e5be60a965981`; do not duplicate scale-99 artifacts.
+2. Scale-100 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
+3. After the scale-100 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears after the scale-99 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00003600`, expected IDs `col.00003601`–`col.00003640`, with fresh exact/near-dedupe preflight before any source apply.
+5. If no safer pending enrichment appears after the scale-100 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00003640`, expected IDs `col.00003641`–`col.00003680`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-99 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00003600` (expected next range `col.00003601`–`col.00003640`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Scale-100 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00003640` (expected next range `col.00003641`–`col.00003680`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
