@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("games/space-typing/contracts/space-typing-admin-alternative-modes.v1.json"));
-const [protocolSource, roomSource, roomUiSource, authoritySource, localMatchSource, gameSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource, extendedSource] = await Promise.all([
+const [protocolSource, roomSource, roomUiSource, authoritySource, localMatchSource, gameSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/protocol.ts"),
   read("games/space-typing/src/duel/room.ts"),
   read("games/space-typing/src/duel/room-ui.ts"),
@@ -18,7 +18,6 @@ const [protocolSource, roomSource, roomUiSource, authoritySource, localMatchSour
   read("portal/src/admin/space-typing.ts"),
   read("admin/server.mjs"),
   read("admin/space-typing-phase-b-map.v1.json"),
-  read("portal/src/admin/space-typing-extended.ts"),
 ]);
 
 const modes = contract.alternativeModes;
@@ -53,11 +52,12 @@ assert(!uiSource.includes('type = "range"'), "Alternative Modes diagnostic must 
 assert(routerSource.includes("renderPhaseBAlternativeModes"), "Alternative Modes renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/alternative-modes`"), "Alternative Modes route is not wired into Phase B");
 const phaseBCall = "const phaseB = renderPhaseBAdminScreen(path, this.navigate);";
-const legacyCall = "return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);";
-assert(shellSource.indexOf(phaseBCall) >= 0 && shellSource.indexOf(legacyCall) >= 0 && shellSource.indexOf(phaseBCall) < shellSource.indexOf(legacyCall), "Phase B must intercept Alternative Modes before legacy mock renderer");
+assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
+assert(shellSource.includes("if (phaseB !== null) return phaseB;"), "Space Typing shell must return the canonical Phase B renderer");
+assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Alternative Modes/mock renderer must not remain reachable from the production shell");
+assert(shellSource.includes("return this.renderUnknown(path);"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
 assert(serverSource.includes("space-typing-admin-alternative-modes.v1.json"), "Admin server must load Alternative Modes diagnostic from pinned child");
 assert(serverSource.includes("/api/admin/space-typing/alternative-modes/contract"), "Admin server Alternative Modes endpoint is missing");
-assert(extendedSource.includes("function renderAlternativeModes()"), "Legacy Alternative Modes mock guard missing; remove this assertion when legacy renderer is deleted");
 
 const phaseMap = JSON.parse(phaseMapSource);
 const row = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/alternative-modes");
@@ -72,4 +72,4 @@ for (const unsupported of [
   "penaltyDamage", "lexicon", "chainRule",
 ]) assert(modes.unsupportedAdminMockFields.includes(unsupported), `Alternative Modes unsupported mock field missing: ${unsupported}`);
 
-console.log("Space Typing Alternative Modes Admin validation passed: Reflex/Word Chain remain explicit runtime-absent prototypes and legacy authoring is unreachable.");
+console.log("Space Typing Alternative Modes Admin validation passed: Reflex/Word Chain remain explicit runtime-absent diagnostics and no legacy mock authoring route is reachable.");
