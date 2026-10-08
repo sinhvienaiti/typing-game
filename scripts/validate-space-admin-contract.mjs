@@ -87,3 +87,5 @@ assert.equal(vfxMap?.applyBoundary, "none");
 console.log(
   `Space Typing Admin contracts OK: ${child.contractRevision} · visuals pinned ${childHead.slice(0, 12)} · Backgrounds/VFX runtime-backed read-only`,
 );
+
+await import("./validate-space-admin-music-library.mjs");

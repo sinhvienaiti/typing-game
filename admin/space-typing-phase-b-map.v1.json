@@ -14,7 +14,7 @@
     {"route":"/admin/space-typing","screen":"Overview","domain":"telemetry","persistence":"child-stage-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/analytics","screen":"Analytics","domain":"telemetry","persistence":"child-stage-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/audio","screen":"Audio Defaults","domain":"audio","persistence":"immutable-revision-store","applyBoundary":"safe-boundary","status":"phase-b-ui-wired"},
-    {"route":"/admin/space-typing/music-library","screen":"Music Library","domain":"music-assets","persistence":"authored-asset-service","applyBoundary":"catalog-rebuild","status":"backend-foundation"},
+    {"route":"/admin/space-typing/music-library","screen":"Music Library","domain":"music-assets","persistence":"authored-asset-service","applyBoundary":"catalog-rebuild","status":"phase-b-ui-wired-runtime-catalog-authoring"},
     {"route":"/admin/space-typing/world-music","screen":"World / Stage Music","domain":"worldMusic","persistence":"immutable-revision-store","applyBoundary":"next-track-or-state","status":"phase-b-ui-wired-all-scopes"},
     {"route":"/admin/space-typing/ships","screen":"Ships","domain":"content.ships","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired-runtime-backed"},
     {"route":"/admin/space-typing/equipment","screen":"Equipment","domain":"content.equipment","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired-runtime-backed"},
