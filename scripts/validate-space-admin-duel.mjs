@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("games/space-typing/contracts/space-typing-admin-duel.v1.json"));
-const [roomSource, rulesSource, modelSource, botsSource, localMatchSource, timingSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource, extendedSource] = await Promise.all([
+const [roomSource, rulesSource, modelSource, botsSource, localMatchSource, timingSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/room.ts"),
   read("games/space-typing/src/duel/rules.ts"),
   read("games/space-typing/src/duel/model.ts"),
@@ -18,7 +18,6 @@ const [roomSource, rulesSource, modelSource, botsSource, localMatchSource, timin
   read("portal/src/admin/space-typing.ts"),
   read("admin/server.mjs"),
   read("admin/space-typing-phase-b-map.v1.json"),
-  read("portal/src/admin/space-typing-extended.ts"),
 ]);
 
 const duel = contract.duel;
@@ -73,11 +72,12 @@ assert(!uiSource.includes("api.rollback"), "Duel Phase B UI must not mutate the 
 assert(routerSource.includes("renderPhaseBDuel"), "Duel renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/duel`"), "Duel route is not wired into Phase B");
 const phaseBCall = "const phaseB = renderPhaseBAdminScreen(path, this.navigate);";
-const legacyCall = "return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);";
-assert(shellSource.indexOf(phaseBCall) >= 0 && shellSource.indexOf(legacyCall) >= 0 && shellSource.indexOf(phaseBCall) < shellSource.indexOf(legacyCall), "Phase B must intercept Duel before the legacy mock renderer");
+assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
+assert(shellSource.includes("if (phaseB !== null) return phaseB;"), "Space Typing shell must return the canonical Phase B renderer");
+assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Duel/mock renderer must not remain reachable from the production shell");
+assert(shellSource.includes("return this.renderUnknown(path);"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
 assert(serverSource.includes("space-typing-admin-duel.v1.json"), "Admin server must load Duel from the pinned child contract");
 assert(serverSource.includes("/api/admin/space-typing/duel/contract"), "Admin server Duel contract endpoint is missing");
-assert(extendedSource.includes("function renderDuel()"), "Legacy Duel mock guard missing; remove this assertion when the legacy renderer is deleted");
 
 const phaseMap = JSON.parse(phaseMapSource);
 const row = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/duel");
