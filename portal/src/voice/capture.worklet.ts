@@ -1,6 +1,7 @@
 import { StreamingResampler } from "../../../shared/voice/audio-resampler.mjs";
 import { CAPTURE_BLOCK_SAMPLES, CAPTURE_MAX_PENDING } from "./capture-policy";
 declare const sampleRate: number;
+declare const currentTime: number;
 declare class AudioWorkletProcessor {
   port: MessagePort;
 }
@@ -50,6 +51,7 @@ class VoiceCapture extends AudioWorkletProcessor {
           type: "overflow",
           sample: this.clock,
           generation: this.generation,
+          audioTimeMs: currentTime * 1000,
         });
         continue;
       }
@@ -59,6 +61,7 @@ class VoiceCapture extends AudioWorkletProcessor {
           type: "pcm",
           sample: this.clock,
           generation: this.generation,
+          audioTimeMs: currentTime * 1000,
           data: this.buffer,
         },
         [this.buffer.buffer],
