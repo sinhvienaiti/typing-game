@@ -15832,6 +15832,71 @@
           "sampleCount": 5
         }
       ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-126",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-126-collocations.json",
+          "expectedCount": 40,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "collocation",
+          "recordSetId": "scale-collocations",
+          "sampleCount": 5
+        }
+      ]
     }
   ]
 }
