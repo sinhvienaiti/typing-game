@@ -8,6 +8,7 @@ import { renderPhaseBEvents } from "./space-typing-events-phase-b";
 import { renderPhaseBExpedition } from "./space-typing-expedition-phase-b";
 import { renderPhaseBFeatureGates } from "./space-typing-feature-gates-phase-b";
 import { renderPhaseBMissions } from "./space-typing-missions-phase-b";
+import { renderPhaseBMusicLibrary } from "./space-typing-music-library-phase-b";
 import { renderPhaseBQa } from "./space-typing-qa-phase-b";
 import { renderPhaseBRanked } from "./space-typing-ranked-phase-b";
 import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
@@ -25,6 +26,7 @@ type Navigate = (path: string) => void;
 
 export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLElement | null {
   if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);
+  if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();
   if (path === `${BASE}/stages`) return renderPhaseBWorlds(navigate);
   if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);
   if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
