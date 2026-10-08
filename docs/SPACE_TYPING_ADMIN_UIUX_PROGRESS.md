@@ -6,16 +6,16 @@ STATUS: IN_PROGRESS
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- Validated implementation HEAD before this metadata checkpoint: `844c1ae0e40868b4b81b1e568875c1daab1a8df3`
+- Validated implementation HEAD before this metadata checkpoint: `a48124dc1b6065d6bb3a2d33f1a1c7c4e80b1615`
 - PR: #49 — OPEN, DRAFT
-- Space Typing Admin CI #507: PASS on `844c1ae0e40868b4b81b1e568875c1daab1a8df3`.
-- Platform CI #1465: PASS on `844c1ae0e40868b4b81b1e568875c1daab1a8df3`.
+- Space Typing Admin CI #546: PASS on `a48124dc1b6065d6bb3a2d33f1a1c7c4e80b1615`.
+- Platform CI #1535: PASS on `a48124dc1b6065d6bb3a2d33f1a1c7c4e80b1615`.
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Branch: `feat/admin-world-music-stage-policy`
-- Validated HEAD: `712cc80c401ababc00ed0b77b5f24952befc0e82`
-- Child CI #1755: PASS.
+- Validated HEAD: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
+- Child CI #1759: PASS.
 - Parent `games/space-typing` is pinned to exactly that tested child SHA.
 
 ## COMPLETED MILESTONES
@@ -27,10 +27,10 @@ The following slices are confirmed present by current Git state and the full Adm
 - B06.5 Bosses — DONE
 - B06.6 Worlds & Stages — DONE
 - Mandatory Typing Content — DONE
-- Shop / economy runtime ownership slice — DONE
+- Shop / economy runtime ownership — DONE
 - Currencies — DONE
-- Rewards & Drops runtime contract slice — DONE
-- Warp economy — DONE
+- Rewards & Drops — DONE
+- Stamina / Warp — DONE
 - Missions — DONE
 - Feature Gates — DONE
 - Events — DONE
@@ -40,57 +40,59 @@ The following slices are confirmed present by current Git state and the full Adm
 - Backgrounds — DONE
 - VFX — DONE
 - UI Assets — DONE
+- QA Sandbox / Test Lab — DONE
+- Overview / Analytics telemetry adapter — DONE
+- Expedition runtime ownership adapter — DONE
+- Daily / Weekly runtime ownership adapter — DONE (Daily canonical; Weekly explicit runtime absence)
 
-## BACKGROUNDS — CLOSED CHECKPOINT
-- Child owns the runtime-backed Backgrounds contract, runtime loader integration, contract test, and audit.
-- The audit follows the real call chain `stage.ts -> fetchKit() -> parseKit()` rather than adding fake production imports/calls.
-- The parent integration gap discovered during VFX work is closed: `/admin/space-typing/backgrounds` routes to the Phase B runtime-backed screen and `/api/admin/space-typing/backgrounds/contract` is exposed through the authenticated Admin service.
-- Backgrounds remains runtime-backed/read-only because no truthful Admin write/apply boundary exists.
+## QA SANDBOX / TEST LAB — CLOSED CHECKPOINT
+- Child exposes a canonical isolated Test Lab contract backed by the real game runtime.
+- QA session state is isolated/ephemeral; Test Lab presets are browser-local only; production campaign persistence remains no-write.
+- Parent exposes authenticated `GET /api/admin/space-typing/qa/contract` and a runtime-backed QA launcher surface.
+- No fake Admin spawn/grant/progression CRUD or production-save mutation bridge was introduced.
 
-## VFX — CLOSED CHECKPOINT
-- Child commit `c444b5f1d2bf873a1e6ad368746c095f11cf3c24` added the runtime-backed VFX contract; `3435ca12b447ee11c28d3cbe8f8d63d885d8cbf9` fixed the canonical quality mapping audit.
-- Canonical VFX ownership is `Game.ts` plus production VFX systems (`CombatFxSystem`, `SkillFxSystem`, player/enemy projectile systems and related screen feedback) with visual-quality budgets owned by `src/performance/quality.ts`.
-- There is no standalone runtime-consumed VFX authoring manifest, persistence seam, or safe apply boundary. Admin is intentionally `runtime-derived-readonly`; no fake profile CRUD, sliders, Save Draft, Publish, or write endpoint was added.
-- Parent exposes authenticated `/api/admin/space-typing/vfx/contract`, routes `/admin/space-typing/vfx` to the runtime-backed Phase B screen, and validates the exact child SHA plus the no-write boundary.
+## OVERVIEW / ANALYTICS — CLOSED CHECKPOINT
+- Child commit `8c2bd4736ed1ec16dcf413985be9e540d10e123e` introduced the runtime telemetry contract.
+- Canonical telemetry is stage/session runtime data only. There is no historical aggregation backend, cross-process live feed, remote player analytics store, or Admin write/publish capability.
+- Parent routes both Overview and Analytics to the authenticated runtime-backed read-only telemetry surface.
+- Performance diagnostics are acknowledged as runtime-private until a real Admin-readable bridge exists; no synthetic historical charts or fake aggregates were added.
 
-## UI ASSETS — CLOSED CHECKPOINT
-- Child commit `a4830c93ebd9d9781fde1eb7cb41bd0d2ea96ebe` introduced the UI Assets ownership contract/audit/test/CI wiring; `712cc80c401ababc00ed0b77b5f24952befc0e82` stabilized the audit against runtime identifiers instead of brittle HTML/CSS formatting.
-- Child CI #1755 is green on `712cc80c401ababc00ed0b77b5f24952befc0e82`.
-- The audit found no standalone Admin-authorable UI asset repository, loader/apply seam, or safe mutation boundary. Production UI ownership is code/DOM/CSS/runtime-backed, including shared UI components/HUD, Duel battle UI, and Ranked reuse.
-- The canonical contract is therefore `runtime-derived-readonly` with `ui-assets.read`, `writeCapability=false`, `previewWriteCapability=false`, `authorableFields=[]`, and `applyBoundary=none`.
-- Parent pins the exact green child SHA and exposes authenticated `GET /api/admin/space-typing/ui-assets/contract` plus `/admin/space-typing/ui-assets`.
-- Parent CI now runs `validate-space-admin-ui-assets.mjs`, syntax-checks it, and runs child `ui-assets:audit`; the Phase B map is closed as `phase-b-ui-wired-runtime-backed-readonly` with `code-owned-runtime-ui` persistence ownership.
-- Advancing the child pin only changed UI Assets contract/audit/test/CI/package files. Existing Backgrounds/VFX and Shop/Currencies exact-child-SHA guards were re-audited against the diff and refreshed without weakening their assertions.
-- Parent Admin CI #507 and Platform CI #1465 are green on `844c1ae0e40868b4b81b1e568875c1daab1a8df3`.
+## EXPEDITION — CLOSED CHECKPOINT
+- Child commit `053ae2dde85614361ee33c023c3f0aa33049ed66` introduced the Expedition runtime ownership contract; child CI #1758 passed before the parent pin advanced.
+- Canonical runtime is the existing browser-owned Expedition system: run version 1, `expansion-v2-v1`, eight encounters, deterministic draft/rest boundaries, revisioned browser save envelope, writer ownership, resume/replay handling, and campaign-fixture integrity checks.
+- Parent exposes authenticated `GET /api/admin/space-typing/expedition/contract` and a read-only ownership surface.
+- Admin cannot remotely read, create, resume, settle, clear, overwrite, or publish a player's Expedition run.
+
+## DAILY / WEEKLY — CLOSED CHECKPOINT
+- Child commit `8128a2a5a7713fff80cd1286b607de6a3e7190f7` introduced the Daily / Weekly runtime ownership contract; child CI #1759 passed.
+- Daily is real and canonical: a deterministic UTC-day Expedition challenge using `utcDayKey()` + `dailySeed(dayKey, rulesetVersion)` with a frozen identity for comparable Personal Best and Personal Ghost results.
+- Daily PB/Ghost persistence is browser-local under `spaceTypingExpansionV2ProfileV1`.
+- Weekly is explicitly unavailable because the current runtime has no canonical weekly challenge identity, weekly seed/reset scheduler, weekly reward track, or remote scheduler backend.
+- Parent exposes authenticated `GET /api/admin/space-typing/daily-weekly/contract`, routes `/admin/space-typing/daily-weekly` to a runtime-partial/read-only surface, and clearly labels Daily supported / Weekly not implemented.
+- No weekly scheduler, reward authoring, remote leaderboard, seed override, Save Draft, or Publish flow was fabricated.
+
+## EXACT-CHILD-SHA GUARDS
+- Every child pin advance was re-audited rather than bypassed.
+- Shop, Currencies, Visuals, QA, Telemetry, Expedition, and their capability/test SHA expectations were refreshed only after confirming the new child commits did not change their canonical runtime ownership.
+- Validator/test semantics were not weakened to make CI pass.
 
 ## CURRENT MILESTONE
-**QA Sandbox / Test Lab capability** — isolated QA capability after closing the B10 Visuals chain.
+**Remaining first-unfinished Admin surface from the Phase B map: Music Library / remaining safe adapters.**
 
-## QA / TEST LAB STARTING RULES
-The current Phase B map calls `/admin/space-typing/qa` an `ephemeral-sandbox` with a `new-qa-run` boundary. That is a planning assumption only; it is not proof that the child runtime exposes a safe sandbox mutation seam.
-
-Before implementation:
-- trace real production diagnostics, preview/test-lab controllers, debug hooks, performance diagnostics, and scenario/fixture entry points;
-- separate production runtime capability from test-only helpers and unit-test fixtures;
-- identify whether any real isolated QA session can be created without mutating campaign/player production state;
-- determine whether preview actions have explicit lifecycle/reset boundaries;
-- classify each requested control as executable QA action, read-only diagnostic, or unsupported;
-- do not expose spawn/grant/unlock/damage/currency/state mutation unless the child already owns an isolated safe execution boundary.
-
-If no genuine QA sandbox exists, replace the aspirational `ephemeral-sandbox` map with a truthful diagnostics/read-only or runtime-absence contract. Do not build a mock Test Lab that behaves differently from the game.
+The Phase B map now truthfully closes QA, telemetry, Expedition, and Daily/Weekly. `Music Library` is still recorded as `backend-foundation`, so the next worker must inspect the current Git state and master plan before deciding whether the existing asset service is sufficient or whether runtime/catalog integration is still missing.
 
 ## CURRENT BLOCKER
-NONE. UI Assets is closed and green. QA/Test Lab runtime ownership audit is next.
+NONE. Daily/Weekly is closed and green on the validated implementation HEAD.
 
 ## NEXT EXACT ACTION
 1. Fetch latest parent and child HEADs before every edit; preserve newer worker commits.
-2. Audit child production sources for Test Lab / QA / debug / diagnostics / performance / preview / scenario seams and distinguish them from test-only code.
-3. Decide whether the canonical QA capability is an isolated executable sandbox, read-only diagnostics, or an explicit unsupported/absence diagnostic.
-4. Implement the smallest truthful child contract/audit/test and CI gate.
-5. Require full child CI green before advancing the parent submodule pin.
-6. Pin parent to the exact green child commit; wire authenticated API + Phase B QA UI + validator/map only for proven capabilities.
-7. Re-audit exact-child-SHA guards after any child pin without weakening them.
-8. Run full Parent Admin CI + Platform CI, update this checkpoint, then continue to Overview/Analytics telemetry adapters and remaining safe adapters.
+2. Re-read the current Phase B map and master plan; do not trust this metadata file over newer Git commits.
+3. Start from the first genuinely unfinished surface. Current map evidence points to `Music Library` (`backend-foundation`).
+4. Audit the existing `MusicAssetService`, catalog build/runtime consumer, upload/remove lifecycle, world/stage music references, and safe apply/rebuild boundary before changing UI semantics.
+5. Do not create a second music catalog/source of truth and do not expose unsupported production mutations.
+6. If advancing the child pin again, require child CI green first and re-audit every exact-child-SHA guard without weakening assertions.
+7. Run full Space Typing Admin CI + Platform CI for the final implementation HEAD.
+8. Update this file with the validated implementation HEAD and the next first-unfinished unit, then continue rather than stopping after a small blocker fix.
 
 ## STATUS
-`IN_PROGRESS` — Backgrounds, VFX, and UI Assets are CLOSED/DONE; QA Sandbox/Test Lab is the active milestone.
+`IN_PROGRESS` — QA Sandbox, Overview/Analytics telemetry, Expedition, and Daily/Weekly Admin runtime ownership are CLOSED/DONE and fully validated. Music Library / remaining safe adapters are next.
