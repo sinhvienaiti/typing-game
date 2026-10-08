@@ -7,7 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-82 publication: `5a1b971b763b69ec9b7b5b4575529c22f14df93d` — scale-81 publication state verified by English Content Master Plan Acceptance #228, English Content Full Validation #192 and Platform CI #1371; published output: `d7ef3bbcbab49524db20c94110afb4f08787825f`.
-- Scale-81 publication checkpoint `5a1b971b763b69ec9b7b5b4575529c22f14df93d` is fully verified; scale-82 is the current publication unit.
+- Scale-82 publication commit: `a7f9410516a3cab3564fd1ca54097b716f52cf79`; bot-triggered English Content Master Plan Acceptance #230 and Platform CI #1373 ended `action_required` before jobs ran, so this normal-user checkpoint and its three mandatory CI gates are the current verification step.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -90,8 +90,8 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-81 publication is fully verified at `5a1b971b763b69ec9b7b5b4575529c22f14df93d`; do not duplicate scale-81 artifacts.
-2. Scale-82 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-82 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-82 publication is complete at `a7f9410516a3cab3564fd1ca54097b716f52cf79`; do not regenerate or duplicate scale-82 artifacts.
+3. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on this normal-user checkpoint before considering scale-82 fully verified.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. If no safer pending enrichment appears after the scale-82 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002920`, expected IDs `col.00002921`–`col.00002960`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-82 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002920` (expected next range `col.00002921`–`col.00002960`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Verify English Content Full Validation, Master Plan Acceptance and Platform CI for scale-82 publication `a7f9410516a3cab3564fd1ca54097b716f52cf79` on this normal-user checkpoint. If all three PASS, scale-82 is fully verified; the next safe collocation frontier is `col.00002920` with expected next range `col.00002921`–`col.00002960` unless a safer under-target E04 family takes priority. Recalculate counts and run exact/near dedupe before every write.
