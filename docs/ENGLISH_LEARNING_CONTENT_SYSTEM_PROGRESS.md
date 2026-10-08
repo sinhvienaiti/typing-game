@@ -7,7 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-77 publication: `dc0f3839b63108a2fbde605e702b09e9742e037c` — scale-76 publication state verified by English Content Master Plan Acceptance #210, English Content Full Validation #179 and Platform CI #1353; published output: `777255d33248259b551486bb3750b22df596472f`.
-- Scale-76 publication checkpoint `dc0f3839b63108a2fbde605e702b09e9742e037c` is fully verified; scale-77 is the current publication unit.
+- Scale-77 publication commit: `a24b0d93ccdb4fa0c1bf26c3a9cdf10b49c12898`; bot-triggered English Content Master Plan Acceptance #213 and Platform CI #1356 ended `action_required` before jobs ran, so this normal-user checkpoint and its three mandatory CI gates are the current verification step.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -90,8 +90,8 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. Scale-76 publication is fully verified at `dc0f3839b63108a2fbde605e702b09e9742e037c`; do not duplicate scale-76 artifacts.
-2. Scale-77 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-77 bot publication commit is created, create one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+2. Scale-77 publication is complete at `a24b0d93ccdb4fa0c1bf26c3a9cdf10b49c12898`; do not regenerate or duplicate scale-77 artifacts.
+3. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on this normal-user checkpoint before considering scale-77 fully verified.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. If no safer pending enrichment appears after the scale-77 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00002720`, expected IDs `col.00002721`–`col.00002760`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-77 is the current publication unit. After its bot publication commit is created, verify remote HEAD and all mandatory CI. If PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00002720` (expected next range `col.00002721`–`col.00002760`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Verify English Content Full Validation, Master Plan Acceptance and Platform CI for scale-77 publication `a24b0d93ccdb4fa0c1bf26c3a9cdf10b49c12898` on this normal-user checkpoint. If all three PASS, scale-77 is fully verified; the next safe collocation frontier is `col.00002720` with expected next range `col.00002721`–`col.00002760` unless a safer under-target E04 family takes priority. Recalculate counts and run exact/near dedupe before every write.
