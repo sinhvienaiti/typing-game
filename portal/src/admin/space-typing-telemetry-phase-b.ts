@@ -109,7 +109,7 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Boundary</p><h2>What Admin can truthfully report</h2></div></div>
-          <p>The child runtime owns these measurements inside the active stage/session. This Admin adapter exposes their canonical schema and ownership; it does not pretend that a live cross-process feed or historical telemetry store exists.</p>
+          <p>The child runtime owns these measurements inside the active stage/session. This Admin adapter exposes their canonical schema and ownership. No live cross-process feed or historical telemetry store exists.</p>
           <p><strong>Write capability:</strong> ${String(telemetry.writeCapability)}</p>
           <p><strong>Publish capability:</strong> ${String(telemetry.publishCapability)}</p>
           <p><strong>Historical aggregation:</strong> ${String(telemetry.historicalAggregationCapability)}</p>
