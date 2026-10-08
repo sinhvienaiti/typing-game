@@ -11,6 +11,7 @@ import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
 import { renderPhaseBStages } from "./space-typing-stages-phase-b";
 import { renderPhaseBTypingContent } from "./space-typing-typing-content-phase-b";
+import { renderPhaseBUiAssets } from "./space-typing-ui-assets-phase-b";
 import { renderPhaseBVfx } from "./space-typing-vfx-phase-b";
 import { renderPhaseBWarp } from "./space-typing-warp-phase-b";
 import { renderPhaseBWorlds } from "./space-typing-worlds-phase-b";
@@ -32,6 +33,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/ranked`) return renderPhaseBRanked();
   if (path === `${BASE}/alternative-modes`) return renderPhaseBAlternativeModes();
   if (path === `${BASE}/backgrounds`) return renderPhaseBBackgrounds();
+  if (path === `${BASE}/ui-assets`) return renderPhaseBUiAssets();
   if (path === `${BASE}/vfx`) return renderPhaseBVfx();
   if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();
   return renderPhaseBCoreAdminScreen(path, navigate);
