@@ -2,6 +2,7 @@ import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-
 import { renderPhaseBAlternativeModes } from "./space-typing-alternative-modes-phase-b";
 import { renderPhaseBBackgrounds } from "./space-typing-backgrounds-phase-b";
 import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
+import { renderPhaseBDailyWeekly } from "./space-typing-daily-weekly-phase-b";
 import { renderPhaseBDuel } from "./space-typing-duel-phase-b";
 import { renderPhaseBEvents } from "./space-typing-events-phase-b";
 import { renderPhaseBExpedition } from "./space-typing-expedition-phase-b";
@@ -32,6 +33,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/rewards`) return renderPhaseBRewards(navigate);
   if (path === `${BASE}/warp`) return renderPhaseBWarp(navigate);
   if (path === `${BASE}/missions`) return renderPhaseBMissions(navigate);
+  if (path === `${BASE}/daily-weekly`) return renderPhaseBDailyWeekly();
   if (path === `${BASE}/expedition`) return renderPhaseBExpedition();
   if (path === `${BASE}/events`) return renderPhaseBEvents();
   if (path === `${BASE}/duel`) return renderPhaseBDuel();

@@ -28,7 +28,7 @@
     {"route":"/admin/space-typing/rewards","screen":"Rewards & Drops","domain":"economy.rewards","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/warp","screen":"Stamina / Warp","domain":"economy.warp","persistence":"child-runtime-policy","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/missions","screen":"Missions","domain":"liveOps.missions","persistence":"child-player-progression-and-session","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
-    {"route":"/admin/space-typing/daily-weekly","screen":"Daily / Weekly","domain":"liveOps.dailyWeekly","persistence":"none","applyBoundary":"none","status":"ui-prototype-not-runtime-connected"},
+    {"route":"/admin/space-typing/daily-weekly","screen":"Daily / Weekly","domain":"liveOps.dailyWeekly","persistence":"child-expansion-v2-profile-browser-local","applyBoundary":"none","status":"phase-b-ui-wired-runtime-partial-readonly"},
     {"route":"/admin/space-typing/expedition","screen":"Expedition","domain":"liveOps.expedition","persistence":"child-browser-local-expedition-run","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/events","screen":"Events","domain":"runtime.events","persistence":"child-stage-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/duel","screen":"Duel Settings","domain":"runtime.duel","persistence":"child-duel-room-session-runtime","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
