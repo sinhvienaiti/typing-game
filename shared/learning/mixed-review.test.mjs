@@ -107,6 +107,21 @@ test("Mixed Review segment plan keeps parent metadata but targets one concrete g
   assert.equal(segmentPlan.items[0].entityId, "airport");
 });
 
+test("Speaking evidence cannot finish a spelling segment even when the same game and item match", () => {
+  const session = buildMixedReviewSession(plan);
+  const progress = createMixedReviewProgress(session);
+  const segment = session.segments[0];
+  for (const activityType of ["speaking", "speaking-recall"]) {
+    const result = recordMixedReviewEvent(session, progress, {
+      version: 1, gameId: segment.game, activityType, entityType: segment.items[0].entityType,
+      entityId: segment.items[0].entityId, result: "correct", occurredAt: "2026-10-04T00:00:00Z",
+      hintUsed: false, replayUsed: false,
+    });
+    assert.equal(result.matched, false);
+    assert.deepEqual(result.progress, progress);
+  }
+});
+
 test("Mixed Review progress advances only on persisted events from the active game/item", () => {
   const session = buildMixedReviewSession(plan);
   let progress = createMixedReviewProgress(session);

@@ -188,7 +188,7 @@ export function recordMixedReviewEvent(
   }
 
   const segment = session.segments[progress.activeSegmentIndex];
-  if (segment === undefined || event.gameId !== segment.game) {
+  if (segment === undefined || event.gameId !== segment.game || event.activityType === "speaking" || event.activityType === "speaking-recall") {
     return {
       progress,
       matched: false,

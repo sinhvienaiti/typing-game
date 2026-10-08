@@ -2,6 +2,7 @@ import {
   createEmptyLearningProfile,
   migrateLearningProfile,
   normalizeVocabularyKey,
+  parseLearningEvent,
 } from "./core.mjs";
 
 export const LEARNING_BACKUP_FORMAT = "typing-game-learning-profile";
@@ -169,8 +170,20 @@ export function validateLearningProfile(profileInput) {
       );
     }
   }
+  if (profileInput.speaking !== undefined && !plainObject(profileInput.speaking)) throw new TypeError("learning profile speaking is invalid");
 
   const profile = migrateLearningProfile(profileInput);
+  for (const [key, record] of Object.entries(profile.speaking ?? {})) {
+    if (key === "" || normalizeVocabularyKey(key) !== key || !plainObject(record) || record.wordKey !== key) throw new TypeError("Speaking record key is invalid");
+    for (const field of ["attempts", "accepted", "missed", "hints", "replays"]) requireNonNegativeInteger(record, field);
+    if (record.accepted + record.missed !== record.attempts || record.hints > record.attempts || record.replays > record.attempts || !validIsoOrNull(record.lastSeenAt) || !Array.isArray(record.sourceGames) || record.sourceGames.some(game => typeof game !== "string" || !game)) throw new TypeError("Speaking counters are invalid");
+    if (!plainObject(record.activities) || Object.entries(record.activities).some(([activity, count]) => !["speaking", "speaking-recall"].includes(activity) || !Number.isSafeInteger(count) || count < 0) || Object.values(record.activities).reduce((sum, count) => sum + count, 0) !== record.attempts) throw new TypeError("Speaking activities are invalid");
+    validateSamples(record.recentEvents, "recentEvents");
+    for (const event of record.recentEvents) {
+      const parsed = parseLearningEvent(event);
+      if (parsed.entityType !== "vocabulary" || parsed.entityId !== key || !["speaking", "speaking-recall"].includes(parsed.activityType)) throw new TypeError("Speaking history is invalid");
+    }
+  }
 
   for (const [entityType, collectionName] of [
     ["vocabulary", "vocabulary"],
@@ -265,7 +278,7 @@ export function resetLearningProfileSelection(
   }
 
   const next = structuredClone(profile);
-  if (selected.has("vocabulary")) next.vocabulary = {};
+  if (selected.has("vocabulary")) { next.vocabulary = {}; if (next.speaking) next.speaking = {}; }
   if (selected.has("grammar")) next.grammar = {};
   if (selected.has("sentence")) next.sentences = {};
   next.updatedAt = new Date(updatedAt).toISOString();

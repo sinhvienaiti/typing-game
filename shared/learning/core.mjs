@@ -237,6 +237,7 @@ export function viewLearningProfile(raw) {
     vocabulary: isPlainObject(raw.vocabulary) ? raw.vocabulary : {},
     grammar: isPlainObject(raw.grammar) ? raw.grammar : {},
     sentences: isPlainObject(raw.sentences) ? raw.sentences : {},
+    ...(isPlainObject(raw.speaking) ? { speaking: raw.speaking } : {}),
   };
 }
 
@@ -245,6 +246,27 @@ export function migrateLearningProfile(raw) {
 }
 
 function applyParsedLearningEvent(next, event) {
+  if (event.activityType === "speaking" || event.activityType === "speaking-recall") {
+    if (event.entityType !== "vocabulary") throw new TypeError("Speaking events require vocabulary");
+    next.speaking ??= {};
+    const existing = Object.hasOwn(next.speaking, event.entityId) ? next.speaking[event.entityId] : {
+      wordKey: event.entityId, attempts: 0, accepted: 0, missed: 0, hints: 0, replays: 0,
+      lastSeenAt: null, sourceGames: [], activities: {}, recentEvents: [],
+    };
+    const record = { ...existing,
+      attempts: existing.attempts + 1,
+      accepted: existing.accepted + (event.result === "correct" ? 1 : 0),
+      missed: existing.missed + (event.result === "wrong" ? 1 : 0),
+      hints: existing.hints + Number(event.hintUsed), replays: existing.replays + Number(event.replayUsed),
+      lastSeenAt: laterIso(existing.lastSeenAt, event.occurredAt),
+      sourceGames: [...new Set([...existing.sourceGames, event.gameId])],
+      activities: { ...existing.activities, [event.activityType]: (existing.activities[event.activityType] ?? 0) + 1 },
+      recentEvents: boundedAppendChronological(existing.recentEvents, event),
+    };
+    Object.defineProperty(next.speaking, event.entityId, { value: record, enumerable: true, configurable: true, writable: true });
+    next.updatedAt = laterIso(next.updatedAt, event.occurredAt);
+    return next;
+  }
   const collectionName = event.entityType === "vocabulary"
     ? "vocabulary"
     : event.entityType === "grammar"

@@ -47,6 +47,12 @@ export type LearningProfile = {
   vocabulary: Record<string, LearningRecord>;
   grammar: Record<string, LearningRecord>;
   sentences: Record<string, LearningRecord>;
+  speaking?: Record<string, SpeakingRecord>;
+};
+export type SpeakingRecord = {
+  wordKey: string; attempts: number; accepted: number; missed: number; hints: number; replays: number;
+  lastSeenAt: string | null; sourceGames: string[];
+  activities: Record<string, number>; recentEvents: LearningEvent[];
 };
 
 export const LEARNING_EVENT_VERSION: 1;

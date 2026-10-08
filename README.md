@@ -156,6 +156,7 @@ The persistent project handoff and engineering history live under docs:
 - [2026-09-19 detail](./docs/changelog/2026-09-19.md)
 - [Recall Typing design](./docs/design/RECALL_TYPING_GAME.md)
 - [Karaoke Typing design](./docs/design/KARAOKE_TYPING_GAME.md)
+- [Space Typing Voice and Warp Charge local testing](./docs/SPACE_VOICE_AND_WARP_LOCAL.md)
 
 Meaningful implementation or infrastructure changes should update the current day's changelog and the project context in the same Git workflow.
 
