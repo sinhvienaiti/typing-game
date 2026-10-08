@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const EXPEDITION_AUDITED_CHILD_SHA = "053ae2dde85614361ee33c023c3f0aa33049ed66";
+const EXPEDITION_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
 const contract = JSON.parse(await readFile(resolve(childRoot, "contracts/space-typing-admin-expedition.v1.json"), "utf8"));
 const page = await readFile(resolve(root, "portal/src/admin/space-typing-expedition-phase-b.ts"), "utf8");
 const router = await readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8");
