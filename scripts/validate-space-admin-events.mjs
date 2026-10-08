@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const eventsContract = JSON.parse(await read("games/space-typing/contracts/space-typing-admin-events.v1.json"));
-const [stageScheduler, galaxyHazards, rareTargets, anomaly, recallBonus, rewardChoice, gameSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource, extendedSource] = await Promise.all([
+const [stageScheduler, galaxyHazards, rareTargets, anomaly, recallBonus, rewardChoice, gameSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/events/stage-scheduler.ts"),
   read("games/space-typing/src/events/galaxy-hazards.ts"),
   read("games/space-typing/src/events/rare-targets.ts"),
@@ -19,7 +19,6 @@ const [stageScheduler, galaxyHazards, rareTargets, anomaly, recallBonus, rewardC
   read("portal/src/admin/space-typing.ts"),
   read("admin/server.mjs"),
   read("admin/space-typing-phase-b-map.v1.json"),
-  read("portal/src/admin/space-typing-extended.ts"),
 ]);
 
 const events = eventsContract.events;
@@ -60,13 +59,12 @@ assert(!uiSource.includes("Event Enabled"), "Events UI must not expose fake runt
 assert(routerSource.includes("renderPhaseBEvents"), "Events renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/events`"), "Events route is not wired into Phase B");
 const phaseBCall = 'const phaseB = renderPhaseBAdminScreen(path, this.navigate);';
-const legacyFallbackCall = 'return renderExtendedAdminScreen(path, this.navigate)';
 assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
-assert(shellSource.includes(legacyFallbackCall), "Space Typing shell legacy fallback is missing");
-assert(shellSource.indexOf(phaseBCall) < shellSource.indexOf(legacyFallbackCall), "Phase B must intercept Events before the legacy mock renderer");
+assert(shellSource.includes('if (phaseB !== null) return phaseB;'), "Space Typing shell must return the canonical Phase B renderer");
+assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Events/mock renderer must not remain reachable from the production shell");
+assert(shellSource.includes("return this.renderUnknown(path);"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
 assert(serverSource.includes("space-typing-admin-events.v1.json"), "Admin server must load Events from the pinned child contract");
 assert(serverSource.includes("/api/admin/space-typing/events/contract"), "Admin server Events contract endpoint is missing");
-assert(extendedSource.includes("function renderEvents()"), "Legacy Events mock guard missing; remove this assertion when the legacy renderer is deleted");
 
 const phaseMap = JSON.parse(phaseMapSource);
 const row = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/events");
@@ -75,4 +73,4 @@ assert.equal(row?.persistence, "child-stage-session-runtime");
 assert.equal(row?.applyBoundary, "none");
 assert.equal(row?.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Events Admin validation passed: canonical stage runtime events are read-only and legacy calendar authoring is unreachable.");
+console.log("Space Typing Events Admin validation passed: canonical stage runtime events are read-only and no legacy calendar/mock fallback is reachable.");
