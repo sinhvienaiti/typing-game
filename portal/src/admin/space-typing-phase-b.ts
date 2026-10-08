@@ -4,6 +4,7 @@ import { renderPhaseBBackgrounds } from "./space-typing-backgrounds-phase-b";
 import { renderPhaseBCurrencies } from "./space-typing-currencies-phase-b";
 import { renderPhaseBDuel } from "./space-typing-duel-phase-b";
 import { renderPhaseBEvents } from "./space-typing-events-phase-b";
+import { renderPhaseBExpedition } from "./space-typing-expedition-phase-b";
 import { renderPhaseBFeatureGates } from "./space-typing-feature-gates-phase-b";
 import { renderPhaseBMissions } from "./space-typing-missions-phase-b";
 import { renderPhaseBQa } from "./space-typing-qa-phase-b";
@@ -31,6 +32,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/rewards`) return renderPhaseBRewards(navigate);
   if (path === `${BASE}/warp`) return renderPhaseBWarp(navigate);
   if (path === `${BASE}/missions`) return renderPhaseBMissions(navigate);
+  if (path === `${BASE}/expedition`) return renderPhaseBExpedition();
   if (path === `${BASE}/events`) return renderPhaseBEvents();
   if (path === `${BASE}/duel`) return renderPhaseBDuel();
   if (path === `${BASE}/ranked`) return renderPhaseBRanked();

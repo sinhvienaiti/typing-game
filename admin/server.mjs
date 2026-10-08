@@ -36,6 +36,7 @@ const vfxContract = JSON.parse(await readFile(resolve(root, "games/space-typing/
 const uiAssetsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-ui-assets.v1.json"), "utf8"));
 const qaContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-qa.v1.json"), "utf8"));
 const telemetryContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-telemetry.v1.json"), "utf8"));
+const expeditionContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-expedition.v1.json"), "utf8"));
 const store = new SpaceTypingRevisionStore({ rootDir: process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing"), contract });
 const musicAssets = new MusicAssetService({ rootDir: root });
 await store.initialize(createDefaultSpaceTypingConfig(contract));
@@ -73,6 +74,7 @@ const server=createServer(async(request,response)=>{try{
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/ui-assets/contract"){json(response,200,uiAssetsContract);return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/qa/contract"){json(response,200,qaContract);return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/telemetry/contract"){json(response,200,telemetryContract);return;}
+  if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/expedition/contract"){json(response,200,expeditionContract);return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/state"){json(response,200,{state:await store.getState(),active:await store.getActiveRevision(),history:await store.listRevisions()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/runtime"){json(response,200,{activeRevision:(await store.getState()).activeRevision,config:await store.getRuntimeConfig()});return;}
   if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/typing-content/catalog"){json(response,200,await queryTypingContentCatalog({rootDir:root,searchParams:url.searchParams}));return;}
