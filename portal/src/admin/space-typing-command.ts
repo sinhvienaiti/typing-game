@@ -12,7 +12,7 @@ const COMMANDS = [
   ["Missions", `${BASE}/missions`, "Live Ops"], ["Daily / Weekly", `${BASE}/daily-weekly`, "Live Ops"], ["Expedition", `${BASE}/expedition`, "Live Ops"], ["Events", `${BASE}/events`, "Live Ops"],
   ["Duel Settings", `${BASE}/duel`, "PvP"], ["Ranked", `${BASE}/ranked`, "PvP"], ["Alternative Modes", `${BASE}/alternative-modes`, "PvP"],
   ["Backgrounds", `${BASE}/backgrounds`, "Visuals"], ["VFX", `${BASE}/vfx`, "Visuals"], ["UI Assets", `${BASE}/ui-assets`, "Visuals"],
-  ["General Settings", `${BASE}/settings`, "System"], ["Feature Flags", `${BASE}/flags`, "System"], ["History & Publish", `${BASE}/history`, "System"], ["QA Sandbox", `${BASE}/qa`, "Developer"],
+  ["General Settings", `${BASE}/settings`, "System"], ["Feature Gates", `${BASE}/feature-gates`, "System"], ["History & Publish", `${BASE}/history`, "System"], ["QA Sandbox", `${BASE}/qa`, "Developer"],
 ] as const;
 
 let current: HTMLElement | null = null;
