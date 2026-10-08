@@ -9096,19 +9096,63 @@
         "license-review",
         "cross-game-smoke"
       ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-104",
+      "phase": "E04",
+      "state": "draft",
+      "category": "phrases",
+      "records": 40,
+      "recordSets": [
+        {
+          "id": "scale-collocations",
+          "path": "content/english/phrases/e04-scale-104-collocations.json",
+          "generated": false,
+          "expectedCount": 40,
+          "actualCount": 40,
+          "byState": {
+            "draft": 40
+          },
+          "byCefr": {
+            "C1": 37,
+            "B2": 3
+          },
+          "digest": 78128
+        }
+      ],
+      "byState": {
+        "draft": 40
+      },
+      "byCefr": {
+        "C1": 37,
+        "B2": 3
+      },
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ]
     }
   ],
   "totals": {
-    "records": 9473,
+    "records": 9513,
     "byState": {
-      "draft": 9473
+      "draft": 9513
     },
     "byCefr": {
       "A1": 1376,
       "A2": 1208,
       "B1": 1174,
-      "B2": 2292,
-      "C1": 2494,
+      "B2": 2295,
+      "C1": 2531,
       "C2": 239
     }
   }
