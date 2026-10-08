@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("games/space-typing/contracts/space-typing-admin-ranked.v1.json"));
-const [rankedSource, authoritySource, serviceSource, wsSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource, extendedSource] = await Promise.all([
+const [rankedSource, authoritySource, serviceSource, wsSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/ranked.ts"),
   read("games/space-typing/src/duel/authority.ts"),
   read("games/space-typing/server/duel/ranked-service.ts"),
@@ -16,7 +16,6 @@ const [rankedSource, authoritySource, serviceSource, wsSource, uiSource, routerS
   read("portal/src/admin/space-typing.ts"),
   read("admin/server.mjs"),
   read("admin/space-typing-phase-b-map.v1.json"),
-  read("portal/src/admin/space-typing-extended.ts"),
 ]);
 
 const ranked = contract.ranked;
@@ -99,11 +98,12 @@ assert(!uiSource.includes("api.publish"), "Ranked Phase B UI must not publish sy
 assert(routerSource.includes("renderPhaseBRanked"), "Ranked renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/ranked`"), "Ranked route is not wired into Phase B");
 const phaseBCall = "const phaseB = renderPhaseBAdminScreen(path, this.navigate);";
-const legacyCall = "return renderExtendedAdminScreen(path, this.navigate) ?? this.renderUnknown(path);";
-assert(shellSource.indexOf(phaseBCall) >= 0 && shellSource.indexOf(legacyCall) >= 0 && shellSource.indexOf(phaseBCall) < shellSource.indexOf(legacyCall), "Phase B must intercept Ranked before legacy mock renderer");
+assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
+assert(shellSource.includes("if (phaseB !== null) return phaseB;"), "Space Typing shell must return the canonical Phase B renderer");
+assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Ranked/mock renderer must not remain reachable from the production shell");
+assert(shellSource.includes("return this.renderUnknown(path);"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
 assert(serverSource.includes("space-typing-admin-ranked.v1.json"), "Admin server must load Ranked from pinned child contract");
 assert(serverSource.includes("/api/admin/space-typing/ranked/contract"), "Admin server Ranked contract endpoint is missing");
-assert(extendedSource.includes("function renderRanked()"), "Legacy Ranked mock guard missing; remove this assertion when legacy renderer is deleted");
 
 const phaseMap = JSON.parse(phaseMapSource);
 const row = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/ranked");
