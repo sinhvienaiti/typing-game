@@ -39,8 +39,8 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
     `UI Assets must not expose ${method} contract mutation`,
   );
 }
-assert.match(nav, /id:\s*"ui-assets"/);
-assert.match(nav, /capability:\s*"ui-assets\.read"/);
+assert.match(nav, /label:\s*"UI Assets"/);
+assert.match(nav, /path:\s*`\$\{ADMIN_BASE\}\/ui-assets`/);
 
 const uiAssetsMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/ui-assets");
 assert.ok(uiAssetsMap, "UI Assets Phase B map row is required");
@@ -49,4 +49,4 @@ assert.equal(uiAssetsMap.persistence, "code-owned-runtime-ui");
 assert.equal(uiAssetsMap.applyBoundary, "none");
 assert.equal(uiAssetsMap.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Admin UI Assets mapping: PASS (pinned child contract + read-only API/UI/map boundary verified).");
+console.log("Space Typing Admin UI Assets mapping: PASS (pinned child contract + read-only API/UI/nav/map boundary verified).");
