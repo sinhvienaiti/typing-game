@@ -1,10 +1,139 @@
+export type AudioCategoryDefaults = {
+  typing: number;
+  combat: number;
+  warnings: number;
+  ui: number;
+  rewards: number;
+};
+
 export type AudioDefaults = {
   master: number;
   pronunciation: number;
   music: number;
   ambient: number;
   sfx: number;
+  /** Legacy revisions may omit this B03 field. Child runtime supports 0..2. */
+  credit?: number;
   announcer: number;
+  /** Legacy revisions may omit these B03 category preferences. */
+  categories?: Partial<AudioCategoryDefaults>;
+};
+
+export type PlaylistSelectionMode = "shuffle-bag" | "ordered";
+export type PlaylistAssignment =
+  | { kind: "inherit" }
+  | { kind: "replace"; trackIds: string[]; selectionMode?: PlaylistSelectionMode };
+export type WorldMusicBossPolicy = {
+  common?: PlaylistAssignment;
+  mini?: PlaylistAssignment;
+  world?: PlaylistAssignment;
+  major?: PlaylistAssignment;
+};
+export type WorldMusicPolicyEntry = {
+  normal?: PlaylistAssignment;
+  boss?: WorldMusicBossPolicy;
+};
+export type WorldMusicPolicy = {
+  configRevision: string;
+  disabledTrackIds?: string[];
+  stages?: Record<string, WorldMusicPolicyEntry>;
+  worlds?: Record<string, WorldMusicPolicyEntry>;
+  galaxies?: Record<string, WorldMusicPolicyEntry>;
+  global?: WorldMusicPolicyEntry;
+};
+
+export type GeneralSettingsConfig = {
+  gameDefaults: {
+    defaultMode: "campaign" | "recall" | "expedition";
+    defaultShip: string;
+    difficulty: "easy" | "normal" | "hard";
+    tutorialEnabled: boolean;
+    pronunciationDefault: boolean;
+    autoSave: boolean;
+  };
+  network: {
+    minimumVersion: string;
+    autoSaveIntervalSeconds: number;
+    reconnectWindowSeconds: number;
+    offlinePlay: boolean;
+    telemetry: boolean;
+  };
+  maintenance: {
+    enabled: boolean;
+    message: string;
+  };
+};
+
+export type FeatureFlagScope = "all" | "new-players" | "cohort" | "environment" | "accounts";
+export type FeatureFlagRisk = "normal" | "economy" | "competitive" | "save";
+export type FeatureFlagConfig = {
+  enabled: boolean;
+  rolloutPercent: number;
+  scope: FeatureFlagScope;
+  risk: FeatureFlagRisk;
+};
+
+export type CoreStatKey =
+  | "hull"
+  | "shield"
+  | "firepower"
+  | "armor"
+  | "energy"
+  | "reactor"
+  | "focus"
+  | "ward"
+  | "luck"
+  | "salvage";
+
+export type ShipVisualProfile = {
+  silhouette: "spear" | "fortress" | "arc" | "phantom" | "crown" | "blade";
+  primary: string;
+  secondary: string;
+  accent: string;
+  core: string;
+  engine: string;
+  glow: string;
+  wingSpan: number;
+  bodyLength: number;
+  engineCount: 1 | 2 | 3;
+};
+
+export type ShipAdminOverride = {
+  name?: string;
+  unlockStage?: number;
+  role?: string;
+  summary?: string;
+  passiveName?: string;
+  activeName?: string;
+  ultimateName?: string;
+  statBonus?: Partial<Record<CoreStatKey, number>>;
+  visual?: Partial<ShipVisualProfile>;
+};
+
+export type ShipAdminPolicy = {
+  configRevision: string;
+  ships?: Record<string, ShipAdminOverride>;
+};
+
+export type ShipAdminPreviewItem = {
+  id: string;
+  name: string;
+  unlockStage: number;
+  role: string;
+  summary: string;
+  passiveName: string;
+  activeName: string;
+  ultimateName: string;
+  statBonus: Partial<Record<CoreStatKey, number>>;
+  visual: ShipVisualProfile;
+  assetId: string;
+  overridden: boolean;
+};
+
+export type ShipAdminPreview = {
+  protocolVersion: 1;
+  configRevision: string;
+  ships: ShipAdminPreviewItem[];
 };
 
 export type SpaceTypingAdminConfig = {
@@ -18,8 +147,20 @@ export type SpaceTypingAdminConfig = {
   worldMusic: {
     policyRevision: string;
     assignments: Record<string, unknown>;
+    /** Additive B04.2 canonical policy: Global + Galaxy + World + Stage. */
+    publishedPolicy?: WorldMusicPolicy;
   };
+  /** Additive B06 content namespace; legacy v1 revisions may omit it. */
+  content?: {
+    ships?: ShipAdminPolicy;
+  };
+  /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
+  system?: GeneralSettingsConfig;
+  /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
+  featureFlags?: Record<string, FeatureFlagConfig>;
 };
+
+export type AdminRevisionRelation = "active" | "ancestor" | "draft";
 
 export type AdminRevision = {
   revision: string;
@@ -29,6 +170,19 @@ export type AdminRevision = {
   message: string;
   config: SpaceTypingAdminConfig;
   active?: boolean;
+  relation?: AdminRevisionRelation;
+  publishable?: boolean;
+  rollbackEligible?: boolean;
+};
+
+export type AdminRevisionValidation = {
+  revision: string;
+  valid: true;
+  activeRevision: string;
+  parentRevision: string | null;
+  relation: AdminRevisionRelation;
+  publishable: boolean;
+  rollbackEligible: boolean;
 };
 
 export type AdminStatePayload = {
@@ -40,6 +194,11 @@ export type AdminStatePayload = {
   };
   active: AdminRevision;
   history: AdminRevision[];
+};
+
+export type AdminRuntimePayload = {
+  activeRevision: string;
+  config: SpaceTypingAdminConfig;
 };
 
 export type WorldMusicPreviewState = {
@@ -58,6 +217,7 @@ export type WorldMusicPreview = {
   configRevision: string;
   manifestRevision: string;
   musicMode: "map" | "random";
+  stageNumber?: number;
   worlds: Array<{
     worldId: string;
     name: string;
@@ -122,13 +282,32 @@ export class SpaceTypingAdminApi {
     return this.request<AdminStatePayload>("/api/admin/space-typing/state");
   }
 
+  getRuntime(): Promise<AdminRuntimePayload> {
+    return this.request<AdminRuntimePayload>("/api/admin/space-typing/runtime");
+  }
+
   previewWorldMusic(input: {
-    publishedPolicy?: unknown;
+    publishedPolicy?: WorldMusicPolicy;
     musicMode?: "map" | "random";
+    stageNumber?: number;
   } = {}): Promise<WorldMusicPreview> {
     return this.request<WorldMusicPreview>("/api/admin/space-typing/world-music/preview", {
       method: "POST",
       body: JSON.stringify(input),
+    });
+  }
+
+  previewShips(input: { policy?: ShipAdminPolicy } = {}): Promise<ShipAdminPreview> {
+    return this.request<ShipAdminPreview>("/api/admin/space-typing/ships/preview", {
+      method: "POST",
+      body: JSON.stringify(input),
+    });
+  }
+
+  validateRevision(revision: string): Promise<AdminRevisionValidation> {
+    return this.request<AdminRevisionValidation>("/api/admin/space-typing/validate-revision", {
+      method: "POST",
+      body: JSON.stringify({ revision }),
     });
   }
 

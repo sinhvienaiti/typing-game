@@ -31,6 +31,173 @@ async function writeJsonAtomic(path, value) {
   await rename(temporary, path);
 }
 
+function object(value, path) {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) {
+    throw new AdminValidationError(`${path} must be an object.`);
+  }
+  return value;
+}
+
+function string(value, path, { min = 1, max = 200, pattern } = {}) {
+  if (typeof value !== "string" || value.length < min || value.length > max) {
+    throw new AdminValidationError(`${path} must be a string between ${min} and ${max} characters.`);
+  }
+  if (pattern && !pattern.test(value)) {
+    throw new AdminValidationError(`${path} has an invalid format.`);
+  }
+  return value;
+}
+
+function boolean(value, path) {
+  if (typeof value !== "boolean") throw new AdminValidationError(`${path} must be boolean.`);
+  return value;
+}
+
+function number(value, path, { min = Number.NEGATIVE_INFINITY, max = Number.POSITIVE_INFINITY } = {}) {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < min || value > max) {
+    throw new AdminValidationError(`${path} must be a finite number between ${min} and ${max}.`);
+  }
+  return value;
+}
+
+function enumValue(value, path, allowed) {
+  if (!allowed.includes(value)) {
+    throw new AdminValidationError(`${path} must be one of: ${allowed.join(", ")}.`);
+  }
+  return value;
+}
+
+function rejectUnknownKeys(value, path, allowed) {
+  for (const key of Object.keys(value)) {
+    if (!allowed.includes(key)) throw new AdminValidationError(path + "." + key + " is not supported by the current canonical schema.");
+  }
+}
+
+function validateTrackIds(value, path, { allowEmpty = true } = {}) {
+  if (!Array.isArray(value)) throw new AdminValidationError(path + " must be an array.");
+  if (!allowEmpty && value.length === 0) throw new AdminValidationError(path + " must contain at least one track id.");
+  const seen = new Set();
+  for (const [index, id] of value.entries()) {
+    string(id, path + "[" + index + "]", { max: 160, pattern: /^[a-z0-9][a-z0-9._-]*$/ });
+    if (seen.has(id)) throw new AdminValidationError(path + " contains duplicate track id " + id + ".");
+    seen.add(id);
+  }
+}
+
+function validatePlaylistAssignment(value, path) {
+  object(value, path);
+  rejectUnknownKeys(value, path, ["kind", "trackIds", "selectionMode"]);
+  enumValue(value.kind, path + ".kind", ["inherit", "replace"]);
+  if (value.kind === "inherit") {
+    if (value.trackIds !== undefined || value.selectionMode !== undefined) {
+      throw new AdminValidationError(path + " inherit assignments cannot include trackIds/selectionMode.");
+    }
+    return;
+  }
+  validateTrackIds(value.trackIds, path + ".trackIds", { allowEmpty: false });
+  if (value.selectionMode !== undefined) {
+    enumValue(value.selectionMode, path + ".selectionMode", ["shuffle-bag", "ordered"]);
+  }
+}
+
+function validateWorldMusicEntry(value, path) {
+  object(value, path);
+  rejectUnknownKeys(value, path, ["normal", "boss"]);
+  if (value.normal !== undefined) validatePlaylistAssignment(value.normal, path + ".normal");
+  if (value.boss !== undefined) {
+    const boss = object(value.boss, path + ".boss");
+    rejectUnknownKeys(boss, path + ".boss", ["common", "mini", "world", "major"]);
+    for (const key of ["common", "mini", "world", "major"]) {
+      if (boss[key] !== undefined) validatePlaylistAssignment(boss[key], path + ".boss." + key);
+    }
+  }
+}
+
+function validateWorldMusic(worldMusic) {
+  object(worldMusic, "worldMusic");
+  string(worldMusic.policyRevision, "worldMusic.policyRevision", { max: 120, pattern: /^[a-z0-9][a-z0-9._-]*$/ });
+  object(worldMusic.assignments, "worldMusic.assignments");
+  if (worldMusic.publishedPolicy === undefined) return;
+  const policy = object(worldMusic.publishedPolicy, "worldMusic.publishedPolicy");
+  rejectUnknownKeys(policy, "worldMusic.publishedPolicy", ["configRevision", "disabledTrackIds", "stages", "worlds", "galaxies", "global"]);
+  string(policy.configRevision, "worldMusic.publishedPolicy.configRevision", { max: 160, pattern: /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/ });
+  if (policy.disabledTrackIds !== undefined) validateTrackIds(policy.disabledTrackIds, "worldMusic.publishedPolicy.disabledTrackIds");
+  if (policy.global !== undefined) validateWorldMusicEntry(policy.global, "worldMusic.publishedPolicy.global");
+  if (policy.stages !== undefined) {
+    const stages = object(policy.stages, "worldMusic.publishedPolicy.stages");
+    for (const [stageId, entry] of Object.entries(stages)) {
+      string(stageId, "worldMusic stage id", { max: 4, pattern: /^(?:[1-9]\d{0,2}|1000)$/ });
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.stages." + stageId);
+    }
+  }
+  if (policy.worlds !== undefined) {
+    const worlds = object(policy.worlds, "worldMusic.publishedPolicy.worlds");
+    for (const [worldId, entry] of Object.entries(worlds)) {
+      string(worldId, "worldMusic world id", { max: 8, pattern: /^world-(?:0[1-9]|[1-4]\d|50)$/ });
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.worlds." + worldId);
+    }
+  }
+  if (policy.galaxies !== undefined) {
+    const galaxies = object(policy.galaxies, "worldMusic.publishedPolicy.galaxies");
+    for (const [galaxyId, entry] of Object.entries(galaxies)) {
+      string(galaxyId, "worldMusic galaxy id", { max: 2, pattern: /^(?:[1-9]|10)$/ });
+      validateWorldMusicEntry(entry, "worldMusic.publishedPolicy.galaxies." + galaxyId);
+    }
+  }
+}
+
+function validateAudio(audio) {
+  object(audio, "audio");
+  string(audio.profileId, "audio.profileId", { max: 80, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+  const defaults = object(audio.defaults, "audio.defaults");
+  for (const key of ["master", "pronunciation", "music", "ambient", "sfx", "announcer"]) {
+    number(defaults[key], `audio.defaults.${key}`, { min: 0, max: 1 });
+  }
+  if (defaults.credit !== undefined) number(defaults.credit, "audio.defaults.credit", { min: 0, max: 2 });
+  if (defaults.categories !== undefined) {
+    const categories = object(defaults.categories, "audio.defaults.categories");
+    for (const key of ["typing", "combat", "warnings", "ui", "rewards"]) {
+      number(categories[key], `audio.defaults.categories.${key}`, { min: 0, max: 1 });
+    }
+  }
+}
+
+function validateSystem(system) {
+  object(system, "system");
+  const gameDefaults = object(system.gameDefaults, "system.gameDefaults");
+  enumValue(gameDefaults.defaultMode, "system.gameDefaults.defaultMode", ["campaign", "recall", "expedition"]);
+  string(gameDefaults.defaultShip, "system.gameDefaults.defaultShip", { max: 80, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+  enumValue(gameDefaults.difficulty, "system.gameDefaults.difficulty", ["easy", "normal", "hard"]);
+  boolean(gameDefaults.tutorialEnabled, "system.gameDefaults.tutorialEnabled");
+  boolean(gameDefaults.pronunciationDefault, "system.gameDefaults.pronunciationDefault");
+  boolean(gameDefaults.autoSave, "system.gameDefaults.autoSave");
+
+  const network = object(system.network, "system.network");
+  string(network.minimumVersion, "system.network.minimumVersion", { max: 40, pattern: /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/ });
+  number(network.autoSaveIntervalSeconds, "system.network.autoSaveIntervalSeconds", { min: 5, max: 3600 });
+  number(network.reconnectWindowSeconds, "system.network.reconnectWindowSeconds", { min: 1, max: 600 });
+  boolean(network.offlinePlay, "system.network.offlinePlay");
+  boolean(network.telemetry, "system.network.telemetry");
+
+  const maintenance = object(system.maintenance, "system.maintenance");
+  boolean(maintenance.enabled, "system.maintenance.enabled");
+  string(maintenance.message, "system.maintenance.message", { min: 0, max: 500 });
+}
+
+function validateFeatureFlags(featureFlags) {
+  object(featureFlags, "featureFlags");
+  const scopes = ["all", "new-players", "cohort", "environment", "accounts"];
+  const risks = ["normal", "economy", "competitive", "save"];
+  for (const [id, flag] of Object.entries(featureFlags)) {
+    string(id, "featureFlags id", { max: 100, pattern: /^[a-z0-9][a-z0-9-]*$/ });
+    object(flag, `featureFlags.${id}`);
+    boolean(flag.enabled, `featureFlags.${id}.enabled`);
+    number(flag.rolloutPercent, `featureFlags.${id}.rolloutPercent`, { min: 0, max: 100 });
+    enumValue(flag.scope, `featureFlags.${id}.scope`, scopes);
+    enumValue(flag.risk, `featureFlags.${id}.risk`, risks);
+  }
+}
+
 export class RevisionStore {
   constructor({ rootDir, contract, now = () => new Date() }) {
     this.rootDir = rootDir;
@@ -54,12 +221,13 @@ export class RevisionStore {
         throw new AdminValidationError(`${key} must equal ${JSON.stringify(expected)}.`);
       }
     }
-    if (config.audio === null || typeof config.audio !== "object") {
-      throw new AdminValidationError("audio config is required.");
-    }
-    if (config.worldMusic === null || typeof config.worldMusic !== "object") {
-      throw new AdminValidationError("worldMusic config is required.");
-    }
+    validateAudio(config.audio);
+    validateWorldMusic(config.worldMusic);
+
+    // Phase B namespaces are additive to v1 so existing local revisions remain readable.
+    // Once present, they are strictly validated before a revision can be written/published.
+    if (config.system !== undefined) validateSystem(config.system);
+    if (config.featureFlags !== undefined) validateFeatureFlags(config.featureFlags);
     return config;
   }
 
@@ -128,12 +296,44 @@ export class RevisionStore {
     const revisions = await Promise.all(
       names.map((name) => readJson(join(this.revisionsDir, name))),
     );
+    const byId = new Map(revisions.map((revision) => [revision.revision, revision]));
+    const ancestors = new Set();
+    let cursor = byId.get(state.activeRevision);
+    while (cursor?.parentRevision) {
+      ancestors.add(cursor.parentRevision);
+      cursor = byId.get(cursor.parentRevision);
+    }
     return revisions
       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-      .map((revision) => ({
-        ...revision,
-        active: revision.revision === state.activeRevision,
-      }));
+      .map((revision) => {
+        const active = revision.revision === state.activeRevision;
+        const relation = active ? "active" : ancestors.has(revision.revision) ? "ancestor" : "draft";
+        return {
+          ...revision,
+          active,
+          relation,
+          publishable: relation === "draft" && revision.parentRevision === state.activeRevision,
+          rollbackEligible: relation === "ancestor",
+        };
+      });
+  }
+
+  async validateRevision(revision) {
+    const state = await this.getState();
+    const target = await this.getRevision(revision);
+    this.validateConfig(target.config);
+    const history = await this.listRevisions();
+    const entry = history.find((candidate) => candidate.revision === revision);
+    if (!entry) throw new AdminValidationError(`Revision ${revision} does not exist.`);
+    return {
+      revision,
+      valid: true,
+      activeRevision: state.activeRevision,
+      parentRevision: target.parentRevision,
+      relation: entry.relation,
+      publishable: entry.publishable,
+      rollbackEligible: entry.rollbackEligible,
+    };
   }
 
   async createRevision({ baseRevision, config, author = "local-admin", message = "Admin draft" }) {
@@ -167,6 +367,11 @@ export class RevisionStore {
       );
     }
     const target = await this.getRevision(revision);
+    if (target.parentRevision !== state.activeRevision) {
+      throw new AdminConflictError(
+        `Revision ${revision} was based on ${target.parentRevision ?? "no parent"}; active revision is ${state.activeRevision}. Create a fresh draft before publishing.`,
+      );
+    }
     this.validateConfig(target.config);
     const nextState = {
       version: 1,
@@ -179,6 +384,35 @@ export class RevisionStore {
   }
 
   async rollback({ targetRevision, expectedActiveRevision }) {
-    return this.publish({ revision: targetRevision, expectedActiveRevision });
+    const state = await this.getState();
+    if (state.activeRevision !== expectedActiveRevision) {
+      throw new AdminConflictError(
+        `Active revision changed from ${expectedActiveRevision} to ${state.activeRevision}.`,
+      );
+    }
+    let cursor = await this.getRevision(state.activeRevision);
+    let eligible = false;
+    while (cursor.parentRevision) {
+      if (cursor.parentRevision === targetRevision) {
+        eligible = true;
+        break;
+      }
+      cursor = await this.getRevision(cursor.parentRevision);
+    }
+    if (!eligible) {
+      throw new AdminValidationError(
+        `Rollback target ${targetRevision} must be a published ancestor of active revision ${state.activeRevision}.`,
+      );
+    }
+    const target = await this.getRevision(targetRevision);
+    this.validateConfig(target.config);
+    const nextState = {
+      version: 1,
+      activeRevision: targetRevision,
+      generation: state.generation + 1,
+      updatedAt: this.now().toISOString(),
+    };
+    await writeJsonAtomic(this.statePath, nextState);
+    return nextState;
   }
 }

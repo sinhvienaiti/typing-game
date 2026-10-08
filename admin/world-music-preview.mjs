@@ -3,11 +3,20 @@ import { resolve } from "node:path";
 
 export class WorldMusicPreviewError extends Error {}
 
+export function parseWorldMusicPreviewOutput(output) {
+  const marker = output.match(/\{\s*"protocolVersion"\s*:/);
+  if (marker?.index === undefined) {
+    throw new Error("preview JSON payload marker not found");
+  }
+  return JSON.parse(output.slice(marker.index));
+}
+
 export async function runWorldMusicPreview({
   rootDir,
   contract,
   publishedPolicy,
   musicMode = "map",
+  stageNumber,
   timeoutMs = 10000,
 }) {
   const protocol = contract?.worldMusic?.previewProtocol;
@@ -16,6 +25,12 @@ export async function runWorldMusicPreview({
   }
   if (musicMode !== "map" && musicMode !== "random") {
     throw new WorldMusicPreviewError("musicMode must be map or random.");
+  }
+  if (
+    stageNumber !== undefined &&
+    (!Number.isInteger(stageNumber) || stageNumber < 1 || stageNumber > 1000)
+  ) {
+    throw new WorldMusicPreviewError("stageNumber must be an integer from 1 to 1000.");
   }
 
   const childDir = resolve(rootDir, "games/space-typing");
@@ -67,7 +82,10 @@ export async function runWorldMusicPreview({
         return;
       }
       try {
-        const preview = JSON.parse(Buffer.concat(stdout).toString("utf8"));
+        // pnpm may print supply-chain verification/status text to stdout before
+        // the child CLI payload on a cold install. Anchor parsing at the
+        // protocol envelope instead of assuming stdout contains JSON only.
+        const preview = parseWorldMusicPreviewOutput(Buffer.concat(stdout).toString("utf8"));
         if (preview?.protocolVersion !== protocol.version || !Array.isArray(preview?.worlds)) {
           throw new Error("invalid preview payload");
         }
@@ -85,6 +103,7 @@ export async function runWorldMusicPreview({
   child.stdin.end(
     JSON.stringify({
       musicMode,
+      ...(stageNumber === undefined ? {} : { stageNumber }),
       ...(publishedPolicy === undefined ? {} : { publishedPolicy }),
     }),
   );

@@ -12,8 +12,8 @@ case "${1:-}" in
     echo
     echo "Play mode does not pull Git, update submodules, or install dependencies."
     echo "It automatically refreshes local Space Typing source art when needed,"
-    echo "refreshes stale static builds, switches nginx to static Play mode,"
-    echo "and opens https://typing-game.local."
+    echo "refreshes stale static builds, starts the read-only Admin runtime bridge,"
+    echo "switches nginx to static Play mode, and opens https://typing-game.local."
     exit 0
     ;;
   *)
@@ -107,8 +107,37 @@ prepare_space_art() {
   pnpm --dir "$game_dir" art:prepare
 }
 
+ensure_admin_runtime_service() {
+  local endpoint="http://127.0.0.1:3199/api/runtime/space-typing/ships"
+  local log_dir="$ROOT_DIR/.local/admin"
+  local pid_file="$log_dir/server.pid"
+
+  mkdir -p "$log_dir"
+  rm -f "$pid_file"
+  nohup node "$ROOT_DIR/admin/server.mjs" >"$log_dir/server.log" 2>&1 &
+  local server_pid="$!"
+  echo "$server_pid" >"$pid_file"
+
+  local attempt
+  for attempt in 1 2 3 4 5; do
+    sleep 0.2
+    if ! kill -0 "$server_pid" 2>/dev/null; then
+      break
+    fi
+    if curl -fsS --max-time 1 "$endpoint" >/dev/null 2>&1; then
+      echo "  ✓ Admin runtime bridge started from current source (PID $server_pid)."
+      return
+    fi
+  done
+
+  rm -f "$pid_file"
+  echo "Unable to start the Space Typing Admin runtime bridge on port 3199."
+  echo "See $log_dir/server.log"
+  exit 1
+}
+
 echo "[1/5] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100 3199
 
 echo "[2/5] Refreshing local Space Typing art..."
 prepare_space_art
@@ -185,7 +214,8 @@ build_if_needed \
   "games/monkeytype/pnpm-lock.yaml" \
   "games/monkeytype/turbo.json"
 
-echo "[4/5] Switching nginx to static Play mode..."
+echo "[4/5] Starting runtime services and switching nginx to static Play mode..."
+ensure_admin_runtime_service
 bash scripts/setup-nginx.sh play
 node games/space-typing/scripts/local-duel.mjs start
 
