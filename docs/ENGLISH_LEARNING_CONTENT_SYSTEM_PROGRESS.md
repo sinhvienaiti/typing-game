@@ -7,7 +7,7 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest fully CI-verified scale-up checkpoint before scale-96 publication: `cb2f24f492f141f38f04e2725a162691548846ef` — scale-95 publication state verified by English Content Master Plan Acceptance #276, English Content Full Validation #226 and Platform CI #1423; published output: `34fd31d8add24592ef5f056664861aeb0f47d881`.
-- Scale-95 publication checkpoint `cb2f24f492f141f38f04e2725a162691548846ef` is fully verified; scale-96 is the current publication unit.
+- Scale-96 bot publication commit `29b6507fde5e65c2dc7638d0f3a4a828c08830b6` is complete; the current step is normal-user checkpoint CI verification for that publication state.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
