@@ -154,5 +154,15 @@ NONE.
 4. If continuing engineering work, only address concrete review/regression findings. Do not recreate removed legacy mock modules or invent new Phase B adapters now that all mapped screens are closed.
 5. Any new product capability beyond current runtime contracts is a new scope/milestone and must first identify a real child owner/apply boundary.
 
+## POST-PHASE-B CONTINUATION
+
+Phase B being complete does **not** mean all Space Typing engineering is complete.
+
+For remaining product/runtime work, the cross-tab source of truth is:
+
+`docs/SPACE_TYPING_REMAINING_IMPLEMENTATION_PROGRESS.md`
+
+When the user asks to continue Space Typing after Phase B, read that file, fetch latest parent/child HEADs, and resume from its first unfinished milestone. Do not reopen completed Admin Phase B work unless current Git shows a concrete regression.
+
 ## STATUS
 `PHASE_B_COMPLETE_CANONICAL_CLEANUP_GREEN` — final regression triage and legacy cleanup are green. Admin CI #596 and Platform CI #1575 pass on `f158945f20257fec8add85a71aba0e01f2c95b83`; child CI #1759 passes on pinned child `8128a2a5a7713fff80cd1286b607de6a3e7190f7`.
