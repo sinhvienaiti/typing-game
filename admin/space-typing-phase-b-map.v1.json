@@ -36,7 +36,7 @@
     {"route":"/admin/space-typing/alternative-modes","screen":"Alternative Modes","domain":"runtime.alternativeModes","persistence":"none","applyBoundary":"none","status":"phase-b-ui-wired-runtime-absence-diagnostic"},
     {"route":"/admin/space-typing/backgrounds","screen":"Backgrounds","domain":"visuals.backgrounds","persistence":"source-owned-compositions-and-generated-kit-manifests","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/vfx","screen":"VFX","domain":"visuals.vfx","persistence":"code-owned-runtime-vfx","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
-    {"route":"/admin/space-typing/ui-assets","screen":"UI Assets","domain":"visuals.uiAssets","persistence":"authored-asset-manifest","applyBoundary":"new-scene","status":"mapped-awaiting-adapter"},
+    {"route":"/admin/space-typing/ui-assets","screen":"UI Assets","domain":"visuals.uiAssets","persistence":"code-owned-runtime-ui","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly"},
     {"route":"/admin/space-typing/settings","screen":"General Settings","domain":"system","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired"},
     {"route":"/admin/space-typing/feature-gates","screen":"Feature Gates","domain":"runtime.featureGates","persistence":"child-browser-local-storage","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly","legacyRouteAlias":"/admin/space-typing/flags"},
     {"route":"/admin/space-typing/history","screen":"History & Publish","domain":"revisions","persistence":"immutable-revision-store","applyBoundary":"cas-publish","status":"phase-b-ui-wired"},
