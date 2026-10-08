@@ -16,7 +16,7 @@ const [missionSource, saveSource, objectiveSource, mainSource, gameSource, child
   read("games/space-typing/.github/workflows/ci.yml"),
   read("portal/src/admin/space-typing-missions-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
-  read("portal/src/admin/space-typing-daily-weekly.ts"),
+  read("portal/src/admin/space-typing-daily-weekly-phase-b.ts"),
 ]);
 
 const missions = contract.missions;
@@ -69,14 +69,17 @@ assert(uiSource.includes("Progression Missions"), "Missions UI must expose canon
 assert(uiSource.includes("Stage Objectives"), "Missions UI must expose canonical stage objectives");
 assert(uiSource.includes("PlayerSave.progression") || uiSource.includes("missionPersistenceOwner"), "Missions UI must expose progression persistence ownership");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Missions UI must make the read-only boundary explicit");
-assert(uiSource.includes("Daily / Weekly (UI mock)"), "Missions UI must keep Daily / Weekly labeled as mock");
+assert(uiSource.includes('button("Daily / Weekly"'), "Missions UI must link to the canonical Daily / Weekly runtime-boundary screen");
+assert(!uiSource.includes("UI mock"), "Missions UI must not label Daily / Weekly as a mock surface");
 assert(!uiSource.includes("api.createRevision"), "Missions UI must not create config revisions");
 assert(!uiSource.includes("api.publish"), "Missions UI must not publish config revisions");
 assert(!uiSource.includes('button("Save Draft"'), "Missions UI must not render Save Draft");
 assert(routerSource.includes("renderPhaseBMissions") && routerSource.includes("`${BASE}/missions`"), "Missions renderer route is not wired");
 
-assert(dailyWeeklySource.includes("UI MOCK · NOT RUNTIME CONNECTED"), "Daily / Weekly must be explicitly disconnected from runtime");
-assert(dailyWeeklySource.includes("Authoring is disabled"), "Daily / Weekly must explain its authoring boundary");
-assert(!dailyWeeklySource.includes("+ New Rotation"), "Disconnected Daily / Weekly UI must not expose fake authoring actions");
+assert(dailyWeeklySource.includes("/api/admin/space-typing/daily-weekly/contract"), "Daily / Weekly must read the authenticated canonical sidecar contract");
+assert(dailyWeeklySource.includes("DAILY · RUNTIME-BACKED"), "Daily / Weekly must expose canonical Daily runtime ownership");
+assert(dailyWeeklySource.includes("WEEKLY · NOT IMPLEMENTED"), "Daily / Weekly must expose explicit Weekly runtime absence");
+assert(dailyWeeklySource.includes("No synthetic live-ops authoring"), "Daily / Weekly must explain the no-authoring boundary");
+assert(!dailyWeeklySource.includes("+ New Rotation"), "Daily / Weekly runtime-boundary UI must not expose fake authoring actions");
 
-console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime and remain read-only.");
+console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical partial read-only boundary.");
