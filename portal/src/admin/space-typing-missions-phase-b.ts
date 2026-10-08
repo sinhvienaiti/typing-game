@@ -81,7 +81,7 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
   actions.append(
     badge("RUNTIME-BACKED · READ ONLY", "good"),
     button("Stamina / Warp", () => navigate("/admin/space-typing/warp")),
-    button("Daily / Weekly (UI mock)", () => navigate("/admin/space-typing/daily-weekly")),
+    button("Daily / Weekly", () => navigate("/admin/space-typing/daily-weekly")),
   );
   header.append(copy, actions);
   page.append(header);
