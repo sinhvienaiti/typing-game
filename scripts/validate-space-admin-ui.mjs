@@ -17,6 +17,7 @@ const historyFile = "portal/src/admin/space-typing-history-phase-b.ts";
 const commandFile = "portal/src/admin/space-typing-command.ts";
 const iconFile = "portal/src/admin/space-typing-icons.ts";
 const uiCssFile = "portal/src/admin/space-typing-ui.css";
+const phaseBCssFile = "portal/src/admin/space-typing-phase-b.css";
 const phaseMapFile = "admin/space-typing-phase-b-map.v1.json";
 const packageFile = "portal/package.json";
 
@@ -33,6 +34,7 @@ const requiredFiles = [
   commandFile,
   iconFile,
   uiCssFile,
+  phaseBCssFile,
   phaseMapFile,
   packageFile,
 ];
@@ -52,6 +54,7 @@ const history = read(historyFile);
 const command = read(commandFile);
 const icons = read(iconFile);
 const css = read(uiCssFile);
+const phaseBCss = read(phaseBCssFile);
 const phaseMap = JSON.parse(read(phaseMapFile));
 const pkg = JSON.parse(read(packageFile));
 
@@ -118,6 +121,35 @@ assert(main.includes('PHASE B · RUNTIME INTEGRATED'), "Runtime-integrated Phase
 assert(main.includes('return this.renderUnknown(path);'), "Unknown-route guard is missing");
 assert(main.includes('if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;'), "Legacy Feature Flags alias is not normalized to canonical Feature Gates route");
 
+// Shared presentation dependencies must be owned by the canonical shell, never by dead mock modules.
+assert(main.includes('import "./space-typing-phase-b.css";'), "Canonical Admin shell does not load shared Phase B styles");
+for (const fontImport of [
+  '@fontsource/exo-2/600.css',
+  '@fontsource/exo-2/700.css',
+  '@fontsource/exo-2/800.css',
+  '@fontsource/be-vietnam-pro/400.css',
+  '@fontsource/be-vietnam-pro/500.css',
+  '@fontsource/be-vietnam-pro/600.css',
+  '@fontsource/be-vietnam-pro/700.css',
+]) {
+  assert(main.includes(`import "${fontImport}";`), `Canonical Admin shell is missing bundled font import ${fontImport}`);
+}
+for (const selector of [".stx-panel", ".stx-grid", ".stx-field", ".stx-notice", ".stx-revision-list"]) {
+  assert(phaseBCss.includes(selector), `Canonical Phase B stylesheet is missing ${selector}`);
+}
+const forbiddenLegacyFiles = [
+  "portal/src/admin/space-typing-mock.ts",
+  "portal/src/admin/space-typing-extended.ts",
+  "portal/src/admin/space-typing-extended.css",
+  "portal/src/admin/space-typing-daily-weekly.ts",
+  "portal/src/admin/space-typing-dialogs.ts",
+  "portal/src/admin/space-typing-dialogs.css",
+  "portal/src/admin/space-typing-world-music-v2.ts",
+];
+for (const file of forbiddenLegacyFiles) {
+  assert(!exists(file), `Dead legacy Admin module must be removed: ${file}`);
+}
+
 // Canonical root and critical routes must resolve to their runtime-backed Phase B owners.
 assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);'), "Overview/Analytics are not routed to runtime telemetry");
 assert(router.includes('if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();'), "Music Library is not routed to the runtime catalog surface");
@@ -169,4 +201,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Space Typing Admin UI contract: PASS (${routes.length} Phase B screens + canonical runtime routing + accessibility/regression guards).`);
+console.log(`Space Typing Admin UI contract: PASS (${routes.length} Phase B screens + canonical runtime routing + canonical style/font ownership + accessibility/regression guards).`);
