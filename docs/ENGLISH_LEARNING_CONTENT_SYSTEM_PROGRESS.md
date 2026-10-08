@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-116 publication: `b4b6cea9ac934128c67449671d37d7f53e02673c` — scale-115 publication state verified by English Content Master Plan Acceptance #351, English Content Full Validation #281 and Platform CI #1516; published output: `042aed58112477e86d30fb13557eea9bd33ede3b`.
-- Scale-115 publication checkpoint `b4b6cea9ac934128c67449671d37d7f53e02673c` is fully verified; scale-116 is the current publication unit.
+- Latest fully CI-verified scale-up checkpoint before scale-117 publication: `06ab13d1396385cd218916942d2c154501ea7c75` — scale-116 publication state verified by English Content Master Plan Acceptance #354, English Content Full Validation #283 and Platform CI #1522; published output: `36a4e4bfbb4e35c22f2557fd9455a55040853756`.
+- Scale-116 publication checkpoint `06ab13d1396385cd218916942d2c154501ea7c75` is fully verified; scale-117 is the current publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +18,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 5,390 published records after scale-116
+- E04 phrase/pattern architecture + current reviewed publication: complete — 5,430 published records after scale-117
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,16 +26,16 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-116 publication
+## Published runtime snapshot after E04 scale-117 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 5,390 records
-- total published rich records: 9,991
+- phrases: 5,430 records
+- total published rich records: 10,031
 - attribution runtime: 4 source records
-- editorial ledger: 9,991 decisions / 9,991 applied / 9,991 publish decisions
-- E04 collocation frontier: `col.00004280`
+- editorial ledger: 10,031 decisions / 10,031 applied / 10,031 publish decisions
+- E04 collocation frontier: `col.00004320`
 
 ## Approved scale-up targets
 
@@ -89,11 +89,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-115 publication is fully verified at `b4b6cea9ac934128c67449671d37d7f53e02673c`; do not duplicate scale-115 artifacts.
-2. Scale-116 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
-3. After the scale-116 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+1. Scale-116 publication is fully verified at `06ab13d1396385cd218916942d2c154501ea7c75`; do not duplicate scale-116 artifacts.
+2. Scale-117 is the current publication unit; do not start another collocation batch until its publication/checkpoint CI completes.
+3. After the scale-117 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. If no safer pending enrichment appears after the scale-116 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00004280`, expected IDs `col.00004281`–`col.00004320`, with fresh exact/near-dedupe preflight before any source apply.
+5. If no safer pending enrichment appears after the scale-117 checkpoint, continue with a bounded E04 collocation batch from frontier `col.00004320`, expected IDs `col.00004321`–`col.00004360`, with fresh exact/near-dedupe preflight before any source apply.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -107,4 +107,4 @@ None.
 
 ## Next actionable task
 
-Scale-116 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00004280` (expected next range `col.00004281`–`col.00004320`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
+Scale-117 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue immediately with the next genuinely new bounded collocation batch from frontier `col.00004320` (expected next range `col.00004321`–`col.00004360`, unless a safer under-target E04 family takes priority). Recalculate counts and run exact/near dedupe before every write.
