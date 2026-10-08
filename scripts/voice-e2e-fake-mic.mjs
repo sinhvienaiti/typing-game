@@ -8,12 +8,14 @@
 //   pnpm voice:e2e -- --seconds=45 --stress --words=galaxy,shield,code
 //
 // --stress blocks the page main thread 30 ms out of every 40 ms (the game
-// shares that thread), to check overload recovery. Prints detections and
-// errors; exits 1 when a word is never detected or the runtime reported an error.
+// shares that thread), to check overload recovery. The report includes bounded
+// capture→main-thread, main-thread→decoder-ACK and event-loop timing evidence so
+// an overload can be localized instead of hidden by increasing the audio queue.
 import { execFileSync, spawn } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { summarizeVoiceProfile } from "./voice-profile-summary.mjs";
 
 const flag = (name, fallback) => {
   const hit = process.argv.find((a) => a.startsWith("--" + name + "="));
@@ -39,18 +41,77 @@ const scenario = `(async () => {
   const mic = feed.createMediaStreamDestination();
   const player = feed.createBufferSource(); player.buffer = buffer; player.loop = true; player.connect(mic); player.start();
   navigator.mediaDevices.getUserMedia = async () => mic.stream;
-  if (${stress}) setInterval(() => { const end = performance.now() + 30; while (performance.now() < end); }, 40);
   const words = ${JSON.stringify(words)};
   const { createBrowserVoiceHost } = await import("/src/voice/host-factory.mjs");
   const events = [];
   const host = createBrowserVoiceHost((event) => events.push(event));
   await host.start(0);
-  if (!events.some((e) => e.type === "ready")) return { detections: [], errors: events.filter((e) => e.type === "error").map((e) => e.message) };
+  if (!events.some((e) => e.type === "ready")) return { detections: [], errors: events.filter((e) => e.type === "error").map((e) => e.message), profile: {} };
+
+  const runtime = host.runtime;
+  const profile = {
+    pcmBlocks: 0,
+    overflowEvents: 0,
+    maxPending: 0,
+    captureDispatchMs: [],
+    decodeAckMs: [],
+    eventLoopLagMs: [],
+  };
+  const keep = (values, value) => {
+    if (!Number.isFinite(value) || value < 0) return;
+    if (values.length >= 512) values.shift();
+    values.push(value);
+  };
+
+  // BrowserVoiceRuntime uses TypeScript-private (not #private) members. The E2E
+  // profiler wraps them only in this temporary test page; production behavior
+  // and Voice protocol messages are untouched.
+  const originalCaptureMessage = runtime.captureMessage.bind(runtime);
+  runtime.captureMessage = (message) => {
+    if (message?.type === "pcm") {
+      profile.pcmBlocks++;
+      message.__profileReceivedAtMs = performance.now();
+      if (Number.isFinite(message.audioTimeMs))
+        keep(profile.captureDispatchMs, runtime.audio.currentTime * 1000 - message.audioTimeMs);
+    }
+    originalCaptureMessage(message);
+    profile.maxPending = Math.max(profile.maxPending, runtime.pending?.length ?? 0);
+  };
+  const originalAcknowledge = runtime.acknowledge.bind(runtime);
+  runtime.acknowledge = (generation) => {
+    const pending = runtime.pending?.[0];
+    if (Number.isFinite(pending?.__profileReceivedAtMs))
+      keep(profile.decodeAckMs, performance.now() - pending.__profileReceivedAtMs);
+    originalAcknowledge(generation);
+  };
+  const originalOverloaded = runtime.overloaded.bind(runtime);
+  runtime.overloaded = () => {
+    profile.overflowEvents++;
+    originalOverloaded();
+  };
+
+  let expectedTick = performance.now() + 20;
+  const eventLoopTimer = setInterval(() => {
+    const now = performance.now();
+    keep(profile.eventLoopLagMs, Math.max(0, now - expectedTick));
+    expectedTick = now + 20;
+  }, 20);
+  const stressTimer = ${stress} ? setInterval(() => {
+    const end = performance.now() + 30;
+    while (performance.now() < end);
+  }, 40) : null;
+
   host.checkVocabulary({ ...host.session, requestId: "e2e", forms: words });
   const targets = words.map((w, i) => ({ unitId: "u" + i, unitVersion: 1, eligibilityVersion: 1, capability: "word", forms: [w], eligible: true, eligibleFromSample: 0 }));
-  await host.applyTargets({ ...host.session, snapshotId: "e2e-1", registryRevision: 1, publishedAtSample: host.runtime.nowSample(), sampleRate: 16000, targets });
+  await host.applyTargets({ ...host.session, snapshotId: "e2e-1", registryRevision: 1, publishedAtSample: runtime.nowSample(), sampleRate: 16000, targets });
   await new Promise((r) => setTimeout(r, ${seconds} * 1000));
-  const result = { detections: events.filter((e) => e.type === "detection").map((e) => e.form), errors: events.filter((e) => e.type === "error").map((e) => e.message) };
+  clearInterval(eventLoopTimer);
+  if (stressTimer !== null) clearInterval(stressTimer);
+  const result = {
+    detections: events.filter((e) => e.type === "detection").map((e) => e.form),
+    errors: events.filter((e) => e.type === "error").map((e) => e.message),
+    profile,
+  };
   await host.stop();
   return result;
 })()`;
@@ -78,7 +139,17 @@ try {
   const result = reply.result?.result?.value;
   if (result === undefined) throw new Error(JSON.stringify(reply.result).slice(0, 500));
   const missing = words.filter((w) => !result.detections.includes(w));
-  console.log(JSON.stringify({ stress, seconds, detections: result.detections.length, missing, errors: result.errors }, null, 1));
+  const profileSummary = summarizeVoiceProfile(result.profile);
+  console.log(JSON.stringify({
+    stress,
+    seconds,
+    detections: result.detections.length,
+    missing,
+    errors: result.errors,
+    profile: profileSummary,
+  }, null, 1));
+  // Timing is evidence, not an acceptance threshold: real-microphone/hardware
+  // latency gates remain manual. E2E failure semantics stay recognition/error-only.
   exitCode = missing.length === 0 && result.errors.length === 0 ? 0 : 1;
 } finally {
   browser.kill("SIGKILL");
