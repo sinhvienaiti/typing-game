@@ -6,6 +6,7 @@ import { renderPhaseBDuel } from "./space-typing-duel-phase-b";
 import { renderPhaseBEvents } from "./space-typing-events-phase-b";
 import { renderPhaseBFeatureGates } from "./space-typing-feature-gates-phase-b";
 import { renderPhaseBMissions } from "./space-typing-missions-phase-b";
+import { renderPhaseBQa } from "./space-typing-qa-phase-b";
 import { renderPhaseBRanked } from "./space-typing-ranked-phase-b";
 import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
@@ -35,6 +36,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/backgrounds`) return renderPhaseBBackgrounds();
   if (path === `${BASE}/ui-assets`) return renderPhaseBUiAssets();
   if (path === `${BASE}/vfx`) return renderPhaseBVfx();
+  if (path === `${BASE}/qa`) return renderPhaseBQa();
   if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();
   return renderPhaseBCoreAdminScreen(path, navigate);
 }

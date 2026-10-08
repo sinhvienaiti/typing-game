@@ -40,6 +40,6 @@
     {"route":"/admin/space-typing/settings","screen":"General Settings","domain":"system","persistence":"immutable-revision-store","applyBoundary":"new-session","status":"phase-b-ui-wired"},
     {"route":"/admin/space-typing/feature-gates","screen":"Feature Gates","domain":"runtime.featureGates","persistence":"child-browser-local-storage","applyBoundary":"none","status":"phase-b-ui-wired-runtime-backed-readonly","legacyRouteAlias":"/admin/space-typing/flags"},
     {"route":"/admin/space-typing/history","screen":"History & Publish","domain":"revisions","persistence":"immutable-revision-store","applyBoundary":"cas-publish","status":"phase-b-ui-wired"},
-    {"route":"/admin/space-typing/qa","screen":"QA Sandbox","domain":"qa","persistence":"ephemeral-sandbox","applyBoundary":"new-qa-run","status":"mapped-awaiting-adapter"}
+    {"route":"/admin/space-typing/qa","screen":"QA Sandbox","domain":"qa","persistence":"child-test-lab-isolated-session-and-preset","applyBoundary":"new-qa-run","status":"phase-b-ui-wired-runtime-backed-ephemeral-sandbox"}
   ]
 }

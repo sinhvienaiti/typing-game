@@ -31,6 +31,7 @@ on:
       - "scripts/validate-space-admin-alternative-modes.mjs"
       - "scripts/validate-space-admin-audio.mjs"
       - "scripts/validate-space-admin-ui-assets.mjs"
+      - "scripts/validate-space-admin-qa.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -80,6 +81,8 @@ jobs:
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate UI Assets runtime ownership audit
         run: node scripts/validate-space-admin-ui-assets.mjs
+      - name: Validate QA Sandbox runtime ownership audit
+        run: node scripts/validate-space-admin-qa.mjs
       - name: Validate Admin service syntax
         run: |
           for file in admin/*.mjs; do node --check "$file"; done
@@ -98,6 +101,7 @@ jobs:
           node --check scripts/validate-space-admin-alternative-modes.mjs
           node --check scripts/validate-space-admin-audio.mjs
           node --check scripts/validate-space-admin-ui-assets.mjs
+          node --check scripts/validate-space-admin-qa.mjs
       - name: Test immutable revision and CAS semantics
         run: node --test admin/store.test.mjs
       - name: Test Typing Content canonical catalog
@@ -185,6 +189,8 @@ jobs:
         run: pnpm --dir games/space-typing alternative-modes:audit
       - name: Audit Space Typing UI Assets contract
         run: pnpm --dir games/space-typing ui-assets:audit
+      - name: Audit Space Typing QA Sandbox contract
+        run: pnpm --dir games/space-typing qa:audit
       - name: Build Space Typing
         run: pnpm build:space
       - name: Build Portal
