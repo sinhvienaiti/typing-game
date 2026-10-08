@@ -48,7 +48,7 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "voice:test": "node --test shared/voice/*.test.mjs",
     "voice:sync": "node scripts/sync-space-voice-contract.mjs",
-    "voice:check": "node scripts/sync-space-voice-contract.mjs --check",
+    "voice:check": "node scripts/sync-space-voice-contract.mjs --check && node --check scripts/voice-profile-summary.mjs && node --check scripts/voice-e2e-fake-mic.mjs",
     "voice:prepare": "node scripts/prepare-voice-model.mjs",
     "voice:smoke": "node scripts/voice-worker-smoke.mjs",
     "voice:e2e": "node scripts/voice-e2e-fake-mic.mjs"
