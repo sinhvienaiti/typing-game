@@ -11,6 +11,7 @@ import { renderPhaseBRanked } from "./space-typing-ranked-phase-b";
 import { renderPhaseBRewards } from "./space-typing-rewards-phase-b";
 import { renderPhaseBShop } from "./space-typing-shop-phase-b";
 import { renderPhaseBStages } from "./space-typing-stages-phase-b";
+import { renderPhaseBTelemetry } from "./space-typing-telemetry-phase-b";
 import { renderPhaseBTypingContent } from "./space-typing-typing-content-phase-b";
 import { renderPhaseBUiAssets } from "./space-typing-ui-assets-phase-b";
 import { renderPhaseBVfx } from "./space-typing-vfx-phase-b";
@@ -21,6 +22,7 @@ const BASE = "/admin/space-typing";
 type Navigate = (path: string) => void;
 
 export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLElement | null {
+  if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);
   if (path === `${BASE}/stages`) return renderPhaseBWorlds(navigate);
   if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);
   if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
