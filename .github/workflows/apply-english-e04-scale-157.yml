@@ -7,6 +7,7 @@ on:
       - scripts/check-english-e04-scale-157-candidates.py
       - scripts/english-e04-scale-157-common.py
       - scripts/e04-scale-157-candidates.json
+      - scripts/e04-scale-157-candidate-replacements.json
       - scripts/update-english-e04-scale-157-progress.py
       - .github/workflows/apply-english-e04-scale-157.yml
 permissions:
@@ -74,7 +75,7 @@ jobs:
           node scripts/sync-english-content-master-plan-status.mjs
       - name: Stage reviewed source and generated runtime
         run: |
-          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-157.py scripts/english-e04-scale-157-common.py scripts/e04-scale-157-candidates.json scripts/update-english-e04-scale-157-progress.py
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-157.py scripts/english-e04-scale-157-common.py scripts/e04-scale-157-candidates.json scripts/e04-scale-157-candidate-replacements.json scripts/update-english-e04-scale-157-progress.py
           git status --short
           if git diff --cached --quiet; then echo 'Scale 157 produced no state change.' >&2; exit 1; fi
           git diff --cached --binary > /tmp/scale157-before.patch
@@ -95,7 +96,7 @@ jobs:
           node scripts/report-english-content-e04.mjs
           node scripts/report-english-content-enrichment-links.mjs
           node scripts/sync-english-content-master-plan-status.mjs
-          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-157.py scripts/english-e04-scale-157-common.py scripts/e04-scale-157-candidates.json scripts/update-english-e04-scale-157-progress.py
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-157.py scripts/english-e04-scale-157-common.py scripts/e04-scale-157-candidates.json scripts/e04-scale-157-candidate-replacements.json scripts/update-english-e04-scale-157-progress.py
           git diff --cached --binary > /tmp/scale157-after.patch
           if ! cmp -s /tmp/scale157-before.patch /tmp/scale157-after.patch; then echo 'Scale 157 artifacts are not reproducible.' >&2; diff -u /tmp/scale157-before.patch /tmp/scale157-after.patch || true; exit 1; fi
       - name: Commit validated scale 157 artifacts

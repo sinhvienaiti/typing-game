@@ -20,9 +20,13 @@ REVIEWED_BY='chatgpt-editorial-scale-157'
 EXPECTED={'collocations':5000,'verbPatterns':510,'phraseItems':1480}
 EXPECTED_FRONTIERS={'phrasal-verb':520,'chunk':495,'idiom':465}
 NEAR_DUP_THRESHOLD=0.86
-CANDIDATES=read_json(ROOT/'scripts/e04-scale-157-candidates.json')['records']
+_base_candidates=read_json(ROOT/'scripts/e04-scale-157-candidates.json')['records']
+_replacements=read_json(ROOT/'scripts/e04-scale-157-candidate-replacements.json').get('replacements',{})
+CANDIDATES=[_replacements.get(spec['text'],spec) for spec in _base_candidates]
 if len(CANDIDATES)!=40:
     raise RuntimeError(f'scale-157 candidate count drifted: {len(CANDIDATES)}')
+if len({spec['text'] for spec in CANDIDATES})!=40:
+    raise RuntimeError('scale-157 replacement overlay produced duplicate candidate text')
 def make_record(identifier:int,spec:dict):
     kind=spec['type']
     prefix={'phrasal-verb':'pv','chunk':'chunk','idiom':'idiom'}[kind]
