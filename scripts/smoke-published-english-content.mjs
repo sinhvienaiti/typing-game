@@ -253,8 +253,8 @@ try {
     fileRuntimeLoader,
     "collocation",
   );
-  if(recallCollocations!==4960) {
-    errors.push("published Recall collocation activity must expose 4960 reviewed records");
+  if(recallCollocations!==5000) {
+    errors.push("published Recall collocation activity must expose 5000 reviewed records");
   }
   const recallDataset=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
