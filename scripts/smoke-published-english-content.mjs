@@ -273,9 +273,9 @@ try {
   const chunkCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"chunk");
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
   if(verbPatternCount!==510) errors.push("published verb-pattern activity must expose 510 reviewed records");
-  if(phrasalVerbCount!==380) errors.push("published phrasal-verb activity must expose 380 reviewed records");
-  if(chunkCount!==285) errors.push("published chunk activity must expose 285 reviewed records");
-  if(idiomCount!==255) errors.push("published idiom activity must expose 255 reviewed records");
+  if(phrasalVerbCount!==390) errors.push("published phrasal-verb activity must expose 390 reviewed records");
+  if(chunkCount!==300) errors.push("published chunk activity must expose 300 reviewed records");
+  if(idiomCount!==270) errors.push("published idiom activity must expose 270 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
 }
