@@ -7,7 +7,8 @@ Status: SCALE_UP_ACTIVE
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
 - Latest bot publication commit: `0af400dcc97be0de6d99bb08ec84c92980ef1ba9` — `feat(content): publish E04 phrase scale 176`.
-- Scale-176 publication has completed all apply-workflow gates; this single normal-user checkpoint must be verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI before the next E04 batch is opened.
+- Scale-176 publication checkpoint `8fa3de0a218df42405c2cd6f393d6a8b147edd54` is fully verified by English Content Full Validation #545, English Content Master Plan Acceptance #676 and Platform CI #1886.
+- Scale-177 is the current first-unfinished E04 publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -92,13 +93,14 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-176 bot publication is complete at `0af400dcc97be0de6d99bb08ec84c92980ef1ba9`; do not duplicate scale-176 artifacts.
-2. Verify this single normal-user checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI.
-3. After all three mandatory CI workflows PASS, recalculate deficits from the resulting HEAD and open the next bounded E04 unit (Scale-177) for under-target phrasal verbs, idioms and chunks unless safer reviewed enrichment has become available.
+1. Scale-176 publication checkpoint `8fa3de0a218df42405c2cd6f393d6a8b147edd54` is fully verified; do not duplicate scale-176 artifacts.
+2. Scale-177 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.
+3. Scale-177 uses the next bounded 40-record phrase batch: 10 phrasal verbs + 15 chunks + 15 idioms, with frontier lease `pv.00000720` / `chunk.00000795` / `idiom.00000765` and near-dedupe threshold `0.86` unchanged.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. Reuse the established scale-up workflow and keep the batch bounded; preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
-6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+5. Reuse the established scale-up workflow and preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
+6. After scale-177 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+7. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
+8. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
 ## Known non-blocking enrichment debt
 
@@ -110,4 +112,4 @@ None.
 
 ## Next actionable task
 
-Verify this Scale-176 normal-user checkpoint against English Content Full Validation, English Content Master Plan Acceptance and Platform CI. Once all three PASS, continue immediately with Scale-177: recalculate live deficits from HEAD, use the next safe IDs after `pv.00000720`, `chunk.00000795` and `idiom.00000765`, generate one bounded reviewed batch, run exact/near dedupe before publication, and drive the full apply/publish/CI pipeline to completion.
+Run Scale-177 preflight against the full current E04 corpus. Resolve only exact/near-duplicate offenders without changing the `0.86` threshold or clean candidates. Then drive apply → review/license → generate/publish → full quality gates → deterministic verification → bot publication → one normal-user checkpoint → English Content Full Validation + Master Plan Acceptance + Platform CI. If all PASS, continue from the resulting live frontiers into the next bounded E04 unit.
