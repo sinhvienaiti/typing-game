@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-176 publication: `abcfdc87b863a2ffd9d508e2a93669fe53738f70` — scale-175 publication state verified by English Content Master Plan Acceptance #668, English Content Full Validation #538 and Platform CI #1878; published output: `80ec239390c0db63b48bf397f148f1c64d932b1e`.
-- Scale-175 publication checkpoint `abcfdc87b863a2ffd9d508e2a93669fe53738f70` is fully verified; scale-176 is the current publication unit.
+- Latest bot publication commit: `0af400dcc97be0de6d99bb08ec84c92980ef1ba9` — `feat(content): publish E04 phrase scale 176`.
+- Scale-176 publication has completed all apply-workflow gates; this single normal-user checkpoint must be verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI before the next E04 batch is opened.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -92,11 +92,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-175 publication checkpoint `abcfdc87b863a2ffd9d508e2a93669fe53738f70` is fully verified; do not duplicate scale-175 artifacts.
-2. Scale-176 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.
-3. After the scale-176 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+1. Scale-176 bot publication is complete at `0af400dcc97be0de6d99bb08ec84c92980ef1ba9`; do not duplicate scale-176 artifacts.
+2. Verify this single normal-user checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI.
+3. After all three mandatory CI workflows PASS, recalculate deficits from the resulting HEAD and open the next bounded E04 unit (Scale-177) for under-target phrasal verbs, idioms and chunks unless safer reviewed enrichment has become available.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. Scale-176 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.
+5. Reuse the established scale-up workflow and keep the batch bounded; preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -110,4 +110,4 @@ None.
 
 ## Next actionable task
 
-Scale-176 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000720`, `chunk.00000795` and `idiom.00000765` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.
+Verify this Scale-176 normal-user checkpoint against English Content Full Validation, English Content Master Plan Acceptance and Platform CI. Once all three PASS, continue immediately with Scale-177: recalculate live deficits from HEAD, use the next safe IDs after `pv.00000720`, `chunk.00000795` and `idiom.00000765`, generate one bounded reviewed batch, run exact/near dedupe before publication, and drive the full apply/publish/CI pipeline to completion.
