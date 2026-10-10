@@ -23,7 +23,7 @@
     "build:local": "pnpm build:portal && pnpm build:shooter && pnpm build:recall && pnpm build:karaoke && pnpm build:space && pnpm build:monkeytype",
     "setup:dev": "bash scripts/setup-nginx.sh dev",
     "setup:play": "bash scripts/setup-nginx.sh play",
-    "play": "bash play.sh",
+    "play": "bash scripts/play.sh",
     "vocab:generate": "node scripts/generate-vocabulary.mjs",
     "vocab:validate": "node scripts/validate-vocabulary.mjs",
     "curriculum:generate": "node scripts/generate-vocabulary-curriculum.mjs",
