@@ -1,0 +1,109 @@
+name: Apply English E04 Scale 72
+
+on:
+  push:
+    branches: [feature/english-learning-content-system]
+    paths:
+      - scripts/apply-english-e04-focused-scale-72.py
+      - scripts/check-english-e04-scale-72-candidates.py
+      - scripts/english-e04-scale-72-common.py
+      - scripts/e04-scale-72-candidates-part*.json
+      - scripts/update-english-e04-scale-72-progress.py
+      - .github/workflows/apply-english-e04-scale-72.yml
+
+permissions:
+  contents: write
+concurrency:
+  group: english-e04-scale-72
+  cancel-in-progress: false
+
+jobs:
+  apply-scale-72:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with: {version: 11.21.0}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: {node-version: 24.11.0}
+      - name: Preflight all scale 72 candidates against current E04
+        run: python3 scripts/check-english-e04-scale-72-candidates.py
+      - name: Apply idempotent E04 scale 72 source batch
+        run: python3 scripts/apply-english-e04-focused-scale-72.py
+      - name: Validate review and controlled-batch contracts
+        run: |
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+      - name: Generate and publish reviewed runtime
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+      - name: Run full English-content quality gates
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Converge derived publication state
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Stage reviewed source and generated runtime
+        run: |
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-72.py scripts/english-e04-scale-72-common.py scripts/e04-scale-72-candidates-part*.json scripts/update-english-e04-scale-72-progress.py
+          git status --short
+          if git diff --cached --quiet; then echo 'Scale 72 produced no state change.' >&2; exit 1; fi
+          git diff --cached --binary > /tmp/scale72-before.patch
+      - name: Verify full publication pipeline is deterministic
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-72.py scripts/english-e04-scale-72-common.py scripts/e04-scale-72-candidates-part*.json scripts/update-english-e04-scale-72-progress.py
+          git diff --cached --binary > /tmp/scale72-after.patch
+          if ! cmp -s /tmp/scale72-before.patch /tmp/scale72-after.patch; then echo 'Scale 72 artifacts are not reproducible.' >&2; diff -u /tmp/scale72-before.patch /tmp/scale72-after.patch || true; exit 1; fi
+      - name: Commit validated scale 72 artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(content): publish E04 collocation scale 72'
+          git push

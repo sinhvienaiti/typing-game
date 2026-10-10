@@ -1,0 +1,141 @@
+name: Apply English E04 Scale 66
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - scripts/apply-english-e04-focused-scale-66.py
+      - scripts/check-english-e04-scale-66-candidates.py
+      - .github/workflows/apply-english-e04-scale-66.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: english-e04-scale-66
+  cancel-in-progress: false
+
+jobs:
+  apply-scale-66:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+      - name: Resolve scale 66 exact conflicts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/apply-english-e04-focused-scale-66.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'rotate light-sensitive exhibits': 'alternate light-sensitive exhibits',
+              'flatten creased archival documents': 'flatten folded archival documents',
+          }
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'expected exactly one scale-66 candidate occurrence for {old!r}, found {count}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Preflight all scale 66 candidates against current E04
+        run: python3 scripts/check-english-e04-scale-66-candidates.py
+      - name: Apply idempotent E04 scale 66 source batch
+        run: python3 scripts/apply-english-e04-focused-scale-66.py
+      - name: Validate review and controlled-batch contracts
+        run: |
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+      - name: Generate and publish reviewed runtime
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+      - name: Run full English-content quality gates
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Converge derived publication state
+        shell: bash
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Stage reviewed source and generated runtime
+        shell: bash
+        run: |
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-66.py
+          git status --short
+          if git diff --cached --quiet; then
+            echo 'Scale 66 produced no state change; it may already be applied.' >&2
+            exit 1
+          fi
+          git diff --cached --binary > /tmp/scale66-before.patch
+      - name: Verify full publication pipeline is deterministic
+        shell: bash
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-66.py
+          git diff --cached --binary > /tmp/scale66-after.patch
+          if ! cmp -s /tmp/scale66-before.patch /tmp/scale66-after.patch; then
+            echo 'Scale 66 artifacts are not reproducible after converging and replaying the full publication pipeline.' >&2
+            diff -u /tmp/scale66-before.patch /tmp/scale66-after.patch || true
+            exit 1
+          fi
+      - name: Commit validated scale 66 artifacts
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(content): publish E04 collocation scale 66'
+          git push

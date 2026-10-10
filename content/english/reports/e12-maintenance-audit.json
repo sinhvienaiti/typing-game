@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "runtime": [
+    {
+      "path": "shared/dictionary/manifest.json",
+      "dataset": "dictionary",
+      "count": 900,
+      "contentVersion": "2026.10.0"
+    },
+    {
+      "path": "shared/grammar/manifest.json",
+      "dataset": "grammar",
+      "count": 300,
+      "contentVersion": "2026.10.0"
+    },
+    {
+      "path": "shared/sentences/manifest.json",
+      "dataset": "sentences",
+      "count": 3401,
+      "contentVersion": "2026.10.0"
+    },
+    {
+      "path": "shared/phrases/manifest.json",
+      "dataset": "phrases",
+      "count": 8070,
+      "contentVersion": "2026.10.0"
+    },
+    {
+      "path": "shared/attribution/english-content/manifest.json",
+      "dataset": "attribution.english-content",
+      "count": 4,
+      "contentVersion": "2026.10.0"
+    }
+  ],
+  "runtimePublished": 12671,
+  "publishedSourceIds": [
+    "legacy-vocabulary",
+    "multiwoz",
+    "oewn",
+    "project-original",
+    "tatoeba"
+  ],
+  "attributionRequiredSourceIds": [
+    "legacy-vocabulary",
+    "multiwoz",
+    "oewn",
+    "tatoeba"
+  ],
+  "sourceAudit": [
+    {
+      "id": "oewn",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": true,
+      "snapshot": "2025-12-31"
+    },
+    {
+      "id": "wiktionary",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": false,
+      "snapshot": null
+    },
+    {
+      "id": "simplewiktionary-en",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": true,
+      "snapshot": "simplewiktionary-dump-2026-09-01;kaikki-extract-2026-09-28"
+    },
+    {
+      "id": "viwiktionary-en",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": true,
+      "snapshot": "viwiktionary-dump-2026-09-01;kaikki-extract-2026-09-28"
+    },
+    {
+      "id": "tatoeba",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": true,
+      "snapshot": "weekly-export-observed-2026-10-03"
+    },
+    {
+      "id": "multiwoz",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "reference",
+      "pinned": true,
+      "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b"
+    },
+    {
+      "id": "verbnet",
+      "publishAllowed": false,
+      "attributionRequired": true,
+      "status": "blocked",
+      "pinned": false,
+      "snapshot": null
+    },
+    {
+      "id": "cambridge-profile",
+      "publishAllowed": false,
+      "attributionRequired": false,
+      "status": "blocked",
+      "pinned": false,
+      "snapshot": null
+    },
+    {
+      "id": "legacy-vocabulary",
+      "publishAllowed": true,
+      "attributionRequired": true,
+      "status": "import-enabled",
+      "pinned": true,
+      "snapshot": "parent-baseline-9edbba00"
+    },
+    {
+      "id": "project-original",
+      "publishAllowed": true,
+      "attributionRequired": false,
+      "status": "import-enabled",
+      "pinned": true,
+      "snapshot": "2026-10"
+    }
+  ],
+  "deprecations": {
+    "count": 0,
+    "replacementIds": []
+  }
+}

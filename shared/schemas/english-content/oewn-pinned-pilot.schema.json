@@ -1,0 +1,349 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/oewn-pinned-pilot.schema.json",
+  "title": "Pinned OEWN lexical enrichment pilot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "release",
+    "sourceRepository",
+    "sourceCommit",
+    "publicationAllowed",
+    "records",
+    "misses",
+    "sourceErrors",
+    "metrics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "oewn"
+    },
+    "release": {
+      "const": "2025-edition"
+    },
+    "sourceRepository": {
+      "const": "globalwordnet/english-wordnet"
+    },
+    "sourceCommit": {
+      "const": "dc343f2683279ecbb13fab4e2fd778d7b162d287"
+    },
+    "publicationAllowed": {
+      "const": false
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "legacyVocabularyRefs",
+          "headword",
+          "headwordKey",
+          "legacyVi",
+          "legacyIpa",
+          "sourceEntryFile",
+          "parts",
+          "quality"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "legacyVocabularyRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "legacyVi": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1000
+          },
+          "legacyIpa": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 300
+          },
+          "sourceEntryFile": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "partOfSpeech",
+                "forms",
+                "pronunciations",
+                "senses"
+              ],
+              "properties": {
+                "partOfSpeech": {
+                  "type": "string",
+                  "enum": [
+                    "n",
+                    "v",
+                    "a",
+                    "r",
+                    "s"
+                  ]
+                },
+                "forms": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300
+                  }
+                },
+                "pronunciations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "value",
+                      "variety"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "variety": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 40
+                      }
+                    }
+                  }
+                },
+                "senses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "senseId",
+                      "synsetId",
+                      "lexFileNumber",
+                      "definitionEn",
+                      "explanationVi",
+                      "sourceExamples",
+                      "memberLemmas",
+                      "ili",
+                      "sourceFile"
+                    ],
+                    "properties": {
+                      "senseId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      },
+                      "synsetId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "lexFileNumber": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 44
+                      },
+                      "definitionEn": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4000
+                        }
+                      },
+                      "explanationVi": {
+                        "type": "null"
+                      },
+                      "sourceExamples": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 4000
+                        }
+                      },
+                      "memberLemmas": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 300
+                        }
+                      },
+                      "ili": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 100
+                      },
+                      "sourceFile": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quality": {
+            "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+          }
+        }
+      }
+    },
+    "misses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey",
+          "reason"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string"
+          },
+          "headword": {
+            "type": "string"
+          },
+          "headwordKey": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sourceErrors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "senseId",
+          "synsetId",
+          "message"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string"
+          },
+          "senseId": {
+            "type": "string"
+          },
+          "synsetId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "mapped",
+        "mappedRate",
+        "totalSenses",
+        "sensesWithDefinitions",
+        "definitionRate",
+        "withPronunciation",
+        "withMorphology",
+        "withSourceExamples"
+      ],
+      "properties": {
+        "requested": {
+          "const": 300
+        },
+        "mapped": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "mappedRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "totalSenses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sensesWithDefinitions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "definitionRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "withPronunciation": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "withMorphology": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "withSourceExamples": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        }
+      }
+    }
+  }
+}

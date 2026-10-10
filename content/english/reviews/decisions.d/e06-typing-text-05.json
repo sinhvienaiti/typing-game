@@ -1,0 +1,1973 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p003-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p003.011",
+      "sourceDigest": "052873b9844d546358cab7680cc3846cfbe7746cdadd44f30ee7984dd6d9b2c1",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p003-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p003.011",
+      "sourceDigest": "eb7e4b75923495ddeb13a6bb697cab4cf1be319c984a15d61620b6062f3daeea",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p003-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p003.017",
+      "sourceDigest": "5615601f5e9cd3074cf329b5796e9b9dff98a780c6eb43d1b441aa2c66ded7f2",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p003-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p003.017",
+      "sourceDigest": "39e2d386cff644f55c3eb8aaf82fd193c140ba78169786921580e7ea6b886c36",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p003-013",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p003.013",
+      "sourceDigest": "1ef423ed129d34b7f3a5f721a1ce978f759a023dc63ed7bdb94ba449db09b4d5",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p003-013",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p003.013",
+      "sourceDigest": "8c0721ba5bf9305983e0bf8b993b505afa36f32500af762449c44c0938794691",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p003-021",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p003.021",
+      "sourceDigest": "4cc1cdc73fdbe8c34ee140548388033423fc0ae92e346c789b4d8933ba4b4577",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p003-021",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p003.021",
+      "sourceDigest": "8e7b875ed66126dcfb32434e4b69c49db66662322155745a6c1f1ec47da9d744",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p003-016",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p003.016",
+      "sourceDigest": "68760a36ffe83e28814db8b943b06f9983275289c1d81c7644bda318d48cd0f1",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p003-016",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p003.016",
+      "sourceDigest": "a4fae801b6851aa12dd6a88904e78f2cce8d8397de742a32499bfab6a057c292",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-005",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.005",
+      "sourceDigest": "4dd4dc5021af6a74dff14ceb57bdbc9ade7abb436792100fe67d713add227b7b",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-005",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.005",
+      "sourceDigest": "c9a1cf005bfb3bb6eb107936a26bbca6b848a8ea5fc8b258847acdb722fa7221",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.011",
+      "sourceDigest": "e1ae73e0736aeafe606b5024b8191fd2ebcb532d1c30f612a95991badda9ed31",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.011",
+      "sourceDigest": "f91d83d629a9b8ff515055503da66cc85114a44a0c448c6c932b01fb90489182",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-006",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.006",
+      "sourceDigest": "b94911a19d950ea0e65d9809584b3973f627534d2bb731bbf87efacdce2cd2b5",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-006",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.006",
+      "sourceDigest": "3df91921d056853c80c94e58b3da787a330f5a2eaa861a71a4e22b07e0a9792f",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-012",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.012",
+      "sourceDigest": "b7eed75a30b4314d3270296ba0b3ec56adf8295e899dffea5936de9636869e2d",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-012",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.012",
+      "sourceDigest": "7d294def2da81313a69d29efea214522fb9307550ea68acc289125525656d3be",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-007",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.007",
+      "sourceDigest": "a51c3c763a64a0f617dba5eb00c654d3a3dc7af3305e931efb01e51439d5a4dc",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-007",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.007",
+      "sourceDigest": "85e3d860c82d632c5838472e14433b21909550dfe1a1e4f51d9ad156ab1045b0",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-016",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.016",
+      "sourceDigest": "6f1c19647fcb0dd109cb646ab1f619f42bb5bb01511c62a2c6191977fb21cbc5",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-016",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.016",
+      "sourceDigest": "dc9fd00bfba7c3e14ba5bf780ed1f299ed842ed9dcedb25b472ba9a73e8e2797",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-008",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.008",
+      "sourceDigest": "b24f8ac2a530320293b855ce4315483058df198cc70feefd9e2a199c07848fbb",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-008",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.008",
+      "sourceDigest": "d6585d488b597782979f0d8a7ec90c4c198c2715d69111b82f38a5c2372a8132",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.017",
+      "sourceDigest": "643acb7a99725d9fbef11669a681cadc7d97a15429128c26518e219b230b6af1",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.017",
+      "sourceDigest": "e56b66b067a557e016bb4de151d6ffa86e470f7607a87d37d8a0a6401d916218",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-009",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.009",
+      "sourceDigest": "744f34a824bd08f97a70917e5c09f2e22224f7e8136c9e21f1169089fa6f6212",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-009",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.009",
+      "sourceDigest": "9f347aaf0d0cf9ff6ff108dc61e04ba6080b4096a60696c596c9e5f5b7402672",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-019",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.019",
+      "sourceDigest": "9ebff9420cd38d2dd84ea4ece121ae9585445ddee39bfc085ee05dff6d102dd7",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-019",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.019",
+      "sourceDigest": "9313b376ff0a3909aa29771e683c06d8e86dc86d8de232cf600dbfde6e9aff3a",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-010",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.010",
+      "sourceDigest": "9f202df2a737b543ff976b68374fab0ca71262967b6beaf329801bb80a95ee3a",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-010",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.010",
+      "sourceDigest": "06d7d11edd9f28961428822d25b700f35859296fd6c23e171c0a355eee849a00",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-020",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.020",
+      "sourceDigest": "64c9cb7b7acb509c32f8adc2455278f57dc61d961fc9ec0239f425a8982e18ab",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-020",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.020",
+      "sourceDigest": "9e126ddc9438910104c75bfb7947059599526220e330ec3def2e54d7be936cae",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.011",
+      "sourceDigest": "ee7484764edd0eaff726fe9f345e40415064e4936eec1e882b64c5820457c7d1",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-011",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.011",
+      "sourceDigest": "166afd28da295d844d042847f2374d669214fe8109e1177b883f78566adc9ac9",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-021",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.021",
+      "sourceDigest": "747cde5d104dde8f840ba0ee6e42b3c0586dcde44bc3e539ce8062e040b9013d",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-021",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.021",
+      "sourceDigest": "ab0ed8a36d4f97b4ef7d6ac226521dcdd73b381272fc910d633a3890c721977f",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-012",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.012",
+      "sourceDigest": "d27fa94c567be01a27e39457a31166d7f60e637b30f2846d0b437b0ea49baea8",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-012",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.012",
+      "sourceDigest": "52e6192f50032f6d9edaa25a4d3410dd38eb8e80fd784c64e7cb6b137f902a41",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p004-022",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p004.022",
+      "sourceDigest": "569054ac951fe38cbdbe22ad3f67c9f1729a81f291f71277bab7d2a7359d7b11",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p004-022",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p004.022",
+      "sourceDigest": "8ff8f0475f7ba9794622ed799667c72a000601944ba97b9ea3186dc858d24a2e",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p005-002",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p005.002",
+      "sourceDigest": "73dd798152d7c0bd41aa233beda53e28bc0eae5438f325f048d8c0394bca5cca",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p005-002",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p005.002",
+      "sourceDigest": "8f5e4d281ccea84d070b33ccc23a816b3a5c16f812fc281f28c37aead8dbbf42",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l001-p005-003",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l001-p005.003",
+      "sourceDigest": "80407494613e42b1da5ed4f106d55c885ac8ba3d11c3fbe6edc4e77046496f97",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l001-p005-003",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l001-p005.003",
+      "sourceDigest": "ac40599921534e59cc2e1ac80e585587da4e0f975798ba8812c823fa16266466",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.sent-tt-l002-p004-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-typing-text-sentences",
+      "recordId": "sent.tt.l002-p004.017",
+      "sourceDigest": "73e32e5f88305bfe8381366428cebc06614e05a23cfce2551e80c2555f928a10",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "not-applicable",
+          "method": "example-sentence"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    },
+    {
+      "id": "review.e06.typing-text-05.ex-cloze-tt-l002-p004-017",
+      "batchId": "e06.typing-text-reviewed-slice",
+      "recordSetId": "reviewed-cloze",
+      "recordId": "ex.cloze.tt.l002-p004.017",
+      "sourceDigest": "235024eef98a541bc38702c39be7633ace6bca6d1c7a0e927c5bc65cc1b3a048",
+      "targetState": "published",
+      "checks": {
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "cross-runtime-token-overlap-review-v5"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "editorial-grammar-review-v5"
+        },
+        "translation": {
+          "status": "not-applicable",
+          "method": "english-only-content"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v5"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "cefr-editorial-review-v5"
+        },
+        "license": {
+          "status": "pass",
+          "method": "project-original-license-review-v5"
+        },
+        "targetStructure": {
+          "status": "pass",
+          "method": "cloze-target-structure-review-v5"
+        }
+      },
+      "reviewedAt": "2026-10-04T07:25:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review",
+      "note": "Fifth controlled typing-text review: source integrity, grammar, naturalness, CEFR, target presence/structure, exact/near dedup, license and cross-game suitability checked before publication."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { readJson } from "./english-content-core.mjs";
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
+const lex=await readJson(path.join(root,"content","english","dictionary","lexeme-seed-pilot.json"));
+const grammar=await readJson(path.join(root,"content","english","grammar","pilot-topics.json"));
+const sentences=await readJson(path.join(root,"content","english","sentences","pilot-sentences.json"));
+const exercises=await readJson(path.join(root,"content","english","sentences","pilot-exercises.json"));
+const byCefr=Object.fromEntries(["A1","A2","B1","B2","C1","C2"].map(level=>[level,grammar.records.filter(item=>item.cefr===level).length]));
+console.log(JSON.stringify({lexemeSeeds:lex.records.length,grammarTopics:grammar.records.length,grammarByCefr:byCefr,sentences:sentences.records.length,exercises:exercises.records.length,publicationState:"authoring-only"},null,2));

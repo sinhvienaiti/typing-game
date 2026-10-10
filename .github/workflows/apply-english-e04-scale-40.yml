@@ -1,0 +1,140 @@
+name: Apply English E04 Scale 40
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+    paths:
+      - scripts/apply-english-e04-focused-scale-40.py
+      - scripts/check-english-e04-scale-40-candidates.py
+      - .github/workflows/apply-english-e04-scale-40.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: english-e04-scale-40
+  cancel-in-progress: false
+
+jobs:
+  apply-scale-40:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+      - name: Replace scale 40 exact-duplicate candidates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/apply-english-e04-focused-scale-40.py')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              "('review structural drawings', 'verb + adjective + noun', 'rà soát bản vẽ kết cấu để xác nhận kích thước, tải trọng và chi tiết thi công', 'B2'),": "('review reinforcement schedules', 'verb + noun phrase', 'rà soát bảng thống kê cốt thép để xác nhận kích thước, số lượng và chi tiết lắp đặt', 'C1'),",
+              "('inspect excavation slopes', 'verb + noun phrase', 'kiểm tra mái dốc hố đào để phát hiện dấu hiệu mất ổn định hoặc sạt lở', 'C1'),": "('assess trench wall stability', 'verb + noun phrase', 'đánh giá độ ổn định của thành rãnh đào để nhận diện nguy cơ sập hoặc biến dạng', 'C1'),",
+              "('balance ventilation systems', 'verb + noun phrase', 'cân chỉnh hệ thống thông gió để lưu lượng tại các nhánh đạt yêu cầu thiết kế', 'C1'),": "('measure ventilation airflow', 'verb + noun phrase', 'đo lưu lượng không khí thông gió để xác nhận hiệu năng tại các khu vực và nhánh ống', 'C1'),",
+          }
+          for old, new in replacements.items():
+              if text.count(old) != 1:
+                  raise SystemExit(f'expected exactly one occurrence of {old!r}')
+              text = text.replace(old, new)
+          path.write_text(text, encoding='utf-8')
+          PY
+      - name: Preflight all scale 40 candidates against current E04
+        run: python3 scripts/check-english-e04-scale-40-candidates.py
+      - name: Apply idempotent E04 scale 40 source batch
+        run: python3 scripts/apply-english-e04-focused-scale-40.py
+      - name: Validate review and controlled-batch contracts
+        run: |
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+      - name: Generate and publish reviewed runtime
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+      - name: Run full English-content quality gates
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Converge derived publication state
+        shell: bash
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Stage reviewed source and generated runtime
+        shell: bash
+        run: |
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-40.py
+          git status --short
+          if git diff --cached --quiet; then
+            echo 'Scale 40 produced no state change; it may already be applied.' >&2
+            exit 1
+          fi
+          git diff --cached --binary > /tmp/scale40-before.patch
+      - name: Verify full publication pipeline is deterministic
+        shell: bash
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs scripts/apply-english-e04-focused-scale-40.py
+          git diff --cached --binary > /tmp/scale40-after.patch
+          if ! cmp -s /tmp/scale40-before.patch /tmp/scale40-after.patch; then
+            echo 'Scale 40 artifacts are not reproducible after converging and replaying the full publication pipeline.' >&2
+            diff -u /tmp/scale40-before.patch /tmp/scale40-after.patch || true
+            exit 1
+          fi
+      - name: Commit validated scale 40 artifacts
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(content): publish E04 collocation scale 40'
+          git push

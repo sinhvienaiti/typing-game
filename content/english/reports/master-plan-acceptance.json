@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "status": "pass",
+  "versions": {
+    "release": "2026.10.0",
+    "dictionary": "2026.10.0",
+    "grammar": "2026.10.0",
+    "sentences": "2026.10.0",
+    "phrases": "2026.10.0",
+    "curriculum": "2026.10.0"
+  },
+  "runtimeCounts": {
+    "dictionary": 900,
+    "grammar": 300,
+    "sentences": 3401,
+    "phrases": 8070,
+    "curriculum": 300
+  },
+  "e03": {
+    "lexemes": 300,
+    "senses": 300,
+    "usages": 300,
+    "lexemesWithoutSenses": 0,
+    "sensesWithoutLexeme": 0,
+    "sensesWithoutVietnameseExplanation": 0,
+    "lexemesWithoutMorphology": 0,
+    "lexemesWithoutUsageRefs": 0,
+    "lexemesWithBrokenUsageRefs": 0,
+    "usagesWithBrokenTargets": 0,
+    "usagesWithoutExamples": 0,
+    "sensesWithoutExamples": 0
+  },
+  "e04": {
+    "collocations": 5000,
+    "verbPatterns": 510,
+    "phrasalVerbs": 790,
+    "chunks": 900,
+    "idioms": 870,
+    "phrasalVerbsMissingMetadata": 0,
+    "collocationsWithoutExamples": 4992,
+    "verbPatternsWithoutExamples": 504,
+    "phraseItemsWithoutExamples": 2534
+  },
+  "e05": {
+    "topics": 300,
+    "topicsByCefr": {
+      "A1": 45,
+      "A2": 50,
+      "B1": 60,
+      "B2": 60,
+      "C1": 50,
+      "C2": 35
+    },
+    "grammarMissingFromCurriculum": 0,
+    "curriculumMissingRuntime": 0
+  },
+  "e06": {
+    "examples": 1513,
+    "exercises": 1400,
+    "exerciseByType": {
+      "cloze": 600,
+      "translation": 600,
+      "error-correction": 100,
+      "transformation": 100
+    },
+    "dialogues": 100,
+    "mistakes": 388
+  },
+  "e07to09": {
+    "capabilities": {
+      "monkeytype": [
+        "grammar-topic",
+        "example-typing",
+        "translation",
+        "cloze",
+        "error-correction",
+        "sentence-building",
+        "transformation",
+        "listening-typing",
+        "contextual-usage",
+        "collocation",
+        "verb-pattern",
+        "phrasal-verb",
+        "idiom",
+        "chunk"
+      ],
+      "recall": [
+        "vocabulary",
+        "collocation",
+        "phrasal-verb",
+        "chunk",
+        "listening-typing",
+        "contextual-usage"
+      ],
+      "shooter": [
+        "vocabulary",
+        "collocation",
+        "phrasal-verb",
+        "chunk",
+        "contextual-usage"
+      ],
+      "karaoke": [
+        "example-typing",
+        "dialogue",
+        "listening-typing",
+        "translation"
+      ],
+      "space": [
+        "vocabulary",
+        "collocation",
+        "phrasal-verb",
+        "chunk",
+        "grammar-challenge",
+        "contextual-usage"
+      ]
+    },
+    "missingCapabilities": {}
+  },
+  "quality": {
+    "stateCounts": {
+      "published": 12671
+    },
+    "unfinishedPublishedChecks": 0,
+    "missingProvenance": 0,
+    "missingSourceLicense": 0
+  },
+  "warnings": [
+    "Collocations without exampleIds: 4992",
+    "Verb patterns without exampleIds: 504",
+    "Phrase items without exampleIds: 2534"
+  ],
+  "errors": []
+}
