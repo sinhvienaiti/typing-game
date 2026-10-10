@@ -11,6 +11,7 @@ function completeCoverage() {
 
 function passingEvidence(overrides = {}) {
   return {
+    provenance: { kind: "real-human-device", synthetic: false },
     humanReadings: { total: 1_000, accepted: 950 },
     negativeAudio: { seconds: 10_800, falseGameplayCommits: 0 },
     latencyMs: { median: 250, p95: 450 },
@@ -36,9 +37,19 @@ test("Final V2 acceptance fails closed for incomplete synthetic/profile evidence
   });
 
   assert.equal(result.ready, false);
+  assert.ok(result.failures.some((failure) => failure.code === "provenance"));
   assert.ok(result.failures.some((failure) => failure.code === "human-readings"));
   assert.ok(result.failures.some((failure) => failure.code === "negative-audio-duration"));
   assert.ok(result.failures.some((failure) => failure.code === "coverage:browserDeviceMatrix"));
+});
+
+test("Final V2 acceptance rejects synthetic provenance even when all numeric gates look good", () => {
+  const result = evaluateVoiceFinalAcceptance(passingEvidence({
+    provenance: { kind: "synthetic-profiler", synthetic: true },
+  }));
+
+  assert.equal(result.ready, false);
+  assert.ok(result.failures.some((failure) => failure.code === "provenance"));
 });
 
 test("Final V2 acceptance rejects insufficient accuracy and any false gameplay commit", () => {
