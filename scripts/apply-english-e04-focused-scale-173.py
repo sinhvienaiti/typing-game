@@ -31,7 +31,7 @@ def main():
         nums=[]
         for record in existing['phraseItems']:
             if record.get('type')!=kind: continue
-            m=re.fullmatch(rf'{prefix}\\.(\\d{{8}})',str(record.get('id','')))
+            m=re.fullmatch(rf'{prefix}\.(\d{{8}})',str(record.get('id','')))
             if m: nums.append(int(m.group(1)))
         current_frontiers[kind]=max(nums) if nums else 0
     if current_frontiers!=frontiers: raise RuntimeError(f'phrase ID frontiers drifted; expected {frontiers}, got {current_frontiers}')
