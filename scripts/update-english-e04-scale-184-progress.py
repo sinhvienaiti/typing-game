@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import runpy
+ROOT=Path(__file__).resolve().parents[1]
+s=runpy.run_path(str(ROOT/'scripts/english-e04-scale-184-common.py'),run_name='e04_scale184_progress')
+replace_once=s['replace_once']; path=s['PROGRESS_PATH']; text=path.read_text(encoding='utf-8')
+repls=[
+('- Latest fully CI-verified scale-up checkpoint before scale-183 publication: `a837830d25c2dac9888d98ed876c527d7f4b8239` — scale-182 publication state verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI; published output: `96be46da948b0559c51536b09d64150f3dddfd7f`.','- Latest fully CI-verified scale-up checkpoint before scale-184 publication: `84980f9d2cdf929a958fa437380af578d313c5c9` — scale-183 publication state verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI; published output: `0cd4d74fa43c02c82b2975ea526a3b35253dfc13`.','verified scale-183 checkpoint'),
+('- Scale-182 publication checkpoint `a837830d25c2dac9888d98ed876c527d7f4b8239` is fully verified; scale-183 is the active publication unit.','- Scale-183 publication checkpoint `84980f9d2cdf929a958fa437380af578d313c5c9` is fully verified; scale-184 is the active publication unit.','scale-184 publication state'),
+('- Scale-183 source/apply publication is active; after bot publication create exactly one normal-user checkpoint before opening scale-184.','- Scale-184 source/apply publication is active; after bot publication create exactly one normal-user checkpoint before opening scale-185.','first unfinished state'),
+('- E04 phrase/pattern architecture + current reviewed publication: complete — 8,070 published records after scale-183','- E04 phrase/pattern architecture + current reviewed publication: complete — 8,110 published records after scale-184','E04 publication count'),
+('## Published runtime snapshot after E04 scale-183 publication','## Published runtime snapshot after E04 scale-184 publication','runtime heading'),
+('- phrases: 8,070 records','- phrases: 8,110 records','phrase count'),
+('- total published rich records: 12,671','- total published rich records: 12,711','rich count'),
+('- editorial ledger: 12,671 decisions / 12,671 applied / 12,671 publish decisions','- editorial ledger: 12,711 decisions / 12,711 applied / 12,711 publish decisions','ledger count'),
+('- E04 phrasal-verb frontier: `pv.00000790`','- E04 phrasal-verb frontier: `pv.00000800`','pv frontier'),
+('- E04 chunk frontier: `chunk.00000900`','- E04 chunk frontier: `chunk.00000915`','chunk frontier'),
+('- E04 idiom frontier: `idiom.00000870`','- E04 idiom frontier: `idiom.00000885`','idiom frontier'),
+('   - phrasal verbs: 1,000+; current frontier is 790, leaving a minimum deficit of 210;','   - phrasal verbs: 1,000+; current frontier is 800, leaving a minimum deficit of 200;','phrasal deficit'),
+('1. Scale-182 publication checkpoint `a837830d25c2dac9888d98ed876c527d7f4b8239` is fully verified; do not duplicate scale-182 artifacts.','1. Scale-183 publication checkpoint `84980f9d2cdf929a958fa437380af578d313c5c9` is fully verified; do not duplicate scale-183 artifacts.','verified current workstream'),
+('2. Scale-183 is the active publication unit; do not start scale-184 until its bot publication, one normal-user checkpoint and all three mandatory CI gates complete.','2. Scale-184 is the active publication unit; do not start scale-185 until its bot publication, one normal-user checkpoint and all three mandatory CI gates complete.','current workstream'),
+('3. Scale-183 adds the bounded 40-record phrase batch: 10 phrasal verbs + 15 chunks + 15 idioms, advancing the expected publication frontiers to `pv.00000790` / `chunk.00000900` / `idiom.00000870`; near-dedupe threshold remains `0.86`.','3. Scale-184 adds the bounded 40-record phrase batch: 10 phrasal verbs + 15 chunks + 15 idioms, advancing the expected publication frontiers to `pv.00000800` / `chunk.00000915` / `idiom.00000885`; near-dedupe threshold remains `0.86`.','scale-184 frontiers'),
+('6. After scale-183 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.','6. After scale-184 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.','checkpoint instruction'),
+('Finish the active Scale-183 apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance + Platform CI on that checkpoint. If all three PASS, open Scale-184 from the resulting live frontiers without changing the `0.86` threshold.','Finish the active Scale-184 apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance + Platform CI on that checkpoint. If all three PASS, open Scale-185 from the resulting live frontiers without changing the `0.86` threshold.','next task')]
+for old,new,label in repls: text=replace_once(text,old,new,label)
+path.write_text(text,encoding='utf-8')
