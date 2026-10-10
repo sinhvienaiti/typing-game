@@ -57,6 +57,14 @@ jobs:
           pnpm learning:check
           pnpm learning:test
 
+      - name: Install Voice Portal dependencies
+        run: pnpm --dir portal install --frozen-lockfile
+
+      - name: Validate voice foundation and canonical child contract
+        run: |
+          pnpm voice:test
+          pnpm voice:check
+
       - name: Validate shared vocabulary
         run: |
           pnpm vocab:validate

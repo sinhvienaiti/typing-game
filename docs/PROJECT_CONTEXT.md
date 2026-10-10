@@ -4226,3 +4226,76 @@ Portal build: PASS
 ~~~
 
 For future continuation, reconstruct from parent `main` and these gitlinks rather than any older SHA in this document.
+
+
+---
+
+# 88. Space Voice and Warp Charge feature branches (2026-10-04)
+
+For this feature's continuation, use parent `feat/space-voice-platform` and its
+pinned `games/space-typing` commit from child `feat/bgv-integration-current`. This
+feature checkpoint supersedes the earlier foundation-only Voice status on those
+branches; it does not change the main-branch history recorded above.
+
+Offline English Voice/Hybrid, bottom-right mode/Mic controls, transcript feedback,
+semantic completion and separated speaking/profile credit are implemented. Portal
+owns capture and lazy inference. `./dev.sh space` and `./play.sh` prepare the pinned
+model; use https://typing-game.local/space-typing to activate recognition.
+
+Warp Charge V3 uses canonical transactional IndexedDB, a Web Lock writer and
+generation/fence/receipt checks. Active 100, Reserve 300, cost 10, regeneration
+6/12 minutes, opt-in Reserve deficit spending and 8/12/18 SC instant +20 refills
+(maximum three per 04:00 UTC+7 day) are implemented. Practice is free and learning
+only; Campaign economic mutations are isolated from its overlay. Save schema 28
+protects current/future/corrupt saves and supports explicit whole-profile recovery.
+
+Final automated checks: game 253 files / 1,623 tests; shared Voice/Learning 105
+tests; game and Portal builds; real Worker/WASM/model WAV decoding. Graphics
+High/Ultra remain intact. The economy audit has 104 production-formula scenarios
+and documents positive replay net: refills are daily limited acceleration rather
+than a proven SC sink.
+
+Real browser/microphone, visual/device acceptance, recognition corpus, negative
+audio, end-to-end latency and frame benchmarks remain unverified. Start from
+[local test instructions](./SPACE_VOICE_AND_WARP_LOCAL.md), then the child Voice/Warp
+status documents; do not infer release certification from the automated suite.
+
+## Voice timeout follow-up (2026-10-04)
+
+The feature branches now report separate Portal, permission, model, audio and
+recognizer timeouts, forward preparation progress and bound/cancel audio activation.
+Lazy import failures surface immediately and allow retry. Portal main currently
+has no Voice host: update the parent feature branch as well as its child gitlink,
+restart the launcher and reload the Portal tab after pulling. This is a confirmed
+compatibility case, not a confirmed diagnosis of the user's Mac stage.
+
+Latest checks: 1,626 game tests, 115 shared Voice/Learning tests, both builds,
+canonical contract, real Worker/WASM decoding and Node VM worklet smoke tests
+passed. Native microphone/browser acceptance remains unverified; Warp is unchanged.
+
+## Local Voice/Warp investigation (2026-10-04, working-tree fixes)
+
+Confirmed on this Mac: Vite served the pinned `.tar.gz` as HTTP gzip encoding,
+causing browser auto-inflation and a checksum mismatch despite valid disk bytes.
+Dev/preview now serve the archive unchanged; invalid asset cache entries retry
+once with full pin verification. Space Typing also replaces unsupported built-in
+boss counter `unbind` with `unlock` and shows Warp on the pilot card with a depot
+dialog. Browser deployment verified 100→90; Practice retained 100.
+
+Voice now connects through Portal and recognizes synthetic spoken words in a
+standalone real browser pipeline. Same-recognizer warmup and bounded 1-second
+audio backpressure mitigate startup bursts, but Portal + combat still reproduced
+ASR overload under current machine load. **Do not mark full Voice combat PASS.**
+See `games/space-typing/docs/VOICE_WARP_FIX_REVIEW_2026-10-04.md` for evidence,
+limitations and remaining performance work. No user's save was reset or edited.
+
+Follow-up review on the same date: cached bounded FIR coefficients eliminate
+repeated resampler trig work; host runtime errors are generation-fenced and release
+the mic immediately, including while suspended. Concurrent warmup/resume and close
+races are covered. Warp queued requests snapshot caller-owned data; Refuel shows
+cost, affordability and Active/Reserve allocation. 77 parent Voice tests and 134
+targeted game tests pass; both TypeScript checks and direct Vite builds pass.
+Real speech fixtures still overflow in two Portal+combat runs (standalone speech
+passes). Do not replace this result with the silence-only run that passed.
+Full game suite has an unrelated VFX alpha failure and two timing failures that
+pass in isolated reruns. See the review for exact evidence; media was not changed.

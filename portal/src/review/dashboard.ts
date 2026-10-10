@@ -556,6 +556,16 @@ export class SmartReviewDashboard {
       this.#renderFilters(state, topicOptions, wordTypeOptions, grammarOptions),
       this.#renderResults(result, vocabulary, now),
     );
+    const speaking = Object.values(profile.speaking ?? {}).sort((a, b) => Date.parse(b.lastSeenAt ?? "") - Date.parse(a.lastSeenAt ?? ""));
+    if (speaking.length) {
+      const panel = element("details", "review-header");
+      panel.append(element("summary", undefined, `Speaking history · ${speaking.length} words · ${speaking.reduce((sum, record) => sum + record.accepted, 0)} accepted`));
+      panel.append(element("p", undefined, "Accepted speech and speaking recall are recorded separately from spelling mastery."));
+      const list = element("ul");
+      for (const record of speaking.slice(0, 100)) list.append(element("li", undefined, `${record.wordKey} · ${record.accepted} accepted · ${record.activities["speaking-recall"] ?? 0} recall · ${record.hints} hints · ${record.replays} replays`));
+      if (speaking.length > 100) panel.append(element("p", undefined, "Showing the 100 most recent words. Export Learning Data for the full history."));
+      panel.append(list); main.append(panel);
+    }
   }
 
   #renderHeader(profile: LearningProfile, now: string): HTMLElement {
