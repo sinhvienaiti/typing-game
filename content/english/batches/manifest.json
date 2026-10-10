@@ -20929,6 +20929,102 @@
           "recordType": "idiom"
         }
       ]
+    },
+    {
+      "id": "e04.phrase-pattern-scale-182",
+      "phase": "E04",
+      "category": "phrases",
+      "cefr": [
+        "B2",
+        "C1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "scale-phrases",
+          "path": "content/english/phrases/e04-scale-182-phrases.json",
+          "expectedCount": 40,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "grammar",
+            "translation",
+            "naturalness",
+            "cefr",
+            "targetStructure",
+            "exactDuplicate",
+            "nearDuplicate",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "schema-validation",
+        "reference-integrity",
+        "exact-dedup",
+        "near-dedup",
+        "grammar-review",
+        "bilingual-review",
+        "naturalness-review",
+        "cefr-review",
+        "target-structure-review",
+        "license-review",
+        "cross-game-smoke"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "recall-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "phrasal-verb",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "phrasal-verb"
+        },
+        {
+          "gameId": "recall-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "vocab-shooter",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "space-typing",
+          "activity": "chunk",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "chunk"
+        },
+        {
+          "gameId": "monkeytype",
+          "activity": "idiom",
+          "recordSetId": "scale-phrases",
+          "sampleCount": 5,
+          "recordType": "idiom"
+        }
+      ]
     }
   ]
 }
