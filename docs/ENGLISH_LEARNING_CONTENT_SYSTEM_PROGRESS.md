@@ -6,9 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-175 publication: `450ccbc8548837cf9777ae82940966c597bacfc4` — scale-174 publication state plus refreshed pinned Tatoeba source snapshot verified by English Content Master Plan Acceptance #659, English Content Full Validation #530 and Platform CI #1869; published output: `ca5daab7308c169d6e7513b7bb47fd737c0f8699`.
-- Scale-174 publication state at `450ccbc8548837cf9777ae82940966c597bacfc4` is fully verified; scale-175 is the current publication unit.
-- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
+- Latest bot publication commit: `80ec239390c0db63b48bf397f148f1c64d932b1e` — `feat(content): publish E04 phrase scale 175`.
+- Scale-175 publication has completed all apply-workflow gates; this normal-user checkpoint must be verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI before the next E04 batch is opened.
+- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
 
@@ -49,9 +49,9 @@ Priority order:
 1. E04 evidence-backed example-link enrichment for existing collocations, verb patterns, phrasal verbs, idioms and chunks.
 2. E04 scale-up toward long-term lexical-unit targets while preserving reviewed provenance/license gates:
    - verb patterns: 500–1,000 target range; current runtime already exceeds the 500 minimum at 510, so prioritize other under-target families unless valid reviewed evidence is ready;
-   - collocations: 5,000+;
-   - phrasal verbs: 1,000+;
-   - idioms/chunks: 2,000+ long-term scale target.
+   - collocations: 5,000+; current frontier is 5,000, so the minimum is met;
+   - phrasal verbs: 1,000+; current frontier is 710, leaving a minimum deficit of 290;
+   - idioms/chunks: 2,000+ long-term scale target; continue bounded reviewed idiom/chunk batches while the target remains unmet.
 3. E11 sentence/exercise corpus scale-up:
    - example sentences: 100,000+;
    - translation pairs: 20,000+;
@@ -92,11 +92,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-174 publication is fully verified at `450ccbc8548837cf9777ae82940966c597bacfc4`; do not duplicate scale-174 artifacts.
-2. Scale-175 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.
-3. After the scale-175 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+1. Scale-175 bot publication is complete at `80ec239390c0db63b48bf397f148f1c64d932b1e`; do not duplicate scale-175 artifacts.
+2. Verify this single normal-user checkpoint with English Content Full Validation, Master Plan Acceptance and Platform CI.
+3. After all three mandatory CI workflows PASS, recalculate deficits from the resulting HEAD and open the next bounded E04 unit (Scale-176) for under-target phrasal verbs, idioms and chunks unless safer reviewed enrichment has become available.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. Scale-175 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.
+5. Reuse the established scale-up workflow and keep the batch bounded; preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -110,4 +110,4 @@ None.
 
 ## Next actionable task
 
-Scale-175 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000710`, `chunk.00000780` and `idiom.00000750` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.
+Verify this Scale-175 normal-user checkpoint against English Content Full Validation, English Content Master Plan Acceptance and Platform CI. Once all three PASS, continue immediately with Scale-176: recalculate live deficits from HEAD, use the next safe IDs after `pv.00000710`, `chunk.00000780` and `idiom.00000750`, generate one bounded reviewed batch, run exact/near dedupe before publication, and drive the full apply/publish/CI pipeline to completion.
