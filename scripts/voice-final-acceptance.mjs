@@ -42,6 +42,21 @@ export function evaluateVoiceFinalAcceptance(report) {
   const value = report && typeof report === "object" && !Array.isArray(report) ? report : {};
   const failures = [];
 
+  const provenance = value.provenance && typeof value.provenance === "object" && !Array.isArray(value.provenance)
+    ? value.provenance
+    : {};
+  if (provenance.kind !== "real-human-device" || provenance.synthetic !== false) {
+    addFailure(
+      failures,
+      "provenance",
+      "evidence must be explicitly recorded from real human/device acceptance (synthetic=false)",
+      {
+        kind: provenance.kind ?? null,
+        synthetic: provenance.synthetic ?? null,
+      },
+    );
+  }
+
   const totalReadings = value.humanReadings?.total;
   const acceptedReadings = value.humanReadings?.accepted;
   const validReadingCounts =
@@ -145,6 +160,10 @@ export function evaluateVoiceFinalAcceptance(report) {
 
   return {
     ready: failures.length === 0,
+    provenance: {
+      kind: provenance.kind ?? null,
+      synthetic: provenance.synthetic ?? null,
+    },
     metrics: {
       totalReadings: validReadingCounts ? totalReadings : null,
       acceptedReadings: validReadingCounts ? acceptedReadings : null,
