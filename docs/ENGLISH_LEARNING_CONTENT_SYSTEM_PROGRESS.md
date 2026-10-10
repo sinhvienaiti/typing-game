@@ -6,8 +6,8 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up checkpoint before scale-164 publication: `7bc45c768ed1c72a66861c16c9750a4c47feedee` — scale-163 publication state verified by English Content Master Plan Acceptance #589, English Content Full Validation #471 and Platform CI #1799; published output: `e498df80505e641daeb7cc606bf1d904684e82fd`.
-- Scale-163 publication checkpoint `7bc45c768ed1c72a66861c16c9750a4c47feedee` is fully verified; scale-164 is the current publication unit.
+- Latest fully CI-verified scale-up checkpoint before scale-165 publication: `7170c534b2b4e373ca346fd03aa537175b4017bf` — scale-164 publication state verified by English Content Master Plan Acceptance #593, English Content Full Validation #474 and Platform CI #1803; published output: `8e9b0b5a709475358830b4a9e0c9200752354b66`.
+- Scale-164 publication checkpoint `7170c534b2b4e373ca346fd03aa537175b4017bf` is fully verified; scale-165 is the current publication unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is now active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -18,7 +18,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 7,310 published records after scale-164
+- E04 phrase/pattern architecture + current reviewed publication: complete — 7,350 published records after scale-165
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -26,19 +26,19 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-164 publication
+## Published runtime snapshot after E04 scale-165 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 7,310 records
-- total published rich records: 11,911
+- phrases: 7,350 records
+- total published rich records: 11,951
 - attribution runtime: 4 source records
-- editorial ledger: 11,911 decisions / 11,911 applied / 11,911 publish decisions
+- editorial ledger: 11,951 decisions / 11,951 applied / 11,951 publish decisions
 - E04 collocation frontier: `col.00005000`
-- E04 phrasal-verb frontier: `pv.00000600`
-- E04 chunk frontier: `chunk.00000615`
-- E04 idiom frontier: `idiom.00000585`
+- E04 phrasal-verb frontier: `pv.00000610`
+- E04 chunk frontier: `chunk.00000630`
+- E04 idiom frontier: `idiom.00000600`
 
 ## Approved scale-up targets
 
@@ -92,11 +92,11 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-163 publication is fully verified at `7bc45c768ed1c72a66861c16c9750a4c47feedee`; do not duplicate scale-163 artifacts.
-2. Scale-164 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.
-3. After the scale-164 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+1. Scale-164 publication is fully verified at `7170c534b2b4e373ca346fd03aa537175b4017bf`; do not duplicate scale-164 artifacts.
+2. Scale-165 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.
+3. After the scale-165 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. Scale-164 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.
+5. Scale-165 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.
 6. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 7. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -110,4 +110,4 @@ None.
 
 ## Next actionable task
 
-Scale-164 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000600`, `chunk.00000615` and `idiom.00000585` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.
+Scale-165 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000610`, `chunk.00000630` and `idiom.00000600` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.
