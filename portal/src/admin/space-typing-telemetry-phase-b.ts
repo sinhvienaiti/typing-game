@@ -95,7 +95,7 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
           : "Inspect production session signals and the truthful scope of persisted local-profile historical data."}</p>
       </div>
       <div class="space-admin-page__badges">
-        <span class="st-admin-badge">RUNTIME-BACKED · READ ONLY</span>
+        <span class="st-admin-badge">RUNTIME-BACKED · SESSION READ ONLY</span>
         <span class="st-admin-badge">HISTORY · LOCAL PROFILE ONLY</span>
         <span class="st-admin-badge">CROSS-PLAYER · UNSUPPORTED</span>
       </div>
