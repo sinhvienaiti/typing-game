@@ -6,14 +6,15 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const [service, server, router, page, map, builder, runtime, controller] = await Promise.all([
+const [service, server, router, page, map, builder, library, adapter, controller] = await Promise.all([
   readFile(resolve(root, "admin/music-assets.mjs"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-music-library-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
   readFile(resolve(childRoot, "scripts/music/build-world-music-catalog.mjs"), "utf8"),
-  readFile(resolve(childRoot, "src/audio/world-music-runtime.ts"), "utf8"),
+  readFile(resolve(childRoot, "src/audio/music-library.ts"), "utf8"),
+  readFile(resolve(childRoot, "src/audio/world-music-adapter.ts"), "utf8"),
   readFile(resolve(childRoot, "src/audio/MusicController.ts"), "utf8"),
 ]);
 
@@ -35,12 +36,20 @@ assert.match(builder, /createHash\("sha256"\)/);
 assert.match(builder, /--check/);
 assert.match(builder, /symlink escape/);
 
-assert.match(runtime, /import catalogData from "\.\/world-music-catalog\.json"/);
-assert.match(runtime, /BUNDLED_WORLD_MUSIC_CATALOG/);
-assert.match(runtime, /materializeRuntimeMusicTracks/);
-assert.match(controller, /BUNDLED_WORLD_MUSIC_CATALOG/);
-assert.match(controller, /this\.catalog = options\.catalog/);
-assert.match(controller, /materializeRuntimeMusicTracks\(this\.catalog/);
+assert.match(library, /import catalogData from "\.\/world-music-catalog\.json"/);
+assert.match(library, /materializeCatalogTrack/);
+assert.match(library, /export const MUSIC_TRACKS/);
+assert.match(library, /resolvePublishedWorldMusicPlaylist/);
+assert.match(library, /legacyWorldPlaylist/);
+
+assert.match(adapter, /import catalogData from "\.\/world-music-catalog\.json"/);
+assert.match(adapter, /PUBLISHED_WORLD_MUSIC_POLICY/);
+assert.match(adapter, /WORLD_MUSIC_CATALOG/);
+assert.match(adapter, /resolveWorldMusicPlaylist/);
+assert.match(adapter, /publishedMusicAssetForState/);
+
+assert.match(controller, /from "\.\/music-library"/);
+assert.match(controller, /this\.tracks = options\.tracks \?\? MUSIC_TRACKS/);
 
 assert.match(server, /\/api\/admin\/space-typing\/music\/library/);
 assert.match(server, /\/api\/admin\/space-typing\/music\/upload/);
@@ -68,4 +77,4 @@ execFileSync(process.execPath, [resolve(childRoot, "scripts/music/build-world-mu
   stdio: "pipe",
 });
 
-console.log("Space Typing Music Library Admin validation passed: authored asset service -> deterministic catalog rebuild -> production MusicController runtime catalog.");
+console.log("Space Typing Music Library Admin validation passed: authored asset service -> deterministic catalog rebuild -> canonical adapter/library -> production MusicController.");
