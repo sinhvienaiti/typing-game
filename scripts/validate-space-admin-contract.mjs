@@ -38,6 +38,9 @@ assert.deepEqual(snapshot, child);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 assert.equal(childHead, VISUALS_AUDITED_CHILD_SHA, `Visuals audit is stale: audited=${VISUALS_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Backgrounds/VFX before changing this SHA.`);
 
+const normalizedBackgroundBudgetSource = backgroundBudgetSource.replaceAll("_", "");
+const normalizedQualitySource = qualitySource.replaceAll("_", "");
+
 assert.equal(backgrounds.capability, "backgrounds.read");
 assert.equal(backgrounds.backgrounds?.mode, "runtime-derived-readonly");
 assert.equal(backgrounds.backgrounds?.writeCapability, false);
@@ -47,11 +50,8 @@ assert.deepEqual(backgrounds.backgrounds?.authorableFields, []);
 assert.equal(backgrounds.backgrounds?.preview?.productionRenderer, true);
 for (const [tier, expected] of Object.entries(backgrounds.backgrounds.qualityBudgets)) {
   for (const [field, value] of Object.entries(expected)) {
-    const literal = Number.isInteger(value) && Math.abs(value) >= 1000
-      ? String(value).replace(/000$/, "_000")
-      : String(value);
     assert.ok(
-      backgroundBudgetSource.includes(`${field}: ${literal}`) || backgroundBudgetSource.includes(`${field}: ${value}`),
+      normalizedBackgroundBudgetSource.includes(`${field}: ${value}`),
       `Background ${tier} budget drifted: ${field}=${value}`,
     );
   }
@@ -72,9 +72,8 @@ assert.ok(vfx.vfx?.domains?.includes("boss-effects"));
 assert.ok(vfx.vfx?.domains?.includes("screen-feedback"));
 for (const [tier, expected] of Object.entries(vfx.vfx.qualityProfiles)) {
   for (const [field, value] of Object.entries(expected)) {
-    const normalized = String(value).replace(/000$/, "_000");
     assert.ok(
-      qualitySource.includes(`${field}: ${value}`) || qualitySource.includes(`${field}: ${normalized}`),
+      normalizedQualitySource.includes(`${field}: ${value}`),
       `VFX ${tier} quality profile drifted: ${field}=${value}`,
     );
   }
