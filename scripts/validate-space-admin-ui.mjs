@@ -158,7 +158,10 @@ assert(router.includes('if (path === `${BASE}/feature-gates` || path === `${BASE
 assert(router.includes('return renderPhaseBCoreAdminScreen(path, navigate);'), "Phase B core fallback for revision-backed screens is missing");
 
 assert(telemetry.includes('/api/admin/space-typing/telemetry/contract'), "Telemetry screen is not bound to the authenticated telemetry contract");
-assert(telemetry.includes('RUNTIME-BACKED · SESSION READ ONLY'), "Telemetry runtime boundary badge is missing");
+assert(telemetry.includes('RUNTIME-BACKED · READ ONLY'), "Telemetry runtime read-only badge is missing");
+assert(telemetry.includes('LOCAL PROFILE HISTORY'), "Telemetry local-profile historical ownership badge is missing");
+assert(telemetry.includes('NO CENTRAL BACKEND'), "Telemetry central-backend boundary badge is missing");
+assert(!telemetry.includes('NO HISTORICAL BACKEND'), "Telemetry screen still claims historical analytics are absent even though local-profile history exists");
 assert(musicLibrary.includes('/api/admin/space-typing/music/library'), "Music Library does not read the canonical Admin music catalog endpoint");
 assert(musicLibrary.includes('/api/admin/space-typing/music/upload'), "Music Library upload does not use the canonical Admin asset service");
 assert(worldMusic.includes('previewWorldMusic'), "World Music Phase B screen does not use canonical preview resolution");
