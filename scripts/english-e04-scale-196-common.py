@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 base=runpy.run_path(str(ROOT/'scripts/english-e04-scale-195-common.py'),run_name='e04_scale196_base')
 read_json=base['read_json']; write_json=base['write_json']; normalized_key=base['normalized_key']; jaccard=base['jaccard']; digest=base['digest']; replace_once=base['replace_once']
 MANIFEST_PATH=ROOT/'content/english/batches/manifest.json'; PHRASE_PATH=ROOT/'content/english/phrases/e04-scale-196-phrases.json'; DECISION_PATH=ROOT/'content/english/reviews/decisions.d/e04-scale-196.json'; PROGRESS_PATH=ROOT/'docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md'
-BATCH_ID='e04.phrase-pattern-scale-196'; REVIEWED_AT='2026-10-11T07:15:00Z'; REVIEWED_BY='chatgpt-editorial-scale-196'
+BATCH_ID='e04.phrase-pattern-scale-196'; REVIEWED_AT='2026-10-11T07:00:00Z'; REVIEWED_BY='chatgpt-editorial-scale-196'
 EXPECTED={'collocations':5000,'verbPatterns':510,'phraseItems':3040}; EXPECTED_FRONTIERS={'phrasal-verb':910,'chunk':1080,'idiom':1050}; NEAR_DUP_THRESHOLD=0.86
 _base_candidates=read_json(ROOT/'scripts/e04-scale-196-candidates.json')['records']; _replacements=read_json(ROOT/'scripts/e04-scale-196-candidate-replacements.json').get('replacements',{}); CANDIDATES=[_replacements.get(spec['text'],spec) for spec in _base_candidates]
 if len(CANDIDATES)!=40: raise RuntimeError(f'scale-196 candidate count drifted: {len(CANDIDATES)}')
