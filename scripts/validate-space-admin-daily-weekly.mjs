@@ -78,8 +78,13 @@ for (const source of contract.liveOps.runtimeSources) {
   const content = await readChild(source);
   assert.ok(content.length > 0, `Daily / Weekly runtime source is empty: ${source}`);
 }
-assert.match(weeklyRuntime, /weeklyChallengeWeekKey/);
-assert.match(weeklyRuntime, /weeklySeed/);
+assert.match(challengeSource, /export function weeklyChallengeWeekKey/);
+assert.match(challengeSource, /export function weeklySeed/);
+assert.match(challengeSource, /export function weeklyChallengeIdentity/);
+assert.match(weeklyRuntime, /export function weeklyChallengeRunBinding/);
+assert.match(weeklyRuntime, /export function weeklyChallengeResumeStatus/);
+assert.match(weeklyRuntime, /export function settleWeeklyChallengeProfile/);
+assert.match(weeklyRuntime, /export function buildWeeklyChallengeAdminSnapshot/);
 assert.match(weeklyAdmin, /WEEKLY_CHALLENGE_ADMIN_MODE = "read-only"/);
 assert.match(weeklyAdmin, /canMutate:\s*false/);
 assert.match(challengeSource, /daily/);
