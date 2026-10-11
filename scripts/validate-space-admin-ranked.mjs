@@ -6,12 +6,13 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("games/space-typing/contracts/space-typing-admin-ranked.v1.json"));
-const [rankedSource, authoritySource, serviceSource, querySource, historyAdminSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
+const [rankedSource, authoritySource, serviceSource, querySource, historyAdminSource, wsServerSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/ranked.ts"),
   read("games/space-typing/src/duel/authority.ts"),
   read("games/space-typing/server/duel/ranked-service.ts"),
   read("games/space-typing/server/duel/ranked-history-query-service.ts"),
   read("games/space-typing/src/duel/ranked-history-admin.ts"),
+  read("games/space-typing/server/duel/ws-server.ts"),
   read("portal/src/admin/space-typing-ranked-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
   read("portal/src/admin/space-typing.ts"),
@@ -33,6 +34,9 @@ assert.equal(ranked.rating.base, 1000);
 assert.equal(ranked.matchmaking.reconnectGraceMs, 30000);
 assert.equal(ranked.history.available, true);
 assert.equal(ranked.history.mode, "persisted-authoritative-readonly");
+assert.equal(ranked.history.queryServiceAvailable, true);
+assert.equal(ranked.history.productionTransportExposed, false);
+assert.equal(ranked.history.parentAdminQueryBridge, false);
 assert.equal(ranked.history.defaultScope, "self");
 assert.equal(ranked.history.crossPlayerScope, "authorized-cross-player");
 assert.equal(ranked.history.authenticationRequired, true);
@@ -47,15 +51,19 @@ for (const symbol of ["startRankedMatch", "rankedParticipant", "finishRankedForf
   assert.ok(authoritySource.includes(symbol), `Ranked authority evidence missing: ${symbol}`);
 }
 assert.match(serviceSource, /DuelRankedService/);
+assert.match(serviceSource, /history\(accountId: string\)/);
 assert.match(historyAdminSource, /DUEL_RANKED_HISTORY_ADMIN_MODE = "read-only"/);
 assert.match(historyAdminSource, /canMutate: false/);
 for (const symbol of ["UNAUTHENTICATED", "FORBIDDEN", "authorized-cross-player", "authorizeCrossPlayer", "Cross-player Ranked history access is not configured"]) {
   assert.ok(querySource.includes(symbol), `Ranked history authorization evidence missing: ${symbol}`);
 }
+assert.ok(!wsServerSource.includes("DuelRankedHistoryQueryService"), "Ranked history contract says production transport is closed, but ws-server now wires the query service; re-audit the transport boundary.");
 
 assert(uiSource.includes("/api/admin/space-typing/ranked/contract"));
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"));
-assert(uiSource.includes("HISTORY · AUTHENTICATED"));
+assert(uiSource.includes("HISTORY SERVICE · READ ONLY"));
+assert(uiSource.includes("HISTORY TRANSPORT · NOT EXPOSED"));
+assert(uiSource.includes("Parent Admin query bridge"));
 assert(uiSource.includes("Fail closed when unconfigured"));
 assert(!uiSource.includes("api.createRevision"));
 assert(!uiSource.includes("api.publish"));
@@ -69,7 +77,10 @@ const phaseMap = JSON.parse(phaseMapSource);
 const row = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/ranked");
 assert.equal(row?.domain, "runtime.ranked");
 assert.equal(row?.persistence, "child-duel-server-profile-and-history-store");
+assert.equal(row?.historyQueryService, true);
+assert.equal(row?.historyTransport, "not-exposed");
+assert.equal(row?.parentAdminHistoryBridge, false);
 assert.equal(row?.applyBoundary, "none");
 assert.equal(row?.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Ranked Admin validation passed: live Ranked policy plus authenticated persisted history are read-only and cross-player access remains fail-closed.");
+console.log("Space Typing Ranked Admin validation passed: Ranked policy/history service are real and read-only; production history transport remains explicitly not exposed and cross-player access remains fail-closed.");
