@@ -1,4 +1,4 @@
-export const CURRENCIES_AUDITED_CHILD_SHA = "ba6276285699af4a0945fba6ff41d262e2f022c2";
+export const CURRENCIES_AUDITED_CHILD_SHA = "19413c24a42cee65237476e7e5a7b33edcdfb64a";
 
 export const CURRENCY_FIELDS = Object.freeze([
   "ID",
