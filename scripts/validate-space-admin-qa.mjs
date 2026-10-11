@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const QA_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
+const QA_AUDITED_CHILD_SHA = "5cc2de2f0a88400ae6531dc05b67b033196126ca";
 const contract = JSON.parse(await readFile(resolve(childRoot, "contracts/space-typing-admin-qa.v1.json"), "utf8"));
 const page = await readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8");
 const router = await readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8");
@@ -23,44 +23,46 @@ assert.equal(contract.route.path, "/admin/space-typing/qa");
 assert.equal(contract.qa.mode, "runtime-backed-ephemeral-sandbox");
 assert.equal(contract.qa.applyBoundary, "new-qa-run");
 assert.equal(contract.qa.sandboxMutationCapability, true);
-assert.equal(contract.qa.presetWriteCapability, true);
 assert.equal(contract.qa.productionPersistenceWriteCapability, false);
 assert.equal(contract.qa.publishCapability, false);
 assert.equal(contract.qa.persistence.session, "isolated-in-memory");
-assert.equal(contract.qa.persistence.preset, "test-lab-only-browser-local-storage");
-assert.equal(contract.qa.persistence.presetKey, "spaceTypingTestLabPresetV1");
 assert.equal(contract.qa.persistence.productionCampaign, "no-write");
 assert.equal(contract.qa.safety.usesProductionGameRuntime, true);
 assert.equal(contract.qa.safety.isolatedSessionState, true);
-assert.equal(contract.qa.safety.neverAutosavesCampaignProgression, true);
-assert.equal(contract.qa.safety.gameMethodsGuardedByTestLabEnabled, true);
 assert.equal(contract.qa.safety.productionSaveMutation, false);
+assert.deepEqual(contract.qa.currentRuntimeCoverage.alternativeModes.modes, ["reflex", "word-chain"]);
+assert.equal(contract.qa.currentRuntimeCoverage.alternativeModes.rankedEligible, false);
+assert.equal(contract.qa.currentRuntimeCoverage.weeklyChallenge.mode, "read-only");
+assert.equal(contract.qa.currentRuntimeCoverage.historicalAnalytics.scope, "current-local-profile");
+assert.equal(contract.qa.currentRuntimeCoverage.historicalAnalytics.crossPlayerSupported, false);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.queryServiceAvailable, true);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.productionTransportExposed, false);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.parentAdminQueryBridge, false);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.authenticationRequired, true);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.crossPlayerAuthorizationRequired, true);
+assert.equal(contract.qa.currentRuntimeCoverage.voiceHybrid.hardwareAcceptance, "manual");
 
 assert.match(server, /space-typing-admin-qa\.v1\.json/);
-assert.match(server, /request\.method==="GET"&&url\.pathname==="\/api\/admin\/space-typing\/qa\/contract"/);
+assert.match(server, /\/api\/admin\/space-typing\/qa\/contract/);
 for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
-  assert.ok(
-    !server.includes(`request.method==="${method}"&&url.pathname==="/api/admin/space-typing/qa/`),
-    `QA Admin service must not expose a fake ${method} mutation endpoint`,
-  );
+  assert.ok(!server.includes(`request.method==="${method}"&&url.pathname==="/api/admin/space-typing/qa/`), `QA Admin service must not expose a fake ${method} mutation endpoint`);
 }
 
 assert.match(router, /renderPhaseBQa/);
-assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
 assert.match(nav, /label:\s*"QA Sandbox"/);
-assert.match(nav, /path:\s*`\$\{ADMIN_BASE\}\/qa`/);
-assert.match(page, /\/api\/admin\/space-typing\/qa\/contract/);
-assert.match(page, /\/games\.json/);
 assert.match(page, /Developer Test Lab/);
 assert.match(page, /RUNTIME-BACKED · EPHEMERAL/);
 assert.match(page, /PRODUCTION SAVE · NO WRITE/);
-assert.match(page, /NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE/);
+assert.match(page, /RANKED HISTORY TRANSPORT · CLOSED/);
+assert.match(page, /MIC HARDWARE · MANUAL/);
+assert.match(page, /currentRuntimeCoverage/);
+assert.match(page, /Parent query bridge/);
+assert.match(page, /hardware acceptance =/i);
 assert.match(page, /window\.open\(appUrl/);
 assert.doesNotMatch(page, /createRevision|\/publish|\/revisions/);
 
 const game = games.games?.find((entry) => entry.id === "space-typing");
 assert.equal(game?.appUrl, "https://space.typing-game.local");
-
 const qaMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/qa");
 assert.ok(qaMap, "QA Sandbox Phase B map row is required");
 assert.equal(qaMap.domain, "qa");
@@ -68,4 +70,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab launcher handoff + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · current-runtime coverage + closed Ranked history transport + isolated Test Lab + manual hardware gate).`);

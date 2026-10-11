@@ -24,6 +24,20 @@ type QaContractPayload = {
     publishCapability: false;
     lifecycleActions: string[];
     inspection: string[];
+    currentRuntimeCoverage: {
+      weeklyChallenge: { owner: string; mode: "read-only" };
+      alternativeModes: { owner: string; modes: string[]; rankedEligible: false };
+      historicalAnalytics: { owner: string; scope: "current-local-profile"; crossPlayerSupported: false };
+      rankedHistory: {
+        owner: string;
+        queryServiceAvailable: true;
+        productionTransportExposed: false;
+        parentAdminQueryBridge: false;
+        authenticationRequired: true;
+        crossPlayerAuthorizationRequired: true;
+      };
+      voiceHybrid: { owner: string; hardwareAcceptance: "manual" };
+    };
     catalogDomains: string[];
     safety: {
       usesProductionGameRuntime: true;
@@ -36,9 +50,7 @@ type QaContractPayload = {
   };
 };
 
-type GamesPayload = {
-  games?: Array<{ id?: string; appUrl?: string }>;
-};
+type GamesPayload = { games?: Array<{ id?: string; appUrl?: string }> };
 
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
@@ -56,8 +68,14 @@ async function fetchQaContract(): Promise<QaContractPayload> {
   });
   if (!response.ok) throw new Error(`QA contract request failed (${response.status})`);
   const payload = (await response.json()) as QaContractPayload;
-  if (payload.capability !== "qa.execute" || payload.qa?.mode !== "runtime-backed-ephemeral-sandbox") {
-    throw new Error("QA contract is not the canonical isolated Test Lab contract.");
+  if (
+    payload.capability !== "qa.execute" ||
+    payload.qa?.mode !== "runtime-backed-ephemeral-sandbox" ||
+    payload.qa.currentRuntimeCoverage?.rankedHistory?.productionTransportExposed !== false ||
+    payload.qa.currentRuntimeCoverage?.rankedHistory?.parentAdminQueryBridge !== false ||
+    payload.qa.currentRuntimeCoverage?.voiceHybrid?.hardwareAcceptance !== "manual"
+  ) {
+    throw new Error("QA contract is not the canonical isolated current-runtime Test Lab contract.");
   }
   return payload;
 }
@@ -83,11 +101,13 @@ export function renderPhaseBQa(): HTMLElement {
       <div>
         <p class="st-admin-eyebrow">Developer · Production Test Lab</p>
         <h1>QA Sandbox</h1>
-        <p>Launch the real Space Typing Test Lab in its own isolated runtime session. Sandbox mutations stay inside Test Lab and never publish or autosave Campaign progression.</p>
+        <p>Launch the real Space Typing Test Lab in its own isolated runtime session. Current feature ownership is surfaced here without pretending unexposed Ranked transport or real microphone hardware is already accepted.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">RUNTIME-BACKED · EPHEMERAL</span>
         <span class="st-admin-badge">PRODUCTION SAVE · NO WRITE</span>
+        <span class="st-admin-badge">RANKED HISTORY TRANSPORT · CLOSED</span>
+        <span class="st-admin-badge">MIC HARDWARE · MANUAL</span>
       </div>
     </header>
     <p class="st-admin-notice" data-qa-status>Loading canonical QA ownership…</p>
@@ -101,39 +121,37 @@ export function renderPhaseBQa(): HTMLElement {
   void Promise.all([fetchQaContract(), resolveSpaceTypingAppUrl()])
     .then(([contract, appUrl]) => {
       const qa = contract.qa;
-      status.textContent = `${qa.catalogDomains.length} runtime QA domains · isolated session · production persistence closed.`;
+      const coverage = qa.currentRuntimeCoverage;
+      status.textContent = `${qa.catalogDomains.length} runtime QA domains · current drift coverage declared · isolated session · production persistence closed.`;
       content.innerHTML = `
         <article class="st-admin-card">
-          <div class="st-admin-card__header">
-            <div><p class="st-admin-eyebrow">Execute</p><h2>Production Test Lab</h2></div>
-            <span class="st-admin-badge">REAL RUNTIME</span>
-          </div>
+          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Execute</p><h2>Production Test Lab</h2></div><span class="st-admin-badge">REAL RUNTIME</span></div>
           <p>The child runtime owns the launcher <code>Developer Test Lab</code>. Opening the game hands control to that canonical launcher instead of reimplementing Game logic in Admin.</p>
           <p><strong>Apply boundary:</strong> ${escapeHtml(qa.applyBoundary)}</p>
           <p><strong>Runtime owner:</strong> ${escapeHtml(qa.runtimeOwner)}</p>
           <button type="button" class="st-admin-btn primary" data-qa-launch>Open Space Typing · Developer Test Lab ↗</button>
-          <p class="st-admin-notice">In the game window, use the built-in <strong>Developer Test Lab</strong> launcher. Start/Restart, Pause/Resume and Reset Arena operate only on the isolated Test Lab session.</p>
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Safety</p><h2>Persistence Boundary</h2></div></div>
           <p><strong>Session:</strong> ${escapeHtml(qa.persistence.session)}</p>
           <p><strong>Preset:</strong> ${escapeHtml(qa.persistence.preset)} · <code>${escapeHtml(qa.persistence.presetKey)}</code></p>
           <p><strong>Production Campaign:</strong> ${escapeHtml(qa.persistence.productionCampaign)}</p>
-          <p><strong>Sandbox mutation:</strong> ${String(qa.sandboxMutationCapability)}</p>
           <p><strong>Production persistence write:</strong> ${String(qa.productionPersistenceWriteCapability)}</p>
           <p><strong>Publish:</strong> ${String(qa.publishCapability)}</p>
-          <p class="st-admin-notice">NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE</p>
         </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Lifecycle</p><h2>Executable Actions</h2></div></div>
-          ${renderList(qa.lifecycleActions)}
-          <p><strong>Inspection:</strong></p>
-          ${renderList(qa.inspection)}
+        <article class="st-admin-card space-admin-card--wide">
+          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Current runtime</p><h2>Re-audit coverage</h2></div></div>
+          <p><strong>Weekly:</strong> ${escapeHtml(coverage.weeklyChallenge.mode)} · <code>${escapeHtml(coverage.weeklyChallenge.owner)}</code></p>
+          <p><strong>Alternative Modes:</strong> ${coverage.alternativeModes.modes.map(escapeHtml).join(" · ")} · Ranked eligible ${String(coverage.alternativeModes.rankedEligible)}</p>
+          <p><strong>Historical Analytics:</strong> ${escapeHtml(coverage.historicalAnalytics.scope)} · cross-player ${String(coverage.historicalAnalytics.crossPlayerSupported)}</p>
+          <p><strong>Ranked History service:</strong> ${String(coverage.rankedHistory.queryServiceAvailable)} · production transport ${String(coverage.rankedHistory.productionTransportExposed)} · Parent query bridge ${String(coverage.rankedHistory.parentAdminQueryBridge)}</p>
+          <p><strong>Ranked History auth:</strong> authenticated ${String(coverage.rankedHistory.authenticationRequired)} · cross-player authorization ${String(coverage.rankedHistory.crossPlayerAuthorizationRequired)}</p>
+          <p><strong>Voice/Hybrid:</strong> hardware acceptance = ${escapeHtml(coverage.voiceHybrid.hardwareAcceptance)}</p>
+          <p class="st-admin-notice">Automated QA may verify software boundaries; Ranked history transport remains closed and microphone/browser/device acceptance remains a manual gate.</p>
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Coverage</p><h2>QA Catalog Domains</h2></div></div>
           <p>${qa.catalogDomains.map((domain) => `<span class="st-admin-chip">${escapeHtml(domain)}</span>`).join(" ")}</p>
-          <p><strong>Canonical sources:</strong></p>
           ${renderList(qa.runtimeSources)}
         </article>
         <article class="st-admin-card">
@@ -142,8 +160,7 @@ export function renderPhaseBQa(): HTMLElement {
         </article>
       `;
 
-      const launch = content.querySelector<HTMLButtonElement>("[data-qa-launch]");
-      launch?.addEventListener("click", () => {
+      content.querySelector<HTMLButtonElement>("[data-qa-launch]")?.addEventListener("click", () => {
         window.open(appUrl, "_blank", "noopener,noreferrer");
       });
     })

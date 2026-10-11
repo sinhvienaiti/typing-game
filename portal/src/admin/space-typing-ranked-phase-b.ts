@@ -51,11 +51,28 @@ type RankedContractPayload = {
       jsonStoreEnv: string;
     };
     runtimeServices: string[];
+    history: {
+      available: true;
+      mode: "persisted-authoritative-readonly";
+      adminSurfaceOwner: string;
+      queryServiceOwner: string;
+      queryServiceAvailable: true;
+      productionTransportExposed: false;
+      parentAdminQueryBridge: false;
+      defaultScope: "self";
+      crossPlayerScope: "authorized-cross-player";
+      authenticationRequired: true;
+      crossPlayerAuthorizationRequired: true;
+      crossPlayerFailClosedWhenUnconfigured: true;
+      eventFilters: string[];
+      writeCapability: false;
+    };
     writeCapability: false;
     previewCapability: false;
     seasonService: false;
     rewardTableService: false;
     unsupportedAdminMockFields: string[];
+    unsupportedAdminOperations: string[];
   };
 };
 
@@ -90,8 +107,15 @@ async function fetchRankedContract(): Promise<RankedContractPayload> {
   });
   const payload = (await response.json().catch(() => ({}))) as Partial<RankedContractPayload> & { message?: string };
   if (!response.ok) throw new Error(payload.message ?? `Ranked contract request failed (${response.status})`);
-  if (payload.capability !== "ranked.read" || !payload.ranked || !payload.route) {
-    throw new Error("Pinned child Ranked contract does not expose ranked.read.");
+  if (
+    payload.capability !== "ranked.read" ||
+    !payload.ranked ||
+    payload.ranked.history?.queryServiceAvailable !== true ||
+    payload.ranked.history?.productionTransportExposed !== false ||
+    payload.ranked.history?.parentAdminQueryBridge !== false ||
+    !payload.route
+  ) {
+    throw new Error("Pinned child Ranked contract does not expose the canonical read-only service/transport boundary.");
   }
   return payload as RankedContractPayload;
 }
@@ -103,10 +127,15 @@ export function renderPhaseBRanked(): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "PvP · Ranked Authority"),
     el("h1", undefined, "Ranked"),
-    el("p", undefined, "Inspect the canonical Ranked ruleset, rating policy, matchmaking expansion and profile persistence used by the Duel authority. The current runtime has no season scheduler or Admin-owned competitive policy store, so authoring remains closed."),
+    el("p", undefined, "Inspect canonical Ranked rules and the persisted history service boundary. History auth logic exists, but the production Duel transport and Parent Admin query bridge do not expose that data yet."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("NO SEASON SERVICE", "warn"));
+  actions.append(
+    badge("RUNTIME-BACKED · READ ONLY", "good"),
+    badge("HISTORY SERVICE · READ ONLY", "good"),
+    badge("HISTORY TRANSPORT · NOT EXPOSED", "warn"),
+    badge("NO SEASON SERVICE", "warn"),
+  );
   head.append(copy, actions);
   page.append(head);
 
@@ -117,7 +146,7 @@ export function renderPhaseBRanked(): HTMLElement {
       const payload = await fetchRankedContract();
       const ranked = payload.ranked;
       status.className = "stx-notice good";
-      status.textContent = `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · Admin writes closed.`;
+      status.textContent = `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · history service present · Parent query bridge closed · Admin writes closed.`;
 
       const rules = panel("Canonical Ruleset", "Code-owned DUEL_RANKED_RULESET");
       rules.append(
@@ -125,10 +154,6 @@ export function renderPhaseBRanked(): HTMLElement {
         scalar("Combat profile", ranked.ruleset.combatProfile),
         scalar("Match length", `${ranked.ruleset.matchLengthSeconds}s`),
         scalar("Round format", `Bo${ranked.ruleset.roundFormat}`),
-        scalar("Hazard", ranked.ruleset.hazardLevel),
-        scalar("Mystery frequency", ranked.ruleset.mysteryFrequency),
-        scalar("Fate frequency", ranked.ruleset.fateFrequency),
-        scalar("Modifier", ranked.ruleset.modifier),
         scalar("Normalized loadout budget", ranked.ruleset.normalizedLoadoutBudget),
         listNotice("Map pool", ranked.ruleset.mapPool),
         scalar("PvE stat scaling", ranked.ruleset.allowPveStatScaling, "good"),
@@ -140,18 +165,8 @@ export function renderPhaseBRanked(): HTMLElement {
       rating.append(
         scalar("Base rating", ranked.rating.base),
         scalar("Rating range", `${ranked.rating.min}–${ranked.rating.max}`),
-        scalar("Matchmaking rating mix", `${Math.round(ranked.rating.typingWeight * 100)}% typing · ${Math.round(ranked.rating.duelWeight * 100)}% Duel`, "good"),
-        scalar("Provisional boundary", `< ${ranked.rating.provisionalMatches} matches`),
-        scalar("Experienced boundary", `< ${ranked.rating.experiencedMatches} matches`),
+        scalar("Rating mix", `${Math.round(ranked.rating.typingWeight * 100)}% typing · ${Math.round(ranked.rating.duelWeight * 100)}% Duel`, "good"),
         listNotice("K factors", ranked.rating.kFactors),
-      );
-
-      const matchmaking = panel("Matchmaking & Presence", "Queue gap expands with wait time; disconnects use authority grace");
-      matchmaking.append(
-        scalar("Initial allowed gap", ranked.matchmaking.initialAllowedGap),
-        scalar("Gap growth", `+${ranked.matchmaking.gapIncrease} every ${ranked.matchmaking.gapIncreaseEverySeconds}s`),
-        scalar("Maximum allowed gap", ranked.matchmaking.maxAllowedGap),
-        scalar("Reconnect grace", `${ranked.matchmaking.reconnectGraceMs / 1000}s`),
       );
 
       const persistence = panel("Profile Persistence", "Server-owned Ranked profile state");
@@ -160,22 +175,34 @@ export function renderPhaseBRanked(): HTMLElement {
         scalar("Persistence owner", ranked.profile.persistenceOwner, "good"),
         scalar("Default store", ranked.profile.defaultStore),
         scalar("Optional store", ranked.profile.optionalStore),
-        scalar("JSON store env", ranked.profile.jsonStoreEnv),
         listNotice("Runtime services", ranked.runtimeServices),
-        listNotice("Runtime sources", ranked.runtimeSources),
       );
 
-      const boundary = panel("Admin Boundary", "No synthetic season or reward authoring");
+      const history = panel("Ranked History", "Persisted service exists · production Parent query bridge not exposed");
+      history.append(
+        scalar("History service available", ranked.history.queryServiceAvailable, "good"),
+        scalar("Mode", ranked.history.mode),
+        scalar("Production transport exposed", ranked.history.productionTransportExposed, "warn"),
+        scalar("Parent Admin query bridge", ranked.history.parentAdminQueryBridge, "warn"),
+        scalar("Default service scope", ranked.history.defaultScope),
+        scalar("Authentication required", ranked.history.authenticationRequired, "good"),
+        scalar("Cross-player authorization required", ranked.history.crossPlayerAuthorizationRequired, "warn"),
+        scalar("Fail closed when unconfigured", ranked.history.crossPlayerFailClosedWhenUnconfigured, "good"),
+        listNotice("Event filters", ranked.history.eventFilters),
+        notice("Admin reports the real service/auth capability only. It does not display synthetic Ranked history or bypass the missing production query transport.", "warn"),
+      );
+
+      const boundary = panel("Admin Boundary", "No synthetic season, settlement or history mutation");
       boundary.append(
         scalar("Season service", ranked.seasonService, "warn"),
         scalar("Reward table service", ranked.rewardTableService, "warn"),
         scalar("Admin write capability", ranked.writeCapability, "warn"),
         scalar("Admin preview capability", ranked.previewCapability, "warn"),
         listNotice("Unsupported legacy mock fields", ranked.unsupportedAdminMockFields, "warn"),
-        notice("Season dates, placement count, free-form matchmaking spread, enable toggles, rank-tier thresholds, season rewards and player-distribution percentages are not canonical runtime config and are intentionally unavailable."),
+        listNotice("Unsupported operations", ranked.unsupportedAdminOperations, "warn"),
       );
 
-      page.append(rules, rating, matchmaking, persistence, boundary);
+      page.append(rules, rating, persistence, history, boundary);
     } catch (error: unknown) {
       status.className = "stx-notice bad";
       status.textContent = `Ranked contract unavailable: ${error instanceof Error ? error.message : String(error)}`;

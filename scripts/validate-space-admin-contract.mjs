@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const VISUALS_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
+const VISUALS_AUDITED_CHILD_SHA = "5cc2de2f0a88400ae6531dc05b67b033196126ca";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
@@ -16,11 +16,13 @@ const snapshotPath = new URL(
   import.meta.url,
 );
 
-const [child, snapshot, backgrounds, vfx, router, server, backgroundsUi, vfxUi, phaseMap] = await Promise.all([
+const [child, snapshot, backgrounds, vfx, backgroundBudgetSource, qualitySource, router, server, backgroundsUi, vfxUi, phaseMap] = await Promise.all([
   readFile(childPath, "utf8").then(JSON.parse),
   readFile(snapshotPath, "utf8").then(JSON.parse),
   readFile(resolve(childRoot, "contracts/space-typing-admin-backgrounds.v1.json"), "utf8").then(JSON.parse),
   readFile(resolve(childRoot, "contracts/space-typing-admin-vfx.v1.json"), "utf8").then(JSON.parse),
+  readFile(resolve(childRoot, "src/background/budget.ts"), "utf8"),
+  readFile(resolve(childRoot, "src/performance/quality.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-backgrounds-phase-b.ts"), "utf8"),
@@ -36,6 +38,9 @@ assert.deepEqual(snapshot, child);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 assert.equal(childHead, VISUALS_AUDITED_CHILD_SHA, `Visuals audit is stale: audited=${VISUALS_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Backgrounds/VFX before changing this SHA.`);
 
+const normalizedBackgroundBudgetSource = backgroundBudgetSource.replaceAll("_", "");
+const normalizedQualitySource = qualitySource.replaceAll("_", "");
+
 assert.equal(backgrounds.capability, "backgrounds.read");
 assert.equal(backgrounds.backgrounds?.mode, "runtime-derived-readonly");
 assert.equal(backgrounds.backgrounds?.writeCapability, false);
@@ -43,6 +48,14 @@ assert.equal(backgrounds.backgrounds?.adminPreviewWriteCapability, false);
 assert.equal(backgrounds.backgrounds?.applyBoundary, "none");
 assert.deepEqual(backgrounds.backgrounds?.authorableFields, []);
 assert.equal(backgrounds.backgrounds?.preview?.productionRenderer, true);
+for (const [tier, expected] of Object.entries(backgrounds.backgrounds.qualityBudgets)) {
+  for (const [field, value] of Object.entries(expected)) {
+    assert.ok(
+      normalizedBackgroundBudgetSource.includes(`${field}: ${value}`),
+      `Background ${tier} budget drifted: ${field}=${value}`,
+    );
+  }
+}
 
 assert.equal(vfx.capability, "vfx.read");
 assert.equal(vfx.vfx?.mode, "runtime-derived-readonly");
@@ -57,6 +70,14 @@ assert.ok(vfx.vfx?.domains?.includes("player-projectiles"));
 assert.ok(vfx.vfx?.domains?.includes("skill-effects"));
 assert.ok(vfx.vfx?.domains?.includes("boss-effects"));
 assert.ok(vfx.vfx?.domains?.includes("screen-feedback"));
+for (const [tier, expected] of Object.entries(vfx.vfx.qualityProfiles)) {
+  for (const [field, value] of Object.entries(expected)) {
+    assert.ok(
+      normalizedQualitySource.includes(`${field}: ${value}`),
+      `VFX ${tier} quality profile drifted: ${field}=${value}`,
+    );
+  }
+}
 
 assert.match(router, /renderPhaseBBackgrounds/);
 assert.match(router, /\$\{BASE\}\/backgrounds`\) return renderPhaseBBackgrounds\(\)/);
@@ -85,7 +106,7 @@ assert.equal(vfxMap?.persistence, "code-owned-runtime-vfx");
 assert.equal(vfxMap?.applyBoundary, "none");
 
 console.log(
-  `Space Typing Admin contracts OK: ${child.contractRevision} · visuals pinned ${childHead.slice(0, 12)} · Backgrounds/VFX runtime-backed read-only`,
+  `Space Typing Admin contracts OK: ${child.contractRevision} · visuals re-audited ${childHead.slice(0, 12)} · Backgrounds/VFX runtime-backed read-only`,
 );
 
 await import("./validate-space-admin-music-library.mjs");
