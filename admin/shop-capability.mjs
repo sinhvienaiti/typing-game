@@ -1,4 +1,4 @@
-export const SHOP_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
+export const SHOP_AUDITED_CHILD_SHA = "ba6276285699af4a0945fba6ff41d262e2f022c2";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
