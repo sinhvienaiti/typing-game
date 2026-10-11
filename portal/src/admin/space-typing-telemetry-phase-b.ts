@@ -8,14 +8,14 @@ type TelemetryContractPayload = {
   capability: "telemetry.read";
   routes: Array<{ id: "overview" | "analytics"; path: string; label: string }>;
   telemetry: {
-    mode: "runtime-derived-session-readonly";
+    mode: "runtime-derived-readonly";
     runtimeSources: string[];
     runtimeOwner: string;
-    persistence: "session-memory-only";
+    persistence: "session-memory-plus-local-profile-history";
     applyBoundary: "none";
     writeCapability: false;
     publishCapability: false;
-    historicalAggregationCapability: false;
+    historicalAggregationCapability: true;
     centralTelemetryBackendCapability: false;
     overviewSignals: string[];
     analyticsSignals: string[];
@@ -25,10 +25,22 @@ type TelemetryContractPayload = {
       signals: string[];
       adminReadableSnapshot: false;
     };
+    historical: {
+      available: true;
+      mode: "local-profile-persisted-readonly";
+      persistenceOwner: "ExpansionV2Profile.history";
+      scope: "current-local-profile";
+      crossPlayerSupported: false;
+      centralTelemetryBackendCapability: false;
+      writeCapability: false;
+      liveTelemetryFallbackWhenEmpty: false;
+    };
     privacy: {
       playerIdentityCollectedByContract: false;
       networkTransportOwnedByContract: false;
-      crossSessionRetentionOwnedByContract: false;
+      crossSessionRetentionOwnedByContract: true;
+      crossSessionRetentionScope: "browser-local-current-profile-only";
+      crossPlayerAggregation: false;
     };
     unsupportedAdminOperations: string[];
   };
@@ -52,11 +64,13 @@ async function fetchTelemetryContract(): Promise<TelemetryContractPayload> {
   const payload = (await response.json()) as TelemetryContractPayload;
   if (
     payload.capability !== "telemetry.read" ||
-    payload.telemetry?.mode !== "runtime-derived-session-readonly" ||
-    payload.telemetry.historicalAggregationCapability !== false ||
+    payload.telemetry?.mode !== "runtime-derived-readonly" ||
+    payload.telemetry.historicalAggregationCapability !== true ||
+    payload.telemetry.historical?.mode !== "local-profile-persisted-readonly" ||
+    payload.telemetry.historical.crossPlayerSupported !== false ||
     payload.telemetry.centralTelemetryBackendCapability !== false
   ) {
-    throw new Error("Telemetry contract does not match the canonical read-only session boundary.");
+    throw new Error("Telemetry contract does not match the canonical session + local-profile read-only boundary.");
   }
   return payload;
 }
@@ -77,12 +91,13 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
         <p class="st-admin-eyebrow">Telemetry · Production Runtime Ownership</p>
         <h1>${analytics ? "Analytics" : "Overview"}</h1>
         <p>${analytics
-          ? "Inspect the canonical per-stage/session telemetry model without fabricating historical or cross-player aggregates."
-          : "Inspect the production session signals that can truthfully back an operational overview today."}</p>
+          ? "Inspect canonical session telemetry plus persisted historical aggregates for the current local profile without fabricating cross-player data."
+          : "Inspect production session signals and the local-profile historical ownership that can truthfully back an operational overview today."}</p>
       </div>
       <div class="space-admin-page__badges">
-        <span class="st-admin-badge">RUNTIME-BACKED · SESSION READ ONLY</span>
-        <span class="st-admin-badge">NO HISTORICAL BACKEND</span>
+        <span class="st-admin-badge">RUNTIME-BACKED · READ ONLY</span>
+        <span class="st-admin-badge">LOCAL PROFILE HISTORY</span>
+        <span class="st-admin-badge">NO CENTRAL BACKEND</span>
       </div>
     </header>
     <p class="st-admin-notice" data-telemetry-status>Loading canonical telemetry ownership…</p>
@@ -97,7 +112,7 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
     .then((contract) => {
       const telemetry = contract.telemetry;
       const signals = analytics ? telemetry.analyticsSignals : telemetry.overviewSignals;
-      status.textContent = `${signals.length} canonical ${analytics ? "analytics" : "overview"} signals · session-memory only · Admin writes closed.`;
+      status.textContent = `${signals.length} canonical ${analytics ? "analytics" : "overview"} signals · local-profile history ${telemetry.historical.available ? "available" : "unavailable"} · Admin writes closed.`;
       content.innerHTML = `
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Canonical</p><h2>Runtime telemetry owner</h2></div></div>
@@ -109,7 +124,7 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Boundary</p><h2>What Admin can truthfully report</h2></div></div>
-          <p>The child runtime owns these measurements inside the active stage/session. This Admin adapter exposes their canonical schema and ownership. No live cross-process feed or historical telemetry store exists.</p>
+          <p>The child runtime owns live stage/session measurements and persisted history for the current browser-local profile. There is no central or cross-player telemetry backend and no Admin mutation path.</p>
           <p><strong>Write capability:</strong> ${String(telemetry.writeCapability)}</p>
           <p><strong>Publish capability:</strong> ${String(telemetry.publishCapability)}</p>
           <p><strong>Historical aggregation:</strong> ${String(telemetry.historicalAggregationCapability)}</p>
@@ -120,6 +135,16 @@ export function renderPhaseBTelemetry(path: string): HTMLElement {
           ${signalList(signals)}
         </article>
         ${analytics ? `
+        <article class="st-admin-card">
+          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Historical</p><h2>Local-profile persisted analytics</h2></div></div>
+          <p><strong>Available:</strong> ${String(telemetry.historical.available)}</p>
+          <p><strong>Mode:</strong> ${escapeHtml(telemetry.historical.mode)}</p>
+          <p><strong>Owner:</strong> ${escapeHtml(telemetry.historical.persistenceOwner)}</p>
+          <p><strong>Scope:</strong> ${escapeHtml(telemetry.historical.scope)}</p>
+          <p><strong>Cross-player supported:</strong> ${String(telemetry.historical.crossPlayerSupported)}</p>
+          <p><strong>Live fallback when empty:</strong> ${String(telemetry.historical.liveTelemetryFallbackWhenEmpty)}</p>
+          <p class="st-admin-notice">Historical rows come only from persisted ExpansionV2Profile history; empty history is not backfilled from live telemetry.</p>
+        </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Performance</p><h2>Adaptive render diagnostics</h2></div></div>
           <p><strong>Runtime diagnostics exist:</strong> ${String(telemetry.performanceDiagnostics.available)}</p>
