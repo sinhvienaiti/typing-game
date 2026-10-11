@@ -56,6 +56,9 @@ type RankedContractPayload = {
       mode: "persisted-authoritative-readonly";
       adminSurfaceOwner: string;
       queryServiceOwner: string;
+      queryServiceAvailable: true;
+      productionTransportExposed: false;
+      parentAdminQueryBridge: false;
       defaultScope: "self";
       crossPlayerScope: "authorized-cross-player";
       authenticationRequired: true;
@@ -107,10 +110,12 @@ async function fetchRankedContract(): Promise<RankedContractPayload> {
   if (
     payload.capability !== "ranked.read" ||
     !payload.ranked ||
-    payload.ranked.history?.available !== true ||
+    payload.ranked.history?.queryServiceAvailable !== true ||
+    payload.ranked.history?.productionTransportExposed !== false ||
+    payload.ranked.history?.parentAdminQueryBridge !== false ||
     !payload.route
   ) {
-    throw new Error("Pinned child Ranked contract does not expose the canonical live + history read boundary.");
+    throw new Error("Pinned child Ranked contract does not expose the canonical read-only service/transport boundary.");
   }
   return payload as RankedContractPayload;
 }
@@ -122,10 +127,15 @@ export function renderPhaseBRanked(): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "PvP · Ranked Authority"),
     el("h1", undefined, "Ranked"),
-    el("p", undefined, "Inspect canonical Ranked rules, persistence and the authenticated historical-query boundary. Admin remains read-only and cross-player history is forbidden unless the server explicitly authorizes it."),
+    el("p", undefined, "Inspect canonical Ranked rules and the persisted history service boundary. History auth logic exists, but the production Duel transport and Parent Admin query bridge do not expose that data yet."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("HISTORY · AUTHENTICATED", "good"), badge("NO SEASON SERVICE", "warn"));
+  actions.append(
+    badge("RUNTIME-BACKED · READ ONLY", "good"),
+    badge("HISTORY SERVICE · READ ONLY", "good"),
+    badge("HISTORY TRANSPORT · NOT EXPOSED", "warn"),
+    badge("NO SEASON SERVICE", "warn"),
+  );
   head.append(copy, actions);
   page.append(head);
 
@@ -136,7 +146,7 @@ export function renderPhaseBRanked(): HTMLElement {
       const payload = await fetchRankedContract();
       const ranked = payload.ranked;
       status.className = "stx-notice good";
-      status.textContent = `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · authenticated history available · Admin writes closed.`;
+      status.textContent = `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · history service present · Parent query bridge closed · Admin writes closed.`;
 
       const rules = panel("Canonical Ruleset", "Code-owned DUEL_RANKED_RULESET");
       rules.append(
@@ -168,17 +178,18 @@ export function renderPhaseBRanked(): HTMLElement {
         listNotice("Runtime services", ranked.runtimeServices),
       );
 
-      const history = panel("Ranked History", "Persisted authoritative settlements · read only");
+      const history = panel("Ranked History", "Persisted service exists · production Parent query bridge not exposed");
       history.append(
-        scalar("Available", ranked.history.available, "good"),
+        scalar("History service available", ranked.history.queryServiceAvailable, "good"),
         scalar("Mode", ranked.history.mode),
-        scalar("Default scope", ranked.history.defaultScope),
+        scalar("Production transport exposed", ranked.history.productionTransportExposed, "warn"),
+        scalar("Parent Admin query bridge", ranked.history.parentAdminQueryBridge, "warn"),
+        scalar("Default service scope", ranked.history.defaultScope),
         scalar("Authentication required", ranked.history.authenticationRequired, "good"),
-        scalar("Cross-player scope", ranked.history.crossPlayerScope),
         scalar("Cross-player authorization required", ranked.history.crossPlayerAuthorizationRequired, "warn"),
         scalar("Fail closed when unconfigured", ranked.history.crossPlayerFailClosedWhenUnconfigured, "good"),
         listNotice("Event filters", ranked.history.eventFilters),
-        notice("This Admin screen exposes the query capability and authorization boundary. It does not bypass server authentication or fabricate another player's history.", "warn"),
+        notice("Admin reports the real service/auth capability only. It does not display synthetic Ranked history or bypass the missing production query transport.", "warn"),
       );
 
       const boundary = panel("Admin Boundary", "No synthetic season, settlement or history mutation");
