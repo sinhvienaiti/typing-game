@@ -2,29 +2,47 @@ import { SpaceTypingAdminApi } from "./api";
 
 const api = new SpaceTypingAdminApi();
 
+type ChallengeContract = {
+  available: true;
+  owner: string;
+  challengeKind: "daily" | "weekly";
+  cadence: "utc-day" | "utc-iso-week";
+  seedPolicy: string;
+  identityFields: string[];
+  adaptivePolicy: "frozen";
+  personalBest: true;
+  personalGhost: true;
+  profileStorageKey: string;
+  remoteScheduler: false;
+  remoteLeaderboard: false;
+  writeCapability: false;
+};
+
 type DailyWeeklyContract = {
   contractRevision: string;
   schemaVersion: number;
   capability: "daily-weekly.read";
   liveOps: {
-    mode: "runtime-partial-readonly";
+    mode: "runtime-readonly";
     runtimeSources: string[];
-    daily: {
-      available: true;
-      owner: string;
+    daily: ChallengeContract & {
       challengeKind: "daily";
       cadence: "utc-day";
       dayKeyFormat: "YYYY-MM-DD";
-      seedPolicy: string;
-      identityFields: string[];
-      adaptivePolicy: "frozen";
-      personalBest: boolean;
-      personalGhost: boolean;
-      profileStorageKey: string;
-      remoteScheduler: false;
-      remoteLeaderboard: false;
+      adminMode: "read-only";
     };
-    weekly: { available: false; reason: string };
+    weekly: ChallengeContract & {
+      challengeKind: "weekly";
+      cadence: "utc-iso-week";
+      weekKeyFormat: "YYYY-Www";
+      weekKeyOwner: string;
+      seedOwner: string;
+      adminMode: "read-only";
+      readableState: string[];
+      schedulerControlCapability: false;
+      rewardAuthoringCapability: false;
+      seedOverrideCapability: false;
+    };
     adminWriteCapability: false;
     scheduleAuthoringCapability: false;
     rewardAuthoringCapability: false;
@@ -52,18 +70,36 @@ async function fetchContract(): Promise<DailyWeeklyContract> {
   const payload = (await response.json()) as DailyWeeklyContract;
   if (
     payload.capability !== "daily-weekly.read" ||
-    payload.liveOps?.mode !== "runtime-partial-readonly" ||
+    payload.liveOps?.mode !== "runtime-readonly" ||
     payload.liveOps.daily?.available !== true ||
-    payload.liveOps.weekly?.available !== false ||
+    payload.liveOps.weekly?.available !== true ||
+    payload.liveOps.daily.writeCapability !== false ||
+    payload.liveOps.weekly.writeCapability !== false ||
     payload.liveOps.adminWriteCapability !== false
   ) {
-    throw new Error("Daily / Weekly contract does not match the canonical partial read-only runtime boundary.");
+    throw new Error("Daily / Weekly contract does not match the canonical read-only runtime boundary.");
   }
   return payload;
 }
 
 function chipList(values: string[]): string {
   return `<div class="st-admin-chip-list">${values.map((value) => `<span class="st-admin-chip">${escapeHtml(value)}</span>`).join("")}</div>`;
+}
+
+function challengeCard(title: string, challenge: ChallengeContract, identityLabel: string, identityValue: string): string {
+  return `
+    <article class="st-admin-card">
+      <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Runtime-backed</p><h2>${escapeHtml(title)}</h2></div></div>
+      <p><strong>Owner:</strong> ${escapeHtml(challenge.owner)}</p>
+      <p><strong>Cadence:</strong> ${escapeHtml(challenge.cadence)}</p>
+      <p><strong>${escapeHtml(identityLabel)}:</strong> ${escapeHtml(identityValue)}</p>
+      <p><strong>Seed policy:</strong> <code>${escapeHtml(challenge.seedPolicy)}</code></p>
+      <p><strong>Adaptive policy:</strong> ${escapeHtml(challenge.adaptivePolicy)}</p>
+      <p><strong>Personal Best:</strong> ${String(challenge.personalBest)} · <strong>Personal Ghost:</strong> ${String(challenge.personalGhost)}</p>
+      <p><strong>Browser profile key:</strong> <code>${escapeHtml(challenge.profileStorageKey)}</code></p>
+      <p class="st-admin-notice">No remote scheduler or remote leaderboard is owned by this contract. Admin writes remain closed.</p>
+    </article>
+  `;
 }
 
 export function renderPhaseBDailyWeekly(): HTMLElement {
@@ -74,11 +110,11 @@ export function renderPhaseBDailyWeekly(): HTMLElement {
       <div>
         <p class="st-admin-eyebrow">Live Ops · Runtime Ownership</p>
         <h1>Daily / Weekly</h1>
-        <p>Inspect the fixed Daily Expedition challenge that exists in production and keep Weekly explicitly absent until a real runtime owner is implemented.</p>
+        <p>Inspect the deterministic Daily Expedition and Weekly Challenge runtimes without inventing remote scheduling, leaderboard, seed override, reward authoring, or player-progress mutation.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">DAILY · RUNTIME-BACKED</span>
-        <span class="st-admin-badge">WEEKLY · NOT IMPLEMENTED</span>
+        <span class="st-admin-badge">WEEKLY · RUNTIME-BACKED</span>
         <span class="st-admin-badge">READ ONLY</span>
       </div>
     </header>
@@ -94,26 +130,20 @@ export function renderPhaseBDailyWeekly(): HTMLElement {
     .then((contract) => {
       const liveOps = contract.liveOps;
       const daily = liveOps.daily;
-      status.textContent = "Daily Expedition is canonical and deterministic per UTC day; Weekly has no canonical runtime implementation. Admin writes are closed.";
+      const weekly = liveOps.weekly;
+      status.textContent = "Daily and Weekly are canonical deterministic browser-local challenge runtimes; Admin reads ownership only and cannot schedule, reseed, author rewards, publish, or mutate player progress.";
       content.innerHTML = `
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Supported</p><h2>Daily Expedition</h2></div></div>
-          <p><strong>Owner:</strong> ${escapeHtml(daily.owner)}</p>
-          <p><strong>Cadence:</strong> ${escapeHtml(daily.cadence)} · ${escapeHtml(daily.dayKeyFormat)}</p>
-          <p><strong>Seed policy:</strong> <code>${escapeHtml(daily.seedPolicy)}</code></p>
-          <p><strong>Adaptive policy:</strong> ${escapeHtml(daily.adaptivePolicy)}</p>
-          <p><strong>Personal Best:</strong> ${String(daily.personalBest)} · <strong>Personal Ghost:</strong> ${String(daily.personalGhost)}</p>
-          <p><strong>Browser profile key:</strong> <code>${escapeHtml(daily.profileStorageKey)}</code></p>
-          <p class="st-admin-notice">No remote scheduler or remote leaderboard is owned by this contract.</p>
-        </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Absent</p><h2>Weekly</h2></div></div>
-          <p>${escapeHtml(liveOps.weekly.reason)}</p>
-          <p class="st-admin-notice">Admin does not fabricate a weekly seed, reset scheduler, reward track, or publish flow.</p>
-        </article>
+        ${challengeCard("Daily Expedition", daily, "Day key", daily.dayKeyFormat)}
+        ${challengeCard("Weekly Challenge", weekly, "Week key", `${weekly.weekKeyFormat} · ${weekly.weekKeyOwner}`)}
         <article class="st-admin-card space-admin-card--wide">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Comparability</p><h2>Daily identity fields</h2></div></div>
           ${chipList(daily.identityFields)}
+        </article>
+        <article class="st-admin-card space-admin-card--wide">
+          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Weekly state</p><h2>Canonical readable state</h2></div></div>
+          ${chipList(weekly.readableState)}
+          <p><strong>Seed owner:</strong> <code>${escapeHtml(weekly.seedOwner)}</code></p>
+          <p><strong>Scheduler control:</strong> ${String(weekly.schedulerControlCapability)} · <strong>Reward authoring:</strong> ${String(weekly.rewardAuthoringCapability)} · <strong>Seed override:</strong> ${String(weekly.seedOverrideCapability)}</p>
         </article>
         <article class="st-admin-card space-admin-card--wide">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Boundary</p><h2>No synthetic live-ops authoring</h2></div></div>
