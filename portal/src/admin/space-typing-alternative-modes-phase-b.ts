@@ -8,19 +8,29 @@ type AlternativeModesContractPayload = {
   capability: "alternative-modes.read";
   route: { id: string; path: string; label: string };
   alternativeModes: {
-    mode: "runtime-absence-diagnostic";
+    mode: "runtime-backed-readonly";
     runtimeSources: string[];
+    runtimeOwner: string;
     supportedDuelMatchModes: string[];
     requestedPrototypeModes: string[];
     runtimeImplementations: Record<string, boolean>;
+    implementations: Array<{
+      id: "reflex" | "word-chain";
+      available: true;
+      supportedMatchTypes: Array<"friend" | "practice">;
+      rankedEligible: false;
+      persistence: "snapshot-v1";
+      reconnect: true;
+    }>;
     authorableFields: string[];
     writeCapability: false;
     previewCapability: false;
     rankedAdmissionCapability: false;
-    persistenceOwner: "none";
+    persistenceOwner: string;
     applyBoundary: "none";
     unsupportedAdminMockFields: string[];
     diagnostic: string;
+    unsupportedAdminOperations: string[];
   };
 };
 
@@ -52,8 +62,12 @@ async function fetchAlternativeModesContract(): Promise<AlternativeModesContract
   });
   const payload = (await response.json().catch(() => ({}))) as Partial<AlternativeModesContractPayload> & { message?: string };
   if (!response.ok) throw new Error(payload.message ?? `Alternative Modes contract request failed (${response.status})`);
-  if (payload.capability !== "alternative-modes.read" || !payload.alternativeModes || !payload.route) {
-    throw new Error("Pinned child Alternative Modes contract does not expose alternative-modes.read.");
+  if (
+    payload.capability !== "alternative-modes.read" ||
+    payload.alternativeModes?.mode !== "runtime-backed-readonly" ||
+    !payload.route
+  ) {
+    throw new Error("Pinned child Alternative Modes contract does not expose the canonical runtime-backed read-only boundary.");
   }
   return payload as AlternativeModesContractPayload;
 }
@@ -65,49 +79,49 @@ export function renderPhaseBAlternativeModes(): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "PvP · Runtime Capability Audit"),
     el("h1", undefined, "Alternative Modes"),
-    el("p", undefined, "This screen reports what the current Space Typing Duel runtime actually implements. Reflex and Word Chain remain prototype concepts only; Admin does not create settings, admission rules or Ranked toggles for modes that have no canonical runtime owner."),
+    el("p", undefined, "Inspect the canonical Reflex and Word Chain runtimes. They support Friend and Practice only; Ranked admission remains fail-closed and Admin does not fabricate tuning or enable toggles."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME AUDIT · READ ONLY", "good"), badge("REFLEX / WORD CHAIN NOT CONNECTED", "warn"));
+  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("RANKED · FAIL CLOSED", "warn"));
   head.append(copy, actions);
   page.append(head);
 
-  const status = notice("Loading canonical Alternative Modes capability audit…");
+  const status = notice("Loading canonical Alternative Modes runtime contract…");
   page.append(status);
   void (async () => {
     try {
       const payload = await fetchAlternativeModesContract();
       const modes = payload.alternativeModes;
       status.className = "stx-notice good";
-      status.textContent = `${modes.supportedDuelMatchModes.length} canonical Duel match modes · ${modes.requestedPrototypeModes.length} unimplemented prototypes · Admin writes closed.`;
+      status.textContent = `${modes.implementations.length} canonical alternative modes · Friend/Practice runtime-backed · Admin writes closed.`;
 
-      const canonical = panel("Canonical Duel Modes", "Modes present in Duel authority/client match views");
-      canonical.append(
-        listNotice("Supported match modes", modes.supportedDuelMatchModes, "good"),
-        notice("Friend, Ranked and Practice are the only canonical Duel match modes exposed by the current authority model."),
-      );
-
-      const prototypes = panel("Prototype Status", "Requested concepts without a runtime owner");
-      for (const id of modes.requestedPrototypeModes) {
-        prototypes.append(notice(`${id}: ${modes.runtimeImplementations[id] === true ? "IMPLEMENTED" : "NOT RUNTIME CONNECTED"}`, modes.runtimeImplementations[id] === true ? "good" : "warn"));
+      const implementations = panel("Canonical Alternative Modes", "Current authoritative runtime registration");
+      for (const mode of modes.implementations) {
+        implementations.append(
+          notice(`${mode.id}: AVAILABLE · ${mode.supportedMatchTypes.join(" / ")} · persistence ${mode.persistence} · reconnect ${String(mode.reconnect)}`, "good"),
+          notice(`${mode.id}: Ranked eligible = ${String(mode.rankedEligible)}`, "warn"),
+        );
       }
-      prototypes.append(notice(modes.diagnostic, "warn"));
+      implementations.append(notice(modes.diagnostic));
 
-      const evidence = panel("Audit Evidence", "Canonical files checked before closing Admin authoring");
-      evidence.append(listNotice("Runtime sources", modes.runtimeSources));
+      const evidence = panel("Runtime Ownership", "Contract is bound to real current Child owners");
+      evidence.append(
+        notice(`Runtime owner: ${modes.runtimeOwner}`, "good"),
+        notice(`Persistence owner: ${modes.persistenceOwner}`),
+        listNotice("Runtime sources", modes.runtimeSources),
+      );
 
       const boundary = panel("Admin Boundary", "No synthetic alternative-mode policy");
       boundary.append(
-        notice(`Persistence owner: ${modes.persistenceOwner}`),
         notice(`Apply boundary: ${modes.applyBoundary}`),
         notice(`Admin write capability: ${String(modes.writeCapability)}`, "warn"),
         notice(`Admin preview capability: ${String(modes.previewCapability)}`, "warn"),
         notice(`Ranked admission capability: ${String(modes.rankedAdmissionCapability)}`, "warn"),
-        listNotice("Unsupported legacy mock fields", modes.unsupportedAdminMockFields, "warn"),
-        notice("Reaction/beat windows, damage values, challenge pools, lexicon/chain rules and Practice/Friend/Ranked enable toggles stay unavailable until a real runtime implementation owns them."),
+        listNotice("Unsupported authoring fields", modes.unsupportedAdminMockFields, "warn"),
+        listNotice("Unsupported operations", modes.unsupportedAdminOperations, "warn"),
       );
 
-      page.append(canonical, prototypes, evidence, boundary);
+      page.append(implementations, evidence, boundary);
     } catch (error: unknown) {
       status.className = "stx-notice bad";
       status.textContent = `Alternative Modes contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
