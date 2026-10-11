@@ -66,7 +66,7 @@ for (const symbol of ["CREATE_ROOM", "JOIN_ROOM", "QUEUE_RANKED", "INTENT"]) ass
 assert(uiSource.includes("/api/admin/space-typing/alternative-modes/contract"), "Alternative Modes UI must read the child runtime contract");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Alternative Modes UI must expose runtime-backed read-only ownership");
 assert(uiSource.includes("RANKED FAIL-CLOSED"), "Alternative Modes UI must make Ranked admission closure explicit");
-assert(uiSource.includes("AlternativeMatchRuntime"), "Alternative Modes UI must expose the canonical runtime owner");
+assert(uiSource.includes("Runtime owner: ${modes.runtimeOwner}"), "Alternative Modes UI must expose the canonical runtime owner from the child contract");
 assert(!uiSource.includes("api.createRevision"), "Alternative Modes UI must not create synthetic revisions");
 assert(!uiSource.includes("api.publish"), "Alternative Modes UI must not publish synthetic mode policy");
 assert(!uiSource.includes('type = "range"'), "Alternative Modes read-only screen must not expose prototype tuning sliders");
