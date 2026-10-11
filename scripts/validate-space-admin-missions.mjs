@@ -78,8 +78,10 @@ assert(routerSource.includes("renderPhaseBMissions") && routerSource.includes("`
 
 assert(dailyWeeklySource.includes("/api/admin/space-typing/daily-weekly/contract"), "Daily / Weekly must read the authenticated canonical sidecar contract");
 assert(dailyWeeklySource.includes("DAILY · RUNTIME-BACKED"), "Daily / Weekly must expose canonical Daily runtime ownership");
-assert(dailyWeeklySource.includes("WEEKLY · NOT IMPLEMENTED"), "Daily / Weekly must expose explicit Weekly runtime absence");
+assert(dailyWeeklySource.includes("WEEKLY · RUNTIME-BACKED"), "Daily / Weekly must expose canonical Weekly runtime ownership");
+assert(!dailyWeeklySource.includes("WEEKLY · NOT IMPLEMENTED"), "Daily / Weekly must not retain the obsolete Weekly-absent boundary");
 assert(dailyWeeklySource.includes("No synthetic live-ops authoring"), "Daily / Weekly must explain the no-authoring boundary");
+assert(dailyWeeklySource.includes("weekly.readableState"), "Daily / Weekly must expose the canonical Weekly readable-state contract");
 assert(!dailyWeeklySource.includes("+ New Rotation"), "Daily / Weekly runtime-boundary UI must not expose fake authoring actions");
 
-console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical partial read-only boundary.");
+console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical Daily + Weekly read-only runtime boundary.");
