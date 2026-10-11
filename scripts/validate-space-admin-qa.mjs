@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const QA_AUDITED_CHILD_SHA = "7a2548ae9d9ee939a59c76f63ced1b6d1b4ed662";
+const QA_AUDITED_CHILD_SHA = "5cc2de2f0a88400ae6531dc05b67b033196126ca";
 const contract = JSON.parse(await readFile(resolve(childRoot, "contracts/space-typing-admin-qa.v1.json"), "utf8"));
 const page = await readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8");
 const router = await readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8");
@@ -35,6 +35,9 @@ assert.equal(contract.qa.currentRuntimeCoverage.alternativeModes.rankedEligible,
 assert.equal(contract.qa.currentRuntimeCoverage.weeklyChallenge.mode, "read-only");
 assert.equal(contract.qa.currentRuntimeCoverage.historicalAnalytics.scope, "current-local-profile");
 assert.equal(contract.qa.currentRuntimeCoverage.historicalAnalytics.crossPlayerSupported, false);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.queryServiceAvailable, true);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.productionTransportExposed, false);
+assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.parentAdminQueryBridge, false);
 assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.authenticationRequired, true);
 assert.equal(contract.qa.currentRuntimeCoverage.rankedHistory.crossPlayerAuthorizationRequired, true);
 assert.equal(contract.qa.currentRuntimeCoverage.voiceHybrid.hardwareAcceptance, "manual");
@@ -50,8 +53,10 @@ assert.match(nav, /label:\s*"QA Sandbox"/);
 assert.match(page, /Developer Test Lab/);
 assert.match(page, /RUNTIME-BACKED · EPHEMERAL/);
 assert.match(page, /PRODUCTION SAVE · NO WRITE/);
+assert.match(page, /RANKED HISTORY TRANSPORT · CLOSED/);
 assert.match(page, /MIC HARDWARE · MANUAL/);
 assert.match(page, /currentRuntimeCoverage/);
+assert.match(page, /Parent query bridge/);
 assert.match(page, /hardware acceptance =/i);
 assert.match(page, /window\.open\(appUrl/);
 assert.doesNotMatch(page, /createRevision|\/publish|\/revisions/);
@@ -65,4 +70,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · current-runtime coverage + isolated Test Lab + manual hardware gate).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · current-runtime coverage + closed Ranked history transport + isolated Test Lab + manual hardware gate).`);
