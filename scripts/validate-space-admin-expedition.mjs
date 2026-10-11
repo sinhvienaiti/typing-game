@@ -6,12 +6,17 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const EXPEDITION_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
+const EXPEDITION_AUDITED_CHILD_SHA = "7a2548ae9d9ee939a59c76f63ced1b6d1b4ed662";
 const contract = JSON.parse(await readFile(resolve(childRoot, "contracts/space-typing-admin-expedition.v1.json"), "utf8"));
-const page = await readFile(resolve(root, "portal/src/admin/space-typing-expedition-phase-b.ts"), "utf8");
-const router = await readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8");
-const server = await readFile(resolve(root, "admin/server.mjs"), "utf8");
-const phaseMap = JSON.parse(await readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"));
+const [coreSource, planSource, page, router, server, phaseMapSource] = await Promise.all([
+  readFile(resolve(childRoot, "src/expedition/core.ts"), "utf8"),
+  readFile(resolve(childRoot, "src/expansion-v2/expedition-plan.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-expedition-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "admin/server.mjs"), "utf8"),
+  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
+]);
+const phaseMap = JSON.parse(phaseMapSource);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 
 assert.equal(childHead, EXPEDITION_AUDITED_CHILD_SHA, `Expedition audit is stale: audited=${EXPEDITION_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Expedition before changing the SHA.`);
@@ -24,6 +29,7 @@ assert.equal(contract.expedition.rulesetVersion, "expansion-v2-v1");
 assert.equal(contract.expedition.encounterCount, 8);
 assert.deepEqual(contract.expedition.draftBeforeEncounterIndexes, [0, 2, 4, 6]);
 assert.equal(contract.expedition.restAfterEncounterIndex, 3);
+assert.deepEqual(contract.expedition.challengeKinds, ["prototype", "daily", "weekly", "qa"]);
 assert.equal(contract.expedition.persistence.storageKey, "spaceTypingExpeditionRunV1");
 assert.equal(contract.expedition.persistence.revisionedEnvelope, true);
 assert.equal(contract.expedition.persistence.writerOwnership, true);
@@ -31,6 +37,17 @@ assert.equal(contract.expedition.safety.adminWriteCapability, false);
 assert.equal(contract.expedition.safety.adminPublishCapability, false);
 assert.equal(contract.expedition.safety.adminRunMutationCapability, false);
 assert.equal(contract.expedition.safety.adminStorageMutationCapability, false);
+
+for (const evidence of [
+  'EXPEDITION_RUN_VERSION = 1',
+  'EXPEDITION_RULESET_VERSION = "expansion-v2-v1"',
+  'kind: "prototype" | "daily" | "weekly" | "qa"',
+]) {
+  assert.ok(coreSource.includes(evidence), `Expedition runtime evidence missing: ${evidence}`);
+}
+assert.match(planSource, /EXPANSION_V2_ENCOUNTER_COUNT = 8/);
+assert.match(planSource, /EXPANSION_V2_DRAFT_BEFORE = \[0, 2, 4, 6\]/);
+assert.match(planSource, /EXPANSION_V2_REST_AFTER = 3/);
 
 assert.match(server, /space-typing-admin-expedition\.v1\.json/);
 assert.match(server, /request\.method==="GET"&&url\.pathname==="\/api\/admin\/space-typing\/expedition\/contract"/);
@@ -60,4 +77,4 @@ assert.equal(row.persistence, "child-browser-local-expedition-run");
 assert.equal(row.applyBoundary, "none");
 assert.equal(row.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log(`Space Typing Admin Expedition mapping: PASS (${childHead.slice(0, 12)} · browser-owned resumable run + no remote mutation backend).`);
+console.log(`Space Typing Admin Expedition mapping: PASS (${childHead.slice(0, 12)} · Weekly-aware browser-owned resumable run + no remote mutation backend).`);
