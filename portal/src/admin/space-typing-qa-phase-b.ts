@@ -28,7 +28,14 @@ type QaContractPayload = {
       weeklyChallenge: { owner: string; mode: "read-only" };
       alternativeModes: { owner: string; modes: string[]; rankedEligible: false };
       historicalAnalytics: { owner: string; scope: "current-local-profile"; crossPlayerSupported: false };
-      rankedHistory: { owner: string; authenticationRequired: true; crossPlayerAuthorizationRequired: true };
+      rankedHistory: {
+        owner: string;
+        queryServiceAvailable: true;
+        productionTransportExposed: false;
+        parentAdminQueryBridge: false;
+        authenticationRequired: true;
+        crossPlayerAuthorizationRequired: true;
+      };
       voiceHybrid: { owner: string; hardwareAcceptance: "manual" };
     };
     catalogDomains: string[];
@@ -64,6 +71,8 @@ async function fetchQaContract(): Promise<QaContractPayload> {
   if (
     payload.capability !== "qa.execute" ||
     payload.qa?.mode !== "runtime-backed-ephemeral-sandbox" ||
+    payload.qa.currentRuntimeCoverage?.rankedHistory?.productionTransportExposed !== false ||
+    payload.qa.currentRuntimeCoverage?.rankedHistory?.parentAdminQueryBridge !== false ||
     payload.qa.currentRuntimeCoverage?.voiceHybrid?.hardwareAcceptance !== "manual"
   ) {
     throw new Error("QA contract is not the canonical isolated current-runtime Test Lab contract.");
@@ -92,11 +101,12 @@ export function renderPhaseBQa(): HTMLElement {
       <div>
         <p class="st-admin-eyebrow">Developer · Production Test Lab</p>
         <h1>QA Sandbox</h1>
-        <p>Launch the real Space Typing Test Lab in its own isolated runtime session. Current feature ownership is surfaced here without pretending automated QA can certify real microphone hardware.</p>
+        <p>Launch the real Space Typing Test Lab in its own isolated runtime session. Current feature ownership is surfaced here without pretending unexposed Ranked transport or real microphone hardware is already accepted.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">RUNTIME-BACKED · EPHEMERAL</span>
         <span class="st-admin-badge">PRODUCTION SAVE · NO WRITE</span>
+        <span class="st-admin-badge">RANKED HISTORY TRANSPORT · CLOSED</span>
         <span class="st-admin-badge">MIC HARDWARE · MANUAL</span>
       </div>
     </header>
@@ -134,9 +144,10 @@ export function renderPhaseBQa(): HTMLElement {
           <p><strong>Weekly:</strong> ${escapeHtml(coverage.weeklyChallenge.mode)} · <code>${escapeHtml(coverage.weeklyChallenge.owner)}</code></p>
           <p><strong>Alternative Modes:</strong> ${coverage.alternativeModes.modes.map(escapeHtml).join(" · ")} · Ranked eligible ${String(coverage.alternativeModes.rankedEligible)}</p>
           <p><strong>Historical Analytics:</strong> ${escapeHtml(coverage.historicalAnalytics.scope)} · cross-player ${String(coverage.historicalAnalytics.crossPlayerSupported)}</p>
-          <p><strong>Ranked History:</strong> authenticated ${String(coverage.rankedHistory.authenticationRequired)} · cross-player authorization ${String(coverage.rankedHistory.crossPlayerAuthorizationRequired)}</p>
+          <p><strong>Ranked History service:</strong> ${String(coverage.rankedHistory.queryServiceAvailable)} · production transport ${String(coverage.rankedHistory.productionTransportExposed)} · Parent query bridge ${String(coverage.rankedHistory.parentAdminQueryBridge)}</p>
+          <p><strong>Ranked History auth:</strong> authenticated ${String(coverage.rankedHistory.authenticationRequired)} · cross-player authorization ${String(coverage.rankedHistory.crossPlayerAuthorizationRequired)}</p>
           <p><strong>Voice/Hybrid:</strong> hardware acceptance = ${escapeHtml(coverage.voiceHybrid.hardwareAcceptance)}</p>
-          <p class="st-admin-notice">Automated QA may verify software boundaries; microphone/browser/device acceptance remains a manual gate.</p>
+          <p class="st-admin-notice">Automated QA may verify software boundaries; Ranked history transport remains closed and microphone/browser/device acceptance remains a manual gate.</p>
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Coverage</p><h2>QA Catalog Domains</h2></div></div>
