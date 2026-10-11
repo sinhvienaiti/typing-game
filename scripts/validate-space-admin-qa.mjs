@@ -6,14 +6,24 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const QA_AUDITED_CHILD_SHA = "8128a2a5a7713fff80cd1286b607de6a3e7190f7";
-const contract = JSON.parse(await readFile(resolve(childRoot, "contracts/space-typing-admin-qa.v1.json"), "utf8"));
-const page = await readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8");
-const router = await readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8");
-const server = await readFile(resolve(root, "admin/server.mjs"), "utf8");
-const nav = await readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8");
-const games = JSON.parse(await readFile(resolve(root, "portal/public/games.json"), "utf8"));
-const phaseMap = JSON.parse(await readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"));
+const QA_AUDITED_CHILD_SHA = "19413c24a42cee65237476e7e5a7b33edcdfb64a";
+const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
+const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
+const [page, router, server, nav, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
+  readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "admin/server.mjs"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8"),
+  readFile(resolve(root, "portal/public/games.json"), "utf8"),
+  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
+  readChild("src/expansion-v2/weekly-challenge-admin.ts"),
+  readChild("src/duel/alternative-modes.ts"),
+  readChild("src/expansion-v2/historical-analytics-admin.ts"),
+  readChild("server/duel/ranked-history-query-service.ts"),
+  readChild("src/input/voice-adapter.ts"),
+]);
+const games = JSON.parse(gamesSource);
+const phaseMap = JSON.parse(phaseMapSource);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 
 assert.equal(childHead, QA_AUDITED_CHILD_SHA, `QA audit is stale: audited=${QA_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Test Lab before changing the SHA.`);
@@ -35,6 +45,65 @@ assert.equal(contract.qa.safety.isolatedSessionState, true);
 assert.equal(contract.qa.safety.neverAutosavesCampaignProgression, true);
 assert.equal(contract.qa.safety.gameMethodsGuardedByTestLabEnabled, true);
 assert.equal(contract.qa.safety.productionSaveMutation, false);
+
+// Re-audit coverage added after the previous 8128a2 checkpoint.
+const coverage = contract.qa.currentRuntimeCoverage;
+assert.deepEqual(coverage.weeklyChallenge, {
+  owner: "src/expansion-v2/weekly-challenge-admin.ts",
+  mode: "read-only",
+});
+assert.deepEqual(coverage.alternativeModes, {
+  owner: "src/duel/alternative-modes.ts",
+  modes: ["reflex", "word-chain"],
+  rankedEligible: false,
+});
+assert.deepEqual(coverage.historicalAnalytics, {
+  owner: "src/expansion-v2/historical-analytics-admin.ts",
+  scope: "current-local-profile",
+  crossPlayerSupported: false,
+});
+assert.deepEqual(coverage.rankedHistory, {
+  owner: "server/duel/ranked-history-query-service.ts",
+  queryServiceAvailable: true,
+  productionTransportExposed: false,
+  parentAdminQueryBridge: false,
+  authenticationRequired: true,
+  crossPlayerAuthorizationRequired: true,
+});
+assert.deepEqual(coverage.voiceHybrid, {
+  owner: "src/input/voice-adapter.ts",
+  hardwareAcceptance: "manual",
+});
+
+assert.match(weeklyAdmin, /WEEKLY_CHALLENGE_ADMIN_MODE = "read-only"/);
+assert.match(weeklyAdmin, /canMutate:\s*false/);
+assert.match(alternativeModes, /"reflex"/);
+assert.match(alternativeModes, /"word-chain"/);
+assert.match(alternativeModes, /rankedEligible:\s*false/);
+assert.match(historicalAdmin, /HISTORICAL_ANALYTICS_ADMIN_MODE = "read-only"/);
+assert.match(historicalAdmin, /crossPlayerSupported:\s*false/);
+assert.match(rankedHistoryService, /export class DuelRankedHistoryQueryService/);
+assert.match(rankedHistoryService, /"UNAUTHENTICATED"/);
+assert.match(rankedHistoryService, /authorizeCrossPlayer/);
+assert.match(voiceAdapter, /export class VoiceAdapter/);
+assert.match(voiceAdapter, /VoiceAcceptanceMetrics/);
+
+for (const source of contract.qa.runtimeSources) {
+  const content = await readChild(source);
+  assert.ok(content.length > 0, `QA runtime source is empty: ${source}`);
+}
+
+for (const unsupported of [
+  "save sandbox state into Campaign progression",
+  "publish sandbox state as production config",
+  "overwrite player saves",
+  "persist Test Lab rewards into production wallets",
+  "bypass testLabEnabled runtime guards",
+  "claim Ranked history is exposed through the current Parent Admin transport",
+  "claim real microphone hardware acceptance from automated QA",
+]) {
+  assert.ok(contract.qa.unsupportedAdminOperations.includes(unsupported), `QA unsupported boundary missing: ${unsupported}`);
+}
 
 assert.match(server, /space-typing-admin-qa\.v1\.json/);
 assert.match(server, /request\.method==="GET"&&url\.pathname==="\/api\/admin\/space-typing\/qa\/contract"/);
@@ -68,4 +137,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab launcher handoff + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + expanded runtime coverage audited + no production write bridge).`);
