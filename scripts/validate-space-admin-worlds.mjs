@@ -14,6 +14,7 @@ const [router,worlds,stages,server,contract,map]=await Promise.all([
 const screen=map.screens.find((entry)=>entry.route==="/admin/space-typing/stages");
 assert.equal(screen?.persistence,"immutable-revision-store");
 assert.equal(screen?.applyBoundary,"new-session");
+assert.deepEqual(screen?.subordinateRoutes,["/admin/space-typing/worlds-stages"]);
 assert.match(router,/renderPhaseBWorlds/);
 assert.match(router,/\$\{BASE\}\/stages/);
 assert.match(router,/\$\{BASE\}\/worlds-stages/);
@@ -32,4 +33,4 @@ assert.match(stages,/eliteChance/);
 assert.match(stages,/modifierSlots/);
 assert.match(server,/\/api\/runtime\/space-typing\/worlds/);
 assert.match(server,/\/api\/admin\/space-typing\/worlds\/preview/);
-console.log("Space Typing B06.6 Worlds + Stages UI/runtime mapping: PASS");
+console.log("Space Typing B06.6 Worlds + Stages UI/runtime mapping: PASS (including canonical subordinate /worlds-stages route)");
