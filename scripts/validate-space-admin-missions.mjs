@@ -44,20 +44,12 @@ assert.equal(missions.writeCapability, false);
 assert.equal(missions.previewCapability, false);
 assert.deepEqual(missions.unsupportedMasterPlanFields, ["dailyReset", "weeklyReset", "rotationCalendar", "rewardPool"]);
 
-for (const id of expectedMissionIds) {
-  assert(missionSource.includes(`\"${id}\"`), `Canonical progression mission missing: ${id}`);
-}
-for (const symbol of ["MISSION_REGISTRY", "createProgressionState", "recordProgressionEvent", "missionProgress", "missionClaimable", "claimMission", "syncAchievements"]) {
-  assert(missionSource.includes(symbol), `Missing canonical progression mission runtime evidence ${symbol}`);
-}
-for (const counter of expectedCounters) {
-  assert(missionSource.includes(counter), `Canonical progression counter missing: ${counter}`);
-}
+for (const id of expectedMissionIds) assert(missionSource.includes(`\"${id}\"`), `Canonical progression mission missing: ${id}`);
+for (const symbol of ["MISSION_REGISTRY", "createProgressionState", "recordProgressionEvent", "missionProgress", "missionClaimable", "claimMission", "syncAchievements"]) assert(missionSource.includes(symbol), `Missing canonical progression mission runtime evidence ${symbol}`);
+for (const counter of expectedCounters) assert(missionSource.includes(counter), `Canonical progression counter missing: ${counter}`);
 assert(saveSource.includes("progression: ProgressionState"), "PlayerSave must persist progression state");
 assert(saveSource.includes("progression:"), "PlayerSave runtime must serialize progression state");
-for (const type of expectedObjectiveTypes) {
-  assert(objectiveSource.includes(`\"${type}\"`), `Canonical Stage Objective type missing: ${type}`);
-}
+for (const type of expectedObjectiveTypes) assert(objectiveSource.includes(`\"${type}\"`), `Canonical Stage Objective type missing: ${type}`);
 assert(mainSource.includes("MISSION_REGISTRY"), "main.ts must consume canonical progression missions");
 assert(gameSource.includes("objectiveForStage") || gameSource.includes("objectiveRewardFactor"), "Game.ts must consume canonical Stage Objective runtime");
 assert(childAudit.includes("claimMission"), "Child Missions audit must exercise canonical mission claiming");
@@ -78,8 +70,9 @@ assert(routerSource.includes("renderPhaseBMissions") && routerSource.includes("`
 
 assert(dailyWeeklySource.includes("/api/admin/space-typing/daily-weekly/contract"), "Daily / Weekly must read the authenticated canonical sidecar contract");
 assert(dailyWeeklySource.includes("DAILY · RUNTIME-BACKED"), "Daily / Weekly must expose canonical Daily runtime ownership");
-assert(dailyWeeklySource.includes("WEEKLY · NOT IMPLEMENTED"), "Daily / Weekly must expose explicit Weekly runtime absence");
+assert(dailyWeeklySource.includes("WEEKLY · RUNTIME-BACKED"), "Daily / Weekly must expose canonical Weekly runtime ownership");
 assert(dailyWeeklySource.includes("No synthetic live-ops authoring"), "Daily / Weekly must explain the no-authoring boundary");
+assert(!dailyWeeklySource.includes("WEEKLY · NOT IMPLEMENTED"), "Daily / Weekly must not preserve the obsolete Weekly absence diagnostic");
 assert(!dailyWeeklySource.includes("+ New Rotation"), "Daily / Weekly runtime-boundary UI must not expose fake authoring actions");
 
-console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical partial read-only boundary.");
+console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical read-only Daily + Weekly boundary.");
