@@ -6,8 +6,9 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (file) => readFile(resolve(root, file), "utf8");
 
-const [help, styles, shell] = await Promise.all([
+const [help, components, styles, shell] = await Promise.all([
   read("portal/src/admin/v2/admin-help.ts"),
+  read("portal/src/admin/v2/admin-components.ts"),
   read("portal/src/admin/v2/admin-v2.css"),
   read("portal/src/admin/space-typing.ts"),
 ]);
@@ -37,6 +38,28 @@ assert.match(help, /this\.destroy\(\)/, "AdminHelpScope root observer must destr
 assert.match(help, /document\.querySelectorAll\("\.st-admin-v2-tooltip,\.st-admin-v2-drawer-backdrop"\)/, "AdminHelpScope must remove stale body-level help surfaces.");
 assert.match(help, /createAdminFieldShell/, "A1 must provide a reusable field/help wrapper foundation.");
 
+// Shared screen/state primitives required before domain migration.
+for (const primitive of [
+  "createAdminPageHeader",
+  "createAdminValidationMessage",
+  "createAdminEmptyState",
+  "createAdminErrorState",
+  "createAdminSkeleton",
+  "createAdminSearchInput",
+  "createAdminFilterBar",
+  "createAdminStatusChip",
+  "createAdminDraftBar",
+  "createAdminEntityTable",
+]) {
+  assert.match(components, new RegExp(`export function ${primitive}`), `Admin V2 shared primitive is missing: ${primitive}`);
+}
+assert.match(components, /aria-live/, "Validation messages must expose live-region behavior.");
+assert.match(components, /aria-busy/, "Loading state must expose busy semantics.");
+assert.match(components, /type = "search"/, "Search primitive must use a semantic search input.");
+assert.match(components, /Review Changes/, "Draft lifecycle bar must support reviewing complete change scope before publish.");
+assert.match(components, /publishDisabled/, "Draft lifecycle bar must support blocking unsafe publish actions.");
+assert.match(components, /th\.scope = "col"/, "Entity table headers must expose column scope.");
+
 // Shell integration: concise primary navigation, contextual help, no native-title-only help.
 assert.match(shell, /import "\.\/v2\/admin-v2\.css";/, "Admin shell must load Admin V2 design-system styles.");
 assert.match(shell, /AdminHelpScope/, "Admin shell must use the shared AdminHelpScope.");
@@ -57,12 +80,20 @@ for (const selector of [
   ".st-admin-v2-drawer-backdrop",
   ".st-admin-v2-help-drawer",
   ".st-admin-v2-field",
+  ".st-admin-v2-page-head",
+  ".st-admin-v2-validation",
+  ".st-admin-v2-empty-state",
+  ".st-admin-v2-error-state",
+  ".st-admin-v2-skeleton",
+  ".st-admin-v2-filter-bar",
+  ".st-admin-v2-table",
+  ".st-admin-v2-draft-bar",
 ]) {
   assert.ok(styles.includes(selector), `Admin V2 styles are missing ${selector}`);
 }
-assert.match(styles, /var\(--st-admin-accent/, "Admin V2 help must reuse the existing Space Typing color tokens.");
-assert.match(styles, /var\(--st-admin-display/, "Admin V2 help must reuse the existing display typography.");
+assert.match(styles, /var\(--st-admin-accent/, "Admin V2 components must reuse the existing Space Typing color tokens.");
+assert.match(styles, /var\(--st-admin-display/, "Admin V2 components must reuse the existing display typography.");
 assert.match(styles, /prefers-reduced-motion/, "Admin V2 help must respect reduced-motion preferences.");
 assert.match(styles, /\.st-admin-nav-description\{display:none!important\}/, "Legacy permanent navigation helper copy must stay hidden during A1 migration.");
 
-console.log("Admin V2 A1 help/design-system foundation: OK");
+console.log("Admin V2 A1 help/shared-component foundation: OK");
