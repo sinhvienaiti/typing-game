@@ -217,7 +217,7 @@ export class SpaceTypingAdmin {
     const env = element("div", "st-admin-env-row");
     env.append(
       element("span", "st-admin-env", "LOCAL"),
-      element("span", "st-admin-mock-badge", "PHASE B · RUNTIME INTEGRATED"),
+      element("span", "st-admin-status good", "SERVICE CONNECTED"),
     );
     brand.append(env);
     aside.append(brand);
@@ -310,10 +310,10 @@ export class SpaceTypingAdmin {
         "st-admin-command",
       ),
     );
-    const runtime = element("span", "st-admin-revision", "LOCAL ADMIN · RUNTIME");
-    runtime.title = "This Admin surface is connected to the local Space Typing runtime service.";
+    const runtime = element("span", "st-admin-revision", "LOCAL ADMIN · CONNECTED");
+    runtime.title = "This Admin surface is connected to the local Space Typing runtime service. Technical milestone: PHASE B · RUNTIME INTEGRATED.";
     bar.append(runtime);
-    bar.append(statusBadge("LOCAL", "good"));
+    bar.append(statusBadge("READY", "good"));
     return bar;
   }
 
@@ -327,9 +327,9 @@ export class SpaceTypingAdmin {
     const page = element("div");
     const panel = element("section", "st-admin-panel solid");
     panel.append(
-      element("div", "st-admin-eyebrow", "Admin Route"),
-      element("h1", undefined, "Unknown Admin screen"),
-      element("p", undefined, `No registered Phase B screen exists for ${path}.`),
+      element("div", "st-admin-eyebrow", "Navigation"),
+      element("h1", undefined, "Screen not found"),
+      element("p", undefined, `This Admin URL is not registered. Use the sidebar or Search command to open a supported Space Typing screen. Requested path: ${path}.`),
       button("Back to Overview", () => this.navigate(ADMIN_BASE), "st-admin-btn primary"),
     );
     page.append(panel);
