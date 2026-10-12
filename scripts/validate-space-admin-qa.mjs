@@ -3,17 +3,19 @@ import { execFileSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
 const QA_AUDITED_CHILD_SHA = "83f80b3d6f640ea1af46e158e25485bc57b31393";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
-const [page, router, server, nav, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
+const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
   readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
   readFile(resolve(root, "portal/public/games.json"), "utf8"),
   readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
   readChild("src/expansion-v2/weekly-challenge-admin.ts"),
@@ -25,6 +27,8 @@ const [page, router, server, nav, gamesSource, phaseMapSource, weeklyAdmin, alte
 const games = JSON.parse(gamesSource);
 const phaseMap = JSON.parse(phaseMapSource);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+const developerManifest = createDeveloperToolsManifest();
+const developerPaths = developerManifest.sections.flatMap((section) => section.tools.map((tool) => tool.path));
 
 assert.equal(childHead, QA_AUDITED_CHILD_SHA, `QA audit is stale: audited=${QA_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Test Lab before changing the SHA.`);
 assert.equal(contract.contractRevision, "space-typing-admin-qa-v1");
@@ -116,8 +120,13 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 
 assert.match(router, /renderPhaseBQa/);
 assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
-assert.match(nav, /label:\s*"QA Sandbox"/);
-assert.match(nav, /path:\s*`\$\{ADMIN_BASE\}\/qa`/);
+
+// A2: QA remains directly routable for migration, but is a developer/test workflow rather than a primary administrator menu item.
+assert.doesNotMatch(nav, /label:\s*"QA Sandbox"/);
+assert.match(nav, /\[`${ADMIN_BASE}\/qa`\]:\s*"QA Sandbox"/);
+assert.ok(developerPaths.includes("/admin/space-typing/qa"), "QA Sandbox must be exposed from permission-gated Developer Tools");
+assert.match(command, /\["QA Sandbox",\s*`\$\{BASE\}\/qa`,\s*"Developer Tools · QA"\]/);
+
 assert.match(page, /\/api\/admin\/space-typing\/qa\/contract/);
 assert.match(page, /\/games\.json/);
 assert.match(page, /Developer Test Lab/);
@@ -137,4 +146,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + expanded runtime coverage audited + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + A2 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
