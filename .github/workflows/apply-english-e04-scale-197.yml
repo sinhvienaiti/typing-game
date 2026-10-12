@@ -34,9 +34,35 @@ jobs:
         run: python3 scripts/apply-english-e04-focused-scale-197.py
       - name: Validate review and controlled-batch contracts
         run: |
-          pnpm english-content:review:validate
-          pnpm english-content:e10
-          pnpm english-content:licenses
+          set +e
+          mkdir -p docs/ci-debug
+          LOG=docs/ci-debug/scale-197-step7.log
+          : > "$LOG"
+          rc=0
+          run_check() {
+            label="$1"
+            shift
+            echo "===== ${label} =====" | tee -a "$LOG"
+            "$@" 2>&1 | tee -a "$LOG"
+            code=${PIPESTATUS[0]}
+            echo "===== exit ${code}: ${label} =====" | tee -a "$LOG"
+            if [ "$code" -ne 0 ]; then rc=1; fi
+          }
+          run_check "english-content:review:validate" pnpm english-content:review:validate
+          run_check "english-content:e10" pnpm english-content:e10
+          run_check "english-content:licenses" pnpm english-content:licenses
+          echo "overall_exit=${rc}" | tee -a "$LOG"
+          exit "$rc"
+      - name: Persist Scale 197 validation diagnostics
+        if: failure()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ci-debug/scale-197-step7.log
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore(ci): capture Scale 197 validation failure'
+            git push
+          fi
       - name: Generate and publish reviewed runtime
         run: |
           pnpm english-content:generate
