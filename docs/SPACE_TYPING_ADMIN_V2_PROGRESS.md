@@ -13,19 +13,24 @@ Parent:
 - A0 migration matrix commit: `46c8da14af8f268fd01f8186c88826fff930042b`
 - A0.5 validated implementation checkpoint: `fefa731922d59542aa9fc6293fa56fc029b999aa`
 - A1 validated implementation checkpoint: `f2f088b59a9ae418b8a26045b5544b46dfb48b73`
+- A2 validated implementation checkpoint: `9d3a94231d6c3168615c1675247cb443bd6b3b51`
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
-- Integration branch: `feat/admin-world-music-stage-policy`
-- Audited HEAD: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
+- Admin integration branch: `feat/admin-world-music-stage-policy`
+- Integration branch HEAD: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
+- Parent-pinned child SHA used by the validated A2 CI: `83f80b3d6f640ea1af46e158e25485bc57b31393`
+- Parent-pinned child CI #1957: PASS.
+
+The child integration branch currently trails the child commit pinned by the parent. Workers must treat the parent gitlink/pinned child SHA as the source of truth for parent validation and must not reset the parent submodule back to the older integration-branch HEAD.
 
 Checkpoint SHAs are informational only. Every worker must fetch latest heads before editing and must never reset newer work back to these values.
 
 ## CURRENT PHASE
 
-`A2 — Shell, capability-aware navigation, Dashboard V2 and Developer Tools scaffold`
+`A3.0 — Media / Asset architecture gate`
 
-A0, A0.5 and A1 are complete. A2 is the first unfinished phase.
+A0, A0.5, A1 and A2 are complete. A3.0 is the first unfinished phase.
 
 ## COMPLETED UNITS
 
@@ -100,24 +105,55 @@ Implemented and validated:
 
 A1 deliberately does **not** claim every Phase B domain page is already Administrator V2. Technical page copy/contract inspectors remain scheduled for their A2+/domain-specific migration destination instead of being cosmetically relabeled.
 
+### A2 — Administrator shell, Dashboard V2 and Developer Tools
+
+Implemented and validated:
+
+- real-data-only Dashboard V2 at `/admin/space-typing`;
+- Dashboard sources only canonical Admin state, revision history, actor, audit activity and Music catalog summary;
+- Dashboard live generation, publishable/stale draft counts, music count, signed-in actor, maintenance warning, recent activity and quick actions;
+- loading, empty and error states with retry;
+- capability-aware primary navigation focused on current administrator workflows;
+- read-only/runtime diagnostic routes removed from the primary administrator sidebar without deleting their canonical direct routes;
+- permission-gated Developer Tools hub using `developer.runtime-inspect`;
+- server-owned Developer Tools manifest grouped into Runtime/Telemetry, Economy Diagnostics, Live Ops Diagnostics, PvP Diagnostics, Visual Diagnostics and QA/Test Lab;
+- permission-aware command palette split between administrator commands and Developer Tools commands;
+- legacy technical route breadcrumb/direct-route metadata retained during migration;
+- A2 shell validator added;
+- main Admin UI validator migrated from the old exact-30-primary-navigation assumption to behavior-based A2 checks while retaining all 30 canonical Phase B route/ownership checks;
+- UI Assets and QA validators migrated to assert Developer Tools placement rather than primary-sidebar placement without weakening their runtime/read-only/test-lab safety boundaries;
+- A2 manual acceptance scenarios appended for Dashboard, permission-aware navigation, Developer Tools, command palette, direct migration routes and responsive layout.
+
+A2 validated checkpoint:
+- Parent HEAD: `9d3a94231d6c3168615c1675247cb443bd6b3b51`
+- Space Typing Admin CI #1002: PASS.
+- Platform CI #2233: PASS.
+- Parent-pinned child `83f80b3d6f640ea1af46e158e25485bc57b31393`: child CI #1957 PASS.
+
+Admin CI #1002 covered all A0.5/A1/A2 validators, every retained Phase B ownership validator, revision/CAS/security tests, domain validation/runtime/lifecycle tests, all canonical preview bridges, boss/world/stage HTTP publish/runtime/rollback smoke tests, Space Typing tests and audits, Space Typing build and Portal TypeScript/Vite build.
+
 ## IN PROGRESS
 
-### A2 — First safe unit
+### A3.0 — Media / Asset architecture gate
 
-1. build a real-data-only Administrator Dashboard at `/admin/space-typing`;
-2. source Dashboard only from canonical state/history/audit/music data that exists today;
-3. introduce capability-aware primary navigation so read-only technical inspectors stop occupying normal administrator navigation;
-4. create a permission-gated Developer Tools hub/scaffold;
-5. keep legacy technical routes resolvable as direct/internal migration routes until their domain phase replaces them;
-6. preserve command palette while separating administrator concepts from developer diagnostics;
-7. migrate A1's exact-30-primary-route validator assumption into A2 behavior-based navigation checks without weakening runtime ownership validators.
+First audit findings already locked:
+
+1. `admin/music-assets.mjs` is the only current generic-style writable media service. It writes uploaded tracks into the child `public/assets/audio/music/...` tree, writes `track.json`, rebuilds `src/audio/world-music-catalog.json`, and only deletes tracks whose provenance is `local-admin-upload`.
+2. Current Music replacement behavior is destructive/manual (`delete then upload replacement`) and therefore is not yet a versioned general Media architecture.
+3. Child `art-src/README.md` explicitly defines `art-src/**` as heavy local source art that is intentionally not committed. Runtime pipelines such as `art:prepare`, `bg:prepare`, `sprites:prepare`, `ship3d:prepare`, `combat-vfx:prepare`, etc. generate committed/runtime assets into `public/assets/space-typing/` or `src/assets/`.
+4. Therefore Admin Media must not silently treat generated runtime files as editable source originals, and must not overwrite generated output without retaining source/provenance/version semantics.
+5. Backgrounds are currently `runtime-derived-readonly`, persisted as `code-owned-runtime-art`, and explicitly reject a parallel Admin shadow registry.
+6. UI Assets are currently `runtime-derived-readonly`, persisted as `code-owned-static-and-inline-svg`, with no generic upload/replace/delete/publish capability.
+7. VFX is currently `runtime-derived-readonly`, persisted as `code-owned-runtime-vfx`; much of it is procedural/config-owned rather than a simple file asset. VFX definitions must not be collapsed into generic file CRUD.
+8. A3.0 must define stable logical asset identity, immutable versions, hashes, storage/provenance, reference/usage tracking, safe replacement/archive/delete, cache/versioned URLs, rollback semantics and import/bootstrap behavior before A3.1 exposes generic Media editing.
 
 ## BLOCKERS
 
-None for the A2 first unit.
+No blocker for architecture/design implementation of A3.0.
 
-Known future architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`, especially:
-- generic Media ownership (A3.0);
+A3.1 writable Media UI is intentionally blocked until A3.0 establishes a canonical persistence owner and safe reference/version semantics for non-Music assets.
+
+Known later architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`, especially:
 - Shop canonical authoring model (A4.0);
 - Ships/Weapons/Projectiles canonical expansion (A5);
 - Live Ops scheduler (A11);
@@ -125,41 +161,31 @@ Known future architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATI
 
 ## DEFERRED MANUAL TESTS
 
-A1 browser/manual scenarios are recorded in:
+A1 and A2 browser/manual scenarios are recorded in:
 - `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-They remain non-blocking for safe A2 automated work. A2 should append scenarios for Dashboard loading/error/empty states, capability-aware nav and Developer Tools permission gating.
+They remain non-blocking for safe architecture/foundation work. Manual validation should be requested before claiming browser UX acceptance, but it must not block architecture units that can be proven through contracts/tests/CI.
 
 ## LATEST GREEN CI
 
-A1 checkpoint `f2f088b59a9ae418b8a26045b5544b46dfb48b73`:
-- Parent Space Typing Admin CI #962 (push): PASS.
-- Parent Space Typing Admin CI #963 (PR): PASS.
-- Parent Platform CI on the same HEAD: PASS.
-- Child integration checkpoint CI #1759: PASS on `8128a2a5a7713fff80cd1286b607de6a3e7190f7` (no child source changes required through A1).
-
-Admin CI #962/963 covered:
-- Admin contract snapshot;
-- A0.5 foundation validator;
-- A1 design-system validator;
-- complete Admin UI + Phase B ownership validators;
-- immutable revision/CAS/security/audit tests;
-- all canonical preview bridges;
-- boss/world/stage HTTP publish/runtime/rollback smoke tests;
-- Space Typing tests and audits;
-- Space Typing build;
-- Portal TypeScript + Vite build.
+A2 checkpoint `9d3a94231d6c3168615c1675247cb443bd6b3b51`:
+- Parent Space Typing Admin CI #1002: PASS.
+- Parent Platform CI #2233: PASS.
+- Parent-pinned child CI #1957: PASS on `83f80b3d6f640ea1af46e158e25485bc57b31393`.
 
 ## NEXT EXACT ACTION
 
-1. Re-fetch parent HEAD before A2 source writes.
-2. Add typed actor/audit/dashboard data contracts to the Admin client without inventing unavailable backend data.
-3. Implement real-data Dashboard V2 and loading/error/empty states.
-4. Implement Developer Tools hub + permission-aware shell exposure.
-5. Reduce primary sidebar to genuine administrator workflows; keep technical legacy routes reachable only through Developer Tools/direct migration aliases.
-6. Update command palette/navigation validator behavior for A2.
-7. Add A2 manual acceptance scenarios.
-8. Run Admin + Platform CI and continue to A3.0 only after A2 exit criteria are green.
+1. Re-fetch parent HEAD before every A3.0 write.
+2. Finish media ownership inventory for Music, source art pipelines, runtime images, ship/model art, SFX and procedural VFX.
+3. Define the canonical Media Asset model: logical asset ID, immutable version ID, SHA-256/hash, kind, MIME/format, dimensions/duration, source provenance, storage class/path, created actor/time and lifecycle status.
+4. Define references/`usedBy` records and the integration boundary between Media assets and revision-backed game definitions.
+5. Define replacement as new immutable asset version + explicit reference migration; never silent in-place overwrite.
+6. Define archive/delete safety: referenced versions cannot be hard-deleted; archive is the normal removal path; hard delete is restricted to safe unreferenced local uploads/generated failures.
+7. Define versioned/cache-safe URLs and rollback semantics so an old game revision can still resolve the asset version it referenced.
+8. Define bootstrap/import of existing runtime-generated/code-owned assets as read/reference assets without duplicating binaries or pretending Admin owns their original source files.
+9. Keep procedural VFX definitions separate from generic binary assets; Media may reference VFX media, but VFX authoring remains its own canonical domain capability.
+10. Implement and test the A3.0 canonical Media service only after the architecture contract is documented and validator-ready.
+11. Move to A3.1 Media Library/Asset Picker only when the A3.0 service is canonical and green.
 
 ## SAFETY RULES
 
@@ -167,4 +193,6 @@ Admin CI #962/963 covered:
 - Do not create fake remote users, fake scheduler services or fake player management.
 - Do not weaken Phase B ownership validators simply to make V2 pass.
 - Do not create Shop/Ships shadow models disconnected from runtime.
-- Do not create unnecessary child branches; continue current Admin integration branch unless a real dependency requires otherwise.
+- Do not create a generic Media CRUD layer on top of generated runtime files without canonical source/provenance/version/reference semantics.
+- Do not treat procedural VFX definitions as if they were ordinary uploaded binary files.
+- Do not create unnecessary child branches; continue from the parent-pinned child source of truth and reconcile the older Admin integration branch only when a real child change requires it.
