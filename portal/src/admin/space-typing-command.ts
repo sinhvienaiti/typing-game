@@ -1,6 +1,8 @@
 import "./space-typing-command.css";
 
 const BASE = "/admin/space-typing";
+const RESULTS_ID = "space-admin-command-results";
+const STATUS_ID = "space-admin-command-status";
 
 type Navigate = (path: string) => void;
 
@@ -45,18 +47,30 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   input.type = "search";
   input.placeholder = "Search screens, settings, content…";
   input.setAttribute("aria-label", "Search Admin commands");
+  input.setAttribute("aria-controls", RESULTS_ID);
+  input.setAttribute("aria-describedby", STATUS_ID);
   const key = document.createElement("kbd");
   key.textContent = "ESC";
   head.append(input, key);
   const results = document.createElement("div");
   results.className = "stx-command-results";
+  results.id = RESULTS_ID;
+  const status = document.createElement("div");
+  status.id = STATUS_ID;
+  status.className = "stx-command-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  status.setAttribute("aria-atomic", "true");
+  const resultButtons = (): HTMLButtonElement[] => Array.from(results.querySelectorAll<HTMLButtonElement>("button.stx-command-result:not([disabled])"));
   const render = () => {
     const query = input.value.trim().toLowerCase();
+    const matches = COMMANDS.filter(([label, , group]) => `${label} ${group}`.toLowerCase().includes(query)).slice(0, 12);
     results.replaceChildren();
-    for (const [label, path, group] of COMMANDS.filter(([label, , group]) => `${label} ${group}`.toLowerCase().includes(query)).slice(0, 12)) {
+    for (const [label, path, group] of matches) {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "stx-command-result";
+      button.setAttribute("aria-label", `${label}, ${group}`);
       const copy = document.createElement("span");
       const strong = document.createElement("strong");
       strong.textContent = label;
@@ -65,15 +79,19 @@ export function openAdminCommandPalette(navigate: Navigate): void {
       copy.append(strong, small);
       const arrow = document.createElement("span");
       arrow.textContent = "→";
+      arrow.setAttribute("aria-hidden", "true");
       button.append(copy, arrow);
       button.addEventListener("click", () => { closeAdminCommandPalette(); navigate(path); });
       results.append(button);
     }
-    if (!results.children.length) {
+    if (matches.length === 0) {
       const empty = document.createElement("div");
       empty.className = "stx-command-empty";
       empty.textContent = "No matching Admin screen.";
       results.append(empty);
+      status.textContent = "No matching Admin screen.";
+    } else {
+      status.textContent = `${matches.length} matching Admin ${matches.length === 1 ? "screen" : "screens"}. Use the arrow keys to move through results.`;
     }
   };
   input.addEventListener("input", render);
@@ -83,8 +101,30 @@ export function openAdminCommandPalette(navigate: Navigate): void {
       closeAdminCommandPalette();
       return;
     }
+    const buttons = resultButtons();
+    const activeIndex = buttons.findIndex((button) => button === document.activeElement);
+    if (event.key === "ArrowDown" && buttons.length > 0) {
+      event.preventDefault();
+      buttons[activeIndex >= 0 ? (activeIndex + 1) % buttons.length : 0]?.focus();
+      return;
+    }
+    if (event.key === "ArrowUp" && buttons.length > 0) {
+      event.preventDefault();
+      buttons[activeIndex >= 0 ? (activeIndex - 1 + buttons.length) % buttons.length : buttons.length - 1]?.focus();
+      return;
+    }
+    if (event.key === "Home" && activeIndex >= 0 && buttons.length > 0) {
+      event.preventDefault();
+      buttons[0]?.focus();
+      return;
+    }
+    if (event.key === "End" && activeIndex >= 0 && buttons.length > 0) {
+      event.preventDefault();
+      buttons[buttons.length - 1]?.focus();
+      return;
+    }
     if (event.key === "Tab") {
-      const focusables: HTMLElement[] = [input, ...Array.from(results.querySelectorAll<HTMLButtonElement>("button:not([disabled])"))];
+      const focusables: HTMLElement[] = [input, ...buttons];
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
       if (first === undefined || last === undefined) return;
@@ -99,7 +139,7 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   };
   document.addEventListener("keydown", onKey);
   currentCleanup = () => document.removeEventListener("keydown", onKey);
-  palette.append(head, results);
+  palette.append(head, results, status);
   overlay.append(palette);
   document.body.append(overlay);
   current = overlay;
