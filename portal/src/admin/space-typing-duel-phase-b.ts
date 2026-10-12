@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 type Tone = "good" | "warn" | "bad" | "info";
@@ -71,22 +72,42 @@ function panel(title: string, subtitle?: string): HTMLElement {
   return root;
 }
 function listNotice(label: string, values: readonly (string | number)[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
 }
 function scalar(label: string, value: string | number | boolean, tone: Tone = "info"): HTMLElement {
   return notice(`${label}: ${String(value)}`, tone);
 }
-async function fetchDuelContract(): Promise<DuelContractPayload> {
-  const response = await fetch("/api/admin/space-typing/duel/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<DuelContractPayload> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Duel contract request failed (${response.status})`);
-  if (payload.capability !== "duel.read" || !payload.duel || !payload.route) {
-    throw new Error("Pinned child Duel contract does not expose duel.read.");
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((item) => typeof item === "string"); }
+function numberArray(value: unknown): value is number[] { return Array.isArray(value) && value.every((item) => typeof item === "number" && Number.isFinite(item)); }
+
+function validateDuelContract(value: unknown): DuelContractPayload {
+  if (!isRecord(value) || value["capability"] !== "duel.read" || !isRecord(value["duel"]) || !isRecord(value["route"])) {
+    throw new Error("Duel contract does not match the canonical duel.read boundary.");
   }
-  return payload as DuelContractPayload;
+  const duel = value["duel"];
+  if (duel["mode"] !== "runtime-derived-readonly") throw new Error("Duel contract is not runtime-derived read-only.");
+  for (const key of ["runtimeSources", "authorableFields", "roomOwnerMutableFields", "unsupportedAdminMockFields"] as const) {
+    if (!stringArray(duel[key])) throw new Error(`Duel contract is missing ${key}.`);
+  }
+  if (!isRecord(duel["roomSettings"]) || !isRecord(duel["bot"]) || !isRecord(duel["combat"]) || !isRecord(duel["safeDefaults"])) {
+    throw new Error("Duel contract is missing room, bot, combat or defaults metadata.");
+  }
+  const room = duel["roomSettings"];
+  for (const key of ["visibilities", "mapSelectionModes", "mapIds", "hazardLevels", "specialFrequencies", "seedModes", "modifiers"] as const) {
+    if (!stringArray(room[key])) throw new Error(`Duel roomSettings is missing ${key}.`);
+  }
+  for (const key of ["matchLengthSeconds", "roundFormats"] as const) if (!numberArray(room[key])) throw new Error(`Duel roomSettings is missing ${key}.`);
+  if (duel["writeCapability"] !== false || duel["previewCapability"] !== false || typeof duel["persistenceOwner"] !== "string") {
+    throw new Error("Duel contract contains an invalid Admin ownership boundary.");
+  }
+  return value as unknown as DuelContractPayload;
+}
+
+async function fetchDuelContract(): Promise<DuelContractPayload> {
+  return validateDuelContract(await api.requestJson<unknown>("/api/admin/space-typing/duel/contract"));
 }
 
 export function renderPhaseBDuel(): HTMLElement {
@@ -104,13 +125,20 @@ export function renderPhaseBDuel(): HTMLElement {
   page.append(head);
 
   const status = notice("Loading canonical Duel runtime contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const payload = await fetchDuelContract();
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical Duel runtime contract…", "loading");
+    content.replaceChildren(notice("Loading room-owner and authority rules…", "info"));
+    void fetchDuelContract().then((payload) => {
+      if (generation !== loadGeneration) return;
       const duel = payload.duel;
-      status.className = "stx-notice good";
-      status.textContent = `Duel ${duel.combat.contentVersion} · ${duel.persistenceOwner} · Admin writes closed.`;
+      setAdminStatus(status, `Duel ${duel.combat.contentVersion} · ${duel.persistenceOwner} · Admin writes closed.`, "success");
+      content.replaceChildren();
 
       const rules = panel("Room Rules", "Validated by src/duel/room.ts");
       rules.append(
@@ -127,10 +155,7 @@ export function renderPhaseBDuel(): HTMLElement {
       );
 
       const defaults = panel("Runtime Defaults", "Safe public defaults; password value is intentionally not exposed");
-      for (const [key, value] of Object.entries(duel.safeDefaults)) {
-        const display = typeof value === "object" ? JSON.stringify(value) : String(value);
-        defaults.append(scalar(key, display));
-      }
+      for (const [key, value] of Object.entries(duel.safeDefaults)) defaults.append(scalar(key, typeof value === "object" ? JSON.stringify(value) : String(value)));
 
       const bot = panel("Practice Bot Bounds", "Canonical normalization and Practice defaults");
       bot.append(
@@ -161,16 +186,24 @@ export function renderPhaseBDuel(): HTMLElement {
         scalar("Admin preview capability", duel.previewCapability, "warn"),
       );
 
-      const unsupported = panel("Removed Mock Controls", "Legacy Admin controls without a canonical runtime owner stay unavailable");
+      const unsupported = panel("Unavailable Admin Controls", "Controls without a canonical runtime owner remain intentionally unavailable");
       unsupported.append(
         listNotice("Unsupported fields", duel.unsupportedAdminMockFields, "warn"),
-        notice("The old Lives=6, free-form match-time/round-window sliders, impact-delay slider, presentation toggles and Save UI Draft were UI mock concepts. They are not treated as production Duel policy."),
+        notice("Lives, free-form match windows, impact-delay sliders, presentation toggles and Admin Save Draft are not promoted into production policy without a canonical owner."),
       );
-      page.append(rules, defaults, bot, authority, ownership, unsupported);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Duel contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+      content.append(rules, defaults, bot, authority, ownership, unsupported);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Duel runtime contract is unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Duel Settings unavailable",
+        fallbackMessage: "The canonical Duel contract could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return page;
 }
