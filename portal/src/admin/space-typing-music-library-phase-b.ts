@@ -1,4 +1,6 @@
 import { SpaceTypingAdminApi } from "./api";
+import { adminErrorMessage } from "./admin-http";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 
@@ -31,22 +33,14 @@ function escapeHtml(value: unknown): string {
     .replaceAll("'", "&#039;");
 }
 
-async function errorMessage(response: Response): Promise<string> {
-  const payload = (await response.json().catch(() => ({}))) as Record<string, unknown>;
-  return typeof payload.message === "string"
-    ? payload.message
-    : typeof payload.error === "string"
-      ? payload.error
-      : `Admin request failed (${response.status})`;
+function validCatalog(payload: MusicCatalogPayload): boolean {
+  return Number.isInteger(payload.schemaVersion) && typeof payload.manifestRevision === "string" && Array.isArray(payload.tracks);
 }
 
 async function loadCatalog(): Promise<MusicCatalogPayload> {
-  const response = await fetch("/api/admin/space-typing/music/library", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  if (!response.ok) throw new Error(await errorMessage(response));
-  return (await response.json()) as MusicCatalogPayload;
+  const payload = await api.requestJson<MusicCatalogPayload>("/api/admin/space-typing/music/library");
+  if (!validCatalog(payload)) throw new Error("Music catalog response does not match the canonical Admin contract.");
+  return payload;
 }
 
 async function uploadTrack(input: {
@@ -59,7 +53,6 @@ async function uploadTrack(input: {
   mood: string;
 }): Promise<MusicCatalogPayload> {
   const headers: Record<string, string> = {
-    "x-typing-game-admin-token": api.getToken(),
     "x-music-file-name": input.file.name,
     "x-music-track-id": input.trackId.trim(),
     "x-music-title": input.title.trim(),
@@ -70,23 +63,24 @@ async function uploadTrack(input: {
   if (input.mixOutSeconds.trim()) headers["x-music-mix-out-seconds"] = input.mixOutSeconds.trim();
   if (input.mood.trim()) headers["x-music-mood"] = input.mood.trim();
 
-  const response = await fetch("/api/admin/space-typing/music/upload", {
+  const payload = await api.requestJson<{ catalog: MusicCatalogPayload }>("/api/admin/space-typing/music/upload", {
     method: "POST",
     headers,
     body: input.file,
   });
-  if (!response.ok) throw new Error(await errorMessage(response));
-  const payload = (await response.json()) as { catalog: MusicCatalogPayload };
+  if (!payload.catalog || !validCatalog(payload.catalog)) {
+    throw new Error("Music upload completed without a valid canonical catalog response.");
+  }
   return payload.catalog;
 }
 
 async function deleteTrack(trackId: string): Promise<MusicCatalogPayload> {
-  const response = await fetch(`/api/admin/space-typing/music/tracks/${encodeURIComponent(trackId)}`, {
-    method: "DELETE",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  if (!response.ok) throw new Error(await errorMessage(response));
-  return (await response.json()) as MusicCatalogPayload;
+  const payload = await api.requestJson<MusicCatalogPayload>(
+    `/api/admin/space-typing/music/tracks/${encodeURIComponent(trackId)}`,
+    { method: "DELETE" },
+  );
+  if (!validCatalog(payload)) throw new Error("Music delete completed without a valid canonical catalog response.");
+  return payload;
 }
 
 function playbackSummary(track: MusicCatalogTrack): string {
@@ -110,7 +104,7 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
         <span class="st-admin-badge">DELETE · ADMIN UPLOADS ONLY</span>
       </div>
     </header>
-    <p class="st-admin-notice" data-music-status>Loading canonical World Music catalog…</p>
+    <p class="st-admin-notice" data-music-status aria-live="polite">Loading canonical World Music catalog…</p>
     <div class="space-admin-grid">
       <article class="st-admin-card space-admin-card--wide">
         <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Authoring</p><h2>Upload track</h2></div></div>
@@ -124,7 +118,7 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
           <label class="stx-field"><span>Mood (optional)</span><input data-music-mood maxlength="80"></label>
         </div>
         <p class="st-admin-notice">Accepted: mp3, ogg, wav, m4a · max 96 MiB. A successful upload writes one authored manifest, rebuilds <code>world-music-catalog.json</code>, and then becomes part of the bundled runtime catalog.</p>
-        <button class="st-admin-btn primary" type="button" data-music-upload>Upload & rebuild catalog</button>
+        <button class="st-admin-btn primary" type="button" data-music-upload disabled>Upload & rebuild catalog</button>
       </article>
       <article class="st-admin-card space-admin-card--wide">
         <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Canonical catalog</p><h2>Tracks</h2></div><strong data-music-revision>—</strong></div>
@@ -148,9 +142,10 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
 
   const render = (catalog: MusicCatalogPayload): void => {
     revision.textContent = `${catalog.tracks.length} tracks · ${catalog.manifestRevision.slice(0, 20)}…`;
-    status.textContent = `Catalog schema v${catalog.schemaVersion} loaded. Only tracks with provenance local-admin-upload can be deleted from this surface.`;
+    setAdminStatus(status, `Catalog schema v${catalog.schemaVersion} loaded. Only tracks with provenance local-admin-upload can be deleted from this surface.`, "success");
+    uploadButton.disabled = false;
     if (catalog.tracks.length === 0) {
-      list.innerHTML = '<p class="st-admin-notice">Catalog is empty.</p>';
+      list.innerHTML = '<p class="st-admin-notice">Catalog is empty. Upload an authored track to create the first Admin-managed catalog entry.</p>';
       return;
     }
     list.innerHTML = `<div class="st-admin-table-wrap"><table class="st-admin-table"><thead><tr><th>ID</th><th>Title</th><th>Playback</th><th>Duration</th><th>Provenance</th><th>Action</th></tr></thead><tbody>${catalog.tracks.map((track) => {
@@ -163,12 +158,11 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
         const trackId = button.dataset.deleteTrack ?? "";
         if (!trackId || !window.confirm(`Delete Admin-uploaded track ${trackId} and rebuild the catalog?`)) return;
         button.disabled = true;
-        status.textContent = `Deleting ${trackId} and rebuilding canonical catalog…`;
+        setAdminStatus(status, `Deleting ${trackId} and rebuilding canonical catalog…`, "loading");
         void deleteTrack(trackId)
           .then(render)
           .catch((error) => {
-            status.textContent = error instanceof Error ? error.message : "Delete failed.";
-            status.classList.add("st-admin-notice--error");
+            setAdminStatus(status, adminErrorMessage(error, "The track could not be deleted. Try again."), "error");
             button.disabled = false;
           });
       });
@@ -178,13 +172,16 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
   uploadButton.addEventListener("click", () => {
     const file = fileInput.files?.[0];
     if (!file) {
-      status.textContent = "Choose an audio file first.";
-      status.classList.add("st-admin-notice--error");
+      setAdminStatus(status, "Choose an audio file first.", "error");
+      fileInput.focus();
+      return;
+    }
+    if (!idInput.value.trim() || !titleInput.value.trim() || !durationInput.value.trim()) {
+      setAdminStatus(status, "Track ID, title and duration are required before upload.", "error");
       return;
     }
     uploadButton.disabled = true;
-    status.classList.remove("st-admin-notice--error");
-    status.textContent = "Uploading authored track and rebuilding canonical catalog…";
+    setAdminStatus(status, "Uploading authored track and rebuilding canonical catalog…", "loading");
     void uploadTrack({
       file,
       trackId: idInput.value,
@@ -204,15 +201,33 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
         render(catalog);
       })
       .catch((error) => {
-        status.textContent = error instanceof Error ? error.message : "Upload failed.";
-        status.classList.add("st-admin-notice--error");
+        setAdminStatus(status, adminErrorMessage(error, "The authored track could not be uploaded. Check the form and try again."), "error");
       })
       .finally(() => { uploadButton.disabled = false; });
   });
 
-  void loadCatalog().then(render).catch((error) => {
-    status.textContent = error instanceof Error ? error.message : "Unable to load music catalog.";
-    status.classList.add("st-admin-notice--error");
-  });
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    uploadButton.disabled = true;
+    revision.textContent = "—";
+    setAdminStatus(status, "Loading canonical World Music catalog…", "loading");
+    list.innerHTML = '<p class="st-admin-notice">Loading tracks…</p>';
+    void loadCatalog().then((catalog) => {
+      if (generation !== loadGeneration) return;
+      render(catalog);
+    }).catch((error) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Music catalog is unavailable.", "error");
+      renderAdminFailureState(list, {
+        title: "Music catalog unavailable",
+        fallbackMessage: "The canonical catalog could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return root;
 }
