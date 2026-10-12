@@ -145,7 +145,7 @@ const server = createServer(async (request, response) => {
       "/api/runtime/space-typing/stages": (s, c) => createStageRuntimeEnvelope(s, c, contract),
     };
 
-    if (request.method === "GET" && runtimeHandlers[url.pathname]) {
+    if(request.method==="GET"&&runtimeHandlers[url.pathname]) {
       const state = await store.getState();
       const config = await store.getRuntimeConfig();
       json(response, 200, runtimeHandlers[url.pathname](state, config));
@@ -163,66 +163,66 @@ const server = createServer(async (request, response) => {
 
     const actor = createLocalAdminActorFromRequest(request);
 
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/actor") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/actor") {
       json(response, 200, actor);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/audit") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/audit") {
       requireAdminPermission(actor, ADMIN_PERMISSIONS.AUDIT_READ);
       const parsedLimit = Number.parseInt(url.searchParams.get("limit") || "100", 10);
       const limit = Number.isFinite(parsedLimit) ? parsedLimit : 100;
       json(response, 200, { events: await auditLog.list({ limit }) });
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/contract") {
       json(response, 200, contract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/events/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/events/contract") {
       json(response, 200, eventsContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/duel/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/duel/contract") {
       json(response, 200, duelContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/ranked/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/ranked/contract") {
       json(response, 200, rankedContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/alternative-modes/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/alternative-modes/contract") {
       json(response, 200, alternativeModesContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/backgrounds/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/backgrounds/contract") {
       json(response, 200, backgroundsContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/vfx/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/vfx/contract") {
       json(response, 200, vfxContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/ui-assets/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/ui-assets/contract") {
       json(response, 200, uiAssetsContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/qa/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/qa/contract") {
       json(response, 200, qaContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/telemetry/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/telemetry/contract") {
       json(response, 200, telemetryContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/expedition/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/expedition/contract") {
       json(response, 200, expeditionContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/daily-weekly/contract") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/daily-weekly/contract") {
       json(response, 200, dailyWeeklyContract);
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/state") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/state") {
       json(response, 200, {
         state: await store.getState(),
         active: await store.getActiveRevision(),
@@ -230,37 +230,37 @@ const server = createServer(async (request, response) => {
       });
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/runtime") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/runtime") {
       json(response, 200, {
         activeRevision: (await store.getState()).activeRevision,
         config: await store.getRuntimeConfig(),
       });
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/typing-content/catalog") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/typing-content/catalog") {
       json(response, 200, await queryTypingContentCatalog({ rootDir: root, searchParams: url.searchParams }));
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/shop/capabilities") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/capabilities") {
       json(response, 200, createShopCapabilityManifest());
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/currencies/capabilities") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/currencies/capabilities") {
       json(response, 200, createCurrencyCapabilityManifest());
       return;
     }
-    if (request.method === "GET" && url.pathname === "/api/admin/space-typing/music/library") {
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/music/library") {
       json(response, 200, await musicAssets.list());
       return;
     }
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/change-scope") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/change-scope") {
       requireAdminPermission(actor, ADMIN_PERMISSIONS.CONFIG_DRAFT);
       const input = await body(request);
       json(response, 200, await revisionChangeScope(input.revision));
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/music/upload") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/music/upload") {
       const trackId = header(request, "x-music-track-id");
       const result = await runAuthorizedAdminMutation({
         ...mutationAuditBase,
@@ -290,7 +290,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "DELETE" && url.pathname.startsWith("/api/admin/space-typing/music/tracks/")) {
+    if(request.method==="DELETE"&&url.pathname.startsWith("/api/admin/space-typing/music/tracks/")) {
       const trackId = decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length));
       const result = await runAuthorizedAdminMutation({
         ...mutationAuditBase,
@@ -307,7 +307,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/world-music/preview") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/world-music/preview") {
       const input = await body(request);
       const active = await store.getRuntimeConfig();
       json(response, 200, await runWorldMusicPreview({
@@ -329,7 +329,7 @@ const server = createServer(async (request, response) => {
       "/api/admin/space-typing/worlds/preview": [runWorldRegistryPreview, "worlds"],
       "/api/admin/space-typing/stages/preview": [runStageConfigPreview, "stages"],
     };
-    if (request.method === "POST" && previewHandlers[url.pathname]) {
+    if(request.method==="POST"&&previewHandlers[url.pathname]) {
       const input = await body(request);
       const active = await store.getRuntimeConfig();
       const [run, key] = previewHandlers[url.pathname];
@@ -337,14 +337,14 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/validate-revision") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/validate-revision") {
       const input = await body(request);
       const validation = await store.validateRevision(input.revision);
       json(response, 200, { ...validation, changeScope: await revisionChangeScope(input.revision) });
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/revisions") {
       const input = await body(request);
       const baseRevision = await store.getRevision(input.baseRevision);
       const draftScope = describeConfigChangeScope({
@@ -369,7 +369,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/publish") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/publish") {
       const input = await body(request);
       const changeScope = await revisionChangeScope(input.revision);
       const state = await runAuthorizedAdminMutation({
@@ -387,7 +387,7 @@ const server = createServer(async (request, response) => {
       return;
     }
 
-    if (request.method === "POST" && url.pathname === "/api/admin/space-typing/rollback") {
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/rollback") {
       const input = await body(request);
       const changeScope = await rollbackChangeScope(input.targetRevision);
       const state = await runAuthorizedAdminMutation({
