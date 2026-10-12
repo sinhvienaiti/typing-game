@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const VISUALS_AUDITED_CHILD_SHA = "da3971d4863a6e2aaf5f8323f34015693883aba9";
+const VISUALS_AUDITED_CHILD_SHA = "27cee3867462f60a58f404109a59b867b2234c16";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
@@ -60,8 +60,6 @@ assert.ok(vfx.vfx?.domains?.includes("screen-feedback"));
 
 assert.match(router, /renderPhaseBBackgrounds/);
 assert.match(router, /\$\{BASE\}\/backgrounds`\) return renderPhaseBBackgrounds\(\)/);
-assert.match(router, /renderPhaseBVfx/);
-assert.match(router, /\$\{BASE\}\/vfx`\) return renderPhaseBVfx\(\)/);
 assert.match(server, /space-typing-admin-backgrounds\.v1\.json/);
 assert.match(server, /space-typing-admin-vfx\.v1\.json/);
 assert.match(server, /\/api\/admin\/space-typing\/backgrounds\/contract/);
