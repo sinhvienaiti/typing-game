@@ -170,7 +170,7 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
         const fileName = header(request, "x-media-file-name", true);
         const mimeType = header(request, "content-type", true);
         const tags = parseTags(header(request, "x-media-tags"));
-        const bytes = await readBody(request, MAX_MEDIA_UPLOAD_BYTES + 1);
+        const bytes = await readBody(request, MAX_MEDIA_UPLOAD_BYTES);
         const result = await serializeMutation(() => runAuthorizedAdminMutation({
           actor,
           permission: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
@@ -208,7 +208,7 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
         const fileName = header(request, "x-media-file-name", true);
         const mimeType = header(request, "content-type", true);
         const role = header(request, "x-media-role") || "primary";
-        const bytes = await readBody(request, MAX_MEDIA_UPLOAD_BYTES + 1);
+        const bytes = await readBody(request, MAX_MEDIA_UPLOAD_BYTES);
         const result = await serializeMutation(() => runAuthorizedAdminMutation({
           actor,
           permission: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
