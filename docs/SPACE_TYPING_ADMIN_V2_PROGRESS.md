@@ -12,6 +12,7 @@ Parent:
 - A0 audit start HEAD: `571ccdcd34362548c29bfdc0a3d55bf7861bd3c0`
 - A0 migration matrix commit: `46c8da14af8f268fd01f8186c88826fff930042b`
 - A0.5 validated implementation checkpoint: `fefa731922d59542aa9fc6293fa56fc029b999aa`
+- A1 validated implementation checkpoint: `f2f088b59a9ae418b8a26045b5544b46dfb48b73`
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
@@ -22,9 +23,9 @@ Checkpoint SHAs are informational only. Every worker must fetch latest heads bef
 
 ## CURRENT PHASE
 
-`A1 — Admin V2 design system foundation`
+`A2 — Shell, capability-aware navigation, Dashboard V2 and Developer Tools scaffold`
 
-A0 and A0.5 are complete. A1 is the first unfinished phase.
+A0, A0.5 and A1 are complete. A2 is the first unfinished phase.
 
 ## COMPLETED UNITS
 
@@ -56,48 +57,64 @@ A0 deliverable:
 - `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`
 
 ### A0.5 — Cross-cutting Architecture Gates
-
-Implemented and validated:
-
 - local Admin actor context with explicit actor ID/display name/auth method/request ID;
 - explicit permission identifiers for draft/publish/rollback/media/audit/Developer Tools;
 - server-side authorization hooks for current mutation routes;
 - local audit JSONL sink with actor/action/domain/entity/change-scope/result metadata;
-- durable pre-mutation audit attempt so a write cannot execute without an audit trail entry;
-- safe post-mutation audit degradation behavior so a completed mutation is not falsely returned as failed solely because the final audit append degraded;
+- durable pre-mutation audit attempt + safe post-mutation audit degradation behavior;
 - generated revision ID resolution in successful audit events;
-- whole-config revision change-scope calculation with changed domains/paths and an explicit complete-revision publish warning;
+- whole-config revision change-scope calculation + complete-revision publish warning;
 - authenticated actor/audit/change-scope API endpoints;
-- Music upload/delete permission + audit wiring;
-- revision create/publish/rollback permission + audit wiring;
-- revision author attribution from actor context instead of implicit default;
-- revision validation response includes change scope;
-- focused unit tests and static wiring validator;
-- Admin CI integration for the A0.5 validator/tests.
+- Music upload/delete and revision create/publish/rollback permission + audit wiring;
+- revision author attribution from actor context;
+- focused tests and CI validation.
 
-A0.5 keeps the current deployment assumption local-only and maps the existing authenticated local token to a backwards-compatible local Super Admin. It does not fabricate a remote IAM platform.
+### A1 — Admin V2 design-system foundation
 
-During A0.5 CI, legacy Phase B validators exposed formatting-coupled route assertions. Existing ownership semantics were preserved: current route formatting was kept compatible and the Shop validator was made whitespace-tolerant without opening any Shop write endpoint or weakening its runtime ownership boundary.
+Implemented and validated:
+
+- reusable imperative-DOM `AdminTooltip`;
+- real-button `AdminInfoIcon`;
+- `AdminHelpDrawer` with focus trap/restore;
+- `AdminFieldShell` help/state wrapper;
+- collision-aware tooltip placement;
+- hover/focus/click/tap help behavior;
+- Escape/outside-click dismissal;
+- `AbortController` listener cleanup;
+- route/portal teardown via `AdminHelpScope` + `MutationObserver`;
+- Space Typing dark sci-fi tooltip/drawer/field styling;
+- reusable Page Header;
+- Validation Message;
+- Empty/Error/Loading/Skeleton states;
+- Search + Filter bar;
+- Status chips;
+- Entity Table;
+- Card Grid;
+- Draft lifecycle bar with `Review Changes` before Publish;
+- Confirmation/Destructive dialog with async failure handling, focus trap and duplicate-submit guard;
+- sidebar migrated away from permanent item/group short descriptions;
+- browser-native `title` removed as the primary help mechanism;
+- topbar technical Phase B milestone replaced by administrator-facing local Admin status + contextual info;
+- A1 design-system validator and migrated main UI contract validator;
+- task-based manual acceptance checklist created.
+
+A1 deliberately does **not** claim every Phase B domain page is already Administrator V2. Technical page copy/contract inspectors remain scheduled for their A2+/domain-specific migration destination instead of being cosmetically relabeled.
 
 ## IN PROGRESS
 
-### A1 — Design system foundation
+### A2 — First safe unit
 
-First safe implementation unit:
-
-1. create reusable imperative-DOM `AdminTooltip` + `AdminInfoIcon` primitives;
-2. create reusable `AdminHelpDrawer` foundation;
-3. create reusable field/help wrapper foundation;
-4. define explicit teardown/lifecycle behavior for document listeners, Escape/outside click, route navigation and stale tooltip nodes;
-5. add Space Typing V2 visual tokens/styles without discarding the existing dark sci-fi identity;
-6. add focused validator/tests for accessibility/lifecycle requirements;
-7. then migrate the shell navigation away from permanent short descriptions and native `title`-only help.
-
-Do not mass-rewrite all Phase B domain forms in the first A1 unit. Build the reusable primitives first and migrate shared shell/help behavior before domain-specific screen conversion.
+1. build a real-data-only Administrator Dashboard at `/admin/space-typing`;
+2. source Dashboard only from canonical state/history/audit/music data that exists today;
+3. introduce capability-aware primary navigation so read-only technical inspectors stop occupying normal administrator navigation;
+4. create a permission-gated Developer Tools hub/scaffold;
+5. keep legacy technical routes resolvable as direct/internal migration routes until their domain phase replaces them;
+6. preserve command palette while separating administrator concepts from developer diagnostics;
+7. migrate A1's exact-30-primary-route validator assumption into A2 behavior-based navigation checks without weakening runtime ownership validators.
 
 ## BLOCKERS
 
-None for the A1 foundation unit.
+None for the A2 first unit.
 
 Known future architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`, especially:
 - generic Media ownership (A3.0);
@@ -108,40 +125,41 @@ Known future architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATI
 
 ## DEFERRED MANUAL TESTS
 
-No manual UI test blocks A1 foundation development.
-
-A1 will add/extend scenarios in:
+A1 browser/manual scenarios are recorded in:
 - `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-Manual acceptance must cover hover, keyboard focus, Escape, outside click, touch/click popover behavior, responsive placement and navigation teardown once the new help primitives are integrated into the shell.
+They remain non-blocking for safe A2 automated work. A2 should append scenarios for Dashboard loading/error/empty states, capability-aware nav and Developer Tools permission gating.
 
 ## LATEST GREEN CI
 
-A0.5 validated checkpoint `fefa731922d59542aa9fc6293fa56fc029b999aa`:
-- Parent Space Typing Admin CI #920: PASS.
-- Parent Platform CI #2193: PASS.
-- Child integration checkpoint CI #1759: PASS on `8128a2a5a7713fff80cd1286b607de6a3e7190f7` (no child source changes were required for A0/A0.5).
+A1 checkpoint `f2f088b59a9ae418b8a26045b5544b46dfb48b73`:
+- Parent Space Typing Admin CI #962 (push): PASS.
+- Parent Space Typing Admin CI #963 (PR): PASS.
+- Parent Platform CI on the same HEAD: PASS.
+- Child integration checkpoint CI #1759: PASS on `8128a2a5a7713fff80cd1286b607de6a3e7190f7` (no child source changes required through A1).
 
-Admin CI #920 covered:
-- Admin V2 foundation validator;
-- complete Phase B ownership validators;
-- immutable revision/CAS + security/audit tests;
+Admin CI #962/963 covered:
+- Admin contract snapshot;
+- A0.5 foundation validator;
+- A1 design-system validator;
+- complete Admin UI + Phase B ownership validators;
+- immutable revision/CAS/security/audit tests;
 - all canonical preview bridges;
 - boss/world/stage HTTP publish/runtime/rollback smoke tests;
 - Space Typing tests and audits;
 - Space Typing build;
-- Portal build.
+- Portal TypeScript + Vite build.
 
 ## NEXT EXACT ACTION
 
-1. Re-fetch current parent HEAD before A1 source writes.
-2. Inspect current shell/core CSS and imperative-DOM lifecycle patterns.
-3. Add shared Admin V2 help primitives under a reusable `portal/src/admin/v2/` structure.
-4. Add styles/tokens matching the current Space Typing admin visual identity.
-5. Add A1 validator/test coverage for tooltip/accessibility/cleanup semantics.
-6. Integrate the shared tooltip into shell navigation and remove permanent per-item short descriptions without losing contextual help.
-7. Run Admin + Platform CI.
-8. Continue the next unfinished A1 component unit after blockers are resolved.
+1. Re-fetch parent HEAD before A2 source writes.
+2. Add typed actor/audit/dashboard data contracts to the Admin client without inventing unavailable backend data.
+3. Implement real-data Dashboard V2 and loading/error/empty states.
+4. Implement Developer Tools hub + permission-aware shell exposure.
+5. Reduce primary sidebar to genuine administrator workflows; keep technical legacy routes reachable only through Developer Tools/direct migration aliases.
+6. Update command palette/navigation validator behavior for A2.
+7. Add A2 manual acceptance scenarios.
+8. Run Admin + Platform CI and continue to A3.0 only after A2 exit criteria are green.
 
 ## SAFETY RULES
 
