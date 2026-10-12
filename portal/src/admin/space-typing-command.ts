@@ -9,7 +9,7 @@ export type AdminCommandOptions = { includeDeveloperTools?: boolean };
 
 const PRIMARY_COMMANDS = [
   ["Overview", BASE, "Dashboard"],
-  ["Audio Defaults", `${BASE}/audio`, "System"], ["Music Library", `${BASE}/music-library`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
+  ["Audio Defaults", `${BASE}/audio`, "System"], ["Media Library", `${BASE}/media`, "Media"], ["Music Library", `${BASE}/music-library`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
   ["Ships", `${BASE}/ships`, "Gameplay"], ["Equipment", `${BASE}/equipment`, "Gameplay"], ["Skills", `${BASE}/skills`, "Gameplay"], ["Enemies", `${BASE}/enemies`, "Gameplay"], ["Bosses", `${BASE}/bosses`, "Gameplay"], ["Worlds & Stages", `${BASE}/stages`, "Content"], ["Typing Content", `${BASE}/typing-content`, "Content"],
   ["General Settings", `${BASE}/settings`, "System"], ["History & Publish", `${BASE}/history`, "System"],
 ] as const;
