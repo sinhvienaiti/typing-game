@@ -157,6 +157,12 @@ export function createAdminFilterBar(...children: HTMLElement[]): HTMLElement {
   return root;
 }
 
+export function createAdminCardGrid(...children: HTMLElement[]): HTMLElement {
+  const root = element("div", "st-admin-v2-card-grid");
+  root.append(...children);
+  return root;
+}
+
 export function createAdminStatusChip(label: string, tone: AdminTone = "info"): HTMLElement {
   return element("span", `st-admin-v2-chip ${tone}`, label);
 }
