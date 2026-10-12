@@ -289,11 +289,11 @@ export async function bootstrapMediaReferences({ store, childRoot, actorId = "me
   if (!store || typeof store.registerReferenceAsset !== "function") throw new TypeError("bootstrapMediaReferences requires a MediaAssetStore-compatible store.");
   if (typeof childRoot !== "string" || childRoot.trim() === "") throw new TypeError("bootstrapMediaReferences requires childRoot.");
 
-  const [music, shipModels, sfx] = await Promise.all([
-    bootstrapMusic({ store, childRoot, actorId }),
-    bootstrapShip3d({ store, childRoot, actorId }),
-    bootstrapSfx({ store, childRoot, actorId }),
-  ]);
+  // Registry mutations are intentionally serialized. MediaAssetStore uses atomic file replacement,
+  // but independent read-modify-write transactions must not race or newer writes can erase earlier admissions.
+  const music = await bootstrapMusic({ store, childRoot, actorId });
+  const shipModels = await bootstrapShip3d({ store, childRoot, actorId });
+  const sfx = await bootstrapSfx({ store, childRoot, actorId });
   return {
     schemaVersion: 1,
     source: "space-typing-runtime-reference-bootstrap",
