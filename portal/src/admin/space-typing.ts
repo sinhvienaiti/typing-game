@@ -16,6 +16,7 @@ import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-ty
 import { AdminHelpScope } from "./v2/admin-help";
 import { renderAdminV2Dashboard } from "./v2/dashboard";
 import { renderAdminV2DeveloperTools } from "./v2/developer-tools";
+import { renderAdminV2MediaLibrary } from "./v2/media-library";
 
 type NavItem = {
   label: string;
@@ -69,9 +70,10 @@ const NAV_GROUPS: readonly NavGroup[] = [
   {
     id: "media",
     label: "Media",
-    description: "Manage the authored music capability that already has a canonical Admin service.",
+    description: "Browse canonical game media, upload Admin-managed assets and keep source-owned runtime media read-only.",
     items: [
-      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage music tracks available to Space Typing." },
+      { label: "Media Library", path: `${ADMIN_BASE}/media`, icon: "▧", description: "Browse images, models, music, SFX and Admin uploads, with immutable version history and usage." },
+      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage the legacy authored music capability while it is migrated into Media V2." },
       { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },
     ],
   },
@@ -356,6 +358,7 @@ export class SpaceTypingAdmin {
 
   private renderPage(path: string): HTMLElement {
     if (path === ADMIN_BASE) return renderAdminV2Dashboard(this.navigate, this.help);
+    if (path === `${ADMIN_BASE}/media`) return renderAdminV2MediaLibrary(this.help);
     if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools(this.navigate, this.help);
     const phaseB = renderPhaseBAdminScreen(path, this.navigate);
     if (phaseB !== null) return phaseB;
