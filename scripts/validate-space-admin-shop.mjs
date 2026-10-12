@@ -63,8 +63,16 @@ assert.equal(manifest.capabilities.currencies, true);
 assert.equal(manifest.capabilities.catalogWrite, false);
 assert.equal(manifest.capabilities.preview, false);
 
-assert.match(server, /GET"&&url\.pathname==="\/api\/admin\/space-typing\/shop\/capabilities"/);
-assert.doesNotMatch(server, /POST"&&url\.pathname==="\/api\/admin\/space-typing\/shop/);
+assert.match(
+  server,
+  /request\.method\s*===\s*"GET"\s*&&\s*url\.pathname\s*===\s*"\/api\/admin\/space-typing\/shop\/capabilities"/,
+  "Shop capability endpoint must remain authenticated GET-only runtime evidence.",
+);
+assert.doesNotMatch(
+  server,
+  /request\.method\s*===\s*"POST"\s*&&\s*url\.pathname\s*===\s*"\/api\/admin\/space-typing\/shop/,
+  "Shop authoring endpoint must stay closed until a canonical child config consumer exists.",
+);
 assert.match(router, /renderPhaseBShop/);
 assert.match(router, /\/shop`\) return renderPhaseBShop/);
 assert.match(ui, /RUNTIME-BACKED · READ ONLY/);
