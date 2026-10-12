@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
 import { MediaAssetStore } from "./media-assets-v2.mjs";
@@ -135,5 +136,35 @@ test("incomplete generated ship bundles are skipped rather than fabricated", asy
     await assert.rejects(() => fixture.store.getAsset("runtime.ship-model.missing-ship"), /Unknown asset/);
   } finally {
     await rm(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("pinned Space Typing runtime tree bootstraps without binary copies or duplicate versions", async () => {
+  const adminRoot = await mkdtemp(join(tmpdir(), "space-admin-media-runtime-smoke-"));
+  const childRoot = fileURLToPath(new URL("../games/space-typing/", import.meta.url));
+  const store = new MediaAssetStore({
+    rootDir: adminRoot,
+    uuid: sequenceUuid(),
+    now: () => new Date("2026-10-13T00:00:00.000Z"),
+  });
+  try {
+    await store.initialize();
+    const shipManifest = JSON.parse(await readFile(join(childRoot, "public/assets/space-typing/ships/3d/manifest.json"), "utf8"));
+    const first = await bootstrapMediaReferences({ store, childRoot, actorId: "ci-runtime-bootstrap" });
+
+    assert.ok(first.music.created > 0, "Pinned child Music catalog must yield reference assets.");
+    assert.equal(first.shipModels.created, shipManifest.ships.length, "Every pinned ship3D manifest entry must have a complete generated bundle.");
+    assert.ok(first.sfx.created > 0, "Pinned child SFX tree must yield code-owned reference assets.");
+    assert.equal((await readdir(join(adminRoot, "media-v2/blobs"))).length, 0, "Runtime smoke bootstrap must remain metadata/reference-only.");
+
+    const assets = await store.listAssets({ includeArchived: true });
+    assert.equal(assets.length, first.totals.created, "Every created bootstrap admission must remain present in the registry.");
+
+    const second = await bootstrapMediaReferences({ store, childRoot, actorId: "ci-runtime-bootstrap" });
+    assert.equal(second.totals.created, 0, "Second bootstrap over unchanged pinned child must not create versions.");
+    assert.equal(second.totals.reused, first.totals.created, "Second bootstrap must reuse every previously created runtime asset version.");
+    assert.equal((await store.listAssets({ includeArchived: true })).length, assets.length);
+  } finally {
+    await rm(adminRoot, { recursive: true, force: true });
   }
 });
