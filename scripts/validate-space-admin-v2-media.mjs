@@ -62,7 +62,7 @@ assert.match(music, /provenance: "local-admin-upload"/);
 assert.match(childPackage, /"ship3d:prepare": "node scripts\/bg-art\/prepare-ship-3d\.mjs"/);
 assert.match(childPackage, /"combat-vfx:prepare": "node scripts\/bg-art\/prepare-combat-vfx\.mjs"/);
 assert.match(childArtReadme, /art-src\//);
-assert.match(childArtReadme, /gitignored|gitignore/i);
+assert.match(childArtReadme, /không đưa lên Git|Git bỏ qua/);
 assert.match(childShip3d, /color\.webp/);
 assert.match(childShip3d, /emissive\.webp/);
 assert.match(childShip3d, /height\.bin/);
