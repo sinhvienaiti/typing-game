@@ -102,27 +102,39 @@ for (const unsupported of [
   "claim Ranked history is exposed through the current Parent Admin transport",
   "claim real microphone hardware acceptance from automated QA",
 ]) {
-  assert.ok(contract.qa.unsupportedAdminOperations.includes(unsupported), `QA unsupported operation missing: ${unsupported}`);
+  assert.ok(contract.qa.unsupportedAdminOperations.includes(unsupported), `QA unsupported boundary missing: ${unsupported}`);
 }
 
-assert.match(page, /RUNTIME-BACKED · ISOLATED/);
-assert.match(page, /Test Lab session/);
-assert.match(page, /new QA run/);
-assert.match(page, /No production progression writes/);
-assert.match(page, /api\.requestJson<unknown>\("\/api\/admin\/space-typing\/qa\/contract"/);
-assert.match(page, /sessionStorage/);
-assert.match(page, /location\.assign\(target\.url\)/);
-assert.match(page, /spaceTypingTestLabPresetV1/);
-assert.match(router, /renderPhaseBQa/);
-assert.match(router, /\$\{BASE\}\/qa/);
 assert.match(server, /space-typing-admin-qa\.v1\.json/);
-assert.match(server, /\/api\/admin\/space-typing\/qa\/contract/);
-assert.doesNotMatch(server, /POST"&&url\.pathname==="\/api\/admin\/space-typing\/qa/);
-assert.match(nav, /\/admin\/space-typing\/qa/);
-assert.match(games.find((game) => game.id === "space-typing")?.url ?? "", /space-typing/);
-const qaMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/qa");
-assert.equal(qaMap?.status, "phase-b-ui-wired-runtime-backed");
-assert.equal(qaMap?.persistence, "test-lab-isolated-session-plus-browser-local-preset");
-assert.equal(qaMap?.applyBoundary, "new-qa-run");
+assert.match(server, /request\.method==="GET"&&url\.pathname==="\/api\/admin\/space-typing\/qa\/contract"/);
+for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
+  assert.ok(
+    !server.includes(`request.method==="${method}"&&url.pathname==="/api/admin/space-typing/qa/`),
+    `QA Admin service must not expose a fake ${method} mutation endpoint`,
+  );
+}
 
-console.log(`Space Typing QA Sandbox Admin validation passed: isolated production Test Lab runtime audited at ${childHead.slice(0, 12)}; production persistence/publish remain blocked.`);
+assert.match(router, /renderPhaseBQa/);
+assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
+assert.match(nav, /label:\s*"QA Sandbox"/);
+assert.match(nav, /path:\s*`\$\{ADMIN_BASE\}\/qa`/);
+assert.match(page, /\/api\/admin\/space-typing\/qa\/contract/);
+assert.match(page, /\/games\.json/);
+assert.match(page, /Developer Test Lab/);
+assert.match(page, /RUNTIME-BACKED · EPHEMERAL/);
+assert.match(page, /PRODUCTION SAVE · NO WRITE/);
+assert.match(page, /NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE/);
+assert.match(page, /window\.open\(appUrl/);
+assert.doesNotMatch(page, /createRevision|\/publish|\/revisions/);
+
+const game = games.games?.find((entry) => entry.id === "space-typing");
+assert.equal(game?.appUrl, "https://space.typing-game.local");
+
+const qaMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/qa");
+assert.ok(qaMap, "QA Sandbox Phase B map row is required");
+assert.equal(qaMap.domain, "qa");
+assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
+assert.equal(qaMap.applyBoundary, "new-qa-run");
+assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
+
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + expanded runtime coverage audited + no production write bridge).`);
