@@ -1,4 +1,4 @@
-export const SHOP_AUDITED_CHILD_SHA = "27cee3867462f60a58f404109a59b867b2234c16";
+export const SHOP_AUDITED_CHILD_SHA = "83f80b3d6f640ea1af46e158e25485bc57b31393";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
@@ -78,36 +78,16 @@ export function createShopCapabilityManifest() {
         "src/economy/credits.ts",
         "src/economy/currencies.ts",
       ],
-      shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
+      persistence: "PlayerSave + session-scoped shop stock",
       currencyIds: ["credits", "alloy", "star-crystal", "quantum-core"],
       priceStateKeys: ["credits", "alloy", "starCrystal", "quantumCore"],
-      stockKinds: ["item", "equipment"],
-      transactionReasons: ["missing", "sold-out", "currency", "full", "duplicate"],
-      refreshBoundary: "sector-instance",
-      persistenceOwner: "PlayerSave.shopState",
+      serviceShopOwner: "src/shops/service-shop.ts",
+      purchaseOwner: "src/shops/state.ts::buyShopStockEntry",
     },
-    evidence: [
-      { id: "catalog-owner", found: true, detail: "src/shops/state.ts owns deterministic stock generation and ShopInstance persistence." },
-      { id: "purchase-owner", found: true, detail: "buyShopStockEntry validates stock/currency/inventory and applies purchase state." },
-      { id: "pricing-owner", found: true, detail: "ShopPrice stores Credits/Alloy plus camelCase Star Crystal/Quantum Core balance keys while the contract exposes canonical hyphenated currency IDs." },
-      { id: "availability-owner", found: true, detail: "shopAvailable gates black-market/hidden/event/traveling shops from discovery and luck." },
-      { id: "service-owner", found: true, detail: "src/shops/service-shop.ts owns upgrade/repair/evolution/service purchase costs." },
-      { id: "authoring-seam", found: false, detail: "No child config contract consumes admin-authored Shop policy yet; write capability stays disabled." },
-    ],
-    linkedRuntimeDomains: [
-      { id: "equipment", label: "Equipment", route: "/admin/space-typing/equipment", relationship: "Shop stock and service upgrades consume runtime equipment definitions/state." },
-      { id: "currencies", label: "Currencies", route: "/admin/space-typing/currencies", relationship: "Purchases spend Credits, Alloy, Star Crystal and Quantum Core." },
-      { id: "skills", label: "Skills", route: "/admin/space-typing/skills", relationship: "Service Shop can consume upgrade progression state; it is not a separate catalog authoring source." },
-    ],
     authoring: {
       enabled: false,
       applyBoundary: "none",
-      persistence: "child-runtime-state",
       reason: authoringReason,
-    },
-    preview: {
-      available: false,
-      reason: "Runtime generation is real, but the child contract does not expose an admin preview protocol yet. Admin does not reimplement the generator because that would create a second source of truth.",
     },
   };
 }
