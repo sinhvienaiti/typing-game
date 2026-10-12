@@ -9,10 +9,13 @@ import "./space-typing-ui.css";
 import "./space-typing-phase-b.css";
 import "./space-typing-remediation.css";
 import "./v2/admin-v2.css";
+import { SpaceTypingAdminApi } from "./api";
 import { renderPhaseBAdminScreen } from "./space-typing-phase-b";
 import { adminNavIcon } from "./space-typing-icons";
 import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
 import { AdminHelpScope } from "./v2/admin-help";
+import { renderAdminV2Dashboard } from "./v2/dashboard";
+import { renderAdminV2DeveloperTools } from "./v2/developer-tools";
 
 type NavItem = {
   label: string;
@@ -26,106 +29,93 @@ type NavGroup = {
   label: string;
   description: string;
   items: readonly NavItem[];
+  requiredPermission?: string;
 };
 
 const ADMIN_BASE = "/admin/space-typing";
 const NAV_STATE_KEY = "typing-game:space-admin-collapsed-groups";
+const DEVELOPER_PERMISSION = "developer.runtime-inspect";
 
 const NAV_GROUPS: readonly NavGroup[] = [
   {
     id: "dashboard",
     label: "Dashboard",
-    description: "Status, activity and operational signals for Space Typing.",
+    description: "Published state, drafts and administrator activity that need attention now.",
     items: [
-      { label: "Overview", path: ADMIN_BASE, icon: "◫", description: "See current service status and the operational signals available to this Admin." },
-      { label: "Analytics", path: `${ADMIN_BASE}/analytics`, icon: "⌁", description: "Review session activity and local profile history that are available today." },
-    ],
-  },
-  {
-    id: "audio",
-    label: "Audio & Music",
-    description: "Manage player audio defaults, music tracks and world or stage assignments.",
-    items: [
-      { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },
-      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage music tracks available to Space Typing." },
-      { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the result." },
+      { label: "Overview", path: ADMIN_BASE, icon: "◫", description: "See real Admin state, pending drafts and recent administrator activity." },
     ],
   },
   {
     id: "content",
-    label: "Game Content",
-    description: "Manage gameplay content such as ships, equipment, enemies, bosses and stages.",
+    label: "Content",
+    description: "Manage worlds, stages and learning-content assignments backed by canonical game data.",
     items: [
-      { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", description: "Manage the fleet and the ship properties currently supported by the game." },
-      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", description: "Manage equipment names, descriptions, stats and supported perks." },
-      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", description: "Manage combat skills and the gameplay-facing values currently supported." },
-      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", description: "Review enemies and tune the gameplay values currently available for management." },
-      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", description: "Review bosses and manage the properties currently available for editing." },
-      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", description: "Review world structure, stage rosters and supported world or stage settings." },
-      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", description: "Browse the English-learning content used by Space Typing." },
+      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", description: "Manage supported world and stage configuration through the revision-backed workflow." },
+      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", description: "Browse canonical English-learning content used by Space Typing without creating a duplicate content database." },
     ],
   },
   {
-    id: "economy",
-    label: "Economy",
-    description: "Review shop, currency, rewards, drops and stamina behavior.",
+    id: "gameplay",
+    label: "Gameplay",
+    description: "Manage revision-backed gameplay entities currently connected to the Space Typing runtime.",
     items: [
-      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▣", description: "Review the current Shop catalog and purchase behavior. Full product editing is being added through Admin V2." },
-      { label: "Currencies", path: `${ADMIN_BASE}/currencies`, icon: "◈", description: "Review currencies, limits, acquisition sources and spending uses." },
-      { label: "Rewards & Drops", path: `${ADMIN_BASE}/rewards`, icon: "✧", description: "Review campaign rewards, combat credits, loot and drop behavior." },
-      { label: "Stamina / Warp", path: `${ADMIN_BASE}/warp`, icon: "⚡", description: "Review Warp stamina, reserve capacity, regeneration and persistence behavior." },
+      { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", description: "Manage the ship properties currently supported by the canonical runtime." },
+      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", description: "Manage supported equipment definitions, stats and perks." },
+      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", description: "Manage supported combat-skill definitions and parameters." },
+      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", description: "Manage supported enemy admission and projectile policy values." },
+      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", description: "Manage supported boss identity values through the canonical revision workflow." },
     ],
   },
   {
-    id: "live-ops",
-    label: "Live Ops",
-    description: "Review missions, recurring challenges, expeditions and event behavior.",
+    id: "media",
+    label: "Media",
+    description: "Manage the authored music capability that already has a canonical Admin service.",
     items: [
-      { label: "Missions", path: `${ADMIN_BASE}/missions`, icon: "✓", description: "Review progression missions and stage objectives." },
-      { label: "Daily / Weekly", path: `${ADMIN_BASE}/daily-weekly`, icon: "◷", description: "Review recurring challenge behavior and which schedules are currently available." },
-      { label: "Expedition", path: `${ADMIN_BASE}/expedition`, icon: "↗", description: "Review Expedition rules and saved-run behavior." },
-      { label: "Events", path: `${ADMIN_BASE}/events`, icon: "◷", description: "Review event behavior currently supported by Space Typing." },
-    ],
-  },
-  {
-    id: "pvp",
-    label: "PvP",
-    description: "Review Duel, Ranked and alternative competitive modes.",
-    items: [
-      { label: "Duel Settings", path: `${ADMIN_BASE}/duel`, icon: "⚔", description: "Review Duel rules and settings that currently control a match." },
-      { label: "Ranked", path: `${ADMIN_BASE}/ranked`, icon: "♜", description: "Review Ranked rules and the competitive features currently available." },
-      { label: "Alternative Modes", path: `${ADMIN_BASE}/alternative-modes`, icon: "⇄", description: "Review alternative PvP modes and their current availability." },
-    ],
-  },
-  {
-    id: "visuals",
-    label: "Visuals",
-    description: "Review backgrounds, visual effects and UI presentation assets.",
-    items: [
-      { label: "Backgrounds", path: `${ADMIN_BASE}/backgrounds`, icon: "▧", description: "Review game backgrounds, generated visual sets and quality variants." },
-      { label: "VFX", path: `${ADMIN_BASE}/vfx`, icon: "✺", description: "Review combat, projectile, skill and boss visual effects." },
-      { label: "UI Assets", path: `${ADMIN_BASE}/ui-assets`, icon: "▦", description: "Review HUD and presentation assets currently used by the game." },
+      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage music tracks available to Space Typing." },
+      { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },
     ],
   },
   {
     id: "system",
     label: "System",
-    description: "Manage global settings, feature availability and publishing history.",
+    description: "Manage safe global settings and the revision lifecycle.",
     items: [
+      { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },
       { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", description: "Manage global game defaults, network behavior and maintenance settings." },
-      { label: "Feature Gates", path: `${ADMIN_BASE}/feature-gates`, icon: "⚑", description: "Review features whose availability can be controlled by the game." },
-      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts and published versions, validate changes, publish or roll back safely." },
+      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts, validate complete change scope, publish or roll back safely." },
     ],
   },
   {
     id: "developer",
-    label: "Developer",
-    description: "Developer and test tools kept separate from normal game-management workflows.",
+    label: "Developer Tools",
+    description: "Runtime contracts, capability diagnostics and isolated QA tools separated from normal administrator workflows.",
+    requiredPermission: DEVELOPER_PERMISSION,
     items: [
-      { label: "QA Sandbox", path: `${ADMIN_BASE}/qa`, icon: "⌬", description: "Open the isolated Test Lab without changing Campaign progress." },
+      { label: "Developer Tools", path: `${ADMIN_BASE}/developer-tools`, icon: "⌬", description: "Open permission-gated runtime, economy, Live Ops, PvP, visual and QA diagnostics." },
     ],
   },
 ];
+
+const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
+  [`${ADMIN_BASE}/analytics`]: "Analytics / Telemetry",
+  [`${ADMIN_BASE}/shop`]: "Shop Runtime Contract",
+  [`${ADMIN_BASE}/currencies`]: "Currencies",
+  [`${ADMIN_BASE}/rewards`]: "Rewards & Drops",
+  [`${ADMIN_BASE}/warp`]: "Stamina / Warp",
+  [`${ADMIN_BASE}/missions`]: "Missions",
+  [`${ADMIN_BASE}/daily-weekly`]: "Daily / Weekly",
+  [`${ADMIN_BASE}/expedition`]: "Expedition",
+  [`${ADMIN_BASE}/events`]: "Events",
+  [`${ADMIN_BASE}/duel`]: "Duel Settings",
+  [`${ADMIN_BASE}/ranked`]: "Ranked",
+  [`${ADMIN_BASE}/alternative-modes`]: "Alternative Modes",
+  [`${ADMIN_BASE}/backgrounds`]: "Backgrounds",
+  [`${ADMIN_BASE}/vfx`]: "VFX",
+  [`${ADMIN_BASE}/ui-assets`]: "UI Assets",
+  [`${ADMIN_BASE}/feature-gates`]: "Feature Gates",
+  [`${ADMIN_BASE}/qa`]: "QA Sandbox",
+  [`${ADMIN_BASE}/worlds-stages`]: "Stages",
+};
 
 function element<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -181,15 +171,24 @@ function writeCollapsedGroups(groups: Set<string>): void {
   }
 }
 
+function routeLabel(path: string): string {
+  const primary = NAV_GROUPS.flatMap((group) => group.items).find((item) => item.path === path);
+  return primary?.label ?? LEGACY_ROUTE_LABELS[path] ?? "Admin";
+}
+
 export class SpaceTypingAdmin {
   private readonly help = new AdminHelpScope();
+  private developerToolsAllowed = false;
+  private renderGeneration = 0;
 
   constructor(private readonly navigate: (path: string) => void) {
-    installAdminCommandShortcut(this.navigate);
+    installAdminCommandShortcut(this.navigate, () => ({ includeDeveloperTools: this.developerToolsAllowed }));
   }
 
   render(path: string): HTMLElement {
     this.help.destroy();
+    this.developerToolsAllowed = false;
+    const generation = ++this.renderGeneration;
     const canonicalPath = normalizedAdminPath(path);
     const root = element("main", "st-admin");
     const shell = element("div", "st-admin-shell");
@@ -204,7 +203,23 @@ export class SpaceTypingAdmin {
     shell.append(main);
     root.append(shell);
     this.help.observeRoot(root);
+    void this.hydratePermissions(root, generation);
     return root;
+  }
+
+  private async hydratePermissions(root: HTMLElement, generation: number): Promise<void> {
+    try {
+      const actor = await new SpaceTypingAdminApi().getActor();
+      if (generation !== this.renderGeneration || !root.isConnected) return;
+      this.developerToolsAllowed = actor.permissions.includes(DEVELOPER_PERMISSION);
+    } catch {
+      if (generation !== this.renderGeneration || !root.isConnected) return;
+      this.developerToolsAllowed = false;
+    }
+
+    for (const node of root.querySelectorAll<HTMLElement>(`[data-admin-permission="${DEVELOPER_PERMISSION}"]`)) {
+      node.hidden = !this.developerToolsAllowed;
+    }
   }
 
   private renderSidebar(path: string): HTMLElement {
@@ -218,7 +233,7 @@ export class SpaceTypingAdmin {
     brand.append(
       mark,
       element("h2", undefined, "Command Center"),
-      element("p", undefined, "Live Ops · Content · Configuration"),
+      element("p", undefined, "Game Management"),
     );
     const env = element("div", "st-admin-env-row");
     env.append(
@@ -239,6 +254,10 @@ export class SpaceTypingAdmin {
 
     for (const group of NAV_GROUPS) {
       const wrapper = element("section", "st-admin-nav-group");
+      if (group.requiredPermission) {
+        wrapper.dataset.adminPermission = group.requiredPermission;
+        wrapper.hidden = true;
+      }
       const groupButton = element("button", "st-admin-nav-group-toggle");
       groupButton.type = "button";
       groupButton.setAttribute("aria-label", `Toggle ${group.label}`);
@@ -304,20 +323,17 @@ export class SpaceTypingAdmin {
 
   private renderTopbar(path: string): HTMLElement {
     const bar = element("div", "st-admin-topbar");
-    const item = NAV_GROUPS
-      .flatMap((group) => group.items)
-      .find((candidate) => candidate.path === path);
     const breadcrumb = element("div", "st-admin-breadcrumb");
     breadcrumb.append(
       document.createTextNode("Space Typing / "),
-      element("strong", undefined, item?.label ?? "Admin"),
+      element("strong", undefined, routeLabel(path)),
     );
     bar.append(breadcrumb);
     bar.append(element("div", "st-admin-topbar-spacer"));
     bar.append(
       button(
         "⌘K  Search command…",
-        () => openAdminCommandPalette(this.navigate),
+        () => openAdminCommandPalette(this.navigate, { includeDeveloperTools: this.developerToolsAllowed }),
         "st-admin-command",
       ),
     );
@@ -339,6 +355,8 @@ export class SpaceTypingAdmin {
   }
 
   private renderPage(path: string): HTMLElement {
+    if (path === ADMIN_BASE) return renderAdminV2Dashboard(this.navigate, this.help);
+    if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools(this.navigate, this.help);
     const phaseB = renderPhaseBAdminScreen(path, this.navigate);
     if (phaseB !== null) return phaseB;
     return this.renderUnknown(path);
