@@ -46,7 +46,7 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 
 // A2: UI Assets remains a real direct runtime route, but its read-only technical surface belongs in Developer Tools rather than primary administrator navigation.
 assert.doesNotMatch(nav, /label:\s*"UI Assets"/);
-assert.match(nav, /\[`${ADMIN_BASE}\/ui-assets`\]:\s*"UI Assets"/);
+assert.ok(nav.includes('[`${ADMIN_BASE}/ui-assets`]: "UI Assets"'), "UI Assets legacy direct-route metadata must remain available during migration");
 assert.ok(developerPaths.includes("/admin/space-typing/ui-assets"), "UI Assets diagnostic route must be exposed from Developer Tools during A2 migration");
 assert.match(command, /\["UI Assets",\s*`\$\{BASE\}\/ui-assets`,\s*"Developer Tools · Visuals"\]/);
 
