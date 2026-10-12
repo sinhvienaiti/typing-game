@@ -9,7 +9,7 @@ export function createDefaultSpaceTypingConfig(contract) {
       ships: { configRevision: "ships-admin-v1", ships: {} },
       equipment: { configRevision: "equipment-admin-v1", equipment: {} },
       skills: { configRevision: "skills-admin-v1", skills: {} },
-      enemies: { configRevision: "enemies-admin-v1", enemies: {} },
+      enemies: { configRevision: "enemies-admin-v1", projectileMode: "auto", enemies: {} },
       bosses: { configRevision: "bosses-admin-v1", bosses: {} },
       worlds: { configRevision: "worlds-admin-v1", worlds: {} },
       stages: { configRevision: "stages-admin-v1", stages: [] }
