@@ -4,6 +4,7 @@ import { extname, join, relative, sep } from "node:path";
 
 const MUSIC_CATALOG = "src/audio/world-music-catalog.json";
 const SHIP_3D_MANIFEST = "public/assets/space-typing/ships/3d/manifest.json";
+const SHIP_3D_ROOT = "public/assets/space-typing/ships/3d";
 const SFX_ROOT = "public/assets/audio/sfx";
 
 function sha256(value) {
@@ -44,6 +45,12 @@ function sanitizeIdPart(value) {
     .toLowerCase()
     .replace(/[^a-z0-9._-]+/g, "-")
     .replace(/^-+|-+$/g, "") || "asset";
+}
+
+function compactIdPart(value, max = 96) {
+  const normalized = sanitizeIdPart(value);
+  if (normalized.length <= max) return normalized;
+  return `${normalized.slice(0, Math.max(1, max - 13))}-${sha256(normalized).slice(0, 12)}`;
 }
 
 function roleFromPath(path) {
@@ -137,7 +144,7 @@ async function bootstrapMusic({ store, childRoot, actorId }) {
     }
     const legacyAdminUpload = track.metadata?.provenance === "local-admin-upload";
     const result = await store.registerReferenceAsset({
-      assetId: `runtime.music.${sanitizeIdPart(track.id)}`,
+      assetId: `runtime.music.${compactIdPart(track.id, 120)}`,
       kind: "music",
       title: track.title,
       provenance: legacyAdminUpload ? "external-reference" : "code-owned",
@@ -162,6 +169,37 @@ async function bootstrapMusic({ store, childRoot, actorId }) {
   return counters;
 }
 
+async function shipBundleComponents(childRoot, shipId) {
+  const definitions = [
+    ["color", "color.webp"],
+    ["emissive", "emissive.webp"],
+    ["height", "height.bin"],
+    ["model", "model.json"],
+  ];
+  const components = [];
+  for (const [role, fileName] of definitions) {
+    const diskPath = join(childRoot, SHIP_3D_ROOT, shipId, fileName);
+    let bytes;
+    try {
+      bytes = await readFile(diskPath);
+    } catch (error) {
+      if (error?.code === "ENOENT") return null;
+      throw error;
+    }
+    if (bytes.length === 0) return null;
+    components.push({
+      role,
+      mimeType: mimeForPath(fileName),
+      format: formatForPath(fileName),
+      byteSize: bytes.length,
+      sha256: sha256(bytes),
+      storageClass: "runtime-reference",
+      runtimeUrl: runtimePath("assets/space-typing/ships/3d", shipId, fileName),
+    });
+  }
+  return components;
+}
+
 async function bootstrapShip3d({ store, childRoot, actorId }) {
   const counters = summary();
   let manifest;
@@ -177,8 +215,12 @@ async function bootstrapShip3d({ store, childRoot, actorId }) {
       counters.skipped += 1;
       continue;
     }
-    const shipId = sanitizeIdPart(rawId);
-    const base = `assets/space-typing/ships/3d/${shipId}`;
+    const shipId = compactIdPart(rawId, 100);
+    const components = await shipBundleComponents(childRoot, shipId);
+    if (components === null) {
+      counters.skipped += 1;
+      continue;
+    }
     const result = await store.registerReferenceAsset({
       assetId: `runtime.ship-model.${shipId}`,
       kind: "model",
@@ -192,12 +234,7 @@ async function bootstrapShip3d({ store, childRoot, actorId }) {
         sourcePath: `art-src/ships/${shipId}-top-hd.png`,
         note: "Source art is local/heavy and is not owned by Media V2; this record references generated runtime output only.",
       },
-      components: [
-        { role: "color", mimeType: "image/webp", format: "webp", storageClass: "runtime-reference", runtimeUrl: runtimePath(base, "color.webp") },
-        { role: "emissive", mimeType: "image/webp", format: "webp", storageClass: "runtime-reference", runtimeUrl: runtimePath(base, "emissive.webp") },
-        { role: "height", mimeType: "application/octet-stream", format: "bin", storageClass: "runtime-reference", runtimeUrl: runtimePath(base, "height.bin") },
-        { role: "model", mimeType: "application/json", format: "json", storageClass: "runtime-reference", runtimeUrl: runtimePath(base, "model.json") },
-      ],
+      components,
     });
     recordAdmission(result, counters);
   }
@@ -222,7 +259,7 @@ async function bootstrapSfx({ store, childRoot, actorId }) {
     const pathDigest = sha256(relativePath).slice(0, 12);
     const titleBase = relativePath.slice(0, -extension.length).replaceAll("/", " / ").replace(/[-_]+/g, " ");
     const result = await store.registerReferenceAsset({
-      assetId: `runtime.sfx.${sanitizeIdPart(relativePath.slice(0, -extension.length))}.${pathDigest}`,
+      assetId: `runtime.sfx.${compactIdPart(relativePath.slice(0, -extension.length), 110)}.${pathDigest}`,
       kind: "sfx",
       title: titleBase.replace(/\b\w/g, (letter) => letter.toUpperCase()),
       provenance: "code-owned",
