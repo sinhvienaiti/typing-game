@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [architecture, service, tests, security, music, childPackage, childArtReadme, childShip3d, childAudioCheck] = await Promise.all([
+const [architecture, service, tests, bootstrap, bootstrapTests, security, music, childPackage, childArtReadme, childShip3d, childAudioCheck] = await Promise.all([
   readFile("docs/SPACE_TYPING_ADMIN_V2_MEDIA_ARCHITECTURE.md", "utf8"),
   readFile("admin/media-assets-v2.mjs", "utf8"),
   readFile("admin/media-assets-v2.test.mjs", "utf8"),
+  readFile("admin/media-bootstrap.mjs", "utf8"),
+  readFile("admin/media-bootstrap.test.mjs", "utf8"),
   readFile("admin/admin-security.mjs", "utf8"),
   readFile("admin/music-assets.mjs", "utf8"),
   readFile("games/space-typing/package.json", "utf8"),
@@ -55,6 +57,27 @@ for (const behavior of [
 ]) {
   assert.ok(tests.includes(behavior), `Media V2 tests are missing ${behavior}.`);
 }
+
+assert.match(bootstrap, /export async function bootstrapMediaReferences/);
+assert.match(bootstrap, /runtime\.music\./, "Music bootstrap must use deterministic namespaced logical asset IDs.");
+assert.match(bootstrap, /runtime\.ship-model\./, "Ship bundle bootstrap must use deterministic namespaced logical asset IDs.");
+assert.match(bootstrap, /runtime\.sfx\./, "SFX bootstrap must use deterministic namespaced logical asset IDs.");
+assert.match(bootstrap, /provenance: legacyAdminUpload \? "external-reference" : "code-owned"/, "Legacy Music uploads must not masquerade as canonical Media V2 admin blobs.");
+assert.match(bootstrap, /provenance: "generated-runtime"/, "Ship bundle bootstrap must preserve generated-runtime provenance.");
+assert.match(bootstrap, /provenance: "code-owned"/, "Static SFX bootstrap must preserve code-owned provenance.");
+assert.match(bootstrap, /sha256: sha256\(bytes\)/, "Reference bootstrap must fingerprint locally available runtime bytes.");
+assert.match(bootstrap, /if \(error\?\.code === "ENOENT"\) return null/, "Incomplete generated ship bundles must fail closed/skip rather than fabricate components.");
+assert.doesNotMatch(bootstrap, /copyFile|rename\(|unlink\(|writeFile\(/, "Reference bootstrap must never copy/move/delete/overwrite runtime binaries.");
+
+for (const behavior of [
+  "bootstrap as reference-only assets idempotently",
+  "bundle byte changes create a new immutable reference version",
+  "bundles are skipped rather than fabricated",
+]) {
+  assert.ok(bootstrapTests.includes(behavior), `Media bootstrap tests are missing ${behavior}.`);
+}
+assert.match(bootstrapTests, /media-v2\/blobs/);
+assert.match(bootstrapTests, /legacy local-admin-upload bytes must not be misrepresented as Media V2 admin blobs/);
 
 assert.match(security, /MEDIA_UPLOAD: "media\.upload"/);
 assert.match(security, /MEDIA_DELETE: "media\.delete"/);
