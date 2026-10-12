@@ -23,10 +23,17 @@ function rejectUnknown(value, path, allowed) {
   }
 }
 
+function projectileMode(value) {
+  if (value !== "auto" && value !== "off" && value !== "on") {
+    fail("content.enemies.projectileMode must be auto, off, or on.");
+  }
+}
+
 export function validateEnemyPolicy(policy, enemyContract) {
   const input = object(policy, "content.enemies");
-  rejectUnknown(input, "content.enemies", ["configRevision", "enemies"]);
+  rejectUnknown(input, "content.enemies", ["configRevision", "projectileMode", "enemies"]);
   text(input.configRevision, "content.enemies.configRevision", 120);
+  if (input.projectileMode !== undefined) projectileMode(input.projectileMode);
   if (input.enemies === undefined) return policy;
 
   const entries = object(input.enemies, "content.enemies.enemies");
