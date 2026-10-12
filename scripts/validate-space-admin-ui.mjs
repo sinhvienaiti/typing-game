@@ -138,10 +138,11 @@ for (const [label, suffix] of primaryRoutes) {
 
 for (const [label, suffix] of developerRoutes) {
   const absolutePath = `/admin/space-typing${suffix}`;
+  const legacyKey = '[`${ADMIN_BASE}' + suffix + '`]';
   assert(!main.includes(`label: "${label}"`), `${label} must not be restored as a primary administrator navigation item`);
   assert(command.includes(`"${label}"`), `Developer command palette is missing ${label}`);
   assert(developerManifestPaths.has(absolutePath), `Developer Tools manifest is missing ${label} (${absolutePath})`);
-  assert(main.includes(`\`${"${ADMIN_BASE}"}${suffix}\``) || main.includes(`\`${"${ADMIN_BASE}"}${suffix}\``), `Legacy breadcrumb/direct-route metadata is missing ${label} (${suffix})`);
+  assert(main.includes(legacyKey), `Legacy breadcrumb/direct-route metadata is missing ${label} (${suffix})`);
 }
 assert(main.includes('label: "Developer Tools"'), "Primary navigation is missing permission-gated Developer Tools entry");
 assert(main.includes('requiredPermission: DEVELOPER_PERMISSION'), "Developer Tools primary entry is not permission-gated");
