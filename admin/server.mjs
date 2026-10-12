@@ -23,6 +23,7 @@ import { createStageRuntimeEnvelope } from "./stage-runtime.mjs";
 import { queryTypingContentCatalog } from "./typing-content-catalog.mjs";
 import { createShopCapabilityManifest } from "./shop-capability.mjs";
 import { createCurrencyCapabilityManifest } from "./currency-capability.mjs";
+import { createDeveloperToolsManifest } from "./developer-tools.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
 import {
   ADMIN_PERMISSIONS,
@@ -174,6 +175,11 @@ const server = createServer(async (request, response) => {
       json(response, 200, { events: await auditLog.list({ limit }) });
       return;
     }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/developer-tools/manifest") {
+      requireAdminPermission(actor, ADMIN_PERMISSIONS.DEVELOPER_INSPECT);
+      json(response, 200, createDeveloperToolsManifest());
+      return;
+    }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/contract") {
       json(response, 200, contract);
       return;
@@ -296,6 +302,7 @@ const server = createServer(async (request, response) => {
         ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.MEDIA_DELETE,
+        auditLog,
         action: "media.music.delete",
         domain: "media.music",
         entityType: "music-track",
@@ -357,6 +364,7 @@ const server = createServer(async (request, response) => {
         ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_DRAFT,
+        auditLog,
         action: "revision.create",
         domain: "config",
         entityType: "revision",
@@ -376,6 +384,7 @@ const server = createServer(async (request, response) => {
         ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_PUBLISH,
+        auditLog,
         action: "revision.publish",
         domain: "config",
         entityType: "revision",
@@ -394,6 +403,7 @@ const server = createServer(async (request, response) => {
         ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_ROLLBACK,
+        auditLog,
         action: "revision.rollback",
         domain: "config",
         entityType: "revision",
