@@ -115,7 +115,11 @@ export function createAdminEmptyState(options: AdminEmptyStateOptions): HTMLElem
   const root = element("section", "st-admin-v2-empty-state");
   root.append(element("div", "st-admin-v2-empty-mark", "◇"), element("h2", undefined, options.title));
   if (options.message) root.append(element("p", undefined, options.message));
-  if (options.action) root.append(element("div", "st-admin-v2-empty-action")).append(options.action);
+  if (options.action) {
+    const action = element("div", "st-admin-v2-empty-action");
+    action.append(options.action);
+    root.append(action);
+  }
   return root;
 }
 
