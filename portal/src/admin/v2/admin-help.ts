@@ -109,7 +109,7 @@ function placeTooltip(trigger: HTMLElement, tooltip: HTMLElement, preferred: Adm
 export function createAdminTooltip(trigger: HTMLElement, options: AdminTooltipOptions): () => void {
   const tooltip = element("div", "st-admin-v2-tooltip");
   tooltip.id = nextId("tooltip");
-  tooltip.role = "tooltip";
+  tooltip.setAttribute("role", "tooltip");
   tooltip.hidden = true;
 
   if (options.title) tooltip.append(element("strong", "st-admin-v2-tooltip-title", options.title));
@@ -299,8 +299,8 @@ export function openAdminHelpDrawer(options: AdminHelpDrawerOptions): () => void
 }
 
 export function createAdminFieldShell(scope: AdminHelpScope, options: AdminFieldShellOptions): HTMLElement {
-  const root = element("label", "st-admin-v2-field");
-  const labelRow = element("span", "st-admin-v2-field-label");
+  const root = element("div", "st-admin-v2-field");
+  const labelRow = element("div", "st-admin-v2-field-label");
   labelRow.append(element("span", undefined, options.label));
   if (options.required) {
     const required = element("span", "st-admin-v2-required", "Required");
@@ -308,6 +308,9 @@ export function createAdminFieldShell(scope: AdminHelpScope, options: AdminField
     labelRow.append(required);
   }
   if (options.help) labelRow.append(scope.infoIcon({ ...options.help, label: `Help for ${options.label}` }));
+  if (!options.control.hasAttribute("aria-label") && !options.control.hasAttribute("aria-labelledby")) {
+    options.control.setAttribute("aria-label", options.label);
+  }
   root.append(labelRow, options.control);
   if (options.stateMessage) {
     root.append(element("span", `st-admin-v2-field-state ${options.stateTone ?? "info"}`, options.stateMessage));
@@ -334,6 +337,21 @@ export class AdminHelpScope {
   openDrawer(options: AdminHelpDrawerOptions): void {
     this.drawerClose?.();
     this.drawerClose = openAdminHelpDrawer(options);
+  }
+
+  observeRoot(root: HTMLElement): void {
+    let hasBeenConnected = root.isConnected;
+    const observer = new MutationObserver(() => {
+      if (root.isConnected) {
+        hasBeenConnected = true;
+        return;
+      }
+      if (!hasBeenConnected) return;
+      observer.disconnect();
+      this.destroy();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    this.disposers.add(() => observer.disconnect());
   }
 
   destroy(): void {
