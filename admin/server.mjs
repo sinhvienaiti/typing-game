@@ -100,6 +100,15 @@ function authorized(request) {
   return request.headers["x-typing-game-admin-token"] === token;
 }
 
+function reportAuditDegradation(error) {
+  console.error("Space Typing Admin audit append degraded after mutation:", error);
+}
+
+const mutationAuditBase = {
+  auditLog,
+  onAuditError: reportAuditDegradation,
+};
+
 async function revisionChangeScope(revisionId) {
   const target = await store.getRevision(revisionId);
   const base = target.parentRevision ? await store.getRevision(target.parentRevision) : null;
@@ -254,9 +263,9 @@ const server = createServer(async (request, response) => {
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/music/upload") {
       const trackId = header(request, "x-music-track-id");
       const result = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
-        auditLog,
         action: "media.music.upload",
         domain: "media.music",
         entityType: "music-track",
@@ -284,9 +293,9 @@ const server = createServer(async (request, response) => {
     if (request.method === "DELETE" && url.pathname.startsWith("/api/admin/space-typing/music/tracks/")) {
       const trackId = decodeURIComponent(url.pathname.slice("/api/admin/space-typing/music/tracks/".length));
       const result = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.MEDIA_DELETE,
-        auditLog,
         action: "media.music.delete",
         domain: "media.music",
         entityType: "music-track",
@@ -338,20 +347,22 @@ const server = createServer(async (request, response) => {
     if (request.method === "POST" && url.pathname === "/api/admin/space-typing/revisions") {
       const input = await body(request);
       const baseRevision = await store.getRevision(input.baseRevision);
-      const changeScope = describeConfigChangeScope({
+      const draftScope = describeConfigChangeScope({
         baseRevision: baseRevision.revision,
         targetRevision: null,
         baseConfig: baseRevision.config,
         targetConfig: input.config,
       });
       const revision = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_DRAFT,
-        auditLog,
         action: "revision.create",
         domain: "config",
         entityType: "revision",
-        changeScope,
+        changeScope: draftScope,
+        resolveEntityId: (created) => created.revision,
+        resolveChangeScope: (created) => ({ ...draftScope, targetRevision: created.revision }),
         operation: () => store.createRevision({ ...input, author: actor.actorId }),
       });
       json(response, 201, revision);
@@ -362,9 +373,9 @@ const server = createServer(async (request, response) => {
       const input = await body(request);
       const changeScope = await revisionChangeScope(input.revision);
       const state = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_PUBLISH,
-        auditLog,
         action: "revision.publish",
         domain: "config",
         entityType: "revision",
@@ -380,9 +391,9 @@ const server = createServer(async (request, response) => {
       const input = await body(request);
       const changeScope = await rollbackChangeScope(input.targetRevision);
       const state = await runAuthorizedAdminMutation({
+        ...mutationAuditBase,
         actor,
         permission: ADMIN_PERMISSIONS.CONFIG_ROLLBACK,
-        auditLog,
         action: "revision.rollback",
         domain: "config",
         entityType: "revision",
