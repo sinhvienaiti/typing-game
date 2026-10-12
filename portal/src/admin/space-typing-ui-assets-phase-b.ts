@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 
@@ -38,18 +39,37 @@ function escapeHtml(value: unknown): string {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-
-async function fetchUiAssetsContract(): Promise<UiAssetsContractPayload> {
-  const response = await fetch("/api/admin/space-typing/ui-assets/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  if (!response.ok) throw new Error(`UI Assets contract request failed (${response.status})`);
-  const payload = (await response.json()) as UiAssetsContractPayload;
-  if (payload.capability !== "ui-assets.read" || payload.uiAssets?.mode !== "runtime-derived-readonly") {
-    throw new Error("UI Assets contract is not the canonical read-only runtime contract.");
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function validateUiAssetsContract(value: unknown): UiAssetsContractPayload {
+  if (!isRecord(value) || value["capability"] !== "ui-assets.read" || !isRecord(value["route"]) || !isRecord(value["uiAssets"])) {
+    throw new Error("UI Assets response does not match the canonical ui-assets.read contract.");
   }
-  return payload;
+  const ui = value["uiAssets"];
+  if (
+    ui["mode"] !== "runtime-derived-readonly" ||
+    !Array.isArray(ui["runtimeSources"]) ||
+    !Array.isArray(ui["surfaces"]) ||
+    !Array.isArray(ui["authorableFields"]) ||
+    !Array.isArray(ui["unsupportedAdminMockFields"]) ||
+    typeof ui["runtimeOwner"] !== "string" ||
+    typeof ui["assetCatalogOwnership"] !== "string" ||
+    typeof ui["dataFlow"] !== "string" ||
+    typeof ui["persistenceOwner"] !== "string" ||
+    ui["applyBoundary"] !== "none"
+  ) {
+    throw new Error("UI Assets response is missing required runtime ownership metadata.");
+  }
+  for (const surface of ui["surfaces"]) {
+    if (!isRecord(surface) || typeof surface["id"] !== "string" || typeof surface["owner"] !== "string" || typeof surface["kind"] !== "string" || !Array.isArray(surface["examples"])) {
+      throw new Error("UI Assets response contains an invalid runtime presentation surface.");
+    }
+  }
+  return value as unknown as UiAssetsContractPayload;
+}
+async function fetchUiAssetsContract(): Promise<UiAssetsContractPayload> {
+  return validateUiAssetsContract(await api.requestJson<unknown>("/api/admin/space-typing/ui-assets/contract"));
 }
 
 function renderSurface(surface: UiAssetSurface): string {
@@ -63,7 +83,7 @@ function renderSurface(surface: UiAssetSurface): string {
         <span class="st-admin-badge">RUNTIME</span>
       </div>
       <p><strong>Owner:</strong> ${escapeHtml(surface.owner)}</p>
-      <p>${surface.examples.map((item) => `<span class="st-admin-chip">${escapeHtml(item)}</span>`).join(" ")}</p>
+      <div class="st-admin-chip-list">${surface.examples.map((item) => `<span class="st-admin-chip">${escapeHtml(item)}</span>`).join("")}</div>
     </article>`;
 }
 
@@ -75,14 +95,14 @@ export function renderPhaseBUiAssets(): HTMLElement {
       <div>
         <p class="st-admin-eyebrow">Visuals · Runtime UI Ownership</p>
         <h1>UI Assets</h1>
-        <p>Inspect the production HUD, shared components, Duel and Ranked presentation ownership without inventing an admin persistence layer.</p>
+        <p>Inspect production HUD, shared components, Duel and Ranked presentation ownership without inventing an Admin persistence layer.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">RUNTIME-BACKED · READ ONLY</span>
         <span class="st-admin-badge">NO FAKE UI ASSET CRUD</span>
       </div>
     </header>
-    <p class="st-admin-notice" data-ui-assets-status>Loading canonical runtime ownership…</p>
+    <p class="st-admin-notice" data-ui-assets-status aria-live="polite">Loading canonical runtime ownership…</p>
     <div class="space-admin-grid" data-ui-assets-content></div>
   `;
 
@@ -90,10 +110,16 @@ export function renderPhaseBUiAssets(): HTMLElement {
   const content = root.querySelector<HTMLElement>("[data-ui-assets-content]");
   if (!status || !content) return root;
 
-  void fetchUiAssetsContract()
-    .then((contract) => {
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical UI Assets runtime ownership…", "loading");
+    content.innerHTML = `<article class="st-admin-card space-admin-card--wide"><p class="st-admin-notice">Loading production presentation surfaces…</p></article>`;
+
+    void fetchUiAssetsContract().then((contract) => {
+      if (generation !== loadGeneration) return;
       const ui = contract.uiAssets;
-      status.textContent = `${ui.surfaces.length} runtime presentation surfaces · Admin writes closed.`;
+      setAdminStatus(status, `${ui.surfaces.length} runtime presentation surfaces · Admin writes closed.`, "success");
       content.innerHTML = `
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Canonical</p><h2>Runtime Ownership</h2></div></div>
@@ -114,13 +140,20 @@ export function renderPhaseBUiAssets(): HTMLElement {
           <p><strong>Unsupported mock controls:</strong></p>
           <ul>${ui.unsupportedAdminMockFields.map((field) => `<li>${escapeHtml(field)}</li>`).join("")}</ul>
         </article>
-        ${ui.surfaces.map(renderSurface).join("")}
+        ${ui.surfaces.length > 0 ? ui.surfaces.map(renderSurface).join("") : `<article class="st-admin-card space-admin-card--wide"><p class="st-admin-notice">No runtime presentation surfaces were exposed by the canonical contract.</p></article>`}
       `;
-    })
-    .catch((error) => {
-      status.textContent = error instanceof Error ? error.message : "Unable to load UI Assets contract.";
-      status.classList.add("st-admin-notice--error");
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "UI Assets service unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "UI Assets unavailable",
+        fallbackMessage: "Unable to load the canonical UI Assets runtime contract.",
+        error,
+        onRetry: load,
+      });
     });
+  };
 
+  load();
   return root;
 }
