@@ -8,6 +8,7 @@ const DEFAULT_ENEMY_POLICY = {
 
 export function createEnemyRuntimeEnvelope(state, config, contract) {
   const policy = structuredClone(config.content?.enemies ?? DEFAULT_ENEMY_POLICY);
+  if (policy.projectileMode === undefined) policy.projectileMode = "auto";
   validateEnemyPolicy(policy, contract.enemies);
   return {
     protocolVersion: 1,
