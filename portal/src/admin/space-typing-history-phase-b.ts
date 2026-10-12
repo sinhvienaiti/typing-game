@@ -5,19 +5,17 @@ import {
   type AdminRevisionValidation,
   type AdminStatePayload,
 } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const BASE = "/admin/space-typing";
 const api = new SpaceTypingAdminApi();
+void BASE;
 
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type DiffKind = "added" | "removed" | "modified";
 type DiffEntry = { kind: DiffKind; path: string; before?: unknown; after?: unknown };
-
-type ValidationState = {
-  revision: string;
-  result: AdminRevisionValidation;
-} | null;
+type ValidationState = { revision: string; result: AdminRevisionValidation } | null;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -25,18 +23,13 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: 
   if (text !== undefined) node.textContent = text;
   return node;
 }
-
 function btn(label: string, onClick: () => void = () => undefined, cls = "st-admin-btn"): HTMLButtonElement {
   const node = el("button", cls, label);
   node.type = "button";
   node.addEventListener("click", onClick);
   return node;
 }
-
-function badge(label: string, tone: Tone = "info"): HTMLElement {
-  return el("span", `st-admin-status ${tone}`, label);
-}
-
+function badge(label: string, tone: Tone = "info"): HTMLElement { return el("span", `st-admin-status ${tone}`, label); }
 function panel(title: string, subtitle?: string): HTMLElement {
   const root = el("section", "st-admin-panel solid stx-panel");
   const head = el("div", "st-admin-panel-head");
@@ -47,7 +40,6 @@ function panel(title: string, subtitle?: string): HTMLElement {
   root.append(head);
   return root;
 }
-
 function header(eyebrow: string, title: string, description: string, actions: readonly HTMLElement[] = []): HTMLElement {
   const root = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
@@ -60,19 +52,35 @@ function header(eyebrow: string, title: string, description: string, actions: re
   }
   return root;
 }
-
-function notice(text: string, tone: Tone = "info"): HTMLElement {
-  return el("div", `stx-notice ${tone}`, text);
-}
-
+function notice(text: string, tone: Tone = "info"): HTMLElement { return el("div", `stx-notice ${tone}`, text); }
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
-
+function validateState(value: unknown): AdminStatePayload {
+  if (!isRecord(value) || !isRecord(value["state"]) || !isRecord(value["active"]) || !Array.isArray(value["history"])) {
+    throw new Error("Revision history response is missing the canonical state envelope.");
+  }
+  const state = value["state"];
+  const active = value["active"];
+  if (
+    typeof state["activeRevision"] !== "string" ||
+    typeof state["generation"] !== "number" ||
+    typeof active["revision"] !== "string" ||
+    !isRecord(active["config"]) ||
+    active["revision"] !== state["activeRevision"]
+  ) {
+    throw new Error("Revision history response contains an inconsistent active pointer.");
+  }
+  for (const revision of value["history"]) {
+    if (!isRecord(revision) || typeof revision["revision"] !== "string" || !isRecord(revision["config"])) {
+      throw new Error("Revision history response contains an invalid immutable revision entry.");
+    }
+  }
+  return value as unknown as AdminStatePayload;
+}
 function sameScalar(a: unknown, b: unknown): boolean {
   return Object.is(a, b) || JSON.stringify(a) === JSON.stringify(b);
 }
-
 function diffValues(before: unknown, after: unknown, path = ""): DiffEntry[] {
   if (sameScalar(before, after)) return [];
   if (isRecord(before) && isRecord(after)) {
@@ -88,30 +96,25 @@ function diffValues(before: unknown, after: unknown, path = ""): DiffEntry[] {
   }
   return [{ kind: "modified", path: path || "config", before, after }];
 }
-
 function shortValue(value: unknown): string {
   if (value === undefined) return "∅";
   const raw = typeof value === "string" ? value : JSON.stringify(value);
   if (raw.length <= 120) return raw;
   return `${raw.slice(0, 117)}…`;
 }
-
 function relationMeta(revision: AdminRevision): { label: string; tone: Tone } {
   if (revision.relation === "active" || revision.active) return { label: "ACTIVE", tone: "good" };
   if (revision.relation === "ancestor") return { label: "PUBLISHED HISTORY", tone: "info" };
   if (revision.publishable) return { label: "FRESH DRAFT", tone: "warn" };
   return { label: "STALE DRAFT", tone: "bad" };
 }
-
 function formattedTime(value: string): string {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
 }
-
 function topDomains(diff: readonly DiffEntry[]): string[] {
   return [...new Set(diff.map((entry) => entry.path.split(".")[0] || "config"))].sort();
 }
-
 function summarize(diff: readonly DiffEntry[]): { added: number; modified: number; removed: number } {
   return {
     added: diff.filter((entry) => entry.kind === "added").length,
@@ -134,6 +137,8 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
   ));
 
   const status = notice("Loading revision store…", "info");
+  status.setAttribute("aria-live", "polite");
+  const failureHost = el("div");
   const shell = el("div", "stx-editor-shell");
   const listPanel = panel("Revisions", "Immutable revision store");
   const listHost = el("div", "stx-revision-list");
@@ -142,24 +147,27 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
   const detailHost = el("div", "stx-stack");
   detailPanel.append(detailHost);
   shell.append(listPanel, detailPanel);
-  page.append(status, shell);
+  page.append(status, failureHost, shell);
 
   let payload: AdminStatePayload | null = null;
   let selectedRevisionId: string | null = null;
   let compareRevisionId: string | null = null;
   let validation: ValidationState = null;
+  let hydrateGeneration = 0;
 
   const setStatus = (message: string, tone: Tone = "info"): void => {
-    status.className = `stx-notice ${tone}`;
-    status.textContent = message;
+    setAdminStatus(status, message, tone === "good" ? "success" : tone === "bad" ? "error" : tone === "warn" ? "warning" : "info");
   };
-
   const revisionById = (id: string | null): AdminRevision | undefined =>
     payload?.history.find((revision) => revision.revision === id);
 
   const renderList = (): void => {
     listHost.replaceChildren();
     if (payload === null) return;
+    if (payload.history.length === 0) {
+      listHost.append(notice("The revision store returned no immutable revisions.", "warn"));
+      return;
+    }
     for (const revision of payload.history) {
       const meta = relationMeta(revision);
       const item = el("button", `stx-revision${selectedRevisionId === revision.revision ? " active" : ""}`) as HTMLButtonElement;
@@ -194,12 +202,7 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
     const domains = topDomains(diff);
 
     const headline = el("div", "st-admin-page-actions");
-    headline.append(
-      badge(meta.label, meta.tone),
-      badge(`+${counts.added}`, "good"),
-      badge(`~${counts.modified}`, "warn"),
-      badge(`-${counts.removed}`, "bad"),
-    );
+    headline.append(badge(meta.label, meta.tone), badge(`+${counts.added}`, "good"), badge(`~${counts.modified}`, "warn"), badge(`-${counts.removed}`, "bad"));
     detailHost.append(headline);
 
     const facts = panel("Revision Metadata", `${selected.revision} · immutable`);
@@ -248,9 +251,7 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
     comparePanel.append(diffBlock);
 
     const gate = panel("Validation & CAS Gate", "Backend-owned eligibility; UI never infers permission to mutate the active pointer");
-    const gateStatus = validation?.revision === selected.revision
-      ? badge("VALIDATED · PASS", "good")
-      : badge("VALIDATION · NOT RUN", "warn");
+    const gateStatus = validation?.revision === selected.revision ? badge("VALIDATED · PASS", "good") : badge("VALIDATION · NOT RUN", "warn");
     const gateCopy = notice(
       selected.publishable
         ? `Fresh draft: parent matches active ${payload.state.activeRevision}. Publish is eligible after validation.`
@@ -273,31 +274,57 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
     rollbackButton.title = selected.rollbackEligible ? "Validate and move the active pointer to this published ancestor." : "Rollback is limited to published ancestors of the active revision.";
     actions.append(validateButton, rollbackButton, publishButton);
     gate.append(actions);
-
     detailHost.append(facts, comparePanel, gate);
   };
 
   const hydrate = async (preferredRevision: string | null = null): Promise<void> => {
+    const generation = ++hydrateGeneration;
+    reload.disabled = true;
+    payload = null;
+    validation = null;
+    failureHost.replaceChildren();
+    listHost.replaceChildren(notice("Loading immutable revisions…", "info"));
+    detailHost.replaceChildren(notice("Waiting for authoritative revision store…", "info"));
+    activeBadge.textContent = "ACTIVE · loading";
+    activeBadge.className = "st-admin-status info";
+    generationBadge.textContent = "GEN · —";
+    generationBadge.className = "st-admin-status info";
     setStatus("Loading immutable revision history…", "info");
     try {
-      payload = await api.getState();
+      const nextPayload = validateState(await api.getState());
+      if (generation !== hydrateGeneration) return;
+      payload = nextPayload;
       activeBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
+      activeBadge.className = "st-admin-status good";
       generationBadge.textContent = `GEN · ${payload.state.generation}`;
+      generationBadge.className = "st-admin-status good";
       selectedRevisionId = preferredRevision && revisionById(preferredRevision)
         ? preferredRevision
         : selectedRevisionId && revisionById(selectedRevisionId)
           ? selectedRevisionId
           : payload.history.find((revision) => revision.publishable)?.revision ?? payload.state.activeRevision;
       const selected = revisionById(selectedRevisionId) ?? payload.active;
-      compareRevisionId = compareRevisionId && revisionById(compareRevisionId)
-        ? compareRevisionId
-        : selected.parentRevision;
-      validation = null;
+      compareRevisionId = compareRevisionId && revisionById(compareRevisionId) ? compareRevisionId : selected.parentRevision;
       renderList();
       renderDetail();
       setStatus(`Loaded ${payload.history.length} immutable revisions. Active pointer is ${payload.state.activeRevision}.`, "good");
     } catch (error: unknown) {
-      setStatus(`Admin service unavailable: ${error instanceof Error ? error.message : String(error)}`, "bad");
+      if (generation !== hydrateGeneration) return;
+      activeBadge.textContent = "ACTIVE · unavailable";
+      activeBadge.className = "st-admin-status bad";
+      generationBadge.textContent = "GEN · unavailable";
+      generationBadge.className = "st-admin-status bad";
+      listHost.replaceChildren();
+      detailHost.replaceChildren();
+      setStatus("Revision store unavailable. Publish and rollback controls are closed.", "bad");
+      renderAdminFailureState(failureHost, {
+        title: "History & Publish unavailable",
+        fallbackMessage: "Unable to load a valid authoritative revision store. No production pointer action is available until reload succeeds.",
+        error,
+        onRetry: () => void hydrate(preferredRevision),
+      });
+    } finally {
+      if (generation === hydrateGeneration) reload.disabled = false;
     }
   };
 
@@ -308,13 +335,14 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
     try {
       const result = await api.validateRevision(selectedRevisionId);
       validation = { revision: selectedRevisionId, result };
-      await hydrate(selectedRevisionId);
-      validation = { revision: selectedRevisionId, result };
+      const revision = selectedRevisionId;
+      await hydrate(revision);
+      validation = { revision, result };
       renderDetail();
-      setStatus(`Validation PASS for ${selectedRevisionId}. Backend relation: ${result.relation}.`, "good");
+      setStatus(`Validation PASS for ${revision}. Backend relation: ${result.relation}.`, "good");
       return result;
     } catch (error: unknown) {
-      setStatus(`Validation failed: ${error instanceof Error ? error.message : String(error)}`, "bad");
+      setStatus(`Validation failed: ${error instanceof Error ? error.message : "The revision could not be validated."}`, "bad");
       return null;
     } finally {
       button.disabled = false;
@@ -323,13 +351,14 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
 
   const publishSelected = async (button: HTMLButtonElement): Promise<void> => {
     if (payload === null || selectedRevisionId === null) return;
+    const baseline = payload;
     const revision = selectedRevisionId;
     if (!window.confirm(`Publish ${revision}? This moves the active runtime pointer after validation.`)) return;
     button.disabled = true;
     try {
-      const latest = await api.getState();
-      if (latest.state.activeRevision !== payload.state.activeRevision) {
-        throw new AdminApiError(409, `Active revision changed from ${payload.state.activeRevision} to ${latest.state.activeRevision}. Reload before publishing.`);
+      const latest = validateState(await api.getState());
+      if (latest.state.activeRevision !== baseline.state.activeRevision) {
+        throw new AdminApiError(409, `Active revision changed from ${baseline.state.activeRevision} to ${latest.state.activeRevision}. Reload before publishing.`);
       }
       const gate = await api.validateRevision(revision);
       if (!gate.publishable) throw new AdminApiError(409, `Revision ${revision} is no longer a fresh publishable draft.`);
@@ -337,7 +366,7 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
       await hydrate(revision);
       setStatus(`Published ${revision}. Active pointer advanced by CAS.`, "good");
     } catch (error: unknown) {
-      setStatus(`Publish rejected: ${error instanceof Error ? error.message : String(error)}`, "bad");
+      setStatus(`Publish rejected: ${error instanceof Error ? error.message : "The publish request was rejected."}`, "bad");
       await hydrate(revision);
     } finally {
       button.disabled = false;
@@ -346,13 +375,14 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
 
   const rollbackSelected = async (button: HTMLButtonElement): Promise<void> => {
     if (payload === null || selectedRevisionId === null) return;
+    const baseline = payload;
     const revision = selectedRevisionId;
     if (!window.confirm(`Rollback active runtime to published ancestor ${revision}?`)) return;
     button.disabled = true;
     try {
-      const latest = await api.getState();
-      if (latest.state.activeRevision !== payload.state.activeRevision) {
-        throw new AdminApiError(409, `Active revision changed from ${payload.state.activeRevision} to ${latest.state.activeRevision}. Reload before rollback.`);
+      const latest = validateState(await api.getState());
+      if (latest.state.activeRevision !== baseline.state.activeRevision) {
+        throw new AdminApiError(409, `Active revision changed from ${baseline.state.activeRevision} to ${latest.state.activeRevision}. Reload before rollback.`);
       }
       const gate = await api.validateRevision(revision);
       if (!gate.rollbackEligible) throw new AdminApiError(409, `Revision ${revision} is not a published ancestor of the current active revision.`);
@@ -360,7 +390,7 @@ export function renderPhaseBHistory(navigate: Navigate): HTMLElement {
       await hydrate(revision);
       setStatus(`Rollback complete. Active pointer now targets ${revision}.`, "good");
     } catch (error: unknown) {
-      setStatus(`Rollback rejected: ${error instanceof Error ? error.message : String(error)}`, "bad");
+      setStatus(`Rollback rejected: ${error instanceof Error ? error.message : "The rollback request was rejected."}`, "bad");
       await hydrate(revision);
     } finally {
       button.disabled = false;
