@@ -106,6 +106,22 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
     return next;
   };
 
+  const requireAdminOwnedAsset = async (assetId) => {
+    const asset = await store.getAsset(assetId);
+    if (!asset.currentVersionId) {
+      throw new MediaHttpError("This media asset has no current version and cannot be modified from the normal Media workflow.", 409, "read-only-owner");
+    }
+    const currentVersion = await store.getVersion(asset.currentVersionId);
+    if (currentVersion.provenance !== "admin-upload") {
+      throw new MediaHttpError(
+        "This media asset is owned by the Space Typing runtime/project and is reference-only in Admin. Upload a new Admin-owned asset instead of replacing or archiving it.",
+        409,
+        "read-only-owner",
+      );
+    }
+    return { asset, currentVersion };
+  };
+
   return async function handleMediaV2Request({ request, response, url, actor }) {
     if (!url.pathname.startsWith(MEDIA_BASE)) return false;
 
@@ -205,6 +221,7 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
 
       if (request.method === "POST" && parts[0] === "assets" && parts[2] === "versions" && parts.length === 3) {
         const assetId = decodeSegment(parts[1], "asset id");
+        await requireAdminOwnedAsset(assetId);
         const fileName = header(request, "x-media-file-name", true);
         const mimeType = header(request, "content-type", true);
         const role = header(request, "x-media-role") || "primary";
@@ -241,6 +258,7 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
 
       if (request.method === "POST" && parts[0] === "assets" && parts[2] === "archive" && parts.length === 3) {
         const assetId = decodeSegment(parts[1], "asset id");
+        await requireAdminOwnedAsset(assetId);
         const input = await readJsonBody(request);
         if (typeof input.archived !== "boolean") throw new MediaHttpError("archive request requires boolean archived.", 400, "validation");
         const result = await serializeMutation(() => runAuthorizedAdminMutation({
