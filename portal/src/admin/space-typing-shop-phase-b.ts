@@ -6,7 +6,7 @@ type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type ShopField = { name: string; runtimeBacked: boolean; source: "runtime-derived" | "unsupported"; authorable: false; reason: string };
 type ShopManifest = {
-  protocolVersion: 2;
+  protocolVersion: 3;
   mode: "runtime-backed-readonly";
   owner: string;
   auditedChildSha: string;
@@ -16,7 +16,8 @@ type ShopManifest = {
   runtime: {
     sources: string[];
     shopTypes: string[];
-    currencies: string[];
+    currencyIds: string[];
+    priceStateKeys: string[];
     stockKinds: string[];
     transactionReasons: string[];
     refreshBoundary: string;
@@ -57,7 +58,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function validateShopManifest(value: unknown): ShopManifest {
-  if (!isRecord(value) || value["protocolVersion"] !== 2 || value["mode"] !== "runtime-backed-readonly") {
+  if (!isRecord(value) || value["protocolVersion"] !== 3 || value["mode"] !== "runtime-backed-readonly") {
     throw new Error("Shop capability response does not match the canonical runtime-backed read-only contract.");
   }
   if (
@@ -75,7 +76,7 @@ function validateShopManifest(value: unknown): ShopManifest {
     throw new Error("Shop capability response is missing required runtime contract sections.");
   }
   const runtime = value["runtime"];
-  for (const key of ["sources", "shopTypes", "currencies", "stockKinds", "transactionReasons"] as const) {
+  for (const key of ["sources", "shopTypes", "currencyIds", "priceStateKeys", "stockKinds", "transactionReasons"] as const) {
     if (!Array.isArray(runtime[key])) throw new Error(`Shop capability response is missing runtime.${key}.`);
   }
   if (typeof runtime["refreshBoundary"] !== "string" || typeof runtime["persistenceOwner"] !== "string") {
@@ -125,7 +126,8 @@ function renderTab(host: HTMLElement, tab: string, manifest: ShopManifest): void
     const summary = panel("Runtime Catalog", "Game-owned generation and transactions; Admin is a reference/control-plane view only");
     summary.append(
       notice(`Shop types: ${manifest.runtime.shopTypes.join(" · ") || "none exposed"}`, "good"),
-      notice(`Currencies: ${manifest.runtime.currencies.join(" · ") || "none exposed"}`, "good"),
+      notice(`Currencies: ${manifest.runtime.currencyIds.join(" · ") || "none exposed"}`, "good"),
+      notice(`Price state keys: ${manifest.runtime.priceStateKeys.join(" · ") || "none exposed"}`, "info"),
       notice(`Stock: ${manifest.runtime.stockKinds.join(" + ") || "none exposed"} · refresh ${manifest.runtime.refreshBoundary} · persistence ${manifest.runtime.persistenceOwner}`, "info"),
       notice(manifest.authoring.reason, "warn"),
     );
