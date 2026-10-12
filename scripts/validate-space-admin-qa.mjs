@@ -123,7 +123,7 @@ assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
 
 // A2: QA remains directly routable for migration, but is a developer/test workflow rather than a primary administrator menu item.
 assert.doesNotMatch(nav, /label:\s*"QA Sandbox"/);
-assert.match(nav, /\[`${ADMIN_BASE}\/qa`\]:\s*"QA Sandbox"/);
+assert.ok(nav.includes('[`${ADMIN_BASE}/qa`]: "QA Sandbox"'), "QA Sandbox legacy direct-route metadata must remain available during migration");
 assert.ok(developerPaths.includes("/admin/space-typing/qa"), "QA Sandbox must be exposed from permission-gated Developer Tools");
 assert.match(command, /\["QA Sandbox",\s*`\$\{BASE\}\/qa`,\s*"Developer Tools · QA"\]/);
 
