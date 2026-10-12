@@ -32,37 +32,42 @@ jobs:
         run: python3 scripts/check-english-e04-scale-197-candidates.py
       - name: Apply idempotent E04 scale 197 source batch
         run: python3 scripts/apply-english-e04-focused-scale-197.py
-      - name: Validate review and controlled-batch contracts
+      - name: Validate review decisions
+        id: review_validate
+        continue-on-error: true
         run: |
-          set +e
-          mkdir -p docs/ci-debug
-          LOG=docs/ci-debug/scale-197-step7.log
-          : > "$LOG"
-          rc=0
-          run_check() {
-            label="$1"
-            shift
-            echo "===== ${label} =====" | tee -a "$LOG"
-            "$@" 2>&1 | tee -a "$LOG"
-            code=${PIPESTATUS[0]}
-            echo "===== exit ${code}: ${label} =====" | tee -a "$LOG"
-            if [ "$code" -ne 0 ]; then rc=1; fi
-          }
-          run_check "english-content:review:validate" pnpm english-content:review:validate
-          run_check "english-content:e10" pnpm english-content:e10
-          run_check "english-content:licenses" pnpm english-content:licenses
-          echo "overall_exit=${rc}" | tee -a "$LOG"
-          exit "$rc"
-      - name: Persist Scale 197 validation diagnostics
-        if: failure()
+          set -o pipefail
+          pnpm english-content:review:validate 2>&1 | tee /tmp/scale197-review-validate.log
+      - name: Validate E10 controlled batches
+        id: e10_validate
+        continue-on-error: true
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/ci-debug/scale-197-step7.log
-          if ! git diff --cached --quiet; then
-            git commit -m 'chore(ci): capture Scale 197 validation failure'
-            git push
-          fi
+          set -o pipefail
+          pnpm english-content:e10 2>&1 | tee /tmp/scale197-e10.log
+      - name: Validate English content licenses
+        id: licenses_validate
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          pnpm english-content:licenses 2>&1 | tee /tmp/scale197-licenses.log
+      - name: Upload Scale 197 validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scale-197-validation-diagnostics
+          path: |
+            /tmp/scale197-review-validate.log
+            /tmp/scale197-e10.log
+            /tmp/scale197-licenses.log
+          if-no-files-found: error
+          retention-days: 3
+      - name: Enforce validation gate
+        if: ${{ always() && (steps.review_validate.outcome == 'failure' || steps.e10_validate.outcome == 'failure' || steps.licenses_validate.outcome == 'failure') }}
+        run: |
+          echo "review_validate=${{ steps.review_validate.outcome }}"
+          echo "e10_validate=${{ steps.e10_validate.outcome }}"
+          echo "licenses_validate=${{ steps.licenses_validate.outcome }}"
+          exit 1
       - name: Generate and publish reviewed runtime
         run: |
           pnpm english-content:generate
