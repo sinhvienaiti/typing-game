@@ -60,6 +60,8 @@ assert.ok(vfx.vfx?.domains?.includes("screen-feedback"));
 
 assert.match(router, /renderPhaseBBackgrounds/);
 assert.match(router, /\$\{BASE\}\/backgrounds`\) return renderPhaseBBackgrounds\(\)/);
+assert.match(router, /renderPhaseBVfx/);
+assert.match(router, /\$\{BASE\}\/vfx`\) return renderPhaseBVfx\(\)/);
 assert.match(server, /space-typing-admin-backgrounds\.v1\.json/);
 assert.match(server, /space-typing-admin-vfx\.v1\.json/);
 assert.match(server, /\/api\/admin\/space-typing\/backgrounds\/contract/);
