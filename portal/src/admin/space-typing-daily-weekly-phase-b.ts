@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 
@@ -60,26 +61,41 @@ function escapeHtml(value: unknown): string {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
+function stringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "string");
+}
+function record(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
 
 async function fetchContract(): Promise<DailyWeeklyContract> {
-  const response = await fetch("/api/admin/space-typing/daily-weekly/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  if (!response.ok) throw new Error(`Daily / Weekly contract request failed (${response.status})`);
-  const payload = (await response.json()) as DailyWeeklyContract;
-  if (
-    payload.capability !== "daily-weekly.read" ||
-    payload.liveOps?.mode !== "runtime-readonly" ||
-    payload.liveOps.daily?.available !== true ||
-    payload.liveOps.weekly?.available !== true ||
-    payload.liveOps.daily.writeCapability !== false ||
-    payload.liveOps.weekly.writeCapability !== false ||
-    payload.liveOps.adminWriteCapability !== false
-  ) {
+  const payload = await api.requestJson<unknown>("/api/admin/space-typing/daily-weekly/contract");
+  if (!record(payload) || payload["capability"] !== "daily-weekly.read" || !record(payload["liveOps"])) {
     throw new Error("Daily / Weekly contract does not match the canonical read-only runtime boundary.");
   }
-  return payload;
+  const liveOps = payload["liveOps"];
+  if (liveOps["mode"] !== "runtime-readonly" || !record(liveOps["daily"]) || !record(liveOps["weekly"])) {
+    throw new Error("Daily / Weekly contract is missing canonical runtime ownership metadata.");
+  }
+  const daily = liveOps["daily"];
+  const weekly = liveOps["weekly"];
+  if (
+    daily["available"] !== true ||
+    daily["challengeKind"] !== "daily" ||
+    daily["writeCapability"] !== false ||
+    !stringArray(daily["identityFields"]) ||
+    weekly["available"] !== true ||
+    weekly["challengeKind"] !== "weekly" ||
+    weekly["writeCapability"] !== false ||
+    !stringArray(weekly["identityFields"]) ||
+    !stringArray(weekly["readableState"]) ||
+    liveOps["adminWriteCapability"] !== false ||
+    !stringArray(liveOps["runtimeSources"]) ||
+    !stringArray(liveOps["unsupportedAdminOperations"])
+  ) {
+    throw new Error("Daily / Weekly contract contains an invalid runtime capability shape.");
+  }
+  return payload as unknown as DailyWeeklyContract;
 }
 
 function chipList(values: string[]): string {
@@ -118,7 +134,7 @@ export function renderPhaseBDailyWeekly(): HTMLElement {
         <span class="st-admin-badge">READ ONLY</span>
       </div>
     </header>
-    <p class="st-admin-notice" data-daily-weekly-status>Loading canonical Daily / Weekly ownership…</p>
+    <p class="st-admin-notice" data-daily-weekly-status aria-live="polite">Loading canonical Daily / Weekly ownership…</p>
     <div class="space-admin-grid" data-daily-weekly-content></div>
   `;
 
@@ -126,35 +142,50 @@ export function renderPhaseBDailyWeekly(): HTMLElement {
   const content = root.querySelector<HTMLElement>("[data-daily-weekly-content]");
   if (!status || !content) return root;
 
-  void fetchContract()
-    .then((contract) => {
-      const liveOps = contract.liveOps;
-      const daily = liveOps.daily;
-      const weekly = liveOps.weekly;
-      status.textContent = "Daily and Weekly are canonical deterministic browser-local challenge runtimes; Admin reads ownership only and cannot schedule, reseed, author rewards, publish, or mutate player progress.";
-      content.innerHTML = `
-        ${challengeCard("Daily Expedition", daily, "Day key", daily.dayKeyFormat)}
-        ${challengeCard("Weekly Challenge", weekly, "Week key", `${weekly.weekKeyFormat} · ${weekly.weekKeyOwner}`)}
-        <article class="st-admin-card space-admin-card--wide">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Comparability</p><h2>Daily identity fields</h2></div></div>
-          ${chipList(daily.identityFields)}
-        </article>
-        <article class="st-admin-card space-admin-card--wide">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Weekly state</p><h2>Canonical readable state</h2></div></div>
-          ${chipList(weekly.readableState)}
-          <p><strong>Seed owner:</strong> <code>${escapeHtml(weekly.seedOwner)}</code></p>
-          <p><strong>Scheduler control:</strong> ${String(weekly.schedulerControlCapability)} · <strong>Reward authoring:</strong> ${String(weekly.rewardAuthoringCapability)} · <strong>Seed override:</strong> ${String(weekly.seedOverrideCapability)}</p>
-        </article>
-        <article class="st-admin-card space-admin-card--wide">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Boundary</p><h2>No synthetic live-ops authoring</h2></div></div>
-          <ul>${liveOps.unsupportedAdminOperations.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-        </article>
-      `;
-    })
-    .catch((error) => {
-      status.textContent = error instanceof Error ? error.message : "Unable to load Daily / Weekly contract.";
-      status.classList.add("st-admin-notice--error");
-    });
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical Daily / Weekly ownership…", "loading");
+    content.replaceChildren();
+    void fetchContract()
+      .then((contract) => {
+        if (generation !== loadGeneration) return;
+        const liveOps = contract.liveOps;
+        const daily = liveOps.daily;
+        const weekly = liveOps.weekly;
+        setAdminStatus(status, "Daily and Weekly are canonical deterministic browser-local challenge runtimes; Admin reads ownership only and cannot schedule, reseed, author rewards, publish, or mutate player progress.", "success");
+        content.innerHTML = `
+          ${challengeCard("Daily Expedition", daily, "Day key", daily.dayKeyFormat)}
+          ${challengeCard("Weekly Challenge", weekly, "Week key", `${weekly.weekKeyFormat} · ${weekly.weekKeyOwner}`)}
+          <article class="st-admin-card space-admin-card--wide">
+            <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Comparability</p><h2>Daily identity fields</h2></div></div>
+            ${chipList(daily.identityFields)}
+          </article>
+          <article class="st-admin-card space-admin-card--wide">
+            <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Weekly state</p><h2>Canonical readable state</h2></div></div>
+            ${chipList(weekly.readableState)}
+            <p><strong>Seed owner:</strong> <code>${escapeHtml(weekly.seedOwner)}</code></p>
+            <p><strong>Scheduler control:</strong> ${String(weekly.schedulerControlCapability)} · <strong>Reward authoring:</strong> ${String(weekly.rewardAuthoringCapability)} · <strong>Seed override:</strong> ${String(weekly.seedOverrideCapability)}</p>
+          </article>
+          <article class="st-admin-card space-admin-card--wide">
+            <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Boundary</p><h2>No synthetic live-ops authoring</h2></div></div>
+            <p>The following operations are intentionally unavailable because no canonical remote Live Ops service owns them:</p>
+            <ul>${liveOps.unsupportedAdminOperations.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          </article>
+        `;
+      })
+      .catch((error: unknown) => {
+        if (generation !== loadGeneration) return;
+        setAdminStatus(status, "Daily / Weekly runtime contract is unavailable.", "error");
+        renderAdminFailureState(content, {
+          title: "Daily / Weekly unavailable",
+          fallbackMessage: "The canonical Daily / Weekly contract could not be loaded. Check the local Admin runtime and try again.",
+          error,
+          onRetry: load,
+        });
+      });
+  };
 
+  load();
   return root;
 }
