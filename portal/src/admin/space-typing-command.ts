@@ -5,16 +5,23 @@ const RESULTS_ID = "space-admin-command-results";
 const STATUS_ID = "space-admin-command-status";
 
 type Navigate = (path: string) => void;
+export type AdminCommandOptions = { includeDeveloperTools?: boolean };
 
-const COMMANDS = [
-  ["Overview", BASE, "Dashboard"], ["Analytics", `${BASE}/analytics`, "Dashboard"],
-  ["Audio Defaults", `${BASE}/audio`, "Audio & Music"], ["Music Library", `${BASE}/music-library`, "Audio & Music"], ["World / Stage Music", `${BASE}/world-music`, "Audio & Music"],
-  ["Ships", `${BASE}/ships`, "Game Content"], ["Equipment", `${BASE}/equipment`, "Game Content"], ["Skills", `${BASE}/skills`, "Game Content"], ["Enemies", `${BASE}/enemies`, "Game Content"], ["Bosses", `${BASE}/bosses`, "Game Content"], ["Worlds & Stages", `${BASE}/stages`, "Game Content"], ["Typing Content", `${BASE}/typing-content`, "Game Content"],
-  ["Shop", `${BASE}/shop`, "Economy"], ["Currencies", `${BASE}/currencies`, "Economy"], ["Rewards & Drops", `${BASE}/rewards`, "Economy"], ["Stamina / Warp", `${BASE}/warp`, "Economy"],
-  ["Missions", `${BASE}/missions`, "Live Ops"], ["Daily / Weekly", `${BASE}/daily-weekly`, "Live Ops"], ["Expedition", `${BASE}/expedition`, "Live Ops"], ["Events", `${BASE}/events`, "Live Ops"],
-  ["Duel Settings", `${BASE}/duel`, "PvP"], ["Ranked", `${BASE}/ranked`, "PvP"], ["Alternative Modes", `${BASE}/alternative-modes`, "PvP"],
-  ["Backgrounds", `${BASE}/backgrounds`, "Visuals"], ["VFX", `${BASE}/vfx`, "Visuals"], ["UI Assets", `${BASE}/ui-assets`, "Visuals"],
-  ["General Settings", `${BASE}/settings`, "System"], ["Feature Gates", `${BASE}/feature-gates`, "System"], ["History & Publish", `${BASE}/history`, "System"], ["QA Sandbox", `${BASE}/qa`, "Developer"],
+const PRIMARY_COMMANDS = [
+  ["Overview", BASE, "Dashboard"],
+  ["Audio Defaults", `${BASE}/audio`, "System"], ["Music Library", `${BASE}/music-library`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
+  ["Ships", `${BASE}/ships`, "Gameplay"], ["Equipment", `${BASE}/equipment`, "Gameplay"], ["Skills", `${BASE}/skills`, "Gameplay"], ["Enemies", `${BASE}/enemies`, "Gameplay"], ["Bosses", `${BASE}/bosses`, "Gameplay"], ["Worlds & Stages", `${BASE}/stages`, "Content"], ["Typing Content", `${BASE}/typing-content`, "Content"],
+  ["General Settings", `${BASE}/settings`, "System"], ["History & Publish", `${BASE}/history`, "System"],
+] as const;
+
+const DEVELOPER_COMMANDS = [
+  ["Developer Tools", `${BASE}/developer-tools`, "Developer Tools"],
+  ["Analytics", `${BASE}/analytics`, "Developer Tools · Runtime"],
+  ["Shop", `${BASE}/shop`, "Developer Tools · Economy"], ["Currencies", `${BASE}/currencies`, "Developer Tools · Economy"], ["Rewards & Drops", `${BASE}/rewards`, "Developer Tools · Economy"], ["Stamina / Warp", `${BASE}/warp`, "Developer Tools · Economy"],
+  ["Missions", `${BASE}/missions`, "Developer Tools · Live Ops"], ["Daily / Weekly", `${BASE}/daily-weekly`, "Developer Tools · Live Ops"], ["Expedition", `${BASE}/expedition`, "Developer Tools · Live Ops"], ["Events", `${BASE}/events`, "Developer Tools · Live Ops"], ["Feature Gates", `${BASE}/feature-gates`, "Developer Tools · Live Ops"],
+  ["Duel Settings", `${BASE}/duel`, "Developer Tools · PvP"], ["Ranked", `${BASE}/ranked`, "Developer Tools · PvP"], ["Alternative Modes", `${BASE}/alternative-modes`, "Developer Tools · PvP"],
+  ["Backgrounds", `${BASE}/backgrounds`, "Developer Tools · Visuals"], ["VFX", `${BASE}/vfx`, "Developer Tools · Visuals"], ["UI Assets", `${BASE}/ui-assets`, "Developer Tools · Visuals"],
+  ["QA Sandbox", `${BASE}/qa`, "Developer Tools · QA"],
 ] as const;
 
 let current: HTMLElement | null = null;
@@ -31,9 +38,12 @@ export function closeAdminCommandPalette(): void {
   focusTarget?.focus();
 }
 
-export function openAdminCommandPalette(navigate: Navigate): void {
+export function openAdminCommandPalette(navigate: Navigate, options: AdminCommandOptions = {}): void {
   closeAdminCommandPalette();
   previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const commands = options.includeDeveloperTools
+    ? [...PRIMARY_COMMANDS, ...DEVELOPER_COMMANDS]
+    : [...PRIMARY_COMMANDS];
   const overlay = document.createElement("div");
   overlay.className = "stx-command-overlay";
   overlay.setAttribute("role", "dialog");
@@ -64,7 +74,7 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   const resultButtons = (): HTMLButtonElement[] => Array.from(results.querySelectorAll<HTMLButtonElement>("button.stx-command-result:not([disabled])"));
   const render = () => {
     const query = input.value.trim().toLowerCase();
-    const matches = COMMANDS.filter(([label, , group]) => `${label} ${group}`.toLowerCase().includes(query)).slice(0, 12);
+    const matches = commands.filter(([label, , group]) => `${label} ${group}`.toLowerCase().includes(query)).slice(0, 12);
     results.replaceChildren();
     for (const [label, path, group] of matches) {
       const button = document.createElement("button");
@@ -147,12 +157,15 @@ export function openAdminCommandPalette(navigate: Navigate): void {
   window.requestAnimationFrame(() => input.focus());
 }
 
-export function installAdminCommandShortcut(navigate: Navigate): () => void {
+export function installAdminCommandShortcut(
+  navigate: Navigate,
+  getOptions: () => AdminCommandOptions = () => ({}),
+): () => void {
   const listener = (event: KeyboardEvent) => {
     if (!location.pathname.startsWith(BASE)) return;
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
-      openAdminCommandPalette(navigate);
+      openAdminCommandPalette(navigate, getOptions());
     }
   };
   document.addEventListener("keydown", listener);
