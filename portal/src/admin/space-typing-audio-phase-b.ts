@@ -1,5 +1,6 @@
 import "./space-typing-ui.css";
 import { SpaceTypingAdminApi, type AudioDefaults, type SpaceTypingAdminConfig } from "./api";
+import { adminErrorMessage } from "./admin-http";
 
 const BASE = "/admin/space-typing";
 const api = new SpaceTypingAdminApi();
@@ -161,6 +162,7 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
   page.append(head);
 
   const runtimeStatus = notice("Loading active revision…", "info");
+  runtimeStatus.setAttribute("aria-live", "polite");
   page.append(runtimeStatus);
 
   let loadedActiveRevision: string | null = null;
@@ -176,6 +178,8 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
   const ambient = slider("Ambient", CHILD_PLAYER_DEFAULTS.ambient);
   const sfx = slider("Global SFX", CHILD_PLAYER_DEFAULTS.sfx);
   const credit = slider("Credits / Crystal pickup", CHILD_PLAYER_DEFAULTS.credit, 2);
+  const editableInputs = [pronunciation.input, music.input, ambient.input, sfx.input, credit.input];
+  editableInputs.forEach((input) => { input.disabled = true; });
 
   const core = panel("Current Player Defaults", "Pinned child GameSettings fields · 0–100% except Credit 0–200%");
   const coreList = el("div", "st-admin-audio-list");
@@ -202,6 +206,7 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
     focusList.append(runtimeRow(CATEGORY_LABELS[category], `${Math.round(PRONUNCIATION_DUCK[category] * 100)}%`));
   }
   focus.append(
+    notice("Pronunciation attenuates only the listed SFX mix groups. BGM / music is intentionally not ducked by pronunciation.", "good"),
     notice("These values are owned by src/audio/mix.ts and are intentionally not persisted by Admin. They can become editable only after the child exposes a validated published-policy consumer.", "warn"),
     focusList,
   );
@@ -223,25 +228,11 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
     ambient.input.value = String(value.ambient);
     sfx.input.value = String(value.sfx);
     credit.input.value = String(value.credit);
-    for (const input of [pronunciation.input, music.input, ambient.input, sfx.input, credit.input]) {
-      input.dispatchEvent(new Event("input"));
-    }
+    for (const input of editableInputs) input.dispatchEvent(new Event("input"));
   };
 
-  void api.getState().then((payload) => {
-    loadedActiveRevision = payload.state.activeRevision;
-    revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
-    profileId = payload.active.config.audio.profileId || "recommended-v1";
-    applyDefaults(payload.active.config.audio.defaults);
-    runtimeStatus.className = "st-admin-info-banner good";
-    runtimeStatus.textContent = "Loaded canonical audio profile. Current child-backed player defaults are authorable; removed legacy master/announcer/category preferences are preserved read-only for revision compatibility.";
-  }).catch((error: unknown) => {
-    runtimeStatus.className = "st-admin-info-banner bad";
-    runtimeStatus.textContent = `Admin service unavailable: ${error instanceof Error ? error.message : String(error)}`;
-  });
-
   const saveBar = el("div", "st-admin-sticky-save");
-  const saveStatus = el("span", undefined, "Save Draft changes current child-backed defaults only · player preferences remain untouched");
+  const saveStatus = el("span", undefined, "Load the active revision before editing audio defaults");
   const saveButton = btn("Save Draft", () => void (async () => {
     saveButton.disabled = true;
     saveStatus.textContent = "Saving immutable audio draft…";
@@ -271,14 +262,15 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
       runtimeStatus.className = "st-admin-info-banner good";
       runtimeStatus.textContent = `Audio draft ${revision.revision} created. Existing player preferences are untouched; removed legacy mix fields were preserved without exposing fake authoring controls.`;
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : String(error);
+      const message = error instanceof Error ? error.message : "The audio draft could not be saved.";
       saveStatus.textContent = `Draft rejected · ${message}`;
       runtimeStatus.className = "st-admin-info-banner bad";
       runtimeStatus.textContent = `Validation/save failed: ${message}`;
     } finally {
-      saveButton.disabled = false;
+      saveButton.disabled = loadedActiveRevision === null;
     }
   })(), "st-admin-btn primary");
+  saveButton.disabled = true;
   saveBar.append(
     el("strong", undefined, "Phase B Audio Draft"),
     saveStatus,
@@ -287,5 +279,50 @@ export function renderPhaseBAudio(navigate: Navigate): HTMLElement {
     saveButton,
   );
   page.append(saveBar);
+
+  let loadGeneration = 0;
+  const loadState = (): void => {
+    const generation = ++loadGeneration;
+    loadedActiveRevision = null;
+    revisionBadge.className = "st-admin-status info";
+    revisionBadge.textContent = "ACTIVE · loading";
+    runtimeStatus.className = "st-admin-info-banner info";
+    runtimeStatus.textContent = "Loading active revision…";
+    saveStatus.textContent = "Load the active revision before editing audio defaults";
+    saveButton.disabled = true;
+    editableInputs.forEach((input) => { input.disabled = true; });
+
+    void api.getState().then((payload) => {
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = payload.state.activeRevision;
+      revisionBadge.className = "st-admin-status good";
+      revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
+      profileId = payload.active.config.audio.profileId || "recommended-v1";
+      applyDefaults(payload.active.config.audio.defaults);
+      editableInputs.forEach((input) => { input.disabled = false; });
+      saveButton.disabled = false;
+      saveStatus.textContent = "Save Draft changes current child-backed defaults only · player preferences remain untouched";
+      runtimeStatus.className = "st-admin-info-banner good";
+      runtimeStatus.textContent = "Loaded canonical audio profile. Current child-backed player defaults are authorable; removed legacy master/announcer/category preferences are preserved read-only for revision compatibility.";
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = null;
+      revisionBadge.className = "st-admin-status bad";
+      revisionBadge.textContent = "ACTIVE · unavailable";
+      saveButton.disabled = true;
+      editableInputs.forEach((input) => { input.disabled = true; });
+      runtimeStatus.className = "st-admin-info-banner bad";
+      runtimeStatus.replaceChildren();
+      runtimeStatus.append(document.createTextNode(adminErrorMessage(
+        error,
+        "The active audio revision could not be loaded. Check the local Admin runtime and try again.",
+      )));
+      const retry = btn("Retry", loadState, "st-admin-btn");
+      retry.setAttribute("aria-label", "Retry loading Audio Defaults");
+      runtimeStatus.append(document.createTextNode(" "), retry);
+    });
+  };
+
+  loadState();
   return page;
 }
