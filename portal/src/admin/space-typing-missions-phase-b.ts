@@ -1,6 +1,6 @@
-import { SpaceTypingAdminApi } from "./api";
+import { isContractRecord, readMainAdminContractSection } from "./space-typing-contract-reader";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
-const api = new SpaceTypingAdminApi();
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type MissionsContract = {
@@ -26,7 +26,6 @@ type MissionsContract = {
   writeCapability: false;
   previewCapability: false;
 };
-type AdminContract = { capabilities: string[]; missions: MissionsContract };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -53,19 +52,35 @@ function panel(title: string, subtitle?: string): HTMLElement {
   return root;
 }
 function listNotice(label: string, values: string[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
 }
-async function fetchMissionsContract(): Promise<MissionsContract> {
-  const response = await fetch("/api/admin/space-typing/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<AdminContract> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Missions contract request failed (${response.status})`);
-  if (!payload.missions || !payload.capabilities?.includes("missions.read")) {
-    throw new Error("Pinned child contract does not expose missions.read.");
+function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((entry) => typeof entry === "string"); }
+
+function validMissionsContract(value: unknown): value is MissionsContract {
+  if (!isContractRecord(value) || value["mode"] !== "runtime-derived-readonly") return false;
+  for (const key of [
+    "runtimeSources",
+    "domains",
+    "authorableFields",
+    "runtimeDerivedFields",
+    "missionIds",
+    "missionCounterKeys",
+    "missionDefinitionFields",
+    "missionSourceFunctions",
+    "stageObjectiveTypes",
+    "stageObjectiveDefinitionFields",
+    "stageObjectiveSourceFunctions",
+    "gameplayConsumers",
+    "rewardIntegration",
+    "unsupportedMasterPlanFields",
+  ] as const) {
+    if (!stringArray(value[key])) return false;
   }
-  return payload.missions;
+  return typeof value["missionPersistenceOwner"] === "string" && typeof value["stageObjectivePersistenceOwner"] === "string";
+}
+
+async function fetchMissionsContract(): Promise<MissionsContract> {
+  return readMainAdminContractSection<MissionsContract>("missions", "missions.read", validMissionsContract);
 }
 
 export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
@@ -75,7 +90,7 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "Live Ops · Runtime Contract"),
     el("h1", undefined, "Missions"),
-    el("p", undefined, "Inspect both canonical progression missions and per-stage objectives consumed by gameplay. Definitions are code-owned; Admin intentionally exposes diagnostics only and does not invent Daily / Weekly rotation authoring."),
+    el("p", undefined, "Inspect canonical progression missions and per-stage objectives consumed by gameplay. Definitions are code-owned; Admin exposes diagnostics without inventing Daily / Weekly rotation authoring."),
   );
   const actions = el("div", "st-admin-page-actions");
   actions.append(
@@ -87,12 +102,19 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
   page.append(header);
 
   const status = notice("Loading canonical Missions contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const missions = await fetchMissionsContract();
-      status.className = "stx-notice good";
-      status.textContent = `${missions.missionIds.length} canonical progression missions · ${missions.stageObjectiveTypes.length} Stage Objective types · Admin writes closed.`;
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    content.replaceChildren(notice("Loading mission and objective ownership…", "info"));
+    setAdminStatus(status, "Loading canonical Missions contract…", "loading");
+    void fetchMissionsContract().then((missions) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, `${missions.missionIds.length} canonical progression missions · ${missions.stageObjectiveTypes.length} Stage Objective types · Admin writes closed.`, "success");
+      content.replaceChildren();
 
       const progression = panel("Progression Missions", "Canonical code-owned registry from src/progression/missions.ts");
       progression.append(
@@ -100,7 +122,7 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
         listNotice("Counters", missions.missionCounterKeys),
         listNotice("Definition fields", missions.missionDefinitionFields),
         notice(`Persistence owner: ${missions.missionPersistenceOwner}`, "good"),
-        notice("Claimed missions and counters are player progression state; mission rewards are issued by claimMission().", "info"),
+        notice("Claimed missions and counters are player progression state; mission rewards are issued by the gameplay claim flow.", "info"),
       );
 
       const objectives = panel("Stage Objectives", "Canonical per-stage objective runtime from src/events/objectives.ts");
@@ -119,19 +141,27 @@ export function renderPhaseBMissions(navigate: Navigate): HTMLElement {
         listNotice("Canonical sources", missions.runtimeSources),
       );
 
-      const boundary = panel("Admin Boundary", "Recurring authoring stays closed until a canonical runtime service exists");
+      const boundary = panel("Admin Boundary", "Unavailable recurring authoring is intentional until a canonical runtime service exists");
       boundary.append(
         listNotice("Unsupported recurring-authoring fields", missions.unsupportedMasterPlanFields, "warn"),
-        notice("The five progression mission definitions are real, but they are code-owned and therefore read-only here.", "warn"),
+        notice("The progression mission definitions are real, but they are code-owned and therefore read-only here.", "warn"),
         notice("Daily / Weekly reset, rotation calendar and reward-pool authoring are unavailable in the canonical runtime.", "warn"),
         notice("Save Draft / Publish / Preview are intentionally unavailable for Missions.", "info"),
       );
 
-      page.append(progression, objectives, integration, boundary);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Missions contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+      content.append(progression, objectives, integration, boundary);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Missions contract is unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Missions unavailable",
+        fallbackMessage: "The canonical Missions contract could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return page;
 }
