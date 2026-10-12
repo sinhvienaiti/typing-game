@@ -173,6 +173,16 @@ export class LocalAdminAuditLog {
   }
 }
 
+async function recordAuditBestEffort(auditLog, event, onAuditError) {
+  try {
+    await auditLog.record(event);
+    return true;
+  } catch (error) {
+    onAuditError(error);
+    return false;
+  }
+}
+
 export async function runAuthorizedAdminMutation({
   actor,
   permission,
@@ -182,24 +192,74 @@ export async function runAuthorizedAdminMutation({
   entityType = null,
   entityId = null,
   changeScope = null,
+  resolveEntityId = null,
+  resolveChangeScope = null,
+  onAuditError = () => undefined,
   operation,
 }) {
   try {
     requireAdminPermission(actor, permission);
-    const value = await operation();
-    await auditLog.record({ actor, action, domain, entityType, entityId, changeScope, result: "success" });
-    return value;
   } catch (error) {
-    await auditLog.record({
+    await recordAuditBestEffort(auditLog, {
       actor,
       action,
       domain,
       entityType,
       entityId,
       changeScope,
-      result: error instanceof AdminAuthorizationError ? "denied" : "error",
+      result: "denied",
       error: error instanceof Error ? error.message : String(error),
-    });
+    }, onAuditError);
     throw error;
   }
+
+  // A durable attempt record is written before mutation. If this write fails, the mutation is not run.
+  // This prevents a successful mutation from being completely absent from the audit stream.
+  await auditLog.record({
+    actor,
+    action,
+    domain,
+    entityType,
+    entityId,
+    changeScope,
+    result: "attempt",
+  });
+
+  let value;
+  try {
+    value = await operation();
+  } catch (error) {
+    await recordAuditBestEffort(auditLog, {
+      actor,
+      action,
+      domain,
+      entityType,
+      entityId,
+      changeScope,
+      result: "error",
+      error: error instanceof Error ? error.message : String(error),
+    }, onAuditError);
+    throw error;
+  }
+
+  const resolvedEntityId = typeof resolveEntityId === "function"
+    ? resolveEntityId(value)
+    : entityId;
+  const resolvedChangeScope = typeof resolveChangeScope === "function"
+    ? resolveChangeScope(value)
+    : changeScope;
+
+  // Do not report a completed mutation as failed only because the final audit append failed.
+  // The durable pre-mutation attempt remains, and the caller can surface/log the audit degradation.
+  await recordAuditBestEffort(auditLog, {
+    actor,
+    action,
+    domain,
+    entityType,
+    entityId: resolvedEntityId ?? null,
+    changeScope: resolvedChangeScope ?? null,
+    result: "success",
+  }, onAuditError);
+
+  return value;
 }
