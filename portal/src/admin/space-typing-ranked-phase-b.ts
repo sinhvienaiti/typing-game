@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 type Tone = "good" | "warn" | "bad" | "info";
@@ -78,22 +79,43 @@ function panel(title: string, subtitle?: string): HTMLElement {
   return root;
 }
 function listNotice(label: string, values: readonly (string | number)[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
 }
 function scalar(label: string, value: string | number | boolean, tone: Tone = "info"): HTMLElement {
   return notice(`${label}: ${String(value)}`, tone);
 }
-async function fetchRankedContract(): Promise<RankedContractPayload> {
-  const response = await fetch("/api/admin/space-typing/ranked/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<RankedContractPayload> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Ranked contract request failed (${response.status})`);
-  if (payload.capability !== "ranked.read" || !payload.ranked || !payload.route) {
-    throw new Error("Pinned child Ranked contract does not expose ranked.read.");
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((item) => typeof item === "string"); }
+function numberArray(value: unknown): value is number[] { return Array.isArray(value) && value.every((item) => typeof item === "number" && Number.isFinite(item)); }
+
+function validateRankedContract(value: unknown): RankedContractPayload {
+  if (!isRecord(value) || value["capability"] !== "ranked.read" || !isRecord(value["ranked"]) || !isRecord(value["route"])) {
+    throw new Error("Ranked contract does not match the canonical ranked.read boundary.");
   }
-  return payload as RankedContractPayload;
+  const ranked = value["ranked"];
+  if (ranked["mode"] !== "runtime-derived-readonly") throw new Error("Ranked contract is not runtime-derived read-only.");
+  for (const key of ["runtimeSources", "authorableFields", "runtimeServices", "unsupportedAdminMockFields"] as const) {
+    if (!stringArray(ranked[key])) throw new Error(`Ranked contract is missing ${key}.`);
+  }
+  if (!isRecord(ranked["ruleset"]) || !isRecord(ranked["rating"]) || !isRecord(ranked["matchmaking"]) || !isRecord(ranked["profile"])) {
+    throw new Error("Ranked contract is missing ruleset, rating, matchmaking or profile metadata.");
+  }
+  const ruleset = ranked["ruleset"];
+  const rating = ranked["rating"];
+  const profile = ranked["profile"];
+  if (!stringArray(ruleset["mapPool"]) || !numberArray(rating["kFactors"]) || !stringArray(profile["fields"])) {
+    throw new Error("Ranked contract contains invalid ruleset/rating/profile collections.");
+  }
+  if (ranked["writeCapability"] !== false || ranked["previewCapability"] !== false || ranked["seasonService"] !== false || ranked["rewardTableService"] !== false) {
+    throw new Error("Ranked contract contains an invalid fail-closed Admin boundary.");
+  }
+  return value as unknown as RankedContractPayload;
+}
+
+async function fetchRankedContract(): Promise<RankedContractPayload> {
+  return validateRankedContract(await api.requestJson<unknown>("/api/admin/space-typing/ranked/contract"));
 }
 
 export function renderPhaseBRanked(): HTMLElement {
@@ -111,13 +133,20 @@ export function renderPhaseBRanked(): HTMLElement {
   page.append(head);
 
   const status = notice("Loading canonical Ranked runtime contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const payload = await fetchRankedContract();
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical Ranked runtime contract…", "loading");
+    content.replaceChildren(notice("Loading Ranked authority rules…", "info"));
+    void fetchRankedContract().then((payload) => {
+      if (generation !== loadGeneration) return;
       const ranked = payload.ranked;
-      status.className = "stx-notice good";
-      status.textContent = `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · Admin writes closed.`;
+      setAdminStatus(status, `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · Admin writes closed.`, "success");
+      content.replaceChildren();
 
       const rules = panel("Canonical Ruleset", "Code-owned DUEL_RANKED_RULESET");
       rules.append(
@@ -172,14 +201,21 @@ export function renderPhaseBRanked(): HTMLElement {
         scalar("Admin write capability", ranked.writeCapability, "warn"),
         scalar("Admin preview capability", ranked.previewCapability, "warn"),
         listNotice("Unsupported legacy mock fields", ranked.unsupportedAdminMockFields, "warn"),
-        notice("Season dates, placement count, free-form matchmaking spread, enable toggles, rank-tier thresholds, season rewards and player-distribution percentages are not canonical runtime config and are intentionally unavailable."),
+        notice("Season dates, placement count, free-form matchmaking spread, enable toggles, rank-tier thresholds, season rewards and player-distribution percentages are intentionally unavailable because no canonical owner exists."),
       );
+      content.append(rules, rating, matchmaking, persistence, boundary);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Ranked runtime contract is unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Ranked unavailable",
+        fallbackMessage: "The canonical Ranked contract could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
 
-      page.append(rules, rating, matchmaking, persistence, boundary);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Ranked contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+  load();
   return page;
 }
