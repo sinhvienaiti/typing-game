@@ -1,6 +1,6 @@
-import { SpaceTypingAdminApi } from "./api";
+import { isContractRecord, readMainAdminContractSection } from "./space-typing-contract-reader";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
-const api = new SpaceTypingAdminApi();
 type Tone = "good" | "warn" | "bad" | "info";
 type FeatureGate = {
   id: string;
@@ -29,7 +29,6 @@ type FeatureGatesContract = {
   previewCapability: false;
   unsupportedMasterPlanFields: string[];
 };
-type AdminContract = { capabilities: string[]; featureGates: FeatureGatesContract };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -49,20 +48,44 @@ function panel(title: string, subtitle?: string): HTMLElement {
   root.append(head);
   return root;
 }
-function listNotice(label: string, values: string[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+function listNotice(label: string, values: readonly string[], tone: Tone = "info"): HTMLElement {
+  return notice(`${label}: ${values.join(" · ") || "none exposed"}`, tone);
+}
+function stringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "string");
+}
+function isFeatureGate(value: unknown): value is FeatureGate {
+  if (!isContractRecord(value)) return false;
+  return typeof value["id"] === "string"
+    && typeof value["storageKey"] === "string"
+    && typeof value["queryParam"] === "string"
+    && typeof value["defaultEnabled"] === "boolean"
+    && stringArray(value["queryOffValues"])
+    && stringArray(value["queryOnValues"])
+    && typeof value["storageDisabledValue"] === "string"
+    && stringArray(value["overridePrecedence"]);
+}
+function isFeatureGatesContract(value: unknown): value is FeatureGatesContract {
+  if (!isContractRecord(value)) return false;
+  return value["mode"] === "runtime-derived-readonly"
+    && stringArray(value["runtimeSources"])
+    && stringArray(value["authorableFields"])
+    && stringArray(value["runtimeDerivedFields"])
+    && stringArray(value["ids"])
+    && Array.isArray(value["gates"])
+    && value["gates"].every(isFeatureGate)
+    && stringArray(value["sourceFunctions"])
+    && typeof value["gameplayConsumer"] === "string"
+    && typeof value["persistenceOwner"] === "string"
+    && value["remoteRolloutService"] === false
+    && value["killSwitchService"] === false
+    && value["percentageRollout"] === false
+    && value["writeCapability"] === false
+    && value["previewCapability"] === false
+    && stringArray(value["unsupportedMasterPlanFields"]);
 }
 async function fetchFeatureGatesContract(): Promise<FeatureGatesContract> {
-  const response = await fetch("/api/admin/space-typing/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<AdminContract> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Feature Gates contract request failed (${response.status})`);
-  if (!payload.featureGates || !payload.capabilities?.includes("feature-gates.read")) {
-    throw new Error("Pinned child contract does not expose feature-gates.read.");
-  }
-  return payload.featureGates;
+  return readMainAdminContractSection("featureGates", "feature-gates.read", isFeatureGatesContract);
 }
 
 export function renderPhaseBFeatureGates(): HTMLElement {
@@ -72,7 +95,7 @@ export function renderPhaseBFeatureGates(): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "System · Runtime Contract"),
     el("h1", undefined, "Feature Gates"),
-    el("p", undefined, "Inspect feature gates actually consumed by Space Typing. Runtime currently owns a browser-local Expansion V2 gate only; there is no remote rollout, percentage rollout, audience targeting or kill-switch service to author from Admin."),
+    el("p", undefined, "Inspect feature gates actually consumed by Space Typing. Runtime currently owns browser-local gate semantics; Admin does not invent a remote rollout, targeting or kill-switch service."),
   );
   const actions = el("div", "st-admin-page-actions");
   actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("NO REMOTE ROLLOUT", "warn"));
@@ -80,25 +103,38 @@ export function renderPhaseBFeatureGates(): HTMLElement {
   page.append(header);
 
   const status = notice("Loading canonical Feature Gates contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const featureGates = await fetchFeatureGatesContract();
-      status.className = "stx-notice good";
-      status.textContent = `${featureGates.ids.length} canonical runtime gate · local browser override semantics · Admin writes closed.`;
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
 
-      for (const gate of featureGates.gates) {
-        const gatePanel = panel(gate.id, "Canonical runtime gate from src/expansion-v2/feature-flags.ts");
-        gatePanel.append(
-          notice(`Storage key: ${gate.storageKey}`, "good"),
-          notice(`Query parameter: ${gate.queryParam}`, "good"),
-          notice(`Default: ${gate.defaultEnabled ? "enabled" : "disabled"}`),
-          listNotice("Override precedence", gate.overridePrecedence),
-          listNotice("Query values · ON", gate.queryOnValues),
-          listNotice("Query values · OFF", gate.queryOffValues),
-          notice(`localStorage disables only when value is exactly: ${gate.storageDisabledValue}`),
-        );
-        page.append(gatePanel);
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical Feature Gates contract…", "loading");
+    content.replaceChildren(notice("Loading browser-local gate ownership and override semantics…", "info"));
+
+    void fetchFeatureGatesContract().then((featureGates) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, `${featureGates.ids.length} canonical runtime gate${featureGates.ids.length === 1 ? "" : "s"} · local override semantics · Admin writes closed.`, "success");
+      const panels: HTMLElement[] = [];
+
+      if (featureGates.gates.length === 0) {
+        panels.push(panel("Runtime Gates", "The valid contract currently exposes no gate records."));
+        panels[0].append(notice("No canonical runtime gates are currently exposed.", "info"));
+      } else {
+        for (const gate of featureGates.gates) {
+          const gatePanel = panel(gate.id, "Canonical runtime gate from the pinned child contract");
+          gatePanel.append(
+            notice(`Storage key: ${gate.storageKey}`, "good"),
+            notice(`Query parameter: ${gate.queryParam}`, "good"),
+            notice(`Default: ${gate.defaultEnabled ? "enabled" : "disabled"}`),
+            listNotice("Override precedence", gate.overridePrecedence),
+            listNotice("Query values · ON", gate.queryOnValues),
+            listNotice("Query values · OFF", gate.queryOffValues),
+            notice(`localStorage disables only when value is exactly: ${gate.storageDisabledValue}`),
+          );
+          panels.push(gatePanel);
+        }
       }
 
       const ownership = panel("Runtime Ownership", "What actually owns and consumes the gate");
@@ -107,21 +143,33 @@ export function renderPhaseBFeatureGates(): HTMLElement {
         listNotice("Source functions", featureGates.sourceFunctions),
         notice(`Gameplay consumer: ${featureGates.gameplayConsumer}`, "good"),
         notice(`Persistence owner: ${featureGates.persistenceOwner}`, "good"),
+        listNotice("Runtime-derived fields", featureGates.runtimeDerivedFields),
       );
 
       const boundary = panel("Admin Boundary", "No parallel rollout configuration is created by this UI");
       boundary.append(
-        notice("Remote rollout service: unavailable", "warn"),
-        notice("Percentage rollout: unavailable", "warn"),
-        notice("Kill-switch service: unavailable", "warn"),
+        notice("Remote rollout service: unavailable by canonical runtime design", "warn"),
+        notice("Percentage rollout: unavailable by canonical runtime design", "warn"),
+        notice("Kill-switch service: unavailable by canonical runtime design", "warn"),
+        notice(`Admin write capability: ${String(featureGates.writeCapability)}`, "info"),
+        notice(`Admin preview capability: ${String(featureGates.previewCapability)}`, "info"),
         listNotice("Unsupported authoring fields", featureGates.unsupportedMasterPlanFields, "warn"),
-        notice("Create Flag, rollout sliders, targeting scopes, toggles, Save Draft and Publish are intentionally unavailable here.", "info"),
+        notice("Create Flag, rollout sliders, targeting scopes, Save Draft and Publish are intentionally unavailable until the child runtime exposes a canonical remote rollout owner.", "info"),
       );
-      page.append(ownership, boundary);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Feature Gates contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+
+      content.replaceChildren(...panels, ownership, boundary);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Feature Gates service unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Feature Gates unavailable",
+        fallbackMessage: "Unable to load the valid canonical feature-gates.read contract.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return page;
 }
