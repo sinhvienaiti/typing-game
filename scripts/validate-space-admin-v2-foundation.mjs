@@ -36,8 +36,8 @@ assert.match(server, /LocalAdminAuditLog/, "Admin server must initialize the aud
 assert.match(server, /\/api\/admin\/space-typing\/actor/, "Admin actor endpoint is missing.");
 assert.match(server, /\/api\/admin\/space-typing\/audit/, "Admin audit endpoint is missing.");
 assert.match(server, /\/api\/admin\/space-typing\/change-scope/, "Admin publish change-scope endpoint is missing.");
-assert.match(server, /ADMIN_PERMISSIONS\.MEDIA_UPLOAD/, "Music upload must enforce media.upload permission.");
-assert.match(server, /ADMIN_PERMISSIONS\.MEDIA_DELETE/, "Music delete must enforce media.delete permission.");
+assert.match(server, /ADMIN_PERMISSIONS\.MEDIA_UPLOAD/, "Media upload mutations must enforce media.upload permission.");
+assert.match(server, /ADMIN_PERMISSIONS\.MEDIA_DELETE/, "Media delete/archive mutations must enforce media.delete permission.");
 assert.match(server, /ADMIN_PERMISSIONS\.CONFIG_DRAFT/, "Revision creation must enforce config.draft permission.");
 assert.match(server, /ADMIN_PERMISSIONS\.CONFIG_PUBLISH/, "Publish must enforce config.publish permission.");
 assert.match(server, /ADMIN_PERMISSIONS\.CONFIG_ROLLBACK/, "Rollback must enforce config.rollback permission.");
@@ -46,11 +46,15 @@ assert.match(server, /author:\s*actor\.actorId/, "Revision author must come from
 assert.match(server, /resolveEntityId:\s*\(created\)\s*=>\s*created\.revision/, "Revision create audit must resolve the created revision ID.");
 assert.match(server, /changeScope:\s*await revisionChangeScope\(input\.revision\)/, "Revision validation must expose publish change scope.");
 
-assert.equal(
-  pkg.scripts["admin:test"],
-  "node --test admin/store.test.mjs admin/admin-security.test.mjs",
-  "admin:test must cover the immutable revision store and Admin V2 security foundation.",
-);
+const adminTest = pkg.scripts["admin:test"];
+assert.equal(typeof adminTest, "string", "admin:test script is missing.");
+for (const requiredTest of [
+  "admin/store.test.mjs",
+  "admin/admin-security.test.mjs",
+]) {
+  assert.ok(adminTest.includes(requiredTest), `admin:test must retain required A0.5 coverage: ${requiredTest}`);
+}
+assert.match(adminTest, /^node --test\b/, "admin:test must continue using the Node test runner.");
 assert.equal(
   pkg.scripts["admin:v2:foundation:validate"],
   "node scripts/validate-space-admin-v2-foundation.mjs",
