@@ -1,3 +1,5 @@
+import "./admin-dialog.css";
+
 export type AdminConfirmDialogOptions = {
   title: string;
   message: string;
