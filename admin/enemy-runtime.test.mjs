@@ -16,7 +16,7 @@ const contract = {
 test("builds a published Enemy runtime envelope", () => {
   const envelope = createEnemyRuntimeEnvelope(
     { activeRevision: "r8" },
-    { content: { enemies: { configRevision: "enemies-admin-test", enemies: { "rainbow-dart": { minStage: 25 } } } } },
+    { content: { enemies: { configRevision: "enemies-admin-test", projectileMode: "off", enemies: { "rainbow-dart": { minStage: 25 } } } } },
     contract,
   );
   assert.deepEqual(envelope, {
@@ -25,13 +25,15 @@ test("builds a published Enemy runtime envelope", () => {
     applyBoundary: "new-session",
     policy: {
       configRevision: "enemies-admin-test",
+      projectileMode: "off",
       enemies: { "rainbow-dart": { minStage: 25 } },
     },
   });
 });
 
-test("uses the safe empty Enemy policy for legacy revisions", () => {
+test("uses the safe adaptive Enemy policy for legacy revisions", () => {
   const envelope = createEnemyRuntimeEnvelope({ activeRevision: "legacy" }, {}, contract);
   assert.equal(envelope.policy.configRevision, "enemies-admin-v1");
+  assert.equal(envelope.policy.projectileMode, "auto");
   assert.deepEqual(envelope.policy.enemies, {});
 });
