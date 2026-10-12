@@ -25,6 +25,9 @@ import { createShopCapabilityManifest } from "./shop-capability.mjs";
 import { createCurrencyCapabilityManifest } from "./currency-capability.mjs";
 import { createDeveloperToolsManifest } from "./developer-tools.mjs";
 import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-assets.mjs";
+import { MediaAssetStore } from "./media-assets-v2.mjs";
+import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
+import { createMediaV2HttpHandler } from "./media-http.mjs";
 import {
   ADMIN_PERMISSIONS,
   AdminAuthorizationError,
@@ -51,8 +54,11 @@ const dailyWeeklyContract = JSON.parse(await readFile(resolve(root, "games/space
 const adminDataDir = process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing");
 const store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract });
 const musicAssets = new MusicAssetService({ rootDir: root });
+const mediaAssetsV2 = new MediaAssetStore({ rootDir: adminDataDir });
 const auditLog = new LocalAdminAuditLog({ rootDir: adminDataDir });
 await store.initialize(createDefaultSpaceTypingConfig(contract));
+await mediaAssetsV2.initialize();
+await bootstrapMediaReferences({ store: mediaAssetsV2, childRoot: resolve(root, "games/space-typing") });
 const host = "127.0.0.1";
 const port = Number.parseInt(process.env.TYPING_GAME_ADMIN_PORT || "3199", 10);
 const token = process.env.TYPING_GAME_ADMIN_TOKEN || "local-dev";
@@ -109,6 +115,11 @@ const mutationAuditBase = {
   auditLog,
   onAuditError: reportAuditDegradation,
 };
+const handleMediaV2Request = createMediaV2HttpHandler({
+  store: mediaAssetsV2,
+  auditLog,
+  onAuditError: reportAuditDegradation,
+});
 
 async function revisionChangeScope(revisionId) {
   const target = await store.getRevision(revisionId);
@@ -163,6 +174,7 @@ const server = createServer(async (request, response) => {
     }
 
     const actor = createLocalAdminActorFromRequest(request);
+    if (await handleMediaV2Request({ request, response, url, actor })) return;
 
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/actor") {
       json(response, 200, actor);
