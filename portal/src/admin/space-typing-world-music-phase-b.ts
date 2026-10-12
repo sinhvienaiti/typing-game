@@ -8,6 +8,7 @@ import {
   type WorldMusicPolicyEntry,
   type WorldMusicPreview,
 } from "./api";
+import { adminErrorMessage } from "./admin-http";
 
 const BASE = "/admin/space-typing";
 const api = new SpaceTypingAdminApi();
@@ -194,6 +195,7 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   page.append(head);
 
   const runtimeStatus = notice("Loading active World Music policy and canonical child preview…", "info");
+  runtimeStatus.setAttribute("aria-live", "polite");
   page.append(runtimeStatus);
   page.append(notice("B04.2 safety: every editable scope is persisted in the child-owned policy shape and previewed through the same canonical resolver before an immutable draft can be saved.", "info"));
 
@@ -205,6 +207,7 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   let galaxyId = 1;
   let stageNumber = 1;
   let slot: Slot = "normal";
+  let serviceReady = false;
 
   const scopePanel = panel("Canonical Scope", "Global → Galaxy → World → Stage; State is selected in the assignment tabs");
   const scopeBody = el("div", "st-admin-panel-pad");
@@ -296,20 +299,23 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
     ] as const) {
       control.classList.toggle("active", scope === value);
       control.setAttribute("aria-pressed", String(scope === value));
+      control.disabled = !serviceReady;
     }
-    galaxySelect.disabled = scope !== "galaxy";
-    worldSelect.disabled = scope !== "world";
-    stageInput.disabled = scope !== "stage";
-    inheritButton.disabled = scope === "global";
+    galaxySelect.disabled = !serviceReady || scope !== "galaxy";
+    worldSelect.disabled = !serviceReady || scope !== "world";
+    stageInput.disabled = !serviceReady || scope !== "stage";
+    inheritButton.disabled = !serviceReady || scope === "global";
+    replaceButton.disabled = !serviceReady;
     inheritButton.title = scope === "global"
       ? "Global has no parent scope to inherit from."
       : "Inherit from the next broader canonical scope.";
+    for (const control of slotButtons.values()) control.disabled = !serviceReady;
   };
 
   const renderEffective = (): void => {
     effectiveBody.replaceChildren();
     if (preview === null) {
-      effectiveBody.append(notice("Preview not loaded yet.", "info"));
+      effectiveBody.append(notice(serviceReady ? "Preview not loaded yet." : "Load the active policy to inspect its effective preview.", "info"));
       return;
     }
     const world = preview.worlds.find((entry) => entry.worldId === worldId) ?? preview.worlds[0];
@@ -361,23 +367,23 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
     replaceButton.classList.toggle("active", kind === "replace");
     inheritButton.setAttribute("aria-pressed", String(kind === "inherit"));
     replaceButton.setAttribute("aria-pressed", String(kind === "replace"));
-    selectionMode.disabled = kind !== "replace";
+    selectionMode.disabled = !serviceReady || kind !== "replace";
     selectionMode.value = assignment?.kind === "replace" ? assignment.selectionMode ?? "shuffle-bag" : "shuffle-bag";
 
     const selected = new Set(assignment?.kind === "replace" ? assignment.trackIds : []);
     const options = previewTracks(preview, draftPolicy);
     trackPicker.replaceChildren();
     if (options.length === 0) {
-      trackPicker.append(notice("No canonical tracks are available from the preview yet.", "warn"));
+      trackPicker.append(notice(serviceReady ? "No canonical tracks are available from the preview yet." : "Load the active policy before editing assignments.", "warn"));
     }
     for (const option of options) {
       const row = el("label", "stx-music-track");
       const input = el("input") as HTMLInputElement;
       input.type = "checkbox";
       input.checked = selected.has(option.id);
-      input.disabled = kind !== "replace";
-      const copy = el("span");
-      copy.append(el("strong", undefined, option.title), el("small", undefined, option.id));
+      input.disabled = !serviceReady || kind !== "replace";
+      const trackCopy = el("span");
+      trackCopy.append(el("strong", undefined, option.title), el("small", undefined, option.id));
       input.addEventListener("change", () => {
         const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
         const ids = new Set(current?.kind === "replace" ? current.trackIds : []);
@@ -389,13 +395,16 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
         });
         syncEditor();
       });
-      row.append(input, copy, badge(input.checked ? "SELECTED" : "AVAILABLE", input.checked ? "good" : "info"));
+      row.append(input, trackCopy, badge(input.checked ? "SELECTED" : "AVAILABLE", input.checked ? "good" : "info"));
       trackPicker.append(row);
     }
     renderEffective();
   };
 
   const validateDraft = async (): Promise<void> => {
+    if (!serviceReady || loadedActiveRevision === null) {
+      throw new Error("Load the active World Music policy before validating a draft.");
+    }
     runtimeStatus.className = "st-admin-info-banner info";
     runtimeStatus.textContent = "Validating draft through child canonical World Music resolver…";
     preview = await api.previewWorldMusic({
@@ -411,9 +420,10 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   };
 
   const refreshScopePreview = (): void => {
+    if (!serviceReady) return;
     void validateDraft().catch((error: unknown) => {
       runtimeStatus.className = "st-admin-info-banner bad";
-      runtimeStatus.textContent = `Preview rejected: ${error instanceof Error ? error.message : String(error)}`;
+      runtimeStatus.textContent = adminErrorMessage(error, "The World Music preview could not be refreshed. Check the local Admin runtime and try again.");
     });
   };
   globalButton.addEventListener("click", () => { scope = "global"; syncEditor(); refreshScopePreview(); });
@@ -442,11 +452,12 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   });
   for (const [value, control] of slotButtons) control.addEventListener("click", () => { slot = value; syncEditor(); });
   inheritButton.addEventListener("click", () => {
-    if (scope === "global") return;
+    if (scope === "global" || !serviceReady) return;
     writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, { kind: "inherit" });
     syncEditor();
   });
   replaceButton.addEventListener("click", () => {
+    if (!serviceReady) return;
     const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
     writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, {
       kind: "replace",
@@ -457,18 +468,20 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
   });
   selectionMode.addEventListener("change", () => {
     const current = readAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot);
-    if (current?.kind !== "replace") return;
+    if (!serviceReady || current?.kind !== "replace") return;
     writeAssignment(draftPolicy, scope, worldId, galaxyId, stageNumber, slot, { ...current, selectionMode: selectionMode.value as PlaylistSelectionMode });
   });
 
   const saveBar = el("div", "st-admin-sticky-save");
-  const saveStatus = el("span", undefined, "Save Draft validates Global/Galaxy/World/Stage policy · Publish remains explicit");
+  const saveStatus = el("span", undefined, "Load the active policy before validating or saving a draft");
   const validateButton = btn("Validate Draft", () => void validateDraft().catch((error: unknown) => {
     runtimeStatus.className = "st-admin-info-banner bad";
-    runtimeStatus.textContent = `Preview rejected: ${error instanceof Error ? error.message : String(error)}`;
+    runtimeStatus.textContent = adminErrorMessage(error, "The World Music draft could not be validated. Check the local Admin runtime and try again.");
   }));
+  validateButton.disabled = true;
   const saveButton = btn("Save Draft", () => void (async () => {
     saveButton.disabled = true;
+    validateButton.disabled = true;
     saveStatus.textContent = "Validating canonical policy before immutable draft…";
     try {
       await validateDraft();
@@ -490,33 +503,73 @@ export function renderPhaseBWorldMusic(navigate: Navigate): HTMLElement {
       runtimeStatus.className = "st-admin-info-banner good";
       runtimeStatus.textContent = `World Music draft ${revision.revision} created. Publish is still required; active playback remains on ${payload.state.activeRevision}.`;
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : String(error);
+      const message = error instanceof Error ? error.message : "The World Music draft could not be saved.";
       saveStatus.textContent = `Draft rejected · ${message}`;
       runtimeStatus.className = "st-admin-info-banner bad";
       runtimeStatus.textContent = `Validation/save failed: ${message}`;
     } finally {
-      saveButton.disabled = false;
+      saveButton.disabled = !serviceReady;
+      validateButton.disabled = !serviceReady;
     }
   })(), "st-admin-btn primary");
+  saveButton.disabled = true;
   saveBar.append(el("strong", undefined, "B04.2 World Music Draft"), saveStatus, el("div", "grow"), btn("Discard", () => navigate(`${BASE}/world-music`)), validateButton, saveButton);
   page.append(saveBar);
 
-  void api.getState().then(async (payload) => {
-    loadedActiveRevision = payload.state.activeRevision;
-    revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
-    draftPolicy = clonePolicy(payload.active.config.worldMusic.publishedPolicy, payload.state.activeRevision);
-    preview = await api.previewWorldMusic({ publishedPolicy: payload.active.config.worldMusic.publishedPolicy, musicMode: "map" });
-    runtimeStatus.className = "st-admin-info-banner good";
-    runtimeStatus.textContent = payload.active.config.worldMusic.publishedPolicy === undefined
-      ? "Loaded generated/legacy World Music fallback. First B04.2 draft can author Global/Galaxy/World/Stage scopes."
-      : `Loaded active published World Music policy · ${payload.active.config.worldMusic.publishedPolicy.configRevision}`;
+  let loadGeneration = 0;
+  const loadState = (): void => {
+    const generation = ++loadGeneration;
+    serviceReady = false;
+    loadedActiveRevision = null;
+    preview = null;
+    revisionBadge.className = "st-admin-status info";
+    revisionBadge.textContent = "ACTIVE · loading";
+    runtimeStatus.className = "st-admin-info-banner info";
+    runtimeStatus.textContent = "Loading active World Music policy and canonical child preview…";
+    saveStatus.textContent = "Load the active policy before validating or saving a draft";
+    validateButton.disabled = true;
+    saveButton.disabled = true;
     syncEditor();
-  }).catch((error: unknown) => {
-    runtimeStatus.className = "st-admin-info-banner bad";
-    runtimeStatus.textContent = `Admin/preview service unavailable: ${error instanceof Error ? error.message : String(error)}`;
-  });
+
+    void api.getState().then(async (payload) => {
+      const nextPolicy = clonePolicy(payload.active.config.worldMusic.publishedPolicy, payload.state.activeRevision);
+      const nextPreview = await api.previewWorldMusic({ publishedPolicy: payload.active.config.worldMusic.publishedPolicy, musicMode: "map" });
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = payload.state.activeRevision;
+      draftPolicy = nextPolicy;
+      preview = nextPreview;
+      serviceReady = true;
+      revisionBadge.className = "st-admin-status good";
+      revisionBadge.textContent = `ACTIVE · ${payload.state.activeRevision}`;
+      runtimeStatus.className = "st-admin-info-banner good";
+      runtimeStatus.textContent = payload.active.config.worldMusic.publishedPolicy === undefined
+        ? "Loaded generated/legacy World Music fallback. First B04.2 draft can author Global/Galaxy/World/Stage scopes."
+        : `Loaded active published World Music policy · ${payload.active.config.worldMusic.publishedPolicy.configRevision}`;
+      saveStatus.textContent = "Save Draft validates Global/Galaxy/World/Stage policy · Publish remains explicit";
+      validateButton.disabled = false;
+      saveButton.disabled = false;
+      syncEditor();
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      serviceReady = false;
+      loadedActiveRevision = null;
+      revisionBadge.className = "st-admin-status bad";
+      revisionBadge.textContent = "ACTIVE · unavailable";
+      validateButton.disabled = true;
+      saveButton.disabled = true;
+      runtimeStatus.className = "st-admin-info-banner bad";
+      runtimeStatus.replaceChildren();
+      runtimeStatus.append(document.createTextNode(adminErrorMessage(
+        error,
+        "The active World Music policy or canonical preview could not be loaded. Check the local Admin runtime and try again.",
+      )));
+      runtimeStatus.append(document.createTextNode(" "), btn("Retry", loadState, "st-admin-btn"));
+      syncEditor();
+    });
+  };
 
   updateScopeState();
   syncEditor();
+  loadState();
   return page;
 }
