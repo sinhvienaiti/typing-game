@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("portal/src/admin/contracts/space-typing-admin.v1.json"));
-const [campaignSource, combatSource, creditsSource, currenciesSource, lootSource, pitySource, gameSource, uiSource, routerSource, phaseMapSource] = await Promise.all([
+const [campaignSource, combatSource, creditsSource, currenciesSource, lootSource, pitySource, gameSource, uiSource, routerSource, phaseMapSource, contractReader] = await Promise.all([
   read("games/space-typing/src/rewards/campaign-rewards.ts"),
   read("games/space-typing/src/rewards/combat-credit-drops.ts"),
   read("games/space-typing/src/economy/credits.ts"),
@@ -17,6 +17,7 @@ const [campaignSource, combatSource, creditsSource, currenciesSource, lootSource
   read("portal/src/admin/space-typing-rewards-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
   read("admin/space-typing-phase-b-map.v1.json"),
+  read("portal/src/admin/space-typing-contract-reader.ts"),
 ]);
 
 const rewards = contract.rewards;
@@ -78,10 +79,15 @@ for (const symbol of ["createLuckPityState", "sanitizeLuckPityState", "luckAdjus
 }
 for (const symbol of ["onEquipmentDrop", "onLuckPityUpdate", "onCombatCreditReward"]) assert(gameSource.includes(symbol), `Missing gameplay mutation evidence ${symbol}`);
 
-assert(uiSource.includes("/api/admin/space-typing/contract"), "Rewards UI must read the authenticated canonical child contract");
+assert(uiSource.includes("readMainAdminContractSection"), "Rewards UI must use the shared validated main-contract reader");
+assert(uiSource.includes('readMainAdminContractSection<RewardsContract>("rewards", "rewards.read"'), "Rewards UI must request the rewards section behind rewards.read");
+assert(contractReader.includes('/api/admin/space-typing/contract'), "Shared contract reader must target the authenticated canonical child contract");
+assert(contractReader.includes('api.requestJson<unknown>'), "Shared contract reader must use safe JSON transport");
+assert(contractReader.includes('Array.isArray(payload["capabilities"])'), "Shared contract reader must validate capabilities before lookup");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Rewards UI must make its read-only boundary explicit");
 assert(uiSource.includes("Code-owned policy fields"), "Rewards UI must expose code-owned policy ownership");
 assert(uiSource.includes("Canonical wallet commit required"), "Rewards UI must expose the real wallet boundary");
+assert(uiSource.includes("renderAdminFailureState"), "Rewards UI must expose a retryable failure state");
 assert(!uiSource.includes("Save Draft"), "Rewards UI must not fabricate authoring");
 assert(!uiSource.includes("api.createRevision"), "Rewards UI must not create config revisions");
 assert(!uiSource.includes("rewards.preview"), "Rewards UI must not fabricate preview capability");
@@ -94,4 +100,4 @@ assert.equal(rewardsMap?.persistence, "child-runtime-policy");
 assert.equal(rewardsMap?.applyBoundary, "none");
 assert.equal(rewardsMap?.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Rewards & Drops Admin validation passed: canonical runtime evidence, read-only policy boundary, no synthetic authoring or preview.");
+console.log("Space Typing Rewards & Drops Admin validation passed: canonical runtime evidence, safe shared contract reader, read-only policy boundary, no synthetic authoring or preview.");
