@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("portal/src/admin/contracts/space-typing-admin.v1.json"));
-const [missionSource, saveSource, objectiveSource, mainSource, gameSource, childAudit, childCi, uiSource, routerSource, dailyWeeklySource] = await Promise.all([
+const [missionSource, saveSource, objectiveSource, mainSource, gameSource, childAudit, childCi, uiSource, routerSource, dailyWeeklySource, contractReaderSource] = await Promise.all([
   read("games/space-typing/src/progression/missions.ts"),
   read("games/space-typing/src/persistence/player-save.ts"),
   read("games/space-typing/src/events/objectives.ts"),
@@ -17,6 +17,7 @@ const [missionSource, saveSource, objectiveSource, mainSource, gameSource, child
   read("portal/src/admin/space-typing-missions-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
   read("portal/src/admin/space-typing-daily-weekly-phase-b.ts"),
+  read("portal/src/admin/space-typing-contract-reader.ts"),
 ]);
 
 const missions = contract.missions;
@@ -64,7 +65,11 @@ assert(childAudit.includes("claimMission"), "Child Missions audit must exercise 
 assert(childAudit.includes("Space Typing Admin Missions audit OK"), "Child Missions audit success marker missing");
 assert(childCi.includes("Audit Missions contract") && childCi.includes("pnpm missions:audit"), "Child CI must run Missions audit");
 
-assert(uiSource.includes("/api/admin/space-typing/contract"), "Missions UI must read the authenticated child contract");
+assert(uiSource.includes("readMainAdminContractSection"), "Missions UI must use the shared canonical main-contract reader");
+assert(uiSource.includes('readMainAdminContractSection<MissionsContract>("missions", "missions.read"'), "Missions UI must request the missions section behind the missions.read capability");
+assert(contractReaderSource.includes('"/api/admin/space-typing/contract"'), "Shared main-contract reader must read the authenticated child contract endpoint");
+assert(contractReaderSource.includes('payload["capabilities"]') && contractReaderSource.includes("capabilities.includes(capability)"), "Shared main-contract reader must validate capabilities only after receiving a valid canonical contract payload");
+assert(contractReaderSource.includes("requestJson<unknown>"), "Shared main-contract reader must use the safe Admin JSON transport");
 assert(uiSource.includes("Progression Missions"), "Missions UI must expose canonical progression missions");
 assert(uiSource.includes("Stage Objectives"), "Missions UI must expose canonical stage objectives");
 assert(uiSource.includes("PlayerSave.progression") || uiSource.includes("missionPersistenceOwner"), "Missions UI must expose progression persistence ownership");
@@ -84,4 +89,4 @@ assert(dailyWeeklySource.includes("No synthetic live-ops authoring"), "Daily / W
 assert(dailyWeeklySource.includes("weekly.readableState"), "Daily / Weekly must expose the canonical Weekly readable-state contract");
 assert(!dailyWeeklySource.includes("+ New Rotation"), "Daily / Weekly runtime-boundary UI must not expose fake authoring actions");
 
-console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; Daily/Weekly links to the canonical Daily + Weekly read-only runtime boundary.");
+console.log("Space Typing Missions Admin validation passed: progression missions + Stage Objectives match canonical runtime; safe main-contract reader is enforced; Daily/Weekly links to the canonical Daily + Weekly read-only runtime boundary.");
