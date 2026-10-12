@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
@@ -63,6 +64,7 @@ const v2Help = read(v2HelpFile);
 const v2Css = read(v2CssFile);
 const phaseMap = JSON.parse(read(phaseMapFile));
 const pkg = JSON.parse(read(packageFile));
+const developerManifest = createDeveloperToolsManifest();
 
 const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
@@ -100,23 +102,56 @@ const routes = [
   ["QA Sandbox", "/qa"],
 ];
 
-assert(Array.isArray(phaseMap.screens), "Phase B map screens are missing");
-assert(phaseMap.screens.length === routes.length, `Phase B map must contain exactly ${routes.length} registered screens during the A1 migration`);
+const primaryRoutes = new Map([
+  ["Overview", ""],
+  ["Audio Defaults", "/audio"],
+  ["Music Library", "/music-library"],
+  ["World / Stage Music", "/world-music"],
+  ["Ships", "/ships"],
+  ["Equipment", "/equipment"],
+  ["Skills", "/skills"],
+  ["Enemies", "/enemies"],
+  ["Bosses", "/bosses"],
+  ["Worlds & Stages", "/stages"],
+  ["Typing Content", "/typing-content"],
+  ["General Settings", "/settings"],
+  ["History & Publish", "/history"],
+]);
+const developerRoutes = new Map(routes.filter(([label]) => !primaryRoutes.has(label)));
+const developerManifestPaths = new Set(
+  developerManifest.sections.flatMap((section) => section.tools.map((tool) => tool.path)),
+);
 
-for (const [label, suffix] of routes) {
-  assert(main.includes(`label: "${label}"`), `Navigation is missing ${label}`);
+assert(Array.isArray(phaseMap.screens), "Phase B map screens are missing");
+assert(phaseMap.screens.length === routes.length, `Phase B map must contain exactly ${routes.length} registered legacy/canonical routes during A2 migration`);
+
+// A2 navigation contract: administrator workflows stay in primary navigation; technical/read-only routes remain reachable through permission-gated Developer Tools.
+for (const [label, suffix] of primaryRoutes) {
+  assert(main.includes(`label: "${label}"`), `Primary administrator navigation is missing ${label}`);
   if (suffix === "") {
-    assert(main.includes('path: ADMIN_BASE'), "Overview canonical navigation path is missing");
+    assert(main.includes("path: ADMIN_BASE"), "Overview canonical primary path is missing");
   } else {
-    assert(main.includes(`path: \`\${ADMIN_BASE}${suffix}\``), `Navigation path is missing ${label} (${suffix})`);
+    assert(main.includes(`path: \`\${ADMIN_BASE}${suffix}\``), `Primary administrator navigation path is missing ${label} (${suffix})`);
   }
-  assert(command.includes(`"${label}"`), `Command palette is missing ${label}`);
+  assert(command.includes(`"${label}"`), `Primary command palette is missing ${label}`);
 }
 
-// The shell must still delegate to the canonical Phase B runtime owners while V2 migrates presentation incrementally.
-assert(main.includes('const phaseB = renderPhaseBAdminScreen(path, this.navigate);'), "Main Admin shell does not delegate to the Phase B router");
+for (const [label, suffix] of developerRoutes) {
+  const absolutePath = `/admin/space-typing${suffix}`;
+  assert(!main.includes(`label: "${label}"`), `${label} must not be restored as a primary administrator navigation item`);
+  assert(command.includes(`"${label}"`), `Developer command palette is missing ${label}`);
+  assert(developerManifestPaths.has(absolutePath), `Developer Tools manifest is missing ${label} (${absolutePath})`);
+  assert(main.includes(`\`${"${ADMIN_BASE}"}${suffix}\``) || main.includes(`\`${"${ADMIN_BASE}"}${suffix}\``), `Legacy breadcrumb/direct-route metadata is missing ${label} (${suffix})`);
+}
+assert(main.includes('label: "Developer Tools"'), "Primary navigation is missing permission-gated Developer Tools entry");
+assert(main.includes('requiredPermission: DEVELOPER_PERMISSION'), "Developer Tools primary entry is not permission-gated");
+
+// The shell must still delegate to canonical Phase B runtime owners while V2 migrates presentation incrementally.
+assert(main.includes('const phaseB = renderPhaseBAdminScreen(path, this.navigate);'), "Main Admin shell does not delegate legacy/direct routes to the Phase B router");
 assert(main.includes('if (phaseB !== null) return phaseB;'), "Main Admin shell does not return the canonical Phase B renderer result");
-assert(!main.includes('if (path === ADMIN_BASE) return this.renderOverview()'), "Legacy mock Overview still preempts Phase B telemetry");
+assert(main.includes('if (path === ADMIN_BASE) return renderAdminV2Dashboard'), "Admin root does not render the real-data V2 Dashboard before Phase B fallback");
+assert(main.includes('if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools'), "Developer Tools hub route is missing");
+assert(!main.includes('if (path === ADMIN_BASE) return this.renderOverview()'), "Legacy mock Overview still preempts Dashboard V2");
 assert(!main.includes('renderExtendedAdminScreen'), "Legacy extended renderer remains reachable from the production Admin shell");
 assert(!main.includes('renderWorldMusicV2'), "Legacy World Music mock renderer remains reachable from the production Admin shell");
 assert(!main.includes('renderDailyWeekly'), "Legacy Daily/Weekly mock renderer remains reachable from the production Admin shell");
@@ -126,7 +161,7 @@ assert(!main.includes('UI MOCK DATA'), "Production Admin shell still advertises 
 assert(main.includes('return this.renderUnknown(path);'), "Unknown-route guard is missing");
 assert(main.includes('if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;'), "Legacy Feature Flags alias is not normalized to canonical Feature Gates route");
 
-// A1 shell behavior: permanent developer-style helper copy is replaced with reusable contextual help.
+// A1/A2 shell behavior: permanent developer-style helper copy is replaced with reusable contextual help.
 assert(main.includes('import "./v2/admin-v2.css";'), "Admin V2 styles are not loaded by the canonical shell");
 assert(main.includes('AdminHelpScope'), "Canonical shell does not use the Admin V2 help scope");
 assert(main.includes('this.help.tooltip(groupButton'), "Navigation groups are missing shared tooltip help");
@@ -174,8 +209,8 @@ for (const file of forbiddenLegacyFiles) {
   assert(!exists(file), `Dead legacy Admin module must be removed: ${file}`);
 }
 
-// Canonical root and critical routes must resolve to their runtime-backed Phase B owners.
-assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);'), "Overview/Analytics are not routed to runtime telemetry");
+// Canonical critical routes must still resolve to their runtime-backed owners even after leaving primary navigation.
+assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);'), "Overview/Analytics canonical telemetry owner is missing");
 assert(router.includes('if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();'), "Music Library is not routed to the runtime catalog surface");
 assert(router.includes('if (path === `${BASE}/daily-weekly`) return renderPhaseBDailyWeekly();'), "Daily/Weekly is not routed to the canonical runtime-boundary surface");
 assert(router.includes('if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();'), "Feature Gates canonical/legacy route handling is missing");
@@ -197,7 +232,9 @@ assert(history.includes('validateRevision'), "History/Publish screen does not va
 assert(command.includes('metaKey || event.ctrlKey'), "Cmd/Ctrl+K command shortcut is missing");
 assert(command.includes('currentCleanup'), "Command palette listener cleanup is missing");
 assert(command.includes('event.key === "Tab"') && command.includes('previousFocus') && command.includes('focusTarget?.focus()'), "Command palette keyboard focus trap/restoration is missing");
-assert(command.includes('`${BASE}/feature-gates`'), "Command palette still targets the legacy /flags route");
+assert(command.includes('`${BASE}/feature-gates`'), "Permission-aware command palette lost the Feature Gates direct route");
+assert(command.includes('const PRIMARY_COMMANDS =') && command.includes('const DEVELOPER_COMMANDS ='), "Command palette does not separate administrator and developer concepts");
+assert(command.includes('options.includeDeveloperTools'), "Developer commands are not permission-aware");
 assert(icons.includes('createElementNS'), "Line SVG Admin icon renderer is missing");
 assert(css.includes(':focus-visible'), "Admin focus-visible accessibility style is missing");
 assert(css.includes('prefers-reduced-motion'), "Admin reduced-motion handling is missing");
@@ -228,4 +265,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Space Typing Admin UI contract: PASS (${routes.length} Phase B routes preserved during A1 + canonical runtime routing + Admin V2 contextual help + accessibility/regression guards).`);
+console.log(`Space Typing Admin UI contract: PASS (${routes.length} canonical Phase B routes preserved; administrator primary navigation separated from permission-gated Developer Tools).`);
