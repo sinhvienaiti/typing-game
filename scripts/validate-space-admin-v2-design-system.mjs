@@ -6,9 +6,12 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (file) => readFile(resolve(root, file), "utf8");
 
-const [help, components, styles, shell] = await Promise.all([
+const [help, components, dialog, componentStyles, dialogStyles, styles, shell] = await Promise.all([
   read("portal/src/admin/v2/admin-help.ts"),
   read("portal/src/admin/v2/admin-components.ts"),
+  read("portal/src/admin/v2/admin-dialog.ts"),
+  read("portal/src/admin/v2/admin-components.css"),
+  read("portal/src/admin/v2/admin-dialog.css"),
   read("portal/src/admin/v2/admin-v2.css"),
   read("portal/src/admin/space-typing.ts"),
 ]);
@@ -47,6 +50,7 @@ for (const primitive of [
   "createAdminSkeleton",
   "createAdminSearchInput",
   "createAdminFilterBar",
+  "createAdminCardGrid",
   "createAdminStatusChip",
   "createAdminDraftBar",
   "createAdminEntityTable",
@@ -59,6 +63,20 @@ assert.match(components, /type = "search"/, "Search primitive must use a semanti
 assert.match(components, /Review Changes/, "Draft lifecycle bar must support reviewing complete change scope before publish.");
 assert.match(components, /publishDisabled/, "Draft lifecycle bar must support blocking unsafe publish actions.");
 assert.match(components, /th\.scope = "col"/, "Entity table headers must expose column scope.");
+assert.match(components, /import "\.\/admin-components\.css";/, "Shared components must own their card-grid styling.");
+assert.match(componentStyles, /\.st-admin-v2-card-grid/, "Admin V2 card-grid styling is missing.");
+
+// Confirmation/destructive dialog foundation.
+assert.match(dialog, /export function openAdminConfirmDialog/, "Admin V2 confirmation dialog primitive is missing.");
+assert.match(dialog, /setAttribute\("role",\s*"alertdialog"\)/, "Confirmation dialog must expose alertdialog semantics.");
+assert.match(dialog, /aria-modal/, "Confirmation dialog must be modal to assistive technology.");
+assert.match(dialog, /event\.key === "Escape"/, "Confirmation dialog must support Escape dismissal.");
+assert.match(dialog, /event\.key !== "Tab"/, "Confirmation dialog must trap keyboard focus.");
+assert.match(dialog, /previousActive\?\.isConnected/, "Confirmation dialog must restore focus.");
+assert.match(dialog, /confirming = true/, "Confirmation dialog must guard duplicate destructive submissions.");
+assert.match(dialog, /import "\.\/admin-dialog\.css";/, "Confirmation dialog must own its styles.");
+assert.match(dialogStyles, /\.st-admin-v2-dialog\.danger/, "Destructive dialog styling is missing.");
+assert.match(dialogStyles, /\.st-admin-v2-dialog-error/, "Dialog failure feedback styling is missing.");
 
 // Shell integration: concise primary navigation, contextual help, no native-title-only help.
 assert.match(shell, /import "\.\/v2\/admin-v2\.css";/, "Admin shell must load Admin V2 design-system styles.");
@@ -96,4 +114,4 @@ assert.match(styles, /var\(--st-admin-display/, "Admin V2 components must reuse 
 assert.match(styles, /prefers-reduced-motion/, "Admin V2 help must respect reduced-motion preferences.");
 assert.match(styles, /\.st-admin-nav-description\{display:none!important\}/, "Legacy permanent navigation helper copy must stay hidden during A1 migration.");
 
-console.log("Admin V2 A1 help/shared-component foundation: OK");
+console.log("Admin V2 A1 help/shared-component/dialog foundation: OK");
