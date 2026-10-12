@@ -8,14 +8,30 @@ export type AdminFailureStateOptions = {
   onRetry?: () => void;
 };
 
+export type AdminStatusTone = "loading" | "success" | "error" | "info" | "warning";
+
 export function setAdminStatus(
   target: HTMLElement,
   message: string,
-  tone: "loading" | "success" | "error" = "loading",
+  tone: AdminStatusTone = "loading",
 ): void {
   target.textContent = message;
   target.classList.remove("st-admin-notice--error", "st-admin-notice--success");
   target.removeAttribute("aria-busy");
+
+  if (target.classList.contains("stx-notice")) {
+    target.classList.remove("good", "warn", "bad", "info");
+    target.classList.add(
+      tone === "success"
+        ? "good"
+        : tone === "error"
+          ? "bad"
+          : tone === "warning"
+            ? "warn"
+            : "info",
+    );
+  }
+
   if (tone === "loading") {
     target.setAttribute("aria-busy", "true");
     return;
