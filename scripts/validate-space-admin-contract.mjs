@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const VISUALS_AUDITED_CHILD_SHA = "27cee3867462f60a58f404109a59b867b2234c16";
+const VISUALS_AUDITED_CHILD_SHA = "83f80b3d6f640ea1af46e158e25485bc57b31393";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
