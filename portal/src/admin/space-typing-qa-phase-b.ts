@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 
@@ -35,10 +36,7 @@ type QaContractPayload = {
     unsupportedAdminOperations: string[];
   };
 };
-
-type GamesPayload = {
-  games?: Array<{ id?: string; appUrl?: string }>;
-};
+type GamesPayload = { games: Array<{ id: string; appUrl: string }> };
 
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
@@ -48,30 +46,72 @@ function escapeHtml(value: unknown): string {
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 }
-
-async function fetchQaContract(): Promise<QaContractPayload> {
-  const response = await fetch("/api/admin/space-typing/qa/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  if (!response.ok) throw new Error(`QA contract request failed (${response.status})`);
-  const payload = (await response.json()) as QaContractPayload;
-  if (payload.capability !== "qa.execute" || payload.qa?.mode !== "runtime-backed-ephemeral-sandbox") {
-    throw new Error("QA contract is not the canonical isolated Test Lab contract.");
-  }
-  return payload;
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
 }
-
+function stringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "string");
+}
+function validateQaContract(value: unknown): QaContractPayload {
+  if (!isRecord(value) || value["capability"] !== "qa.execute" || !isRecord(value["route"]) || !isRecord(value["qa"])) {
+    throw new Error("QA response does not match the canonical qa.execute contract.");
+  }
+  const qa = value["qa"];
+  if (
+    qa["mode"] !== "runtime-backed-ephemeral-sandbox" ||
+    typeof qa["runtimeOwner"] !== "string" ||
+    !stringArray(qa["runtimeSources"]) ||
+    !isRecord(qa["persistence"]) ||
+    qa["applyBoundary"] !== "new-qa-run" ||
+    qa["sandboxMutationCapability"] !== true ||
+    qa["presetWriteCapability"] !== true ||
+    qa["productionPersistenceWriteCapability"] !== false ||
+    qa["publishCapability"] !== false ||
+    !stringArray(qa["lifecycleActions"]) ||
+    !stringArray(qa["inspection"]) ||
+    !stringArray(qa["catalogDomains"]) ||
+    !isRecord(qa["safety"]) ||
+    !stringArray(qa["unsupportedAdminOperations"])
+  ) {
+    throw new Error("QA response is missing required isolated Test Lab ownership data.");
+  }
+  const persistence = qa["persistence"];
+  const safety = qa["safety"];
+  if (
+    persistence["session"] !== "isolated-in-memory" ||
+    persistence["preset"] !== "test-lab-only-browser-local-storage" ||
+    typeof persistence["presetKey"] !== "string" ||
+    persistence["productionCampaign"] !== "no-write" ||
+    safety["usesProductionGameRuntime"] !== true ||
+    safety["isolatedSessionState"] !== true ||
+    safety["neverAutosavesCampaignProgression"] !== true ||
+    safety["gameMethodsGuardedByTestLabEnabled"] !== true ||
+    safety["productionSaveMutation"] !== false
+  ) {
+    throw new Error("QA response violates the production-save isolation contract.");
+  }
+  return value as unknown as QaContractPayload;
+}
+function validateGamesPayload(value: unknown): GamesPayload {
+  if (!isRecord(value) || !Array.isArray(value["games"])) throw new Error("Game registry response is missing games[].");
+  for (const game of value["games"]) {
+    if (!isRecord(game) || typeof game["id"] !== "string" || typeof game["appUrl"] !== "string") {
+      throw new Error("Game registry contains an invalid game entry.");
+    }
+  }
+  return value as unknown as GamesPayload;
+}
+async function fetchQaContract(): Promise<QaContractPayload> {
+  return validateQaContract(await api.requestJson<unknown>("/api/admin/space-typing/qa/contract"));
+}
 async function resolveSpaceTypingAppUrl(): Promise<string> {
-  const response = await fetch("/games.json", { cache: "no-store" });
-  if (!response.ok) throw new Error(`Game registry request failed (${response.status})`);
-  const payload = (await response.json()) as GamesPayload;
-  const appUrl = payload.games?.find((game) => game.id === "space-typing")?.appUrl;
-  if (!appUrl) throw new Error("Space Typing appUrl is missing from games.json.");
+  const payload = validateGamesPayload(await api.requestJson<unknown>("/games.json"));
+  const appUrl = payload.games.find((game) => game.id === "space-typing")?.appUrl?.trim();
+  if (!appUrl) throw new Error("Space Typing appUrl is missing from the canonical game registry.");
   return appUrl;
 }
-
 function renderList(values: readonly string[]): string {
+  if (values.length === 0) return `<p class="st-admin-notice">None exposed by the canonical contract.</p>`;
   return `<ul>${values.map((value) => `<li><code>${escapeHtml(value)}</code></li>`).join("")}</ul>`;
 }
 
@@ -90,18 +130,27 @@ export function renderPhaseBQa(): HTMLElement {
         <span class="st-admin-badge">PRODUCTION SAVE · NO WRITE</span>
       </div>
     </header>
-    <p class="st-admin-notice" data-qa-status>Loading canonical QA ownership…</p>
+    <p class="st-admin-notice" data-qa-status aria-live="polite">Loading canonical QA ownership…</p>
+    <div data-qa-failure></div>
     <div class="space-admin-grid" data-qa-content></div>
   `;
 
   const status = root.querySelector<HTMLElement>("[data-qa-status]");
+  const failure = root.querySelector<HTMLElement>("[data-qa-failure]");
   const content = root.querySelector<HTMLElement>("[data-qa-content]");
-  if (!status || !content) return root;
+  if (!status || !failure || !content) return root;
 
-  void Promise.all([fetchQaContract(), resolveSpaceTypingAppUrl()])
-    .then(([contract, appUrl]) => {
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    failure.replaceChildren();
+    content.replaceChildren();
+    setAdminStatus(status, "Loading canonical QA ownership and Space Typing launcher…", "loading");
+
+    void Promise.all([fetchQaContract(), resolveSpaceTypingAppUrl()]).then(([contract, appUrl]) => {
+      if (generation !== loadGeneration) return;
       const qa = contract.qa;
-      status.textContent = `${qa.catalogDomains.length} runtime QA domains · isolated session · production persistence closed.`;
+      setAdminStatus(status, `${qa.catalogDomains.length} runtime QA domains · isolated session · production persistence closed.`, "success");
       content.innerHTML = `
         <article class="st-admin-card">
           <div class="st-admin-card__header">
@@ -132,7 +181,7 @@ export function renderPhaseBQa(): HTMLElement {
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Coverage</p><h2>QA Catalog Domains</h2></div></div>
-          <p>${qa.catalogDomains.map((domain) => `<span class="st-admin-chip">${escapeHtml(domain)}</span>`).join(" ")}</p>
+          <p>${qa.catalogDomains.map((domain) => `<span class="st-admin-chip">${escapeHtml(domain)}</span>`).join(" ") || "No domains exposed."}</p>
           <p><strong>Canonical sources:</strong></p>
           ${renderList(qa.runtimeSources)}
         </article>
@@ -143,14 +192,20 @@ export function renderPhaseBQa(): HTMLElement {
       `;
 
       const launch = content.querySelector<HTMLButtonElement>("[data-qa-launch]");
-      launch?.addEventListener("click", () => {
-        window.open(appUrl, "_blank", "noopener,noreferrer");
+      launch?.addEventListener("click", () => window.open(appUrl, "_blank", "noopener,noreferrer"));
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      content.replaceChildren();
+      setAdminStatus(status, "QA Sandbox unavailable. Test Lab launch is disabled.", "error");
+      renderAdminFailureState(failure, {
+        title: "QA Sandbox unavailable",
+        fallbackMessage: "Unable to validate the isolated qa.execute contract and Space Typing launcher. No Test Lab action is available until Retry succeeds.",
+        error,
+        onRetry: load,
       });
-    })
-    .catch((error) => {
-      status.textContent = error instanceof Error ? error.message : "Unable to load QA Sandbox contract.";
-      status.classList.add("st-admin-notice--error");
     });
+  };
 
+  load();
   return root;
 }
