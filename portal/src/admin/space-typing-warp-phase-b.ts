@@ -1,6 +1,6 @@
-import { SpaceTypingAdminApi } from "./api";
+import { isContractRecord, readMainAdminContractSection } from "./space-typing-contract-reader";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
-const api = new SpaceTypingAdminApi();
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type WarpContract = {
@@ -32,7 +32,6 @@ type WarpContract = {
   writeCapability: false;
   previewCapability: false;
 };
-type AdminContract = { capabilities: string[]; warp: WarpContract };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -59,20 +58,28 @@ function panel(title: string, subtitle?: string): HTMLElement {
   return root;
 }
 function listNotice(label: string, values: Array<string | number>, tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
 }
-function minutes(ms: number): string {
-  return `${Math.round(ms / 60_000)} min / Warp`;
+function minutes(ms: number): string { return `${Math.round(ms / 60_000)} min / Warp`; }
+function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((entry) => typeof entry === "string"); }
+function numberArray(value: unknown): value is number[] { return Array.isArray(value) && value.every((entry) => typeof entry === "number" && Number.isFinite(entry)); }
+
+function validWarpContract(value: unknown): value is WarpContract {
+  if (!isContractRecord(value) || value["mode"] !== "runtime-derived-readonly" || typeof value["policyVersion"] !== "string") return false;
+  for (const key of ["runtimeSources", "authorableFields", "runtimeDerivedFields", "sourceFunctions", "transactionFunctions", "codeOwnedPolicyFields"] as const) {
+    if (!stringArray(value[key])) return false;
+  }
+  if (!isContractRecord(value["policy"])) return false;
+  const policy = value["policy"];
+  for (const key of ["activeCap", "reserveCap", "sortieCost", "activeRegenMs", "reserveRegenMs", "refuelAmount", "dailyRefillLimit"] as const) {
+    if (typeof policy[key] !== "number" || !Number.isFinite(policy[key])) return false;
+  }
+  if (!numberArray(policy["refuelPrices"]) || typeof policy["refuelCurrency"] !== "string" || typeof policy["dailyReset"] !== "string") return false;
+  return typeof value["persistenceOwner"] === "string" && typeof value["accountStateOwner"] === "string" && typeof value["sortieCostInvariant"] === "string" && typeof value["auditCommand"] === "string";
 }
+
 async function fetchWarpContract(): Promise<WarpContract> {
-  const response = await fetch("/api/admin/space-typing/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<AdminContract> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Warp contract request failed (${response.status})`);
-  if (!payload.warp || !payload.capabilities?.includes("warp.read")) throw new Error("Pinned child contract does not expose warp.read.");
-  return payload.warp;
+  return readMainAdminContractSection<WarpContract>("warp", "warp.read", validWarpContract);
 }
 
 export function renderPhaseBWarp(navigate: Navigate): HTMLElement {
@@ -94,13 +101,20 @@ export function renderPhaseBWarp(navigate: Navigate): HTMLElement {
   page.append(header);
 
   const status = notice("Loading canonical Warp contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const warp = await fetchWarpContract();
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    content.replaceChildren(notice("Loading canonical Warp policy…", "info"));
+    setAdminStatus(status, "Loading canonical Warp contract…", "loading");
+    void fetchWarpContract().then((warp) => {
+      if (generation !== loadGeneration) return;
       const policy = warp.policy;
-      status.className = "stx-notice good";
-      status.textContent = `${warp.policyVersion} · ${warp.runtimeSources.length} canonical sources · gameplay-only player mutations · Admin writes closed.`;
+      setAdminStatus(status, `${warp.policyVersion} · ${warp.runtimeSources.length} canonical sources · gameplay-only player mutations · Admin writes closed.`, "success");
+      content.replaceChildren();
 
       const capacity = panel("Capacity & Regeneration", "Canonical WARP_POLICY values used by gameplay");
       capacity.append(
@@ -138,7 +152,7 @@ export function renderPhaseBWarp(navigate: Navigate): HTMLElement {
         notice(`Runtime audit: ${warp.auditCommand}`, "good"),
       );
 
-      const boundaries = panel("Admin Boundary", "Policy is code-owned and player mutation is gameplay-only");
+      const boundaries = panel("Admin Boundary", "Unavailable authoring is intentional; policy is code-owned and player mutation is gameplay-only");
       boundaries.append(
         listNotice("Code-owned policy fields", warp.codeOwnedPolicyFields, "warn"),
         notice("Authoring unsupported: no canonical Admin persistence/apply consumer exists for WARP_POLICY, so Save Draft / Publish are intentionally unavailable.", "warn"),
@@ -146,11 +160,19 @@ export function renderPhaseBWarp(navigate: Navigate): HTMLElement {
         notice("Preview unsupported: Admin does not duplicate reconcile/spend/refuel logic or simulate a player wallet.", "info"),
       );
 
-      page.append(capacity, sortie, refuel, ownership, boundaries);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Stamina / Warp contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+      content.append(capacity, sortie, refuel, ownership, boundaries);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Stamina / Warp contract is unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Stamina / Warp unavailable",
+        fallbackMessage: "The canonical Warp contract could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return page;
 }
