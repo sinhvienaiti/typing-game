@@ -10,13 +10,22 @@ const contract = {
   },
 };
 
-test("accepts canonical Enemy stage-admission overrides", () => {
+test("accepts canonical Enemy stage-admission and projectile overrides", () => {
   assert.equal(validateEnemyPolicy({
     configRevision: "enemies-admin-test",
+    projectileMode: "off",
     enemies: {
       "rainbow-dart": { minStage: 25 },
     },
   }, contract).configRevision, "enemies-admin-test");
+
+  for (const mode of ["auto", "off", "on"]) {
+    assert.doesNotThrow(() => validateEnemyPolicy({
+      configRevision: "enemies-admin-test",
+      projectileMode: mode,
+      enemies: {},
+    }, contract));
+  }
 });
 
 test("accepts an empty Enemy override set", () => {
@@ -26,7 +35,7 @@ test("accepts an empty Enemy override set", () => {
   }, contract));
 });
 
-test("rejects unknown IDs, unsupported tuning fields and invalid stage bounds", () => {
+test("rejects unknown IDs, unsupported tuning fields, invalid projectile policy and invalid stage bounds", () => {
   assert.throws(() => validateEnemyPolicy({
     configRevision: "enemies-admin-test",
     enemies: { unknown: { minStage: 20 } },
@@ -35,6 +44,11 @@ test("rejects unknown IDs, unsupported tuning fields and invalid stage bounds", 
     configRevision: "enemies-admin-test",
     enemies: { "rainbow-scout": { hp: 100 } },
   }, contract), /not authorable/);
+  assert.throws(() => validateEnemyPolicy({
+    configRevision: "enemies-admin-test",
+    projectileMode: "boss-only",
+    enemies: {},
+  }, contract), /projectileMode/);
   assert.throws(() => validateEnemyPolicy({
     configRevision: "enemies-admin-test",
     enemies: { "rainbow-scout": { minStage: 0 } },
