@@ -8,6 +8,7 @@ import {
   type ShipVisualProfile,
   type SpaceTypingAdminConfig,
 } from "./api";
+import { adminErrorMessage } from "./admin-http";
 
 const api = new SpaceTypingAdminApi();
 const CORE_STATS: readonly CoreStatKey[] = [
@@ -130,6 +131,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   page.append(header);
 
   const status = notice("Loading active revision and canonical child ship registry…", "info");
+  status.setAttribute("aria-live", "polite");
   const body = el("div", "stx-grid");
   const listPanel = panel("Canonical Fleet", "11 child-owned ship IDs · IDs and asset IDs are immutable");
   const listHost = el("div");
@@ -145,6 +147,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   let activePreview: ShipAdminPreview | null = null;
   let selectedId: ShipId = "vanguard";
   let policy: ShipAdminPolicy = { configRevision: "ships-admin-v1", ships: {} };
+  let serviceReady = false;
+  let loadGeneration = 0;
 
   const setStatus = (text: string, tone: Tone = "info"): void => {
     status.className = `stx-notice ${tone}`;
@@ -169,6 +173,10 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const renderList = (): void => {
     listHost.replaceChildren();
     const ships = bundled?.ships ?? activePreview?.ships ?? [];
+    if (ships.length === 0) {
+      listHost.append(notice(serviceReady ? "No canonical ships were returned by the preview." : "Load the canonical ship registry to browse the fleet.", serviceReady ? "warn" : "info"));
+      return;
+    }
     for (const ship of ships) {
       const current = effectiveShip(ship.id) ?? ship;
       const row = el("div", "stx-toggle-row");
@@ -181,6 +189,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         renderList();
         renderEditor();
       }, selectedId === ship.id ? "st-admin-btn primary" : "st-admin-btn");
+      select.disabled = !serviceReady;
       actions.append(select);
       row.append(copyNode, actions);
       listHost.append(row);
@@ -197,8 +206,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const renderEditor = (): void => {
     editorHost.replaceChildren();
     const ship = effectiveShip(selectedId);
-    if (!ship) {
-      editorHost.append(notice("Ship registry has not finished loading.", "warn"));
+    if (!serviceReady || !ship) {
+      editorHost.append(notice(serviceReady ? "No ship is available for editing." : "Load the active revision and canonical ship preview before editing overrides.", serviceReady ? "warn" : "info"));
       return;
     }
 
@@ -286,38 +295,23 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         setStatus(`${selectedId} reset to bundled child runtime values. Save Draft to persist this removal.`, "good");
       }),
       button("Validate Preview", () => {
+        setStatus("Validating ship overrides against the canonical child preview…", "info");
         void api.previewShips({ policy }).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
           setStatus(`Child canonical preview accepted ${preview.ships.length} ships for ${preview.configRevision}.`, "good");
-        }).catch((error: unknown) => setStatus(`Preview rejected: ${error instanceof Error ? error.message : String(error)}`, "bad"));
+        }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The ship preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
     editorHost.append(metadata, stats, visual, actions);
   };
 
-  void Promise.all([api.getState(), api.previewShips()]).then(async ([statePayload, bundledPreview]) => {
-    loadedActiveRevision = statePayload.state.activeRevision;
-    revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
-    bundled = bundledPreview;
-    policy = policyFrom(statePayload.active.config);
-    activePreview = await api.previewShips({ policy });
-    selectedId = activePreview.ships[0]?.id ?? "vanguard";
-    renderList();
-    renderEditor();
-    setStatus(
-      statePayload.active.config.content?.ships
-        ? `Loaded active Ships policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
-        : "Active revision predates B06.1 Ships policy; bundled child registry is shown until the first draft is saved.",
-      statePayload.active.config.content?.ships ? "good" : "warn",
-    );
-  }).catch((error: unknown) => setStatus(`Ships Admin unavailable: ${error instanceof Error ? error.message : String(error)}`, "bad"));
-
   const saveBar = el("div", "st-admin-sticky-save stx-savebar");
-  const saveStatus = el("span", undefined, "Revision-backed · no direct runtime mutation");
+  const saveStatus = el("span", undefined, "Load the active revision before saving a ship draft");
   const save = button("Save Draft", () => {
     void (async () => {
+      if (!serviceReady) return;
       save.disabled = true;
       saveStatus.textContent = "Validating against child runtime…";
       try {
@@ -337,15 +331,68 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
         setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to make it the active Admin policy; gameplay apply boundary is a new session.`, "good");
       } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : String(error);
+        const message = adminErrorMessage(error, "The Ships draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
         setStatus(`Validation/save failed: ${message}`, "bad");
       } finally {
-        save.disabled = false;
+        save.disabled = !serviceReady;
       }
     })();
   }, "st-admin-btn primary");
+  save.disabled = true;
   saveBar.append(el("strong", undefined, "B06.1 Ships Draft"), saveStatus, el("div", "grow"), button("Discard", () => navigate(location.pathname)), save);
   page.append(saveBar);
+
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    serviceReady = false;
+    loadedActiveRevision = null;
+    bundled = null;
+    activePreview = null;
+    revisionBadge.className = "st-admin-status info";
+    revisionBadge.textContent = "ACTIVE · loading";
+    setStatus("Loading active revision and canonical child ship registry…", "info");
+    saveStatus.textContent = "Load the active revision before saving a ship draft";
+    save.disabled = true;
+    renderList();
+    renderEditor();
+
+    void Promise.all([api.getState(), api.previewShips()]).then(async ([statePayload, bundledPreview]) => {
+      const nextPolicy = policyFrom(statePayload.active.config);
+      const nextActivePreview = await api.previewShips({ policy: nextPolicy });
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = statePayload.state.activeRevision;
+      bundled = bundledPreview;
+      policy = nextPolicy;
+      activePreview = nextActivePreview;
+      serviceReady = true;
+      selectedId = activePreview.ships[0]?.id ?? "vanguard";
+      revisionBadge.className = "st-admin-status good";
+      revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
+      saveStatus.textContent = "Revision-backed · no direct runtime mutation";
+      save.disabled = false;
+      renderList();
+      renderEditor();
+      setStatus(
+        statePayload.active.config.content?.ships
+          ? `Loaded active Ships policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
+          : "Active revision predates B06.1 Ships policy; bundled child registry is shown until the first draft is saved.",
+        statePayload.active.config.content?.ships ? "good" : "warn",
+      );
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      serviceReady = false;
+      loadedActiveRevision = null;
+      revisionBadge.className = "st-admin-status bad";
+      revisionBadge.textContent = "ACTIVE · unavailable";
+      save.disabled = true;
+      listHost.replaceChildren(notice("The canonical fleet could not be loaded. Retry after the local Admin service is available.", "bad"));
+      editorHost.replaceChildren(notice("Ship overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
+      status.className = "stx-notice bad";
+      status.replaceChildren(document.createTextNode(adminErrorMessage(error, "The Ships Admin service is unavailable. Check the local runtime and try again.")), document.createTextNode(" "), button("Retry", load));
+    });
+  };
+
+  load();
   return page;
 }
