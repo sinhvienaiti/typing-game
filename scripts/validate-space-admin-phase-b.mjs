@@ -9,7 +9,9 @@ const api = await readFile(new URL("portal/src/admin/api.ts", root), "utf8");
 const main = await readFile(new URL("portal/src/admin/space-typing.ts", root), "utf8");
 const phaseBRouter = await readFile(new URL("portal/src/admin/space-typing-phase-b.ts", root), "utf8");
 const phaseBCore = await readFile(new URL("portal/src/admin/space-typing-phase-b-core.ts", root), "utf8");
+const settingsPhaseB = await readFile(new URL("portal/src/admin/space-typing-settings-phase-b.ts", root), "utf8");
 const featureGatesPhaseB = await readFile(new URL("portal/src/admin/space-typing-feature-gates-phase-b.ts", root), "utf8");
+const contractReader = await readFile(new URL("portal/src/admin/space-typing-contract-reader.ts", root), "utf8");
 const phaseB = `${phaseBRouter}\n${phaseBCore}`;
 const stagesPhaseB = await readFile(new URL("portal/src/admin/space-typing-stages-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
@@ -97,16 +99,35 @@ assert.match(api, /export type FeatureFlagConfig/);
 assert.match(api, /getRuntime\(\): Promise<AdminRuntimePayload>/);
 assert.match(main, /renderPhaseBAdminScreen/);
 assert.match(main, /if \(phaseB !== null\) return phaseB/);
-assert.match(phaseB, /Admin Phase B · General Settings draft/);
-assert.match(phaseB, /api\.createRevision/);
-assert.doesNotMatch(phaseBRouter, /api\.publish/);
-assert.match(phaseB, /runtime unchanged/);
+
+// General Settings must use the dedicated fail-closed editor before the legacy core fallback.
+assert.match(phaseBRouter, /renderPhaseBSettings/);
+assert.match(phaseBRouter, /\$\{BASE\}\/settings`\) return renderPhaseBSettings\(navigate\)/);
+assert.ok(
+  phaseBRouter.indexOf("`${BASE}/settings`") < phaseBRouter.indexOf("renderPhaseBCoreAdminScreen(path, navigate)"),
+  "General Settings must be intercepted before the legacy core renderer",
+);
+assert.match(settingsPhaseB, /Admin Phase B · General Settings draft/);
+assert.match(settingsPhaseB, /api\.createRevision/);
+assert.doesNotMatch(settingsPhaseB, /api\.publish/);
+assert.match(settingsPhaseB, /loadedActiveRevision/);
+assert.match(settingsPhaseB, /ACTIVE · unavailable/);
+assert.match(settingsPhaseB, /renderAdminFailureState/);
+assert.match(settingsPhaseB, /schema defaults/i);
+assert.match(settingsPhaseB, /runtime unchanged/);
+
+// Feature Gates use the shared validated main-contract reader. The endpoint and
+// capabilities guard belong to that reader rather than being duplicated in every UI module.
 assert.match(phaseBRouter, /renderPhaseBFeatureGates/);
 assert.match(phaseBRouter, /\$\{BASE\}\/feature-gates/);
 assert.match(phaseBRouter, /\$\{BASE\}\/flags/);
 assert.match(featureGatesPhaseB, /RUNTIME-BACKED · READ ONLY/);
 assert.match(featureGatesPhaseB, /NO REMOTE ROLLOUT/);
-assert.match(featureGatesPhaseB, /\/api\/admin\/space-typing\/contract/);
+assert.match(featureGatesPhaseB, /readMainAdminContractSection/);
+assert.match(featureGatesPhaseB, /readMainAdminContractSection\("featureGates", "feature-gates\.read"/);
+assert.match(contractReader, /\/api\/admin\/space-typing\/contract/);
+assert.match(contractReader, /api\.requestJson<unknown>/);
+assert.match(contractReader, /Array\.isArray\(payload\["capabilities"\]\)/);
 assert.doesNotMatch(featureGatesPhaseB, /api\.createRevision/);
 assert.doesNotMatch(featureGatesPhaseB, /api\.publish/);
 assert.doesNotMatch(featureGatesPhaseB, /rolloutPercent/);
@@ -205,4 +226,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, runtime-backed Feature Gates registered read-only).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, fail-closed General Settings, runtime-backed Feature Gates via safe shared contract reader).`);
