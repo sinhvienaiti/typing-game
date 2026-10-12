@@ -2,6 +2,7 @@ import { validateEnemyPolicy } from "./enemy-policy.mjs";
 
 const DEFAULT_ENEMY_POLICY = {
   configRevision: "enemies-admin-v1",
+  projectileMode: "auto",
   enemies: {},
 };
 
