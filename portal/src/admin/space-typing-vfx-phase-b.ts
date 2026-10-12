@@ -111,7 +111,11 @@ export function renderPhaseBVfx(): HTMLElement {
     el("p", undefined, "Inspect production combat, projectile, skill, boss and screen-feedback VFX together with their canonical quality budgets. Tuning remains code-owned until a real apply boundary exists."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("CODE-OWNED TUNING", "info"));
+  actions.append(
+    badge("RUNTIME-BACKED · READ ONLY", "good"),
+    badge("CODE-OWNED TUNING", "info"),
+    badge("NO FAKE VFX PROFILE", "warn"),
+  );
   head.append(copy, actions);
   page.append(head);
 
@@ -161,7 +165,7 @@ export function renderPhaseBVfx(): HTMLElement {
         notice(`Admin preview write capability: ${String(vfx.adminPreviewWriteCapability)}`, "warn"),
         listNotice("Authorable fields", vfx.authorableFields.length > 0 ? vfx.authorableFields : ["none"], "warn"),
         listNotice("Unsupported legacy mock controls", vfx.unsupportedAdminMockFields, "warn"),
-        notice("Scale, intensity, duration, opacity, blend and screen-shake controls stay locked until a real child config consumer and safe apply boundary exist."),
+        notice("NO FAKE VFX PROFILE: scale, intensity, duration, opacity, blend and screen-shake controls stay locked until a real child config consumer and safe apply boundary exist."),
       );
 
       content.replaceChildren(ownership, quality, combat, boundary);
