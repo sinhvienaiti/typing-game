@@ -107,23 +107,56 @@ prepare_space_art() {
   pnpm --dir "$game_dir" art:prepare
 }
 
+print_admin_runtime_log() {
+  local log_file="$1"
+  if [[ -s "$log_file" ]]; then
+    echo
+    echo "--- Last 80 lines of $log_file ---"
+    tail -n 80 "$log_file" || true
+    echo "--- End Admin runtime log ---"
+  else
+    echo "Admin runtime log is empty: $log_file"
+  fi
+}
+
 ensure_admin_runtime_service() {
   local endpoint="http://127.0.0.1:3199/api/runtime/space-typing/ships"
   local log_dir="$ROOT_DIR/.local/admin"
+  local log_file="$log_dir/server.log"
   local pid_file="$log_dir/server.pid"
+  local startup_attempts=80
+  local startup_sleep=0.25
 
   mkdir -p "$log_dir"
   rm -f "$pid_file"
-  nohup node "$ROOT_DIR/admin/server.mjs" >"$log_dir/server.log" 2>&1 &
+
+  # cleanup-dev-ports.sh intentionally leaves processes outside this repository alone.
+  # Detect that case explicitly so Node does not fail later with a vague EADDRINUSE.
+  local existing_pids
+  existing_pids="$(lsof -tiTCP:3199 -sTCP:LISTEN 2>/dev/null || true)"
+  if [[ -n "$existing_pids" ]]; then
+    echo "Port 3199 is still occupied after project cleanup; refusing to replace an unrelated process."
+    lsof -nP -iTCP:3199 -sTCP:LISTEN 2>/dev/null || true
+    echo "Stop the process using port 3199, then run ./play.sh again."
+    exit 1
+  fi
+
+  : >"$log_file"
+  nohup node "$ROOT_DIR/admin/server.mjs" >"$log_file" 2>&1 &
   local server_pid="$!"
   echo "$server_pid" >"$pid_file"
 
   local attempt
-  for attempt in 1 2 3 4 5; do
-    sleep 0.2
+  for ((attempt = 1; attempt <= startup_attempts; attempt++)); do
+    sleep "$startup_sleep"
+
     if ! kill -0 "$server_pid" 2>/dev/null; then
-      break
+      rm -f "$pid_file"
+      echo "Space Typing Admin runtime bridge exited before becoming ready (PID $server_pid)."
+      print_admin_runtime_log "$log_file"
+      exit 1
     fi
+
     if curl -fsS --max-time 1 "$endpoint" >/dev/null 2>&1; then
       echo "  ✓ Admin runtime bridge started from current source (PID $server_pid)."
       return
@@ -131,8 +164,10 @@ ensure_admin_runtime_service() {
   done
 
   rm -f "$pid_file"
-  echo "Unable to start the Space Typing Admin runtime bridge on port 3199."
-  echo "See $log_dir/server.log"
+  kill "$server_pid" 2>/dev/null || true
+  echo "Timed out waiting for the Space Typing Admin runtime bridge on port 3199."
+  echo "The startup probe now waits about 20 seconds to accommodate slower filesystems such as WSL-mounted drives."
+  print_admin_runtime_log "$log_file"
   exit 1
 }
 
