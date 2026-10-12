@@ -54,9 +54,10 @@
     "voice:worker:smoke": "node scripts/voice-worker-smoke.mjs",
     "space:voice:sync": "node scripts/sync-space-voice-contract.mjs",
     "dev:admin": "node admin/server.mjs",
-    "admin:test": "node --test admin/store.test.mjs admin/admin-security.test.mjs",
+    "admin:test": "node --test admin/store.test.mjs admin/admin-security.test.mjs admin/media-assets-v2.test.mjs",
     "admin:v2:foundation:validate": "node scripts/validate-space-admin-v2-foundation.mjs",
     "admin:v2:design-system:validate": "node scripts/validate-space-admin-v2-design-system.mjs",
+    "admin:v2:media:validate": "node scripts/validate-space-admin-v2-media.mjs",
     "admin:contract:validate": "node scripts/validate-space-admin-contract.mjs"
   },
   "devDependencies": {
