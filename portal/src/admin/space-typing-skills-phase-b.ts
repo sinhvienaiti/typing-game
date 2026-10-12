@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
+import { adminErrorMessage } from "./admin-http";
 
 const api = new SpaceTypingAdminApi();
 const SKILL_CATEGORIES = ["offensive", "defensive", "support"] as const;
@@ -120,7 +121,7 @@ function policyFrom(config: SpaceTypingAdminConfig): SkillAdminPolicy {
 }
 
 function mergeSkill(base: SkillAdminPreviewItem, override?: SkillAdminOverride): SkillAdminPreviewItem {
-  const merged: SkillAdminPreviewItem = {
+  return {
     ...base,
     ...(override ?? {}),
     id: base.id,
@@ -130,29 +131,17 @@ function mergeSkill(base: SkillAdminPreviewItem, override?: SkillAdminOverride):
       : override.typingCondition === null ? undefined : { ...override.typingCondition },
     overridden: override !== undefined && Object.keys(override).length > 0,
   };
-  return merged;
 }
 
 async function previewSkills(policy?: SkillAdminPolicy): Promise<SkillAdminPreview> {
-  const response = await fetch("/api/admin/space-typing/skills/preview", {
+  const payload = await api.requestJson<SkillAdminPreview>("/api/admin/space-typing/skills/preview", {
     method: "POST",
-    cache: "no-store",
-    headers: {
-      "content-type": "application/json",
-      "x-typing-game-admin-token": api.getToken(),
-    },
     body: JSON.stringify(policy === undefined ? {} : { policy }),
   });
-  const payload = (await response.json().catch(() => ({}))) as Record<string, unknown>;
-  if (!response.ok) {
-    const message = typeof payload["message"] === "string"
-      ? payload["message"]
-      : typeof payload["error"] === "string"
-        ? payload["error"]
-        : `Skills preview failed (${response.status})`;
-    throw new Error(message);
+  if (payload.protocolVersion !== 1 || !Array.isArray(payload.skills)) {
+    throw new Error("Skills preview response does not match the canonical Admin contract.");
   }
-  return payload as unknown as SkillAdminPreview;
+  return payload;
 }
 
 function valueLabel(value: unknown): string {
@@ -202,6 +191,7 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
   page.append(header);
 
   const status = notice("Loading active revision and canonical child Skill registry…", "info");
+  status.setAttribute("aria-live", "polite");
   const filterBar = el("div", "st-admin-filterbar");
   const search = el("input", "st-admin-search") as HTMLInputElement;
   search.placeholder = "Search skills…";
@@ -227,6 +217,11 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
   let activePreview: SkillAdminPreview | null = null;
   let selectedId = "";
   let policy: SkillAdminPolicy = { configRevision: "skills-admin-v1", skills: {} };
+  let serviceReady = false;
+  let loadGeneration = 0;
+
+  search.disabled = true;
+  categoryFilter.disabled = true;
 
   const setStatus = (text: string, tone: Tone = "info"): void => {
     status.className = `stx-notice ${tone}`;
@@ -248,9 +243,14 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
 
   const renderList = (): void => {
     listHost.replaceChildren();
+    const allSkills = bundled?.skills ?? activePreview?.skills ?? [];
+    if (!serviceReady || allSkills.length === 0) {
+      listHost.append(notice(serviceReady ? "No canonical Skills were returned by the preview." : "Load the canonical Skill registry to browse and filter Skills.", serviceReady ? "warn" : "info"));
+      return;
+    }
     const query = search.value.trim().toLowerCase();
     const category = categoryFilter.value;
-    const skills = (bundled?.skills ?? activePreview?.skills ?? []).filter((skill) => {
+    const skills = allSkills.filter((skill) => {
       const categoryMatch = category === "all" || skill.category === category;
       const queryMatch = query.length === 0 || `${skill.id} ${skill.name} ${skill.category}`.toLowerCase().includes(query);
       return categoryMatch && queryMatch;
@@ -269,11 +269,13 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
       );
       const actions = el("div");
       if (policy.skills?.[skill.id] && Object.keys(policy.skills[skill.id]).length > 0) actions.append(badge("OVERRIDE", "warn"));
-      actions.append(button(selectedId === skill.id ? "Editing" : "Edit", () => {
+      const edit = button(selectedId === skill.id ? "Editing" : "Edit", () => {
         selectedId = skill.id;
         renderList();
         renderEditor();
-      }, selectedId === skill.id ? "st-admin-btn primary" : "st-admin-btn"));
+      }, selectedId === skill.id ? "st-admin-btn primary" : "st-admin-btn");
+      edit.disabled = !serviceReady;
+      actions.append(edit);
       row.append(copyNode, actions);
       listHost.append(row);
     }
@@ -283,8 +285,8 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     editorHost.replaceChildren();
     const base = baseSkill(selectedId);
     const skill = effectiveSkill(selectedId);
-    if (!base || !skill) {
-      editorHost.append(notice("Skill registry has not finished loading.", "warn"));
+    if (!serviceReady || !base || !skill) {
+      editorHost.append(notice(serviceReady ? "No Skill is selected." : "Load the active revision and canonical Skill preview before editing overrides.", serviceReady ? "warn" : "info"));
       return;
     }
 
@@ -367,12 +369,13 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
         setStatus(`${selectedId} reset to bundled child values. Save Draft to persist this removal.`, "good");
       }),
       button("Validate Preview", () => {
+        setStatus("Validating Skill overrides against the canonical child preview…", "info");
         void previewSkills(policy).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
           setStatus(`Child canonical preview accepted ${preview.skills.length} Skills for ${preview.configRevision}.`, "good");
-        }).catch((error: unknown) => setStatus(`Preview rejected: ${error instanceof Error ? error.message : String(error)}`, "bad"));
+        }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Skills preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
 
@@ -382,28 +385,11 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
   search.addEventListener("input", renderList);
   categoryFilter.addEventListener("change", renderList);
 
-  void Promise.all([api.getState(), previewSkills()]).then(async ([statePayload, bundledPreview]) => {
-    loadedActiveRevision = statePayload.state.activeRevision;
-    revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
-    bundled = bundledPreview;
-    policy = policyFrom(statePayload.active.config);
-    activePreview = await previewSkills(policy);
-    selectedId = activePreview.skills[0]?.id ?? "";
-    renderList();
-    renderEditor();
-    const hasPolicy = (statePayload.active.config as SkillAwareConfig).content?.skills !== undefined;
-    setStatus(
-      hasPolicy
-        ? `Loaded active Skills policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
-        : "Active revision predates B06.3 Skills policy; bundled child registry is shown until the first draft is saved.",
-      hasPolicy ? "good" : "warn",
-    );
-  }).catch((error: unknown) => setStatus(`Skills Admin unavailable: ${error instanceof Error ? error.message : String(error)}`, "bad"));
-
   const saveBar = el("div", "st-admin-sticky-save stx-savebar");
-  const saveStatus = el("span", undefined, "Revision-backed · no direct runtime mutation");
+  const saveStatus = el("span", undefined, "Load the active revision before saving a Skills draft");
   const save = button("Save Draft", () => {
     void (async () => {
+      if (!serviceReady) return;
       save.disabled = true;
       saveStatus.textContent = "Validating against child runtime…";
       try {
@@ -423,14 +409,15 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
         setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots the published Skill policy only on the next session.`, "good");
       } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : String(error);
+        const message = adminErrorMessage(error, "The Skills draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
         setStatus(`Validation/save failed: ${message}`, "bad");
       } finally {
-        save.disabled = false;
+        save.disabled = !serviceReady;
       }
     })();
   }, "st-admin-btn primary");
+  save.disabled = true;
   saveBar.append(
     el("strong", undefined, "B06.3 Skills Draft"),
     saveStatus,
@@ -439,5 +426,64 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     save,
   );
   page.append(saveBar);
+
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    serviceReady = false;
+    loadedActiveRevision = null;
+    bundled = null;
+    activePreview = null;
+    revisionBadge.className = "st-admin-status info";
+    revisionBadge.textContent = "ACTIVE · loading";
+    search.disabled = true;
+    categoryFilter.disabled = true;
+    save.disabled = true;
+    saveStatus.textContent = "Load the active revision before saving a Skills draft";
+    setStatus("Loading active revision and canonical child Skill registry…", "info");
+    renderList();
+    renderEditor();
+
+    void Promise.all([api.getState(), previewSkills()]).then(async ([statePayload, bundledPreview]) => {
+      const nextPolicy = policyFrom(statePayload.active.config);
+      const nextPreview = await previewSkills(nextPolicy);
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = statePayload.state.activeRevision;
+      bundled = bundledPreview;
+      policy = nextPolicy;
+      activePreview = nextPreview;
+      selectedId = activePreview.skills[0]?.id ?? "";
+      serviceReady = true;
+      revisionBadge.className = "st-admin-status good";
+      revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
+      search.disabled = false;
+      categoryFilter.disabled = false;
+      save.disabled = false;
+      saveStatus.textContent = "Revision-backed · no direct runtime mutation";
+      renderList();
+      renderEditor();
+      const hasPolicy = (statePayload.active.config as SkillAwareConfig).content?.skills !== undefined;
+      setStatus(
+        hasPolicy
+          ? `Loaded active Skills policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
+          : "Active revision predates B06.3 Skills policy; bundled child registry is shown until the first draft is saved.",
+        hasPolicy ? "good" : "warn",
+      );
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      serviceReady = false;
+      loadedActiveRevision = null;
+      revisionBadge.className = "st-admin-status bad";
+      revisionBadge.textContent = "ACTIVE · unavailable";
+      search.disabled = true;
+      categoryFilter.disabled = true;
+      save.disabled = true;
+      listHost.replaceChildren(notice("The canonical Skill registry could not be loaded. Retry after the local Admin service is available.", "bad"));
+      editorHost.replaceChildren(notice("Skill overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
+      status.className = "stx-notice bad";
+      status.replaceChildren(document.createTextNode(adminErrorMessage(error, "The Skills Admin service is unavailable. Check the local runtime and try again.")), document.createTextNode(" "), button("Retry", load));
+    });
+  };
+
+  load();
   return page;
 }
