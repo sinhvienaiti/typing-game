@@ -63,7 +63,7 @@ test("whole-revision change scope reports every changed domain/path", () => {
   assert.match(scope.publishWarning, /complete target revision/i);
 });
 
-test("audit log records successful and denied mutations with actor attribution", async (t) => {
+test("audit log records attempt and success with resolved revision identity", async (t) => {
   const rootDir = await mkdtemp(join(tmpdir(), "typing-game-admin-audit-"));
   t.after(() => rm(rootDir, { recursive: true, force: true }));
   let event = 0;
@@ -73,6 +73,7 @@ test("audit log records successful and denied mutations with actor attribution",
     idFactory: () => `event-${++event}`,
   });
   const actor = createLocalAdminActor({ actorId: "toan", displayName: "Toan", requestId: "req-1" });
+  const draftScope = { model: "whole-config-revision", baseRevision: "seed-v1", targetRevision: null, domains: ["audio"] };
 
   const result = await runAuthorizedAdminMutation({
     actor,
@@ -81,32 +82,99 @@ test("audit log records successful and denied mutations with actor attribution",
     action: "revision.create",
     domain: "config",
     entityType: "revision",
-    entityId: "draft-1",
-    changeScope: { model: "whole-config-revision", domains: ["audio"] },
-    operation: async () => "ok",
+    changeScope: draftScope,
+    resolveEntityId: (revision) => revision.revision,
+    resolveChangeScope: (revision) => ({ ...draftScope, targetRevision: revision.revision }),
+    operation: async () => ({ revision: "draft-1" }),
   });
-  assert.equal(result, "ok");
+  assert.equal(result.revision, "draft-1");
 
-  const deniedActor = { ...actor, actorId: "viewer", permissions: [] };
+  const events = await auditLog.list();
+  assert.equal(events.length, 2);
+  assert.equal(events[0].result, "success");
+  assert.equal(events[0].entityId, "draft-1");
+  assert.equal(events[0].changeScope.targetRevision, "draft-1");
+  assert.equal(events[0].actor.actorId, "toan");
+  assert.equal(events[0].requestId, "req-1");
+  assert.equal(events[1].result, "attempt");
+});
+
+test("denied mutations are audited and never execute", async (t) => {
+  const rootDir = await mkdtemp(join(tmpdir(), "typing-game-admin-audit-denied-"));
+  t.after(() => rm(rootDir, { recursive: true, force: true }));
+  const auditLog = new LocalAdminAuditLog({ rootDir });
+  const actor = { ...createLocalAdminActor(), actorId: "viewer", permissions: [] };
+  let executed = false;
+
   await assert.rejects(
     runAuthorizedAdminMutation({
-      actor: deniedActor,
+      actor,
       permission: ADMIN_PERMISSIONS.CONFIG_PUBLISH,
       auditLog,
       action: "revision.publish",
       domain: "config",
       entityType: "revision",
       entityId: "draft-1",
-      operation: async () => "should-not-run",
+      operation: async () => {
+        executed = true;
+        return "should-not-run";
+      },
     }),
     AdminAuthorizationError,
   );
 
+  assert.equal(executed, false);
   const events = await auditLog.list();
-  assert.equal(events.length, 2);
+  assert.equal(events.length, 1);
   assert.equal(events[0].result, "denied");
   assert.equal(events[0].actor.actorId, "viewer");
-  assert.equal(events[1].result, "success");
-  assert.equal(events[1].actor.actorId, "toan");
-  assert.equal(events[1].requestId, "req-1");
+});
+
+test("audit attempt failure prevents mutation from running", async () => {
+  let executed = false;
+  const auditLog = {
+    async record() {
+      throw new Error("audit disk unavailable");
+    },
+  };
+
+  await assert.rejects(
+    runAuthorizedAdminMutation({
+      actor: createLocalAdminActor(),
+      permission: ADMIN_PERMISSIONS.CONFIG_DRAFT,
+      auditLog,
+      action: "revision.create",
+      domain: "config",
+      operation: async () => {
+        executed = true;
+        return { revision: "draft-1" };
+      },
+    }),
+    /audit disk unavailable/,
+  );
+  assert.equal(executed, false);
+});
+
+test("final audit append failure does not make a completed mutation look failed", async () => {
+  let writes = 0;
+  let auditError = null;
+  const auditLog = {
+    async record() {
+      writes += 1;
+      if (writes === 2) throw new Error("final audit append failed");
+    },
+  };
+
+  const result = await runAuthorizedAdminMutation({
+    actor: createLocalAdminActor(),
+    permission: ADMIN_PERMISSIONS.CONFIG_DRAFT,
+    auditLog,
+    action: "revision.create",
+    domain: "config",
+    operation: async () => ({ revision: "draft-1" }),
+    onAuditError: (error) => { auditError = error; },
+  });
+
+  assert.equal(result.revision, "draft-1");
+  assert.match(auditError?.message ?? "", /final audit append failed/);
 });
