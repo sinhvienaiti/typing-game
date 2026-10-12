@@ -11,9 +11,10 @@ case "${1:-}" in
     echo "Usage: ./play.sh"
     echo
     echo "Play mode does not pull Git, update submodules, or install dependencies."
-    echo "It automatically refreshes local Space Typing source art when needed,"
-    echo "refreshes stale static builds, starts the read-only Admin runtime bridge,"
-    echo "switches nginx to static Play mode, and opens https://typing-game.local."
+    echo "It automatically refreshes local Space Typing source art, prepares the"
+    echo "verified offline Voice model when needed, refreshes stale static builds,"
+    echo "starts the Admin runtime bridge, switches nginx to static Play mode,"
+    echo "and opens https://typing-game.local."
     exit 0
     ;;
   *)
@@ -107,6 +108,26 @@ prepare_space_art() {
   pnpm --dir "$game_dir" art:prepare
 }
 
+prepare_voice_assets() {
+  if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+    echo "Node and pnpm are required to prepare the offline Voice model."
+    exit 1
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "Python 3 is required to prepare the offline Voice model."
+    echo "On Ubuntu/WSL run: sudo apt update && sudo apt install -y python3"
+    exit 1
+  fi
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "The Portal Voice dependency vosk-browser is not installed yet."
+    echo "After pulling this update, run once: pnpm install --frozen-lockfile"
+    echo "Then retry ./play.sh."
+    exit 1
+  fi
+
+  pnpm voice:prepare
+}
+
 print_admin_runtime_log() {
   local log_file="$1"
   if [[ -s "$log_file" ]]; then
@@ -166,18 +187,21 @@ ensure_admin_runtime_service() {
   rm -f "$pid_file"
   kill "$server_pid" 2>/dev/null || true
   echo "Timed out waiting for the Space Typing Admin runtime bridge on port 3199."
-  echo "The startup probe now waits about 20 seconds to accommodate slower filesystems such as WSL-mounted drives."
+  echo "The startup probe waits about 20 seconds to accommodate slower filesystems such as WSL-mounted drives."
   print_admin_runtime_log "$log_file"
   exit 1
 }
 
-echo "[1/5] Stopping typing-game development servers..."
+echo "[1/6] Stopping typing-game development servers..."
 bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100 3199
 
-echo "[2/5] Refreshing local Space Typing art..."
+echo "[2/6] Refreshing local Space Typing art..."
 prepare_space_art
 
-echo "[3/5] Checking static builds..."
+echo "[3/6] Preparing verified offline Voice assets..."
+prepare_voice_assets
+
+echo "[4/6] Checking static builds..."
 node scripts/generate-music-index.mjs
 build_if_needed \
   "Portal" \
@@ -189,7 +213,12 @@ build_if_needed \
   "portal/package.json" \
   "portal/tsconfig.json" \
   "portal/vite.config.ts" \
-  "shared/learning"
+  "package.json" \
+  "pnpm-lock.yaml" \
+  "shared/learning" \
+  "shared/voice" \
+  "scripts/offline-vosk-plugin.mjs" \
+  "scripts/voice-model-middleware.mjs"
 
 build_if_needed \
   "Vocabulary Shooter" \
@@ -249,10 +278,10 @@ build_if_needed \
   "games/monkeytype/pnpm-lock.yaml" \
   "games/monkeytype/turbo.json"
 
-echo "[4/5] Starting runtime services and switching nginx to static Play mode..."
+echo "[5/6] Starting runtime services and switching nginx to static Play mode..."
 ensure_admin_runtime_service
 bash scripts/setup-nginx.sh play
 node games/space-typing/scripts/local-duel.mjs start
 
-echo "[5/5] Opening typing games..."
+echo "[6/6] Opening typing games..."
 bash scripts/play.sh
