@@ -15,12 +15,13 @@ Parent:
 - A1 validated checkpoint: `f2f088b59a9ae418b8a26045b5544b46dfb48b73`
 - A2 validated checkpoint: `9d3a94231d6c3168615c1675247cb443bd6b3b51`
 - A3.0 validated checkpoint: `d707354b48432987c8794e2df304b55ea0214172`
+- A3.1 validated checkpoint: `98bfa8712286c6b2c7e4ebbcbcbc8c05374a783f`
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
 - Admin integration branch: `feat/admin-world-music-stage-policy`
 - Integration branch HEAD: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
-- Parent-pinned child SHA used by A2/A3.0 validation: `83f80b3d6f640ea1af46e158e25485bc57b31393`
+- Parent-pinned child SHA used by A2/A3 validation: `83f80b3d6f640ea1af46e158e25485bc57b31393`
 - Parent-pinned child CI #1957: PASS.
 
 The child integration branch trails the child commit pinned by the parent. Workers must treat the parent gitlink/pinned child SHA as source of truth and must not reset the parent submodule back to the older integration-branch HEAD.
@@ -29,9 +30,9 @@ Checkpoint SHAs are informational only. Every worker must fetch latest heads bef
 
 ## CURRENT PHASE
 
-`A3.1 — Media Library + Asset Picker`
+`A4.0 — Shop Architecture Decision`
 
-A0, A0.5, A1, A2 and A3.0 are complete. A3.1 is the first unfinished phase.
+A0, A0.5, A1, A2, A3.0 and A3.1 are complete. A4.0 is the first unfinished phase.
 
 ## COMPLETED UNITS
 
@@ -41,7 +42,7 @@ A0, A0.5, A1, A2 and A3.0 are complete. A3.1 is the first unfinished phase.
 - Roles/Permissions core moved earlier than full A13 management UI.
 - Audit foundation moved earlier than full A14 Audit UI.
 - Developer Tools scaffold moved to A2; A15 is cleanup/final migration.
-- Media split into A3.0 architecture + A3.1 UI.
+- Media split into A3.0 architecture + A3.1 Media Library/Asset Picker.
 - Shop split into A4.0 architecture + A4.1 workflow.
 - Validator migration made explicit.
 
@@ -132,72 +133,117 @@ Bootstrap adapter:
 - importer never copies/moves/deletes/overwrites runtime binaries;
 - bootstrap admissions are serialized after tests exposed a real read-modify-write lost-update race.
 
-Automated coverage:
-- `admin/media-assets-v2.test.mjs`
-- `admin/media-bootstrap.test.mjs`
-- `scripts/validate-space-admin-v2-media.mjs`
-- runtime smoke test runs against the actual parent-pinned Space Typing tree, confirms current Music + all ship3D manifest bundles + SFX can be indexed, `media-v2/blobs` stays empty, and rerun creates zero duplicate versions.
-
 A3.0 validated checkpoint:
 - Parent HEAD: `d707354b48432987c8794e2df304b55ea0214172`
 - Space Typing Admin CI #1034: PASS.
 - Platform CI #2249: PASS.
 - Parent-pinned child: `83f80b3d6f640ea1af46e158e25485bc57b31393`.
 
-## IN PROGRESS
-
 ### A3.1 — Media Library + Asset Picker
 
-Implementation order is backend-first:
+Backend / API:
+- canonical `MediaAssetStore` initialized under the existing Admin data root;
+- runtime Music/ship3D/SFX reference bootstrap runs idempotently on Admin service startup;
+- authenticated Media V2 read APIs expose logical assets, versions, references and exact-version components;
+- Admin-owned upload/new-version/archive mutations use A0.5 permission + audit enforcement;
+- normal Media API/UI does not expose hard-delete;
+- Media HTTP mutations are serialized so concurrent read-modify-write operations cannot lose registry admissions;
+- exact Admin-owned blobs are served only through authenticated version/component endpoints;
+- generated/code-owned/external-reference assets remain reference-only ownership and reject Replace/Archive with `read-only-owner` instead of creating a shadow Admin version;
+- Media mutations declare `changesGameplay: false`: upload/version/archive alone never change a Ship/Shop/World/runtime revision.
 
-1. instantiate canonical `MediaAssetStore` under existing Admin data root;
-2. bootstrap current runtime references idempotently at service initialization;
-3. expose narrow authenticated Media V2 read APIs;
-4. expose Admin-owned upload/new-version/archive mutations with A0.5 permission + audit enforcement;
-5. do not expose casual hard-delete in normal Media UI;
-6. serve Admin-owned blobs through exact-version component URLs;
-7. add Portal Media API types/client;
-8. build Media Library using A1 primitives;
-9. build reusable Asset Picker that returns exact `assetVersionId`;
-10. add Media manual acceptance scenarios and CI/browser-contract validators.
+Portal / administrator workflow:
+- typed `MediaAdminApi` client;
+- authenticated Admin-blob preview fetch uses Object URLs; runtime-reference media keeps canonical runtime URLs;
+- primary `/admin/space-typing/media` Media Library route plus command-palette entry;
+- administrator-first search/type/archive filters and entity table;
+- upload panel with explicit no-gameplay-mutation copy;
+- ownership-aware details, preview, usage graph and immutable version history;
+- technical IDs/source paths are progressive disclosure rather than primary UI;
+- Replace/Archive controls appear only for Admin-owned media and only when actor permissions allow them;
+- reusable Asset Picker returns exact `{asset, version}` rather than raw path or moving `latest` reference;
+- Asset Picker supports allowed media types, current/historical version selection, preview, keyboard focus trap, Escape/outside close and focus restoration;
+- responsive Media Library/Picker styling preserves the Space Typing dark sci-fi visual language.
 
-Important A3.1 behavior:
-- uploading media alone never changes Shop/Ships/Worlds/gameplay;
-- generated/code-owned runtime assets are visible/searchable/referenceable but remain read-only ownership;
-- replacement creates a new version; reference migration is explicit and belongs to the consuming domain draft;
-- raw paths/provenance diagnostics are progressive disclosure, not normal primary workflow.
+Automated coverage:
+- `admin/media-http.test.mjs`
+- `admin/media-http-server-smoke.test.mjs`
+- `admin/media-http-ownership.test.mjs`
+- `admin/media-assets-v2.test.mjs`
+- `admin/media-bootstrap.test.mjs`
+- `scripts/validate-space-admin-v2-media.mjs`
+- full Portal build and Space Typing build in Admin CI;
+- A3.1 manual scenarios recorded in `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`.
+
+A3.1 validated checkpoint:
+- Parent HEAD: `98bfa8712286c6b2c7e4ebbcbcbc8c05374a783f`
+- Space Typing Admin CI #1074: PASS.
+- Platform CI #2269: PASS.
+- Parent-pinned child: `83f80b3d6f640ea1af46e158e25485bc57b31393`.
+
+Manual A3.1 browser QA remains explicitly deferred/non-blocking for independent architecture work. It must be executed before final Admin V2 acceptance or before a later domain depends on an unproven browser interaction.
+
+## IN PROGRESS
+
+### A4.0 — Shop Architecture Decision
+
+Current audit findings against parent-pinned child `83f80b3d6f640ea1af46e158e25485bc57b31393`:
+
+- current Shop capability is intentionally `runtime-backed-readonly`; no canonical Admin-authored Shop policy is consumed by gameplay yet;
+- runtime owner is primarily `src/shops/state.ts`, with service pricing in `src/shops/service-shop.ts` and currency ownership in `src/economy/*`;
+- Shop inventory is not a simple static catalog: `ShopInstance` stock is deterministically generated and persisted in `PlayerSave.shopState`;
+- generation inputs include shop type, world/stage/sector, luck, progression and hidden discovery state;
+- supported shop types are `normal`, `station`, `traveling`, `black-market`, `hidden`, `event`, `service`;
+- stock currently includes item and equipment entries with remaining quantity and multi-currency price;
+- item pools differ by shop type; equipment availability depends on tier and grade rules;
+- equipment grades use shop-type/stage probability policy;
+- normal Shop pricing is derived from item/equipment grade, equipment tier and shop-type modifiers, then expressed across Credits/Alloy/Star Crystal/Quantum Core;
+- hidden/event/black-market/traveling availability is runtime policy, not a simple Enabled boolean;
+- Shop instances refresh at the sector-instance boundary and are persisted once generated, so changing pricing/generation policy must define what happens to already-created PlayerSave instances;
+- `src/shops/service-shop.ts` owns a separate family of service costs (repair, enhancement, evolution, affix/reroll, skill/attribute upgrade, etc.) and must not be accidentally collapsed into ordinary stock pricing;
+- Master Plan concepts such as Original Price, Discount, Daily/Weekly Limit, Featured, Sort Order, schedules and bundles do not currently exist natively in this runtime and must not be fabricated by Admin UI.
+
+A4.0 must therefore define a real runtime-consumed canonical policy/adapter before A4.1 exposes Shop editing. A CRUD table that writes only to parent Admin state without child runtime consumption is forbidden.
 
 ## BLOCKERS
 
-No blocker for A3.1 backend/API implementation.
+No blocker for A4.0 architecture/audit work.
 
-Later architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`, especially Shop A4.0, Ships/Weapons/Projectiles A5, Live Ops scheduler A11 and absent remote player backend.
+A4.1 write UI is blocked until A4.0 resolves at minimum:
+- canonical Shop policy owner/schema;
+- child runtime adapter/consumer seam;
+- preview/simulation contract using the same runtime generator/pricing logic;
+- existing persisted `PlayerSave.shopState` behavior when policy changes;
+- separation between generated stock policy, stock/catalog eligibility, pricing policy, availability policy and service-shop costs;
+- explicit decision on unsupported promotion/schedule/bundle concepts rather than synthetic fields.
+
+Later architecture gates remain tracked in `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`, especially Ships/Weapons/Projectiles A5, Live Ops scheduler A11 and absent remote player backend.
 
 ## DEFERRED MANUAL TESTS
 
-A1/A2 browser scenarios are recorded in:
+A1/A2/A3.1 browser scenarios are recorded in:
 - `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-They remain non-blocking for safe foundation work. A3.1 Media scenarios must be appended before claiming browser UX acceptance.
+They remain non-blocking for independent safe architecture/foundation work. They must be completed before final acceptance and before any later phase treats an untested browser interaction as a proven dependency.
 
 ## LATEST GREEN CI
 
-A3.0 checkpoint `d707354b48432987c8794e2df304b55ea0214172`:
-- Parent Space Typing Admin CI #1034: PASS.
-- Parent Platform CI #2249: PASS.
+A3.1 checkpoint `98bfa8712286c6b2c7e4ebbcbcbc8c05374a783f`:
+- Parent Space Typing Admin CI #1074: PASS.
+- Parent Platform CI #2269: PASS.
 - Parent-pinned child CI #1957: PASS on `83f80b3d6f640ea1af46e158e25485bc57b31393`.
 
 ## NEXT EXACT ACTION
 
-1. Re-fetch parent HEAD before every A3.1 write.
-2. Add Media V2 server adapter with minimal changes to `admin/server.mjs` so old formatting-sensitive Phase B validators remain stable.
-3. Initialize `MediaAssetStore` and run idempotent reference bootstrap on startup.
-4. Add authenticated Media read endpoints for assets/versions/references/component resolution.
-5. Add `media.upload` mutations for new asset/new immutable version through `runAuthorizedAdminMutation`.
-6. Add `media.delete` mutation for archive/unarchive; keep hard-delete out of normal A3.1 UI/API unless an explicitly restricted cleanup endpoint is separately justified/tested.
-7. Serve only `admin-blob` component bytes from Media V2; reference-only runtime files keep their canonical runtime URLs.
-8. Add HTTP/security tests before Portal UI.
-9. Then add Portal client, Media Library and Asset Picker.
+1. Re-fetch parent HEAD before every A4.0 write.
+2. Finish Shop runtime-owner audit: item registry, equipment registry, presentation metadata/assets, pricing/availability/purchase paths and service-shop cost families.
+3. Write `docs/SPACE_TYPING_ADMIN_V2_SHOP_ARCHITECTURE.md` before implementing Shop write UI.
+4. Define a canonical Shop policy that models real runtime policy rather than generated player-instance state.
+5. Define migration/compatibility behavior for existing `PlayerSave.shopState` instances when a policy revision changes.
+6. Define runtime preview/simulation API that calls the same generator/pricing logic as gameplay, with explicit scenario inputs (shop type/stage/world/luck/progression/discovery) and no second generator.
+7. Define which requested administrator fields are truly authorable in A4.1 and which remain unavailable until real Live Ops/promotion capabilities exist.
+8. Only after the architecture is validated should child runtime policy consumption and parent Admin authoring be implemented.
+9. Do not build a Shop CRUD screen first.
 
 ## SAFETY RULES
 
