@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
+import { adminErrorMessage } from "./admin-http";
 
 const api = new SpaceTypingAdminApi();
 
@@ -118,25 +119,14 @@ function mergeEnemy(base: EnemyAdminPreviewItem, override?: EnemyAdminOverride):
 }
 
 async function previewEnemies(policy?: EnemyAdminPolicy): Promise<EnemyAdminPreview> {
-  const response = await fetch("/api/admin/space-typing/enemies/preview", {
+  const payload = await api.requestJson<EnemyAdminPreview>("/api/admin/space-typing/enemies/preview", {
     method: "POST",
-    cache: "no-store",
-    headers: {
-      "content-type": "application/json",
-      "x-typing-game-admin-token": api.getToken(),
-    },
     body: JSON.stringify(policy === undefined ? {} : { policy }),
   });
-  const payload = (await response.json().catch(() => ({}))) as Record<string, unknown>;
-  if (!response.ok) {
-    const message = typeof payload["message"] === "string"
-      ? payload["message"]
-      : typeof payload["error"] === "string"
-        ? payload["error"]
-        : `Enemies preview failed (${response.status})`;
-    throw new Error(message);
+  if (payload.protocolVersion !== 1 || !Array.isArray(payload.enemies)) {
+    throw new Error("Enemies preview response does not match the canonical Admin contract.");
   }
-  return payload as unknown as EnemyAdminPreview;
+  return payload;
 }
 
 function visualSummary(visual: EnemyVisualProfile): string {
@@ -182,6 +172,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   page.append(header);
 
   const status = notice("Loading active revision and canonical child Enemy registry…", "info");
+  status.setAttribute("aria-live", "polite");
   const filterBar = el("div", "st-admin-filterbar");
   const search = el("input", "st-admin-search") as HTMLInputElement;
   search.placeholder = "Search enemies…";
@@ -207,6 +198,12 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   let activePreview: EnemyAdminPreview | null = null;
   let selectedId = "";
   let policy: EnemyAdminPolicy = { configRevision: "enemies-admin-v1", enemies: {} };
+  let serviceReady = false;
+  let loadGeneration = 0;
+
+  search.disabled = true;
+  familyFilter.disabled = true;
+  roleFilter.disabled = true;
 
   const setStatus = (text: string, tone: Tone = "info"): void => {
     status.className = `stx-notice ${tone}`;
@@ -234,10 +231,15 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
 
   const renderList = (): void => {
     listHost.replaceChildren();
+    const allEnemies = bundled?.enemies ?? activePreview?.enemies ?? [];
+    if (!serviceReady || allEnemies.length === 0) {
+      listHost.append(notice(serviceReady ? "No canonical Enemy definitions were returned by the preview." : "Load the canonical Enemy registry to browse and filter definitions.", serviceReady ? "warn" : "info"));
+      return;
+    }
     const query = search.value.trim().toLowerCase();
     const family = familyFilter.value || "all";
     const role = roleFilter.value || "all";
-    const enemies = (bundled?.enemies ?? activePreview?.enemies ?? []).filter((enemy) => {
+    const enemies = allEnemies.filter((enemy) => {
       const familyMatch = family === "all" || enemy.family === family;
       const roleMatch = role === "all" || enemy.role === role;
       const queryMatch = query.length === 0 || `${enemy.id} ${enemy.name} ${enemy.family} ${enemy.role} ${enemy.rarity}`.toLowerCase().includes(query);
@@ -257,11 +259,13 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       );
       const actions = el("div");
       if (policy.enemies?.[enemy.id] && Object.keys(policy.enemies[enemy.id]).length > 0) actions.append(badge("OVERRIDE", "warn"));
-      actions.append(button(selectedId === enemy.id ? "Editing" : "Edit", () => {
+      const edit = button(selectedId === enemy.id ? "Editing" : "Edit", () => {
         selectedId = enemy.id;
         renderList();
         renderEditor();
-      }, selectedId === enemy.id ? "st-admin-btn primary" : "st-admin-btn"));
+      }, selectedId === enemy.id ? "st-admin-btn primary" : "st-admin-btn");
+      edit.disabled = !serviceReady;
+      actions.append(edit);
       row.append(copyNode, actions);
       listHost.append(row);
     }
@@ -271,8 +275,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     editorHost.replaceChildren();
     const base = baseEnemy(selectedId);
     const enemy = effectiveEnemy(selectedId);
-    if (!base || !enemy) {
-      editorHost.append(notice("Enemy registry has not finished loading.", "warn"));
+    if (!serviceReady || !base || !enemy) {
+      editorHost.append(notice(serviceReady ? "No Enemy is selected." : "Load the active revision and canonical Enemy preview before editing admission.", serviceReady ? "warn" : "info"));
       return;
     }
 
@@ -328,12 +332,13 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         setStatus(`${selectedId} reset to bundled child admission. Save Draft to persist this removal.`, "good");
       }),
       button("Validate Preview", () => {
+        setStatus("Validating Enemy admission against the canonical child preview…", "info");
         void previewEnemies(policy).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
           setStatus(`Child canonical preview accepted ${preview.enemies.length} Enemy definitions for ${preview.configRevision}.`, "good");
-        }).catch((error: unknown) => setStatus(`Preview rejected: ${error instanceof Error ? error.message : String(error)}`, "bad"));
+        }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Enemies preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
 
@@ -344,29 +349,11 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   familyFilter.addEventListener("change", renderList);
   roleFilter.addEventListener("change", renderList);
 
-  void Promise.all([api.getState(), previewEnemies()]).then(async ([statePayload, bundledPreview]) => {
-    loadedActiveRevision = statePayload.state.activeRevision;
-    revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
-    bundled = bundledPreview;
-    policy = policyFrom(statePayload.active.config);
-    activePreview = await previewEnemies(policy);
-    selectedId = activePreview.enemies[0]?.id ?? "";
-    rebuildFilters();
-    renderList();
-    renderEditor();
-    const hasPolicy = (statePayload.active.config as EnemyAwareConfig).content?.enemies !== undefined;
-    setStatus(
-      hasPolicy
-        ? `Loaded active Enemy admission policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
-        : "Active revision predates B06.4 Enemy policy; bundled child admission is shown until the first draft is saved.",
-      hasPolicy ? "good" : "warn",
-    );
-  }).catch((error: unknown) => setStatus(`Enemies Admin unavailable: ${error instanceof Error ? error.message : String(error)}`, "bad"));
-
   const saveBar = el("div", "st-admin-sticky-save stx-savebar");
-  const saveStatus = el("span", undefined, "Revision-backed · no direct runtime mutation");
+  const saveStatus = el("span", undefined, "Load the active revision before saving an Enemy draft");
   const save = button("Save Draft", () => {
     void (async () => {
+      if (!serviceReady) return;
       save.disabled = true;
       saveStatus.textContent = "Validating against child runtime…";
       try {
@@ -386,14 +373,15 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
         setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots Enemy admission only when a new session starts.`, "good");
       } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : String(error);
+        const message = adminErrorMessage(error, "The Enemy draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
         setStatus(`Validation/save failed: ${message}`, "bad");
       } finally {
-        save.disabled = false;
+        save.disabled = !serviceReady;
       }
     })();
   }, "st-admin-btn primary");
+  save.disabled = true;
   saveBar.append(
     el("strong", undefined, "B06.4 Enemy Draft"),
     saveStatus,
@@ -402,5 +390,69 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     save,
   );
   page.append(saveBar);
+
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    serviceReady = false;
+    loadedActiveRevision = null;
+    bundled = null;
+    activePreview = null;
+    revisionBadge.className = "st-admin-status info";
+    revisionBadge.textContent = "ACTIVE · loading";
+    search.disabled = true;
+    familyFilter.disabled = true;
+    roleFilter.disabled = true;
+    save.disabled = true;
+    saveStatus.textContent = "Load the active revision before saving an Enemy draft";
+    setStatus("Loading active revision and canonical child Enemy registry…", "info");
+    rebuildFilters();
+    renderList();
+    renderEditor();
+
+    void Promise.all([api.getState(), previewEnemies()]).then(async ([statePayload, bundledPreview]) => {
+      const nextPolicy = policyFrom(statePayload.active.config);
+      const nextPreview = await previewEnemies(nextPolicy);
+      if (generation !== loadGeneration) return;
+      loadedActiveRevision = statePayload.state.activeRevision;
+      bundled = bundledPreview;
+      policy = nextPolicy;
+      activePreview = nextPreview;
+      selectedId = activePreview.enemies[0]?.id ?? "";
+      serviceReady = true;
+      revisionBadge.className = "st-admin-status good";
+      revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
+      search.disabled = false;
+      familyFilter.disabled = false;
+      roleFilter.disabled = false;
+      save.disabled = false;
+      saveStatus.textContent = "Revision-backed · no direct runtime mutation";
+      rebuildFilters();
+      renderList();
+      renderEditor();
+      const hasPolicy = (statePayload.active.config as EnemyAwareConfig).content?.enemies !== undefined;
+      setStatus(
+        hasPolicy
+          ? `Loaded active Enemy admission policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
+          : "Active revision predates B06.4 Enemy policy; bundled child admission is shown until the first draft is saved.",
+        hasPolicy ? "good" : "warn",
+      );
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      serviceReady = false;
+      loadedActiveRevision = null;
+      revisionBadge.className = "st-admin-status bad";
+      revisionBadge.textContent = "ACTIVE · unavailable";
+      search.disabled = true;
+      familyFilter.disabled = true;
+      roleFilter.disabled = true;
+      save.disabled = true;
+      listHost.replaceChildren(notice("The canonical Enemy registry could not be loaded. Retry after the local Admin service is available.", "bad"));
+      editorHost.replaceChildren(notice("Enemy admission overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
+      status.className = "stx-notice bad";
+      status.replaceChildren(document.createTextNode(adminErrorMessage(error, "The Enemies Admin service is unavailable. Check the local runtime and try again.")), document.createTextNode(" "), button("Retry", load));
+    });
+  };
+
+  load();
   return page;
 }
