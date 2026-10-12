@@ -155,7 +155,7 @@ export type SpaceTypingAdminConfig = {
   /** Additive B06 content namespace; legacy v1 revisions may omit it. */
   content?: {
     ships?: ShipAdminPolicy;
-  };
+  } & Record<string, unknown>;
   /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
   system?: GeneralSettingsConfig;
   /** Additive Phase B namespace; optional for compatibility with pre-Phase-B local revisions. */
@@ -177,6 +177,18 @@ export type AdminRevision = {
   rollbackEligible?: boolean;
 };
 
+export type AdminChangeScope = {
+  model: "whole-config-revision";
+  baseRevision: string | null;
+  targetRevision: string | null;
+  changed: boolean;
+  changedPathCount: number;
+  truncated: boolean;
+  domains: string[];
+  changedPaths: string[];
+  publishWarning: string;
+};
+
 export type AdminRevisionValidation = {
   revision: string;
   valid: true;
@@ -185,6 +197,7 @@ export type AdminRevisionValidation = {
   relation: AdminRevisionRelation;
   publishable: boolean;
   rollbackEligible: boolean;
+  changeScope?: AdminChangeScope;
 };
 
 export type AdminStatePayload = {
@@ -201,6 +214,68 @@ export type AdminStatePayload = {
 export type AdminRuntimePayload = {
   activeRevision: string;
   config: SpaceTypingAdminConfig;
+};
+
+export type AdminActor = {
+  actorId: string;
+  actorDisplayName: string;
+  authMethod: string;
+  role: string;
+  requestId: string;
+  permissions: string[];
+};
+
+export type AdminAuditEvent = {
+  schemaVersion: number;
+  eventId: string;
+  timestamp: string;
+  actor: null | {
+    actorId: string;
+    actorDisplayName: string;
+    authMethod: string;
+    role: string;
+  };
+  requestId: string | null;
+  action: string;
+  domain: string;
+  entityType: string | null;
+  entityId: string | null;
+  changeScope: unknown;
+  result: "attempt" | "success" | "denied" | "error";
+  error: string | null;
+};
+
+export type AdminAuditPayload = {
+  events: AdminAuditEvent[];
+};
+
+export type AdminMusicCatalogSummary = {
+  schemaVersion: number;
+  manifestRevision: string;
+  tracks: Array<{
+    id: string;
+    title: string;
+    uploadedByAdmin: boolean;
+  } & Record<string, unknown>>;
+};
+
+export type DeveloperToolLink = {
+  label: string;
+  path: string;
+  description: string;
+};
+
+export type DeveloperToolSection = {
+  id: string;
+  label: string;
+  description: string;
+  tools: DeveloperToolLink[];
+};
+
+export type DeveloperToolsManifest = {
+  version: 1;
+  permission: "developer.runtime-inspect";
+  sections: DeveloperToolSection[];
 };
 
 export type WorldMusicPreviewState = {
@@ -277,6 +352,23 @@ export class SpaceTypingAdminApi {
       }
       throw error;
     }
+  }
+
+  getActor(): Promise<AdminActor> {
+    return this.request<AdminActor>("/api/admin/space-typing/actor");
+  }
+
+  getAudit(limit = 8): Promise<AdminAuditPayload> {
+    const safeLimit = Math.max(1, Math.min(100, Math.trunc(limit)));
+    return this.request<AdminAuditPayload>(`/api/admin/space-typing/audit?limit=${safeLimit}`);
+  }
+
+  getDeveloperToolsManifest(): Promise<DeveloperToolsManifest> {
+    return this.request<DeveloperToolsManifest>("/api/admin/space-typing/developer-tools/manifest");
+  }
+
+  getMusicCatalogSummary(): Promise<AdminMusicCatalogSummary> {
+    return this.request<AdminMusicCatalogSummary>("/api/admin/space-typing/music/library");
   }
 
   getState(): Promise<AdminStatePayload> {
