@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("portal/src/admin/contracts/space-typing-admin.v1.json"));
-const [featureSource, mainSource, childAudit, childCi, uiSource, routerSource, legacyCore] = await Promise.all([
+const [featureSource, mainSource, childAudit, childCi, uiSource, routerSource, legacyCore, contractReader] = await Promise.all([
   read("games/space-typing/src/expansion-v2/feature-flags.ts"),
   read("games/space-typing/src/main.ts"),
   read("games/space-typing/scripts/audit-admin-feature-gates.ts"),
@@ -14,6 +14,7 @@ const [featureSource, mainSource, childAudit, childCi, uiSource, routerSource, l
   read("portal/src/admin/space-typing-feature-gates-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b-core.ts"),
+  read("portal/src/admin/space-typing-contract-reader.ts"),
 ]);
 
 const featureGates = contract.featureGates;
@@ -49,7 +50,11 @@ assert(mainSource.includes("expansionV2FeatureEnabled"), "main.ts must consume t
 assert(childAudit.includes("Space Typing Admin Feature Gates audit OK"), "Child Feature Gates audit success marker missing");
 assert(childCi.includes("Audit Feature Gates contract") && childCi.includes("pnpm feature-gates:audit"), "Child CI must execute Feature Gates audit");
 
-assert(uiSource.includes("/api/admin/space-typing/contract"), "Feature Gates UI must read the authenticated canonical child contract");
+assert(uiSource.includes("readMainAdminContractSection"), "Feature Gates UI must use the shared validated main-contract reader");
+assert(uiSource.includes('readMainAdminContractSection("featureGates", "feature-gates.read"'), "Feature Gates UI must request the featureGates section behind feature-gates.read");
+assert(contractReader.includes('/api/admin/space-typing/contract'), "Shared contract reader must target the authenticated canonical child contract");
+assert(contractReader.includes('api.requestJson<unknown>'), "Shared contract reader must use safe JSON transport");
+assert(contractReader.includes('Array.isArray(payload["capabilities"])'), "Shared contract reader must validate the canonical capabilities list before capability lookup");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Feature Gates UI must expose read-only ownership");
 assert(uiSource.includes("NO REMOTE ROLLOUT"), "Feature Gates UI must make remote rollout absence explicit");
 assert(uiSource.includes("expansion-v2") || uiSource.includes("featureGates.gates"), "Feature Gates UI must render the canonical runtime gate");
@@ -74,4 +79,4 @@ assert(routerSource.indexOf("`${BASE}/flags`") < routerSource.indexOf("renderPha
 // but routing must make the old writable renderer unreachable from registered Feature Gates paths.
 assert(legacyCore.includes("Admin Phase B · Feature Flags draft"), "Expected legacy featureFlags compatibility code was not found; remove this guard when legacy schema is migrated away");
 
-console.log("Space Typing Feature Gates Admin validation passed: canonical expansion-v2 gate is read-only and legacy rollout authoring is unreachable.");
+console.log("Space Typing Feature Gates Admin validation passed: canonical expansion-v2 gate is read-only, loaded through the safe shared contract reader, and legacy rollout authoring is unreachable.");
