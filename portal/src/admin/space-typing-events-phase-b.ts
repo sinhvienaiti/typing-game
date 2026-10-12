@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "./api";
+import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
 const api = new SpaceTypingAdminApi();
 type Tone = "good" | "warn" | "bad" | "info";
@@ -47,19 +48,41 @@ function panel(title: string, subtitle?: string): HTMLElement {
   return root;
 }
 function listNotice(label: string, values: string[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.join(" · ")}`, tone);
+  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
 }
-async function fetchEventsContract(): Promise<EventsContractPayload> {
-  const response = await fetch("/api/admin/space-typing/events/contract", {
-    cache: "no-store",
-    headers: { "x-typing-game-admin-token": api.getToken() },
-  });
-  const payload = (await response.json().catch(() => ({}))) as Partial<EventsContractPayload> & { message?: string };
-  if (!response.ok) throw new Error(payload.message ?? `Events contract request failed (${response.status})`);
-  if (payload.capability !== "events.read" || !payload.events || !payload.route) {
-    throw new Error("Pinned child Events contract does not expose events.read.");
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function stringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every((entry) => typeof entry === "string");
+}
+
+function validateEventsContract(value: unknown): EventsContractPayload {
+  if (!isRecord(value) || value["capability"] !== "events.read" || !isRecord(value["events"]) || !isRecord(value["route"])) {
+    throw new Error("Events contract does not match the canonical events.read boundary.");
   }
-  return payload as EventsContractPayload;
+  const events = value["events"];
+  if (events["mode"] !== "runtime-derived-readonly") {
+    throw new Error("Events contract is not runtime-derived read-only.");
+  }
+  for (const key of ["runtimeSources", "domains", "authorableFields", "runtimeDerivedFields", "stageRandomEventIds", "stageRandomEventTones", "galaxyModifierIds", "sourceFunctions", "unsupportedMasterPlanFields"] as const) {
+    if (!stringArray(events[key])) throw new Error(`Events contract is missing ${key}.`);
+  }
+  if (
+    typeof events["gameplayConsumer"] !== "string" ||
+    typeof events["persistenceOwner"] !== "string" ||
+    events["scheduledLiveOpsService"] !== false ||
+    events["calendarService"] !== false ||
+    events["writeCapability"] !== false ||
+    events["previewCapability"] !== false
+  ) {
+    throw new Error("Events contract contains an invalid runtime ownership boundary.");
+  }
+  return value as unknown as EventsContractPayload;
+}
+
+async function fetchEventsContract(): Promise<EventsContractPayload> {
+  return validateEventsContract(await api.requestJson<unknown>("/api/admin/space-typing/events/contract"));
 }
 
 export function renderPhaseBEvents(): HTMLElement {
@@ -77,13 +100,20 @@ export function renderPhaseBEvents(): HTMLElement {
   page.append(header);
 
   const status = notice("Loading canonical Events runtime contract…");
-  page.append(status);
-  void (async () => {
-    try {
-      const payload = await fetchEventsContract();
+  status.setAttribute("aria-live", "polite");
+  const content = el("div");
+  page.append(status, content);
+
+  let loadGeneration = 0;
+  const load = (): void => {
+    const generation = ++loadGeneration;
+    setAdminStatus(status, "Loading canonical Events runtime contract…", "loading");
+    content.replaceChildren(notice("Loading gameplay event ownership…", "info"));
+    void fetchEventsContract().then((payload) => {
+      if (generation !== loadGeneration) return;
       const events = payload.events;
-      status.className = "stx-notice good";
-      status.textContent = `${events.domains.length} runtime event domains · stage-session ownership · Admin writes closed.`;
+      setAdminStatus(status, `${events.domains.length} runtime event domains · stage-session ownership · Admin writes closed.`, "success");
+      content.replaceChildren();
 
       const stageEvents = panel("Stage Random Events", "Canonical stage-scheduler registry");
       stageEvents.append(
@@ -117,13 +147,21 @@ export function renderPhaseBEvents(): HTMLElement {
         notice("Scheduled Live Ops service: unavailable", "warn"),
         notice("Calendar service: unavailable", "warn"),
         listNotice("Unsupported master-plan fields", events.unsupportedMasterPlanFields, "warn"),
-        notice("Event creation, start/end windows, timezone/recurrence, audience targeting, enable toggles, draft saves and publishing are intentionally unavailable until a canonical runtime service owns them."),
+        notice("Event creation, start/end windows, timezone/recurrence, audience targeting, enable toggles, draft saves and publishing are intentionally unavailable until a canonical runtime service owns them.", "info"),
       );
-      page.append(stageEvents, galaxyEvents, runtimeSystems, ownership, boundary);
-    } catch (error: unknown) {
-      status.className = "stx-notice bad";
-      status.textContent = `Events contract unavailable: ${error instanceof Error ? error.message : String(error)}`;
-    }
-  })();
+      content.append(stageEvents, galaxyEvents, runtimeSystems, ownership, boundary);
+    }).catch((error: unknown) => {
+      if (generation !== loadGeneration) return;
+      setAdminStatus(status, "Events runtime contract is unavailable.", "error");
+      renderAdminFailureState(content, {
+        title: "Events unavailable",
+        fallbackMessage: "The canonical Events contract could not be loaded. Check the local Admin runtime and try again.",
+        error,
+        onRetry: load,
+      });
+    });
+  };
+
+  load();
   return page;
 }
