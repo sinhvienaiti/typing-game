@@ -17,6 +17,7 @@ on:
       - "scripts/validate-space-admin-contract.mjs"
       - "scripts/validate-space-admin-ui.mjs"
       - "scripts/validate-space-admin-phase-b.mjs"
+      - "scripts/validate-space-admin-v2-foundation.mjs"
       - "scripts/validate-space-admin-worlds.mjs"
       - "scripts/validate-space-admin-typing-content.mjs"
       - "scripts/validate-space-admin-shop.mjs"
@@ -52,6 +53,8 @@ jobs:
         run: git submodule update --init games/space-typing
       - name: Validate Admin contract snapshot
         run: node scripts/validate-space-admin-contract.mjs
+      - name: Validate Admin V2 foundation wiring
+        run: node scripts/validate-space-admin-v2-foundation.mjs
       - name: Validate complete Admin UI scope
         run: node scripts/validate-space-admin-ui.mjs
       - name: Validate Admin Phase B mapping
@@ -96,6 +99,7 @@ jobs:
         run: |
           for file in admin/*.mjs; do node --check "$file"; done
           node --check scripts/validate-space-admin-phase-b.mjs
+          node --check scripts/validate-space-admin-v2-foundation.mjs
           node --check scripts/validate-space-admin-worlds.mjs
           node --check scripts/validate-space-admin-typing-content.mjs
           node --check scripts/validate-space-admin-shop.mjs
@@ -114,8 +118,8 @@ jobs:
           node --check scripts/validate-space-admin-telemetry.mjs
           node --check scripts/validate-space-admin-expedition.mjs
           node --check scripts/validate-space-admin-daily-weekly.mjs
-      - name: Test immutable revision and CAS semantics
-        run: node --test admin/store.test.mjs
+      - name: Test immutable revision, CAS and Admin V2 security semantics
+        run: pnpm admin:test
       - name: Test Typing Content canonical catalog
         run: node --test admin/typing-content-catalog.test.mjs
       - name: Test Shop capability contract
