@@ -31,9 +31,19 @@ test("builds a published Enemy runtime envelope", () => {
   });
 });
 
-test("uses the safe adaptive Enemy policy for legacy revisions", () => {
+test("uses the safe adaptive Enemy policy for revisions without Enemy config", () => {
   const envelope = createEnemyRuntimeEnvelope({ activeRevision: "legacy" }, {}, contract);
   assert.equal(envelope.policy.configRevision, "enemies-admin-v1");
   assert.equal(envelope.policy.projectileMode, "auto");
   assert.deepEqual(envelope.policy.enemies, {});
+});
+
+test("normalizes older Enemy revisions to Admin-owned adaptive projectiles", () => {
+  const envelope = createEnemyRuntimeEnvelope(
+    { activeRevision: "legacy-enemies" },
+    { content: { enemies: { configRevision: "enemies-admin-v1", enemies: { "rainbow-scout": { minStage: 5 } } } } },
+    contract,
+  );
+  assert.equal(envelope.policy.projectileMode, "auto");
+  assert.deepEqual(envelope.policy.enemies, { "rainbow-scout": { minStage: 5 } });
 });
