@@ -208,6 +208,131 @@ Expected:
 
 ---
 
+# A3.1 — Media Library / Asset Picker
+
+## A3.1-M01 — Media Library inventory and filters
+
+1. Open `/admin/space-typing/media`.
+2. Search for a known ship such as `Vanguard`.
+3. Filter by Images, 3D Models, Music and SFX.
+4. Toggle `Show archived`.
+
+Expected:
+- Media Library appears as a normal administrator workflow under Media and in `Cmd/Ctrl+K`;
+- current runtime/reference media and Admin-managed uploads appear from the canonical Media V2 registry;
+- search works by administrator-facing name/tags without requiring a raw path;
+- type filters do not create synthetic/fake assets;
+- archived Admin-owned media is hidden by default and visible only when requested.
+
+## A3.1-M02 — Runtime/project-owned media is read-only
+
+1. Select a generated ship model such as Vanguard 3D Ship.
+2. Select a code-owned SFX or built-in Music item.
+
+Expected:
+- detail shows an administrator-readable read-only ownership explanation;
+- Replace / Upload new version is not offered for generated/code-owned/external-reference media;
+- Archive is not offered for runtime/project-owned media;
+- technical source/owner/path data is under progressive disclosure rather than permanent primary copy;
+- direct API attempts to replace/archive source-owned media fail closed with a conflict instead of creating a shadow Admin version.
+
+## A3.1-M03 — Upload a new Admin-managed asset
+
+1. Click `Upload media`.
+2. Choose a type, enter a display name and optional tags.
+3. Select a small image/audio test file and upload it.
+4. Return to Dashboard/History and compare active revision/generation before vs after upload.
+
+Expected:
+- UI clearly states upload adds media to the library only;
+- upload succeeds only for an actor with `media.upload`;
+- the new item appears as `Admin managed` with one immutable version;
+- image/audio preview loads through the authenticated Media service;
+- gameplay active revision/generation is unchanged;
+- no Ship/Shop/World automatically starts using the uploaded file.
+
+## A3.1-M04 — Create a new immutable version
+
+1. Open an Admin-managed media item.
+2. Click `Upload new version` and choose different bytes.
+3. Inspect Version History after upload.
+4. If possible, preview both old/new versions through Asset Picker.
+
+Expected:
+- a new `assetVersionId` is created;
+- previous version remains available and unchanged;
+- current library version changes to the newly uploaded version;
+- no existing gameplay reference silently follows the new version;
+- no binary is overwritten in place.
+
+## A3.1-M05 — Archive and restore
+
+1. Open an Admin-managed media item.
+2. Choose Archive and confirm.
+3. Verify it disappears from the normal list.
+4. Enable `Show archived`, select it and restore it.
+
+Expected:
+- confirmation explains that archive does not delete immutable versions or change gameplay references;
+- archived item is hidden from normal library/picker discovery;
+- historical versions remain resolvable;
+- restoring makes the logical asset visible again;
+- no hard-delete action is exposed in normal Media Library UI.
+
+## A3.1-M06 — Usage and exact-version visibility
+
+1. Select media with zero references and media with one or more canonical references when available.
+2. Inspect `Used by` and Versions.
+
+Expected:
+- usage references identify domain/entity/field in administrator-readable form;
+- reference count matches canonical Media V2 reference graph;
+- Versions distinguishes current vs historical immutable versions;
+- IDs/source diagnostics are not required for routine browsing.
+
+## A3.1-M07 — Asset Picker exact-version contract
+
+Execute from a test harness or first consuming V2 editor that invokes `openAdminMediaAssetPicker`.
+
+1. Open Asset Picker constrained to one or more allowed media types.
+2. Search/select a logical asset.
+3. Select the current version, then repeat with a historical version.
+4. Confirm `Use selected version`.
+
+Expected:
+- picker lists only active logical assets of allowed types;
+- it does not expose archived assets;
+- current and historical versions are distinguishable;
+- selection returns the exact logical asset + `assetVersionId`, not a moving `latest` alias or raw path;
+- image/audio preview works for both Admin-owned and canonical runtime-reference assets when a browser preview is supported;
+- selecting media does not publish or mutate gameplay by itself.
+
+## A3.1-M08 — Asset Picker keyboard / focus lifecycle
+
+1. Open Asset Picker from a keyboard-focusable trigger.
+2. Navigate with Tab / Shift+Tab.
+3. Press Escape; reopen and click outside the dialog.
+4. Reopen and complete a selection.
+
+Expected:
+- keyboard focus stays inside the picker while open;
+- Escape/outside click closes it when no selection is being committed;
+- focus returns to the original trigger;
+- repeated open/close cycles do not leave stale preview Object URLs or duplicated keyboard listeners.
+
+## A3.1-M09 — Responsive Media management
+
+Check Media Library and Asset Picker at desktop, laptop and narrow/mobile emulation widths.
+
+Expected:
+- list/detail workspace collapses without horizontal overflow;
+- upload form remains operable;
+- preview does not cover controls;
+- Asset Picker asset list/detail and footer remain keyboard/touch usable;
+- permanent explanatory paragraphs do not reintroduce Phase B-style visual clutter.
+
+---
+
 # Future phase scenarios
 
 The following scenarios are placeholders and become executable when their phase lands:
