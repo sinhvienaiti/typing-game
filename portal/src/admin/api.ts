@@ -1,3 +1,5 @@
+import { AdminHttpError, requestAdminJson } from "./admin-http";
+
 export type AudioCategoryDefaults = {
   typing: number;
   combat: number;
@@ -234,12 +236,16 @@ export type WorldMusicPreview = {
 
 const TOKEN_KEY = "typing-game:space-admin-token";
 
-export class AdminApiError extends Error {
-  readonly status: number;
-
-  constructor(status: number, message: string) {
-    super(message);
-    this.status = status;
+export class AdminApiError extends AdminHttpError {
+  constructor(status: number, message: string, source?: AdminHttpError) {
+    super(message, {
+      code: source?.code ?? "http-error",
+      method: source?.method ?? "REQUEST",
+      path: source?.path ?? "/api/admin/space-typing",
+      status,
+      contentType: source?.contentType ?? "application/json",
+    });
+    this.name = "AdminApiError";
   }
 }
 
@@ -255,27 +261,22 @@ export class SpaceTypingAdminApi {
     localStorage.setItem(TOKEN_KEY, this.token);
   }
 
+  requestJson<T>(path: string, init?: RequestInit): Promise<T> {
+    return this.request<T>(path, init);
+  }
+
   private async request<T>(path: string, init?: RequestInit): Promise<T> {
-    const response = await fetch(path, {
-      ...init,
-      cache: "no-store",
-      headers: {
-        "content-type": "application/json",
-        "x-typing-game-admin-token": this.token,
-        ...(init?.headers ?? {}),
-      },
-    });
-    const payload = (await response.json().catch(() => ({}))) as Record<string, unknown>;
-    if (!response.ok) {
-      const message =
-        typeof payload["message"] === "string"
-          ? payload["message"]
-          : typeof payload["error"] === "string"
-            ? payload["error"]
-            : `Admin request failed (${response.status})`;
-      throw new AdminApiError(response.status, message);
+    try {
+      return await requestAdminJson<T>(path, {
+        token: this.token,
+        init,
+      });
+    } catch (error) {
+      if (error instanceof AdminHttpError) {
+        throw new AdminApiError(error.status, error.message, error);
+      }
+      throw error;
     }
-    return payload as T;
   }
 
   getState(): Promise<AdminStatePayload> {
