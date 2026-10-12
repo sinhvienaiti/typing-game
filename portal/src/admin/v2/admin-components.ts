@@ -1,3 +1,4 @@
+import "./admin-components.css";
 import type { AdminHelpScope, AdminInfoIconOptions } from "./admin-help";
 
 export type AdminTone = "info" | "good" | "warn" | "bad";
