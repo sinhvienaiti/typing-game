@@ -13,7 +13,7 @@
 1. Open Space Typing Admin on desktop.
 2. Expand a sidebar group.
 3. Hover a group label.
-4. Hover an item such as Ships or Shop.
+4. Hover an item such as Ships or Music Library.
 
 Expected:
 - concise label remains the only permanent sidebar text;
@@ -108,6 +108,103 @@ Expected:
 - groups/items are materially less noisy than Phase B;
 - labels remain scannable and do not overlap icons/chevrons;
 - active route remains obvious.
+
+---
+
+# A2 — Administrator Shell / Dashboard / Developer Tools
+
+## A2-M01 — Dashboard uses real Admin data only
+
+1. Open `/admin/space-typing`.
+2. Note the live generation, draft count, music count and signed-in actor.
+3. Open History & Publish and compare draft/live state.
+4. Open Music Library and compare the catalog size.
+
+Expected:
+- Dashboard values correspond to real revision-store and music-catalog data;
+- no random/demo/placeholder KPI appears;
+- publishable and stale draft counts match History semantics;
+- maintenance warning appears only when the active revision has maintenance enabled.
+
+## A2-M02 — Dashboard loading, empty and error states
+
+1. Reload Dashboard normally.
+2. On a fresh local Admin profile with no successful audit activity, inspect Recent Admin Activity.
+3. Temporarily stop the Admin service and reload Dashboard, then restore the service and use Retry.
+
+Expected:
+- loading skeleton is visible while canonical data is loading;
+- no-activity state is explicit and not presented as an error;
+- service failure produces a clear administrator-facing error state;
+- retry returns to the Dashboard without stale overlays or duplicate content.
+
+## A2-M03 — Administrator-first primary navigation
+
+Inspect the normal sidebar.
+
+Expected:
+- normal Admin navigation contains Dashboard, Content, Gameplay, Media and System workflows that currently have real administrator value;
+- Shop runtime contract, currencies diagnostics, rewards diagnostics, missions diagnostics, PvP diagnostics, Backgrounds/VFX/UI Assets diagnostics and QA Sandbox do not appear as normal administrator menu items;
+- technical routes were not deleted: they remain reachable from Developer Tools for an authorized actor.
+
+## A2-M04 — Developer Tools permission-aware visibility
+
+Run with an actor/token configuration that does not expose `developer.runtime-inspect` when such a restricted local test actor is available.
+
+Expected:
+- Developer Tools group fails closed while actor permissions are unresolved;
+- unauthorized actor does not receive the Developer Tools manifest;
+- Developer Tools command-palette entries are omitted when permission is absent;
+- normal administrator workflows remain usable.
+
+Current local default actor is Super Admin, so this scenario may remain deferred until a restricted actor fixture is introduced.
+
+## A2-M05 — Developer Tools organization
+
+1. Open Developer Tools as the local Super Admin.
+2. Inspect Runtime & Telemetry, Economy Diagnostics, Live Ops Diagnostics, PvP Diagnostics, Visual Diagnostics and QA/Test Lab.
+3. Open at least one tool from each section.
+
+Expected:
+- technical screens are grouped by purpose instead of mixed into normal navigation;
+- descriptions make it clear that diagnostics are not editable Admin capabilities;
+- existing canonical direct routes still load their runtime-backed/read-only surfaces;
+- no fake Shop editor, fake event scheduler or fake player backend is introduced.
+
+## A2-M06 — Command palette separation
+
+1. Open `Cmd/Ctrl+K` as the default local Super Admin.
+2. Search for `Ships`, `History`, `Shop`, `Events`, `VFX` and `QA`.
+
+Expected:
+- administrator workflows are available as normal commands;
+- technical commands are available only because the current actor has Developer Tools permission;
+- command result labels/groups clearly distinguish Developer Tools concepts;
+- keyboard navigation, Escape and focus restoration continue to work.
+
+## A2-M07 — Direct legacy migration routes
+
+Directly open representative technical URLs such as:
+- `/admin/space-typing/shop`
+- `/admin/space-typing/events`
+- `/admin/space-typing/backgrounds`
+- `/admin/space-typing/qa`
+
+Expected:
+- route still resolves during migration;
+- breadcrumb remains understandable;
+- route is not re-added to the primary administrator sidebar;
+- underlying Phase B ownership/runtime safety behavior remains unchanged.
+
+## A2-M08 — Responsive shell after navigation reduction
+
+Check desktop, laptop and narrow viewport widths.
+
+Expected:
+- shorter administrator-first sidebar remains scannable;
+- Dashboard cards/attention/activity/quick actions do not force horizontal page overflow;
+- Developer Tools cards/links remain readable;
+- tooltips and command palette remain usable after resize.
 
 ---
 
