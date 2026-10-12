@@ -1,134 +1,214 @@
 # Space Typing Administrator Admin V2 — Master Plan
 
-> Status: PLANNING SOURCE OF TRUTH FOR ADMINISTRATOR-FIRST REDESIGN
+> Status: PLANNING SOURCE OF TRUTH — REVIEWED / HARDENED
 >
 > Scope: `sinhvienaiti/typing-game` + `sinhvienaiti/space-typing`
 >
-> Parent working branch at plan creation: `feat/space-typing-admin-uiux`
+> Review date: 2026-10-13
 >
-> Parent HEAD observed before plan creation: `db53949ad89271e3ad6cd8232fa2331cd962b58f`
+> Parent working branch: `feat/space-typing-admin-uiux`
 >
-> Child Admin integration branch observed before plan creation: `feat/admin-world-music-stage-policy`
+> Parent HEAD observed immediately before this review/update: `f45ba4aa1929e2bab8b3b73e1cbdb583ab8d84ed`
 >
-> Child HEAD observed before plan creation: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
+> Child Admin integration branch: `feat/admin-world-music-stage-policy`
+>
+> Child HEAD observed immediately before this review/update: `8128a2a5a7713fff80cd1286b607de6a3e7190f7`
 >
 > IMPORTANT: these SHAs are checkpoints only. Every implementation worker MUST fetch current GitHub HEADs first and use newer Git state as source of truth. Never reset a branch to the SHAs in this document.
 
 ---
 
-## 0. Executive decision
+# 0. Executive decision
 
-The current Space Typing Admin Phase B successfully established many important engineering foundations: authenticated Admin APIs, runtime ownership audits, revision-backed configuration, validation, canonical child integration, publishing/rollback infrastructure, and removal of legacy fake/mock production routing.
+The current Space Typing Admin Phase B established important engineering foundations: authenticated Admin APIs, runtime ownership audits, revision-backed configuration, validation, preview bridges, canonical child integration, publish/rollback infrastructure, and removal of legacy fake/mock production routing.
 
-However, the current product surface is not yet an administrator-oriented game management product. Too many screens expose runtime contracts, source ownership, canonical IDs, capability evidence, apply boundaries, child SHAs, unsupported runtime fields, and implementation terminology directly in the primary UI.
+Those foundations remain valuable and must be preserved.
 
-That approach is valuable for developers, but it is the wrong primary experience for game administrators.
+The current product surface, however, is still too developer-oriented. A normal administrator is currently exposed to runtime contracts, canonical IDs, source ownership, capability evidence, apply boundaries, child SHAs, persistence details and implementation language that should not be required for routine game management.
 
-Admin V2 therefore changes the primary product model from:
+Admin V2 changes the primary product model from:
 
 ```text
 Admin screen = runtime/config inspector with some editing
 ```
 
-to:
+into:
 
 ```text
-Admin screen = business/game-management workflow
-                ↓
-            domain service
-                ↓
-      validation + canonical model
-                ↓
-        Space Typing runtime
+Administrator workflow
+        ↓
+Admin Domain API
+        ↓
+Admin Domain Service
+        ↓
+Domain validation + permissions + audit
+        ↓
+Canonical persisted definition / revision / change set
+        ↓
+Runtime adapter / generated artifact when required
+        ↓
+Space Typing runtime consumer
 ```
 
-The existing Phase B technical work is NOT discarded. It becomes the foundation beneath V2 and, where appropriate, is surfaced under **Developer Tools / Diagnostics** rather than in administrator-facing workflows.
+The existing technical information is not deleted. It is relocated to **Developer Tools / Diagnostics / Advanced details**.
 
-### Product rule
+## Hard product rule
 
-> If a normal administrator must understand source code, JSON structure, filesystem paths, canonical runtime IDs, child SHAs, runtime evidence, protocol versions, or implementation ownership in order to perform a routine game-management task, the Admin UX is not complete.
+> If a normal administrator must understand source code, JSON structure, filesystem paths, canonical runtime IDs, child SHAs, protocol versions, runtime evidence, persistence ownership or implementation boundaries to complete a routine task, that Admin V2 workflow is not finished.
 
-This rule is a hard acceptance criterion for Admin V2.
-
----
-
-# 1. Why Admin V2 is required
-
-## 1.1 Current problem: developer-first presentation
-
-Representative current patterns include:
-
-- Shop presenting runtime contract status, capability evidence, read-only boundaries, runtime source fields, persistence ownership and unsupported authoring states.
-- Ships presenting canonical IDs, asset IDs, child registry terminology, override persistence terminology and apply-boundary details as primary content.
-- Navigation items carrying long descriptions under almost every label.
-- Page headers containing technical explanations that are always visible.
-- Panels carrying subtitles that describe architecture instead of helping an administrator finish a task.
-- Runtime diagnostics and administrator actions being mixed in the same hierarchy.
-
-This produces a technically correct but operationally noisy product.
-
-## 1.2 Administrator intent is different
-
-An administrator thinks in tasks such as:
-
-- “Change the price of this product.”
-- “Add a SALE badge until Sunday.”
-- “Replace the Vanguard ship image.”
-- “Change its primary weapon and projectile effect.”
-- “Disable this boss temporarily.”
-- “Schedule a Halloween promotion.”
-- “Upload a new BGM and assign it to World G05.”
-- “Duplicate this ship and create a new variant.”
-- “Preview this change before publishing.”
-- “See who changed this value.”
-
-The UI must be organized around these tasks.
+This is a hard acceptance criterion.
 
 ---
 
-# 2. Admin V2 product principles
+# 1. Product-owner requirements locked by this plan
+
+These requirements must survive every implementation decision.
+
+## 1.1 Administrator orientation
+
+The primary Admin product is for administrators and game operators, not developers.
+
+## 1.2 Shop
+
+Administrators must ultimately be able to manage real runtime-consumed product data, including applicable fields such as:
+
+- product presentation;
+- product name/label;
+- price;
+- sale price / discount;
+- discount label/badge such as SALE / HOT / NEW / LIMITED;
+- availability/schedule;
+- media;
+- purchase limits/stock semantics where runtime genuinely supports them;
+- preview before publish.
+
+The current Shop runtime-contract inspector is not considered a finished Shop admin screen.
+
+## 1.3 Ships
+
+Administrators must ultimately be able to manage applicable ship properties such as:
+
+- image / authored visual asset;
+- 3D model where supported;
+- display name;
+- description / class / rarity;
+- weapon;
+- projectile;
+- VFX;
+- SFX;
+- unlock rule;
+- related media;
+- preview/test behavior.
+
+No raw path editing should be required.
+
+## 1.4 UI density
+
+Permanent short descriptions and architecture-heavy subtitles must be removed substantially.
+
+Help should use styled tooltips/info icons/help drawers and progressive disclosure.
+
+## 1.5 Developer information
+
+Runtime contracts, SHAs, protocol versions, source ownership, raw paths, registry evidence and similar technical information remain available, but under **Developer Tools / Advanced** rather than the normal administrator workflow.
+
+---
+
+# 2. Verified current-state constraints that shape V2
+
+The following are not theoretical concerns. They were observed in the current implementation and must influence sequencing.
+
+## 2.1 Current shell is still developer-heavy
+
+Current navigation/page helpers render permanent descriptions and technical explanatory text. Admin V2 must replace this with concise labels, contextual help and task-oriented state messages.
+
+## 2.2 Current UI construction is imperative DOM TypeScript
+
+The existing admin is not a React component system. V2 shared components must therefore define lifecycle and cleanup explicitly instead of assuming framework-managed cleanup.
+
+This is especially important for tooltips, dialogs, outside-click handlers, keyboard handlers, async loading and focus restoration.
+
+## 2.3 Current Shop is runtime-backed read-only
+
+The current Shop screen exposes a runtime contract, not a canonical administrator-authored commerce model.
+
+Therefore:
+
+> Do not add edit buttons to the existing Shop inspector until canonical Shop authoring architecture is decided and implemented.
+
+## 2.4 Current Ships editor is a registry/config override editor
+
+The existing Ships workflow has useful revision/preview foundations but exposes IDs, asset IDs, procedural settings and implementation boundaries more prominently than real administrator concepts.
+
+It must evolve into an entity workflow, not merely receive cosmetic wording changes.
+
+## 2.5 Current revision/publish model is whole-config oriented
+
+Existing revisions contain complete config state and publish uses compare-and-swap against the active revision.
+
+This means an entity editor cannot casually present `Publish` as if it were guaranteed to publish only that entity.
+
+V2 must define change scope and publish semantics before writable entity workflows are considered complete.
+
+## 2.6 Current authentication is minimal/local-oriented
+
+The current server model is effectively a local Admin service with a shared token and no mature user/role identity model.
+
+The plan may target roles, audit and multi-user-safe mutation, but implementation must not pretend those capabilities already exist.
+
+## 2.7 Current generic Media architecture is incomplete
+
+Music already has stronger upload/catalog behavior than several other asset types. Images, models, VFX and other media do not yet share a complete writable canonical Media service.
+
+Therefore Media UI must follow a Media architecture gate rather than immediately creating generic upload/edit screens over inconsistent owners.
+
+## 2.8 Existing validator freezes Phase B presentation details
+
+Current Admin validation includes useful canonical/runtime safety checks, but also hardcodes old routes/labels/status text and other presentation details.
+
+V2 must migrate those assertions deliberately. Do not weaken canonical safety checks simply to make the new UI pass.
+
+---
+
+# 3. Product principles
 
 ## P01 — Administrator-first language
 
-Use domain language: Product, Price, Ship, Weapon, Boss, Reward, Event, Image, Music, Publish.
+Use domain language: Product, Price, Ship, Weapon, Boss, Reward, Event, Image, Music, Draft, Preview, Publish.
 
-Do not use implementation language in primary UI: runtime owner, protocol version, canonical source, child SHA, apply boundary, registry evidence, serialized override, JSON path.
-
-Technical terms belong in Developer Tools or contextual troubleshooting details.
+Implementation language belongs in Developer Tools.
 
 ## P02 — Progressive disclosure
 
 Show only information needed for the current task.
 
-- Basic fields are visible.
-- Advanced fields live in Advanced sections/drawers.
-- Help is hidden behind tooltips/info icons.
-- Diagnostics are hidden behind Developer Tools.
-- Conditional fields appear only when their controlling option is selected.
+- basic fields visible;
+- advanced fields in Advanced sections/drawers;
+- help behind tooltips/info icons;
+- diagnostics under Developer Tools;
+- conditional fields shown only when relevant.
 
-## P03 — Tooltip-first help, not permanent short descriptions
+## P03 — Tooltip-first help
 
-The current repeated short descriptions must be removed from primary layouts wherever the label/control is self-explanatory.
+Do not render permanent helper paragraphs where a label is self-explanatory.
 
-Standard:
+Example:
 
 ```text
-Price                 ⓘ
-[ 2,000              ]
+Price                                    ⓘ
+[ 2,000                                  ]
 ```
 
-Hover/focus/click on `ⓘ`:
+Tooltip:
 
 ```text
 PRICE
 Base purchase price before promotion discounts.
 ```
 
-Do not render this text permanently below the field unless it is a validation message, warning, state explanation, or task-critical instruction.
+Permanent inline copy is reserved for validation, warnings, state, destructive consequences or task-critical instructions.
 
 ## P04 — Visual management instead of path management
-
-Administrators choose assets from a Media Library / Asset Picker.
 
 Wrong:
 
@@ -144,138 +224,132 @@ Ship Image
 [ Replace ] [ Remove ]
 ```
 
-## P05 — Safe content lifecycle
+## P05 — Safe lifecycle
 
 Routine mutation flow:
 
 ```text
-Edit → Save Draft → Validate → Preview → Publish
+Edit → Save Draft → Validate → Preview → Review Change Scope → Publish
 ```
 
-A normal edit must not silently mutate production runtime immediately.
+No routine edit silently mutates live gameplay.
 
-## P06 — Preserve one source of truth
+## P06 — One source of truth
 
-Admin V2 must not create a shadow model that diverges from gameplay.
+No shadow Admin database/config that gameplay does not consume canonically.
 
-When runtime currently lacks an authorable domain, implementation must establish a real canonical owner/apply boundary before presenting an editable administrator workflow.
+If a domain has no authorable owner, implement the owner first.
 
 ## P07 — Lists first, details second
 
-Large domains use list/detail patterns:
+Large domains use searchable/filterable list or card views followed by focused entity editors.
 
-- searchable table/grid
-- filters
-- sorting
-- status
-- bulk actions where appropriate
-- create/duplicate/edit actions
-- focused entity editor
+## P08 — Preview visual/experiential output
 
-Do not place an entire registry worth of forms on one page.
+Ships, weapons, projectiles, bosses, VFX, backgrounds, music, SFX, shop cards, promotions and stages should provide meaningful preview/test surfaces where practical.
 
-## P08 — Preview whenever the output is visual or experiential
+## P09 — Server-side permissions
 
-Ships, projectiles, VFX, backgrounds, bosses, music, SFX, shop cards and events should have useful preview/test surfaces.
+UI hiding is not authorization. Every mutation/publish/destructive action must be permission-checked server-side once the permission foundation exists.
 
-## P09 — Strong permissions
+## P10 — Preserve Space Typing identity
 
-Developer-only controls and dangerous operations must be separated from normal administrator permissions.
+Keep the dark sci-fi command interface, restrained cyan/violet accents, Exo 2 / Be Vietnam Pro typography, angular panels and high-contrast states.
 
-## P10 — Preserve Space Typing visual identity
+Reduce noise; do not turn Admin into a generic white SaaS dashboard.
 
-Admin must feel like part of Space Typing: dark sci-fi command interface, restrained cyan/violet accents, existing Exo 2 / Be Vietnam Pro typography, angular panels and high-contrast states.
+## P11 — Real-data-only UI
 
-The redesign should reduce noise without becoming a generic white SaaS dashboard.
+Do not invent dashboard counters, scheduled events, audit entries, player data or capabilities merely to make a screen look complete.
 
----
+Unavailable capability should be represented honestly and quietly.
 
-# 3. Target users and roles
+## P12 — Capability-aware navigation
 
-Admin V2 should be designed around explicit roles even if initial authentication remains simple.
+The target IA is the final destination, not a requirement to render dozens of dead routes immediately.
 
-## 3.1 Super Admin
-
-Full access to all administrator domains, publishing, permissions and Developer Tools.
-
-## 3.2 Game Designer
-
-Can manage gameplay content:
-
-- ships
-- weapons
-- projectiles
-- skills
-- equipment
-- enemies
-- bosses
-- worlds
-- stages
-- objectives
-- routes
-
-## 3.3 Economy Manager
-
-Can manage:
-
-- shop
-- products
-- currencies where allowed
-- rewards
-- drop tables
-- pricing
-- promotions
-- purchase limits
-
-## 3.4 Content Manager
-
-Can manage:
-
-- world/stage presentation
-- typing content assignments
-- labels/descriptions
-- images/media assignments
-
-## 3.5 Live Ops Manager
-
-Can manage:
-
-- events
-- promotions
-- discounts
-- announcements
-- schedules
-- feature activations that are explicitly live-ops safe
-
-## 3.6 Media Manager
-
-Can upload, replace, tag and manage assets without changing gameplay balance.
-
-## 3.7 Support / Player Operations
-
-Future/conditional role for player lookup, inventory/progress support and safe compensating operations if a real server-side player backend exists.
-
-Do NOT fabricate player-management CRUD if the runtime is still browser/local-profile owned.
-
-## 3.8 Developer
-
-Can access:
-
-- Runtime Inspector
-- Contract Inspector
-- Validation Diagnostics
-- QA Sandbox / Test Lab
-- raw technical metadata
-- runtime ownership evidence
-- protocol/version diagnostics
-
-## 3.9 Viewer
-
-Read-only access to permitted domains.
+Normal navigation should expose administrator workflows only when they are implemented or meaningfully usable.
 
 ---
 
-# 4. Target information architecture
+# 4. Deployment model gate
+
+Before first major writable V2 domain, A0 must record the intended deployment model.
+
+## Current verified implementation assumption
+
+Current Admin infrastructure is local-oriented and must be treated as such until architecture explicitly changes it.
+
+## A0 decision required
+
+Choose and document one of these directions for the current milestone:
+
+### D1 — Local authoring/control plane
+
+Admin runs locally for trusted operators/developers; published artifacts/config are later deployed through existing project flow.
+
+### D2 — Remote production control plane
+
+Admin is a networked multi-user service with production authentication, authorization, persistent identity, concurrency, durable storage, scheduling and security requirements.
+
+### Rule
+
+Do not partially design as D1 while implementing role/audit/scheduling assumptions as if D2 already exists.
+
+A future migration from D1 to D2 is allowed, but the boundary must be explicit.
+
+---
+
+# 5. Target users, roles and permission model
+
+Target roles remain:
+
+- Super Admin
+- Game Designer
+- Economy Manager
+- Content Manager
+- Live Ops Manager
+- Media Manager
+- Support / Player Operations — only when real player backend exists
+- Developer
+- Viewer
+
+Target permission format:
+
+```text
+resource.action
+```
+
+Examples:
+
+```text
+shop.read
+shop.write
+shop.publish
+ships.write
+media.upload
+media.replace
+events.publish
+developer.runtime-inspect
+```
+
+## Critical sequencing change
+
+The complete Roles & Permissions management UI remains a later phase, but **minimal permission infrastructure must exist before the first writable V2 domain ships**.
+
+Minimum early foundation:
+
+- current actor identity model;
+- permission evaluation service;
+- server-side mutation/publish authorization hook;
+- Developer Tools permission boundary;
+- test coverage proving UI hiding cannot bypass server authorization.
+
+A13 later builds the administrator-facing role-template/granular-permission UI on top of this foundation.
+
+---
+
+# 6. Target information architecture
 
 ```text
 SPACE TYPING ADMIN
@@ -326,10 +400,10 @@ PVP / MODES
 └── Alternative Modes
 
 PLAYERS
-├── Players             (only when canonical backend exists)
-├── Progress            (only when canonical backend exists)
-├── Inventory           (only when canonical backend exists)
-└── Transactions        (only when canonical ledger exists)
+├── Players        (only when canonical backend exists)
+├── Progress       (only when canonical backend exists)
+├── Inventory      (only when canonical backend exists)
+└── Transactions   (only when canonical ledger exists)
 
 SYSTEM
 ├── Game Settings
@@ -340,79 +414,71 @@ SYSTEM
     ├── Runtime Inspector
     ├── Contract Inspector
     ├── Validation
-    ├── Diagnostics
+    ├── Asset Diagnostics
     └── QA Sandbox / Test Lab
 ```
 
-### Navigation rule
+## Navigation rules
 
-Sidebar items should show only icon + concise label in normal state.
-
-Current always-visible per-item descriptions should be removed.
-
-Optional help behavior:
-
-- collapsed sidebar: tooltip on icon hover
-- expanded sidebar: label only
-- group tooltip/info icon for less obvious groups
+- expanded sidebar: icon + concise label only;
+- collapsed sidebar: icon + styled tooltip;
+- no permanent per-item short descriptions;
+- do not expose unavailable target routes merely because they exist in the target IA;
+- Developer Tools is permission-gated;
+- technical routes should migrate into Developer Tools incrementally as each V2 domain replaces its Phase B inspector.
 
 ---
 
-# 5. Global UI/UX specification
+# 7. Global UI/UX specification
 
-## 5.1 Visual density
-
-Goal: information-dense but calm.
-
-Avoid:
-
-- stacked permanent notices
-- repeated explanation paragraphs
-- architecture text in page headers
-- large technical subtitles under every panel title
-- multiple status badges that all say similar things
+## 7.1 Visual density
 
 Prefer:
 
-- concise heading
-- optional one-line task context only when necessary
-- tooltip/info icon
-- compact status chips
-- drawers for advanced details
-- warnings only when actionable
+- concise headings;
+- optional one-line task context only when necessary;
+- tooltips/info icons;
+- compact status chips;
+- drawers/accordions for advanced details;
+- warnings only when actionable.
 
-## 5.2 Standard page header
+Avoid:
 
-```text
-Ships                                    [ + Create Ship ]
-Fleet management                          [ Filter ] [ Search ]
-```
+- architecture paragraphs in page headers;
+- source/owner subtitles under every panel;
+- repeated permanent helper text;
+- stacked notices saying the same thing;
+- multiple technical badges in normal workflows.
 
-The subtitle may be omitted when redundant.
-
-No primary header should contain paragraphs describing runtime architecture.
-
-## 5.3 Standard field
+## 7.2 Standard header
 
 ```text
-Display Name                         ⓘ
-[ Vanguard                           ]
+Ships                                  [ + Create Ship ]
+Fleet management                        [ Search ] [ Filter ]
 ```
 
-Optional states:
+Subtitle may be omitted when redundant.
 
-- required marker
-- invalid state
-- warning state
-- read-only lock icon
+## 7.3 Standard field
 
-Never place a long helper paragraph beneath every field.
+```text
+Display Name                            ⓘ
+[ Vanguard                              ]
+```
 
-## 5.4 Tooltip component — hard requirement
+Optional field states:
+
+- required;
+- invalid;
+- warning;
+- read-only lock;
+- pending draft change.
+
+## 7.4 Tooltip component — hard requirement
 
 Create a reusable first-class component, not browser-native `title` only.
 
-Suggested API concept:
+Conceptual API:
 
 ```ts
 createAdminTooltip({
@@ -422,79 +488,82 @@ createAdminTooltip({
 });
 ```
 
-### Visual style
+### Visual
 
-- dark/translucent panel matching Space Typing
-- thin cyan/violet border
-- subtle glow only
-- 8–10px angular corner treatment consistent with current shell
-- Exo 2 title, Be Vietnam Pro body
-- maximum width approximately 280–340px
-- no excessive animation
-- small fade + 2–4px scale/translate transition
-- very high z-index within admin portal
-- must not cover the focused input when an alternate placement exists
+- dark/translucent Space Typing panel;
+- thin cyan/violet border;
+- subtle glow;
+- angular corner treatment consistent with shell;
+- Exo 2 title / Be Vietnam Pro body;
+- ~280–340px max width;
+- restrained fade/translate transition;
+- high z-index;
+- collision-aware placement.
 
 ### Interaction
 
 Desktop:
 
-- hover info icon
-- keyboard focus info icon
-- Escape closes persistent/focus tooltip
+- hover;
+- keyboard focus;
+- Escape closes persistent/focus state.
 
 Touch:
 
-- tap info icon toggles tooltip/popover
-- tap outside closes
+- tap toggles;
+- outside tap closes.
 
-Accessibility:
+### Accessibility
 
-- tooltip trigger is a real button when interactive
-- `aria-describedby` / appropriate tooltip semantics
-- fully keyboard reachable
-- not required to hover with a mouse
+- interactive trigger is a real button;
+- keyboard reachable;
+- `aria-describedby` / appropriate semantics;
+- help never requires mouse-only hover.
 
-### Content rule
+### Imperative DOM lifecycle requirement
 
-Normal tooltip length: 1–4 short lines.
+Because current Admin is imperative DOM TypeScript, tooltip implementation must explicitly define:
 
-For complex topics:
+- unique IDs;
+- event listener cleanup;
+- outside-click cleanup;
+- Escape handler cleanup;
+- focus restoration where applicable;
+- viewport collision/flip behavior;
+- stale tooltip removal during route/screen teardown;
+- no orphan document-level listeners after rerender/navigation.
+
+## 7.5 Help Drawer
+
+Tooltip: 1–4 short lines.
+
+Longer explanation uses:
 
 ```text
-Advanced pricing rule...
 Learn more →
 ```
 
-Open a help drawer rather than a 15-line tooltip.
+and opens `AdminHelpDrawer`.
 
-## 5.5 Inline messages
+## 7.6 Inline state messages
 
-Inline messages are reserved for state, not generic documentation.
-
-Valid examples:
+Valid:
 
 ```text
 ⚠ Sale price must be lower than base price.
-```
-
-```text
 ✓ Draft validated successfully.
-```
-
-```text
 ⚠ This asset is used by 12 entities.
 ```
 
-Invalid example:
+Invalid as permanent inline documentation:
 
 ```text
 This field controls how the child runtime resolves ...
 ```
 
-That belongs in a tooltip or Developer Tools.
+## 7.7 Conditional fields
 
-## 5.6 Conditional fields
+Show fields only for selected rule types.
 
 Example:
 
@@ -506,70 +575,49 @@ Required World
 [ G04 — Frozen Rift ▼ ]
 ```
 
-Do not show controls for all possible unlock types simultaneously.
+## 7.8 Lists
 
-## 5.7 List screens
+Large entity domains should support applicable combinations of:
 
-Every large entity domain should implement:
+- search;
+- filters;
+- sort;
+- status chips;
+- pagination/virtualization where required;
+- create;
+- edit;
+- duplicate;
+- archive/disable;
+- preview;
+- safe bulk actions only when appropriate.
 
-- search
-- filters
-- sort
-- status chips
-- pagination or virtualized/scalable list where required
-- create
-- edit
-- duplicate
-- archive/disable where appropriate
-- bulk actions only where safe
+## 7.9 Entity editors
 
-## 5.8 Entity editor
+Complex entities use tabs/sections.
 
-Use tabs/sections for complex entities.
-
-Example Ship editor:
+Example:
 
 ```text
 Vanguard
 [ General ] [ Visuals ] [ Combat ] [ Effects ] [ Unlock ] [ Preview ]
 ```
 
-## 5.9 Sticky lifecycle bar
-
-For revision-backed entities:
+## 7.10 Sticky lifecycle bar
 
 ```text
 Unsaved changes
-[ Discard ] [ Save Draft ] [ Preview ] [ Publish ]
+[ Discard ] [ Save Draft ] [ Preview ] [ Review Changes ] [ Publish ]
 ```
 
-Publishing may remain centralized in History & Publish if required by the existing revision architecture, but the entity editor must provide a clear workflow rather than forcing administrators to understand revision internals.
-
-## 5.10 Empty states
-
-Good empty state:
-
-```text
-No promotions yet.
-Create a promotion to schedule a discount or featured campaign.
-[ + Create Promotion ]
-```
-
-Bad empty state:
-
-```text
-Canonical runtime does not expose promotional authoring capability.
-```
-
-If the capability genuinely does not exist, the administrator-facing state should explain product availability plainly, while technical evidence belongs in Developer Tools.
+The button label and behavior must reflect actual revision/change-set semantics described later in this plan.
 
 ---
 
-# 6. Shared component/design-system work
+# 8. Shared Admin V2 component system
 
-Admin V2 should establish reusable components before rewriting every domain.
+Create reusable primitives before mass domain migration.
 
-## A. Shell components
+## Shell
 
 - `AdminSidebar`
 - `AdminTopbar`
@@ -578,7 +626,7 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminPageActions`
 - `AdminCommandPalette`
 
-## B. Data/list components
+## Lists/data
 
 - `AdminEntityTable`
 - `AdminCardGrid`
@@ -589,7 +637,7 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminStatusChip`
 - `AdminBulkActionBar`
 
-## C. Form components
+## Forms
 
 - `AdminField`
 - `AdminTextInput`
@@ -606,7 +654,7 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminTagInput`
 - `AdminEntityPicker`
 
-## D. Help/state components
+## Help/state
 
 - `AdminInfoIcon`
 - `AdminTooltip`
@@ -617,7 +665,7 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminErrorState`
 - `AdminSkeleton`
 
-## E. Media components
+## Media
 
 - `AdminAssetPicker`
 - `AdminAssetCard`
@@ -628,7 +676,7 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminUploadDropzone`
 - `AdminUsageReferences`
 
-## F. Lifecycle components
+## Lifecycle
 
 - `AdminDraftBar`
 - `AdminPublishDialog`
@@ -636,24 +684,24 @@ Admin V2 should establish reusable components before rewriting every domain.
 - `AdminChangeSummary`
 - `AdminAuditTimeline`
 
-## G. Dialogs/drawers
+## Dialogs/drawers
 
-- confirmation dialog
-- destructive confirmation
-- duplicate entity dialog
-- asset replacement dialog
-- advanced settings drawer
-- dependency/usage drawer
+- confirmation dialog;
+- destructive confirmation;
+- duplicate entity dialog;
+- asset replacement dialog;
+- advanced settings drawer;
+- dependency/usage drawer.
 
-### Component acceptance rule
+### Component rule
 
-A screen should not create a new one-off form/list pattern if a shared Admin V2 component can satisfy it.
+A domain must not create a new one-off form/list/help/lifecycle pattern when a shared V2 component can satisfy the need.
 
 ---
 
-# 7. Domain architecture
+# 9. Domain architecture and canonical ownership
 
-## 7.1 Required layers
+## Required layers
 
 ```text
 Administrator UI
@@ -662,86 +710,196 @@ Admin Domain API
       ↓
 Admin Domain Service
       ↓
-Domain Validation
+Authorization + validation + audit
       ↓
-Canonical persisted definition / revision
+Canonical persisted definition / revision / change set
       ↓
 Runtime adapter / generated artifact if required
       ↓
 Space Typing runtime consumer
 ```
 
-## 7.2 Existing Phase B work to preserve
+## Preserve from Phase B
 
-Keep and reuse where compatible:
+Keep where compatible:
 
-- authenticated Admin service
-- revision model
-- compare-and-swap semantics
-- validation pipeline
-- publish/rollback
-- runtime preview bridges
-- canonical child registries
-- existing asset/catalog builders that are true runtime owners
-- CI contract validators
+- authenticated Admin service;
+- revision model;
+- CAS semantics;
+- validation pipeline;
+- publish/rollback;
+- runtime preview bridges;
+- canonical child registries;
+- real asset/catalog builders;
+- CI ownership/contract validators.
 
-## 7.3 Existing Phase B work to relocate from primary UX
+## Move out of primary UI
 
-Move to Developer Tools or internal diagnostics:
+Move to Developer Tools/Advanced:
 
-- child SHA evidence
-- runtime source paths
-- protocol versions
-- runtime ownership strings
-- contract field tables
-- unsupported field matrices
-- raw capability manifests
-- persistence-owner diagnostics
-- exact apply-boundary implementation text
-- raw evidence lists
+- child SHA evidence;
+- runtime source paths;
+- protocol versions;
+- runtime ownership strings;
+- raw contract tables;
+- unsupported field matrices;
+- raw capability manifests;
+- persistence-owner diagnostics;
+- exact apply-boundary implementation text;
+- raw evidence lists.
 
-## 7.4 Missing capability policy
+## Missing capability policy
 
-Admin V2 must not fake authoring.
+If a valid administrator requirement lacks a canonical owner:
 
-If an administrator requirement is valid but current runtime lacks a canonical authoring model, implementation should:
+1. identify current gameplay behavior;
+2. define canonical domain model;
+3. choose real owner in parent/child/service;
+4. implement persistence/revision behavior;
+5. implement validation;
+6. implement runtime consumption;
+7. expose Admin Domain API;
+8. add Admin editor;
+9. add preview using the same transform/runtime adapter;
+10. add CI tests preventing divergence.
 
-1. identify existing gameplay behavior;
-2. define the canonical domain model;
-3. implement the domain owner in child/runtime or parent where architecturally correct;
-4. add validation;
-5. expose Admin service API;
-6. add Admin editor;
-7. ensure runtime consumes the exact same canonical source;
-8. add CI tests preventing divergence.
+Never fabricate authoring with a disconnected Admin-only config.
 
 ---
 
-# 8. Media Library — foundation capability
+# 10. Draft / change-set / publish architecture gate
 
-Media management is a dependency for many administrator workflows and should be implemented early.
+This is a new mandatory gate before the first major writable V2 entity domain.
 
-## 8.1 Media types
+## Current risk
 
-- Images
-- 3D Models
-- Music
-- SFX
-- VFX presets/assets
+Current revisions are whole-config snapshots. Multiple entity/domain edits may coexist in one draft revision lineage.
 
-## 8.2 Media list
+Therefore the UI must not imply:
 
-Each asset card/row should show:
+```text
+Publish Vanguard
+```
 
-- preview
-- display name
-- type
-- tags/category
-- dimensions/duration/model metadata where relevant
-- status
-- usage count
+if the operation may also publish unrelated pending Shop/World/etc. changes.
 
-## 8.3 Asset detail
+## A0.5 decision required
+
+Explicitly choose and document one model:
+
+### Model R1 — Whole-config revision remains canonical
+
+If retained:
+
+- entity `Save Draft` may create/update a whole-config revision;
+- `Review Changes` must show all pending changes included in publication;
+- `Publish` copy must describe the real scope;
+- unrelated pending changes must never be silently published;
+- centralized History & Publish may remain the actual publication surface;
+- entity editor may link/hand off to centralized publication.
+
+### Model R2 — Change sets / domain-scoped drafts
+
+If implemented:
+
+- change set owns explicit entity/domain scope;
+- merge/validation into canonical whole state is defined;
+- conflict behavior is defined;
+- publish/rollback remains auditable and deterministic.
+
+### Hard acceptance
+
+No writable V2 domain is complete until an administrator can clearly answer:
+
+> “Exactly what changes will go live when I press Publish?”
+
+---
+
+# 11. Actor identity, permissions and audit foundation
+
+## 11.1 Actor identity
+
+Remove reliance on a generic default such as `local-admin` as the long-term audit identity.
+
+A0.5 defines the minimal actor envelope appropriate for the chosen deployment model.
+
+Example conceptual fields:
+
+```text
+actorId
+actorDisplayName
+authMethod
+requestId
+```
+
+Do not overbuild production identity while the deployment model is local-only, but do not lose the ability to attribute mutations.
+
+## 11.2 Permission foundation
+
+Before first writable V2 domain:
+
+- authorization service exists;
+- server mutation routes call it;
+- publish/rollback/destructive operations have explicit permissions;
+- Developer Tools has explicit permission boundary;
+- tests prove denied operations remain denied even when called directly.
+
+## 11.3 Minimal audit event envelope
+
+Every meaningful mutation/publish operation should be able to record:
+
+```text
+actor
+action
+domain
+entity type
+entity ID/reference
+change scope
+revision/change-set reference
+timestamp
+result
+```
+
+Human-readable field-level diff UI may come later in A14.
+
+### Sequencing rule
+
+A14 is the **full Audit Log UX**, not the first time audit exists.
+
+---
+
+# 12. Media architecture gate
+
+Media management is a dependency for Shop, Ships, Bosses, Worlds, VFX and more.
+
+Do not build a generic Media Library UI over inconsistent storage contracts first.
+
+## A3.0 must define
+
+For each asset type:
+
+- canonical asset identity;
+- display metadata;
+- storage owner/location;
+- immutable vs replaceable fields;
+- file/hash/version semantics;
+- MIME/type/dimension/duration/model validation;
+- generated filename policy;
+- duplicate detection policy;
+- usage/reference lookup;
+- replace semantics;
+- archive/delete semantics;
+- cache invalidation;
+- preview URL/source behavior;
+- revision/publish relationship;
+- rollback expectations;
+- provenance/source metadata where relevant.
+
+## Media entity principle
+
+Filesystem path is an implementation detail, not the administrator-facing identity.
+
+Target asset detail:
 
 ```text
 Vanguard Main Ship
@@ -757,583 +915,270 @@ Usage
 • Shop Product: Vanguard
 • Ship Selection Card: Vanguard
 
-[ Replace File ] [ Download/View Source if allowed ]
+[ Replace File ] [ Archive ]
 ```
 
-Do not make the filesystem path the primary identity.
+## Asset Picker
 
-## 8.4 Upload
+All entity references should use one reusable picker with:
 
-- drag/drop + file picker
-- validate extension/MIME
-- validate size/dimensions/duration
-- safe generated filename/storage mapping
-- duplicate detection where useful
-- preview before save
-- automatic metadata extraction
-- tag/category assignment
+- search;
+- type filter;
+- tags;
+- preview grid/list;
+- upload new when permitted;
+- select;
+- usage context.
 
-## 8.5 Replace
+---
 
-Before replacing:
+# 13. Administrator screen/domain specification
+
+The following defines product intent. A route should become visible only when the underlying capability is real enough to support its workflow.
+
+## 13.1 Dashboard
+
+Goal: answer **“What needs my attention now?”**
+
+Show only real data available from implemented domains, such as:
+
+- drafts/unpublished changes;
+- validation issues;
+- broken/missing references;
+- scheduled events/promotions when canonical scheduling exists;
+- recent audit activity when audit source exists;
+- high-level service health.
+
+Do not fabricate counts or cards for future domains.
+
+Do not show SHAs/protocols/raw capability evidence by default.
+
+## 13.2 Shop / Products
+
+Target catalog list/cards:
+
+- image;
+- product name;
+- category;
+- effective price;
+- promotion/badge;
+- availability;
+- stock/limit summary when canonical;
+- status;
+- actions.
+
+Product editor sections:
 
 ```text
-This asset is currently used by 12 entities.
-Replacing it will update those references after publish.
+General | Media | Pricing | Availability | Unlock | Preview
 ```
 
-## 8.6 Delete
+General:
 
-Deletion must be blocked or explicitly handled if references exist.
+- display name;
+- short label;
+- description;
+- category;
+- status;
+- sort order.
 
-Use archive/unpublish where physical delete is unsafe.
+Media:
 
-## 8.7 Asset Picker
+- thumbnail;
+- main image;
+- optional card/background/icon.
 
-Any entity field that references an asset should launch the same reusable picker.
+Pricing:
 
-Example:
+- currency;
+- base price;
+- sale price;
+- derived discount where appropriate;
+- SALE/HOT/NEW/LIMITED/custom approved badge.
 
-```text
-Ship Image
-[ vanguard-main ]
-[ Replace ]
-```
+Availability:
 
-Picker:
+- active/inactive;
+- start/end;
+- purchase limit;
+- stock semantics only if canonical runtime supports them.
 
-- search
-- type filter
-- tags
-- thumbnail grid
-- upload new
-- select
+Preview should render the actual/near-actual gameplay shop presentation using canonical transforms.
 
----
+### Mandatory architecture decision before write UI
 
-# 9. Screen-by-screen administrator specification
+Choose explicitly:
 
-# 9.1 Dashboard
+A. authored canonical product catalog consumed by runtime; or
 
-## Goal
+B. authored merchandising layer over canonical gameplay items with runtime-owned price/stock generation.
 
-Answer: “What needs my attention right now?”
+Do not create a second disconnected catalog.
 
-## Primary content
+## 13.3 Currencies
 
-- published content counts
-- draft/unpublished changes
-- scheduled events/promotions
-- missing/broken asset references
-- validation warnings
-- recent admin activity
-- service health only at a high level
+Administrator concepts:
 
-Example:
+- display name;
+- icon;
+- symbol;
+- enabled;
+- cap if applicable;
+- formatting;
+- acquisition/source summary;
+- spend/sink summary.
 
-```text
-Live Content
-12 Worlds · 184 Stages · 32 Ships · 58 Products
+Internal ID/persistence owner belong in Advanced/Developer Tools.
 
-Needs Attention
-3 unpublished changes
-2 missing asset references
-1 promotion awaiting review
+## 13.4 Rewards / Drop Tables / Unlock Rules
 
-Live Ops
-Halloween Event        Active
-Autumn Sale            Ends in 2 days
+Use entity/reference pickers and structured conditions instead of raw JSON.
 
-Recent Activity
-Toan updated Vanguard
-Admin published World G05
-```
+Drop tables should support validation/simulation appropriate to the real runtime model.
 
-## Do not show by default
+Unlock rule types may include only genuinely supported conditions such as:
 
-- child commit SHA
-- raw runtime evidence
-- capability manifests
-- protocol versions
+- always unlocked;
+- world completed;
+- stage completed;
+- player level;
+- purchase/currency requirement;
+- achievement/mission only when canonical.
 
----
+## 13.5 Ships
 
-# 9.2 Shop
+Fleet list:
 
-## Goal
+- visual preview;
+- display name;
+- class/rarity;
+- primary weapon;
+- unlock summary;
+- status.
 
-Manage what players can purchase and how it is presented.
-
-## Shop list/catalog
-
-Columns/cards:
-
-- image
-- product name
-- category
-- effective price
-- promotion/badge
-- availability
-- stock/limit summary
-- status
-- actions
-
-Actions:
-
-- Add Product
-- Edit
-- Duplicate
-- Disable/Enable
-- Preview
-- Archive where appropriate
-
-Filters:
-
-- category
-- currency
-- status
-- promotion
-- availability window
-
-## Product editor tabs
-
-### General
-
-- Display name
-- Short label
-- Description
-- Category
-- Status
-- Sort order
-
-### Media
-
-- Thumbnail
-- Main image
-- optional card background
-- optional icon
-
-### Pricing
-
-- Currency
-- Base price
-- Sale price
-- Discount percentage derived/displayed where appropriate
-- Discount label: SALE / HOT / NEW / LIMITED / custom approved label
-
-### Availability
-
-- Active/inactive
-- Start datetime
-- End datetime
-- purchase limit
-- stock model if canonical runtime supports it
-
-### Unlock
-
-- no requirement
-- level requirement
-- world requirement
-- stage requirement
-- prerequisite item/achievement only if canonical owner exists
-
-### Preview
-
-Render the actual shop card/presentation as close to gameplay as practical.
-
-## Required architecture change
-
-Current Shop runtime is effectively a deterministic/game-owned runtime contract and is not a complete administrator-authored commerce catalog.
-
-Admin V2 must define whether Shop should become:
-
-A. a canonical authored product catalog consumed by runtime; or
-B. an authored merchandising layer over canonical gameplay items with runtime price/stock generators.
-
-This decision must be made explicitly before enabling writes.
-
-Do not simply add form fields that write a second disconnected catalog.
-
----
-
-# 9.3 Products
-
-Products should be a reusable commerce entity if Shop presentation and item ownership justify separating product definitions from shop placement.
-
-Potential fields:
-
-- product ID (internal/read-only after creation)
-- display name
-- description
-- item type
-- referenced gameplay entity
-- images
-- default price
-- tags
-- lifecycle status
-
-Use this separation only if it reduces duplication and aligns with runtime.
-
----
-
-# 9.4 Currencies
-
-Administrator UI should focus on usable economy semantics:
-
-- Display Name
-- Icon
-- Symbol
-- Enabled
-- Cap if applicable
-- Display formatting
-- acquisition/source summary
-- spend/sink summary
-
-Advanced/system-only:
-
-- immutable internal ID
-- persistence key
-- runtime technical owner
-
-If currency behavior is intentionally fixed in code, normal administrators should see it as read-only business data, while developers can inspect technical ownership separately.
-
----
-
-# 9.5 Rewards & Drop Tables
-
-## Rewards
-
-Editable/admin-manageable where canonical runtime supports:
-
-- reward name/type
-- amount/value
-- currency/item reference
-- source context
-- enabled
-
-## Drop Table editor
-
-```text
-Drop Table: Elite Sector G04
-
-Reward                Weight/Chance
-Credits               55%
-Crystal               25%
-Equipment Rare        15%
-Legendary Fragment     5%
-```
-
-Features:
-
-- add row
-- entity picker
-- probability validation
-- normalize/weight mode depending runtime model
-- simulation/preview button if deterministic enough
-
-Do not expose raw nested reward JSON.
-
----
-
-# 9.6 Unlock Rules
-
-Provide reusable conditions instead of duplicating raw unlock fields across every entity.
-
-Possible condition types:
-
-- World completed
-- Stage completed
-- Player level
-- Achievement/mission if canonical
-- Currency purchase where appropriate
-- Always unlocked
-
-UI should dynamically show fields for the selected rule type.
-
----
-
-# 9.7 Ships
-
-## Fleet list
-
-Show:
-
-- visual thumbnail/model
-- display name
-- rarity/class
-- primary weapon
-- unlock summary
-- status
-- actions
-
-Do not show raw asset IDs in the default list.
-
-## Ship editor
-
-Tabs:
+Editor:
 
 ```text
 General | Visuals | Combat | Effects | Unlock | Shop | Preview
 ```
 
-### General
+General:
 
-- Display Name
-- Description
-- Role/Class
-- Rarity
-- Enabled
-- Sort order
+- name;
+- description;
+- role/class;
+- rarity;
+- enabled;
+- sort order.
 
-Advanced drawer:
+Visuals:
 
-- internal immutable ID
-- technical registry metadata
+- thumbnail;
+- main image;
+- 3D model where supported;
+- skins/alternate assets;
+- engine glow;
+- damage/destroyed visual;
+- scale/offsets only when needed.
 
-### Visuals
+Existing procedural silhouette/color controls may remain under Advanced fallback, not dominate the normal workflow when authored assets exist.
 
-- Thumbnail
-- Main ship image
-- 3D model if supported
-- alternate skin/assets
-- engine glow asset/preset
-- damage-state visuals
-- destroyed-state visual
-- display scale
-- offsets only when needed
+Combat:
 
-Existing procedural silhouette/colors may remain available under an Advanced procedural fallback section, not as the dominant visual management method when authored assets exist.
+- primary weapon;
+- secondary weapon when real;
+- supported stat adjustments;
+- fire/cooldown/defense/shield values exposed in game language.
 
-### Combat
+Effects:
 
-- Primary Weapon
-- Secondary Weapon if runtime supports
-- base stat adjustments
-- fire rate/modifiers
-- defense/shield characteristics
-
-Use game-language labels and units.
-
-### Effects
-
-- engine VFX
-- muzzle/fire VFX
-- projectile trail
-- hit VFX
-- shield VFX
-- low-HP smoke/fire
-- death explosion
-- SFX references
-
-### Unlock
-
-- unlock rule
-- progression display milestone
-- shop availability if relevant
-
-### Preview
-
-Interactive preview/test:
-
-- ship render
-- rotate/model preview if 3D
-- engine effect
-- fire primary weapon
-- hit target
-- death effect
-
-## Duplicate ship
-
-`Duplicate Vanguard` → creates draft entity/variant with generated internal ID workflow and copied editable fields.
-
----
-
-# 9.8 Weapons
-
-Weapon should be a first-class entity if multiple ships/enemies can reuse it.
-
-Fields:
-
-- Name
-- Description
-- Weapon Type
-- Damage
-- Fire Rate
-- Cooldown
-- Projectile reference
-- Muzzle VFX
-- Fire SFX
-- Hit behavior
-- Enabled
-
-Preview/Test:
-
-- fire weapon in isolated preview scene
-- show projectile travel
-- show hit VFX/SFX
-
-Internal formulas and engine keys stay in Advanced/Developer Tools.
-
----
-
-# 9.9 Projectiles
-
-Fields:
-
-- Name
-- Image/Model
-- Trail VFX
-- Impact VFX
-- Impact SFX
-- Speed
-- Scale
-- lifetime/range if gameplay owns it
-- behavior type if canonical
-- enabled
+- engine VFX;
+- muzzle VFX;
+- projectile trail;
+- impact VFX;
+- shield VFX;
+- low-HP smoke/fire;
+- death explosion;
+- SFX references.
 
 Preview:
 
-`▶ Test Projectile`
+- render ship;
+- model rotate if 3D;
+- engine effect;
+- fire weapon;
+- projectile/hit effect;
+- damage/death effect.
 
-The administrator should not type asset paths.
+Duplicate creates a new draft entity/variant with safe ID generation.
 
----
+## 13.6 Weapons
 
-# 9.10 Skills
+First-class entity when reuse/runtime ownership justifies it.
 
-List:
+Fields may include:
 
-- icon
-- name
-- category/type
-- cooldown
-- status
+- name;
+- description;
+- type;
+- damage;
+- fire rate/cooldown;
+- projectile reference;
+- muzzle VFX;
+- fire SFX;
+- hit behavior;
+- enabled.
 
-Editor:
+Preview/Test should exercise real canonical transform/behavior where practical.
 
-- General
-- Icon/Media
-- Gameplay Parameters
-- Effects
-- Audio
-- Unlock
-- Preview
+## 13.7 Projectiles
 
-Descriptions of formulas belong in tooltips/help drawers, not always-visible panel subtitles.
+Fields may include:
 
----
+- name;
+- image/model;
+- trail VFX;
+- impact VFX;
+- impact SFX;
+- speed;
+- scale;
+- lifetime/range where canonical;
+- behavior type;
+- enabled.
 
-# 9.11 Equipment
+No path text boxes.
 
-List:
+## 13.8 Skills / Equipment
 
-- icon
-- name
-- slot/type
-- rarity
-- key bonus
-- status
+Use shared list/detail/media/entity-picker patterns.
 
-Editor:
+Skills:
 
-- General
-- Visual
-- Stats
-- Perks
-- Economy/Unlock
-- Preview
+```text
+General | Media | Gameplay Parameters | Effects | Audio | Unlock | Preview
+```
 
-Use structured perk editing instead of raw serialized config.
+Equipment:
 
----
+```text
+General | Visual | Stats | Perks | Economy/Unlock | Preview
+```
 
-# 9.12 Enemies
+Use structured perk editing; no serialized config editing.
 
-List:
+## 13.9 Enemies / Bosses
 
-- image/model
-- name
-- family/archetype
-- difficulty/tier
-- worlds/stages usage
-- status
+Enemies should expose real business/game concepts: visuals, combat, weapon/projectile relationships, effects, audio, rewards, stage usage and behavior profile where configurable.
 
-Editor:
-
-- General
-- Visuals
-- Combat
-- AI/admission parameters that are genuinely configurable
-- Weapons/Projectiles
-- Effects
-- Audio
-- Rewards
-- Stage Usage
-- Preview
-
-Where AI behavior is code-only, show selected behavior profile as read-only/business-friendly information rather than exposing implementation evidence.
-
----
-
-# 9.13 Bosses
-
-Boss editor should be substantially richer than current identity-focused overrides.
-
-Tabs:
+Bosses:
 
 ```text
 General | Appearance | Combat | Phases | Abilities | Audio | Rewards | Stages | Preview
 ```
 
-### General
+Boss phase authoring should be visual/structured, never raw JSON.
 
-- name
-- title/subtitle
-- description
-- enabled
-- difficulty/tier
-
-### Appearance
-
-- portrait
-- battle image/model
-- scale
-- position offset
-- aura/effect preset
-
-### Phases
-
-Visual phase editor:
-
-```text
-Phase 1   HP 100% → 70%
-Phase 2   HP 70%  → 30%
-Phase 3   HP < 30%
-```
-
-Each phase can reference abilities/effects and supported parameters.
-
-Do not make administrators author phase JSON.
-
-### Rewards
-
-Entity-based reward picker/drop table.
-
-### Preview
-
-Boss preview scene, animation/effect preview, phase switching.
-
----
-
-# 9.14 Worlds
-
-World list:
-
-- hero/background thumbnail
-- world name
-- stage count
-- progression status
-- publish status
+## 13.10 Worlds / Stages / Routes / Objectives / Challenges
 
 World editor:
 
@@ -1341,942 +1186,736 @@ World editor:
 General | Stages | Visuals | Music | Rewards | Routes | Unlock | Preview
 ```
 
-### General
-
-- Display Name
-- Description
-- Order
-- Enabled
-
-### Visuals
-
-- hero/background
-- parallax set
-- overlay FX
-- lighting/theme preset
-
-### Music
-
-- default BGM
-- boss BGM
-- volume/default mix override only if needed
-
-### Routes
-
-visual route/stage relationship editor rather than raw IDs where feasible.
-
----
-
-# 9.15 Stages
-
-Stage list under world or global searchable list.
-
-Editor:
+Stage editor:
 
 ```text
 General | Enemies | Objective | Words/Typing | Visuals | Music | Rewards | Unlock | Preview
 ```
 
-### Enemies
+Use entity selectors for enemies/rewards/media/content pools.
 
-Use entity selector / roster editor.
+Routes/Objectives/Challenges should be first-class administrator concepts only if they are genuine gameplay domains.
 
-### Objective
+## 13.11 Typing Content
 
-Select supported objective type and show only relevant parameters.
+Space Typing Admin should manage browsing/assignment/reference to canonical English Learning Content, not create a second authoring database.
 
-### Words/Typing
+Target tasks:
 
-Reference canonical content sets through searchable selectors.
+- search/filter by CEFR/topic/type;
+- preview content;
+- assign content sets/pools to world/stage;
+- inspect validation/reference issues.
 
-### Preview
+## 13.12 Music / SFX / VFX / Models / Images
 
-Launch isolated stage preview/test where architecture permits.
+These become real Media workflows only after A3.0 establishes canonical ownership.
 
----
+Common features:
 
-# 9.16 Routes / Objectives / Challenges
+- preview;
+- searchable metadata/tags;
+- usage references;
+- upload/replace when supported;
+- archive/delete policy;
+- assignment through Asset Picker.
 
-These should become explicit administrator concepts if they are real gameplay domains.
+## 13.13 Events / Promotions / Discounts / Announcements
 
-Avoid hiding them inside generic stage configuration when operators need to manage them repeatedly.
+Only implement editable Live Ops when real canonical scheduling/consumption exists.
 
-Each editor must use domain-specific controls rather than JSON.
+Event target fields may include:
 
----
+- name;
+- status;
+- start/end;
+- timezone policy;
+- media;
+- applicable worlds/stages/modes;
+- rewards;
+- promotions;
+- approved feature toggles;
+- preview.
 
-# 9.17 Typing Content
+Promotion target fields:
 
-Primary administrator tasks:
+- product selection;
+- discount type/value;
+- badge;
+- start/end;
+- limit overrides if supported;
+- priority/conflict behavior;
+- preview.
 
-- browse content
-- search/filter by CEFR/topic/type
-- preview assignments
-- assign content pool to stages/worlds
-- inspect validation issues
+Validation must catch overlap/conflict/expiry/product availability issues.
 
-Do not duplicate the English Learning Content source of truth.
+Announcements are only implemented if gameplay has a player-facing announcement consumer.
 
-If content authoring remains owned by the parent English Learning Content System, Space Typing Admin should manage assignment/reference, not create a second authoring database.
+## 13.14 PvP / Duel / Ranked / Modes
 
----
+Expose safe game-rule controls only where a real authority boundary exists.
 
-# 9.18 Music
+Room authority, server/client ownership and unsupported backend diagnostics belong in Developer Tools.
 
-Music Library should become an actual media-management screen rather than a runtime evidence page.
+Do not fabricate ranked season management.
 
-List:
+## 13.15 Players
 
-- track name
-- duration
-- category
-- usage
-- status
-- play button
+Hide normal Players navigation until a real canonical server-side player/account backend exists.
 
-Actions:
+Future support operations require strong permission and audit.
 
-- Upload
-- Preview/play
-- Rename display metadata where safe
-- Tag
-- Replace file
-- Delete only when provenance/usage rules permit
+## 13.16 Game Settings
 
-World/stage assignment belongs in World/Stage editors as well as dedicated music assignment management when helpful.
+Keep truly global administrator-owned settings only.
 
----
+Do not turn this page into a dump of runtime constants.
 
-# 9.19 SFX
+## 13.17 History & Publish
 
-First-class library for:
+Translate technical revision infrastructure into administrator language:
 
-- weapon shots
-- impacts
-- UI sounds
-- boss sounds
-- announcer sounds
-- pickups
-- explosions
+- Drafts;
+- Pending Changes;
+- Published Version;
+- Compare Changes;
+- Publish;
+- Roll Back.
 
-Features:
+Normal compare should be human-readable by entity/domain. Raw JSON diff may exist under Advanced/Developer Tools.
 
-- audio preview
-- tags/categories
-- usage references
-- replace/upload
+## 13.18 Developer Tools
 
----
+Developer Tools hosts technical Phase B surfaces:
 
-# 9.20 VFX
+### Runtime Inspector
 
-Current visual ownership inspection should evolve into manageable presets/assets where runtime can consume authored definitions.
+- runtime ownership;
+- active registry data;
+- apply boundaries;
+- generated values.
 
-List/grid:
+### Contract Inspector
 
-- animated/static preview
-- name
-- category
-- usage count
+- protocol versions;
+- capability manifests;
+- parent/child ownership contracts.
 
-Editor where canonical:
+### Validation
 
-- asset/preset selection
-- intensity
-- scale
-- duration
-- color theme
-- particle profile
+- raw validation diagnostics;
+- canonical IDs;
+- schema/version detail.
 
-Avoid exposing renderer internals directly to normal admins.
+### Asset Diagnostics
 
----
+- raw paths;
+- missing files;
+- generated catalog revisions;
+- provenance.
 
-# 9.21 Events
+### QA Sandbox / Test Lab
 
-Live Ops Event editor:
+Retain isolated technical preview/test capabilities.
 
-- Event name
-- status
-- start/end
-- timezone policy
-- banner/media
-- applicable worlds/stages/modes
-- rewards
-- promotions
-- feature toggles explicitly approved for Live Ops
-- preview
-
-Schedule visualization is required.
-
-If current runtime has no canonical remote event calendar, implementing this screen as editable requires first building the genuine event definition owner. Until then, present a business-friendly unavailable/read-only state and retain technical evidence only in Developer Tools.
+Developer Tools is permission-gated and visually separated from normal administrator workflows.
 
 ---
 
-# 9.22 Promotions / Discounts
+# 14. Search, responsive, accessibility and performance
 
-Promotion editor:
+## Search
 
-- Name
-- Product selection
-- Discount type
-- Discount value
-- Badge label
-- Start/end
-- purchase limit overrides if supported
-- priority/conflict rules
-- preview
+Search administrator concepts first:
 
-Conflict validation:
+- entity names;
+- categories;
+- labels;
+- IDs only as secondary/advanced matches.
 
-- overlapping promotions
-- invalid sale price
-- expired schedule
-- product unavailable during promotion
+## Responsive
 
----
+Primary target remains desktop administration.
 
-# 9.23 Announcements
+- wide desktop: sidebar + multi-column editor;
+- laptop: narrower editor;
+- tablet: collapsible sidebar, single-column complex forms;
+- small mobile: basic review/light edits only; complex previews may be limited.
 
-Only implement if a canonical player-facing announcement surface exists or is explicitly added.
-
-Fields:
-
-- title
-- message
-- image
-- schedule
-- target scope
-- status
-
-No fake Admin-only data that gameplay never reads.
-
----
-
-# 9.24 PvP / Duel / Ranked
-
-Administrator-facing screen should show supported game rules with normal labels and controls.
-
-Developer diagnostics about room ownership, server/client authority and absent backend capabilities move to Developer Tools.
-
-Editable settings require a real safe authority boundary.
-
-Ranked season management must not be fabricated if the backend/service does not exist.
-
----
-
-# 9.25 Players
-
-Do not present fake player management when profile state is local/browser-owned.
-
-When a real server-side player/account backend exists, target features include:
-
-- search player
-- view progression
-- view inventory
-- safe support actions
-- transaction/audit history
-
-Any destructive or grant action requires strong permission + audit log.
-
-Until then, hide Players from normal navigation or clearly mark unavailable product capability without technical clutter.
-
----
-
-# 9.26 Game Settings
-
-Keep truly global administrator settings only.
-
-Examples:
-
-- maintenance mode
-- default gameplay settings intended for server/admin ownership
-- environment-safe feature availability
-
-Do not turn this page into a dump of all runtime constants.
-
----
-
-# 9.27 Roles & Permissions
-
-Target permission model:
-
-```text
-resource.action
-```
-
-Examples:
-
-- `shop.read`
-- `shop.write`
-- `shop.publish`
-- `ships.write`
-- `media.upload`
-- `events.publish`
-- `developer.runtime-inspect`
-
-UI should provide role templates plus granular override if necessary.
-
-Dangerous permissions are visually distinguished.
-
----
-
-# 9.28 Audit Log
-
-Audit entries should answer:
-
-- who
-- what entity
-- what changed
-- when
-- draft/publish action
-- previous/new values where appropriate
-
-Example:
-
-```text
-13 Oct 01:14
-Toan
-Vanguard · Price
-1,800 → 2,000
-```
-
-Technical revision IDs can be accessible in detail, not primary list content.
-
----
-
-# 9.29 History & Publish
-
-Existing immutable revision infrastructure remains valuable.
-
-V2 should translate it into administrator language:
-
-- Drafts
-- Pending Changes
-- Published Version
-- Compare Changes
-- Publish
-- Roll Back
-
-Raw JSON diff may remain available under Advanced/Developer detail, while normal compare view should group human-readable entity changes.
-
----
-
-# 9.30 Developer Tools
-
-This is where much of current Phase B UI logic belongs.
-
-Suggested sections:
-
-## Runtime Inspector
-
-- current runtime ownership
-- active registry data
-- apply boundaries
-- runtime-generated values
-
-## Contract Inspector
-
-- protocol versions
-- capability manifests
-- server/child ownership contracts
-
-## Validation
-
-- raw validation results
-- canonical IDs
-- schema/version diagnostics
-
-## Asset Diagnostics
-
-- raw paths
-- missing files
-- generated catalog revision
-- provenance
-
-## QA Sandbox
-
-- existing isolated Test Lab
-
-Developer Tools must be permission-gated and visually separate from normal administrator management.
-
----
-
-# 10. Draft / Preview / Publish lifecycle
-
-## 10.1 Draft
-
-An administrator can save incomplete but structurally valid work without changing live gameplay.
-
-## 10.2 Validation
-
-Validation should occur:
-
-- while editing for field-level constraints
-- on Save Draft for domain constraints
-- before Preview/Publish for full canonical validation
-
-## 10.3 Preview
-
-Preview should use the same canonical transformation/runtime adapters that Publish uses wherever possible.
-
-Do not create a separate approximate preview model that can disagree with production.
-
-## 10.4 Publish
-
-Publishing should:
-
-- use compare-and-swap protection
-- fail safely if active revision changed
-- show conflict/change summary
-- record actor/time/message
-- activate only validated canonical state
-
-## 10.5 Rollback
-
-Rollback should be clearly labeled and permission-gated.
-
-The UI should show what will change before confirming.
-
----
-
-# 11. Validation UX
-
-## Field validation
-
-Example:
-
-```text
-Sale Price
-[ 2200 ]
-⚠ Sale price must be lower than base price (2000).
-```
-
-## Cross-field validation
-
-Show near related section.
-
-## Cross-entity validation
-
-Example:
-
-```text
-Cannot archive Plasma Cannon.
-Used by 4 active ships.
-[ View usages ]
-```
-
-## Publish validation summary
-
-Group issues:
-
-- Errors — block publish
-- Warnings — allow with explicit review if safe
-- Information — non-blocking
-
-Do not dump raw stack traces in normal UI.
-
-Raw diagnostics can be expanded in Developer Tools.
-
----
-
-# 12. Search, filters and command palette
-
-The existing command palette can be retained and evolved.
-
-Search should index administrator concepts:
-
-- entity names
-- categories
-- labels
-- IDs as secondary advanced matches
-
-Examples:
-
-```text
-Vanguard
-Halloween
-G04
-Plasma Cannon
-```
-
-Do not require exact canonical IDs.
-
----
-
-# 13. Responsive behavior
-
-Primary target remains desktop administration, but layouts must degrade cleanly.
-
-Breakpoints:
-
-- desktop wide: sidebar + multi-column editor
-- laptop: sidebar + narrower editor
-- tablet: collapsible sidebar, single-column complex forms
-- small mobile: basic review/light edits only; previews may be limited
-
-Tooltip must remain usable on touch through click/tap popover behavior.
-
----
-
-# 14. Accessibility
+## Accessibility
 
 Hard requirements:
 
-- keyboard navigable
-- visible focus state
-- tooltip help accessible without hover
-- buttons are real buttons
-- correct labels for inputs
-- dialogs trap focus appropriately
-- Escape closes dialogs/tooltips where applicable
-- color is not the only status indicator
-- reasonable contrast on dark UI
-- tables/cards have accessible names
-- audio controls have labels
+- keyboard navigation;
+- visible focus;
+- help accessible without hover;
+- real buttons;
+- proper input labels;
+- focus-trapped dialogs;
+- Escape behavior where appropriate;
+- color not the only state signal;
+- dark-theme contrast;
+- accessible table/card/audio names.
+
+## Performance
+
+- lazy-load media/model previews;
+- virtualize large lists when needed;
+- debounce search;
+- cancel/ignore stale async work;
+- cache reference catalogs with revision invalidation;
+- avoid loading technical manifests on normal screens;
+- avoid whole-page rerender per keystroke where unnecessary.
 
 ---
 
-# 15. Performance requirements
+# 15. Security and mutation safety
 
-- avoid loading all media thumbnails at once
-- lazy-load image/model previews
-- virtualize very large lists if needed
-- cancel/ignore stale async loads
-- avoid full page rerender on every keystroke when not necessary
-- cache reference catalogs carefully with revision invalidation
-- debounce search
-- avoid fetching technical manifests for screens that do not display them
-
----
-
-# 16. Security and mutation safety
-
-- authenticated endpoints only
-- permission check server-side, never only in UI
-- validate all filenames/uploads
-- path traversal protection
-- content type + extension validation
-- size limits
-- CAS/revision checks for writes
-- destructive operations require confirmation
-- audit actor and timestamp
-- no arbitrary filesystem paths from administrator input
-- no arbitrary JSON injection endpoints for normal admins
-- no secret/token exposure in UI
+- authenticated endpoints only;
+- server-side permission checks;
+- filename/path traversal protection;
+- MIME/type/extension/size validation;
+- CAS/revision conflict checks;
+- destructive confirmation;
+- actor/timestamp/audit event;
+- no arbitrary filesystem path input;
+- no arbitrary JSON mutation endpoint for normal admins;
+- no secret/token exposure;
+- preview must not mutate active runtime;
+- publish must activate only validated canonical state.
 
 ---
 
-# 17. Migration strategy from current Phase B
+# 16. A0 migration inventory specification
 
-The migration must be incremental and resumable.
+A0 is more than a list of pages. It creates the architecture map used by every later worker.
 
-Do not perform a destructive rewrite of all screens at once.
+## 16.1 Required migration matrix
 
-## Migration classification
-
-For every existing screen, classify current functionality into:
-
-### KEEP AS FOUNDATION
-
-- authenticated endpoint
-- validated canonical model
-- runtime preview
-- revision/publish logic
-
-### REUSE IN ADMINISTRATOR UI
-
-- useful domain data
-- entity registry
-- safe write operation
-- preview capability
-
-### MOVE TO DEVELOPER TOOLS
-
-- contract/evidence/source metadata
-- SHA/protocol/apply-boundary diagnostics
-
-### REMOVE FROM PRIMARY UI
-
-- permanent explanatory short descriptions
-- architecture-heavy subtitles
-- redundant notice stacks
-- raw paths/IDs when asset/entity pickers can replace them
-
-### BUILD NEW DOMAIN CAPABILITY
-
-Where administrator requirements are legitimate but runtime has no authorable owner.
-
----
-
-# 18. Current screen migration map
-
-## Overview / Analytics
-
-Current: runtime/session diagnostics.
-
-V2:
-
-- Administrator Dashboard becomes operational/product summary.
-- Runtime telemetry detail moves to Developer Tools / Analytics detail where appropriate.
-
-## Audio Defaults
-
-Current technical configuration can be simplified to administrator controls with tooltips.
-
-## Music Library
-
-Keep upload/catalog foundation.
-
-Rebuild presentation as true media library.
-
-## World / Stage Music
-
-Keep canonical assignment/publish foundation.
-
-Integrate music selection into World and Stage editors; retain dedicated assignment view if useful.
-
-## Ships
-
-Keep canonical preview + revision validation.
-
-Rebuild list/detail editor; add Media/Combat/Effects workflows and hide override internals.
-
-## Equipment / Skills
-
-Keep domain validation where valid; rebuild administrator editors.
-
-## Enemies / Bosses
-
-Keep registry integration; expand domain models only through real runtime ownership.
-
-## Worlds & Stages
-
-Keep revision/runtime integration; split administrator workflows for Worlds and Stages.
-
-## Typing Content
-
-Keep canonical content ownership; make assignment/browse UX administrator-friendly.
-
-## Shop
-
-Major redesign and likely domain architecture expansion. Current runtime-contract screen moves to Developer Tools.
-
-## Currencies / Rewards / Warp
-
-Keep real runtime semantics. Present business concepts; technical ownership moves to Developer Tools.
-
-## Missions / Daily / Weekly / Expedition / Events
-
-Separate actual administrator-manageable capabilities from runtime diagnostics. Do not imply authoring where no canonical owner exists.
-
-## Duel / Ranked / Alternative Modes
-
-Same principle: administrator settings only where real authority exists; diagnostics move down.
-
-## Backgrounds / VFX / UI Assets
-
-Consolidate into Media / Visual management patterns with reusable Asset Picker.
-
-## Feature Gates
-
-Normal safe Live Ops gates may remain administrator-facing. Developer/experimental gates belong in Developer Tools.
-
-## History & Publish
-
-Keep foundation, redesign language/presentation.
-
-## QA Sandbox
-
-Move under Developer Tools.
-
----
-
-# 19. Detailed implementation phases
-
-The phase IDs below become the execution order unless current Git state proves a dependency should be adjusted.
-
-## A0 — Current-state audit and migration inventory
-
-### Tasks
-
-- fetch latest parent and child HEADs
-- inspect every registered Admin screen
-- classify each piece as KEEP / REUSE / MOVE / REMOVE / BUILD NEW
-- inventory existing APIs/domain services/tests
-- identify administrator-required capabilities missing from runtime
-- produce a machine-readable or Markdown migration matrix
-
-### Deliverable
+Create/update:
 
 `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`
 
-### Exit criteria
+Each current route/domain should record at minimum:
 
-Every current screen has an explicit migration destination.
+```text
+Current route
+Current UI module
+Target V2 route/domain
+Administrator task
+Current Admin API
+Parent service/owner
+Child/runtime owner
+Persistence/revision owner
+Runtime apply boundary
+Current write level: none/read-only/draft/publish
+Preview capability
+Current classification
+Target classification
+Missing canonical capability
+Required prerequisite phase
+Developer Tools destination if applicable
+Current tests/validators
+Validator migration required?
+Migration risk
+Manual acceptance scenario
+Notes/blockers
+```
 
-No coding assumptions based on old Phase B checkpoint only.
+## 16.2 Classification values
+
+- KEEP AS FOUNDATION
+- REUSE IN ADMINISTRATOR UI
+- MOVE TO DEVELOPER TOOLS
+- REMOVE FROM PRIMARY UI
+- BUILD NEW DOMAIN CAPABILITY
+
+## 16.3 Capability Gap Register
+
+A0 must also produce a dedicated section/table listing missing capabilities such as:
+
+```text
+Capability
+Requested admin workflow
+Why current runtime cannot support it
+Canonical owner needed
+Parent/child impact
+Persistence model
+Preview need
+Security/permission impact
+Dependency phase
+Decision/status
+```
+
+This prevents UI workers from improvising shadow models.
+
+## 16.4 Deployment decision
+
+A0 records D1 vs D2 from Section 4.
+
+## 16.5 Branch/integration policy
+
+A0 records the exact parent/child branch strategy from Section 18.
+
+## 16.6 Validator Migration Map
+
+A0 records every validator/assertion that freezes legacy presentation or route structure and separates it from safety-critical canonical invariants.
+
+---
+
+# 17. Validator migration strategy
+
+The current validator must evolve with V2.
+
+## Preserve safety invariants
+
+Do not weaken checks for:
+
+- canonical runtime ownership;
+- no legacy mock production routing;
+- child/runtime consumption;
+- immutable revision/CAS safety;
+- no fabricated backend/capability;
+- upload/path safety;
+- reference integrity.
+
+## Replace brittle presentation assertions
+
+Legacy assertions such as exact Phase B route counts, old labels, old status banners or technical presentation text should be replaced with behavioral V2 invariants.
+
+Examples of V2 invariants:
+
+- primary nav does not render permanent developer descriptions;
+- unavailable target routes are not exposed as fake management pages;
+- Developer Tools is permission-separated;
+- tooltip/help component is accessible;
+- raw paths are not normal asset-edit controls;
+- write screens use canonical domain APIs;
+- preview does not mutate active runtime;
+- publish is CAS protected;
+- server rejects unauthorized mutation;
+- administrator workflows do not require JSON editing.
+
+### Rule
+
+Validator migration is not validator weakening.
+
+---
+
+# 18. Branch and multi-worker integration policy
+
+Past work has shown that domain-specific child branches can become stranded or forgotten.
+
+Admin V2 should minimize branch fragmentation.
+
+## Parent
+
+Primary Admin V2 work continues on:
+
+`feat/space-typing-admin-uiux`
+
+unless current Git state clearly requires another integration strategy.
+
+## Child
+
+Prefer one explicit Admin V2 child integration branch rather than creating a new child branch for every domain.
+
+The current candidate integration branch is:
+
+`feat/admin-world-music-stage-policy`
+
+A0 must confirm whether to continue this branch or supersede it with one clearly documented integration branch.
+
+## Rules
+
+- do not create a new child branch casually;
+- every child commit used by Admin V2 must have a documented integration destination;
+- migration/progress docs must state which child branch contains canonical work;
+- workers must inspect newer commits before changing child ownership;
+- no reset/revert of newer worker code;
+- no domain branch may be considered complete while its code is unintegrated/stranded unless explicitly marked as such.
+
+---
+
+# 19. Revised implementation roadmap
+
+The original A0–A17 product goals remain, but sequencing is hardened so foundational safety is not implemented after writable domains.
+
+## A0 — Current-state audit + migration inventory
+
+Deliverables:
+
+- `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`;
+- `docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md`;
+- Capability Gap Register;
+- Validator Migration Map;
+- deployment-model decision;
+- parent/child integration policy;
+- current API/service/owner map.
+
+Exit criteria:
+
+- every existing route has a migration destination;
+- every requested write workflow has a known canonical owner or explicit gap;
+- no implementation assumption relies only on an old checkpoint.
+
+---
+
+## A0.5 — Cross-cutting architecture gates
+
+This phase is mandatory before the first large writable V2 domain.
+
+Resolve/implement minimum foundation for:
+
+### A0.5.1 Draft/change-set/publish semantics
+
+- whole-config vs domain/change-set model;
+- exact publication scope;
+- conflict behavior;
+- entity editor lifecycle contract.
+
+### A0.5.2 Actor identity
+
+- current actor envelope appropriate to deployment model.
+
+### A0.5.3 Minimal permissions
+
+- permission service;
+- server-side mutation/publish checks;
+- Developer Tools permission boundary.
+
+### A0.5.4 Minimal audit event infrastructure
+
+- mutation/publish actor/action/entity/scope/revision/timestamp/result.
+
+### A0.5.5 Entity/reference conventions
+
+- immutable internal IDs;
+- display identity;
+- safe reference pickers;
+- archive/disable/delete conventions;
+- duplicate/new-ID behavior.
+
+Exit criteria:
+
+A writable domain can be implemented without inventing security, publication or identity semantics locally.
 
 ---
 
 ## A1 — Admin V2 design system foundation
 
-### Tasks
-
 Build shared:
 
-- Tooltip
-- Info Icon
-- Help Drawer
-- Field wrapper
-- Validation message
-- Page header
-- Filter/search bar
-- Entity table/card
-- Empty/error/loading states
-- Drawer/dialog primitives
-- Draft lifecycle bar
+- Tooltip;
+- Info Icon;
+- Help Drawer;
+- Field wrapper;
+- Validation message;
+- Page Header;
+- Search/Filter primitives;
+- Entity table/card;
+- Empty/Error/Loading state;
+- Drawer/Dialog;
+- Draft lifecycle bar;
+- common status chips.
 
-### Mandatory cleanup
+Mandatory cleanup:
 
-- stop rendering navigation short descriptions by default
-- remove always-visible technical page descriptions where replaced by tooltip/help
-- establish spacing/type tokens for lower-noise UI
+- stop rendering nav short descriptions by default;
+- remove generic permanent technical helper paragraphs where tooltip/help replaces them;
+- establish lower-noise spacing/type tokens;
+- keep task-critical warnings visible.
 
-### Tooltip acceptance
+Tooltip tests must cover:
 
-- mouse hover works
-- keyboard focus works
-- touch click works
-- Escape/outside-click behavior works
-- Space Typing style
-- accessible semantics
-
-### Tests
-
-- component behavior tests
-- keyboard/accessibility checks
-- responsive screenshots/manual QA checklist
+- hover;
+- focus;
+- touch toggle;
+- Escape;
+- outside click;
+- cleanup after screen teardown;
+- collision placement;
+- keyboard/a11y semantics.
 
 ---
 
-## A2 — Shell, navigation and Dashboard V2
+## A2 — Shell + capability-aware navigation + Dashboard + Developer Tools scaffold
 
-### Tasks
+Tasks:
 
-- implement new information architecture
-- concise sidebar labels
-- role-aware Developer Tools section
-- administrator Dashboard
-- move technical diagnostics out of Dashboard
-- preserve command palette
+- implement concise target IA incrementally;
+- capability-aware/permission-aware nav;
+- do not add dead placeholder routes;
+- administrator Dashboard using real data only;
+- create Developer Tools scaffold now;
+- move technical surfaces into Developer Tools incrementally as V2 replacements appear;
+- preserve command palette.
 
-### Exit criteria
+Exit criteria:
 
-A normal administrator can navigate without seeing runtime terminology in the primary shell.
+Normal administrator navigation is understandable without runtime terminology.
 
----
+### Important change
 
-## A3 — Media Library + Asset Picker
-
-### Tasks
-
-- unified media browsing model
-- Images
-- Music
-- SFX
-- VFX
-- 3D Models where supported
-- upload
-- replace
-- usage references
-- safe delete/archive
-- reusable asset picker
-
-### Exit criteria
-
-Subsequent entity editors do not require administrators to type asset paths.
+A15 is no longer the first Developer Tools migration phase. A2 creates the destination; later phases move technical content continuously.
 
 ---
 
-## A4 — Economy V2: Shop / Products / Pricing / Promotions foundation
+## A3.0 — Media architecture gate
 
-### First requirement
+Define/implement the canonical Media model from Section 12.
 
-Resolve canonical Shop authoring architecture. Current read-only runtime contract cannot simply be decorated with edit buttons.
+Exit criteria:
 
-### Tasks
-
-- define canonical product/merchandising model
-- runtime consumption path
-- pricing
-- availability
-- badges/discount labels
-- media references
-- limits
-- drafts
-- preview
-- publish
-
-### Exit criteria
-
-Administrator can change a real product’s presentation/price/availability and gameplay consumes the published canonical result.
+Images/Music/SFX/VFX/Models have documented ownership/reference/replace/archive/version rules appropriate to their capabilities.
 
 ---
 
-## A5 — Gameplay V2: Ships / Weapons / Projectiles
+## A3.1 — Media Library + Asset Picker
 
-### Tasks
+Build real supported workflows:
 
-- fleet list/detail
-- media assignment
-- ship naming/description
-- stats
-- primary weapon assignment
-- projectile entity
-- VFX/SFX assignment
-- unlock rules
-- duplicate
-- preview/test
+- browse/search/filter;
+- preview;
+- upload where supported;
+- metadata;
+- usage references;
+- replace;
+- safe archive/delete;
+- reusable Asset Picker.
 
-### Exit criteria
+Exit criteria:
 
-Administrator can perform the core workflow requested by product owner: replace ship image/model, change name, choose weapon/projectile/effects, preview, draft and publish without code/path editing.
+Later entity editors no longer require administrators to type asset paths.
+
+---
+
+## A4.0 — Shop architecture decision + canonical owner
+
+Resolve Shop model A vs B from Section 13.2.
+
+Implement missing canonical model/service/runtime consumption before enabling normal write UI.
+
+Exit criteria:
+
+There is one real Shop/product source of truth and a tested runtime path.
+
+---
+
+## A4.1 — Economy V2: Shop / Products / Pricing / Promotion foundation
+
+Implement administrator workflows for:
+
+- catalog/list;
+- product editor;
+- price/sale/badge;
+- availability;
+- media;
+- safe limits;
+- draft;
+- preview;
+- review change scope;
+- publish handoff/operation according to A0.5 semantics.
+
+Exit criteria:
+
+Administrator can change a real product’s applicable presentation/price/availability and the published canonical result is what gameplay consumes.
+
+---
+
+## A5 — Ships / Weapons / Projectiles
+
+Implement:
+
+- fleet list/detail;
+- authored media/model assignment;
+- naming/description/class/rarity where canonical;
+- weapon assignment;
+- projectile entity/reference;
+- VFX/SFX;
+- unlock;
+- duplicate;
+- preview/test;
+- safe draft/publish flow.
+
+Exit criteria:
+
+Administrator can replace ship image/model, change name, select weapon/projectile/effects and preview/publish without code/path editing.
 
 ---
 
 ## A6 — Skills / Equipment
 
-Rebuild with shared list/detail/entity-picker/media patterns.
+Rebuild with shared V2 patterns and canonical owners.
 
 ---
 
 ## A7 — Enemies / Bosses
 
-Implement rich entity workflows including visuals, combat relationships, effects, rewards, stage usage and boss phases where canonical runtime can support them.
+Implement rich entity workflows, relationships, effects, rewards, stage usage and structured boss phases only where runtime can support them canonically.
 
 ---
 
-## A8 — Worlds / Stages / Routes / Objectives
+## A8 — Worlds / Stages / Routes / Objectives / Challenges / Typing assignment
 
-Split current combined technical management into content workflows.
-
-Integrate media/music/reward/content assignment.
+Split current technical management into administrator content workflows and integrate Media/Music/Reward/Typing assignment.
 
 ---
 
 ## A9 — Audio / SFX / VFX management completion
 
-Consolidate dedicated media workflows and usages after gameplay/world editors exercise them.
+Complete specialized Media workflows after gameplay/world domains exercise them.
 
 ---
 
-## A10 — Economy completion: Currencies / Rewards / Drop Tables / Unlock Rules / Warp
+## A10 — Economy completion
 
-Convert remaining economy diagnostics into administrator workflows where safe.
-
----
-
-## A11 — Live Ops: Events / Promotions / Discounts / Announcements
-
-Build real scheduling only where canonical runtime/backend owners exist or are intentionally added.
+Currencies / Rewards / Drop Tables / Unlock Rules / Warp and related semantics become administrator workflows only where authority is real.
 
 ---
 
-## A12 — PvP / Modes administrator controls
+## A11 — Live Ops
 
-Separate safe game-rule controls from diagnostics.
-
-Do not fabricate ranked season backend.
+Events / Promotions / Discounts / Announcements with real scheduling only when canonical runtime/backend owners exist.
 
 ---
 
-## A13 — Roles & Permissions
+## A12 — PvP / Modes
 
-Add role-aware navigation and server-side authorization for mutations.
-
----
-
-## A14 — Audit Log + human-readable History / Publish
-
-Keep immutable revision safety while adding entity-oriented change summaries.
+Expose safe rule controls; keep authority diagnostics in Developer Tools; do not fabricate ranked backend.
 
 ---
 
-## A15 — Developer Tools migration
+## A13 — Full Roles & Permissions UX
 
-Move remaining Phase B technical surfaces into:
+Build on A0.5 permission foundation:
 
-- Runtime Inspector
-- Contract Inspector
-- Validation
-- Asset Diagnostics
-- QA Sandbox
+- role templates;
+- granular overrides where needed;
+- dangerous-permission emphasis;
+- role-aware nav/editor actions;
+- permission audit/testing.
 
-Normal administrator navigation must no longer expose these details by default.
+A13 is not allowed to be the first server-side authorization implementation.
 
 ---
 
-## A16 — UX polish / accessibility / responsive / performance
+## A14 — Full Audit Log + human-readable History / Publish UX
 
-Full pass:
+Build on the earlier audit event foundation:
 
-- remove stale helper paragraphs
-- tooltip consistency
-- empty/loading/error states
-- keyboard navigation
-- responsive layouts
-- list scalability
-- preview performance
+- who;
+- what entity;
+- what changed;
+- when;
+- draft/publish action;
+- previous/new value summaries;
+- human-readable compare;
+- rollback visibility.
+
+A14 is not allowed to be the first time mutations are attributable.
+
+---
+
+## A15 — Developer Tools migration cleanup
+
+By A15 most technical surfaces should already have moved incrementally.
+
+A15 performs the final cleanup/consolidation:
+
+- Runtime Inspector;
+- Contract Inspector;
+- Validation;
+- Asset Diagnostics;
+- QA Sandbox;
+- removal of stale duplicate technical surfaces from normal Admin routes.
+
+---
+
+## A16 — UX / accessibility / responsive / performance polish
+
+Full consistency pass:
+
+- remove stale helper paragraphs;
+- tooltip consistency;
+- empty/loading/error states;
+- keyboard navigation;
+- responsive layout;
+- list scalability;
+- async cleanup;
+- preview performance;
+- visual hierarchy/noise reduction.
 
 ---
 
 ## A17 — Administrator acceptance testing
 
-Create a manual acceptance file with task-based scenarios.
+Maintain:
 
-Examples:
+`docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-1. Change product price.
-2. Add discount badge and schedule.
-3. Replace ship image.
+Task-based acceptance should include at least:
+
+1. Change a real product price.
+2. Add a discount badge/schedule where supported.
+3. Replace a ship image/model.
 4. Change ship weapon/projectile/VFX.
-5. Upload BGM and assign it to a world.
+5. Upload supported BGM and assign it to a world/stage.
 6. Duplicate an entity.
-7. Save a draft without affecting runtime.
-8. Preview changes.
-9. Publish.
-10. Roll back.
-11. Confirm restricted role cannot access Developer Tools.
-12. Complete all above without using raw path/JSON/source-code concepts.
+7. Save draft without changing active runtime.
+8. Preview canonical changes.
+9. Review exactly what will be published.
+10. Publish safely.
+11. Roll back safely.
+12. Confirm restricted role cannot mutate forbidden domains.
+13. Confirm restricted role cannot access Developer Tools.
+14. Confirm audit attribution for mutation/publish.
+15. Complete normal workflows without raw path/JSON/source-code concepts.
 
 ---
 
-# 20. First implementation sequence after this plan
+# 20. Required execution order
 
-The next worker should NOT jump directly into Shop or Ships without foundation work.
-
-Start with:
+The next implementation should follow:
 
 ```text
-A0 → A1 → A2 → A3 → A4 → A5 ...
+A0
+ ↓
+A0.5
+ ↓
+A1
+ ↓
+A2
+ ↓
+A3.0
+ ↓
+A3.1
+ ↓
+A4.0
+ ↓
+A4.1
+ ↓
+A5 → A6 → ... → A17
 ```
 
-Reason:
+Why:
 
-- A0 prevents duplicating/replacing working Phase B infrastructure incorrectly.
-- A1 establishes shared UX patterns, especially tooltip/help behavior required by product owner.
-- A2 fixes the developer-first navigation/shell globally.
-- A3 provides asset management required by Ships, Shop, Bosses, Worlds and VFX.
-- A4 and A5 then build high-value administrator workflows on correct foundations.
+- A0 prevents incorrect duplication/removal of Phase B foundations.
+- A0.5 prevents permissions/audit/publish semantics from being retrofitted after writes exist.
+- A1 establishes shared UX primitives.
+- A2 fixes global navigation and creates the Developer Tools destination early.
+- A3.0 prevents a fake generic Media UI.
+- A3.1 enables asset-based workflows without paths.
+- A4.0 prevents shadow Shop authoring.
+- A4.1/A5 then deliver the high-value administrator workflows requested by the product owner.
 
 ---
 
-# 21. Suggested file/module direction
+# 21. Suggested module direction
 
-Exact files may change after A0 audit, but target organization should avoid another collection of giant one-off Phase B renderers.
+Exact files are decided after A0, but new V2 work should avoid another set of giant one-off Phase B renderers.
 
-Possible structure:
+Possible direction:
 
 ```text
 portal/src/admin/
@@ -2284,8 +1923,10 @@ portal/src/admin/
     shell/
     components/
       tooltip.ts
+      help-drawer.ts
       field.ts
       entity-table.ts
+      entity-picker.ts
       asset-picker.ts
       draft-bar.ts
       dialogs.ts
@@ -2312,238 +1953,210 @@ portal/src/admin/
       domains.css
 ```
 
-This is a direction, not a requirement to create a parallel framework blindly. A0 must determine how best to evolve current modules without dangerous churn.
+Do not create a parallel framework blindly. Reuse safe current utilities where they fit, and migrate incrementally.
 
-Backend/domain files should similarly be grouped by real domain instead of adding arbitrary generic JSON mutation endpoints.
-
----
-
-# 22. CI and automated test strategy
-
-## 22.1 Keep existing critical guarantees
-
-Do not weaken current validators simply to make V2 pass.
-
-Preserve:
-
-- exact runtime ownership where relevant
-- no legacy mock production routing
-- canonical child/runtime consumption
-- immutable revision semantics
-- safe publishing
-- no synthetic unsupported backend
-
-## 22.2 Add V2 UI contract checks carefully
-
-Tests should protect behavior, not freeze incidental text/CSS too aggressively.
-
-Test important requirements:
-
-- normal nav does not show developer descriptions
-- Developer Tools permission separation
-- tooltip component exists and is used for help
-- Shop uses administrator entity workflow once writable
-- asset picker replaces raw path editing
-- draft/publish lifecycle is preserved
-
-## 22.3 Domain tests
-
-For each writable entity:
-
-- schema validation
-- cross-field validation
-- reference integrity
-- missing asset rejection
-- duplicate ID protection
-- CAS conflict
-- preview matches canonical transform
-- publish activates expected runtime state
-- rollback
-
-## 22.4 Upload tests
-
-- MIME/extension
-- max size
-- unsafe filenames
-- path traversal
-- duplicates
-- usage protection
+Backend/domain logic should be grouped by real domain, not generic arbitrary-JSON mutation endpoints.
 
 ---
 
-# 23. Manual QA strategy
+# 22. Automated test strategy
 
-Each phase should add its scenarios to:
+## Preserve existing guarantees
+
+Keep tests for:
+
+- canonical ownership;
+- no legacy fake routing;
+- real child/runtime consumption;
+- CAS/revision safety;
+- preview isolation;
+- no fabricated unsupported backend.
+
+## Shared component tests
+
+At minimum:
+
+- tooltip lifecycle/accessibility;
+- dialogs/focus;
+- validation state;
+- stale async cancellation;
+- route teardown cleanup.
+
+## Writable domain tests
+
+For every writable entity:
+
+- schema validation;
+- cross-field validation;
+- reference integrity;
+- missing asset rejection;
+- duplicate ID protection;
+- authorization denial/allow;
+- audit event creation;
+- CAS conflict;
+- preview uses canonical transform;
+- preview does not mutate live state;
+- publish activates expected runtime state;
+- rollback behavior;
+- publication scope/change summary correctness.
+
+## Media/upload tests
+
+- MIME/extension;
+- size;
+- unsafe filename;
+- traversal;
+- duplicate/hash behavior where relevant;
+- usage protection;
+- replace/version semantics;
+- archive/delete policy.
+
+---
+
+# 23. Manual QA policy
+
+Manual testing should not block unrelated implementation units unless a manual result is necessary to prove a dependency for the next unit.
+
+Deferred manual scenarios are recorded in:
 
 `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-Manual testing should not block unrelated implementation units unless the result is required to establish correctness of the next dependency.
+and progress docs.
 
-Record deferred manual scenarios and continue safe automated work where possible.
+Fix confirmed defects as they are found, but do not stop the entire roadmap merely because a later manual visual pass is pending.
 
 ---
 
-# 24. Definition of Done for an Administrator V2 screen
+# 24. Definition of Done for a V2 administrator screen
 
-A screen is NOT done because it renders runtime data.
+A screen is not done merely because it renders runtime data.
 
 It is done only when all applicable criteria are met:
 
-- administrator task is explicit
-- list/search/filter works where needed
-- entity can be opened/edited if product requirement says it is manageable
-- labels use game/business language
-- no raw filesystem path is required
-- no JSON editing is required
-- no source-code knowledge is required
-- no child SHA/protocol evidence is in primary workflow
-- help uses tooltip/info/help drawer instead of permanent clutter
-- validation messages are actionable
-- Draft workflow is clear
-- Preview exists where visual/behavioral preview is meaningful
-- Publish is safe
-- permissions are respected
-- audit history is recorded where required
-- runtime consumes the same canonical source
-- automated tests cover critical paths
-- manual acceptance scenario exists
+- administrator task is explicit;
+- route is exposed only if capability is real/useful;
+- list/search/filter is appropriate for domain size;
+- entity can be safely edited when product requirement says it is manageable;
+- labels use game/business language;
+- raw filesystem paths are not required;
+- JSON editing is not required;
+- source-code knowledge is not required;
+- SHAs/protocol/evidence are not in primary workflow;
+- help uses tooltip/info/help drawer rather than permanent clutter;
+- validation messages are actionable;
+- Draft workflow is clear;
+- Preview exists when meaningful;
+- administrator can understand publication scope;
+- publish is CAS-safe;
+- server permissions are enforced;
+- audit attribution exists for meaningful mutation;
+- runtime consumes the same canonical source;
+- automated tests cover critical paths;
+- manual acceptance scenario exists.
 
 ---
 
 # 25. Explicit anti-patterns forbidden in V2
 
-Do NOT reintroduce these patterns in primary administrator screens:
+Do not reintroduce in primary administrator screens:
 
 1. Page title followed by a paragraph explaining runtime architecture.
-2. Panel title followed by a permanent subtitle describing source files/owners.
-3. Rows such as `runtimeBacked`, `source`, `owner`, `protocolVersion` as normal administrator content.
-4. Asset text boxes that require `/assets/...` paths.
-5. JSON textareas for routine content authoring.
-6. Displaying child SHA as a normal success metric.
-7. “Capability evidence” panels in primary workflows.
-8. Multiple warning/info boxes that merely explain that a feature is technically absent.
-9. A read-only developer inspector being presented as if it were a finished administrator management page.
-10. Adding edit buttons that write a shadow config not consumed canonically by gameplay.
+2. Panel subtitle permanently describing source files/owners.
+3. `runtimeBacked`, `source`, `owner`, `protocolVersion` as normal business fields.
+4. Asset text boxes requiring `/assets/...` paths.
+5. JSON textareas for routine authoring.
+6. Child SHA as a normal success metric.
+7. Capability-evidence panels in normal workflows.
+8. Large warning stacks that only explain technical absence.
+9. A read-only developer inspector presented as finished administrator management.
+10. Edit buttons writing a shadow config gameplay does not consume.
+11. Entity-level `Publish` that silently publishes unrelated changes.
+12. Permission checks implemented only in the browser/UI.
+13. Audit added only after high-risk write domains already exist.
+14. Generic Media upload UI without defined asset/reference/version semantics.
+15. Dead target-IA routes exposed as fake management pages.
+16. New per-domain child branches without a documented integration destination.
+17. Weakening canonical validators merely to satisfy redesigned UI assertions.
 
 ---
 
 # 26. Resumability / multi-worker protocol
 
-Every implementation worker must follow this sequence:
+Every worker must:
 
-1. Fetch latest parent branch HEAD.
-2. Fetch latest child branch/submodule state relevant to the task.
-3. Read this Master Plan.
-4. Read latest `docs/SPACE_TYPING_ADMIN_UIUX_PROGRESS.md` and any new Admin V2 progress file.
-5. Inspect commits newer than any checkpoint in the handoff.
-6. Determine first unfinished Admin V2 phase/unit from Git state.
-7. Never reset to a SHA in a prompt/plan.
-8. Never revert or overwrite newer work from another worker.
-9. Make changes idempotent/resumable.
-10. After fixing a blocker, continue the first unfinished safe unit rather than stopping automatically.
-11. Do not weaken validators or runtime ownership checks to force CI green.
-12. Do not fabricate missing runtime capabilities.
-13. Update progress/checkpoint docs after meaningful completion.
+1. fetch latest parent branch HEAD;
+2. fetch latest child integration branch HEAD;
+3. read this Master Plan;
+4. read `docs/SPACE_TYPING_ADMIN_UIUX_PROGRESS.md` and `docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md` when present;
+5. inspect commits newer than handoff/checkpoint;
+6. determine first unfinished V2 phase/unit from current Git state;
+7. never reset to a SHA in a prompt/plan;
+8. never revert/overwrite newer worker work;
+9. make changes idempotent/resumable;
+10. after fixing a blocker, continue the first unfinished safe unit;
+11. never weaken canonical validators to force green CI;
+12. never fabricate missing runtime capabilities;
+13. update progress/checkpoint docs after meaningful completion;
+14. document any child-domain work and its integration destination;
+15. keep PR #49 draft/not-ready unless the user explicitly asks otherwise.
 
 ---
 
-# 27. Progress file to create when implementation begins
+# 27. Progress file
 
-Create:
+Create/update when implementation begins:
 
 `docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md`
 
 Minimum structure:
 
 ```text
-CURRENT HEADS
-CURRENT PHASE
+CURRENT PARENT HEAD
+CURRENT CHILD HEAD
+CURRENT PHASE / UNIT
 COMPLETED UNITS
 IN PROGRESS
+ARCHITECTURE DECISIONS
+CAPABILITY GAPS
 BLOCKERS
 DEFERRED MANUAL TESTS
 LATEST GREEN CI
 NEXT EXACT ACTION
 ```
 
-This Master Plan remains the design/product source of truth; Progress tracks execution state.
+This Master Plan is the design/product/architecture source of truth. Progress tracks execution state.
 
 ---
 
-# 28. Product-owner requirements locked by this plan
+# 28. Immediate next action
 
-The following requirements are explicit and must not be lost during implementation:
+The next implementation worker must begin **A0 — Current-state audit + migration inventory**, not Shop/Ships coding.
 
-## Administrator orientation
+First concrete actions:
 
-The primary Admin is for administrators, not developers.
+1. fetch latest parent and child HEADs;
+2. audit all current Admin routes/modules/APIs/services/validators;
+3. create `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md` with all fields from Section 16;
+4. create/update `docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md`;
+5. create Capability Gap Register;
+6. create Validator Migration Map;
+7. lock deployment model for the current milestone;
+8. lock child integration branch policy;
+9. execute A0.5 architecture decisions for publish scope, actor, minimal permissions, audit and entity/reference conventions;
+10. only then implement A1 Design System Foundation.
 
-## Shop
+The first visible UI change after foundations should be the shared Tooltip/Info Icon/help behavior plus removal of always-visible navigation short descriptions — while preserving task-critical warnings and state messages.
 
-Administrators must ultimately be able to manage applicable product data such as:
-
-- product presentation
-- price
-- discount label/badge
-- availability
-- media
-
-through a canonical runtime-consumed model.
-
-## Ships
-
-Administrators must ultimately be able to manage applicable ship properties such as:
-
-- image/model
-- name
-- weapon
-- projectile
-- effects
-- related media
-
-without raw source/path editing.
-
-## UI density
-
-Permanent short descriptions must be reduced substantially.
-
-## Tooltips
-
-Hover/focus/tap help must use styled Space Typing tooltips/info icons.
-
-## Developer information
-
-Technical/runtime details remain available but move under Developer Tools/Advanced surfaces.
+Do not mark PR #49 ready or merge it unless the user explicitly requests that action.
 
 ---
 
 # 29. Success metric
 
-Admin V2 succeeds when a non-developer administrator can perform normal game operations by recognizing game concepts on screen, without needing a developer to explain the runtime architecture.
+Admin V2 succeeds when a non-developer administrator who understands Space Typing can confidently perform normal game operations without needing a developer to explain repository architecture.
 
-A practical acceptance question for every page:
+Acceptance question for every page:
 
-> “Could an administrator who understands Space Typing but has never seen this repository confidently use this page?”
+> “Could an administrator who understands Space Typing but has never seen this repository confidently use this page, understand what their change affects, preview it, and know exactly what will be published?”
 
 If the answer is no, the screen is not finished.
-
----
-
-# 30. Immediate next action
-
-The next implementation tab/worker should begin **A0 — Current-state audit and migration inventory**.
-
-Do not begin by cosmetically rewriting all current screens.
-
-The first concrete deliverables are:
-
-1. fetch latest Git state;
-2. audit all current Admin routes/modules/APIs;
-3. create `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`;
-4. create `docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md`;
-5. identify reusable Phase B foundations;
-6. identify technical surfaces to move to Developer Tools;
-7. identify first missing canonical domain needed for administrator workflows;
-8. then implement **A1 Design System Foundation**, starting with Tooltip/Info Icon and removal of always-visible navigation short descriptions.
-
-Do not mark PR #49 ready or merge it unless the user explicitly requests that action.
