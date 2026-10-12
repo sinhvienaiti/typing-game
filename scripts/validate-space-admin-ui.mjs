@@ -18,6 +18,8 @@ const commandFile = "portal/src/admin/space-typing-command.ts";
 const iconFile = "portal/src/admin/space-typing-icons.ts";
 const uiCssFile = "portal/src/admin/space-typing-ui.css";
 const phaseBCssFile = "portal/src/admin/space-typing-phase-b.css";
+const v2HelpFile = "portal/src/admin/v2/admin-help.ts";
+const v2CssFile = "portal/src/admin/v2/admin-v2.css";
 const phaseMapFile = "admin/space-typing-phase-b-map.v1.json";
 const packageFile = "portal/package.json";
 
@@ -35,6 +37,8 @@ const requiredFiles = [
   iconFile,
   uiCssFile,
   phaseBCssFile,
+  v2HelpFile,
+  v2CssFile,
   phaseMapFile,
   packageFile,
 ];
@@ -55,6 +59,8 @@ const command = read(commandFile);
 const icons = read(iconFile);
 const css = read(uiCssFile);
 const phaseBCss = read(phaseBCssFile);
+const v2Help = read(v2HelpFile);
+const v2Css = read(v2CssFile);
 const phaseMap = JSON.parse(read(phaseMapFile));
 const pkg = JSON.parse(read(packageFile));
 
@@ -95,7 +101,7 @@ const routes = [
 ];
 
 assert(Array.isArray(phaseMap.screens), "Phase B map screens are missing");
-assert(phaseMap.screens.length === routes.length, `Phase B map must contain exactly ${routes.length} registered screens`);
+assert(phaseMap.screens.length === routes.length, `Phase B map must contain exactly ${routes.length} registered screens during the A1 migration`);
 
 for (const [label, suffix] of routes) {
   assert(main.includes(`label: "${label}"`), `Navigation is missing ${label}`);
@@ -107,7 +113,7 @@ for (const [label, suffix] of routes) {
   assert(command.includes(`"${label}"`), `Command palette is missing ${label}`);
 }
 
-// The shell must be Phase-B-only. Legacy mock renderers must never preempt the canonical router.
+// The shell must still delegate to the canonical Phase B runtime owners while V2 migrates presentation incrementally.
 assert(main.includes('const phaseB = renderPhaseBAdminScreen(path, this.navigate);'), "Main Admin shell does not delegate to the Phase B router");
 assert(main.includes('if (phaseB !== null) return phaseB;'), "Main Admin shell does not return the canonical Phase B renderer result");
 assert(!main.includes('if (path === ADMIN_BASE) return this.renderOverview()'), "Legacy mock Overview still preempts Phase B telemetry");
@@ -117,9 +123,27 @@ assert(!main.includes('renderDailyWeekly'), "Legacy Daily/Weekly mock renderer r
 assert(!main.includes('openMusicUploadMockDialog'), "Legacy Music Library mock workflow remains reachable from the production Admin shell");
 assert(!main.includes('space-typing-mock'), "Production Admin shell still imports mock data");
 assert(!main.includes('UI MOCK DATA'), "Production Admin shell still advertises mock data");
-assert(main.includes('PHASE B · RUNTIME INTEGRATED'), "Runtime-integrated Phase B shell badge is missing");
 assert(main.includes('return this.renderUnknown(path);'), "Unknown-route guard is missing");
 assert(main.includes('if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;'), "Legacy Feature Flags alias is not normalized to canonical Feature Gates route");
+
+// A1 shell behavior: permanent developer-style helper copy is replaced with reusable contextual help.
+assert(main.includes('import "./v2/admin-v2.css";'), "Admin V2 styles are not loaded by the canonical shell");
+assert(main.includes('AdminHelpScope'), "Canonical shell does not use the Admin V2 help scope");
+assert(main.includes('this.help.tooltip(groupButton'), "Navigation groups are missing shared tooltip help");
+assert(main.includes('this.help.tooltip(navButton'), "Navigation items are missing shared tooltip help");
+assert(main.includes('this.help.infoIcon({'), "Topbar does not use the shared click/tap info icon");
+assert(main.includes('this.help.observeRoot(root);'), "Admin V2 help surfaces are not tied to root teardown");
+assert(!main.includes('PHASE B · RUNTIME INTEGRATED'), "Technical Phase B milestone text leaked back into the primary shell");
+assert(!main.includes('element("small", "st-admin-nav-description"'), "Permanent navigation short descriptions leaked back into the primary shell");
+assert(!main.includes('groupButton.title ='), "Navigation group help regressed to browser-native title text");
+assert(!main.includes('navButton.title ='), "Navigation item help regressed to browser-native title text");
+assert(!main.includes('runtime.title ='), "Topbar help regressed to browser-native title text");
+assert(v2Help.includes('aria-describedby'), "Admin V2 tooltip is missing accessible help association");
+assert(v2Help.includes('new AbortController()'), "Admin V2 tooltip listeners are not explicitly cleanable");
+assert(v2Help.includes('new MutationObserver'), "Admin V2 help scope does not clean up when leaving Admin");
+assert(v2Css.includes('.st-admin-v2-tooltip'), "Admin V2 tooltip styling is missing");
+assert(v2Css.includes('.st-admin-v2-info'), "Admin V2 info-icon styling is missing");
+assert(v2Css.includes('prefers-reduced-motion'), "Admin V2 help system does not respect reduced-motion preferences");
 
 // Shared presentation dependencies must be owned by the canonical shell, never by dead mock modules.
 assert(main.includes('import "./space-typing-phase-b.css";'), "Canonical Admin shell does not load shared Phase B styles");
@@ -204,4 +228,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Space Typing Admin UI contract: PASS (${routes.length} Phase B screens + canonical runtime routing + canonical style/font ownership + accessibility/regression guards).`);
+console.log(`Space Typing Admin UI contract: PASS (${routes.length} Phase B routes preserved during A1 + canonical runtime routing + Admin V2 contextual help + accessibility/regression guards).`);
