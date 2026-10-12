@@ -6,8 +6,10 @@ const api = new SpaceTypingAdminApi();
 type EnemyAdminOverride = {
   minStage?: number;
 };
+type EnemyProjectilePolicy = "auto" | "off" | "on";
 type EnemyAdminPolicy = {
   configRevision: string;
+  projectileMode?: EnemyProjectilePolicy;
   enemies?: Record<string, EnemyAdminOverride>;
 };
 type EnemyVisualProfile = {
@@ -98,6 +100,17 @@ function field(label: string, value: string, type: "text" | "number" = "text"): 
   return { root, control };
 }
 
+function selectField<T extends string>(label: string, value: T, options: readonly { value: T; label: string }[]): { root: HTMLElement; control: HTMLSelectElement } {
+  const root = el("label", "stx-field");
+  root.append(el("span", undefined, label));
+  const control = el("select", "st-admin-select") as HTMLSelectElement;
+  control.setAttribute("aria-label", label);
+  for (const option of options) control.append(new Option(option.label, option.value));
+  control.value = value;
+  root.append(control);
+  return { root, control };
+}
+
 function readonlyField(label: string, value: string): HTMLElement {
   const entry = field(label, value);
   entry.control.disabled = true;
@@ -106,7 +119,9 @@ function readonlyField(label: string, value: string): HTMLElement {
 
 function policyFrom(config: SpaceTypingAdminConfig): EnemyAdminPolicy {
   const content = (config as EnemyAwareConfig).content;
-  return structuredClone(content?.enemies ?? { configRevision: "enemies-admin-v1", enemies: {} });
+  const policy = structuredClone(content?.enemies ?? { configRevision: "enemies-admin-v1", enemies: {} });
+  policy.projectileMode ??= "auto";
+  return policy;
 }
 
 function mergeEnemy(base: EnemyAdminPreviewItem, override?: EnemyAdminOverride): EnemyAdminPreviewItem {
@@ -166,13 +181,29 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   copy.append(
     el("div", "st-admin-eyebrow", "Game Content · Canonical Enemy Registry · B06.4"),
     el("h1", undefined, "Enemies"),
-    el("p", undefined, "Author the canonical Enemy stage-admission policy through immutable revisions. The child runtime owns identity, taxonomy, rewards and visual definitions; this slice changes only the supported minimum-stage boundary."),
+    el("p", undefined, "Author canonical Enemy admission and normal-enemy projectile policy through immutable revisions. Identity, taxonomy, rewards and visuals remain child-owned."),
   );
   header.append(copy, revisionBadge);
   page.append(header);
 
   const status = notice("Loading active revision and canonical child Enemy registry…", "info");
   status.setAttribute("aria-live", "polite");
+
+  const projectilePolicyPanel = panel("Combat Projectile Policy", "Admin authority · applies on the next game session after Publish");
+  const projectileMode = selectField<EnemyProjectilePolicy>("Normal Enemy Projectiles", "auto", [
+    { value: "auto", label: "Auto · follow canonical difficulty" },
+    { value: "off", label: "Off · disable normal-enemy projectiles" },
+    { value: "on", label: "On · enable normal-enemy projectiles" },
+  ]);
+  projectileMode.control.disabled = true;
+  projectilePolicyPanel.append(
+    grid(
+      projectileMode.root,
+      readonlyField("Boss Projectiles", "Always enabled · child-owned combat rule"),
+    ),
+    notice("This published value is authoritative over the legacy hidden player setting. LocalStorage or DevTools cannot override it while the platform runtime is published. `Auto` preserves the canonical difficulty-driven behavior.", "info"),
+  );
+
   const filterBar = el("div", "st-admin-filterbar");
   const search = el("input", "st-admin-search") as HTMLInputElement;
   search.placeholder = "Search enemies…";
@@ -187,17 +218,17 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   const listPanel = panel("Canonical Enemies", "35 child-owned Enemy definitions · immutable identity / taxonomy / visuals / rewards");
   const listHost = el("div");
   listPanel.append(listHost);
-  const editorPanel = panel("Enemy Admission Override", "Only `content.enemies.enemies.<id>.minStage` is persisted in B06.4");
+  const editorPanel = panel("Enemy Admission Override", "`content.enemies.enemies.<id>.minStage` plus the global projectile policy are persisted in B06.4");
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
-  page.append(status, filterBar, body);
+  page.append(status, projectilePolicyPanel, filterBar, body);
 
   let loadedActiveRevision: string | null = null;
   let bundled: EnemyAdminPreview | null = null;
   let activePreview: EnemyAdminPreview | null = null;
   let selectedId = "";
-  let policy: EnemyAdminPolicy = { configRevision: "enemies-admin-v1", enemies: {} };
+  let policy: EnemyAdminPolicy = { configRevision: "enemies-admin-v1", projectileMode: "auto", enemies: {} };
   let serviceReady = false;
   let loadGeneration = 0;
 
@@ -209,6 +240,14 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     status.className = `stx-notice ${tone}`;
     status.textContent = text;
   };
+
+  projectileMode.control.addEventListener("change", () => {
+    if (!serviceReady) return;
+    const value = projectileMode.control.value;
+    if (value !== "auto" && value !== "off" && value !== "on") return;
+    policy.projectileMode = value;
+    setStatus(`Normal-enemy projectile draft changed to ${value}. Save Draft and Publish to make it authoritative for new sessions.`, "warn");
+  });
 
   const baseEnemy = (id: string): EnemyAdminPreviewItem | undefined => bundled?.enemies.find((enemy) => enemy.id === id);
   const effectiveEnemy = (id: string): EnemyAdminPreviewItem | undefined => {
@@ -282,7 +321,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
 
     editorHost.append(notice(`ID ${enemy.id} · ${enemy.family}/${enemy.role}/${enemy.rarity} · apply boundary: new session`, "info"));
     editorHost.append(notice(
-      "The master UI plan also lists HP, Shield, Armor, Speed, Damage, AI, Spawn Weight, Skills, Projectiles, VFX, SFX, Drop Table and Enabled. Those are intentionally read-only/not persisted here because the current child Enemy contract does not expose canonical authorable runtime fields for them.",
+      "HP, Shield, Armor, Speed, Damage, AI, Spawn Weight, Skills, per-enemy projectile definitions, VFX, SFX, Drop Table and Enabled remain read-only because the current child Enemy contract does not expose canonical authorable runtime fields for them. The global normal-enemy projectile switch is managed by Combat Projectile Policy above.",
       "warn",
     ));
 
@@ -332,12 +371,12 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         setStatus(`${selectedId} reset to bundled child admission. Save Draft to persist this removal.`, "good");
       }),
       button("Validate Preview", () => {
-        setStatus("Validating Enemy admission against the canonical child preview…", "info");
+        setStatus("Validating Enemy admission and projectile policy against the canonical child preview…", "info");
         void previewEnemies(policy).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
-          setStatus(`Child canonical preview accepted ${preview.enemies.length} Enemy definitions for ${preview.configRevision}.`, "good");
+          setStatus(`Child canonical preview accepted ${preview.enemies.length} Enemy definitions and projectile policy for ${preview.configRevision}.`, "good");
         }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Enemies preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
@@ -367,11 +406,11 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         const revision = await api.createRevision({
           baseRevision: payload.active.revision,
           config,
-          message: "Admin Phase B · B06.4 Enemy admission draft",
+          message: "Admin Phase B · B06.4 Enemy admission + projectile policy draft",
         });
         activePreview = validated;
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
-        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots Enemy admission only when a new session starts.`, "good");
+        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots Enemy admission and projectile policy only when a new session starts.`, "good");
       } catch (error: unknown) {
         const message = adminErrorMessage(error, "The Enemy draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
@@ -383,7 +422,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   }, "st-admin-btn primary");
   save.disabled = true;
   saveBar.append(
-    el("strong", undefined, "B06.4 Enemy Draft"),
+    el("strong", undefined, "B06.4 Enemy + Combat Draft"),
     saveStatus,
     el("div", "grow"),
     button("Discard", () => navigate(location.pathname)),
@@ -402,6 +441,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     search.disabled = true;
     familyFilter.disabled = true;
     roleFilter.disabled = true;
+    projectileMode.control.disabled = true;
+    projectileMode.control.value = "auto";
     save.disabled = true;
     saveStatus.textContent = "Load the active revision before saving an Enemy draft";
     setStatus("Loading active revision and canonical child Enemy registry…", "info");
@@ -424,6 +465,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       search.disabled = false;
       familyFilter.disabled = false;
       roleFilter.disabled = false;
+      projectileMode.control.value = policy.projectileMode ?? "auto";
+      projectileMode.control.disabled = false;
       save.disabled = false;
       saveStatus.textContent = "Revision-backed · no direct runtime mutation";
       rebuildFilters();
@@ -432,8 +475,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       const hasPolicy = (statePayload.active.config as EnemyAwareConfig).content?.enemies !== undefined;
       setStatus(
         hasPolicy
-          ? `Loaded active Enemy admission policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
-          : "Active revision predates B06.4 Enemy policy; bundled child admission is shown until the first draft is saved.",
+          ? `Loaded active Enemy policy ${policy.configRevision} · normal-enemy projectiles: ${policy.projectileMode ?? "auto"}. Save Draft is isolated until History / Publish.`
+          : "Active revision predates B06.4 Enemy policy; bundled admission plus Admin-owned auto projectile behavior are shown until the first draft is saved.",
         hasPolicy ? "good" : "warn",
       );
     }).catch((error: unknown) => {
@@ -445,6 +488,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       search.disabled = true;
       familyFilter.disabled = true;
       roleFilter.disabled = true;
+      projectileMode.control.disabled = true;
       save.disabled = true;
       listHost.replaceChildren(notice("The canonical Enemy registry could not be loaded. Retry after the local Admin service is available.", "bad"));
       editorHost.replaceChildren(notice("Enemy admission overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
