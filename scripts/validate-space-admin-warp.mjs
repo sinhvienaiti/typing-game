@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 const contract = JSON.parse(await read("portal/src/admin/contracts/space-typing-admin.v1.json"));
-const [warpSource, accountState, transactions, playerSave, auditSource, childCi, uiSource, routerSource, phaseMapSource] = await Promise.all([
+const [warpSource, accountState, transactions, playerSave, auditSource, childCi, uiSource, routerSource, phaseMapSource, contractReader] = await Promise.all([
   read("games/space-typing/src/economy/warp-charge.ts"),
   read("games/space-typing/src/persistence/account-state.ts"),
   read("games/space-typing/src/persistence/account-transactions.ts"),
@@ -16,6 +16,7 @@ const [warpSource, accountState, transactions, playerSave, auditSource, childCi,
   read("portal/src/admin/space-typing-warp-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
   read("admin/space-typing-phase-b-map.v1.json"),
+  read("portal/src/admin/space-typing-contract-reader.ts"),
 ]);
 
 const warp = contract.warp;
@@ -63,13 +64,18 @@ for (const symbol of ["WARP_POLICY", "auditCampaign", "auditReplay", "auditPacin
 assert(childCi.includes("Audit Warp economy"), "Child CI must run the Warp economy audit");
 assert(childCi.includes("pnpm stamina:audit"), "Child CI must execute pnpm stamina:audit");
 
-assert(uiSource.includes("/api/admin/space-typing/contract"), "Warp UI must read the authenticated canonical child contract");
+assert(uiSource.includes("readMainAdminContractSection"), "Warp UI must use the shared validated main-contract reader");
+assert(uiSource.includes('readMainAdminContractSection<WarpContract>("warp", "warp.read"'), "Warp UI must request the warp section behind warp.read");
+assert(contractReader.includes('/api/admin/space-typing/contract'), "Shared contract reader must target the authenticated canonical child contract");
+assert(contractReader.includes('api.requestJson<unknown>'), "Shared contract reader must use safe JSON transport");
+assert(contractReader.includes('Array.isArray(payload["capabilities"])'), "Shared contract reader must validate capabilities before lookup");
 assert(uiSource.includes("RUNTIME-BACKED · READ ONLY"), "Warp UI must make its read-only boundary explicit");
 assert(uiSource.includes("Capacity & Regeneration"), "Warp UI must expose capacity and regeneration policy");
 assert(uiSource.includes("Sortie Admission"), "Warp UI must expose sortie cost ownership");
 assert(uiSource.includes("Refuel Policy"), "Warp UI must expose refuel policy as reference data");
 assert(uiSource.includes("Code-owned policy fields"), "Warp UI must expose code-owned policy ownership");
 assert(uiSource.includes("gameplay-only"), "Warp UI must explain gameplay-only player mutation");
+assert(uiSource.includes("renderAdminFailureState"), "Warp UI must expose a retryable failure state");
 assert(!uiSource.includes("api.createRevision"), "Warp UI must not create config revisions");
 assert(!uiSource.includes("api.publish"), "Warp UI must not publish config revisions");
 assert(!uiSource.includes('button("Save Draft"'), "Warp UI must not render a Save Draft authoring control");
@@ -83,4 +89,4 @@ assert.equal(warpMap?.persistence, "child-runtime-policy");
 assert.equal(warpMap?.applyBoundary, "none");
 assert.equal(warpMap?.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Stamina / Warp Admin validation passed: canonical WARP_POLICY, gameplay-only mutations, CI audit, read-only Admin boundary.");
+console.log("Space Typing Stamina / Warp Admin validation passed: canonical WARP_POLICY, gameplay-only mutations, safe shared contract reader, CI audit and read-only Admin boundary.");
