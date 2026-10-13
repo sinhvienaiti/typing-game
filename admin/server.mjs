@@ -30,6 +30,7 @@ import { MAX_UPLOAD_BYTES, MusicAssetError, MusicAssetService } from "./music-as
 import { MediaAssetStore } from "./media-assets-v2.mjs";
 import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
 import { createMediaV2HttpHandler } from "./media-http.mjs";
+import { createMediaRuntimeHttpHandler } from "./media-runtime.mjs";
 import {
   ADMIN_PERMISSIONS,
   AdminAuthorizationError,
@@ -123,6 +124,7 @@ const handleMediaV2Request = createMediaV2HttpHandler({
   auditLog,
   onAuditError: reportAuditDegradation,
 });
+const handleMediaRuntimeRequest = createMediaRuntimeHttpHandler({ store: mediaAssetsV2 });
 
 async function revisionChangeScope(revisionId) {
   const target = await store.getRevision(revisionId);
@@ -150,6 +152,8 @@ async function rollbackChangeScope(targetRevision) {
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
+    if (await handleMediaRuntimeRequest({ request, response, url })) return;
+
     const runtimeHandlers = {
       "/api/runtime/space-typing/ships": (s, c) => createShipRuntimeEnvelope(s, c),
       "/api/runtime/space-typing/equipment": (s, c) => createEquipmentRuntimeEnvelope(s, c),
@@ -327,7 +331,7 @@ const server = createServer(async (request, response) => {
         domain: "media.music",
         entityType: "music-track",
         entityId: trackId,
-        changeScope: { model: "asset-mutation", operation: "delete", assetType: "music", assetId: trackId },
+        changeScope: { model: "asset-mutation", operation: "delete", assetType: "music", assetId: trackId ?? null },
         operation: () => musicAssets.remove(trackId),
       });
       json(response, 200, result);
