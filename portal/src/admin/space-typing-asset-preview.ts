@@ -22,6 +22,7 @@ export type SpaceTypingShipPreviewCandidate = Readonly<{
   characterId: string;
   visual: Readonly<Record<string, unknown>>;
   imageAssetVersionId?: string;
+  projectileArchetype?: string;
 }>;
 
 type PreviewResponse = Readonly<{
@@ -196,6 +197,9 @@ export class SpaceTypingAssetPreviewBridge {
           ...(nextCandidate.imageAssetVersionId === undefined
             ? {}
             : { imageAssetVersionId: nextCandidate.imageAssetVersionId }),
+          ...(nextCandidate.projectileArchetype === undefined
+            ? {}
+            : { projectileArchetype: nextCandidate.projectileArchetype }),
         }).then(
           (payload) => {
             for (const waiter of waiters) waiter.resolve(payload);
