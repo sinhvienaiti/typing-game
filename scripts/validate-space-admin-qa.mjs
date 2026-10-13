@@ -7,7 +7,7 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const QA_AUDITED_CHILD_SHA = "dbd7348daf23a7e8ef3d804c23205e22f82407f1";
+const QA_AUDITED_CHILD_SHA = "671c9ef6afb3446a7bb87b5c4369cda165fa1c8d";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
