@@ -5,6 +5,16 @@ const COMMAND_TIMEOUT_MS = 5_000;
 const TOKEN_PATTERN = /^[A-Za-z0-9._:-]{8,160}$/;
 const RESPONSE_TYPES = new Set(["READY", "APPLIED", "ERROR", "DISPOSED"]);
 
+type PreviewCommandType =
+  | "LOAD_CANDIDATE"
+  | "SET_SCENARIO"
+  | "SET_TUNING"
+  | "RESET"
+  | "PAUSE"
+  | "DISPOSE";
+
+type PreviewExpectedResponseType = "APPLIED" | "DISPOSED";
+
 export type SpaceTypingAssetPreviewScenario = "idle" | "move" | "fire";
 export type SpaceTypingAssetPreviewSource = "draft" | "published";
 
@@ -26,6 +36,8 @@ type PendingRequest = {
   resolve: (payload: unknown) => void;
   reject: (error: Error) => void;
   timeout: number;
+  commandType: PreviewCommandType;
+  expectedType: PreviewExpectedResponseType;
 };
 
 type GameRegistry = Readonly<{
@@ -215,13 +227,19 @@ export class SpaceTypingAssetPreviewBridge {
     window.clearTimeout(pending.timeout);
     if (response.type === "ERROR") {
       pending.reject(new Error(safeMessage(response.payload)));
-    } else {
-      pending.resolve(response.payload);
+      return;
     }
+    if (response.type !== pending.expectedType) {
+      pending.reject(new Error(
+        `Space Typing preview returned ${response.type} for ${pending.commandType}; expected ${pending.expectedType}.`,
+      ));
+      return;
+    }
+    pending.resolve(response.payload);
   };
 
   private async send(
-    type: "LOAD_CANDIDATE" | "SET_SCENARIO" | "SET_TUNING" | "RESET" | "PAUSE",
+    type: Exclude<PreviewCommandType, "DISPOSE">,
     payload?: unknown,
   ): Promise<unknown> {
     if (this.disposed) throw new Error("Space Typing preview bridge is disposed.");
@@ -230,13 +248,14 @@ export class SpaceTypingAssetPreviewBridge {
   }
 
   private sendNow(
-    type: "LOAD_CANDIDATE" | "SET_SCENARIO" | "SET_TUNING" | "RESET" | "PAUSE" | "DISPOSE",
+    type: PreviewCommandType,
     payload?: unknown,
   ): Promise<unknown> {
     if (this.disposed) return Promise.reject(new Error("Space Typing preview bridge is disposed."));
     const frameWindow = this.iframe.contentWindow;
     if (frameWindow === null) return Promise.reject(new Error("Space Typing preview frame is unavailable."));
     const requestId = this.nextRequestId++;
+    const expectedType: PreviewExpectedResponseType = type === "DISPOSE" ? "DISPOSED" : "APPLIED";
     const message = Object.freeze({
       protocolVersion: ASSET_PREVIEW_PROTOCOL_VERSION,
       previewSessionId: this.previewSessionId,
@@ -251,7 +270,7 @@ export class SpaceTypingAssetPreviewBridge {
         this.pending.delete(requestId);
         reject(new Error(`Space Typing preview command ${type} timed out.`));
       }, COMMAND_TIMEOUT_MS);
-      this.pending.set(requestId, { resolve, reject, timeout });
+      this.pending.set(requestId, { resolve, reject, timeout, commandType: type, expectedType });
       frameWindow.postMessage(message, this.origin);
     });
   }
