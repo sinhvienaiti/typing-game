@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const VISUALS_AUDITED_CHILD_SHA = "dbd7348daf23a7e8ef3d804c23205e22f82407f1";
+// A5.2 re-audit: child CI at this SHA passes Backgrounds + VFX audits; the
+// dbd7348..671c9ef compare only changes Ship/Admin preview/runtime-media paths
+// plus the Ship renderer/visual authority needed by the production preview.
+const VISUALS_AUDITED_CHILD_SHA = "671c9ef6afb3446a7bb87b5c4369cda165fa1c8d";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
