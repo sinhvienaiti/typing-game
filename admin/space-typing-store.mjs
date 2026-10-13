@@ -6,48 +6,73 @@ import { EnemyPolicyValidationError, validateEnemyPolicy } from "./enemy-policy.
 import { BossPolicyValidationError, validateBossPolicy } from "./boss-policy.mjs";
 import { WorldPolicyValidationError, validateWorldPolicy } from "./world-policy.mjs";
 import { StagePolicyValidationError, validateStagePolicy } from "./stage-policy.mjs";
+import { ShopPolicyValidationError, validateShopPolicy } from "./shop-policy.mjs";
 
 export class SpaceTypingRevisionStore extends RevisionStore {
+  constructor({ shopContract = null, ...options }) {
+    super(options);
+    this.shopContract = shopContract;
+  }
+
   validateConfig(config) {
     super.validateConfig(config);
-    if (config.content === undefined) return config;
-    if (config.content === null || typeof config.content !== "object" || Array.isArray(config.content)) {
-      throw new AdminValidationError("content must be an object.");
-    }
-    for (const key of Object.keys(config.content)) {
-      if (!["ships", "equipment", "skills", "enemies", "bosses", "worlds", "stages"].includes(key)) {
-        throw new AdminValidationError(`content.${key} is not supported by the current canonical schema.`);
+
+    if (config.content !== undefined) {
+      if (config.content === null || typeof config.content !== "object" || Array.isArray(config.content)) {
+        throw new AdminValidationError("content must be an object.");
+      }
+      for (const key of Object.keys(config.content)) {
+        if (!["ships", "equipment", "skills", "enemies", "bosses", "worlds", "stages"].includes(key)) {
+          throw new AdminValidationError(`content.${key} is not supported by the current canonical schema.`);
+        }
+      }
+
+      if (config.content.ships !== undefined) {
+        try { validateShipPolicy(config.content.ships, this.contract.ships); }
+        catch (error) { if (error instanceof ShipPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.equipment !== undefined) {
+        try { validateEquipmentPolicy(config.content.equipment, this.contract.equipment); }
+        catch (error) { if (error instanceof EquipmentPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.skills !== undefined) {
+        try { validateSkillPolicy(config.content.skills, this.contract.skills); }
+        catch (error) { if (error instanceof SkillPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.enemies !== undefined) {
+        try { validateEnemyPolicy(config.content.enemies, this.contract.enemies); }
+        catch (error) { if (error instanceof EnemyPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.bosses !== undefined) {
+        try { validateBossPolicy(config.content.bosses, this.contract.bosses); }
+        catch (error) { if (error instanceof BossPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.worlds !== undefined) {
+        try { validateWorldPolicy(config.content.worlds, this.contract.worlds, this.contract.enemies); }
+        catch (error) { if (error instanceof WorldPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
+      if (config.content.stages !== undefined) {
+        try { validateStagePolicy(config.content.stages, this.contract.stages); }
+        catch (error) { if (error instanceof StagePolicyValidationError) throw new AdminValidationError(error.message); throw error; }
       }
     }
 
-    if (config.content.ships !== undefined) {
-      try { validateShipPolicy(config.content.ships, this.contract.ships); }
-      catch (error) { if (error instanceof ShipPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+    if (config.economy !== undefined) {
+      if (config.economy === null || typeof config.economy !== "object" || Array.isArray(config.economy)) {
+        throw new AdminValidationError("economy must be an object.");
+      }
+      for (const key of Object.keys(config.economy)) {
+        if (key !== "shop") {
+          throw new AdminValidationError(`economy.${key} is not supported by the current canonical schema.`);
+        }
+      }
+      if (config.economy.shop !== undefined) {
+        if (!this.shopContract) throw new AdminValidationError("Child Shop Admin contract is unavailable.");
+        try { validateShopPolicy(config.economy.shop, this.shopContract); }
+        catch (error) { if (error instanceof ShopPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
+      }
     }
-    if (config.content.equipment !== undefined) {
-      try { validateEquipmentPolicy(config.content.equipment, this.contract.equipment); }
-      catch (error) { if (error instanceof EquipmentPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
-    if (config.content.skills !== undefined) {
-      try { validateSkillPolicy(config.content.skills, this.contract.skills); }
-      catch (error) { if (error instanceof SkillPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
-    if (config.content.enemies !== undefined) {
-      try { validateEnemyPolicy(config.content.enemies, this.contract.enemies); }
-      catch (error) { if (error instanceof EnemyPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
-    if (config.content.bosses !== undefined) {
-      try { validateBossPolicy(config.content.bosses, this.contract.bosses); }
-      catch (error) { if (error instanceof BossPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
-    if (config.content.worlds !== undefined) {
-      try { validateWorldPolicy(config.content.worlds, this.contract.worlds, this.contract.enemies); }
-      catch (error) { if (error instanceof WorldPolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
-    if (config.content.stages !== undefined) {
-      try { validateStagePolicy(config.content.stages, this.contract.stages); }
-      catch (error) { if (error instanceof StagePolicyValidationError) throw new AdminValidationError(error.message); throw error; }
-    }
+
     return config;
   }
 }
