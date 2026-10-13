@@ -80,15 +80,26 @@ type ShopManifest = {
   preview: { available: boolean; protocolVersion: number | null; command: string | null; mutation: boolean; reason: string };
   deferredCapabilities: string[];
 };
+type CatalogItem = { id: string; kind: "item"; name: string; category: string; icon: string; grade: GradeId | null };
+type CatalogEquipment = { id: string; kind: "equipment"; name: string; category: string; tier: number; icon: string };
+type CatalogGrade = { id: GradeId; label: string; icon: string };
+type ConstraintRange = { min: number; max: number; integer?: boolean };
 type ShopContract = {
   schemaVersion: 1;
   configNamespace: "economy.shop";
   ids: { shopTypes: ShopType[]; itemIds: string[]; equipmentIds: string[]; gradeIds: GradeId[]; equipmentTiers: number[]; discoveryIds: string[] };
+  catalog: {
+    items: CatalogItem[];
+    equipment: CatalogEquipment[];
+    grades: CatalogGrade[];
+    sourceOfTruth: { items: string; equipment: string; grades: string };
+  };
   currencies: Array<keyof Price>;
   authorableSections: string[];
-  constraints: Record<string, { min: number; max: number; integer?: boolean } | number>;
+  constraints: Record<string, ConstraintRange | number>;
 };
-type PreviewStock = { kind: "item" | "equipment"; itemId?: string; definitionId?: string; grade?: GradeId; remaining: number; price: Price };
+type PreviewPrice = Price & { compareAtPrice?: Price | null; badge?: string | null };
+type PreviewStock = { kind: "item" | "equipment"; itemId?: string; definitionId?: string; grade?: GradeId; remaining: number; price: PreviewPrice };
 type ShopPreview = {
   protocolVersion: 1;
   kind: "space-typing-shop-runtime-preview";
@@ -166,6 +177,12 @@ function formatPrice(price: Price): string {
   const parts = Object.entries(price).filter(([, value]) => value > 0).map(([key, value]) => `${value} ${key}`);
   return parts.length ? parts.join(" · ") : "Free";
 }
+function constraintRange(contract: ShopContract, key: string, fallback: ConstraintRange): ConstraintRange {
+  const value = contract.constraints[key];
+  return isRecord(value) && typeof value["min"] === "number" && typeof value["max"] === "number"
+    ? { min: value["min"], max: value["max"], integer: value["integer"] === true }
+    : fallback;
+}
 function validateShopManifest(value: unknown): ShopManifest {
   if (!isRecord(value) || value["protocolVersion"] !== 4 || !["runtime-backed-authoring", "runtime-backed-readonly"].includes(String(value["mode"]))) throw new Error("Shop capability response does not match protocol v4.");
   if (!isRecord(value["authoring"]) || !isRecord(value["preview"]) || !isRecord(value["runtime"]) || !Array.isArray(value["fields"]) || !Array.isArray(value["tabs"])) throw new Error("Shop capability response is incomplete.");
@@ -232,6 +249,15 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
   const markDirty = (): void => { validatedPolicy = null; latestPreview = null; draftRevision = null; refreshBadges(); renderPreviewPanel(); };
   const bindNumber = (field: { control: HTMLInputElement }, apply: (value: number) => void): void => field.control.addEventListener("input", () => { apply(Number(field.control.value)); markDirty(); });
   const bindText = (field: { control: HTMLInputElement }, apply: (value: string) => void): void => field.control.addEventListener("input", () => { apply(field.control.value); markDirty(); });
+  const catalogItem = (id: string): CatalogItem | undefined => contract?.catalog.items.find((item) => item.id === id);
+  const catalogEquipment = (id: string): CatalogEquipment | undefined => contract?.catalog.equipment.find((item) => item.id === id);
+  const catalogLabel = (kind: "item" | "equipment", id: string): string => {
+    const product = kind === "item" ? catalogItem(id) : catalogEquipment(id);
+    return product ? `${product.icon} ${product.name}` : id;
+  };
+  const editOffer = (kind: "item" | "equipment", id: string): void => {
+    selectedOfferKind = kind; selectedOfferId = id; activeTab = "Offers"; renderTabs(); renderActiveTab();
+  };
 
   const priceEditor = (title: string, price: Price, onChange: () => void): HTMLElement => {
     const root = panel(title);
@@ -254,18 +280,72 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
     bindNumber(itemCount, (value) => { rule.itemCount = value; }); bindNumber(itemStock, (value) => { rule.itemStock = value; }); bindNumber(equipmentCount, (value) => { rule.equipmentCount = value; });
     root.append(grid(type.root, itemCount.root, itemStock.root, equipmentCount.root));
 
+    const products = panel("Product Catalog", `Registry-backed administrator view · ${selectedShopType} Shop`);
+    const productTable = el("table", "st-admin-table");
+    const productHead = el("tr");
+    for (const label of ["Product", "Category", "Availability", "Price", "Stock & Deal", "Status", "Actions"]) productHead.append(el("th", undefined, label));
+    const productThead = el("thead"); productThead.append(productHead); productTable.append(productThead);
+    const productBody = el("tbody");
+    for (const product of contract.catalog.items) {
+      const offer = policy.offers.items[product.id];
+      const inPool = rule.itemPool.includes(product.id);
+      const inScope = offer?.shopTypes?.includes(selectedShopType) ?? true;
+      const enabled = offer?.enabled !== false;
+      const grade = product.grade ?? "aluminum";
+      const activePrice = offer?.priceByShopType?.[selectedShopType] ?? policy.pricing.itemGradePrices[selectedShopType][grade];
+      const originalPrice = offer?.compareAtPriceByShopType?.[selectedShopType];
+      const stock = offer?.stockByShopType?.[selectedShopType] ?? rule.itemStock;
+      const row = el("tr");
+      const productCell = el("td"); const productName = el("strong", undefined, `${product.icon} ${product.name}`); productName.title = product.id; productCell.append(productName, el("small", undefined, ` · ${product.id}`));
+      const availability = inPool && inScope && enabled ? "Generated" : !inPool ? "Not in item pool" : !inScope ? "Scoped out" : "Disabled";
+      const deal = [ `${stock} stock`, offer?.badge ? `Badge: ${offer.badge}` : "", originalPrice ? `Original: ${formatPrice(originalPrice)}` : "" ].filter(Boolean).join(" · ");
+      const statusCell = el("td"); statusCell.append(!inPool || !inScope || !enabled ? badge("INACTIVE", "warn") : offer ? badge("OVERRIDE", "info") : badge("INHERITED", "good"));
+      const actionCell = el("td"); actionCell.append(button("Edit Offer", () => editOffer("item", product.id)));
+      row.append(productCell, el("td", undefined, product.category), el("td", undefined, availability), el("td", undefined, formatPrice(activePrice)), el("td", undefined, deal || `${stock} stock`), statusCell, actionCell); productBody.append(row);
+    }
+    for (const product of contract.catalog.equipment) {
+      const offer = policy.offers.equipment[product.id];
+      const tierAllowed = rule.allowedEquipmentTiers.includes(product.tier);
+      const poolAllowed = !rule.equipmentPool || rule.equipmentPool.includes(product.id);
+      const inScope = offer?.shopTypes?.includes(selectedShopType) ?? true;
+      const enabled = offer?.enabled !== false;
+      const explicitPrice = offer?.priceByShopTypeAndGrade?.[selectedShopType]?.[selectedGrade];
+      const basePrice = policy.pricing.equipmentGradePrices[selectedShopType][selectedGrade];
+      const originalPrice = offer?.compareAtPriceByShopTypeAndGrade?.[selectedShopType]?.[selectedGrade];
+      const row = el("tr");
+      const productCell = el("td"); const productName = el("strong", undefined, `${product.icon} ${product.name}`); productName.title = product.id; productCell.append(productName, el("small", undefined, ` · ${product.id}`));
+      const availability = tierAllowed && poolAllowed && inScope && enabled ? `Tier ${product.tier} eligible` : !tierAllowed ? `Tier ${product.tier} disabled` : !poolAllowed ? "Not in equipment pool" : !inScope ? "Scoped out" : "Disabled";
+      const priceText = explicitPrice ? formatPrice(explicitPrice) : `${formatPrice(basePrice)} base · Tier ${product.tier} runtime-adjusted`;
+      const deal = ["1 stock when generated", offer?.badge ? `Badge: ${offer.badge}` : "", originalPrice ? `Original: ${formatPrice(originalPrice)}` : ""].filter(Boolean).join(" · ");
+      const statusCell = el("td"); statusCell.append(!tierAllowed || !poolAllowed || !inScope || !enabled ? badge("INACTIVE", "warn") : offer ? badge("OVERRIDE", "info") : badge("INHERITED", "good"));
+      const actionCell = el("td"); actionCell.append(button("Edit Offer", () => editOffer("equipment", product.id)));
+      row.append(productCell, el("td", undefined, `${product.category} · Tier ${product.tier}`), el("td", undefined, availability), el("td", undefined, priceText), el("td", undefined, deal), statusCell, actionCell); productBody.append(row);
+    }
+    productTable.append(productBody); const productWrap = el("div", "st-admin-table-wrap"); productWrap.append(productTable); products.append(productWrap);
+
+    const gradeWeights = panel("Equipment Grade Chances", "Edit canonical generation weights. Runtime normalizes these weights when rolling a grade; they are intentionally not stored as percentages.");
+    const weightConstraint = constraintRange(contract, "gradeWeight", { min: 0, max: 1_000_000 });
+    const bands = policy.generation.equipmentGradeBands[selectedShopType];
+    for (const band of bands) {
+      const bandPanel = panel(`From stage ${band.minStage}`);
+      const fields = contract.catalog.grades.map((grade) => numberField(`${grade.icon} ${grade.label}`, band.weights[grade.id] ?? 0, `Relative ${grade.label} roll weight from stage ${band.minStage}. Production resolveShopEquipmentGrade normalizes all non-negative weights in this band.`, { min: weightConstraint.min, max: weightConstraint.max, step: 1 }));
+      for (const [index, grade] of contract.catalog.grades.entries()) bindNumber(fields[index], (value) => { band.weights[grade.id] = value; });
+      bandPanel.append(grid(...fields.map((field) => field.root))); gradeWeights.append(bandPanel);
+    }
+
     const pools = panel("Item pool", "Registered products only · hover ⓘ for field intent");
     for (const itemId of contract.ids.itemIds) {
-      const control = checkRow(itemId, rule.itemPool.includes(itemId), "Include this registered item in deterministic generation for the selected Shop type.");
-      control.control.addEventListener("change", () => { rule.itemPool = control.control.checked ? [...new Set([...rule.itemPool, itemId])] : rule.itemPool.filter((id) => id !== itemId); markDirty(); });
+      const item = catalogItem(itemId);
+      const control = checkRow(item ? `${item.icon} ${item.name}` : itemId, rule.itemPool.includes(itemId), `Include ${item?.name ?? itemId} (${itemId}) in deterministic generation for the selected Shop type.`);
+      control.control.addEventListener("change", () => { rule.itemPool = control.control.checked ? [...new Set([...rule.itemPool, itemId])] : rule.itemPool.filter((id) => id !== itemId); markDirty(); renderActiveTab(); });
       pools.append(control.root);
     }
     const tiers = panel("Equipment tiers");
     for (const tier of contract.ids.equipmentTiers) {
       const control = checkRow(`Tier ${tier}`, rule.allowedEquipmentTiers.includes(tier), "Allow this canonical equipment tier in generated stock.");
-      control.control.addEventListener("change", () => { rule.allowedEquipmentTiers = control.control.checked ? [...new Set([...rule.allowedEquipmentTiers, tier])].sort() : rule.allowedEquipmentTiers.filter((value) => value !== tier); markDirty(); }); tiers.append(control.root);
+      control.control.addEventListener("change", () => { rule.allowedEquipmentTiers = control.control.checked ? [...new Set([...rule.allowedEquipmentTiers, tier])].sort() : rule.allowedEquipmentTiers.filter((value) => value !== tier); markDirty(); renderActiveTab(); }); tiers.append(control.root);
     }
-    content.append(root, grid(pools, tiers));
+    content.append(root, products, gradeWeights, grid(pools, tiers));
   };
 
   const renderPricing = (): void => {
@@ -327,6 +407,7 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
     const ids = selectedOfferKind === "item" ? contract.ids.itemIds : contract.ids.equipmentIds;
     if (!ids.includes(selectedOfferId)) selectedOfferId = ids[0] ?? "";
     const product = selectField("Product", selectedOfferId, ids, "Stable registry ID. Rename/art changes belong to the owning registry screen, not Shop.");
+    for (const option of Array.from(product.control.options)) option.textContent = `${catalogLabel(selectedOfferKind, option.value)} · ${option.value}`;
     const type = selectField("Shop type", selectedShopType, contract.ids.shopTypes, "Shop type whose per-offer values are being edited.");
     const grade = selectField("Grade", selectedGrade, contract.ids.gradeIds, "Grade used for equipment offer price overrides.");
     kind.control.addEventListener("change", () => { selectedOfferKind = kind.control.value as "item"|"equipment"; selectedOfferId = ""; renderActiveTab(); });
@@ -360,7 +441,8 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
       const offer = existing as ItemOffer; offer.stockByShopType ??= {}; offer.priceByShopType ??= {}; offer.compareAtPriceByShopType ??= {};
       const stock = numberField("Stock override", offer.stockByShopType[selectedShopType] ?? policy.generation.shopTypes[selectedShopType].itemStock, "Starting stock for this item in the selected Shop type.", { min: 0, max: 99, step: 1 });
       bindNumber(stock, (value) => { offer.stockByShopType![selectedShopType] = value; }); root.append(stock.root);
-      offer.priceByShopType[selectedShopType] ??= structuredClone(policy.pricing.itemGradePrices[selectedShopType]["aluminum"]);
+      const itemGrade = catalogItem(selectedOfferId)?.grade ?? "aluminum";
+      offer.priceByShopType[selectedShopType] ??= structuredClone(policy.pricing.itemGradePrices[selectedShopType][itemGrade]);
       offer.compareAtPriceByShopType[selectedShopType] ??= structuredClone(offer.priceByShopType[selectedShopType]!);
       root.append(grid(priceEditor("Offer price", offer.priceByShopType[selectedShopType]!, () => {}), priceEditor("Original / compare-at price", offer.compareAtPriceByShopType[selectedShopType]!, () => {})));
     } else {
@@ -448,8 +530,11 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
     root.append(discoveries, button("Validate Preview", () => { void runPreview(); }, "st-admin-btn primary"));
     if (latestPreview) {
       root.append(notice(`${latestPreview.instance.id} · seed ${latestPreview.instance.seed} · sector ${latestPreview.instance.sectorStart} · ${latestPreview.available ? "AVAILABLE" : "BLOCKED BY AVAILABILITY"}`, latestPreview.available ? "good" : "warn"));
-      const table = el("table", "st-admin-table"); const head = el("tr"); for (const label of ["Kind", "Product", "Grade", "Stock", "Price"]) head.append(el("th", undefined, label)); const thead = el("thead"); thead.append(head); table.append(thead); const body = el("tbody");
-      for (const stock of latestPreview.instance.stock) { const row = el("tr"); row.append(el("td", undefined, stock.kind), el("td", undefined, stock.itemId ?? stock.definitionId ?? "—"), el("td", undefined, stock.grade ?? "—"), el("td", undefined, String(stock.remaining)), el("td", undefined, formatPrice(stock.price))); body.append(row); }
+      const table = el("table", "st-admin-table"); const head = el("tr"); for (const label of ["Kind", "Product", "Grade", "Stock", "Badge", "Price", "Original price"]) head.append(el("th", undefined, label)); const thead = el("thead"); thead.append(head); table.append(thead); const body = el("tbody");
+      for (const stock of latestPreview.instance.stock) {
+        const row = el("tr"); const id = stock.itemId ?? stock.definitionId ?? "—"; const product = stock.kind === "item" ? catalogItem(id) : catalogEquipment(id); const productText = product ? `${product.icon} ${product.name}` : id;
+        row.append(el("td", undefined, stock.kind), el("td", undefined, productText), el("td", undefined, stock.grade ?? "—"), el("td", undefined, String(stock.remaining)), el("td", undefined, stock.price.badge ?? "—"), el("td", undefined, formatPrice(stock.price)), el("td", undefined, stock.price.compareAtPrice ? formatPrice(stock.price.compareAtPrice) : "—")); body.append(row);
+      }
       table.append(body); const wrap = el("div", "st-admin-table-wrap"); wrap.append(table); root.append(wrap);
     } else root.append(notice("Edit freely, then validate to see the generated Shop instance. Preview does not mutate runtime or revision state.", "info"));
     previewHost.append(root);
@@ -498,6 +583,7 @@ export function renderPhaseBShop(navigate: Navigate): HTMLElement {
     void Promise.all([fetchShopManifest(), fetchShopContract(), api.getState(), previewShop(undefined)]).then(async ([nextManifest, nextContract, state, bundled]) => {
       if (generation !== loadGeneration) return;
       if (!nextManifest.authoring.enabled || !nextManifest.preview.available) throw new Error("Pinned child Shop contract has not opened canonical authoring + preview.");
+      if (!nextContract.catalog?.items?.length || !nextContract.catalog?.equipment?.length || !nextContract.catalog?.grades?.length) throw new Error("Pinned child Shop contract is missing the canonical product catalog metadata.");
       manifest = nextManifest; contract = nextContract; bundledPolicy = structuredClone(bundled.policy); loadedActiveRevision = state.state.activeRevision;
       const activePolicy = (state.active.config as ShopAwareConfig).economy?.shop; policy = structuredClone(activePolicy ?? bundled.policy); selectedShopType = nextContract.ids.shopTypes[0] ?? "normal"; selectedGrade = nextContract.ids.gradeIds[0] ?? "aluminum"; selectedOfferId = nextContract.ids.itemIds[0] ?? ""; previewContext.shopType = selectedShopType;
       const effective = await previewShop(policy, previewContext); if (generation !== loadGeneration) return; latestPreview = effective; validatedPolicy = JSON.stringify(policy); baselinePolicy = JSON.stringify(policy);
