@@ -12,6 +12,7 @@ import {
 
 export type AssetTuningCapabilityStatus =
   | "SUPPORTED NOW"
+  | "AVAILABLE"
   | "REQUIRES CANONICAL MIGRATION"
   | "READ-ONLY REFERENCE"
   | "DEFERRED / UNSUPPORTED";
@@ -76,7 +77,7 @@ function element<K extends keyof HTMLElementTagNameMap>(
 }
 
 function toneForCapability(status: AssetTuningCapabilityStatus): "good" | "warn" | "info" {
-  if (status === "SUPPORTED NOW") return "good";
+  if (status === "SUPPORTED NOW" || status === "AVAILABLE") return "good";
   if (status === "REQUIRES CANONICAL MIGRATION") return "warn";
   return "info";
 }
