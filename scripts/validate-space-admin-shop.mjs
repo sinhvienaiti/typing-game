@@ -46,6 +46,17 @@ for (const deferred of ["schedule-window", "daily-purchase-limit", "weekly-purch
 }
 assert.deepEqual(shopContract.currencies, ["credits", "alloy", "starCrystal", "quantumCore"]);
 assert.deepEqual(shopContract.ids.shopTypes, ["normal", "station", "traveling", "black-market", "hidden", "event", "service"]);
+assert.equal(shopContract.catalog.items.length, shopContract.ids.itemIds.length, "Shop item catalog must cover every canonical item ID");
+assert.equal(shopContract.catalog.equipment.length, shopContract.ids.equipmentIds.length, "Shop equipment catalog must cover every canonical equipment ID");
+assert.equal(shopContract.catalog.grades.length, shopContract.ids.gradeIds.length, "Shop grade catalog must cover every canonical grade ID");
+assert.deepEqual(shopContract.catalog.items.map((entry) => entry.id), shopContract.ids.itemIds);
+assert.deepEqual(shopContract.catalog.equipment.map((entry) => entry.id), shopContract.ids.equipmentIds);
+assert.deepEqual(shopContract.catalog.grades.map((entry) => entry.id), shopContract.ids.gradeIds);
+assert.deepEqual(shopContract.catalog.sourceOfTruth, {
+  items: "src/items/registry.ts#ITEM_REGISTRY",
+  equipment: "src/equipment/registry.ts#EQUIPMENT_REGISTRY",
+  grades: "src/grades.ts#GRADE_PRESENTATION",
+});
 
 assert.match(shopPolicy, /export type ShopAdminPolicyV1/);
 assert.match(shopPolicy, /export const BUNDLED_SHOP_POLICY/);
@@ -61,6 +72,8 @@ assert.match(shopState, /export function resolveShopInstance/);
 assert.match(shopState, /export function shopAvailable/);
 assert.match(shopState, /export function buyShopStockEntry/);
 assert.match(shopState, /remaining: number/);
+assert.match(shopState, /compareAtPrice\?: ShopBasePrice \| null/);
+assert.match(shopState, /badge\?: string \| null/);
 assert.match(serviceShop, /export type ServiceShopState/);
 assert.match(serviceShop, /spendCredits/);
 assert.match(credits, /export function spendCredits/);
@@ -115,6 +128,13 @@ assert.match(ui, /config\.economy\.shop\s*=\s*nextPolicy/);
 assert.match(ui, /api\.createRevision/);
 assert.match(ui, /api\.validateRevision/);
 assert.match(ui, /api\.publish/);
+assert.match(ui, /Product Catalog/);
+assert.match(ui, /Equipment Grade Chances/);
+assert.match(ui, /catalog\.items/);
+assert.match(ui, /catalog\.equipment/);
+assert.match(ui, /catalog\.grades/);
+assert.match(ui, /stock\.price\.badge/);
+assert.match(ui, /stock\.price\.compareAtPrice/);
 assert.match(ui, /Original \/ compare-at price/);
 assert.match(ui, /Badge \/ label/);
 assert.match(ui, /existing persisted Shop instances keep their original prices\/stock|Existing persisted Shop instances keep their original prices\/stock/);
@@ -126,4 +146,4 @@ assert.equal(map.status, "phase-b-ui-wired-runtime-backed-authoring");
 assert.equal(map.persistence, "immutable-revision-store");
 assert.equal(map.applyBoundary, "new-session+new-shop-instance");
 
-console.log(`Shop Admin A4.1 contract valid for ${childHead}: production preview + immutable revision authoring enabled; deferred capabilities remain closed.`);
+console.log(`Shop Admin A4.1 contract valid for ${childHead}: registry-backed catalog + grade weights + production merchandising preview + immutable revision authoring enabled; deferred capabilities remain closed.`);
