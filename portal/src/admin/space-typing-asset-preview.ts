@@ -40,6 +40,11 @@ type PendingRequest = {
   expectedType: PreviewExpectedResponseType;
 };
 
+type PreviewWaiter = {
+  resolve: (payload: unknown) => void;
+  reject: (error: Error) => void;
+};
+
 type GameRegistry = Readonly<{
   games?: readonly Readonly<{
     id?: unknown;
@@ -120,6 +125,9 @@ export class SpaceTypingAssetPreviewBridge {
   private nextRequestId = 1;
   private ready = false;
   private disposed = false;
+  private queuedShipCandidate: SpaceTypingShipPreviewCandidate | null = null;
+  private queuedShipFrame: number | null = null;
+  private readonly queuedShipWaiters: PreviewWaiter[] = [];
 
   private constructor(target: Readonly<{ origin: string; url: URL }>) {
     this.origin = target.origin;
@@ -163,12 +171,39 @@ export class SpaceTypingAssetPreviewBridge {
     return this.readyPromise;
   }
 
-  async loadShip(candidate: SpaceTypingShipPreviewCandidate): Promise<unknown> {
-    return this.send("LOAD_CANDIDATE", {
-      domain: "ship",
-      characterId: candidate.characterId,
-      visual: candidate.visual,
+  loadShip(candidate: SpaceTypingShipPreviewCandidate): Promise<unknown> {
+    if (this.disposed) return Promise.reject(new Error("Space Typing preview bridge is disposed."));
+    this.queuedShipCandidate = candidate;
+    const result = new Promise<unknown>((resolve, reject) => {
+      this.queuedShipWaiters.push({ resolve, reject });
     });
+    if (this.queuedShipFrame === null) {
+      this.queuedShipFrame = window.requestAnimationFrame(() => {
+        this.queuedShipFrame = null;
+        const nextCandidate = this.queuedShipCandidate;
+        this.queuedShipCandidate = null;
+        const waiters = this.queuedShipWaiters.splice(0);
+        if (nextCandidate === null) {
+          const error = new Error("Space Typing preview candidate queue was empty.");
+          for (const waiter of waiters) waiter.reject(error);
+          return;
+        }
+        void this.send("LOAD_CANDIDATE", {
+          domain: "ship",
+          characterId: nextCandidate.characterId,
+          visual: nextCandidate.visual,
+        }).then(
+          (payload) => {
+            for (const waiter of waiters) waiter.resolve(payload);
+          },
+          (error: unknown) => {
+            const failure = error instanceof Error ? error : new Error(String(error));
+            for (const waiter of waiters) waiter.reject(failure);
+          },
+        );
+      });
+    }
+    return result;
   }
 
   async setScenario(scenario: SpaceTypingAssetPreviewScenario): Promise<unknown> {
@@ -288,6 +323,10 @@ export class SpaceTypingAssetPreviewBridge {
     this.ready = false;
     if (this.readyTimeout !== null) window.clearTimeout(this.readyTimeout);
     this.readyTimeout = null;
+    if (this.queuedShipFrame !== null) window.cancelAnimationFrame(this.queuedShipFrame);
+    this.queuedShipFrame = null;
+    this.queuedShipCandidate = null;
+    for (const waiter of this.queuedShipWaiters.splice(0)) waiter.reject(reason);
     this.readyReject?.(reason);
     this.readyResolve = null;
     this.readyReject = null;
