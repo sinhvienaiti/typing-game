@@ -20,6 +20,7 @@ import { createEnemyRuntimeEnvelope } from "./enemy-runtime.mjs";
 import { createBossRuntimeEnvelope } from "./boss-runtime.mjs";
 import { createWorldRuntimeEnvelope } from "./world-runtime.mjs";
 import { createStageRuntimeEnvelope } from "./stage-runtime.mjs";
+import { createShopRuntimeEnvelope } from "./shop-runtime.mjs";
 import { queryTypingContentCatalog } from "./typing-content-catalog.mjs";
 import { createShopCapabilityManifest } from "./shop-capability.mjs";
 import { createCurrencyCapabilityManifest } from "./currency-capability.mjs";
@@ -40,6 +41,7 @@ import {
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const contract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json"), "utf8"));
+const shopContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-shop.v1.json"), "utf8"));
 const eventsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-events.v1.json"), "utf8"));
 const duelContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-duel.v1.json"), "utf8"));
 const rankedContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-ranked.v1.json"), "utf8"));
@@ -52,7 +54,7 @@ const telemetryContract = JSON.parse(await readFile(resolve(root, "games/space-t
 const expeditionContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-expedition.v1.json"), "utf8"));
 const dailyWeeklyContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-daily-weekly.v1.json"), "utf8"));
 const adminDataDir = process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing");
-const store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract });
+const store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract, shopContract });
 const musicAssets = new MusicAssetService({ rootDir: root });
 const mediaAssetsV2 = new MediaAssetStore({ rootDir: adminDataDir });
 const auditLog = new LocalAdminAuditLog({ rootDir: adminDataDir });
@@ -155,6 +157,7 @@ const server = createServer(async (request, response) => {
       "/api/runtime/space-typing/bosses": (s, c) => createBossRuntimeEnvelope(s, c, contract),
       "/api/runtime/space-typing/worlds": (s, c) => createWorldRuntimeEnvelope(s, c, contract),
       "/api/runtime/space-typing/stages": (s, c) => createStageRuntimeEnvelope(s, c, contract),
+      "/api/runtime/space-typing/shop": (s, c) => createShopRuntimeEnvelope(s, c),
     };
 
     if(request.method==="GET"&&runtimeHandlers[url.pathname]) {
@@ -194,6 +197,10 @@ const server = createServer(async (request, response) => {
     }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/contract") {
       json(response, 200, contract);
+      return;
+    }
+    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/contract") {
+      json(response, 200, shopContract);
       return;
     }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/events/contract") {
