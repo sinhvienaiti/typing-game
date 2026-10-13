@@ -30,9 +30,13 @@ jobs:
         with:
           node-version: 24.11.0
           cache: pnpm
-          cache-dependency-path: portal/pnpm-lock.yaml
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            portal/pnpm-lock.yaml
       - name: Validate A5 preview transport invariants
         run: node scripts/validate-space-admin-asset-preview.mjs
+      - name: Install root dependencies required by Portal build config
+        run: pnpm install --frozen-lockfile
       - name: Install Portal dependencies
         run: pnpm --dir portal install --frozen-lockfile
       - name: Build Portal
