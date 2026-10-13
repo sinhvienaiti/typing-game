@@ -58,6 +58,16 @@ function imageAssetVersionId(value, path) {
   }
 }
 
+function projectileArchetype(value, path, constraints) {
+  const allowed = constraints?.projectileArchetype?.values;
+  if (!Array.isArray(allowed) || allowed.length === 0) {
+    fail("Child Ships Admin projectile contract is incomplete.");
+  }
+  if (typeof value !== "string" || !allowed.includes(value)) {
+    fail(`${path} must reference a canonical production projectile recipe.`);
+  }
+}
+
 export function validateShipPolicy(policy, shipContract) {
   const input = object(policy, "content.ships");
   rejectUnknownKeys(input, "content.ships", ["configRevision", "ships"]);
@@ -96,6 +106,14 @@ export function validateShipPolicy(policy, shipContract) {
       imageAssetVersionId(
         override.imageAssetVersionId,
         `content.ships.ships.${id}.imageAssetVersionId`,
+      );
+    }
+
+    if (override.projectileArchetype !== undefined) {
+      projectileArchetype(
+        override.projectileArchetype,
+        `content.ships.ships.${id}.projectileArchetype`,
+        constraints,
       );
     }
 
