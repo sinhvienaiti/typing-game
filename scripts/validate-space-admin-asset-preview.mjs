@@ -2,10 +2,14 @@ import { readFile } from "node:fs/promises";
 
 const bridgePath = "portal/src/admin/space-typing-asset-preview.ts";
 const shipsPath = "portal/src/admin/space-typing-ships-phase-b.ts";
+const studioPath = "portal/src/admin/v2/asset-tuning-studio.ts";
+const studioCssPath = "portal/src/admin/v2/asset-tuning-studio.css";
 
-const [bridge, ships] = await Promise.all([
+const [bridge, ships, studio, studioCss] = await Promise.all([
   readFile(new URL(`../${bridgePath}`, import.meta.url), "utf8"),
   readFile(new URL(`../${shipsPath}`, import.meta.url), "utf8"),
+  readFile(new URL(`../${studioPath}`, import.meta.url), "utf8"),
+  readFile(new URL(`../${studioCssPath}`, import.meta.url), "utf8"),
 ]);
 
 function requireText(source, needle, label) {
@@ -41,6 +45,19 @@ forbidText(bridge, "ADMIN_TOKEN", "preview must not receive Admin credentials");
 forbidText(bridge, "Authorization", "preview must not receive Authorization header/token");
 forbidText(bridge, "Math.random", "preview security tokens must not use Math.random");
 
+requireText(studio, 'export function createAssetTuningStudio', "A5.1 exposes a shared Studio shell");
+requireText(studio, 'className = "st-admin-asset-studio"', "Studio shell owns shared layout chrome");
+requireText(studio, 'element("details", "st-admin-asset-studio-advanced")', "Studio provides Basic/Advanced disclosure");
+requireText(studio, 'export function createAssetTuningScalarControl', "Studio exposes canonical scalar primitive");
+requireText(studio, 'slider.type = "range"', "scalar primitive includes keyboard-capable slider");
+requireText(studio, 'number.type = "number"', "scalar primitive includes numeric alternative");
+requireText(studio, 'commit(options.defaultValue)', "Reset comes from domain/profile default");
+requireText(studio, 'openAdminMediaAssetPicker', "Studio reuses the existing immutable-version Asset Picker");
+requireText(studio, 'A domain should render', "Asset Picker remains capability-gated by the owning domain");
+requireText(studio, 'export function createAssetTuningCapabilityState', "unsupported/migration capability state is explicit");
+requireText(studioCss, 'grid-template-columns: minmax(340px, 420px) minmax(0, 1fr)', "preview receives dominant flexible width");
+requireText(studioCss, '.st-admin-asset-studio-lifecycle', "Studio exposes lifecycle bar integration");
+
 requireText(ships, '"Draft"', "Ships preview exposes Draft source");
 requireText(ships, '"Published"', "Ships preview exposes Published source");
 requireText(ships, '"Idle"', "Ships preview exposes Idle scenario");
@@ -52,9 +69,18 @@ requireText(ships, 'SpaceTypingAssetPreviewBridge.mount(previewHost)', "Ships pa
 requireText(ships, 'bridge.loadShip({ characterId: ship.id, visual: previewVisual(ship) })', "candidate is sent as typed Ship visual data");
 requireText(ships, 'bridge.setScenario(previewScenario)', "scenario uses preview protocol");
 requireText(ships, 'previewBridge?.disposeImmediately()', "route lifecycle tears down preview bridge");
+requireText(ships, 'createAssetTuningStudio({', "Ships adopts the shared A5.1 Studio shell");
+requireText(ships, 'createAssetTuningScalarControl(helpScope', "Ships uses shared slider + numeric + reset primitive");
+requireText(ships, 'defaultValue: baseline.visual.wingSpan', "Wing Span reset uses canonical bundled default");
+requireText(ships, 'defaultValue: baseline.visual.bodyLength', "Body Length reset uses canonical bundled default");
+requireText(ships, 'status: "REQUIRES CANONICAL MIGRATION"', "migration-required features remain capability state");
+requireText(ships, 'status: "READ-ONLY REFERENCE"', "read-only features remain capability state");
+requireText(ships, 'status: "DEFERRED / UNSUPPORTED"', "unsupported features remain capability state");
+requireText(ships, 'studio.lifecycleHost.append(saveBar)', "existing Save Draft lifecycle is integrated into Studio");
 requireText(ships, 'Save Draft', "existing revision lifecycle remains present");
 requireText(ships, 'Published preview still reflects active', "saving Draft does not relabel it as Published");
 forbidText(ships, 'publishedPreview = validated', "Draft validation must not overwrite Published preview");
 forbidText(ships, 'publishedPreview = validatedDraft', "Draft validation must remain ephemeral");
+forbidText(ships, 'panel("Visual Profile"', "Ships no longer duplicates Asset Tuning settings in a legacy panel");
 
-console.log("Space Typing Admin A5 preview transport validation passed.");
+console.log("Space Typing Admin A5 preview + A5.1 Studio validation passed.");
