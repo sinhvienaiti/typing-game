@@ -17,6 +17,7 @@ const validPolicy = () => ({
       name: "Aegis Mk II",
       unlockStage: 120,
       imageAssetVersionId: "media-version.11111111-2222-3333-4444-555555555555",
+      projectileArchetype: "cosmic",
       statBonus: { shield: 16 },
       visual: { silhouette: "fortress", wingSpan: 1.2, engineCount: 2 },
     },
@@ -39,6 +40,21 @@ test("A5.2 parent validator accepts only canonical Media V2 Ship image versions"
   assert.throws(
     () => validateShipPolicy({ configRevision: "bad", ships: { vanguard: { imageAssetVersionId: "https:\/\/example.test\/ship.webp" } } }, contract.ships),
     /canonical Media V2 version id/,
+  );
+});
+
+test("A5.3 parent validator accepts only child-contract production projectile recipes", () => {
+  assert.equal(
+    validateShipPolicy(validPolicy(), contract.ships).ships.aegis.projectileArchetype,
+    "cosmic",
+  );
+  assert.throws(
+    () => validateShipPolicy({ configRevision: "bad", ships: { vanguard: { projectileArchetype: "invented" } } }, contract.ships),
+    /canonical production projectile recipe/,
+  );
+  assert.throws(
+    () => validateShipPolicy({ configRevision: "bad", ships: { vanguard: { projectileArchetype: "/assets/projectile.png" } } }, contract.ships),
+    /canonical production projectile recipe/,
   );
 });
 
