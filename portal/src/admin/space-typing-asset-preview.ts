@@ -220,10 +220,13 @@ export class SpaceTypingAssetPreviewBridge {
     }
   };
 
-  private async send(type: "LOAD_CANDIDATE" | "SET_SCENARIO" | "SET_TUNING" | "RESET" | "PAUSE"): Promise<unknown> {
+  private async send(
+    type: "LOAD_CANDIDATE" | "SET_SCENARIO" | "SET_TUNING" | "RESET" | "PAUSE",
+    payload?: unknown,
+  ): Promise<unknown> {
     if (this.disposed) throw new Error("Space Typing preview bridge is disposed.");
     await this.readyPromise;
-    return this.sendNow(type);
+    return this.sendNow(type, payload);
   }
 
   private sendNow(
@@ -266,6 +269,9 @@ export class SpaceTypingAssetPreviewBridge {
     this.ready = false;
     if (this.readyTimeout !== null) window.clearTimeout(this.readyTimeout);
     this.readyTimeout = null;
+    this.readyReject?.(reason);
+    this.readyResolve = null;
+    this.readyReject = null;
     window.removeEventListener("message", this.onMessage);
     for (const pending of this.pending.values()) {
       window.clearTimeout(pending.timeout);
