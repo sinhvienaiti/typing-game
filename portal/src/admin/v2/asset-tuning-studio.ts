@@ -1,6 +1,10 @@
 import "./asset-tuning-studio.css";
-import { createAdminFieldShell, createAdminStatusChip } from "./admin-components";
-import { AdminHelpScope, type AdminInfoIconOptions } from "./admin-help";
+import { createAdminStatusChip } from "./admin-components";
+import {
+  AdminHelpScope,
+  createAdminFieldShell,
+  type AdminInfoIconOptions,
+} from "./admin-help";
 import {
   openAdminMediaAssetPicker,
   type AdminMediaAssetPickerOptions,
