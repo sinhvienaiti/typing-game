@@ -37,6 +37,19 @@ const CORE_STATS: readonly CoreStatKey[] = [
   "salvage",
 ];
 const SILHOUETTES = ["spear", "fortress", "arc", "phantom", "crown", "blade"] as const;
+const PROJECTILE_ARCHETYPES = [
+  "spear",
+  "heavy",
+  "electric",
+  "shadow",
+  "star",
+  "barrage",
+  "mystic",
+  "guard",
+  "slash",
+  "radiant",
+  "cosmic",
+] as const;
 const BASIC_COLOR_KEYS = ["primary", "secondary", "accent"] as const;
 const ADVANCED_COLOR_KEYS = ["core", "engine", "glow"] as const;
 const TEXT_FIELDS = [
@@ -52,6 +65,9 @@ type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type ShipId = string;
 type VisualColorKey = (typeof BASIC_COLOR_KEYS)[number] | (typeof ADVANCED_COLOR_KEYS)[number];
+type ProjectileArchetype = (typeof PROJECTILE_ARCHETYPES)[number];
+type ShipPreviewWithProjectile = ShipAdminPreviewItem & { projectileArchetype?: ProjectileArchetype };
+type ShipOverrideWithProjectile = ShipAdminOverride & { projectileArchetype?: ProjectileArchetype };
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -134,6 +150,11 @@ function policyFrom(config: SpaceTypingAdminConfig): ShipAdminPolicy {
 
 function previewVisual(ship: ShipAdminPreviewItem): Readonly<Record<string, unknown>> {
   return structuredClone(ship.visual) as unknown as Readonly<Record<string, unknown>>;
+}
+
+function projectileArchetypeFor(ship: ShipAdminPreviewItem): ProjectileArchetype | undefined {
+  const value = (ship as ShipPreviewWithProjectile).projectileArchetype;
+  return value !== undefined && PROJECTILE_ARCHETYPES.includes(value) ? value : undefined;
 }
 
 function colorLabel(key: VisualColorKey): string {
@@ -285,10 +306,12 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     setPreviewStatus(`Loading ${previewSource} · ${ship.id} · ${previewScenario} through production renderer…`, "info");
     void ensurePreviewBridge().then(async (bridge) => {
       if (generation !== previewGeneration || !page.isConnected) return;
+      const projectileArchetype = projectileArchetypeFor(ship);
       await bridge.loadShip({
         characterId: ship.id,
         visual: previewVisual(ship),
         ...(ship.imageAssetVersionId === undefined ? {} : { imageAssetVersionId: ship.imageAssetVersionId }),
+        ...(projectileArchetype === undefined ? {} : { projectileArchetype }),
       });
       if (generation !== previewGeneration || !page.isConnected) return;
       await bridge.setScenario(previewScenario);
@@ -436,6 +459,46 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       stateTone: ship.imageAssetVersionId === undefined ? "info" : "good",
     }));
 
+    const effectiveProjectile = projectileArchetypeFor(ship);
+    const baselineProjectile = projectileArchetypeFor(baseline);
+    if (effectiveProjectile !== undefined && baselineProjectile !== undefined) {
+      const projectile = el("select", "st-admin-select") as HTMLSelectElement;
+      for (const recipe of PROJECTILE_ARCHETYPES) projectile.append(new Option(recipe, recipe));
+      projectile.value = effectiveProjectile;
+      projectile.addEventListener("change", () => {
+        const next = projectile.value as ProjectileArchetype;
+        const override = overrideFor(selectedId) as ShipOverrideWithProjectile;
+        if (next === baselineProjectile) {
+          delete override.projectileArchetype;
+          pruneEmptyOverride(selectedId);
+        } else {
+          override.projectileArchetype = next;
+        }
+        renderList();
+        renderStudioSettings();
+        syncPreview();
+        setStatus(`${selectedId} projectile recipe set to ${next}. Fire preview uses the production PlayerShotSystem; Save Draft to persist this binding.`, "good");
+      });
+      studio.basicHost.append(createAdminFieldShell(helpScope, {
+        label: "Projectile Recipe",
+        control: projectile,
+        help: {
+          title: "Projectile Recipe",
+          content: "Binds this Ship to one existing production projectile recipe. The recipe owns muzzle placement, trail, sprite bundle and motion. Those internals are deliberately not editable as separate Admin fields.",
+        },
+        stateMessage: effectiveProjectile === baselineProjectile
+          ? `Bundled production recipe · ${effectiveProjectile}`
+          : `Draft override · ${effectiveProjectile} · applies on a new session`,
+        stateTone: effectiveProjectile === baselineProjectile ? "info" : "good",
+      }));
+    } else {
+      studio.basicHost.append(createAssetTuningCapabilityState({
+        label: "Projectile recipe binding",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "The canonical child preview did not expose a production projectile recipe for this Ship.",
+      }));
+    }
+
     const silhouette = el("select", "st-admin-select") as HTMLSelectElement;
     for (const option of SILHOUETTES) silhouette.append(new Option(option, option));
     silhouette.value = ship.visual.silhouette;
@@ -510,6 +573,21 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         description: "Basic uses the canonical Media V2 Asset Picker and stores an exact immutable image version.",
       }),
       createAssetTuningCapabilityState({
+        label: "Projectile recipe binding",
+        status: "AVAILABLE",
+        description: "Basic binds a Ship to one existing production PlayerShot recipe. Fire preview executes the same child PlayerShotSystem path.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Projectile muzzle / trail / sprite internals",
+        status: "READ-ONLY REFERENCE",
+        description: "These are owned by the selected production recipe and are not independent writable Admin fields.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Projectile launch / impact SFX",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Production audio identities exist, but persisted bindings plus a production-backed Admin audio scenario do not yet form a complete authoring chain.",
+      }),
+      createAssetTuningCapabilityState({
         label: "Persistent scale / offset / rotation",
         status: "REQUIRES CANONICAL MIGRATION",
         description: "Draw-time pose inputs remain runtime state until canonical persisted presentation fields exist.",
@@ -520,14 +598,14 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         description: "The generated relief runtime may be referenced, but exact-version Admin assignment and repeated preview cleanup are not ready.",
       }),
       createAssetTuningCapabilityState({
-        label: "Projectile authoring",
-        status: "REQUIRES CANONICAL MIGRATION",
-        description: "Fire preview uses the production Ship projectile path; code-owned projectile recipes are not editable yet.",
-      }),
-      createAssetTuningCapabilityState({
         label: "Current VFX / SFX",
         status: "READ-ONLY REFERENCE",
         description: "Production effects and semantic/sample audio can be previewed only through their current runtime owners.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Miss presentation / Weapon Admin entity",
+        status: "DEFERRED / UNSUPPORTED",
+        description: "Normal Ship projectiles have no canonical per-Ship miss presentation, and production has no first-class writable Weapon domain.",
       }),
       createAssetTuningCapabilityState({
         label: "Arbitrary / animated GLB",
