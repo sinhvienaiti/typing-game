@@ -13,6 +13,7 @@ const VISUAL_KEYS = [
   "engineCount",
 ];
 const COLOR_KEYS = ["primary", "secondary", "accent", "core", "engine", "glow"];
+const MEDIA_ASSET_VERSION_ID_PATTERN = /^media-version\.[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/;
 const TEXT_LIMITS = {
   name: 80,
   role: 100,
@@ -51,6 +52,12 @@ function rejectUnknownKeys(value, path, allowed) {
   }
 }
 
+function imageAssetVersionId(value, path) {
+  if (typeof value !== "string" || !MEDIA_ASSET_VERSION_ID_PATTERN.test(value)) {
+    fail(`${path} must be a canonical Media V2 version id.`);
+  }
+}
+
 export function validateShipPolicy(policy, shipContract) {
   const input = object(policy, "content.ships");
   rejectUnknownKeys(input, "content.ships", ["configRevision", "ships"]);
@@ -83,6 +90,13 @@ export function validateShipPolicy(policy, shipContract) {
         fail(`content.ships.ships.${id}.unlockStage must be an integer.`);
       }
       finiteNumber(override.unlockStage, `content.ships.ships.${id}.unlockStage`, range.min, range.max);
+    }
+
+    if (override.imageAssetVersionId !== undefined) {
+      imageAssetVersionId(
+        override.imageAssetVersionId,
+        `content.ships.ships.${id}.imageAssetVersionId`,
+      );
     }
 
     if (override.statBonus !== undefined) {
