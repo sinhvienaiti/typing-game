@@ -42,6 +42,7 @@ test("parent authored overrides are merged by child runtime sources", async () =
       ships: {
         aegis: {
           unlockStage: 120,
+          imageAssetVersionId: "media-version.11111111-2222-3333-4444-555555555555",
           statBonus: { shield: 16 },
           visual: { wingSpan: 1.2, engineCount: 2 },
         },
@@ -51,6 +52,7 @@ test("parent authored overrides are merged by child runtime sources", async () =
   const aegis = preview.ships.find((ship) => ship.id === "aegis");
   assert.equal(preview.configRevision, "parent-ships-test-v1");
   assert.equal(aegis.unlockStage, 120);
+  assert.equal(aegis.imageAssetVersionId, "media-version.11111111-2222-3333-4444-555555555555");
   assert.equal(aegis.statBonus.shield, 16);
   assert.equal(aegis.statBonus.armor, 8);
   assert.equal(aegis.visual.wingSpan, 1.2);
