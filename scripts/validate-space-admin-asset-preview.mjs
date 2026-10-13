@@ -46,7 +46,7 @@ forbidText(bridge, "Authorization", "preview must not receive Authorization head
 forbidText(bridge, "Math.random", "preview security tokens must not use Math.random");
 
 requireText(studio, 'export function createAssetTuningStudio', "A5.1 exposes a shared Studio shell");
-requireText(studio, 'className = "st-admin-asset-studio"', "Studio shell owns shared layout chrome");
+requireText(studio, 'element("section", "st-admin-asset-studio")', "Studio shell owns shared layout chrome");
 requireText(studio, 'element("details", "st-admin-asset-studio-advanced")', "Studio provides Basic/Advanced disclosure");
 requireText(studio, 'export function createAssetTuningScalarControl', "Studio exposes canonical scalar primitive");
 requireText(studio, 'slider.type = "range"', "scalar primitive includes keyboard-capable slider");
