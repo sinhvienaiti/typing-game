@@ -1,12 +1,12 @@
-export const SHOP_AUDITED_CHILD_SHA = "83f80b3d6f640ea1af46e158e25485bc57b31393";
+export const SHOP_AUDITED_CHILD_SHA = "1fd9eed7e6c492034c2816e90a6e0bc1e8c5309d";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
-  "Featured",
-  "Daily",
-  "Weekly",
-  "Bundles",
-  "History",
+  "Pricing",
+  "Availability",
+  "Offers",
+  "Services",
+  "Deferred",
 ]);
 
 export const SHOP_FIELDS = Object.freeze([
@@ -14,49 +14,54 @@ export const SHOP_FIELDS = Object.freeze([
   "Item",
   "Category",
   "Price",
-  "Currency",
   "Original Price",
   "Discount",
-  "Purchase Limit",
+  "Stock",
+  "Availability",
+  "Requirement",
+  "Badge / Label",
+  "Enabled",
   "Daily Limit",
   "Weekly Limit",
-  "Availability",
-  "Requirement",
   "Featured",
   "Sort Order",
-  "Enabled",
 ]);
 
-const runtimeFieldNames = new Set([
-  "ID",
-  "Item",
-  "Category",
-  "Price",
-  "Currency",
-  "Purchase Limit",
-  "Availability",
-  "Requirement",
-  "Enabled",
-]);
+const fieldModel = Object.freeze({
+  "ID": [true, "registry-owned", false, "Stable product identity is owned by the item/equipment registries."],
+  "Item": [true, "registry-owned", false, "Name and core identity are owned by the item/equipment registries; Shop policy selects registered IDs."],
+  "Category": [true, "registry-owned", false, "Item/equipment category is owned by its registry."],
+  "Price": [true, "policy-authorable", true, "Authorable through pricing tables and per-offer overrides."],
+  "Original Price": [true, "policy-authorable", true, "Authorable as compare-at price on item/equipment offer overrides."],
+  "Discount": [true, "runtime-derived", false, "Discount presentation is derived from Price and Original Price; no independent percentage source is created."],
+  "Stock": [true, "policy-authorable", true, "Item stock is authorable per Shop type; generated equipment count is controlled by generation rules."],
+  "Availability": [true, "policy-authorable", true, "Authorable through Shop-type availability rules and offer Shop-type scopes."],
+  "Requirement": [true, "policy-authorable", true, "Discovery/chance requirements are authorable through canonical availability rules."],
+  "Badge / Label": [true, "policy-authorable", true, "Optional offer badge is consumed by the canonical Shop policy."],
+  "Enabled": [true, "policy-authorable", true, "Per-offer enabled state is authorable without changing registry identity."],
+  "Daily Limit": [false, "unsupported", false, "The current runtime has no daily purchase-limit semantic."],
+  "Weekly Limit": [false, "unsupported", false, "The current runtime has no weekly purchase-limit semantic."],
+  "Featured": [false, "unsupported", false, "The current runtime has no featured-ranking semantic."],
+  "Sort Order": [false, "unsupported", false, "The deterministic generator owns runtime ordering; no independent Admin sort order exists."],
+});
 
-const runtimeReason = "Derived by the pinned Space Typing Shop runtime. It is inspectable here but not authorable because the current gameplay policy is source-owned and purchase state persists in PlayerSave.";
-const unsupportedReason = "The current Space Typing Shop runtime has no native concept for this master-plan field. Admin keeps the field visible but locked instead of fabricating behavior.";
-const authoringReason = "Shop generation/pricing rules are source-owned in the child runtime and transaction state persists in PlayerSave. No canonical admin-config consumer exists yet, so Shop authoring remains closed.";
+export function createShopCapabilityManifest(contract = {}) {
+  const authorableSections = Array.isArray(contract.authorableSections) ? [...contract.authorableSections] : [];
+  const previewProtocol = contract.previewProtocol ?? {};
+  const runtime = contract.runtime ?? {};
+  const previewAvailable = previewProtocol.available === true && previewProtocol.version === 1;
+  const authoringEnabled = authorableSections.length > 0 && previewAvailable;
 
-export function createShopCapabilityManifest() {
   return {
-    protocolVersion: 3,
-    mode: "runtime-backed-readonly",
+    protocolVersion: 4,
+    mode: authoringEnabled ? "runtime-backed-authoring" : "runtime-backed-readonly",
     owner: "Space Typing shops/economy runtime",
     auditedChildSha: SHOP_AUDITED_CHILD_SHA,
     tabs: SHOP_TABS,
-    fields: SHOP_FIELDS.map((name) => ({
-      name,
-      runtimeBacked: runtimeFieldNames.has(name),
-      source: runtimeFieldNames.has(name) ? "runtime-derived" : "unsupported",
-      authorable: false,
-      reason: runtimeFieldNames.has(name) ? runtimeReason : unsupportedReason,
-    })),
+    fields: SHOP_FIELDS.map((name) => {
+      const [runtimeBacked, source, authorable, reason] = fieldModel[name];
+      return { name, runtimeBacked, source, authorable: authoringEnabled && authorable, reason };
+    }),
     capabilities: {
       runtimeCatalogGeneration: true,
       purchaseTransaction: true,
@@ -65,49 +70,63 @@ export function createShopCapabilityManifest() {
       stockRemaining: true,
       availability: true,
       serviceShop: true,
-      catalogWrite: false,
+      catalogWrite: authoringEnabled,
+      offerWrite: authoringEnabled,
+      servicePricingWrite: authoringEnabled,
       schedules: false,
       bundles: false,
       transactionHistory: false,
-      preview: false,
+      preview: previewAvailable,
     },
     runtime: {
       sources: [
+        "src/shops/policy.ts",
         "src/shops/state.ts",
         "src/shops/service-shop.ts",
         "src/economy/credits.ts",
         "src/economy/currencies.ts",
       ],
-      shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
+      shopTypes: Array.isArray(contract?.ids?.shopTypes) ? [...contract.ids.shopTypes] : [],
       currencyIds: ["credits", "alloy", "star-crystal", "quantum-core"],
-      priceStateKeys: ["credits", "alloy", "starCrystal", "quantumCore"],
+      priceStateKeys: Array.isArray(contract.currencies) ? [...contract.currencies] : [],
       stockKinds: ["item", "equipment"],
       transactionReasons: ["missing", "sold-out", "currency", "full", "duplicate"],
       refreshBoundary: "sector-instance",
       persistenceOwner: "PlayerSave.shopState",
     },
     evidence: [
+      { id: "policy-contract", found: authoringEnabled, detail: "src/shops/policy.ts exposes the validated ShopAdminPolicyV1 authoring contract consumed by runtime materialization." },
       { id: "catalog-owner", found: true, detail: "src/shops/state.ts owns deterministic stock generation and ShopInstance persistence." },
       { id: "purchase-owner", found: true, detail: "buyShopStockEntry validates stock/currency/inventory and applies purchase state." },
-      { id: "pricing-owner", found: true, detail: "ShopPrice stores Credits/Alloy plus camelCase Star Crystal/Quantum Core balance keys while the contract exposes canonical hyphenated currency IDs." },
-      { id: "availability-owner", found: true, detail: "shopAvailable gates black-market/hidden/event/traveling shops from discovery and luck." },
-      { id: "service-owner", found: true, detail: "src/shops/service-shop.ts owns upgrade/repair/evolution/service purchase costs." },
-      { id: "authoring-seam", found: false, detail: "No child config contract consumes admin-authored Shop policy yet; write capability stays disabled." },
+      { id: "pricing-owner", found: true, detail: "Shop policy pricing and offer overrides are consumed by the production generator; Admin does not reimplement pricing." },
+      { id: "availability-owner", found: true, detail: "shopAvailable consumes canonical policy availability rules and discovery/luck context." },
+      { id: "service-owner", found: true, detail: "src/shops/service-shop.ts consumes the canonical services policy for repair/enhancement/evolution/affix/dismantle costs." },
+      { id: "preview-seam", found: previewAvailable, detail: previewAvailable ? "The child exports pnpm shop:admin-preview and materializes the same production Shop policy/runtime path." : "No compatible child Shop preview protocol is available." },
     ],
     linkedRuntimeDomains: [
-      { id: "equipment", label: "Equipment", route: "/admin/space-typing/equipment", relationship: "Shop stock and service upgrades consume runtime equipment definitions/state." },
-      { id: "currencies", label: "Currencies", route: "/admin/space-typing/currencies", relationship: "Purchases spend Credits, Alloy, Star Crystal and Quantum Core." },
-      { id: "skills", label: "Skills", route: "/admin/space-typing/skills", relationship: "Service Shop can consume upgrade progression state; it is not a separate catalog authoring source." },
+      { id: "equipment", label: "Equipment", route: "/admin/space-typing/equipment", relationship: "Shop generation selects registered equipment IDs and service upgrades consume equipment state." },
+      { id: "currencies", label: "Currencies", route: "/admin/space-typing/currencies", relationship: "Pricing spends Credits, Alloy, Star Crystal and Quantum Core." },
+      { id: "skills", label: "Skills", route: "/admin/space-typing/skills", relationship: "Progression remains owned by progression/upgrades; Shop only consumes that state." },
     ],
     authoring: {
-      enabled: false,
-      applyBoundary: "none",
-      persistence: "child-runtime-state",
-      reason: authoringReason,
+      enabled: authoringEnabled,
+      configNamespace: contract.configNamespace ?? "economy.shop",
+      sections: authorableSections,
+      applyBoundary: runtime.applyBoundary ?? "none",
+      persistence: authoringEnabled ? "admin-revision-store" : "child-runtime-state",
+      reason: authoringEnabled
+        ? "Drafts persist in the Admin revision store under economy.shop. Publish changes only future sessions and newly resolved Shop instances; existing ShopInstance snapshots do not self-reprice."
+        : "Shop authoring remains closed until a canonical validated child policy and production preview protocol are available.",
     },
     preview: {
-      available: false,
-      reason: "Runtime generation is real, but the child contract does not expose an admin preview protocol yet. Admin does not reimplement the generator because that would create a second source of truth.",
+      available: previewAvailable,
+      protocolVersion: previewAvailable ? previewProtocol.version : null,
+      command: previewAvailable ? previewProtocol.plannedCommand : null,
+      mutation: previewProtocol.mutation === true,
+      reason: previewAvailable
+        ? "Preview delegates to the pinned child production materializer/generator and never mutates the running game or Admin revision state."
+        : "The pinned child contract does not expose a compatible Shop preview protocol.",
     },
+    deferredCapabilities: Array.isArray(contract.deferredCapabilities) ? [...contract.deferredCapabilities] : [],
   };
 }

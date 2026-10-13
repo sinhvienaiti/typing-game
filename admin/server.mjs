@@ -13,6 +13,7 @@ import { runEnemyRegistryPreview, EnemyRegistryPreviewError } from "./enemy-regi
 import { runBossRegistryPreview, BossRegistryPreviewError } from "./boss-registry-preview.mjs";
 import { runWorldRegistryPreview, WorldRegistryPreviewError } from "./world-registry-preview.mjs";
 import { runStageConfigPreview, StageConfigPreviewError } from "./stage-config-preview.mjs";
+import { runShopConfigPreview, ShopConfigPreviewError } from "./shop-config-preview.mjs";
 import { createShipRuntimeEnvelope } from "./ship-runtime.mjs";
 import { createEquipmentRuntimeEnvelope } from "./equipment-runtime.mjs";
 import { createSkillRuntimeEnvelope } from "./skill-runtime.mjs";
@@ -267,7 +268,7 @@ const server = createServer(async (request, response) => {
       return;
     }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/capabilities") {
-      json(response, 200, createShopCapabilityManifest());
+      json(response, 200, createShopCapabilityManifest(shopContract));
       return;
     }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/currencies/capabilities") {
@@ -342,6 +343,25 @@ const server = createServer(async (request, response) => {
         publishedPolicy: input.publishedPolicy ?? active.worldMusic?.publishedPolicy,
         musicMode: input.musicMode ?? "map",
         stageNumber: input.stageNumber,
+      }));
+      return;
+    }
+
+    if(request.method==="POST"&&url.pathname==="/api/admin/space-typing/shop/preview") {
+      const input = await body(request);
+      const state = await store.getState();
+      const active = await store.getRuntimeConfig();
+      json(response, 200, await runShopConfigPreview({
+        rootDir: root,
+        contract: shopContract,
+        policy: input.policy ?? active.economy?.shop,
+        activeRevision: state.activeRevision,
+        shopType: input.shopType,
+        stage: input.stage,
+        worldKey: input.worldKey,
+        luck: input.luck,
+        progression: input.progression,
+        discovered: input.discovered,
       }));
       return;
     }
@@ -465,6 +485,7 @@ const server = createServer(async (request, response) => {
       [BossRegistryPreviewError, "bosses-preview-error"],
       [WorldRegistryPreviewError, "worlds-preview-error"],
       [StageConfigPreviewError, "stages-preview-error"],
+      [ShopConfigPreviewError, "shop-preview-error"],
     ];
     for (const [Type, code] of previews) {
       if (error instanceof Type) {

@@ -1,53 +1,76 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createShopCapabilityManifest, SHOP_AUDITED_CHILD_SHA, SHOP_FIELDS, SHOP_TABS } from "./shop-capability.mjs";
+import {
+  createShopCapabilityManifest,
+  SHOP_AUDITED_CHILD_SHA,
+  SHOP_FIELDS,
+  SHOP_TABS,
+} from "./shop-capability.mjs";
 
-const RUNTIME_FIELDS = ["ID", "Item", "Category", "Price", "Currency", "Purchase Limit", "Availability", "Requirement", "Enabled"];
-const UNSUPPORTED_FIELDS = ["Original Price", "Discount", "Daily Limit", "Weekly Limit", "Featured", "Sort Order"];
+const contract = {
+  configNamespace: "economy.shop",
+  runtime: {
+    endpoint: "/api/runtime/space-typing/shop",
+    applyBoundary: "new-session+new-shop-instance",
+    fallback: "bundled-policy",
+  },
+  previewProtocol: {
+    version: 1,
+    available: true,
+    plannedCommand: "pnpm shop:admin-preview",
+    mutation: false,
+  },
+  ids: {
+    shopTypes: ["normal", "station", "traveling", "black-market", "hidden", "event", "service"],
+  },
+  currencies: ["credits", "alloy", "starCrystal", "quantumCore"],
+  authorableSections: ["generation", "pricing", "availability", "offers", "services"],
+  deferredCapabilities: ["schedule-window", "daily-purchase-limit", "weekly-purchase-limit", "bundle-transaction"],
+};
 
-test("Shop capability manifest mirrors the master-plan surface and real runtime ownership", () => {
-  const manifest = createShopCapabilityManifest();
-  assert.equal(manifest.protocolVersion, 3);
-  assert.equal(manifest.mode, "runtime-backed-readonly");
+test("Shop capability manifest opens only canonical runtime-backed authoring seams", () => {
+  const manifest = createShopCapabilityManifest(contract);
+  assert.equal(manifest.protocolVersion, 4);
+  assert.equal(manifest.mode, "runtime-backed-authoring");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "83f80b3d6f640ea1af46e158e25485bc57b31393");
-  assert.deepEqual(manifest.tabs, ["Catalog", "Featured", "Daily", "Weekly", "Bundles", "History"]);
-  assert.equal(SHOP_TABS.length, 6);
-  assert.equal(SHOP_FIELDS.length, 15);
-  assert.deepEqual(SHOP_FIELDS, [
-    "ID", "Item", "Category", "Price", "Currency", "Original Price", "Discount", "Purchase Limit",
-    "Daily Limit", "Weekly Limit", "Availability", "Requirement", "Featured", "Sort Order", "Enabled",
-  ]);
-  assert.deepEqual(manifest.fields.filter((field) => field.runtimeBacked).map((field) => field.name), RUNTIME_FIELDS);
-  assert.deepEqual(manifest.fields.filter((field) => !field.runtimeBacked).map((field) => field.name), UNSUPPORTED_FIELDS);
-  assert.ok(manifest.fields.every((field) => field.authorable === false));
-  assert.equal(manifest.authoring.enabled, false);
-  assert.equal(manifest.authoring.applyBoundary, "none");
-  assert.equal(manifest.authoring.persistence, "child-runtime-state");
+  assert.equal(manifest.auditedChildSha, "1fd9eed7e6c492034c2816e90a6e0bc1e8c5309d");
+  assert.deepEqual(manifest.tabs, SHOP_TABS);
+  assert.deepEqual(manifest.fields.map((field) => field.name), SHOP_FIELDS);
+
+  const authorable = manifest.fields.filter((field) => field.authorable).map((field) => field.name);
+  assert.deepEqual(authorable, ["Price", "Original Price", "Stock", "Availability", "Requirement", "Badge / Label", "Enabled"]);
+  assert.equal(manifest.fields.find((field) => field.name === "Discount")?.authorable, false);
+  assert.equal(manifest.fields.find((field) => field.name === "Daily Limit")?.source, "unsupported");
+  assert.equal(manifest.fields.find((field) => field.name === "Item")?.source, "registry-owned");
+
+  assert.deepEqual(manifest.authoring.sections, contract.authorableSections);
+  assert.equal(manifest.authoring.enabled, true);
+  assert.equal(manifest.authoring.applyBoundary, "new-session+new-shop-instance");
+  assert.equal(manifest.authoring.persistence, "admin-revision-store");
+  assert.equal(manifest.preview.available, true);
+  assert.equal(manifest.preview.command, "pnpm shop:admin-preview");
+  assert.equal(manifest.preview.mutation, false);
 });
 
-test("Shop capabilities keep canonical currency IDs separate from runtime price state keys", () => {
-  const manifest = createShopCapabilityManifest();
-  assert.deepEqual(manifest.capabilities, {
-    runtimeCatalogGeneration: true,
-    purchaseTransaction: true,
-    pricing: true,
-    currencies: true,
-    stockRemaining: true,
-    availability: true,
-    serviceShop: true,
-    catalogWrite: false,
-    schedules: false,
-    bundles: false,
-    transactionHistory: false,
-    preview: false,
+test("Shop capability manifest keeps deferred runtime concepts closed", () => {
+  const manifest = createShopCapabilityManifest(contract);
+  assert.equal(manifest.capabilities.catalogWrite, true);
+  assert.equal(manifest.capabilities.offerWrite, true);
+  assert.equal(manifest.capabilities.servicePricingWrite, true);
+  assert.equal(manifest.capabilities.preview, true);
+  assert.equal(manifest.capabilities.schedules, false);
+  assert.equal(manifest.capabilities.bundles, false);
+  assert.equal(manifest.capabilities.transactionHistory, false);
+  assert.deepEqual(manifest.deferredCapabilities, contract.deferredCapabilities);
+});
+
+test("Shop authoring fails closed when the child preview contract is unavailable", () => {
+  const manifest = createShopCapabilityManifest({
+    ...contract,
+    previewProtocol: { ...contract.previewProtocol, available: false },
   });
-  assert.deepEqual(manifest.runtime.currencyIds, ["credits", "alloy", "star-crystal", "quantum-core"]);
-  assert.deepEqual(manifest.runtime.priceStateKeys, ["credits", "alloy", "starCrystal", "quantumCore"]);
-  assert.deepEqual(manifest.runtime.shopTypes, ["normal", "station", "traveling", "black-market", "hidden", "event", "service"]);
-  assert.deepEqual(manifest.runtime.stockKinds, ["item", "equipment"]);
-  assert.equal(manifest.runtime.refreshBoundary, "sector-instance");
-  assert.equal(manifest.runtime.persistenceOwner, "PlayerSave.shopState");
-  assert.ok(manifest.evidence.filter((entry) => entry.id !== "authoring-seam").every((entry) => entry.found === true));
-  assert.equal(manifest.evidence.find((entry) => entry.id === "authoring-seam")?.found, false);
+  assert.equal(manifest.mode, "runtime-backed-readonly");
+  assert.equal(manifest.authoring.enabled, false);
+  assert.equal(manifest.preview.available, false);
+  assert.ok(manifest.fields.every((field) => field.authorable === false));
 });
