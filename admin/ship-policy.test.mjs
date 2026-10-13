@@ -16,6 +16,7 @@ const validPolicy = () => ({
     aegis: {
       name: "Aegis Mk II",
       unlockStage: 120,
+      imageAssetVersionId: "media-version.11111111-2222-3333-4444-555555555555",
       statBonus: { shield: 16 },
       visual: { silhouette: "fortress", wingSpan: 1.2, engineCount: 2 },
     },
@@ -24,6 +25,21 @@ const validPolicy = () => ({
 
 test("B06.1 parent validator accepts child-contract-backed ship overrides", () => {
   assert.equal(validateShipPolicy(validPolicy(), contract.ships).configRevision, "ships-admin-test-v1");
+});
+
+test("A5.2 parent validator accepts only canonical Media V2 Ship image versions", () => {
+  assert.equal(
+    validateShipPolicy(validPolicy(), contract.ships).ships.aegis.imageAssetVersionId,
+    "media-version.11111111-2222-3333-4444-555555555555",
+  );
+  assert.throws(
+    () => validateShipPolicy({ configRevision: "bad", ships: { vanguard: { imageAssetVersionId: "/assets/ship.webp" } } }, contract.ships),
+    /canonical Media V2 version id/,
+  );
+  assert.throws(
+    () => validateShipPolicy({ configRevision: "bad", ships: { vanguard: { imageAssetVersionId: "https:\/\/example.test\/ship.webp" } } }, contract.ships),
+    /canonical Media V2 version id/,
+  );
 });
 
 test("B06.1 parent validator rejects unknown IDs and player-state fields", () => {
