@@ -193,6 +193,8 @@ jobs:
         run: node --test admin/world-http-runtime-smoke.test.mjs
       - name: Test canonical Stages Admin preview bridge
         run: node --test admin/stage-config-preview.test.mjs
+      - name: Test canonical Shop Admin preview bridge
+        run: node --test admin/shop-config-preview.test.mjs
       - name: Test B06.6 Stage HTTP publish/runtime/rollback smoke
         run: node --test admin/stage-http-runtime-smoke.test.mjs
       - name: Test Space Typing
