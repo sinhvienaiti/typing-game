@@ -108,6 +108,7 @@ export type ShipAdminOverride = {
   passiveName?: string;
   activeName?: string;
   ultimateName?: string;
+  imageAssetVersionId?: string;
   statBonus?: Partial<Record<CoreStatKey, number>>;
   visual?: Partial<ShipVisualProfile>;
 };
@@ -126,6 +127,7 @@ export type ShipAdminPreviewItem = {
   passiveName: string;
   activeName: string;
   ultimateName: string;
+  imageAssetVersionId?: string;
   statBonus: Partial<Record<CoreStatKey, number>>;
   visual: ShipVisualProfile;
   assetId: string;
