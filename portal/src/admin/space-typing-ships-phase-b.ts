@@ -15,6 +15,12 @@ import {
   type SpaceTypingAssetPreviewScenario,
   type SpaceTypingAssetPreviewSource,
 } from "./space-typing-asset-preview";
+import { AdminHelpScope, createAdminFieldShell } from "./v2/admin-help";
+import {
+  createAssetTuningCapabilityState,
+  createAssetTuningScalarControl,
+  createAssetTuningStudio,
+} from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
 const CORE_STATS: readonly CoreStatKey[] = [
@@ -30,7 +36,8 @@ const CORE_STATS: readonly CoreStatKey[] = [
   "salvage",
 ];
 const SILHOUETTES = ["spear", "fortress", "arc", "phantom", "crown", "blade"] as const;
-const COLOR_KEYS = ["primary", "secondary", "accent", "core", "engine", "glow"] as const;
+const BASIC_COLOR_KEYS = ["primary", "secondary", "accent"] as const;
+const ADVANCED_COLOR_KEYS = ["core", "engine", "glow"] as const;
 const TEXT_FIELDS = [
   ["name", "Name"],
   ["role", "Role"],
@@ -43,6 +50,7 @@ const TEXT_FIELDS = [
 type Navigate = (path: string) => void;
 type Tone = "good" | "warn" | "bad" | "info";
 type ShipId = string;
+type VisualColorKey = (typeof BASIC_COLOR_KEYS)[number] | (typeof ADVANCED_COLOR_KEYS)[number];
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -127,15 +135,28 @@ function previewVisual(ship: ShipAdminPreviewItem): Readonly<Record<string, unkn
   return structuredClone(ship.visual) as unknown as Readonly<Record<string, unknown>>;
 }
 
+function colorLabel(key: VisualColorKey): string {
+  const labels: Record<VisualColorKey, string> = {
+    primary: "Primary",
+    secondary: "Secondary",
+    accent: "Accent",
+    core: "Core",
+    engine: "Engine",
+    glow: "Glow",
+  };
+  return labels[key];
+}
+
 export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const page = el("div");
+  const helpScope = new AdminHelpScope();
   const revisionBadge = badge("ACTIVE · loading", "info");
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
     el("div", "st-admin-eyebrow", "Game Content · Runtime-backed Registry · B06.1"),
     el("h1", undefined, "Ships"),
-    el("p", undefined, "Author identity metadata, progression discovery milestones, combat stat bonuses and visual profiles against the child runtime registry. Selection remains independent of Campaign unlock milestones."),
+    el("p", undefined, "Manage canonical Ship metadata, combat bonuses and production-backed presentation. Visual tuning uses the shared A5 Asset Tuning Studio."),
   );
   header.append(copy, revisionBadge);
   page.append(header);
@@ -143,40 +164,36 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const status = notice("Loading active revision and canonical child ship registry…", "info");
   status.setAttribute("aria-live", "polite");
 
-  const previewPanel = panel(
-    "Production Visual Preview",
-    "A5.0 isolated preview · Draft and Published use the child production renderer without changing PlayerSave, Shop state, active revision or Media current.",
-  );
-  previewPanel.classList.add("st-admin-asset-preview-panel");
-  const previewToolbar = el("div", "st-admin-asset-preview-toolbar");
-  const draftPreviewButton = button("Draft", () => selectPreviewSource("draft"), "st-admin-btn primary");
-  const publishedPreviewButton = button("Published", () => selectPreviewSource("published"));
-  const idlePreviewButton = button("Idle", () => selectPreviewScenario("idle"), "st-admin-btn primary");
-  const movePreviewButton = button("Move", () => selectPreviewScenario("move"));
-  const firePreviewButton = button("Fire", () => selectPreviewScenario("fire"));
-  previewToolbar.append(
-    el("strong", undefined, "Source"),
-    draftPreviewButton,
-    publishedPreviewButton,
-    el("strong", undefined, "Scenario"),
-    idlePreviewButton,
-    movePreviewButton,
-    firePreviewButton,
-  );
-  const previewHost = el("div", "st-admin-asset-preview-stage");
-  const previewStatus = el("div", "st-admin-asset-preview-status", "Waiting for the canonical fleet before starting preview…");
-  previewStatus.setAttribute("aria-live", "polite");
-  previewPanel.append(previewToolbar, previewHost, previewStatus);
+  const studio = createAssetTuningStudio({
+    helpScope,
+    title: "Ship Appearance",
+    basicLabel: "Basic",
+    sources: [
+      { id: "draft", label: "Draft", help: "Current in-memory candidate, including unsaved visual edits." },
+      { id: "published", label: "Published", help: "Active revision materialized separately from the Draft candidate." },
+    ],
+    activeSource: "draft",
+    scenarios: [
+      { id: "idle", label: "Idle", help: "Production idle presentation. Scenario state is not persisted." },
+      { id: "move", label: "Move", help: "Production movement presentation. Scenario state is not persisted." },
+      { id: "fire", label: "Fire", help: "Production Ship projectile path. This does not create a Weapon Admin entity." },
+    ],
+    activeScenario: "idle",
+    onSourceChange: (source) => selectPreviewSource(source as SpaceTypingAssetPreviewSource),
+    onScenarioChange: (scenario) => selectPreviewScenario(scenario as SpaceTypingAssetPreviewScenario),
+  });
+  const previewHost = studio.previewHost;
+  const previewStatus = studio.previewStatus;
 
   const body = el("div", "stx-grid");
   const listPanel = panel("Canonical Fleet", "11 child-owned ship IDs · IDs and asset IDs are immutable");
   const listHost = el("div");
   listPanel.append(listHost);
-  const editorPanel = panel("Ship Override", "Only authored differences are persisted in `content.ships.ships.<id>`");
+  const editorPanel = panel("Ship Configuration", "Metadata and combat policy stay separate from presentation tuning.");
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
-  page.append(status, previewPanel, body);
+  page.append(status, studio.root, body);
 
   let loadedActiveRevision: string | null = null;
   let bundled: ShipAdminPreview | null = null;
@@ -221,12 +238,9 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       ? publishedPreview?.ships.find((ship) => ship.id === selectedId)
       : effectiveShip(selectedId);
 
-  function refreshPreviewButtons(): void {
-    draftPreviewButton.classList.toggle("primary", previewSource === "draft");
-    publishedPreviewButton.classList.toggle("primary", previewSource === "published");
-    idlePreviewButton.classList.toggle("primary", previewScenario === "idle");
-    movePreviewButton.classList.toggle("primary", previewScenario === "move");
-    firePreviewButton.classList.toggle("primary", previewScenario === "fire");
+  function refreshPreviewControls(): void {
+    studio.setSource(previewSource);
+    studio.setScenario(previewScenario);
   }
 
   async function ensurePreviewBridge(): Promise<SpaceTypingAssetPreviewBridge> {
@@ -252,7 +266,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
 
   function syncPreview(): void {
     const generation = ++previewGeneration;
-    refreshPreviewButtons();
+    refreshPreviewControls();
     if (!serviceReady) {
       setPreviewStatus("Waiting for active revision and canonical ship registry…", "info");
       return;
@@ -286,7 +300,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     if (previewScenario === scenario) return;
     previewScenario = scenario;
     const generation = ++previewGeneration;
-    refreshPreviewButtons();
+    refreshPreviewControls();
     const bridge = previewBridge;
     if (bridge === null) {
       syncPreview();
@@ -321,6 +335,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         selectedId = ship.id;
         renderList();
         renderEditor();
+        renderStudioSettings();
         syncPreview();
       }, selectedId === ship.id ? "st-admin-btn primary" : "st-admin-btn");
       select.disabled = !serviceReady;
@@ -335,6 +350,138 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       (overrideFor(selectedId) as Record<string, unknown>)[key] = control.value;
       renderList();
     });
+  };
+
+  const setVisualColor = (key: VisualColorKey, value: string): void => {
+    const override = overrideFor(selectedId);
+    override.visual ??= {};
+    override.visual[key] = value;
+    syncPreview();
+  };
+
+  const createVisualColorField = (key: VisualColorKey, ship: ShipAdminPreviewItem): HTMLElement => {
+    const input = el("input") as HTMLInputElement;
+    input.type = "text";
+    input.value = ship.visual[key];
+    input.spellcheck = false;
+    input.addEventListener("input", () => setVisualColor(key, input.value));
+    return createAdminFieldShell(helpScope, {
+      label: colorLabel(key),
+      control: input,
+    });
+  };
+
+  const renderStudioSettings = (): void => {
+    studio.basicHost.replaceChildren();
+    studio.advancedHost.replaceChildren();
+    const ship = effectiveShip(selectedId);
+    if (!serviceReady || !ship) {
+      studio.basicHost.append(notice(serviceReady ? "No ship is available for tuning." : "Load the canonical fleet before tuning presentation.", serviceReady ? "warn" : "info"));
+      studio.advancedHost.append(notice("Capability state will appear after the canonical fleet loads.", "info"));
+      return;
+    }
+
+    const baseline = baseShip(selectedId) ?? ship;
+
+    const silhouette = el("select", "st-admin-select") as HTMLSelectElement;
+    for (const option of SILHOUETTES) silhouette.append(new Option(option, option));
+    silhouette.value = ship.visual.silhouette;
+    silhouette.addEventListener("change", () => {
+      const override = overrideFor(selectedId);
+      override.visual ??= {};
+      override.visual.silhouette = silhouette.value as ShipVisualProfile["silhouette"];
+      syncPreview();
+    });
+    studio.basicHost.append(createAdminFieldShell(helpScope, {
+      label: "Silhouette",
+      control: silhouette,
+    }));
+
+    for (const key of BASIC_COLOR_KEYS) studio.basicHost.append(createVisualColorField(key, ship));
+
+    studio.basicHost.append(
+      createAssetTuningScalarControl(helpScope, {
+        label: "Wing Span",
+        value: ship.visual.wingSpan,
+        defaultValue: baseline.visual.wingSpan,
+        min: 0.5,
+        max: 2,
+        step: 0.01,
+        stateMessage: "Production-backed Ship visual field · applies on a new session",
+        onChange: (value) => {
+          const override = overrideFor(selectedId);
+          override.visual ??= {};
+          override.visual.wingSpan = value;
+          syncPreview();
+        },
+      }),
+      createAssetTuningScalarControl(helpScope, {
+        label: "Body Length",
+        value: ship.visual.bodyLength,
+        defaultValue: baseline.visual.bodyLength,
+        min: 0.5,
+        max: 2,
+        step: 0.01,
+        stateMessage: "Production-backed Ship visual field · applies on a new session",
+        onChange: (value) => {
+          const override = overrideFor(selectedId);
+          override.visual ??= {};
+          override.visual.bodyLength = value;
+          syncPreview();
+        },
+      }),
+    );
+
+    const engines = el("select", "st-admin-select") as HTMLSelectElement;
+    for (const count of [1, 2, 3] as const) engines.append(new Option(String(count), String(count)));
+    engines.value = String(ship.visual.engineCount);
+    engines.addEventListener("change", () => {
+      const override = overrideFor(selectedId);
+      override.visual ??= {};
+      override.visual.engineCount = Number(engines.value) as 1 | 2 | 3;
+      syncPreview();
+    });
+    studio.basicHost.append(createAdminFieldShell(helpScope, {
+      label: "Engine Count",
+      control: engines,
+    }));
+
+    for (const key of ADVANCED_COLOR_KEYS) studio.advancedHost.append(createVisualColorField(key, ship));
+
+    const capabilityTitle = el("strong", undefined, "Capability boundaries");
+    studio.advancedHost.append(
+      capabilityTitle,
+      createAssetTuningCapabilityState({
+        label: "Per-Ship 2D Media assignment",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "The current production path does not yet expose a writable exact-version Ship image field, so no Asset Picker is shown here.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Persistent scale / offset / rotation",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Draw-time pose inputs remain runtime state until canonical persisted presentation fields exist.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Current relief 3D bundle",
+        status: "READ-ONLY REFERENCE",
+        description: "The generated relief runtime may be referenced, but exact-version Admin assignment and repeated preview cleanup are not ready.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Projectile authoring",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Fire preview uses the production Ship projectile path; code-owned projectile recipes are not editable yet.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Current VFX / SFX",
+        status: "READ-ONLY REFERENCE",
+        description: "Production effects and semantic/sample audio can be previewed only through their current runtime owners.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Arbitrary / animated GLB",
+        status: "DEFERRED / UNSUPPORTED",
+        description: "No canonical arbitrary GLB loader or semantic animation-clip runtime exists today.",
+      }),
+    );
   };
 
   const renderEditor = (): void => {
@@ -381,55 +528,13 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     }
     for (let index = 0; index < statFields.length; index += 3) stats.append(grid(...statFields.slice(index, index + 3)));
 
-    const visual = panel("Visual Profile", "Procedural/profile fallback fields consumed by the child production renderer; unsaved preview remains ephemeral.");
-    const silhouette = field("Silhouette", ship.visual.silhouette, SILHOUETTES);
-    silhouette.control.addEventListener("change", () => {
-      const override = overrideFor(selectedId);
-      override.visual ??= {};
-      override.visual.silhouette = silhouette.control.value as ShipVisualProfile["silhouette"];
-      syncPreview();
-    });
-    const visualFields: HTMLElement[] = [silhouette.root];
-    for (const key of COLOR_KEYS) {
-      const item = field(key, ship.visual[key]);
-      item.control.addEventListener("input", () => {
-        const override = overrideFor(selectedId);
-        override.visual ??= {};
-        override.visual[key] = item.control.value;
-        syncPreview();
-      });
-      visualFields.push(item.root);
-    }
-    for (const key of ["wingSpan", "bodyLength"] as const) {
-      const item = field(key, String(ship.visual[key]), undefined, "number");
-      const input = item.control as HTMLInputElement;
-      input.min = "0.5";
-      input.max = "2";
-      input.step = "0.01";
-      input.addEventListener("input", () => {
-        const override = overrideFor(selectedId);
-        override.visual ??= {};
-        override.visual[key] = Number(input.value);
-        syncPreview();
-      });
-      visualFields.push(item.root);
-    }
-    const engines = field("engineCount", String(ship.visual.engineCount), ["1", "2", "3"]);
-    engines.control.addEventListener("change", () => {
-      const override = overrideFor(selectedId);
-      override.visual ??= {};
-      override.visual.engineCount = Number(engines.control.value) as 1 | 2 | 3;
-      syncPreview();
-    });
-    visualFields.push(engines.root);
-    for (let index = 0; index < visualFields.length; index += 3) visual.append(grid(...visualFields.slice(index, index + 3)));
-
     const actions = el("div", "st-admin-page-actions");
     actions.append(
       button("Reset Ship Override", () => {
         if (policy.ships) delete policy.ships[selectedId];
         renderList();
         renderEditor();
+        renderStudioSettings();
         syncPreview();
         setStatus(`${selectedId} reset to bundled child runtime values. Save Draft to persist this removal.`, "good");
       }),
@@ -438,12 +543,13 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         void api.previewShips({ policy }).then((validatedDraft) => {
           renderList();
           renderEditor();
+          renderStudioSettings();
           syncPreview();
           setStatus(`Child canonical policy accepted Draft ${validatedDraft.configRevision} with ${validatedDraft.ships.length} ships. Published preview remains the active revision.`, "good");
         }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Draft ship policy could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
-    editorHost.append(metadata, stats, visual, actions);
+    editorHost.append(metadata, stats, actions);
   };
 
   const saveBar = el("div", "st-admin-sticky-save stx-savebar");
@@ -479,7 +585,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   }, "st-admin-btn primary");
   save.disabled = true;
   saveBar.append(el("strong", undefined, "B06.1 Ships Draft"), saveStatus, el("div", "grow"), button("Discard", () => navigate(location.pathname)), save);
-  page.append(saveBar);
+  studio.lifecycleHost.append(saveBar);
 
   const load = (): void => {
     const generation = ++loadGeneration;
@@ -496,6 +602,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     save.disabled = true;
     renderList();
     renderEditor();
+    renderStudioSettings();
 
     void Promise.all([api.getState(), api.previewShips()]).then(async ([statePayload, bundledPreview]) => {
       const nextPolicy = policyFrom(statePayload.active.config);
@@ -513,6 +620,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       save.disabled = false;
       renderList();
       renderEditor();
+      renderStudioSettings();
       syncPreview();
       setStatus(
         statePayload.active.config.content?.ships
@@ -529,6 +637,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       revisionBadge.textContent = "ACTIVE · unavailable";
       save.disabled = true;
       setPreviewStatus("Preview is disabled until the canonical fleet is available.", "bad");
+      studio.basicHost.replaceChildren(notice("Presentation tuning is disabled until the canonical fleet is available.", "bad"));
+      studio.advancedHost.replaceChildren(notice("Capability state is unavailable until the canonical fleet loads.", "warn"));
       listHost.replaceChildren(notice("The canonical fleet could not be loaded. Retry after the local Admin service is available.", "bad"));
       editorHost.replaceChildren(notice("Ship overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
       status.className = "stx-notice bad";
@@ -554,7 +664,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     }
   });
 
-  refreshPreviewButtons();
+  helpScope.observeRoot(page);
+  refreshPreviewControls();
   load();
   return page;
 }
