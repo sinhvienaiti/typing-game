@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const TELEMETRY_AUDITED_CHILD_SHA = "83f80b3d6f640ea1af46e158e25485bc57b31393";
+const TELEMETRY_AUDITED_CHILD_SHA = "1fd9eed7e6c492034c2816e90a6e0bc1e8c5309d";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-telemetry.v1.json"));
 const [page, router, server, phaseMapSource, historicalAdmin, historicalAnalytics, historicalSummary] = await Promise.all([
