@@ -16,6 +16,7 @@ import {
   type SpaceTypingAssetPreviewSource,
 } from "./space-typing-asset-preview";
 import { AdminHelpScope, createAdminFieldShell } from "./v2/admin-help";
+import { openAdminMediaAssetPicker } from "./v2/asset-picker";
 import {
   createAssetTuningCapabilityState,
   createAssetTuningScalarControl,
@@ -224,6 +225,11 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     return policy.ships[id];
   };
 
+  const pruneEmptyOverride = (id: ShipId): void => {
+    const override = policy.ships?.[id];
+    if (override !== undefined && Object.keys(override).length === 0) delete policy.ships?.[id];
+  };
+
   const baseShip = (id: ShipId): ShipAdminPreviewItem | undefined =>
     bundled?.ships.find((ship) => ship.id === id);
 
@@ -279,7 +285,11 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     setPreviewStatus(`Loading ${previewSource} · ${ship.id} · ${previewScenario} through production renderer…`, "info");
     void ensurePreviewBridge().then(async (bridge) => {
       if (generation !== previewGeneration || !page.isConnected) return;
-      await bridge.loadShip({ characterId: ship.id, visual: previewVisual(ship) });
+      await bridge.loadShip({
+        characterId: ship.id,
+        visual: previewVisual(ship),
+        ...(ship.imageAssetVersionId === undefined ? {} : { imageAssetVersionId: ship.imageAssetVersionId }),
+      });
       if (generation !== previewGeneration || !page.isConnected) return;
       await bridge.setScenario(previewScenario);
       if (generation !== previewGeneration || !page.isConnected) return;
@@ -382,6 +392,49 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     }
 
     const baseline = baseShip(selectedId) ?? ship;
+    const imageActions = el("div", "st-admin-page-actions");
+    const chooseImage = button(ship.imageAssetVersionId ? "Change image" : "Choose image", () => {
+      openAdminMediaAssetPicker({
+        title: `Choose image for ${ship.name}`,
+        message: "Select an image from the Media Library. The exact immutable version is stored in this Ship draft.",
+        allowedKinds: ["image"],
+        selectedAssetVersionId: ship.imageAssetVersionId ?? null,
+        returnFocus: chooseImage,
+        onSelect: ({ version }) => {
+          overrideFor(selectedId).imageAssetVersionId = version.assetVersionId;
+          renderList();
+          renderStudioSettings();
+          syncPreview();
+          setStatus(`${selectedId} now uses Media V2 image ${version.assetVersionId}. Save Draft to persist this assignment.`, "good");
+        },
+      });
+    });
+    imageActions.append(chooseImage);
+    if (ship.imageAssetVersionId !== undefined) {
+      imageActions.append(button("Clear", () => {
+        const override = policy.ships?.[selectedId];
+        if (override !== undefined) {
+          delete override.imageAssetVersionId;
+          pruneEmptyOverride(selectedId);
+        }
+        renderList();
+        renderStudioSettings();
+        syncPreview();
+        setStatus(`${selectedId} image override cleared. The bundled production image is restored for this Draft.`, "good");
+      }));
+    }
+    studio.basicHost.append(createAdminFieldShell(helpScope, {
+      label: "Ship Image",
+      control: imageActions,
+      help: {
+        title: "Ship Image",
+        content: "Choose an image through Media V2. The Draft stores the exact immutable asset version; Clear restores the bundled production image. The production preview above updates from the same runtime resolver.",
+      },
+      stateMessage: ship.imageAssetVersionId === undefined
+        ? "Bundled production image · no Admin media override"
+        : `Media V2 exact version · ${ship.imageAssetVersionId}`,
+      stateTone: ship.imageAssetVersionId === undefined ? "info" : "good",
+    }));
 
     const silhouette = el("select", "st-admin-select") as HTMLSelectElement;
     for (const option of SILHOUETTES) silhouette.append(new Option(option, option));
@@ -453,8 +506,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       capabilityTitle,
       createAssetTuningCapabilityState({
         label: "Per-Ship 2D Media assignment",
-        status: "REQUIRES CANONICAL MIGRATION",
-        description: "The current production path does not yet expose a writable exact-version Ship image field, so no Asset Picker is shown here.",
+        status: "AVAILABLE",
+        description: "Basic uses the canonical Media V2 Asset Picker and stores an exact immutable image version.",
       }),
       createAssetTuningCapabilityState({
         label: "Persistent scale / offset / rotation",
