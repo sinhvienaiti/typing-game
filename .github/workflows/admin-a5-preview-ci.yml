@@ -1,0 +1,39 @@
+name: Space Typing Admin A5 Preview CI
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - "portal/src/admin/space-typing-asset-preview.ts"
+      - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "scripts/validate-space-admin-asset-preview.mjs"
+      - ".github/workflows/admin-a5-preview-ci.yml"
+  pull_request:
+    paths:
+      - "portal/src/admin/space-typing-asset-preview.ts"
+      - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "scripts/validate-space-admin-asset-preview.mjs"
+      - ".github/workflows/admin-a5-preview-ci.yml"
+
+jobs:
+  preview-contract-and-portal-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+          cache: pnpm
+          cache-dependency-path: portal/pnpm-lock.yaml
+      - name: Validate A5 preview transport invariants
+        run: node scripts/validate-space-admin-asset-preview.mjs
+      - name: Install Portal dependencies
+        run: pnpm --dir portal install --frozen-lockfile
+      - name: Build Portal
+        run: pnpm --dir portal build
