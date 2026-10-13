@@ -21,6 +21,7 @@ export type SpaceTypingAssetPreviewSource = "draft" | "published";
 export type SpaceTypingShipPreviewCandidate = Readonly<{
   characterId: string;
   visual: Readonly<Record<string, unknown>>;
+  imageAssetVersionId?: string;
 }>;
 
 type PreviewResponse = Readonly<{
@@ -192,6 +193,9 @@ export class SpaceTypingAssetPreviewBridge {
           domain: "ship",
           characterId: nextCandidate.characterId,
           visual: nextCandidate.visual,
+          ...(nextCandidate.imageAssetVersionId === undefined
+            ? {}
+            : { imageAssetVersionId: nextCandidate.imageAssetVersionId }),
         }).then(
           (payload) => {
             for (const waiter of waiters) waiter.resolve(payload);
