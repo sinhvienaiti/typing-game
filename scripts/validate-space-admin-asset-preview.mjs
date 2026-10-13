@@ -32,6 +32,8 @@ requireText(bridge, 'url.searchParams.set("previewSession", this.previewSessionI
 requireText(bridge, 'url.searchParams.set("nonce", this.nonce)', "nonce is carried to controlled route");
 requireText(bridge, 'private nextRequestId = 1', "request ids are monotonic");
 requireText(bridge, 'type === "DISPOSE" ? "DISPOSED" : "APPLIED"', "command responses fail closed by type");
+requireText(bridge, 'window.requestAnimationFrame(() =>', "high-frequency Ship candidate updates are frame-coalesced");
+requireText(bridge, 'window.cancelAnimationFrame(this.queuedShipFrame)', "queued frame is cancelled on teardown");
 requireText(bridge, 'window.removeEventListener("message", this.onMessage)', "bridge removes message listener");
 requireText(bridge, 'this.pending.clear()', "bridge clears pending requests");
 requireText(bridge, 'this.iframe.remove()', "bridge removes iframe");
