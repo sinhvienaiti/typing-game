@@ -1,3 +1,4 @@
+import "./space-typing-asset-preview.css";
 import {
   SpaceTypingAdminApi,
   type CoreStatKey,
@@ -9,6 +10,11 @@ import {
   type SpaceTypingAdminConfig,
 } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import {
+  SpaceTypingAssetPreviewBridge,
+  type SpaceTypingAssetPreviewScenario,
+  type SpaceTypingAssetPreviewSource,
+} from "./space-typing-asset-preview";
 
 const api = new SpaceTypingAdminApi();
 const CORE_STATS: readonly CoreStatKey[] = [
@@ -117,6 +123,10 @@ function policyFrom(config: SpaceTypingAdminConfig): ShipAdminPolicy {
   return structuredClone(config.content?.ships ?? { configRevision: "ships-admin-v1", ships: {} });
 }
 
+function previewVisual(ship: ShipAdminPreviewItem): Readonly<Record<string, unknown>> {
+  return structuredClone(ship.visual) as unknown as Readonly<Record<string, unknown>>;
+}
+
 export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const page = el("div");
   const revisionBadge = badge("ACTIVE · loading", "info");
@@ -132,6 +142,32 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
 
   const status = notice("Loading active revision and canonical child ship registry…", "info");
   status.setAttribute("aria-live", "polite");
+
+  const previewPanel = panel(
+    "Production Visual Preview",
+    "A5.0 isolated preview · Draft and Published use the child production renderer without changing PlayerSave, Shop state, active revision or Media current.",
+  );
+  previewPanel.classList.add("st-admin-asset-preview-panel");
+  const previewToolbar = el("div", "st-admin-asset-preview-toolbar");
+  const draftPreviewButton = button("Draft", () => selectPreviewSource("draft"), "st-admin-btn primary");
+  const publishedPreviewButton = button("Published", () => selectPreviewSource("published"));
+  const idlePreviewButton = button("Idle", () => selectPreviewScenario("idle"), "st-admin-btn primary");
+  const movePreviewButton = button("Move", () => selectPreviewScenario("move"));
+  const firePreviewButton = button("Fire", () => selectPreviewScenario("fire"));
+  previewToolbar.append(
+    el("strong", undefined, "Source"),
+    draftPreviewButton,
+    publishedPreviewButton,
+    el("strong", undefined, "Scenario"),
+    idlePreviewButton,
+    movePreviewButton,
+    firePreviewButton,
+  );
+  const previewHost = el("div", "st-admin-asset-preview-stage");
+  const previewStatus = el("div", "st-admin-asset-preview-status", "Waiting for the canonical fleet before starting preview…");
+  previewStatus.setAttribute("aria-live", "polite");
+  previewPanel.append(previewToolbar, previewHost, previewStatus);
+
   const body = el("div", "stx-grid");
   const listPanel = panel("Canonical Fleet", "11 child-owned ship IDs · IDs and asset IDs are immutable");
   const listHost = el("div");
@@ -140,19 +176,29 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
-  page.append(status, body);
+  page.append(status, previewPanel, body);
 
   let loadedActiveRevision: string | null = null;
   let bundled: ShipAdminPreview | null = null;
-  let activePreview: ShipAdminPreview | null = null;
+  let publishedPreview: ShipAdminPreview | null = null;
   let selectedId: ShipId = "vanguard";
   let policy: ShipAdminPolicy = { configRevision: "ships-admin-v1", ships: {} };
   let serviceReady = false;
   let loadGeneration = 0;
+  let previewSource: SpaceTypingAssetPreviewSource = "draft";
+  let previewScenario: SpaceTypingAssetPreviewScenario = "idle";
+  let previewGeneration = 0;
+  let previewBridge: SpaceTypingAssetPreviewBridge | null = null;
+  let previewBridgePromise: Promise<SpaceTypingAssetPreviewBridge> | null = null;
 
   const setStatus = (text: string, tone: Tone = "info"): void => {
     status.className = `stx-notice ${tone}`;
     status.textContent = text;
+  };
+
+  const setPreviewStatus = (text: string, tone: Tone = "info"): void => {
+    previewStatus.className = `st-admin-asset-preview-status ${tone}`;
+    previewStatus.textContent = text;
   };
 
   const overrideFor = (id: ShipId): ShipAdminOverride => {
@@ -166,13 +212,100 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
 
   const effectiveShip = (id: ShipId): ShipAdminPreviewItem | undefined => {
     const base = baseShip(id);
-    if (!base) return activePreview?.ships.find((ship) => ship.id === id);
+    if (!base) return publishedPreview?.ships.find((ship) => ship.id === id);
     return mergeShip(base, policy.ships?.[id]);
   };
 
+  const previewShip = (): ShipAdminPreviewItem | undefined =>
+    previewSource === "published"
+      ? publishedPreview?.ships.find((ship) => ship.id === selectedId)
+      : effectiveShip(selectedId);
+
+  function refreshPreviewButtons(): void {
+    draftPreviewButton.classList.toggle("primary", previewSource === "draft");
+    publishedPreviewButton.classList.toggle("primary", previewSource === "published");
+    idlePreviewButton.classList.toggle("primary", previewScenario === "idle");
+    movePreviewButton.classList.toggle("primary", previewScenario === "move");
+    firePreviewButton.classList.toggle("primary", previewScenario === "fire");
+  }
+
+  async function ensurePreviewBridge(): Promise<SpaceTypingAssetPreviewBridge> {
+    if (previewBridge !== null) return previewBridge;
+    if (previewBridgePromise !== null) return previewBridgePromise;
+    setPreviewStatus("Connecting to isolated child production preview…", "info");
+    const mountPromise = SpaceTypingAssetPreviewBridge.mount(previewHost).then(async (bridge) => {
+      if (!page.isConnected) {
+        bridge.disposeImmediately();
+        throw new Error("Ships page was closed before preview became ready.");
+      }
+      previewBridge = bridge;
+      await bridge.waitUntilReady();
+      return bridge;
+    }).catch((error: unknown) => {
+      if (previewBridge?.iframe.isConnected === false) previewBridge = null;
+      previewBridgePromise = null;
+      throw error;
+    });
+    previewBridgePromise = mountPromise;
+    return mountPromise;
+  }
+
+  function syncPreview(): void {
+    const generation = ++previewGeneration;
+    refreshPreviewButtons();
+    if (!serviceReady) {
+      setPreviewStatus("Waiting for active revision and canonical ship registry…", "info");
+      return;
+    }
+    const ship = previewShip();
+    if (ship === undefined) {
+      setPreviewStatus(`No ${previewSource} preview candidate exists for ${selectedId}.`, "warn");
+      return;
+    }
+    setPreviewStatus(`Loading ${previewSource} · ${ship.id} · ${previewScenario} through production renderer…`, "info");
+    void ensurePreviewBridge().then(async (bridge) => {
+      if (generation !== previewGeneration || !page.isConnected) return;
+      await bridge.loadShip({ characterId: ship.id, visual: previewVisual(ship) });
+      if (generation !== previewGeneration || !page.isConnected) return;
+      await bridge.setScenario(previewScenario);
+      if (generation !== previewGeneration || !page.isConnected) return;
+      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship.id} · ${previewScenario} · production renderer`, "good");
+    }).catch((error: unknown) => {
+      if (generation !== previewGeneration || !page.isConnected) return;
+      setPreviewStatus(error instanceof Error ? error.message : String(error), "bad");
+    });
+  }
+
+  function selectPreviewSource(source: SpaceTypingAssetPreviewSource): void {
+    if (previewSource === source) return;
+    previewSource = source;
+    syncPreview();
+  }
+
+  function selectPreviewScenario(scenario: SpaceTypingAssetPreviewScenario): void {
+    if (previewScenario === scenario) return;
+    previewScenario = scenario;
+    const generation = ++previewGeneration;
+    refreshPreviewButtons();
+    const bridge = previewBridge;
+    if (bridge === null) {
+      syncPreview();
+      return;
+    }
+    setPreviewStatus(`Switching to ${scenario} production scenario…`, "info");
+    void bridge.setScenario(scenario).then(() => {
+      if (generation !== previewGeneration || !page.isConnected) return;
+      const ship = previewShip();
+      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship?.id ?? selectedId} · ${scenario} · production renderer`, "good");
+    }).catch((error: unknown) => {
+      if (generation !== previewGeneration || !page.isConnected) return;
+      setPreviewStatus(error instanceof Error ? error.message : String(error), "bad");
+    });
+  }
+
   const renderList = (): void => {
     listHost.replaceChildren();
-    const ships = bundled?.ships ?? activePreview?.ships ?? [];
+    const ships = bundled?.ships ?? publishedPreview?.ships ?? [];
     if (ships.length === 0) {
       listHost.append(notice(serviceReady ? "No canonical ships were returned by the preview." : "Load the canonical ship registry to browse the fleet.", serviceReady ? "warn" : "info"));
       return;
@@ -188,6 +321,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         selectedId = ship.id;
         renderList();
         renderEditor();
+        syncPreview();
       }, selectedId === ship.id ? "st-admin-btn primary" : "st-admin-btn");
       select.disabled = !serviceReady;
       actions.append(select);
@@ -247,12 +381,13 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     }
     for (let index = 0; index < statFields.length; index += 3) stats.append(grid(...statFields.slice(index, index + 3)));
 
-    const visual = panel("Visual Profile", "Procedural/profile fallback fields consumed by the child renderer; asset identity stays derived from ship ID.");
+    const visual = panel("Visual Profile", "Procedural/profile fallback fields consumed by the child production renderer; unsaved preview remains ephemeral.");
     const silhouette = field("Silhouette", ship.visual.silhouette, SILHOUETTES);
     silhouette.control.addEventListener("change", () => {
       const override = overrideFor(selectedId);
       override.visual ??= {};
       override.visual.silhouette = silhouette.control.value as ShipVisualProfile["silhouette"];
+      syncPreview();
     });
     const visualFields: HTMLElement[] = [silhouette.root];
     for (const key of COLOR_KEYS) {
@@ -261,6 +396,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         const override = overrideFor(selectedId);
         override.visual ??= {};
         override.visual[key] = item.control.value;
+        syncPreview();
       });
       visualFields.push(item.root);
     }
@@ -274,6 +410,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         const override = overrideFor(selectedId);
         override.visual ??= {};
         override.visual[key] = Number(input.value);
+        syncPreview();
       });
       visualFields.push(item.root);
     }
@@ -282,6 +419,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       const override = overrideFor(selectedId);
       override.visual ??= {};
       override.visual.engineCount = Number(engines.control.value) as 1 | 2 | 3;
+      syncPreview();
     });
     visualFields.push(engines.root);
     for (let index = 0; index < visualFields.length; index += 3) visual.append(grid(...visualFields.slice(index, index + 3)));
@@ -292,16 +430,17 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         if (policy.ships) delete policy.ships[selectedId];
         renderList();
         renderEditor();
+        syncPreview();
         setStatus(`${selectedId} reset to bundled child runtime values. Save Draft to persist this removal.`, "good");
       }),
-      button("Validate Preview", () => {
-        setStatus("Validating ship overrides against the canonical child preview…", "info");
-        void api.previewShips({ policy }).then((preview) => {
-          activePreview = preview;
+      button("Validate Draft", () => {
+        setStatus("Validating current Draft ship overrides against the canonical child policy…", "info");
+        void api.previewShips({ policy }).then((validatedDraft) => {
           renderList();
           renderEditor();
-          setStatus(`Child canonical preview accepted ${preview.ships.length} ships for ${preview.configRevision}.`, "good");
-        }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The ship preview could not be validated. Check the local Admin runtime and try again."), "bad"));
+          syncPreview();
+          setStatus(`Child canonical policy accepted Draft ${validatedDraft.configRevision} with ${validatedDraft.ships.length} ships. Published preview remains the active revision.`, "good");
+        }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Draft ship policy could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
     editorHost.append(metadata, stats, visual, actions);
@@ -319,7 +458,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         if (loadedActiveRevision === null || loadedActiveRevision !== payload.state.activeRevision) {
           throw new Error(`Active revision changed from ${loadedActiveRevision ?? "not-loaded"} to ${payload.state.activeRevision}. Reload this screen before saving to avoid overwriting newer published changes.`);
         }
-        const validated = await api.previewShips({ policy });
+        await api.previewShips({ policy });
         const config = cloneConfig(payload.active.config);
         config.content = { ...(config.content ?? {}), ships: structuredClone(policy) };
         const revision = await api.createRevision({
@@ -327,9 +466,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
           config,
           message: "Admin Phase B · B06.1 Ships registry draft",
         });
-        activePreview = validated;
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
-        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to make it the active Admin policy; gameplay apply boundary is a new session.`, "good");
+        setStatus(`Draft ${revision.revision} passed child policy + server validation. Published preview still reflects active ${loadedActiveRevision}; publish from History to change runtime policy. Gameplay apply boundary is a new session.`, "good");
       } catch (error: unknown) {
         const message = adminErrorMessage(error, "The Ships draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
@@ -345,13 +483,15 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
 
   const load = (): void => {
     const generation = ++loadGeneration;
+    ++previewGeneration;
     serviceReady = false;
     loadedActiveRevision = null;
     bundled = null;
-    activePreview = null;
+    publishedPreview = null;
     revisionBadge.className = "st-admin-status info";
     revisionBadge.textContent = "ACTIVE · loading";
     setStatus("Loading active revision and canonical child ship registry…", "info");
+    setPreviewStatus("Waiting for active revision and canonical ship registry…", "info");
     saveStatus.textContent = "Load the active revision before saving a ship draft";
     save.disabled = true;
     renderList();
@@ -359,33 +499,36 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
 
     void Promise.all([api.getState(), api.previewShips()]).then(async ([statePayload, bundledPreview]) => {
       const nextPolicy = policyFrom(statePayload.active.config);
-      const nextActivePreview = await api.previewShips({ policy: nextPolicy });
+      const nextPublishedPreview = await api.previewShips({ policy: nextPolicy });
       if (generation !== loadGeneration) return;
       loadedActiveRevision = statePayload.state.activeRevision;
       bundled = bundledPreview;
       policy = nextPolicy;
-      activePreview = nextActivePreview;
+      publishedPreview = nextPublishedPreview;
       serviceReady = true;
-      selectedId = activePreview.ships[0]?.id ?? "vanguard";
+      selectedId = publishedPreview.ships[0]?.id ?? "vanguard";
       revisionBadge.className = "st-admin-status good";
       revisionBadge.textContent = `ACTIVE · ${statePayload.state.activeRevision}`;
       saveStatus.textContent = "Revision-backed · no direct runtime mutation";
       save.disabled = false;
       renderList();
       renderEditor();
+      syncPreview();
       setStatus(
         statePayload.active.config.content?.ships
-          ? `Loaded active Ships policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
+          ? `Loaded active Ships policy ${policy.configRevision}. Draft is isolated until History / Publish; Published preview is pinned to active ${statePayload.state.activeRevision}.`
           : "Active revision predates B06.1 Ships policy; bundled child registry is shown until the first draft is saved.",
         statePayload.active.config.content?.ships ? "good" : "warn",
       );
     }).catch((error: unknown) => {
       if (generation !== loadGeneration) return;
+      ++previewGeneration;
       serviceReady = false;
       loadedActiveRevision = null;
       revisionBadge.className = "st-admin-status bad";
       revisionBadge.textContent = "ACTIVE · unavailable";
       save.disabled = true;
+      setPreviewStatus("Preview is disabled until the canonical fleet is available.", "bad");
       listHost.replaceChildren(notice("The canonical fleet could not be loaded. Retry after the local Admin service is available.", "bad"));
       editorHost.replaceChildren(notice("Ship overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
       status.className = "stx-notice bad";
@@ -393,6 +536,25 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     });
   };
 
+  const lifecycleObserver = new MutationObserver(() => {
+    if (page.isConnected) return;
+    lifecycleObserver.disconnect();
+    ++previewGeneration;
+    previewBridge?.disposeImmediately();
+    previewBridge = null;
+    previewBridgePromise = null;
+  });
+  queueMicrotask(() => {
+    if (page.isConnected) {
+      lifecycleObserver.observe(document.body, { childList: true, subtree: true });
+    } else {
+      previewBridge?.disposeImmediately();
+      previewBridge = null;
+      previewBridgePromise = null;
+    }
+  });
+
+  refreshPreviewButtons();
   load();
   return page;
 }
