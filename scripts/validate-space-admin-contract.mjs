@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
-// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
-// Background/VFX ownership, contracts and Admin write boundaries remain
-// untouched; VFX stays runtime-backed read-only and SFX authoring stays closed.
-const VISUALS_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10 re-audit: 71de632..4f62c94 changes only Ship unlock runtime authority,
+// A10 capability truth-map code and A10 tests. Background/VFX ownership,
+// contracts and Admin write boundaries are unchanged; VFX stays runtime-backed
+// read-only and Backgrounds stays runtime-derived read-only.
+const VISUALS_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
