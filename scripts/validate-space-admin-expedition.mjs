@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const EXPEDITION_AUDITED_CHILD_SHA = "7dd950bd59dc51255558ebf3a211d1eff8d0df3f";
+// A5.4/A6 re-audit: 7dd950b..0d8ed88 changes Ship asset-preview/relief
+// ownership plus the Skills/Equipment capability matrix/tests. Expedition
+// runtime, persistence and plan ownership asserted below are unchanged.
+const EXPEDITION_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-expedition.v1.json"));
 const [page, router, server, phaseMapSource, coreSource, sessionSource, storeSource, planSource] = await Promise.all([
