@@ -1,5 +1,6 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
 const SKILL_CATEGORIES = ["offensive", "defensive", "support"] as const;
@@ -291,7 +292,19 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     }
 
     editorHost.append(notice(`ID ${skill.id} · category ${skill.category} · apply boundary: new session`, "info"));
-    editorHost.append(notice("The master UI plan also lists behavior/presentation fields such as damage, radius, duration, projectile, VFX, SFX and camera effects. B06.3 does not persist those generically until the child runtime exposes canonical typed fields for them.", "warn"));
+    const capabilities = panel("Capabilities", "Only production-backed Skill controls are editable.");
+    capabilities.append(
+      createAssetTuningCapabilityState({
+        label: "Gameplay Policy",
+        status: "AVAILABLE",
+        description: "Name, description, energy, cooldown, charges, stage limit and typing condition are revision-backed.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Media / VFX",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Production effects are still code-owned; no generic Media, VFX or SFX binding is authorable yet.",
+      }),
+    );
 
     const identity = panel("Identity", "Name and description are authorable; ID and category remain child-owned.");
     const name = field("Name", skill.name);
@@ -379,7 +392,7 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
       }, "st-admin-btn primary"),
     );
 
-    editorHost.append(identity, gameplay, conditionPanel, diffPanel(base, skill), actions);
+    editorHost.append(capabilities, identity, gameplay, conditionPanel, diffPanel(base, skill), actions);
   };
 
   search.addEventListener("input", renderList);
