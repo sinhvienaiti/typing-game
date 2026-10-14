@@ -7,7 +7,10 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const QA_AUDITED_CHILD_SHA = "7dd950bd59dc51255558ebf3a211d1eff8d0df3f";
+// A5.4 re-audit: 7dd950b..d463206 changes Ship relief/media preview,
+// Ship3D lifecycle and A5 tests only. The dedicated QA contract and every
+// Test Lab ownership source asserted below are unchanged.
+const QA_AUDITED_CHILD_SHA = "d4632067fbe2e0ba17324a75793c62088cbd6ceb";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
