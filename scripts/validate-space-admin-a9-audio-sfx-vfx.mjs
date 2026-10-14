@@ -31,7 +31,7 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-sfx-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
-  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
+  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-music-library-phase-b.ts"), "utf8"),
   readFile(resolve(childRoot, "src/audio/world-music-model.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b.ts"), "utf8"),
