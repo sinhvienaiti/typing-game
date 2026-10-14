@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-const EXPECTED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
+// A9 SFX re-audit: 8e1c384..71de632 only adds the canonical SAMPLE_SFX
+// Admin read model/contract/preview/audit/test and package scripts. World/Stage
+// authority, frozen Expedition Stage semantics and adjacent runtime owners are unchanged.
+const EXPECTED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
 
 const [
   capabilities,
