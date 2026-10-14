@@ -1,8 +1,8 @@
-// A8 Expedition Stage re-audit: 25a74f6..8e1c384 only adds the frozen
-// Expedition Stage runtime snapshot/fail-closed resume boundary and its
-// regression coverage. Shop policy, generation, pricing, availability,
-// offers, services and transaction ownership sources are unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
+// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
+// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
+// Shop policy, generation, pricing, availability, offers, services and
+// transaction ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
