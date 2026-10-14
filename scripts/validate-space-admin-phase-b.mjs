@@ -165,32 +165,44 @@ assert.match(phaseB, /renderPhaseBSkills/);
 assert.match(skillsPhaseB, /B06\.3/);
 assert.match(skillsPhaseB, /api\.createRevision/);
 assert.doesNotMatch(skillsPhaseB, /api\.publish/);
+
+// A7 Enemy authoring is intentionally narrower than the legacy B06.4 surface:
+// projectileMode is production-backed; minStage remains preserved preview-only migration data.
 assert.match(phaseB, /renderPhaseBEnemies/);
 assert.match(enemiesPhaseB, /B06\.4/);
 assert.match(enemiesPhaseB, /\/api\/admin\/space-typing\/enemies\/preview/);
 assert.match(enemiesPhaseB, /Minimum Stage/);
 assert.match(enemiesPhaseB, /minStage/);
-assert.match(enemiesPhaseB, /Admin Phase B · B06\.4 Enemy admission \+ projectile policy draft/);
+assert.match(enemiesPhaseB, /Admin A7 · Enemy projectile policy draft/);
 assert.match(enemiesPhaseB, /Normal Enemy Projectiles/);
 assert.match(enemiesPhaseB, /projectileMode/);
-assert.match(enemiesPhaseB, /per-enemy projectile definitions/);
+assert.match(enemiesPhaseB, /PROJECTILES · NEW SESSION/);
+assert.match(enemiesPhaseB, /REQUIRES CANONICAL MIGRATION/);
+assert.match(enemiesPhaseB, /minStage\.control\.disabled = true/);
 assert.match(enemiesPhaseB, /api\.createRevision/);
 assert.doesNotMatch(enemiesPhaseB, /api\.publish/);
+assert.doesNotMatch(enemiesPhaseB, /Canonical runtime consumer: Enemy spawn profile minimum-stage gate/);
+assert.doesNotMatch(enemiesPhaseB, /gameplay snapshots Enemy admission/);
 assert.match(server, /\/api\/runtime\/space-typing\/enemies/);
 assert.match(server, /\/api\/admin\/space-typing\/enemies\/preview/);
 
+// A7 Bosses are fail-closed: legacy name/title data may be previewed, but the
+// page must not create or publish drafts until bossIdentityForStage consumes it.
 assert.match(phaseB, /renderPhaseBBosses/);
 assert.match(phaseB, /\$\{BASE\}\/bosses/);
 assert.match(bossesPhaseB, /B06\.5/);
 assert.match(bossesPhaseB, /\/api\/admin\/space-typing\/bosses\/preview/);
 assert.match(bossesPhaseB, /Name/);
 assert.match(bossesPhaseB, /Title/);
-assert.match(bossesPhaseB, /name.*100/si);
-assert.match(bossesPhaseB, /title.*160/si);
-assert.match(bossesPhaseB, /Admin Phase B · B06\.5 Boss identity draft/);
-assert.match(bossesPhaseB, /HP, Shield, Armor, Damage, Speed/);
-assert.match(bossesPhaseB, /api\.createRevision/);
+assert.match(bossesPhaseB, /PREVIEW · NO RUNTIME APPLY/);
+assert.match(bossesPhaseB, /Name \/ Title/);
+assert.match(bossesPhaseB, /REQUIRES CANONICAL MIGRATION/);
+assert.match(bossesPhaseB, /Phases \/ Mechanics/);
+assert.match(bossesPhaseB, /Rewards \/ Drops/);
+assert.doesNotMatch(bossesPhaseB, /api\.createRevision/);
 assert.doesNotMatch(bossesPhaseB, /api\.publish/);
+assert.doesNotMatch(bossesPhaseB, /Admin Phase B · B06\.5 Boss identity draft/);
+assert.doesNotMatch(bossesPhaseB, /gameplay snapshots Boss identity/);
 assert.match(server, /\/api\/runtime\/space-typing\/bosses/);
 assert.match(server, /\/api\/admin\/space-typing\/bosses\/preview/);
 
@@ -229,4 +241,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, fail-closed General Settings, runtime-backed Feature Gates via safe shared contract reader).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, A7 Enemy projectile-only authoring + fail-closed Bosses, fail-closed General Settings, runtime-backed Feature Gates via safe shared contract reader).`);
