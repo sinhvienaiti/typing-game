@@ -80,6 +80,25 @@ requireText(equipmentPage, 'api.createRevision', "Equipment retains immutable re
 requireText(equipmentPage, 'Publish from History to activate it', "Equipment keeps activation in the shared History / Publish boundary");
 forbidText(equipmentPage, 'api.publish(', "Equipment editor must not bypass History with direct publish");
 
+// A6.1: adopt the shared capability-state primitive without pretending the
+// registry/data preview is a production visual renderer.
+requireText(skillPage, 'createAssetTuningCapabilityState', "Skills reuse the shared capability-state primitive");
+requireText(skillPage, 'label: "Gameplay Policy"', "Skills expose the canonical gameplay capability to operators");
+requireText(skillPage, 'status: "AVAILABLE"', "Skills mark proven gameplay authoring available");
+requireText(skillPage, 'label: "Media / VFX"', "Skills expose the media/VFX boundary explicitly");
+requireText(skillPage, 'status: "REQUIRES CANONICAL MIGRATION"', "Skills keep unowned Media/VFX authoring migration-gated");
+forbidText(skillPage, 'The master UI plan also lists behavior/presentation fields', "Skills must not restore the old developer-heavy warning copy");
+
+requireText(equipmentPage, 'createAssetTuningCapabilityState', "Equipment reuse the shared capability-state primitive");
+requireText(equipmentPage, 'label: "Gameplay Policy"', "Equipment expose canonical gameplay authoring to operators");
+requireText(equipmentPage, 'label: "Registry Icon"', "Equipment show the current child-owned glyph boundary");
+requireText(equipmentPage, 'status: "READ-ONLY REFERENCE"', "Equipment keep the registry glyph read-only");
+requireText(equipmentPage, 'label: "Media Binding"', "Equipment expose future Media migration boundary");
+requireText(equipmentPage, 'status: "REQUIRES CANONICAL MIGRATION"', "Equipment keep unowned Media authoring migration-gated");
+requireText(equipmentPage, 'label: "VFX / SFX"', "Equipment expose generic effect boundary explicitly");
+requireText(equipmentPage, 'status: "DEFERRED / UNSUPPORTED"', "Equipment keep generic VFX/SFX authoring closed");
+forbidText(equipmentPage, 'The master UI plan contains future acquisition/rarity/upgrade fields', "Equipment must not restore the old developer-heavy warning copy");
+
 for (const fakeUi of [
   "effectPreset",
   "vfxAssetVersionId",
@@ -94,4 +113,4 @@ for (const fakeUi of [
 requireText(sharedStudio, 'export function createAssetTuningCapabilityState', "A6 can reuse the shared capability-state primitive");
 requireText(sharedStudio, 'export function createAssetTuningStudio', "A6 can reuse the shared Studio shell once a production preview chain exists");
 
-console.log("Space Typing Admin A6.0 Skills/Equipment capability boundary: PASS — gameplay authoring remains canonical; Drafts are child-preview validated; Media/VFX authoring stays fail-closed until migrated.");
+console.log("Space Typing Admin A6.1 Skills/Equipment: PASS — canonical gameplay authoring uses shared capability states; Drafts remain child-preview validated; Media/VFX authoring stays fail-closed until migrated.");
