@@ -74,6 +74,7 @@ const NAV_GROUPS: readonly NavGroup[] = [
     items: [
       { label: "Media Library", path: `${ADMIN_BASE}/media`, icon: "▧", description: "Browse images, models, music, SFX and Admin uploads, with immutable version history and usage." },
       { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage the legacy authored music capability while it is migrated into Media V2." },
+      { label: "SFX", path: `${ADMIN_BASE}/sfx`, icon: "◉", description: "Inspect production sample-backed sound effects and test the exact committed runtime assets without changing game policy." },
       { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },
     ],
   },

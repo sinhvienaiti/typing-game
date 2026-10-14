@@ -11,6 +11,7 @@ const routerFile = "portal/src/admin/space-typing-phase-b.ts";
 const coreFile = "portal/src/admin/space-typing-phase-b-core.ts";
 const telemetryFile = "portal/src/admin/space-typing-telemetry-phase-b.ts";
 const musicLibraryFile = "portal/src/admin/space-typing-music-library-phase-b.ts";
+const sfxFile = "portal/src/admin/space-typing-sfx-phase-b.ts";
 const worldMusicFile = "portal/src/admin/space-typing-world-music-phase-b.ts";
 const dailyWeeklyFile = "portal/src/admin/space-typing-daily-weekly-phase-b.ts";
 const featureGatesFile = "portal/src/admin/space-typing-feature-gates-phase-b.ts";
@@ -30,6 +31,7 @@ const requiredFiles = [
   coreFile,
   telemetryFile,
   musicLibraryFile,
+  sfxFile,
   worldMusicFile,
   dailyWeeklyFile,
   featureGatesFile,
@@ -52,6 +54,7 @@ const router = read(routerFile);
 const core = read(coreFile);
 const telemetry = read(telemetryFile);
 const musicLibrary = read(musicLibraryFile);
+const sfx = read(sfxFile);
 const worldMusic = read(worldMusicFile);
 const dailyWeekly = read(dailyWeeklyFile);
 const featureGates = read(featureGatesFile);
@@ -74,6 +77,7 @@ const routes = [
   ["Analytics", "/analytics"],
   ["Audio Defaults", "/audio"],
   ["Music Library", "/music-library"],
+  ["SFX", "/sfx"],
   ["World / Stage Music", "/world-music"],
   ["Ships", "/ships"],
   ["Equipment", "/equipment"],
@@ -106,6 +110,7 @@ const primaryRoutes = new Map([
   ["Overview", ""],
   ["Audio Defaults", "/audio"],
   ["Music Library", "/music-library"],
+  ["SFX", "/sfx"],
   ["World / Stage Music", "/world-music"],
   ["Ships", "/ships"],
   ["Equipment", "/equipment"],
@@ -213,6 +218,7 @@ for (const file of forbiddenLegacyFiles) {
 // Canonical critical routes must still resolve to their runtime-backed owners even after leaving primary navigation.
 assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);'), "Overview/Analytics canonical telemetry owner is missing");
 assert(router.includes('if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();'), "Music Library is not routed to the runtime catalog surface");
+assert(router.includes('if (path === `${BASE}/sfx`) return renderPhaseBSfx();'), "SFX is not routed to the production sample catalog surface");
 assert(router.includes('if (path === `${BASE}/daily-weekly`) return renderPhaseBDailyWeekly();'), "Daily/Weekly is not routed to the canonical runtime-boundary surface");
 assert(router.includes('if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();'), "Feature Gates canonical/legacy route handling is missing");
 assert(router.includes('return renderPhaseBCoreAdminScreen(path, navigate);'), "Phase B core fallback for revision-backed screens is missing");
@@ -224,6 +230,12 @@ assert(telemetry.includes('NO CENTRAL BACKEND'), "Telemetry central-backend boun
 assert(!telemetry.includes('NO HISTORICAL BACKEND'), "Telemetry screen still claims historical analytics are absent even though local-profile history exists");
 assert(musicLibrary.includes('/api/admin/space-typing/music/library'), "Music Library does not read the canonical Admin music catalog endpoint");
 assert(musicLibrary.includes('/api/admin/space-typing/music/upload'), "Music Library upload does not use the canonical Admin asset service");
+assert(sfx.includes('createAdminSfxCatalog'), "SFX screen does not use the pinned child production SAMPLE_SFX read model");
+assert(sfx.includes('RUNTIME-BACKED · READ ONLY'), "SFX read-only runtime badge is missing");
+assert(sfx.includes('TEST PLAYBACK'), "SFX Test Playback capability is missing");
+assert(sfx.includes('NO FAKE SFX POLICY'), "SFX unsupported-authoring boundary is not visible");
+assert(sfx.includes('new Audio(productionSampleUrl'), "SFX preview does not play the canonical production asset URL");
+assert(!sfx.includes('createRevision') && !sfx.includes('/publish') && !sfx.includes('/revisions'), "SFX page must not expose fake revision/publish authoring");
 assert(worldMusic.includes('previewWorldMusic'), "World Music Phase B screen does not use canonical preview resolution");
 assert(dailyWeekly.includes('/api/admin/space-typing/daily-weekly/contract'), "Daily/Weekly screen is not bound to the child runtime contract");
 assert(featureGates.includes('/api/admin/space-typing/feature-gates/contract') || featureGates.includes('feature-gates'), "Feature Gates runtime ownership surface is missing");
