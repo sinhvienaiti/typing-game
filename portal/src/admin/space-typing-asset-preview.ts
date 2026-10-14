@@ -22,6 +22,7 @@ export type SpaceTypingShipPreviewCandidate = Readonly<{
   characterId: string;
   visual: Readonly<Record<string, unknown>>;
   imageAssetVersionId?: string;
+  reliefAssetVersionId?: string | null;
   projectileArchetype?: string;
 }>;
 
@@ -197,6 +198,9 @@ export class SpaceTypingAssetPreviewBridge {
           ...(nextCandidate.imageAssetVersionId === undefined
             ? {}
             : { imageAssetVersionId: nextCandidate.imageAssetVersionId }),
+          ...(nextCandidate.reliefAssetVersionId === undefined
+            ? {}
+            : { reliefAssetVersionId: nextCandidate.reliefAssetVersionId }),
           ...(nextCandidate.projectileArchetype === undefined
             ? {}
             : { projectileArchetype: nextCandidate.projectileArchetype }),
