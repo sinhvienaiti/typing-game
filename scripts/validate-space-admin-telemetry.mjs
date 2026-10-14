@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A8 Expedition Stage runtime re-audit: 25a74f6..8e1c384 only adds the
-// per-run Stage runtime snapshot/fail-closed resume boundary plus regression
-// coverage. The Telemetry contract and historical analytics ownership sources
-// asserted below are unchanged.
-const TELEMETRY_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
+// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
+// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
+// The Telemetry contract and historical analytics ownership sources asserted
+// below remain unchanged.
+const TELEMETRY_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-telemetry.v1.json"));
 const [page, router, server, phaseMapSource, historicalAdmin, historicalAnalytics, historicalSummary] = await Promise.all([
