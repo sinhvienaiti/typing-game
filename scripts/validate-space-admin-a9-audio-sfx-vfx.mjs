@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const A9_SFX_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10 re-audit: 71de632..4f62c94 changes only Ship unlock runtime authority,
+// A10 capability truth-map code and A10 tests. Audio/SFX/VFX ownership,
+// contracts, preview behavior and write boundaries are unchanged.
+const A9_SFX_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
 
 const [
   sfxContract,
@@ -28,7 +31,7 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-sfx-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
-  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
+  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
   readFile(resolve(root, "portal/src/admin/space-typing-music-library-phase-b.ts"), "utf8"),
   readFile(resolve(childRoot, "src/audio/world-music-model.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b.ts"), "utf8"),
