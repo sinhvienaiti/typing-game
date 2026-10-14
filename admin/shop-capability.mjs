@@ -1,7 +1,8 @@
-// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
-// A8 capability/regression tests. Shop policy, generation, pricing,
-// availability and transaction ownership sources are unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
+// A8 Expedition Stage re-audit: 25a74f6..8e1c384 only adds the frozen
+// Expedition Stage runtime snapshot/fail-closed resume boundary and its
+// regression coverage. Shop policy, generation, pricing, availability,
+// offers, services and transaction ownership sources are unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
