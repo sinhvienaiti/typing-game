@@ -1,6 +1,10 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
 import { adminErrorMessage } from "./admin-http";
 import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
+import {
+  createEnemyProductionPreviewPanel,
+  type EnemyProductionPreviewPanelHandle,
+} from "./v2/preview/enemy-production-preview";
 
 const api = new SpaceTypingAdminApi();
 
@@ -180,9 +184,9 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "Game Content · Canonical Enemy Registry · B06.4 · A7"),
+    el("div", "st-admin-eyebrow", "Game Content · Canonical Enemy Registry · B06.4 · A7 · A10.5"),
     el("h1", undefined, "Enemies"),
-    el("p", undefined, "Author the production-backed normal-enemy projectile policy and inspect canonical Enemy definitions. Minimum Stage overrides remain preserved migration data until the child spawn/roster runtime consumes them."),
+    el("p", undefined, "Author the production-backed normal-enemy projectile policy, inspect canonical Enemy definitions, and verify visuals in the isolated child production renderer. Minimum Stage overrides remain preserved migration data until the child spawn/roster runtime consumes them."),
   );
   header.append(copy, revisionBadge);
   page.append(header);
@@ -219,7 +223,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   const listPanel = panel("Canonical Enemies", "35 child-owned Enemy definitions · immutable identity / taxonomy / visuals / rewards");
   const listHost = el("div");
   listPanel.append(listHost);
-  const editorPanel = panel("Enemy Registry & Capabilities", "A7 fail-closed: only production-backed controls are authorable");
+  const editorPanel = panel("Enemy Registry & Capabilities", "A7 authority + A10.5 production preview · fail closed");
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
@@ -232,6 +236,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   let policy: EnemyAdminPolicy = { configRevision: "enemies-admin-v1", projectileMode: "auto", enemies: {} };
   let serviceReady = false;
   let loadGeneration = 0;
+  let productionPreviewHandle: EnemyProductionPreviewPanelHandle | null = null;
 
   search.disabled = true;
   familyFilter.disabled = true;
@@ -315,6 +320,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   };
 
   const renderEditor = (): void => {
+    productionPreviewHandle?.dispose();
+    productionPreviewHandle = null;
     editorHost.replaceChildren();
     const base = baseEnemy(selectedId);
     const enemy = effectiveEnemy(selectedId);
@@ -343,11 +350,18 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         description: "Name, taxonomy, reward data and visual tokens remain bundled Enemy registry authority.",
       }),
       createAssetTuningCapabilityState({
-        label: "Media / VFX / SFX",
+        label: "Production Visual Preview",
+        status: "SUPPORTED NOW",
+        description: "Idle, hit and death render through the isolated child production Enemy renderer and CombatFxSystem. Runtime-kind scenarios remain closed until an honest stage/runtime context exists.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Media / VFX / SFX Authoring",
         status: "REQUIRES CANONICAL MIGRATION",
         description: "No immutable Media V2 per-Enemy binding or production Admin resolver exists yet.",
       }),
     );
+
+    productionPreviewHandle = createEnemyProductionPreviewPanel(enemy.id);
 
     const identity = panel("Canonical Identity & Taxonomy", "Child-owned and immutable in A7");
     identity.append(grid(
@@ -398,7 +412,16 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       }, "st-admin-btn primary"),
     );
 
-    editorHost.append(capabilities, identity, admission, rewards, visuals, diffPanel(base, enemy), actions);
+    editorHost.append(
+      capabilities,
+      productionPreviewHandle.root,
+      identity,
+      admission,
+      rewards,
+      visuals,
+      diffPanel(base, enemy),
+      actions,
+    );
   };
 
   search.addEventListener("input", renderList);
@@ -498,6 +521,8 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       );
     }).catch((error: unknown) => {
       if (generation !== loadGeneration) return;
+      productionPreviewHandle?.dispose();
+      productionPreviewHandle = null;
       serviceReady = false;
       loadedActiveRevision = null;
       revisionBadge.className = "st-admin-status bad";
