@@ -68,12 +68,17 @@ for (const fakeField of [
   forbidText(equipmentPolicy, fakeField, `Equipment policy must not invent ${fakeField}`);
 }
 
+// These pages own Draft creation, not direct activation. Each Draft is first
+// materialized through the child registry-preview validator, then persisted as
+// an immutable revision. Publish/rollback remains centralized in History.
+requireText(skillPage, 'const validated = await previewSkills(policy)', "Skills validate the candidate through the canonical child preview before Draft creation");
 requireText(skillPage, 'api.createRevision', "Skills retain immutable revision authoring");
-requireText(skillPage, 'api.validateRevision', "Skills retain validation before publish");
-requireText(skillPage, 'api.publish', "Skills retain normal publish boundary");
+requireText(skillPage, 'Publish from History to activate it', "Skills keep activation in the shared History / Publish boundary");
+forbidText(skillPage, 'api.publish(', "Skills editor must not bypass History with direct publish");
+requireText(equipmentPage, 'const validated = await previewEquipment(policy)', "Equipment validates the candidate through the canonical child preview before Draft creation");
 requireText(equipmentPage, 'api.createRevision', "Equipment retains immutable revision authoring");
-requireText(equipmentPage, 'api.validateRevision', "Equipment retains validation before publish");
-requireText(equipmentPage, 'api.publish', "Equipment retains normal publish boundary");
+requireText(equipmentPage, 'Publish from History to activate it', "Equipment keeps activation in the shared History / Publish boundary");
+forbidText(equipmentPage, 'api.publish(', "Equipment editor must not bypass History with direct publish");
 
 for (const fakeUi of [
   "effectPreset",
@@ -89,4 +94,4 @@ for (const fakeUi of [
 requireText(sharedStudio, 'export function createAssetTuningCapabilityState', "A6 can reuse the shared capability-state primitive");
 requireText(sharedStudio, 'export function createAssetTuningStudio', "A6 can reuse the shared Studio shell once a production preview chain exists");
 
-console.log("Space Typing Admin A6.0 Skills/Equipment capability boundary: PASS — gameplay authoring remains canonical; Media/VFX authoring stays fail-closed until migrated.");
+console.log("Space Typing Admin A6.0 Skills/Equipment capability boundary: PASS — gameplay authoring remains canonical; Drafts are child-preview validated; Media/VFX authoring stays fail-closed until migrated.");
