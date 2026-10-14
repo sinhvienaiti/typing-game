@@ -1,14 +1,16 @@
 # Space Typing Admin Asset Tuning — Progress / Handoff
 
-Last updated: 2026-10-13
+Last updated: 2026-10-14
 
-## Status
+## Current status
 
-**A5.0 — Runtime Capability Matrix + Production Preview Harness: AUTOMATED CODE GATE GREEN**
+- **A5.0 — Runtime Capability Matrix + Production Preview Harness: COMPLETE**
+- **A5.1 — Shared Asset Tuning Studio shell: COMPLETE**
+- **A5.2 — Ship 2D Authoring / exact Media V2 image assignment: COMPLETE (automated implementation)**
+- **A5.3 — Projectile / Effect Binding Migration: COMPLETE for the production-backed capability slice; non-canonical effect domains remain deliberately closed**
+- **First unfinished unit: A5.4 — Current 3D bundle authoring / exact-version relief-bundle audit and migration**
 
-A5.0 implementation is complete for the supported Ship procedural visual slice. Manual visual/lifecycle acceptance remains intentionally non-blocking and is tracked separately in `docs/SPACE_TYPING_ADMIN_ASSET_TUNING_MANUAL_ACCEPTANCE.md`.
-
-Do not broaden this status into claims that 2D Media assignment, relief-3D assignment, arbitrary GLB, animated GLB, generic VFX authoring, generic SFX authoring, or a Weapon Admin entity are supported. They remain classified conservatively by the child executable capability matrix.
+Manual acceptance remains intentionally non-blocking and is tracked in `docs/SPACE_TYPING_ADMIN_ASSET_TUNING_MANUAL_ACCEPTANCE.md`.
 
 ## Source of truth
 
@@ -16,76 +18,23 @@ Do not broaden this status into claims that 2D Media assignment, relief-3D assig
 
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- A5 code baseline: `99d9fecb22bb29bbd72009694992c324f620d308`
-- Manual acceptance checkpoint: `20f2d0e30132653ec996d54bc9251d1358c49f94`
 - PR: `#49`
+- Last verified A5.3 implementation baseline before this progress-document update: `b3bdb1f25b6e289d26b649db07cb60499b4207ce`
 
 ### Child runtime
 
 - Repo: `sinhvienaiti/space-typing`
-- Runtime branch: `feat/bgv-integration-current`
-- A5 runtime authority HEAD: `6f08e0905e9b13b8fb7204dba4db6b0cd8e28889`
-- Latest child A5 commit: `test(admin): lock canonical Ship visual preview capability`
+- Branch: `feat/bgv-integration-current`
+- A5.3 runtime authority: `7dd950bd59dc51255558ebf3a211d1eff8d0df3f`
+- Child CI `#2012`: PASS, including unit tests, Admin smoke/audits, strict build and R01 browser QA.
 
-### Parent submodule reconciliation
+The parent gitlink now pins the same child A5.3 runtime authority. Do not reset either repository to an older checkpoint from a handoff prompt.
 
-The parent branch currently pins `games/space-typing` to historical child SHA:
-
-`dbd7348daf23a7e8ef3d804c23205e22f82407f1`
-
-This gitlink is **not** the A5 child runtime authority. A5 preview runs cross-origin through the canonical `/games.json` entry and the child-owned `/admin-preview.html` route; the parent Portal does not import the A5 production renderer from the parent submodule checkout.
-
-Therefore:
-
-- do **not** reset/revert `feat/bgv-integration-current` to `dbd7348...`;
-- do **not** treat the parent gitlink as evidence that A5 child work is absent;
-- do **not** fabricate a gitlink update through a normal file-content API;
-- when a deliberate integration/submodule reconciliation milestone is performed later, compare the then-current child integration target and update the gitlink explicitly as its own operation.
-
-Until that deliberate reconciliation, the A5 runtime source of truth is the child branch/HEAD above.
-
-## Automated evidence
-
-### Child
-
-Child CI run `#1990` at `6f08e090...` passed the relevant suite, including:
-
-- unit tests;
-- Admin preview bridge smoke;
-- strict TypeScript/Vite build;
-- R01 browser QA.
-
-### Parent A5-specific gate
-
-Dedicated workflow: `.github/workflows/admin-a5-preview-ci.yml`
-
-At code checkpoint `99d9fec...`:
-
-- push run `#5` / run id `38397264145`: PASS;
-- PR run `#6` / run id `38397272362`: PASS.
-
-The A5 gate executes:
-
-1. `scripts/validate-space-admin-asset-preview.mjs`;
-2. root dependency install required by the Portal Vite build configuration;
-3. Portal dependency install;
-4. strict `pnpm --dir portal build` (`tsc --noEmit && vite build`).
-
-An earlier workflow-only failure was traced to missing root `vosk-browser` installation. The preview validator itself passed. The workflow was corrected without weakening protocol/security assertions.
-
-### Parent general Admin CI
-
-The production preview integration previously passed full Space Typing Admin CI at parent checkpoint `86a03bcc3094cc0b374f510edd4037fdd8a684b2`.
-
-At the time this progress document was prepared, the full Admin CI triggered by docs-only checkpoint `20f2d0e...` was still running. That does not invalidate the green A5 code gate above; re-check the newest branch CI before any future handoff claims that *all* branch workflows are green.
-
-## A5.0 implementation completed
-
-### A5.0.1 — Runtime capability matrix
+## A5.0 — Runtime capability matrix / production preview
 
 Child executable matrix: `src/admin/asset-tuning-capabilities.ts`.
 
-Every candidate field/domain is classified as one of:
+Every candidate capability is classified as exactly one of:
 
 - `SUPPORTED NOW`
 - `REQUIRES CANONICAL MIGRATION`
@@ -94,195 +43,192 @@ Every candidate field/domain is classified as one of:
 
 `SUPPORTED NOW` requires a complete named chain:
 
-persisted field → validator → runtime resolver → production consumer → preview consumer → apply boundary.
+persisted canonical field → validator → runtime materializer/resolver → production consumer → preview consumer using the production path → defined apply boundary.
 
-### A5.0.2 — Ship runtime authority
+The child `/admin-preview.html` harness uses production `drawCharacterShip()` and `PlayerShotSystem`. The parent bridge uses exact origin/source/session/nonce validation and preserves Draft vs Published isolation. No Portal-only Ship/projectile renderer exists.
 
-Canonical Ship visual override now reaches the same visual resolver used by the production renderer.
+## A5.1 — Shared Asset Tuning Studio
 
-The production path remains `drawCharacterShip()`; the Admin preview does not maintain a copied Ship renderer.
+The Ships page uses the shared A5 Studio shell and common field/capability primitives rather than a developer-style diagnostic form.
 
-### A5.0.3 — Isolated child preview protocol
+The Studio keeps:
 
-Child protocol v1 includes:
+- Draft / Published source switch;
+- Idle / Move / Fire production scenarios;
+- Basic / Advanced disclosure;
+- shared scalar controls with reset semantics;
+- standard Admin tooltip/help presentation;
+- existing Save Draft / Revision / History / Publish lifecycle.
 
-- `READY`
-- `LOAD_CANDIDATE`
-- `SET_SCENARIO`
-- `SET_TUNING`
-- `PAUSE`
-- `RESET`
-- `DISPOSE`
-- `APPLIED`
-- `ERROR`
-- `DISPOSED`
+Capability states remain visible instead of being converted into fake writable controls.
 
-Security/lifecycle properties include:
+## A5.2 — Ship exact-version 2D Media assignment
 
-- exact parent origin;
-- exact `event.source`;
-- protocol version;
-- CSPRNG session + nonce;
-- monotonic request IDs;
-- strict candidate parsing;
-- fail-closed response typing;
-- listener/RAF/pending-request cleanup.
+Canonical field:
 
-### A5.0.4 — Production visual harness
+`ships.<id>.imageAssetVersionId`
 
-Child has a dedicated `admin-preview.html` build entry.
+Implemented chain:
 
-The harness uses:
+Ships Admin → existing Media V2 Asset Picker → exact immutable `assetVersionId` → strict parent/child validation → revision-backed Ship config → published Ship runtime policy → child exact-version Ship media resolver → production renderer / production Admin preview.
 
-- production `drawCharacterShip()`;
-- production `PlayerShotSystem` for Fire;
-- scoped ephemeral candidate state;
-- no mutation of the active gameplay Ship runtime session.
+A5.2 guarantees:
 
-Supported scenarios:
-
-- Idle
-- Move
-- Fire
-
-Fire is explicitly the existing production Ship projectile path. A writable Weapon domain was **not** invented.
-
-### A5.0.5 — Parent secure transport
-
-Parent bridge: `portal/src/admin/space-typing-asset-preview.ts`.
-
-It:
-
-- resolves the child origin through canonical `/games.json` entry `space-typing`;
-- uses only fixed child route `/admin-preview.html`;
-- does not accept an arbitrary script/module/iframe URL from Admin form state;
-- does not pass Admin credentials to the child;
-- checks exact child origin/source/session/nonce;
-- rejects response-type mismatches;
-- removes iframe/listeners and rejects pending work on teardown.
-
-### A5.0.6 — Draft vs Published preview isolation
-
-The Ships Admin page exposes separate preview sources:
-
-- **Draft** — current in-memory candidate including unsaved visual changes;
-- **Published** — separately materialized active revision.
-
-`Validate Draft` and `Save Draft` do not overwrite/relabel Published preview state.
-
-Normal Revision/History/Publish semantics remain authoritative for runtime changes.
-
-### A5.0.7 — High-frequency update coalescing
-
-Ship candidate updates are coalesced to at most one `LOAD_CANDIDATE` command per animation frame.
-
-Route teardown cancels a queued animation frame and rejects queued waiters. UI generation guards prevent stale preview operations from overwriting the latest status or continuing into a stale scenario update.
-
-### A5.0.8 — Exact Media runtime bridge
-
-Parent has an exact-version Media runtime resolver/HTTP bridge; child has strict exact-version Media response validation.
-
-Guardrail remains:
-
-- runtime binding must pin exact immutable `assetVersionId`;
+- Choose image / Change image / Clear;
+- image-only Media picker filtering;
+- exact immutable version persistence;
+- no raw filesystem path or arbitrary URL;
+- no implicit `current` / `latest` resolution;
+- fallback to bundled Ship art when no override exists or a runtime resource cannot be used;
 - upload alone does not change gameplay;
-- no silent `current` / `latest` resolution may substitute for a pinned version.
+- Draft/Published/rollback semantics remain revision-backed.
 
-This does **not** mean every domain already has a writable Media binding field.
+## A5.3 — Projectile / Effect Binding Migration
 
-### A5.0.9 — Manual acceptance separated from implementation blockers
+### Runtime ownership audit
 
-Manual checklist:
+The production normal-Ship projectile path is owned by:
 
-`docs/SPACE_TYPING_ADMIN_ASSET_TUNING_MANUAL_ACCEPTANCE.md`
+- `src/characters/projectiles.ts` — per-Ship semantic projectile profile;
+- `src/vfx/player-shots.ts` — production `ShotRecipe` and `PlayerShotSystem`;
+- `src/vfx/player-shot-sprites.ts` — strict painted projectile sprite bundles;
+- `src/audio/Sfx.ts` — production launch/impact audio implementation;
+- `src/Game.ts` — production impact/audio gameplay consumption.
 
-It covers:
+The runtime does **not** expose a first-class writable Weapon entity.
 
-- Draft vs Published isolation;
-- production Idle/Move/Fire parity;
-- rapid tuning responsiveness;
-- route cleanup repeated 20 times;
-- security negative checks;
-- revision/CAS behavior;
-- exact Media semantics.
+### Supported canonical authoring: Ship → projectile recipe
 
-Failures found there become follow-up defects; an unperformed manual check does not block independent A5 work.
+Canonical field:
 
-### A5.0.10 — Conservative 3D boundary
+`ships.<id>.projectileArchetype`
 
-Current child 3D runtime is generated relief, not arbitrary GLB.
+Allowed production recipe identities:
 
-The current relief path remains `READ-ONLY REFERENCE` in A5.0. Exact-version relief assignment remains `REQUIRES CANONICAL MIGRATION`. Arbitrary and animated GLB remain `DEFERRED / UNSUPPORTED`.
+`spear`, `heavy`, `electric`, `shadow`, `star`, `barrage`, `mystic`, `guard`, `slash`, `radiant`, `cosmic`.
 
-Audit found A5.4 lifecycle prerequisites before repeated Admin 3D mount/switch/unmount can be called clean:
+Implemented chain:
 
-- `DuelShip3D.dispose()` does not yet prove explicit geometry/material/texture cleanup;
-- module-level 3D load caching must be reconciled with repeated Admin preview lifecycle;
-- no canonical arbitrary-GLB/skeletal-animation semantic runtime exists yet.
+Ship draft field → strict enum validation → Ship runtime session → `playerProjectileProfile()` → `shotRecipeFor()` → production `PlayerShotSystem.fire()` → Fire preview using the same production system → `new-session` apply boundary.
 
-Do not bypass those gaps with a second preview-only renderer.
+Changing a recipe in Admin immediately changes Draft Fire preview. Saving still creates a Draft revision only; runtime changes after normal Publish and a new session.
 
-## A5.0 exit-gate assessment
+### Impact audio is recipe-derived, not a second writable field
 
-| Gate | Status | Evidence |
-| --- | --- | --- |
-| No writable field missing production consumer | PASS | executable child capability matrix |
-| One real field chain end-to-end | PASS | Ship procedural visual profile |
-| Preview uses production path | PASS | `drawCharacterShip()` + `PlayerShotSystem` |
-| Preview is non-mutating | PASS by automated architecture/tests | scoped child candidate + Draft/Published isolation |
-| Protocol/security is fail closed | PASS | child tests + parent static regression gate + strict build |
-| Lifecycle cleanup implemented | PASS by automated implementation; manual stress pending | resource scopes + route teardown + manual x20 checklist |
-| Branch/source reconciliation documented | PASS | this document |
-| Exact Media semantics preserved | PASS | exact-version resolver/validator; no current/latest fallback |
+A5.3 found a real typed production impact identity (`PlayerImpactVariant`) already consumed by `Game.applyShotImpact()` → `Sfx.boltImpact()`.
 
-Result: **A5.0 automated implementation gate is green.**
+To prevent invalid visual/sound combinations, the selected projectile recipe now derives its matching impact sound identity. For example, an `electric` recipe derives the production `storm` impact sound; a `heavy` recipe derives `heavy`.
 
-Manual visual/stress acceptance remains an explicit non-blocking checklist rather than a false automated claim.
+There is intentionally **no** separate Admin `impactSfxAssetVersionId` or free-form impact-SFX field.
 
-## Capability decisions carried forward
+The Fire preview now uses production audio:
+
+- launch: `Sfx.shot()`;
+- impact: recipe-derived `Sfx.boltImpact()`.
+
+Launch audio remains read-only because `Sfx.shot()` is a generic production cue shared by multiple gameplay flows and has no canonical per-Ship semantic binding.
+
+### Recipe-owned projectile presentation remains read-only
+
+Muzzle placement, trail geometry/mode, painted projectile sprites, motion and impact geometry are owned by the selected production `ShotRecipe`.
+
+The painted art runtime is a strict multi-component bundle (`bolt`, `finisher`, `impact`, `muzzle`) with manifest/hash semantics. A single `projectileImageAssetVersionId` would be structurally incorrect, so A5.3 does not invent one.
+
+Future exact-version projectile-art authoring requires a canonical immutable **bundle** resolver, not a single-image shortcut.
+
+### Skill → effect binding remains migration-required
+
+Current Skill Admin policy persists gameplay fields such as metadata, energy cost, cooldown, charges and typing condition.
+
+Production VFX/SFX selection is still hard-wired by skill ID through `Game.ts` and `SkillFxSystem`. There is no canonical persisted `effectPreset` / exact-version effect binding with validator + production resolver + production preview chain.
+
+Classification: **REQUIRES CANONICAL MIGRATION**.
+
+Do not create generic VFX CRUD or a fake writable `effectPreset` merely to satisfy the Admin UI.
+
+### Unsupported / deferred boundaries retained
+
+- normal Ship per-Ship miss presentation: `DEFERRED / UNSUPPORTED`;
+- generic VFX CRUD: `DEFERRED / UNSUPPORTED`;
+- first-class Weapon Admin entity: `DEFERRED / UNSUPPORTED`;
+- arbitrary GLB / animated GLB semantic clips: `DEFERRED / UNSUPPORTED` until a real production runtime exists.
+
+## A5.3 automated evidence
+
+### Child
+
+Runtime authority `7dd950bd59dc51255558ebf3a211d1eff8d0df3f` passed child CI `#2012`.
+
+Tests/audits cover:
+
+- strict projectile recipe materialization;
+- production recipe resolution;
+- recipe-derived impact identity;
+- scoped Admin Fire preview without mutating active Ship runtime;
+- launch/impact production SFX preview;
+- capability classification that keeps recipe internals and unsupported domains closed.
+
+### Parent
+
+A5.3 parent integration includes:
+
+- parent Ship validator support for `projectileArchetype`;
+- server validation tests;
+- exact child contract snapshot sync;
+- typed preview bridge forwarding;
+- Shared Studio `Projectile Recipe` control;
+- child source assertions in the dedicated A5 preview CI;
+- no arbitrary projectile URL/path;
+- explicit assertions that no independent launch/impact SFX asset field was introduced;
+- parent child-gitlink pin to `7dd950bd...`;
+- re-audited unrelated domain SHA guards without removing their assertions.
+
+At the last implementation checkpoint, fresh parent A5 Preview, Admin and Platform workflows for the latest branch were running. Re-check current workflow conclusions before claiming all parent CI green in a handoff.
+
+## Current capability summary
 
 ### Supported now
 
-- Ship procedural/profile visual fields already owned by canonical Ship policy.
-- Existing Skill gameplay policy remains supported independently of A5 media/VFX authoring.
+- Ship procedural visual profile;
+- per-Ship exact immutable 2D image assignment;
+- Ship → production projectile recipe binding;
+- existing Skill gameplay policy (independent of effect/media authoring).
+
+### Read-only / derived production reference
+
+- aim/recoil/boost scenario state;
+- current relief 3D runtime;
+- projectile muzzle/trail/sprite/motion/impact geometry owned by recipe;
+- recipe-derived projectile impact SFX;
+- generic production projectile launch cue;
+- current production VFX/SFX where no canonical writable binding exists.
 
 ### Requires canonical migration
 
-- per-Ship 2D Media assignment;
-- persistent presentation scale/offset/rotation/pivot fields;
-- exact-version relief 3D assignment;
-- projectile profile authoring;
+- persistent Ship presentation offset/rotation/pivot fields;
+- exact-version relief 3D bundle assignment;
+- exact-version projectile painted-art bundle assignment;
 - Skill Media/VFX binding.
-
-### Read-only reference
-
-- gameplay aim/recoil/boost scenario state;
-- current generated relief 3D runtime;
-- current production projectile trail/impact behavior;
-- current production VFX;
-- current sample-backed/synthesized SFX.
 
 ### Deferred / unsupported
 
 - arbitrary GLB;
-- animated GLB semantic clips before a production animation runtime exists;
-- generic uploaded-image VFX authoring;
-- unproven writable Weapon Admin entity.
+- animated GLB semantic clips without a production animation runtime;
+- generic VFX CRUD;
+- normal Ship per-Ship miss authoring;
+- fake Weapon Admin entity.
 
-## First unfinished unit
+## First unfinished unit — A5.4
 
-With A5.0 automated code gate green, the next implementation unit is:
+**A5.4 — Current 3D bundle authoring / exact-version relief bundle migration**
 
-**A5.1 — Shared Asset Tuning Studio shell**
+Start with audit, not a form:
 
-Before implementing A5.1:
+1. fetch latest parent + child HEAD and CI;
+2. inspect `src/duel/relief-model.ts`, `src/duel/ship3d.ts` and all relevant bundle manifests/loaders;
+3. inspect Media V2 kinds/component-role semantics and whether an immutable asset version can represent the complete relief bundle;
+4. prove disposal/cache lifecycle for repeated Admin preview mount/switch/unmount;
+5. identify persisted canonical assignment field, validator, exact-version bundle resolver, production consumer, production-backed preview consumer and apply boundary;
+6. only then expose a compatible bundle picker in the Shared Asset Tuning Studio.
 
-1. fetch latest parent and child HEADs again;
-2. re-check latest CI;
-3. read the A5.1 section of `docs/SPACE_TYPING_ADMIN_ASSET_TUNING_PREVIEW_PLAN.md`;
-4. keep the shared Studio shell separate from domain-specific persistence;
-5. only render controls backed by capability-matrix `SUPPORTED NOW` fields;
-6. keep `REQUIRES CANONICAL MIGRATION`, `READ-ONLY REFERENCE`, and `DEFERRED / UNSUPPORTED` visible as capability state rather than silently turning them into writable form fields;
-7. preserve Draft / Published / Revision / History semantics and the child production preview harness.
-
-Do not jump directly to Ship 3D authoring or generic VFX/SFX CRUD.
+If exact-version bundle resolution or lifecycle ownership is incomplete, implement the canonical migration first. Do not fall back to raw GLB/path/URL authoring and do not build a Portal-only 3D renderer.
