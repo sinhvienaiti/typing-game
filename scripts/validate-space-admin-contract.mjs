@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A5.4/A6 re-audit: d463206..0d8ed88 adds only the Skills/Equipment
-// capability matrix and its tests. Background/VFX ownership, contracts and
+// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability
+// matrix and its regression tests. Background/VFX ownership, contracts and
 // Admin write boundaries remain untouched; no generic writable VFX/SFX or
 // visual authoring surface is introduced.
-const VISUALS_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
+const VISUALS_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,

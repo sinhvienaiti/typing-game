@@ -7,10 +7,10 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A6 re-audit: d463206..0d8ed88 adds only the Skills/Equipment capability
-// matrix and its tests. The dedicated QA contract and every Test Lab ownership
+// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability
+// matrix and tests. The dedicated QA contract and every Test Lab ownership
 // source asserted below are unchanged.
-const QA_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
+const QA_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([

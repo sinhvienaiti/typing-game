@@ -1,4 +1,7 @@
-export const SHOP_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
+// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability matrix
+// and tests; Shop policy, generation, pricing, availability and transaction
+// ownership sources are unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
