@@ -6,10 +6,12 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A5.2 re-audit: child CI at this SHA passes Backgrounds + VFX audits; the
-// dbd7348..671c9ef compare only changes Ship/Admin preview/runtime-media paths
-// plus the Ship renderer/visual authority needed by the production preview.
-const VISUALS_AUDITED_CHILD_SHA = "671c9ef6afb3446a7bb87b5c4369cda165fa1c8d";
+// A5.3 re-audit: child CI at this SHA passes Backgrounds + VFX audits; the
+// 671c9ef..f87a58b compare is limited to Ship/Admin projectile policy,
+// production PlayerShotSystem integration, preview wiring, contract and tests.
+// Background ownership is untouched; VFX changes stay inside the existing
+// player-projectile production path and do not introduce a generic writable VFX domain.
+const VISUALS_AUDITED_CHILD_SHA = "f87a58bec1d5f8c25cd3af6f429395711de424bb";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
