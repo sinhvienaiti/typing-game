@@ -14,6 +14,7 @@ const VISUAL_KEYS = [
 ];
 const COLOR_KEYS = ["primary", "secondary", "accent", "core", "engine", "glow"];
 const MEDIA_ASSET_VERSION_ID_PATTERN = /^media-version\.[A-Za-z0-9][A-Za-z0-9._:-]{0,159}$/;
+const RELIEF_ASSET_VERSION_FIELD = "reliefAssetVersionId";
 const TEXT_LIMITS = {
   name: 80,
   role: 100,
@@ -52,7 +53,7 @@ function rejectUnknownKeys(value, path, allowed) {
   }
 }
 
-function imageAssetVersionId(value, path) {
+function mediaAssetVersionId(value, path) {
   if (typeof value !== "string" || !MEDIA_ASSET_VERSION_ID_PATTERN.test(value)) {
     fail(`${path} must be a canonical Media V2 version id.`);
   }
@@ -76,10 +77,13 @@ export function validateShipPolicy(policy, shipContract) {
 
   const ships = object(input.ships, "content.ships.ships");
   const ids = shipContract?.ids ?? [];
-  const authorableFields = shipContract?.authorableFields ?? [];
+  const contractAuthorableFields = shipContract?.authorableFields ?? [];
+  const authorableFields = contractAuthorableFields.includes(RELIEF_ASSET_VERSION_FIELD)
+    ? contractAuthorableFields
+    : [...contractAuthorableFields, RELIEF_ASSET_VERSION_FIELD];
   const coreStatKeys = shipContract?.coreStatKeys ?? [];
   const constraints = shipContract?.constraints;
-  if (ids.length === 0 || authorableFields.length === 0 || !constraints) {
+  if (ids.length === 0 || contractAuthorableFields.length === 0 || !constraints) {
     fail("Child Ships Admin contract is incomplete.");
   }
 
@@ -103,9 +107,16 @@ export function validateShipPolicy(policy, shipContract) {
     }
 
     if (override.imageAssetVersionId !== undefined) {
-      imageAssetVersionId(
+      mediaAssetVersionId(
         override.imageAssetVersionId,
         `content.ships.ships.${id}.imageAssetVersionId`,
+      );
+    }
+
+    if (override.reliefAssetVersionId !== undefined) {
+      mediaAssetVersionId(
+        override.reliefAssetVersionId,
+        `content.ships.ships.${id}.reliefAssetVersionId`,
       );
     }
 
