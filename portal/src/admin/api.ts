@@ -109,6 +109,8 @@ export type ShipAdminOverride = {
   activeName?: string;
   ultimateName?: string;
   imageAssetVersionId?: string;
+  reliefAssetVersionId?: string;
+  projectileArchetype?: string;
   statBonus?: Partial<Record<CoreStatKey, number>>;
   visual?: Partial<ShipVisualProfile>;
 };
@@ -128,6 +130,8 @@ export type ShipAdminPreviewItem = {
   activeName: string;
   ultimateName: string;
   imageAssetVersionId?: string;
+  reliefAssetVersionId?: string;
+  projectileArchetype?: string;
   statBonus: Partial<Record<CoreStatKey, number>>;
   visual: ShipVisualProfile;
   assetId: string;
