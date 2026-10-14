@@ -7,10 +7,10 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability
-// matrix and tests. The dedicated QA contract and every Test Lab ownership
-// source asserted below are unchanged.
-const QA_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
+// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
+// A8 capability/regression tests. The dedicated QA contract and every Test Lab
+// ownership source asserted below are unchanged.
+const QA_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
@@ -53,7 +53,6 @@ assert.equal(contract.qa.safety.neverAutosavesCampaignProgression, true);
 assert.equal(contract.qa.safety.gameMethodsGuardedByTestLabEnabled, true);
 assert.equal(contract.qa.safety.productionSaveMutation, false);
 
-// Re-audit coverage added after the previous 8128a2 checkpoint.
 const coverage = contract.qa.currentRuntimeCoverage;
 assert.deepEqual(coverage.weeklyChallenge, {
   owner: "src/expansion-v2/weekly-challenge-admin.ts",
@@ -124,7 +123,6 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 assert.match(router, /renderPhaseBQa/);
 assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
 
-// A2: QA remains directly routable for migration, but is a developer/test workflow rather than a primary administrator menu item.
 assert.doesNotMatch(nav, /label:\s*"QA Sandbox"/);
 assert.ok(nav.includes('[`${ADMIN_BASE}/qa`]: "QA Sandbox"'), "QA Sandbox legacy direct-route metadata must remain available during migration");
 assert.ok(developerPaths.includes("/admin/space-typing/qa"), "QA Sandbox must be exposed from permission-gated Developer Tools");
