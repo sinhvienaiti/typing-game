@@ -6,12 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A5.4 re-audit: 3d3ce06..d463206 is limited to Ship relief registry
-// preview materialization, Ship3D resource-disposal strict-build narrowing and
-// A5.4 tests/capability evidence. Background and VFX production ownership,
-// contracts and Admin write boundaries are untouched; no generic writable
-// VFX/SFX domain is introduced.
-const VISUALS_AUDITED_CHILD_SHA = "d4632067fbe2e0ba17324a75793c62088cbd6ceb";
+// A5.4/A6 re-audit: d463206..0d8ed88 adds only the Skills/Equipment
+// capability matrix and its tests. Background/VFX ownership, contracts and
+// Admin write boundaries remain untouched; no generic writable VFX/SFX or
+// visual authoring surface is introduced.
+const VISUALS_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
