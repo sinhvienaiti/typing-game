@@ -38,6 +38,7 @@ on:
       - "scripts/validate-space-admin-telemetry.mjs"
       - "scripts/validate-space-admin-expedition.mjs"
       - "scripts/validate-space-admin-daily-weekly.mjs"
+      - "scripts/validate-space-admin-a7-enemy-boss.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -65,6 +66,8 @@ jobs:
         run: node scripts/validate-space-admin-ui.mjs
       - name: Validate Admin Phase B mapping
         run: node scripts/validate-space-admin-phase-b.mjs
+      - name: Validate A7 Enemy / Boss capability boundary
+        run: node scripts/validate-space-admin-a7-enemy-boss.mjs
       - name: Validate B06.6 Worlds + Stages mapping
         run: node scripts/validate-space-admin-worlds.mjs
       - name: Validate Typing Content canonical integration
@@ -126,6 +129,7 @@ jobs:
           node --check scripts/validate-space-admin-telemetry.mjs
           node --check scripts/validate-space-admin-expedition.mjs
           node --check scripts/validate-space-admin-daily-weekly.mjs
+          node --check scripts/validate-space-admin-a7-enemy-boss.mjs
       - name: Test immutable revision, CAS and Admin V2 security/media semantics
         run: pnpm admin:test
       - name: Test Typing Content canonical catalog
