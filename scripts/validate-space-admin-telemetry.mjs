@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability
-// matrix and tests. The Telemetry contract and historical analytics ownership
-// sources asserted below are unchanged.
-const TELEMETRY_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
+// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
+// A8 capability/regression tests. The Telemetry contract and historical
+// analytics ownership sources asserted below are unchanged.
+const TELEMETRY_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-telemetry.v1.json"));
 const [page, router, server, phaseMapSource, historicalAdmin, historicalAnalytics, historicalSummary] = await Promise.all([
