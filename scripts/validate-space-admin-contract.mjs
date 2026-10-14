@@ -6,11 +6,12 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
-// A8 capability/regression tests. Background/VFX ownership, contracts and
-// Admin write boundaries remain untouched; no generic writable VFX/SFX or
-// visual authoring surface is introduced.
-const VISUALS_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
+// A8 Expedition Stage runtime re-audit: 25a74f6..8e1c384 only adds the
+// per-run Stage runtime snapshot/fail-closed resume boundary plus regression
+// coverage. Background/VFX ownership, contracts and Admin write boundaries
+// remain untouched; no generic writable VFX/SFX or visual authoring surface
+// is introduced.
+const VISUALS_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
