@@ -13,6 +13,7 @@ const [
   skillPage,
   equipmentPage,
   sharedStudio,
+  sharedHelp,
 ] = await Promise.all([
   readFile(resolve(child, "src/admin/a6-skill-equipment-capabilities.ts"), "utf8"),
   readFile(resolve(child, "src/admin/skill-runtime-policy.ts"), "utf8"),
@@ -20,6 +21,7 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-skills-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-equipment-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/v2/asset-tuning-studio.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/v2/admin-help.ts"), "utf8"),
 ]);
 
 function requireText(source, needle, label) {
@@ -99,6 +101,35 @@ requireText(equipmentPage, 'label: "VFX / SFX"', "Equipment expose generic effec
 requireText(equipmentPage, 'status: "DEFERRED / UNSUPPORTED"', "Equipment keep generic VFX/SFX authoring closed");
 forbidText(equipmentPage, 'The master UI plan contains future acquisition/rarity/upgrade fields', "Equipment must not restore the old developer-heavy warning copy");
 
+// A6.2: operator guidance uses the shared tooltip/field shell instead of
+// embedding explanatory prose into every label or leaving lifecycle leaks.
+requireText(sharedHelp, 'export function createAdminFieldShell', "shared V2 help exposes field shells");
+requireText(sharedHelp, 'export class AdminHelpScope', "shared V2 help exposes lifecycle-scoped tooltips");
+requireText(sharedHelp, 'root.append(labelRow, options.control)', "shared field shell owns label/help/control composition");
+
+requireText(skillPage, 'AdminHelpScope, createAdminFieldShell', "Skills import shared field-help primitives");
+requireText(skillPage, 'const helpScope = new AdminHelpScope()', "Skills own one help lifecycle scope per page");
+requireText(skillPage, 'helpScope.observeRoot(page)', "Skills destroy tooltip resources when the route detaches");
+for (const title of ["Skill Category", "Energy Cost", "Cooldown", "Charges", "Per-stage Limit", "Typing Condition Mode"]) {
+  requireText(skillPage, `title: "${title}"`, `Skills provide shared tooltip help for ${title}`);
+}
+requireText(skillPage, 'stateMessage: "Child-owned · read only"', "Skills show immutable Category state inline");
+forbidText(skillPage, 'Category (immutable)', "Skills no longer encode help as a verbose immutable field label");
+forbidText(skillPage, 'Charges (blank = unlimited)', "Skills move unlimited-charge guidance into tooltip help");
+forbidText(skillPage, 'Per-stage Limit (blank = unlimited)', "Skills move per-stage unlimited guidance into tooltip help");
+
+requireText(equipmentPage, 'AdminHelpScope, createAdminFieldShell', "Equipment import shared field-help primitives");
+requireText(equipmentPage, 'const helpScope = new AdminHelpScope()', "Equipment own one help lifecycle scope per page");
+requireText(equipmentPage, 'helpScope.observeRoot(page)', "Equipment destroy tooltip resources when the route detaches");
+for (const title of ["Equipment Slot", "Equipment Tier", "Equipment Perk"]) {
+  requireText(equipmentPage, `title: "${title}"`, `Equipment provide shared tooltip help for ${title}`);
+}
+requireText(equipmentPage, 'stateMessage: "Child-owned · read only"', "Equipment show immutable Slot state inline");
+requireText(equipmentPage, 'stateMessage: "Registry-owned · read only"', "Equipment show immutable Tier state inline");
+requireText(equipmentPage, 'stateMessage: item.perk ? `Effective perk · ${item.perk}` : "No effective perk"', "Equipment use field state for effective Perk feedback");
+forbidText(equipmentPage, 'Slot (immutable)', "Equipment no longer encode help as a verbose immutable Slot label");
+forbidText(equipmentPage, 'Tier (immutable)', "Equipment no longer encode help as a verbose immutable Tier label");
+
 for (const fakeUi of [
   "effectPreset",
   "vfxAssetVersionId",
@@ -113,4 +144,4 @@ for (const fakeUi of [
 requireText(sharedStudio, 'export function createAssetTuningCapabilityState', "A6 can reuse the shared capability-state primitive");
 requireText(sharedStudio, 'export function createAssetTuningStudio', "A6 can reuse the shared Studio shell once a production preview chain exists");
 
-console.log("Space Typing Admin A6.1 Skills/Equipment: PASS — canonical gameplay authoring uses shared capability states; Drafts remain child-preview validated; Media/VFX authoring stays fail-closed until migrated.");
+console.log("Space Typing Admin A6.2 Skills/Equipment: PASS — canonical gameplay authoring uses shared capability states and lifecycle-scoped field help; Drafts stay child-preview validated; Media/VFX authoring remains fail-closed.");
