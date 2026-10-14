@@ -193,7 +193,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
 
   loadCandidate(candidate: TCandidate): Promise<unknown> {
     if (this.disposed) return Promise.reject(new Error("Production preview bridge is disposed."));
-    const generation = ++this.candidateGeneration;
+    ++this.candidateGeneration;
     this.lastCandidate = candidate;
     this.queuedCandidate = candidate;
     const result = new Promise<unknown>((resolve, reject) => {
@@ -202,6 +202,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
     if (this.queuedFrame === null) {
       this.queuedFrame = window.requestAnimationFrame(() => {
         this.queuedFrame = null;
+        const flushGeneration = this.candidateGeneration;
         const nextCandidate = this.queuedCandidate;
         this.queuedCandidate = null;
         const waiters = this.queuedWaiters.splice(0);
@@ -212,7 +213,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
         }
         void this.send("LOAD_CANDIDATE", this.adapter.candidatePayload(nextCandidate)).then(
           (payload) => {
-            if (generation !== this.candidateGeneration) {
+            if (flushGeneration !== this.candidateGeneration) {
               const stale = new ProductionPreviewStaleError();
               for (const waiter of waiters) waiter.reject(stale);
               return;
