@@ -6,13 +6,24 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability
-// matrix and tests. Expedition runtime, persistence and plan ownership asserted
-// below are unchanged.
-const EXPEDITION_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
+// A8 Expedition re-audit: this checkpoint freezes the immutable Stage Admin
+// runtime session into every newly persisted Expedition run, preserves that
+// snapshot across resume, and fails legacy saves closed to bundled Stage data.
+const EXPEDITION_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-expedition.v1.json"));
-const [page, router, server, phaseMapSource, coreSource, sessionSource, storeSource, planSource] = await Promise.all([
+const [
+  page,
+  router,
+  server,
+  phaseMapSource,
+  coreSource,
+  sessionSource,
+  storeSource,
+  planSource,
+  stageRuntimePolicySource,
+  stageSnapshotTestSource,
+] = await Promise.all([
   readFile(resolve(root, "portal/src/admin/space-typing-expedition-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
@@ -21,6 +32,8 @@ const [page, router, server, phaseMapSource, coreSource, sessionSource, storeSou
   readChild("src/expedition/session.ts"),
   readChild("src/expedition/store.ts"),
   readChild("src/expansion-v2/expedition-plan.ts"),
+  readChild("src/admin/stage-runtime-policy.ts"),
+  readChild("tests/expedition-stage-runtime-snapshot.test.ts"),
 ]);
 const phaseMap = JSON.parse(phaseMapSource);
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
@@ -65,6 +78,28 @@ assert.match(coreSource, /weekly/);
 assert.match(sessionSource, /ExpeditionSession/);
 assert.match(storeSource, /spaceTypingExpeditionRunV1/);
 assert.match(planSource, /expansion-v2/);
+
+// A8 Stage-runtime ownership regression: Expedition persistence owns a frozen
+// copy of the page/session policy and never inherits a newer Published policy
+// when an existing or legacy run is resumed after reload.
+assert.match(storeSource, /stageRuntimeSnapshot/);
+assert.match(storeSource, /freezeNewRunStageRuntime/);
+assert.match(storeSource, /captureActiveStageRuntimeSession/);
+assert.match(storeSource, /normalizePersistedStageRuntime/);
+assert.match(storeSource, /materializeStageRuntimeSessionSnapshot/);
+assert.match(storeSource, /armEncounterStageRuntime/);
+assert.match(storeSource, /activateExpeditionStageRuntimeSession/);
+assert.match(stageRuntimePolicySource, /export function materializeStageRuntimeSessionSnapshot/);
+assert.match(stageRuntimePolicySource, /export function captureActiveStageRuntimeSession/);
+assert.match(stageRuntimePolicySource, /export function activateExpeditionStageRuntimeSession/);
+assert.match(stageRuntimePolicySource, /return bundledSession\(\)/);
+assert.match(stageRuntimePolicySource, /expeditionStageRuntimeSession = null/);
+assert.match(stageSnapshotTestSource, /stage-a/);
+assert.match(stageSnapshotTestSource, /stage-b/);
+assert.match(stageSnapshotTestSource, /legacy-run/);
+assert.match(stageSnapshotTestSource, /createBundledStageConfig/);
+assert.match(stageSnapshotTestSource, /loadExpeditionEnvelope/);
+
 for (const unsupported of [
   "create or mutate Expedition runs",
   "edit Expedition encounter rules",
@@ -106,4 +141,4 @@ assert.equal(row.persistence, "child-browser-local-expedition-run");
 assert.equal(row.applyBoundary, "none");
 assert.equal(row.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log(`Space Typing Admin Expedition mapping: PASS (${childHead.slice(0, 12)} · browser-owned resumable run + weekly-capable challenge model + write verification + no remote mutation backend).`);
+console.log(`Space Typing Admin Expedition mapping: PASS (${childHead.slice(0, 12)} · browser-owned resumable run + frozen Stage runtime snapshot + legacy bundled fallback + no remote mutation backend).`);
