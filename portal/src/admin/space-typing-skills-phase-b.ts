@@ -1,5 +1,6 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { AdminHelpScope, createAdminFieldShell } from "./v2/admin-help";
 import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
@@ -180,6 +181,7 @@ function diffPanel(base: SkillAdminPreviewItem, effective: SkillAdminPreviewItem
 
 export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
   const page = el("div");
+  const helpScope = new AdminHelpScope();
   const revisionBadge = badge("ACTIVE · loading", "info");
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
@@ -306,26 +308,36 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
       }),
     );
 
-    const identity = panel("Identity", "Name and description are authorable; ID and category remain child-owned.");
+    const identity = panel("Identity", "Canonical Skill identity");
     const name = field("Name", skill.name);
     (name.control as HTMLInputElement).maxLength = 100;
     name.control.addEventListener("input", () => {
       overrideFor(selectedId).name = name.control.value;
       renderList();
     });
-    const category = field("Category (immutable)", skill.category, SKILL_CATEGORIES);
+    const category = field("Category", skill.category, SKILL_CATEGORIES);
     category.control.disabled = true;
+    const categoryShell = createAdminFieldShell(helpScope, {
+      label: "Category",
+      control: category.control,
+      help: {
+        title: "Skill Category",
+        content: "Owned by the child Skill registry. Admin may edit gameplay policy but cannot move a Skill between categories.",
+      },
+      stateMessage: "Child-owned · read only",
+      stateTone: "info",
+    });
     const description = descriptionField(skill.description ?? "");
     description.control.addEventListener("input", () => {
       overrideFor(selectedId).description = description.control.value;
     });
-    identity.append(grid(name.root, category.root), description.root);
+    identity.append(grid(name.root, categoryShell), description.root);
 
-    const gameplay = panel("Runtime Costs & Limits", "Validated against the child SkillDefinition contract");
+    const gameplay = panel("Runtime Costs & Limits", "Published changes apply on the next game session.");
     const energy = field("Energy Cost", String(skill.energyCost), undefined, "number");
-    const cooldown = field("Cooldown (seconds)", String(skill.cooldown), undefined, "number");
-    const charges = field("Charges (blank = unlimited)", skill.charges === null ? "" : String(skill.charges), undefined, "number");
-    const perStage = field("Per-stage Limit (blank = unlimited)", skill.perStageLimit === null ? "" : String(skill.perStageLimit), undefined, "number");
+    const cooldown = field("Cooldown", String(skill.cooldown), undefined, "number");
+    const charges = field("Charges", skill.charges === null ? "" : String(skill.charges), undefined, "number");
+    const perStage = field("Per-stage Limit", skill.perStageLimit === null ? "" : String(skill.perStageLimit), undefined, "number");
     const energyInput = energy.control as HTMLInputElement;
     energyInput.min = "0"; energyInput.max = "200"; energyInput.step = "0.1";
     const cooldownInput = cooldown.control as HTMLInputElement;
@@ -338,9 +350,29 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     cooldown.control.addEventListener("input", () => { overrideFor(selectedId).cooldown = Number(cooldown.control.value); renderList(); });
     charges.control.addEventListener("input", () => { overrideFor(selectedId).charges = charges.control.value.trim() === "" ? null : Number(charges.control.value); });
     perStage.control.addEventListener("input", () => { overrideFor(selectedId).perStageLimit = perStage.control.value.trim() === "" ? null : Number(perStage.control.value); });
-    gameplay.append(grid(energy.root, cooldown.root), grid(charges.root, perStage.root));
+    const energyShell = createAdminFieldShell(helpScope, {
+      label: "Energy Cost",
+      control: energy.control,
+      help: { title: "Energy Cost", content: "Energy consumed when this Skill activates. Allowed range: 0–200." },
+    });
+    const cooldownShell = createAdminFieldShell(helpScope, {
+      label: "Cooldown",
+      control: cooldown.control,
+      help: { title: "Cooldown", content: "Seconds before the Skill can activate again. Allowed range: 0–300." },
+    });
+    const chargesShell = createAdminFieldShell(helpScope, {
+      label: "Charges",
+      control: charges.control,
+      help: { title: "Charges", content: "Maximum activations available from the canonical Skill definition. Leave empty for unlimited." },
+    });
+    const perStageShell = createAdminFieldShell(helpScope, {
+      label: "Per-stage Limit",
+      control: perStage.control,
+      help: { title: "Per-stage Limit", content: "Maximum activations during one stage. Leave empty for unlimited." },
+    });
+    gameplay.append(grid(energyShell, cooldownShell), grid(chargesShell, perStageShell));
 
-    const conditionPanel = panel("Typing Condition", "Inherit bundled condition, explicitly override it, or remove it for this published policy.");
+    const conditionPanel = panel("Typing Condition", "Optional activation requirements");
     const currentOverride = policy.skills?.[selectedId]?.typingCondition;
     const modeValue = currentOverride === null ? "none" : currentOverride === undefined ? "inherit" : "override";
     const mode = field("Condition Mode", modeValue, ["inherit", "override", "none"]);
@@ -371,7 +403,15 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     streak.control.addEventListener("input", writeCondition);
     accuracy.control.addEventListener("input", writeCondition);
     syncConditionControls();
-    conditionPanel.append(grid(mode.root, streak.root, accuracy.root));
+    const modeShell = createAdminFieldShell(helpScope, {
+      label: "Condition Mode",
+      control: mode.control,
+      help: {
+        title: "Typing Condition Mode",
+        content: "Inherit keeps the bundled condition, Override writes explicit thresholds, and None removes the condition from this published policy.",
+      },
+    });
+    conditionPanel.append(grid(modeShell, streak.root, accuracy.root));
 
     const actions = el("div", "st-admin-page-actions");
     actions.append(
@@ -497,6 +537,7 @@ export function renderPhaseBSkills(navigate: Navigate): HTMLElement {
     });
   };
 
+  helpScope.observeRoot(page);
   load();
   return page;
 }
