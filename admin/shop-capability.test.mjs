@@ -33,7 +33,7 @@ test("Shop capability manifest opens only canonical runtime-backed authoring sea
   assert.equal(manifest.protocolVersion, 4);
   assert.equal(manifest.mode, "runtime-backed-authoring");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "671c9ef6afb3446a7bb87b5c4369cda165fa1c8d");
+  assert.equal(manifest.auditedChildSha, "7dd950bd59dc51255558ebf3a211d1eff8d0df3f");
   assert.deepEqual(manifest.tabs, SHOP_TABS);
   assert.deepEqual(manifest.fields.map((field) => field.name), SHOP_FIELDS);
 
