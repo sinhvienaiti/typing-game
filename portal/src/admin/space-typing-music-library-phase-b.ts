@@ -14,7 +14,8 @@ type MusicCatalogTrack = {
   playback: CatalogPlayback;
   durationSeconds: number;
   mixOutSeconds?: number;
-  loop?: boolean;
+  loop: boolean;
+  trimGain?: number;
   metadata?: Record<string, unknown>;
   uploadedByAdmin: boolean;
 };
@@ -23,6 +24,7 @@ type MusicCatalogPayload = {
   manifestRevision: string;
   tracks: MusicCatalogTrack[];
 };
+type GamesPayload = { games: Array<{ id: string; appUrl: string }> };
 
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
@@ -41,6 +43,14 @@ async function loadCatalog(): Promise<MusicCatalogPayload> {
   const payload = await api.requestJson<MusicCatalogPayload>("/api/admin/space-typing/music/library");
   if (!validCatalog(payload)) throw new Error("Music catalog response does not match the canonical Admin contract.");
   return payload;
+}
+
+async function resolveSpaceTypingAppUrl(): Promise<string> {
+  const payload = await api.requestJson<GamesPayload>("/games.json");
+  if (!payload || !Array.isArray(payload.games)) throw new Error("Game registry response is missing games[].");
+  const appUrl = payload.games.find((game) => game?.id === "space-typing" && typeof game.appUrl === "string")?.appUrl?.trim();
+  if (!appUrl) throw new Error("Space Typing appUrl is missing from the canonical game registry.");
+  return appUrl;
 }
 
 async function uploadTrack(input: {
@@ -88,6 +98,27 @@ function playbackSummary(track: MusicCatalogTrack): string {
   return `stems · ${track.playback.calm.length} calm / ${track.playback.intense.length} intense`;
 }
 
+function previewSource(track: MusicCatalogTrack): CatalogSource | null {
+  if (track.playback.kind === "single") return track.playback.sources[0] ?? null;
+  return track.playback.calm[0] ?? track.playback.intense[0] ?? null;
+}
+
+function sourceSummary(track: MusicCatalogTrack): string {
+  if (track.playback.kind === "single") {
+    return track.playback.sources.map((source) => source.src).join(" · ");
+  }
+  const calm = track.playback.calm[0]?.src ?? "—";
+  const intense = track.playback.intense[0]?.src ?? "—";
+  return `calm ${calm} · intense ${intense}`;
+}
+
+function productionMusicUrl(appUrl: string, source: string): string {
+  if (!source.startsWith("/assets/audio/music/") || source.includes("..")) {
+    throw new Error(`Refusing non-production Music path: ${source}`);
+  }
+  return new URL(source, appUrl).toString();
+}
+
 export function renderPhaseBMusicLibrary(): HTMLElement {
   const root = document.createElement("section");
   root.className = "space-admin-page space-admin-page--phase-b";
@@ -96,10 +127,11 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
       <div>
         <p class="st-admin-eyebrow">Audio · Authored Asset Service · Phase B</p>
         <h1>Music Library</h1>
-        <p>Manage authored tracks through the canonical World Music catalog. Upload/delete rebuilds the bundled catalog consumed by the production MusicController.</p>
+        <p>Manage authored tracks through the canonical World Music catalog. Upload/delete rebuilds the bundled catalog consumed by the production MusicController; Test Playback uses the exact catalog source served by Space Typing.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">RUNTIME CATALOG · CONNECTED</span>
+        <span class="st-admin-badge">TEST PLAYBACK</span>
         <span class="st-admin-badge">APPLY · CATALOG REBUILD</span>
         <span class="st-admin-badge">DELETE · ADMIN UPLOADS ONLY</span>
       </div>
@@ -122,6 +154,7 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
       </article>
       <article class="st-admin-card space-admin-card--wide">
         <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Canonical catalog</p><h2>Tracks</h2></div><strong data-music-revision>—</strong></div>
+        <p class="st-admin-notice">Context assignments and enabled/disabled policy remain under World / Stage Music, their canonical owner. Catalog loop is shown as authored metadata; Test Playback does not mutate either policy or game state.</p>
         <div data-music-list></div>
       </article>
     </div>
@@ -140,7 +173,23 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
   const moodInput = root.querySelector<HTMLInputElement>("[data-music-mood]");
   if (!status || !list || !revision || !uploadButton || !fileInput || !idInput || !titleInput || !worldInput || !durationInput || !mixoutInput || !moodInput) return root;
 
-  const render = (catalog: MusicCatalogPayload): void => {
+  let activeAudio: HTMLAudioElement | null = null;
+  let activePreviewButton: HTMLButtonElement | null = null;
+
+  const stopPlayback = (): void => {
+    if (activeAudio !== null) {
+      activeAudio.pause();
+      activeAudio.currentTime = 0;
+      activeAudio = null;
+    }
+    if (activePreviewButton !== null) {
+      activePreviewButton.textContent = "Test Playback";
+      activePreviewButton = null;
+    }
+  };
+
+  const render = (catalog: MusicCatalogPayload, appUrl: string): void => {
+    stopPlayback();
     revision.textContent = `${catalog.tracks.length} tracks · ${catalog.manifestRevision.slice(0, 20)}…`;
     setAdminStatus(status, `Catalog schema v${catalog.schemaVersion} loaded. Only tracks with provenance local-admin-upload can be deleted from this surface.`, "success");
     uploadButton.disabled = false;
@@ -148,27 +197,60 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
       list.innerHTML = '<p class="st-admin-notice">Catalog is empty. Upload an authored track to create the first Admin-managed catalog entry.</p>';
       return;
     }
-    list.innerHTML = `<div class="st-admin-table-wrap"><table class="st-admin-table"><thead><tr><th>ID</th><th>Title</th><th>Playback</th><th>Duration</th><th>Provenance</th><th>Action</th></tr></thead><tbody>${catalog.tracks.map((track) => {
+    list.innerHTML = `<div class="st-admin-table-wrap"><table class="st-admin-table"><thead><tr><th>ID</th><th>Title</th><th>Source</th><th>Playback</th><th>Duration</th><th>Loop</th><th>Provenance</th><th>Preview</th><th>Action</th></tr></thead><tbody>${catalog.tracks.map((track) => {
       const provenance = String(track.metadata?.provenance ?? "catalog");
-      return `<tr><td><code>${escapeHtml(track.id)}</code></td><td>${escapeHtml(track.title)}</td><td>${escapeHtml(playbackSummary(track))}</td><td>${escapeHtml(track.durationSeconds)}s</td><td>${escapeHtml(provenance)}</td><td>${track.uploadedByAdmin ? `<button type="button" class="st-admin-btn danger" data-delete-track="${escapeHtml(track.id)}">Delete</button>` : '<span class="st-admin-badge">SOURCE-OWNED</span>'}</td></tr>`;
+      const source = previewSource(track);
+      return `<tr><td><code>${escapeHtml(track.id)}</code></td><td>${escapeHtml(track.title)}</td><td><code title="${escapeHtml(sourceSummary(track))}">${escapeHtml(source?.src ?? "—")}</code></td><td>${escapeHtml(playbackSummary(track))}</td><td>${escapeHtml(track.durationSeconds)}s</td><td><span class="st-admin-badge">${track.loop ? "LOOP" : "ONE-SHOT"}</span></td><td>${escapeHtml(provenance)}</td><td>${source ? `<button type="button" class="st-admin-btn" data-preview-track="${escapeHtml(track.id)}">Test Playback</button>` : '<span class="st-admin-badge">NO SOURCE</span>'}</td><td>${track.uploadedByAdmin ? `<button type="button" class="st-admin-btn danger" data-delete-track="${escapeHtml(track.id)}">Delete</button>` : '<span class="st-admin-badge">SOURCE-OWNED</span>'}</td></tr>`;
     }).join("")}</tbody></table></div>`;
 
-    for (const button of list.querySelectorAll<HTMLButtonElement>("[data-delete-track]")) {
-      button.addEventListener("click", () => {
-        const trackId = button.dataset.deleteTrack ?? "";
+    for (const previewButton of list.querySelectorAll<HTMLButtonElement>("[data-preview-track]")) {
+      previewButton.addEventListener("click", () => {
+        if (activePreviewButton === previewButton) {
+          stopPlayback();
+          return;
+        }
+        const trackId = previewButton.dataset.previewTrack ?? "";
+        const track = catalog.tracks.find((candidate) => candidate.id === trackId);
+        const source = track ? previewSource(track) : null;
+        if (!track || !source) return;
+        stopPlayback();
+        try {
+          const audio = new Audio(productionMusicUrl(appUrl, source.src));
+          audio.preload = "auto";
+          audio.loop = track.loop === true;
+          activeAudio = audio;
+          activePreviewButton = previewButton;
+          previewButton.textContent = "Stop";
+          const finish = (): void => {
+            if (activeAudio === audio) stopPlayback();
+          };
+          audio.addEventListener("ended", finish, { once: true });
+          audio.addEventListener("error", finish, { once: true });
+          void audio.play().catch(() => finish());
+        } catch {
+          stopPlayback();
+        }
+      });
+    }
+
+    for (const deleteButton of list.querySelectorAll<HTMLButtonElement>("[data-delete-track]")) {
+      deleteButton.addEventListener("click", () => {
+        const trackId = deleteButton.dataset.deleteTrack ?? "";
         if (!trackId || !window.confirm(`Delete Admin-uploaded track ${trackId} and rebuild the catalog?`)) return;
-        button.disabled = true;
+        stopPlayback();
+        deleteButton.disabled = true;
         setAdminStatus(status, `Deleting ${trackId} and rebuilding canonical catalog…`, "loading");
         void deleteTrack(trackId)
-          .then(render)
+          .then((catalog) => render(catalog, appUrl))
           .catch((error) => {
             setAdminStatus(status, adminErrorMessage(error, "The track could not be deleted. Try again."), "error");
-            button.disabled = false;
+            deleteButton.disabled = false;
           });
       });
     }
   };
 
+  let appUrl = "";
   uploadButton.addEventListener("click", () => {
     const file = fileInput.files?.[0];
     if (!file) {
@@ -180,6 +262,11 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
       setAdminStatus(status, "Track ID, title and duration are required before upload.", "error");
       return;
     }
+    if (!appUrl) {
+      setAdminStatus(status, "Space Typing runtime origin is unavailable. Reload the catalog before authoring.", "error");
+      return;
+    }
+    stopPlayback();
     uploadButton.disabled = true;
     setAdminStatus(status, "Uploading authored track and rebuilding canonical catalog…", "loading");
     void uploadTrack({
@@ -198,7 +285,7 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
         durationInput.value = "";
         mixoutInput.value = "";
         moodInput.value = "";
-        render(catalog);
+        render(catalog, appUrl);
       })
       .catch((error) => {
         setAdminStatus(status, adminErrorMessage(error, "The authored track could not be uploaded. Check the form and try again."), "error");
@@ -209,19 +296,22 @@ export function renderPhaseBMusicLibrary(): HTMLElement {
   let loadGeneration = 0;
   const load = (): void => {
     const generation = ++loadGeneration;
+    stopPlayback();
+    appUrl = "";
     uploadButton.disabled = true;
     revision.textContent = "—";
-    setAdminStatus(status, "Loading canonical World Music catalog…", "loading");
+    setAdminStatus(status, "Loading canonical World Music catalog and game origin…", "loading");
     list.innerHTML = '<p class="st-admin-notice">Loading tracks…</p>';
-    void loadCatalog().then((catalog) => {
+    void Promise.all([loadCatalog(), resolveSpaceTypingAppUrl()]).then(([catalog, resolvedAppUrl]) => {
       if (generation !== loadGeneration) return;
-      render(catalog);
+      appUrl = resolvedAppUrl;
+      render(catalog, appUrl);
     }).catch((error) => {
       if (generation !== loadGeneration) return;
       setAdminStatus(status, "Music catalog is unavailable.", "error");
       renderAdminFailureState(list, {
         title: "Music catalog unavailable",
-        fallbackMessage: "The canonical catalog could not be loaded. Check the local Admin runtime and try again.",
+        fallbackMessage: "The canonical catalog or Space Typing game origin could not be loaded. Check the local Admin runtime and try again.",
         error,
         onRetry: load,
       });

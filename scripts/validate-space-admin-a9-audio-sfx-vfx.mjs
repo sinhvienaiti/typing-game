@@ -18,6 +18,7 @@ const [
   command,
   phaseMapSource,
   musicPage,
+  musicModel,
   vfxPage,
 ] = await Promise.all([
   readFile(resolve(childRoot, "contracts/space-typing-admin-sfx.v1.json"), "utf8").then(JSON.parse),
@@ -29,6 +30,7 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
   readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-music-library-phase-b.ts"), "utf8"),
+  readFile(resolve(childRoot, "src/audio/world-music-model.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b.ts"), "utf8"),
 ]);
 const childPackage = JSON.parse(childPackageSource);
@@ -86,10 +88,31 @@ assert.equal(sfxMap.persistence, "child-code-owned-sample-bank");
 assert.equal(sfxMap.applyBoundary, "none");
 assert.equal(sfxMap.status, "phase-b-ui-wired-runtime-backed-readonly-preview");
 
+// A9 Music: catalog source/duration/loop are visible and Test Playback uses the
+// exact production asset. Context and Enabled are owned by World Music policy,
+// so Music Library must not invent duplicate authoring controls for them.
+assert.match(musicModel, /export type CatalogTrack/);
+assert.match(musicModel, /loop:\s*boolean/);
+assert.match(musicModel, /disabledTrackIds\?: readonly string\[\]/);
+assert.match(musicModel, /stages\?: Readonly<Record<string, WorldMusicPolicyEntry>>/);
+assert.match(musicModel, /worlds\?: Readonly<Record<string, WorldMusicPolicyEntry>>/);
+assert.match(musicModel, /galaxies\?: Readonly<Record<string, WorldMusicPolicyEntry>>/);
 assert.match(musicPage, /Music Library/);
 assert.match(musicPage, /\/api\/admin\/space-typing\/music\/library/);
+assert.match(musicPage, /TEST PLAYBACK/);
+assert.match(musicPage, /<th>Source<\/th>/);
+assert.match(musicPage, /<th>Duration<\/th>/);
+assert.match(musicPage, /<th>Loop<\/th>/);
+assert.match(musicPage, /\/games\.json/);
+assert.match(musicPage, /source\.startsWith\("\/assets\/audio\/music\/"\)/);
+assert.match(musicPage, /new Audio\(productionMusicUrl/);
+assert.match(musicPage, /audio\.loop = track\.loop === true/);
+assert.match(musicPage, /Context assignments and enabled\/disabled policy remain under World \/ Stage Music/);
+assert.doesNotMatch(musicPage, /trimGain[^\n]*(?:Volume|volume)/);
+assert.doesNotMatch(musicPage, /createRevision|\/publish|\/revisions/);
+
 assert.match(vfxPage, /RUNTIME-BACKED · READ ONLY/);
 assert.match(vfxPage, /NO FAKE VFX PROFILE/);
 assert.doesNotMatch(vfxPage, /createRevision|\/publish|\/revisions/);
 
-console.log(`Space Typing Admin A9 Audio/SFX/VFX boundary: PASS (${childHead.slice(0, 12)} · canonical sample SFX catalog + browser Test Playback; VFX remains read-only).`);
+console.log(`Space Typing Admin A9 Audio/SFX/VFX boundary: PASS (${childHead.slice(0, 12)} · Music + SFX production asset Test Playback; SFX/VFX unsupported authoring stays closed).`);
