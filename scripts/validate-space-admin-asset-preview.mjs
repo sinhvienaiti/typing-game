@@ -53,6 +53,8 @@ requireText(bridge, 'this.pending.clear()', "bridge clears pending requests");
 requireText(bridge, 'this.iframe.remove()', "bridge removes iframe");
 requireText(bridge, 'imageAssetVersionId?: string', "Ship preview candidate carries optional exact image version");
 requireText(bridge, 'imageAssetVersionId: nextCandidate.imageAssetVersionId', "bridge forwards exact Ship image version to child preview");
+requireText(bridge, 'reliefAssetVersionId?: string | null', "A5.4 Ship preview candidate carries optional exact relief bundle version");
+requireText(bridge, 'reliefAssetVersionId: nextCandidate.reliefAssetVersionId', "A5.4 bridge forwards exact Ship relief bundle version to child preview");
 requireText(bridge, 'projectileArchetype?: string', "Ship preview candidate carries optional production projectile recipe");
 requireText(bridge, 'projectileArchetype: nextCandidate.projectileArchetype', "bridge forwards Ship projectile recipe to child preview");
 forbidText(bridge, "ADMIN_TOKEN", "preview must not receive Admin credentials");
@@ -81,6 +83,7 @@ requireText(ships, 'let publishedPreview: ShipAdminPreview | null = null', "Publ
 requireText(ships, 'previewSource === "published"', "source switch selects published data explicitly");
 requireText(ships, 'SpaceTypingAssetPreviewBridge.mount(previewHost)', "Ships page uses child-owned preview harness");
 requireText(ships, 'imageAssetVersionId: ship.imageAssetVersionId', "candidate sends exact Ship image version through typed preview bridge");
+requireText(ships, 'reliefAssetVersionId: ship.reliefAssetVersionId ?? null', "A5.4 candidate sends exact Ship relief bundle version through typed preview bridge");
 requireText(ships, 'projectileArchetypeFor(ship)', "candidate resolves canonical Ship projectile recipe");
 requireText(ships, '{ projectileArchetype }', "candidate sends Ship projectile recipe through preview bridge");
 requireText(ships, 'bridge.setScenario(previewScenario)', "scenario uses preview protocol");
@@ -96,6 +99,12 @@ requireText(ships, 'overrideFor(selectedId).imageAssetVersionId = version.assetV
 requireText(ships, 'delete override.imageAssetVersionId', "Clear removes only the image override");
 requireText(ships, 'label: "Ship Image"', "Ship image control uses standard Admin field shell");
 requireText(ships, 'title: "Ship Image"', "Ship image guidance uses tooltip help instead of permanent long copy");
+requireText(ships, 'allowedKinds: ["model"]', "A5.4 relief picker is constrained to model assets");
+requireText(ships, 'isVersionCompatible: isSpaceTypingReliefMediaVersionCompatible', "A5.4 relief picker enforces strict bundle compatibility");
+requireText(ships, 'selectedAssetVersionId: ship.reliefAssetVersionId ?? null', "A5.4 relief picker restores the current exact bundle version");
+requireText(ships, 'overrideFor(selectedId).reliefAssetVersionId = version.assetVersionId', "A5.4 selection persists immutable relief version into draft policy");
+requireText(ships, 'delete override.reliefAssetVersionId', "A5.4 bundled-default action removes only the relief override");
+requireText(ships, 'label: "3D Relief Bundle"', "A5.4 relief bundle control uses standard Admin field shell");
 requireText(ships, 'const PROJECTILE_ARCHETYPES = [', "A5.3 exposes only production-backed recipe identities");
 requireText(ships, 'label: "Projectile Recipe"', "A5.3 Ship projectile binding uses standard Admin field shell");
 requireText(ships, 'override.projectileArchetype = next', "A5.3 persists recipe binding into Ship draft policy");
@@ -116,6 +125,8 @@ forbidText(ships, 'publishedPreview = validated', "Draft validation must not ove
 forbidText(ships, 'publishedPreview = validatedDraft', "Draft validation must remain ephemeral");
 forbidText(ships, 'panel("Visual Profile"', "Ships no longer duplicates Asset Tuning settings in a legacy panel");
 
+requireText(childPolicy, 'reliefAssetVersionId?: string', "A5.4 child canonical Ship policy persists exact relief bundle version");
+requireText(childPolicy, 'isShipReliefAssetVersionId', "A5.4 child runtime validator rejects non-canonical relief assignments");
 requireText(childPolicy, 'projectileArchetype?: ShipRuntimeProjectileArchetype', "child canonical Ship policy persists projectile recipe");
 requireText(childPolicy, 'PROJECTILE_ARCHETYPES.has', "child runtime validator rejects unknown projectile recipes");
 requireText(childProjectiles, 'withPlayerProjectileRuntimeSession', "child supports isolated preview resolution without mutating active session");
@@ -127,10 +138,13 @@ requireText(childShots, 'playerProjectileProfile(characterId).archetype', "produ
 requireText(childPreview, 'const shots = new PlayerShotSystem<number>()', "Fire preview owns real production PlayerShotSystem");
 requireText(childPreview, 'const sfx = new Sfx()', "Fire preview owns the real production Sfx implementation");
 requireText(childPreview, 'shots.fire({', "Fire preview invokes production projectile fire path");
-requireText(childPreview, 'if (fired) sfx.shot(1)', "Fire preview uses the production launch cue without inventing a writable launch binding");
+requireText(childPreview, 'sfx.shot(1);', "Fire preview uses the production launch cue without inventing a writable launch binding");
+requireText(childPreview, 'flashShipAssetPreviewRelief(activeCandidate, nextReliefGun++)', "A5.4 Fire preview drives production relief gun feedback on the same fired-shot event");
 requireText(childPreview, 'sfx.boltImpact(power, pan, variant)', "Fire arrivals use the production impact cue");
 requireText(childPreview, 'playerProjectileProfile(activeCandidate.characterId).impactVariant', "Fire preview resolves impact audio from the same recipe-derived production profile");
 requireText(childPreview, 'withShipAssetPreviewRuntime(activeCandidate', "Fire preview scopes production runtime to ephemeral candidate");
+requireText(childPreview, 'prepareShipAssetPreviewCandidate(', "A5.4 preview prepares candidate-owned exact media resources before rendering");
+requireText(childPreview, 'releaseShipAssetPreviewCandidate(', "A5.4 preview releases superseded/disposed candidate resources");
 requireText(childSfx, 'boltImpact(power: number, pan = 0, variant: ImpactVariant = "energy")', "production Sfx exposes typed impact variants");
 requireText(childSfx, 'shot(multiplier: number)', "production Sfx owns the generic launch cue");
 forbidText(childPolicy, 'projectileUrl', "child policy must not accept arbitrary projectile URLs");
@@ -138,4 +152,4 @@ forbidText(childPolicy, 'projectilePath', "child policy must not accept arbitrar
 forbidText(childPolicy, 'impactSfxAssetVersionId', "A5.3 must not introduce an independent impact-SFX field that can drift from the recipe");
 forbidText(childPolicy, 'launchSfxAssetVersionId', "A5.3 must not invent a per-Ship launch-SFX binding for a generic production cue");
 
-console.log("Space Typing Admin A5 preview + A5.2 Ship Media + A5.3 projectile/SFX binding validation passed.");
+console.log("Space Typing Admin A5 preview + A5.2 Ship Media + A5.3 projectile/SFX + A5.4 relief bundle validation passed.");
