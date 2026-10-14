@@ -5,6 +5,8 @@ on:
     branches:
       - feat/space-typing-admin-uiux
     paths:
+      - "games/space-typing"
+      - "portal/src/admin/contracts/space-typing-admin.v1.json"
       - "portal/src/admin/space-typing-asset-preview.ts"
       - "portal/src/admin/space-typing-asset-preview.css"
       - "portal/src/admin/space-typing-ships-phase-b.ts"
@@ -12,6 +14,8 @@ on:
       - ".github/workflows/admin-a5-preview-ci.yml"
   pull_request:
     paths:
+      - "games/space-typing"
+      - "portal/src/admin/contracts/space-typing-admin.v1.json"
       - "portal/src/admin/space-typing-asset-preview.ts"
       - "portal/src/admin/space-typing-asset-preview.css"
       - "portal/src/admin/space-typing-ships-phase-b.ts"
@@ -23,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - uses: pnpm/action-setup@v4
         with:
           version: 11.21.0
