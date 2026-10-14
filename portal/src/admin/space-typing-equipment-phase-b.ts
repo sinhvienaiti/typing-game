@@ -4,6 +4,7 @@ import {
   type SpaceTypingAdminConfig,
 } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
 const CORE_STATS: readonly CoreStatKey[] = [
@@ -302,7 +303,29 @@ export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
     }
 
     editorHost.append(notice(`ID ${item.id} · slot ${item.slot} · Mk.${item.tier} · icon ${item.icon} · apply boundary: new session`, "info"));
-    editorHost.append(notice("The master UI plan contains future acquisition/rarity/upgrade fields. B06.2 intentionally does not persist those until the child runtime exposes a canonical contract for them.", "warn"));
+    const capabilities = panel("Capabilities", "Only production-backed Equipment controls are editable.");
+    capabilities.append(
+      createAssetTuningCapabilityState({
+        label: "Gameplay Policy",
+        status: "AVAILABLE",
+        description: "Name, description, core stat bonuses and canonical perk are revision-backed.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Registry Icon",
+        status: "READ-ONLY REFERENCE",
+        description: `Current icon ${item.icon} is a child-owned glyph, not a Media V2 asset.`,
+      }),
+      createAssetTuningCapabilityState({
+        label: "Media Binding",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Replacing the glyph with Media requires an exact-version field and production resolver first.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "VFX / SFX",
+        status: "DEFERRED / UNSUPPORTED",
+        description: "No generic per-Equipment VFX or SFX authoring contract exists in production.",
+      }),
+    );
 
     const identity = panel("Identity", "Name and description are authorable; ID / slot / tier / icon remain child-owned.");
     const name = field("Name", item.name);
@@ -363,7 +386,7 @@ export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
       }, "st-admin-btn primary"),
     );
 
-    editorHost.append(identity, stats, perkPanel, statsSummary(base, item), actions);
+    editorHost.append(capabilities, identity, stats, perkPanel, statsSummary(base, item), actions);
   };
 
   search.addEventListener("input", renderList);
