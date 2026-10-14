@@ -7,10 +7,11 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
-// A8 capability/regression tests. The dedicated QA contract and every Test Lab
-// ownership source asserted below are unchanged.
-const QA_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
+// A8 Expedition Stage runtime re-audit: 25a74f6..8e1c384 only adds the
+// per-run Stage runtime snapshot/fail-closed resume boundary plus regression
+// coverage. The dedicated QA contract, Test Lab isolation/persistence rules,
+// Developer Tools placement and every QA ownership source asserted below are unchanged.
+const QA_AUDITED_CHILD_SHA = "8e1c3844faed0de1da721d8db8115712a56d311c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
@@ -20,7 +21,7 @@ const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAd
   readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
   readFile(resolve(root, "portal/public/games.json"), "utf8"),
-  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8"),
+  readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
   readChild("src/expansion-v2/weekly-challenge-admin.ts"),
   readChild("src/duel/alternative-modes.ts"),
   readChild("src/expansion-v2/historical-analytics-admin.ts"),
@@ -28,7 +29,7 @@ const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAd
   readChild("src/input/voice-adapter.ts"),
 ]);
 const games = JSON.parse(gamesSource);
-const phaseMap = JSON.parse(phaseMapSource);
+const phaseMap = phaseMapSource;
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 const developerManifest = createDeveloperToolsManifest();
 const developerPaths = developerManifest.sections.flatMap((section) => section.tools.map((tool) => tool.path));
