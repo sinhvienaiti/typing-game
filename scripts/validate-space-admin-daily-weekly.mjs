@@ -6,7 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-const DAILY_WEEKLY_AUDITED_CHILD_SHA = "7dd950bd59dc51255558ebf3a211d1eff8d0df3f";
+// A5.4/A6 re-audit: 7dd950b..0d8ed88 changes Ship asset-preview/relief
+// ownership plus the Skills/Equipment capability matrix/tests. Daily/Weekly
+// challenge identity, runtime and read-only Admin ownership remain untouched.
+const DAILY_WEEKLY_AUDITED_CHILD_SHA = "0d8ed88a90b370e6547e9846cfca1c46ef2a342f";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-daily-weekly.v1.json"));
 const [page, router, server, phaseMapSource, weeklyRuntime, weeklyAdmin, challengeSource] = await Promise.all([
