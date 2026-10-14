@@ -1,7 +1,7 @@
-// A7 re-audit: 0d8ed88..a4ffb5b adds only the Enemy/Boss capability matrix
-// and tests; Shop policy, generation, pricing, availability and transaction
-// ownership sources are unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "a4ffb5b60a3b93830fbd5e1510865e00f431203a";
+// A8 re-audit: a4ffb5b..25a74f6 adds World/Stage runtime authority plus
+// A8 capability/regression tests. Shop policy, generation, pricing,
+// availability and transaction ownership sources are unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "25a74f6c065edc4e60120968548c1d4ac8a15cb5";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
