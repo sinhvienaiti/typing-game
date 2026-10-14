@@ -1,3 +1,4 @@
+import { attachA8WorldStageCapabilitySummary } from "./space-typing-a8-world-stage-capabilities";
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
 import { renderPhaseBAlternativeModes } from "./space-typing-alternative-modes-phase-b";
 import { renderPhaseBBackgrounds } from "./space-typing-backgrounds-phase-b";
@@ -28,8 +29,8 @@ type Navigate = (path: string) => void;
 export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLElement | null {
   if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);
   if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();
-  if (path === `${BASE}/stages`) return renderPhaseBWorlds(navigate);
-  if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);
+  if (path === `${BASE}/stages`) return attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world");
+  if (path === `${BASE}/worlds-stages`) return attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage");
   if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
   if (path === `${BASE}/shop`) return renderPhaseBShop(navigate);
   if (path === `${BASE}/currencies`) return renderPhaseBCurrencies(navigate);
