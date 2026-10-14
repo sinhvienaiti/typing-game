@@ -45,13 +45,43 @@ update_submodule_branch() {
   echo "  ✓ $path: $(git -C "$path" rev-parse --short HEAD) ($branch)"
 }
 
+update_submodule_pinned() {
+  local path="$1"
+  local pinned_sha
+  local actual_sha
+
+  pinned_sha="$(git rev-parse "HEAD:$path")"
+  echo "  → Restoring $path to the platform-pinned gitlink ${pinned_sha:0:12}..."
+  git submodule update --init --recursive "$path"
+  actual_sha="$(git -C "$path" rev-parse HEAD)"
+
+  if [[ "$actual_sha" != "$pinned_sha" ]]; then
+    echo "ERROR: $path did not land on the platform gitlink." >&2
+    echo "  expected: $pinned_sha" >&2
+    echo "  actual:   $actual_sha" >&2
+    exit 1
+  fi
+
+  echo "  ✓ $path: $(git -C "$path" rev-parse --short HEAD) (platform gitlink)"
+}
+
+update_space_submodule() {
+  if [[ "${TYPING_GAME_SPACE_FOLLOW_BRANCH:-0}" == "1" ]]; then
+    echo "  ! TYPING_GAME_SPACE_FOLLOW_BRANCH=1: explicitly following the Space Typing branch hint."
+    update_submodule_branch "games/space-typing" "games/space-typing"
+    return
+  fi
+
+  update_submodule_pinned "games/space-typing"
+}
+
 case "$TARGET" in
   all)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
     update_submodule_branch "games/vocab-shooter" "games/vocab-shooter"
     update_submodule_branch "games/recall-typing" "games/recall-typing"
     update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
-    update_submodule_branch "games/space-typing" "games/space-typing"
+    update_space_submodule
     ;;
   monkeytype)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
@@ -66,7 +96,7 @@ case "$TARGET" in
     update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
     ;;
   space)
-    update_submodule_branch "games/space-typing" "games/space-typing"
+    update_space_submodule
     ;;
 esac
 
