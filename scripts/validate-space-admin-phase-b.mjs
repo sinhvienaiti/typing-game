@@ -15,6 +15,7 @@ const contractReader = await readFile(new URL("portal/src/admin/space-typing-con
 const phaseB = `${phaseBRouter}\n${phaseBCore}`;
 const stagesPhaseB = await readFile(new URL("portal/src/admin/space-typing-stages-phase-b.ts", root), "utf8");
 const audioPhaseB = await readFile(new URL("portal/src/admin/space-typing-audio-phase-b.ts", root), "utf8");
+const sfxPhaseB = await readFile(new URL("portal/src/admin/space-typing-sfx-phase-b.ts", root), "utf8");
 const worldMusicPhaseB = await readFile(new URL("portal/src/admin/space-typing-world-music-phase-b.ts", root), "utf8");
 const shipsPhaseB = await readFile(new URL("portal/src/admin/space-typing-ships-phase-b.ts", root), "utf8");
 const equipmentPhaseB = await readFile(new URL("portal/src/admin/space-typing-equipment-phase-b.ts", root), "utf8");
@@ -27,12 +28,13 @@ const server = await readFile(new URL("admin/server.mjs", root), "utf8");
 assert.equal(map.schemaVersion, 1);
 assert.equal(map.phase, "B");
 assert.equal(map.contractRevision, "space-typing-admin-v1");
-assert.equal(map.screens.length, 30, "Phase B mapping must cover all 30 registered Admin screens");
+assert.equal(map.screens.length, 31, "Phase B mapping must cover all 31 registered Admin screens");
 
 const routes = map.screens.map((entry) => entry.route);
 assert.equal(new Set(routes).size, routes.length, "Phase B mapping routes must be unique");
 
 const audio = map.screens.find((entry) => entry.route === "/admin/space-typing/audio");
+const sfx = map.screens.find((entry) => entry.route === "/admin/space-typing/sfx");
 const worldMusic = map.screens.find((entry) => entry.route === "/admin/space-typing/world-music");
 const ships = map.screens.find((entry) => entry.route === "/admin/space-typing/ships");
 const equipment = map.screens.find((entry) => entry.route === "/admin/space-typing/equipment");
@@ -46,6 +48,10 @@ const history = map.screens.find((entry) => entry.route === "/admin/space-typing
 assert.equal(audio?.domain, "audio");
 assert.equal(audio?.status, "phase-b-ui-wired");
 assert.equal(audio?.applyBoundary, "safe-boundary");
+assert.equal(sfx?.domain, "audio.sfx");
+assert.equal(sfx?.status, "phase-b-ui-wired-runtime-backed-readonly-preview");
+assert.equal(sfx?.persistence, "child-code-owned-sample-bank");
+assert.equal(sfx?.applyBoundary, "none");
 assert.equal(worldMusic?.domain, "worldMusic");
 assert.equal(worldMusic?.status, "phase-b-ui-wired-all-scopes");
 assert.equal(worldMusic?.applyBoundary, "next-track-or-state");
@@ -141,6 +147,21 @@ assert.doesNotMatch(audioPhaseB, /api\.publish/);
 assert.match(audioPhaseB, /spaceTypingSettingsV1/);
 assert.match(audioPhaseB, /PRONUNCIATION_DUCK/);
 assert.match(audioPhaseB, /assertStableActiveRevision/);
+
+// A9 SFX is a first-class administrator Media workflow, but remains read-only
+// because the child runtime does not yet own a publishable SFX policy.
+assert.match(phaseBRouter, /renderPhaseBSfx/);
+assert.match(phaseBRouter, /\$\{BASE\}\/sfx`\) return renderPhaseBSfx\(\)/);
+assert.match(sfxPhaseB, /createAdminSfxCatalog/);
+assert.match(sfxPhaseB, /RUNTIME-BACKED · READ ONLY/);
+assert.match(sfxPhaseB, /TEST PLAYBACK/);
+assert.match(sfxPhaseB, /NO FAKE SFX POLICY/);
+assert.match(sfxPhaseB, /Runtime Gain/);
+assert.match(sfxPhaseB, /Pool/);
+assert.match(sfxPhaseB, /new Audio\(productionSampleUrl/);
+assert.doesNotMatch(sfxPhaseB, /api\.createRevision/);
+assert.doesNotMatch(sfxPhaseB, /api\.publish/);
+
 assert.match(phaseB, /renderPhaseBWorldMusic/);
 assert.match(worldMusicPhaseB, /B04\.2 World Music Draft/);
 assert.match(worldMusicPhaseB, /api\.previewWorldMusic/);
@@ -241,4 +262,4 @@ for (const entry of dangerous) {
   assert.notEqual(entry.applyBoundary, "immediate", `${entry.screen} must not use immediate production apply`);
 }
 
-console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, A7 Enemy projectile-only authoring + fail-closed Bosses, fail-closed General Settings, runtime-backed Feature Gates via safe shared contract reader).`);
+console.log(`Space Typing Admin Phase B mapping: PASS (${map.screens.length} screens, A9 SFX production catalog/Test Playback read-only, A7 Enemy projectile-only authoring + fail-closed Bosses, fail-closed General Settings, runtime-backed Feature Gates via safe shared contract reader).`);
