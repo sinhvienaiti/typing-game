@@ -8,8 +8,9 @@ const childPolicyPath = "games/space-typing/src/admin/ship-runtime-policy.ts";
 const childProjectilesPath = "games/space-typing/src/characters/projectiles.ts";
 const childShotsPath = "games/space-typing/src/vfx/player-shots.ts";
 const childPreviewPath = "games/space-typing/src/admin/asset-preview-main.ts";
+const childSfxPath = "games/space-typing/src/audio/Sfx.ts";
 
-const [bridge, ships, studio, studioCss, childPolicy, childProjectiles, childShots, childPreview] = await Promise.all([
+const [bridge, ships, studio, studioCss, childPolicy, childProjectiles, childShots, childPreview, childSfx] = await Promise.all([
   readFile(new URL(`../${bridgePath}`, import.meta.url), "utf8"),
   readFile(new URL(`../${shipsPath}`, import.meta.url), "utf8"),
   readFile(new URL(`../${studioPath}`, import.meta.url), "utf8"),
@@ -18,6 +19,7 @@ const [bridge, ships, studio, studioCss, childPolicy, childProjectiles, childSho
   readFile(new URL(`../${childProjectilesPath}`, import.meta.url), "utf8"),
   readFile(new URL(`../${childShotsPath}`, import.meta.url), "utf8"),
   readFile(new URL(`../${childPreviewPath}`, import.meta.url), "utf8"),
+  readFile(new URL(`../${childSfxPath}`, import.meta.url), "utf8"),
 ]);
 
 function requireText(source, needle, label) {
@@ -100,7 +102,7 @@ requireText(ships, 'override.projectileArchetype = next', "A5.3 persists recipe 
 requireText(ships, 'delete override.projectileArchetype', "A5.3 can restore bundled recipe without fake null values");
 requireText(ships, 'Fire preview uses the production PlayerShotSystem', "A5.3 UI states production Fire preview ownership");
 requireText(ships, 'Projectile muzzle / trail / sprite internals', "recipe internals remain read-only derived presentation");
-requireText(ships, 'Projectile launch / impact SFX', "audio migration boundary remains explicit");
+requireText(ships, 'Projectile launch / impact SFX', "audio capability boundary remains explicit");
 requireText(ships, 'Miss presentation / Weapon Admin entity', "unsupported miss/Weapon authoring remains explicit");
 requireText(ships, 'status: "AVAILABLE"', "production-backed A5 capabilities are promoted");
 requireText(ships, 'status: "REQUIRES CANONICAL MIGRATION"', "remaining migration-required features remain capability state");
@@ -118,12 +120,22 @@ requireText(childPolicy, 'projectileArchetype?: ShipRuntimeProjectileArchetype',
 requireText(childPolicy, 'PROJECTILE_ARCHETYPES.has', "child runtime validator rejects unknown projectile recipes");
 requireText(childProjectiles, 'withPlayerProjectileRuntimeSession', "child supports isolated preview resolution without mutating active session");
 requireText(childProjectiles, 'session.ships[id]?.projectileArchetype', "child production projectile profile resolves Ship policy binding");
+requireText(childProjectiles, 'playerImpactVariantForArchetype', "projectile recipe derives a production impact sound identity");
+requireText(childProjectiles, 'impactVariant: playerImpactVariantForArchetype(archetype)', "runtime recipe override cannot retain a mismatched Ship impact sound");
 requireText(childShots, 'export function shotRecipeFor', "child exposes production recipe resolver");
 requireText(childShots, 'playerProjectileProfile(characterId).archetype', "production PlayerShot recipe derives from canonical Ship projectile profile");
 requireText(childPreview, 'const shots = new PlayerShotSystem<number>()', "Fire preview owns real production PlayerShotSystem");
+requireText(childPreview, 'const sfx = new Sfx()', "Fire preview owns the real production Sfx implementation");
 requireText(childPreview, 'shots.fire({', "Fire preview invokes production projectile fire path");
+requireText(childPreview, 'if (fired) sfx.shot(1)', "Fire preview uses the production launch cue without inventing a writable launch binding");
+requireText(childPreview, 'sfx.boltImpact(power, pan, variant)', "Fire arrivals use the production impact cue");
+requireText(childPreview, 'playerProjectileProfile(activeCandidate.characterId).impactVariant', "Fire preview resolves impact audio from the same recipe-derived production profile");
 requireText(childPreview, 'withShipAssetPreviewRuntime(activeCandidate', "Fire preview scopes production runtime to ephemeral candidate");
+requireText(childSfx, 'boltImpact(power: number, pan = 0, variant: ImpactVariant = "energy")', "production Sfx exposes typed impact variants");
+requireText(childSfx, 'shot(multiplier: number)', "production Sfx owns the generic launch cue");
 forbidText(childPolicy, 'projectileUrl', "child policy must not accept arbitrary projectile URLs");
 forbidText(childPolicy, 'projectilePath', "child policy must not accept arbitrary projectile filesystem paths");
+forbidText(childPolicy, 'impactSfxAssetVersionId', "A5.3 must not introduce an independent impact-SFX field that can drift from the recipe");
+forbidText(childPolicy, 'launchSfxAssetVersionId', "A5.3 must not invent a per-Ship launch-SFX binding for a generic production cue");
 
-console.log("Space Typing Admin A5 preview + A5.2 Ship Media + A5.3 projectile binding validation passed.");
+console.log("Space Typing Admin A5 preview + A5.2 Ship Media + A5.3 projectile/SFX binding validation passed.");
