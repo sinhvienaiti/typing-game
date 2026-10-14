@@ -1,5 +1,6 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
 
@@ -158,16 +159,16 @@ function visualSummary(visual: EnemyVisualProfile): string {
 }
 
 function diffPanel(base: EnemyAdminPreviewItem, effective: EnemyAdminPreviewItem): HTMLElement {
-  const root = panel("Runtime Diff Preview", "Bundled child admission → effective draft admission");
+  const root = panel("Registry Preview Diff", "Bundled child admission → persisted Admin preview candidate");
   const row = el("div", "stx-toggle-row");
   const copy = el("div");
   copy.append(el("strong", undefined, "Minimum Stage"), el("small", undefined, `${base.minStage} → ${effective.minStage}`));
   const changed = base.minStage !== effective.minStage;
-  row.append(copy, badge(changed ? "CHANGED" : "UNCHANGED", changed ? "warn" : "info"));
+  row.append(copy, badge(changed ? "MIGRATION DATA" : "UNCHANGED", changed ? "warn" : "info"));
   root.append(row, notice(
     changed
-      ? "Stage admission differs from the bundled registry. This takes effect only for a new game session after Publish."
-      : "No runtime admission difference from the bundled Enemy registry.",
+      ? "Preview-only migration data. Production enemyDefinition()/world roster resolution does not consume this override yet."
+      : "No preview-only Minimum Stage difference from the bundled Enemy registry.",
     changed ? "warn" : "info",
   ));
   return root;
@@ -179,9 +180,9 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "Game Content · Canonical Enemy Registry · B06.4"),
+    el("div", "st-admin-eyebrow", "Game Content · Canonical Enemy Registry · B06.4 · A7"),
     el("h1", undefined, "Enemies"),
-    el("p", undefined, "Author canonical Enemy admission and normal-enemy projectile policy through immutable revisions. Identity, taxonomy, rewards and visuals remain child-owned."),
+    el("p", undefined, "Author the production-backed normal-enemy projectile policy and inspect canonical Enemy definitions. Minimum Stage overrides remain preserved migration data until the child spawn/roster runtime consumes them."),
   );
   header.append(copy, revisionBadge);
   page.append(header);
@@ -189,7 +190,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   const status = notice("Loading active revision and canonical child Enemy registry…", "info");
   status.setAttribute("aria-live", "polite");
 
-  const projectilePolicyPanel = panel("Combat Projectile Policy", "Admin authority · applies on the next game session after Publish");
+  const projectilePolicyPanel = panel("Combat Projectile Policy", "SUPPORTED NOW · Admin authority · applies on the next game session after Publish");
   const projectileMode = selectField<EnemyProjectilePolicy>("Normal Enemy Projectiles", "auto", [
     { value: "auto", label: "Auto · follow canonical difficulty" },
     { value: "off", label: "Off · disable normal-enemy projectiles" },
@@ -212,13 +213,13 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   familyFilter.setAttribute("aria-label", "Enemy family filter");
   const roleFilter = el("select", "st-admin-select") as HTMLSelectElement;
   roleFilter.setAttribute("aria-label", "Enemy role filter");
-  filterBar.append(search, familyFilter, roleFilter, el("div", "st-admin-filter-spacer"), badge("APPLY · NEW SESSION", "info"));
+  filterBar.append(search, familyFilter, roleFilter, el("div", "st-admin-filter-spacer"), badge("PROJECTILES · NEW SESSION", "info"));
 
   const body = el("div", "stx-grid");
   const listPanel = panel("Canonical Enemies", "35 child-owned Enemy definitions · immutable identity / taxonomy / visuals / rewards");
   const listHost = el("div");
   listPanel.append(listHost);
-  const editorPanel = panel("Enemy Admission Override", "`content.enemies.enemies.<id>.minStage` plus the global projectile policy are persisted in B06.4");
+  const editorPanel = panel("Enemy Registry & Capabilities", "A7 fail-closed: only production-backed controls are authorable");
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
@@ -292,13 +293,16 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       const current = effectiveEnemy(enemy.id) ?? enemy;
       const row = el("div", "stx-toggle-row");
       const copyNode = el("div");
+      const stageSummary = current.minStage === enemy.minStage
+        ? `stage ${enemy.minStage}+`
+        : `stage ${enemy.minStage}+ · migration preview ${current.minStage}+`;
       copyNode.append(
         el("strong", undefined, current.name),
-        el("small", undefined, `${enemy.id} · ${enemy.family} · ${enemy.role} · ${enemy.rarity} · stage ${current.minStage}+`),
+        el("small", undefined, `${enemy.id} · ${enemy.family} · ${enemy.role} · ${enemy.rarity} · ${stageSummary}`),
       );
       const actions = el("div");
-      if (policy.enemies?.[enemy.id] && Object.keys(policy.enemies[enemy.id]).length > 0) actions.append(badge("OVERRIDE", "warn"));
-      const edit = button(selectedId === enemy.id ? "Editing" : "Edit", () => {
+      if (policy.enemies?.[enemy.id] && Object.keys(policy.enemies[enemy.id]).length > 0) actions.append(badge("MIGRATION DATA", "warn"));
+      const edit = button(selectedId === enemy.id ? "Viewing" : "View", () => {
         selectedId = enemy.id;
         renderList();
         renderEditor();
@@ -315,17 +319,37 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     const base = baseEnemy(selectedId);
     const enemy = effectiveEnemy(selectedId);
     if (!serviceReady || !base || !enemy) {
-      editorHost.append(notice(serviceReady ? "No Enemy is selected." : "Load the active revision and canonical Enemy preview before editing admission.", serviceReady ? "warn" : "info"));
+      editorHost.append(notice(serviceReady ? "No Enemy is selected." : "Load the active revision and canonical Enemy preview before inspecting capabilities.", serviceReady ? "warn" : "info"));
       return;
     }
 
-    editorHost.append(notice(`ID ${enemy.id} · ${enemy.family}/${enemy.role}/${enemy.rarity} · apply boundary: new session`, "info"));
-    editorHost.append(notice(
-      "HP, Shield, Armor, Speed, Damage, AI, Spawn Weight, Skills, per-enemy projectile definitions, VFX, SFX, Drop Table and Enabled remain read-only because the current child Enemy contract does not expose canonical authorable runtime fields for them. The global normal-enemy projectile switch is managed by Combat Projectile Policy above.",
-      "warn",
-    ));
+    editorHost.append(notice(`ID ${enemy.id} · ${enemy.family}/${enemy.role}/${enemy.rarity} · projectile policy: new session · minStage: preview-only`, "info"));
 
-    const identity = panel("Canonical Identity & Taxonomy", "Child-owned and immutable in B06.4");
+    const capabilities = panel("Capabilities", "A7 authority is based on production consumers, not preview availability.");
+    capabilities.append(
+      createAssetTuningCapabilityState({
+        label: "Normal Enemy Projectile Policy",
+        status: "SUPPORTED NOW",
+        description: "Published projectileMode is consumed by the production enemy projectile resolver and applies to new sessions.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Minimum Stage",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Existing values are preserved and previewable, but production enemyDefinition()/world roster resolution does not consume the Admin override yet.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Identity / Rewards / Visuals",
+        status: "READ-ONLY REFERENCE",
+        description: "Name, taxonomy, reward data and visual tokens remain bundled Enemy registry authority.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Media / VFX / SFX",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "No immutable Media V2 per-Enemy binding or production Admin resolver exists yet.",
+      }),
+    );
+
+    const identity = panel("Canonical Identity & Taxonomy", "Child-owned and immutable in A7");
     identity.append(grid(
       readonlyField("Name", enemy.name),
       readonlyField("Family", enemy.family),
@@ -333,20 +357,15 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       readonlyField("Rarity", enemy.rarity),
     ));
 
-    const admission = panel("Stage Admission", "Canonical runtime consumer: Enemy spawn profile minimum-stage gate");
+    const admission = panel("Stage Admission", "Migration metadata · registry preview only · no production consumer");
     const minStage = field("Minimum Stage", String(enemy.minStage), "number");
     minStage.control.min = "1";
     minStage.control.max = "1000";
     minStage.control.step = "1";
-    minStage.control.addEventListener("input", () => {
-      policy.enemies ??= {};
-      policy.enemies[selectedId] ??= {};
-      policy.enemies[selectedId].minStage = Number(minStage.control.value);
-      renderList();
-    });
-    admission.append(minStage.root, notice("Valid range: Stage 1–1000. A higher value delays admission; a lower value allows this Enemy definition earlier where the existing spawn selection chooses it.", "info"));
+    minStage.control.disabled = true;
+    admission.append(minStage.root, notice("Read-only until the child spawn/roster runtime consumes the published override. Existing persisted values are preserved; this screen will not author new minStage data.", "warn"));
 
-    const rewards = panel("Rewards", "Canonical child definition · read-only in this slice");
+    const rewards = panel("Rewards", "Canonical child definition · read-only");
     rewards.append(grid(
       readonlyField("Reward", enemy.reward ?? "—"),
       readonlyField("Reward Power", enemy.rewardPower === undefined ? "—" : String(enemy.rewardPower)),
@@ -363,25 +382,23 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     );
 
     const actions = el("div", "st-admin-page-actions");
+    const resetMigration = button("Reset Migration Override", () => undefined);
+    resetMigration.disabled = true;
+    resetMigration.title = "Minimum Stage authoring is closed until a production runtime consumer exists.";
     actions.append(
-      button("Reset Enemy Override", () => {
-        if (policy.enemies) delete policy.enemies[selectedId];
-        renderList();
-        renderEditor();
-        setStatus(`${selectedId} reset to bundled child admission. Save Draft to persist this removal.`, "good");
-      }),
+      resetMigration,
       button("Validate Preview", () => {
-        setStatus("Validating Enemy admission and projectile policy against the canonical child preview…", "info");
+        setStatus("Validating preserved Enemy migration data and projectile policy against the canonical child preview…", "info");
         void previewEnemies(policy).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
-          setStatus(`Child canonical preview accepted ${preview.enemies.length} Enemy definitions and projectile policy for ${preview.configRevision}.`, "good");
+          setStatus(`Child canonical preview accepted ${preview.enemies.length} Enemy definitions and projectile policy for ${preview.configRevision}. Only projectileMode is production-authoritative today.`, "good");
         }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Enemies preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
 
-    editorHost.append(identity, admission, rewards, visuals, diffPanel(base, enemy), actions);
+    editorHost.append(capabilities, identity, admission, rewards, visuals, diffPanel(base, enemy), actions);
   };
 
   search.addEventListener("input", renderList);
@@ -389,7 +406,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   roleFilter.addEventListener("change", renderList);
 
   const saveBar = el("div", "st-admin-sticky-save stx-savebar");
-  const saveStatus = el("span", undefined, "Load the active revision before saving an Enemy draft");
+  const saveStatus = el("span", undefined, "Load the active revision before saving an Enemy projectile draft");
   const save = button("Save Draft", () => {
     void (async () => {
       if (!serviceReady) return;
@@ -406,11 +423,11 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
         const revision = await api.createRevision({
           baseRevision: payload.active.revision,
           config,
-          message: "Admin Phase B · B06.4 Enemy admission + projectile policy draft",
+          message: "Admin A7 · Enemy projectile policy draft",
         });
         activePreview = validated;
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
-        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots Enemy admission and projectile policy only when a new session starts.`, "good");
+        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate projectileMode for the next session. Preserved Enemy minStage data remains preview-only and does not alter production spawning.`, "good");
       } catch (error: unknown) {
         const message = adminErrorMessage(error, "The Enemy draft could not be saved. Check the local Admin runtime and try again.");
         saveStatus.textContent = `Draft rejected · ${message}`;
@@ -422,7 +439,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
   }, "st-admin-btn primary");
   save.disabled = true;
   saveBar.append(
-    el("strong", undefined, "B06.4 Enemy + Combat Draft"),
+    el("strong", undefined, "A7 Enemy Projectile Draft"),
     saveStatus,
     el("div", "grow"),
     button("Discard", () => navigate(location.pathname)),
@@ -444,7 +461,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
     projectileMode.control.disabled = true;
     projectileMode.control.value = "auto";
     save.disabled = true;
-    saveStatus.textContent = "Load the active revision before saving an Enemy draft";
+    saveStatus.textContent = "Load the active revision before saving an Enemy projectile draft";
     setStatus("Loading active revision and canonical child Enemy registry…", "info");
     rebuildFilters();
     renderList();
@@ -468,15 +485,15 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       projectileMode.control.value = policy.projectileMode ?? "auto";
       projectileMode.control.disabled = false;
       save.disabled = false;
-      saveStatus.textContent = "Revision-backed · no direct runtime mutation";
+      saveStatus.textContent = "Projectile policy revision-backed · migration data preserved · no direct runtime mutation";
       rebuildFilters();
       renderList();
       renderEditor();
       const hasPolicy = (statePayload.active.config as EnemyAwareConfig).content?.enemies !== undefined;
       setStatus(
         hasPolicy
-          ? `Loaded active Enemy policy ${policy.configRevision} · normal-enemy projectiles: ${policy.projectileMode ?? "auto"}. Save Draft is isolated until History / Publish.`
-          : "Active revision predates B06.4 Enemy policy; bundled admission plus Admin-owned auto projectile behavior are shown until the first draft is saved.",
+          ? `Loaded active Enemy policy ${policy.configRevision} · normal-enemy projectiles: ${policy.projectileMode ?? "auto"}. Only projectileMode is production-authoritative; per-Enemy minStage remains migration data.`
+          : "Active revision predates B06.4 Enemy policy; bundled Enemy definitions are read-only and projectileMode defaults to Auto until the first draft is saved.",
         hasPolicy ? "good" : "warn",
       );
     }).catch((error: unknown) => {
@@ -491,7 +508,7 @@ export function renderPhaseBEnemies(navigate: Navigate): HTMLElement {
       projectileMode.control.disabled = true;
       save.disabled = true;
       listHost.replaceChildren(notice("The canonical Enemy registry could not be loaded. Retry after the local Admin service is available.", "bad"));
-      editorHost.replaceChildren(notice("Enemy admission overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
+      editorHost.replaceChildren(notice("Enemy capability inspection is disabled until the active revision and canonical preview are loaded.", "warn"));
       status.className = "stx-notice bad";
       status.replaceChildren(document.createTextNode(adminErrorMessage(error, "The Enemies Admin service is unavailable. Check the local runtime and try again.")), document.createTextNode(" "), button("Retry", load));
     });

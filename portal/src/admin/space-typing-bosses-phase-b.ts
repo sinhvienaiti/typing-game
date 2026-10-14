@@ -1,5 +1,6 @@
 import { SpaceTypingAdminApi, type SpaceTypingAdminConfig } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
 
@@ -73,13 +74,12 @@ function grid(...children: HTMLElement[]): HTMLElement {
   return root;
 }
 
-function field(label: string, value: string, maxLength?: number): { root: HTMLElement; control: HTMLInputElement } {
+function field(label: string, value: string): { root: HTMLElement; control: HTMLInputElement } {
   const root = el("label", "stx-field");
   root.append(el("span", undefined, label));
   const control = el("input") as HTMLInputElement;
   control.type = "text";
   control.value = value;
-  if (maxLength !== undefined) control.maxLength = maxLength;
   control.setAttribute("aria-label", label);
   root.append(control);
   return { root, control };
@@ -117,7 +117,7 @@ async function previewBosses(policy?: BossAdminPolicy): Promise<BossAdminPreview
 }
 
 function diffPanel(base: BossAdminPreviewItem, effective: BossAdminPreviewItem): HTMLElement {
-  const root = panel("Runtime Diff Preview", "Bundled canonical identity → effective draft identity");
+  const root = panel("Registry Preview Diff", "Bundled Boss identity → persisted Admin preview candidate");
   for (const [label, before, after] of [
     ["Name", base.name, effective.name],
     ["Title", base.title, effective.title],
@@ -126,25 +126,25 @@ function diffPanel(base: BossAdminPreviewItem, effective: BossAdminPreviewItem):
     const copy = el("div");
     copy.append(el("strong", undefined, label), el("small", undefined, `${before} → ${after}`));
     const changed = before !== after;
-    row.append(copy, badge(changed ? "CHANGED" : "UNCHANGED", changed ? "warn" : "info"));
+    row.append(copy, badge(changed ? "MIGRATION DATA" : "UNCHANGED", changed ? "warn" : "info"));
     root.append(row);
   }
   root.append(notice(
-    "Published Boss identity changes are snapshotted at the new-session boundary. Draft and preview never mutate the current gameplay session.",
-    "info",
+    "Preview-only migration data. Production bossIdentityForStage() still resolves bundled identities and does not consume these Admin overrides.",
+    "warn",
   ));
   return root;
 }
 
-export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
+export function renderPhaseBBosses(_navigate: Navigate): HTMLElement {
   const page = el("div");
   const revisionBadge = badge("ACTIVE · loading", "info");
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "Game Content · Canonical Boss Registry · B06.5"),
+    el("div", "st-admin-eyebrow", "Game Content · Canonical Boss Registry · B06.5 · A7"),
     el("h1", undefined, "Bosses"),
-    el("p", undefined, "Revision-backed Boss identity authoring. Only canonical name/title overrides are writable in B06.5; combat stats, phases, rewards, visuals and audio remain child-runtime owned until they have explicit canonical consumers."),
+    el("p", undefined, "Inspect canonical Boss identity, stage usage and combat ownership. Existing name/title overrides remain preserved migration data, but A7 closes Boss authoring until a production identity consumer is wired."),
   );
   header.append(copy, revisionBadge);
   page.append(header);
@@ -159,19 +159,18 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
   familyFilter.setAttribute("aria-label", "Boss family filter");
   const roleFilter = el("select", "st-admin-select") as HTMLSelectElement;
   roleFilter.setAttribute("aria-label", "Boss role filter");
-  filterBar.append(search, familyFilter, roleFilter, el("div", "st-admin-filter-spacer"), badge("APPLY · NEW SESSION", "info"));
+  filterBar.append(search, familyFilter, roleFilter, el("div", "st-admin-filter-spacer"), badge("PREVIEW · NO RUNTIME APPLY", "warn"));
 
   const body = el("div", "stx-grid");
-  const listPanel = panel("Canonical Bosses", "26 child-owned Boss identities · name/title are the only B06.5 authorable fields");
+  const listPanel = panel("Canonical Bosses", "26 child-owned Boss identities · bundled production authority");
   const listHost = el("div");
   listPanel.append(listHost);
-  const editorPanel = panel("Boss Identity Override", "Persists only `content.bosses.bosses.<id>.name/title`");
+  const editorPanel = panel("Boss Registry & Capabilities", "A7 fail-closed: no Boss write field has a proven production consumer yet");
   const editorHost = el("div");
   editorPanel.append(editorHost);
   body.append(listPanel, editorPanel);
   page.append(status, filterBar, body);
 
-  let loadedActiveRevision: string | null = null;
   let bundled: BossAdminPreview | null = null;
   let activePreview: BossAdminPreview | null = null;
   let selectedId = "";
@@ -236,28 +235,17 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
         el("small", undefined, `${boss.id} · ${current.title} · ${boss.family} · ${boss.role} · ${boss.rank}`),
       );
       const actions = el("div");
-      if (policy.bosses?.[boss.id] && Object.keys(policy.bosses[boss.id]).length > 0) actions.append(badge("OVERRIDE", "warn"));
-      const edit = button(selectedId === boss.id ? "Editing" : "Edit", () => {
+      if (policy.bosses?.[boss.id] && Object.keys(policy.bosses[boss.id]).length > 0) actions.append(badge("MIGRATION DATA", "warn"));
+      const view = button(selectedId === boss.id ? "Viewing" : "View", () => {
         selectedId = boss.id;
         renderList();
         renderEditor();
       }, selectedId === boss.id ? "st-admin-btn primary" : "st-admin-btn");
-      edit.disabled = !serviceReady;
-      actions.append(edit);
+      view.disabled = !serviceReady;
+      actions.append(view);
       row.append(copyNode, actions);
       listHost.append(row);
     }
-  };
-
-  const updateOverride = (id: string, base: BossAdminPreviewItem, name: string, title: string): void => {
-    const normalizedName = name.trim();
-    const normalizedTitle = title.trim();
-    const next: BossAdminOverride = {};
-    if (normalizedName !== base.name) next.name = normalizedName;
-    if (normalizedTitle !== base.title) next.title = normalizedTitle;
-    policy.bosses ??= {};
-    if (Object.keys(next).length === 0) delete policy.bosses[id];
-    else policy.bosses[id] = next;
   };
 
   const renderEditor = (): void => {
@@ -265,104 +253,82 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
     const base = baseBoss(selectedId);
     const boss = effectiveBoss(selectedId);
     if (!serviceReady || !base || !boss) {
-      editorHost.append(notice(serviceReady ? "No Boss is selected." : "Load the active revision and canonical Boss preview before editing identity overrides.", serviceReady ? "warn" : "info"));
+      editorHost.append(notice(serviceReady ? "No Boss is selected." : "Load the active revision and canonical Boss preview before inspecting capabilities.", serviceReady ? "warn" : "info"));
       return;
     }
 
-    editorHost.append(notice(`ID ${boss.id} · ${boss.family}/${boss.role}/${boss.rank} · apply boundary: new session`, "info"));
-    editorHost.append(notice(
-      "HP, Shield, Armor, Damage, Speed, phase thresholds, skills, projectiles, VFX, SFX and rewards are intentionally read-only/not persisted. The current child contract exposes only canonical `name` and `title` consumers.",
-      "warn",
-    ));
+    editorHost.append(notice(`ID ${boss.id} · ${boss.family}/${boss.role}/${boss.rank} · production Admin write boundary: none`, "info"));
 
-    const identity = panel("Canonical Identity", "Only Name and Title are authorable in B06.5");
-    const name = field("Name", boss.name, 100);
-    const title = field("Title", boss.title, 160);
-    const immutable = grid(
-      readonlyField("Family", boss.family),
-      readonlyField("Role", boss.role),
-      readonlyField("Rank", boss.rank),
+    const capabilities = panel("Capabilities", "A7 authority is based on production consumers, not preview availability.");
+    capabilities.append(
+      createAssetTuningCapabilityState({
+        label: "Name / Title",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "Existing overrides are preserved and previewable, but production bossIdentityForStage() does not consume them yet.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Identity / Stage Usage",
+        status: "READ-ONLY REFERENCE",
+        description: "ID, role, rank, family and stage selection are bundled Boss/campaign authority.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Phases / Mechanics",
+        status: "READ-ONLY REFERENCE",
+        description: "Phase thresholds, projectile patterns, typing mechanics and skills remain production code authority.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Media / VFX / SFX",
+        status: "REQUIRES CANONICAL MIGRATION",
+        description: "No immutable Media V2 Boss art/GLB/VFX/SFX binding is owned by the current Admin policy.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Rewards / Drops",
+        status: "DEFERRED / UNSUPPORTED",
+        description: "There is no canonical per-Boss Admin reward/drop relationship in the current runtime contract.",
+      }),
     );
-    const onInput = (): void => {
-      updateOverride(selectedId, base, name.control.value, title.control.value);
-      renderList();
-    };
-    name.control.addEventListener("input", onInput);
-    title.control.addEventListener("input", onInput);
-    identity.append(grid(name.root, title.root), immutable, notice("Server constraints: Name ≤ 100 characters, Title ≤ 160 characters; blank values are rejected.", "info"));
+
+    const identity = panel("Canonical Identity", "Migration preview is read-only until production identity wiring exists");
+    identity.append(
+      grid(
+        readonlyField("Name", boss.name),
+        readonlyField("Title", boss.title),
+      ),
+      grid(
+        readonlyField("Family", boss.family),
+        readonlyField("Role", boss.role),
+        readonlyField("Rank", boss.rank),
+      ),
+      notice("Name/title values shown here may include an older persisted Admin override. A7 preserves that data but does not offer an authoring control because gameplay still resolves the bundled Boss identity.", "warn"),
+    );
 
     const actions = el("div", "st-admin-page-actions");
     actions.append(
-      button("Reset Boss Override", () => {
-        if (policy.bosses) delete policy.bosses[selectedId];
-        renderList();
-        renderEditor();
-        setStatus(`${selectedId} reset to bundled child identity. Save Draft to persist this removal.`, "good");
-      }),
       button("Validate Preview", () => {
-        setStatus("Validating Boss identity overrides against the canonical child preview…", "info");
+        setStatus("Validating preserved Boss migration data against the canonical child registry preview…", "info");
         void previewBosses(policy).then((preview) => {
           activePreview = preview;
           renderList();
           renderEditor();
-          setStatus(`Child canonical preview accepted ${preview.bosses.length} Boss definitions for ${preview.configRevision}.`, "good");
+          setStatus(`Child canonical preview accepted ${preview.bosses.length} Boss definitions for ${preview.configRevision}. This confirms preview compatibility, not production runtime authority.`, "good");
         }).catch((error: unknown) => setStatus(adminErrorMessage(error, "The Bosses preview could not be validated. Check the local Admin runtime and try again."), "bad"));
       }, "st-admin-btn primary"),
     );
 
-    editorHost.append(identity, diffPanel(base, boss), actions);
+    editorHost.append(capabilities, identity, diffPanel(base, boss), actions);
   };
 
   search.addEventListener("input", renderList);
   familyFilter.addEventListener("change", renderList);
   roleFilter.addEventListener("change", renderList);
 
-  const saveBar = el("div", "st-admin-sticky-save stx-savebar");
-  const saveStatus = el("span", undefined, "Load the active revision before saving a Boss draft");
-  const save = button("Save Draft", () => {
-    void (async () => {
-      if (!serviceReady) return;
-      save.disabled = true;
-      saveStatus.textContent = "Validating against child runtime…";
-      try {
-        const payload = await api.getState();
-        if (loadedActiveRevision === null || loadedActiveRevision !== payload.state.activeRevision) {
-          throw new Error(`Active revision changed from ${loadedActiveRevision ?? "not-loaded"} to ${payload.state.activeRevision}. Reload this screen before saving to avoid overwriting newer published changes.`);
-        }
-        const validated = await previewBosses(policy);
-        const config = structuredClone(payload.active.config) as BossAwareConfig;
-        config.content = { ...(config.content ?? {}), bosses: structuredClone(policy) };
-        const revision = await api.createRevision({
-          baseRevision: payload.active.revision,
-          config,
-          message: "Admin Phase B · B06.5 Boss identity draft",
-        });
-        activePreview = validated;
-        saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
-        setStatus(`Draft ${revision.revision} passed child preview + server validation. Publish from History to activate it; gameplay snapshots Boss identity only when a new session starts.`, "good");
-      } catch (error: unknown) {
-        const message = adminErrorMessage(error, "The Boss draft could not be saved. Check the local Admin runtime and try again.");
-        saveStatus.textContent = `Draft rejected · ${message}`;
-        setStatus(`Validation/save failed: ${message}`, "bad");
-      } finally {
-        save.disabled = !serviceReady;
-      }
-    })();
-  }, "st-admin-btn primary");
-  save.disabled = true;
-  saveBar.append(
-    el("strong", undefined, "B06.5 Boss Draft"),
-    saveStatus,
-    el("div", "grow"),
-    button("Discard", () => navigate(location.pathname)),
-    save,
-  );
-  page.append(saveBar);
+  const boundary = panel("A7 Publish Boundary", "No production-backed Boss authoring seam is open in this checkpoint");
+  boundary.append(notice("Draft/Publish authoring is intentionally disabled on this page. Existing persisted name/title migration data remains visible and previewable, but changing it would imply runtime authority that the child game does not yet have.", "warn"));
+  page.append(boundary);
 
   const load = (): void => {
     const generation = ++loadGeneration;
     serviceReady = false;
-    loadedActiveRevision = null;
     bundled = null;
     activePreview = null;
     revisionBadge.className = "st-admin-status info";
@@ -370,8 +336,6 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
     search.disabled = true;
     familyFilter.disabled = true;
     roleFilter.disabled = true;
-    save.disabled = true;
-    saveStatus.textContent = "Load the active revision before saving a Boss draft";
     setStatus("Loading active revision and canonical child Boss registry…", "info");
     rebuildFilters();
     renderList();
@@ -381,7 +345,6 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
       const nextPolicy = policyFrom(statePayload.active.config);
       const nextPreview = await previewBosses(nextPolicy);
       if (generation !== loadGeneration) return;
-      loadedActiveRevision = statePayload.state.activeRevision;
       bundled = bundledPreview;
       policy = nextPolicy;
       activePreview = nextPreview;
@@ -392,30 +355,26 @@ export function renderPhaseBBosses(navigate: Navigate): HTMLElement {
       search.disabled = false;
       familyFilter.disabled = false;
       roleFilter.disabled = false;
-      save.disabled = false;
-      saveStatus.textContent = "Revision-backed · no direct runtime mutation";
       rebuildFilters();
       renderList();
       renderEditor();
       const hasPolicy = (statePayload.active.config as BossAwareConfig).content?.bosses !== undefined;
       setStatus(
         hasPolicy
-          ? `Loaded active Boss identity policy ${policy.configRevision}. Save Draft is isolated until History / Publish.`
-          : "Active revision predates B06.5 Boss policy; bundled child identities are shown until the first draft is saved.",
-        hasPolicy ? "good" : "warn",
+          ? `Loaded Boss migration policy ${policy.configRevision}. Name/title overrides are preserved for preview only; production bossIdentityForStage() remains bundled-authoritative.`
+          : "No Boss migration policy is stored in the active revision. Bundled child identities are production-authoritative and this A7 page is read-only.",
+        hasPolicy ? "warn" : "good",
       );
     }).catch((error: unknown) => {
       if (generation !== loadGeneration) return;
       serviceReady = false;
-      loadedActiveRevision = null;
       revisionBadge.className = "st-admin-status bad";
       revisionBadge.textContent = "ACTIVE · unavailable";
       search.disabled = true;
       familyFilter.disabled = true;
       roleFilter.disabled = true;
-      save.disabled = true;
       listHost.replaceChildren(notice("The canonical Boss registry could not be loaded. Retry after the local Admin service is available.", "bad"));
-      editorHost.replaceChildren(notice("Boss identity overrides are disabled until the active revision and canonical preview are loaded.", "warn"));
+      editorHost.replaceChildren(notice("Boss capability inspection is disabled until the active revision and canonical preview are loaded.", "warn"));
       status.className = "stx-notice bad";
       status.replaceChildren(document.createTextNode(adminErrorMessage(error, "The Bosses Admin service is unavailable. Check the local runtime and try again.")), document.createTextNode(" "), button("Retry", load));
     });
