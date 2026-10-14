@@ -1,8 +1,8 @@
-// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
-// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
-// Shop policy, generation, pricing, availability, offers, services and
-// transaction ownership sources remain unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10 re-audit: 71de632..4f62c94 changes Ship unlock runtime authority and
+// adds the unified unlock/economy capability truth map. Shop policy,
+// generation, pricing, availability, offers, services and transaction
+// ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",

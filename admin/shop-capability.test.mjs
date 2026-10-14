@@ -1,11 +1,20 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   createShopCapabilityManifest,
   SHOP_AUDITED_CHILD_SHA,
   SHOP_FIELDS,
   SHOP_TABS,
 } from "./shop-capability.mjs";
+import { createCurrencyCapabilityManifest } from "./currency-capability.mjs";
+import {
+  A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA,
+  createUnlockEconomyCapabilityManifest,
+} from "./unlock-economy-capability.mjs";
 
 const contract = {
   configNamespace: "economy.shop",
@@ -33,7 +42,7 @@ test("Shop capability manifest opens only canonical runtime-backed authoring sea
   assert.equal(manifest.protocolVersion, 4);
   assert.equal(manifest.mode, "runtime-backed-authoring");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "71de6326ab448b4e0977d5daf9bd0187591cb32d");
+  assert.equal(manifest.auditedChildSha, "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6");
   assert.deepEqual(manifest.tabs, SHOP_TABS);
   assert.deepEqual(manifest.fields.map((field) => field.name), SHOP_FIELDS);
 
@@ -73,4 +82,36 @@ test("Shop authoring fails closed when the child preview contract is unavailable
   assert.equal(manifest.authoring.enabled, false);
   assert.equal(manifest.preview.available, false);
   assert.ok(manifest.fields.every((field) => field.authorable === false));
+});
+
+test("A10 unlock/economy truth map mirrors the pinned child and never invents player-state authoring", () => {
+  const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
+  const child = resolve(root, "games/space-typing");
+  const childHead = execFileSync("git", ["-C", child, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+  assert.equal(childHead, A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA);
+  assert.equal(SHOP_AUDITED_CHILD_SHA, A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA);
+
+  const childCapabilities = readFileSync(resolve(child, "src/admin/a10-unlock-economy-capabilities.ts"), "utf8");
+  for (const id of ["ship.unlock-stage", "shop.policy", "wallet.currency-balances", "player.ownership-entitlements", "loot.equipment-drop-tables", "reward.combat-credit-drop-policy"]) {
+    assert.ok(childCapabilities.includes(`id: \"${id}\"`), `Pinned child A10 capability is missing ${id}`);
+  }
+  assert.ok(childCapabilities.includes('productionConsumer: "src/characters/state.ts::unlockCharactersForStage()"'));
+  assert.ok(childCapabilities.includes('applyBoundary: "new-session+new-shop-instance"'));
+
+  const manifest = createUnlockEconomyCapabilityManifest();
+  assert.equal(manifest.protocolVersion, 1);
+  assert.equal(manifest.milestone, "A10.0");
+  assert.equal(manifest.auditedChildSha, childHead);
+  assert.deepEqual(manifest.authorableIds, ["ship.unlock-stage", "shop.policy"]);
+  assert.ok(manifest.readOnlyIds.includes("wallet.currency-balances"));
+  assert.ok(manifest.readOnlyIds.includes("player.ownership-entitlements"));
+  assert.ok(manifest.readOnlyIds.includes("loot.equipment-drop-tables"));
+  assert.equal(manifest.invariants.walletMutationFromContentAdmin, false);
+  assert.equal(manifest.invariants.entitlementMutationFromContentAdmin, false);
+  assert.equal(manifest.invariants.fakeRewardOrDropPublishing, false);
+
+  const currencies = createCurrencyCapabilityManifest();
+  assert.equal(currencies.capabilities.balanceAuthoring, false);
+  assert.equal(currencies.capabilities.definitionAuthoring, false);
+  assert.equal(currencies.authoring.enabled, false);
 });
