@@ -145,8 +145,9 @@ requireText(childPreview, 'playerProjectileProfile(activeCandidate.characterId).
 requireText(childPreview, 'withShipAssetPreviewRuntime(activeCandidate', "Fire preview scopes production runtime to ephemeral candidate");
 requireText(childPreview, 'prepareShipAssetPreviewCandidate(', "A5.4 preview prepares candidate-owned exact media resources before rendering");
 requireText(childPreview, 'releaseShipAssetPreviewCandidate(', "A5.4 preview releases superseded/disposed candidate resources");
-requireText(childSfx, 'boltImpact(power: number, pan = 0, variant: ImpactVariant = "energy")', "production Sfx exposes typed impact variants");
-requireText(childSfx, 'shot(multiplier: number)', "production Sfx owns the generic launch cue");
+requireText(childSfx, 'export type ImpactVariant = PlayerImpactVariant | "energy"', "production Sfx keeps a typed impact-variant boundary");
+requireText(childSfx, 'boltImpact(power = 1, pan = 0, variant: ImpactVariant = "crystal"): void', "production Sfx exposes typed impact variants with the current production default");
+requireText(childSfx, 'shot(multiplier = 1): void', "production Sfx owns the generic launch cue");
 forbidText(childPolicy, 'projectileUrl', "child policy must not accept arbitrary projectile URLs");
 forbidText(childPolicy, 'projectilePath', "child policy must not accept arbitrary projectile filesystem paths");
 forbidText(childPolicy, 'impactSfxAssetVersionId', "A5.3 must not introduce an independent impact-SFX field that can drift from the recipe");
