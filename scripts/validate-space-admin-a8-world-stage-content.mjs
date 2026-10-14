@@ -21,6 +21,7 @@ const [
   stagesPage,
   typingPage,
   router,
+  capabilityUi,
 ] = await Promise.all([
   readFile(resolve(child, "src/admin/a8-world-stage-content-capabilities.ts"), "utf8"),
   readFile(resolve(child, "src/admin/stage-runtime-policy.ts"), "utf8"),
@@ -34,6 +35,7 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-stages-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-typing-content-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-a8-world-stage-capabilities.ts"), "utf8"),
 ]);
 
 function requireText(source, needle, label) {
@@ -91,11 +93,18 @@ requireText(worldsPage, "api.createRevision", "World Admin uses immutable Draft 
 forbidText(worldsPage, "api.publish(", "World Admin cannot direct-publish");
 requireText(worldsPage, "Reload this screen before saving to avoid overwriting newer published changes", "World Admin has stale-active protection");
 
-// The two existing administrator views must remain reachable without inventing a third schema.
-requireText(router, 'if (path === `${BASE}/stages`) return renderPhaseBWorlds(navigate);', "World Roster route remains wired");
-requireText(router, 'if (path === `${BASE}/worlds-stages`) return renderPhaseBStages(navigate);', "Stage Overrides route remains wired");
+// The two administrator views stay separate while sharing one visible A8 authority boundary.
+requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world")', "World Roster route carries the A8 capability summary");
+requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage")', "Stage Overrides route carries the A8 capability summary");
 requireText(worldsPage, 'navigate("/admin/space-typing/worlds-stages")', "World editor links to Stage editor");
 requireText(stagesPage, 'navigate("/admin/space-typing/stages")', "Stage editor links to World editor");
+for (const label of ["World Enemy Roster", "Stage Gameplay Tuning", "Routes", "Objectives", "Daily / Weekly Challenges", "Typing Assignment"]) {
+  requireText(capabilityUi, label, `A8 UI surfaces ${label}`);
+}
+requireText(capabilityUi, "AUTHORITY VERIFIED", "A8 UI declares verified authority boundary");
+requireText(capabilityUi, "READ-ONLY REFERENCE", "A8 UI visibly marks read-only adjacent systems");
+requireText(capabilityUi, "DEFERRED / UNSUPPORTED", "A8 UI visibly marks unsupported Typing assignment");
+requireText(capabilityUi, "World Music, Backgrounds and Rewards remain separate canonical Admin domains", "A8 UI preserves dedicated domain ownership");
 
 // Adjacent A8 systems remain canonical runtime references, not fake authoring seams.
 requireText(routeRuntime, "export function createRouteGraph(", "Routes stay deterministic runtime state");
@@ -103,11 +112,6 @@ requireText(routeRuntime, "export function isValidRouteGraph(", "Routes retain r
 requireText(objectives, "export function objectiveForStage(", "Objectives stay code-derived from Stage/Difficulty");
 requireText(challenges, "export function dailySeed(", "Daily challenge identity stays deterministic");
 requireText(challenges, "export function weeklyChallengeIdentity(", "Weekly challenge identity stays deterministic");
-requireText(capabilities, 'id: "route.graph"', "Route capability is explicit");
-requireText(capabilities, 'id: "objective.definition"', "Objective capability is explicit");
-requireText(capabilities, 'id: "challenge.daily-weekly-identity"', "Challenge capability is explicit");
-requireText(capabilities, 'id: "typing.stage-assignment"', "Typing assignment capability is explicit");
-requireText(capabilities, 'status: "DEFERRED / UNSUPPORTED"', "Unsupported A8 authoring stays closed");
 requireText(typingPage, "Editing is intentionally disabled here", "Typing Content remains canonical read/reference only");
 forbidText(typingPage, "api.createRevision", "Typing Content cannot create fake Stage assignment Drafts");
 
