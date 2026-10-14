@@ -4,6 +4,7 @@ import {
   type SpaceTypingAdminConfig,
 } from "./api";
 import { adminErrorMessage } from "./admin-http";
+import { AdminHelpScope, createAdminFieldShell } from "./v2/admin-help";
 import { createAssetTuningCapabilityState } from "./v2/asset-tuning-studio";
 
 const api = new SpaceTypingAdminApi();
@@ -189,6 +190,7 @@ function statsSummary(base: EquipmentAdminPreviewItem, effective: EquipmentAdmin
 
 export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
   const page = el("div");
+  const helpScope = new AdminHelpScope();
   const revisionBadge = badge("ACTIVE · loading", "info");
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
@@ -327,21 +329,44 @@ export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
       }),
     );
 
-    const identity = panel("Identity", "Name and description are authorable; ID / slot / tier / icon remain child-owned.");
+    const identity = panel("Identity", "Canonical Equipment identity");
     const name = field("Name", item.name);
     (name.control as HTMLInputElement).maxLength = 100;
     name.control.addEventListener("input", () => {
       overrideFor(selectedId).name = name.control.value;
       renderList();
     });
+    const slot = field("Slot", item.slot, EQUIPMENT_SLOTS);
+    slot.control.disabled = true;
+    const slotShell = createAdminFieldShell(helpScope, {
+      label: "Slot",
+      control: slot.control,
+      help: {
+        title: "Equipment Slot",
+        content: "Owned by the child Equipment registry. Changing a slot would change the canonical item identity, so Admin keeps it read-only.",
+      },
+      stateMessage: "Child-owned · read only",
+      stateTone: "info",
+    });
+    const tier = field("Tier", String(item.tier), ["1", "2", "3"]);
+    tier.control.disabled = true;
+    const tierShell = createAdminFieldShell(helpScope, {
+      label: "Tier",
+      control: tier.control,
+      help: {
+        title: "Equipment Tier",
+        content: "Mk.I, Mk.II and Mk.III are registry-owned identities. Admin can tune the allowed policy fields without reclassifying the item tier.",
+      },
+      stateMessage: "Registry-owned · read only",
+      stateTone: "info",
+    });
     const description = descriptionField(item.description);
     description.control.addEventListener("input", () => {
       overrideFor(selectedId).description = description.control.value;
     });
-    identity.append(grid(name.root, field("Slot (immutable)", item.slot, EQUIPMENT_SLOTS).root, field("Tier (immutable)", String(item.tier), ["1", "2", "3"]).root), description.root);
-    for (const control of identity.querySelectorAll<HTMLInputElement | HTMLSelectElement>("select")) control.disabled = true;
+    identity.append(grid(name.root, slotShell, tierShell), description.root);
 
-    const stats = panel("Core Stat Bonuses", "Canonical child stat keys · allowed range -100..100");
+    const stats = panel("Core Stat Bonuses", "Allowed range -100..100 · applied after Publish on a new session");
     const statFields: HTMLElement[] = [];
     for (const key of CORE_STATS) {
       const entry = field(key, String(item.stats[key] ?? 0), undefined, "number");
@@ -364,8 +389,18 @@ export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
       overrideFor(selectedId).perk = perk.control.value === "__none__" ? null : perk.control.value;
       renderList();
     });
-    const perkPanel = panel("Perk", "Mk.II / Mk.III behavior hook from the canonical child perk registry.");
-    perkPanel.append(perk.root, notice(item.perk ? `Effective perk: ${item.perk}` : "No effective perk.", item.perk ? "good" : "info"));
+    const perkPanel = panel("Perk", "Canonical gameplay hook");
+    const perkShell = createAdminFieldShell(helpScope, {
+      label: "Perk",
+      control: perk.control,
+      help: {
+        title: "Equipment Perk",
+        content: "Choose from perk IDs already owned by the child registry. Selecting None removes the effective perk override; it does not create a new perk definition.",
+      },
+      stateMessage: item.perk ? `Effective perk · ${item.perk}` : "No effective perk",
+      stateTone: item.perk ? "good" : "info",
+    });
+    perkPanel.append(perkShell);
 
     const actions = el("div", "st-admin-page-actions");
     actions.append(
@@ -491,6 +526,7 @@ export function renderPhaseBEquipment(navigate: Navigate): HTMLElement {
     });
   };
 
+  helpScope.observeRoot(page);
   load();
   return page;
 }
