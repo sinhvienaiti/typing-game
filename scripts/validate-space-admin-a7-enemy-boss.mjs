@@ -93,13 +93,35 @@ requireText(capabilities, 'id: "boss.metadata-name-title"', "Boss metadata capab
 forbidText(bossIdentity, 'activeBossRuntimeOverride', "bossIdentityForStage must not be mistaken for consuming the Admin Boss metadata override");
 requireText(bossIdentity, 'export function bossIdentityForStage', "A7 records the current bundled Boss production identity resolver");
 
-// Existing pages retain immutable Draft creation and History-owned activation.
-requireText(enemyPage, 'const validated = await previewEnemies(policy)', "Enemies validate through the canonical child preview before Draft creation");
-requireText(enemyPage, 'api.createRevision', "Enemies retain immutable Draft creation");
+// A7.1 UI must expose shared capability states and fail closed around migration-only fields.
+requireText(enemyPage, 'createAssetTuningCapabilityState', "Enemies use shared A7 capability UI");
+requireText(enemyPage, 'label: "Normal Enemy Projectile Policy"', "Enemies expose the production-backed projectile capability");
+requireText(enemyPage, 'status: "SUPPORTED NOW"', "Enemy projectile policy is visibly supported");
+requireText(enemyPage, 'label: "Minimum Stage"', "Enemies expose minStage capability state");
+requireText(enemyPage, 'status: "REQUIRES CANONICAL MIGRATION"', "Enemy minStage is migration-gated");
+requireText(enemyPage, 'minStage.control.disabled = true', "Enemy minStage editor is fail-closed");
+requireText(enemyPage, 'badge("PROJECTILES · NEW SESSION"', "Enemy new-session badge is scoped to the production-backed projectile policy");
+requireText(enemyPage, 'const validated = await previewEnemies(policy)', "Enemies validate through the canonical child preview before projectile Draft creation");
+requireText(enemyPage, 'api.createRevision', "Enemies retain immutable Draft creation for projectileMode");
 forbidText(enemyPage, 'api.publish(', "Enemies must not bypass History with direct publish");
-requireText(bossPage, 'const validated = await previewBosses(policy)', "Bosses validate through the canonical child preview before Draft creation");
-requireText(bossPage, 'api.createRevision', "Bosses retain immutable Draft creation");
-forbidText(bossPage, 'api.publish(', "Bosses must not bypass History with direct publish");
+forbidText(enemyPage, 'Canonical runtime consumer: Enemy spawn profile minimum-stage gate', "Enemies must not claim minStage has a production consumer");
+forbidText(enemyPage, 'This takes effect only for a new game session after Publish.', "Enemies must not claim minStage preview data applies at runtime");
+forbidText(enemyPage, 'gameplay snapshots Enemy admission', "Enemies must not claim gameplay snapshots migration-only admission data");
+
+requireText(bossPage, 'createAssetTuningCapabilityState', "Bosses use shared A7 capability UI");
+requireText(bossPage, 'label: "Name / Title"', "Bosses expose metadata capability state");
+requireText(bossPage, 'status: "REQUIRES CANONICAL MIGRATION"', "Boss metadata is visibly migration-gated");
+requireText(bossPage, 'label: "Phases / Mechanics"', "Bosses expose read-only combat ownership");
+requireText(bossPage, 'status: "READ-ONLY REFERENCE"', "Boss production references remain read-only");
+requireText(bossPage, 'label: "Rewards / Drops"', "Bosses expose unsupported reward binding");
+requireText(bossPage, 'status: "DEFERRED / UNSUPPORTED"', "Boss reward authoring remains closed");
+requireText(bossPage, 'badge("PREVIEW · NO RUNTIME APPLY"', "Boss page declares preview-only authority");
+requireText(bossPage, 'void previewBosses(policy)', "Bosses retain canonical preview validation for preserved migration data");
+forbidText(bossPage, 'api.createRevision', "Boss page must not create Drafts while no Boss write field has a production consumer");
+forbidText(bossPage, 'api.publish(', "Boss page must not publish migration-only metadata");
+forbidText(bossPage, 'Published Boss identity changes are snapshotted at the new-session boundary', "Bosses must not claim migration metadata is runtime-live");
+forbidText(bossPage, 'current child contract exposes only canonical `name` and `title` consumers', "Bosses must not claim name/title production consumers exist");
+forbidText(bossPage, 'gameplay snapshots Boss identity', "Bosses must not claim gameplay snapshots the Admin override");
 
 // Do not invent rich write seams before child runtime ownership exists.
 for (const fakeField of [
@@ -116,4 +138,4 @@ for (const fakeField of [
   forbidText(bossPolicy, fakeField, `Boss policy must not invent ${fakeField}`);
 }
 
-console.log("Space Typing Admin A7.0 Enemies/Bosses capability audit: PASS — projectileMode is production-backed; Enemy minStage and Boss name/title remain migration-gated until real production consumers exist; rich registry/combat/media ownership stays read-only or closed.");
+console.log("Space Typing Admin A7 Enemies/Bosses capability audit: PASS — projectileMode is production-backed; Enemy minStage and Boss name/title are visibly migration-gated; Boss authoring is fail-closed until real production consumers exist.");
