@@ -63,7 +63,9 @@ for (const status of [
 }
 
 // Enemy global projectile mode is the one proven writable production seam.
-requireText(enemyPolicy, 'projectileMode?: AdminEnemyProjectileMode', "Enemy Admin policy persists projectileMode");
+requireText(enemyPolicy, 'projectileMode: AdminEnemyProjectileMode | null', "Enemy runtime session carries projectileMode");
+requireText(enemyPolicy, 'const POLICY_KEYS = new Set(["configRevision", "projectileMode", "enemies"])', "Enemy runtime policy accepts projectileMode");
+requireText(enemyPolicy, 'sanitizeProjectileMode(policy.projectileMode)', "Enemy runtime policy materializes projectileMode");
 requireText(enemyProjectilePolicy, 'ACTIVE_ENEMY_RUNTIME_SESSION', "Enemy projectile resolver reads the active published Admin session");
 requireText(enemyProjectilePolicy, 'resolveEnemyProjectileMode', "Enemy projectile policy exposes a production resolver");
 requireText(enemyProjectilePolicy, 'normalEnemyProjectilesEnabled', "Enemy projectile policy exposes the production enablement consumer");
@@ -72,7 +74,7 @@ requireText(capabilities, 'productionConsumer: "src/combat/enemy-projectile-poli
 
 // minStage currently has persistence + validation + registry preview only.
 requireText(enemyPolicy, 'minStage?: number', "Enemy policy still accepts minStage for compatibility/migration");
-requireText(enemyPreview, 'minStage: override?.minStage ?? definition.minStage', "Enemy Admin preview can materialize a minStage candidate");
+requireText(enemyPreview, 'minStage: override?.minStage ?? base.minStage', "Enemy Admin preview can materialize a minStage candidate");
 requireText(capabilities, 'id: "enemy.min-stage"', "Enemy minStage capability exists");
 requireText(capabilities, 'status: "REQUIRES CANONICAL MIGRATION"', "A7 keeps unproven authoring migration-gated");
 forbidText(enemyRegistry, 'activeEnemyRuntimeOverride', "Bundled enemyDefinition must not be mistaken for an Admin-aware resolver");
