@@ -40,6 +40,7 @@ on:
       - "scripts/validate-space-admin-daily-weekly.mjs"
       - "scripts/validate-space-admin-a7-enemy-boss.mjs"
       - "scripts/validate-space-admin-a8-world-stage-content.mjs"
+      - "scripts/validate-space-admin-a9-audio-sfx-vfx.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -97,6 +98,8 @@ jobs:
         run: node scripts/validate-space-admin-alternative-modes.mjs
       - name: Validate Admin Audio mapping against pinned child
         run: node scripts/validate-space-admin-audio.mjs
+      - name: Validate A9 Audio / SFX / VFX completion boundary
+        run: node scripts/validate-space-admin-a9-audio-sfx-vfx.mjs
       - name: Validate UI Assets runtime ownership audit
         run: node scripts/validate-space-admin-ui-assets.mjs
       - name: Validate QA Sandbox runtime ownership audit
@@ -134,6 +137,7 @@ jobs:
           node --check scripts/validate-space-admin-daily-weekly.mjs
           node --check scripts/validate-space-admin-a7-enemy-boss.mjs
           node --check scripts/validate-space-admin-a8-world-stage-content.mjs
+          node --check scripts/validate-space-admin-a9-audio-sfx-vfx.mjs
       - name: Test immutable revision, CAS and Admin V2 security/media semantics
         run: pnpm admin:test
       - name: Test Typing Content canonical catalog
@@ -221,6 +225,8 @@ jobs:
         run: pnpm --dir games/space-typing ranked:audit
       - name: Audit Space Typing Alternative Modes contract
         run: pnpm --dir games/space-typing alternative-modes:audit
+      - name: Audit Space Typing SFX contract
+        run: pnpm --dir games/space-typing sfx:audit
       - name: Audit Space Typing UI Assets contract
         run: pnpm --dir games/space-typing ui-assets:audit
       - name: Audit Space Typing QA Sandbox contract
