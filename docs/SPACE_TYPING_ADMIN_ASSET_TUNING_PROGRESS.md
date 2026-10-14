@@ -11,7 +11,8 @@ Last updated: 2026-10-14
 - **A5.4 — Ship exact-version 3D relief bundle assignment + production preview lifecycle: COMPLETE**
 - **A6.0 — Skills / Equipment canonical capability audit + executable matrix: COMPLETE**
 - **A6.1 — Skills / Equipment shared capability-state UI adoption: COMPLETE**
-- **First unfinished unit: A6.2 — shared V2 field/help ergonomics for canonical Skills / Equipment gameplay editors**
+- **A6.2 — Skills / Equipment shared V2 field/help ergonomics: COMPLETE**
+- **First unfinished unit: A7.0 — Enemies / Bosses canonical capability audit**
 
 Manual visual acceptance remains intentionally non-blocking and is tracked separately. An unavailable historical CI log is also non-blocking under `docs/SPACE_TYPING_CI_CONTINUATION_POLICY.md`; use the next safe commit as the fresh diagnostic checkpoint instead of stopping implementation.
 
@@ -23,7 +24,7 @@ Manual visual acceptance remains intentionally non-blocking and is tracked separ
 - Branch: `feat/space-typing-admin-uiux`
 - PR: `#49` — OPEN / DRAFT
 - Parent gitlink pins child `0d8ed88a90b370e6547e9846cfca1c46ef2a342f`.
-- Dedicated A6 Skills / Equipment CI run `38522696356` passed capability validation and Portal build on the A6.1 UI checkpoint.
+- Dedicated A6 Skills / Equipment CI run `38523367231` passed A6.2 capability/help validation and Portal build.
 - Latest full Admin / Platform runs must still be re-checked before a handoff claims the entire parent branch green; do not infer their conclusion from the dedicated A6 gate.
 
 ### Child runtime
@@ -203,14 +204,12 @@ A6 tests fail closed if a `SUPPORTED NOW` capability lacks persistence, validato
 
 Skills and Equipment retain their existing canonical registry/data-preview and immutable Draft lifecycle. A6.1 does **not** relabel those previews as a production visual renderer.
 
-The pages now reuse `createAssetTuningCapabilityState()` from the shared V2 Asset Tuning primitives.
+The pages reuse `createAssetTuningCapabilityState()` from the shared V2 Asset Tuning primitives.
 
 ### Skills operator-facing states
 
 - `Gameplay Policy` — `AVAILABLE`
 - `Media / VFX` — `REQUIRES CANONICAL MIGRATION`
-
-The previous long developer-centric warning about hypothetical damage/radius/projectile/VFX/SFX fields is removed.
 
 ### Equipment operator-facing states
 
@@ -219,7 +218,7 @@ The previous long developer-centric warning about hypothetical damage/radius/pro
 - `Media Binding` — `REQUIRES CANONICAL MIGRATION`
 - `VFX / SFX` — `DEFERRED / UNSUPPORTED`
 
-The previous long future-fields warning is removed.
+The previous long developer-centric warning copy was removed.
 
 Lifecycle remains:
 
@@ -227,15 +226,40 @@ canonical child preview validation → immutable Draft revision → shared Histo
 
 Skills / Equipment editors do not call `api.publish()` directly.
 
-Dedicated A6 CI protects:
+---
 
-- child capability matrix identities/statuses;
-- canonical authorable allow-lists;
-- absence of fake Media/VFX/SFX fields;
-- child-preview-before-Draft lifecycle;
-- History-owned activation boundary;
-- shared capability-state UI adoption;
-- Portal build.
+## A6.2 — Shared V2 field/help ergonomics
+
+A6.2 closes the A6 rebuild without changing canonical field ownership.
+
+Both Skills and Equipment now use `AdminHelpScope` + `createAdminFieldShell()` for ambiguous or immutable controls. Tooltips use the shared accessible hover/focus/popover implementation and `helpScope.observeRoot(page)` tears them down when the route detaches.
+
+### Skills
+
+Shared field help covers:
+
+- immutable `Category` with explicit child-owned read-only state;
+- `Energy Cost` range/meaning;
+- `Cooldown` range/meaning;
+- nullable/unlimited `Charges`;
+- nullable/unlimited `Per-stage Limit`;
+- `Typing Condition Mode` semantics (`inherit` / `override` / `none`).
+
+Verbose labels such as `Category (immutable)` and `Charges (blank = unlimited)` were replaced with normal operator labels plus contextual help.
+
+### Equipment
+
+Shared field help covers:
+
+- immutable `Slot` with child-owned read-only state;
+- immutable `Tier` with registry-owned read-only state;
+- canonical `Perk` selection semantics and effective-perk field state.
+
+The Equipment identity/limits copy was shortened while keeping the critical `new-session` apply boundary visible.
+
+Dedicated A6 CI protects capability boundaries, Draft lifecycle, shared capability-state UI, shared field-help lifecycle and Portal build. Run `38523367231` passed the A6.2 checkpoint.
+
+**A6 is complete.** No Media picker, effect preset, generic VFX/SFX control or fake production visual renderer was introduced.
 
 ---
 
@@ -290,18 +314,20 @@ Their assertions were retained. The SHA guards were not removed or relaxed.
 
 ---
 
-## First unfinished unit — A6.2
+## First unfinished unit — A7.0
 
-**A6.2 — shared V2 field/help ergonomics for canonical Skills / Equipment gameplay editors**
+**A7.0 — Enemies / Bosses canonical capability audit**
 
-Goals:
+Start from runtime ownership, not from the rich-entity mockup target.
 
-1. retain the current canonical authorable field sets exactly;
-2. migrate operator-facing field guidance to shared Admin help/tooltip primitives where useful;
-3. reduce permanent implementation-heavy descriptions while keeping critical apply/publish boundaries visible;
-4. keep immutable fields visibly read-only;
-5. retain registry/data preview semantics without calling it production visual preview;
-6. preserve child-preview validation before Draft creation and History-owned Publish;
-7. do not introduce any Media picker, effect preset or VFX/SFX control unless a future child migration first establishes a complete production authority chain.
+Audit and classify at minimum:
 
-Manual UI review remains non-blocking for implementation; record it separately and fix concrete visual defects when reported.
+1. canonical Enemy/Boss persisted policy fields and exact validators;
+2. registry-owned identity, type/family, art, stats, projectile/effect behavior and stage usage;
+3. production consumers for Enemy `minStage`, global projectile mode and Boss metadata;
+4. any canonical reward/drop, relationship, phase, mechanic, Media/VFX/SFX binding or stage-usage write seams that genuinely exist;
+5. registry/data preview versus true production visual preview ownership;
+6. apply boundaries and revision lifecycle;
+7. explicit unsupported/migration-required fields so the Admin does not invent Boss phases, rewards, effects or asset bindings.
+
+Only after that executable capability audit should A7 expose richer shared V2 entity workflows.
