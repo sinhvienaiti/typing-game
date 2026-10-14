@@ -15,6 +15,7 @@ import {
   type SpaceTypingAssetPreviewScenario,
   type SpaceTypingAssetPreviewSource,
 } from "./space-typing-asset-preview";
+import { isSpaceTypingReliefMediaVersionCompatible } from "./space-typing-relief-media";
 import { AdminHelpScope, createAdminFieldShell } from "./v2/admin-help";
 import { openAdminMediaAssetPicker } from "./v2/asset-picker";
 import {
@@ -66,8 +67,7 @@ type Tone = "good" | "warn" | "bad" | "info";
 type ShipId = string;
 type VisualColorKey = (typeof BASIC_COLOR_KEYS)[number] | (typeof ADVANCED_COLOR_KEYS)[number];
 type ProjectileArchetype = (typeof PROJECTILE_ARCHETYPES)[number];
-type ShipPreviewWithProjectile = ShipAdminPreviewItem & { projectileArchetype?: ProjectileArchetype };
-type ShipOverrideWithProjectile = ShipAdminOverride & { projectileArchetype?: ProjectileArchetype };
+type PreviewSurface = "2d" | "relief";
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -153,8 +153,10 @@ function previewVisual(ship: ShipAdminPreviewItem): Readonly<Record<string, unkn
 }
 
 function projectileArchetypeFor(ship: ShipAdminPreviewItem): ProjectileArchetype | undefined {
-  const value = (ship as ShipPreviewWithProjectile).projectileArchetype;
-  return value !== undefined && PROJECTILE_ARCHETYPES.includes(value) ? value : undefined;
+  const value = ship.projectileArchetype;
+  return typeof value === "string" && PROJECTILE_ARCHETYPES.includes(value as ProjectileArchetype)
+    ? value as ProjectileArchetype
+    : undefined;
 }
 
 function colorLabel(key: VisualColorKey): string {
@@ -226,6 +228,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
   let loadGeneration = 0;
   let previewSource: SpaceTypingAssetPreviewSource = "draft";
   let previewScenario: SpaceTypingAssetPreviewScenario = "idle";
+  let previewSurface: PreviewSurface = "2d";
   let previewGeneration = 0;
   let previewBridge: SpaceTypingAssetPreviewBridge | null = null;
   let previewBridgePromise: Promise<SpaceTypingAssetPreviewBridge> | null = null;
@@ -303,7 +306,8 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       setPreviewStatus(`No ${previewSource} preview candidate exists for ${selectedId}.`, "warn");
       return;
     }
-    setPreviewStatus(`Loading ${previewSource} · ${ship.id} · ${previewScenario} through production renderer…`, "info");
+    const surfaceLabel = previewSurface === "relief" ? "3D relief" : "2D";
+    setPreviewStatus(`Loading ${previewSource} · ${ship.id} · ${surfaceLabel} · ${previewScenario} through production renderer…`, "info");
     void ensurePreviewBridge().then(async (bridge) => {
       if (generation !== previewGeneration || !page.isConnected) return;
       const projectileArchetype = projectileArchetypeFor(ship);
@@ -311,12 +315,15 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         characterId: ship.id,
         visual: previewVisual(ship),
         ...(ship.imageAssetVersionId === undefined ? {} : { imageAssetVersionId: ship.imageAssetVersionId }),
+        ...(previewSurface === "relief"
+          ? { reliefAssetVersionId: ship.reliefAssetVersionId ?? null }
+          : {}),
         ...(projectileArchetype === undefined ? {} : { projectileArchetype }),
       });
       if (generation !== previewGeneration || !page.isConnected) return;
       await bridge.setScenario(previewScenario);
       if (generation !== previewGeneration || !page.isConnected) return;
-      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship.id} · ${previewScenario} · production renderer`, "good");
+      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship.id} · ${surfaceLabel} · ${previewScenario} · production renderer`, "good");
     }).catch((error: unknown) => {
       if (generation !== previewGeneration || !page.isConnected) return;
       setPreviewStatus(error instanceof Error ? error.message : String(error), "bad");
@@ -343,7 +350,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     void bridge.setScenario(scenario).then(() => {
       if (generation !== previewGeneration || !page.isConnected) return;
       const ship = previewShip();
-      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship?.id ?? selectedId} · ${scenario} · production renderer`, "good");
+      setPreviewStatus(`${previewSource === "draft" ? "Draft" : "Published"} · ${ship?.id ?? selectedId} · ${previewSurface === "relief" ? "3D relief" : "2D"} · ${scenario} · production renderer`, "good");
     }).catch((error: unknown) => {
       if (generation !== previewGeneration || !page.isConnected) return;
       setPreviewStatus(error instanceof Error ? error.message : String(error), "bad");
@@ -425,6 +432,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         returnFocus: chooseImage,
         onSelect: ({ version }) => {
           overrideFor(selectedId).imageAssetVersionId = version.assetVersionId;
+          previewSurface = "2d";
           renderList();
           renderStudioSettings();
           syncPreview();
@@ -432,7 +440,10 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         },
       });
     });
-    imageActions.append(chooseImage);
+    imageActions.append(chooseImage, button("Preview 2D", () => {
+      previewSurface = "2d";
+      syncPreview();
+    }));
     if (ship.imageAssetVersionId !== undefined) {
       imageActions.append(button("Clear", () => {
         const override = policy.ships?.[selectedId];
@@ -440,6 +451,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
           delete override.imageAssetVersionId;
           pruneEmptyOverride(selectedId);
         }
+        previewSurface = "2d";
         renderList();
         renderStudioSettings();
         syncPreview();
@@ -451,12 +463,63 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       control: imageActions,
       help: {
         title: "Ship Image",
-        content: "Choose an image through Media V2. The Draft stores the exact immutable asset version; Clear restores the bundled production image. The production preview above updates from the same runtime resolver.",
+        content: "Choose an image through Media V2. The Draft stores the exact immutable asset version; Clear restores the bundled production image.",
       },
       stateMessage: ship.imageAssetVersionId === undefined
-        ? "Bundled production image · no Admin media override"
-        : `Media V2 exact version · ${ship.imageAssetVersionId}`,
+        ? "Bundled production image"
+        : `Exact version · ${ship.imageAssetVersionId}`,
       stateTone: ship.imageAssetVersionId === undefined ? "info" : "good",
+    }));
+
+    const reliefActions = el("div", "st-admin-page-actions");
+    const chooseRelief = button(ship.reliefAssetVersionId ? "Change 3D bundle" : "Choose 3D bundle", () => {
+      openAdminMediaAssetPicker({
+        title: `Choose 3D relief bundle for ${ship.name}`,
+        message: "Only compatible immutable Space Typing relief bundles are shown.",
+        allowedKinds: ["model"],
+        selectedAssetVersionId: ship.reliefAssetVersionId ?? null,
+        returnFocus: chooseRelief,
+        isVersionCompatible: isSpaceTypingReliefMediaVersionCompatible,
+        incompatibleEmptyMessage: "A relief bundle needs model, color, emissive and height components with immutable hashes.",
+        onSelect: ({ version }) => {
+          overrideFor(selectedId).reliefAssetVersionId = version.assetVersionId;
+          previewSurface = "relief";
+          renderList();
+          renderStudioSettings();
+          syncPreview();
+          setStatus(`${selectedId} now uses exact 3D relief bundle ${version.assetVersionId}. Save Draft to persist this assignment.`, "good");
+        },
+      });
+    });
+    reliefActions.append(chooseRelief, button("Preview 3D", () => {
+      previewSurface = "relief";
+      syncPreview();
+    }));
+    if (ship.reliefAssetVersionId !== undefined) {
+      reliefActions.append(button("Use bundled default", () => {
+        const override = policy.ships?.[selectedId];
+        if (override !== undefined) {
+          delete override.reliefAssetVersionId;
+          pruneEmptyOverride(selectedId);
+        }
+        previewSurface = "relief";
+        renderList();
+        renderStudioSettings();
+        syncPreview();
+        setStatus(`${selectedId} 3D relief override cleared. The bundled production hull is restored for this Draft.`, "good");
+      }));
+    }
+    studio.basicHost.append(createAdminFieldShell(helpScope, {
+      label: "3D Relief Bundle",
+      control: reliefActions,
+      help: {
+        title: "3D Relief Bundle",
+        content: "Choose one exact Media V2 relief bundle. Uploading Media does not change gameplay until the Ship draft is published.",
+      },
+      stateMessage: ship.reliefAssetVersionId === undefined
+        ? "Bundled production hull"
+        : `Exact version · ${ship.reliefAssetVersionId}`,
+      stateTone: ship.reliefAssetVersionId === undefined ? "info" : "good",
     }));
 
     const effectiveProjectile = projectileArchetypeFor(ship);
@@ -467,7 +530,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       projectile.value = effectiveProjectile;
       projectile.addEventListener("change", () => {
         const next = projectile.value as ProjectileArchetype;
-        const override = overrideFor(selectedId) as ShipOverrideWithProjectile;
+        const override = overrideFor(selectedId);
         if (next === baselineProjectile) {
           delete override.projectileArchetype;
           pruneEmptyOverride(selectedId);
@@ -484,7 +547,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         control: projectile,
         help: {
           title: "Projectile Recipe",
-          content: "Binds this Ship to one existing production projectile recipe. The recipe owns muzzle placement, trail, sprite bundle and motion. Those internals are deliberately not editable as separate Admin fields.",
+          content: "Binds this Ship to one existing production projectile recipe. Muzzle, trail, sprite and motion remain recipe-owned.",
         },
         stateMessage: effectiveProjectile === baselineProjectile
           ? `Bundled production recipe · ${effectiveProjectile}`
@@ -570,7 +633,17 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       createAssetTuningCapabilityState({
         label: "Per-Ship 2D Media assignment",
         status: "AVAILABLE",
-        description: "Basic uses the canonical Media V2 Asset Picker and stores an exact immutable image version.",
+        description: "Basic stores one exact immutable Media V2 image version.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "Per-Ship 3D relief bundle assignment",
+        status: "AVAILABLE",
+        description: "Basic stores one exact immutable compatible Media V2 relief bundle and previews it through production Ship3D.",
+      }),
+      createAssetTuningCapabilityState({
+        label: "3D anchors / material / lighting",
+        status: "READ-ONLY REFERENCE",
+        description: "Model anchors and production renderer material/lighting remain owned by the relief bundle and runtime.",
       }),
       createAssetTuningCapabilityState({
         label: "Projectile recipe binding",
@@ -588,19 +661,19 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         description: "Production audio identities exist, but persisted bindings plus a production-backed Admin audio scenario do not yet form a complete authoring chain.",
       }),
       createAssetTuningCapabilityState({
-        label: "Persistent scale / offset / rotation",
+        label: "Persistent 3D scale / orientation / pivot",
         status: "REQUIRES CANONICAL MIGRATION",
-        description: "Draw-time pose inputs remain runtime state until canonical persisted presentation fields exist.",
+        description: "Those values are still runtime-owned and have no canonical persisted Ship field.",
       }),
       createAssetTuningCapabilityState({
-        label: "Current relief 3D bundle",
-        status: "READ-ONLY REFERENCE",
-        description: "The generated relief runtime may be referenced, but exact-version Admin assignment and repeated preview cleanup are not ready.",
+        label: "Semantic 3D animation clips",
+        status: "DEFERRED / UNSUPPORTED",
+        description: "Idle, attack, cast, recoil/recover, wing, cloth and hand/weapon clip bindings are not canonical runtime fields.",
       }),
       createAssetTuningCapabilityState({
         label: "Current VFX / SFX",
         status: "READ-ONLY REFERENCE",
-        description: "Production effects and semantic/sample audio can be previewed only through their current runtime owners.",
+        description: "Production effects and semantic/sample audio remain owned by their current runtime systems.",
       }),
       createAssetTuningCapabilityState({
         label: "Miss presentation / Weapon Admin entity",
@@ -610,7 +683,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
       createAssetTuningCapabilityState({
         label: "Arbitrary / animated GLB",
         status: "DEFERRED / UNSUPPORTED",
-        description: "No canonical arbitrary GLB loader or semantic animation-clip runtime exists today.",
+        description: "Production relief uses its typed bundle; no canonical arbitrary GLB/GLTF loader exists.",
       }),
     );
   };
@@ -701,7 +774,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
         const revision = await api.createRevision({
           baseRevision: payload.active.revision,
           config,
-          message: "Admin Phase B · B06.1 Ships registry draft",
+          message: "Admin A5 · Ship asset tuning draft",
         });
         saveStatus.textContent = `Draft saved · ${revision.revision} · runtime unchanged`;
         setStatus(`Draft ${revision.revision} passed child policy + server validation. Published preview still reflects active ${loadedActiveRevision}; publish from History to change runtime policy. Gameplay apply boundary is a new session.`, "good");
@@ -715,7 +788,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     })();
   }, "st-admin-btn primary");
   save.disabled = true;
-  saveBar.append(el("strong", undefined, "B06.1 Ships Draft"), saveStatus, el("div", "grow"), button("Discard", () => navigate(location.pathname)), save);
+  saveBar.append(el("strong", undefined, "Ships Draft"), saveStatus, el("div", "grow"), button("Discard", () => navigate(location.pathname)), save);
   studio.lifecycleHost.append(saveBar);
 
   const load = (): void => {
@@ -725,6 +798,7 @@ export function renderPhaseBShips(navigate: Navigate): HTMLElement {
     loadedActiveRevision = null;
     bundled = null;
     publishedPreview = null;
+    previewSurface = "2d";
     revisionBadge.className = "st-admin-status info";
     revisionBadge.textContent = "ACTIVE · loading";
     setStatus("Loading active revision and canonical child ship registry…", "info");
