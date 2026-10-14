@@ -20,6 +20,8 @@ export type AdminMediaAssetPickerOptions = {
   allowedKinds?: readonly MediaKind[];
   selectedAssetVersionId?: string | null;
   returnFocus?: HTMLElement | null;
+  isVersionCompatible?: (asset: MediaAsset, version: MediaVersion) => boolean;
+  incompatibleEmptyMessage?: string;
   onSelect: (selection: MediaAssetSelection) => void | Promise<void>;
 };
 
@@ -155,6 +157,9 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
   const controller = new AbortController();
   const { signal } = controller;
   const previewHandles = new Set<MediaPreviewHandle>();
+  const detailCache = new Map<string, MediaAssetDetailPayload>();
+  const compatibleAssetIds = new Set<string>();
+  let compatibilityReady = options.isVersionCompatible === undefined;
   let assets: MediaAsset[] = [];
   let selectedAsset: MediaAssetDetailPayload | null = null;
   let selectedVersion: MediaVersion | null = null;
@@ -176,20 +181,34 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
     if (previousActive?.isConnected) previousActive.focus();
   };
 
+  const versionCompatible = (asset: MediaAsset, version: MediaVersion): boolean =>
+    options.isVersionCompatible?.(asset, version) ?? true;
+
+  const compatibleVersions = (payload: MediaAssetDetailPayload): MediaVersion[] =>
+    payload.versions.filter((version) => versionCompatible(payload.asset, version));
+
   const filteredAssets = (): MediaAsset[] => assets.filter((asset) => {
     if (!allowedKinds.includes(asset.kind)) return false;
+    if (!compatibilityReady) return false;
+    if (options.isVersionCompatible && !compatibleAssetIds.has(asset.assetId)) return false;
     if (kind !== "all" && asset.kind !== kind) return false;
     if (!query) return true;
     return [asset.title, ...asset.tags].some((value) => value.toLowerCase().includes(query));
   });
 
   function renderAssetList(): void {
+    if (!compatibilityReady) {
+      assetList.replaceChildren(createAdminSkeleton(8));
+      return;
+    }
     const rows = filteredAssets();
     assetList.replaceChildren();
     if (rows.length === 0) {
       assetList.append(createAdminEmptyState({
         title: "No matching media",
-        message: "Try another search or media type. Archived items are intentionally excluded from the picker.",
+        message: options.isVersionCompatible
+          ? options.incompatibleEmptyMessage ?? "No compatible immutable versions are available for this field."
+          : "Try another search or media type. Archived items are intentionally excluded from the picker.",
       }));
       return;
     }
@@ -272,12 +291,20 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
     preview.append(previewPlaceholder("Choose a version", "Preview follows the exact version selection below."));
 
     const versions = element("div", "st-admin-v2-picker-versions");
+    const availableVersions = compatibleVersions(payload);
     const preferred = preferredVersionId
-      ? payload.versions.find((version) => version.assetVersionId === preferredVersionId) ?? null
-      : payload.versions.find((version) => version.assetVersionId === payload.asset.currentVersionId) ?? payload.versions[0] ?? null;
+      ? availableVersions.find((version) => version.assetVersionId === preferredVersionId) ?? null
+      : availableVersions.find((version) => version.assetVersionId === payload.asset.currentVersionId) ?? availableVersions[0] ?? null;
     updateSelection(preferred);
 
-    for (const version of payload.versions) {
+    if (availableVersions.length === 0) {
+      versions.append(createAdminEmptyState({
+        title: "No compatible versions",
+        message: options.incompatibleEmptyMessage ?? "This media item has no version compatible with this field.",
+      }));
+    }
+
+    for (const version of availableVersions) {
       const row = element("div", `st-admin-v2-picker-version${selectedVersion?.assetVersionId === version.assetVersionId ? " selected" : ""}`);
       const copy = element("div", "st-admin-v2-picker-version-copy");
       copy.append(
@@ -298,12 +325,24 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
     if (preferred) void renderVersionPreview(preview, preferred);
   }
 
+  async function assetDetail(assetId: string): Promise<MediaAssetDetailPayload> {
+    const cached = detailCache.get(assetId);
+    if (cached) return cached;
+    const payload = await api.getAsset(assetId);
+    detailCache.set(assetId, payload);
+    return payload;
+  }
+
   async function selectAsset(assetId: string, preferredVersionId?: string | null): Promise<void> {
     const generation = ++detailGeneration;
     detail.replaceChildren(createAdminSkeleton(6));
     try {
-      const payload = await api.getAsset(assetId);
+      const payload = await assetDetail(assetId);
       if (closed || generation !== detailGeneration) return;
+      if (options.isVersionCompatible && compatibleVersions(payload).length === 0) {
+        detail.replaceChildren(previewPlaceholder("Incompatible media", options.incompatibleEmptyMessage ?? "Choose another media item."));
+        return;
+      }
       renderDetail(payload, preferredVersionId);
     } catch (error) {
       if (closed || generation !== detailGeneration) return;
@@ -338,6 +377,7 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
 
   use.addEventListener("click", async () => {
     if (!selectedAsset || !selectedVersion || selecting) return;
+    if (!versionCompatible(selectedAsset.asset, selectedVersion)) return;
     selecting = true;
     use.disabled = true;
     const original = use.textContent;
@@ -363,11 +403,27 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
       const payload = await api.listAssets();
       if (closed) return;
       assets = payload.assets;
+      if (options.isVersionCompatible) {
+        const candidates = assets.filter((asset) => allowedKinds.includes(asset.kind));
+        const details = await Promise.allSettled(candidates.map((asset) => assetDetail(asset.assetId)));
+        if (closed) return;
+        details.forEach((result) => {
+          if (result.status !== "fulfilled") return;
+          if (compatibleVersions(result.value).length > 0) compatibleAssetIds.add(result.value.asset.assetId);
+        });
+        compatibilityReady = true;
+      }
       renderAssetList();
       if (options.selectedAssetVersionId) {
         try {
           const selected = await api.getVersion(options.selectedAssetVersionId);
-          if (!closed && allowedKinds.includes(assets.find((asset) => asset.assetId === selected.version.assetId)?.kind ?? "data")) {
+          const asset = assets.find((entry) => entry.assetId === selected.version.assetId);
+          if (
+            !closed
+            && asset !== undefined
+            && allowedKinds.includes(asset.kind)
+            && versionCompatible(asset, selected.version)
+          ) {
             await selectAsset(selected.version.assetId, selected.version.assetVersionId);
           }
         } catch {
@@ -375,6 +431,7 @@ export function openAdminMediaAssetPicker(options: AdminMediaAssetPickerOptions)
         }
       }
     } catch (error) {
+      compatibilityReady = true;
       if (!closed) assetList.replaceChildren(previewPlaceholder("Media Library unavailable", error instanceof Error ? error.message : "Unable to load Media Library."));
     }
     if (!closed) search.focus();
