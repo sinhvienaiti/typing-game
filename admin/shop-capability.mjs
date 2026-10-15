@@ -1,8 +1,8 @@
-// A10 re-audit: 71de632..4f62c94 changes Ship unlock runtime authority and
-// adds the unified unlock/economy capability truth map. Shop policy,
-// generation, pricing, availability, offers, services and transaction
-// ownership sources remain unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
+// A10.5 re-audit: 4f62c94..6c57a2b changes only isolated Admin preview
+// modules for Enemy/Boss/Skill/Equipment/World/Stage. Shop policy, contracts,
+// generation, pricing, availability, offers, services and transaction ownership
+// sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
