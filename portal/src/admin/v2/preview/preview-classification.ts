@@ -1,3 +1,5 @@
+import "../admin-ux-fixes.css";
+
 export type ProductionPreviewClassification =
   | "full-runtime"
   | "production-presentation"
@@ -67,6 +69,46 @@ const CLASSIFICATIONS: Readonly<Record<string, ClassificationDefinition>> = Obje
   "/admin/space-typing/qa": NOT_APPLICABLE,
 });
 
+const DRAFT_ACTION_PATHS = new Set([
+  "/admin/space-typing/skills",
+  "/admin/space-typing/equipment",
+]);
+
+function draftSource(grid: HTMLElement): HTMLSelectElement | null {
+  for (const select of grid.querySelectorAll<HTMLSelectElement>("select")) {
+    if ([...select.options].some((option) => option.value === "draft")) return select;
+  }
+  return null;
+}
+
+function attachDraftPreviewIntent(root: HTMLElement, path: string): void {
+  if (!DRAFT_ACTION_PATHS.has(path) || root.dataset["draftPreviewIntent"] === "true") return;
+  root.dataset["draftPreviewIntent"] = "true";
+
+  for (const grid of root.querySelectorAll<HTMLElement>(".st-admin-runtime-preview-grid")) {
+    const source = draftSource(grid);
+    if (source === null) continue;
+    const action = [...grid.children].find(
+      (node): node is HTMLButtonElement => node instanceof HTMLButtonElement && node.classList.contains("st-admin-btn"),
+    );
+    if (action === undefined) continue;
+    action.dataset["previewDraftAction"] = "true";
+    action.textContent = "Preview draft candidate";
+    action.title = "Run the current unsaved field values through the isolated production runtime.";
+  }
+
+  root.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const action = event.target.closest<HTMLButtonElement>('button[data-preview-draft-action="true"]');
+    if (action === null) return;
+    const grid = action.closest<HTMLElement>(".st-admin-runtime-preview-grid");
+    if (grid === null) return;
+    const source = draftSource(grid);
+    if (source === null || source.disabled) return;
+    source.value = "draft";
+  }, { capture: true });
+}
+
 export function productionPreviewClassification(path: string): ClassificationDefinition | null {
   return CLASSIFICATIONS[path] ?? null;
 }
@@ -75,6 +117,7 @@ export function attachProductionPreviewClassification(root: HTMLElement, path: s
   const definition = productionPreviewClassification(path);
   if (definition === null || root.dataset["previewClassification"] !== undefined) return root;
   root.dataset["previewClassification"] = definition.kind;
+  attachDraftPreviewIntent(root, path);
 
   const header = root.querySelector<HTMLElement>(".st-admin-page-head, .space-admin-page__header");
   if (header === null) return root;
