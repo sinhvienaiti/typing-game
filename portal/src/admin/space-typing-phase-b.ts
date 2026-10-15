@@ -23,33 +23,38 @@ import { renderPhaseBUiAssets } from "./space-typing-ui-assets-phase-b";
 import { renderPhaseBVfx } from "./space-typing-vfx-phase-b";
 import { renderPhaseBWarp } from "./space-typing-warp-phase-b";
 import { renderPhaseBWorlds } from "./space-typing-worlds-phase-b";
+import { attachProductionPreviewClassification } from "./v2/preview/preview-classification";
 
 const BASE = "/admin/space-typing";
 type Navigate = (path: string) => void;
 
+function classified(path: string, screen: HTMLElement | null): HTMLElement | null {
+  return screen === null ? null : attachProductionPreviewClassification(screen, path);
+}
+
 export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLElement | null {
-  if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);
-  if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();
-  if (path === `${BASE}/sfx`) return renderPhaseBSfx();
-  if (path === `${BASE}/stages`) return attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world");
-  if (path === `${BASE}/worlds-stages`) return attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage");
-  if (path === `${BASE}/typing-content`) return renderPhaseBTypingContent(navigate);
-  if (path === `${BASE}/shop`) return renderPhaseBShop(navigate);
-  if (path === `${BASE}/currencies`) return renderPhaseBCurrencies(navigate);
-  if (path === `${BASE}/rewards`) return renderPhaseBRewards(navigate);
-  if (path === `${BASE}/warp`) return renderPhaseBWarp(navigate);
-  if (path === `${BASE}/missions`) return renderPhaseBMissions(navigate);
-  if (path === `${BASE}/daily-weekly`) return renderPhaseBDailyWeekly();
-  if (path === `${BASE}/expedition`) return renderPhaseBExpedition();
-  if (path === `${BASE}/events`) return renderPhaseBEvents();
-  if (path === `${BASE}/duel`) return renderPhaseBDuel();
-  if (path === `${BASE}/ranked`) return renderPhaseBRanked();
-  if (path === `${BASE}/alternative-modes`) return renderPhaseBAlternativeModes();
-  if (path === `${BASE}/backgrounds`) return renderPhaseBBackgrounds();
-  if (path === `${BASE}/ui-assets`) return renderPhaseBUiAssets();
-  if (path === `${BASE}/vfx`) return renderPhaseBVfx();
-  if (path === `${BASE}/settings`) return renderPhaseBSettings(navigate);
-  if (path === `${BASE}/qa`) return renderPhaseBQa();
-  if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();
-  return renderPhaseBCoreAdminScreen(path, navigate);
+  if (path === BASE || path === `${BASE}/analytics`) return classified(path, renderPhaseBTelemetry(path));
+  if (path === `${BASE}/music-library`) return classified(path, renderPhaseBMusicLibrary());
+  if (path === `${BASE}/sfx`) return classified(path, renderPhaseBSfx());
+  if (path === `${BASE}/stages`) return classified(path, attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world"));
+  if (path === `${BASE}/worlds-stages`) return classified(path, attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage"));
+  if (path === `${BASE}/typing-content`) return classified(path, renderPhaseBTypingContent(navigate));
+  if (path === `${BASE}/shop`) return classified(path, renderPhaseBShop(navigate));
+  if (path === `${BASE}/currencies`) return classified(path, renderPhaseBCurrencies(navigate));
+  if (path === `${BASE}/rewards`) return classified(path, renderPhaseBRewards(navigate));
+  if (path === `${BASE}/warp`) return classified(path, renderPhaseBWarp(navigate));
+  if (path === `${BASE}/missions`) return classified(path, renderPhaseBMissions(navigate));
+  if (path === `${BASE}/daily-weekly`) return classified(path, renderPhaseBDailyWeekly());
+  if (path === `${BASE}/expedition`) return classified(path, renderPhaseBExpedition());
+  if (path === `${BASE}/events`) return classified(path, renderPhaseBEvents());
+  if (path === `${BASE}/duel`) return classified(path, renderPhaseBDuel());
+  if (path === `${BASE}/ranked`) return classified(path, renderPhaseBRanked());
+  if (path === `${BASE}/alternative-modes`) return classified(path, renderPhaseBAlternativeModes());
+  if (path === `${BASE}/backgrounds`) return classified(path, renderPhaseBBackgrounds());
+  if (path === `${BASE}/ui-assets`) return classified(path, renderPhaseBUiAssets());
+  if (path === `${BASE}/vfx`) return classified(path, renderPhaseBVfx());
+  if (path === `${BASE}/settings`) return classified(path, renderPhaseBSettings(navigate));
+  if (path === `${BASE}/qa`) return classified(path, renderPhaseBQa());
+  if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return classified(path, renderPhaseBFeatureGates());
+  return classified(path, renderPhaseBCoreAdminScreen(path, navigate));
 }
