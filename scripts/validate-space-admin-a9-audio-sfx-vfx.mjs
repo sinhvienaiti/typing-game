@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 ownership re-audit: b75cec6..dcba99b changes only the bounded Test Lab
-// direct-launch bootstrap, registry wiring and focused unit coverage.
+// A9 ownership re-audit: dcba99b..f8b74d0 changes only the child Enemy
+// Admin production-preview painted-art resolution/fallback behavior.
 // Audio/SFX/VFX ownership, contracts, production sample/music sources and write
 // boundaries asserted below are unchanged.
-const A9_SFX_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
+const A9_SFX_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
 
 const [
   sfxContract,
@@ -97,9 +97,6 @@ assert.equal(sfxMap.persistence, "child-code-owned-sample-bank");
 assert.equal(sfxMap.applyBoundary, "none");
 assert.equal(sfxMap.status, "phase-b-ui-wired-runtime-backed-readonly-preview");
 
-// A9 Music: catalog source/duration/loop are visible and Test Playback uses the
-// exact production asset. Context and Enabled are owned by World Music policy,
-// so Music Library must not invent duplicate authoring controls for them.
 assert.match(musicModel, /export type CatalogTrack/);
 assert.match(musicModel, /loop:\s*boolean/);
 assert.match(musicModel, /disabledTrackIds\?: readonly string\[\]/);
