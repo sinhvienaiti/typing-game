@@ -143,6 +143,21 @@ function createInspector(navigate: (path: string) => void): HTMLElement {
   return shell;
 }
 
+function renderAuthorizedDeveloperTools(
+  root: HTMLElement,
+  manifest: DeveloperToolsManifest,
+  navigate: (path: string) => void,
+): void {
+  const warning = element("div", "st-admin-v2-dev-warning");
+  warning.append(createAdminStatusChip("Technical", "warn"), element("span", undefined, "Raw JSON and implementation ownership belong here, not on primary administrator screens."));
+
+  const directoryHead = element("h2", undefined, "Diagnostic Directory");
+  const body = element("div", "st-admin-v2-dev-body");
+  renderManifest(body, manifest, navigate);
+
+  root.append(warning, createInspector(navigate), directoryHead, body);
+}
+
 export function renderAdminV2DeveloperTools(navigate: (path: string) => void, helpScope: AdminHelpScope): HTMLElement {
   const root = element("section", "st-admin-v2-developer-tools");
   root.append(createAdminPageHeader({
@@ -156,23 +171,22 @@ export function renderAdminV2DeveloperTools(navigate: (path: string) => void, he
     },
   }));
 
-  const warning = element("div", "st-admin-v2-dev-warning");
-  warning.append(createAdminStatusChip("Technical", "warn"), element("span", undefined, "Raw JSON and implementation ownership belong here, not on primary administrator screens."));
-  root.append(warning, createInspector(navigate));
-
-  const directoryHead = element("h2", undefined, "Diagnostic Directory");
-  const body = element("div", "st-admin-v2-dev-body");
-  body.append(createAdminSkeleton(5));
-  root.append(directoryHead, body);
+  const accessBody = element("div", "st-admin-v2-dev-body");
+  accessBody.setAttribute("aria-live", "polite");
+  accessBody.append(createAdminSkeleton(5));
+  root.append(accessBody);
 
   requestAnimationFrame(async () => {
     try {
+      // Fail closed on direct-route access: do not mount any technical inspector,
+      // links or runtime requests until the server-authorized manifest succeeds.
       const manifest = await api.getDeveloperToolsManifest();
       if (!root.isConnected) return;
-      renderManifest(body, manifest, navigate);
+      accessBody.remove();
+      renderAuthorizedDeveloperTools(root, manifest, navigate);
     } catch (error) {
       if (!root.isConnected) return;
-      body.replaceChildren(createAdminErrorState({
+      accessBody.replaceChildren(createAdminErrorState({
         title: "Developer Tools unavailable",
         message: adminErrorMessage(error, "You do not have permission to inspect developer diagnostics."),
       }));
