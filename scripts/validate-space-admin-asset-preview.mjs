@@ -31,7 +31,6 @@ function forbidText(input, needle, label) {
   if (input.includes(needle)) throw new Error(`${label}: forbidden ${JSON.stringify(needle)}`);
 }
 
-// A10.5 shared foundation: transport/security/lifecycle belongs to the shared bridge.
 requireText(source.contract, 'ProductionPreviewLifecycle = "loading" | "ready" | "error" | "unsupported"', "shared lifecycle contract is explicit");
 requireText(source.contract, "ProductionPreviewDomainAdapter", "shared domain adapter contract exists");
 requireText(source.bridge, 'const ASSET_PREVIEW_PROTOCOL_VERSION = 1 as const', "protocol remains versioned");
@@ -59,7 +58,6 @@ forbidText(source.bridge, "ADMIN_TOKEN", "preview must not receive Admin credent
 forbidText(source.bridge, "Authorization", "preview must not receive Authorization headers");
 forbidText(source.bridge, "Math.random", "security tokens must not use Math.random");
 
-// Shared studio host provides administrator-facing lifecycle/action chrome without renderer duplication.
 requireText(source.studio, "createProductionPreviewStudio", "shared production preview studio exists");
 requireText(source.studio, '"Reset"', "studio exposes reset");
 requireText(source.studio, '"Replay"', "studio exposes replay");
@@ -67,7 +65,6 @@ requireText(source.studio, '"Fullscreen"', "studio exposes fullscreen when brows
 requireText(source.studio, '"Fullscreen preview is not supported by this browser."', "fullscreen fails soft as unsupported");
 requireText(source.studio, "lifecycleTone", "studio maps lifecycle states to administrator status tones");
 
-// Ships is the compatibility baseline and now delegates to the shared bridge through a thin domain adapter.
 requireText(source.facade, "ProductionPreviewBridge.mount(host, shipProductionPreviewAdapter)", "Ships facade delegates to shared ProductionPreviewBridge");
 requireText(source.facade, "return this.bridge.loadCandidate(candidate)", "Ship load uses shared candidate transport");
 requireText(source.facade, "return this.bridge.replay()", "Ships inherits shared replay lifecycle");
@@ -79,9 +76,8 @@ requireText(source.shipAdapter, 'projectileArchetype?: string', "Ship candidate 
 requireText(source.shipAdapter, 'imageAssetVersionId: candidate.imageAssetVersionId', "adapter forwards exact Ship image version");
 requireText(source.shipAdapter, 'reliefAssetVersionId: candidate.reliefAssetVersionId', "adapter forwards exact relief bundle version");
 requireText(source.shipAdapter, 'projectileArchetype: candidate.projectileArchetype', "adapter forwards projectile recipe");
-requireText(source.shipAdapter, 'tuningPayload: (visual) => Object.freeze({ visual })', "Ship tuning remains a typed domain adapter operation");
+requireText(source.shipAdapter, 'tuningPayload: (visual: Readonly<Record<string, unknown>>) => Object.freeze({ visual })', "Ship tuning remains an explicitly typed domain adapter operation");
 
-// Existing A5 Studio/editor invariants remain protected.
 requireText(source.tuningStudio, 'export function createAssetTuningStudio', "A5.1 shared Studio shell remains available");
 requireText(source.tuningStudio, 'element("details", "st-admin-asset-studio-advanced")', "technical/advanced controls remain progressively disclosed");
 requireText(source.tuningStudio, 'export function createAssetTuningScalarControl', "canonical scalar primitive remains shared");
@@ -111,7 +107,6 @@ requireText(source.ships, 'studio.lifecycleHost.append(saveBar)', "Save Draft li
 forbidText(source.ships, 'publishedPreview = validated', "Draft validation must not overwrite Published preview");
 forbidText(source.ships, 'publishedPreview = validatedDraft', "Draft validation remains ephemeral");
 
-// Child production ownership and candidate isolation remain mandatory.
 requireText(source.childPolicy, 'reliefAssetVersionId?: string', "child canonical Ship policy persists relief version");
 requireText(source.childPolicy, 'isShipReliefAssetVersionId', "child validator rejects non-canonical relief assignments");
 requireText(source.childPolicy, 'projectileArchetype?: ShipRuntimeProjectileArchetype', "child policy persists projectile recipe");
