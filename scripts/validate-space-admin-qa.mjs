@@ -7,11 +7,11 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// QA ownership re-audit: 9cd58072..f31a2908 adds Boss 3D runtime plus Admin
-// testing-policy bootstrap/state tests. The canonical Test Lab controller,
+// QA ownership re-audit: f31a2908..22a35dd changes only the A10 testing
+// selection capability/bootstrap/tests. The canonical Test Lab controller,
 // isolated TestLabSession, production Game runtime guards and no-write
 // persistence boundary asserted below are unchanged.
-const QA_AUDITED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
+const QA_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, qaEmbedCss, shellScrollCss, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter, directTestLabLaunch, testLabRegistry] = await Promise.all([
