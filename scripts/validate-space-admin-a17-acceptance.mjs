@@ -6,11 +6,12 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 
-const [acceptance, security, history, developerTools, previewStudio, previewBridge] = await Promise.all([
+const [acceptance, security, history, developerTools, developerToolsUi, previewStudio, previewBridge] = await Promise.all([
   read("docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md"),
   read("admin/admin-security.mjs"),
   read("portal/src/admin/space-typing-history-phase-b.ts"),
   read("admin/developer-tools.mjs"),
+  read("portal/src/admin/v2/developer-tools.ts"),
   read("portal/src/admin/v2/preview/production-preview-studio.ts"),
   read("portal/src/admin/v2/preview/production-preview-bridge.ts"),
 ]);
@@ -63,6 +64,22 @@ for (const [id, label] of developerSections) {
   assert.ok(developerTools.includes(`label: "${label}"`), `Developer Tools section label missing: ${label}`);
 }
 assert.match(developerTools, /developer\.runtime-inspect/);
+
+// A13/A15/A17-M19: direct-route access must fail closed before any technical inspector mounts.
+assert.match(developerToolsUi, /const manifest = await api\.getDeveloperToolsManifest\(\)/);
+assert.match(developerToolsUi, /renderAuthorizedDeveloperTools\(root, manifest, navigate\)/);
+assert.match(developerToolsUi, /do not mount any technical inspector/);
+assert.match(developerToolsUi, /Developer Tools unavailable/);
+const routeGate = developerToolsUi.slice(developerToolsUi.indexOf("export function renderAdminV2DeveloperTools"));
+assert.ok(
+  routeGate.indexOf("await api.getDeveloperToolsManifest()") < routeGate.indexOf("renderAuthorizedDeveloperTools(root, manifest, navigate)"),
+  "Developer Tools must verify the server-authorized manifest before mounting technical inspectors.",
+);
+assert.doesNotMatch(
+  routeGate.slice(0, routeGate.indexOf("await api.getDeveloperToolsManifest()")),
+  /createInspector\(|api\.getState\(|api\.getRuntime\(/,
+  "Developer Tools direct route must not mount or query technical inspectors before authorization succeeds.",
+);
 
 // A16/A10.5: preview UX/lifecycle remains accessible and isolated.
 assert.match(previewStudio, /aria-live/);
