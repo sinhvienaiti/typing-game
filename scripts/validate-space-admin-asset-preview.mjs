@@ -66,7 +66,10 @@ requireText(source.studio, '"Fullscreen preview is not supported by this browser
 requireText(source.studio, "lifecycleTone", "studio maps lifecycle states to administrator status tones");
 
 requireText(source.facade, "ProductionPreviewBridge.mount(host, shipProductionPreviewAdapter)", "Ships facade delegates to shared ProductionPreviewBridge");
-requireText(source.facade, "return this.bridge.loadCandidate(candidate)", "Ship load uses shared candidate transport");
+requireText(source.facade, "const operation = this.bridge.loadCandidate(candidate)", "Ship load delegates to shared candidate transport");
+requireText(source.facade, "this.latestCandidate = operation", "Ship facade tracks the authoritative candidate operation");
+requireText(source.facade, "return operation", "Ship load returns the shared candidate transport promise");
+requireText(source.facade, "await this.latestCandidate", "Ship scenario/tuning/replay ordering waits for candidate materialization");
 requireText(source.facade, "return this.bridge.replay()", "Ships inherits shared replay lifecycle");
 requireText(source.shipAdapter, 'domain: "ship"', "Ship adapter identifies the child production domain");
 requireText(source.shipAdapter, 'defaultScenario: "idle"', "Ship adapter owns production default scenario");
