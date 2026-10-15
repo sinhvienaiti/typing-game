@@ -16,6 +16,8 @@ import {
   createUnlockEconomyCapabilityManifest,
 } from "./unlock-economy-capability.mjs";
 
+const AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
+
 const contract = {
   configNamespace: "economy.shop",
   runtime: {
@@ -42,7 +44,7 @@ test("Shop capability manifest opens only canonical runtime-backed authoring sea
   assert.equal(manifest.protocolVersion, 4);
   assert.equal(manifest.mode, "runtime-backed-authoring");
   assert.equal(manifest.auditedChildSha, SHOP_AUDITED_CHILD_SHA);
-  assert.equal(manifest.auditedChildSha, "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c");
+  assert.equal(manifest.auditedChildSha, AUDITED_CHILD_SHA);
   assert.deepEqual(manifest.tabs, SHOP_TABS);
   assert.deepEqual(manifest.fields.map((field) => field.name), SHOP_FIELDS);
 
@@ -88,6 +90,7 @@ test("A10 unlock/economy truth map mirrors the pinned child and never invents pl
   const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
   const child = resolve(root, "games/space-typing");
   const childHead = execFileSync("git", ["-C", child, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+  assert.equal(childHead, AUDITED_CHILD_SHA);
   assert.equal(childHead, A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA);
   assert.equal(SHOP_AUDITED_CHILD_SHA, A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA);
 
