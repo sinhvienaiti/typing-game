@@ -73,6 +73,17 @@ const DRAFT_ACTION_PATHS = new Set([
   "/admin/space-typing/skills",
   "/admin/space-typing/equipment",
 ]);
+const SHIPS_PATH = "/admin/space-typing/ships";
+const SHIP_CANDIDATE_ACTIONS = new Set([
+  "Choose image",
+  "Change image",
+  "Preview 2D",
+  "Clear",
+  "Choose 3D bundle",
+  "Change 3D bundle",
+  "Preview 3D",
+  "Use bundled default",
+]);
 
 function draftSource(grid: HTMLElement): HTMLSelectElement | null {
   for (const select of grid.querySelectorAll<HTMLSelectElement>("select")) {
@@ -109,6 +120,21 @@ function attachDraftPreviewIntent(root: HTMLElement, path: string): void {
   }, { capture: true });
 }
 
+function attachShipCandidateIntent(root: HTMLElement, path: string): void {
+  if (path !== SHIPS_PATH || root.dataset["shipCandidateIntent"] === "true") return;
+  root.dataset["shipCandidateIntent"] = "true";
+
+  root.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const action = event.target.closest<HTMLButtonElement>("button.st-admin-btn");
+    const label = action?.textContent?.trim() ?? "";
+    if (action === null || !SHIP_CANDIDATE_ACTIONS.has(label)) return;
+    const draft = root.querySelector<HTMLButtonElement>('.st-admin-asset-choice[data-choice-id="draft"]');
+    if (draft === null || draft.getAttribute("aria-pressed") === "true") return;
+    draft.click();
+  }, { capture: true });
+}
+
 export function productionPreviewClassification(path: string): ClassificationDefinition | null {
   return CLASSIFICATIONS[path] ?? null;
 }
@@ -118,6 +144,7 @@ export function attachProductionPreviewClassification(root: HTMLElement, path: s
   if (definition === null || root.dataset["previewClassification"] !== undefined) return root;
   root.dataset["previewClassification"] = definition.kind;
   attachDraftPreviewIntent(root, path);
+  attachShipCandidateIntent(root, path);
 
   const header = root.querySelector<HTMLElement>(".st-admin-page-head, .space-admin-page__header");
   if (header === null) return root;
