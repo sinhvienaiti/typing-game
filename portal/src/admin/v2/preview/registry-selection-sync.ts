@@ -1,5 +1,3 @@
-const DEFAULT_ROW_SELECTOR = ".stx-toggle-row";
-
 export function wireLegacyRegistrySelection(
   root: HTMLElement,
   acceptedActions: readonly string[],
@@ -13,7 +11,7 @@ export function wireLegacyRegistrySelection(
     if (!(button instanceof HTMLButtonElement)) return;
     if (!accepted.has(button.textContent?.trim() ?? "")) return;
 
-    const row = button.closest(DEFAULT_ROW_SELECTOR);
+    const row = button.closest(".stx-toggle-row");
     const metadata = row?.querySelector("small")?.textContent?.trim() ?? "";
     const [id] = metadata.split(" · ", 1);
     if (id?.trim()) onSelect(id.trim());
