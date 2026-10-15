@@ -46,7 +46,7 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/missions`) return classified(path, renderPhaseBMissions(navigate));
   if (path === `${BASE}/daily-weekly`) return classified(path, renderPhaseBDailyWeekly());
   if (path === `${BASE}/expedition`) return classified(path, renderPhaseBExpedition());
-  if (path === `${BASE}/events`) return classified(path, renderPhaseBEvents());
+  if (path === `${BASE}/events`) return classified(path, renderPhaseBEvents(navigate));
   if (path === `${BASE}/duel`) return classified(path, renderPhaseBDuel());
   if (path === `${BASE}/ranked`) return classified(path, renderPhaseBRanked());
   if (path === `${BASE}/alternative-modes`) return classified(path, renderPhaseBAlternativeModes());
