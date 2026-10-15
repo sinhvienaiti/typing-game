@@ -9,18 +9,20 @@ export type AdminCommandOptions = { includeDeveloperTools?: boolean };
 
 const PRIMARY_COMMANDS = [
   ["Overview", BASE, "Dashboard"],
+  ["Shop", `${BASE}/shop`, "Economy & Live Ops"],
+  ["Live Ops", `${BASE}/events`, "Economy & Live Ops"],
   ["Audio Defaults", `${BASE}/audio`, "System"], ["Media Library", `${BASE}/media`, "Media"], ["Music Library", `${BASE}/music-library`, "Media"], ["SFX", `${BASE}/sfx`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
   ["Ships", `${BASE}/ships`, "Gameplay"], ["Equipment", `${BASE}/equipment`, "Gameplay"], ["Skills", `${BASE}/skills`, "Gameplay"], ["Enemies", `${BASE}/enemies`, "Gameplay"], ["Bosses", `${BASE}/bosses`, "Gameplay"], ["Worlds & Stages", `${BASE}/stages`, "Content"], ["Typing Content", `${BASE}/typing-content`, "Content"],
-  ["General Settings", `${BASE}/settings`, "System"], ["History & Publish", `${BASE}/history`, "System"],
+  ["General Settings", `${BASE}/settings`, "System"], ["Roles & Permissions", `${BASE}/roles`, "System"], ["History & Publish", `${BASE}/history`, "System"],
 ] as const;
 
 const DEVELOPER_COMMANDS = [
   ["Developer Tools", `${BASE}/developer-tools`, "Developer Tools"],
   ["Analytics", `${BASE}/analytics`, "Developer Tools · Runtime"],
-  ["Shop", `${BASE}/shop`, "Developer Tools · Economy"], ["Currencies", `${BASE}/currencies`, "Developer Tools · Economy"], ["Rewards & Drops", `${BASE}/rewards`, "Developer Tools · Economy"], ["Stamina / Warp", `${BASE}/warp`, "Developer Tools · Economy"],
-  ["Missions", `${BASE}/missions`, "Developer Tools · Live Ops"], ["Daily / Weekly", `${BASE}/daily-weekly`, "Developer Tools · Live Ops"], ["Expedition", `${BASE}/expedition`, "Developer Tools · Live Ops"], ["Events", `${BASE}/events`, "Developer Tools · Live Ops"], ["Feature Gates", `${BASE}/feature-gates`, "Developer Tools · Live Ops"],
+  ["Currencies", `${BASE}/currencies`, "Developer Tools · Runtime"], ["Rewards & Drops", `${BASE}/rewards`, "Developer Tools · Runtime"], ["Stamina / Warp", `${BASE}/warp`, "Developer Tools · Runtime"], ["Expedition", `${BASE}/expedition`, "Developer Tools · Runtime"],
+  ["Missions", `${BASE}/missions`, "Developer Tools · Contracts"], ["Daily / Weekly", `${BASE}/daily-weekly`, "Developer Tools · Contracts"], ["Feature Gates", `${BASE}/feature-gates`, "Developer Tools · Validation"],
   ["Duel Settings", `${BASE}/duel`, "Developer Tools · PvP"], ["Ranked", `${BASE}/ranked`, "Developer Tools · PvP"], ["Alternative Modes", `${BASE}/alternative-modes`, "Developer Tools · PvP"],
-  ["Backgrounds", `${BASE}/backgrounds`, "Developer Tools · Visuals"], ["VFX", `${BASE}/vfx`, "Developer Tools · Visuals"], ["UI Assets", `${BASE}/ui-assets`, "Developer Tools · Visuals"],
+  ["Backgrounds", `${BASE}/backgrounds`, "Developer Tools · Assets"], ["VFX", `${BASE}/vfx`, "Developer Tools · Assets"], ["UI Assets", `${BASE}/ui-assets`, "Developer Tools · Assets"],
   ["QA Sandbox", `${BASE}/qa`, "Developer Tools · QA"],
 ] as const;
 
