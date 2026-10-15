@@ -6,6 +6,7 @@ const paths = {
   environments: "portal/src/admin/v2/preview/panels/world-stage-production-preview.ts",
   systems: "portal/src/admin/v2/preview/panels/system-runtime-preview.ts",
   equipment: "portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts",
+  bossPanel: "portal/src/admin/v2/preview/panels/boss-production-preview.ts",
   shipFacade: "portal/src/admin/space-typing-asset-preview.ts",
   router: "portal/src/admin/space-typing-phase-b.ts",
   vfxPage: "portal/src/admin/space-typing-vfx-phase-b.ts",
@@ -32,6 +33,7 @@ requireText(source.childEnemy, "drawModularEnemy", "Enemy preview reuses product
 requireText(source.childEnemy, "new CombatFxSystem()", "Enemy hit/death reuses production CombatFxSystem");
 requireText(source.childBoss, "drawPaintedSprite", "Boss preview reuses painted production renderer");
 requireText(source.childBoss, "bossPhase", "Boss phase preview uses production CombatFxSystem");
+requireText(source.childBoss, "setScenario(next", "Boss child scene owns scenario transitions without requiring candidate reload");
 requireText(source.childWorldStage, "WorldSceneRenderer", "World/Stage preview reuses production WorldSceneRenderer");
 requireText(source.childWorldStage, "worldForStage", "Stage preview resolves canonical production world mapping");
 requireText(source.childWorldRenderer, "export class WorldSceneRenderer", "canonical production WorldSceneRenderer remains available");
@@ -53,6 +55,12 @@ requireText(source.vfxPage, "createCombatVfxProductionPreviewPanel", "VFX first-
 requireText(source.shipFacade, "private latestCandidate", "Ships facade tracks the latest production candidate operation");
 requireText(source.shipFacade, "this.latestCandidate = operation", "Ships facade updates candidate ordering on every load");
 requireText(source.shipFacade, "await this.latestCandidate", "Ships scenario/tuning waits for candidate materialization");
+
+requireText(source.bossPanel, "let latestCandidate: Promise<unknown> = Promise.resolve()", "Boss preview tracks the latest production candidate operation");
+requireText(source.bossPanel, "latestCandidate = operation", "Boss preview updates candidate ordering before awaiting materialization");
+requireText(source.bossPanel, "await latestCandidate", "Boss scenario transitions wait for candidate materialization");
+requireText(source.bossPanel, 'scenario.control.addEventListener("change", () => void applyScenario().catch(reportError))', "Boss scenario changes use the dedicated scenario command path");
+forbidText(source.bossPanel, 'scenario.control.addEventListener("change", () => void loadSelectedBoss()', "Boss scenario changes must not reload the candidate");
 
 requireText(source.systems, '"/api/admin/space-typing/skills/preview"', "Skill preview uses canonical preview endpoint");
 requireText(source.systems, "production SkillEngine", "Skill UI states production engine ownership");
