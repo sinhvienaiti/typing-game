@@ -6,11 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
-// Admin preview host Ship mutation lifecycle and its focused queue test.
-// A8 capability/policy/runtime ownership files are unchanged; World/Stage
-// preview remains child-owned and the authoring authority boundary is intact.
-const EXPECTED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
+// A8 authority re-audit: 33b0764..b75cec6 changes only the isolated Enemy
+// Admin production-preview renderer plus its painted-kind test. World/Stage
+// capability, policy and runtime ownership files are unchanged.
+const EXPECTED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
 const read = (path) => readFile(resolve(root, path), "utf8");
 const readChild = (path) => readFile(resolve(child, path), "utf8");
 
