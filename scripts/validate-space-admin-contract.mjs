@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A17 visual-boundary re-audit: b75cec6..dcba99b changes only the bounded
-// Test Lab direct-launch bootstrap, registry wiring and focused unit coverage.
+// A17 visual-boundary re-audit: dcba99b..f8b74d0 changes only the child
+// Enemy Admin production-preview painted-art resolution/fallback behavior.
 // Background contracts/art ownership and VFX runtime authority are unchanged.
-const VISUALS_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
+const VISUALS_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
 const childPath = new URL("../games/space-typing/contracts/space-typing-admin.v1.json", import.meta.url);
 const snapshotPath = new URL("../portal/src/admin/contracts/space-typing-admin.v1.json", import.meta.url);
 
