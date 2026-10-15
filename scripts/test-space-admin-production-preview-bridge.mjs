@@ -139,11 +139,37 @@ try {
   assert.equal(loads.length, 1, "coalescing should send only the latest same-frame candidate");
   assert.deepEqual(loads[0].payload, { id: "candidate-b" });
 
+  postedMessages.length = 0;
+  const queuedBeforeReset = bridge.loadCandidate(Object.freeze({ id: "candidate-before-reset" }));
+  const resetSettled = Promise.allSettled([queuedBeforeReset]);
+  assert.equal(animationFrames.size, 1, "candidate should be queued before reset");
+
+  const reset = bridge.reset();
+  assert.equal(animationFrames.size, 0, "reset must cancel an unflushed candidate frame");
+  const [queuedBeforeResetResult] = await resetSettled;
+  await reset;
+
+  assert.equal(queuedBeforeResetResult.status, "rejected", "reset must reject an unflushed candidate");
+  assert.ok(
+    queuedBeforeResetResult.reason instanceof ProductionPreviewStaleError,
+    "reset must reject queued candidate with ProductionPreviewStaleError",
+  );
+  assert.equal(
+    postedMessages.filter((message) => message.type === "LOAD_CANDIDATE").length,
+    0,
+    "reset must not let a stale queued candidate load after RESET",
+  );
+  assert.equal(
+    postedMessages.filter((message) => message.type === "RESET").length,
+    1,
+    "reset should issue exactly one RESET command",
+  );
+
   bridge.disposeImmediately();
   assert.equal(iframeRemoved, true, "bridge teardown should remove its iframe");
   assert.equal(messageListeners.size, 0, "bridge teardown should remove its message listener");
 
-  console.log("Production Preview bridge same-frame coalescing test passed: superseded waiter rejects stale and latest candidate resolves.");
+  console.log("Production Preview bridge coalescing/reset test passed: stale waiters reject and queued candidates cannot reload after reset.");
 } finally {
   if (originalWindow === undefined) delete globalThis.window;
   else globalThis.window = originalWindow;
