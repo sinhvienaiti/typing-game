@@ -6,10 +6,12 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-// A10 re-audit: 71de632..4f62c94 changes only Ship unlock runtime authority,
-// A10 capability truth-map code and A10 tests. World/Stage authority,
-// frozen Expedition Stage semantics and adjacent runtime owners are unchanged.
-const EXPECTED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
+// A10.5 re-audit: 4f62c94..6c57a2b only adds isolated Admin preview
+// runtime support for Skill/Equipment/World/Stage. World/Stage policy ownership,
+// production consumers and frozen Expedition semantics remain unchanged.
+const EXPECTED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
+const read = (path) => readFile(resolve(root, path), "utf8");
+const readChild = (path) => readFile(resolve(child, path), "utf8");
 
 const [
   capabilities,
@@ -20,26 +22,32 @@ const [
   routeRuntime,
   objectives,
   challenges,
-  worldsPage,
-  stagesPage,
+  worldsWrapper,
+  worldsLegacy,
+  stagesWrapper,
+  stagesLegacy,
   typingPage,
   router,
   capabilityUi,
 ] = await Promise.all([
-  readFile(resolve(child, "src/admin/a8-world-stage-content-capabilities.ts"), "utf8"),
-  readFile(resolve(child, "src/admin/stage-runtime-policy.ts"), "utf8"),
-  readFile(resolve(child, "src/campaign/stage.ts"), "utf8"),
-  readFile(resolve(child, "src/admin/world-runtime-policy.ts"), "utf8"),
-  readFile(resolve(child, "src/worlds/roster.ts"), "utf8"),
-  readFile(resolve(child, "src/campaign/route.ts"), "utf8"),
-  readFile(resolve(child, "src/events/objectives.ts"), "utf8"),
-  readFile(resolve(child, "src/expansion-v2/challenge.ts"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing-worlds-phase-b.ts"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing-stages-phase-b.ts"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing-typing-content-phase-b.ts"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing-a8-world-stage-capabilities.ts"), "utf8"),
+  readChild("src/admin/a8-world-stage-content-capabilities.ts"),
+  readChild("src/admin/stage-runtime-policy.ts"),
+  readChild("src/campaign/stage.ts"),
+  readChild("src/admin/world-runtime-policy.ts"),
+  readChild("src/worlds/roster.ts"),
+  readChild("src/campaign/route.ts"),
+  readChild("src/events/objectives.ts"),
+  readChild("src/expansion-v2/challenge.ts"),
+  read("portal/src/admin/space-typing-worlds-phase-b.ts"),
+  read("portal/src/admin/space-typing-worlds-phase-b-legacy.ts"),
+  read("portal/src/admin/space-typing-stages-phase-b.ts"),
+  read("portal/src/admin/space-typing-stages-phase-b-legacy.ts"),
+  read("portal/src/admin/space-typing-typing-content-phase-b.ts"),
+  read("portal/src/admin/space-typing-phase-b.ts"),
+  read("portal/src/admin/space-typing-a8-world-stage-capabilities.ts"),
 ]);
+const worldsSurface = `${worldsWrapper}\n${worldsLegacy}`;
+const stagesSurface = `${stagesWrapper}\n${stagesLegacy}`;
 
 function requireText(source, needle, label) {
   assert.ok(source.includes(needle), `${label}: expected ${JSON.stringify(needle)}`);
@@ -61,56 +69,59 @@ for (const id of [
   "typing.catalog-reference",
   "typing.stage-assignment",
   "world.media-reward-relationship-authoring",
-]) {
-  requireText(capabilities, `id: "${id}"`, `A8 capability ${id} is registered`);
-}
+]) requireText(capabilities, `id: "${id}"`, `A8 capability ${id} is registered`);
 for (const status of ["SUPPORTED NOW", "READ-ONLY REFERENCE", "DEFERRED / UNSUPPORTED"]) {
-  requireText(capabilities, `status: "${status}"`, `A8 matrix uses ${status}`);
+  requireText(capabilities, `status: "${status}"`, `A8 matrix preserves ${status}`);
 }
 
-// Stage authority: only the three validated tuning fields reach production.
+// Stage authority: only validated tuning fields reach the production factory.
 for (const field of ["enemyBudget", "eliteChance", "modifierSlots"]) {
   requireText(stagePolicy, field, `Stage policy owns ${field}`);
-  requireText(stagesPage, field, `Stage Admin exposes ${field}`);
+  requireText(stagesSurface, field, `Stage Admin exposes ${field}`);
 }
-requireText(stageRuntime, 'import { activeStageRuntimeOverride } from "../admin/stage-runtime-policy"', "Production Stage factory reads the published Admin session");
-requireText(stageRuntime, "export function createStageConfig(", "Production Stage factory remains the canonical entry point");
-requireText(stageRuntime, "activeStageRuntimeOverride(normalizeStage(stage))", "Production Stage factory resolves the active override");
+requireText(stageRuntime, 'import { activeStageRuntimeOverride } from "../admin/stage-runtime-policy"', "Production Stage factory reads published Admin session");
+requireText(stageRuntime, "export function createStageConfig(", "Production Stage factory remains canonical entry point");
+requireText(stageRuntime, "activeStageRuntimeOverride(normalizeStage(stage))", "Production Stage factory resolves active override");
 requireText(stageRuntime, "return resolveStageConfig(createBundledStageConfigInternal(stage), override);", "Production Stage factory applies validated override fields");
-requireText(stageRuntime, "export function createBundledStageConfig(stage: number)", "Admin preview keeps a bundled baseline");
-requireText(stageRuntime, "return createBundledStageConfigInternal(stage);", "Bundled preview baseline does not recursively consume active runtime policy");
+requireText(stageRuntime, "export function createBundledStageConfig(stage: number)", "Admin preview retains bundled baseline");
 requireText(stagePolicy, "materializeStageRuntimeSessionSnapshot", "Stage policy validates frozen Expedition snapshots");
-requireText(stagePolicy, "captureActiveStageRuntimeSession", "Stage policy exposes immutable page-session capture for new Expedition runs");
-requireText(stagePolicy, "activateExpeditionStageRuntimeSession", "Stage policy exposes an explicit Expedition override boundary");
-requireText(stagePolicy, "expeditionStageRuntimeSession = null", "Expedition override is one-shot and cannot leak into normal Campaign stage creation");
-requireText(stagesPage, "/api/admin/space-typing/stages/preview", "Stage Admin validates through canonical child preview");
-requireText(stagesPage, "api.createRevision", "Stage Admin uses immutable Draft creation");
-forbidText(stagesPage, "api.publish(", "Stage Admin cannot direct-publish");
-requireText(stagesPage, "Reload this screen before saving to avoid overwriting newer published changes", "Stage Admin has stale-active protection");
+requireText(stagePolicy, "captureActiveStageRuntimeSession", "Stage policy exposes immutable page-session capture");
+requireText(stagePolicy, "activateExpeditionStageRuntimeSession", "Stage policy exposes explicit Expedition boundary");
+requireText(stagePolicy, "expeditionStageRuntimeSession = null", "Expedition override cannot leak into normal Campaign creation");
 
-// World authority: enemyRoster is resolved before production selection.
+// A10.5 wrapper + stable editor composition.
+requireText(stagesWrapper, "renderLegacyPhaseBWorldsStages", "Stage wrapper retains established editor");
+requireText(stagesWrapper, "createStageProductionPreviewPanel", "Stage wrapper attaches child production composition preview");
+requireText(stagesSurface, "/api/admin/space-typing/stages/preview", "Stage Admin validates through canonical child preview");
+requireText(stagesSurface, "api.createRevision", "Stage Admin uses immutable Draft creation");
+forbidText(stagesSurface, "api.publish(", "Stage Admin cannot direct-publish");
+requireText(stagesSurface, "Reload this screen before saving to avoid overwriting newer published changes", "Stage Admin retains stale-active protection");
+
+// World authority: enemyRoster is the one authorable World production seam.
 requireText(worldPolicy, 'const AUTHORABLE_KEYS = new Set(["enemyRoster"])', "World policy exposes only enemyRoster");
-requireText(worldRoster, "activeWorldRuntimeOverride", "Production World roster reads the published Admin session");
-requireText(worldRoster, "resolveWorldProfileForRuntime", "Production World roster uses the canonical runtime resolver");
+requireText(worldRoster, "activeWorldRuntimeOverride", "Production World roster reads published Admin session");
+requireText(worldRoster, "resolveWorldProfileForRuntime", "Production World roster uses canonical runtime resolver");
 requireText(worldRoster, "export function worldProfileForRuntimeStage(", "Production World authority helper exists");
 requireText(worldRoster, "worldProfileForRuntimeStage(stage)", "Production spawn path resolves effective World before selection");
-requireText(worldsPage, "/api/admin/space-typing/worlds/preview", "World Admin validates through canonical child preview");
-requireText(worldsPage, "enemyRoster", "World Admin exposes the supported roster field");
-requireText(worldsPage, "api.createRevision", "World Admin uses immutable Draft creation");
-forbidText(worldsPage, "api.publish(", "World Admin cannot direct-publish");
-requireText(worldsPage, "Reload this screen before saving to avoid overwriting newer published changes", "World Admin has stale-active protection");
+requireText(worldsWrapper, "renderLegacyPhaseBWorlds", "World wrapper retains established editor");
+requireText(worldsWrapper, "createWorldProductionPreviewPanel", "World wrapper attaches child production environment preview");
+requireText(worldsSurface, "/api/admin/space-typing/worlds/preview", "World Admin validates through canonical child preview");
+requireText(worldsSurface, "enemyRoster", "World Admin exposes supported roster field");
+requireText(worldsSurface, "api.createRevision", "World Admin uses immutable Draft creation");
+forbidText(worldsSurface, "api.publish(", "World Admin cannot direct-publish");
+requireText(worldsSurface, "Reload this screen before saving to avoid overwriting newer published changes", "World Admin retains stale-active protection");
 
-requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world")', "World Roster route carries the A8 capability summary");
-requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage")', "Stage Overrides route carries the A8 capability summary");
-requireText(worldsPage, 'navigate("/admin/space-typing/worlds-stages")', "World editor links to Stage editor");
-requireText(stagesPage, 'navigate("/admin/space-typing/stages")', "Stage editor links to World editor");
+requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBWorlds(navigate), "world")', "World route carries A8 capability summary");
+requireText(router, 'attachA8WorldStageCapabilitySummary(renderPhaseBStages(navigate), "stage")', "Stage route carries A8 capability summary");
+requireText(worldsSurface, 'navigate("/admin/space-typing/worlds-stages")', "World editor links to Stage editor");
+requireText(stagesSurface, 'navigate("/admin/space-typing/stages")', "Stage editor links to World editor");
 for (const label of ["World Enemy Roster", "Stage Gameplay Tuning", "Routes", "Objectives", "Daily / Weekly Challenges", "Typing Assignment"]) {
   requireText(capabilityUi, label, `A8 UI surfaces ${label}`);
 }
 requireText(capabilityUi, "AUTHORITY VERIFIED", "A8 UI declares verified authority boundary");
 requireText(capabilityUi, "READ-ONLY REFERENCE", "A8 UI visibly marks read-only adjacent systems");
 requireText(capabilityUi, "DEFERRED / UNSUPPORTED", "A8 UI visibly marks unsupported Typing assignment");
-requireText(capabilityUi, "World Music, Backgrounds and Rewards remain separate canonical Admin domains", "A8 UI preserves dedicated domain ownership");
+requireText(capabilityUi, "World Music, Backgrounds and Rewards remain separate canonical Admin domains", "A8 preserves dedicated domain ownership");
 
 requireText(routeRuntime, "export function createRouteGraph(", "Routes stay deterministic runtime state");
 requireText(routeRuntime, "export function isValidRouteGraph(", "Routes retain runtime validation");
@@ -120,18 +131,9 @@ requireText(challenges, "export function weeklyChallengeIdentity(", "Weekly chal
 requireText(typingPage, "Editing is intentionally disabled here", "Typing Content remains canonical read/reference only");
 forbidText(typingPage, "api.createRevision", "Typing Content cannot create fake Stage assignment Drafts");
 
-for (const fakeField of [
-  "routeGraph",
-  "objectiveType",
-  "objectiveRewardFactor",
-  "challengeSeed",
-  "challengeSchedule",
-  "typingContentId",
-  "vocabularyAssignmentId",
-  "typingTextAssignmentId",
-]) {
+for (const fakeField of ["routeGraph", "objectiveType", "objectiveRewardFactor", "challengeSeed", "challengeSchedule", "typingContentId", "vocabularyAssignmentId", "typingTextAssignmentId"]) {
   forbidText(stagePolicy, fakeField, `Stage policy must not invent ${fakeField}`);
   forbidText(worldPolicy, fakeField, `World policy must not invent ${fakeField}`);
 }
 
-console.log(`Space Typing Admin A8 World/Stage content authority audit: PASS · child ${childHead.slice(0, 12)} · World roster + Stage tuning production-backed; Expedition consumes frozen Stage snapshots; Routes/Objectives/Challenges/Typing assignment remain read-only/deferred.`);
+console.log(`Space Typing Admin A8: PASS · child ${childHead.slice(0, 12)} · World roster/Stage tuning remain production-backed while A10.5 adds child-owned World/Stage rendering; adjacent Routes/Objectives/Challenges/Typing remain read-only/deferred.`);
