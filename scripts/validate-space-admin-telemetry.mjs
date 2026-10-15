@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// Telemetry ownership re-audit: dcba99b..f8b74d0 changes only the child Enemy
-// Admin production-preview painted-art resolution/fallback behavior.
-// Telemetry and historical analytics ownership sources asserted below are unchanged.
-const TELEMETRY_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
+// Telemetry ownership re-audit: f8b74d0..9cd58072 changes only the child Enemy
+// Admin presentation mapping/test. Telemetry and historical analytics ownership
+// sources asserted below are unchanged.
+const TELEMETRY_AUDITED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-telemetry.v1.json"));
 const [page, router, server, phaseMapSource, historicalAdmin, historicalAnalytics, historicalSummary] = await Promise.all([
