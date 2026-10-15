@@ -107,11 +107,16 @@ assert.match(api, /getRuntime\(\): Promise<AdminRuntimePayload>/);
 assert.match(main, /renderPhaseBAdminScreen/);
 assert.match(main, /if \(phaseB !== null\) return phaseB/);
 
+// Every routed Phase B surface is decorated centrally so preview classification
+// and role-aware UI gates cannot be bypassed by a direct route.
+assert.match(phaseBRouter, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(phaseBRouter, /attachRoleAwareActionGates\(screen\)/);
+
 // General Settings must use the dedicated fail-closed editor before the legacy core fallback.
 assert.match(phaseBRouter, /renderPhaseBSettings/);
-assert.match(phaseBRouter, /\$\{BASE\}\/settings`\) return renderPhaseBSettings\(navigate\)/);
+assert.match(phaseBRouter, /\$\{BASE\}\/settings`\) return decorated\(path, renderPhaseBSettings\(navigate\)\)/);
 assert.ok(
-  phaseBRouter.indexOf("`${BASE}/settings`") < phaseBRouter.indexOf("renderPhaseBCoreAdminScreen(path, navigate)"),
+  phaseBRouter.indexOf("`${BASE}/settings`") < phaseBRouter.indexOf("return decorated(path, renderPhaseBCoreAdminScreen(path, navigate));"),
   "General Settings must be intercepted before the legacy core renderer",
 );
 assert.match(settingsPhaseB, /Admin Phase B · General Settings draft/);
@@ -151,7 +156,7 @@ assert.match(audioPhaseB, /assertStableActiveRevision/);
 // A9 SFX is a first-class administrator Media workflow, but remains read-only
 // because the child runtime does not yet own a publishable SFX policy.
 assert.match(phaseBRouter, /renderPhaseBSfx/);
-assert.match(phaseBRouter, /\$\{BASE\}\/sfx`\) return renderPhaseBSfx\(\)/);
+assert.match(phaseBRouter, /\$\{BASE\}\/sfx`\) return decorated\(path, renderPhaseBSfx\(\)\)/);
 assert.match(sfxPhaseB, /createAdminSfxCatalog/);
 assert.match(sfxPhaseB, /RUNTIME-BACKED · READ ONLY/);
 assert.match(sfxPhaseB, /TEST PLAYBACK/);
