@@ -50,9 +50,17 @@ for (const token of ["before", "after", "getAudit", "Publish", "Rollback", "Adva
 }
 assert.match(history, /expectedActiveRevision|api\.publish|api\.rollback/);
 
-// A15: technical surfaces are consolidated by the five master-plan inspector areas.
-for (const id of ["runtime", "contracts", "validation", "assets", "qa"]) {
+// A15: technical surfaces are consolidated into the five named inspector areas.
+const developerSections = [
+  ["runtime-inspector", "Runtime Inspector"],
+  ["contract-inspector", "Contract Inspector"],
+  ["validation", "Validation"],
+  ["asset-diagnostics", "Asset Diagnostics"],
+  ["qa-sandbox", "QA Sandbox"],
+];
+for (const [id, label] of developerSections) {
   assert.ok(developerTools.includes(`id: "${id}"`), `Developer Tools section missing: ${id}`);
+  assert.ok(developerTools.includes(`label: "${label}"`), `Developer Tools section label missing: ${label}`);
 }
 assert.match(developerTools, /developer\.runtime-inspect/);
 
