@@ -23,6 +23,9 @@ const [
   enemyProductionPreview,
   bossWrapper,
   bossLegacy,
+  bossProductionPreview,
+  selectionSync,
+  runtimePreviewCss,
 ] = await Promise.all([
   readChild("src/admin/a7-enemy-boss-capabilities.ts"),
   readChild("src/admin/enemy-runtime-policy.ts"),
@@ -38,6 +41,9 @@ const [
   read("portal/src/admin/v2/preview/enemy-production-preview.ts"),
   read("portal/src/admin/space-typing-bosses-phase-b.ts"),
   read("portal/src/admin/space-typing-bosses-phase-b-legacy.ts"),
+  read("portal/src/admin/v2/preview/panels/boss-production-preview.ts"),
+  read("portal/src/admin/v2/preview/registry-selection-sync.ts"),
+  read("portal/src/admin/v2/admin-runtime-preview-fixes.css"),
 ]);
 const bossSurface = `${bossWrapper}\n${bossLegacy}`;
 
@@ -81,12 +87,17 @@ for (const token of [
   "enemyAssetPreviewPaintedKind",
   "hasPaintedEnemy",
   "production-painted-enemy",
-  "must never silently",
+  "PREVIEW_KIND_BY_ID",
+  "PREVIEW_KIND_BY_ROLE",
+  "definition.role",
+  "admin-presentation-only",
+  "never silently falls back",
   "pnpm art:prepare",
 ]) requireText(enemyAssetPreview, token, `Enemy production painted-art invariant ${token}`);
-requireText(enemyAssetPreview, 'definitionId.endsWith(`-${kind}`)', "Enemy painted preview maps canonical family-kind IDs such as rainbow-scout");
+requireText(enemyAssetPreview, 'definitionId.endsWith(`-${kind}`)', "Enemy painted preview preserves direct family-kind mappings such as rainbow-scout");
 requireText(enemyAssetPreview, "paintedEnemySprite(candidate.definition.family, candidate.paintedKind, \"high\")", "Enemy preview draws the exact prepared production painted asset");
-forbidText(enemyAssetPreview, "production-painted-enemy-with-modular-fallback", "Painted-mapped Enemy preview must not advertise silent modular fallback");
+forbidText(enemyAssetPreview, "drawModularEnemy", "Enemy Admin preview must not silently render the generic modular/base body");
+forbidText(enemyAssetPreview, "StaticEnemyBodyCache", "Enemy Admin preview must not retain modular-body fallback cache");
 
 requireText(bossPolicy, "name?: string", "Boss policy preserves name migration data");
 requireText(bossPolicy, "title?: string", "Boss policy preserves title migration data");
@@ -118,6 +129,19 @@ forbidText(enemyProductionPreview, "Media V2 tester", "Enemy primary preview mus
 
 requireText(bossWrapper, "renderLegacyBosses", "Boss wrapper retains established canonical inspector");
 requireText(bossWrapper, "createBossProductionPreviewPanel", "Boss wrapper attaches production preview panel");
+requireText(bossWrapper, "wireLegacyRegistrySelection", "Boss registry View selection is synchronized into production preview");
+requireText(bossWrapper, "preview.selectBoss", "Boss wrapper forwards canonical registry identity to production preview");
+requireText(selectionSync, 'button.closest(".stx-toggle-row")', "Shared registry selection sync remains row-scoped");
+for (const token of [
+  "selectBoss",
+  "pendingSelectionId",
+  "st-admin-production-preview-shell--hero",
+  "st-admin-preview-media-tools",
+  "Media candidate · preview only",
+  "mediaTools.append(mediaSummary, mediaTester.root)",
+]) requireText(bossProductionPreview, token, `Boss Ship-first preview UX ${token}`);
+requireText(runtimePreviewCss, ".st-admin-boss-preview-primary .st-admin-production-preview-shell--hero", "Boss production renderer retains hero-sized viewport");
+requireText(runtimePreviewCss, ".st-admin-preview-media-tools>summary", "Boss media candidate control remains secondary/collapsible");
 for (const token of [
   "createAssetTuningCapabilityState",
   'label: "Name / Title"',
@@ -138,4 +162,4 @@ for (const fakeField of ["mediaAssetVersionId", "imageAssetVersionId", "modelAss
   forbidText(bossPolicy, fakeField, `Boss policy must not invent ${fakeField}`);
 }
 
-console.log("Space Typing Admin A7: PASS — Enemy projectile authoring remains production-backed; Enemy painted art is automatic/fail-closed instead of manual QA replacement; Boss preview ownership remains child production-backed.");
+console.log("Space Typing Admin A7: PASS — every registry Enemy receives deterministic painted Admin presentation without modular fallback; Boss keeps a hero production renderer with secondary media QA and synchronized registry selection.");
