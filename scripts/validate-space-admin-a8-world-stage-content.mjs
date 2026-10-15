@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-// A8 authority re-audit: dcba99b..f8b74d0 changes only the child Enemy
-// Admin production-preview painted-art resolution/fallback behavior. World/Stage
-// capability, policy and runtime ownership files are unchanged.
-const EXPECTED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
+// A8 authority re-audit: f8b74d0..9cd58072 changes only the child Enemy
+// Admin presentation mapping/test. World/Stage capability, policy and runtime
+// ownership files are unchanged.
+const EXPECTED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
 const read = (path) => readFile(resolve(root, path), "utf8");
 const readChild = (path) => readFile(resolve(child, path), "utf8");
 
