@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
-// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
-// Daily/Weekly challenge identity, deterministic runtime, browser-local
-// persistence and read-only Admin ownership remain untouched.
-const DAILY_WEEKLY_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10.5 re-audit: 71de632..6c57a2b changes Ship/A10 capability work and
+// isolated Admin preview modules. Daily/Weekly challenge identity,
+// deterministic runtime, browser-local persistence and read-only Admin
+// ownership asserted below are unchanged.
+const DAILY_WEEKLY_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-daily-weekly.v1.json"));
 const [page, router, server, phaseMapSource, weeklyRuntime, weeklyAdmin, challengeSource] = await Promise.all([
@@ -114,7 +114,9 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 }
 
 assert.match(router, /renderPhaseBDailyWeekly/);
-assert.match(router, /\$\{BASE\}\/daily-weekly`\) return renderPhaseBDailyWeekly\(\)/);
+assert.match(router, /\$\{BASE\}\/daily-weekly`\) return decorated\(path, renderPhaseBDailyWeekly\(\)\)/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 assert.match(page, /\/api\/admin\/space-typing\/daily-weekly\/contract/);
 assert.match(page, /DAILY · RUNTIME-BACKED/);
 assert.match(page, /WEEKLY · RUNTIME-BACKED/);
