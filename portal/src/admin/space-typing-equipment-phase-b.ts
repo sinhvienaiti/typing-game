@@ -1,5 +1,5 @@
 import { renderPhaseBEquipment as renderLegacyEquipment } from "./space-typing-equipment-phase-b-legacy";
-import { createEquipmentProductionRuntimePanel } from "./v2/preview/panels/system-runtime-preview";
+import { createEquipmentProductionRuntimePanel } from "./v2/preview/panels/equipment-runtime-preview";
 
 type Navigate = (path: string) => void;
 
