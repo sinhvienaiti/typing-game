@@ -93,7 +93,7 @@ const routes = [
   ["Missions", "/missions"],
   ["Daily / Weekly", "/daily-weekly"],
   ["Expedition", "/expedition"],
-  ["Events", "/events"],
+  ["Live Ops", "/events"],
   ["Duel Settings", "/duel"],
   ["Ranked", "/ranked"],
   ["Alternative Modes", "/alternative-modes"],
@@ -119,8 +119,14 @@ const primaryRoutes = new Map([
   ["Bosses", "/bosses"],
   ["Worlds & Stages", "/stages"],
   ["Typing Content", "/typing-content"],
+  ["Shop", "/shop"],
+  ["Live Ops", "/events"],
   ["General Settings", "/settings"],
   ["History & Publish", "/history"],
+]);
+const v2OnlyPrimaryRoutes = new Map([
+  ["Media Library", "/media"],
+  ["Roles & Permissions", "/roles"],
 ]);
 const developerRoutes = new Map(routes.filter(([label]) => !primaryRoutes.has(label)));
 const developerManifestPaths = new Set(
@@ -130,7 +136,7 @@ const developerManifestPaths = new Set(
 assert(Array.isArray(phaseMap.screens), "Phase B map screens are missing");
 assert(phaseMap.screens.length === routes.length, `Phase B map must contain exactly ${routes.length} registered legacy/canonical routes during A2 migration`);
 
-// A2 navigation contract: administrator workflows stay in primary navigation; technical/read-only routes remain reachable through permission-gated Developer Tools.
+// A2/A11/A15 navigation contract: administrator workflows stay primary; diagnostics stay permission-gated.
 for (const [label, suffix] of primaryRoutes) {
   assert(main.includes(`label: "${label}"`), `Primary administrator navigation is missing ${label}`);
   if (suffix === "") {
@@ -138,6 +144,11 @@ for (const [label, suffix] of primaryRoutes) {
   } else {
     assert(main.includes(`path: \`\${ADMIN_BASE}${suffix}\``), `Primary administrator navigation path is missing ${label} (${suffix})`);
   }
+  assert(command.includes(`"${label}"`), `Primary command palette is missing ${label}`);
+}
+for (const [label, suffix] of v2OnlyPrimaryRoutes) {
+  assert(main.includes(`label: "${label}"`), `Admin V2 primary navigation is missing ${label}`);
+  assert(main.includes(`path: \`\${ADMIN_BASE}${suffix}\``), `Admin V2 primary navigation path is missing ${label} (${suffix})`);
   assert(command.includes(`"${label}"`), `Primary command palette is missing ${label}`);
 }
 
@@ -149,6 +160,7 @@ for (const [label, suffix] of developerRoutes) {
   assert(developerManifestPaths.has(absolutePath), `Developer Tools manifest is missing ${label} (${absolutePath})`);
   assert(main.includes(legacyKey), `Legacy breadcrumb/direct-route metadata is missing ${label} (${suffix})`);
 }
+assert(!developerManifestPaths.has("/admin/space-typing/shop"), "Shop must remain an administrator workflow rather than a Developer Tools-only surface");
 assert(main.includes('label: "Developer Tools"'), "Primary navigation is missing permission-gated Developer Tools entry");
 assert(main.includes('requiredPermission: DEVELOPER_PERMISSION'), "Developer Tools primary entry is not permission-gated");
 
@@ -215,13 +227,15 @@ for (const file of forbiddenLegacyFiles) {
   assert(!exists(file), `Dead legacy Admin module must be removed: ${file}`);
 }
 
-// Canonical critical routes must still resolve to their runtime-backed owners even after leaving primary navigation.
-assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return renderPhaseBTelemetry(path);'), "Overview/Analytics canonical telemetry owner is missing");
-assert(router.includes('if (path === `${BASE}/music-library`) return renderPhaseBMusicLibrary();'), "Music Library is not routed to the runtime catalog surface");
-assert(router.includes('if (path === `${BASE}/sfx`) return renderPhaseBSfx();'), "SFX is not routed to the production sample catalog surface");
-assert(router.includes('if (path === `${BASE}/daily-weekly`) return renderPhaseBDailyWeekly();'), "Daily/Weekly is not routed to the canonical runtime-boundary surface");
-assert(router.includes('if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return renderPhaseBFeatureGates();'), "Feature Gates canonical/legacy route handling is missing");
-assert(router.includes('return renderPhaseBCoreAdminScreen(path, navigate);'), "Phase B core fallback for revision-backed screens is missing");
+// Canonical routes are decorated centrally so preview classification and role-aware gates cannot be bypassed.
+assert(router.includes('attachProductionPreviewClassification(screen, path);'), "Phase B router no longer applies production-preview classification centrally");
+assert(router.includes('attachRoleAwareActionGates(screen);'), "Phase B router no longer applies role-aware action gates centrally");
+assert(router.includes('if (path === BASE || path === `${BASE}/analytics`) return decorated(path, renderPhaseBTelemetry(path));'), "Overview/Analytics canonical telemetry owner is missing");
+assert(router.includes('if (path === `${BASE}/music-library`) return decorated(path, renderPhaseBMusicLibrary());'), "Music Library is not routed to the runtime catalog surface");
+assert(router.includes('if (path === `${BASE}/sfx`) return decorated(path, renderPhaseBSfx());'), "SFX is not routed to the production sample catalog surface");
+assert(router.includes('if (path === `${BASE}/daily-weekly`) return decorated(path, renderPhaseBDailyWeekly());'), "Daily/Weekly is not routed to the canonical runtime-boundary surface");
+assert(router.includes('if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return decorated(path, renderPhaseBFeatureGates());'), "Feature Gates canonical/legacy route handling is missing");
+assert(router.includes('return decorated(path, renderPhaseBCoreAdminScreen(path, navigate));'), "Phase B core fallback for revision-backed screens is missing");
 
 assert(telemetry.includes('/api/admin/space-typing/telemetry/contract'), "Telemetry screen is not bound to the authenticated telemetry contract");
 assert(telemetry.includes('RUNTIME-BACKED · READ ONLY'), "Telemetry runtime read-only badge is missing");
