@@ -37,6 +37,7 @@ type PendingRequest = {
 };
 
 type PreviewWaiter = {
+  generation: number;
   resolve: (payload: unknown) => void;
   reject: (error: Error) => void;
 };
@@ -193,11 +194,11 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
 
   loadCandidate(candidate: TCandidate): Promise<unknown> {
     if (this.disposed) return Promise.reject(new Error("Production preview bridge is disposed."));
-    ++this.candidateGeneration;
+    const generation = ++this.candidateGeneration;
     this.lastCandidate = candidate;
     this.queuedCandidate = candidate;
     const result = new Promise<unknown>((resolve, reject) => {
-      this.queuedWaiters.push({ resolve, reject });
+      this.queuedWaiters.push({ generation, resolve, reject });
     });
     if (this.queuedFrame === null) {
       this.queuedFrame = window.requestAnimationFrame(() => {
@@ -205,7 +206,12 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
         const flushGeneration = this.candidateGeneration;
         const nextCandidate = this.queuedCandidate;
         this.queuedCandidate = null;
-        const waiters = this.queuedWaiters.splice(0);
+        const queued = this.queuedWaiters.splice(0);
+        const waiters: PreviewWaiter[] = [];
+        for (const waiter of queued) {
+          if (waiter.generation === flushGeneration) waiters.push(waiter);
+          else waiter.reject(new ProductionPreviewStaleError());
+        }
         if (nextCandidate === null) {
           const error = new Error("Production preview candidate queue was empty.");
           for (const waiter of waiters) waiter.reject(error);
