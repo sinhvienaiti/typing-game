@@ -12,24 +12,28 @@ const [
   capabilities,
   skillPolicy,
   equipmentPolicy,
+  paintedIcons,
   skillWrapper,
   skillLegacy,
   equipmentWrapper,
   equipmentLegacy,
   skillRuntimePanel,
   equipmentRuntimePanel,
+  productionIconPreview,
   sharedStudio,
   sharedHelp,
 ] = await Promise.all([
   readChild("src/admin/a6-skill-equipment-capabilities.ts"),
   readChild("src/admin/skill-runtime-policy.ts"),
   readChild("src/admin/equipment-runtime-policy.ts"),
+  readChild("src/ui/painted-icons.ts"),
   read("portal/src/admin/space-typing-skills-phase-b.ts"),
   read("portal/src/admin/space-typing-skills-phase-b-legacy.ts"),
   read("portal/src/admin/space-typing-equipment-phase-b.ts"),
   read("portal/src/admin/space-typing-equipment-phase-b-legacy.ts"),
   read("portal/src/admin/v2/preview/panels/system-runtime-preview.ts"),
   read("portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts"),
+  read("portal/src/admin/v2/preview/production-registry-icon.ts"),
   read("portal/src/admin/v2/asset-tuning-studio.ts"),
   read("portal/src/admin/v2/admin-help.ts"),
 ]);
@@ -112,8 +116,11 @@ for (const token of [
   "/api/admin/space-typing/skills/preview",
   "scheduleDraftPreview",
   "LIVE_PREVIEW_DELAY_MS",
+  'createProductionRegistryIconPreview("skill")',
+  "visual.show(item.id, item.name)",
+  "Preview draft candidate",
 ]) {
-  requireText(skillRuntimePanel, token, `Skill production runtime evidence ${token}`);
+  requireText(skillRuntimePanel, token, `Skill production runtime/visual evidence ${token}`);
 }
 for (const token of [
   "resolveEquipmentPerks",
@@ -123,16 +130,30 @@ for (const token of [
   "/api/admin/space-typing/equipment/preview",
   "scheduleDraftPreview",
   "LIVE_PREVIEW_DELAY_MS",
+  'createProductionRegistryIconPreview("equipment")',
+  "visual.show(item.id, item.name)",
+  "Preview draft candidate",
 ]) {
-  requireText(equipmentRuntimePanel, token, `Equipment production runtime evidence ${token}`);
+  requireText(equipmentRuntimePanel, token, `Equipment production runtime/visual evidence ${token}`);
 }
 requireText(equipmentRuntimePanel, "MULTIPLIER_EFFECTS.has(key) ? value !== 1 : value !== 0", "Equipment preview distinguishes multiplier baseline 1 from real numeric effect 1");
 requireText(skillRuntimePanel, "if (current !== previewGeneration) return", "Skill live preview remains latest-request-wins");
 requireText(equipmentRuntimePanel, "if (current !== previewGeneration) return", "Equipment live preview remains latest-request-wins");
+
+for (const token of [
+  "paintedSkillIcon",
+  "paintedEquipmentIcon",
+  "CHILD ASSET · READ ONLY",
+  "canonical child production painted icon",
+]) requireText(productionIconPreview, token, `Production registry visual helper ${token}`);
+requireText(paintedIcons, '../assets/icons/skills/*.webp', "Child production resolver owns Skill painted icons");
+requireText(paintedIcons, '../assets/icons/equipment/*.webp', "Child production resolver owns Equipment painted icons");
+requireText(paintedIcons, "export function paintedSkillIcon", "Child exposes canonical Skill painted icon resolver");
+requireText(paintedIcons, "export function paintedEquipmentIcon", "Child exposes canonical Equipment painted icon resolver");
 
 for (const fakeUi of ["effectPreset", "vfxAssetVersionId", "sfxAssetVersionId", "iconAssetVersionId", "imageAssetVersionId"]) {
   forbidText(skillSurface, fakeUi, `Skills UI must not expose unowned ${fakeUi}`);
   forbidText(equipmentSurface, fakeUi, `Equipment UI must not expose unowned ${fakeUi}`);
 }
 
-console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while live A10.5 previews exercise child-owned production behavior.");
+console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while live runtime simulation is paired with exact child-owned painted production visuals.");
