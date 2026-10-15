@@ -1,8 +1,8 @@
-// A10 unlock/economy authority re-audit: dcba99b..f8b74d0 changes only the
-// child Enemy Admin production-preview painted-art resolution/fallback behavior.
-// The A10 capability map, Ship runtime policy, character unlock consumer,
-// wallet/economy formulas, rewards, loot and entitlement ownership are unchanged.
-export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
+// A10 unlock/economy authority re-audit: f8b74d0..9cd58072 changes only the
+// child Enemy Admin presentation mapping/test. The A10 capability map, Ship
+// runtime policy, character unlock consumer, wallet/economy formulas, rewards,
+// loot and entitlement ownership are unchanged.
+export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
 
 const capabilities = Object.freeze([
   {
