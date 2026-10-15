@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// Daily/Weekly ownership re-audit: b75cec6..dcba99b changes only the bounded
-// Test Lab direct-launch bootstrap, registry wiring and focused unit coverage.
+// Daily/Weekly ownership re-audit: dcba99b..f8b74d0 changes only the child
+// Enemy Admin production-preview painted-art resolution/fallback behavior.
 // Daily/Weekly challenge identity, deterministic runtime, browser-local
 // persistence and read-only Admin ownership asserted below are unchanged.
-const DAILY_WEEKLY_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
+const DAILY_WEEKLY_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-daily-weekly.v1.json"));
 const [page, router, server, phaseMapSource, weeklyRuntime, weeklyAdmin, challengeSource] = await Promise.all([
