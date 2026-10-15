@@ -12,6 +12,7 @@ const [
   capabilities,
   enemyPolicy,
   enemyPreview,
+  enemyAssetPreview,
   enemyProjectilePolicy,
   enemyRegistry,
   worldRoster,
@@ -19,12 +20,14 @@ const [
   bossPreview,
   bossIdentity,
   enemyPage,
+  enemyProductionPreview,
   bossWrapper,
   bossLegacy,
 ] = await Promise.all([
   readChild("src/admin/a7-enemy-boss-capabilities.ts"),
   readChild("src/admin/enemy-runtime-policy.ts"),
   readChild("src/admin/enemy-registry-preview.ts"),
+  readChild("src/admin/enemy-asset-preview.ts"),
   readChild("src/combat/enemy-projectile-policy.ts"),
   readChild("src/enemies/registry.ts"),
   readChild("src/worlds/roster.ts"),
@@ -32,6 +35,7 @@ const [
   readChild("scripts/admin/boss-registry-preview.ts"),
   readChild("src/boss/identity.ts"),
   read("portal/src/admin/space-typing-enemies-phase-b.ts"),
+  read("portal/src/admin/v2/preview/enemy-production-preview.ts"),
   read("portal/src/admin/space-typing-bosses-phase-b.ts"),
   read("portal/src/admin/space-typing-bosses-phase-b-legacy.ts"),
 ]);
@@ -73,6 +77,17 @@ forbidText(enemyRegistry, "activeEnemyRuntimeOverride", "Bundled enemy registry 
 forbidText(worldRoster, "activeEnemyRuntimeOverride", "World roster must not be mistaken for consuming Enemy minStage override");
 for (const token of ["rewardPower", "visual:", "spawnFx", "hitFx", "deathFx"]) requireText(enemyRegistry, token, `Enemy registry owns bundled ${token}`);
 
+for (const token of [
+  "enemyAssetPreviewPaintedKind",
+  "hasPaintedEnemy",
+  "production-painted-enemy",
+  "must never silently",
+  "pnpm art:prepare",
+]) requireText(enemyAssetPreview, token, `Enemy production painted-art invariant ${token}`);
+requireText(enemyAssetPreview, 'definitionId.endsWith(`-${kind}`)', "Enemy painted preview maps canonical family-kind IDs such as rainbow-scout");
+requireText(enemyAssetPreview, "paintedEnemySprite(candidate.definition.family, candidate.paintedKind, \"high\")", "Enemy preview draws the exact prepared production painted asset");
+forbidText(enemyAssetPreview, "production-painted-enemy-with-modular-fallback", "Painted-mapped Enemy preview must not advertise silent modular fallback");
+
 requireText(bossPolicy, "name?: string", "Boss policy preserves name migration data");
 requireText(bossPolicy, "title?: string", "Boss policy preserves title migration data");
 requireText(bossPreview, 'authorableFields: ["name", "title"]', "Boss registry preview documents preserved envelope");
@@ -90,6 +105,16 @@ for (const token of [
 ]) requireText(enemyPage, token, `Enemy Admin evidence ${token}`);
 forbidText(enemyPage, "api.publish(", "Enemy editor cannot bypass History with direct publish");
 forbidText(enemyPage, "Canonical runtime consumer: Enemy spawn profile minimum-stage gate", "Enemy page must not invent minStage runtime ownership");
+
+for (const token of [
+  "canonical painted art resolved automatically",
+  "Enemy art is resolved automatically by the child production renderer",
+  "canonical child-owned art",
+  "ProductionPreviewBridge.mount",
+]) requireText(enemyProductionPreview, token, `Enemy production preview UX ${token}`);
+forbidText(enemyProductionPreview, "createImageMediaCandidateTester", "Enemy primary preview must not ask administrators to choose a temporary image");
+forbidText(enemyProductionPreview, "Choose candidate image", "Enemy primary preview must not expose candidate-image QA picker copy");
+forbidText(enemyProductionPreview, "Media V2 tester", "Enemy primary preview must not present temporary Media QA as production art ownership");
 
 requireText(bossWrapper, "renderLegacyBosses", "Boss wrapper retains established canonical inspector");
 requireText(bossWrapper, "createBossProductionPreviewPanel", "Boss wrapper attaches production preview panel");
@@ -113,4 +138,4 @@ for (const fakeField of ["mediaAssetVersionId", "imageAssetVersionId", "modelAss
   forbidText(bossPolicy, fakeField, `Boss policy must not invent ${fakeField}`);
 }
 
-console.log("Space Typing Admin A7: PASS — Enemy projectile authoring remains production-backed, migration-only fields stay fail-closed, and Enemy/Boss A10.5 previews reuse child production rendering.");
+console.log("Space Typing Admin A7: PASS — Enemy projectile authoring remains production-backed; Enemy painted art is automatic/fail-closed instead of manual QA replacement; Boss preview ownership remains child production-backed.");
