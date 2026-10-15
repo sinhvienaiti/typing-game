@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A17 visual-boundary re-audit: 9cd58072..f31a2908 adds the authored Boss 3D
-// runtime plus Admin testing-policy bootstrap/state tests. It does not change
-// Background contracts/art ownership, VFX contracts, or Game.ts VFX authority.
-const VISUALS_AUDITED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
+// A17 visual-boundary re-audit: f31a2908..22a35dd changes only the A10 testing
+// selection capability/bootstrap/tests. It does not change Background contracts,
+// art ownership, VFX contracts, or Game.ts VFX authority.
+const VISUALS_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 const childPath = new URL("../games/space-typing/contracts/space-typing-admin.v1.json", import.meta.url);
 const snapshotPath = new URL("../portal/src/admin/contracts/space-typing-admin.v1.json", import.meta.url);
 
