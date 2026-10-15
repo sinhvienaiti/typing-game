@@ -1,352 +1,323 @@
 # Space Typing Admin V2 — Manual Acceptance
 
-> Task-based manual QA checklist for Administrator-first Admin V2.
+> Task-based acceptance checklist for the Administrator-first Admin V2.
 >
-> Automated implementation must continue when these scenarios are safely deferrable. Manual QA becomes blocking only when a later dependency requires the observed browser behavior to be proven.
+> **Policy:** automated evidence may prove architecture/safety invariants, but it does **not** replace visual/browser acceptance. Every A17 browser scenario remains `MANUAL: QUEUED` until a human executes it. A queued manual scenario does not block unrelated implementation work.
 
 ---
 
-# A1 — Help / Tooltip / Shell Foundation
+## Acceptance status legend
 
-## A1-M01 — Navigation tooltip by mouse
-
-1. Open Space Typing Admin on desktop.
-2. Expand a sidebar group.
-3. Hover a group label.
-4. Hover an item such as Ships or Music Library.
-
-Expected:
-- concise label remains the only permanent sidebar text;
-- contextual tooltip appears near the hovered control;
-- tooltip uses the dark Space Typing sci-fi style;
-- tooltip does not cover the trigger when another placement fits;
-- moving away closes non-pinned help;
-- no browser-native yellow `title` tooltip appears.
-
-## A1-M02 — Keyboard tooltip access
-
-1. Navigate the sidebar using Tab / Shift+Tab.
-2. Focus a group toggle and a navigation item.
-
-Expected:
-- visible keyboard focus remains clear;
-- contextual help is available on focus without requiring a mouse;
-- help is associated accessibly with the focused control;
-- Escape closes visible tooltip help.
-
-## A1-M03 — Click/tap info icon
-
-1. Activate the info icon beside `LOCAL ADMIN · CONNECTED` with mouse click.
-2. Repeat using keyboard Enter/Space.
-3. On a touch-capable device or emulation, tap the icon.
-
-Expected:
-- tooltip/popover toggles open;
-- content explains local Admin and draft/publish behavior in administrator language;
-- a second activation closes it;
-- tap/click outside closes it;
-- Escape closes it and restores focus to the trigger where applicable.
-
-## A1-M04 — Tooltip collision handling
-
-1. Resize the viewport so the sidebar/topbar trigger is close to a window edge.
-2. Open the associated tooltip.
-
-Expected:
-- tooltip flips/repositions when the preferred direction has insufficient space;
-- tooltip remains inside the viewport with readable padding;
-- no horizontal page overflow is introduced.
-
-## A1-M05 — Route teardown
-
-1. Open a tooltip.
-2. Navigate to another Space Typing Admin route before interacting with the old tooltip.
-
-Expected:
-- old tooltip node disappears;
-- no stale tooltip is visible on the new route;
-- new route help still works;
-- repeated navigation does not produce duplicated Escape/outside-click behavior.
-
-## A1-M06 — Leaving Admin teardown
-
-1. Open/pin a tooltip in Space Typing Admin.
-2. Navigate out of Space Typing Admin to another portal surface.
-
-Expected:
-- body-level tooltip/backdrop is removed;
-- no Admin overlay remains on the non-Admin page;
-- returning to Admin creates one clean help lifecycle only.
-
-## A1-M07 — Help drawer keyboard behavior
-
-Execute once a screen uses the shared Help Drawer.
-
-Expected:
-- drawer receives initial focus;
-- Tab/Shift+Tab stays inside the drawer;
-- Escape closes the drawer;
-- clicking/tapping the backdrop closes it;
-- focus returns to the element that opened it;
-- background controls are not accidentally activated while the drawer is open.
-
-## A1-M08 — Reduced motion
-
-1. Enable OS/browser `prefers-reduced-motion: reduce`.
-2. Open tooltips/help drawer.
-
-Expected:
-- tooltip/drawer remains fully usable;
-- decorative transitions/animations are suppressed.
-
-## A1-M09 — Sidebar density
-
-Inspect the sidebar at desktop/laptop widths.
-
-Expected:
-- no always-visible short description appears beneath every item;
-- groups/items are materially less noisy than Phase B;
-- labels remain scannable and do not overlap icons/chevrons;
-- active route remains obvious.
+- `AUTOMATED: COVERED` — a validator/test protects the relevant invariant.
+- `AUTOMATED: PARTIAL` — some safety/ownership behavior is automated; visual/browser behavior still needs manual verification.
+- `MANUAL: QUEUED` — ready for human execution; not claimed as passed.
+- `MANUAL: BLOCKED` — only for a genuine missing dependency, never simply because nobody has clicked through yet.
 
 ---
 
-# A2 — Administrator Shell / Dashboard / Developer Tools
+# Retained foundation acceptance — A1 / A2 / A3.1
 
-## A2-M01 — Dashboard uses real Admin data only
+These remain part of final acceptance and must be executed before PR #49 is marked Ready.
 
-1. Open `/admin/space-typing`.
-2. Note the live generation, draft count, music count and signed-in actor.
-3. Open History & Publish and compare draft/live state.
-4. Open Music Library and compare the catalog size.
+## A1 — Help, keyboard and shell
 
-Expected:
-- Dashboard values correspond to real revision-store and music-catalog data;
-- no random/demo/placeholder KPI appears;
-- publishable and stale draft counts match History semantics;
-- maintenance warning appears only when the active revision has maintenance enabled.
+- `A1-M01` mouse/focus tooltip lifecycle and collision placement.
+- `A1-M02` keyboard focus, Escape and accessible association.
+- `A1-M03` click/tap info popover and outside-click close.
+- `A1-M04` viewport-edge collision handling without horizontal overflow.
+- `A1-M05` route teardown removes stale tooltip/listeners.
+- `A1-M06` leaving Admin removes body-level overlays.
+- `A1-M07` Help Drawer focus trap, Escape and focus restoration.
+- `A1-M08` reduced-motion mode remains fully usable.
+- `A1-M09` sidebar stays concise and administrator-first.
 
-## A2-M02 — Dashboard loading, empty and error states
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-1. Reload Dashboard normally.
-2. On a fresh local Admin profile with no successful audit activity, inspect Recent Admin Activity.
-3. Temporarily stop the Admin service and reload Dashboard, then restore the service and use Retry.
+## A2 — Dashboard, navigation and Developer Tools
 
-Expected:
-- loading skeleton is visible while canonical data is loading;
-- no-activity state is explicit and not presented as an error;
-- service failure produces a clear administrator-facing error state;
-- retry returns to the Dashboard without stale overlays or duplicate content.
+- `A2-M01` Dashboard shows real state only.
+- `A2-M02` loading/empty/error/retry states.
+- `A2-M03` primary navigation excludes diagnostics-only routes.
+- `A2-M04` restricted role cannot see/open Developer Tools.
+- `A2-M05` Runtime/Contract/Validation/Asset/QA diagnostics are consolidated under Developer Tools.
+- `A2-M06` command palette respects permission separation.
+- `A2-M07` legacy diagnostic URLs remain canonical and safe when directly opened.
+- `A2-M08` responsive shell remains usable at desktop/laptop/narrow widths.
 
-## A2-M03 — Administrator-first primary navigation
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-Inspect the normal sidebar.
+## A3.1 — Media Library / Asset Picker
 
-Expected:
-- normal Admin navigation contains Dashboard, Content, Gameplay, Media and System workflows that currently have real administrator value;
-- Shop runtime contract, currencies diagnostics, rewards diagnostics, missions diagnostics, PvP diagnostics, Backgrounds/VFX/UI Assets diagnostics and QA Sandbox do not appear as normal administrator menu items;
-- technical routes were not deleted: they remain reachable from Developer Tools for an authorized actor.
+- `A3.1-M01` inventory/search/type filters/archive visibility.
+- `A3.1-M02` runtime/project-owned media remains read-only.
+- `A3.1-M03` Admin upload creates media without changing gameplay revision.
+- `A3.1-M04` replace creates a new immutable version.
+- `A3.1-M05` archive/restore preserves historical versions/references.
+- `A3.1-M06` usage graph and exact-version visibility.
+- `A3.1-M07` Asset Picker returns exact `{asset, version}`.
+- `A3.1-M08` picker keyboard/focus/Object-URL teardown.
+- `A3.1-M09` responsive Media workflow.
 
-## A2-M04 — Developer Tools permission-aware visibility
-
-Run with an actor/token configuration that does not expose `developer.runtime-inspect` when such a restricted local test actor is available.
-
-Expected:
-- Developer Tools group fails closed while actor permissions are unresolved;
-- unauthorized actor does not receive the Developer Tools manifest;
-- Developer Tools command-palette entries are omitted when permission is absent;
-- normal administrator workflows remain usable.
-
-Current local default actor is Super Admin, so this scenario may remain deferred until a restricted actor fixture is introduced.
-
-## A2-M05 — Developer Tools organization
-
-1. Open Developer Tools as the local Super Admin.
-2. Inspect Runtime & Telemetry, Economy Diagnostics, Live Ops Diagnostics, PvP Diagnostics, Visual Diagnostics and QA/Test Lab.
-3. Open at least one tool from each section.
-
-Expected:
-- technical screens are grouped by purpose instead of mixed into normal navigation;
-- descriptions make it clear that diagnostics are not editable Admin capabilities;
-- existing canonical direct routes still load their runtime-backed/read-only surfaces;
-- no fake Shop editor, fake event scheduler or fake player backend is introduced.
-
-## A2-M06 — Command palette separation
-
-1. Open `Cmd/Ctrl+K` as the default local Super Admin.
-2. Search for `Ships`, `History`, `Shop`, `Events`, `VFX` and `QA`.
-
-Expected:
-- administrator workflows are available as normal commands;
-- technical commands are available only because the current actor has Developer Tools permission;
-- command result labels/groups clearly distinguish Developer Tools concepts;
-- keyboard navigation, Escape and focus restoration continue to work.
-
-## A2-M07 — Direct legacy migration routes
-
-Directly open representative technical URLs such as:
-- `/admin/space-typing/shop`
-- `/admin/space-typing/events`
-- `/admin/space-typing/backgrounds`
-- `/admin/space-typing/qa`
-
-Expected:
-- route still resolves during migration;
-- breadcrumb remains understandable;
-- route is not re-added to the primary administrator sidebar;
-- underlying Phase B ownership/runtime safety behavior remains unchanged.
-
-## A2-M08 — Responsive shell after navigation reduction
-
-Check desktop, laptop and narrow viewport widths.
-
-Expected:
-- shorter administrator-first sidebar remains scannable;
-- Dashboard cards/attention/activity/quick actions do not force horizontal page overflow;
-- Developer Tools cards/links remain readable;
-- tooltips and command palette remain usable after resize.
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
 ---
 
-# A3.1 — Media Library / Asset Picker
+# A17 — Administrator end-to-end acceptance matrix
 
-## A3.1-M01 — Media Library inventory and filters
+## A17-M01 — Change a real Shop product price
 
-1. Open `/admin/space-typing/media`.
-2. Search for a known ship such as `Vanguard`.
-3. Filter by Images, 3D Models, Music and SFX.
-4. Toggle `Show archived`.
+**Task:** Open Shop, select a canonical offer that exposes an Admin-owned price override, change the price, save a draft, inspect preview/change scope, then publish only if the current runtime owns that write seam.
 
-Expected:
-- Media Library appears as a normal administrator workflow under Media and in `Cmd/Ctrl+K`;
-- current runtime/reference media and Admin-managed uploads appear from the canonical Media V2 registry;
-- search works by administrator-facing name/tags without requiring a raw path;
-- type filters do not create synthetic/fake assets;
-- archived Admin-owned media is hidden by default and visible only when requested.
+**Expected:** gameplay consumes the same canonical owner; no disconnected product catalog or shadow price model is created. If the current offer is runtime-owned/read-only, the UI must say so instead of exposing a fake editor.
 
-## A3.1-M02 — Runtime/project-owned media is read-only
+**Automated evidence:** Shop ownership/capability validators and runtime preview tests.
 
-1. Select a generated ship model such as Vanguard 3D Ship.
-2. Select a code-owned SFX or built-in Music item.
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-Expected:
-- detail shows an administrator-readable read-only ownership explanation;
-- Replace / Upload new version is not offered for generated/code-owned/external-reference media;
-- Archive is not offered for runtime/project-owned media;
-- technical source/owner/path data is under progressive disclosure rather than permanent primary copy;
-- direct API attempts to replace/archive source-owned media fail closed with a conflict instead of creating a shadow Admin version.
+## A17-M02 — Discount badge / schedule only where supported
 
-## A3.1-M03 — Upload a new Admin-managed asset
+**Task:** Inspect Promotions/Discounts from Live Ops and Shop Offers.
 
-1. Click `Upload media`.
-2. Choose a type, enter a display name and optional tags.
-3. Select a small image/audio test file and upload it.
-4. Return to Dashboard/History and compare active revision/generation before vs after upload.
+**Expected:** badge/original-price fields work only when owned by Shop; start/end scheduling remains unavailable while canonical scheduling is absent. No fake calendar service appears.
 
-Expected:
-- UI clearly states upload adds media to the library only;
-- upload succeeds only for an actor with `media.upload`;
-- the new item appears as `Admin managed` with one immutable version;
-- image/audio preview loads through the authenticated Media service;
-- gameplay active revision/generation is unchanged;
-- no Ship/Shop/World automatically starts using the uploaded file.
+**Automated evidence:** A11 Live Ops ownership boundary and Events/Shop validators.
 
-## A3.1-M04 — Create a new immutable version
+Status: `AUTOMATED: COVERED` for fail-closed ownership · `MANUAL: QUEUED` for browser UX.
 
-1. Open an Admin-managed media item.
-2. Click `Upload new version` and choose different bytes.
-3. Inspect Version History after upload.
-4. If possible, preview both old/new versions through Asset Picker.
+## A17-M03 — Replace a Ship image/model through Media
 
-Expected:
-- a new `assetVersionId` is created;
-- previous version remains available and unchanged;
-- current library version changes to the newly uploaded version;
-- no existing gameplay reference silently follows the new version;
-- no binary is overwritten in place.
+**Task:** Pick a Ship, replace an exact supported image/model asset version through Asset Picker, save draft and compare Draft vs Published preview.
 
-## A3.1-M05 — Archive and restore
+**Expected:** no raw path entry; exact immutable `assetVersionId` is pinned; Media current-version movement does not silently change published gameplay.
 
-1. Open an Admin-managed media item.
-2. Choose Archive and confirm.
-3. Verify it disappears from the normal list.
-4. Enable `Show archived`, select it and restore it.
+**Automated evidence:** Media V2 exact-version tests, Ship media resolver/preview validators.
 
-Expected:
-- confirmation explains that archive does not delete immutable versions or change gameplay references;
-- archived item is hidden from normal library/picker discovery;
-- historical versions remain resolvable;
-- restoring makes the logical asset visible again;
-- no hard-delete action is exposed in normal Media Library UI.
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-## A3.1-M06 — Usage and exact-version visibility
+## A17-M04 — Change Ship weapon/projectile/VFX context
 
-1. Select media with zero references and media with one or more canonical references when available.
-2. Inspect `Used by` and Versions.
+**Task:** Change only supported Ship projectile/effect relationships and preview Fire/Impact through production runtime.
 
-Expected:
-- usage references identify domain/entity/field in administrator-readable form;
-- reference count matches canonical Media V2 reference graph;
-- Versions distinguishes current vs historical immutable versions;
-- IDs/source diagnostics are not required for routine browsing.
+**Expected:** production `PlayerShotSystem`/effect path is used; unsupported VFX policy remains read-only; no Admin renderer copy exists.
 
-## A3.1-M07 — Asset Picker exact-version contract
+**Automated evidence:** A5/A10 production-preview bridge and VFX coverage validator.
 
-Execute from a test harness or first consuming V2 editor that invokes `openAdminMediaAssetPicker`.
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-1. Open Asset Picker constrained to one or more allowed media types.
-2. Search/select a logical asset.
-3. Select the current version, then repeat with a historical version.
-4. Confirm `Use selected version`.
+## A17-M05 — Ship Draft vs Published production preview
 
-Expected:
-- picker lists only active logical assets of allowed types;
-- it does not expose archived assets;
-- current and historical versions are distinguishable;
-- selection returns the exact logical asset + `assetVersionId`, not a moving `latest` alias or raw path;
-- image/audio preview works for both Admin-owned and canonical runtime-reference assets when a browser preview is supported;
-- selecting media does not publish or mutate gameplay by itself.
+**Task:** Create an unsaved/draft Ship presentation change and toggle preview source between Draft and Published.
 
-## A3.1-M08 — Asset Picker keyboard / focus lifecycle
+**Expected:** same child production renderer is used for both sources; switching source does not mutate active runtime or PlayerSave.
 
-1. Open Asset Picker from a keyboard-focusable trigger.
-2. Navigate with Tab / Shift+Tab.
-3. Press Escape; reopen and click outside the dialog.
-4. Reopen and complete a selection.
+**Automated evidence:** shared ProductionPreviewBridge source semantics/isolation validators.
 
-Expected:
-- keyboard focus stays inside the picker while open;
-- Escape/outside click closes it when no selection is being committed;
-- focus returns to the original trigger;
-- repeated open/close cycles do not leave stale preview Object URLs or duplicated keyboard listeners.
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
-## A3.1-M09 — Responsive Media management
+## A17-M06 — Enemy/Boss combat preview
 
-Check Media Library and Asset Picker at desktop, laptop and narrow/mobile emulation widths.
+**Task:** Preview representative Enemy and Boss idle/hit/death, plus phase behavior where production supports it.
 
-Expected:
-- list/detail workspace collapses without horizontal overflow;
-- upload form remains operable;
-- preview does not cover controls;
-- Asset Picker asset list/detail and footer remain keyboard/touch usable;
-- permanent explanatory paragraphs do not reintroduce Phase B-style visual clutter.
+**Expected:** child production draw/VFX systems render the scenarios. Do not expect fabricated attack/fire scenarios where production has no isolated owner.
+
+**Automated evidence:** Enemy/Boss production preview adapters and A10 coverage validator.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M07 — Skill cast through production runtime
+
+**Task:** Select a Skill and run its supported isolated cast/runtime scenario.
+
+**Expected:** `SkillEngine` owns activation, energy, cooldown/state transitions; Admin does not fabricate combat results.
+
+**Automated evidence:** child `SkillEngine` runtime preview and parent Skill production runtime panel.
+
+Status: `AUTOMATED: COVERED` for state simulation · `MANUAL: QUEUED` for presentation.
+
+## A17-M08 — Equipment representative gameplay context
+
+**Task:** Select Equipment, inspect before/after stats/perks and any supported visible context.
+
+**Expected:** `resolveEquipmentPerks` owns resolved effects; numeric effect value `1` is not accidentally hidden; no fake visual effect is claimed for stat-only equipment.
+
+**Automated evidence:** Equipment resolver runtime preview and correctness fix.
+
+Status: `AUTOMATED: COVERED` for resolution · `MANUAL: QUEUED`.
+
+## A17-M09 — World production environment preview
+
+**Task:** Preview a World using Published and Draft candidate data.
+
+**Expected:** real production background/environment/parallax/lighting composition path is used; preview remains isolated from progression.
+
+**Automated evidence:** World production renderer adapter and A10.5 coverage validator.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M10 — Stage representative production composition
+
+**Task:** Preview a Stage containing its World/background and current objective/enemy/typing context supported by runtime.
+
+**Expected:** the child production Stage composition path is used; unsupported contextual pieces fail soft rather than being mocked.
+
+**Automated evidence:** Stage production renderer adapter and A10.5 coverage validator.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M11 — Upload BGM and assign World/Stage music
+
+**Task:** Upload a supported Admin-managed music asset, rebuild catalog, assign it to a World/Stage context, preview playback/loop, save draft and publish deliberately.
+
+**Expected:** upload alone does not change gameplay; assignment uses canonical World Music policy; production `MusicController` resolves the published catalog/policy.
+
+**Automated evidence:** Media/Music catalog builder, World Music preview bridge and runtime adapter validators.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M12 — Duplicate an entity safely
+
+**Task:** Duplicate a supported entity from its editor.
+
+**Expected:** a new immutable internal ID is generated, references are not silently redirected, result is a draft until explicitly published.
+
+**Automated evidence:** entity/reference conventions where implemented.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M13 — Save Draft without changing active runtime
+
+**Task:** Save a supported edit as Draft and refresh both Admin runtime state and game runtime before publishing.
+
+**Expected:** active revision/generation and gameplay remain unchanged until Publish succeeds.
+
+**Automated evidence:** immutable revision store/runtime envelope tests.
+
+Status: `AUTOMATED: COVERED` · `MANUAL: QUEUED`.
+
+## A17-M14 — Preview changes without mutating progression/wallet/ownership
+
+**Task:** Exercise Ship/Enemy/Boss/World/Stage/VFX previews repeatedly while inspecting active revision and local gameplay progression.
+
+**Expected:** preview candidate injection never writes PlayerSave, wallet, Shop ownership, progression or active revision.
+
+**Automated evidence:** shared production-preview isolation contracts and simulated reward/economy policies.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M15 — Review exact publication scope
+
+**Task:** Open History & Publish for a draft containing changes in one or more domains.
+
+**Expected:** primary compare uses administrator language grouped by domain/entity/field with before → after values; raw paths/revision internals are available only under Advanced.
+
+**Automated evidence:** A14 History validator and whole-config change-scope tests.
+
+Status: `AUTOMATED: COVERED` for structure · `MANUAL: QUEUED`.
+
+## A17-M16 — Publish safely with CAS
+
+**Task:** Validate and publish a fresh draft. Separately create a stale draft by advancing active revision first.
+
+**Expected:** fresh draft publishes; stale draft is rejected and cannot overwrite newer work.
+
+**Automated evidence:** revision CAS/store tests and publish validation flow.
+
+Status: `AUTOMATED: COVERED` · `MANUAL: QUEUED`.
+
+## A17-M17 — Roll back safely
+
+**Task:** Select an eligible published ancestor and roll back; attempt rollback to an ineligible/stale revision.
+
+**Expected:** ancestor rollback succeeds using expected-active CAS; invalid target fails closed; History shows the action clearly.
+
+**Automated evidence:** rollback/CAS tests and A14 History flow.
+
+Status: `AUTOMATED: COVERED` · `MANUAL: QUEUED`.
+
+## A17-M18 — Restricted role cannot mutate forbidden domains
+
+**Task:** Run Admin with a restricted server-side role, attempt Save Draft/Publish/Rollback/Media mutations both from UI and direct API.
+
+**Expected:** prohibited actions are hidden/disabled in UI and rejected server-side; browser headers cannot self-promote the actor.
+
+**Automated evidence:** A13 role templates, effective permission evaluation, denied-mutation audit tests.
+
+Status: `AUTOMATED: COVERED` for server enforcement · `MANUAL: QUEUED`.
+
+## A17-M19 — Restricted role cannot access Developer Tools
+
+**Task:** Run with a role lacking `developer.runtime-inspect`; inspect sidebar, command palette and direct Developer Tools endpoint/route.
+
+**Expected:** navigation/commands fail closed and server endpoint returns permission denial.
+
+**Automated evidence:** permission-gated manifest/navigation and A13 security tests.
+
+Status: `AUTOMATED: COVERED` for permission contract · `MANUAL: QUEUED`.
+
+## A17-M20 — Audit attribution for mutation / publish / rollback
+
+**Task:** Create a draft, publish it, perform an eligible rollback, then open History.
+
+**Expected:** activity identifies actor, action, entity/domain, timestamp and result; denied/error attempts are attributable; human-readable compare remains separate from raw diagnostics.
+
+**Automated evidence:** durable pre-mutation audit tests + A14 History integration validator.
+
+Status: `AUTOMATED: COVERED` · `MANUAL: QUEUED`.
+
+## A17-M21 — Normal workflows require no raw path/JSON/SHA/protocol knowledge
+
+**Task:** Complete representative Shop/Ship/World/Media/History workflows without opening Developer Tools.
+
+**Expected:** normal controls use game/business language, selectors and Asset Picker; raw filesystem paths, JSON textareas, child SHAs and protocol versions are not required.
+
+**Automated evidence:** V2 anti-pattern validators and Developer Tools separation.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M22 — Production preview teardown leaves no orphan resources
+
+**Task:** Repeatedly open/switch/close production previews, enter/exit fullscreen, navigate away mid-load and replay/reset scenarios.
+
+**Expected:** iframe/runtime/audio/RAF/listeners are disposed; no stale async result overwrites a newer selection; focus/status remain usable.
+
+**Automated evidence:** ProductionPreviewBridge stale-generation/teardown logic + A16 preview UX validator.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
+
+## A17-M23 — Live Ops truthfulness
+
+**Task:** Open Events/Promotions/Discounts/Announcements.
+
+**Expected:** Shop-owned merchandising controls link to the real owner; Gameplay Events stay read-only where appropriate; scheduling/announcements remain unavailable when no canonical service exists.
+
+**Automated evidence:** A11 Live Ops control-plane validation.
+
+Status: `AUTOMATED: COVERED` for capability boundary · `MANUAL: QUEUED`.
+
+## A17-M24 — PvP / Ranked / Alternative Modes truthfulness
+
+**Task:** Run Duel Room Scenario, then inspect Ranked and Alternative Modes.
+
+**Expected:** Duel scenario uses production room validator/session simulation; Ranked does not invent season management; Alternative Modes keep Ranked admission fail-closed.
+
+**Automated evidence:** A12 production Duel simulation and Ranked/Alternative Modes validators.
+
+Status: `AUTOMATED: COVERED` for rule/authority boundary · `MANUAL: QUEUED`.
+
+## A17-M25 — Responsive / keyboard / reduced-motion final sweep
+
+**Task:** Repeat representative edit/preview/history/developer workflows at wide desktop, laptop and narrow viewport using mouse, keyboard and reduced-motion preference.
+
+**Expected:** no critical horizontal overflow, visible focus, usable tooltips/dialogs, production preview actions accessible by keyboard, fullscreen exits cleanly.
+
+**Automated evidence:** A1/A16 CSS/component validators.
+
+Status: `AUTOMATED: PARTIAL` · `MANUAL: QUEUED`.
 
 ---
 
-# Future phase scenarios
+# Final acceptance rule
 
-The following scenarios are placeholders and become executable when their phase lands:
+A17 implementation is considered **prepared** when all cases above have a real executable path or an explicit truthful fail-closed expectation and automated safety evidence is wired into CI.
 
-- change a Shop product price and preview the real gameplay result;
-- schedule a discount/badge and verify conflict validation;
-- replace a Ship image/model through Media Library;
-- change Ship weapon/projectile/VFX/SFX without raw paths;
-- upload BGM and assign it to a World/Stage;
-- duplicate an entity into a draft;
-- save draft without changing active runtime;
-- review the complete change scope before Publish;
-- publish with CAS safety;
-- roll back an eligible published version;
-- verify a restricted role cannot call mutation/Developer Tools APIs directly;
-- verify audit log answers who/what/when/change scope;
-- complete routine administrator tasks without raw JSON/path/SHA/protocol/source ownership concepts.
+A17 is considered **human accepted** only after the `MANUAL: QUEUED` cases required for release have actually been executed and recorded. Do not convert queued rows to PASS from code inspection alone.
