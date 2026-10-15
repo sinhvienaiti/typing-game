@@ -140,6 +140,34 @@ prepare_space_art() {
   pnpm --dir "$ROOT_DIR/games/space-typing" art:prepare
 }
 
+prepare_voice_assets() {
+  if [[ "$TARGET" != "all" && "$TARGET" != "space" ]]; then
+    echo "  • Space Typing is not selected; Voice preparation skipped."
+    return
+  fi
+
+  if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+    echo "Node and pnpm are required to prepare the offline Voice model."
+    exit 1
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "Python 3 is required to prepare the offline Voice model."
+    echo "On Ubuntu/WSL run: sudo apt update && sudo apt install -y python3"
+    exit 1
+  fi
+
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "  → Installing the updated Platform dependencies required by Voice..."
+    pnpm install
+  fi
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "The Portal Voice dependency vosk-browser is still unavailable after pnpm install."
+    exit 1
+  fi
+
+  pnpm voice:prepare
+}
+
 if has_git_checkout; then
   if [[ "${TYPING_GAME_DEV_AFTER_PULL:-0}" != "1" ]]; then
     echo "[1/5] Pulling latest platform code..."
@@ -157,8 +185,9 @@ else
   prepare_without_git
 fi
 
-echo "[3/5] Refreshing local Space Typing art..."
+echo "[3/5] Refreshing local Space Typing art and Voice assets..."
 prepare_space_art
+prepare_voice_assets
 
 echo "Indexing local background music..."
 pnpm music:index

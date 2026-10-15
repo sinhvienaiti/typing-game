@@ -1,0 +1,31 @@
+.st-admin-v2-picker-backdrop{position:fixed;inset:0;z-index:1300;background:rgba(1,5,13,.78);backdrop-filter:blur(6px);display:grid;place-items:center;padding:24px}
+.st-admin-v2-picker{width:min(1080px,96vw);max-height:min(820px,92vh);display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;border:1px solid var(--st-admin-border);background:linear-gradient(145deg,rgba(10,20,36,.99),rgba(3,8,18,.99));box-shadow:0 26px 90px rgba(0,0,0,.55);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%)}
+.st-admin-v2-picker-head{display:flex;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--st-admin-border)}
+.st-admin-v2-picker-head h2{margin:0;font-family:var(--st-admin-display);font-size:20px}
+.st-admin-v2-picker-head p{margin:5px 0 0;color:var(--st-admin-muted);font-size:13px}
+.st-admin-v2-picker-filter{display:flex;gap:10px;flex-wrap:wrap;padding:12px 20px;border-bottom:1px solid var(--st-admin-border);background:rgba(5,12,24,.55)}
+.st-admin-v2-picker-filter .st-admin-v2-search{flex:1;min-width:220px}
+.st-admin-v2-picker-select{min-height:40px;border:1px solid var(--st-admin-border);background:rgba(5,12,24,.9);color:var(--st-admin-text);padding:8px 10px;font:inherit}
+.st-admin-v2-picker-workspace{display:grid;grid-template-columns:minmax(280px,.7fr) minmax(0,1.3fr);min-height:0}
+.st-admin-v2-picker-assets{overflow:auto;border-right:1px solid var(--st-admin-border);padding:12px}
+.st-admin-v2-picker-asset{width:100%;display:grid;gap:5px;text-align:left;padding:11px 12px;border:1px solid transparent;background:transparent;color:var(--st-admin-text);cursor:pointer;font:inherit}
+.st-admin-v2-picker-asset:hover,.st-admin-v2-picker-asset:focus{border-color:var(--st-admin-border);background:rgba(37,207,255,.05);outline:none}
+.st-admin-v2-picker-asset.active{border-color:color-mix(in srgb,var(--st-admin-accent) 65%,var(--st-admin-border));background:rgba(37,207,255,.09)}
+.st-admin-v2-picker-asset strong{font-size:13px}
+.st-admin-v2-picker-asset span{font-size:11px;color:var(--st-admin-muted)}
+.st-admin-v2-picker-detail{overflow:auto;padding:18px;display:grid;align-content:start;gap:14px}
+.st-admin-v2-picker-empty{min-height:260px;display:grid;place-items:center;text-align:center;color:var(--st-admin-muted)}
+.st-admin-v2-picker-preview{min-height:180px;border:1px solid var(--st-admin-border);background:radial-gradient(circle at 50% 35%,rgba(37,207,255,.08),rgba(2,7,16,.85));display:grid;place-items:center;overflow:hidden}
+.st-admin-v2-picker-preview img{max-width:100%;max-height:300px;object-fit:contain}
+.st-admin-v2-picker-preview audio{width:min(100%,420px);margin:24px}
+.st-admin-v2-picker-versions{display:grid;gap:8px}
+.st-admin-v2-picker-version{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--st-admin-border);background:rgba(5,12,24,.5)}
+.st-admin-v2-picker-version.selected{border-color:var(--st-admin-accent);background:rgba(37,207,255,.08)}
+.st-admin-v2-picker-version-copy{display:grid;gap:3px;min-width:0}
+.st-admin-v2-picker-version-copy strong{font-size:12px}
+.st-admin-v2-picker-version-copy span{font-size:11px;color:var(--st-admin-muted)}
+.st-admin-v2-picker-foot{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 20px;border-top:1px solid var(--st-admin-border);background:rgba(5,12,24,.72)}
+.st-admin-v2-picker-selection{display:grid;gap:2px;min-width:0;color:var(--st-admin-muted);font-size:11px}
+.st-admin-v2-picker-selection strong{color:var(--st-admin-text);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.st-admin-v2-picker-actions{display:flex;gap:8px}
+@media(max-width:780px){.st-admin-v2-picker-backdrop{padding:10px}.st-admin-v2-picker{width:100%;max-height:96vh}.st-admin-v2-picker-workspace{grid-template-columns:1fr}.st-admin-v2-picker-assets{max-height:210px;border-right:0;border-bottom:1px solid var(--st-admin-border)}.st-admin-v2-picker-foot{align-items:stretch;flex-direction:column}.st-admin-v2-picker-actions>*{flex:1}}

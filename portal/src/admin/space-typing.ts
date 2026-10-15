@@ -1,347 +1,392 @@
-import contractJson from "./contracts/space-typing-admin.v1.json";
-import {
-  AdminApiError,
-  SpaceTypingAdminApi,
-  type AdminRevision,
-  type AdminStatePayload,
-  type AudioDefaults,
-  type SpaceTypingAdminConfig,
-  type WorldMusicPreview,
-} from "./api";
+import "@fontsource/exo-2/600.css";
+import "@fontsource/exo-2/700.css";
+import "@fontsource/exo-2/800.css";
+import "@fontsource/be-vietnam-pro/400.css";
+import "@fontsource/be-vietnam-pro/500.css";
+import "@fontsource/be-vietnam-pro/600.css";
+import "@fontsource/be-vietnam-pro/700.css";
+import "./space-typing-ui.css";
+import "./space-typing-phase-b.css";
+import "./space-typing-remediation.css";
+import "./v2/admin-v2.css";
+import { SpaceTypingAdminApi } from "./api";
+import { renderPhaseBAdminScreen } from "./space-typing-phase-b";
+import { adminNavIcon } from "./space-typing-icons";
+import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
+import { AdminHelpScope } from "./v2/admin-help";
+import { renderAdminV2Dashboard } from "./v2/dashboard";
+import { renderAdminV2DeveloperTools } from "./v2/developer-tools";
+import { renderAdminV2MediaLibrary } from "./v2/media-library";
 
-type AdminRoute = { id: string; path: string; label: string };
-type AdminContract = {
-  contractRevision: string;
+type NavItem = {
   label: string;
-  themeId: string;
-  routes: AdminRoute[];
-  worldMusic: {
-    galaxyCount: number;
-    worldsPerGalaxy: number;
-    worldCount: number;
-    validationBadges: string[];
-  };
+  path: string;
+  icon: string;
+  description: string;
 };
 
-const contract = contractJson as AdminContract;
-const STYLE_ID = "space-typing-admin-v1-styles";
+type NavGroup = {
+  id: string;
+  label: string;
+  description: string;
+  items: readonly NavItem[];
+  requiredPermission?: string;
+};
 
-function ensureStyles(): void {
-  if (document.getElementById(STYLE_ID) !== null) return;
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = `
-    .st-admin{min-height:calc(100vh - 72px);padding:24px;background:radial-gradient(circle at 15% 0%,rgba(49,116,173,.18),transparent 38%),radial-gradient(circle at 90% 10%,rgba(125,75,190,.14),transparent 32%),#050912;color:#e9f7ff;font-family:Inter,ui-sans-serif,system-ui,sans-serif}.st-admin-grid{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px}.st-admin-side,.st-admin-panel{border:1px solid rgba(117,210,255,.16);background:rgba(7,18,31,.88);box-shadow:0 18px 60px rgba(0,0,0,.28);border-radius:18px}.st-admin-side{padding:18px;height:max-content;position:sticky;top:88px}.st-admin-kicker{font-size:11px;letter-spacing:.18em;color:#73ddff;font-weight:800}.st-admin-side h2{margin:7px 0 3px;font-size:20px}.st-admin-muted{color:#91a9ba;font-size:13px;line-height:1.5}.st-admin-nav{display:grid;gap:8px;margin-top:18px}.st-admin-nav button{all:unset;cursor:pointer;padding:11px 12px;border-radius:10px;color:#b9cbd8;border:1px solid transparent}.st-admin-nav button:hover,.st-admin-nav button.active{color:#f3fbff;background:rgba(58,185,235,.12);border-color:rgba(84,208,255,.22)}.st-admin-token{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}.st-admin-token input{width:100%;box-sizing:border-box;margin:7px 0;padding:9px 10px;border-radius:9px;border:1px solid rgba(117,210,255,.2);background:#07111d;color:#dff7ff}.st-admin-token button,.st-admin-action{border:1px solid rgba(93,217,255,.3);background:rgba(23,148,196,.16);color:#c9f4ff;border-radius:9px;padding:8px 11px;cursor:pointer}.st-admin-action.primary{background:linear-gradient(135deg,rgba(0,167,220,.34),rgba(109,73,207,.32));font-weight:700}.st-admin-action:disabled{opacity:.45;cursor:not-allowed}.st-admin-panel{padding:22px}.st-admin-head{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;margin-bottom:18px}.st-admin-head h1{margin:2px 0 5px;font-size:28px}.st-admin-env{white-space:nowrap;border:1px solid rgba(126,247,189,.22);background:rgba(34,130,87,.13);color:#96f2c2;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;letter-spacing:.08em}.st-admin-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.st-admin-card{padding:15px;border:1px solid rgba(255,255,255,.08);border-radius:13px;background:rgba(255,255,255,.025)}.st-admin-card strong{display:block;font-size:18px;margin-top:5px;word-break:break-word}.st-admin-section{margin-top:20px}.st-admin-section h3{margin:0 0 10px}.st-admin-note,.st-admin-error,.st-admin-success{padding:11px 13px;border-radius:10px;font-size:13px;margin:12px 0}.st-admin-note{background:rgba(83,151,189,.1);border:1px solid rgba(85,190,232,.18);color:#b9d9e7}.st-admin-error{background:rgba(173,55,72,.14);border:1px solid rgba(255,106,127,.25);color:#ffbdc7}.st-admin-success{background:rgba(34,139,92,.14);border:1px solid rgba(99,235,170,.22);color:#aaf0ca}.st-audio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.st-audio-row{padding:13px;border-radius:12px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02)}.st-audio-row label{display:flex;justify-content:space-between;font-size:13px;font-weight:700}.st-audio-row input[type=range]{width:100%;margin-top:12px}.st-admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.st-galaxy-list{display:grid;gap:14px}.st-galaxy{border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:13px}.st-galaxy h3{margin:0 0 10px;color:#a9eaff}.st-world-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.st-world{padding:10px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.025)}.st-world strong{font-size:13px}.st-world small{display:block;color:#8faabb;margin-top:5px}.st-world-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.st-world-source{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#7fa2b8;margin-top:7px;overflow-wrap:anywhere}.st-history{display:grid;gap:9px}.st-history-row{display:grid;grid-template-columns:minmax(180px,1fr) minmax(170px,.8fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:11px}.st-history-row code{font-size:12px;color:#9de9ff}.st-badge{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;letter-spacing:.05em;background:rgba(87,203,241,.12);border:1px solid rgba(92,214,255,.18);color:#aeeeff}.st-admin-loading{padding:30px;text-align:center;color:#99b4c6}@media(max-width:900px){.st-admin-grid{grid-template-columns:1fr}.st-admin-side{position:static}.st-admin-cards,.st-audio-grid{grid-template-columns:1fr}.st-world-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.st-history-row{grid-template-columns:1fr}}
-  `;
-  document.head.append(style);
+const ADMIN_BASE = "/admin/space-typing";
+const NAV_STATE_KEY = "typing-game:space-admin-collapsed-groups";
+const DEVELOPER_PERMISSION = "developer.runtime-inspect";
+
+const NAV_GROUPS: readonly NavGroup[] = [
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    description: "Published state, drafts and administrator activity that need attention now.",
+    items: [
+      { label: "Overview", path: ADMIN_BASE, icon: "◫", description: "See real Admin state, pending drafts and recent administrator activity." },
+    ],
+  },
+  {
+    id: "content",
+    label: "Content",
+    description: "Manage worlds, stages and learning-content assignments backed by canonical game data.",
+    items: [
+      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", description: "Manage supported world and stage configuration through the revision-backed workflow." },
+      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", description: "Browse canonical English-learning content used by Space Typing without creating a duplicate content database." },
+    ],
+  },
+  {
+    id: "gameplay",
+    label: "Gameplay",
+    description: "Manage revision-backed gameplay entities currently connected to the Space Typing runtime.",
+    items: [
+      { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", description: "Manage the ship properties currently supported by the canonical runtime." },
+      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", description: "Manage supported equipment definitions, stats and perks." },
+      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", description: "Manage supported combat-skill definitions and parameters." },
+      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", description: "Manage supported enemy admission and projectile policy values." },
+      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", description: "Manage supported boss identity values through the canonical revision workflow." },
+    ],
+  },
+  {
+    id: "economy-live-ops",
+    label: "Economy & Live Ops",
+    description: "Manage canonical Shop merchandising and the Live Ops controls that have real runtime owners.",
+    items: [
+      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▱", description: "Manage supported Shop offers, pricing and merchandising through the canonical Shop owner." },
+      { label: "Live Ops", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Manage runtime-owned Live Ops controls and see unsupported scheduling or announcements fail closed." },
+    ],
+  },
+  {
+    id: "media",
+    label: "Media",
+    description: "Browse canonical game media, upload Admin-managed assets and keep source-owned runtime media read-only.",
+    items: [
+      { label: "Media Library", path: `${ADMIN_BASE}/media`, icon: "▧", description: "Browse images, models, music, SFX and Admin uploads, with immutable version history and usage." },
+      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage the legacy authored music capability while it is migrated into Media V2." },
+      { label: "SFX", path: `${ADMIN_BASE}/sfx`, icon: "◉", description: "Inspect production sample-backed sound effects and test the exact committed runtime assets without changing game policy." },
+      { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },
+    ],
+  },
+  {
+    id: "system",
+    label: "System",
+    description: "Manage safe global settings, access review and the revision lifecycle.",
+    items: [
+      { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },
+      { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", description: "Manage global game defaults, network behavior and maintenance settings." },
+      { label: "Roles & Permissions", path: `${ADMIN_BASE}/roles`, icon: "◈", description: "Review server-enforced role templates, dangerous permissions and this deployment's effective access." },
+      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts, validate complete change scope, publish or roll back safely." },
+    ],
+  },
+  {
+    id: "developer",
+    label: "Developer Tools",
+    description: "Runtime contracts, capability diagnostics and isolated QA tools separated from normal administrator workflows.",
+    requiredPermission: DEVELOPER_PERMISSION,
+    items: [
+      { label: "Developer Tools", path: `${ADMIN_BASE}/developer-tools`, icon: "⌬", description: "Open permission-gated runtime, economy, Live Ops, PvP, visual and QA diagnostics." },
+    ],
+  },
+];
+
+const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
+  [`${ADMIN_BASE}/analytics`]: "Analytics / Telemetry",
+  [`${ADMIN_BASE}/shop`]: "Shop",
+  [`${ADMIN_BASE}/currencies`]: "Currencies",
+  [`${ADMIN_BASE}/rewards`]: "Rewards & Drops",
+  [`${ADMIN_BASE}/warp`]: "Stamina / Warp",
+  [`${ADMIN_BASE}/missions`]: "Missions",
+  [`${ADMIN_BASE}/daily-weekly`]: "Daily / Weekly",
+  [`${ADMIN_BASE}/expedition`]: "Expedition",
+  [`${ADMIN_BASE}/events`]: "Live Ops",
+  [`${ADMIN_BASE}/duel`]: "Duel Settings",
+  [`${ADMIN_BASE}/ranked`]: "Ranked",
+  [`${ADMIN_BASE}/alternative-modes`]: "Alternative Modes",
+  [`${ADMIN_BASE}/backgrounds`]: "Backgrounds",
+  [`${ADMIN_BASE}/vfx`]: "VFX",
+  [`${ADMIN_BASE}/ui-assets`]: "UI Assets",
+  [`${ADMIN_BASE}/feature-gates`]: "Feature Gates",
+  [`${ADMIN_BASE}/qa`]: "QA Sandbox",
+  [`${ADMIN_BASE}/worlds-stages`]: "Stages",
+  [`${ADMIN_BASE}/roles`]: "Roles & Permissions",
+};
+
+function element<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  className?: string,
+  text?: string,
+): HTMLElementTagNameMap[K] {
+  const node = document.createElement(tag);
+  if (className !== undefined) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
 }
 
-function cloneConfig(config: SpaceTypingAdminConfig): SpaceTypingAdminConfig {
-  return structuredClone(config);
+function button(
+  label: string,
+  onClick: () => void,
+  className = "st-admin-btn",
+): HTMLButtonElement {
+  const node = element("button", className, label);
+  node.type = "button";
+  node.addEventListener("click", onClick);
+  return node;
 }
 
-function button(label: string, onClick: () => void, className = "st-admin-action"): HTMLButtonElement {
-  const element = document.createElement("button");
-  element.type = "button";
-  element.className = className;
-  element.textContent = label;
-  element.addEventListener("click", onClick);
-  return element;
+function statusBadge(
+  label: string,
+  tone: "good" | "warn" | "bad" | "info" = "info",
+): HTMLElement {
+  return element("span", `st-admin-status ${tone}`, label);
+}
+
+function normalizedAdminPath(path: string): string {
+  if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;
+  return path;
+}
+
+function readCollapsedGroups(): Set<string> {
+  try {
+    const raw = localStorage.getItem(NAV_STATE_KEY);
+    if (raw === null) return new Set(NAV_GROUPS.map((group) => group.id));
+    const parsed = JSON.parse(raw) as unknown;
+    if (!Array.isArray(parsed)) return new Set();
+    return new Set(parsed.filter((value): value is string => typeof value === "string"));
+  } catch {
+    return new Set();
+  }
+}
+
+function writeCollapsedGroups(groups: Set<string>): void {
+  try {
+    localStorage.setItem(NAV_STATE_KEY, JSON.stringify([...groups]));
+  } catch {
+    // Navigation remains fully usable even when local storage is unavailable.
+  }
+}
+
+function routeLabel(path: string): string {
+  const primary = NAV_GROUPS.flatMap((group) => group.items).find((item) => item.path === path);
+  return primary?.label ?? LEGACY_ROUTE_LABELS[path] ?? "Admin";
 }
 
 export class SpaceTypingAdmin {
-  private readonly api = new SpaceTypingAdminApi();
+  private readonly help = new AdminHelpScope();
+  private developerToolsAllowed = false;
+  private renderGeneration = 0;
 
   constructor(private readonly navigate: (path: string) => void) {
-    ensureStyles();
+    installAdminCommandShortcut(this.navigate, () => ({ includeDeveloperTools: this.developerToolsAllowed }));
   }
 
   render(path: string): HTMLElement {
-    const root = document.createElement("main");
-    root.className = "st-admin";
-    const grid = document.createElement("div");
-    grid.className = "st-admin-grid";
-    grid.append(this.renderSidebar(path));
-    const panel = document.createElement("section");
-    panel.className = "st-admin-panel";
-    panel.innerHTML = '<div class="st-admin-loading">Loading Space Typing Admin…</div>';
-    grid.append(panel);
-    root.append(grid);
-    void this.loadPage(panel, path);
+    this.help.destroy();
+    this.developerToolsAllowed = false;
+    const generation = ++this.renderGeneration;
+    const canonicalPath = normalizedAdminPath(path);
+    const root = element("main", "st-admin");
+    const shell = element("div", "st-admin-shell");
+    shell.append(this.renderSidebar(canonicalPath));
+
+    const main = element("div", "st-admin-main");
+    main.append(this.renderTopbar(canonicalPath));
+    const content = element("div", "st-admin-content");
+    content.append(this.renderPage(canonicalPath));
+    main.append(content);
+
+    shell.append(main);
+    root.append(shell);
+    this.help.observeRoot(root);
+    void this.hydratePermissions(root, generation);
     return root;
   }
 
-  private renderSidebar(path: string): HTMLElement {
-    const aside = document.createElement("aside");
-    aside.className = "st-admin-side";
-    const kicker = document.createElement("div");
-    kicker.className = "st-admin-kicker";
-    kicker.textContent = "LOCAL GAME ADMIN";
-    const title = document.createElement("h2");
-    title.textContent = contract.label;
-    const revision = document.createElement("div");
-    revision.className = "st-admin-muted";
-    revision.textContent = contract.contractRevision;
-    const nav = document.createElement("div");
-    nav.className = "st-admin-nav";
-    for (const route of contract.routes) {
-      const item = button(route.label, () => this.navigate(route.path), "");
-      item.className = path === route.path ? "active" : "";
-      nav.append(item);
+  private async hydratePermissions(root: HTMLElement, generation: number): Promise<void> {
+    try {
+      const actor = await new SpaceTypingAdminApi().getActor();
+      if (generation !== this.renderGeneration || !root.isConnected) return;
+      this.developerToolsAllowed = actor.permissions.includes(DEVELOPER_PERMISSION);
+    } catch {
+      if (generation !== this.renderGeneration || !root.isConnected) return;
+      this.developerToolsAllowed = false;
     }
 
-    const token = document.createElement("div");
-    token.className = "st-admin-token";
-    const tokenLabel = document.createElement("div");
-    tokenLabel.className = "st-admin-muted";
-    tokenLabel.textContent = "Local Admin token";
-    const input = document.createElement("input");
-    input.type = "password";
-    input.value = this.api.getToken();
-    input.autocomplete = "off";
-    const save = button("Save token", () => this.api.setToken(input.value));
-    token.append(tokenLabel, input, save);
-    aside.append(kicker, title, revision, nav, token);
+    for (const node of root.querySelectorAll<HTMLElement>(`[data-admin-permission="${DEVELOPER_PERMISSION}"]`)) {
+      node.hidden = !this.developerToolsAllowed;
+    }
+  }
+
+  private renderSidebar(path: string): HTMLElement {
+    const aside = element("aside", "st-admin-sidebar");
+    const brand = element("div", "st-admin-brand");
+    const mark = element("div", "st-admin-brand-mark");
+    mark.append(
+      element("span", "st-admin-brand-logo", "ST"),
+      element("span", undefined, "Space Typing"),
+    );
+    brand.append(
+      mark,
+      element("h2", undefined, "Command Center"),
+      element("p", undefined, "Game Management"),
+    );
+    const env = element("div", "st-admin-env-row");
+    env.append(
+      element("span", "st-admin-env", "LOCAL"),
+      element("span", "st-admin-status good", "SERVICE CONNECTED"),
+    );
+    brand.append(env);
+    aside.append(brand);
+
+    const collapsed = readCollapsedGroups();
+    const activeGroup = NAV_GROUPS.find((group) => group.items.some((item) => item.path === path));
+    if (activeGroup) collapsed.delete(activeGroup.id);
+    writeCollapsedGroups(collapsed);
+
+    const nav = element("nav", "st-admin-nav");
+    nav.setAttribute("aria-label", "Space Typing Admin sections");
+    let activeButton: HTMLButtonElement | null = null;
+
+    for (const group of NAV_GROUPS) {
+      const wrapper = element("section", "st-admin-nav-group");
+      if (group.requiredPermission) {
+        wrapper.dataset.adminPermission = group.requiredPermission;
+        wrapper.hidden = true;
+      }
+      const groupButton = element("button", "st-admin-nav-group-toggle");
+      groupButton.type = "button";
+      groupButton.setAttribute("aria-label", `Toggle ${group.label}`);
+      this.help.tooltip(groupButton, {
+        title: group.label,
+        content: group.description,
+        placement: "right",
+        interaction: "hover-focus",
+      });
+      const groupCopy = element("span", "st-admin-nav-group-copy");
+      groupCopy.append(element("strong", undefined, group.label));
+      const chevron = element("span", "st-admin-nav-chevron", "⌄");
+      chevron.setAttribute("aria-hidden", "true");
+      groupButton.append(groupCopy, chevron);
+
+      const groupItems = element("div", "st-admin-nav-group-items");
+      const groupItemsId = `space-admin-nav-${group.id}`;
+      groupItems.id = groupItemsId;
+      groupButton.setAttribute("aria-controls", groupItemsId);
+      const initiallyExpanded = !collapsed.has(group.id);
+      groupButton.setAttribute("aria-expanded", String(initiallyExpanded));
+      groupItems.hidden = !initiallyExpanded;
+
+      groupButton.addEventListener("click", () => {
+        const expanded = groupButton.getAttribute("aria-expanded") === "true";
+        groupButton.setAttribute("aria-expanded", String(!expanded));
+        groupItems.hidden = expanded;
+        if (expanded) collapsed.add(group.id); else collapsed.delete(group.id);
+        writeCollapsedGroups(collapsed);
+      });
+
+      for (const item of group.items) {
+        const navButton = element(
+          "button",
+          `st-admin-nav-item${path === item.path ? " active" : ""}`,
+        );
+        navButton.type = "button";
+        navButton.setAttribute("aria-label", item.label);
+        this.help.tooltip(navButton, {
+          title: item.label,
+          content: item.description,
+          placement: "right",
+          interaction: "hover-focus",
+        });
+        const navCopy = element("span", "st-admin-nav-copy");
+        navCopy.append(element("span", "st-admin-nav-text", item.label));
+        navButton.append(adminNavIcon(item.icon), navCopy);
+        navButton.addEventListener("click", () => this.navigate(item.path));
+        groupItems.append(navButton);
+        if (path === item.path) activeButton = navButton;
+      }
+
+      wrapper.append(groupButton, groupItems);
+      nav.append(wrapper);
+    }
+    aside.append(nav);
+
+    if (activeButton !== null) {
+      queueMicrotask(() => activeButton?.scrollIntoView({ block: "nearest" }));
+    }
     return aside;
   }
 
-  private async loadPage(panel: HTMLElement, path: string): Promise<void> {
-    try {
-      const state = await this.api.getState();
-      if (path === "/admin/space-typing/audio") {
-        this.renderAudio(panel, state);
-      } else if (path === "/admin/space-typing/world-music") {
-        const preview = await this.api.previewWorldMusic();
-        this.renderWorldMusic(panel, state, preview);
-      } else if (path === "/admin/space-typing/history") {
-        this.renderHistory(panel, state);
-      } else {
-        this.renderOverview(panel, state);
-      }
-    } catch (error) {
-      panel.replaceChildren(this.renderFailure(error));
-    }
+  private renderTopbar(path: string): HTMLElement {
+    const bar = element("div", "st-admin-topbar");
+    const breadcrumb = element("div", "st-admin-breadcrumb");
+    breadcrumb.append(
+      document.createTextNode("Space Typing / "),
+      element("strong", undefined, routeLabel(path)),
+    );
+    bar.append(breadcrumb);
+    bar.append(element("div", "st-admin-topbar-spacer"));
+    bar.append(
+      button(
+        "⌘K  Search command…",
+        () => openAdminCommandPalette(this.navigate, { includeDeveloperTools: this.developerToolsAllowed }),
+        "st-admin-command",
+      ),
+    );
+
+    const localAdmin = element("span", "st-admin-v2-topbar-help");
+    localAdmin.append(
+      element("span", "st-admin-revision", "LOCAL ADMIN · CONNECTED"),
+      this.help.infoIcon({
+        title: "Local Admin",
+        content: "Connected to the local Space Typing Admin service. Saved drafts do not affect the active game until an explicit publish succeeds.",
+        placement: "bottom",
+        interaction: "popover",
+        label: "About the local Admin connection",
+      }),
+    );
+    bar.append(localAdmin);
+    bar.append(statusBadge("READY", "good"));
+    return bar;
   }
 
-  private renderHeader(title: string, subtitle: string): HTMLElement {
-    const head = document.createElement("header");
-    head.className = "st-admin-head";
-    const copy = document.createElement("div");
-    const kicker = document.createElement("div");
-    kicker.className = "st-admin-kicker";
-    kicker.textContent = "SPACE TYPING · ADMIN V1";
-    const h1 = document.createElement("h1");
-    h1.textContent = title;
-    const p = document.createElement("div");
-    p.className = "st-admin-muted";
-    p.textContent = subtitle;
-    copy.append(kicker, h1, p);
-    const env = document.createElement("div");
-    env.className = "st-admin-env";
-    env.textContent = "LOCAL · 127.0.0.1";
-    head.append(copy, env);
-    return head;
+  private renderPage(path: string): HTMLElement {
+    if (path === ADMIN_BASE) return renderAdminV2Dashboard(this.navigate, this.help);
+    if (path === `${ADMIN_BASE}/media`) return renderAdminV2MediaLibrary(this.help);
+    if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools(this.navigate, this.help);
+    const phaseB = renderPhaseBAdminScreen(path, this.navigate);
+    if (phaseB !== null) return phaseB;
+    return this.renderUnknown(path);
   }
 
-  private renderOverview(panel: HTMLElement, state: AdminStatePayload): void {
-    panel.replaceChildren(this.renderHeader("Overview", "Runtime reads only the active immutable revision."));
-    const cards = document.createElement("div");
-    cards.className = "st-admin-cards";
-    const items: Array<[string, string]> = [
-      ["Active revision", state.state.activeRevision],
-      ["Contract", contract.contractRevision],
-      ["World topology", `${contract.worldMusic.galaxyCount} Galaxies · ${contract.worldMusic.worldCount} Worlds`],
-    ];
-    for (const [label, value] of items) {
-      const card = document.createElement("div");
-      card.className = "st-admin-card";
-      const caption = document.createElement("div");
-      caption.className = "st-admin-muted";
-      caption.textContent = label;
-      const strong = document.createElement("strong");
-      strong.textContent = value;
-      card.append(caption, strong);
-      cards.append(card);
-    }
-    const note = document.createElement("div");
-    note.className = "st-admin-note";
-    note.textContent = "Draft revisions never leak into runtime. Publish and rollback use compare-and-swap against the active revision.";
-    panel.append(cards, note);
-  }
-
-  private renderAudio(panel: HTMLElement, state: AdminStatePayload): void {
-    panel.replaceChildren(this.renderHeader("Audio & Mix", "Edit product-owned defaults; player personal volume remains separate."));
-    const config = cloneConfig(state.active.config);
-    const grid = document.createElement("div");
-    grid.className = "st-audio-grid";
-    const keys = ["master", "pronunciation", "music", "ambient", "sfx", "announcer"] as const;
-    for (const key of keys) {
-      const row = document.createElement("div");
-      row.className = "st-audio-row";
-      const label = document.createElement("label");
-      const name = document.createElement("span");
-      name.textContent = key[0]?.toUpperCase() + key.slice(1);
-      const value = document.createElement("span");
-      value.textContent = config.audio.defaults[key].toFixed(2);
-      label.append(name, value);
-      const input = document.createElement("input");
-      input.type = "range";
-      input.min = "0";
-      input.max = "1";
-      input.step = "0.01";
-      input.value = String(config.audio.defaults[key]);
-      input.addEventListener("input", () => {
-        const parsed = Number.parseFloat(input.value);
-        config.audio.defaults[key] = Number.isFinite(parsed) ? parsed : 0;
-        value.textContent = config.audio.defaults[key].toFixed(2);
-      });
-      row.append(label, input);
-      grid.append(row);
-    }
-    const status = document.createElement("div");
-    const actions = document.createElement("div");
-    actions.className = "st-admin-actions";
-    const save = button("Save immutable draft", () => {
-      save.disabled = true;
-      status.className = "st-admin-note";
-      status.textContent = "Saving draft…";
-      void this.api
-        .createRevision({
-          baseRevision: state.state.activeRevision,
-          config,
-          message: "Update product audio defaults",
-        })
-        .then((revision) => {
-          status.className = "st-admin-success";
-          status.textContent = `Draft ${revision.revision} saved. Runtime is unchanged until Publish.`;
-        })
-        .catch((error: unknown) => {
-          status.className = "st-admin-error";
-          status.textContent = error instanceof Error ? error.message : "Could not save draft.";
-        })
-        .finally(() => {
-          save.disabled = false;
-        });
-    }, "st-admin-action primary");
-    actions.append(save, button("History / Publish", () => this.navigate("/admin/space-typing/history")));
-    panel.append(grid, actions, status);
-  }
-
-  private renderWorldMusic(
-    panel: HTMLElement,
-    state: AdminStatePayload,
-    preview: WorldMusicPreview,
-  ): void {
-    panel.replaceChildren(this.renderHeader("World Music", "Canonical resolver preview for all 50 Worlds — no UI-side fallback guessing."));
-    const note = document.createElement("div");
-    note.className = "st-admin-note";
-    note.textContent = `Config ${preview.configRevision} · manifest ${preview.manifestRevision} · mode ${preview.musicMode} · active revision ${state.state.activeRevision}`;
-    panel.append(note);
-    const list = document.createElement("div");
-    list.className = "st-galaxy-list";
-    for (let galaxy = 1; galaxy <= contract.worldMusic.galaxyCount; galaxy += 1) {
-      const section = document.createElement("section");
-      section.className = "st-galaxy";
-      const title = document.createElement("h3");
-      title.textContent = `Galaxy ${String(galaxy).padStart(2, "0")}`;
-      const worlds = document.createElement("div");
-      worlds.className = "st-world-grid";
-      for (const world of preview.worlds.filter((item) => item.galaxy === galaxy)) {
-        const card = document.createElement("div");
-        card.className = "st-world";
-        const strong = document.createElement("strong");
-        strong.textContent = `${world.worldId} · ${world.name}`;
-        const range = document.createElement("small");
-        range.textContent = `Stages ${world.stageRange[0]}–${world.stageRange[1]} · normal ${world.states.normal.trackCount} · boss ${world.states.world.trackCount}`;
-        const badges = document.createElement("div");
-        badges.className = "st-world-badges";
-        for (const badge of [...new Set([...world.states.normal.badges, ...world.states.world.badges])]) {
-          const chip = document.createElement("span");
-          chip.className = "st-badge";
-          chip.textContent = badge;
-          badges.append(chip);
-        }
-        const source = document.createElement("div");
-        source.className = "st-world-source";
-        source.textContent = `normal: ${world.states.normal.resolvedFrom} · boss: ${world.states.world.resolvedFrom}`;
-        source.title = [...world.states.normal.fallbackTrace, ...world.states.world.fallbackTrace].join("\n");
-        card.append(strong, range, badges, source);
-        worlds.append(card);
-      }
-      section.append(title, worlds);
-      list.append(section);
-    }
-    panel.append(list);
-  }
-
-  private renderHistory(panel: HTMLElement, state: AdminStatePayload): void {
-    panel.replaceChildren(this.renderHeader("History / Publish", "Activate a draft or roll back to any retained immutable revision with CAS protection."));
-    const status = document.createElement("div");
-    const list = document.createElement("div");
-    list.className = "st-history";
-    for (const revision of state.history) {
-      list.append(this.renderHistoryRow(revision, state, status, panel));
-    }
-    panel.append(status, list);
-  }
-
-  private renderHistoryRow(
-    revision: AdminRevision,
-    state: AdminStatePayload,
-    status: HTMLElement,
-    panel: HTMLElement,
-  ): HTMLElement {
-    const row = document.createElement("div");
-    row.className = "st-history-row";
-    const identity = document.createElement("div");
-    const code = document.createElement("code");
-    code.textContent = revision.revision;
-    const message = document.createElement("div");
-    message.className = "st-admin-muted";
-    message.textContent = revision.message;
-    identity.append(code, message);
-    const meta = document.createElement("div");
-    meta.className = "st-admin-muted";
-    meta.textContent = new Date(revision.createdAt).toLocaleString();
-    const actions = document.createElement("div");
-    if (revision.revision === state.state.activeRevision) {
-      const active = document.createElement("span");
-      active.className = "st-badge";
-      active.textContent = "ACTIVE";
-      actions.append(active);
-    } else {
-      const older = Date.parse(revision.createdAt) < Date.parse(state.active.createdAt);
-      const activate = button(older ? "Rollback here" : "Publish draft", () => {
-        activate.disabled = true;
-        const request = older
-          ? this.api.rollback(revision.revision, state.state.activeRevision)
-          : this.api.publish(revision.revision, state.state.activeRevision);
-        void request
-          .then(() => this.loadPage(panel, "/admin/space-typing/history"))
-          .catch((error: unknown) => {
-            status.className = "st-admin-error";
-            status.textContent = error instanceof Error ? error.message : "Publish failed.";
-          })
-          .finally(() => {
-            activate.disabled = false;
-          });
-      }, "st-admin-action primary");
-      actions.append(activate);
-    }
-    row.append(identity, meta, actions);
-    return row;
-  }
-
-  private renderFailure(error: unknown): HTMLElement {
-    const block = document.createElement("div");
-    block.className = "st-admin-error";
-    if (error instanceof AdminApiError && error.status === 401) {
-      block.textContent = "Admin service rejected the token. Update the local Admin token in the sidebar.";
-    } else {
-      block.textContent = error instanceof Error
-        ? `Admin service unavailable: ${error.message}`
-        : "Admin service unavailable.";
-    }
-    return block;
+  private renderUnknown(path: string): HTMLElement {
+    const page = element("div");
+    const panel = element("section", "st-admin-panel solid");
+    panel.append(
+      element("div", "st-admin-eyebrow", "Navigation"),
+      element("h1", undefined, "Screen not found"),
+      element("p", undefined, `This Admin URL is not registered. Use the sidebar or Search command to open a supported Space Typing screen. Requested path: ${path}.`),
+      button("Back to Overview", () => this.navigate(ADMIN_BASE), "st-admin-btn primary"),
+    );
+    page.append(panel);
+    return page;
   }
 }

@@ -46,11 +46,23 @@
     "build:space": "pnpm --dir games/space-typing build",
     "learning:check": "node --check shared/learning/core.mjs && node --check shared/learning/browser-store.mjs && node --check shared/learning/query.mjs && node --check shared/learning/message-contract.mjs && node --check shared/learning/review-session.mjs && node --check shared/learning/monkey-review-dataset.mjs && node --check shared/learning/recall-review-dataset.mjs && node --check shared/learning/shooter-review-dataset.mjs && node --check shared/learning/space-review-dataset.mjs && node --check shared/learning/karaoke-review-dataset.mjs && node --check shared/learning/mixed-review.mjs && node --check shared/learning/adaptive-mix.mjs && node --check shared/learning/profile-backup.mjs && node --check shared/learning/review-lifecycle.mjs",
     "learning:test": "node --test shared/learning/*.test.mjs",
+    "voice:check": "node --test shared/voice/*.test.mjs",
+    "voice:e2e:local": "node scripts/voice-e2e-fake-mic.mjs --runtime",
+    "voice:profile": "node scripts/voice-profile-summary.mjs",
+    "voice:final": "node scripts/voice-final-acceptance.mjs",
+    "voice:prepare": "node scripts/prepare-voice-model.mjs",
+    "voice:worker:smoke": "node scripts/voice-worker-smoke.mjs",
+    "space:voice:sync": "node scripts/sync-space-voice-contract.mjs",
     "dev:admin": "node admin/server.mjs",
-    "admin:test": "node --test admin/store.test.mjs",
+    "admin:test": "node --test admin/store.test.mjs admin/admin-security.test.mjs admin/admin-roles.test.mjs admin/developer-tools.test.mjs admin/media-assets-v2.test.mjs admin/media-bootstrap.test.mjs admin/media-http.test.mjs admin/media-http-ownership.test.mjs",
+    "admin:v2:foundation:validate": "node scripts/validate-space-admin-v2-foundation.mjs",
+    "admin:v2:design-system:validate": "node scripts/validate-space-admin-v2-design-system.mjs",
+    "admin:v2:media:validate": "node scripts/validate-space-admin-v2-media.mjs",
+    "admin:v2:a17:validate": "node scripts/validate-space-admin-a17-acceptance.mjs",
     "admin:contract:validate": "node scripts/validate-space-admin-contract.mjs"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vosk-browser": "0.0.8"
   }
 }

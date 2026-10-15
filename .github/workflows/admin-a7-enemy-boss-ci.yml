@@ -1,0 +1,47 @@
+name: Space Typing Admin A7 Enemy Boss CI
+
+on:
+  push:
+    branches:
+      - feat/space-typing-admin-uiux
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/v2/asset-tuning-studio.ts"
+      - "scripts/validate-space-admin-a7-enemy-boss.mjs"
+      - ".github/workflows/admin-a7-enemy-boss-ci.yml"
+  pull_request:
+    paths:
+      - "games/space-typing"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/v2/asset-tuning-studio.ts"
+      - "scripts/validate-space-admin-a7-enemy-boss.mjs"
+      - ".github/workflows/admin-a7-enemy-boss-ci.yml"
+
+jobs:
+  capability-contract-and-portal-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+          cache: pnpm
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            portal/pnpm-lock.yaml
+      - name: Validate A7 Enemy Boss capability boundary
+        run: node scripts/validate-space-admin-a7-enemy-boss.mjs
+      - name: Install root dependencies required by Portal build config
+        run: pnpm install --frozen-lockfile
+      - name: Install Portal dependencies
+        run: pnpm --dir portal install --frozen-lockfile
+      - name: Build Portal
+        run: pnpm --dir portal build

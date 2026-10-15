@@ -15,6 +15,23 @@ const devNginx = await readFile(
 
 const failures = [];
 
+function serverBlockFor(config, serverName) {
+  const marker = `server_name ${serverName};`;
+  const markerIndex = config.indexOf(marker);
+  if (markerIndex < 0) return null;
+  const start = config.lastIndexOf("server {", markerIndex);
+  if (start < 0) return null;
+  let depth = 0;
+  for (let index = start; index < config.length; index += 1) {
+    if (config[index] === "{") depth += 1;
+    if (config[index] === "}") {
+      depth -= 1;
+      if (depth === 0) return config.slice(start, index + 1);
+    }
+  }
+  return null;
+}
+
 for (const output of [
   "portal/dist/index.html",
   "games/vocab-shooter/dist/index.html",
@@ -54,6 +71,27 @@ for (const host of [
   }
 }
 
+const portalPlayServer = serverBlockFor(nginx, "typing-game.local");
+if (portalPlayServer === null) {
+  failures.push("Play nginx is missing the typing-game.local HTTPS server block.");
+} else {
+  const adminLocation = "location /api/admin/space-typing/";
+  const spaFallback = "location / { try_files $uri $uri/ /index.html; }";
+  const adminLocationIndex = portalPlayServer.indexOf(adminLocation);
+  const spaFallbackIndex = portalPlayServer.indexOf(spaFallback);
+
+  if (adminLocationIndex < 0) {
+    failures.push("Play nginx does not proxy Space Typing Admin API requests.");
+  }
+  if (!portalPlayServer.includes("proxy_pass http://127.0.0.1:3199;")) {
+    failures.push("Play nginx Space Typing Admin API does not target the Admin service on port 3199.");
+  }
+  if (spaFallbackIndex < 0) {
+    failures.push("Play nginx Portal server is missing its SPA fallback.");
+  } else if (adminLocationIndex >= 0 && adminLocationIndex > spaFallbackIndex) {
+    failures.push("Play nginx Admin API proxy must be declared before the Portal SPA fallback.");
+  }
+}
 
 for (const [name, config] of [
   ["play", nginx],
@@ -101,5 +139,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  "Play mode contract PASS: all static apps, shared runtime data, and Portal shared-learning rebuild dependency are covered.",
+  "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, and Portal shared-learning rebuild dependency are covered.",
 );

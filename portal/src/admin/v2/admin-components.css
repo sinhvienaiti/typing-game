@@ -1,0 +1,16 @@
+.st-admin-v2-card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));
+  gap:12px;
+  align-items:start;
+}
+
+.st-admin-v2-card-grid>.st-admin-panel,
+.st-admin-v2-card-grid>.stx-panel{
+  min-width:0;
+  height:100%;
+}
+
+@media(max-width:720px){
+  .st-admin-v2-card-grid{grid-template-columns:1fr}
+}
