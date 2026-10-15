@@ -1,6 +1,7 @@
 import "../../admin-runtime-preview-fixes.css";
 import { SpaceTypingAdminApi } from "../../../api";
 import { adminErrorMessage } from "../../../admin-http";
+import { createProductionRegistryIconPreview } from "../production-registry-icon";
 
 type SkillState = { cooldownRemaining?: number; charges?: number | null; usesThisStage?: number } | null;
 type SkillRuntimePreview = {
@@ -74,7 +75,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   const copy = el("div");
   copy.append(
     el("h2", undefined, "Live Production Runtime Preview"),
-    el("p", undefined, "Exercise activation, energy, cooldown and charge behavior live through the child production SkillEngine."),
+    el("p", undefined, "Show the canonical painted Skill visual and exercise activation, energy, cooldown and charge behavior through the child production SkillEngine."),
   );
   head.append(copy);
   root.append(head);
@@ -92,14 +93,15 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   cooldown.min = "0";
   cooldown.max = "300";
   cooldown.step = "0.1";
-  const apply = el("button", "st-admin-btn", "Refresh preview") as HTMLButtonElement;
+  const apply = el("button", "st-admin-btn", "Refresh published preview") as HTMLButtonElement;
   apply.type = "button";
   const controls = el("div", "stx-grid st-admin-runtime-preview-grid");
   controls.append(field("Source", source), field("Skill", skillSelect), field("Energy cost", energy), field("Cooldown", cooldown), apply);
   const message = el("div", "stx-notice info", "Loading production Skill runtime…");
   message.setAttribute("aria-live", "polite");
+  const visual = createProductionRegistryIconPreview("skill");
   const result = el("div", "stx-grid");
-  root.append(controls, message, result);
+  root.append(controls, message, visual.root, result);
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: SkillResponse | null = null;
@@ -110,6 +112,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   const selected = (): SkillItem | undefined => published?.skills.find((item) => item.id === skillSelect.value);
 
   const render = (item: SkillItem, candidate = false): void => {
+    visual.show(item.id, item.name);
     result.replaceChildren();
     const runtime = item.runtimePreview;
     const rows: Array<[string, string]> = [
@@ -130,8 +133,8 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     status(
       message,
       candidate
-        ? "Draft candidate executed live through production SkillEngine. Nothing was persisted."
-        : "Published definition executed through production SkillEngine.",
+        ? "Draft candidate executed live through production SkillEngine. The painted icon is the canonical child-owned visual and remains read-only. Nothing was persisted."
+        : "Published definition executed through production SkillEngine with its canonical child-owned painted icon.",
       runtime.activationReady ? "good" : "warn",
     );
   };
@@ -186,6 +189,8 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     if (!item) return;
     energy.value = String(item.energyCost);
     cooldown.value = String(item.cooldown);
+    apply.textContent = source.value === "draft" ? "Preview draft candidate" : "Refresh published preview";
+    visual.show(item.id, item.name);
     if (source.value === "published") render(item);
     else if (previewDraft) scheduleDraftPreview(0);
   };
