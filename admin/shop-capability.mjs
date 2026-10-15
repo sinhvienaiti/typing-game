@@ -1,8 +1,8 @@
-// A17 Shop authority re-audit: 33b0764..b75cec6 changes only the isolated
-// Enemy Admin production-preview renderer plus its focused painted-kind test.
-// Shop policy, contracts, generation, pricing, availability, offers, services
-// and transaction ownership sources remain unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
+// A17 Shop authority re-audit: b75cec6..dcba99b changes only the bounded Test
+// Lab direct-launch bootstrap, registry wiring and focused unit coverage. Shop
+// policy, contracts, generation, pricing, availability, offers, services and
+// transaction ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",

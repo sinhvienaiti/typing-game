@@ -1,8 +1,8 @@
-// A10 unlock/economy authority re-audit: 33b0764..b75cec6 changes only the
-// isolated Enemy Admin production-preview renderer plus its painted-kind test.
-// The A10 capability map, Ship runtime policy, character unlock consumer,
-// wallet/economy formulas, rewards, loot and entitlement ownership are unchanged.
-export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
+// A10 unlock/economy authority re-audit: b75cec6..dcba99b changes only the
+// bounded Test Lab direct-launch bootstrap, registry wiring and focused unit
+// coverage. The A10 capability map, Ship runtime policy, character unlock
+// consumer, wallet/economy formulas, rewards, loot and entitlement ownership are unchanged.
+export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
 
 const capabilities = Object.freeze([
   {

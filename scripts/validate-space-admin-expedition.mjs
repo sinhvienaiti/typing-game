@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// Expedition ownership re-audit: 33b0764..b75cec6 changes only the isolated
-// Enemy Admin production-preview renderer plus its focused painted-kind test.
+// Expedition ownership re-audit: b75cec6..dcba99b changes only the bounded
+// Test Lab direct-launch bootstrap, registry wiring and focused unit coverage.
 // Expedition run/session/store ownership, plan, Stage runtime policy and frozen
 // Stage snapshot regression coverage asserted below are unchanged.
-const EXPEDITION_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
+const EXPEDITION_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-expedition.v1.json"));
 const [

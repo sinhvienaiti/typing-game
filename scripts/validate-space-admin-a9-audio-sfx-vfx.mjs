@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 ownership re-audit: 33b0764..b75cec6 changes only the isolated Enemy
-// Admin production-preview renderer plus its focused painted-kind test.
+// A9 ownership re-audit: b75cec6..dcba99b changes only the bounded Test Lab
+// direct-launch bootstrap, registry wiring and focused unit coverage.
 // Audio/SFX/VFX ownership, contracts, production sample/music sources and write
 // boundaries asserted below are unchanged.
-const A9_SFX_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
+const A9_SFX_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
 
 const [
   sfxContract,
