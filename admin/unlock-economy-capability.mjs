@@ -1,9 +1,8 @@
-// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
-// Admin preview host Ship mutation lifecycle plus its focused queue test. The
-// A10 unlock/economy capability map, Ship runtime policy, character unlock
-// consumer, wallet/economy formulas, rewards, loot and entitlement ownership
-// asserted by this manifest are unchanged.
-export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
+// A10 unlock/economy authority re-audit: 33b0764..b75cec6 changes only the
+// isolated Enemy Admin production-preview renderer plus its painted-kind test.
+// The A10 capability map, Ship runtime policy, character unlock consumer,
+// wallet/economy formulas, rewards, loot and entitlement ownership are unchanged.
+export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
 
 const capabilities = Object.freeze([
   {
