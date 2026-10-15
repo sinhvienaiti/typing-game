@@ -6,11 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 ownership re-audit: 9cd58072..f31a2908 adds Boss 3D runtime plus
-// Admin testing-policy bootstrap/state tests. Audio/SFX/VFX ownership,
-// contracts, production sample/music sources and write boundaries asserted
-// below are unchanged.
-const A9_SFX_AUDITED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
+// A9 ownership re-audit: f31a2908..22a35dd changes only the A10 testing
+// selection capability/bootstrap/tests. Audio/SFX/VFX ownership, contracts,
+// production sample/music sources and write boundaries asserted below are unchanged.
+const A9_SFX_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 
 const [
   sfxContract,
