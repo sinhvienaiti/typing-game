@@ -1,4 +1,4 @@
-import { SpaceTypingAdminApi, type ShipAdminPreviewItem } from "../../api";
+import { SpaceTypingAdminApi, type ShipAdminPreviewItem } from "../../../api";
 import { ProductionPreviewBridge } from "../production-preview-bridge";
 import { createProductionPreviewStudio } from "../production-preview-studio";
 import {
