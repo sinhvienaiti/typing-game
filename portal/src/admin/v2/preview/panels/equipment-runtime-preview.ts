@@ -92,7 +92,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: EquipmentResponse | null = null;
-  let generation = 0;
+  let previewGeneration = 0;
   const selected = (): EquipmentItem | undefined => published?.equipment.find((item) => item.id === equipmentSelect.value);
 
   const render = (item: EquipmentItem, candidate = false): void => {
@@ -129,17 +129,15 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
   };
 
   const invalidatePendingPreview = (): void => {
-    generation += 1;
+    previewGeneration += 1;
   };
 
   const load = async (): Promise<void> => {
-    const current = ++generation;
     try {
       status(message, "Loading production Equipment runtime…");
       const runtime = await api.getRuntime();
       const policy = objectPolicy(runtime.config);
       const response = await previewEquipment(policy);
-      if (current !== generation) return;
       publishedPolicy = policy;
       published = response;
       equipmentSelect.replaceChildren(...response.equipment.map((item) => new Option(item.name, item.id)));
@@ -153,7 +151,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
       );
       syncInputs();
     } catch (error) {
-      if (current === generation) status(message, adminErrorMessage(error, "Could not load Equipment runtime preview."), "bad");
+      status(message, adminErrorMessage(error, "Could not load Equipment runtime preview."), "bad");
     }
   };
 
@@ -180,7 +178,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
         render(item);
         return;
       }
-      const current = ++generation;
+      const current = ++previewGeneration;
       const itemId = item.id;
       const draft = structuredClone(publishedPolicy ?? { configRevision: "equipment-admin-preview", equipment: {} }) as Record<string, unknown>;
       draft["configRevision"] = "equipment-admin-preview-draft";
@@ -196,12 +194,12 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
       try {
         status(message, "Resolving isolated draft candidate through production equipment logic…");
         const response = await previewEquipment(draft);
-        if (current !== generation) return;
+        if (current !== previewGeneration) return;
         const candidate = response.equipment.find((entry) => entry.id === itemId);
         if (!candidate) throw new Error("Equipment candidate was not returned by production preview.");
         render(candidate, true);
       } catch (error) {
-        if (current === generation) status(message, adminErrorMessage(error, "Could not preview Equipment candidate."), "bad");
+        if (current === previewGeneration) status(message, adminErrorMessage(error, "Could not preview Equipment candidate."), "bad");
       }
     })();
   });

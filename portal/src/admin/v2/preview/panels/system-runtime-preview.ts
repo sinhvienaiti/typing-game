@@ -100,7 +100,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: SkillResponse | null = null;
-  let generation = 0;
+  let previewGeneration = 0;
 
   const selected = (): SkillItem | undefined => published?.skills.find((item) => item.id === skillSelect.value);
   const render = (item: SkillItem, candidate = false): void => {
@@ -139,23 +139,21 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   };
 
   const invalidatePendingPreview = (): void => {
-    generation += 1;
+    previewGeneration += 1;
   };
 
   const load = async (): Promise<void> => {
-    const current = ++generation;
     try {
       status(message, "Loading production Skill runtime…");
       const runtime = await api.getRuntime();
       const policy = skillsPolicy(runtime.config);
       const response = await previewSkills(policy);
-      if (current !== generation) return;
       publishedPolicy = policy;
       published = response;
       skillSelect.replaceChildren(...response.skills.map((item) => new Option(item.name, item.id)));
       syncInputs();
     } catch (error) {
-      if (current === generation) status(message, adminErrorMessage(error, "Could not load Skill runtime preview."), "bad");
+      status(message, adminErrorMessage(error, "Could not load Skill runtime preview."), "bad");
     }
   };
 
@@ -178,7 +176,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
         render(item);
         return;
       }
-      const current = ++generation;
+      const current = ++previewGeneration;
       const itemId = item.id;
       const draft = structuredClone(publishedPolicy ?? { configRevision: "skills-admin-preview", skills: {} }) as Record<string, unknown>;
       draft.configRevision = "skills-admin-preview-draft";
@@ -189,12 +187,12 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
       try {
         status(message, "Running isolated draft candidate through SkillEngine…");
         const response = await previewSkills(draft);
-        if (current !== generation) return;
+        if (current !== previewGeneration) return;
         const candidate = response.skills.find((entry) => entry.id === itemId);
         if (!candidate) throw new Error("Skill candidate was not returned by production preview.");
         render(candidate, true);
       } catch (error) {
-        if (current === generation) status(message, adminErrorMessage(error, "Could not preview Skill candidate."), "bad");
+        if (current === previewGeneration) status(message, adminErrorMessage(error, "Could not preview Skill candidate."), "bad");
       }
     })();
   });

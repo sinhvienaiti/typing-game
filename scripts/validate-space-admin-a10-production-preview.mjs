@@ -56,13 +56,15 @@ requireText(source.shipFacade, "await this.latestCandidate", "Ships scenario/tun
 
 requireText(source.systems, '"/api/admin/space-typing/skills/preview"', "Skill preview uses canonical preview endpoint");
 requireText(source.systems, "production SkillEngine", "Skill UI states production engine ownership");
-requireText(source.systems, "let generation = 0", "Skill preview uses latest-request-wins generation control");
-requireText(source.systems, "if (current !== generation) return", "Skill preview ignores stale async responses");
+requireText(source.systems, "let previewGeneration = 0", "Skill draft preview has independent latest-request-wins generation control");
+requireText(source.systems, "const current = ++previewGeneration", "Skill draft preview advances only the preview generation");
+requireText(source.systems, "if (current !== previewGeneration) return", "Skill preview ignores stale draft responses");
 requireText(source.equipment, '"/api/admin/space-typing/equipment/preview"', "Equipment preview uses canonical preview endpoint");
 requireText(source.equipment, "MULTIPLIER_EFFECTS", "Equipment effect baseline distinguishes neutral multipliers from active count=1 effects");
 requireText(source.equipment, "Nothing was persisted", "Equipment Draft preview remains isolated");
-requireText(source.equipment, "let generation = 0", "Equipment preview uses latest-request-wins generation control");
-requireText(source.equipment, "if (current !== generation) return", "Equipment preview ignores stale async responses");
+requireText(source.equipment, "let previewGeneration = 0", "Equipment draft preview has independent latest-request-wins generation control");
+requireText(source.equipment, "const current = ++previewGeneration", "Equipment draft preview advances only the preview generation");
+requireText(source.equipment, "if (current !== previewGeneration) return", "Equipment preview ignores stale draft responses");
 
 for (const kind of ["full-runtime", "production-presentation", "simulation-data", "not-applicable"]) {
   requireText(source.classification, `kind: "${kind}"`, `classification ${kind} exists`);
