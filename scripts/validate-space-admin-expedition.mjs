@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A10.5 re-audit: 71de632..6c57a2b changes Ship/A10 capability work and
-// isolated Admin preview modules. Expedition run/session/store ownership,
-// expedition plan, Stage runtime policy and frozen Stage snapshot regression
-// coverage asserted below are unchanged.
-const EXPEDITION_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
+// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
+// Admin preview host Ship mutation lifecycle plus its focused queue test.
+// Expedition run/session/store ownership, plan, Stage runtime policy and frozen
+// Stage snapshot regression coverage asserted below are unchanged.
+const EXPEDITION_AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-expedition.v1.json"));
 const [

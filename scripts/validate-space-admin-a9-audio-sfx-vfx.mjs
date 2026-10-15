@@ -6,10 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A10.5 re-audit: 4f62c94..6c57a2b changes isolated Admin preview
-// modules for Enemy/Boss/Skill/Equipment/World/Stage. Audio/SFX/VFX ownership,
-// contracts, production sample/music sources and write boundaries are unchanged.
-const A9_SFX_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
+// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
+// Admin preview host Ship mutation lifecycle plus its focused queue test.
+// Audio/SFX/VFX ownership, contracts, production sample/music sources and write
+// boundaries asserted below are unchanged.
+const A9_SFX_AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
 
 const [
   sfxContract,
