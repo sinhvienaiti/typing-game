@@ -110,6 +110,11 @@ async function resolveSpaceTypingAppUrl(): Promise<string> {
   if (!appUrl) throw new Error("Space Typing appUrl is missing from the canonical game registry.");
   return appUrl;
 }
+function directTestLabUrl(appUrl: string): string {
+  const url = new URL(appUrl, window.location.href);
+  url.searchParams.set("testLab", "1");
+  return url.toString();
+}
 function renderList(values: readonly string[]): string {
   if (values.length === 0) return `<p class="st-admin-notice">None exposed by the canonical contract.</p>`;
   return `<ul>${values.map((value) => `<li><code>${escapeHtml(value)}</code></li>`).join("")}</ul>`;
@@ -121,9 +126,9 @@ export function renderPhaseBQa(): HTMLElement {
   root.innerHTML = `
     <header class="space-admin-page__header">
       <div>
-        <p class="st-admin-eyebrow">Developer · Production Test Lab</p>
-        <h1>QA Sandbox</h1>
-        <p>Launch the real Space Typing Test Lab in its own isolated runtime session. Sandbox mutations stay inside Test Lab and never publish or autosave Campaign progression.</p>
+        <p class="st-admin-eyebrow">Developer · QA Sandbox</p>
+        <h1>Test Lab Launcher</h1>
+        <p>Launch the full Space Typing Developer Test Lab directly in its own isolated runtime session. Admin only opens the canonical child Test Lab; sandbox mutations never publish or autosave Campaign progression.</p>
       </div>
       <div class="space-admin-page__badges">
         <span class="st-admin-badge">RUNTIME-BACKED · EPHEMERAL</span>
@@ -145,7 +150,7 @@ export function renderPhaseBQa(): HTMLElement {
     const generation = ++loadGeneration;
     failure.replaceChildren();
     content.replaceChildren();
-    setAdminStatus(status, "Loading canonical QA ownership and Space Typing launcher…", "loading");
+    setAdminStatus(status, "Loading canonical QA ownership and direct Test Lab launcher…", "loading");
 
     void Promise.all([fetchQaContract(), resolveSpaceTypingAppUrl()]).then(([contract, appUrl]) => {
       if (generation !== loadGeneration) return;
@@ -154,14 +159,14 @@ export function renderPhaseBQa(): HTMLElement {
       content.innerHTML = `
         <article class="st-admin-card">
           <div class="st-admin-card__header">
-            <div><p class="st-admin-eyebrow">Execute</p><h2>Production Test Lab</h2></div>
+            <div><p class="st-admin-eyebrow">Execute</p><h2>Full Developer Test Lab</h2></div>
             <span class="st-admin-badge">REAL RUNTIME</span>
           </div>
-          <p>The child runtime owns the launcher <code>Developer Test Lab</code>. Opening the game hands control to that canonical launcher instead of reimplementing Game logic in Admin.</p>
+          <p>The child runtime owns the canonical <code>Developer Test Lab</code>. Admin opens that full Test Lab directly instead of reimplementing Game logic or requiring a second launcher click.</p>
           <p><strong>Apply boundary:</strong> ${escapeHtml(qa.applyBoundary)}</p>
           <p><strong>Runtime owner:</strong> ${escapeHtml(qa.runtimeOwner)}</p>
-          <button type="button" class="st-admin-btn primary" data-qa-launch>Open Space Typing · Developer Test Lab ↗</button>
-          <p class="st-admin-notice">In the game window, use the built-in <strong>Developer Test Lab</strong> launcher. Start/Restart, Pause/Resume and Reset Arena operate only on the isolated Test Lab session.</p>
+          <button type="button" class="st-admin-btn primary" data-qa-launch>Open Full Developer Test Lab ↗</button>
+          <p class="st-admin-notice">The new game window opens directly into the built-in <strong>Developer Test Lab</strong>. Start/Restart, Pause/Resume and Reset Arena still operate only on the isolated Test Lab session.</p>
         </article>
         <article class="st-admin-card">
           <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Safety</p><h2>Persistence Boundary</h2></div></div>
@@ -192,7 +197,7 @@ export function renderPhaseBQa(): HTMLElement {
       `;
 
       const launch = content.querySelector<HTMLButtonElement>("[data-qa-launch]");
-      launch?.addEventListener("click", () => window.open(appUrl, "_blank", "noopener,noreferrer"));
+      launch?.addEventListener("click", () => window.open(directTestLabUrl(appUrl), "_blank", "noopener,noreferrer"));
     }).catch((error: unknown) => {
       if (generation !== loadGeneration) return;
       content.replaceChildren();

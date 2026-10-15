@@ -7,14 +7,14 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// QA ownership re-audit: 33b0764..b75cec6 changes only the isolated Enemy
-// Admin production-preview renderer plus its focused painted-kind test.
-// Weekly challenge, alternative modes, historical analytics, ranked-history
-// query service, voice adapter and QA/Test Lab ownership remain unchanged.
-const QA_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
+// QA ownership re-audit: b75cec6..dcba99b adds only the direct Test Lab
+// deep-link bootstrap plus focused unit coverage. The canonical controller,
+// isolated TestLabSession, production Game runtime guards and no-write
+// persistence boundary remain authoritative and unchanged.
+const QA_AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
-const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
+const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter, directTestLabLaunch, testLabRegistry] = await Promise.all([
   readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
@@ -27,6 +27,8 @@ const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAd
   readChild("src/expansion-v2/historical-analytics-admin.ts"),
   readChild("server/duel/ranked-history-query-service.ts"),
   readChild("src/input/voice-adapter.ts"),
+  readChild("src/test-lab/direct-launch.ts"),
+  readChild("src/test-lab/registry.ts"),
 ]);
 const games = JSON.parse(gamesSource);
 const phaseMap = phaseMapSource;
@@ -95,6 +97,13 @@ assert.match(rankedHistoryService, /authorizeCrossPlayer/);
 assert.match(voiceAdapter, /export class VoiceAdapter/);
 assert.match(voiceAdapter, /VoiceAcceptanceMetrics/);
 
+assert.match(directTestLabLaunch, /DIRECT_TEST_LAB_PARAM = "testLab"/);
+assert.match(directTestLabLaunch, /DIRECT_TEST_LAB_VALUE = "1"/);
+assert.match(directTestLabLaunch, /TEST_LAB_BUTTON_ID = "testLabButton"/);
+assert.match(directTestLabLaunch, /shouldDirectLaunchTestLab/);
+assert.match(directTestLabLaunch, /runtime\.enqueue\(\(\) => button\.click\(\)\)/);
+assert.match(testLabRegistry, /installDirectTestLabLaunch\(\)/);
+
 for (const source of contract.qa.runtimeSources) {
   const content = await readChild(source);
   assert.ok(content.length > 0, `QA runtime source is empty: ${source}`);
@@ -133,11 +142,14 @@ assert.match(command, /\["QA Sandbox",\s*`\$\{BASE\}\/qa`,\s*"Developer Tools ·
 
 assert.match(page, /\/api\/admin\/space-typing\/qa\/contract/);
 assert.match(page, /\/games\.json/);
-assert.match(page, /Developer Test Lab/);
+assert.match(page, /Test Lab Launcher/);
+assert.match(page, /Open Full Developer Test Lab/);
+assert.match(page, /searchParams\.set\("testLab", "1"\)/);
 assert.match(page, /RUNTIME-BACKED · EPHEMERAL/);
 assert.match(page, /PRODUCTION SAVE · NO WRITE/);
 assert.match(page, /NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE/);
-assert.match(page, /window\.open\(appUrl/);
+assert.match(page, /window\.open\(directTestLabUrl\(appUrl\)/);
+assert.doesNotMatch(page, /use the built-in <strong>Developer Test Lab<\/strong> launcher/);
 assert.doesNotMatch(page, /createRevision|\/publish|\/revisions/);
 
 const game = games.games?.find((entry) => entry.id === "space-typing");
@@ -150,4 +162,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + A15 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · direct full Test Lab launch + isolated Test Lab + A15 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
