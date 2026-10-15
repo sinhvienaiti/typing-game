@@ -126,10 +126,14 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     statValue.value = String(item.stats[statSelect.value] ?? 0);
     perkSelect.value = item.runtimePreview.perkId ?? "";
     if (source.value === "published") render(item);
+    else status(message, "Draft candidate ready. Adjust values, then preview the runtime result.", "info");
   };
 
   const invalidatePendingPreview = (): void => {
     previewGeneration += 1;
+    if (source.value === "draft" && published !== null) {
+      status(message, "Draft candidate changed. Preview again to refresh the runtime result.", "info");
+    }
   };
 
   const load = async (): Promise<void> => {

@@ -136,10 +136,14 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     energy.value = String(item.energyCost);
     cooldown.value = String(item.cooldown);
     if (source.value === "published") render(item);
+    else status(message, "Draft candidate ready. Adjust values, then preview the runtime result.", "info");
   };
 
   const invalidatePendingPreview = (): void => {
     previewGeneration += 1;
+    if (source.value === "draft" && published !== null) {
+      status(message, "Draft candidate changed. Preview again to refresh the runtime result.", "info");
+    }
   };
 
   const load = async (): Promise<void> => {
