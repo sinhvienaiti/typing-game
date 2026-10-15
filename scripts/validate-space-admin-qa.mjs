@@ -7,11 +7,11 @@ import { createDeveloperToolsManifest } from "../admin/developer-tools.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
-// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
-// The dedicated QA contract, Test Lab isolation/persistence rules, Developer
-// Tools placement and every QA ownership source asserted below are unchanged.
-const QA_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10.5 re-audit: 71de632..6c57a2b changes Ship/A10 capability work and
+// isolated Admin preview modules. Weekly challenge, alternative modes,
+// historical analytics, ranked-history query service, voice adapter and the
+// dedicated QA/Test Lab ownership/persistence contract asserted below are unchanged.
+const QA_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
 const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter] = await Promise.all([
@@ -122,7 +122,9 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 }
 
 assert.match(router, /renderPhaseBQa/);
-assert.match(router, /\$\{BASE\}\/qa`\) return renderPhaseBQa\(\)/);
+assert.match(router, /\$\{BASE\}\/qa`\) return decorated\(path, renderPhaseBQa\(\)\)/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 
 assert.doesNotMatch(nav, /label:\s*"QA Sandbox"/);
 assert.ok(nav.includes('[`${ADMIN_BASE}/qa`]: "QA Sandbox"'), "QA Sandbox legacy direct-route metadata must remain available during migration");
@@ -148,4 +150,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + A2 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · isolated Test Lab + A15 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
