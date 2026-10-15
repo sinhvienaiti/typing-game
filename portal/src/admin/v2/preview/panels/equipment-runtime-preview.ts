@@ -1,6 +1,7 @@
 import "../../admin-runtime-preview-fixes.css";
 import { SpaceTypingAdminApi } from "../../../api";
 import { adminErrorMessage } from "../../../admin-http";
+import { createProductionRegistryIconPreview } from "../production-registry-icon";
 
 type EquipmentRuntimePreview = {
   resolver: "resolveEquipmentPerks";
@@ -68,7 +69,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
   const copy = el("div");
   copy.append(
     el("h2", undefined, "Live Production Runtime Preview"),
-    el("p", undefined, "Resolve effective stats and perk behavior live through the same production equipment resolver gameplay uses."),
+    el("p", undefined, "Show the canonical painted Equipment visual and resolve effective stats and perk behavior through the same production equipment resolver gameplay uses."),
   );
   head.append(copy);
   root.append(head);
@@ -84,14 +85,15 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
   statValue.max = "100";
   statValue.step = "0.1";
   const perkSelect = el("select", "st-admin-select") as HTMLSelectElement;
-  const apply = el("button", "st-admin-btn", "Refresh preview") as HTMLButtonElement;
+  const apply = el("button", "st-admin-btn", "Refresh published preview") as HTMLButtonElement;
   apply.type = "button";
   const controls = el("div", "stx-grid st-admin-runtime-preview-grid");
   controls.append(field("Source", source), field("Equipment", equipmentSelect), field("Stat", statSelect), field("Value", statValue), field("Perk", perkSelect), apply);
   const message = el("div", "stx-notice info", "Loading production Equipment runtime…");
   message.setAttribute("aria-live", "polite");
+  const visual = createProductionRegistryIconPreview("equipment");
   const result = el("div", "stx-grid");
-  root.append(controls, message, result);
+  root.append(controls, message, visual.root, result);
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: EquipmentResponse | null = null;
@@ -101,6 +103,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
   const selected = (): EquipmentItem | undefined => published?.equipment.find((item) => item.id === equipmentSelect.value);
 
   const render = (item: EquipmentItem, candidate = false): void => {
+    visual.show(item.id, item.name);
     result.replaceChildren();
     const runtime = item.runtimePreview;
     const enabledEffects = activePerkEffects(runtime.perkEffects);
@@ -121,8 +124,8 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     status(
       message,
       candidate
-        ? "Draft candidate resolved through production equipment perks. Nothing was persisted. Live preview is current."
-        : "Published equipment resolved through production gameplay logic.",
+        ? "Draft candidate resolved through production equipment perks. The painted icon is the canonical child-owned visual and remains read-only. Nothing was persisted."
+        : "Published equipment resolved through production gameplay logic with its canonical child-owned painted icon.",
       "good",
     );
   };
@@ -182,6 +185,8 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     if (!item) return;
     statValue.value = String(item.stats[statSelect.value] ?? 0);
     perkSelect.value = item.runtimePreview.perkId ?? "";
+    apply.textContent = source.value === "draft" ? "Preview draft candidate" : "Refresh published preview";
+    visual.show(item.id, item.name);
     if (source.value === "published") render(item);
     else if (previewDraft) scheduleDraftPreview(0);
   };
