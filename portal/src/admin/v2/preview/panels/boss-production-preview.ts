@@ -30,6 +30,7 @@ type BossPreviewResponse = Readonly<{
 export type BossProductionPreviewPanelHandle = Readonly<{
   root: HTMLElement;
   dispose: () => void;
+  selectBoss: (id: string) => void;
 }>;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
@@ -49,7 +50,7 @@ function field(label: string): Readonly<{ root: HTMLElement; control: HTMLSelect
 }
 
 export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHandle {
-  const root = el("section", "st-admin-panel solid stx-panel");
+  const root = el("section", "st-admin-panel solid stx-panel st-admin-boss-preview-primary");
   const head = el("div", "st-admin-panel-head");
   const copy = el("div");
   copy.append(
@@ -72,23 +73,28 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
 
   const mediaTester = createImageMediaCandidateTester({
     title: "Boss image test candidate",
-    description: "Choose an exact Media V2 image for visual QA. The production Boss renderer below remains canonical until Boss media binding is migrated into production authority.",
+    description: "Choose an exact Media V2 image for visual QA only. Production Boss art remains canonical until Boss media binding is migrated into production authority.",
   });
-  const frameHost = el("div", "st-admin-production-preview-shell");
+  const frameHost = el("div", "st-admin-production-preview-shell st-admin-production-preview-shell--hero");
   const status = el("div", "st-admin-asset-preview-status info", "Loading canonical Boss registry…");
   status.setAttribute("aria-live", "polite");
+  const mediaTools = el("details", "st-admin-preview-media-tools");
+  const mediaSummary = el("summary", undefined, "Media candidate · preview only");
+  mediaTools.append(mediaSummary, mediaTester.root);
+
   root.append(
     grid,
-    el("div", "stx-notice info", "Boss art selection is still child-owned. The Media V2 tester lets administrators inspect a replacement image now without pretending it has already become a published Boss binding."),
-    mediaTester.root,
+    el("div", "stx-notice info", "Current production Boss art renders at full size below. Media replacement is a secondary QA tool and stays collapsed until needed."),
     frameHost,
     status,
+    mediaTools,
   );
 
   const studio = createProductionPreviewStudio(frameHost, status);
   let bridge: ProductionPreviewBridge<BossProductionPreviewCandidate, BossProductionPreviewScenario, never> | null = null;
   let disposed = false;
   let bosses: readonly BossPreviewItem[] = [];
+  let pendingSelectionId: string | null = null;
   let generation = 0;
   let latestCandidate: Promise<unknown> = Promise.resolve();
   let connectedOnce = false;
@@ -136,6 +142,16 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     describeReady();
   };
 
+  const selectBoss = (id: string): void => {
+    pendingSelectionId = id;
+    if (disposed || bosses.length === 0) return;
+    if (!bosses.some((item) => item.id === id)) return;
+    pendingSelectionId = null;
+    boss.control.value = id;
+    void loadSelectedBoss().catch(reportError);
+    root.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  };
+
   const dispose = (): void => {
     if (disposed) return;
     disposed = true;
@@ -154,7 +170,10 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
-  boss.control.addEventListener("change", () => void loadSelectedBoss().catch(reportError));
+  boss.control.addEventListener("change", () => {
+    pendingSelectionId = null;
+    void loadSelectedBoss().catch(reportError);
+  });
   scenario.control.addEventListener("change", () => void applyScenario().catch(reportError));
   source.control.addEventListener("change", describeReady);
 
@@ -168,6 +187,11 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     if (bosses.length === 0) {
       studio.setLifecycle("unsupported", "No canonical Boss identities were returned.");
       return;
+    }
+    const requested = pendingSelectionId;
+    if (requested !== null && bosses.some((item) => item.id === requested)) {
+      boss.control.value = requested;
+      pendingSelectionId = null;
     }
     const mounted = await ProductionPreviewBridge.mount(studio.frameHost, bossProductionPreviewAdapter);
     if (disposed) {
@@ -191,5 +215,5 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     await loadSelectedBoss();
   }).catch(reportError);
 
-  return Object.freeze({ root, dispose });
+  return Object.freeze({ root, dispose, selectBoss });
 }
