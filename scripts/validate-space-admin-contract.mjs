@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A10 re-audit: 71de632..4f62c94 changes only Ship unlock runtime authority,
-// A10 capability truth-map code and A10 tests. Background/VFX ownership,
-// contracts and Admin write boundaries are unchanged; VFX stays runtime-backed
-// read-only and Backgrounds stays runtime-derived read-only.
-const VISUALS_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
+// A10.5 re-audit: 4f62c94..6c57a2b changes only isolated Admin preview
+// runtime modules for Enemy/Boss/Skill/Equipment/World/Stage. Background/VFX
+// ownership, contracts and Admin write boundaries are unchanged; VFX stays
+// runtime-backed read-only and Backgrounds stays runtime-derived read-only.
+const VISUALS_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 const childPath = new URL(
   "../games/space-typing/contracts/space-typing-admin.v1.json",
   import.meta.url,
