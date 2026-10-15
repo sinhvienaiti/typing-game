@@ -16,7 +16,7 @@ import {
   createUnlockEconomyCapabilityManifest,
 } from "./unlock-economy-capability.mjs";
 
-const AUDITED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
+const AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 
 const contract = {
   configNamespace: "economy.shop",
@@ -95,20 +95,25 @@ test("A10 unlock/economy truth map mirrors the pinned child and never invents pl
   assert.equal(SHOP_AUDITED_CHILD_SHA, A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA);
 
   const childCapabilities = readFileSync(resolve(child, "src/admin/a10-unlock-economy-capabilities.ts"), "utf8");
-  for (const id of ["ship.unlock-stage", "shop.policy", "wallet.currency-balances", "player.ownership-entitlements", "loot.equipment-drop-tables", "reward.combat-credit-drop-policy"]) {
+  for (const id of ["ship.unlock-stage", "ship.testing-selection-override", "shop.policy", "wallet.currency-balances", "player.ownership-entitlements", "loot.equipment-drop-tables", "reward.combat-credit-drop-policy"]) {
     assert.ok(childCapabilities.includes(`id: \"${id}\"`), `Pinned child A10 capability is missing ${id}`);
   }
   assert.ok(childCapabilities.includes('productionConsumer: "src/characters/state.ts::unlockCharactersForStage()"'));
+  assert.ok(childCapabilities.includes('productionConsumer: "src/characters/state.ts::selectCharacter()"'));
+  assert.ok(childCapabilities.includes('persistedField: "system.testing.unlockAllShips"'));
   assert.ok(childCapabilities.includes('applyBoundary: "new-session+new-shop-instance"'));
 
   const manifest = createUnlockEconomyCapabilityManifest();
   assert.equal(manifest.protocolVersion, 1);
   assert.equal(manifest.milestone, "A10.0");
   assert.equal(manifest.auditedChildSha, childHead);
-  assert.deepEqual(manifest.authorableIds, ["ship.unlock-stage", "shop.policy"]);
+  assert.deepEqual(manifest.authorableIds, ["ship.unlock-stage", "ship.testing-selection-override", "shop.policy"]);
   assert.ok(manifest.readOnlyIds.includes("wallet.currency-balances"));
   assert.ok(manifest.readOnlyIds.includes("player.ownership-entitlements"));
   assert.ok(manifest.readOnlyIds.includes("loot.equipment-drop-tables"));
+  assert.equal(manifest.invariants.selectionIndependentOfCampaignUnlock, false);
+  assert.equal(manifest.invariants.normalSelectionRespectsUnlockedEntitlement, true);
+  assert.equal(manifest.invariants.testingSelectionOverrideDoesNotGrantEntitlement, true);
   assert.equal(manifest.invariants.walletMutationFromContentAdmin, false);
   assert.equal(manifest.invariants.entitlementMutationFromContentAdmin, false);
   assert.equal(manifest.invariants.fakeRewardOrDropPublishing, false);

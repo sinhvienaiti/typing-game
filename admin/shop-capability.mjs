@@ -1,8 +1,8 @@
-// A17 Shop authority re-audit: 9cd58072..f31a2908 adds Boss 3D runtime plus
-// Admin testing-policy bootstrap/state tests. Shop policy/contracts, generation,
-// pricing, availability, offers, services and transaction ownership sources are
-// unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
+// A17 Shop authority re-audit: f31a2908..22a35dd finalizes only the Admin
+// testing-selection capability semantics/tests and legacy player-setting row.
+// Shop policy/contracts, generation, pricing, availability, offers, services
+// and transaction ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",

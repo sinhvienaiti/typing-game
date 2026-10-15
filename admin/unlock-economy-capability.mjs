@@ -1,8 +1,7 @@
-// A10 unlock/economy authority re-audit: f8b74d0..9cd58072 changes only the
-// child Enemy Admin presentation mapping/test. The A10 capability map, Ship
-// runtime policy, character unlock consumer, wallet/economy formulas, rewards,
-// loot and entitlement ownership are unchanged.
-export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
+// A10 unlock/economy authority re-audit: child 22a35dd finalizes the published
+// Admin testing-selection policy, keeps temporary all-ship selection separate
+// from persisted entitlement, and preserves Shop/wallet/reward/loot ownership.
+export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 
 const capabilities = Object.freeze([
   {
@@ -15,7 +14,19 @@ const capabilities = Object.freeze([
     productionConsumer: "src/characters/state.ts::unlockCharactersForStage()",
     applyBoundary: "new-session",
     adminRoute: "/admin/space-typing/ships",
-    reason: "Published Ship unlockStage is consumed by the frozen production Ship runtime session. Existing player unlocks remain monotonic and ship selection stays independent of campaign gating.",
+    reason: "Published Ship unlockStage is consumed by the frozen production Ship runtime session. Existing unlocked entitlement remains monotonic. Temporary all-ship selection is controlled separately by the Admin testing policy and never grants ownership.",
+  },
+  {
+    id: "ship.testing-selection-override",
+    label: "Unlock all ships (testing)",
+    status: "supported-now",
+    authorable: true,
+    source: "system.testing.unlockAllShips",
+    runtimeOwner: "src/admin/game-testing-policy.ts",
+    productionConsumer: "src/characters/state.ts::selectCharacter()",
+    applyBoundary: "new-session",
+    adminRoute: "/admin/space-typing/settings",
+    reason: "Published testing policy can make every Ship selectable for the current game session. It never adds IDs to state.unlocked and never grants, revokes or rewrites player ownership/progression.",
   },
   {
     id: "shop.policy",
@@ -51,7 +62,7 @@ const capabilities = Object.freeze([
     productionConsumer: "character/equipment/shop ownership and inventory consumers",
     applyBoundary: "player-state",
     adminRoute: null,
-    reason: "Admin may author supported content policy, but it must not directly grant or revoke persisted player entitlement through a content editor.",
+    reason: "Admin may author supported content/testing policy, but neither Ship unlockStage nor the all-ship testing override may directly grant or revoke persisted player entitlement.",
   },
   {
     id: "reward.stage-clear-formulas",
@@ -113,7 +124,9 @@ export function createUnlockEconomyCapabilityManifest() {
     authorableIds: capabilities.filter((entry) => entry.authorable).map((entry) => entry.id),
     readOnlyIds: capabilities.filter((entry) => !entry.authorable).map((entry) => entry.id),
     invariants: {
-      selectionIndependentOfCampaignUnlock: true,
+      selectionIndependentOfCampaignUnlock: false,
+      normalSelectionRespectsUnlockedEntitlement: true,
+      testingSelectionOverrideDoesNotGrantEntitlement: true,
       unlockedEntitlementIsNonRevoking: true,
       walletMutationFromContentAdmin: false,
       entitlementMutationFromContentAdmin: false,

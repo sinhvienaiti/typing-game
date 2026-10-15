@@ -16,8 +16,8 @@ type SystemWithTesting = NonNullable<SpaceTypingAdminConfig["system"]> & {
 const api = new SpaceTypingAdminApi();
 const DEFAULT_TESTING: TestingOverrides = {
   unlockAllStages: false,
-  // Preserve the current game rule: ship selection is independent of Campaign
-  // milestone discovery unless an administrator deliberately changes it.
+  // Preserve the pre-policy product behavior until an administrator explicitly
+  // disables the all-ship testing override in a published revision.
   unlockAllShips: true,
 };
 const DEFAULT_SYSTEM: NonNullable<SpaceTypingAdminConfig["system"]> = {
@@ -116,7 +116,7 @@ function createTestingOverridesPanel(navigate: Navigate): HTMLElement {
   );
   const unlockShips = createSwitch(
     "Unlock all ships",
-    "Forces every ship to be selectable in Hangar without adding ownership to player progression. Current product policy already keeps ship selection independent from Campaign milestones.",
+    "Makes every ship selectable in Hangar for new sessions without adding ownership to player progression. When disabled, Hangar respects the player's persisted unlocked entitlement.",
   );
   unlockStages.control.disabled = true;
   unlockShips.control.disabled = true;
@@ -173,7 +173,7 @@ function createTestingOverridesPanel(navigate: Navigate): HTMLElement {
       applySwitch(unlockStages.control, testing.unlockAllStages);
       applySwitch(unlockShips.control, testing.unlockAllShips);
       notice.className = "stx-notice good";
-      notice.textContent = `Published ${payload.state.activeRevision} · Stage unlock ${testing.unlockAllStages ? "ON" : "OFF"} · Ship unlock ${testing.unlockAllShips ? "ON" : "OFF"}`;
+      notice.textContent = `Published ${payload.state.activeRevision} · All stages ${testing.unlockAllStages ? "ON" : "OFF"} · All ships ${testing.unlockAllShips ? "ON" : "OFF"}`;
       setEditable(true);
     } catch (error: unknown) {
       if (currentGeneration !== generation) return;
