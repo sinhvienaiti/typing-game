@@ -119,7 +119,9 @@ assert.match(server, /policy:\s*input\.policy\s*\?\?\s*active\.economy\?\.shop/)
 assert.doesNotMatch(server, /\/api\/admin\/space-typing\/shop\/(?:save|publish|write)/, "Shop must use generic immutable revisions rather than a direct write endpoint");
 
 assert.match(router, /renderPhaseBShop/);
-assert.match(router, /\/shop`\) return renderPhaseBShop/);
+assert.match(router, /\$\{BASE\}\/shop`\) return decorated\(path, renderPhaseBShop\(navigate\)\)/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 assert.match(ui, /protocolVersion:\s*4/);
 assert.match(ui, /\/api\/admin\/space-typing\/shop\/capabilities/);
 assert.match(ui, /\/api\/admin\/space-typing\/shop\/contract/);
