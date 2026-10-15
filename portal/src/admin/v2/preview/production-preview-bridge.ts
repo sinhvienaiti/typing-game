@@ -212,6 +212,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
           if (waiter.generation === flushGeneration) waiters.push(waiter);
           else waiter.reject(new ProductionPreviewStaleError());
         }
+        if (waiters.length === 0) return;
         if (nextCandidate === null) {
           const error = new Error("Production preview candidate queue was empty.");
           for (const waiter of waiters) waiter.reject(error);
@@ -254,6 +255,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
 
   async reset(): Promise<unknown> {
     ++this.candidateGeneration;
+    this.invalidateQueuedCandidate(new ProductionPreviewStaleError());
     this.lastCandidate = null;
     this.lastScenario = this.adapter.defaultScenario;
     return this.send("RESET");
@@ -264,6 +266,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
     if (candidate === null) throw new Error("Load a production preview candidate before replaying it.");
     const scenario = this.lastScenario;
     const generation = ++this.candidateGeneration;
+    this.invalidateQueuedCandidate(new ProductionPreviewStaleError());
     await this.send("RESET");
     if (generation !== this.candidateGeneration) throw new ProductionPreviewStaleError();
     await this.send("LOAD_CANDIDATE", this.adapter.candidatePayload(candidate));
@@ -354,6 +357,13 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
     });
   }
 
+  private invalidateQueuedCandidate(reason: Error): void {
+    if (this.queuedFrame !== null) window.cancelAnimationFrame(this.queuedFrame);
+    this.queuedFrame = null;
+    this.queuedCandidate = null;
+    for (const waiter of this.queuedWaiters.splice(0)) waiter.reject(reason);
+  }
+
   private failReady(error: Error): void {
     this.lifecycle = Object.freeze({ status: "error", message: error.message });
     this.readyReject?.(error);
@@ -369,10 +379,7 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
     ++this.candidateGeneration;
     if (this.readyTimeout !== null) window.clearTimeout(this.readyTimeout);
     this.readyTimeout = null;
-    if (this.queuedFrame !== null) window.cancelAnimationFrame(this.queuedFrame);
-    this.queuedFrame = null;
-    this.queuedCandidate = null;
-    for (const waiter of this.queuedWaiters.splice(0)) waiter.reject(reason);
+    this.invalidateQueuedCandidate(reason);
     this.readyReject?.(reason);
     this.readyResolve = null;
     this.readyReject = null;
