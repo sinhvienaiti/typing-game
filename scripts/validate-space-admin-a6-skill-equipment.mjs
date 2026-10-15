@@ -19,6 +19,7 @@ const [
   equipmentLegacy,
   skillRuntimePanel,
   equipmentRuntimePanel,
+  selectionSync,
   productionIconPreview,
   sharedStudio,
   sharedHelp,
@@ -33,6 +34,7 @@ const [
   read("portal/src/admin/space-typing-equipment-phase-b-legacy.ts"),
   read("portal/src/admin/v2/preview/panels/system-runtime-preview.ts"),
   read("portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts"),
+  read("portal/src/admin/v2/preview/registry-selection-sync.ts"),
   read("portal/src/admin/v2/preview/production-registry-icon.ts"),
   read("portal/src/admin/v2/asset-tuning-studio.ts"),
   read("portal/src/admin/v2/admin-help.ts"),
@@ -75,8 +77,14 @@ for (const fakeField of ["effectPreset", "effectAssetVersionId", "vfxAssetVersio
 
 requireText(skillWrapper, "renderLegacySkills", "Skills retain the established authoring editor");
 requireText(skillWrapper, "createSkillProductionRuntimePanel", "Skills attach the production SkillEngine panel");
+requireText(skillWrapper, "wireLegacyRegistrySelection", "Skills sync legacy editor selection into the live preview");
+requireText(skillWrapper, "preview.selectSkill", "Skills route Edit selection into the live preview handle");
 requireText(equipmentWrapper, "renderLegacyEquipment", "Equipment retain the established authoring editor");
 requireText(equipmentWrapper, "createEquipmentProductionRuntimePanel", "Equipment attach the production equipment resolver panel");
+requireText(equipmentWrapper, "wireLegacyRegistrySelection", "Equipment sync legacy editor selection into the live preview");
+requireText(equipmentWrapper, "preview.selectEquipment", "Equipment route Edit selection into the live preview handle");
+requireText(selectionSync, 'button.closest(".stx-toggle-row")', "Registry selection sync resolves the clicked canonical row");
+requireText(selectionSync, 'metadata.split(" · ", 1)', "Registry selection sync derives canonical ids from row metadata");
 
 for (const [surface, previewCall, name] of [
   [skillSurface, "const validated = await previewSkills(policy)", "Skills"],
@@ -118,6 +126,8 @@ for (const token of [
   "LIVE_PREVIEW_DELAY_MS",
   'createProductionRegistryIconPreview("skill")',
   "visual.show(item.id, item.name)",
+  "selectSkill",
+  "pendingSelectionId",
   "Preview draft candidate",
 ]) {
   requireText(skillRuntimePanel, token, `Skill production runtime/visual evidence ${token}`);
@@ -132,6 +142,8 @@ for (const token of [
   "LIVE_PREVIEW_DELAY_MS",
   'createProductionRegistryIconPreview("equipment")',
   "visual.show(item.id, item.name)",
+  "selectEquipment",
+  "pendingSelectionId",
   "Preview draft candidate",
 ]) {
   requireText(equipmentRuntimePanel, token, `Equipment production runtime/visual evidence ${token}`);
@@ -156,4 +168,4 @@ for (const fakeUi of ["effectPreset", "vfxAssetVersionId", "sfxAssetVersionId", 
   forbidText(equipmentSurface, fakeUi, `Equipment UI must not expose unowned ${fakeUi}`);
 }
 
-console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while live runtime simulation is paired with exact child-owned painted production visuals.");
+console.log("Space Typing Admin A6: PASS — Skills/Equipment keep canonical Draft authoring while registry Edit selection stays synchronized with live child-owned production visuals and runtime simulation.");
