@@ -6,10 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A10 re-audit: 71de632..4f62c94 changes only Ship unlock runtime authority,
-// A10 capability truth-map code and A10 tests. Audio/SFX/VFX ownership,
-// contracts, preview behavior and write boundaries are unchanged.
-const A9_SFX_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
+// A10.5 re-audit: 4f62c94..6c57a2b changes isolated Admin preview
+// modules for Enemy/Boss/Skill/Equipment/World/Stage. Audio/SFX/VFX ownership,
+// contracts, production sample/music sources and write boundaries are unchanged.
+const A9_SFX_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 
 const [
   sfxContract,
@@ -22,7 +22,8 @@ const [
   phaseMapSource,
   musicPage,
   musicModel,
-  vfxPage,
+  vfxWrapper,
+  vfxLegacy,
 ] = await Promise.all([
   readFile(resolve(childRoot, "contracts/space-typing-admin-sfx.v1.json"), "utf8").then(JSON.parse),
   readFile(resolve(childRoot, "src/audio/admin-sfx-catalog.ts"), "utf8"),
@@ -35,9 +36,11 @@ const [
   readFile(resolve(root, "portal/src/admin/space-typing-music-library-phase-b.ts"), "utf8"),
   readFile(resolve(childRoot, "src/audio/world-music-model.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b-legacy.ts"), "utf8"),
 ]);
 const childPackage = JSON.parse(childPackageSource);
 const phaseMap = JSON.parse(phaseMapSource);
+const vfxPage = `${vfxWrapper}\n${vfxLegacy}`;
 const childHead = execFileSync("git", ["-C", childRoot, "rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 
 assert.equal(childHead, A9_SFX_AUDITED_CHILD_SHA, `A9 SFX audit is stale: audited=${A9_SFX_AUDITED_CHILD_SHA} pinned-child=${childHead}. Re-audit Audio/SFX/VFX before changing this SHA.`);
@@ -81,7 +84,9 @@ assert.match(page, /\/games\.json/);
 assert.doesNotMatch(page, /createRevision|\/publish|\/revisions|method:\s*["'](?:POST|PUT|PATCH|DELETE)["']/);
 
 assert.match(router, /renderPhaseBSfx/);
-assert.match(router, /\$\{BASE\}\/sfx`\) return renderPhaseBSfx\(\)/);
+assert.match(router, /\$\{BASE\}\/sfx`\) return decorated\(path, renderPhaseBSfx\(\)\)/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 assert.match(command, /\["SFX",\s*`\$\{BASE\}\/sfx`,\s*"Media"\]/);
 
 const sfxMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/sfx");
@@ -114,8 +119,10 @@ assert.match(musicPage, /Context assignments and enabled\/disabled policy remain
 assert.doesNotMatch(musicPage, /trimGain[^\n]*(?:Volume|volume)/);
 assert.doesNotMatch(musicPage, /createRevision|\/publish|\/revisions/);
 
+assert.match(vfxPage, /space-typing-vfx-phase-b-legacy/);
+assert.match(vfxPage, /createCombatVfxProductionPreviewPanel/);
 assert.match(vfxPage, /RUNTIME-BACKED · READ ONLY/);
 assert.match(vfxPage, /NO FAKE VFX PROFILE/);
 assert.doesNotMatch(vfxPage, /createRevision|\/publish|\/revisions/);
 
-console.log(`Space Typing Admin A9 Audio/SFX/VFX boundary: PASS (${childHead.slice(0, 12)} · Music + SFX production asset Test Playback; SFX/VFX unsupported authoring stays closed).`);
+console.log(`Space Typing Admin A9 Audio/SFX/VFX boundary: PASS (${childHead.slice(0, 12)} · Music + SFX production asset Test Playback; VFX production preview wrapper retains code-owned read-only tuning boundary).`);
