@@ -51,8 +51,8 @@ for (const id of [
   "equipment.media-binding",
   "equipment.vfx-sfx-binding",
 ]) requireText(capabilities, `id: "${id}"`, `A6 capability ${id} is registered`);
-for (const status of ["SUPPORTED NOW", "REQUIRES CANONICAL MIGRATION", "READ-ONLY REFERENCE", "DEFERRED / UNSUPPORTED"]) {
-  requireText(capabilities, `status: "${status}"`, `A6 capability matrix preserves ${status}`);
+for (const state of ["SUPPORTED NOW", "REQUIRES CANONICAL MIGRATION", "READ-ONLY REFERENCE", "DEFERRED / UNSUPPORTED"]) {
+  requireText(capabilities, `status: "${state}"`, `A6 capability matrix preserves ${state}`);
 }
 
 requireText(skillPolicy, "const AUTHORABLE_KEYS = new Set([", "Skill policy owns an explicit allow-list");
@@ -69,7 +69,6 @@ for (const fakeField of ["effectPreset", "effectAssetVersionId", "vfxAssetVersio
   forbidText(equipmentPolicy, fakeField, `Equipment policy must not invent ${fakeField}`);
 }
 
-// A10.5 wraps the stable authoring editors with production-runtime panels.
 requireText(skillWrapper, "renderLegacySkills", "Skills retain the established authoring editor");
 requireText(skillWrapper, "createSkillProductionRuntimePanel", "Skills attach the production SkillEngine panel");
 requireText(equipmentWrapper, "renderLegacyEquipment", "Equipment retain the established authoring editor");
@@ -104,19 +103,36 @@ requireText(sharedHelp, "export class AdminHelpScope", "Shared V2 help exposes l
 requireText(sharedStudio, "export function createAssetTuningCapabilityState", "A6 retains shared capability-state primitive");
 requireText(sharedStudio, "export function createAssetTuningStudio", "Shared Studio remains available for production-backed domains");
 
-// Each wrapper must hit the child-owned production behavior actually used by gameplay.
-for (const token of ["SkillEngine", "runtimePreview", "energyBefore", "energyAfter", "Draft candidate executed through production SkillEngine", "/api/admin/space-typing/skills/preview"]) {
+for (const token of [
+  "SkillEngine",
+  "runtimePreview",
+  "energyBefore",
+  "energyAfter",
+  "Draft candidate executed live through production SkillEngine",
+  "/api/admin/space-typing/skills/preview",
+  "scheduleDraftPreview",
+  "LIVE_PREVIEW_DELAY_MS",
+]) {
   requireText(skillRuntimePanel, token, `Skill production runtime evidence ${token}`);
 }
-for (const token of ["resolveEquipmentPerks", "perkEffects", "Effective stats", "Draft candidate resolved through production equipment perks", "/api/admin/space-typing/equipment/preview"]) {
+for (const token of [
+  "resolveEquipmentPerks",
+  "perkEffects",
+  "Effective stats",
+  "Draft candidate resolved through production equipment perks",
+  "/api/admin/space-typing/equipment/preview",
+  "scheduleDraftPreview",
+  "LIVE_PREVIEW_DELAY_MS",
+]) {
   requireText(equipmentRuntimePanel, token, `Equipment production runtime evidence ${token}`);
 }
-// Numeric one is a real effect for non-multiplier perks such as stageBlocks.
 requireText(equipmentRuntimePanel, "MULTIPLIER_EFFECTS.has(key) ? value !== 1 : value !== 0", "Equipment preview distinguishes multiplier baseline 1 from real numeric effect 1");
+requireText(skillRuntimePanel, "if (current !== previewGeneration) return", "Skill live preview remains latest-request-wins");
+requireText(equipmentRuntimePanel, "if (current !== previewGeneration) return", "Equipment live preview remains latest-request-wins");
 
 for (const fakeUi of ["effectPreset", "vfxAssetVersionId", "sfxAssetVersionId", "iconAssetVersionId", "imageAssetVersionId"]) {
   forbidText(skillSurface, fakeUi, `Skills UI must not expose unowned ${fakeUi}`);
   forbidText(equipmentSurface, fakeUi, `Equipment UI must not expose unowned ${fakeUi}`);
 }
 
-console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while A10.5 wrappers exercise child-owned SkillEngine/equipment resolver previews.");
+console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while live A10.5 previews exercise child-owned production behavior.");

@@ -1,3 +1,4 @@
+import "../../admin-runtime-preview-fixes.css";
 import { SpaceTypingAdminApi } from "../../../api";
 import { adminErrorMessage } from "../../../admin-http";
 
@@ -24,6 +25,7 @@ type SkillItem = {
 type SkillResponse = { protocolVersion: 1; skills: SkillItem[] };
 
 const api = new SpaceTypingAdminApi();
+const LIVE_PREVIEW_DELAY_MS = 180;
 
 function el<K extends keyof HTMLElementTagNameMap>(tag: K, cls?: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -71,14 +73,14 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   const head = el("div", "st-admin-panel-head");
   const copy = el("div");
   copy.append(
-    el("h2", undefined, "Production Runtime Preview"),
-    el("p", undefined, "Exercise activation, energy, cooldown and charge behavior through the child SkillEngine."),
+    el("h2", undefined, "Live Production Runtime Preview"),
+    el("p", undefined, "Exercise activation, energy, cooldown and charge behavior live through the child production SkillEngine."),
   );
   head.append(copy);
   root.append(head);
 
   const source = el("select", "st-admin-select") as HTMLSelectElement;
-  source.append(new Option("Published", "published"), new Option("Draft candidate", "draft"));
+  source.append(new Option("Published", "published"), new Option("Draft candidate · live", "draft"));
   const skillSelect = el("select", "st-admin-select") as HTMLSelectElement;
   const energy = el("input") as HTMLInputElement;
   energy.type = "number";
@@ -90,19 +92,23 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   cooldown.min = "0";
   cooldown.max = "300";
   cooldown.step = "0.1";
-  const apply = el("button", "st-admin-btn", "Preview candidate") as HTMLButtonElement;
+  const apply = el("button", "st-admin-btn", "Refresh preview") as HTMLButtonElement;
   apply.type = "button";
-  const controls = el("div", "stx-grid");
+  const controls = el("div", "stx-grid st-admin-runtime-preview-grid");
   controls.append(field("Source", source), field("Skill", skillSelect), field("Energy cost", energy), field("Cooldown", cooldown), apply);
   const message = el("div", "stx-notice info", "Loading production Skill runtime…");
+  message.setAttribute("aria-live", "polite");
   const result = el("div", "stx-grid");
   root.append(controls, message, result);
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: SkillResponse | null = null;
   let previewGeneration = 0;
+  let previewTimer: ReturnType<typeof setTimeout> | null = null;
+  let disposed = false;
 
   const selected = (): SkillItem | undefined => published?.skills.find((item) => item.id === skillSelect.value);
+
   const render = (item: SkillItem, candidate = false): void => {
     result.replaceChildren();
     const runtime = item.runtimePreview;
@@ -124,27 +130,74 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     status(
       message,
       candidate
-        ? "Draft candidate executed through production SkillEngine. Nothing was persisted."
+        ? "Draft candidate executed live through production SkillEngine. Nothing was persisted."
         : "Published definition executed through production SkillEngine.",
       runtime.activationReady ? "good" : "warn",
     );
   };
 
-  const syncInputs = (): void => {
+  const cancelTimer = (): void => {
+    if (previewTimer !== null) clearTimeout(previewTimer);
+    previewTimer = null;
+  };
+
+  const invalidatePendingPreview = (): void => {
+    previewGeneration += 1;
+    cancelTimer();
+    if (source.value === "draft" && published !== null) {
+      status(message, "Draft candidate changed · live runtime preview is refreshing…", "info");
+    }
+  };
+
+  const runDraftPreview = async (): Promise<void> => {
+    const item = selected();
+    if (!item || source.value !== "draft" || disposed) return;
+    const current = ++previewGeneration;
+    const itemId = item.id;
+    const draft = structuredClone(publishedPolicy ?? { configRevision: "skills-admin-preview", skills: {} }) as Record<string, unknown>;
+    draft.configRevision = "skills-admin-preview-draft";
+    const overrides = (draft.skills && typeof draft.skills === "object" ? draft.skills : {}) as Record<string, unknown>;
+    const existing = (overrides[itemId] && typeof overrides[itemId] === "object" ? overrides[itemId] : {}) as Record<string, unknown>;
+    overrides[itemId] = { ...existing, energyCost: Number(energy.value), cooldown: Number(cooldown.value) };
+    draft.skills = overrides;
+    try {
+      status(message, "Running live isolated draft candidate through production SkillEngine…");
+      const response = await previewSkills(draft);
+      if (current !== previewGeneration) return;
+      const candidate = response.skills.find((entry) => entry.id === itemId);
+      if (!candidate) throw new Error("Skill candidate was not returned by production preview.");
+      render(candidate, true);
+    } catch (error) {
+      if (current === previewGeneration) status(message, adminErrorMessage(error, "Could not preview Skill candidate."), "bad");
+    }
+  };
+
+  const scheduleDraftPreview = (delay = LIVE_PREVIEW_DELAY_MS): void => {
+    cancelTimer();
+    if (source.value !== "draft" || published === null || disposed) return;
+    previewTimer = setTimeout(() => {
+      previewTimer = null;
+      void runDraftPreview();
+    }, delay);
+  };
+
+  const syncInputs = (previewDraft = true): void => {
     const item = selected();
     if (!item) return;
     energy.value = String(item.energyCost);
     cooldown.value = String(item.cooldown);
     if (source.value === "published") render(item);
-    else status(message, "Draft candidate ready. Adjust values, then preview the runtime result.", "info");
+    else if (previewDraft) scheduleDraftPreview(0);
   };
 
-  const invalidatePendingPreview = (): void => {
-    previewGeneration += 1;
-    if (source.value === "draft" && published !== null) {
-      status(message, "Draft candidate changed. Preview again to refresh the runtime result.", "info");
-    }
+  const setControlsDisabled = (disabled: boolean): void => {
+    source.disabled = disabled;
+    skillSelect.disabled = disabled;
+    energy.disabled = disabled;
+    cooldown.disabled = disabled;
+    apply.disabled = disabled;
   };
+  setControlsDisabled(true);
 
   const load = async (): Promise<void> => {
     try {
@@ -152,12 +205,16 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
       const runtime = await api.getRuntime();
       const policy = skillsPolicy(runtime.config);
       const response = await previewSkills(policy);
+      if (disposed) return;
       publishedPolicy = policy;
       published = response;
       skillSelect.replaceChildren(...response.skills.map((item) => new Option(item.name, item.id)));
-      syncInputs();
+      setControlsDisabled(false);
+      syncInputs(false);
+      const item = selected();
+      if (item) render(item);
     } catch (error) {
-      status(message, adminErrorMessage(error, "Could not load Skill runtime preview."), "bad");
+      if (!disposed) status(message, adminErrorMessage(error, "Could not load Skill runtime preview."), "bad");
     }
   };
 
@@ -169,37 +226,32 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     invalidatePendingPreview();
     syncInputs();
   });
-  energy.addEventListener("input", invalidatePendingPreview);
-  cooldown.addEventListener("input", invalidatePendingPreview);
-  apply.addEventListener("click", () => {
-    void (async () => {
-      const item = selected();
-      if (!item) return;
-      if (source.value === "published") {
-        invalidatePendingPreview();
-        render(item);
-        return;
-      }
-      const current = ++previewGeneration;
-      const itemId = item.id;
-      const draft = structuredClone(publishedPolicy ?? { configRevision: "skills-admin-preview", skills: {} }) as Record<string, unknown>;
-      draft.configRevision = "skills-admin-preview-draft";
-      const overrides = (draft.skills && typeof draft.skills === "object" ? draft.skills : {}) as Record<string, unknown>;
-      const existing = (overrides[itemId] && typeof overrides[itemId] === "object" ? overrides[itemId] : {}) as Record<string, unknown>;
-      overrides[itemId] = { ...existing, energyCost: Number(energy.value), cooldown: Number(cooldown.value) };
-      draft.skills = overrides;
-      try {
-        status(message, "Running isolated draft candidate through SkillEngine…");
-        const response = await previewSkills(draft);
-        if (current !== previewGeneration) return;
-        const candidate = response.skills.find((entry) => entry.id === itemId);
-        if (!candidate) throw new Error("Skill candidate was not returned by production preview.");
-        render(candidate, true);
-      } catch (error) {
-        if (current === previewGeneration) status(message, adminErrorMessage(error, "Could not preview Skill candidate."), "bad");
-      }
-    })();
+  energy.addEventListener("input", () => {
+    invalidatePendingPreview();
+    scheduleDraftPreview();
   });
+  cooldown.addEventListener("input", () => {
+    invalidatePendingPreview();
+    scheduleDraftPreview();
+  });
+  apply.addEventListener("click", () => {
+    invalidatePendingPreview();
+    if (source.value === "published") {
+      const item = selected();
+      if (item) render(item);
+    } else {
+      void runDraftPreview();
+    }
+  });
+
+  const observer = new MutationObserver(() => {
+    if (root.isConnected || disposed) return;
+    disposed = true;
+    previewGeneration += 1;
+    cancelTimer();
+    observer.disconnect();
+  });
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 
   void load();
   return root;

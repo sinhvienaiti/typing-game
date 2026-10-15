@@ -6,7 +6,9 @@ const paths = {
   environments: "portal/src/admin/v2/preview/panels/world-stage-production-preview.ts",
   systems: "portal/src/admin/v2/preview/panels/system-runtime-preview.ts",
   equipment: "portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts",
+  enemyPanel: "portal/src/admin/v2/preview/enemy-production-preview.ts",
   bossPanel: "portal/src/admin/v2/preview/panels/boss-production-preview.ts",
+  mediaTester: "portal/src/admin/v2/media-candidate-preview.ts",
   shipFacade: "portal/src/admin/space-typing-asset-preview.ts",
   router: "portal/src/admin/space-typing-phase-b.ts",
   vfxPage: "portal/src/admin/space-typing-vfx-phase-b.ts",
@@ -29,7 +31,9 @@ function forbidText(input, needle, label) {
   if (input.includes(needle)) throw new Error(`${label}: forbidden ${JSON.stringify(needle)}`);
 }
 
-requireText(source.childEnemy, "drawModularEnemy", "Enemy preview reuses production renderer");
+requireText(source.childEnemy, "drawModularEnemy", "Enemy preview retains production modular fallback");
+requireText(source.childEnemy, "paintedEnemySprite", "Enemy preview prefers prepared production painted art when the canonical id maps to an Enemy kind");
+requireText(source.childEnemy, "drawPaintedSprite", "Enemy preview draws painted art through the production sprite renderer");
 requireText(source.childEnemy, "new CombatFxSystem()", "Enemy hit/death reuses production CombatFxSystem");
 requireText(source.childBoss, "drawPaintedSprite", "Boss preview reuses painted production renderer");
 requireText(source.childBoss, "bossPhase", "Boss phase preview uses production CombatFxSystem");
@@ -62,17 +66,26 @@ requireText(source.bossPanel, "await latestCandidate", "Boss scenario transition
 requireText(source.bossPanel, 'scenario.control.addEventListener("change", () => void applyScenario().catch(reportError))', "Boss scenario changes use the dedicated scenario command path");
 forbidText(source.bossPanel, 'scenario.control.addEventListener("change", () => void loadSelectedBoss()', "Boss scenario changes must not reload the candidate");
 
+for (const panel of [source.enemyPanel, source.bossPanel]) {
+  requireText(panel, "createImageMediaCandidateTester", "Enemy/Boss preview exposes a Media V2 image test candidate without inventing production persistence");
+}
+requireText(source.mediaTester, 'allowedKinds: ["image"]', "Media candidate tester is image-only");
+requireText(source.mediaTester, "preview-only", "Media candidate tester clearly marks temporary QA semantics");
+requireText(source.mediaTester, "MediaAdminApi", "Media candidate tester resolves exact Media V2 preview bytes through the canonical Admin media API");
+
 requireText(source.systems, '"/api/admin/space-typing/skills/preview"', "Skill preview uses canonical preview endpoint");
 requireText(source.systems, "production SkillEngine", "Skill UI states production engine ownership");
 requireText(source.systems, "let previewGeneration = 0", "Skill draft preview has independent latest-request-wins generation control");
 requireText(source.systems, "const current = ++previewGeneration", "Skill draft preview advances only the preview generation");
 requireText(source.systems, "if (current !== previewGeneration) return", "Skill preview ignores stale draft responses");
+requireText(source.systems, "scheduleDraftPreview", "Skill draft inputs drive debounced live runtime preview");
 requireText(source.equipment, '"/api/admin/space-typing/equipment/preview"', "Equipment preview uses canonical preview endpoint");
 requireText(source.equipment, "MULTIPLIER_EFFECTS", "Equipment effect baseline distinguishes neutral multipliers from active count=1 effects");
 requireText(source.equipment, "Nothing was persisted", "Equipment Draft preview remains isolated");
 requireText(source.equipment, "let previewGeneration = 0", "Equipment draft preview has independent latest-request-wins generation control");
 requireText(source.equipment, "const current = ++previewGeneration", "Equipment draft preview advances only the preview generation");
 requireText(source.equipment, "if (current !== previewGeneration) return", "Equipment preview ignores stale draft responses");
+requireText(source.equipment, "scheduleDraftPreview", "Equipment draft inputs drive debounced live runtime preview");
 
 for (const kind of ["full-runtime", "production-presentation", "simulation-data", "not-applicable"]) {
   requireText(source.classification, `kind: "${kind}"`, `classification ${kind} exists`);

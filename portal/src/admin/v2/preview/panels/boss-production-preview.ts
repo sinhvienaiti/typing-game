@@ -1,4 +1,5 @@
 import { SpaceTypingAdminApi } from "../../../api";
+import { createImageMediaCandidateTester } from "../../media-candidate-preview";
 import {
   ProductionPreviewBridge,
   ProductionPreviewStaleError,
@@ -58,7 +59,7 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   head.append(copy);
   root.append(head);
 
-  const grid = el("div", "stx-grid");
+  const grid = el("div", "stx-grid st-admin-runtime-preview-grid");
   const boss = field("Boss");
   const source = field("Preview Source");
   source.control.append(new Option("Published · production registry", "published"), new Option("Draft · identity migration preview", "draft"));
@@ -69,12 +70,17 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   }
   grid.append(boss.root, source.root, scenario.root);
 
+  const mediaTester = createImageMediaCandidateTester({
+    title: "Boss image test candidate",
+    description: "Choose an exact Media V2 image for visual QA. The production Boss renderer below remains canonical until Boss media binding is migrated into production authority.",
+  });
   const frameHost = el("div", "st-admin-production-preview-shell");
   const status = el("div", "st-admin-asset-preview-status info", "Loading canonical Boss registry…");
   status.setAttribute("aria-live", "polite");
   root.append(
     grid,
-    el("div", "stx-notice info", "Boss art selection is child-owned today. Name/title migration data does not change the visual candidate, so Draft and Published intentionally render the same production Boss asset."),
+    el("div", "stx-notice info", "Boss art selection is still child-owned. The Media V2 tester lets administrators inspect a replacement image now without pretending it has already become a published Boss binding."),
+    mediaTester.root,
     frameHost,
     status,
   );
@@ -136,6 +142,7 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     generation += 1;
     bridge?.disposeImmediately();
     bridge = null;
+    mediaTester.dispose();
     studio.dispose();
     observer.disconnect();
   };
