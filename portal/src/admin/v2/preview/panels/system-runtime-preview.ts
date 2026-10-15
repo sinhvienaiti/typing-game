@@ -25,6 +25,11 @@ type SkillItem = {
 };
 type SkillResponse = { protocolVersion: 1; skills: SkillItem[] };
 
+export type SkillProductionRuntimePanelHandle = {
+  root: HTMLElement;
+  selectSkill: (id: string) => void;
+};
+
 const api = new SpaceTypingAdminApi();
 const LIVE_PREVIEW_DELAY_MS = 180;
 
@@ -69,7 +74,7 @@ async function previewSkills(policy?: Record<string, unknown>): Promise<SkillRes
   });
 }
 
-export function createSkillProductionRuntimePanel(): HTMLElement {
+export function createSkillProductionRuntimePanel(): SkillProductionRuntimePanelHandle {
   const root = el("section", "st-admin-panel solid stx-panel");
   const head = el("div", "st-admin-panel-head");
   const copy = el("div");
@@ -105,6 +110,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: SkillResponse | null = null;
+  let pendingSelectionId: string | null = null;
   let previewGeneration = 0;
   let previewTimer: ReturnType<typeof setTimeout> | null = null;
   let disposed = false;
@@ -195,6 +201,17 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     else if (previewDraft) scheduleDraftPreview(0);
   };
 
+  const selectSkill = (id: string): void => {
+    pendingSelectionId = id;
+    if (published === null || disposed) return;
+    if (!published.skills.some((item) => item.id === id)) return;
+    pendingSelectionId = null;
+    skillSelect.value = id;
+    invalidatePendingPreview();
+    syncInputs();
+    root.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  };
+
   const setControlsDisabled = (disabled: boolean): void => {
     source.disabled = disabled;
     skillSelect.disabled = disabled;
@@ -215,6 +232,11 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
       published = response;
       skillSelect.replaceChildren(...response.skills.map((item) => new Option(item.name, item.id)));
       setControlsDisabled(false);
+      const requested = pendingSelectionId;
+      if (requested !== null && response.skills.some((item) => item.id === requested)) {
+        skillSelect.value = requested;
+        pendingSelectionId = null;
+      }
       syncInputs(false);
       const item = selected();
       if (item) render(item);
@@ -228,6 +250,7 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
     syncInputs();
   });
   skillSelect.addEventListener("change", () => {
+    pendingSelectionId = null;
     invalidatePendingPreview();
     syncInputs();
   });
@@ -259,5 +282,5 @@ export function createSkillProductionRuntimePanel(): HTMLElement {
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
   void load();
-  return root;
+  return { root, selectSkill };
 }
