@@ -6,10 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-// A8 authority re-audit: f8b74d0..9cd58072 changes only the child Enemy
-// Admin presentation mapping/test. World/Stage capability, policy and runtime
-// ownership files are unchanged.
-const EXPECTED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
+// A8 authority re-audit: 9cd58072..f31a2908 adds Boss 3D runtime plus
+// published Admin testing-policy bootstrap/state tests. None of the World/Stage
+// capability, policy, campaign factory, roster, route, objective or challenge
+// authority files audited below changed.
+const EXPECTED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
 const read = (path) => readFile(resolve(root, path), "utf8");
 const readChild = (path) => readFile(resolve(child, path), "utf8");
 
