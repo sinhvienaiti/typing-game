@@ -48,6 +48,7 @@ on:
       - "scripts/validate-space-admin-a14-history.mjs"
       - "scripts/validate-space-admin-a16-ux.mjs"
       - "scripts/validate-space-admin-a17-acceptance.mjs"
+      - "scripts/test-space-admin-production-preview-bridge.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -161,6 +162,7 @@ jobs:
           node --check scripts/validate-space-admin-a14-history.mjs
           node --check scripts/validate-space-admin-a16-ux.mjs
           node --check scripts/validate-space-admin-a17-acceptance.mjs
+          node --check scripts/test-space-admin-production-preview-bridge.mjs
       - name: Test immutable revision, CAS and Admin V2 security/media semantics
         run: pnpm admin:test
       - name: Test Typing Content canonical catalog
@@ -208,6 +210,8 @@ jobs:
           pnpm install
           pnpm --dir portal install
           pnpm --dir games/space-typing install
+      - name: Test Production Preview bridge candidate coalescing
+        run: node scripts/test-space-admin-production-preview-bridge.mjs
       - name: Test canonical World Music Admin preview bridge
         run: node --test admin/world-music-preview.test.mjs
       - name: Test canonical Ships Admin preview bridge
