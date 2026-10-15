@@ -1,4 +1,4 @@
-name: Space Typing Admin A5 Preview CI
+name: Space Typing Admin A5/A10 Production Preview CI
 
 on:
   push:
@@ -9,8 +9,18 @@ on:
       - "portal/src/admin/contracts/space-typing-admin.v1.json"
       - "portal/src/admin/space-typing-asset-preview.ts"
       - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-phase-b.ts"
       - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/space-typing-skills-phase-b.ts"
+      - "portal/src/admin/space-typing-equipment-phase-b.ts"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-vfx-phase-b.ts"
+      - "portal/src/admin/v2/preview/**"
       - "scripts/validate-space-admin-asset-preview.mjs"
+      - "scripts/validate-space-admin-a10-production-preview.mjs"
       - ".github/workflows/admin-a5-preview-ci.yml"
   pull_request:
     paths:
@@ -18,8 +28,18 @@ on:
       - "portal/src/admin/contracts/space-typing-admin.v1.json"
       - "portal/src/admin/space-typing-asset-preview.ts"
       - "portal/src/admin/space-typing-asset-preview.css"
+      - "portal/src/admin/space-typing-phase-b.ts"
       - "portal/src/admin/space-typing-ships-phase-b.ts"
+      - "portal/src/admin/space-typing-enemies-phase-b.ts"
+      - "portal/src/admin/space-typing-bosses-phase-b.ts"
+      - "portal/src/admin/space-typing-skills-phase-b.ts"
+      - "portal/src/admin/space-typing-equipment-phase-b.ts"
+      - "portal/src/admin/space-typing-worlds-phase-b.ts"
+      - "portal/src/admin/space-typing-stages-phase-b.ts"
+      - "portal/src/admin/space-typing-vfx-phase-b.ts"
+      - "portal/src/admin/v2/preview/**"
       - "scripts/validate-space-admin-asset-preview.mjs"
+      - "scripts/validate-space-admin-a10-production-preview.mjs"
       - ".github/workflows/admin-a5-preview-ci.yml"
 
 jobs:
@@ -41,6 +61,8 @@ jobs:
             portal/pnpm-lock.yaml
       - name: Validate A5 preview transport invariants
         run: node scripts/validate-space-admin-asset-preview.mjs
+      - name: Validate A10 production preview coverage and classification
+        run: node scripts/validate-space-admin-a10-production-preview.mjs
       - name: Install root dependencies required by Portal build config
         run: pnpm install --frozen-lockfile
       - name: Install Portal dependencies
