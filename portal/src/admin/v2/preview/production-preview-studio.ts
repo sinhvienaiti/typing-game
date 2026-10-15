@@ -37,6 +37,8 @@ export function createProductionPreviewStudio(host: HTMLElement, statusHost: HTM
   const replayButton = element("button", "st-admin-btn", "Replay") as HTMLButtonElement;
   const fullscreenButton = element("button", "st-admin-btn", "Fullscreen") as HTMLButtonElement;
   for (const button of [resetButton, replayButton, fullscreenButton]) button.type = "button";
+  resetButton.disabled = true;
+  replayButton.disabled = true;
   resetButton.setAttribute("aria-label", "Reset production preview");
   replayButton.setAttribute("aria-label", "Replay production preview scenario");
   fullscreenButton.setAttribute("aria-label", "Open production preview fullscreen");
@@ -52,18 +54,22 @@ export function createProductionPreviewStudio(host: HTMLElement, statusHost: HTM
   let disposed = false;
   let actions: ProductionPreviewStudioActions | null = null;
   let actionGeneration = 0;
+  let actionPending = false;
 
   const run = (action: "reset" | "replay"): void => {
-    if (disposed || actions === null) return;
+    if (disposed || actions === null || actionPending) return;
     const current = ++actionGeneration;
+    const currentActions = actions;
+    actionPending = true;
     resetButton.disabled = true;
     replayButton.disabled = true;
-    Promise.resolve(actions[action]()).catch((error: unknown) => {
+    Promise.resolve().then(() => currentActions[action]()).catch((error: unknown) => {
       if (disposed || current !== actionGeneration) return;
       statusHost.className = "st-admin-asset-preview-status bad";
       statusHost.textContent = error instanceof Error ? error.message : String(error);
     }).finally(() => {
       if (disposed || current !== actionGeneration) return;
+      actionPending = false;
       resetButton.disabled = false;
       replayButton.disabled = false;
     });
@@ -124,8 +130,10 @@ export function createProductionPreviewStudio(host: HTMLElement, statusHost: HTM
     bindActions: (nextActions): void => {
       if (disposed) return;
       actions = nextActions;
-      resetButton.disabled = false;
-      replayButton.disabled = false;
+      if (!actionPending) {
+        resetButton.disabled = false;
+        replayButton.disabled = false;
+      }
     },
     dispose: (): void => {
       if (disposed) return;
