@@ -20,7 +20,56 @@ export const ADMIN_PERMISSIONS = Object.freeze({
   DEVELOPER_INSPECT: "developer.runtime-inspect",
 });
 
+export const ADMIN_PERMISSION_CATALOG = Object.freeze([
+  { id: ADMIN_PERMISSIONS.CONFIG_DRAFT, label: "Create drafts", group: "Configuration", dangerous: false },
+  { id: ADMIN_PERMISSIONS.CONFIG_PUBLISH, label: "Publish configuration", group: "Configuration", dangerous: true },
+  { id: ADMIN_PERMISSIONS.CONFIG_ROLLBACK, label: "Roll back published configuration", group: "Configuration", dangerous: true },
+  { id: ADMIN_PERMISSIONS.MEDIA_UPLOAD, label: "Upload media", group: "Media", dangerous: false },
+  { id: ADMIN_PERMISSIONS.MEDIA_DELETE, label: "Archive / delete Admin media", group: "Media", dangerous: true },
+  { id: ADMIN_PERMISSIONS.AUDIT_READ, label: "Read audit history", group: "Governance", dangerous: false },
+  { id: ADMIN_PERMISSIONS.DEVELOPER_INSPECT, label: "Open Developer Tools", group: "Developer", dangerous: true },
+]);
+
 const SUPER_ADMIN_PERMISSIONS = Object.freeze(Object.values(ADMIN_PERMISSIONS));
+const KNOWN_PERMISSIONS = new Set(SUPER_ADMIN_PERMISSIONS);
+
+export const ADMIN_ROLE_TEMPLATES = Object.freeze([
+  Object.freeze({ id: "super-admin", label: "Super Admin", description: "Full local administration and Developer Tools access.", permissions: SUPER_ADMIN_PERMISSIONS }),
+  Object.freeze({ id: "publisher", label: "Publisher", description: "Prepare, publish and roll back configuration with audit visibility.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.CONFIG_PUBLISH, ADMIN_PERMISSIONS.CONFIG_ROLLBACK, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  Object.freeze({ id: "editor", label: "Content Editor", description: "Prepare revision-backed changes and upload media, without publish or destructive media access.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  Object.freeze({ id: "media-manager", label: "Media Manager", description: "Upload and retire Admin-managed media without configuration publish rights.", permissions: Object.freeze([ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.MEDIA_DELETE, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  Object.freeze({ id: "developer", label: "Developer / QA", description: "Read-oriented audit and Developer Tools access without configuration mutation.", permissions: Object.freeze([ADMIN_PERMISSIONS.AUDIT_READ, ADMIN_PERMISSIONS.DEVELOPER_INSPECT]) }),
+  Object.freeze({ id: "viewer", label: "Viewer", description: "Normal read-only administration without audit, mutation or Developer Tools permissions.", permissions: Object.freeze([]) }),
+]);
+
+function roleTemplate(role) {
+  return ADMIN_ROLE_TEMPLATES.find((entry) => entry.id === role) ?? null;
+}
+
+function permissionOverrides(raw) {
+  if (typeof raw !== "string" || raw.trim() === "") return [];
+  return raw.split(",").map((entry) => entry.trim()).filter(Boolean).map((entry) => {
+    const operation = entry.startsWith("-") ? "remove" : "add";
+    const permission = entry.replace(/^[+-]/, "");
+    if (!KNOWN_PERMISSIONS.has(permission)) throw new TypeError(`Unknown Admin permission override: ${permission}`);
+    return Object.freeze({ operation, permission });
+  });
+}
+
+export function resolveAdminRolePermissions(role, overrideText = "") {
+  const template = roleTemplate(role);
+  const permissions = new Set(template?.permissions ?? []);
+  const overrides = permissionOverrides(overrideText);
+  for (const override of overrides) {
+    if (override.operation === "remove") permissions.delete(override.permission);
+    else permissions.add(override.permission);
+  }
+  return Object.freeze({
+    roleKnown: template !== null,
+    permissions: Object.freeze(SUPER_ADMIN_PERMISSIONS.filter((permission) => permissions.has(permission))),
+    overrides: Object.freeze(overrides),
+  });
+}
 
 function cleanText(value, fallback, max = 120) {
   if (typeof value !== "string") return fallback;
@@ -32,14 +81,22 @@ export function createLocalAdminActor({
   actorId = "local-admin",
   displayName = "Local Admin",
   requestId = randomUUID(),
+  role = "super-admin",
+  permissionOverrideText = "",
 } = {}) {
+  const resolved = resolveAdminRolePermissions(role, permissionOverrideText);
   return Object.freeze({
     actorId: cleanText(actorId, "local-admin", 80),
     actorDisplayName: cleanText(displayName, "Local Admin", 120),
     authMethod: "local-admin-token",
-    role: "super-admin",
+    role: cleanText(role, "viewer", 80),
+    roleKnown: resolved.roleKnown,
     requestId: cleanText(requestId, randomUUID(), 120),
-    permissions: SUPER_ADMIN_PERMISSIONS,
+    permissions: resolved.permissions,
+    permissionOverrides: resolved.overrides,
+    permissionCatalog: ADMIN_PERMISSION_CATALOG,
+    roleTemplates: ADMIN_ROLE_TEMPLATES,
+    roleAssignmentOwner: "deployment",
   });
 }
 
@@ -52,6 +109,9 @@ export function createLocalAdminActorFromRequest(request) {
     actorId: first(actorHeader),
     displayName: first(displayHeader),
     requestId: first(requestHeader),
+    // Role/permission ownership is server-side. Never trust a browser/request header to elevate access.
+    role: process.env.TYPING_GAME_ADMIN_ROLE || "super-admin",
+    permissionOverrideText: process.env.TYPING_GAME_ADMIN_PERMISSION_OVERRIDES || "",
   });
 }
 
@@ -77,14 +137,12 @@ function equalValue(left, right) {
 
 function collectChangedPaths(base, next, prefix, paths, maxPaths) {
   if (paths.length >= maxPaths || equalValue(base, next)) return;
-
   const baseObject = base !== null && typeof base === "object" && !Array.isArray(base);
   const nextObject = next !== null && typeof next === "object" && !Array.isArray(next);
   if (!baseObject || !nextObject) {
     paths.push(prefix || "$root");
     return;
   }
-
   const keys = new Set([...Object.keys(base), ...Object.keys(next)]);
   for (const key of [...keys].sort()) {
     if (paths.length >= maxPaths) return;
@@ -102,13 +160,7 @@ function domainForPath(path) {
   return parts[0] || "$root";
 }
 
-export function describeConfigChangeScope({
-  baseRevision = null,
-  targetRevision = null,
-  baseConfig,
-  targetConfig,
-  maxPaths = 200,
-}) {
+export function describeConfigChangeScope({ baseRevision = null, targetRevision = null, baseConfig, targetConfig, maxPaths = 200 }) {
   const changedPaths = [];
   collectChangedPaths(baseConfig, targetConfig, "", changedPaths, maxPaths);
   const domains = [...new Set(changedPaths.map(domainForPath))].sort();
@@ -140,12 +192,7 @@ export class LocalAdminAuditLog {
       schemaVersion: 1,
       eventId: this.idFactory(),
       timestamp: this.now().toISOString(),
-      actor: actor ? {
-        actorId: actor.actorId,
-        actorDisplayName: actor.actorDisplayName,
-        authMethod: actor.authMethod,
-        role: actor.role,
-      } : null,
+      actor: actor ? { actorId: actor.actorId, actorDisplayName: actor.actorDisplayName, authMethod: actor.authMethod, role: actor.role } : null,
       requestId: actor?.requestId ?? null,
       action,
       domain,
@@ -183,83 +230,23 @@ async function recordAuditBestEffort(auditLog, event, onAuditError) {
   }
 }
 
-export async function runAuthorizedAdminMutation({
-  actor,
-  permission,
-  auditLog,
-  action,
-  domain,
-  entityType = null,
-  entityId = null,
-  changeScope = null,
-  resolveEntityId = null,
-  resolveChangeScope = null,
-  onAuditError = () => undefined,
-  operation,
-}) {
+export async function runAuthorizedAdminMutation({ actor, permission, auditLog, action, domain, entityType = null, entityId = null, changeScope = null, resolveEntityId = null, resolveChangeScope = null, onAuditError = () => undefined, operation }) {
   try {
     requireAdminPermission(actor, permission);
   } catch (error) {
-    await recordAuditBestEffort(auditLog, {
-      actor,
-      action,
-      domain,
-      entityType,
-      entityId,
-      changeScope,
-      result: "denied",
-      error: error instanceof Error ? error.message : String(error),
-    }, onAuditError);
+    await recordAuditBestEffort(auditLog, { actor, action, domain, entityType, entityId, changeScope, result: "denied", error: error instanceof Error ? error.message : String(error) }, onAuditError);
     throw error;
   }
-
-  // A durable attempt record is written before mutation. If this write fails, the mutation is not run.
-  // This prevents a successful mutation from being completely absent from the audit stream.
-  await auditLog.record({
-    actor,
-    action,
-    domain,
-    entityType,
-    entityId,
-    changeScope,
-    result: "attempt",
-  });
-
+  await auditLog.record({ actor, action, domain, entityType, entityId, changeScope, result: "attempt" });
   let value;
   try {
     value = await operation();
   } catch (error) {
-    await recordAuditBestEffort(auditLog, {
-      actor,
-      action,
-      domain,
-      entityType,
-      entityId,
-      changeScope,
-      result: "error",
-      error: error instanceof Error ? error.message : String(error),
-    }, onAuditError);
+    await recordAuditBestEffort(auditLog, { actor, action, domain, entityType, entityId, changeScope, result: "error", error: error instanceof Error ? error.message : String(error) }, onAuditError);
     throw error;
   }
-
-  const resolvedEntityId = typeof resolveEntityId === "function"
-    ? resolveEntityId(value)
-    : entityId;
-  const resolvedChangeScope = typeof resolveChangeScope === "function"
-    ? resolveChangeScope(value)
-    : changeScope;
-
-  // Do not report a completed mutation as failed only because the final audit append failed.
-  // The durable pre-mutation attempt remains, and the caller can surface/log the audit degradation.
-  await recordAuditBestEffort(auditLog, {
-    actor,
-    action,
-    domain,
-    entityType,
-    entityId: resolvedEntityId ?? null,
-    changeScope: resolvedChangeScope ?? null,
-    result: "success",
-  }, onAuditError);
-
+  const resolvedEntityId = typeof resolveEntityId === "function" ? resolveEntityId(value) : entityId;
+  const resolvedChangeScope = typeof resolveChangeScope === "function" ? resolveChangeScope(value) : changeScope;
+  await recordAuditBestEffort(auditLog, { actor, action, domain, entityType, entityId: resolvedEntityId ?? null, changeScope: resolvedChangeScope ?? null, result: "success" }, onAuditError);
   return value;
 }
