@@ -13,9 +13,9 @@ export const enemyProductionPreviewAdapter: ProductionPreviewDomainAdapter<
 > = Object.freeze({
   domain: "enemy",
   defaultScenario: "idle",
-  candidatePayload: (candidate) => Object.freeze({
+  candidatePayload: (candidate: EnemyProductionPreviewCandidate) => Object.freeze({
     domain: "enemy",
     definitionId: candidate.definitionId,
   }),
-  scenarioPayload: (scenario) => Object.freeze({ scenario }),
+  scenarioPayload: (scenario: EnemyProductionPreviewScenario) => Object.freeze({ scenario }),
 });

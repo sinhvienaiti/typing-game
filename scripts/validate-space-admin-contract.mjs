@@ -11,14 +11,8 @@ const childRoot = resolve(root, "games/space-typing");
 // ownership, contracts and Admin write boundaries are unchanged; VFX stays
 // runtime-backed read-only and Backgrounds stays runtime-derived read-only.
 const VISUALS_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
-const childPath = new URL(
-  "../games/space-typing/contracts/space-typing-admin.v1.json",
-  import.meta.url,
-);
-const snapshotPath = new URL(
-  "../portal/src/admin/contracts/space-typing-admin.v1.json",
-  import.meta.url,
-);
+const childPath = new URL("../games/space-typing/contracts/space-typing-admin.v1.json", import.meta.url);
+const snapshotPath = new URL("../portal/src/admin/contracts/space-typing-admin.v1.json", import.meta.url);
 
 const [child, snapshot, backgrounds, vfx, router, server, backgroundsUi, vfxUi, vfxUiLegacy, phaseMap] = await Promise.all([
   readFile(childPath, "utf8").then(JSON.parse),
@@ -58,16 +52,20 @@ assert.equal(vfx.vfx?.writeCapability, false);
 assert.equal(vfx.vfx?.adminPreviewWriteCapability, false);
 assert.equal(vfx.vfx?.applyBoundary, "none");
 assert.deepEqual(vfx.vfx?.authorableFields, []);
-assert.ok(vfx.vfx?.domains?.includes("combat"));
-assert.ok(vfx.vfx?.domains?.includes("player-projectiles"));
-assert.ok(vfx.vfx?.domains?.includes("skill-effects"));
-assert.ok(vfx.vfx?.domains?.includes("boss-effects"));
-assert.ok(vfx.vfx?.domains?.includes("screen-feedback"));
+for (const domain of ["combat", "player-projectiles", "skill-effects", "boss-effects", "screen-feedback"]) {
+  assert.ok(vfx.vfx?.domains?.includes(domain), `VFX domain missing: ${domain}`);
+}
 
+// A13/A10.5 route decoration is now part of the canonical shell. Keep exact
+// route->renderer ownership while also protecting preview classification and
+// role-aware action gates instead of freezing the old undecorated return text.
 assert.match(router, /renderPhaseBBackgrounds/);
-assert.match(router, /\$\{BASE\}\/backgrounds`\) return renderPhaseBBackgrounds\(\)/);
+assert.match(router, /if \(path === `\$\{BASE\}\/backgrounds`\) return decorated\(path, renderPhaseBBackgrounds\(\)\);/);
 assert.match(router, /renderPhaseBVfx/);
-assert.match(router, /\$\{BASE\}\/vfx`\) return renderPhaseBVfx\(\)/);
+assert.match(router, /if \(path === `\$\{BASE\}\/vfx`\) return decorated\(path, renderPhaseBVfx\(\)\);/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
+
 assert.match(server, /space-typing-admin-backgrounds\.v1\.json/);
 assert.match(server, /space-typing-admin-vfx\.v1\.json/);
 assert.match(server, /\/api\/admin\/space-typing\/backgrounds\/contract/);
@@ -95,6 +93,4 @@ assert.equal(vfxMap?.status, "phase-b-ui-wired-runtime-backed-readonly");
 assert.equal(vfxMap?.persistence, "code-owned-runtime-vfx");
 assert.equal(vfxMap?.applyBoundary, "none");
 
-console.log(
-  `Space Typing Admin contract core OK: ${child.contractRevision} · visuals pinned ${childHead.slice(0, 12)} · Backgrounds/VFX runtime-backed read-only`,
-);
+console.log(`Space Typing Admin contract core OK: ${child.contractRevision} · visuals pinned ${childHead.slice(0, 12)} · decorated Backgrounds/VFX routes remain runtime-backed read-only`);

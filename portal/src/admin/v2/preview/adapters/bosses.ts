@@ -10,6 +10,6 @@ export const bossProductionPreviewAdapter: ProductionPreviewDomainAdapter<
 > = Object.freeze({
   domain: "boss",
   defaultScenario: "idle",
-  candidatePayload: (candidate) => Object.freeze({ domain: "boss", bossId: candidate.bossId }),
-  scenarioPayload: (scenario) => Object.freeze({ scenario }),
+  candidatePayload: (candidate: BossProductionPreviewCandidate) => Object.freeze({ domain: "boss", bossId: candidate.bossId }),
+  scenarioPayload: (scenario: BossProductionPreviewScenario) => Object.freeze({ scenario }),
 });

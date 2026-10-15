@@ -10,6 +10,6 @@ export const worldProductionPreviewAdapter: ProductionPreviewDomainAdapter<
 > = Object.freeze({
   domain: "world",
   defaultScenario: "idle",
-  candidatePayload: (candidate) => Object.freeze({ domain: "world", worldId: candidate.worldId }),
+  candidatePayload: (candidate: WorldProductionPreviewCandidate) => Object.freeze({ domain: "world", worldId: candidate.worldId }),
   scenarioPayload: () => Object.freeze({ scenario: "idle" }),
 });

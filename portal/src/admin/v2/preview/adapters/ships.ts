@@ -18,7 +18,7 @@ export const shipProductionPreviewAdapter: ProductionPreviewDomainAdapter<
 > = Object.freeze({
   domain: "ship",
   defaultScenario: "idle",
-  candidatePayload: (candidate) => Object.freeze({
+  candidatePayload: (candidate: ShipProductionPreviewCandidate) => Object.freeze({
     domain: "ship",
     characterId: candidate.characterId,
     visual: candidate.visual,
@@ -32,6 +32,6 @@ export const shipProductionPreviewAdapter: ProductionPreviewDomainAdapter<
       ? {}
       : { projectileArchetype: candidate.projectileArchetype }),
   }),
-  scenarioPayload: (scenario) => Object.freeze({ scenario }),
-  tuningPayload: (visual) => Object.freeze({ visual }),
+  scenarioPayload: (scenario: ShipProductionPreviewScenario) => Object.freeze({ scenario }),
+  tuningPayload: (visual: Readonly<Record<string, unknown>>) => Object.freeze({ visual }),
 });
