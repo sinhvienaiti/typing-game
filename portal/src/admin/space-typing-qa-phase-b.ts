@@ -1,3 +1,5 @@
+import "./space-typing-qa-embed.css";
+import "./space-typing-shell-scroll-fix.css";
 import { SpaceTypingAdminApi } from "./api";
 import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
