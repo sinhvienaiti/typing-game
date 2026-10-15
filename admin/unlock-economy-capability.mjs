@@ -1,4 +1,7 @@
-export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "4f62c94ac9d9762796b7c07a1ade5b28aff9abc6";
+// Re-audited from 4f62c94..6c57a2b: the delta does not change the
+// A10 unlock/economy capability map, Ship runtime policy, character unlock
+// consumer, wallet/economy formulas, rewards, loot or entitlement ownership.
+export const A10_UNLOCK_ECONOMY_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 
 const capabilities = Object.freeze([
   {
