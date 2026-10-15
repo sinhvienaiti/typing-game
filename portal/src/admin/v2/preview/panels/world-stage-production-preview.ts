@@ -1,4 +1,4 @@
-import { SpaceTypingAdminApi } from "../../api";
+import { SpaceTypingAdminApi } from "../../../api";
 import { ProductionPreviewBridge } from "../production-preview-bridge";
 import { createProductionPreviewStudio } from "../production-preview-studio";
 import {
