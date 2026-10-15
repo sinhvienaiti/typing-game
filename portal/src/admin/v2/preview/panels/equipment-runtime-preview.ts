@@ -22,6 +22,11 @@ type EquipmentItem = {
 };
 type EquipmentResponse = { protocolVersion: 1; equipment: EquipmentItem[] };
 
+export type EquipmentProductionRuntimePanelHandle = {
+  root: HTMLElement;
+  selectEquipment: (id: string) => void;
+};
+
 const api = new SpaceTypingAdminApi();
 const CORE_STATS = ["hull", "shield", "firepower", "armor", "energy", "reactor", "focus", "ward", "luck", "salvage"] as const;
 const MULTIPLIER_EFFECTS = new Set(["skillCostMultiplier", "cooldownRate", "hostileShotSpeed", "rageGainMultiplier"]);
@@ -63,7 +68,7 @@ function activePerkEffects(effects: Record<string, number | boolean>): Array<[st
   });
 }
 
-export function createEquipmentProductionRuntimePanel(): HTMLElement {
+export function createEquipmentProductionRuntimePanel(): EquipmentProductionRuntimePanelHandle {
   const root = el("section", "st-admin-panel solid stx-panel");
   const head = el("div", "st-admin-panel-head");
   const copy = el("div");
@@ -97,6 +102,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
 
   let publishedPolicy: Record<string, unknown> | undefined;
   let published: EquipmentResponse | null = null;
+  let pendingSelectionId: string | null = null;
   let previewGeneration = 0;
   let previewTimer: ReturnType<typeof setTimeout> | null = null;
   let disposed = false;
@@ -191,6 +197,17 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     else if (previewDraft) scheduleDraftPreview(0);
   };
 
+  const selectEquipment = (id: string): void => {
+    pendingSelectionId = id;
+    if (published === null || disposed) return;
+    if (!published.equipment.some((item) => item.id === id)) return;
+    pendingSelectionId = null;
+    equipmentSelect.value = id;
+    invalidatePendingPreview();
+    syncInputs();
+    root.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  };
+
   const setControlsDisabled = (disabled: boolean): void => {
     source.disabled = disabled;
     equipmentSelect.disabled = disabled;
@@ -220,6 +237,11 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
         ...[...unique.entries()].sort((a, b) => a[1].localeCompare(b[1])).map(([id, label]) => new Option(label, id)),
       );
       setControlsDisabled(false);
+      const requested = pendingSelectionId;
+      if (requested !== null && response.equipment.some((item) => item.id === requested)) {
+        equipmentSelect.value = requested;
+        pendingSelectionId = null;
+      }
       syncInputs(false);
       const item = selected();
       if (item) render(item);
@@ -233,6 +255,7 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     syncInputs();
   });
   equipmentSelect.addEventListener("change", () => {
+    pendingSelectionId = null;
     invalidatePendingPreview();
     syncInputs();
   });
@@ -268,5 +291,5 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
   void load();
-  return root;
+  return { root, selectEquipment };
 }
