@@ -14,7 +14,10 @@ on:
       - "games/space-typing"
       - "shared/vocabulary/**"
       - "shared/typing-texts/**"
+      - "docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md"
+      - "docs/SPACE_TYPING_ADMIN_V2_PROGRESS.md"
       - "scripts/validate-space-admin-contract.mjs"
+      - "scripts/validate-space-admin-music-library.mjs"
       - "scripts/validate-space-admin-ui.mjs"
       - "scripts/validate-space-admin-phase-b.mjs"
       - "scripts/validate-space-admin-v2-foundation.mjs"
@@ -41,6 +44,10 @@ on:
       - "scripts/validate-space-admin-a7-enemy-boss.mjs"
       - "scripts/validate-space-admin-a8-world-stage-content.mjs"
       - "scripts/validate-space-admin-a9-audio-sfx-vfx.mjs"
+      - "scripts/validate-space-admin-a10-production-preview.mjs"
+      - "scripts/validate-space-admin-a14-history.mjs"
+      - "scripts/validate-space-admin-a16-ux.mjs"
+      - "scripts/validate-space-admin-a17-acceptance.mjs"
       - ".github/workflows/admin-ci.yml"
 
 jobs:
@@ -56,8 +63,10 @@ jobs:
           node-version: 24.11.0
       - name: Initialize Space Typing submodule
         run: git submodule update --init games/space-typing
-      - name: Validate Admin contract snapshot
+      - name: Validate Admin contract core
         run: node scripts/validate-space-admin-contract.mjs
+      - name: Validate Music Library production catalog ownership
+        run: node scripts/validate-space-admin-music-library.mjs
       - name: Validate Admin V2 foundation wiring
         run: node scripts/validate-space-admin-v2-foundation.mjs
       - name: Validate Admin V2 design system
@@ -100,6 +109,8 @@ jobs:
         run: node scripts/validate-space-admin-audio.mjs
       - name: Validate A9 Audio / SFX / VFX completion boundary
         run: node scripts/validate-space-admin-a9-audio-sfx-vfx.mjs
+      - name: Validate A10 Production Preview coverage
+        run: node scripts/validate-space-admin-a10-production-preview.mjs
       - name: Validate UI Assets runtime ownership audit
         run: node scripts/validate-space-admin-ui-assets.mjs
       - name: Validate QA Sandbox runtime ownership audit
@@ -110,9 +121,17 @@ jobs:
         run: node scripts/validate-space-admin-expedition.mjs
       - name: Validate Daily / Weekly runtime ownership audit
         run: node scripts/validate-space-admin-daily-weekly.mjs
+      - name: Validate A14 human-readable History / Publish
+        run: node scripts/validate-space-admin-a14-history.mjs
+      - name: Validate A16 production-preview UX lifecycle
+        run: node scripts/validate-space-admin-a16-ux.mjs
+      - name: Validate A17 acceptance closure
+        run: node scripts/validate-space-admin-a17-acceptance.mjs
       - name: Validate Admin service syntax
         run: |
           for file in admin/*.mjs; do node --check "$file"; done
+          node --check scripts/validate-space-admin-contract.mjs
+          node --check scripts/validate-space-admin-music-library.mjs
           node --check scripts/validate-space-admin-phase-b.mjs
           node --check scripts/validate-space-admin-v2-foundation.mjs
           node --check scripts/validate-space-admin-v2-design-system.mjs
@@ -138,6 +157,10 @@ jobs:
           node --check scripts/validate-space-admin-a7-enemy-boss.mjs
           node --check scripts/validate-space-admin-a8-world-stage-content.mjs
           node --check scripts/validate-space-admin-a9-audio-sfx-vfx.mjs
+          node --check scripts/validate-space-admin-a10-production-preview.mjs
+          node --check scripts/validate-space-admin-a14-history.mjs
+          node --check scripts/validate-space-admin-a16-ux.mjs
+          node --check scripts/validate-space-admin-a17-acceptance.mjs
       - name: Test immutable revision, CAS and Admin V2 security/media semantics
         run: pnpm admin:test
       - name: Test Typing Content canonical catalog
