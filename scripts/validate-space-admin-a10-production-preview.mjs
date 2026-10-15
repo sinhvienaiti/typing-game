@@ -32,11 +32,15 @@ function forbidText(input, needle, label) {
   if (input.includes(needle)) throw new Error(`${label}: forbidden ${JSON.stringify(needle)}`);
 }
 
-requireText(source.childEnemy, "drawModularEnemy", "Enemy preview retains production modular renderer only for definitions without a canonical painted mapping");
-requireText(source.childEnemy, "paintedEnemySprite", "Enemy preview resolves prepared production painted art when the canonical id maps to an Enemy kind");
-requireText(source.childEnemy, "hasPaintedEnemy", "Enemy preview fails closed when a mapped painted asset is absent from the build");
+forbidText(source.childEnemy, "drawModularEnemy", "Enemy Admin preview must never silently fall back to the generic modular/base renderer");
+forbidText(source.childEnemy, "StaticEnemyBodyCache", "Enemy Admin preview must not retain modular-body fallback state");
+requireText(source.childEnemy, "paintedEnemySprite", "Enemy preview resolves prepared production painted art for canonical registry identities");
+requireText(source.childEnemy, "hasPaintedEnemy", "Enemy preview fails closed when mapped painted art is absent from the build");
 requireText(source.childEnemy, "drawPaintedSprite", "Enemy preview draws painted art through the production sprite renderer");
-requireText(source.childEnemy, "must never silently", "Enemy painted mappings cannot silently degrade to a modular body");
+requireText(source.childEnemy, "PREVIEW_KIND_BY_ID", "Enemy preview owns explicit presentation mapping for registry ids that do not encode a runtime kind");
+requireText(source.childEnemy, "PREVIEW_KIND_BY_ROLE", "Enemy preview has a deterministic role-backed painted presentation fallback");
+requireText(source.childEnemy, "admin-presentation-only", "Enemy registry-to-painted mapping is explicitly presentation-only rather than gameplay authority");
+requireText(source.childEnemy, "never silently falls back", "Enemy painted mappings cannot silently degrade to a modular body");
 requireText(source.childEnemy, "new CombatFxSystem()", "Enemy hit/death reuses production CombatFxSystem");
 requireText(source.childBoss, "drawPaintedSprite", "Boss preview reuses painted production renderer");
 requireText(source.childBoss, "bossPhase", "Boss phase preview uses production CombatFxSystem");
@@ -68,6 +72,8 @@ requireText(source.bossPanel, "latestCandidate = operation", "Boss preview updat
 requireText(source.bossPanel, "await latestCandidate", "Boss scenario transitions wait for candidate materialization");
 requireText(source.bossPanel, 'scenario.control.addEventListener("change", () => void applyScenario().catch(reportError))', "Boss scenario changes use the dedicated scenario command path");
 forbidText(source.bossPanel, 'scenario.control.addEventListener("change", () => void loadSelectedBoss()', "Boss scenario changes must not reload the candidate");
+requireText(source.bossPanel, "st-admin-production-preview-shell--hero", "Boss production preview keeps the renderer as the primary hero surface");
+requireText(source.bossPanel, "st-admin-preview-media-tools", "Boss Media candidate QA remains a secondary collapsible tool");
 
 requireText(source.bossPanel, "createImageMediaCandidateTester", "Boss preview retains the separate preview-only Media V2 QA tester while Boss media binding is migration-gated");
 forbidText(source.enemyPanel, "createImageMediaCandidateTester", "Enemy primary production preview must resolve canonical child art automatically");
@@ -84,6 +90,7 @@ requireText(source.systems, "const current = ++previewGeneration", "Skill draft 
 requireText(source.systems, "if (current !== previewGeneration) return", "Skill preview ignores stale draft responses");
 requireText(source.systems, "scheduleDraftPreview", "Skill draft inputs drive debounced live runtime preview");
 requireText(source.systems, 'createProductionRegistryIconPreview("skill")', "Skill preview pairs production runtime behavior with canonical child-painted visual");
+requireText(source.systems, "selectSkill", "Skill live preview exposes selection synchronization for the authoring registry");
 requireText(source.equipment, '"/api/admin/space-typing/equipment/preview"', "Equipment preview uses canonical preview endpoint");
 requireText(source.equipment, "MULTIPLIER_EFFECTS", "Equipment effect baseline distinguishes neutral multipliers from active count=1 effects");
 requireText(source.equipment, "Nothing was persisted", "Equipment Draft preview remains isolated");
@@ -92,6 +99,7 @@ requireText(source.equipment, "const current = ++previewGeneration", "Equipment 
 requireText(source.equipment, "if (current !== previewGeneration) return", "Equipment preview ignores stale draft responses");
 requireText(source.equipment, "scheduleDraftPreview", "Equipment draft inputs drive debounced live runtime preview");
 requireText(source.equipment, 'createProductionRegistryIconPreview("equipment")', "Equipment preview pairs production resolver behavior with canonical child-painted visual");
+requireText(source.equipment, "selectEquipment", "Equipment live preview exposes selection synchronization for the authoring registry");
 for (const token of ["paintedSkillIcon", "paintedEquipmentIcon", "CHILD ASSET · READ ONLY"]) {
   requireText(source.productionIcon, token, `Skill/Equipment production visual helper ${token}`);
 }
