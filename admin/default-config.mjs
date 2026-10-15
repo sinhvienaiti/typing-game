@@ -17,7 +17,14 @@ export function createDefaultSpaceTypingConfig(contract) {
     system: {
       gameDefaults: { defaultMode: "campaign", defaultShip: "vanguard", difficulty: "normal", tutorialEnabled: true, pronunciationDefault: true, autoSave: true },
       network: { minimumVersion: "0.1.0", autoSaveIntervalSeconds: 30, reconnectWindowSeconds: 20, offlinePlay: true, telemetry: true },
-      maintenance: { enabled: false, message: "Scheduled maintenance" }
+      maintenance: { enabled: false, message: "Scheduled maintenance" },
+      testing: {
+        unlockAllStages: false,
+        // Preserve the current product rule: ship selection is independent of
+        // Campaign discovery milestones unless an administrator explicitly
+        // changes the testing policy.
+        unlockAllShips: true
+      }
     },
     featureFlags: {
       "voice-mode": { enabled: true, rolloutPercent: 100, scope: "all", risk: "normal" },
