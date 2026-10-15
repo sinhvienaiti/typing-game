@@ -84,6 +84,7 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   let disposed = false;
   let bosses: readonly BossPreviewItem[] = [];
   let generation = 0;
+  let latestCandidate: Promise<unknown> = Promise.resolve();
   let connectedOnce = false;
 
   const selectedCandidate = (): BossProductionPreviewCandidate | null => {
@@ -102,13 +103,27 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
   };
 
-  const apply = async (): Promise<void> => {
+  const loadSelectedBoss = async (): Promise<void> => {
     const active = bridge;
     const candidate = selectedCandidate();
     if (disposed || active === null || candidate === null) return;
     const activeGeneration = ++generation;
     studio.setLifecycle("loading", "Applying Boss candidate in child production runtime…");
-    await active.loadCandidate(candidate);
+    const operation = active.loadCandidate(candidate);
+    latestCandidate = operation;
+    await operation;
+    if (disposed || active !== bridge || activeGeneration !== generation) return;
+    await active.setScenario(scenario.control.value as BossProductionPreviewScenario);
+    if (disposed || active !== bridge || activeGeneration !== generation) return;
+    describeReady();
+  };
+
+  const applyScenario = async (): Promise<void> => {
+    const active = bridge;
+    if (disposed || active === null) return;
+    const activeGeneration = ++generation;
+    studio.setLifecycle("loading", `Switching Boss scenario to ${scenario.control.value}…`);
+    await latestCandidate;
     if (disposed || active !== bridge || activeGeneration !== generation) return;
     await active.setScenario(scenario.control.value as BossProductionPreviewScenario);
     if (disposed || active !== bridge || activeGeneration !== generation) return;
@@ -132,8 +147,8 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
-  boss.control.addEventListener("change", () => void apply().catch(reportError));
-  scenario.control.addEventListener("change", () => void apply().catch(reportError));
+  boss.control.addEventListener("change", () => void loadSelectedBoss().catch(reportError));
+  scenario.control.addEventListener("change", () => void applyScenario().catch(reportError));
   source.control.addEventListener("change", describeReady);
 
   void api.requestJson<BossPreviewResponse>("/api/admin/space-typing/bosses/preview", {
@@ -159,14 +174,14 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
       reset: async () => {
         scenario.control.value = "idle";
         await mounted.reset();
-        await apply();
+        await loadSelectedBoss();
       },
       replay: async () => {
         await mounted.replay();
         describeReady();
       },
     });
-    await apply();
+    await loadSelectedBoss();
   }).catch(reportError);
 
   return Object.freeze({ root, dispose });
