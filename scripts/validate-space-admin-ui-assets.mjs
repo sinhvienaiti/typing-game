@@ -35,6 +35,8 @@ assert.match(page, /NO FAKE UI ASSET CRUD/);
 assert.match(page, /Admin writes closed/);
 assert.match(router, /renderPhaseBUiAssets/);
 assert.match(router, /\$\{BASE\}\/ui-assets/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 assert.match(server, /space-typing-admin-ui-assets\.v1\.json/);
 assert.match(server, /request\.method==="GET"&&url\.pathname==="\/api\/admin\/space-typing\/ui-assets\/contract"/);
 for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
@@ -44,11 +46,11 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
   );
 }
 
-// A2: UI Assets remains a real direct runtime route, but its read-only technical surface belongs in Developer Tools rather than primary administrator navigation.
+// A15: UI Assets remains a real direct runtime route, but its read-only technical surface belongs in Developer Tools rather than primary administrator navigation.
 assert.doesNotMatch(nav, /label:\s*"UI Assets"/);
 assert.ok(nav.includes('[`${ADMIN_BASE}/ui-assets`]: "UI Assets"'), "UI Assets legacy direct-route metadata must remain available during migration");
-assert.ok(developerPaths.includes("/admin/space-typing/ui-assets"), "UI Assets diagnostic route must be exposed from Developer Tools during A2 migration");
-assert.match(command, /\["UI Assets",\s*`\$\{BASE\}\/ui-assets`,\s*"Developer Tools · Visuals"\]/);
+assert.ok(developerPaths.includes("/admin/space-typing/ui-assets"), "UI Assets diagnostic route must be exposed from Developer Tools");
+assert.match(command, /\["UI Assets",\s*`\$\{BASE\}\/ui-assets`,\s*"Developer Tools · Assets"\]/);
 
 const uiAssetsMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/ui-assets");
 assert.ok(uiAssetsMap, "UI Assets Phase B map row is required");
@@ -57,4 +59,4 @@ assert.equal(uiAssetsMap.persistence, "code-owned-runtime-ui");
 assert.equal(uiAssetsMap.applyBoundary, "none");
 assert.equal(uiAssetsMap.status, "phase-b-ui-wired-runtime-backed-readonly");
 
-console.log("Space Typing Admin UI Assets mapping: PASS (pinned child contract + read-only API/UI + A2 Developer Tools placement + map boundary verified).");
+console.log("Space Typing Admin UI Assets mapping: PASS (pinned child contract + read-only API/UI + A15 Developer Tools Assets placement + map boundary verified).");
