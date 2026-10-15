@@ -1,307 +1,162 @@
 # Space Typing Admin V2 — Progress
 
-> Execution tracker for `docs/SPACE_TYPING_ADMINISTRATOR_ADMIN_V2_MASTER_PLAN.md`.
+> Current execution tracker for `docs/SPACE_TYPING_ADMINISTRATOR_ADMIN_V2_MASTER_PLAN.md`.
 >
-> This file tracks implementation state only. The Master Plan remains the product/design source of truth, `SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md` is the A0 audit source of truth, and `SPACE_TYPING_ADMIN_ASSET_TUNING_PREVIEW_PLAN.md` is the implementation source of truth for A5 presentation/preview work.
+> The Master Plan is the product/design source of truth. This file records what is actually implemented on the active integration branches. Checkpoint SHAs are informational: every worker must fetch latest parent/child HEAD before editing and must never reset newer work to a checkpoint.
 
-## CURRENT HEADS / SOURCE-OF-TRUTH POLICY
+## Current source of truth — 2026-10-15
 
 Parent:
 - Repo: `sinhvienaiti/typing-game`
 - Branch: `feat/space-typing-admin-uiux`
-- A0 audit start HEAD: `571ccdcd34362548c29bfdc0a3d55bf7861bd3c0`
-- A0 migration matrix commit: `46c8da14af8f268fd01f8186c88826fff930042b`
-- A0.5 validated checkpoint: `fefa731922d59542aa9fc6293fa56fc029b999aa`
-- A1 validated checkpoint: `f2f088b59a9ae418b8a26045b5544b46dfb48b73`
-- A2 validated checkpoint: `9d3a94231d6c3168615c1675247cb443bd6b3b51`
-- A3.0 validated checkpoint: `d707354b48432987c8794e2df304b55ea0214172`
-- A3.1 validated checkpoint: `98bfa8712286c6b2c7e4ebbcbcbc8c05374a783f`
-- Asset Tuning / Runtime Preview initial plan checkpoint: `49470623f7fdc8cc96720a5896a124628d1698ab`
-- A5 architecture hardening commit: `067d330c360a5ade2daf9eca2a18940be6df33ac`
+- Latest HEAD at this progress refresh: `f743799233406e8cea15e98d04741aa0ef0e65f9`
+- PR #49 remains **DRAFT**. Do not mark Ready or merge without explicit human instruction.
 
 Child:
 - Repo: `sinhvienaiti/space-typing`
-- Current runtime/integration branch used by the A5 review: `feat/bgv-integration-current`
-- Reviewed runtime checkpoint: `dbd7348daf23a7e8ef3d804c23205e22f82407f1`
-- Historical Admin integration branch: `feat/admin-world-music-stage-policy`
+- Active Admin V2/runtime integration branch: `feat/bgv-integration-current`
+- Current audited/pinned preview runtime: `6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c`
+- Parent local tooling must preserve the exact gitlink by default. Following a child branch is opt-in only.
 
-### Child branch reconciliation rule
-
-The historical `feat/admin-world-music-stage-policy` branch and current `feat/bgv-integration-current` branch have diverged. Workers must **not** reset the current runtime branch to the historical Admin branch and must **not** merge/revert either branch automatically just because an older document names it.
-
-Before any A5 implementation that depends on child runtime:
-
-1. fetch latest child HEAD;
-2. use the latest approved integration/runtime source as source of truth;
-3. compare any required historical Admin/runtime work against the current branch;
-4. classify differences as already superseded / still required / obsolete;
-5. preserve all newer work.
-
-Checkpoint SHAs are informational only. Every worker must fetch latest heads before editing and must never reset newer work back to these values.
+Historical child branches such as `feat/admin-world-music-stage-policy` are evidence/reference only. Do not switch back, reset, merge or overwrite newer integration work merely because an older document names them.
 
 ---
 
-## CURRENT PHASE TRACKING
+## Execution state
 
-Historical execution tracker before the A5 architecture review still recorded:
+The roadmap has advanced beyond the old A4/A5 historical tracker. **Do not restart A0–A10.** Current implementation sequence executed from the 2026-10-14 override is:
 
-`A4.0 — Shop Architecture Decision`
+`A10.5 → A11 → A12 → A13 → A14 → A15 → A16 → A17`
 
-Do not infer from this historical label that A5 UI may start immediately. The current A5 plan adds a mandatory architecture gate:
+Current status:
 
-```text
-A5.0 runtime authority + production preview gate
-→ only then A5.1 Studio UI
-```
-
-Workers continuing Shop work should follow the latest Shop architecture/progress state at current HEAD. Workers beginning A5 must follow the A5 lock below even if older progress text appears to imply Ships/Weapons/Projectiles are already ready for UI authoring.
+| Phase | State | Current result |
+| --- | --- | --- |
+| A0–A10 | IMPLEMENTED / retained | Earlier architecture, Media, Shop/economy, Ships, Skills/Equipment, Enemies/Bosses, Worlds/Stages, Audio/VFX and economy work remains canonical subject to current validators. |
+| A10.5 | IMPLEMENTED | Shared Production Preview foundation plus combat, world/stage and VFX core retrofit; preview coverage classified deliberately. |
+| A11 | IMPLEMENTED | Runtime-owned Live Ops control plane; Shop-owned merchandising reused; scheduling/announcements fail closed when no canonical service exists. |
+| A12 | IMPLEMENTED | Duel production room simulation; Ranked/Alternative Modes remain truthful read-only/fail-closed where authority is absent. |
+| A13 | IMPLEMENTED | Server-side role templates/effective permissions, dangerous-permission emphasis and role-aware UI/action gates. |
+| A14 | IMPLEMENTED | Human-readable History/Publish with audit attribution, before→after summaries and preserved CAS validation. |
+| A15 | IMPLEMENTED | Runtime Inspector, Contract Inspector, Validation, Asset Diagnostics and QA Sandbox consolidated in permission-gated Developer Tools. |
+| A16 | IMPLEMENTED | Accessibility/responsive/reduced-motion and production-preview keyboard/fullscreen/teardown polish. |
+| A17 | PREPARED; MANUAL QUEUED | 25 task-based acceptance scenarios are executable/documented. Automated evidence is being wired into CI; browser/manual cases remain QUEUED and are not falsely marked PASS. |
 
 ---
 
-## COMPLETED FOUNDATION UNITS
-
-### Master Plan review / hardening
-- Administrator-first requirements locked.
-- A0.5 architecture gate inserted before writable V2 domains.
-- Roles/Permissions core moved earlier than full A13 management UI.
-- Audit foundation moved earlier than full A14 Audit UI.
-- Developer Tools scaffold moved to A2; A15 is cleanup/final migration.
-- Media split into A3.0 architecture + A3.1 Media Library/Asset Picker.
-- Shop split into A4.0 architecture + A4.1 workflow.
-- Validator migration made explicit.
-
-### A0 — Current-state audit and migration inventory
-- audited mapped Admin routes and ownership boundaries;
-- classified KEEP / REUSE / MOVE / REMOVE / BUILD NEW / SPLIT;
-- inventoried Admin APIs/runtime preview boundaries;
-- recorded whole-config publish-scope risk;
-- locked local authenticated authoring deployment assumption;
-- created Capability Gap Register and Validator Migration Map;
-- locked Developer Tools destinations.
-
-Deliverable: `docs/SPACE_TYPING_ADMIN_V2_MIGRATION_MATRIX.md`
-
-### A0.5 — Cross-cutting Architecture Gates
-- local actor identity/request context;
-- server-side permissions for draft/publish/rollback/media/audit/Developer Tools;
-- JSONL audit sink with durable pre-mutation attempt and safe post-mutation degradation;
-- whole-config change-scope/publish warning;
-- actor/audit/change-scope endpoints;
-- revision permission/audit wiring;
-- actor-based revision author attribution;
-- tests and CI validation.
-
-### A1 — Admin V2 design-system foundation
-- reusable tooltip/info/help drawer/field help system;
-- collision handling, hover/focus/tap, Escape/outside close, route teardown;
-- Page Header, validation, empty/error/loading, search/filter, chips, table/card grid;
-- draft lifecycle bar and confirm/destructive dialog;
-- concise sidebar with tooltip-first contextual help;
-- A1 validator/manual acceptance coverage.
-
-### A2 — Administrator shell, Dashboard V2 and Developer Tools
-- real-data-only Dashboard V2;
-- capability-aware primary navigation;
-- read-only diagnostics removed from administrator sidebar but retained as canonical direct routes;
-- permission-gated Developer Tools hub/manifest;
-- permission-aware command palette;
-- shell/main validator migration without weakening Phase B ownership checks;
-- UI Assets/QA validators migrated to Developer Tools placement.
-
-A2 checkpoint:
-- Parent `9d3a94231d6c3168615c1675247cb443bd6b3b51`
-- Admin CI #1002 PASS
-- Platform CI #2233 PASS
-
-### A3.0 — Media / Asset architecture gate
-
-Architecture source of truth:
-- `docs/SPACE_TYPING_ADMIN_V2_MEDIA_ARCHITECTURE.md`
+## A10.5 — Production Preview Foundation + Core Retrofit
 
 Locked architecture:
-- stable logical asset separated from immutable asset version;
-- published/runtime definitions pin exact `assetVersionId`; no silent `follow latest`;
-- multi-component bundle support;
-- explicit provenance/storage classes;
-- explicit usage reference graph;
-- replacement creates new immutable version and never overwrites old bytes;
-- archive is normal removal;
-- hard delete is fail-closed for referenced/current/generated/code-owned versions;
-- rollback retains exact referenced media versions;
-- generated/code-owned bootstrap is metadata/reference-only and idempotent;
-- procedural VFX definitions remain outside generic Media CRUD.
 
-Canonical service:
-- `admin/media-assets-v2.mjs`
-- Admin metadata/blob store under Admin data root;
-- atomic registry writes;
-- content-addressed immutable Admin blobs;
-- logical asset/version/reference listing and resolution;
-- upload creates immutable versions;
-- reference-only bundle registration;
-- archive/unarchive;
-- explicit reference add/remove/query;
-- safe hard-delete guard;
-- versioned Admin blob URL resolution.
+`Draft/Published → ProductionPreviewBridge → Domain Preview Adapter → CHILD PRODUCTION RENDERER/RUNTIME`
 
-Bootstrap adapter:
-- `admin/media-bootstrap.mjs`
-- Music catalog indexed as reference-only;
-- generated Ship 3D bundles indexed as multi-component reference assets;
-- incomplete bundles skipped rather than fabricated;
-- static SFX tree indexed as code-owned reference-only assets;
-- importer never copies/moves/deletes/overwrites runtime binaries;
-- bootstrap admissions serialized to avoid read-modify-write lost updates.
+Completed properties:
+- child gitlink safety in bootstrap/local development;
+- shared Preview bridge/studio lifecycle rather than Ship-only infrastructure;
+- Draft/Published candidates, replay/reset and stale-generation cancellation;
+- explicit dispose/teardown and isolated iframe transport;
+- Ships remains the reference production preview;
+- Enemies/Bosses use child production drawing/VFX scenarios supported by runtime;
+- Skills use production `SkillEngine` state simulation;
+- Equipment uses production `resolveEquipmentPerks` resolution;
+- Worlds/Stages use child production preview renderer paths;
+- VFX reuses representative Ship fire/projectile/impact production context instead of duplicating renderer logic;
+- every route is classified intentionally as production/contextual/data/media/no-preview;
+- unsupported visual/gameplay scenarios fail soft instead of being fabricated.
 
-### A3.1 — Media Library + Asset Picker
+Important A10.5 commits include:
+- `a93fac4c5e6148c9ff3478f63fed1b804306b36b` — Skill/Equipment runtime preview.
+- `71f08a516bbf474abd491c56ceaa6cc013314217` — production combat VFX preview context.
+- `780eddbd0875448c9c186d44602409d2c15a6325` — preview coverage classification.
+- `0c78e57cce555cab22da58010887a59cf0b5dfc1` — Equipment effect-display correctness.
+- `ff971d998ca5cd67e2159ca76be4a5a50174ae23` — production-preview coverage validator/workflow protection.
 
-Backend/API:
-- canonical `MediaAssetStore` initialized under Admin data root;
-- authenticated Media V2 read APIs expose logical assets, versions, references and exact-version components;
-- Admin-owned Media mutations use A0.5 permission/audit enforcement;
-- normal Media UI does not expose hard-delete;
-- generated/code-owned/external assets remain reference-only;
-- Media mutations declare `changesGameplay: false`.
-
-Portal workflow:
-- typed Media API client;
-- authenticated Admin-blob preview uses Object URLs;
-- Media Library route/search/filter/details/version history;
-- usage graph;
-- ownership-aware Replace/Archive;
-- reusable Asset Picker returns exact `{asset, version}`;
-- current/historical version selection;
-- keyboard focus trap, Escape/outside close and focus restoration;
-- technical IDs/paths progressive-disclosed rather than primary UI.
-
-A3.1 validated checkpoint:
-- Parent HEAD: `98bfa8712286c6b2c7e4ebbcbcbc8c05374a783f`
-- Space Typing Admin CI #1074 PASS
-- Platform CI #2269 PASS
-
-Manual A1/A2/A3.1 browser QA remains deferred/non-blocking for independent architecture work but must be completed before final acceptance or before a later phase depends on an unproven interaction.
+Child preview runtime used by the parent:
+- `52a6d2a8408dfd26a21936795036df9c6ec5b160` — Skill/Equipment production runtime simulation.
+- `6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c` — World/Stage production preview renderer and current child integration HEAD.
 
 ---
 
-## SHOP ARCHITECTURE SAFETY — RETAINED
+## A11–A16 completion checkpoints
 
-Shop must remain runtime-owned rather than becoming a disconnected CRUD product catalog.
+- A11 Live Ops: `f73b4b46220151d178bcf0bc31b8dc745b48e94d`
+- A12 PvP/Modes: `acccf79e5f90aa2481bcd2b5db566731bb72cd88`
+- A13 Roles/Permissions: `b3bc43b67af6ec457e86d5a5149d45c79f011677`
+- A14 History/Publish: `de033f43f5d84bd70639a99629600c2605935203`
+- A15 Developer Tools cleanup: `5b9539b0263e7e3f25074f412795591247a2aff0`
+- A16 UX/preview polish: `6fd3ca3ae2b94a9616418c4179756deb15355afc`
 
-Important locked rules remain:
+A13 details:
+- role templates: Super Admin, Publisher, Content Editor, Media Manager, Developer/QA, Viewer;
+- role assignment/overrides are server/deployment-owned (`TYPING_GAME_ADMIN_ROLE`, `TYPING_GAME_ADMIN_PERMISSION_OVERRIDES`);
+- request/browser headers cannot elevate role;
+- unknown roles resolve to no permissions;
+- server mutation checks remain authoritative; UI gating is only the usability layer.
 
-- Shop inventory/instances are runtime-derived/persisted state, not a static shadow catalog;
-- Item/Equipment identity stays with owning registries;
-- Shop-specific authoring must model real runtime policy;
-- service-shop costs remain a separate policy family from ordinary stock pricing;
-- unsupported promotions/schedules/bundles must not be fabricated;
-- existing persisted `PlayerSave.shopState` behavior must be explicitly defined when policy revisions change;
-- Shop preview/simulation must reuse canonical runtime generation/pricing logic;
-- media upload alone must not mutate gameplay Shop state.
+A14 details:
+- primary change review is grouped in administrator language with before→after values;
+- actor/action/timestamp/result activity comes from the audit log;
+- raw revision/path diagnostics move under Advanced;
+- publish/rollback still use expected-active CAS and backend validation.
 
-Architecture source of truth:
-- `docs/SPACE_TYPING_ADMIN_V2_SHOP_ARCHITECTURE.md`
+A15 details:
+- technical screens are consolidated under permission-gated Developer Tools;
+- writable normal workflows such as Ships and Music Library are not mislabeled developer-only;
+- no fake backend/control plane was introduced while consolidating diagnostics.
 
----
-
-## A5 ARCHITECTURE REVIEW LOCK — MANDATORY
-
-Architecture source of truth:
-- `docs/SPACE_TYPING_ADMIN_ASSET_TUNING_PREVIEW_PLAN.md`
-
-Review verdict: **GO WITH CHANGES**.
-
-### A5.1 is blocked until A5.0 exits
-
-Do not build the Asset Tuning Studio form first.
-
-A5.0 must first prove:
-
-1. every writable field has a persisted domain owner;
-2. validator/materializer/resolver/production consumer are explicit;
-3. current Ship visual policy actually reaches the production renderer, or the authority gap is repaired;
-4. per-entity exact Media versions are resolved through a canonical production resolver before Asset Picker assignment becomes gameplay-writable;
-5. existing Ship 3D is treated as the current strict generated relief-bundle representation, not arbitrary GLB;
-6. arbitrary GLB / animated GLB / semantic clip mapping remain deferred until production supports them;
-7. current procedural VFX remains read-only until a canonical writable effect contract exists;
-8. Ship motion values such as aim/recoil/roll/pitch/yaw remain preview scenario state unless a real persisted consumer is introduced;
-9. the Child Admin Visual Preview Harness uses production renderer/presentation modules rather than Portal copies;
-10. preview does not mutate active revision, PlayerSave, persisted ShopInstance, published definitions or Media current-version pointers;
-11. resource lifecycle cleanup is proven for RAF/audio/Object URLs/WebGL/geometry/material/texture/fetch/listeners;
-12. branch/source-of-truth reconciliation is documented.
-
-### Baseline capability classification from reviewed child checkpoint
-
-- Ship metadata: `SUPPORTED NOW`.
-- Ship procedural visual authoring: `REQUIRES CANONICAL MIGRATION` until production consumption is proven.
-- Per-Ship 2D image assignment: `REQUIRES CANONICAL MIGRATION`.
-- persisted scale/offset/rotation/pivot: `REQUIRES CANONICAL MIGRATION`.
-- idle/aim/recoil and 3D roll/pitch/yaw: `READ-ONLY REFERENCE` / preview scenario state.
-- Engine/Muzzle/Trail/Impact/Low-HP/Death VFX: `READ-ONLY REFERENCE` until effect ownership migrates.
-- current projectile recipes: code-owned; authoring requires canonical migration.
-- existing generated relief 3D bundle: `READ-ONLY REFERENCE` first; writable exact-version assignment requires migration.
-- arbitrary GLB / animated GLB / animation clips: `DEFERRED / UNSUPPORTED`.
-- generic writable VFX: `DEFERRED / UNSUPPORTED` under current contract.
-- first-class Weapon Admin entity: conditional; do not invent one if runtime ownership does not justify it.
-
-### A5.0 exact execution order
-
-1. Re-fetch parent/child heads and audit authority chain.
-2. Repair/prove current Ship visual runtime consumption.
-3. Lock minimal Ship presentation schema only for real consumers.
-4. Decide shared sprite-sheet vs per-Ship exact-version 2D migration.
-5. Lock strict current relief 3D profile.
-6. Decide derived-Media lineage; prefer validation-only until explicit provenance exists.
-7. Build Child Admin Visual Preview Harness from production modules.
-8. Add isolated domain candidate adapter for unsaved preview.
-9. Harden postMessage/security/lifecycle/stale cancellation.
-10. Add Draft vs Published sourcing through the same harness.
-11. Only then start A5.1 Studio UI.
-
-### A5 tests that must not be skipped
-
-- production consumer parity for every writable field;
-- exact `assetVersionId` pin test (`A` stays active after Media `B` becomes current);
-- upload-is-not-gameplay test;
-- preview mutation-isolation test;
-- production/harness authority parity test;
-- strict 3D profile rejection tests;
-- postMessage origin/source/protocol/stale request tests if iframe is used;
-- repeated preview mount/switch/unmount resource cleanup test;
-- CAS conflict test;
-- VFX unknown/non-authorable fields continue failing closed.
+A16 details:
+- production preview controls are keyboard accessible;
+- status is announced through `aria-live`;
+- fullscreen state/listeners are cleaned up;
+- responsive preview sizing and reduced-motion behavior are protected;
+- async actions cannot resurrect disposed preview chrome.
 
 ---
 
-## DEFERRED MANUAL TESTS
+## A17 — Acceptance preparation
 
-Existing Admin V2 browser scenarios are recorded in:
+Canonical checklist:
 - `docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md`
 
-For A5 additionally require:
+Current A17 preparation:
+- 25 end-to-end scenarios, including all 22 Master Plan minimum tasks;
+- each scenario records expected behavior and automated evidence;
+- browser/visual cases are explicitly `MANUAL: QUEUED`;
+- no manual PASS may be inferred from code inspection;
+- `scripts/validate-space-admin-a17-acceptance.mjs` protects scenario coverage and A13–A16 safety evidence.
 
-- common laptop/desktop anti-clutter review;
-- keyboard-only core editing flow;
-- slider numeric alternative/no drag-only verification;
-- normal Admin has no raw paths/child SHA/protocol/manifests;
-- production gameplay vs preview comparison for hull/motion/muzzle/projectile/trail/impact identity;
-- repeated 3D preview switching/hide/show/navigation stress test.
+Manual testing remains non-blocking for independent implementation. It becomes release/Ready gating only when the user chooses to perform final acceptance or when a future change genuinely depends on a visual/manual observation.
 
 ---
 
-## SAFETY RULES
+## CI / validator state
 
-- Do not mark PR #49 Ready or merge without explicit user instruction.
-- Fetch latest parent and child source of truth before every new implementation unit.
-- Do not reset/revert/overwrite newer worker/runtime work.
-- Do not merge divergent child branches automatically merely to make documentation line up.
-- Do not create fake remote users, fake scheduler services or fake player management.
-- Do not weaken validators merely to make Admin V2 pass.
+Fresh CI after A16 exposed stale presentation/audit assumptions. Per project policy, inaccessible old logs are not blockers; fresh commits are used to reveal the next concrete failure.
+
+CI triage already performed:
+- re-audited child delta `4f62c94… → 6c57a2b…`; only isolated Admin preview modules changed, not Background/VFX ownership contracts;
+- updated the visuals audited child pin without weakening ownership checks;
+- migrated VFX validation to inspect the A10.5 wrapper + retained read-only contract surface instead of requiring old presentation banners in one file.
+
+Recent CI-fix commits:
+- `107bbf0e8868f6faf37c2420c478268694571bb2` — re-audit visuals against pinned preview runtime.
+- `c29d970fb26795c2ad21d575c30a71ac28ad5517` — validate VFX retrofit through wrapper + legacy boundary.
+
+At this progress refresh, Admin CI still reports the umbrella `Validate Admin contract snapshot` step failing; that step also chain-imports Music Library validation, so CI is being split/wired more granularly rather than guessing from an unavailable log. Do not treat this temporary red state as permission to weaken canonical ownership/CAS/media/preview validators.
+
+---
+
+## Safety rules that remain mandatory
+
+- Fetch latest parent and child HEAD before every new implementation unit/commit series.
+- Never reset/revert/overwrite newer worker code.
+- Preserve the parent-pinned child gitlink unless explicit follow-branch mode is requested.
+- Do not create fake remote users, fake scheduler services, fake player management or fake Ranked season services.
+- Do not weaken validators to make CI green.
 - Do not create Shop/Ships/Weapon shadow models disconnected from runtime.
-- Do not expose generated runtime files as writable Media blobs without an explicit ownership migration.
-- Do not treat procedural VFX definitions as ordinary uploaded binary files.
-- Do not let upload/replace implicitly mutate gameplay references.
-- Do not treat a renderer function parameter as an authorable setting without a persisted domain field + production consumer.
-- Do not copy renderer/VFX logic into Portal.
-- Do not treat current registry/data preview helpers as the production visual Preview Harness.
-- Do not claim arbitrary GLB/animation support while production still uses the generated relief-bundle path.
-- Do not start A5.1 until the A5.0 exit gate in the Asset Tuning plan is satisfied.
+- Do not expose raw filesystem asset paths as normal administrator editing controls.
+- Media upload/replace must not implicitly mutate gameplay references.
+- Production Preview must reuse child-owned renderer/runtime; do not copy rendering/VFX logic into Portal.
+- Preview must not mutate active revision, PlayerSave, wallet, ownership, entitlement or progression.
+- Manual QA remains queued/non-blocking until release acceptance, and must never be marked PASS without human execution.
+- PR #49 remains DRAFT until explicit user instruction.
