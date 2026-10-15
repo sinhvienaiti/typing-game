@@ -6,9 +6,6 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-// A10.5 re-audit: 4f62c94..6c57a2b only adds isolated Admin preview
-// runtime support for Skill/Equipment/World/Stage. World/Stage policy ownership,
-// production consumers and frozen Expedition semantics remain unchanged.
 const EXPECTED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 const read = (path) => readFile(resolve(root, path), "utf8");
 const readChild = (path) => readFile(resolve(child, path), "utf8");
@@ -74,7 +71,6 @@ for (const status of ["SUPPORTED NOW", "READ-ONLY REFERENCE", "DEFERRED / UNSUPP
   requireText(capabilities, `status: "${status}"`, `A8 matrix preserves ${status}`);
 }
 
-// Stage authority: only validated tuning fields reach the production factory.
 for (const field of ["enemyBudget", "eliteChance", "modifierSlots"]) {
   requireText(stagePolicy, field, `Stage policy owns ${field}`);
   requireText(stagesSurface, field, `Stage Admin exposes ${field}`);
@@ -89,21 +85,19 @@ requireText(stagePolicy, "captureActiveStageRuntimeSession", "Stage policy expos
 requireText(stagePolicy, "activateExpeditionStageRuntimeSession", "Stage policy exposes explicit Expedition boundary");
 requireText(stagePolicy, "expeditionStageRuntimeSession = null", "Expedition override cannot leak into normal Campaign creation");
 
-// A10.5 wrapper + stable editor composition.
-requireText(stagesWrapper, "renderLegacyPhaseBWorldsStages", "Stage wrapper retains established editor");
+requireText(stagesWrapper, "renderLegacyStages", "Stage wrapper retains established editor");
 requireText(stagesWrapper, "createStageProductionPreviewPanel", "Stage wrapper attaches child production composition preview");
 requireText(stagesSurface, "/api/admin/space-typing/stages/preview", "Stage Admin validates through canonical child preview");
 requireText(stagesSurface, "api.createRevision", "Stage Admin uses immutable Draft creation");
 forbidText(stagesSurface, "api.publish(", "Stage Admin cannot direct-publish");
 requireText(stagesSurface, "Reload this screen before saving to avoid overwriting newer published changes", "Stage Admin retains stale-active protection");
 
-// World authority: enemyRoster is the one authorable World production seam.
 requireText(worldPolicy, 'const AUTHORABLE_KEYS = new Set(["enemyRoster"])', "World policy exposes only enemyRoster");
 requireText(worldRoster, "activeWorldRuntimeOverride", "Production World roster reads published Admin session");
 requireText(worldRoster, "resolveWorldProfileForRuntime", "Production World roster uses canonical runtime resolver");
 requireText(worldRoster, "export function worldProfileForRuntimeStage(", "Production World authority helper exists");
 requireText(worldRoster, "worldProfileForRuntimeStage(stage)", "Production spawn path resolves effective World before selection");
-requireText(worldsWrapper, "renderLegacyPhaseBWorlds", "World wrapper retains established editor");
+requireText(worldsWrapper, "renderLegacyWorlds", "World wrapper retains established editor");
 requireText(worldsWrapper, "createWorldProductionPreviewPanel", "World wrapper attaches child production environment preview");
 requireText(worldsSurface, "/api/admin/space-typing/worlds/preview", "World Admin validates through canonical child preview");
 requireText(worldsSurface, "enemyRoster", "World Admin exposes supported roster field");
