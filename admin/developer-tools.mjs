@@ -13,6 +13,7 @@ export const DEVELOPER_TOOLS_MANIFEST = Object.freeze({
         Object.freeze({ label: "Currencies", path: `${BASE}/currencies`, description: "Inspect runtime-owned currency caps, sources and persistence semantics." }),
         Object.freeze({ label: "Rewards & Drops", path: `${BASE}/rewards`, description: "Inspect runtime reward/drop resolution where no administrator authoring owner exists." }),
         Object.freeze({ label: "Stamina / Warp", path: `${BASE}/warp`, description: "Inspect stamina regeneration, reserve and persistence ownership." }),
+        Object.freeze({ label: "Expedition", path: `${BASE}/expedition`, description: "Inspect Expedition runtime/save boundaries without exposing browser-local progression as Admin policy." }),
       ]),
     }),
     Object.freeze({
@@ -21,6 +22,8 @@ export const DEVELOPER_TOOLS_MANIFEST = Object.freeze({
       description: "Inspect canonical child contracts for Live Ops, PvP and presentation ownership without exposing raw JSON on normal administrator routes.",
       tools: Object.freeze([
         Object.freeze({ label: "Live Ops", path: `${BASE}/events`, description: "Inspect gameplay Events ownership and the Shop-owned promotion boundary." }),
+        Object.freeze({ label: "Missions", path: `${BASE}/missions`, description: "Inspect mission/progression ownership where no separate Admin authoring service exists." }),
+        Object.freeze({ label: "Daily / Weekly", path: `${BASE}/daily-weekly`, description: "Inspect recurring challenge ownership and the absence of a canonical weekly scheduler where applicable." }),
         Object.freeze({ label: "Duel", path: `${BASE}/duel`, description: "Inspect Duel room/session authority and supported scenario values." }),
         Object.freeze({ label: "Ranked", path: `${BASE}/ranked`, description: "Inspect fixed competitive rules and authority-owned constraints." }),
         Object.freeze({ label: "Alternative Modes", path: `${BASE}/alternative-modes`, description: "Inspect runtime mode availability and admission boundaries." }),
