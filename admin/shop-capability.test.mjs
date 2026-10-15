@@ -16,7 +16,7 @@ import {
   createUnlockEconomyCapabilityManifest,
 } from "./unlock-economy-capability.mjs";
 
-const AUDITED_CHILD_SHA = "dcba99b60523f671076bda497f126824ad01797c";
+const AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
 
 const contract = {
   configNamespace: "economy.shop",
