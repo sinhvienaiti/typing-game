@@ -14,8 +14,10 @@ const childRoot = resolve(root, "games/space-typing");
 const QA_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-qa.v1.json"));
-const [page, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter, directTestLabLaunch, testLabRegistry] = await Promise.all([
+const [page, qaEmbedCss, shellScrollCss, router, server, nav, command, gamesSource, phaseMapSource, weeklyAdmin, alternativeModes, historicalAdmin, rankedHistoryService, voiceAdapter, directTestLabLaunch, testLabRegistry] = await Promise.all([
   readFile(resolve(root, "portal/src/admin/space-typing-qa-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-qa-embed.css"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-shell-scroll-fix.css"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8"),
@@ -140,17 +142,34 @@ assert.ok(nav.includes('[`${ADMIN_BASE}/qa`]: "QA Sandbox"'), "QA Sandbox legacy
 assert.ok(developerPaths.includes("/admin/space-typing/qa"), "QA Sandbox must be exposed from permission-gated Developer Tools");
 assert.match(command, /\["QA Sandbox",\s*`\$\{BASE\}\/qa`,\s*"Developer Tools · QA"\]/);
 
+assert.match(page, /\.\/space-typing-qa-embed\.css/);
+assert.match(page, /\.\/space-typing-shell-scroll-fix\.css/);
 assert.match(page, /\/api\/admin\/space-typing\/qa\/contract/);
 assert.match(page, /\/games\.json/);
-assert.match(page, /Test Lab Launcher/);
-assert.match(page, /Open Full Developer Test Lab/);
+assert.match(page, /Developer Test Lab/);
+assert.match(page, /EMBEDDED CHILD RUNTIME/);
+assert.match(page, /data-qa-testlab-frame/);
+assert.match(page, /sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups"/);
+assert.match(page, /allow="autoplay; microphone; fullscreen"/);
 assert.match(page, /searchParams\.set\("testLab", "1"\)/);
-assert.match(page, /RUNTIME-BACKED · EPHEMERAL/);
+assert.match(page, /frame\.src = testLabUrl/);
+assert.match(page, /startEmbeddedRuntime\(\)/);
+assert.match(page, /Open standalone/);
 assert.match(page, /PRODUCTION SAVE · NO WRITE/);
 assert.match(page, /NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE/);
-assert.match(page, /window\.open\(directTestLabUrl\(appUrl\)/);
-assert.doesNotMatch(page, /use the built-in <strong>Developer Test Lab<\/strong> launcher/);
+assert.doesNotMatch(page, /Open Full Developer Test Lab/);
+assert.doesNotMatch(page, /The new game window opens directly into/);
 assert.doesNotMatch(page, /createRevision|\/publish|\/revisions/);
+
+assert.match(qaEmbedCss, /\.stx-qa-testlab-frame/);
+assert.match(qaEmbedCss, /height:max\(760px,calc\(100vh - 245px\)\)/);
+assert.match(qaEmbedCss, /\.stx-qa-frame-shell/);
+assert.match(shellScrollCss, /\.st-admin\{height:100%;min-height:0;overflow:hidden\}/);
+assert.match(shellScrollCss, /\.st-admin-shell\{height:100%;min-height:0;overflow:hidden\}/);
+assert.match(shellScrollCss, /\.st-admin-sidebar\{position:relative;top:auto;height:100%;max-height:none;min-height:0;overflow-x:hidden;overflow-y:auto/);
+assert.match(shellScrollCss, /overscroll-behavior-y:contain/);
+assert.match(shellScrollCss, /\.st-admin-main\{height:100%;min-height:0;min-width:0;overflow-x:hidden;overflow-y:auto/);
+assert.doesNotMatch(shellScrollCss, /position:sticky/);
 
 const game = games.games?.find((entry) => entry.id === "space-typing");
 assert.equal(game?.appUrl, "https://space.typing-game.local");
@@ -162,4 +181,4 @@ assert.equal(qaMap.persistence, "child-test-lab-isolated-session-and-preset");
 assert.equal(qaMap.applyBoundary, "new-qa-run");
 assert.equal(qaMap.status, "phase-b-ui-wired-runtime-backed-ephemeral-sandbox");
 
-console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · direct full Test Lab launch + isolated Test Lab + A15 Developer Tools placement + expanded runtime coverage audited + no production write bridge).`);
+console.log(`Space Typing Admin QA mapping: PASS (${childHead.slice(0, 12)} · embedded canonical Test Lab + independently scrolling Admin shell + isolated Test Lab + no production write bridge).`);
