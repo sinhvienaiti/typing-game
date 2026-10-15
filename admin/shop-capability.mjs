@@ -1,8 +1,7 @@
-// A17 Shop authority re-audit: dcba99b..f8b74d0 changes only the child Enemy
-// Admin production-preview painted-art resolution/fallback behavior. Shop
-// policy, contracts, generation, pricing, availability, offers, services and
-// transaction ownership sources remain unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "f8b74d0fe3a52d5b0d2cbc9fbfcb78509edc677b";
+// A17 Shop authority re-audit: f8b74d0..9cd58072 changes only the child Enemy
+// Admin presentation mapping/test. Shop policy, contracts, generation, pricing,
+// availability, offers, services and transaction ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "9cd58072e3cae232e9bc8387846ecc42721121e3";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",
