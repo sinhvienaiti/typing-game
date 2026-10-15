@@ -92,8 +92,6 @@ for (const entry of map.screens) {
 }
 
 assert.match(defaultConfig, /\bsystem:\s*\{/);
-// Legacy featureFlags remain schema-compatible for old revisions, but registered
-// Feature Gates routes no longer expose the revision-backed authoring surface.
 assert.match(defaultConfig, /\bfeatureFlags:\s*\{/);
 assert.match(defaultConfig, /\benemies:\s*\{/);
 assert.match(defaultConfig, /projectileMode:\s*"auto"/);
@@ -109,12 +107,9 @@ assert.match(api, /getRuntime\(\): Promise<AdminRuntimePayload>/);
 assert.match(main, /renderPhaseBAdminScreen/);
 assert.match(main, /if \(phaseB !== null\) return phaseB/);
 
-// Every routed Phase B surface is decorated centrally so preview classification
-// and role-aware UI gates cannot be bypassed by a direct route.
 assert.match(phaseBRouter, /attachProductionPreviewClassification\(screen, path\)/);
 assert.match(phaseBRouter, /attachRoleAwareActionGates\(screen\)/);
 
-// General Settings must use the dedicated fail-closed editor before the legacy core fallback.
 assert.match(phaseBRouter, /renderPhaseBSettings/);
 assert.match(phaseBRouter, /\$\{BASE\}\/settings`\) return decorated\(path, renderPhaseBSettings\(navigate\)\)/);
 assert.ok(
@@ -122,7 +117,7 @@ assert.ok(
   "General Settings must be intercepted before the legacy core renderer",
 );
 assert.match(settingsPhaseB, /Admin Phase B · General Settings draft/);
-assert.match(settingsPhaseB, /renderLegacyPhaseBSettings/);
+assert.match(settingsPhaseB, /space-typing-settings-phase-b-legacy/);
 assert.match(settingsPhaseB, /Access & Permissions/);
 assert.match(settingsPhaseB, /api\.createRevision/);
 assert.doesNotMatch(settingsPhaseB, /api\.publish/);
@@ -132,8 +127,6 @@ assert.match(settingsPhaseB, /renderAdminFailureState/);
 assert.match(settingsPhaseB, /schema defaults/i);
 assert.match(settingsPhaseB, /runtime unchanged/);
 
-// Feature Gates use the shared validated main-contract reader. The endpoint and
-// capabilities guard belong to that reader rather than being duplicated in every UI module.
 assert.match(phaseBRouter, /renderPhaseBFeatureGates/);
 assert.match(phaseBRouter, /\$\{BASE\}\/feature-gates/);
 assert.match(phaseBRouter, /\$\{BASE\}\/flags/);
@@ -157,8 +150,6 @@ assert.match(audioPhaseB, /spaceTypingSettingsV1/);
 assert.match(audioPhaseB, /PRONUNCIATION_DUCK/);
 assert.match(audioPhaseB, /assertStableActiveRevision/);
 
-// A9 SFX is a first-class administrator Media workflow, but remains read-only
-// because the child runtime does not yet own a publishable SFX policy.
 assert.match(phaseBRouter, /renderPhaseBSfx/);
 assert.match(phaseBRouter, /\$\{BASE\}\/sfx`\) return decorated\(path, renderPhaseBSfx\(\)\)/);
 assert.match(sfxPhaseB, /createAdminSfxCatalog/);
@@ -189,19 +180,17 @@ assert.match(shipsPhaseB, /api\.createRevision/);
 assert.doesNotMatch(shipsPhaseB, /api\.publish/);
 assert.match(phaseB, /renderPhaseBEquipment/);
 assert.match(equipmentPhaseB, /B06\.2/);
-assert.match(equipmentPhaseB, /renderPhaseBEquipment as renderLegacyPhaseBEquipment/);
+assert.match(equipmentPhaseB, /space-typing-equipment-phase-b-legacy/);
 assert.match(equipmentPhaseB, /createEquipmentProductionRuntimePanel/);
 assert.match(equipmentPhaseB, /api\.createRevision/);
 assert.doesNotMatch(equipmentPhaseB, /api\.publish/);
 assert.match(phaseB, /renderPhaseBSkills/);
 assert.match(skillsPhaseB, /B06\.3/);
-assert.match(skillsPhaseB, /renderPhaseBSkills as renderLegacyPhaseBSkills/);
+assert.match(skillsPhaseB, /space-typing-skills-phase-b-legacy/);
 assert.match(skillsPhaseB, /createSkillProductionRuntimePanel/);
 assert.match(skillsPhaseB, /api\.createRevision/);
 assert.doesNotMatch(skillsPhaseB, /api\.publish/);
 
-// A7 Enemy authoring is intentionally narrower than the legacy B06.4 surface:
-// projectileMode is production-backed; minStage remains preserved preview-only migration data.
 assert.match(phaseB, /renderPhaseBEnemies/);
 assert.match(enemiesPhaseB, /B06\.4/);
 assert.match(enemiesPhaseB, /\/api\/admin\/space-typing\/enemies\/preview/);
@@ -220,11 +209,10 @@ assert.doesNotMatch(enemiesPhaseB, /gameplay snapshots Enemy admission/);
 assert.match(server, /\/api\/runtime\/space-typing\/enemies/);
 assert.match(server, /\/api\/admin\/space-typing\/enemies\/preview/);
 
-// A7 Bosses are fail-closed: legacy name/title data may be previewed, but the
-// page must not create or publish drafts until bossIdentityForStage consumes it.
 assert.match(phaseB, /renderPhaseBBosses/);
 assert.match(phaseB, /\$\{BASE\}\/bosses/);
 assert.match(bossesPhaseB, /B06\.5/);
+assert.match(bossesPhaseB, /space-typing-bosses-phase-b-legacy/);
 assert.match(bossesPhaseB, /createBossProductionPreviewPanel/);
 assert.match(bossesPhaseB, /\/api\/admin\/space-typing\/bosses\/preview/);
 assert.match(bossesPhaseB, /Name/);
