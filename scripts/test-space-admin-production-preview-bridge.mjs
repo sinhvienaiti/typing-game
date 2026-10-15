@@ -101,6 +101,10 @@ const flushAnimationFrames = () => {
   for (const callback of callbacks) callback(16);
 };
 
+const flushMicrotasks = async () => {
+  await Promise.resolve();
+};
+
 globalThis.window = fakeWindow;
 globalThis.document = fakeDocument;
 
@@ -151,6 +155,7 @@ try {
   deferNextType = "LOAD_CANDIDATE";
   const inFlightOld = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-old" }));
   flushAnimationFrames();
+  await flushMicrotasks();
   assert.ok(deferredCommand, "older candidate should be in flight before the newer candidate is queued");
 
   const inFlightLatest = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-latest" }));
@@ -175,6 +180,7 @@ try {
 
   deferNextType = "SET_TUNING";
   const staleTuning = bridge.setTuning(Object.freeze({ glow: 1.25 }));
+  await flushMicrotasks();
   assert.ok(deferredCommand, "tuning command should be in flight before stale response");
   const tuningMessage = deferredCommand;
   deferredCommand = null;

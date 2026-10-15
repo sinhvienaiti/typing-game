@@ -6,7 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const child = resolve(root, "games/space-typing");
-const EXPECTED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
+// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
+// Admin preview host Ship mutation lifecycle and its focused queue test.
+// A8 capability/policy/runtime ownership files are unchanged; World/Stage
+// preview remains child-owned and the authoring authority boundary is intact.
+const EXPECTED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
 const read = (path) => readFile(resolve(root, path), "utf8");
 const readChild = (path) => readFile(resolve(child, path), "utf8");
 
