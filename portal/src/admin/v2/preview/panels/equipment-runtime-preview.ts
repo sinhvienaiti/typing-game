@@ -128,6 +128,10 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     if (source.value === "published") render(item);
   };
 
+  const invalidatePendingPreview = (): void => {
+    generation += 1;
+  };
+
   const load = async (): Promise<void> => {
     const current = ++generation;
     try {
@@ -153,23 +157,37 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
     }
   };
 
-  source.addEventListener("change", syncInputs);
-  equipmentSelect.addEventListener("change", syncInputs);
-  statSelect.addEventListener("change", syncInputs);
+  source.addEventListener("change", () => {
+    invalidatePendingPreview();
+    syncInputs();
+  });
+  equipmentSelect.addEventListener("change", () => {
+    invalidatePendingPreview();
+    syncInputs();
+  });
+  statSelect.addEventListener("change", () => {
+    invalidatePendingPreview();
+    syncInputs();
+  });
+  statValue.addEventListener("input", invalidatePendingPreview);
+  perkSelect.addEventListener("change", invalidatePendingPreview);
   apply.addEventListener("click", () => {
     void (async () => {
       const item = selected();
       if (!item) return;
       if (source.value === "published") {
+        invalidatePendingPreview();
         render(item);
         return;
       }
+      const current = ++generation;
+      const itemId = item.id;
       const draft = structuredClone(publishedPolicy ?? { configRevision: "equipment-admin-preview", equipment: {} }) as Record<string, unknown>;
       draft["configRevision"] = "equipment-admin-preview-draft";
       const overrides = (draft["equipment"] && typeof draft["equipment"] === "object" ? draft["equipment"] : {}) as Record<string, unknown>;
-      const currentOverride = (overrides[item.id] && typeof overrides[item.id] === "object" ? overrides[item.id] : {}) as Record<string, unknown>;
+      const currentOverride = (overrides[itemId] && typeof overrides[itemId] === "object" ? overrides[itemId] : {}) as Record<string, unknown>;
       const stats = (currentOverride["stats"] && typeof currentOverride["stats"] === "object" ? currentOverride["stats"] : {}) as Record<string, unknown>;
-      overrides[item.id] = {
+      overrides[itemId] = {
         ...currentOverride,
         stats: { ...stats, [statSelect.value]: Number(statValue.value) },
         perk: perkSelect.value || null,
@@ -178,11 +196,12 @@ export function createEquipmentProductionRuntimePanel(): HTMLElement {
       try {
         status(message, "Resolving isolated draft candidate through production equipment logic…");
         const response = await previewEquipment(draft);
-        const candidate = response.equipment.find((entry) => entry.id === item.id);
+        if (current !== generation) return;
+        const candidate = response.equipment.find((entry) => entry.id === itemId);
         if (!candidate) throw new Error("Equipment candidate was not returned by production preview.");
         render(candidate, true);
       } catch (error) {
-        status(message, adminErrorMessage(error, "Could not preview Equipment candidate."), "bad");
+        if (current === generation) status(message, adminErrorMessage(error, "Could not preview Equipment candidate."), "bad");
       }
     })();
   });

@@ -228,6 +228,11 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
             for (const waiter of waiters) waiter.resolve(payload);
           },
           (error: unknown) => {
+            if (flushGeneration !== this.candidateGeneration) {
+              const stale = new ProductionPreviewStaleError();
+              for (const waiter of waiters) waiter.reject(stale);
+              return;
+            }
             const failure = error instanceof Error ? error : new Error(String(error));
             for (const waiter of waiters) waiter.reject(failure);
           },

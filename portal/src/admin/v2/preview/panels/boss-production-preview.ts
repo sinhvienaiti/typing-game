@@ -1,5 +1,8 @@
 import { SpaceTypingAdminApi } from "../../../api";
-import { ProductionPreviewBridge } from "../production-preview-bridge";
+import {
+  ProductionPreviewBridge,
+  ProductionPreviewStaleError,
+} from "../production-preview-bridge";
 import { createProductionPreviewStudio } from "../production-preview-studio";
 import {
   bossProductionPreviewAdapter,
@@ -94,6 +97,11 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
     studio.setLifecycle("ready", `${item.name}, ${item.title} · ${item.rank} · production Boss renderer`);
   };
 
+  const reportError = (error: unknown): void => {
+    if (disposed || error instanceof ProductionPreviewStaleError) return;
+    studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
+  };
+
   const apply = async (): Promise<void> => {
     const active = bridge;
     const candidate = selectedCandidate();
@@ -124,8 +132,8 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
   });
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
-  boss.control.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
-  scenario.control.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
+  boss.control.addEventListener("change", () => void apply().catch(reportError));
+  scenario.control.addEventListener("change", () => void apply().catch(reportError));
   source.control.addEventListener("change", describeReady);
 
   void api.requestJson<BossPreviewResponse>("/api/admin/space-typing/bosses/preview", {
@@ -159,9 +167,7 @@ export function createBossProductionPreviewPanel(): BossProductionPreviewPanelHa
       },
     });
     await apply();
-  }).catch((error: unknown) => {
-    if (!disposed) studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
-  });
+  }).catch(reportError);
 
   return Object.freeze({ root, dispose });
 }

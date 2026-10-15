@@ -1,5 +1,8 @@
 import { SpaceTypingAdminApi, type ShipAdminPreviewItem } from "../../../api";
-import { ProductionPreviewBridge } from "../production-preview-bridge";
+import {
+  ProductionPreviewBridge,
+  ProductionPreviewStaleError,
+} from "../production-preview-bridge";
 import { createProductionPreviewStudio } from "../production-preview-studio";
 import {
   shipProductionPreviewAdapter,
@@ -88,6 +91,20 @@ export function createCombatVfxProductionPreviewPanel(): CombatVfxProductionPrev
     studio.dispose();
   });
 
+  const describeReady = (): void => {
+    const ship = ships.find((entry) => entry.id === shipSelect.value);
+    if (!ship) return;
+    studio.setLifecycle(
+      "ready",
+      `${ship.name} · ${ship.projectileArchetype ?? "canonical projectile"} · muzzle → flight → impact · production runtime`,
+    );
+  };
+
+  const reportError = (error: unknown): void => {
+    if (error instanceof ProductionPreviewStaleError || cleanup.isDisposed()) return;
+    studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
+  };
+
   const apply = async (): Promise<void> => {
     const active = bridge;
     const ship = ships.find((entry) => entry.id === shipSelect.value);
@@ -98,14 +115,11 @@ export function createCombatVfxProductionPreviewPanel(): CombatVfxProductionPrev
     if (cleanup.isDisposed() || active !== bridge || activeGeneration !== generation) return;
     await active.setScenario("fire");
     if (cleanup.isDisposed() || active !== bridge || activeGeneration !== generation) return;
-    studio.setLifecycle(
-      "ready",
-      `${ship.name} · ${ship.projectileArchetype ?? "canonical projectile"} · muzzle → flight → impact · production runtime`,
-    );
+    describeReady();
   };
 
   shipSelect.addEventListener("change", () => {
-    void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error)));
+    void apply().catch(reportError);
   });
 
   void api.previewShips().then(async (payload) => {
@@ -125,13 +139,17 @@ export function createCombatVfxProductionPreviewPanel(): CombatVfxProductionPrev
     await mounted.waitUntilReady();
     if (cleanup.isDisposed() || bridge !== mounted) return;
     studio.bindActions({
-      reset: async () => { await mounted.reset(); await apply(); },
-      replay: async () => { await mounted.replay(); await apply(); },
+      reset: async () => {
+        await mounted.reset();
+        await apply();
+      },
+      replay: async () => {
+        await mounted.replay();
+        if (!cleanup.isDisposed() && bridge === mounted) describeReady();
+      },
     });
     await apply();
-  }).catch((error: unknown) => {
-    if (!cleanup.isDisposed()) studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
-  });
+  }).catch(reportError);
 
   return Object.freeze({ root, dispose: cleanup.dispose });
 }

@@ -27,26 +27,33 @@ const animationFrames = new Map();
 const postedMessages = [];
 let nextAnimationFrame = 1;
 let iframeRemoved = false;
+let deferNextLoad = false;
+let deferredLoad = null;
 
 const emitMessage = (data) => {
   const event = { origin, source: frameWindow, data };
   for (const listener of [...messageListeners]) listener(event);
 };
 
+const appliedResponse = (message) => ({
+  protocolVersion: message.protocolVersion,
+  previewSessionId: message.previewSessionId,
+  nonce: message.nonce,
+  requestId: message.requestId,
+  type: message.type === "DISPOSE" ? "DISPOSED" : "APPLIED",
+  payload: message.payload,
+});
+
 const frameWindow = {
   postMessage(message, targetOrigin) {
     assert.equal(targetOrigin, origin);
     postedMessages.push(message);
-    queueMicrotask(() => {
-      emitMessage({
-        protocolVersion: message.protocolVersion,
-        previewSessionId: message.previewSessionId,
-        nonce: message.nonce,
-        requestId: message.requestId,
-        type: message.type === "DISPOSE" ? "DISPOSED" : "APPLIED",
-        payload: message.payload,
-      });
-    });
+    if (message.type === "LOAD_CANDIDATE" && deferNextLoad) {
+      deferNextLoad = false;
+      deferredLoad = message;
+      return;
+    }
+    queueMicrotask(() => emitMessage(appliedResponse(message)));
   },
 };
 
@@ -140,6 +147,32 @@ try {
   assert.deepEqual(loads[0].payload, { id: "candidate-b" });
 
   postedMessages.length = 0;
+  deferNextLoad = true;
+  const inFlightOld = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-old" }));
+  flushAnimationFrames();
+  assert.ok(deferredLoad, "older candidate should be in flight before the newer candidate is queued");
+
+  const inFlightLatest = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-latest" }));
+  flushAnimationFrames();
+  const oldMessage = deferredLoad;
+  deferredLoad = null;
+  emitMessage({
+    protocolVersion: oldMessage.protocolVersion,
+    previewSessionId: oldMessage.previewSessionId,
+    nonce: oldMessage.nonce,
+    requestId: oldMessage.requestId,
+    type: "ERROR",
+    payload: { message: "Ship preview candidate was superseded by a newer request." },
+  });
+  const [oldInFlightResult, latestInFlightResult] = await Promise.allSettled([inFlightOld, inFlightLatest]);
+  assert.equal(oldInFlightResult.status, "rejected", "older in-flight candidate must reject");
+  assert.ok(
+    oldInFlightResult.reason instanceof ProductionPreviewStaleError,
+    "older in-flight child rejection must be normalized to ProductionPreviewStaleError",
+  );
+  assert.equal(latestInFlightResult.status, "fulfilled", "latest in-flight candidate should remain authoritative");
+
+  postedMessages.length = 0;
   const queuedBeforeReset = bridge.loadCandidate(Object.freeze({ id: "candidate-before-reset" }));
   const resetSettled = Promise.allSettled([queuedBeforeReset]);
   assert.equal(animationFrames.size, 1, "candidate should be queued before reset");
@@ -169,7 +202,7 @@ try {
   assert.equal(iframeRemoved, true, "bridge teardown should remove its iframe");
   assert.equal(messageListeners.size, 0, "bridge teardown should remove its message listener");
 
-  console.log("Production Preview bridge coalescing/reset test passed: stale waiters reject and queued candidates cannot reload after reset.");
+  console.log("Production Preview bridge coalescing/reset test passed: stale waiters reject, in-flight supersession is normalized, and queued candidates cannot reload after reset.");
 } finally {
   if (originalWindow === undefined) delete globalThis.window;
   else globalThis.window = originalWindow;

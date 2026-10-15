@@ -1,5 +1,8 @@
 import { SpaceTypingAdminApi } from "../../../api";
-import { ProductionPreviewBridge } from "../production-preview-bridge";
+import {
+  ProductionPreviewBridge,
+  ProductionPreviewStaleError,
+} from "../production-preview-bridge";
 import { createProductionPreviewStudio } from "../production-preview-studio";
 import {
   worldProductionPreviewAdapter,
@@ -114,6 +117,21 @@ export function createWorldProductionPreviewPanel(): ProductionEnvironmentPrevie
     studio.dispose();
   });
 
+  const describeReady = (): void => {
+    const item = worlds.find((entry) => entry.id === world.control.value);
+    if (!item) return;
+    const sourceLabel = source.control.value === "draft" ? "Draft context · canonical environment" : "Published runtime";
+    studio.setLifecycle(
+      "ready",
+      `${sourceLabel} · ${item.name} · Galaxy ${item.galaxy} · Stages ${item.stageStart}–${item.stageEnd}`,
+    );
+  };
+
+  const reportError = (error: unknown): void => {
+    if (error instanceof ProductionPreviewStaleError || cleanup.isDisposed()) return;
+    studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
+  };
+
   const apply = async (): Promise<void> => {
     const active = bridge;
     const worldId = world.control.value;
@@ -122,15 +140,11 @@ export function createWorldProductionPreviewPanel(): ProductionEnvironmentPrevie
     studio.setLifecycle("loading", "Applying World in child production renderer…");
     await active.loadCandidate(Object.freeze({ worldId }));
     if (cleanup.isDisposed() || active !== bridge || activeGeneration !== generation) return;
-    const item = worlds.find((entry) => entry.id === worldId);
-    studio.setLifecycle(
-      "ready",
-      item ? `${item.name} · Galaxy ${item.galaxy} · Stages ${item.stageStart}–${item.stageEnd} · production environment` : `${worldId} · production environment`,
-    );
+    describeReady();
   };
 
-  world.control.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
-  source.control.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
+  world.control.addEventListener("change", () => void apply().catch(reportError));
+  source.control.addEventListener("change", describeReady);
 
   void api.requestJson<WorldPreviewResponse>("/api/admin/space-typing/worlds/preview", {
     method: "POST",
@@ -152,13 +166,17 @@ export function createWorldProductionPreviewPanel(): ProductionEnvironmentPrevie
     await mounted.waitUntilReady();
     if (cleanup.isDisposed() || bridge !== mounted) return;
     studio.bindActions({
-      reset: async () => { await mounted.reset(); await apply(); },
-      replay: async () => { await mounted.replay(); await apply(); },
+      reset: async () => {
+        await mounted.reset();
+        await apply();
+      },
+      replay: async () => {
+        await mounted.replay();
+        if (!cleanup.isDisposed() && bridge === mounted) describeReady();
+      },
     });
     await apply();
-  }).catch((error: unknown) => {
-    if (!cleanup.isDisposed()) studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
-  });
+  }).catch(reportError);
 
   return Object.freeze({ root, dispose: cleanup.dispose });
 }
@@ -207,6 +225,18 @@ export function createStageProductionPreviewPanel(): ProductionEnvironmentPrevie
     studio.dispose();
   });
 
+  const describeReady = (): void => {
+    const value = Number(stage.value);
+    if (!Number.isSafeInteger(value) || value < 1 || value > 1000) return;
+    const sourceLabel = source.control.value === "draft" ? "Draft context · canonical mapping" : "Published runtime";
+    studio.setLifecycle("ready", `${sourceLabel} · Stage ${value} · production environment`);
+  };
+
+  const reportError = (error: unknown): void => {
+    if (error instanceof ProductionPreviewStaleError || cleanup.isDisposed()) return;
+    studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
+  };
+
   const apply = async (): Promise<void> => {
     const active = bridge;
     const value = Number(stage.value);
@@ -219,11 +249,11 @@ export function createStageProductionPreviewPanel(): ProductionEnvironmentPrevie
     studio.setLifecycle("loading", `Resolving Stage ${value} in child runtime…`);
     await active.loadCandidate(Object.freeze({ stage: value }));
     if (cleanup.isDisposed() || active !== bridge || activeGeneration !== generation) return;
-    studio.setLifecycle("ready", `Stage ${value} · canonical world mapping · production environment`);
+    describeReady();
   };
 
-  stage.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
-  source.control.addEventListener("change", () => void apply().catch((error: unknown) => studio.setLifecycle("error", error instanceof Error ? error.message : String(error))));
+  stage.addEventListener("change", () => void apply().catch(reportError));
+  source.control.addEventListener("change", describeReady);
 
   void ProductionPreviewBridge.mount(studio.frameHost, stageProductionPreviewAdapter).then(async (mounted) => {
     if (cleanup.isDisposed()) {
@@ -234,13 +264,18 @@ export function createStageProductionPreviewPanel(): ProductionEnvironmentPrevie
     await mounted.waitUntilReady();
     if (cleanup.isDisposed() || bridge !== mounted) return;
     studio.bindActions({
-      reset: async () => { stage.value = "1"; await mounted.reset(); await apply(); },
-      replay: async () => { await mounted.replay(); await apply(); },
+      reset: async () => {
+        stage.value = "1";
+        await mounted.reset();
+        await apply();
+      },
+      replay: async () => {
+        await mounted.replay();
+        if (!cleanup.isDisposed() && bridge === mounted) describeReady();
+      },
     });
     await apply();
-  }).catch((error: unknown) => {
-    if (!cleanup.isDisposed()) studio.setLifecycle("error", error instanceof Error ? error.message : String(error));
-  });
+  }).catch(reportError);
 
   return Object.freeze({ root, dispose: cleanup.dispose });
 }
