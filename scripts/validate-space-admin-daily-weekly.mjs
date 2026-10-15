@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// Daily/Weekly ownership re-audit: 9cd58072..f31a2908 adds Boss 3D runtime plus
-// Admin testing-policy bootstrap/state tests. Daily/Weekly challenge identity,
+// Daily/Weekly ownership re-audit: f31a2908..22a35dd changes only the A10 testing
+// selection capability/bootstrap/tests. Daily/Weekly challenge identity,
 // deterministic runtime, browser-local persistence and read-only Admin ownership
 // asserted below are unchanged.
-const DAILY_WEEKLY_AUDITED_CHILD_SHA = "f31a2908eaefb3d480f29781f3300074ec4e0a2c";
+const DAILY_WEEKLY_AUDITED_CHILD_SHA = "22a35dd24e25cd9e6881aba350977eb6f42889f2";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-daily-weekly.v1.json"));
 const [page, router, server, phaseMapSource, weeklyRuntime, weeklyAdmin, challengeSource] = await Promise.all([
