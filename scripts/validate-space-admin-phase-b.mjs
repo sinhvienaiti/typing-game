@@ -15,7 +15,7 @@ const settingsPhaseB = await readSurface("portal/src/admin/space-typing-settings
 const featureGatesPhaseB = await readText("portal/src/admin/space-typing-feature-gates-phase-b.ts");
 const contractReader = await readText("portal/src/admin/space-typing-contract-reader.ts");
 const phaseB = `${phaseBRouter}\n${phaseBCore}`;
-const stagesPhaseB = await readText("portal/src/admin/space-typing-stages-phase-b.ts");
+const stagesPhaseB = await readSurface("portal/src/admin/space-typing-stages-phase-b.ts", "portal/src/admin/space-typing-stages-phase-b-legacy.ts");
 const audioPhaseB = await readText("portal/src/admin/space-typing-audio-phase-b.ts");
 const sfxPhaseB = await readText("portal/src/admin/space-typing-sfx-phase-b.ts");
 const worldMusicPhaseB = await readText("portal/src/admin/space-typing-world-music-phase-b.ts");
@@ -232,6 +232,8 @@ assert.match(server, /\/api\/admin\/space-typing\/bosses\/preview/);
 assert.match(phaseBRouter, /renderPhaseBStages/);
 assert.match(phaseBRouter, /\$\{BASE\}\/stages/);
 assert.match(stagesPhaseB, /B06\.6/);
+assert.match(stagesPhaseB, /space-typing-stages-phase-b-legacy/);
+assert.match(stagesPhaseB, /createStageProductionPreviewPanel/);
 assert.match(stagesPhaseB, /\/api\/admin\/space-typing\/stages\/preview/);
 assert.match(stagesPhaseB, /enemyBudget/);
 assert.match(stagesPhaseB, /eliteChance/);
