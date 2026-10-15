@@ -16,7 +16,8 @@ const [
   skillLegacy,
   equipmentWrapper,
   equipmentLegacy,
-  productionRuntimePanel,
+  skillRuntimePanel,
+  equipmentRuntimePanel,
   sharedStudio,
   sharedHelp,
 ] = await Promise.all([
@@ -28,6 +29,7 @@ const [
   read("portal/src/admin/space-typing-equipment-phase-b.ts"),
   read("portal/src/admin/space-typing-equipment-phase-b-legacy.ts"),
   read("portal/src/admin/v2/preview/panels/system-runtime-preview.ts"),
+  read("portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts"),
   read("portal/src/admin/v2/asset-tuning-studio.ts"),
   read("portal/src/admin/v2/admin-help.ts"),
 ]);
@@ -67,28 +69,28 @@ for (const fakeField of ["effectPreset", "effectAssetVersionId", "vfxAssetVersio
   forbidText(equipmentPolicy, fakeField, `Equipment policy must not invent ${fakeField}`);
 }
 
-// A10.5 deliberately split each page into a stable authoring surface plus a
-// production-runtime preview wrapper. Validate the composed behavior rather
-// than freezing every historical token into the wrapper file itself.
-requireText(skillWrapper, "renderLegacyPhaseBSkills", "Skills retain the established authoring editor");
-requireText(skillWrapper, "createSkillProductionRuntimePanel", "Skills attach the A10.5 production runtime panel");
-requireText(equipmentWrapper, "renderLegacyPhaseBEquipment", "Equipment retain the established authoring editor");
-requireText(equipmentWrapper, "createEquipmentProductionRuntimePanel", "Equipment attach the A10.5 production runtime panel");
+// A10.5 wraps the stable authoring editors with production-runtime panels.
+requireText(skillWrapper, "renderLegacySkills", "Skills retain the established authoring editor");
+requireText(skillWrapper, "createSkillProductionRuntimePanel", "Skills attach the production SkillEngine panel");
+requireText(equipmentWrapper, "renderLegacyEquipment", "Equipment retain the established authoring editor");
+requireText(equipmentWrapper, "createEquipmentProductionRuntimePanel", "Equipment attach the production equipment resolver panel");
 
-requireText(skillSurface, "const validated = await previewSkills(policy)", "Skills validate candidates through the canonical child preview");
-requireText(skillSurface, "api.createRevision", "Skills keep immutable Draft creation");
-requireText(skillSurface, "Publish from History to activate it", "Skills keep activation centralized in History");
-forbidText(skillSurface, "api.publish(", "Skills editor cannot bypass History with direct publish");
-requireText(equipmentSurface, "const validated = await previewEquipment(policy)", "Equipment validate candidates through the canonical child preview");
-requireText(equipmentSurface, "api.createRevision", "Equipment keep immutable Draft creation");
-requireText(equipmentSurface, "Publish from History to activate it", "Equipment keep activation centralized in History");
-forbidText(equipmentSurface, "api.publish(", "Equipment editor cannot bypass History with direct publish");
-
+for (const [surface, previewCall, name] of [
+  [skillSurface, "const validated = await previewSkills(policy)", "Skills"],
+  [equipmentSurface, "const validated = await previewEquipment(policy)", "Equipment"],
+]) {
+  requireText(surface, previewCall, `${name} validate candidates through the canonical child preview`);
+  requireText(surface, "api.createRevision", `${name} keep immutable Draft creation`);
+  requireText(surface, "Publish from History to activate it", `${name} keep activation centralized in History`);
+  forbidText(surface, "api.publish(", `${name} editor cannot bypass History with direct publish`);
+  requireText(surface, "createAssetTuningCapabilityState", `${name} use shared capability states`);
+  requireText(surface, "AdminHelpScope, createAdminFieldShell", `${name} retain shared field-help primitives`);
+  requireText(surface, "helpScope.observeRoot(page)", `${name} clean help resources on route detach`);
+}
 for (const [surface, labels, name] of [
   [skillSurface, ["Gameplay Policy", "Media / VFX"], "Skills"],
   [equipmentSurface, ["Gameplay Policy", "Registry Icon", "Media Binding", "VFX / SFX"], "Equipment"],
 ]) {
-  requireText(surface, "createAssetTuningCapabilityState", `${name} use shared capability states`);
   for (const label of labels) requireText(surface, `label: "${label}"`, `${name} expose ${label}`);
 }
 requireText(skillSurface, 'status: "AVAILABLE"', "Skills expose proven gameplay authoring as available");
@@ -99,27 +101,22 @@ requireText(equipmentSurface, 'status: "DEFERRED / UNSUPPORTED"', "Equipment kee
 
 requireText(sharedHelp, "export function createAdminFieldShell", "Shared V2 help exposes field shells");
 requireText(sharedHelp, "export class AdminHelpScope", "Shared V2 help exposes lifecycle-scoped tooltips");
-requireText(skillSurface, "AdminHelpScope, createAdminFieldShell", "Skills retain shared field-help primitives");
-requireText(skillSurface, "helpScope.observeRoot(page)", "Skills clean help resources on route detach");
-requireText(equipmentSurface, "AdminHelpScope, createAdminFieldShell", "Equipment retain shared field-help primitives");
-requireText(equipmentSurface, "helpScope.observeRoot(page)", "Equipment clean help resources on route detach");
+requireText(sharedStudio, "export function createAssetTuningCapabilityState", "A6 retains shared capability-state primitive");
+requireText(sharedStudio, "export function createAssetTuningStudio", "Shared Studio remains available for production-backed domains");
 
-// Production preview must exercise child-owned runtime semantics, not merely a
-// registry diff relabeled as Live Preview.
-for (const token of ["SkillEngine", "runtimePreview", "energyBefore", "energyAfter", "Draft candidate executed through production SkillEngine"]) {
-  requireText(productionRuntimePanel, token, `Skill production runtime preview evidence ${token}`);
+// Each wrapper must hit the child-owned production behavior actually used by gameplay.
+for (const token of ["SkillEngine", "runtimePreview", "energyBefore", "energyAfter", "Draft candidate executed through production SkillEngine", "/api/admin/space-typing/skills/preview"]) {
+  requireText(skillRuntimePanel, token, `Skill production runtime evidence ${token}`);
 }
-for (const token of ["resolveEquipmentPerks", "perkEffects", "Effective stats", "Draft candidate resolved through production equipment perks"]) {
-  requireText(productionRuntimePanel, token, `Equipment production runtime preview evidence ${token}`);
+for (const token of ["resolveEquipmentPerks", "perkEffects", "Effective stats", "Draft candidate resolved through production equipment perks", "/api/admin/space-typing/equipment/preview"]) {
+  requireText(equipmentRuntimePanel, token, `Equipment production runtime evidence ${token}`);
 }
-requireText(productionRuntimePanel, "/api/admin/space-typing/skills/preview", "Skill production panel uses canonical preview endpoint");
-requireText(productionRuntimePanel, "/api/admin/space-typing/equipment/preview", "Equipment production panel uses canonical preview endpoint");
+// Numeric one is a real effect for non-multiplier perks such as stageBlocks.
+requireText(equipmentRuntimePanel, "MULTIPLIER_EFFECTS.has(key) ? value !== 1 : value !== 0", "Equipment preview distinguishes multiplier baseline 1 from real numeric effect 1");
 
 for (const fakeUi of ["effectPreset", "vfxAssetVersionId", "sfxAssetVersionId", "iconAssetVersionId", "imageAssetVersionId"]) {
   forbidText(skillSurface, fakeUi, `Skills UI must not expose unowned ${fakeUi}`);
   forbidText(equipmentSurface, fakeUi, `Equipment UI must not expose unowned ${fakeUi}`);
 }
-requireText(sharedStudio, "export function createAssetTuningCapabilityState", "A6 retains shared capability-state primitive");
-requireText(sharedStudio, "export function createAssetTuningStudio", "Shared Studio remains available for production-backed domains");
 
-console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while A10.5 wrappers exercise child-owned production runtime previews.");
+console.log("Space Typing Admin A6: PASS — Skills/Equipment preserve canonical Draft authoring and capability gates while A10.5 wrappers exercise child-owned SkillEngine/equipment resolver previews.");
