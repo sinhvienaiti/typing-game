@@ -59,7 +59,6 @@ for (const status of ["SUPPORTED NOW", "REQUIRES CANONICAL MIGRATION", "READ-ONL
   requireText(capabilities, `status: "${status}"`, `A7 matrix preserves ${status}`);
 }
 
-// Enemy projectileMode remains the proven writable production seam.
 requireText(enemyPolicy, "projectileMode: AdminEnemyProjectileMode | null", "Enemy runtime session carries projectileMode");
 requireText(enemyPolicy, 'const POLICY_KEYS = new Set(["configRevision", "projectileMode", "enemies"])', "Enemy runtime policy accepts projectileMode");
 requireText(enemyPolicy, "sanitizeProjectileMode(policy.projectileMode)", "Enemy runtime policy materializes projectileMode");
@@ -68,21 +67,18 @@ requireText(enemyProjectilePolicy, "resolveEnemyProjectileMode", "Enemy projecti
 requireText(enemyProjectilePolicy, "normalEnemyProjectilesEnabled", "Enemy projectile policy exposes production consumer");
 requireText(capabilities, 'productionConsumer: "src/combat/enemy-projectile-policy.ts::normalEnemyProjectilesEnabled() consumed by Game.ts"', "A7 records projectile production consumer");
 
-// minStage remains migration data until a production consumer exists.
 requireText(enemyPolicy, "minStage?: number", "Enemy policy still preserves minStage migration data");
 requireText(enemyPreview, "minStage: override?.minStage ?? base.minStage", "Enemy preview can materialize minStage candidate");
 forbidText(enemyRegistry, "activeEnemyRuntimeOverride", "Bundled enemy registry must not be mistaken for Admin-aware admission resolver");
 forbidText(worldRoster, "activeEnemyRuntimeOverride", "World roster must not be mistaken for consuming Enemy minStage override");
 for (const token of ["rewardPower", "visual:", "spawnFx", "hitFx", "deathFx"]) requireText(enemyRegistry, token, `Enemy registry owns bundled ${token}`);
 
-// Boss metadata remains previewable migration data only.
 requireText(bossPolicy, "name?: string", "Boss policy preserves name migration data");
 requireText(bossPolicy, "title?: string", "Boss policy preserves title migration data");
 requireText(bossPreview, 'authorableFields: ["name", "title"]', "Boss registry preview documents preserved envelope");
 forbidText(bossIdentity, "activeBossRuntimeOverride", "bossIdentityForStage must not be mistaken for consuming Admin Boss metadata");
 requireText(bossIdentity, "export function bossIdentityForStage", "Bundled Boss production identity resolver remains canonical");
 
-// Enemy is still a full editor plus the A10.5 production combat arena.
 for (const token of [
   "createAssetTuningCapabilityState",
   'label: "Normal Enemy Projectile Policy"',
@@ -95,9 +91,7 @@ for (const token of [
 forbidText(enemyPage, "api.publish(", "Enemy editor cannot bypass History with direct publish");
 forbidText(enemyPage, "Canonical runtime consumer: Enemy spawn profile minimum-stage gate", "Enemy page must not invent minStage runtime ownership");
 
-// A10.5 wrapped the stable Boss read-only inspector with production rendering.
-// Validate both layers rather than freezing legacy presentation into one file.
-requireText(bossWrapper, "renderLegacyPhaseBBosses", "Boss wrapper retains established canonical inspector");
+requireText(bossWrapper, "renderLegacyBosses", "Boss wrapper retains established canonical inspector");
 requireText(bossWrapper, "createBossProductionPreviewPanel", "Boss wrapper attaches production preview panel");
 for (const token of [
   "createAssetTuningCapabilityState",
