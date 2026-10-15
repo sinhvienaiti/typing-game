@@ -1,8 +1,8 @@
-// A10.5 re-audit: 4f62c94..6c57a2b changes only isolated Admin preview
-// modules for Enemy/Boss/Skill/Equipment/World/Stage. Shop policy, contracts,
-// generation, pricing, availability, offers, services and transaction ownership
-// sources remain unchanged.
-export const SHOP_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
+// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
+// Admin preview host Ship mutation lifecycle plus its focused queue test. Shop
+// policy, contracts, generation, pricing, availability, offers, services and
+// transaction ownership sources remain unchanged.
+export const SHOP_AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
 
 export const SHOP_TABS = Object.freeze([
   "Catalog",

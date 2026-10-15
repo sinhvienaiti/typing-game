@@ -17,10 +17,13 @@ export const resolveSpaceTypingAssetPreviewTarget = resolveSpaceTypingProduction
 
 /**
  * Compatibility facade for the existing Ships page. The shared A10.5
- * ProductionPreviewBridge now owns isolation, security, stale cancellation and
- * lifecycle; this facade keeps A5 callers source-compatible.
+ * ProductionPreviewBridge owns isolation, security, stale cancellation and
+ * lifecycle; this facade keeps A5 callers source-compatible and preserves the
+ * required candidate-before-scenario/tuning ordering while Ship media prepares.
  */
 export class SpaceTypingAssetPreviewBridge {
+  private latestCandidate: Promise<unknown> = Promise.resolve();
+
   private constructor(
     private readonly bridge: ProductionPreviewBridge<
       ShipProductionPreviewCandidate,
@@ -51,14 +54,18 @@ export class SpaceTypingAssetPreviewBridge {
   }
 
   loadShip(candidate: ShipProductionPreviewCandidate): Promise<unknown> {
-    return this.bridge.loadCandidate(candidate);
+    const operation = this.bridge.loadCandidate(candidate);
+    this.latestCandidate = operation;
+    return operation;
   }
 
   async setScenario(scenario: ShipProductionPreviewScenario): Promise<unknown> {
+    await this.latestCandidate;
     return this.bridge.setScenario(scenario);
   }
 
   async setTuning(visual: Readonly<Record<string, unknown>>): Promise<unknown> {
+    await this.latestCandidate;
     return this.bridge.setTuning(visual);
   }
 
@@ -71,6 +78,7 @@ export class SpaceTypingAssetPreviewBridge {
   }
 
   async replay(): Promise<void> {
+    await this.latestCandidate;
     return this.bridge.replay();
   }
 

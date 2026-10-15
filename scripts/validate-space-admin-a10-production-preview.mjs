@@ -6,6 +6,7 @@ const paths = {
   environments: "portal/src/admin/v2/preview/panels/world-stage-production-preview.ts",
   systems: "portal/src/admin/v2/preview/panels/system-runtime-preview.ts",
   equipment: "portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts",
+  shipFacade: "portal/src/admin/space-typing-asset-preview.ts",
   router: "portal/src/admin/space-typing-phase-b.ts",
   vfxPage: "portal/src/admin/space-typing-vfx-phase-b.ts",
   childHost: "games/space-typing/src/admin/asset-preview-main.ts",
@@ -43,15 +44,25 @@ requireText(source.combatVfx, "api.previewShips()", "VFX context comes from cano
 requireText(source.childHost, "new PlayerShotSystem<number>()", "child preview owns production PlayerShotSystem");
 requireText(source.childHost, "shots.fire({", "child fire scenario uses production projectile simulation");
 requireText(source.childHost, "new Sfx()", "child fire preview uses production Sfx path");
+requireText(source.childHost, "AssetPreviewMutationQueue", "child Ship preview serializes async candidate/tuning mutations");
+requireText(source.childHost, 'code: "STALE_PREVIEW_COMMAND"', "child preview marks superseded commands explicitly");
 requireText(source.childShots, "export class PlayerShotSystem", "production projectile system remains first-class");
 forbidText(source.combatVfx, "CanvasRenderingContext2D", "Parent VFX panel must not implement a second effects renderer");
 requireText(source.vfxPage, "createCombatVfxProductionPreviewPanel", "VFX first-class page exposes production combat preview");
 
+requireText(source.shipFacade, "private latestCandidate", "Ships facade tracks the latest production candidate operation");
+requireText(source.shipFacade, "this.latestCandidate = operation", "Ships facade updates candidate ordering on every load");
+requireText(source.shipFacade, "await this.latestCandidate", "Ships scenario/tuning waits for candidate materialization");
+
 requireText(source.systems, '"/api/admin/space-typing/skills/preview"', "Skill preview uses canonical preview endpoint");
 requireText(source.systems, "production SkillEngine", "Skill UI states production engine ownership");
+requireText(source.systems, "let generation = 0", "Skill preview uses latest-request-wins generation control");
+requireText(source.systems, "if (current !== generation) return", "Skill preview ignores stale async responses");
 requireText(source.equipment, '"/api/admin/space-typing/equipment/preview"', "Equipment preview uses canonical preview endpoint");
 requireText(source.equipment, "MULTIPLIER_EFFECTS", "Equipment effect baseline distinguishes neutral multipliers from active count=1 effects");
 requireText(source.equipment, "Nothing was persisted", "Equipment Draft preview remains isolated");
+requireText(source.equipment, "let generation = 0", "Equipment preview uses latest-request-wins generation control");
+requireText(source.equipment, "if (current !== generation) return", "Equipment preview ignores stale async responses");
 
 for (const kind of ["full-runtime", "production-presentation", "simulation-data", "not-applicable"]) {
   requireText(source.classification, `kind: "${kind}"`, `classification ${kind} exists`);
