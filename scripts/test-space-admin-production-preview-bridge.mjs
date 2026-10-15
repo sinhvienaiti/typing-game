@@ -27,8 +27,8 @@ const animationFrames = new Map();
 const postedMessages = [];
 let nextAnimationFrame = 1;
 let iframeRemoved = false;
-let deferNextLoad = false;
-let deferredLoad = null;
+let deferNextType = null;
+let deferredCommand = null;
 
 const emitMessage = (data) => {
   const event = { origin, source: frameWindow, data };
@@ -48,9 +48,9 @@ const frameWindow = {
   postMessage(message, targetOrigin) {
     assert.equal(targetOrigin, origin);
     postedMessages.push(message);
-    if (message.type === "LOAD_CANDIDATE" && deferNextLoad) {
-      deferNextLoad = false;
-      deferredLoad = message;
+    if (message.type === deferNextType) {
+      deferNextType = null;
+      deferredCommand = message;
       return;
     }
     queueMicrotask(() => emitMessage(appliedResponse(message)));
@@ -110,6 +110,7 @@ try {
     defaultScenario: "idle",
     candidatePayload: (candidate) => candidate,
     scenarioPayload: (scenario) => ({ scenario }),
+    tuningPayload: (tuning) => ({ visual: tuning }),
   });
   const bridge = new ProductionPreviewBridge(
     Object.freeze({ origin, url: new URL(`${origin}/admin-preview.html`) }),
@@ -147,15 +148,15 @@ try {
   assert.deepEqual(loads[0].payload, { id: "candidate-b" });
 
   postedMessages.length = 0;
-  deferNextLoad = true;
+  deferNextType = "LOAD_CANDIDATE";
   const inFlightOld = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-old" }));
   flushAnimationFrames();
-  assert.ok(deferredLoad, "older candidate should be in flight before the newer candidate is queued");
+  assert.ok(deferredCommand, "older candidate should be in flight before the newer candidate is queued");
 
   const inFlightLatest = bridge.loadCandidate(Object.freeze({ id: "candidate-in-flight-latest" }));
   flushAnimationFrames();
-  const oldMessage = deferredLoad;
-  deferredLoad = null;
+  const oldMessage = deferredCommand;
+  deferredCommand = null;
   emitMessage({
     protocolVersion: oldMessage.protocolVersion,
     previewSessionId: oldMessage.previewSessionId,
@@ -171,6 +172,21 @@ try {
     "older in-flight child rejection must be normalized to ProductionPreviewStaleError",
   );
   assert.equal(latestInFlightResult.status, "fulfilled", "latest in-flight candidate should remain authoritative");
+
+  deferNextType = "SET_TUNING";
+  const staleTuning = bridge.setTuning(Object.freeze({ glow: 1.25 }));
+  assert.ok(deferredCommand, "tuning command should be in flight before stale response");
+  const tuningMessage = deferredCommand;
+  deferredCommand = null;
+  emitMessage({
+    protocolVersion: tuningMessage.protocolVersion,
+    previewSessionId: tuningMessage.previewSessionId,
+    nonce: tuningMessage.nonce,
+    requestId: tuningMessage.requestId,
+    type: "ERROR",
+    payload: { message: "Ship preview tuning was superseded.", code: "STALE_PREVIEW_COMMAND" },
+  });
+  await assert.rejects(staleTuning, ProductionPreviewStaleError);
 
   postedMessages.length = 0;
   const queuedBeforeReset = bridge.loadCandidate(Object.freeze({ id: "candidate-before-reset" }));
@@ -202,7 +218,7 @@ try {
   assert.equal(iframeRemoved, true, "bridge teardown should remove its iframe");
   assert.equal(messageListeners.size, 0, "bridge teardown should remove its message listener");
 
-  console.log("Production Preview bridge coalescing/reset test passed: stale waiters reject, in-flight supersession is normalized, and queued candidates cannot reload after reset.");
+  console.log("Production Preview bridge coalescing/reset test passed: stale waiters, in-flight supersession, child stale codes, and reset invalidation are normalized.");
 } finally {
   if (originalWindow === undefined) delete globalThis.window;
   else globalThis.window = originalWindow;

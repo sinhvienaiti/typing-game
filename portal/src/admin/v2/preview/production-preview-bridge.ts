@@ -9,6 +9,7 @@ const READY_TIMEOUT_MS = 8_000;
 const COMMAND_TIMEOUT_MS = 5_000;
 const TOKEN_PATTERN = /^[A-Za-z0-9._:-]{8,160}$/;
 const RESPONSE_TYPES = new Set(["READY", "APPLIED", "ERROR", "DISPOSED"]);
+const STALE_COMMAND_CODE = "STALE_PREVIEW_COMMAND";
 
 type PreviewCommandType =
   | "LOAD_CANDIDATE"
@@ -64,6 +65,10 @@ function safeMessage(value: unknown): string {
   return typeof input?.message === "string" && input.message.trim().length > 0
     ? input.message
     : "Space Typing production preview rejected the command.";
+}
+
+function isStaleCommandPayload(value: unknown): boolean {
+  return object(value)?.code === STALE_COMMAND_CODE;
 }
 
 function parseResponse(value: unknown, expectedSession: string, expectedNonce: string): PreviewResponse | null {
@@ -319,7 +324,11 @@ export class ProductionPreviewBridge<TCandidate, TScenario extends string, TTuni
     this.pending.delete(response.requestId);
     window.clearTimeout(pending.timeout);
     if (response.type === "ERROR") {
-      pending.reject(new Error(safeMessage(response.payload)));
+      pending.reject(
+        isStaleCommandPayload(response.payload)
+          ? new ProductionPreviewStaleError()
+          : new Error(safeMessage(response.payload)),
+      );
       return;
     }
     if (response.type !== pending.expectedType) {
