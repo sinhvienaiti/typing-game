@@ -68,6 +68,15 @@ const NAV_GROUPS: readonly NavGroup[] = [
     ],
   },
   {
+    id: "economy-live-ops",
+    label: "Economy & Live Ops",
+    description: "Manage canonical Shop merchandising and the Live Ops controls that have real runtime owners.",
+    items: [
+      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▱", description: "Manage supported Shop offers, pricing and merchandising through the canonical Shop owner." },
+      { label: "Live Ops", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Manage runtime-owned Live Ops controls and see unsupported scheduling or announcements fail closed." },
+    ],
+  },
+  {
     id: "media",
     label: "Media",
     description: "Browse canonical game media, upload Admin-managed assets and keep source-owned runtime media read-only.",
@@ -81,10 +90,11 @@ const NAV_GROUPS: readonly NavGroup[] = [
   {
     id: "system",
     label: "System",
-    description: "Manage safe global settings and the revision lifecycle.",
+    description: "Manage safe global settings, access review and the revision lifecycle.",
     items: [
       { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },
       { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", description: "Manage global game defaults, network behavior and maintenance settings." },
+      { label: "Roles & Permissions", path: `${ADMIN_BASE}/roles`, icon: "◈", description: "Review server-enforced role templates, dangerous permissions and this deployment's effective access." },
       { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts, validate complete change scope, publish or roll back safely." },
     ],
   },
@@ -101,14 +111,14 @@ const NAV_GROUPS: readonly NavGroup[] = [
 
 const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
   [`${ADMIN_BASE}/analytics`]: "Analytics / Telemetry",
-  [`${ADMIN_BASE}/shop`]: "Shop Runtime Contract",
+  [`${ADMIN_BASE}/shop`]: "Shop",
   [`${ADMIN_BASE}/currencies`]: "Currencies",
   [`${ADMIN_BASE}/rewards`]: "Rewards & Drops",
   [`${ADMIN_BASE}/warp`]: "Stamina / Warp",
   [`${ADMIN_BASE}/missions`]: "Missions",
   [`${ADMIN_BASE}/daily-weekly`]: "Daily / Weekly",
   [`${ADMIN_BASE}/expedition`]: "Expedition",
-  [`${ADMIN_BASE}/events`]: "Events",
+  [`${ADMIN_BASE}/events`]: "Live Ops",
   [`${ADMIN_BASE}/duel`]: "Duel Settings",
   [`${ADMIN_BASE}/ranked`]: "Ranked",
   [`${ADMIN_BASE}/alternative-modes`]: "Alternative Modes",
@@ -118,6 +128,7 @@ const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
   [`${ADMIN_BASE}/feature-gates`]: "Feature Gates",
   [`${ADMIN_BASE}/qa`]: "QA Sandbox",
   [`${ADMIN_BASE}/worlds-stages`]: "Stages",
+  [`${ADMIN_BASE}/roles`]: "Roles & Permissions",
 };
 
 function element<K extends keyof HTMLElementTagNameMap>(
