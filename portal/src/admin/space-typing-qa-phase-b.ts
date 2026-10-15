@@ -126,18 +126,18 @@ export function renderPhaseBQa(): HTMLElement {
   root.innerHTML = `
     <header class="space-admin-page__header">
       <div>
-        <p class="st-admin-eyebrow">Developer · QA Sandbox</p>
-        <h1>Test Lab Launcher</h1>
-        <p>Launch the full Space Typing Developer Test Lab directly in its own isolated runtime session. Admin only opens the canonical child Test Lab; sandbox mutations never publish or autosave Campaign progression.</p>
+        <p class="st-admin-eyebrow">Developer · Test Lab</p>
+        <h1>Developer Test Lab</h1>
+        <p>Run the canonical Space Typing Test Lab directly inside Admin. The embedded child runtime remains isolated and never publishes or autosaves Campaign progression.</p>
       </div>
       <div class="space-admin-page__badges">
-        <span class="st-admin-badge">RUNTIME-BACKED · EPHEMERAL</span>
+        <span class="st-admin-badge">EMBEDDED CHILD RUNTIME</span>
         <span class="st-admin-badge">PRODUCTION SAVE · NO WRITE</span>
       </div>
     </header>
     <p class="st-admin-notice" data-qa-status aria-live="polite">Loading canonical QA ownership…</p>
     <div data-qa-failure></div>
-    <div class="space-admin-grid" data-qa-content></div>
+    <div data-qa-content></div>
   `;
 
   const status = root.querySelector<HTMLElement>("[data-qa-status]");
@@ -150,61 +150,100 @@ export function renderPhaseBQa(): HTMLElement {
     const generation = ++loadGeneration;
     failure.replaceChildren();
     content.replaceChildren();
-    setAdminStatus(status, "Loading canonical QA ownership and direct Test Lab launcher…", "loading");
+    setAdminStatus(status, "Loading canonical QA ownership and embedded Test Lab…", "loading");
 
     void Promise.all([fetchQaContract(), resolveSpaceTypingAppUrl()]).then(([contract, appUrl]) => {
       if (generation !== loadGeneration) return;
       const qa = contract.qa;
-      setAdminStatus(status, `${qa.catalogDomains.length} runtime QA domains · isolated session · production persistence closed.`, "success");
+      const testLabUrl = directTestLabUrl(appUrl);
+      setAdminStatus(status, `${qa.catalogDomains.length} runtime QA domains · embedded isolated session · production persistence closed.`, "success");
       content.innerHTML = `
-        <article class="st-admin-card">
-          <div class="st-admin-card__header">
-            <div><p class="st-admin-eyebrow">Execute</p><h2>Full Developer Test Lab</h2></div>
-            <span class="st-admin-badge">REAL RUNTIME</span>
+        <article class="st-admin-card stx-qa-embed-card">
+          <div class="st-admin-card__header stx-qa-embed-header">
+            <div>
+              <p class="st-admin-eyebrow">Live · Canonical child runtime</p>
+              <h2>Full Developer Test Lab</h2>
+              <p>The exact child-owned Test Lab runs below inside Admin; no parent-side Game/Test Lab implementation is duplicated.</p>
+            </div>
+            <div class="stx-qa-embed-actions">
+              <button type="button" class="st-admin-btn" data-qa-reload>Reload Test Lab</button>
+              <button type="button" class="st-admin-btn" data-qa-standalone>Open standalone ↗</button>
+            </div>
           </div>
-          <p>The child runtime owns the canonical <code>Developer Test Lab</code>. Admin opens that full Test Lab directly instead of reimplementing Game logic or requiring a second launcher click.</p>
-          <p><strong>Apply boundary:</strong> ${escapeHtml(qa.applyBoundary)}</p>
-          <p><strong>Runtime owner:</strong> ${escapeHtml(qa.runtimeOwner)}</p>
-          <button type="button" class="st-admin-btn primary" data-qa-launch>Open Full Developer Test Lab ↗</button>
-          <p class="st-admin-notice">The new game window opens directly into the built-in <strong>Developer Test Lab</strong>. Start/Restart, Pause/Resume and Reset Arena still operate only on the isolated Test Lab session.</p>
+          <div class="stx-qa-frame-shell" data-qa-frame-shell>
+            <div class="stx-qa-frame-status" data-qa-frame-status aria-live="polite">Starting isolated Test Lab runtime…</div>
+            <iframe
+              class="stx-qa-testlab-frame"
+              data-qa-testlab-frame
+              title="Space Typing Developer Test Lab"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups"
+              allow="autoplay; microphone; fullscreen"
+              referrerpolicy="same-origin"
+              loading="eager"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p class="st-admin-notice">Embedded session only · apply boundary: <strong>${escapeHtml(qa.applyBoundary)}</strong> · production Campaign: <strong>${escapeHtml(qa.persistence.productionCampaign)}</strong>.</p>
         </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Safety</p><h2>Persistence Boundary</h2></div></div>
-          <p><strong>Session:</strong> ${escapeHtml(qa.persistence.session)}</p>
-          <p><strong>Preset:</strong> ${escapeHtml(qa.persistence.preset)} · <code>${escapeHtml(qa.persistence.presetKey)}</code></p>
-          <p><strong>Production Campaign:</strong> ${escapeHtml(qa.persistence.productionCampaign)}</p>
-          <p><strong>Sandbox mutation:</strong> ${String(qa.sandboxMutationCapability)}</p>
-          <p><strong>Production persistence write:</strong> ${String(qa.productionPersistenceWriteCapability)}</p>
-          <p><strong>Publish:</strong> ${String(qa.publishCapability)}</p>
-          <p class="st-admin-notice">NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE</p>
-        </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Lifecycle</p><h2>Executable Actions</h2></div></div>
-          ${renderList(qa.lifecycleActions)}
-          <p><strong>Inspection:</strong></p>
-          ${renderList(qa.inspection)}
-        </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Coverage</p><h2>QA Catalog Domains</h2></div></div>
-          <p>${qa.catalogDomains.map((domain) => `<span class="st-admin-chip">${escapeHtml(domain)}</span>`).join(" ") || "No domains exposed."}</p>
-          <p><strong>Canonical sources:</strong></p>
-          ${renderList(qa.runtimeSources)}
-        </article>
-        <article class="st-admin-card">
-          <div class="st-admin-card__header"><div><p class="st-admin-eyebrow">Closed</p><h2>Unsupported Production Writes</h2></div></div>
-          ${renderList(qa.unsupportedAdminOperations)}
-        </article>
+        <details class="st-admin-card stx-qa-details">
+          <summary>QA ownership, lifecycle and safety details</summary>
+          <div class="stx-grid stx-qa-details-grid">
+            <section>
+              <p class="st-admin-eyebrow">Safety</p>
+              <h3>Persistence Boundary</h3>
+              <p><strong>Session:</strong> ${escapeHtml(qa.persistence.session)}</p>
+              <p><strong>Preset:</strong> ${escapeHtml(qa.persistence.preset)} · <code>${escapeHtml(qa.persistence.presetKey)}</code></p>
+              <p><strong>Production persistence write:</strong> ${String(qa.productionPersistenceWriteCapability)}</p>
+              <p><strong>Publish:</strong> ${String(qa.publishCapability)}</p>
+              <p class="st-admin-notice">NO FAKE QA CRUD · NO CAMPAIGN SAVE BRIDGE</p>
+            </section>
+            <section>
+              <p class="st-admin-eyebrow">Lifecycle</p>
+              <h3>Executable Actions</h3>
+              ${renderList(qa.lifecycleActions)}
+              <p><strong>Inspection:</strong></p>
+              ${renderList(qa.inspection)}
+            </section>
+            <section>
+              <p class="st-admin-eyebrow">Coverage</p>
+              <h3>QA Catalog Domains</h3>
+              <p>${qa.catalogDomains.map((domain) => `<span class="st-admin-chip">${escapeHtml(domain)}</span>`).join(" ") || "No domains exposed."}</p>
+              <p><strong>Runtime owner:</strong> ${escapeHtml(qa.runtimeOwner)}</p>
+            </section>
+            <section>
+              <p class="st-admin-eyebrow">Closed</p>
+              <h3>Unsupported Production Writes</h3>
+              ${renderList(qa.unsupportedAdminOperations)}
+            </section>
+          </div>
+        </details>
       `;
 
-      const launch = content.querySelector<HTMLButtonElement>("[data-qa-launch]");
-      launch?.addEventListener("click", () => window.open(directTestLabUrl(appUrl), "_blank", "noopener,noreferrer"));
+      const frame = content.querySelector<HTMLIFrameElement>("[data-qa-testlab-frame]");
+      const frameStatus = content.querySelector<HTMLElement>("[data-qa-frame-status]");
+      const reload = content.querySelector<HTMLButtonElement>("[data-qa-reload]");
+      const standalone = content.querySelector<HTMLButtonElement>("[data-qa-standalone]");
+      if (!frame || !frameStatus) throw new Error("Embedded Test Lab frame failed to mount.");
+
+      const startEmbeddedRuntime = (): void => {
+        frameStatus.textContent = "Starting isolated Test Lab runtime…";
+        frameStatus.classList.remove("ready");
+        frame.src = testLabUrl;
+      };
+      frame.addEventListener("load", () => {
+        frameStatus.textContent = "Embedded Test Lab runtime loaded.";
+        frameStatus.classList.add("ready");
+      });
+      reload?.addEventListener("click", startEmbeddedRuntime);
+      standalone?.addEventListener("click", () => window.open(testLabUrl, "_blank", "noopener,noreferrer"));
+      startEmbeddedRuntime();
     }).catch((error: unknown) => {
       if (generation !== loadGeneration) return;
       content.replaceChildren();
-      setAdminStatus(status, "QA Sandbox unavailable. Test Lab launch is disabled.", "error");
+      setAdminStatus(status, "QA Sandbox unavailable. Embedded Test Lab is disabled.", "error");
       renderAdminFailureState(failure, {
         title: "QA Sandbox unavailable",
-        fallbackMessage: "Unable to validate the isolated qa.execute contract and Space Typing launcher. No Test Lab action is available until Retry succeeds.",
+        fallbackMessage: "Unable to validate the isolated qa.execute contract and Space Typing runtime. The embedded Test Lab is unavailable until Retry succeeds.",
         error,
         onRetry: load,
       });
