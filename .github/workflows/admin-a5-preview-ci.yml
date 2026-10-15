@@ -22,6 +22,7 @@ on:
       - "scripts/validate-space-admin-asset-preview.mjs"
       - "scripts/validate-space-admin-a10-production-preview.mjs"
       - "scripts/test-space-admin-production-preview-bridge.mjs"
+      - "scripts/test-space-admin-production-preview-studio.mjs"
       - ".github/workflows/admin-a5-preview-ci.yml"
   pull_request:
     paths:
@@ -42,6 +43,7 @@ on:
       - "scripts/validate-space-admin-asset-preview.mjs"
       - "scripts/validate-space-admin-a10-production-preview.mjs"
       - "scripts/test-space-admin-production-preview-bridge.mjs"
+      - "scripts/test-space-admin-production-preview-studio.mjs"
       - ".github/workflows/admin-a5-preview-ci.yml"
 
 jobs:
@@ -71,5 +73,7 @@ jobs:
         run: pnpm --dir portal install --frozen-lockfile
       - name: Test Production Preview bridge candidate coalescing
         run: node scripts/test-space-admin-production-preview-bridge.mjs
+      - name: Test Production Preview Studio action serialization
+        run: node scripts/test-space-admin-production-preview-studio.mjs
       - name: Build Portal
         run: pnpm --dir portal build
