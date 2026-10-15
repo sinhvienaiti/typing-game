@@ -6,6 +6,7 @@ const paths = {
   environments: "portal/src/admin/v2/preview/panels/world-stage-production-preview.ts",
   systems: "portal/src/admin/v2/preview/panels/system-runtime-preview.ts",
   equipment: "portal/src/admin/v2/preview/panels/equipment-runtime-preview.ts",
+  productionIcon: "portal/src/admin/v2/preview/production-registry-icon.ts",
   enemyPanel: "portal/src/admin/v2/preview/enemy-production-preview.ts",
   bossPanel: "portal/src/admin/v2/preview/panels/boss-production-preview.ts",
   mediaTester: "portal/src/admin/v2/media-candidate-preview.ts",
@@ -31,9 +32,11 @@ function forbidText(input, needle, label) {
   if (input.includes(needle)) throw new Error(`${label}: forbidden ${JSON.stringify(needle)}`);
 }
 
-requireText(source.childEnemy, "drawModularEnemy", "Enemy preview retains production modular fallback");
-requireText(source.childEnemy, "paintedEnemySprite", "Enemy preview prefers prepared production painted art when the canonical id maps to an Enemy kind");
+requireText(source.childEnemy, "drawModularEnemy", "Enemy preview retains production modular renderer only for definitions without a canonical painted mapping");
+requireText(source.childEnemy, "paintedEnemySprite", "Enemy preview resolves prepared production painted art when the canonical id maps to an Enemy kind");
+requireText(source.childEnemy, "hasPaintedEnemy", "Enemy preview fails closed when a mapped painted asset is absent from the build");
 requireText(source.childEnemy, "drawPaintedSprite", "Enemy preview draws painted art through the production sprite renderer");
+requireText(source.childEnemy, "must never silently", "Enemy painted mappings cannot silently degrade to a modular body");
 requireText(source.childEnemy, "new CombatFxSystem()", "Enemy hit/death reuses production CombatFxSystem");
 requireText(source.childBoss, "drawPaintedSprite", "Boss preview reuses painted production renderer");
 requireText(source.childBoss, "bossPhase", "Boss phase preview uses production CombatFxSystem");
@@ -66,10 +69,11 @@ requireText(source.bossPanel, "await latestCandidate", "Boss scenario transition
 requireText(source.bossPanel, 'scenario.control.addEventListener("change", () => void applyScenario().catch(reportError))', "Boss scenario changes use the dedicated scenario command path");
 forbidText(source.bossPanel, 'scenario.control.addEventListener("change", () => void loadSelectedBoss()', "Boss scenario changes must not reload the candidate");
 
-for (const panel of [source.enemyPanel, source.bossPanel]) {
-  requireText(panel, "createImageMediaCandidateTester", "Enemy/Boss preview exposes a Media V2 image test candidate without inventing production persistence");
-}
-requireText(source.mediaTester, 'allowedKinds: ["image"]', "Media candidate tester is image-only");
+requireText(source.bossPanel, "createImageMediaCandidateTester", "Boss preview retains the separate preview-only Media V2 QA tester while Boss media binding is migration-gated");
+forbidText(source.enemyPanel, "createImageMediaCandidateTester", "Enemy primary production preview must resolve canonical child art automatically");
+forbidText(source.enemyPanel, "Choose candidate image", "Enemy primary production preview must not ask administrators to choose a temporary image");
+requireText(source.enemyPanel, "canonical painted art resolved automatically", "Enemy Admin explains automatic child-owned painted-art resolution");
+requireText(source.mediaTester, 'allowedKinds: ["image"]', "Media candidate tester remains image-only for domains that still expose the separate QA surface");
 requireText(source.mediaTester, "preview-only", "Media candidate tester clearly marks temporary QA semantics");
 requireText(source.mediaTester, "MediaAdminApi", "Media candidate tester resolves exact Media V2 preview bytes through the canonical Admin media API");
 
@@ -79,6 +83,7 @@ requireText(source.systems, "let previewGeneration = 0", "Skill draft preview ha
 requireText(source.systems, "const current = ++previewGeneration", "Skill draft preview advances only the preview generation");
 requireText(source.systems, "if (current !== previewGeneration) return", "Skill preview ignores stale draft responses");
 requireText(source.systems, "scheduleDraftPreview", "Skill draft inputs drive debounced live runtime preview");
+requireText(source.systems, 'createProductionRegistryIconPreview("skill")', "Skill preview pairs production runtime behavior with canonical child-painted visual");
 requireText(source.equipment, '"/api/admin/space-typing/equipment/preview"', "Equipment preview uses canonical preview endpoint");
 requireText(source.equipment, "MULTIPLIER_EFFECTS", "Equipment effect baseline distinguishes neutral multipliers from active count=1 effects");
 requireText(source.equipment, "Nothing was persisted", "Equipment Draft preview remains isolated");
@@ -86,6 +91,10 @@ requireText(source.equipment, "let previewGeneration = 0", "Equipment draft prev
 requireText(source.equipment, "const current = ++previewGeneration", "Equipment draft preview advances only the preview generation");
 requireText(source.equipment, "if (current !== previewGeneration) return", "Equipment preview ignores stale draft responses");
 requireText(source.equipment, "scheduleDraftPreview", "Equipment draft inputs drive debounced live runtime preview");
+requireText(source.equipment, 'createProductionRegistryIconPreview("equipment")', "Equipment preview pairs production resolver behavior with canonical child-painted visual");
+for (const token of ["paintedSkillIcon", "paintedEquipmentIcon", "CHILD ASSET · READ ONLY"]) {
+  requireText(source.productionIcon, token, `Skill/Equipment production visual helper ${token}`);
+}
 
 for (const kind of ["full-runtime", "production-presentation", "simulation-data", "not-applicable"]) {
   requireText(source.classification, `kind: "${kind}"`, `classification ${kind} exists`);
