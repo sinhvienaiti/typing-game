@@ -1,4 +1,3 @@
-import { createImageMediaCandidateTester } from "../media-candidate-preview";
 import { ProductionPreviewBridge } from "./production-preview-bridge";
 import { createProductionPreviewStudio } from "./production-preview-studio";
 import {
@@ -46,15 +45,14 @@ function panel(title: string, subtitle: string): HTMLElement {
 }
 
 /**
- * Administrator-facing Enemy preview chrome. Rendering stays in the child
- * production runtime; this module owns only source/scenario controls and the
- * isolated preview bridge lifecycle. Media V2 selection is intentionally a
- * separate preview-only QA surface until the canonical Enemy policy owns media.
+ * Administrator-facing Enemy preview chrome. Rendering and canonical art
+ * resolution stay in the child production runtime; Admin only selects source
+ * semantics/scenario and owns the isolated preview bridge lifecycle.
  */
 export function createEnemyProductionPreviewPanel(definitionId: string): EnemyProductionPreviewPanelHandle {
   const root = panel(
     "Production Preview",
-    "Exact child production Enemy renderer · painted art when available · isolated preview state · no progression mutation",
+    "Exact child production Enemy renderer · canonical painted art resolved automatically · isolated preview state · no progression mutation",
   );
   const controls = element("div", "stx-grid st-admin-runtime-preview-grid");
   const source = selectField<ProductionPreviewSource>("Preview Source", "published", [
@@ -68,10 +66,6 @@ export function createEnemyProductionPreviewPanel(definitionId: string): EnemyPr
   ]);
   controls.append(source.root, scenario.root);
 
-  const mediaTester = createImageMediaCandidateTester({
-    title: "Enemy image test candidate",
-    description: "Choose any Media V2 image for visual QA before a canonical per-Enemy media binding exists. This tester never mutates the production registry.",
-  });
   const previewHost = element("div", "st-admin-production-preview-shell");
   const previewStatus = element(
     "div",
@@ -84,9 +78,8 @@ export function createEnemyProductionPreviewPanel(definitionId: string): EnemyPr
     element(
       "div",
       "stx-notice info",
-      "The child preview now prefers the canonical painted Enemy asset when the registry ID maps to a production enemy kind, then falls back to the modular renderer. The Media V2 tester below is preview-only until per-Enemy media becomes production-authoritative.",
+      "Enemy art is resolved automatically by the child production renderer, just like Boss preview. Definitions with a canonical painted family/kind asset must render that asset; the preview no longer asks administrators to choose a temporary replacement image.",
     ),
-    mediaTester.root,
     previewHost,
     previewStatus,
   );
@@ -103,10 +96,10 @@ export function createEnemyProductionPreviewPanel(definitionId: string): EnemyPr
     if (source.control.value === "draft") {
       studio.setLifecycle(
         "ready",
-        "Draft selected · Enemy visual authority is still child-owned, so the canonical child renderer remains authoritative. Use the Media V2 tester above for temporary image QA.",
+        "Draft selected · Enemy visual identity remains child-owned, so the current canonical production art is rendered automatically while draft gameplay fields remain isolated.",
       );
     } else {
-      studio.setLifecycle("ready", "Published production Enemy definition is rendering in the isolated child runtime, preferring painted production art when available.");
+      studio.setLifecycle("ready", "Published production Enemy definition and canonical child-owned art are rendering in the isolated child runtime.");
     }
   };
 
@@ -124,7 +117,6 @@ export function createEnemyProductionPreviewPanel(definitionId: string): EnemyPr
     generation += 1;
     bridge?.disposeImmediately();
     bridge = null;
-    mediaTester.dispose();
     studio.dispose();
     observer.disconnect();
   };
