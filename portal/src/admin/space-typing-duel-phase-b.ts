@@ -1,3 +1,11 @@
+import {
+  DuelRoom,
+  defaultDuelRoomSettings,
+  validateDuelRoomSettings,
+  type DuelRoomSettingsInput,
+} from "../../../games/space-typing/src/duel/room";
+import type { DuelBotPersonality } from "../../../games/space-typing/src/duel/bots";
+import type { DuelMapId } from "../../../games/space-typing/src/duel/maps";
 import { SpaceTypingAdminApi } from "./api";
 import { renderAdminFailureState, setAdminStatus } from "./space-typing-admin-state";
 
@@ -14,15 +22,15 @@ type DuelContractPayload = {
     authorableFields: string[];
     roomOwnerMutableFields: string[];
     roomSettings: {
-      visibilities: string[];
-      matchLengthSeconds: number[];
-      roundFormats: number[];
-      mapSelectionModes: string[];
-      mapIds: string[];
-      hazardLevels: string[];
-      specialFrequencies: string[];
-      seedModes: string[];
-      modifiers: string[];
+      visibilities: Array<DuelRoomSettingsInput["visibility"]>;
+      matchLengthSeconds: Array<DuelRoomSettingsInput["matchLengthSeconds"]>;
+      roundFormats: Array<DuelRoomSettingsInput["roundFormat"]>;
+      mapSelectionModes: Array<DuelRoomSettingsInput["mapSelection"]["mode"]>;
+      mapIds: DuelMapId[];
+      hazardLevels: Array<DuelRoomSettingsInput["hazardLevel"]>;
+      specialFrequencies: Array<DuelRoomSettingsInput["mysteryFrequency"]>;
+      seedModes: Array<DuelRoomSettingsInput["seedMode"]>;
+      modifiers: Array<DuelRoomSettingsInput["modifier"]>;
       roomNameLength: { min: number; max: number };
       privatePasswordLength: { min: number; max: number };
       fixedSeed: { min: number; max: number; integer: boolean };
@@ -32,8 +40,8 @@ type DuelContractPayload = {
       wpm: { min: number; max: number; practiceDefault: number };
       accuracy: { min: number; max: number; practiceDefault: number };
       reactionMs: { min: number; max: number; practiceDefault: number };
-      personalities: string[];
-      practiceDefaultPersonality: string;
+      personalities: DuelBotPersonality[];
+      practiceDefaultPersonality: DuelBotPersonality;
     };
     combat: {
       contentVersion: string;
@@ -71,43 +79,49 @@ function panel(title: string, subtitle?: string): HTMLElement {
   root.append(head);
   return root;
 }
-function listNotice(label: string, values: readonly (string | number)[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
+function field(label: string, control: HTMLElement): HTMLElement {
+  const root = el("label", "stx-field");
+  root.append(el("span", undefined, label), control);
+  return root;
 }
-function scalar(label: string, value: string | number | boolean, tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${String(value)}`, tone);
+function select<T extends string | number>(values: readonly T[], value: T): HTMLSelectElement {
+  const control = el("select", "st-admin-select") as HTMLSelectElement;
+  for (const item of values) control.append(new Option(String(item), String(item)));
+  control.value = String(value);
+  return control;
 }
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
+function numeric(value: number, min: number, max: number, step = 1): HTMLInputElement {
+  const input = el("input") as HTMLInputElement;
+  input.type = "number";
+  input.value = String(value);
+  input.min = String(min);
+  input.max = String(max);
+  input.step = String(step);
+  return input;
 }
+function check(label: string, checked: boolean): { root: HTMLElement; input: HTMLInputElement } {
+  const root = el("label", "stx-toggle-row");
+  root.append(el("strong", undefined, label));
+  const input = el("input") as HTMLInputElement;
+  input.type = "checkbox";
+  input.checked = checked;
+  root.append(input);
+  return { root, input };
+}
+function isRecord(value: unknown): value is Record<string, unknown> { return value !== null && typeof value === "object" && !Array.isArray(value); }
 function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((item) => typeof item === "string"); }
 function numberArray(value: unknown): value is number[] { return Array.isArray(value) && value.every((item) => typeof item === "number" && Number.isFinite(item)); }
-
 function validateDuelContract(value: unknown): DuelContractPayload {
-  if (!isRecord(value) || value["capability"] !== "duel.read" || !isRecord(value["duel"]) || !isRecord(value["route"])) {
-    throw new Error("Duel contract does not match the canonical duel.read boundary.");
-  }
+  if (!isRecord(value) || value["capability"] !== "duel.read" || !isRecord(value["duel"])) throw new Error("Duel contract does not match duel.read.");
   const duel = value["duel"];
   if (duel["mode"] !== "runtime-derived-readonly") throw new Error("Duel contract is not runtime-derived read-only.");
-  for (const key of ["runtimeSources", "authorableFields", "roomOwnerMutableFields", "unsupportedAdminMockFields"] as const) {
-    if (!stringArray(duel[key])) throw new Error(`Duel contract is missing ${key}.`);
-  }
-  if (!isRecord(duel["roomSettings"]) || !isRecord(duel["bot"]) || !isRecord(duel["combat"]) || !isRecord(duel["safeDefaults"])) {
-    throw new Error("Duel contract is missing room, bot, combat or defaults metadata.");
-  }
+  for (const key of ["runtimeSources", "authorableFields", "roomOwnerMutableFields", "unsupportedAdminMockFields"] as const) if (!stringArray(duel[key])) throw new Error(`Duel contract is missing ${key}.`);
+  if (!isRecord(duel["roomSettings"]) || !isRecord(duel["bot"]) || !isRecord(duel["combat"]) || !isRecord(duel["safeDefaults"])) throw new Error("Duel contract metadata is incomplete.");
   const room = duel["roomSettings"];
-  for (const key of ["visibilities", "mapSelectionModes", "mapIds", "hazardLevels", "specialFrequencies", "seedModes", "modifiers"] as const) {
-    if (!stringArray(room[key])) throw new Error(`Duel roomSettings is missing ${key}.`);
-  }
+  for (const key of ["visibilities", "mapSelectionModes", "mapIds", "hazardLevels", "specialFrequencies", "seedModes", "modifiers"] as const) if (!stringArray(room[key])) throw new Error(`Duel roomSettings is missing ${key}.`);
   for (const key of ["matchLengthSeconds", "roundFormats"] as const) if (!numberArray(room[key])) throw new Error(`Duel roomSettings is missing ${key}.`);
-  if (duel["writeCapability"] !== false || duel["previewCapability"] !== false || typeof duel["persistenceOwner"] !== "string") {
-    throw new Error("Duel contract contains an invalid Admin ownership boundary.");
-  }
+  if (duel["writeCapability"] !== false || duel["previewCapability"] !== false || typeof duel["persistenceOwner"] !== "string") throw new Error("Duel Admin ownership boundary changed; re-audit required.");
   return value as unknown as DuelContractPayload;
-}
-
-async function fetchDuelContract(): Promise<DuelContractPayload> {
-  return validateDuelContract(await api.requestJson<unknown>("/api/admin/space-typing/duel/contract"));
 }
 
 export function renderPhaseBDuel(): HTMLElement {
@@ -115,95 +129,151 @@ export function renderPhaseBDuel(): HTMLElement {
   const head = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "PvP · Authority-owned Room Rules"),
-    el("h1", undefined, "Duel Settings"),
-    el("p", undefined, "Inspect the Duel rules actually owned by Space Typing. Friend Room and Practice settings are changed by the room owner inside the Duel session; there is no canonical global Admin policy store, so Admin publishing is intentionally closed."),
+    el("div", "st-admin-eyebrow", "PvP · Session Rule Simulation"),
+    el("h1", undefined, "Duel & Practice Rules"),
+    el("p", undefined, "Test the same room settings and bot normalization used by gameplay. These controls are session-only simulation: they never create an Admin revision or change a live room."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("ROOM OWNER CONFIG", "info"));
+  actions.append(badge("PRODUCTION RULE VALIDATION", "good"), badge("NO ADMIN PERSISTENCE", "info"));
   head.append(copy, actions);
   page.append(head);
 
-  const status = notice("Loading canonical Duel runtime contract…");
+  const status = notice("Loading canonical Duel contract…");
   status.setAttribute("aria-live", "polite");
   const content = el("div");
   page.append(status, content);
 
-  let loadGeneration = 0;
+  let generation = 0;
   const load = (): void => {
-    const generation = ++loadGeneration;
-    setAdminStatus(status, "Loading canonical Duel runtime contract…", "loading");
-    content.replaceChildren(notice("Loading room-owner and authority rules…", "info"));
-    void fetchDuelContract().then((payload) => {
-      if (generation !== loadGeneration) return;
+    const current = ++generation;
+    setAdminStatus(status, "Loading canonical Duel contract and production room rules…", "loading");
+    void api.requestJson<unknown>("/api/admin/space-typing/duel/contract").then(validateDuelContract).then((payload) => {
+      if (current !== generation) return;
       const duel = payload.duel;
-      setAdminStatus(status, `Duel ${duel.combat.contentVersion} · ${duel.persistenceOwner} · Admin writes closed.`, "success");
+      const defaults = defaultDuelRoomSettings();
+      setAdminStatus(status, `Duel ${duel.combat.contentVersion} · production room validator ready · Admin writes closed.`, "success");
       content.replaceChildren();
 
-      const rules = panel("Room Rules", "Validated by src/duel/room.ts");
-      rules.append(
-        listNotice("Visibility", duel.roomSettings.visibilities),
-        listNotice("Match length (seconds)", duel.roomSettings.matchLengthSeconds, "good"),
-        listNotice("Round formats", duel.roomSettings.roundFormats.map((value) => `Bo${value}`)),
-        listNotice("Map selection", duel.roomSettings.mapSelectionModes),
-        listNotice("Map IDs", duel.roomSettings.mapIds),
-        listNotice("Hazard", duel.roomSettings.hazardLevels),
-        listNotice("Mystery / Fate frequency", duel.roomSettings.specialFrequencies),
-        listNotice("Modifiers", duel.roomSettings.modifiers),
-        scalar("Room name length", `${duel.roomSettings.roomNameLength.min}–${duel.roomSettings.roomNameLength.max}`),
-        scalar("Private password length", `${duel.roomSettings.privatePasswordLength.min}–${duel.roomSettings.privatePasswordLength.max}`),
+      const scenario = panel("Room Scenario", "Uses child validateDuelRoomSettings() and DuelRoom directly");
+      const visibility = select(duel.roomSettings.visibilities, defaults.visibility);
+      const length = select(duel.roomSettings.matchLengthSeconds, defaults.matchLengthSeconds);
+      const rounds = select(duel.roomSettings.roundFormats, defaults.roundFormat);
+      const mapMode = select(duel.roomSettings.mapSelectionModes, defaults.mapSelection.mode);
+      const mapId = select(duel.roomSettings.mapIds, defaults.mapSelection.mode === "fixed" ? defaults.mapSelection.mapId : duel.roomSettings.mapIds[0] ?? "frost-wastes");
+      const hazard = select(duel.roomSettings.hazardLevels, defaults.hazardLevel);
+      const mystery = select(duel.roomSettings.specialFrequencies, defaults.mysteryFrequency);
+      const fate = select(duel.roomSettings.specialFrequencies, defaults.fateFrequency);
+      const modifier = select(duel.roomSettings.modifiers, defaults.modifier);
+      const botAllowed = check("Practice bot allowed", defaults.botAllowed);
+      const controls = el("div", "stx-grid");
+      controls.append(
+        field("Visibility", visibility), field("Match length", length), field("Rounds", rounds),
+        field("Map mode", mapMode), field("Map", mapId), field("Hazard", hazard),
+        field("Mystery", mystery), field("Fate", fate), field("Modifier", modifier), botAllowed.root,
       );
 
-      const defaults = panel("Runtime Defaults", "Safe public defaults; password value is intentionally not exposed");
-      for (const [key, value] of Object.entries(duel.safeDefaults)) defaults.append(scalar(key, typeof value === "object" ? JSON.stringify(value) : String(value)));
+      const botWpm = numeric(duel.bot.wpm.practiceDefault, duel.bot.wpm.min, duel.bot.wpm.max);
+      const botAccuracy = numeric(Math.round(duel.bot.accuracy.practiceDefault * 100), Math.round(duel.bot.accuracy.min * 100), Math.round(duel.bot.accuracy.max * 100));
+      const botReaction = numeric(duel.bot.reactionMs.practiceDefault, duel.bot.reactionMs.min, duel.bot.reactionMs.max);
+      const personality = select(duel.bot.personalities, duel.bot.practiceDefaultPersonality);
+      const botControls = el("div", "stx-grid");
+      botControls.append(field("Bot WPM", botWpm), field("Bot accuracy %", botAccuracy), field("Reaction ms", botReaction), field("Personality", personality));
+      const result = notice("Change a rule to run an isolated production validation.", "info");
+      const snapshot = el("div", "stx-grid");
+      scenario.append(controls, botControls, result, snapshot);
 
-      const bot = panel("Practice Bot Bounds", "Canonical normalization and Practice defaults");
-      bot.append(
-        scalar("WPM", `${duel.bot.wpm.min}–${duel.bot.wpm.max} · default ${duel.bot.wpm.practiceDefault}`),
-        scalar("Accuracy", `${Math.round(duel.bot.accuracy.min * 100)}–${Math.round(duel.bot.accuracy.max * 100)}% · default ${Math.round(duel.bot.accuracy.practiceDefault * 100)}%`),
-        scalar("Reaction", `${duel.bot.reactionMs.min}–${duel.bot.reactionMs.max}ms · default ${duel.bot.reactionMs.practiceDefault}ms`),
-        listNotice("Personalities", duel.bot.personalities),
+      const simulate = (): void => {
+        const chosenMode = mapMode.value as DuelRoomSettingsInput["mapSelection"]["mode"];
+        const mapSelection: DuelRoomSettingsInput["mapSelection"] = chosenMode === "fixed"
+          ? { mode: "fixed", mapId: mapId.value as DuelMapId }
+          : { mode: chosenMode, pool: [...duel.roomSettings.mapIds] };
+        const candidate: DuelRoomSettingsInput = {
+          ...defaults,
+          roomName: "Admin Preview",
+          visibility: visibility.value as DuelRoomSettingsInput["visibility"],
+          password: visibility.value === "private" ? "preview-only" : undefined,
+          matchLengthSeconds: Number(length.value) as DuelRoomSettingsInput["matchLengthSeconds"],
+          roundFormat: Number(rounds.value) as DuelRoomSettingsInput["roundFormat"],
+          mapSelection,
+          hazardLevel: hazard.value as DuelRoomSettingsInput["hazardLevel"],
+          mysteryFrequency: mystery.value as DuelRoomSettingsInput["mysteryFrequency"],
+          fateFrequency: fate.value as DuelRoomSettingsInput["fateFrequency"],
+          botAllowed: botAllowed.input.checked,
+          seedMode: "random",
+          modifier: modifier.value as DuelRoomSettingsInput["modifier"],
+        };
+        const validation = validateDuelRoomSettings(candidate);
+        if (!validation.ok) {
+          result.className = "stx-notice bad";
+          result.textContent = validation.errors.join(" ");
+          snapshot.replaceChildren();
+          return;
+        }
+        const room = new DuelRoom({
+          roomId: "admin-preview",
+          ownerParticipantId: "admin-preview-owner",
+          ownerDisplayName: "Admin Preview",
+          settings: validation.settings,
+        });
+        if (botAllowed.input.checked) {
+          room.setBot({
+            requesterId: "admin-preview-owner",
+            displayName: "Practice Bot",
+            config: {
+              wpm: Number(botWpm.value),
+              accuracy: Number(botAccuracy.value) / 100,
+              reactionMs: Number(botReaction.value),
+              personality: personality.value as DuelBotPersonality,
+            },
+          });
+        }
+        room.setReady("admin-preview-owner", true);
+        const state = room.snapshot();
+        result.className = "stx-notice good";
+        result.textContent = "VALID · production DuelRoom accepted this isolated scenario · nothing persisted";
+        snapshot.replaceChildren(
+          notice(`${state.settings.mapSelection.mode.toUpperCase()} map · ${state.settings.matchLengthSeconds / 60} min · Bo${state.settings.roundFormat} · ${state.settings.hazardLevel} hazard`, "good"),
+          notice(`Modifier ${state.settings.modifier} · mystery ${state.settings.mysteryFrequency} · fate ${state.settings.fateFrequency}`),
+          notice(state.slots[1].bot ? `Practice bot normalized to ${state.slots[1].bot.wpm} WPM · ${Math.round(state.slots[1].bot.accuracy * 100)}% · ${state.slots[1].bot.reactionMs}ms · ${state.slots[1].bot.personality}` : "Practice bot disabled", state.slots[1].bot ? "good" : "info"),
+        );
+      };
+      for (const control of [visibility, length, rounds, mapMode, mapId, hazard, mystery, fate, modifier, botWpm, botAccuracy, botReaction, personality]) control.addEventListener("change", simulate);
+      botAllowed.input.addEventListener("change", simulate);
+      mapMode.addEventListener("change", () => { mapId.disabled = mapMode.value !== "fixed"; });
+      mapId.disabled = mapMode.value !== "fixed";
+      simulate();
+
+      const rankedBoundary = panel("Ranked Boundary", "Global competitive rules are not room-owner settings");
+      rankedBoundary.append(
+        notice("Friend and Practice settings belong to the room/session owner. Ranked rules are authority-owned and remain read-only in Admin.", "info"),
+        notice("There is no canonical global Duel Admin policy store, so Save Draft/Publish is intentionally absent.", "warn"),
       );
 
-      const authority = panel("Combat Authority & Impact Timing", "Damage and presentation timing come from the Duel authority clock");
-      authority.append(
-        scalar("Combat profile", duel.combat.combatProfile, "good"),
-        scalar("Default regulation", `${duel.combat.defaultRegulationSeconds}s`),
-        scalar("Hard overtime", `${duel.combat.hardOvertimeSeconds}s`),
-        scalar("Projectile base travel", `${duel.combat.projectileBaseTravelMs}ms`),
-        scalar("Typing cannon travel", `${duel.combat.typingCannonTravelMs}ms`),
-        scalar("Between-round break", `${duel.combat.roundBreakSeconds}s`),
-        scalar("Damage resolves on authority clock", duel.combat.damageResolvesOnAuthorityClock, "good"),
-        notice("Admin does not expose a manual projectile-delay slider because timing and damage synchronization share authority-owned runtime constants.", "warn"),
+      const advanced = el("details", "st-admin-panel solid stx-panel");
+      advanced.append(el("summary", undefined, "Advanced authority & runtime details"));
+      const advancedBody = el("div", "stx-grid");
+      advancedBody.append(
+        notice(`Persistence owner: ${duel.persistenceOwner}`),
+        notice(`Room-owner mutable fields: ${duel.roomOwnerMutableFields.join(" · ")}`),
+        notice(`Combat profile: ${duel.combat.combatProfile} · regulation ${duel.combat.defaultRegulationSeconds}s · overtime ${duel.combat.hardOvertimeSeconds}s`),
+        notice(`Projectile presentation: base ${duel.combat.projectileBaseTravelMs}ms · cannon ${duel.combat.typingCannonTravelMs}ms · round break ${duel.combat.roundBreakSeconds}s`),
+        notice(`Damage resolves on authority clock: ${String(duel.combat.damageResolvesOnAuthorityClock)}`, "good"),
+        notice(`Runtime sources: ${duel.runtimeSources.join(" · ")}`),
+        notice(`Unsupported Admin fields: ${duel.unsupportedAdminMockFields.join(" · ")}`, "warn"),
       );
-
-      const ownership = panel("Ownership Boundary", "Room mutation is gameplay behavior, not Admin publishing");
-      ownership.append(
-        listNotice("Room-owner mutable fields", duel.roomOwnerMutableFields, "good"),
-        listNotice("Runtime sources", duel.runtimeSources),
-        scalar("Room owner write capability", duel.roomOwnerWriteCapability, "good"),
-        scalar("Admin write capability", duel.writeCapability, "warn"),
-        scalar("Admin preview capability", duel.previewCapability, "warn"),
-      );
-
-      const unsupported = panel("Unavailable Admin Controls", "Controls without a canonical runtime owner remain intentionally unavailable");
-      unsupported.append(
-        listNotice("Unsupported fields", duel.unsupportedAdminMockFields, "warn"),
-        notice("Lives, free-form match windows, impact-delay sliders, presentation toggles and Admin Save Draft are not promoted into production policy without a canonical owner."),
-      );
-      content.append(rules, defaults, bot, authority, ownership, unsupported);
+      advanced.append(advancedBody);
+      content.append(scenario, rankedBoundary, advanced);
     }).catch((error: unknown) => {
-      if (generation !== loadGeneration) return;
+      if (current !== generation) return;
       setAdminStatus(status, "Duel runtime contract is unavailable.", "error");
       renderAdminFailureState(content, {
         title: "Duel Settings unavailable",
-        fallbackMessage: "The canonical Duel contract could not be loaded. Check the local Admin runtime and try again.",
+        fallbackMessage: "The canonical Duel contract could not be loaded.",
         error,
         onRetry: load,
       });
     });
   };
-
   load();
   return page;
 }

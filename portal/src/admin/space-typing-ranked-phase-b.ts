@@ -27,30 +27,9 @@ type RankedContractPayload = {
       normalizedLoadoutBudget: number;
       mapPool: string[];
     };
-    rating: {
-      base: number;
-      min: number;
-      max: number;
-      typingWeight: number;
-      duelWeight: number;
-      provisionalMatches: number;
-      experiencedMatches: number;
-      kFactors: number[];
-    };
-    matchmaking: {
-      initialAllowedGap: number;
-      gapIncreaseEverySeconds: number;
-      gapIncrease: number;
-      maxAllowedGap: number;
-      reconnectGraceMs: number;
-    };
-    profile: {
-      fields: string[];
-      persistenceOwner: string;
-      defaultStore: string;
-      optionalStore: string;
-      jsonStoreEnv: string;
-    };
+    rating: { base: number; min: number; max: number; typingWeight: number; duelWeight: number; provisionalMatches: number; experiencedMatches: number; kFactors: number[] };
+    matchmaking: { initialAllowedGap: number; gapIncreaseEverySeconds: number; gapIncrease: number; maxAllowedGap: number; reconnectGraceMs: number };
+    profile: { fields: string[]; persistenceOwner: string; defaultStore: string; optionalStore: string; jsonStoreEnv: string };
     runtimeServices: string[];
     writeCapability: false;
     previewCapability: false;
@@ -78,44 +57,18 @@ function panel(title: string, subtitle?: string): HTMLElement {
   root.append(head);
   return root;
 }
-function listNotice(label: string, values: readonly (string | number)[], tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${values.length ? values.join(" · ") : "none exposed"}`, tone);
-}
-function scalar(label: string, value: string | number | boolean, tone: Tone = "info"): HTMLElement {
-  return notice(`${label}: ${String(value)}`, tone);
-}
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
+function isRecord(value: unknown): value is Record<string, unknown> { return value !== null && typeof value === "object" && !Array.isArray(value); }
 function stringArray(value: unknown): value is string[] { return Array.isArray(value) && value.every((item) => typeof item === "string"); }
 function numberArray(value: unknown): value is number[] { return Array.isArray(value) && value.every((item) => typeof item === "number" && Number.isFinite(item)); }
-
 function validateRankedContract(value: unknown): RankedContractPayload {
-  if (!isRecord(value) || value["capability"] !== "ranked.read" || !isRecord(value["ranked"]) || !isRecord(value["route"])) {
-    throw new Error("Ranked contract does not match the canonical ranked.read boundary.");
-  }
+  if (!isRecord(value) || value["capability"] !== "ranked.read" || !isRecord(value["ranked"])) throw new Error("Ranked contract does not match ranked.read.");
   const ranked = value["ranked"];
   if (ranked["mode"] !== "runtime-derived-readonly") throw new Error("Ranked contract is not runtime-derived read-only.");
-  for (const key of ["runtimeSources", "authorableFields", "runtimeServices", "unsupportedAdminMockFields"] as const) {
-    if (!stringArray(ranked[key])) throw new Error(`Ranked contract is missing ${key}.`);
-  }
-  if (!isRecord(ranked["ruleset"]) || !isRecord(ranked["rating"]) || !isRecord(ranked["matchmaking"]) || !isRecord(ranked["profile"])) {
-    throw new Error("Ranked contract is missing ruleset, rating, matchmaking or profile metadata.");
-  }
-  const ruleset = ranked["ruleset"];
-  const rating = ranked["rating"];
-  const profile = ranked["profile"];
-  if (!stringArray(ruleset["mapPool"]) || !numberArray(rating["kFactors"]) || !stringArray(profile["fields"])) {
-    throw new Error("Ranked contract contains invalid ruleset/rating/profile collections.");
-  }
-  if (ranked["writeCapability"] !== false || ranked["previewCapability"] !== false || ranked["seasonService"] !== false || ranked["rewardTableService"] !== false) {
-    throw new Error("Ranked contract contains an invalid fail-closed Admin boundary.");
-  }
+  for (const key of ["runtimeSources", "authorableFields", "runtimeServices", "unsupportedAdminMockFields"] as const) if (!stringArray(ranked[key])) throw new Error(`Ranked contract is missing ${key}.`);
+  if (!isRecord(ranked["ruleset"]) || !isRecord(ranked["rating"]) || !isRecord(ranked["matchmaking"]) || !isRecord(ranked["profile"])) throw new Error("Ranked contract metadata is incomplete.");
+  if (!stringArray(ranked["ruleset"]["mapPool"]) || !numberArray(ranked["rating"]["kFactors"]) || !stringArray(ranked["profile"]["fields"])) throw new Error("Ranked contract collections are invalid.");
+  if (ranked["writeCapability"] !== false || ranked["previewCapability"] !== false || ranked["seasonService"] !== false || ranked["rewardTableService"] !== false) throw new Error("Ranked ownership boundary changed; re-audit required.");
   return value as unknown as RankedContractPayload;
-}
-
-async function fetchRankedContract(): Promise<RankedContractPayload> {
-  return validateRankedContract(await api.requestJson<unknown>("/api/admin/space-typing/ranked/contract"));
 }
 
 export function renderPhaseBRanked(): HTMLElement {
@@ -123,99 +76,82 @@ export function renderPhaseBRanked(): HTMLElement {
   const head = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "PvP · Ranked Authority"),
+    el("div", "st-admin-eyebrow", "PvP · Competitive Rules"),
     el("h1", undefined, "Ranked"),
-    el("p", undefined, "Inspect the canonical Ranked ruleset, rating policy, matchmaking expansion and profile persistence used by the Duel authority. The current runtime has no season scheduler or Admin-owned competitive policy store, so authoring remains closed."),
+    el("p", undefined, "Review the competitive rules players actually enter. Ranked is authority-owned and intentionally read-only in Admin; no season scheduler, reward table or enable switch is fabricated."),
   );
   const actions = el("div", "st-admin-page-actions");
-  actions.append(badge("RUNTIME-BACKED · READ ONLY", "good"), badge("NO SEASON SERVICE", "warn"));
+  actions.append(badge("AUTHORITY-OWNED · READ ONLY", "good"), badge("NO SEASON SERVICE", "warn"));
   head.append(copy, actions);
   page.append(head);
 
-  const status = notice("Loading canonical Ranked runtime contract…");
+  const status = notice("Loading canonical Ranked rules…");
   status.setAttribute("aria-live", "polite");
   const content = el("div");
   page.append(status, content);
 
-  let loadGeneration = 0;
+  let generation = 0;
   const load = (): void => {
-    const generation = ++loadGeneration;
-    setAdminStatus(status, "Loading canonical Ranked runtime contract…", "loading");
-    content.replaceChildren(notice("Loading Ranked authority rules…", "info"));
-    void fetchRankedContract().then((payload) => {
-      if (generation !== loadGeneration) return;
+    const current = ++generation;
+    setAdminStatus(status, "Loading canonical Ranked rules…", "loading");
+    void api.requestJson<unknown>("/api/admin/space-typing/ranked/contract").then(validateRankedContract).then((payload) => {
+      if (current !== generation) return;
       const ranked = payload.ranked;
-      setAdminStatus(status, `${ranked.ruleset.id} · ${ranked.profile.persistenceOwner} · Admin writes closed.`, "success");
+      setAdminStatus(status, `${ranked.ruleset.id} · production competitive rules loaded · Admin writes closed.`, "success");
       content.replaceChildren();
 
-      const rules = panel("Canonical Ruleset", "Code-owned DUEL_RANKED_RULESET");
-      rules.append(
-        scalar("Ruleset", ranked.ruleset.id, "good"),
-        scalar("Combat profile", ranked.ruleset.combatProfile),
-        scalar("Match length", `${ranked.ruleset.matchLengthSeconds}s`),
-        scalar("Round format", `Bo${ranked.ruleset.roundFormat}`),
-        scalar("Hazard", ranked.ruleset.hazardLevel),
-        scalar("Mystery frequency", ranked.ruleset.mysteryFrequency),
-        scalar("Fate frequency", ranked.ruleset.fateFrequency),
-        scalar("Modifier", ranked.ruleset.modifier),
-        scalar("Normalized loadout budget", ranked.ruleset.normalizedLoadoutBudget),
-        listNotice("Map pool", ranked.ruleset.mapPool),
-        scalar("PvE stat scaling", ranked.ruleset.allowPveStatScaling, "good"),
-        scalar("PvE luck/pity", ranked.ruleset.allowPveLuckPity, "good"),
-        scalar("Campaign credit minting", ranked.ruleset.allowCampaignCreditMinting, "good"),
+      const rules = panel("Player-facing Ruleset", "The fixed production rules used for Ranked admission");
+      const ruleGrid = el("div", "stx-grid");
+      ruleGrid.append(
+        notice(`${ranked.ruleset.matchLengthSeconds / 60} minute matches · Bo${ranked.ruleset.roundFormat}`, "good"),
+        notice(`${ranked.ruleset.hazardLevel} hazard · ${ranked.ruleset.modifier} modifier`),
+        notice(`Mystery ${ranked.ruleset.mysteryFrequency} · Fate ${ranked.ruleset.fateFrequency}`),
+        notice(`Normalized loadout budget: ${ranked.ruleset.normalizedLoadoutBudget}`),
+        notice(`Map pool: ${ranked.ruleset.mapPool.join(" · ")}`),
+      );
+      rules.append(ruleGrid);
+
+      const fairness = panel("Competitive Fairness", "Campaign/economy advantages are intentionally excluded");
+      fairness.append(
+        notice(`Combat profile: ${ranked.ruleset.combatProfile}`, "good"),
+        notice(`PvE stat scaling: ${ranked.ruleset.allowPveStatScaling ? "allowed" : "blocked"}`, ranked.ruleset.allowPveStatScaling ? "warn" : "good"),
+        notice(`PvE luck / pity: ${ranked.ruleset.allowPveLuckPity ? "allowed" : "blocked"}`, ranked.ruleset.allowPveLuckPity ? "warn" : "good"),
+        notice(`Campaign credit minting: ${ranked.ruleset.allowCampaignCreditMinting ? "allowed" : "blocked"}`, ranked.ruleset.allowCampaignCreditMinting ? "warn" : "good"),
       );
 
-      const rating = panel("Rating Policy", "Canonical dual typing + Duel rating model");
-      rating.append(
-        scalar("Base rating", ranked.rating.base),
-        scalar("Rating range", `${ranked.rating.min}–${ranked.rating.max}`),
-        scalar("Matchmaking rating mix", `${Math.round(ranked.rating.typingWeight * 100)}% typing · ${Math.round(ranked.rating.duelWeight * 100)}% Duel`, "good"),
-        scalar("Provisional boundary", `< ${ranked.rating.provisionalMatches} matches`),
-        scalar("Experienced boundary", `< ${ranked.rating.experiencedMatches} matches`),
-        listNotice("K factors", ranked.rating.kFactors),
+      const unavailable = panel("Unavailable Administration", "No canonical owner exists for these Live competitive controls");
+      unavailable.append(
+        badge("FAIL-CLOSED", "warn"),
+        notice("Season dates, placement count overrides, tier thresholds, season rewards, player-distribution targets and Ranked enable toggles are unavailable."),
+        notice(`Season service: ${String(ranked.seasonService)} · reward table service: ${String(ranked.rewardTableService)} · Admin write: ${String(ranked.writeCapability)}`, "warn"),
       );
 
-      const matchmaking = panel("Matchmaking & Presence", "Queue gap expands with wait time; disconnects use authority grace");
-      matchmaking.append(
-        scalar("Initial allowed gap", ranked.matchmaking.initialAllowedGap),
-        scalar("Gap growth", `+${ranked.matchmaking.gapIncrease} every ${ranked.matchmaking.gapIncreaseEverySeconds}s`),
-        scalar("Maximum allowed gap", ranked.matchmaking.maxAllowedGap),
-        scalar("Reconnect grace", `${ranked.matchmaking.reconnectGraceMs / 1000}s`),
+      const advanced = el("details", "st-admin-panel solid stx-panel");
+      advanced.append(el("summary", undefined, "Advanced rating, matchmaking & persistence details"));
+      const body = el("div", "stx-grid");
+      body.append(
+        notice(`Rating ${ranked.rating.min}–${ranked.rating.max} · base ${ranked.rating.base} · ${Math.round(ranked.rating.typingWeight * 100)}% typing / ${Math.round(ranked.rating.duelWeight * 100)}% Duel`),
+        notice(`K factors: ${ranked.rating.kFactors.join(" · ")} · provisional < ${ranked.rating.provisionalMatches} · experienced < ${ranked.rating.experiencedMatches}`),
+        notice(`Matchmaking gap ${ranked.matchmaking.initialAllowedGap} → max ${ranked.matchmaking.maxAllowedGap}; +${ranked.matchmaking.gapIncrease} every ${ranked.matchmaking.gapIncreaseEverySeconds}s`),
+        notice(`Reconnect grace: ${ranked.matchmaking.reconnectGraceMs / 1000}s`),
+        notice(`Profile persistence: ${ranked.profile.persistenceOwner} · default ${ranked.profile.defaultStore} · optional ${ranked.profile.optionalStore}`),
+        notice(`Runtime services: ${ranked.runtimeServices.join(" · ")}`),
+        notice(`Runtime sources: ${ranked.runtimeSources.join(" · ")}`),
+        notice(`Unsupported Admin fields: ${ranked.unsupportedAdminMockFields.join(" · ")}`, "warn"),
       );
-
-      const persistence = panel("Profile Persistence", "Server-owned Ranked profile state");
-      persistence.append(
-        listNotice("Profile fields", ranked.profile.fields),
-        scalar("Persistence owner", ranked.profile.persistenceOwner, "good"),
-        scalar("Default store", ranked.profile.defaultStore),
-        scalar("Optional store", ranked.profile.optionalStore),
-        scalar("JSON store env", ranked.profile.jsonStoreEnv),
-        listNotice("Runtime services", ranked.runtimeServices),
-        listNotice("Runtime sources", ranked.runtimeSources),
-      );
-
-      const boundary = panel("Admin Boundary", "No synthetic season or reward authoring");
-      boundary.append(
-        scalar("Season service", ranked.seasonService, "warn"),
-        scalar("Reward table service", ranked.rewardTableService, "warn"),
-        scalar("Admin write capability", ranked.writeCapability, "warn"),
-        scalar("Admin preview capability", ranked.previewCapability, "warn"),
-        listNotice("Unsupported legacy mock fields", ranked.unsupportedAdminMockFields, "warn"),
-        notice("Season dates, placement count, free-form matchmaking spread, enable toggles, rank-tier thresholds, season rewards and player-distribution percentages are intentionally unavailable because no canonical owner exists."),
-      );
-      content.append(rules, rating, matchmaking, persistence, boundary);
+      advanced.append(body);
+      content.append(rules, fairness, unavailable, advanced);
     }).catch((error: unknown) => {
-      if (generation !== loadGeneration) return;
+      if (current !== generation) return;
       setAdminStatus(status, "Ranked runtime contract is unavailable.", "error");
       renderAdminFailureState(content, {
         title: "Ranked unavailable",
-        fallbackMessage: "The canonical Ranked contract could not be loaded. Check the local Admin runtime and try again.",
+        fallbackMessage: "The canonical Ranked contract could not be loaded.",
         error,
         onRetry: load,
       });
     });
   };
-
   load();
   return page;
 }
