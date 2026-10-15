@@ -6,11 +6,10 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A17 release review re-audit: 6c57a2b..33b0764 changes only the isolated
-// Admin preview host mutation lifecycle plus its focused queue test. Background
-// contracts/art ownership remain untouched; VFX remains runtime-backed read-only,
-// with Ship preview LOAD/TUNING now serialized to prevent stale state resurrection.
-const VISUALS_AUDITED_CHILD_SHA = "33b0764d07890ac4a8c42775450882a7618bc942";
+// A17 visual-boundary re-audit: 33b0764..b75cec6 changes only the isolated
+// Enemy Admin production-preview renderer and its focused painted-kind test.
+// Background contracts/art ownership and VFX runtime authority are unchanged.
+const VISUALS_AUDITED_CHILD_SHA = "b75cec6cf94208de58341e9d59a1777cddd6c064";
 const childPath = new URL("../games/space-typing/contracts/space-typing-admin.v1.json", import.meta.url);
 const snapshotPath = new URL("../portal/src/admin/contracts/space-typing-admin.v1.json", import.meta.url);
 
@@ -56,9 +55,6 @@ for (const domain of ["combat", "player-projectiles", "skill-effects", "boss-eff
   assert.ok(vfx.vfx?.domains?.includes(domain), `VFX domain missing: ${domain}`);
 }
 
-// A13/A10.5 route decoration is now part of the canonical shell. Keep exact
-// route->renderer ownership while also protecting preview classification and
-// role-aware action gates instead of freezing the old undecorated return text.
 assert.match(router, /renderPhaseBBackgrounds/);
 assert.match(router, /if \(path === `\$\{BASE\}\/backgrounds`\) return decorated\(path, renderPhaseBBackgrounds\(\)\);/);
 assert.match(router, /renderPhaseBVfx/);
@@ -75,8 +71,6 @@ assert.match(backgroundsUi, /RUNTIME-BACKED · READ ONLY/);
 assert.match(backgroundsUi, /\/api\/admin\/space-typing\/backgrounds\/contract/);
 assert.doesNotMatch(backgroundsUi, /createRevision|\/publish/);
 
-// A10.5 wraps the canonical read-only VFX inspector with a child-owned production
-// combat preview. Validate both layers instead of freezing the old one-file presentation.
 assert.match(vfxUi, /renderLegacyPhaseBVfx/);
 assert.match(vfxUi, /createCombatVfxProductionPreviewPanel/);
 assert.match(vfxUiSurface, /RUNTIME-BACKED · READ ONLY/);
