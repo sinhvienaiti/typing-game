@@ -20,7 +20,7 @@ const snapshotPath = new URL(
   import.meta.url,
 );
 
-const [child, snapshot, backgrounds, vfx, router, server, backgroundsUi, vfxUi, phaseMap] = await Promise.all([
+const [child, snapshot, backgrounds, vfx, router, server, backgroundsUi, vfxUi, vfxUiLegacy, phaseMap] = await Promise.all([
   readFile(childPath, "utf8").then(JSON.parse),
   readFile(snapshotPath, "utf8").then(JSON.parse),
   readFile(resolve(childRoot, "contracts/space-typing-admin-backgrounds.v1.json"), "utf8").then(JSON.parse),
@@ -29,8 +29,10 @@ const [child, snapshot, backgrounds, vfx, router, server, backgroundsUi, vfxUi, 
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-backgrounds-phase-b.ts"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b.ts"), "utf8"),
+  readFile(resolve(root, "portal/src/admin/space-typing-vfx-phase-b-legacy.ts"), "utf8"),
   readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
 ]);
+const vfxUiSurface = `${vfxUi}\n${vfxUiLegacy}`;
 
 assert.equal(child.contractRevision, "space-typing-admin-v1");
 assert.equal(child.schemaVersion, 1);
@@ -74,10 +76,15 @@ assert.doesNotMatch(server, /POST"&&url\.pathname==="\/api\/admin\/space-typing\
 assert.match(backgroundsUi, /RUNTIME-BACKED · READ ONLY/);
 assert.match(backgroundsUi, /\/api\/admin\/space-typing\/backgrounds\/contract/);
 assert.doesNotMatch(backgroundsUi, /createRevision|\/publish/);
-assert.match(vfxUi, /RUNTIME-BACKED · READ ONLY/);
-assert.match(vfxUi, /NO FAKE VFX PROFILE/);
-assert.match(vfxUi, /\/api\/admin\/space-typing\/vfx\/contract/);
-assert.doesNotMatch(vfxUi, /createRevision|\/publish|type\s*=\s*["']range["']/);
+
+// A10.5 wraps the canonical read-only VFX inspector with a child-owned production
+// combat preview. Validate both layers instead of freezing the old one-file presentation.
+assert.match(vfxUi, /renderLegacyPhaseBVfx/);
+assert.match(vfxUi, /createCombatVfxProductionPreviewPanel/);
+assert.match(vfxUiSurface, /RUNTIME-BACKED · READ ONLY/);
+assert.match(vfxUiSurface, /NO FAKE VFX PROFILE/);
+assert.match(vfxUiSurface, /\/api\/admin\/space-typing\/vfx\/contract/);
+assert.doesNotMatch(vfxUiSurface, /createRevision|\/publish|type\s*=\s*["']range["']/);
 
 const backgroundsMap = phaseMap.screens.find((entry) => entry.route === "/admin/space-typing/backgrounds");
 assert.equal(backgroundsMap?.status, "phase-b-ui-wired-runtime-backed-readonly");
