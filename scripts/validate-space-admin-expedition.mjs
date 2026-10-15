@@ -6,11 +6,11 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const childRoot = resolve(root, "games/space-typing");
-// A9 SFX re-audit: 8e1c384..71de632 only adds the production-derived
-// SAMPLE_SFX Admin read model/contract/preview/audit/test and package scripts.
-// Expedition run/session/store ownership and the frozen Stage snapshot regression
-// coverage asserted below remain unchanged.
-const EXPEDITION_AUDITED_CHILD_SHA = "71de6326ab448b4e0977d5daf9bd0187591cb32d";
+// A10.5 re-audit: 71de632..6c57a2b changes Ship/A10 capability work and
+// isolated Admin preview modules. Expedition run/session/store ownership,
+// expedition plan, Stage runtime policy and frozen Stage snapshot regression
+// coverage asserted below are unchanged.
+const EXPEDITION_AUDITED_CHILD_SHA = "6c57a2b7340b96a41e0f9f2b6fb5143ca532fd1c";
 const readChild = (path) => readFile(resolve(childRoot, path), "utf8");
 const contract = JSON.parse(await readChild("contracts/space-typing-admin-expedition.v1.json"));
 const [
@@ -80,9 +80,6 @@ assert.match(sessionSource, /ExpeditionSession/);
 assert.match(storeSource, /spaceTypingExpeditionRunV1/);
 assert.match(planSource, /expansion-v2/);
 
-// A8 Stage-runtime ownership regression: Expedition persistence owns a frozen
-// copy of the page/session policy and never inherits a newer Published policy
-// when an existing or legacy run is resumed after reload.
 assert.match(storeSource, /stageRuntimeSnapshot/);
 assert.match(storeSource, /freezeNewRunStageRuntime/);
 assert.match(storeSource, /captureActiveStageRuntimeSession/);
@@ -122,7 +119,9 @@ for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
 }
 
 assert.match(router, /renderPhaseBExpedition/);
-assert.match(router, /\$\{BASE\}\/expedition`\) return renderPhaseBExpedition\(\)/);
+assert.match(router, /\$\{BASE\}\/expedition`\) return decorated\(path, renderPhaseBExpedition\(\)\)/);
+assert.match(router, /attachProductionPreviewClassification\(screen, path\)/);
+assert.match(router, /attachRoleAwareActionGates\(screen\)/);
 assert.match(page, /\/api\/admin\/space-typing\/expedition\/contract/);
 assert.match(page, /RUNTIME-BACKED · READ ONLY/);
 assert.match(page, /BROWSER SAVE · NO REMOTE MUTATION/);
