@@ -6,9 +6,10 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (path) => readFile(resolve(root, path), "utf8");
 
-const [acceptance, security, history, developerTools, developerToolsUi, previewStudio, previewBridge] = await Promise.all([
+const [acceptance, security, permissionGates, history, developerTools, developerToolsUi, previewStudio, previewBridge] = await Promise.all([
   read("docs/SPACE_TYPING_ADMIN_V2_MANUAL_ACCEPTANCE.md"),
   read("admin/admin-security.mjs"),
+  read("portal/src/admin/v2/security/permission-gates.ts"),
   read("portal/src/admin/space-typing-history-phase-b.ts"),
   read("admin/developer-tools.mjs"),
   read("portal/src/admin/v2/developer-tools.ts"),
@@ -44,6 +45,32 @@ assert.match(security, /TYPING_GAME_ADMIN_PERMISSION_OVERRIDES/);
 assert.match(security, /template\?\.permissions \?\? \[\]/);
 assert.match(security, /Never trust a browser\/request header to elevate access/);
 assert.match(security, /result: "denied"/);
+
+// A13: permission-aware client actions also fail closed while actor hydration is pending/unavailable.
+for (const token of [
+  'root.dataset["adminPermissionState"] = "pending"',
+  "primeFailClosed(root, snapshots);",
+  'root.addEventListener("click"',
+  "event.preventDefault();",
+  "event.stopImmediatePropagation();",
+  "}, true);",
+  'root.dataset["adminPermissionState"] = "unavailable"',
+  "failUnavailable(root, snapshots);",
+]) {
+  assert.ok(permissionGates.includes(token), `A13 permission hydration guard missing: ${token}`);
+}
+assert.ok(
+  permissionGates.indexOf("primeFailClosed(root, snapshots);") < permissionGates.indexOf("void api.getActor()"),
+  "Permission-bearing actions must enter a fail-closed pending state before actor hydration begins.",
+);
+assert.doesNotMatch(
+  permissionGates,
+  /button\.disabled\s*=\s*false/,
+  "Permission hydration must not blindly re-enable buttons owned by domain validation/loading state.",
+);
+const actorFailureGate = permissionGates.slice(permissionGates.indexOf(".catch(() => {"));
+assert.match(actorFailureGate, /permissions = null;/);
+assert.match(actorFailureGate, /failUnavailable\(root, snapshots\);/);
 
 // A14: administrator-facing compare/audit is present while CAS remains backend-owned.
 for (const token of ["before", "after", "getAudit", "Publish", "Rollback", "Advanced"]) {
