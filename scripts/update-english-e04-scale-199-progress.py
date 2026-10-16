@@ -24,3 +24,4 @@ repls=[
 ('Finish the active Scale-198 apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance + Platform CI on that checkpoint. If all three PASS, open Scale-199 from the resulting live frontiers without changing the `0.86` threshold.','Finish the active Scale-199 apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance + Platform CI on that checkpoint. If all three PASS, open Scale-200 from the resulting live frontiers without changing the `0.86` threshold.','next task')]
 for old,new,label in repls: text=replace_once(text,old,new,label)
 path.write_text(text,encoding='utf-8')
+# Recovery trigger: converge derived metadata after Simple Wiktionary source-pin refresh.
