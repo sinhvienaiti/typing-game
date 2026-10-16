@@ -1,0 +1,92 @@
+name: Converge English Content Recovery
+on:
+  push:
+    branches: [prep/e04-scale-199]
+    paths:
+      - .github/workflows/converge-english-content-recovery.yml
+permissions:
+  contents: write
+concurrency:
+  group: english-content-recovery-scale-199
+  cancel-in-progress: false
+jobs:
+  converge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with: {version: 11.21.0}
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with: {node-version: 24.11.0}
+      - name: Generate and publish reviewed runtime
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+      - name: Run English-content quality gates
+        run: |
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Converge derived publication state
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+      - name: Stage converged artifacts
+        run: |
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs
+          git status --short
+          if git diff --cached --quiet; then echo 'Recovery produced no derived state change.' >&2; exit 1; fi
+          git diff --cached --binary > /tmp/recovery-before.patch
+      - name: Verify recovery is deterministic
+        run: |
+          pnpm english-content:generate
+          pnpm english-content:publish
+          pnpm english-content:validate
+          pnpm english-content:review:validate
+          pnpm english-content:e10
+          pnpm english-content:licenses
+          pnpm english-content:test
+          pnpm english-content:dedupe
+          pnpm english-content:runtime:smoke
+          pnpm english-content:e11
+          pnpm english-content:e12
+          node scripts/audit-english-content-master-plan.mjs
+          node scripts/report-english-content-e04.mjs
+          node scripts/report-english-content-enrichment-links.mjs
+          node scripts/sync-english-content-master-plan-status.mjs
+          git add content/english shared docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md docs/ENGLISH_LEARNING_CONTENT_SYSTEM_PROGRESS.md scripts/smoke-published-english-content.mjs
+          git diff --cached --binary > /tmp/recovery-after.patch
+          if ! cmp -s /tmp/recovery-before.patch /tmp/recovery-after.patch; then echo 'Recovery artifacts are not reproducible.' >&2; diff -u /tmp/recovery-before.patch /tmp/recovery-after.patch || true; exit 1; fi
+      - name: Commit converged derived artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix(content): converge refreshed Simple Wiktionary metadata'
+          git push
