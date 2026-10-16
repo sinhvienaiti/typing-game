@@ -1409,6 +1409,2806 @@
     },
     {
       "schemaVersion": 1,
+      "id": "chunk.00001416",
+      "type": "chunk",
+      "text": "when a rollout depends on cached configuration, verify cache invalidation reaches every region before changing the default",
+      "key": "when a rollout depends on cached configuration, verify cache invalidation reaches every region before changing the default",
+      "meaningVi": "khi rollout phụ thuộc vào configuration được cache, hãy xác minh cache invalidation tới mọi region trước khi đổi default",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm rollout governance tránh trạng thái cấu hình không đồng nhất giữa các region.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001416",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001417",
+      "type": "chunk",
+      "text": "before changing a service ownership boundary, map operational responsibilities that are currently enforced only by team habit",
+      "key": "before changing a service ownership boundary, map operational responsibilities that are currently enforced only by team habit",
+      "meaningVi": "trước khi thay đổi ranh giới ownership của service, hãy lập bản đồ các trách nhiệm vận hành hiện chỉ được duy trì bằng thói quen của team",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm ownership transition làm rõ trách nhiệm ngầm trước khi tái tổ chức.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001417",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001418",
+      "type": "chunk",
+      "text": "if a recommendation metric improves after excluding cold-start users, report the excluded population separately to preserve context",
+      "key": "if a recommendation metric improves after excluding cold-start users, report the excluded population separately to preserve context",
+      "meaningVi": "nếu recommendation metric cải thiện sau khi loại cold-start user, hãy báo cáo riêng population bị loại để giữ đúng bối cảnh",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm recommender analysis tránh che giấu selection effect.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001418",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001419",
+      "type": "chunk",
+      "text": "when a database replica is promoted, compare replication lag and pending writes before redirecting latency-sensitive traffic",
+      "key": "when a database replica is promoted, compare replication lag and pending writes before redirecting latency-sensitive traffic",
+      "meaningVi": "khi database replica được promote, hãy so sánh replication lag và pending write trước khi chuyển traffic nhạy với latency",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm failover kiểm tra tính nhất quán trước khi chuyển traffic.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001419",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001420",
+      "type": "chunk",
+      "text": "before simplifying a pricing page, preserve enough detail for customers to distinguish usage limits from feature limits",
+      "key": "before simplifying a pricing page, preserve enough detail for customers to distinguish usage limits from feature limits",
+      "meaningVi": "trước khi đơn giản hóa pricing page, hãy giữ đủ chi tiết để khách hàng phân biệt usage limit với feature limit",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm pricing UX cân bằng đơn giản hóa với tính minh bạch.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001420",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001421",
+      "type": "chunk",
+      "text": "if average handling time drops after automation, inspect exception queues to see whether difficult cases were merely displaced",
+      "key": "if average handling time drops after automation, inspect exception queues to see whether difficult cases were merely displaced",
+      "meaningVi": "nếu average handling time giảm sau automation, hãy kiểm tra exception queue để xem case khó có chỉ bị chuyển sang nơi khác hay không",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm operations measurement phát hiện complexity bị dồn vào exception path.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001421",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001422",
+      "type": "chunk",
+      "text": "when a data contract adds a fallback value, track how often the fallback is used so missing upstream data remains visible",
+      "key": "when a data contract adds a fallback value, track how often the fallback is used so missing upstream data remains visible",
+      "meaningVi": "khi data contract thêm fallback value, hãy theo dõi tần suất fallback được dùng để dữ liệu upstream bị thiếu vẫn nhìn thấy được",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm data quality ngăn fallback che khuất lỗi nguồn.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001422",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001423",
+      "type": "chunk",
+      "text": "before reducing connection timeouts, model slow but valid dependencies separately from genuinely failed connections",
+      "key": "before reducing connection timeouts, model slow but valid dependencies separately from genuinely failed connections",
+      "meaningVi": "trước khi giảm connection timeout, hãy mô hình hóa dependency chậm nhưng hợp lệ tách khỏi connection thực sự lỗi",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm timeout tuning tránh tạo false failure cho dependency chậm.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001423",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001424",
+      "type": "chunk",
+      "text": "if a new inventory policy lowers stockouts, compare expiry and obsolescence costs before increasing target coverage",
+      "key": "if a new inventory policy lowers stockouts, compare expiry and obsolescence costs before increasing target coverage",
+      "meaningVi": "nếu inventory policy mới làm giảm stockout, hãy so sánh chi phí hết hạn và lỗi thời trước khi tăng target coverage",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm inventory tradeoff cân bằng availability với holding risk.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001424",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001425",
+      "type": "chunk",
+      "text": "when a privacy filter removes identifiers, test whether combinations of remaining fields can still re-identify rare users",
+      "key": "when a privacy filter removes identifiers, test whether combinations of remaining fields can still re-identify rare users",
+      "meaningVi": "khi privacy filter loại identifier, hãy kiểm tra liệu tổ hợp các field còn lại có vẫn tái nhận diện user hiếm hay không",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm privacy review xem xét re-identification qua quasi-identifiers.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001425",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001426",
+      "type": "chunk",
+      "text": "before merging monitoring dashboards, preserve service-level drilldowns so aggregate health does not hide isolated failures",
+      "key": "before merging monitoring dashboards, preserve service-level drilldowns so aggregate health does not hide isolated failures",
+      "meaningVi": "trước khi hợp nhất monitoring dashboard, hãy giữ service-level drilldown để aggregate health không che lỗi cục bộ",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm observability giữ khả năng phân tích chi tiết sau consolidation.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001426",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001427",
+      "type": "chunk",
+      "text": "if a campaign appears more efficient after audience narrowing, compare incremental reach rather than cost per converted user alone",
+      "key": "if a campaign appears more efficient after audience narrowing, compare incremental reach rather than cost per converted user alone",
+      "meaningVi": "nếu campaign có vẻ hiệu quả hơn sau khi thu hẹp audience, hãy so sánh incremental reach thay vì chỉ cost per converted user",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm marketing analysis tránh tối ưu metric bằng cách thu hẹp population quá mức.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001427",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001428",
+      "type": "chunk",
+      "text": "when a dependency upgrade removes warnings, verify deprecated behavior was not silently replaced with a different default",
+      "key": "when a dependency upgrade removes warnings, verify deprecated behavior was not silently replaced with a different default",
+      "meaningVi": "khi dependency upgrade loại warning, hãy xác minh behavior deprecated không bị âm thầm thay bằng default khác",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm dependency upgrade kiểm tra semantic change ngoài warning.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001428",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001429",
+      "type": "chunk",
+      "text": "before increasing worker concurrency, measure downstream rate limits and shared-resource saturation under coordinated bursts",
+      "key": "before increasing worker concurrency, measure downstream rate limits and shared-resource saturation under coordinated bursts",
+      "meaningVi": "trước khi tăng worker concurrency, hãy đo rate limit downstream và saturation của shared resource dưới burst đồng thời",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm concurrency tuning tránh chuyển bottleneck xuống downstream.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001429",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001430",
+      "type": "chunk",
+      "text": "if support satisfaction rises after closing tickets sooner, check reopen rates before treating faster closure as better resolution",
+      "key": "if support satisfaction rises after closing tickets sooner, check reopen rates before treating faster closure as better resolution",
+      "meaningVi": "nếu support satisfaction tăng sau khi đóng ticket sớm hơn, hãy kiểm tra reopen rate trước khi coi đóng nhanh là giải quyết tốt hơn",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm support quality phân biệt speed với resolution durability.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001430",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001431",
+      "type": "chunk",
+      "text": "when a ranking model favors newer content, audit long-tail discovery so freshness does not erase durable high-value items",
+      "key": "when a ranking model favors newer content, audit long-tail discovery so freshness does not erase durable high-value items",
+      "meaningVi": "khi ranking model ưu tiên content mới, hãy audit long-tail discovery để freshness không xóa mất item có giá trị bền vững",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm ranking governance cân bằng freshness với evergreen value.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001431",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001432",
+      "type": "chunk",
+      "text": "before changing a reconciliation cutoff, replay transactions around the boundary to quantify timing-sensitive mismatches",
+      "key": "before changing a reconciliation cutoff, replay transactions around the boundary to quantify timing-sensitive mismatches",
+      "meaningVi": "trước khi thay đổi reconciliation cutoff, hãy replay transaction quanh boundary để định lượng mismatch nhạy với timing",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm reconciliation kiểm tra ảnh hưởng của cutoff tới matching.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001432",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001433",
+      "type": "chunk",
+      "text": "if a compressed payload reduces bandwidth, measure decompression CPU on constrained clients before making it universal",
+      "key": "if a compressed payload reduces bandwidth, measure decompression cpu on constrained clients before making it universal",
+      "meaningVi": "nếu compressed payload giảm bandwidth, hãy đo CPU decompression trên client hạn chế tài nguyên trước khi áp dụng toàn bộ",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm payload optimization cân bằng network với client compute.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001433",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001434",
+      "type": "chunk",
+      "text": "when a fraud model is recalibrated, compare threshold movement across customer segments rather than only global precision",
+      "key": "when a fraud model is recalibrated, compare threshold movement across customer segments rather than only global precision",
+      "meaningVi": "khi fraud model được recalibrate, hãy so sánh thay đổi threshold giữa các customer segment thay vì chỉ global precision",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm fraud analytics kiểm tra tác động không đồng đều giữa segment.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001434",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001435",
+      "type": "chunk",
+      "text": "before removing a legacy endpoint, inspect traffic from scheduled jobs and offline clients that may not appear in interactive telemetry",
+      "key": "before removing a legacy endpoint, inspect traffic from scheduled jobs and offline clients that may not appear in interactive telemetry",
+      "meaningVi": "trước khi xóa legacy endpoint, hãy kiểm tra traffic từ scheduled job và offline client có thể không xuất hiện trong interactive telemetry",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm API deprecation tránh bỏ sót non-interactive consumers.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001435",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001436",
+      "type": "chunk",
+      "text": "if a new fulfillment rule lowers shipping cost, compare delivery variance and split-shipment frequency before broad adoption",
+      "key": "if a new fulfillment rule lowers shipping cost, compare delivery variance and split-shipment frequency before broad adoption",
+      "meaningVi": "nếu fulfillment rule mới làm giảm shipping cost, hãy so sánh delivery variance và split-shipment frequency trước khi áp dụng rộng",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm logistics đánh giá service quality bên cạnh chi phí.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001436",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001437",
+      "type": "chunk",
+      "text": "when a search index is rebuilt incrementally, schedule periodic full validation to catch documents skipped by change detection",
+      "key": "when a search index is rebuilt incrementally, schedule periodic full validation to catch documents skipped by change detection",
+      "meaningVi": "khi search index được rebuild incremental, hãy lên lịch full validation định kỳ để phát hiện document bị bỏ sót bởi change detection",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm indexing giúp phát hiện omission tích lũy trong incremental path.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001437",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001438",
+      "type": "chunk",
+      "text": "before increasing a promotional discount, estimate customer pull-forward so future baseline demand is not overstated",
+      "key": "before increasing a promotional discount, estimate customer pull-forward so future baseline demand is not overstated",
+      "meaningVi": "trước khi tăng promotional discount, hãy ước tính customer pull-forward để baseline demand tương lai không bị đánh giá sai",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm promotion analysis tách demand tăng thật khỏi demand bị kéo sớm.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001438",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001439",
+      "type": "chunk",
+      "text": "if authentication latency falls after token caching, verify revocation propagation remains within the required security window",
+      "key": "if authentication latency falls after token caching, verify revocation propagation remains within the required security window",
+      "meaningVi": "nếu authentication latency giảm sau token caching, hãy xác minh revocation propagation vẫn nằm trong security window yêu cầu",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm auth caching cân bằng latency với revocation freshness.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001439",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001440",
+      "type": "chunk",
+      "text": "when a forecasting model uses external indicators, test graceful degradation for periods when those indicators arrive late",
+      "key": "when a forecasting model uses external indicators, test graceful degradation for periods when those indicators arrive late",
+      "meaningVi": "khi forecasting model dùng external indicator, hãy test graceful degradation cho giai đoạn indicator đến trễ",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm forecast resilience xử lý data feed chậm.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001440",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001441",
+      "type": "chunk",
+      "text": "before consolidating customer identities, preserve merge provenance so incorrect unions can be reversed without guesswork",
+      "key": "before consolidating customer identities, preserve merge provenance so incorrect unions can be reversed without guesswork",
+      "meaningVi": "trước khi hợp nhất customer identity, hãy giữ merge provenance để union sai có thể được đảo ngược mà không phải phỏng đoán",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm identity resolution hỗ trợ rollback có truy vết.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001441",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001442",
+      "type": "chunk",
+      "text": "if a cache hit rate improves after widening keys, verify unrelated users are not sharing state that should remain isolated",
+      "key": "if a cache hit rate improves after widening keys, verify unrelated users are not sharing state that should remain isolated",
+      "meaningVi": "nếu cache hit rate tăng sau khi mở rộng key, hãy xác minh user không liên quan không chia sẻ state vốn phải cách ly",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm cache correctness kiểm tra isolation sau key redesign.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001442",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001443",
+      "type": "chunk",
+      "text": "when a team reduces meeting time, compare decision latency and rework so coordination cost is not merely deferred",
+      "key": "when a team reduces meeting time, compare decision latency and rework so coordination cost is not merely deferred",
+      "meaningVi": "khi team giảm thời gian họp, hãy so sánh decision latency và rework để coordination cost không chỉ bị dời sang nơi khác",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm team operations đánh giá hiệu quả coordination toàn diện.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001443",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001444",
+      "type": "chunk",
+      "text": "before relaxing validation on optional metadata, identify downstream rules that still assume the field is trustworthy when present",
+      "key": "before relaxing validation on optional metadata, identify downstream rules that still assume the field is trustworthy when present",
+      "meaningVi": "trước khi nới validation cho metadata optional, hãy xác định rule downstream vẫn giả định field đáng tin khi có mặt",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm schema quality tránh làm suy yếu semantic contract.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001444",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001445",
+      "type": "chunk",
+      "text": "if a delivery route optimizer cuts distance, inspect driver overtime and time-window violations before accepting the plan",
+      "key": "if a delivery route optimizer cuts distance, inspect driver overtime and time-window violations before accepting the plan",
+      "meaningVi": "nếu route optimizer giảm quãng đường, hãy kiểm tra driver overtime và time-window violation trước khi chấp nhận kế hoạch",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm logistics optimization cân bằng distance với operational constraints.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001445",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001446",
+      "type": "chunk",
+      "text": "when a billing rule is corrected prospectively, quantify historical exposure before deciding whether retroactive adjustment is required",
+      "key": "when a billing rule is corrected prospectively, quantify historical exposure before deciding whether retroactive adjustment is required",
+      "meaningVi": "khi billing rule được sửa cho tương lai, hãy định lượng exposure lịch sử trước khi quyết định có cần điều chỉnh hồi tố hay không",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm billing governance đánh giá phạm vi tác động trước remediation.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001446",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001447",
+      "type": "chunk",
+      "text": "before increasing log verbosity during an incident, estimate storage pressure and ingestion backlogs at peak traffic",
+      "key": "before increasing log verbosity during an incident, estimate storage pressure and ingestion backlogs at peak traffic",
+      "meaningVi": "trước khi tăng log verbosity trong incident, hãy ước tính storage pressure và ingestion backlog ở peak traffic",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm incident observability tránh gây thêm bottleneck bởi logging.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001447",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001448",
+      "type": "chunk",
+      "text": "if a model explanation becomes simpler, confirm predictive behavior did not change because features were removed at the same time",
+      "key": "if a model explanation becomes simpler, confirm predictive behavior did not change because features were removed at the same time",
+      "meaningVi": "nếu model explanation trở nên đơn giản hơn, hãy xác nhận predictive behavior không thay đổi do feature cũng bị loại cùng lúc",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm model governance tách explainability improvement khỏi model change.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001448",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001449",
+      "type": "chunk",
+      "text": "when a supplier score improves, verify missing reports are not excluded from the denominator in a way that rewards non-reporting",
+      "key": "when a supplier score improves, verify missing reports are not excluded from the denominator in a way that rewards non-reporting",
+      "meaningVi": "khi supplier score cải thiện, hãy xác minh report bị thiếu không bị loại khỏi denominator theo cách vô tình thưởng cho việc không báo cáo",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm supplier analytics phát hiện incentive sai do missing data.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001449",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001450",
+      "type": "chunk",
+      "text": "before renaming a public event, test consumers that match event names literally rather than through a versioned schema",
+      "key": "before renaming a public event, test consumers that match event names literally rather than through a versioned schema",
+      "meaningVi": "trước khi đổi tên public event, hãy test consumer match event name theo literal thay vì qua versioned schema",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm event compatibility bảo vệ consumer phụ thuộc tên literal.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001450",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001451",
+      "type": "chunk",
+      "text": "if warehouse throughput rises after batching picks, compare order lateness for small urgent orders before scaling the policy",
+      "key": "if warehouse throughput rises after batching picks, compare order lateness for small urgent orders before scaling the policy",
+      "meaningVi": "nếu warehouse throughput tăng sau batching pick, hãy so sánh order lateness của đơn nhỏ khẩn cấp trước khi mở rộng policy",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm warehouse operations kiểm tra fairness giữa order profile.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001451",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001452",
+      "type": "chunk",
+      "text": "when a data export is anonymized, validate referential consistency so linked records remain analytically usable without restoring identity",
+      "key": "when a data export is anonymized, validate referential consistency so linked records remain analytically usable without restoring identity",
+      "meaningVi": "khi data export được anonymize, hãy xác minh referential consistency để record liên kết vẫn dùng được cho phân tích mà không khôi phục identity",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm anonymization cân bằng privacy với analytical integrity.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001452",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001453",
+      "type": "chunk",
+      "text": "before adopting a faster serialization format, test backward readers and archival recovery tools against the new encoding",
+      "key": "before adopting a faster serialization format, test backward readers and archival recovery tools against the new encoding",
+      "meaningVi": "trước khi dùng serialization format nhanh hơn, hãy test backward reader và archival recovery tool với encoding mới",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm format migration kiểm tra compatibility và khả năng recovery.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001453",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001454",
+      "type": "chunk",
+      "text": "if a mobile release improves startup time, compare background battery use so initialization work was not simply deferred",
+      "key": "if a mobile release improves startup time, compare background battery use so initialization work was not simply deferred",
+      "meaningVi": "nếu mobile release cải thiện startup time, hãy so sánh background battery use để công việc khởi tạo không chỉ bị dời về sau",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm mobile performance phát hiện work shifting sau startup.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001454",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "chunk.00001455",
+      "type": "chunk",
+      "text": "when a compliance control is automated, preserve evidence of both successful checks and skipped conditions for later audit",
+      "key": "when a compliance control is automated, preserve evidence of both successful checks and skipped conditions for later audit",
+      "meaningVi": "khi compliance control được tự động hóa, hãy giữ bằng chứng của cả check thành công lẫn điều kiện bị skip cho audit sau này",
+      "cefr": "C1",
+      "transitivity": "not-applicable",
+      "separability": "not-applicable",
+      "register": [
+        "neutral"
+      ],
+      "notesVi": "Cụm compliance automation yêu cầu audit trail đầy đủ.",
+      "exampleIds": [],
+      "quality": {
+        "state": "published",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e04-scale-210-authoring-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e04-scale-210-grammar-editorial-review"
+          },
+          "translation": {
+            "status": "pass",
+            "method": "e04-scale-210-bilingual-review"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e04-scale-210-naturalness-review"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e04-scale-210-cefr-review"
+          },
+          "targetStructure": {
+            "status": "pass",
+            "method": "e04-scale-210-structure-review"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "normalized-key-v210"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e04-scale-210-cross-batch-near-dedup-review"
+          },
+          "license": {
+            "status": "pass",
+            "method": "project-original-license-review-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "chunk.00001455",
+            "sourceUrl": "content/english/phrases/e04-scale-210-phrases.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original E04 focused scale-210 chunk; bilingual meaning and structure were editorially reviewed before publication."
+      }
+    },
+    {
+      "schemaVersion": 1,
       "id": "pv.00000261",
       "type": "phrasal-verb",
       "text": "break with",
