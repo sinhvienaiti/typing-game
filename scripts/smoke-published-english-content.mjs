@@ -274,7 +274,7 @@ try {
   const idiomCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"idiom");
   if(verbPatternCount!==510) errors.push("published verb-pattern activity must expose 510 reviewed records");
   if(phrasalVerbCount!==1000) errors.push("published phrasal-verb activity must expose 1000 reviewed records");
-  if(chunkCount!==1255) errors.push("published chunk activity must expose 1255 reviewed records");
+  if(chunkCount!==1295) errors.push("published chunk activity must expose 1295 reviewed records");
   if(idiomCount!==1185) errors.push("published idiom activity must expose 1185 reviewed records");
 } catch (error) {
   errors.push("published activity source routing smoke failed: "+error.message);
