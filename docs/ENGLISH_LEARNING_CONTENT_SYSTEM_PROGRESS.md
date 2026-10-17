@@ -6,9 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up state before scale-223 publication: `9e13c9a6f6632f6f85ae86c341ca27ef7660dac0` — scale-222 publication checkpoint verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI; scale-222 published output: `14b22c1d4ebfae9b947dc7327f7eccf6c34db330`.
-- Scale-222 publication state at `9e13c9a6f6632f6f85ae86c341ca27ef7660dac0` is fully verified; scale-223 is the active publication unit.
-- Scale-223 source/apply publication is active; after bot publication create exactly one normal-user checkpoint before opening the next safe scale-up unit.
+- Latest fully CI-verified scale-up state before scale-224 publication: `03775c03973e66204df7d46c4e1b7e2401952fad` — scale-223 publication checkpoint verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI; scale-223 published output: `27ed6f7a76d7766a4de3172e7bf48ab9e1d3ecc9`.
+- Scale-223 publication state at `03775c03973e66204df7d46c4e1b7e2401952fad` is fully verified; scale-224 is the active publication unit.
+- Scale-224 source/apply publication is active; after bot publication create exactly one normal-user checkpoint before opening the next safe scale-up unit.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is active.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
@@ -19,7 +19,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 
 - E00–E02 foundation/contracts: complete
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
-- E04 phrase/pattern architecture + current reviewed publication: complete — 9,670 published records after scale-223
+- E04 phrase/pattern architecture + current reviewed publication: complete — 9,695 published records after scale-224
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
 - E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
@@ -27,18 +27,18 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-223 publication
+## Published runtime snapshot after E04 scale-224 publication
 
 - dictionary: 900 records
 - grammar: 300 records
 - sentences: 3,401 records
-- phrases: 9,670 records
-- total published rich records: 14,271
+- phrases: 9,695 records
+- total published rich records: 14,296
 - attribution runtime: 4 source records
-- editorial ledger: 14,271 decisions / 14,271 applied / 14,271 publish decisions
+- editorial ledger: 14,296 decisions / 14,296 applied / 14,296 publish decisions
 - E04 collocation frontier: `col.00005000`
 - E04 phrasal-verb frontier: `pv.00001000`
-- E04 chunk frontier: `chunk.00001975`
+- E04 chunk frontier: `chunk.00002000`
 - E04 idiom frontier: `idiom.00001185`
 
 ## Approved scale-up targets
@@ -52,7 +52,7 @@ Priority order:
    - verb patterns: 500–1,000 target range; current runtime already exceeds the 500 minimum at 510, so prioritize other under-target families unless valid reviewed evidence is ready;
    - collocations: 5,000+; current frontier is 5,000, so the minimum is met;
    - phrasal verbs: 1,000+; current frontier is 1,000, so the minimum is met; prioritize other under-target families unless valid reviewed phrasal evidence is ready;
-   - idioms/chunks: 2,000+ long-term scale target; continue bounded reviewed idiom/chunk batches while the target remains unmet.
+   - idioms/chunks: 2,000+ long-term scale target; the chunk frontier now reaches 2,000, so do not extend chunks further merely for volume; recalculate the next evidence-backed E04 or E11 priority from live HEAD.
 3. E11 sentence/exercise corpus scale-up:
    - example sentences: 100,000+;
    - translation pairs: 20,000+;
@@ -93,12 +93,12 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. Scale-222 publication checkpoint `9e13c9a6f6632f6f85ae86c341ca27ef7660dac0` is fully verified; do not duplicate scale-222 artifacts.
-2. Scale-223 is the active publication unit; do not start the next scale-up unit until its bot publication, one normal-user checkpoint and all three mandatory CI gates complete.
-3. Scale-223 adds a bounded 40-record chunk-only batch because the phrasal-verb and collocation minimums are already met while chunks remain under target, advancing the expected publication frontiers to `pv.00001000` / `chunk.00001975` / `idiom.00001185`; near-dedupe threshold remains `0.86`.
+1. Scale-223 publication checkpoint `03775c03973e66204df7d46c4e1b7e2401952fad` is fully verified; do not duplicate scale-223 artifacts.
+2. Scale-224 is the active publication unit; do not start the next scale-up unit until its bot publication, one normal-user checkpoint and all three mandatory CI gates complete.
+3. Scale-224 adds the final bounded 25-record chunk-only batch required to reach the 2,000 chunk target exactly, advancing the expected publication frontiers to `pv.00001000` / `chunk.00002000` / `idiom.00001185`; near-dedupe threshold remains `0.86`.
 4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
 5. Reuse the established scale-up workflow and preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
-6. After scale-223 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
+6. After scale-224 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
 7. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
 8. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
 
@@ -112,4 +112,4 @@ None.
 
 ## Next actionable task
 
-Finish the active Scale-223 chunk-only apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance and Platform CI on that checkpoint. If all three PASS, recalculate live deficits and continue with the final bounded chunk unit needed to reach 2,000 without changing the `0.86` threshold.
+Finish the active Scale-224 final 25-record chunk apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance and Platform CI on that checkpoint. If all three PASS, treat the 2,000 chunk target as reached and recalculate the next first-unfinished evidence-backed E04 or E11 unit from live HEAD without changing the `0.86` threshold.
