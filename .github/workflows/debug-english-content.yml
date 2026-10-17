@@ -1,0 +1,93 @@
+name: English Content Full Validation
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+
+permissions:
+  contents: write
+
+jobs:
+  validate-english-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Synchronize master-plan status snapshots
+        run: node scripts/sync-english-content-master-plan-status.mjs
+
+      - name: Validate English content schemas
+        run: pnpm english-content:validate
+
+      - name: Validate English review ledger
+        run: pnpm english-content:review:validate
+
+      - name: Validate English E10 batch contracts
+        run: pnpm english-content:e10
+
+      - name: Validate English content licenses
+        run: pnpm english-content:licenses
+
+      - name: Run English content tests
+        run: pnpm english-content:test
+
+      - name: Generate runtime artifacts
+        run: pnpm english-content:generate
+
+      - name: Publish runtime artifacts
+        run: pnpm english-content:publish
+
+      - name: Check runtime exact dedupe
+        run: pnpm english-content:dedupe
+
+      - name: Smoke published runtime
+        run: pnpm english-content:runtime:smoke
+
+      - name: Check E11 readiness
+        run: pnpm english-content:e11
+
+      - name: Run E12 release maintenance
+        run: pnpm english-content:e12
+
+      - name: Audit master-plan acceptance
+        run: node scripts/audit-english-content-master-plan.mjs
+
+      - name: Report E04 runtime coverage
+        run: node scripts/report-english-content-e04.mjs
+
+      - name: Measure enrichment-link evidence
+        run: node scripts/report-english-content-enrichment-links.mjs
+
+      - name: Verify generated source/runtime artifacts are reproducible
+        shell: bash
+        run: |
+          if ! git diff --exit-code -- shared content/english; then
+            echo 'Generated English-content artifacts drift from committed source of truth.' >&2
+            exit 1
+          fi
+
+      - name: Commit synchronized master-plan status
+        shell: bash
+        run: |
+          git status --short
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
+          if git diff --cached --quiet; then
+            echo 'Master-plan status already synchronized.'
+            exit 0
+          fi
+          git commit -m 'docs(content): sync English content runtime status'
+          git push

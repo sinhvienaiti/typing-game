@@ -1,0 +1,14 @@
+{
+  "records": [
+    ["capture calibration exposure", "chụp khung phơi sáng phục vụ hiệu chuẩn tải trọng quang học", "C1"],
+    ["subtract detector dark frame", "trừ khung tối của cảm biến khỏi dữ liệu đo", "C1"],
+    ["normalize radiometric response", "chuẩn hóa đáp ứng bức xạ của cảm biến quan sát", "C1"],
+    ["register multispectral channels", "đăng ký thẳng hàng các kênh ảnh đa phổ", "C1"],
+    ["compress payload data stream", "nén luồng dữ liệu do tải trọng tạo ra", "B2"],
+    ["prioritize downlink queue", "ưu tiên hàng đợi dữ liệu truyền xuống trạm mặt đất", "B2"],
+    ["allocate ground station window", "phân bổ cửa sổ liên lạc cho trạm mặt đất", "B2"],
+    ["archive processed telemetry", "lưu trữ dữ liệu đo xa đã xử lý", "B2"],
+    ["verify packet checksum", "xác minh giá trị kiểm tra của gói dữ liệu", "B2"],
+    ["reconstruct missing telemetry", "khôi phục phần dữ liệu đo xa bị thiếu", "C1"]
+  ]
+}

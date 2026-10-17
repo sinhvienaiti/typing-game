@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.narrative-viewpoint-aspect",
+      "cefr": "C2",
+      "title": "Tense/aspect viewpoint shifts in narrative",
+      "objective": "Manipulate temporal viewpoint across scenes while keeping reference time coherent.",
+      "concept": {
+        "en": "Advanced narrative manages tense and aspect as viewpoint choices: simple forms move events forward, progressive forms open an internal view, and perfect forms look back from a reference point.",
+        "vi": "Tường thuật nâng cao quản lý thì và thể như lựa chọn điểm nhìn: dạng đơn đẩy sự kiện tiến lên, tiếp diễn mở góc nhìn bên trong, và hoàn thành nhìn ngược từ một mốc tham chiếu."
+      },
+      "formulae": [
+        "simple tense for event progression",
+        "progressive for internal/ongoing viewpoint",
+        "perfect for anteriority relative to a reference time"
+      ],
+      "whenToUse": [
+        "Shift viewpoint deliberately across scenes while keeping the temporal reference point recoverable."
+      ],
+      "forms": {
+        "positive": [
+          "By the time the inspectors arrived, the night team had been monitoring the pressure for six hours, and the alarms were still sounding.",
+          "She opens the archive, finds the unsigned note, and suddenly remembers what the witness had said the previous evening.",
+          "The river had been rising for days; by dawn, water was spilling across the lower road."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.01.1",
+        "sent.grc2.01.01.2",
+        "sent.grc2.01.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.01"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.01",
+        "ex.translation.grc2.01.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.narrative-viewpoint-aspect",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.historical-present",
+      "cefr": "C2",
+      "title": "Historical present and stylistic tense shift",
+      "objective": "Use present forms for vivid narration without accidental tense inconsistency.",
+      "concept": {
+        "en": "The historical present switches into present tense inside a past narrative to make selected events feel immediate, while surrounding time references keep the chronology clear.",
+        "vi": "Historical present chuyển sang hiện tại trong một câu chuyện quá khứ để làm một số sự kiện trở nên sống động, trong khi các mốc thời gian xung quanh vẫn giữ trình tự rõ."
+      },
+      "formulae": [
+        "past narrative frame → selected present-tense scene",
+        "present tense used stylistically, not accidentally"
+      ],
+      "whenToUse": [
+        "Use the historical present consistently for a deliberately foregrounded scene, then signal any return to past narration."
+      ],
+      "forms": {
+        "positive": [
+          "So I enter the room, and the chair looks up and says, 'We need to talk,' even though ten minutes earlier she had denied there was a problem.",
+          "In 1969 the team reaches the ridge and discovers that the route marked on the map no longer exists.",
+          "The witness pauses, turns toward the jury, and then describes what she had seen outside the station."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.02.1",
+        "sent.grc2.01.02.2",
+        "sent.grc2.01.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.02"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.02",
+        "ex.translation.grc2.01.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.historical-present",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.sequence-of-tenses",
+      "cefr": "C2",
+      "title": "Sequence of tenses and deliberate non-backshift",
+      "objective": "Manage tense relationships in complex reporting across multiple time frames.",
+      "concept": {
+        "en": "Sequence of tenses in complex reporting reflects both the reporting time and whether the embedded proposition is still valid; backshift can therefore be obligatory, optional, or deliberately avoided.",
+        "vi": "Sequence of tenses trong tường thuật phức phản ánh cả thời điểm tường thuật và việc mệnh đề nhúng còn đúng hay không; vì vậy lùi thì có thể bắt buộc, tùy chọn hoặc chủ ý không dùng."
+      },
+      "formulae": [
+        "past reporting verb + backshifted clause",
+        "non-backshift for a still-valid/general proposition where licensed"
+      ],
+      "whenToUse": [
+        "Choose backshift from temporal interpretation and current validity rather than applying it mechanically."
+      ],
+      "forms": {
+        "positive": [
+          "The review concluded that the control had failed because the software was relying on a configuration that was already obsolete.",
+          "The lecturer reminded us that water boils at 100 degrees Celsius at standard pressure.",
+          "She said in March that the company would publish the figures once the audit had finished."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.03.1",
+        "sent.grc2.01.03.2",
+        "sent.grc2.01.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.03"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.03",
+        "ex.translation.grc2.01.03"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.sequence-of-tenses",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.layered-counterfactuals",
+      "cefr": "C2",
+      "title": "Layered counterfactual reasoning",
+      "objective": "Express multi-stage unreal causes/results across past and present time frames.",
+      "concept": {
+        "en": "Layered counterfactuals combine several unreal assumptions and consequences across different time frames, with each clause locating its own hypothetical relation.",
+        "vi": "Counterfactual nhiều tầng kết hợp nhiều giả định và hệ quả phi thực ở các mốc thời gian khác nhau, mỗi mệnh đề tự định vị quan hệ giả định của nó."
+      },
+      "formulae": [
+        "if + past perfect ... would have + participle; if that had happened, would + verb now",
+        "nested/linked counterfactual consequences"
+      ],
+      "whenToUse": [
+        "Use layered counterfactuals only when each unreal step has a clear causal and temporal relation to the next."
+      ],
+      "forms": {
+        "positive": [
+          "If the regulator had intervened earlier, the merger might have been delayed; had that happened, the market would be less concentrated today.",
+          "Had we retained the original backup, we could have restored the archive, which would have spared us the reconstruction now under way.",
+          "If she were more willing to delegate, she might have accepted the promotion last year and would not be managing both teams now."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.04.1",
+        "sent.grc2.01.04.2",
+        "sent.grc2.01.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.04"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.04",
+        "ex.translation.grc2.01.04"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.layered-counterfactuals",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.implicit-conditionals",
+      "cefr": "C2",
+      "title": "Implied and elliptical conditionals",
+      "objective": "Recognize and produce conditional meaning without an explicit if-clause.",
+      "concept": {
+        "en": "Conditional meaning can be conveyed without if through context, inversion, a noun phrase, an imperative, or a modalized main clause.",
+        "vi": "Nghĩa điều kiện có thể được diễn đạt không cần if thông qua ngữ cảnh, đảo ngữ, cụm danh từ, mệnh lệnh hoặc mệnh đề chính có modal."
+      },
+      "formulae": [
+        "with/but for/without + noun phrase, conditional result",
+        "imperative + and/or + result",
+        "modal result with condition inferred from context"
+      ],
+      "whenToUse": [
+        "Recognize the missing condition and make it explicit only when clarity requires it."
+      ],
+      "forms": {
+        "positive": [
+          "Without the additional evidence, the appeal would almost certainly have failed.",
+          "One more delay and the funding agreement could collapse altogether.",
+          "A less experienced team might have abandoned the search at that point."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.05.1",
+        "sent.grc2.01.05.2",
+        "sent.grc2.01.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.05"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.05",
+        "ex.translation.grc2.01.05"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.implicit-conditionals",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.so-such-inversion",
+      "cefr": "C2",
+      "title": "Inversion after so/such",
+      "objective": "Use formal/literary So + adjective... and Such was... patterns accurately.",
+      "concept": {
+        "en": "Formal or literary clauses can front so + adjective/adverb or such + noun phrase, triggering inversion or an emphatic copular pattern.",
+        "vi": "Mệnh đề trang trọng hoặc văn chương có thể đưa so + tính/trạng từ hoặc such + cụm danh từ lên đầu, kéo theo đảo ngữ hoặc mẫu copular nhấn mạnh."
+      },
+      "formulae": [
+        "So + adjective + be + subject + that ...",
+        "Such + be + noun phrase + that ..."
+      ],
+      "whenToUse": [
+        "Use these highly marked patterns for deliberate rhetorical emphasis, not as a neutral default."
+      ],
+      "forms": {
+        "positive": [
+          "So convincing was the evidence that even the original critics accepted the revised conclusion.",
+          "Such was the intensity of the storm that the coastal sensors stopped transmitting.",
+          "So rapidly did demand increase that the supplier exhausted its reserve stock within a week."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.06.1",
+        "sent.grc2.01.06.2",
+        "sent.grc2.01.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.06"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.06",
+        "ex.translation.grc2.01.06"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.so-such-inversion",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.locative-inversion",
+      "cefr": "C2",
+      "title": "Locative and directional inversion",
+      "objective": "Use marked place/direction-first inversion in descriptive/literary contexts.",
+      "concept": {
+        "en": "Locative and directional inversion places a location or movement expression first and, with suitable verbs, places the lexical verb before a full noun subject.",
+        "vi": "Locative/directional inversion đưa cụm nơi chốn hoặc hướng lên đầu và với động từ phù hợp, đặt động từ từ vựng trước chủ ngữ danh từ đầy đủ."
+      },
+      "formulae": [
+        "locative/directional phrase + verb + full noun subject"
+      ],
+      "whenToUse": [
+        "Use this marked order mainly in descriptive, literary, or scene-setting prose, especially with be, stand, lie, come, and similar verbs."
+      ],
+      "forms": {
+        "positive": [
+          "Beyond the final checkpoint stood a row of temporary shelters.",
+          "From the eastern tunnel emerged a maintenance vehicle carrying the replacement transformer.",
+          "At the center of the courtyard lies a stone basin dating from the seventeenth century."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.01.07.1",
+        "sent.grc2.01.07.2",
+        "sent.grc2.01.07.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.01.07"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.01.07",
+        "ex.translation.grc2.01.07"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.locative-inversion",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-01-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    }
+  ]
+}

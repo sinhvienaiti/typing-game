@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/review-ledger.schema.json",
+  "title": "English-content editorial review ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "decisions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "batchId",
+          "recordSetId",
+          "recordId",
+          "sourceDigest",
+          "targetState",
+          "checks",
+          "reviewedAt",
+          "reviewedBy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^review\\.[a-z0-9._-]+$",
+            "maxLength": 160
+          },
+          "batchId": {
+            "type": "string",
+            "pattern": "^e\\d{2}\\.[a-z0-9][a-z0-9-]*$",
+            "maxLength": 100
+          },
+          "recordSetId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$",
+            "maxLength": 100
+          },
+          "recordId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "sourceDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "targetState": {
+            "type": "string",
+            "enum": [
+              "validated",
+              "reviewed",
+              "published",
+              "deprecated"
+            ]
+          },
+          "checks": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "status",
+                "method"
+              ],
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "pass",
+                    "fail",
+                    "not-applicable"
+                  ]
+                },
+                "method": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120
+                },
+                "note": {
+                  "type": "string",
+                  "maxLength": 500
+                }
+              }
+            }
+          },
+          "reviewedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reviewedBy": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      }
+    }
+  }
+}
