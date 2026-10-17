@@ -30,29 +30,45 @@ function sourceKey(source) {
     [...(source.filterValues??[])].sort((a,b)=>String(a).localeCompare(String(b),"en")).join("\u0000"),
   ].join("\u0001");
 }
-function e04ManifestSources(targetId) {
+function manifestSources(targetId) {
   const sources=[];
   for (const batch of batchManifest.batches??[]) {
-    if (batch?.phase!=="E04"||batch?.category!=="phrases") continue;
     for (const set of batch.recordSets??[]) {
       const setId=String(set?.id??"");
       const relative=String(set?.path??"");
       if (!relative) continue;
-      if (targetId==="collocations"&&(setId==="collocations"||setId==="scale-collocations")) {
+
+      if (batch?.phase==="E04"&&batch?.category==="phrases") {
+        if (targetId==="collocations"&&(setId==="collocations"||setId==="scale-collocations")) {
+          sources.push({path:relative,collection:"records"});
+        } else if (targetId==="verb-patterns"&&(setId==="verb-patterns"||setId==="scale-verb-patterns")) {
+          sources.push({path:relative,collection:"records"});
+        } else if (targetId==="phrasal-verbs"&&(setId==="phrases"||setId==="scale-phrases")) {
+          sources.push({path:relative,collection:"records",filterField:"type",filterValues:["phrasal-verb"]});
+        } else if (targetId==="idioms-chunks"&&(setId==="phrases"||setId==="scale-phrases")) {
+          sources.push({path:relative,collection:"records",filterField:"type",filterValues:["idiom","chunk"]});
+        }
+        continue;
+      }
+
+      if (targetId==="example-sentences"&&batch?.phase==="E03"&&batch?.category==="dictionary"&&setId==="reviewed-examples") {
         sources.push({path:relative,collection:"records"});
-      } else if (targetId==="verb-patterns"&&(setId==="verb-patterns"||setId==="scale-verb-patterns")) {
-        sources.push({path:relative,collection:"records"});
-      } else if (targetId==="phrasal-verbs"&&(setId==="phrases"||setId==="scale-phrases")) {
-        sources.push({path:relative,collection:"records",filterField:"type",filterValues:["phrasal-verb"]});
-      } else if (targetId==="idioms-chunks"&&(setId==="phrases"||setId==="scale-phrases")) {
-        sources.push({path:relative,collection:"records",filterField:"type",filterValues:["idiom","chunk"]});
+        continue;
+      }
+
+      if (batch?.phase==="E05"&&batch?.category==="grammar") {
+        if (targetId==="example-sentences"&&setId==="examples") {
+          sources.push({path:relative,collection:"records"});
+        } else if (targetId==="common-mistakes"&&setId==="common-mistakes") {
+          sources.push({path:relative,collection:"records"});
+        }
       }
     }
   }
   return sources;
 }
 function sourcesForTarget(target) {
-  const merged=[...(target.sources??[]),...e04ManifestSources(target.id)];
+  const merged=[...(target.sources??[]),...manifestSources(target.id)];
   const seen=new Set();
   return merged.filter(source=>{
     const key=sourceKey(source);
