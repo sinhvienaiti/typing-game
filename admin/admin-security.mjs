@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID, createHash, timingSafeEqual } from "node:crypto";
 import { appendFile, mkdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
@@ -18,6 +18,14 @@ export const ADMIN_PERMISSIONS = Object.freeze({
   MEDIA_DELETE: "media.delete",
   AUDIT_READ: "audit.read",
   DEVELOPER_INSPECT: "developer.runtime-inspect",
+  PLAYERS_READ: "players.read",
+  PLAYERS_MODERATE: "players.moderate",
+  PLAYERS_SAVE: "players.save",
+  PLAYERS_CREDENTIALS: "players.credentials",
+  LIVEOPS_MAIL: "liveops.mail",
+  CHAT_MODERATE: "chat.moderate",
+  FEEDBACK_READ: "feedback.read",
+  FEEDBACK_MANAGE: "feedback.manage",
 });
 
 export const ADMIN_PERMISSION_CATALOG = Object.freeze([
@@ -28,6 +36,14 @@ export const ADMIN_PERMISSION_CATALOG = Object.freeze([
   { id: ADMIN_PERMISSIONS.MEDIA_DELETE, label: "Archive / delete Admin media", group: "Media", dangerous: true },
   { id: ADMIN_PERMISSIONS.AUDIT_READ, label: "Read audit history", group: "Governance", dangerous: false },
   { id: ADMIN_PERMISSIONS.DEVELOPER_INSPECT, label: "Open Developer Tools", group: "Developer", dangerous: true },
+  { id: ADMIN_PERMISSIONS.PLAYERS_READ, label: "View players, rewards, mail and codes", group: "Players", dangerous: false },
+  { id: ADMIN_PERMISSIONS.PLAYERS_MODERATE, label: "Ban, unban and sign players out", group: "Players", dangerous: true },
+  { id: ADMIN_PERMISSIONS.PLAYERS_SAVE, label: "Download and restore cloud saves", group: "Players", dangerous: true },
+  { id: ADMIN_PERMISSIONS.PLAYERS_CREDENTIALS, label: "Password reset links and the email outbox", group: "Players", dangerous: true },
+  { id: ADMIN_PERMISSIONS.LIVEOPS_MAIL, label: "Send mail, gift codes and chat announcements", group: "Players", dangerous: true },
+  { id: ADMIN_PERMISSIONS.CHAT_MODERATE, label: "Read chat, delete messages, mute players, handle reports", group: "Players", dangerous: true },
+  { id: ADMIN_PERMISSIONS.FEEDBACK_READ, label: "Read player feedback and bug reports", group: "Players", dangerous: false },
+  { id: ADMIN_PERMISSIONS.FEEDBACK_MANAGE, label: "Mark feedback read or resolved, reply by in-game mail", group: "Players", dangerous: false },
 ]);
 
 const SUPER_ADMIN_PERMISSIONS = Object.freeze(Object.values(ADMIN_PERMISSIONS));
@@ -38,7 +54,10 @@ export const ADMIN_ROLE_TEMPLATES = Object.freeze([
   Object.freeze({ id: "publisher", label: "Publisher", description: "Prepare, publish and roll back configuration with audit visibility.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.CONFIG_PUBLISH, ADMIN_PERMISSIONS.CONFIG_ROLLBACK, ADMIN_PERMISSIONS.AUDIT_READ]) }),
   Object.freeze({ id: "editor", label: "Content Editor", description: "Prepare revision-backed changes and upload media, without publish or destructive media access.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.AUDIT_READ]) }),
   Object.freeze({ id: "media-manager", label: "Media Manager", description: "Upload and retire Admin-managed media without configuration publish rights.", permissions: Object.freeze([ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.MEDIA_DELETE, ADMIN_PERMISSIONS.AUDIT_READ]) }),
-  Object.freeze({ id: "developer", label: "Developer / QA", description: "Read-oriented audit and Developer Tools access without configuration mutation.", permissions: Object.freeze([ADMIN_PERMISSIONS.AUDIT_READ, ADMIN_PERMISSIONS.DEVELOPER_INSPECT]) }),
+  Object.freeze({ id: "support", label: "Player Support", description: "Look up players, handle bans, save restores and password help, send compensation mail, answer feedback.", permissions: Object.freeze([ADMIN_PERMISSIONS.PLAYERS_READ, ADMIN_PERMISSIONS.PLAYERS_MODERATE, ADMIN_PERMISSIONS.PLAYERS_SAVE, ADMIN_PERMISSIONS.PLAYERS_CREDENTIALS, ADMIN_PERMISSIONS.LIVEOPS_MAIL, ADMIN_PERMISSIONS.CHAT_MODERATE, ADMIN_PERMISSIONS.FEEDBACK_READ, ADMIN_PERMISSIONS.FEEDBACK_MANAGE, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  Object.freeze({ id: "liveops", label: "Live Ops", description: "Send mail and gift codes to players, answer feedback; no access to saves, bans or credentials.", permissions: Object.freeze([ADMIN_PERMISSIONS.PLAYERS_READ, ADMIN_PERMISSIONS.LIVEOPS_MAIL, ADMIN_PERMISSIONS.FEEDBACK_READ, ADMIN_PERMISSIONS.FEEDBACK_MANAGE, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  // Bug reports are QA's input: read them, no replies.
+  Object.freeze({ id: "developer", label: "Developer / QA", description: "Read-oriented audit, player bug reports and Developer Tools access without configuration mutation.", permissions: Object.freeze([ADMIN_PERMISSIONS.AUDIT_READ, ADMIN_PERMISSIONS.DEVELOPER_INSPECT, ADMIN_PERMISSIONS.FEEDBACK_READ]) }),
   Object.freeze({ id: "viewer", label: "Viewer", description: "Normal read-only administration without audit, mutation or Developer Tools permissions.", permissions: Object.freeze([]) }),
 ]);
 
@@ -249,4 +268,17 @@ export async function runAuthorizedAdminMutation({ actor, permission, auditLog, 
   const resolvedChangeScope = typeof resolveChangeScope === "function" ? resolveChangeScope(value) : changeScope;
   await recordAuditBestEffort(auditLog, { actor, action, domain, entityType, entityId: resolvedEntityId ?? null, changeScope: resolvedChangeScope ?? null, result: "success" }, onAuditError);
   return value;
+}
+
+/** Constant-time token check (hashing first makes the lengths equal). */
+export function sameAdminToken(given, expected) {
+  if (typeof given !== "string" || typeof expected !== "string" || expected === "") return false;
+  const a = createHash("sha256").update(given).digest();
+  const b = createHash("sha256").update(expected).digest();
+  return timingSafeEqual(a, b);
+}
+
+/** The local default or anything short: fine on this machine, never for real player data. */
+export function isWeakAdminToken(token) {
+  return typeof token !== "string" || token === "local-dev" || token.length < 24;
 }

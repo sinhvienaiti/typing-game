@@ -1,4 +1,8 @@
 import { attachA8WorldStageCapabilitySummary } from "./space-typing-a8-world-stage-capabilities";
+import { renderAdminV2Players } from "./v2/players";
+import { renderAdminV2LiveopsMail } from "./v2/liveops-mail";
+import { renderAdminV2ChatModeration } from "./v2/chat-moderation";
+import { renderAdminV2Feedback } from "./v2/feedback";
 import { renderPhaseBAdminScreen as renderPhaseBCoreAdminScreen } from "./space-typing-phase-b-core";
 import { renderPhaseBAlternativeModes } from "./space-typing-alternative-modes-phase-b";
 import { renderPhaseBBackgrounds } from "./space-typing-backgrounds-phase-b";
@@ -62,5 +66,9 @@ export function renderPhaseBAdminScreen(path: string, navigate: Navigate): HTMLE
   if (path === `${BASE}/roles`) return decorated(path, renderAdminV2Roles());
   if (path === `${BASE}/qa`) return decorated(path, renderPhaseBQa());
   if (path === `${BASE}/feature-gates` || path === `${BASE}/flags`) return decorated(path, renderPhaseBFeatureGates());
+  if (path === `${BASE}/players`) return decorated(path, renderAdminV2Players());
+  if (path === `${BASE}/liveops-mail`) return decorated(path, renderAdminV2LiveopsMail());
+  if (path === `${BASE}/chat`) return decorated(path, renderAdminV2ChatModeration());
+  if (path === `${BASE}/feedback`) return decorated(path, renderAdminV2Feedback());
   return decorated(path, renderPhaseBCoreAdminScreen(path, navigate));
 }

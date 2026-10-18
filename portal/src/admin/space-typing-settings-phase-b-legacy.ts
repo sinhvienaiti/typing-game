@@ -343,7 +343,8 @@ export function renderPhaseBSettings(navigate: Navigate): HTMLElement {
         throw new Error(`Active revision changed from ${loadedActiveRevision} to ${latest.state.activeRevision}. Reload before saving.`);
       }
       const config = structuredClone(latest.active.config) as SpaceTypingAdminConfig;
-      config.system = collectSystem();
+      // Keep system keys this form does not edit (e.g. system.testing from the Testing panel).
+      config.system = { ...config.system, ...collectSystem() };
       const revision = await api.createRevision({
         baseRevision: latest.active.revision,
         config,

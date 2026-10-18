@@ -69,11 +69,22 @@ const NAV_GROUPS: readonly NavGroup[] = [
   },
   {
     id: "economy-live-ops",
-    label: "Economy & Live Ops",
-    description: "Manage canonical Shop merchandising and the Live Ops controls that have real runtime owners.",
+    label: "Economy",
+    description: "Manage canonical Shop merchandising.",
     items: [
       { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▱", description: "Manage supported Shop offers, pricing and merchandising through the canonical Shop owner." },
-      { label: "Live Ops", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Manage runtime-owned Live Ops controls and see unsupported scheduling or announcements fail closed." },
+    ],
+  },
+  {
+    id: "players-live-ops",
+    label: "Players & Live Ops",
+    description: "Online accounts (Cloudflare Worker + D1), chat moderation, Daily Hub mail and gift codes, and the read-only event catalog.",
+    items: [
+      { label: "Players", path: `${ADMIN_BASE}/players`, icon: "☺", description: "Look up pilots, their cloud save, Daily Hub progress, rewards and sessions; ban, sign out, restore saves, send gifts." },
+      { label: "Mail & Gift Codes", path: `${ADMIN_BASE}/liveops-mail`, icon: "✉", description: "Send gifts and announcements to every player and create gift codes; read the email outbox and account audit." },
+      { label: "Chat Moderation", path: `${ADMIN_BASE}/chat`, icon: "☏", description: "Read world chat, delete messages, mute players, handle reports and post system announcements." },
+      { label: "Feedback", path: `${ADMIN_BASE}/feedback`, icon: "✎", description: "Read ideas, bug reports and contact messages players send from the game; mark them handled or reply by in-game mail." },
+      { label: "Events (read-only)", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Read the in-stage event catalog owned by the game code. Scheduling is not available yet." },
     ],
   },
   {
@@ -109,6 +120,11 @@ const NAV_GROUPS: readonly NavGroup[] = [
   },
 ];
 
+/** Pages reached from inside a section that should keep its nav item lit. */
+const NAV_ALIASES: Readonly<Record<string, string>> = {
+  [`${ADMIN_BASE}/worlds-stages`]: `${ADMIN_BASE}/stages`,
+};
+
 const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
   [`${ADMIN_BASE}/analytics`]: "Analytics / Telemetry",
   [`${ADMIN_BASE}/shop`]: "Shop",
@@ -127,7 +143,11 @@ const LEGACY_ROUTE_LABELS: Readonly<Record<string, string>> = {
   [`${ADMIN_BASE}/ui-assets`]: "UI Assets",
   [`${ADMIN_BASE}/feature-gates`]: "Feature Gates",
   [`${ADMIN_BASE}/qa`]: "QA Sandbox",
-  [`${ADMIN_BASE}/worlds-stages`]: "Stages",
+  [`${ADMIN_BASE}/worlds-stages`]: "Worlds & Stages · Stage overrides",
+  [`${ADMIN_BASE}/players`]: "Players",
+  [`${ADMIN_BASE}/liveops-mail`]: "Mail & Gift Codes",
+  [`${ADMIN_BASE}/chat`]: "Chat Moderation",
+  [`${ADMIN_BASE}/feedback`]: "Feedback",
   [`${ADMIN_BASE}/roles`]: "Roles & Permissions",
 };
 
@@ -306,7 +326,7 @@ export class SpaceTypingAdmin {
       for (const item of group.items) {
         const navButton = element(
           "button",
-          `st-admin-nav-item${path === item.path ? " active" : ""}`,
+          `st-admin-nav-item${path === item.path || NAV_ALIASES[path] === item.path ? " active" : ""}`,
         );
         navButton.type = "button";
         navButton.setAttribute("aria-label", item.label);

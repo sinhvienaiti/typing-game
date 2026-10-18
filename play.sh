@@ -282,6 +282,7 @@ echo "[5/6] Starting runtime services and switching nginx to static Play mode...
 ensure_admin_runtime_service
 bash scripts/setup-nginx.sh play
 node games/space-typing/scripts/local-duel.mjs start
+node games/space-typing/scripts/local-account.mjs start
 
 echo "[6/6] Opening typing games..."
 bash scripts/play.sh

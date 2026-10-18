@@ -31,14 +31,17 @@ import { MediaAssetStore } from "./media-assets-v2.mjs";
 import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
 import { createMediaV2HttpHandler } from "./media-http.mjs";
 import { createMediaRuntimeHttpHandler } from "./media-runtime.mjs";
+import { createAccountAdminHttpHandler } from "./account-bridge.mjs";
 import {
   ADMIN_PERMISSIONS,
   AdminAuthorizationError,
   LocalAdminAuditLog,
   createLocalAdminActorFromRequest,
   describeConfigChangeScope,
+  isWeakAdminToken,
   requireAdminPermission,
   runAuthorizedAdminMutation,
+  sameAdminToken,
 } from "./admin-security.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
@@ -108,7 +111,8 @@ function header(request, name, required = false) {
 }
 
 function authorized(request) {
-  return request.headers["x-typing-game-admin-token"] === token;
+  const given = request.headers["x-typing-game-admin-token"];
+  return sameAdminToken(Array.isArray(given) ? given[0] : given, token);
 }
 
 function reportAuditDegradation(error) {
@@ -125,6 +129,7 @@ const handleMediaV2Request = createMediaV2HttpHandler({
   onAuditError: reportAuditDegradation,
 });
 const handleMediaRuntimeRequest = createMediaRuntimeHttpHandler({ store: mediaAssetsV2 });
+const handleAccountAdminRequest = createAccountAdminHttpHandler({ auditLog, onAuditError: reportAuditDegradation, adminTokenWeak: isWeakAdminToken(token) });
 
 async function revisionChangeScope(revisionId) {
   const target = await store.getRevision(revisionId);
@@ -183,6 +188,7 @@ const server = createServer(async (request, response) => {
 
     const actor = createLocalAdminActorFromRequest(request);
     if (await handleMediaV2Request({ request, response, url, actor })) return;
+    if (await handleAccountAdminRequest({ request, response, url, actor })) return;
 
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/actor") {
       json(response, 200, actor);
