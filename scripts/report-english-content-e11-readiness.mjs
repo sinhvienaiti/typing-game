@@ -59,6 +59,12 @@ function manifestSources(targetId) {
       if (batch?.phase==="E05"&&batch?.category==="grammar") {
         if (targetId==="example-sentences"&&setId==="examples") {
           sources.push({path:relative,collection:"records"});
+        } else if (targetId==="translation-pairs"&&setId==="exercises") {
+          sources.push({path:relative,collection:"records",filterField:"type",filterValues:["translation"]});
+        } else if (targetId==="cloze-exercises"&&setId==="exercises") {
+          sources.push({path:relative,collection:"records",filterField:"type",filterValues:["cloze"]});
+        } else if (targetId==="sentence-transformations"&&setId==="exercises") {
+          sources.push({path:relative,collection:"records",filterField:"type",filterValues:["transformation"]});
         } else if (targetId==="common-mistakes"&&setId==="common-mistakes") {
           sources.push({path:relative,collection:"records"});
         }
