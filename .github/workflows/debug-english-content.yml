@@ -64,7 +64,7 @@ jobs:
         run: node scripts/check-english-content-e11-readiness.mjs
 
       - name: Report exact E11 runtime counts
-        run: node scripts/report-english-content-e11-runtime-counts.mjs
+        run: pnpm english-content:e11:runtime
 
       - name: Run E12 release maintenance
         run: pnpm english-content:e12
