@@ -9,6 +9,47 @@
     "common-mistakes": 388,
     "writing-exercises": 100
   },
+  "readinessReconciliation": {
+    "state": "matched",
+    "compared": [
+      {
+        "runtimeMetric": "translation-pairs",
+        "e11Target": "translation-pairs",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "runtimeMetric": "cloze-exercises",
+        "e11Target": "cloze-exercises",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "runtimeMetric": "dialogue-examples",
+        "e11Target": "dialogue-examples",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      },
+      {
+        "runtimeMetric": "common-mistakes",
+        "e11Target": "common-mistakes",
+        "runtimeCount": 388,
+        "readinessCount": 388
+      },
+      {
+        "runtimeMetric": "writing-exercises",
+        "e11Target": "sentence-transformations",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      }
+    ],
+    "excluded": [
+      {
+        "runtimeMetric": "typing-texts",
+        "reason": "Legacy typing-text runtime corpus has no locked E11 long-term target."
+      }
+    ]
+  },
   "definitions": {
     "typing-texts": {
       "source": "shared/typing-texts/index.json",

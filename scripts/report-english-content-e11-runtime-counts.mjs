@@ -56,9 +56,10 @@ async function loadSentenceRuntime() {
   return {manifest,groups};
 }
 
-const [typingIndex,sentenceRuntime]=await Promise.all([
+const [typingIndex,sentenceRuntime,readiness]=await Promise.all([
   readJson("shared/typing-texts/index.json"),
   loadSentenceRuntime(),
+  readJson("content/english/reports/e11-readiness.json"),
 ]);
 
 requireCondition(Array.isArray(typingIndex.levels),"shared/typing-texts/index.json must contain levels[]");
@@ -83,10 +84,40 @@ const counts={
   "writing-exercises":exerciseByType.transformation??0,
 };
 
+const readinessCounts=new Map((readiness.targets??[]).map(target=>[target.id,target.current]));
+const readinessMappings=[
+  ["translation-pairs","translation-pairs"],
+  ["cloze-exercises","cloze-exercises"],
+  ["dialogue-examples","dialogue-examples"],
+  ["common-mistakes","common-mistakes"],
+  ["writing-exercises","sentence-transformations"],
+];
+const compared=readinessMappings.map(([runtimeMetric,e11Target])=>{
+  const runtimeCount=counts[runtimeMetric];
+  const readinessCount=readinessCounts.get(e11Target);
+  requireCondition(
+    typeof readinessCount==="number",
+    "E11 readiness report is missing target "+e11Target+" required by runtime metric "+runtimeMetric,
+  );
+  requireCondition(
+    runtimeCount===readinessCount,
+    "E11 readiness/runtime drift for "+runtimeMetric+" -> "+e11Target+": runtime="+String(runtimeCount)+", readiness="+String(readinessCount),
+  );
+  return {runtimeMetric,e11Target,runtimeCount,readinessCount};
+});
+
 const report={
   schemaVersion:1,
   contentVersion:sentenceRuntime.manifest.contentVersion,
   counts,
+  readinessReconciliation:{
+    state:"matched",
+    compared,
+    excluded:[{
+      runtimeMetric:"typing-texts",
+      reason:"Legacy typing-text runtime corpus has no locked E11 long-term target.",
+    }],
+  },
   definitions:{
     "typing-texts":{
       source:"shared/typing-texts/index.json",
