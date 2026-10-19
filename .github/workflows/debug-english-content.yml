@@ -60,8 +60,8 @@ jobs:
           pnpm english-content:derive:typing-texts
           node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
 
-      - name: Check E11 readiness
-        run: pnpm english-content:e11
+      - name: Check E11 readiness report freshness
+        run: node scripts/check-english-content-e11-readiness.mjs
 
       - name: Run E12 release maintenance
         run: pnpm english-content:e12
