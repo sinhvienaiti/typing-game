@@ -2,14 +2,40 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
-import { englishContentRecordId, englishContentReviewSourceDigest } from "./english-review-core.mjs";
+import {
+  englishContentRecordId,
+  englishContentReviewSourceDigest,
+  overlayEnglishReviewDecisions,
+  readEnglishReviewLedger,
+} from "./english-review-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const targetDoc=await readJson(path.join(root,"content","english","targets","long-term.json"));
-const batchManifest=await readJson(path.join(root,"content","english","batches","manifest.json"));
+const [targetDoc,batchManifest,reviewLedger]=await Promise.all([
+  readJson(path.join(root,"content","english","targets","long-term.json")),
+  readJson(path.join(root,"content","english","batches","manifest.json")),
+  readEnglishReviewLedger(root),
+]);
 const errors=[];
 const rows=[];
 const seenTargets=new Set();
+const batchSetsByPath=new Map();
+for (const batch of batchManifest.batches??[]) {
+  for (const set of batch.recordSets??[]) {
+    batchSetsByPath.set(set.path,{
+      batchId:batch.id,
+      recordSetId:set.id,
+      requiredChecks:set.requiredChecks??[],
+    });
+  }
+}
+const PUBLISHABLE_SENTENCE_TARGETS=new Set([
+  "common-mistakes",
+  "example-sentences",
+  "translation-pairs",
+  "cloze-exercises",
+  "sentence-transformations",
+  "dialogue-examples",
+]);
 
 function recordKey(record,index) {
   const id=record?.id??record?.lexemeId;
@@ -21,6 +47,33 @@ function selectCollection(doc,source) {
   if (source.filterField===undefined) return values;
   const wanted=new Set(source.filterValues??[]);
   return values.filter(item=>wanted.has(String(item?.[source.filterField])));
+}
+function publishable(records,label) {
+  const result=[];
+  for (const record of records) {
+    if (record?.quality?.state!=="published") continue;
+    const checks=Object.values(record?.quality?.checks??{});
+    const unfinished=checks.find(check=>check?.status==="pending"||check?.status==="fail");
+    if (unfinished) {
+      throw new TypeError(label+": published record "+String(record?.id??record?.lexemeId??"<unknown>")+" has unfinished quality checks");
+    }
+    result.push(record);
+  }
+  return result;
+}
+function selectTargetRecords(doc,source,targetId) {
+  if (!PUBLISHABLE_SENTENCE_TARGETS.has(targetId)||source.collection!=="records") {
+    return selectCollection(doc,source);
+  }
+  if (!Array.isArray(doc?.records)) throw new TypeError(source.path+" does not contain records[]");
+  const context=batchSetsByPath.get(source.path);
+  const reviewed=context===undefined
+    ?doc.records
+    :overlayEnglishReviewDecisions(doc.records,reviewLedger,context);
+  const eligible=publishable(reviewed,targetId+" @ "+source.path);
+  if (source.filterField===undefined) return eligible;
+  const wanted=new Set(source.filterValues??[]);
+  return eligible.filter(item=>wanted.has(String(item?.[source.filterField])));
 }
 function sourceKey(source) {
   return [
@@ -133,7 +186,7 @@ for (const target of targetDoc.targets??[]) {
     try { doc=await readJson(path.join(root,source.path)); }
     catch (error) { errors.push(target.id+": "+error.message); continue; }
     let records;
-    try { records=selectCollection(doc,source); }
+    try { records=selectTargetRecords(doc,source,target.id); }
     catch (error) { errors.push(target.id+": "+error.message); continue; }
     records.forEach((record,index)=>unique.add(recordKey(record,index)+"@"+source.path));
     sourceCounts.push({path:source.path,count:records.length});
