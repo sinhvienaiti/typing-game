@@ -55,6 +55,11 @@ jobs:
       - name: Smoke published runtime
         run: pnpm english-content:runtime:smoke
 
+      - name: Prepare next E11 typing-text review slice
+        run: |
+          pnpm english-content:derive:typing-texts
+          node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
+
       - name: Check E11 readiness
         run: pnpm english-content:e11
 
