@@ -66,6 +66,21 @@ jobs:
       - name: Prepare E11 sentence review-gap queue
         run: node scripts/prepare-english-content-e11-review-queue.mjs --per-target-limit 12
 
+      - name: Checkout pinned MultiWOZ source
+        uses: actions/checkout@v4
+        with:
+          repository: budzianowski/multiwoz
+          ref: fe0c8e65cfcd8462bd33c86e35f21addc84ca82b
+          path: .cache/english-content/multiwoz
+          sparse-checkout: |
+            data/MultiWOZ_2.2/train/dialogues_001.json
+            data/MultiWOZ_2.2/train/dialogues_002.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Prepare pinned MultiWOZ E11 dialogue review slice
+        run: pnpm english-content:e11:dialogue:next -- --limit=24
+
       - name: Upload E11 review packets
         uses: actions/upload-artifact@v4
         with:
@@ -73,6 +88,7 @@ jobs:
           path: |
             content/english/review-queues/typing-text-e11-next-review.json
             content/english/review-queues/e11-sentence-gap-next-review.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-review.json
           if-no-files-found: error
           retention-days: 7
 
