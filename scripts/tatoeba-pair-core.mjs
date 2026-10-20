@@ -53,6 +53,19 @@ export function tatoebaPairSourceKey(pair) {
   return String(englishId)+":"+String(vietnameseId);
 }
 
+export function tatoebaPairSourceKeyFromTranslationRecord(record) {
+  if (record?.type!=="translation") return null;
+  const sources=(record?.provenance?.sources??[]).filter(source=>source?.dataset==="tatoeba");
+  if (sources.length<2) return null;
+  const englishId=Number(sources[0]?.sourceId);
+  const vietnameseId=Number(sources[1]?.sourceId);
+  if (
+    !Number.isSafeInteger(englishId)||englishId<=0||
+    !Number.isSafeInteger(vietnameseId)||vietnameseId<=0
+  ) return null;
+  return tatoebaPairSourceKey({englishId,vietnameseId});
+}
+
 export function looksLikeLearningPair(english,vietnamese) {
   const en=String(english).trim();
   const vi=String(vietnamese).trim();
