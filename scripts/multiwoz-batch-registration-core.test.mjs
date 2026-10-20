@@ -58,7 +58,7 @@ function candidate(pin) {
   };
 }
 
-function fixture({complete=true}={}) {
+function fixture() {
   const pin=pinFixture();
   const packet={
     schemaVersion:1,
@@ -80,15 +80,11 @@ function fixture({complete=true}={}) {
   };
   const intake=buildMultiwozDialogueReviewIntake(packet,pin);
   const handoff=buildMultiwozDialogueEditorialHandoff(packet,intake,pin);
-  if (complete) {
-    const entry=handoff.records[0];
-    entry.editorial.disposition="accept";
-    entry.editorial.cefr="A2";
-    for (const name of Object.keys(entry.editorial.checks)) entry.editorial.checks[name]="pass";
-  }
-  const finalization=complete
-    ?buildMultiwozDialogueEditorialFinalization(handoff,packet,intake,pin)
-    :{authoring:{schemaVersion:1,records:[]},proposal:{batch:{}}};
+  const entry=handoff.records[0];
+  entry.editorial.disposition="accept";
+  entry.editorial.cefr="A2";
+  for (const name of Object.keys(entry.editorial.checks)) entry.editorial.checks[name]="pass";
+  const finalization=buildMultiwozDialogueEditorialFinalization(handoff,packet,intake,pin);
   return {
     pin,
     packet,
@@ -152,9 +148,17 @@ test("registrar rejects a record-set path already owned by another batch",()=>{
 });
 
 test("registrar cannot bypass pending editorial handoff",()=>{
-  const pending=fixture({complete:false});
+  const data=fixture();
+  const handoff=structuredClone(data.handoff);
+  const entry=handoff.records[0];
+  entry.editorial.disposition="pending";
+  entry.editorial.cefr=null;
+  entry.editorial.scenario=null;
+  entry.editorial.turns=null;
+  entry.editorial.notes="";
+  for (const name of Object.keys(entry.editorial.checks)) entry.editorial.checks[name]="pending";
   assert.throws(
-    ()=>registerMultiwozDialogueBatchManifest(pending),
+    ()=>registerMultiwozDialogueBatchManifest({...data,handoff}),
     /still has 1 pending record/,
   );
 });
