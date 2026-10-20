@@ -6,10 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified scale-up state before scale-224 publication: `03775c03973e66204df7d46c4e1b7e2401952fad` — scale-223 publication checkpoint verified by English Content Full Validation, English Content Master Plan Acceptance and Platform CI; scale-223 published output: `27ed6f7a76d7766a4de3172e7bf48ab9e1d3ecc9`.
-- Scale-223 publication state at `03775c03973e66204df7d46c4e1b7e2401952fad` is fully verified; scale-224 is the active publication unit.
-- Scale-224 source/apply publication is active; after bot publication create exactly one normal-user checkpoint before opening the next safe scale-up unit.
-- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E04/E11 content scale-up is active.
+- Latest fully CI-verified hardening checkpoint before the current Tatoeba next-slice work: `f3e1dd43d5468c936cea8d5b0880ce3669da862c` — English Content Full Validation passed with E11 readiness freshness, exact runtime-count reconciliation, exact record-level runtime coverage, E12 maintenance, enrichment reporting and reproducibility checks.
+- E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
+- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E11 corpus scale-up is the first unfinished workstream. E04 may continue only when new evidence-backed reviewed enrichment/content is actually available.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
 
@@ -41,19 +40,36 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E04 chunk frontier: `chunk.00002000`
 - E04 idiom frontier: `idiom.00001185`
 
+## Current E11 readiness snapshot
+
+Recalculate from live HEAD before every new batch; these values are a handoff snapshot, not a substitute for the generated readiness/runtime reports.
+
+- grammar topics: 300
+- verb patterns: 510
+- collocations: 5,000
+- phrasal verbs: 1,000
+- idioms/chunks: 3,185
+- common mistakes: 388
+- example sentences: 1,513
+- translation pairs: 600
+- cloze exercises: 600
+- sentence transformations: 100
+- dialogue examples: 100
+- legacy typing texts: 300; this runtime metric has no separate locked E11 long-term target
+
 ## Approved scale-up targets
 
 Current repository/master-plan data always outranks these checkpoint numbers. Recalculate from HEAD before every new batch.
 
 Priority order:
 
-1. E04 evidence-backed example-link enrichment for existing collocations, verb patterns, phrasal verbs, idioms and chunks.
-2. E04 scale-up toward long-term lexical-unit targets while preserving reviewed provenance/license gates:
-   - verb patterns: 500–1,000 target range; current runtime already exceeds the 500 minimum at 510, so prioritize other under-target families unless valid reviewed evidence is ready;
-   - collocations: 5,000+; current frontier is 5,000, so the minimum is met;
-   - phrasal verbs: 1,000+; current frontier is 1,000, so the minimum is met; prioritize other under-target families unless valid reviewed phrasal evidence is ready;
-   - idioms/chunks: 2,000+ long-term scale target; the chunk frontier now reaches 2,000, so do not extend chunks further merely for volume; recalculate the next evidence-backed E04 or E11 priority from live HEAD.
-3. E11 sentence/exercise corpus scale-up:
+1. E04 evidence-backed example-link enrichment for existing collocations, verb patterns, phrasal verbs, idioms and chunks when valid reviewable evidence exists. Do not create enrichment merely to keep E04 active.
+2. E04 long-term minimums are currently reached for the controlled phrase families:
+   - verb patterns: 510, above the 500 minimum;
+   - collocations: 5,000, minimum reached;
+   - phrasal verbs: 1,000, minimum reached;
+   - idioms/chunks: 3,185 combined, above the 2,000 minimum; chunk frontier is exactly 2,000.
+3. E11 sentence/exercise corpus scale-up is now the first unfinished capacity work:
    - example sentences: 100,000+;
    - translation pairs: 20,000+;
    - cloze exercises: 30,000+;
@@ -87,20 +103,20 @@ Before creating or modifying any scale-up batch, the worker MUST perform this se
 
 ## Current milestone
 
-`E04/E11 SCALE-UP ACTIVE`
+`E11 CORPUS SCALE-UP ACTIVE`
 
-Mandatory architecture/pilot implementation is complete. The active work is quality-first content expansion toward the approved long-term targets.
+Mandatory architecture/pilot implementation is complete. The active work is quality-first content expansion toward the approved E11 long-term targets.
 
 ## Current first-unfinished workstream
 
-1. Scale-223 publication checkpoint `03775c03973e66204df7d46c4e1b7e2401952fad` is fully verified; do not duplicate scale-223 artifacts.
-2. Scale-224 is the active publication unit; do not start the next scale-up unit until its bot publication, one normal-user checkpoint and all three mandatory CI gates complete.
-3. Scale-224 adds the final bounded 25-record chunk-only batch required to reach the 2,000 chunk target exactly, advancing the expected publication frontiers to `pv.00001000` / `chunk.00002000` / `idiom.00001185`; near-dedupe threshold remains `0.86`.
-4. The latest enrichment evidence scan found whole-phrase candidates only for already-covered E04 records; there is no newly safe uncovered enrichment queue to promote automatically. Lemma-only verb-pattern evidence remains review-only.
-5. Reuse the established scale-up workflow and preserve exact/near-dedupe, provenance, review, deterministic publication and runtime gates.
-6. After scale-224 bot publication, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.
-7. After each E04 batch passes all gates, continue immediately with the next safe batch in the same run when possible.
-8. When E04 has no immediately safe batch, continue to the next E11 corpus family using the same controlled-batch procedure.
+1. E04 scale-224 is complete; all controlled E04 phrase-family minimums are met. Do not create scale-225 merely for volume.
+2. Translation pairs are the current bounded E11 scale-up front: runtime is 600 against the locked 20,000 target, and the repository already has a pinned Tatoeba source/review pipeline.
+3. The legacy Tatoeba E06 pilot selector uses `selectEvenly(candidates, limit)`. Increasing its limit is unsafe for scale-up because a new limit can reshuffle the previously selected 300 pairs. Keep that pilot behavior unchanged for reproducibility.
+4. The E11 path now uses a separate source-ID-based, prefix-monotonic next-slice selector. It excludes Tatoeba pair identities already present in controlled batch-manifest record sets and never derives identity from editable English/Vietnamese text.
+5. Use `pnpm english-content:e11:translation:next -- --limit=24` to prepare the default bounded next review packet when, and only when, the local `.cache/english-content/tatoeba/` files match the checksums in `content/english/sources/tatoeba-eng-vie-pilot.json`.
+6. The Tatoeba URLs in the pin are moving export URLs. A newly downloaded current export is not automatically the pinned historical snapshot. Never update the pin or accept a checksum mismatch merely to make the command run.
+7. The next-slice output is candidate-only. Do not add it to runtime or mark it published until a controlled E10 batch and digest-bound bilingual/naturalness/CEFR/license review have completed.
+8. After a reviewed bounded Tatoeba slice is integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify all mandatory CI gates before opening the following slice.
 
 ## Known non-blocking enrichment debt
 
@@ -108,8 +124,8 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 
 ## Blocker
 
-None.
+The next Tatoeba candidate slice requires access to the exact pinned source-cache bytes. This is a source-availability constraint, not permission to refresh/re-pin the moving upstream export. Core selector/preparer development and validation can continue without weakening this constraint.
 
 ## Next actionable task
 
-Finish the active Scale-224 final 25-record chunk apply/publish pipeline through deterministic verification and bot publication. Then create exactly one normal-user tree-identical checkpoint and verify English Content Full Validation + Master Plan Acceptance and Platform CI on that checkpoint. If all three PASS, treat the 2,000 chunk target as reached and recalculate the next first-unfinished evidence-backed E04 or E11 unit from live HEAD without changing the `0.86` threshold.
+With exact pinned Tatoeba cache bytes available, run the bounded E11 translation next-slice preparer (default 24 pairs), inspect the generated source IDs and candidate records, then create the controlled E10 batch/review artifacts for that slice. Keep every new record non-published until digest-bound bilingual, naturalness, CEFR and license review passes. If the pinned cache is unavailable, continue with another E11 family that has reproducible committed/pinned source material rather than fetching a newer Tatoeba export under the old pin.
