@@ -1,8 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { buildMultiwozDialogueReviewIntake } from "./multiwoz-review-intake-core.mjs";
 import { buildMultiwozDialogueEditorialHandoff } from "./multiwoz-editorial-handoff-core.mjs";
 import {
@@ -183,4 +185,14 @@ test("finalization outputs are immutable and idempotent",async()=>{
   } finally {
     await fs.rm(root,{recursive:true,force:true});
   }
+});
+
+test("E11 MultiWOZ editorial finalizer accepts pnpm separator and is syntax-valid",()=>{
+  const script=fileURLToPath(new URL("./finalize-multiwoz-e11-dialogue-editorial-handoff.mjs",import.meta.url));
+  const syntax=spawnSync(process.execPath,["--check",script],{encoding:"utf8"});
+  assert.equal(syntax.status,0,syntax.stderr||syntax.stdout);
+  const result=spawnSync(process.execPath,[script,"--","--handoff"],{encoding:"utf8"});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/--handoff requires a value/);
+  assert.doesNotMatch(result.stderr,/Unknown argument: --/);
 });
