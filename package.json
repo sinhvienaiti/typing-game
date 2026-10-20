@@ -48,7 +48,7 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "english-content:generate": "node scripts/generate-english-content.mjs",
     "english-content:validate": "node scripts/validate-english-content.mjs && node scripts/validate-english-grammar-scales.mjs",
-    "english-content:test": "node --test scripts/english-content-core.test.mjs scripts/english-review-core.test.mjs scripts/oewn-pinned-core.test.mjs scripts/tatoeba-pair-core.test.mjs scripts/multiwoz-dialogue-core.test.mjs scripts/wiktextract-enrichment-core.test.mjs shared/english-content/*.test.mjs",
+    "english-content:test": "node --test scripts/english-content-core.test.mjs scripts/english-review-core.test.mjs scripts/oewn-pinned-core.test.mjs scripts/tatoeba-pair-core.test.mjs scripts/multiwoz-dialogue-core.test.mjs scripts/wiktextract-enrichment-core.test.mjs scripts/check-english-content-e11-readiness.test.mjs shared/english-content/*.test.mjs",
     "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
     "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
     "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
