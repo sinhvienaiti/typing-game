@@ -15,6 +15,18 @@ export function normalizeDialogueText(value) {
     .toLocaleLowerCase("en-US");
 }
 
+export function multiwozDialogueSourceKey(dialogue) {
+  const dialogueId=String(dialogue?.dialogueId??"").trim();
+  if (!dialogueId) throw new TypeError("MultiWOZ dialogue source identity requires dialogueId");
+  return dialogueId;
+}
+
+export function multiwozDialogueSourceKeyFromRecord(record) {
+  const source=(record?.provenance?.sources??[]).find(item=>item?.dataset==="multiwoz");
+  const sourceId=String(source?.sourceId??"").trim();
+  return sourceId||null;
+}
+
 export function parseMultiwozDialogue(raw) {
   if (raw===null||typeof raw!=="object"||Array.isArray(raw)) return null;
   if (typeof raw.dialogue_id!=="string"||raw.dialogue_id.trim()==="") return null;
@@ -70,4 +82,19 @@ export function selectEvenly(items,limit) {
     selected.push(items[position]);
   }
   return selected;
+}
+
+export function selectNextMultiwozDialogues(items,limit,{excludeKeys=[]}={}) {
+  const count=Math.max(0,Math.floor(Number(limit)||0));
+  if (count===0) return [];
+  const excluded=new Set([...excludeKeys].map(String));
+  const unique=new Map();
+  for (const item of items) {
+    const key=multiwozDialogueSourceKey(item);
+    if (excluded.has(key)||unique.has(key)) continue;
+    unique.set(key,item);
+  }
+  return [...unique.values()]
+    .sort((left,right)=>multiwozDialogueSourceKey(left).localeCompare(multiwozDialogueSourceKey(right),"en"))
+    .slice(0,count);
 }
