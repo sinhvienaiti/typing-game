@@ -79,6 +79,9 @@ jobs:
       - name: Report exact E11 runtime counts
         run: pnpm english-content:e11:runtime
 
+      - name: Audit E11 record-level runtime coverage
+        run: pnpm english-content:e11:records
+
       - name: Run E12 release maintenance
         run: pnpm english-content:e12
 
