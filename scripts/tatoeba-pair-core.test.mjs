@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import {
   looksLikeLearningPair,
   normalizedPairKey,
@@ -8,6 +10,7 @@ import {
   selectEvenly,
   selectNextTatoebaPairs,
   tatoebaPairSourceKey,
+  tatoebaPairSourceKeyFromTranslationRecord,
 } from "./tatoeba-pair-core.mjs";
 
 test("parses Tatoeba sentence rows with or without explicit language",()=>{
@@ -46,6 +49,23 @@ test("Tatoeba pair source identity is bound to sentence ids rather than text",()
   assert.throws(()=>tatoebaPairSourceKey({englishId:10,vietnameseId:"bad"}),/source identity/);
 });
 
+test("reviewed translation provenance yields the same source identity after editorial text changes",()=>{
+  const record={
+    type:"translation",
+    prompt:"Biên tập lại câu tiếng Việt.",
+    acceptedAnswers:["Edited English presentation."],
+    provenance:{sources:[
+      {dataset:"tatoeba",sourceId:"1333"},
+      {dataset:"tatoeba",sourceId:"5690"},
+    ]},
+  };
+  assert.equal(tatoebaPairSourceKeyFromTranslationRecord(record),"1333:5690");
+  record.prompt="Nội dung trình bày có thể đổi mà source identity không đổi.";
+  assert.equal(tatoebaPairSourceKeyFromTranslationRecord(record),"1333:5690");
+  assert.equal(tatoebaPairSourceKeyFromTranslationRecord({type:"translation",provenance:{sources:[]}}),null);
+  assert.equal(tatoebaPairSourceKeyFromTranslationRecord({type:"cloze"}),null);
+});
+
 test("next Tatoeba slices exclude used source ids and are prefix-monotonic",()=>{
   const candidates=[
     {englishId:50,vietnameseId:500},
@@ -66,4 +86,10 @@ test("next Tatoeba slices exclude used source ids and are prefix-monotonic",()=>
     selectNextTatoebaPairs([...candidates].reverse(),4,{excludeKeys}),
     firstFour,
   );
+});
+
+test("E11 Tatoeba review-slice preparer stays syntax-valid without requiring local source cache",()=>{
+  const script=fileURLToPath(new URL("./prepare-tatoeba-e11-translation-slice.mjs",import.meta.url));
+  const result=spawnSync(process.execPath,["--check",script],{encoding:"utf8"});
+  assert.equal(result.status,0,result.stderr||result.stdout);
 });
