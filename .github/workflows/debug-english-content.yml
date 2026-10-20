@@ -43,6 +43,9 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
+      - name: Run E11 runtime-count freshness regression
+        run: node --test scripts/check-english-content-e11-runtime-counts.test.mjs
+
       - name: Run MultiWOZ editorial handoff tests
         run: node --test scripts/multiwoz-editorial-handoff-core.test.mjs
 
@@ -103,8 +106,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-      - name: Report exact E11 runtime counts
-        run: pnpm english-content:e11:runtime
+      - name: Check E11 runtime count report freshness
+        run: node scripts/check-english-content-e11-runtime-counts.mjs
 
       - name: Audit E11 record-level runtime coverage
         run: pnpm english-content:e11:records
