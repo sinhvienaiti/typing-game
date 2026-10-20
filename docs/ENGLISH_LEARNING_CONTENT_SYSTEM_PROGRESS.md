@@ -6,7 +6,7 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified hardening checkpoint before the current Tatoeba next-slice work: `f3e1dd43d5468c936cea8d5b0880ce3669da862c` — English Content Full Validation passed with E11 readiness freshness, exact runtime-count reconciliation, exact record-level runtime coverage, E12 maintenance, enrichment reporting and reproducibility checks.
+- Latest fully CI-verified E11 scale-up checkpoint before the current editorial-finalization hardening: `ca5da255c866cdd3d08d52f903f71300e39f3fe1` — English Content Full Validation #762 passed the pinned MultiWOZ checkout, 24-record next-slice preparation, controlled intake, editorial handoff, publication/runtime gates, E11 readiness/runtime/record-level coverage, E12 maintenance and reproducibility checks.
 - E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E11 corpus scale-up is the first unfinished workstream. E04 may continue only when new evidence-backed reviewed enrichment/content is actually available.
 - PR: #48 — open, draft, mergeable
@@ -110,22 +110,25 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. E04 scale-224 is complete; all controlled E04 phrase-family minimums are met. Do not create scale-225 merely for volume.
-2. Translation pairs are the current bounded E11 scale-up front: runtime is 600 against the locked 20,000 target, and the repository already has a pinned Tatoeba source/review pipeline.
-3. The legacy Tatoeba E06 pilot selector uses `selectEvenly(candidates, limit)`. Increasing its limit is unsafe for scale-up because a new limit can reshuffle the previously selected 300 pairs. Keep that pilot behavior unchanged for reproducibility.
-4. The E11 path now uses a separate source-ID-based, prefix-monotonic next-slice selector. It excludes Tatoeba pair identities already present in controlled batch-manifest record sets and never derives identity from editable English/Vietnamese text.
-5. Use `pnpm english-content:e11:translation:next -- --limit=24` to prepare the default bounded next review packet when, and only when, the local `.cache/english-content/tatoeba/` files match the checksums in `content/english/sources/tatoeba-eng-vie-pilot.json`.
-6. The Tatoeba URLs in the pin are moving export URLs. A newly downloaded current export is not automatically the pinned historical snapshot. Never update the pin or accept a checksum mismatch merely to make the command run.
-7. The next-slice output is candidate-only. Do not add it to runtime or mark it published until a controlled E10 batch and digest-bound bilingual/naturalness/CEFR/license review have completed.
-8. After a reviewed bounded Tatoeba slice is integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify all mandatory CI gates before opening the following slice.
+2. Translation pairs remain the largest preferred bounded E11 scale-up front because runtime is 600 against the locked 20,000 target and a Tatoeba source/review pipeline exists. However, the exact pinned Tatoeba cache bytes are not currently available through the reproducible repository/CI path, so this lane remains source-blocked rather than license/review-blocked.
+3. Keep the legacy Tatoeba E06 pilot selector unchanged. The E11 Tatoeba path uses the separate source-ID-based, prefix-monotonic selector and must reject checksum drift instead of silently refreshing the moving export URLs.
+4. MultiWOZ dialogue scale-up is the current reproducible fallback lane: runtime is 100 against the locked 10,000 target, and source identity is pinned to immutable Git commit/blob SHAs.
+5. Full Validation #762 verified an end-to-end non-publishing MultiWOZ path for the bounded 24-record slice: immutable source checkout → deterministic next-slice selection with provenance exclusion → candidate packet → controlled intake → editorial handoff → artifact upload. The handoff starts with every record `pending`; no review decisions or runtime publication are created.
+6. The branch now contains an editorial finalizer for this handoff. It may run only after every handoff record has an explicit `accept`, `edit`, or `reject` disposition. Accepted/edited records require CEFR and completed editorial checks; rejected records require a reason. `edit` must contain a real scenario/turn change.
+7. Finalization is intentionally non-publishing. It converts accepted/edited records only to `quality.state = draft`, preserves immutable MultiWOZ source identity, marks edited provenance as modified, excludes rejected records, and emits a batch-registration proposal with `reviewDecisions = not-created` and `runtimePublication = blocked`.
+8. Do not register the proposed E11 MultiWOZ batch in `content/english/batches/manifest.json`, do not create review-ledger decisions, and do not publish runtime records while the editorial handoff contains pending work. The normal E10 digest-bound review/publication pipeline remains mandatory after authoring is finalized.
+9. After editorial completion, run `pnpm english-content:e11:dialogue:finalize` against the exact packet/intake/handoff set, inspect the produced draft authoring records and proposal, then register the controlled batch as a separate reviewed change. Only after batch validation should digest-bound review decisions be authored and the normal publisher be allowed to promote passing records.
+10. After any reviewed bounded slice is actually integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify Full Validation, Master Plan Acceptance and Platform CI before opening the following slice.
 
 ## Known non-blocking enrichment debt
 
 Many E04 items still lack `exampleIds`. These are not errors and must not be auto-filled from unsafe lemma-only matches. Treat them as an evidence/review queue: link only when whole-phrase/frame evidence is valid and reviewable.
 
-## Blocker
+## Blockers
 
-The next Tatoeba candidate slice requires access to the exact pinned source-cache bytes. This is a source-availability constraint, not permission to refresh/re-pin the moving upstream export. Core selector/preparer development and validation can continue without weakening this constraint.
+- Tatoeba translation next-slice: requires the exact pinned source-cache bytes. The moving upstream export URL must not be downloaded and accepted under the old pin merely because the historical cache is unavailable.
+- MultiWOZ dialogue next-slice: source/candidate/intake infrastructure is not blocked. Promotion is deliberately waiting on real editorial completion of the 24-record handoff. This is a quality gate, not a CI/tooling blocker and must not be bypassed by auto-accepting records.
 
 ## Next actionable task
 
-With exact pinned Tatoeba cache bytes available, run the bounded E11 translation next-slice preparer (default 24 pairs), inspect the generated source IDs and candidate records, then create the controlled E10 batch/review artifacts for that slice. Keep every new record non-published until digest-bound bilingual, naturalness, CEFR and license review passes. If the pinned cache is unavailable, continue with another E11 family that has reproducible committed/pinned source material rather than fetching a newer Tatoeba export under the old pin.
+Complete editorial authoring for the existing 24-record MultiWOZ handoff using the generated candidate/intake evidence: for every record choose `accept`, `edit`, or `reject`; assign/confirm CEFR for accepted/edited records; complete exact/near-dedupe, grammar, naturalness, CEFR and license checks; provide real edits when disposition is `edit`; and record a reason for every rejection. When and only when the handoff has zero pending records, run `pnpm english-content:e11:dialogue:finalize`, inspect the draft authoring output and batch-registration proposal, then register that controlled batch in a separate change. Do not generate review-ledger publish decisions or change runtime counts until the registered authoring records have passed the normal digest-bound E10 review gate.
