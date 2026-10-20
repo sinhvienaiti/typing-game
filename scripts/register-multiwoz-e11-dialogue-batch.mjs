@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson } from "./english-content-core.mjs";
+import { validateEnglishContentBatchContracts } from "./english-batch-contract-core.mjs";
 import { registerMultiwozDialogueBatchManifest } from "./multiwoz-batch-registration-core.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
@@ -45,6 +46,27 @@ export function parseArgs(argv) {
   return options;
 }
 
+export async function validateProspectiveRegistration({manifest,authoring,proposal}) {
+  const schemaDir=path.join(root,"shared","schemas","english-content");
+  const [commonSchema,batchSchema]=await Promise.all([
+    readJson(path.join(schemaDir,"common.schema.json")),
+    readJson(path.join(schemaDir,"batch-manifest.schema.json")),
+  ]);
+  const proposedAuthoringPath=proposal.authoringPath;
+  const {errors,report}=await validateEnglishContentBatchContracts({
+    manifest,
+    commonSchema,
+    batchSchema,
+    loadRecordSet:(recordPath)=>recordPath===proposedAuthoringPath
+      ?authoring
+      :readJson(path.join(root,recordPath)),
+  });
+  if (errors.length) {
+    throw new Error("Prospective E10 batch contract validation failed:\n"+errors.join("\n"));
+  }
+  return report;
+}
+
 export async function main(argv=process.argv.slice(2)) {
   const options=parseArgs(argv);
   const [manifest,packet,intake,handoff,authoring,proposal,pin]=await Promise.all([
@@ -65,6 +87,11 @@ export async function main(argv=process.argv.slice(2)) {
     intake,
     pin,
   });
+  const contractReport=await validateProspectiveRegistration({
+    manifest:result.manifest,
+    authoring,
+    proposal,
+  });
 
   let wrote=false;
   if (options.write&&result.status==="registered") {
@@ -81,6 +108,7 @@ export async function main(argv=process.argv.slice(2)) {
     authoringDigest:result.authoringDigest,
     reviewDecisions:result.reviewDecisions,
     runtimePublication:result.runtimePublication,
+    e10ContractRecords:contractReport.totals.records,
     manifest:path.relative(root,options.manifestPath).replaceAll(path.sep,"/"),
     wrote,
   }));
