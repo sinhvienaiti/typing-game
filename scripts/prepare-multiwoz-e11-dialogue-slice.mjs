@@ -23,6 +23,7 @@ function parseArgs(argv) {
   };
   for (let index=0;index<argv.length;index++) {
     const raw=argv[index];
+    if (raw==="--") continue;
     const equal=raw.indexOf("=");
     const flag=equal<0?raw:raw.slice(0,equal);
     const inlineValue=equal<0?null:raw.slice(equal+1);
