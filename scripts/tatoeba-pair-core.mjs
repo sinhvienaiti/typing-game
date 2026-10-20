@@ -39,6 +39,20 @@ export function normalizedPairKey(english,vietnamese) {
   return normalize(english)+"\u0000"+normalize(vietnamese);
 }
 
+export function tatoebaPairSourceKey(pair) {
+  const englishId=Number(pair?.englishId);
+  const vietnameseId=Number(pair?.vietnameseId);
+  if (
+    !Number.isSafeInteger(englishId)||
+    !Number.isSafeInteger(vietnameseId)||
+    englishId<=0||
+    vietnameseId<=0
+  ) {
+    throw new TypeError("Tatoeba pair source identity requires positive integer englishId and vietnameseId");
+  }
+  return String(englishId)+":"+String(vietnameseId);
+}
+
 export function looksLikeLearningPair(english,vietnamese) {
   const en=String(english).trim();
   const vi=String(vietnamese).trim();
@@ -69,6 +83,21 @@ export function selectEvenly(items,limit) {
     selected.push(items[position]);
   }
   return selected;
+}
+
+export function selectNextTatoebaPairs(items,limit,{excludeKeys=[]}={}) {
+  const count=Math.max(0,Math.floor(Number(limit)||0));
+  if (count===0) return [];
+  const excluded=new Set([...excludeKeys].map(String));
+  const unique=new Map();
+  for (const item of items) {
+    const key=tatoebaPairSourceKey(item);
+    if (excluded.has(key)||unique.has(key)) continue;
+    unique.set(key,item);
+  }
+  return [...unique.values()]
+    .sort((a,b)=>a.englishId-b.englishId||a.vietnameseId-b.vietnameseId)
+    .slice(0,count);
 }
 
 export async function sha256File(file) {
