@@ -66,6 +66,16 @@ jobs:
       - name: Prepare E11 sentence review-gap queue
         run: node scripts/prepare-english-content-e11-review-queue.mjs --per-target-limit 12
 
+      - name: Upload E11 review packets
+        uses: actions/upload-artifact@v4
+        with:
+          name: e11-review-packets-${{ github.sha }}
+          path: |
+            content/english/review-queues/typing-text-e11-next-review.json
+            content/english/review-queues/e11-sentence-gap-next-review.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Report exact E11 runtime counts
         run: pnpm english-content:e11:runtime
 
