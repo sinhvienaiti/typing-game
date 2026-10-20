@@ -43,6 +43,9 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
+      - name: Run MultiWOZ editorial handoff tests
+        run: node --test scripts/multiwoz-editorial-handoff-core.test.mjs
+
       - name: Generate runtime artifacts
         run: pnpm english-content:generate
 
@@ -84,6 +87,9 @@ jobs:
       - name: Build controlled MultiWOZ E11 review intake
         run: node scripts/prepare-multiwoz-e11-dialogue-intake.mjs
 
+      - name: Prepare MultiWOZ E11 editorial handoff
+        run: node scripts/prepare-multiwoz-e11-dialogue-editorial-handoff.mjs
+
       - name: Upload E11 review packets
         uses: actions/upload-artifact@v4
         with:
@@ -93,6 +99,7 @@ jobs:
             content/english/review-queues/e11-sentence-gap-next-review.json
             content/english/review-queues/multiwoz-e11-dialogue-next-review.json
             content/english/review-queues/multiwoz-e11-dialogue-next-intake.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-editorial-handoff.json
           if-no-files-found: error
           retention-days: 7
 
