@@ -86,6 +86,14 @@ test("next MultiWOZ slices exclude used ids and stay prefix-monotonic",()=>{
   );
 });
 
+test("E11 MultiWOZ preparer accepts a pnpm-style argument separator",()=>{
+  const script=fileURLToPath(new URL("./prepare-multiwoz-e11-dialogue-slice.mjs",import.meta.url));
+  const result=spawnSync(process.execPath,[script,"--","--limit=0"],{encoding:"utf8"});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/--limit must be an integer from 1 to 200/);
+  assert.doesNotMatch(result.stderr,/Unknown argument: --/);
+});
+
 test("E11 MultiWOZ review-slice preparer stays syntax-valid without requiring local source cache",()=>{
   const script=fileURLToPath(new URL("./prepare-multiwoz-e11-dialogue-slice.mjs",import.meta.url));
   const result=spawnSync(process.execPath,["--check",script],{encoding:"utf8"});
