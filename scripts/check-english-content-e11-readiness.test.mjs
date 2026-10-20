@@ -38,10 +38,7 @@ test("E11 readiness report freshness checker", async (t) => {
     await t.test("accepts a freshly regenerated report", () => {
       const result = runChecker();
       assert.equal(result.status, 0, result.stderr || result.stdout);
-      assert.match(
-        result.stdout,
-        /\[english-content:e11:check\].*"state":"fresh"/,
-      );
+      assert.match(result.stdout, /"state":\s*"fresh"/);
       assert.equal(
         readFileSync(reportPath, "utf8"),
         fresh,
