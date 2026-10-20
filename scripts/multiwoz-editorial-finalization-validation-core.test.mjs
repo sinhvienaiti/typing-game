@@ -1,0 +1,152 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { buildMultiwozDialogueReviewIntake } from "./multiwoz-review-intake-core.mjs";
+import { buildMultiwozDialogueEditorialHandoff } from "./multiwoz-editorial-handoff-core.mjs";
+import { buildMultiwozDialogueEditorialFinalization } from "./multiwoz-editorial-finalization-core.mjs";
+import { validateMultiwozDialogueEditorialFinalizationOutputs } from "./multiwoz-editorial-finalization-validation-core.mjs";
+
+function pinFixture() {
+  return {
+    version:"2.2",
+    repository:"budzianowski/multiwoz",
+    commit:"fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+    path:"data/MultiWOZ_2.2/train/dialogues_001.json",
+    blobSha1:"1ab08d377750e83493095b0eb1249df81a99ba21",
+    license:"MIT",
+    attribution:"MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+    additionalFiles:[{
+      path:"data/MultiWOZ_2.2/train/dialogues_002.json",
+      blobSha1:"d182eae43341a44ebe3807ed61e829d73dc34a84",
+    }],
+  };
+}
+
+function candidate(pin) {
+  return {
+    schemaVersion:1,
+    id:"dlg.multiwoz.d001.json",
+    scenario:"hotel service conversation",
+    turns:[
+      {speaker:"Learner",text:"I need a quiet hotel near the centre for a short weekend stay."},
+      {speaker:"Assistant",text:"Which price range would you prefer, and do you need free parking?"},
+      {speaker:"Learner",text:"I would prefer a moderate price, and free parking would be helpful."},
+      {speaker:"Assistant",text:"I can help with that and suggest a suitable hotel near the centre."},
+    ],
+    quality:{
+      state:"candidate",
+      checks:{
+        schema:{status:"pass",method:"fixture"},
+        sourcePin:{status:"pass",method:"fixture"},
+        naturalness:{status:"pending",method:"fixture"},
+        cefr:{status:"pending",method:"fixture"},
+      },
+    },
+    provenance:{
+      sources:[{
+        dataset:"multiwoz",
+        sourceId:"D001.json",
+        sourceUrl:"https://github.com/"+pin.repository+"/blob/"+pin.commit+"/"+pin.path,
+        snapshot:pin.commit,
+        license:pin.license,
+        attribution:pin.attribution,
+        modified:false,
+      }],
+    },
+  };
+}
+
+function completedFixture() {
+  const pin=pinFixture();
+  const packet={
+    schemaVersion:1,
+    kind:"english-content-review-packet",
+    batchFamily:"e11.dialogue-multiwoz",
+    source:{
+      dataset:"multiwoz",
+      version:pin.version,
+      repository:pin.repository,
+      commit:pin.commit,
+      observedFiles:[
+        {path:pin.path,blobSha1:pin.blobSha1},
+        ...pin.additionalFiles,
+      ],
+      pinned:true,
+    },
+    selection:{requestedLimit:1,selectedDialogueIds:["D001.json"]},
+    recordSet:{recordSetId:"dialogues",records:[candidate(pin)]},
+  };
+  const intake=buildMultiwozDialogueReviewIntake(packet,pin);
+  const handoff=buildMultiwozDialogueEditorialHandoff(packet,intake,pin);
+  const entry=handoff.records[0];
+  entry.editorial.disposition="accept";
+  entry.editorial.cefr="A2";
+  for (const name of Object.keys(entry.editorial.checks)) entry.editorial.checks[name]="pass";
+  const finalization=buildMultiwozDialogueEditorialFinalization(handoff,packet,intake,pin);
+  return {pin,packet,intake,handoff,...finalization};
+}
+
+test("post-finalization validation accepts deterministic draft outputs",()=>{
+  const fixture=completedFixture();
+  const result=validateMultiwozDialogueEditorialFinalizationOutputs(fixture);
+  assert.equal(result.state,"valid");
+  assert.equal(result.recordCount,1);
+  assert.equal(result.acceptedCount,1);
+  assert.equal(result.editedCount,0);
+  assert.equal(result.rejectedCount,0);
+  assert.equal(result.batchRegistration,"ready-for-manifest-registration");
+  assert.equal(result.reviewDecisions,"not-created");
+  assert.equal(result.runtimePublication,"blocked");
+});
+
+test("post-finalization validation rejects authoring drift",()=>{
+  const fixture=completedFixture();
+  const authoring=structuredClone(fixture.authoring);
+  authoring.records[0].turns[0].text="This was edited after deterministic finalization.";
+  assert.throws(
+    ()=>validateMultiwozDialogueEditorialFinalizationOutputs({...fixture,authoring}),
+    /authoring output drifted/,
+  );
+});
+
+test("post-finalization validation rejects proposal lifecycle or digest drift",()=>{
+  const fixture=completedFixture();
+  const lifecycleProposal=structuredClone(fixture.proposal);
+  lifecycleProposal.lifecycle.runtimePublication="published";
+  assert.throws(
+    ()=>validateMultiwozDialogueEditorialFinalizationOutputs({...fixture,proposal:lifecycleProposal}),
+    /batch-registration proposal drifted/,
+  );
+
+  const digestProposal=structuredClone(fixture.proposal);
+  digestProposal.authoringDigest="sha256:stale";
+  assert.throws(
+    ()=>validateMultiwozDialogueEditorialFinalizationOutputs({...fixture,proposal:digestProposal}),
+    /batch-registration proposal drifted/,
+  );
+});
+
+test("post-finalization validation refuses a handoff that returned to pending",()=>{
+  const fixture=completedFixture();
+  const handoff=structuredClone(fixture.handoff);
+  handoff.records[0].editorial.disposition="pending";
+  handoff.records[0].editorial.cefr=null;
+  for (const name of Object.keys(handoff.records[0].editorial.checks)) {
+    handoff.records[0].editorial.checks[name]="pending";
+  }
+  assert.throws(
+    ()=>validateMultiwozDialogueEditorialFinalizationOutputs({...fixture,handoff}),
+    /still has 1 pending record/,
+  );
+});
+
+test("E11 MultiWOZ finalization validator accepts pnpm separator and is syntax-valid",()=>{
+  const script=fileURLToPath(new URL("./validate-multiwoz-e11-dialogue-finalization.mjs",import.meta.url));
+  const syntax=spawnSync(process.execPath,["--check",script],{encoding:"utf8"});
+  assert.equal(syntax.status,0,syntax.stderr||syntax.stdout);
+  const result=spawnSync(process.execPath,[script,"--","--proposal"],{encoding:"utf8"});
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/--proposal requires a value/);
+  assert.doesNotMatch(result.stderr,/Unknown argument: --/);
+});
