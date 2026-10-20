@@ -58,7 +58,7 @@ test("E11 readiness report freshness checker", async (t) => {
         const result = runChecker();
         assert.equal(result.status, 1, result.stderr || result.stdout);
         assert.match(result.stderr, /E11 readiness report is stale/);
-        assert.match(result.stderr, /npm run english-content:e11/);
+        assert.match(result.stderr, /pnpm english-content:e11/);
         assert.equal(
           readFileSync(reportPath, "utf8"),
           stale,
