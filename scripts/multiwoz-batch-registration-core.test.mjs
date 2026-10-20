@@ -6,7 +6,7 @@ import { buildMultiwozDialogueReviewIntake } from "./multiwoz-review-intake-core
 import { buildMultiwozDialogueEditorialHandoff } from "./multiwoz-editorial-handoff-core.mjs";
 import { buildMultiwozDialogueEditorialFinalization } from "./multiwoz-editorial-finalization-core.mjs";
 import { registerMultiwozDialogueBatchManifest } from "./multiwoz-batch-registration-core.mjs";
-import { parseArgs } from "./register-multiwoz-e11-dialogue-batch.mjs";
+import { parseArgs, validateProspectiveRegistration } from "./register-multiwoz-e11-dialogue-batch.mjs";
 
 function pinFixture() {
   return {
@@ -160,6 +160,30 @@ test("registrar cannot bypass pending editorial handoff",()=>{
   assert.throws(
     ()=>registerMultiwozDialogueBatchManifest({...data,handoff}),
     /still has 1 pending record/,
+  );
+});
+
+test("prospective registration must pass the same E10 batch contracts before write",async()=>{
+  const data=fixture();
+  const registration=registerMultiwozDialogueBatchManifest(data);
+  const report=await validateProspectiveRegistration({
+    manifest:registration.manifest,
+    authoring:data.authoring,
+    proposal:data.proposal,
+  });
+  assert.equal(report.totals.records,1);
+  assert.equal(report.batches.length,1);
+  assert.equal(report.batches[0].records,1);
+
+  const invalidManifest=structuredClone(registration.manifest);
+  invalidManifest.batches[0].gameSmokes[0].sampleCount=0;
+  await assert.rejects(
+    ()=>validateProspectiveRegistration({
+      manifest:invalidManifest,
+      authoring:data.authoring,
+      proposal:data.proposal,
+    }),
+    /Prospective E10 batch contract validation failed/,
   );
 });
 
