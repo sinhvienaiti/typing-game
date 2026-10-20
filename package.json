@@ -77,6 +77,7 @@
     "english-content:e11": "node scripts/report-english-content-e11-readiness.mjs",
     "english-content:e11:runtime": "node scripts/report-english-content-e11-runtime-counts.mjs",
     "english-content:e11:records": "node scripts/audit-english-content-e11-record-coverage.mjs",
+    "english-content:e11:translation:next": "node scripts/prepare-tatoeba-e11-translation-slice.mjs",
     "english-content:e12:release": "node scripts/generate-english-content-release.mjs",
     "english-content:e12:audit": "node scripts/audit-english-content-maintenance.mjs",
     "english-content:e12:sample": "node scripts/sample-english-content-quality.mjs",
