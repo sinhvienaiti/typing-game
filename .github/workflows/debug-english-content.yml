@@ -88,16 +88,44 @@ jobs:
           persist-credentials: false
 
       - name: Prepare pinned MultiWOZ E11 dialogue review slice
-        run: pnpm english-content:e11:dialogue:next -- --limit=24
+        id: multiwoz_slice
+        shell: bash
+        run: |
+          pnpm english-content:e11:dialogue:next -- --limit=24
+          if [[ -f content/english/review-queues/multiwoz-e11-dialogue-next-review.json ]]; then
+            echo 'has_slice=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_slice=false' >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Build controlled MultiWOZ E11 review intake
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
         run: node scripts/prepare-multiwoz-e11-dialogue-intake.mjs
 
       - name: Prepare MultiWOZ E11 editorial handoff
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
         run: node scripts/prepare-multiwoz-e11-dialogue-editorial-handoff.mjs
 
       - name: Apply reviewed MultiWOZ E11 editorial decisions
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
         run: node scripts/process-multiwoz-e11-dialogue-editorial-review.mjs
+
+      - name: Register completed MultiWOZ E11 editorial slice
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
+        shell: bash
+        run: |
+          node scripts/register-multiwoz-e11-dialogue-batch.mjs --write
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-01.json \
+            content/english/batches/manifest.json
+          if git diff --cached --quiet; then
+            echo 'Reviewed MultiWOZ slice is already registered.'
+          else
+            git commit -m 'feat(content): register reviewed MultiWOZ E11 slice'
+            git push origin HEAD:feature/english-learning-content-system
+          fi
 
       - name: Upload E11 review packets
         uses: actions/upload-artifact@v4
@@ -152,4 +180,4 @@ jobs:
             exit 0
           fi
           git commit -m 'docs(content): sync English content runtime status'
-          git push
+          git push origin HEAD:feature/english-learning-content-system

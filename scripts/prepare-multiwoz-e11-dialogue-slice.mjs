@@ -112,63 +112,80 @@ for (const sourceSpec of sourceSpecs) {
 }
 
 const usedDialogueKeys=await collectUsedDialogueKeys(batchManifest);
-const selected=selectNextMultiwozDialogues(candidates,options.limit,{excludeKeys:usedDialogueKeys});
-if (selected.length<options.limit) {
-  throw new Error(
-    "Only "+selected.length+" unused pinned MultiWOZ candidates remain; requested "+options.limit,
-  );
-}
-const records=selected.map(dialogue=>({
-  schemaVersion:1,
-  id:"dlg.multiwoz."+dialogue.dialogueId.toLocaleLowerCase("en-US").replace(/[^a-z0-9._-]+/gu,"-"),
-  scenario:dialogue.services.join(" + ")+" service conversation",
-  turns:dialogue.turns.map(turn=>({
-    speaker:turn.speaker==="USER"?"Learner":"Assistant",
-    text:turn.utterance,
-  })),
-  quality:quality(),
-  provenance:{
-    sources:[{
-      dataset:"multiwoz",
-      sourceId:dialogue.dialogueId,
-      sourceUrl:"https://github.com/"+pin.repository+"/blob/"+pin.commit+"/"+dialogue.sourcePath,
-      snapshot:pin.commit,
-      license:pin.license,
-      attribution:pin.attribution,
-      modified:false,
-    }],
-    note:"Human-human MultiWOZ 2.2 dialogue selected from the pinned commit for bounded E11 review.",
-  },
-}));
-const packet={
-  schemaVersion:1,
-  kind:"english-content-review-packet",
-  batchFamily:"e11.dialogue-multiwoz",
-  source:{
-    dataset:"multiwoz",
-    version:pin.version,
-    repository:pin.repository,
-    commit:pin.commit,
-    observedFiles,
-    pinned:true,
-  },
-  selection:{
-    strategy:"dialogue-source-id-order-after-manifest-multiwoz-exclusion-v1",
-    requestedLimit:options.limit,
+const remainingCandidates=candidates.filter(
+  dialogue=>!usedDialogueKeys.has(multiwozDialogueSourceKey(dialogue)),
+);
+const selected=selectNextMultiwozDialogues(
+  candidates,
+  Math.min(options.limit,remainingCandidates.length),
+  {excludeKeys:usedDialogueKeys},
+);
+
+if (selected.length===0) {
+  await fs.rm(options.outputPath,{force:true});
+  console.log("E11 MultiWOZ next dialogue review slice:",JSON.stringify({
+    state:"source-exhausted",
+    output:path.relative(root,options.outputPath).replaceAll(path.sep,"/"),
     candidateCount:candidates.length,
     usedDialogueCount:usedDialogueKeys.size,
-    remainingCandidateCount:candidates.filter(dialogue=>!usedDialogueKeys.has(multiwozDialogueSourceKey(dialogue))).length,
-    selectedDialogueIds:selected.map(multiwozDialogueSourceKey),
-  },
-  recordSet:{recordSetId:"dialogues",records},
-};
+    remainingCandidateCount:0,
+    selectedCount:0,
+  }));
+} else {
+  const records=selected.map(dialogue=>({
+    schemaVersion:1,
+    id:"dlg.multiwoz."+dialogue.dialogueId.toLocaleLowerCase("en-US").replace(/[^a-z0-9._-]+/gu,"-"),
+    scenario:dialogue.services.join(" + ")+" service conversation",
+    turns:dialogue.turns.map(turn=>({
+      speaker:turn.speaker==="USER"?"Learner":"Assistant",
+      text:turn.utterance,
+    })),
+    quality:quality(),
+    provenance:{
+      sources:[{
+        dataset:"multiwoz",
+        sourceId:dialogue.dialogueId,
+        sourceUrl:"https://github.com/"+pin.repository+"/blob/"+pin.commit+"/"+dialogue.sourcePath,
+        snapshot:pin.commit,
+        license:pin.license,
+        attribution:pin.attribution,
+        modified:false,
+      }],
+      note:"Human-human MultiWOZ 2.2 dialogue selected from the pinned commit for bounded E11 review.",
+    },
+  }));
+  const packet={
+    schemaVersion:1,
+    kind:"english-content-review-packet",
+    batchFamily:"e11.dialogue-multiwoz",
+    source:{
+      dataset:"multiwoz",
+      version:pin.version,
+      repository:pin.repository,
+      commit:pin.commit,
+      observedFiles,
+      pinned:true,
+    },
+    selection:{
+      strategy:"dialogue-source-id-order-after-manifest-multiwoz-exclusion-v1",
+      requestedLimit:options.limit,
+      candidateCount:candidates.length,
+      usedDialogueCount:usedDialogueKeys.size,
+      remainingCandidateCount:remainingCandidates.length,
+      selectedDialogueIds:selected.map(multiwozDialogueSourceKey),
+    },
+    recordSet:{recordSetId:"dialogues",records},
+  };
 
-await fs.mkdir(path.dirname(options.outputPath),{recursive:true});
-await fs.writeFile(options.outputPath,stableJson(packet),"utf8");
-console.log("E11 MultiWOZ next dialogue review slice:",JSON.stringify({
-  output:path.relative(root,options.outputPath).replaceAll(path.sep,"/"),
-  candidateCount:candidates.length,
-  usedDialogueCount:usedDialogueKeys.size,
-  selectedCount:selected.length,
-  selectedDialogueIds:packet.selection.selectedDialogueIds,
-}));
+  await fs.mkdir(path.dirname(options.outputPath),{recursive:true});
+  await fs.writeFile(options.outputPath,stableJson(packet),"utf8");
+  console.log("E11 MultiWOZ next dialogue review slice:",JSON.stringify({
+    state:selected.length<options.limit?"final-partial-slice":"ready",
+    output:path.relative(root,options.outputPath).replaceAll(path.sep,"/"),
+    candidateCount:candidates.length,
+    usedDialogueCount:usedDialogueKeys.size,
+    remainingCandidateCount:remainingCandidates.length,
+    selectedCount:selected.length,
+    selectedDialogueIds:packet.selection.selectedDialogueIds,
+  }));
+}
