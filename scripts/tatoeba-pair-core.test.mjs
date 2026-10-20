@@ -6,6 +6,8 @@ import {
   parseTatoebaLinkRow,
   parseTatoebaSentenceRow,
   selectEvenly,
+  selectNextTatoebaPairs,
+  tatoebaPairSourceKey,
 } from "./tatoeba-pair-core.mjs";
 
 test("parses Tatoeba sentence rows with or without explicit language",()=>{
@@ -33,4 +35,35 @@ test("pair normalization and even selection are deterministic",()=>{
     "hello world!\u0000xin chào thế giới!"
   );
   assert.deepEqual(selectEvenly([0,1,2,3,4,5,6,7,8,9],4),[1,3,6,8]);
+});
+
+test("Tatoeba pair source identity is bound to sentence ids rather than text",()=>{
+  const first={englishId:10,vietnameseId:20,englishText:"Same text",vietnameseText:"Cùng chữ"};
+  const second={englishId:11,vietnameseId:21,englishText:"Same text",vietnameseText:"Cùng chữ"};
+  assert.equal(tatoebaPairSourceKey(first),"10:20");
+  assert.equal(tatoebaPairSourceKey(second),"11:21");
+  assert.notEqual(tatoebaPairSourceKey(first),tatoebaPairSourceKey(second));
+  assert.throws(()=>tatoebaPairSourceKey({englishId:10,vietnameseId:"bad"}),/source identity/);
+});
+
+test("next Tatoeba slices exclude used source ids and are prefix-monotonic",()=>{
+  const candidates=[
+    {englishId:50,vietnameseId:500},
+    {englishId:10,vietnameseId:100},
+    {englishId:40,vietnameseId:400},
+    {englishId:20,vietnameseId:200},
+    {englishId:30,vietnameseId:300},
+    {englishId:20,vietnameseId:200},
+  ];
+  const excludeKeys=new Set(["20:200"]);
+  const firstTwo=selectNextTatoebaPairs(candidates,2,{excludeKeys});
+  const firstFour=selectNextTatoebaPairs(candidates,4,{excludeKeys});
+
+  assert.deepEqual(firstTwo.map(tatoebaPairSourceKey),["10:100","30:300"]);
+  assert.deepEqual(firstFour.map(tatoebaPairSourceKey),["10:100","30:300","40:400","50:500"]);
+  assert.deepEqual(firstFour.slice(0,firstTwo.length),firstTwo);
+  assert.deepEqual(
+    selectNextTatoebaPairs([...candidates].reverse(),4,{excludeKeys}),
+    firstFour,
+  );
 });
