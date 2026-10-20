@@ -9,6 +9,7 @@ import {
   selectNextTatoebaPairs,
   sha256File,
   tatoebaPairSourceKey,
+  tatoebaPairSourceKeyFromTranslationRecord,
 } from "./tatoeba-pair-core.mjs";
 import { readJson, stableJson } from "./english-content-core.mjs";
 
@@ -74,19 +75,6 @@ function sourceRef(id,pin) {
   };
 }
 
-function usedTatoebaPairKey(record) {
-  if (record?.type!=="translation") return null;
-  const sources=(record?.provenance?.sources??[]).filter(source=>source?.dataset==="tatoeba");
-  if (sources.length<2) return null;
-  const englishId=Number(sources[0]?.sourceId);
-  const vietnameseId=Number(sources[1]?.sourceId);
-  if (
-    !Number.isSafeInteger(englishId)||englishId<=0||
-    !Number.isSafeInteger(vietnameseId)||vietnameseId<=0
-  ) return null;
-  return tatoebaPairSourceKey({englishId,vietnameseId});
-}
-
 async function collectUsedPairKeys(batchManifest) {
   const paths=new Set();
   for (const batch of batchManifest.batches??[]) {
@@ -99,7 +87,7 @@ async function collectUsedPairKeys(batchManifest) {
     const document=await readJson(path.join(root,relative));
     if (!Array.isArray(document?.records)) continue;
     for (const record of document.records) {
-      const key=usedTatoebaPairKey(record);
+      const key=tatoebaPairSourceKeyFromTranslationRecord(record);
       if (key!==null) keys.add(key);
     }
   }
