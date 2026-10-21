@@ -84,6 +84,7 @@ jobs:
           sparse-checkout: |
             data/MultiWOZ_2.2/train/dialogues_001.json
             data/MultiWOZ_2.2/train/dialogues_002.json
+            data/MultiWOZ_2.2/train/dialogues_003.json
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -114,6 +115,10 @@ jobs:
         if: steps.multiwoz_slice.outputs.has_slice == 'true'
         shell: bash
         run: |
+          if [[ ! -f content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json ]]; then
+            echo 'Current MultiWOZ slice has no completed editorial decision set; leaving it as a review artifact.'
+            exit 0
+          fi
           node scripts/register-multiwoz-e11-dialogue-batch.mjs --write
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
