@@ -175,6 +175,27 @@ jobs:
       - name: Run E12 release maintenance
         run: pnpm english-content:e12
 
+      - name: Synchronize deterministic E10/E12 metadata
+        shell: bash
+        run: |
+          git add \
+            content/english/releases/2026.10.0.json \
+            content/english/reports/e10-batch-report.json \
+            content/english/reports/e12-quality-sample.json
+          if git diff --cached --quiet; then
+            echo 'E10/E12 generated metadata already synchronized.'
+            exit 0
+          fi
+          git fetch origin feature/english-learning-content-system
+          if [[ "$(git rev-parse FETCH_HEAD)" != "$(git rev-parse HEAD)" ]]; then
+            echo 'Branch advanced while this workflow was running; refusing to overwrite newer work.' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(content): refresh E10/E12 generated metadata'
+          git push origin HEAD:feature/english-learning-content-system
+
       - name: Audit master-plan acceptance
         run: node scripts/audit-english-content-master-plan.mjs
 
