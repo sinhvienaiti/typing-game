@@ -1,5 +1,7 @@
+import { execFile } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
 import {
@@ -10,6 +12,7 @@ import {
   selectEvenly,
 } from "./multiwoz-dialogue-core.mjs";
 
+const execFileAsync=promisify(execFile);
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const args=new Map(process.argv.slice(2).filter(value=>value.startsWith("--")).map(raw=>{
   const split=raw.indexOf("=");
@@ -26,8 +29,54 @@ const reportOutput=path.resolve(root,args.get("--report")??"content/english/revi
 const observedFiles=[];
 const candidates=[];
 const seenDialogueText=new Set();
-for (const sourceSpec of sourceSpecs) {
+
+async function ensurePinnedSourceFile(sourceSpec) {
   const sourceFile=path.join(sourceDir,sourceSpec.path);
+  try {
+    await fs.access(sourceFile);
+    return sourceFile;
+  } catch (error) {
+    if (error?.code!=="ENOENT") throw error;
+  }
+
+  let checkoutCommit="";
+  try {
+    const result=await execFileAsync("git",["-C",sourceDir,"rev-parse","HEAD"],{encoding:"utf8"});
+    checkoutCommit=result.stdout.trim();
+  } catch (error) {
+    throw new Error(
+      "MultiWOZ pinned source is missing and source directory is not a readable git checkout: "+sourceSpec.path,
+      {cause:error},
+    );
+  }
+  if (checkoutCommit!==pin.commit) {
+    throw new Error(
+      "MultiWOZ pinned source is missing and checkout HEAD does not match the pinned commit. Expected "+
+      pin.commit+", got "+checkoutCommit+": "+sourceSpec.path,
+    );
+  }
+
+  let body;
+  try {
+    const result=await execFileAsync(
+      "git",
+      ["-C",sourceDir,"show",pin.commit+":"+sourceSpec.path],
+      {encoding:null,maxBuffer:32*1024*1024},
+    );
+    body=result.stdout;
+  } catch (error) {
+    throw new Error(
+      "Unable to materialize pinned MultiWOZ source from the verified git checkout: "+sourceSpec.path,
+      {cause:error},
+    );
+  }
+  await fs.mkdir(path.dirname(sourceFile),{recursive:true});
+  await fs.writeFile(sourceFile,body);
+  return sourceFile;
+}
+
+for (const sourceSpec of sourceSpecs) {
+  const sourceFile=await ensurePinnedSourceFile(sourceSpec);
   const observedBlobSha1=await gitBlobSha1(sourceFile);
   if (observedBlobSha1!==sourceSpec.blobSha1) {
     throw new Error("MultiWOZ source blob mismatch for "+sourceSpec.path+". Expected "+sourceSpec.blobSha1+", got "+observedBlobSha1);
