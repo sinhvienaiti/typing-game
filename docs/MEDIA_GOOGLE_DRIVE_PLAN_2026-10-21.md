@@ -2,7 +2,8 @@
 
 > **Dành cho:** chủ dự án và AI làm tiếp.
 > **Mục tiêu:** media gốc không lên Git, nhưng máy nào cũng lấy về được bằng một lệnh.
-> **Trạng thái:** mới phân tích, chưa làm. rclone 1.75.2 đã cài trên Mac; chưa kết nối Google.
+> **Trạng thái (22/10):** đã làm xong lệnh `pnpm media:*` và test, đã sửa các lỗi từ review (hai máy, đổi tên, nhánh, pull sai md5; xem [changelog 22/10](./changelog/2026-10-22.md)). Chưa kết nối Google, chưa đẩy lần nào. Hướng dẫn dùng: [MEDIA_STORAGE.md](./MEDIA_STORAGE.md).
+> Khác với bản phân tích: bắt đầu bằng client OAuth có sẵn của rclone (client riêng là tuỳ chọn, `--client-id`); Drive chia `repo/` và `private/`; danh sách nhạc riêng `media/private.md5` không vào Git (repo công khai), chỉ nằm trên Drive `_locks/`; `rclone dedupe` dùng chế độ `skip` (rclone 1.75 không có chế độ tên `identical`).
 
 ## 1. Kết luận
 
@@ -75,9 +76,10 @@
 | Nén zip lên Drive | Mất kiểm tra từng file; đổi một file phải tải lại cả gói. |
 | Viết lại lịch sử Git để xóa media cũ | Phải force-push, làm hỏng các bản clone. Để quyết định riêng sau. |
 
-## 6. Việc tiếp theo (khi chủ dự án muốn làm)
+## 6. Việc tiếp theo
 
-1. Tạo OAuth client theo hướng dẫn AI soạn.
-2. AI viết `scripts/media/media.mjs`, `media/media.config.json`, lệnh `pnpm media:*`, test với rclone backend local (không cần mạng).
-3. Đẩy lần đầu, rồi diễn tập khôi phục: `pnpm media:pull --to ~/media-restore-test` và so md5.
-4. Sau khi Drive đủ và khớp md5, chủ dự án mới xóa bản trùng (`art-src/models/raw`, `~/Downloads/img-typing`).
+1. ~~AI viết `scripts/media/media.mjs`, `media/media.config.json`, lệnh `pnpm media:*`, test với rclone backend local.~~ Xong 22/10.
+2. Chủ dự án chạy `pnpm media:setup` trong terminal của mình (đăng nhập Google một lần).
+3. `pnpm media:push --dry-run`, rồi `pnpm media:push`. Commit `games/space-typing/media.md5` theo dòng lệnh script in ra.
+4. Diễn tập khôi phục: `pnpm media:check --remote`, rồi `pnpm media:pull --to ~/media-restore-test` và so md5.
+5. Sau khi Drive đủ và khớp md5, chủ dự án mới xóa bản trùng (`art-src/models/raw`, `~/Downloads/img-typing`).

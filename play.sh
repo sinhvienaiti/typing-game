@@ -261,6 +261,7 @@ build_if_needed \
   "games/space-typing/src" \
   "games/space-typing/public" \
   "games/space-typing/art-src" \
+  "games/space-typing/.media-pulled" \
   "games/space-typing/scripts" \
   "games/space-typing/index.html" \
   "games/space-typing/package.json" \

@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "remote": "tgmedia",
+  "driveFolder": "typing-game-media",
+  "rcloneMinVersion": "1.68.0",
+  "reserveBytes": 2000000000,
+  "hashCache": ".cache/media-hash.json",
+  "oldDir": ".media-old",
+  "game": {
+    "dir": "games/space-typing",
+    "lock": "media.md5",
+    "pulledStamp": ".media-pulled",
+    "sources": "art-src/3d/SOURCES.json",
+    "indexSourcesScript": "games/space-typing/scripts/models/index-3d-sources.mjs",
+    "modelsDir": "public/assets/space-typing/models",
+    "modelsManifest": "public/assets/space-typing/models/manifest.json",
+    "ships3dDir": "public/assets/space-typing/ships/3d"
+  },
+  "privateLock": "media/private.md5",
+  "junk": [".DS_Store", "._*", "Thumbs.db", "desktop.ini", ".localized", "*.tmp", "*.part", "*.partial", "*:Zone.Identifier"],
+  "mediaExtensions": [
+    "png", "jpg", "jpeg", "webp", "avif", "gif", "bmp", "tga", "tif", "tiff", "psd", "svg", "ico", "hdr", "exr", "ktx2", "basis",
+    "ogg", "mp3", "wav", "m4a", "aac", "flac", "opus",
+    "mp4", "webm", "mov",
+    "glb", "gltf", "bin", "fbx", "obj", "blend", "usdz"
+  ],
+  "sets": {
+    "originals": {
+      "root": "art-src",
+      "exclude": [
+        "**/*.zip",
+        "**/_out/**",
+        "models/.campaign3d-model-cache/**",
+        "models/.ship-model-cache/**"
+      ],
+      "duplicateOf3d": "models/raw"
+    },
+    "runtime": {
+      "skipDirs": [
+        "**/node_modules",
+        "**/dist",
+        "**/.git",
+        "**/.wt-*",
+        ".visual",
+        "art-src",
+        "coverage"
+      ]
+    },
+    "private": {
+      "roots": [
+        "shared/music",
+        "games/space-typing/art-src/Dota-Sounds",
+        "games/space-typing/public/local-assets"
+      ],
+      "exclude": ["shared/music/index.local.json"]
+    }
+  }
+}

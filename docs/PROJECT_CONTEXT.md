@@ -4232,3 +4232,9 @@ For future continuation, reconstruct from parent `main` and these gitlinks rathe
 ## Local Mac launcher environment — 2026-10-18
 
 On the native Apple Silicon workstation, both login and interactive zsh load ~/.config/local-dev/env.zsh. The Play/Dev/Nginx launchers also discover native Homebrew and Node 24 themselves, so a Terminal opened before bootstrap can still launch the project. Nginx setup uses brew --prefix, validates changed configuration before reloading the privileged master, and remembers the successfully applied signature to avoid repeated sudo prompts for an unchanged configuration. Local runtime state stays under .local/nginx/.
+
+---
+
+## Media store on Google Drive — 2026-10-22
+
+Images, music, GLB models and `.bin` height maps are never committed. They live in one private Google Drive folder, `typing-game-media`, reached through rclone (remote `tgmedia`, pinned to that folder with `root_folder_id`). Commands run from the parent repo: `pnpm media:setup | status | push | pull | check` (`scripts/media/`, config `media/media.config.json`, guide `docs/MEDIA_STORAGE.md`). Three sets: `originals` (`games/space-typing/art-src`, minus Blender outputs, caches, zips and `models/raw` files that duplicate `art-src/3d` by md5), `runtime` (media under `games/space-typing` that Git does not track, plus tracked models whose originals are lost) and `private` (`shared/music`, `art-src/Dota-Sounds`, `public/local-assets`). `games/space-typing/media.md5` is the tracked lock for originals and runtime; the private lock `media/private.md5` stays out of Git (the repos are public) and is kept on Drive under `_locks/`. Only `rclone copy`/`check`/listing commands run; replaced originals move to `_replaced/`. `pnpm media:pull` touches `games/space-typing/.media-pulled`, which `./play.sh` treats as a Space Typing build input.

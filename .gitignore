@@ -19,3 +19,12 @@ shared/music/*
 
 # Prepared and verified offline Voice model, regenerated locally.
 portal/public/assets/voice/
+
+# Media store on Google Drive (docs/MEDIA_STORAGE.md). The private lock lists
+# licensed music filenames, so it stays out of this public repo (Drive _locks/ only).
+/media/private.md5
+/.media-old/
+/.media-tmp/
+# rclone credentials never belong in a repo.
+rclone.conf
+*.rclone.conf
