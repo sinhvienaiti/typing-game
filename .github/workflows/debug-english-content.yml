@@ -52,6 +52,22 @@ jobs:
       - name: Run MultiWOZ editorial decision tests
         run: node --test scripts/multiwoz-editorial-decision-core.test.mjs
 
+      - name: Run MultiWOZ dynamic-slice regression
+        shell: bash
+        run: |
+          node --check scripts/process-multiwoz-e11-dialogue-editorial-review.mjs
+          node --check scripts/register-multiwoz-e11-dialogue-batch.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { multiwozEditorialSliceIdentity } from './scripts/process-multiwoz-e11-dialogue-editorial-review.mjs';
+          const identity=multiwozEditorialSliceIdentity({decisionSetId:'e11.dialogue-multiwoz.reviewed-slice-02'});
+          assert.deepEqual(identity,{
+            sliceId:'02',
+            batchId:'e11.dialogue-multiwoz-reviewed-slice-02',
+            authoringRelative:'content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-02.json',
+          });
+          NODE
+
       - name: Generate runtime artifacts
         run: pnpm english-content:generate
 
@@ -138,11 +154,12 @@ jobs:
             echo 'Current MultiWOZ slice has no completed editorial decision set; leaving it as a review artifact.'
             exit 0
           fi
+          AUTHORING_PATH="$(node --input-type=module -e "import fs from 'node:fs'; const proposal=JSON.parse(fs.readFileSync('content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json','utf8')); const value=String(proposal.authoringPath??''); if (!/^content\\/english\\/sentences\\/e11-multiwoz-dialogue-reviewed-slice-\\d+\\.json$/.test(value)) process.exit(2); process.stdout.write(value);")"
           node scripts/register-multiwoz-e11-dialogue-batch.mjs --write
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
-            content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-01.json \
+            "$AUTHORING_PATH" \
             content/english/batches/manifest.json
           if git diff --cached --quiet; then
             echo 'Reviewed MultiWOZ slice is already registered.'
@@ -162,7 +179,7 @@ jobs:
             content/english/review-queues/multiwoz-e11-dialogue-next-intake.json
             content/english/review-queues/multiwoz-e11-dialogue-next-editorial-handoff.json
             content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json
-            content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-01.json
+            content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-*.json
           if-no-files-found: error
           retention-days: 7
 

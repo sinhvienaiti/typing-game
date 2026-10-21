@@ -10,7 +10,7 @@ const defaults={
   packetPath:path.join(root,"content","english","review-queues","multiwoz-e11-dialogue-next-review.json"),
   intakePath:path.join(root,"content","english","review-queues","multiwoz-e11-dialogue-next-intake.json"),
   handoffPath:path.join(root,"content","english","review-queues","multiwoz-e11-dialogue-next-editorial-handoff.json"),
-  authoringPath:path.join(root,"content","english","sentences","e11-multiwoz-dialogue-reviewed-slice-01.json"),
+  authoringPath:null,
   proposalPath:path.join(root,"content","english","review-queues","multiwoz-e11-dialogue-next-batch-proposal.json"),
   manifestPath:path.join(root,"content","english","batches","manifest.json"),
   write:false,
@@ -46,6 +46,20 @@ export function parseArgs(argv) {
   return options;
 }
 
+function resolveAuthoringPath(proposal,overridePath) {
+  const proposed=proposal?.authoringPath;
+  if (overridePath) return overridePath;
+  if (typeof proposed!=="string"||proposed.trim()==="") {
+    throw new TypeError("proposal authoringPath must be a non-empty string");
+  }
+  const resolved=path.resolve(root,proposed);
+  const relative=path.relative(root,resolved).replaceAll(path.sep,"/");
+  if (!relative.startsWith("content/english/sentences/")||relative.includes("../")) {
+    throw new TypeError("proposal authoringPath must stay under content/english/sentences/");
+  }
+  return resolved;
+}
+
 export async function validateProspectiveRegistration({manifest,authoring,proposal}) {
   const schemaDir=path.join(root,"shared","schemas","english-content");
   const [commonSchema,batchSchema]=await Promise.all([
@@ -69,15 +83,16 @@ export async function validateProspectiveRegistration({manifest,authoring,propos
 
 export async function main(argv=process.argv.slice(2)) {
   const options=parseArgs(argv);
-  const [manifest,packet,intake,handoff,authoring,proposal,pin]=await Promise.all([
+  const [manifest,packet,intake,handoff,proposal,pin]=await Promise.all([
     readJson(options.manifestPath),
     readJson(options.packetPath),
     readJson(options.intakePath),
     readJson(options.handoffPath),
-    readJson(options.authoringPath),
     readJson(options.proposalPath),
     readJson(path.join(root,"content","english","sources","multiwoz-e06-dialogue.json")),
   ]);
+  const authoringPath=resolveAuthoringPath(proposal,options.authoringPath);
+  const authoring=await readJson(authoringPath);
   const result=registerMultiwozDialogueBatchManifest({
     manifest,
     authoring,
@@ -105,6 +120,7 @@ export async function main(argv=process.argv.slice(2)) {
     status:result.status,
     batchId:result.batchId,
     recordCount:result.recordCount,
+    authoringPath:path.relative(root,authoringPath).replaceAll(path.sep,"/"),
     authoringDigest:result.authoringDigest,
     reviewDecisions:result.reviewDecisions,
     runtimePublication:result.runtimePublication,

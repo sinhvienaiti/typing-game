@@ -42,6 +42,11 @@ export function validateMultiwozDialogueEditorialFinalizationOutputs({
   if (proposal.kind !== "english-content-batch-registration-proposal") {
     throw new TypeError("proposal kind must be english-content-batch-registration-proposal");
   }
+  const proposalId=requireText(proposal.proposalId,"proposal id");
+  const batchId=requireText(proposal?.batch?.id,"proposal batch id");
+  if (proposalId!==batchId) {
+    throw new TypeError("proposal id must match proposal batch id");
+  }
   const authoringPath=requireText(proposal.authoringPath,"proposal authoringPath");
   if (!authoringPath.startsWith("content/english/sentences/")) {
     throw new TypeError("proposal authoringPath must stay under content/english/sentences/");
@@ -52,7 +57,7 @@ export function validateMultiwozDialogueEditorialFinalizationOutputs({
     packet,
     intake,
     pin,
-    {authoringPath},
+    {authoringPath,batchId,proposalId},
   );
 
   assertStableEqual(authoring,expected.authoring,"authoring output");

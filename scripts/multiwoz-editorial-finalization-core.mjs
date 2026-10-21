@@ -37,6 +37,8 @@ const REQUIRED_BEFORE_PUBLISH=Object.freeze([
   "license-review",
 ]);
 const ALLOWED_CEFR=new Set(["A2","B1"]);
+const DEFAULT_BATCH_ID="e11.dialogue-multiwoz-reviewed-slice-01";
+const BATCH_ID_PATTERN=/^e11\.dialogue-multiwoz-reviewed-slice-\d+$/;
 
 function requireText(value,label) {
   if (typeof value!=="string"||value.trim()==="") throw new TypeError(label+" must be a non-empty string");
@@ -131,7 +133,13 @@ function authoringRecord(entry) {
   };
 }
 
-export function buildMultiwozDialogueEditorialFinalization(handoff,packet,intake,pin,{authoringPath}={}) {
+export function buildMultiwozDialogueEditorialFinalization(
+  handoff,
+  packet,
+  intake,
+  pin,
+  {authoringPath,batchId,proposalId}={},
+) {
   const validation=validateMultiwozDialogueEditorialHandoff(handoff,packet,intake,pin);
   if (validation.pending!==0) {
     throw new TypeError("MultiWOZ editorial handoff still has "+validation.pending+" pending record(s)");
@@ -142,6 +150,14 @@ export function buildMultiwozDialogueEditorialFinalization(handoff,packet,intake
   ).replaceAll(path.sep,"/");
   if (!normalizedPath.startsWith("content/english/sentences/")) {
     throw new TypeError("authoringPath must stay under content/english/sentences/");
+  }
+  const normalizedBatchId=requireText(batchId??DEFAULT_BATCH_ID,"batchId");
+  if (!BATCH_ID_PATTERN.test(normalizedBatchId)) {
+    throw new TypeError("batchId must match e11.dialogue-multiwoz-reviewed-slice-<number>");
+  }
+  const normalizedProposalId=requireText(proposalId??normalizedBatchId,"proposalId");
+  if (normalizedProposalId!==normalizedBatchId) {
+    throw new TypeError("proposalId must match batchId for MultiWOZ editorial finalization");
   }
 
   const records=[];
@@ -157,7 +173,7 @@ export function buildMultiwozDialogueEditorialFinalization(handoff,packet,intake
 
   const authoring={schemaVersion:1,records};
   const batch={
-    id:"e11.dialogue-multiwoz-reviewed-slice-01",
+    id:normalizedBatchId,
     phase:"E11",
     category:"sentences",
     cefr:["A2","B1"],
@@ -181,7 +197,7 @@ export function buildMultiwozDialogueEditorialFinalization(handoff,packet,intake
   const proposal={
     schemaVersion:1,
     kind:"english-content-batch-registration-proposal",
-    proposalId:"e11.dialogue-multiwoz-reviewed-slice-01",
+    proposalId:normalizedProposalId,
     handoffId:handoff.handoffId,
     intakeId:handoff.intakeId,
     recordSetDigest:handoff.recordSetDigest,
