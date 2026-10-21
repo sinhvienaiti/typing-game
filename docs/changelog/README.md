@@ -25,6 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
+| 2026-10-21 | Rift Defense V4, sửa Campaign 3D, mô hình 3D gốc dời vào `art-src/3d` theo cấu trúc ảnh 2D; cập nhật con trỏ Space Typing (gồm các commit 20/10 đã bỏ media). | [2026-10-21](./2026-10-21.md) |
 | 2026-10-18 | Fixed native Mac shell/launcher PATH discovery and Nginx startup for the current checkout. | [2026-10-18](./2026-10-18.md) |
 | 2026-09-22 | Advanced Space Typing through the post-Step-68 checkpoint, refreshed the parent submodule pin, fixed Space-origin shared vocabulary/typing-text routing, and added a Platform CI integration contract that preserves existing game routes. | [2026-09-22](./2026-09-22.md) |
 | 2026-09-21 | Fixed rapid consecutive pronunciation loss across Shooter, Recall and Monkeytype EN-VN by queueing browser speech instead of cancelling the active utterance before each word; added regression coverage and updated platform submodule pointers. | [2026-09-21](./2026-09-21.md) |
