@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-20",
+  "hashMethod": "SHA-256 of depth-first recursive traversal; sort entries within each directory using the explicit collator below; emit relative POSIX path + NUL + lowercase hex SHA-256 of raw file bytes + LF for each regular file; exclude entries named .DS_Store and __pycache__ at every level; directories emit no record",
+  "sources": [
+    {
+      "id": "threejs-game-skills",
+      "repository": "https://github.com/majidmanzarpour/threejs-game-skills",
+      "commit": "8286774b22a2566bf894dbc825825c16921866af",
+      "packageVersion": "0.1.0",
+      "scope": "user",
+      "location": "~/.agents/skills",
+      "installer": "Codex built-in skill-installer/install-skill-from-github.py with --ref exact commit and --dest ~/.agents/skills",
+      "reviewed": [
+        "README.md",
+        "package.json",
+        "install.sh",
+        "skill entrypoints",
+        "credential probe and helper endpoints"
+      ],
+      "skills": [
+        {
+          "name": "threejs-3d-generator",
+          "fileCount": 6,
+          "treeSha256": "f346e1b376b1c3a1772c90bf8d78282800399b71ea5ebaaf8af361425eca171d"
+        },
+        {
+          "name": "threejs-aaa-graphics-builder",
+          "fileCount": 9,
+          "treeSha256": "7450c8774e35dc51b71e6f3cb1cb34cc1dd85b84568a1aa3ea4b545084870d4c"
+        },
+        {
+          "name": "threejs-audio-generator",
+          "fileCount": 4,
+          "treeSha256": "d19c1a42c0afef3a1f2a1f1c6d926e6c204a3ba46cae339e76e741a6b9eedc32"
+        },
+        {
+          "name": "threejs-debug-profiler",
+          "fileCount": 3,
+          "treeSha256": "0af10725505b8f6ee0f2f1242318e212d071bcfe43c2722ef71077c4bd896336"
+        },
+        {
+          "name": "threejs-game-director",
+          "fileCount": 7,
+          "treeSha256": "012210a2837972f2a9de66dfe2334e2c2b0f10a2bcd4fb465de59c1b3ac8c793"
+        },
+        {
+          "name": "threejs-game-ui-designer",
+          "fileCount": 3,
+          "treeSha256": "d574229af0aa753611b036a43e9e3e0eb2b69e3bc0d200a963ad396a71a66fd8"
+        },
+        {
+          "name": "threejs-gameplay-systems",
+          "fileCount": 33,
+          "treeSha256": "e2359526caf979bf65a10997c95fdb744d36ee41b31960cbeb9e9100e48dcf72"
+        },
+        {
+          "name": "threejs-image-generator",
+          "fileCount": 3,
+          "treeSha256": "70d37d79f08b524b5f57b5ea32e0f28a90c5b9a27c5b893aec52a83ff4b6e9d1"
+        },
+        {
+          "name": "threejs-qa-release",
+          "fileCount": 6,
+          "treeSha256": "016d2b8f7b336597210f2fb8422b4fca2aa267c20f6f501451195581f40ae2e0"
+        }
+      ]
+    },
+    {
+      "id": "game-studio@openai-curated",
+      "repository": "https://github.com/openai/plugins",
+      "marketplaceCommit": "82fd64bce3869f0d4c0bb2bf0e36a6e262ca5ad8",
+      "cacheRevision": "82fd64bc",
+      "manifestVersion": "0.1.0",
+      "installer": "codex plugin add game-studio@openai-curated --json",
+      "scope": "plugin",
+      "location": "~/.codex/plugins/cache/openai-curated/game-studio/82fd64bc",
+      "skills": [
+        {
+          "name": "game-playtest",
+          "fileCount": 2,
+          "treeSha256": "622d5480645c595fb5cc6abbc96f67749bada4fe93eea36f46811326469ae135"
+        },
+        {
+          "name": "game-studio",
+          "fileCount": 2,
+          "treeSha256": "a1b51ee07964f0fa9c1d32dba5fa31e0d1fc1edf81daba18679337cac1ae3f94"
+        },
+        {
+          "name": "game-ui-frontend",
+          "fileCount": 2,
+          "treeSha256": "db0700034de06154e6a15063019fbfbc4951e52b39a79f545cb4791ce72a282a"
+        },
+        {
+          "name": "phaser-2d-game",
+          "fileCount": 2,
+          "treeSha256": "b44b41e7eead31526a00f1033f38e69694f9c8013be8289262d9c232915775e6"
+        },
+        {
+          "name": "react-three-fiber-game",
+          "fileCount": 2,
+          "treeSha256": "c28319378761151c248b45aa4a806f0daaebab948e81bf12acfe8c8e3995fe01"
+        },
+        {
+          "name": "sprite-pipeline",
+          "fileCount": 2,
+          "treeSha256": "f7e57f91108c2d2af25b9c6b2a3d895628079066f29532169f0918de989ff97a"
+        },
+        {
+          "name": "three-webgl-game",
+          "fileCount": 2,
+          "treeSha256": "26be8d3efabaccf05a8c6357d0860e6eb50e81973d2d58e6a8eafb1bb518cd6c"
+        },
+        {
+          "name": "web-3d-asset-pipeline",
+          "fileCount": 2,
+          "treeSha256": "d42f98aef48260fc1cd2387e536d4081d9f718e6c4a17d45962f29f9189dbae7"
+        },
+        {
+          "name": "web-game-foundations",
+          "fileCount": 2,
+          "treeSha256": "27cccda627c00d1224ac17310f0f338aa0204c55a801ac4d8d3e3862cf483792"
+        }
+      ]
+    }
+  ],
+  "hashAlgorithm": {
+    "id": "sha256-recursive-node-collation-v1",
+    "locale": "en-US",
+    "collatorOptions": {
+      "usage": "sort",
+      "sensitivity": "variant",
+      "ignorePunctuation": false,
+      "numeric": false,
+      "caseFirst": "false"
+    },
+    "recordEncoding": "UTF-8",
+    "reproducedWith": {
+      "node": "v24.22.0",
+      "icu": "78.3",
+      "resolvedCollation": "default"
+    },
+    "coverage": "Each recorded skill folder only; plugin-level shared references, scripts, manifests and hooks are outside these hashes.",
+    "verification": "node scripts/verify-agent-skill-sources.mjs"
+  }
+}
