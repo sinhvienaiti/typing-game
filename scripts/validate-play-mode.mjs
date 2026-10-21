@@ -112,11 +112,11 @@ for (const required of [
   'PLATFORM="macos"',
   'PLATFORM="linux"',
   'NGINX_BASE="/etc/nginx"',
-  'NGINX_BASE="/usr/local/etc/nginx"',
+  '--prefix',
   "render_config",
   "migrate_legacy_linux_certificate",
   "sudo nginx -t",
-  "brew services restart nginx",
+  'sudo "$NGINX_BIN" -t',
 ]) {
   if (!setupNginx.includes(required)) {
     failures.push(`setup-nginx.sh is missing cross-platform contract: ${required}`);

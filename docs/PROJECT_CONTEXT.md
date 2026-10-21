@@ -4226,3 +4226,9 @@ Portal build: PASS
 ~~~
 
 For future continuation, reconstruct from parent `main` and these gitlinks rather than any older SHA in this document.
+
+---
+
+## Local Mac launcher environment — 2026-10-18
+
+On the native Apple Silicon workstation, both login and interactive zsh load ~/.config/local-dev/env.zsh. The Play/Dev/Nginx launchers also discover native Homebrew and Node 24 themselves, so a Terminal opened before bootstrap can still launch the project. Nginx setup uses brew --prefix, validates changed configuration before reloading the privileged master, and remembers the successfully applied signature to avoid repeated sudo prompts for an unchanged configuration. Local runtime state stays under .local/nginx/.

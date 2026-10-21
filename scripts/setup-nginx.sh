@@ -8,12 +8,15 @@ if [[ "$MODE" != "dev" && "$MODE" != "play" ]]; then
 fi
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+source "$ROOT_DIR/scripts/local-env.sh"
 SOURCE="$ROOT_DIR/infra/nginx/typing-game.local.$MODE.conf"
 
 case "$(uname -s)" in
   Darwin)
     PLATFORM="macos"
-    NGINX_BASE="/usr/local/etc/nginx"
+    BREW_PREFIX="$(brew --prefix)"
+    NGINX_BIN="$BREW_PREFIX/bin/nginx"
+    NGINX_BASE="$BREW_PREFIX/etc/nginx"
     TARGET="$NGINX_BASE/servers/typing-game.local.conf"
     SSL_DIR="$NGINX_BASE/ssl/typing-game.local"
     ;;
@@ -132,10 +135,34 @@ render_config() {
     "$SOURCE" > "$destination"
 }
 
+macos_nginx_running() {
+  local pid_file="$BREW_PREFIX/var/run/nginx.pid"
+  local nginx_pid=""
+  [[ -r "$pid_file" ]] || return 1
+  read -r nginx_pid < "$pid_file" || true
+  [[ "$nginx_pid" =~ ^[0-9]+$ ]] || return 1
+  local process
+  process="$(ps -p "$nginx_pid" -o comm= 2>/dev/null)" || return 1
+  [[ "$process" == *"nginx: master process "* || "$process" == */nginx ]]
+}
+
 restart_nginx() {
   if [[ "$PLATFORM" == "macos" ]]; then
-    nginx -t
-    brew services restart nginx
+    local state_dir="$ROOT_DIR/.local/nginx"
+    local state_file="$state_dir/applied-config.sha256"
+    local signature
+    signature="$(shasum -a 256 "$TARGET" "$CERT" "$NGINX_BASE/nginx.conf" | shasum -a 256 | awk '{print $1}')"
+    if [[ -r "$state_file" ]] && [[ "$(cat "$state_file")" == "$signature" ]] && macos_nginx_running; then
+      return
+    fi
+    sudo "$NGINX_BIN" -t
+    if macos_nginx_running; then
+      sudo "$NGINX_BIN" -s reload
+    else
+      sudo "$NGINX_BIN"
+    fi
+    mkdir -p "$state_dir"
+    printf '%s\n' "$signature" > "$state_file"
     return
   fi
 
@@ -173,11 +200,15 @@ if [[ "$PLATFORM" == "linux" ]]; then
 else
   mkdir -p "$(dirname "$TARGET")"
   if [[ ! -f "$TARGET" ]] || ! cmp -s "$temp_config" "$TARGET"; then
+    if [[ -f "$TARGET" ]]; then
+      mkdir -p "$NGINX_BASE/backups"
+      cp -p "$TARGET" "$NGINX_BASE/backups/$(basename "$TARGET").$(date +%Y%m%d-%H%M%S)"
+    fi
     cp "$temp_config" "$TARGET"
     restart_nginx
     echo "nginx switched to $MODE mode ($PLATFORM)."
   else
-    brew services start nginx >/dev/null 2>&1 || true
+    restart_nginx
     echo "nginx is already in $MODE mode ($PLATFORM)."
   fi
 fi
