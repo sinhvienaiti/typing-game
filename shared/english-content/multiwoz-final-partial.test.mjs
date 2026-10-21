@@ -66,6 +66,17 @@ function packet(requestedLimit=3) {
   };
 }
 
+test("MultiWOZ record ids canonicalize source identity deterministically",()=>{
+  assert.equal(
+    multiwozDialogueRecordId({dialogueId:" WOZ 20/068.JSON "}),
+    "dlg.multiwoz.woz-20-068.json",
+  );
+  assert.equal(
+    multiwozDialogueRecordId({dialogueId:"PMUL0097.json"}),
+    "dlg.multiwoz.pmul0097.json",
+  );
+});
+
 test("MultiWOZ selector returns a deterministic final partial remainder",()=>{
   const candidates=[
     {dialogueId:"D003.json"},
