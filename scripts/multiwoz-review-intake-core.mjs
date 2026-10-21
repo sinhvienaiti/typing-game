@@ -59,8 +59,8 @@ export function buildMultiwozDialogueReviewIntake(packet,pin) {
   const records=packet.recordSet.records;
   if (records.length===0) throw new TypeError("MultiWOZ intake requires at least one candidate record");
   const requestedLimit=packet?.selection?.requestedLimit;
-  if (!Number.isInteger(requestedLimit)||requestedLimit!==records.length) {
-    throw new TypeError("MultiWOZ intake record count must equal selection.requestedLimit");
+  if (!Number.isInteger(requestedLimit)||requestedLimit<1||records.length>requestedLimit) {
+    throw new TypeError("MultiWOZ intake record count must not exceed selection.requestedLimit");
   }
 
   const selectedIds=packet?.selection?.selectedDialogueIds;
