@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildMultiwozDialogueReviewIntake } from "../../scripts/multiwoz-review-intake-core.mjs";
+import { selectNextMultiwozDialogues } from "../../scripts/multiwoz-dialogue-core.mjs";
 
 function pin() {
   return {
@@ -61,6 +62,16 @@ function packet(requestedLimit=3) {
     recordSet:{recordSetId:"dialogues",records},
   };
 }
+
+test("MultiWOZ selector returns a deterministic final partial remainder",()=>{
+  const candidates=[
+    {dialogueId:"D003.json"},
+    {dialogueId:"D001.json"},
+    {dialogueId:"D002.json"},
+  ];
+  const selected=selectNextMultiwozDialogues(candidates,24,{excludeKeys:new Set(["D001.json"])});
+  assert.deepEqual(selected.map(item=>item.dialogueId),["D002.json","D003.json"]);
+});
 
 test("MultiWOZ intake accepts a deterministic final partial slice",()=>{
   const intake=buildMultiwozDialogueReviewIntake(packet(3),pin());
