@@ -80,7 +80,7 @@ async function collectUsedDialogueKeys(batchManifest) {
   return keys;
 }
 
-async function collectRejectedDialogueRecordIds() {
+async function collectRejectedDialogueRecordIds(batchManifest) {
   let entries=[];
   try {
     entries=await fs.readdir(editorialRoot,{withFileTypes:true});
@@ -88,18 +88,30 @@ async function collectRejectedDialogueRecordIds() {
     if (error?.code==="ENOENT") return new Set();
     throw error;
   }
+  const registeredBatchIds=new Set(
+    (batchManifest?.batches??[])
+      .map(batch=>String(batch?.id??"").trim())
+      .filter(Boolean),
+  );
   const rejected=new Set();
   for (const entry of entries
     .filter(candidate=>candidate.isDirectory()&&/^multiwoz-e11-dialogue-slice-\d+$/.test(candidate.name))
     .sort((left,right)=>left.name.localeCompare(right.name,"en"))) {
+    const sliceMatch=/^multiwoz-e11-dialogue-slice-(\d+)$/.exec(entry.name);
+    const sliceId=sliceMatch?.[1];
+    const expectedBatchId="e11.dialogue-multiwoz-reviewed-slice-"+sliceId;
+    if (!registeredBatchIds.has(expectedBatchId)) continue;
+
     const decisionDir=path.join(editorialRoot,entry.name);
     const manifest=await readJson(path.join(decisionDir,"manifest.json"));
+    const expectedDecisionSetId="e11.dialogue-multiwoz.reviewed-slice-"+sliceId;
     if (
       manifest?.schemaVersion!==1||
       manifest?.kind!=="english-content-editorial-decision-manifest"||
+      manifest?.decisionSetId!==expectedDecisionSetId||
       !Array.isArray(manifest?.shards)
     ) {
-      throw new TypeError("Invalid MultiWOZ editorial decision manifest: "+entry.name);
+      throw new TypeError("Invalid registered MultiWOZ editorial decision manifest: "+entry.name);
     }
     for (const spec of manifest.shards) {
       if (typeof spec?.path!=="string"||spec.path.trim()==="") {
@@ -128,11 +140,11 @@ async function collectRejectedDialogueRecordIds() {
 }
 
 const options=parseArgs(process.argv.slice(2));
-const [pin,batchManifest,rejectedDialogueRecordIds]=await Promise.all([
+const [pin,batchManifest]=await Promise.all([
   readJson(path.join(root,"content","english","sources","multiwoz-e06-dialogue.json")),
   readJson(path.join(root,"content","english","batches","manifest.json")),
-  collectRejectedDialogueRecordIds(),
 ]);
+const rejectedDialogueRecordIds=await collectRejectedDialogueRecordIds(batchManifest);
 const sourceSpecs=[
   {path:pin.path,blobSha1:pin.blobSha1},
   ...(pin.additionalFiles??[]),
