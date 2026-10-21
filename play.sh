@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/local-env.sh"
+# Local Play keeps the private announcer/music files and the Admin QA Sandbox (Test Lab).
+# Public builds leave both out: see "Build flags" in games/space-typing/README.md.
+export SPACE_LOCAL_ASSETS=1 SPACE_TEST_LAB=1
 
 case "${1:-}" in
   "")
