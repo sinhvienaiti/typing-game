@@ -1,7 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildMultiwozDialogueReviewIntake } from "../../scripts/multiwoz-review-intake-core.mjs";
-import { selectNextMultiwozDialogues } from "../../scripts/multiwoz-dialogue-core.mjs";
+import {
+  multiwozDialogueRecordId,
+  selectNextMultiwozDialogues,
+} from "../../scripts/multiwoz-dialogue-core.mjs";
 
 function pin() {
   return {
@@ -71,6 +74,25 @@ test("MultiWOZ selector returns a deterministic final partial remainder",()=>{
   ];
   const selected=selectNextMultiwozDialogues(candidates,24,{excludeKeys:new Set(["D001.json"])});
   assert.deepEqual(selected.map(item=>item.dialogueId),["D002.json","D003.json"]);
+});
+
+test("MultiWOZ selector stays deterministic after editorial-reject prefiltering",()=>{
+  const candidates=[
+    {dialogueId:"D004.json"},
+    {dialogueId:"D002.json"},
+    {dialogueId:"D003.json"},
+    {dialogueId:"D001.json"},
+  ];
+  const rejectedRecordIds=new Set(["dlg.multiwoz.d002.json"]);
+  const eligible=candidates.filter(item=>!rejectedRecordIds.has(multiwozDialogueRecordId(item)));
+  const selected=selectNextMultiwozDialogues(eligible,2,{excludeKeys:new Set(["D001.json"])});
+  assert.deepEqual(selected.map(item=>item.dialogueId),["D003.json","D004.json"]);
+  const reversedEligible=[...candidates].reverse()
+    .filter(item=>!rejectedRecordIds.has(multiwozDialogueRecordId(item)));
+  assert.deepEqual(
+    selectNextMultiwozDialogues(reversedEligible,2,{excludeKeys:new Set(["D001.json"])}),
+    selected,
+  );
 });
 
 test("MultiWOZ intake accepts a deterministic final partial slice",()=>{
