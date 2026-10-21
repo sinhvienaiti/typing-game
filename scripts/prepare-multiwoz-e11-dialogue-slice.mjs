@@ -5,6 +5,7 @@ import { readJson, stableJson } from "./english-content-core.mjs";
 import {
   gitBlobSha1,
   isLearningDialogue,
+  multiwozDialogueRecordId,
   multiwozDialogueSourceKey,
   multiwozDialogueSourceKeyFromRecord,
   normalizeDialogueText,
@@ -14,6 +15,7 @@ import {
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const defaultOutput=path.join(root,"content","english","review-queues","multiwoz-e11-dialogue-next-review.json");
+const editorialRoot=path.join(root,"content","english","reviews","editorial");
 
 function parseArgs(argv) {
   const options={
@@ -78,10 +80,58 @@ async function collectUsedDialogueKeys(batchManifest) {
   return keys;
 }
 
+async function collectRejectedDialogueRecordIds() {
+  let entries=[];
+  try {
+    entries=await fs.readdir(editorialRoot,{withFileTypes:true});
+  } catch (error) {
+    if (error?.code==="ENOENT") return new Set();
+    throw error;
+  }
+  const rejected=new Set();
+  for (const entry of entries
+    .filter(candidate=>candidate.isDirectory()&&/^multiwoz-e11-dialogue-slice-\d+$/.test(candidate.name))
+    .sort((left,right)=>left.name.localeCompare(right.name,"en"))) {
+    const decisionDir=path.join(editorialRoot,entry.name);
+    const manifest=await readJson(path.join(decisionDir,"manifest.json"));
+    if (
+      manifest?.schemaVersion!==1||
+      manifest?.kind!=="english-content-editorial-decision-manifest"||
+      !Array.isArray(manifest?.shards)
+    ) {
+      throw new TypeError("Invalid MultiWOZ editorial decision manifest: "+entry.name);
+    }
+    for (const spec of manifest.shards) {
+      if (typeof spec?.path!=="string"||spec.path.trim()==="") {
+        throw new TypeError("Invalid MultiWOZ editorial decision shard path: "+entry.name);
+      }
+      const shard=await readJson(path.join(decisionDir,spec.path));
+      for (const name of ["decisionSetId","handoffId","intakeId","recordSetDigest"]) {
+        if (shard?.[name]!==manifest?.[name]) {
+          throw new TypeError("MultiWOZ editorial decision shard metadata mismatch for "+name+": "+entry.name);
+        }
+      }
+      if (shard?.schemaVersion!==1||shard?.kind!=="english-content-editorial-decision-shard"||!Array.isArray(shard?.decisions)) {
+        throw new TypeError("Invalid MultiWOZ editorial decision shard: "+entry.name+"/"+spec.path);
+      }
+      for (const decision of shard.decisions) {
+        if (decision?.disposition!=="reject") continue;
+        const recordId=String(decision?.recordId??"").trim();
+        if (!recordId.startsWith("dlg.multiwoz.")) {
+          throw new TypeError("Rejected MultiWOZ editorial decision has invalid recordId: "+recordId);
+        }
+        rejected.add(recordId);
+      }
+    }
+  }
+  return rejected;
+}
+
 const options=parseArgs(process.argv.slice(2));
-const [pin,batchManifest]=await Promise.all([
+const [pin,batchManifest,rejectedDialogueRecordIds]=await Promise.all([
   readJson(path.join(root,"content","english","sources","multiwoz-e06-dialogue.json")),
   readJson(path.join(root,"content","english","batches","manifest.json")),
+  collectRejectedDialogueRecordIds(),
 ]);
 const sourceSpecs=[
   {path:pin.path,blobSha1:pin.blobSha1},
@@ -111,12 +161,15 @@ for (const sourceSpec of sourceSpecs) {
   }
 }
 
+const eligibleCandidates=candidates.filter(
+  dialogue=>!rejectedDialogueRecordIds.has(multiwozDialogueRecordId(dialogue)),
+);
 const usedDialogueKeys=await collectUsedDialogueKeys(batchManifest);
-const remainingCandidates=candidates.filter(
+const remainingCandidates=eligibleCandidates.filter(
   dialogue=>!usedDialogueKeys.has(multiwozDialogueSourceKey(dialogue)),
 );
 const selected=selectNextMultiwozDialogues(
-  candidates,
+  eligibleCandidates,
   Math.min(options.limit,remainingCandidates.length),
   {excludeKeys:usedDialogueKeys},
 );
@@ -127,6 +180,7 @@ if (selected.length===0) {
     state:"source-exhausted",
     output:path.relative(root,options.outputPath).replaceAll(path.sep,"/"),
     candidateCount:candidates.length,
+    rejectedDialogueCount:rejectedDialogueRecordIds.size,
     usedDialogueCount:usedDialogueKeys.size,
     remainingCandidateCount:0,
     selectedCount:0,
@@ -134,7 +188,7 @@ if (selected.length===0) {
 } else {
   const records=selected.map(dialogue=>({
     schemaVersion:1,
-    id:"dlg.multiwoz."+dialogue.dialogueId.toLocaleLowerCase("en-US").replace(/[^a-z0-9._-]+/gu,"-"),
+    id:multiwozDialogueRecordId(dialogue),
     scenario:dialogue.services.join(" + ")+" service conversation",
     turns:dialogue.turns.map(turn=>({
       speaker:turn.speaker==="USER"?"Learner":"Assistant",
@@ -170,6 +224,7 @@ if (selected.length===0) {
       strategy:"dialogue-source-id-order-after-manifest-multiwoz-exclusion-v1",
       requestedLimit:options.limit,
       candidateCount:candidates.length,
+      rejectedDialogueCount:rejectedDialogueRecordIds.size,
       usedDialogueCount:usedDialogueKeys.size,
       remainingCandidateCount:remainingCandidates.length,
       selectedDialogueIds:selected.map(multiwozDialogueSourceKey),
@@ -183,6 +238,7 @@ if (selected.length===0) {
     state:selected.length<options.limit?"final-partial-slice":"ready",
     output:path.relative(root,options.outputPath).replaceAll(path.sep,"/"),
     candidateCount:candidates.length,
+    rejectedDialogueCount:rejectedDialogueRecordIds.size,
     usedDialogueCount:usedDialogueKeys.size,
     remainingCandidateCount:remainingCandidates.length,
     selectedCount:selected.length,

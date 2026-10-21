@@ -21,6 +21,12 @@ export function multiwozDialogueSourceKey(dialogue) {
   return dialogueId;
 }
 
+export function multiwozDialogueRecordId(dialogue) {
+  return "dlg.multiwoz."+multiwozDialogueSourceKey(dialogue)
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9._-]+/gu,"-");
+}
+
 export function multiwozDialogueSourceKeyFromRecord(record) {
   const source=(record?.provenance?.sources??[]).find(item=>item?.dataset==="multiwoz");
   const sourceId=String(source?.sourceId??"").trim();
