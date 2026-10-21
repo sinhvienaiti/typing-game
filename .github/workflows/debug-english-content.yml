@@ -69,6 +69,25 @@ jobs:
           pnpm english-content:derive:typing-texts
           node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
 
+      - name: Synchronize E11 readiness report
+        shell: bash
+        run: |
+          node scripts/report-english-content-e11-readiness.mjs --write
+          git add content/english/reports/e11-readiness.json
+          if git diff --cached --quiet; then
+            echo 'E11 readiness report already synchronized.'
+            exit 0
+          fi
+          git fetch origin feature/english-learning-content-system
+          if [[ "$(git rev-parse FETCH_HEAD)" != "$(git rev-parse HEAD)" ]]; then
+            echo 'Branch advanced while this workflow was running; refusing to overwrite newer work.' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(content): refresh E11 readiness report'
+          git push origin HEAD:feature/english-learning-content-system
+
       - name: Check E11 readiness report freshness
         run: node scripts/check-english-content-e11-readiness.mjs
 
