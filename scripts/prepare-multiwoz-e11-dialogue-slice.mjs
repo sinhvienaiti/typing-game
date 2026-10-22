@@ -100,7 +100,7 @@ async function collectRejectedDialogueRecordIds(batchManifest) {
     const sliceMatch=/^multiwoz-e11-dialogue-slice-(\d+)$/.exec(entry.name);
     const sliceId=sliceMatch?.[1];
     const expectedBatchId="e11.dialogue-multiwoz-reviewed-slice-"+sliceId;
-    if (!registeredBatchIds.has(expectedBatchId)) continue;
+    const registered=registeredBatchIds.has(expectedBatchId);
 
     const decisionDir=path.join(editorialRoot,entry.name);
     const manifest=await readJson(path.join(decisionDir,"manifest.json"));
@@ -109,10 +109,13 @@ async function collectRejectedDialogueRecordIds(batchManifest) {
       manifest?.schemaVersion!==1||
       manifest?.kind!=="english-content-editorial-decision-manifest"||
       manifest?.decisionSetId!==expectedDecisionSetId||
-      !Array.isArray(manifest?.shards)
+      !Array.isArray(manifest?.shards)||
+      manifest.shards.length===0
     ) {
-      throw new TypeError("Invalid registered MultiWOZ editorial decision manifest: "+entry.name);
+      throw new TypeError("Invalid MultiWOZ editorial decision manifest: "+entry.name);
     }
+
+    const sliceDecisions=[];
     for (const spec of manifest.shards) {
       if (typeof spec?.path!=="string"||spec.path.trim()==="") {
         throw new TypeError("Invalid MultiWOZ editorial decision shard path: "+entry.name);
@@ -123,17 +126,37 @@ async function collectRejectedDialogueRecordIds(batchManifest) {
           throw new TypeError("MultiWOZ editorial decision shard metadata mismatch for "+name+": "+entry.name);
         }
       }
-      if (shard?.schemaVersion!==1||shard?.kind!=="english-content-editorial-decision-shard"||!Array.isArray(shard?.decisions)) {
+      if (
+        shard?.schemaVersion!==1||
+        shard?.kind!=="english-content-editorial-decision-shard"||
+        !Array.isArray(shard?.decisions)||
+        !Number.isInteger(spec?.count)||
+        shard.decisions.length!==spec.count
+      ) {
         throw new TypeError("Invalid MultiWOZ editorial decision shard: "+entry.name+"/"+spec.path);
       }
-      for (const decision of shard.decisions) {
-        if (decision?.disposition!=="reject") continue;
-        const recordId=String(decision?.recordId??"").trim();
-        if (!recordId.startsWith("dlg.multiwoz.")) {
-          throw new TypeError("Rejected MultiWOZ editorial decision has invalid recordId: "+recordId);
-        }
-        rejected.add(recordId);
+      sliceDecisions.push(...shard.decisions);
+    }
+    if (!Number.isInteger(manifest.totalCount)||manifest.totalCount!==sliceDecisions.length) {
+      throw new TypeError("MultiWOZ editorial decision totalCount mismatch: "+entry.name);
+    }
+    const recordIds=new Set();
+    for (const decision of sliceDecisions) {
+      const recordId=String(decision?.recordId??"").trim();
+      if (!recordId.startsWith("dlg.multiwoz.")||recordIds.has(recordId)) {
+        throw new TypeError("MultiWOZ editorial decision has invalid or duplicate recordId: "+recordId);
       }
+      recordIds.add(recordId);
+    }
+
+    const rejectionOnlyComplete=
+      sliceDecisions.length>0&&
+      sliceDecisions.every(decision=>decision?.disposition==="reject");
+    if (!registered&&!rejectionOnlyComplete) continue;
+
+    for (const decision of sliceDecisions) {
+      if (decision?.disposition!=="reject") continue;
+      rejected.add(String(decision.recordId).trim());
     }
   }
   return rejected;

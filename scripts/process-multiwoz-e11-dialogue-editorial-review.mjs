@@ -131,6 +131,28 @@ export async function main(argv=process.argv.slice(2)) {
   await fs.writeFile(options.handoffPath,stableJson(applied.handoff),"utf8");
   const authoringPath=options.authoringPath??path.join(root,identity.authoringRelative);
   const authoringRelative=path.relative(root,authoringPath).replaceAll(path.sep,"/");
+
+  if (applied.accepted===0&&applied.edited===0) {
+    if (applied.rejected!==applied.handoff.records.length) {
+      throw new TypeError("Rejection-only MultiWOZ editorial outcome must reject every handoff record");
+    }
+    await fs.rm(authoringPath,{force:true});
+    await fs.rm(options.proposalPath,{force:true});
+    console.log("E11 MultiWOZ editorial review:",JSON.stringify({
+      state:"finalized-rejections-only",
+      decisionSetId:applied.decisionSetId,
+      sliceId:identity.sliceId,
+      pending:applied.pending,
+      accepted:applied.accepted,
+      edited:applied.edited,
+      rejected:applied.rejected,
+      batchRegistration:"not-required",
+      reviewDecisions:"complete",
+      runtimePublication:"blocked",
+    }));
+    return;
+  }
+
   const finalization=buildMultiwozDialogueEditorialFinalization(applied.handoff,packet,intake,pin,{
     authoringPath:authoringRelative,
     batchId:identity.batchId,
