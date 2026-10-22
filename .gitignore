@@ -28,3 +28,6 @@ portal/public/assets/voice/
 # rclone credentials never belong in a repo.
 rclone.conf
 *.rclone.conf
+
+# Reference videos stay local (no media in Git)
+*.mov
