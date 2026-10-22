@@ -1,0 +1,15 @@
+# Nhật ký lệch giữa kit và Space
+
+Ghi một dòng khi sửa lỗi ở một bên (kit hoặc Space) mà bên kia chưa có.
+Lệnh `pnpm kit:drift` ở repo cha in tóm tắt khác biệt, chỉ để biết.
+
+| Ngày | Module kit | File gốc ở Space | Bên đã sửa | Nội dung | Bên kia cần làm |
+|---|---|---|---|---|---|
+| 2026-10-23 | `typing/` | `src/td/sim/systems/calls.ts` (`typeKey`, nhánh TD 1A6) | Kit | Từ cặp bậc 2: giờ phím đầu tính từ phím mở cặp, không phải phím thứ hai. Thời gian gõ không còn ngắn đi một phím | TD: ghi `firstMs` ở phím mở cặp |
+| 2026-10-23 | `three/` | `src/scene3d/particles.ts` | Kit | `ParticlePool.clear()` đặt lại số hạt sống ngay, không chờ khung sau | Space: thêm `this.live = 0` trong `clear()` |
+| 2026-10-23 | `three/` | `src/ui/title-guide-scene.ts` | Kit | Chất lượng Ultra được khử răng cưa và DPR 1,75 như High | Space: coi `ultra` như `high` trong cảnh Rồng dẫn đường |
+| 2026-10-23 | `feedback/` | `src/feedback/trauma.ts` (thẻ `survival-s0`, a292d1ac) | Space, kit bắt kịp | Rung màn hình: cặp nhiễu (nx, ny) bị kéo vào trong vòng tròn đơn vị (`Math.hypot` rồi chia). Trước đó hai trục cùng đỉnh thì rung vượt trần, tối đa √2 × `maxPx` (≈ 19,8 px thay vì 14 px với `ship`; test đo được 16,2 px). Kit giữ `Trauma(profile, random)` | Không. Kit đã có test 40 seed, giữ ở trạng thái chấn thương 1 suốt 20 s |
+| 2026-10-23 | `feedback/` | `src/feedback/tiers.ts` (a292d1ac) | Space, kit bắt kịp | Độ giật lùi của quái: T1 0,12 → 0,18; T2 0,22 → 0,30. Hồ sơ `dragon` và `td` dùng chung bảng này nên cũng đổi | Không |
+| 2026-10-23 | `feedback/` | `src/feedback/numbers.ts` (a292d1ac) | Space, kit bắt kịp | Số sát thương: `box()` tính cả độ phồng (`popScale`), nên số đang phồng không đè khung học; số mới rơi lên số cùng kiểu dưới T3 còn trẻ (≤ 0,3 s) thì gộp vào (`absorb`); không gộp được thì đặt sang hai bên trước (6 lần thử: 2 lần sang ngang rồi mới lên trên, thay vì 4 lần chỉ lên trên); `settle()` chạy mỗi khung trong `update()` nên số không chồng thành tháp. Xuất `popScale` | Không |
+| 2026-10-23 | `feedback/` | `src/feedback/numbers.ts` (a292d1ac) | Kit | Khác Space có chủ ý: cửa sổ gộp đám đông là `profile.numbers.crowdMergeS` (mọi hồ sơ 0,3 s, Space là hằng `CROWD_MERGE_S`); `settle()` công khai để game gọi sau khi tự dời số; `popScale(tier, pop, table)` đọc độ phồng từ bảng bậc của hồ sơ (bậc ngoài 0–5 kẹp về T0/T5, Space trả 1,2); `NumberSprites.write()` vẽ theo bảng bậc của `field.profile`, nên kích thước vẽ luôn bằng hộp `box()` | Space: không cần, trừ khi sau này dùng shim |
+| 2026-10-23 | `feedback/` | `src/feedback/*` | Kit | Ghi chép để không ai "sửa lại cho giống Space": các khác biệt API của kit được giữ nguyên là `Debris(capacity, { floorY, profile, random, geometry })`, `AudioCues({ volume, profile, context, destination, events, random })` với bus `shots` (Space: `guns`), `word()` thay `load()`, `Trauma(profile, random)`, `HitStop` có `from`/`until`/`stopped()`/`scale()`/`worldDt()`/`clear()` và `BlowQueue`, `sweepReady` bắt đầu ở `-Infinity` (Space: 0, tức là sweep đầu tiên trước 0 ms bị chặn) | Không |
