@@ -54,6 +54,8 @@ Tự chạy trong **terminal của bạn**, không chạy qua AI. Không dán m�
    - Cuối cùng script in dung lượng còn trống. Lần đẩy đầu cần khoảng 3,7 GB, cộng 2 GB dự phòng. Drive đầy thì Gmail ngừng nhận thư.
    - Kiểm tra chỗ trống chỉ làm được với tài khoản có hạn mức (Gmail cá nhân). Tài khoản Workspace dùng chung dung lượng không báo hạn mức: push cảnh báo rồi bỏ qua bước này.
 3. Đăng nhập hết hạn (lâu không dùng, đổi mật khẩu): `pnpm media:setup --reconnect`.
+   - Client riêng hiện để chế độ **Testing** (Publish cần trang chủ và chính sách riêng tư trên domain riêng), nên Google bắt đăng nhập lại mỗi 7 ngày. Báo hết hạn thì chạy lệnh trên rồi bấm Allow.
+   - Đổi sang client khác: `rclone config delete tgmedia` (chỉ xoá cấu hình trên máy, không đụng Drive), rồi `pnpm media:setup --client-id <Client ID>`. Client secret chỉ dán khi được hỏi, không đưa lên dòng lệnh.
 
 Client OAuth riêng (tuỳ chọn, khi client có sẵn của rclone bị Google chặn hoặc chậm):
 
