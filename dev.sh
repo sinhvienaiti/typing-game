@@ -9,7 +9,7 @@ TARGET="${1:-all}"
 
 case "$TARGET" in
   -h|--help|help)
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
     echo
     echo "Default: all"
     echo "If Git is available, dev.sh pulls and updates submodules first."
@@ -30,11 +30,20 @@ case "$TARGET" in
   space-typing)
     TARGET="space"
     ;;
-  all|monkeytype|shooter|recall|karaoke|space)
+  dragon-hold)
+    TARGET="dragon"
+    ;;
+  typing-defense)
+    TARGET="td"
+    ;;
+  typing-survival)
+    TARGET="survival"
+    ;;
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival)
     ;;
   *)
     echo "Unknown target: $TARGET"
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
     exit 1
     ;;
 esac
@@ -72,6 +81,18 @@ install_if_missing() {
   fi
 }
 
+# New games may not be checked out yet; "all" skips them until they exist.
+install_if_present() {
+  local dir="$1"
+  local label="$2"
+
+  if [[ ! -f "$dir/package.json" ]]; then
+    echo "  • $label is not checked out yet; skipped."
+    return
+  fi
+  install_if_missing "$dir" "$label"
+}
+
 ensure_monkeytype_config() {
   local config="$ROOT_DIR/games/monkeytype/frontend/src/ts/constants/firebase-config.ts"
   local example="$ROOT_DIR/games/monkeytype/frontend/src/ts/constants/firebase-config-example.ts"
@@ -98,6 +119,9 @@ prepare_without_git() {
       install_if_missing "$ROOT_DIR/games/space-typing" "Space Typing"
       install_if_missing "$ROOT_DIR/games/monkeytype" "Monkeytype"
       ensure_monkeytype_config
+      install_if_present "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+      install_if_present "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+      install_if_present "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
       ;;
     monkeytype)
       install_if_missing "$ROOT_DIR/games/monkeytype" "Monkeytype"
@@ -114,6 +138,15 @@ prepare_without_git() {
       ;;
     space)
       install_if_missing "$ROOT_DIR/games/space-typing" "Space Typing"
+      ;;
+    dragon)
+      install_if_missing "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+      ;;
+    td)
+      install_if_missing "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+      ;;
+    survival)
+      install_if_missing "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
       ;;
   esac
 }
@@ -219,5 +252,14 @@ case "$TARGET" in
     ;;
   space)
     exec pnpm dev:space
+    ;;
+  dragon)
+    exec pnpm dev:dragon
+    ;;
+  td)
+    exec pnpm dev:td
+    ;;
+  survival)
+    exec pnpm dev:survival
     ;;
 esac

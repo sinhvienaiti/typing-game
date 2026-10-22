@@ -84,6 +84,20 @@ Vanguard/Fleet, catalog ngoại hình và chính sách tier theo từng consumer
 | Kiểm thử trình duyệt và bằng chứng hình ảnh | `space-typing-playtest` |
 | CI, HEAD mới và tiếp tục công việc | `game-ci-resumable` |
 
+### Skill theo từng game
+
+13 skill trong `.agents/skills` viết cho Space Typing. Ba game tách ra theo
+[kế hoạch tách](games/SPLIT_PLAN.md) dùng skill Game Studio, `threejs-*` và tài
+liệu thiết kế của chính game; skill Space chỉ để tham khảo, không phải hợp đồng.
+
+| Game | Skill | Nguồn thiết kế |
+| --- | --- | --- |
+| Space Typing (`games/space-typing`) | 13 skill dự án, bắt đầu ở `space-typing-director` | Tài liệu và `contracts/` của Space |
+| Rồng Giữ Ải (`games/dragon-hold`) | Game Studio, `threejs-*` | [`docs/games/dragon-lane`](games/dragon-lane/DESIGN.md) |
+| Lời Gọi (`games/typing-defense`) | Game Studio, `threejs-*` | `docs/` của game (trước khi tách: `docs/td` của Space) |
+| Tuyến Cuối (`games/typing-survival`) | Game Studio, `threejs-*` | `docs/` của game (trước khi tách: `docs/survival` của Space) |
+| Portal, nginx, script khởi chạy | `game-ci-resumable` khi tiếp tục CI/Git | [Kế hoạch tách](games/SPLIT_PLAN.md) mục 9–10 |
+
 Thứ tự: yêu cầu người dùng và hợp đồng project → specialist engine → kiến thức chung.
 [AGENTS.md](../AGENTS.md) chỉ chứa routing ngắn. Không tự đổi engine, thêm di chuyển
 WASD hoặc dựng lại project từ scaffold vì skill generic gợi ý.

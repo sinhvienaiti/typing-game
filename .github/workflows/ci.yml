@@ -31,7 +31,7 @@ jobs:
           test "$(git ls-files --stage games/karaoke-typing | awk '{print $1}')" = "160000"
 
       - name: Validate shell scripts
-        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh
+        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh scripts/game-dir.sh
 
       - name: Validate dev launcher arguments
         run: |
@@ -56,6 +56,9 @@ jobs:
         run: |
           pnpm learning:check
           pnpm learning:test
+
+      - name: Test portal learning bridge and game registry
+        run: pnpm portal:test
 
       - name: Validate shared vocabulary
         run: |

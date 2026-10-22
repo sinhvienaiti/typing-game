@@ -42,6 +42,9 @@ HOSTS=(
   "recall.typing-game.local"
   "karaoke.typing-game.local"
   "space.typing-game.local"
+  "dragon.typing-game.local"
+  "td.typing-game.local"
+  "survival.typing-game.local"
 )
 
 ensure_hosts() {

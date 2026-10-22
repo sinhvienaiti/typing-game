@@ -19,6 +19,20 @@ do
   fi
 done
 
+# New games are checked only once they are checked out.
+for path in \
+  "$ROOT_DIR/games/dragon-hold/dist/index.html" \
+  "$ROOT_DIR/games/typing-defense/dist/index.html" \
+  "$ROOT_DIR/games/typing-survival/dist/index.html"
+do
+  [[ -f "${path%/dist/index.html}/package.json" ]] || continue
+  if [[ ! -f "$path" ]]; then
+    echo "Static build is missing: $path"
+    echo "Run: pnpm build:local"
+    exit 1
+  fi
+done
+
 open_url() {
   if command -v open >/dev/null 2>&1; then
     open "$URL"

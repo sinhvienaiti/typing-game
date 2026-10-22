@@ -5,10 +5,10 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
 
 case "$TARGET" in
-  all|monkeytype|shooter|recall|karaoke|space)
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival)
     ;;
   *)
-    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
     exit 1
     ;;
 esac
@@ -75,6 +75,31 @@ update_space_submodule() {
   update_submodule_pinned "games/space-typing"
 }
 
+# New games are local repos until their submodules are registered.
+update_new_game() {
+  local path="$1"
+
+  if git config -f .gitmodules --get "submodule.$path.path" >/dev/null 2>&1; then
+    update_submodule_branch "$path" "$path"
+  elif [[ -f "$path/package.json" ]]; then
+    echo "  ✓ $path is a local checkout (not a submodule yet)."
+  else
+    echo "  • $path is not checked out yet; skipped."
+  fi
+}
+
+require_new_game() {
+  local path="$1"
+  local label="$2"
+
+  update_new_game "$path"
+  if [[ ! -f "$path/package.json" ]]; then
+    echo "$label is not checked out yet: $path/package.json is missing." >&2
+    echo "See docs/games/SPLIT_PLAN.md for how the game is added." >&2
+    exit 1
+  fi
+}
+
 case "$TARGET" in
   all)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
@@ -82,6 +107,9 @@ case "$TARGET" in
     update_submodule_branch "games/recall-typing" "games/recall-typing"
     update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
     update_space_submodule
+    update_new_game "games/dragon-hold"
+    update_new_game "games/typing-defense"
+    update_new_game "games/typing-survival"
     ;;
   monkeytype)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
@@ -97,6 +125,15 @@ case "$TARGET" in
     ;;
   space)
     update_space_submodule
+    ;;
+  dragon)
+    require_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    ;;
+  td)
+    require_new_game "games/typing-defense" "Lời Gọi"
+    ;;
+  survival)
+    require_new_game "games/typing-survival" "Tuyến Cuối"
     ;;
 esac
 
@@ -126,6 +163,18 @@ install_space() {
   pnpm --dir games/space-typing install
 }
 
+install_new_game() {
+  local path="$1"
+  local label="$2"
+
+  if [[ ! -f "$path/package.json" ]]; then
+    echo "Skipping $label: $path is not checked out yet."
+    return
+  fi
+  echo "Installing $label..."
+  pnpm --dir "$path" install
+}
+
 install_monkeytype() {
   echo "Installing Monkeytype..."
   (
@@ -148,6 +197,9 @@ case "$TARGET" in
     install_karaoke
     install_space
     install_monkeytype
+    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    install_new_game "games/typing-defense" "Lời Gọi"
+    install_new_game "games/typing-survival" "Tuyến Cuối"
     ;;
   monkeytype)
     install_monkeytype
@@ -163,6 +215,15 @@ case "$TARGET" in
     ;;
   space)
     install_space
+    ;;
+  dragon)
+    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    ;;
+  td)
+    install_new_game "games/typing-defense" "Lời Gọi"
+    ;;
+  survival)
+    install_new_game "games/typing-survival" "Tuyến Cuối"
     ;;
 esac
 

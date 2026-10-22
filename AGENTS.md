@@ -17,3 +17,17 @@ Canonical project skills live in `.agents/skills`. Update those first; use
 Launch the agent from the parent project root; an independently opened Git
 submodule does not inherit these parent skill folders.
 See [setup and validation](docs/AGENT_SKILLS_SETUP.md) for commands and discovery.
+
+## Skills by game
+
+The project skills in `.agents/skills` are written for Space Typing. The games
+split out of it ([split plan](docs/games/SPLIT_PLAN.md)) follow their own design
+docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
+
+| Game | Skills | Design source |
+| --- | --- | --- |
+| Space Typing (`games/space-typing`) | `.agents/skills`, from `space-typing-director` | Space docs, `contracts/` |
+| Rồng Giữ Ải (`games/dragon-hold`) | Game Studio, `threejs-*` | [`docs/games/dragon-lane`](docs/games/dragon-lane/DESIGN.md) |
+| Lời Gọi (`games/typing-defense`) | Game Studio, `threejs-*` | the game's `docs/` (`docs/td` in Space until the split) |
+| Tuyến Cuối (`games/typing-survival`) | Game Studio, `threejs-*` | the game's `docs/` (`docs/survival` in Space until the split) |
+| Portal, nginx, launch scripts | `game-ci-resumable` for CI/Git resumes | [split plan](docs/games/SPLIT_PLAN.md) §9–10 |

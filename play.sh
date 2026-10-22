@@ -88,6 +88,18 @@ build_if_needed() {
   pnpm "$script"
 }
 
+# New games may not be checked out yet; skip them until they exist.
+game_present() {
+  local name="$1"
+  local dir="$2"
+
+  if [[ -f "$dir/package.json" ]]; then
+    return 0
+  fi
+  echo "  • $name is not checked out yet ($dir); skipped."
+  return 1
+}
+
 prepare_space_art() {
   local game_dir="$ROOT_DIR/games/space-typing"
   local package_file="$game_dir/package.json"
@@ -197,7 +209,7 @@ ensure_admin_runtime_service() {
 }
 
 echo "[1/6] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3100 3199
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3005 3006 3007 3100 3199
 
 echo "[2/6] Refreshing local Space Typing art..."
 prepare_space_art
@@ -282,6 +294,45 @@ build_if_needed \
   "games/monkeytype/package.json" \
   "games/monkeytype/pnpm-lock.yaml" \
   "games/monkeytype/turbo.json"
+
+if game_present "Rồng Giữ Ải" "games/dragon-hold"; then
+  build_if_needed \
+    "Rồng Giữ Ải" \
+    "games/dragon-hold/dist/index.html" \
+    "build:dragon" \
+    "games/dragon-hold/src" \
+    "games/dragon-hold/public" \
+    "games/dragon-hold/index.html" \
+    "games/dragon-hold/package.json" \
+    "games/dragon-hold/tsconfig.json" \
+    "games/dragon-hold/vite.config.ts"
+fi
+
+if game_present "Lời Gọi" "games/typing-defense"; then
+  build_if_needed \
+    "Lời Gọi" \
+    "games/typing-defense/dist/index.html" \
+    "build:td" \
+    "games/typing-defense/src" \
+    "games/typing-defense/public" \
+    "games/typing-defense/index.html" \
+    "games/typing-defense/package.json" \
+    "games/typing-defense/tsconfig.json" \
+    "games/typing-defense/vite.config.ts"
+fi
+
+if game_present "Tuyến Cuối" "games/typing-survival"; then
+  build_if_needed \
+    "Tuyến Cuối" \
+    "games/typing-survival/dist/index.html" \
+    "build:survival" \
+    "games/typing-survival/src" \
+    "games/typing-survival/public" \
+    "games/typing-survival/index.html" \
+    "games/typing-survival/package.json" \
+    "games/typing-survival/tsconfig.json" \
+    "games/typing-survival/vite.config.ts"
+fi
 
 echo "[5/6] Starting runtime services and switching nginx to static Play mode..."
 ensure_admin_runtime_service

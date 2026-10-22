@@ -19,6 +19,14 @@ const rules = [
     name: "game iframe fills the game stage",
     pattern: /\.game-frame\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0[^}]*height:\s*100%/s,
   },
+  {
+    name: "nav game groups render inline when they fit",
+    pattern: /\.nav-group\s*\{[^}]*display:\s*flex/s,
+  },
+  {
+    name: "nav game groups collapse into fixed menus when the row overflows",
+    pattern: /\.global-nav\.nav-compact \.nav-group-items\s*\{[^}]*position:\s*fixed/s,
+  },
 ];
 
 const failed = rules.filter((rule) => !rule.pattern.test(css));
