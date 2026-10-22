@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { chmodSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
-import { CONTENT, git, hasRclone, makeFixture, md5, runMedia, write } from './fixture.mjs';
+import { addDragonHold, CONTENT, DRAGON, git, hasRclone, makeFixture, md5, runMedia, write } from './fixture.mjs';
 
 const GAME_REMOTE = 'repo/games/space-typing';
 
@@ -402,6 +402,98 @@ test('media store round trip with the real rclone on a local remote', { skip: !h
         assert.match(line, /--transfers 4/);
       }
     }
+  });
+});
+
+test('two games: each has its own lock, Drive folder and _locks copy; Space stays where it was', { skip: !hasRclone() && 'rclone is not installed' }, async (t) => {
+  const fx = makeFixture();
+  t.after(() => rmSync(fx.base, { recursive: true, force: true }));
+  const dragon = addDragonHold(fx);
+  const DRAGON_REMOTE = 'repo/games/dragon-hold';
+  const spaceLock = path.join(fx.game, 'media.md5');
+  const dragonLock = path.join(dragon, 'media.md5');
+
+  await t.test('dry run lists both games and skips the missing ones', () => {
+    const result = runMedia(fx, 'push', '--dry-run');
+    assert.equal(result.code, 0, result.out);
+    assert.match(result.stdout, /Bỏ qua games\/typing-defense/);
+    assert.match(result.stdout, /originals → Drive repo\/games\/dragon-hold\//);
+    const plan = read(fx.repo, '.cache/media-push-dry-run.txt');
+    assert.match(plan, /games\/space-typing\/art-src\/3d\/enemies\/a\.glb/);
+    assert.match(plan, /games\/dragon-hold\/art-src\/3d\/units\/warden\.glb/);
+    assert.match(plan, /games\/dragon-hold\/public\/assets\/dragon-hold\/models\/units\/warden\/warden\.high\.glb/);
+  });
+
+  await t.test('one push uploads both games and writes one lock per game', () => {
+    const result = runMedia(fx, 'push', '--yes');
+    assert.equal(result.code, 0, result.out);
+    const drive = listFiles(fx.drive);
+    for (const expected of [
+      `${GAME_REMOTE}/art-src/3d/enemies/a.glb`,
+      `${GAME_REMOTE}/public/assets/space-typing/models/enemies/a/a.high.glb`,
+      `${DRAGON_REMOTE}/art-src/3d/units/warden.glb`,
+      `${DRAGON_REMOTE}/art-src/units/warden.png`,
+      `${DRAGON_REMOTE}/public/assets/dragon-hold/models/units/warden/warden.high.glb`,
+    ]) assert.ok(drive.includes(expected), `${expected} is on Drive:\n${drive.join('\n')}`);
+    const copies = drive.filter((file) => file.startsWith('_locks/'));
+    const stamps = new Set(copies.map((file) => file.split('/')[1]));
+    assert.equal(stamps.size, 1, 'one stamp for the whole push');
+    for (const name of ['space-typing.media.md5', 'dragon-hold.media.md5', 'private.md5']) assert.ok(copies.some((file) => file.endsWith(`/${name}`)), name);
+    const space = readFileSync(spaceLock, 'utf8');
+    const own = readFileSync(dragonLock, 'utf8');
+    assert.doesNotMatch(space, /dragon-hold|warden/);
+    assert.equal(own, [
+      `${md5(DRAGON.glb)}  art-src/3d/units/warden.glb`,
+      `${md5(DRAGON.png)}  art-src/units/warden.png`,
+      `${md5(DRAGON.runtime)}  public/assets/dragon-hold/models/units/warden/warden.high.glb`,
+    ].join('\n') + '\n');
+    assert.equal(read(fx.drive, `_locks/${[...stamps][0]}/dragon-hold.media.md5`), own);
+    assert.match(result.stdout, /git -C games\/space-typing add media\.md5/);
+    assert.match(result.stdout, /git -C games\/dragon-hold add media\.md5/);
+  });
+
+  await t.test('check --remote and pull --to cover both games', () => {
+    const checked = runMedia(fx, 'check', '--remote');
+    assert.equal(checked.code, 0, checked.out);
+    assert.match(checked.stdout, /games\/dragon-hold \(Rồng Giữ Ải\):/);
+    assert.match(checked.stdout, new RegExp(`${DRAGON_REMOTE}/: khớp 3/3`));
+    const restore = path.join(fx.base, 'restore-two');
+    const result = runMedia(fx, 'pull', '--to', restore);
+    assert.equal(result.code, 0, result.out);
+    const total = [spaceLock, dragonLock, path.join(fx.repo, 'media/private.md5')]
+      .reduce((sum, file) => sum + readFileSync(file, 'utf8').trim().split('\n').length, 0);
+    assert.match(result.stdout, new RegExp(`Khớp ${total}/${total}`));
+    assert.equal(read(restore, 'games/dragon-hold/art-src/3d/units/warden.glb'), DRAGON.glb);
+    assert.equal(read(restore, 'games/space-typing/art-src/3d/enemies/a.glb'), CONTENT.glbA);
+  });
+
+  git(fx.game, 'add', 'media.md5');
+  git(fx.game, 'commit', '-q', '-m', 'space lock');
+  git(dragon, 'add', 'media.md5');
+  git(dragon, 'commit', '-q', '-m', 'dragon lock');
+
+  await t.test('pull restores a missing file of the second game and stamps only that game', () => {
+    const file = path.join(dragon, 'public/assets/dragon-hold/models/units/warden/warden.high.glb');
+    rmSync(file);
+    const result = runMedia(fx, 'pull', '--only', 'runtime');
+    assert.equal(result.code, 0, result.out);
+    assert.equal(readFileSync(file, 'utf8'), DRAGON.runtime);
+    assert.ok(existsSync(path.join(dragon, '.media-pulled')));
+    assert.equal(existsSync(path.join(fx.game, '.media-pulled')), false);
+    assert.match(result.stdout, /play\.sh sẽ build lại Rồng Giữ Ải/);
+  });
+
+  await t.test('--forget works across games; a pattern no game uses is refused', () => {
+    rmSync(path.join(dragon, 'art-src/units/warden.png'));
+    const before = readFileSync(spaceLock, 'utf8');
+    const wrong = runMedia(fx, 'push', '--only', 'originals', '--forget', 'games/dragon-hold/art-src/units/warden.png', '--forget', 'games/dragon-hold/nothing.png');
+    assert.equal(wrong.code, 1, wrong.out);
+    assert.match(wrong.out, /--forget games\/dragon-hold\/nothing\.png: không khớp/);
+    const result = runMedia(fx, 'push', '--only', 'originals', '--forget', 'games/dragon-hold/art-src/units/warden.png');
+    assert.equal(result.code, 0, result.out);
+    assert.doesNotMatch(readFileSync(dragonLock, 'utf8'), /warden\.png/);
+    assert.equal(readFileSync(spaceLock, 'utf8'), before, 'Space lock untouched');
+    assert.ok(existsSync(path.join(fx.drive, DRAGON_REMOTE, 'art-src/units/warden.png')), 'Drive keeps it');
   });
 });
 

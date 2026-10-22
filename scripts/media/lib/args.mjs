@@ -89,5 +89,6 @@ export const USAGE = `Kho media trên Google Drive (chạy trong thư mục typi
       Kiểm tra file trên máy (và trên Drive với --remote) khớp danh sách md5.
 
 Nhóm: originals (art-src), runtime (media chạy game chưa vào Git), private (nhạc, âm thanh riêng).
+originals và runtime tính riêng cho từng game trong media/media.config.json (games[]); game chưa có thư mục thì bỏ qua.
 Viết cờ không có "--" đứng trước: pnpm media:push --dry-run
 Hướng dẫn: docs/MEDIA_STORAGE.md`;

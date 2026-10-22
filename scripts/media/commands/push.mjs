@@ -7,11 +7,11 @@ import { formatLock, mergeHistory, sameEntries, writeFileAtomic, writeLockFile }
 import { isManifestOwned, quotaCheck, runtimeReferences } from '../lib/plan.mjs';
 import { parseCombined, RcloneError, rcloneOk, runRclone, TRANSFER_FLAGS } from '../lib/rclone.mjs';
 import {
-  downloadLockCopies, driveAbout, driveFlags, ensureRemote, fetchLockCopies, listingFlags, listLockCopies, LOCK_COPY_NAMES,
+  downloadLockCopies, driveAbout, driveFlags, ensureRemote, fetchLockCopies, listingFlags, listLockCopies, PRIVATE_LOCK_COPY,
   tempDir, uploadLockCopies,
 } from '../lib/remote.mjs';
-import { folderSummary, gameLockSetOf, readSources, toRel } from '../lib/sets.mjs';
-import { loadState, readLocks, selectedSets } from '../lib/state.mjs';
+import { folderSummary, gameLockSetOf, lockCopyName, presentGames, readSources, toRel, withGame } from '../lib/sets.mjs';
+import { gameSetNames, loadState, readLocks, selectedSets } from '../lib/state.mjs';
 import { confirm, fmtBytes, fmtCount, MediaError, nextStamp, printList, sumBytes } from '../lib/ui.mjs';
 
 const SUMMARY_DEPTH = { originals: 2, runtime: 5, private: 4 };
@@ -26,9 +26,31 @@ function patternMatches(pattern, rel, key) {
   return [rel, key].some((candidate) => candidate === pattern || candidate.startsWith(`${pattern}/`));
 }
 
+function patternsOf(options) {
+  return {
+    forget: (options.forget ?? []).map((value) => normalizePattern(value, '--forget')),
+    readd: (options.readd ?? []).map((value) => normalizePattern(value, '--readd')),
+  };
+}
+
+/** --forget / --readd patterns no set used: refused, so a typo never passes silently. */
+function unusedPatternProblems(options, plans) {
+  const { forget, readd } = patternsOf(options);
+  const usedForget = new Set(plans.flatMap((planned) => [...planned.usedForget]));
+  const usedReadd = new Set(plans.flatMap((planned) => [...planned.usedReadd]));
+  const problems = [];
+  for (const pattern of forget) {
+    if (!usedForget.has(pattern)) problems.push({ title: `--forget ${pattern}: không khớp file nào đang thiếu, hay tên cũ của file đổi tên (file còn trên máy thì không bỏ được).`, items: [] });
+  }
+  for (const pattern of readd) {
+    if (!usedReadd.has(pattern)) problems.push({ title: `--readd ${pattern}: không khớp file nào đã bị bỏ khỏi danh sách.`, items: [] });
+  }
+  return problems;
+}
+
 /** Local files under art-src/3d must be indexed in SOURCES.json with the same md5. */
 function sourcesProblems(ctx, perSet) {
-  const sources = readSources(ctx.root, ctx.config);
+  const sources = readSources(ctx.root, ctx.game);
   const prefix = `${ctx.config.sets.originals.root}/3d/`;
   const problems = [];
   for (const [key, entry] of perSet.local) {
@@ -68,10 +90,10 @@ export function compareDriveCopies(copies, { knownHere, knownInClone, relevant =
 
 /** Reads the game lock copies newest first, in growing batches, until compareDriveCopies settles. */
 async function checkDriveLocks(ctx, info, listing, state, gameSets) {
-  const name = LOCK_COPY_NAMES.game;
+  const name = lockCopyName(ctx.game);
   const stamps = [...(listing.byName[name] ?? [])].reverse();
   const headHistory = state.perSet[gameSets[0]].history;
-  const allHistory = lockHistory(path.join(ctx.root, ctx.config.game.dir), ctx.config.game.lock, { all: true });
+  const allHistory = lockHistory(path.join(ctx.root, ctx.game.dir), ctx.game.lock, { all: true });
   const setOf = (key) => gameLockSetOf(ctx.config, key);
   const knownHere = (key, md5) => state.gameLock.get(key) === md5 || Boolean(headHistory.get(key)?.has(md5))
     || state.perSet[setOf(key)]?.local.get(key)?.md5 === md5;
@@ -96,16 +118,17 @@ async function checkDriveLocks(ctx, info, listing, state, gameSets) {
 }
 
 function referencedRuntimeKeys(ctx) {
-  return new Set(runtimeReferences(path.join(ctx.root, ctx.config.game.dir), ctx.config.game).map((ref) => ref.key));
+  return new Set(runtimeReferences(path.join(ctx.root, ctx.game.dir), ctx.game).map((ref) => ref.key));
 }
 
 /**
  * Decides, per set, what to upload and what the new lock is. Collects
  * problems (refusals) and questions (need y, or --yes for "replace") instead of acting.
+ * ctx.game: the game of originals/runtime. reportUnused: false when the caller
+ * checks --forget/--readd across several games (usedForget, usedReadd).
  */
-export function planPush(ctx, state, names, options) {
-  const forget = (options.forget ?? []).map((value) => normalizePattern(value, '--forget'));
-  const readd = (options.readd ?? []).map((value) => normalizePattern(value, '--readd'));
+export function planPush(ctx, state, names, options, { reportUnused = true } = {}) {
+  const { forget, readd } = patternsOf(options);
   const usedForget = new Set();
   const usedReadd = new Set();
   const newOnly = Boolean(options['new-only']);
@@ -128,7 +151,7 @@ export function planPush(ctx, state, names, options) {
     for (const key of plan.missing) {
       if (forgetPattern(key)) forgotten.push(key);
       // --new-only never drops a line by itself: the other machine may simply not have pulled it.
-      else if (!newOnly && name === 'runtime' && isManifestOwned(key, ctx.config.game) && !referenced.has(key)) autoForgotten.push(key);
+      else if (!newOnly && name === 'runtime' && isManifestOwned(key, ctx.game) && !referenced.has(key)) autoForgotten.push(key);
       else missing.push(key);
     }
     const readded = [];
@@ -211,19 +234,15 @@ export function planPush(ctx, state, names, options) {
       const sourceProblems = sourcesProblems(ctx, perSet);
       if (sourceProblems.length) {
         problems.push({
-          title: `originals: art-src/3d chưa khớp SOURCES.json. Chạy node ${ctx.config.game.indexSourcesScript} trước, rồi commit SOURCES.json.`,
+          title: `originals (${ctx.game.dir}): art-src/3d chưa khớp SOURCES.json. Chạy node ${ctx.game.indexSourcesScript} trước, rồi commit SOURCES.json.`,
           items: sourceProblems,
         });
       }
     }
   }
-  for (const pattern of forget) {
-    if (!usedForget.has(pattern)) problems.push({ title: `--forget ${pattern}: không khớp file nào đang thiếu, hay tên cũ của file đổi tên (file còn trên máy thì không bỏ được).`, items: [] });
-  }
-  for (const pattern of readd) {
-    if (!usedReadd.has(pattern)) problems.push({ title: `--readd ${pattern}: không khớp file nào đã bị bỏ khỏi danh sách.`, items: [] });
-  }
-  return { sets, problems, warnings, newOnly };
+  const planned = { sets, problems, warnings, newOnly, usedForget, usedReadd };
+  if (reportUnused) problems.push(...unusedPatternProblems(options, [planned]));
+  return planned;
 }
 
 function printProblems(ctx, problems) {
@@ -273,10 +292,10 @@ function printPlan(ctx, planned, state) {
   for (const warning of planned.warnings) ctx.out.write(`! ${warning}\n`);
 }
 
-function writeDryRunList(ctx, planned) {
+function writeDryRunList(ctx, plans) {
   const file = path.join(ctx.root, '.cache', 'media-push-dry-run.txt');
   const lines = [];
-  for (const set of Object.values(planned.sets)) {
+  for (const set of plans.flatMap((planned) => Object.values(planned.sets))) {
     const replace = new Set(set.replace);
     for (const key of set.upload) {
       const entry = set.local.get(key);
@@ -383,7 +402,8 @@ function newGameLock(ctx, state, planned) {
 export async function push(ctx, options) {
   const names = selectedSets(options);
   const dryRun = Boolean(options['dry-run']);
-  const gameSets = names.filter((name) => name !== 'private');
+  const gameSets = gameSetNames(names);
+  const games = gameSets.length ? presentGames(ctx) : [];
   let info = null;
   let listing = null;
   let privateVersions = [];
@@ -391,69 +411,88 @@ export async function push(ctx, options) {
     info = await ensureRemote(ctx);
     listing = await listLockCopies(ctx, info);
     if (names.includes('private')) {
-      privateVersions = (await fetchLockCopies(ctx, info, { all: [LOCK_COPY_NAMES.private] }, listing))[LOCK_COPY_NAMES.private];
+      privateVersions = (await fetchLockCopies(ctx, info, { all: [PRIVATE_LOCK_COPY] }, listing))[PRIVATE_LOCK_COPY];
     }
   }
   const privateHistory = new Map();
   for (const version of privateVersions) mergeHistory(privateHistory, version.entries);
-  const state = await loadState(ctx, names, {
-    privateLock: privateVersions.at(-1)?.entries,
-    privateHistory,
-  });
-  if (names.includes('private')) mergeHistory(privateHistory, state.privateLock);
 
-  const planned = planPush(ctx, state, names, options);
-  let driveGameLock = null;
-  if (!dryRun && gameSets.length) {
-    const report = await checkDriveLocks(ctx, info, listing, state, gameSets);
-    driveGameLock = report.newest?.entries ?? null;
-    if (report.drift.length) {
-      const stamps = [...new Set(report.drift.map((item) => item.stamp))];
-      planned.problems.unshift({
-        title: `Drive có danh sách md5 mới hơn từ máy khác (${report.drift.length} file, _locks/${stamps.at(0)}${stamps.length > 1 ? ` và ${stamps.length - 1} bản sao khác` : ''}).\n`
-          + `  Chạy git pull trong ${ctx.config.game.dir} (và git submodule update ở repo cha), rồi pnpm media:pull, sau đó đẩy lại.\n`
-          + '  Máy kia mất commit media.md5: xem docs/MEDIA_STORAGE.md, mục Khi gặp lỗi.',
-        items: report.drift.map((item) => item.key),
-      });
-    }
-    if (report.otherBranch.length) {
-      planned.warnings.unshift(`Danh sách trên Drive có ${report.otherBranch.length} dòng chỉ có ở nhánh khác trong repo ${ctx.config.game.dir} của máy này, `
-        + 'chưa có ở nhánh hiện tại. Vẫn đẩy tiếp; nhớ merge nhánh đó (không phải git pull) để media.md5 đủ dòng.');
+  // One part per game (its originals and runtime, its own lock), then the shared private set.
+  const parts = [];
+  for (const game of games) {
+    const gctx = withGame(ctx, game);
+    const state = await loadState(gctx, gameSets);
+    parts.push({ ctx: gctx, game, names: gameSets, state, planned: planPush(gctx, state, gameSets, options, { reportUnused: false }) });
+  }
+  if (names.includes('private')) {
+    const pctx = withGame(ctx, null);
+    const state = await loadState(pctx, ['private'], { privateLock: privateVersions.at(-1)?.entries, privateHistory });
+    mergeHistory(privateHistory, state.privateLock);
+    parts.push({ ctx: pctx, game: null, names: ['private'], state, planned: planPush(pctx, state, ['private'], options, { reportUnused: false }) });
+  }
+  const gameParts = parts.filter((part) => part.game);
+  const privatePart = parts.find((part) => !part.game) ?? null;
+  const plans = parts.map((part) => part.planned);
+
+  const driveGameLocks = new Map();
+  if (!dryRun) {
+    for (const part of gameParts) {
+      const { game } = part;
+      const report = await checkDriveLocks(part.ctx, info, listing, part.state, part.names);
+      driveGameLocks.set(game.id, report.newest?.entries ?? null);
+      if (report.drift.length) {
+        const stamps = [...new Set(report.drift.map((item) => item.stamp))];
+        part.planned.problems.unshift({
+          title: `Drive có danh sách md5 mới hơn từ máy khác (${game.dir}, ${report.drift.length} file, _locks/${stamps.at(0)}${stamps.length > 1 ? ` và ${stamps.length - 1} bản sao khác` : ''}).\n`
+            + `  Chạy git pull trong ${game.dir} (và git submodule update ở repo cha), rồi pnpm media:pull, sau đó đẩy lại.\n`
+            + '  Máy kia mất commit media.md5: xem docs/MEDIA_STORAGE.md, mục Khi gặp lỗi.',
+          items: report.drift.map((item) => item.key),
+        });
+      }
+      if (report.otherBranch.length) {
+        part.planned.warnings.unshift(`Danh sách trên Drive có ${report.otherBranch.length} dòng chỉ có ở nhánh khác trong repo ${game.dir} của máy này, `
+          + 'chưa có ở nhánh hiện tại. Vẫn đẩy tiếp; nhớ merge nhánh đó (không phải git pull) để media.md5 đủ dòng.');
+      }
     }
   }
+  const problems = [...plans.flatMap((planned) => planned.problems), ...unusedPatternProblems(options, plans)];
 
   if (dryRun) {
     ctx.out.write('Đẩy thử (--dry-run): không kết nối Drive, không ghi gì lên Drive hay vào danh sách md5.\n');
-    printPlan(ctx, planned, state);
-    const all = Object.values(planned.sets).flatMap((set) => set.upload.map((key) => set.local.get(key)));
-    const listFile = writeDryRunList(ctx, planned);
+    for (const part of parts) printPlan(part.ctx, part.planned, part.state);
+    const all = plans.flatMap((planned) => Object.values(planned.sets).flatMap((set) => set.upload.map((key) => set.local.get(key))));
+    const listFile = writeDryRunList(ctx, plans);
     ctx.out.write(`\nTổng: ${fmtCount(all.length)} file, ${fmtBytes(sumBytes(all))}. Danh sách đầy đủ: ${listFile}\n`);
-    if (planned.problems.length) {
+    if (problems.length) {
       ctx.out.write('\nKhi đẩy thật sẽ bị từ chối vì:\n');
-      printProblems(ctx, planned.problems);
+      printProblems(ctx, problems);
       return 1;
     }
     return 0;
   }
 
-  if (planned.problems.length) {
-    printProblems(ctx, planned.problems);
+  if (problems.length) {
+    printProblems(ctx, problems);
     ctx.err.write('Chưa đẩy gì.\n');
     return 1;
   }
-  await askQuestions(ctx, planned, options);
-  for (const warning of planned.warnings) ctx.out.write(`! ${warning}\n`);
+  for (const planned of plans) await askQuestions(ctx, planned, options);
+  for (const planned of plans) for (const warning of planned.warnings) ctx.out.write(`! ${warning}\n`);
 
-  const sets = Object.values(planned.sets);
+  const sets = plans.flatMap((planned) => Object.values(planned.sets));
   const uploads = sets.flatMap((set) => set.upload.map((key) => set.local.get(key)));
-  const nextGameLock = gameSets.length ? newGameLock(ctx, state, planned) : state.gameLock;
-  const gameLockChanged = gameSets.length > 0 && (!state.gameLockExists ? nextGameLock.size > 0 : !sameEntries(nextGameLock, state.gameLock));
-  const nextPrivateLock = names.includes('private') ? planned.sets.private.newLock : null;
-  const privateChanged = Boolean(nextPrivateLock) && !sameEntries(nextPrivateLock, state.privateLock);
-  const localPrivateStale = Boolean(nextPrivateLock) && !sameEntries(nextPrivateLock, readLocks(ctx).privateLock ?? new Map());
-  const nothingNew = !uploads.length && !gameLockChanged && !privateChanged;
-  if (gameLockChanged && isDetachedHead(path.join(ctx.root, ctx.config.game.dir))) {
-    throw new MediaError(`${ctx.config.game.dir} đang ở detached HEAD: commit media.md5 sẽ dễ mất.\n  Chạy: git -C ${ctx.config.game.dir} switch <nhánh đang làm>  (hoặc switch -c <nhánh mới>), rồi đẩy lại. Chưa đẩy gì.`);
+  for (const part of gameParts) {
+    part.nextGameLock = newGameLock(ctx, part.state, part.planned);
+    part.gameLockChanged = !part.state.gameLockExists ? part.nextGameLock.size > 0 : !sameEntries(part.nextGameLock, part.state.gameLock);
+  }
+  const nextPrivateLock = privatePart ? privatePart.planned.sets.private.newLock : null;
+  const privateChanged = Boolean(nextPrivateLock) && !sameEntries(nextPrivateLock, privatePart.state.privateLock);
+  const localPrivateStale = Boolean(nextPrivateLock) && !sameEntries(nextPrivateLock, readLocks(withGame(ctx, null)).privateLock ?? new Map());
+  const nothingNew = !uploads.length && !gameParts.some((part) => part.gameLockChanged) && !privateChanged;
+  for (const { game, gameLockChanged } of gameParts) {
+    if (gameLockChanged && isDetachedHead(path.join(ctx.root, game.dir))) {
+      throw new MediaError(`${game.dir} đang ở detached HEAD: commit media.md5 sẽ dễ mất.\n  Chạy: git -C ${game.dir} switch <nhánh đang làm>  (hoặc switch -c <nhánh mới>), rồi đẩy lại. Chưa đẩy gì.`);
+    }
   }
 
   const uploadBytes = sumBytes(uploads);
@@ -515,34 +554,35 @@ export async function push(ctx, options) {
   }
 
   if (nothingNew) {
-    if (localPrivateStale) writeLockFile(state.privateLockFile, nextPrivateLock);
-    // The newest Drive copy must describe this lock: a copy that failed to upload
+    if (localPrivateStale) writeLockFile(privatePart.state.privateLockFile, nextPrivateLock);
+    // The newest Drive copy must describe each lock: a copy that failed to upload
     // earlier, or a lock merged in Git, is copied now (every line was just verified).
-    if (gameSets.length && state.gameLock.size && !sameEntries(state.gameLock, driveGameLock)) {
-      await uploadCopies(ctx, info, stamp, { [LOCK_COPY_NAMES.game]: state.gameLock });
-      ctx.out.write(`Bản sao danh sách mới nhất trên Drive khác ${ctx.config.game.dir}/${ctx.config.game.lock}: đã chép lại vào _locks/${stamp}/.\n`);
+    const stale = gameParts.filter(({ game, state }) => state.gameLock.size && !sameEntries(state.gameLock, driveGameLocks.get(game.id)));
+    if (stale.length) {
+      await uploadCopies(ctx, info, stamp, Object.fromEntries(stale.map(({ game, state }) => [lockCopyName(game), state.gameLock])));
+      for (const { game } of stale) ctx.out.write(`Bản sao danh sách mới nhất trên Drive khác ${game.dir}/${game.lock}: đã chép lại vào _locks/${stamp}/.\n`);
     }
     ctx.out.write(`Không có gì mới để đẩy. Drive khớp md5: ${fmtCount(verified)}/${fmtCount(verified)}.\n`);
     return 0;
   }
 
   await uploadCopies(ctx, info, stamp, {
-    [LOCK_COPY_NAMES.game]: gameSets.length && nextGameLock.size ? nextGameLock : null,
-    [LOCK_COPY_NAMES.private]: nextPrivateLock?.size ? nextPrivateLock : null,
+    ...Object.fromEntries(gameParts.map(({ game, nextGameLock }) => [lockCopyName(game), nextGameLock.size ? nextGameLock : null])),
+    [PRIVATE_LOCK_COPY]: nextPrivateLock?.size ? nextPrivateLock : null,
   });
-  if (gameLockChanged) writeLockFile(state.gameLockFile, nextGameLock);
-  if (privateChanged || localPrivateStale) writeLockFile(state.privateLockFile, nextPrivateLock);
+  for (const part of gameParts) if (part.gameLockChanged) writeLockFile(part.state.gameLockFile, part.nextGameLock);
+  if (privateChanged || localPrivateStale) writeLockFile(privatePart.state.privateLockFile, nextPrivateLock);
 
   ctx.out.write(`\n✓ Đã đẩy ${fmtCount(uploads.length)} file (${fmtBytes(uploadBytes)}). Drive khớp md5: ${fmtCount(verified)}/${fmtCount(verified)}. Bản sao danh sách: _locks/${stamp}/\n`);
-  if (gameLockChanged) {
-    const game = ctx.config.game.dir;
-    ctx.out.write(`\nĐã cập nhật ${game}/${ctx.config.game.lock}. Commit cùng code (script không tự commit):\n`
-      + `  git -C ${game} add ${ctx.config.game.lock}\n`
-      + `  git -C ${game} commit -m "chore(media): cập nhật ${ctx.config.game.lock}"\n`
-      + `  git add ${game}\n`
-      + `  git commit -m "chore: cập nhật con trỏ ${path.posix.basename(game)} (${ctx.config.game.lock})"\n`);
+  for (const { game, gameLockChanged } of gameParts) {
+    if (!gameLockChanged) continue;
+    const dir = game.dir;
+    ctx.out.write(`\nĐã cập nhật ${dir}/${game.lock}. Commit cùng code (script không tự commit):\n`
+      + `  git -C ${dir} add ${game.lock}\n`
+      + `  git -C ${dir} commit -m "chore(media): cập nhật ${game.lock}"\n`
+      + `  git add ${dir}\n`
+      + `  git commit -m "chore: cập nhật con trỏ ${path.posix.basename(dir)} (${game.lock})"\n`);
   }
   if (privateChanged) ctx.out.write(`Danh sách riêng ${ctx.config.privateLock} chỉ nằm trên máy này và trên Drive (_locks/), không vào Git.\n`);
   return 0;
 }
-

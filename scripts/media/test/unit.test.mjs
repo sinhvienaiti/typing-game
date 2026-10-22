@@ -1,7 +1,7 @@
 // Unit tests: no network, no rclone. Run: pnpm media:test
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -12,13 +12,13 @@ import { HashCache, hashEntries } from '../lib/hash.mjs';
 import { formatLock, isSafeRelativePath, LockError, parseLock, parseLockHistory } from '../lib/lock.mjs';
 import { classify, quotaCheck, runtimeReferences } from '../lib/plan.mjs';
 import { assertAllowed, parseCombined, redact } from '../lib/rclone.mjs';
-import { assertLockKeys, loadConfig, lockKeyProblem, lostOriginalIds, scanSets } from '../lib/sets.mjs';
+import { assertLockKeys, findGame, loadConfig, lockCopyName, lockKeyProblem, lostOriginalIds, presentGames, scanSets, setDefinitions, withGame } from '../lib/sets.mjs';
 import { loadState } from '../lib/state.mjs';
 import { nextStamp } from '../lib/ui.mjs';
 import { askQuestions, compareDriveCopies, planPush } from '../commands/push.mjs';
 import { createArgs, remoteSection } from '../commands/setup.mjs';
 import { createContext } from '../media.mjs';
-import { CONTENT, git, makeFixture, md5, REPO_ROOT, write } from './fixture.mjs';
+import { addDragonHold, CONTENT, DRAGON, git, makeFixture, md5, REPO_ROOT, runMedia, write } from './fixture.mjs';
 
 const MD5_A = 'a'.repeat(32);
 const MD5_B = 'b'.repeat(32);
@@ -256,7 +256,7 @@ test('sets: walk the disk minus git ls-files, ignoring .gitignore', async (t) =>
   write(fx.game, 'art-src/enemies/a.png:Zone.Identifier', '[ZoneTransfer]\nZoneId=3\n');
   write(fx.repo, 'shared/music/producer (1)/song a.m4a:Zone.Identifier', '[ZoneTransfer]\n');
   write(fx.game, 'art-src/enemies/what?.png', 'a name Windows cannot hold');
-  const ctx = createContext({ root: fx.repo, out: { write() {} } });
+  const ctx = withGame(createContext({ root: fx.repo, out: { write() {} } }), 'space-typing');
   const { sets, notes } = await scanSets(ctx, ['originals', 'runtime', 'private']);
   const keys = (name) => sets[name].map((entry) => entry.key);
   assert.deepEqual(keys('originals'), [
@@ -282,7 +282,7 @@ test('sets: walk the disk minus git ls-files, ignoring .gitignore', async (t) =>
 test('sets: a models/raw file is dropped only when its art-src/3d twin is on this machine or in the lock', async (t) => {
   const fx = makeFixture();
   t.after(() => rmSync(fx.base, { recursive: true, force: true }));
-  const ctx = createContext({ root: fx.repo, out: { write() {} } });
+  const ctx = withGame(createContext({ root: fx.repo, out: { write() {} } }), 'space-typing');
   const raw = 'art-src/models/raw/enemies/a.glb';
   // A machine whose art-src/3d is incomplete: SOURCES.json alone is not enough.
   rmSync(path.join(fx.game, 'art-src/3d/enemies/a.glb'));
@@ -300,21 +300,28 @@ test('sets: a models/raw file is dropped only when its art-src/3d twin is on thi
 
 test('lock keys stay inside their set (locks come from a public repo and from Drive)', () => {
   const config = loadConfig(REPO_ROOT);
+  const space = findGame(config, 'space-typing');
   for (const key of ['art-src/3d/enemies/a.glb', 'art-src/notes/prompt.txt', 'public/assets/space-typing/models/a/a.high.glb',
     'docs/art-requests/map (1).png', 'public/assets/space-typing/ships/3d/razor/height.bin']) {
-    assert.equal(lockKeyProblem(config, 'game', key), null, key);
+    assert.equal(lockKeyProblem(config, 'game', key, space), null, key);
   }
   for (const key of ['.git/hooks/pre-push', 'scripts/x.mjs', 'public/a.js', 'node_modules/x/a.png', 'dist/a.png', '.visual/a.png',
     'art-src/Dota-Sounds/a.wav', 'public/local-assets/a.ogg', 'art-src/.git/config', 'src/.git/a.png']) {
-    assert.notEqual(lockKeyProblem(config, 'game', key), null, key);
+    assert.notEqual(lockKeyProblem(config, 'game', key, space), null, key);
   }
+  // Space's private folders are not private inside another game.
+  const dragon = findGame(config, 'dragon-hold');
+  assert.equal(lockKeyProblem(config, 'game', 'art-src/Dota-Sounds/a.wav', dragon), null);
+  assert.equal(lockKeyProblem(config, 'game', 'public/assets/dragon-hold/models/units/a/a.high.glb', dragon), null);
+  assert.notEqual(lockKeyProblem(config, 'game', 'scripts/x.mjs', dragon), null);
+  assert.throws(() => lockKeyProblem(config, 'game', 'art-src/a.png'), /game nào/);
   assert.equal(lockKeyProblem(config, 'private', 'shared/music/a b/song.m4a'), null);
   assert.equal(lockKeyProblem(config, 'private', 'games/space-typing/public/local-assets/a.ogg'), null);
   for (const key of ['scripts/media/media.mjs', '.git/hooks/pre-push', 'shared/music/.git/x', 'shared/musicx/a.m4a']) {
     assert.notEqual(lockKeyProblem(config, 'private', key), null, key);
   }
-  assert.throws(() => assertLockKeys(config, 'game', new Map([['scripts/x.mjs', MD5_A]]), 'media.md5'), /ngoài nhóm/);
-  assert.equal(assertLockKeys(config, 'game', null, 'media.md5'), null);
+  assert.throws(() => assertLockKeys(config, 'game', new Map([['scripts/x.mjs', MD5_A]]), 'media.md5', space), /ngoài nhóm/);
+  assert.equal(assertLockKeys(config, 'game', null, 'media.md5', space), null);
 });
 
 test('runtime references: manifest URLs and ship textures with their ?v= hash', (t) => {
@@ -337,7 +344,7 @@ test('runtime references: manifest URLs and ship textures with their ?v= hash', 
 test('push plan: --forget, auto-forget of unreferenced models, missing files need an answer', async (t) => {
   const fx = makeFixture();
   t.after(() => rmSync(fx.base, { recursive: true, force: true }));
-  const ctx = createContext({ root: fx.repo, out: { write() {} } });
+  const ctx = withGame(createContext({ root: fx.repo, out: { write() {} } }), 'space-typing');
   const lock = [
     [md5(CONTENT.glbA), 'art-src/3d/enemies/a.glb'],
     [MD5_A, 'public/assets/space-typing/models/enemies/old/old.high.glb'],
@@ -371,7 +378,7 @@ test('push plan: --forget, auto-forget of unreferenced models, missing files nee
 test('push plan: --yes never accepts a rename; --forget <old name> does; --readd brings back a dropped path', async (t) => {
   const fx = makeFixture();
   t.after(() => rmSync(fx.base, { recursive: true, force: true }));
-  const ctx = createContext({ root: fx.repo, out: { write() {} }, stdin: { isTTY: false } });
+  const ctx = withGame(createContext({ root: fx.repo, out: { write() {} }, stdin: { isTTY: false } }), 'space-typing');
   // Lock v1 lists art-src/enemies/a.png; v2 renamed it to placeholder.png and dropped forgotten.png.
   writeFileSync(path.join(fx.game, 'media.md5'), `${md5(CONTENT.pngV1)}  art-src/enemies/a.png\n${MD5_B}  art-src/enemies/forgotten.png\n`);
   git(fx.game, 'add', '-f', 'media.md5');
@@ -450,4 +457,122 @@ test('no OAuth token or client secret is committed in the parent repo', () => {
     if (secret.test(text)) offenders.push(file);
   }
   assert.deepEqual(offenders, []);
+});
+
+test('config: games[] keeps Space first with the exact lock, Drive folder and lock copy it had', () => {
+  const config = loadConfig(REPO_ROOT);
+  assert.deepEqual(config.games.map((game) => game.id), ['space-typing', 'dragon-hold', 'typing-defense', 'typing-survival']);
+  assert.equal(config.game, undefined, 'the old single block is gone after loading');
+  const space = config.games[0];
+  // The values the single `game` block had: Drive paths must not move, or everything uploads again.
+  assert.deepEqual({ ...space, id: undefined, title: undefined }, {
+    id: undefined, title: undefined, dir: 'games/space-typing', lock: 'media.md5', pulledStamp: '.media-pulled', sources: 'art-src/3d/SOURCES.json',
+    indexSourcesScript: 'games/space-typing/scripts/models/index-3d-sources.mjs', modelsDir: 'public/assets/space-typing/models',
+    modelsManifest: 'public/assets/space-typing/models/manifest.json', ships3dDir: 'public/assets/space-typing/ships/3d',
+  });
+  const strip = ({ game, ...rest }) => rest;
+  const definitions = setDefinitions(config, space);
+  assert.deepEqual(strip(definitions.originals), { name: 'originals', lockFile: 'games/space-typing/media.md5', lockBase: 'games/space-typing', remoteBase: 'repo/games/space-typing', backup: true, confirmReplace: true, inGameLock: true });
+  assert.deepEqual(strip(definitions.runtime), { name: 'runtime', lockFile: 'games/space-typing/media.md5', lockBase: 'games/space-typing', remoteBase: 'repo/games/space-typing', backup: false, confirmReplace: false, inGameLock: true });
+  assert.deepEqual(strip(definitions.private), { name: 'private', lockFile: 'media/private.md5', lockBase: '', remoteBase: 'private', backup: true, confirmReplace: true, inGameLock: false });
+  assert.equal(lockCopyName(space), 'space-typing.media.md5');
+  for (const id of ['dragon-hold', 'typing-defense', 'typing-survival']) {
+    const game = findGame(config, id);
+    assert.equal(game.dir, `games/${id}`);
+    assert.equal(game.modelsManifest, `public/assets/${id}/models/manifest.json`);
+    assert.equal(setDefinitions(config, game).originals.remoteBase, `repo/games/${id}`);
+    assert.equal(setDefinitions(config, game).runtime.lockFile, `games/${id}/media.md5`);
+    assert.equal(lockCopyName(game), `${id}.media.md5`);
+  }
+  assert.deepEqual(Object.keys(setDefinitions(config, null)), ['private'], 'no game: the private set only');
+});
+
+test('config: an older single game block still loads; bad or duplicate games are refused', (t) => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'media-config-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const base = JSON.parse(readFileSync(path.join(REPO_ROOT, 'media/media.config.json'), 'utf8'));
+  const space = base.games[0];
+  const save = (value) => {
+    mkdirSync(path.join(dir, 'media'), { recursive: true });
+    writeFileSync(path.join(dir, 'media/media.config.json'), JSON.stringify(value));
+  };
+  const { games, ...rest } = base;
+  const { id, title, ...legacyBlock } = space;
+  save({ ...rest, game: legacyBlock });
+  const legacy = loadConfig(dir);
+  assert.deepEqual(legacy.games.map((game) => [game.id, game.dir]), [['space-typing', 'games/space-typing']]);
+  save({ ...rest, games: [space, { ...space }] });
+  assert.throws(() => loadConfig(dir), /trùng/);
+  save({ ...rest, games: [space, { ...space, id: 'Bad Id', dir: 'games/x' }] });
+  assert.throws(() => loadConfig(dir), /id không hợp lệ/);
+  save({ ...rest, games: [space, { ...space, id: 'x', dir: '../outside' }] });
+  assert.throws(() => loadConfig(dir), /dir không hợp lệ/);
+  save({ ...rest, games: [] });
+  assert.throws(() => loadConfig(dir), /games\[\]/);
+});
+
+test('games: a game whose folder is missing is skipped with one notice, never an error', async (t) => {
+  const fx = makeFixture();
+  t.after(() => rmSync(fx.base, { recursive: true, force: true }));
+  let printed = '';
+  const ctx = createContext({ root: fx.repo, out: { write(text) { printed += text; } } });
+  assert.deepEqual(presentGames(withGame(ctx, 'space-typing')).map((game) => game.id), ['space-typing']);
+  assert.deepEqual(presentGames(ctx).map((game) => game.id), ['space-typing'], 'cached across withGame copies');
+  assert.equal(printed.match(/Bỏ qua games\/dragon-hold/g)?.length, 1);
+  assert.match(printed, /Bỏ qua games\/typing-defense/);
+  assert.match(printed, /Bỏ qua games\/typing-survival/);
+  // The private set needs no game; it still reads Space's Git list for its folders.
+  const { sets } = await scanSets(withGame(ctx, null), ['private']);
+  assert.deepEqual(sets.private.map((entry) => entry.key), [
+    'games/space-typing/art-src/Dota-Sounds/Double Kill.wav', 'games/space-typing/public/local-assets/announcer/a.ogg', 'shared/music/producer (1)/song a.m4a',
+  ]);
+  await assert.rejects(scanSets(withGame(ctx, null), ['originals']), /game nào/);
+
+  const status = runMedia(fx, 'status');
+  assert.equal(status.code, 0, status.out);
+  assert.match(status.stdout, /Bỏ qua games\/dragon-hold: chưa có thư mục/);
+  assert.match(status.stdout, /games\/space-typing \(Space Typing\):\n {2}Chưa có games\/space-typing\/media\.md5/);
+  const check = runMedia(fx, 'check', '--only', 'runtime');
+  assert.match(check.stdout, /Bỏ qua games\/typing-survival/);
+  assert.doesNotMatch(check.out, /Error|at file:/);
+
+  // Even Space missing is a notice: the private set still works.
+  rmSync(fx.game, { recursive: true, force: true });
+  const privateOnly = runMedia(fx, 'status');
+  assert.equal(privateOnly.code, 0, privateOnly.out);
+  assert.match(privateOnly.stdout, /Bỏ qua games\/space-typing/);
+  assert.match(privateOnly.stdout, /private {4}1 file/);
+});
+
+test('sets: a second game has its own originals, runtime, lock base and Drive folder', async (t) => {
+  const fx = makeFixture();
+  t.after(() => rmSync(fx.base, { recursive: true, force: true }));
+  addDragonHold(fx);
+  const ctx = createContext({ root: fx.repo, out: { write() {} } });
+  assert.deepEqual(presentGames(ctx).map((game) => game.id), ['space-typing', 'dragon-hold']);
+  const dragon = withGame(ctx, 'dragon-hold');
+  const { sets, notes } = await scanSets(dragon, ['originals', 'runtime']);
+  assert.deepEqual(sets.originals.map((entry) => [entry.key, entry.rel]), [
+    ['art-src/3d/units/warden.glb', 'games/dragon-hold/art-src/3d/units/warden.glb'],
+    ['art-src/units/warden.png', 'games/dragon-hold/art-src/units/warden.png'],
+  ]);
+  assert.deepEqual(sets.runtime.map((entry) => entry.key), ['public/assets/dragon-hold/models/units/warden/warden.high.glb']);
+  assert.deepEqual(notes.unsafe, []);
+  // Space's sets do not change when another game appears.
+  const space = await scanSets(withGame(ctx, 'space-typing'), ['originals', 'runtime']);
+  assert.ok(space.sets.originals.every((entry) => entry.rel.startsWith('games/space-typing/')));
+  assert.ok(space.sets.runtime.every((entry) => entry.rel.startsWith('games/space-typing/')));
+  assert.equal(space.sets.runtime.length, 3);
+
+  const state = await loadState(dragon, ['originals', 'runtime']);
+  assert.equal(state.perSet.originals.definition.remoteBase, 'repo/games/dragon-hold');
+  assert.equal(state.gameLockExists, false);
+  assert.deepEqual(state.perSet.runtime.plan.added, ['public/assets/dragon-hold/models/units/warden/warden.high.glb']);
+  assert.equal(md5(DRAGON.glb), state.perSet.originals.local.get('art-src/3d/units/warden.glb').md5);
+  const planned = planPush(dragon, state, ['originals', 'runtime'], {});
+  assert.equal(planned.problems.length, 0, JSON.stringify(planned.problems));
+  // A --forget meant for Space is not refused inside Dragonhold's plan when the caller checks all games.
+  const scoped = planPush(dragon, state, ['runtime'], { forget: ['games/space-typing/docs/x.png'] }, { reportUnused: false });
+  assert.equal(scoped.problems.length, 0);
+  assert.equal(scoped.usedForget.size, 0);
 });

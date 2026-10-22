@@ -6,15 +6,15 @@ import path from 'node:path';
 import { hashEntries } from '../lib/hash.mjs';
 import { runtimeReferences } from '../lib/plan.mjs';
 import { rcloneOk, runRclone } from '../lib/rclone.mjs';
-import { driveAbout, ensureRemote, fetchLockCopies, listingFlags, LOCK_COPY_NAMES, remoteHas } from '../lib/remote.mjs';
-import { readSources } from '../lib/sets.mjs';
-import { lockForSet, loadState, selectedSets } from '../lib/state.mjs';
+import { driveAbout, ensureRemote, fetchLockCopies, listingFlags, PRIVATE_LOCK_COPY, remoteHas } from '../lib/remote.mjs';
+import { presentGames, readSources, withGame } from '../lib/sets.mjs';
+import { gameSetNames, lockForSet, loadState, selectedSets } from '../lib/state.mjs';
 import { fmtBytes, fmtCount, printList } from '../lib/ui.mjs';
 import { verifyOnDrive } from './push.mjs';
 import { printSetDetails, setLine } from './status.mjs';
 
 function sourcesReport(ctx, perSet) {
-  const sources = readSources(ctx.root, ctx.config);
+  const sources = readSources(ctx.root, ctx.game);
   const prefix = `${ctx.config.sets.originals.root}/3d/`;
   const problems = [];
   let matched = 0;
@@ -31,12 +31,12 @@ function sourcesReport(ctx, perSet) {
 }
 
 async function manifestReport(ctx) {
-  const gameRoot = path.join(ctx.root, ctx.config.game.dir);
-  const references = runtimeReferences(gameRoot, ctx.config.game);
+  const gameRoot = path.join(ctx.root, ctx.game.dir);
+  const references = runtimeReferences(gameRoot, ctx.game);
   const missing = [];
   const present = [];
   for (const reference of references) {
-    const rel = `${ctx.config.game.dir}/${reference.key}`;
+    const rel = `${ctx.game.dir}/${reference.key}`;
     const abs = path.join(ctx.root, rel);
     if (!existsSync(abs)) { missing.push(reference.key); continue; }
     const stats = statSync(abs);
@@ -47,17 +47,21 @@ async function manifestReport(ctx) {
   return { total: references.length, missing, wrongVersion };
 }
 
-async function remoteReport(ctx, info, state, names, options) {
+/** states: [{ state, names }] for each game, then the private set. */
+async function remoteReport(ctx, info, states, options) {
   let problems = 0;
-  const copies = names.includes('private') ? await fetchLockCopies(ctx, info, { latest: [LOCK_COPY_NAMES.private] }) : {};
-  const privateLock = copies[LOCK_COPY_NAMES.private]?.at(-1)?.entries ?? state.privateLock;
+  const hasPrivate = states.some(({ names }) => names.includes('private'));
+  const copies = hasPrivate ? await fetchLockCopies(ctx, info, { latest: [PRIVATE_LOCK_COPY] }) : {};
   const groups = new Map();
-  for (const name of names) {
-    const definition = state.definitions[name];
-    const lock = lockForSet(ctx.config, definition, state.gameLock, privateLock);
-    const group = groups.get(definition.remoteBase) ?? new Map();
-    for (const [key, md5] of lock) group.set(key, md5);
-    groups.set(definition.remoteBase, group);
+  for (const { state, names } of states) {
+    const privateLock = copies[PRIVATE_LOCK_COPY]?.at(-1)?.entries ?? state.privateLock;
+    for (const name of names) {
+      const definition = state.definitions[name];
+      const lock = lockForSet(ctx.config, definition, state.gameLock, privateLock);
+      const group = groups.get(definition.remoteBase) ?? new Map();
+      for (const [key, md5] of lock) group.set(key, md5);
+      groups.set(definition.remoteBase, group);
+    }
   }
   ctx.out.write('\nTrên Google Drive:\n');
   for (const [remoteBase, entries] of groups) {
@@ -102,31 +106,47 @@ async function remoteReport(ctx, info, state, names, options) {
 
 export async function check(ctx, options) {
   const names = selectedSets(options);
-  const state = await loadState(ctx, names);
+  const gameNames = gameSetNames(names);
+  const states = [];
   let problems = 0;
   ctx.out.write('Kiểm tra trên máy này (so với danh sách md5):\n');
-  for (const name of names) {
-    const perSet = state.perSet[name];
-    ctx.out.write(`${setLine(name, perSet)}\n`);
+  for (const game of gameNames.length ? presentGames(ctx) : []) {
+    const gctx = withGame(ctx, game);
+    const state = await loadState(gctx, gameNames);
+    states.push({ state, names: gameNames });
+    ctx.out.write(`${game.dir} (${game.title ?? game.id}):\n`);
+    for (const name of gameNames) {
+      const perSet = state.perSet[name];
+      ctx.out.write(`${setLine(name, perSet)}\n`);
+      printSetDetails(ctx, perSet);
+      problems += perSet.plan.missing.length + perSet.plan.changed.length + perSet.plan.stale.length;
+    }
+    if (gameNames.includes('originals')) {
+      const report = sourcesReport(gctx, state.perSet.originals);
+      ctx.out.write(`art-src/3d: ${report.matched}/${report.total} khớp md5 trong SOURCES.json.\n`);
+      printList(ctx, '  Lệch SOURCES.json:', report.problems, { indent: '    ' });
+      problems += report.problems.length;
+    }
+    if (gameNames.includes('runtime')) {
+      const report = await manifestReport(gctx);
+      ctx.out.write(`Manifest runtime: ${report.total} file được game gọi tới · thiếu ${report.missing.length} · sai ?v= ${report.wrongVersion.length}\n`);
+      printList(ctx, '  Thiếu (game sẽ báo 404) → pnpm media:pull:', report.missing, { indent: '    ' });
+      printList(ctx, '  Sai ?v= (file khác bản manifest ghi):', report.wrongVersion, { indent: '    ' });
+      problems += report.missing.length + report.wrongVersion.length;
+    }
+  }
+  if (names.includes('private')) {
+    const state = await loadState(withGame(ctx, null), ['private']);
+    states.push({ state, names: ['private'] });
+    if (gameNames.length) ctx.out.write('Dùng chung:\n');
+    const perSet = state.perSet.private;
+    ctx.out.write(`${setLine('private', perSet)}\n`);
     printSetDetails(ctx, perSet);
     problems += perSet.plan.missing.length + perSet.plan.changed.length + perSet.plan.stale.length;
   }
-  if (names.includes('originals')) {
-    const report = sourcesReport(ctx, state.perSet.originals);
-    ctx.out.write(`art-src/3d: ${report.matched}/${report.total} khớp md5 trong SOURCES.json.\n`);
-    printList(ctx, '  Lệch SOURCES.json:', report.problems, { indent: '    ' });
-    problems += report.problems.length;
-  }
-  if (names.includes('runtime')) {
-    const report = await manifestReport(ctx);
-    ctx.out.write(`Manifest runtime: ${report.total} file được game gọi tới · thiếu ${report.missing.length} · sai ?v= ${report.wrongVersion.length}\n`);
-    printList(ctx, '  Thiếu (game sẽ báo 404) → pnpm media:pull:', report.missing, { indent: '    ' });
-    printList(ctx, '  Sai ?v= (file khác bản manifest ghi):', report.wrongVersion, { indent: '    ' });
-    problems += report.missing.length + report.wrongVersion.length;
-  }
   if (options.remote || options['fix-duplicates']) {
     const info = await ensureRemote(ctx);
-    problems += await remoteReport(ctx, info, state, names, options);
+    problems += await remoteReport(ctx, info, states, options);
   }
   ctx.out.write(problems ? `\n✗ Còn ${fmtCount(problems)} vấn đề.\n` : '\n✓ Khớp.\n');
   return problems ? 1 : 0;

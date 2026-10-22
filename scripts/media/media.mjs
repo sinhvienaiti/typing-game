@@ -21,7 +21,7 @@ const DEFAULT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 
 
 export function createContext({ root = DEFAULT_ROOT, env = process.env, out = process.stdout, err = process.stderr, stdin = process.stdin, now } = {}) {
   const config = loadConfig(root);
-  const ctx = { root, env, out, err, stdin, now, config };
+  const ctx = { root, env, out, err, stdin, now, config, game: null, present: {} };
   ctx.cache = new HashCache(path.join(root, config.hashCache));
   let warned = false;
   ctx.onSlowHash = (count, bytes) => {

@@ -5,12 +5,22 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { formatLock, parseLock } from './lock.mjs';
 import { installHint, rcloneOk, rcloneVersion, remoteConfig, runRclone, versionAtLeast } from './rclone.mjs';
-import { assertLockKeys } from './sets.mjs';
+import { assertLockKeys, lockCopyName } from './sets.mjs';
 import { MediaError } from './ui.mjs';
 
-export const LOCK_COPY_NAMES = { game: 'space-typing.media.md5', private: 'private.md5' };
-// Which set rules a Drive lock copy's keys must follow (see lockKeyProblem).
-const LOCK_COPY_KINDS = { [LOCK_COPY_NAMES.game]: 'game', [LOCK_COPY_NAMES.private]: 'private' };
+// Each game's copy is <id>.media.md5 (lockCopyName); the private one is shared.
+export const PRIVATE_LOCK_COPY = 'private.md5';
+
+/**
+ * Every lock copy name the config knows, with the set rules its keys must
+ * follow (see lockKeyProblem): Map(name -> { kind, game }). Games whose folder
+ * is missing here still count, so the newest stamp covers every push.
+ */
+export function lockCopyKinds(config) {
+  const kinds = new Map(config.games.map((game) => [lockCopyName(game), { kind: 'game', game }]));
+  kinds.set(PRIVATE_LOCK_COPY, { kind: 'private', game: null });
+  return kinds;
+}
 const STAMP = /^\d{4}-\d{2}-\d{2}_\d{6}Z$/;
 // Test backends: an alias or local remote pointing at a temp folder.
 const TEST_TYPES = new Set(['alias', 'local']);
@@ -59,7 +69,7 @@ export function listingFlags(info) {
  * maxStamp } where maxStamp is the newest stamp of any copy (for the clock check).
  */
 export async function listLockCopies(ctx, info) {
-  const byName = Object.fromEntries(Object.values(LOCK_COPY_NAMES).map((name) => [name, []]));
+  const byName = Object.fromEntries([...lockCopyKinds(ctx.config).keys()].map((name) => [name, []]));
   let maxStamp = null;
   if (!(await remoteTopFolders(ctx, info)).has('_locks')) return { byName, maxStamp };
   const listing = await rcloneOk(ctx, ['lsf', '-R', '--files-only', `${info.remote}:_locks`, ...listingFlags(info)]);
@@ -81,6 +91,7 @@ export async function downloadLockCopies(ctx, info, items) {
   const result = new Map();
   if (!items.length) return result;
   const wanted = items.map(({ stamp, name }) => `${stamp}/${name}`);
+  const kinds = lockCopyKinds(ctx.config);
   const dir = tempDir('media-locks-');
   try {
     const listFile = path.join(dir, 'files.txt');
@@ -91,7 +102,9 @@ export async function downloadLockCopies(ctx, info, items) {
       const file = path.join(target, stamp, name);
       if (!existsSync(file)) continue;
       const label = `Drive _locks/${stamp}/${name}`;
-      result.set(`${stamp}/${name}`, assertLockKeys(ctx.config, LOCK_COPY_KINDS[name], parseLock(readFileSync(file, 'utf8'), label), label));
+      const rules = kinds.get(name);
+      if (!rules) continue;
+      result.set(`${stamp}/${name}`, assertLockKeys(ctx.config, rules.kind, parseLock(readFileSync(file, 'utf8'), label), label, rules.game));
     }
     return result;
   } finally {

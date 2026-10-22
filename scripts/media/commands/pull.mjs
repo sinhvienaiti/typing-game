@@ -9,9 +9,9 @@ import { lockHistory } from '../lib/git.mjs';
 import { hashEntries } from '../lib/hash.mjs';
 import { mergeHistory, sameEntries, writeLockFile } from '../lib/lock.mjs';
 import { runRclone, TRANSFER_FLAGS } from '../lib/rclone.mjs';
-import { ensureRemote, fetchLockCopies, listingFlags, LOCK_COPY_NAMES, tempDir } from '../lib/remote.mjs';
-import { setDefinitions, toRel } from '../lib/sets.mjs';
-import { lockForSet, readLocks, selectedSets } from '../lib/state.mjs';
+import { ensureRemote, fetchLockCopies, listingFlags, PRIVATE_LOCK_COPY, tempDir } from '../lib/remote.mjs';
+import { lockCopyName, presentGames, setDefinitions, toRel, withGame } from '../lib/sets.mjs';
+import { gameSetNames, lockForSet, readGameLock, readLocks, selectedSets } from '../lib/state.mjs';
 import { fmtBytes, fmtCount, MediaError, printList, runStamp } from '../lib/ui.mjs';
 
 function resolveTarget(ctx, value) {
@@ -65,41 +65,45 @@ export async function pull(ctx, options) {
   const target = options.to ? resolveTarget(ctx, options.to) : null;
   const destRoot = target ?? ctx.root;
   if (target && options['update-stale']) throw new MediaError('--update-stale chỉ dùng cho repo, không dùng với --to.');
-  const definitions = setDefinitions(ctx.config);
-  const gameSets = names.filter((name) => name !== 'private');
+  const gameSets = gameSetNames(names);
+  const games = gameSets.length ? presentGames(ctx) : [];
   const info = await ensureRemote(ctx);
 
-  const local = readLocks(ctx);
+  const local = readLocks(withGame(ctx, null));
+  const gameLocks = games.map((game) => ({ game, ...readGameLock(ctx, game) }));
   const copies = await fetchLockCopies(ctx, info, {
-    latest: gameSets.length && !local.gameLock ? [LOCK_COPY_NAMES.game] : [],
-    all: names.includes('private') ? [LOCK_COPY_NAMES.private] : [],
+    latest: gameLocks.filter((item) => !item.entries).map((item) => lockCopyName(item.game)),
+    all: names.includes('private') ? [PRIVATE_LOCK_COPY] : [],
   });
-  let gameLock = local.gameLock;
-  if (gameSets.length && !gameLock) {
-    gameLock = copies[LOCK_COPY_NAMES.game].at(-1)?.entries ?? null;
-    if (gameLock) ctx.out.write(`Máy này chưa có ${ctx.config.game.dir}/${ctx.config.game.lock} (chưa git pull?): dùng bản sao mới nhất trên Drive.\n`);
-    else ctx.out.write(`Chưa có ${ctx.config.game.dir}/${ctx.config.game.lock}: chưa ai đẩy originals/runtime lên Drive.\n`);
+  for (const item of gameLocks) {
+    if (item.entries) continue;
+    item.entries = copies[lockCopyName(item.game)]?.at(-1)?.entries ?? null;
+    if (item.entries) ctx.out.write(`Máy này chưa có ${item.label} (chưa git pull?): dùng bản sao mới nhất trên Drive.\n`);
+    else ctx.out.write(`Chưa có ${item.label}: chưa ai đẩy originals/runtime lên Drive.\n`);
   }
-  const privateVersions = copies[LOCK_COPY_NAMES.private] ?? [];
+  const privateVersions = copies[PRIVATE_LOCK_COPY] ?? [];
   const privateLock = privateVersions.at(-1)?.entries ?? local.privateLock;
   if (names.includes('private') && !target && privateVersions.length && !sameEntries(privateLock, local.privateLock ?? new Map())) {
     writeLockFile(local.privateLockFile, privateLock);
   }
-  const histories = {
-    game: lockHistory(path.join(ctx.root, ctx.config.game.dir), ctx.config.game.lock),
-    private: mergeHistory(new Map(), local.privateLock),
-  };
-  for (const version of privateVersions) mergeHistory(histories.private, version.entries);
+  const privateHistory = mergeHistory(new Map(), local.privateLock);
+  for (const version of privateVersions) mergeHistory(privateHistory, version.entries);
+
+  // Every (lock, set) pair to restore: each game's sets, then the private set.
+  const sources = gameLocks.map(({ game, entries }) => ({
+    game, gameLock: entries, names: gameSets, history: lockHistory(path.join(ctx.root, game.dir), game.lock),
+  }));
+  if (names.includes('private')) sources.push({ game: null, gameLock: null, names: ['private'], history: privateHistory });
 
   // What each locked file looks like in the destination.
   const plan = [];
-  for (const name of names) {
-    const definition = definitions[name];
-    const lock = lockForSet(ctx.config, definition, gameLock, privateLock);
+  for (const source of sources) for (const name of source.names) {
+    const definition = setDefinitions(ctx.config, source.game)[name];
+    const lock = lockForSet(ctx.config, definition, source.gameLock, privateLock);
     for (const [key, md5] of lock) {
       const rel = toRel(definition, key);
       const abs = path.join(destRoot, rel);
-      const item = { name, definition, key, rel, abs, md5, state: 'missing' };
+      const item = { name, definition, history: source.history, key, rel, abs, md5, state: 'missing' };
       if (existsSync(abs)) {
         const stats = statSync(abs);
         Object.assign(item, { size: stats.size, mtimeMs: stats.mtimeMs, cacheKey: target ? null : rel, md5: undefined, expected: md5 });
@@ -116,8 +120,7 @@ export async function pull(ctx, options) {
   const edited = [];
   for (const item of present) {
     if (item.md5 === item.expected) { item.state = 'ok'; continue; }
-    const history = item.definition.inGameLock ? histories.game : histories.private;
-    if (history.get(item.key)?.has(item.md5)) { item.state = 'stale'; stale.push(item); }
+    if (item.history.get(item.key)?.has(item.md5)) { item.state = 'stale'; stale.push(item); }
     else { item.state = 'edited'; edited.push(item); }
   }
 
@@ -201,13 +204,13 @@ export async function pull(ctx, options) {
 
   if (!target && placed.length) {
     ctx.out.write(`Đã tải ${fmtCount(placed.length)} file.\n`);
-    if (placed.some((item) => item.rel.startsWith(`${ctx.config.game.dir}/`))) {
+    const rebuilt = games.filter((game) => game.pulledStamp && placed.some((item) => item.rel.startsWith(`${game.dir}/`)));
+    for (const game of rebuilt) {
       // Pulled files keep Drive's older modification times; this stamp makes ./play.sh rebuild.
-      const stampFile = path.join(ctx.root, ctx.config.game.dir, ctx.config.game.pulledStamp);
-      writeFileSync(stampFile, `${new Date().toISOString()}\n`);
-      ctx.out.write('./play.sh sẽ build lại Space Typing.\n');
-      if (isWsl(ctx.env)) ctx.out.write('WSL: nếu Vite đang chạy, khởi động lại để thấy file mới trong public/.\n');
+      writeFileSync(path.join(ctx.root, game.dir, game.pulledStamp), `${new Date().toISOString()}\n`);
+      ctx.out.write(`./play.sh sẽ build lại ${game.title ?? game.id}.\n`);
     }
+    if (rebuilt.length && isWsl(ctx.env)) ctx.out.write('WSL: nếu Vite đang chạy, khởi động lại để thấy file mới trong public/.\n');
     if (placed.some((item) => item.rel.startsWith('shared/music/'))) {
       ctx.out.write('Nhạc mới: ./dev.sh và ./play.sh tự chạy pnpm music:index (hoặc chạy tay).\n');
     }

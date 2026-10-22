@@ -126,6 +126,34 @@ export function makeFixture() {
   return { base, repo, game, drive, env, rcloneLog };
 }
 
+export const DRAGON = {
+  glb: 'dragonhold tripo original',
+  png: 'dragonhold concept art',
+  runtime: 'dragonhold runtime unit high',
+};
+
+/**
+ * A second game repo (games/dragon-hold, as in media.config.json games[]):
+ * originals in art-src, one runtime model in its manifest, tracked code.
+ */
+export function addDragonHold(fixture) {
+  const game = path.join(fixture.repo, 'games/dragon-hold');
+  const url = '/assets/dragon-hold/models/units/warden/warden.high.glb';
+  write(game, 'package.json', '{"name":"dragon-hold"}\n');
+  write(game, 'art-src/3d/SOURCES.json', `${JSON.stringify({ version: 1, files: { 'units/warden.glb': { md5: md5(DRAGON.glb), bytes: DRAGON.glb.length } } }, null, 1)}\n`);
+  write(game, 'public/assets/dragon-hold/models/manifest.json', `${JSON.stringify({
+    version: 1, models: { 'units/warden': { tiers: { high: { url: `${url}?v=${sha256(DRAGON.runtime).slice(0, 10)}` } } } },
+  }, null, 1)}\n`);
+  write(game, '.gitignore', 'art-src/*\n!art-src/3d/\nart-src/3d/*\n!art-src/3d/SOURCES.json\npublic/assets/dragon-hold/models/*/\n');
+  git(game, 'init', '-q');
+  git(game, 'add', '-A');
+  git(game, 'commit', '-q', '-m', 'dragon-hold');
+  write(game, 'art-src/3d/units/warden.glb', DRAGON.glb);
+  write(game, 'art-src/units/warden.png', DRAGON.png);
+  write(game, 'public/assets/dragon-hold/models/units/warden/warden.high.glb', DRAGON.runtime);
+  return game;
+}
+
 export function runMedia(fixture, ...args) {
   const result = spawnSync(process.execPath, [SCRIPT, ...args], { env: fixture.env, encoding: 'utf8', cwd: fixture.repo });
   return { code: result.status, out: `${result.stdout}${result.stderr}`, stdout: result.stdout, stderr: result.stderr };

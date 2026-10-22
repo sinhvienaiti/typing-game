@@ -21,6 +21,8 @@ Viết cờ **không có `--`** đứng trước: `pnpm media:push --dry-run`. S
 | `runtime` | Mọi file media trong `games/space-typing` mà Git không theo dõi (GLB trong `public/`, hull tàu, ảnh trong `docs/`…), cộng 14 mô hình runtime đã mất bản gốc | `repo/games/space-typing/...` | Thay thẳng (tạo lại được) |
 | `private` | `shared/music/**`, `art-src/Dota-Sounds/**`, `public/local-assets/**` | `private/...` | Chuyển vào `_replaced/` |
 
+Từ 23/10, `originals` và `runtime` tính riêng cho từng game trong `games[]` của `media/media.config.json`: Space Typing, Rồng Giữ Ải, Lời Gọi, Tuyến Cuối. Mỗi game có `media.md5` riêng và thư mục `repo/games/<id>/` riêng trên Drive. Game chưa có thư mục thì lệnh bỏ qua, chỉ in một dòng báo. Đường dẫn của Space giữ nguyên. Chi tiết: [docs/games/MEDIA_AND_MODELS.md](games/MEDIA_AND_MODELS.md).
+
 Đo ngày 21/10 trên Mac: originals 834 file (2,9 GB), runtime 423 file (371 MB), private 208 file (481 MB). Tổng khoảng 1.465 file, 3,7 GB.
 
 Không đưa lên:

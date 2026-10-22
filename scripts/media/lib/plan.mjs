@@ -86,8 +86,8 @@ function stripQuery(url) {
  */
 export function runtimeReferences(gameRoot, gameConfig) {
   const references = [];
-  const manifestFile = path.join(gameRoot, gameConfig.modelsManifest);
-  if (existsSync(manifestFile)) {
+  const manifestFile = gameConfig.modelsManifest ? path.join(gameRoot, gameConfig.modelsManifest) : null;
+  if (manifestFile && existsSync(manifestFile)) {
     const manifest = JSON.parse(readFileSync(manifestFile, 'utf8'));
     for (const [id, model] of Object.entries(manifest.models ?? {})) {
       for (const [tier, info] of Object.entries(model.tiers ?? {})) {
@@ -97,8 +97,8 @@ export function runtimeReferences(gameRoot, gameConfig) {
       }
     }
   }
-  const shipsDir = path.join(gameRoot, gameConfig.ships3dDir);
-  if (existsSync(shipsDir)) {
+  const shipsDir = gameConfig.ships3dDir ? path.join(gameRoot, gameConfig.ships3dDir) : null;
+  if (shipsDir && existsSync(shipsDir)) {
     for (const entry of readdirSync(shipsDir, { withFileTypes: true })) {
       const modelFile = path.join(shipsDir, entry.name, 'model.json');
       if (!entry.isDirectory() || !existsSync(modelFile)) continue;
@@ -119,5 +119,5 @@ export function runtimeReferences(gameRoot, gameConfig) {
 
 /** Lock entries in folders the manifests own; only these may be forgotten automatically. */
 export function isManifestOwned(key, gameConfig) {
-  return key.startsWith(`${gameConfig.modelsDir}/`) || key.startsWith(`${gameConfig.ships3dDir}/`);
+  return [gameConfig.modelsDir, gameConfig.ships3dDir].some((dir) => Boolean(dir) && key.startsWith(`${dir}/`));
 }
