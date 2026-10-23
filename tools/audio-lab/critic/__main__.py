@@ -12,6 +12,7 @@ Lệnh:
   groups  liệt kê nhóm âm (khóa dùng cho --group và trường group của thẻ spec)
   schema  in JSON Schema của file kết quả
   pairs   so cặp bản gốc / bản làm hỏng (<tên>__clipped|muddy|thin) trên kết quả đã chấm
+  agreement  so xếp hạng của máy với điểm mù của chủ dự án (mục 4.6), trước và sau file hiệu chỉnh
 
 Ví dụ:
   run.sh critic run ~/AudioLab/work/typing-survival/gun.xung/r1 --spec gun.xung.yaml
@@ -37,10 +38,11 @@ def _run(a) -> int:
             return 2
     opts = Options(layers=layers, stage=a.stage, group=a.group, game=a.game, variant_set=a.variant_set,
                    clap_models=tuple(a.clap_models.split(",")) if a.clap_models else (), seed=a.seed, quiet=a.quiet,
-                   blind_cards=a.blind_cards)
+                   blind_cards=a.blind_cards, calibration=a.calibration)
+    from .calibration import CalibrationError
     try:
         batch = run(a.inputs, spec_path=a.spec, refs=a.refs or [], out_dir=a.out, opts=opts, sources=a.sources)
-    except FileNotFoundError as e:
+    except (FileNotFoundError, CalibrationError) as e:
         print(f"audio-lab critic: {e}", file=sys.stderr)
         return 2
     if a.fail_on_block and batch["counts"]["BLOCK"]:
@@ -71,6 +73,16 @@ def _pairs(a) -> int:
     from .calibrate import main
     main(a.dirs)
     return 0
+
+
+def _agreement(a) -> int:
+    from .agreement import main
+    from .calibration import CalibrationError
+    try:
+        return main(a)
+    except CalibrationError as e:
+        print(f"audio-lab critic: {e}", file=sys.stderr)
+        return 2
 
 
 def _safe_env() -> None:
@@ -108,6 +120,9 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--blind-cards", action="store_true",
                    help="vẽ thêm <tên>.blind.png cho Bảng Nghe: không tên file, không kết luận, không điểm")
     r.add_argument("--seed", type=int, default=0, help="hạt ngẫu nhiên cho việc chọn bản dò")
+    r.add_argument("--calibration", help="file hiệu chỉnh theo điểm chủ dự án (đường dẫn, số phiên bản, hoặc "
+                                         "none = trọng số và mục tiêu gốc của kế hoạch); mặc định: bản mới nhất "
+                                         "trong critic/calibration/")
     r.add_argument("--fail-on-block", action="store_true", help="thoát mã 1 nếu có file bị chặn")
     r.add_argument("--quiet", action="store_true")
     r.set_defaults(fn=_run)
@@ -116,6 +131,13 @@ def main(argv: list[str] | None = None) -> int:
     q = sub.add_parser("pairs", help="so cặp bản gốc / bản làm hỏng")
     q.add_argument("dirs", nargs="+", help="thư mục kết quả của critic run")
     q.set_defaults(fn=_pairs)
+    g = sub.add_parser("agreement", help="so máy với điểm mù của chủ dự án, trước và sau hiệu chỉnh")
+    g.add_argument("--review", help="thư mục điểm chấm (mặc định ~/AudioLab/review)")
+    g.add_argument("--batch", action="append", help="chỉ lô này (lặp lại được; mặc định 0a và 0b)")
+    g.add_argument("--calibration", help="file hiệu chỉnh để so (mặc định: bản mới nhất; none = chỉ in trước)")
+    g.add_argument("--json", help="ghi số liệu đầy đủ ra file JSON (ngoài repo)")
+    g.add_argument("--md", help="ghi báo cáo Markdown ra file (ngoài repo)")
+    g.set_defaults(fn=_agreement)
     a = p.parse_args(argv)
     return a.fn(a)
 

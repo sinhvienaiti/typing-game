@@ -89,6 +89,7 @@ Mọi lệnh chạy từ gốc repo. `run.sh` nạp `common/env.sh` (không toke
 | `pnpm audio:test` | pytest cho mọi module (`AUDIOLAB_TEST_MODELS=1` thêm L3–L5 thật; `AUDIOLAB_BROWSER=1` thêm thử Bảng Nghe bằng Chrome) |
 | `pnpm audio:specs generate [--check] \| validate \| report \| list \| export` | Thẻ spec YAML cho mỗi id, sinh từ `catalog.ts` và các danh sách âm ([`specs/README.md`](specs/README.md)) |
 | `pnpm audio:critic run <file\|thư mục>… --spec … [--stage raw\|final] [--sources SOURCES.json]` | Tai AI nhiều lớp: JSON, thẻ ảnh PNG, `summary.md`, danh sách nghe ([`critic/README.md`](critic/README.md)) |
+| `pnpm audio:critic agreement [--calibration N\|none] [--md F] [--json F]` | So xếp hạng của máy với điểm mù của chủ dự án, trước và sau file hiệu chỉnh `critic/calibration/owner-v<N>.json` (mục 4.6). `critic run` dùng bản mới nhất; quyết định ở [`DECISIONS.md`](DECISIONS.md) |
 | `pnpm audio:build render RECIPE.json --spec CARD.yaml` | Dựng âm theo công thức, chuỗi cuối, hồ sơ nguồn ([`build/README.md`](build/README.md)) |
 | `pnpm audio:build mark-ai --run RUN_DIR --from-critic CRITIC_OUT` | Ghi các bước AI mà bộ phê bình đã chạy lên từng file, thêm dòng mô hình vào sổ (mục 10.7) |
 | `pnpm audio:build release --run RUN_DIR [--variants 1,3]` | Đưa biến thể đã chọn vào cây staging |

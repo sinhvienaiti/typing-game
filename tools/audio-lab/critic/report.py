@@ -112,6 +112,10 @@ def summary_md(results: list[dict], batch: dict) -> str:
         + ("mọi lỗi vệ sinh đều chặn." if batch["stage"] == "final" else
            "chỉ clip chặn; lỗi khác thành việc sửa, sửa xong phải chạy lại với `--stage final`."),
         f"- Lớp đã yêu cầu: {', '.join(batch['layers'])}.",
+        "- Hiệu chỉnh theo điểm chủ dự án (mục 4.6): "
+        + (f"`{Path(batch['calibration']['path']).name}` (bản {batch['calibration']['version']}, "
+           f"{batch['calibration'].get('date') or 'không ghi ngày'}); L1 không bị hiệu chỉnh."
+           if batch.get("calibration") else "không dùng (trọng số mục 4.5 và mục tiêu mục 4.3.3 gốc)."),
     ]
     if log:
         parts = []

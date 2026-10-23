@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from . import artifacts, audio as A, features, hygiene, learned, policy, psycho, report, score
+from . import artifacts, audio as A, calibration as C, features, hygiene, learned, policy, psycho, report, score
 from . import spec as S
 from .thresholds import LEARNED, SCHEMA_FILE, VERSION
 
@@ -28,6 +28,8 @@ class Options:
     seed: int = 0
     quiet: bool = False
     blind_cards: bool = False     # also write <stem>.blind.png for the Listening Board
+    calibration: str | None = None   # owner calibration (critic/calibration.py): path, version or "none";
+                                     # None = $AUDIOLAB_CRITIC_CALIBRATION, else the newest file
 
 
 def parse_layers(s: str | None) -> tuple[str, ...]:
@@ -163,7 +165,7 @@ def _drop_twins(files: list[Path]) -> list[Path]:
 
 
 def _score_one(p: Path, name: str, sp: S.Spec, rs: RefSet | None, pol, opts: Options, L: set, tool: dict,
-               created: str) -> tuple[dict, tuple]:
+               created: str, cal=None) -> tuple[dict, tuple]:
     """Measure, gate (L1), flag (L1b) and score (L2) one file. Raises A.LoadError for unusable files."""
     t0 = time.time()
     a = A.load_checked(p)
@@ -203,7 +205,7 @@ def _score_one(p: Path, name: str, sp: S.Spec, rs: RefSet | None, pol, opts: Opt
         tm["L1b"] = round(time.time() - t1, 3)
     if "L2" in L and not m.get("silent"):
         t1 = time.time()
-        l2 = features.l2_score(m, sp, rs.l2 if rs else None)
+        l2 = features.l2_score(m, sp, rs.l2 if rs else None, cal)
         l2["psycho"] = psycho.measure(a.mono, a.sr, (m.get("onset_ms") or 0) / 1000, m.get("lufs_m_max"))
         l2["refs_used"] = sum(1 for t in l2["targets"] if t["source"] == "refs")
         r["L2"] = l2
@@ -258,6 +260,7 @@ def run(paths: list[str], spec_path: str | None = None, refs: list[str] | None =
     created = now_iso()
     tool = tool_info(opts.layers)
     pol = policy.load(sources)
+    cal = C.load(opts.calibration)
     ref_sets, ref_of = _ref_sets(files, cards, list(refs or []), opts)
 
     results, ctxs = [], {}
@@ -267,7 +270,7 @@ def run(paths: list[str], spec_path: str | None = None, refs: list[str] | None =
         sp = _spec_for(p, cards, opts)
         rs = ref_sets.get(ref_of[p]) if ref_of[p] else None
         try:
-            r, ctx_entry = _score_one(p, name, sp, rs, pol, opts, L, tool, created)
+            r, ctx_entry = _score_one(p, name, sp, rs, pol, opts, L, tool, created, cal)
             ctxs[name] = ctx_entry
         except A.LoadError as e:          # one broken file never stops the batch: it is blocked
             r = _broken(p, name, sp, e.code, e.label_vi, e.msg_vi, e.audio, opts, tool, created)
@@ -341,7 +344,7 @@ def run(paths: list[str], spec_path: str | None = None, refs: list[str] | None =
         model_status["log"] = learned.LOG
         model_status["l5_batch"] = l5_batch
 
-    batch_extra = score.combine(results, seed=opts.seed)
+    batch_extra = score.combine(results, seed=opts.seed, calibration=cal)
     for r in results:
         if r.get("error"):
             r["notes_vi"] = [r["error"]["msg_vi"]]
@@ -373,6 +376,7 @@ def run(paths: list[str], spec_path: str | None = None, refs: list[str] | None =
         "created": created, "tool": tool, "stage": opts.stage, "layers": list(opts.layers),
         "refs": {k: v.to_json() for k, v in ref_sets.items()}, "ai_policy": {"ledgers": pol.loaded},
         "models": model_status, "listen": batch_extra["listen"],
+        "calibration": cal.to_json() if cal is not None else None,
         "spec_path": str(spec_path) if spec_path else None, "elapsed_s": round(time.time() - t_all, 2),
     })
     if not opts.quiet:

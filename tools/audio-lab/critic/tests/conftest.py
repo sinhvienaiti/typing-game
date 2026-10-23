@@ -11,6 +11,20 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "models: loads audiobox/CLAP/AST from the offline cache (AUDIOLAB_TEST_MODELS=1)")
 
 
+@pytest.fixture(scope="session", autouse=True)
+def plan_weights_and_targets():
+    """Tests check the plan's own rules (§4.3-§4.5), so the owner calibration (critic/calibration/) is off
+    unless a test turns it on (test_calibration.py)."""
+    from critic.calibration import ENV
+    old = os.environ.get(ENV)
+    os.environ[ENV] = "none"
+    yield
+    if old is None:
+        os.environ.pop(ENV, None)
+    else:
+        os.environ[ENV] = old
+
+
 def pytest_collection_modifyitems(config, items):
     if os.environ.get("AUDIOLAB_TEST_MODELS") == "1":
         return

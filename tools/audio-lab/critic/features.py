@@ -396,18 +396,25 @@ def analyze(a: A.Audio, spec: Spec) -> tuple[dict, dict]:
 REF_FEATURES = sorted({t.feature for g in G.GROUPS.values() for t in g.targets})
 
 
-def targets_for(spec: Spec, ref_stats: dict | None = None) -> list[tuple[G.Target, str]]:
-    """Group targets; explicit spec duration replaces the group's; refs (>= 5) replace good bands."""
+def targets_for(spec: Spec, ref_stats: dict | None = None, calibration=None) -> list[tuple[G.Target, str]]:
+    """Group targets, then the owner calibration (critic/calibration.py), then the spec's own duration
+    and attack limit, then approved refs (>= 5) replace good bands."""
+    base = list(spec.group_obj.targets)
+    changed: dict[str, str] = {}
+    if calibration is not None:
+        from .calibration import spec_keys
+        base, changed = calibration.targets(base, **spec_keys(spec))
     out = []
-    for t in spec.group_obj.targets:
-        src = "group"
+    for t in base:
+        src = f"calibration:{changed[t.feature]}" if t.feature in changed else "group"
         if t.feature == "duration_ms" and spec.duration_ms:
             # good = the spec's own tolerance (what L1 accepts), so a length inside the spec is never red
             lo, hi = spec.duration_ms
             tol = spec.duration_tol
             t = G.between("duration_ms", lo * (1 - tol), hi * (1 + tol), 0.2, t.weight, t.low_vi, t.high_vi)
             src = "spec"
-        if t.feature == "attack_ms" and spec.attack_max_ms and spec.attack_max_ms != spec.group_obj.attack_max_ms:
+        if (t.feature == "attack_ms" and t.feature not in changed and spec.attack_max_ms
+                and spec.attack_max_ms != spec.group_obj.attack_max_ms):
             t = G.at_most("attack_ms", spec.attack_max_ms / 2, spec.attack_max_ms, t.weight, high_vi=t.high_vi)
             src = "spec"
         st = (ref_stats or {}).get(t.feature)
@@ -420,9 +427,9 @@ def targets_for(spec: Spec, ref_stats: dict | None = None) -> list[tuple[G.Targe
     return out
 
 
-def l2_score(m: dict, spec: Spec, ref_stats: dict | None = None) -> dict:
+def l2_score(m: dict, spec: Spec, ref_stats: dict | None = None, calibration=None) -> dict:
     rows, num, den, notes = [], 0.0, 0.0, []
-    for t, src in targets_for(spec, ref_stats):
+    for t, src in targets_for(spec, ref_stats, calibration):
         v = m.get(t.feature)
         d = t.desirability(v)
         rows.append({"feature": t.feature, "value": v, "good": [_j(t.good[0]), _j(t.good[1])],
@@ -436,7 +443,8 @@ def l2_score(m: dict, spec: Spec, ref_stats: dict | None = None) -> dict:
             if side:
                 notes.append((d, f"{side} ({_fmt(t.feature, v)})"))
     notes.sort(key=lambda x: x[0])
-    return {"score": fnum(num / den, 4) if den else None, "targets": rows, "notes_vi": [n for _, n in notes[:3]]}
+    return {"score": fnum(num / den, 4) if den else None, "targets": rows, "notes_vi": [n for _, n in notes[:3]],
+            "calibration": calibration.version if calibration is not None else None}
 
 
 def _j(v):

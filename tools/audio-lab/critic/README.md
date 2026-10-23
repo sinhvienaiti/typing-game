@@ -7,10 +7,12 @@ Bộ phê bình của mục 4 trong [`AUDIO_PIPELINE.md`](../../../docs/games/AU
 ```bash
 pnpm audio:critic run <file|thư mục>... [--spec THẺ.yaml|THƯ_MỤC] [--refs ÂM_ĐÃ_DUYỆT...] \
     [--layers L1,L1b,L2,L3,L4,L5,L6 | fast | all] [--out THƯ_MỤC] [--stage final|raw] \
-    [--sources SOURCES.json] [--group NHÓM] [--game GAME] [--variant-set] [--blind-cards] [--fail-on-block]
+    [--sources SOURCES.json] [--group NHÓM] [--game GAME] [--variant-set] [--blind-cards] [--fail-on-block] \
+    [--calibration N|ĐƯỜNG_DẪN|none]
 pnpm audio:critic groups      # bảng nhóm âm: độ dài, ngưỡng lên, im lặng đầu, lặp, stereo, họ bẩn, mục tiêu L2
 pnpm audio:critic schema      # JSON Schema của file kết quả
 pnpm audio:critic pairs OUT   # so cặp bản gốc / bản làm hỏng (<tên>__clipped|muddy|thin), cổng của lô 0a
+pnpm audio:critic agreement [--calibration N|none] [--batch 0a] [--md F] [--json F]   # máy so với điểm mù của chủ dự án (mục 4.6)
 ```
 
 Ví dụ:
@@ -73,6 +75,24 @@ bash tools/audio-lab/run.sh critic run raw/ --stage raw
 - **Nhóm `generic`:** không kiểm thời gian lên (mục 4.3.1 chỉ kiểm phím, UI, trúng, bắn, nổ, sinh vật).
 - Mọi ngưỡng L1b và mục tiêu L2 là điểm xuất phát, chưa hiệu chỉnh. Khi một id có từ 5 âm tham chiếu, mục tiêu L2 thành khoảng P10–P90 của bộ đó.
 
+## Hiệu chỉnh theo điểm của chủ dự án (mục 4.6)
+
+`critic/calibration/owner-v<N>.json` (schema `audiolab.critic.calibration/1`, `calibration.py`) ghi những gì điểm mù của chủ dự án đã dạy bộ chấm. **Bản số lớn nhất được dùng mặc định** cho `critic run`; `--calibration 1` hoặc biến môi trường `AUDIOLAB_CRITIC_CALIBRATION` chọn bản khác, `none` trả về đúng trọng số mục 4.5 và mục tiêu mục 4.3.3 của kế hoạch. Kết quả ghi bản đã dùng: `L2.calibration`, `score.calibration`, `score.calibration_rules`, nguồn của từng mục tiêu (`source: calibration:<luật>`), `_batch.json` và một dòng trong `summary.md`.
+
+- **Luật trọng số** (`weights.rules`): khớp theo `family`, `group`, `game`, `id` (regex) và chỉ **hạ** một lớp (`scale` 0–1). Phần bớt ra dồn cho `to` (mặc định L2, không bao giờ cho L4: trần 0,1 của mục 4.4). Tổng trọng số giữ nguyên.
+- **Luật mục tiêu L2** (`l2.rules`): `set` (thay hoặc thêm một mục tiêu hình thang: `good`, `bad`, `weight`, ghi chú `low_vi`/`high_vi`), `weight` (đổi trọng số một mục tiêu), `drop`. Cùng một đặc trưng thì luật sau thắng. Mục tiêu do thẻ spec đặt (độ dài, ngưỡng lên) và bộ âm tham chiếu từ 5 âm vẫn được áp sau hiệu chỉnh.
+- **L1 và L1b không bao giờ được hiệu chỉnh ở đây**: file có khóa `L1`, `L1b`, `hygiene` hay `gate` bị từ chối. Nới một cổng là việc của kế hoạch và thẻ spec.
+- Mỗi luật có `why_vi` (bằng chứng, bằng số) và `evidence` (các id đã chấm). Bản mới là file mới (`owner-v2.json`…), không sửa bản cũ, để kết quả cũ vẫn đọc lại được.
+
+`critic agreement` đọc mọi `~/AudioLab/review/<game>/ratings.jsonl` (dòng cuối của mỗi id thắng), phiên và JSON của bộ chấm, rồi chấm lại **cả nhóm xếp hạng** của mỗi bản được nghe từ số đo đã lưu (L3, L4 là đầu ra mô hình đã lưu, không chạy lại mô hình nào, chưa tới 1 giây). Báo cáo: bản chủ dự án chọn theo vai trò (đứng đầu, khác nhất, bản dò) và theo họ; mức khớp theo cặp và theo bản đầu của từng lớp, trước và sau; phần do trọng số và phần do mục tiêu; bỏ từng luật; từng id; đặc trưng tách bản được chấm cao. Số "sau" đo trên chính dữ liệu dùng để chọn luật, nên lạc quan: phép thử thật là lô sau.
+
+```bash
+bash tools/audio-lab/run.sh critic agreement --md ~/AudioLab/work/_calibration/owner-v1.md \
+    --json ~/AudioLab/work/_calibration/owner-v1.json
+```
+
+Bản 1 (24/10/2026, 19 id lô 0a và 0b): audiobox hạ từ 0,3 xuống 0,1 ở họ trúng, bắn, phím và UI, thưởng; mục tiêu mới cho nền rừng (sáng), `hit.t1` của Tuyến Cuối (thân vừa, crest cao), tiếng trúng nặng và lửa (bớt ù dưới 150 Hz), tiếng gọi trọn của sinh vật, `call-chop` (gõ trầm). Điểm tổng khớp 13/37 cặp trước, 24/37 sau. Lý do từng quyết định: [`DECISIONS.md`](../DECISIONS.md).
+
 ## Thẻ spec, âm tham chiếu, sổ nguồn
 
 - `--spec` nhận một file YAML (một thẻ hoặc danh sách) hoặc thư mục thẻ của làn Specs (`specs/<game>/`). File ứng viên khớp thẻ theo id dài nhất ở đầu tên file (`gun.xung-3.wav` → `gun.xung`). Không có thẻ thì nhóm suy ra từ tên file, cuối cùng là `generic`. Khóa đọc được ở đầu `critic/spec.py`.
@@ -105,7 +125,7 @@ Bảng Nghe đọc `_batch.json` bằng `board from-critic`.
 ## Kiểm thử
 
 ```bash
-bash tools/audio-lab/run.sh test tools/audio-lab/critic                          # không nạp mô hình
+bash tools/audio-lab/run.sh test tools/audio-lab/critic                          # không nạp mô hình, không hiệu chỉnh
 AUDIOLAB_TEST_MODELS=1 bash tools/audio-lab/run.sh test tools/audio-lab/critic   # thêm L3–L5 thật, offline
 ```
 

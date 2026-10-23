@@ -26,7 +26,7 @@ Every key is optional; a nested `critic:` mapping overrides top-level keys.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any
 
@@ -184,6 +184,18 @@ def from_mapping(raw: dict | None, path: str | None = None, group_override: str 
         ast_forbid=list(ast.get("forbid") or []),
         refs=_refs(raw, base), path=path, raw=orig,
     )
+
+
+def from_json(d: dict) -> Spec:
+    """A Spec back from a critic result's `spec` (Spec.to_json), to re-score stored results."""
+    names = {f.name for f in fields(Spec)} - {"raw"}
+    kw = {k: d[k] for k in names if k in d}
+    if kw.get("duration_ms") is not None:
+        kw["duration_ms"] = tuple(kw["duration_ms"])
+    kw["clap_contrast"] = [tuple(p) for p in kw.get("clap_contrast") or []]
+    if kw.get("group") not in G.GROUPS:
+        kw["group"] = "generic"
+    return Spec(**kw)
 
 
 def load_cards(path: str | Path) -> list[Spec]:

@@ -112,11 +112,12 @@ def ask_stats(results: list[dict]) -> dict:
     return {"n": n, "ask_owner": sum(1 for r in el if r["ask_owner"]["value"]), "flags": dict(sorted(by.items()))}
 
 
-def combine(results: list[dict], n_refs: int | None = None, seed: int = 0) -> dict:
+def combine(results: list[dict], n_refs: int | None = None, seed: int = 0, calibration=None) -> dict:
     """Mutates every result (adds `score`, `ask_owner`, `read_card`); returns batch-level info.
 
     `n_refs` forces the approved-reference count; by default each rank group uses the largest
-    reference set among its files (result["refs"]["n"])."""
+    reference set among its files (result["refs"]["n"]). `calibration` (critic/calibration.py) scales
+    the §4.5 weights per family, group or id from owner ratings (§4.6); None = the plan's weights."""
     groups: dict[str, list[dict]] = {}
     for r in results:
         groups.setdefault(rank_key(r), []).append(r)
@@ -125,7 +126,12 @@ def combine(results: list[dict], n_refs: int | None = None, seed: int = 0) -> di
         dirty = any(r["spec"].get("dirty") for r in rs)
         n = n_refs if n_refs is not None else max(((r.get("refs") or {}).get("n") or 0) for r in rs)
         stage = stage_for(dirty, n)
-        w = dict(zip(LAYERS, WEIGHTS[stage]))
+        plan = dict(zip(LAYERS, WEIGHTS[stage]))
+        w, cal_rules = dict(plan), []
+        cal = calibration.version if calibration is not None else None
+        if calibration is not None:
+            from .calibration import spec_keys
+            w, cal_rules = calibration.weights(w, **spec_keys(rs[0]["spec"]))
         elig = [r for r in rs if r["verdict"] != "BLOCK"]
         raw = {L: [_layer_value(r, L) for r in elig] for L in LAYERS}
         avail = {L: any(v is not None for v in raw[L]) and w[L] > 0 for L in LAYERS}
@@ -138,7 +144,8 @@ def combine(results: list[dict], n_refs: int | None = None, seed: int = 0) -> di
             c = sum(used[L] * v for L, v in parts.items())
             comb.append(c)
             r["score"] = {"combined": fnum(c, 4), "stage": stage, "rank_group": gk,
-                          "weights_plan": dict(w), "weights_used": {L: fnum(v, 3) for L, v in used.items()},
+                          "weights_plan": dict(plan), "weights_used": {L: fnum(v, 3) for L, v in used.items()},
+                          "calibration": cal, "calibration_rules": cal_rules,
                           "z": {L: fnum(v, 3) for L, v in parts.items()}}
         rk = _ranks([c for c in comb])
         r2 = _ranks(raw["L2"])
@@ -149,7 +156,8 @@ def combine(results: list[dict], n_refs: int | None = None, seed: int = 0) -> di
             if r["verdict"] == "BLOCK":
                 r["score"] = {"combined": None, "stage": stage, "rank_group": gk, "rank": None,
                               "rank_l2": None, "rank_l3": None, "n_ranked": len(elig),
-                              "weights_plan": dict(w), "weights_used": None, "z": {}}
+                              "weights_plan": dict(plan), "weights_used": None,
+                              "calibration": cal, "calibration_rules": cal_rules, "z": {}}
         # ask the owner (§4.5). Ours, until the learned layers are calibrated on owner ratings (§4.6):
         # AST "expected label missing" / "low confidence" never ask (they fired on most batch-0 files),
         # and an L4 flag asks only when it separates candidates of this id (some have it, some not):
