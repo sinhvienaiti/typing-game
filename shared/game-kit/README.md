@@ -31,8 +31,27 @@ Kế hoạch đầy đủ: `docs/games/SPLIT_PLAN.md` §4.
 | `typing/` | Bộ định tuyến gõ, chữ, chọn từ, chấm điểm | Space `src/td/typing/*` (làn Kit B) |
 | `three/` | Nạp model, vật liệu, hạt, sân khấu 3D | Space `render3d/*`, `scene3d/*` (làn Kit B) |
 | `feedback/` | Phản hồi gõ theo hồ sơ game | Space `src/feedback/*` ở thẻ `survival-s0` (a292d1ac, làn Kit B) |
+| `balance/` | Cân bằng nhiều yếu tố: hồ sơ năng lực, `effectiveE`/`paceK`, dải đích, FlowMeter, bộ điều nhịp, bot gõ giống người, cổng B1–B9 | Mới, theo `docs/games/BALANCE.md` §8 |
 
 Mỗi module có `index.ts` xuất API công khai và test `*.test.ts` nằm cạnh.
+
+### `balance/` (BALANCE.md §8)
+
+TS thuần, tất định: không dùng `Date`, `performance`, `Math.random`, `window`; mọi số ngẫu nhiên đi qua `RngStream` của `platform/`.
+Phân số tính bằng phần nghìn (‰, số nguyên 0–1000), riêng N (gần thua) là số đếm.
+Game tự lưu hồ sơ (khóa `<game>.skill`), tự cấp bảng bậc và tự nối quyết định vào sim.
+
+| File | Nội dung |
+|---|---|
+| `profile.ts` | `SkillProfile`: 13 yếu tố, mỗi yếu tố có giá trị và độ tin (số mẫu). Mặc định theo chế độ và theo trẻ em/người lớn. `updateSkill` sau mỗi ải hoặc đợt: EWMA 0,25, loại ải bỏ dở, AFK, quá ngắn, lệch xa. `blendSkill` trộn mặc định sang số đo theo độ tin. `serializeSkill`/`parseSkill` có phiên bản, đọc lỗi thì về mặc định từng trường |
+| `pace.ts` | `effectiveE`, `capacity` (C(E)), `paceK` (0,75–1,30, hai chiều, làm tròn 1/1000), `scaleTicks`, `familiarityMix`, `newWordShare`, `telegraphScale`, `peakLanes`, `suggestDifficulty`, `skillAdvice` |
+| `bands.ts` | `BANDS`: dải đích §3 cho Thư giãn, Cân bằng, Thử thách; `scoreBand` chấm trong/dưới/trên từng chỉ số; `bandModeFor` |
+| `flow.ts` | `FlowMeter`: nhận ảnh chụp mỗi tick (hoặc mỗi N tick), tính P, I, O, S, N, Q theo cửa sổ 20 s và cả ải |
+| `director.ts` | `PaceDirector`: mỗi 300 tick tính độ căng τ; 3 cửa sổ thấp thì tăng một bậc, 2 cửa sổ cao thì giảm; có trễ, tối đa 2 bậc mỗi đợt, trần ±15 % khoảng sinh và ±10 % W; tắt ở Lời Thề, Vương Miện, xếp hạng, Duel; ghi nhật ký `pace` |
+| `typist.ts` | `HumanTypist`: bot gõ giống người (E, a, CV log-normal, thời gian nhận từ theo độ quen, Backspace, bỏ khóa, chọn mục tiêu, chú ý khi đông, thời gian nhìn bảng, mệt); `STANDARD_BOTS` (bộ bot chuẩn §6); `KeyPlayer` phát phím theo tick |
+| `gates.ts` | `summarizeRuns` gộp các lượt của một bot ở một chế độ; `runGates` chấm B1–B9 (thiếu số thì "THIẾU SỐ", không bao giờ "ĐẠT"); `formatGates` in bảng Markdown chung |
+
+`typing/tempo.ts` vẫn giữ `paceFactor` cũ (chỉ giãn, trần 1,0 theo D06). Việc mới dùng `paceK` của `balance/` (BALANCE.md §9.1 thay D06).
 
 ## Lệnh
 
@@ -52,7 +71,7 @@ Khi chép, lệnh:
 
 - Bỏ test: `*.test.ts`, `*.spec.ts`, `*.test-helper.ts`, thư mục `__tests__`, `__fixtures__`.
 - Từ chối file media (ảnh, âm, video, model, font) trong kit.
-- Từ chối khi một module import module khác (`../<module>/...`) mà game chưa khai. Hiện tại: `vocab` cần `input`; `learning` cần `platform`, `vocab`; `speech` cần `platform`; `typing` cần `platform`.
+- Từ chối khi một module import module khác (`../<module>/...`) mà game chưa khai. Hiện tại: `vocab` cần `input`; `learning` cần `platform`, `vocab`; `speech` cần `platform`; `typing` cần `platform`; `balance` cần `platform`.
 - Xoá file thừa trong `src/kit/`, chỉ ghi file đổi nội dung.
 - Ghi vào `kit-manifest.json`: phiên bản kit, `parentCommit` (commit cuối của repo cha có đổi `shared/game-kit`), `parentDirty` (kit có thay đổi chưa commit), danh sách module, sha256 từng file.
 
