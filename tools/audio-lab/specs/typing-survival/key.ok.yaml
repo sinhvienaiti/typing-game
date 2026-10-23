@@ -1,0 +1,190 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: key.ok
+game: typing-survival
+status: draft
+manual_fields: []
+when: Mỗi phím đúng
+purpose: 'Rơ-le đóng trên bàn phím thép: khô, ngắn, chắc tay; 5 cao độ xoay vòng ±3 %'
+category: key-ok
+family: phim-ui
+source_class: key
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: keys
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 40
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 32
+  max_ms: 48
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [15, 60]
+  music: null
+onset:
+  class: key
+  rise_max_ms: 3
+  lead_silence_max_ms: 2
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); THEME_SOUND_LIST §2: cắt im lặng đầu file, tiếng phải bắt đầu ngay, dưới 5 ms'
+variants:
+  target: 4
+  min: 4
+  max: 6
+  basis: 'THEME_SOUND_LIST §2: tiếng lặp nhiều cần 4–6 biến thể'
+randomisation:
+  group: key-ok
+  pitch_cents: 50
+  gain_db: 1
+  rules: [Tránh lặp 2 bản gần nhất]
+  current_code: 5 cao độ xoay vòng theo chữ, thêm ±3 % ngẫu nhiên (mã tổng hợp)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: presence
+      range_hz: [4000, 8000]
+      role: Tách phím, lách tách điện, đầu tiếng hit.t1
+    - band: body
+      range_hz: [120, 800]
+      role: Thân súng, thân tiếng trúng
+  voice_band: onset-only
+  voice_band_text: Chỉ đầu tiếng rất ngắn ở 1–4 kHz; không ngân ở dải giọng đọc (§6.4)
+  spectrum: 'Đề xuất mới (§6.2): tiếng tách chủ yếu trên 4 kHz, thân dưới 800 Hz, dải 1–4 kHz thấp hơn dải 4–8 kHz ít nhất 6 dB. Tài liệu game thắng cho đến khi sửa'
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: keys
+  bus_gain: 0.5
+  bus_gain_db: -6.02
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: voice() nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -6.02
+  pronunciation_duck_db: -4.44
+  mix_target:
+    metric: lufs-m-max
+    range: [-28, -24]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Single mechanical relay click on a heavy steel console, dry, tight, very short (40 ms), industrial keyboard, no reverb, no tail.
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [synth]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [synth]
+      detail: Tổng hợp bằng mã (theo luật dự án), chỉnh bằng bản dựng không chạy game và tai AI
+    - rank: 2
+      kinds: [cc0-layer]
+      detail: Một mẫu thu thật Kenney CC0, mã đổi cao độ
+    - rank: 3
+      kinds: [owner-recording]
+      detail: Một mẫu tự ghi, mã đổi cao độ
+  needs_now: []
+  needs_later: []
+  note: Mô hình khuếch tán yếu với tiếng dưới 50 ms
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [project-code, CC0-1.0, owner-original]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Rơ-le thép khô (§8.3)
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 300
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: key_ok
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 300
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 3
+  head_max_ms: 2
+  rate_hz: 3.333
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Single mechanical relay click on a heavy steel console, dry, tight, very short (40 ms), industrial keyboard, no reverb, no tail.
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/theme-audio.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 3. Gõ và nạp đạn
+  plan: []
+notes: ''

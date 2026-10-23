@@ -1,0 +1,188 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: music-boss
+game: typing-defense
+status: draft
+manual_fields: []
+when: Boss (chưa có, bước 1B)
+purpose: Lớn, có lễ
+category: music
+family: nhac
+source_class: music
+playback:
+  mode: loop
+  channels: stereo
+  channels_basis: 'THEME_SOUND_LIST §1: mono cho tiếng ngắn, stereo cho nhạc và âm nền'
+  bus: music
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 91428.571
+  tolerance_pct: null
+  tolerance_ms: 1
+  min_ms: 91427.571
+  max_ms: 91429.571
+  basis: Đúng số ô nhịp, lệch không quá 1 ms (§4.3.1); BPM và số ô nhịp theo mã và prompt
+  category_range_ms: null
+  music:
+    bpm: 84
+    bars: 32
+    beats_per_bar: 4
+    key: ngũ cung Hò–Xự–Xang–Xê–Cống
+onset:
+  class: loop
+  rise_max_ms: null
+  lead_silence_max_ms: null
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: AUDIO_PIPELINE §4.3.3 (Nhạc)
+randomisation:
+  group: none
+  pitch_cents: 0
+  gain_db: 0
+  rules: [Không đổi ngẫu nhiên]
+  current_code: Mã chọn ngẫu nhiên hình đàn tranh mỗi ô nhịp; file nhạc thì không đổi ngẫu nhiên
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands: []
+  voice_band: ducked
+  voice_band_text: Nhạc nhường giọng đọc theo mức của tài liệu game; không đổi mức ở đây (§6.2 bước 5)
+  spectrum: Đúng số ô nhịp, cùng giọng và điệu giữa các stem (bài J)
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: lufs-i
+    target: -18
+    basis: 'THEME_SOUND_LIST §1: nhạc −18 LUFS'
+  proposal: null
+  bus: music
+  bus_gain: 1.0
+  bus_gain_db: 0.0
+  gain_db: null
+  gain_basis: null
+  relative_db: null
+  pronunciation_duck_db: -9.0
+  mix_target:
+    metric: lufs-i
+    range: null
+    text: LUFS-I theo game (−18; Tuyến Cuối −16)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Boss theme in the same pentatonic and tempo family: big trống cơm and large drum ensemble, đàn tranh tremolo, sáo trúc lead, gongs, 32 bars.'
+  suffix: null
+  style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
+  sweetener: tre, chuông đồng và đàn tranh
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [sample-player]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [sample-player]
+      detail: MIDI do Claude viết, phát bằng mẫu CC0 qua bộ phát mẫu Python; đúng BPM, đúng giọng, stem khớp ô nhịp
+    - rank: 2
+      kinds: [model-later]
+      detail: ACE-Step 1.5 để phác ý tưởng và làm stinger
+    - rank: 3
+      kinds: [model-later]
+      detail: Stable Audio 3 Small-Music cho pad; Magenta RealTime 2 cho nền thích ứng
+  needs_now: []
+  needs_later: []
+  note: Mô hình tạo nhạc không tự sinh các stem tách rời trên cùng một lưới nhịp
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mẫu VCSL, VSCO-2-CE (CC0); MIDI do Claude viết; mido là MIT (chưa kiểm lại)
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Chủ dự án ký duyệt từng stem nhạc và từng âm có cồng (§8.2)
+  - 'Chất liệu: tre, gỗ, chuông đồng, cồng, giấy, trống cơm, sáo trúc, đàn tranh. Không laser, không tiếng máy, không synth điện tử'
+  - Thang ngũ cung Hò, Xự, Xang, Xê, Cống (gần C D F G A); nốt của chữ và nhạc cùng một thang (TK 24.8)
+  - 'Không tôn giáo (TK 22.1): không chuông chùa, không mõ chùa, không tụng; cồng là cồng hội làng; phách tre thay mõ'
+  - 'Tránh âm Trung Quốc hay Nhật Bản dán nhãn Việt: nhị dẫn giai điệu, shakuhachi, taiko (§8.2)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: music
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Drum, Flute, Zither]
+    forbid: []
+  loop: true
+  stereo: true
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: null
+  rate_hz: null
+  bpm: 84
+  bars: 32
+  beats_per_bar: 4
+  intent: 'Boss theme in the same pentatonic and tempo family: big trống cơm and large drum ensemble, đàn tranh tremolo, sáo trúc lead, gongs, 32 bars.'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [chu-du-an-duyet, chua-co-trong-ma]
+origin:
+  code:
+    file: src/view/audio-min.ts
+    present: false
+    asset_stem: null
+    synth_in_code: false
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 6. Nhạc (bus `music`)
+  plan: []
+notes: ''

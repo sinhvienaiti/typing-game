@@ -1,0 +1,127 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-survival",
+  "id": "hit.t1",
+  "group": "hit-small",
+  "family": "trung",
+  "description": "Lô 0: đạn Xung trúng bậc T1, tiếng keng ngắn trên vỏ thép, 80 ms. Đầu tiếng Kenney Impact Plate light (hoán đổi 5 bản) lọc cao, thêm tiếng ngân FM 3,2 kHz rất ngắn. Sub và đuôi là lớp dùng chung hit.sub, hit.tail (mục 6.3), không nướng vào đây.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "attack",
+      "role": "attack",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactPlate_light_000.ogg"
+      },
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 900
+        }
+      ],
+      "trim": {
+        "endMs": 95
+      },
+      "fadeOutMs": 35,
+      "vary": {
+        "pitchCents": [
+          -150,
+          150
+        ],
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactPlate_light_001.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactPlate_light_002.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactPlate_light_003.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactPlate_light_004.ogg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ring",
+      "role": "sweetener",
+      "source": {
+        "synth": "fm_ping",
+        "params": {
+          "carrierHz": 3200,
+          "ratio": 1.41,
+          "index": 2.5,
+          "indexDecayMs": 15,
+          "durMs": 75,
+          "decayMs": 60
+        }
+      },
+      "offsetMs": 1,
+      "gainDb": -15,
+      "vary": {
+        "pitchCents": [
+          -120,
+          120
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "role": "body",
+      "source": {
+        "synth": "noise_burst",
+        "params": {
+          "color": "pink",
+          "durMs": 50,
+          "attackMs": 0.3,
+          "decayMs": 40,
+          "hpHz": 250,
+          "lpHz": 800
+        }
+      },
+      "gainDb": -12
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 40,
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.3
+    },
+    "maxLengthMs": 90,
+    "tail": {
+      "floorDb": -60,
+      "fadeMs": 10
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 30,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 6,
+    "seed": 80,
+    "includeBase": true,
+    "pitchCents": [
+      -150,
+      150
+    ],
+    "gainDb": [
+      -2,
+      2
+    ]
+  },
+  "export": {
+    "path": "sfx/hits/hit-t1",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

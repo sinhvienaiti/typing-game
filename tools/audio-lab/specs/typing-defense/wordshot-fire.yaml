@@ -1,0 +1,195 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: wordshot-fire
+game: typing-defense
+status: draft
+manual_fields: []
+when: Phát Chữ bay ra
+purpose: Nhanh, có chữ trong đó
+category: shot
+family: ban
+source_class: shot
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §1: mono cho tiếng ngắn, stereo cho nhạc và âm nền'
+  bus: world
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 180
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 144
+  max_ms: 216
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [80, 350]
+  music: null
+onset:
+  class: impact
+  rise_max_ms: 10
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 4
+  min: 4
+  max: 6
+  basis: 'AUDIO_PIPELINE §4.3.3 (Bắn, khạc); §9 #23: 4'
+randomisation:
+  group: shot
+  pitch_cents: 100
+  gain_db: 2
+  rules: [Tối đa 4 tiếng cho mỗi loại vũ khí, Hai lần phát cách nhau ít nhất 30 ms]
+  current_code: 'Tổng hợp trong mã; game chưa có bộ tải file (§6.3 #6)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: body
+      range_hz: [120, 800]
+      role: Thân gỗ, thân tre
+  voice_band: onset-only
+  voice_band_text: Chỉ đầu tiếng rất ngắn ở 1–4 kHz; không ngân ở dải giọng đọc (§6.4)
+  spectrum: 'Súng: từ 25 % năng lượng dưới 150 Hz, crest từ 12 dB. Khạc hoặc phóng: dưới 120 Hz thấp hơn ít nhất 12 dB'
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §1: Tiếng ngắn đỉnh −1 dBTP (TK 24.9)'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: world
+  bus_gain: 0.9
+  bus_gain_db: -0.92
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: nhánh TypingAudio nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -0.92
+  pronunciation_duck_db: null
+  mix_target:
+    metric: lufs-m-max
+    range: [-24, -18]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: A fast bamboo arrow whoosh with a dry paper flutter, left to right, 0.18 s.
+  suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
+  style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
+  sweetener: tre, chuông đồng và đàn tranh
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [model-later, cc0-layer, synth]
+      detail: Stable Audio 3, cộng lớp cơ khí Kenney, cộng sub tổng hợp
+    - rank: 2
+      kinds: [synth]
+      detail: Tổng hợp thuần (ElevenLabs gói trả phí là việc của chủ dự án)
+  needs_now: []
+  needs_later: [buoc-0]
+  note: null
+  batch1:
+    n: 23
+    why: Mỗi lần bắn chữ
+    source: Stable Audio 3 (tiếng vút) cộng tiếng giấy
+    variants: '4'
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Chất liệu: tre, gỗ, chuông đồng, cồng, giấy, trống cơm, sáo trúc, đàn tranh. Không laser, không tiếng máy, không synth điện tử'
+  - Thang ngũ cung Hò, Xự, Xang, Xê, Cống (gần C D F G A); nốt của chữ và nhạc cùng một thang (TK 24.8)
+  - 'Không tôn giáo (TK 22.1): không chuông chùa, không mõ chùa, không tụng; cồng là cồng hội làng; phách tre thay mõ'
+  - 'Tránh âm Trung Quốc hay Nhật Bản dán nhãn Việt: nhị dẫn giai điệu, shakuhachi, taiko (§8.2)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 250
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: shot_launch
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 250
+  ast:
+    expected: [Wood]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 10
+  head_max_ms: 5
+  rate_hz: 4
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: A fast bamboo arrow whoosh with a dry paper flutter, left to right, 0.18 s.
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/view/audio-min.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 3. Trận và làng (bus `world`)
+  plan: ['AUDIO_PIPELINE §9 #23 (lô 1)']
+notes: ''

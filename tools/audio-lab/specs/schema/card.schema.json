@@ -1,0 +1,1396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/tools/audio-lab/specs/card.schema.json",
+  "title": "Thẻ spec âm thanh (Audio Lab)",
+  "description": "Một thẻ cho mỗi id âm của một game. Kế hoạch: docs/games/AUDIO_PIPELINE.md §4.1 (L0), §5.1 bước 1. Tài liệu game thắng khi số liệu khác nhau.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "game",
+    "status",
+    "manual_fields",
+    "when",
+    "purpose",
+    "category",
+    "family",
+    "source_class",
+    "playback",
+    "duration",
+    "onset",
+    "variants",
+    "randomisation",
+    "frequency_role",
+    "loudness",
+    "prompt",
+    "pitches",
+    "parts",
+    "layer_plan",
+    "references",
+    "source_plan",
+    "licence",
+    "constraints",
+    "board",
+    "critic",
+    "blocked_by",
+    "origin",
+    "notes"
+  ],
+  "properties": {
+    "manual": {
+      "$ref": "#/$defs/manual"
+    },
+    "schema": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*([.-][a-z0-9]+)*$"
+    },
+    "game": {
+      "enum": [
+        "dragon-hold",
+        "typing-defense",
+        "typing-survival",
+        "space-typing"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "ready",
+        "in-progress",
+        "review",
+        "approved",
+        "done",
+        "blocked",
+        "retired"
+      ]
+    },
+    "manual_fields": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z_]+(\\.[a-z_0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "when": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "key-ok",
+        "key-bad",
+        "ui",
+        "word-reward",
+        "shot",
+        "hit-small",
+        "hit-heavy",
+        "blast",
+        "death-swarm",
+        "death-big",
+        "creature",
+        "warning",
+        "ambience",
+        "music",
+        "stinger",
+        "fx-other"
+      ]
+    },
+    "family": {
+      "enum": [
+        "phim-ui",
+        "thuong",
+        "ban",
+        "trung",
+        "no",
+        "chet",
+        "sinh-vat",
+        "nen",
+        "nhac"
+      ]
+    },
+    "source_class": {
+      "enum": [
+        "key",
+        "ui",
+        "pitched-reward",
+        "impact",
+        "shot",
+        "electric",
+        "blast",
+        "fire",
+        "creature",
+        "ambience",
+        "warning-stinger",
+        "music",
+        "folk-instrument",
+        "folk-flute",
+        "voice",
+        "foley-other"
+      ]
+    },
+    "playback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "channels",
+        "bus",
+        "priority",
+        "min_gap_ms",
+        "limit_group",
+        "caps"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "mode": {
+          "enum": [
+            "one-shot",
+            "loop"
+          ]
+        },
+        "channels": {
+          "enum": [
+            "mono",
+            "stereo"
+          ]
+        },
+        "channels_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "priority": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "min_gap_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "limit_group": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "caps": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "manual": {
+              "$ref": "#/$defs/manual"
+            },
+            "per_s": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "per_frame": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "shared_per_s": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "min_gap_ms": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "format": {
+          "type": "string"
+        }
+      }
+    },
+    "duration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_ms",
+        "tolerance_pct",
+        "tolerance_ms",
+        "min_ms",
+        "max_ms",
+        "basis"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "target_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "tolerance_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "tolerance_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "min_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "max_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category_range_ms": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/range"
+            }
+          ]
+        },
+        "music": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "bpm",
+                "bars",
+                "beats_per_bar"
+              ],
+              "properties": {
+                "manual": {
+                  "$ref": "#/$defs/manual"
+                },
+                "bpm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "bars": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "beats_per_bar": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "key": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "onset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "class",
+        "rise_max_ms",
+        "lead_silence_max_ms"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "class": {
+          "enum": [
+            "key",
+            "ui",
+            "impact",
+            "creature",
+            "other",
+            "none",
+            "loop"
+          ]
+        },
+        "rise_max_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "lead_silence_max_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target",
+        "min",
+        "max"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "target": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "randomisation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "group",
+        "pitch_cents",
+        "gain_db",
+        "rules"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "group": {
+          "enum": [
+            "key-ok",
+            "key-bad",
+            "word-reward",
+            "rare-fixed",
+            "shot",
+            "hit-small",
+            "hit-heavy",
+            "blast",
+            "death-swarm",
+            "default",
+            "none"
+          ]
+        },
+        "pitch_cents": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1200
+        },
+        "gain_db": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 12
+        },
+        "rules": {
+          "$ref": "#/$defs/strings"
+        },
+        "current_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "frequency_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bands",
+        "voice_band"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "band"
+            ],
+            "properties": {
+              "band": {
+                "enum": [
+                  "sub",
+                  "body",
+                  "voice",
+                  "presence",
+                  "pitched"
+                ]
+              },
+              "range_hz": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/$defs/range"
+                  }
+                ]
+              },
+              "role": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "voice_band": {
+          "enum": [
+            "onset-only",
+            "decay-15db-100ms",
+            "avoid",
+            "soft-short",
+            "short-warning",
+            "ducked",
+            "free"
+          ]
+        },
+        "voice_band_text": {
+          "type": "string"
+        },
+        "spectrum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "loudness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "bus",
+        "gain_db"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "file": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/level"
+            }
+          ]
+        },
+        "proposal": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/level"
+            }
+          ]
+        },
+        "bus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bus_gain": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bus_gain_db": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gain_db": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gain_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "relative_db": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "gain_db + bus_gain_db: mức của file đã chuẩn hóa sau mức riêng và mức bus, trước master"
+        },
+        "pronunciation_duck_db": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "maximum": 0
+        },
+        "mix_target": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "manual": {
+                  "$ref": "#/$defs/manual"
+                },
+                "metric": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "range": {
+                  "oneOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "$ref": "#/$defs/range"
+                    }
+                  ]
+                },
+                "text": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "weight": {
+                  "enum": [
+                    null,
+                    "medium",
+                    "heavy"
+                  ]
+                },
+                "basis": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "variants"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "suffix": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "style_root": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sweetener": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variants": {
+          "$ref": "#/$defs/strings",
+          "maxItems": 8
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "pitches": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "notes"
+          ],
+          "properties": {
+            "manual": {
+              "$ref": "#/$defs/manual"
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[A-G](#|b)?[0-8]$"
+              }
+            },
+            "count": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "scale": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "basis": {
+              "type": "string"
+            },
+            "proposal": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "notes",
+                    "basis"
+                  ],
+                  "properties": {
+                    "notes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "pattern": "^[A-G](#|b)?[0-8]$"
+                      }
+                    },
+                    "basis": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "parts": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "layer_plan": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "manual": {
+              "$ref": "#/$defs/manual"
+            },
+            "builds_on": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "shares": {
+              "$ref": "#/$defs/strings"
+            },
+            "summary": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "related": {
+              "$ref": "#/$defs/strings"
+            }
+          }
+        }
+      ]
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "licence"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Đường dẫn dưới ~/AudioLab hoặc art-src; không phải file trong Git"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "licence": {
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "style",
+              "reference",
+              "hero",
+              "approved"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "now",
+        "later",
+        "ranked"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "now": {
+          "$ref": "#/$defs/kinds"
+        },
+        "later": {
+          "$ref": "#/$defs/kinds"
+        },
+        "ranked": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "rank",
+              "kinds"
+            ],
+            "properties": {
+              "rank": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "kinds": {
+                "$ref": "#/$defs/kinds"
+              },
+              "detail": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "needs_now": {
+          "$ref": "#/$defs/blockers"
+        },
+        "needs_later": {
+          "$ref": "#/$defs/blockers"
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "batch1": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "n": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "why": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "variants": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "style_board": {
+          "type": "boolean"
+        },
+        "sa3_trial": {
+          "type": "boolean"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "licence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowed",
+        "conditional",
+        "forbidden"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "allowed": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "CC0-1.0",
+              "project-code",
+              "owner-original",
+              "MIT",
+              "Apache-2.0",
+              "CC-BY-4.0"
+            ]
+          }
+        },
+        "conditional": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "licence",
+              "condition"
+            ],
+            "properties": {
+              "licence": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "forbidden": {
+          "$ref": "#/$defs/strings"
+        },
+        "attribution_required": {
+          "type": "boolean"
+        },
+        "notes": {
+          "$ref": "#/$defs/strings"
+        },
+        "record": {
+          "type": "string"
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "constraints": {
+      "$ref": "#/$defs/strings"
+    },
+    "board": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contexts",
+        "repeat_interval_ms"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "contexts": {
+          "$ref": "#/$defs/contexts"
+        },
+        "contexts_before_phase3": {
+          "$ref": "#/$defs/contexts"
+        },
+        "dense": {
+          "type": "boolean"
+        },
+        "repeat_interval_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "repeat_basis": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "loudness_match": {
+          "enum": [
+            "lufs-m"
+          ]
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    },
+    "critic": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Khóa cho làn Critic. critic/spec.py đưa mục này lên gốc; group, loop, stereo, pitched, attack_max_ms, head_max_ms, rate_hz, bpm, bars, beats_per_bar, intent, refs được tính lại từ các trường khác sau mỗi lần sinh (trừ khi critic có manual: true)",
+      "required": [
+        "group",
+        "dirty",
+        "loop_eval",
+        "ast"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "group": {
+          "type": "string",
+          "pattern": "^[a-z_]+$"
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "stereo": {
+          "type": "boolean"
+        },
+        "pitched": {
+          "type": "boolean"
+        },
+        "attack_max_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "head_max_ms": {
+          "$ref": "#/$defs/msOrNull"
+        },
+        "rate_hz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bpm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "bars": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "beats_per_bar": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "intent": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Luôn là chuỗi (prompt, hoặc when): critic/spec.py lấy mục prompt ở gốc nếu intent rỗng"
+        },
+        "refs": {
+          "$ref": "#/$defs/strings"
+        },
+        "weights_batch1": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "l2",
+            "l3",
+            "l4",
+            "l5"
+          ],
+          "properties": {
+            "l2": {
+              "$ref": "#/$defs/weight"
+            },
+            "l3": {
+              "$ref": "#/$defs/weight"
+            },
+            "l4": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.1
+            },
+            "l5": {
+              "$ref": "#/$defs/weight"
+            }
+          }
+        },
+        "loop_eval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "length_s": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/range"
+                }
+              ]
+            },
+            "plays": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "interval_ms": {
+              "$ref": "#/$defs/msOrNull"
+            }
+          }
+        },
+        "ast": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "expected",
+            "forbid"
+          ],
+          "properties": {
+            "expected": {
+              "$ref": "#/$defs/strings"
+            },
+            "forbid": {
+              "$ref": "#/$defs/strings"
+            }
+          }
+        },
+        "basis": {
+          "type": "string"
+        },
+        "clap": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Tùy chọn, sửa tay (ghi critic.clap vào manual_fields): nhãn CLAP riêng cho id; contrast là các cặp [chất liệu muốn có, chất liệu sai] (§4.4)",
+          "properties": {
+            "labels": {
+              "$ref": "#/$defs/strings"
+            },
+            "expected": {
+              "$ref": "#/$defs/strings"
+            },
+            "contrast": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            }
+          }
+        }
+      }
+    },
+    "blocked_by": {
+      "$ref": "#/$defs/blockers"
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "sound_list",
+        "plan"
+      ],
+      "properties": {
+        "code": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "present"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "present": {
+              "type": "boolean"
+            },
+            "asset_stem": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "synth_in_code": {
+              "type": "boolean"
+            }
+          }
+        },
+        "sound_list": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "present"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "present": {
+              "type": "boolean"
+            },
+            "section": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "plan": {
+          "$ref": "#/$defs/strings"
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "manual": {
+      "type": "boolean",
+      "description": "true: bộ sinh giữ nguyên mục này (hoặc cả thẻ nếu đặt ở gốc)"
+    },
+    "msOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "strings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "kinds": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "synth",
+          "cc0-layer",
+          "sample-player",
+          "model-later",
+          "owner-recording"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "buoc-0",
+          "chu-du-an-tai-freesound",
+          "chu-du-an-ghi-am",
+          "giay-dong-y",
+          "chu-du-an-duyet",
+          "sua-tai-lieu-game",
+          "chua-co-trong-ma"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "contexts": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "mot-minh",
+          "lap-20",
+          "loa-nho",
+          "trong-tran"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "level": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metric",
+        "target"
+      ],
+      "properties": {
+        "manual": {
+          "$ref": "#/$defs/manual"
+        },
+        "metric": {
+          "enum": [
+            "peak-dbtp",
+            "lufs-m-max",
+            "lufs-s-max",
+            "lufs-i"
+          ]
+        },
+        "target": {
+          "type": "number",
+          "maximum": 0
+        },
+        "pad_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "true_peak_max_dbtp": {
+          "type": "number",
+          "maximum": 0
+        },
+        "basis": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

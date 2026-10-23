@@ -1,0 +1,195 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: amb.forest
+game: dragon-hold
+status: draft
+manual_fields: []
+when: Luôn chạy; nhỏ lại trong đợt
+purpose: Gió qua rừng thông, có cơn
+category: ambience
+family: nen
+source_class: ambience
+playback:
+  mode: loop
+  channels: stereo
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: ambience
+  priority: 5
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 6000
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 4800
+  max_ms: 7200
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: null
+  music: null
+onset:
+  class: loop
+  rise_max_ms: null
+  lead_silence_max_ms: null
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: 'AUDIO_PIPELINE §4.3.3 (Nền lặp); §9 #7: 1'
+randomisation:
+  group: none
+  pitch_cents: 0
+  gain_db: 0
+  rules: [Không đổi ngẫu nhiên]
+  current_code: Vòng lặp, không đổi ngẫu nhiên
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: sub
+      range_hz: [20, 120]
+      role: Thân gầm rồng, Bom Hạt Thông
+    - band: presence
+      range_hz: [4000, 8000]
+      role: Lách tách than hồng, tiếng tách phím gỗ
+  voice_band: avoid
+  voice_band_text: Tránh dải 1–4 kHz
+  spectrum: Phần lớn năng lượng dưới 300 Hz và ở 4–10 kHz
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: lufs-i
+    target: -26
+    basis: 'M0_SOUND_LIST §1: nền −26 LUFS'
+  proposal: null
+  bus: ambience
+  bus_gain: 0.6
+  bus_gain_db: -4.44
+  gain_db: -10
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -14.44
+  pronunciation_duck_db: -4.0
+  mix_target:
+    metric: lufs-i
+    range: null
+    text: LUFS-I theo tài liệu game (nền −26)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Seamless loop, wind through a misty pine forest, soft gusts, no birds, 6 s
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants: []
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [model-later]
+      detail: Stable Audio 3, rồi sửa mối nối
+    - rank: 2
+      kinds: [cc0-layer]
+      detail: Bản ghi hiện trường CC0
+    - rank: 3
+      kinds: [synth]
+      detail: Tổng hợp bằng mã (như hiện nay)
+  needs_now: []
+  needs_later: [buoc-0]
+  note: Độ dài theo tài liệu game
+  batch1:
+    n: 7
+    why: Phát liên tục
+    source: Stable Audio 3, vòng lặp 6 s đúng tài liệu game
+    variants: '1'
+  style_board: true
+  sa3_trial: true
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints: []
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: ambience
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Wind]
+    forbid: []
+  loop: true
+  stereo: true
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: null
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Seamless loop, wind through a misty pine forest, soft gusts, no birds, 6 s
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: ambience/forest-wind
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.11 Nền (bus `ambience`, P5)
+  plan:
+    - 'AUDIO_PIPELINE §9 #7 (lô 1)'
+    - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
+    - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
+notes: ''

@@ -1,0 +1,128 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-survival",
+  "id": "hit.t2",
+  "group": "hit-heavy",
+  "family": "trung",
+  "description": "Lô 0: chí mạng (T2, T3), keng nặng hơn hit.t1 kèm cú thụi trầm, 160 ms. Đầu tiếng Kenney Impact Metal heavy (hoán đổi), thân nhiễu 200–800 Hz, sub 85→50 Hz ngắn. Theo mục 6.3 về sau sub tách sang hit.sub dùng chung; bản lô 0 giữ sub để nghe thử bậc.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "attack",
+      "role": "attack",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactMetal_heavy_001.ogg"
+      },
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 500
+        }
+      ],
+      "trim": {
+        "endMs": 190
+      },
+      "fadeOutMs": 60,
+      "vary": {
+        "pitchCents": [
+          -80,
+          80
+        ],
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_heavy_002.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_heavy_003.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_heavy_004.ogg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "role": "body",
+      "source": {
+        "synth": "noise_burst",
+        "params": {
+          "color": "pink",
+          "durMs": 175,
+          "attackMs": 0.5,
+          "decayMs": 160,
+          "hpHz": 200,
+          "lpHz": 800,
+          "order": 4
+        }
+      },
+      "gainDb": -9,
+      "vary": {
+        "gainDb": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "thump",
+      "role": "sub",
+      "source": {
+        "synth": "sub_thump",
+        "params": {
+          "startHz": 85,
+          "endHz": 50,
+          "glideMs": 50,
+          "durMs": 150,
+          "decayMs": 140,
+          "click": 0.15
+        }
+      },
+      "gainDb": -6
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "saturation": {
+      "driveDb": 3,
+      "mix": 0.3
+    },
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.3
+    },
+    "maxLengthMs": 185,
+    "tail": {
+      "floorDb": -66,
+      "fadeMs": 20
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 50,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 4,
+    "seed": 160,
+    "includeBase": true,
+    "pitchCents": [
+      -80,
+      80
+    ],
+    "gainDb": [
+      -1,
+      1
+    ]
+  },
+  "export": {
+    "path": "sfx/hits/hit-t2",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

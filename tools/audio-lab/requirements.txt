@@ -1,0 +1,29 @@
+# Audio Lab: top-level pins (Python 3.12, macOS arm64, one venv at ~/AudioLab/.venv).
+# Versions marked "PoC" are the ones that ran in the 2026-10-23 AI-ears proof of concept.
+# Full transitive lock with hashes: requirements.lock.txt (regenerate with tools/audio-lab/common/lock.sh).
+
+# Signal analysis and I/O (no ffmpeg: libsndfile reads WAV, FLAC, OGG Vorbis, MP3)
+numpy==2.5.4            # PoC
+scipy==1.18.1           # PoC
+soundfile==0.14.0       # PoC
+soxr==1.1.0             # PoC, high-quality resampling (48 kHz chain)
+librosa==1.0.0          # PoC, needs Python >= 3.12
+pyloudnorm==0.2.0       # PoC
+matplotlib==3.11.2      # PoC, PNG cards
+mosqito==1.2.1          # sharpness, roughness, SII (Apache-2.0)
+
+# DSP chain, local only (GPL-3.0: import from local scripts, never vendor into a repo)
+pedalboard==0.9.26      # PoC
+
+# Music, specs, schemas, tests
+mido==1.3.3
+pyyaml==6.0.3           # PoC
+jsonschema==4.26.0
+pytest==9.1.1
+
+# Learned critics (L3 audiobox, L4 CLAP via transformers ClapModel, AST)
+torch==2.14.1           # PoC, MPS
+torchaudio==2.11.0      # PoC
+transformers==5.20.2    # PoC
+huggingface-hub==2.2.0  # PoC
+audiobox-aesthetics==0.0.4  # PoC (CC-BY-4.0 weights)
