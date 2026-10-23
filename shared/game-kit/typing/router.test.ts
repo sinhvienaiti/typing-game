@@ -151,6 +151,33 @@ describe("key router", () => {
     expect(again.t.stats.strays).toBe(1);
   });
 
+  it('unlock with router.unlockErrors "keep" drops the letters but the wrong keys stay with the word, for its grade', () => {
+    expect(TD_TYPING.router.unlockErrors).toBe("drop");
+    // No unlockErrors at all (a game's own RouterRules from before the option): Esc wipes the word clean, as before.
+    const { unlockErrors: _drop, ...oldRouter } = TD_TYPING.router;
+    const old = createSession(compileTyping({ ...TD_TYPING, router: oldRouter }), deck);
+    addWord(old, wordIndex(deck, "duck"), rules.kind.call!, 1, 0);
+    type({ t: old, hits: [] }, "dux");
+    unlock(old);
+    expect(old.words.errors[old.words.live()[0]!]).toBe(0);
+
+    const keep = compileTyping(typingConfig(TD_TYPING, { router: { unlockErrors: "keep" } }));
+    const t = createSession(keep, deck);
+    addWord(t, wordIndex(deck, "duck"), keep.kind.call!, 1, 0);
+    const slot = t.words.live()[0]!;
+    const s = { t, hits: [] as Hit[] };
+    expect(type(s, "dux")).toEqual([KEY.lock, KEY.advance, KEY.wrong]);
+    expect(unlock(t)).toBe(true);
+    expect([t.router.lock, t.words.typed[slot], t.words.errors[slot]]).toEqual([-1, 0, 1]);
+    expect(t.stats.errors).toBe(1);
+    // Typed again cleanly: it still carries its one wrong key, like Backspace to empty (a 4-letter word with 1 error is OK).
+    type(s, "duck", 50, 0);
+    expect(s.hits).toMatchObject([{ timing: { errors: 1, len: 4 }, grade: "ok" }]);
+    // A word dealt into the slot afterwards starts clean.
+    addWord(t, wordIndex(deck, "duck"), keep.kind.call!, 1, 60);
+    expect(t.words.errors[t.words.live()[0]!]).toBe(0);
+  });
+
   it("several keys in one tick route in order", () => {
     const s = withWords("flame");
     expect(type(s, "flame", 50, 0)).toEqual([KEY.lock, KEY.advance, KEY.advance, KEY.advance, KEY.done]);
