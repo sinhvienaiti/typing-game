@@ -85,7 +85,7 @@ Bot và người thật đo cùng các chỉ số này. Báo cáo cân bằng in
 
 | Đòn bẩy | Theo yếu tố | Giới hạn |
 |---|---|---|
-| **Nhịp k** (giãn hoặc nén khoảng sinh và giờ đợt) | E, độ đều, mệt | k = clamp(C(E_eff) / C_ref ; 0,75 ; 1,30). Hai chiều: người nhanh bị nén, người chậm được giãn |
+| **Nhịp k** (giãn hoặc nén khoảng sinh và giờ đợt) | E, độ đều, mệt | k = clamp(C(E_eff) / C_ref ; 0,75 ; 1,30). Hai chiều: người nhanh bị nén, người chậm được giãn. **C_ref = C(E_eff của bot Chuẩn)**, để người tham chiếu có đúng k = 1 (Rồng: E_eff(35; 95 %; 0,25) ≈ 29,4 → C_ref ≈ 19,6 từ/phút) |
 | E hiệu dụng `E_eff` | E, a, độ đều | E_eff = E × (0,6 + 0,4 × a²) × (1 − 0,5 × CV), giữ trong [0,7E ; E] |
 | Độ dài từ | E | Theo bảng riêng của game (Rồng: 01 §3.4) |
 | Tỉ lệ từ mới mỗi đợt | a, vốn từ, thời gian nhận từ mới | Thấp hơn khi a < 90 % hoặc nhận từ mới > 1,5 s; không dưới mức hẹn của ải học |
