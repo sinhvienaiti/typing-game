@@ -382,6 +382,11 @@ Bot: 25 WPM 95 %, 35 WPM 95 %, 60 WPM 97 %, trừ khi ghi khác. "Đồ TB" là 
 | G22 | Dấu Thách | 35 | Ải có Dấu Thách | Đạt ≥ 25 %; không mục tiêu phụ nào 0 % |
 
 - Ải không đạt: chỉnh hệ số trong dữ liệu (±10 %) hoặc đổi seed. Không sửa mã.
+- **Ngoại lệ của bản thử dọc M0 (người điều phối chốt ngày 23/10/2026):**
+  - G5 trên bản đồ M0 (10 đợt, có tướng) dùng ngưỡng của DESIGN §9: chỉ gõ thắng ≤ 40 %. Ngưỡng ≥ 70 % ở ải 1–10 của bảng trên áp dụng cho chương 1 thật (M2), nơi ải ngắn hơn và dạy dần.
+  - Máu Hỏa Long cấp 1 ở M0 là 460 (bot chỉnh), thay mức 1.000 của 01 §2.2. Đây là số tạm, xem lại sau buổi chủ dự án chơi thử.
+  - Đợt 10 của M0 được phép chạm đỉnh tải 1,40 (trần cứng), vượt trần 1,15 của đợt giữa C1–C2.
+  - Cổng B1–B9 của `../BALANCE.md` §7 áp dụng cho M0 cùng G1–G9.
 - Cổng in báo cáo từ M1. Thành cổng cứng khi một lát phát hành được khóa.
 
 ## 8. Hiệu năng sim và sức chạy bot
