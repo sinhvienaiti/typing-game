@@ -51,7 +51,7 @@
 | D03 | Đòn gõ là loại **Chữ**: không bị Giáp, Kháng chặn. Chỉ khiên chữ chặn chữ. Không có chí mạng ngẫu nhiên | Giáp làm khó quân ta, không làm khó tay gõ. Độ khó không đến từ tốc gõ |
 | D04 | 1 W = sát thương một từ **Vừa** ở sức chuẩn của chương. Cấp Rồng trong ải không tăng P | Số từ để hạ quái không trôi trong ải |
 | D05 | Bộ sinh đợt chỉ ở 02 §5. Ngân sách đợt đo bằng **tải gõ**; đe dọa (ĐĐ) chỉ dùng để chọn thành phần | Chương sau không đòi gõ nhanh hơn |
-| D06 | Nhịp đợt co giãn theo tốc gõ đo được, **chỉ chậm lại** (k_E ≥ 0,75) | Người 25 WPM vẫn đi được; người nhanh chọn mức Khó |
+| D06 | ~~Nhịp đợt co giãn theo tốc gõ đo được, chỉ chậm lại (k_E ≥ 0,75)~~ **Thay bằng D23** | Bot 60 WPM thắng 100 % ở M0a: một chiều không đủ |
 | D07 | Vàng theo ngân sách ải × số đường, chia cho quái theo ĐĐ | Không ngập vàng khi bầy đông |
 | D08 | Trang bị bản đầu là **trang bị cố định**: không độ hiếm, không dòng phụ ngẫu nhiên, không rèn may rủi, không Chợ Rừng | Giá tính được; thêm sau khi có số đo người chơi |
 | D09 | Chợ Học gộp vào Thẻ Ôn | Hai cơ chế ôn trùng nhau |
@@ -68,6 +68,7 @@
 | D20 | Ải Ôn ở ải 9 và 19 mỗi chương | Ải nghỉ, ôn từ yếu |
 | D21 | Bạch Long dẫn lời ở ải 1–10, vào trận từ ải 11 | Mỗi ải tối đa một ý mới |
 | D22 | Model Rồng (v2, v3 medium, v4) vào bộ media riêng của game qua `pnpm media:push` | Game không phụ thuộc thư mục media của Space khi chạy |
+| D23 | **Cân bằng nhiều yếu tố** theo `../BALANCE.md`: hồ sơ năng lực 13 yếu tố, nhịp k hai chiều (0,75–1,30) theo E hiệu dụng, bộ điều nhịp trong ải, Vùng Chữ tính bằng thời gian, áp lực liên tục, dải đích theo chế độ, bộ bot giống người. BALANCE.md §9.1 thay hàng k_E ở §4.4 | Chủ dự án (23/10): tránh quá dễ hay quá khó; cân theo tốc độ, độ chính xác và nhiều yếu tố khác |
 
 ## 4. Số chuẩn
 
