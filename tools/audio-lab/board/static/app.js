@@ -541,6 +541,7 @@ function renderCards() {
       h("span", { class: "grow" }, d.listens[c.label] ? `nghe ${d.listens[c.label]} lần` : "chưa nghe"),
       picked ? h("span", { class: "badge " + (d.pickAuto ? "auto" : "pick"), title: d.pickAuto ? "Tự chọn vì có nhiều sao nhất; bấm V để chọn tay" : "" }, d.pickAuto ? "tốt nhất (sao)" : "tốt nhất") : null,
       d.dropped.has(c.label) ? h("span", { class: "badge drop" }, "bỏ") : null),
+    c.note ? h("div", { class: "cnote", title: "Nhãn ghi sẵn cho bản này" }, c.note) : null,
     h("div", { class: "player" },
       h("button", { class: "play", "aria-label": `Phát bản ${c.label}`, onclick: () => { if (isPlaying(c.label)) stopAudio(); else { S.sel = pos; play(pos, { once: it.mode === "variants" }); } } }, "▶"),
       h("div", { class: "track" }, h("i")),

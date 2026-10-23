@@ -92,8 +92,10 @@ def run(x: np.ndarray, sr: int, params: dict, loop: bool = False) -> tuple[np.nd
         rep["headCutMs"] = round(1000.0 * cut / sr, 2)
         rep["steps"].append(f"trim<{head.get('preRollMs', 0.5):g}ms")
     cap = params.get("maxLengthMs")
+    capped = False
     if cap and y.shape[0] > dsp.ms_to_n(cap, sr):
         y = y[: dsp.ms_to_n(cap, sr)]
+        capped = True
         rep["steps"].append(f"cap{cap:g}ms")
     tail = params.get("tail")
     if loop:
@@ -101,6 +103,15 @@ def run(x: np.ndarray, sr: int, params: dict, loop: bool = False) -> tuple[np.nd
         if xf > 0:
             y = dsp.loop_crossfade(y, xf, sr)
             rep["steps"].append(f"loopxf{xf:g}ms")
+    elif tail and tail.get("shape") == "exp":
+        # exponential cap from the knee to floorDb at the last sample (no flat cut then fade)
+        n = y.shape[0]
+        pk = int(np.argmax(np.max(np.abs(y), axis=1))) if n else 0
+        knee = dsp.ms_to_n(float(tail["kneeMs"]), sr) if tail.get("kneeMs") is not None else int(0.35 * n)
+        knee = max(knee, pk + dsp.ms_to_n(5.0, sr))
+        y, info = dsp.exp_cap_tail(y, sr, knee, float(tail.get("floorDb", -60.0)))
+        rep["tailShape"] = {"shape": "exp", "capped": capped, **info}
+        rep["steps"].append(f"expTail{info['knee_ms']:g}ms>{tail.get('floorDb', -60.0):g}dB")
     elif tail:
         n0 = y.shape[0]
         y = dsp.tail_trim(y, float(tail.get("floorDb", -60.0)), sr)

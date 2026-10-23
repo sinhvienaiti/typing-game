@@ -84,6 +84,7 @@ button.chip { cursor: pointer; }
 .card .head { display: flex; align-items: center; gap: 10px; }
 .card .lab { font: 800 30px/1 var(--font); width: 40px; }
 .card .head .grow { flex: 1; color: var(--muted); font-size: 12px; }
+.card .cnote { font-size: 12px; font-weight: 600; color: var(--accent); border: 1px dashed var(--line-2); border-radius: 6px; padding: 3px 8px; }
 .card .badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
 .badge.pick { background: var(--pick); color: var(--pick-ink); }
 .badge.auto { background: transparent; color: var(--pick); border: 1px solid var(--pick); }

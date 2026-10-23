@@ -107,17 +107,32 @@ def _c(cid, label_vi, on, value, unit, limit, ok, fix, msg_vi=""):
 
 
 def gate(data: np.ndarray, sr: int, m: dict, spec: Spec, stage: str = "final", subtype: str | None = None,
-         source_qa: dict | None = None) -> tuple[dict, dict]:
+         source_qa: dict | None = None, clip_twin: tuple | None = None) -> tuple[dict, dict]:
     """source_qa: raw L1 of the layers this file was built from (critic.policy.source_qa, read from
-    the build's SOURCES.json): a clipped layer blocks even when the mix and the chain hid it."""
+    the build's SOURCES.json): a clipped layer blocks even when the mix and the chain hid it.
+    clip_twin: (data, subtype, name) of the unclipped float copy a generator wrote next to its 16-bit
+    file (Stable Audio 3: <name>.f32.wav). The clip checks then read the model output, not the
+    16-bit writer, whose hard clip is reported as information only (ours, batch 0b review)."""
     checks: list[dict] = []
-    clip = clip_scan(data, subtype)
-    checks.append(_c("clip_full_scale", "Clip (3 mẫu liền ≥ 0,999 FS)", "raw", clip["full_runs"], "đoạn", 0,
+    writer = None
+    if clip_twin is not None:
+        clip = clip_scan(clip_twin[0], clip_twin[1])
+        writer = clip_scan(data, subtype)
+        on = "raw-float"
+    else:
+        clip = clip_scan(data, subtype)
+        on = "raw"
+    checks.append(_c("clip_full_scale", "Clip (3 mẫu liền ≥ 0,999 FS)", on, clip["full_runs"], "đoạn", 0,
                      clip["full_runs"] == 0, "reject",
                      f"{clip['full_runs']} đoạn, {clip['full_samples']} mẫu chạm trần" if clip["full_runs"] else ""))
-    checks.append(_c("clip_flat_top", "Đỉnh phẳng (4 mẫu cùng độ lớn, trên −20 dBFS)", "raw", clip["flat_runs"],
+    checks.append(_c("clip_flat_top", "Đỉnh phẳng (4 mẫu cùng độ lớn, trên −20 dBFS)", on, clip["flat_runs"],
                      "đoạn", 0, clip["flat_runs"] == 0, "reject",
                      f"{clip['flat_runs']} đoạn đỉnh phẳng: đã bị cắt khi ghi file" if clip["flat_runs"] else ""))
+    if writer is not None:
+        n_w = writer["full_runs"] + writer["flat_runs"]
+        checks.append(_c("writer_clip", f"Clip của bộ ghi 16-bit (thông tin; kiểm clip đọc {clip_twin[2]})", "raw",
+                         n_w, "đoạn", None, True, "use_float_copy",
+                         f"bản 16-bit có {n_w} đoạn chạm trần do bộ ghi cắt; dùng bản float" if n_w else ""))
     if source_qa and source_qa.get("checked"):
         bad = source_qa.get("failed") or []
         checks.append(_c("source_clip", "Clip trong nguồn của từng lớp (trước khi trộn)", "raw",
@@ -203,6 +218,9 @@ def gate(data: np.ndarray, sr: int, m: dict, spec: Spec, stage: str = "final", s
     verdict = "BLOCK" if blocking else ("NEEDS_FIX" if failed else "PASS")
     res = {"stage": stage, "pass": not failed, "verdict": verdict, "blocking": blocking,
            "fixes": fixes, "failed": [c["id"] for c in failed], "checks": checks}
+    if writer is not None:
+        res["clip_source"] = {"file": clip_twin[2], "subtype": clip_twin[1],
+                              "writer_clip_runs": writer["full_runs"] + writer["flat_runs"]}
     return res, {"clip_idx": clip["full_idx"], "flat_idx": clip["flat_idx"], "clip_scan": {
         k: clip[k] for k in ("full_runs", "flat_runs", "plateau_runs", "low_bit_depth", "lossy_or_float")}}
 

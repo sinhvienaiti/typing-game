@@ -59,6 +59,31 @@ L1B = {
     "noise_floor_max_dbfs": -60.0,
     "refs_min": 3,                 # refs of the same group needed for P90-based flags
     "refs_pct": 90.0,
+    # ours (batch 0b review), loops only: events that make a short loop recognisable on repeat
+    "loop_knock_db": 10.0,         # 10 ms level over the 1 s running median (above 100 Hz)
+    "loop_knock_max_s": 0.15,      # ... and short (a gust is not a knock)
+    "loop_chirp_prom_db": 24.0,    # one bin in 1.5-9 kHz over the band median (tonal, bird-like)
+    "loop_chirp_rise_db": 6.0,     # ... while the band rises over its running median
+    "loop_band_range_db": 8.0,     # a 1/6-octave band (1.5-12 kHz) whose level re the bed moves this much
+    "loop_band_over_db": 3.0,      # ... more than the median band moves (it comes and goes on its own)
+    "loop_knock_low_band": (20.0, 200.0),   # ours (review 2): a wind-mic thump hidden under the full band
+    "loop_knock_low_min_s": 0.03,  # ... lasts >= 30 ms (a 10 ms low-band level jitters by chance)
+    "loop_tone_rise_db": 15.0,     # tonal event (4096-pt STFT bin): over its own 1 s running median ...
+    "loop_tone_prom_db": 12.0,     # ... over the +-500 Hz neighbours (+-100 Hz excluded) ...
+    "loop_tone_band_rise_db": 4.0,  # ... while its +-1 kHz band rises (H s2001: 3.93 kHz, 18/13/5 dB)
+    "comb_prom_db": 6.0,           # decoder comb (k x 44100/256 Hz above 10 kHz): median line prominence
+    "comb_level_min_db": -75.0,    # ... only when the lines are not far under the loop's spectral peak
+    "near_mono_corr": 0.98,        # stereo card, but the channels are (near) identical ...
+    "near_mono_side_db": -10.0,    # ... or the side channel sits >= 10 dB under the mid (review 2: corr 0.886)
+    # ours (review 2): channel balance of stereo files, broadband and per band (20-150, 150-1k, 1-4k, 4-16k)
+    "lr_balance_max_db": 1.5,
+    "lr_band_balance_max_db": 3.0,
+    # ours (review 2): two onsets in one shot: the >= 2 kHz band peaks, dips and comes back
+    "double_onset_after_ms": (12.0, 40.0),
+    "double_onset_db": -6.0,       # the second peak within 6 dB of the first ...
+    "double_onset_rise_db": 4.0,   # ... and >= 4 dB over the dip between them ...
+    "double_onset_dip_db": -6.0,   # ... after the band fell >= 6 dB under the first (a clank's beating is not)
+    "double_onset_min_rel_db": -30.0,   # only when that band peaks within 30 dB of the full band
 }
 
 # §4.3.3 / §4.4 L2 and learned-layer rules.

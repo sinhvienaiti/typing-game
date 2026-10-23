@@ -33,3 +33,33 @@ def test_make_session_alias_and_anchors(tmp_path):
     s = session.load(path)
     assert [c.role for c in s.items[0].candidates] == ["top", "distinct", "probe"]
     assert s.items[0].probe and s.items[0].loop["interval_ms"] == 200
+
+
+def test_candidate_note_is_shown_but_role_and_path_are_not(tmp_path):
+    """A labelled contrast (batch 0b: the mõ-risk call-chop, rule-blocked howls) shows its note only."""
+    t = np.arange(4800) / 48000
+    files = []
+    for j in range(2):
+        w = tmp_path / f"call-chop__{'AB'[j]}__s1.wav"
+        sf.write(str(w), 0.3 * np.sin(2 * np.pi * (300 + 200 * j) * t) * np.exp(-t / 0.03), 48000)
+        files.append(w)
+    raw = {"schema": "audiolab.board.session/1", "session": "s", "game": "_test", "batch": "0b", "seed": 3,
+           "items": [{"id": "call-chop", "candidates": [
+               {"file": str(files[0]), "role": "top"},
+               {"file": str(files[1]), "role": "contrast-mo-risk", "note": "Đối chứng có chủ ý: tiếng tốc rỗng"}]}]}
+    p = tmp_path / "s.json"
+    p.write_text(json.dumps(raw, ensure_ascii=False), "utf-8")
+    s = session.load(p)
+    view = session.item_view(s.items[0])
+    notes = {c["label"]: c.get("note") for c in view["candidates"]}
+    assert sorted(v for v in notes.values() if v) == ["Đối chứng có chủ ý: tiếng tốc rỗng"]
+    text = json.dumps(view, ensure_ascii=False)
+    assert "contrast-mo-risk" not in text and "call-chop__B" not in text and "top" not in text
+    raw["items"][0]["candidates"][1]["note"] = "x" * 81
+    p.write_text(json.dumps(raw), "utf-8")
+    try:
+        session.load(p)
+    except session.SessionError as exc:
+        assert "note" in str(exc)
+    else:
+        raise AssertionError("a note over 80 characters must be refused")

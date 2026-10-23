@@ -83,7 +83,15 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, ambience, steady wind blowing through a misty pine forest, soft gusts rising and falling, rustling pine needles, stereo field recording'
+    - 'B: Field recording, gentle wind in tall pine trees, soft whooshing gusts, distant creaking branches, calm continuous ambience'
+    - 'C: Wind through a dense conifer forest at dusk, low airy rush, slow gentle gusts, needles rustling softly, quiet, continuous outdoor ambience'
+    - 'D: Seamless loop, wind through a misty pine forest, soft gusts, no birds, 6 s'
+    - 'E: TrackType: SFX, ambience, stereo field recording, wind hissing through pine needles high in the canopy, airy and bright, soft steady gusts, wide and continuous'
+    - 'F: Wide stereo binaural recording in a pine forest on a windy day, constant airy hiss of wind through conifer needles, gentle swells, smooth and even'
+    - 'G: TrackType: SFX, ambience, stereo, light breeze in tall pine trees, fine needle rustle and soft whooshing air, calm, even, continuous, painterly fantasy forest'
+    - 'H: Field recording, stereo, wind moving through a dense pine forest, rich high rustle of countless needles over a soft low rumble, steady and seamless'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -192,4 +200,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #7 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: ''
+notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. E–H thêm ở vòng 2: không nhắc tới chim (chữ ''no birds'' sinh ra tiếng chim), nhấn lá kim và stereo.'

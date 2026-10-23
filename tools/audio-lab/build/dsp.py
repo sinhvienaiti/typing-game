@@ -169,6 +169,40 @@ def tail_trim(x: np.ndarray, floor_db: float, sr: int = SR, keep_ms: float = 5.0
     return x[:end]
 
 
+def exp_cap_tail(x: np.ndarray, sr: int, knee: int, end_db: float = -60.0, smooth_ms: float = 4.0,
+                 end_fade_ms: float = 2.0) -> tuple[np.ndarray, dict]:
+    """Exponential cap on a tail a length cap cut (batch 0b review: never a flat cut then a fade).
+
+    From `knee` a straight line in dB (an exponential decay) runs from the 5 ms level there to
+    `end_db` (re the peak) at the last sample. The sound keeps its own decay where it is already
+    under the line; the gain only falls (no pumping). Ends with a short fade against a click."""
+    y2 = as2d(np.asarray(x, dtype=np.float64))
+    n = y2.shape[0]
+    if n < 4:
+        return y2, {"knee_ms": 0.0, "max_cut_db": 0.0}
+    knee = int(np.clip(knee, 0, n - 2))
+    mono = np.sqrt(np.mean(y2 ** 2, axis=1))
+    w = max(1, min(n, ms_to_n(5.0, sr)))
+    env = np.sqrt(np.convolve(mono ** 2, np.ones(w) / w, mode="same") + 1e-20)
+    env_db = 20 * np.log10(env / (float(env.max()) + 1e-20))
+    start_db = float(env_db[knee])
+    t = np.arange(n)
+    line = np.full(n, np.inf)
+    line[knee:] = start_db + (end_db - start_db) * (t[knee:] - knee) / max(1, n - 1 - knee)
+    g = np.minimum(0.0, line - env_db)
+    g[:knee] = 0.0
+    sw = max(1, min(n, ms_to_n(smooth_ms, sr)))
+    g = np.convolve(g, np.ones(sw) / sw, mode="same")
+    g[:knee] = 0.0
+    g[knee:] = np.minimum.accumulate(g[knee:])
+    out = y2 * (10 ** (g / 20))[:, None]
+    f = min(n, max(2, ms_to_n(end_fade_ms, sr)))
+    out[n - f:] *= (np.linspace(1.0, 0.0, f) ** 2)[:, None]
+    info = {"knee_ms": round(knee / sr * 1000, 1), "start_db": round(start_db, 1), "end_db": end_db,
+            "max_cut_db": round(float(-g.min()), 1), "natural_end_db": round(float(env_db[-1]), 1)}
+    return out, info
+
+
 def saturate(x: np.ndarray, drive_db: float, mix: float = 1.0) -> np.ndarray:
     """Gentle tanh saturation; output peak matches input peak before blending."""
     if drive_db <= 0 or mix <= 0:

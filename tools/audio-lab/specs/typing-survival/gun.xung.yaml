@@ -89,7 +89,11 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, heavy autocannon single shot from a steel turret, deep punch with a sharp crack and a mechanical breech clack, close, dry, no long reverb, industrial'
+    - 'B: Single gunshot, large caliber cannon firing once, powerful low thump and crisp crack, short, close mic, dry, slightly distorted'
+    - 'C: TrackType: SFX, one shot of a heavy machine gun, punchy low-end boom, metallic bolt clack, very short tail, gritty'
+    - 'D: Heavy artillery cannon blast, single shot, deep thump with a sharp transient crack, steel mechanism clank, short, dry, distorted metal, close'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -198,4 +202,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #11 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: ''
+notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'

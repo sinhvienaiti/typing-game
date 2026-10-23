@@ -15,7 +15,7 @@ playback:
   mode: one-shot
   channels: mono
   channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
-  bus: dragon
+  bus: world
   priority: 3
   min_gap_ms: 500
   limit_group: null
@@ -68,13 +68,13 @@ loudness:
     pad_s: 0.4
     true_peak_max_dbtp: -1
     basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
-  bus: dragon
+  bus: world
   bus_gain: 0.75
   bus_gain_db: -2.5
   gain_db: 0
   gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
   relative_db: -2.5
-  pronunciation_duck_db: -3.0
+  pronunciation_duck_db: -6.0
   mix_target:
     metric: lufs-m-max
     range: null

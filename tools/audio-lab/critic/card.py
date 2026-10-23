@@ -57,6 +57,19 @@ def _key_lines(r: dict) -> list[str]:
     if s and s.get("applies"):
         lines.append(f"Mối nối: bước nhảy {vn(s.get('jump_excess_dbfs'), 1, 'dBFS')}  ·  RMS lệch {vn(s.get('rms_diff_db'), 2, 'dB')}"
                      f"  ·  trọng tâm lệch {vn((s.get('centroid_diff_rel') or 0) * 100, 1, '%')}")
+    ls, sig = m.get("loop_spectrum"), m.get("loop_signature") or {}
+    if ls:
+        st = m.get("stereo_correlation")
+        lines.append(f"Vòng: trên 8 kHz {vn((ls.get('ltas_share_above_8k') or 0) * 100, 1, '%')}  ·  4–10 kHz "
+                     f"{vn((ls.get('ltas_share_4k_10k') or 0) * 100, 1, '%')}  ·  nghiêng {vn(ls.get('ltas_tilt_db_oct'), 2, 'dB/oct')}"
+                     f"  ·  lược giải mã {vn(ls.get('comb_median_prom_db'), 1, 'dB')}  ·  gõ {sig.get('knocks', 0)}"
+                     f"  ·  chiêm chiếp {sig.get('chirps', 0)}  ·  dải có/mất {sig.get('bands', 0)}"
+                     f"  ·  tương quan L/R {vn(st, 3) if st is not None else 'mono'}"
+                     + (f"  ·  trái − phải {vn(m.get('lr_balance_db'), 1, 'dB')}  ·  bên/giữa {vn(m.get('side_mid_db'), 1, 'dB')}"
+                        if st is not None else ""))
+    if m.get("hf_reonset_db") is not None:
+        lines[1] += (f"  ·  dải >2 kHz bật lại {vn(m.get('hf_reonset_db'), 1, 'dB')} sau {vn(m.get('hf_reonset_ms'), 0, 'ms')}"
+                     f" (lên {vn(m.get('hf_reonset_rise_db'), 1, 'dB')})")
     return lines
 
 
@@ -150,6 +163,13 @@ def render(r: dict, ctx: dict, png: str, blind: bool = False) -> None:
     if head > 0.0005:
         ax.axvspan(0, head * k, color="#9e9e9e", alpha=0.35, label=f"im lặng đầu {vn(head * 1000, 1)} ms")
     ax.axvline(onset * k, color="g", lw=1, ls="--", label="đầu tiếng (10 %)")
+    sig_ev = ((m.get("loop_signature") or {}).get("events")) or []
+    for j, e in enumerate(sig_ev[:12]):     # loop signature: knocks (gõ), chirps (chiếp), bands (dải)
+        col = {"knock": "#d81b60", "chirp": "#6a1b9a"}.get(e["kind"], "#ef6c00")
+        ax.axvline(e["t"] * k, color=col, lw=1.2, alpha=0.8,
+                   label=("dấu vòng: gõ / chiếp / dải có-mất" if j == 0 else None))
+        txt = {"knock": "gõ", "chirp": "chiếp"}.get(e["kind"]) or f"dải {e['hz'] / 1000:.1f}k"
+        ax.text(e["t"] * k, 1.0, txt, color=col, fontsize=8, va="bottom")
     ax.set_xlim(0, max(t[-1], 1e-6))
     ax.set_ylim(-1.12, 1.12)
     ax.set_title("Dạng sóng (đường đỏ: 0 dBFS)", loc="left", fontsize=10)
@@ -203,9 +223,24 @@ def render(r: dict, ctx: dict, png: str, blind: bool = False) -> None:
                  "không nghe trên mức này", loc="left", fontsize=10)
     ax.set_xlabel(xl)
 
-    # average spectrum
+    # average spectrum (beds: long-term average of the loop with its per-second spread, comb region)
     ax = fig.add_subplot(gs[1, 6:])
-    if "spectrum" in ctx:
+    if "loop_spectrum" in ctx:
+        L = ctx["loop_spectrum"]["ltas"]
+        f, p = L["f"], L["psd"]
+        sel = f >= 20
+        ref = p[sel].max() + 1e-20
+        ax.fill_between(f[sel], pdb(L["p10"][sel] / ref), pdb(L["p90"][sel] / ref), color="#90caf9", alpha=0.5, lw=0)
+        ax.semilogx(f[sel], pdb(p[sel] / ref), lw=0.7, color="#0d47a1")
+        ax.axvspan(10000, sr / 2, color="#ffcdd2", alpha=0.45, lw=0)
+        ax.axvspan(4000, 10000, color="#c8e6c9", alpha=0.45, lw=0)
+        ax.set_xlim(20, sr / 2)
+        ax.set_ylim(-90, 3)
+        cp = (m.get("loop_spectrum") or {}).get("comb_median_prom_db")
+        ax.set_title(f"Phổ dài hạn của vòng (xanh nhạt: P10–P90 từng giây; hồng: vùng lược, nhô {vn(cp, 1)} dB)",
+                     fontsize=9, loc="left")
+        ax.set_xlabel("Hz")
+    elif "spectrum" in ctx:
         f, avg = ctx["spectrum"]
         sel = f >= 20
         ax.semilogx(f[sel], pdb(avg[sel] / (avg[sel].max() + 1e-20)), lw=0.9)
@@ -213,8 +248,8 @@ def render(r: dict, ctx: dict, png: str, blind: bool = False) -> None:
             ax.axvspan(lo, hi, color=c, alpha=0.6, lw=0)
         ax.set_xlim(20, sr / 2)
         ax.set_ylim(-80, 3)
-    ax.set_title("Phổ trung bình (xanh: sub, cam: ù, tím: giọng 1–4k)", fontsize=9, loc="left")
-    ax.set_xlabel("Hz")
+        ax.set_title("Phổ trung bình (xanh: sub, cam: ù, tím: giọng 1–4k)", fontsize=9, loc="left")
+        ax.set_xlabel("Hz")
 
     # loudness envelope (full width on the blind card: it has no L2 panel)
     ax = fig.add_subplot(gs[2, :] if blind else gs[2, :6])

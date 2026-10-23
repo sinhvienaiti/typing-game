@@ -2,7 +2,7 @@
 
 Bộ công cụ làm âm cho các game gõ chữ. Nó tạo ứng viên, chấm bằng "tai AI" nhiều lớp, dựng bản cuối kèm hồ sơ giấy phép, rồi cho chủ dự án nghe mù trên Bảng Nghe. Kế hoạch gốc: [`docs/games/AUDIO_PIPELINE.md`](../../docs/games/AUDIO_PIPELINE.md). Mục 4 (bộ phê bình), 5 (vòng tạo), 7 (Bảng Nghe), 10 (giấy phép) và 11 (bố cục) là hợp đồng của thư mục này.
 
-Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md).
+Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md). Phiên Stable Audio 3 vòng 2 (lô 0b): [`SESSION_0B.md`](SESSION_0B.md).
 
 ## Trạng thái (23/10/2026)
 
@@ -24,8 +24,9 @@ Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESS
 **Stable Audio 3: bước 0 đã xong (23/10/2026).**
 
 - Chủ dự án là cá nhân, không phải công ty, chưa có doanh thu. Chủ dự án đã tự đăng ký Stability AI Community License; trang xác nhận ghi "successfully activated". Bản ghi: `~/AudioLab/licences/stability-registration.txt`. Dòng chấp nhận và bản giấy phép kèm ngày: `~/AudioLab/licences/licences.jsonl` và các file `*-2026-10-23.txt` cùng thư mục.
-- Mô hình (Small-SFX, Small-Music) cài ở `~/AudioLab/models/stable-audio-3/optimized/mlx` (repo ghim `77e0398c`), trọng số trong `~/AudioLab/models/hf-cache`, công cụ chạy lô ở `~/AudioLab/models/sa3-meta/tools/sa3_batch.py`. Lớp gọi trong `gen/` của Audio Lab sẽ dùng công cụ này.
+- Mô hình (Small-SFX, Small-Music) cài ở `~/AudioLab/models/stable-audio-3/optimized/mlx` (repo ghim `77e0398c`), trọng số trong `~/AudioLab/models/hf-cache`, công cụ chạy lô ở `~/AudioLab/models/sa3-meta/tools/sa3_batch.py`. Lớp gọi `gen/sa3.py` dùng công cụ này ([`gen/README.md`](gen/README.md)).
 - Bản thử 6 id: `~/AudioLab/work/<game>/<id>/sa3-trial/`, phiên nghe `~/AudioLab/review/batch-0b/`.
+- Vòng 2 sau buổi soát bản thử (`bash tools/audio-lab/run.sh batch0b all`): xử lý lại 144 bản thô bằng chuỗi đã sửa (`gen/process.py`), tạo thêm 66 bản ở chỗ buổi soát đòi prompt khác, 3 công thức ghép lớp (`build/recipes/<game>/<id>.sa3-r2.json`), chấm đủ lớp, phiên lô 0b. Báo cáo `~/AudioLab/work/_batch0b/sa3-r2/REPORT.md`.
 - Khi phát hành: chép bản đăng ký và dòng chấp nhận vào `art-src/audio/licences/` và `licences.jsonl` của game. `licence-check` chặn mọi lớp Stable Audio 3 cho đến khi sổ của game có hai thứ đó (mục 10.7).
 
 ## Bố cục
@@ -95,6 +96,9 @@ Mọi lệnh chạy từ gốc repo. `run.sh` nạp `common/env.sh` (không toke
 | `pnpm audio:sampler render -i <nhạc cụ> --notes "0:C5:0.5:100" -o x.wav` | Bộ phát mẫu Python ([`sampler/README.md`](sampler/README.md)) |
 | `pnpm audio:board [--game G] [--batch B]` | Bảng Nghe ở `127.0.0.1:3191` (bận thì 3192) ([`board/README.md`](board/README.md)) |
 | `pnpm audio:board make-session <critic out>… --game G --batch B --session S` | Phiên nghe từ danh sách nghe của bộ phê bình (`from-critic` là tên cũ) |
+| `bash tools/audio-lab/run.sh sa3 plan\|run --spec CARD.yaml [--variant E] [--seeds 2001-2006] [--seconds 1\|2\|3\|10] --run R` | Stable Audio 3 từ thẻ spec: bản float, hồ sơ từng ứng viên, dòng sổ ([`gen/README.md`](gen/README.md)) |
+| `bash tools/audio-lab/run.sh process <raw>… --spec CARD.yaml --out DIR [--notch-comb] [--whole]` | Đầu ra mô hình thành ứng viên nghe: đầu tiếng thật, đuôi hàm mũ, kênh theo thẻ, cắt lược, vòng lặp có kiểm mối nối |
+| `bash tools/audio-lab/run.sh batch0b all\|generate\|process\|recipes\|critic\|link\|session\|report [--force]` | Lô 0b vòng 2 (Stable Audio 3, 6 id) |
 | `pnpm audio:batch0 all [--run R] [--force]` | Chạy trọn lô 0: bộ phát mẫu, dựng 10 công thức, chấm đủ lớp, ghi sổ, kiểm giấy phép, lập phiên lô 0a. File phiên đã có không bị ghi đè nếu thiếu `--force` (chủ dự án có thể đang chấm) |
 | `bash tools/audio-lab/run.sh models [--download]` | Kiểm hoặc tải trọng số bộ phê bình |
 | `bash tools/audio-lab/run.sh libraries [--offline]` | Tải hoặc kiểm lại thư viện CC0 ([`gen/README.md`](gen/README.md)) |
@@ -156,13 +160,13 @@ Trọng số không dùng: `mispeech/midashenglm-0.6b-fp32` (2,6 GB) trong cache
 
 | Thư mục | Việc | Giai đoạn | Phụ trách |
 |---|---|---|---|
-| `common/` | Đường dẫn, môi trường an toàn, `launch.py`, `setup.sh`, `lock.sh`, `fetch_models.py`, `batch0.py` (chạy trọn lô 0) | 0 | Làn Nền tảng; `batch0.py`, `fetch_models.py`: làn Ghép nối |
+| `common/` | Đường dẫn, môi trường an toàn, `launch.py`, `setup.sh`, `lock.sh`, `fetch_models.py`, `batch0.py` (chạy trọn lô 0), `batch0b.py` (lô 0b vòng 2) | 0 | Làn Nền tảng; `batch0.py`, `fetch_models.py`: làn Ghép nối |
 | `critic/` | L1 cổng vệ sinh, L1b dò lỗi do mô hình tạo, L2 đặc trưng, L3–L5 học máy, L6 thẻ ảnh, điểm tổng, danh sách nghe | 1 | Làn Critic |
 | `specs/` | 147 thẻ spec YAML cho 3 game, sinh từ `catalog.ts` và các danh sách âm | 1 | Làn Specs |
 | `board/` | Bảng Nghe v1: nghe mù, cân độ to, Một mình, Lặp 20 lần, Loa nhỏ | 1 | Làn Board |
 | `build/` | Công thức, ghép lớp (thư viện, tổng hợp, bộ phát mẫu), chuỗi cuối, sổ giấy phép, `licence-check`, `critic_link.py` | 1–2 | Làn Build; `recipes/` và `critic_link.py`: làn Ghép nối |
 | `sampler/` | Bộ phát mẫu Python: MIDI (mido) và mẫu CC0, dời tối đa 3 bán cung, chỉnh cao độ theo số đo | 2 | Làn Thư viện và Bộ phát mẫu |
-| `gen/` | Tải thư viện CC0, chỉ mục, dòng giấy phép. Lớp gọi mô hình tạo âm còn **trống** cho đến khi chủ dự án xong bước 0 | 2 | Làn Thư viện và Bộ phát mẫu |
+| `gen/` | Tải thư viện CC0, chỉ mục, dòng giấy phép; lớp gọi Stable Audio 3 (`sa3.py`) và chuỗi xử lý đầu ra mô hình (`process.py`) | 2 | Làn Thư viện và Bộ phát mẫu |
 | `harness/` | Nối với bộ thử của từng game (bài A–J). Không sửa mã game ở đây | 3 | (chưa giao) |
 | `poc/` | Mã hai bản thử, đóng băng để tham chiếu (xem `poc/README.md`) | 0 | Làn Nền tảng |
 

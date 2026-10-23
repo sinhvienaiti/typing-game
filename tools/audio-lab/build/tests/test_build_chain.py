@@ -66,3 +66,27 @@ def test_loop_keeps_head_and_crossfades():
     assert y.shape[0] == x.size - int(0.05 * SR)
     jump = abs(y[-1, 0] - y[0, 0])
     assert jump < 0.05
+
+
+def test_exp_tail_caps_a_ringing_sound_without_a_flat_cut():
+    """Batch 0b review: a ring cut by maxLengthMs decays exponentially to the floor, no cut-then-fade."""
+    t = np.arange(int(0.3 * SR)) / SR
+    x = np.sin(2 * np.pi * 2500 * t) * np.exp(-t / 0.08)            # rings for 200+ ms
+    norm = {"normalise": {"mode": "none"}}
+    old, _ = chain.run(x, SR, _params(maxLengthMs=96, tail={"floorDb": -60, "fadeMs": 25}, headTrim=None, **norm))
+    new, rep = chain.run(x, SR, _params(maxLengthMs=96, tail={"floorDb": -60, "shape": "exp", "kneeMs": 30},
+                                        headTrim=None, **norm))
+    assert new.shape[0] == old.shape[0] == int(0.096 * SR)
+    assert rep["tailShape"]["shape"] == "exp" and rep["tailShape"]["capped"] and rep["tailShape"]["knee_ms"] == 30.0
+
+    def level(y, a_ms, b_ms):
+        seg = y[int(a_ms * SR / 1000):int(b_ms * SR / 1000), 0]
+        return 10 * np.log10(np.mean(seg ** 2) + 1e-20)
+    ref = level(new, 0, 10)
+    steps = [level(new, a, a + 10) - ref for a in range(30, 90, 10)]
+    assert all(b < a for a, b in zip(steps, steps[1:]))               # keeps falling, no flat stretch
+    d = np.diff(steps)
+    assert d.max() - d.min() < 3.0                                     # about straight in dB: exponential
+    assert level(new, 86, 96) - ref < -45                              # reaches the floor at the cap
+    assert level(old, 60, 70) - level(old, 30, 40) > -8                # the old way stays flat, then fades
+    assert np.allclose(new[: int(0.03 * SR), 0], old[: int(0.03 * SR), 0])

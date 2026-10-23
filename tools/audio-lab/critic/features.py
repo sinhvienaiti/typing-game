@@ -111,6 +111,54 @@ def hf_attack(mono: np.ndarray, sr: int, env: dict) -> dict:
     return out
 
 
+def hf_reonset(mono: np.ndarray, sr: int) -> dict:
+    """Two onsets in one shot (ours, batch 0b review 2: gun.xung v3 sounded like two shots 25 ms apart).
+
+    On the >= 2 kHz band (2 ms RMS, 0.5 ms hop): the first peak is the first frame within 6 dB of the
+    band's loudest, climbed to its local top; the band's loudest frame 12-40 ms later is the second
+    peak, the lowest frame between them the dip. Reported: delay, second peak re the first, rise
+    over the dip, dip re the first; None when the band peaks more than 30 dB under the full band."""
+    lo, hi = L1B["double_onset_after_ms"]
+    out = {"hf_reonset_ms": None, "hf_reonset_db": None, "hf_reonset_rise_db": None, "hf_reonset_dip_db": None}
+    y = A.band(mono, sr, 2000.0, min(16000.0, sr / 2 * 0.95), zero_phase=False)
+    t, r = A.frame_rms(y, sr, 2.0, 0.5)
+    _, rf = A.frame_rms(mono, sr, 2.0, 0.5)
+    if not len(r) or r.max() <= 0:
+        return out
+    e = pdb(r ** 2)
+    if float(e.max()) < float(pdb(rf.max() ** 2)) + L1B["double_onset_min_rel_db"]:
+        return out
+    i1 = int(np.argmax(e >= e.max() - 6.0))
+    while i1 + 1 < len(e) and e[i1 + 1] >= e[i1]:
+        i1 += 1
+    sel = np.where((t >= t[i1] + lo / 1000) & (t <= t[i1] + hi / 1000))[0]
+    if not sel.size:
+        return out
+    k = int(sel[int(np.argmax(e[sel]))])
+    dip = float(e[i1:k + 1].min())
+    out.update({"hf_reonset_ms": fnum((t[k] - t[i1]) * 1000, 1), "hf_reonset_db": fnum(e[k] - e[i1], 1),
+                "hf_reonset_rise_db": fnum(e[k] - dip, 1), "hf_reonset_dip_db": fnum(dip - e[i1], 1)})
+    return out
+
+
+LR_BANDS = ((20.0, 150.0), (150.0, 1000.0), (1000.0, 4000.0), (4000.0, 16000.0))
+
+
+def stereo_balance(L: np.ndarray, R: np.ndarray, sr: int) -> dict:
+    """Channel balance (L re R, dB) broadband and in 4 bands, and the side level re the mid (ours,
+    batch 0b review 2: a bed leaning 6 dB right; a 'stereo' bed whose side sat 11.8 dB under the mid)."""
+    def bal(a, b):
+        return float(pdb(np.mean(a ** 2)) - pdb(np.mean(b ** 2)))
+    bands = []
+    for lo, hi in LR_BANDS:
+        if hi >= sr / 2:
+            hi = sr / 2 * 0.95
+        bands.append(fnum(bal(A.band(L, sr, lo, hi), A.band(R, sr, lo, hi)), 1))
+    mid, side = (L + R) / 2, (L - R) / 2
+    return {"lr_balance_db": fnum(bal(L, R), 2), "lr_balance_bands_db": bands,
+            "side_mid_db": fnum(max(-120.0, float(pdb(np.mean(side ** 2)) - pdb(np.mean(mid ** 2)))), 1)}
+
+
 def ending(mono: np.ndarray, sr: int, env: dict) -> dict:
     """Tail end: decayed to -60 dB re peak, or a fade of >= 5 ms (§4.3.1)."""
     peak_rms = float(env["rms"][env["i_pk"]]) + EPS
@@ -312,6 +360,8 @@ def analyze(a: A.Audio, spec: Spec) -> tuple[dict, dict]:
     m.update(dynamics(mono, sr, env))
     if spec.group_obj.percussive:
         m.update(hf_attack(mono, sr, env))
+        if not spec.loop:
+            m.update(hf_reonset(mono, sr))
     m.update(ending(mono, sr, env))
     lo, curves = loudness(data, sr)
     m.update(lo)
@@ -325,6 +375,10 @@ def analyze(a: A.Audio, spec: Spec) -> tuple[dict, dict]:
     m["onset_strength_max"] = fnum(librosa.onset.onset_strength(y=np.pad(y, (0, max(0, 2048 - len(y)))), sr=sr).max())
     if spec.loop or spec.group_obj.loop:
         m["seam"] = seam(data, sr)
+        if spec.group != "music":          # beds: long-term spectrum, decoder comb, loop signature
+            from . import loopcheck
+            m["loop_spectrum"], ctx["loop_spectrum"] = loopcheck.summary(data, sr)
+            m["loop_signature"] = loopcheck.signature(data, sr, loop=True)
     if spec.pitched:
         pm, track = pitch(mono, sr, m["onset_ms"] / 1000)
         m.update(pm)
@@ -334,6 +388,7 @@ def analyze(a: A.Audio, spec: Spec) -> tuple[dict, dict]:
         m["stereo_correlation"] = fnum(np.corrcoef(L, R)[0, 1], 3) if np.std(L) > 0 and np.std(R) > 0 else 1.0
         e_lr = (np.mean(L ** 2) + np.mean(R ** 2)) / 2
         m["mono_loss_db"] = fnum(pdb(e_lr) - pdb(np.mean(((L + R) / 2) ** 2)))
+        m.update(stereo_balance(L, R, sr))
     return m, ctx
 
 

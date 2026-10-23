@@ -1,8 +1,47 @@
-# gen: thư viện CC0 (và sau này là lớp gọi mô hình)
+# gen: thư viện CC0, lớp gọi Stable Audio 3 và chuỗi xử lý đầu ra mô hình
 
-Phần đã có: tải thư viện CC0 của mục 3.4 trong [kế hoạch](../../../docs/games/AUDIO_PIPELINE.md), lập chỉ mục và ghi sổ giấy phép. Lớp gọi Stable Audio 3 và ACE-Step **chưa có**, chờ bước 0 của chủ dự án.
+Phần đã có: tải thư viện CC0 của mục 3.4 trong [kế hoạch](../../../docs/games/AUDIO_PIPELINE.md), lập chỉ mục và ghi sổ giấy phép; lớp gọi Stable Audio 3 (`sa3.py`, chủ dự án đã xong bước 0 ngày 23/10/2026) và chuỗi xử lý đầu ra mô hình thành ứng viên nghe (`process.py`). ACE-Step **chưa có**, chờ chủ dự án chấp nhận giấy phép.
 
-## Lệnh
+## Stable Audio 3 (`sa3.py`)
+
+```bash
+R=tools/audio-lab/run.sh
+bash $R sa3 plan --spec tools/audio-lab/specs/dragon-hold/amb.forest.yaml --variant E --seeds 2001-2006   # in job, không chạy
+bash $R sa3 run  --spec tools/audio-lab/specs/dragon-hold/amb.forest.yaml --variant E --seeds 2001-2006 --run sa3-r2
+bash $R sa3 run  --spec .../enemy.quadruped.howl.yaml --variant A --seconds 3 --tag-seconds --run sa3-r2   # tên ...__A3s__s1001
+```
+
+- **Prompt lấy từ thẻ spec:** `prompt.variants` (mỗi chuỗi dạng `"E: văn bản"` giữ khóa E; chuỗi không khóa được đặt A, B, C… theo thứ tự); thẻ không có biến thể thì dùng `prompt.text`. `--prompt KHÓA=văn bản` thêm prompt tạm, không ghi vào thẻ.
+- **Độ dài tạo chỉ 1, 2, 3, 10 s.** Bản cài này cho ra nhiễu toàn thang ở 0,5 s và 1,5 s (cả CLI `./sa3`). Không ghi `--seconds` thì lấy mức nhỏ nhất chứa được `duration.max_ms` của thẻ cộng khoảng dư (âm ngắn 1 s, tiếng tru 1,1 s → 2 s, nền 6 s → 10 s), rồi cắt sau.
+- **cfg mặc định 1,0** (mục 5.1): negative prompt khi đó không có tác dụng, chỉ được ghi vào hồ sơ (`negative_prompt_written_not_applied`). Bản thử cfg 3 cộng negative không cho kết quả tốt hơn.
+- **Chạy:** `~/AudioLab/models/sa3-meta/tools/batch_run.sh JOB OUTDIR` (mô hình nằm sẵn trong một tiến trình, giống từng byte với CLI), Hugging Face offline, không token. Mỗi lần một mô hình nặng: không chạy cùng lúc với bộ phê bình.
+- **Mỗi ứng viên** trong `~/AudioLab/work/<game>/<id>/<run>/raw/`: `<tên>.wav` (16-bit như CLI, bộ ghi cắt cứng phần |x| > 1), `<tên>.f32.wav` (bản float chưa bị cắt: cổng L1 đọc bản này) và `<tên>.json` (`audiolab.sa3.candidate/1`: prompt, seed, steps, cfg, độ dài, mô hình kèm revision và SHA-256 trọng số, SHA-256 hai file, số đo thô như số đoạn bộ ghi cắt, tương quan stereo, dòng sổ). Ứng viên đã có thì bỏ qua. Báo cáo lô: `raw/_batch-report-<giờ>.json`.
+- **Sổ giấy phép:** `<run>/licences.rows.jsonl` nhận dòng `model` (vai trò `generate`, giấy phép `LicenseRef-Stability-Community-2024`) và hai dòng `acceptance` (bản đăng ký Stability, điều khoản Gemma của bộ mã hóa chữ T5Gemma) qua `build.ledger.append_rows`. Lớp `gen` của công thức ghi `"record": "<tên>.json"`: `build render` kiểm SHA-256 của file với hồ sơ rồi mang các dòng đó và bản giấy phép có ngày vào lần dựng, nên `licence-check` thấy cả dòng mô hình lẫn bản đăng ký (mục 10.7). Hồ sơ của bản thử lô 0b (cũ hơn) không có dòng sổ: bộ dựng tự lập lại từ `install-record.json`.
+
+## Xử lý đầu ra mô hình (`process.py`)
+
+```bash
+bash $R process ~/AudioLab/work/<game>/<id>/sa3-trial/raw ~/AudioLab/work/<game>/<id>/sa3-r2/raw \
+    --spec tools/audio-lab/specs/<game>/<id>.yaml --out ~/AudioLab/work/<game>/<id>/sa3-r2/processed [--notch-comb] [--whole]
+```
+
+Đọc bản float, đổi sang 48 kHz (soxr VHQ), lọc cao 35 Hz, rồi:
+
+| Bước | Âm ngắn | Nền lặp |
+|---|---|---|
+| Đầu tiếng | Mỗi âm là một đoạn mức 10 ms vượt (đỉnh − 30 dB; sinh vật − 40 dB). **Đầu tiếng thật** là điểm bắt đầu đoạn đó, tìm cùng một cách cho mọi cửa sổ, kể cả cửa sổ đầu tiên, không giới hạn lùi; đầu file cũng tính. Đoạn bắt đầu ngay sau đuôi của âm trước (28 ms trước nó trên −30 dB so với đỉnh) là "cắt ngang", không bao giờ làm điểm đầu. Không còn đầu tiếng thật thì ứng viên vào thư mục `<out>-rejected` kèm lý do. **Đầu file chỉ được tin khi có bằng chứng** (vòng soát 2): 1,5 ms đầu thấp hơn đỉnh của âm ≥ 30 dB, hoặc đỉnh dải trên 2 kHz nằm trong 5 ms đầu (âm ngắn; sinh vật chỉ dùng điều kiện mức). Không đạt thì vẫn giữ để chấm máy nhưng ghi `"onset_verified": false` và `onset_note` "đầu tiếng chưa xác minh"; bộ chọn ưu tiên cửa sổ có bằng chứng, và `batch0b` không đưa bản đó vào phiên nghe | — |
+| Cửa sổ | Độ dài tự nhiên (tới −40 dB), chặn ở `max_ms` của thẻ. Sinh vật (hoặc `--whole`) giữ trọn tiếng gọi, kể cả đoạn lớn dần. Không bao giờ qua âm sau; trong một đoạn, phát thứ hai cách ≥ 30 ms, to ngang phát đầu (trong 6 dB) sau một chỗ trũng ≥ 12 dB **kéo dài ≥ 8 ms** thì cửa sổ dừng ở chỗ trũng (loạt đạn giữ phát đầu; chỗ chập chờn ngắn của một tiếng phụt lửa không tính) | Tìm điểm bắt đầu trên lưới 25 ms: khớp mức và màu hai đầu, đều mức, không có tiếng gõ hay chiêm chiếp bên trong, mối nối 50 ms đạt |
+| Loại bỏ | Vào `<out>-rejected` kèm lý do: không có đầu tiếng thật; phát đầu ngắn hơn `min_ms` của thẻ vì phát sau đến sớm; **gõ hai lần** (một tiếng nhỏ hơn ≥ 6 dB, rồi chỗ trũng ≥ 12 dB dưới tiếng chính kéo dài ≥ 8 ms, rồi tiếng chính sau ≥ 20 ms: cắt vào tiếng chính sẽ cắt giữa đuôi tiếng đầu). Tiếng nổ giòn rồi tiếng ùm 14–19 ms sau của súng không phải gõ hai lần. Chạy lại thì một ứng viên chuyển thư mục, không bao giờ nằm ở cả hai | Mối nối vẫn trượt sau 12 lần thử |
+| Đuôi | **Mũ hàm mũ** (`build.dsp.exp_cap_tail`, cũng là `chain.tail.shape: "exp"` của công thức): từ điểm gối, một đường thẳng theo dB (tức tắt dần theo hàm mũ) đi tới −60 dB ở mẫu cuối; âm giữ nguyên chỗ đã nằm dưới đường; độ lợi chỉ giảm. Không còn kiểu cắt phẳng rồi làm mờ | Crossfade công suất đều 500 ms, rồi **kiểm mối nối** bằng chính số đo L1 của bộ phê bình; trượt thì thử điểm khác (tới 12 lần) |
+| Kênh | Theo thẻ: mono theo luật 5.1 (giữa nếu mất ≤ 3 dB) | Theo thẻ: stereo giữ nguyên, ghi tương quan; bản mono nhân đôi được đánh dấu `dual_mono`. **Cân hai kênh theo từng 1/3 octave** (vòng soát 2: H s2004 nghiêng phải 5,9 dB, 6,6 dB dưới 150 Hz nhưng 2,7 dB ở 4–16 kHz): tỉ lệ năng lượng trái/phải dài hạn mỗi 1/3 octave, làm mượt 3 dải, mỗi kênh nhận một nửa chênh lệch qua bộ lọc FIR pha tuyến tính đặt giữa (không trễ). Ghi `lr_balance` (trước, sau) trong `<tên>.proc.json` |
+| Lọc lược | — | `--notch-comb`: ở mỗi vạch k × 44100/256 Hz (172,27 Hz) trên 10 kHz nhô ≥ 3 dB (bộ giải mã của mô hình để lại các vạch này), một bộ lọc đỉnh rộng 24 Hz, pha không, **cắt đúng bằng độ nhô của vạch**: vạch về ngang nền, không thành hố (khấc sâu vô hạn làm vạch tụt 10 dB dưới nền) |
+| Mức | Theo thẻ (`loudness.file`: đỉnh −1 dBTP) | Theo thẻ (LUFS-I −26), giới hạn ≤ 3 dB |
+
+Ra: `<out>/<tên>.wav` (PCM 24-bit), `<tên>.proc.json` (cửa sổ, đầu tiếng, các ứng viên cửa sổ, đuôi, kênh, mối nối, lọc khấc, chuỗi), `SOURCES.json` (một lớp `gen` cho mỗi file, kèm kiểm clip trên **bản float** trong đúng cửa sổ, để `critic run --sources` dùng) và `licences.rows.jsonl`.
+
+`common/batch0b.py` (`run.sh batch0b all`) chạy cả vòng 2 của lô 0b: tạo, xử lý, dựng công thức ghép lớp, chấm, ghi sổ, kiểm giấy phép trên cây thử, lập phiên nghe. Từng bước: `run.sh batch0b generate|process|recipes|critic|link|session|report [--force]`. Phiên đã có không bị ghi đè nếu thiếu `--force`. Báo cáo: `~/AudioLab/work/_batch0b/sa3-r2/REPORT.md` và `summary.json`; hướng dẫn nghe cho chủ dự án: [`SESSION_0B.md`](../SESSION_0B.md).
+
+## Thư viện CC0: lệnh
 
 ```bash
 bash tools/audio-lab/run.sh gen.fetch_libraries              # Kenney (cả 10 gói âm), VCSL, VSCO-2-CE

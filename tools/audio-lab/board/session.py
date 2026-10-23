@@ -21,6 +21,7 @@ MAX_CANDIDATES = len(LETTERS)
 SLUG = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9._-]{0,63}$")
 UNSAFE = re.compile(r"[^A-Za-z0-9._-]+")
 AUDIO_EXT = {".wav", ".wave", ".ogg", ".oga", ".opus", ".flac", ".mp3", ".m4a"}
+MAX_NOTE = 80      # candidate `note`: shown to the owner on purpose (never the role, path or score)
 
 
 class SessionError(ValueError):
@@ -73,6 +74,7 @@ class Candidate:
     label: str = ""
     gains: list[float] = field(default_factory=list)
     measures: list[dict] = field(default_factory=list)
+    note: str = ""                  # owner-visible label (a deliberate contrast, a rule-blocked take)
 
 
 @dataclass
@@ -237,8 +239,11 @@ def _candidate(raw, where: str, base: Path, index: int, critic_dirs: list[Path] 
              for c, (_, named, stale), f in zip(cards, found, files)]
     key = shas[0] if len(shas) == 1 else hashlib.sha256("".join(shas).encode()).hexdigest()
     role = raw.get("role")
+    note = raw.get("note") or ""
+    if not isinstance(note, str) or len(note) > MAX_NOTE:
+        raise _err(where, f"'note' phải là chuỗi tối đa {MAX_NOTE} ký tự")
     return Candidate(index=index, role=role if isinstance(role, str) and role else "", files=files,
-                     shas=shas, cards=cards, critics=critics, key=key)
+                     shas=shas, cards=cards, critics=critics, key=key, note=note.strip())
 
 
 def _item(raw, where: str, base: Path, index: int, sess: dict, seen: set[str]) -> Item:
@@ -370,6 +375,7 @@ def item_view(item: Item) -> dict:
                                            "avoid", "count", "seamless") if k in item.loop},
         "candidates": [
             {"label": c.label,
+             **({"note": c.note} if c.note else {}),
              "files": [{"n": n, "gainDb": g, "durationMs": m.get("duration_ms")}
                        for n, (g, m) in enumerate(zip(c.gains, c.measures))]}
             for c in item.displayed

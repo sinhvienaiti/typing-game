@@ -90,7 +90,14 @@ prompt:
   suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, one low knock of a wooden axe handle on a thick bamboo trunk, hollow woody thud with a few tiny splinter crackles, dry, outdoor, close'
+    - 'B: A single hollow knock on a large bamboo stalk, deep woody tone, short, light cracking of bamboo fibers, recorded outdoors, no reverb'
+    - 'C: TrackType: SFX, wood chop, an axe striking green bamboo once, low dull thock, short dry splinters, village, close mic'
+    - 'D: Single hit of a wooden mallet on a hollow bamboo tube, low resonant tok, quick decay, small wood splinters, dry foley one-shot'
+    - 'E: TrackType: SFX, one deep solid knock of a heavy wooden axe handle against a thick green bamboo trunk, dull low thud, short, a few tiny splinter crackles, dry, outdoor, close'
+    - 'F: One heavy blunt strike of a hardwood club on a thick living bamboo culm, deep dense thump, very short decay, faint fibre crackle, dry outdoor foley'
+    - 'G: TrackType: SFX, single low dull chop into thick green bamboo with the back of an axe, solid dead woody impact, short, close mic, village, dry'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -197,4 +204,4 @@ origin:
     section: 2. Tiếng gõ và lời gọi (bus `typing`)
   plan:
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: ''
+notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. E–G thêm ở vòng 2: họ A (gõ trầm, chắc), tránh ''hollow'', ''tube'', ''tok'' (họ B ra tiếng tốc rỗng giống mõ, TK 22.1).'

@@ -7,6 +7,8 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import numpy as np
+
 from . import artifacts, audio as A, features, hygiene, learned, policy, psycho, report, score
 from . import spec as S
 from .thresholds import LEARNED, SCHEMA_FILE, VERSION
@@ -130,6 +132,36 @@ def _ref_sets(files: list[Path], cards: list[S.Spec], cli_refs: list[str], opts:
     return sets, by_file
 
 
+FLOAT_TWIN = ".f32.wav"
+
+
+def float_twin(p: Path, a: A.Audio) -> tuple | None:
+    """(data, subtype, name) of <stem>.f32.wav next to a 16-bit generator file, when it is the same
+    audio unclipped (gen/sa3.py writes it: the CLI's 16-bit writer hard-clips |x| > 1)."""
+    if p.name.endswith(FLOAT_TWIN) or str(a.subtype).upper() in ("FLOAT", "DOUBLE"):
+        return None
+    tw = p.with_name(p.stem + FLOAT_TWIN)
+    if not tw.is_file():
+        return None
+    try:
+        t = A.load(tw)
+    except Exception:  # noqa: BLE001 - an unreadable twin is ignored, the file itself is gated
+        return None
+    if t.data.shape != a.data.shape or t.sr != a.sr:
+        return None
+    lsb = 2.0 / 2 ** (16 if "16" in str(a.subtype) else 24)
+    if np.max(np.abs(np.clip(t.data, -1.0, 1.0) - a.data)) > 4 * lsb:
+        return None
+    return t.data, t.subtype, tw.name
+
+
+def _drop_twins(files: list[Path]) -> list[Path]:
+    """A raw folder holds x.wav and x.f32.wav: score x.wav once (its clip checks read the twin)."""
+    have = {f.resolve() for f in files}
+    return [f for f in files if not (f.name.endswith(FLOAT_TWIN) and
+                                     f.with_name(f.name[: -len(FLOAT_TWIN)] + ".wav").resolve() in have)]
+
+
 def _score_one(p: Path, name: str, sp: S.Spec, rs: RefSet | None, pol, opts: Options, L: set, tool: dict,
                created: str) -> tuple[dict, tuple]:
     """Measure, gate (L1), flag (L1b) and score (L2) one file. Raises A.LoadError for unusable files."""
@@ -159,7 +191,7 @@ def _score_one(p: Path, name: str, sp: S.Spec, rs: RefSet | None, pol, opts: Opt
     if "L1" in L:
         t1 = time.time()
         g, gctx = hygiene.gate(a.data, a.sr, m, sp, opts.stage, subtype=a.subtype,
-                               source_qa=pol.source_qa(a.sha256))
+                               source_qa=pol.source_qa(a.sha256), clip_twin=float_twin(p, a))
         ctx.update(gctx)
         r["L1"] = g
         r["verdict"] = g["verdict"]
@@ -216,7 +248,7 @@ def run(paths: list[str], spec_path: str | None = None, refs: list[str] | None =
     opts = opts or Options()
     t_all = time.time()
     L = set(opts.layers)
-    files = A.collect(paths)
+    files = _drop_twins(A.collect(paths))
     if not files:
         raise SystemExit("không có file âm nào để chấm")
     cards = S.load_cards(spec_path) if spec_path else []

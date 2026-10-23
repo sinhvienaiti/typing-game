@@ -134,6 +134,11 @@ def detect(a: A.Audio, m: dict, ctx: dict, spec: Spec, ref_stats: dict | None = 
     if a.channels == 2:
         metrics["stereo_correlation"] = m.get("stereo_correlation")
         metrics["mono_loss_db"] = m.get("mono_loss_db")
+        for k in ("lr_balance_db", "lr_balance_bands_db", "side_mid_db"):
+            metrics[k] = m.get(k)
+    if g.percussive and not spec.loop:
+        for k in ("hf_reonset_ms", "hf_reonset_db", "hf_reonset_rise_db", "hf_reonset_dip_db"):
+            metrics[k] = m.get(k)
 
     rs = ref_stats or {}
     src = "default"
@@ -187,10 +192,70 @@ def detect(a: A.Audio, m: dict, ctx: dict, spec: Spec, ref_stats: dict | None = 
             flag("stereo_mismatch", {"correlation": r, "mono_loss_db": loss},
                  {"correlation": L1B["stereo_corr_min"], "mono_loss_db": L1B["mono_loss_max_db"]},
                  f"hai kênh lệch nhau (tương quan {_n(r, 2)}, mất {_n(loss)} dB khi gộp mono)")
+    if a.channels == 2 and spec.group != "music":
+        b, bands = metrics.get("lr_balance_db"), [v for v in (metrics.get("lr_balance_bands_db") or []) if v is not None]
+        worst = max(bands, key=abs) if bands else None
+        if (b is not None and abs(b) > L1B["lr_balance_max_db"]) or (
+                worst is not None and abs(worst) > L1B["lr_band_balance_max_db"]):
+            side = "phải" if (b if b is not None else worst) < 0 else "trái"
+            flag("lr_imbalance", {"balance_db": b, "bands_db": bands},
+                 {"balance_db": L1B["lr_balance_max_db"], "band_db": L1B["lr_band_balance_max_db"]},
+                 f"lệch kênh: trái so với phải {_n(b)} dB (theo dải {', '.join(_n(v) for v in bands)} dB), "
+                 f"nghiêng sang {side}")
+    ro, rr, rd = metrics.get("hf_reonset_db"), metrics.get("hf_reonset_rise_db"), metrics.get("hf_reonset_dip_db")
+    if (ro is not None and rr is not None and rd is not None and ro >= L1B["double_onset_db"]
+            and rr >= L1B["double_onset_rise_db"] and rd <= L1B["double_onset_dip_db"]):
+        flag("double_onset", {"after_ms": metrics.get("hf_reonset_ms"), "second_db": ro, "rise_db": rr, "dip_db": rd},
+             {"second_db": L1B["double_onset_db"], "rise_db": L1B["double_onset_rise_db"],
+              "dip_db": L1B["double_onset_dip_db"], "after_ms": list(L1B["double_onset_after_ms"])},
+             f"hai đầu tiếng: dải trên 2 kHz bật lại {_n(metrics.get('hf_reonset_ms'))} ms sau đỉnh đầu "
+             f"({_n(ro)} dB so với đỉnh đầu, lên {_n(rr)} dB từ chỗ trũng): nghe như hai phát")
     v = metrics.get("noise_floor_dbfs")
     if v is not None and v > L1B["noise_floor_max_dbfs"]:
         flag("noise_floor", v, L1B["noise_floor_max_dbfs"], f"nền nhiễu ở đuôi {_n(v)} dBFS")
+    _loop_flags(a, m, spec, metrics, flag)
     return {"metrics": metrics, "flags": flags, "thresholds_source": src}
+
+
+def _loop_flags(a: A.Audio, m: dict, spec: Spec, metrics: dict, flag) -> None:
+    """Beds (ours, batch 0b review): loop signature, decoder comb lines, near-mono stereo bed."""
+    sig, ls = m.get("loop_signature"), m.get("loop_spectrum")
+    if sig and sig.get("applies"):
+        nb = sig.get("bands", 0)
+        metrics["loop_knocks"], metrics["loop_chirps"], metrics["loop_bands"] = sig["knocks"], sig["chirps"], nb
+        if sig["knocks"] or sig["chirps"] or nb:
+            ev = sig["events"]
+
+            def what(e):
+                if e["kind"] == "knock":
+                    return "thụp trầm dưới 200 Hz" if e.get("band") == "below-200" else "gõ"
+                if e["kind"] == "chirp":
+                    return f"tiếng có cao độ {_n(e['hz'] / 1000, 2)} kHz" if e.get("rule") == "tone" else "chiêm chiếp"
+                return f"dải {_n(e['hz'] / 1000, 1)} kHz lúc có lúc mất"
+            when = ", ".join(f"{_n(e['t'], 2)} s ({what(e)})" for e in ev[:4])
+            flag("loop_signature", {"knocks": sig["knocks"], "chirps": sig["chirps"], "bands": nb,
+                                    "max_knock_db": sig["max_knock_db"], "max_chirp_db": sig["max_chirp_db"],
+                                    "max_band_db": sig.get("max_band_db")},
+                 {"knock_db": L1B["loop_knock_db"], "knock_low_min_ms": L1B["loop_knock_low_min_s"] * 1000,
+                  "chirp_prom_db": L1B["loop_chirp_prom_db"],
+                  "tone": [L1B["loop_tone_rise_db"], L1B["loop_tone_prom_db"], L1B["loop_tone_band_rise_db"]],
+                  "band_range_db": L1B["loop_band_range_db"]},
+                 f"vòng lặp có dấu nhận ra khi lặp: {when}" + (" …" if len(ev) > 4 else ""))
+    if ls:
+        cp, lv = ls.get("comb_median_prom_db"), ls.get("comb_line_level_db")
+        metrics["comb_median_prom_db"] = cp
+        if cp is not None and cp >= L1B["comb_prom_db"] and (lv is None or lv >= L1B["comb_level_min_db"]):
+            flag("decoder_comb", cp, L1B["comb_prom_db"],
+                 f"vạch lược của bộ giải mã (bội 172,27 Hz trên 10 kHz) nhô {_n(cp)} dB: lọc khấc")
+    if spec.loop and spec.stereo_ok and spec.group != "music":
+        r, sm = m.get("stereo_correlation"), m.get("side_mid_db")
+        if a.channels == 1 or (r is not None and r >= L1B["near_mono_corr"]) or (
+                sm is not None and sm <= L1B["near_mono_side_db"]):
+            flag("near_mono", {"correlation": r, "side_mid_db": sm} if a.channels == 2 else 1.0,
+                 {"correlation": L1B["near_mono_corr"], "side_mid_db": L1B["near_mono_side_db"]},
+                 f"thẻ cần nền stereo nhưng hai kênh gần như giống nhau (tương quan {_n(r, 3)}, kênh bên thấp hơn "
+                 f"kênh giữa {_n(-sm if sm is not None else None)} dB)" if a.channels == 2 else
+                 "thẻ cần nền stereo nhưng file là mono")
 
 
 L1B_REF_FEATURES = ("hiss_flatness_tail", "hiss_share_rise_db", "swirl_flux_db", "hf_attack_ms")

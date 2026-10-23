@@ -216,6 +216,10 @@
             },
             "initNoise": {
               "type": "number"
+            },
+            "record": {
+              "type": "string",
+              "description": "Candidate record of gen/sa3.py (audiolab.sa3.candidate/1) next to the file: its sha256 must match `file`; its licence rows (model, acceptance) and dated copies go into the run's ledger."
             }
           }
         },
@@ -539,6 +543,17 @@
             "fadeMs": {
               "type": "number",
               "minimum": 5
+            },
+            "shape": {
+              "enum": [
+                "fade",
+                "exp"
+              ],
+              "description": "fade (default): drop the tail under floorDb, then a fade of fadeMs. exp: an exponential cap from kneeMs (default 35 % of the length, never before the peak + 5 ms) down to floorDb at the last sample; for sounds a maxLengthMs cuts (batch 0b review: no flat cut then fade)."
+            },
+            "kneeMs": {
+              "type": "number",
+              "minimum": 0
             }
           }
         },

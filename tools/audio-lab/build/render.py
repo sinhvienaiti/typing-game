@@ -144,6 +144,8 @@ def _raw_clip_gate(layer: dict, loaded: sources.Loaded, strict: bool) -> dict | 
 def _refuse_bad_source(layer_id: str, loaded: sources.Loaded) -> None:
     """Render-time gate: never mix a disallowed source or a non-commercial model (§3.5, §10.2)."""
     for row in loaded.rows:
+        if row.get("kind") == "acceptance":     # a recorded acceptance (Stability, Gemma), not a source
+            continue
         why = policy.source_problem(row)
         if why:
             raise LicenceError(f"lớp '{layer_id}': nguồn {row.get('path') or row.get('file') or row['key']} bị chặn: {why}")

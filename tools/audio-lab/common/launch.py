@@ -27,6 +27,9 @@ ENTRYPOINTS = {
     "sampler": "sampler",                     # sampler/__main__.py
     "libraries": "gen.fetch_libraries",       # CC0 libraries + SOURCES.jsonl
     "batch0": "common.batch0",                # common/batch0.py: end-to-end run of phase 0-1
+    "batch0b": "common.batch0b",              # common/batch0b.py: batch 0b round 2 (Stable Audio 3)
+    "sa3": "gen.sa3",                         # gen/sa3.py: Stable Audio 3 jobs from spec cards
+    "process": "gen.process",                 # gen/process.py: model output -> review candidates
     "models": "common.fetch_models",          # critic weights in the HF cache (check / --download)
     "test": "pytest",
 }

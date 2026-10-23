@@ -68,6 +68,36 @@ def _ledger_row(ref, ledger_rows: dict[str, dict]) -> dict:
     return ledger_rows[ref]
 
 
+def _gen_record(g: dict, path: Path, sha: str, meta: dict) -> tuple[list[dict], dict[str, Path]]:
+    """Licence rows of a model output from its candidate record (gen/sa3.py), checked by sha256.
+
+    The record must describe this very file (wav16 or float copy) and name the same model; its rows
+    (model, Stability registration, Gemma terms) and dated copies travel with the layer (§10.6)."""
+    if not g.get("record"):
+        return [], {}
+    rp = Path(str(g["record"])).expanduser()
+    rec = json.loads(rp.read_text(encoding="utf-8"))
+    files = rec.get("files") or {}
+    if sha not in {f.get("sha256") for f in files.values() if isinstance(f, dict)}:
+        raise ValueError(f"{path.name}: sha256 không khớp hồ sơ {rp.name} (file đã đổi?)")
+    mdl = rec.get("model") or {}
+    rec_model = mdl.get("id") or (f"{mdl['repo']}@{mdl['revision']}" if mdl.get("repo") and mdl.get("revision") else None)
+    if rec_model and rec_model != g["model"]:
+        raise ValueError(f"{path.name}: lớp ghi mô hình {g['model']}, hồ sơ ghi {rec_model}")
+    for k, rk in (("prompt", "prompt"), ("seed", "seed"), ("cfg", "cfg")):
+        if k not in meta and rec.get(rk) is not None:
+            meta[k] = rec[rk]
+    meta["record"] = rp.name
+    lic = rec.get("licence") if isinstance(rec.get("licence"), dict) else {}
+    rows = [dict(r) for r in lic.get("rows") or [] if isinstance(r, dict)]
+    copies = {k: Path(v) for k, v in (lic.get("copies") or {}).items()}
+    if not rows and str(mdl.get("repo", "")).startswith("stabilityai/stable-audio-3"):
+        from gen import sa3      # records of the batch 0b trial predate the rows: same model, same licence
+        r2, c2 = sa3.licence_rows(sa3.load_install(), mdl.get("dit") or "sm-sfx")
+        rows, copies = r2, {k: Path(v) for k, v in c2.items()}
+    return rows, copies
+
+
 SAMPLER_TOOL = "audiolab-sampler"
 _SAMPLER_CACHE: dict[str, tuple[np.ndarray, dict]] = {}
 
@@ -194,6 +224,7 @@ def load(source: dict, *, libraries: Path, synth_seed: int, ledger_rows: dict[st
         for k in ("prompt", "negativePrompt", "cfg", "seed", "window", "initAudio", "initNoise"):
             if k in g:
                 meta[k] = g[k]
+        rows, copies = _gen_record(g, path, sha, meta)
         if "stability" in meta["licence"].lower():
             meta["licenceAccepted"] = "licences/stability-registration.txt"
         if g.get("initAudio"):
@@ -201,7 +232,7 @@ def load(source: dict, *, libraries: Path, synth_seed: int, ledger_rows: dict[st
             init = Path(str(g["initAudio"])).expanduser()
             if init.is_file():
                 meta["initAudio"] = f"{init.name} sha256:{ledger.sha256_file(init)}"
-        return Loaded(audio, "gen", meta, sha256=sha, raw_qa=raw_qa([clip_scan_file(path, g.get("window"))]))
+        return Loaded(audio, "gen", meta, rows, copies, sha, raw_qa=raw_qa([clip_scan_file(path, g.get("window"))]))
 
     if "sampler" in source:
         return _load_sampler(source["sampler"], libraries, sr)

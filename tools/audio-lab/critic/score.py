@@ -69,13 +69,20 @@ DIST_FEATURES = ("centroid_hz", "duration_ms", "attack_ms", "crest_db", "tail_ms
                  "share_below_150", "share_above_3k")
 
 
+# Beds and music loops: attack, tail and punch mean nothing for a 6 s loop (batch 0b review);
+# colour, level movement and width tell two loops apart.
+LOOP_DIST_FEATURES = ("centroid_hz", "rolloff85_hz", "flatness", "mud_share", "share_below_150", "share_above_3k",
+                      "lufs_m_range_db", "stereo_correlation")
+
+
 def _vec(r: dict) -> np.ndarray:
     m = r.get("metrics") or {}
+    loop = bool((r.get("spec") or {}).get("loop"))
     out = []
-    for f in DIST_FEATURES:
+    for f in (LOOP_DIST_FEATURES if loop else DIST_FEATURES):
         v = m.get(f)
-        v = 0.0 if v is None else float(v)
-        out.append(math.log1p(max(v, 0.0)) if f in ("centroid_hz", "duration_ms", "attack_ms", "tail_ms") else v)
+        v = (1.0 if f == "stereo_correlation" else 0.0) if v is None else float(v)
+        out.append(math.log1p(max(v, 0.0)) if f in ("centroid_hz", "rolloff85_hz", "duration_ms", "attack_ms", "tail_ms") else v)
     return np.array(out)
 
 

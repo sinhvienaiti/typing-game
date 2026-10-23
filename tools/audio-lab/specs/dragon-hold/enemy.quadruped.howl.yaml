@@ -86,7 +86,11 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a short eerie wolf howl, a single call rising then falling, in a dark rotten forest, close, dry, no music'
+    - 'B: Animal vocalization, a lone wolf howling once, brief mournful howl, about one second, outdoor night forest, slight distance'
+    - 'C: TrackType: SFX, monstrous wolf-beast howl, deep and raspy, short, eerie, fantasy creature, dry'
+    - 'D: Field recording of a wild wolf howl, short single howl with a growly start, dark woods, natural, no reverb'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -191,4 +195,4 @@ origin:
   plan:
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: ''
+notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'
