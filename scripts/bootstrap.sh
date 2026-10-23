@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
+GIT_HOST="${TYPING_GAME_GIT_HOST:-}"
 
 case "$TARGET" in
   all|monkeytype|shooter|recall|karaoke|space)
@@ -17,12 +18,61 @@ cd "$ROOT_DIR"
 
 git submodule sync --recursive
 
+submodule_url_for_host() {
+  local path="$1"
+  local repo="${path##*/}"
+
+  case "$GIT_HOST" in
+    "")
+      return 1
+      ;;
+    gitlab)
+      printf 'https://gitlab.com/sinhvienaiti/%s.git\n' "$repo"
+      ;;
+    github)
+      printf 'https://github.com/sinhvienaiti/%s.git\n' "$repo"
+      ;;
+    *)
+      echo "Unsupported TYPING_GAME_GIT_HOST: $GIT_HOST" >&2
+      exit 1
+      ;;
+  esac
+}
+
+apply_submodule_host_override() {
+  [[ -n "$GIT_HOST" ]] || return 0
+
+  local name path url
+  while IFS='|' read -r name path; do
+    url="$(submodule_url_for_host "$path")"
+    git config "submodule.$name.url" "$url"
+    echo "  → $path source: $GIT_HOST"
+  done <<'EOF'
+games/monkeytype|games/monkeytype
+games/vocab-shooter|games/vocab-shooter
+games/recall-typing|games/recall-typing
+games/karaoke-typing|games/karaoke-typing
+games/space-typing|games/space-typing
+EOF
+}
+
+apply_submodule_host_override
+
 update_submodule_branch() {
   local name="$1"
   local path="$2"
   local branch
+  local override_url=""
+
+  if [[ -n "$GIT_HOST" ]]; then
+    override_url="$(submodule_url_for_host "$path")"
+  fi
 
   git submodule update --init --recursive "$path"
+
+  if [[ -n "$override_url" ]]; then
+    git -C "$path" remote set-url origin "$override_url"
+  fi
 
   branch="$(git config -f .gitmodules --get "submodule.$name.branch" || true)"
   if [[ -z "$branch" ]]; then
