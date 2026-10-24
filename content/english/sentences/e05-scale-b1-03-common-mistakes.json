@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.01",
+      "incorrect": "I wish the weather will be good tomorrow as a normal expectation.",
+      "corrections": [
+        "I hope the weather is good tomorrow."
+      ],
+      "explanationVi": "Hope phù hợp với kỳ vọng có khả năng xảy ra; wish diễn tả điều trái với thực tế hoặc khó thành hiện thực.",
+      "targetIds": [
+        "gr.b1.hope-vs-wish"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.02",
+      "incorrect": "You worked all night, so you can be tired for a strong deduction.",
+      "corrections": [
+        "You worked all night, so you must be tired."
+      ],
+      "explanationVi": "Must thể hiện suy đoán gần như chắc chắn; can không dùng theo cách này cho suy đoán khẳng định mạnh.",
+      "targetIds": [
+        "gr.b1.deduction-present"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.03",
+      "incorrect": "The answer must be correct when we are only uncertain.",
+      "corrections": [
+        "The answer could be correct."
+      ],
+      "explanationVi": "Could/may/might phù hợp khi chỉ nói khả năng; must mạnh hơn và thể hiện suy đoán gần chắc chắn.",
+      "targetIds": [
+        "gr.b1.possibility-modals"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.04",
+      "incorrect": "You don't must print the form.",
+      "corrections": [
+        "You don't need to print the form."
+      ],
+      "explanationVi": "Để nói không cần thiết, dùng don't need to hoặc don't have to; không dùng don't must.",
+      "targetIds": [
+        "gr.b1.obligation-need"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.05",
+      "incorrect": "You'd better to take an umbrella.",
+      "corrections": [
+        "You'd better take an umbrella."
+      ],
+      "explanationVi": "Sau had better dùng động từ nguyên mẫu không có to.",
+      "targetIds": [
+        "gr.b1.advice-strength"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.06",
+      "incorrect": "We couldn't allowed to enter the room.",
+      "corrections": [
+        "We weren't allowed to enter the room."
+      ],
+      "explanationVi": "Be allowed to cần đúng dạng của be; ở quá khứ phủ định dùng weren't allowed to.",
+      "targetIds": [
+        "gr.b1.permission-allowed"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.07",
+      "incorrect": "It started to raining after lunch.",
+      "corrections": [
+        "It started raining after lunch."
+      ],
+      "explanationVi": "Sau start có thể dùng V-ing hoặc to + động từ nguyên mẫu, nhưng không dùng to + V-ing.",
+      "targetIds": [
+        "gr.b1.gerund-infinitive-similar"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb1.03.08",
+      "incorrect": "I remember to meet her years ago.",
+      "corrections": [
+        "I remember meeting her years ago."
+      ],
+      "explanationVi": "Ký ức về một sự việc đã xảy ra dùng remember + V-ing; remember to do nói về việc cần nhớ thực hiện.",
+      "targetIds": [
+        "gr.b1.remember-forget-gerund-infinitive"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    }
+  ]
+}

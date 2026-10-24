@@ -1,0 +1,259 @@
+name: English Content Full Validation
+
+on:
+  push:
+    branches:
+      - feature/english-learning-content-system
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate-english-content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Synchronize master-plan status snapshots
+        run: node scripts/sync-english-content-master-plan-status.mjs
+
+      - name: Validate English content schemas
+        run: pnpm english-content:validate
+
+      - name: Validate English review ledger
+        run: pnpm english-content:review:validate
+
+      - name: Validate English E10 batch contracts
+        run: pnpm english-content:e10
+
+      - name: Validate English content licenses
+        run: pnpm english-content:licenses
+
+      - name: Run English content tests
+        run: pnpm english-content:test
+
+      - name: Run E11 runtime-count freshness regression
+        run: node --test scripts/check-english-content-e11-runtime-counts.test.mjs
+
+      - name: Run MultiWOZ editorial handoff tests
+        run: node --test scripts/multiwoz-editorial-handoff-core.test.mjs
+
+      - name: Run MultiWOZ editorial decision tests
+        run: node --test scripts/multiwoz-editorial-decision-core.test.mjs
+
+      - name: Run MultiWOZ dynamic-slice regression
+        shell: bash
+        run: |
+          node --check scripts/process-multiwoz-e11-dialogue-editorial-review.mjs
+          node --check scripts/register-multiwoz-e11-dialogue-batch.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { multiwozEditorialSliceIdentity } from './scripts/process-multiwoz-e11-dialogue-editorial-review.mjs';
+          const identity=multiwozEditorialSliceIdentity({decisionSetId:'e11.dialogue-multiwoz.reviewed-slice-02'});
+          assert.deepEqual(identity,{
+            sliceId:'02',
+            batchId:'e11.dialogue-multiwoz-reviewed-slice-02',
+            authoringRelative:'content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-02.json',
+          });
+          NODE
+
+      - name: Generate runtime artifacts
+        run: pnpm english-content:generate
+
+      - name: Publish runtime artifacts
+        run: pnpm english-content:publish
+
+      - name: Check runtime exact dedupe
+        run: pnpm english-content:dedupe
+
+      - name: Smoke published runtime
+        run: pnpm english-content:runtime:smoke
+
+      - name: Prepare next E11 typing-text review slice
+        run: |
+          pnpm english-content:derive:typing-texts
+          node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
+
+      - name: Synchronize E11 readiness report
+        shell: bash
+        run: |
+          node scripts/report-english-content-e11-readiness.mjs --write
+          git add content/english/reports/e11-readiness.json
+          if git diff --cached --quiet; then
+            echo 'E11 readiness report already synchronized.'
+            exit 0
+          fi
+          git fetch origin feature/english-learning-content-system
+          if [[ "$(git rev-parse FETCH_HEAD)" != "$(git rev-parse HEAD)" ]]; then
+            echo 'Branch advanced while this workflow was running; refusing to overwrite newer work.' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(content): refresh E11 readiness report'
+          git push origin HEAD:feature/english-learning-content-system
+
+      - name: Check E11 readiness report freshness
+        run: node scripts/check-english-content-e11-readiness.mjs
+
+      - name: Prepare E11 sentence review-gap queue
+        run: node scripts/prepare-english-content-e11-review-queue.mjs --per-target-limit 12
+
+      - name: Checkout pinned MultiWOZ source
+        uses: actions/checkout@v4
+        with:
+          repository: budzianowski/multiwoz
+          ref: fe0c8e65cfcd8462bd33c86e35f21addc84ca82b
+          path: .cache/english-content/multiwoz
+          sparse-checkout: |
+            data/MultiWOZ_2.2/train/dialogues_001.json
+            data/MultiWOZ_2.2/train/dialogues_002.json
+            data/MultiWOZ_2.2/train/dialogues_003.json
+            data/MultiWOZ_2.2/train/dialogues_004.json
+            data/MultiWOZ_2.2/train/dialogues_005.json
+            data/MultiWOZ_2.2/train/dialogues_006.json
+            data/MultiWOZ_2.2/train/dialogues_007.json
+            data/MultiWOZ_2.2/train/dialogues_008.json
+            data/MultiWOZ_2.2/train/dialogues_009.json
+            data/MultiWOZ_2.2/train/dialogues_010.json
+            data/MultiWOZ_2.2/train/dialogues_011.json
+            data/MultiWOZ_2.2/train/dialogues_012.json
+            data/MultiWOZ_2.2/train/dialogues_013.json
+            data/MultiWOZ_2.2/train/dialogues_014.json
+            data/MultiWOZ_2.2/train/dialogues_015.json
+            data/MultiWOZ_2.2/train/dialogues_016.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      - name: Prepare pinned MultiWOZ E11 dialogue review slice
+        id: multiwoz_slice
+        shell: bash
+        run: |
+          pnpm english-content:e11:dialogue:next -- --limit=24
+          if [[ -f content/english/review-queues/multiwoz-e11-dialogue-next-review.json ]]; then
+            echo 'has_slice=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_slice=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build controlled MultiWOZ E11 review intake
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
+        run: node scripts/prepare-multiwoz-e11-dialogue-intake.mjs
+
+      - name: Prepare MultiWOZ E11 editorial handoff
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
+        run: node scripts/prepare-multiwoz-e11-dialogue-editorial-handoff.mjs
+
+      - name: Apply reviewed MultiWOZ E11 editorial decisions
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
+        run: node scripts/process-multiwoz-e11-dialogue-editorial-review.mjs
+
+      - name: Register completed MultiWOZ E11 editorial slice
+        if: steps.multiwoz_slice.outputs.has_slice == 'true'
+        shell: bash
+        run: |
+          if [[ ! -f content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json ]]; then
+            echo 'Current MultiWOZ slice has no completed editorial decision set; leaving it as a review artifact.'
+            exit 0
+          fi
+          AUTHORING_PATH="$(node --input-type=module -e "import fs from 'node:fs'; const proposal=JSON.parse(fs.readFileSync('content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json','utf8')); const value=String(proposal.authoringPath??''); if (!/^content\\/english\\/sentences\\/e11-multiwoz-dialogue-reviewed-slice-\\d+\\.json$/.test(value)) process.exit(2); process.stdout.write(value);")"
+          node scripts/register-multiwoz-e11-dialogue-batch.mjs --write
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            "$AUTHORING_PATH" \
+            content/english/batches/manifest.json
+          if git diff --cached --quiet; then
+            echo 'Reviewed MultiWOZ slice is already registered.'
+          else
+            git commit -m 'feat(content): register reviewed MultiWOZ E11 slice'
+            git push origin HEAD:feature/english-learning-content-system
+          fi
+
+      - name: Upload E11 review packets
+        uses: actions/upload-artifact@v4
+        with:
+          name: e11-review-packets-${{ github.sha }}
+          path: |
+            content/english/review-queues/typing-text-e11-next-review.json
+            content/english/review-queues/e11-sentence-gap-next-review.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-review.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-intake.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-editorial-handoff.json
+            content/english/review-queues/multiwoz-e11-dialogue-next-batch-proposal.json
+            content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-*.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Check E11 runtime count report freshness
+        run: node scripts/check-english-content-e11-runtime-counts.mjs
+
+      - name: Audit E11 record-level runtime coverage
+        run: pnpm english-content:e11:records
+
+      - name: Run E12 release maintenance
+        run: pnpm english-content:e12
+
+      - name: Synchronize deterministic E10/E12 metadata
+        shell: bash
+        run: |
+          git add \
+            content/english/releases/2026.10.0.json \
+            content/english/reports/e10-batch-report.json \
+            content/english/reports/e12-quality-sample.json
+          if git diff --cached --quiet; then
+            echo 'E10/E12 generated metadata already synchronized.'
+            exit 0
+          fi
+          git fetch origin feature/english-learning-content-system
+          if [[ "$(git rev-parse FETCH_HEAD)" != "$(git rev-parse HEAD)" ]]; then
+            echo 'Branch advanced while this workflow was running; refusing to overwrite newer work.' >&2
+            exit 1
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore(content): refresh E10/E12 generated metadata'
+          git push origin HEAD:feature/english-learning-content-system
+
+      - name: Audit master-plan acceptance
+        run: node scripts/audit-english-content-master-plan.mjs
+
+      - name: Report E04 runtime coverage
+        run: node scripts/report-english-content-e04.mjs
+
+      - name: Measure enrichment-link evidence
+        run: node scripts/report-english-content-enrichment-links.mjs
+
+      - name: Verify generated source/runtime artifacts are reproducible
+        shell: bash
+        run: |
+          if ! git diff --exit-code -- shared content/english; then
+            echo 'Generated English-content artifacts drift from committed source of truth.' >&2
+            exit 1
+          fi
+
+      - name: Commit synchronized master-plan status
+        shell: bash
+        run: |
+          git status --short
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md
+          if git diff --cached --quiet; then
+            echo 'Master-plan status already synchronized.'
+            exit 0
+          fi
+          git commit -m 'docs(content): sync English content runtime status'
+          git push origin HEAD:feature/english-learning-content-system

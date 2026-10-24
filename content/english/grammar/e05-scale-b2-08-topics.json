@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.b2.word-order-adverbials",
+      "cefr": "B2",
+      "title": "Adverbial position and information flow",
+      "objective": "Place manner/place/time and sentence adverbials for clarity and emphasis.",
+      "concept": {
+        "en": "Adverbial position reflects both grammar and information flow; manner, place, time and sentence adverbials have preferred zones and can shift for emphasis.",
+        "vi": "Vị trí trạng ngữ phản ánh cả ngữ pháp lẫn dòng thông tin; cách thức, nơi chốn, thời gian và trạng ngữ toàn câu có các vị trí ưu tiên và có thể dịch chuyển để nhấn mạnh."
+      },
+      "formulae": [
+        "subject + manner + verb/object where licensed",
+        "verb/object + place + time",
+        "sentence adverbial, + clause"
+      ],
+      "whenToUse": [
+        "Arrange multiple adverbials so the sentence remains natural, unambiguous and appropriately focused."
+      ],
+      "forms": {
+        "positive": [
+          "She carefully reviewed the contract at home last night.",
+          "Fortunately, the team completed the migration ahead of schedule.",
+          "We met at the main office early on Monday morning."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grb2.08.01.1",
+        "sent.grb2.08.01.2",
+        "sent.grb2.08.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.grb2.08.01"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grb2.08.01",
+        "ex.translation.grb2.08.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.b2.word-order-adverbials",
+            "sourceUrl": "content/english/grammar/e05-scale-b2-08-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled B2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.b2.preposition-choice-meaning",
+      "cefr": "B2",
+      "title": "Preposition choice and meaning contrasts",
+      "objective": "Distinguish near-synonymous prepositions in time, place, cause and method contexts.",
+      "concept": {
+        "en": "Near-synonymous prepositions encode different relations of point, area, agent, means, cause and method, so literal translation often selects the wrong one.",
+        "vi": "Các giới từ gần nghĩa mã hóa những quan hệ khác nhau như điểm, vùng, tác nhân, phương tiện, nguyên nhân và cách thức; dịch sát từng từ thường dẫn đến chọn sai."
+      },
+      "formulae": [
+        "arrive at/in",
+        "by + agent/method",
+        "with + instrument",
+        "for + beneficiary/purpose"
+      ],
+      "whenToUse": [
+        "Choose prepositions from the semantic relation and collocation rather than from a one-to-one translation equivalent."
+      ],
+      "forms": {
+        "positive": [
+          "We arrived at the station just before noon.",
+          "The report was written by an independent consultant for the board.",
+          "He solved the problem with a temporary workaround rather than by replacing the server."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grb2.08.02.1",
+        "sent.grb2.08.02.2",
+        "sent.grb2.08.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.grb2.08.02"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grb2.08.02",
+        "ex.translation.grb2.08.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.b2.preposition-choice-meaning",
+            "sourceUrl": "content/english/grammar/e05-scale-b2-08-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled B2 grammar-body content; publication is review-ledger only."
+      }
+    }
+  ]
+}

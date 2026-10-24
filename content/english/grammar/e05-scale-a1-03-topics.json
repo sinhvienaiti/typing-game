@@ -1,0 +1,843 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.present-simple-negative",
+      "cefr": "A1",
+      "title": "Present Simple: negatives",
+      "objective": "Use don't/doesn't + base verb.",
+      "concept": {
+        "en": "Use don't with I/you/we/they and doesn't with he/she/it to make negative Present Simple statements; keep the main verb in the base form.",
+        "vi": "Dùng don't với I/you/we/they và doesn't với he/she/it để tạo câu phủ định ở Hiện tại đơn; động từ chính giữ nguyên dạng cơ bản."
+      },
+      "formulae": [
+        "I/You/We/They + don't + base verb.",
+        "He/She/It + doesn't + base verb."
+      ],
+      "whenToUse": [
+        "Say that a routine, fact, preference or state is not true.",
+        "Contrast a negative Present Simple statement with an affirmative one."
+      ],
+      "forms": {
+        "negative": [
+          "I don't drink coffee after dinner.",
+          "Mina doesn't work on Saturdays.",
+          "They don't live near the station."
+        ]
+      },
+      "variations": [
+        "Do not add third-person -s after doesn't: she doesn't work, not she doesn't works."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.01.1",
+        "sent.gra1.03.01.2",
+        "sent.gra1.03.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.01"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.present-simple-questions"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.present-simple-routines",
+        "gr.a1.present-simple-third-person"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.01",
+        "ex.translation.gra1.03.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.present-simple-negative",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.present-simple-questions",
+      "cefr": "A1",
+      "title": "Present Simple: yes/no questions",
+      "objective": "Form Do/Does questions and short answers.",
+      "concept": {
+        "en": "Use do before I/you/we/they and does before he/she/it to make Present Simple yes/no questions; use the base form of the main verb.",
+        "vi": "Dùng do trước I/you/we/they và does trước he/she/it để tạo câu hỏi yes/no ở Hiện tại đơn; động từ chính dùng dạng cơ bản."
+      },
+      "formulae": [
+        "Do + I/you/we/they + base verb?",
+        "Does + he/she/it + base verb?",
+        "Yes, subject + do/does. / No, subject + don't/doesn't."
+      ],
+      "whenToUse": [
+        "Ask whether a routine, fact, preference or state is true.",
+        "Give a short yes/no answer without repeating the full clause."
+      ],
+      "forms": {
+        "question": [
+          "Do you walk to work every day?",
+          "Does Leo play tennis after school?",
+          "Do they need a ticket for this bus?"
+        ]
+      },
+      "variations": [
+        "After does, use the base verb: Does she live here?, not Does she lives here?"
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.02.1",
+        "sent.gra1.03.02.2",
+        "sent.gra1.03.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.02"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.present-simple-negative",
+        "gr.a1.wh-questions-present"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.present-simple-routines",
+        "gr.a1.present-simple-third-person"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.02",
+        "ex.translation.gra1.03.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.present-simple-questions",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.wh-questions-present",
+      "cefr": "A1",
+      "title": "Present Simple: wh- questions",
+      "objective": "Ask for basic information with who/what/where/when/why/how.",
+      "concept": {
+        "en": "Put a wh-word before a Present Simple question to ask for specific information such as place, time, reason or manner.",
+        "vi": "Đặt từ để hỏi trước câu hỏi ở Hiện tại đơn để hỏi thông tin cụ thể như nơi chốn, thời gian, lý do hoặc cách thức."
+      },
+      "formulae": [
+        "Wh-word + do + I/you/we/they + base verb?",
+        "Wh-word + does + he/she/it + base verb?"
+      ],
+      "whenToUse": [
+        "Ask for a missing piece of basic information.",
+        "Ask about routines, facts and regular activities."
+      ],
+      "forms": {
+        "question": [
+          "Where do you buy your groceries?",
+          "What does Maya do after class?",
+          "When do the shops close?"
+        ]
+      },
+      "variations": [
+        "When who or what is the subject, do/does may not appear; that subject-question pattern is treated separately from this basic object/adverbial pattern."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.03.1",
+        "sent.gra1.03.03.2",
+        "sent.gra1.03.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.03"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.present-simple-questions"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.present-simple-questions"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.03",
+        "ex.translation.gra1.03.03"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.wh-questions-present",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.frequency-adverbs",
+      "cefr": "A1",
+      "title": "Adverbs of frequency",
+      "objective": "Place always/usually/often/sometimes/never naturally.",
+      "concept": {
+        "en": "Frequency adverbs such as always, usually, often, sometimes and never normally go before a main verb but after the verb be.",
+        "vi": "Trạng từ tần suất như always, usually, often, sometimes và never thường đứng trước động từ thường nhưng đứng sau động từ be."
+      },
+      "formulae": [
+        "Subject + frequency adverb + main verb.",
+        "Subject + be + frequency adverb + complement."
+      ],
+      "whenToUse": [
+        "Say how often a routine or repeated action happens.",
+        "Describe how often a state with be is true."
+      ],
+      "forms": {
+        "positive": [
+          "I usually eat breakfast at home.",
+          "She is often busy on Monday mornings.",
+          "We never watch TV during dinner."
+        ]
+      },
+      "variations": [
+        "Sometimes can also appear at the beginning or end of a clause, but the mid-position pattern is the core A1 rule."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.04.1",
+        "sent.gra1.03.04.2",
+        "sent.gra1.03.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.04"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.present-simple-routines",
+        "gr.a1.be-identification-description"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.04",
+        "ex.translation.gra1.03.04"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.frequency-adverbs",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.can-ability",
+      "cefr": "A1",
+      "title": "Can/can't: ability",
+      "objective": "Talk about present ability and inability.",
+      "concept": {
+        "en": "Use can + base verb for present ability and can't/cannot + base verb for present inability.",
+        "vi": "Dùng can + động từ nguyên mẫu để nói về khả năng hiện tại và can't/cannot + động từ nguyên mẫu để nói về việc không có khả năng."
+      },
+      "formulae": [
+        "Subject + can + base verb.",
+        "Subject + can't/cannot + base verb.",
+        "Can + subject + base verb?"
+      ],
+      "whenToUse": [
+        "Say what someone is able or unable to do now.",
+        "Ask about a person's present ability."
+      ],
+      "forms": {
+        "positive": [
+          "I can swim across the pool."
+        ],
+        "negative": [
+          "My little brother can't ride a bike yet."
+        ],
+        "question": [
+          "Can you use this camera?"
+        ]
+      },
+      "variations": [
+        "Can does not change with he/she/it, and the following verb stays in the base form."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.05.1",
+        "sent.gra1.03.05.2",
+        "sent.gra1.03.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.05"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.can-permission-requests"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.subject-pronouns"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.05",
+        "ex.translation.gra1.03.05"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.can-ability",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.can-permission-requests",
+      "cefr": "A1",
+      "title": "Can: permission and simple requests",
+      "objective": "Ask for permission and make simple requests with can.",
+      "concept": {
+        "en": "Use Can I...? to ask for permission and Can you...? to make a simple request; can can also give basic permission.",
+        "vi": "Dùng Can I...? để xin phép và Can you...? để đưa ra yêu cầu đơn giản; can cũng có thể dùng để cho phép ở mức cơ bản."
+      },
+      "formulae": [
+        "Can I + base verb ...?",
+        "Can you + base verb ...?",
+        "You can + base verb ..."
+      ],
+      "whenToUse": [
+        "Ask whether you may do something.",
+        "Ask another person to do something simple.",
+        "Give basic permission."
+      ],
+      "forms": {
+        "question": [
+          "Can I open the window?",
+          "Can you help me with this bag, please?"
+        ],
+        "positive": [
+          "You can use my phone if you need it."
+        ]
+      },
+      "variations": [
+        "Please can make a request sound friendlier, but can is still less formal than could or may."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.06.1",
+        "sent.gra1.03.06.2",
+        "sent.gra1.03.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.06"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.can-ability",
+        "gr.a2.polite-requests-permission"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.can-ability"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.06",
+        "ex.translation.gra1.03.06"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.can-permission-requests",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.imperatives",
+      "cefr": "A1",
+      "title": "Imperatives and instructions",
+      "objective": "Give simple commands, directions and instructions.",
+      "concept": {
+        "en": "Use the base verb without an expressed subject for a simple command or instruction; use don't + base verb for a negative imperative.",
+        "vi": "Dùng động từ dạng cơ bản mà không cần nêu chủ ngữ để đưa ra mệnh lệnh hoặc hướng dẫn đơn giản; dùng don't + động từ cơ bản cho câu mệnh lệnh phủ định."
+      },
+      "formulae": [
+        "Base verb + ...",
+        "Please + base verb + ...",
+        "Don't + base verb + ..."
+      ],
+      "whenToUse": [
+        "Give simple directions or instructions.",
+        "Ask someone to do or not do something directly."
+      ],
+      "forms": {
+        "positive": [
+          "Please close the door quietly.",
+          "Turn left at the next corner."
+        ],
+        "negative": [
+          "Don't touch that hot pan."
+        ]
+      },
+      "variations": [
+        "Please can soften a direct instruction; the grammatical verb form remains the base form."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.07.1",
+        "sent.gra1.03.07.2",
+        "sent.gra1.03.07.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.07"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.can-permission-requests"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.07",
+        "ex.translation.gra1.03.07"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.imperatives",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.a1.object-pronouns",
+      "cefr": "A1",
+      "title": "Object pronouns",
+      "objective": "Use me/you/him/her/it/us/them after verbs and prepositions.",
+      "concept": {
+        "en": "Use object pronouns such as me, him, her, us and them when the pronoun receives the action or follows a preposition.",
+        "vi": "Dùng đại từ tân ngữ như me, him, her, us và them khi đại từ nhận tác động của hành động hoặc đứng sau giới từ."
+      },
+      "formulae": [
+        "verb + me/you/him/her/it/us/them",
+        "preposition + me/you/him/her/it/us/them"
+      ],
+      "whenToUse": [
+        "Replace a known person or thing after a verb.",
+        "Use the correct pronoun after a preposition."
+      ],
+      "forms": {
+        "positive": [
+          "Please call me after work.",
+          "I see her at the gym every morning.",
+          "The teacher gives us homework every Friday."
+        ]
+      },
+      "variations": [
+        "You and it have the same subject and object forms; the other common personal pronouns change form."
+      ],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.gra1.03.08.1",
+        "sent.gra1.03.08.2",
+        "sent.gra1.03.08.3"
+      ],
+      "commonMistakeIds": [
+        "err.gra1.03.08"
+      ],
+      "contrastTopicIds": [
+        "gr.a1.subject-pronouns"
+      ],
+      "dialogueIds": [],
+      "prerequisiteIds": [
+        "gr.a1.subject-pronouns"
+      ],
+      "exerciseIds": [
+        "ex.cloze.gra1.03.08",
+        "ex.translation.gra1.03.08"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-a1-scale-authoring-v3"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "independent-grammar-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v3"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-concept-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.a1.object-pronouns",
+            "sourceUrl": "content/english/grammar/e05-scale-a1-03-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled A1 grammar-body scale content; publication is review-ledger only."
+      }
+    }
+  ]
+}

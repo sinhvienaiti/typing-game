@@ -1,0 +1,773 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.complex-subject-agreement",
+      "cefr": "C1",
+      "title": "Agreement with complex subjects",
+      "objective": "Handle intervening phrases, either/or, neither/nor and quantified noun phrases.",
+      "concept": {
+        "en": "Agreement with complex subjects depends on the grammatical head and on special coordination patterns, not simply the nearest noun.",
+        "vi": "Hòa hợp với chủ ngữ phức phụ thuộc vào head ngữ pháp và các mẫu phối hợp đặc biệt, không chỉ danh từ gần động từ nhất."
+      },
+      "formulae": [
+        "head noun + intervening phrase + agreeing verb",
+        "either X or Y / neither X nor Y + proximity-sensitive agreement"
+      ],
+      "whenToUse": [
+        "Identify the subject head before choosing verb number, then handle correlative coordination according to accepted register norms."
+      ],
+      "forms": {
+        "positive": [
+          "The quality of the supporting documents has improved substantially.",
+          "Neither the regional offices nor the central unit has confirmed the figure.",
+          "A series of unexpected delays has pushed the launch into the next quarter."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.01.1",
+        "sent.grc1.05.01.2",
+        "sent.grc1.05.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.01"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.01",
+        "ex.translation.grc1.05.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.complex-subject-agreement",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.notional-agreement",
+      "cefr": "C1",
+      "title": "Notional and proximity agreement",
+      "objective": "Choose singular/plural agreement with collective and coordinated meanings by dialect/register.",
+      "concept": {
+        "en": "Notional agreement lets meaning, collectivity, or proximity influence number where grammar permits more than one convention.",
+        "vi": "Notional agreement cho phép ý nghĩa, tính tập thể hoặc khoảng cách ảnh hưởng đến số của động từ khi ngữ pháp cho phép nhiều quy ước."
+      },
+      "formulae": [
+        "collective noun + singular/plural verb by meaning and dialect",
+        "notional plural with coordinated concepts"
+      ],
+      "whenToUse": [
+        "Choose agreement consistently with dialect, register, and whether a group is conceptualized as one unit or as members."
+      ],
+      "forms": {
+        "positive": [
+          "The committee has reached its decision after three hours of debate.",
+          "The committee are divided over how the new rule should be interpreted.",
+          "Ten kilometres is too far to walk with this equipment."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.02.1",
+        "sent.grc1.05.02.2",
+        "sent.grc1.05.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.02"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.02",
+        "ex.translation.grc1.05.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.notional-agreement",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.adjective-complementation",
+      "cefr": "C1",
+      "title": "Advanced adjective complementation",
+      "objective": "Choose adjective + that-clause/to-infinitive/preposition patterns and understood subjects.",
+      "concept": {
+        "en": "Adjectives select different complement types and may assign the understood subject of an infinitive in different ways.",
+        "vi": "Tính từ chọn các loại bổ ngữ khác nhau và có thể gán chủ ngữ ngầm của infinitive theo những cách khác nhau."
+      },
+      "formulae": [
+        "adjective + that-clause",
+        "adjective + to-infinitive",
+        "adjective + preposition + -ing/noun"
+      ],
+      "whenToUse": [
+        "Learn adjective-complement pairings and check who is understood to perform an infinitive action."
+      ],
+      "forms": {
+        "positive": [
+          "The board is reluctant to disclose the preliminary estimate before verification.",
+          "We are confident that the revised procedure will withstand external scrutiny.",
+          "She is concerned about relying on a single supplier for a critical component."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.03.1",
+        "sent.grc1.05.03.2",
+        "sent.grc1.05.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.03"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.03",
+        "ex.translation.grc1.05.03"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.adjective-complementation",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.verb-complementation-advanced",
+      "cefr": "C1",
+      "title": "Advanced verb complementation",
+      "objective": "Control complex patterns after perception, causative, reporting and attitude verbs.",
+      "concept": {
+        "en": "Advanced verb complementation distinguishes bare infinitives, to-infinitives, -ing clauses, and object-plus-complement patterns after particular verbs.",
+        "vi": "Verb complementation nâng cao phân biệt bare infinitive, to-infinitive, -ing và mẫu object + complement sau từng động từ."
+      },
+      "formulae": [
+        "verb + object + bare infinitive",
+        "verb + object + to-infinitive",
+        "verb + -ing"
+      ],
+      "whenToUse": [
+        "Treat complement selection as part of the lexical grammar of the controlling verb."
+      ],
+      "forms": {
+        "positive": [
+          "The new evidence led the investigators to reconsider their original timeline.",
+          "We observed the pressure fall steadily as the valve opened.",
+          "The consultant advised the board to postpone the tender until the specifications were clearer."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.04.1",
+        "sent.grc1.05.04.2",
+        "sent.grc1.05.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.04"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.04",
+        "ex.translation.grc1.05.04"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.verb-complementation-advanced",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.resultative-constructions",
+      "cefr": "C1",
+      "title": "Resultative constructions",
+      "objective": "Use patterns such as wipe it clean/paint it red where English licenses result states.",
+      "concept": {
+        "en": "Resultative constructions pair an action with a complement that names the state produced by that action.",
+        "vi": "Resultative construction ghép một hành động với bổ ngữ chỉ trạng thái kết quả do hành động tạo ra."
+      },
+      "formulae": [
+        "verb + object + result adjective/phrase"
+      ],
+      "whenToUse": [
+        "Use resultatives only with combinations that English conventionally licenses; not every verb and adjective can combine productively."
+      ],
+      "forms": {
+        "positive": [
+          "The technicians wiped the sensor housing clean before reassembly.",
+          "The heat warped the plastic panel out of shape.",
+          "They hammered the damaged bracket flat enough to fit the replacement frame."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.05.1",
+        "sent.grc1.05.05.2",
+        "sent.grc1.05.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.05"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.05",
+        "ex.translation.grc1.05.05"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.resultative-constructions",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.causative-ergative-alternation",
+      "cefr": "C1",
+      "title": "Causative and ergative alternation",
+      "objective": "Distinguish verbs used transitively for causing change vs intransitively for change.",
+      "concept": {
+        "en": "Some change-of-state verbs alternate between a transitive causative use and an intransitive ergative use.",
+        "vi": "Một số động từ chỉ thay đổi trạng thái luân phiên giữa cách dùng ngoại động gây biến đổi và nội động biểu thị tự thay đổi."
+      },
+      "formulae": [
+        "agent/cause + change verb + object",
+        "subject + same change verb"
+      ],
+      "whenToUse": [
+        "Use the alternation when English allows the changed entity to appear either as object of a cause or as subject of the change."
+      ],
+      "forms": {
+        "positive": [
+          "The sudden temperature drop cracked the outer seal.",
+          "The outer seal cracked during the overnight freeze.",
+          "Higher interest rates have narrowed the gap, but the gap may widen again next year."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.06.1",
+        "sent.grc1.05.06.2",
+        "sent.grc1.05.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.06"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.06",
+        "ex.translation.grc1.05.06"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.causative-ergative-alternation",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.formal-discourse-markers",
+      "cefr": "C1",
+      "title": "Formal discourse markers",
+      "objective": "Organize arguments with moreover, nonetheless, conversely, hence and related markers.",
+      "concept": {
+        "en": "Formal discourse markers signal addition, concession, contrast, consequence, and inference between stretches of argument.",
+        "vi": "Dấu nối diễn ngôn trang trọng biểu thị bổ sung, nhượng bộ, đối lập, hệ quả và suy luận giữa các phần lập luận."
+      },
+      "formulae": [
+        "sentence connector, + clause",
+        "clause; connector, clause"
+      ],
+      "whenToUse": [
+        "Choose a connector whose logical relation matches the argument and whose register fits formal prose."
+      ],
+      "forms": {
+        "positive": [
+          "The intervention reduced waiting times; moreover, it improved continuity of care.",
+          "The initial forecast was optimistic. Nonetheless, the reserve proved sufficient.",
+          "The sample was not representative; hence, the estimate should not be generalized nationally."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.07.1",
+        "sent.grc1.05.07.2",
+        "sent.grc1.05.07.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.07"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.07",
+        "ex.translation.grc1.05.07"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.formal-discourse-markers",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c1.cohesion-reference-chains",
+      "cefr": "C1",
+      "title": "Cohesion and reference chains",
+      "objective": "Maintain clear pronoun, demonstrative and lexical reference across paragraphs.",
+      "concept": {
+        "en": "Cohesive reference chains keep entities identifiable across sentences by controlling pronouns, demonstratives, repetition, and lexical reformulation.",
+        "vi": "Chuỗi quy chiếu tạo liên kết giúp người đọc theo dõi thực thể qua nhiều câu bằng đại từ, từ chỉ định, lặp có kiểm soát và thay thế từ vựng."
+      },
+      "formulae": [
+        "clear noun phrase → pronoun/demonstrative → lexical restatement"
+      ],
+      "whenToUse": [
+        "Maintain an unambiguous antecedent whenever several possible referents are active in a paragraph."
+      ],
+      "forms": {
+        "positive": [
+          "The commission published two reports. The second document focuses on enforcement, and it recommends a new appeals process.",
+          "A sensor and a controller failed simultaneously. This combination made the original diagnosis difficult.",
+          "The proposal was revised twice. Those changes resolved the pricing issue but not the governance dispute."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc1.05.08.1",
+        "sent.grc1.05.08.2",
+        "sent.grc1.05.08.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc1.05.08"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc1.05.08",
+        "ex.translation.grc1.05.08"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c1.cohesion-reference-chains",
+            "sourceUrl": "content/english/grammar/e05-scale-c1-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C1 grammar-body content; publication is review-ledger only."
+      }
+    }
+  ]
+}

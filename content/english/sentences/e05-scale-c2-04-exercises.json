@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.01",
+      "type": "cloze",
+      "prompt": "The team ___ the new parser against three established systems.",
+      "targetIds": [
+        "gr.c2.word-class-conversion"
+      ],
+      "acceptedAnswers": [
+        "benchmarked"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.01.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.01",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Vui lòng email bản khai đã ký cho ban thư ký trước buổi trưa.",
+      "targetIds": [
+        "gr.c2.word-class-conversion"
+      ],
+      "acceptedAnswers": [
+        "Please email the signed declaration to the secretariat before noon."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.01.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.02",
+      "type": "cloze",
+      "prompt": "___ whether you might have a moment to discuss the revised terms.",
+      "targetIds": [
+        "gr.c2.pragmatic-tense-modal"
+      ],
+      "acceptedAnswers": [
+        "I was wondering"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.02.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.02",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Chúng tôi hy vọng có thể tránh mở lại toàn bộ cuộc đàm phán ở giai đoạn này.",
+      "targetIds": [
+        "gr.c2.pragmatic-tense-modal"
+      ],
+      "acceptedAnswers": [
+        "We were hoping to avoid reopening the entire negotiation at this stage."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.02.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.03",
+      "type": "cloze",
+      "prompt": "The subsidiary ___ the assets shortly before the investigation began.",
+      "targetIds": [
+        "gr.c2.evidential-distancing"
+      ],
+      "acceptedAnswers": [
+        "is reported to have transferred"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.03.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.03",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Theo các báo cáo, một số nhà thầu đã rút lui sau khi lịch trình thay đổi.",
+      "targetIds": [
+        "gr.c2.evidential-distancing"
+      ],
+      "acceptedAnswers": [
+        "Reportedly, several bidders withdrew after the timetable was changed."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.03.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.04",
+      "type": "cloze",
+      "prompt": "___, the team completed it without interrupting customer service.",
+      "targetIds": [
+        "gr.c2.concessive-inversion"
+      ],
+      "acceptedAnswers": [
+        "Difficult though the transition was"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.04.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.04",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Dù giao thức được thiết kế cẩn thận, một chế độ lỗi vẫn bị bỏ sót.",
+      "targetIds": [
+        "gr.c2.concessive-inversion"
+      ],
+      "acceptedAnswers": [
+        "Carefully as the protocol had been designed, one failure mode had been overlooked."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.04.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.05",
+      "type": "cloze",
+      "prompt": "The authorization remains valid ___ the required insurance coverage.",
+      "targetIds": [
+        "gr.c2.formal-conditional-register"
+      ],
+      "acceptedAnswers": [
+        "subject to the operator maintaining"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.05.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.05",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Nếu một trong hai bên chấm dứt thỏa thuận, tài liệu mật phải được hoàn trả trong mười ngày làm việc.",
+      "targetIds": [
+        "gr.c2.formal-conditional-register"
+      ],
+      "acceptedAnswers": [
+        "In the event that either party terminates the agreement, confidential material must be returned within ten working days."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.05.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.cloze.grc2.04.06",
+      "type": "cloze",
+      "prompt": "The committee approved the ___.",
+      "targetIds": [
+        "gr.c2.dense-noun-phrases"
+      ],
+      "acceptedAnswers": [
+        "high-risk supplier data-retention policy review schedule"
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.06.1"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ex.translation.grc2.04.06",
+      "type": "translation",
+      "prompt": "Dịch sang tiếng Anh: Chúng tôi sửa lịch rà soát chính sách lưu giữ dữ liệu áp dụng cho nhà cung cấp rủi ro cao.",
+      "targetIds": [
+        "gr.c2.dense-noun-phrases"
+      ],
+      "acceptedAnswers": [
+        "We revised the schedule for reviewing the data-retention policy applied to high-risk suppliers."
+      ],
+      "sourceSentenceIds": [
+        "sent.grc2.04.06.2"
+      ],
+      "cefr": "C2",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    }
+  ]
+}

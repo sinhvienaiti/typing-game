@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "decisionSetId": "e11.dialogue-multiwoz.reviewed-slice-01",
+  "handoffId": "e11.dialogue-multiwoz.next",
+  "intakeId": "e11.dialogue-multiwoz.next",
+  "recordSetDigest": "57ad43e7853a63ed62ea9e59afb9e56a911bb98e5d0967baa30c37c03324177a",
+  "kind": "english-content-editorial-decision-shard",
+  "decisions": [
+    {
+      "recordId": "dlg.multiwoz.sng0397.json",
+      "sourceDigest": "766cf039a28c7b19cccd03e5aabca7f463d40c6fa7336ed6d6caa1028024247a",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Booking a train from Leicester to Cambridge",
+      "turns": [
+        {"speaker": "Learner", "text": "I'd like a train from Leicester to Cambridge, please!"},
+        {"speaker": "Assistant", "text": "What day will you be travelling?"},
+        {"speaker": "Learner", "text": "I will be travelling on Monday and need to arrive by 14:15."},
+        {"speaker": "Assistant", "text": "Train TR5054 arrives in Cambridge at 13:54. Would you like to book it?"},
+        {"speaker": "Learner", "text": "Yes, please book it for two people."},
+        {"speaker": "Assistant", "text": "Of course. The total is £75.59, payable at the station. Your booking is confirmed. Can I help with anything else?"},
+        {"speaker": "Learner", "text": "No, thank you. That's all."},
+        {"speaker": "Assistant", "text": "All right. Have a great trip!"}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng0725.json",
+      "sourceDigest": "85bce9a661470d7bb8e6a190c640ca80925435cb8eed36592462ccbd1e38e18b",
+      "disposition": "edit",
+      "cefr": "B1",
+      "scenario": "Changing restaurant search criteria after no matches",
+      "turns": [
+        {"speaker": "Learner", "text": "I am looking for a cheap gastropub in the centre of town."},
+        {"speaker": "Assistant", "text": "I could not find any restaurants matching those requirements."},
+        {"speaker": "Learner", "text": "How about something in the south in the moderate price range?"},
+        {"speaker": "Assistant", "text": "I'm still not finding a match. Would you like to change the area, price range, or food type?"},
+        {"speaker": "Learner", "text": "Yes, let's try Chinese food."},
+        {"speaker": "Assistant", "text": "If you're also willing to change the area and price, there are three cheap Chinese restaurants in the centre: Charlie Chan, Rice House, and Golden House."},
+        {"speaker": "Learner", "text": "I'll choose Rice House. What is the postcode?"},
+        {"speaker": "Assistant", "text": "Its postcode is CB1 2BD. Can I help with anything else?"},
+        {"speaker": "Learner", "text": "That's all. Thank you."},
+        {"speaker": "Assistant", "text": "You're welcome. Have a great day!"}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng0955.json",
+      "sourceDigest": "ca55021908b5706398e1b9c36a0acc0886eee220abb56b3e689f4d3ca78ba5ea",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Checking an expensive hotel on the east side of town",
+      "turns": [
+        {"speaker": "Learner", "text": "I need an expensive place to stay, and internet isn't essential."},
+        {"speaker": "Assistant", "text": "I have several options around town. Do you prefer a particular area?"},
+        {"speaker": "Learner", "text": "Yes, the east side, please."},
+        {"speaker": "Assistant", "text": "Express by Holiday Inn Cambridge matches those requirements. Would you like to book it?"},
+        {"speaker": "Learner", "text": "Does it have free parking?"},
+        {"speaker": "Assistant", "text": "Yes, it does."},
+        {"speaker": "Learner", "text": "I'm not ready to book. Could you give me the address and star rating?"},
+        {"speaker": "Assistant", "text": "Certainly. It is a two-star hotel at 15-17 Norman Way, Coldhams Business Park."},
+        {"speaker": "Learner", "text": "No, that's all. Thanks."},
+        {"speaker": "Assistant", "text": "You're welcome. Contact us again if you decide to make a reservation."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng1092.json",
+      "sourceDigest": "a8c06c9828c3affaee76573c2730a01a2087821ee794764d66b017bf20f9b47e",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Asking about an attraction's postcode and entrance fee",
+      "turns": [
+        {"speaker": "Learner", "text": "I'm looking for information about an attraction called The Man on the Moon."},
+        {"speaker": "Assistant", "text": "The Man on the Moon is at 2 Norfolk Street in the centre of town. Would you like more information?"},
+        {"speaker": "Learner", "text": "Yes. Can you tell me its postcode and entrance fee?"},
+        {"speaker": "Assistant", "text": "I don't have entrance-fee information in the database, but the postcode is CB1 2LF. Can I help with anything else?"},
+        {"speaker": "Learner", "text": "No, that's all. Thanks."},
+        {"speaker": "Assistant", "text": "Thank you. Goodbye."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng1151.json",
+      "sourceDigest": "254aec0f9bf4d634bc34dac1441ce757bf48f9303ada97ebe83bd325b1a93d2b",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Finding a boating attraction in north Cambridge",
+      "turns": [
+        {"speaker": "Learner", "text": "I want to go boating somewhere around town. What places do you have listed?"},
+        {"speaker": "Assistant", "text": "There are two options in the centre, one in the north, and one in the east. Do you prefer a particular area?"},
+        {"speaker": "Learner", "text": "I think I'd like somewhere in the north."},
+        {"speaker": "Assistant", "text": "The Riverboat Georgina is in the north of town at Cambridge Passenger Cruisers, Jubilee House. Can I help with anything else?"},
+        {"speaker": "Learner", "text": "That is all I need. Thank you."},
+        {"speaker": "Assistant", "text": "Have a wonderful time in Cambridge!"}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng1344.json",
+      "sourceDigest": "9b2b687af0a3a7fe008e85b06195db15ea1c3b5a852c8eaea5951630bc921a5c",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Finding a cheap four-star guesthouse with Wi-Fi",
+      "turns": [
+        {"speaker": "Learner", "text": "Hello, I'm looking for a cheap four-star place to stay."},
+        {"speaker": "Assistant", "text": "Certainly. Is there a specific area of town where you would like to stay?"},
+        {"speaker": "Learner", "text": "I'd like a guesthouse with free Wi-Fi. Please also give me the area and address."},
+        {"speaker": "Assistant", "text": "Leverton House matches those requirements. It is in the east at 732-734 Newmarket Road. Would you like a reservation?"},
+        {"speaker": "Learner", "text": "No, I'll wait for now. Thanks for your help. Goodbye."},
+        {"speaker": "Assistant", "text": "Glad I could help. Have a good day. Goodbye."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    }
+  ]
+}

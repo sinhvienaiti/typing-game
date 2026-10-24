@@ -1,0 +1,441 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20482.json",
+      "scenario": "Getting the phone number for a moderately priced restaurant in east Cambridge",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Hello. I'm looking for a moderately priced restaurant in the east part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Curry Prince is in the east part of town and is in the moderate price range."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What is their phone number?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Their phone number is 01223 566388."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I needed to know. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye!"
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20482.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_004.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20517.json",
+      "scenario": "Choosing a moderately priced restaurant in east Cambridge and asking for an address",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Hello. I'm looking for a moderately priced restaurant in the east part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Do you have a preference for the type of food?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, I don't mind."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are three options to choose from."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Okay. What are they?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Curry Prince and Rajmahal both serve Indian food, and Pizza Hut Fen Ditton serves Italian food."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I get the address of one of them?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Certainly. Curry Prince is at 451 Newmarket Road, Fen Ditton."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye!"
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20517.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_004.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20528.json",
+      "scenario": "Switching from unusual food to an Indian restaurant in south Cambridge",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Hello. I'm looking for a restaurant on the south side of town that serves unusual food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I'm sorry, but there are no restaurants that match that request. Would you like something different?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Yes. How about Indian food?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I recommend Taj Tandoori. It is in the south part of town."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What is the phone number?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Taj Tandoori's phone number is 01223 412299. Is there anything else I can help you with?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, that's all. Thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye!"
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20528.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_004.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20586.json",
+      "scenario": "Switching from unavailable Russian food to an expensive British restaurant",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for an expensive restaurant that serves Russian food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are no expensive restaurants serving Russian food. Can I help you find another type of food?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Yes. Do you have British food?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Yes, there are six options. Does the part of town matter?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, I don't mind."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I can recommend Graffiti in the west. Would you like more information?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "May I have the phone number?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Their phone number is 01223 277977. Is there anything else I can help you with?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye!"
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20586.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_004.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    }
+  ]
+}

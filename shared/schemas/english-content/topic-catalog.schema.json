@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/topic-catalog.schema.json",
+  "title": "English grammar/usage topic catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "topics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "cefr",
+          "title",
+          "objective"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^gr\\.(a1|a2|b1|b2|c1|c2)\\.[a-z0-9-]+$"
+          },
+          "cefr": {
+            "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/cefr"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 180
+          },
+          "objective": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 500
+          }
+        }
+      }
+    }
+  }
+}

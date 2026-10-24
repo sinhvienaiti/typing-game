@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/e03-sense-review.schema.json",
+  "title": "E03 bilingual sense-alignment review packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "records",
+    "metrics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "oewn+viwiktionary-en"
+    },
+    "records": {
+      "type": "array",
+      "minItems": 300,
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey",
+          "oewnParts",
+          "viEntries",
+          "posReview",
+          "quality"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oewnParts": {
+            "type": "array"
+          },
+          "viEntries": {
+            "type": "array"
+          },
+          "posReview": {
+            "type": "array"
+          },
+          "quality": {
+            "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "bothSources",
+        "oewnOnly",
+        "posOverlapRecords",
+        "oewnSenses",
+        "viSenses"
+      ],
+      "properties": {
+        "requested": {
+          "const": 300
+        },
+        "bothSources": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "oewnOnly": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "posOverlapRecords": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "oewnSenses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "viSenses": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

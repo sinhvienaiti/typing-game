@@ -40,6 +40,24 @@ for (const route of ["/vocabulary/", "/typing-texts/", "/music/"]) {
   }
 }
 
+const englishContentRoutes = {
+  "/english-content/curriculum/": "shared/curriculum/",
+  "/english-content/dictionary/": "shared/dictionary/",
+  "/english-content/grammar/": "shared/grammar/",
+  "/english-content/sentences/": "shared/sentences/",
+  "/english-content/phrases/": "shared/phrases/",
+  "/english-content/attribution/": "shared/attribution/english-content/",
+};
+for (const [name, config] of [["play", nginx], ["dev", devNginx]]) {
+  for (const [route, target] of Object.entries(englishContentRoutes)) {
+    if (!config.includes(`location ${route}`)) failures.push(`${name} nginx is missing English-content route: ${route}`);
+    if (!config.includes(`alias __ROOT_DIR__/${target}`)) failures.push(`${name} nginx route ${route} is not bound to ${target}`);
+  }
+  if (config.includes("location /english-content/ {")) {
+    failures.push(`${name} nginx must not expose the whole shared/ tree under /english-content/`);
+  }
+}
+
 for (const host of [
   "typing-game.local",
   "monkeytype.typing-game.local",

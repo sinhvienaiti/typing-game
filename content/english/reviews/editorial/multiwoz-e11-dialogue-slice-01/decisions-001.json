@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "decisionSetId": "e11.dialogue-multiwoz.reviewed-slice-01",
+  "handoffId": "e11.dialogue-multiwoz.next",
+  "intakeId": "e11.dialogue-multiwoz.next",
+  "recordSetDigest": "57ad43e7853a63ed62ea9e59afb9e56a911bb98e5d0967baa30c37c03324177a",
+  "kind": "english-content-editorial-decision-shard",
+  "decisions": [
+    {
+      "recordId": "dlg.multiwoz.mul2327.json",
+      "sourceDigest": "0ee64d9b3ec48ee83603bc8470f5e77d2953b00b6494bad01705d6e43d5f99eb",
+      "disposition": "edit",
+      "cefr": "B1",
+      "scenario": "Choosing a Chinese restaurant, an attraction, and a taxi",
+      "turns": [
+        {"speaker": "Learner", "text": "I'm looking for an expensive Chinese restaurant with a classy atmosphere."},
+        {"speaker": "Assistant", "text": "There are several expensive Chinese restaurants. Do you have a preferred area of town?"},
+        {"speaker": "Learner", "text": "No. Please recommend one and give me its address and postcode."},
+        {"speaker": "Assistant", "text": "Yu Garden is an expensive Chinese restaurant on the east side of town."},
+        {"speaker": "Learner", "text": "Great. What are the address and postcode?"},
+        {"speaker": "Assistant", "text": "Yu Garden is at 529 Newmarket Road, Fen Ditton, postcode CB5 8PA."},
+        {"speaker": "Learner", "text": "Thanks. Could you also recommend an attraction in the centre of town?"},
+        {"speaker": "Assistant", "text": "Hughes Hall is a college attraction in the centre, and admission is free."},
+        {"speaker": "Learner", "text": "Great. Can I get a taxi from Hughes Hall to Yu Garden at 15:30?"},
+        {"speaker": "Assistant", "text": "Yes. I can arrange a taxi from Hughes Hall to Yu Garden for 15:30."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.pmul1169.json",
+      "sourceDigest": "35913395a8369903270725cd22385b96d0fcc522c30456f6a0e12e60a5c06b05",
+      "disposition": "edit",
+      "cefr": "B1",
+      "scenario": "Changing from a concert hall search to a museum search",
+      "turns": [
+        {"speaker": "Learner", "text": "Can you help me find a concert hall?"},
+        {"speaker": "Assistant", "text": "There is one concert hall in the centre of town. Do you need more information about it?"},
+        {"speaker": "Learner", "text": "I was hoping to find a concert hall in the west part of town."},
+        {"speaker": "Assistant", "text": "I only have a concert hall listed in the centre. Would you consider another type of attraction in the west?"},
+        {"speaker": "Learner", "text": "Yes, I would consider a museum."},
+        {"speaker": "Assistant", "text": "There are several museums in the west part of town."},
+        {"speaker": "Learner", "text": "Can you recommend one and give me the available contact details?"},
+        {"speaker": "Assistant", "text": "Cafe Jello Gallery is one option in the west, at 13 Madalene Street. This listing does not contain complete fee, phone, and postcode details."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.pmul1764.json",
+      "sourceDigest": "1383631947c01ef59d80187b606a9bd9e98a94a627f69a995b7dc290b3ff6901",
+      "disposition": "edit",
+      "cefr": "B1",
+      "scenario": "Checking a guesthouse and planning a train trip",
+      "turns": [
+        {"speaker": "Learner", "text": "A friend recommended the Alexander Bed and Breakfast. What can you tell me about it?"},
+        {"speaker": "Assistant", "text": "It is a four-star guesthouse in the centre of town with free parking and free internet."},
+        {"speaker": "Learner", "text": "That sounds good. What is the address?"},
+        {"speaker": "Assistant", "text": "The address is 56 Saint Barnabas Road."},
+        {"speaker": "Learner", "text": "I will also need a train on Tuesday."},
+        {"speaker": "Assistant", "text": "Where will you be travelling from, and what time do you need to arrive?"},
+        {"speaker": "Learner", "text": "I need to travel from Leicester to Cambridge and arrive by 10:15."},
+        {"speaker": "Assistant", "text": "I can help find a train that arrives by 10:15. Would you like to see the available options before booking?"}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.pmul3528.json",
+      "sourceDigest": "9eba0ac4a597323cc2ce0a55987d5dbb16c1875f886e377952de11a45fdf3853",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Booking a train from Cambridge to Stansted Airport",
+      "turns": [
+        {"speaker": "Learner", "text": "Can you help me find a train on Sunday that arrives by 18:15?"},
+        {"speaker": "Assistant", "text": "Where are you departing from, and what is your destination?"},
+        {"speaker": "Learner", "text": "I'm travelling from Cambridge to Stansted Airport."},
+        {"speaker": "Assistant", "text": "Train TR1526 leaves at 17:40 and arrives at 18:08. Would you like tickets?"},
+        {"speaker": "Learner", "text": "Yes, please. I need tickets for seven people and I'd also like the reference number."},
+        {"speaker": "Assistant", "text": "Certainly. I can book seven tickets on TR1526 and provide the reference number."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.pmul4509.json",
+      "sourceDigest": "87ee5a3067981178efaa85b5879a9fe541e80b5ad9836122db8cc3120b20864c",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Checking information about a hotel and a park",
+      "turns": [
+        {"speaker": "Learner", "text": "I need some information about Cityroomz."},
+        {"speaker": "Assistant", "text": "Cityroomz is a moderately priced hotel in the centre, on Station Road, and it offers free internet."},
+        {"speaker": "Learner", "text": "Thank you. Is it a hotel or a guesthouse?"},
+        {"speaker": "Assistant", "text": "Cityroomz is a hotel. Its address is Sleeperz Hotel, Station Road."},
+        {"speaker": "Learner", "text": "I also need information about Sheep's Green and Lammas Land Park on Fen Causeway. What can you tell me about it?"},
+        {"speaker": "Assistant", "text": "It is a park in the south part of town, around Fen Causeway and Newnham Road, and admission is free."},
+        {"speaker": "Learner", "text": "Thanks, that's all I need. Have a great day!"},
+        {"speaker": "Assistant", "text": "You're welcome. Have a great day too!"}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    },
+    {
+      "recordId": "dlg.multiwoz.sng01520.json",
+      "sourceDigest": "b566a4a718a52302b4c7d1fb849a2ea87decb35255c546d37fa16dfb87a65f0d",
+      "disposition": "edit",
+      "cefr": "A2",
+      "scenario": "Booking a cheap Chinese restaurant",
+      "turns": [
+        {"speaker": "Learner", "text": "I am looking for a cheap restaurant that serves Chinese food."},
+        {"speaker": "Assistant", "text": "The Lucky Star is a cheap Chinese restaurant. Would you like to make a reservation?"},
+        {"speaker": "Learner", "text": "Yes, could you reserve a table for one at 20:00 on Saturday?"},
+        {"speaker": "Assistant", "text": "Your booking was successful. The table will be held for 15 minutes."},
+        {"speaker": "Learner", "text": "Thank you very much for your help!"},
+        {"speaker": "Assistant", "text": "You're welcome. Have a good day!"},
+        {"speaker": "Learner", "text": "Thanks, you too. Goodbye."},
+        {"speaker": "Assistant", "text": "Goodbye, and thank you for using the Cambridge information service."}
+      ],
+      "checks": {"exactDuplicate": "pass", "nearDuplicate": "pass", "grammar": "pass", "naturalness": "pass", "cefr": "pass", "license": "pass"},
+      "notes": "Editorially normalized for grammar, casing, task flow, and learner-facing naturalness while retaining the pinned source intent and provenance."
+    }
+  ]
+}

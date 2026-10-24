@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.construction-register-selection",
+      "cefr": "C2",
+      "title": "Construction choice and register constraints",
+      "objective": "Choose among grammatically possible constructions based on genre, formality and idiomatic frequency.",
+      "concept": {
+        "en": "Several grammatical constructions may express similar content, but their frequency and acceptability vary sharply across conversation, journalism, academic prose, and legal language.",
+        "vi": "Nhiều cấu trúc ngữ pháp có thể diễn đạt nội dung gần nhau, nhưng tần suất và độ phù hợp khác mạnh giữa hội thoại, báo chí, học thuật và pháp lý."
+      },
+      "formulae": [
+        "neutral construction ↔ marked formal/literary/spoken alternative"
+      ],
+      "whenToUse": [
+        "Choose not only a grammatical form but the form conventionally expected by the genre and communicative relationship."
+      ],
+      "forms": {
+        "positive": [
+          "The study found no measurable effect, a wording appropriate for a concise research report.",
+          "No measurable effect did the study find is grammatical only in a highly marked rhetorical context.",
+          "We didn't really get much out of it may suit conversation but not the executive summary."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.01.1",
+        "sent.grc2.05.01.2",
+        "sent.grc2.05.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.01"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.01",
+        "ex.translation.grc2.05.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.construction-register-selection",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.idiomatic-prepositions-c2",
+      "cefr": "C2",
+      "title": "Idiomatic preposition selection at advanced level",
+      "objective": "Resolve low-predictability preposition choices through collocational evidence and context.",
+      "concept": {
+        "en": "At C2, many preposition choices are low-predictability lexical conventions whose alternatives may be grammatical but carry different senses or collocational strength.",
+        "vi": "Ở C2, nhiều lựa chọn giới từ là quy ước từ vựng khó dự đoán; phương án khác có thể vẫn ngữ pháp nhưng mang nghĩa hoặc mức collocation khác."
+      },
+      "formulae": [
+        "lexeme + conventional preposition",
+        "preposition alternatives distinguished by sense/register"
+      ],
+      "whenToUse": [
+        "Use corpus-like collocational knowledge and local meaning rather than one-to-one translation to select the preposition."
+      ],
+      "forms": {
+        "positive": [
+          "The judgment is predicated on the assumption that the disclosure duty applies to both subsidiaries.",
+          "Her account is at odds with the timeline reconstructed from the server logs.",
+          "The committee showed little appetite for reopening a compromise reached after months of negotiation."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.02.1",
+        "sent.grc2.05.02.2",
+        "sent.grc2.05.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.02"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.02",
+        "ex.translation.grc2.05.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.idiomatic-prepositions-c2",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.advanced-punctuation-grammar",
+      "cefr": "C2",
+      "title": "Punctuation as grammatical signaling",
+      "objective": "Use colon, semicolon, dash and comma choices to mark clause relations without run-ons or comma splices.",
+      "concept": {
+        "en": "Punctuation can signal whether clauses are independent, subordinate, appositive, or parenthetical; choices therefore interact with grammatical structure rather than merely pausing speech.",
+        "vi": "Dấu câu có thể báo hiệu mệnh đề độc lập, phụ thuộc, đồng vị hay chen ngang; vì vậy nó tương tác với cấu trúc ngữ pháp chứ không chỉ biểu thị chỗ ngắt."
+      },
+      "formulae": [
+        "independent clause; independent clause",
+        "independent clause: elaboration/list",
+        "dash for marked interruption/supplement",
+        "comma with non-defining supplement"
+      ],
+      "whenToUse": [
+        "Choose punctuation by syntactic relation and discourse function, and avoid comma splices between independent clauses."
+      ],
+      "forms": {
+        "positive": [
+          "The evidence was incomplete; the panel therefore postponed its decision.",
+          "One conclusion was unavoidable: the control had never been tested under peak load.",
+          "The final witness—an engineer who had left the company in 2022—provided the missing maintenance records."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.03.1",
+        "sent.grc2.05.03.2",
+        "sent.grc2.05.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.03"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.03",
+        "ex.translation.grc2.05.03"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.advanced-punctuation-grammar",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.spoken-written-register-shift",
+      "cefr": "C2",
+      "title": "Spoken vs written grammar at C2",
+      "objective": "Recast headers, ellipsis, contractions and dense nominal style appropriately across registers.",
+      "concept": {
+        "en": "Expert register shifting recasts not only vocabulary but grammar: speech favors ellipsis, headers, tails, contractions, and clause chains, whereas formal writing often favors explicit subordination and nominal organization.",
+        "vi": "Chuyển đổi văn phong ở mức cao không chỉ đổi từ vựng mà đổi cả ngữ pháp: lời nói chuộng lược, header/tail, contraction và chuỗi mệnh đề; văn viết trang trọng thường chuộng quan hệ phụ thuộc rõ và tổ chức danh ngữ."
+      },
+      "formulae": [
+        "spoken clause chain/ellipsis ↔ explicit written subordination/nominalization"
+      ],
+      "whenToUse": [
+        "Recast structure to fit the target mode instead of merely replacing informal words with formal synonyms."
+      ],
+      "forms": {
+        "positive": [
+          "Spoken: 'That deadline, we can't move it, can we?' Written: 'The deadline cannot be extended under the current agreement.'",
+          "Spoken: 'We looked at it and it just didn't add up.' Written: 'Our review found the figures internally inconsistent.'",
+          "Spoken: 'Bit of a problem with the backup.' Written: 'The backup procedure presents a material operational risk.'"
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.04.1",
+        "sent.grc2.05.04.2",
+        "sent.grc2.05.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.04"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.04",
+        "ex.translation.grc2.05.04"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.spoken-written-register-shift",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.ambiguity-reference-editing",
+      "cefr": "C2",
+      "title": "Syntactic ambiguity and reference repair",
+      "objective": "Diagnose ambiguous modification/pronoun scope and rewrite for a single intended reading.",
+      "concept": {
+        "en": "Advanced editing identifies competing modifier attachment, pronoun antecedents, quantifier scope, and coordination parses, then rewrites for one intended interpretation.",
+        "vi": "Biên tập nâng cao nhận diện attachment, antecedent đại từ, phạm vi lượng từ và cách phân tích phối hợp cạnh tranh, rồi viết lại để chỉ còn một cách hiểu chủ đích."
+      },
+      "formulae": [
+        "ambiguous structure → explicit antecedent/position/scope marker"
+      ],
+      "whenToUse": [
+        "Resolve ambiguity by naming the referent, moving the modifier, splitting clauses, or repeating a key noun when necessary."
+      ],
+      "forms": {
+        "positive": [
+          "After speaking to Daniel, Priya told the director that Daniel would revise the appendix.",
+          "The policy applies only to contractors who handle personal data, not to all external suppliers.",
+          "Using the laboratory microscope, the researcher examined the sample that had been stored in ethanol."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.05.1",
+        "sent.grc2.05.05.2",
+        "sent.grc2.05.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.05"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.05",
+        "ex.translation.grc2.05.05"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.ambiguity-reference-editing",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.advanced-editing-consistency",
+      "cefr": "C2",
+      "title": "Advanced grammatical editing",
+      "objective": "Repair subtle agreement, parallelism, tense/aspect and complement-pattern inconsistencies in long text.",
+      "concept": {
+        "en": "C2 editing checks agreement, parallelism, tense/aspect, complement selection, and reference across long stretches where each local phrase may look plausible in isolation.",
+        "vi": "Biên tập C2 kiểm tra hòa hợp, song song, thì/thể, lựa chọn bổ ngữ và quy chiếu xuyên đoạn dài nơi từng cụm riêng lẻ có thể trông hợp lý."
+      },
+      "formulae": [
+        "maintain grammatical feature consistency across coordinated and dependent structures"
+      ],
+      "whenToUse": [
+        "Edit globally: identify the controlling timeline, subject heads, complement patterns, and parallel frame before correcting isolated forms."
+      ],
+      "forms": {
+        "positive": [
+          "The report argues that the measure is costly, that it duplicates existing controls, and that it should therefore be withdrawn.",
+          "By the time the second review began, the team had corrected the coding error and had rerun every affected model.",
+          "Neither the revised definition nor the accompanying examples resolve the ambiguity identified by the reviewers."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.05.06.1",
+        "sent.grc2.05.06.2",
+        "sent.grc2.05.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.05.06"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.05.06",
+        "ex.translation.grc2.05.06"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.advanced-editing-consistency",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-05-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    }
+  ]
+}
