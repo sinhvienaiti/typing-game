@@ -11,6 +11,7 @@ const CHECKS=Object.freeze([
 ]);
 const DISPOSITIONS=new Set(["accept","edit","reject"]);
 const CHECK_STATES=new Set(["pass","not-applicable","fail"]);
+const SHA256_PATTERN=/^[0-9a-f]{64}$/;
 
 function requireText(value,label) {
   if (typeof value!=="string"||value.trim()==="") throw new TypeError(label+" must be a non-empty string");
@@ -43,7 +44,11 @@ function normalizeTurns(value,label) {
 function normalizeDecision(decision,source) {
   const recordId=requireText(decision?.recordId,"MultiWOZ editorial decision recordId");
   if (recordId!==source.recordId) throw new TypeError(recordId+": editorial decision recordId does not match the bound handoff entry");
-  if (decision?.sourceDigest!==source.sourceDigest) throw new TypeError(recordId+": editorial decision sourceDigest is stale");
+  const sourceDigest=requireText(decision?.sourceDigest,recordId+" editorial decision sourceDigest");
+  if (!SHA256_PATTERN.test(sourceDigest)) {
+    throw new TypeError(recordId+": editorial decision sourceDigest is stale or malformed; expected 64 lowercase hex characters");
+  }
+  if (sourceDigest!==source.sourceDigest) throw new TypeError(recordId+": editorial decision sourceDigest is stale");
   const disposition=decision?.disposition;
   if (!DISPOSITIONS.has(disposition)) throw new TypeError(recordId+": editorial decision must be accept, edit, or reject");
   const checks={};
