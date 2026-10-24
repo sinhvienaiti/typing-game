@@ -1,0 +1,105 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "leak.drum",
+ "group": "rare-fixed",
+ "family": "nen",
+ "description": "Lô 1 (BATCH1_BRIEF #28): ứng viên thêm 'kẻng cộng trống hội nhỏ'. Kẻng như bản 1 (nhịp 0a), cộng trống khung VCSL đánh mở dưới nhát đầu và nhát cuối (−7 dB, lọc thấp 1,5 kHz để trống không lấn dải giọng).",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "strike",
+   "role": "body",
+   "fadeOutMs": 200,
+   "source": {
+    "sampler": {
+     "instrument": "anvil",
+     "notes": "0:anvil-hit2:0.4:105 0.28:anvil-hit2:0.4:90 0.56:anvil-hit2:0.65:80"
+    }
+   }
+  },
+  {
+   "id": "drum",
+   "role": "body",
+   "gainDb": -7,
+   "fadeOutMs": 200,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1500,
+     "order": 2
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "frame-drum",
+     "notes": "0:hdruml-hit:0.6:100 0.56:hdruml-hit:0.6:88"
+    }
+   }
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 70,
+     "endHz": 45,
+     "glideMs": 80,
+     "durMs": 260,
+     "decayMs": 240
+    }
+   },
+   "gainDb": -12
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "filters": [
+   {
+    "type": "peak",
+    "hz": 2500,
+    "gainDb": -4,
+    "q": 0.8
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 1250,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 900
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 1,
+  "seed": 2802,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/alerts/leak",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

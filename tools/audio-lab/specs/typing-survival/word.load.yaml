@@ -85,7 +85,11 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, heavy rifle magazine slammed into a steel receiver, two-part ka-chunk with a latch click, close, punchy, dry'
+    - 'B: Ammunition magazine inserted and locked into a heavy gun, solid metal clack then a firm latch, close mic, dry'
+    - 'C: TrackType: SFX, gun reload, magazine snapped home into a steel autocannon, chunky metallic ka-chunk, short, industrial'
+    - 'D: Heavy weapon reload, metal slide and latch locking into place, two quick solid clicks, close, dry, satisfying'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -195,4 +199,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #17 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): hai nhịp cách nhau 40–70 ms là cố ý (mục 4.1 #17); cờ double_onset không loại bản khỏi phiên.'

@@ -88,7 +88,9 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, electric arc crackle burning through metal, short sizzling zap, close, dry'
+    - 'B: High voltage spark zap on a steel plate, crisp electric crackle and buzz, very short'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -195,4 +197,4 @@ origin:
     present: true
     section: 4. Súng
   plan: ['AUDIO_PIPELINE §9 #19 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): Stable Audio 3 chỉ làm lớp kết cấu; tách điện và ù 50/100 Hz tổng hợp trong công thức.'

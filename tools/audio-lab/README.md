@@ -2,7 +2,7 @@
 
 Bộ công cụ làm âm cho các game gõ chữ. Nó tạo ứng viên, chấm bằng "tai AI" nhiều lớp, dựng bản cuối kèm hồ sơ giấy phép, rồi cho chủ dự án nghe mù trên Bảng Nghe. Kế hoạch gốc: [`docs/games/AUDIO_PIPELINE.md`](../../docs/games/AUDIO_PIPELINE.md). Mục 4 (bộ phê bình), 5 (vòng tạo), 7 (Bảng Nghe), 10 (giấy phép) và 11 (bố cục) là hợp đồng của thư mục này.
 
-Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md). Phiên Stable Audio 3 vòng 2 (lô 0b): [`SESSION_0B.md`](SESSION_0B.md).
+Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md). Phiên Stable Audio 3 vòng 2 (lô 0b): [`SESSION_0B.md`](SESSION_0B.md). Thiết kế lô 1 (28 id, súng liên thanh, bài thử "Liên thanh 3 s", thứ tự sản xuất): [`BATCH1_BRIEF.md`](BATCH1_BRIEF.md). Lô 1 Rồng Giữ Ải (phiên `1-dh-s2`, `1-dh-s3`): [`SESSION_1_DH.md`](SESSION_1_DH.md). Lô 1 Tuyến Cuối (phiên `1-ts-s1`, `1-ts-s4`): [`SESSION_1_TS.md`](SESSION_1_TS.md). Lô 1 Lời Gọi (phiên `1-td-s5`, `1-td-s6`): [`SESSION_1_TD.md`](SESSION_1_TD.md).
 
 ## Trạng thái (23/10/2026)
 
@@ -100,6 +100,10 @@ Mọi lệnh chạy từ gốc repo. `run.sh` nạp `common/env.sh` (không toke
 | `bash tools/audio-lab/run.sh sa3 plan\|run --spec CARD.yaml [--variant E] [--seeds 2001-2006] [--seconds 1\|2\|3\|10] --run R` | Stable Audio 3 từ thẻ spec: bản float, hồ sơ từng ứng viên, dòng sổ ([`gen/README.md`](gen/README.md)) |
 | `bash tools/audio-lab/run.sh process <raw>… --spec CARD.yaml --out DIR [--notch-comb] [--whole]` | Đầu ra mô hình thành ứng viên nghe: đầu tiếng thật, đuôi hàm mũ, kênh theo thẻ, cắt lược, vòng lặp có kiểm mối nối |
 | `bash tools/audio-lab/run.sh batch0b all\|generate\|process\|recipes\|critic\|link\|session\|report [--force]` | Lô 0b vòng 2 (Stable Audio 3, 6 id) |
+| `bash tools/audio-lab/run.sh common.batch1_dh all\|generate\|process\|bodies\|recipes\|blend\|critic\|link\|context\|session\|report [--run b1] [--force]` | Lô 1, Rồng Giữ Ải (bước P2, P3 của `BATCH1_BRIEF.md`): 12 id, bản dựng trong bối cảnh, phiên `1-dh-s2`, `1-dh-s3`. Báo cáo `~/AudioLab/work/_batch1/dragon-hold/<run>/REPORT.md` |
+| `bash tools/audio-lab/run.sh common.batch1_ts all\|generate\|process\|bodies\|recipes\|critic\|loops\|kills\|t2\|load\|breach\|stage2\|link\|context\|session\|report [--run b1] [--force]` | Lô 1, Tuyến Cuối (bước P1, P4 của `BATCH1_BRIEF.md`): 14 id (gồm `gun.xung.loop`, `gun.xung.tail`, `hit.sub`, `hit.tail` đề xuất), súng ba hướng dựng ở "Liên thanh 3 s", phiên `1-ts-s1`, `1-ts-s4`. Các bước `loops`, `kills`, `t2`, `load`, `breach` dựng bản sửa và chấm riêng từng id để thứ hạng so được. Báo cáo `~/AudioLab/work/_batch1/typing-survival/<run>/REPORT.md` |
+| `bash tools/audio-lab/run.sh common.batch1_td all\|generate\|process\|layers\|recipes\|critic\|link\|context\|session\|report [--run b1] [--force]` | Lô 1, Lời Gọi (bước P5 của `BATCH1_BRIEF.md`): 11 id (thang `word-hit` 7 nốt ba hướng, chuông, Phát Chữ, tên, mực, nổ, xu, `leak`, `call-chop`, `ui-move`, `ui-pick`), bản dựng trong bối cảnh `td-wordhit-chain`, `td-night`, `td-menu`, phiên `1-td-s5`, `1-td-s6`. Báo cáo `~/AudioLab/work/_batch1/typing-defense/<run>/REPORT.md` |
+| `bash tools/audio-lab/run.sh context render --scenario dh-cast-chain --slot ID=FILE… [--focus ID] --out X.wav` | Dựng âm trong cảnh trận bằng bộ trộn giống game (bus, hạ tiếng khi đọc, vang rừng, bộ giới hạn), kèm giọng đọc macOS, số đo bài C và thẻ ảnh ([`context/README.md`](context/README.md)) |
 | `pnpm audio:batch0 all [--run R] [--force]` | Chạy trọn lô 0: bộ phát mẫu, dựng 10 công thức, chấm đủ lớp, ghi sổ, kiểm giấy phép, lập phiên lô 0a. File phiên đã có không bị ghi đè nếu thiếu `--force` (chủ dự án có thể đang chấm) |
 | `bash tools/audio-lab/run.sh models [--download]` | Kiểm hoặc tải trọng số bộ phê bình |
 | `bash tools/audio-lab/run.sh libraries [--offline]` | Tải hoặc kiểm lại thư viện CC0 ([`gen/README.md`](gen/README.md)) |
@@ -164,7 +168,8 @@ Trọng số không dùng: `mispeech/midashenglm-0.6b-fp32` (2,6 GB) trong cache
 | `common/` | Đường dẫn, môi trường an toàn, `launch.py`, `setup.sh`, `lock.sh`, `fetch_models.py`, `batch0.py` (chạy trọn lô 0), `batch0b.py` (lô 0b vòng 2) | 0 | Làn Nền tảng; `batch0.py`, `fetch_models.py`: làn Ghép nối |
 | `critic/` | L1 cổng vệ sinh, L1b dò lỗi do mô hình tạo, L2 đặc trưng, L3–L5 học máy, L6 thẻ ảnh, điểm tổng, danh sách nghe | 1 | Làn Critic |
 | `specs/` | 147 thẻ spec YAML cho 3 game, sinh từ `catalog.ts` và các danh sách âm | 1 | Làn Specs |
-| `board/` | Bảng Nghe v1: nghe mù, cân độ to, Một mình, Lặp 20 lần, Loa nhỏ | 1 | Làn Board |
+| `board/` | Bảng Nghe v1: nghe mù, cân độ to, Một mình, Lặp 20 lần, Loa nhỏ; bối cảnh dựng sẵn "Trong trận thô", "Liên thanh 3 s" (lô 1) | 1 | Làn Board |
+| `context/` | Bản dựng trong bối cảnh trận (lô 1): bộ trộn giống game, kịch bản Rồng Giữ Ải (`dh-cast-chain`, `dh-pack`, `dh-trap`, `dh-beds`), Tuyến Cuối (`ts-xung-3s`, `ts-xung-3s-kills`, `ts-tia-3s`, `ts-breach`) và Lời Gọi (`td-wordhit-chain`, `td-night`, `td-menu`); cách phát "game hiện tại" và "đề xuất", giọng đọc, số đo | 3 (phần đầu) | Lô 1 |
 | `build/` | Công thức, ghép lớp (thư viện, tổng hợp, bộ phát mẫu), chuỗi cuối, sổ giấy phép, `licence-check`, `critic_link.py` | 1–2 | Làn Build; `recipes/` và `critic_link.py`: làn Ghép nối |
 | `sampler/` | Bộ phát mẫu Python: MIDI (mido) và mẫu CC0, dời tối đa 3 bán cung, chỉnh cao độ theo số đo | 2 | Làn Thư viện và Bộ phát mẫu |
 | `gen/` | Tải thư viện CC0, chỉ mục, dòng giấy phép; lớp gọi Stable Audio 3 (`sa3.py`) và chuỗi xử lý đầu ra mô hình (`process.py`) | 2 | Làn Thư viện và Bộ phát mẫu |

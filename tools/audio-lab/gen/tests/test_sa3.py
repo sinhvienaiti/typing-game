@@ -71,6 +71,26 @@ def test_job_has_float_copies_and_keeps_the_negative_prompt_written_only(tmp_pat
         sa3.build_job(card(tmp_path), variants=["Z"], seeds=[1])
 
 
+def test_forbidden_prompts_of_loi_goi_are_refused(tmp_path):
+    """DECISIONS Q2: call-chop B, D and the 'tốc' words are refused for typing-defense; other games are free."""
+    chop = card(tmp_path, id="call-chop", game="typing-defense",
+                prompt={"variants": ["A: one low knock of an axe handle on bamboo", "B: a hollow knock",
+                                     "D: hollow bamboo tube, low resonant tok", "E: deep solid knock on bamboo"]})
+    assert [it["name"] for it in sa3.build_job(chop, variants=["A", "E"], seeds=[1])["items"]] == \
+        ["call-chop__A__s1", "call-chop__E__s1"]
+    for keys in (["B"], ["D"], None):          # None: every prompt of the card, B and D among them
+        with pytest.raises(sa3.Sa3Error):
+            sa3.build_job(chop, variants=keys, seeds=[1])
+    other = card(tmp_path, id="ui-move", game="typing-defense", prompt={"variants": ["A: a temple block tap"]})
+    with pytest.raises(sa3.Sa3Error):
+        sa3.build_job(other, seeds=[1])
+    for text in ("small wooden fish knock", "a mõ hit", "one TOK on wood", "tiếng tốc"):
+        with pytest.raises(sa3.Sa3Error):
+            sa3.check_prompts({"id": "x", "game": "typing-defense"}, {"A": text})
+    sa3.check_prompts({"id": "x", "game": "typing-defense"}, {"A": "a stoked fire, token, hollow woody thud"})
+    sa3.check_prompts({"id": "x", "game": "dragon-hold"}, {"A": "a temple block tap"})
+
+
 def test_licence_rows_are_valid_and_name_the_model_revision(tmp_path):
     rows, copies = sa3.licence_rows(install(), licences=licences(tmp_path), date="2026-10-23")
     keys = {r["key"] for r in rows}

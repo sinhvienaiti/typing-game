@@ -27,18 +27,27 @@ TAGS: list[tuple[str, str]] = [
     ("nhàm khi lặp", "KeyP"),
     ("rẻ tiền", "KeyE"),
     ("khó nghe tiếng đọc", "KeyO"),
+    ("ngắt quãng", "KeyJ"),      # batch 1: dense sounds that fall apart between plays (BATCH1_BRIEF §3.5)
 ]
 TAG_NAMES = [t for t, _ in TAGS]
 
 # Listening contexts (§7). "mix" (Trong trận) arrives with board v2, after phase 3.
+# "rendered" contexts play a file made beforehand for each candidate (context/ module: the candidate in a
+# game-like mix with the other sounds of the scene); a session gives it as `ctx: {key: file}` per candidate,
+# and an item offers the context only when every candidate has one (BATCH1_BRIEF §3.5).
 CONTEXTS = [
     {"key": "alone", "label": "Một mình", "enabled": True},
     {"key": "loop", "label": "Lặp 20 lần", "enabled": True},
     {"key": "small", "label": "Loa nhỏ", "enabled": True, "hint": "Lọc cao 200 Hz"},
+    {"key": "scene", "label": "Trong trận thô", "enabled": True, "rendered": True,
+     "hint": "Bản dựng sẵn qua bộ trộn giống game: chuỗi trận, giọng đọc, nền"},
+    {"key": "burst", "label": "Liên thanh 3 s", "enabled": True, "rendered": True,
+     "hint": "Bản dựng sẵn: 3 s bắn liên tục đúng nhịp game"},
     {"key": "mix", "label": "Trong trận", "enabled": False, "hint": "Có từ giai đoạn 3 (Bảng Nghe v2)"},
 ]
 CONTEXT_KEYS = [c["key"] for c in CONTEXTS]
 ENABLED_CONTEXTS = [c["key"] for c in CONTEXTS if c["enabled"]]
+RENDERED_CONTEXTS = [c["key"] for c in CONTEXTS if c.get("rendered")]
 
 MODES = {
     "hero": "Chọn âm gốc",

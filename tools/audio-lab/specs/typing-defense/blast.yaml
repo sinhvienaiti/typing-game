@@ -89,7 +89,11 @@ prompt:
   suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a burst of paper scraps and dust thrown into the air, dry papery whoosh and flutter, short, close'
+    - 'B: A paper bag of flour bursting, a soft dusty puff with fluttering paper shreds, short, dry outdoor'
+    - 'C: TrackType: SFX, a deep thump of a large wooden drum with a burst of paper scraps and dust, short, dry, village'
+    - 'D: A large frame drum struck once with a cloud of torn paper bursting out, deep round thud and papery flutter, short, dry outdoor'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -201,4 +205,4 @@ origin:
     present: true
     section: 3. Trận và làng (bus `world`)
   plan: ['AUDIO_PIPELINE §9 #26 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF #26): A, B là lớp giấy, bụi cho công thức (trống khung VCSL hoặc timpani VSCO-2-CE bên dưới); C, D là bản Stable Audio 3 nguyên khối để so.'

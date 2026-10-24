@@ -306,3 +306,18 @@ def test_stereo_bed_is_levelled_per_band():
     assert max(abs(v) for v in rep["after"]["bands_db"]) < 1.0
     same, rep2 = P.balance_stereo(np.stack([L, L], axis=1), SR)
     assert not rep2["applied"]
+
+
+def test_two_part_keeps_an_intended_ka_chunk():
+    """word.load (batch 1): a light 'ka' 40 ms before the main 'chunk' is the design, not a flam."""
+    def knock(n, f, tau):
+        t = np.arange(n) / SR
+        return np.sin(2 * np.pi * f * t) * np.exp(-t / tau)
+    x = np.zeros(int(0.4 * SR))
+    a, b = int(0.010 * SR), int(0.050 * SR)
+    x[a:a + int(0.2 * SR)] += 0.25 * knock(int(0.2 * SR), 700, 0.040)
+    x[b:b + int(0.2 * SR)] += 1.0 * knock(int(0.2 * SR), 650, 0.030)
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=250, min_ms=200, max_ms=300)
+    p.two_part = True
+    res = P.process_oneshot(x[:, None], SR, p)
+    assert res["usable"] and res["pre_hit"] is None and res["two_part"]["main_ms"] >= 35

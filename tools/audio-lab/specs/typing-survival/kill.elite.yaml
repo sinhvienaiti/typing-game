@@ -89,7 +89,11 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, large armored machine creature exploding, heavy metal tearing, deep boom, close, industrial'
+    - 'B: Big armored robot blows apart, thick steel ripping and a deep explosion thump, debris, short'
+    - 'C: TrackType: SFX, heavy mech destroyed, deep metallic explosion, tearing steel plates, electrical discharge crackle'
+    - 'D: Armored war machine explodes, deep boom with crunching steel and sparks, gritty, close, dry'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -196,4 +200,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: ['AUDIO_PIPELINE §9 #16 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng tia điện tổng hợp 2–8 kHz trong công thức.'

@@ -89,7 +89,11 @@ prompt:
   suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a soft puff of an ink-soaked paper bag popping, muffled, short, close, dry'
+    - 'B: A wet paper ball squashed once, a soft muffled pop with a tiny splash, short, gentle, close foley'
+    - 'C: TrackType: SFX, a small cloud of soot puffing out, soft breathy poof, papery, very short, dry'
+    - 'D: A damp paper lantern collapsing softly, a muffled thup with a light paper crinkle, short, dry outdoor'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -207,4 +211,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #25 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF #25): hai hướng cho bảng phong cách (S5): A, B ''giấy ướt bục''; C, D ''phụt khói, giấy''.'

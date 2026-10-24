@@ -87,7 +87,11 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small metal creature shattering, crunchy breaking metal, scattering shards, low boom, short, close, dry'
+    - 'B: Small robot bug crushed and breaking apart, crunchy metal fragments scattering, quick, dry, gritty, close'
+    - 'C: TrackType: SFX, small metal creature bursts into pieces, metal shards scatter and ring briefly in a steel hall, crunchy, short'
+    - 'D: Tiny mechanical drone explodes into scrap, crunchy metal break with shards bouncing on steel, short metallic echo'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -197,4 +201,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #15 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): hai hướng cho bảng phong cách: A, B vỡ khô; C, D vỡ có vang.'

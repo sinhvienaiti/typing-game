@@ -117,8 +117,13 @@ function audioCtx() {
   return AU.ctx;
 }
 function audioUrl(it, label, n) { return `/api/audio/${enc(S.sess.session)}/${enc(it.key)}/${label}/${n}`; }
-function buffer(it, label, n) {
-  const url = audioUrl(it, label, n);
+function ctxUrl(it, label, key) { return `/api/ctx/${enc(S.sess.session)}/${enc(it.key)}/${label}/${enc(key)}`; }
+// A rendered context (scene, burst) plays a file made for each candidate; only items that have one offer it.
+function ctxInfo(key) { return S.cfg.contexts.find((x) => x.key === key); }
+function isRendered(key) { const c = ctxInfo(key); return !!(c && c.rendered); }
+function available(it, c) { return !!c && c.enabled && (!c.rendered || (it && (it.rendered || []).includes(c.key))); }
+function buffer(it, label, n, url) {
+  url = url || audioUrl(it, label, n);
   if (AU.buffers.has(url)) return Promise.resolve(AU.buffers.get(url));
   if (!AU.pending.has(url)) {
     const p = fetch(url)
@@ -181,7 +186,8 @@ async function play(pos, { set = false, once = false } = {}) {
   if (cand) d.listens[cand.label] = (d.listens[cand.label] || 0) + 1;
   const out = output(ctxKey);
   try {
-    if (ctxKey === "loop" && !once) await playLoop(it, set ? null : cand, out, token);
+    if (isRendered(ctxKey)) await playRendered(it, cand, ctxKey, out, token);
+    else if (ctxKey === "loop" && !once) await playLoop(it, set ? null : cand, out, token);
     else await playOnce(it, cand, out, token);
   } catch (err) {
     say(err.message, "err");
@@ -195,6 +201,15 @@ async function playOnce(it, cand, out, token) {
   const t0 = AU.ctx.currentTime + 0.03;
   source(buf, out, t0, 1, cand.files[n].gainDb);
   AU.play = { label: cand.label, kind: "once", t0, dur: buf.duration, n, of: cand.files.length, events: [] };
+  animate();
+}
+async function playRendered(it, cand, key, out, token) {
+  if (!cand) { say("Chọn một bản để nghe bản dựng.", "warn"); return; }
+  const buf = await buffer(it, cand.label, 0, ctxUrl(it, cand.label, key));
+  if (token !== AU.token) return;
+  const t0 = AU.ctx.currentTime + 0.03;
+  source(buf, out, t0, 1, 0);          // renders of one item share one level, set when they were made
+  AU.play = { label: cand.label, kind: "once", t0, dur: buf.duration, n: 0, of: 1, events: [] };
   animate();
 }
 async function playLoop(it, cand, out, token) {
@@ -342,13 +357,13 @@ function select(pos, autoplay) {
 }
 function setContext(key) {
   const c = S.cfg.contexts.find((x) => x.key === key);
-  if (!c || !c.enabled) return;
+  if (!available(cur(), c)) return;
   stopAudio();
   S.ctx = key;
   renderHead(); renderCards();
 }
 function stepContext(dir) {
-  const keys = S.cfg.contexts.filter((c) => c.enabled).map((c) => c.key);
+  const keys = S.cfg.contexts.filter((c) => available(cur(), c)).map((c) => c.key);
   setContext(keys[(keys.indexOf(S.ctx) + dir + keys.length) % keys.length]);
 }
 
@@ -501,9 +516,9 @@ function renderHead() {
         it.desc ? h("span", { class: "desc" }, it.desc) : null)),
     h("div", {},
       h("nav", { class: "ctxs", "aria-label": "Bối cảnh nghe" },
-        S.cfg.contexts.map((c) => h("button", {
+        S.cfg.contexts.filter((c) => !c.rendered || available(it, c)).map((c) => h("button", {
           class: (c.key === S.ctx ? "on " : "") + (it.contexts.includes(c.key) ? "sug" : ""),
-          disabled: !c.enabled, title: c.hint || (it.contexts.includes(c.key) ? "Gợi ý cho họ âm này" : ""),
+          disabled: !available(it, c), title: c.hint || (it.contexts.includes(c.key) ? "Gợi ý cho họ âm này" : ""),
           onclick: () => setContext(c.key),
         }, c.key === "loop" ? `Lặp ${it.loop.count || 20} lần` : c.label, !c.enabled ? h("small", {}, " (giai đoạn 3)") : null))),
       h("div", { class: "ctxhint" }, kbd("↑"), " ", kbd("↓"), " đổi bối cảnh · ", ctxHint(it))));
@@ -515,6 +530,7 @@ function ctxHint(it) {
     return `${p.count || 20} lần, cách ~${fmt(p.interval_ms, 0)} ms, ±${fmt(p.cents, 0)} cent, ±${fmt(p.db, 1)} dB`;
   }
   if (S.ctx === "small") return `lọc cao ${fmt(S.cfg.smallSpeakerHz, 0)} Hz`;
+  if (isRendered(S.ctx)) return ctxInfo(S.ctx).hint || "bản dựng sẵn";
   return "phát riêng từng bản";
 }
 

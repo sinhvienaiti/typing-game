@@ -88,7 +88,9 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, big fire burst, a whoosh of roaring flames flaring up and dying down, warm, half a second, close, outdoor'
+    - 'B: Large bonfire flare-up, sudden roaring flame burst with crackling embers, short, warm, organic, recorded close'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -198,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: ['AUDIO_PIPELINE §9 #4 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): lớp bùng lửa 300–500 ms đặt trên công thức của fire.impact.a (BATCH1_BRIEF #4).'

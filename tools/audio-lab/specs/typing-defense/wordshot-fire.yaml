@@ -85,7 +85,11 @@ prompt:
   suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a fast bamboo arrow whoosh with a dry paper flutter, one quick swish, short, close, dry, outdoor'
+    - 'B: A sheet of rice paper flicked fast through the air, one quick dry swish with a papery flutter, very short, close foley'
+    - 'C: TrackType: SFX, a small bamboo dart thrown hard, short airy swoosh with a light paper rustle, crisp start, dry, village'
+    - 'D: A thin bamboo stick whipped through the air once, short sharp swish, papery texture, close, dry outdoor foley'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -192,4 +196,4 @@ origin:
     present: true
     section: 3. Trận và làng (bus `world`)
   plan: ['AUDIO_PIPELINE §9 #23 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF #23): A, C tiếng vút tre có giấy; B tiếng giấy vút; D gậy tre quất. Không viết chữ phủ định trong prompt (cfg 1,0). Chặn prompt kiểu mõ theo DECISIONS Q2.'

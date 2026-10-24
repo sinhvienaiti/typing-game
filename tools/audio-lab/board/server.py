@@ -5,6 +5,7 @@ GET  /static/<file>                      app.js, app.css
 GET  /api/config | /api/health | /api/sessions
 GET  /api/session/<sid>                  blind view + saved ratings (by label) + resume point
 GET  /api/audio/<sid>/<item>/<label>/<n> audio as WAV (OGG is decoded); the URL never names the file
+GET  /api/ctx/<sid>/<item>/<label>/<key>  the candidate's pre-rendered context (scene, burst) as WAV
 GET  /api/reveal/<sid>/<item>            card + measurements, 403 until the item is rated
                                          (session "reveal": "end": until every item is rated)
 GET  /api/card/<sid>/<item>/<label>      critic PNG, same rule
@@ -144,7 +145,8 @@ def pick_anchors(lines: list[dict], sid: str, n: int, seed: int) -> list[dict]:
                     "group": line.get("group") or "", "mode": line.get("mode") or "hero", "anchor": True,
                     "desc": line.get("desc") or "",
                     "anchor_of": {"session": line.get("session"), "item": line.get("item"), "rev": line.get("rev", 1)},
-                    "contexts": [ctx] if ctx in config.ENABLED_CONTEXTS else None, "candidates": cands})
+                    "contexts": [ctx] if ctx in config.ENABLED_CONTEXTS and ctx not in config.RENDERED_CONTEXTS else None,
+                    "candidates": cands})
         if len(out) >= n:
             break
     return out
@@ -334,6 +336,13 @@ class Board:
             raise ApiError(404, "không có bản này")
         return c.files[n]
 
+    def ctx_audio(self, sid: str, key: str, label: str, ctx: str) -> Path:
+        _, it = self._item(sid, key)
+        c = it.by_label(label)
+        if c is None or ctx not in it.rendered or ctx not in c.ctx:
+            raise ApiError(404, "không có bản dựng cho bối cảnh này")
+        return c.ctx[ctx]
+
     def card(self, sid: str, key: str, label: str, n: int = 0) -> Path:
         s, it = self._item(sid, key)
         if not self._revealed(s, it):
@@ -455,6 +464,8 @@ class Board:
             line["dropped"] = [key[lb] for lb in sorted(set(dropped))]
         if it.anchor_of:
             line["anchor_of"] = it.anchor_of
+        if any(c.ctx for c in it.candidates):
+            line["ctx_files"] = {c.key: {k: session.display_path(p) for k, p in c.ctx.items()} for c in it.candidates}
         self.store.append(s.game, line)
         self.save_state({"session": s.sid, "elapsedMs": _int(body.get("session_ms")), "device": device})
         return {"ok": True, "rev": rev, "revealAt": s.reveal,
@@ -559,6 +570,13 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(b.session_view(args[0]))
         if route == "audio" and len(args) == 4 and args[3].isdigit():
             f = b.audio(args[0], args[1], args[2], int(args[3]))
+            try:
+                data = b.audio_bytes(f)
+            except Exception as exc:  # noqa: BLE001 - unreadable file: say so, keep serving
+                raise ApiError(404, f"không đọc được âm ({type(exc).__name__})")
+            return self._send(200, data, "audio/wav")
+        if route == "ctx" and len(args) == 4:
+            f = b.ctx_audio(args[0], args[1], args[2], args[3])
             try:
                 data = b.audio_bytes(f)
             except Exception as exc:  # noqa: BLE001 - unreadable file: say so, keep serving

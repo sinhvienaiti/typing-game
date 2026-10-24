@@ -87,7 +87,10 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, station hull breach, deep boom, groaning stressed steel, ominous, close'
+    - 'B: Massive steel hull cracks open, deep heavy boom and metal groan, industrial disaster, short'
+    - 'C: TrackType: SFX, space station wall ruptures, deep impact boom with creaking twisted metal, dark, ominous'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -188,4 +191,4 @@ origin:
     present: true
     section: 6. Tuyến bị đánh, cảnh báo, kết trận
   plan: ['AUDIO_PIPELINE §9 #20 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng còi hai nốt tổng hợp (440/330 Hz, vuông lọc thấp, mỗi nốt 90 ms) trong công thức.'

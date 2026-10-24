@@ -87,7 +87,9 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a low wooden war horn blast, mossy and hollow, slowly swelling then fading, ominous, outdoor forest'
+    - 'B: Ancient horn made of wood and bark blown once, deep breathy drone swelling, dark fantasy, distant forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -192,4 +194,4 @@ origin:
     present: true
     section: 5.5 Tướng G01 Yêu Rêu Cầm Cờ (bus `enemies`)
   plan: ['AUDIO_PIPELINE §9 #6 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): kết cấu Stable Audio 3 cho lớp ''gỗ, rêu'' trên kèn co quãng thấp (không trombone); cũng chấm như ứng viên nguyên khối để so.'

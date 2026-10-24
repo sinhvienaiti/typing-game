@@ -83,7 +83,11 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, several four-legged animals trotting on soft dirt, steady hoof and paw footsteps, close, continuous'
+    - 'B: A small pack of wolves running on a forest path, rhythmic padding paws and panting, steady, outdoor'
+    - 'C: Field recording, a group of boars trotting over packed earth and leaves, heavy rhythmic footfalls, even pace'
+    - 'D: TrackType: SFX, beasts galloping on a dirt trail, gallop triplets in a steady rhythm, muffled thuds, close, organic'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: ['AUDIO_PIPELINE §9 #10 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): 4 prompt vó chạy, tạo 10 s rồi cắt vòng 4 s mono.'

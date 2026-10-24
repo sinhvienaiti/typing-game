@@ -88,7 +88,9 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'C: TrackType: SFX, magic fire spell impact, warm deep flame burst, muffled boom, crackling embers fading quickly, fantasy, organic'
+    - 'E: TrackType: SFX, darker fireball impact, a muffled flame puff with a few dry ember crackles, warm, low, short, organic'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -198,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: ['AUDIO_PIPELINE §9 #3 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): C là prompt C của fire.impact.a (thân ''warm deep flame burst, crackling embers'', BATCH1_BRIEF #3); E nghiêng tối hơn.'

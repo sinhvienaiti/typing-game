@@ -88,7 +88,9 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a pine cone bomb bursts, a deep woody boom with seeds and wood splinters scattering, short, outdoor forest'
+    - 'B: Small wooden powder keg explosion in a forest, dull low thump, crackling splinters and pattering seeds, short'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -190,4 +192,4 @@ origin:
     present: true
     section: 5.6 Bẫy (bus `traps`, P4)
   plan: []
-notes: ''
+notes: 'Lô 1 (24/10/2026): 2 prompt Stable Audio 3 cạnh công thức v3 (BATCH1_BRIEF 4.4).'

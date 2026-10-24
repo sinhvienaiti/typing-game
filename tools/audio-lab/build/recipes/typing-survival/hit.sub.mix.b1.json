@@ -1,0 +1,133 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "hit.sub.mix",
+ "group": "generic",
+ "family": "trung",
+ "description": "Lô 1 (BATCH1_BRIEF #13): hai bản thử của hit.sub dưới cùng một đầu tiếng + thân T2 (bản máy xếp đầu: hit.t2.kb2-v5). Biến thể 1: sub v1 (85→45 Hz, 90 ms, bão hòa 3 dB); 2: sub v2 (72→42 Hz, 110 ms, 6 dB).",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "front",
+   "role": "attack",
+   "gainDb": -3,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 700
+    }
+   ],
+   "trim": {
+    "endMs": 45
+   },
+   "fadeOutMs": 30,
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactMetal_heavy_000.ogg"
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "gainDb": -1,
+   "fadeInMs": 2,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 120,
+     "order": 2
+    },
+    {
+     "type": "lowpass",
+     "hz": 2000,
+     "order": 4
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t2/b1/raw/hit.t2__B__s2001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t2/b1/raw/hit.t2__B__s2001.json",
+     "window": [
+      0.017,
+      0.209
+     ]
+    }
+   }
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 85,
+     "endHz": 45,
+     "glideMs": 45,
+     "durMs": 90,
+     "decayMs": 80,
+     "driveDb": 3
+    }
+   },
+   "gainDb": -9.0,
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "synth": "sub_thump",
+      "params": {
+       "startHz": 72,
+       "endHz": 42,
+       "glideMs": 60,
+       "durMs": 110,
+       "decayMs": 100,
+       "driveDb": 6
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 30,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.3
+  },
+  "maxLengthMs": 192,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 120
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 50,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2540,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/hits/hit-sub-mix",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -75,6 +75,7 @@ class Candidate:
     gains: list[float] = field(default_factory=list)
     measures: list[dict] = field(default_factory=list)
     note: str = ""                  # owner-visible label (a deliberate contrast, a rule-blocked take)
+    ctx: dict[str, Path] = field(default_factory=dict)   # rendered context key -> file made for this candidate
 
 
 @dataclass
@@ -97,6 +98,7 @@ class Item:
     loudness_spread_100ms_db: float | None = None   # 100 ms loudness spread left after matching
     quiet_db: float = 0.0            # how far under the session target the item plays (true-peak cap)
     source_id: str | None = None     # real id behind a neutral calibration id (never sent to the page)
+    rendered: list[str] = field(default_factory=list)   # rendered contexts every candidate has a file for
 
     def by_label(self, label: str) -> Candidate | None:
         return next((c for c in self.candidates if c.label == label), None)
@@ -238,12 +240,27 @@ def _candidate(raw, where: str, base: Path, index: int, critic_dirs: list[Path] 
              (None if stale else named or _sibling(f, (".png", ".card.png"), critic_dirs))
              for c, (_, named, stale), f in zip(cards, found, files)]
     key = shas[0] if len(shas) == 1 else hashlib.sha256("".join(shas).encode()).hexdigest()
+    ctx_raw = raw.get("ctx") or {}
+    if not isinstance(ctx_raw, dict):
+        raise _err(where, "'ctx' phải là object {bối cảnh: file}")
+    ctx: dict[str, Path] = {}
+    for k, v in ctx_raw.items():
+        if k not in config.RENDERED_CONTEXTS:
+            raise _err(where, f"ctx: bối cảnh {k!r} không phải bản dựng sẵn; dùng {config.RENDERED_CONTEXTS}")
+        if not isinstance(v, str) or not v:
+            raise _err(where, f"ctx.{k}: cần một đường dẫn")
+        p = resolve_path(v, base)
+        if not p.is_file():
+            raise _err(where, f"ctx.{k}: không thấy file {v}")
+        if p.suffix.lower() not in AUDIO_EXT:
+            raise _err(where, f"ctx.{k}: đuôi file không hỗ trợ: {p.suffix}")
+        ctx[k] = p
     role = raw.get("role")
     note = raw.get("note") or ""
     if not isinstance(note, str) or len(note) > MAX_NOTE:
         raise _err(where, f"'note' phải là chuỗi tối đa {MAX_NOTE} ký tự")
     return Candidate(index=index, role=role if isinstance(role, str) and role else "", files=files,
-                     shas=shas, cards=cards, critics=critics, key=key, note=note.strip())
+                     shas=shas, cards=cards, critics=critics, key=key, note=note.strip(), ctx=ctx)
 
 
 def _item(raw, where: str, base: Path, index: int, sess: dict, seen: set[str]) -> Item:
@@ -282,7 +299,10 @@ def _item(raw, where: str, base: Path, index: int, sess: dict, seen: set[str]) -
     bad = [c for c in contexts if c not in config.CONTEXT_KEYS]
     if bad:
         raise _err(where, f"bối cảnh lạ: {bad}; dùng {config.CONTEXT_KEYS}")
-    usable = [c for c in contexts if c in config.ENABLED_CONTEXTS]
+    # a rendered context needs a file for every candidate (an anchor or a new item may have none)
+    rendered = [k for k in config.RENDERED_CONTEXTS if all(k in c.ctx for c in cands)]
+    usable = [c for c in contexts if c in config.ENABLED_CONTEXTS
+              and (c not in config.RENDERED_CONTEXTS or c in rendered)]
     if "mix" in contexts and "loop" not in usable:
         usable.append("loop")      # §7: before phase 3 "Trong trận" is replaced by "Lặp 20 lần"
     if not isinstance(item["loop"], dict):
@@ -300,7 +320,8 @@ def _item(raw, where: str, base: Path, index: int, sess: dict, seen: set[str]) -
     return Item(key=key, index=index, id=sound_id.strip(), desc=str(raw.get("desc") or ""),
                 family=item["family"], group=item["group"], mode=mode, contexts=usable or ["alone"],
                 probe=probe, anchor=bool(raw.get("anchor")), anchor_of=raw.get("anchor_of"),
-                loop=loop, candidates=cands, source_id=src_id if isinstance(src_id, str) and src_id else None)
+                loop=loop, candidates=cands, source_id=src_id if isinstance(src_id, str) and src_id else None,
+                rendered=rendered)
 
 
 def build(raw: dict, path: Path, cache: loudness.MeasureCache | None,
@@ -371,6 +392,7 @@ def item_view(item: Item) -> dict:
         "mode": item.mode,
         "modeLabel": config.MODES[item.mode],
         "contexts": item.contexts,
+        "rendered": item.rendered,
         "loop": {k: item.loop[k] for k in ("interval_ms", "jitter", "cents", "db", "offset_ms", "gap_ms",
                                            "avoid", "count", "seamless") if k in item.loop},
         "candidates": [

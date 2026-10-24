@@ -159,7 +159,7 @@ def test_session_errors_are_vietnamese(tmp_path):
 # ---------------------------------------------------------------- HTTP API
 def test_api_flow(server):
     st, cfg = call(server, "/api/config")
-    assert st == 200 and len(cfg["tags"]) == 15 and cfg["tags"][0]["name"] == "hay"
+    assert st == 200 and len(cfg["tags"]) == len(config.TAGS) == 16 and cfg["tags"][0]["name"] == "hay"
     st, lst = call(server, "/api/sessions")
     assert st == 200 and lst["sessions"][0]["session"] == "s1" and lst["sessions"][0]["items"] == 3
     st, view = call(server, "/api/session/s1")

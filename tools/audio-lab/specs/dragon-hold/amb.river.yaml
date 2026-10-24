@@ -83,7 +83,11 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, ambience, stereo field recording, a gentle forest stream babbling over small stones, soft bubbling water, calm and continuous'
+    - 'B: Small brook in a pine forest, steady trickling water and soft gurgles, wide stereo, even, continuous ambience'
+    - 'C: Field recording, shallow mountain creek flowing gently, light splashes and bubbles, close stereo, steady'
+    - 'D: TrackType: SFX, ambience, quiet woodland stream, smooth running water with tiny bubbles, warm, painterly fantasy forest, seamless'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.11 Nền (bus `ambience`, P5)
   plan: ['AUDIO_PIPELINE §9 #8 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): 4 prompt suối, tạo 10 s rồi cắt vòng 5 s.'

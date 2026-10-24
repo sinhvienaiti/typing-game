@@ -56,13 +56,14 @@ class Plan:
     norm_mode: str
     norm_target: float
     whole: bool = False
+    two_part: bool = False       # a lighter first hit 20-90 ms before the main one is the design (word.load 'ka-chunk')
 
     @property
     def creature(self) -> bool:
         return self.onset_class == "creature"
 
 
-def plan_from_card(card: dict, whole: bool | None = None) -> Plan:
+def plan_from_card(card: dict, whole: bool | None = None, two_part: bool = False) -> Plan:
     pb, d, o = card.get("playback") or {}, card.get("duration") or {}, card.get("onset") or {}
     lf = (card.get("loudness") or {}).get("file") or {}
     metric = str(lf.get("metric") or "peak-dbtp")
@@ -75,7 +76,8 @@ def plan_from_card(card: dict, whole: bool | None = None) -> Plan:
     return Plan(id=card["id"], game=card["game"], loop=loop, channels=2 if pb.get("channels") == "stereo" else 1,
                 onset_class=cls, rise_max_ms=o.get("rise_max_ms"), target_ms=t,
                 min_ms=float(d.get("min_ms") or t * 0.8), max_ms=float(d.get("max_ms") or t * 1.2),
-                norm_mode=mode, norm_target=target, whole=bool(whole if whole is not None else cls == "creature"))
+                norm_mode=mode, norm_target=target, whole=bool(whole if whole is not None else cls == "creature"),
+                two_part=bool(two_part))
 
 
 # ---------------------------------------------------------------- envelopes and events
@@ -484,6 +486,11 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
     pool = true[:6]
     min_n = int(plan.min_ms * sr / 1000) - int(0.002 * sr)
     flams = {id(w): (None if plan.whole else pre_hit(m, sr, w.event.onset, w.b)) for w in pool}
+    two = {}
+    if plan.two_part:            # the intended two-part sound: kept, recorded, never refused as a flam
+        for k, f in list(flams.items()):
+            if f and 20.0 <= f["main_ms"] - f["first_ms"] <= 90.0:
+                two[k], flams[k] = f, None
 
     def long_enough(w: Window) -> bool:      # a burst cut at its next shot can be too short to use
         return plan.whole or (w.b - w.a) >= min_n or w.event.end_kind not in ("next-hit", "next-event")
@@ -526,7 +533,7 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
                 + (f", đỉnh trên 2 kHz ở {ev.hf_peak_ms:g} ms" if ev.hf_peak_ms is not None else "")
                 + "); giữ để chấm máy, không chọn vào phiên nghe").replace(".", ",").replace("-", "−")
     return {"onset_ok": best.event.true_onset, "usable": reason is None, "audio": y, "window": wj(best),
-            "onset_verified": best.event.verified, "onset_note": note,
+            "onset_verified": best.event.verified, "onset_note": note, "two_part": two.get(id(best)),
             "shaping": shaping, "reason": reason, "pre_hit": flams.get(id(best)),
             "n_events": len(events), "n_true": len(true), "candidates": [wj(w) for w in wins[:8]]}
 
@@ -611,11 +618,11 @@ def _model_id(rec: dict) -> str:
 
 
 def process_record(rec: dict, card: dict, out_dir: Path, *, whole: bool | None = None, notch: bool = False,
-                   rejected: Path | None = None, run: str | None = None) -> dict:
+                   rejected: Path | None = None, run: str | None = None, two_part: bool = False) -> dict:
     """Process one candidate record (gen/sa3.py or the batch 0b trial). Returns the proc report."""
     from build import chain, dsp, measure
 
-    plan = plan_from_card(card, whole)
+    plan = plan_from_card(card, whole, two_part)
     f32 = Path(rec["files"]["f32"]["path"])
     x, sr_in = sf.read(str(f32), always_2d=True, dtype="float64")
     x = dsp.resample(x, sr_in, SR)
@@ -707,7 +714,7 @@ def sources_record(info: dict, rec: dict, variant: int, date: str, tools: dict) 
 
 
 def process_many(records: list[Path], card: dict, out_dir: Path, *, whole: bool | None = None, notch: bool = False,
-                 rejected: Path | None = None, force: bool = False) -> dict:
+                 rejected: Path | None = None, force: bool = False, two_part: bool = False) -> dict:
     """Process records into out_dir; write SOURCES.json and licences.rows.jsonl for the kept files."""
     from build import ledger, render
     from gen import sa3
@@ -726,7 +733,7 @@ def process_many(records: list[Path], card: dict, out_dir: Path, *, whole: bool 
         if not force and (out_dir / f"{name}.wav").is_file() and (out_dir / f"{name}.proc.json").is_file():
             skipped += 1
             continue
-        info = process_record(rec, card, out_dir, whole=whole, notch=notch, rejected=rejected)
+        info = process_record(rec, card, out_dir, whole=whole, notch=notch, rejected=rejected, two_part=two_part)
         if not info.get("onset_ok"):
             rej.append({"candidate": name, "reason": info.get("reason")})
             data.pop(f"{name}.wav", None)
@@ -764,12 +771,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--rejected", help="nơi để bản không có đầu tiếng thật (mặc định <out>-rejected)")
     ap.add_argument("--whole", action="store_true", help="giữ trọn âm tự nhiên (mặc định với sinh vật)")
     ap.add_argument("--notch-comb", action="store_true", help="lọc khấc vạch lược của bộ giải mã (nền)")
+    ap.add_argument("--two-part", action="store_true", help="âm hai nhịp có chủ ý (word.load): nhịp nhẹ 20–90 ms trước nhịp chính không bị coi là gõ hai lần")
     ap.add_argument("--force", action="store_true", help="xử lý lại file đã có")
     a = ap.parse_args(argv)
     env.apply()
     card = sa3.read_card(a.spec)
     res = process_many(collect_records(a.inputs), card, Path(a.out).expanduser(), whole=True if a.whole else None,
-                       notch=a.notch_comb, rejected=Path(a.rejected).expanduser() if a.rejected else None, force=a.force)
+                       notch=a.notch_comb, rejected=Path(a.rejected).expanduser() if a.rejected else None, force=a.force,
+                       two_part=a.two_part)
     print(json.dumps({**res, "rejected": len(res["rejected"])}, ensure_ascii=False))
     for r in res["rejected"]:
         print(f"  loại {r['candidate']}: {r['reason']}")

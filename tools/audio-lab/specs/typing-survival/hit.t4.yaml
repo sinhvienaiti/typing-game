@@ -88,7 +88,11 @@ prompt:
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, massive impact on a steel beam, deep thump and a heavy metallic clang, close, dry, industrial'
+    - 'B: Huge hammer blow on a thick steel girder, powerful low boom with a bright metal crack, short, close'
+    - 'C: TrackType: SFX, metal impact one-shot, colossal strike on a steel bulkhead, deep heavy thud, crisp attack'
+    - 'D: Heavy artillery shell hitting thick armor plate, deep boom and a hard metallic clang, industrial, close'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -199,4 +203,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: ['AUDIO_PIPELINE §9 #14 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): đầu + thân 300 ms từ Stable Audio 3; hit.sub và hit.tail ghép thêm (bản nghe ghép sẵn đủ lớp).'

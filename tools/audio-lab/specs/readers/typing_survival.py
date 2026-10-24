@@ -68,6 +68,12 @@ RULES: list[tuple[str, dict]] = [
     (r"word\.perfect", {"category": "word-reward", "source": "impact", "add_bands": ["presence"],
                         "layer_plan": {"builds_on": "word.load", "summary": "word.load cộng tiếng nạp điện tổng hợp (§9 #18)"},
                         "constraints": ["Theo luật âm xong từ (§6.2)"]}),
+    (r"gun\.xung\.loop", {"category": "ambience", "source": "foley-other", "family": "ban", "dirty": True,
+                          "layer_plan": {"builds_on": "gun.xung", "shares": [], "summary": "Nền cơ khí chạy suốt loạt bắn, dưới các phát đơn (BATCH1_BRIEF §3.2)"},
+                          "constraints": ["Không có đầu tiếng nổi lên: mọi đầu tiếng thấp hơn đỉnh phát đơn ít nhất 12 dB (BATCH1_BRIEF §3.2)",
+                                          "Không có chu kỳ rõ ở 5–15 Hz: tự tương quan đường bao ở độ trễ 60–220 ms dưới 0,3"]}),
+    (r"gun\.xung\.tail", {"category": "fx-other", "source": "impact", "family": "ban", "onset": "none", "dirty": True,
+                          "layer_plan": {"builds_on": None, "shares": ["hit.tail"], "summary": "Khi ngừng bắn: vang thép sảnh rộng và máy dừng; chung chất liệu với hit.tail (BATCH1_BRIEF §3.2)"}}),
     (r"gun\.xung", {"category": "shot", "source": "shot", "dirty": True, "add_bands": ["sub"],
                     "constraints": ["Ghép bốn lớp: thịch sub 40–90 Hz ≤120 ms, cơ khí ngắn, năng lượng, đuôi dùng chung hit.tail (§8.3)",
                                     "Phát 5 lần mỗi giây nên phải ngắn (§3.2)"]}),
@@ -117,7 +123,10 @@ RULES: list[tuple[str, dict]] = [
 PLAN_PROPOSED = {
     "hit.sub": "AUDIO_PIPELINE §6.3 #3, §9 #13, §16 #6: lớp sub dùng chung của bậc trúng",
     "hit.tail": "AUDIO_PIPELINE §6.3 #3, §9 #14, §16 #6: đuôi kim loại dùng chung",
+    "gun.xung.loop": "BATCH1_BRIEF §3.2: nền cơ khí liên thanh chạy suốt loạt bắn Xung",
+    "gun.xung.tail": "BATCH1_BRIEF §3.2: đuôi khi súng Xung ngừng bắn",
 }
+PROPOSED_BUS = {"gun.xung.loop": "guns", "gun.xung.tail": "guns"}     # default: impacts
 
 
 def _bus_globs(text: str) -> tuple[dict[str, dict], dict[str, list[str]]]:
@@ -222,7 +231,8 @@ def read(game_root: Path) -> GameData:
                                 DISAGREE, False, "prose"))
     for sid, basis in PLAN_PROPOSED.items():
         if all(e.id != sid for e in entries):
-            entries.append(Entry(sid, GAME, proposed=basis, listing={"section": None, "when": "", "feel": "", "prompt": None, "bus": "impacts"}))
+            entries.append(Entry(sid, GAME, proposed=basis, listing={"section": None, "when": "", "feel": "", "prompt": None,
+                                                                         "bus": PROPOSED_BUS.get(sid, "impacts")}))
             issues.append(Issue(GAME, sid, "plan-only", f"Kế hoạch đề xuất id mới ({basis}); cần thêm vào THEME_SOUND_LIST.md trước", PLAN))
 
     issues += common.presence_issues(entries, GAME, FILES["catalog"], FILES["list"])

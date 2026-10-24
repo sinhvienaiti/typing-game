@@ -45,10 +45,28 @@ GEMMA_URL = "https://ai.google.dev/gemma/terms"
 DIT_WEIGHTS = {"sm-sfx": "dit_sm-sfx_f16.npz", "sm-music": "dit_sm-music_f16.npz"}
 SHARED_WEIGHTS = ("same_s_decoder_f32.npz", "t5gemma_f16.npz")
 _KEYED = re.compile(r"^([A-Z][0-9]?)\s*:\s*(.+)$", re.S)
+# DECISIONS Q2 (TK 22.1: no temple wood block in Lời Gọi): words that give the hollow, high, pitched "tốc", for every
+# id of the game, and the call-chop prompts B, D (B s1002 rated 2/5, the lowest of the id, batch 0b)
+FORBIDDEN_TERMS: dict[str, tuple[str, ...]] = {
+    "typing-defense": (r"\btok\b", r"\btốc\b", r"hollow\s+tube", r"temple\s+block", r"wooden\s+fish", r"\bmõ\b"),
+}
+FORBIDDEN_KEYS: dict[tuple[str, str], tuple[str, ...]] = {("typing-defense", "call-chop"): ("B", "D")}
 
 
 class Sa3Error(ValueError):
     pass
+
+
+def check_prompts(card: dict, prompts: dict[str, str]) -> None:
+    """Refuse a prompt the decisions log forbids for this game or id (DECISIONS Q2)."""
+    game, sid = card.get("game") or "", card.get("id") or ""
+    keys = [k for k in prompts if k in FORBIDDEN_KEYS.get((game, sid), ())]
+    if keys:
+        raise Sa3Error(f"{sid}: prompt {', '.join(keys)} bị cấm (DECISIONS Q2, TK 22.1: tiếng gõ rỗng, cao giống mõ)")
+    for k, text in prompts.items():
+        for pat in FORBIDDEN_TERMS.get(game, ()):
+            if re.search(pat, text, re.I):
+                raise Sa3Error(f"{sid}: prompt {k} có cụm bị cấm /{pat}/ (DECISIONS Q2, TK 22.1): {text[:80]}")
 
 
 # ---------------------------------------------------------------- install + model identity
@@ -145,6 +163,7 @@ def build_job(card: dict, *, variants: list[str] | None = None, seeds: list[int]
     missing = [k for k in keys if k not in allp]
     if missing:
         raise Sa3Error(f"{card['id']}: không có prompt {', '.join(missing)}; có {', '.join(allp)}")
+    check_prompts(card, {k: allp[k] for k in keys})
     if dit not in DIT_WEIGHTS:
         raise Sa3Error(f"dit {dit!r} không có; chọn {', '.join(DIT_WEIGHTS)}")
     if not 1 <= int(steps) <= 100:

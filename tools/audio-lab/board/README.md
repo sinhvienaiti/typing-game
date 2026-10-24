@@ -75,7 +75,8 @@ Nhóm của bộ phê bình (`key_ok`, `hit_small`, `explosion`, `ambience`…) 
 - `reveal`: `"item"` (mặc định) mở thẻ ảnh và số đo ngay sau khi chấm id đó; `"end"` chỉ mở khi đã chấm **mọi** id của phiên (API `reveal`, `card` trả 403 trước đó). Lô 0a và các phiên hiệu chỉnh dùng `"end"`, để phán quyết của máy không dạy tai ở các id sau.
 - `source_id` (tùy chọn): tên thật của item có id trung tính (phiên hiệu chỉnh dùng `calib-1`, `calib-2`…). Trường này chỉ ghi vào dòng điểm, không gửi lên trang.
 - `role` mặc định theo danh sách nghe của mục 4.6: bản 1 `top`, bản 2 `distinct`, bản cuối `probe` khi item có `"probe": true`, còn lại `other`. Lượt biến thể: `variant`.
-- `mode`: `hero` (mặc định), `variants`, `pair`, `style`. `contexts`: `alone`, `loop`, `small`, `mix` (`mix` được thay bằng `loop` cho đến giai đoạn 3). Mặc định theo họ âm như mục 7.
+- `mode`: `hero` (mặc định), `variants`, `pair`, `style`. `contexts`: `alone`, `loop`, `small`, `scene`, `burst`, `mix` (`mix` được thay bằng `loop` cho đến giai đoạn 3). Mặc định theo họ âm như mục 7.
+- `ctx` (tùy chọn, mỗi ứng viên): `{"scene": "<file>"}` hoặc `{"burst": "<file>"}`, bản dựng sẵn của chính ứng viên đó. Item chỉ có bối cảnh dựng sẵn khi mọi ứng viên đều có file; cặp mốc không bao giờ có. Đường dẫn không tới trang (`/api/ctx/<phiên>/<item>/<nhãn>/<bối cảnh>`); dòng điểm ghi thêm `ctx_files`.
 - `family`: 8 họ chung của mục 4.6 (`phim-ui`, `thuong`, `ban`, `trung`, `no`, `chet`, `sinh-vat`, `nen`). `group` (tùy chọn) chọn luật lặp chi tiết hơn: `phim-dung`, `phim-sai`, `ui`, `thuong-tu`, `thuong-hiem`, `ban`, `trung-nho`, `trung-nang`, `no`, `chet-bay`, `chet-lon`, `sinh-vat`, `nen`, hoặc tên nhóm của bộ phê bình (`board/config.py`, `CRITIC_GROUP_PRESET`). Chỉ luật `nen` (nền lặp) phát liền mạch; báo nguy và stinger lặp theo nhịp, không đổi cao độ.
 - `loop` (tùy chọn) ghi đè: `interval_ms`, `jitter`, `cents`, `db`, `offset_ms`, `gap_ms`, `avoid`, `count`, `seamless`, `preset`. Không ghi `count` thì item phát cách nhau từ 1 s trở lên lặp 8 lần, còn lại 20 lần: một nốt thưởng 1,5 s lặp 20 lần mất 30 s cho mỗi bản. Nút bối cảnh hiện đúng số lần ("Lặp 8 lần").
 - `anchors: N` (mặc định 4, `0` để tắt) chèn N cặp mốc lấy từ các phiên trước của cùng game (bản tốt nhất và bản kém nhất của một lượt cũ, chỉ khi file còn nguyên SHA-256). Cặp mốc được chọn lúc chủ dự án mở phiên lần đầu (không phải lúc server khởi động) và ghi vào file trạng thái, nên lần mở sau vẫn giống hệt. Phiên đã có điểm mà chưa có cặp mốc thì không bị chèn thêm, để vị trí làm tiếp không đổi. Cặp mốc giữ chế độ và mô tả của id gốc: trang không biết item nào là cặp mốc. Phiên demo và lô 0a đặt `anchors: 0`.
@@ -102,6 +103,8 @@ Mức đích là −23 LUFS-M (`target_lufs` trong file phiên). Cả item hạ 
 | Một mình | Phát riêng bản đang chọn |
 | Lặp 20 lần (8 lần với âm phát thưa) | 20 lần, hoặc 8 lần khi item phát cách nhau từ 1 s, theo nhịp chơi thật và độ ngẫu nhiên của mục 5.3 (cao độ đổi bằng `playbackRate` như kit, mức ±dB, lệch thời điểm, khoảng nghỉ tối thiểu, không lặp lại biến thể vừa phát). Mẫu ngẫu nhiên giống hệt cho mọi bản của cùng item, nên chỉ âm là khác. Nền (`nen`) lặp liền mạch để nghe mối nối |
 | Loa nhỏ | Như "Một mình", qua bộ lọc cao 200 Hz (`BiquadFilter`) |
+| Trong trận thô (`scene`) | Lô 1: phát bản dựng sẵn của từng ứng viên (`ctx.scene` trong file phiên; module [`context/`](../context/README.md)): ứng viên trong một đoạn trận ngắn qua bộ trộn giống game, có giọng đọc. Không lặp, không chỉnh mức. Chỉ hiện khi mọi ứng viên của item có bản dựng |
+| Liên thanh 3 s (`burst`) | Như trên, cho bài thử súng liên thanh (`BATCH1_BRIEF.md` mục 3.5) |
 | Trong trận | Tắt, có từ giai đoạn 3 (Bảng Nghe v2) |
 
 ## Phím tắt
@@ -115,7 +118,7 @@ Mức đích là −23 LUFS-M (`target_lufs` trong file phiên). Cả item hạ 
 | `V` | Bản tốt nhất. Không bấm thì bản có nhiều sao nhất được tự chọn khi không hòa (`pick_auto`) |
 | `0` | Không bản nào đạt |
 | `X` | Lượt biến thể: bỏ hoặc giữ bản đang chọn |
-| `H` `G` `C` `D` `R` `Y` `K` `T` `N` `M` `S` `L` `P` `E` `O` | hay, hợp game, chói, đục, rè/lỗi, yếu/mỏng, quá dài, quá to, quá nhỏ, chậm, sai chất liệu, lạc thể loại, nhàm khi lặp, rẻ tiền, khó nghe tiếng đọc |
+| `H` `G` `C` `D` `R` `Y` `K` `T` `N` `M` `S` `L` `P` `E` `O` `J` | hay, hợp game, chói, đục, rè/lỗi, yếu/mỏng, quá dài, quá to, quá nhỏ, chậm, sai chất liệu, lạc thể loại, nhàm khi lặp, rẻ tiền, khó nghe tiếng đọc, ngắt quãng (lô 1) |
 | `↑` `↓` | Đổi bối cảnh |
 | `Enter` | Lưu (thẻ ảnh và số đo hiện ra), Enter lần nữa sang id tiếp. `⇧Enter`: bỏ qua |
 | `⌫` | Id trước |

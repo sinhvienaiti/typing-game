@@ -1,0 +1,177 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "blast.mix",
+ "group": "blast",
+ "family": "no",
+ "description": "Lô 1 (BATCH1_BRIEF #26): Tháp Pháo, cụm Phát Chữ. Vòng 2 sau thẻ ảnh: vòng 1 (nứt tổng hợp 3 ms, rồi lớp giấy lên chậm) bị chặn ở thời gian lên 14 ms và có hai đầu tiếng 23–25 ms, 72 % dưới 150 Hz, sub dài 315 ms. Nay tiếng nứt là ván gỗ Kenney impactPlank (lọc cao 900 Hz, 60 ms), to nhất ở đầu; trống khung VCSL (đánh mở, rồi đánh chặn) hoặc timpani VSCO-2-CE nhỏ hơn 4 dB, lọc cao 70 Hz, cắt ở 320 ms; lớp giấy, bụi Stable Audio 3 (prompt A, B) vào sau 12 ms, mờ vào 25 ms, −7 dB, lọc cao 400 Hz. Không lách tách, không chất taiko. Biến thể n dùng nứt n, trống n, giấy n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "crack",
+   "role": "attack",
+   "trim": {
+    "endMs": 60
+   },
+   "fadeOutMs": 30,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 900
+    }
+   ],
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactPlank_medium_004.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlank_medium_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlank_medium_000.ogg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "drum",
+   "role": "body",
+   "gainDb": -4,
+   "trim": {
+    "endMs": 320
+   },
+   "fadeOutMs": 180,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 70,
+     "order": 2
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "frame-drum",
+     "notes": "0:hdruml-hit:0.6:118"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "timpani",
+       "notes": "0:timpani2-hit:0.8:105"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "frame-drum",
+       "notes": "0:hdruml-hitmuted:0.5:120"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "paper",
+   "role": "texture",
+   "gainDb": -7,
+   "offsetMs": 12,
+   "fadeInMs": 25,
+   "fadeOutMs": 120,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 400
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__B__s2006.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__B__s2006.json",
+     "window": [
+      0.00075,
+      0.48075
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__A__s2003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__A__s2003.json",
+       "window": [
+        0.02525,
+        0.385
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__B__s2005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1/raw/blast__B__s2005.json",
+       "window": [
+        0.0055,
+        0.473
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 40,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 460,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 200
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 3,
+  "seed": 2401,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/blast",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -83,7 +83,11 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a dense swarm of small insects skittering over dry leaves, constant rustling, close, mono'
+    - 'B: Hundreds of ants and beetles crawling across forest litter, fine scratchy patter, steady and continuous'
+    - 'C: Field recording, many tiny legs scurrying on dry leaves and twigs, busy crackly rustle, even, close'
+    - 'D: TrackType: SFX, creature swarm marching through undergrowth, chittering skitter and leaf crunch, steady, organic'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: ['AUDIO_PIPELINE §9 #9 (lô 1)']
-notes: ''
+notes: 'Lô 1 (24/10/2026): 4 prompt bầy lạo xạo, tạo 10 s rồi cắt vòng 4 s mono.'

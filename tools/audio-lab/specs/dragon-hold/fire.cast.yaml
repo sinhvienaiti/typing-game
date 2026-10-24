@@ -91,7 +91,11 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, dragon fireball launch, a deep round whoomph of fire thrown forward, short and warm, close, dry, organic'
+    - 'B: TrackType: SFX, a dragon spits fire, a short throaty breath huff followed by a low fireball whoosh, close, dry, fantasy creature'
+    - 'C: Torch flame swung fast through the air, a single soft round fire whoosh launch, low and warm, short, recorded close outdoors'
+    - 'D: Large beast exhales a quick burst of flame, breathy rasp into a deep fire puff, short, warm, painterly fantasy forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -198,4 +202,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #1 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: ''
+notes: 'Lô 1 (24/10/2026): A, C hướng ''phụt tròn''; B, D hướng ''khạc có hơi thở'' (bảng phong cách mục 9 bước 2). Không viết chữ phủ định trong prompt: ''no birds'' của amb.forest từng sinh ra tiếng chim.'

@@ -1,0 +1,192 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "kill.swarm.vang",
+ "group": "death-swarm",
+ "family": "chet",
+ "description": "Lô 1 (BATCH1_BRIEF #15), hướng 'vỡ có vang': bản Stable Audio 3 prompt C, D (mảnh thép văng, vang ngắn trong sảnh thép) bắt đầu giữa tiếng nên đầu tiếng chưa xác minh; dựng theo nguồn hạng 1 của thẻ: đầu tiếng Kenney Impact (Metal light, Plate light, Tin medium; lọc cao 1,5 kHz, 40 ms) trên thân Stable Audio 3 cửa sổ 260 ms từ 4 ms trước đỉnh (C__s2001, D__s2002, C__s2004, D__s2005, C__s2005, D__s2006), lọc cao 150 Hz, khoét nhẹ 2,5 kHz. Biến thể n dùng đầu tiếng n và thân n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "head",
+   "role": "attack",
+   "gainDb": -6,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1500
+    }
+   ],
+   "trim": {
+    "endMs": 40
+   },
+   "fadeOutMs": 25,
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlate_light_001.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactTin_medium_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactMetal_light_004.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlate_light_003.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactTin_medium_004.ogg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "offsetMs": 0.5,
+   "fadeInMs": 2,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 150,
+     "order": 2
+    },
+    {
+     "type": "peak",
+     "hz": 2500,
+     "gainDb": -3,
+     "q": 0.8
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2001.json",
+     "window": [
+      0.0229,
+      0.2829
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2002.json",
+       "window": [
+        0.0209,
+        0.2809
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2004.json",
+       "window": [
+        0.0249,
+        0.2849
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2005.json",
+       "window": [
+        0.0369,
+        0.2969
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__C__s2005.json",
+       "window": [
+        0.0259,
+        0.2859
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2006.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.swarm/b1/raw/kill.swarm__D__s2006.json",
+       "window": [
+        0.0379,
+        0.2979
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.3
+  },
+  "maxLengthMs": 300,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 200
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 40,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 6,
+  "seed": 2534,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/kills/kill-swarm",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}
