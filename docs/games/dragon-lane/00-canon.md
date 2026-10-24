@@ -169,7 +169,7 @@ T_a   = 8 s × biên / k, không dưới 2 lần thời gian một từ của ng
 biên  = 1 + 3,0 × P(từ Ẩu ở độ chính xác a) + 0,6 × CV                // BALANCE.md §2 yếu tố 3 và 4
 ```
 
-- Biên thời gian nhân cả T_a và độ chờ của Héo lan. Ví dụ: 85 %, CV 0,35 → × 1,88; 95 %, CV 0,25 → × 1,22; 99 %, CV 0,2 → × 1,12.
+- Biên thời gian nhân cả T_a và độ chờ của Héo lan. P(từ Ẩu) tính với ℓ̄ của dải E (§4.3): 5 chữ khi E < 45, 6 chữ khi E ≥ 45, nên cùng a và CV cho hai biên. Ví dụ (E < 45 / E ≥ 45): 85 %, CV 0,35 → × 1,705 / × 1,882; 95 %, CV 0,25 → × 1,219 / × 1,249; 99 %, CV 0,2 → × 1,123 ở cả hai dải. Số khớp `paceFor` (`marginPm`) của `games/dragon-hold`.
 - E, a, CV lấy từ hồ sơ (D26): `?wpm=`, thẻ tốc độ, hoặc số đo của hồ sơ. Không có a, CV thì dùng 95 % và 0,25.
 
 ### 4.5 Loại ải, đợt, nghỉ

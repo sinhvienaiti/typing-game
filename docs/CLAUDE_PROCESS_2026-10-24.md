@@ -71,14 +71,30 @@ Chưa đo được trên Dell: Chrome trong WSL vẽ WebGL bằng phần mềm (
 
 Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome của Windows (có GPU) qua node Windows (mục 6.C).
 
+- 24/10, **lượt sửa sau kiểm tra độc lập xong và đã push**. Kèm theo, đo lại bằng GPU qua Chrome Windows các kịch bản trước đó trượt vì vẽ phần mềm.
+
+| Repo | Commit | Kết quả |
+|---|---|---|
+| typing-survival | `015e454`, `e4c7db7` | Ô Xung/swarmNear = ○ như hai bộ seed đo được. G3m báo **trượt** một cách trung thực, test ghim `KNOWN_MISSES`; chờ lượt làm lại sức súng. Báo cáo 100 seed chạy lại (`tmp/dell-2026-10-24/bal100d.md`). GPU: hiệu năng đạt rộng. Kiểm tra: đạt |
+| typing-defense | `0f7aa72`, `37c2ec1` | Thẻ Thành Lũy xếp lại nút bán; B1/B7 gộp chấm theo dải chặt (vẫn trượt như đã biết); đủ kịch bản ở 1920; GPU đạt; "đã chọn theo đề xuất (b)". Kiểm tra: đạt |
+| dragon-hold | `02a0833`, `dc08714` | Phím tốc độ cố định; toast; ô số đo theo nét vẽ (`dh-numbers-drawn`); đo lại GPU. Kiểm tra: **chưa đạt**, vì tài liệu nói quá về bằng chứng hit-stop (mục 6.A) |
+| space-typing | `4061ae02` | `.gitignore` chừa `*.md`, `*.txt` cạnh model. Kiểm tra: đạt |
+
 ## 5. Đang làm
 
-- Sửa các lỗi mà bước kiểm tra độc lập tìm ra (mục 6.A).
-- Đánh giá mode tu tiên chống thú triều: `docs/games/tu-tien/` (mục 6.D).
+- Bước B: việc tiếp theo của từng game, cộng lượt viết lại spec âm theo Q6 (mục 6.B).
 
 ## 6. Còn lại, theo thứ tự
 
-### A. Sửa sau kiểm tra độc lập (đang làm)
+### A. Còn sót sau kiểm tra độc lập (gộp vào lượt B của từng game)
+- **dragon-hold** (lớn):
+  - `docs/changelog/2026-10-24-m0a-review2.md` (hàng GPU của `dh-hitstop-keys`) nói số trong bão "chạm 0 lần, theo box và theo nét vẽ". Tài liệu cũng ghi sai nguyên nhân của mẫu "touching 1" ở lần chạy GPU đầu. Phải viết lại cho đúng những gì lần chạy chứng minh.
+  - Phụ: `dh-crowd` ở 1920 chỉ lấy được 1/3 lần đo, vì Rồng gục. Thử seed khác.
+  - Phụ: kit `feedback/numbers.ts`: chữ số nghiêng tràn ô atlas 48 px; dấu của nhãn lấn sang ô số "3".
+- **typing-defense** (nhỏ): thẻ tháp, trại lính, mỏ vàng và ruộng vẫn tràn chữ ở nút bán và "Gửi Draconis" khi ở 1280×720. Check `typedInTheWindow` của `td-1a6-perf` dễ chập chờn (29–35 phím, cần ≥ 30).
+- **typing-survival** (nhỏ): G3m chỉ đo seed 1–16 trong test; seed 17–32 là bước tay. Thời gian chạy báo cáo trong `AGENTS.md` cần sửa thành 18–30 phút.
+
+### A0. Lỗi kiểm tra lượt 1 (đã sửa ở lượt sửa, giữ để tra)
 1. **typing-survival** (lớn): ô `COUNTERS` của Xung trên "Bầy sát vạch" được commit là ● (2). Đo seed 1–16 ra ○ (tỷ lệ 1,30); seed 17–32 cũng ra ○ (1,41). G3m chỉ đạt nhờ ô này, và changelog ghi sai lý do. Phải sửa bảng hoặc sức súng, chạy lại G3m, rồi sửa changelog.
    Lỗi nhỏ:
    - Bảng 100 seed lệch báo cáo 1 điểm ở khoảng 8 ô.
@@ -193,3 +209,8 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
   - Repo cha: nâng gitlink, commit canon Rồng Giữ Ải, chặn `*.mp4`.
   - Kiểm tra độc lập tìm ra lỗi; việc sửa ghi ở mục 6.A.
   - Mở việc đánh giá mode tu tiên (6.D).
+- 24/10/2026 (Dell): lượt sửa sau kiểm tra độc lập xong.
+  - 4 game push 7 commit; repo cha nâng gitlink.
+  - Có đường đo hiệu năng bằng GPU qua Chrome Windows.
+  - Changelog ngày `docs/changelog/2026-10-24.md` nay ghi đủ việc trong ngày.
+  - Bản đánh giá Tu Tiên Thủ Ải đã commit (`707349e0`), chờ chủ dự án đồng ý mốc M0.
