@@ -54,12 +54,52 @@
     }
   ],
   "privateLock": "media/private.md5",
-  "junk": [".DS_Store", "._*", "Thumbs.db", "desktop.ini", ".localized", "*.tmp", "*.part", "*.partial", "*:Zone.Identifier"],
+  "junk": [
+    ".DS_Store",
+    "._*",
+    "Thumbs.db",
+    "desktop.ini",
+    ".localized",
+    "*.tmp",
+    "*.part",
+    "*.partial",
+    "*:Zone.Identifier"
+  ],
   "mediaExtensions": [
-    "png", "jpg", "jpeg", "webp", "avif", "gif", "bmp", "tga", "tif", "tiff", "psd", "svg", "ico", "hdr", "exr", "ktx2", "basis",
-    "ogg", "mp3", "wav", "m4a", "aac", "flac", "opus",
-    "mp4", "webm", "mov",
-    "glb", "gltf", "bin", "fbx", "obj", "blend", "usdz"
+    "png",
+    "jpg",
+    "jpeg",
+    "webp",
+    "avif",
+    "gif",
+    "bmp",
+    "tga",
+    "tif",
+    "tiff",
+    "psd",
+    "svg",
+    "ico",
+    "hdr",
+    "exr",
+    "ktx2",
+    "basis",
+    "ogg",
+    "mp3",
+    "wav",
+    "m4a",
+    "aac",
+    "flac",
+    "opus",
+    "mp4",
+    "webm",
+    "mov",
+    "glb",
+    "gltf",
+    "bin",
+    "fbx",
+    "obj",
+    "blend",
+    "usdz"
   ],
   "sets": {
     "originals": {
@@ -80,7 +120,10 @@
         "**/.wt-*",
         ".visual",
         "art-src",
-        "coverage"
+        "coverage",
+        "tmp",
+        ".cache",
+        "test-results"
       ]
     },
     "private": {
@@ -89,7 +132,9 @@
         "games/space-typing/art-src/Dota-Sounds",
         "games/space-typing/public/local-assets"
       ],
-      "exclude": ["shared/music/index.local.json"]
+      "exclude": [
+        "shared/music/index.local.json"
+      ]
     }
   }
 }
