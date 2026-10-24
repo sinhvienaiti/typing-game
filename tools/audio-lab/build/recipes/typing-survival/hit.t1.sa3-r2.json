@@ -1,0 +1,222 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-survival",
+  "id": "hit.t1",
+  "group": "hit-small",
+  "family": "trung",
+  "description": "Lô 0b vòng 2: bản thử hit.t1 họ D thiếu thân 200–800 Hz (< 25 %) và đuôi bị cắt phẳng ở 80 ms. Công thức theo mục 9 #12: đầu tiếng Kenney Impact Metal light (2–6 kHz, cắt 25 ms), tiếng keng Stable Audio 3 họ A (thân 22–28 % ở 200–800 Hz), cộng một lớp thân dày từ Stable Audio 3 họ B lọc dải 200–850 Hz. Cửa sổ 96 ms (mức tối đa của thẻ) với đuôi tắt dần; tiếng ngân thật 128–209 ms không giữ hết được. Biến thể n dùng keng thứ n và thân thứ n. Đuôi: mũ hàm mũ từ 30 ms xuống −60 dB ở mẫu cuối (chain.tail.shape \"exp\"), không cắt phẳng rồi làm mờ.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "tick",
+      "role": "attack",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactMetal_light_000.ogg"
+      },
+      "gainDb": -7,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 1500
+        }
+      ],
+      "trim": {
+        "endMs": 25
+      },
+      "fadeOutMs": 18,
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_001.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactMetal_light_004.ogg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "clank",
+      "role": "body",
+      "source": {
+        "gen": {
+          "tool": "stable-audio-3 (sa3_batch.py)",
+          "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+          "licence": "LicenseRef-Stability-Community-2024",
+          "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1001.f32.wav",
+          "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1001.json",
+          "window": [
+            0.0,
+            0.11
+          ]
+        }
+      },
+      "gainDb": -1,
+      "fadeOutMs": 40,
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1002.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1002.json",
+              "window": [
+                0.0,
+                0.11
+              ]
+            }
+          },
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1004.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1004.json",
+              "window": [
+                0.0,
+                0.11
+              ]
+            }
+          },
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1006.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1006.json",
+              "window": [
+                0.0,
+                0.11
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "thick",
+      "role": "body",
+      "source": {
+        "gen": {
+          "tool": "stable-audio-3 (sa3_batch.py)",
+          "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+          "licence": "LicenseRef-Stability-Community-2024",
+          "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1001.f32.wav",
+          "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1001.json",
+          "window": [
+            0.0,
+            0.1
+          ]
+        }
+      },
+      "gainDb": 2,
+      "fadeOutMs": 45,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 190,
+          "order": 2
+        },
+        {
+          "type": "lowpass",
+          "hz": 850,
+          "order": 2
+        }
+      ],
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1006.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1006.json",
+              "window": [
+                0.0,
+                0.1
+              ]
+            }
+          },
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1004.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__B__s1004.json",
+              "window": [
+                0.0,
+                0.1
+              ]
+            }
+          },
+          {
+            "gen": {
+              "tool": "stable-audio-3 (sa3_batch.py)",
+              "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+              "licence": "LicenseRef-Stability-Community-2024",
+              "file": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1002.f32.wav",
+              "record": "~/AudioLab/work/typing-survival/hit.t1/sa3-trial/raw/hit.t1__A__s1002.json",
+              "window": [
+                0.0,
+                0.1
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 40,
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.3
+    },
+    "maxLengthMs": 96,
+    "tail": {
+      "floorDb": -60,
+      "shape": "exp",
+      "kneeMs": 30
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 30,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 4,
+    "seed": 121,
+    "includeBase": true,
+    "pitchCents": [
+      -80,
+      80
+    ],
+    "gainDb": [
+      -1,
+      1
+    ]
+  },
+  "export": {
+    "path": "sfx/hits/hit-t1",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

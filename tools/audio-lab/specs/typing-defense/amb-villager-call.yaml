@@ -1,0 +1,182 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: amb-villager-call
+game: typing-defense
+status: draft
+manual_fields: []
+when: Màn đầu, mỗi 3–7 s, trái hoặc phải
+purpose: Làng xa, chiều tà
+category: fx-other
+family: nen
+source_class: voice
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §1: mono cho tiếng ngắn, stereo cho nhạc và âm nền'
+  bus: world
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 1500
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 1200
+  max_ms: 1800
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: null
+  music: null
+onset:
+  class: none
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 4
+  min: 4
+  max: 4
+  basis: 'Prompt trong docs/audio/THEME_SOUND_LIST.md: 4 biến thể'
+randomisation:
+  group: default
+  pitch_cents: null
+  gain_db: null
+  rules:
+    - '§5.3 chưa có nhóm này: giữ cách đổi ngẫu nhiên hiện tại của mã'
+  current_code: 'Tổng hợp trong mã; game chưa có bộ tải file (§6.3 #6)'
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: voice
+      range_hz: [1000, 4000]
+      role: Chỉ đầu tiếng rất ngắn
+  voice_band: free
+  voice_band_text: Không phát dày; vẫn tránh ngân dài ở 1–4 kHz khi đang đọc từ
+  spectrum: null
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §1: Tiếng ngắn đỉnh −1 dBTP (TK 24.9)'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: world
+  bus_gain: 0.9
+  bus_gain_db: -0.92
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: nhánh TypingAudio nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -0.92
+  pronunciation_duck_db: null
+  mix_target:
+    metric: lufs-m-max
+    range: null
+    text: Chưa có mức trong §4.3.3; lấy theo họ âm khi có âm đã duyệt
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: A villager calling across rice fields at dusk, far away, a long drawn "Ơ… ơi!" in Vietnamese, no other words, heavy distance and soft valley echo, 1.5 s. Make 4 variants (two men, two women).
+  suffix: null
+  style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
+  sweetener: tre, chuông đồng và đàn tranh
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [owner-recording]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [owner-recording]
+      detail: Chủ dự án và người nhà ghi, có giấy đồng ý
+  needs_now: [chu-du-an-ghi-am, giay-dong-y]
+  needs_later: []
+  note: Không dùng AI. Stable Audio 3 không có giọng người
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [owner-original]
+  conditional:
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes: []
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Không dùng AI (§3.2)
+  - Chỉ tiếng "Ơ… ơi!", không lời khác
+  - 'Chất liệu: tre, gỗ, chuông đồng, cồng, giấy, trống cơm, sáo trúc, đàn tranh. Không laser, không tiếng máy, không synth điện tử'
+  - Thang ngũ cung Hò, Xự, Xang, Xê, Cống (gần C D F G A); nốt của chữ và nhạc cùng một thang (TK 24.8)
+  - 'Không tôn giáo (TK 22.1): không chuông chùa, không mõ chùa, không tụng; cồng là cồng hội làng; phách tre thay mõ'
+  - 'Tránh âm Trung Quốc hay Nhật Bản dán nhãn Việt: nhị dẫn giai điệu, shakuhachi, taiko (§8.2)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: generic
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: A villager calling across rice fields at dusk, far away, a long drawn "Ơ… ơi!" in Vietnamese, no other words, heavy distance and soft valley echo, 1.5 s. Make 4 variants (two men, two women).
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [chu-du-an-ghi-am, giay-dong-y]
+origin:
+  code:
+    file: src/view/audio-min.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 5. Âm nền màn đầu
+  plan: []
+notes: ''

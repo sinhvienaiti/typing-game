@@ -1,0 +1,189 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "gun.xung.loop.split2",
+ "group": "ambience",
+ "family": "ban",
+ "description": "Lô 1 (BATCH1_BRIEF §3.2): nền liên thanh từ bản Stable Audio 3 dài 10 s (4 bản ít chu kỳ nhất ở 5–15 Hz: gun.xung.loop__B__s3002, gun.xung.loop__C__s3003, gun.xung.loop__A__s3004, gun.xung.loop__B__s3004), cùng đoạn 3,0 s mà process.py đã chọn, tách hai lớp: ù và động cơ dưới 600 Hz, lách cách dời lên 5,5–9 kHz, nhỏ hơn 18 dB (bản tách đầu có tiếng chíp có cao độ 2–4 kHz lặp lại mỗi vòng); dải 1–4 kHz gần như trống để giọng đọc không bị che. Nối thành vòng 2,5 s.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "hum",
+   "role": "body",
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 55
+    },
+    {
+     "type": "lowpass",
+     "hz": 600,
+     "order": 4
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3002.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3002.json",
+     "window": [
+      3.75,
+      6.75
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__C__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__C__s3003.json",
+       "window": [
+        6.35,
+        9.35
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__A__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__A__s3004.json",
+       "window": [
+        1.8,
+        4.8
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3004.json",
+       "window": [
+        0.7,
+        3.7
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "clatter",
+   "role": "sweetener",
+   "gainDb": -18,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 5500,
+     "order": 8
+    },
+    {
+     "type": "lowpass",
+     "hz": 9000,
+     "order": 2
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3002.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3002.json",
+     "window": [
+      3.75,
+      6.75
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__C__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__C__s3003.json",
+       "window": [
+        6.35,
+        9.35
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__A__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__A__s3004.json",
+       "window": [
+        1.8,
+        4.8
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/gun.xung.loop/b1/raw/gun.xung.loop__B__s3004.json",
+       "window": [
+        0.7,
+        3.7
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "loopCrossfadeMs": 500,
+  "normalise": {
+   "mode": "lufs-i",
+   "target": -26
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "maxGrDb": 3
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2513,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/guns/gun-xung-loop",
+  "ogg": true,
+  "oggQuality": 0.6
+ },
+ "loop": true
+}

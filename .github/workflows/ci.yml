@@ -31,7 +31,7 @@ jobs:
           test "$(git ls-files --stage games/karaoke-typing | awk '{print $1}')" = "160000"
 
       - name: Validate shell scripts
-        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh
+        run: bash -n dev.sh play.sh scripts/bootstrap.sh scripts/setup-nginx.sh scripts/play.sh scripts/cleanup-dev-ports.sh scripts/setup-vocabulary-sources.sh scripts/game-dir.sh
 
       - name: Validate dev launcher arguments
         run: |
@@ -56,6 +56,9 @@ jobs:
         run: |
           pnpm learning:check
           pnpm learning:test
+
+      - name: Test portal learning bridge and game registry
+        run: pnpm portal:test
 
       - name: Validate shared vocabulary
         run: |
@@ -104,6 +107,9 @@ jobs:
           node --check scripts/validate-portal-layout.mjs
           node --check scripts/validate-space-integration.mjs
           node --check scripts/validate-play-mode.mjs
+          node --check scripts/prepare-voice-model.mjs
+          node --check scripts/offline-vosk-plugin.mjs
+          node --check scripts/voice-model-middleware.mjs
 
       - name: Validate game registry
         run: node -e "JSON.parse(require('fs').readFileSync('portal/public/games.json','utf8'))"
@@ -114,6 +120,9 @@ jobs:
           pnpm --dir portal install
           pnpm --dir games/recall-typing install
           pnpm --dir games/space-typing install
+
+      - name: Validate Voice platform
+        run: pnpm voice:check
 
       - name: Test Recall Typing
         run: pnpm --dir games/recall-typing test

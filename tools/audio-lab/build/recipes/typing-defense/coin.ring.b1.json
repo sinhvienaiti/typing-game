@@ -1,0 +1,159 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "coin.ring",
+ "group": "default",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #27), hướng 'ngân trên 4 kHz': một tiếng xu chạm của Kenney RPG handleCoins (cắt đúng một tiếng chạm 150–238 ms, lọc cao 400 Hz), cộng chuông VCSL Hand Chimes nốt ngũ cung cao (C7, A6, G6, D7): tiếng 'ting' đủ dải 60 ms, phần ngân chỉ còn trên 5 kHz (lọc cao bậc 8). Vòng 2 sau thẻ ảnh: vòng 1 dùng cả nắm xu (hai đầu tiếng, tiếng to tới muộn 100 ms) và lọc bậc 4 để lại vạch nốt chuông −65 dB tới hết file. Biến thể n dùng nốt n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "coin",
+   "role": "attack",
+   "gainDb": -2,
+   "trim": {
+    "startMs": 150,
+    "endMs": 238
+   },
+   "fadeOutMs": 50,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 400
+    }
+   ],
+   "source": {
+    "library": "kenney/rpg-audio/Audio/handleCoins.ogg"
+   }
+  },
+  {
+   "id": "ting",
+   "role": "sweetener",
+   "gainDb": -6,
+   "offsetMs": 8,
+   "trim": {
+    "endMs": 60
+   },
+   "fadeOutMs": 40,
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.5:85"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:G6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:D7:0.5:85"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "ring",
+   "role": "tail",
+   "gainDb": -4,
+   "offsetMs": 8,
+   "fadeOutMs": 220,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 5000,
+     "order": 8
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "hand-chimes",
+     "notes": "0:C7:0.5:85"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:A6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:G6:0.5:85"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "hand-chimes",
+       "notes": "0:D7:0.5:85"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 40,
+  "filters": [
+   {
+    "type": "highpass",
+    "hz": 150
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 340,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 180
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2501,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/coin",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

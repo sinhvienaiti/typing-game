@@ -1,0 +1,629 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audiolab.recipe/1",
+  "title": "Audio Lab layering recipe, version 1",
+  "description": "One sound id: layers (library, file, model output or synth), a final chain and seeded variants. AUDIO_PIPELINE.md §5.1-§5.3, §11.",
+  "type": "object",
+  "required": [
+    "schema",
+    "game",
+    "id",
+    "layers"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema": {
+      "const": "audiolab.recipe/1"
+    },
+    "game": {
+      "enum": [
+        "dragon-hold",
+        "typing-defense",
+        "typing-survival",
+        "space-typing"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "group": {
+      "type": "string",
+      "description": "§5.3 variation group (policy.VARIATION_LIMITS)."
+    },
+    "family": {
+      "type": "string",
+      "description": "§4.6 family, informational."
+    },
+    "description": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "sampleRate": {
+      "const": 48000
+    },
+    "channels": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "loop": {
+      "type": "boolean"
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/layer"
+      }
+    },
+    "chain": {
+      "$ref": "#/$defs/chain"
+    },
+    "variants": {
+      "$ref": "#/$defs/variants"
+    },
+    "export": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9/._-]*$",
+          "description": "Runtime stem under public/assets/<game>/audio, e.g. sfx/dragon/fire-impact-a; files get -<n>.ogg."
+        },
+        "ogg": {
+          "type": "boolean"
+        },
+        "oggQuality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Vorbis quality 0..1 (libsndfile compression level = 1 - quality)."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "range": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "filter": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "highpass",
+            "lowpass",
+            "bandpass",
+            "peak",
+            "lowshelf",
+            "highshelf"
+          ]
+        },
+        "hz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "lowHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "highHz": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "gainDb": {
+          "type": "number"
+        },
+        "q": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "library": {
+          "type": "string",
+          "description": "Path under ~/AudioLab/libraries, e.g. kenney/impact-sounds/Audio/impactMetal_light_002.ogg"
+        },
+        "file": {
+          "type": "string",
+          "description": "Own or owner-downloaded file; needs `ledger` (a licences.jsonl key or row)."
+        },
+        "ledger": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        },
+        "licenceText": {
+          "type": "string",
+          "description": "file sources: dated licence text to copy into art-src/audio/licences/."
+        },
+        "synth": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        },
+        "gen": {
+          "type": "object",
+          "required": [
+            "tool",
+            "model",
+            "licence",
+            "file"
+          ],
+          "properties": {
+            "tool": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "licence": {
+              "type": "string"
+            },
+            "file": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "negativePrompt": {
+              "type": "string"
+            },
+            "seed": {
+              "type": "integer"
+            },
+            "cfg": {
+              "type": "number"
+            },
+            "window": {
+              "$ref": "#/$defs/range"
+            },
+            "initAudio": {
+              "type": "string"
+            },
+            "initNoise": {
+              "type": "number"
+            },
+            "record": {
+              "type": "string",
+              "description": "Candidate record of gen/sa3.py (audiolab.sa3.candidate/1) next to the file: its sha256 must match `file`; its licence rows (model, acceptance) and dated copies go into the run's ledger."
+            }
+          }
+        },
+        "sampler": {
+          "type": "object",
+          "description": "A sampler phrase from CC0 multisamples (sampler/engine.py): rendered in-process from {instrument, notes} or read from a prior render {render: x.wav} with its x.json report.",
+          "properties": {
+            "instrument": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "description": "Index id(s), e.g. dan-tranh.normal"
+            },
+            "instrumentDir": {
+              "type": "string",
+              "description": "Sample folder under ~/AudioLab/libraries"
+            },
+            "instrumentName": {
+              "type": "string"
+            },
+            "pitched": {
+              "type": "boolean"
+            },
+            "octaveOffset": {
+              "type": "integer"
+            },
+            "notes": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              ],
+              "description": "'start:note:dur[:vel[:key]]' items, or note objects {start, note|midi|key, dur, vel, instrument, cents, gain_db, pan, choke}"
+            },
+            "bpm": {
+              "type": "number"
+            },
+            "lengthS": {
+              "type": "number"
+            },
+            "tail": {
+              "enum": [
+                "keep",
+                "cut",
+                "wrap"
+              ]
+            },
+            "tuning": {
+              "enum": [
+                "auto",
+                "sfz",
+                "none"
+              ]
+            },
+            "rr": {
+              "enum": [
+                "cycle",
+                "random"
+              ]
+            },
+            "seed": {
+              "type": "integer"
+            },
+            "veltrack": {
+              "type": "number"
+            },
+            "maxShift": {
+              "type": "number",
+              "maximum": 3
+            },
+            "render": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "anyOf": [
+            {
+              "required": [
+                "render"
+              ]
+            },
+            {
+              "required": [
+                "notes"
+              ]
+            }
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "library"
+          ]
+        },
+        {
+          "required": [
+            "file",
+            "ledger"
+          ]
+        },
+        {
+          "required": [
+            "synth"
+          ]
+        },
+        {
+          "required": [
+            "gen"
+          ]
+        },
+        {
+          "required": [
+            "sampler"
+          ]
+        }
+      ]
+    },
+    "layer": {
+      "type": "object",
+      "required": [
+        "id",
+        "source"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9_-]*$"
+        },
+        "role": {
+          "type": "string",
+          "description": "attack, body, tail, sub, mech, sweetener..."
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "offsetMs": {
+          "type": "number"
+        },
+        "gainDb": {
+          "type": "number",
+          "maximum": 24
+        },
+        "pitchSemitones": {
+          "type": "number",
+          "minimum": -24,
+          "maximum": 24
+        },
+        "pitchMode": {
+          "enum": [
+            "varispeed",
+            "preserve"
+          ]
+        },
+        "trim": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "startMs": {
+              "type": "number",
+              "minimum": 0
+            },
+            "endMs": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        "fadeInMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fadeOutMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reverse": {
+          "type": "boolean"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/filter"
+          }
+        },
+        "mute": {
+          "type": "boolean"
+        },
+        "vary": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pitchCents": {
+              "$ref": "#/$defs/range"
+            },
+            "gainDb": {
+              "$ref": "#/$defs/range"
+            },
+            "offsetMs": {
+              "$ref": "#/$defs/range"
+            },
+            "swap": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/source"
+              },
+              "description": "Alternative sources; each variant picks one of [source, ...swap]."
+            },
+            "reseed": {
+              "type": "boolean",
+              "description": "Synth layers: new noise seed per variant (default true)."
+            },
+            "swapMode": {
+              "enum": [
+                "random",
+                "cycle"
+              ],
+              "description": "random (default): each non-base variant draws one source; cycle: variant n uses source (n-1) mod count, so candidates are deliberate combos."
+            }
+          }
+        },
+        "allowClip": {
+          "type": "string",
+          "minLength": 8,
+          "description": "Rare exception to the raw clip gate (§4.3.1): why this clipped source is used on purpose (e.g. an intentionally distorted layer). Recorded in SOURCES.json rawQa.exception; the final critic then lets it pass."
+        }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "dcHpfHz": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 120
+        },
+        "hpfHz": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/filter"
+          }
+        },
+        "saturation": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "driveDb": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 18
+            },
+            "mix": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "headTrim": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "thresholdDb": {
+              "type": "number",
+              "maximum": -10
+            },
+            "preRollMs": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 20
+            }
+          }
+        },
+        "maxLengthMs": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "tail": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "floorDb": {
+              "type": "number",
+              "maximum": -30
+            },
+            "fadeMs": {
+              "type": "number",
+              "minimum": 5
+            },
+            "shape": {
+              "enum": [
+                "fade",
+                "exp"
+              ],
+              "description": "fade (default): drop the tail under floorDb, then a fade of fadeMs. exp: an exponential cap from kneeMs (default 35 % of the length, never before the peak + 5 ms) down to floorDb at the last sample; for sounds a maxLengthMs cuts (batch 0b review: no flat cut then fade)."
+            },
+            "kneeMs": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "loopCrossfadeMs": {
+          "type": "number",
+          "minimum": 0
+        },
+        "normalise": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "enum": [
+                "lufs-m-max",
+                "lufs-s-max",
+                "lufs-i",
+                "peak",
+                "none"
+              ]
+            },
+            "target": {
+              "type": "number",
+              "maximum": 0
+            }
+          }
+        },
+        "limiter": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ceilingDbtp": {
+              "type": "number",
+              "maximum": -0.1
+            },
+            "releaseMs": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "maxGrDb": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "includeBase": {
+          "type": "boolean",
+          "description": "Variant 1 has no random pitch/gain/swap (the hero)."
+        },
+        "pitchCents": {
+          "$ref": "#/$defs/range"
+        },
+        "gainDb": {
+          "$ref": "#/$defs/range"
+        }
+      }
+    }
+  }
+}

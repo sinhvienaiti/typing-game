@@ -3,12 +3,13 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/local-env.sh"
 
 TARGET="${1:-all}"
 
 case "$TARGET" in
   -h|--help|help)
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
     echo
     echo "Default: all"
     echo "If Git is available, dev.sh pulls and updates submodules first."
@@ -29,11 +30,20 @@ case "$TARGET" in
   space-typing)
     TARGET="space"
     ;;
-  all|monkeytype|shooter|recall|karaoke|space)
+  dragon-hold)
+    TARGET="dragon"
+    ;;
+  typing-defense)
+    TARGET="td"
+    ;;
+  typing-survival)
+    TARGET="survival"
+    ;;
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival)
     ;;
   *)
     echo "Unknown target: $TARGET"
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
     exit 1
     ;;
 esac
@@ -71,6 +81,18 @@ install_if_missing() {
   fi
 }
 
+# New games may not be checked out yet; "all" skips them until they exist.
+install_if_present() {
+  local dir="$1"
+  local label="$2"
+
+  if [[ ! -f "$dir/package.json" ]]; then
+    echo "  • $label is not checked out yet; skipped."
+    return
+  fi
+  install_if_missing "$dir" "$label"
+}
+
 ensure_monkeytype_config() {
   local config="$ROOT_DIR/games/monkeytype/frontend/src/ts/constants/firebase-config.ts"
   local example="$ROOT_DIR/games/monkeytype/frontend/src/ts/constants/firebase-config-example.ts"
@@ -97,6 +119,9 @@ prepare_without_git() {
       install_if_missing "$ROOT_DIR/games/space-typing" "Space Typing"
       install_if_missing "$ROOT_DIR/games/monkeytype" "Monkeytype"
       ensure_monkeytype_config
+      install_if_present "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+      install_if_present "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+      install_if_present "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
       ;;
     monkeytype)
       install_if_missing "$ROOT_DIR/games/monkeytype" "Monkeytype"
@@ -113,6 +138,15 @@ prepare_without_git() {
       ;;
     space)
       install_if_missing "$ROOT_DIR/games/space-typing" "Space Typing"
+      ;;
+    dragon)
+      install_if_missing "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
+      ;;
+    td)
+      install_if_missing "$ROOT_DIR/games/typing-defense" "Lời Gọi"
+      ;;
+    survival)
+      install_if_missing "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
       ;;
   esac
 }
@@ -140,6 +174,34 @@ prepare_space_art() {
   pnpm --dir "$ROOT_DIR/games/space-typing" art:prepare
 }
 
+prepare_voice_assets() {
+  if [[ "$TARGET" != "all" && "$TARGET" != "space" ]]; then
+    echo "  • Space Typing is not selected; Voice preparation skipped."
+    return
+  fi
+
+  if ! command -v node >/dev/null 2>&1 || ! command -v pnpm >/dev/null 2>&1; then
+    echo "Node and pnpm are required to prepare the offline Voice model."
+    exit 1
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    echo "Python 3 is required to prepare the offline Voice model."
+    echo "On Ubuntu/WSL run: sudo apt update && sudo apt install -y python3"
+    exit 1
+  fi
+
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "  → Installing the updated Platform dependencies required by Voice..."
+    pnpm install
+  fi
+  if ! node -e 'require.resolve("vosk-browser")' >/dev/null 2>&1; then
+    echo "The Portal Voice dependency vosk-browser is still unavailable after pnpm install."
+    exit 1
+  fi
+
+  pnpm voice:prepare
+}
+
 if has_git_checkout; then
   if [[ "${TYPING_GAME_DEV_AFTER_PULL:-0}" != "1" ]]; then
     echo "[1/5] Pulling latest platform code..."
@@ -157,8 +219,9 @@ else
   prepare_without_git
 fi
 
-echo "[3/5] Refreshing local Space Typing art..."
+echo "[3/5] Refreshing local Space Typing art and Voice assets..."
 prepare_space_art
+prepare_voice_assets
 
 echo "Indexing local background music..."
 pnpm music:index
@@ -169,6 +232,7 @@ pnpm setup:dev
 echo "[5/5] Starting development services for: $TARGET"
 if [[ "$TARGET" == "all" || "$TARGET" == "space" ]]; then
   node games/space-typing/scripts/local-duel.mjs start
+  node games/space-typing/scripts/local-account.mjs start
 fi
 case "$TARGET" in
   all)
@@ -188,5 +252,14 @@ case "$TARGET" in
     ;;
   space)
     exec pnpm dev:space
+    ;;
+  dragon)
+    exec pnpm dev:dragon
+    ;;
+  td)
+    exec pnpm dev:td
+    ;;
+  survival)
+    exec pnpm dev:survival
     ;;
 esac

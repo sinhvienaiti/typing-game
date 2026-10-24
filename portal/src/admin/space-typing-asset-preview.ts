@@ -1,0 +1,92 @@
+import {
+  ProductionPreviewBridge,
+  resolveSpaceTypingProductionPreviewTarget,
+} from "./v2/preview/production-preview-bridge";
+import {
+  shipProductionPreviewAdapter,
+  type ShipProductionPreviewCandidate,
+  type ShipProductionPreviewScenario,
+  type ShipProductionPreviewSource,
+} from "./v2/preview/adapters/ships";
+
+export type SpaceTypingAssetPreviewScenario = ShipProductionPreviewScenario;
+export type SpaceTypingAssetPreviewSource = ShipProductionPreviewSource;
+export type SpaceTypingShipPreviewCandidate = ShipProductionPreviewCandidate;
+
+export const resolveSpaceTypingAssetPreviewTarget = resolveSpaceTypingProductionPreviewTarget;
+
+/**
+ * Compatibility facade for the existing Ships page. The shared A10.5
+ * ProductionPreviewBridge owns isolation, security, stale cancellation and
+ * lifecycle; this facade keeps A5 callers source-compatible and preserves the
+ * required candidate-before-scenario/tuning ordering while Ship media prepares.
+ */
+export class SpaceTypingAssetPreviewBridge {
+  private latestCandidate: Promise<unknown> = Promise.resolve();
+
+  private constructor(
+    private readonly bridge: ProductionPreviewBridge<
+      ShipProductionPreviewCandidate,
+      ShipProductionPreviewScenario,
+      Readonly<Record<string, unknown>>
+    >,
+  ) {}
+
+  static async mount(host: HTMLElement): Promise<SpaceTypingAssetPreviewBridge> {
+    const bridge = await ProductionPreviewBridge.mount(host, shipProductionPreviewAdapter);
+    return new SpaceTypingAssetPreviewBridge(bridge);
+  }
+
+  get iframe(): HTMLIFrameElement {
+    return this.bridge.iframe;
+  }
+
+  get origin(): string {
+    return this.bridge.origin;
+  }
+
+  get previewSessionId(): string {
+    return this.bridge.previewSessionId;
+  }
+
+  async waitUntilReady(): Promise<void> {
+    return this.bridge.waitUntilReady();
+  }
+
+  loadShip(candidate: ShipProductionPreviewCandidate): Promise<unknown> {
+    const operation = this.bridge.loadCandidate(candidate);
+    this.latestCandidate = operation;
+    return operation;
+  }
+
+  async setScenario(scenario: ShipProductionPreviewScenario): Promise<unknown> {
+    await this.latestCandidate;
+    return this.bridge.setScenario(scenario);
+  }
+
+  async setTuning(visual: Readonly<Record<string, unknown>>): Promise<unknown> {
+    await this.latestCandidate;
+    return this.bridge.setTuning(visual);
+  }
+
+  async setPaused(paused: boolean): Promise<unknown> {
+    return this.bridge.setPaused(paused);
+  }
+
+  async reset(): Promise<unknown> {
+    return this.bridge.reset();
+  }
+
+  async replay(): Promise<void> {
+    await this.latestCandidate;
+    return this.bridge.replay();
+  }
+
+  async dispose(): Promise<void> {
+    return this.bridge.dispose();
+  }
+
+  disposeImmediately(): void {
+    this.bridge.disposeImmediately();
+  }
+}

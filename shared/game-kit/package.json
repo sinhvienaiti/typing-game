@@ -1,0 +1,20 @@
+{
+  "name": "@typing-game/game-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared game kit copied into each game's src/kit by scripts/sync-game-kit.mjs.",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "@types/three": "0.170.0",
+    "three": "0.170.0",
+    "typescript": "^6.0.2",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@11.21.0"
+}

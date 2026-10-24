@@ -1,0 +1,208 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: gun.xung
+game: typing-survival
+status: draft
+manual_fields: [purpose, prompt.text, critic.intent, critic.loop_eval]
+when: Viên Xung rời nòng (súng bắn 10 viên/s, tiếng phát cho một nửa số viên)
+purpose: 'Pháo tự động hạng nặng: khóa nòng đóng, cú đấm trầm có thân, tiếng nổ giòn; vang hành lang thép rất ngắn trong file (đuôi dài khi ngừng bắn là đề xuất gun.xung.tail, mã chưa có)'
+category: shot
+family: ban
+source_class: shot
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: guns
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps:
+    per_s: 5
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  manual: true
+  target_ms: null
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 96
+  max_ms: 380
+  basis: 'BATCH1_BRIEF §3.2 (lô 1): đầu 0–120 ms, đuôi tắt dần tới khoảng 350 ms. Tài liệu game ghi 120 ms (THEME_SOUND_LIST); chờ người điều phối sửa'
+  category_range_ms: [80, 350]
+  music: null
+onset:
+  class: impact
+  rise_max_ms: 10
+  lead_silence_max_ms: 5
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); THEME_SOUND_LIST §2: cắt im lặng đầu file, tiếng phải bắt đầu ngay, dưới 5 ms'
+variants:
+  target: 6
+  min: 4
+  max: 6
+  basis: 'THEME_SOUND_LIST §2: tiếng lặp nhiều cần 4–6 biến thể; §9 #11: 6'
+randomisation:
+  group: shot
+  pitch_cents: 100
+  gain_db: 2
+  rules: [Tối đa 4 tiếng cho mỗi loại vũ khí, Hai lần phát cách nhau ít nhất 30 ms]
+  current_code: Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: body
+      range_hz: [120, 800]
+      role: Thân súng, thân tiếng trúng
+    - band: sub
+      range_hz: [20, 120]
+      role: Sub súng, sub dùng chung hit.sub
+  voice_band: onset-only
+  voice_band_text: Chỉ đầu tiếng rất ngắn ở 1–4 kHz; không ngân ở dải giọng đọc (§6.4)
+  spectrum: 'Súng: từ 25 % năng lượng dưới 150 Hz, crest từ 12 dB. Khạc hoặc phóng: dưới 120 Hz thấp hơn ít nhất 12 dB'
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: guns
+  bus_gain: 0.42
+  bus_gain_db: -7.54
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: voice() nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -7.54
+  pronunciation_duck_db: -6.02
+  mix_target:
+    metric: lufs-m-max
+    range: [-24, -18]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Heavy autocannon single shot from a steel turret: a breech clack, a deep punch with a sharp crack and a short thick body, a quick slap off the steel corridor, 350 ms, industrial.'
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants:
+    - 'C: TrackType: SFX, one shot of a heavy machine gun, punchy low-end boom, metallic bolt clack, very short tail, gritty'
+    - 'E: TrackType: SFX, heavy autocannon firing a single round inside a steel turret, deep chesty body, punchy low-mid thump, short, close, dry, industrial'
+    - 'F: TrackType: SFX, one heavy cannon shot, thick low-mid punch and a short metallic body resonance, tight, close mic, dry, industrial steel'
+    - 'I: TrackType: SFX, heavy autocannon single shot inside a steel turret, mechanical breech clack, deep punch with a sharp crack, short thick body, quick slap echo off a steel corridor, industrial'
+    - 'J: Large caliber cannon firing once in a metal hangar, bolt slamming home, powerful chesty blast with a gritty crack, brief metallic reverberation, close'
+    - 'K: TrackType: SFX, heavy turret gun single shot, breech clack, powerful chest punch with a thick steel body, a brief steel ring and a quick slap echo off the corridor walls, tight, industrial'
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [model-later, cc0-layer, synth]
+      detail: Stable Audio 3, cộng lớp cơ khí Kenney, cộng sub tổng hợp
+    - rank: 2
+      kinds: [synth]
+      detail: Tổng hợp thuần (ElevenLabs gói trả phí là việc của chủ dự án)
+  needs_now: []
+  needs_later: [buoc-0]
+  note: null
+  batch1:
+    n: 11
+    why: Phát 5 lần mỗi giây
+    source: 'Ghép lớp: cơ khí Kenney (Impact Metal, Plate), thân Stable Audio 3, sub tổng hợp. Họ bẩn'
+    variants: '6'
+  style_board: true
+  sa3_trial: true
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Ghép bốn lớp: thịch sub 40–90 Hz ≤120 ms, cơ khí ngắn, năng lượng, đuôi dùng chung hit.tail (§8.3)'
+  - Phát 5 lần mỗi giây nên phải ngắn (§3.2)
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 200
+  repeat_basis: Trần phát mỗi giây của tài liệu hoặc mã
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: shot_gun
+  dirty: true
+  weights_batch1:
+    l2: 0.9
+    l3: 0.0
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 200
+  ast:
+    expected: ['Gunshot, gunfire']
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 10
+  head_max_ms: 5
+  rate_hz: 5
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'Heavy autocannon single shot from a steel turret: a breech clack, a deep punch with a sharp crack and a short thick body, a quick slap off the steel corridor, 350 ms, industrial.'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/theme-audio.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 4. Súng
+  plan:
+    - 'AUDIO_PIPELINE §9 #11 (lô 1)'
+    - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
+    - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
+notes: 'Q6 (24/10): đã soát, thiết kế lô 1 đã theo Q6: khóa nòng (chuẩn bị), đấm và nổ giòn (phát), thân dày ngắn, vang hành lang rất ngắn trong file. Súng phát 5 lần mỗi giây nên mỗi phát ngắn. Sửa sau review (24/10): mã game phát một tiếng mỗi phát, không ghép lớp nào; gun.xung.tail (khi ngừng bắn) và hit.tail mới là đề xuất (mục 6.3 #3, 16 #6 còn mở), nên vang ngắn phải nằm trong file. E, F là prompt thân cho công thức lô 1 (gun.xung.d1a…d2b.b1.json): công thức ghép sẵn lớp đuôi TAIL (nhiễu hồng 160–650 Hz) vào từng phát, nên ''thump'' của E chỉ là lớp dưới thân, có đuôi đè lên trong file. Bỏ B, D (''thump'' với tiếng nổ giòn, không thân, ''dry''), H (''chest thump'', ''dry''); thêm K thay H. critic.loop_eval giữ bật bằng tay (manual_fields): bộ sinh tắt nó khi prompt ghi 350 ms (từ 300 ms trở lên), nhưng đây là âm lặp dày nhất cả ba game và phiên S1 nghe nó ở bối cảnh "Liên thanh 3 s". Bộ chấm tự lặp 3–4 s theo độ dài thật của file (dưới 300 ms, critic/learned.py), không đọc khóa này. Bỏ A (''no long reverb'', chữ phủ định) và G (''short boomy thump''); giữ C, E, F; thêm I, J (cả phát). Prompt trong THEME_SOUND_LIST.md nay ghi 350 ms, khớp duration (manual) 96–380 ms của lô 1. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E–H là prompt thân (1 s) cho họ súng liên thanh (mục 3). duration (manual, 96–380 ms) là ngoại lệ của lô 1: phát đơn có đầu 0–120 ms và đuôi tắt dần tới khoảng 350 ms (mục 3.2), chờ người điều phối sửa THEME_SOUND_LIST.md; bỏ khi tài liệu game đổi.'

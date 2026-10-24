@@ -1,0 +1,97 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "leak",
+ "group": "rare-fixed",
+ "family": "nen",
+ "description": "Lô 1 (BATCH1_BRIEF #28): kẻng sắt VCSL Anvil ba nhát (0a v2, anh chấm 4/5, 0d842a87). Chỉ hoàn thiện: 1) đúng nhịp 0a (0, 0,28, 0,56 s) nhưng đuôi tắt dần tự nhiên theo hàm mũ tới 1,25 s thay cho làm mờ 250 ms; 2) nhịp dồn hơn (0, 0,24, 0,48 s), nhát cuối ngân dài hơn. Sub nhẹ dưới nhát đầu, khoét 2,5 kHz như 0a.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "strike",
+   "role": "body",
+   "fadeOutMs": 200,
+   "source": {
+    "sampler": {
+     "instrument": "anvil",
+     "notes": "0:anvil-hit2:0.4:105 0.28:anvil-hit2:0.4:90 0.56:anvil-hit2:0.65:80"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "anvil",
+       "notes": "0:anvil-hit2:0.4:105 0.24:anvil-hit2:0.4:92 0.48:anvil-hit2:0.75:84"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "sub",
+   "role": "sub",
+   "source": {
+    "synth": "sub_thump",
+    "params": {
+     "startHz": 70,
+     "endHz": 45,
+     "glideMs": 80,
+     "durMs": 260,
+     "decayMs": 240
+    }
+   },
+   "gainDb": -12
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "filters": [
+   {
+    "type": "peak",
+    "hz": 2500,
+    "gainDb": -4,
+    "q": 0.8
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 1250,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 900
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2801,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/alerts/leak",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

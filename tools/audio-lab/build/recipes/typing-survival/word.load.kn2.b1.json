@@ -1,0 +1,167 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "word.load.kn2",
+ "group": "reward",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #17), hướng 2 sửa lại: 'ka' là tiếng tách đầu của Kenney RPG metalClick (cắt từ 97 ms của file, lọc cao 1 kHz), 'chunk' là cú chốt của metalLatch (cắt từ 41 ms của file) 52 ms sau, dưới đó thân Stable Audio 3 lọc thấp 900 Hz. Bản kn trước chỉ cắt đuôi nên 'ka' là đoạn nhiễu dẫn của file và cú chính tới muộn khoảng 95 ms.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "ka",
+   "role": "attack",
+   "source": {
+    "library": "kenney/rpg-audio/Audio/metalClick.ogg"
+   },
+   "gainDb": 2,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1000
+    }
+   ],
+   "trim": {
+    "startMs": 97,
+    "endMs": 150
+   },
+   "fadeOutMs": 30
+  },
+  {
+   "id": "chunk",
+   "role": "mech",
+   "source": {
+    "library": "kenney/rpg-audio/Audio/metalLatch.ogg"
+   },
+   "offsetMs": 52,
+   "gainDb": -3,
+   "trim": {
+    "startMs": 41,
+    "endMs": 150
+   },
+   "fadeOutMs": 70,
+   "vary": {
+    "offsetMs": [
+     -8,
+     10
+    ]
+   }
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "offsetMs": 50,
+   "gainDb": -2,
+   "fadeInMs": 2,
+   "fadeOutMs": 80,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 900,
+     "order": 4
+    },
+    {
+     "type": "highpass",
+     "hz": 60
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2001.json",
+     "window": [
+      0.045,
+      0.245
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2002.json",
+       "window": [
+        0.28375,
+        0.48375
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2003.json",
+       "window": [
+        0.069,
+        0.269
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2004.json",
+       "window": [
+        0.28225,
+        0.48225
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 300,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 200
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 50,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 2535,
+  "includeBase": true,
+  "pitchCents": [
+   -20,
+   20
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/words/word-load",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

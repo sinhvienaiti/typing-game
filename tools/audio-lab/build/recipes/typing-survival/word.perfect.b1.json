@@ -1,0 +1,239 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "word.perfect",
+ "group": "reward",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #18): word.load (bản máy xếp đầu: word.load.kn2-v4) cộng tiếng nạp điện rít lên, đặt ngoài dải giọng: biến thể 1 dưới 1 kHz (răng cưa 280→880 Hz, lọc thấp 1 kHz), biến thể 2 trên 4 kHz (sine 4,6→7,2 kHz); bốn tia lửa trên 5 kHz.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "ka",
+   "role": "attack",
+   "source": {
+    "library": "kenney/rpg-audio/Audio/metalClick.ogg"
+   },
+   "gainDb": 2,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1000
+    }
+   ],
+   "trim": {
+    "startMs": 97,
+    "endMs": 150
+   },
+   "fadeOutMs": 30
+  },
+  {
+   "id": "chunk",
+   "role": "mech",
+   "source": {
+    "library": "kenney/rpg-audio/Audio/metalLatch.ogg"
+   },
+   "offsetMs": 52,
+   "gainDb": -3,
+   "trim": {
+    "startMs": 41,
+    "endMs": 150
+   },
+   "fadeOutMs": 70
+  },
+  {
+   "id": "body",
+   "role": "body",
+   "offsetMs": 50,
+   "gainDb": -2,
+   "fadeInMs": 2,
+   "fadeOutMs": 80,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 900,
+     "order": 4
+    },
+    {
+     "type": "highpass",
+     "hz": 60
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2004.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/word.load/b1/raw/word.load__A__s2004.json",
+     "window": [
+      0.28225,
+      0.48225
+     ]
+    }
+   }
+  },
+  {
+   "id": "whine",
+   "role": "sweetener",
+   "offsetMs": 90,
+   "gainDb": -12,
+   "source": {
+    "synth": "tone",
+    "params": {
+     "wave": "saw",
+     "freqHz": 280,
+     "endHz": 880,
+     "glideMs": 260,
+     "durMs": 300,
+     "attackMs": 30,
+     "decayMs": 500
+    }
+   },
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1000,
+     "order": 4
+    }
+   ],
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "synth": "tone",
+      "params": {
+       "wave": "sine",
+       "freqHz": 4600,
+       "endHz": 7200,
+       "glideMs": 260,
+       "durMs": 300,
+       "attackMs": 30,
+       "decayMs": 500
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "spark0",
+   "role": "sweetener",
+   "offsetMs": 190,
+   "gainDb": -20,
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 5200,
+     "lpHz": 12000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -20,
+     20
+    ]
+   }
+  },
+  {
+   "id": "spark1",
+   "role": "sweetener",
+   "offsetMs": 260,
+   "gainDb": -23,
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 5200,
+     "lpHz": 12000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -20,
+     20
+    ]
+   }
+  },
+  {
+   "id": "spark2",
+   "role": "sweetener",
+   "offsetMs": 330,
+   "gainDb": -25,
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 5200,
+     "lpHz": 12000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -20,
+     20
+    ]
+   }
+  },
+  {
+   "id": "spark3",
+   "role": "sweetener",
+   "offsetMs": 400,
+   "gainDb": -28,
+   "source": {
+    "synth": "click",
+    "params": {
+     "durMs": 2,
+     "hpHz": 5200,
+     "lpHz": 12000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -20,
+     20
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 520,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 380
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 2,
+  "seed": 2542,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/words/word-perfect",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

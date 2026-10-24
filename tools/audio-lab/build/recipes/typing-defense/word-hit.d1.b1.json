@@ -1,0 +1,190 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "word-hit.d1",
+ "group": "word-reward",
+ "family": "thuong",
+ "description": "Lô 1 (BATCH1_BRIEF #21), hướng 1 = công thức 0a mà anh chấm 3/5 ở C4 (e79e84d1): tiếng gảy đàn tranh VCSL Normal đủ dải giữ 120 ms, phần ngân cùng nốt lọc thấp 1 kHz bậc 4 nhỏ hơn 4 dB, khoét nhẹ 2,5 kHz (mục 6.2). Cả thang hạ một quãng tám: A3 (từ ẩu), C4, D4, F4, G4, A4, C5. Không lối rung (0a: 2/5). Biến thể n là nốt n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "pluck",
+   "role": "attack",
+   "trim": {
+    "endMs": 120
+   },
+   "fadeOutMs": 90,
+   "source": {
+    "sampler": {
+     "instrument": "dan-tranh.normal",
+     "notes": [
+      {
+       "start": 0,
+       "note": "A3",
+       "dur": 0.8,
+       "vel": 100,
+       "cents": -25.0
+      }
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:C4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:D4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:F4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:G4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:A4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:C5:0.8:100"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "ring",
+   "role": "tail",
+   "gainDb": -4,
+   "fadeOutMs": 250,
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1000,
+     "order": 4
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "dan-tranh.normal",
+     "notes": [
+      {
+       "start": 0,
+       "note": "A3",
+       "dur": 0.8,
+       "vel": 100,
+       "cents": -25.0
+      }
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:C4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:D4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:F4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:G4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:A4:0.8:100"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "dan-tranh.normal",
+       "notes": "0:C5:0.8:100"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 40,
+  "filters": [
+   {
+    "type": "peak",
+    "hz": 2500,
+    "gainDb": -3,
+    "q": 0.7
+   }
+  ],
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 900,
+  "tail": {
+   "floorDb": -60,
+   "fadeMs": 200
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 7,
+  "seed": 2101,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/reward/word-hit",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

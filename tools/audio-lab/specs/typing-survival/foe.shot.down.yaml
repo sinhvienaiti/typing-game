@@ -1,0 +1,204 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: foe.shot.down
+game: typing-survival
+status: draft
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
+when: Xung bắn rơi đạn của lính
+purpose: 'Xung bắn rơi đạn của lính: viên đạn vỡ giữa không trung, tia lửa nhỏ tóe, mảnh kim loại leng keng; vang ngắn'
+category: hit-small
+family: trung
+source_class: impact
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: impacts
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 150
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 120
+  max_ms: 180
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [50, 150]
+  music: null
+onset:
+  class: impact
+  rise_max_ms: 10
+  lead_silence_max_ms: 5
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); THEME_SOUND_LIST §2: cắt im lặng đầu file, tiếng phải bắt đầu ngay, dưới 5 ms'
+variants:
+  target: 6
+  min: 6
+  max: 8
+  basis: AUDIO_PIPELINE §4.3.3 (Trúng nhỏ)
+randomisation:
+  group: hit-small
+  pitch_cents: 150
+  gain_db: 2
+  rules: [Gom trong 38–45 ms (kit đang dùng 38 ms)]
+  current_code: Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: presence
+      range_hz: [4000, 8000]
+      role: Tách phím, lách tách điện, đầu tiếng hit.t1
+    - band: body
+      range_hz: [120, 800]
+      role: Thân súng, thân tiếng trúng
+  voice_band: onset-only
+  voice_band_text: Chỉ đầu tiếng rất ngắn ở 1–4 kHz; không ngân ở dải giọng đọc (§6.4)
+  spectrum: Đầu tiếng 2–6 kHz, thân 200–800 Hz, crest từ 12 dB
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: impacts
+  bus_gain: 0.6
+  bus_gain_db: -4.44
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: voice() nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -4.44
+  pronunciation_duck_db: -6.02
+  mix_target:
+    metric: lufs-m-max
+    range: [-22, -20]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Small projectile shot down mid-air: a short crisp metallic crack, a tiny spark burst and fragments tinkling, short steel corridor echo, 150 ms.'
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants:
+    - 'A: TrackType: SFX, small projectile shot down mid-air, crisp metallic crack, tiny burst of sparks, fragments tinkling, short echo in a steel corridor'
+    - 'B: Bullet hitting an incoming plasma glob, sharp snap and sizzle, small debris scattering, brief metallic reverberation'
+    - 'C: TrackType: SFX, interception hit, quick bright crack with a small spark crackle, tiny shards, short steel room tail'
+    - 'D: Small energy bolt destroyed in flight, crisp tick and fizz, little fragments bouncing, short ringing echo'
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [cc0-layer, model-later]
+      detail: 'Ghép lớp: lớp đầu từ Kenney Impact (CC0), thân và đuôi từ Stable Audio 3'
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3 nguyên khối, tạo lại thân hoặc đuôi bằng inpaint
+    - rank: 3
+      kinds: [synth]
+      detail: Tổng hợp
+  needs_now: []
+  needs_later: [buoc-0]
+  note: 'Khi chưa có Stable Audio 3: lớp đầu Kenney Impact + thân tổng hợp (§10.1)'
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 200
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: hit_small
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 200
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 10
+  head_max_ms: 5
+  rate_hz: 5
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'Small projectile shot down mid-air: a short crisp metallic crack, a tiny spark burst and fragments tinkling, short steel corridor echo, 150 ms.'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/theme-audio.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 5. Trúng, hạ, quái bắn
+  plan: []
+notes: 'Q6 (24/10): bỏ ''metallic pop'' (pop bị cấm). Nứt vỡ (phát), tia lửa và mảnh (thân), vang ngắn (đuôi). Dài 90 → 150 ms để có chỗ cho đuôi ngắn (vẫn trong nhóm Trúng nhỏ 50–150 ms).'

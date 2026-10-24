@@ -1,0 +1,204 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "dragon-hold",
+  "id": "fire.impact.a",
+  "group": "hit-heavy",
+  "family": "trung",
+  "description": "Lô 0 (chưa có Stable Audio 3): cầu lửa trúng, phụt lửa trầm, thân tròn. Đầu tiếng Kenney Impact Soft (CC0, hoán đổi), luồng phụt nhiễu hồng lọc thấp, sub 80→45 Hz, vài tiếng lách tách than hồng trên 3 kHz. Thay lớp phụt bằng Stable Audio 3 khi bước 0 cho phép (thẻ spec, source_plan). Vòng 2: sub kéo dài 214 ms (mục tiêu ≤ 150 ms), rút còn 110 ms.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "attack",
+      "role": "attack",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactSoft_heavy_000.ogg"
+      },
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 250
+        }
+      ],
+      "fadeOutMs": 90,
+      "trim": {
+        "endMs": 260
+      },
+      "vary": {
+        "pitchCents": [
+          -60,
+          60
+        ],
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactSoft_heavy_001.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactSoft_heavy_002.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactPunch_heavy_001.ogg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "whoomph",
+      "role": "body",
+      "source": {
+        "synth": "noise_sweep",
+        "params": {
+          "color": "pink",
+          "durMs": 320,
+          "fromHz": 900,
+          "toHz": 160,
+          "mode": "lowpass",
+          "order": 2,
+          "shape": "swell",
+          "peakAt": 0.12,
+          "curve": 0.7
+        }
+      },
+      "gainDb": -3,
+      "fadeOutMs": 80,
+      "vary": {
+        "gainDb": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "sub",
+      "role": "sub",
+      "source": {
+        "synth": "sub_thump",
+        "params": {
+          "startHz": 80,
+          "endHz": 45,
+          "glideMs": 70,
+          "durMs": 110,
+          "decayMs": 100
+        }
+      },
+      "gainDb": -5
+    },
+    {
+      "id": "ember1",
+      "role": "sweetener",
+      "source": {
+        "synth": "click",
+        "params": {
+          "durMs": 3,
+          "hpHz": 3200,
+          "lpHz": 9000
+        }
+      },
+      "offsetMs": 70,
+      "gainDb": -20,
+      "vary": {
+        "offsetMs": [
+          -15,
+          25
+        ]
+      }
+    },
+    {
+      "id": "ember2",
+      "role": "sweetener",
+      "source": {
+        "synth": "click",
+        "params": {
+          "durMs": 2,
+          "hpHz": 3800,
+          "lpHz": 10000
+        }
+      },
+      "offsetMs": 150,
+      "gainDb": -23,
+      "vary": {
+        "offsetMs": [
+          -25,
+          30
+        ]
+      }
+    },
+    {
+      "id": "ember3",
+      "role": "sweetener",
+      "source": {
+        "synth": "click",
+        "params": {
+          "durMs": 3,
+          "hpHz": 3000,
+          "lpHz": 8000
+        }
+      },
+      "offsetMs": 235,
+      "gainDb": -26,
+      "vary": {
+        "offsetMs": [
+          -30,
+          30
+        ]
+      }
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "filters": [
+      {
+        "type": "lowpass",
+        "hz": 9000,
+        "order": 2
+      },
+      {
+        "type": "peak",
+        "hz": 2500,
+        "gainDb": -3,
+        "q": 0.8
+      }
+    ],
+    "saturation": {
+      "driveDb": 3,
+      "mix": 0.3
+    },
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.5
+    },
+    "maxLengthMs": 400,
+    "tail": {
+      "floorDb": -60,
+      "fadeMs": 30
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 60,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 4,
+    "seed": 341,
+    "includeBase": true,
+    "pitchCents": [
+      -80,
+      80
+    ],
+    "gainDb": [
+      -1,
+      1
+    ]
+  },
+  "export": {
+    "path": "sfx/dragon/fire-impact-a",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}
