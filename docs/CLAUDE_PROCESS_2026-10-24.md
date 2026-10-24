@@ -89,14 +89,28 @@ Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome c
 | typing-defense | `8f5ae21` | Chỉ có phần âm Q6. R2 **đang dở trong cây làm việc** (khoảng 63 file), lượt chạy lại sẽ chụp vào nhánh `wip/r2-partial-2026-10-24` rồi làm tiếp |
 | cha | `bfdf2177`, `512033e9` | Viết lại 54/66 thẻ âm hành động theo Q6 (`tools/audio-lab/Q6_REWRITE_2026-10-24.md`). Kit: atlas chữ số đo theo nét mực, nhãn ở hàng riêng; canon và BALANCE. Kiểm tra làn âm: **chưa đạt** (`hit.t1`/`t2` của Tuyến Cuối giữ nguyên với lý do sai; 4 thẻ còn "thump/thud"), đang sửa |
 
+- 25/10 (rạng sáng), **bước B, đợt 2 (đã push)**:
+
+| Repo | Commit | Nội dung | Kiểm tra độc lập |
+|---|---|---|---|
+| typing-defense | `66a2888`, `a6309e4`, `dd4534c`, `a9d855e`, `f9d4667`, `1da07bc` | 1B R2: Tối Thượng, Chữ Chiêu, Mảnh Chữ, Ngắt, Tanuki, Nuppeppō, chế độ hoảng; thẻ nhà tự xuống dòng; kịch bản `td-1b-ult`, `td-1b-direct`; `BUILD_NOTES` §7.3. Phần dở cũ chỉ còn ở nhánh cục bộ `wip/r2-partial-2026-10-24` (`c7db97d`, chưa push). Âm Q6: prompt pack `04-audio*.md` | **Chưa đạt**: G5 chỉ đạt với bot Chuẩn; cân bằng R2 tệ hơn R1 (B3 trượt, B1 trượt cả hai bộ); cần chỉnh cân bằng bị để chủ dự án chọn, trái luật chọn theo đề xuất; JS gzip 87,16 kB, vượt 85 kB |
+| typing-survival | `9e6d91c`, `0e36f7c`, `4490077` | Báo cáo 100 seed trên `49ba852`: lần đầu **G3m, B3, B4 đạt**. Còn trượt B1, B7 và vế "tốt nhất ≤ 97 %" của G3c. 9 vòng chỉnh sau đó không giữ được vòng nào. Âm Q6: `hit.t1`/`t2`/`t4` | Đạt (lỗi nhỏ) |
+| dragon-hold | `61d372f` | Bảng giọng giữ đúng độ dài âm đang phát (`synthMs`) cho các đích Q6 dài hơn | Lượt kiểm tra vòng 3: **chưa đạt**. Dải nhàn ≤ 20 % riêng của game (D27) che việc B1 trượt theo dải chung ≤ 10 % cho cả 6 bot; không tài liệu nào đề xuất D27. D29 hạ sàn đọc được (stagger khoảng 0,34 s so với canon 0,6 s) |
+| cha | `3bc8322a` | Q6 sửa sau review: TS hit, gỡ thump/thud, `gen.sa3` chặn từ Q6, `test_sa3_q6.py` | Đạt (lỗi nhỏ) |
+
+Test audio-lab trên Dell:
+- Lệnh: `AUDIOLAB_HOME=$HOME/AudioLab ~/.venvs/audiolab-tests/bin/python -m pytest -q specs/tests gen/tests`, chạy trong `tools/audio-lab`. Venv chỉ phục vụ test (numpy, scipy, soundfile, soxr, librosa, pyloudnorm, pyyaml, jsonschema, pytest, ghim theo `requirements.txt`); không có mô hình.
+- Kết quả: 206 đạt, 2 trượt. Hai test trượt vì 14 thẻ S1 của Tuyến Cuối chưa có bộ đọc trong `specs/readers/typing_survival.py`.
+- Phải đặt `AUDIOLAB_HOME`. Nếu không, `pytest.ini` tạo một thư mục tên đúng nguyên chữ `$AUDIOLAB_HOME` ngay trong `tools/audio-lab` (đã bị gitignore).
+
 ## 5. Đang làm
 
-- Bước B, đợt 2 (workflow `phase-b-resume`):
-  - kiểm tra độc lập Rồng Giữ Ải;
-  - làm nốt R2 của Lời Gọi;
-  - làm nốt lượt súng của Tuyến Cuối (báo cáo 100 seed, kịch bản, tài liệu);
-  - sửa các lỗi kiểm tra tìm ra ở làn âm Q6.
-- Nếu phiên bị ngắt nữa: đọc `git log` và `git status` của từng repo, rồi chạy tiếp từ trạng thái đó. Mỗi làn ghi kết quả chạy vào `games/<game>/tmp/dell-2026-10-24/c/`.
+- Bước C: sửa các lỗi lớn mà bước kiểm tra tìm ra.
+  - Rồng Giữ Ải: báo B1 theo cả hai dải; D27 thành đề xuất chờ xác nhận; giữ sàn đọc được của D29.
+  - Lời Gọi R2: giữ số của R1; chọn cần chỉnh cân bằng theo đề xuất; G5 tính cho mọi bot; bundle JS < 85 kB.
+  - Tuyến Cuối: đòn bẩy cho G3c vế "tốt nhất ≤ 97 %", B1, B7.
+  - Âm Q6: lỗi nhỏ, cộng bộ đọc cho 14 thẻ S1.
+- Nếu phiên bị ngắt: đọc `git log` và `git status` của từng repo rồi chạy tiếp từ trạng thái đó. Kết quả chạy nằm ở `games/<game>/tmp/dell-2026-10-24/`.
 
 ## 6. Còn lại, theo thứ tự
 
