@@ -1,0 +1,118 @@
+# Process chung: Mac mini M4 ⇄ Dell (từ 24/10/2026)
+
+> File sống. Ghi việc đã xong, đang làm, còn lại cho **cả repo cha và 4 game**, để một AI không có bối cảnh hội thoại (Claude, Codex) làm tiếp được trên máy Dell hay máy Mac mini M4.
+> Cập nhật sau mỗi phần việc đã commit: sửa mục 4–6 và thêm một dòng vào nhật ký (mục 9).
+> File cũ hơn, chỉ cho Space Typing: [`games/space-typing/docs/CLAUDE_PROCESS_2026-10-17.md`](../games/space-typing/docs/CLAUDE_PROCESS_2026-10-17.md) (dừng ở 21/10, nhiều chỗ đã cũ).
+
+## 1. Hai máy
+
+| | Mac mini M4 | Dell (laptop Windows 11) |
+|---|---|---|
+| Thư mục repo | `/Users/toandx/htdocs/typing-game` | `D:\typing-game` = `/mnt/d/typing-game` trong WSL |
+| Công cụ | Homebrew, node 24, pnpm 11.21 | **Chỉ trong WSL Ubuntu-24.04**: git, nvm node 24.11.0, pnpm 11.21.0. Windows không có git/node |
+| Chạy lệnh | Terminal | `wsl -e bash <file.sh>`; script nên `source scripts/local-env.sh` (nạp nvm, `CHROME_PATH`, `BLENDER_BIN`) |
+| Trình duyệt cho `cdp-run` | Chrome của macOS | Chrome for Testing trong WSL: `~/.cache/chrome-for-testing/chrome/linux-*/chrome-linux64/chrome` (tự đặt `CHROME_PATH` qua `local-env.sh`) |
+| Blender | `/Applications/Blender.app` | Bản Linux `~/.local/blender/blender-5.2.*-linux-x64/blender` (tự đặt `BLENDER_BIN`). `D:\Blender\blender.exe` không nhận đường dẫn `/mnt/...` |
+| audio-lab | Chạy được: `~/AudioLab` (venv, Stable Audio 3 bản MLX, thư viện CC0, work, review) | **Không chạy được phần sinh âm**: MLX chỉ có trên Apple Silicon, `say` chỉ có trên macOS, `~/AudioLab` không chép sang |
+| Media (Google Drive qua rclone) | Đã cấu hình `tgmedia` | rclone 1.75 đã cài, **chưa có `~/.config/rclone`**: chủ dự án chạy `pnpm media:setup` (đăng nhập Google) trước mọi `media:*` |
+| nginx Play mode | Đã dựng 9 host | nginx trong WSL còn cấu hình 16/10 (6 host cũ). Xem mục 7.3 |
+| GitHub | SSH + HTTPS | SSH qua `~/.ssh/id_ed25519_github` (đã thêm `~/.ssh/config`). Remote của `games/space-typing` trên Dell đã đổi sang SSH; các submodule cũ (monkeytype, karaoke, recall, vocab) vẫn HTTPS, chưa có credential |
+| RAM cho WSL | — | 7 GB: đừng chạy song song nhiều trình duyệt hay bộ cân bằng nhiều luồng |
+
+Thiết lập đã làm trên Dell ngày 24/10 (log: `.local/dell-setup-2026-10-24.log`, gitignored):
+- `core.filemode=false` trong mọi repo (bản chép từ Mac làm ~1.278 file hiện "đổi quyền"). `~/.gitconfig`: `user.name=toandx`, `user.email=toandx@192.168.52.5` (giống commit trên Mac), `pull.ff=only`, `core.autocrlf=false`.
+- `node_modules` chép từ Mac hỏng hết (mất symlink, store trỏ `/Users/toandx/Library/pnpm/store`, binary darwin-arm64). Đã **chuyển** (không xoá) sang `D:\_mac-leftovers-2026-10-24\node_modules\` rồi `pnpm install --frozen-lockfile` cho: gốc, `portal`, `shared/game-kit`, 4 game.
+- 4 worktree cũ của space-typing (`games/.wt-survival`, `.wt-td-1a`, `.wt-td-1a6`, `.wt-td-1a6-r3`) trỏ vào đường dẫn Mac, đã kiểm: không có thay đổi chưa commit, nhánh đã gộp hoặc đã push, nội dung có trong `typing-defense`/`typing-survival`. Đã **chuyển** 3 cái sang `D:\_mac-leftovers-2026-10-24\worktrees\`; `games/.wt-td-1a` chưa chuyển được (Windows đang giữ file, "Permission denied"), parent repo bỏ qua nó. Metadata `git worktree` vẫn còn (đánh dấu prunable), không ảnh hưởng.
+- apt: jq, zip, ffmpeg, sqlite3, python3-venv, python3-pip, thư viện cho Chrome và Blender; rclone 1.75 (.deb chính thức); Chrome for Testing 156 (headless, sandbox chạy được); Blender 5.2.3 LTS bản Linux ở `~/.local/blender`.
+- `scripts/local-env.sh` có thêm khối Linux: nạp nvm nếu thiếu node, đặt `CHROME_PATH`, `BLENDER_BIN`. Các script `cdp-run.mjs` đọc `CHROME_PATH`; `scripts/models/prepare-3d-models.mjs` đọc `BLENDER_BIN`.
+- **Đừng chạy `pnpm bootstrap`** khi còn việc chưa commit: nó `submodule sync/update` (đổi remote 3 game mới sang HTTPS, checkout gitlink cũ).
+
+## 2. Luật của chủ dự án (giữ nguyên trên cả hai máy)
+
+- Việc nào tài liệu ghi "chủ dự án cần chọn": làm theo phương án đề xuất, ghi "đã chọn theo đề xuất" vào tài liệu, liệt kê trong báo cáo để chủ dự án đổi sau.
+- Backend online chỉ dùng Cloudflare Free (Workers/D1/DO).
+- Mô hình 3D: Claude viết prompt, chủ dự án tạo ở Tripo3D/Meshy, Claude dọn và rig trong Blender. Chủ dự án chê chuyển động cứng.
+- Âm thanh: ghi nhớ cũ (18/10) nói "chỉ âm thu thật CC0". Từ 23/10, `tools/audio-lab/DECISIONS.md` Q1 cho phép Stable Audio 3 là nguồn chính cho lửa, nổ, nền, sinh vật (chủ dự án đã đăng ký giấy phép Stability). Theo `DECISIONS.md`.
+- Mỗi game có `AGENTS.md` riêng; repo cha có [`AGENTS.md`](../AGENTS.md) và [`docs/games/SPLIT_PLAN.md`](games/SPLIT_PLAN.md).
+- Mỗi phần việc xong: commit, push, cập nhật file này.
+
+## 3. Trạng thái Git lúc nhận từ Mac (24/10 ~09:08, chép sang Dell ~12:00)
+
+Mọi commit trên Mac **đã có trên GitHub** (kiểm bằng `git ls-remote`). Phần chỉ có trên đĩa là việc chưa commit:
+
+| Repo | Nhánh / HEAD | Chưa commit lúc nhận |
+|---|---|---|
+| cha `typing-game` | `feat/space-typing-admin-uiux` `f1ab34f2` | 34 file sửa + 64 file mới trong `tools/audio-lab` (lô 1: `BATCH1_BRIEF.md`, `SESSION_1_*.md`, `common/batch1_*.py`, gói `context/`, `build/recipes/**`); gitlink của dragon-hold, typing-defense, typing-survival chậm 1 commit |
+| `games/space-typing` | `feat/space-typing-2026-10-18` `36249a35` (tag `td-1a6-final`, `survival-s0` đã push) | `media.md5` (+70 dòng art-src/td, đã đẩy lên Drive từ Mac 09:08). 409 file model/hull chưa track là **media của Drive theo thiết kế**: không `git add`, không `git clean` |
+| `games/dragon-hold` | `main` `a011b96` | `media.md5` (6 GLB Rồng) chưa track |
+| `games/typing-defense` | `main` `74628a4` | 45 file sửa + 10 file mới: lượt sửa sau phản biện 1B R1 và lượt rig sinh vật; `media.md5` (288 dòng) chưa track |
+| `games/typing-survival` | `main` `c140039` | 15 file sửa: lượt sửa sau phản biện S1 R1 (đang dở: `COUNTER_SEEDS`/`countersMatch` thêm nhưng chưa dùng) |
+
+Bản chụp nguyên trạng việc chưa commit của typing-defense và typing-survival: nhánh **`wip/mac-2026-10-24`** (đã push, chỉ để phòng hờ).
+
+## 4. Đã xong trên Dell
+
+- 24/10: audit toàn bộ, kiểm chứng chéo (6 agent), dựng môi trường (mục 1), bản chụp `wip/mac-2026-10-24`.
+
+## 5. Đang làm
+
+- Chốt việc dở của Mac rồi commit từng repo (mục 6, bước A).
+
+## 6. Còn lại, theo thứ tự
+
+### A. Chốt việc dở từ Mac (đang làm)
+1. **typing-defense, 1B R1 sửa sau phản biện**: chạy `pnpm check`, `td:golden:check`; bal-r4 vẫn **trượt** B1/B7 ở bộ seed 1 và mục tiêu chặt §6.4 (steady, sloppy), nên phải chỉnh tiếp hoặc ghi là ngoại lệ; đồng bộ `BUILD_1B.md` §5.6 với code (kHp 0.2, kHp2 4.3, Thuồng Luồng 385 hp, đàn 5 con đêm 5); viết `BUILD_NOTES` §7.2 + changelog lượt sửa; chạy lại kịch bản trình duyệt 1B. Lượt rig sinh vật (`scripts/models/**`, Mộc Tinh, Mầm Gỗ, Nuppeppō, Thuồng Luồng, cú con) commit riêng kèm changelog. Commit `media.md5`.
+2. **typing-survival, S1 R1 sửa sau phản biện**: nối nốt `COUNTER_SEEDS`/`countersMatch` vào `tests/guns.test.ts` và `scripts/balance.ts:142`, đo lại bảng `COUNTERS`; kiểm golden S0; chạy lại v8 (G3c, ma trận B1) và báo cáo 100 seed (`--time`); `pnpm check`; kịch bản trình duyệt bị ảnh hưởng; changelog lượt sửa, cập nhật `BUILD_NOTES` §9.1, sửa `AGENTS.md` (đang ghi "R1 done").
+3. **dragon-hold, M0a**: ghi changelog "review 2" (`tmp/review2`: 3 bot thắng 10/10 đợt; bot 25 WPM không có `?wpm` thua ở đợt 3 vì mặc định `typistWpm` 35 ở `src/app/app.ts:167`); sửa dòng G5 cũ ở `LANES.md:242-244`; các việc nhỏ ở `docs/changelog/2026-10-24-m0a-round2-gate.md:201-207`; commit `media.md5`.
+4. **space-typing**: commit `media.md5`.
+5. **repo cha**: commit lô 1 của audio-lab (chưa chạy lại được trên Dell), `scripts/local-env.sh` (khối Linux), file này; nâng gitlink 4 game.
+
+### B. Việc tiếp theo của từng game (sau bước A)
+- **typing-defense**: chủ dự án chơi bản đồ 1 tới boss (`BUILD_1B.md:625`, kịch bản §22), rồi R2 (`:627-633`), R3 (`:635-641`).
+- **typing-survival**: R2 (`docs/BUILD_S1.md:531-538`), R3.
+- **dragon-hold**: 9 mục cần quyết ở `round2-gate.md:189-199` (theo đề xuất), B9 chơi thử thật, rồi M0b (chọn dấu Héo A/B, 3 model mẫu Tripo; xem `art-src/2d/README-samples.md`).
+- **space-typing**: lõi Space chưa có bước kế được ghi sau 21/10. Ứng viên: phần "Còn lại" của `docs/changelog/2026-10-21-fix-batch-1.md:44-55`, lộ trình §5 của `docs/changelog/2026-10-21-code-review.md`, mục 5 của file process 17/10. Bước S8 "Dọn Space" của `SPLIT_PLAN.md` chờ 2 tuần ổn định hoặc chủ dự án đồng ý.
+- **audio-lab**: lô 1 đã sinh và dựng 6 phiên nghe trên Mac (`tools/audio-lab/SESSION_1_*.md`), chủ dự án chưa chấm. Chỉ làm tiếp được trên Mac.
+
+## 7. Quay về Mac mini M4
+
+### 7.1 Lấy việc của Dell về
+Trên Mac, thư mục cũ vẫn còn **chính những thay đổi chưa commit** mà Dell đã commit. Làm theo thứ tự:
+```bash
+cd ~/htdocs/typing-game
+# 1. Xem thay đổi còn trên Mac có khác bản đã push không (bình thường là giống).
+for r in games/typing-defense games/typing-survival games/dragon-hold games/space-typing .; do
+  git -C "$r" fetch origin && git -C "$r" status -sb | head -3
+done
+# 2. Ở mỗi repo con còn việc dở: cất đi rồi kéo bản của Dell.
+git -C games/typing-defense stash push -u -m mac-before-dell-sync && git -C games/typing-defense pull --ff-only
+git -C games/typing-survival stash push -u -m mac-before-dell-sync && git -C games/typing-survival pull --ff-only
+git -C games/dragon-hold stash push -u -m mac-before-dell-sync && git -C games/dragon-hold pull --ff-only
+git -C games/space-typing stash push -m mac-before-dell-sync -- media.md5 && git -C games/space-typing pull --ff-only
+git stash push -u -m mac-before-dell-sync -- tools && git pull --ff-only
+git submodule status
+```
+Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có thể bỏ.
+
+### 7.2 Những thứ trên Mac vẫn đúng
+`~/AudioLab`, `~/.config/rclone`, node_modules của Mac, nginx 9 host vẫn dùng được, không cần cài lại.
+
+### 7.3 Việc chủ dự án tự làm trên Dell (cần quyền quản trị, Claude không tự sửa cài đặt hệ thống)
+- Play mode, 3 host mới (`dragon.`, `td.`, `survival.typing-game.local`): trong WSL chạy `pnpm setup:play` (hoặc `setup:dev`). Script viết lại nginx, chứng chỉ mkcert, `/etc/hosts` của WSL.
+- Thêm 3 host vào `C:\Windows\System32\drivers\etc\hosts` (Notepad chạy quyền Administrator), cùng dòng với 6 host cũ.
+- Nếu Chrome trên Windows báo chứng chỉ không tin: nhập `rootCA.pem` của mkcert trong WSL (`mkcert -CAROOT`) vào Windows.
+- `pnpm media:setup` (đăng nhập Google) trước khi dùng `media:pull/push`.
+- Chạy game không cần nginx: `pnpm --dir games/<game> dev` (dragon 3005, td 3006, survival 3007), mở `http://127.0.0.1:<port>`.
+
+## 8. Dữ liệu ngoài Git (đừng xoá khi dọn)
+
+- `games/*/tmp/`: bằng chứng cổng, ảnh phản biện, báo cáo cân bằng (dragon-hold 1,6 GB; typing-defense `tmp/review-r1`, `tmp/fix-r1`; typing-survival `tmp/review-r1`, `tmp/fix`). Là bản duy nhất của các lượt phản biện.
+- `D:\typing-gamev2` (bản Windows trước thời Mac, 18/10): còn **bản gốc Meshy** mà `games/space-typing/art-src/3d/SOURCES.json` ghi là đã mất (`draconis-v2/v3/v4.meshy.glb`, `rainbow-scout-3d`, `dragon-fireball`, `auriel-hero.glb`, `draconis.blend`). `C:\Users\Admin\Downloads\dragon` cũng có bản tải Meshy. Cần chép về `art-src/3d/...` rồi `pnpm media:push --new-only --only originals`.
+- `D:\typing-game2410.zip` (19 GB, chép từ Mac): giữ tới khi mọi thứ đã khớp.
+- `D:\_mac-leftovers-2026-10-24`: node_modules và worktree cũ của Mac, xoá được khi đã chạy ổn.
+- `~/AudioLab` chỉ có trên Mac. `tools/audio-lab/owner-data/` chỉ giữ điểm chấm lô 0a, 0b và giấy phép.
+- `.local/admin/space-typing/*`, `games/space-typing/.account-local/`, `cloud/.dev.vars`: trạng thái local, gitignored.
+
+## 9. Nhật ký cập nhật
+
+- 24/10/2026 (Dell): tạo file. Audit, kiểm chứng, dựng môi trường WSL, bản chụp `wip/mac-2026-10-24` cho typing-defense và typing-survival.

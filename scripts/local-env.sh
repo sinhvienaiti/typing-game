@@ -14,3 +14,23 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   fi
   unset local_brew local_brew_prefix
 fi
+
+# Linux / WSL (the Dell laptop): node comes from nvm, Chrome from Chrome for Testing,
+# Blender from a Linux build. Windows .exe tools cannot take /mnt/... paths.
+if [[ "$(uname -s)" == "Linux" ]]; then
+  if ! command -v node >/dev/null 2>&1 && [[ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]]; then
+    export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+    # shellcheck disable=SC1091
+    . "$NVM_DIR/nvm.sh"
+  fi
+  if [[ -z "${CHROME_PATH:-}" ]]; then
+    local_chrome="$(ls -d "$HOME"/.cache/chrome-for-testing/chrome/linux-*/chrome-linux64/chrome 2>/dev/null | tail -1)"
+    [[ -n "$local_chrome" ]] && export CHROME_PATH="$local_chrome"
+    unset local_chrome
+  fi
+  if [[ -z "${BLENDER_BIN:-}" ]]; then
+    local_blender="$(ls -d "$HOME"/.local/blender/blender-*-linux-x64/blender 2>/dev/null | tail -1)"
+    [[ -n "$local_blender" ]] && export BLENDER_BIN="$local_blender"
+    unset local_blender
+  fi
+fi
