@@ -461,7 +461,7 @@ test('no OAuth token or client secret is committed in the parent repo', () => {
 
 test('config: games[] keeps Space first with the exact lock, Drive folder and lock copy it had', () => {
   const config = loadConfig(REPO_ROOT);
-  assert.deepEqual(config.games.map((game) => game.id), ['space-typing', 'dragon-hold', 'typing-defense', 'typing-survival']);
+  assert.deepEqual(config.games.map((game) => game.id), ['space-typing', 'dragon-hold', 'typing-defense', 'typing-survival', 'immortality-cultivation']);
   assert.equal(config.game, undefined, 'the old single block is gone after loading');
   const space = config.games[0];
   // The values the single `game` block had: Drive paths must not move, or everything uploads again.
@@ -476,7 +476,7 @@ test('config: games[] keeps Space first with the exact lock, Drive folder and lo
   assert.deepEqual(strip(definitions.runtime), { name: 'runtime', lockFile: 'games/space-typing/media.md5', lockBase: 'games/space-typing', remoteBase: 'repo/games/space-typing', backup: false, confirmReplace: false, inGameLock: true });
   assert.deepEqual(strip(definitions.private), { name: 'private', lockFile: 'media/private.md5', lockBase: '', remoteBase: 'private', backup: true, confirmReplace: true, inGameLock: false });
   assert.equal(lockCopyName(space), 'space-typing.media.md5');
-  for (const id of ['dragon-hold', 'typing-defense', 'typing-survival']) {
+  for (const id of ['dragon-hold', 'typing-defense', 'typing-survival', 'immortality-cultivation']) {
     const game = findGame(config, id);
     assert.equal(game.dir, `games/${id}`);
     assert.equal(game.modelsManifest, `public/assets/${id}/models/manifest.json`);
