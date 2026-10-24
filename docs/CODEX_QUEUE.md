@@ -17,7 +17,8 @@ Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng
 | 006 | [Làm lại ảnh 2D M0 chưa đạt](codex-queue/006-dh-m0-images-redo.md): E01-S, G01-F/B, U1-F/B, E25-S/F, 4 decal, phông xa | Rồng Giữ Ải | Ảnh | Đang chạy (25/10) |
 | 005a | [Ảnh 2D bậc VS: nhân vật, quái, đồ cầm](codex-queue/005a-td-vs-images-characters.md), để dựng 3D sau | Lời Gọi | Ảnh | Chờ 006 |
 | 005b | [Ảnh 2D bậc VS: công trình, prop](codex-queue/005b-td-vs-images-buildings.md), khoảng 70 món, 2 lần chạy × 45 | Lời Gọi | Ảnh | Chờ 005a |
-| 007 | [Bộ prompt ảnh M0b và ảnh 2D nguồn để dựng 3D](codex-queue/007-tu-tien-art-pack-and-images.md): 2 ảnh bản sắc, Kiếm tu, 5 họ thú, tinh anh, thú tướng, Thú Vương, trận pháp, kiếm bay; mục Tu Tiên trong 3D_REQUESTS | Tu Tiên Thủ Ải | Prompt + ảnh | Đang chạy (25/10), song song với chuỗi 006 → 005a → 005b |
+| 007 | [Bộ prompt ảnh M0b và ảnh 2D nguồn để dựng 3D](codex-queue/007-tu-tien-art-pack-and-images.md): 2 ảnh bản sắc, Kiếm tu, 5 họ thú, tinh anh, thú tướng, Thú Vương, trận pháp, kiếm bay; mục Tu Tiên trong 3D_REQUESTS | Tu Tiên Thủ Ải | Prompt + ảnh | **Xong** 25/10: bộ prompt `docs/games/tu-tien/art-requests/m0b/` (44 prompt); 38 ảnh trong `games/immortality-cultivation/art-src/` (2 ảnh bản sắc, Kiếm tu, Thổ thể tu, bot, 5 họ thú, tinh anh, thú tướng, Thú Vương, cơ quan, trận, kiếm Thanh Phong); bảng 3D Tu Tiên 19 GLB trong `3D_REQUESTS.md`. Cần duyệt: 2 ảnh bản sắc và 3 mẫu chính; nền chưa đúng `#E6E6E6` |
+| 007b | [Làm nốt ảnh M0b còn thiếu](codex-queue/007b-tu-tien-images-rest.md): Hậu Thổ Ấn, góc cạnh kiếm, Đằng Thử/Khê Viên, Hỏa Nha ngang | Tu Tiên Thủ Ải | Ảnh | Đang chạy (25/10) |
 | 004 | [Đưa Tu Tiên Thủ Ải vào portal, nginx, script Play](codex-queue/004-portal-tu-tien-integration.md) | Repo cha | Tích hợp | **Xong** 25/10. Claude kiểm trong WSL: `bash -n`, `node --check`, JSON, test portal 11/11, `validate-play-mode`, `validate-space-integration` đều đạt |
 
 Mỗi lần chạy:
