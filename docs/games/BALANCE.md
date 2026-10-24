@@ -191,7 +191,10 @@ Mỗi game chạy ma trận **bot × chế độ × seed** (≥ 20 seed) trên m
 - **Kinh tế chặt:** vàng ải chỉ đủ phủ khoảng một đỉnh của một đường; chọn món là quyết định thật (cổng G14 giữ nguyên).
 - **Bậc của bộ điều nhịp:** khoảng sinh ± 7 %, một thuộc tính tinh anh, dời đỉnh, quãng lặng, rơi bình máu khi gần thua.
 - Cổng G1–G3 của 00 §7 đọc theo dải mục 3 và cổng B1–B9 ở trên.
-- **Số riêng của Rồng Giữ Ải (vòng 3, 24/10, đã chọn theo đề xuất; 00 D27–D29):** trần nhịp k là 1,50 thay cho 1,30 của mục 4.1, và luật cổng co giãn cùng khoảng sinh; dải Nhàn I ở Cân bằng là ≤ 20 % thay cho ≤ 10 % (lúc quái còn đi tới Vùng Chữ là nhịp của thể loại); G8 "phần phe ta" là bẫy, nhà, lính, chiêu của Rồng tính vào phần Rồng.
+- **Số riêng của Rồng Giữ Ải (00 D27–D29):**
+  - Đã chọn theo đề xuất (vòng 3, 24/10): trần nhịp k là 1,50 thay cho 1,30 của mục 4.1 (D29); G8 "phần phe ta" là bẫy, nhà, lính, chiêu của Rồng tính vào phần Rồng (D28).
+  - **Đề xuất của vòng 3, chờ chủ dự án xác nhận** (D27; không tài liệu nào đề xuất, vòng 3 tự đề xuất): dải Nhàn I ở Cân bằng ≤ 20 % thay cho ≤ 10 %, vì lúc quái còn đi tới Vùng Chữ là nhịp của thể loại. Tới khi chủ dự án xác nhận, cổng B1, B7 chính thức vẫn đọc dải chung của mục 3; báo cáo bot in B1, B7 theo cả hai dải. Theo dải chung, cả 6 bot B1 trượt I (vòng 3: 16,4–30,6 %).
+  - **Đề xuất của vòng sửa 25/10, chờ chủ dự án xác nhận** (D29): luật cổng (1,5 s một toán mỗi cổng, 0,6 s giữa hai cổng) giãn cùng khoảng sinh nhưng không bao giờ ngắn hơn hai số đó; khi luật cổng giữ một toán, cả đợt chờ theo. Vòng 3 từng co luật cổng theo nhịp k, xuống khoảng 0,34 s ở k 1,50.
 
 ### 9.2 Lời Gọi
 
