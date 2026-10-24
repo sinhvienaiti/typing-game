@@ -75,6 +75,16 @@ test("rejects stale source digests and incomplete decision coverage",()=>{
   assert.throws(()=>applyMultiwozDialogueEditorialDecisions(handoff,missing,packet,intake,pin),/cover every generated handoff record/);
 });
 
+test("rejects malformed SHA-256 source digests before applying decisions",()=>{
+  const {pin,packet,intake,handoff,decisions}=fixture();
+  const malformed=structuredClone(decisions);
+  malformed.decisions[0].sourceDigest=handoff.records[0].sourceDigest.slice(0,-1);
+  assert.throws(
+    ()=>applyMultiwozDialogueEditorialDecisions(handoff,malformed,packet,intake,pin),
+    /expected 64 lowercase hex characters/,
+  );
+});
+
 test("detects whether a committed decision set is bound to the current generated slice",()=>{
   const {handoff,decisions}=fixture();
   assert.equal(multiwozEditorialDecisionsMatchHandoff(decisions,handoff),true);
