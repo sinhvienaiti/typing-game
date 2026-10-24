@@ -1,7 +1,7 @@
 # Rồng Giữ Ải (Dragonhold) — Tài liệu tổng (23/10/2026)
 
 > **Dành cho:** chủ dự án (duyệt), các agent làm hình, mã, âm, cân bằng.
-> **Trạng thái:** thiết kế đã qua một vòng phản biện đầy đủ và đã sửa. Chưa có mã.
+> **Trạng thái:** thiết kế đã qua một vòng phản biện đầy đủ và đã sửa. Có mã từ 23/10/2026 ở repo riêng `games/dragon-hold`: mốc M0a (hộp xám, §9) đang qua cổng; tiến độ và số đo ở `docs/changelog/` của repo đó.
 > **Cách đọc:** tài liệu này là bản tổng, không có số riêng. Số chuẩn ở `00-canon.md`. Chi tiết từng hệ ở các file 01–06. Tách ba game ở `../SPLIT_PLAN.md`.
 
 ## 0. Một trang

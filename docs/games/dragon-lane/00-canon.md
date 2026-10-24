@@ -69,6 +69,9 @@
 | D21 | Bạch Long dẫn lời ở ải 1–10, vào trận từ ải 11 | Mỗi ải tối đa một ý mới |
 | D22 | Model Rồng (v2, v3 medium, v4) vào bộ media riêng của game qua `pnpm media:push` | Game không phụ thuộc thư mục media của Space khi chạy |
 | D23 | **Cân bằng nhiều yếu tố** theo `../BALANCE.md`: hồ sơ năng lực 13 yếu tố, nhịp k hai chiều (0,75–1,30) theo E hiệu dụng, bộ điều nhịp trong ải, Vùng Chữ tính bằng thời gian, áp lực liên tục, dải đích theo chế độ, bộ bot giống người. BALANCE.md §9.1 thay hàng k_E ở §4.4 | Chủ dự án (23/10): tránh quá dễ hay quá khó; cân theo tốc độ, độ chính xác và nhiều yếu tố khác |
+| D24 | **Esc nhả khóa và bỏ các chữ đã gõ; số phím sai đã có trên từ vẫn giữ** tới khi từ xong hoặc mất (như Backspace), nên vẫn tính vào e và sự kiện học. Kit: `RouterRules.unlockErrors: "keep"` (24/10) | Esc không được xóa lỗi; câu này thay "Esc nhả khóa." ở 01 §3.3 |
+| D25 | **Học trước không là lần nhớ.** Học trước gửi `review-card` kèm `hintUsed: true` (từ, IPA, nghĩa đang hiện). "Lần nhớ đúng" là lần đúng ở `meaning-recall`, `listening`, `review-card` **không** có `hintUsed` (24/10) | Gõ chép không được tính là thuộc (D14); áp cho cả bản lưu trên máy và mẫu đọc từ portal. Thay dòng "Lần nhớ đúng" ở 01 §6.3 và câu Học trước ở 01 §6.6 |
+| D26 | **Tốc độ gõ E của ải không bao giờ ngầm là 35.** Chưa có số đo thì game hỏi tốc độ trước Học trước (thẻ tốc độ, gợi ý sẵn 35). Đã đo thì thẻ đặt số đo của hồ sơ lên đầu (E, a, CV). Đường dẫn có `?wpm=` thì dùng số đó. Hết mỗi ải, hồ sơ cập nhật theo BALANCE.md §2. Đã chọn theo đề xuất (24/10) | Rà soát 2: bot 25 WPM mở trang không có `?wpm` chơi với nhịp 35 và thua ở đợt 3; cùng bot với `?wpm=25` thắng, còn 82 % máu |
 
 ## 4. Số chuẩn
 
@@ -156,6 +159,18 @@ k_E       = clamp(C(E) / 22,7 ; 0,75 ; 1,00)            // khoảng sinh × 1 / 
 - Tải trên 1,0 là cố ý. Phần dư do bẫy, lính, nhà, kỹ năng gánh.
 - k_E chỉ giãn **thời gian** (khoảng sinh, giờ đợt). Thành phần, W, mã băm của ải giữ nguyên. Ví dụ E = 25: k_E = 0,75, toán sinh thưa hơn 33 %.
 - Bot của cổng "chuẩn thắng ẩu" chạy với k_E = 1 để so trên cùng nhịp.
+
+**Nhịp theo hồ sơ (D23 thay k_E ở trên; BALANCE.md §4.1, §9.1). Số đang dùng từ M0a** (`src/content/rules.ts` `PACE`):
+
+```text
+E_eff = E × (0,6 + 0,4 × a²) × (1 − 0,5 × CV), giữ trong [0,7 E ; E]
+k     = clamp(C(E_eff) / C_ref ; 0,75 ; 1,30)      C_ref = C(E_eff của bot Chuẩn 35 WPM, 95 %, CV 0,25) ≈ 19,6 từ/phút
+T_a   = 8 s × biên / k, không dưới 2 lần thời gian một từ của người đó; + 1 thời gian từ cho mỗi từ thêm trong chuỗi của quái   // Vùng Chữ tính bằng thời gian
+biên  = 1 + 3,0 × P(từ Ẩu ở độ chính xác a) + 0,6 × CV                // BALANCE.md §2 yếu tố 3 và 4
+```
+
+- Biên thời gian nhân cả T_a và độ chờ của Héo lan. Ví dụ: 85 %, CV 0,35 → × 1,88; 95 %, CV 0,25 → × 1,22; 99 %, CV 0,2 → × 1,12.
+- E, a, CV lấy từ hồ sơ (D26): `?wpm=`, thẻ tốc độ, hoặc số đo của hồ sơ. Không có a, CV thì dùng 95 % và 0,25.
 
 ### 4.5 Loại ải, đợt, nghỉ
 
@@ -293,9 +308,15 @@ Chia 900 × f: hạ quái 60 % (theo tỉ lệ ĐĐ từng con; cụm bầy tr�
 | Nguyền Chuẩn (02) | Tắt | Bật từ C12 | Bật từ C12 |
 | Vảy thưởng | × 0,8 | × 1,0 | × 1,25 |
 | Vương Miện, Lời Thề | Không | Có | Có |
+| Héo lan (BALANCE.md §5) | × 0,5 | × 1,0 | × 0,9 |
+| Dải đích của bộ điều nhịp (BALANCE.md §3) | Thư giãn | Cân bằng | Thử thách |
 
 - Đổi mức ở Lều Chuẩn Bị trước mỗi ải. Không đổi giữa ải. Sao tính như nhau ở mọi mức.
 - Hồ sơ trẻ em mặc định Dễ. Thua 2 lần liền ở một ải: gợi ý hạ một mức, không ép.
+- Héo lan ở Khó nhẹ hơn Thường (× 0,9) vì Khó đã nặng hơn nhờ các hàng khác của bảng và dải Thử thách.
+- **Héo lan (áp lực liên tục, D23; số từ M0a, `rules.ts` `PRESSURE`):** mỗi nhịp 2 s, mỗi mục tiêu còn chờ trong Vùng Chữ rỉ Héo vào Hỏa Long (sát thương chuẩn). Mục tiêu còn chờ: từ của nó đã hiện lâu hơn độ chờ (một từ ở tốc E thô của người chơi × biên thời gian, mục 4.4), hoặc nó đứng trong vùng mà chưa có từ. Một cụm bầy là một mục tiêu.
+  - 13,5 HP/s trong Vùng Chữ; 27 HP/s trong Vòng Nguy (10 m); 50 % mức vùng khi lính của ta đang chặn nó. Tối đa 2 mục tiêu mỗi nhịp.
+  - × g(c) × hệ số Héo của mức (bảng trên) × √k × độ dày theo đợt: 25 % ở đợt 1, cộng 12 % mỗi đợt (133 % ở đợt 10).
 
 ## 5. Ngân sách chữ
 
@@ -385,7 +406,7 @@ Bot: 25 WPM 95 %, 35 WPM 95 %, 60 WPM 97 %, trừ khi ghi khác. "Đồ TB" là 
 - **Ngoại lệ của bản thử dọc M0 (người điều phối chốt ngày 23/10/2026):**
   - G5 trên bản đồ M0 (10 đợt, có tướng) dùng ngưỡng của DESIGN §9: chỉ gõ thắng ≤ 40 %. Ngưỡng ≥ 70 % ở ải 1–10 của bảng trên áp dụng cho chương 1 thật (M2), nơi ải ngắn hơn và dạy dần.
   - Máu Hỏa Long cấp 1 ở M0 là 460 (bot chỉnh), thay mức 1.000 của 01 §2.2. Đây là số tạm, xem lại sau buổi chủ dự án chơi thử.
-  - Đợt 10 của M0 được phép chạm đỉnh tải 1,40 (trần cứng), vượt trần 1,15 của đợt giữa C1–C2.
+  - Đợt 10 của M0 được phép chạm đỉnh tải 1,40 (trần cứng), vượt trần 1,15 của đợt giữa C1–C2. Đo được sau vòng cân bằng 23/10: đỉnh 1,39 (tải trung bình đợt 1,15).
   - Cổng B1–B9 của `../BALANCE.md` §7 áp dụng cho M0 cùng G1–G9.
 - Cổng in báo cáo từ M1. Thành cổng cứng khi một lát phát hành được khóa.
 

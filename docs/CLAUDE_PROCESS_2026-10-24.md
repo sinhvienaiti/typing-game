@@ -54,28 +54,79 @@ Bản chụp nguyên trạng việc chưa commit của typing-defense và typing
 ## 4. Đã xong trên Dell
 
 - 24/10: audit toàn bộ, kiểm chứng chéo (6 agent), dựng môi trường (mục 1), bản chụp `wip/mac-2026-10-24`.
+- 24/10, **bước A (chốt việc dở từ Mac) xong và đã push**. Mỗi game có một agent làm, một agent khác kiểm tra độc lập.
+
+| Repo | Commit (đã push) | Nội dung | Kiểm tra độc lập |
+|---|---|---|---|
+| `games/typing-defense` | `b2533df`, `eb410e2`, `951c298`, `702eaf1`, `73019dc` | Sửa sau phản biện 1B R1; `BUILD_1B` khớp mã; `BUILD_NOTES` §7.2; changelog `2026-10-24-td-1b-r1-fix.md`; rig sinh vật (changelog `2026-10-24-models-creature-rigs.md`); `media.md5`; `scripts/td/tsx-worker.mjs` để `td:balance` chạy được trên Node 24.11 Linux | Đạt, có lỗi nhỏ (mục 6.A) |
+| `games/typing-survival` | `17710ae`, `dc5a4db`, `a789a7b` | Sửa sau phản biện S1 R1: G3c bỏ bộ bẫy, báo cáo 100 seed chạy được, G3m 16 seed; changelog `2026-10-24-s1-r1-fix.md`; `BUILD_NOTES` 9.1 | **Chưa đạt**: một ô `COUNTERS` sai (mục 6.A) |
+| `games/dragon-hold` | `09d7c7d`, `c105897`, `8fd646b`, `58b5ade`, `767d69a`, `8231629`, `7c28c45` | Ghi review 2; hỏi tốc độ gõ trước ván đầu, không ngầm 35 WPM (canon D26); cờ tướng G01; menu ô tránh Hỏa Long; golden Khó tắt điều nhịp + Esc; import kit; `media.md5` | Đạt, có lỗi nhỏ |
+| `games/space-typing` | `9445341b`, `27a987b1`, `fe048d6a`, `63f63cf6` | `media.md5`; `.gitignore` chặn media runtime (mục review #74); `td.html` báo Lời Gọi đã chuyển; file process 17/10 trỏ về file này | Đạt |
+| cha | (commit này) | Canon Rồng Giữ Ải D24–D26, §4.4, §4.10, §7; `DESIGN.md:4`; gitlink 4 game; `*.mp4` vào `.gitignore` | — |
+
+Chưa đo được trên Dell: Chrome trong WSL vẽ WebGL bằng phần mềm (SwiftShader), nên các kịch bản hiệu năng và gõ phím thời gian thực trượt hoặc không chạy được:
+- Lời Gọi: kiểm luồng chính của `td-1b-perf` và `td-1a6-perf`.
+- Tuyến Cuối: `s0-keys`, `s0-perf`, `s1-perf`.
+- Rồng Giữ Ải: `dh-hitstop-keys` và 10 kịch bản `dh-*`.
+
+Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome của Windows (có GPU) qua node Windows (mục 6.C).
 
 ## 5. Đang làm
 
-- Chốt việc dở của Mac rồi commit từng repo (mục 6, bước A).
+- Sửa các lỗi mà bước kiểm tra độc lập tìm ra (mục 6.A).
+- Đánh giá mode tu tiên chống thú triều: `docs/games/tu-tien/` (mục 6.D).
 
 ## 6. Còn lại, theo thứ tự
 
-### A. Chốt việc dở từ Mac (đang làm)
-1. **typing-defense, 1B R1 sửa sau phản biện**: chạy `pnpm check`, `td:golden:check`; bal-r4 vẫn **trượt** B1/B7 ở bộ seed 1 và mục tiêu chặt §6.4 (steady, sloppy), nên phải chỉnh tiếp hoặc ghi là ngoại lệ; đồng bộ `BUILD_1B.md` §5.6 với code (kHp 0.2, kHp2 4.3, Thuồng Luồng 385 hp, đàn 5 con đêm 5); viết `BUILD_NOTES` §7.2 + changelog lượt sửa; chạy lại kịch bản trình duyệt 1B. Lượt rig sinh vật (`scripts/models/**`, Mộc Tinh, Mầm Gỗ, Nuppeppō, Thuồng Luồng, cú con) commit riêng kèm changelog. Commit `media.md5`.
-2. **typing-survival, S1 R1 sửa sau phản biện**: nối nốt `COUNTER_SEEDS`/`countersMatch` vào `tests/guns.test.ts` và `scripts/balance.ts:142`, đo lại bảng `COUNTERS`; kiểm golden S0; chạy lại v8 (G3c, ma trận B1) và báo cáo 100 seed (`--time`); `pnpm check`; kịch bản trình duyệt bị ảnh hưởng; changelog lượt sửa, cập nhật `BUILD_NOTES` §9.1, sửa `AGENTS.md` (đang ghi "R1 done").
-3. **dragon-hold, M0a**: ghi changelog "review 2" (`tmp/review2`: 3 bot thắng 10/10 đợt; bot 25 WPM không có `?wpm` thua ở đợt 3 vì mặc định `typistWpm` 35 ở `src/app/app.ts:167`); sửa dòng G5 cũ ở `LANES.md:242-244`; các việc nhỏ ở `docs/changelog/2026-10-24-m0a-round2-gate.md:201-207`; commit `media.md5`.
-4. **space-typing**: commit `media.md5`.
-5. **repo cha**: commit lô 1 của audio-lab (chưa chạy lại được trên Dell), `scripts/local-env.sh` (khối Linux), file này; nâng gitlink 4 game.
+### A. Sửa sau kiểm tra độc lập (đang làm)
+1. **typing-survival** (lớn): ô `COUNTERS` của Xung trên "Bầy sát vạch" được commit là ● (2). Đo seed 1–16 ra ○ (tỷ lệ 1,30); seed 17–32 cũng ra ○ (1,41). G3m chỉ đạt nhờ ô này, và changelog ghi sai lý do. Phải sửa bảng hoặc sức súng, chạy lại G3m, rồi sửa changelog.
+   Lỗi nhỏ:
+   - Bảng 100 seed lệch báo cáo 1 điểm ở khoảng 8 ô.
+   - "14 400 trận" phải là 18 400 (có cả G3c).
+   - Đếm cặp của hàng Trâu sai.
+2. **typing-defense** (nhỏ):
+   - Nút "Bán 10 Gỗ" và "Bán 10 Lúa" tràn chữ ở 1280×720.
+   - Ghi "đã chọn theo đề xuất (b)" cho quyết định thiết kế ở §7.2.
+   - Comment `heroMul` còn ghi 0,5 (số đúng là 0,35).
+   - Báo cáo `td:balance` vẫn chấm B7 gộp theo dải cũ.
+3. **dragon-hold** (nhỏ):
+   - Bước B9 chưa cảnh báo phím tốc độ lùi một số khi đã có "Số đo".
+   - Selector toast trong `dh-pace` sai.
+   - Ví dụ "85 %, CV 0,35 → × 1,88" ở canon §4.4 chỉ đúng với E ≥ 45.
+   - `dh-hitstop-keys` bị kể là bằng chứng cho phần sửa số chồng nhau, dù chưa chứng minh được gì.
+4. **space-typing** (nhỏ): `.gitignore` chặn cả README/LICENSE mới đặt cạnh model; changelog repo cha chưa có dòng trỏ sang.
 
-### B. Việc tiếp theo của từng game (sau bước A)
-- **typing-defense**: chủ dự án chơi bản đồ 1 tới boss (`BUILD_1B.md:625`, kịch bản §22), rồi R2 (`:627-633`), R3 (`:635-641`).
-- **typing-survival**: R2 (`docs/BUILD_S1.md:531-538`), R3.
-- **dragon-hold**: 9 mục cần quyết ở `round2-gate.md:189-199` (theo đề xuất), B9 chơi thử thật, rồi M0b (chọn dấu Héo A/B, 3 model mẫu Tripo; xem `art-src/2d/README-samples.md`).
+### B. Việc tiếp theo của từng game
+- **typing-defense**:
+  - Chủ dự án chơi bản đồ 1 tới boss ở 1280×720 (`BUILD_1B.md:627`, kịch bản §22) và bấm "Chép số chơi thử" để có số cho B9.
+  - Cổng cân bằng R1 còn trượt (`BUILD_NOTES.md:886-893`): B1 bộ 1 (Chậm chắc 92 %, Ẩu 73 %); B7 bộ 1 (91 %); đích chặt gộp. Khoảng 15 bộ số thử đều không gỡ được.
+  - Đề xuất (b): sang R2, nâng "Bắn mạnh nối" cùng lúc làm Đêm 1–4 khó hơn.
+  - Sau đó làm R2, R3 (`BUILD_1B` §17).
+- **typing-survival**:
+  - Cổng R1 chưa đạt: B1, B3 (Trẻ em ở Thư giãn), B4, B7, và vế "tốt nhất ≤ 97 %" của G3c.
+  - Bước kế theo `docs/changelog/2026-10-24-s1-r1-fix.md:213`: làm lại sức các súng mạnh (Tán, Tia trực tuyến, Pháo Sao) cùng nhịp ải 1–4; đo bằng `tmp/dell-2026-10-24/scripts/g3c-all.sh` và `b1-all.sh`; rồi chạy lại báo cáo 100 seed.
+  - Sau đó làm R2 (`docs/BUILD_S1.md:531-538`).
+- **dragon-hold**:
+  - Làm 9 mục "Cần anh quyết" theo đề xuất. Bảng đề xuất ở `docs/changelog/2026-10-24-m0a-review2.md:132-144`, bắt đầu với Nhàn I (B1, B7), rồi chạy lại `pnpm dh:balance`.
+  - Chủ dự án chơi thử B9 với tốc độ đã chọn.
+  - Sửa `box()` ở `shared/game-kit` feedback/numbers.ts (kit drift), rồi chép lại vào game.
+  - Sau đó sang M0b.
 - **space-typing**: lõi Space chưa có bước kế được ghi sau 21/10. Ứng viên: phần "Còn lại" của `docs/changelog/2026-10-21-fix-batch-1.md:44-55`, lộ trình §5 của `docs/changelog/2026-10-21-code-review.md`, mục 5 của file process 17/10. Bước S8 "Dọn Space" của `SPLIT_PLAN.md` chờ 2 tuần ổn định hoặc chủ dự án đồng ý.
 - **audio-lab**: lô 1 đã sinh và dựng 6 phiên nghe trên Mac (`tools/audio-lab/SESSION_1_*.md`), chủ dự án chưa chấm. Chỉ sinh âm được trên Mac.
   - Theo Q6 (24/10), họ lửa của Rồng Giữ Ải phải sinh lại ở lô 1c, vì hướng "phụt tròn" đã bị bỏ.
-  - Trước đó, trên Dell, phải viết lại thẻ spec (`tools/audio-lab/specs/**`), `docs/audio/*` và `src/audio/catalog.ts` của ba game theo Q6. Việc này chờ các game commit xong lượt chốt việc dở.
+  - Trước đó, trên Dell, phải viết lại thẻ spec (`tools/audio-lab/specs/**`), `docs/audio/*` và `src/audio/catalog.ts` của ba game theo Q6. Bước A đã xong, nên giờ làm được.
+
+### C. Môi trường Dell còn thiếu
+- Chạy kiểm hiệu năng trên Dell bằng **Chrome Windows (GPU RTX 3050 Ti)**:
+  - Tải node portable bản Windows từ nodejs.org vào thư mục scratch.
+  - Chạy `cdp-run.mjs` từ Windows, trỏ tới Vite trong WSL (127.0.0.1:port đi qua wslrelay).
+  - Chrome trong WSL chỉ có SwiftShader. Đã thử `--use-angle=gl` với Mesa d3d12: không có WebGL.
+- ImageMagick 7 (`magick`): `td_rig_review.py` cần nó để ghép bảng ảnh duyệt rig.
+
+### D. Mode tu tiên chống thú triều (mới, 24/10)
+- Tài liệu đề xuất của Codex: `TU_TIEN_TYPING_SYSTEMS_AND_5_COMBAT_OPTIONS_V2_2026-10-24.md` ở gốc repo.
+- Video tham khảo QCBH: file `.mp4` ở gốc repo, không đưa vào Git.
+- Bản đánh giá nhiều agent: `docs/games/tu-tien/`, gồm `DANH_GIA_2026-10-24.md` và `analysis/01-08`.
 
 ## 7. Quay về Mac mini M4
 
@@ -121,3 +172,8 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
 - 24/10/2026 (Dell): tạo file. Audit, kiểm chứng, dựng môi trường WSL, bản chụp `wip/mac-2026-10-24` cho typing-defense và typing-survival.
 - 24/10/2026 (Dell): repo cha commit `f3de2980` (khối Linux trong `local-env.sh`, file này) và `47faf42b` (lô 1 audio-lab từ Mac). Đã push.
 - 24/10/2026 (Dell): chủ dự án chốt luật âm theo hình dạng hành động. Ghi vào `tools/audio-lab/DECISIONS.md` Q6 và `SESSION_1_DH.md` S2.
+- 24/10/2026 (Dell): bước A xong.
+  - Đã push 19 commit của 4 game (bảng ở mục 4).
+  - Repo cha: nâng gitlink, commit canon Rồng Giữ Ải, chặn `*.mp4`.
+  - Kiểm tra độc lập tìm ra lỗi; việc sửa ghi ở mục 6.A.
+  - Mở việc đánh giá mode tu tiên (6.D).
