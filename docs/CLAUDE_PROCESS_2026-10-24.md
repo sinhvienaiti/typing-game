@@ -33,6 +33,7 @@ Thiết lập đã làm trên Dell ngày 24/10 (log: `.local/dell-setup-2026-10-
 - Backend online chỉ dùng Cloudflare Free (Workers/D1/DO).
 - Mô hình 3D: Claude viết prompt, chủ dự án tạo ở Tripo3D/Meshy, Claude dọn và rig trong Blender. Chủ dự án chê chuyển động cứng.
 - Âm thanh: ghi nhớ cũ (18/10) nói "chỉ âm thu thật CC0". Từ 23/10, `tools/audio-lab/DECISIONS.md` Q1 cho phép Stable Audio 3 là nguồn chính cho lửa, nổ, nền, sinh vật (chủ dự án đã đăng ký giấy phép Stability). Theo `DECISIONS.md`.
+- **Âm theo hình dạng hành động** (chủ dự án, 24/10, [`tools/audio-lab/DECISIONS.md`](../tools/audio-lab/DECISIONS.md) Q6). Mỗi âm phải đúng loại và cỡ của hành động: tụ lực, phát có lực, thân, đuôi vang trong không gian bản đồ. Rồng khạc cầu lửa phải nghe mạnh mẽ, vang vọng. Cấm âm quê mùa, lỗi thời kiểu "bụp", "thụp", puff, pop, bóng bay, đồ chơi, retro.
 - Mỗi game có `AGENTS.md` riêng; repo cha có [`AGENTS.md`](../AGENTS.md) và [`docs/games/SPLIT_PLAN.md`](games/SPLIT_PLAN.md).
 - Mỗi phần việc xong: commit, push, cập nhật file này.
 
@@ -72,7 +73,9 @@ Bản chụp nguyên trạng việc chưa commit của typing-defense và typing
 - **typing-survival**: R2 (`docs/BUILD_S1.md:531-538`), R3.
 - **dragon-hold**: 9 mục cần quyết ở `round2-gate.md:189-199` (theo đề xuất), B9 chơi thử thật, rồi M0b (chọn dấu Héo A/B, 3 model mẫu Tripo; xem `art-src/2d/README-samples.md`).
 - **space-typing**: lõi Space chưa có bước kế được ghi sau 21/10. Ứng viên: phần "Còn lại" của `docs/changelog/2026-10-21-fix-batch-1.md:44-55`, lộ trình §5 của `docs/changelog/2026-10-21-code-review.md`, mục 5 của file process 17/10. Bước S8 "Dọn Space" của `SPLIT_PLAN.md` chờ 2 tuần ổn định hoặc chủ dự án đồng ý.
-- **audio-lab**: lô 1 đã sinh và dựng 6 phiên nghe trên Mac (`tools/audio-lab/SESSION_1_*.md`), chủ dự án chưa chấm. Chỉ làm tiếp được trên Mac.
+- **audio-lab**: lô 1 đã sinh và dựng 6 phiên nghe trên Mac (`tools/audio-lab/SESSION_1_*.md`), chủ dự án chưa chấm. Chỉ sinh âm được trên Mac.
+  - Theo Q6 (24/10), họ lửa của Rồng Giữ Ải phải sinh lại ở lô 1c, vì hướng "phụt tròn" đã bị bỏ.
+  - Trước đó, trên Dell, phải viết lại thẻ spec (`tools/audio-lab/specs/**`), `docs/audio/*` và `src/audio/catalog.ts` của ba game theo Q6. Việc này chờ các game commit xong lượt chốt việc dở.
 
 ## 7. Quay về Mac mini M4
 
@@ -116,3 +119,5 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
 ## 9. Nhật ký cập nhật
 
 - 24/10/2026 (Dell): tạo file. Audit, kiểm chứng, dựng môi trường WSL, bản chụp `wip/mac-2026-10-24` cho typing-defense và typing-survival.
+- 24/10/2026 (Dell): repo cha commit `f3de2980` (khối Linux trong `local-env.sh`, file này) và `47faf42b` (lô 1 audio-lab từ Mac). Đã push.
+- 24/10/2026 (Dell): chủ dự án chốt luật âm theo hình dạng hành động. Ghi vào `tools/audio-lab/DECISIONS.md` Q6 và `SESSION_1_DH.md` S2.

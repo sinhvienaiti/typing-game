@@ -161,6 +161,53 @@ Các id Stable Audio 3 ở Q1. `calib-*` là âm làm hỏng có chủ ý; chún
 
 ---
 
+## Q6. Âm theo hình dạng của hành động; bỏ hướng "bụp, thụp"
+
+**Nguồn:** chủ dự án nói trong chat ngày 24/10/2026 (trên máy Dell). Ý chính:
+- Không thêm âm quê mùa, lỗi thời kiểu "bụp", "thụp".
+- Mỗi âm phải đạt đúng loại hành động của nó.
+- Ví dụ: rồng khè lửa ra quả cầu thì âm phải mạnh mẽ, vang vọng, không như ném quả bóng bay rồi nghe "thụp" hay "bụp".
+
+Quyết định này **thay** hướng "phụt tròn" đang ghi trong thẻ `fire.cast` (prompt A, C, D), `fire.impact.*` ("phụt trầm, thân tròn") và trong `SESSION_1_DH.md` phiên S2. Nó cũng thay âm tạm trong game ("noise over a sine thump", `games/dragon-hold/src/audio/synth.ts:6`).
+
+**Luật cho mọi âm hành động của ba game** (đòn đánh, phép, súng, nổ, trúng, sinh vật):
+1. **Có hình dạng theo hành động**, đủ bốn phần, trừ khi hành động thật sự không có phần đó:
+   - chuẩn bị: hít vào, tụ lực, lên nòng;
+   - phát: đầu tiếng có lực;
+   - thân: lửa cháy, lực đẩy, vật bay;
+   - đuôi: vang trong không gian của bản đồ (thung lũng, rừng thông, hành lang thép).
+2. **Cỡ âm theo cỡ thứ phát ra âm.** Rồng, boss, đòn to phải nghe to xác và có trọng lượng. Quái nhỏ thì nhỏ.
+3. **Bỏ hẳn các hướng sau**, trong prompt, công thức ghép lớp và âm tổng hợp tạm:
+   - "puff", "pop", "balloon";
+   - "thump" hay "thud" đứng một mình;
+   - "soft round whoomph";
+   - âm kiểu đồ chơi, hoạt hình, retro, 8-bit, chiptune;
+   - một tiếng trầm ngắn không có thân và đuôi.
+   Một lớp sub hoặc tiếng nổ đục chỉ được làm lớp dưới, có thân và đuôi đè lên.
+4. **Vẫn giữ luật giọng đọc** (mục 6.2): năng lượng 1–4 kHz phải tắt nhanh. Đuôi vang nằm dưới 1 kHz hoặc trên 4 kHz và nhường giọng đọc.
+   Âm phát sau mỗi từ (khoảng 1,5 s một lần) giữ đuôi thấp để lặp 20 lần không mệt. Đòn to (`fire.impact.c`, `dragon.skyfire.*`, `dragon.inferno`) được đuôi dài và to hơn rõ.
+
+**Rồng khạc cầu lửa (`fire.cast`).** Ba lớp:
+1. Tiếng khè hoặc gầm họng ngắn của một sinh vật lớn.
+2. Tiếng lửa phụt ra dưới áp lực: bắt lửa, rồi tiếng lửa gầm.
+3. Cầu lửa lao đi: whoosh dày, có chuyển động ra xa.
+
+Đuôi vang của rừng núi dài khoảng 0,6–1,2 s ở mức thấp. Độ dài cũ 340 ms quá ngắn để có đuôi. Đề xuất: file 600–900 ms gồm cả vang sớm; bus `world` của game thêm vang chung cho đuôi dài.
+
+**Cầu lửa trúng (`fire.impact.*`).** Lửa bùng nổ có thân, gồm ba phần: lửa bùng, tiếng nổ lách tách của than, mảnh văng. Có đuôi vang. Cấm nghe như "một cục rơi xuống". `.c` là đòn to: dài và nặng hơn rõ.
+
+**Hệ quả cho lô 1:**
+- Ứng viên hướng "phụt tròn" (`fire.cast` A, C; `fire.impact.a` "thân tròn") không còn là hướng được chọn.
+- Phiên S2 vẫn chấm được để đo máy, nhưng lô 1c phải sinh lại họ lửa theo Q6.
+- Các id cùng loại ở Lời Gọi (`arrow-fire`, `blast`, `wordshot-fire`) và Tuyến Cuối (súng, `hit.*`, `kill.*`) phải soát lại theo luật trên.
+
+**Việc kéo theo:**
+- Viết lại prompt, mục đích và độ dài trong thẻ spec, `docs/audio/*` và `src/audio/catalog.ts` của từng game.
+- Đề xuất thêm một luật L2 cho bộ chấm: phạt âm hành động có đuôi quá ngắn, hoặc chỉ có một cú trầm không thân.
+- Âm tổng hợp tạm trong game không được coi là âm thật. Âm thật về từ Audio Lab trên Mac sau phiên nghe của chủ dự án.
+
+---
+
 ## Mục 16 của kế hoạch: đã chốt và còn mở
 
 | # | Câu hỏi | Trạng thái | Căn cứ hoặc điều còn thiếu |

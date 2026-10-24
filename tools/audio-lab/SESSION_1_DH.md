@@ -25,6 +25,8 @@ Hai phiên: **`1-dh-s2`** (trận đánh) và **`1-dh-s3`** (nền và tù và).
 
 | Phiên | Id | Bối cảnh mở đầu | Câu hỏi |
 |---|---|---|---|
+> **24/10/2026, chủ dự án:** bỏ hướng "phụt tròn", "bụp, thụp" cho cầu lửa. Âm phải mạnh mẽ, vang vọng, đúng hình dạng hành động ([`DECISIONS.md`](DECISIONS.md) Q6). S2 vẫn chấm được để đo máy, nhưng họ lửa sẽ được sinh lại ở lô 1c theo Q6.
+
 | **S2** | `fire.cast` (3 bản) | Trong trận thô | Hai hướng: phụt lửa tròn, và khạc có hơi thở. Có nghe ra rồng khạc lửa không? Giọng đọc từ có bị che không (nhãn "khó nghe tiếng đọc")? |
 | | `fire.impact.a` (3) | Trong trận thô | Âm gốc của họ cầu lửa: phụt trầm, thân tròn, lách tách nhỏ. Lặp 20 lần có mệt không? |
 | | `fire.impact.b` (2) | Trong trận thô | Tối hơn .a, lách tách khô. Cùng họ mà phân biệt được không? |
