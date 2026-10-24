@@ -57,7 +57,7 @@ Sổ này ghi những quyết định đã chốt cho Audio Lab: nguồn của q
 - **Quyết định:** với mọi lời gọi (`call-*`) và UI của Lời Gọi, không dùng prompt cho ra tiếng gõ rỗng, cao, có cao độ:
   - không dùng prompt B ("a single hollow knock on a large bamboo stalk…") và prompt D ("hollow bamboo tube, low resonant tok") của thẻ `call-chop`;
   - không viết prompt mới có "tok", "tốc", "hollow tube", "temple block", "wooden fish", "mõ".
-- **Hướng:** gõ trầm, chắc (prompt A và E–G của thẻ `call-chop`).
+- **Hướng:** gõ trầm, chắc (prompt A, E, G, H của thẻ `call-chop`; F bỏ ở lượt sửa sau review Q6 vì "thump" đứng riêng, H thay nó).
 - **Đã làm:** luật L2 `t-call-chop-knock` của bản hiệu chỉnh 1 phạt bản `call-chop` có dưới 30 % năng lượng ở dưới 300 Hz. Ở 0b, máy cũ xếp bản mõ thứ 5/41, trên cả hai bản anh chọn; nay bản anh chọn đứng 1/41.
 - **Chưa làm:** thẻ spec vẫn giữ prompt B và D để tạo lại đúng ứng viên lô 0b. `gen.sa3` chưa có bước chặn prompt cấm; đề xuất thêm bước đó trước lô 1c.
 
@@ -210,8 +210,9 @@ Quyết định này **thay** hướng "phụt tròn" đang ghi trong thẻ `fir
 
 Chi tiết từng id, độ dài và việc của lô 1c: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md).
 
-- **Phân loại 149 thẻ.** 66 id là âm hành động. Còn lại: 25 UI và phím, 11 thưởng, 3 học, 18 báo nguy và stinger, 8 nền, 1 giọng, 9 nhạc, 8 foley không phải đòn đánh (đặt bẫy, dựng nhà, hồi máu, sửa tuyến).
+- **Phân loại 149 thẻ.** 66 id là âm hành động. Còn lại: 25 UI và phím, 11 thưởng, 3 học, 18 báo nguy và stinger, 8 nền, 1 giọng, 9 nhạc, 8 foley không phải đòn đánh (đặt bẫy, dựng nhà, hồi máu, sửa tuyến). Từ 25/10 có thêm 14 thẻ S1 của Tuyến Cuối (163 thẻ): 11 âm hành động, 2 báo nguy (`leader.horn`, `rift.warn`), 1 thưởng (`star.get`); tổng 77 âm hành động.
 - **Thẻ spec.**
+  - **Số sau hai lượt sửa (24–25/10):** 60 id viết lại, 6 id soát (`gun.xung`, `gun.xung.loop`, `gun.xung.tail`, `gun.tia.pulse`, `hit.sub`, `hit.tail`), vì ba bậc trúng và ba tiếng lên đòn đã chuyển sang viết lại ở lượt sau review. Hai dòng dưới là số của lượt đầu.
   - 54 id viết lại theo bốn phần: purpose, prompt.text, prompt.variants, notes ("Q6 (24/10)"). Đường dẫn đã sửa ghi vào `manual_fields`.
   - 12 id soát và giữ thiết kế, chỉ bỏ biến thể có chữ cấm hoặc chữ phủ định:
     - ba tiếng lên đòn của quái;
@@ -221,12 +222,12 @@ Chi tiết từng id, độ dài và việc của lô 1c: [`Q6_REWRITE_2026-10-2
   - **Sai, đã sửa ở lượt sau review:** lượt này giữ các bậc trúng với lý do "đuôi là lớp dùng chung `hit.tail`, sub là `hit.sub`, do mã ghép". Mã game không ghép lớp nào: `theme-audio.ts` phát một tiếng cho mỗi bậc. Ba tiếng lên đòn cũng không có đuôi trong không gian (luật 1). Xem "Q6: sửa sau review" bên dưới.
   - Biến thể Q6 dùng khóa mới, không dùng lại khóa cũ, để tên ứng viên mới không trùng tên ứng viên lô 0b, lô 1. Chỉ giữ biến thể cũ đã hợp Q6, ví dụ howl B là bản anh chọn.
   - 4 id không phải âm hành động chỉ thay chữ cấm: `type.miss`, `ui.deny`, `trap.spikes.arm`, `key.bad`.
-- **Danh sách âm của ba game** (`M0_SOUND_LIST.md`, hai `THEME_SOUND_LIST.md`) ghi cùng cảm giác, prompt và độ dài. Lệnh `specs generate --check` (mã thật của Audio Lab, chạy bằng Python hệ thống của máy Dell qua `common/launch.py`, không qua `pnpm` hay venv) cho 149/149 thẻ có sẵn "giữ nguyên", mã thoát 1 vì 14 id S1 của Tuyến Cuối chưa có thẻ (có từ trước).
+- **Danh sách âm của ba game** (`M0_SOUND_LIST.md`, hai `THEME_SOUND_LIST.md`) ghi cùng cảm giác, prompt và độ dài. Lệnh `specs generate --check` (mã thật của Audio Lab, chạy bằng Python hệ thống của máy Dell qua `common/launch.py`, không qua `pnpm` hay venv) cho 149/149 thẻ có sẵn "giữ nguyên", mã thoát 1 vì 14 id S1 của Tuyến Cuối chưa có thẻ (có từ trước). Từ 25/10 có thẻ cho 14 id đó: 163/163 thẻ khớp nguồn, mã thoát 0.
 - **Độ dài.**
   - `fire.cast` 340 → 750 ms: 750 ± 20 % đúng bằng khoảng 600–900 ms của đề xuất trên, **đã chọn theo đề xuất**.
   - Đòn to và họ lửa dài hơn trong `catalog.ts` của Rồng Giữ Ải.
   - Bốn id của Lời Gọi và hai id của Tuyến Cuối dài hơn trong prompt của danh sách.
-- **Chưa làm ở lượt này** (hai việc đầu đã làm ở lượt sau review):
+- **Chưa làm ở lượt này** (việc thứ hai, bước chặn chữ cấm trong `gen.sa3`, đã làm ở lượt sau review; `synth.ts` và luật L2 vẫn mở):
   - âm tổng hợp tạm trong game (`synth.ts` "sine thump") là mã game, không thuộc làn này;
   - bước chặn chữ cấm Q6 trong `gen.sa3`;
   - luật L2 dưới đây.
@@ -242,13 +243,34 @@ Review của lượt trên tìm ra 1 lỗi lớn, một số lỗi nhỏ và 1 v
   - Ghi chú của `hit.sub`, `hit.tail`, `gun.xung`, `gun.xung.tail` nay nói rõ: các lớp dùng chung mới là đề xuất (mục 6.3 #3, 16 #6 còn mở); Audio Lab có ghép thì ghép sẵn vào file.
 - **Chữ cấm còn sót.** "thump", "thud" đứng riêng ở `dragon.low`, `unit.warden.place`, `enemy.quadruped.march` (D), `call-chop` (F), `gun.xung` (B, D, H), `hit.t2`, `hit.t4`: đã sửa từng chỗ. Còn lại có chủ ý, ghi trong ghi chú của thẻ:
   - `call-chop` A, E: hai prompt anh chấm 3/5, Q2 gọi tên; "thud" nằm sau tiếng gõ có dăm tre lách tách;
-  - `gun.xung` E: prompt thân của công thức lô 1, công thức ghép sẵn lớp đuôi.
+  - `gun.xung` E: prompt thân của công thức lô 1, công thức ghép sẵn lớp đuôi. (Lý do này sai và không nhất quán; lượt 25/10 bỏ E, xem "sửa sau review lần 2".)
 - **Tiếng lên đòn của quái** (ba `*.windup`) thêm vang rừng thông ngắn.
-- **`critic.loop_eval` bật lại** cho `gun.xung` (5 lần mỗi giây) và `wordshot-fire` (sau mỗi từ), giữ bằng `manual_fields`. Bộ sinh đã tắt nó khi prompt dài từ 300 ms. Bộ chấm không đọc khóa này: nó tự lặp 3–4 s các file dưới 300 ms (`critic/learned.py`).
-- **`gen.sa3.FORBIDDEN_TERMS`** chặn chữ cấm Q6 cho cả ba game: puff, pop, balloon, whoomph, boing, bonk, toy, cartoon, retro, 8-bit, chiptune, bụp, thụp. Test: `gen/tests/test_sa3_q6.py`. "thump", "thud" không vào danh sách vì cần ngữ cảnh. `numpy` chuyển vào trong hàm của `sa3.py`, để bước dựng job và chặn chữ chạy được mà không cần bộ âm.
+- **`critic.loop_eval` bật lại** cho `gun.xung` (5 lần mỗi giây) và `wordshot-fire` (sau mỗi từ), giữ bằng `manual_fields`. Bộ sinh đã tắt nó khi prompt dài từ 300 ms. Bộ chấm không đọc khóa này: nó tự lặp 3–4 s các file dưới 300 ms (`critic/learned.py`). (Việc bật lại vì vậy không đổi gì; lượt 25/10 cho bộ chấm đọc khóa này và trả `wordshot-fire` về tắt, xem bên dưới.)
+- **`gen.sa3.FORBIDDEN_TERMS`** chặn chữ cấm Q6 cho cả ba game: puff, pop, balloon, whoomph, boing, bonk, toy, cartoon, retro, 8-bit, chiptune, bụp, thụp. (Lượt 25/10 thêm poof, plop, whoomp, fwoomp, thoomp.) Test: `gen/tests/test_sa3_q6.py`. "thump", "thud" không vào danh sách vì cần ngữ cảnh. `numpy` chuyển vào trong hàm của `sa3.py`, để bước dựng job và chặn chữ chạy được mà không cần bộ âm.
 - **Bộ giới hạn tiếng của Rồng Giữ Ải** (đã chọn theo đề xuất): `lengthMs` giữ là đích của file thật. `synthMs` mới ghi độ dài âm tạm của 9 id dài ra ở Q6. Bộ giới hạn giữ chỗ theo độ dài thật của thứ đang phát (`VoiceLimiter.settle`): âm tạm, hoặc file khi có. Lời Gọi, Tuyến Cuối không đổi: mã của hai game không đọc độ dài trong danh sách âm.
 - **Đuôi prompt chung của Lời Gọi** viết lại không có chữ phủ định. Hai gói prompt `04-audio.md`, `04-audio-vs.md` viết lại theo Q6: dòng SPACE cho âm hành động, mọi chữ cấm sửa theo ngữ cảnh.
 - **Kiểm đã chạy trên máy Dell** (WSL, Python hệ thống 3.12, PyYAML 6.0.1, jsonschema 4.10.3; không venv, không pytest thật): ghi đúng ở mục 9 của `Q6_REWRITE`.
+
+### Q6: sửa sau review lần 2 (25/10/2026, máy Dell)
+
+Review của lượt trên tìm 6 lỗi nhỏ (không lỗi lớn). Chi tiết và kiểm: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 10.
+
+- **Sổ này ghi quá chỗ đã làm:** câu "hai việc đầu đã làm" sai (chỉ bước chặn của `gen.sa3` đã làm; `synth.ts` của Rồng Giữ Ải vẫn là "sine thump"); Q2 ghi hướng `call-chop` là "A và E–G" trong khi F đã bỏ, H đã thêm; số 54/12 chưa tính lượt sửa. Đã sửa ba chỗ ở trên (số mới 60/6).
+- **`gun.xung` E** (đã chọn theo đề xuất của review: bỏ E như D, H). Lý do giữ E của lượt trước sai: d1a, d1b dùng thân nhiễu tổng hợp; d2a lấy thân A s1005, đổi bằng F s2005, D s1002, G s2002; d2b lấy thân E s2005, đổi bằng C s1002, H s2002, D s1005; cả bốn ghép một lớp đuôi nhiễu hồng 160–650 Hz; công thức lô 0b `gun.xung.sa3-r2.json` lấy A s1005, D s1002, C s1002, D s1005 và không có lớp đuôi. D, H (đã bỏ) giữ đúng vai thân như E. Các công thức đọc file thô đã có trên đĩa, không đọc chữ của thẻ, và lô 1c chỉ tạo I, J, K. **Bỏ thêm F** ("dry", không có vang hành lang), để thẻ theo một luật: biến thể còn trong thẻ phải tự đạt Q6 khi tạo một mình; còn C, I, J, K (đề xuất của vòng này, chờ chủ dự án xác nhận).
+- **`critic.loop_eval`** (đã chọn theo đề xuất của review: cho bộ chấm đọc khóa này). `critic/spec.py` đọc `loop_eval.enabled`; `critic/learned.py` chấm L3–L5 trên bản lặp 3–4 s khi file dưới 300 ms **hoặc** thẻ bật khóa này. Nhịp lặp vẫn là `rate_hz` (thẻ lấy từ `board.repeat_interval_ms`). Thẻ không tắt được bản lặp của file dưới 300 ms (mục 4.4). Test mới ở `critic/tests/test_spec_and_layers.py`. Hệ quả: mọi bản `gun.xung` (96–380 ms) nay được chấm cùng một kiểu, bản lặp ở 5 Hz; trước đó bản từ 300 ms được chấm như file đơn.
+- **`wordshot-fire`**: nhịp lặp của thẻ là nhịp thật, 1,5 s (một Phát Chữ cho mỗi từ bắn xong, `src/sim/systems/rewards.ts` của Lời Gọi), thay 250 ms chung của nhóm Bắn (đã chọn theo đề xuất của review). Bối cảnh "Lặp 20 lần" của Bảng Nghe phát theo nhịp này (`board from-critic` lấy khoảng lặp từ `rate_hz`): đó là chỗ kiểm luật 4 của Q6. `critic.loop_eval` trả về giá trị của bộ sinh (tắt): ở 1,5 s một lần, bản lặp 3–4 s của bộ chấm chỉ có 3 phát rời nhau (đề xuất của vòng này, chờ chủ dự án xác nhận).
+- **Gói prompt Lời Gọi** (đã chọn theo đề xuất của review): `transient` của A02, A04, A07, dòng LOOP và SOFTPITCH viết khẳng định; thêm A38, tiếng đi Cương Thi và V190 (VS) có "not harsh", "not scary". Lính đâm trúng giữ không có `tail`, nay có lý do: A18 (đã dán SPACE) phát ngay trước cú trúng, đuôi vang của nó phủ cả đòn.
+- **`gen.sa3.Q6_TERMS`** (đã chọn theo đề xuất của review) thêm poof, plop, whoomp (cả whoomph, woomp, fwoomp, fwhoomp), thoomp; "oomph" không bị chặn. Test thêm ca ở `gen/tests/test_sa3_q6.py`.
+- **14 id S1 của Tuyến Cuối có thẻ.** Bộ đọc `specs/readers/typing_survival.py` mở `...GUN_SOUND_IDS` của `src/audio/gun-audio.ts`, đọc bus và khoảng cách tối thiểu ở `GUN_BUS` của `theme-audio.ts`, có `RULES` cho 14 id. Danh sách âm của game thêm 14 id vào bảng bus §1. Thẻ theo dạng Q6: biến thể A–D, ghi chú bốn phần. Các chọn lựa của vòng này (đề xuất của vòng này, chờ chủ dự án xác nhận):
+  - nhịp lặp của súng S1 lấy từ `src/content/guns.ts` (luật `repeat` mới của bộ đọc, `specs/build.py`): Tán 383 ms, Ray 800 ms, Pháo Sao 750 ms;
+  - `hit.armour` (đòn bị Vỏ chặn) xếp nhóm Trúng nhỏ, không phải Trúng nặng: nhỏ hơn một cú trúng thật, và luật `t-hit-small-steel` của bản hiệu chỉnh 1 hợp tiếng keng thép;
+  - `gun.ray.charge` là phần chuẩn bị của phát Ray, dừng gọn ở đỉnh, không có đuôi (đuôi ở `gun.ray.fire`);
+  - `shield.hit` viết lại prompt: thêm đầu tiếng chạm và đuôi hành lang thép (luật 1), 180 ms giữ nguyên;
+  - `shield.break`, `rift.open` nhóm "Khác", không kiểm thời gian lên (mở đầu bằng tiếng rít hay rên dâng);
+  - `rift.warn` đổi nguồn thành Stable Audio 3 hoặc thép rên CC0 (nguồn mặc định của báo nguy là kèn, cồng);
+  - prompt `rift.warn`, `leader.horn` trong danh sách bỏ "no music".
+- **Bộ đọc của Tuyến Cuối, cùng loại với lỗi lớn của lượt trước:** `layer_plan.summary` của ba bậc trúng và một ràng buộc của `gun.xung` còn viết như thể mã đang ghép `hit.sub`, `hit.tail`; nay ghi rõ đó là đề xuất của kế hoạch và mã phát một tiếng mỗi bậc, mỗi phát.
+- **Bàn giao:** gitlink cho các commit game của lượt trước đã được người điều phối nâng ở `c873ff69`. Commit game của lượt này (typing-survival `81e8842`, typing-defense `2cf052d`) và dòng làn âm trong `docs/CLAUDE_PROCESS_2026-10-24.md` (dòng 90, "chưa đạt … đang sửa") chờ người điều phối.
 
 ### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
 
@@ -331,3 +353,4 @@ Review của lượt trên tìm ra 1 lỗi lớn, một số lỗi nhỏ và 1 v
    - chèn cặp mốc để đo độ nhất quán;
    - nhắc anh gắn nhãn "rè/lỗi" khi nghe thấy, để có dữ liệu chỉnh L1b;
    - đặt `gun.xung` tổng hợp và `gun.xung` Stable Audio 3 trong cùng một phiên.
+4. **Chờ chủ dự án xác nhận** (đề xuất của vòng 25/10, ghi ở "Q6: sửa sau review lần 2"): `gun.xung` bỏ cả F; `wordshot-fire` tắt `critic.loop_eval`; các chọn lựa của 14 thẻ S1 Tuyến Cuối (nhịp lặp theo `guns.ts`, `hit.armour` là Trúng nhỏ, `gun.ray.charge` không đuôi, prompt mới của `shield.hit`, nhóm và nguồn của `shield.break`, `rift.open`, `rift.warn`).

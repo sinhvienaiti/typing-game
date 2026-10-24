@@ -1,4 +1,5 @@
-"""Tuyến Cuối: src/audio/theme-audio.ts (SOUND_IDS, BUSES, voice() calls) + docs/audio/THEME_SOUND_LIST.md."""
+"""Tuyến Cuối: src/audio/theme-audio.ts (SOUND_IDS, BUSES, GUN_BUS, voice() calls), src/audio/gun-audio.ts
+(GUN_SOUND_IDS, the S1 sounds spread into SOUND_IDS) + docs/audio/THEME_SOUND_LIST.md."""
 from __future__ import annotations
 
 import fnmatch
@@ -14,12 +15,17 @@ GAME = "typing-survival"
 LABEL = "Tuyến Cuối"
 FILES = {
     "catalog": "src/audio/theme-audio.ts",
+    "guns": "src/audio/gun-audio.ts",
     "music": "src/audio/music.ts",
     "list": "docs/audio/THEME_SOUND_LIST.md",
 }
 
 BUS_RE = re.compile(r"(\w+):\s*\{\s*gain:\s*([\d.]+),\s*duck:\s*([\d.]+)\s*\}")
 VOICE_RE = re.compile(r'this\.voice\(\s*"(\w+)"\s*,(.*?)\);', re.S)
+SOUND_IDS_RE = re.compile(r"\bSOUND_IDS\b[^=]*=\s*\[(.*?)\]", re.S)
+# S1 sounds: `"gun.tan.fire": { bus: "guns", gap: 60 },` in GUN_BUS (theme-audio.ts) - bus and least gap (ms)
+GUN_BUS_BLOCK_RE = re.compile(r"\bGUN_BUS\b[^=]*=\s*\{(.*?)\n\};", re.S)
+GUN_BUS_ROW_RE = re.compile(r'"([\w.]+)":\s*\{\s*bus:\s*"(\w+)",\s*gap:\s*(\d+)\s*\}')
 PROMPT_RE = re.compile(r"^-\s*`([\w.]+)`\s*[—-]\s*\*Prompt:\*\s*\"(.+)\"\s*$", re.M)
 ID_TOKEN = re.compile(r"^[a-z]+(?:\.[a-z0-9]+)+$")
 FILE_EXT = re.compile(r"\.(ts|js|mjs|md|json|ogg|wav|css|html)$")
@@ -57,8 +63,16 @@ CONTEXT = {
     "constraints": ["Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)"],
 }
 
-HIT_LAYERS = ("Mỗi bậc có file đầu tiếng + thân riêng; hit.sub và hit.tail dùng chung, mã ghép theo cờ bass và tail của tiers.ts; "
-              "giữ trong mã độ to theo số viên và độ dài theo bậc (§6.3 #3). Cần nâng kit SceneAudio trước (§6.3 #1)")
+# Rhythm of the S1 guns while a loaded word runs (src/content/guns.ts, 24/10/2026): board and critic repeat interval.
+REPEAT = {
+    "tan": (383, "src/content/guns.ts TAN: 6 loạt trong 2,3 s mỗi từ nạp, khoảng 383 ms một loạt"),
+    "ray": (800, "src/content/guns.ts RAY: 3 phát trong 2,4 s mỗi từ nạp, khoảng 800 ms một phát (nạp 0,15 s trước mỗi phát)"),
+    "phao": (750, "src/content/guns.ts PHAO: 4 quả trong 3 s mỗi từ nạp, khoảng 750 ms một quả; mỗi quả nổ sau 0,7 s bay"),
+}
+
+HIT_LAYERS = ("Đề xuất của kế hoạch (§6.3 #3; §16 #6 còn mở): mỗi bậc có file đầu tiếng + thân riêng; hit.sub và hit.tail dùng chung, "
+              "mã ghép theo cờ bass và tail của tiers.ts; cần nâng kit SceneAudio trước (§6.3 #1). Mã hiện tại (ThemeAudio.flush) "
+              "phát một tiếng cho mỗi bậc, không ghép lớp nào, nên file của từng bậc tự có thân và đuôi (Q6); có ghép thì ghép sẵn vào file")
 
 RULES: list[tuple[str, dict]] = [
     (r"key\.ok", {"category": "key-ok", "source": "key", "constraints": ["Rơ-le thép khô (§8.3)"]}),
@@ -75,7 +89,8 @@ RULES: list[tuple[str, dict]] = [
     (r"gun\.xung\.tail", {"category": "fx-other", "source": "impact", "family": "ban", "onset": "none", "dirty": True,
                           "layer_plan": {"builds_on": None, "shares": ["hit.tail"], "summary": "Khi ngừng bắn: vang thép sảnh rộng và máy dừng; chung chất liệu với hit.tail (BATCH1_BRIEF §3.2)"}}),
     (r"gun\.xung", {"category": "shot", "source": "shot", "dirty": True, "add_bands": ["sub"],
-                    "constraints": ["Ghép bốn lớp: thịch sub 40–90 Hz ≤120 ms, cơ khí ngắn, năng lượng, đuôi dùng chung hit.tail (§8.3)",
+                    "constraints": ["Ghép bốn lớp: sub 40–90 Hz ≤120 ms dưới thân, cơ khí ngắn, năng lượng, đuôi (§8.3). Mã phát một tiếng "
+                                    "mỗi phát, không ghép lớp nào: đuôi dùng chung hit.tail mới là đề xuất, nên Audio Lab ghép sẵn đuôi ngắn vào file (Q6)",
                                     "Phát 5 lần mỗi giây nên phải ngắn (§3.2)"]}),
     (r"gun\.tia\.(start|end)", {"category": "fx-other", "source": "electric", "family": "ban", "onset": "none", "dirty": True}),
     (r"gun\.tia\.pulse", {"category": "hit-small", "source": "electric", "dirty": True}),
@@ -113,6 +128,40 @@ RULES: list[tuple[str, dict]] = [
                           "source_override": {"ranked": [(["sample-player", "synth"], "MIDI và bộ phát mẫu (VCSL Anvil, Brake Drum) cộng synth tổng hợp bằng mã"),
                                                          (["model-later"], "Stable Audio 3")],
                                               "now": ["sample-player", "synth"], "later": []}}),
+    # S1 (src/audio/gun-audio.ts; bus and least gap in GUN_BUS of theme-audio.ts; THEME_SOUND_LIST §9)
+    (r"gun\.tan\.fire", {"category": "shot", "source": "shot", "dirty": True, "add_bands": ["sub"], "repeat": REPEAT["tan"],
+                         "constraints": ["Một loạt 7 viên của Tán là một tiếng: khóa bơm, nổ đanh có thân, vỏ đạn leng keng trên sàn thép (THEME_SOUND_LIST §9)"]}),
+    (r"gun\.ray\.charge", {"category": "fx-other", "source": "electric", "family": "ban", "onset": "none", "dirty": True,
+                           "dense": True, "repeat": REPEAT["ray"],
+                           "layer_plan": {"builds_on": None, "shares": [],
+                                          "summary": "Phần chuẩn bị của một phát Ray; gun.ray.fire phát ngay sau 0,15 s và mang đầu tiếng, thân, đuôi"},
+                           "constraints": ["Dừng gọn ở đỉnh: đuôi của phát bắn nằm ở gun.ray.fire, để vang không chồng lên tiếng nổ đanh"]}),
+    (r"gun\.ray\.fire", {"category": "shot", "source": "shot", "dirty": True, "add_bands": ["sub"], "repeat": REPEAT["ray"],
+                         "layer_plan": {"builds_on": None, "shares": [],
+                                        "summary": "Phát sau gun.ray.charge (0,15 s): nổ đanh, cú đấm trầm có trọng lượng, đuôi thép ngân dài dọc hành lang"}}),
+    (r"gun\.phao\.launch", {"category": "shot", "source": "shot", "dirty": True, "add_bands": ["sub"], "repeat": REPEAT["phao"]}),
+    (r"gun\.phao\.burst", {"category": "blast", "source": "blast", "dense": True, "repeat": REPEAT["phao"]}),
+    (r"hit\.armour", {"category": "hit-small", "source": "impact",
+                      "constraints": ["Một loạt đòn vào Vỏ nghe thành một tiếng keng: GUN_BUS giữ ít nhất 90 ms giữa hai lần phát"]}),
+    (r"shield\.hit", {"category": "hit-small", "source": "electric", "dirty": True}),
+    (r"shield\.break", {"category": "fx-other", "source": "impact", "family": "trung", "onset": "none", "dirty": True,
+                        "constraints": ["Mở đầu bằng tiếng rít căng (phần chuẩn bị), nên không kiểm thời gian lên, như tiếng dâng (§4.3.1)"]}),
+    (r"foe\.split", {"category": "death-swarm", "source": "impact", "dirty": True}),
+    (r"leader\.horn", {"category": "warning", "source": "warning-stinger", "bands": ["sub", "body"]}),
+    (r"leader\.down", {"category": "death-big", "source": "impact", "dirty": True}),
+    (r"rift\.warn", {"category": "warning", "source": "warning-stinger", "onset": "none", "bands": ["sub", "body"],
+                     "source_override": {"ranked": [(["model-later"], "Stable Audio 3: tường thép rên, kẽo kẹt, tiếng ầm dâng dần"),
+                                                    (["cc0-layer"], "Ghép tiếng thép rên, kẽo kẹt CC0 (Kenney, Freesound CC0)"),
+                                                    (["synth"], "Tổng hợp như hiện nay")],
+                                         "now": ["cc0-layer", "synth"], "later": ["model-later"]}}),
+    (r"rift\.open", {"category": "fx-other", "source": "impact", "family": "no", "onset": "none", "dirty": True,
+                     "constraints": ["Mở đầu bằng tiếng thép rên dâng lên (phần chuẩn bị), nên không kiểm thời gian lên (§4.3.1)"]}),
+    (r"star\.get", {"category": "word-reward", "source": "pitched-reward", "rand": "rare-fixed", "dense": False,
+                    "source_override": {"ranked": [(["sample-player"], "Thanh thép: VCSL Anvil, Brake Drum hoặc thanh kim loại, một nốt C6 cộng lấp lánh"),
+                                                   (["synth"], "Tổng hợp thanh thép như hiện nay")],
+                                        "now": ["sample-player", "synth"], "later": []},
+                    "pitches": {"notes": ["C6"], "scale": None,
+                                "basis": "src/audio/gun-audio.ts: thanh thép 1.046,5 Hz (C6), lấp lánh tam giác 2.093 Hz (C7)"}}),
     (r"ui\.\w+", {"category": "ui", "source": "ui"}),
     (r"music\.surge", {"category": "music", "source": "music",
                        "constraints": ["Lớp chiến là những cú bùng ngắn, nghịch phách; không có pad kéo dài ở 300 Hz–3 kHz (§8.3, §8.5)"]}),
@@ -177,13 +226,32 @@ def code_buses(text: str, ids: list[str]) -> dict[str, str]:
     return out
 
 
+def sound_ids(code: str, guns: str) -> tuple[list[str], list[str]]:
+    """SOUND_IDS of theme-audio.ts, with `...GUN_SOUND_IDS` (gun-audio.ts) opened. Returns (all ids, S1 ids)."""
+    ids = parse.ts_string_array(code, "SOUND_IDS")
+    m = SOUND_IDS_RE.search(code)
+    spread = parse.ts_string_array(guns, "GUN_SOUND_IDS") if m and "...GUN_SOUND_IDS" in m.group(1) else []
+    gun_ids = [s for s in spread if s not in ids]
+    return ids + gun_ids, gun_ids
+
+
+def gun_buses(code: str) -> dict[str, dict]:
+    """GUN_BUS of theme-audio.ts: id -> {"bus", "gap_ms"} (ThemeAudio.gun() plays every S1 id through it)."""
+    m = GUN_BUS_BLOCK_RE.search(code)
+    return {r.group(1): {"bus": r.group(2), "gap_ms": float(r.group(3))} for r in GUN_BUS_ROW_RE.finditer(m.group(1) if m else "")}
+
+
 def read(game_root: Path) -> GameData:
     texts = {k: parse.read_text(game_root / v) for k, v in FILES.items()}
     lst, code = texts["list"], texts["catalog"]
     issues = common.need(lst, LIST_NEEDLES, GAME, FILES["list"])
 
-    ids = parse.ts_string_array(code, "SOUND_IDS")
+    ids, gun_ids = sound_ids(code, texts["guns"])
     buses = code_buses(code, ids)
+    gun_bus = gun_buses(code)
+    for sid in gun_ids:
+        if sid in gun_bus:
+            buses.setdefault(sid, gun_bus[sid]["bus"])
     code_levels = {m.group(1): {"gain": float(m.group(2)), "duck": float(m.group(3))} for m in BUS_RE.finditer(code)}
     doc_levels, globs = _bus_globs(lst)
     listed = read_list(lst)
@@ -204,6 +272,10 @@ def read(game_root: Path) -> GameData:
     for sid in order:
         e = Entry(sid, GAME, in_code=sid in ids, in_list=sid in listed and listed[sid].get("section") is not None,
                   code={"bus": buses.get(sid)} if sid in ids else {}, listing=dict(listed.get(sid, {})))
+        if sid in gun_ids:
+            e.code["code_file"] = FILES["guns"]
+            if gun_bus.get(sid, {}).get("gap_ms"):
+                e.code["gap_ms"] = gun_bus[sid]["gap_ms"]
         if sid.startswith("music.") and sid in ids:
             e.code.update({"loop": True, "bpm": bpm, "bars": ctx["music"]["bars"]})
         doc_bus = next((b for b, gl in globs.items() if any(fnmatch.fnmatchcase(sid, g) for g in gl)), None)
@@ -252,4 +324,6 @@ def current_randomisation(e: Entry) -> str:
         return "5 cao độ xoay vòng theo chữ, thêm ±3 % ngẫu nhiên (mã tổng hợp)"
     if e.id.startswith("music."):
         return "Vòng lặp, không đổi ngẫu nhiên"
+    if e.id == "hit.armour":
+        return "Thép tấm 980–1.070 Hz ngẫu nhiên mỗi lần (mã tổng hợp, gun-audio.ts); khi có file, SceneAudio của kit đổi ±5 % tốc độ phát (§5.3)"
     return "Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)"

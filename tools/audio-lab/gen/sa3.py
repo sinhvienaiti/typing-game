@@ -50,7 +50,10 @@ Q2_TERMS = (r"\btok\b", r"\btốc\b", r"hollow\s+tube", r"temple\s+block", r"woo
 # DECISIONS Q6 (owner, 24/10/2026): no "bụp, thụp" puffs, toy, cartoon or retro sounds, in every game. A lone
 # "thump"/"thud" is banned too, but a low layer under a body and a tail is allowed: that needs the context, so the
 # Q6 review reads it; a word list here would also refuse the owner's rated call-chop A, E ("knock ... thud").
-Q6_TERMS = (r"\bpuff(?:s|ed|ing|y)?\b", r"\bpop(?:s|ped|ping)?\b", r"\bballoon\w*", r"\bwhoomph\w*", r"\bboing\w*", r"\bbonk\w*",
+# The puff words follow the Lời Gọi prompt packs (04-audio*.md: puff, pop, poof) and the spellings the Q6 pass
+# removed by hand (plop, fwoomp, thoomp, whoomp/whoomph/woomph).
+Q6_TERMS = (r"\bpuff(?:s|ed|ing|y)?\b", r"\bpop(?:s|ped|ping)?\b", r"\bpoof\w*", r"\bplop\w*", r"\bballoon\w*",
+            r"\bf?wh?oomp\w*", r"\bthoomp\w*", r"\bboing\w*", r"\bbonk\w*",
             r"\btoy(?:s|like)?\b", r"\btoy-like\b", r"\bcartoon\w*", r"\bretro\b", r"\b8[- ]?bit\b", r"\bchiptune\w*",
             r"\bbụp\b", r"\bthụp\b")
 FORBIDDEN_TERMS: dict[str, tuple[str, ...]] = {

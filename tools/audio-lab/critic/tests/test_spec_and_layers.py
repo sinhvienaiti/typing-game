@@ -108,6 +108,23 @@ def test_repetition_for_short_sounds():
     assert item.short and 3.0 <= len(item.mono(16000)) / 16000 <= 4.0
 
 
+def test_card_loop_eval_turns_the_repetition_on_for_longer_files():
+    """critic.loop_eval.enabled (specs card) repeats a 350 ms shot at its rhythm; without it the file is scored alone."""
+    sr = 48000
+    shot = np.zeros(int(0.35 * sr), dtype=np.float32)
+    shot[:2400] = 0.5
+    a = A.from_array(shot, sr)
+    card = {"id": "gun.xung", "critic": {"rate_hz": 5, "loop_eval": {"enabled": True, "interval_ms": 200}}}
+    on = learned.Item("on", a, S.from_mapping(card))
+    assert on.spec.loop_eval and on.short and on.input_kind == "repetition"
+    assert 3.0 <= len(on.mono(16000)) / 16000 <= 4.0
+    off = learned.Item("off", a, S.from_mapping({"id": "gun.xung", "critic": {"loop_eval": {"enabled": False}}}))
+    assert not off.spec.loop_eval and not off.short and off.input_kind == "file"
+    tiny = learned.Item("tiny", A.from_array(synth.weak_click(), sr), S.from_mapping({"group": "key_ok", "loop_eval": {"enabled": False}}))
+    assert tiny.short                                    # under 300 ms the plan's repetition always holds
+    assert S.from_json(on.spec.to_json()).loop_eval is True
+
+
 def test_no_ai_sources_never_reach_models():
     assert learned.no_ai("/Users/x/AudioLab/libraries/_no-ai/sonniss/a.wav")
     assert not learned.no_ai("/Users/x/AudioLab/libraries/kenney/a.ogg")

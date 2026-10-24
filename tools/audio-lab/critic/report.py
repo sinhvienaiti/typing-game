@@ -199,7 +199,8 @@ def summary_md(results: list[dict], batch: dict) -> str:
               "DC thật, mối nối) ghi ở `tools/audio-lab/README.md`. Ngưỡng L1b và mục tiêu L2 là điểm xuất phát "
               "(mục 4.3.2, 4.3.3), chưa hiệu chỉnh bằng điểm của chủ dự án.",
               "- Bước nhảy ở mối nối tính phần vượt quá bước nhảy P95 bình thường trong file, để tiếng sáng không bị chặn nhầm.",
-              "- Âm ngắn dưới 300 ms được L3–L5 chấm trên bản lặp 3–4 s theo nhịp của nhóm (mục 4.4).",
+              "- Âm ngắn dưới 300 ms, và âm có thẻ bật `critic.loop_eval`, được L3–L5 chấm trên bản lặp 3–4 s "
+              "theo nhịp của thẻ hoặc của nhóm (mục 4.4).",
               "- Không gửi thẻ ảnh của file có `cloud_ok: false` (nguồn `_no-ai`) cho AI chạy trên mây (mục 10.3).", ""]
     return "\n".join(lines)
 

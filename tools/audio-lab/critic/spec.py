@@ -17,6 +17,8 @@ Every key is optional; a nested `critic:` mapping overrides top-level keys.
     attack_max_ms: 10             # override §4.3.1 limits (owner-approved only); null = not checked
     head_max_ms: 5                # null = not checked (loops, music)
     rate_hz: 5                    # game rhythm for the 3-4 s repetition of short sounds
+    loop_eval: {enabled: true}    # also score files of 300 ms or more on that repetition (dense sounds that
+                                  # overlap in game, e.g. gun.xung 350 ms at 5 Hz); shorter files always are
     bpm: 96, bars: 8, beats_per_bar: 4      # loops and music: exact length check
     intent: "a heavy industrial autocannon shot"   # informational; never a quality score
     clap: {labels: [...], expected: [...], contrast: [[good, bad], ...]}
@@ -52,6 +54,7 @@ class Spec:
     attack_max_ms: float | None = None
     head_max_ms: float | None = 5.0                  # None = head silence not checked
     rate_hz: float = 3.0
+    loop_eval: bool = False                          # card asks for the repetition whatever the file length
     bpm: float | None = None
     bars: float | None = None
     beats_per_bar: float = 4.0
@@ -161,6 +164,7 @@ def from_mapping(raw: dict | None, path: str | None = None, group_override: str 
     clap = raw.get("clap") or {}
     ast = raw.get("ast") or {}
     exp = clap.get("expected") or []
+    le = raw.get("loop_eval")
     base = Path(path).parent if path else Path.cwd()
     return Spec(
         group=gkey, group_source=src, id=sid, game=raw.get("game") or game,
@@ -174,6 +178,7 @@ def from_mapping(raw: dict | None, path: str | None = None, group_override: str 
         # an explicit null means "not checked", like attack_max_ms (specs lane: loops have no head check)
         head_max_ms=_num(raw.get("head_max_ms")) if "head_max_ms" in raw else g.head_max_ms,
         rate_hz=_or(raw.get("rate_hz"), g.rate_hz),
+        loop_eval=bool(le.get("enabled")) if isinstance(le, dict) else le is True,
         bpm=_num(raw.get("bpm")), bars=_num(raw.get("bars")),
         beats_per_bar=_num(raw.get("beats_per_bar")) or 4.0,
         intent=raw.get("intent") or raw.get("prompt"),

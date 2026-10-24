@@ -2,9 +2,9 @@
 
 They only rank or flag; they never block. Models load lazily, once per process, from the offline
 Hugging Face cache (HF_HUB_OFFLINE=1, no token; see common/env.py). MPS when available, CPU
-fallback (AUDIOLAB_DEVICE=cpu forces CPU). Sounds shorter than 300 ms are scored on a 3-4 s
-repetition at the game rhythm (§4.4). Files the AI policy forbids never reach a model (§10.2,
-critic/policy.py).
+fallback (AUDIOLAB_DEVICE=cpu forces CPU). Sounds shorter than 300 ms, and longer ones whose
+card sets critic.loop_eval.enabled, are scored on a 3-4 s repetition at the game rhythm (§4.4).
+Files the AI policy forbids never reach a model (§10.2, critic/policy.py).
 """
 from __future__ import annotations
 
@@ -127,7 +127,8 @@ class Item:
 
     @property
     def short(self) -> bool:
-        return self.audio.duration < L2["short_s"]
+        """Scored on the repetition: shorter than 300 ms (§4.4), or the card asks (critic.loop_eval.enabled)."""
+        return self.audio.duration < L2["short_s"] or self.spec.loop_eval
 
     @property
     def long(self) -> bool:

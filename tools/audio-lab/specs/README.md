@@ -22,7 +22,7 @@ Thêm `--game <game>` để chỉ chạy một game. Chạy thẳng bằng venv 
 |---|---|---|---|
 | `dragon-hold` | `src/audio/catalog.ts` (id, bus, ưu tiên, độ dài, `gainDb`), `mix.ts` (mức bus), `music-plan.ts` (lớp nhạc) | `docs/audio/M0_SOUND_LIST.md` | Catalog là nguồn chuẩn của độ dài |
 | `typing-defense` | Không có bảng id. `readers/typing_defense.py` dò từng nhánh của `TypingAudio` (`EVIDENCE`) trong `src/view/audio-min.ts`, `music.ts` | `docs/audio/THEME_SOUND_LIST.md` | Độ dài lấy từ prompt |
-| `typing-survival` | `src/audio/theme-audio.ts` (`SOUND_IDS`, `BUSES`, lời gọi `voice()`), `music.ts` | `docs/audio/THEME_SOUND_LIST.md` | Độ dài lấy từ prompt |
+| `typing-survival` | `src/audio/theme-audio.ts` (`SOUND_IDS`, `BUSES`, lời gọi `voice()`, `GUN_BUS`), `gun-audio.ts` (`GUN_SOUND_IDS`, 14 id S1 trải vào `SOUND_IDS`), `music.ts` | `docs/audio/THEME_SOUND_LIST.md` | Độ dài lấy từ prompt. Bus và khoảng cách tối thiểu của id S1 lấy ở `GUN_BUS`; nhịp lặp của súng S1 lấy từ `src/content/guns.ts` (luật `repeat` của bộ đọc) |
 
 Thêm cả id do kế hoạch đề xuất (`hit.sub`, `hit.tail`, §6.3) và id chỉ nhắc trong văn bản (`kill.chime`), với `status: proposed` và `blocked_by: [sua-tai-lieu-game]`.
 
@@ -49,7 +49,7 @@ Mỗi bộ đọc kiểm lại các câu luật nó dựa vào (ví dụ "Đòn 
 | `source_plan` | Thứ tự nguồn, `now` (làm ngay khi chưa có mô hình), `later`, hồ sơ lô 1 | §3.2, §9, §10.1 |
 | `licence` | Giấy phép được dùng, có điều kiện, bị cấm | §10.2 |
 | `constraints` | Luật riêng của id và của game (văn hóa, chất liệu) | Tài liệu game, §8 |
-| `board`, `critic` | Bối cảnh nghe, nhịp lặp; họ bẩn, trọng số lô 1, chấm trên bản lặp, nhãn AST nên có. `critic` còn chép sẵn các khóa mà `critic/spec.py` đọc (`group`, `loop`, `stereo`, `attack_max_ms`, `head_max_ms`, `rate_hz`, `bpm`, `bars`, `intent`, `refs`), tính lại sau mỗi lần sinh; `null` nghĩa là không kiểm. `group` theo `category`, trừ các id có khuôn riêng ở `taxonomy.CRITIC_GROUP_BY_ID` (`fire.impact.*` → `hit_fire`). `critic.clap` (nhãn, cặp chất liệu CLAP riêng cho id) chỉ sửa tay và phải ghi vào `manual_fields` (ví dụ `ui-pick`: phách gỗ cộng chuông đồng). `intent` luôn là chuỗi (prompt, hoặc `when` khi chưa có prompt) | §7, §4.4, §4.5 |
+| `board`, `critic` | Bối cảnh nghe, nhịp lặp (trần phát của tài liệu, hoặc nhịp thật mà luật `repeat` của bộ đọc ghi, hoặc đề xuất chung của nhóm theo bot 40 WPM); họ bẩn, trọng số lô 1, chấm trên bản lặp (`loop_eval`: bộ sinh bật cho âm dưới 300 ms; bật tay cho âm dài hơn mà lặp dày thì từ 25/10 bộ chấm cũng chấm file đó trên bản lặp), nhãn AST nên có. `critic` còn chép sẵn các khóa mà `critic/spec.py` đọc (`group`, `loop`, `stereo`, `attack_max_ms`, `head_max_ms`, `rate_hz`, `bpm`, `bars`, `intent`, `refs`), tính lại sau mỗi lần sinh; `null` nghĩa là không kiểm. `group` theo `category`, trừ các id có khuôn riêng ở `taxonomy.CRITIC_GROUP_BY_ID` (`fire.impact.*` → `hit_fire`). `critic.clap` (nhãn, cặp chất liệu CLAP riêng cho id) chỉ sửa tay và phải ghi vào `manual_fields` (ví dụ `ui-pick`: phách gỗ cộng chuông đồng). `intent` luôn là chuỗi (prompt, hoặc `when` khi chưa có prompt) | §7, §4.4, §4.5 |
 | `blocked_by` | Việc đang chặn (duyệt, tự ghi, Freesound…) | Bảng `BLOCKERS` trong `taxonomy.py` |
 | `origin` | File nguồn, id có trong mã và danh sách không | Bộ đọc |
 

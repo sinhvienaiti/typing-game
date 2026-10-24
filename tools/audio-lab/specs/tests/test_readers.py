@@ -129,6 +129,15 @@ def test_build_card_applies_game_rules(tmp_path):
     assert odd["category"] is None and any(i.kind == "unclassified" for i in issues)
 
 
+def test_build_card_takes_the_game_rhythm_from_the_rule(tmp_path):
+    """A reader rule's `repeat` (the game's own rhythm) beats the plan's typical interval for the board and critic."""
+    gd = dragon_hold.read(_game(tmp_path))
+    gd.rules = [(r"fire\.impact\.a", {"category": "shot", "source": "shot", "repeat": (800, "nhịp của game")})] + gd.rules
+    card, _ = build_card(gd, gd.entry("fire.impact.a"), EMPTY_PLAN, dragon_hold)
+    assert card["board"]["repeat_interval_ms"] == 800 and card["board"]["repeat_basis"] == "nhịp của game"
+    assert card["critic"]["rate_hz"] == 1.25
+
+
 def test_survival_bus_lookup_from_voice_calls():
     text = '''
 export const SOUND_IDS = ["key.ok", "word.load", "word.perfect", "ui.move", "ui.back", "music.calm"] as const;
@@ -140,3 +149,29 @@ this.music.start(this.ctx, this.inserts.get("music")!, this.buffer);
     ids = ["key.ok", "word.load", "word.perfect", "ui.move", "ui.back", "music.calm"]
     assert typing_survival.code_buses(text, ids) == {
         "key.ok": "keys", "word.perfect": "alerts", "word.load": "alerts", "ui.move": "ui", "ui.back": "ui", "music.calm": "music"}
+
+
+def test_survival_opens_the_s1_spread_and_reads_gun_bus():
+    code = '''
+export const SOUND_IDS = ["key.ok", "hit.t1", ...GUN_SOUND_IDS] as const;
+const GUN_BUS: Readonly<Record<GunSoundId, { bus: Bus; gap: number }>> = {
+  "gun.tan.fire": { bus: "guns", gap: 60 },
+  "star.get": { bus: "ui", gap: 0 },
+};
+'''
+    guns = 'export const GUN_SOUND_IDS = [\n  "gun.tan.fire",\n  "star.get",\n] as const;'
+    assert typing_survival.sound_ids(code, guns) == (["key.ok", "hit.t1", "gun.tan.fire", "star.get"], ["gun.tan.fire", "star.get"])
+    assert typing_survival.sound_ids('export const SOUND_IDS = ["key.ok"] as const;', guns) == (["key.ok"], [])
+    assert typing_survival.gun_buses(code) == {"gun.tan.fire": {"bus": "guns", "gap_ms": 60.0}, "star.get": {"bus": "ui", "gap_ms": 0.0}}
+
+
+def test_survival_s1_ids_on_the_real_game_are_in_code_classified_and_on_a_bus():
+    """The 14 S1 ids of gun-audio.ts: in SOUND_IDS (spread), a GUN_BUS bus, a RULES row, no reader issue."""
+    from common import env
+    gd = typing_survival.read(env.GAMES / typing_survival.GAME)
+    s1 = [e for e in gd.entries if e.code.get("code_file") == typing_survival.FILES["guns"]]
+    assert len(s1) >= 14
+    for e in s1:
+        assert e.in_code and e.in_list and e.code["bus"] and e.listing.get("prompt"), e.id
+        assert (gd.rule_for(e.id) or {}).get("category"), e.id
+    assert [i for i in gd.issues if i.id in {e.id for e in s1}] == []

@@ -105,7 +105,7 @@ parts: null
 layer_plan:
   builds_on: null
   shares: [hit.sub, hit.tail]
-  summary: 'Mỗi bậc có file đầu tiếng + thân riêng; hit.sub và hit.tail dùng chung, mã ghép theo cờ bass và tail của tiers.ts; giữ trong mã độ to theo số viên và độ dài theo bậc (§6.3 #3). Cần nâng kit SceneAudio trước (§6.3 #1)'
+  summary: 'Đề xuất của kế hoạch (§6.3 #3; §16 #6 còn mở): mỗi bậc có file đầu tiếng + thân riêng; hit.sub và hit.tail dùng chung, mã ghép theo cờ bass và tail của tiers.ts; cần nâng kit SceneAudio trước (§6.3 #1). Mã hiện tại (ThemeAudio.flush) phát một tiếng cho mỗi bậc, không ghép lớp nào, nên file của từng bậc tự có thân và đuôi (Q6); có ghép thì ghép sẵn vào file'
   related: []
 references: []
 source_plan:

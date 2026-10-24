@@ -261,6 +261,8 @@ def _board(e: Entry, category: str | None, caps: dict, gap_ms: float | None, rul
     interval, basis = None, None
     if caps.get("per_s"):
         interval, basis = 1000 / caps["per_s"], "Trần phát mỗi giây của tài liệu hoặc mã"
+    elif rule.get("repeat"):             # the game's own rhythm, read by the reader's author from the game's rules
+        interval, basis = rule["repeat"]
     elif dense and category in tx.TYPICAL_INTERVAL_MS:
         interval, basis = tx.TYPICAL_INTERVAL_MS[category], "Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game"
     if interval is not None and gap_ms:
