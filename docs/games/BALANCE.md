@@ -191,6 +191,7 @@ Mỗi game chạy ma trận **bot × chế độ × seed** (≥ 20 seed) trên m
 - **Kinh tế chặt:** vàng ải chỉ đủ phủ khoảng một đỉnh của một đường; chọn món là quyết định thật (cổng G14 giữ nguyên).
 - **Bậc của bộ điều nhịp:** khoảng sinh ± 7 %, một thuộc tính tinh anh, dời đỉnh, quãng lặng, rơi bình máu khi gần thua.
 - Cổng G1–G3 của 00 §7 đọc theo dải mục 3 và cổng B1–B9 ở trên.
+- **Số riêng của Rồng Giữ Ải (vòng 3, 24/10, đã chọn theo đề xuất; 00 D27–D29):** trần nhịp k là 1,50 thay cho 1,30 của mục 4.1, và luật cổng co giãn cùng khoảng sinh; dải Nhàn I ở Cân bằng là ≤ 20 % thay cho ≤ 10 % (lúc quái còn đi tới Vùng Chữ là nhịp của thể loại); G8 "phần phe ta" là bẫy, nhà, lính, chiêu của Rồng tính vào phần Rồng.
 
 ### 9.2 Lời Gọi
 

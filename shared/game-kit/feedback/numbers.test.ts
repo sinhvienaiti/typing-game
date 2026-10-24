@@ -1,6 +1,6 @@
 // Source: games/space-typing@survival-s0 tests/feedback-numbers.test.ts (kit copy, plus the profiles)
-import { describe, expect, it } from "vitest";
-import { NumberField, STYLE, popScale } from "./numbers";
+import { afterEach, describe, expect, it } from "vitest";
+import { NUMBER_ATLAS, NumberField, NumberSprites, STYLE, digitCellWidth, popScale, type GlyphMetrics } from "./numbers";
 import { DRAGON, SHIP } from "./profiles";
 
 /**
@@ -288,5 +288,142 @@ describe("profiles", () => {
     expect(SHIP.numbers.colors.some(gold)).toBe(true);
     expect(DRAGON.numbers.colors.some(gold)).toBe(false);
     expect(DRAGON.numbers.label).toBe("HOÀN HẢO");
+  });
+});
+
+/**
+ * The glyph atlas (dragon-hold review 2 minor 2): in 48 px cells the italic
+ * digits with their 9 px outline overran into the next cell, so every glyph
+ * 1–9 and × was drawn with 2–5 ink columns of the glyph before it, and the
+ * label's accents (À, Ả) reached into the digit row, so a "3" carried bits of
+ * "Ả" under it. Glyph metrics below are Chrome's for dragon-hold's fonts (Be
+ * Vietnam Pro 800, the digits slanted: "italic 800 52px"; the label 800
+ * 40 px), measured on the Dell (Windows Chrome 155, textAlign centre).
+ */
+describe("the glyph atlas", () => {
+  const DIGIT: Record<string, GlyphMetrics> = {
+    "0": { width: 36.8, actualBoundingBoxLeft: 13.4, actualBoundingBoxRight: 23.6 },
+    "1": { width: 23.2, actualBoundingBoxLeft: 3.6, actualBoundingBoxRight: 17.4 },
+    "2": { width: 34.8, actualBoundingBoxLeft: 15.4, actualBoundingBoxRight: 22.6 },
+    "3": { width: 35.7, actualBoundingBoxLeft: 12.9, actualBoundingBoxRight: 22.1 },
+    "4": { width: 37.6, actualBoundingBoxLeft: 15.8, actualBoundingBoxRight: 21.2 },
+    "5": { width: 35.8, actualBoundingBoxLeft: 12.9, actualBoundingBoxRight: 23.1 },
+    "6": { width: 36.7, actualBoundingBoxLeft: 13.4, actualBoundingBoxRight: 21.6 },
+    "7": { width: 31.1, actualBoundingBoxLeft: 8.6, actualBoundingBoxRight: 24.4 },
+    "8": { width: 35.3, actualBoundingBoxLeft: 13.7, actualBoundingBoxRight: 22.3 },
+    "9": { width: 36.7, actualBoundingBoxLeft: 12.4, actualBoundingBoxRight: 22.6 },
+    "×": { width: 33.5, actualBoundingBoxLeft: 8.8, actualBoundingBoxRight: 17.2 },
+  };
+  const LABEL = { width: 225.7, actualBoundingBoxLeft: 110.8, actualBoundingBoxRight: 112.7, actualBoundingBoxAscent: 30.4, actualBoundingBoxDescent: 11.6 };
+  const A = NUMBER_ATLAS;
+  /** A glyph's ink span across the atlas when painted centred at x (outline included). */
+  const ink = (m: GlyphMetrics, x: number) => [x - m.actualBoundingBoxLeft! - A.digitOutline / 2, x + m.actualBoundingBoxRight! + A.digitOutline / 2] as const;
+
+  it("gives every glyph a cell its ink fits in, with room at both edges (48 px cells did not)", () => {
+    const cell = digitCellWidth((glyph) => DIGIT[glyph]!);
+    expect(cell).toBeGreaterThanOrEqual(A.minCellW);
+    expect(cell * A.glyphs.length).toBeLessThanOrEqual(A.width);
+    let overranOld = 0;
+    [...A.glyphs].forEach((glyph, index) => {
+      const [left, right] = ink(DIGIT[glyph]!, index * cell + cell / 2);
+      expect(left).toBeGreaterThanOrEqual(index * cell + A.edgePx);
+      expect(right).toBeLessThanOrEqual((index + 1) * cell - A.edgePx);
+      const [oldLeft, oldRight] = ink(DIGIT[glyph]!, index * 48 + 24);
+      if (oldLeft < index * 48 || oldRight > (index + 1) * 48) overranOld += 1;
+    });
+    // The old layout: most glyphs reached into a neighbour's cell.
+    expect(overranOld).toBeGreaterThanOrEqual(8);
+  });
+
+  it("widens the cells for a wider font, never past the atlas, and without a measured box still leaves room", () => {
+    const wide = digitCellWidth(() => ({ width: 40, actualBoundingBoxLeft: 30, actualBoundingBoxRight: 34 }));
+    expect(wide).toBe(2 * Math.ceil(34 + A.digitOutline / 2 + A.edgePx));
+    expect(digitCellWidth(() => ({ width: 90, actualBoundingBoxLeft: 80, actualBoundingBoxRight: 80 }))).toBe(92);
+    const blind = digitCellWidth(() => ({ width: 33.4 }));
+    expect(blind / 2).toBeGreaterThanOrEqual(33.4 / 2 + A.digitOutline / 2 + A.edgePx);
+  });
+
+  type Paint = { text: string; x: number; y: number; font: string };
+  const originalDocument = (globalThis as { document?: unknown }).document;
+  afterEach(() => {
+    (globalThis as { document?: unknown }).document = originalDocument;
+  });
+  /** A canvas whose 2D context measures with the metrics above and records what is painted. */
+  const fakeCanvas = () => {
+    const painted: Paint[] = [];
+    const context = {
+      font: "",
+      textAlign: "start",
+      textBaseline: "alphabetic",
+      lineJoin: "miter",
+      lineWidth: 1,
+      strokeStyle: "",
+      fillStyle: "",
+      measureText(text: string) {
+        return this.font.startsWith("italic") ? DIGIT[text]! : LABEL;
+      },
+      strokeText() {},
+      fillText(text: string, x: number, y: number) {
+        painted.push({ text, x, y, font: this.font });
+      },
+    };
+    const canvas = { width: 0, height: 0, getContext: () => context };
+    (globalThis as { document?: unknown }).document = { createElement: () => canvas };
+    return { canvas, painted };
+  };
+
+  it("paints each digit in the middle of its own cell and the label in its own row, below the digits' reach", () => {
+    const { canvas, painted } = fakeCanvas();
+    const sprites = new NumberSprites(DRAGON);
+    expect([canvas.width, canvas.height]).toEqual([A.width, A.height]);
+    const cell = sprites.cellWidth;
+    expect(cell).toBe(digitCellWidth((glyph) => DIGIT[glyph]!));
+    const digits = painted.filter((p) => p.font === A.digitFont);
+    expect(digits.map((p) => p.text).join("")).toBe(A.glyphs);
+    digits.forEach((p, index) => expect([p.x, p.y]).toEqual([index * cell + cell / 2, A.digitMidY]));
+    const label = painted.find((p) => p.text === "HOÀN HẢO")!;
+    expect(label.font).toBe(A.labelFont);
+    expect(label.y).toBe(A.labelTop + A.labelRowH / 2);
+    // The accents' top (ascent + outline) stays inside the label row, and the row starts below the digit row.
+    expect(label.y - LABEL.actualBoundingBoxAscent - A.labelOutline / 2).toBeGreaterThan(A.labelTop + A.edgePx);
+    expect(label.y + LABEL.actualBoundingBoxDescent + A.labelOutline / 2).toBeLessThan(A.labelTop + A.labelRowH - A.edgePx);
+    expect(A.labelTop).toBeGreaterThanOrEqual(2 * A.cellH);
+    // The old atlas put the label's middle at 96: its accents reached row 57, inside the 64 digit rows.
+    expect(96 - LABEL.actualBoundingBoxAscent - A.labelOutline / 2).toBeLessThan(A.cellH);
+  });
+
+  it("draws the glyphs at the scale and place they always had: only the quads grew round them", () => {
+    fakeCanvas();
+    const sprites = new NumberSprites(DRAGON);
+    const cell = sprites.cellWidth;
+    const field = new NumberField(DRAGON);
+    field.fontPx = 20;
+    const i = field.spawn(1, 640, 300, 120, STYLE.perfect, 3, 1.6, 1, 0, -1, 0);
+    sprites.write(field, 1280, 720);
+    const { rect, uv } = sprites as unknown as { rect: Float32Array; uv: Float32Array };
+    const px = field.fontPx * field.size[i]! * popScale(field.tier[i]!, field.pop[i]!, DRAGON.tiers);
+    const advance = A.advance * px;
+    const top = field.y[i]! - px / 2;
+    const text = field.text(i);
+    expect(text).toBe("120");
+    for (let c = 0; c < text.length; c += 1) {
+      const o = c * 4;
+      const g = A.glyphs.indexOf(text[c]!);
+      // One whole cell of the digit row, nothing of its neighbours or the label row.
+      expect(uv[o]! * A.width).toBeCloseTo(g * cell, 3);
+      expect(uv[o + 2]! * A.width).toBeCloseTo((g + 1) * cell, 3);
+      expect([uv[o + 1], uv[o + 3]! * A.height]).toEqual([0, A.cellH]);
+      // Screen px per atlas px as before (1.4 advances per 48 columns, 1.25 font sizes per 64 rows); the glyph's middle on its advance.
+      expect(rect[o + 2]! / cell).toBeCloseTo((advance * 1.4) / 48, 6);
+      expect(rect[o + 3]! / A.cellH).toBeCloseTo((px * 1.25) / 64, 6);
+      expect(rect[o]! + rect[o + 2]! / 2).toBeCloseTo(field.x[i]! - (text.length * advance) / 2 + (c + 0.5) * advance, 4);
+      expect(rect[o + 1]).toBeCloseTo(top, 4);
+    }
+    // The label: its own row, its middle 0.4 label heights above the digits' top, 1.3 label heights per 64 rows.
+    const o = text.length * 4;
+    const lh = px * A.label;
+    expect([uv[o + 1]! * A.height, uv[o + 3]! * A.height]).toEqual([A.labelTop, A.labelTop + A.labelRowH]);
+    expect(rect[o + 3]! / A.labelRowH).toBeCloseTo((lh * 1.3) / 64, 6);
+    expect(rect[o + 1]! + rect[o + 3]! / 2).toBeCloseTo(top - 0.4 * lh, 4);
   });
 });

@@ -72,6 +72,9 @@
 | D24 | **Esc nhả khóa và bỏ các chữ đã gõ; số phím sai đã có trên từ vẫn giữ** tới khi từ xong hoặc mất (như Backspace), nên vẫn tính vào e và sự kiện học. Kit: `RouterRules.unlockErrors: "keep"` (24/10) | Esc không được xóa lỗi; câu này thay "Esc nhả khóa." ở 01 §3.3 |
 | D25 | **Học trước không là lần nhớ.** Học trước gửi `review-card` kèm `hintUsed: true` (từ, IPA, nghĩa đang hiện). "Lần nhớ đúng" là lần đúng ở `meaning-recall`, `listening`, `review-card` **không** có `hintUsed` (24/10) | Gõ chép không được tính là thuộc (D14); áp cho cả bản lưu trên máy và mẫu đọc từ portal. Thay dòng "Lần nhớ đúng" ở 01 §6.3 và câu Học trước ở 01 §6.6 |
 | D26 | **Tốc độ gõ E của ải không bao giờ ngầm là 35.** Chưa có số đo thì game hỏi tốc độ trước Học trước (thẻ tốc độ, gợi ý sẵn 35). Đã đo thì thẻ đặt số đo của hồ sơ lên đầu (E, a, CV). Đường dẫn có `?wpm=` thì dùng số đó. Hết mỗi ải, hồ sơ cập nhật theo BALANCE.md §2. Đã chọn theo đề xuất (24/10) | Rà soát 2: bot 25 WPM mở trang không có `?wpm` chơi với nhịp 35 và thua ở đợt 3; cùng bot với `?wpm=25` thắng, còn 82 % máu |
+| D27 | **Dải Nhàn I của Rồng Giữ Ải ở Cân bằng là ≤ 20 %** (dải chung của BALANCE.md §3 là ≤ 10 %; Thư giãn, Thử thách giữ dải chung). Báo cáo bot, B1 và B7 đọc dải này; bộ điều nhịp vẫn nhắm 30 % (dải chung + 20 điểm). Đã chọn theo đề xuất (vòng 3, 24/10): cổng vòng 2 nêu bốn cách mà không chọn; vòng 3 đề xuất cách (b) theo số đo | Chữ chỉ hiện trong vài giây cuối đường đi của quái (Vùng Chữ), nên lúc quái đang đi tới mà chưa có chữ là nhịp của thể loại. Đo trên bot Chuẩn (10 seed): tải đợt + 15 % (cách c) đưa I xuống 15,6 % nhưng thắng từ 100 % còn 40 %; giảm nửa sát thương phe ta và chiêu (cách d) đổi I 1,2 điểm; chỉ đếm quãng nhàn ≥ 1 s (cách a) đổi 3 điểm |
+| D28 | **G8 "phần phe ta" là sát thương của bẫy, nhà, lính.** Chiêu của Hỏa Long (Phun Lửa, Thiên Hỏa, Viêm Đế) tính vào phần Rồng cùng đòn từ: Rồng 65–80 %, phe ta 20–35 %, trần 40 %. Mỗi chiêu vùng giữ trần riêng 15 % (BALANCE.md §9.1). Đã chọn theo đề xuất (03 §0 ghi sẵn cách chia này; vòng 3, 24/10) | Tên cổng là "phần phe ta"; 03 là tài liệu chủ của phe ta và chia "Hỏa Long (đòn từ, chiêu) 65–80 %". Đo ở M0 (b35): phe ta 30,1 %, Rồng 69,9 % (đòn từ 56,2 %, chiêu 13,7 %), Thiên Hỏa 12,8 % |
+| D29 | **Trần nhịp k của Rồng Giữ Ải là 1,50** (BALANCE.md §4.1 chung: 1,30). Luật cổng (một toán mỗi cổng mỗi 1,5 s, hai cổng cách nhau ≥ 0,6 s) co giãn cùng khoảng sinh, như mọi khoảng sinh khác (× 1 / k, × mức khó, × bộ điều nhịp). Đã chọn theo đề xuất (`2026-10-23-m0a-balance.md`; vòng 3, 24/10) | Ở trần 1,30, bot Nhanh 70 WPM (k thô 1,53) thắng 100 %, b60 98 %. Ở 1,50: 77,5 % và 75 % (40 seed). Luật cổng không co giãn thì toán của người gõ nhanh bị dồn, đỉnh tải lên 1,44–1,45, vượt trần cứng 1,40 (G9); co giãn thì 1,40 |
 
 ## 4. Số chuẩn
 
@@ -164,13 +167,14 @@ k_E       = clamp(C(E) / 22,7 ; 0,75 ; 1,00)            // khoảng sinh × 1 / 
 
 ```text
 E_eff = E × (0,6 + 0,4 × a²) × (1 − 0,5 × CV), giữ trong [0,7 E ; E]
-k     = clamp(C(E_eff) / C_ref ; 0,75 ; 1,30)      C_ref = C(E_eff của bot Chuẩn 35 WPM, 95 %, CV 0,25) ≈ 19,6 từ/phút
+k     = clamp(C(E_eff) / C_ref ; 0,75 ; 1,50)      C_ref = C(E_eff của bot Chuẩn 35 WPM, 95 %, CV 0,25) ≈ 19,6 từ/phút   // trần 1,50: D29
 T_a   = 8 s × biên / k, không dưới 2 lần thời gian một từ của người đó; + 1 thời gian từ cho mỗi từ thêm trong chuỗi của quái   // Vùng Chữ tính bằng thời gian
 biên  = 1 + 3,0 × P(từ Ẩu ở độ chính xác a) + 0,6 × CV                // BALANCE.md §2 yếu tố 3 và 4
 ```
 
 - Biên thời gian nhân cả T_a và độ chờ của Héo lan. P(từ Ẩu) tính với ℓ̄ của dải E (§4.3): 5 chữ khi E < 45, 6 chữ khi E ≥ 45, nên cùng a và CV cho hai biên. Ví dụ (E < 45 / E ≥ 45): 85 %, CV 0,35 → × 1,705 / × 1,882; 95 %, CV 0,25 → × 1,219 / × 1,249; 99 %, CV 0,2 → × 1,123 ở cả hai dải. Số khớp `paceFor` (`marginPm`) của `games/dragon-hold`.
 - E, a, CV lấy từ hồ sơ (D26): `?wpm=`, thẻ tốc độ, hoặc số đo của hồ sơ. Không có a, CV thì dùng 95 % và 0,25.
+- k và bộ điều nhịp co giãn mọi khoảng sinh, kể cả luật cổng của 02 §5.3 và 01 §1.4 (1,5 s một toán mỗi cổng, 0,6 s giữa hai cổng ở nhịp tham chiếu), để kế hoạch đợt giữ nguyên dáng ở mọi tốc độ (D29; đã chọn theo đề xuất, vòng 3).
 
 ### 4.5 Loại ải, đợt, nghỉ
 
@@ -386,7 +390,7 @@ Bot: 25 WPM 95 %, 35 WPM 95 %, 60 WPM 97 %, trừ khi ghi khác. "Đồ TB" là 
 | G5 | Hỗ trợ cần thiết | 35, chỉ gõ, không mua | Ải 1–10 / ải 21+ | Thắng ≥ 70 % / thua ≥ 60 % |
 | G6 | Gõ là sức chính | 0 WPM, mua tối ưu | Từ ải 2 | Thua 100 %, trước hết đợt 3 |
 | G7 | Chuẩn thắng ẩu | 35 WPM 98 % so với 50 WPM 85 %, k_E = 1 | 5 ải mẫu mỗi chương | Bot chuẩn hạ quái nhanh hơn |
-| G8 | Phần phe ta | 35, đồ TB | Mỗi chương | Sát thương không do gõ 20–35 %, trần 40 %; khống chế của bẫy nằm trong ±25 % mức C1 |
+| G8 | Phần phe ta | 35, đồ TB | Mỗi chương | Sát thương của bẫy, nhà, lính 20–35 %, trần 40 % (chiêu của Hỏa Long tính vào phần Rồng, D28); khống chế của bẫy nằm trong ±25 % mức C1 |
 | G9 | Không ngộp | Mọi bot | Mọi ải | Tải đỉnh ≤ 1,40; cửa sổ Cụm Ấn ≤ 0,90; chữ sống ≤ N_max |
 | G10 | Đọc được | 35 | Cấp từ ≤ 3, bố cục 4 đường | Rơi xuống tầng 2 chữ đầu < 1 lần mỗi phút |
 | G11 | Không mất công gõ | 35 | Mọi ải | Mất khóa vì nguồn khác ≤ 5 % số khóa |
@@ -407,7 +411,7 @@ Bot: 25 WPM 95 %, 35 WPM 95 %, 60 WPM 97 %, trừ khi ghi khác. "Đồ TB" là 
   - G5 trên bản đồ M0 (10 đợt, có tướng) dùng ngưỡng của DESIGN §9: chỉ gõ thắng ≤ 40 %. Ngưỡng ≥ 70 % ở ải 1–10 của bảng trên áp dụng cho chương 1 thật (M2), nơi ải ngắn hơn và dạy dần.
   - Máu Hỏa Long cấp 1 ở M0 là 460 (bot chỉnh), thay mức 1.000 của 01 §2.2. Đây là số tạm, xem lại sau buổi chủ dự án chơi thử.
   - Đợt 10 của M0 được phép chạm đỉnh tải 1,40 (trần cứng), vượt trần 1,15 của đợt giữa C1–C2. Đo được sau vòng cân bằng 23/10: đỉnh 1,39 (tải trung bình đợt 1,15).
-  - Cổng B1–B9 của `../BALANCE.md` §7 áp dụng cho M0 cùng G1–G9.
+  - Cổng B1–B9 của `../BALANCE.md` §7 áp dụng cho M0 cùng G1–G9, với dải I ≤ 20 % ở Cân bằng của D27 (vòng 3, 24/10; đã chọn theo đề xuất).
 - Cổng in báo cáo từ M1. Thành cổng cứng khi một lát phát hành được khóa.
 
 ## 8. Hiệu năng sim và sức chạy bot
