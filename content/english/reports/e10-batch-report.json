@@ -15914,16 +15914,55 @@
         "cefr-review",
         "license-review"
       ]
+    },
+    {
+      "id": "e11.dialogue-multiwoz-reviewed-slice-44",
+      "phase": "E11",
+      "state": "draft",
+      "category": "sentences",
+      "records": 5,
+      "recordSets": [
+        {
+          "id": "reviewed-dialogues",
+          "path": "content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-44.json",
+          "generated": false,
+          "expectedCount": 5,
+          "actualCount": 5,
+          "byState": {
+            "draft": 5
+          },
+          "byCefr": {
+            "A2": 5
+          },
+          "digest": 16201
+        }
+      ],
+      "byState": {
+        "draft": 5
+      },
+      "byCefr": {
+        "A2": 5
+      },
+      "requiredBeforePublish": [
+        "source-pin",
+        "dialogue-structure-review",
+        "identifier-safety-review",
+        "dedupe-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ]
     }
   ],
   "totals": {
-    "records": 14777,
+    "records": 14782,
     "byState": {
-      "draft": 14777
+      "draft": 14782
     },
     "byCefr": {
       "A1": 1376,
-      "A2": 1517,
+      "A2": 1522,
       "B1": 1344,
       "B2": 2717,
       "C1": 6894,
