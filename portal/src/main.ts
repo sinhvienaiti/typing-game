@@ -40,6 +40,7 @@ import {
 } from "./review/mixed";
 import type { LearningEvent } from "../../shared/learning/core.mjs";
 import type { ReviewPlan } from "../../shared/learning/review-session.mjs";
+import type { ParentVoiceBridge } from "../../shared/voice/bridge.mjs";
 import {
   pendingReviewAction,
   shouldAbandonReviewOnRouteChange,
@@ -57,6 +58,73 @@ type Game = {
 type Registry = {
   games: Game[];
 };
+
+let voiceBridge: ParentVoiceBridge | null = null;
+let voiceBridgeLoading: Promise<ParentVoiceBridge> | null = null;
+let voiceRouteGeneration = 0;
+async function handleVoiceMessage(event: MessageEvent<unknown>): Promise<void> {
+  const frame = currentFrame,
+    game = currentGame,
+    generation = voiceRouteGeneration;
+  if (
+    game?.id !== "space-typing" ||
+    !frame?.contentWindow ||
+    event.source !== frame.contentWindow ||
+    event.origin !== new URL(game.appUrl).origin
+  )
+    return;
+  const loading = (voiceBridgeLoading ??= Promise.all([
+    import("../../shared/voice/bridge.mjs"),
+    import("./voice/host-factory.mjs"),
+  ]).then(
+    ([{ ParentVoiceBridge }, { createBrowserVoiceHost }]) =>
+      new ParentVoiceBridge({ createHost: createBrowserVoiceHost }),
+  ));
+  let bridge: ParentVoiceBridge;
+  try {
+    bridge = await loading;
+  } catch (error) {
+    if (voiceBridgeLoading !== loading) return;
+    voiceBridgeLoading = null;
+    if (
+      generation !== voiceRouteGeneration ||
+      frame !== currentFrame ||
+      game !== currentGame
+    )
+      return;
+    const request = event.data as Record<string, unknown>;
+    if (
+      request?.version !== 1 ||
+      request.type !== "typing-game:voice:v1:hello" ||
+      typeof request.gameInstanceId !== "string" ||
+      !request.gameInstanceId.trim() ||
+      request.gameInstanceId.length > 160
+    )
+      return;
+    console.warn("Portal Voice service could not load", error);
+    frame.contentWindow.postMessage(
+      {
+        version: 1,
+        type: "typing-game:voice:v1:error",
+        gameId: game.id,
+        gameInstanceId: request.gameInstanceId,
+        code: "voice-service-load-failed",
+        message:
+          "Voice service could not load. Restart the Portal and reload this tab.",
+      },
+      event.origin,
+    );
+    return;
+  }
+  if (
+    generation !== voiceRouteGeneration ||
+    frame !== currentFrame ||
+    game !== currentGame
+  )
+    return;
+  voiceBridge = bridge;
+  bridge.handleMessage(event, frame, game);
+}
 
 const appElement = document.querySelector<HTMLDivElement>("#app");
 if (appElement === null) throw new Error("#app not found");
@@ -369,6 +437,8 @@ function renderMissing(): HTMLElement {
 }
 
 function renderRoute(): void {
+  voiceRouteGeneration += 1;
+  voiceBridge?.reset();
   const path = normalizedPath();
   const previousGame = currentGame;
   if (
@@ -427,6 +497,10 @@ function renderRoute(): void {
 }
 
 window.addEventListener("message", (event: MessageEvent<unknown>) => {
+  if (event.data !== null && typeof event.data === "object" && "type" in event.data && typeof event.data.type === "string" && event.data.type.startsWith("typing-game:voice:")) {
+    void handleVoiceMessage(event);
+    return;
+  }
   if (learningBridge.handleMessage(event, currentFrame, currentGame)) return;
 
   if (!gameOrigins.has(event.origin)) return;
