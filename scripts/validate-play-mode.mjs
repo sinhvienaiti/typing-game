@@ -44,6 +44,13 @@ const NEW_GAMES = [
     script: "survival",
     aliases: ["/assets/space-typing/models/"],
   },
+  {
+    dir: "immortality-cultivation",
+    host: "tutien.typing-game.local",
+    port: 3008,
+    script: "tutien",
+    aliases: ["/assets/space-typing/models/"],
+  },
 ];
 
 const packageJson = JSON.parse(await readFile("package.json", "utf8"));
@@ -236,5 +243,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival hosts are covered.",
+  "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered.",
 );

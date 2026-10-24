@@ -15,6 +15,7 @@ const NEW_GAMES = [
   { id: "dragon-hold", appUrl: "https://dragon.typing-game.local", path: "/dragon-hold" },
   { id: "typing-defense", appUrl: "https://td.typing-game.local", path: "/typing-defense" },
   { id: "typing-survival", appUrl: "https://survival.typing-game.local", path: "/typing-survival" },
+  { id: "immortality-cultivation", appUrl: "https://tutien.typing-game.local", path: "/immortality-cultivation" },
 ];
 
 const EXPECTED_GROUPS = {
@@ -26,6 +27,7 @@ const EXPECTED_GROUPS = {
   "dragon-hold": "battle",
   "typing-defense": "battle",
   "typing-survival": "battle",
+  "immortality-cultivation": "battle",
 };
 
 function registeredGame(id) {
@@ -75,7 +77,7 @@ function attempt(gameId, requestId) {
   };
 }
 
-test("registry groups every game and lists the three new games", () => {
+test("registry groups every game and lists the new games", () => {
   assert.deepEqual(
     Object.fromEntries(registry.games.map((game) => [game.id, game.group])),
     EXPECTED_GROUPS,

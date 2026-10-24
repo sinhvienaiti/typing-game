@@ -5,13 +5,18 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
 
 case "$TARGET" in
-  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival)
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien)
     ;;
   *)
-    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
+    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien]"
     exit 1
     ;;
 esac
+
+if [[ "$TARGET" == "tutien" && ! -f "$ROOT_DIR/games/immortality-cultivation/package.json" ]]; then
+  echo "  • Tu Tiên Thủ Ải is not checked out yet; skipped."
+  exit 0
+fi
 
 cd "$ROOT_DIR"
 
@@ -78,6 +83,12 @@ update_space_submodule() {
 # New games are local repos until their submodules are registered.
 update_new_game() {
   local path="$1"
+  local label="${2:-$path}"
+
+  if [[ "$path" == "games/immortality-cultivation" && ! -f "$path/package.json" ]]; then
+    echo "  • $label is not checked out yet; skipped."
+    return
+  fi
 
   if git config -f .gitmodules --get "submodule.$path.path" >/dev/null 2>&1; then
     update_submodule_branch "$path" "$path"
@@ -110,6 +121,7 @@ case "$TARGET" in
     update_new_game "games/dragon-hold"
     update_new_game "games/typing-defense"
     update_new_game "games/typing-survival"
+    update_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
   monkeytype)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
@@ -134,6 +146,9 @@ case "$TARGET" in
     ;;
   survival)
     require_new_game "games/typing-survival" "Tuyến Cuối"
+    ;;
+  tutien)
+    require_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
 esac
 
@@ -200,6 +215,7 @@ case "$TARGET" in
     install_new_game "games/dragon-hold" "Rồng Giữ Ải"
     install_new_game "games/typing-defense" "Lời Gọi"
     install_new_game "games/typing-survival" "Tuyến Cuối"
+    install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
   monkeytype)
     install_monkeytype
@@ -224,6 +240,9 @@ case "$TARGET" in
     ;;
   survival)
     install_new_game "games/typing-survival" "Tuyến Cuối"
+    ;;
+  tutien)
+    install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
 esac
 

@@ -61,6 +61,12 @@ const expectedGames = [
     submodule: "games/typing-survival",
     pendingSubmodule: true,
   },
+  {
+    id: "immortality-cultivation",
+    path: "/immortality-cultivation",
+    appUrl: "https://tutien.typing-game.local",
+    submodule: "games/immortality-cultivation",
+  },
 ];
 
 const registry = JSON.parse(read("portal/public/games.json"));

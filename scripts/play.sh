@@ -23,7 +23,8 @@ done
 for path in \
   "$ROOT_DIR/games/dragon-hold/dist/index.html" \
   "$ROOT_DIR/games/typing-defense/dist/index.html" \
-  "$ROOT_DIR/games/typing-survival/dist/index.html"
+  "$ROOT_DIR/games/typing-survival/dist/index.html" \
+  "$ROOT_DIR/games/immortality-cultivation/dist/index.html"
 do
   [[ -f "${path%/dist/index.html}/package.json" ]] || continue
   if [[ ! -f "$path" ]]; then

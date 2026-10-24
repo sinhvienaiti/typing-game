@@ -209,7 +209,7 @@ ensure_admin_runtime_service() {
 }
 
 echo "[1/6] Stopping typing-game development servers..."
-bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3005 3006 3007 3100 3199
+bash scripts/cleanup-dev-ports.sh --project-only 3000 3001 3002 3003 3004 3005 3006 3007 3008 3100 3199
 
 echo "[2/6] Refreshing local Space Typing art..."
 prepare_space_art
@@ -332,6 +332,19 @@ if game_present "Tuyến Cuối" "games/typing-survival"; then
     "games/typing-survival/package.json" \
     "games/typing-survival/tsconfig.json" \
     "games/typing-survival/vite.config.ts"
+fi
+
+if game_present "Tu Tiên Thủ Ải" "games/immortality-cultivation"; then
+  build_if_needed \
+    "Tu Tiên Thủ Ải" \
+    "games/immortality-cultivation/dist/index.html" \
+    "build:tutien" \
+    "games/immortality-cultivation/src" \
+    "games/immortality-cultivation/public" \
+    "games/immortality-cultivation/index.html" \
+    "games/immortality-cultivation/package.json" \
+    "games/immortality-cultivation/tsconfig.json" \
+    "games/immortality-cultivation/vite.config.ts"
 fi
 
 echo "[5/6] Starting runtime services and switching nginx to static Play mode..."

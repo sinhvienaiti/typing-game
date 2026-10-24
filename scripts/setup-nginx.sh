@@ -45,6 +45,7 @@ HOSTS=(
   "dragon.typing-game.local"
   "td.typing-game.local"
   "survival.typing-game.local"
+  "tutien.typing-game.local"
 )
 
 ensure_hosts() {

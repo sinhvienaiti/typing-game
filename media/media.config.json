@@ -51,6 +51,17 @@
       "indexSourcesScript": "scripts/models/index-3d-sources.mjs --root games/typing-survival",
       "modelsDir": "public/assets/typing-survival/models",
       "modelsManifest": "public/assets/typing-survival/models/manifest.json"
+    },
+    {
+      "id": "immortality-cultivation",
+      "title": "Tu Tiên Thủ Ải",
+      "dir": "games/immortality-cultivation",
+      "lock": "media.md5",
+      "pulledStamp": ".media-pulled",
+      "sources": "art-src/3d/SOURCES.json",
+      "indexSourcesScript": "scripts/models/index-3d-sources.mjs --root games/immortality-cultivation",
+      "modelsDir": "public/assets/immortality-cultivation/models",
+      "modelsManifest": "public/assets/immortality-cultivation/models/manifest.json"
     }
   ],
   "privateLock": "media/private.md5",

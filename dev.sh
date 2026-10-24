@@ -9,7 +9,7 @@ TARGET="${1:-all}"
 
 case "$TARGET" in
   -h|--help|help)
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien]"
     echo
     echo "Default: all"
     echo "If Git is available, dev.sh pulls and updates submodules first."
@@ -39,14 +39,22 @@ case "$TARGET" in
   typing-survival)
     TARGET="survival"
     ;;
-  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival)
+  immortality-cultivation)
+    TARGET="tutien"
+    ;;
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien)
     ;;
   *)
     echo "Unknown target: $TARGET"
-    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival]"
+    echo "Usage: ./dev.sh [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien]"
     exit 1
     ;;
 esac
+
+if [[ "$TARGET" == "tutien" && ! -f "$ROOT_DIR/games/immortality-cultivation/package.json" ]]; then
+  echo "  • Tu Tiên Thủ Ải is not checked out yet; skipped."
+  exit 0
+fi
 
 has_git_checkout() {
   command -v git >/dev/null 2>&1 &&
@@ -122,6 +130,7 @@ prepare_without_git() {
       install_if_present "$ROOT_DIR/games/dragon-hold" "Rồng Giữ Ải"
       install_if_present "$ROOT_DIR/games/typing-defense" "Lời Gọi"
       install_if_present "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
+      install_if_present "$ROOT_DIR/games/immortality-cultivation" "Tu Tiên Thủ Ải"
       ;;
     monkeytype)
       install_if_missing "$ROOT_DIR/games/monkeytype" "Monkeytype"
@@ -147,6 +156,9 @@ prepare_without_git() {
       ;;
     survival)
       install_if_missing "$ROOT_DIR/games/typing-survival" "Tuyến Cuối"
+      ;;
+    tutien)
+      install_if_present "$ROOT_DIR/games/immortality-cultivation" "Tu Tiên Thủ Ải"
       ;;
   esac
 }
@@ -261,5 +273,8 @@ case "$TARGET" in
     ;;
   survival)
     exec pnpm dev:survival
+    ;;
+  tutien)
+    exec pnpm dev:tutien
     ;;
 esac

@@ -96,6 +96,7 @@ liệu thiết kế của chính game; skill Space chỉ để tham khảo, khô
 | Rồng Giữ Ải (`games/dragon-hold`) | Game Studio, `threejs-*` | [`docs/games/dragon-lane`](games/dragon-lane/DESIGN.md) |
 | Lời Gọi (`games/typing-defense`) | Game Studio, `threejs-*` | `docs/` của game (trước khi tách: `docs/td` của Space) |
 | Tuyến Cuối (`games/typing-survival`) | Game Studio, `threejs-*` | `docs/` của game (trước khi tách: `docs/survival` của Space) |
+| Tu Tiên Thủ Ải (`games/immortality-cultivation`) | Game Studio, `threejs-*` | [`docs/games/tu-tien`](games/tu-tien) |
 | Portal, nginx, script khởi chạy | `game-ci-resumable` khi tiếp tục CI/Git | [Kế hoạch tách](games/SPLIT_PLAN.md) mục 9–10 |
 
 Thứ tự: yêu cầu người dùng và hợp đồng project → specialist engine → kiến thức chung.
