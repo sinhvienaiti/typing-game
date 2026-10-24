@@ -5,9 +5,16 @@ schema: 1
 id: ink-puff
 game: typing-defense
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
+  - prompt.suffix
 when: Quái Mực Câm tan (tối đa 8 mỗi giây)
-purpose: Mềm, không máu
+purpose: 'Mềm, không máu: túi giấy thấm mực rách, mực bắn tóe nhỏ, giấy lả tả; vang ngắn'
 category: death-swarm
 family: chet
 source_class: foley-other
@@ -24,11 +31,11 @@ playback:
     per_s: 8
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 150
+  target_ms: 200
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 120
-  max_ms: 180
+  min_ms: 160
+  max_ms: 240
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [80, 200]
   music: null
@@ -85,15 +92,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: A soft puff of an ink-soaked paper bag popping, muffled, 0.15 s.
-  suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
+  text: 'An ink-soaked paper creature tearing apart: a soft wet paper rip, a small splash of ink spattering, paper scraps fluttering down, short village echo, 0.2 s.'
+  suffix: null
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
   variants:
-    - 'A: TrackType: SFX, a soft puff of an ink-soaked paper bag popping, muffled, short, close, dry'
-    - 'B: A wet paper ball squashed once, a soft muffled pop with a tiny splash, short, gentle, close foley'
-    - 'C: TrackType: SFX, a small cloud of soot puffing out, soft breathy poof, papery, very short, dry'
-    - 'D: A damp paper lantern collapsing softly, a muffled thup with a light paper crinkle, short, dry outdoor'
+    - 'E: TrackType: SFX, an ink-soaked paper creature tears apart, soft wet paper rip, small ink splash spattering, scraps fluttering, short village echo'
+    - 'F: Wet rice paper torn quickly, gentle squelch, droplets spattering on wood, light papery flutter, brief outdoor tail'
+    - 'G: TrackType: SFX, small paper spirit dissolving, damp tearing, splatter of ink, soft rustle settling, small, short echo'
+    - 'H: Soggy paper lantern ripping open, little ink spray, crinkling paper falling, soft airy tail'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -194,7 +201,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: A soft puff of an ink-soaked paper bag popping, muffled, 0.15 s.
+  intent: 'An ink-soaked paper creature tearing apart: a soft wet paper rip, a small splash of ink spattering, paper scraps fluttering down, short village echo, 0.2 s.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -211,4 +218,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #25 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF #25): hai hướng cho bảng phong cách (S5): A, B ''giấy ướt bục''; C, D ''phụt khói, giấy''.'
+notes: 'Q6 (24/10): bỏ ''puff'', ''pop'', ''poof'', ''thup'' (bị cấm); tên id giữ nguyên vì mã dùng. Rách (phát), mực tóe (thân), giấy rơi và vang ngắn (đuôi). Nguồn nhỏ, phát tới 8 lần mỗi giây nên âm nhỏ, đuôi rất ngắn. Dài 0,15 → 0,2 s. Không ghép đuôi chung của §1. Khóa E–H thay A–D của lô 1. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF #25): hai hướng cho bảng phong cách (S5): A, B ''giấy ướt bục''; C, D ''phụt khói, giấy''.'

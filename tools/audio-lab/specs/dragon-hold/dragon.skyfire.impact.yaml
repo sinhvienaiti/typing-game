@@ -5,9 +5,15 @@ schema: 1
 id: dragon.skyfire.impact
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Thiên Hỏa chạm đất; Viêm Đế nổ
-purpose: Nổ trầm lớn, lửa bùng
+purpose: 'Thiên Hỏa chạm đất (cả Viêm Đế nổ): nổ lửa rất lớn có thân, đất rung, lửa gầm cháy tiếp, đất đá rơi; vang thung lũng dài'
 category: blast
 family: 'no'
 source_class: blast
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 1400
+  target_ms: 1800
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 1120
-  max_ms: 1680
+  min_ms: 1440
+  max_ms: 2160
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [600, 2000]
   music: null
@@ -84,11 +90,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Massive meteor-like fire explosion, deep sub boom, roaring flames, 1.4 s
+  text: 'Massive meteor-like fire explosion: a cracking blast with a deep body, ground shaking, roaring flames and falling rocks, long rolling valley echo, 1.8 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a giant fireball crashes into the ground, sharp cracking blast with a deep heavy boom underneath, roaring firestorm, earth and rocks raining down, long echo rolling through a valley'
+    - 'B: Huge explosion of fire in a forest valley, powerful detonation, burning debris and stones falling, flames roaring on, thunderous reverberation off the hills'
+    - 'C: TrackType: SFX, epic meteor impact, splitting crack and massive low boom, wall of roaring fire, crackling embers, long dark valley tail, cinematic, organic'
+    - 'D: Big fire bomb detonating outdoors, heavy blast with weight, flames whooshing up and burning, gravel and wood debris scattering, long outdoor echo fading slowly'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +185,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Massive meteor-like fire explosion, deep sub boom, roaring flames, 1.4 s
+  intent: 'Massive meteor-like fire explosion: a cracking blast with a deep body, ground shaking, roaring flames and falling rocks, long rolling valley echo, 1.8 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đòn to, đuôi dài và to hơn rõ; ''deep sub boom'' chỉ còn là lớp dưới của tiếng nổ có thân và đuôi. Dài 1400 → 1800 ms.'

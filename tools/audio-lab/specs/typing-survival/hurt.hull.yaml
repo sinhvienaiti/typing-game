@@ -5,9 +5,9 @@ schema: 1
 id: hurt.hull
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Đạn lính trúng tàu
-purpose: Tiếng thép bị đập mạnh, ngân ngắn
+purpose: 'Tiếng thép bị đập mạnh: keng to có thân, ngân ngắn, rung trầm; vang hành lang thép'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: heavy
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Heavy blow on a ship's steel hull, loud clang with short ring and low thud, 400 ms.
+  text: 'Heavy blow on a ship''s steel hull: a loud clang with a dense body, a short ring and a low rumble, steel corridor echo, 400 ms.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, heavy blow on a steel hull, loud clang with a dense metal body, short ring, low rumble, echo in a steel corridor, industrial'
+    - 'B: Large projectile smashing into a ship''s armored wall, hard bang and resonant clang, shuddering steel, metallic hall reverberation'
+    - 'C: TrackType: SFX, metal impact, massive strike on a bulkhead, crisp crack, ringing body, low shake, short steel room tail'
+    - 'D: Steel plating hit by an energy blast, loud metallic slam, vibrating ring, rumble fading down a corridor'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Heavy blow on a ship's steel hull, loud clang with short ring and low thud, 400 ms.
+  intent: 'Heavy blow on a ship''s steel hull: a loud clang with a dense body, a short ring and a low rumble, steel corridor echo, 400 ms.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 6. Tuyến bị đánh, cảnh báo, kết trận
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''low thud''; đập (phát), keng có thân (thân), rung và vang hành lang (đuôi).'

@@ -206,6 +206,67 @@ Quyết định này **thay** hướng "phụt tròn" đang ghi trong thẻ `fir
 - Đề xuất thêm một luật L2 cho bộ chấm: phạt âm hành động có đuôi quá ngắn, hoặc chỉ có một cú trầm không thân.
 - Âm tổng hợp tạm trong game không được coi là âm thật. Âm thật về từ Audio Lab trên Mac sau phiên nghe của chủ dự án.
 
+### Q6: đã làm trên máy Dell (24/10/2026)
+
+Chi tiết từng id, độ dài và việc của lô 1c: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md).
+
+- **Phân loại 149 thẻ.** 66 id là âm hành động. Còn lại: 25 UI và phím, 11 thưởng, 3 học, 18 báo nguy và stinger, 8 nền, 1 giọng, 9 nhạc, 8 foley không phải đòn đánh (đặt bẫy, dựng nhà, hồi máu, sửa tuyến).
+- **Thẻ spec.**
+  - 54 id viết lại theo bốn phần: purpose, prompt.text, prompt.variants, notes ("Q6 (24/10)"). Đường dẫn đã sửa ghi vào `manual_fields`.
+  - 12 id soát và giữ thiết kế, chỉ bỏ biến thể có chữ cấm hoặc chữ phủ định:
+    - ba tiếng lên đòn của quái;
+    - các bậc trúng của Tuyến Cuối, vì đuôi là lớp dùng chung `hit.tail` và sub là `hit.sub`;
+    - `gun.xung` và hai lớp loop, tail của nó;
+    - `gun.tia.pulse`.
+  - Biến thể Q6 dùng khóa mới, không dùng lại khóa cũ, để tên ứng viên mới không trùng tên ứng viên lô 0b, lô 1. Chỉ giữ biến thể cũ đã hợp Q6, ví dụ howl B là bản anh chọn.
+  - 4 id không phải âm hành động chỉ thay chữ cấm: `type.miss`, `ui.deny`, `trap.spikes.arm`, `key.bad`.
+- **Danh sách âm của ba game** (`M0_SOUND_LIST.md`, hai `THEME_SOUND_LIST.md`) ghi cùng cảm giác, prompt và độ dài. `pnpm audio:specs generate --check` cho 149/149 thẻ "giữ nguyên".
+- **Độ dài.**
+  - `fire.cast` 340 → 750 ms: 750 ± 20 % đúng bằng khoảng 600–900 ms của đề xuất trên, **đã chọn theo đề xuất**.
+  - Đòn to và họ lửa dài hơn trong `catalog.ts` của Rồng Giữ Ải.
+  - Bốn id của Lời Gọi và hai id của Tuyến Cuối dài hơn trong prompt của danh sách.
+- **Chưa làm:**
+  - âm tổng hợp tạm trong game (`synth.ts` "sine thump") là mã game, không thuộc làn này;
+  - bước chặn chữ cấm Q6 trong `gen.sa3`;
+  - luật L2 dưới đây.
+
+### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
+
+**Mục đích:** phạt âm hành động có đuôi quá ngắn, hoặc chỉ là một cú trầm không thân.
+
+**Đặc trưng dùng lại**, đều đã có trong `critic/features.py`, không cần đo mới:
+
+| Đặc trưng | Đo gì |
+|---|---|
+| `tail_ms` | Từ khung to nhất tới khung cuối còn trên −60 dB so với đỉnh (đường bao 1 ms) |
+| `punch_db` | Mức 20 ms đầu trừ mức 100–300 ms sau đầu tiếng (trần 40 dB). Cú trầm rồi tắt cho số rất lớn; âm có thân cho số vừa |
+| `share_150_800` | Phần năng lượng ở thân 150–800 Hz |
+| `share_below_150` | Phần năng lượng dưới 150 Hz |
+| `sub_len_ms` | Độ dài lớp 40–90 Hz trong khoảng 20 dB dưới đỉnh của chính nó |
+
+**Luật đề xuất**, viết theo dạng file hiệu chỉnh `critic/calibration/owner-v2.json`. Mọi con số là điểm xuất phát, **chưa đo trên file nào**:
+
+| Id luật | Áp cho | Mục tiêu (good / bad) | Ghi chú tiếng Việt khi trượt |
+|---|---|---|---|
+| `t-q6-tail-cast` | id `^fire\.cast$` (nhóm thưởng) | `tail_ms` ≥ 300 / ≤ 120 | đuôi quá ngắn, chưa có vang thung lũng |
+| `t-q6-tail-fire` | nhóm `hit_fire` | `tail_ms` ≥ 250 / ≤ 100 | đuôi quá ngắn, nghe như một cục rơi xuống |
+| `t-q6-tail-heavy` | nhóm `hit_heavy`, id `^(impact\.multi\|general\.g01\.attack\|enemy\.quadruped\.charge\|trap\.spikes\.trigger\|hurt\.hull)$` | `tail_ms` ≥ 200 / ≤ 80 | đuôi quá ngắn |
+| `t-q6-tail-blast` | nhóm `explosion` | `tail_ms` ≥ 500 / ≤ 200 | nổ không có đuôi vang |
+| `t-q6-lone-low` | họ `trung`, `no`, `ban`, `chet` của Rồng Giữ Ải và Lời Gọi; id `^(kill\|hurt\|foe)\.` của Tuyến Cuối | `punch_db` trong [6, 20] / ngoài [0, 32]; `share_150_800` ≥ 0,12 / ≤ 0,03 | một cú trầm rồi tắt, không có thân |
+
+- **Phạm vi của luật trầm đứng riêng:** không áp cho `gun.xung` (5 phát mỗi giây, đuôi là lớp riêng) và các bậc trúng của Tuyến Cuối. Ở đó đuôi và sub là lớp dùng chung do mã ghép, nên file bậc được phép gọn.
+- **Cách chồng lên mục tiêu cũ:** `set` của `punch_db` thay mục tiêu `PUNCH` (≥ 6 dB) cho các nhóm khớp, nên cận dưới vẫn còn. Luật nhóm `t-hit-boom` (dưới 150 Hz không quá 70 %) và giới hạn `sub_len_ms` (≤ 150 ms ở trúng, ≤ 300 ms ở nổ) giữ nguyên, hợp với luật Q6 "sub chỉ làm lớp dưới".
+- **Thêm một cờ (cần mã, nhỏ):** `lone_low_hit` khi đồng thời có `share_below_150` ≥ 0,6, `tail_ms` < 150 và `punch_db` ≥ 25. Ghi chú: "một cú trầm không thân, không đuôi (Q6)". Cờ chỉ hiện trên thẻ ảnh và danh sách nghe, không chặn. File hiệu chỉnh không biểu diễn được điều kiện "và", nên cần cờ này.
+- **Đi kèm:** khi làm luật này, sửa ghi chú "phụt lửa trầm, thân tròn" của nhóm `hit_fire` ở `critic/groups.py` và lý do ở `specs/taxonomy.CRITIC_GROUP_BY_ID`. Thẻ spec không đổi vì chỉ đọc tên nhóm.
+- **Kiểm trước khi bật (trên Mac):**
+  1. Thêm ca vào `critic/tests/test_calibration.py` bằng `critic/tests/synth.py`. Một cú sin 80 Hz dài 120 ms phải trượt cả `tail_ms` và luật trầm đứng riêng. Một tiếng trúng có thân 150–800 Hz và đuôi 300 ms phải đạt.
+  2. Đo các ứng viên lô 1 có sẵn: `fire.cast` hướng "phụt tròn" (A, C) phải xếp dưới hướng có hơi thở (B, D); `fire.impact.*` cũng vậy.
+  3. Sau phiên S2 của anh, chạy `critic agreement --batch 1` với và không có `owner-v2`. Chỉ bật khi số cặp khớp không giảm.
+- **Vì sao chưa làm trong mã:**
+  - ngưỡng chưa đo trên file nào;
+  - máy Dell không có venv, trọng số hay file âm của Audio Lab;
+  - mục 4.6 đòi hiệu chỉnh L2 dựa trên điểm chấm, và làn Critic giữ mã này.
+
 ---
 
 ## Mục 16 của kế hoạch: đã chốt và còn mở

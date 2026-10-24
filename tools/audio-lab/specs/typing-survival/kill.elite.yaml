@@ -5,9 +5,9 @@ schema: 1
 id: kill.elite
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Quái tinh nhuệ (lính) chết
-purpose: Như trên nhưng nặng hơn, thêm phóng điện
+purpose: 'Như trên nhưng nặng hơn: thép xé toạc, nổ trầm có thân, phóng điện lách tách, mảnh rơi; vang hành lang thép'
 category: death-big
 family: chet
 source_class: impact
@@ -85,15 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: 'Large armored machine creature exploding: heavy metal tearing, deep boom and an electrical discharge crackle, 500 ms, no voice.'
+  text: 'Large armored machine creature exploding: heavy metal tearing, a deep boom with body, an electrical discharge crackle, debris falling, steel corridor echo, 500 ms.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, large armored machine creature exploding, heavy metal tearing, deep boom, close, industrial'
-    - 'B: Big armored robot blows apart, thick steel ripping and a deep explosion thump, debris, short'
-    - 'C: TrackType: SFX, heavy mech destroyed, deep metallic explosion, tearing steel plates, electrical discharge crackle'
-    - 'D: Armored war machine explodes, deep boom with crunching steel and sparks, gritty, close, dry'
+    - 'E: TrackType: SFX, large armored machine creature exploding, heavy metal tearing, deep boom with a solid body, electrical discharge crackle, debris raining, echo rolling down a steel corridor, industrial'
+    - 'F: Big armored robot blowing apart in a metal hangar, steel ripping, powerful blast, sparks and fragments clattering, long metallic reverberation'
+    - 'G: TrackType: SFX, heavy mech destroyed, crunching steel plates, deep explosion, sizzling electric arcs, scrap falling, steel hall tail, gritty'
+    - 'H: Armored war machine bursting, tearing metal and a weighty boom, crackling short circuits, debris bouncing on a steel deck, reverberant industrial space'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -185,7 +185,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: 'Large armored machine creature exploding: heavy metal tearing, deep boom and an electrical discharge crackle, 500 ms, no voice.'
+  intent: 'Large armored machine creature exploding: heavy metal tearing, a deep boom with body, an electrical discharge crackle, debris falling, steel corridor echo, 500 ms.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -200,4 +200,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: ['AUDIO_PIPELINE §9 #16 (lô 1)']
-notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng tia điện tổng hợp 2–8 kHz trong công thức.'
+notes: 'Q6 (24/10): thêm đuôi vang hành lang thép (A–D của lô 1 đều ''close, dry'' hoặc ''short'', không có đuôi); bỏ ''no voice''. Xé thép (phát), nổ có thân và phóng điện (thân), mảnh rơi và vang (đuôi). Khóa E–H thay A–D. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng tia điện tổng hợp 2–8 kHz trong công thức.'

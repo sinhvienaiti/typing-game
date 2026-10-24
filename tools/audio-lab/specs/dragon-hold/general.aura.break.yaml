@@ -5,9 +5,9 @@ schema: 1
 id: general.aura.break
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Hào quang tắt (Ấn Phá)
-purpose: '"Vỡ kính"'
+purpose: 'Hào quang tắt (Ấn Phá): phép nứt căng rồi vỡ như kính, mảnh sáng rơi lanh canh; vang ngắn'
 category: fx-other
 family: trung
 source_class: impact
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Magical glass shatter, bright tinkling shards, 700 ms
+  text: 'Magical aura shattering: a tense crackle building, a glass-like burst, bright shards tinkling down, short echo, 700 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a magic shield shatters, short tension crackle, bright glass-like burst, tinkling shards falling, short forest echo'
+    - 'B: Enchanted barrier breaking, fizzing strain then a crisp shatter, sparkling fragments raining, outdoor reverb'
+    - 'C: TrackType: SFX, spell break, rising crackle into a crystal shatter, shimmering debris, fantasy, short echo'
+    - 'D: Glassy magic dome cracking and bursting, tinkling shards, a soft airy tail'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Magical glass shatter, bright tinkling shards, 700 ms
+  intent: 'Magical aura shattering: a tense crackle building, a glass-like burst, bright shards tinkling down, short echo, 700 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 5.5 Tướng G01 Yêu Rêu Cầm Cờ (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): nứt căng (chuẩn bị), vỡ (phát), mảnh rơi (thân), vang ngắn (đuôi). Mảnh sáng nằm trên 4 kHz, nhường giọng đọc.'

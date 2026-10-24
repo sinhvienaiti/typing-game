@@ -86,7 +86,10 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, giant wasp preparing to dive, wing buzz rising in pitch and intensity, tense'
+    - 'B: Insect wings revving up faster and higher, droning hum building'
+    - 'C: Large insect charging up to attack, buzz swelling louder and sharper'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -189,4 +192,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đã soát. Phần chuẩn bị của cú bổ nhào, prompt cũ không có chữ cấm nên giữ; thêm 3 biến thể.'

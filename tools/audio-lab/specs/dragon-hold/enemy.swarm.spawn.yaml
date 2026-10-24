@@ -5,9 +5,9 @@ schema: 1
 id: enemy.swarm.spawn
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Cụm Kiến Gai xuất hiện
-purpose: Lạo xạo nhanh
+purpose: 'Kiến Gai xuất hiện: nhiều chân nhỏ lạo xạo tràn ra trên lá; vang ngắn'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Quick skittering of many tiny insect legs, 300 ms
+  text: 'Thorn ant cluster appears: quick skittering of many tiny legs rushing out over leaves, short echo, 300 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a cluster of tiny ants pours out, fast skittering of many legs over dry leaves, short forest echo'
+    - 'B: Swarm of small insects scurrying out of a hole, busy crackly patter, brief outdoor reverb'
+    - 'C: TrackType: SFX, small creature swarm emerging, rustling legs and clicks, tiny, short echo'
+    - 'D: Many beetles spilling out over twigs, quick scratchy rush, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Quick skittering of many tiny insect legs, 300 ms
+  intent: 'Thorn ant cluster appears: quick skittering of many tiny legs rushing out over leaves, short echo, 300 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bầy nhỏ nên âm nhỏ; tràn ra (phát, thân), vang ngắn (đuôi).'

@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.death
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chết
-purpose: Ngã lăn, lông bay, đốm linh
+purpose: 'Thú bốn chân chết: tiếng rên cuối, thân ngã lăn trên lá, bụi lắng, đốm linh nhỏ bay lên; vang rừng'
 category: death-big
 family: chet
 source_class: impact
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Beast collapse with fur puff, then a tiny spirit chime, 600 ms
+  text: 'Beast collapse: a last groan, a heavy body falling and rolling on leaves, fur and dust settling, then a tiny spirit chime, forest echo, 600 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a wolf-boar dies, last weak groan, heavy body collapsing and rolling on dry leaves, dust settling, a tiny rising spirit chime, short forest echo'
+    - 'B: Large animal falling to the ground, final breath, heavy body hitting the earth with leaf and twig crunch, a faint sparkle rising, outdoor reverb'
+    - 'C: TrackType: SFX, beast death, dying whine, body slump on forest floor, fur rustle, small magical chime floating up, gentle echo'
+    - 'D: Boar collapsing after a fight, groan, heavy fall into bushes, branches snapping, a tiny glassy twinkle at the end, low tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Beast collapse with fur puff, then a tiny spirit chime, 600 ms
+  intent: 'Beast collapse: a last groan, a heavy body falling and rolling on leaves, fur and dust settling, then a tiny spirit chime, forest echo, 600 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''fur puff'' (puff bị cấm); rên (chuẩn bị), ngã (phát), lăn trên lá (thân), đốm linh và vang rừng (đuôi).'

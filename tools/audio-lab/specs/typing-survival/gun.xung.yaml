@@ -5,9 +5,9 @@ schema: 1
 id: gun.xung
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Viên Xung rời nòng (súng bắn 10 viên/s, tiếng phát cho một nửa số viên)
-purpose: 'Pháo tự động hạng nặng: cú đấm trầm, tiếng nổ giòn, khóa nòng'
+purpose: 'Pháo tự động hạng nặng: khóa nòng đóng, cú đấm trầm có thân, tiếng nổ giòn; vang hành lang thép rất ngắn (đuôi dài là lớp riêng khi ngừng bắn)'
 category: shot
 family: ban
 source_class: shot
@@ -86,19 +86,19 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Heavy autocannon single shot from a steel turret, deep punch with sharp crack and mechanical breech clack, 120 ms, close, no long reverb, industrial.
+  text: 'Heavy autocannon single shot from a steel turret: a breech clack, a deep punch with a sharp crack and a short thick body, a quick slap off the steel corridor, 350 ms, industrial.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, heavy autocannon single shot from a steel turret, deep punch with a sharp crack and a mechanical breech clack, close, dry, no long reverb, industrial'
     - 'B: Single gunshot, large caliber cannon firing once, powerful low thump and crisp crack, short, close mic, dry, slightly distorted'
     - 'C: TrackType: SFX, one shot of a heavy machine gun, punchy low-end boom, metallic bolt clack, very short tail, gritty'
     - 'D: Heavy artillery cannon blast, single shot, deep thump with a sharp transient crack, steel mechanism clank, short, dry, distorted metal, close'
     - 'E: TrackType: SFX, heavy autocannon firing a single round inside a steel turret, deep chesty body, punchy low-mid thump, short, close, dry, industrial'
     - 'F: TrackType: SFX, one heavy cannon shot, thick low-mid punch and a short metallic body resonance, tight, close mic, dry, industrial steel'
-    - 'G: Single large caliber gunshot recorded close, fat punchy body in the low mids, short boomy thump, gritty, dry'
     - 'H: TrackType: SFX, heavy turret gun single shot, powerful chest thump with a brief steel ring, short and tight, close, dry'
+    - 'I: TrackType: SFX, heavy autocannon single shot inside a steel turret, mechanical breech clack, deep punch with a sharp crack, short thick body, quick slap echo off a steel corridor, industrial'
+    - 'J: Large caliber cannon firing once in a metal hangar, bolt slamming home, powerful chesty blast with a gritty crack, brief metallic reverberation, close'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -173,10 +173,10 @@ critic:
     l4: 0.1
     l5: 0.0
   loop_eval:
-    enabled: true
-    length_s: [3, 4]
-    plays: 10
-    interval_ms: 200
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
   ast:
     expected: ['Gunshot, gunfire']
     forbid: []
@@ -189,7 +189,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Heavy autocannon single shot from a steel turret, deep punch with sharp crack and mechanical breech clack, 120 ms, close, no long reverb, industrial.
+  intent: 'Heavy autocannon single shot from a steel turret: a breech clack, a deep punch with a sharp crack and a short thick body, a quick slap off the steel corridor, 350 ms, industrial.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -207,4 +207,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #11 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E–H là prompt thân (1 s) cho họ súng liên thanh (mục 3). duration (manual, 96–380 ms) là ngoại lệ của lô 1: phát đơn có đầu 0–120 ms và đuôi tắt dần tới khoảng 350 ms (mục 3.2), chờ người điều phối sửa THEME_SOUND_LIST.md; bỏ khi tài liệu game đổi.'
+notes: 'Q6 (24/10): đã soát, thiết kế lô 1 đã theo Q6: khóa nòng (chuẩn bị), đấm và nổ giòn (phát), thân dày ngắn, vang hành lang rất ngắn trong file; đuôi dài khi ngừng bắn là gun.xung.tail, đuôi thép dùng chung là hit.tail. Súng phát 5 lần mỗi giây nên mỗi phát ngắn. Bỏ A (''no long reverb'', chữ phủ định) và G (''short boomy thump''); giữ B–D, E, F, H; thêm I, J (cả phát). Prompt trong THEME_SOUND_LIST.md nay ghi 350 ms, khớp duration (manual) 96–380 ms của lô 1. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E–H là prompt thân (1 s) cho họ súng liên thanh (mục 3). duration (manual, 96–380 ms) là ngoại lệ của lô 1: phát đơn có đầu 0–120 ms và đuôi tắt dần tới khoảng 350 ms (mục 3.2), chờ người điều phối sửa THEME_SOUND_LIST.md; bỏ khi tài liệu game đổi.'

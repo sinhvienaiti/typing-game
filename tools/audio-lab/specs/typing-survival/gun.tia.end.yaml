@@ -5,9 +5,9 @@ schema: 1
 id: gun.tia.end
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Tia tắt
-purpose: Máy phát hạ điện, tắt dần
+purpose: 'Tia tắt: máy phát hạ điện, hồ quang xì tắt, tiếng ù chìm vào vang thép'
 category: fx-other
 family: ban
 source_class: electric
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: High-voltage generator powering down, falling pitch with a short electrical fizzle, 400 ms, industrial, dry.
+  text: 'High-voltage generator powering down: falling pitch, the arc fizzling out, the hum dying into a short steel corridor echo, 400 ms, industrial.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, an electric ray shutting off, generator spinning down with falling pitch, arc fizzling out, hum dying into a short steel corridor echo'
+    - 'B: Industrial machine powering down, descending whine, last crackles of electricity, metallic hall decay'
+    - 'C: TrackType: SFX, tesla weapon stop, discharge sputter, low hum sinking, short reverberation in a steel room'
+    - 'D: Arc welder switched off, sizzle cut, motor winding down, faint ring of the steel deck'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: High-voltage generator powering down, falling pitch with a short electrical fizzle, 400 ms, industrial, dry.
+  intent: 'High-voltage generator powering down: falling pitch, the arc fizzling out, the hum dying into a short steel corridor echo, 400 ms, industrial.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 4. Súng
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''dry''; phần cuối của đòn Tia: hạ điện (thân), vang thép (đuôi).'

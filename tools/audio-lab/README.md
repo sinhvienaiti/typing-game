@@ -2,7 +2,7 @@
 
 Bộ công cụ làm âm cho các game gõ chữ. Nó tạo ứng viên, chấm bằng "tai AI" nhiều lớp, dựng bản cuối kèm hồ sơ giấy phép, rồi cho chủ dự án nghe mù trên Bảng Nghe. Kế hoạch gốc: [`docs/games/AUDIO_PIPELINE.md`](../../docs/games/AUDIO_PIPELINE.md). Mục 4 (bộ phê bình), 5 (vòng tạo), 7 (Bảng Nghe), 10 (giấy phép) và 11 (bố cục) là hợp đồng của thư mục này.
 
-Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md). Phiên Stable Audio 3 vòng 2 (lô 0b): [`SESSION_0B.md`](SESSION_0B.md). Thiết kế lô 1 (28 id, súng liên thanh, bài thử "Liên thanh 3 s", thứ tự sản xuất): [`BATCH1_BRIEF.md`](BATCH1_BRIEF.md). Lô 1 Rồng Giữ Ải (phiên `1-dh-s2`, `1-dh-s3`): [`SESSION_1_DH.md`](SESSION_1_DH.md). Lô 1 Tuyến Cuối (phiên `1-ts-s1`, `1-ts-s4`): [`SESSION_1_TS.md`](SESSION_1_TS.md). Lô 1 Lời Gọi (phiên `1-td-s5`, `1-td-s6`): [`SESSION_1_TD.md`](SESSION_1_TD.md).
+Phiên nghe đầu tiên cho chủ dự án (lô 0a): xem [`SESSION_0A.md`](SESSION_0A.md). Phiên Stable Audio 3 vòng 2 (lô 0b): [`SESSION_0B.md`](SESSION_0B.md). Thiết kế lô 1 (28 id, súng liên thanh, bài thử "Liên thanh 3 s", thứ tự sản xuất): [`BATCH1_BRIEF.md`](BATCH1_BRIEF.md). Lô 1 Rồng Giữ Ải (phiên `1-dh-s2`, `1-dh-s3`): [`SESSION_1_DH.md`](SESSION_1_DH.md). Lô 1 Tuyến Cuối (phiên `1-ts-s1`, `1-ts-s4`): [`SESSION_1_TS.md`](SESSION_1_TS.md). Lô 1 Lời Gọi (phiên `1-td-s5`, `1-td-s6`): [`SESSION_1_TD.md`](SESSION_1_TD.md). Âm hành động theo hình dạng hành động (DECISIONS Q6) và bản viết lại 66 thẻ, việc của lô 1c: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md).
 
 ## Trạng thái (23/10/2026)
 

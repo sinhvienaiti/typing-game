@@ -5,9 +5,9 @@ schema: 1
 id: enemy.flyer.attack
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bổ nhào, chích
-purpose: Rít bổ nhào, chích "tách"
+purpose: 'Ong Gai bổ nhào chích: lao xuống gió rít, chích "tách" có lực; vang rừng ngắn'
 category: fx-other
 family: trung
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Diving wasp whistle ending in a sharp sting click, 300 ms
+  text: 'Diving wasp attack: air rushing past as it dives, a sharp stinger strike, short forest echo, 300 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a giant wasp dives and stings, fast air rush and buzz swooping down, sharp piercing sting strike, short forest echo'
+    - 'B: Insect swooping at high speed, whooshing buzz, quick stabbing click on impact, brief outdoor reverb'
+    - 'C: TrackType: SFX, flying creature attack, dive whoosh with wing buzz, crisp sting hit, small, short echo'
+    - 'D: Hornet strike, rushing buzz pass-by ending in a hard needle prick, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Diving wasp whistle ending in a sharp sting click, 300 ms
+  intent: 'Diving wasp attack: air rushing past as it dives, a sharp stinger strike, short forest echo, 300 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bổ nhào (chuẩn bị, thân), chích (phát), vang rừng ngắn (đuôi).'

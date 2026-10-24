@@ -5,9 +5,15 @@ schema: 1
 id: dragon.hurt
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Hỏa Long trúng đòn
-purpose: Gầm đau ngắn, thịch trầm
+purpose: 'Hỏa Long trúng đòn: gầm đau của thú lớn, thân nặng bị đẩy lùi, vảy cào đá; vang thung lũng thấp'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 420
+  target_ms: 600
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 336
-  max_ms: 504
+  min_ms: 480
+  max_ms: 720
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [200, 1600]
   music: null
@@ -85,11 +91,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Large dragon short pained grunt with a heavy body thud, 400 ms
+  text: 'Large dragon struck: a sharp pained roar from a huge creature, heavy body recoiling with scales scraping, low valley echo, 600 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a huge dragon is hit, a sudden pained roar-grunt from a large chest, heavy scaled body recoiling, low growl fading into a valley echo'
+    - 'B: Large reptile beast hurt, deep guttural cry of pain, body shifting with a heavy scrape of scales on stone, dark outdoor reverberation'
+    - 'C: TrackType: SFX, fantasy dragon pain vocal, short strained roar layered with a low rumble, leathery wings jolting, echo across a forest valley, big and weighty'
+    - 'D: A giant creature takes a blow, sharp hurt bellow, low throat rattle afterwards, heavy body sliding back on gravel, long low echo outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -167,7 +177,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: []
+    expected: [Roar]
     forbid: [Speech]
   loop: false
   stereo: false
@@ -178,7 +188,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Large dragon short pained grunt with a heavy body thud, 400 ms
+  intent: 'Large dragon struck: a sharp pained roar from a huge creature, heavy body recoiling with scales scraping, low valley echo, 600 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -193,4 +203,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''heavy body thud'' (tiếng trầm đứng riêng); gầm đau có thân và đuôi, cỡ của một con rồng. Dài 420 → 600 ms.'

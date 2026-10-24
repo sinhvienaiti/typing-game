@@ -5,9 +5,9 @@ schema: 1
 id: dragon.breath
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Phun Lửa (Alt + 1)
-purpose: Hít vào rồi luồng lửa cuộn dài
+purpose: 'Phun Lửa: hít sâu của thú lớn, lửa bắt rồi luồng lửa cuộn dài có áp lực, tắt dần vào vang thung lũng thấp'
 category: fx-other
 family: ban
 source_class: fire
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Dragon inhale then long rolling fire breath, deep whoosh, crackling, no hiss, 1.6 s
+  text: 'Dragon breath attack: a deep creature inhale, flame igniting under pressure into a long rolling fire jet, roaring and crackling, dying off into a low valley echo, 1.6 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a huge dragon takes a deep rasping breath, then a pressurised fire jet ignites and roars continuously, crackling flames, fading into a low echo across a forest valley'
+    - 'B: Large flamethrower blast recorded in a wide valley, a strong intake of air before it, long rolling roar of flame, steady crackle, tail echoing off distant hills'
+    - 'C: TrackType: SFX, fantasy fire breath, heavy throat inhale, gas fire bursting into a long turbulent jet, deep rumbling body, crackling embers, dark outdoor reverb'
+    - 'D: Giant torch blown into a long gust of flame, deep breath first, roaring fire jet with weight, sputtering at the end, low echo outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts:
@@ -181,7 +185,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Dragon inhale then long rolling fire breath, deep whoosh, crackling, no hiss, 1.6 s
+  intent: 'Dragon breath attack: a deep creature inhale, flame igniting under pressure into a long rolling fire jet, roaring and crackling, dying off into a low valley echo, 1.6 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -196,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''no hiss'' (chữ phủ định). Bốn phần khớp ba phần tách sẵn: đầu (hít, bắt lửa), vòng lặp (luồng lửa), cuối (tắt, vang thung lũng).'

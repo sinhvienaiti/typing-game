@@ -5,9 +5,9 @@ schema: 1
 id: unit.warden.down
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Vệ Binh Rêu ngã thành nụ cây
-purpose: Vỡ vụn, một nốt nhỏ
+purpose: 'Vệ Binh Rêu ngã: đá gỗ nứt, đổ vụn xuống đất, lá rơi, kết bằng một nốt mầm nhỏ; vang rừng'
 category: fx-other
 family: trung
 source_class: foley-other
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Moss guardian crumbling into soil, soft collapse, ending with a tiny sprout pluck, 900 ms
+  text: 'Moss guardian falling: stone and wood cracking, crumbling down into soil with falling leaves, ending with a tiny sprout pluck, forest echo, 900 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a moss stone guardian breaks down, cracking stone and wood, crumbling collapse into soil, leaves falling, a tiny plucked sprout note, forest echo'
+    - 'B: Mossy rock statue toppling, grinding crack, gravel and dirt pouring down, a small bright pluck at the end, outdoor reverb'
+    - 'C: TrackType: SFX, nature golem defeated, crunching collapse, earth settling, leafy rustle, gentle magical pluck, organic, echo'
+    - 'D: Stone and root creature crumbling apart, cracks and rumble, soil sliding, little sprout chime, low tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -167,7 +171,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: []
+    expected: [Wood]
     forbid: []
   loop: false
   stereo: false
@@ -178,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Moss guardian crumbling into soil, soft collapse, ending with a tiny sprout pluck, 900 ms
+  intent: 'Moss guardian falling: stone and wood cracking, crumbling down into soil with falling leaves, ending with a tiny sprout pluck, forest echo, 900 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -193,4 +197,4 @@ origin:
     present: true
     section: 5.7 Hỗ trợ (bus `units`, P4)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''soft collapse''; nứt (chuẩn bị), đổ (phát), đất và lá (thân), nốt mầm và vang rừng (đuôi).'

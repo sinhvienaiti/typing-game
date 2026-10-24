@@ -5,9 +5,9 @@ schema: 1
 id: enemy.swarm.death
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chết (cả cụm gộp lại)
-purpose: Bụp nhỏ, vỏ vỡ
+purpose: 'Kiến Gai chết (cả cụm): vỏ nhỏ vỡ giòn liên tiếp, mảnh văng, đốm linh li ti; vang ngắn'
 category: death-swarm
 family: chet
 source_class: impact
@@ -83,11 +83,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Small insect pop and shell crunch, tiny spirit glint, 380 ms
+  text: 'Small insect cluster crushed: crisp shell crunches in a quick burst, bits scattering, a tiny spirit glint, short echo, 380 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a cluster of tiny insects crushed, quick burst of crisp shell crunches, bits scattering on leaves, tiny spirit glint, short forest echo'
+    - 'B: Handful of beetle shells cracking at once, crunchy crackle, debris pattering, faint sparkle, brief outdoor reverb'
+    - 'C: TrackType: SFX, swarm death, rapid brittle cracks, rustling scatter, small magical tinkle, short echo'
+    - 'D: Small bugs breaking apart together, crackling crunch spreading, tiny glassy twinkle at the end, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Small insect pop and shell crunch, tiny spirit glint, 380 ms
+  intent: 'Small insect cluster crushed: crisp shell crunches in a quick burst, bits scattering, a tiny spirit glint, short echo, 380 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''pop'' (bị cấm) và ''Bụp nhỏ''; vỡ (phát), mảnh văng (thân), đốm linh và vang ngắn (đuôi).'

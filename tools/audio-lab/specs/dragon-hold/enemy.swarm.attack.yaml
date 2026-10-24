@@ -5,9 +5,9 @@ schema: 1
 id: enemy.swarm.attack
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Cắn nhỏ
-purpose: '"Tách" nhỏ'
+purpose: 'Kiến Gai cắn: lao nhỏ, cắn "tách" li ti'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,14 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Tiny insect bite click, 140 ms
+  text: 'Tiny ant bite: a quick skitter lunge and a small sharp mandible snap, brief tail, 140 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, tiny insect lunges and bites, quick skitter, small sharp mandible snap, brief tail'
+    - 'B: Ant bite, little scurry then a crisp pincer click, very small, short rustle'
+    - 'C: TrackType: SFX, small bug attack, light scratch and snappy pinch, tiny'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Tiny insect bite click, 140 ms
+  intent: 'Tiny ant bite: a quick skitter lunge and a small sharp mandible snap, brief tail, 140 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): cỡ âm theo nguồn: con kiến thì tiếng rất nhỏ; lao (chuẩn bị), cắn (phát), đuôi rất ngắn.'

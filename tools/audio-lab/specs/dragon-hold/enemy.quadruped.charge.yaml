@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.charge
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Húc (E19)
-purpose: Húc "huỵch"
+purpose: 'Heo Nanh Đá húc: vó dồn tới, va "huỵch" nặng có thân, bụi đất tung; vang rừng ngắn'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: heavy
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Heavy boar charge impact, body slam thud, dust, 400 ms
+  text: 'Heavy boar charge: hooves pounding in, a weighty body slam with a grunt, dirt and dust spraying, short forest echo, 400 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a heavy stone-tusked boar charges, hooves pounding closer, a weighty body slam with a grunt, dust and pebbles spraying, short forest echo'
+    - 'B: Big wild boar ramming into a wooden barrier, rush of hooves, heavy crashing impact, splintering wood and dirt, brief outdoor reverb'
+    - 'C: TrackType: SFX, beast charge attack, thundering steps, powerful slam with body weight, gravel scatter, low echo'
+    - 'D: Large animal crashing into a target at full speed, snort, heavy collision, debris and dust settling, short low tail'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Heavy boar charge impact, body slam thud, dust, 400 ms
+  intent: 'Heavy boar charge: hooves pounding in, a weighty body slam with a grunt, dirt and dust spraying, short forest echo, 400 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''body slam thud'' (tiếng trầm đứng riêng); vó dồn (chuẩn bị), va (phát), bụi đất (thân), vang rừng (đuôi).'

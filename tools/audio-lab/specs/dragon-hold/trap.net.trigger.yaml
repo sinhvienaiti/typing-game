@@ -5,9 +5,9 @@ schema: 1
 id: trap.net.trigger
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Lưới Phóng bắn, kéo quái bay xuống
-purpose: Phụt, vút, quấn
+purpose: 'Lưới Phóng bắn: lò xo kẽo kẹt, nòng bật, lưới bung vút qua không khí, dây quấn siết; vang rừng ngắn (không nổ)'
 category: fx-other
 family: 'no'
 source_class: foley-other
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Net launcher thump, net whoosh through the air, rope wrapping, 600 ms
+  text: 'Net launcher fires: a spring creak, a sharp launch snap, the net whooshing open through the air, ropes wrapping tight, short forest echo, 600 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a net launcher fires, spring creak, sharp wooden launch snap, net whooshing open through the air, ropes wrapping tight, short forest echo'
+    - 'B: Rope net shot from a wooden catapult, quick twang, fluttering whoosh, rope cinching and creaking, brief outdoor reverb'
+    - 'C: TrackType: SFX, trap launch, mechanical clack, airy swoosh of netting, tightening rope squeaks, organic, short echo'
+    - 'D: Hunting net thrown by a spring trap, snap, wide whoosh, ropes snagging and pulling tight, short tail in a pine forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -178,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Net launcher thump, net whoosh through the air, rope wrapping, 600 ms
+  intent: 'Net launcher fires: a spring creak, a sharp launch snap, the net whooshing open through the air, ropes wrapping tight, short forest echo, 600 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -193,4 +197,4 @@ origin:
     present: true
     section: 5.6 Bẫy (bus `traps`, P4)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''launcher thump''; lò xo (chuẩn bị), bật (phát), lưới bay và dây quấn (thân), vang rừng ngắn (đuôi). Không nổ (§8.1).'

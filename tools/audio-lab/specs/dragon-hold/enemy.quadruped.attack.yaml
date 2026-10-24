@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.attack
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Cắn (E18)
-purpose: Cắn "phập"
+purpose: 'Thú cắn: lao tới thở hắt, hàm cắn "phập" có lực, gầm ngắn; vang rừng ngắn'
 category: hit-small
 family: trung
 source_class: creature
@@ -84,11 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Fast animal bite snap, 200 ms
+  text: 'Wolf-boar bite: a short lunge breath, a powerful jaw snap with a snarl, short forest echo, 200 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a beast lunges and bites, quick huff, strong jaw snap with teeth clacking, short snarl, brief forest echo'
+    - 'B: Wolf biting hard, fast snarl into a snapping chomp, short outdoor reverberation'
+    - 'C: TrackType: SFX, animal bite attack, aggressive growl burst and wet jaw snap, small debris, short echo'
+    - 'D: Large dog-like creature snapping its jaws, sharp bite with a growl, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Fast animal bite snap, 200 ms
+  intent: 'Wolf-boar bite: a short lunge breath, a powerful jaw snap with a snarl, short forest echo, 200 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): lao (chuẩn bị), cắn (phát), gầm (thân), vang rừng ngắn (đuôi).'

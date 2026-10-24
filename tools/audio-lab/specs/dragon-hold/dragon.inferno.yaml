@@ -5,9 +5,15 @@ schema: 1
 id: dragon.inferno
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Viêm Đế (tối thượng)
-purpose: Khạc lửa lớn, bùng cháy, hợp xướng trầm
+purpose: 'Viêm Đế (tối thượng): rồng hít sâu, khạc lửa khổng lồ, bùng cháy lan rộng, hợp xướng trầm dâng; vang thung lũng rất dài'
 category: blast
 family: 'no'
 source_class: fire
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 1700
+  target_ms: 2400
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 1360
-  max_ms: 2040
+  min_ms: 1920
+  max_ms: 2880
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [600, 2000]
   music: null
@@ -84,11 +90,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Dragon ultimate, giant fire spit and blaze, low choir pad swell, epic, 1.7 s
+  text: 'Dragon ultimate: a deep inhale, a giant pressurised fire spit and blaze spreading wide, a low choir swell under the roar, very long valley echo, 2.4 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a colossal dragon unleashes its ultimate fire, deep rumbling inhale, enormous flame eruption roaring outward, firestorm spreading, low choir swelling underneath, very long valley echo'
+    - 'B: Gigantic flamethrower blast across a forest valley, huge intake of air, roaring pressurised fire with weight, crackling inferno, reverberation rolling off the mountains, epic'
+    - 'C: TrackType: SFX, epic fire spell, dragon roar into a massive fire blast, blazing flames and crackling embers spreading, dark choir pad rising, long cinematic tail, organic'
+    - 'D: Volcano-like burst of fire from a huge beast, deep breath, explosive flame roar, rolling blaze, distant echoes fading slowly over hills, powerful and warm'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -164,7 +174,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: [Fire]
+    expected: [Fire, Roar]
     forbid: []
   loop: false
   stereo: false
@@ -175,7 +185,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Dragon ultimate, giant fire spit and blaze, low choir pad swell, epic, 1.7 s
+  intent: 'Dragon ultimate: a deep inhale, a giant pressurised fire spit and blaze spreading wide, a low choir swell under the roar, very long valley echo, 2.4 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -190,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đòn to nhất của Hỏa Long: đuôi dài và to rõ. Dài 1700 → 2400 ms. Hợp xướng trầm nằm dưới 1 kHz, nhường giọng đọc.'

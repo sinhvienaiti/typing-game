@@ -5,9 +5,9 @@ schema: 1
 id: gun.tia.start
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Tia bật
-purpose: Hồ quang điện quay lên, kêu ù của máy phát
+purpose: 'Tia bật: máy phát quay lên, hồ quang bắt "xẹt" rồi kêu ù; vang hành lang thép ngắn'
 category: fx-other
 family: ban
 source_class: electric
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: 'Industrial electric arc ray igniting: generator spin-up, crackling high-voltage arc and a low 55 Hz hum, 600 ms, gritty, no music.'
+  text: 'Industrial electric arc ray igniting: a generator spinning up, a high-voltage arc striking and crackling over a low 55 Hz hum, short steel corridor echo, 600 ms, gritty.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, an electric arc ray weapon igniting, generator spin-up rising, high-voltage arc striking with a crackle, steady low hum, short echo in a steel corridor, industrial'
+    - 'B: Heavy electrical generator powering up, rising whine, arc snapping on and sizzling, deep mains hum, metallic hall reverberation'
+    - 'C: TrackType: SFX, tesla coil weapon start, building buzz, crackling discharge locking on, low drone, gritty, steel room echo'
+    - 'D: Arc welder sparking into life on a steel deck, motor winding up, harsh crackle settling into a hum, short metallic reverb'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: 'Industrial electric arc ray igniting: generator spin-up, crackling high-voltage arc and a low 55 Hz hum, 600 ms, gritty, no music.'
+  intent: 'Industrial electric arc ray igniting: a generator spinning up, a high-voltage arc striking and crackling over a low 55 Hz hum, short steel corridor echo, 600 ms, gritty.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 4. Súng
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''no music'' (chữ phủ định). Quay lên (chuẩn bị), hồ quang bắt (phát), ù (thân), vang hành lang ngắn (đuôi).'

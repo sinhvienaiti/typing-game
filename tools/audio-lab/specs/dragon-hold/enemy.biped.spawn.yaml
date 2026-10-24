@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.spawn
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Quái hai chân xuất hiện
-purpose: '"Hự" gầm gừ'
+purpose: 'Yêu Rêu xuất hiện: khịt nhanh, tiếng gằn "hự" của quái nhỏ, giáp lá xào; vang rừng ngắn'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Small moss goblin grunt, gruff short vocal, forest creature, 350 ms
+  text: 'Small moss goblin appears: a quick snort into a gruff short grunt, bark armour rustling, short forest echo, 350 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a small forest goblin growls as it appears, quick sniff, gruff short grunt, rustle of leaf and bark armour, brief forest echo'
+    - 'B: Little moss creature snarling once, throaty grunt with a rasp, leaves shaking on its body, short outdoor reverberation'
+    - 'C: TrackType: SFX, small fantasy creature vocal, hostile grunt, twigs and bark plates clicking, close but in a forest, short echo'
+    - 'D: Goblin-like beast huffing and grunting as it steps out of the bushes, leafy rustle, short low echo outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Small moss goblin grunt, gruff short vocal, forest creature, 350 ms
+  intent: 'Small moss goblin appears: a quick snort into a gruff short grunt, bark armour rustling, short forest echo, 350 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): quái nhỏ thì âm nhỏ, nhưng vẫn có hơi (chuẩn bị), tiếng gằn (phát), giáp lá (thân), vang rừng ngắn (đuôi).'

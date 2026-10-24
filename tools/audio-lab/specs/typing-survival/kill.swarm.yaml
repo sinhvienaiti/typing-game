@@ -5,9 +5,9 @@ schema: 1
 id: kill.swarm
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Quái bầy chết (gom theo ô 3 m mỗi khung)
-purpose: Kim loại vỡ vụn, một tiếng nổ trầm, một thanh thép gõ lên nốt cao dần khi giết liên tục
+purpose: Kim loại vỡ vụn giòn, mảnh văng leng keng, một tiếng nổ trầm nhỏ ở dưới; vang hành lang thép ngắn. Thanh thép leo nốt khi giết liên tục tách riêng
 category: death-swarm
 family: chet
 source_class: impact
@@ -83,15 +83,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: 'Small metal creature shattering: crunchy breaking metal, scattering shards and a low boom, 250 ms, several variations, no voice.'
+  text: 'Small metal creature shattering: crunchy breaking metal, shards scattering and ringing briefly, a low boom underneath, short steel corridor echo, 250 ms, several variations.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, small metal creature shattering, crunchy breaking metal, scattering shards, low boom, short, close, dry'
-    - 'B: Small robot bug crushed and breaking apart, crunchy metal fragments scattering, quick, dry, gritty, close'
     - 'C: TrackType: SFX, small metal creature bursts into pieces, metal shards scatter and ring briefly in a steel hall, crunchy, short'
     - 'D: Tiny mechanical drone explodes into scrap, crunchy metal break with shards bouncing on steel, short metallic echo'
+    - 'E: TrackType: SFX, small metal creature shattering, crunchy breaking metal, shards scattering and ringing briefly, low boom underneath, short echo in a steel corridor, industrial'
+    - 'F: Small robot bug bursting apart, metal fragments clattering across a steel floor, quick crunch with weight, brief metallic hall reverberation, gritty'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -184,7 +184,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: 'Small metal creature shattering: crunchy breaking metal, scattering shards and a low boom, 250 ms, several variations, no voice.'
+  intent: 'Small metal creature shattering: crunchy breaking metal, shards scattering and ringing briefly, a low boom underneath, short steel corridor echo, 250 ms, several variations.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -201,4 +201,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #15 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): hai hướng cho bảng phong cách: A, B vỡ khô; C, D vỡ có vang.'
+notes: 'Q6 (24/10): chọn hướng ''vỡ có vang'' (C, D của lô 1) theo luật đuôi vang trong không gian; bỏ hướng ''vỡ khô'' (A, B). Bỏ ''no voice'' (chữ phủ định). Nguồn nhỏ, phát rất dày nên đuôi ngắn; tiếng nổ trầm chỉ là lớp dưới. Thêm E, F. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): hai hướng cho bảng phong cách: A, B vỡ khô; C, D vỡ có vang.'

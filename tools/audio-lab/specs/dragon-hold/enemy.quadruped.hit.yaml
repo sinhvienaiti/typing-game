@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.hit
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bị lính đánh trúng
-purpose: Lông "thịch"
+purpose: 'Thú bốn chân trúng đòn: cú đánh vào lông dày có thân, kêu ngắn, lông xào; vang rừng ngắn'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Furry body hit, soft heavy thump, 200 ms
+  text: 'Furry beast hit: a solid strike into thick fur, a short yelp-grunt, fur rustling, short forest echo, 200 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a furry beast is struck, solid smack into thick fur and muscle, short pained grunt, fur rustle, brief forest echo'
+    - 'B: Club hitting a wolf''s thick coat, dense whack with a body, small yelp, short outdoor reverb'
+    - 'C: TrackType: SFX, animal hit, punchy fleshy impact, quick snarl, leaves stirring, short echo'
+    - 'D: Blow landing on a wild boar, heavy hide slap, grunt, dirt scuff, short low tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Furry body hit, soft heavy thump, 200 ms
+  intent: 'Furry beast hit: a solid strike into thick fur, a short yelp-grunt, fur rustling, short forest echo, 200 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''soft heavy thump'' (tiếng trầm đứng riêng). Trúng nhỏ: không có phần chuẩn bị; đuôi ngắn.'

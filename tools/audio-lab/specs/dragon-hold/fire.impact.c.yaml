@@ -5,9 +5,15 @@ schema: 1
 id: fire.impact.c
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: 'Đòn to: bậc T3 trở lên, Hoàn hảo, Chớp'
-purpose: Bùng lửa lớn, trầm, cháy tiếp
+purpose: 'Đòn to (T3 trở lên, Hoàn hảo, Chớp): lửa bùng lớn có trọng lượng, gầm cháy tiếp, than và mảnh văng xa; vang thung lũng dài, dài và nặng hơn .a rõ'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 520
+  target_ms: 1000
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 416
-  max_ms: 624
+  min_ms: 800
+  max_ms: 1200
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [120, 600]
   music: null
@@ -84,13 +90,15 @@ loudness:
     weight: heavy
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Big fire burst impact, heavy low thump, roaring flames and crackling embers, 500 ms
+  text: 'Big fire impact: a heavy flame explosion with weight, roaring flames that keep burning, embers and debris flung wide, long low valley echo, 1 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, big fire burst, a whoosh of roaring flames flaring up and dying down, warm, half a second, close, outdoor'
-    - 'B: Large bonfire flare-up, sudden roaring flame burst with crackling embers, short, warm, organic, recorded close'
+    - 'C: TrackType: SFX, massive fireball impact, a heavy flame explosion with a deep body, roaring fire that keeps burning, embers and burning debris flung wide, long low echo rolling through a forest valley'
+    - 'D: A large fire bomb bursts in a forest clearing, powerful roaring flame blast, crackling embers and wood debris raining down, a long dark reverberation off the hills'
+    - 'E: TrackType: SFX, dragon fire blast hits hard, deep weighty boom inside a roaring flame burst, sustained crackling blaze, scattered burning splinters, long valley tail, epic, organic'
+    - 'F: Huge bonfire flare-up after a strong impact, flames roaring up and rolling, heavy crackle and debris, the sound echoing away across a wide valley, powerful and warm'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +182,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: [Fire]
+    expected: [Explosion, Fire]
     forbid: []
   loop: false
   stereo: false
@@ -185,7 +193,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Big fire burst impact, heavy low thump, roaring flames and crackling embers, 500 ms
+  intent: 'Big fire impact: a heavy flame explosion with weight, roaring flames that keep burning, embers and debris flung wide, long low valley echo, 1 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -200,4 +208,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: ['AUDIO_PIPELINE §9 #4 (lô 1)']
-notes: 'Lô 1 (24/10/2026): lớp bùng lửa 300–500 ms đặt trên công thức của fire.impact.a (BATCH1_BRIEF #4).'
+notes: 'Q6 (24/10): đòn to được đuôi dài và to hơn rõ; tiếng nổ đục chỉ là lớp dưới, có thân lửa gầm và đuôi vang đè lên. Dài 520 → 1000 ms. Khóa C–F thay A, B của lô 1 (lớp bùng 300–500 ms trên công thức của .a); công thức fire.impact.c.b1 phải dựng lại cho độ dài mới. Ghi chú trước Q6: Lô 1 (24/10/2026): lớp bùng lửa 300–500 ms đặt trên công thức của fire.impact.a (BATCH1_BRIEF #4).'

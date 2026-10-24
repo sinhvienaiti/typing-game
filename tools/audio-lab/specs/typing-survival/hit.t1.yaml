@@ -89,11 +89,10 @@ prompt:
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, a small bullet impact on a thick steel hull, one short bright metallic clank, fast decay, close mic, dry, no reverb'
     - 'B: A single bolt striking a steel plate, sharp metal ping with a tight low-mid body, very short, recorded close in a dead room'
-    - 'C: TrackType: SFX, metal impact one-shot, small projectile hitting an armored steel door, crisp transient, short gritty clank, no tail, industrial'
     - 'D: Bullet hit on sheet metal, short tick and clank, dry, fast decay, single hit'
     - 'E: TrackType: SFX, small bullet impact on a steel plate, bright crisp metallic clank with a medium body, short, close, dry, industrial'
+    - 'F: TrackType: SFX, small bullet striking a steel hull plate, bright crisp clank with a tight body, the ring dying fast into a steel corridor, industrial'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -207,4 +206,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #12 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E nghiêng sáng hơn, thân vừa (mục 4.1 #12); gốc là C (anh chọn C s1006 thô).'
+notes: 'Q6 (24/10): đã soát: file bậc là đầu tiếng + thân (mục 6.3 #3); sub và đuôi thép là lớp dùng chung hit.sub, hit.tail do mã ghép, nên hình dạng Q6 đủ khi ghép. Bỏ A (''no reverb'') và C (''no tail''): chữ phủ định; bản anh chọn C s1006 vẫn là file gốc, chữ của C còn trong bản ghi ứng viên và lịch sử Git. Thêm F. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E nghiêng sáng hơn, thân vừa (mục 4.1 #12); gốc là C (anh chọn C s1006 thô).'

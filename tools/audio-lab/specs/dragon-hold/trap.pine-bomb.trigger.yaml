@@ -5,9 +5,9 @@ schema: 1
 id: trap.pine-bomb.trigger
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bom Hạt Thông nổ (số quái trúng làm tiếng to hơn)
-purpose: Nổ trầm, hạt văng
+purpose: 'Bom Hạt Thông nổ: ngòi nhựa xì, nổ trầm có thân, hạt và dăm văng; vang rừng'
 category: blast
 family: 'no'
 source_class: blast
@@ -84,13 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Pine cone bomb explosion, deep boom, seeds and splinters scattering, 1.1 s
+  text: 'Pine cone bomb explosion: a short resin fuse hiss, a woody crack and deep boom with body, seeds and splinters scattering, forest echo, 1.1 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, a pine cone bomb bursts, a deep woody boom with seeds and wood splinters scattering, short, outdoor forest'
-    - 'B: Small wooden powder keg explosion in a forest, dull low thump, crackling splinters and pattering seeds, short'
+    - 'C: TrackType: SFX, a pine cone bomb goes off, short resin fuse hiss, woody crack and deep boom with a heavy body, seeds and splinters scattering, echo through a pine forest'
+    - 'D: Small wooden powder keg explodes in a forest, fizzing fuse, sharp crack, deep blast, pattering seeds and wood splinters, rolling outdoor reverberation'
+    - 'E: TrackType: SFX, fantasy nature bomb, crackling sizzle, splitting wood burst with weight, debris raining down on leaves, long low forest echo'
+    - 'F: Exploding pine cone the size of a barrel, quick hiss, sharp snapping boom, shards of bark and seeds flying, echo across the valley'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -177,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Pine cone bomb explosion, deep boom, seeds and splinters scattering, 1.1 s
+  intent: 'Pine cone bomb explosion: a short resin fuse hiss, a woody crack and deep boom with body, seeds and splinters scattering, forest echo, 1.1 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -192,4 +194,4 @@ origin:
     present: true
     section: 5.6 Bẫy (bus `traps`, P4)
   plan: []
-notes: 'Lô 1 (24/10/2026): 2 prompt Stable Audio 3 cạnh công thức v3 (BATCH1_BRIEF 4.4).'
+notes: 'Q6 (24/10): thêm phần chuẩn bị (ngòi xì) và đuôi vang rừng. Khóa C–F thay A, B của lô 1 (B ''dull low thump''). Công thức v3 (Kenney Impact Plank, anh chọn 3/5 ở lô 0a) vẫn là nền; lô 1c đặt thân và đuôi Q6 lên trên. Ghi chú trước Q6: Lô 1 (24/10/2026): 2 prompt Stable Audio 3 cạnh công thức v3 (BATCH1_BRIEF 4.4).'

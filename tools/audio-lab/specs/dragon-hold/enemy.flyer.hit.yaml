@@ -5,9 +5,9 @@ schema: 1
 id: enemy.flyer.hit
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bị trúng
-purpose: Vỏ "rắc" nhỏ
+purpose: 'Ong Gai trúng đòn: vỏ kitin nứt "rắc", cánh khựng lại; vang ngắn'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Small chitin crack, insect shell hit, 180 ms
+  text: 'Wasp hit: a small chitin shell cracking, wings faltering, short forest echo, 180 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, giant wasp struck, small chitin shell crack, wing buzz faltering, brief forest echo'
+    - 'B: Insect shell hit, crisp crunch, stuttering wings, short outdoor reverb'
+    - 'C: TrackType: SFX, small creature impact, brittle crack with a buzzing body, short echo'
+    - 'D: Beetle shell flicked hard, sharp crackle and a quick buzz, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Small chitin crack, insect shell hit, 180 ms
+  intent: 'Wasp hit: a small chitin shell cracking, wings faltering, short forest echo, 180 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): trúng nhỏ: nứt vỏ (phát), cánh khựng (thân), vang ngắn (đuôi).'

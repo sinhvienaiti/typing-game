@@ -5,9 +5,9 @@ schema: 1
 id: hurt.drain
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Quái trong vùng hút rút giáp tuyến (mỗi điểm giáp, tối đa một tiếng mỗi 420 ms)
-purpose: 'Lách tách điện khô trên tấm giáp, nhỏ: nghe là biết tuyến đang bị hút'
+purpose: 'Lách tách điện khô trên tấm giáp, nhỏ: hồ quang ký sinh bám vào và hút điện; vang thép rất ngắn'
 category: fx-other
 family: trung
 source_class: electric
@@ -83,11 +83,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Faint dry electrical crackle on steel armour plating, short (150 ms), a parasite sapping power, quiet, no boom.
+  text: 'Faint electrical crackle on steel armour plating: a small parasitic arc latching on and sapping power with a thin sizzle, quiet, short steel echo, 150 ms.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small electric parasite draining armour, faint arc latching onto steel plating, thin crackle and sizzle, quiet, short metallic echo'
+    - 'B: Tiny electrical leak on a metal panel, quick sputtering crackle, power fading, soft steel room tail'
+    - 'C: TrackType: SFX, energy siphon, weak buzzing zap and crackle on armour, small, brief reverberation'
+    - 'D: Faint spark crawling over a steel plate, light fizzing crackle, quiet, short tail in a corridor'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -164,7 +168,7 @@ critic:
     plays: 10
     interval_ms: null
   ast:
-    expected: [Explosion]
+    expected: []
     forbid: []
   loop: false
   stereo: false
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Faint dry electrical crackle on steel armour plating, short (150 ms), a parasite sapping power, quiet, no boom.
+  intent: 'Faint electrical crackle on steel armour plating: a small parasitic arc latching on and sapping power with a thin sizzle, quiet, short steel echo, 150 ms.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 6. Tuyến bị đánh, cảnh báo, kết trận
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''no boom'' (chữ phủ định; nó còn làm bộ sinh gắn nhãn AST ''Explosion''). Nguồn nhỏ nên âm nhỏ: bám (phát), lách tách (thân), vang rất ngắn (đuôi).'

@@ -5,9 +5,9 @@ schema: 1
 id: enemy.flyer.death
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chết, rơi xoáy
-purpose: Vỏ vỡ, rơi xoáy, đốm linh
+purpose: 'Ong Gai chết: vỏ vỡ, rơi xoáy với tiếng cánh tắt dần, đốm linh; vang rừng'
 category: death-big
 family: chet
 source_class: impact
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Wasp shell crack, falling spiral buzz dying out, tiny spirit chime, 700 ms
+  text: Wasp shell cracking, falling in a spiral with its buzz dying out, a tiny spirit chime, forest echo, 700 ms
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, giant wasp dies, shell cracking, wing buzz spiralling down and fading, a tiny rising spirit chime, short forest echo'
+    - 'B: Insect falling out of the air, sputtering wings descending, brittle crack, faint sparkle, outdoor reverb'
+    - 'C: TrackType: SFX, flying creature death, crunchy shell break, spinning fall buzz dying away, small magical chime, gentle echo'
+    - 'D: Hornet knocked out of the sky, crack, buzzing spiral down into leaves, tiny glassy twinkle, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Wasp shell crack, falling spiral buzz dying out, tiny spirit chime, 700 ms
+  intent: Wasp shell cracking, falling in a spiral with its buzz dying out, a tiny spirit chime, forest echo, 700 ms
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): vỡ (phát), rơi xoáy (thân), đốm linh và vang rừng (đuôi).'

@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.death
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chết (gộp theo khung)
-purpose: Vỏ vỡ, đốm sáng "linh"
+purpose: 'Yêu Rêu chết: vỏ cây vỡ thành lá, lá rơi lả tả, đốm linh nhỏ bay lên; vang rừng'
 category: death-big
 family: chet
 source_class: impact
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Moss creature shell cracking into leaves, then a tiny rising spirit chime, 550 ms
+  text: Moss creature shell cracking apart into leaves, leaves falling, then a tiny rising spirit chime, soft forest echo, 550 ms
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small forest creature breaks apart, bark shell cracking, a burst of dry leaves falling, a tiny rising spirit chime, short forest echo'
+    - 'B: Brittle bark and twigs snapping and crumbling into leaves, rustling fall, a faint glassy sparkle rising, outdoor reverb'
+    - 'C: TrackType: SFX, creature death, woody crack and leafy collapse, small magical chime floating up, organic, gentle echo'
+    - 'D: Dry moss figure shattering, crackle of bark, leaves pattering to the ground, a small bright twinkle at the end, short tail'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +180,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Moss creature shell cracking into leaves, then a tiny rising spirit chime, 550 ms
+  intent: Moss creature shell cracking apart into leaves, leaves falling, then a tiny rising spirit chime, soft forest echo, 550 ms
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +195,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): vỡ (phát), lá rơi (thân), đốm linh và vang rừng (đuôi).'

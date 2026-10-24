@@ -5,9 +5,9 @@ schema: 1
 id: general.g01.skill
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: 'Cắm Cờ: hô lệnh, cờ cắm xuống đất, trống'
-purpose: Hô có vang, thịch, trống trận
+purpose: 'Cắm Cờ: hô lệnh vang, cán cờ cắm phập xuống đất, một tiếng trống trận; vang thung lũng'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Goblin captain shout, banner pole slammed into earth, one war drum hit, 1.1 s
+  text: Goblin captain war shout, banner pole slammed into earth with a crunch, one war drum hit, echo across the valley, 1.1 s
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a goblin captain bellows a battle cry, heavy banner pole stabbed into the ground with a crunch of earth, one deep war drum hit, echo across a forest valley'
+    - 'B: Creature war cry, wooden pole driven into soil, dirt crunch, single frame drum strike, long outdoor reverberation'
+    - 'C: TrackType: SFX, rallying creature roar, flag planting impact, deep drum boom, epic, wide valley echo'
+    - 'D: Gruff creature yell, stake slammed into earth, booming drum, echoes rolling off hills'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Goblin captain shout, banner pole slammed into earth, one war drum hit, 1.1 s
+  intent: Goblin captain war shout, banner pole slammed into earth with a crunch, one war drum hit, echo across the valley, 1.1 s
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.5 Tướng G01 Yêu Rêu Cầm Cờ (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): hô (chuẩn bị), cắm cờ (phát), trống (thân), vang thung lũng (đuôi). Tiếng hô là tiếng sinh vật, không thành lời (AST cấm Speech).'

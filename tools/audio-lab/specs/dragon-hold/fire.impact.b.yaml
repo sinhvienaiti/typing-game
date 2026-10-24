@@ -5,9 +5,15 @@ schema: 1
 id: fire.impact.b
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Cầu lửa trúng (biến thể 2)
-purpose: Như trên, tối hơn, có lách tách
+purpose: 'Như .a, tối hơn: lửa bùng trầm, than nổ khô, dăm gỗ văng; vang rừng thấp, ngắn'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 380
+  target_ms: 640
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 304
-  max_ms: 456
+  min_ms: 512
+  max_ms: 768
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [120, 600]
   music: null
@@ -84,13 +90,15 @@ loudness:
     weight: medium
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Fireball impact variant, darker, flame puff with a few dry crackles, 380 ms
+  text: 'Darker fireball impact variant: a deep flame flare, dry ember crackle and splinters scattering, short low forest echo, 640 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'C: TrackType: SFX, magic fire spell impact, warm deep flame burst, muffled boom, crackling embers fading quickly, fantasy, organic'
-    - 'E: TrackType: SFX, darker fireball impact, a muffled flame puff with a few dry ember crackles, warm, low, short, organic'
+    - 'F: TrackType: SFX, darker fireball impact, a deep heavy flame flare on contact, dry ember crackle, wood splinters scattering, brief low echo in a forest valley'
+    - 'G: A fireball bursts against rock, dark roaring flame flare, dry crackling embers and grit scattering, short dark outdoor reverberation, organic'
+    - 'H: TrackType: SFX, smoky fire impact, low flame whoosh flaring out, crisp dry crackle of embers, small debris falling, short warm forest echo'
+    - 'I: Burning log thrown hard onto the ground, flames flaring up with a roar, sparks and splinters bursting out, crackle settling into a low outdoor echo'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -185,7 +193,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Fireball impact variant, darker, flame puff with a few dry crackles, 380 ms
+  intent: 'Darker fireball impact variant: a deep flame flare, dry ember crackle and splinters scattering, short low forest echo, 640 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -200,4 +208,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: ['AUDIO_PIPELINE §9 #3 (lô 1)']
-notes: 'Lô 1 (24/10/2026): C là prompt C của fire.impact.a (thân ''warm deep flame burst, crackling embers'', BATCH1_BRIEF #3); E nghiêng tối hơn.'
+notes: 'Q6 (24/10): cùng hình dạng với fire.impact.a, tối hơn để phân biệt. Dài 380 → 640 ms. Khóa F–I thay C, E của lô 1 (C ''muffled boom'', E ''muffled flame puff'' bị Q6 bỏ). Ghi chú trước Q6: Lô 1 (24/10/2026): C là prompt C của fire.impact.a (thân ''warm deep flame burst, crackling embers'', BATCH1_BRIEF #3); E nghiêng tối hơn.'

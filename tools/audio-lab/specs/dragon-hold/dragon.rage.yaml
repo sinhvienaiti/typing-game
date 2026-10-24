@@ -5,9 +5,9 @@ schema: 1
 id: dragon.rage
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Long Nộ đầy
-purpose: Dâng lên rồi một tiếng gầm gọn
+purpose: 'Long Nộ đầy: lửa dâng lên trong ngực rồng, gầm gọn có lực; vang thung lũng ngắn'
 category: fx-other
 family: sinh-vat
 source_class: fire
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Rising fiery power swell ending in a short dragon growl, 1 s
+  text: Rising fiery power swell in a dragon's chest ending in a short forceful growl, brief valley echo, 1 s
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a dragon''s fury building, a rising roar of inner fire and crackling heat, ending in a short powerful growl, brief echo across a valley'
+    - 'B: Fire swelling up like a furnace being fanned, rumble growing louder, then a sharp deep growl from a large beast, short outdoor reverberation'
+    - 'C: TrackType: SFX, fantasy power-up, deep rising flame roar with embers crackling, a quick throaty snarl at the peak, low forest echo'
+    - 'D: Growing rumble and blaze like a bonfire catching air, a strong animal growl on top, then the heat settling into a low echo'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -173,7 +177,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Rising fiery power swell ending in a short dragon growl, 1 s
+  intent: Rising fiery power swell in a dragon's chest ending in a short forceful growl, brief valley echo, 1 s
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -188,4 +192,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): dâng (chuẩn bị), gầm (phát), lửa (thân), vang ngắn (đuôi). Độ dài giữ 1 s.'

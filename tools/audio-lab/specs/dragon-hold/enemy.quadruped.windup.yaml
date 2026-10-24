@@ -86,7 +86,10 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a wolf-boar digs in before attacking, claws scraping dirt, low growl rising in intensity'
+    - 'B: Beast pawing the ground, gravel scratching, rumbling snarl building up, tense'
+    - 'C: Boar scraping hooves on packed earth, snorting, threatening growl getting louder'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -189,4 +192,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đã soát. Phần chuẩn bị của đòn (cào đất, gầm dâng), prompt cũ không có chữ cấm nên giữ; thêm 3 biến thể nhấn tiếng gầm dâng lên.'

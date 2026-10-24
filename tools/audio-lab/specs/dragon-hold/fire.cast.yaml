@@ -5,9 +5,15 @@ schema: 1
 id: fire.cast
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: 'Xong từ có mục tiêu: Hỏa Long khạc cầu lửa'
-purpose: '"Khà!" ngắn và tiếng phụt lửa trầm'
+purpose: Khè họng của thú lớn, lửa bắt cháy dưới áp lực rồi gầm, cầu lửa lao ra xa; vang thung lũng thấp
 category: word-reward
 family: thuong
 source_class: shot
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 340
+  target_ms: 750
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 272
-  max_ms: 408
+  min_ms: 600
+  max_ms: 900
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [150, 900]
   music: null
@@ -87,15 +93,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Dragon short throaty spit with a deep fireball whoomph launch, no laser hiss, 350 ms
+  text: Large dragon throat huff into a pressurised flame ignition that roars, then a thick fireball whoosh travelling away, low valley echo tail, 750 ms
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, dragon fireball launch, a deep round whoomph of fire thrown forward, short and warm, close, dry, organic'
-    - 'B: TrackType: SFX, a dragon spits fire, a short throaty breath huff followed by a low fireball whoosh, close, dry, fantasy creature'
-    - 'C: Torch flame swung fast through the air, a single soft round fire whoosh launch, low and warm, short, recorded close outdoors'
-    - 'D: Large beast exhales a quick burst of flame, breathy rasp into a deep fire puff, short, warm, painterly fantasy forest'
+    - 'E: TrackType: SFX, a huge dragon spits a fireball, a short throaty growl-huff from a large creature, a pressurised burst of flame igniting and roaring, a thick whoosh rushing away into a forest valley, low distant echo'
+    - 'F: A big beast breathes out a fireball, deep raspy throat exhale, gas flame ignites under pressure with a hard roar, the fire rushes off into the distance, dark low valley reverberation, outdoor'
+    - 'G: TrackType: SFX, fantasy dragon fire attack, heavy chest rumble and throat hiss, blowtorch-like flame burst roaring, fireball flying away with a dense whoosh, echo off pine hills, powerful, organic'
+    - 'H: Flamethrower burst recorded outdoors in a wide valley, a deep animal huff before it, pressurised flame roar, thick moving whoosh fading away, long low echo, weighty'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +180,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: []
+    expected: [Fire]
     forbid: []
   loop: false
   stereo: false
@@ -185,7 +191,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Dragon short throaty spit with a deep fireball whoomph launch, no laser hiss, 350 ms
+  intent: Large dragon throat huff into a pressurised flame ignition that roars, then a thick fireball whoosh travelling away, low valley echo tail, 750 ms
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -202,4 +208,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #1 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: 'Lô 1 (24/10/2026): A, C hướng ''phụt tròn''; B, D hướng ''khạc có hơi thở'' (bảng phong cách mục 9 bước 2). Không viết chữ phủ định trong prompt: ''no birds'' của amb.forest từng sinh ra tiếng chim.'
+notes: 'Q6 (24/10): bốn phần theo ví dụ của chủ dự án: khè hoặc gầm họng ngắn của sinh vật lớn (chuẩn bị), lửa bắt dưới áp lực (phát), lửa gầm và cầu lửa lao xa với whoosh dày (thân), vang thung lũng, rừng thấp (đuôi). Dài 340 → 750 ms (catalog; Q6 đề xuất file 600–900 ms gồm vang sớm: đã chọn theo đề xuất, 750 ± 20 % đúng bằng 600–900 ms); bus world của game thêm vang chung cho đuôi dài. Khóa E–H thay A–D của lô 1 (A, C ''phụt tròn'', D ''fire puff'' bị Q6 bỏ; B ''close, dry'' trái luật đuôi). Âm phát sau mỗi từ: năng lượng 1–4 kHz chỉ ở đầu tiếng, đuôi dưới 1 kHz và thấp. Ghi chú trước Q6: Lô 1 (24/10/2026): A, C hướng ''phụt tròn''; B, D hướng ''khạc có hơi thở'' (bảng phong cách mục 9 bước 2). Không viết chữ phủ định trong prompt: ''no birds'' của amb.forest từng sinh ra tiếng chim.'

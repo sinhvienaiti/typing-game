@@ -5,9 +5,9 @@ schema: 1
 id: dragon.skyfire.cast
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: 'Thiên Hỏa (Alt + 2): khối lửa rơi'
-purpose: Rít rơi từ cao xuống
+purpose: 'Thiên Hỏa: khối lửa lớn rơi từ trời, tiếng ầm từ xa, lửa gầm và gió xé mạnh dần khi lao xuống'
 category: fx-other
 family: ban
 source_class: fire
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Falling fireball whistle from the sky, descending pitch, 900 ms
+  text: 'A huge fireball falling from the sky: distant rumble growing, roaring flame and rushing air getting closer and louder, 900 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a burning meteor falling from high above, deep rumble growing, roaring flames and violent rushing air coming closer, building tension'
+    - 'B: Large mass of fire plunging down through the air, heavy roar of flame, air tearing past, rising intensity toward impact, outdoor'
+    - 'C: TrackType: SFX, fantasy sky fire spell, thunder-like rumble in the clouds, then a blazing fireball diving down with a dense roaring whoosh that swells'
+    - 'D: Flaming boulder falling fast over a forest valley, crackling fire and air rush growing louder and closer, powerful, organic'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -162,7 +166,7 @@ critic:
     plays: null
     interval_ms: null
   ast:
-    expected: []
+    expected: [Fire]
     forbid: []
   loop: false
   stereo: false
@@ -173,7 +177,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Falling fireball whistle from the sky, descending pitch, 900 ms
+  intent: 'A huge fireball falling from the sky: distant rumble growing, roaring flame and rushing air getting closer and louder, 900 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -188,4 +192,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ hướng ''tiếng huýt rơi, cao độ đi xuống'' (kiểu hoạt hình). Đây là phần chuẩn bị và thân của đòn; phần phát và đuôi dài nằm ở dragon.skyfire.impact phát ngay sau, nên độ dài giữ 900 ms.'

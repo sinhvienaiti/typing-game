@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.shoot
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bắn tên, gai (E11)
-purpose: Dây bật, gai rít
+purpose: 'Yêu Rêu Cung bắn: kéo dây kẽo kẹt, dây bật, gai bay rít ra xa; vang rừng ngắn'
 category: shot
 family: ban
 source_class: shot
@@ -81,11 +81,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Small bow string twang and thorn arrow whistle, 300 ms
+  text: 'Moss archer shoots: a creaking bow draw, a string snap and a thorn arrow hissing away into the forest, short echo, 300 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small bow drawn with a creak, string released with a snap, thorn arrow whizzing away, short forest echo'
+    - 'B: Little wooden bow firing, tight string twang, arrow flight hiss fading into the distance, brief outdoor reverb'
+    - 'C: TrackType: SFX, archer shot, quick creak, crisp release, projectile hissing as it travels away, light, organic'
+    - 'D: Thorn dart shot from a bark bow, sharp pluck and fast airy whoosh moving away, short echo in a pine forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -169,7 +173,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Small bow string twang and thorn arrow whistle, 300 ms
+  intent: 'Moss archer shoots: a creaking bow draw, a string snap and a thorn arrow hissing away into the forest, short echo, 300 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -184,4 +188,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): kéo dây (chuẩn bị), dây bật (phát), gai bay xa (thân), vang rừng ngắn (đuôi).'

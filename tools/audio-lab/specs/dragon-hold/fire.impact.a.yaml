@@ -5,9 +5,15 @@ schema: 1
 id: fire.impact.a
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Cầu lửa trúng (biến thể 1)
-purpose: Phụt lửa trầm, thân tròn
+purpose: 'Lửa bùng có thân khi trúng: lửa bùng, than nổ lách tách, mảnh văng; vang rừng thấp, ngắn'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 340
+  target_ms: 600
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 272
-  max_ms: 408
+  min_ms: 480
+  max_ms: 720
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [120, 600]
   music: null
@@ -84,15 +90,15 @@ loudness:
     weight: medium
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Fireball impact, soft deep burst, low-passed flame whoomph, small crackle, 350 ms
+  text: 'Fireball impact: a flame burst flaring out on contact, crackling embers and scattering debris, short low forest echo, 600 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, fireball impact, soft deep burst of flame, low-passed whoomph, small crackle, short, close, dry'
-    - 'B: A ball of fire hitting the ground, rounded low thump and a quick flame whoosh puff, a few ember crackles, short decay, no explosion debris'
-    - 'C: TrackType: SFX, magic fire spell impact, warm deep flame burst, muffled boom, crackling embers fading quickly, fantasy, organic'
-    - 'D: Torch fire burst, a gas flame ignition whoomph, low and round, short, small crackle tail, recorded close outdoors'
+    - 'E: TrackType: SFX, fireball impact, a fierce flame burst flaring outward on contact, crackling embers and small burning debris scattering, a short low echo in a pine forest, organic'
+    - 'F: A ball of fire slams into the ground and flares up, roaring flame burst, sharp ember crackle, bits of burning wood and dirt scattering, brief dark outdoor reverb'
+    - 'G: TrackType: SFX, magic fire spell hits a target, hard flame flare with a quick roar, sizzling embers and splinters spraying, short warm forest echo, close and powerful'
+    - 'H: Torch fire bursting against a tree trunk, flames bursting out with force, crackling embers, scattered sparks and bark fragments, low short reverberation outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -183,7 +189,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Fireball impact, soft deep burst, low-passed flame whoomph, small crackle, 350 ms
+  intent: 'Fireball impact: a flame burst flaring out on contact, crackling embers and scattering debris, short low forest echo, 600 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -201,4 +207,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #2 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'
+notes: 'Q6 (24/10): thay hướng ''phụt trầm, thân tròn''. Ba phần: lửa bùng (phát), than nổ lách tách và mảnh văng (thân), vang rừng thấp, ngắn (đuôi); phần chuẩn bị nằm ở fire.cast. Cấm nghe như ''một cục rơi xuống''. Dài 340 → 600 ms. Khóa E–H thay A–D của lô 0b và lô 1 (B ''rounded low thump ... puff'' là thân của công thức b1). Âm phát sau mỗi từ có mục tiêu: đuôi thấp để lặp 20 lần không mệt. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'

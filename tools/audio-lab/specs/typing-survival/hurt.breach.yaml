@@ -5,9 +5,15 @@ schema: 1
 id: hurt.breach
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Quái chạm vạch đáy
-purpose: 'Thân trạm rung: tiếng nổ trầm, thép rên, còi báo hai nốt'
+purpose: 'Thân trạm rung: tiếng nổ trầm có thân, thép rên, còi báo hai nốt ngắn; vang dội dọc hành lang thép'
 category: warning
 family: nen
 source_class: warning-stinger
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 600
+  target_ms: 800
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 480
-  max_ms: 720
+  min_ms: 640
+  max_ms: 960
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [250, 2000]
   music: null
@@ -83,14 +89,14 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: 'Station hull breach: deep boom, groaning stressed steel and a short two-tone klaxon, 600 ms, industrial, ominous.'
+  text: 'Station hull breach: a deep boom with body, groaning stressed steel and a short two-tone klaxon, echoing down a steel corridor, 800 ms, industrial, ominous.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, station hull breach, deep boom, groaning stressed steel, ominous, close'
-    - 'B: Massive steel hull cracks open, deep heavy boom and metal groan, industrial disaster, short'
-    - 'C: TrackType: SFX, space station wall ruptures, deep impact boom with creaking twisted metal, dark, ominous'
+    - 'D: TrackType: SFX, station hull breach, deep boom with a heavy body, stressed steel groaning and creaking, rumble echoing down a long steel corridor, ominous'
+    - 'E: Massive steel wall cracking under impact, powerful low blast, metal moaning and twisting, long industrial hall reverberation'
+    - 'F: TrackType: SFX, space station wall ruptures, deep impact with weight, shuddering structure, creaking girders, dark metallic echo fading slowly'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: 'Station hull breach: deep boom, groaning stressed steel and a short two-tone klaxon, 600 ms, industrial, ominous.'
+  intent: 'Station hull breach: a deep boom with body, groaning stressed steel and a short two-tone klaxon, echoing down a steel corridor, 800 ms, industrial, ominous.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +197,4 @@ origin:
     present: true
     section: 6. Tuyến bị đánh, cảnh báo, kết trận
   plan: ['AUDIO_PIPELINE §9 #20 (lô 1)']
-notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng còi hai nốt tổng hợp (440/330 Hz, vuông lọc thấp, mỗi nốt 90 ms) trong công thức.'
+notes: 'Q6 (24/10): phần va chạm có thân (thép rên) và đuôi vang hành lang; còi hai nốt vẫn tổng hợp trong công thức (báo nguy cố định). Dài 600 → 800 ms. Khóa D–F thay A–C của lô 1 (đều ''close'' hoặc ''short'', không có đuôi). Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân Stable Audio 3, cộng còi hai nốt tổng hợp (440/330 Hz, vuông lọc thấp, mỗi nốt 90 ms) trong công thức.'

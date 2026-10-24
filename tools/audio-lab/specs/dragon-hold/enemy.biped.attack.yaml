@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.attack
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chém cận chiến
-purpose: Chém "xoẹt"
+purpose: 'Yêu Rêu chém: vung gươm gỗ, chém "xoẹt" trúng giòn; vang rừng ngắn'
 category: fx-other
 family: trung
 source_class: foley-other
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Quick wooden blade slash whoosh, 250 ms
+  text: 'Moss goblin melee strike: a quick wooden blade swing, a sharp slash landing, short forest echo, 250 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small creature slashes with a wooden blade, fast swing whoosh, sharp cutting hit, brief rustle, short forest echo'
+    - 'B: Quick wooden sword swipe, airy swish into a crisp chopping strike, short outdoor reverberation'
+    - 'C: TrackType: SFX, melee attack, light weapon swing and snappy slash impact, wood and leaves, small, short echo'
+    - 'D: Branch-like blade whipped through the air and striking bark, quick swish and crack, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -178,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Quick wooden blade slash whoosh, 250 ms
+  intent: 'Moss goblin melee strike: a quick wooden blade swing, a sharp slash landing, short forest echo, 250 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -193,4 +197,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): vung (chuẩn bị), chém trúng (phát), lá xào (thân), vang rừng ngắn (đuôi); quái nhỏ nên âm nhỏ.'

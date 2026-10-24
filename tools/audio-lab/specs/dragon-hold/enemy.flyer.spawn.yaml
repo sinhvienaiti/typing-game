@@ -5,9 +5,9 @@ schema: 1
 id: enemy.flyer.spawn
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Ong Gai xuất hiện
-purpose: Kêu cao, vo ve
+purpose: 'Ong Gai xuất hiện: tiếng cánh vo ve dâng lại gần, kêu cao lách cách; vang rừng ngắn'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Giant wasp high chitter and wing buzz swell, 350 ms
+  text: 'Giant thorn wasp appears: wing buzz swelling in, a high chitter, short forest echo, 350 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a giant wasp arrives, wing buzz swelling closer, sharp high chitter, short forest echo'
+    - 'B: Large insect flying in, loud droning wings rising, clicking mandibles, brief outdoor reverb'
+    - 'C: TrackType: SFX, fantasy insect creature vocal, buzzing wings, rasping chitter, small, short echo'
+    - 'D: Hornet-like creature hovering into view, rising buzz, aggressive clicks, short tail in a pine forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Giant wasp high chitter and wing buzz swell, 350 ms
+  intent: 'Giant thorn wasp appears: wing buzz swelling in, a high chitter, short forest echo, 350 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): cánh dâng (chuẩn bị), kêu (phát), vo ve (thân), vang rừng ngắn (đuôi).'

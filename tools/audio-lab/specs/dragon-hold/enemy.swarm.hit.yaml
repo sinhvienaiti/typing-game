@@ -5,9 +5,9 @@ schema: 1
 id: enemy.swarm.hit
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bị trúng
-purpose: Vỏ "rắc" li ti
+purpose: 'Kiến Gai trúng: vỏ li ti nứt "rắc", lá khẽ xào'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,14 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Tiny chitin tick, 140 ms
+  text: 'Tiny chitin hit: a very small crisp shell crack with a brief leaf rustle, 140 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, tiny insect struck, very small crisp shell crack, quick leaf rustle'
+    - 'B: Little beetle hit, sharp tiny crunch, brief scratchy tail'
+    - 'C: TrackType: SFX, small bug impact, brittle tick and crackle, tiny'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Tiny chitin tick, 140 ms
+  intent: 'Tiny chitin hit: a very small crisp shell crack with a brief leaf rustle, 140 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): trúng rất nhỏ: nứt (phát), xào lá (thân, đuôi rất ngắn).'

@@ -5,9 +5,9 @@ schema: 1
 id: general.g01.death
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: G01 chết
-purpose: Ngã nặng, tù và tắt, đốm sáng lớn
+purpose: 'G01 chết: rên, ngã nặng, giáp gỗ vỡ, tù và tắt dần, đốm sáng lớn bay lên; vang thung lũng dài'
 category: death-big
 family: chet
 source_class: creature
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Large creature collapse, dying war horn, big rising spirit chime, 1.8 s
+  text: Large creature collapse with a dying groan, the war horn fading out, a big rising spirit chime, long valley echo, 1.8 s
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a goblin warlord falls, dying groan, heavy body crashing to the ground with armour rattling, war horn fading, big rising spirit chime, long forest valley echo'
+    - 'B: Large creature collapsing, wood and bark armour crunching, a last horn blast dying away, shimmering chime rising, long outdoor reverb'
+    - 'C: TrackType: SFX, boss death, defeated groan, heavy fall, horn sinking, magical chime swell, epic, long echo'
+    - 'D: Big mossy brute toppling over, branches snapping, horn dying out, bright spirit bells ascending, reverberation rolling across hills'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -177,7 +181,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Large creature collapse, dying war horn, big rising spirit chime, 1.8 s
+  intent: Large creature collapse with a dying groan, the war horn fading out, a big rising spirit chime, long valley echo, 1.8 s
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -192,4 +196,4 @@ origin:
     present: true
     section: 5.5 Tướng G01 Yêu Rêu Cầm Cờ (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): tướng lớn: rên (chuẩn bị), ngã (phát), tù và tắt (thân), đốm sáng và vang thung lũng dài (đuôi).'

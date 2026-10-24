@@ -5,9 +5,9 @@ schema: 1
 id: dragon.down
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: 'Thua: Hỏa Long kiệt sức'
-purpose: Gầm dài rơi xuống, lửa tắt
+purpose: 'Hỏa Long kiệt sức: tiếng rên dài rơi xuống của thú lớn, thân nặng đổ xuống, lửa tắt; vang thung lũng dài'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Exhausted dragon long falling groan, fire dying out, heavy body settling, 1.6 s
+  text: 'Exhausted dragon: a long falling groan from a huge creature, heavy body collapsing onto earth, fire guttering out, long low valley echo, 1.6 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a huge dragon collapses, a long weary groan sinking in pitch, heavy body falling onto the ground with scales scraping, flames dying with a soft hiss, long low valley echo'
+    - 'B: Giant beast slowly going down, deep tired moan, the ground shaking under a heavy body, embers fizzling out, dark reverberation across hills'
+    - 'C: TrackType: SFX, fantasy dragon defeat, strained fading roar, massive body slumping onto rock and dirt, a last breath of fire hissing out, wide forest echo, sad and weighty'
+    - 'D: Large creature exhaling its last strength, long low groan, heavy collapse with dust and stones, crackling fire dying away, long outdoor reverb tail'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -178,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Exhausted dragon long falling groan, fire dying out, heavy body settling, 1.6 s
+  intent: 'Exhausted dragon: a long falling groan from a huge creature, heavy body collapsing onto earth, fire guttering out, long low valley echo, 1.6 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -193,4 +197,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): sinh vật lớn: rên (chuẩn bị), đổ xuống (phát), lửa tắt (thân), vang thung lũng dài (đuôi). Độ dài giữ 1,6 s.'

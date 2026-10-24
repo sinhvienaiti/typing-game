@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.spawn
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Thú bốn chân xuất hiện
-purpose: Khịt rồi gầm
+purpose: 'Thú bốn chân xuất hiện: khịt mũi ướt rồi gầm gừ trầm, móng cào lá; vang rừng ngắn'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,11 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Wolf-boar snort followed by a low growl, 400 ms
+  text: 'Wolf-boar appears: a wet snort, then a low threatening growl, short forest echo, 400 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a wolf-boar beast snorts and growls as it appears, wet snort, low threatening growl, short forest echo'
+    - 'B: Large wild boar and wolf mix, sniffing snort into a rumbling snarl, paws scraping leaves, brief outdoor reverb'
+    - 'C: TrackType: SFX, fantasy beast vocal, heavy snort, deep throaty growl, organic, short echo in a pine forest'
+    - 'D: Wolf growling low after a sharp sniff, gravelly snarl, small dirt scuff, short low tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -174,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Wolf-boar snort followed by a low growl, 400 ms
+  intent: 'Wolf-boar appears: a wet snort, then a low threatening growl, short forest echo, 400 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -189,4 +193,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): khịt (chuẩn bị), gầm gừ (phát, thân), vang rừng ngắn (đuôi); thú vừa nên âm vừa.'

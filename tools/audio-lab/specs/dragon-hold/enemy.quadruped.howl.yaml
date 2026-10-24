@@ -5,9 +5,9 @@ schema: 1
 id: enemy.quadruped.howl
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Tru gọi bầy (dành sẵn cho kỹ năng E18)
-purpose: Sói tru ngắn
+purpose: 'Sói Mục tru gọi bầy: hít vào, tiếng tru dâng lên rồi hạ; vang rừng mục xa'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -82,15 +82,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Short eerie wolf howl, rotten forest, 1 s
+  text: 'Wolf howl calling the pack: a breath in, one eerie howl rising then falling, echoing through a rotten forest, 1 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, a short eerie wolf howl, a single call rising then falling, in a dark rotten forest, close, dry, no music'
     - 'B: Animal vocalization, a lone wolf howling once, brief mournful howl, about one second, outdoor night forest, slight distance'
-    - 'C: TrackType: SFX, monstrous wolf-beast howl, deep and raspy, short, eerie, fantasy creature, dry'
-    - 'D: Field recording of a wild wolf howl, short single howl with a growly start, dark woods, natural, no reverb'
+    - 'E: TrackType: SFX, a lone wolf howls to call its pack, breath in, an eerie howl rising and falling, echo drifting through a dark rotten forest'
+    - 'F: Animal vocalization, a large wolf-beast howling once with a raspy start, long mournful call, night forest reverberation, slight distance'
+    - 'G: TrackType: SFX, monstrous wolf howl, deep and haunting, outdoor, echoing off trees in a misty valley'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -178,7 +178,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Short eerie wolf howl, rotten forest, 1 s
+  intent: 'Wolf howl calling the pack: a breath in, one eerie howl rising then falling, echoing through a rotten forest, 1 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -195,4 +195,4 @@ origin:
   plan:
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: 'Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'
+notes: 'Q6 (24/10): giữ B (bản anh chọn B s1004 3/5 ở lô 0b, lô 1 dùng B); bỏ A, C, D (''dry'', ''no music'', ''no reverb'' trái luật đuôi vang và luật không viết chữ phủ định); thêm E–G. Q3: tiếng gọi trọn lớn dần tới 150 ms. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên.'

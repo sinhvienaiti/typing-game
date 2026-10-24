@@ -86,7 +86,10 @@ prompt:
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small goblin preparing to strike, short grunt of effort, wooden bark armour plates rattling, leaves swishing as the arm swings back'
+    - 'B: Creature raising a weapon, quick breath in, light wooden plates clicking together, a small swish of the arm'
+    - 'C: Bark plates and twigs clattering as a little forest creature draws back to hit, effort grunt, short'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -193,4 +196,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đã soát. Đây là phần chuẩn bị của đòn (enemy.biped.attack là phần phát), prompt cũ không có chữ cấm nên giữ; thêm 3 biến thể có hơi gằn để nghe ra quái sắp đánh.'

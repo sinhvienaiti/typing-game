@@ -5,9 +5,16 @@ schema: 1
 id: arrow-fire
 game: typing-defense
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
+  - prompt.suffix
 when: Tháp Cung bắn (tối đa 4 lần mỗi giây)
-purpose: Nhẹ, nền
+purpose: 'Nhẹ, nền: cung tre kẽo kẹt, dây bật, mũi tên vút đi xa; vang làng ngắn'
 category: shot
 family: ban
 source_class: shot
@@ -23,11 +30,11 @@ playback:
     per_s: 4
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 80
+  target_ms: 200
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 64
-  max_ms: 96
+  min_ms: 160
+  max_ms: 240
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [80, 350]
   music: null
@@ -82,15 +89,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: A soft twang of a small bamboo bow string, very short, 0.08 s, quiet.
-  suffix: Single isolated sound, dry, no music, no speech, no reverb tail beyond the sound, starts instantly, clean end, 48 kHz.
+  text: 'A small bamboo bow shot: a soft creak, a quick string snap, the arrow hissing away over the fields, short village echo, 0.2 s.'
+  suffix: null
   style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
   sweetener: tre, chuông đồng và đàn tranh
   variants:
-    - 'A: TrackType: SFX, a soft twang of a small bamboo bow string, very short, quiet, close, dry'
-    - 'B: A small wooden bow shoots an arrow, a short dull string thump with a tiny swish, quiet, dry outdoor foley'
-    - 'C: TrackType: SFX, light bowstring snap of a little hunting bow, soft woody thrum, very short, close, dry'
-    - 'D: A taut cord plucked once on a bamboo frame, short low thrum, muffled, quiet, dry'
+    - 'E: TrackType: SFX, a small bamboo bow shoots, soft creak, quick string snap, light arrow hissing away over rice fields, short village echo'
+    - 'F: Little wooden bow released outdoors, gentle twang, airy whizz of an arrow flying off, brief open-air reverb, quiet'
+    - 'G: TrackType: SFX, archer tower shot, tight bowstring pluck with a woody body, arrow swish travelling away, small, short echo'
+    - 'H: Bamboo bow and reed arrow, light draw and release, quick string snap, swish into the distance, soft outdoor tail'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -183,7 +190,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: A soft twang of a small bamboo bow string, very short, 0.08 s, quiet.
+  intent: 'A small bamboo bow shot: a soft creak, a quick string snap, the arrow hissing away over the fields, short village echo, 0.2 s.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -200,4 +207,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #24 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
-notes: 'Lô 1 (24/10/2026, BATCH1_BRIEF #24): hai hướng cho bảng phong cách (S5): A, C ''dây ngân'' (twang); B, D ''bật dây trầm'' (thump).'
+notes: 'Q6 (24/10): kéo (chuẩn bị), dây bật (phát), tên bay xa (thân), vang làng ngắn (đuôi). Cung tre nhỏ nên âm nhỏ; phát tới 4 lần mỗi giây nên đuôi ngắn. Dài 0,08 → 0,2 s. Không ghép đuôi chung của §1 (prompt.suffix sửa tay = null). Khóa E–H thay A–D của lô 1 (B, D ''dull string thump'', ''low thrum, muffled'' là tiếng trầm đứng riêng; A, C ''very short, dry''). Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF #24): hai hướng cho bảng phong cách (S5): A, C ''dây ngân'' (twang); B, D ''bật dây trầm'' (thump).'

@@ -5,9 +5,15 @@ schema: 1
 id: impact.multi
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Một đòn chữ trúng 3 quái trở lên trong 45 ms
-purpose: Một tiếng nặng thêm lách tách nhiều chỗ
+purpose: 'Một đòn chữ trúng 3 quái trở lên: lửa bùng nặng nhiều chỗ, than lách tách tản rộng, mảnh văng; vang rừng'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 480
+  target_ms: 700
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 384
-  max_ms: 576
+  min_ms: 560
+  max_ms: 840
   basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
   category_range_ms: [120, 600]
   music: null
@@ -84,11 +90,15 @@ loudness:
     weight: heavy
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Heavy layered fire impact hitting several targets, sub thump and scattered crackles, 500 ms
+  text: 'Heavy fire impact spreading over several targets: layered flame bursts with weight, wide scattered ember crackles and debris, low forest echo, 700 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a fire strike hitting several targets at once, layered heavy flame bursts, crackling embers scattering left and right, burning debris, low forest echo'
+    - 'B: Several fireballs landing almost together, overlapping roaring flame flares with weight, wide ember crackle and splinters, dark outdoor reverberation'
+    - 'C: TrackType: SFX, spreading fire blast, one deep flame burst fanning out into many small flare-ups and crackles, debris, short valley echo, powerful, organic'
+    - 'D: Wave of fire sweeping over a group of creatures, heavy whooshing flare, multiple crackling bursts, scattered burning bits, low reverberant tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +185,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Heavy layered fire impact hitting several targets, sub thump and scattered crackles, 500 ms
+  intent: 'Heavy fire impact spreading over several targets: layered flame bursts with weight, wide scattered ember crackles and debris, low forest echo, 700 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +200,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''sub thump'' (một tiếng trầm); lửa bùng nhiều lớp có thân, lách tách tản rộng, đuôi vang rừng. Dài 480 → 700 ms.'

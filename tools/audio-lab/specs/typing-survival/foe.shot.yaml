@@ -5,9 +5,9 @@ schema: 1
 id: foe.shot
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Lính bắn vào tuyến
-purpose: 'Cảnh báo: cầu plasma nạp và phụt ra, nghe là biết có thứ đang bay tới'
+purpose: 'Cảnh báo: cầu plasma nạp rít lên, bắn ra có lực rồi lao tới tuyến; vang hành lang thép ngắn'
 category: shot
 family: ban
 source_class: shot
@@ -81,11 +81,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Alien plasma blob charging and spitting out, rising buzzy whoosh, warning-like, 250 ms, sci-fi industrial.
+  text: Alien plasma blob charging with a rising buzz, then spat out with force and rushing toward you, short steel corridor echo, 250 ms, sci-fi industrial.
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, alien plasma shot, quick rising charge buzz, forceful spit of energy, sizzling whoosh rushing closer, short echo in a steel corridor'
+    - 'B: Creature spitting a glob of plasma, gurgling charge, hard release, buzzing projectile approaching, metallic hall reverberation'
+    - 'C: TrackType: SFX, organic energy projectile fired, wet crackle charging up, sharp burst, warbling whoosh flying in, industrial sci-fi, short tail'
+    - 'D: Acidic plasma bolt launched by a beast, rising hum, snap of release, fizzing rush toward the listener, short steel room echo'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -170,7 +174,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Alien plasma blob charging and spitting out, rising buzzy whoosh, warning-like, 250 ms, sci-fi industrial.
+  intent: Alien plasma blob charging with a rising buzz, then spat out with force and rushing toward you, short steel corridor echo, 250 ms, sci-fi industrial.
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -185,4 +189,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: []
-notes: ''
+notes: 'Q6 (24/10): nạp (chuẩn bị), bắn ra (phát), lao tới (thân), vang hành lang ngắn (đuôi).'

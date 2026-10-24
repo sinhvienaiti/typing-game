@@ -5,9 +5,9 @@ schema: 1
 id: dragon.roar
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Long Hống (Từ Khẩn)
-purpose: Gầm lớn, sóng gió đẩy ra
+purpose: 'Long Hống: hít sâu, tiếng gầm lớn của rồng, sóng khí đẩy ra; vang thung lũng'
 category: creature
 family: sinh-vat
 source_class: creature
@@ -85,11 +85,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Huge dragon roar with a pushing shockwave rumble, 1.3 s
+  text: 'Huge dragon roar: a deep intake of breath, a massive roar with a pushing shockwave of air, echoing across the valley, 1.3 s'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a giant dragon roars, deep breath in, an enormous throaty roar, a blast of air pushing outward, the roar echoing across a forest valley'
+    - 'B: Huge beast bellowing, layered lion and crocodile roar pitched low, air rushing and leaves shaking, long reverberation off distant hills'
+    - 'C: TrackType: SFX, fantasy dragon war cry, chest rumble building into a powerful roar, shockwave whoosh, wide valley echo, epic, organic'
+    - 'D: Massive creature roaring outdoors, deep growl rising into a full roar, gusting air, tail of echoes rolling through a pine forest'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -178,7 +182,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Huge dragon roar with a pushing shockwave rumble, 1.3 s
+  intent: 'Huge dragon roar: a deep intake of breath, a massive roar with a pushing shockwave of air, echoing across the valley, 1.3 s'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -193,4 +197,4 @@ origin:
     present: true
     section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): hít (chuẩn bị), gầm (phát), sóng khí (thân), vang thung lũng (đuôi). Q3: tiếng gọi trọn được lớn dần tới 150 ms. Độ dài giữ 1,3 s.'

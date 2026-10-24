@@ -5,9 +5,9 @@ schema: 1
 id: unit.hit
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Lính hoặc nhà bị đánh
-purpose: Khiên gỗ "cộp"
+purpose: 'Lính hoặc nhà bị đánh: đòn trúng khiên gỗ "cộp" có thân gỗ; vang ngắn'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Wooden shield block knock, 180 ms
+  text: 'Wooden shield blocking a blow: a solid knock with a woody body, short forest echo, 180 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a wooden shield takes a hit, solid knock with a resonant woody body, short forest echo'
+    - 'B: Club striking a thick wooden shield, hard crack and plank resonance, brief outdoor reverb'
+    - 'C: TrackType: SFX, block impact, sturdy wood clack, quick rattle, short echo'
+    - 'D: Blow landing on a wooden wall, dense knock and creak, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Wooden shield block knock, 180 ms
+  intent: 'Wooden shield blocking a blow: a solid knock with a woody body, short forest echo, 180 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.7 Hỗ trợ (bus `units`, P4)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): trúng (phát), thân gỗ (thân), vang ngắn (đuôi).'

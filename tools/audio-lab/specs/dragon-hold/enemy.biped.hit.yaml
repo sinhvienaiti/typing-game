@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.hit
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Bị lính đánh trúng
-purpose: Lá xào, thịch
+purpose: 'Yêu Rêu trúng đòn: cú đánh giòn vào giáp vỏ cây, lá vụn bay; vang rừng ngắn'
 category: hit-small
 family: trung
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Leafy creature hit, dry leaves rustle with a soft thud, 200 ms
+  text: 'Leafy creature hit: a crisp strike on bark armour, dry leaves bursting and rustling, short forest echo, 200 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small forest creature hit, crisp strike on bark armour, dry leaves scattering, short rustle, brief forest echo'
+    - 'B: Stick striking a bundle of dry leaves and bark, sharp crack and leafy burst, short outdoor reverb'
+    - 'C: TrackType: SFX, creature impact, woody snap with a leafy body, small, quick, short echo'
+    - 'D: Blow landing on a moss-covered creature, crunch of bark and leaves, brief rustling tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Leafy creature hit, dry leaves rustle with a soft thud, 200 ms
+  intent: 'Leafy creature hit: a crisp strike on bark armour, dry leaves bursting and rustling, short forest echo, 200 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''soft thud'' (tiếng trầm đứng riêng). Trúng nhỏ: không có phần chuẩn bị; đuôi ngắn.'

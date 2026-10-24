@@ -5,9 +5,15 @@ schema: 1
 id: foe.shot.down
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Xung bắn rơi đạn của lính
-purpose: Tiếng bốp kim loại nhỏ
+purpose: 'Xung bắn rơi đạn của lính: viên đạn vỡ giữa không trung, tia lửa nhỏ tóe, mảnh kim loại leng keng; vang ngắn'
 category: hit-small
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 90
+  target_ms: 150
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 72
-  max_ms: 108
+  min_ms: 120
+  max_ms: 180
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [50, 150]
   music: null
@@ -84,11 +90,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: 'Small projectile shot down mid-air: short metallic pop with a tiny spark, 90 ms.'
+  text: 'Small projectile shot down mid-air: a short crisp metallic crack, a tiny spark burst and fragments tinkling, short steel corridor echo, 150 ms.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, small projectile shot down mid-air, crisp metallic crack, tiny burst of sparks, fragments tinkling, short echo in a steel corridor'
+    - 'B: Bullet hitting an incoming plasma glob, sharp snap and sizzle, small debris scattering, brief metallic reverberation'
+    - 'C: TrackType: SFX, interception hit, quick bright crack with a small spark crackle, tiny shards, short steel room tail'
+    - 'D: Small energy bolt destroyed in flight, crisp tick and fizz, little fragments bouncing, short ringing echo'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -176,7 +186,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: 'Small projectile shot down mid-air: short metallic pop with a tiny spark, 90 ms.'
+  intent: 'Small projectile shot down mid-air: a short crisp metallic crack, a tiny spark burst and fragments tinkling, short steel corridor echo, 150 ms.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -191,4 +201,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: []
-notes: ''
+notes: 'Q6 (24/10): bỏ ''metallic pop'' (pop bị cấm). Nứt vỡ (phát), tia lửa và mảnh (thân), vang ngắn (đuôi). Dài 90 → 150 ms để có chỗ cho đuôi ngắn (vẫn trong nhóm Trúng nhỏ 50–150 ms).'

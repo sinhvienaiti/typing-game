@@ -5,9 +5,9 @@ schema: 1
 id: trap.spikes.trigger
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Gai Chông đâm
-purpose: Gai trồi "xoẹt"
+purpose: 'Gai Chông đâm: đất nứt, gai gỗ trồi "xoẹt" lên đâm trúng; vang rừng ngắn (không nổ)'
 category: hit-heavy
 family: 'no'
 source_class: impact
@@ -84,11 +84,15 @@ loudness:
     weight: medium
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Sharp wooden spikes thrusting up from the ground, quick stab, 250 ms
+  text: 'Wooden spikes thrusting up: soil cracking, sharp stakes stabbing up fast and hitting, short forest echo, 250 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
-  variants: []
+  variants:
+    - 'A: TrackType: SFX, a spike trap springs, soil cracking, sharp wooden stakes stabbing up fast, piercing hit, short forest echo'
+    - 'B: Wooden spikes shooting out of the ground, dirt crunch, swift stab and splinter crackle, brief outdoor reverb'
+    - 'C: TrackType: SFX, trap trigger, earth crack, quick wooden thrust, crisp impact, organic, short echo'
+    - 'D: Sharpened stakes snapping upright through soil and leaves, sharp swish and crack, short tail outdoors'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -175,7 +179,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Sharp wooden spikes thrusting up from the ground, quick stab, 250 ms
+  intent: 'Wooden spikes thrusting up: soil cracking, sharp stakes stabbing up fast and hitting, short forest echo, 250 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -190,4 +194,4 @@ origin:
     present: true
     section: 5.6 Bẫy (bus `traps`, P4)
   plan: []
-notes: ''
+notes: 'Q6 (24/10): đất nứt (chuẩn bị), gai đâm (phát), dăm gỗ (thân), vang rừng ngắn (đuôi). Không nổ (§8.1).'
