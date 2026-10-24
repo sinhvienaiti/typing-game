@@ -127,10 +127,22 @@ Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome c
   - Chrome trong WSL chỉ có SwiftShader: dùng cho kiểm chức năng, không dùng để đo hiệu năng.
 - ImageMagick 7.1.2-34 (`magick`): đã cài 24/10 từ bản phát hành chính thức trên GitHub (AppImage, giải nén sẵn), ở `~/.local/bin/magick`. `local-env.sh` đưa `~/.local/bin` vào `PATH`. `td_rig_review.py` dùng nó để ghép bảng ảnh duyệt rig.
 
-### D. Mode tu tiên chống thú triều (mới, 24/10)
-- Tài liệu đề xuất của Codex: `TU_TIEN_TYPING_SYSTEMS_AND_5_COMBAT_OPTIONS_V2_2026-10-24.md` ở gốc repo.
-- Video tham khảo QCBH: file `.mp4` ở gốc repo, không đưa vào Git.
-- Bản đánh giá nhiều agent: `docs/games/tu-tien/`, gồm `DANH_GIA_2026-10-24.md` và `analysis/01-08`.
+### D. Game tu tiên chống thú triều (mới, 24/10)
+- **Đã xong: đánh giá** `docs/games/tu-tien/DANH_GIA_2026-10-24.md` (đọc trước), gồm 7 bản phân tích và 1 bản phản biện ở `analysis/`. Bản chụp đề xuất Codex nằm ở `source/`. Video QCBH ở gốc repo, không vào Git.
+- **Kết luận:** nên làm, dưới dạng **game mới** `games/tu-tien` (cổng 3008), không phải mode của Rồng Giữ Ải.
+  - Ba điểm mới so với các game hiện có: nhân vật tự đi trên sân, gõ vào thanh kỹ năng "Bàn Quyết" chứ không gõ lên từng con quái, và chơi đội 2–3 người.
+  - Ngoài trận chỉ có 4 hệ lâu dài: cảnh giới, công pháp, pháp bảo, Thư Lâu.
+  - Dùng 3 loại tiền. Sơn Môn là một màn tĩnh 4 điểm.
+- **MVP** (khoảng 10–14 tuần):
+  - Solo, có thể thêm 2 bot.
+  - 1 chương = 1 ải.
+  - 2 trường phái (Kiếm, Thổ thể), 2 cảnh giới.
+  - Có Tĩnh Tu; chỉ Typing.
+- **Chờ chủ dự án:**
+  - Đồng ý bắt đầu.
+  - Chọn hướng hình (lai GLB và sprite) sau buổi A/B có số đo. Đây là điểm duy nhất không tự làm theo đề xuất.
+  - Các câu khác ở mục 8 của file đánh giá đã có đề xuất.
+- **Bước kế khi được đồng ý:** M0 Canon (viết `docs/games/tu-tien/00-canon.md`, 2–3 ngày), rồi M0a hộp xám, song song với bản thử Tĩnh Tu.
 
 ## 7. Quay về Mac mini M4
 
