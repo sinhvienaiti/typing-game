@@ -215,20 +215,40 @@ Chi tiết từng id, độ dài và việc của lô 1c: [`Q6_REWRITE_2026-10-2
   - 54 id viết lại theo bốn phần: purpose, prompt.text, prompt.variants, notes ("Q6 (24/10)"). Đường dẫn đã sửa ghi vào `manual_fields`.
   - 12 id soát và giữ thiết kế, chỉ bỏ biến thể có chữ cấm hoặc chữ phủ định:
     - ba tiếng lên đòn của quái;
-    - các bậc trúng của Tuyến Cuối, vì đuôi là lớp dùng chung `hit.tail` và sub là `hit.sub`;
+    - các bậc trúng của Tuyến Cuối;
     - `gun.xung` và hai lớp loop, tail của nó;
     - `gun.tia.pulse`.
+  - **Sai, đã sửa ở lượt sau review:** lượt này giữ các bậc trúng với lý do "đuôi là lớp dùng chung `hit.tail`, sub là `hit.sub`, do mã ghép". Mã game không ghép lớp nào: `theme-audio.ts` phát một tiếng cho mỗi bậc. Ba tiếng lên đòn cũng không có đuôi trong không gian (luật 1). Xem "Q6: sửa sau review" bên dưới.
   - Biến thể Q6 dùng khóa mới, không dùng lại khóa cũ, để tên ứng viên mới không trùng tên ứng viên lô 0b, lô 1. Chỉ giữ biến thể cũ đã hợp Q6, ví dụ howl B là bản anh chọn.
   - 4 id không phải âm hành động chỉ thay chữ cấm: `type.miss`, `ui.deny`, `trap.spikes.arm`, `key.bad`.
-- **Danh sách âm của ba game** (`M0_SOUND_LIST.md`, hai `THEME_SOUND_LIST.md`) ghi cùng cảm giác, prompt và độ dài. `pnpm audio:specs generate --check` cho 149/149 thẻ "giữ nguyên".
+- **Danh sách âm của ba game** (`M0_SOUND_LIST.md`, hai `THEME_SOUND_LIST.md`) ghi cùng cảm giác, prompt và độ dài. Lệnh `specs generate --check` (mã thật của Audio Lab, chạy bằng Python hệ thống của máy Dell qua `common/launch.py`, không qua `pnpm` hay venv) cho 149/149 thẻ có sẵn "giữ nguyên", mã thoát 1 vì 14 id S1 của Tuyến Cuối chưa có thẻ (có từ trước).
 - **Độ dài.**
   - `fire.cast` 340 → 750 ms: 750 ± 20 % đúng bằng khoảng 600–900 ms của đề xuất trên, **đã chọn theo đề xuất**.
   - Đòn to và họ lửa dài hơn trong `catalog.ts` của Rồng Giữ Ải.
   - Bốn id của Lời Gọi và hai id của Tuyến Cuối dài hơn trong prompt của danh sách.
-- **Chưa làm:**
+- **Chưa làm ở lượt này** (hai việc đầu đã làm ở lượt sau review):
   - âm tổng hợp tạm trong game (`synth.ts` "sine thump") là mã game, không thuộc làn này;
   - bước chặn chữ cấm Q6 trong `gen.sa3`;
   - luật L2 dưới đây.
+
+### Q6: sửa sau review (24/10/2026, máy Dell)
+
+Review của lượt trên tìm ra 1 lỗi lớn, một số lỗi nhỏ và 1 việc còn mở. Chi tiết từng id: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 9.
+
+- **Bậc trúng Tuyến Cuối viết lại theo Q6.** `hit.t1`, `hit.t2`, `hit.t4`: đầu tiếng giòn, thân thép, lớp trầm chỉ ở dưới, đuôi hành lang thép ngắn dưới 1 kHz, nằm trong file.
+  - `hit.t1` 80 → 140 ms: vẫn theo hướng anh chọn (Stable Audio 3 nguyên khối, crest cao, thân vừa, Q1); đuôi ngắn nối các phát thành loạt (ghi chú `calib-1`).
+  - `hit.t2` 160 → 260 ms: ít sub như bản anh chọn ở 0a (Q5).
+  - `hit.t4` giữ 900 ms.
+  - Ghi chú của `hit.sub`, `hit.tail`, `gun.xung`, `gun.xung.tail` nay nói rõ: các lớp dùng chung mới là đề xuất (mục 6.3 #3, 16 #6 còn mở); Audio Lab có ghép thì ghép sẵn vào file.
+- **Chữ cấm còn sót.** "thump", "thud" đứng riêng ở `dragon.low`, `unit.warden.place`, `enemy.quadruped.march` (D), `call-chop` (F), `gun.xung` (B, D, H), `hit.t2`, `hit.t4`: đã sửa từng chỗ. Còn lại có chủ ý, ghi trong ghi chú của thẻ:
+  - `call-chop` A, E: hai prompt anh chấm 3/5, Q2 gọi tên; "thud" nằm sau tiếng gõ có dăm tre lách tách;
+  - `gun.xung` E: prompt thân của công thức lô 1, công thức ghép sẵn lớp đuôi.
+- **Tiếng lên đòn của quái** (ba `*.windup`) thêm vang rừng thông ngắn.
+- **`critic.loop_eval` bật lại** cho `gun.xung` (5 lần mỗi giây) và `wordshot-fire` (sau mỗi từ), giữ bằng `manual_fields`. Bộ sinh đã tắt nó khi prompt dài từ 300 ms. Bộ chấm không đọc khóa này: nó tự lặp 3–4 s các file dưới 300 ms (`critic/learned.py`).
+- **`gen.sa3.FORBIDDEN_TERMS`** chặn chữ cấm Q6 cho cả ba game: puff, pop, balloon, whoomph, boing, bonk, toy, cartoon, retro, 8-bit, chiptune, bụp, thụp. Test: `gen/tests/test_sa3_q6.py`. "thump", "thud" không vào danh sách vì cần ngữ cảnh. `numpy` chuyển vào trong hàm của `sa3.py`, để bước dựng job và chặn chữ chạy được mà không cần bộ âm.
+- **Bộ giới hạn tiếng của Rồng Giữ Ải** (đã chọn theo đề xuất): `lengthMs` giữ là đích của file thật. `synthMs` mới ghi độ dài âm tạm của 9 id dài ra ở Q6. Bộ giới hạn giữ chỗ theo độ dài thật của thứ đang phát (`VoiceLimiter.settle`): âm tạm, hoặc file khi có. Lời Gọi, Tuyến Cuối không đổi: mã của hai game không đọc độ dài trong danh sách âm.
+- **Đuôi prompt chung của Lời Gọi** viết lại không có chữ phủ định. Hai gói prompt `04-audio.md`, `04-audio-vs.md` viết lại theo Q6: dòng SPACE cho âm hành động, mọi chữ cấm sửa theo ngữ cảnh.
+- **Kiểm đã chạy trên máy Dell** (WSL, Python hệ thống 3.12, PyYAML 6.0.1, jsonschema 4.10.3; không venv, không pytest thật): ghi đúng ở mục 9 của `Q6_REWRITE`.
 
 ### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
 
@@ -254,7 +274,10 @@ Chi tiết từng id, độ dài và việc của lô 1c: [`Q6_REWRITE_2026-10-2
 | `t-q6-tail-blast` | nhóm `explosion` | `tail_ms` ≥ 500 / ≤ 200 | nổ không có đuôi vang |
 | `t-q6-lone-low` | họ `trung`, `no`, `ban`, `chet` của Rồng Giữ Ải và Lời Gọi; id `^(kill\|hurt\|foe)\.` của Tuyến Cuối | `punch_db` trong [6, 20] / ngoài [0, 32]; `share_150_800` ≥ 0,12 / ≤ 0,03 | một cú trầm rồi tắt, không có thân |
 
-- **Phạm vi của luật trầm đứng riêng:** không áp cho `gun.xung` (5 phát mỗi giây, đuôi là lớp riêng) và các bậc trúng của Tuyến Cuối. Ở đó đuôi và sub là lớp dùng chung do mã ghép, nên file bậc được phép gọn.
+- **Phạm vi của luật trầm đứng riêng** (sửa sau review): không áp cho `gun.xung` (5 phát mỗi giây, mỗi phát ngắn). Các bậc trúng của Tuyến Cuối nay tự có thân và đuôi trong file (mã không ghép lớp), nên chúng cần luật đuôi riêng theo cỡ: `t-q6-tail-tier`, id `^hit\.t[12]$`, `tail_ms` ≥ 60 / ≤ 25 cho T1 và ≥ 120 / ≤ 50 cho T2 (hai luật, hai id).
+- **Hai chỗ hở khi làm thật** (review, 24/10):
+  1. **Khóa `match` của một luật là "và", không phải "hoặc"** (`critic/calibration.py` › `_match`). Các hàng ghi "nhóm X, id Y" hay "họ của game A; id của game B" phải tách thành nhiều luật, mỗi luật một id. Viết gộp thì `t-q6-tail-heavy` chỉ khớp các id vừa thuộc `hit_heavy` vừa khớp regex. Còn nếu chỉ ghi `group: hit_heavy` thì luật trúng cả `hit.t2` và `hit.t4` của Tuyến Cuối, với ngưỡng không hợp cỡ của chúng. Cách làm: `t-q6-tail-heavy-g` (`group: hit_heavy`, `game: dragon-hold`), `t-q6-tail-heavy-id` (chỉ `id`), `t-q6-lone-low-dh` (`family`, `game: dragon-hold`), `t-q6-lone-low-td` (`family`, `game: typing-defense`), `t-q6-lone-low-ts` (`id`, `game: typing-survival`).
+  2. **`punch_db` đo mức 100–300 ms sau đầu tiếng** (`critic/features.py` › `dynamics`). File dưới 100 ms không có số (luật bỏ qua). File 140–300 ms thì cửa sổ đó là cuối đoạn tắt, nên một tiếng trúng giòn, gọn cũng ra `punch_db` lớn và bị đọc nhầm là "cú trầm không thân". Luật trầm đứng riêng chỉ áp cho id có thẻ dài từ 400 ms (ghi bằng regex id, vì file hiệu chỉnh không khớp theo độ dài). Hoặc thêm một đặc trưng có cửa sổ theo độ dài file (cần mã, làn Critic).
 - **Cách chồng lên mục tiêu cũ:** `set` của `punch_db` thay mục tiêu `PUNCH` (≥ 6 dB) cho các nhóm khớp, nên cận dưới vẫn còn. Luật nhóm `t-hit-boom` (dưới 150 Hz không quá 70 %) và giới hạn `sub_len_ms` (≤ 150 ms ở trúng, ≤ 300 ms ở nổ) giữ nguyên, hợp với luật Q6 "sub chỉ làm lớp dưới".
 - **Thêm một cờ (cần mã, nhỏ):** `lone_low_hit` khi đồng thời có `share_below_150` ≥ 0,6, `tail_ms` < 150 và `punch_db` ≥ 25. Ghi chú: "một cú trầm không thân, không đuôi (Q6)". Cờ chỉ hiện trên thẻ ảnh và danh sách nghe, không chặn. File hiệu chỉnh không biểu diễn được điều kiện "và", nên cần cờ này.
 - **Đi kèm:** khi làm luật này, sửa ghi chú "phụt lửa trầm, thân tròn" của nhóm `hit_fire` ở `critic/groups.py` và lý do ở `specs/taxonomy.CRITIC_GROUP_BY_ID`. Thẻ spec không đổi vì chỉ đọc tên nhóm.

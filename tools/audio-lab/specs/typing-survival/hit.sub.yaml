@@ -183,4 +183,4 @@ origin:
   plan:
     - 'AUDIO_PIPELINE §9 #13 (lô 1)'
     - 'AUDIO_PIPELINE §6.3 #3, §9 #13, §16 #6: lớp sub dùng chung của bậc trúng'
-notes: 'Q6 (24/10): đúng luật ''lớp sub chỉ làm lớp dưới, có thân và đuôi đè lên'': mã chỉ ghép hit.sub dưới thân bậc T2 trở lên, không bao giờ phát riêng.'
+notes: 'Q6 (24/10): đúng luật ''lớp sub chỉ làm lớp dưới, có thân và đuôi đè lên'': hit.sub chỉ nằm dưới thân bậc T2 trở lên, không bao giờ phát riêng. Sửa sau review (24/10): đây là id đề xuất; mã game chưa ghép lớp nào (theme-audio.ts phát một tiếng mỗi bậc, mục 6.3 #3 và 16 #6 còn mở). Đến khi chủ dự án duyệt việc ghép lúc chạy, Audio Lab ghép sẵn hit.sub vào file bậc (như công thức lô 1 hit.t2.kb.b1.json, hit.t4.b1.json).'

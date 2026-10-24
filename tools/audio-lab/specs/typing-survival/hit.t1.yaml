@@ -5,9 +5,15 @@ schema: 1
 id: hit.t1
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Đạn Xung trúng (bậc T1), gom 38 ms
-purpose: Tiếng keng ngắn trên vỏ thép
+purpose: 'Keng nhỏ, sáng trên vỏ thép: đầu tiếng giòn, thân thép gọn, ngân tắt nhanh vào vang hành lang thép ngắn và thấp. Phát tới 10 lần mỗi giây nên nhỏ, gọn, đuôi nối các phát thành loạt'
 category: hit-small
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 80
+  target_ms: 140
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 64
-  max_ms: 96
+  min_ms: 112
+  max_ms: 168
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [50, 150]
   music: null
@@ -84,15 +90,15 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Small metallic bullet impact on a steel hull, short bright clank, 80 ms, several variations, dry.
+  text: 'Small bullet striking a steel hull plate: a bright crisp clank, a small tight steel body, the ring dying fast into a short low echo down the steel corridor, 140 ms, several variations.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'B: A single bolt striking a steel plate, sharp metal ping with a tight low-mid body, very short, recorded close in a dead room'
-    - 'D: Bullet hit on sheet metal, short tick and clank, dry, fast decay, single hit'
-    - 'E: TrackType: SFX, small bullet impact on a steel plate, bright crisp metallic clank with a medium body, short, close, dry, industrial'
     - 'F: TrackType: SFX, small bullet striking a steel hull plate, bright crisp clank with a tight body, the ring dying fast into a steel corridor, industrial'
+    - 'G: TrackType: SFX, small caliber round hitting a thin steel hull, sharp bright metal clank, a small tight steel body, a brief low slap echo off the steel corridor walls, industrial'
+    - 'H: Single bullet impact on a steel bulkhead, crisp metallic ping with a short resonant body, a quick low reverberation down a long metal corridor, close'
+    - 'I: TrackType: SFX, metal impact one-shot, small bullet on a steel plate, bright transient, compact steel body, short dark corridor tail, industrial'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -188,7 +194,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Small metallic bullet impact on a steel hull, short bright clank, 80 ms, several variations, dry.
+  intent: 'Small bullet striking a steel hull plate: a bright crisp clank, a small tight steel body, the ring dying fast into a short low echo down the steel corridor, 140 ms, several variations.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -206,4 +212,4 @@ origin:
     - 'AUDIO_PIPELINE §9 #12 (lô 1)'
     - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
     - AUDIO_PIPELINE §9 (bản thử Stable Audio 3, 6 id)
-notes: 'Q6 (24/10): đã soát: file bậc là đầu tiếng + thân (mục 6.3 #3); sub và đuôi thép là lớp dùng chung hit.sub, hit.tail do mã ghép, nên hình dạng Q6 đủ khi ghép. Bỏ A (''no reverb'') và C (''no tail''): chữ phủ định; bản anh chọn C s1006 vẫn là file gốc, chữ của C còn trong bản ghi ứng viên và lịch sử Git. Thêm F. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E nghiêng sáng hơn, thân vừa (mục 4.1 #12); gốc là C (anh chọn C s1006 thô).'
+notes: 'Q6 (24/10, viết lại sau review): game phát một file cho mỗi bậc (theme-audio.ts flush), không ghép hit.sub hay hit.tail lúc chạy (mục 6.3 #3 và 16 #6 còn mở), nên file T1 tự có đủ hình dạng: đầu tiếng giòn 2–6 kHz, thân thép gọn (10–35 % ở 200–800 Hz, luật t-hit-small-steel), đuôi hành lang thép ngắn, thấp, dưới 1 kHz (luật giọng đọc mục 6.2). 80 → 140 ms để có chỗ cho đuôi; ở 5–10 lần mỗi giây, đuôi ngắn nối các phát thành loạt (ghi chú calib-1 của anh: "không liên thanh, ngắt quãng"). Vẫn nhỏ hơn T2, T4 (cỡ âm theo nguồn). Hướng anh chọn ở lô 0b vẫn giữ: Stable Audio 3 nguyên khối, crest cao, thân vừa phải (C s1006 3/5 thắng hai công thức thân dày 2/5); bản C s1006 là mẫu cho đầu tiếng và thân, Audio Lab có ghép đuôi thì ghép sẵn vào file. Bỏ B (''dead room''), D, E (''dry''): không có đuôi trong không gian; giữ F; thêm G, H, I. Chữ của các khóa đã bỏ còn trong bản ghi ứng viên và lịch sử Git. Lượt trước (24/10) ghi nhầm rằng sub và đuôi do mã ghép. Ghi chú trước Q6: Lô 0b: prompt A–D của bản thử Stable Audio 3 (23/10/2026), giữ để tạo lại đúng ứng viên. Lô 1 (24/10/2026, BATCH1_BRIEF.md): E nghiêng sáng hơn, thân vừa (mục 4.1 #12); gốc là C (anh chọn C s1006 thô).'

@@ -13,6 +13,7 @@ manual_fields:
   - duration.min_ms
   - duration.max_ms
   - prompt.suffix
+  - critic.loop_eval
 when: Phát Chữ bay ra
 purpose: 'Nhanh, có chữ trong đó: vung tay tre, chữ giấy phóng vút đi, giấy phần phật bay xa; vang làng ngắn'
 category: shot
@@ -172,10 +173,10 @@ critic:
     l4: 0.1
     l5: 0.0
   loop_eval:
-    enabled: false
-    length_s: null
-    plays: null
-    interval_ms: null
+    enabled: true
+    length_s: [3, 4]
+    plays: 10
+    interval_ms: 250
   ast:
     expected: [Wood]
     forbid: []
@@ -203,4 +204,4 @@ origin:
     present: true
     section: 3. Trận và làng (bus `world`)
   plan: ['AUDIO_PIPELINE §9 #23 (lô 1)']
-notes: 'Q6 (24/10): vung (chuẩn bị), thả (phát), vút có giấy bay xa (thân), vang làng ngắn (đuôi). Âm phát sau mỗi từ: đuôi thấp, ngắn. Dài 0,18 → 0,35 s. Không ghép đuôi chung của §1. Khóa E–H thay A–D của lô 1 (đều ''short, dry'', không có đuôi). Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF #23): A, C tiếng vút tre có giấy; B tiếng giấy vút; D gậy tre quất. Không viết chữ phủ định trong prompt (cfg 1,0). Chặn prompt kiểu mõ theo DECISIONS Q2.'
+notes: 'Q6 (24/10): vung (chuẩn bị), thả (phát), vút có giấy bay xa (thân), vang làng ngắn (đuôi). Âm phát sau mỗi từ: đuôi thấp, ngắn. Dài 0,18 → 0,35 s. Không ghép đuôi chung của §1. Khóa E–H thay A–D của lô 1 (đều ''short, dry'', không có đuôi). Sửa sau review (24/10): critic.loop_eval giữ bật bằng tay (manual_fields). Bộ sinh tắt nó khi độ dài đạt 300 ms (0,35 s từ lượt Q6), nhưng đây là âm phát sau mỗi từ, phải nghe lặp 20 lần không mệt (Q6 luật 4). Bộ chấm tự lặp theo độ dài thật của file (dưới 300 ms, critic/learned.py), không đọc khóa này. Công thức lô 1 wordshot-fire.mix.b1.json dựng trên lớp A–D đã bỏ: lô 1c dựng lại. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF #23): A, C tiếng vút tre có giấy; B tiếng giấy vút; D gậy tre quất. Không viết chữ phủ định trong prompt (cfg 1,0). Chặn prompt kiểu mõ theo DECISIONS Q2.'

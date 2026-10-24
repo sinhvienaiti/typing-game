@@ -87,7 +87,7 @@ prompt:
     - 'A: TrackType: SFX, several four-legged animals trotting on soft dirt, steady hoof and paw footsteps, close, continuous'
     - 'B: A small pack of wolves running on a forest path, rhythmic padding paws and panting, steady, outdoor'
     - 'C: Field recording, a group of boars trotting over packed earth and leaves, heavy rhythmic footfalls, even pace'
-    - 'D: TrackType: SFX, beasts galloping on a dirt trail, gallop triplets in a steady rhythm, muffled thuds, close, organic'
+    - 'E: TrackType: SFX, beasts galloping on a dirt trail, gallop triplets in a steady rhythm, muffled hoof beats on soft earth, close, organic'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -194,4 +194,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: ['AUDIO_PIPELINE §9 #10 (lô 1)']
-notes: 'Lô 1 (24/10/2026): 4 prompt vó chạy, tạo 10 s rồi cắt vòng 4 s mono.'
+notes: 'Lô 1 (24/10/2026): 4 prompt vó chạy, tạo 10 s rồi cắt vòng 4 s mono. Q6 (24/10, sửa sau review): đây là nền lặp, không phải âm hành động; chỉ thay chữ cấm. Bỏ D (''muffled thuds''), thêm E cùng ý với tiếng vó (''hoof beats''). Ứng viên D của lô 1 (phiên S3) vẫn chấm được; chữ của D còn trong bản ghi ứng viên và lịch sử Git. Bảng JOBS của common/batch1_dh.py còn trỏ D.'

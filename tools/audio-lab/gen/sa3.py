@@ -27,7 +27,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import numpy as np
 import yaml
 
 from common import env
@@ -47,8 +46,17 @@ SHARED_WEIGHTS = ("same_s_decoder_f32.npz", "t5gemma_f16.npz")
 _KEYED = re.compile(r"^([A-Z][0-9]?)\s*:\s*(.+)$", re.S)
 # DECISIONS Q2 (TK 22.1: no temple wood block in Lời Gọi): words that give the hollow, high, pitched "tốc", for every
 # id of the game, and the call-chop prompts B, D (B s1002 rated 2/5, the lowest of the id, batch 0b)
+Q2_TERMS = (r"\btok\b", r"\btốc\b", r"hollow\s+tube", r"temple\s+block", r"wooden\s+fish", r"\bmõ\b")
+# DECISIONS Q6 (owner, 24/10/2026): no "bụp, thụp" puffs, toy, cartoon or retro sounds, in every game. A lone
+# "thump"/"thud" is banned too, but a low layer under a body and a tail is allowed: that needs the context, so the
+# Q6 review reads it; a word list here would also refuse the owner's rated call-chop A, E ("knock ... thud").
+Q6_TERMS = (r"\bpuff(?:s|ed|ing|y)?\b", r"\bpop(?:s|ped|ping)?\b", r"\bballoon\w*", r"\bwhoomph\w*", r"\bboing\w*", r"\bbonk\w*",
+            r"\btoy(?:s|like)?\b", r"\btoy-like\b", r"\bcartoon\w*", r"\bretro\b", r"\b8[- ]?bit\b", r"\bchiptune\w*",
+            r"\bbụp\b", r"\bthụp\b")
 FORBIDDEN_TERMS: dict[str, tuple[str, ...]] = {
-    "typing-defense": (r"\btok\b", r"\btốc\b", r"hollow\s+tube", r"temple\s+block", r"wooden\s+fish", r"\bmõ\b"),
+    "dragon-hold": Q6_TERMS,
+    "typing-defense": Q2_TERMS + Q6_TERMS,
+    "typing-survival": Q6_TERMS,
 }
 FORBIDDEN_KEYS: dict[tuple[str, str], tuple[str, ...]] = {("typing-defense", "call-chop"): ("B", "D")}
 
@@ -58,7 +66,7 @@ class Sa3Error(ValueError):
 
 
 def check_prompts(card: dict, prompts: dict[str, str]) -> None:
-    """Refuse a prompt the decisions log forbids for this game or id (DECISIONS Q2)."""
+    """Refuse a prompt the decisions log forbids for this game or id (DECISIONS Q2, Q6)."""
     game, sid = card.get("game") or "", card.get("id") or ""
     keys = [k for k in prompts if k in FORBIDDEN_KEYS.get((game, sid), ())]
     if keys:
@@ -66,7 +74,9 @@ def check_prompts(card: dict, prompts: dict[str, str]) -> None:
     for k, text in prompts.items():
         for pat in FORBIDDEN_TERMS.get(game, ()):
             if re.search(pat, text, re.I):
-                raise Sa3Error(f"{sid}: prompt {k} có cụm bị cấm /{pat}/ (DECISIONS Q2, TK 22.1): {text[:80]}")
+                why = ("DECISIONS Q6: âm hành động theo hình dạng hành động, không 'bụp, thụp', đồ chơi" if pat in Q6_TERMS
+                       else "DECISIONS Q2, TK 22.1")
+                raise Sa3Error(f"{sid}: prompt {k} có cụm bị cấm /{pat}/ ({why}): {text[:80]}")
 
 
 # ---------------------------------------------------------------- install + model identity
@@ -229,6 +239,8 @@ def licence_rows(install: dict, dit: str = "sm-sfx", date: str | None = None,
 
 def writer_clip_runs(x: np.ndarray) -> dict:
     """Runs of >= 3 samples at >= 0.999 FS in the 16-bit file (the CLI writer's hard clip)."""
+    import numpy as np   # here, not at the top: building and checking jobs needs no audio stack
+
     from critic.hygiene import runs
     full = samples = 0
     for ch in range(x.shape[1]):
@@ -240,6 +252,7 @@ def writer_clip_runs(x: np.ndarray) -> dict:
 
 
 def raw_stats(wav16: Path, f32: Path) -> dict:
+    import numpy as np
     import soundfile as sf
     x16, sr = sf.read(str(wav16), always_2d=True)
     xf, _ = sf.read(str(f32), always_2d=True)

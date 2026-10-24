@@ -5,9 +5,9 @@ schema: 1
 id: enemy.biped.windup
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Lên đòn
-purpose: Giáp lách cách
+purpose: 'Yêu Rêu lên đòn: giáp vỏ cây lách cách, vung tay lấy đà; vang rừng ngắn'
 category: fx-other
 family: sinh-vat
 source_class: foley-other
@@ -82,14 +82,14 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Light bark-armor rattle, wooden plates clicking, 250 ms
+  text: 'Moss goblin winding up a blow: wooden bark-armour plates clicking and rattling, a quick arm swing drawing back, a short soft echo under pine trees, 250 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, small goblin preparing to strike, short grunt of effort, wooden bark armour plates rattling, leaves swishing as the arm swings back'
-    - 'B: Creature raising a weapon, quick breath in, light wooden plates clicking together, a small swish of the arm'
-    - 'C: Bark plates and twigs clattering as a little forest creature draws back to hit, effort grunt, short'
+    - 'A: TrackType: SFX, small goblin preparing to strike, short grunt of effort, wooden bark armour plates rattling, leaves swishing as the arm swings back, a short soft echo under pine trees'
+    - 'B: Creature raising a weapon, quick breath in, light wooden plates clicking together, a small swish of the arm, brief open forest reverb'
+    - 'C: Bark plates and twigs clattering as a little forest creature draws back to hit, effort grunt, a short echo off the tree trunks'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -181,7 +181,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Light bark-armor rattle, wooden plates clicking, 250 ms
+  intent: 'Moss goblin winding up a blow: wooden bark-armour plates clicking and rattling, a quick arm swing drawing back, a short soft echo under pine trees, 250 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -196,4 +196,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: 'Q6 (24/10): đã soát. Đây là phần chuẩn bị của đòn (enemy.biped.attack là phần phát), prompt cũ không có chữ cấm nên giữ; thêm 3 biến thể có hơi gằn để nghe ra quái sắp đánh.'
+notes: 'Q6 (24/10): Đây là phần chuẩn bị của đòn (enemy.biped.attack là phần phát); thêm 3 biến thể có hơi gằn để nghe ra quái sắp đánh. Sửa sau review (24/10): lượt đầu giữ prompt cũ không có đuôi; luật 1 của Q6 đòi đuôi vang trong không gian bản đồ, nên prompt và A–C thêm vang rừng thông ngắn, nhỏ (âm P5, phát dày). A–C chưa có ứng viên nào (không lô nào tạo id này), nên sửa tại chỗ, không đổi khóa.'

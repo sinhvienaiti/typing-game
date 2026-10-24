@@ -5,9 +5,15 @@ schema: 1
 id: hit.t2
 game: typing-survival
 status: draft
-manual_fields: []
+manual_fields:
+  - purpose
+  - prompt.text
+  - critic.intent
+  - duration.target_ms
+  - duration.min_ms
+  - duration.max_ms
 when: Chí mạng, gõ chuẩn (T2, T3)
-purpose: Keng nặng hơn, thêm cú thụi trầm
+purpose: 'Chí mạng: keng nặng hơn T1, nứt giòn ở đầu, thân thép dày, một lớp trầm nhẹ bên dưới (ít sub), ngân tắt vào vang hành lang thép ngắn'
 category: hit-heavy
 family: trung
 source_class: impact
@@ -22,11 +28,11 @@ playback:
   caps: {}
   format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
 duration:
-  target_ms: 160
+  target_ms: 260
   tolerance_pct: 20
   tolerance_ms: null
-  min_ms: 128
-  max_ms: 192
+  min_ms: 208
+  max_ms: 312
   basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
   category_range_ms: [120, 600]
   music: null
@@ -84,15 +90,15 @@ loudness:
     weight: medium
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Heavy bullet impact on thick steel armor, clank with a low thump, 160 ms, punchy, dry.
+  text: 'Heavy bullet striking thick steel armour: a hard bright crack, a dense steel clang with a solid body and a light low layer underneath, the ring fading into a short echo down the steel corridor, 260 ms, punchy.'
   suffix: null
   style_root: industrial, steel, close, punchy
   sweetener: tia điện và thép ngân
   variants:
-    - 'A: TrackType: SFX, heavy bullet impact on thick steel armor, hard metallic clank with a low thump, short, punchy, close, dry'
-    - 'B: Large caliber round hitting an armored steel plate, loud clank and a dense low-mid body, short, close mic, dry, industrial'
-    - 'C: TrackType: SFX, metal impact one-shot, heavy projectile striking a thick steel door, crisp transient, solid body, short decay'
-    - 'D: Critical hit on heavy steel armor, sharp crack and a deep clang, short, gritty, close, dry'
+    - 'E: TrackType: SFX, heavy bullet impact on thick steel armour, hard bright crack, dense metallic clang with a solid body, a light low layer underneath, the ring fading into a short steel corridor echo, punchy, industrial'
+    - 'F: Large caliber round slamming into an armoured steel plate, sharp crack and a heavy clang with weight, the metal ring rolling briefly down a long steel hall, close, gritty'
+    - 'G: TrackType: SFX, metal impact one-shot, heavy projectile striking a thick steel door, crisp transient, solid steel body, short dark reverberation in a metal corridor'
+    - 'H: Critical hit on heavy steel armour, bright crack over a deep clang, compact steel body, a brief low echo off the steel corridor walls, industrial'
   basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -188,7 +194,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Heavy bullet impact on thick steel armor, clank with a low thump, 160 ms, punchy, dry.
+  intent: 'Heavy bullet striking thick steel armour: a hard bright crack, a dense steel clang with a solid body and a light low layer underneath, the ring fading into a short echo down the steel corridor, 260 ms, punchy.'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: []
@@ -203,4 +209,4 @@ origin:
     present: true
     section: 5. Trúng, hạ, quái bắn
   plan: ['AUDIO_PIPELINE §9 #13 (lô 1)']
-notes: 'Q6 (24/10): đã soát: đầu tiếng + thân của bậc T2, cú thụi trầm nằm dưới tiếng keng, hit.sub ghép thêm lúc chạy; không có chữ cấm, giữ A–D. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân và đầu tiếng của bậc T2; hit.sub ghép thêm lúc chạy (bản nghe ghép sẵn).'
+notes: 'Q6 (24/10, viết lại sau review): game phát một file cho mỗi bậc (theme-audio.ts flush), không ghép hit.sub lúc chạy (mục 6.3 #3 và 16 #6 còn mở), nên file T2 tự có đủ: nứt giòn ở đầu, thân thép dày, một lớp trầm nhẹ bên dưới, đuôi hành lang thép ngắn dưới 1 kHz. Ít sub theo điểm của anh: bản v2 ít sub 3/5 thắng v4 2/5 và v1 nặng sub nhất 1/5 (lô 0a, DECISIONS Q5); luật t-hit-boom (dưới 150 Hz không quá 70 %) giữ nguyên. 160 → 260 ms để có thân và đuôi; vẫn ngắn hơn T4 (900 ms) rõ. Bỏ A (''low thump'' và ''dry''), B, D (''dry''), C (''short decay'', không có không gian); thêm E, F, G, H. Ứng viên A–D của lô 1 (phiên S1) vẫn chấm được để đo máy; chữ của chúng còn trong bản ghi ứng viên và lịch sử Git. Lượt trước (24/10) ghi nhầm rằng hit.sub do mã ghép. Ghi chú trước Q6: Lô 1 (24/10/2026, BATCH1_BRIEF.md): thân và đầu tiếng của bậc T2; hit.sub ghép thêm lúc chạy (bản nghe ghép sẵn).'

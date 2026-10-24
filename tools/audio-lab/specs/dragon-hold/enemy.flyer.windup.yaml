@@ -5,9 +5,9 @@ schema: 1
 id: enemy.flyer.windup
 game: dragon-hold
 status: draft
-manual_fields: []
+manual_fields: [purpose, prompt.text, critic.intent]
 when: Chuẩn bị bổ nhào
-purpose: Vo ve dâng lên
+purpose: 'Ong Gai sắp bổ nhào: cánh vo ve dâng cao, căng dần; vang rừng ngắn'
 category: fx-other
 family: sinh-vat
 source_class: creature
@@ -82,14 +82,14 @@ loudness:
     weight: null
     basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
 prompt:
-  text: Insect wing buzz rising in pitch, 300 ms
+  text: 'Giant thorn wasp gathering for a dive: wing buzz rising in pitch and tension, a short echo through the pine forest, 300 ms'
   suffix: null
   style_root: painterly fantasy forest, warm, organic, outdoor
   sweetener: than hồng lách tách và đàn hạc
   variants:
-    - 'A: TrackType: SFX, giant wasp preparing to dive, wing buzz rising in pitch and intensity, tense'
-    - 'B: Insect wings revving up faster and higher, droning hum building'
-    - 'C: Large insect charging up to attack, buzz swelling louder and sharper'
+    - 'A: TrackType: SFX, giant wasp preparing to dive, wing buzz rising in pitch and intensity, tense, a short echo through the pine forest'
+    - 'B: Insect wings revving up faster and higher, droning hum building, brief open forest reverb'
+    - 'C: Large insect charging up to attack, buzz swelling louder and sharper, a short echo between the tree trunks'
   basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
 pitches: null
 parts: null
@@ -177,7 +177,7 @@ critic:
   bpm: null
   bars: null
   beats_per_bar: null
-  intent: Insect wing buzz rising in pitch, 300 ms
+  intent: 'Giant thorn wasp gathering for a dive: wing buzz rising in pitch and tension, a short echo through the pine forest, 300 ms'
   refs: []
   basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
 blocked_by: [chu-du-an-tai-freesound]
@@ -192,4 +192,4 @@ origin:
     present: true
     section: 5.3 Quái theo lớp (bus `enemies`)
   plan: []
-notes: 'Q6 (24/10): đã soát. Phần chuẩn bị của cú bổ nhào, prompt cũ không có chữ cấm nên giữ; thêm 3 biến thể.'
+notes: 'Q6 (24/10): Phần chuẩn bị của cú bổ nhào; thêm 3 biến thể. Sửa sau review (24/10): lượt đầu giữ prompt cũ không có đuôi; luật 1 của Q6 đòi đuôi vang trong không gian bản đồ, nên prompt và A–C thêm vang rừng thông ngắn. A–C chưa có ứng viên nào (không lô nào tạo id này), nên sửa tại chỗ, không đổi khóa.'
