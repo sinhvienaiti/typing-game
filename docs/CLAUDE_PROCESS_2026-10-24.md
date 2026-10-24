@@ -176,6 +176,21 @@ Test audio-lab trên Dell:
   - Chrome trong WSL chỉ có SwiftShader: dùng cho kiểm chức năng, không dùng để đo hiệu năng.
 - ImageMagick 7.1.2-34 (`magick`): đã cài 24/10 từ bản phát hành chính thức trên GitHub (AppImage, giải nén sẵn), ở `~/.local/bin/magick`. `local-env.sh` đưa `~/.local/bin` vào `PATH`. `td_rig_review.py` dùng nó để ghép bảng ảnh duyệt rig.
 
+### D0. Trạng thái 25/10 sáng (đọc mục này trước mục D)
+- **Tu Tiên Thủ Ải = repo `immortality-cultivation`.** Chủ dự án tạo repo `sinhvienaiti/immortality-cultivation`; đã gắn làm submodule `games/immortality-cultivation` (commit `6ab88f87`).
+- **Hướng hình (chủ dự án, 25/10):** 3D trước, có đo bằng bench HN0. Chỉ phần nào trượt ngân sách mới lùi xuống bản nhẹ hơn.
+- **M0 Canon xong:** `docs/games/tu-tien/00-canon.md` (D01–D46) và `M0A_PLAN.md` (bước 0 + 8 làn), đã qua phản biện `analysis/09`, commit `07b31720`.
+- **Menu portal và nginx có game thứ 9:** commit `6c44135b`, do Codex làm ở phiếu 004. Play mode trong WSL phục vụ 10 host. Chủ dự án chạy `scripts/windows/add-hosts.ps1` (quyền Administrator) để thêm host vào Windows.
+- **Đang chạy:**
+  - M0a đợt A (workflow `tu-tien-m0a-part-a`, script chép ở `.local/workflows/tu-tien-m0a-part-a.js` để chạy tiếp): bước 0 khung repo, rồi làn 1a, 2, 3, 5, 8, rồi kiểm tra độc lập.
+  - Đợt B: làn 1b bench HN0 đầy đủ, làn 4 Kiếm/combat, làn 6 view, làn 7 bot/cổng.
+- **Codex** (hàng việc `docs/CODEX_QUEUE.md`, bộ chạy `tools/codex-run`, model `gpt-6.1-sol`):
+  - Ảnh Rồng Giữ Ải M0 đã xong 67/67; phiếu 006 làm lại các ảnh lỗi.
+  - Ảnh 2D bậc VS của Lời Gọi (005a, 005b).
+  - Bộ prompt và ảnh của Tu Tiên (007).
+  - Danh sách 3D của mọi game: `docs/games/3D_REQUESTS.md`.
+- **Lời Gọi R2:** lượt sửa 2 đang chạy (workflow `td-r2-fix-2`).
+
 ### D. Game tu tiên chống thú triều (mới, 24/10)
 - **Đã xong: đánh giá** `docs/games/tu-tien/DANH_GIA_2026-10-24.md` (đọc trước), gồm 7 bản phân tích và 1 bản phản biện ở `analysis/`. Bản chụp đề xuất Codex nằm ở `source/`. Video QCBH ở gốc repo, không vào Git.
 - **Kết luận:** nên làm, dưới dạng **game mới** `games/tu-tien` (cổng 3008), không phải mode của Rồng Giữ Ải.
