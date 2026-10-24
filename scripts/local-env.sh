@@ -18,6 +18,8 @@ fi
 # Linux / WSL (the Dell laptop): node comes from nvm, Chrome from Chrome for Testing,
 # Blender from a Linux build. Windows .exe tools cannot take /mnt/... paths.
 if [[ "$(uname -s)" == "Linux" ]]; then
+  # ~/.local/bin holds user tools such as ImageMagick 7's magick (td_rig_review.py).
+  [[ -d "$HOME/.local/bin" && ":$PATH:" != *":$HOME/.local/bin:"* ]] && export PATH="$HOME/.local/bin:$PATH"
   if ! command -v node >/dev/null 2>&1 && [[ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]]; then
     export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
     # shellcheck disable=SC1091

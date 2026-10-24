@@ -116,12 +116,16 @@ Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome c
   - Theo Q6 (24/10), họ lửa của Rồng Giữ Ải phải sinh lại ở lô 1c, vì hướng "phụt tròn" đã bị bỏ.
   - Trước đó, trên Dell, phải viết lại thẻ spec (`tools/audio-lab/specs/**`), `docs/audio/*` và `src/audio/catalog.ts` của ba game theo Q6. Bước A đã xong, nên giờ làm được.
 
-### C. Môi trường Dell còn thiếu
-- Chạy kiểm hiệu năng trên Dell bằng **Chrome Windows (GPU RTX 3050 Ti)**:
-  - Tải node portable bản Windows từ nodejs.org vào thư mục scratch.
-  - Chạy `cdp-run.mjs` từ Windows, trỏ tới Vite trong WSL (127.0.0.1:port đi qua wslrelay).
-  - Chrome trong WSL chỉ có SwiftShader. Đã thử `--use-angle=gl` với Mesa d3d12: không có WebGL.
-- ImageMagick 7 (`magick`): `td_rig_review.py` cần nó để ghép bảng ảnh duyệt rig.
+### C. Môi trường Dell
+- **Đã có (24/10): đo bằng GPU qua Chrome Windows.** Chrome Windows 155 dùng RTX 3050 Ti qua ANGLE D3D11, đo được khoảng 238 khung/giây với Rồng Giữ Ải.
+  - Node portable Windows: `D:\_tools\node-v24.11.0-win-x64\node.exe` (đã kiểm sha256).
+  - Cách chạy:
+    1. Chạy Vite của game trong WSL.
+    2. Từ PowerShell đặt `$env:URL` và `$env:OUT_DIR`.
+    3. `& D:\_tools\node-v24.11.0-win-x64\node.exe <game>\src\kit\tools\cdp-run.mjs <kịch bản> --width= --height=`.
+  - Phần cần tsx/esbuild (replay, so mã băm) chạy trong WSL, vì `node_modules` là bản Linux.
+  - Chrome trong WSL chỉ có SwiftShader: dùng cho kiểm chức năng, không dùng để đo hiệu năng.
+- ImageMagick 7.1.2-34 (`magick`): đã cài 24/10 từ bản phát hành chính thức trên GitHub (AppImage, giải nén sẵn), ở `~/.local/bin/magick`. `local-env.sh` đưa `~/.local/bin` vào `PATH`. `td_rig_review.py` dùng nó để ghép bảng ảnh duyệt rig.
 
 ### D. Mode tu tiên chống thú triều (mới, 24/10)
 - Tài liệu đề xuất của Codex: `TU_TIEN_TYPING_SYSTEMS_AND_5_COMBAT_OPTIONS_V2_2026-10-24.md` ở gốc repo.
