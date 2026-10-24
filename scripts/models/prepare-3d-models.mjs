@@ -2,7 +2,7 @@
 /**
  * pnpm models:blender [--root <game>] [--out <dir>] [--url-base <path>]
  *                     [--preset <file>] [--only <key>[,…]] [--kind <kind>] [--kinds <a,b>]
- *                     [--contracts <file>] [--blender <bin>] [--dry-run] [--force] [--no-package]
+ *                     [--contracts <file>] [--blender <bin>] [--preview <dir>] [--dry-run] [--force] [--no-package]
  *
  * Copy of games/space-typing/scripts/models/prepare-campaign3d-models.mjs for
  * any game: Tripo/Meshy GLBs in <root>/art-src/3d go through the Blender helper
@@ -11,8 +11,18 @@
  * the same --root/--out/--url-base, into the game's model manifest.
  *
  * Preset (default <root>/scripts/models/presets/campaign3d-models.json):
- *   { "version": 1, "models": { "<kind>/<id>": { "source": "<path under art-src/3d>.glb",
- *     "placeholder"?, "rotate"?, "nose"?, "facing"?, "triangles", "autoEmissive"?, "reviewed" } } }
+ *   { "version": 1, "contracts"?: "<file under root>", "kinds"?: ["<kind>", …],
+ *     "models": { "<kind>/<id>": { "source": "<path under art-src/3d>.glb",
+ *     "placeholder"?, "rotate"?, "nose"?, "facing"?, "triangles", "autoEmissive"?, "reviewed",
+ *     "static"?: { … }, "reference"?: "<picture under art-src>" } } }
+ * "contracts" and "kinds" are defaults for --contracts and --kinds.
+ * An entry with "static" (props, buildings, projectiles, worn or held items:
+ * no rig, no clip) goes through blender/static_model_tools.py instead, with
+ * "static" as its spec (orientation, size, pivot, colour, FX_ sockets; see
+ * that file) and "triangles" as its decimation target. Its colour is matched
+ * to "reference", else to the 2D picture SOURCES.json lists for the source.
+ * It writes a report to <root>/art-src/models/.reports/<kind>__<id>.json and,
+ * with --preview <dir>, before/after/top/front renders.
  * An entry whose own model is not made yet builds from its placeholder; a new
  * or changed source waits for review (REVIEW) until --force. Blender writes
  * <root>/art-src/models/<kind>/<id>.glb, so --art-src is not supported here.
@@ -27,6 +37,7 @@ import { loadContracts, parseFlags, resolveGame, UsageError } from './lib/option
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const HELPER = join(HERE, 'blender/space_typing_model_tools.py');
+export const STATIC_HELPER = join(HERE, 'blender/static_model_tools.py');
 export const PACKAGER = join(HERE, 'prepare-models.mjs');
 export const DEFAULT_KINDS = ['enemies', 'bosses', 'skills', 'items'];
 const NOSES = ['+X', '-X', '+Y', '-Y'];
@@ -36,7 +47,7 @@ const sha = (value) => createHash('sha256').update(value).digest('hex');
 const fileHash = async (path) => sha(await readFile(path));
 
 export const FLAGS = {
-  preset: 'string', only: 'list', kind: 'string', kinds: 'list', contracts: 'string', blender: 'string',
+  preset: 'string', only: 'list', kind: 'string', kinds: 'list', contracts: 'string', blender: 'string', preview: 'string',
   'dry-run': 'boolean', force: 'boolean', 'no-package': 'boolean',
 };
 
@@ -53,6 +64,10 @@ export function validatePreset(key, value, { contracts, kinds = DEFAULT_KINDS })
   if (!Number.isInteger(value.triangles) || value.triangles < min || value.triangles > max) throw new Error(key + ': triangles must be an integer in ' + min + '–' + max);
   if (!Number.isFinite(value.autoEmissive ?? 0) || (value.autoEmissive ?? 0) < 0 || (value.autoEmissive ?? 0) > 1) throw new Error(key + ': autoEmissive must be in [0, 1]');
   if (typeof value.reviewed !== 'boolean') throw new Error(key + ': reviewed must be true or false');
+  if (value.static != null && (typeof value.static !== 'object' || Array.isArray(value.static))) throw new Error(key + ': static must be an object (the static helper spec)');
+  if (value.reference != null && (typeof value.reference !== 'string' || !/\.(png|jpe?g|webp)$/i.test(value.reference) || value.reference.includes('..') || value.reference.startsWith('/'))) {
+    throw new Error(key + ': reference must be a picture path under art-src');
+  }
   return { kind, id, ...value, nose: value.nose ?? '+Y', facing: value.facing ?? '+Y', autoEmissive: value.autoEmissive ?? 0 };
 }
 
@@ -68,6 +83,24 @@ export function resolveSource(sourceRoot, entry) {
 export function cacheSignature(value, sourceHash, shared, packaged) {
   const { source, placeholder, note, ...numbers } = value;
   return sha(JSON.stringify({ version: 2, source: sourceHash, entry: numbers, ...shared, package: packaged }));
+}
+
+/** Static helper command: no rig, no clip; the spec carries the decimation target. */
+export function staticArguments(entry, input, { output, report, reference, preview }) {
+  const args = ['--background', '--factory-startup', '--python-exit-code', '1', '--python', STATIC_HELPER, '--',
+    '--input', input, '--output', output, '--id', entry.kind + '/' + entry.id,
+    '--spec', JSON.stringify({ ...entry.static, triangles: entry.triangles })];
+  if (report) args.push('--report', report);
+  if (reference) args.push('--reference', reference);
+  if (preview) args.push('--preview', preview);
+  return args;
+}
+
+/** The 2D picture a static entry's colour is matched to: its own "reference", else SOURCES.json's image. */
+export function referencePicture(options, entry, sources) {
+  if (entry.reference) return join(options.artSrc, entry.reference);
+  const image = sources?.files?.[entry.source]?.image;
+  return typeof image === 'string' && !image.includes('..') ? join(options.root, image) : null;
 }
 
 export function blenderArguments(root, entry, input) {
@@ -145,6 +178,7 @@ export function blenderOptions(flags, cwd = process.cwd()) {
     kinds: flags.kinds,
     contracts: flags.contracts ? resolve(cwd, flags.contracts) : undefined,
     blender: flags.blender,
+    preview: flags.preview ? resolve(cwd, flags.preview) : undefined,
     dryRun: Boolean(flags['dry-run']),
     force: Boolean(flags.force),
     noPackage: Boolean(flags['no-package']),
@@ -156,18 +190,28 @@ export async function prepare3DModels(options) {
   const log = options.log ?? console.log;
   const execute = options.runCommand ?? runCommand;
   const sourceRoot = join(options.artSrc, '3d');
-  const contracts = options.contractsModule ?? await loadContracts(options.root, options.contracts);
-  const kinds = options.kinds ?? DEFAULT_KINDS;
-  for (const kind of kinds) {
-    if (!contracts.MODEL_CONTRACTS[kind]) throw new Error('--kinds: ' + kind + ' has no model contract in ' + contracts.file);
-    if (!HELPER_KINDS.includes(kind)) throw new Error('--kinds: the Blender helper does not handle ' + kind);
-  }
-  if (options.kind && !kinds.includes(options.kind)) throw new Error('--kind must be one of ' + kinds.join(', '));
   const preset = await readJson(options.presetFile);
   if (preset?.version !== 1 || !preset.models || typeof preset.models !== 'object') throw new Error('Invalid preset file: ' + options.presetFile);
+  // The preset may name the game's contracts and kinds; flags win.
+  if (preset.contracts != null && (typeof preset.contracts !== 'string' || preset.contracts.includes('..'))) throw new Error('Preset contracts must be a path under the game root');
+  if (preset.kinds != null && (!Array.isArray(preset.kinds) || !preset.kinds.every((kind) => typeof kind === 'string'))) throw new Error('Preset kinds must be a list of kinds');
+  options = { ...options, contracts: options.contracts ?? (preset.contracts ? join(options.root, preset.contracts) : undefined) };
+  const contracts = options.contractsModule ?? await loadContracts(options.root, options.contracts);
+  const kinds = options.kinds ?? preset.kinds ?? DEFAULT_KINDS;
+  const allStatic = (kind) => {
+    const entries = Object.entries(preset.models).filter(([key]) => key.startsWith(kind + '/'));
+    return entries.length > 0 && entries.every(([, value]) => value?.static != null);
+  };
+  for (const kind of kinds) {
+    if (!contracts.MODEL_CONTRACTS[kind]) throw new Error('--kinds: ' + kind + ' has no model contract in ' + contracts.file);
+    if (!HELPER_KINDS.includes(kind) && !allStatic(kind)) throw new Error('--kinds: the Blender helper does not handle ' + kind + ' (only "static" entries can use it)');
+  }
+  if (options.kind && !kinds.includes(options.kind)) throw new Error('--kind must be one of ' + kinds.join(', '));
   const only = options.only ? new Set(options.only) : null;
   if (only) for (const key of only) if (!preset.models[key]) throw new Error('Unknown preset key: ' + key);
   const keys = Object.keys(preset.models).filter((key) => (!only || only.has(key)) && (!options.kind || key.startsWith(options.kind + '/')));
+  const staticHash = await fileHash(STATIC_HELPER);
+  const sources = await readJson(join(sourceRoot, 'SOURCES.json'));
   const shared = {
     helperHash: await fileHash(HELPER),
     packagerHash: await fileHash(PACKAGER),
@@ -197,16 +241,25 @@ export async function prepare3DModels(options) {
       if (!entry.reviewed) log('NOTE ' + key + ': orientation not yet marked reviewed in ' + options.presetFile);
       const processed = join(options.artSrc, 'models', entry.kind, entry.id + '.glb');
       const outputs = [processed, ...(!options.noPackage ? runtimePaths(options, entry.kind, entry.id) : [])];
-      const signature = cacheSignature(preset.models[key], sourceHash, shared, !options.noPackage);
+      const reference = entry.static ? referencePicture(options, entry, sources) : null;
+      const usable = reference !== null && existsSync(reference) ? reference : null;
+      if (entry.static && reference !== null && usable === null) log('NOTE ' + key + ': reference picture ' + reference + ' is missing; colour matching is skipped');
+      const signature = cacheSignature(preset.models[key], sourceHash,
+        entry.static ? { ...shared, helperHash: staticHash, referenceHash: usable ? await fileHash(usable) : null } : shared, !options.noPackage);
       let cached = !options.force && cache?.signature === signature && (options.noPackage || await validRuntimeEntry(options, contracts, entry.kind, entry.id));
       if (cached) for (const path of outputs) {
         if (!existsSync(path) || await fileHash(path) !== cache.outputs?.[path]) { cached = false; break; }
       }
       if (cached) { results.push({ key, status: 'cached' }); log('CACHED ' + key); continue; }
-      const args = blenderArguments(options.root, entry, source.path);
+      const args = entry.static
+        ? staticArguments(entry, source.path, {
+          output: processed, reference: usable, preview: options.preview,
+          report: join(options.artSrc, 'models/.reports', entry.kind + '__' + entry.id + '.json'),
+        })
+        : blenderArguments(options.root, entry, source.path);
       if (options.dryRun) {
         results.push({ key, status: 'planned', args, packager: options.noPackage ? null : packagerArguments(options, key) });
-        log('PLAN ' + key + ': ' + entry.triangles + ' triangles, nose ' + entry.nose + ', facing ' + entry.facing); continue;
+        log('PLAN ' + key + ': ' + entry.triangles + ' triangles, ' + (entry.static ? 'static' : 'nose ' + entry.nose + ', facing ' + entry.facing)); continue;
       }
       blender ??= await findBlender(options.blender);
       await execute(blender, args, { cwd: options.root });
@@ -237,7 +290,7 @@ export async function prepare3DModels(options) {
 }
 
 export const USAGE = `pnpm models:blender [--root <game>] [--out <dir>] [--url-base </assets/<id>/models/>] [--preset <file>]
-    [--only <key>[,…]] [--kind <kind>] [--kinds <a,b>] [--contracts <file>] [--blender <bin>] [--dry-run] [--force] [--no-package]`;
+    [--only <key>[,…]] [--kind <kind>] [--kinds <a,b>] [--contracts <file>] [--blender <bin>] [--preview <dir>] [--dry-run] [--force] [--no-package]`;
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {

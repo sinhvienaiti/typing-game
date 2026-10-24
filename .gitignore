@@ -31,3 +31,6 @@ rclone.conf
 
 # Reference videos stay local (no media in Git)
 *.mov
+
+# Python bytecode (Blender tooling)
+__pycache__/

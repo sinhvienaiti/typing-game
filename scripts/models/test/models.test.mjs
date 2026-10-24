@@ -1,5 +1,6 @@
 // Model tools: flags, defaults, URL rewriting, manifest import/regeneration,
-// SOURCES.json indexing and the Blender plan. No Blender, no network.
+// SOURCES.json indexing and the Blender plan. No network; one test runs
+// the static helper's math in Blender when it is installed (skipped otherwise).
 // Run: pnpm models:test
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
@@ -13,7 +14,9 @@ import {
 } from '../lib/options.mjs';
 import { FLAGS as PREPARE_FLAGS, importModels, modelOptions, prepareModels, writeManifest } from '../prepare-models.mjs';
 import { indexOptions, indexSources, mirrorImage, readers, regenerateCommand } from '../index-3d-sources.mjs';
-import { blenderOptions, FLAGS as BLENDER_FLAGS, HELPER, PACKAGER, prepare3DModels, validatePreset } from '../prepare-3d-models.mjs';
+import {
+  blenderOptions, findBlender, FLAGS as BLENDER_FLAGS, HELPER, PACKAGER, prepare3DModels, STATIC_HELPER, validatePreset,
+} from '../prepare-3d-models.mjs';
 
 const SPACE = path.join(REPO_ROOT, 'games/space-typing');
 const SPACE_BASE = '/assets/space-typing/models';
@@ -228,6 +231,61 @@ test('blender: preset checks, a dry run plans Blender and the packager with the 
   await assert.rejects(prepare3DModels({ ...options, kinds: ['units'] }), /Blender helper does not handle units/, 'a contract alone is not enough');
   assert.equal(readFileSync(HELPER, 'utf8'), readFileSync(path.join(SPACE, 'scripts/models/blender/space_typing_model_tools.py'), 'utf8'),
     'the Blender helper is the same file as Space\'s');
+});
+
+test('blender: static entries go to the static helper with their spec, picture, report and preview', async (t) => {
+  const root = path.join(scratch(t), 'typing-defense');
+  const contracts = {
+    file: path.join(root, 'scripts/models/model-contracts.ts'),
+    MODEL_CONTRACTS: {
+      buildings: { requiredSockets: ['FX_core'], triangles: { min: 2000, max: 15000 } },
+      props: { requiredSockets: [], triangles: { min: 50, max: 4000 } },
+    },
+  };
+  put(root, 'scripts/models/model-contracts.ts', 'export const MODEL_CONTRACTS = {};\n');
+  put(root, 'art-src/3d/buildings/keep.glb', 'tripo keep');
+  put(root, 'art-src/3d/props/pile.glb', 'tripo pile');
+  put(root, 'art-src/buildings/keep.png', 'picture');
+  put(root, 'art-src/3d/SOURCES.json', JSON.stringify({ files: { 'buildings/keep.glb': { image: 'art-src/buildings/keep.png' } } }));
+  const keep = { source: 'buildings/keep.glb', triangles: 15000, reviewed: false, static: { yaw: 90, size: { measure: 'footprint', metres: 7 } } };
+  const pile = { source: 'props/pile.glb', triangles: 2000, reviewed: false, reference: 'props/pile-ref.png', static: { yaw: 90 } };
+  const presetFile = put(root, 'scripts/models/presets/static.json', JSON.stringify({
+    version: 1, contracts: 'scripts/models/model-contracts.ts', kinds: ['buildings', 'props'], models: { 'buildings/keep': keep, 'props/pile': pile },
+  }));
+  assert.throws(() => validatePreset('props/pile', { ...pile, static: [1] }, { contracts, kinds: ['props'] }), /static must be an object/);
+  assert.throws(() => validatePreset('props/pile', { ...pile, reference: '../x.png' }, { contracts, kinds: ['props'] }), /reference/);
+  const lines = [];
+  const preview = path.join(root, 'previews');
+  const options = { ...blenderOptions({ root, preset: presetFile, 'dry-run': true, preview }), contractsModule: contracts, log: (line) => lines.push(line) };
+  const { results, failures } = await prepare3DModels(options);
+  assert.equal(failures, 0, lines.join('\n'));
+  const planned = Object.fromEntries(results.map((result) => [result.key, result]));
+  const args = planned['buildings/keep'].args;
+  const value = (flag) => args[args.indexOf(flag) + 1];
+  assert.equal(value('--python'), STATIC_HELPER);
+  assert.equal(value('--input'), path.join(root, 'art-src/3d/buildings/keep.glb'));
+  assert.equal(value('--output'), path.join(root, 'art-src/models/buildings/keep.glb'));
+  assert.equal(value('--id'), 'buildings/keep');
+  assert.deepEqual(JSON.parse(value('--spec')), { ...keep.static, triangles: 15000 }, 'the spec carries the decimation target');
+  assert.equal(value('--reference'), path.join(root, 'art-src/buildings/keep.png'), 'picture from SOURCES.json');
+  assert.equal(value('--report'), path.join(root, 'art-src/models/.reports/buildings__keep.json'));
+  assert.equal(value('--preview'), preview);
+  assert.ok(planned['buildings/keep'].packager.includes(path.join(root, 'scripts/models/model-contracts.ts')), 'the preset\'s contracts reach the packager');
+  assert.ok(!planned['props/pile'].args.includes('--reference'), 'a missing reference picture is left out');
+  assert.ok(lines.some((line) => line.startsWith('NOTE props/pile: reference picture')));
+  assert.ok(lines.some((line) => line === 'PLAN buildings/keep: 15000 triangles, static'));
+  // A kind the Space helper does not know works only when every entry of it is static.
+  put(root, 'scripts/models/presets/mixed.json', JSON.stringify({ version: 1, kinds: ['props'], models: { 'props/pile': { ...pile, static: undefined } } }));
+  await assert.rejects(prepare3DModels({ ...options, presetFile: path.join(root, 'scripts/models/presets/mixed.json') }), /only "static" entries/);
+});
+
+test('static helper math in Blender: ring fit ignores a platform, colour never overshoots, roll-off stays below white', async (t) => {
+  let blender;
+  try { blender = await findBlender(undefined); } catch { t.skip('Blender not installed'); return; }
+  const script = path.join(REPO_ROOT, 'scripts/models/test/static_model_tools_check.py');
+  const run = spawnSync(blender, ['--background', '--factory-startup', '--python-exit-code', '1', '--python', script], { encoding: 'utf8', timeout: 120000 });
+  assert.equal(run.status, 0, run.stdout + run.stderr);
+  assert.match(run.stdout, /static checks passed/);
 });
 
 test('CLI: bad flags exit 2 before doing anything; --help exits 0', () => {
