@@ -41,11 +41,15 @@ Set-Content -Path (Join-Path $log 'brief.md') -Value $prompt -Encoding UTF8
 
 $imgArgs = @(); foreach ($i in $Image) { $imgArgs += @('-i', (Resolve-Path $i)) }
 # The prompt goes in on stdin ("-"): briefs can be longer than a Windows command line, and stdin keeps UTF-8 intact.
-$cxArgs = @('exec', '-m', $Model, '-c', "model_reasoning_effort=`"$Effort`"", '--skip-git-repo-check', '-s', $Sandbox,
-  '-C', $workdir, '--json', '-o', (Join-Path $log 'last.md')) + $imgArgs + @('-')
+# --disable memories: the owner's Codex memory writer failed inside a run (apply_patch on memory_summary.md).
+$cxArgs = @('exec', '-m', $Model, '-c', "model_reasoning_effort=`"$Effort`"", '--disable', 'memories', '--skip-git-repo-check',
+  '-s', $Sandbox, '-C', $workdir, '--json', '-o', (Join-Path $log 'last.md')) + $imgArgs + @('-')
 
 $env:OPENAI_API_KEY = $null; $env:CODEX_API_KEY = $null   # use the owner's ChatGPT login, never an API key
 $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+# Windows PowerShell 5.1 turns every stderr line of a native command into an error record; with
+# ErrorActionPreference Stop that aborted a whole run on one logged warning. Codex logs to stderr freely.
+$ErrorActionPreference = 'Continue'
 $prompt | & $codex @cxArgs > (Join-Path $log 'events.jsonl') 2> (Join-Path $log 'err.txt')
 $code = $LASTEXITCODE
 "exit $code"

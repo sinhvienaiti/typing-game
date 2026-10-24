@@ -217,8 +217,14 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
 `~/AudioLab`, `~/.config/rclone`, node_modules của Mac, nginx 9 host vẫn dùng được, không cần cài lại.
 
 ### 7.3 Việc chủ dự án tự làm trên Dell (cần quyền quản trị, Claude không tự sửa cài đặt hệ thống)
-- Play mode, 3 host mới (`dragon.`, `td.`, `survival.typing-game.local`): trong WSL chạy `pnpm setup:play` (hoặc `setup:dev`). Script viết lại nginx, chứng chỉ mkcert, `/etc/hosts` của WSL.
-- Thêm 3 host vào `C:\Windows\System32\drivers\etc\hosts` (Notepad chạy quyền Administrator), cùng dòng với 6 host cũ.
+- **Play mode trong WSL đã dựng lại (25/10).**
+  - nginx có 10 host: thêm `dragon.`, `td.`, `survival.`, `tutien.typing-game.local`.
+  - Chứng chỉ mkcert có đủ 10 tên.
+  - Portal và 3 game đã build lại.
+  - Trong WSL cả 10 host trả về 200.
+  - `tutien` tạm là trang chờ (`games/immortality-cultivation/dist/index.html`, không commit) tới khi M0a có bản build.
+- **Còn việc của chủ dự án:** thêm host vào hosts của Windows. Mở PowerShell bằng "Run as administrator" rồi chạy `powershell -ExecutionPolicy Bypass -File D:\typing-game\scripts\windows\add-hosts.ps1`.
+  - Script đọc `HOSTS` của `scripts/setup-nginx.sh`, chỉ thêm host còn thiếu, sao lưu file hosts trước, chạy lại được nhiều lần.
 - Nếu Chrome trên Windows báo chứng chỉ không tin: nhập `rootCA.pem` của mkcert trong WSL (`mkcert -CAROOT`) vào Windows.
 - `pnpm media:setup` (đăng nhập Google) trước khi dùng `media:pull/push`.
 - Chạy game không cần nginx: `pnpm --dir games/<game> dev` (dragon 3005, td 3006, survival 3007), mở `http://127.0.0.1:<port>`.
