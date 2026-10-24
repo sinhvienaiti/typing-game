@@ -80,9 +80,23 @@ Chạy lại các kịch bản này trên Mac, hoặc trên Dell bằng Chrome c
 | dragon-hold | `02a0833`, `dc08714` | Phím tốc độ cố định; toast; ô số đo theo nét vẽ (`dh-numbers-drawn`); đo lại GPU. Kiểm tra: **chưa đạt**, vì tài liệu nói quá về bằng chứng hit-stop (mục 6.A) |
 | space-typing | `4061ae02` | `.gitignore` chừa `*.md`, `*.txt` cạnh model. Kiểm tra: đạt |
 
+- 24/10 tối, **bước B, đợt 1 (đã push)**. Workflow bị ngắt vì giới hạn phiên lúc khoảng 21:30. Phần đã xong:
+
+| Repo | Commit | Nội dung |
+|---|---|---|
+| dragon-hold | `68e51ea`, `24c8591`, `8ccefbc`, `0211249`, `a4d00e7` | Vòng 3: 9 quyết định theo đề xuất (canon D27–D29: dải nhàn Cân bằng ≤ 20 %, G8 theo 03 §0, trần k 1,50). Atlas số sát thương từ kit. Hit-stop đo trên GPU: 0/2.848 khung có số chạm nhau. `dh-crowd` đủ 3 lần đo (seed 5, 6). B1/B7 vẫn trượt sau 6 vòng chỉnh. **Kiểm tra độc lập: đang chạy lại** |
+| typing-survival | `f975d02`, `49ba852`, `0f0748d` | Làm lại sức súng (Xung chương 27 viên, Tán 2,3 s, Ray 95…), G3m đo trên cả seed 1–16 và 17–32, đồng bộ kit. Báo cáo 100 seed, tài liệu và kịch bản: **đang làm** |
+| typing-defense | `8f5ae21` | Chỉ có phần âm Q6. R2 **đang dở trong cây làm việc** (khoảng 63 file), lượt chạy lại sẽ chụp vào nhánh `wip/r2-partial-2026-10-24` rồi làm tiếp |
+| cha | `bfdf2177`, `512033e9` | Viết lại 54/66 thẻ âm hành động theo Q6 (`tools/audio-lab/Q6_REWRITE_2026-10-24.md`). Kit: atlas chữ số đo theo nét mực, nhãn ở hàng riêng; canon và BALANCE. Kiểm tra làn âm: **chưa đạt** (`hit.t1`/`t2` của Tuyến Cuối giữ nguyên với lý do sai; 4 thẻ còn "thump/thud"), đang sửa |
+
 ## 5. Đang làm
 
-- Bước B: việc tiếp theo của từng game, cộng lượt viết lại spec âm theo Q6 (mục 6.B).
+- Bước B, đợt 2 (workflow `phase-b-resume`):
+  - kiểm tra độc lập Rồng Giữ Ải;
+  - làm nốt R2 của Lời Gọi;
+  - làm nốt lượt súng của Tuyến Cuối (báo cáo 100 seed, kịch bản, tài liệu);
+  - sửa các lỗi kiểm tra tìm ra ở làn âm Q6.
+- Nếu phiên bị ngắt nữa: đọc `git log` và `git status` của từng repo, rồi chạy tiếp từ trạng thái đó. Mỗi làn ghi kết quả chạy vào `games/<game>/tmp/dell-2026-10-24/c/`.
 
 ## 6. Còn lại, theo thứ tự
 
@@ -214,3 +228,9 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
   - Có đường đo hiệu năng bằng GPU qua Chrome Windows.
   - Changelog ngày `docs/changelog/2026-10-24.md` nay ghi đủ việc trong ngày.
   - Bản đánh giá Tu Tiên Thủ Ải đã commit (`707349e0`), chờ chủ dự án đồng ý mốc M0.
+- 24/10/2026 (Dell, tối): bước B đợt 1, một phần, đã push.
+  - Rồng Giữ Ải vòng 3.
+  - Tuyến Cuối làm lại sức súng.
+  - Âm Q6: 54 thẻ.
+  - Kit: atlas chữ số.
+  - Bị ngắt vì giới hạn phiên; chạy tiếp ở đợt 2.
