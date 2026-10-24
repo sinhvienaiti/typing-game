@@ -103,14 +103,19 @@ Test audio-lab trên Dell:
 - Kết quả: 206 đạt, 2 trượt. Hai test trượt vì 14 thẻ S1 của Tuyến Cuối chưa có bộ đọc trong `specs/readers/typing_survival.py`.
 - Phải đặt `AUDIOLAB_HOME`. Nếu không, `pytest.ini` tạo một thư mục tên đúng nguyên chữ `$AUDIOLAB_HOME` ngay trong `tools/audio-lab` (đã bị gitignore).
 
+- 25/10 (sáng), **bước C: sửa sau kiểm tra (đã push)**. Phần làm xong ở cả 4 làn. Kiểm tra độc lập của 3 game bị ngắt vì giới hạn phiên, đang chạy lại; làn âm đã đạt.
+
+| Repo | Commit | Nội dung |
+|---|---|---|
+| dragon-hold | `915a888`, `d5fd0fb`, `212167f`, `06cd4e6` | B1/B7 chấm theo **dải chung** BALANCE §3 và in thêm dải D27. Cả hai vẫn trượt: nhàn I của 6 bot 16,4–30,6 %. D27 thành "đề xuất của vòng 3, chờ chủ dự án xác nhận". Luật cổng giữ sàn canon (1,5 s mỗi cổng, 0,6 s giữa làn); khi cổng giữ một nhóm, cả đợt chờ; G9 1,40. Đọc được ở 70 và 100 WPM (GPU). Thử 4 vòng B1/B7, không giữ vòng nào |
+| typing-defense | `e2757fd`…`0fc83a8` (7) | Gói JS khởi động 77,2 kB < 85 kB, `pnpm build` tự kiểm. G5 chấm mọi bot, đạt (cao nhất 12,4 %). `PACE.speedK` 0,3 (chờ chủ dự án xác nhận). B3 đạt; đích chặt 4/6 bot như R1. Còn trượt: B1 (Ẩu, Chậm chắc ở bộ 2), G3 bộ 2. `BUILD_NOTES` §7.4 |
+| typing-survival | `ce953b8`…`5766ea4` (7) | Tách `aim.ts` cho ngân sách dòng; băng Xung chương không lẫn sang Trận thử; định nghĩa B4 vào `BUILD_S1` §11.3; kịch bản `survival-s1-latency` (phím tới khung/tới đạn trên GPU); cần `drainRate` cho từng ải. 6 vòng thử mỗi họ cổng, không vòng nào giữ. Báo cáo 100 seed: **cổng R1 vẫn chưa đạt** (B1, B7, G3c vế "tốt nhất") |
+| cha | `c18f1a2c`, `559bc106`, `b88cb0ca` | Âm Q6: thẻ cho 14 id S1, bộ chấm đọc `loop_eval`, thêm từ cấm cho `gen.sa3` (kiểm tra: đạt). Canon D27/D29. Changelog ngày |
+
 ## 5. Đang làm
 
-- Bước C: sửa các lỗi lớn mà bước kiểm tra tìm ra.
-  - Rồng Giữ Ải: báo B1 theo cả hai dải; D27 thành đề xuất chờ xác nhận; giữ sàn đọc được của D29.
-  - Lời Gọi R2: giữ số của R1; chọn cần chỉnh cân bằng theo đề xuất; G5 tính cho mọi bot; bundle JS < 85 kB.
-  - Tuyến Cuối: đòn bẩy cho G3c vế "tốt nhất ≤ 97 %", B1, B7.
-  - Âm Q6: lỗi nhỏ, cộng bộ đọc cho 14 thẻ S1.
-- Nếu phiên bị ngắt: đọc `git log` và `git status` của từng repo rồi chạy tiếp từ trạng thái đó. Kết quả chạy nằm ở `games/<game>/tmp/dell-2026-10-24/`.
+- Chạy lại kiểm tra độc lập của bước C cho dragon-hold, typing-defense, typing-survival (workflow `phase-c-review-fixes`, chạy tiếp bằng cache).
+- Nếu phiên bị ngắt: đọc `git log` và `git status` của từng repo rồi chạy tiếp từ trạng thái đó. Kết quả chạy nằm ở `games/<game>/tmp/dell-2026-10-2x/`. Script workflow để chạy tiếp được chép vào `.local/workflows/` (gitignored).
 
 ## 6. Còn lại, theo thứ tự
 
