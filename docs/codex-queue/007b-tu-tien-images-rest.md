@@ -9,6 +9,18 @@ Không chạy git.
 
 **Nguồn:** bộ prompt `docs/games/tu-tien/art-requests/m0b/` (Codex viết ở phiếu 007) và nhận xét trong `games/immortality-cultivation/art-src/README-m0b.md`.
 
+## Trạng thái khi chạy lại (25/10, 16:50)
+
+Lượt 09:49–13:10 đứt mạng trước khi xong. **Đã có, không tạo lại:**
+- `treasures/hau-tho-an.png` (bản cũ `.v1.png`);
+- `treasures/thanh-phong-kiem-side.png` (bản cũ `.v1.png`);
+- `variants/dang-thu.png`, `variants/dang-thu-front.png`.
+
+**Còn thiếu:**
+- `variants/khe-vien.png`, `variants/khe-vien-back.png` (prompt đã có cạnh chỗ lưu);
+- `beasts/hoa-nha-side.png`: bản cũ đã đổi tên `.v1.png`, chưa có lượt mới (vẫn tối đa 2 lượt);
+- bước 3 (README-m0b, 3D_REQUESTS) chưa làm.
+
 ## Việc
 
 1. **Tạo các ảnh phiếu 007 để lại vì hết lượt:**

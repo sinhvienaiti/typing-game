@@ -65,10 +65,14 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
 - **Codex bị dừng giữa chừng.** Phiếu ảnh tự bỏ qua ảnh đã có, nên chạy lại là làm tiếp:
   - **005a** (ảnh nhân vật bậc VS của Lời Gọi): dừng khi đang vẽ. Chạy lại 005a, rồi 005b.
   - **012b** (sửa `tools/art-normalize`): dừng khi đang sửa. Bản đang dở **không commit**, có trong gói ở `typing-game/tools/art-normalize`. Trên Mac: chạy lại 012b, Claude phản biện, rồi mới commit.
-  - **014** (8 avatar Tu Tiên): đã xong 6–8 mẫu. Kiểm `art-src/avatar-test/`; thiếu thì chạy lại 014, rồi ghép ảnh xem nhanh.
+  - **014** (8 avatar Tu Tiên): xong 6/8 (a01–a06). a07, a08 mới có bản lượt đầu bị loại và prompt lượt 2.
+    - **Đừng chạy lại 014**: chạy phiếu **014r** (làm nốt a07, a08 bằng prompt có sẵn, ảnh xem nhanh, README; không đụng a01–a06).
+    - Session Tu Tiên đã xem 6 ảnh (ảnh ghép `art-src/_review/014-preview-6of8-claude.jpg` trong gói): mặt khác hẳn nhau, chất vẽ tay mực và gouache đạt; chi tiết ở D0.
   - **Chưa chạy:**
     - 015, 016 (ảnh 2D và gom Tripo cho 3 game);
-    - danh sách Tu Tiên `.local/codex-lane-tutien.txt` (007b, 010a, 010b, 010c).
+    - danh sách Tu Tiên `.local/codex-lane-tutien.txt`: **014r → 007b → 010a → 010b → 010c** (bản trong gói đã có dòng 014r).
+    - Lúc 16:44 Codex báo hết hạn mức ChatGPT tới 18:10. Session Tu Tiên đã dừng hàng chờ đang đợi trên Dell, để chạy trên Mac.
+    - Phiếu 007b ghi sẵn ảnh đã có và ảnh còn thiếu (Khê Viên 2 góc, Hỏa Nha ngang).
   - File danh sách nằm trong gói ở `typing-game/.local/`.
 - **Không có tiến trình nào còn chạy;** mọi repo đã push.
   - Chưa vào Git: `tools/art-normalize/` (chờ phản biện) và tài liệu gốc `TU_TIEN_TYPING_SYSTEMS_AND_5_COMBAT_OPTIONS_V2_2026-10-24.md` của chủ dự án.
@@ -306,6 +310,17 @@ Test audio-lab trên Dell:
 - **M0a đợt A bị giới hạn phiên ngắt lúc khoảng 07:00.**
   - Bước 0 đã commit và push (`4ee8658`, `2443db6`).
   - 5 làn bỏ lại khoảng 71 file chưa commit. Workflow chạy tiếp từ cache; các làn được dặn làm tiếp phần dở trong đường dẫn của mình.
+- **Avatar 014, session Tu Tiên duyệt 6/8 (25/10, 16:50).**
+  - Đạt: mỗi người một cấu trúc mặt, tuổi, biểu cảm riêng; nét mực và gouache thật sự vẽ tay; ở cỡ 128 px vẫn nhận ra từng người. Khác hẳn bộ 009, nơi mọi người chung một mặt.
+  - Còn lỗi:
+    - a01 vẫn là mặt "đẹp chuẩn" nhất, da trắng sứ;
+    - a04 (ma đầu) và a06 (trưởng lão) tối, ít tương phản ở 128 px, nên thêm viền sáng;
+    - chuôi kiếm a01, a02 quấn kiểu katana, chưa ra kiếm Việt;
+    - trang phục còn chung chung, chưa rõ chất Việt.
+  - **Đề xuất** (chờ chủ dự án chọn): giữ 10 nhân vật chơi được của D49 nhưng mỗi người một kiểu mặt lấy từ bảng này.
+    - Ví dụ: Kiếm nữ kiểu a01, Kiếm nam kiểu a02, Thổ thể nam kiểu a05, Phù nam kiểu a07, Hỏa nam kiểu a08.
+    - a03, a04 làm nhân vật phản diện hoặc người đứng sau thú triều.
+    - Khi được duyệt: ghi D50 vào canon, vẽ bộ avatar 10 người, rồi viết lại phiếu 013, 013b theo mặt mới.
 
 ### D. Game tu tiên chống thú triều (mới, 24/10)
 - **Đã xong: đánh giá** `docs/games/tu-tien/DANH_GIA_2026-10-24.md` (đọc trước), gồm 7 bản phân tích và 1 bản phản biện ở `analysis/`. Bản chụp đề xuất Codex nằm ở `source/`. Video QCBH ở gốc repo, không vào Git.
