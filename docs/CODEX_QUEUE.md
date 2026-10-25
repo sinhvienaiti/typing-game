@@ -20,7 +20,7 @@ Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng
 | 007 | [Bộ prompt ảnh M0b và ảnh 2D nguồn để dựng 3D](codex-queue/007-tu-tien-art-pack-and-images.md): 2 ảnh bản sắc, Kiếm tu, 5 họ thú, tinh anh, thú tướng, Thú Vương, trận pháp, kiếm bay; mục Tu Tiên trong 3D_REQUESTS | Tu Tiên Thủ Ải | Prompt + ảnh | **Xong** 25/10: bộ prompt `docs/games/tu-tien/art-requests/m0b/` (44 prompt); 38 ảnh trong `games/immortality-cultivation/art-src/` (2 ảnh bản sắc, Kiếm tu, Thổ thể tu, bot, 5 họ thú, tinh anh, thú tướng, Thú Vương, cơ quan, trận, kiếm Thanh Phong); bảng 3D Tu Tiên 19 GLB trong `3D_REQUESTS.md`. Cần duyệt: 2 ảnh bản sắc và 3 mẫu chính; nền chưa đúng `#E6E6E6` |
 | 007b | [Làm nốt ảnh M0b còn thiếu](codex-queue/007b-tu-tien-images-rest.md): Hậu Thổ Ấn, góc cạnh kiếm, Đằng Thử/Khê Viên, Hỏa Nha ngang | Tu Tiên Thủ Ải | Ảnh | Dừng lúc 06:10 vì hết hạn mức ChatGPT. Xếp lại sau 009 |
 | 008 | [Làm lại ảnh bản sắc theo nhận xét của chủ dự án](codex-queue/008-tu-tien-identity-redo.md): nữ Kiếm tu quý phái, hoàng tộc (D47); cảnh ải đúng camera game, thấy trọn sân và triều thú (D48); ảnh nguồn kiem-tu mới | Tu Tiên Thủ Ải | Ảnh (ưu tiên) | **Xong** 25/10: 6 ảnh mới, bản cũ giữ `.v1.png`. **Chủ dự án duyệt:** chân dung A (miện ngọc) là chuẩn phong cách; cảnh 55° là góc camera mặc định. Còn: nền nguồn chưa đúng `#E6E6E6`, tay cần mở thêm trước Tripo |
-| 009 | [Chân dung concept cho cả danh sách nhân vật](codex-queue/009-tu-tien-character-roster.md): 5 trường phái × nam/nữ (D49) cộng ảnh đội hình | Tu Tiên Thủ Ải | Ảnh | Đang chạy từ 09:23 25/10 (4/11 ảnh lúc 09:35) |
+| 009 | [Chân dung concept cho cả danh sách nhân vật](codex-queue/009-tu-tien-character-roster.md): 5 trường phái × nam/nữ (D49) cộng ảnh đội hình | Tu Tiên Thủ Ải | Ảnh | **Xong** 25/10:<br>• 9 chân dung mới, nữ Kiếm tu dùng lại bản A;<br>• 1 ảnh đội hình 2172×724, chỉ 5 ảnh tham chiếu vì công cụ giới hạn;<br>• bộ prompt `m0b/06-roster.md`.<br>**Claude duyệt:** prompt đạt; đã sửa câu "A chưa duyệt" (chủ dự án đã duyệt). Ảnh xem nhanh: `art-src/_review/009-roster-sheet.jpg`. Mặt các nhân vật còn khá giống nhau.<br>**Chờ chủ dự án chọn** trước khi làm ảnh nguồn 3D |
 | 010a | [Môi trường và kết cấu VFX](codex-queue/010a-tu-tien-environment-vfx.md): 6 ô đất, 8 decal, 3 lớp phông, 6 cỏ bụi, 18 VFX | Tu Tiên Thủ Ải | Ảnh + hậu kỳ | Làn A: tự chạy sau hàng chờ hiện tại (`queue.ps1`, `.local/codex-lane-a.txt`) |
 | 010b | [Biểu tượng](codex-queue/010b-tu-tien-icons.md): 35 cái (chiêu Kiếm, Thổ thể, đan phù, cơ quan, tiền, Đạo Quả, cảnh giới) | Tu Tiên Thủ Ải | Ảnh + hậu kỳ | Làn A, sau 010a |
 | 010c | [Màn tựa, Sơn Môn, khung giao diện, Tĩnh Tu](codex-queue/010c-tu-tien-ui-hub-tinh-tu.md): 25 ảnh, có số cắt 9-slice | Tu Tiên Thủ Ải | Ảnh + hậu kỳ | Làn A, sau 010b |
@@ -40,3 +40,11 @@ Mỗi lần chạy:
 - Log nằm ở `.local/codex-runs/<id>/`.
 - Ảnh là media, không vào Git. Chủ dự án sao lưu bằng `pnpm media:push`, sau khi chạy `pnpm media:setup` trên máy.
 - Claude xem báo cáo `last.md`, nhìn thử một số ảnh, rồi cập nhật bảng này.
+- **Duyệt kỹ mọi đầu ra của Codex trước khi commit** (chủ dự án dặn 25/10: "có thể nó code không được tốt"):
+  - Mã, script, công cụ:
+    - Claude tự đọc diff;
+    - chạy test của Codex và các lệnh kiểm của repo;
+    - phản biện độc lập nhiều góc: đúng sai, ca biên, quy ước repo, an toàn (không ghi đè, không xóa, đúng đường dẫn).
+    - Sai thì sửa hoặc trả lại; ghi kết luận vào cột trạng thái.
+  - Báo cáo phản biện của Codex (như 011) chỉ là đầu vào: Claude kiểm lại từng phát hiện trước khi sửa mã theo nó.
+  - Không bao giờ commit chỉ dựa trên báo cáo của chính Codex.
