@@ -1,5 +1,7 @@
 # Tu Tiên Thủ Ải — Bộ prompt ảnh M0b và nguồn dựng 3D (25/10/2026)
 
+> **Cập nhật Phiếu 008:** [00-identity.md](00-identity.md) hiện có hai chân dung phục sức hoàng tộc theo D47 và hai cảnh toàn sân theo D48 (50°/55°); cặp Kiếm tu trước/sau ở [01-cultivators-bots.md](01-cultivators-bots.md) dùng thiết kế mới. Phiếu sửa được phép tối đa hai lượt cho mỗi ảnh, độc lập với trần 40 của Phiếu 007 đã xong. Bản cũ và prompt giữ tên `.v1`; xem [giao nhận Phiếu 008](../../../../../games/immortality-cultivation/art-src/README-m0b.md). Các số đếm, thứ tự và việc còn thiếu dưới đây là hồ sơ **Phiếu 007 tại thời điểm giao**, không phải tổng kiểm kê hiện tại.
+
 > **Kết quả lượt này:** 40 đầu ra = 38 ảnh danh mục + 2 bản đầu bị loại. Góc ngang Hỏa Nha sau thử lại vẫn chưa đạt Multiview; nền nguồn chưa khóa đúng #E6E6E6. Sáu ảnh chưa tạo ở §6; xem [nhận xét từng ảnh](../../../../../games/immortality-cultivation/art-src/README-m0b.md).
 > **Phiếu 007 · Dành cho:** chủ dự án duyệt bản sắc, tự dựng Tripo; Codex tạo ảnh bằng image_gen tích hợp; Blender dọn model, rig và làm clip sau. Chỉ tạo nguồn 2D, chưa dựng hoặc tích hợp GLB.
 > **Nguồn thắng:** [canon](../../00-canon.md) §0, §2, §8–12, §14.5, §20–21, D03, D23, D27, D36; [đánh giá](../../DANH_GIA_2026-10-24.md) cho lý do bản sắc; [3D_REQUESTS.md §1.1](../../../3D_REQUESTS.md#11-quy-tắc-rig-của-lượt-này) cho rig. Cách đóng gói theo bộ Rồng M0; không chép mỹ thuật Rồng hoặc game khác.
@@ -9,11 +11,11 @@ Instructions for the image tool (Codex image_gen or ChatGPT)
 - This README is an index, not an image prompt.
 - Open the named file and paste one complete text prompt per image, verbatim.
 - Follow section 2 order. One output per call; never combine views on one sheet.
-- Attach only the reference image named for that output; inspect local references first.
+- Attach the reference image or images named for that output, in their stated roles; inspect local references first.
 - Keep all reconstruction plates on uniform #E6E6E6 with no shadows, text or effects.
 - Bipeds: front A pose then rear A pose. Quadrupeds: left side then front. Crow: front then left side.
 - Keep primary and secondary views geometrically identical.
-- Count all outputs, including retries, against the 40-image cap; retry an obviously broken image at most once.
+- For completed ticket 007, all outputs including retries count against its 40-image cap. Ticket 008 allows at most two attempts per requested image.
 - Save each PNG and its exact prompt as <id>.prompt.txt in the specified directory.
 ```
 
