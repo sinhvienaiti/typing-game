@@ -34,6 +34,8 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
   - Cuối cùng đo hiệu năng Apple M4 khi máy rảnh.
   - Bị ngắt: chạy lại bằng `resumeFromRunId` (cùng phiên), hoặc đọc `git log` từng repo rồi chạy tiếp phần còn thiếu.
   - Sau đó người điều phối chép kit mới vào typing-defense và typing-survival (`pnpm kit:sync`), nâng gitlink.
+  - **25/10 khoảng 23:00 hết hạn mức phiên:** 9 bước xong (Lời Gọi F3–F6 và kế hoạch R3; Tuyến Cuối cổng R1 và báo cáo; âm 1c sinh, dựng phiên nghe, phản biện), 18 bước hỏng. Chạy tiếp bằng `resumeFromRunId` thì chạy lại cả bước đã xong (cache chỉ giữ phần đầu liền mạch), nên đã dừng.
+  - **Từ 23:50 chạy tiếp mỗi làn một workflow** `.local/workflows/lane-continue.js` (`args.lane`): Lời Gọi `wf_1d8075fa-b38`, Tuyến Cuối `wf_3c8b76f9-3f4`, Rồng `wf_64b27449-e78`, âm `wf_3e84b3d7-22f`. Kết quả bước đã xong ở `.local/workflows/state/<làn>-done.json`. Mỗi làn game xong thì tự chạy đợt test chia theo màn. Đo hiệu năng M4 chạy riêng sau cùng.
 
 ### 0.1 Mang việc về Mac
 1. **Code:** mọi repo đã push lúc rời Dell (repo cha nhánh `feat/space-typing-admin-uiux`; 5 game nhánh `main`, Space nhánh `feat/space-typing-2026-10-18`). Kéo về theo mục 7.1, thêm `git submodule update --init games/immortality-cultivation` (game mới, chưa có trên Mac).
