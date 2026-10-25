@@ -664,6 +664,22 @@ describe("a number's box is what NumberSprites draws", () => {
     for (let i = 0; i < f.alive.length; i += 1) if (f.alive[i] === 1) expect(f.box(i, zero()).y).toBeGreaterThanOrEqual(0);
   });
 
+  it("a number born just under the top edge floats up to it, not past it (Mac 720p storm: a \"575\" whose label drifted off screen)", () => {
+    const f = new NumberField(DRAGON);
+    f.fontPx = 16;
+    const probe = f.spawn(9, 640, 400, 575, STYLE.perfect, 4, 1.6, 1, 0, -1, 0);
+    const above = 400 - 16 - f.box(probe, zero()).y;
+    f.kill(probe);
+    // Born with its box 2 px under the top edge (spawn() lifts it 16 px off its blow).
+    const i = f.spawn(1, 640, above + 2 + 16, 575, STYLE.perfect, 4, 1.6, 1, 0, -1, 0);
+    expect(i).toBeGreaterThanOrEqual(0);
+    expect(f.box(i, zero()).y).toBeGreaterThanOrEqual(0);
+    for (let k = 0; k < 50 && f.alive[i] === 1; k += 1) {
+      f.update(1 / 60);
+      if (f.alive[i] === 1) expect(f.box(i, zero()).y).toBeGreaterThanOrEqual(-1e-6);
+    }
+  });
+
   it("settle() lifts a number again when its first lift lands on one already passed: none touch after the frame", () => {
     const f = new NumberField(DRAGON);
     f.fontPx = 16;
