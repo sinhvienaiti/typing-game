@@ -182,23 +182,29 @@ def feature(r: dict, f: str):
 
 
 def item_stats(it: Item, res: dict[str, dict], scorer: str) -> dict:
+    """Pairs and top pick of one item. Combined scores are z-scores inside one critic run (its rank group), so only
+    candidates of the same critic folder are compared; an item mixing runs (batch 1c review: a take ranked only at raw
+    stage next to final-stage ones) counts its cross-run pairs in `cross_run_pairs` and has no top pick."""
     vals = {c.sha: value(res.get(str(c.critic)), scorer) for c in it.cands}
     rated = [c for c in it.cands if c.stars is not None and vals[c.sha] is not None]
-    agree, n = 0.0, 0
+    agree, n, cross = 0.0, 0, 0
     for a, b in itertools.combinations(rated, 2):
         if a.stars == b.stars:
+            continue
+        if Path(a.critic).parent != Path(b.critic).parent:
+            cross += 1
             continue
         n += 1
         dv = vals[a.sha] - vals[b.sha]
         agree += 0.5 if dv == 0 else float((dv > 0) == (a.stars > b.stars))
     top = None
-    if rated:
+    if rated and len({Path(c.critic).parent for c in rated}) == 1:
         best = max(vals[c.sha] for c in rated)
         tied = [c for c in rated if vals[c.sha] == best]
         top = sum(c.pick for c in tied) / len(tied)
     pick = next((c for c in it.cands if c.pick), None)
     pr = res.get(str(pick.critic)) if pick else None
-    return {"pairs_agree": agree, "pairs": n, "top_pick": top,
+    return {"pairs_agree": agree, "pairs": n, "top_pick": top, "cross_run_pairs": cross,
             "pick_rank": ((pr or {}).get("score") or {}).get("rank") if scorer == "combined" else None,
             "n_ranked": ((pr or {}).get("score") or {}).get("n_ranked") if scorer == "combined" else None,
             "values": {c.role: vals[c.sha] for c in it.cands}}

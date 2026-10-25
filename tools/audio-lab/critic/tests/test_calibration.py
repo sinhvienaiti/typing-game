@@ -281,6 +281,18 @@ def test_pairs_ties_and_top_pick():
     assert st["top_pick"] == 0.5                                                 # 2-way tie at the top
 
 
+def test_pairs_across_two_critic_runs_are_not_compared():
+    """Batch 1c review: a take ranked only at raw stage (critic-info-<id>) next to final-stage takes (critic-final):
+    their combined z-scores come from two rank groups, so those pairs are counted apart and the item has no top pick."""
+    it = AG.Item("g", "x", "1c", "s", "trung", "hit_fire", False, "", None, [])
+    for k, s, d in (("a", 4, "final"), ("b", 2, "final"), ("c", 3, "info")):
+        it.cands.append(AG.Cand(k, "top", s, k == "a", Path(f"/{d}/{k}.json")))
+    res = {f"/{d}/{k}.json": {"verdict": "PASS", "score": {"combined": v, "rank": None}}
+           for k, v, d in (("a", 0.9, "final"), ("b", 0.1, "final"), ("c", 2.0, "info"))}
+    st = AG.item_stats(it, res, "combined")
+    assert (st["pairs_agree"], st["pairs"], st["cross_run_pairs"], st["top_pick"]) == (1.0, 1, 2, None)
+
+
 def test_roles_by_family_and_loop_only_features():
     it = _item({"a": 2, "p": 3}, "p", roles={"a": "top", "p": "probe"})
     rf = AG.roles_by_family([it])
