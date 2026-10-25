@@ -16,6 +16,14 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
   - Gói vẫn ở `typing-game-handoff-2026-10-25/` (gốc repo, không vào Git). Xoá được sau khi chủ dự án kiểm Drive.
 - **Codex CLI chưa có trên Mac.** Phiếu 005a, 005b, 012b, 015 chờ chủ dự án cài Codex CLI ≥ 0.164 và đăng nhập ChatGPT (`tools/codex-run/README.md`).
 - **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored): 4 chỗ CPU, 1 chỗ trình duyệt (`--gpu`), 1 chỗ commit repo cha (`--git`).
+- **Đang chạy (25/10, từ khoảng 19:10):** workflow `mac-continue-3-games-audio-1c` (script `.local/workflows/mac-continue-3-games-audio-1c.js`, run `wf_212e861e-4c4`). Bốn làn song song, mỗi làn: làm → 2–3 người kiểm độc lập → gộp → sửa:
+  - Lời Gọi: F3–F6 và mục 6.A, rồi R3 "Học và dạy" (kế hoạch `docs/td/R3_PLAN.md`), cân bằng R3;
+  - Tuyến Cuối: cổng R1, đề xuất (a), (b) của §5.1 làm theo đề xuất, báo cáo 100 seed;
+  - Rồng Giữ Ải: sửa `box()`/`settle()` của kit (chỉ chép vào dragon-hold), `dh-crowd`, rồi B1/B7 (toán tiên phong, thành phần đợt);
+  - Âm lô 1c: sinh lại theo Q6 §7, dựng phiên nghe `SESSION_1C_*`.
+  - Cuối cùng đo hiệu năng Apple M4 khi máy rảnh.
+  - Bị ngắt: chạy lại bằng `resumeFromRunId` (cùng phiên), hoặc đọc `git log` từng repo rồi chạy tiếp phần còn thiếu.
+  - Sau đó người điều phối chép kit mới vào typing-defense và typing-survival (`pnpm kit:sync`), nâng gitlink.
 
 ### 0.1 Mang việc về Mac
 1. **Code:** mọi repo đã push lúc rời Dell (repo cha nhánh `feat/space-typing-admin-uiux`; 5 game nhánh `main`, Space nhánh `feat/space-typing-2026-10-18`). Kéo về theo mục 7.1, thêm `git submodule update --init games/immortality-cultivation` (game mới, chưa có trên Mac).
