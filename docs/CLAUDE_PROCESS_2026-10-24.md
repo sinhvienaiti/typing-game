@@ -14,7 +14,9 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
 - **Code:** đã kéo về theo mục 7.1. Việc dở trên Mac đều đã có trong commit của Dell (so md5 từng file), nên cất vào stash `mac-before-dell-sync` ở 4 game và repo cha; bỏ được.
 - **Media:** đã chép gói Dell vào repo (1.013 file mới, 45 file trùng, 0 file đè lên file Git theo dõi) và `pnpm media:push` 692 file (520 MB): Rồng Giữ Ải 414, Lời Gọi 115, Tu Tiên 163.
   - Gói vẫn ở `typing-game-handoff-2026-10-25/` (gốc repo, không vào Git). Xoá được sau khi chủ dự án kiểm Drive.
-- **Codex CLI chưa có trên Mac.** Phiếu 005a, 005b, 012b, 015 chờ chủ dự án cài Codex CLI ≥ 0.164 và đăng nhập ChatGPT (`tools/codex-run/README.md`).
+- **Codex CLI có sẵn trên Mac** (sửa ghi nhầm lúc đầu: nó không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-26.1007.21434/bin/macos-aarch64/codex`, bản 0.162.0-alpha.17.2, đã đăng nhập ChatGPT (`~/.codex/auth.json`). Đã thử `codex exec -m gpt-6.1-sol`: chạy được.
+  - Đường dẫn đổi khi extension Cursor cập nhật. Không có `pwsh`, nên `run.ps1`, `queue.ps1` không chạy được trên Mac: gọi thẳng `codex exec` với cùng tham số.
+  - Phiếu còn chờ chạy: 005a, 005b, 012b, 015.
 - **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored): 4 chỗ CPU, 1 chỗ trình duyệt (`--gpu`), 1 chỗ commit repo cha (`--git`).
 - **Đang chạy (25/10, từ khoảng 19:10):** workflow `mac-continue-3-games-audio-1c` (script `.local/workflows/mac-continue-3-games-audio-1c.js`, run `wf_212e861e-4c4`). Bốn làn song song, mỗi làn: làm → 2–3 người kiểm độc lập → gộp → sửa:
   - Lời Gọi: F3–F6 và mục 6.A, rồi R3 "Học và dạy" (kế hoạch `docs/td/R3_PLAN.md`), cân bằng R3;

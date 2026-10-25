@@ -8,7 +8,7 @@ Mục đích: giao cho Codex những việc **hình ảnh, prompt âm thanh và 
   - Bản 0.146 trong extension Cursor chỉ gọi được `gpt-5.6-sol`. Với `gpt-6.x`, máy chủ báo "not supported when using Codex with a ChatGPT account".
 - **Đăng nhập:** bằng ChatGPT (`~/.codex/auth.json` của Windows). **Không dùng API key**: `run.ps1` xóa `OPENAI_API_KEY`, `CODEX_API_KEY`.
 - **Model mặc định:** `gpt-6.1-sol`, suy luận `high` (chủ dự án chọn: 6.1 sol, high trở lên). Có thể truyền `-Effort xhigh` hoặc `max`.
-- **Trên Mac:** cài Codex CLI ≥ 0.164 rồi đặt `CODEX_BIN`. Script là PowerShell; trên Mac dùng `pwsh`, hoặc chạy thẳng `codex exec` với cùng tham số.
+- **Trên Mac mini M4:** Codex CLI có sẵn trong extension ChatGPT của Cursor (không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-<bản>/bin/macos-aarch64/codex`. Bản 0.162.0-alpha.17.2 gọi được `gpt-6.1-sol` (thử ngày 25/10/2026), nên trên Mac không cần ≥ 0.164. Đặt `CODEX_BIN` trỏ tới file đó. Mac không có `pwsh`: chạy thẳng `codex exec` với cùng tham số của `run.ps1`.
 
 ## Cách dùng
 
