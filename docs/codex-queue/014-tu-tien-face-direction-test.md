@@ -1,47 +1,63 @@
-# Phiếu 014 · Tu Tiên Thủ Ải · thử 3 hướng gương mặt (6 ảnh)
+# Phiếu 014 · Tu Tiên Thủ Ải · 8 avatar vẽ tay thử nghiệm (mặt khác hẳn nhau)
 
-**Bối cảnh:**
-- Chủ dự án duyệt 10 chân dung của phiếu 009. Sau đó (25/10 chiều) chủ dự án thấy **gương mặt quá giống ảnh AI tràn lan trên mạng**, khiến game giống các game khác.
-- Mọi nhân vật đang chung một khuôn "mặt idol AI": da sứ mịn, mắt to, cằm V, môi bóng, mặt đối xứng, gần như cùng một người.
-- **Nguyên nhân một phần nằm ở prompt cũ:** "strikingly beautiful", "delicate harmonious facial features", "luminous natural skin", "match the attached portrait's face rendering". Mọi ảnh còn đính kèm cùng chân dung A, nên khuôn mặt bị chép sang tất cả.
-- Phiếu 013 và 013b (ảnh nguồn 3D) **tạm dừng** tới khi chủ dự án chọn hướng mặt mới.
+**Yêu cầu của chủ dự án (25/10):**
+1. Gương mặt hiện tại là "mặt AI" tràn lan, giống các game khác.
+2. Gương mặt chủ yếu dùng làm **avatar**, nên làm **dạng vẽ**: đẹp và phong phú hơn.
+3. Các mặt hiện tại y như nhau, chỉ khác màu da và cái áo. Phải khác thật ở **khuôn mặt**, nhiều hướng: rất đẹp, rất tà ác, rất mạnh mẽ…; có người **trẻ** và **trung niên**.
 
-**Mục tiêu:** tạo bản so sánh để chủ dự án chọn. Cùng 2 nhân vật (Kiếm nữ, Kiếm nam), **giữ nguyên phục sức, bảng màu, pháp khí** của chân dung đã duyệt, **chỉ đổi gương mặt và cách vẽ** theo 3 hướng.
+Làm **vài mẫu xem thử trước**. Chưa sửa danh sách nhân vật, chưa làm ảnh nguồn 3D.
+
+**Nguyên nhân mặt giống nhau:**
+- prompt cũ dùng "strikingly beautiful, delicate harmonious features, luminous skin";
+- mọi ảnh đính kèm cùng chân dung A.
+
+**Ở phiếu này:**
+- **Không đính kèm ảnh chân dung cũ nào.**
+- Mỗi người tả khuôn mặt riêng: dáng mặt, xương gò má, mũi, mắt, mày, môi, tuổi, nếp nhăn, sẹo, nốt ruồi, biểu cảm.
 
 **Thư mục làm việc:** gốc repo `D:\typing-game`. Chỉ được ghi vào:
-- `games/immortality-cultivation/art-src/face-test/` (ảnh và prompt);
-- `games/immortality-cultivation/art-src/_review/014-face-test.jpg`;
+- `games/immortality-cultivation/art-src/avatar-test/` (ảnh và prompt);
+- `games/immortality-cultivation/art-src/_review/014-avatar-test.jpg`;
 - `games/immortality-cultivation/art-src/README-014.md`.
 
-Không chạy git; không sửa ảnh và tài liệu có sẵn.
+Không chạy git, không sửa ảnh có sẵn.
 
-## Nguồn
+## Phong cách chung (vẽ tay, không phải ảnh)
 
-- **Phục sức để giữ:** `art-src/roster/kiem-nu.png`, `roster/kiem-nam.png` và prompt cạnh ảnh.
-  - Đính kèm chỉ để giữ áo, miện, kiếm, bảng màu. Viết rõ trong prompt: **không giữ khuôn mặt** của ảnh đính kèm.
-- **Canon:** `docs/games/tu-tien/00-canon.md` D47 (quý phái, hoàng tộc, kín đáo, mọi lứa tuổi) và §21.1 (vẻ thủy mặc, game 3D nhìn từ trên).
+- Tranh **minh họa vẽ tay**: nét mực rõ, có nhấn nhá; tô màu kiểu màu nước và gouache trên giấy dó.
+- Sắc độ thủy mặc; ánh sáng có chủ ý, hợp tính cách.
+- Chất **sơn thủy huyền ảo Việt**: trang phục và trang sức cổ, chi tiết hoa văn Việt (mây, sóng, hạc, rồng thời Lý).
+- **Tránh:** da sứ bóng, mắt to quá cỡ, cằm V nhọn, môi bóng, mặt đối xứng hoàn hảo, nét idol; kiểu anime hay ảnh 3D bóng bẩy.
+- Mỗi người phải nhận ra ngay khi chỉ còn bóng đầu.
+- **Khung avatar:** bán thân từ ngực lên, mặt chiếm khoảng 40 % chiều cao, nền đơn giản theo màu tính cách. Ảnh 1024 × 1024. Không chữ, không khung.
+- **Luật canon D47:** kín đáo, không gợi cảm, không máu, hợp mọi lứa tuổi. Nhân vật tà ác thể hiện bằng ánh mắt, dáng, ánh sáng, không bằng máu hay kinh dị.
 
-## Ba hướng (mỗi hướng: Kiếm nữ + Kiếm nam, 1024 × 1536, nửa người như chân dung cũ)
+## 8 mẫu
 
-| Mã | Hướng | Mô tả để viết prompt |
+| Tệp | Người | Hướng khuôn mặt (tả riêng, khác hẳn nhau) |
 |---|---|---|
-| H1 | **Tranh lụa Việt** | Vẽ trên lụa theo truyền thống tranh lụa Việt Nam:<br>• màu khoáng dịu, nét vẽ mảnh;<br>• mảng màu phẳng, đổ bóng rất nhẹ, thấy vân lụa;<br>• gương mặt vẽ bằng nét: mắt dài một mí hoặc hai mí nhẹ, mày thanh, mặt trái xoan đầy đặn.<br>Không chép tác phẩm hay họa sĩ cụ thể nào |
-| H2 | **Tượng sơn mài và khắc gỗ cách điệu** | Nhân vật như một bức tượng 3D cách điệu cao:<br>• khối mặt đơn giản có mặt phẳng rõ, chất sơn mài và gỗ, ngọc;<br>• vẽ tay; mắt khắc hình hạt hạnh, không có da kiểu ảnh chụp.<br>Gần nhất với model 3D trong game, đọc rõ ở cỡ nhỏ |
-| H3 | **Người thật, không mặt idol** | Bán tả thực nhưng là một người cụ thể:<br>• nét Việt rõ: sống mũi thấp vừa, gò má, mày tự nhiên;<br>• tuổi thật (nữ khoảng 28, nam khoảng 35); da có kết cấu thật, hơi bất đối xứng, trang điểm rất nhẹ;<br>• như chọn diễn viên đóng vai, không phải người mẫu.<br>Vẫn quý phái nhờ dáng và trang phục |
-
-**Viết prompt:**
-- Khẳng định điều cần có. Thêm một câu tránh khuôn mặt AI phổ biến: da sứ bóng, mắt to quá cỡ, cằm V nhọn, môi bóng, mặt đối xứng hoàn hảo, nét mặt idol.
-- Nữ và nam phải là hai người khác hẳn nhau.
-- Giữ luật D47: kín đáo, không gợi cảm, không chữ, không logo.
+| `a01-nu-kiem-tre` | Nữ kiếm tu, ~20 | **Rất đẹp, thanh cao:** mặt trái xoan dài, mắt một mí dài và sắc, mày lá liễu, sống mũi thẳng nhỏ, nốt ruồi dưới mắt; tóc búi cao, trâm ngọc |
+| `a02-nam-kiem-trung-nien` | Nam kiếm khách, ~45 | **Mạnh mẽ, từng trải:** mặt vuông, xương gò má cao, sẹo chéo qua mày, râu quai nón tỉa ngắn có sợi bạc, mắt sâu nheo, môi mím |
+| `a03-nu-ta-tu` | Nữ tà tu, ~32 | **Đẹp nhưng tà ác:** mặt hẹp, gò má nhô, mắt xếch nửa khép, ánh nhìn lạnh, môi mỏng nhếch một bên, móng dài sẫm; khói mực tím quanh vai |
+| `a04-nam-ma-dau` | Ma đầu, ~50 | **Rất tà ác, uy hiếp:** mặt gầy dài, má hóp, mũi khoằm, mày rậm xếch, mắt ánh đỏ sẫm mờ, tóc xám búi lệch; ánh sáng từ dưới lên |
+| `a05-nam-the-tu-tre` | Thổ thể tu, ~24 | **Mạnh mẽ, chất phác:** mặt tròn bè, hàm rộng, mũi to, mày đậm thẳng, da rám nắng, nụ cười rộng thật thà, cổ to; giáp ngọc thổ |
+| `a06-nu-truong-lao` | Nữ trưởng lão, ~55 | **Uy nghiêm, sắc sảo:** mặt dài, nếp nhăn khóe mắt và hai bên mũi, tóc muối tiêu búi chặt, mắt nhỏ sáng, cằm nhọn ngẩng cao; áo chàm thêu bạc |
+| `a07-thieu-nien-phu-tu` | Thiếu niên phù tu, ~17 | **Lanh lợi, tinh nghịch:** mặt tròn, má phúng phính, răng khểnh, mắt tròn sáng, tóc rối buộc dở, vết mực trên má; cầm bút phù |
+| `a08-nam-hoa-tu` | Hỏa tu, ~38 | **Kiêu ngạo, nóng nảy:** mặt chữ điền góc cạnh, mày rậm cau, mắt hổ phách, râu ria nhọn, tóc dựng kiểu ngọn lửa buộc cao; ánh lửa hắt một bên mặt |
 
 ## Việc
 
-1. Viết 6 prompt; lưu `face-test/<h1|h2|h3>-<nu|nam>.png` và `.prompt.txt` cạnh ảnh.
-   - Ảnh hỏng rõ thì tạo lại tối đa 1 lần.
-   - Mở xem từng ảnh. Kiểm riêng: khuôn mặt có còn giống mặt idol AI không. Nếu còn, sửa prompt và tạo lại, trong giới hạn 1 lần.
-2. **Ảnh so sánh** `_review/014-face-test.jpg`: lưới 3 cột (H1, H2, H3) × 2 hàng (nữ, nam), có nhãn tiếng Việt. Thêm cột đầu là chân dung cũ để so.
-   - Dùng ImageMagick trong WSL: `~/.local/bin/magick montage`, font `/mnt/c/Windows/Fonts/arial.ttf` để có dấu.
-3. **Thêm một ô thu nhỏ:** cả 6 khuôn mặt ở cỡ 64 px cao, vì trong game nhân vật chỉ cao khoảng 64 px. Đặt ngay trong ảnh so sánh, hoặc thành tệp `_review/014-face-test-small.jpg`.
-4. **Viết `README-014.md`:** mỗi hướng một đoạn ngắn, gồm điểm mạnh, điểm yếu, độ hợp với model 3D, và mức tránh được "mặt AI". Kết thúc bằng một đề xuất.
+1. **Viết 8 prompt** theo bảng trên. Mỗi prompt có:
+   - phong cách chung;
+   - tả khuôn mặt chi tiết;
+   - trang phục theo trường phái;
+   - một câu tránh mặt AI phổ biến.
 
-**Xong khi:** 6 ảnh, ảnh so sánh và README đã có.
+   Lưu `avatar-test/<tệp>.png` và `<tệp>.prompt.txt` cạnh ảnh.
+2. **Mở xem từng ảnh.** Nếu mặt còn giống mặt idol AI, hoặc giống một ảnh trước đó, sửa prompt và tạo lại, tối đa 1 lần.
+3. **Ảnh xem nhanh** `_review/014-avatar-test.jpg`, dùng ImageMagick trong WSL (`~/.local/bin/magick montage`, font `/mnt/c/Windows/Fonts/arial.ttf` để có dấu):
+   - lưới 4 × 2, có nhãn tiếng Việt (tên vai, tuổi);
+   - thêm một hàng thu nhỏ 128 px, cỡ avatar trong game.
+4. **Viết `README-014.md`:** mỗi ảnh một dòng (đạt chưa, khác các ảnh khác ở đâu), và nhận xét chung về phong cách.
+
+**Xong khi:** 8 ảnh, ảnh xem nhanh và README đã có.
