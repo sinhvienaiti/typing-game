@@ -21,7 +21,7 @@ Không chạy git, không sửa mã.
   - §21.3: dòng "không giống QCBH";
   - §24: tiếp cận, độ tương phản chữ.
 - `docs/games/tu-tien/art-requests/m0b/README.md`, `00-identity.md`.
-- Ảnh chuẩn phong cách `games/immortality-cultivation/art-src/identity/`. Màn tựa và Sơn Môn đính kèm chân dung A và cảnh 55°.
+- Ảnh chuẩn phong cách `games/immortality-cultivation/art-src/identity/`. Màn tựa và Sơn Môn chỉ đính kèm cảnh 55°. **Không đính kèm chân dung A** và không vẽ mặt người trong phiếu này (25/10: chủ dự án chê gương mặt cũ, hướng mặt mới đang chờ duyệt ở phiếu 014).
 
 ## Lô U (15)
 
