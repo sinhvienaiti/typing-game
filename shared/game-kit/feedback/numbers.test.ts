@@ -648,6 +648,22 @@ describe("a number's box is what NumberSprites draws", () => {
     expect(f.dropped).toBe(dropped + 1);
   });
 
+  it("settle() drops a number it would lift past the top edge, where it would be drawn cut (Mac 720p storm: a half-seen \"956\")", () => {
+    const f = new NumberField(DRAGON);
+    f.fontPx = 16;
+    const a = f.spawn(1, 640, 120, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0);
+    const b = f.spawn(2, 900, 120, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0.01);
+    expect([a >= 0, b >= 0]).toEqual([true, true]);
+    // b moved onto a near the top: lifting it above a would take its box past y 0.
+    const h = f.box(a, zero()).h;
+    [f.x[a], f.y[a]] = [640, h * 0.9];
+    [f.x[b], f.y[b]] = [640, h * 0.9];
+    f.settle();
+    expect(f.alive[a]).toBe(1);
+    expect(f.alive[b]).toBe(0);
+    for (let i = 0; i < f.alive.length; i += 1) if (f.alive[i] === 1) expect(f.box(i, zero()).y).toBeGreaterThanOrEqual(0);
+  });
+
   it("settle() lifts a number again when its first lift lands on one already passed: none touch after the frame", () => {
     const f = new NumberField(DRAGON);
     f.fontPx = 16;
