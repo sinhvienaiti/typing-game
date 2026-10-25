@@ -17,7 +17,15 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
 - **Codex CLI có sẵn trên Mac** (sửa ghi nhầm lúc đầu: nó không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-26.1007.21434/bin/macos-aarch64/codex`, bản 0.162.0-alpha.17.2, đã đăng nhập ChatGPT (`~/.codex/auth.json`). Đã thử `codex exec -m gpt-6.1-sol`: chạy được.
   - Đường dẫn đổi khi extension Cursor cập nhật. Không có `pwsh`, nên `run.ps1`, `queue.ps1` không chạy được trên Mac: gọi thẳng `codex exec` với cùng tham số.
   - Phiếu còn chờ chạy: 005a, 005b, 012b, 015.
-- **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored): 4 chỗ CPU, 1 chỗ trình duyệt (`--gpu`), 1 chỗ commit repo cha (`--git`).
+- **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored, bản 2 từ 25/10 khoảng 20:30, theo ý chủ dự án):
+  - đếm theo **số nhân** (10 nhân): bộ cân bằng chạy song song của Rồng và Lời Gọi tính 6, test và `pnpm check` tính 4, build tính 2, việc khác 1; `--jobs=N`, `--threads=N`, `--cores=N` ghi đè;
+  - **trình duyệt 3 chỗ** cho kiểm chức năng và chụp hình; lượt đo hiệu năng (tên có perf, latency, hitstop, trace, fps, hoặc `--perf`) **giữ cả 3 chỗ**, nên chạy một mình;
+  - xếp hàng đến trước làm trước trong từng nhóm; 1 chỗ commit repo cha (`--git`).
+- **Đợt test chia theo màn** (chủ dự án, 25/10): mỗi làn game xong vòng sửa thì chạy `.local/workflows/level-test-wave.js` với `args.game` = `td`, `ts`, `dh`.
+  - 6 agent mỗi game, mỗi agent một nhóm màn (Lời Gọi: Đêm 1–2, Đêm 3–4, Đêm 5 + boss, Học R3, hộp cát, menu; Tuyến Cuối: Trận thử, ải 1–4, menu và kho súng; Rồng: đợt 1–2, 3–4, 5–6, 7–8, 9–10, menu).
+  - Mỗi agent chơi ở 2 kiểu gõ (khoảng 30 WPM chuẩn, 70 WPM) và 2 độ phân giải, dev server cổng riêng (Rồng 4150+, Lời Gọi 4160+, Tuyến Cuối 4170+), chạy bot cho màn của mình; rồi gộp → sửa → kiểm lại độc lập.
+  - Tuyến Cuối chạy trước một bước: chia bộ cân bằng ra nhiều luồng (báo cáo 100 seed từ khoảng 19 phút xuống vài phút).
+  - Theo dõi làn xong: `.local/bin/wf-lane-done.py <journal> <làn>`.
 - **Đang chạy (25/10, từ khoảng 19:10):** workflow `mac-continue-3-games-audio-1c` (script `.local/workflows/mac-continue-3-games-audio-1c.js`, run `wf_212e861e-4c4`). Bốn làn song song, mỗi làn: làm → 2–3 người kiểm độc lập → gộp → sửa:
   - Lời Gọi: F3–F6 và mục 6.A, rồi R3 "Học và dạy" (kế hoạch `docs/td/R3_PLAN.md`), cân bằng R3;
   - Tuyến Cuối: cổng R1, đề xuất (a), (b) của §5.1 làm theo đề xuất, báo cáo 100 seed;
