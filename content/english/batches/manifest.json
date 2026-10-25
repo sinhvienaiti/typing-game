@@ -26863,6 +26863,59 @@
           "sampleCount": 1
         }
       ]
+    },
+    {
+      "id": "e11.dialogue-multiwoz-reviewed-slice-46",
+      "phase": "E11",
+      "category": "sentences",
+      "cefr": [
+        "A2",
+        "B1"
+      ],
+      "state": "draft",
+      "recordSets": [
+        {
+          "id": "reviewed-dialogues",
+          "path": "content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-46.json",
+          "expectedCount": 6,
+          "generated": false,
+          "allowedQualityStates": [
+            "draft"
+          ],
+          "requiredChecks": [
+            "schema",
+            "sourcePin",
+            "dialogueStructure",
+            "identifierSafety",
+            "exactDuplicate",
+            "nearDuplicate",
+            "grammar",
+            "translation",
+            "naturalness",
+            "targetStructure",
+            "cefr",
+            "license"
+          ]
+        }
+      ],
+      "requiredBeforePublish": [
+        "source-pin",
+        "dialogue-structure-review",
+        "identifier-safety-review",
+        "dedupe-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "license-review"
+      ],
+      "gameSmokes": [
+        {
+          "gameId": "karaoke-typing",
+          "activity": "dialogue",
+          "recordSetId": "reviewed-dialogues",
+          "sampleCount": 3
+        }
+      ]
     }
   ]
 }
