@@ -355,6 +355,11 @@ Mỗi làn chỉ ghi vào đường dẫn của mình. Không ai sửa `src/kit/
 **Nghiệm thu**
 - Test: HUD đọc đúng giá trị; dấu thẻ đợt; luồng phím chế độ cửa hàng (mua, đặt, nâng hai lần, bán hai lần, Esc; mũi tên không làm người chơi đi khi chế độ mở); vùng màn; mọi id âm im lặng; không tệp nào import `AudioCues`.
 - Kịch bản của Làn 7: cỡ px đạt canon §21.1 (`ic-scale`); Bàn Quyết không bị che; 0 lỗi console; `ic-perf` ở High trên Dell TB ≤ 8 ms, p95 ≤ 12 ms.
+- **`ic-camera-frame` (canon D48, chủ dự án 25/10).** Ở 1280 × 720 và 1920 × 1080, khung camera chứa đủ:
+  - 4 góc sân 40 × 26 m, có lề;
+  - 2 cổng, đường trời, Trận Tâm;
+  - mọi thú đang trên sân ở đợt đông nhất.
+  Phép kiểm chiếu các điểm đó qua `Projector` và chụp ảnh để xem. Không zoom vào trong trận.
 
 ### 6.7 Làn 7 — Bot, cân bằng, golden, kịch bản
 
