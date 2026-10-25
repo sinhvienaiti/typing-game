@@ -1,7 +1,7 @@
 """Batch 1c: the Q6 regeneration of Q6_REWRITE_2026-10-24.md §7 (action sounds shaped by their action).
 
   run.sh common.batch1c all [--game G] [--run b1c] [--force]
-  run.sh common.batch1c generate|process|recipes|critic|link|report [--game G] [--run b1c] [--force]
+  run.sh common.batch1c generate|process|recipes|critic|link|report|context|session [--game G] [--run b1c] [--force]
 
 The owner's rule (DECISIONS Q6, 24/10/2026): an action sound has the shape of its action, a build-up, a
 forceful release, a body and a tail that echoes in the map's space; no puff, pop, balloon, toy, retro,
@@ -29,13 +29,23 @@ link      critic AI steps into SOURCES.json, a batch-local release tree of the r
 report    ~/AudioLab/work/_batch1c/<run>/REPORT.md and summary.json: per id the counts, the machine's top takes, the
           rank of every owner-rated reference, and the Q6 shape numbers (tail, punch, body share) against the L2
           rule proposed in DECISIONS Q6 (informational: not in the machine's score).
+context   the listening list of each id (select, at most 4: the machine's top, the other kind, rule-blocked whole
+          takes with a label, the owner-rated takes blind, probes, a prompt not offered yet, the most different)
+          rendered in its scene with the game-like mixer (context/): dh-cast-chain (fire.cast at the Q6 750 ms, the
+          impacts, impact.multi on words 2 and 5), dh-pack, dh-trap, td-wordhit-chain, td-night, ts-xung-3s (the
+          gun.xung I/K sets next to batch 1's direction 2 and the game today), ts-xung-3s-kills, ts-breach; every
+          other slot fixed. ~/AudioLab/work/_batch1c/<run>/<game>/context.
+session   one board session per game, ~/AudioLab/review/<game>/sessions/1c-dh|1c-td|1c-ts.json (batch "1c", anchor
+          pairs up to 10 items, cards at the end); an existing session file is never overwritten without --force.
 
 Heavy models run one at a time (common/batch1_dh.wait_heavy_free); nothing is written under games/**.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import random
 import re
 import subprocess
 import sys
@@ -635,6 +645,10 @@ def finals(run: str, game: str) -> tuple[list[Path], list[Path]]:
 
 
 INFO_BLOCKS = {"attack", "duration"}      # rules a whole take may break by design (a swell, a creature call, a flare)
+# ranked at raw stage too although the id has eligible finals: the session offers one of their rule-blocked whole
+# takes with a label (Q6_REWRITE §11.3 #2): the pine bomb (a boom that swells, often after a fuse or a crack, §11.3 #1)
+# and the bow (21/24 whole takes slower than 10 ms)
+INFO_EXTRA = {DH: ("trap.pine-bomb.trigger",), TD: ("arrow-fire",)}
 
 
 def info_ids(run: str, game: str) -> list[str]:
@@ -661,15 +675,15 @@ def step_critic(run: str, game: str | None = None, force: bool = False) -> None:
             t0 = time.time()
             _say(f"critic {g} final ({len(dirs)} mục): mã {_critic_run(dirs, srcs, out, LAB / 'specs' / g)}, "
                  f"{time.time() - t0:.0f} s")
-        for sid in info_ids(run, g):
+        for sid in dict.fromkeys([*info_ids(run, g), *INFO_EXTRA.get(g, ())]):
             info = critic_out(run, g, f"info-{sid}")
             if (info / "_batch.json").is_file() and not force:
                 continue
             proc = id_dir(g, sid, run) / "processed"
             refs = [f for label, f in REFS.get(g, {}).items() if label.split(" ")[0] == sid and f.is_file()]
             wait_heavy_free(f"critic info {sid}")
-            rc = _critic_run([proc, *refs], [proc / "SOURCES.json", *(f.parent / "SOURCES.json" for f in refs)], info,
-                             card_path(g, sid), stage="raw")
+            ref_src = [(f.parent.parent if f.parent.name == "masters" else f.parent) / "SOURCES.json" for f in refs]
+            rc = _critic_run([proc, *refs], [proc / "SOURCES.json", *ref_src], info, card_path(g, sid), stage="raw")
             _say(f"critic {g}/{sid} giai đoạn raw (bản nguyên khối chỉ bị luật lên hoặc luật độ dài chặn): mã {rc}")
         raw = critic_out(run, g, "raw")
         if not (raw / "_batch.json").is_file() or force:
@@ -853,6 +867,33 @@ def summarise(run: str, game: str) -> dict:
 Q6_RULE_VI = {"tail": "đuôi", "punch": "cú đấm/thân", "body": "thân 150–800 Hz", "lone_low_hit": "cú trầm đứng riêng"}
 
 
+def context_rows(run: str, game: str) -> list[str]:
+    """The in-scene numbers of every listening pick (step context), when the renders exist."""
+    p = base_dir(run, game) / "context" / "context.json"
+    if not p.is_file():
+        return []
+    renders = json.loads(p.read_text("utf-8")).get("renders") or {}
+    L = [f"### Bản dựng trong bối cảnh ({game})", "",
+         "Giọng: dải 1–4 kHz của giọng đọc so với phần còn lại, 300 ms đầu mỗi từ, từ kém nhất (bài C, đạt từ 10 dB). "
+         "1–4 kHz tụt: năng lượng 1–4 kHz của file tụt bao nhiêu sau 100 ms (luật âm xong từ, đạt từ 15 dB). Loa nhỏ: "
+         "mức mất qua lọc cao 200 Hz. Hổng, trũng: số đo 'Liên thanh' của stem súng (BATCH1_BRIEF §3.5; hổng < 10 %, "
+         "trũng < 12 dB). Đỉnh: bản trộn trước mức hạ chung của file dựng (−4, −11, −6 dB theo game), nên file nghe không clip.", "",
+         "| Id | Vai trò | Bản | Kịch bản | Giọng min dB | 1–4 kHz tụt dB | Loa nhỏ dB | Hổng % | Trũng dB | Đỉnh dBTP |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+    for sid, rr in renders.items():
+        for name, r in rr.items():
+            m = r.get("metrics") or {}
+            b = m.get("burst") or {}
+            bd = m.get("focus_band_decay") or {}
+            drop = bd.get("drop_db_at_100ms")
+            drop = min(drop) if isinstance(drop, list) and drop else (None if isinstance(drop, list) else drop)
+            L.append(f"| `{sid}` | {r.get('role')} | `{name}` | {r.get('scenario')} | {_fmt((m.get('voice') or {}).get('min_db'))} | "
+                     f"{_fmt(drop)} | {_fmt(m.get('focus_small_speaker_loss_db'))} | "
+                     f"{_fmt(b.get('gap_time_pct'))} | {_fmt(b.get('dip_median_db'))} | "
+                     f"{_fmt((m.get('mix') or {}).get('true_peak_dbtp'))} |")
+    return L + [""]
+
+
 def _q6_cell(q: dict) -> str:
     return "; ".join(f"{Q6_RULE_VI[k]} {v}" for k, v in q.items()) or "–"
 
@@ -897,6 +938,7 @@ def step_report(run: str, game: str | None = None, force: bool = False) -> Path:
                          f"{_fmt(m.get('punch_db'))} | {_pct(m.get('share_below_150'))} | {_pct(m.get('share_150_800'))} | "
                          f"{_q6_cell(r['q6'])} | {', '.join(r['flags']) or '–'} |")
             L.append("")
+        L += context_rows(run, g)
     path = base_dir(run) / "REPORT.md"
     path.write_text("\n".join(L) + "\n", "utf-8")
     (base_dir(run) / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=1, default=str), "utf-8")
@@ -904,11 +946,526 @@ def step_report(run: str, game: str | None = None, force: bool = False) -> Path:
     return path
 
 
+# ---------------------------------------------------------------- step 8: listening lists (plan §4.6 step 2)
+
+# per item, references included: the board lays out 4 cards a row, and at 1280x720 a fifth card pushes the tag row
+# below the fold (measured 147 px on gun.xung); batch 1 offered 2-4
+MAX_CANDIDATES = 4
+# probes (a take from the lower half of the machine's ranking) at 6/19 ids, about 30 % (§4.6 step 2), on ids where the
+# references and rule-blocked takes leave room
+PROBE_IDS = {DH: ("fire.cast", "fire.impact.a"), TD: ("ink-puff", "blast"), TS: ("hit.t4", "hurt.breach")}
+RULE_NOTE = {     # shown to the owner (board note, at most 80 characters)
+    "fire.impact.b": "Bị luật chặn: lửa bùng lên chậm (> 10 ms); chấm như mọi bản",
+    "fire.impact.c": "Bị luật chặn: lửa bùng lên chậm (> 10 ms); chấm như mọi bản",
+    "impact.multi": "Bị luật chặn: lửa bùng lên chậm (> 10 ms); chấm như mọi bản",
+    "trap.pine-bomb.trigger": "Bị luật chặn: tiếng nổ lên chậm (> 10 ms); chấm như mọi bản",
+    "enemy.quadruped.howl": "Bị luật chặn: tiếng tru lớn dần chậm (> 30 ms); chấm như mọi bản",
+    "arrow-fire": "Bị luật chặn: tiếng vút lên chậm (> 10 ms); chấm như mọi bản",
+    "wordshot-fire": "Bị luật chặn: tiếng vút lên chậm (> 10 ms); chấm như mọi bản",
+}
+CURRENT_NOTE = "Cách game đang phát: chỉ viên chẵn, không nền, không đuôi"
+# gun.xung (Q6 §7 "đặt cạnh các hướng lô 1 trong Liên thanh 3 s"): batch 1 direction 2 (its set in session 1-ts-s1,
+# bed 16 dB under the shot: the better burst numbers of batch 1 and the fixed gun of every Tuyến Cuối render here;
+# direction 3 is the same set with a louder bed, direction 1 stays in 1-ts-s1: four cards fit 1280x720), the batch 1c
+# whole takes per prompt as a set (A the prompt's eligible takes, B the same takes 5 dB lower, as batch 1's set B),
+# and 0a v2 as the game plays today
+B1_TS = env.WORK / "_batch1" / TS / "b1"
+GUN_B1 = ("direction-2",)
+GUN_PROMPTS = ("I", "J", "K")
+GUN_B_DB = -5.0              # batch1_ts.GUN_B_DB: set B 4-6 dB under set A (BATCH1_BRIEF §3.2)
+GUN_SET_MAX = 4
+
+
+def _load(out: Path) -> dict[str, dict]:
+    """Critic docs of one run by stem, each knowing its run folder (critic JSON and card live there)."""
+    docs = _docs(out)
+    for d in docs.values():
+        d["_out"] = str(out)
+    return docs
+
+
+def _eligible(d: dict) -> bool:
+    return d["verdict"] == "PASS" and _verified(d) and not _flags(d) & NO_PICK_FLAGS and _kind(d) in ("sa3", "recipe")
+
+
+def _prompt_of(d: dict) -> str:
+    return prompt_of(d["file"]["stem"])
+
+
+def _rule_note(sid: str, final: dict) -> str | None:
+    note = RULE_NOTE.get(sid)
+    if note and "duration" in final["L1"]["blocking"]:
+        note += "; dài hơn thẻ"
+    return note
+
+
+def _spread(ranked: list[dict], want: int) -> list[dict]:
+    """The best `want` of a ranking, one per prompt first (the prompts are the directions of the card)."""
+    out: list[dict] = []
+    seen: set[str] = set()
+    for d in ranked:
+        if len(out) < want and _prompt_of(d) not in seen:
+            out.append(d)
+            seen.add(_prompt_of(d))
+    for d in ranked:
+        if len(out) < want and d not in out:
+            out.append(d)
+    return out
+
+
+def _probe(game: str, sid: str, order: list[dict], used: set[str]) -> dict | None:
+    pool = [d for d in order[max(1, len(order) // 2):] if d["file"]["path"] not in used]
+    if not pool:
+        return None
+    rng = random.Random(int(hashlib.sha256(f"batch-1c:{game}:{sid}".encode()).hexdigest()[:8], 16))
+    return rng.choice(sorted(pool, key=lambda d: d["file"]["stem"]))
+
+
+def _ref_role(label: str) -> str:
+    tag = label.split(" ")[1]
+    return f"ref-{tag}" if tag in ("0a", "0b") else "ref"
+
+
+def select(run: str, game: str) -> dict[str, dict]:
+    """Per id the listening list, at most MAX_CANDIDATES, filled in this order of priority: the machine's top and the
+    best of the other kind (recipe or whole take); rule-blocked whole takes with a label (one, or up to three of
+    different prompts when nothing is eligible); the takes the owner rated and the batch 1 render kept in use, blind
+    (consistency pairs); a probe at PROBE_IDS; then the best of a prompt not offered yet and the most different take
+    of the machine's upper half."""
+    final = _load(critic_out(run, game, "final"))
+    sel: dict[str, dict] = {}
+    for sid in JOBS[game]:
+        if game == TS and sid == "gun.xung":
+            sel[sid] = gun_select(run, final)
+            continue
+        mine = sorted([d for d in final.values() if _sid(d) == sid], key=_rank)
+        ok = [d for d in mine if _eligible(d)]
+        info = _load(critic_out(run, game, f"info-{sid}"))
+        e: dict = {"n_new": sum(1 for d in mine if _kind(d) in ("sa3", "recipe")), "eligible": len(ok)}
+        core: list[tuple[dict, str, str | None]] = []
+        rule: list[tuple[dict, str, str | None]] = []
+        refs: list[tuple[dict, str, str | None]] = []
+        if ok:
+            core.append((ok[0], "top", None))
+            other = [d for d in ok if _kind(d) != _kind(ok[0])]
+            if other:
+                core.append((other[0], "best-recipe" if _kind(other[0]) == "recipe" else "best-take", None))
+        if info:
+            blocked = [d for d in mine if _kind(d) == "sa3" and d["verdict"] == "BLOCK" and _verified(d)
+                       and set(d["L1"]["blocking"]) <= INFO_BLOCKS and not _flags(d) & NO_PICK_FLAGS]
+            ranked = sorted([info[d["file"]["stem"]] for d in blocked if d["file"]["stem"] in info
+                             and not _flags(info[d["file"]["stem"]]) & NO_PICK_FLAGS], key=_rank)
+            e["rule_blocked_whole"] = len(blocked)
+            rule = [(d, "rule-blocked", _rule_note(sid, final[d["file"]["stem"]])) for d in _spread(ranked, 1 if ok else 3)]
+            if not ok:
+                # a recipe blocked by the same rule (wordshot-fire.mix): no raw-stage rank, the best L2 score
+                recs = sorted([d for d in mine if _kind(d) == "recipe" and d["verdict"] == "BLOCK"
+                               and set(d["L1"]["blocking"]) <= INFO_BLOCKS and not _flags(d) & NO_PICK_FLAGS],
+                              key=lambda d: -((d.get("L2") or {}).get("score") or 0.0))
+                if recs:
+                    rule.append((recs[0], "rule-blocked-recipe", _rule_note(sid, recs[0])))
+        for label, f in REFS.get(game, {}).items():
+            if label.split(" ")[0] != sid:
+                continue
+            d = next((x for x in mine if x["file"]["path"] == str(f)), None)
+            if d is None:
+                continue
+            fin = d
+            if d["verdict"] != "PASS" and d["file"]["stem"] in info:
+                d = info[d["file"]["stem"]]
+            # blind, unless every new take of the id carries the rule label too (the howl): then it carries it
+            note = _rule_note(sid, fin) if (not ok and fin["verdict"] == "BLOCK"
+                                            and set(fin["L1"]["blocking"]) <= INFO_BLOCKS) else None
+            refs.append((d, _ref_role(label), note))
+        kept = [d for d in mine if _kind(d) == "b1" and d["verdict"] == "PASS" and not _flags(d) & NO_PICK_FLAGS]
+        if kept:
+            refs.append((kept[0], "b1-kept", None))
+        ordered = core + rule + refs
+        used = {d["file"]["path"] for d, _, _ in ordered}
+        if sid in PROBE_IDS.get(game, ()) and ok:
+            pr = _probe(game, sid, ok, used)
+            if pr is not None:
+                ordered.append((pr, "probe", None))
+                used.add(pr["file"]["path"])
+        if ok:
+            heard = {_prompt_of(d) for d, _, _ in ordered if _kind(d) == "sa3"}
+            fresh = [d for d in ok if _kind(d) == "sa3" and _prompt_of(d) not in heard and d["file"]["path"] not in used]
+            if fresh:
+                ordered.append((fresh[0], "other-prompt", None))
+                used.add(fresh[0]["file"]["path"])
+            dis = _distinct(ok[0], [d for d in _upper(ok) if d["file"]["path"] not in used])
+            if dis is not None:
+                ordered.append((dis, "distinct", None))
+        e["picks"] = [{"docs": [d], "role": r, "note": n} for d, r, n in ordered[:MAX_CANDIDATES]]
+        e["left_out"] = [r for _, r, _ in ordered[MAX_CANDIDATES:]]
+        sel[sid] = e
+    return sel
+
+
+def _b1_doc(path: Path) -> dict | None:
+    """The batch 1 critic doc of a batch 1 gun file (its JSON and card for the board)."""
+    out = B1_TS / "critic-final"
+    p = out / f"{path.stem}.json"
+    if not p.is_file():
+        return None
+    d = json.loads(p.read_text("utf-8"))
+    if d["file"]["path"] != str(path):
+        return None
+    d["_out"] = str(out)
+    return d
+
+
+def gun_select(run: str, final: dict[str, dict]) -> dict:
+    mine = sorted([d for d in final.values() if _sid(d) == "gun.xung"], key=_rank)
+    ok = [d for d in mine if _eligible(d)]
+    e: dict = {"n_new": sum(1 for d in mine if _kind(d) == "sa3"), "eligible": len(ok), "picks": [], "prompts": {}}
+    for name in GUN_B1:
+        j = B1_TS / "context" / "gun.xung" / f"{name}.json"
+        if not j.is_file():
+            continue
+        doc = json.loads(j.read_text("utf-8"))
+        st = {k: [Path(p) for p in v] for k, v in doc["slots"]["gun.xung"].items() if isinstance(v, list)}
+        a, b = st.get("A", []), st.get("B", [])
+        files = [x for pair in zip(a, b) for x in pair] + a[len(b):] + b[len(a):]
+        docs = [_b1_doc(p) for p in files]
+        e["picks"].append({"files": files, "docs": docs if all(docs) else [], "set": st, "role": f"b1-{name}",
+                           "bed_db": float(doc.get("bed_db_under_shot") or 16.0), "note": None})
+    for p in GUN_PROMPTS:
+        takes = [d for d in ok if _prompt_of(d) == p][:GUN_SET_MAX]
+        allp = [d for d in mine if _prompt_of(d) == p]
+        e["prompts"][p] = {"takes": len(allp), "eligible": len(takes),
+                           "unverified": sum(1 for d in allp if not _verified(d)),
+                           "flagged": sum(1 for d in allp if _flags(d) & NO_PICK_FLAGS),
+                           "blocked": sum(1 for d in allp if d["verdict"] != "PASS")}
+        if takes:
+            fs = [Path(d["file"]["path"]) for d in takes]
+            e["picks"].append({"files": fs, "docs": takes, "set": {"A": fs, "B": fs, "B_db": GUN_B_DB},
+                               "role": f"1c-{p}", "bed_db": 16.0, "note": None})
+    ref = [d for d in mine if _kind(d) == "ref"]
+    if ref:
+        e["picks"].append({"files": [Path(ref[0]["file"]["path"])], "docs": ref[:1], "role": "ref-0a-current",
+                           "config": "current", "note": CURRENT_NOTE})
+    while len(e["picks"]) > MAX_CANDIDATES:      # the 1c set with the fewest eligible takes gives way
+        sets = [p for p in e["picks"] if p["role"].startswith("1c-")]
+        drop = min(sets, key=lambda p: len(p["files"]))
+        e["picks"].remove(drop)
+        e.setdefault("left_out", []).append(drop["role"])
+    return e
+
+
+# ---------------------------------------------------------------- step 9: in-game context renders
+
+SCENARIO = {DH: {"fire.cast": "dh-cast-chain", "fire.impact.a": "dh-cast-chain", "fire.impact.b": "dh-cast-chain",
+                 "fire.impact.c": "dh-cast-chain", "impact.multi": "dh-cast-chain",
+                 "trap.pine-bomb.trigger": "dh-trap", "enemy.quadruped.howl": "dh-pack"},
+            TD: {"arrow-fire": "td-wordhit-chain", "wordshot-fire": "td-wordhit-chain", "ink-puff": "td-wordhit-chain",
+                 "blast": "td-wordhit-chain", "call-chop": "td-night"},
+            TS: {"kill.swarm": "ts-xung-3s-kills", "kill.elite": "ts-xung-3s-kills", "hurt.breach": "ts-breach",
+                 "gun.xung": "ts-xung-3s", "hit.t1": "ts-xung-3s", "hit.t2": "ts-xung-3s", "hit.t4": "ts-xung-3s"}}
+CTX_KEY = {DH: "scene", TD: "scene", TS: "burst"}       # Tuyến Cuối: "Liên thanh 3 s"; ts-breach is a scene
+
+
+def ctx_key(game: str, sid: str) -> str:
+    return "scene" if sid == "hurt.breach" else CTX_KEY[game]
+
+
+def ctx_dir(run: str, game: str) -> Path:
+    return base_dir(run, game) / "context"
+
+
+def _b1_fixed(game: str) -> dict:
+    """The fixed slots of the batch 1 renders of this game (beds, the word-hit scale, the gun set, ...)."""
+    p = env.WORK / "_batch1" / game / "b1" / "context" / "context.json"
+    if not p.is_file():
+        return {}
+    out: dict = {}
+    for k, v in (json.loads(p.read_text("utf-8")).get("fixed") or {}).items():
+        if isinstance(v, dict):
+            out[k] = {n: ([Path(x) for x in f] if isinstance(f, list) else Path(f)) for n, f in v.items()}
+        elif isinstance(v, list):
+            out[k] = [Path(x) for x in v]
+        else:
+            out[k] = Path(v)
+    return out
+
+
+def fixed_slots(game: str, sel: dict) -> dict:
+    """Every slot a render does not test: this batch's first pick for the 1c ids (Q6 replaces the batch 1 takes),
+    batch 1's fixed take for the rest (the forest bed the owner rated 4/5, the word-hit scale, batch 1's gun set with
+    the better burst numbers, the mechanical bed and tail)."""
+    out = _b1_fixed(game)
+    for sid in JOBS[game]:
+        if game == TS and sid == "gun.xung":
+            continue
+        picks = sel.get(sid, {}).get("picks") or []
+        if picks:
+            f = Path(picks[0]["docs"][0]["file"]["path"])
+            out[sid] = [f] if game == TS else f
+    return out
+
+
+def _pick_name(game: str, sid: str, p: dict) -> str:
+    return p["role"] if (game == TS and sid == "gun.xung") else p["docs"][0]["file"]["stem"]
+
+
+def _jsonable(v):
+    if isinstance(v, dict):
+        return {k: _jsonable(x) for k, x in v.items()}
+    if isinstance(v, (list, tuple)):
+        return [_jsonable(x) for x in v]
+    return str(v) if isinstance(v, Path) else v
+
+
+def pick_slots(game: str, sid: str, p: dict, fixed: dict) -> tuple[dict, str, float]:
+    """(slots, playback configuration, bed dB) of one pick's render: the fixed slots with the pick in its own."""
+    slots = dict(fixed)
+    config, bed = p.get("config", "proposed"), float(p.get("bed_db") or 16.0)
+    if game == TS and sid == "gun.xung":
+        slots[sid] = p["set"] if p.get("set") else [Path(f) for f in p["files"]]
+    else:
+        f = Path(p["docs"][0]["file"]["path"])
+        slots[sid] = [f] if game == TS else f
+    return slots, config, bed
+
+
+def render_pick(game: str, sid: str, slots: dict, config: str, bed: float, out: Path) -> dict:
+    if game == DH:
+        from context import scenes
+        return scenes.render(SCENARIO[game][sid], slots, out, focus=sid)
+    if game == TD:
+        from context import td_scenes
+        return td_scenes.render(SCENARIO[game][sid], slots, out, focus=sid)
+    from context import ts_scenes
+    return ts_scenes.render(SCENARIO[game][sid], slots, out, focus=sid, config=config, bed_db=bed)
+
+
+def _slots_sig(slots: dict, config: str, bed: float) -> str:
+    return hashlib.sha256(json.dumps([_jsonable(slots), config, bed], sort_keys=True).encode()).hexdigest()[:16]
+
+
+def step_context(run: str, game: str | None = None, force: bool = False) -> dict:
+    """Each pick in its scene (context/), every other slot fixed: the renders of one id differ only by that pick.
+    A render on disk is reused only when it was made from the same slots (a new top changes every fixed slot)."""
+    done_all: dict = {}
+    for g in _games(game):
+        sel = select(run, g)
+        fixed = fixed_slots(g, sel)
+        cj = ctx_dir(run, g) / "context.json"
+        prev = (json.loads(cj.read_text("utf-8")).get("renders") or {}) if cj.is_file() else {}
+        done: dict = {"fixed": _jsonable(fixed), "renders": {}}
+        for sid in JOBS[g]:
+            for p in sel[sid]["picks"]:
+                name = _pick_name(g, sid, p)
+                out = ctx_dir(run, g) / sid / f"{name}.wav"
+                slots, config, bed = pick_slots(g, sid, p, fixed)
+                sig = _slots_sig(slots, config, bed)
+                same = ((prev.get(sid) or {}).get(name) or {}).get("slots_sig") == sig
+                if same and out.is_file() and out.with_suffix(".json").is_file() and not force:
+                    doc = json.loads(out.with_suffix(".json").read_text("utf-8"))
+                else:
+                    doc = render_pick(g, sid, slots, config, bed, out)
+                m = doc["metrics"]
+                done["renders"].setdefault(sid, {})[name] = {"file": str(out), "role": p["role"],
+                                                             "scenario": SCENARIO[g][sid], "config": config,
+                                                             "slots_sig": sig, "metrics": m}
+                b = m.get("burst") or {}
+                _say(f"context {g}/{sid} {name}: {SCENARIO[g][sid]}, giọng 1–4 kHz min "
+                     f"{(m.get('voice') or {}).get('min_db')} dB, đỉnh {(m.get('mix') or {}).get('true_peak_dbtp')} dBTP"
+                     + (f", hổng {b.get('gap_time_pct')} %, trũng {b.get('dip_median_db')} dB" if b else ""))
+        ctx_dir(run, g).mkdir(parents=True, exist_ok=True)
+        (ctx_dir(run, g) / "context.json").write_text(json.dumps(done, ensure_ascii=False, indent=1, default=float), "utf-8")
+        done_all[g] = done
+    return done_all
+
+
+# ---------------------------------------------------------------- step 10: board sessions
+
+SESSIONS = {DH: ("1c-dh", "Lô 1c · Rồng Giữ Ải · họ lửa, bom, tiếng tru (Q6)"),
+            TD: ("1c-td", "Lô 1c · Lời Gọi · tên, Phát Chữ, mực, pháo, lời gọi (Q6)"),
+            TS: ("1c-ts", "Lô 1c · Tuyến Cuối · súng, trúng, hạ quái, báo nguy (Q6)")}
+DESC = {
+    "fire.cast": "Hỏa Long khạc cầu lửa khi gõ xong từ (600–900 ms). Nghe đủ bốn phần: khè họng tụ lực, lửa bắt và "
+                 "gầm có lực, cầu lửa lao ra xa có thân, đuôi vang thung lũng thấp. 'Trong trận thô': giọng đọc phải rõ "
+                 "ngay sau tiếng khạc",
+    "fire.impact.a": "Cầu lửa trúng, âm gốc của họ (480–720 ms): lửa bùng có thân, than lách tách, mảnh văng, vang rừng "
+                     "ngắn. Không được nghe như 'một cục rơi xuống'. 'Lặp' phát mỗi 1,5 s như sau mỗi từ",
+    "fire.impact.b": "Biến thể tối hơn của cầu lửa trúng (512–768 ms): lửa bùng trầm, than nổ khô, dăm gỗ văng. Cùng họ "
+                     "với .a nhưng phân biệt được. Bản có nhãn 'bị luật chặn' là chủ ý; chấm như mọi bản",
+    "fire.impact.c": "Đòn to: bậc T3 trở lên, Hoàn hảo, Chớp (800–1200 ms). Lửa bùng lớn có trọng lượng, cháy tiếp, than "
+                     "và mảnh văng xa, vang thung lũng dài. Dài và nặng hơn .a rõ, không có tiếng nổ thứ hai",
+    "impact.multi": "Một từ trúng từ 3 quái trở lên (560–840 ms), phát chồng lên tiếng trúng thường: lửa bùng nặng nhiều "
+                    "chỗ, than tản rộng, vang rừng. Mọi bản đều có nhãn 'bị luật chặn'; chấm như mọi bản. 'Trong trận "
+                    "thô': từ thứ 2 và thứ 5",
+    "trap.pine-bomb.trigger": "Bom Hạt Thông nổ (880–1320 ms): nổ trầm có thân, hạt và dăm văng, vang rừng thông. Lớp "
+                              "trầm chỉ được nằm dưới, không thành một cú 'thụp'. Thử thêm 'Loa nhỏ'",
+    "enemy.quadruped.howl": "Sói Mục tru gọi bầy: hít vào, tiếng tru dâng lên rồi hạ, vang rừng mục xa; phát cách nhau "
+                            "1,5 s. Mọi bản có nhãn 'bị luật chặn' (luật đầu tiếng sinh vật); chấm như mọi bản. Cuối "
+                            "tiếng tru có tiếng rít cao không?",
+    "arrow-fire": "Tháp Cung bắn, tới 4 lần mỗi giây (160–240 ms): cung tre kẽo kẹt, dây bật, mũi tên vút đi xa, vang "
+                  "làng ngắn. Nhẹ, nằm dưới mọi thứ. Trong trận có gắt, có che giọng đọc không?",
+    "wordshot-fire": "Phát Chữ bay ra sau mỗi từ (280–420 ms): vung tay tre, chữ giấy phóng vút đi, giấy phần phật bay "
+                     "xa, vang làng ngắn. Mọi bản có nhãn 'bị luật chặn' (tiếng vút lên chậm). 'Lặp' phát mỗi 1,5 s "
+                     "như trong game: đuôi có đủ thấp để nghe 20 từ không mệt?",
+    "ink-puff": "Mực Câm tan, tới 8 lần mỗi giây (160–240 ms): túi giấy thấm mực rách, mực bắn tóe nhỏ, giấy lả tả, vang "
+                "ngắn. Mềm, không máu. Dày như trong trận có thành tiếng rè không?",
+    "blast": "Tháp Pháo nổ (640–960 ms): trống lớn nện có thân, giấy và bụi bung tung, mảnh giấy rơi lả tả, vang làng. "
+             "Không nổ lách tách, không chất taiko. Thử thêm 'Loa nhỏ'",
+    "call-chop": "Lời gọi Chặt sáng lên: gõ gỗ trầm, chắc vào thân tre (200–300 ms). Nghe ra mõ chùa thì gắn 'sai chất "
+                 "liệu'. 'Trong trận thô': cảnh đêm, gọi Chặt hai lần giữa lúc gõ",
+    "gun.xung": "Súng Xung, pháo tự động bắn 10 viên mỗi giây. Mỗi bản là một bộ phát (bộ nặng và bộ nhẹ xen nhau), có "
+                "nền cơ khí và đuôi khi ngừng; có bản là hướng của lô 1, có bản là Stable Audio 3 nguyên khối của lô 1c. "
+                "'Liên thanh 3 s': một loạt liền, có lực, hay rời từng phát (nhãn 'ngắt quãng')?",
+    "hit.t1": "Đạn Xung trúng vỏ thép, tới 10 lần mỗi giây (112–168 ms): keng giòn, thân thép gọn, đuôi hành lang thép "
+              "ngắn. Sáng, gọn, không che tiếng súng và tiếng đọc từ",
+    "hit.t2": "Chí mạng (208–312 ms): nặng hơn hit.t1, keng có thân, lớp trầm chỉ ở dưới, đuôi hành lang ngắn. Nghe kỹ có "
+              "'gõ đúp' không",
+    "hit.t4": "Đòn lớn (720–1080 ms): nện nặng vào dầm thép, nứt giòn, thân thép dày, dầm ngân dài lăn dọc hành lang. To "
+              "và dài hơn hit.t2 rõ",
+    "kill.swarm": "Bầy quái kim loại vỡ, hàng trăm lần mỗi trận (200–300 ms), hướng 'vỡ có vang': bản Stable Audio 3 mới "
+                  "và công thức của lô 1. Có chói, có mỏng, lặp có mệt không?",
+    "kill.elite": "Lính tinh nhuệ nổ (400–600 ms): thép xé toạc, nổ trầm có thân, phóng điện lách tách, mảnh rơi, vang "
+                  "hành lang thép. Đuôi có bị cụt đột ngột không?",
+    "hurt.breach": "Báo nguy, tuyến bị phá (640–960 ms): nổ trầm có thân, thép rên, còi hai nốt ngắn, vang dội dọc hành "
+                   "lang thép. Khác hẳn tiếng trúng, đủ rõ để báo nguy giữa trận",
+}
+CONTEXTS = {
+    "fire.cast": ["scene", "loop", "alone", "small"], "fire.impact.a": ["scene", "loop", "alone", "small"],
+    "fire.impact.b": ["scene", "loop", "alone", "small"], "fire.impact.c": ["scene", "loop", "alone", "small"],
+    "impact.multi": ["scene", "alone", "loop", "small"], "trap.pine-bomb.trigger": ["scene", "alone", "small"],
+    "enemy.quadruped.howl": ["scene", "alone", "loop"],
+    "arrow-fire": ["scene", "loop", "alone", "small"], "wordshot-fire": ["scene", "loop", "alone", "small"],
+    "ink-puff": ["scene", "loop", "alone", "small"], "blast": ["scene", "alone", "small", "loop"],
+    "call-chop": ["alone", "scene", "loop"],
+    "gun.xung": ["burst", "alone", "loop", "small"], "hit.t1": ["burst", "loop", "alone", "small"],
+    "hit.t2": ["burst", "alone", "loop", "small"], "hit.t4": ["burst", "alone", "small"],
+    "kill.swarm": ["burst", "loop", "alone", "small"], "kill.elite": ["burst", "alone", "small"],
+    "hurt.breach": ["scene", "alone", "small"],
+}
+# "Lặp": the fire family follows a word (one every 1.5 s at 40 WPM), so it repeats at that pace (Q6 rule 4: a low tail
+# that 20 words in a row do not tire); the Tuyến Cuối rates are batch1_ts.LOOP (the scene's real pace)
+LOOP = {"fire.cast": {"interval_ms": 1500, "count": 8}, "fire.impact.a": {"interval_ms": 1500, "count": 8},
+        "fire.impact.b": {"interval_ms": 1500, "count": 8}, "fire.impact.c": {"interval_ms": 1500, "count": 8},
+        "impact.multi": {"interval_ms": 1500, "count": 8}, "enemy.quadruped.howl": {"interval_ms": 1500, "count": 4},
+        "wordshot-fire": {"interval_ms": 1500, "count": 8},
+        "gun.xung": {"interval_ms": 100, "count": 30, "cents": 40, "db": 1}, "hit.t1": {"interval_ms": 100, "count": 20},
+        "kill.swarm": {"interval_ms": 150, "count": 20}, "hit.t2": {"interval_ms": 400, "count": 8}}
+RATE_FIX = {"call-chop": 3.0, "blast": 1 / 1.2}     # batch1_td._loop: alerts 3 a second; two cannon towers
+
+
+MAX_ITEMS = 10               # plan §7: at most 10 ids and 20 minutes a session, anchors included
+ANCHORS = 4                  # §4.6 step 6 (batch 1: 4); fewer when the ids leave less room
+
+
+class SessionExists(RuntimeError):
+    pass
+
+
+def anchors_for(n_ids: int) -> int:
+    return max(0, min(ANCHORS, MAX_ITEMS - n_ids))
+
+
+def session_path(game: str) -> Path:
+    return env.REVIEW / game / "sessions" / f"{SESSIONS[game][0]}.json"
+
+
+def _loop(game: str, sid: str, picks: list[dict]) -> dict | None:
+    import yaml
+    if sid in LOOP:
+        return dict(LOOP[sid])
+    card = yaml.safe_load(card_path(game, sid).read_text("utf-8")) or {}
+    rate = RATE_FIX.get(sid) or (card.get("critic") or {}).get("rate_hz")
+    gap = (card.get("playback") or {}).get("min_gap_ms") or 0
+    longest = max(((d.get("metrics") or {}).get("duration_ms") or 0) for p in picks for d in p.get("docs") or [])
+    if game == TS:
+        return {"interval_ms": int(max(1000.0, longest + 300)), "count": 6}
+    if not rate and not gap:
+        return None
+    iv = int(max(1000.0 / rate if rate else 0, gap, longest + 50))
+    return {"interval_ms": iv, **({"count": 8} if iv >= 500 else {})}
+
+
+def _cand(p: dict, ctx: Path | None, key: str) -> dict:
+    from board import session as S
+    docs = p.get("docs") or []
+    files = [Path(f) for f in p.get("files") or [d["file"]["path"] for d in docs]]
+
+    def card(d: dict) -> str | None:
+        c = d.get("card_blind") or d.get("card")
+        return S.display_path(Path(d["_out"]) / c) if c and (Path(d["_out"]) / c).is_file() else None
+
+    if len(files) == 1:
+        c: dict = {"file": S.display_path(files[0]), "role": p["role"]}
+        if docs:
+            c["critic"] = S.display_path(Path(docs[0]["_out"]) / f"{docs[0]['file']['stem']}.json")
+            if card(docs[0]):
+                c["card"] = card(docs[0])
+    else:
+        c = {"files": [S.display_path(f) for f in files], "role": p["role"]}
+        if docs and len(docs) == len(files):
+            c["critics"] = [S.display_path(Path(d["_out"]) / f"{d['file']['stem']}.json") for d in docs]
+            c["cards"] = [card(d) for d in docs]
+    if p.get("note"):
+        c["note"] = p["note"]
+    if ctx is not None and ctx.is_file():
+        c["ctx"] = {key: S.display_path(ctx)}
+    return c
+
+
+# listening order (default: the order of §7); Tuyến Cuối starts with the gun, the burst every other item plays over
+ORDER = {TS: ("gun.xung", "hit.t1", "hit.t2", "hit.t4", "kill.swarm", "kill.elite", "hurt.breach")}
+
+
+def build_session(run: str, game: str, sel: dict) -> dict:
+    name, title = SESSIONS[game]
+    items = []
+    for sid in ORDER.get(game, tuple(JOBS[game])):
+        picks = sel[sid]["picks"]
+        if not picks:
+            _say(f"phiên {name}: {sid} không có bản nào để nghe")
+            continue
+        key = ctx_key(game, sid)
+        cands = [_cand(p, ctx_dir(run, game) / sid / f"{_pick_name(game, sid, p)}.wav", key) for p in picks]
+        sp = next((d.get("spec") for p in picks for d in p.get("docs") or [] if d.get("spec")), None) or {}
+        item = {"id": sid, "family": sp.get("family") or "", "group": sp.get("group") or "", "desc": DESC[sid],
+                "probe": any(p["role"] == "probe" for p in picks), "contexts": CONTEXTS[sid], "candidates": cands}
+        lp = _loop(game, sid, picks)
+        if lp:
+            item["loop"] = lp
+        items.append(item)
+    return {"schema": "audiolab.board.session/1", "session": name, "game": game, "batch": "1c", "title": title,
+            "seed": int(hashlib.sha256(f"{game}:{name}".encode()).hexdigest()[:8], 16), "max_minutes": 20,
+            "anchors": anchors_for(len(items)), "reveal": "end", "items": items}
+
+
+def step_session(run: str, game: str | None = None, force: bool = False) -> list[Path]:
+    """One session per game (~/AudioLab/review/<game>/sessions/1c-*.json); an existing file needs --force."""
+    from board import session as S
+    games = _games(game)
+    there = [session_path(g) for g in games if session_path(g).exists()]
+    if there and not force:
+        raise SessionExists(f"{', '.join(map(str, there))} đã có; thêm --force để ghi đè (điểm đã chấm vẫn giữ trong "
+                            "ratings.jsonl)")
+    paths = []
+    for g in games:
+        doc = build_session(run, g, select(run, g))
+        path = session_path(g)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", "utf-8")
+        s = S.load(path)                # validate now: paths, ctx files, contexts, notes
+        missing = [i.id for i in s.items if ctx_key(g, i.id) not in i.rendered]
+        paths.append(path)
+        _say(f"phiên {path}: {len(doc['items'])} id, {sum(len(i['candidates']) for i in doc['items'])} bản "
+             f"(+{doc['anchors']} cặp mốc khi mở)"
+             + (f"; thiếu bản dựng trong bối cảnh: {', '.join(missing)}" if missing else ""))
+    return paths
+
+
 # ---------------------------------------------------------------- CLI
 
 STEPS = {"generate": step_generate, "process": step_process, "sources": step_sources, "recipes": step_recipes,
-         "critic": step_critic, "link": step_link, "report": step_report}
-ALL = ("generate", "process", "recipes", "critic", "link", "report")
+         "critic": step_critic, "link": step_link, "report": step_report, "context": step_context,
+         "session": step_session}
+ALL = ("generate", "process", "recipes", "critic", "link", "report", "context", "session")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -916,11 +1473,15 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("step", choices=[*STEPS, "all"])
     ap.add_argument("--game", choices=GAMES)
     ap.add_argument("--run", default=RUN)
-    ap.add_argument("--force", action="store_true", help="làm lại bước đã có")
+    ap.add_argument("--force", action="store_true", help="làm lại bước đã có; ghi đè file phiên")
     a = ap.parse_args(argv)
     env.apply()
     for name in (ALL if a.step == "all" else (a.step,)):
-        rc = STEPS[name](a.run, a.game, a.force)
+        try:
+            rc = STEPS[name](a.run, a.game, a.force)
+        except SessionExists as exc:
+            print(f"batch1c: {exc}", file=sys.stderr)
+            return 1
         if isinstance(rc, int) and rc:
             return rc
     return 0

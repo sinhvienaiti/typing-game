@@ -130,3 +130,108 @@ def test_q6_checks_follow_the_decisions_proposal():
     assert batch1c.q6_checks(doc("hit.t2", "typing-survival", "hit_heavy", "trung", 260, punch_db=40, tail_ms=132,
                                  share_below_150=0.72)) == {"tail": "đạt", "lone_low_hit": "trượt"}
     assert batch1c.q6_checks(doc("hit.t1", "typing-survival", "hit_small", "trung", 140, tail_ms=40)) == {"tail": "giữa"}
+
+
+# ---------------------------------------------------------------- context and session steps (listening sessions)
+
+def test_every_id_has_a_scene_a_description_and_board_contexts():
+    from board import config
+    from context import scenes, td_scenes, ts_scenes
+
+    known = set(scenes.SCENARIOS) | set(td_scenes.SCENARIOS) | set(ts_scenes.SCENARIOS)
+    for g in batch1c.GAMES:
+        assert set(batch1c.SCENARIO[g]) == set(batch1c.JOBS[g]), g
+        for sid in batch1c.JOBS[g]:
+            assert batch1c.SCENARIO[g][sid] in known, sid
+            assert batch1c.DESC[sid] and set(batch1c.CONTEXTS[sid]) <= set(config.CONTEXT_KEYS), sid
+            # the rendered context the session points at is one the item lists first
+            assert batch1c.CONTEXTS[sid][0] in (batch1c.ctx_key(g, sid), "alone"), sid
+    # the task's scenes: dh-cast-chain, dh-pack, dh-trap, td-wordhit-chain, td-night, ts-xung-3s(-kills), ts-breach
+    used = {s for g in batch1c.GAMES for s in batch1c.SCENARIO[g].values()}
+    assert used == {"dh-cast-chain", "dh-pack", "dh-trap", "td-wordhit-chain", "td-night", "ts-xung-3s",
+                    "ts-xung-3s-kills", "ts-breach"}
+
+
+def test_owner_notes_fit_the_board():
+    from board import session
+
+    notes = [*batch1c.RULE_NOTE.values(), batch1c.CURRENT_NOTE]
+    assert all(len(n + "; dài hơn thẻ") <= session.MAX_NOTE for n in notes)
+    assert set(batch1c.RULE_NOTE) <= {sid for g in batch1c.GAMES for sid in batch1c.JOBS[g]}
+
+
+def test_after_word_sounds_repeat_at_the_word_pace():
+    # Q6 rule 4: the sounds after each word (one every 1.5 s at 40 WPM) keep a low tail over many repeats
+    for sid in ("fire.cast", "fire.impact.a", "fire.impact.b", "fire.impact.c", "impact.multi", "wordshot-fire"):
+        assert batch1c.LOOP[sid]["interval_ms"] == 1500, sid
+    assert batch1c.anchors_for(7) == 3 and batch1c.anchors_for(5) == 4 and batch1c.anchors_for(12) == 0
+
+
+def test_spread_takes_one_per_prompt_first():
+    docs = [{"file": {"stem": f"x__{p}__s300{i}"}} for i, p in enumerate("EEFGE")]
+    assert [d["file"]["stem"] for d in batch1c._spread(docs, 3)] == ["x__E__s3000", "x__F__s3002", "x__G__s3003"]
+    assert len(batch1c._spread(docs, 5)) == 5
+    final = {"L1": {"blocking": ["attack", "duration"]}}
+    assert batch1c._rule_note("enemy.quadruped.howl", final).endswith("; dài hơn thẻ")
+    assert batch1c._rule_note("hit.t1", final) is None
+
+
+def _wav(path, seconds=0.3, f=440.0):
+    import numpy as np
+    import soundfile as sf
+    t = np.arange(int(seconds * 48000)) / 48000
+    path.parent.mkdir(parents=True, exist_ok=True)
+    sf.write(str(path), 0.2 * np.sin(2 * np.pi * f * t) * np.exp(-t / 0.1), 48000, subtype="FLOAT")
+    return path
+
+
+def test_session_is_valid_for_the_board_and_never_overwritten(tmp_path, monkeypatch):
+    from board import session
+
+    monkeypatch.setattr(batch1c.env, "REVIEW", tmp_path / "review")
+    monkeypatch.setattr(batch1c, "ctx_dir", lambda run, game: tmp_path / "ctx" / game)
+    game = "typing-defense"
+    out = tmp_path / "critic"
+    sel = {}
+    for k, sid in enumerate(batch1c.JOBS[game]):
+        picks = []
+        for j, role in enumerate(("top", "rule-blocked", "ref")):
+            stem = f"{sid}__E__s{3001 + j}"
+            f = _wav(tmp_path / "takes" / f"{stem}.wav", f=300 + 50 * k + 7 * j)
+            _wav(tmp_path / "ctx" / game / sid / f"{stem}.wav", 1.0, f=200 + 9 * j + k)
+            d = {"file": {"stem": stem, "path": str(f)}, "_out": str(out), "metrics": {"duration_ms": 300.0},
+                 "spec": {"family": "ban", "group": "shot"}}
+            picks.append({"docs": [d], "role": role, "note": batch1c.RULE_NOTE.get(sid) if role == "rule-blocked" else None})
+        sel[sid] = {"picks": picks}
+    doc = batch1c.build_session("b1c", game, sel)
+    path = batch1c.session_path(game)
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps(doc, ensure_ascii=False), "utf-8")
+    s = session.load(path)
+    assert s.batch == "1c" and s.reveal == "end" and s.anchors_wanted == 4
+    assert all("scene" in it.rendered for it in s.items)         # every candidate has its in-scene render
+    wordshot = next(it for it in s.items if it.id == "wordshot-fire")
+    assert wordshot.loop["interval_ms"] == 1500
+    assert any(c.note.startswith("Bị luật chặn") for c in wordshot.candidates)
+    before = path.read_text("utf-8")
+    with pytest.raises(batch1c.SessionExists):
+        batch1c.step_session("b1c", game, force=False)
+    assert path.read_text("utf-8") == before
+
+
+def test_a_render_is_reused_only_for_the_same_slots(tmp_path):
+    take = {"docs": [{"file": {"path": str(tmp_path / "a.wav")}}], "role": "top"}
+    fixed = {"amb.forest": tmp_path / "forest.wav", "fire.impact.a": tmp_path / "old.wav"}
+    slots, config, bed = batch1c.pick_slots("dragon-hold", "fire.cast", take, fixed)
+    assert slots["fire.cast"] == tmp_path / "a.wav" and config == "proposed" and fixed.get("fire.cast") is None
+    sig = batch1c._slots_sig(slots, config, bed)
+    moved = dict(fixed, **{"fire.impact.a": tmp_path / "new.wav"})
+    assert batch1c._slots_sig(batch1c.pick_slots("dragon-hold", "fire.cast", take, moved)[0], config, bed) != sig
+    gun = {"files": [tmp_path / "i1.wav"], "set": {"A": [tmp_path / "i1.wav"], "B": [tmp_path / "i1.wav"], "B_db": -5.0},
+           "role": "1c-I", "bed_db": 16.0}
+    s2, c2, b2 = batch1c.pick_slots("typing-survival", "gun.xung", gun, {})
+    assert s2["gun.xung"]["B_db"] == -5.0 and (c2, b2) == ("proposed", 16.0)
+    ref = {"files": [tmp_path / "v2.wav"], "role": "ref-0a-current", "config": "current"}
+    assert batch1c.pick_slots("typing-survival", "gun.xung", ref, {})[1] == "current"
+    hit = {"docs": [{"file": {"path": str(tmp_path / "h.wav")}}], "role": "top"}
+    assert batch1c.pick_slots("typing-survival", "hit.t1", hit, {})[0]["hit.t1"] == [tmp_path / "h.wav"]
