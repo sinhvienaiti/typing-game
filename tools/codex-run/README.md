@@ -23,6 +23,18 @@ powershell -File tools\codex-run\run.ps1 -Name <id> -Brief docs\codex-queue\<phi
   - `last.md`: báo cáo cuối của Codex;
   - `err.txt`.
 - **Codex không commit.** Claude (hoặc chủ dự án) xem kết quả, kiểm, rồi commit phần văn bản. Ảnh và âm là media, không vào Git: sao lưu bằng `pnpm media:push`.
+- **`-Sandbox danger-full-access`** cho phiếu cần gọi `wsl.exe` (git, node, pnpm, ImageMagick chỉ có trong WSL). Sandbox `workspace-write` chặn lệnh này (`E_ACCESSDENIED`). Phiếu loại này phải tự ghi rõ đường dẫn được ghi.
+
+## Chạy nhiều phiếu
+
+```powershell
+powershell -File tools\codex-run\queue.ps1 -List .local\codex-lane-a.txt [-WaitFor <chữ trong lệnh của hàng chờ khác>]
+```
+
+- File danh sách: mỗi dòng `tên | phiếu | thư mục | effort | sandbox`. Dòng bắt đầu bằng `#` là chú thích.
+- Gặp hạn mức ChatGPT ("try again at 8:54 AM"), `queue.ps1` chờ tới giờ đó cộng 2 phút rồi chạy lại phiếu. Log lần hỏng được giữ dưới tên `<tên>-prev-<giờ>`.
+- `-WaitFor` chờ hàng chờ khác xong rồi mới bắt đầu, để hai lượt sinh ảnh không giành hạn mức của nhau.
+- Hai danh sách chạy song song được, miễn là không ghi cùng thư mục.
 
 ## Ưu tiên (chủ dự án, 25/10)
 

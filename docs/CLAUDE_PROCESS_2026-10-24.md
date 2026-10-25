@@ -196,6 +196,18 @@ Test audio-lab trên Dell:
 - **Chủ dự án duyệt ảnh bản sắc Tu Tiên (25/10):** ảnh nữ kiếm tu chưa đủ quý phái và hoàng tộc (D47); ảnh cảnh ải phóng to quá, phải thấy trọn sân (D48).
   - Chủ dự án muốn nhiều nhân vật, nên có thêm D49 (đề xuất): mỗi trường phái có 1 nam, 1 nữ.
   - Codex phiếu 008 (vẽ lại) và 009 (chân dung cả danh sách) chạy sau khi hạn mức ChatGPT mở lại lúc 08:56.
+  - **008 xong, chủ dự án duyệt** ("khá đẹp… pass"): chân dung A (miện ngọc) là chuẩn phong cách; cảnh 55° là góc camera mặc định (canon D47, D48).
+- **Danh sách toàn bộ ảnh Tu Tiên (25/10, 09:40):** `docs/games/tu-tien/art-requests/IMAGE_LIST.md`.
+  - 159 ảnh chia 7 lô (A nguồn 3D, R nhân vật, E môi trường, V VFX, I biểu tượng, U giao diện và Sơn Môn, T Tĩnh Tu); 46 ảnh đã có.
+  - Phiếu Codex 010a (E + V), 010b (I), 010c (U + T) sinh phần còn lại.
+- **Codex nhận thêm việc ngoài ảnh** (chạy được lệnh WSL nhờ `-Sandbox danger-full-access`):
+  - 012: công cụ hậu kỳ ảnh `tools/art-normalize` (alpha, lề, nền phẳng, liền mép, icon, ảnh xem nhanh), chạy trên ảnh Rồng Giữ Ải còn lỗi;
+  - 011: phản biện độc lập lượt sửa 2 của Lời Gọi R2. Báo cáo ở `games/typing-defense/tmp/dell-2026-10-25/review3/REPORT.md`; Claude đọc rồi sửa nếu cần.
+- **Hai làn Codex chạy song song** (`tools/codex-run/queue.ps1`, tự chờ khi gặp hạn mức ChatGPT):
+  - làn A (ảnh): 009 → 007b → 005a → 005b, rồi 010a → 010b → 010c;
+  - làn B (việc khác): 012 → 011.
+  - Xem trạng thái ở `docs/CODEX_QUEUE.md`, log ở `.local/codex-runs/`.
+  - **Nếu máy tắt giữa chừng:** chạy lại `queue.ps1` với cùng file danh sách. Bỏ dòng của phiếu đã xong; phiếu ảnh tự bỏ qua ảnh đã có.
 - **M0a đợt A bị giới hạn phiên ngắt lúc khoảng 07:00.**
   - Bước 0 đã commit và push (`4ee8658`, `2443db6`).
   - 5 làn bỏ lại khoảng 71 file chưa commit. Workflow chạy tiếp từ cache; các làn được dặn làm tiếp phần dở trong đường dẫn của mình.
@@ -283,3 +295,6 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
   - Âm Q6: 54 thẻ.
   - Kit: atlas chữ số.
   - Bị ngắt vì giới hạn phiên; chạy tiếp ở đợt 2.
+- 25/10/2026 (Dell, 09:40): danh sách toàn bộ ảnh Tu Tiên (`IMAGE_LIST.md`).
+  - Codex có phiếu 010a, 010b, 010c (ảnh), 011 (phản biện Lời Gọi R2 lượt sửa 2), 012 (công cụ hậu kỳ ảnh).
+  - Thêm `tools/codex-run/queue.ps1`: hai làn Codex chạy song song, tự chờ khi gặp hạn mức.

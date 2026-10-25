@@ -10,7 +10,8 @@ param(
   [string]$Cwd = '.',
   [string]$Model = 'gpt-6.1-sol',
   [ValidateSet('high', 'xhigh', 'max')] [string]$Effort = 'high',
-  [ValidateSet('read-only', 'workspace-write')] [string]$Sandbox = 'workspace-write',
+  # danger-full-access lets Codex call wsl.exe (git, node, pnpm live only in WSL); workspace-write blocks it (E_ACCESSDENIED).
+  [ValidateSet('read-only', 'workspace-write', 'danger-full-access')] [string]$Sandbox = 'workspace-write',
   [string[]]$Image = @()
 )
 $ErrorActionPreference = 'Stop'
