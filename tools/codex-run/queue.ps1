@@ -4,7 +4,8 @@
 #
 # List lines: name | brief | cwd | effort | sandbox   (blank lines and lines starting with # are skipped;
 # effort defaults to high, sandbox to workspace-write). A ticket whose run hits the usage limit is retried
-# after the time Codex names ("try again at 8:54 AM"), up to -MaxTries times; its failed log dir is kept.
+# after the time Codex names ("try again at 8:54 AM"), and one whose connection dropped is retried after
+# 2 minutes, up to -MaxTries times in all; failed log dirs are kept.
 param(
   [Parameter(Mandatory = $true)] [string]$List,
   # Wait until no other process whose command line contains this text is running (another queue).
@@ -53,7 +54,10 @@ foreach ($line in $items) {
     $code = $LASTEXITCODE
     $events = Join-Path $log 'events.jsonl'
     $limited = (Test-Path $events) -and (Select-String -Path $events -Pattern 'usage limit' -Quiet)
-    "$(Stamp) end $name exit $code$(if ($limited) { ' (usage limit)' })"
+    # A dropped connection ends the run without a report; image tickets skip finished files, so a rerun is cheap.
+    $dropped = ($code -ne 0) -and (Test-Path $events) -and (Select-String -Path $events -Pattern 'stream disconnected' -Quiet)
+    "$(Stamp) end $name exit $code$(if ($limited) { ' (usage limit)' } elseif ($dropped) { ' (connection dropped)' })"
+    if ($dropped) { Start-Sleep -Seconds 120; continue }
     if (-not $limited) { break }
     $resume = LimitResume $events
     "$(Stamp) waiting for the limit to reset at $($resume.ToString('dd/MM HH:mm'))"

@@ -27,7 +27,7 @@ Không chạy git, không sửa mã.
 
 | Id | Món | Khổ cuối | Ghi chú |
 |---|---|---|---|
-| `title/key-art` | Tranh màn tựa: nữ Kiếm tu (chân dung A) trên cổng Thanh Thạch Ải, triều thú xa dưới thung, núi đá vôi, mây | 1920 × 1080 | Chừa khoảng trống bên trái cho tên game và menu (làm bằng CSS). Không chữ |
+| `title/key-art` | **TẠM HOÃN, KHÔNG TẠO** (25/10): chủ dự án thấy gương mặt nhân vật quá giống ảnh AI tràn lan, đang chọn hướng mặt mới. Thay bằng `title/key-art-scene`: cổng Thanh Thạch Ải, triều thú xa dưới thung, núi đá vôi, mây, **không có người** | 1920 × 1080 | Chừa khoảng trống bên trái cho tên game và menu (làm bằng CSS). Không chữ |
 | `title/loading` | Màn chờ: phi kiếm bay qua mây núi, tĩnh | 1920 × 1080 | Không chữ |
 | `hub/son-mon` | Nền Sơn Môn: sân tông môn trên núi, 4 công trình đứng rõ | 1920 × 1080 | 4 công trình phải tách nhau để đặt điểm bấm. Ghi tọa độ tâm từng công trình vào README |
 | `hub/tran-dai`, `hub/tinh-that`, `hub/thu-lau`, `hub/bao-khi-lo` | 4 tranh điểm Sơn Môn | 1024 × 768 | Hiện khi rê chuột hoặc chọn phím 1–4 |
