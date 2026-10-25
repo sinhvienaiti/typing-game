@@ -8,36 +8,34 @@ Phiếu có thể chạy nhiều lần: lần sau chỉ thêm model mới và c�
 
 **Thư mục đích (ngoài repo, để media không bao giờ vào Git):** `D:\tripo-upload\`.
 
+**Bố cục phẳng** (chủ dự án yêu cầu 25/10: không mở từng thư mục con, không phải đọc file hướng dẫn):
+
 ```text
 D:\tripo-upload\
-  INDEX.md                      mục lục tiếng Việt: bảng mọi model, tổng credit rig, thứ tự nên làm
-  face-02000\  face-04000\  face-06000\  face-08000\  face-10000\  face-20000\ …   (theo số trong bảng)
-    _sheet.jpg                  ảnh xem nhanh cả nhóm, có nhãn
-    <game>__<id>\               ví dụ dragon-hold__E01, typing-defense__barracks
-      front.png  back.png  left.png    đúng ô Multiview của Tripo; một ảnh thì image.png
-      tripo.txt                 hướng dẫn cho model này
+  INDEX.md                                             mục lục ngắn
+  _GLB tải về\                                         chủ dự án lưu GLB tải về ở đây
+  face 6000 - rig Tripo Biped (Idle Walk Attack Death) - multiview\
+  face 6000 - KHÔNG bấm rig (Claude rig sau) - 1 ảnh\
+  face 2000 - không rig - 1 ảnh\
+  …                                                    một thư mục cho mỗi bộ (face, rig, chế độ)
+    rong_moss-grunt_front.png  rong_moss-grunt_back.png     multiview: <game>_<id>_<front|back|left>.png
+    loigoi_piggy.png                                        1 ảnh: <game>_<id>.png
 ```
 
-## `tripo.txt` mỗi model ghi
-
-- **Chế độ:** Multiview to 3D, hoặc Image to 3D; ảnh nào vào ô nào.
-- **Face limit.**
-- **Rig:**
-  - `Tripo Biped, 20 credit`, kèm clip preset cần chọn;
-  - hoặc `KHÔNG bấm rig, tải GLB không xương, Claude rig trong Blender`;
-  - hoặc `Không rig`.
-- **Thiết lập chung:** theo §2 của `3D_REQUESTS.md` (tách nền bật, texture HD, PBR, lưới tam giác, Smart Low Poly tắt).
-- **Sau khi tải GLB:** đặt tên đúng `<id>.glb` và chép về đường dẫn ở cột GLB đích của `3D_REQUESTS.md`.
-- **Lưu ý về ảnh** nếu README giao nhận ghi lỗi chưa sửa.
+- **Mã game:** `rong` (Rồng Giữ Ải), `loigoi` (Lời Gọi), `tuyencuoi` (Tuyến Cuối).
+- **Không có thư mục con theo model**, không `tripo.txt`, không `_sheet.jpg`.
+- Rig, face, chế độ đọc từ cột tương ứng của `3D_REQUESTS.md`. Thiết lập chung (tách nền, PBR, lưới tam giác) ghi một lần trong `INDEX.md`.
+- **Ảnh đã có trong thư mục thì giữ nguyên;** chỉ thêm model mới vào đúng thư mục.
+- **Lưu ý về ảnh lỗi chưa sửa:** ghi một dòng cạnh model trong `INDEX.md`.
 
 ## Việc
 
 1. Đọc §3 của `3D_REQUESTS.md`; lấy mọi dòng của 3 game có trạng thái "có ảnh".
-2. Chép ảnh (không di chuyển, không sửa) vào đúng nhóm face; viết `tripo.txt`.
-3. **Thiếu ảnh** thì không tạo thư mục model; ghi vào `INDEX.md` mục "Chờ ảnh".
-4. Làm `_sheet.jpg` mỗi nhóm bằng ImageMagick trong WSL (`~/.local/bin/magick montage`, font `/mnt/c/Windows/Fonts/arial.ttf`).
+2. Chép ảnh (không di chuyển, không sửa) vào đúng thư mục theo bố cục phẳng ở trên, đặt tên đúng mẫu.
+3. **Thiếu ảnh** thì không chép; ghi vào `INDEX.md` mục "Chờ ảnh".
+4. Kiểm: số file, mã băm khớp nguồn, không trùng tên.
 5. **`INDEX.md`:**
-   - bảng model theo nhóm face: game, id, tên Việt, chế độ, rig, credit;
+   - bảng thư mục: số model, số ảnh; dưới mỗi thư mục, danh sách `<game>_<id>`: tên Việt;
    - tổng số model, tổng credit rig;
    - thứ tự nên làm: Rồng Giữ Ải trước, rồi Lời Gọi bậc P, Tuyến Cuối, Lời Gọi bậc VS;
    - mục "Chờ ảnh".
