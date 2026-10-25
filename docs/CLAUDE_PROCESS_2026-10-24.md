@@ -8,6 +8,15 @@
 
 Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mục 2 (luật) và mục D0 của mục 6, **không cần đọc lại hội thoại cũ**.
 
+### 0.0 Đã nhận việc trên Mac (25/10/2026 tối)
+- **Tu Tiên TẠM DỪNG** (chủ dự án, 25/10 tối): chưa triển khai tiếp. Không chạy M0a đợt B, nhánh wip, phiếu Codex 014r, 007b, 010a–c, 013, 013b. Mục 0.2–0.3b về Tu Tiên chỉ còn để tra.
+  - Submodule `games/immortality-cultivation` đã checkout ở `main` (`19f35a2`) chỉ để sao lưu ảnh của nó lên Drive.
+- **Code:** đã kéo về theo mục 7.1. Việc dở trên Mac đều đã có trong commit của Dell (so md5 từng file), nên cất vào stash `mac-before-dell-sync` ở 4 game và repo cha; bỏ được.
+- **Media:** đã chép gói Dell vào repo (1.013 file mới, 45 file trùng, 0 file đè lên file Git theo dõi) và `pnpm media:push` 692 file (520 MB): Rồng Giữ Ải 414, Lời Gọi 115, Tu Tiên 163.
+  - Gói vẫn ở `typing-game-handoff-2026-10-25/` (gốc repo, không vào Git). Xoá được sau khi chủ dự án kiểm Drive.
+- **Codex CLI chưa có trên Mac.** Phiếu 005a, 005b, 012b, 015 chờ chủ dự án cài Codex CLI ≥ 0.164 và đăng nhập ChatGPT (`tools/codex-run/README.md`).
+- **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored): 4 chỗ CPU, 1 chỗ trình duyệt (`--gpu`), 1 chỗ commit repo cha (`--git`).
+
 ### 0.1 Mang việc về Mac
 1. **Code:** mọi repo đã push lúc rời Dell (repo cha nhánh `feat/space-typing-admin-uiux`; 5 game nhánh `main`, Space nhánh `feat/space-typing-2026-10-18`). Kéo về theo mục 7.1, thêm `git submodule update --init games/immortality-cultivation` (game mới, chưa có trên Mac).
 2. **Media chưa lên Drive** vì Dell không có rclone. Gói `C:\Users\Admin\Downloads\typing-game-handoff-2026-10-25\` trên Dell:
@@ -413,3 +422,4 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
   - Phiếu 009 xong: chờ chủ dự án chọn nhân vật.
   - M0a đợt A của Tu Tiên push xong, đợt B đang chạy.
   - Kế hoạch đưa game lên mạng `docs/HOSTING_PLAN_2026-10-25.md`.
+- 25/10/2026 (Mac, tối): nhận việc trên Mac. Kéo code theo 7.1; media gói Dell lên Drive (692 file), commit `media.md5` của Rồng Giữ Ải, Lời Gọi, Tu Tiên. Chủ dự án tạm dừng Tu Tiên (mục 0.0).
