@@ -6,7 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully CI-verified E11 scale-up checkpoint before the current editorial-finalization hardening: `ca5da255c866cdd3d08d52f903f71300e39f3fe1` — English Content Full Validation #762 passed the pinned MultiWOZ checkout, 24-record next-slice preparation, controlled intake, editorial handoff, publication/runtime gates, E11 readiness/runtime/record-level coverage, E12 maintenance and reproducibility checks.
+- Latest fully verified E11 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. That run applied the decisions and registered the reviewed slice; the workflow then created registration commit `b9400e88f2c498b8524137aa2317d32ab87b0f81`, followed by generated-metadata commit `9803698754f07d7023bde774b13c249eb8309d91`.
+- MultiWOZ slice 51 is integrated: 22/22 candidates received explicit editorial decisions, with 9 edited records retained and 13 rejected. The registered runtime slice is `content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-51.json`.
+- The pinned MultiWOZ 2.2 source coverage now includes the complete configured source set at immutable upstream commit `fe0c8e65cfcd8462bd33c86e35f21addc84ca82b`: train `dialogues_001.json` through `dialogues_017.json`, dev `dialogues_001.json` and `dialogues_002.json`, and test `dialogues_001.json` and `dialogues_002.json`. There is no configured or upstream-designed `test/dialogues_003.json` lane; never invent one.
 - E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
 - Current phase: mandatory E00–E12 implementation is complete; approved quality-first E11 corpus scale-up is the first unfinished workstream. E04 may continue only when new evidence-backed reviewed enrichment/content is actually available.
 - PR: #48 — open, draft, mergeable
@@ -26,7 +28,9 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
 - E12 release/audit/maintenance foundation: complete and enforced
 
-## Published runtime snapshot after E04 scale-224 publication
+## Historical runtime snapshot after E04 scale-224 publication
+
+These values are the scale-224 baseline only. MultiWOZ E11 reviewed slices have subsequently changed sentence/dialogue-related runtime state. Recalculate current counts from live generated manifests/reports before planning any new batch; do not use these historical values as the current runtime total.
 
 - dictionary: 900 records
 - grammar: 300 records
@@ -40,9 +44,9 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E04 chunk frontier: `chunk.00002000`
 - E04 idiom frontier: `idiom.00001185`
 
-## Current E11 readiness snapshot
+## Historical E11 readiness baseline
 
-Recalculate from live HEAD before every new batch; these values are a handoff snapshot, not a substitute for the generated readiness/runtime reports.
+Recalculate from live HEAD before every new batch; these values predate the later MultiWOZ reviewed slices and are a handoff baseline, not a substitute for generated readiness/runtime reports.
 
 - grammar topics: 300
 - verb patterns: 510
@@ -110,15 +114,14 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 ## Current first-unfinished workstream
 
 1. E04 scale-224 is complete; all controlled E04 phrase-family minimums are met. Do not create scale-225 merely for volume.
-2. Translation pairs remain the largest preferred bounded E11 scale-up front because runtime is 600 against the locked 20,000 target and a Tatoeba source/review pipeline exists. However, the exact pinned Tatoeba cache bytes are not currently available through the reproducible repository/CI path, so this lane remains source-blocked rather than license/review-blocked.
-3. Keep the legacy Tatoeba E06 pilot selector unchanged. The E11 Tatoeba path uses the separate source-ID-based, prefix-monotonic selector and must reject checksum drift instead of silently refreshing the moving export URLs.
-4. MultiWOZ dialogue scale-up is the current reproducible fallback lane: runtime is 100 against the locked 10,000 target, and source identity is pinned to immutable Git commit/blob SHAs.
-5. Full Validation #762 verified an end-to-end non-publishing MultiWOZ path for the bounded 24-record slice: immutable source checkout → deterministic next-slice selection with provenance exclusion → candidate packet → controlled intake → editorial handoff → artifact upload. The handoff starts with every record `pending`; no review decisions or runtime publication are created.
-6. The branch now contains an editorial finalizer for this handoff. It may run only after every handoff record has an explicit `accept`, `edit`, or `reject` disposition. Accepted/edited records require CEFR and completed editorial checks; rejected records require a reason. `edit` must contain a real scenario/turn change.
-7. Finalization is intentionally non-publishing. It converts accepted/edited records only to `quality.state = draft`, preserves immutable MultiWOZ source identity, marks edited provenance as modified, excludes rejected records, and emits a batch-registration proposal with `reviewDecisions = not-created` and `runtimePublication = blocked`.
-8. Do not register the proposed E11 MultiWOZ batch in `content/english/batches/manifest.json`, do not create review-ledger decisions, and do not publish runtime records while the editorial handoff contains pending work. The normal E10 digest-bound review/publication pipeline remains mandatory after authoring is finalized.
-9. After editorial completion, run `pnpm english-content:e11:dialogue:finalize` against the exact packet/intake/handoff set, inspect the produced draft authoring records and proposal, then register the controlled batch as a separate reviewed change. Only after batch validation should digest-bound review decisions be authored and the normal publisher be allowed to promote passing records.
-10. After any reviewed bounded slice is actually integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify Full Validation, Master Plan Acceptance and Platform CI before opening the following slice.
+2. Translation pairs remain the largest preferred bounded E11 scale-up front because runtime is far below the locked 20,000 target and a Tatoeba source/review pipeline exists. However, the exact pinned Tatoeba cache bytes are not currently available through the reproducible repository/CI path, so this lane remains source-blocked rather than license/review-blocked.
+3. Keep the legacy Tatoeba E06 pilot selector unchanged. The E11 Tatoeba path uses the separate source-ID-based, prefix-monotonic selector and must reject checksum drift instead of silently refreshing moving export URLs.
+4. MultiWOZ dialogue scale-up remains the current reproducible fallback lane. The pipeline has progressed through 51 reviewed slices using immutable source identity, explicit editorial decisions, digest-bound review, normal E10 publication gates and bot registration/metadata refreshes.
+5. The configured MultiWOZ source has been extended through the last designed file currently pinned for this lane: train 001–017, dev 001–002 and test 001–002. Source pin, blob SHA1s, license and attribution remain immutable/reproducible at the pinned upstream commit.
+6. Full Validation #913 verified slice 51 and registered it, but its next-review packet was prepared before the workflow-created registration/metadata commits. Therefore #913's packet must not be reused to decide slice 52.
+7. A fresh English Content Full Validation must run on a HEAD containing the registered slice-51 state. If it emits another bounded MultiWOZ review packet, that packet becomes slice 52 and must go through the same complete editorial/dedupe/digest-bound review path.
+8. If the fresh run reports `source-exhausted` / no next packet, treat the configured MultiWOZ lane as exhausted. Do not invent `test/dialogues_003.json`; instead inspect the current roadmap/source-coverage contracts and move only to the next explicitly designed E11 source/record-type lane.
+9. After any reviewed bounded slice is integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify the relevant English Content Full Validation before opening the following slice. Platform CI failures outside this content lane are not a reason to replay old completed content work.
 
 ## Known non-blocking enrichment debt
 
@@ -127,8 +130,8 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 ## Blockers
 
 - Tatoeba translation next-slice: requires the exact pinned source-cache bytes. The moving upstream export URL must not be downloaded and accepted under the old pin merely because the historical cache is unavailable.
-- MultiWOZ dialogue next-slice: source/candidate/intake infrastructure is not blocked. Promotion is deliberately waiting on real editorial completion of the 24-record handoff. This is a quality gate, not a CI/tooling blocker and must not be bypassed by auto-accepting records.
+- MultiWOZ is not currently source-cache blocked. The immediate requirement is a fresh Full Validation after slice-51 registration so the deterministic selector can prove either a real next packet or `source-exhausted` against the final configured source set.
 
 ## Next actionable task
 
-Complete editorial authoring for the existing 24-record MultiWOZ handoff using the generated candidate/intake evidence: for every record choose `accept`, `edit`, or `reject`; assign/confirm CEFR for accepted/edited records; complete exact/near-dedupe, grammar, naturalness, CEFR and license checks; provide real edits when disposition is `edit`; and record a reason for every rejection. When and only when the handoff has zero pending records, run `pnpm english-content:e11:dialogue:finalize`, inspect the draft authoring output and batch-registration proposal, then register that controlled batch in a separate change. Do not generate review-ledger publish decisions or change runtime counts until the registered authoring records have passed the normal digest-bound E10 review gate.
+Run English Content Full Validation from the newest live HEAD that contains the registered slice-51 state. Use only the fresh review/intake/editorial-handoff artifacts from that run. If a non-empty packet exists, review the complete bounded packet as slice 52 with exact/near-dedupe checks, grammar/naturalness/CEFR/license review, explicit edit/reject reasons and exact digest binding, then commit it atomically and let the normal apply/register pipeline run. If the fresh run reports `source-exhausted` or produces no next MultiWOZ packet, do not add `test/dialogues_003.json`; inspect the current E11 roadmap/source coverage and continue with the next explicitly designed lane.
