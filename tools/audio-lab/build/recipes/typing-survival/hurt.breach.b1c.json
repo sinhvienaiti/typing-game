@@ -1,0 +1,194 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "hurt.breach",
+ "group": "alarm",
+ "family": "nen",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Tuyến bị phá 800 ms (640–960): nổ trầm có thân, thép rên, còi hai nốt ngắn, vang dội dọc hành lang thép. Thân là bản Stable Audio 3 prompt D–F của lô 1c (tạo 2 s, cửa sổ process.py dài tự nhiên tới 960 ms), lọc cao 40 Hz; còi giữ như lô 1 (440/330 Hz vuông, lọc thấp 1,6 kHz, 90 ms mỗi nốt ở 30 và 140 ms). Đuôi hàm mũ từ 650 ms (lô 1: 720 ms tối đa, thân A–C đã bỏ). Biến thể n dùng thân n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "body",
+   "role": "body",
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 40,
+     "order": 2
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.json",
+     "window": [
+      0.0235,
+      0.9835
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.json",
+       "window": [
+        0.009,
+        0.969
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.json",
+       "window": [
+        0.0005,
+        0.9605
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.json",
+       "window": [
+        0.06125,
+        1.02125
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.json",
+       "window": [
+        0.00125,
+        0.948
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.json",
+       "window": [
+        0.024,
+        0.984
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "siren1",
+   "role": "sweetener",
+   "offsetMs": 30,
+   "gainDb": -9,
+   "source": {
+    "synth": "tone",
+    "params": {
+     "wave": "square",
+     "freqHz": 440,
+     "durMs": 90,
+     "attackMs": 4,
+     "decayMs": 400
+    }
+   },
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1600,
+     "order": 4
+    }
+   ],
+   "fadeOutMs": 15
+  },
+  {
+   "id": "siren2",
+   "role": "sweetener",
+   "offsetMs": 140,
+   "gainDb": -9,
+   "source": {
+    "synth": "tone",
+    "params": {
+     "wave": "square",
+     "freqHz": 330,
+     "durMs": 90,
+     "attackMs": 4,
+     "decayMs": 400
+    }
+   },
+   "filters": [
+    {
+     "type": "lowpass",
+     "hz": 1600,
+     "order": 4
+    }
+   ],
+   "fadeOutMs": 15
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35.0,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 960,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 650
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 6,
+  "seed": 3533,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/alerts/hurt-breach",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

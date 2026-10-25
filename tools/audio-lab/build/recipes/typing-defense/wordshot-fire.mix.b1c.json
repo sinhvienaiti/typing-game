@@ -1,0 +1,148 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "wordshot-fire.mix",
+ "group": "shot",
+ "family": "ban",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Phát Chữ 350 ms (280–420): vung tay tre, chữ giấy phóng vút đi, giấy phần phật bay xa, vang làng ngắn. Tiếng vút là bản Stable Audio 3 prompt E–H của lô 1c (mỗi prompt một bản, xếp bằng L1, L1b, L2; cửa sổ đầu tiếng thật, dài tự nhiên tới 420 ms nên giữ được đuôi làng), cộng tiếng lật giấy Kenney RPG bookFlip3/2 (cắt từ 25 ms, lọc cao 1,5 kHz, −10 dB, vào sau 8 ms) cho chữ giấy. Lọc cao 120 Hz (§4.3.3 'khạc, phóng'). Phát sau mỗi từ (1,5 s một lần): đuôi hàm mũ từ 220 ms, thấp. Lô 1 dùng tiếng vút A–D (đã bỏ) và cắt ở 210 ms. Biến thể n dùng tiếng vút n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "whoosh",
+   "role": "body",
+   "fadeOutMs": 60,
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__E__s3001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__E__s3001.json",
+     "window": [
+      0.05675,
+      0.33675
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__F__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__F__s3001.json",
+       "window": [
+        0.0,
+        0.42
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__G__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__G__s3001.json",
+       "window": [
+        0.05125,
+        0.381
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__H__s3005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/wordshot-fire/b1c/raw/wordshot-fire__H__s3005.json",
+       "window": [
+        0.05425,
+        0.33425
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "paper",
+   "role": "sweetener",
+   "gainDb": -10,
+   "offsetMs": 8,
+   "trim": {
+    "startMs": 25,
+    "endMs": 190
+   },
+   "fadeOutMs": 60,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 1500
+    }
+   ],
+   "source": {
+    "library": "kenney/rpg-audio/Audio/bookFlip3.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip2.ogg"
+     },
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip3.ogg"
+     },
+     {
+      "library": "kenney/rpg-audio/Audio/bookFlip2.ogg"
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 120,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 420,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 220
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60.0,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 3301,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/wordshot-fire",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}
