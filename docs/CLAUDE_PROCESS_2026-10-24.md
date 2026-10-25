@@ -189,7 +189,16 @@ Test audio-lab trên Dell:
   - Ảnh 2D bậc VS của Lời Gọi (005a, 005b).
   - Bộ prompt và ảnh của Tu Tiên (007).
   - Danh sách 3D của mọi game: `docs/games/3D_REQUESTS.md`.
-- **Lời Gọi R2:** lượt sửa 2 đang chạy (workflow `td-r2-fix-2`).
+- **Lời Gọi R2:** lượt sửa 2 xong và đã push (`c9a8edd`…`266e39d`):
+  - G3, G8 chấm theo từng bộ seed; chunk tải lười có đường lùi; gói khởi động ở `/` 82,56 kB; perf đo ở 60 Hz.
+  - B1 vẫn tệ hơn R1 và G3 bộ 2 vẫn trượt sau khi thử đủ các bước §6.5. Hướng chỉnh kế tiếp ghi cho R3.
+  - Bước kiểm tra độc lập của lượt này chưa chạy, vì bị giới hạn phiên. Chạy lại khi rảnh.
+- **Chủ dự án duyệt ảnh bản sắc Tu Tiên (25/10):** ảnh nữ kiếm tu chưa đủ quý phái và hoàng tộc (D47); ảnh cảnh ải phóng to quá, phải thấy trọn sân (D48).
+  - Chủ dự án muốn nhiều nhân vật, nên có thêm D49 (đề xuất): mỗi trường phái có 1 nam, 1 nữ.
+  - Codex phiếu 008 (vẽ lại) và 009 (chân dung cả danh sách) chạy sau khi hạn mức ChatGPT mở lại lúc 08:56.
+- **M0a đợt A bị giới hạn phiên ngắt lúc khoảng 07:00.**
+  - Bước 0 đã commit và push (`4ee8658`, `2443db6`).
+  - 5 làn bỏ lại khoảng 71 file chưa commit. Workflow chạy tiếp từ cache; các làn được dặn làm tiếp phần dở trong đường dẫn của mình.
 
 ### D. Game tu tiên chống thú triều (mới, 24/10)
 - **Đã xong: đánh giá** `docs/games/tu-tien/DANH_GIA_2026-10-24.md` (đọc trước), gồm 7 bản phân tích và 1 bản phản biện ở `analysis/`. Bản chụp đề xuất Codex nằm ở `source/`. Video QCBH ở gốc repo, không vào Git.
