@@ -17,6 +17,7 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
 - **Codex CLI có sẵn trên Mac** (sửa ghi nhầm lúc đầu: nó không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-26.1007.21434/bin/macos-aarch64/codex`, bản 0.162.0-alpha.17.2, đã đăng nhập ChatGPT (`~/.codex/auth.json`). Đã thử `codex exec -m gpt-6.1-sol`: chạy được.
   - Đường dẫn đổi khi extension Cursor cập nhật. Không có `pwsh`, nên `run.ps1`, `queue.ps1` không chạy được trên Mac: gọi thẳng `codex exec` với cùng tham số.
   - Phiếu còn chờ chạy: 005a, 005b, 012b, 015.
+- **3D Tripo: chủ dự án tự tạo tay trên web** (26/10). Đã thử `tripo-cli` 0.7.3 (cài toàn máy, đã đăng nhập): chùy Oni với thiết lập web tốn đúng 30 credit, nhưng trừ vào **ví API riêng** (developers.tripo3d.ai, 1.000 → 970), không phải credit web (chủ dự án có hơn 4.000). Không chạy hàng loạt qua CLI hay plugin Codex. Model thử ở `games/typing-defense/tmp/mac-2026-10-25/tripo-test/`.
 - **Khóa chung cho việc nặng:** `.local/bin/heavy.sh` (gitignored, bản 2 từ 25/10 khoảng 20:30, theo ý chủ dự án):
   - đếm theo **số nhân** (10 nhân): bộ cân bằng chạy song song của Rồng và Lời Gọi tính 6, test và `pnpm check` tính 4, build tính 2, việc khác 1; `--jobs=N`, `--threads=N`, `--cores=N` ghi đè;
   - **trình duyệt 3 chỗ** cho kiểm chức năng và chụp hình; lượt đo hiệu năng (tên có perf, latency, hitstop, trace, fps, hoặc `--perf`) **giữ cả 3 chỗ**, nên chạy một mình;
