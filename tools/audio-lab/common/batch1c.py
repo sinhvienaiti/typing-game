@@ -35,8 +35,9 @@ context   the listening list of each id (select, at most 4: the machine's top, t
           impacts, impact.multi on words 2 and 5), dh-pack, dh-trap, td-wordhit-chain, td-night, ts-xung-3s (the
           gun.xung I/K sets next to batch 1's direction 2 and the game today), ts-xung-3s-kills, ts-breach; every
           other slot fixed. ~/AudioLab/work/_batch1c/<run>/<game>/context.
-session   one board session per game, ~/AudioLab/review/<game>/sessions/1c-dh|1c-td|1c-ts.json (batch "1c", anchor
-          pairs up to 10 items, cards at the end); an existing session file is never overwritten without --force.
+session   the board sessions, ~/AudioLab/review/<game>/sessions/1c-dh-1|1c-dh-2|1c-td|1c-ts-1|1c-ts-2.json (batch "1c",
+          at most 10 items and 20 minutes each with the anchor pairs, cards at the end); an existing session file is
+          never overwritten without --force, and one the owner has opened never.
 
 Heavy models run one at a time (common/batch1_dh.wait_heavy_free); nothing is written under games/**.
 """
@@ -242,15 +243,83 @@ PEAK_POOLS = {
     # kill.elite takes sound from their first sample (21/24 processed takes have an unverified onset, never listened):
     # the recipe body starts at the blast instead
     "elite": (TS, "kill.elite", 0.56, 0.6),
+    # review of batch 1c: the processed window kept the take's build-up, so with D s3002 the boom came at 390 ms,
+    # after the recipe's siren and steel hit ("hit, build-up, hit again"); the body now starts at the boom too
+    "breach": (TS, "hurt.breach", 0.90, 1.0),
 }
-# pool -> (game, id): processed windows (process.py's true onset and natural length), no second onset
-PROC_POOLS = {"breach": (TS, "hurt.breach")}
 # id -> fast-critic-ranked layers (L1, L1b, L2; no model): a whoosh, a paper and dust burst
 LAYER_POOLS = {"wordshot": (TD, "wordshot-fire"), "blast": (TD, "blast")}
 LAYER_NO_FLAGS = {"wordshot": {"double_onset", "lr_imbalance"}, "blast": {"lr_imbalance"}}
 
+# Level match of the bodies (review of batch 1c). The raw takes come from the model at levels 20 dB or more apart
+# (fire.impact.b: -19.6 to -45.9 LUFS-M after the 90 Hz high-pass), and a body layer at one gain made the quiet
+# variants a Kenney front and embers with no body (fire.impact.b-v3, the machine's top, 54 % of its samples under
+# -90 dBFS). Each body is measured as the layer plays it (its window through the layer's filters) after its first
+# BODY_SKIP_MS, LUFS-M max: the body is what follows the strike (the front layer carries the strike). A first pass
+# measured the whole window, and the transient-only takes (fire.impact.a F: a click 23-26 dB over what follows it)
+# came out level with real bodies, so fire.impact.a v2 and v6 kept 50-60 ms within 30 dB of their peak. Each take is
+# brought to the median level of its pool by its source gainDb (up or down: the layer gains of the recipe were set
+# for a typical take; matching to the loudest raised the paper of blast.mix by up to 5 dB and made v1 rise too slowly
+# for the 10 ms rule); one more than BODY_SPREAD_DB under the loudest is left out (a near-silent take raised 26 dB is
+# mostly the model's floor, a click raised 20 dB is still a click).
+BODY_SPREAD_DB = 10.0
+BODY_SKIP_MS = 40.0
+BODY_FILTERS = {
+    "fire-a": [{"type": "highpass", "hz": 90, "order": 4}],
+    "fire-b": [{"type": "highpass", "hz": 90, "order": 4}],
+    "fire-c": [{"type": "highpass", "hz": 70, "order": 4}],
+    "pine": [{"type": "highpass", "hz": 40, "order": 2}],
+    "t4": [{"type": "highpass", "hz": 90, "order": 2}],
+    "elite": [{"type": "highpass", "hz": 45, "order": 2}],
+    "breach": [{"type": "highpass", "hz": 40, "order": 2}],
+    "wordshot": [{"type": "highpass", "hz": 120, "order": 2}],      # no layer filter: the chain's 120 Hz high-pass
+    "blast": [{"type": "highpass", "hz": 300}],
+}
 
-def peak_bodies(game: str, sid: str, run: str, length_s: float, max_peak_s: float) -> dict:
+
+def _filters(key: str) -> list[dict]:
+    return json.loads(json.dumps(BODY_FILTERS[key]))
+
+
+def body_level(file: str, window: list[float], filters: list[dict]) -> float:
+    """LUFS-M max of a body window as its layer plays it (mono, through the layer's filters), after its first
+    BODY_SKIP_MS (the strike)."""
+    from build import dsp, measure
+    from build.sources import read_audio
+
+    x = read_audio(Path(file), dsp.SR)
+    y = x[dsp.ms_to_n(window[0] * 1000):dsp.ms_to_n(window[1] * 1000)].mean(axis=1, keepdims=True)
+    y = dsp.apply_filters(y, filters)
+    return float(measure.lufs_m_max(y[dsp.ms_to_n(BODY_SKIP_MS):], dsp.SR))
+
+
+def level_match(rows: list[dict], filters: list[dict], level=body_level) -> tuple[list[dict], list[dict]]:
+    """(kept, too quiet): each row gets level_lufs and gain_db (to the median of the kept rows); a row more than
+    BODY_SPREAD_DB under the loudest is too quiet."""
+    import statistics
+
+    for r in rows:
+        r["level_lufs"] = round(level(r["file"], r["window"], filters), 1)
+    if not rows:
+        return [], []
+    top = max(r["level_lufs"] for r in rows)
+    kept = [r for r in rows if top - r["level_lufs"] <= BODY_SPREAD_DB]
+    quiet = [r for r in rows if top - r["level_lufs"] > BODY_SPREAD_DB]
+    ref = statistics.median(r["level_lufs"] for r in kept)
+    for r in rows:
+        r["gain_db"] = round(ref - r["level_lufs"], 1)
+    return kept, quiet
+
+
+def _gen(b: dict) -> dict:
+    """A body take as a recipe source, with its level match (source gainDb) when it has one."""
+    src = gen_src(b)
+    if b.get("gain_db"):
+        src["gen"]["gainDb"] = float(b["gain_db"])
+    return src
+
+
+def peak_bodies(game: str, sid: str, run: str, length_s: float, max_peak_s: float, key: str) -> dict:
     rows, rej = [], []
     for f in sorted((id_dir(game, sid, run) / "raw").glob("*.f32.wav")):
         r = body_window(f, length_s)
@@ -258,21 +327,12 @@ def peak_bodies(game: str, sid: str, run: str, length_s: float, max_peak_s: floa
         r["name"] = f.name.replace(".f32.wav", "")
         r["ok"] = bool(not r["double_onset"] and not r["clip"] and r["pre_db"] <= -3.0 and r["peak_s"] <= max_peak_s)
         (rows if r["ok"] else rej).append(r)
-    rows.sort(key=lambda r: -r["peak_db"])
-    return {"length_s": length_s, "n": len(rows) + len(rej), "ok": len(rows),
+    rows, quiet = level_match(rows, _filters(key))
+    rows.sort(key=lambda r: -r["level_lufs"])
+    return {"length_s": length_s, "n": len(rows) + len(rej) + len(quiet), "ok": len(rows),
             "bodies": _round_robin(rows, lambda r: prompt_of(r["name"])),
-            "rejected": [{k: r[k] for k in ("name", "double_onset", "clip", "pre_db", "peak_s")} for r in rej]}
-
-
-def proc_bodies(game: str, sid: str, run: str) -> dict:
-    from common import batch1_ts
-
-    if game != batch1_ts.GAME:
-        raise ValueError(game)
-    rows = batch1_ts._proc_sources(sid, run)
-    ok = sorted([r for r in rows if not r["double_onset"]], key=lambda r: -(r.get("len_ms") or 0))
-    return {"n": len(rows), "ok": len(ok), "bodies": _round_robin(ok, lambda r: prompt_of(r["name"])),
-            "rejected": [r["name"] for r in rows if r["double_onset"]]}
+            "rejected": [{k: r[k] for k in ("name", "double_onset", "clip", "pre_db", "peak_s")} for r in rej],
+            "quiet": [{k: r[k] for k in ("name", "level_lufs", "gain_db")} for r in quiet]}
 
 
 def _critic_run(inputs: list[Path], srcs: list[Path], out: Path, spec: Path, stage: str = "final",
@@ -292,11 +352,25 @@ def critic_out(run: str, game: str, name: str) -> Path:
     return base_dir(run, game) / f"critic-{name}"
 
 
+def fresh(out: Path) -> Path:
+    """An empty folder for a critic run that replaces an earlier one. The critic writes one JSON per input and never
+    removes the others, so a take that a re-run of process refused would keep its old verdict there (review fix of
+    1c). The earlier run moves to <name>.prev (the one before it is dropped): kept to compare, never read by a step."""
+    import shutil
+
+    if out.is_dir():
+        prev = out.with_name(out.name + ".prev")
+        if prev.exists():
+            shutil.rmtree(prev)
+        out.rename(prev)
+    return out
+
+
 def layer_pool(game: str, sid: str, key: str, run: str, force: bool) -> list[dict]:
     proc = id_dir(game, sid, run) / "processed"
     out = critic_out(run, game, f"layers-{sid}")
     if not (out / "_batch.json").is_file() or force:
-        _critic_run([proc], [proc / "SOURCES.json"], out, card_path(game, sid), layers="L1,L1b,L2", cards=False)
+        _critic_run([proc], [proc / "SOURCES.json"], fresh(out), card_path(game, sid), layers="L1,L1b,L2", cards=False)
     rows = []
     for d in _docs(out).values():
         pj = json.loads(Path(d["file"]["path"]).with_suffix(".proc.json").read_text("utf-8"))
@@ -309,8 +383,9 @@ def layer_pool(game: str, sid: str, key: str, run: str, force: bool) -> list[dic
         rows.append({"name": d["file"]["stem"], "l2": (d.get("L2") or {}).get("score") or 0.0,
                      "file": pj["source_f32"], "record": pj["raw_record"], "window": pj["window_raw_s"],
                      "len_ms": pj["window"]["len_ms"]})
+    rows, quiet = level_match(rows, _filters(key))
     rows.sort(key=lambda r: -r["l2"])
-    return _round_robin(rows, lambda r: prompt_of(r["name"]))
+    return _round_robin(rows, lambda r: prompt_of(r["name"])), quiet
 
 
 def step_sources(run: str, game: str | None = None, force: bool = False) -> dict:
@@ -318,18 +393,17 @@ def step_sources(run: str, game: str | None = None, force: bool = False) -> dict
     pools = json.loads(out.read_text("utf-8")) if out.is_file() and not force else {}
     for key, (g, sid, length, max_pk) in PEAK_POOLS.items():
         if g in _games(game) and (key not in pools or force):
-            pools[key] = peak_bodies(g, sid, run, length, max_pk)
+            pools[key] = peak_bodies(g, sid, run, length, max_pk, key)
             _say(f"thân {key} ({sid}): {pools[key]['ok']}/{pools[key]['n']} dùng được (một đầu tiếng, không cắt vào âm "
-                 f"trước, không clip, đỉnh trước {max_pk:g} s)")
-    for key, (g, sid) in PROC_POOLS.items():
-        if g in _games(game) and (key not in pools or force):
-            pools[key] = proc_bodies(g, sid, run)
-            _say(f"thân {key} ({sid}): {pools[key]['ok']}/{pools[key]['n']} (đầu tiếng đã xác minh, không hai đầu tiếng)")
+                 f"trước, không clip, đỉnh trước {max_pk:g} s, không nhỏ hơn thân to nhất quá {BODY_SPREAD_DB:g} dB); "
+                 f"nhỏ quá: {len(pools[key]['quiet'])}; cân mức {min([0.0] + [b['gain_db'] for b in pools[key]['bodies']]):+g} "
+                 f"tới {max([0.0] + [b['gain_db'] for b in pools[key]['bodies']]):+g} dB")
     for key, (g, sid) in LAYER_POOLS.items():
         if g in _games(game) and (key not in pools or force):
-            rows = layer_pool(g, sid, key, run, force)
-            pools[key] = {"n": len(rows), "ok": len(rows), "bodies": rows}
-            _say(f"lớp {key} ({sid}): {len(rows)} bản; đầu: {', '.join(r['name'] for r in rows[:4])}")
+            rows, quiet = layer_pool(g, sid, key, run, force)
+            pools[key] = {"n": len(rows) + len(quiet), "ok": len(rows), "bodies": rows,
+                          "quiet": [{k: r[k] for k in ("name", "level_lufs", "gain_db")} for r in quiet]}
+            _say(f"lớp {key} ({sid}): {len(rows)} bản, nhỏ quá {len(quiet)}; đầu: {', '.join(r['name'] for r in rows[:4])}")
     out.write_text(json.dumps(pools, indent=1, ensure_ascii=False, default=float), "utf-8")
     return pools
 
@@ -384,7 +458,9 @@ def _chain(max_ms: float, knee_ms: float, *, lowpass: float | None = None, dc: f
 
 
 Q6_NOTE = ("Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; "
-           "lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. ")
+           "lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của "
+           "nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị "
+           "loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). ")
 
 
 def dh_recipes(pools: dict) -> dict[str, dict]:
@@ -406,7 +482,7 @@ def dh_recipes(pools: dict) -> dict[str, dict]:
             [_cycle({"id": "front", "role": "attack", "gainDb": -4, "filters": [{"type": "highpass", "hz": 300}],
                      "trim": {"endMs": 80}, "fadeOutMs": 50}, [_lib(f) for f in fronts_a[:n]]),
              _cycle({"id": "body", "role": "body", "gainDb": -1, "fadeInMs": 3, "fadeOutMs": 180,
-                     "filters": [{"type": "highpass", "hz": 90, "order": 4}]}, [gen_src(b) for b in A[:n]]),
+                     "filters": _filters("fire-a")}, [_gen(b) for b in A[:n]]),
              {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {
                  "startHz": 80, "endHz": 45, "glideMs": 50, "durMs": 90, "decayMs": 70}}, "gainDb": -11},
              *json.loads(json.dumps(embers))],
@@ -423,7 +499,7 @@ def dh_recipes(pools: dict) -> dict[str, dict]:
                      "trim": {"endMs": 80}, "fadeOutMs": 50},
                     [_lib("impactGeneric_light_002"), _lib("impactGeneric_light_000")] * (nb // 2) + [_lib("impactGeneric_light_002")] * (nb % 2)),
              _cycle({"id": "body", "role": "body", "gainDb": 0, "fadeInMs": 3, "fadeOutMs": 200, "pitchSemitones": -1,
-                     "filters": [{"type": "highpass", "hz": 90, "order": 4}]}, [gen_src(b) for b in B[:nb]]),
+                     "filters": _filters("fire-b")}, [_gen(b) for b in B[:nb]]),
              {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {
                  "startHz": 75, "endHz": 42, "glideMs": 50, "durMs": 85, "decayMs": 65}}, "gainDb": -12},
              *json.loads(json.dumps(embers)),
@@ -443,7 +519,7 @@ def dh_recipes(pools: dict) -> dict[str, dict]:
             [_cycle({"id": "front", "role": "attack", "gainDb": -2, "filters": [{"type": "highpass", "hz": 200}],
                      "trim": {"endMs": 100}, "fadeOutMs": 60}, [_lib(f) for f in fronts_c[:nc]]),
              _cycle({"id": "body", "role": "body", "gainDb": 0, "fadeInMs": 3, "fadeOutMs": 320,
-                     "filters": [{"type": "highpass", "hz": 70, "order": 4}]}, [gen_src(b) for b in C[:nc]]),
+                     "filters": _filters("fire-c")}, [_gen(b) for b in C[:nc]]),
              {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {
                  "startHz": 80, "endHz": 40, "glideMs": 70, "durMs": 140, "decayMs": 110}}, "gainDb": -9},
              *json.loads(json.dumps(embers)),
@@ -469,7 +545,7 @@ def dh_recipes(pools: dict) -> dict[str, dict]:
                  "color": "white", "durMs": 30, "attackMs": 0.2, "decayMs": 25, "hpHz": 2000, "lpHz": 8000}},
               "gainDb": -6},
              _cycle({"id": "body", "role": "body", "gainDb": -2, "fadeInMs": 2, "fadeOutMs": 350,
-                     "filters": [{"type": "highpass", "hz": 40, "order": 2}]}, [gen_src(b) for b in P[:npb]]),
+                     "filters": _filters("pine")}, [_gen(b) for b in P[:npb]]),
              {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {
                  "startHz": 62, "endHz": 35, "glideMs": 120, "durMs": 240, "decayMs": 220}}, "gainDb": -12},
              *[{"id": i, "role": "debris", "source": _lib(f), "offsetMs": o, "gainDb": g,
@@ -493,7 +569,7 @@ def td_recipes(pools: dict) -> dict[str, dict]:
             "25 ms, lọc cao 1,5 kHz, −10 dB, vào sau 8 ms) cho chữ giấy. Lọc cao 120 Hz (§4.3.3 'khạc, phóng'). Phát sau mỗi "
             "từ (1,5 s một lần): đuôi hàm mũ từ 220 ms, thấp. Lô 1 dùng tiếng vút A–D (đã bỏ) và cắt ở 210 ms. "
             "Biến thể n dùng tiếng vút n.",
-            [_cycle({"id": "whoosh", "role": "body", "fadeOutMs": 60}, [gen_src(b) for b in W]),
+            [_cycle({"id": "whoosh", "role": "body", "fadeOutMs": 60}, [_gen(b) for b in W]),
              _cycle({"id": "paper", "role": "sweetener", "gainDb": -10, "offsetMs": 8, "trim": {"startMs": 25, "endMs": 190},
                      "fadeOutMs": 60, "filters": [{"type": "highpass", "hz": 1500}]}, papers[:len(W)])],
             _chain(420, 220, dc=120), len(W), 3301, "sfx/battle/wordshot-fire")
@@ -516,7 +592,7 @@ def td_recipes(pools: dict) -> dict[str, dict]:
              _cycle({"id": "drum", "role": "body", "gainDb": -3, "trim": {"endMs": 500}, "fadeOutMs": 300,
                      "filters": [{"type": "highpass", "hz": 70, "order": 2}]}, drums[:n]),
              _cycle({"id": "paper", "role": "texture", "gainDb": -5, "offsetMs": 12, "fadeInMs": 25, "fadeOutMs": 300,
-                     "filters": [{"type": "highpass", "hz": 300}]}, [gen_src(b) for b in P])],
+                     "filters": _filters("blast")}, [_gen(b) for b in P])],
             _chain(960, 520, dc=40, release_ms=80), n, 3401, "sfx/battle/blast")
     return out
 
@@ -534,8 +610,8 @@ def ts_recipes(pools: dict) -> dict[str, dict]:
             "vang hành lang thép. Thân là bản Stable Audio 3 prompt E–H của lô 1c, cửa sổ 560 ms từ 4 ms trước đỉnh 5 ms (một "
             "đầu tiếng, xen theo prompt): bản thô kêu ngay từ mẫu đầu nên 21/24 bản xử lý có đầu tiếng chưa xác minh, không "
             "nghe được nguyên khối. Lọc cao 45 Hz; năm tiếng tách điện tổng hợp 2–8 kHz thưa dần tới 300 ms. Đuôi hàm mũ từ 420 ms. Lô 1 dùng thân A–D (đã bỏ). Biến thể n dùng thân n.",
-            [_cycle({"id": "body", "role": "body", "filters": [{"type": "highpass", "hz": 45, "order": 2}]},
-                    [gen_src(b) for b in E]), *arcs],
+            [_cycle({"id": "body", "role": "body", "filters": _filters("elite")},
+                    [_gen(b) for b in E]), *arcs],
             _chain(600, 420), len(E), 3530, "sfx/kills/kill-elite", pitch=(-30, 30))
     BR = pools["breach"]["bodies"][:6]
     if BR:
@@ -548,11 +624,12 @@ def ts_recipes(pools: dict) -> dict[str, dict]:
         out["hurt.breach"] = _recipe(
             TS, "hurt.breach", "alarm", "nen",
             Q6_NOTE + "Tuyến bị phá 800 ms (640–960): nổ trầm có thân, thép rên, còi hai nốt ngắn, vang dội dọc hành lang "
-            "thép. Thân là bản Stable Audio 3 prompt D–F của lô 1c (tạo 2 s, cửa sổ process.py dài tự nhiên tới 960 ms), lọc "
-            "cao 40 Hz; còi giữ như lô 1 (440/330 Hz vuông, lọc thấp 1,6 kHz, 90 ms mỗi nốt ở 30 và 140 ms). Đuôi hàm mũ từ "
-            "650 ms (lô 1: 720 ms tối đa, thân A–C đã bỏ). Biến thể n dùng thân n.",
-            [_cycle({"id": "body", "role": "body", "filters": [{"type": "highpass", "hz": 40, "order": 2}]},
-                    [gen_src(b) for b in BR]), *json.loads(json.dumps(siren))],
+            "thép. Thân là bản Stable Audio 3 prompt D–F của lô 1c (tạo 2 s), cửa sổ 900 ms từ 4 ms trước đỉnh tiếng nổ, lọc "
+            "cao 40 Hz, nên còi vào ngay trên tiếng nổ (lượt đầu lấy cửa sổ process.py có phần tụ lực: ở thân D s3002 tiếng "
+            "nổ tới ở 390 ms, sau còi); còi giữ như lô 1 (440/330 Hz vuông, lọc thấp 1,6 kHz, 90 ms mỗi nốt ở 30 và 140 ms). "
+            "Đuôi hàm mũ từ 650 ms (lô 1: 720 ms tối đa, thân A–C đã bỏ). Biến thể n dùng thân n.",
+            [_cycle({"id": "body", "role": "body", "filters": _filters("breach")},
+                    [_gen(b) for b in BR]), *json.loads(json.dumps(siren))],
             _chain(960, 650, release_ms=80), len(BR), 3533, "sfx/alerts/hurt-breach")
         heads = [_lib(f"impactPlate_heavy_00{k}") for k in (0, 2, 4)] * 2
         b2_layers = [_cycle({"id": "hit", "role": "attack", "gainDb": -3, "filters": [{"type": "lowpass", "hz": 2500, "order": 2}],
@@ -561,7 +638,7 @@ def ts_recipes(pools: dict) -> dict[str, dict]:
                          "startHz": 70, "endHz": 38, "glideMs": 120, "durMs": 300, "decayMs": 280, "driveDb": 6}}},
                      _cycle({"id": "body", "role": "body", "offsetMs": 10,
                              "filters": [{"type": "highpass", "hz": 40, "order": 2}, {"type": "lowpass", "hz": 1200, "order": 4}]},
-                            [gen_src(b) for b in BR])]
+                            [_gen(b) for b in BR])]
         for s in json.loads(json.dumps(siren)):
             s["filters"] = [{"type": "lowpass", "hz": 1000, "order": 8}]
             b2_layers.append(s)
@@ -569,9 +646,10 @@ def ts_recipes(pools: dict) -> dict[str, dict]:
             TS, "hurt.breach.b2", "alarm", "nen",
             Q6_NOTE + "Bản 2 của hurt.breach (như hurt.breach.b2 của lô 1, dựng lại cho 800 ms): cú đập thép Kenney Impact "
             "Plate heavy (lọc thấp 2,5 kHz) và lớp nổ trầm tổng hợp 70→38 Hz 300 ms −10 dB ở 0 ms làm tiếng phát; thân Stable "
-            "Audio 3 prompt D–F lọc 40 Hz–1,2 kHz (thép rên và vang hành lang dưới dải giọng); còi lọc thấp 1 kHz. Biến thể n "
-            "dùng cú đập n và thân n.",
-            b2_layers, _chain(960, 650, release_ms=80), len(BR), 3536, "sfx/alerts/hurt-breach")
+            "Audio 3 prompt D–F từ đỉnh tiếng nổ (như hurt.breach), lọc 40 Hz–1,2 kHz (thép rên và vang hành lang dưới dải "
+            "giọng); còi lọc thấp 1 kHz. Đường xuất riêng sfx/alerts/hurt-breach-b2 (lượt đầu trùng đường với hurt.breach, "
+            "nên bộ ogg sau ghi đè bộ trước). Biến thể n dùng cú đập n và thân n.",
+            b2_layers, _chain(960, 650, release_ms=80), len(BR), 3536, "sfx/alerts/hurt-breach-b2")
     T4 = pools["t4"]["bodies"][:6]
     if T4:
         fronts = [_lib(f"impactMetal_heavy_00{k}") for k in (0, 2, 3, 4)] * 2
@@ -585,7 +663,7 @@ def ts_recipes(pools: dict) -> dict[str, dict]:
             [_cycle({"id": "front", "role": "attack", "gainDb": -4, "filters": [{"type": "highpass", "hz": 600}],
                      "trim": {"endMs": 60}, "fadeOutMs": 40}, fronts[:len(T4)]),
              _cycle({"id": "body", "role": "body", "gainDb": 0, "fadeInMs": 2, "fadeOutMs": 300,
-                     "filters": [{"type": "highpass", "hz": 90, "order": 2}]}, [gen_src(b) for b in T4]),
+                     "filters": _filters("t4")}, [_gen(b) for b in T4]),
              {"id": "sub", "role": "sub", "source": {"synth": "sub_thump", "params": {
                  "startHz": 85, "endHz": 45, "glideMs": 45, "durMs": 90, "decayMs": 80, "driveDb": 3}}, "gainDb": -10}],
             _chain(1080, 700, dc=30, release_ms=80), len(T4), 3524, "sfx/hits/hit-t4")
@@ -609,12 +687,20 @@ def step_recipes(run: str, game: str | None = None, force: bool = False) -> None
                 _say(f"recipe {g}/{rid}: không có nguồn nào dùng được, bỏ qua")
                 continue
             p = recipe_path(g, rid)
-            p.write_text(json.dumps(recipes[rid], ensure_ascii=False, indent=1) + "\n", "utf-8")
             out = recipe_run(g, rid, run)
+            # the committed recipe file always matches its render: written only when it is rendered (review of 1c)
             if out.is_dir() and (out / "render.json").is_file() and not force:
-                _say(f"recipe {g}/{rid}: đã có {out}")
+                done = out / "recipe.json"
+                if done.is_file() and json.loads(done.read_text("utf-8")) != recipes[rid]:
+                    _say(f"recipe {g}/{rid}: CẢNH BÁO nguồn đã đổi so với bản dựng ở {out}; {p.name} giữ như bản dựng, "
+                         "thêm --force để dựng lại")
+                else:
+                    _say(f"recipe {g}/{rid}: đã có {out}")
                 continue
-            res = render.render(p, out=out, spec=card_path(g, sid_of(g, rid)))
+            p.write_text(json.dumps(recipes[rid], ensure_ascii=False, indent=1) + "\n", "utf-8")
+            # build.render writes over the masters it makes and leaves the others: a re-render with fewer variants
+            # (fire.impact.b 8 -> 6 after the level match) would leave v7, v8 of the old one for the critic to rank
+            res = render.render(p, out=fresh(out), spec=card_path(g, sid_of(g, rid)))
             _say(f"recipe {g}/{rid}: {res.report['count']} biến thể, mức id {res.report['idLevel']} LUFS-M; "
                  + ("; ".join(res.report["warnings"]) or "không cảnh báo"))
 
@@ -664,6 +750,25 @@ def info_ids(run: str, game: str) -> list[str]:
     return out
 
 
+def info_inputs(run: str, game: str, sid: str) -> tuple[list[Path], list[Path]]:
+    """Inputs of the raw-stage run of one id: its processed takes, its recipe masters, its owner-rated references and
+    the batch 1 render kept in use for it."""
+    dirs, srcs = finals(run, game)
+    out_d, out_s = [], []
+    for d, s_ in zip(dirs, srcs):
+        if d.is_file():
+            label = next((lb for lb, f in REFS.get(game, {}).items() if f == d), "")
+            mine = label.split(" ")[0] == sid
+        elif d.name == "processed":
+            mine = d.parent.parent.name == sid
+        else:                        # <id>/<run>-recipe-<rid>/masters, <id>/b1-recipe-<rid>/masters
+            mine = d.parent.parent.name == sid
+        if mine:
+            out_d.append(d)
+            out_s.append(s_)
+    return out_d, out_s
+
+
 def step_critic(run: str, game: str | None = None, force: bool = False) -> None:
     for g in _games(game):
         out = critic_out(run, g, "final")
@@ -673,22 +778,29 @@ def step_critic(run: str, game: str | None = None, force: bool = False) -> None:
             dirs, srcs = finals(run, g)
             wait_heavy_free(f"critic {g}")
             t0 = time.time()
-            _say(f"critic {g} final ({len(dirs)} mục): mã {_critic_run(dirs, srcs, out, LAB / 'specs' / g)}, "
+            _say(f"critic {g} final ({len(dirs)} mục): mã {_critic_run(dirs, srcs, fresh(out), LAB / 'specs' / g)}, "
                  f"{time.time() - t0:.0f} s")
-        for sid in dict.fromkeys([*info_ids(run, g), *INFO_EXTRA.get(g, ())]):
+        wanted = list(dict.fromkeys([*info_ids(run, g), *INFO_EXTRA.get(g, ())]))
+        # a raw-stage run of an id that no longer needs one (its takes pass now) would still feed select(): set aside
+        for old in base_dir(run, g).glob("critic-info-*"):
+            if old.is_dir() and not old.name.endswith(".prev") and old.name[len("critic-info-"):] not in wanted:
+                fresh(old)
+                _say(f"critic {g}: {old.name} không còn cần (bản nguyên khối đã qua), chuyển sang .prev")
+        for sid in wanted:
             info = critic_out(run, g, f"info-{sid}")
             if (info / "_batch.json").is_file() and not force:
                 continue
-            proc = id_dir(g, sid, run) / "processed"
-            refs = [f for label, f in REFS.get(g, {}).items() if label.split(" ")[0] == sid and f.is_file()]
+            # every file a listening item of this id can hold (takes, recipes, owner-rated takes, the batch 1 render kept
+            # in use) is ranked in this one run: `critic agreement` compares the combined z-scores of one rank group,
+            # so an item never mixes this run with critic-final (review of batch 1c)
+            dirs, srcs = info_inputs(run, g, sid)
             wait_heavy_free(f"critic info {sid}")
-            ref_src = [(f.parent.parent if f.parent.name == "masters" else f.parent) / "SOURCES.json" for f in refs]
-            rc = _critic_run([proc, *refs], [proc / "SOURCES.json", *ref_src], info, card_path(g, sid), stage="raw")
+            rc = _critic_run(dirs, srcs, fresh(info), card_path(g, sid), stage="raw")
             _say(f"critic {g}/{sid} giai đoạn raw (bản nguyên khối chỉ bị luật lên hoặc luật độ dài chặn): mã {rc}")
         raw = critic_out(run, g, "raw")
         if not (raw / "_batch.json").is_file() or force:
             raws = [id_dir(g, sid, run) / "raw" for sid in JOBS[g] if (id_dir(g, sid, run) / "raw").is_dir()]
-            rc = _critic_run(raws, [], raw, LAB / "specs" / g, stage="raw", layers="L1,L1b", cards=False)
+            rc = _critic_run(raws, [], fresh(raw), LAB / "specs" / g, stage="raw", layers="L1,L1b", cards=False)
             _say(f"critic {g} raw L1 (clip đọc bản float): mã {rc}")
 
 
@@ -713,6 +825,9 @@ def step_link(run: str, game: str | None = None, force: bool = False) -> int:
                 res = critic_link.apply(p / "SOURCES.json", outs, p / "licences.rows.jsonl")
                 _say(f"mark-ai {g}/{sid}: {res['steps']} bước, {res['files']} hồ sơ")
         art, pub = staging_dirs(run, g)
+        # the trial tree is rebuilt from the current renders every time: a release left from an earlier render (the
+        # first hurt.breach.b2 on sfx/alerts/hurt-breach) would trip the export-path guard or hide a stale file
+        fresh(base_dir(run, g) / "staging")
         n = 0
         for rid in RECIPE_IDS[g]:
             r = recipe_run(g, rid, run)
@@ -778,7 +893,9 @@ def q6_checks(d: dict) -> dict[str, str]:
 
     tail = Q6_TAIL.get(sid) or Q6_TAIL_GROUP.get(grp) or (Q6_TAIL_DH_HEAVY if game == DH and grp == "hit_heavy" else None)
     if tail:
-        r = hi(m.get("tail_ms"), *tail)
+        # a window the card's max cut: tail_ms of the file is the cap's decay (the window's end minus its peak), so the
+        # rule reads the take's own tail on its raw window (review of 1c)
+        r = hi(m.get("tail_ms_natural", m.get("tail_ms")), *tail)
         if r:
             out["tail"] = r
     lone = sid != "gun.xung" and ((game in (DH, TD) and fam in LONE_LOW_FAMILIES)
@@ -797,17 +914,49 @@ def q6_checks(d: dict) -> dict[str, str]:
     return out
 
 
+_NAT: dict[str, dict] = {}
+
+
+def natural_tail(d: dict) -> dict:
+    """The take's own tail when the card's max cut its window (proc.json): tail_ms (peak to the last frame over the
+    critic's floor, as critic.features) on the raw float from the window start to the next event or the file end, and
+    the level where the window was cut. Empty for a window that ends on the take's own decay, or not a whole take."""
+    key = d["file"]["path"]
+    if key not in _NAT:
+        _NAT[key] = _natural_tail(d)
+    return _NAT[key]
+
+
+def _natural_tail(d: dict) -> dict:
+    if _kind(d) != "sa3":
+        return {}
+    pj = _proc(d)
+    if not pj or not (pj.get("window") or {}).get("capped"):
+        return {}
+    import soundfile as sf
+    from critic import features as F
+    w = pj["window"]
+    x, sr = sf.read(pj["source_f32"], always_2d=True, dtype="float64")
+    a = int(w["window_s"][0] * sr)
+    end = x.shape[0] if w["end_kind"] in ("decayed", "file-end") else int((w["onset_s"] + w["natural_ms"] / 1000) * sr)
+    mono = x[a:max(a + 1, end)].mean(axis=1)
+    env_ = F.envelope(mono, sr)
+    return {"tail_ms_natural": F.dynamics(mono, sr, env_)["tail_ms"],
+            "cut_db": (pj.get("tail") or {}).get("natural_end_db")}
+
+
 def _row(d: dict, final: dict | None = None) -> dict:
     """One report row; `final` = the final-stage doc of a file ranked in a raw-stage info run (verdict from final)."""
-    m, s_ = d["metrics"], d.get("score") or {}
+    m, s_ = dict(d["metrics"], **natural_tail(d)), d.get("score") or {}
     f = final or d
     return {"stem": d["file"]["stem"], "file": d["file"]["path"], "sha8": d["file"].get("sha256", "")[:8],
             "kind": _kind(d), "ref": _ref_label(d), "verdict": f["verdict"], "blocking": f["L1"]["blocking"],
             "rank_stage": "raw" if final is not None else "final",
             "rank": s_.get("rank"), "n_ranked": s_.get("n_ranked"), "combined": s_.get("combined"),
             "L2": (d.get("L2") or {}).get("score"), "flags": sorted(_flags(d)), "verified": _verified(d),
-            "q6": q6_checks(d),
-            "metrics": {k: m.get(k) for k in ("duration_ms", "attack_ms", "tail_ms", "punch_db", "share_below_150",
+            "q6": q6_checks(dict(d, metrics=m)),
+            "metrics": {k: m.get(k) for k in ("duration_ms", "attack_ms", "tail_ms", "tail_ms_natural", "cut_db",
+                                               "punch_db", "share_below_150",
                                                "share_150_800", "share_1k_4k", "sub_len_ms", "sustain_1k4k_ms",
                                                "lufs_m_max", "speaker_loss_db") if m.get(k) is not None}}
 
@@ -856,8 +1005,9 @@ def summarise(run: str, game: str) -> dict:
                       for d, r in picks]
         e["refs"] = [_row(info[d["file"]["path"]], d) if d["verdict"] != "PASS" and d["file"]["path"] in info
                      else _row(d) for d in mine if _kind(d) in ("ref", "b1")]
+        e["cut_loud"] = sum(1 for d in ok if (natural_tail(d).get("cut_db") or -999) > CUT_DB)
         for d in ok:
-            for rule, v in q6_checks(d).items():
+            for rule, v in q6_checks(dict(d, metrics=dict(d["metrics"], **natural_tail(d)))).items():
                 e["q6"].setdefault(rule, {"đạt": 0, "giữa": 0, "trượt": 0})[v] += 1
         e["loop_eval"] = loop_eval(game, sid)
         out[sid] = e
@@ -918,24 +1068,27 @@ def step_report(run: str, game: str | None = None, force: bool = False) -> Path:
         summary["games"][g] = {"counts": c, "n_files": bd.get("n_files"), "elapsed_s": bd.get("elapsed_s"), "ids": s}
         L += [f"## {g}", "", f"Lần chấm cuối: {bd.get('n_files')} file, {c.get('PASS', 0)} ĐẠT, {c.get('BLOCK', 0)} CHẶN, "
               f"{c.get('NEEDS_FIX', 0)} CẦN SỬA; {_fmt(bd.get('elapsed_s'), 0)} s.", "",
-              "| Id | Bản mới | Qua L1 | Nghe được | Bị chặn vì | Lặp L3–L5 | Q6 (bản nghe được) |", "|---|---|---|---|---|---|---|"]
+              "| Id | Bản mới | Qua L1 | Nghe được | Bị chặn vì | Lặp L3–L5 | Q6 (bản nghe được) | Cắt khi còn trên −30 dB |",
+              "|---|---|---|---|---|---|---|---|"]
         for sid, e in s.items():
             q = "; ".join(f"{Q6_RULE_VI[k]} {v['đạt']}/{v['giữa']}/{v['trượt']}" for k, v in e["q6"].items()) or "–"
             blk = ", ".join(f"{k} {v}" for k, v in sorted(e["blocking"].items(), key=lambda kv: -kv[1])) or "–"
             le = e["loop_eval"]
             lp = f"bật, {_fmt(float(le['rate_hz']), 2)} Hz" if le["enabled"] and le["rate_hz"] else ("bật" if le["enabled"] else "tắt")
-            L.append(f"| `{sid}` | {e['n_new']} | {e['pass']} | {e['eligible']} | {blk} | {lp} | {q} |")
-        L += ["", "Q6: số bản đạt/giữa/trượt trong các bản nghe được. Lặp L3–L5: `critic.loop_eval` của thẻ (bộ chấm còn tự "
-              "lặp mọi file dưới 300 ms).", ""]
+            L.append(f"| `{sid}` | {e['n_new']} | {e['pass']} | {e['eligible']} | {blk} | {lp} | {q} | {e['cut_loud']} |")
+        L += ["", "Q6: số bản đạt/giữa/trượt trong các bản nghe được; luật đuôi đọc đuôi gốc của bản bị cắt theo độ dài tối "
+              "đa của thẻ (đuôi của file là đường tắt dần của bước xử lý). Lặp L3–L5: `critic.loop_eval` của thẻ (bộ chấm "
+              "còn tự lặp mọi file dưới 300 ms). Cột cuối: bản nghe được bị cắt ở độ dài tối đa khi âm gốc còn trên −30 dB.", ""]
         for sid, e in s.items():
-            L += [f"### `{sid}`", "", "| Vai trò | Bản | Loại | L1 | Hạng | Điểm | L2 | Dài ms | Lên ms | Đuôi ms | Đấm dB | "
-                  "<150 Hz | 150–800 Hz | Q6 | Cờ |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+            L += [f"### `{sid}`", "", "| Vai trò | Bản | Loại | L1 | Hạng | Điểm | L2 | Dài ms | Lên ms | Đuôi ms (gốc; cắt ở dB) | "
+                  "Đấm dB | <150 Hz | 150–800 Hz | Q6 | Cờ |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
             for r in e["picks"] + [dict(r, role=r["ref"] or "lô 1 dùng tiếp") for r in e["refs"]]:
                 m = r["metrics"]
                 L.append(f"| {r['role']} | `{r['stem']}` | {r['kind']} | {r['verdict']} {','.join(r['blocking'])} | "
                          f"{r['rank'] or '–'}/{r['n_ranked'] or '–'}{' (raw)' if r['rank_stage'] == 'raw' else ''} | {_fmt(r['combined'], 2)} | {_fmt(r['L2'], 2)} | "
-                         f"{_fmt(m.get('duration_ms'), 0)} | {_fmt(m.get('attack_ms'))} | {_fmt(m.get('tail_ms'), 0)} | "
-                         f"{_fmt(m.get('punch_db'))} | {_pct(m.get('share_below_150'))} | {_pct(m.get('share_150_800'))} | "
+                         f"{_fmt(m.get('duration_ms'), 0)} | {_fmt(m.get('attack_ms'))} | {_fmt(m.get('tail_ms'), 0)}"
+                         + (f" (gốc {_fmt(m.get('tail_ms_natural'), 0)}; {_fmt(m.get('cut_db'))})" if m.get("tail_ms_natural") is not None else "")
+                         + f" | {_fmt(m.get('punch_db'))} | {_pct(m.get('share_below_150'))} | {_pct(m.get('share_150_800'))} | "
                          f"{_q6_cell(r['q6'])} | {', '.join(r['flags']) or '–'} |")
             L.append("")
         L += context_rows(run, g)
@@ -952,8 +1105,8 @@ def step_report(run: str, game: str | None = None, force: bool = False) -> Path:
 # below the fold (measured 147 px on gun.xung); batch 1 offered 2-4
 MAX_CANDIDATES = 4
 # probes (a take from the lower half of the machine's ranking) at 6/19 ids, about 30 % (§4.6 step 2), on ids where the
-# references and rule-blocked takes leave room
-PROBE_IDS = {DH: ("fire.cast", "fire.impact.a"), TD: ("ink-puff", "blast"), TS: ("hit.t4", "hurt.breach")}
+# references and rule-blocked takes leave room. Not fire.cast (review of 1c): its four Q6 prompts E-H come first.
+PROBE_IDS = {DH: ("fire.impact.a", "fire.impact.c"), TD: ("ink-puff", "blast"), TS: ("hit.t4", "hurt.breach")}
 RULE_NOTE = {     # shown to the owner (board note, at most 80 characters)
     "fire.impact.b": "Bị luật chặn: lửa bùng lên chậm (> 10 ms); chấm như mọi bản",
     "fire.impact.c": "Bị luật chặn: lửa bùng lên chậm (> 10 ms); chấm như mọi bản",
@@ -964,6 +1117,10 @@ RULE_NOTE = {     # shown to the owner (board note, at most 80 characters)
     "wordshot-fire": "Bị luật chặn: tiếng vút lên chậm (> 10 ms); chấm như mọi bản",
 }
 CURRENT_NOTE = "Cách game đang phát: chỉ viên chẵn, không nền, không đuôi"
+# a take of a BUILD_UP id the card's max cut while it still sounded over CUT_DB (review of 1c, Q6): its tail is the cap's
+# exponential decay, not the take's own echo. The label lets the owner tell a card too short from a take with no tail.
+CUT_NOTE = "đuôi rút vừa thẻ"
+CUT_DB = -30.0
 # gun.xung (Q6 §7 "đặt cạnh các hướng lô 1 trong Liên thanh 3 s"): batch 1 direction 2 (its set in session 1-ts-s1,
 # bed 16 dB under the shot: the better burst numbers of batch 1 and the fixed gun of every Tuyến Cuối render here;
 # direction 3 is the same set with a louder bed, direction 1 stays in 1-ts-s1: four cards fit 1280x720), the batch 1c
@@ -999,6 +1156,30 @@ def _rule_note(sid: str, final: dict) -> str | None:
     return note
 
 
+def _proc(d: dict) -> dict | None:
+    p = Path(d["file"]["path"]).with_suffix(".proc.json")
+    return json.loads(p.read_text("utf-8")) if p.is_file() else None
+
+
+def cut_while_loud(game: str, sid: str, d: dict) -> bool:
+    """A whole take of a BUILD_UP id whose window the card's max cut while the take sounded over CUT_DB."""
+    if sid not in BUILD_UP.get(game, set()) or _kind(d) != "sa3":
+        return False
+    pj = _proc(d) or {}
+    nat = (pj.get("tail") or {}).get("natural_end_db")
+    return bool((pj.get("window") or {}).get("capped")) and nat is not None and nat > CUT_DB
+
+
+def join_notes(*parts: str | None) -> str | None:
+    """Owner-visible notes joined with '; ', each kept only while the note fits the board (80 characters)."""
+    from board.session import MAX_NOTE
+    out = ""
+    for p in parts:
+        if p and len(out + ("; " if out else "") + p) <= MAX_NOTE:
+            out += ("; " if out else "") + p
+    return out or None
+
+
 def _spread(ranked: list[dict], want: int) -> list[dict]:
     """The best `want` of a ranking, one per prompt first (the prompts are the directions of the card)."""
     out: list[dict] = []
@@ -1030,8 +1211,10 @@ def select(run: str, game: str) -> dict[str, dict]:
     """Per id the listening list, at most MAX_CANDIDATES, filled in this order of priority: the machine's top and the
     best of the other kind (recipe or whole take); rule-blocked whole takes with a label (one, or up to three of
     different prompts when nothing is eligible); the takes the owner rated and the batch 1 render kept in use, blind
-    (consistency pairs); a probe at PROBE_IDS; then the best of a prompt not offered yet and the most different take
-    of the machine's upper half."""
+    (consistency pairs); a probe at PROBE_IDS; the best take of every prompt not offered yet (the prompts are the Q6
+    directions of the card); then the most different take of the machine's upper half, of a prompt not offered first.
+    An item holding a take ranked only at raw stage takes every critic doc from that raw-stage run (info_inputs ranked
+    all of them there), so `critic agreement` compares one rank group per item."""
     final = _load(critic_out(run, game, "final"))
     sel: dict[str, dict] = {}
     for sid in JOBS[game]:
@@ -1058,10 +1241,11 @@ def select(run: str, game: str) -> dict[str, dict]:
             e["rule_blocked_whole"] = len(blocked)
             rule = [(d, "rule-blocked", _rule_note(sid, final[d["file"]["stem"]])) for d in _spread(ranked, 1 if ok else 3)]
             if not ok:
-                # a recipe blocked by the same rule (wordshot-fire.mix): no raw-stage rank, the best L2 score
+                # a recipe blocked by the same rule (wordshot-fire.mix): the best raw-stage rank (best L2 without one)
                 recs = sorted([d for d in mine if _kind(d) == "recipe" and d["verdict"] == "BLOCK"
                                and set(d["L1"]["blocking"]) <= INFO_BLOCKS and not _flags(d) & NO_PICK_FLAGS],
-                              key=lambda d: -((d.get("L2") or {}).get("score") or 0.0))
+                              key=lambda d: (_rank(info[d["file"]["stem"]]) if d["file"]["stem"] in info else 1e9,
+                                             -((d.get("L2") or {}).get("score") or 0.0)))
                 if recs:
                     rule.append((recs[0], "rule-blocked-recipe", _rule_note(sid, recs[0])))
         for label, f in REFS.get(game, {}).items():
@@ -1071,8 +1255,8 @@ def select(run: str, game: str) -> dict[str, dict]:
             if d is None:
                 continue
             fin = d
-            if d["verdict"] != "PASS" and d["file"]["stem"] in info:
-                d = info[d["file"]["stem"]]
+            if d["verdict"] != "PASS":
+                d = next((x for x in info.values() if x["file"]["path"] == d["file"]["path"]), d)
             # blind, unless every new take of the id carries the rule label too (the howl): then it carries it
             note = _rule_note(sid, fin) if (not ok and fin["verdict"] == "BLOCK"
                                             and set(fin["L1"]["blocking"]) <= INFO_BLOCKS) else None
@@ -1089,15 +1273,25 @@ def select(run: str, game: str) -> dict[str, dict]:
                 used.add(pr["file"]["path"])
         if ok:
             heard = {_prompt_of(d) for d, _, _ in ordered if _kind(d) == "sa3"}
-            fresh = [d for d in ok if _kind(d) == "sa3" and _prompt_of(d) not in heard and d["file"]["path"] not in used]
-            if fresh:
-                ordered.append((fresh[0], "other-prompt", None))
-                used.add(fresh[0]["file"]["path"])
-            dis = _distinct(ok[0], [d for d in _upper(ok) if d["file"]["path"] not in used])
+            for d in ok:                      # every Q6 direction not offered yet: its best take
+                if _kind(d) == "sa3" and _prompt_of(d) not in heard and d["file"]["path"] not in used:
+                    ordered.append((d, "other-prompt", None))
+                    used.add(d["file"]["path"])
+                    heard.add(_prompt_of(d))
+            pool = [d for d in _upper(ok) if d["file"]["path"] not in used]
+            dis = _distinct(ok[0], [d for d in pool if _prompt_of(d) not in heard]) or _distinct(ok[0], pool)
             if dis is not None:
                 ordered.append((dis, "distinct", None))
-        e["picks"] = [{"docs": [d], "role": r, "note": n} for d, r, n in ordered[:MAX_CANDIDATES]]
         e["left_out"] = [r for _, r, _ in ordered[MAX_CANDIDATES:]]
+        ordered = ordered[:MAX_CANDIDATES]
+        if any(d.get("_out") == str(critic_out(run, game, f"info-{sid}")) for d, _, _ in ordered):
+            # by path: a stem can repeat across folders (the recipe's -v3 and the 0a -v3 of the pine bomb: "-v3__2")
+            by_path = {x["file"]["path"]: x for x in info.values()}
+            swapped = [(by_path.get(d["file"]["path"], d), r, n) for d, r, n in ordered]
+            e["mixed_runs"] = [d["file"]["stem"] for d, _, _ in swapped if d["_out"] != str(critic_out(run, game, f"info-{sid}"))]
+            ordered = swapped
+        e["picks"] = [{"docs": [d], "role": r, "note": join_notes(n, CUT_NOTE if cut_while_loud(game, sid, d) else None)}
+                      for d, r, n in ordered]
         sel[sid] = e
     return sel
 
@@ -1239,8 +1433,21 @@ def render_pick(game: str, sid: str, slots: dict, config: str, bed: float, out: 
     return ts_scenes.render(SCENARIO[game][sid], slots, out, focus=sid, config=config, bed_db=bed)
 
 
+def _file_id(v):
+    """A slot's file by path and content: a re-processed take keeps its path (review fix of 1c: the knee moved, so the
+    processed files changed under the same names, and a path-only signature reused the old renders)."""
+    if isinstance(v, dict):
+        return {k: _file_id(x) for k, x in v.items()}
+    if isinstance(v, (list, tuple)):
+        return [_file_id(x) for x in v]
+    if isinstance(v, Path):
+        from build import ledger
+        return f"{v}#{ledger.sha256_file(v)[:16]}" if v.is_file() else str(v)
+    return v
+
+
 def _slots_sig(slots: dict, config: str, bed: float) -> str:
-    return hashlib.sha256(json.dumps([_jsonable(slots), config, bed], sort_keys=True).encode()).hexdigest()[:16]
+    return hashlib.sha256(json.dumps([_file_id(slots), config, bed], sort_keys=True).encode()).hexdigest()[:16]
 
 
 def step_context(run: str, game: str | None = None, force: bool = False) -> dict:
@@ -1280,9 +1487,21 @@ def step_context(run: str, game: str | None = None, force: bool = False) -> dict
 
 # ---------------------------------------------------------------- step 10: board sessions
 
-SESSIONS = {DH: ("1c-dh", "Lô 1c · Rồng Giữ Ải · họ lửa, bom, tiếng tru (Q6)"),
-            TD: ("1c-td", "Lô 1c · Lời Gọi · tên, Phát Chữ, mực, pháo, lời gọi (Q6)"),
-            TS: ("1c-ts", "Lô 1c · Tuyến Cuối · súng, trúng, hạ quái, báo nguy (Q6)")}
+# game -> sessions (name, title, ids in listening order). Plan §7 (AUDIO_PIPELINE.md:557): at most 10 ids and 20 minutes
+# a session. About 40 s a card (the in-scene render, alone, the stars and tags; batch 1: 26 cards and 3 anchor pairs in
+# 20-25 minutes), so the 7 ids of Rồng Giữ Ải and Tuyến Cuối (26 cards each) are two sessions (review of 1c); Lời Gọi
+# (5 ids, 20 cards, 4 pairs) stays one. Tuyến Cuối starts with the gun: every other item plays over the burst.
+SESSIONS = {DH: (("1c-dh-1", "Lô 1c · Rồng Giữ Ải 1/2 · khạc lửa, cầu lửa trúng (Q6)",
+                  ("fire.cast", "fire.impact.a", "fire.impact.b", "fire.impact.c")),
+                 ("1c-dh-2", "Lô 1c · Rồng Giữ Ải 2/2 · trúng nhiều quái, bom, tiếng tru (Q6)",
+                  ("impact.multi", "trap.pine-bomb.trigger", "enemy.quadruped.howl"))),
+            TD: (("1c-td", "Lô 1c · Lời Gọi · tên, Phát Chữ, mực, pháo, lời gọi (Q6)",
+                  ("arrow-fire", "wordshot-fire", "ink-puff", "blast", "call-chop")),),
+            TS: (("1c-ts-1", "Lô 1c · Tuyến Cuối 1/2 · súng, ba bậc trúng (Q6)",
+                  ("gun.xung", "hit.t1", "hit.t2", "hit.t4")),
+                 ("1c-ts-2", "Lô 1c · Tuyến Cuối 2/2 · hạ quái, báo nguy (Q6)",
+                  ("kill.swarm", "kill.elite", "hurt.breach")))}
+SEC_PER_CARD = 40.0
 DESC = {
     "fire.cast": "Hỏa Long khạc cầu lửa khi gõ xong từ (600–900 ms). Nghe đủ bốn phần: khè họng tụ lực, lửa bắt và "
                  "gầm có lực, cầu lửa lao ra xa có thân, đuôi vang thung lũng thấp. 'Trong trận thô': giọng đọc phải rõ "
@@ -1353,19 +1572,26 @@ RATE_FIX = {"call-chop": 3.0, "blast": 1 / 1.2}     # batch1_td._loop: alerts 3 
 
 
 MAX_ITEMS = 10               # plan §7: at most 10 ids and 20 minutes a session, anchors included
+MAX_MINUTES = 20
 ANCHORS = 4                  # §4.6 step 6 (batch 1: 4); fewer when the ids leave less room
+ANCHORS_SPLIT = 2            # a game split in two sessions: 2 pairs each (4 in all, batch 1c first pass: 3)
 
 
 class SessionExists(RuntimeError):
     pass
 
 
-def anchors_for(n_ids: int) -> int:
-    return max(0, min(ANCHORS, MAX_ITEMS - n_ids))
+def anchors_for(n_ids: int, split: bool = False) -> int:
+    return max(0, min(ANCHORS_SPLIT if split else ANCHORS, MAX_ITEMS - n_ids))
 
 
-def session_path(game: str) -> Path:
-    return env.REVIEW / game / "sessions" / f"{SESSIONS[game][0]}.json"
+def session_path(game: str, name: str | None = None) -> Path:
+    return env.REVIEW / game / "sessions" / f"{name or SESSIONS[game][0][0]}.json"
+
+
+def est_minutes(n_cards: int, anchors: int) -> float:
+    """Listening time of a session: SEC_PER_CARD a card, an anchor pair 2 cards."""
+    return round((n_cards + 2 * anchors) * SEC_PER_CARD / 60.0, 1)
 
 
 def _loop(game: str, sid: str, picks: list[dict]) -> dict | None:
@@ -1411,14 +1637,11 @@ def _cand(p: dict, ctx: Path | None, key: str) -> dict:
     return c
 
 
-# listening order (default: the order of §7); Tuyến Cuối starts with the gun, the burst every other item plays over
-ORDER = {TS: ("gun.xung", "hit.t1", "hit.t2", "hit.t4", "kill.swarm", "kill.elite", "hurt.breach")}
-
-
-def build_session(run: str, game: str, sel: dict) -> dict:
-    name, title = SESSIONS[game]
+def build_session(run: str, game: str, sel: dict, part: tuple[str, str, tuple[str, ...]] | None = None) -> dict:
+    name, title, ids = part or SESSIONS[game][0]
+    split = len(SESSIONS[game]) > 1
     items = []
-    for sid in ORDER.get(game, tuple(JOBS[game])):
+    for sid in ids:
         picks = sel[sid]["picks"]
         if not picks:
             _say(f"phiên {name}: {sid} không có bản nào để nghe")
@@ -1433,30 +1656,68 @@ def build_session(run: str, game: str, sel: dict) -> dict:
             item["loop"] = lp
         items.append(item)
     return {"schema": "audiolab.board.session/1", "session": name, "game": game, "batch": "1c", "title": title,
-            "seed": int(hashlib.sha256(f"{game}:{name}".encode()).hexdigest()[:8], 16), "max_minutes": 20,
-            "anchors": anchors_for(len(items)), "reveal": "end", "items": items}
+            "seed": int(hashlib.sha256(f"{game}:{name}".encode()).hexdigest()[:8], 16), "max_minutes": MAX_MINUTES,
+            "anchors": anchors_for(len(items), split), "reveal": "end", "items": items}
+
+
+def superseded(games: tuple[str, ...]) -> list[Path]:
+    """Session files of batch 1c that SESSIONS no longer writes (1c-dh and 1c-ts before the split in two, review of
+    1c): the board would still serve them. One the owner has opened is never moved (SessionExists)."""
+    out = []
+    for g in games:
+        names = {part[0] for part in SESSIONS[g]}
+        for path in sorted((env.REVIEW / g / "sessions").glob("1c-*.json")):
+            try:
+                raw = json.loads(path.read_text("utf-8"))
+            except (OSError, ValueError):
+                continue
+            name = raw.get("session") or path.stem
+            if str(raw.get("batch")) != "1c" or name in names:
+                continue
+            if (env.REVIEW / g / "state" / f"{name}.json").exists():
+                raise SessionExists(f"{path}: phiên cũ anh đã mở; không cất đi")
+            out.append(path)
+    return out
 
 
 def step_session(run: str, game: str | None = None, force: bool = False) -> list[Path]:
-    """One session per game (~/AudioLab/review/<game>/sessions/1c-*.json); an existing file needs --force."""
+    """The sessions of each game (~/AudioLab/review/<game>/sessions/1c-*.json). An existing file needs --force, and a
+    session the owner has opened (its state file exists) is never overwritten, --force or not."""
     from board import session as S
     games = _games(game)
-    there = [session_path(g) for g in games if session_path(g).exists()]
+    targets = [(g, part) for g in games for part in SESSIONS[g]]
+    opened = [str(env.REVIEW / g / "state" / f"{part[0]}.json") for g, part in targets
+              if (env.REVIEW / g / "state" / f"{part[0]}.json").exists()]
+    if opened:
+        raise SessionExists(f"{', '.join(opened)}: anh đã mở phiên này; không ghi đè (điểm và chỗ đang nghe nằm ở đó)")
+    there = [session_path(g, part[0]) for g, part in targets if session_path(g, part[0]).exists()]
     if there and not force:
         raise SessionExists(f"{', '.join(map(str, there))} đã có; thêm --force để ghi đè (điểm đã chấm vẫn giữ trong "
                             "ratings.jsonl)")
+    old = superseded(games)
+    if old and not force:
+        raise SessionExists(f"{', '.join(map(str, old))}: phiên 1c cũ, không còn trong SESSIONS; thêm --force để cất đi")
+    for path in old:                    # never opened (checked in superseded): moved out of the board's sight
+        dest = path.parent / "_superseded" / path.name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        path.replace(dest)
+        _say(f"phiên cũ {path.name} cất vào {dest.parent} (Bảng Nghe chỉ đọc sessions/*.json)")
     paths = []
     for g in games:
-        doc = build_session(run, g, select(run, g))
-        path = session_path(g)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", "utf-8")
-        s = S.load(path)                # validate now: paths, ctx files, contexts, notes
-        missing = [i.id for i in s.items if ctx_key(g, i.id) not in i.rendered]
-        paths.append(path)
-        _say(f"phiên {path}: {len(doc['items'])} id, {sum(len(i['candidates']) for i in doc['items'])} bản "
-             f"(+{doc['anchors']} cặp mốc khi mở)"
-             + (f"; thiếu bản dựng trong bối cảnh: {', '.join(missing)}" if missing else ""))
+        sel = select(run, g)
+        for part in SESSIONS[g]:
+            doc = build_session(run, g, sel, part)
+            path = session_path(g, part[0])
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", "utf-8")
+            s = S.load(path)                # validate now: paths, ctx files, contexts, notes
+            missing = [i.id for i in s.items if ctx_key(g, i.id) not in i.rendered]
+            paths.append(path)
+            n_cards = sum(len(i["candidates"]) for i in doc["items"])
+            mins = est_minutes(n_cards, doc["anchors"])
+            _say(f"phiên {path}: {len(doc['items'])} id, {n_cards} bản (+{doc['anchors']} cặp mốc khi mở), khoảng "
+                 f"{mins:g} phút" + (f" (QUÁ {MAX_MINUTES} phút)" if mins > MAX_MINUTES else "")
+                 + (f"; thiếu bản dựng trong bối cảnh: {', '.join(missing)}" if missing else ""))
     return paths
 
 

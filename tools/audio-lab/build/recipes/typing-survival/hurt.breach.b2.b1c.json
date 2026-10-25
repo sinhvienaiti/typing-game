@@ -5,7 +5,7 @@
  "id": "hurt.breach.b2",
  "group": "alarm",
  "family": "nen",
- "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Bản 2 của hurt.breach (như hurt.breach.b2 của lô 1, dựng lại cho 800 ms): cú đập thép Kenney Impact Plate heavy (lọc thấp 2,5 kHz) và lớp nổ trầm tổng hợp 70→38 Hz 300 ms −10 dB ở 0 ms làm tiếng phát; thân Stable Audio 3 prompt D–F lọc 40 Hz–1,2 kHz (thép rên và vang hành lang dưới dải giọng); còi lọc thấp 1 kHz. Biến thể n dùng cú đập n và thân n.",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Bản 2 của hurt.breach (như hurt.breach.b2 của lô 1, dựng lại cho 800 ms): cú đập thép Kenney Impact Plate heavy (lọc thấp 2,5 kHz) và lớp nổ trầm tổng hợp 70→38 Hz 300 ms −10 dB ở 0 ms làm tiếng phát; thân Stable Audio 3 prompt D–F từ đỉnh tiếng nổ (như hurt.breach), lọc 40 Hz–1,2 kHz (thép rên và vang hành lang dưới dải giọng); còi lọc thấp 1 kHz. Đường xuất riêng sfx/alerts/hurt-breach-b2 (lượt đầu trùng đường với hurt.breach, nên bộ ogg sau ghi đè bộ trước). Biến thể n dùng cú đập n và thân n.",
  "channels": 1,
  "layers": [
   {
@@ -84,12 +84,13 @@
      "tool": "stable-audio-3 (sa3_batch.py)",
      "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
      "licence": "LicenseRef-Stability-Community-2024",
-     "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.f32.wav",
-     "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.json",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.json",
      "window": [
-      0.0235,
-      0.9835
-     ]
+      0.446,
+      1.346
+     ],
+     "gainDb": -0.1
     }
    },
    "vary": {
@@ -103,35 +104,10 @@
        "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.f32.wav",
        "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.json",
        "window": [
-        0.009,
-        0.969
-       ]
-      }
-     },
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.json",
-       "window": [
-        0.0005,
-        0.9605
-       ]
-      }
-     },
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.json",
-       "window": [
-        0.06125,
-        1.02125
-       ]
+        0.2624,
+        1.1624
+       ],
+       "gainDb": -2.6
       }
      },
      {
@@ -142,9 +118,10 @@
        "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.f32.wav",
        "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.json",
        "window": [
-        0.00125,
-        0.948
-       ]
+        0.1067,
+        1.0067
+       ],
+       "gainDb": 3.5
       }
      },
      {
@@ -152,12 +129,41 @@
        "tool": "stable-audio-3 (sa3_batch.py)",
        "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
        "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.json",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3004.json",
        "window": [
-        0.024,
-        0.984
-       ]
+        0.4999,
+        1.3999
+       ],
+       "gainDb": -0.1
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3002.json",
+       "window": [
+        0.2744,
+        1.1744
+       ],
+       "gainDb": -2.5
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3003.json",
+       "window": [
+        0.1067,
+        1.0067
+       ],
+       "gainDb": 4.1
       }
      }
     ]
@@ -248,7 +254,7 @@
   ]
  },
  "export": {
-  "path": "sfx/alerts/hurt-breach",
+  "path": "sfx/alerts/hurt-breach-b2",
   "ogg": true,
   "oggQuality": 0.6
  }

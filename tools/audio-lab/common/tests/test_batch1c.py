@@ -1,7 +1,9 @@
 """Batch 1c (Q6_REWRITE §7): the job table generates only the Q6 keys, at the §7 lengths, with names no earlier batch
 used, and the rebuilt recipes are valid for the Q6 lengths of their cards."""
 import json
+from pathlib import Path
 
+import numpy as np
 import pytest
 
 from common import batch0b, batch1_dh, batch1_td, batch1_ts, batch1c
@@ -88,6 +90,8 @@ def test_recipes_are_valid_and_fit_the_q6_lengths(tmp_path):
 
     pools = {key: {"bodies": _fake_pool(tmp_path, key, 8, 0.5)} for key in
              ("fire-a", "fire-b", "fire-c", "pine", "t4", "elite", "breach", "wordshot", "blast")}
+    for k, b in enumerate(pools["fire-b"]["bodies"]):
+        b["gain_db"] = float(k)
     built = {g: batch1c.RECIPES[g](pools) for g in batch1c.GAMES}
     for g, recs in built.items():
         assert set(recs) == set(batch1c.RECIPE_IDS[g])
@@ -104,6 +108,32 @@ def test_recipes_are_valid_and_fit_the_q6_lengths(tmp_path):
             assert all(lay.get("gainDb", 0) <= -9 for lay in subs), rid
             assert any(lay.get("role") in ("body", "texture") for lay in data["layers"]), rid
     assert batch1c.recipe_path("dragon-hold", "fire.impact.a").name == "fire.impact.a.b1c.json"
+    # review of 1c: every recipe its own export path (hurt.breach.b2 overwrote hurt.breach's runtime files)
+    paths = [d["export"]["path"] for recs in built.values() for d in recs.values()]
+    assert len(paths) == len(set(paths))
+    # level match: the body takes carry their source gainDb; the level is measured through the layer's own filters
+    body = next(ly for ly in built["dragon-hold"]["fire.impact.b"]["layers"] if ly["id"] == "body")
+    gains = [src["gen"].get("gainDb", 0.0) for src in [body["source"], *body["vary"]["swap"]]]
+    assert gains == [float(k) for k in range(8)]
+    for g, recs in built.items():
+        for rid, data in recs.items():
+            for ly in data["layers"]:
+                key = {"fire.impact.a": "fire-a", "fire.impact.b": "fire-b", "fire.impact.c": "fire-c",
+                       "trap.pine-bomb.trigger": "pine", "kill.elite": "elite", "hurt.breach": "breach",
+                       "hit.t4": "t4", "blast.mix": "blast"}.get(rid)
+                if key and "gen" in ly["source"] and ly["role"] in ("body", "texture"):
+                    assert ly["filters"] == batch1c.BODY_FILTERS[key], (rid, ly["id"])
+
+
+def test_bodies_are_level_matched_and_a_near_silent_take_is_left_out():
+    """Review of 1c: fire.impact.b bodies -19.6 to -45.9 LUFS-M; one layer gain made the quiet variants a Kenney front
+    with no body. Each body is brought to the median of its pool (the recipe's layer gains were set for a typical
+    take); more than 10 dB under the loudest, left out."""
+    rows = [{"file": n, "window": [0, 1]} for n in ("loud", "mid", "quiet", "silent")]
+    levels = {"loud": -19.6, "mid": -28.2, "quiet": -29.5, "silent": -45.9}
+    kept, out = batch1c.level_match(rows, [], level=lambda f, w, flt: levels[f])
+    assert [(r["file"], r["gain_db"]) for r in kept] == [("loud", -8.6), ("mid", 0.0), ("quiet", 1.3)]
+    assert [r["file"] for r in out] == ["silent"]
 
 
 def test_round_robin_spreads_the_prompts():
@@ -158,6 +188,12 @@ def test_owner_notes_fit_the_board():
     notes = [*batch1c.RULE_NOTE.values(), batch1c.CURRENT_NOTE]
     assert all(len(n + "; dài hơn thẻ") <= session.MAX_NOTE for n in notes)
     assert set(batch1c.RULE_NOTE) <= {sid for g in batch1c.GAMES for sid in batch1c.JOBS[g]}
+    # the build-up ids carry the rule label too: both labels fit
+    for sid in batch1c.BUILD_UP["dragon-hold"] | batch1c.BUILD_UP["typing-survival"]:
+        note = batch1c.join_notes(batch1c.RULE_NOTE.get(sid), batch1c.CUT_NOTE)
+        assert note.endswith(batch1c.CUT_NOTE) and len(note) <= session.MAX_NOTE, sid
+    assert batch1c.join_notes(None, None) is None
+    assert batch1c.join_notes("x" * 75, batch1c.CUT_NOTE) == "x" * 75        # never over 80: the second part waits
 
 
 def test_after_word_sounds_repeat_at_the_word_pace():
@@ -165,6 +201,22 @@ def test_after_word_sounds_repeat_at_the_word_pace():
     for sid in ("fire.cast", "fire.impact.a", "fire.impact.b", "fire.impact.c", "impact.multi", "wordshot-fire"):
         assert batch1c.LOOP[sid]["interval_ms"] == 1500, sid
     assert batch1c.anchors_for(7) == 3 and batch1c.anchors_for(5) == 4 and batch1c.anchors_for(12) == 0
+    assert batch1c.anchors_for(4, split=True) == 2
+
+
+def test_sessions_cover_every_id_once_within_the_plan_limits():
+    """Plan §7 (AUDIO_PIPELINE.md:557): at most 10 ids and 20 minutes a session, anchors included. Review of 1c: one
+    session of 7 ids (26 cards, 3 pairs) was 20-25 minutes; Rồng Giữ Ải and Tuyến Cuối are now two sessions each."""
+    for g in batch1c.GAMES:
+        ids = [sid for _, _, part in batch1c.SESSIONS[g] for sid in part]
+        assert sorted(ids) == sorted(batch1c.JOBS[g]), g
+        split = len(batch1c.SESSIONS[g]) > 1
+        for name, title, part in batch1c.SESSIONS[g]:
+            assert name.startswith("1c-") and title.startswith("Lô 1c")
+            n_anchors = batch1c.anchors_for(len(part), split)
+            assert len(part) + n_anchors <= batch1c.MAX_ITEMS
+            assert batch1c.est_minutes(batch1c.MAX_CANDIDATES * len(part), n_anchors) <= batch1c.MAX_MINUTES, name
+    assert batch1c.SESSIONS["typing-survival"][0][2][0] == "gun.xung"       # every other item plays over the burst
 
 
 def test_spread_takes_one_per_prompt_first():
@@ -217,6 +269,13 @@ def test_session_is_valid_for_the_board_and_never_overwritten(tmp_path, monkeypa
     with pytest.raises(batch1c.SessionExists):
         batch1c.step_session("b1c", game, force=False)
     assert path.read_text("utf-8") == before
+    # a session the owner has opened (its state file) is never overwritten, even with --force
+    state = tmp_path / "review" / game / "state" / f"{batch1c.SESSIONS[game][0][0]}.json"
+    state.parent.mkdir(parents=True)
+    state.write_text("{}", "utf-8")
+    with pytest.raises(batch1c.SessionExists, match="đã mở"):
+        batch1c.step_session("b1c", game, force=True)
+    assert path.read_text("utf-8") == before
 
 
 def test_a_render_is_reused_only_for_the_same_slots(tmp_path):
@@ -227,6 +286,12 @@ def test_a_render_is_reused_only_for_the_same_slots(tmp_path):
     sig = batch1c._slots_sig(slots, config, bed)
     moved = dict(fixed, **{"fire.impact.a": tmp_path / "new.wav"})
     assert batch1c._slots_sig(batch1c.pick_slots("dragon-hold", "fire.cast", take, moved)[0], config, bed) != sig
+    # review fix of 1c: a take re-processed under the same name (the knee moved) is a new slot, not the old render
+    (tmp_path / "a.wav").write_bytes(b"first")
+    sig1 = batch1c._slots_sig(slots, config, bed)
+    assert sig1 == batch1c._slots_sig(slots, config, bed)
+    (tmp_path / "a.wav").write_bytes(b"re-processed")
+    assert batch1c._slots_sig(slots, config, bed) != sig1
     gun = {"files": [tmp_path / "i1.wav"], "set": {"A": [tmp_path / "i1.wav"], "B": [tmp_path / "i1.wav"], "B_db": -5.0},
            "role": "1c-I", "bed_db": 16.0}
     s2, c2, b2 = batch1c.pick_slots("typing-survival", "gun.xung", gun, {})
@@ -235,3 +300,63 @@ def test_a_render_is_reused_only_for_the_same_slots(tmp_path):
     assert batch1c.pick_slots("typing-survival", "gun.xung", ref, {})[1] == "current"
     hit = {"docs": [{"file": {"path": str(tmp_path / "h.wav")}}], "role": "top"}
     assert batch1c.pick_slots("typing-survival", "hit.t1", hit, {})[0]["hit.t1"] == [tmp_path / "h.wav"]
+
+
+def test_a_critic_rerun_starts_from_an_empty_folder(tmp_path):
+    """Review fix of 1c: the critic never removes the JSON of an input that is gone, so a take that the re-run of process
+    refused (moved to processed-rejected) kept its old verdict next to the new ones. The old run moves to .prev."""
+    out = tmp_path / "critic-final"
+    out.mkdir()
+    (out / "gone.json").write_text("{}", "utf-8")
+    assert batch1c.fresh(out) == out and not out.exists()
+    assert (tmp_path / "critic-final.prev" / "gone.json").is_file()
+    out.mkdir()
+    (out / "second.json").write_text("{}", "utf-8")
+    batch1c.fresh(out)
+    assert sorted(p.name for p in (tmp_path / "critic-final.prev").iterdir()) == ["second.json"]
+    assert batch1c.fresh(tmp_path / "never-made") == tmp_path / "never-made"
+
+
+def test_a_click_with_no_body_is_measured_by_what_follows_it(tmp_path):
+    """Review fix of 1c (fire.impact.a F s3002): a take that is a click and then silence measured level with real
+    bodies over its whole window (the click fills the 400 ms LUFS-M), so v2 and v6 of the recipe stayed thin. The
+    level is read after the first BODY_SKIP_MS: the click is left out of the pool, a sustained body is kept."""
+    import soundfile as sf
+    sr = 48000
+    t = np.arange(int(0.6 * sr)) / sr
+    rng = np.random.default_rng(3)
+    body = 0.3 * rng.standard_normal(t.size) * np.exp(-t / 0.25)
+    click = rng.standard_normal(t.size) * np.exp(-t / 0.004)
+    for name, x in (("body", body), ("click", click)):
+        sf.write(str(tmp_path / f"{name}.wav"), np.stack([x, x], axis=1).astype(np.float32), sr, subtype="FLOAT")
+    flt = batch1c.BODY_FILTERS["fire-a"]
+    rows = [{"file": str(tmp_path / f"{n}.wav"), "window": [0.0, 0.56]} for n in ("body", "click")]
+    kept, quiet = batch1c.level_match(rows, flt)
+    assert [Path(r["file"]).stem for r in kept] == ["body"] and [Path(r["file"]).stem for r in quiet] == ["click"]
+    assert quiet[0]["gain_db"] > batch1c.BODY_SPREAD_DB
+
+
+def test_a_session_file_split_in_two_is_put_away_not_served(tmp_path, monkeypatch):
+    """Review fix of 1c: 1c-dh and 1c-ts became two sessions each. The old single files would still show on the board
+    (it reads <game>/sessions/*.json): --force moves them to sessions/_superseded; one the owner opened stays."""
+    monkeypatch.setattr(batch1c.env, "REVIEW", tmp_path / "review")
+    sessions = tmp_path / "review" / "dragon-hold" / "sessions"
+    sessions.mkdir(parents=True)
+    (sessions / "1c-dh.json").write_text(json.dumps({"session": "1c-dh", "batch": "1c"}), "utf-8")
+    (sessions / "1c-dh-1.json").write_text(json.dumps({"session": "1c-dh-1", "batch": "1c"}), "utf-8")
+    (sessions / "1-dh-s2.json").write_text(json.dumps({"session": "1-dh-s2", "batch": "1"}), "utf-8")
+    assert batch1c.superseded(("dragon-hold",)) == [sessions / "1c-dh.json"]
+    state = tmp_path / "review" / "dragon-hold" / "state" / "1c-dh.json"
+    state.parent.mkdir(parents=True)
+    state.write_text("{}", "utf-8")
+    with pytest.raises(batch1c.SessionExists, match="đã mở"):
+        batch1c.superseded(("dragon-hold",))
+    state.unlink()
+    monkeypatch.setattr(batch1c, "select", lambda run, g: (_ for _ in ()).throw(RuntimeError("stop after the move")))
+    (sessions / "1c-dh-1.json").unlink()
+    with pytest.raises(batch1c.SessionExists, match="phiên 1c cũ"):
+        batch1c.step_session("b1c", "dragon-hold", force=False)
+    with pytest.raises(RuntimeError, match="stop after the move"):
+        batch1c.step_session("b1c", "dragon-hold", force=True)
+    assert not (sessions / "1c-dh.json").exists() and (sessions / "_superseded" / "1c-dh.json").is_file()
+    assert (sessions / "1-dh-s2.json").is_file()

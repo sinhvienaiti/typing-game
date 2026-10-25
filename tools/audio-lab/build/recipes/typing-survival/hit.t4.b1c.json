@@ -5,7 +5,7 @@
  "id": "hit.t4",
  "group": "hit-heavy",
  "family": "trung",
- "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Đòn lớn 900 ms (720–1080): nện nặng vào dầm thép, nứt giòn, thân thép dày có trọng lượng, lớp trầm bên dưới, dầm ngân dài lăn dọc hành lang thép. Mã game phát một tiếng mỗi bậc (không ghép lớp), nên mọi lớp nằm sẵn trong file. Đầu tiếng Kenney Impact Metal heavy (lọc cao 600 Hz, 60 ms, −4 dB); thân là bản Stable Audio 3 prompt E–G của lô 1c, cửa sổ 850 ms từ 4 ms trước đỉnh (giữ tiếng dầm ngân của chính bản đó; lô 1 lấy 300 ms rồi ghép đuôi Anvil); sub 90 ms −10 dB chỉ ở dưới. Đuôi hàm mũ từ 700 ms. Biến thể n dùng đầu tiếng n và thân n.",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Đòn lớn 900 ms (720–1080): nện nặng vào dầm thép, nứt giòn, thân thép dày có trọng lượng, lớp trầm bên dưới, dầm ngân dài lăn dọc hành lang thép. Mã game phát một tiếng mỗi bậc (không ghép lớp), nên mọi lớp nằm sẵn trong file. Đầu tiếng Kenney Impact Metal heavy (lọc cao 600 Hz, 60 ms, −4 dB); thân là bản Stable Audio 3 prompt E–G của lô 1c, cửa sổ 850 ms từ 4 ms trước đỉnh (giữ tiếng dầm ngân của chính bản đó; lô 1 lấy 300 ms rồi ghép đuôi Anvil); sub 90 ms −10 dB chỉ ở dưới. Đuôi hàm mũ từ 700 ms. Biến thể n dùng đầu tiếng n và thân n.",
  "channels": 1,
  "layers": [
   {
@@ -39,9 +39,6 @@
      },
      {
       "library": "kenney/impact-sounds/Audio/impactMetal_heavy_000.ogg"
-     },
-     {
-      "library": "kenney/impact-sounds/Audio/impactMetal_heavy_002.ogg"
      }
     ]
    }
@@ -69,38 +66,13 @@
      "window": [
       0.0898,
       0.9398
-     ]
+     ],
+     "gainDb": -7.1
     }
    },
    "vary": {
     "swapMode": "cycle",
     "swap": [
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3002.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3002.json",
-       "window": [
-        0.0199,
-        0.8699
-       ]
-      }
-     },
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__F__s3001.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__F__s3001.json",
-       "window": [
-        0.0828,
-        0.9328
-       ]
-      }
-     },
      {
       "gen": {
        "tool": "stable-audio-3 (sa3_batch.py)",
@@ -119,12 +91,13 @@
        "tool": "stable-audio-3 (sa3_batch.py)",
        "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
        "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3005.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3005.json",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__F__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__F__s3001.json",
        "window": [
-        0.017,
-        0.867
-       ]
+        0.0828,
+        0.9328
+       ],
+       "gainDb": -5.6
       }
      },
      {
@@ -132,12 +105,27 @@
        "tool": "stable-audio-3 (sa3_batch.py)",
        "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
        "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3006.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3006.json",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3002.json",
        "window": [
-        0.1038,
-        0.9538
-       ]
+        0.0199,
+        0.8699
+       ],
+       "gainDb": 0.7
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hit.t4/b1c/raw/hit.t4__G__s3005.json",
+       "window": [
+        0.017,
+        0.867
+       ],
+       "gainDb": 0.7
       }
      }
     ]
@@ -183,7 +171,7 @@
   }
  },
  "variants": {
-  "count": 6,
+  "count": 5,
   "seed": 3524,
   "includeBase": true,
   "pitchCents": [

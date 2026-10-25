@@ -5,7 +5,7 @@
  "id": "hurt.breach",
  "group": "alarm",
  "family": "nen",
- "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Tuyến bị phá 800 ms (640–960): nổ trầm có thân, thép rên, còi hai nốt ngắn, vang dội dọc hành lang thép. Thân là bản Stable Audio 3 prompt D–F của lô 1c (tạo 2 s, cửa sổ process.py dài tự nhiên tới 960 ms), lọc cao 40 Hz; còi giữ như lô 1 (440/330 Hz vuông, lọc thấp 1,6 kHz, 90 ms mỗi nốt ở 30 và 140 ms). Đuôi hàm mũ từ 650 ms (lô 1: 720 ms tối đa, thân A–C đã bỏ). Biến thể n dùng thân n.",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Tuyến bị phá 800 ms (640–960): nổ trầm có thân, thép rên, còi hai nốt ngắn, vang dội dọc hành lang thép. Thân là bản Stable Audio 3 prompt D–F của lô 1c (tạo 2 s), cửa sổ 900 ms từ 4 ms trước đỉnh tiếng nổ, lọc cao 40 Hz, nên còi vào ngay trên tiếng nổ (lượt đầu lấy cửa sổ process.py có phần tụ lực: ở thân D s3002 tiếng nổ tới ở 390 ms, sau còi); còi giữ như lô 1 (440/330 Hz vuông, lọc thấp 1,6 kHz, 90 ms mỗi nốt ở 30 và 140 ms). Đuôi hàm mũ từ 650 ms (lô 1: 720 ms tối đa, thân A–C đã bỏ). Biến thể n dùng thân n.",
  "channels": 1,
  "layers": [
   {
@@ -23,12 +23,13 @@
      "tool": "stable-audio-3 (sa3_batch.py)",
      "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
      "licence": "LicenseRef-Stability-Community-2024",
-     "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.f32.wav",
-     "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3001.json",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.json",
      "window": [
-      0.0235,
-      0.9835
-     ]
+      0.446,
+      1.346
+     ],
+     "gainDb": -0.1
     }
    },
    "vary": {
@@ -42,35 +43,10 @@
        "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.f32.wav",
        "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3005.json",
        "window": [
-        0.009,
-        0.969
-       ]
-      }
-     },
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3004.json",
-       "window": [
-        0.0005,
-        0.9605
-       ]
-      }
-     },
-     {
-      "gen": {
-       "tool": "stable-audio-3 (sa3_batch.py)",
-       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
-       "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3002.json",
-       "window": [
-        0.06125,
-        1.02125
-       ]
+        0.2624,
+        1.1624
+       ],
+       "gainDb": -2.6
       }
      },
      {
@@ -81,9 +57,10 @@
        "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.f32.wav",
        "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3005.json",
        "window": [
-        0.00125,
-        0.948
-       ]
+        0.1067,
+        1.0067
+       ],
+       "gainDb": 3.5
       }
      },
      {
@@ -91,12 +68,41 @@
        "tool": "stable-audio-3 (sa3_batch.py)",
        "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
        "licence": "LicenseRef-Stability-Community-2024",
-       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.f32.wav",
-       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3003.json",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__D__s3004.json",
        "window": [
-        0.024,
-        0.984
-       ]
+        0.4999,
+        1.3999
+       ],
+       "gainDb": -0.1
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__E__s3002.json",
+       "window": [
+        0.2744,
+        1.1744
+       ],
+       "gainDb": -2.5
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/hurt.breach/b1c/raw/hurt.breach__F__s3003.json",
+       "window": [
+        0.1067,
+        1.0067
+       ],
+       "gainDb": 4.1
       }
      }
     ]

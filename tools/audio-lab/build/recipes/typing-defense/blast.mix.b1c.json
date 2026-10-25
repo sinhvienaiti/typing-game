@@ -5,7 +5,7 @@
  "id": "blast.mix",
  "group": "blast",
  "family": "no",
- "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Tháp Pháo 800 ms (640–960): trống lớn nện có thân, giấy và bụi bung tung, mảnh giấy rơi lả tả, vang làng; không lớp nổ lách tách, không chất taiko. Nứt ván Kenney impactPlank (lọc cao 900 Hz, 60 ms) cho tiếng phát; trống khung VCSL đánh mở hoặc timpani VSCO-2-CE làm thân (−3 dB, lọc cao 70 Hz, giữ 500 ms: lô 1 cắt ở 320 ms); lớp giấy, bụi và vang làng là bản Stable Audio 3 prompt E–H (xếp bằng L1, L1b, L2), lọc cao 300 Hz để tiếng trống của chính bản đó không thành đầu tiếng thứ hai, vào sau 12 ms, mờ vào 25 ms, −5 dB, dài tự nhiên tới 960 ms. Đuôi hàm mũ từ 520 ms. Biến thể n dùng nứt n, trống n, lớp giấy n.",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Tháp Pháo 800 ms (640–960): trống lớn nện có thân, giấy và bụi bung tung, mảnh giấy rơi lả tả, vang làng; không lớp nổ lách tách, không chất taiko. Nứt ván Kenney impactPlank (lọc cao 900 Hz, 60 ms) cho tiếng phát; trống khung VCSL đánh mở hoặc timpani VSCO-2-CE làm thân (−3 dB, lọc cao 70 Hz, giữ 500 ms: lô 1 cắt ở 320 ms); lớp giấy, bụi và vang làng là bản Stable Audio 3 prompt E–H (xếp bằng L1, L1b, L2), lọc cao 300 Hz để tiếng trống của chính bản đó không thành đầu tiếng thứ hai, vào sau 12 ms, mờ vào 25 ms, −5 dB, dài tự nhiên tới 960 ms. Đuôi hàm mũ từ 520 ms. Biến thể n dùng nứt n, trống n, lớp giấy n.",
  "channels": 1,
  "layers": [
   {
@@ -108,7 +108,8 @@
      "window": [
       0.03425,
       0.67425
-     ]
+     ],
+     "gainDb": 0.6
     }
    },
    "vary": {
@@ -124,7 +125,8 @@
        "window": [
         0.0345,
         0.6745
-       ]
+       ],
+       "gainDb": -2.9
       }
      },
      {
@@ -137,7 +139,8 @@
        "window": [
         0.01975,
         0.65975
-       ]
+       ],
+       "gainDb": -2.0
       }
      },
      {
@@ -150,7 +153,8 @@
        "window": [
         0.13825,
         0.903
-       ]
+       ],
+       "gainDb": 3.8
       }
      }
     ]
