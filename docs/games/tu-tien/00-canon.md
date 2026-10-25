@@ -1174,6 +1174,7 @@ Sau MVP: 10 bậc, đan phương, thi lên cấp từ.
 ### 23.2 Replay và nhật ký (PB-25)
 
 - **Đầu replay:** `{ v: 1, gameId, rulesHash, seed, stageId, preset, pacing: boolean, seats: [{ seat, profile: { e, a, cv }, kPm }], deck: [{ wordId, text, group, mastery, recalls, assumed }], newWordAllowance, loadout: { guard: "ward" | "dash", tamPhap } }`. Mọi thứ đến từ ngoài sim (lõi học bất đồng bộ, hồ sơ, sổ cái) nằm ở đây, nên replay chạy lại được trên máy khác (B9) và golden không phụ thuộc máy.
+- **Sàn Chớp trong đầu replay** (ghi thêm 25/10, lượt sửa phần A của M0a): mỗi ghế có thêm trường tùy chọn `flashEX1000` = E_eff × 1000 của Chớp sau sàn 5 phiên (mục 6.5). Nó đến từ hồ sơ ngoài sim nên nằm ở đầu replay; vắng thì sim dùng E_eff của `profile`.
 - **Thân:** lệnh theo tick (`SimCommand`, kể cả `pace-update`, `ward-use`) và đầu vào của `local` (`move-to`, `arrows`).
 - **Đuôi:** `hashWorld` và `hashLocal` mỗi 600 tick và cuối trận. `ic-replay` và golden so cả hai.
 - Nhật ký buổi chơi thử của anh (B9) là replay này kèm `ms` đồng hồ tường của từng phím (chỉ cho học và đo, không vào băm).
@@ -1236,7 +1237,7 @@ Sau MVP: 10 bậc, đan phương, thi lên cấp từ.
 | 8 | Kiến trúc `local` (vị trí người ngoài sim) ngay từ solo? | Có, từ M0a: đổi sau tốn hơn nhiều (D28) |
 | 9 | Các tệp `analysis/01–07` có cần dòng đầu trỏ về canon? | Có (việc còn lại của M0, tệp đánh giá §6); làm ở lượt sửa kế, chỉ thêm một dòng |
 | 10 | CB3 ở bot Khá, Nhanh (ô 1 nhận mọi từ dư, PB-05) | Làn bot in phần ô 1 theo từng bot ngay vòng đầu. Vượt 30 % thì trước hết tăng sức ô 2, ô 4 (giữ bất biến hạ thú), sau mới hạ ô 1; không tăng tải để che |
-| 11 | Bot "gõ bừa" ở Tĩnh Tu (gõ cả Tâm ma) vẫn có thể lĩnh ngộ trong 2 phiên vì Minh cho nhiều điểm | Theo dõi bằng báo cáo HC4b; nếu điểm phiên của bot gõ bừa ≥ bot Chuẩn thì nâng phạt chọn nhầm −3 → −5 (đổi số, không đổi luật) |
+| 11 | Bot "gõ bừa" ở Tĩnh Tu (gõ cả Tâm ma) vẫn có thể lĩnh ngộ trong 2 phiên vì Minh cho nhiều điểm | Theo dõi bằng báo cáo HC4b; nếu điểm phiên của bot gõ bừa ≥ bot Chuẩn thì nâng phạt chọn nhầm −3 → −5 (đổi số, không đổi luật). *Bổ sung 25/10 (lượt sửa phần A M0a; đề xuất của vòng này, chờ chủ dự án xác nhận): phiên hoàn thành bị kẹp 100 nên ở Nhập Môn hai bot cùng 100 và −5 không đổi được điểm kẹp; HC4b và đòn bẩy này so **điểm thô chưa kẹp** (5 Minh + 2 Thường − 3 nhầm).* |
 | 12 | `ward` cùng tick bị thế giới và `local` dùng lần cuối (mục 9.1) | Chấp nhận lệch tối đa một lần đỡ; nếu replay đội ở M3 cho thấy lệch thường xuyên thì chuyển phần đỡ cho mình sang đếm riêng của `local` (3 lần chung chia theo thứ tự tick) |
 | 13 | Trận lạnh dùng từ nền qua bước lùi ở ô 2, ô 5, Ấn (mục 17.1) | Giữ ở M0a (không lõi học). Khi có lõi học, báo cáo in số lần từ nền lên ô 2, ô 5, Ấn; > 20 % số từ của các ô đó thì tăng phần "đến hạn" của bộ từ |
 
