@@ -321,3 +321,34 @@ def test_two_part_keeps_an_intended_ka_chunk():
     p.two_part = True
     res = P.process_oneshot(x[:, None], SR, p)
     assert res["usable"] and res["pre_hit"] is None and res["two_part"]["main_ms"] >= 35
+
+
+def test_build_up_keeps_a_huff_before_the_flame_and_later_bursts():
+    """DECISIONS Q6 (batch 1c): fire.cast is a huff, then the flame bursts; impact.multi is several flare-ups. Without
+    build_up the huff reads as a flam ('gõ hai lần') and the second burst ends the window; with it both stay, and the
+    window is still capped at the card's max."""
+    rng = np.random.default_rng(6)
+
+    def burst(n, tau, gain):
+        t = np.arange(n) / SR
+        return gain * rng.standard_normal(n) * np.exp(-t / tau)
+    x = np.zeros(int(1.4 * SR))
+    h, f, f2 = int(0.010 * SR), int(0.200 * SR), int(0.520 * SR)
+    bed = int(1.09 * SR)
+    x[h:h + bed] += 0.06 * rng.standard_normal(bed) * np.minimum(1.0, (bed - np.arange(bed)) / (0.1 * SR))  # breath, roar
+    x[h:h + int(0.09 * SR)] += burst(int(0.09 * SR), 0.030, 0.15)      # the huff, ~16 dB under the flame
+    x[f:f + int(0.25 * SR)] += burst(int(0.25 * SR), 0.050, 1.0)       # the flame burst
+    x[f2:f2 + int(0.6 * SR)] += burst(int(0.6 * SR), 0.120, 0.9)       # a second flare of the same strike
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=750, min_ms=600, max_ms=900)
+    strict = P.process_oneshot(x[:, None], SR, p)
+    assert not strict["usable"] and "next-hit" in strict["reason"]
+    one = x.copy()
+    one[f2:f2 + int(0.6 * SR)] = 0.06 * rng.standard_normal(int(0.6 * SR))      # no second flare: only the huff
+    assert "gõ hai lần" in P.process_oneshot(one[:, None], SR, p)["reason"]
+    p.build_up = True
+    assert P.process_oneshot(one[:, None], SR, p)["usable"]
+    res = P.process_oneshot(x[:, None], SR, p)
+    w = res["window"]
+    assert res["usable"] and res["pre_hit"] is None and res["build_up"]["main_ms"] >= 150, res["reason"]
+    assert w["onset_s"] < 0.012 and w["end_kind"] != "next-hit"
+    assert 600 <= w["len_ms"] <= 900, w

@@ -21,6 +21,8 @@ record per file (a `gen` layer with the raw clip test of the float copy window) 
 `critic run --sources`, and <out>/licences.rows.jsonl the model and licence rows. A candidate with
 no true onset, whose first shot is shorter than the card's min before the next one, or whose window
 opens on a weak first hit before the main one (a flam), goes to the rejected folder, with the reason. Raw files are never touched.
+--build-up (DECISIONS Q6): an action shaped as build-up then release (a huff before the flame, a fuse before the boom,
+several flare-ups of one strike) keeps its weaker first part and its later hits; the window is still capped at the card's max.
 """
 from __future__ import annotations
 
@@ -57,13 +59,17 @@ class Plan:
     norm_target: float
     whole: bool = False
     two_part: bool = False       # a lighter first hit 20-90 ms before the main one is the design (word.load 'ka-chunk')
+    # DECISIONS Q6: the action's own build-up or bursts are the design (a huff before the flame, a fuse before the
+    # boom, several flare-ups of one multi-target strike): a weaker first part is never a flam and a later hit never
+    # ends the window; unlike `whole`, the window is still capped at the card's max
+    build_up: bool = False
 
     @property
     def creature(self) -> bool:
         return self.onset_class == "creature"
 
 
-def plan_from_card(card: dict, whole: bool | None = None, two_part: bool = False) -> Plan:
+def plan_from_card(card: dict, whole: bool | None = None, two_part: bool = False, build_up: bool = False) -> Plan:
     pb, d, o = card.get("playback") or {}, card.get("duration") or {}, card.get("onset") or {}
     lf = (card.get("loudness") or {}).get("file") or {}
     metric = str(lf.get("metric") or "peak-dbtp")
@@ -77,7 +83,7 @@ def plan_from_card(card: dict, whole: bool | None = None, two_part: bool = False
                 onset_class=cls, rise_max_ms=o.get("rise_max_ms"), target_ms=t,
                 min_ms=float(d.get("min_ms") or t * 0.8), max_ms=float(d.get("max_ms") or t * 1.2),
                 norm_mode=mode, norm_target=target, whole=bool(whole if whole is not None else cls == "creature"),
-                two_part=bool(two_part))
+                two_part=bool(two_part), build_up=bool(build_up))
 
 
 # ---------------------------------------------------------------- envelopes and events
@@ -476,7 +482,7 @@ def render_window(x: np.ndarray, sr: int, w: Window, plan: Plan) -> tuple[np.nda
 def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
     """x: (n, ch) float at SR after HPF. Returns {audio, window, candidates, onset_ok, ...}."""
     m = x.mean(axis=1)
-    events, G = find_events(m, sr, plan.creature, plan.whole)
+    events, G = find_events(m, sr, plan.creature, plan.whole or plan.build_up)   # build_up: no next-hit cut
     wins = plan_windows(m, sr, plan, events, G)
     true = [w for w in wins if w.event.true_onset]
     rise = plan.rise_max_ms
@@ -486,7 +492,11 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
     pool = true[:6]
     min_n = int(plan.min_ms * sr / 1000) - int(0.002 * sr)
     flams = {id(w): (None if plan.whole else pre_hit(m, sr, w.event.onset, w.b)) for w in pool}
-    two = {}
+    two, built = {}, {}
+    if plan.build_up:            # the action's own build-up (Q6): recorded, never refused as a flam
+        for k, f in list(flams.items()):
+            if f:
+                built[k], flams[k] = f, None
     if plan.two_part:            # the intended two-part sound: kept, recorded, never refused as a flam
         for k, f in list(flams.items()):
             if f and 20.0 <= f["main_ms"] - f["first_ms"] <= 90.0:
@@ -534,6 +544,7 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
                 + "); giữ để chấm máy, không chọn vào phiên nghe").replace(".", ",").replace("-", "−")
     return {"onset_ok": best.event.true_onset, "usable": reason is None, "audio": y, "window": wj(best),
             "onset_verified": best.event.verified, "onset_note": note, "two_part": two.get(id(best)),
+            "build_up": built.get(id(best)),
             "shaping": shaping, "reason": reason, "pre_hit": flams.get(id(best)),
             "n_events": len(events), "n_true": len(true), "candidates": [wj(w) for w in wins[:8]]}
 
@@ -618,11 +629,12 @@ def _model_id(rec: dict) -> str:
 
 
 def process_record(rec: dict, card: dict, out_dir: Path, *, whole: bool | None = None, notch: bool = False,
-                   rejected: Path | None = None, run: str | None = None, two_part: bool = False) -> dict:
+                   rejected: Path | None = None, run: str | None = None, two_part: bool = False,
+                   build_up: bool = False) -> dict:
     """Process one candidate record (gen/sa3.py or the batch 0b trial). Returns the proc report."""
     from build import chain, dsp, measure
 
-    plan = plan_from_card(card, whole, two_part)
+    plan = plan_from_card(card, whole, two_part, build_up)
     f32 = Path(rec["files"]["f32"]["path"])
     x, sr_in = sf.read(str(f32), always_2d=True, dtype="float64")
     x = dsp.resample(x, sr_in, SR)
@@ -661,7 +673,7 @@ def process_record(rec: dict, card: dict, out_dir: Path, *, whole: bool | None =
         w = res["window"]
         info.update({"window": w, "window_raw_s": w["window_s"], "tail": res["shaping"], "channels": ch,
                      "events": res["n_events"], "true_onsets": res["n_true"], "window_candidates": res["candidates"],
-                     "pre_hit": res.get("pre_hit")})
+                     "pre_hit": res.get("pre_hit"), "build_up": res.get("build_up")})
         steps += [f"window {w['len_ms']:.0f} ms at {w['onset_s']:.3f} s ({w['onset_kind']} onset; {w['why']})",
                   f"exp cap tail from {res['shaping']['knee_ms']:g} ms to -60 dB (cut up to {res['shaping']['max_cut_db']:g} dB)",
                   f"channels {ch['channels']}", rep["summary"]]
@@ -714,7 +726,8 @@ def sources_record(info: dict, rec: dict, variant: int, date: str, tools: dict) 
 
 
 def process_many(records: list[Path], card: dict, out_dir: Path, *, whole: bool | None = None, notch: bool = False,
-                 rejected: Path | None = None, force: bool = False, two_part: bool = False) -> dict:
+                 rejected: Path | None = None, force: bool = False, two_part: bool = False,
+                 build_up: bool = False) -> dict:
     """Process records into out_dir; write SOURCES.json and licences.rows.jsonl for the kept files."""
     from build import ledger, render
     from gen import sa3
@@ -733,7 +746,8 @@ def process_many(records: list[Path], card: dict, out_dir: Path, *, whole: bool 
         if not force and (out_dir / f"{name}.wav").is_file() and (out_dir / f"{name}.proc.json").is_file():
             skipped += 1
             continue
-        info = process_record(rec, card, out_dir, whole=whole, notch=notch, rejected=rejected, two_part=two_part)
+        info = process_record(rec, card, out_dir, whole=whole, notch=notch, rejected=rejected, two_part=two_part,
+                              build_up=build_up)
         if not info.get("onset_ok"):
             rej.append({"candidate": name, "reason": info.get("reason")})
             data.pop(f"{name}.wav", None)
@@ -772,13 +786,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--whole", action="store_true", help="giữ trọn âm tự nhiên (mặc định với sinh vật)")
     ap.add_argument("--notch-comb", action="store_true", help="lọc khấc vạch lược của bộ giải mã (nền)")
     ap.add_argument("--two-part", action="store_true", help="âm hai nhịp có chủ ý (word.load): nhịp nhẹ 20–90 ms trước nhịp chính không bị coi là gõ hai lần")
+    ap.add_argument("--build-up", action="store_true", help="âm hành động có phần tụ lực hay nhiều nhịp (Q6): phần đầu nhỏ hơn không bị coi là gõ hai lần, nhịp sau không cắt cửa sổ; vẫn cắt ở độ dài tối đa của thẻ")
     ap.add_argument("--force", action="store_true", help="xử lý lại file đã có")
     a = ap.parse_args(argv)
     env.apply()
     card = sa3.read_card(a.spec)
     res = process_many(collect_records(a.inputs), card, Path(a.out).expanduser(), whole=True if a.whole else None,
                        notch=a.notch_comb, rejected=Path(a.rejected).expanduser() if a.rejected else None, force=a.force,
-                       two_part=a.two_part)
+                       two_part=a.two_part, build_up=a.build_up)
     print(json.dumps({**res, "rejected": len(res["rejected"])}, ensure_ascii=False))
     for r in res["rejected"]:
         print(f"  loại {r['candidate']}: {r['reason']}")
