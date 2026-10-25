@@ -425,3 +425,64 @@ def test_loop_presets_from_critic_groups():
     assert config.loop_params({"group": "hit_small"})["interval_ms"] == 250
     assert config.loop_params({"group": "unknown", "family": "ban"})["preset"] == "ban"
     assert config.loop_params({"group": "stinger", "family": "nen"})["cents"] == 0
+
+
+def test_an_anchor_never_repeats_a_file_this_batch_offers(tmp_path):
+    """Batch 1c review: the 0a pair 'gun.xung v2 vs v3' came back as an anchor of 1c-ts while v2 was also a labelled card
+    of that session ('Cách game đang phát'): not blind. A pair holding a file that a session of the batch offers is
+    skipped; the session the pair was rated in may hold its files (that is the anchor itself)."""
+    from board.server import pick_anchors
+
+    a, b = tone(tmp_path / "a.wav", 440), tone(tmp_path / "b.wav", 880)
+    c, d = tone(tmp_path / "c.wav", 660), tone(tmp_path / "d.wav", 990)
+
+    def line(item, f1, f2):
+        h1, h2 = session.file_sha(f1), session.file_sha(f2)
+        return {"kind": "rating", "session": "0a-x", "item": item, "id": item, "mode": "hero", "shown": [h1, h2],
+                "stars": {h1: 5, h2: 2}, "files": {h1: [str(f1)], h2: [str(f2)]}}
+    lines = [line("gun", a, b), line("hit", c, d)]
+    assert len(pick_anchors(lines, "1c-ts-1", 2, 3)) == 2
+    only = pick_anchors(lines, "1c-ts-1", 2, 3, {"1c-ts-1": {session.file_sha(a)}, "1c-ts-2": set()})
+    assert [x["id"] for x in only] == ["hit"]
+    assert len(pick_anchors(lines, "1c-ts-1", 2, 3, {"0a-x": {session.file_sha(a)}})) == 2
+
+
+def test_an_opened_session_skips_anchors_the_batch_offers(server):
+    """Batch 1c review, at open time: an earlier pair whose file a session of the same batch offers is left out, even
+    when that other session is not one this board serves (another --batch, or explicit files)."""
+    st, view = call(server, "/api/session/s1")
+    key = view["items"][0]["key"]
+    assert call(server, "/api/rate", {"session": "s1", "item": key, "context": "alone", "device": "headphones",
+                                      "stars": {"A": 5, "B": 1, "C": 3}, "pick": "A"})[0] == 200
+    root, f = server["root"], server["files"]
+    write_session(root, "n1", [{"id": "hit", "candidates": [str(f["a"]), str(f["b"]), str(f["c"])]}], batch="t2")
+    p2 = write_session(root, "n2", [{"id": "bell2", "candidates": [str(f["d"])]}], batch="t2", anchors=1)
+    only = Board(server["review"], sessions=[p2], cache_path=root / "cache2.json")
+    only.ensure_anchors("n2")
+    assert "anchors" not in only.store.load_state("_test", "n2")       # the only earlier pair is offered by n1
+    other = write_session(root, "n1", [{"id": "hit", "candidates": [str(f["d"])]}], batch="t2")
+    assert other.is_file()
+    only.ensure_anchors("n2")
+    assert [a["item"]["id"] for a in only.store.load_state("_test", "n2")["anchors"]] == ["hit"]
+
+
+def test_two_sessions_of_a_batch_draw_different_anchor_pairs(server):
+    """Review fix of 1c: 1c-dh-1 and 1c-dh-2 drew the same 0a pair from a pool of a few. The second session to be
+    opened skips the pairs the first already holds."""
+    root, f = server["root"], server["files"]
+    st, view = call(server, "/api/session/s1")
+    for item, stars in ((view["items"][0]["key"], {"A": 5, "B": 1, "C": 3}),):
+        assert call(server, "/api/rate", {"session": "s1", "item": item, "context": "alone", "device": "headphones",
+                                          "stars": stars, "pick": "A"})[0] == 200
+    write_session(root, "s0", [{"id": "hit2", "candidates": [str(f["a"]), str(f["c"])]}])
+    st, v0 = call(server, "/api/session/s0")
+    assert call(server, "/api/rate", {"session": "s0", "item": v0["items"][0]["key"], "context": "alone",
+                                      "device": "headphones", "stars": {"A": 4, "B": 2}, "pick": "A"})[0] == 200
+    write_session(root, "h1", [{"id": "bell2", "candidates": [str(f["d"])]}], batch="t3", anchors=1)
+    write_session(root, "h2", [{"id": "bell3", "candidates": [str(f["d"])]}], batch="t3", anchors=1)
+    b = server["board"]
+    b.ensure_anchors("h1")
+    b.ensure_anchors("h2")
+    a1 = b.store.load_state("_test", "h1")["anchors"][0]["item"]["anchor_of"]["item"]
+    a2 = b.store.load_state("_test", "h2")["anchors"][0]["item"]["anchor_of"]["item"]
+    assert a1 != a2

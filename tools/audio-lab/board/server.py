@@ -123,8 +123,17 @@ def _anchor_candidates(line: dict) -> list[dict] | None:
     return out
 
 
-def pick_anchors(lines: list[dict], sid: str, n: int, seed: int) -> list[dict]:
-    """§4.6 step 6: re-insert pairs rated in earlier sessions of the same game."""
+def pick_anchors(lines: list[dict], sid: str, n: int, seed: int, batch_files: dict[str, set[str]] | None = None,
+                 taken: set[tuple] | None = None) -> list[dict]:
+    """§4.6 step 6: re-insert pairs rated in earlier sessions of the same game.
+
+    `batch_files`: session -> sha256 of the files it offers, for the sessions of the batch being opened. A pair holding a
+    file that a session of this batch offers (other than the session the pair was rated in) is not a blind anchor: the
+    owner meets that file there, maybe with a label (batch 1c: gun.xung 0a v2, "Cách game đang phát").
+    `taken`: (session, item) of the pairs another session of the batch already holds as anchors (a batch split in two
+    sessions would otherwise draw the same pairs twice from a small pool)."""
+    batch_files = batch_files or {}
+    taken = taken or set()
     latest: dict[tuple, dict] = {}
     for line in lines:
         if line.get("session") == sid or line.get("anchor") or line.get("mode") not in ("hero", "pair"):
@@ -134,8 +143,13 @@ def pick_anchors(lines: list[dict], sid: str, n: int, seed: int) -> list[dict]:
     random.Random(f"{seed}:anchors").shuffle(pool)
     out: list[dict] = []
     for line in pool:
+        if (line.get("session"), line.get("item")) in taken:
+            continue
         cands = _anchor_candidates(line)
         if not cands:
+            continue
+        seen = set().union(*(v for k, v in batch_files.items() if k != line.get("session")))
+        if any(session.file_sha(Path(f)) in seen for c in cands for f in c["files"]):
             continue
         ctx = line.get("context")
         # Opaque key: the page must not be able to tell an anchor from a new item.
@@ -241,7 +255,12 @@ class Board:
                 self.store.save_state(game, sid, state)
                 return
             seed = raw.get("seed") if isinstance(raw.get("seed"), int) else 0
-            picked = pick_anchors(self.store.lines(game), sid, want, seed)
+            files = self._batch_files(game, raw.get("batch"))
+            taken = {(a["item"]["anchor_of"]["session"], a["item"]["anchor_of"]["item"])
+                     for other in files if other != sid
+                     for a in self.store.load_state(game, other).get("anchors") or []
+                     if isinstance(a.get("item"), dict) and a["item"].get("anchor_of")}
+            picked = pick_anchors(self.store.lines(game), sid, want, seed, files, taken)
             if not picked:
                 return                  # nothing rated before: try again on the next open
             rng = random.Random(f"{seed}:anchor-pos")
@@ -249,6 +268,30 @@ class Board:
             state["anchors"] = [{"pos": rng.randint(1, max(1, n)), "item": it} for it in picked]
             self.store.save_state(game, sid, state)
             self._loaded.pop(sid, None)
+
+    def _batch_files(self, game: str, batch) -> dict[str, set[str]]:
+        """Session -> sha256 of its candidate files, for the sessions of one game and batch (what an anchor must not
+        repeat)."""
+        out: dict[str, set[str]] = {}
+        # every session file of the game on disk, not only those this board serves (--batch, explicit files): the
+        # owner may open the other sessions of the batch in another board run
+        paths = {*self.explicit, *sorted((self.review_root / game / "sessions").glob("*.json"))}
+        for path in sorted(paths):
+            try:
+                raw = session.read_raw(path)
+            except session.SessionError:
+                continue
+            if raw.get("game") != game or str(raw.get("batch") or "") != str(batch or ""):
+                continue
+            shas = out.setdefault(raw.get("session") or path.stem, set())
+            for it in raw.get("items") or []:
+                for c in it.get("candidates") or []:
+                    names = c if isinstance(c, str) else (c.get("files") or [c.get("file")])
+                    for n in [names] if isinstance(names, str) else names:
+                        p = session.resolve_path(n, path.parent) if n else None
+                        if p is not None and p.is_file():
+                            shas.add(session.file_sha(p))
+        return out
 
     def sessions(self) -> dict:
         out = []
