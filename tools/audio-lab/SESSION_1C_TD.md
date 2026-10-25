@@ -1,6 +1,6 @@
 # Lô 1c · Lời Gọi: phiên nghe `1c-td` (âm theo hình dạng hành động, Q6)
 
-Khoảng **15–20 phút**. Một phiên, 5 id, 20 bản. Thiết kế: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 7, 11, 12; luật của anh: [`DECISIONS.md`](DECISIONS.md) Q6, Q2 (không mõ chùa). Báo cáo của máy (chỉ đọc sau khi chấm): `~/AudioLab/work/_batch1c/b1c/REPORT.md`.
+Khoảng **19 phút** (dưới giới hạn 20 phút của kế hoạch, kể cả 4 cặp mốc). Một phiên, 5 id, 20 bản. Thiết kế: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 7, 11, 12, 13 (13 là bản dựng lại sau phản biện, 26/10); luật của anh: [`DECISIONS.md`](DECISIONS.md) Q6, Q2 (không mõ chùa). Báo cáo của máy (chỉ đọc sau khi chấm): `~/AudioLab/work/_batch1c/b1c/REPORT.md`.
 
 Không có gì ở đây được đưa vào game. Mọi bản nằm trong `~/AudioLab`.
 
@@ -58,6 +58,8 @@ Gắn nhãn theo Q6:
 | `blast` | 4 | Trong trận thô | Trống nện có thân, giấy và bụi bung, vang làng. Có nổ lách tách hay chất taiko không? Thử "Loa nhỏ" |
 | `call-chop` | 4 | Một mình | Gõ gỗ trầm, chắc vào thân tre. Nghe ra mõ chùa thì gắn `S`. Có bản nào nghe như gõ đúp không? |
 
+- `ink-puff` còn 7/24 bản nguyên khối (trước 17): 10 bản còn đang lên hay còn to ở 240 ms, độ dài tối đa của thẻ, nên không còn chỗ cho đuôi (sửa sau phản biện, Q6_REWRITE 13.2). Phiên có prompt F và H.
+
 ## Bản có nhãn "bị luật chặn"
 
 - Cổng vệ sinh của máy đòi âm va chạm lên tới đỉnh trong 10 ms. Tiếng vút có phần lấy đà (vung tay, kéo dây) lên chậm hơn, nên bị chặn: mọi bản nguyên khối của Phát Chữ, 21/24 bản của Tháp Cung.
@@ -65,7 +67,7 @@ Gắn nhãn theo Q6:
 
 ## Cặp mốc (đo độ nhất quán)
 
-- 4 cặp mốc từ lô 0a, 0b được chèn khi anh mở phiên lần đầu. Bảng không cho biết mục nào là cặp mốc.
+- 4 cặp mốc từ lô 0a, 0b được chèn khi anh mở phiên lần đầu. Bảng không cho biết mục nào là cặp mốc. Cặp nào có bản cũng nằm trong phiên lô 1c thì không được chọn (cặp `call-chop` của 0b).
 - Một id có lẫn bản anh đã chấm ở lô trước. Phiên không ghi là bản nào.
 - Hai thứ này cho máy đo anh có chấm lại giống lần trước không (mục 4.6 bước 6).
 
@@ -91,5 +93,5 @@ Gắn nhãn theo Q6:
 
 - Điểm ghi thêm vào `~/AudioLab/review/typing-defense/ratings.jsonl`.
 - Claude chạy `bash tools/audio-lab/run.sh critic agreement --batch 1c` để đo bản hiệu chỉnh 1 trên dữ liệu mới.
-- Rồi chốt bản gốc của từng id, làm lượt biến thể. Khi đưa vào game, bù mức to của `wordshot-fire.mix` (−23,9 LUFS-M) bằng `gainDb` (Q6_REWRITE 11.3 #6).
+- Rồi chốt bản gốc của từng id, làm lượt biến thể. Khi đưa vào game, bù mức to của `wordshot-fire.mix` (−22,5 LUFS-M sau khi lớp vút được cân mức; trước −23,9) bằng `gainDb` (Q6_REWRITE 13.1).
 - Bản dựng trong bối cảnh và số đo: `~/AudioLab/work/_batch1c/b1c/typing-defense/context/`.

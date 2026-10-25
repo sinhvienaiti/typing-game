@@ -295,12 +295,22 @@ Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mụ
 Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 12. Hướng dẫn nghe: [`SESSION_1C_DH.md`](SESSION_1C_DH.md), [`SESSION_1C_TD.md`](SESSION_1C_TD.md), [`SESSION_1C_TS.md`](SESSION_1C_TS.md). **Chờ chủ dự án nghe.**
 
 - **Ba phiên, lô `1c`:** `1c-dh` (7 id, 26 bản, 3 cặp mốc), `1c-td` (5 id, 20 bản, 4 cặp mốc), `1c-ts` (7 id, 26 bản, 3 cặp mốc). Mỗi bản có bản dựng trong bối cảnh ("Trong trận thô"; Tuyến Cuối "Liên thanh 3 s"): 72 bản dựng.
-- **Làm đủ 5 ý của "Phiên lô 1" ở mục 3 bên dưới:** tai nghe cả phiên; "Lặp" theo nhịp thật (họ lửa và Phát Chữ mỗi 1,5 s); cặp mốc và bản anh đã chấm nằm lẫn, không nhãn; nhắc gắn "rè/lỗi"; `gun.xung` tổng hợp 0a, công thức lô 1 và Stable Audio 3 nguyên khối trong cùng một phiên.
+- **Làm đủ 5 ý của "Phiên lô 1" ở mục 3 bên dưới:** tai nghe cả phiên; "Lặp" theo nhịp thật (họ lửa và Phát Chữ mỗi 1,5 s); cặp mốc và bản anh đã chấm nằm lẫn, không nhãn (trừ `gun.xung` 0a v2: nó mang nhãn "Cách game đang phát", nên không mù và không dùng được làm bản đo độ nhất quán; sửa sau phản biện, mục dưới); nhắc gắn "rè/lỗi"; `gun.xung` tổng hợp 0a, công thức lô 1 và Stable Audio 3 nguyên khối trong cùng một phiên.
 - **Bản bị luật chặn có nhãn** (luật lên 10 ms của tiếng va chạm, luật 30 ms của sinh vật): 15 bản. Điểm của anh cho các bản này là bằng chứng để sửa §4.3.1 (Q6_REWRITE 11.3 #2).
 - **Phát hiện của máy, trước khi anh nghe:**
   - `gun.xung` nguyên khối hổng ở 10 viên mỗi giây: prompt I 20,4 %, K 17,1 % (hướng 2 lô 1: 0,2 %; ngưỡng 10 %). J không có bản nào nghe được.
   - Giọng đọc trượt bài C ở mọi bản dựng, như lô 1 (tốt nhất 6,4 dB, đạt từ 10 dB).
   - Mọi `fire.cast` theo Q6 trượt luật "âm xong từ" (1–4 kHz tăng 4,3–6,0 dB sau 100 ms thay vì tụt 15 dB), vì tiếng gầm tới sau phần khè. Hai luật chỉ hòa được bằng dải tần của phần gầm, hoặc hạ tiếng khi đọc.
+
+### Q6: sửa sau phản biện lô 1c (26/10/2026, máy Mac)
+
+Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 13; changelog `docs/changelog/2026-10-26-audio-lab-batch-1c-review-fix.md`. Hai người kiểm độc lập: **chưa đạt**, 2 lỗi lớn, 11 lỗi nhỏ. Cả hai lỗi lớn làm sai thứ anh sẽ nghe; đã sửa trước khi anh mở phiên (chưa có file trạng thái 1c nào).
+
+- **Thân của công thức nay được cân mức.** Bản Stable Audio 3 ra ở mức lệch nhau tới 26 dB; một độ lợi cho cả lớp làm vài biến thể chỉ còn đầu tiếng Kenney và than (`fire.impact.b-v3`, bản máy xếp đầu, 54 % mẫu dưới −90 dBFS). Mỗi thân được đo sau 40 ms đầu, qua bộ lọc của lớp, rồi đưa về trung vị của bể; bản nhỏ hơn bản to nhất quá 10 dB bị loại, vì nâng 20 dB một tiếng tách vẫn chỉ là tiếng tách. `fire.impact.a`, `.b` nay đạt −20 LUFS-M, không cần bù `gainDb`.
+- **Đuôi hàm mũ không còn cắt vào tiếng chính.** Đường tắt dần bắt đầu sau thân của cửa sổ (trong 6 dB dưới khung to nhất), sau tiếng chính 100 ms ở id tụ lực. Bản mà thân còn kéo tới sát độ dài tối đa của thẻ bị loại ("không còn chỗ cho đuôi"): `fire.cast` mất 10/24 (F 5, H 5: tiếng gầm còn trong 6 dB dưới đỉnh tới 770–890 ms của 900 ms), `hurt.breach` 6/18 (cả prompt D), `ink-puff` 10/24. Đây là chỗ thẻ có thể quá ngắn cho Q6 (việc của làn Specs, mục 13.6).
+- **Luật đuôi L2 (đề xuất bên dưới) đọc đuôi gốc của bản**, không đọc đuôi tổng hợp của bước xử lý. Kết luận cũ "luật đuôi không tách được bản nào" không đo được gì; bỏ.
+- **Phiên dựng lại:** Rồng Giữ Ải và Tuyến Cuối mỗi game hai phiên (mỗi phiên tối đa 10 mục và 20 phút); `fire.cast` có đủ hướng E, G, H; cặp mốc không lặp file mà phiên cùng lô đưa ra (`gun.xung` 0a v2 mang nhãn "Cách game đang phát" nên không mù); điểm máy của mỗi item lấy từ một lần chấm.
+- **Đã chọn theo đề xuất** (luật §2 của process; anh đổi được sau): tách phiên thay cho ghi chỗ lệch 20 phút; cân mức thân về trung vị, loại bản nhỏ quá 10 dB; loại bản không còn chỗ cho đuôi thay cho gắn nhãn; nhãn "đuôi rút vừa thẻ" chỉ cho 4 id tụ lực.
 
 ### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
 
@@ -387,8 +397,9 @@ Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mụ
    Phiên lô 1 (25/10) và lô 1c (25/10, khuya) đã làm đủ 5 ý này. Chưa phiên nào được chấm.
 4. ~~**Chờ chủ dự án xác nhận**~~ **Đã chọn theo đề xuất** (luật §2 của `docs/CLAUDE_PROCESS_2026-10-24.md`, 25/10 khuya; chủ dự án đổi được sau). Các đề xuất của vòng 25/10, ghi ở "Q6: sửa sau review lần 2", giữ như đang có trong thẻ: `gun.xung` bỏ cả F; `wordshot-fire` tắt `critic.loop_eval`; các chọn lựa của 14 thẻ S1 Tuyến Cuối (nhịp lặp theo `guns.ts`, `hit.armour` là Trúng nhỏ, `gun.ray.charge` không đuôi, prompt mới của `shield.hit`, nhóm và nguồn của `shield.break`, `rift.open`, `rift.warn`).
 5. **Lô 1c (25/10, Mac), việc kế** (`Q6_REWRITE` mục 11.6, 12.6):
-   - ~~dựng bản trong bối cảnh và phiên nghe `SESSION_1C_*`~~: đã làm (mục 12). **Chờ chủ dự án nghe** `1c-dh`, `1c-td`, `1c-ts`;
-   - sau phiên: `critic agreement --batch 1c`, chốt bản, lượt biến thể, bù `gainDb` cho 5 công thức dưới −20 LUFS-M;
+   - ~~dựng bản trong bối cảnh và phiên nghe `SESSION_1C_*`~~: đã làm (mục 12), dựng lại sau phản biện (mục 13). **Chờ chủ dự án nghe** `1c-dh-1`, `1c-dh-2`, `1c-td`, `1c-ts-1`, `1c-ts-2`;
+   - sau phiên: `critic agreement --batch 1c`, chốt bản, lượt biến thể, bù `gainDb` cho bom (−24,4 LUFS-M) và `wordshot-fire.mix` (−22,5); `hit.t4` −20,1 chỉ thiếu 0,1 dB. Trước phản biện là 5 công thức: `fire.impact.a/b` thiếu vì thân mỏng, không vì thẻ;
+   - thẻ có thể quá ngắn cho Q6 (làn Specs): `fire.cast` 900 ms (F, H gầm tới 770–890 ms), `hurt.breach` 960 ms (D), `ink-puff` 240 ms (E, G, H còn đang lên lúc bị cắt);
    - đề xuất lớp đầu tiếng cho `impact.multi`, `arrow-fire`, `wordshot-fire` (cần sửa §4.3.1 của kế hoạch), dựa trên điểm anh cho 15 bản có nhãn "bị luật chặn";
    - `gun.xung` nguyên khối hổng 17–20 % ở 10 viên mỗi giây: nếu anh thích chất tiếng I hay K, dựng công thức thân 1c cộng lớp đuôi của lô 1;
    - đòn bẩy cho bản Tuyến Cuối kêu từ mẫu đầu: `kill.elite` 21/24, `hit.t2` 15/22, `hit.t1` 14/23 bản có đầu tiếng chưa xác minh;

@@ -41,3 +41,7 @@ Chi tiết và số đo: `tools/audio-lab/Q6_REWRITE_2026-10-24.md` §12 và `DE
 - Chủ dự án nghe `1c-dh`, `1c-td`, `1c-ts`, rồi các phiên lô 1 có id chỉ còn ở lô 1.
 - Sau phiên: `critic agreement --batch 1c`, lớp đầu tiếng cho id bị luật chặn (§4.3.1), chốt bản, bù `gainDb`.
 - Người điều phối: thêm dòng vào `docs/changelog/README.md` và dòng làn âm trong `docs/CLAUDE_PROCESS_2026-10-24.md`.
+
+## Sửa sau phản biện
+
+Phản biện độc lập (26/10): **chưa đạt**, 2 lỗi lớn (thân `fire.impact.b`, `.a` không cân mức; đuôi hàm mũ cắt vào tiếng chính của id tụ lực), 11 lỗi nhỏ (phiên quá 20 phút, `gun.xung` 0a v2 có nhãn nên không mù, `fire.cast` thiếu hướng G và H, điểm của hai lần chấm trong một item, đường xuất trùng của `hurt.breach`, còi trước tiếng nổ ở `hurt.breach-v4`, `step_recipes` ghi file trước khi dựng, chữ "đề xuất" của Q3, "16 phiên cũ", thứ tự bằng chứng, `tmp/` không gitignore). Cả 13 mục và cách sửa: [`2026-10-26-audio-lab-batch-1c-review-fix.md`](2026-10-26-audio-lab-batch-1c-review-fix.md); số đo ở `tools/audio-lab/Q6_REWRITE_2026-10-24.md` §13. Ba phiên `1c-dh`, `1c-td`, `1c-ts` ở trên đã được thay bằng năm phiên `1c-dh-1`, `1c-dh-2`, `1c-td`, `1c-ts-1`, `1c-ts-2`; phiên cũ cất vào `sessions/_superseded/`.

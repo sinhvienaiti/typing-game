@@ -1,6 +1,6 @@
-# Lô 1c · Tuyến Cuối: phiên nghe `1c-ts` (âm theo hình dạng hành động, Q6)
+# Lô 1c · Tuyến Cuối: phiên nghe `1c-ts-1`, `1c-ts-2` (âm theo hình dạng hành động, Q6)
 
-Khoảng **20–25 phút**. Một phiên, 7 id, 26 bản. Thiết kế: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 7, 11, 12; luật của anh: [`DECISIONS.md`](DECISIONS.md) Q6; bài thử súng liên thanh: [`BATCH1_BRIEF.md`](BATCH1_BRIEF.md) mục 3. Báo cáo của máy (chỉ đọc sau khi chấm): `~/AudioLab/work/_batch1c/b1c/REPORT.md`.
+Hai phiên, mỗi phiên dưới 20 phút: **`1c-ts-1`** khoảng 13 phút (4 id, 16 bản), **`1c-ts-2`** khoảng 9 phút (3 id, 10 bản). Thiết kế: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 7, 11, 12, 13 (13 là bản dựng lại sau phản biện, 26/10); luật của anh: [`DECISIONS.md`](DECISIONS.md) Q6; bài thử súng liên thanh: [`BATCH1_BRIEF.md`](BATCH1_BRIEF.md) mục 3. Báo cáo của máy (chỉ đọc sau khi chấm): `~/AudioLab/work/_batch1c/b1c/REPORT.md`.
 
 Không có gì ở đây được đưa vào game. Mọi bản nằm trong `~/AudioLab`.
 
@@ -10,8 +10,8 @@ Không có gì ở đây được đưa vào game. Mọi bản nằm trong `~/Au
 pnpm audio:board --game typing-survival --batch 1c --open
 ```
 
-- Phiên **`1c-ts`**: 7 id, thêm **3 cặp mốc** lấy từ lô 0a, 0b (anh không cần biết cặp nào). Tổng 10 mục, đúng giới hạn 10 id mỗi phiên của kế hoạch (mục 7).
-- Thứ tự: súng trước, vì mọi id khác nghe trên nền súng đang bắn; rồi ba bậc trúng, hạ quái, báo nguy.
+- Bảng hiện cả hai phiên. **`1c-ts-1`** trước: súng, vì mọi id khác nghe trên nền súng đang bắn, rồi ba bậc trúng. **`1c-ts-2`** sau: hạ quái, báo nguy.
+- `1c-ts-1` thêm **2 cặp mốc** lấy từ lô 0a, 0b (anh không cần biết cặp nào). `1c-ts-2` không có cặp mốc: Tuyến Cuối chỉ có 5 cặp đã chấm; 3 cặp có một bản cũng nằm trong phiên 1c (nên không mù), 2 cặp còn lại đã ở `1c-ts-1`. Mỗi phiên tối đa 10 mục và 20 phút (kế hoạch mục 7).
 - Thẻ ảnh và số đo của máy chỉ mở khi chấm xong cả phiên. Mệt thì dừng: bảng nhớ chỗ đang nghe.
 
 ## Nghe gì: bốn phần của Q6
@@ -53,29 +53,32 @@ Gắn nhãn theo Q6:
 
 ## Từng id
 
-| Id | Số bản | Mở đầu | Câu hỏi |
-|---|---|---|---|
-| `gun.xung` | 4 | Liên thanh 3 s | Mỗi bản là một bộ phát (bộ nặng và bộ nhẹ xen nhau). Một bản là hướng 2 của lô 1 (khóa nòng, thân, đuôi ghép); hai bản là Stable Audio 3 nguyên khối của lô 1c (prompt I và K, bộ nhẹ là chính các bản đó phát nhỏ hơn 5 dB); một bản ghi "Cách game đang phát". Có nghe thành **một loạt liền, có lực** không, hay rời từng phát (`J`)? |
-| `hit.t1` | 4 | Liên thanh 3 s | Đạn trúng vỏ thép, tới 10 lần mỗi giây: keng giòn, thân gọn, đuôi hành lang ngắn. Có che tiếng súng hay giọng đọc không? |
-| `hit.t2` | 4 | Liên thanh 3 s | Chí mạng: nặng hơn `hit.t1`, lớp trầm chỉ ở dưới. Có "gõ đúp" không? |
-| `hit.t4` | 4 | Liên thanh 3 s | Đòn lớn: dầm thép ngân dài dọc hành lang. To và dài hơn `hit.t2` rõ chưa? |
-| `kill.swarm` | 3 | Liên thanh 3 s | Quái kim loại vỡ, hàng trăm lần mỗi trận. Hướng "vỡ có vang": bản Stable Audio 3 mới, và công thức của lô 1. Có chói, có mỏng, lặp có mệt không? |
-| `kill.elite` | 3 | Liên thanh 3 s | Lính tinh nhuệ nổ: thép xé, nổ trầm có thân, tia điện, mảnh rơi. Đuôi có bị cụt đột ngột không? |
-| `hurt.breach` | 4 | Trong trận thô | Báo nguy: nổ trầm có thân, thép rên, còi hai nốt, vang dội hành lang. Khác hẳn tiếng trúng, đủ rõ để biết tuyến vừa bị phá không? |
+| Phiên | Id | Số bản | Mở đầu | Câu hỏi |
+|---|---|---|---|---|
+| `1c-ts-1` | `gun.xung` | 4 | Liên thanh 3 s | Mỗi bản là một bộ phát (bộ nặng và bộ nhẹ xen nhau). Một bản là hướng 2 của lô 1 (khóa nòng, thân, đuôi ghép); hai bản là Stable Audio 3 nguyên khối của lô 1c (prompt I và K, bộ nhẹ là chính các bản đó phát nhỏ hơn 5 dB); một bản ghi "Cách game đang phát". Có nghe thành **một loạt liền, có lực** không, hay rời từng phát (`J`)? |
+| `1c-ts-1` | `hit.t1` | 4 | Liên thanh 3 s | Đạn trúng vỏ thép, tới 10 lần mỗi giây: keng giòn, thân gọn, đuôi hành lang ngắn. Có che tiếng súng hay giọng đọc không? |
+| `1c-ts-1` | `hit.t2` | 4 | Liên thanh 3 s | Chí mạng: nặng hơn `hit.t1`, lớp trầm chỉ ở dưới. Có "gõ đúp" không? |
+| `1c-ts-1` | `hit.t4` | 4 | Liên thanh 3 s | Đòn lớn: dầm thép ngân dài dọc hành lang. To và dài hơn `hit.t2` rõ chưa? |
+| `1c-ts-2` | `kill.swarm` | 3 | Liên thanh 3 s | Quái kim loại vỡ, hàng trăm lần mỗi trận. Hướng "vỡ có vang": bản Stable Audio 3 mới, và công thức của lô 1. Có chói, có mỏng, lặp có mệt không? |
+| `1c-ts-2` | `kill.elite` | 3 | Liên thanh 3 s | Lính tinh nhuệ nổ: thép xé, nổ trầm có thân, tia điện, mảnh rơi. Đuôi có bị cụt đột ngột không? |
+| `1c-ts-2` | `hurt.breach` | 4 | Trong trận thô | Báo nguy: nổ trầm có thân, thép rên, còi hai nốt, vang dội hành lang. Khác hẳn tiếng trúng, đủ rõ để biết tuyến vừa bị phá không? Còi có vào ngay trên tiếng nổ không? Một bản có nhãn "đuôi rút vừa thẻ": âm gốc còn kêu ở 960 ms, độ dài tối đa của thẻ, nên máy rút đuôi cho vừa; thấy đuôi cụt thì đó là bằng chứng thẻ quá ngắn |
 
 - Prompt J của súng không có trong phiên: 6/6 bản kêu ngay từ mẫu đầu (đầu tiếng chưa xác minh), 5 bản còn bị luật đầu tiếng chặn.
+- `hurt.breach` prompt D không có bản nguyên khối trong phiên: 6/6 bản còn to tới sát 960 ms, không còn chỗ cho đuôi (sửa sau phản biện, Q6_REWRITE 13.2).
+- **Vì sao hai phiên** (sửa sau phản biện): một phiên 7 id, 26 bản và 3 cặp mốc mất khoảng 20–25 phút, vượt giới hạn 20 phút của kế hoạch.
 - Nhiều bản trúng, hạ quái của lô 1c cũng kêu ngay từ mẫu đầu và không được đưa vào phiên (`kill.elite` 21/24, `hit.t2` 15/22, `hit.t1` 14/23; Q6_REWRITE 11.3 #3). Vì vậy `kill.elite` chủ yếu là công thức.
 
 ## Cặp mốc (đo độ nhất quán)
 
-- 3 cặp mốc từ lô 0a, 0b được chèn khi anh mở phiên lần đầu. Bảng không cho biết mục nào là cặp mốc.
+- 2 cặp mốc từ lô 0a, 0b được chèn vào `1c-ts-1` khi anh mở phiên lần đầu. Bảng không cho biết mục nào là cặp mốc.
 - Vài id có lẫn bản anh đã chấm ở lô trước, hoặc bản cũng nằm trong phiên S1, S4 của lô 1. Phiên không ghi là bản nào.
+- Bản "Cách game đang phát" của súng (0a v2, anh chấm 4/5) mang nhãn, nên **không** dùng để đo độ nhất quán; cặp 0a của súng có bản này cũng không được chọn làm cặp mốc.
 - Hai thứ này cho máy đo anh có chấm lại giống lần trước không (mục 4.6 bước 6).
 
 ## Thiết bị
 
 - Nghe cả phiên bằng **tai nghe** (hộp đầu phiên: phím `1`).
-- Rồi mở lại phiên bằng **loa** (`2`), chỉ cho `gun.xung`: lực của súng phải nghe được trên loa nhỏ.
+- Rồi mở lại `1c-ts-1` bằng **loa** (`2`), chỉ cho `gun.xung`: lực của súng phải nghe được trên loa nhỏ.
 - Chỉnh âm lượng máy ở id đầu, giữ nguyên tới hết.
 - Nghe thấy lỗi thì gắn **"rè/lỗi"** (`R`). Chưa lượt chấm nào có nhãn này; nó là dữ liệu duy nhất để chỉnh bộ dò lỗi của máy (L1b).
 
@@ -89,11 +92,11 @@ Gắn nhãn theo Q6:
 | `1-ts-s4` (chưa chấm) | `kill.swarm`, `kill.elite`, `hurt.breach` | Có: sinh lại theo Q6 | Chỉ còn để đo máy |
 | `1-ts-s4` (chưa chấm) | `word.load`, `word.perfect`, `gun.tia.pulse` | Không | Chỉ có ở S4 |
 
-**Thứ tự đề xuất:** `1c-ts` trước, rồi S1 (nền, đuôi súng, mức nền), rồi S4.
+**Thứ tự đề xuất:** `1c-ts-1`, `1c-ts-2`, rồi S1 (nền, đuôi súng, mức nền), rồi S4.
 
 ## Sau phiên
 
 - Điểm ghi thêm vào `~/AudioLab/review/typing-survival/ratings.jsonl`.
 - Claude chạy `bash tools/audio-lab/run.sh critic agreement --batch 1c` để đo bản hiệu chỉnh 1 trên dữ liệu mới, rồi chốt hướng súng, bản gốc của từng id và làm lượt biến thể.
-- Khi đưa vào game, bù mức to của `hit.t4` (−22,9 LUFS-M) bằng `gainDb` (Q6_REWRITE 11.3 #6).
+- `hit.t4` nay đạt −20,1 LUFS-M sau khi thân được cân mức (trước −22,9; Q6_REWRITE 13.1), gần như không cần bù `gainDb`.
 - Bản dựng trong bối cảnh và số đo: `~/AudioLab/work/_batch1c/b1c/typing-survival/context/`.
