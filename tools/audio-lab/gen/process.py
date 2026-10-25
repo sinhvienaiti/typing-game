@@ -20,9 +20,13 @@ Per candidate: <out>/<name>.wav (PCM 24-bit) and <name>.proc.json. <out>/SOURCES
 record per file (a `gen` layer with the raw clip test of the float copy window) for
 `critic run --sources`, and <out>/licences.rows.jsonl the model and licence rows. A candidate with
 no true onset, whose first shot is shorter than the card's min before the next one, or whose window
-opens on a weak first hit before the main one (a flam), goes to the rejected folder, with the reason. Raw files are never touched.
+opens on a weak first hit before the main one (a flam), or whose main sound is still rising or loud where the card's
+max cuts it (no room for a tail after it), goes to the rejected folder, with the reason. Raw files are never touched.
 --build-up (DECISIONS Q6): an action shaped as build-up then release (a huff before the flame, a fuse before the boom,
-several flare-ups of one strike) keeps its weaker first part and its later hits; the window is still capped at the card's max.
+several flare-ups of one strike) keeps its weaker first part and its later hits; the window is still capped at the card's
+max, and the tail cap starts 100 ms after the window's loudest part (the main sound), never on it.
+The tail cap of every window starts after its body (the last frame, 10 % of the window and 10-50 ms long, within
+6 dB of its loudest frame).
 """
 from __future__ import annotations
 
@@ -427,6 +431,61 @@ class Window:
     score: float = 0.0
     critic_attack_ms: float | None = None
     shaping: dict = field(default_factory=dict)
+    room_ok: bool = True
+
+
+# Exponential tail cap of a window the card's max (or the next event) cuts (batch 1c review, Q6): the line starts
+# after the window's MAIN sound, never before it. With a build-up (a huff, a fuse, several flare-ups) the loudest
+# part comes late: a knee at 35 % of the window turned the flame or the boom down by 8-27 dB. The main sound keeps
+# its own decay for TAIL_HOLD_MS (build-up ids; plain sounds 10 % of the window, at most that) and to the end of its
+# body (body_end), and the window must leave the cap at least TAIL_ROOM_FRAC of its length (TAIL_ROOM_MIN_MS at least)
+# after the knee; else the sound is still rising or loud where the card cuts it (a swell or a roar past the card's
+# max), which no tail shape can save: refused, with the reason.
+TAIL_HOLD_MS = 100.0
+TAIL_ROOM_FRAC = 0.2
+TAIL_ROOM_MIN_MS = 50.0
+# a sound already this far under its peak where the window ends decays on its own there: no room needed
+# (impact.multi A s3004 of batch 1c: a late flare-up, then -35 dB at the card's max)
+TAIL_ROOM_END_DB = -30.0
+
+
+def main_index(y: np.ndarray, sr: int, win_ms: float = 10.0) -> int:
+    """Sample at the centre of the loudest `win_ms` of a window (the main sound)."""
+    m = y if y.ndim == 1 else y.mean(axis=1)
+    w = max(1, min(m.size, int(win_ms * sr / 1000)))
+    c = np.concatenate([[0.0], np.cumsum(m ** 2)])
+    hop = max(1, int(0.001 * sr))
+    st = np.arange(0, max(1, m.size - w + 1), hop)
+    return int(st[int(np.argmax(c[st + w] - c[st]))] + w // 2)
+
+
+def tail_room_need(n: int, sr: int) -> int:
+    return int(max(TAIL_ROOM_MIN_MS * sr / 1000, TAIL_ROOM_FRAC * n))
+
+
+# The main sound is a body, not one loud instant: fire.cast E s3005 peaks at 145 ms (the flame catching) and stays
+# within 1-3 dB of that until 450 ms; fire.impact.c and kill.elite carry their blast for 200-400 ms. The cap starts where
+# the body ends: the centre of the last frame within BODY_DB of the window's loudest frame (a later flare-up of
+# impact.multi counts too). The frame is 10 % of the window, 10 to 50 ms: a 10 ms peak sits a few dB over the body the
+# ear hears, so a 10 ms frame still cut kill.elite and gun.xung bodies by up to 20 dB; a 96 ms hit needs a short one.
+# Measured on batch 1c (Apple M4, Q6_REWRITE §13): a plain hit's body ends inside the 35 % knee of batch 0b, so its
+# knee does not move.
+BODY_DB = 6.0
+BODY_WIN_MS = (10.0, 50.0)
+
+
+def body_end(y: np.ndarray, sr: int, drop_db: float = BODY_DB) -> int:
+    """Centre of the last frame of a window within `drop_db` of its loudest frame (frame: 10 % of the window,
+    BODY_WIN_MS bounds)."""
+    m = y if y.ndim == 1 else y.mean(axis=1)
+    lo, hi = BODY_WIN_MS
+    win_ms = float(np.clip(0.1 * m.size / sr * 1000, lo, hi))
+    w = max(1, min(m.size, int(win_ms * sr / 1000)))
+    c = np.concatenate([[0.0], np.cumsum(m ** 2)])
+    hop = max(1, int(0.001 * sr))
+    st = np.arange(0, max(1, m.size - w + 1), hop)
+    e = 10 * np.log10((c[st + w] - c[st]) / w + 1e-20)
+    return int(st[np.flatnonzero(e >= e.max() - drop_db)[-1]] + w // 2)
 
 
 def plan_windows(m: np.ndarray, sr: int, plan: Plan, events: list[Event], G: float) -> list[Window]:
@@ -468,14 +527,26 @@ def render_window(x: np.ndarray, sr: int, w: Window, plan: Plan) -> tuple[np.nda
     pre = w.event.onset - w.a
     y = fade_in(y, max(pre, int(0.0003 * sr)))
     n = y.shape[0]
-    first = w.event.first_peak - w.a
-    if w.capped:
-        knee = max(first + int(0.005 * sr), int(0.35 * n))
-    else:
-        knee = max(first + int(0.005 * sr), int(0.6 * n))
+    main = main_index(y, sr)
+    # the event's first loud point can lie past the window (a sound still rising where the card cuts it)
+    first = min(w.event.first_peak - w.a, main)
+    knee = max(first + int(0.005 * sr), int((0.35 if w.capped else 0.6) * n))
+    hold_ms = TAIL_HOLD_MS if plan.build_up else min(TAIL_HOLD_MS, 0.1 * n / sr * 1000)
+    knee = max(knee, main + int(hold_ms * sr / 1000))
+    body = body_end(y, sr)
+    knee = max(knee, body)
     if plan.whole:
         knee = max(knee, int(0.85 * n))
+    room, need = n - knee, tail_room_need(n, sr)
     y, info = cap_tail(y, sr, knee, -60.0)
+    info.update({"main_ms": round(main / sr * 1000, 1),
+                 "body_end_ms": round(body / sr * 1000, 1),
+                 "tail_room_ms": round(max(0, room) / sr * 1000, 1),
+                 "tail_room_need_ms": round(need / sr * 1000, 1),
+                 # a window that ends on the sound's own decay needs no room; one the card or the next event cuts
+                 # while it still sounds does
+                 "tail_room_ok": bool(plan.whole or not w.capped or room >= need
+                                      or info["natural_end_db"] <= TAIL_ROOM_END_DB)})
     return y, info
 
 
@@ -487,8 +558,9 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
     true = [w for w in wins if w.event.true_onset]
     rise = plan.rise_max_ms
     for w in true[:6]:
-        y, _ = render_window(x, sr, w, plan)
+        y, sh = render_window(x, sr, w, plan)
         w.critic_attack_ms = round(_critic_attack_ms(y, sr), 2)
+        w.room_ok = sh["tail_room_ok"]
     pool = true[:6]
     min_n = int(plan.min_ms * sr / 1000) - int(0.002 * sr)
     flams = {id(w): (None if plan.whole else pre_hit(m, sr, w.event.onset, w.b)) for w in pool}
@@ -507,7 +579,8 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
 
     if pool:
         ok = (lambda w: rise is None or plan.whole or (w.critic_attack_ms or 0) <= rise)
-        best = max(pool, key=lambda w: (long_enough(w), flams[id(w)] is None, w.event.verified, ok(w), w.score))
+        best = max(pool, key=lambda w: (long_enough(w), w.room_ok, flams[id(w)] is None, w.event.verified, ok(w),
+                                        w.score))
     else:
         best = wins[0] if wins else None
     if best is None:
@@ -524,7 +597,8 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
                 "peak_rel_db": round(ev.peak_db - G, 2), "attack_ms_est": round(ev.attack_ms, 2),
                 "natural_ms": round((ev.end - ev.onset) / sr * 1000, 1), "end_kind": ev.end_kind,
                 "window_s": [round(w.a / sr, 5), round(w.b / sr, 5)], "len_ms": round((w.b - w.a) / sr * 1000, 1),
-                "capped": w.capped, "why": w.reason, "score": w.score, "critic_attack_ms": w.critic_attack_ms}
+                "capped": w.capped, "why": w.reason, "score": w.score, "critic_attack_ms": w.critic_attack_ms,
+                "tail_room_ok": w.room_ok}
 
     reason = None
     if not best.event.true_onset:
@@ -536,6 +610,11 @@ def process_oneshot(x: np.ndarray, sr: int, plan: Plan) -> dict:
         f = flams[id(best)]
         reason = (f"gõ hai lần: tiếng nhỏ ở {f['first_ms']:g} ms ({f['first_db']:g} dB) rồi tiếng chính ở "
                   f"{f['main_ms']:g} ms; cắt vào tiếng chính sẽ cắt giữa đuôi tiếng đầu")
+    elif not shaping["tail_room_ok"]:
+        reason = (f"không còn chỗ cho đuôi: tiếng chính ở {shaping['main_ms']:g} ms, cửa sổ {(best.b - best.a) / sr * 1000:.0f} ms "
+                  f"(tối đa của thẻ {plan.max_ms:g} ms) chỉ còn {shaping['tail_room_ms']:g} ms sau tiếng chính, cần "
+                  f"{shaping['tail_room_need_ms']:g} ms; âm còn đang lên hay còn to ({shaping['natural_end_db']:g} dB) "
+                  f"chỗ bị cắt").replace(".", ",").replace("-", "−")
     note = None
     if reason is None and not best.event.verified:
         ev = best.event

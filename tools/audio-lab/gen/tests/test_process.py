@@ -233,7 +233,9 @@ def test_flutter_inside_one_whoosh_is_not_a_second_hit():
     rng = np.random.default_rng(5)
     n = int(0.6 * SR)
     t = np.arange(n) / SR
-    env = np.minimum(1.0, t / 0.004) * np.exp(-t / 0.5)
+    # decays 6 dB in 140 ms (batch 1c review: a whoosh still within 6 dB of its peak where the card's max cuts it has
+    # no room for a tail and is refused; tau 0.5 s here was such a whoosh)
+    env = np.minimum(1.0, t / 0.004) * np.exp(-t / 0.2)
     gate = np.ones(n)
     a = int(0.080 * SR)
     gate[a:a + int(0.011 * SR)] = 0.02                      # 11 ms flutter: the 10 ms level dips > 12 dB briefly
@@ -352,3 +354,102 @@ def test_build_up_keeps_a_huff_before_the_flame_and_later_bursts():
     assert res["usable"] and res["pre_hit"] is None and res["build_up"]["main_ms"] >= 150, res["reason"]
     assert w["onset_s"] < 0.012 and w["end_kind"] != "next-hit"
     assert 600 <= w["len_ms"] <= 900, w
+
+
+def test_tail_cap_starts_after_the_main_sound_of_a_build_up():
+    """Batch 1c review (Q6): with a build-up the loudest part comes late (the flame at ~460 ms of a 900 ms window).
+    The cap used to start at 35 % of the window (315 ms) and turned the flame down by 13 dB; it now starts 100 ms
+    after the window's main sound, which keeps its level."""
+    rng = np.random.default_rng(11)
+    x = np.zeros(int(2.0 * SR))
+    h, f = int(0.010 * SR), int(0.450 * SR)
+    t = np.arange(int(0.12 * SR)) / SR
+    x[h:h + t.size] += 0.12 * rng.standard_normal(t.size) * np.exp(-t / 0.04)          # the huff
+    x[h:f] += 0.08 * rng.standard_normal(f - h)                                         # the breath into the flame
+    n = int(1.4 * SR)                                                                   # flame and roar, long tail
+    x[f:f + n] += rng.standard_normal(n) * np.exp(-np.arange(n) / SR / 0.2)
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=750, min_ms=600, max_ms=900, build_up=True)
+    res = P.process_oneshot(x[:, None], SR, p)
+    sh, w = res["shaping"], res["window"]
+    assert res["usable"] and w["capped"], res["reason"]
+    assert abs(sh["main_ms"] - 450) < 30 and sh["knee_ms"] >= sh["main_ms"] + 99, sh
+    assert sh["tail_room_ok"] and sh["tail_room_ms"] >= sh["tail_room_need_ms"]
+    # the main sound is untouched: same level in the processed window as in the raw one (before normalising)
+    a = int(round(w["window_s"][0] * SR))
+    y = res["audio"]
+    raw = x[a:a + y.shape[0]]
+    k = int(sh["main_ms"] * SR / 1000)
+    seg = slice(k - int(0.01 * SR), k + int(0.05 * SR))
+    assert np.allclose(y[seg, 0], raw[seg], atol=1e-9)
+    # the old knee (35 % of the window) would have cut into it
+    assert int(0.35 * y.shape[0]) < k
+
+
+def test_a_sound_still_loud_where_the_card_cuts_it_is_refused():
+    """A swell whose loudest part sits at the end of the card's window (ink-puff H s3003 of batch 1c: the next sound at
+    240 ms, still -9 dB there) has no room for a tail: the cap used to end it with a 2 ms fade. Refused, with the
+    reason; a plain hit with the same window keeps its knee at 35 % of it."""
+    t = np.arange(int(0.6 * SR)) / SR
+    swell = np.sin(2 * np.pi * 600 * t) * np.minimum(1.0, t / 0.23) * np.exp(-np.maximum(0, t - 0.23) / 0.1)
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=200, min_ms=160, max_ms=240)
+    res = P.process_oneshot(swell[:, None], SR, p)
+    assert not res["usable"] and "không còn chỗ cho đuôi" in res["reason"], res["reason"]
+    assert res["window"]["tail_room_ok"] is False
+    hit = np.sin(2 * np.pi * 600 * t) * np.exp(-t / 0.12)
+    ok = P.process_oneshot(hit[:, None], SR, p)
+    assert ok["usable"] and ok["window"]["capped"]
+    # its knee: 35 % of the window, or the end of its body (within 6 dB of the peak: 83 ms + half its 24 ms frame)
+    sh = ok["shaping"]
+    assert abs(sh["knee_ms"] - max(0.35 * ok["window"]["len_ms"], sh["body_end_ms"])) < 1.5, sh
+    assert 85 <= sh["body_end_ms"] <= 100, sh
+
+
+def test_tail_cap_starts_after_the_body_not_the_loudest_instant():
+    """Batch 1c review (fire.cast E s3005): the flame catches at ~145 ms and stays within 1-3 dB of it until ~450 ms,
+    then decays past the card's 900 ms. The loudest 10 ms is early, so a knee at 35 % (315 ms) cut the flame's body by
+    10 dB at 350 ms. The cap now starts where the body (within 6 dB of the loudest 10 ms) ends."""
+    rng = np.random.default_rng(5)
+    n = int(2.0 * SR)
+    t = np.arange(n) / SR
+    env_ = np.where(t < 0.145, 0.05 + 0.95 * t / 0.145, np.where(t < 0.45, 0.85 + 0.15 * np.cos(40 * t) ** 2,
+                                                                  0.9 * np.exp(-(t - 0.45) / 0.35)))
+    x = rng.standard_normal(n) * env_
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=750, min_ms=600, max_ms=900, build_up=True)
+    res = P.process_oneshot(x[:, None], SR, p)
+    sh, w = res["shaping"], res["window"]
+    assert res["usable"] and w["capped"], res["reason"]
+    assert sh["body_end_ms"] >= 430 and sh["knee_ms"] >= sh["body_end_ms"], sh
+    a = int(round(w["window_s"][0] * SR))
+    y = res["audio"][:, 0]
+    seg = slice(int(0.30 * SR) - a, int(0.42 * SR) - a)
+    raw = x[a:a + y.size]
+    assert np.allclose(y[seg], raw[seg], atol=1e-9)                                 # the body is untouched
+    assert sh["tail_room_ok"] and sh["tail_room_ms"] >= sh["tail_room_need_ms"]
+
+
+def test_a_roar_still_in_its_body_where_the_card_cuts_it_is_refused():
+    """A flame that stays within 6 dB of its peak to 800 ms of a 900 ms card (fire.cast F s3001, s3003, s3005 of batch
+    1c): the cap would fade the roar itself in its last 100 ms ('tắt nhanh'). Refused: the take does not fit the card."""
+    rng = np.random.default_rng(6)
+    n = int(2.0 * SR)
+    t = np.arange(n) / SR
+    env_ = np.where(t < 0.1, 0.1 + 0.9 * t / 0.1, np.where(t < 0.85, 1.0, np.exp(-(t - 0.85) / 0.3)))
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=750, min_ms=600, max_ms=900, build_up=True)
+    res = P.process_oneshot((rng.standard_normal(n) * env_)[:, None], SR, p)
+    assert not res["usable"] and "không còn chỗ cho đuôi" in res["reason"], res["reason"]
+
+
+def test_a_late_flare_up_that_has_decayed_at_the_cut_keeps_its_window():
+    """impact.multi A s3004 of batch 1c: a second flare-up within 6 dB of the first late in the window, then its own
+    decay to -35 dB where the card's max cuts it. Little room after the body, but the sound has decayed: kept."""
+    rng = np.random.default_rng(8)
+    n = int(2.0 * SR)
+    t = np.arange(n) / SR
+    flare = np.where(t < 0.56, np.clip((t - 0.50) / 0.06, 0, 1), np.exp(-np.maximum(0, t - 0.56) / 0.03))
+    env_ = np.exp(-t / 0.15) + 0.7 * flare                    # the flare swells in, so it is not a second event
+    p = plan(onset_class="other", rise_max_ms=None, target_ms=600, min_ms=450, max_ms=690, build_up=True)
+    res = P.process_oneshot((rng.standard_normal(n) * env_)[:, None], SR, p)
+    sh = res["shaping"]
+    assert res["window"]["capped"] and sh["body_end_ms"] >= 560, sh
+    assert sh["tail_room_ms"] < sh["tail_room_need_ms"] and sh["natural_end_db"] <= P.TAIL_ROOM_END_DB, sh
+    assert res["usable"] and sh["tail_room_ok"], res["reason"]
