@@ -208,6 +208,22 @@ Test audio-lab trên Dell:
   - làn B (việc khác): 012 → 011.
   - Xem trạng thái ở `docs/CODEX_QUEUE.md`, log ở `.local/codex-runs/`.
   - **Nếu máy tắt giữa chừng:** chạy lại `queue.ps1` với cùng file danh sách. Bỏ dòng của phiếu đã xong; phiếu ảnh tự bỏ qua ảnh đã có.
+- **Luật mới (chủ dự án, 25/10):** Claude duyệt kỹ mọi đầu ra của Codex trước khi commit: đọc diff, chạy test, phản biện nhiều góc. Ghi ở `docs/CODEX_QUEUE.md`.
+- **Phiếu 009 xong:** 10 chân dung cộng ảnh đội hình. Ảnh xem nhanh ở `games/immortality-cultivation/art-src/_review/009-roster-sheet.jpg`. **Chờ chủ dự án chọn hoặc sửa** trước khi làm ảnh nguồn 3D.
+- **M0a đợt A của Tu Tiên xong và đã push** (game `947bc5a`; repo cha nâng gitlink ở `2eccea5c`).
+  - Gồm bước 0 và các làn 1a, 2, 3, 5, 8. Phản biện độc lập: đạt.
+  - Phản biện nêu 3 lỗi lớn:
+    - test ranh giới quá chậm trên `/mnt/d`;
+    - camera 52° thay vì 55° (D48);
+    - thiếu 11 dòng SYNC_DEBT.
+  - Thêm 10 lỗi nhỏ. Kết quả đầy đủ ở `games/immortality-cultivation/tmp/part-a/result.json` (không vào Git).
+- **M0a đợt B đang chạy:** workflow `tu-tien-m0a-part-b`, script `.local/workflows/tu-tien-m0a-part-b.js`.
+  - Thứ tự: sửa lỗi phản biện đợt A → làn 1b (bench HN0 và phán quyết GPU), làn 4 (Kiếm, combat), làn 6 (view, HUD) → tích hợp `startApp` → làn 7 (bot, cổng, golden, kịch bản, gồm `ic-camera-frame`) → phản biện → sửa.
+  - Bị ngắt thì chạy tiếp bằng `resumeFromRunId`.
+- **Kế hoạch đưa game lên mạng:** `docs/HOSTING_PLAN_2026-10-25.md`.
+  - Chủ dự án hỏi gói Free hay 5 USD có đủ không. Kết luận: đủ cho phần file (≈ 680 MiB phục vụ, không có giới hạn tổng); gói 5 USD chỉ cho backend.
+  - Việc khó là mã: mọi game ghi cứng nguồn portal `https://typing-game.local`; API runtime của Admin và Duel chưa có chỗ chạy.
+  - Đã qua 2 phản biện độc lập. Chưa làm bước nào; bước 0 là việc của chủ dự án (tên miền, thanh toán, nhạc riêng, 4 game luyện gõ).
 - **M0a đợt A bị giới hạn phiên ngắt lúc khoảng 07:00.**
   - Bước 0 đã commit và push (`4ee8658`, `2443db6`).
   - 5 làn bỏ lại khoảng 71 file chưa commit. Workflow chạy tiếp từ cache; các làn được dặn làm tiếp phần dở trong đường dẫn của mình.
@@ -298,3 +314,8 @@ Khi đã chắc bản kéo về đủ, các stash `mac-before-dell-sync` có th�
 - 25/10/2026 (Dell, 09:40): danh sách toàn bộ ảnh Tu Tiên (`IMAGE_LIST.md`).
   - Codex có phiếu 010a, 010b, 010c (ảnh), 011 (phản biện Lời Gọi R2 lượt sửa 2), 012 (công cụ hậu kỳ ảnh).
   - Thêm `tools/codex-run/queue.ps1`: hai làn Codex chạy song song, tự chờ khi gặp hạn mức.
+- 25/10/2026 (Dell, trưa):
+  - Luật duyệt kỹ đầu ra Codex.
+  - Phiếu 009 xong: chờ chủ dự án chọn nhân vật.
+  - M0a đợt A của Tu Tiên push xong, đợt B đang chạy.
+  - Kế hoạch đưa game lên mạng `docs/HOSTING_PLAN_2026-10-25.md`.
