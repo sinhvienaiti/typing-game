@@ -1,7 +1,7 @@
 # Danh sách ảnh 2D cần dựng 3D — mọi game (25/10/2026)
 
 > **Phiếu 003 · Dành cho:** chủ dự án dựng model trong Tripo; Claude nhận GLB để chuẩn cỡ, rig và làm clip trong Blender.
-> **Đợt 1 đã nhập (26/10/2026):** 55 GLB của 54 model trong `tripo-upload/` (cộng chùy Oni từ lần thử CLI) đã ở đúng "Nơi lưu GLB gốc"; còn thiếu `linh-giao-dai-spear` (Lời Gọi) và `rainbow-scout` (Tuyến Cuối). Bảng ghép: [`3D_IMPORT_2026-10-26.md`](3D_IMPORT_2026-10-26.md).
+> **Đợt 1 đã nhập (26/10/2026):** 55 GLB của 54 model trong `tripo-upload/` (cộng chùy Oni từ lần thử CLI) đã ở đúng "Nơi lưu GLB gốc"; còn thiếu `linh-giao-dai-spear` (Lời Gọi); `rainbow-scout` dùng chung model của `rainbow-tank` (chủ dự án, 26/10). Bảng ghép: [`3D_IMPORT_2026-10-26.md`](3D_IMPORT_2026-10-26.md).
 > **Phạm vi:** Rồng Giữ Ải M0; phần Lời Gọi chưa có bản gốc hoặc cần làm lại, gồm bậc P và VS; bản gốc còn thiếu cho Tuyến Cuối S1; Tu Tiên Thủ Ải chờ canon.
 > **Đường dẫn:** mọi đường dẫn đầy đủ trong bảng tính từ gốc `D:\typing-game`. Trạng thái “có” chỉ xác nhận file ảnh hiện diện trên máy, chưa thay cho duyệt mỹ thuật. Ảnh của phiếu 001–002 đang được bổ sung; đã kiểm tồn tại ảnh lúc 25/10/2026 04:14:12 +07:00.
 
