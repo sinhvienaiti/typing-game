@@ -630,6 +630,24 @@ describe("a number's box is what NumberSprites draws", () => {
     expect(inkTouch(drawnInk(sprites, field), a, b)).toBe(false);
   });
 
+  it("settle() never lifts a number onto a protected rectangle: it drops it (Mac dh-hitstop-keys: one number on a word tag after a frame)", () => {
+    const f = new NumberField(DRAGON);
+    f.fontPx = 16;
+    // Two T4 numbers on one spot (never merged); a word tag just above them.
+    const a = f.spawn(1, 640, 400, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0);
+    const b = f.spawn(2, 900, 400, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0.01);
+    const box = f.box(a, zero());
+    f.protected = [{ x: 560, y: box.y - 40, w: 160, h: 36 }];
+    [f.x[b], f.y[b]] = [f.x[a]!, f.y[a]!];
+    expect(f.overlaps()).toBe(0);
+    const dropped = f.dropped;
+    f.settle();
+    expect(f.overlaps()).toBe(0);
+    expect(f.alive[a]).toBe(1);
+    expect(f.alive[b]).toBe(0);
+    expect(f.dropped).toBe(dropped + 1);
+  });
+
   it("settle() lifts a number again when its first lift lands on one already passed: none touch after the frame", () => {
     const f = new NumberField(DRAGON);
     f.fontPx = 16;
