@@ -272,6 +272,24 @@ Review của lượt trên tìm 6 lỗi nhỏ (không lỗi lớn). Chi tiết v
 - **Bộ đọc của Tuyến Cuối, cùng loại với lỗi lớn của lượt trước:** `layer_plan.summary` của ba bậc trúng và một ràng buộc của `gun.xung` còn viết như thể mã đang ghép `hit.sub`, `hit.tail`; nay ghi rõ đó là đề xuất của kế hoạch và mã phát một tiếng mỗi bậc, mỗi phát.
 - **Bàn giao:** gitlink cho các commit game của lượt trước đã được người điều phối nâng ở `c873ff69`. Commit game của lượt này (typing-survival `81e8842`, typing-defense `2cf052d`) và dòng làn âm trong `docs/CLAUDE_PROCESS_2026-10-24.md` (dòng 90, "chưa đạt … đang sửa") chờ người điều phối.
 
+### Q6: lô 1c đã sinh (25/10/2026, máy Mac)
+
+Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 11. Chưa có bản dựng trong bối cảnh, chưa có phiên nghe.
+
+- **426 bản Stable Audio 3** cho 19 id, chỉ khóa Q6 của mục 7, seed 3001–3006 (`call-chop` 3101–3106). Sau xử lý giữ 394 bản. Thêm 10 công thức dựng lại (`<rid>.b1c.json`, 62 biến thể). Chấm máy cả ba game; `licence-check` cây thử đạt.
+- **Luật của `gen/process.py` chặn đúng hình dạng Q6** ở các hành động có phần tụ lực hay nhiều nhịp:
+  - tiếng khè trước lửa của `fire.cast` (15/24 bản bị loại vì "gõ hai lần");
+  - ngòi trước tiếng nổ của bom;
+  - nhiều quả cầu lửa của `impact.multi`;
+  - phần đầu trước tiếng nổ của `hurt.breach`.
+
+  Thêm `--build-up` cho đúng 4 id đó: phần tụ lực được giữ, cửa sổ vẫn cắt ở độ dài tối đa của thẻ. Tiếng trúng thường giữ luật chặt.
+- **Luật lên ≤ 10 ms** của lớp đầu tiếng `impact` chặn mọi bản nguyên khối của `wordshot-fire`, `impact.multi` và 21/24 bản `arrow-fire`. Đề xuất (chưa làm, cần sửa §4.3.1 và thẻ): cho ba id này sang lớp `other` như `fire.cast`, hoặc đo thời gian lên từ đỉnh chính.
+- **Luật L2 đề xuất ở dưới, đo lần đầu trên file thật:**
+  - luật đuôi không tách được bản nào của lô theo Q6 (mọi bản nghe được đều qua);
+  - `punch_db` đọc sai âm có phần tụ lực (`hurt.breach` nguyên khối trượt 23/28);
+  - cờ `lone_low_hit` bắt `hit.t2` 0a v2 và `gun.xung` 0a v2, hai bản cũ anh chấm 3/5 và 4/5. Vì vậy cờ phải miễn `gun.xung`.
+
 ### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
 
 **Mục đích:** phạt âm hành động có đuôi quá ngắn, hoặc chỉ là một cú trầm không thân.
@@ -354,3 +372,8 @@ Review của lượt trên tìm 6 lỗi nhỏ (không lỗi lớn). Chi tiết v
    - nhắc anh gắn nhãn "rè/lỗi" khi nghe thấy, để có dữ liệu chỉnh L1b;
    - đặt `gun.xung` tổng hợp và `gun.xung` Stable Audio 3 trong cùng một phiên.
 4. **Chờ chủ dự án xác nhận** (đề xuất của vòng 25/10, ghi ở "Q6: sửa sau review lần 2"): `gun.xung` bỏ cả F; `wordshot-fire` tắt `critic.loop_eval`; các chọn lựa của 14 thẻ S1 Tuyến Cuối (nhịp lặp theo `guns.ts`, `hit.armour` là Trúng nhỏ, `gun.ray.charge` không đuôi, prompt mới của `shield.hit`, nhóm và nguồn của `shield.break`, `rift.open`, `rift.warn`).
+5. **Lô 1c (25/10, Mac), việc kế** (`Q6_REWRITE` mục 11.6):
+   - dựng bản trong bối cảnh và phiên nghe `SESSION_1C_*`;
+   - đề xuất lớp đầu tiếng cho `impact.multi`, `arrow-fire`, `wordshot-fire` (cần sửa §4.3.1 của kế hoạch);
+   - đòn bẩy cho bản Tuyến Cuối kêu từ mẫu đầu: `kill.elite` 21/24, `hit.t2` 15/22, `hit.t1` 14/23 bản có đầu tiếng chưa xác minh;
+   - luật L2 Q6: `punch_db` đo từ đỉnh chính cho id có phần tụ lực.
