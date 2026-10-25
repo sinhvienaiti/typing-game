@@ -4,6 +4,59 @@
 > Cập nhật sau mỗi phần việc đã commit: sửa mục 4–6 và thêm một dòng vào nhật ký (mục 9).
 > File cũ hơn, chỉ cho Space Typing: [`games/space-typing/docs/CLAUDE_PROCESS_2026-10-17.md`](../games/space-typing/docs/CLAUDE_PROCESS_2026-10-17.md) (dừng ở 21/10, nhiều chỗ đã cũ).
 
+## 0. BẮT ĐẦU Ở ĐÂY khi về Mac mini M4 (viết trên Dell, 25/10/2026 khoảng 16:30)
+
+Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mục 2 (luật) và mục D0 của mục 6, **không cần đọc lại hội thoại cũ**.
+
+### 0.1 Mang việc về Mac
+1. **Code:** mọi repo đã push lúc rời Dell (repo cha nhánh `feat/space-typing-admin-uiux`; 5 game nhánh `main`, Space nhánh `feat/space-typing-2026-10-18`). Kéo về theo mục 7.1, thêm `git submodule update --init games/immortality-cultivation` (game mới, chưa có trên Mac).
+2. **Media chưa lên Drive** vì Dell không có rclone. Gói `C:\Users\Admin\Downloads\typing-game-handoff-2026-10-25\` trên Dell:
+   - 721 file, khoảng 500 MiB; cấu trúc giống repo;
+   - có `HANDOFF.md`, `MANIFEST.csv`, và thư mục `tripo-upload\`.
+   - Chủ dự án chuyển gói sang Mac, rồi chép nội dung `typing-game\` của gói đè vào repo.
+   - **Việc đầu tiên của Claude trên Mac:**
+     1. `pnpm media:status`, rồi `pnpm media:push` (cần trả lời y cho file mới);
+     2. commit các `games/*/media.md5` vừa tạo hoặc cập nhật;
+     3. push.
+   - Tuyến Cuối và Tu Tiên lần đầu có `media.md5`.
+3. **Chỉ còn trên Dell:**
+   - `games/*/tmp/` (bằng chứng, khoảng 4 GB);
+   - log Codex ở `.local/codex-runs/` (đã chép kết quả phản biện 012 và script workflow vào gói).
+
+### 0.2 Hai session đang làm việc lúc rời Dell
+- **Session chính:** Rồng Giữ Ải, Lời Gọi, Tuyến Cuối, Space, ảnh gửi Tripo, Codex.
+- **Session Tu Tiên** (tách 25/10 theo ý chủ dự án): mọi việc của `games/immortality-cultivation` và `docs/games/tu-tien`.
+- Trên Mac nên giữ đúng cách chia này: một session cho Tu Tiên, một cho các game còn lại.
+
+### 0.3 Trạng thái và việc kế từng game
+- **Tu Tiên** (chi tiết ở D0 mục 6):
+  - M0a đợt A xong.
+  - **Đợt B:** làn 4, 1b, 6 và tích hợp `startApp` đã commit, push (game `19f35a2`). Làn 7 (bot, cổng, golden, kịch bản, `ic-camera-frame`), phản biện độc lập và vòng sửa còn chạy lúc rời máy.
+    - Nếu chưa xong: chạy lại 3 bước đó trên Mac theo `.local/workflows/tu-tien-m0a-part-b.js` (có trong gói). Bỏ các bước đã xong; workflow không chạy tiếp được sang máy khác.
+  - **Avatar:** chủ dự án chê "mặt AI". Phiếu Codex 014 vẽ 8 avatar tay, mặt khác hẳn nhau; lúc rời máy xong 6/8. Chờ chủ dự án chọn.
+  - Phiếu 013 và 013b (ảnh nguồn 3D nhân vật) đang dừng.
+- **Lời Gọi:** R2 chưa chốt được.
+  - Còn trượt: B1 (Ẩu cả hai bộ, Chậm chắc bộ 2) và G3 bộ 2 (44,7 s).
+  - Phản biện Codex 011 thêm 4 lỗi nhỏ (Claude đã kiểm lại đúng): F3 tiếng và hộp cát không tải lại sau lỗi; F4 tài liệu nói sai thời điểm tải thẻ; F5 phép kiểm khung lấy max từng phần thay vì tổng; F6 câu "không làm chậm" chưa chứng minh.
+  - Việc kế: sửa F3–F6, rồi R3 kèm lượt cân bằng.
+  - Ảnh bậc VS: phiếu 005a (nhân vật) đang vẽ, còn 005b.
+- **Tuyến Cuối:** cổng R1 còn trượt. Việc kế: chỉnh sức súng (mục B bên dưới).
+- **Rồng Giữ Ải:**
+  - quyết 9 mục "cần anh quyết" theo đề xuất;
+  - B1, B7 trượt;
+  - B9 chờ chủ dự án chơi thử;
+  - 24 model chờ dựng Tripo.
+- **Ảnh và 3D:**
+  - `D:\tripo-upload\` (bản sao ở `tripo-upload\` trong gói): 57 model, chia thư mục theo face, rig, chế độ; 60 credit rig. Còn 86 model chờ ảnh.
+  - Phiếu 015 (kiểm kê và làm đủ ảnh 2D của 3 game) và 016 (gom lại) chưa chạy.
+  - Phiếu 012b (sửa `tools/art-normalize`, chưa commit) đang chạy.
+  - Codex CLI trên Mac cần ≥ 0.164 (`tools/codex-run/README.md`).
+- **Đưa game lên mạng:** `docs/HOSTING_PLAN_2026-10-25.md`. Bước 0 là việc của chủ dự án.
+
+### 0.4 Luật mới hôm nay (đã ghi vào bộ nhớ Claude)
+- Trả lời chủ dự án **bằng tiếng Việt**. Câu hỏi đơn giản thì trả lời ngắn, không tự làm thêm việc lớn.
+- Duyệt kỹ mọi đầu ra của Codex trước khi commit (`docs/CODEX_QUEUE.md`).
+
 ## 1. Hai máy
 
 | | Mac mini M4 | Dell (laptop Windows 11) |
