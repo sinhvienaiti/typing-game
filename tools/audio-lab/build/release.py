@@ -49,6 +49,12 @@ def release(run_dir: Path, variants: list[int] | None, art_src: Path, public: Pa
     # Drop the id's previous release in this tree.
     src_path = art_src / "SOURCES.json"
     data = ledger.read_sources(src_path)
+    # Two recipes with one export path would overwrite each other's runtime files (batch 1c review: hurt.breach and
+    # hurt.breach.b2 both on sfx/alerts/hurt-breach, 24 masters for 18 ogg files): refused before anything is written.
+    for key, rec in ledger.records(data).items():
+        if rec.get("id") != sid and key.rsplit("-", 1)[0] == stem:
+            raise ValueError(f"đường xuất {stem} đã thuộc công thức '{rec.get('id')}' ({key}); "
+                             f"công thức '{sid}' cần export.path riêng")
     for key, rec in list(ledger.records(data).items()):
         if rec.get("id") == sid:
             (public / key).unlink(missing_ok=True)

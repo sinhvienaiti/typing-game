@@ -211,6 +211,12 @@
             "window": {
               "$ref": "#/$defs/range"
             },
+            "gainDb": {
+              "type": "number",
+              "minimum": -24,
+              "maximum": 24,
+              "description": "Level match of this take, applied to its window before the layer's own chain: the takes a layer swaps between (vary.swap) come raw from the model at levels 20 dB or more apart."
+            },
             "initAudio": {
               "type": "string"
             },

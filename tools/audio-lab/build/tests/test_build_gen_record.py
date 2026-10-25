@@ -83,3 +83,19 @@ def test_gen_record_must_describe_the_file(tmp_path):
     libs = make_library(tmp_path / "libs")
     with pytest.raises(ValueError, match="sha256"):
         render.render(_recipe(f32, rp), out=tmp_path / "run", run="run", libraries=libs)
+
+
+def test_gen_gain_db_levels_one_take_among_the_swaps(tmp_path):
+    """Batch 1c review: the takes a body layer swaps between come raw from the model, 20 dB or more apart; the
+    source's gainDb levels one of them before the layer's chain, and the run records it."""
+    from build import sources
+
+    f32, rp = _candidate(tmp_path, peak=0.5)
+    src = _recipe(f32, rp)["layers"][1]["source"]
+    plain = sources.load(src, libraries=tmp_path, synth_seed=1)
+    up = sources.load({"gen": dict(src["gen"], gainDb=6.0)}, libraries=tmp_path, synth_seed=1)
+    assert np.allclose(up.audio, plain.audio * 10 ** (6 / 20)) and up.layer_meta["gainDb"] == 6.0
+    from build import recipe
+    data = _recipe(f32, rp)
+    data["layers"][1]["source"]["gen"]["gainDb"] = 6.0
+    recipe.validate(data, "hit.test")

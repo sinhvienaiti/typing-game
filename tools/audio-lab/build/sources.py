@@ -218,10 +218,12 @@ def load(source: dict, *, libraries: Path, synth_seed: int, ledger_rows: dict[st
         if g.get("window"):
             a, b = g["window"]
             audio = audio[dsp.ms_to_n(a * 1000, sr): dsp.ms_to_n(b * 1000, sr)]
+        if g.get("gainDb"):          # level match of one take among a layer's swaps (raw takes differ by 20 dB+)
+            audio = audio * dsp.db_to_gain(float(g["gainDb"]))
         sha = ledger.sha256_file(path)
         meta = {"kind": "gen", "tool": g["tool"], "model": g["model"], "licence": policy.canonical(g["licence"]),
                 "source": path.name, "sourceSha256": sha, "aiSteps": ["generate"]}
-        for k in ("prompt", "negativePrompt", "cfg", "seed", "window", "initAudio", "initNoise"):
+        for k in ("prompt", "negativePrompt", "cfg", "seed", "window", "gainDb", "initAudio", "initNoise"):
             if k in g:
                 meta[k] = g[k]
         rows, copies = _gen_record(g, path, sha, meta)

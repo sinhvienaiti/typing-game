@@ -135,6 +135,24 @@ def test_rerelease_replaces_previous_set(tmp_path):
     assert _codes(art, pub) == []
 
 
+def test_two_recipes_never_share_an_export_path(tmp_path):
+    """Batch 1c review: hurt.breach and hurt.breach.b2 both exported to sfx/alerts/hurt-breach, so the second set of
+    runtime files overwrote the first. The second release is refused before it writes anything."""
+    art, pub = _released_tree(tmp_path)
+    libs = tmp_path / "libs"
+    other = recipe(count=1)
+    other["id"] = "hit.test.b2"
+    res = render.render(other, out=tmp_path / "run2", run="run2", libraries=libs, date="2026-10-23")
+    before = sorted(p.name for p in (pub / "sfx" / "hits").iterdir())
+    with pytest.raises(ValueError, match="export.path riêng"):
+        release.release(res.out, None, art, pub, date="2026-10-23")
+    assert sorted(p.name for p in (pub / "sfx" / "hits").iterdir()) == before
+    other["export"] = dict(other["export"], path="sfx/hits/hit-test-b2")
+    res = render.render(other, out=tmp_path / "run3", run="run3", libraries=libs, date="2026-10-23")
+    release.release(res.out, None, art, pub, date="2026-10-23")
+    assert _codes(art, pub) == []
+
+
 def test_build_cli_dispatches_licence_check(tmp_path):
     from build.__main__ import main
 
