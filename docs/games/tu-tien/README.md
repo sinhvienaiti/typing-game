@@ -2,9 +2,9 @@
 
 Thư mục này đánh giá một game mới cho portal: **giữ ải chống thú triều trong thế giới tu tiên**, kỹ năng phát ra khi gõ (sau này nói) đúng từ tiếng Anh, chơi một mình hoặc theo đội 2–3 người (Thất Tinh 7 ghế là mở rộng, bot bù ghế). Tham chiếu nguyên tắc từ Quỷ Cốc Bát Hoang (Tale of Immortal), không chép tên, UI, hình hay cốt truyện.
 
-**Trạng thái (25/10/2026): M0 xong phần viết, sắp dựng M0a.** Anh đã chọn làm (24–25/10) và chọn hướng hình **3D trước, có đo**. Đã có canon và kế hoạch M0a, đã qua một vòng phản biện ([`analysis/09-phan-bien-canon.md`](analysis/09-phan-bien-canon.md)) và đã sửa theo đó (canon D32–D46); chưa có mã. Mọi con số là số thử.
+**Trạng thái (25/10/2026): đang dựng M0a.** Anh đã chọn làm (24–25/10) và chọn hướng hình **3D trước, có đo**. Canon và kế hoạch M0a đã qua một vòng phản biện ([`analysis/09-phan-bien-canon.md`](analysis/09-phan-bien-canon.md)) và đã sửa theo đó (canon D32–D46). **Bước 0 của M0a xong** (khung repo, kit, hợp đồng dữ liệu §23.3, lưu, test ranh giới, định tuyến phím, đầu replay; `pnpm check` xanh); các làn 1–8 dựng trên stub. Mọi con số là số thử.
 
-- **Repo:** `sinhvienaiti/immortality-cultivation`, submodule `games/immortality-cultivation` (mới có `README.md`). `gameId` `immortality-cultivation`, cổng dev 3008, host `tutien.typing-game.local`.
+- **Repo:** `sinhvienaiti/immortality-cultivation`, submodule `games/immortality-cultivation` (luật làm việc ở `AGENTS.md`, làn ở `LANES.md` của repo game). `gameId` `immortality-cultivation`, cổng dev 3008, host `tutien.typing-game.local`.
 - **Tài liệu thiết kế** vẫn ở thư mục này (`docs/games/tu-tien/`), như `dragon-lane/` của Rồng Giữ Ải; chuyển vào repo game ở M1.
 
 ## Đọc theo thứ tự

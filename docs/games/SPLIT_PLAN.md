@@ -243,7 +243,9 @@ Làm **một PR cho cả ba game** để chủ dự án chạy `setup-nginx.sh` 
 | `media/media.config.json`, `scripts/media/lib/sets.mjs` | `games[]` (mục 5) |
 | `AGENTS.md`, `docs/AGENT_SKILLS_SETUP.md` | Bảng game nào dùng skill nào. Skill dự án hiện có (`.agents/skills`) viết cho Space; game mới dùng skill Game Studio, `threejs-*` và tài liệu thiết kế của chính nó |
 
-- Cổng đang dùng: 3000–3004 (game), 3100 (portal), 3199 (admin), 3014 (duel), 3016 (account), 3095–3098 (công cụ). 3005–3007 đang trống.
+- Cổng đang dùng: 3000–3004 (game), 3005–3007 (Rồng Giữ Ải, Lời Gọi, Tuyến Cuối), 3008 (Tu Tiên Thủ Ải), 3100 (portal), 3199 (admin), 3014 (duel), 3016 (account), 3095–3098 (công cụ).
+
+**Game thứ tư: Tu Tiên Thủ Ải** (25/10/2026): id và `gameId` `immortality-cultivation`, repo `sinhvienaiti/immortality-cultivation` (submodule `games/immortality-cultivation`, `branch = main`), cổng dev **3008** (`--strictPort`, cờ cổng chỉ ở `pnpm dev` của game), host `tutien.typing-game.local`. Nối repo cha theo đúng bảng trên (commit `6c44135b`, `f160d4bc`). Tài liệu thiết kế ở [`docs/games/tu-tien/`](tu-tien/README.md) (canon `00-canon.md`, kế hoạch `M0A_PLAN.md`); chuyển vào repo game ở M1.
 
 ## 11. Những gì ở lại Space Typing
 
