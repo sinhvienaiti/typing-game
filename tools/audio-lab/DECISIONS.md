@@ -256,12 +256,12 @@ Review của lượt trên tìm ra 1 lỗi lớn, một số lỗi nhỏ và 1 v
 Review của lượt trên tìm 6 lỗi nhỏ (không lỗi lớn). Chi tiết và kiểm: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 10.
 
 - **Sổ này ghi quá chỗ đã làm:** câu "hai việc đầu đã làm" sai (chỉ bước chặn của `gen.sa3` đã làm; `synth.ts` của Rồng Giữ Ải vẫn là "sine thump"); Q2 ghi hướng `call-chop` là "A và E–G" trong khi F đã bỏ, H đã thêm; số 54/12 chưa tính lượt sửa. Đã sửa ba chỗ ở trên (số mới 60/6).
-- **`gun.xung` E** (đã chọn theo đề xuất của review: bỏ E như D, H). Lý do giữ E của lượt trước sai: d1a, d1b dùng thân nhiễu tổng hợp; d2a lấy thân A s1005, đổi bằng F s2005, D s1002, G s2002; d2b lấy thân E s2005, đổi bằng C s1002, H s2002, D s1005; cả bốn ghép một lớp đuôi nhiễu hồng 160–650 Hz; công thức lô 0b `gun.xung.sa3-r2.json` lấy A s1005, D s1002, C s1002, D s1005 và không có lớp đuôi. D, H (đã bỏ) giữ đúng vai thân như E. Các công thức đọc file thô đã có trên đĩa, không đọc chữ của thẻ, và lô 1c chỉ tạo I, J, K. **Bỏ thêm F** ("dry", không có vang hành lang), để thẻ theo một luật: biến thể còn trong thẻ phải tự đạt Q6 khi tạo một mình; còn C, I, J, K (đề xuất của vòng này, chờ chủ dự án xác nhận).
+- **`gun.xung` E** (đã chọn theo đề xuất của review: bỏ E như D, H). Lý do giữ E của lượt trước sai: d1a, d1b dùng thân nhiễu tổng hợp; d2a lấy thân A s1005, đổi bằng F s2005, D s1002, G s2002; d2b lấy thân E s2005, đổi bằng C s1002, H s2002, D s1005; cả bốn ghép một lớp đuôi nhiễu hồng 160–650 Hz; công thức lô 0b `gun.xung.sa3-r2.json` lấy A s1005, D s1002, C s1002, D s1005 và không có lớp đuôi. D, H (đã bỏ) giữ đúng vai thân như E. Các công thức đọc file thô đã có trên đĩa, không đọc chữ của thẻ, và lô 1c chỉ tạo I, J, K. **Bỏ thêm F** ("dry", không có vang hành lang), để thẻ theo một luật: biến thể còn trong thẻ phải tự đạt Q6 khi tạo một mình; còn C, I, J, K (đề xuất của vòng này; đã chọn theo đề xuất ngày 25/10, "Việc còn lại" mục 4).
 - **`critic.loop_eval`** (đã chọn theo đề xuất của review: cho bộ chấm đọc khóa này). `critic/spec.py` đọc `loop_eval.enabled`; `critic/learned.py` chấm L3–L5 trên bản lặp 3–4 s khi file dưới 300 ms **hoặc** thẻ bật khóa này. Nhịp lặp vẫn là `rate_hz` (thẻ lấy từ `board.repeat_interval_ms`). Thẻ không tắt được bản lặp của file dưới 300 ms (mục 4.4). Test mới ở `critic/tests/test_spec_and_layers.py`. Hệ quả: mọi bản `gun.xung` (96–380 ms) nay được chấm cùng một kiểu, bản lặp ở 5 Hz; trước đó bản từ 300 ms được chấm như file đơn.
-- **`wordshot-fire`**: nhịp lặp của thẻ là nhịp thật, 1,5 s (một Phát Chữ cho mỗi từ bắn xong, `src/sim/systems/rewards.ts` của Lời Gọi), thay 250 ms chung của nhóm Bắn (đã chọn theo đề xuất của review). Bối cảnh "Lặp 20 lần" của Bảng Nghe phát theo nhịp này (`board from-critic` lấy khoảng lặp từ `rate_hz`): đó là chỗ kiểm luật 4 của Q6. `critic.loop_eval` trả về giá trị của bộ sinh (tắt): ở 1,5 s một lần, bản lặp 3–4 s của bộ chấm chỉ có 3 phát rời nhau (đề xuất của vòng này, chờ chủ dự án xác nhận).
+- **`wordshot-fire`**: nhịp lặp của thẻ là nhịp thật, 1,5 s (một Phát Chữ cho mỗi từ bắn xong, `src/sim/systems/rewards.ts` của Lời Gọi), thay 250 ms chung của nhóm Bắn (đã chọn theo đề xuất của review). Bối cảnh "Lặp 20 lần" của Bảng Nghe phát theo nhịp này (`board from-critic` lấy khoảng lặp từ `rate_hz`): đó là chỗ kiểm luật 4 của Q6. `critic.loop_eval` trả về giá trị của bộ sinh (tắt): ở 1,5 s một lần, bản lặp 3–4 s của bộ chấm chỉ có 3 phát rời nhau (đề xuất của vòng này; đã chọn theo đề xuất ngày 25/10, "Việc còn lại" mục 4).
 - **Gói prompt Lời Gọi** (đã chọn theo đề xuất của review): `transient` của A02, A04, A07, dòng LOOP và SOFTPITCH viết khẳng định; thêm A38, tiếng đi Cương Thi và V190 (VS) có "not harsh", "not scary". Lính đâm trúng giữ không có `tail`, nay có lý do: A18 (đã dán SPACE) phát ngay trước cú trúng, đuôi vang của nó phủ cả đòn.
 - **`gen.sa3.Q6_TERMS`** (đã chọn theo đề xuất của review) thêm poof, plop, whoomp (cả whoomph, woomp, fwoomp, fwhoomp), thoomp; "oomph" không bị chặn. Test thêm ca ở `gen/tests/test_sa3_q6.py`.
-- **14 id S1 của Tuyến Cuối có thẻ.** Bộ đọc `specs/readers/typing_survival.py` mở `...GUN_SOUND_IDS` của `src/audio/gun-audio.ts`, đọc bus và khoảng cách tối thiểu ở `GUN_BUS` của `theme-audio.ts`, có `RULES` cho 14 id. Danh sách âm của game thêm 14 id vào bảng bus §1. Thẻ theo dạng Q6: biến thể A–D, ghi chú bốn phần. Các chọn lựa của vòng này (đề xuất của vòng này, chờ chủ dự án xác nhận):
+- **14 id S1 của Tuyến Cuối có thẻ.** Bộ đọc `specs/readers/typing_survival.py` mở `...GUN_SOUND_IDS` của `src/audio/gun-audio.ts`, đọc bus và khoảng cách tối thiểu ở `GUN_BUS` của `theme-audio.ts`, có `RULES` cho 14 id. Danh sách âm của game thêm 14 id vào bảng bus §1. Thẻ theo dạng Q6: biến thể A–D, ghi chú bốn phần. Các chọn lựa của vòng này (đề xuất của vòng này; đã chọn theo đề xuất ngày 25/10, "Việc còn lại" mục 4):
   - nhịp lặp của súng S1 lấy từ `src/content/guns.ts` (luật `repeat` mới của bộ đọc, `specs/build.py`): Tán 383 ms, Ray 800 ms, Pháo Sao 750 ms;
   - `hit.armour` (đòn bị Vỏ chặn) xếp nhóm Trúng nhỏ, không phải Trúng nặng: nhỏ hơn một cú trúng thật, và luật `t-hit-small-steel` của bản hiệu chỉnh 1 hợp tiếng keng thép;
   - `gun.ray.charge` là phần chuẩn bị của phát Ray, dừng gọn ở đỉnh, không có đuôi (đuôi ở `gun.ray.fire`);
@@ -289,6 +289,18 @@ Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mụ
   - luật đuôi không tách được bản nào của lô theo Q6 (mọi bản nghe được đều qua);
   - `punch_db` đọc sai âm có phần tụ lực (`hurt.breach` nguyên khối trượt 23/28);
   - cờ `lone_low_hit` bắt `hit.t2` 0a v2 và `gun.xung` 0a v2, hai bản cũ anh chấm 3/5 và 4/5. Vì vậy cờ phải miễn `gun.xung`.
+
+### Q6: phiên nghe lô 1c (25/10/2026, máy Mac)
+
+Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mục 12. Hướng dẫn nghe: [`SESSION_1C_DH.md`](SESSION_1C_DH.md), [`SESSION_1C_TD.md`](SESSION_1C_TD.md), [`SESSION_1C_TS.md`](SESSION_1C_TS.md). **Chờ chủ dự án nghe.**
+
+- **Ba phiên, lô `1c`:** `1c-dh` (7 id, 26 bản, 3 cặp mốc), `1c-td` (5 id, 20 bản, 4 cặp mốc), `1c-ts` (7 id, 26 bản, 3 cặp mốc). Mỗi bản có bản dựng trong bối cảnh ("Trong trận thô"; Tuyến Cuối "Liên thanh 3 s"): 72 bản dựng.
+- **Làm đủ 5 ý của "Phiên lô 1" ở mục 3 bên dưới:** tai nghe cả phiên; "Lặp" theo nhịp thật (họ lửa và Phát Chữ mỗi 1,5 s); cặp mốc và bản anh đã chấm nằm lẫn, không nhãn; nhắc gắn "rè/lỗi"; `gun.xung` tổng hợp 0a, công thức lô 1 và Stable Audio 3 nguyên khối trong cùng một phiên.
+- **Bản bị luật chặn có nhãn** (luật lên 10 ms của tiếng va chạm, luật 30 ms của sinh vật): 15 bản. Điểm của anh cho các bản này là bằng chứng để sửa §4.3.1 (Q6_REWRITE 11.3 #2).
+- **Phát hiện của máy, trước khi anh nghe:**
+  - `gun.xung` nguyên khối hổng ở 10 viên mỗi giây: prompt I 20,4 %, K 17,1 % (hướng 2 lô 1: 0,2 %; ngưỡng 10 %). J không có bản nào nghe được.
+  - Giọng đọc trượt bài C ở mọi bản dựng, như lô 1 (tốt nhất 6,4 dB, đạt từ 10 dB).
+  - Mọi `fire.cast` theo Q6 trượt luật "âm xong từ" (1–4 kHz tăng 4,3–6,0 dB sau 100 ms thay vì tụt 15 dB), vì tiếng gầm tới sau phần khè. Hai luật chỉ hòa được bằng dải tần của phần gầm, hoặc hạ tiếng khi đọc.
 
 ### Q6: đề xuất luật L2 cho bộ chấm (chưa làm trong mã)
 
@@ -371,9 +383,25 @@ Chi tiết và số: [`Q6_REWRITE_2026-10-24.md`](Q6_REWRITE_2026-10-24.md) mụ
    - chèn cặp mốc để đo độ nhất quán;
    - nhắc anh gắn nhãn "rè/lỗi" khi nghe thấy, để có dữ liệu chỉnh L1b;
    - đặt `gun.xung` tổng hợp và `gun.xung` Stable Audio 3 trong cùng một phiên.
-4. **Chờ chủ dự án xác nhận** (đề xuất của vòng 25/10, ghi ở "Q6: sửa sau review lần 2"): `gun.xung` bỏ cả F; `wordshot-fire` tắt `critic.loop_eval`; các chọn lựa của 14 thẻ S1 Tuyến Cuối (nhịp lặp theo `guns.ts`, `hit.armour` là Trúng nhỏ, `gun.ray.charge` không đuôi, prompt mới của `shield.hit`, nhóm và nguồn của `shield.break`, `rift.open`, `rift.warn`).
-5. **Lô 1c (25/10, Mac), việc kế** (`Q6_REWRITE` mục 11.6):
-   - dựng bản trong bối cảnh và phiên nghe `SESSION_1C_*`;
-   - đề xuất lớp đầu tiếng cho `impact.multi`, `arrow-fire`, `wordshot-fire` (cần sửa §4.3.1 của kế hoạch);
+
+   Phiên lô 1 (25/10) và lô 1c (25/10, khuya) đã làm đủ 5 ý này. Chưa phiên nào được chấm.
+4. ~~**Chờ chủ dự án xác nhận**~~ **Đã chọn theo đề xuất** (luật §2 của `docs/CLAUDE_PROCESS_2026-10-24.md`, 25/10 khuya; chủ dự án đổi được sau). Các đề xuất của vòng 25/10, ghi ở "Q6: sửa sau review lần 2", giữ như đang có trong thẻ: `gun.xung` bỏ cả F; `wordshot-fire` tắt `critic.loop_eval`; các chọn lựa của 14 thẻ S1 Tuyến Cuối (nhịp lặp theo `guns.ts`, `hit.armour` là Trúng nhỏ, `gun.ray.charge` không đuôi, prompt mới của `shield.hit`, nhóm và nguồn của `shield.break`, `rift.open`, `rift.warn`).
+5. **Lô 1c (25/10, Mac), việc kế** (`Q6_REWRITE` mục 11.6, 12.6):
+   - ~~dựng bản trong bối cảnh và phiên nghe `SESSION_1C_*`~~: đã làm (mục 12). **Chờ chủ dự án nghe** `1c-dh`, `1c-td`, `1c-ts`;
+   - sau phiên: `critic agreement --batch 1c`, chốt bản, lượt biến thể, bù `gainDb` cho 5 công thức dưới −20 LUFS-M;
+   - đề xuất lớp đầu tiếng cho `impact.multi`, `arrow-fire`, `wordshot-fire` (cần sửa §4.3.1 của kế hoạch), dựa trên điểm anh cho 15 bản có nhãn "bị luật chặn";
+   - `gun.xung` nguyên khối hổng 17–20 % ở 10 viên mỗi giây: nếu anh thích chất tiếng I hay K, dựng công thức thân 1c cộng lớp đuôi của lô 1;
    - đòn bẩy cho bản Tuyến Cuối kêu từ mẫu đầu: `kill.elite` 21/24, `hit.t2` 15/22, `hit.t1` 14/23 bản có đầu tiếng chưa xác minh;
    - luật L2 Q6: `punch_db` đo từ đỉnh chính cho id có phần tụ lực.
+6. **Còn chờ điểm của lô 1** (25/10: chưa phiên nào của lô 1 được chấm; `ratings.jsonl` chỉ có lô 0a, 0b):
+
+   | Phiên | Id lô 1c đã sinh lại theo Q6 (lô 1 chỉ còn để đo máy) | Id chỉ có ở lô 1 (vẫn cần điểm) |
+   |---|---|---|
+   | S2 `1-dh-s2` | `fire.cast`, `fire.impact.a/b/c`, `enemy.quadruped.howl`, `trap.pine-bomb.trigger` | – |
+   | S3 `1-dh-s3` | – | `amb.forest`, `amb.river`, `enemy.swarm.march`, `enemy.quadruped.march`, `wave.horn`, `general.g01.horn` |
+   | S5 `1-td-s5` | `wordshot-fire`, `arrow-fire`, `ink-puff`, `blast` | `word-hit`, `word-hit-bell`, `coin` |
+   | S6 `1-td-s6` | `call-chop` (thêm G, H) | `leak`, `ui-move`, `ui-pick` |
+   | S1 `1-ts-s1` | `hit.t1`, `hit.t2`, `hit.t4`; `gun.xung` thêm I, K | `gun.xung` hướng 1, 3 và mức nền; `gun.xung.loop`, `gun.xung.tail`, `hit.sub`, `hit.tail` |
+   | S4 `1-ts-s4` | `kill.swarm`, `kill.elite`, `hurt.breach` | `word.load`, `word.perfect`, `gun.tia.pulse` |
+
+   Thứ tự đề xuất trong từng `SESSION_1C_*`: phiên 1c trước, rồi phiên lô 1 có id chỉ còn ở lô 1; S2 sau cùng (chỉ đo máy và thử luật đuôi Q6 trên bản "phụt tròn").
