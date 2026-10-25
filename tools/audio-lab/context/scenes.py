@@ -4,6 +4,8 @@ Rồng Giữ Ải (games/dragon-hold, read only):
   dh-cast-chain  word complete -> fire.cast (world, pan 0) and the spoken word -> fire.impact 0.6 s later,
                  one word every 1.5 s (40 WPM), impacts in the turn of map-events.ts (a, b) with the big
                  hit (c: tier 3+, perfect, flash) every third word; the forest bed under it. 9.6 s.
+                 With an impact.multi slot (batch 1c), words 2 and 5 hit 3 and 4 foes: impact.multi on top of
+                 their impact, at the game's gain min(1, 0.55 + 0.15 log2 n) (map-events.ts:175).
   dh-pack        a pack of quadrupeds arrives: their march loop fades in, a howl at 1.0 s and 4.6 s
                  (catalog gap 1.5 s), two words with fire.cast and impacts. 8 s.
   dh-trap        a swarm on the lane, words every 1.5 s, the pine bomb goes off at 2.2 s and 5.2 s. 7 s.
@@ -36,12 +38,19 @@ IMPACT_GAIN_DB = {"a": 20 * np.log10(0.85), "b": 20 * np.log10(0.85), "c": 0.0} 
 BED_REL_DB = {"amb.forest": 0.0, "amb.river": -8.0, "enemy.swarm.march": -7.0, "enemy.quadruped.march": -6.0}
 FOREST_LUFS_I = -26.0      # card loudness.mix_target text: "LUFS-I theo tài liệu game (nền −26)"
 BUS = {"fire.cast": "world", "fire.impact.a": "world", "fire.impact.b": "world", "fire.impact.c": "world",
-       "enemy.quadruped.howl": "enemies", "trap.pine-bomb.trigger": "traps", "wave.horn": "stingers",
+       "impact.multi": "world", "enemy.quadruped.howl": "enemies", "trap.pine-bomb.trigger": "traps", "wave.horn": "stingers",
        "general.g01.horn": "enemies", "amb.forest": "ambience", "amb.river": "ambience",
        "enemy.swarm.march": "enemies", "enemy.quadruped.march": "enemies"}
 SCENARIOS = ("dh-cast-chain", "dh-pack", "dh-trap", "dh-beds")
-CARD_CENTS = {"fire.cast": 30, "fire.impact.a": 80, "fire.impact.b": 80, "fire.impact.c": 80,
+CARD_CENTS = {"fire.cast": 30, "fire.impact.a": 80, "fire.impact.b": 80, "fire.impact.c": 80, "impact.multi": 80,
               "enemy.quadruped.howl": 70, "trap.pine-bomb.trigger": 0}
+# dh-cast-chain: word index -> foes hit (map-events.ts: impact.multi once a word's hits reach 3 within GATHER_S)
+MULTI_AT = {1: 3, 4: 4}
+
+
+def multi_gain_db(count: int) -> float:
+    """map-events.ts:175: gain min(1, 0.55 + log2(count) * 0.15)."""
+    return float(20 * np.log10(min(1.0, 0.55 + np.log2(count) * 0.15)))
 
 
 def card(sid: str) -> dict:
@@ -113,8 +122,9 @@ class Builder:
                                        level_curve=[(t0, level, ramp_s / 3.0)]))
         self.marks.append({"t": round(t0, 3), "id": sid, "until": t1, "level": level, "pan": pan})
 
-    def word_done(self, t: float, impact: str | None):
-        """Word complete: fire.cast and the spoken word now, the fireball lands 0.6 s later."""
+    def word_done(self, t: float, impact: str | None, multi: int = 0):
+        """Word complete: fire.cast and the spoken word now, the fireball lands 0.6 s later; `multi` foes hit
+        (3 or more) add impact.multi in the same frame (no pan: map-events.ts pushes it unplaced)."""
         w = voices.WORDS[self.word % len(voices.WORDS)]
         v = voices.VOICES[self.word % len(voices.VOICES)]
         self.word += 1
@@ -123,6 +133,10 @@ class Builder:
         if impact:
             sid = f"fire.impact.{impact}"
             self.shot(sid, t + 0.6, pan=self.rng.choice([-0.3, -0.15, 0.15, 0.3]), gain_db=IMPACT_GAIN_DB[impact], db=1.0)
+        if multi >= 3:
+            # shot() returns before drawing a random number when the slot is empty: renders without
+            # impact.multi (batch 1) keep their exact pattern
+            self.shot("impact.multi", t + 0.6, pan=0.0, gain_db=multi_gain_db(multi), db=1.0)
 
 
 def build(scenario: str, slots: dict[str, Path], delay_s: float = 0.15) -> tuple[Builder, float]:
@@ -131,7 +145,7 @@ def build(scenario: str, slots: dict[str, Path], delay_s: float = 0.15) -> tuple
         dur = 9.6
         b.bed("amb.forest", 0.0, dur)
         for i, k in enumerate("abcabc"):
-            b.word_done(0.5 + 1.5 * i, k)
+            b.word_done(0.5 + 1.5 * i, k, multi=MULTI_AT.get(i, 0))
     elif scenario == "dh-pack":
         dur = 8.0
         b.bed("amb.forest", 0.0, dur)

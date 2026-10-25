@@ -87,3 +87,12 @@ def test_ceasefire_cut_counts_only_above_minus_60_db(tmp_path):
     sc2, _ = T.build("ts-xung-3s", {"gun.xung": sets, "gun.xung.tail": [hard]}, "proposed")
     cut = T.burst_numbers(T.render_mix(sc2, dur), sc2)
     assert cut["stop_max_drop_10ms_db"] > 20.0 and not cut["stop_pass"]
+
+
+def test_set_b_of_whole_takes_plays_lower_by_b_db(tmp_path):
+    takes = [shot(tmp_path / f"t{k}.wav", 0.3, 40 + k) for k in range(3)]
+    sc, _ = T.build("ts-xung-3s", {"gun.xung": {"A": takes, "B": takes, "B_db": -5.0}}, "proposed")
+    a = [m["db"] for m in sc.marks if m["id"] == "gun.xung.A"]
+    b = [m["db"] for m in sc.marks if m["id"] == "gun.xung.B"]
+    assert len(a) == len(b) == 15
+    assert all(-1.01 <= x <= 1.01 for x in a) and all(-6.01 <= x <= -3.99 for x in b)

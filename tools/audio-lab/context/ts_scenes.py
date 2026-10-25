@@ -207,6 +207,9 @@ class Builder:
         """n rounds every 100 ms from t0; the gun's sounds by configuration."""
         gun = self.slots.get("gun.xung")
         sets = gun if isinstance(gun, dict) else {"A": _files(gun)}
+        # "B_db" (batch 1c): set B is set A's whole takes played lower (BATCH1_BRIEF §3.2: B 4-6 dB under A);
+        # the batch 1 sets are rendered files, B already lower, no offset
+        b_db = float(sets.get("B_db") or 0.0)
         rounds = [t0 + 0.1 * k for k in range(n)]
         self.sc.fire = (t0, ceasefire)
         shots: list[Ev] = []
@@ -215,7 +218,7 @@ class Builder:
                 continue                                        # combat.ts:139: even rounds only
             key = "A" if (k % 2 == 0 or "B" not in sets) else "B"
             ev = self.one("gun.xung", t, pan=0.0, key=key if self.config != "current" else None, files=sets[key],
-                          label=f"gun.xung.{key}", gun=True, lufs_m=None)
+                          label=f"gun.xung.{key}", gun=True, lufs_m=None, gain_db=b_db if key == "B" else 0.0)
             if ev is not None:
                 shots.append(ev)
                 self.sc.rounds.append(ev.t)
@@ -506,7 +509,8 @@ def render(scenario: str, slots: dict, out_wav: Path, focus: str | None = None, 
         worst = min(sw, key=lambda r: r["min_db"])
         m["voice_worst"] = {**worst, "min_db_voice_minus6": round(worst["min_db"] - 6.0, 1)}
     doc = {"schema": "audiolab.context.render/1", "scenario": scenario, "game": GAME, "config": config, "focus": focus,
-           "slots": {k: ({kk: [str(p) for p in _files(vv)] for kk, vv in v.items()} if isinstance(v, dict)
+           "slots": {k: ({kk: (vv if isinstance(vv, (int, float)) else [str(p) for p in _files(vv)])
+                          for kk, vv in v.items()} if isinstance(v, dict)
                          else [str(p) for p in _files(v)]) for k, v in slots.items()},
            "duration_s": dur, "voice_delay_s": delay_s, "duck_from": res["duck_from"], "bed_db_under_shot": bed_db,
            "scene_gain_db": SCENE_GAIN_DB, "timeline": sc.marks, "notes": sc.notes,

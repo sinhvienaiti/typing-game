@@ -62,3 +62,28 @@ def test_band_decay_rule():
     fast = burst(0.4, 2000, -6, 0.01)          # 1-4 kHz gone within 100 ms
     slow = burst(0.4, 2000, -6, 0.3)
     assert metrics.band_decay(fast)["pass_15db"] and not metrics.band_decay(slow)["pass_15db"]
+
+
+def test_cast_chain_adds_impact_multi_only_when_its_slot_is_filled(tmp_path, monkeypatch):
+    import soundfile as sf
+
+    from context import scenes
+
+    monkeypatch.setattr(scenes.voices, "load", lambda v, w: burst(0.4, 1500, -20, 1.0))
+    scenes._CACHE.clear()
+    files = {}
+    for k, sid in enumerate(("fire.cast", "fire.impact.a", "fire.impact.b", "fire.impact.c", "impact.multi")):
+        p = tmp_path / f"{sid}.wav"
+        sf.write(str(p), burst(0.7, 300 + 100 * k, -12, 0.2), SR, subtype="FLOAT")
+        files[sid] = p
+    without = {k: v for k, v in files.items() if k != "impact.multi"}
+    b0, _ = scenes.build("dh-cast-chain", without)
+    b1, _ = scenes.build("dh-cast-chain", files)
+    multi = [m for m in b1.marks if m["id"] == "impact.multi"]
+    assert not [m for m in b0.marks if m["id"] == "impact.multi"]
+    assert [m["t"] for m in multi] == [round(0.5 + 1.5 * 1 + 0.6, 3), round(0.5 + 1.5 * 4 + 0.6, 3)]
+    # map-events.ts:175 gain for 3 and 4 foes, +-1 dB of level spread
+    assert abs(multi[0]["db"] - scenes.multi_gain_db(3)) <= 1.0 and abs(multi[1]["db"] - scenes.multi_gain_db(4)) <= 1.0
+    assert scenes.multi_gain_db(3) < scenes.multi_gain_db(4) < 0.0
+    # the other sounds keep their times
+    assert [(m["t"], m["id"]) for m in b0.marks] == [(m["t"], m["id"]) for m in b1.marks if m["id"] != "impact.multi"]

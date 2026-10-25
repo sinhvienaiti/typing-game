@@ -33,7 +33,7 @@ Số lấy từ mã âm của game (chỉ đọc). Rồng Giữ Ải (`games/dra
 
 | Kịch bản | Dài | Có gì |
 |---|---|---|
-| `dh-cast-chain` | 9,6 s | Nền rừng; 6 từ, mỗi 1,5 s (40 WPM): `fire.cast` cùng lúc với yêu cầu đọc, giọng đọc sau 150 ms, cầu lửa trúng 0,6 s sau, theo lượt a, b, c (đòn to ở từ thứ 3 và 6) |
+| `dh-cast-chain` | 9,6 s | Nền rừng; 6 từ, mỗi 1,5 s (40 WPM): `fire.cast` cùng lúc với yêu cầu đọc, giọng đọc sau 150 ms, cầu lửa trúng 0,6 s sau, theo lượt a, b, c (đòn to ở từ thứ 3 và 6). Có chỗ `impact.multi` (lô 1c): từ thứ 2 trúng 3 quái, từ thứ 5 trúng 4 quái, `impact.multi` phát cùng khung với tiếng trúng, không đặt trái phải, mức như game `min(1; 0,55 + 0,15·log2 n)` (`map-events.ts:175`). Không có chỗ đó thì bản dựng giống hệt lô 1 |
 | `dh-pack` | 8 s | Nền rừng; vó thú vào từ 0,6 s; tiếng tru ở 1,0 s và 4,6 s; ba từ có cầu lửa |
 | `dh-trap` | 7 s | Nền rừng, bầy lạo xạo; bốn từ; Bom Hạt Thông nổ ở 2,2 s và 5,2 s |
 | `dh-beds` | 18 s | Nền rừng 3 vòng, suối; tù và báo đợt ở 3 s; bầy và thú vào dần; tù và tướng G01 ở 9,5 s; bốn từ có cầu lửa từ 12 s |
@@ -58,7 +58,7 @@ Số lấy từ `games/typing-survival/src/audio/theme-audio.ts`, `src/view/comb
 | Cấu hình | Cách phát |
 |---|---|
 | `current` (game hiện tại) | Chỉ viên chẵn (`combat.ts:139`), một file mỗi id, tốc độ ×U(0,95; 1,05), mọi tiếng bắt đầu ở đầu khung 60 Hz, không nền, không đuôi, nén 2 ms / 140 ms, hạ tiếng khi giọng cất lên |
-| `proposed` (đề xuất, BATCH1_BRIEF §3.3) | Mọi viên, bộ A và B xen nhau, đúng thời điểm mô phỏng, nền `gun.xung.loop` (vào 45 ms, ra 100 ms) và `gun.xung.tail` khi ngừng, tối đa 4 tiếng súng (cướp tiếng cũ nhất, mờ 25 ms), lệch A ±40, B ±70 cent, ±1 dB, nén bus súng và trúng 15 ms / 300 ms, hạ tiếng từ lúc xin đọc |
+| `proposed` (đề xuất, BATCH1_BRIEF §3.3) | Mọi viên, bộ A và B xen nhau, đúng thời điểm mô phỏng, nền `gun.xung.loop` (vào 45 ms, ra 100 ms) và `gun.xung.tail` khi ngừng, tối đa 4 tiếng súng (cướp tiếng cũ nhất, mờ 25 ms), lệch A ±40, B ±70 cent, ±1 dB, nén bus súng và trúng 15 ms / 300 ms, hạ tiếng từ lúc xin đọc. Bộ súng có thể ghi `B_db` (lô 1c: bộ B là chính các bản nguyên khối của bộ A, phát nhỏ hơn 5 dB, như bộ B của lô 1 nhỏ hơn bộ A 4–6 dB) |
 
 | Kịch bản | Dài | Có gì |
 |---|---|---|
