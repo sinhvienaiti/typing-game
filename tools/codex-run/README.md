@@ -8,7 +8,11 @@ Mục đích: giao cho Codex những việc **hình ảnh, prompt âm thanh và 
   - Bản 0.146 trong extension Cursor chỉ gọi được `gpt-5.6-sol`. Với `gpt-6.x`, máy chủ báo "not supported when using Codex with a ChatGPT account".
 - **Đăng nhập:** bằng ChatGPT (`~/.codex/auth.json` của Windows). **Không dùng API key**: `run.ps1` xóa `OPENAI_API_KEY`, `CODEX_API_KEY`.
 - **Model mặc định:** `gpt-6.1-sol`, suy luận `high` (chủ dự án chọn: 6.1 sol, high trở lên). Có thể truyền `-Effort xhigh` hoặc `max`.
-- **Trên Mac mini M4:** Codex CLI có sẵn trong extension ChatGPT của Cursor (không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-<bản>/bin/macos-aarch64/codex`. Bản 0.162.0-alpha.17.2 gọi được `gpt-6.1-sol` (thử ngày 25/10/2026), nên trên Mac không cần ≥ 0.164. Đặt `CODEX_BIN` trỏ tới file đó. Mac không có `pwsh`: chạy thẳng `codex exec` với cùng tham số của `run.ps1`.
+- **Trên Mac mini M4:** Codex CLI có sẵn trong extension ChatGPT của Cursor (không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-<bản>/bin/macos-aarch64/codex`. Bản 0.162.0-alpha.17.2 gọi được `gpt-6.1-sol` (thử ngày 25/10/2026), nên trên Mac không cần ≥ 0.164. Mac không có `pwsh`, nên dùng hai bản bash cùng cách làm:
+  - `tools/codex-run/run.sh <tên> <phiếu> [thư mục] [effort] [sandbox]`;
+  - `tools/codex-run/queue.sh <danh sách>`: cùng định dạng danh sách, tự chờ khi hết hạn mức (tối đa 12 lần), chạy lại khi rớt kết nối (tối đa 4 lần).
+  - Hai script tự tìm bản mới nhất trong extension Cursor; đặt `CODEX_BIN` nếu muốn dùng bản khác.
+  - Trên Mac dùng sandbox `workspace-write` (không cần `danger-full-access`, vì git, node, ImageMagick chạy thẳng, không qua WSL).
 
 ## Cách dùng
 
