@@ -10,14 +10,16 @@
 
 | Lô | Nhóm | Số ảnh | Đã có | Phiếu Codex |
 |---|---|---:|---:|---|
-| A | Ảnh nguồn 3D (GLB) | 47 | 42 | 007, 007b, 008 |
-| R | Danh sách nhân vật (concept) | 11 | 4 (009 đang chạy) | 009 |
+| A | Ảnh nguồn 3D (GLB): thú, cơ quan, prop, pháp bảo | 47 | 42 | 007, 007b, 008 |
+| A2 | Ảnh nguồn 3D nhân vật theo danh sách đã duyệt: 4 MVP + pháp khí | 11 | 0 | 013 |
+| A3 | Ảnh nguồn 3D 6 nhân vật sau MVP, 2 linh thú, 6 pháp khí | ≈ 22 | 0 | 013b |
+| R | Danh sách nhân vật (concept) | 11 | 11, **chủ dự án duyệt 25/10** | 009 |
 | E | Môi trường: đất, decal, phông, cỏ bụi | 23 | 0 | 010a |
 | V | Kết cấu VFX | 18 | 0 | 010a |
 | I | Biểu tượng | 35 | 0 | 010b |
 | U | Giao diện, Sơn Môn, màn tựa | 15 | 0 | 010c |
 | T | Tĩnh Tu | 10 | 0 | 010c |
-| **Cộng** | | **159** | **46** | |
+| **Cộng** | | **≈ 192** | **53** | |
 
 Âm thanh và nhạc không nằm trong danh sách này. Danh sách âm làm ở M0b (canon §22), sinh âm bằng audio-lab trên Mac.
 
@@ -42,9 +44,20 @@
 | `treasures/thanh-phong-kiem` | Phi kiếm Thanh Phong (ô 1, "vạn kiếm") | trên, cạnh | trên: có; cạnh: chờ (007b) |
 | `treasures/hau-tho-an` | Hậu Thổ Ấn (pháp bảo Thổ thể) | 1 | chờ (007b) |
 
-## R. Danh sách nhân vật (D49; concept, chưa gửi Tripo)
+## R. Danh sách nhân vật (D49; concept)
 
-5 trường phái × nam/nữ cộng ảnh đội hình. Kiếm nữ dùng chân dung A. Gồm: Kiếm (nữ ✓, nam), Thổ thể (nam, nữ), Phù (nam, nữ), Hỏa (nam, nữ), Ngự thú (nam, nữ, kèm linh thú nhỏ), cộng `roster/doi-hinh.png`. Phiếu 009.
+- **Gồm:** 5 trường phái × nam/nữ cộng ảnh đội hình. Kiếm nữ dùng chân dung A.
+  - Kiếm (nữ, nam), Thổ thể (nam, nữ), Phù (nam, nữ), Hỏa (nam, nữ), Ngự thú (nam, nữ, kèm linh thú nhỏ);
+  - ảnh đội hình `roster/doi-hinh.png`.
+  - Phiếu 009.
+- **Chủ dự án duyệt cả 10 ngày 25/10** ("10 ảnh kia đạt").
+- **Ảnh nguồn 3D theo bộ này:**
+  - phiếu 013: Kiếm nam/nữ, Thổ thể nam/nữ, trượng đá;
+  - phiếu 013b: 6 nhân vật sau MVP, linh lộc, linh cáo, 6 pháp khí.
+- **Thay thế:**
+  - `cultivators/kiem-tu.*` thay bằng `kiem-nu.*`;
+  - `tho-the-tu.*` thay bằng `tho-the-nam.*`, `tho-the-nu.*`.
+  - Bot không có ảnh nguồn riêng: dùng model trường phái còn lại, đổi màu áo.
 
 ## E. Môi trường (2D dùng thẳng: nướng lên đất, lặp liền mép)
 

@@ -45,7 +45,7 @@ Không chạy git, không sửa mã.
   - giữa khung phải trơn để kéo giãn được;
   - ghi số cắt (trên, phải, dưới, trái, theo px) của mỗi khung vào `art-src/ui/slices.json`.
 - **Ảnh 1920 × 1080:** `image_gen` sinh tối đa 1536 × 1024. Cắt về 16:9 rồi phóng bằng Lanczos; ghi khổ gốc vào README.
-- Nếu đã có `tools/art-normalize/` (phiếu 012) thì dùng nó.
+- Chỉ dùng `tools/art-normalize/` (phiếu 012) khi `docs/CODEX_QUEUE.md` ghi phiếu 012 "Claude đã duyệt"; không thì tự gọi `magick`.
 
 ## Lô T · Tĩnh Tu (10)
 

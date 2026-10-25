@@ -70,7 +70,7 @@ Không làm flipbook: game tạo chuyển động bằng shader.
 
 3. **Xử lý bằng ImageMagick trong WSL.** `magick` ở `~/.local/bin/magick`; đường dẫn Windows `D:\…` là `/mnt/d/…` trong WSL.
    - Gọi: `wsl -e bash -lc "<lệnh>"`, hoặc viết script `.sh` vào `games/immortality-cultivation/art-src/_tools/` rồi chạy `wsl -e bash /mnt/d/.../x.sh`.
-   - Nếu đã có `tools/art-normalize/` (phiếu 012) thì dùng nó.
+   - Chỉ dùng `tools/art-normalize/` (phiếu 012) khi `docs/CODEX_QUEUE.md` ghi phiếu 012 "Claude đã duyệt"; không thì tự gọi `magick`.
 4. **Làm ảnh xem nhanh** `art-src/_review/010a-environment.png` và `010a-vfx.png` bằng `magick montage`:
    - ảnh VFX hòa cộng: đặt trên nền tối;
    - ảnh trong suốt: đặt trên nền ca rô;

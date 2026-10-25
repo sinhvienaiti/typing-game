@@ -44,7 +44,7 @@ Không chạy git, không sửa mã.
   - Kiếm theo hệ Kim (bạc lam, trắng ngà); Thổ thể theo hệ Thổ (ngọc vàng đất, nâu đá).
 - **Khổ:** sinh 1024², lưu bản cuối 256² PNG trong suốt và thêm bản 64² (`<id>@64.png`).
   - Nếu `image_gen` không ra nền trong suốt: sinh trên nền phẳng một màu, tách alpha bằng ImageMagick trong WSL (`~/.local/bin/magick`, ổ `D:` là `/mnt/d`).
-  - Nếu đã có `tools/art-normalize/` (phiếu 012) thì dùng nó.
+  - Chỉ dùng `tools/art-normalize/` (phiếu 012) khi `docs/CODEX_QUEUE.md` ghi phiếu 012 "Claude đã duyệt"; không thì tự gọi `magick`.
   - Bản sinh giữ là `<id>.raw.png`; prompt lưu `<id>.prompt.txt`.
 - Ảnh đã có thì bỏ qua. Ảnh hỏng rõ thì tạo lại tối đa 1 lần.
 

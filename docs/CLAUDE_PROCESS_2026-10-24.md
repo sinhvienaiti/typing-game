@@ -209,7 +209,12 @@ Test audio-lab trên Dell:
   - Xem trạng thái ở `docs/CODEX_QUEUE.md`, log ở `.local/codex-runs/`.
   - **Nếu máy tắt giữa chừng:** chạy lại `queue.ps1` với cùng file danh sách. Bỏ dòng của phiếu đã xong; phiếu ảnh tự bỏ qua ảnh đã có.
 - **Luật mới (chủ dự án, 25/10):** Claude duyệt kỹ mọi đầu ra của Codex trước khi commit: đọc diff, chạy test, phản biện nhiều góc. Ghi ở `docs/CODEX_QUEUE.md`.
-- **Phiếu 009 xong:** 10 chân dung cộng ảnh đội hình. Ảnh xem nhanh ở `games/immortality-cultivation/art-src/_review/009-roster-sheet.jpg`. **Chờ chủ dự án chọn hoặc sửa** trước khi làm ảnh nguồn 3D.
+- **Phiếu 009 xong; chủ dự án duyệt cả 10 chân dung (25/10, "10 ảnh kia đạt").**
+  - Canon D49 ghi pháp khí và linh thú theo bộ đã duyệt. Ảnh xem nhanh: `games/immortality-cultivation/art-src/_review/009-roster-sheet.jpg`.
+  - Ảnh nguồn 3D:
+    - phiếu 013: 4 nhân vật MVP, đứng đầu làn A;
+    - phiếu 013b: 6 nhân vật sau MVP, linh thú, pháp khí, cuối làn A.
+  - Đề xuất rig: một bộ xương mẫu người + tà áo trong Blender cho mọi nhân vật, 0 credit rig Tripo.
 - **M0a đợt A của Tu Tiên xong và đã push** (game `947bc5a`; repo cha nâng gitlink ở `2eccea5c`).
   - Gồm bước 0 và các làn 1a, 2, 3, 5, 8. Phản biện độc lập: đạt.
   - Phản biện nêu 3 lỗi lớn:
