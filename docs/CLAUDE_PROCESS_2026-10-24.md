@@ -53,6 +53,27 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
   - Codex CLI trên Mac cần ≥ 0.164 (`tools/codex-run/README.md`).
 - **Đưa game lên mạng:** `docs/HOSTING_PLAN_2026-10-25.md`. Bước 0 là việc của chủ dự án.
 
+### 0.3b ĐÃ DỪNG TOÀN BỘ lúc 25/10 khoảng 16:45 (chủ dự án tắt Dell). Chạy tiếp trên Mac
+- **Workflow M0a đợt B của Tu Tiên dừng giữa làn 7.**
+  - Trên `main`, đã push: các làn 4, 1b, 6, tích hợp (`19f35a2`).
+  - Phần làm dở của làn 7, chưa kiểm, chưa phản biện: nhánh `wip/m0a-part-b-stop-2026-10-25` (`b552d0e`), đã push.
+  - **Trên Mac:**
+    1. xem diff nhánh wip, giữ phần đúng, gộp vào `main`;
+    2. chạy lại làn 7 (bot, cổng B1–B8, CB, HC, golden, kịch bản `ic-*`, `ic-camera-frame`);
+    3. phản biện độc lập, rồi vòng sửa.
+  - Prompt các bước ở `.local/workflows/tu-tien-m0a-part-b.js` (có trong gói Downloads).
+- **Codex bị dừng giữa chừng.** Phiếu ảnh tự bỏ qua ảnh đã có, nên chạy lại là làm tiếp:
+  - **005a** (ảnh nhân vật bậc VS của Lời Gọi): dừng khi đang vẽ. Chạy lại 005a, rồi 005b.
+  - **012b** (sửa `tools/art-normalize`): dừng khi đang sửa. Bản đang dở **không commit**, có trong gói ở `typing-game/tools/art-normalize`. Trên Mac: chạy lại 012b, Claude phản biện, rồi mới commit.
+  - **014** (8 avatar Tu Tiên): đã xong 6–8 mẫu. Kiểm `art-src/avatar-test/`; thiếu thì chạy lại 014, rồi ghép ảnh xem nhanh.
+  - **Chưa chạy:**
+    - 015, 016 (ảnh 2D và gom Tripo cho 3 game);
+    - danh sách Tu Tiên `.local/codex-lane-tutien.txt` (007b, 010a, 010b, 010c).
+  - File danh sách nằm trong gói ở `typing-game/.local/`.
+- **Không có tiến trình nào còn chạy;** mọi repo đã push.
+  - Chưa vào Git: `tools/art-normalize/` (chờ phản biện) và tài liệu gốc `TU_TIEN_TYPING_SYSTEMS_AND_5_COMBAT_OPTIONS_V2_2026-10-24.md` của chủ dự án.
+  - Cả hai đều có trong gói Downloads.
+
 ### 0.4 Luật mới hôm nay (đã ghi vào bộ nhớ Claude)
 - Trả lời chủ dự án **bằng tiếng Việt**. Câu hỏi đơn giản thì trả lời ngắn, không tự làm thêm việc lớn.
 - Duyệt kỹ mọi đầu ra của Codex trước khi commit (`docs/CODEX_QUEUE.md`).
