@@ -1,6 +1,6 @@
 // Source: games/space-typing@survival-s0 tests/feedback-numbers.test.ts (kit copy, plus the profiles)
 import { afterEach, describe, expect, it } from "vitest";
-import { NUMBER_ATLAS, NumberField, NumberSprites, STYLE, digitCellWidth, popScale, type GlyphMetrics } from "./numbers";
+import { NUMBER_ATLAS, NumberField, NumberSprites, STYLE, digitCellWidth, numberInk, popScale, quadInk, type GlyphMetrics, type Rect } from "./numbers";
 import { DRAGON, SHIP } from "./profiles";
 
 /**
@@ -16,6 +16,35 @@ const field = () => {
   return f;
 };
 const live = (f: NumberField) => [...f.alive].map((alive, i) => (alive === 1 ? i : -1)).filter((i) => i >= 0);
+
+type Paint = { text: string; x: number; y: number; font: string };
+const originalDocument = (globalThis as { document?: unknown }).document;
+afterEach(() => {
+  (globalThis as { document?: unknown }).document = originalDocument;
+});
+/** A document whose canvas measures text with `digits` (italic, the digit font) and `label`, and records what is painted. */
+const installCanvas = (digits: Record<string, GlyphMetrics>, label: GlyphMetrics) => {
+  const painted: Paint[] = [];
+  const context = {
+    font: "",
+    textAlign: "start",
+    textBaseline: "alphabetic",
+    lineJoin: "miter",
+    lineWidth: 1,
+    strokeStyle: "",
+    fillStyle: "",
+    measureText(text: string) {
+      return this.font.startsWith("italic") ? digits[text]! : label;
+    },
+    strokeText() {},
+    fillText(text: string, x: number, y: number) {
+      painted.push({ text, x, y, font: this.font });
+    },
+  };
+  const canvas = { width: 0, height: 0, getContext: () => context };
+  (globalThis as { document?: unknown }).document = { createElement: () => canvas };
+  return { canvas, painted };
+};
 
 describe("rolling up", () => {
   it("adds blows on one target within 150 ms into one number that pops again", () => {
@@ -105,6 +134,14 @@ describe("protected rectangles", () => {
     expect(f.live).toBeLessThanOrEqual(f.limit);
   });
 });
+
+/**
+ * A perfect number's box height without a canvas (the whole quads count as
+ * ink), in font sizes: from the label quad's top (its middle 0.4 label heights
+ * above the digits' top, 1.3 label heights per 64 of its 128 rows) to the
+ * glyph quads' bottom (1.25 font sizes down); box() adds 3 px.
+ */
+const WHOLE_H = NUMBER_ATLAS.glyphQuadH + (NUMBER_ATLAS.labelMidUp + (NUMBER_ATLAS.labelQuadH * NUMBER_ATLAS.labelRowH) / NUMBER_ATLAS.cellH / 2) * NUMBER_ATLAS.label;
 
 describe("a crowd's numbers (S0 review: no towers)", () => {
   const extent = (f: NumberField) => {
@@ -239,10 +276,10 @@ describe("a crowd's numbers (S0 review: no towers)", () => {
     // Just above the frame at rest size, over it while popping (1.35×).
     const i = f.spawn(1, 640, 578, 30, STYLE.perfect, 3, 1.6, 0.8, 0, -1, 0);
     expect(i).toBeGreaterThanOrEqual(0);
-    // Drawn size at its pop: the glyph height is the font size × pop.
+    // Drawn size at its pop: the glyph quads stand 1.25 × the font size × pop from the number's top, above the frame.
     const px = f.fontPx * f.size[i]! * popScale(f.tier[i]!, f.pop[i]!);
-    expect(f.y[i]! + px / 2).toBeLessThanOrEqual(580);
-    expect(f.box(i, { x: 0, y: 0, w: 0, h: 0 }).h).toBeCloseTo(px * 1.42, 6);
+    expect(f.y[i]! - px / 2 + px * NUMBER_ATLAS.glyphQuadH).toBeLessThanOrEqual(580);
+    expect(f.box(i, { x: 0, y: 0, w: 0, h: 0 }).h).toBeCloseTo(WHOLE_H * px + 3, 6);
     expect(f.overlaps()).toBe(0);
   });
 
@@ -251,7 +288,7 @@ describe("a crowd's numbers (S0 review: no towers)", () => {
     expect(popScale(3, 1, flat.tiers)).toBe(1);
     const f = new NumberField(flat);
     const i = f.spawn(1, 640, 300, 30, STYLE.perfect, 3, 1.6, 0.8, 0, -1, 0);
-    expect(f.box(i, { x: 0, y: 0, w: 0, h: 0 }).h).toBeCloseTo(f.fontPx * 1.6 * 1.42, 4);
+    expect(f.box(i, { x: 0, y: 0, w: 0, h: 0 }).h).toBeCloseTo(WHOLE_H * f.fontPx * 1.6 + 3, 4);
   });
 });
 
@@ -343,34 +380,8 @@ describe("the glyph atlas", () => {
     expect(blind / 2).toBeGreaterThanOrEqual(33.4 / 2 + A.digitOutline / 2 + A.edgePx);
   });
 
-  type Paint = { text: string; x: number; y: number; font: string };
-  const originalDocument = (globalThis as { document?: unknown }).document;
-  afterEach(() => {
-    (globalThis as { document?: unknown }).document = originalDocument;
-  });
   /** A canvas whose 2D context measures with the metrics above and records what is painted. */
-  const fakeCanvas = () => {
-    const painted: Paint[] = [];
-    const context = {
-      font: "",
-      textAlign: "start",
-      textBaseline: "alphabetic",
-      lineJoin: "miter",
-      lineWidth: 1,
-      strokeStyle: "",
-      fillStyle: "",
-      measureText(text: string) {
-        return this.font.startsWith("italic") ? DIGIT[text]! : LABEL;
-      },
-      strokeText() {},
-      fillText(text: string, x: number, y: number) {
-        painted.push({ text, x, y, font: this.font });
-      },
-    };
-    const canvas = { width: 0, height: 0, getContext: () => context };
-    (globalThis as { document?: unknown }).document = { createElement: () => canvas };
-    return { canvas, painted };
-  };
+  const fakeCanvas = () => installCanvas(DIGIT, LABEL);
 
   it("paints each digit in the middle of its own cell and the label in its own row, below the digits' reach", () => {
     const { canvas, painted } = fakeCanvas();
@@ -425,5 +436,217 @@ describe("the glyph atlas", () => {
     expect([uv[o + 1]! * A.height, uv[o + 3]! * A.height]).toEqual([A.labelTop, A.labelTop + A.labelRowH]);
     expect(rect[o + 3]! / A.labelRowH).toBeCloseTo((lh * 1.3) / 64, 6);
     expect(rect[o + 1]! + rect[o + 3]! / 2).toBeCloseTo(top - 0.4 * lh, 4);
+  });
+});
+
+/**
+ * Kit drift from dragon-hold round 3: box() counted the digits' advances and
+ * one font size of height (1.42 for a perfect number), but NumberSprites draws
+ * more. Each italic, outlined glyph's ink reaches past its advance, the glyph
+ * quads stand 1.25 font sizes tall from the number's top, and the "HOÀN HẢO"
+ * label is wider than a few digits. Two labels side by side touched (round 2
+ * gate) and a number's digits reached the label under it (review 2 minor 2).
+ * settle() made one pass, so a number it lifted could stay on one it had
+ * already passed (round 3: 8–11 of ~2,770 storm frames a run). Metrics below
+ * are Chrome's for dragon-hold's fonts on the Mac mini M4 (Chrome 155,
+ * textAlign centre, textBaseline middle), after the fonts loaded.
+ */
+describe("a number's box is what NumberSprites draws", () => {
+  const MAC: Record<string, Required<GlyphMetrics>> = {
+    "0": { width: 36.8, actualBoundingBoxLeft: 12.8, actualBoundingBoxRight: 22.4, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.6 },
+    "1": { width: 23.2, actualBoundingBoxLeft: 2.7, actualBoundingBoxRight: 16.7, actualBoundingBoxAscent: 23.4, actualBoundingBoxDescent: 15.1 },
+    "2": { width: 34.8, actualBoundingBoxLeft: 14.7, actualBoundingBoxRight: 21.6, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.1 },
+    "3": { width: 35.7, actualBoundingBoxLeft: 12.3, actualBoundingBoxRight: 21.9, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.6 },
+    "4": { width: 37.6, actualBoundingBoxLeft: 14.9, actualBoundingBoxRight: 20.4, actualBoundingBoxAscent: 23.4, actualBoundingBoxDescent: 15.1 },
+    "5": { width: 35.8, actualBoundingBoxLeft: 12.5, actualBoundingBoxRight: 22.2, actualBoundingBoxAscent: 23.4, actualBoundingBoxDescent: 15.6 },
+    "6": { width: 36.7, actualBoundingBoxLeft: 12.1, actualBoundingBoxRight: 21.2, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.6 },
+    "7": { width: 31.1, actualBoundingBoxLeft: 8, actualBoundingBoxRight: 24.1, actualBoundingBoxAscent: 23.4, actualBoundingBoxDescent: 15.1 },
+    "8": { width: 35.3, actualBoundingBoxLeft: 13.3, actualBoundingBoxRight: 21.9, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.6 },
+    "9": { width: 36.7, actualBoundingBoxLeft: 11.6, actualBoundingBoxRight: 21.7, actualBoundingBoxAscent: 23.9, actualBoundingBoxDescent: 15.6 },
+    "×": { width: 33.5, actualBoundingBoxLeft: 8, actualBoundingBoxRight: 16.1, actualBoundingBoxAscent: 11.8, actualBoundingBoxDescent: 9.6 },
+  };
+  const MAC_LABEL: Required<GlyphMetrics> = { width: 225.7, actualBoundingBoxLeft: 110.3, actualBoundingBoxRight: 111.4, actualBoundingBoxAscent: 30.1, actualBoundingBoxDescent: 12 };
+  const A = NUMBER_ATLAS;
+  const zero = (): Rect => ({ x: 0, y: 0, w: 0, h: 0 });
+  const touch = (a: Rect, b: Rect) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+  const inside = (a: Rect, box: Rect) => a.x >= box.x - 1e-6 && a.y >= box.y - 1e-6 && a.x + a.w <= box.x + box.w + 1e-6 && a.y + a.h <= box.y + box.h + 1e-6;
+
+  /** The box before the fix: the digits' advances, one font size tall (a perfect number 1.42, the label above). */
+  class AdvanceBoxField extends NumberField {
+    override box(i: number, out: Rect, x = this.x[i]!, y = this.y[i]!): Rect {
+      const px = this.fontPx * this.size[i]! * popScale(this.tier[i]!, this.pop[i]!, this.profile.tiers);
+      const perfect = this.style[i] === STYLE.perfect;
+      out.w = this.text(i).length * A.advance * px;
+      out.h = px * (perfect ? 1 + A.label : 1);
+      out.x = x - out.w / 2;
+      out.y = y - px / 2 - (perfect ? A.label * px : 0);
+      return out;
+    }
+  }
+
+  /**
+   * Each live number's ink on screen as NumberSprites wrote it: per glyph quad,
+   * the glyph's measured box (outline included) at its cell's middle; for a
+   * perfect number, the label's in its row.
+   */
+  const drawnInk = (sprites: NumberSprites, field: NumberField): Map<number, Rect[]> => {
+    const { rect, labelWidth } = sprites as unknown as { rect: Float32Array; labelWidth: number };
+    const cell = sprites.cellWidth;
+    const out = new Map<number, Rect[]>();
+    let q = 0;
+    for (let i = 0; i < field.alive.length; i += 1) {
+      if (field.alive[i] === 0) continue;
+      const text = field.text(i);
+      const inks: Rect[] = [];
+      for (let c = 0; c < text.length; c += 1, q += 1) {
+        const m = MAC[text[c]!]!;
+        const o = q * 4;
+        const x0 = cell / 2 - m.actualBoundingBoxLeft - A.digitOutline / 2;
+        const x1 = cell / 2 + m.actualBoundingBoxRight + A.digitOutline / 2;
+        const y0 = A.digitMidY - m.actualBoundingBoxAscent - A.digitOutline / 2;
+        const y1 = A.digitMidY + m.actualBoundingBoxDescent + A.digitOutline / 2;
+        inks.push({ x: rect[o]! + (x0 / cell) * rect[o + 2]!, y: rect[o + 1]! + (y0 / A.cellH) * rect[o + 3]!, w: ((x1 - x0) / cell) * rect[o + 2]!, h: ((y1 - y0) / A.cellH) * rect[o + 3]! });
+      }
+      if (field.style[i] === STYLE.perfect) {
+        const o = q * 4;
+        q += 1;
+        const L = MAC_LABEL;
+        const x0 = labelWidth / 2 - L.actualBoundingBoxLeft - A.labelOutline / 2;
+        const x1 = labelWidth / 2 + L.actualBoundingBoxRight + A.labelOutline / 2;
+        const y0 = A.labelRowH / 2 - L.actualBoundingBoxAscent - A.labelOutline / 2;
+        const y1 = A.labelRowH / 2 + L.actualBoundingBoxDescent + A.labelOutline / 2;
+        inks.push({ x: rect[o]! + (x0 / labelWidth) * rect[o + 2]!, y: rect[o + 1]! + (y0 / A.labelRowH) * rect[o + 3]!, w: ((x1 - x0) / labelWidth) * rect[o + 2]!, h: ((y1 - y0) / A.labelRowH) * rect[o + 3]! });
+      }
+      out.set(i, inks);
+    }
+    return out;
+  };
+  const inkTouch = (inks: Map<number, Rect[]>, a: number, b: number) => inks.get(a)!.some((p) => inks.get(b)!.some((r) => touch(p, r)));
+
+  it("measures the atlas ink from the canvas, outline and edge included; a part it cannot measure counts its whole quad", () => {
+    const ink = numberInk("HOÀN HẢO", (font, text) => (font === A.digitFont ? MAC[text]! : MAC_LABEL));
+    // "7" reaches furthest (24.1 px right), "0" highest and lowest; the label 225.7 px wide.
+    expect(ink.digitHalf).toBeCloseTo(24.1 + 4.5 + 1, 6);
+    expect(ink.digitTop).toBeCloseTo(34 - 23.9 - 4.5 - 1, 6);
+    expect(ink.digitBottom).toBeCloseTo(34 + 15.6 + 4.5 + 1, 6);
+    expect(ink.labelWidth).toBeCloseTo(225.7 + 8 + 2, 6);
+    expect(ink.labelUp).toBeCloseTo(30.1 + 4 + 1, 6);
+    expect(ink.labelDown).toBeCloseTo(12 + 4 + 1, 6);
+    // Inside the quads: the cell's 64 rows, the label row's 64 rows either side of its middle.
+    expect(ink.digitTop).toBeGreaterThan(0);
+    expect(ink.digitBottom).toBeLessThan(A.cellH);
+    expect(ink.labelUp).toBeLessThan(A.labelRowH / 2);
+    const whole = quadInk("HOÀN HẢO");
+    expect(whole).toEqual({ digitHalf: A.minCellW / 2, digitTop: 0, digitBottom: A.cellH, labelWidth: 8 * 26 + 16, labelUp: 64, labelDown: 64 });
+    // No ascent from the canvas: the digits' rows are the whole cell; the rest is still measured.
+    const flat = numberInk("HOÀN HẢO", (font, text) => (font === A.digitFont ? { width: MAC[text]!.width, actualBoundingBoxLeft: MAC[text]!.actualBoundingBoxLeft, actualBoundingBoxRight: MAC[text]!.actualBoundingBoxRight } : { width: 225.7 }));
+    expect([flat.digitTop, flat.digitBottom, flat.labelUp, flat.labelDown]).toEqual([0, A.cellH, 64, 64]);
+    expect(flat.digitHalf).toBeCloseTo(ink.digitHalf, 6);
+    expect(flat.labelWidth).toBeCloseTo(225.7 + 8 + 2, 6);
+  });
+
+  it("holds every glyph's and the label's ink as written to the GPU; the advance box did not", () => {
+    installCanvas(MAC, MAC_LABEL);
+    const sprites = new NumberSprites(DRAGON);
+    const fields = [new NumberField(DRAGON), new AdvanceBoxField(DRAGON)];
+    const outside = fields.map((field) => {
+      field.fontPx = 16;
+      const ids = [
+        field.spawn(1, 200, 400, 7, STYLE.normal, 1, 1, 1, 0, -1, 0),
+        field.spawn(2, 400, 400, 128, STYLE.crit, 2, 1.3, 1, 0, -1, 0),
+        field.spawn(3, 640, 400, 1016, STYLE.perfect, 4, 1.6, 1, 0, -1, 0),
+        field.spawn(4, 900, 400, 6, STYLE.tick, 1, 1, 1, 0, -1, 0),
+      ];
+      for (let k = 1; k < 6; k += 1) field.spawn(4, 900, 400, 6, STYLE.tick, 1, 1, 1, 0, -1, k * 0.05);
+      expect(ids.every((id) => id >= 0)).toBe(true);
+      expect(field.text(ids[3]!)).toBe("36×6");
+      sprites.write(field, 1280, 720);
+      const inks = drawnInk(sprites, field);
+      let count = 0;
+      for (const [i, list] of inks) {
+        const box = field.box(i, zero());
+        for (const ink of list) if (!inside(ink, box)) count += 1;
+        if (field instanceof AdvanceBoxField || field.style[i] === STYLE.tick) continue;
+        // Not much bigger than the ink either: 3 px of room, a pixel of smoothing a side, and across, the widest
+        // glyph's reach at both ends (under an advance).
+        const px = field.fontPx * field.size[i]! * popScale(field.tier[i]!, field.pop[i]!, DRAGON.tiers);
+        const x0 = Math.min(...list.map((r) => r.x));
+        const x1 = Math.max(...list.map((r) => r.x + r.w));
+        const y0 = Math.min(...list.map((r) => r.y));
+        const y1 = Math.max(...list.map((r) => r.y + r.h));
+        expect(box.w - (x1 - x0)).toBeLessThanOrEqual(3 + A.advance * px);
+        expect(box.h - (y1 - y0)).toBeLessThanOrEqual(3 + 2);
+      }
+      return count;
+    });
+    expect(outside[0]).toBe(0);
+    // Before: the label and most glyphs' ink reached past the advance box.
+    expect(outside[1]).toBeGreaterThanOrEqual(5);
+  });
+
+  it("keeps two Hoàn hảo numbers on one spot apart as drawn, also while they fly (the round 2 gate shot)", () => {
+    installCanvas(MAC, MAC_LABEL);
+    const sprites = new NumberSprites(DRAGON);
+    const storm = (field: NumberField) => {
+      field.fontPx = 16;
+      const a = field.spawn(1, 640, 120, 256, STYLE.perfect, 3, 1.6, 0.9, 0, -1, 0);
+      const b = field.spawn(2, 640, 120, 126, STYLE.perfect, 3, 1.6, 0.9, 0, -1, 0.01);
+      expect([a >= 0, b >= 0]).toEqual([true, true]);
+      return [a, b] as const;
+    };
+    const old = new AdvanceBoxField(DRAGON);
+    const [oa, ob] = storm(old);
+    sprites.write(old, 1280, 720);
+    expect(inkTouch(drawnInk(sprites, old), oa, ob)).toBe(true);
+    const field = new NumberField(DRAGON);
+    const [a, b] = storm(field);
+    for (let k = 0; k <= 20; k += 1) {
+      if (field.alive[a] === 0 || field.alive[b] === 0) break;
+      sprites.write(field, 1280, 720);
+      expect(inkTouch(drawnInk(sprites, field), a, b)).toBe(false);
+      field.update(1 / 60);
+    }
+  });
+
+  it("keeps a number's digits off the label of a Hoàn hảo number just under it", () => {
+    installCanvas(MAC, MAC_LABEL);
+    const sprites = new NumberSprites(DRAGON);
+    const stacked = (field: NumberField) => {
+      field.fontPx = 16;
+      const a = field.spawn(1, 640, 200, 128, STYLE.perfect, 3, 1.6, 0.9, 0, -1, 0);
+      // Born 16 px above its blow, 1 px under the first's advance box (which ends half a font size under its middle).
+      const px = field.fontPx * field.size[a]! * popScale(field.tier[a]!, field.pop[a]!, DRAGON.tiers);
+      const b = field.spawn(2, 640, field.y[a]! + px / 2 + 1 + px / 2 + A.label * px + 16, 128, STYLE.perfect, 3, 1.6, 0.9, 0, -1, 0.01);
+      expect([a >= 0, b >= 0]).toEqual([true, true]);
+      return [a, b] as const;
+    };
+    const old = new AdvanceBoxField(DRAGON);
+    const [oa, ob] = stacked(old);
+    sprites.write(old, 1280, 720);
+    expect(inkTouch(drawnInk(sprites, old), oa, ob)).toBe(true);
+    const field = new NumberField(DRAGON);
+    const [a, b] = stacked(field);
+    sprites.write(field, 1280, 720);
+    expect(inkTouch(drawnInk(sprites, field), a, b)).toBe(false);
+  });
+
+  it("settle() lifts a number again when its first lift lands on one already passed: none touch after the frame", () => {
+    const f = new NumberField(DRAGON);
+    f.fontPx = 16;
+    // T4 numbers never merge. c (oldest) sits just above a; b (youngest) lands on a.
+    const c = f.spawn(1, 200, 600, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0);
+    const a = f.spawn(2, 640, 600, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0.01);
+    const b = f.spawn(3, 1000, 600, 120, STYLE.perfect, 4, 1.6, 2, 0, -1, 0.02);
+    const h = f.box(a, zero()).h;
+    [f.x[a], f.y[a]] = [640, 400];
+    [f.x[c], f.y[c]] = [640, 400 - h - 2];
+    [f.x[b], f.y[b]] = [640, 400];
+    f.settle();
+    const ids = [a, b, c];
+    for (const i of ids) for (const j of ids) if (j > i) expect(touch(f.box(i, zero()), f.box(j, zero()))).toBe(false);
+    // One pass lifts b off a onto c; the next lifts it above c.
+    expect(f.y[b]!).toBeLessThan(f.y[c]!);
+    expect(f.y[c]!).toBeLessThan(f.y[a]!);
+    expect([f.alive[a], f.alive[b], f.alive[c]]).toEqual([1, 1, 1]);
   });
 });
