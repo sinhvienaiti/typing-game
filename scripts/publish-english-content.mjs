@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { readJson, stableJson } from "./english-content-core.mjs";
 import { overlayEnglishReviewDecisions, readEnglishReviewLedger } from "./english-review-core.mjs";
 import { applyEnglishExampleLinks, readEnglishExampleLinkLedger } from "./english-example-link-core.mjs";
+import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [batchManifest,reviewLedger,exampleLinkLedger]=await Promise.all([
@@ -28,6 +29,16 @@ async function loadRecords(relative) {
     ?doc.records
     :overlayEnglishReviewDecisions(doc.records,reviewLedger,context);
 }
+async function loadReviewedTypingTextRecords() {
+  const relative="content/english/sentences/e06-reviewed-typing-text-sentences.json";
+  const result=await loadRecords(relative);
+  const context=batchSetsByPath.get(relative);
+  if (!context) throw new Error(relative+": missing manifest record-set context");
+  for (const shard of await readE11TypingTextReviewShards(root)) {
+    result.push(...overlayEnglishReviewDecisions(shard.records,reviewLedger,context));
+  }
+  return result;
+}
 function published(records,label) {
   const result=[];
   for (const record of records) {
@@ -40,11 +51,6 @@ function published(records,label) {
     result.push(record);
   }
   return result;
-}
-async function resetDir(relative) {
-  const target=path.join(root,relative);
-  await fs.rm(target,{recursive:true,force:true});
-  await fs.mkdir(target,{recursive:true});
 }
 async function publishDataset({dataset,baseDir,groups}) {
   const shards=[];
@@ -79,7 +85,7 @@ const grammarScaleTopics=[];
 const grammarScaleSentences=[];
 const grammarScaleExercises=[];
 const grammarScaleMistakes=[];
-const grammarScaleBatches=(batchManifest.batches??[]).filter(batch=>/^e05\.grammar-scale-[a-z][0-9]-[0-9]{2}$/u.test(batch.id)).sort((a,b)=>a.id.localeCompare(b.id,"en"));
+const grammarScaleBatches=(batchManifest.batches??[]).filter(batch=>/^e05\.grammar-scale-[a-z][0-9]-[0-9]{2}$/u.test(batch.id)).sort((a,b)=>a.id.localeCompare(b,"en"));
 for (const batch of grammarScaleBatches) {
   const sets=new Map((batch.recordSets??[]).map(set=>[set.id,set]));
   grammarScaleTopics.push(...await loadRecords(sets.get("grammar-topics").path));
@@ -90,14 +96,14 @@ for (const batch of grammarScaleBatches) {
 const reviewedE06Exercises=await loadRecords("content/english/sentences/e06-reviewed-exercises.json");
 const reviewedTranslationSentences=await loadRecords("content/english/sentences/e06-reviewed-translation-sentences.json");
 const reviewedTranslations=await loadRecords("content/english/sentences/e06-reviewed-translations.json");
-const reviewedTypingTextSentences=await loadRecords("content/english/sentences/e06-reviewed-typing-text-sentences.json");
+const reviewedTypingTextSentences=await loadReviewedTypingTextRecords();
 const reviewedCloze=await loadRecords("content/english/sentences/e06-reviewed-cloze.json");
 const reviewedDialogues=await loadRecords("content/english/sentences/e06-reviewed-dialogues.json");
 const reviewedCommonMistakes=await loadRecords("content/english/sentences/e06-reviewed-common-mistakes.json");
 const e04Collocations=[];
 const e04VerbPatterns=[];
 const e04Phrases=[];
-const e04Batches=(batchManifest.batches??[]).filter(batch=>batch.phase==="E04"&&batch.category==="phrases").sort((a,b)=>a.id.localeCompare(b.id,"en"));
+const e04Batches=(batchManifest.batches??[]).filter(batch=>batch.phase==="E04"&&batch.category==="phrases").sort((a,b)=>a.id.localeCompare(b,"en"));
 for (const batch of e04Batches) {
   for (const set of batch.recordSets??[]) {
     if (set.id==="collocations"||set.id==="scale-collocations") e04Collocations.push(...await loadRecords(set.path));
@@ -122,10 +128,7 @@ const phraseEnrichment=applyEnglishExampleLinks(e04Phrases,exampleLinkLedger,{
   targetType:"phrase",
   examples:allPublishedExamples,
 });
-const appliedExampleLinks=
-  verbPatternEnrichment.applied+
-  collocationEnrichment.applied+
-  phraseEnrichment.applied;
+const appliedExampleLinks=verbPatternEnrichment.applied+collocationEnrichment.applied+phraseEnrichment.applied;
 
 await fs.mkdir(path.join(root,"shared","dictionary"),{recursive:true});
 await fs.mkdir(path.join(root,"shared","grammar"),{recursive:true});
