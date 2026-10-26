@@ -449,11 +449,13 @@ describe("the glyph atlas", () => {
  * settle() made one pass, so a number it lifted could stay on one it had
  * already passed (round 3: 8–11 of ~2,770 storm frames a run). Metrics below
  * are Chrome's on the Mac mini M4 (Chrome 155, textAlign centre, textBaseline
- * middle) for the atlas font lists. Neither "Exo 2" nor "Be Vietnam Pro" is
- * installed or served there (no @font-face), so they are the system fallback's
- * (26/10 review; document.fonts.check() reads true for a family it never
- * loads). The atlas paints with the same fallback, so the box still matches
- * what is drawn; another machine's fonts give other numbers.
+ * middle) in dragon-hold's page, after its fonts loaded. "Exo 2" is neither
+ * installed nor served there, so the digits fall to "Be Vietnam Pro" (the game
+ * loads it from @fontsource, 800; the italic is synthesized); the label is Be
+ * Vietnam Pro 800 itself (checked 26/10: same widths with "Be Vietnam Pro"
+ * named alone, system-ui gives 30.1 and 213.5; document.fonts.check() reads
+ * true for "Exo 2" though nothing loads it). A game without that font gets
+ * other numbers; its box then follows its own atlas.
  */
 describe("a number's box is what NumberSprites draws", () => {
   const MAC: Record<string, Required<GlyphMetrics>> = {
