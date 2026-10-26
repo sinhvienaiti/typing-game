@@ -448,8 +448,12 @@ describe("the glyph atlas", () => {
  * gate) and a number's digits reached the label under it (review 2 minor 2).
  * settle() made one pass, so a number it lifted could stay on one it had
  * already passed (round 3: 8–11 of ~2,770 storm frames a run). Metrics below
- * are Chrome's for dragon-hold's fonts on the Mac mini M4 (Chrome 155,
- * textAlign centre, textBaseline middle), after the fonts loaded.
+ * are Chrome's on the Mac mini M4 (Chrome 155, textAlign centre, textBaseline
+ * middle) for the atlas font lists. Neither "Exo 2" nor "Be Vietnam Pro" is
+ * installed or served there (no @font-face), so they are the system fallback's
+ * (26/10 review; document.fonts.check() reads true for a family it never
+ * loads). The atlas paints with the same fallback, so the box still matches
+ * what is drawn; another machine's fonts give other numbers.
  */
 describe("a number's box is what NumberSprites draws", () => {
   const MAC: Record<string, Required<GlyphMetrics>> = {
@@ -678,6 +682,36 @@ describe("a number's box is what NumberSprites draws", () => {
       f.update(1 / 60);
       if (f.alive[i] === 1) expect(f.box(i, zero()).y).toBeGreaterThanOrEqual(-1e-6);
     }
+  });
+
+  it("a merge inside settle() keeps the grown number at the top edge, not past it (26/10 review: the merge popped it with no clamp)", () => {
+    const f = new NumberField(DRAGON);
+    f.fontPx = 16;
+    const a = f.spawn(1, 640, 300, 12, STYLE.normal, 2, 1, 2, 0, -1, 0);
+    const b = f.spawn(2, 900, 300, 9, STYLE.normal, 2, 1, 2, 0, -1, 0.01);
+    expect([a >= 0, b >= 0]).toEqual([true, true]);
+    // Both done popping and still; a's box just under the top edge, b dragged onto it (same style, below T3: a takes it in).
+    f.pop[a] = 0;
+    f.pop[b] = 0;
+    f.vx.fill(0);
+    f.vy.fill(0);
+    f.y[a] = f.y[a]! - f.box(a, zero()).y + 0.5;
+    [f.x[b], f.y[b]] = [f.x[a]!, f.y[a]!];
+    // The pop (× 1.35 at T2) and the longer value grow a's box upward past y 0 unless the merge puts it back.
+    f.settle();
+    expect([f.alive[a], f.alive[b]]).toEqual([1, 0]);
+    expect(f.pop[a]).toBe(1);
+    expect(f.box(a, zero()).y).toBeGreaterThanOrEqual(-1e-6);
+  });
+
+  it("an unmeasured glyph counts the whole quad of the cell the atlas paints, which may be wider than minCellW", () => {
+    expect(quadInk("HOÀN HẢO").digitHalf).toBe(A.minCellW / 2);
+    expect(quadInk("HOÀN HẢO", 80).digitHalf).toBe(40);
+    // Never narrower than the atlas's narrowest cell.
+    expect(quadInk("HOÀN HẢO", 10).digitHalf).toBe(A.minCellW / 2);
+    // Digits the canvas gives no width or box for: the whole cell digitCellWidth() would paint.
+    const blank = numberInk("HOÀN HẢO", (font) => (font === A.digitFont ? { width: 0 } : MAC_LABEL));
+    expect(blank.digitHalf).toBe(digitCellWidth(() => ({ width: 0 })) / 2);
   });
 
   it("settle() lifts a number again when its first lift lands on one already passed: none touch after the frame", () => {
