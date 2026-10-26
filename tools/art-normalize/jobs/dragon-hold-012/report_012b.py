@@ -15,7 +15,7 @@ def margins(record):
 
 
 def main():
-    raise SystemExit("Báo cáo 012b đã khóa; dùng report-012c.sh. Nội dung dưới đây là mẫu lịch sử đã bị phản biện.")
+    raise SystemExit("Báo cáo 012b đã khóa; dùng report-012d.sh. Nội dung dưới đây là mẫu lịch sử đã bị phản biện.")
     manifest_path = ART / "_review/normalize-metrics.json"
     obj = json.loads(manifest_path.read_text(encoding="utf-8"))
     require(obj["tool_sha256"] == tool_hashes(), "Hash công cụ không khớp lô.")

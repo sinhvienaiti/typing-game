@@ -132,4 +132,4 @@ def main():
     write_text_new(verification, json.dumps({'original_file_count': len(original['original_sha256']), 'original_sha256_unchanged': True, 'record_count': len(records), 'test': 'Đạt test.sh sau sửa seamless', 'new_files_sha256': {rel(p): digest(p) for p in newfiles}}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f"""Đạt kiểm bàn giao: {len(records)} bản xử lý; giữ nguyên {len(original['original_sha256'])} file gốc. Báo cáo: {report}""")
 if __name__ == '__main__':
-    raise SystemExit('Hồ sơ Phiếu 012 đã khóa; dùng rebuild-012b.sh cho lô sửa.')
+    raise SystemExit('Hồ sơ Phiếu 012 đã khóa; dùng rebuild-012d.sh cho lô sửa.')

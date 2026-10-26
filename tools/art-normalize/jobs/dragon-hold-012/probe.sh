@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-printf "%s\n" "Hồ sơ thử 012b đã khóa; dùng rebuild-012c.sh và inspect-pockets.sh." >&2
+printf "%s\n" "Hồ sơ thử 012b đã khóa; dùng rebuild-012d.sh và inspect-pockets.sh." >&2
 exit 1
 source "$(dirname -- "${BASH_SOURCE[0]}")/../../common.sh"
 export ART_NORMALIZE_DIR

@@ -56,8 +56,8 @@ def tool_hashes():
 
 def snapshot():
     current = json.loads((ART / "_review/normalize-metrics.json").read_text(encoding="utf-8"))
-    require(current.get("ticket") not in ("012b", "012c") and not current.get("archived_012"),
-            "Runner 012b đã khóa sau công bố; dùng runner 012c.")
+    require(current.get("ticket") not in ("012b", "012c", "012d") and not current.get("archived_012"),
+            "Runner 012b đã khóa sau công bố; dùng rebuild-012d.sh.")
     if META.exists():
         obj = json.loads(META.read_text(encoding="utf-8"))
         require(obj["tool_sha256"] == tool_hashes(), "Công cụ đã đổi sau khi bắt đầu lô; dùng vùng dựng mới.")
@@ -380,7 +380,7 @@ if __name__ == "__main__":
     except BlockingIOError:
         raise SystemExit("Một runner Rồng đang chạy; từ chối chạy đồng thời.")
     current = json.loads((ART / "_review/normalize-metrics.json").read_text())
-    require(current.get("ticket") not in ("012b", "012c") and not current.get("archived_012"), "Runner 012b đã khóa sau công bố; dùng 012c.")
+    require(current.get("ticket") not in ("012b", "012c", "012d") and not current.get("archived_012"), "Runner 012b đã khóa sau công bố; dùng rebuild-012d.sh.")
     if args.action == "build-parallel":
         snapshot()
         def worker(index):

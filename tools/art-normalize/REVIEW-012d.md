@@ -27,7 +27,7 @@ Ca bắt buộc khác: cắt cứng, cắt cột sai nhất, sọc tại chỗ c
 | API nhận tên nguồn bắt đầu `-` | Decorator ghi đường dẫn tuyệt đối đã kiểm trở lại đối số src/files. Test fit/pad/sheet với tên tương đối `-script`. |
 | File bị tráo thành SVG | Mỗi lần đọc dùng coder PNG/JPEG/WebP đã kiểm. Test tráo nội dung sau kiểm và canary MSL; không gọi decoder cho chữ ký bị cấm. |
 | File công bố 0600 | File mới và bản lưu dùng 0644. Sửa quyền các dẫn xuất lịch sử 012c/012b có tên trong hồ sơ, không sửa byte hay quyền nguồn. Test quyền file công bố và fsync phải xảy ra trước link. |
-| Tín hiệu khi dọn để partial | Chặn TERM/HUP/INT lúc tạo tên tạm và trong finally dọn; thử gửi từng tín hiệu ngay trong unlink. Tín hiệu sau link có thể báo lỗi nhưng đích đã đầy đủ, không còn partial. SIGKILL/mất điện ngoài bảo đảm này. |
+| Tín hiệu khi dọn để partial | Chặn TERM/HUP/INT lúc tạo tên tạm và trong finally dọn; thử gửi từng tín hiệu ngay trong unlink. Số partial còn lại giảm nhưng chưa hết: tín hiệu đến ngay sau os.link vẫn có thể để lại một `.normalize-*.partial` là hard link thứ hai của đích hoàn chỉnh (phản biện lần 4: 11/40 lượt SIGTERM). Đích vẫn đầy đủ. SIGKILL/mất điện ngoài bảo đảm này. |
 | Import thay SIGHUP/nohup | Chỉ CLI/runner gọi install_signal_handlers, giữ SIG_IGN. Test import không đổi handler. |
 | Pha một nhận symlink treo | Kiểm is_symlink và đường dẫn thực của cả tên cũ/bản lưu trước mọi đổi tên. Test runner 012d với symlink treo ở cuối danh sách, file đầu giữ nguyên hash và chưa có bản lưu. |
 | Test khóa có thể dựng art thật | Khóa riêng, ART/STAGE riêng cho mọi runner và report, gồm 012b/012c/012d. Bỏ khóa cũng chỉ tới dữ liệu tổng hợp thiếu manifest, không chạm art thật. |
@@ -76,7 +76,7 @@ Lượt chốt cuối sửa đúng một màu trong fixture: pixel ranh RGB (160
 
 ## 4. Chạy mutant
 
-`mutation_012d.py` nhập định nghĩa của ba bộ docs-tests và bộ code của người phản biện, áp lên bản sao công cụ, chạy test.sh riêng. Bản gốc phải đạt trước khi bắt đầu. Mẫu cũ hết hiệu lực được ghi riêng, không tính là bị bắt. Khi cùng hành vi đã chuyển hàm, ghi rõ retarget và giữ old/new trong kết quả.
+`mutation_012d.py` nhập định nghĩa của ba bộ docs-tests và bộ code của người phản biện, áp lên bản sao công cụ, chạy test.sh riêng. Các bộ này nằm trong `.tmp` của người phản biện, ngoài Git; clone mới không chạy lại được bảng dưới đây. Bản gốc phải đạt trước khi bắt đầu. Mẫu cũ hết hiệu lực được ghi riêng, không tính là bị bắt. Khi cùng hành vi đã chuyển hàm, ghi rõ retarget và giữ old/new trong kết quả.
 
 Lượt thăm dò trước khi chốt fixture bị loại hoàn toàn: một test mới gọi nhầm chữ ký preserve_interior lịch sử; sau đó kỳ vọng no-key-hue đã lẫn ngưỡng báo cáo >40 với ngưỡng sửa >50. Các lỗi fixture đã sửa. Chỉ lượt có baseline đạt và hash mã tương ứng được dùng cho bảng kết quả cuối; không cộng các lượt bị ngắt.
 
@@ -86,7 +86,7 @@ Lượt thăm dò trước khi chốt fixture bị loại hoàn toàn: một tes
 
 **Không áp được:** A5, M2, M3 sửa bước tô lại viền bằng màu trung bình lân cận, vốn đã bị xóa. Không tính ba mẫu này là bị bắt.
 
-**Giới hạn diễn giải:** “bị bắt” trong bảng nghĩa là test.sh của bản sao trả mã khác 0. E2 trượt vì IndexError; E6/E7 có biên an toàn trượt ở phép kiểm khoảng cách giải tích. H4–H6 trượt bằng FileNotFoundError khi đi tiếp qua chốt bị bỏ vào mô phỏng cố ý không có file đầu ra. H7 đã dịch file a trong ART giả trước khi phát hiện bản lưu z sai; phép kiểm hash a sau đó nhận FileNotFoundError. Đây là kiểm dữ liệu tổng hợp, không phải playtest phá art thật. M6 retarget trượt ở ca texture phải qua vì cửa sổ ngoài 3 px quá nhạy; kiểm sọc tại path B1 thật được báo riêng ở §3. Không diễn giải toàn bộ 67 mẫu là 67 kiểm ảnh thực độc lập.
+**Giới hạn diễn giải:** “bị bắt” trong bảng nghĩa là test.sh của bản sao trả mã khác 0. E2 trượt vì IndexError; E6/E7 có biên an toàn trượt ở phép kiểm khoảng cách giải tích. H4–H6 trượt bằng FileNotFoundError khi đi tiếp qua chốt bị bỏ vào mô phỏng cố ý không có file đầu ra. H7 đã dịch file a trong ART giả trước khi phát hiện bản lưu z sai; phép kiểm hash a sau đó nhận FileNotFoundError. H4–H7 chỉ ghim runner lịch sử rebuild_012c.py: khối chốt của regression_012d và ca bản lưu sai hash lúc đó chỉ nạp runner này, nên chúng không chứng minh runner 012d giữ chốt (mutant J-* tương ứng trên rebuild_012d.py còn sống; xem §6). Đây là kiểm dữ liệu tổng hợp, không phải playtest phá art thật. M6 retarget trượt ở ca texture phải qua vì cửa sổ ngoài 3 px quá nhạy; kiểm sọc tại path B1 thật được báo riêng ở §3. Không diễn giải toàn bộ 67 mẫu là 67 kiểm ảnh thực độc lập.
 
 Những mẫu đánh dấu “chuyển vị trí” được áp lại theo hành vi gần nhất sau khi mã đổi hàm. B4/M5 thay cách chọn trạng thái cuối DP, không còn là phép min/max cột thẳng cũ; ca cắt thẳng sai nhất trên B1 thật được kiểm riêng. M6 chuyển cả bề rộng cửa sổ lẫn phạm vi về đúng ba cột ngoài, không chỉ thu cửa sổ trong khi vẫn quét toàn dải. D6 chuyển mức nới một đơn vị sang ngưỡng residual 5→6, không giữ công thức nguồn+3 cũ.
 
@@ -176,3 +176,51 @@ Sau công bố: 164/164 hash nguồn, 461/461 hash lịch sử, 211/211 bản l�
 Các số không nên bỏ qua khi duyệt ảnh: D3 còn 2/3 pixel sắc khóa vừa theo ngưỡng >40; tùy chọn job chỉ kẹp >50. Bộ đếm viền/số alpha 9–249 trong lòng D2/D4 có tăng sau khi bỏ bước tô sáng viền; bảng README giữ nguyên số, không gán toàn bộ thành lỗi hoặc tuyên bố đã sạch mọi viền. Cần xem nguyên cỡ, nhất là hoa tím, rêu và nét tối. Khóa bão hòa xa nền vẫn có điểm bị xóa/partial theo quy tắc đã công bố, có bộ đếm riêng.
 
 Không sửa ảnh gốc, art-src/3d, Tu Tiên, game code/docs, tools/audio-lab, model hoặc âm thanh. Không chạy Git, build hay test game. Dựng lại B1, 8 decal, 40 icon; dựng lại 32 Tripo do thay quy tắc canvas/khóa trung tính. Giữ nội dung `.rejected-012`/`.rejected-012b`, lưu bản 012c bằng `.rejected-012c` và kiểm hash. Chủ dự án/Claude cần xem đường nối B1, viền tối decal, D2 tím, D3 và highlight Tripo ở 1:1, rồi phản biện lần 4 trước commit.
+
+## 6. Claude sửa sau phản biện lần 4
+
+Ngày 26/10/2026. Phản biện lần 4 (`.local/codex-runs/012d-review.json`) ghi 1 lỗi lớn và 14 lỗi nhỏ, đề nghị commit sau vài sửa nhỏ của Claude. Commit đầu giữ đúng công cụ Codex 012d, khớp `tool_sha256` của manifest công bố (41/41 file). Commit thứ hai là phần sửa dưới đây. Không dựng lại lô, không đổi ảnh nào trong art-src, không viết lại manifest; vì vậy hash mã hiện hành khác `tool_sha256` đã công bố, và đó là chủ đích.
+
+| Mục phản biện | Claude sửa |
+|---|---|
+| Lỗi lớn: chốt `--reference` cho qua đường nối rách | `reference_metrics` ghi `inferred_path_max_jump` và thêm tiêu chí `path_continuity`: bước lớn nhất của đường nối suy ra giữa hai hàng ≤8 px. Đo được: B1 công bố 5, ví dụ xy 4/4, B1 rách theo từng hàng 174. |
+| Test chưa ghim tính liền của DP | `regression_012d` thêm ba ca: đường nối metadata của seam-x.png nhảy ≤4 px giữa hai hàng; ô texture.png cắt theo argmin từng hàng của chính chi phí DP phải trượt `path_continuity`; nguồn có bướu sáng giữa overlap thì đường nối DP phải qua chốt, còn cắt thẳng giữa dải phải trượt `cut_continuity`. Ô thử được dựng độc lập với `minimum_path`. |
+| Chốt runner 012d không được test | Khối chốt (nội thất decal, nội thất icon, bản sọc 012 phải trượt, phông mới phải qua, khóa đậm xa viền) và ca bản lưu sai hash ở pha một chạy cho cả `rebuild_012c.py` lẫn `rebuild_012d.py`. Vùng dựng giả có sẵn `records/` và hash giả, nên bỏ một chốt sẽ đi tới validation và trượt rõ tên, không còn trượt vì thiếu file đầu ra. |
+| Thông báo khóa cũ | probe.sh, audit-probe.sh, normalize_dragon.py, finalize_dragon.py trỏ `rebuild-012d.sh`; report_012b.py trỏ `report-012d.sh`; runner 012b chặn thêm ticket `012d`. |
+| Tài liệu | README: art thật bắt buộc `--reference`; seam-check không thấy mảnh vỡ ở mức nội dung nên phải xem đường nối ở 1:1; ngưỡng cắt ghi đúng max(1; p99); partial có thể còn sau link; thêm dòng tiêu chí liền đường nối. Hồ sơ này sửa §2 (partial giảm chứ chưa hết) và §4 (H4–H7 chỉ ghim runner 012c; bộ mutant nằm ngoài Git). README job ghi việc ghim lại test sau khi dựng. |
+| example_xy.py | Kiểm WORK trước khi tạo thư mục; đường dẫn ngoài WORK không còn để lại thư mục rỗng. |
+| README-normalize: câu “Các dòng True…” sai (bảng 0/32 dòng True) | Không sửa file đã công bố: hash của nó nằm trong `_review/normalize-verification.json` và snapshot của runner kế tiếp đòi đúng hash đó. `report_012d.py` chỉ in câu này khi bảng có dòng True. |
+
+Kiểm sau sửa:
+
+- `seam-check.sh` trên B1 công bố với `--reference pine-river-far.png`: `pass` true, đủ 8 tiêu chí đạt, `inferred_path_max_jump` 5, 0/16 dải trượt.
+- Ví dụ xy trong README: `pass` true, bước đường nối lớn nhất 4 ở cả hai trục.
+- `test.sh` mã thoát 0; `verify-code.sh` mã thoát 0.
+
+Chạy lại mutant của người phản biện trên bản sao công cụ đã sửa (định nghĩa giữ nguyên trong `code-tests/mutate4.py`, mỗi mẫu một test.sh riêng). Trước sửa, cả tám mẫu đều còn sống.
+
+| Mẫu | Kết quả sau sửa | Ca bắt |
+|---|---|---|
+| `S3-dp-free-jump` | Trượt test | Ô seam-x có reference trượt `path_continuity` (bước 27 px). |
+| `S4-straight-cut-mid` | Trượt test | Ô bướu sáng: đường nối thành cắt thẳng giữa dải, trượt `cut_continuity`. |
+| `J-H4-decal-interior-gate-off` | Trượt test | Khối chốt runner 012d đi tới validation. |
+| `J-H5-rejected-012-must-fail-off` | Trượt test | Khối chốt runner 012d đi tới validation. |
+| `J-H6-strong-key-far-off` | Trượt test | Khối chốt runner 012d đi tới validation. |
+| `J-H7-phase1-archive-hash-off` | Trượt test | Runner 012d dịch a.png trước khi thấy bản lưu z sai hash. |
+| `J-backdrop-gate-off` | Trượt test | Khối chốt runner 012d đi tới validation. |
+| `J-icon-interior-gate-off` (thêm) | Trượt test | Runner 012d bỏ chốt icon, trượt ở chốt số bản ghi thay vì chốt nội thất. |
+
+Các mẫu còn sống khác của phản biện lần 4 (cắt theo dải 64 hàng, các chốt key(), J-canvas-first, J-no-hue-job-list-empty, J-preserve-hue-allow-all…) không được chạy lại và chưa ghim; xem danh sách hoãn.
+
+Hoãn cho chủ dự án hoặc phiếu sau; không mục nào chặn commit:
+
+- Viền tối từ quầng bóng nền xanh trên decal, rõ nhất ở forest-litter.v1 (trở lại mức 012b). Đưa crop 012c/012d cho chủ dự án chọn; nếu cần viền sạch hơn, phiếu sau tách bóng khóa khỏi sơn và thêm chốt độ sáng viền.
+- Vòng xanh khóa quanh đốm đã kẹp ở D3: 78 và 113 px có chênh khóa >25.
+- B1: mây bị cắt chéo và ngọn thông lơ lửng tại đường nối. Chấp nhận như lỗi thẩm mỹ, hoặc sau này thêm chi phí cắt qua vật thể vào DP.
+- Fixture cho các chốt của key(): viền tối, pixel không phải ứng viên, kẹp viền no-key-hue, không phóng to ở flat-bg.
+- Dải cắt trượt 16–32 hàng thay dải 64 hàng cố định: đoạn gãy 49 hàng vẫn lọt, một dải của B1 đúng bằng ngưỡng.
+- Gương hẹp ở chế độ `--reference`: ô đúng có đuôi ít chi tiết vẫn trượt `mirror`; test chỉ kiểm `criteria['detail']`.
+- Làm chắc việc dọn partial khi tín hiệu đến ngay sau os.link trong publish_file.
+- Kiểm thư mục symlink trong publish: đích mới phải resolve bên trong ART.
+- Chuỗi trợ giúp argparse còn tiếng Anh trên Python 3.9; report-012c.sh/report-012d.sh chạy báo cáo cả khi gọi `--help`.
+- mutation_012d.py nhận thư mục bộ mutant làm tham số.

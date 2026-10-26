@@ -147,4 +147,4 @@ def main():
         write_text_new(MANIFEST, json.dumps({'original_sha256': originals, 'originals_unchanged': unchanged, 'records': records, 'review': review_records}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Đã giữ nguyên {len(originals)} file gốc. Manifest: {MANIFEST}', flush=True)
 if __name__ == '__main__':
-    raise SystemExit('Hồ sơ Phiếu 012 đã khóa; dùng rebuild-012b.sh cho lô sửa.')
+    raise SystemExit('Hồ sơ Phiếu 012 đã khóa; dùng rebuild-012d.sh cho lô sửa.')

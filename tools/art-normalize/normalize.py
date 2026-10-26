@@ -566,6 +566,12 @@ def reference_metrics(w, h, pixels, rw, rh, reference, blend=.12):
         band = rlength-length if 0<rlength-length<length//2 else after["band_width"]
         has_overlap = rlength>length
         path = sa.infer_path(data,ref,band) if has_overlap else None
+        if path:
+            # infer_path decides each row on its own; a per-row free jump of the
+            # DP tears content into slivers that every other criterion misses.
+            jump = max((abs(a-b) for a,b in zip(path,path[1:])), default=0)
+            after["inferred_path_max_jump"] = jump
+            after["criteria"]["path_continuity"] = jump <= 8
         ref_laps=[]
         for k in range(1,length-1):
             samples=[]

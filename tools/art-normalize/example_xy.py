@@ -5,8 +5,10 @@ import sys
 from pathlib import Path
 import normalize as n
 
-folder=n.safe_path(sys.argv[1]);folder.mkdir(parents=True,exist_ok=True)
+folder=n.safe_path(sys.argv[1])
+# Check before mkdir, so a path outside WORK leaves no empty directories behind.
 if not folder.resolve().is_relative_to(n.WORK.resolve()):raise ValueError('Ví dụ phải nằm trong WORK.')
+folder.mkdir(parents=True,exist_ok=True)
 rng=random.Random(12012);w,h=320,288
 pixels=bytearray(v for _ in range(w*h) for v in (rng.randrange(90,166),rng.randrange(90,166),rng.randrange(90,166),255))
 raw=folder/'noise.png';out=folder/'ground.png'

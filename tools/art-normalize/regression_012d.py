@@ -95,29 +95,58 @@ def run(d):
     check(n.rgba(d/'neutral-paint-bridge-cut-012d.png')[2][(22*80+33)*4+3]==255,
           'Nới ngưỡng ứng viên làm xuyên cầu sơn, mất túi khóa <64 px.')
     # Execute the job guards with synthetic ART/STAGE and mocked processing.
-    # Reaching validation is a failure, never a nested real build.
+    # Reaching validation is a failure, never a nested real build. Both the
+    # historical 012c runner and the current 012d runner must hold every guard.
     from contextlib import ExitStack
     import tempfile
-    for guard,kind,word in (("interior","decal","Nội thất"),("rejected","backdrop","Bản sọc"),("residue","decal","Còn màu khóa")):
-        art=d/f'guard-art-{guard}';stage=d/f'guard-stage-{guard}';art.mkdir();stage.mkdir()
-        fake={"size":[1024,1024],"margins_ltrb_alpha_gt_0":[[50]*4]*4}
-        spec={"kind":kind,"input":"source.png","output":"output.png"}
-        preservation={"rgb_changed":1 if guard=="interior" else 0,"alpha_changed":0}
-        with ExitStack() as stack:
-            for name,value in (("ART",art),("STAGE",stage)):
-                stack.enter_context(patch.object(job,name,value))
-            for name,value in (("snapshot",{"old_records":[spec],"tool_sha256":{}}),("tool_hashes",{}),
-                               ("simple_metrics",fake),("key_residue",{"strong_key_far_from_edge":1 if guard=="residue" else 0}),
-                               ("fringe_metrics",{}),("preserve_interior",preservation),("run",{})):
-                stack.enter_context(patch.object(job,name,return_value=value))
-            stack.enter_context(patch.object(job,'verify_originals',return_value=None))
-            stack.enter_context(patch.object(n,'rgba',return_value=(64,64,bytearray([0,255,0,255]*4096))))
-            stack.enter_context(patch.object(n,'reference_metrics',return_value={"x":{"pass":True}}))
-            stack.enter_context(patch.object(job,'sidecar',return_value=None))
-            stack.enter_context(patch.object(job,'make_reviews',side_effect=RuntimeError('Không được tới validation')))
-            try:job.build()
-            except ValueError as error:check(word in str(error),f'Sai chốt job {guard}: {error}')
-            else:raise RuntimeError(f'Job bỏ chốt {guard}.')
+    guards=(("interior","decal","Nội thất decal",True),("icon","icon","Nội thất icon",True),
+            ("rejected","backdrop","Bản sọc",True),("backdrop","backdrop","Phông chưa đạt",False),
+            ("residue","decal","Còn màu khóa",True))
+    for runner in ('rebuild_012c.py','rebuild_012d.py'):
+        guarded=load_job(runner)
+        for guard,kind,word,seam_pass in guards:
+            art=d/f'guard-art-{runner[:-3]}-{guard}';stage=d/f'guard-stage-{runner[:-3]}-{guard}';art.mkdir()
+            # With records/ present and digest mocked, a removed guard runs on to
+            # make_reviews and fails there by name, not on a missing output file.
+            (stage/'records').mkdir(parents=True)
+            fake={"size":[1024,1024],"corner_alpha":[0]*4,"margins_ltrb_alpha_gt_0":[[50]*4]*4}
+            spec={"kind":kind,"input":"source.png","output":"output.png"}
+            preservation={"rgb_changed":1 if guard in ("interior","icon") else 0,"alpha_changed":0}
+            with ExitStack() as stack:
+                for name,value in (("ART",art),("STAGE",stage)):
+                    stack.enter_context(patch.object(guarded,name,value))
+                for name,value in (("snapshot",{"old_records":[spec],"tool_sha256":{}}),("tool_hashes",{}),
+                                   ("simple_metrics",fake),("key_residue",{"strong_key_far_from_edge":1 if guard=="residue" else 0}),
+                                   ("fringe_metrics",{}),("preserve_interior",preservation),("run",{}),("digest","0"*64)):
+                    stack.enter_context(patch.object(guarded,name,return_value=value))
+                stack.enter_context(patch.object(guarded,'verify_originals',return_value=None))
+                stack.enter_context(patch.object(n,'rgba',return_value=(64,64,bytearray([0,255,0,255]*4096))))
+                # A passing report trips the rejected-012 guard; a failing one must
+                # get past it and trip the backdrop pass guard on the new tile.
+                stack.enter_context(patch.object(n,'reference_metrics',return_value={"x":{"pass":seam_pass}}))
+                stack.enter_context(patch.object(guarded,'sidecar',return_value=None))
+                stack.enter_context(patch.object(guarded,'make_reviews',side_effect=RuntimeError('Không được tới validation')))
+                try:guarded.build()
+                except ValueError as error:check(word in str(error),f'Sai chốt job {runner} {guard}: {error}')
+                else:raise RuntimeError(f'Job {runner} bỏ chốt {guard}.')
+    # A wrong-hash archive found late in phase 1 must stop both runners before a.png moves.
+    for runner in ('rebuild_012c.py','rebuild_012d.py'):
+        archived=load_job(runner)
+        art=d/f'archive-hash-art-{runner[:-3]}';stage=d/f'archive-hash-stage-{runner[:-3]}';art.mkdir();(stage/'images').mkdir(parents=True)
+        before={}
+        for name in ('a.png','z.png'):
+            (art/name).write_bytes(paint.read_bytes());before[name]=archived.digest(art/name)
+        archived.archive_name(art/'z.png').write_bytes(b'invalid late archive')
+        (stage/'images/a.png').write_bytes(rim.read_bytes())
+        (stage/'manifest.json').write_text(json.dumps({'tool_sha256':{},'original_sha256':{},'historical_sha256':{},'before_sha256':before,
+                                                     'artifacts_sha256':{'a.png':archived.digest(stage/'images/a.png')}}))
+        with patch.object(archived,'ART',art),patch.object(archived,'STAGE',stage),patch.object(archived,'tool_hashes',return_value={}):
+            try:archived.publish()
+            except ValueError as error:check('hash' in str(error),f'{runner}: sai nhánh từ chối bản lưu: {error}')
+            else:raise RuntimeError(f'{runner}: không chặn bản lưu sai hash.')
+        check((art/'a.png').is_file() and archived.digest(art/'a.png')==before['a.png']
+              and not archived.archive_name(art/'a.png').exists(),
+              f'{runner}: công bố đã sửa file trước khi kiểm hết.')
     # The current runner must refuse a late dangling archive before moving a.png.
     current=load_job('rebuild_012d.py')
     art=d/'publish-012d-art';stage=d/'publish-012d-stage';art.mkdir();(stage/'images').mkdir(parents=True)
@@ -272,6 +301,41 @@ def run(d):
         hard=bytearray(v for y in range(th) for x in range(ow) for v in ramp[(y*tw+(ow+x if x<cut else x))*4:(y*tw+(ow+x if x<cut else x))*4+4])
         gate=n.reference_metrics(ow,th,hard,tw,th,ramp)['x']
         check(not gate['criteria']['cut_continuity'],'Cắt cứng/cột sai nhất vẫn qua.')
+    # Feathered tiles built here, independently of minimum_path and overlap_pixels.
+    lo,hi=5,band-5;mid=(lo+hi)//2
+    def feathered(src,cuts,radius=3):
+        out=bytearray(ow*th*4)
+        for y in range(th):
+            for x in range(ow):
+                i=(y*ow+x)*4
+                if x>=band:out[i:i+4]=src[(y*tw+x)*4:(y*tw+x)*4+4];continue
+                t=min(1,max(0,(x-cuts[y]+radius)/(2*radius)));t=t*t*(3-2*t)
+                for c in range(3):out[i+c]=round(src[(y*tw+ow+x)*4+c]*(1-t)+src[(y*tw+x)*4+c]*t)
+                out[i+3]=255
+        return out
+    def cost(src,y,k):
+        error=sum((src[(y*tw+ow+k)*4+c]-src[(y*tw+k)*4+c])**2 for c in range(3))
+        a,b=max(0,k-4),min(band-1,k+4)
+        return error+60*(sum(abs(src[(y*tw+ow+a)*4+c]-src[(y*tw+b)*4+c]) for c in range(3))/3)**2
+    # The DP's own cost minimised per row, with no continuity, tears the tile
+    # into slivers; only path_continuity sees it (B1 torn this way jumps 174 px).
+    torn=[min(range(lo,hi),key=lambda k:cost(tex,y,k)) for y in range(th)]
+    gate=n.reference_metrics(ow,th,feathered(tex,torn),tw,th,tex)['x']
+    check(not gate['pass'] and not gate['criteria']['path_continuity'] and gate['inferred_path_max_jump']>8,
+          f'Đường nối rách theo từng hàng vẫn qua: {gate["criteria"]}')
+    # A smooth bright bump centred in the overlap: the DP must cut around it,
+    # while a straight cut through the middle halves it and must fail.
+    bump=bytearray(tex)
+    for y in range(th):
+        for x in range(band):
+            for c in range(3):
+                i=(y*tw+x)*4+c;bump[i]=min(255,round(tex[i]+80*math.exp(-((x-mid)/4.5)**2)))
+    n.save_rgba(tw,th,bump,d/'bump-source-012d.png')
+    n.seamless(d/'bump-source-012d.png',d/'bump-tile-012d.png','x',.12)
+    gate=n.reference_metrics(*n.rgba(d/'bump-tile-012d.png'),tw,th,bump)['x']
+    check(gate['pass'],f'Đường nối DP quanh vật sáng không qua chốt: {gate["criteria"]}')
+    straight=n.reference_metrics(ow,th,feathered(bump,[mid]*th),tw,th,bump)['x']
+    check(not straight['pass'] and not straight['criteria']['cut_continuity'],'Cắt thẳng giữa dải qua vật sáng vẫn qua.')
     # Pin the feather against the public source, independently of overlap_pixels.
     import struct
     raw=(d/'seam-x.png').read_bytes();offset=8;metadata=None
@@ -283,6 +347,7 @@ def run(d):
     check(metadata is not None,'Không ghi đường nối trong PNG.')
     info=metadata['axes']['x'];path=info['path'];radius=info['radius']
     check(2<=radius<=4 and len(path)==th,'Sai bán kính/đường nối.')
+    check(all(abs(a-b)<=4 for a,b in zip(path,path[1:])),'Đường nối DP nhảy >4 px giữa hai hàng.')
     for y in range(th):
         x=path[y]-1;t=(x-path[y]+radius)/(2*radius);t=t*t*(3-2*t)
         for c in range(3):

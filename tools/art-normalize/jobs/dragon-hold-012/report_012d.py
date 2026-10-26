@@ -47,7 +47,10 @@ def main():
         b,a=r['before'],r['after']
         hc=a['highlight_check']
         lines.append(f"| `{r['output']}` | {b['size']} → {a['size']} | {b['subject_scale']} → {a['subject_scale']} | {b['residue']['enclosed_neutral_ge_64_pixels']} → {a['residue']['enclosed_neutral_ge_64_pixels']} | {hc['near_bg_colored_source']}/{hc['removed_at_key']} | {ib} / {ic} |")
-    lines+=['',f'Giống byte bản 012b: {len(identical_b)}/32; giống 012c: {len(identical_c)}/32. Các dòng True ở bảng chỉ thay nhãn do chốt/đo, không có thay đổi pixel.', '',
+    same=f'Giống byte bản 012b: {len(identical_b)}/32; giống 012c: {len(identical_c)}/32.'
+    # Only explain True rows when the table has any.
+    if identical_b or identical_c:same+=' Các dòng True ở bảng chỉ thay nhãn do chốt/đo, không có thay đổi pixel.'
+    lines+=['',same, '',
             '## 6. Kiểm tra và bàn giao','']
     for name,result in obj['validation'].items():lines.append(f"- `{name}`: mã thoát {result['exit_code']}; hash `{result['sha256']}`.")
     lines+=['', 'Manifest [normalize-metrics.json](../_review/normalize-metrics.json) ghi argv/hash/số đo. Sidecar `.prompt.txt` ghi phép hậu kỳ và prompt nguồn nguyên văn khi có; không thay prompt thiếu bằng prompt bản khác.', '',
