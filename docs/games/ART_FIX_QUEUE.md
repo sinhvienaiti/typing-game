@@ -12,9 +12,18 @@ Thêm hai việc trước khi gửi Tripo đợt 2 ([INDEX](../../typing-game-ha
 
 ## 2. Sửa bằng công cụ
 
-Không có mục mức Sửa. Lượt chấm đầu không có kết quả nào dưới 7 điểm; lượt chấm thêm có hai mục dưới 7 (V34, V35) nhưng lỗi không sửa được bằng công cụ, nên xếp Tạo lại (mục 3).
+Lượt chấm lại 26/10 không có mục mức Sửa. Lượt chấm đầu không có kết quả nào dưới 7 điểm; lượt chấm thêm có hai mục dưới 7 (V34, V35) nhưng lỗi không sửa được bằng công cụ, nên xếp Tạo lại (mục 3).
+
+Thêm 27/10 từ Codex 015b lượt 3 (Codex tự chấm, Claude duyệt ảnh xem nhanh):
+
+| Mã | File | Mức cần | Điểm | Việc sửa | Giữ file |
+|---|---|---|---:|---|---|
+| C21 Chân dung Mộc Tinh | [moc-tinh.png](../../games/typing-defense/art-src/portraits/moc-tinh.png) | P1 | 6 | Giữ dáng/màu Mộc Tinh nhưng ra toàn thân, mặt nhỏ ở 64 px, thiếu vệt mực tím và viền mực. Cần cắt đầu–tán–ngực, chuẩn hóa khổ/nền, bổ sung vệt mực và viền; lỗi sửa được, không tạo lại. Claude chấm độc lập. | Ảnh gốc giữ nguyên; bản cắt ghi tên mới. |
+
 
 ## 3. Tạo lại
+
+**Xong 27/10:** cả hai đã vẽ lại một lần (Codex 015c, `games/typing-defense/art-src/README-015c.md`): V34 8, V35 7,5, tạm chấp nhận, chuyển sang ART_REPLACE_LATER.md; ảnh trong `tripo-upload-dot2` đã thay, gửi Tripo được. Bảng dưới là lý do lúc xếp mức.
 
 2 mục, cả hai P2 (Lời Gọi, ảnh nguồn Tripo, INDEX P2 #40, #41). Mỗi mục tạo lại tối đa 1 lần (ART_ACCEPTANCE §2). Lần mới từ 7 điểm thì gửi Tripo face 10000 (KHÔNG bấm rig, Claude rig sau); vẫn dưới 7 thì dùng bản tốt hơn (bản hiện có từ 5 điểm) và ghi ART_REPLACE_LATER.md.
 

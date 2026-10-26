@@ -28,6 +28,14 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
     - Rồng Giữ Ải: xong vòng sửa sau phản biện (đã push tới 4fcfbb6). Đợt test chia theo màn bị cắt khi đang chạy.
     - Tuyến Cuối: build 2 (súng) bị cắt lần hai, khoảng 600 dòng chưa commit.
   - Đã dừng 4 dev server và 1 Chrome headless bỏ lại, rồi chạy lại Lời Gọi `wt3ckud7s`, Rồng `we636lt19`, Tuyến Cuối `wxu0tmqah`.
+- **26/10 khoảng 22:00 hết hạn mức lần 6; 27/10 01:20 chạy lại, bản gọn** (chủ dự án, 27/10: "nhiều subagent cũng không phải là tốt", chỉ giữ subagent làm đúng việc cần):
+  - Bỏ vòng phản biện riêng và đợt test 6 người: hai đợt này test cùng một bản code hai lần.
+  - Thay bằng `.local/workflows/test-pass-lean.js`: mỗi game 3 người test (đúng 3 suất trình duyệt), 1 agent vừa xác minh vừa sửa, chỉ kiểm lại độc lập khi đã sửa lỗi nặng.
+  - Phần việc còn lại của ba làn giảm từ khoảng 39 agent xuống khoảng 13.
+  - Rồng Giữ Ải giữ báo cáo của 2 người đã test đợt 1–2, 7–8 (`.local/workflows/state/dh-wave-done.json`), không chạy lại.
+  - Tuyến Cuối bỏ bước chuẩn bị chạy cân bằng đa luồng (chưa cần).
+  - Đang chạy: Rồng `wdjy8as6w`, Lời Gọi `wofl4j6v2`, Tuyến Cuối `w3sugg0rb`.
+  - Codex 015b xong 60/60 đích P1/P2 lúc 21:38; 015c (vẽ lại 2 nhánh Trại Lính) chạy ở làn B.
 - **Luật duyệt ảnh 7 điểm (chủ dự án, 26/10):** [`docs/games/ART_ACCEPTANCE.md`](games/ART_ACCEPTANCE.md), danh sách thay sau [`ART_REPLACE_LATER.md`](games/ART_REPLACE_LATER.md).
   - Workflow `art-rescore-7` (`wf_e87ec2b1-402`) chấm lại 111 ảnh và model đang bị xếp "lỗi": 75 đạt, 36 tạm chấp nhận, không ảnh nào phải sửa hay tạo lại.
   - Xếp ưu tiên:

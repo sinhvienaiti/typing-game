@@ -318,7 +318,7 @@ Các số mục “3.2”, “02 §7.2” trong bản chép trên là số mục
 **Bốn ảnh Trại Lính P2 đã chấm (26/10):** bộ cấp 2, 3 (V14, V15) và hai nhánh Khiên Đồng, Giáo Dài (V34, V35) vẽ theo `barracks.png` cũ, nên được chấm so với `barracks-v2.png` và render `barracks.glb` (hai người độc lập, người thứ ba cho V15, V34, V35):
 - V14 bộ cấp 2 (INDEX P2 #38): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: thu nhỏ đều, đặt vào dải sân phải trong rào `barracks.glb`, render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
 - V15 bộ cấp 3 (#39): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: chỉnh tỉ lệ từng trục cho mái ngói chụp kín mái rơm `barracks.glb` (nâng Z khoảng 15–25 %), render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
-- V34 nhánh Khiên Đồng (#40): **6,5, Tạo lại P2.** V35 nhánh Giáo Dài (#41): **5,5, Tạo lại P2.** Cả hai chỉ cao khoảng nửa tháp v2, luật 02 §8 cấm kéo dãn riêng chiều cao, nên không ghép được. Không gửi bản hiện có; vẽ lại 2D một lần theo `barracks-v2.png` (ART_FIX_QUEUE.md §3), từ 7 điểm mới gửi Tripo face 10000.
+- V34 nhánh Khiên Đồng (#40): **6,5, Tạo lại P2.** V35 nhánh Giáo Dài (#41): **5,5, Tạo lại P2.** Cả hai chỉ cao khoảng nửa tháp v2, luật 02 §8 cấm kéo dãn riêng chiều cao, nên không ghép được. Không gửi bản hiện có; vẽ lại 2D một lần theo `barracks-v2.png` (ART_FIX_QUEUE.md §3), từ 7 điểm mới gửi Tripo face 10000. **27/10, đã vẽ lại một lần (Codex 015c):** V34 bản mới 8, V35 bản mới 7,5, cả hai tạm chấp nhận, cao 79 % và 77 % tháp v2 cùng bề ngang chân; ảnh trong `tripo-upload-dot2` đã thay bằng bản mới, gửi Tripo được. Bản 26/10 giữ đuôi `.v1.png`.
 
 ## 5. Việc sau khi có GLB
 
