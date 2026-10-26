@@ -194,6 +194,7 @@ Mỗi game chạy ma trận **bot × chế độ × seed** (≥ 20 seed) trên m
 - **Số riêng của Rồng Giữ Ải (00 D27–D29):**
   - Đã chọn theo đề xuất (vòng 3, 24/10): trần nhịp k là 1,50 thay cho 1,30 của mục 4.1 (D29); G8 "phần phe ta" là bẫy, nhà, lính, chiêu của Rồng tính vào phần Rồng (D28).
   - **Đề xuất của vòng 3, chờ chủ dự án xác nhận** (D27; không tài liệu nào đề xuất, vòng 3 tự đề xuất): dải Nhàn I ở Cân bằng ≤ 20 % thay cho ≤ 10 %, vì lúc quái còn đi tới Vùng Chữ là nhịp của thể loại. Tới khi chủ dự án xác nhận, cổng B1, B7 chính thức vẫn đọc dải chung của mục 3; báo cáo bot in B1, B7 theo cả hai dải. Theo dải chung, cả 6 bot B1 trượt I (vòng 3: 16,4–30,6 %).
+    - Sửa 26/10 sau phản biện: Vùng Chữ trong mã là **giao** của vòng 26 m và T_a (`games/dragon-hold/src/sim/words.ts` `inWordZone`), không thay vòng 26 m như dòng "Vùng Chữ tính bằng thời gian" ở trên. Ở Mới, Chậm chắc, Chuẩn, Ẩu, 60–72 % I là lúc chưa quái nào vào vòng 26 m; Q của mọi bot 37–48 %, dưới đích 55–70 %. Đích I và đích Q ngược chiều nhau trên đường 25 m của M0; chủ dự án chọn cùng D27 (00 D27).
   - **Đề xuất của vòng sửa 25/10, chờ chủ dự án xác nhận** (D29): luật cổng (1,5 s một toán mỗi cổng, 0,6 s giữa hai cổng) giãn cùng khoảng sinh nhưng không bao giờ ngắn hơn hai số đó; khi luật cổng giữ một toán, cả đợt chờ theo. Vòng 3 từng co luật cổng theo nhịp k, xuống khoảng 0,34 s ở k 1,50.
 
 ### 9.2 Lời Gọi
