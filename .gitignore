@@ -13,6 +13,10 @@ dist/
 .local/
 # Evidence of review and test runs (games keep theirs in games/<id>/tmp/, also ignored)
 /tmp/
+# Hand-off folders between machines and Tripo upload sets (images, GLB): media, never in Git
+/typing-game-handoff-*/
+# Tripo CLI local context
+/.tripo/
 
 # Local background music files stay outside Git.
 shared/music/*

@@ -289,6 +289,37 @@ Các số mục “3.2”, “02 §7.2” trong bản chép trên là số mục
 4. **Bậc VS làm sau P**, vẫn theo đúng các cặp face limit/rig đã gom chung. Cùng nhóm có cả Rồng và TD thì giữ riêng ảnh tham chiếu/phong cách, không dùng ảnh game này làm tham chiếu cho game kia.
 5. **Tu Tiên:** chỉ xếp lịch sau khi có canon mỹ thuật và danh sách M0b. Không chi credit dựa trên tài liệu đánh giá cũ.
 
+## Ưu tiên Lời Gọi đợt 2 (26/10/2026)
+
+`typing-game-handoff-2026-10-25/tripo-upload-dot2/` có 92 ảnh của 87 model Lời Gọi, đã xếp mức cần theo [ART_ACCEPTANCE.md](ART_ACCEPTANCE.md) §3. Bảng đủ, thứ tự và lý do ở [`INDEX.md`](../../typing-game-handoff-2026-10-25/tripo-upload-dot2/INDEX.md), mục "Ưu tiên (26/10/2026)". Cần gửi 86 model; Trại Lính không làm lại (dưới đây).
+
+**Thư mục handoff không được vào Git, nhưng `.gitignore` chưa loại nó.** Lúc kiểm (26/10) cả `typing-game-handoff-2026-10-25/` chưa track, có 420 PNG, 55 GLB, 3 BIN. Chạy `git add -A` hay `git add .` ở repo cha sẽ đưa media vào Git. Chỉ add từng file văn bản cần; nên thêm dòng `typing-game-handoff-2026-10-25/` vào `.gitignore`.
+
+| Mức | Model | Credit (30 mỗi model, chưa tính rig) |
+|---|---:|---:|
+| P1 | 7 | 210 |
+| P2 | 41 | 1.230 |
+| P3 | 38 | 1.140 |
+| **Cộng** | **86** | **2.580** |
+
+**P1, làm trước** (game đang có, cảnh 3D 1C của bản đồ 1 cần, chưa có GLB):
+1. Draconis Phượng Long (`loigoi_draconis`, multiview, face 30000, không bấm rig).
+2. Lông lửa Draconis (`loigoi_fire-feather`): Tối Thượng có trong truyện từ Ngày 3.
+3. Giàn tre (`loigoi_scaffold-bamboo`): công trường của mọi nhà.
+4. Cầu gỗ (`loigoi_cau-go`): 2 cầu qua suối của bản đồ hiện tại.
+5. Vách Thác Bạc (`loigoi_vach-thac-bac`): Khe Nứt, chỗ quái ra và Mộc Tinh trồi lên.
+6. Rìu Chú Tiều (`loigoi_worker-kit-tieu-axe`): dân chặt cây.
+7. Nón lá Cô Mạ (`loigoi_worker-kit-ma-head`): nông dân của Ruộng.
+
+**Trại Lính: không làm lại.** `games/typing-defense/art-src/3d/buildings/barracks.glb` đã là bản Tripo dựng từ `barracks-v2.png` ngày 24/10 (`wooden+fortress+3d+model2410.glb`). Chấm lại 26/10: hai người 9,5 và 9, điểm 9,5/10, Đạt, mức cần P2 (1C cần 6 nhà bậc P). Đạt thì dùng (ART_ACCEPTANCE §2): không gửi Tripo, không tốn credit, không ghi ART_REPLACE_LATER.md. Việc còn lại là của Claude ([ART_FIX_QUEUE.md](ART_FIX_QUEUE.md) §1): chạy lại preset `buildings/barracks` (bản trong `public/` vẫn là nhà 1,8 m cũ), sửa ảnh nguồn và `downloadedAs` cũ trong `SOURCES.json`. Dòng 02/P5 ở §3, câu "1 bản làm lại Trại Lính" ở §1 và mục 2 của §4 trên đây đã cũ.
+
+**Mức P2 của tám ảnh nguồn 3D VS.** K04, K10, K13 (đồ nghề tổ thợ), V18 (Ruộng cấp 2), V36, V37 (hai nhánh Mỏ Vàng), V68 (lông Đại Bàng Tinh), V69 (hạt Mộc Tinh) nằm ở P2 của INDEX. ART_REPLACE_LATER.md, ART_FIX_QUEUE.md và IMAGE_AUDIT §7 cũng ghi P2. V18, V37, V69 là ảnh Tạm chấp nhận: làm bước "trước Tripo" ở ART_FIX_QUEUE.md §5.1 rồi gửi file mới trong `art-src`, không gửi bản trong thư mục handoff.
+
+**Bốn ảnh Trại Lính P2 đã chấm (26/10):** bộ cấp 2, 3 (V14, V15) và hai nhánh Khiên Đồng, Giáo Dài (V34, V35) vẽ theo `barracks.png` cũ, nên được chấm so với `barracks-v2.png` và render `barracks.glb` (hai người độc lập, người thứ ba cho V15, V34, V35):
+- V14 bộ cấp 2 (INDEX P2 #38): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: thu nhỏ đều, đặt vào dải sân phải trong rào `barracks.glb`, render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
+- V15 bộ cấp 3 (#39): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: chỉnh tỉ lệ từng trục cho mái ngói chụp kín mái rơm `barracks.glb` (nâng Z khoảng 15–25 %), render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
+- V34 nhánh Khiên Đồng (#40): **6,5, Tạo lại P2.** V35 nhánh Giáo Dài (#41): **5,5, Tạo lại P2.** Cả hai chỉ cao khoảng nửa tháp v2, luật 02 §8 cấm kéo dãn riêng chiều cao, nên không ghép được. Không gửi bản hiện có; vẽ lại 2D một lần theo `barracks-v2.png` (ART_FIX_QUEUE.md §3), từ 7 điểm mới gửi Tripo face 10000.
+
 ## 5. Việc sau khi có GLB
 
 Đây là hướng dẫn cho lượt nhận model sau; phiếu này chỉ lập danh sách, chưa tạo ảnh, model, rig hay đẩy media.

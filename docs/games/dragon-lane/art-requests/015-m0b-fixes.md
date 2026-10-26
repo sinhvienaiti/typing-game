@@ -2,6 +2,22 @@
 
 Ngày 26/10/2026. Giữ phong cách và dấu Héo A của bộ M0. Đây là biến thể prompt có chỉ dẫn tư thế rõ hơn; ảnh ứng viên có hậu tố `-015`, không thay ảnh cũ. Góc sau chỉ tạo từ ứng viên mặt trước tương ứng. Nền ảnh nguồn vẫn là `#E6E6E6`.
 
+## Quyết định sau chấm lại (26/10/2026)
+
+Chấm theo [luật 7 điểm](../../ART_ACCEPTANCE.md): từ 7 điểm là nhận, không tạo lại. Không đích nào của phiếu này dưới 7, nên không chạy lại prompt nào bên dưới; các prompt giữ làm lịch sử. M0a còn vẽ hộp tạm; cột "File dùng" là file M0b nhập. Đích đã có model thì chấm model. Chi tiết ở [IMAGE_AUDIT §7](../../IMAGE_AUDIT_2026-10-25.md); mục tạm chấp nhận ghi ở [ART_REPLACE_LATER.md](../../ART_REPLACE_LATER.md).
+
+| Đích | File dùng | Gốc hay 015 | Điểm | Mức | Còn làm |
+|---|---|---|---:|---|---|
+| G01-F | Model [moss-banner.glb](../../../../games/dragon-hold/art-src/3d/generals/moss-banner.glb), dựng từ moss-banner.png và moss-banner-back.png | Gốc. Không dùng moss-banner-015.png: tay thẳng hơn nhưng góc dạng tay vẫn hẹp | 9 | Đạt | Khi rig Blender: tách cán cờ khỏi bàn tay, gắn vào xương tay (khuỷu gập ~90°, không tư thế A). Không dựng lại model. |
+| U1-F | Model [moss-warden.glb](../../../../games/dragon-hold/art-src/3d/units/moss-warden.glb), dựng từ moss-warden.png và moss-warden-back.png | Gốc. moss-warden-015.png chỉ giữ làm ảnh Front nếu dựng lại | 8 | Tạm chấp nhận | Trước khi rig: xóa nhánh chùy thừa và nửa khiên thừa trong Blender, chỉnh hướng (mặt đang quay +X). Khi có kinh phí: dựng lại từ moss-warden-015.png, Back thấy quai khiên, chọn rig Biped. |
+| D1 | [dirt-patches.alpha.png](../../../../games/dragon-hold/art-src/decals/pine-river/dirt-patches.alpha.png) (012d) | Gốc đã tách nền. Bản -015 và _review/015 chưa tách nền, không hơn | 9,5 | Đạt | Không. Đất hơi đỏ cam so với ô path, earth; chỉnh màu nếu cần. |
+| D2 | [_review/015-flower-clusters.png](../../../../games/dragon-hold/art-src/_review/015-flower-clusters.png). Trong lúc chờ: [flower-clusters.alpha.png](../../../../games/dragon-hold/art-src/decals/pine-river/flower-clusters.alpha.png) | 015, bản trong _review. flower-clusters-015.png và .v1.alpha kém hơn | 8,5 | Tạm chấp nhận | Ghi README nguồn cho ảnh _review; chạy art-normalize (khóa #0000FF, khử quầng xanh, khổ 1024, lề từ 48 px); kiểm tím còn nguyên. |
+| D3 | [forest-litter.alpha.png](../../../../games/dragon-hold/art-src/decals/pine-river/forest-litter.alpha.png) | Gốc đã tách nền. Bản -015 và _review/015 chưa tách nền, không hơn | 8,5 | Tạm chấp nhận | Dùng ngay. Sỏi, cành có bóng khối; thay khi có kinh phí. |
+| D4 | [moss-puddles.v1.alpha.png](../../../../games/dragon-hold/art-src/decals/pine-river/moss-puddles.v1.alpha.png) (moss-puddles.alpha.png cũng dùng được) | Gốc, bản .v1 đã tách nền. Bản -015 rêu vàng hơn; _review/015 có vệt hồng, chưa tách nền | 8 | Tạm chấp nhận | Dùng ngay. Rêu nổi khối, hơi vàng lục; thay khi có kinh phí. |
+| B1 | [pine-river-far.seamless.png](../../../../games/dragon-hold/art-src/backdrops/pine-river-far.seamless.png) | Gốc đã nối mép. Ứng viên 015, cả bản _review, chưa liền mép | 9 | Đạt | Không. Hai lỗi thẩm mỹ của REVIEW-012d coi như chấp nhận, không cắt lại. |
+
+E01-S (prompt cũ, không ở file này): không dùng thorn-wasp-side-015.png. Model [thorn-wasp.glb](../../../../games/dragon-hold/art-src/3d/enemies/thorn-wasp.glb) được 7,5, Tạm chấp nhận. Khi rig Blender, xoay mỗi cánh 80–90° cho gần nằm ngang. Nếu có kinh phí dựng lại thì chỉ dùng ảnh Front thorn-wasp.tripo.png.
+
 ## G01-F
 
 Đích: `games/dragon-hold/art-src/generals/moss-banner-015.png`.

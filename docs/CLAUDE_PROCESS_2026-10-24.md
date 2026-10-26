@@ -22,6 +22,18 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
   - Lời Gọi `wf_1d8075fa-b38` (R3 phần B làm tiếp, 4 commit chưa push lúc ngắt), Rồng `wf_64b27449-e78` (B1/B7 kèm đổi tên), kế hoạch triển khai riêng `wf_7f616e0b-f80` (chỉ còn bước viết).
   - Codex 005b và 012c chạm hạn mức ChatGPT lúc 00:25, `queue.sh` tự chạy lại lúc 04:56.
 - **26/10 khoảng 08:30 và 12:00 hết hạn mức lần 3, lần 4; mỗi lần chạy lại từ cache** (`ts-feel-pass` `wf_04c2625f-9a4`, Lời Gọi `wf_1d8075fa-b38`, Rồng `wf_64b27449-e78`, công cụ ảnh `wf_ed749a41-c4d`). Tới 15:10: Tuyến Cuối xong vòng sửa R1, spec, build 1 (chữ gõ), đang build 2 (súng); Lời Gọi xong R3 A, B, luật gỗ, nút gọi sớm, hai rồng, đang cân bằng R3; Rồng xong đổi tên, B1/B7, phản biện, đang sửa; `tools/art-normalize` đã commit (012d + sửa của Claude, `fc6f1963`, `9c429863`), đang kiểm độc lập, chưa push. Codex: 005a, 005b, 015 đạt; 012b, 012c trượt; 015b chạy 6 lượt.
+- **26/10 chiều tối hết hạn mức lần 5 (mở lại 20:10); chạy lại lúc 20:15 từ cache.**
+  - Trước khi bị cắt:
+    - Lời Gọi: xong R3 phần A (đã push tới 7d6adf4). Bước 9, lượt cân bằng, có 3 commit chưa push (1f77e48, b655de2, 106db85) và tài liệu đang sửa dở.
+    - Rồng Giữ Ải: xong vòng sửa sau phản biện (đã push tới 4fcfbb6). Đợt test chia theo màn bị cắt khi đang chạy.
+    - Tuyến Cuối: build 2 (súng) bị cắt lần hai, khoảng 600 dòng chưa commit.
+  - Đã dừng 4 dev server và 1 Chrome headless bỏ lại, rồi chạy lại Lời Gọi `wt3ckud7s`, Rồng `we636lt19`, Tuyến Cuối `wxu0tmqah`.
+- **Luật duyệt ảnh 7 điểm (chủ dự án, 26/10):** [`docs/games/ART_ACCEPTANCE.md`](games/ART_ACCEPTANCE.md), danh sách thay sau [`ART_REPLACE_LATER.md`](games/ART_REPLACE_LATER.md).
+  - Workflow `art-rescore-7` (`wf_e87ec2b1-402`) chấm lại 111 ảnh và model đang bị xếp "lỗi": 75 đạt, 36 tạm chấp nhận, không ảnh nào phải sửa hay tạo lại.
+  - Xếp ưu tiên:
+    - 248 đích của Codex 015b: còn 60 phải làm (P1 9, P2 51), 166 chờ kinh phí, 22 đã có;
+    - 87 model Tripo đợt 2: P1 7, P2 41, P3 39; P3 chờ kinh phí, hoãn được 1.170 credit.
+  - Phiếu 015b đã sửa theo luật.
 - **Mỗi game triển khai riêng (chủ dự án, 26/10, "lưu ý quan trọng"):** không game nào phụ thuộc game khác hay repo cha khi build và khi chạy; không đẩy toàn bộ code và media cùng nhau. Đang chạy workflow chỉ đọc `deploy-independence-audit` (run `wf_7f616e0b-f80`): kiểm từng game, build thử bản clone riêng ngoài repo cha, rồi viết `docs/games/DEPLOY_INDEPENDENCE.md`. Tuyến Cuối phải mang bản chép riêng chỉ các model nó dùng, không chép cả thư viện 360 MiB của Space.
 - **Chủ dự án chơi thử 26/10 và chê** (ghi đủ ở bộ nhớ "Game quality bar"):
   - **Tuyến Cuối nhàm:** không hiệu ứng từng chữ, đạn và laser chán dù có model 3D, tàu đứng im, chữ gõ ở dưới khó nhìn quái. Tham khảo `typing_break.mov`. → workflow `.local/workflows/ts-feel-pass.js` (nghiên cứu → spec `docs/FEEL_PASS_S1.md` → chữ gõ lên cao và hiệu ứng từng chữ → VFX súng bằng model 3D → tàu chuyển động → phản biện cảm giác → sửa → đợt test chia theo màn), chạy ngay sau vòng sửa của làn Tuyến Cuối, thay cho đợt test của làn đó.
@@ -154,6 +166,7 @@ Thiết lập đã làm trên Dell ngày 24/10 (log: `.local/dell-setup-2026-10-
 - Việc nào tài liệu ghi "chủ dự án cần chọn": làm theo phương án đề xuất, ghi "đã chọn theo đề xuất" vào tài liệu, liệt kê trong báo cáo để chủ dự án đổi sau.
 - Backend online chỉ dùng Cloudflare Free (Workers/D1/DO).
 - Mô hình 3D: Claude viết prompt, chủ dự án tạo ở Tripo3D/Meshy, Claude dọn và rig trong Blender. Chủ dự án chê chuyển động cứng.
+- **Duyệt ảnh 2D và model 3D theo thang 10 điểm** (chủ dự án, 26/10): chi phí làm ảnh rất đắt. Từ 7 điểm là nhận. Chỉ tạo lại khi sai quá, không sửa được; lỗi khung, lề, nền, khổ thì sửa bằng công cụ. Ảnh tạm chấp nhận ghi vào [`docs/games/ART_REPLACE_LATER.md`](games/ART_REPLACE_LATER.md) để thay khi có kinh phí. Làm ảnh cần thiết trước (P1, P2; P3 chờ kinh phí). Luật đầy đủ: [`docs/games/ART_ACCEPTANCE.md`](games/ART_ACCEPTANCE.md).
 - Âm thanh: ghi nhớ cũ (18/10) nói "chỉ âm thu thật CC0". Từ 23/10, `tools/audio-lab/DECISIONS.md` Q1 cho phép Stable Audio 3 là nguồn chính cho lửa, nổ, nền, sinh vật (chủ dự án đã đăng ký giấy phép Stability). Theo `DECISIONS.md`.
 - **Âm theo hình dạng hành động** (chủ dự án, 24/10, [`tools/audio-lab/DECISIONS.md`](../tools/audio-lab/DECISIONS.md) Q6). Mỗi âm phải đúng loại và cỡ của hành động: tụ lực, phát có lực, thân, đuôi vang trong không gian bản đồ. Rồng khạc cầu lửa phải nghe mạnh mẽ, vang vọng. Cấm âm quê mùa, lỗi thời kiểu "bụp", "thụp", puff, pop, bóng bay, đồ chơi, retro.
 - Mỗi game có `AGENTS.md` riêng; repo cha có [`AGENTS.md`](../AGENTS.md) và [`docs/games/SPLIT_PLAN.md`](games/SPLIT_PLAN.md).
