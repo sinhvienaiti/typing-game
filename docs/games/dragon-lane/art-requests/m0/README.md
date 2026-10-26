@@ -22,7 +22,7 @@ Instructions for the image tool (Codex image_gen or ChatGPT)
 | File | Chứa gì | Số ảnh |
 |---|---|---|
 | [`01-creatures.md`](01-creatures.md) | 2 ảnh thử dấu Héo (HT-A, HT-B); 7 sinh vật địch: E09, E18, E01 (mẫu duyệt), E11, E19, E25, G01, mỗi con 2 góc; cách đổi sang dấu B | 16 |
-| [`02-allies-traps.md`](02-allies-traps.md) | 3 bẫy (Gai Chông, Bom Hạt Thông, Lưới Phóng), lính chặn Vệ Binh Rêu (2 góc), Nhà Thuốc Lá | 6 |
+| [`02-allies-traps.md`](02-allies-traps.md) | 3 bẫy (Gai Chông, Bom Hạt Thông, Lưới Phóng), lính chặn Vệ Binh Rêu (2 góc), Lều Thuốc Nam | 6 |
 | [`03-pine-river-props.md`](03-pine-river-props.md) | 12 prop kit rừng thông có sông (xuân): 4 cây, 2 bụi, 3 đá, gốc, khúc gỗ, cầu | 12 |
 | [`04-2d-ground-decals-backdrop.md`](04-2d-ground-decals-backdrop.md) | 8 ô đất lặp, 4 tấm decal 2 × 2, 1 phông xa (không gửi Tripo) | 13 |
 | [`05-icons.md`](05-icons.md) | 20 icon HUD và cửa hàng (không gửi Tripo) | 20 |
@@ -38,7 +38,7 @@ DESIGN §7.2 ước "~60 ảnh". Thêm 7 ảnh vì sinh vật và lính có 2 g�
 | 1 | Sửa theo ý chủ dự án; nếu chọn B: tạo lại E09-F, E18-S, E18-F, E01-F theo 01 §11. Thêm E09-B, E01-S | Codex | Ảnh đạt bảng kiểm 01 §12 |
 | 2 | Tripo 3 model mẫu: E09 (Biped), E18 (Quadruped), E01 (bay) + 4 clip mỗi con | Chủ dự án | Chủ dự án duyệt model, rig, clip (DESIGN §9 M0, cổng "Chủ dự án"). Chưa đạt thì không làm đợt 4 |
 | 3 | 12 prop kit (file 03), 8 ô đất, 4 decal, phông xa (file 04) | Codex → Tripo | Chủ dự án duyệt ảnh bản đồ 3 góc × 4 hướng khi M0b có hình |
-| 4 | E11, E19, E25, G01 (file 01), Vệ Binh Rêu, Nhà Thuốc Lá, 3 bẫy (file 02) | Codex → Tripo | Bảng kiểm từng file |
+| 4 | E11, E19, E25, G01 (file 01), Vệ Binh Rêu, Lều Thuốc Nam, 3 bẫy (file 02) | Codex → Tripo | Bảng kiểm từng file |
 | 5 | 20 icon (file 05); I01–I05 đính kèm ảnh nguồn đã duyệt + dòng `BUILDREF` | Codex | Đọc được ở 32 px |
 
 - Ảnh 2D không chặn việc viết mã: M0a chạy bằng hộp xám (DESIGN §9).

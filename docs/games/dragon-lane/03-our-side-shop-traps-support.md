@@ -121,7 +121,7 @@ G_hd = max(0, G × (1 − phá_giáp) − xuyên)
 - Mỗi quái hiện tối đa 5 biểu tượng trạng thái. Thứ tự: khống chế, rồi dấu, rồi sát thương theo thời gian. Biểu tượng nằm **dưới** thanh máu, không che thẻ chữ.
 
 **Trạng thái phe ta:**
-- Tốt: Khiên (Vòm Khiên, Bạch Long, thuốc), Hồi (Nhà Thuốc Lá, Thầy Lang Nấm), Kiên Cố (+G), Hăng (+tốc đánh), Vững (miễn khống chế cứng), Thanh tẩy (xóa 1 hiệu ứng xấu).
+- Tốt: Khiên (Vòm Khiên, Bạch Long, thuốc), Hồi (Lều Thuốc Nam, Thầy Lang Nấm), Kiên Cố (+G), Hăng (+tốc đánh), Vững (miễn khống chế cứng), Thanh tẩy (xóa 1 hiệu ứng xấu).
 - Xấu (từ quái): Cháy, Độc, Choáng (chỉ lính), Phá giáp, Câm (nhà tắt hào quang), Nguyền (−50 % hồi máu).
 
 ### 2.4 Phản ứng nguyên tố
@@ -301,7 +301,7 @@ Theo công thức 00 §4.9: hạ quái 60 % (chia theo ĐĐ, cụm bầy trả m
 | 2 | Chuông Gió | `wind-chime` | Phe ta +30 % Kiên định | Thanh tẩy 1 hiệu ứng xấu cho mọi đồng minh trong vùng | 8 m | 100 | — |
 | 3 | Tháp Canh | `watchtower` | Lộ diện tàng hình. Đánh dấu quái mạnh nhất mỗi 6 s. Bắn quái bay 12 VL/1 s | Đánh dấu 5 quái | 16 m | 110 | 2 |
 | 4 | Giếng Vàng | `gold-well` | +4 Vàng mỗi 10 s trong đợt | +15 Vàng | 6 m (chỉ để nạp Năng) | 120 | 1 |
-| 5 | Nhà Thuốc Lá | `herb-hut` | Hồi 1,5 % máu tối đa mỗi giây cho đồng minh (cả Rồng) | Hồi 10 % tức thì | 7 m | 120 | — |
+| 5 | Lều Thuốc Nam | `herb-hut` | Hồi 1,5 % máu tối đa mỗi giây cho đồng minh (cả Rồng) | Hồi 10 % tức thì | 7 m | 120 | — |
 | 6 | Lò Rèn Dã Chiến | `field-forge` | Bẫy trong vùng hồi nhanh 15 % | Nạp đầy bẫy hồi lâu nhất | 12 m | 120 | — |
 | 7 | Đài Khuếch Chữ | `word-amp` | Quái trong vùng nhận +15 % đòn từ | +40 % trong 4 s | 10 m | 130 | — |
 | 8 | Gốc Gọi Hồn | `revive-root` | Lính trong vùng hồi sinh nhanh 40 % | Hồi sinh ngay 1 lính ngã, kèm Khiên 150 | 12 m | 130 | — |
@@ -385,7 +385,7 @@ Lịch này khớp lịch dạy 04 §6 và ma trận 0.3. Mỗi ải tối đa m
 
 | Khoảng ải | Mở |
 |---|---|
-| 1–20 (C1) | Gai Chông (ải 2), Vệ Binh Rêu (6), Bình Máu Nhỏ (7), Lưới Phóng (13, sau quái bay đầu tiên ở ải 12), Bom Hạt Thông (14), Nhà Thuốc Lá (16), Tim Rồng và Vảy Cứng (17) |
+| 1–20 (C1) | Gai Chông (ải 2), Vệ Binh Rêu (6), Bình Máu Nhỏ (7), Lưới Phóng (13, sau quái bay đầu tiên ở ải 12), Bom Hạt Thông (14), Lều Thuốc Nam (16), Tim Rồng và Vảy Cứng (17) |
 | 21–40 (C2) | Cột Chậm, Thợ Săn Cú, Bùn Lầy, Hạt Giống Nổ, **Chuông Bạc**, Pháo Hiệu Rồng, **Lông Phượng** |
 | 41–60 (C3) | **Bùa Phá Chữ** (trước Yêu Rêu Khiên), Hố Gió, Người Rơm Mồi, Lưới Dây Leo, Lò Rèn Dã Chiến, Bình Máu Lớn |
 | 61–80 (C4) | **Trống Đất**, Cột Sét, Thầy Lang Nấm, Vòm Khiên, Mìn Ấn, Khiên Lá Sồi, Thuốc Vảy Đá |

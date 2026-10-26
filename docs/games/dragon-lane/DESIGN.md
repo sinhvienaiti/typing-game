@@ -238,7 +238,7 @@ W_boss = round(0,38 × 0,7 × t)   // t: giây đích ở 35 WPM; 0,7 vì hộ t
 | Lát (mốc) | Tripo (chủ dự án) | Codex | Âm |
 |---|---|---|---|
 | **Mẫu duyệt** (đầu M0) | 3 sinh vật: E09 Yêu Rêu Lính, E18 Sói Mục, E01 Ong Gai (4 clip mỗi con) | 2 ảnh thử dấu Héo cho E09; ảnh nguồn 3 loài | — |
-| **M0** bản thử dọc | +4 sinh vật: E11, E19, E25, G01; 12 cây, đá, bụi của kit rừng thông; Gai Chông, Bom Hạt Thông, Lưới Phóng, Vệ Binh Rêu, Nhà Thuốc Lá (5) → **~24 model** | ~60 ảnh: nguồn cho 24 model, 8 ô đất, 4 decal, phông, ~20 icon | ~50 tiếng: gõ (mã), cầu lửa 3, Phun Lửa, bộ lớp hai chân, bốn chân, bay, bầy, G01, 3 bẫy × 2, 2 hỗ trợ × 2, UI 4, tù và, thắng, thua, Hỏa Long trúng, ngã; 1 bản nhạc 2 lớp + 1 bản tướng |
+| **M0** bản thử dọc | +4 sinh vật: E11, E19, E25, G01; 12 cây, đá, bụi của kit rừng thông; Gai Chông, Bom Hạt Thông, Lưới Phóng, Vệ Binh Rêu, Lều Thuốc Nam (5) → **~24 model** | ~60 ảnh: nguồn cho 24 model, 8 ô đất, 4 decal, phông, ~20 icon | ~50 tiếng: gõ (mã), cầu lửa 3, Phun Lửa, bộ lớp hai chân, bốn chân, bay, bầy, G01, 3 bẫy × 2, 2 hỗ trợ × 2, UI 4, tù và, thắng, thua, Hỏa Long trúng, ngã; 1 bản nhạc 2 lớp + 1 bản tướng |
 | **M2** chương 1 | B01; 5 prop còn lại của kit | ~40 | +20: B01, Bạch Long, Long Hống; thoại Bạch Long ải 1–20 (~60 câu) |
 | **M3** C2–C3 | 8 quái, tướng, 2 boss; kit rừng phép 12 prop; 8 món; 4 nhà làng | ~120 | Bộ lớp còn lại; nhạc rừng phép; 2 boss |
 | **M4** C4–C6 (công khai) | ~12 quái, tướng, boss; 3 kit (36 prop); ~10 món | ~200 | Nhạc 3 kit; boss; tranh truyện có giọng |
@@ -270,7 +270,7 @@ Mỗi mốc có bốn loại cổng: **test** tự động, **kịch bản trìn
 | Rồng | **Hỏa Long ở giữa**: đòn gõ, Phun Lửa (Alt + 1), Thiên Hỏa (Alt + 2), Long Hống (Từ Khẩn), Long Nộ và Viêm Đế (thử đổi sang v3). Bạch Long đứng cạnh làm người dẫn (clip Guide có sẵn), chưa đánh |
 | Quái (6 loại) | E09 Yêu Rêu Lính (**hai chân**, cận chiến) · E11 Yêu Rêu Cung (hai chân, bắn xa) · E18 Sói Mục (**bốn chân**, bầy nhỏ, vồ qua chặn) · E19 Heo Nanh Đá (bốn chân, húc) · E01 Ong Gai (**bay**, bắn) · E25 Kiến Gai (bò, cụm bầy một từ) |
 | Tướng | G01 Yêu Rêu Cầm Cờ: hào quang Xung Phong, Cắm Cờ, Ấn Phá |
-| Phe ta | **3 bẫy:** Gai Chông, Bom Hạt Thông, Lưới Phóng · **2 hỗ trợ:** Vệ Binh Rêu (lính chặn), Nhà Thuốc Lá (nhà phép) · Bình Máu Nhỏ · Tim Rồng, Vảy Cứng |
+| Phe ta | **3 bẫy:** Gai Chông, Bom Hạt Thông, Lưới Phóng · **2 hỗ trợ:** Vệ Binh Rêu (lính chặn), Lều Thuốc Nam (nhà phép) · Bình Máu Nhỏ · Tim Rồng, Vảy Cứng |
 | Cửa hàng | Mở **giữa các đợt** (nghỉ 20 s): đặt, nâng, bán; dải Bộ Mang Theo; đặt bằng chuột và bàn phím (00 §6) |
 | Đợt | **10 đợt**, tải theo 00 §4.4 (đợt 1 0,6 → đợt 10 1,25), tướng ở đợt 5 và đợt 10, đỉnh và quãng lặng theo 02 §5 |
 | Gõ và học | Thẻ chữ, chữ đầu duy nhất, khóa mềm, bảo hộ khóa, ngân sách chữ, khung học (IPA, nghĩa, hàng đợi), phát âm, Học trước, Thẻ Ôn; sự kiện học `dragon-hold` (xếp hàng cục bộ nếu portal chưa nối) |

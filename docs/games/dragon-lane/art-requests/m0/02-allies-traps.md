@@ -1,7 +1,7 @@
 # Rồng Giữ Ải — M0 · 02. Phe ta: bẫy, lính chặn, nhà phép gửi Tripo (23/10/2026)
 
 > **Dành cho:** chủ dự án (Tripo); AI điều khiển Codex CLI; AI ghép file sau.
-> **Lấy từ:** `../../DESIGN.md` §7.2, §9 M0 (3 bẫy, 2 hỗ trợ); `../../03-our-side-shop-traps-support.md` §7.2 (Gai Chông, Lưới Phóng, Bom Hạt Thông), §8.2 (Nhà Thuốc Lá), §9.2 (Vệ Binh Rêu); `../../05-presentation-audio-tech-split.md` §2.2 (màu phe ta), §6.5–6.6 (hình bẫy, nhà, lính).
+> **Lấy từ:** `../../DESIGN.md` §7.2, §9 M0 (3 bẫy, 2 hỗ trợ); `../../03-our-side-shop-traps-support.md` §7.2 (Gai Chông, Lưới Phóng, Bom Hạt Thông), §8.2 (Lều Thuốc Nam), §9.2 (Vệ Binh Rêu); `../../05-presentation-audio-tech-split.md` §2.2 (màu phe ta), §6.5–6.6 (hình bẫy, nhà, lính).
 > **Mục lục, thứ tự làm, thiết lập Tripo, nơi lưu GLB:** [`README.md`](README.md). Mỗi khối `text` là **một ảnh**: dán nguyên văn, không rút gọn, không thêm bớt. Các dòng chung giống từng chữ ở mọi prompt (README §5).
 
 ## 1. Luật chung
@@ -29,7 +29,7 @@ Cột file bỏ tiền tố `games/dragon-hold/art-src/`.
 | TR3 | Lưới Phóng `net-launcher` | Trụ: bắn lưới quái bay thấp trong 10 m, Hạ Cánh 3 s | `traps/net-launcher.png` | 1024×1536 | — |
 | U1-F | Vệ Binh Rêu `moss-warden` · ảnh chính | Lính chặn: suất chặn 2, máu 450, G1 | `units/moss-warden.png` | 1024×1536 | — |
 | U1-B | Vệ Binh Rêu · nhìn sau | — | `units/moss-warden-back.png` | 1024×1536 | U1-F |
-| H1 | Nhà Thuốc Lá `herb-hut` | Nhà phép: hồi 1,5 % máu/s trong 7 m | `houses/herb-hut.png` | 1024×1024 | — |
+| H1 | Lều Thuốc Nam `herb-hut` | Nhà phép: hồi 1,5 % máu/s trong 7 m | `houses/herb-hut.png` | 1024×1024 | — |
 
 ## 3. Bẫy
 
@@ -138,7 +138,7 @@ Never draw: black outlines, fire, smoke, mist, sparks, particles, glow or aura e
 Background: plain flat very light neutral grey (#E6E6E6), perfectly uniform, no gradient, no vignette, no floor, no shadow.
 ```
 
-## 5. Nhà phép: Nhà Thuốc Lá (`herb-hut`)
+## 5. Nhà phép: Lều Thuốc Nam (`herb-hut`)
 
 | Mục | Giá trị |
 |---|---|

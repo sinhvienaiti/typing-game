@@ -232,7 +232,7 @@ Bảng gồm cả hệ của Rồng (01), món (03), quái (02) và luật ải.
 | 3 | **Phun Lửa** (Alt + 1, Chữ Chiêu); ô Vuốt | 13 | **Lưới Phóng** (kéo quái bay xuống) |
 | 4 | Từ cụm bầy: Kiến Gai | 14 | **Bom Hạt Thông** (nổ cụm); cầu và suối (cơ chế chữ ký) |
 | 5 | Ải Tướng: Yêu Rêu Cầm Cờ, hào quang, **Ấn Phá** | 15 | Ải Tướng: **Long Nộ, Viêm Đế** (Alt + 5); ô Hỏa Châu |
-| 6 | **Vệ Binh Rêu** (lính chặn) | 16 | **Nhà Thuốc Lá** (nhà phép đầu) |
+| 6 | **Vệ Binh Rêu** (lính chặn) | 16 | **Lều Thuốc Nam** (nhà phép đầu) |
 | 7 | **Bình Máu Nhỏ** (Alt + 7) | 17 | **Tim Rồng, Vảy Cứng**; ô Vảy Giáp; mục tiêu Giữ Kho; Dấu Thách đầu |
 | 8 | Gọi đợt sớm (Shift + Enter) | 18 | **Từ Khẩn**, Long Hống |
 | 9 | Ải Ôn đầu tiên: Học trước, Thẻ Ôn | 19 | Ải Ôn, Lửa Trại (xem trước boss) |

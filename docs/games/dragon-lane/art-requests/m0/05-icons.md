@@ -29,7 +29,7 @@ Cột file bỏ tiền tố `games/dragon-hold/art-src/`.
 | I02 | Bom Hạt Thông | `ui/icons/pine-bomb.png` | M |
 | I03 | Lưới Phóng | `ui/icons/net-launcher.png` | M |
 | I04 | Vệ Binh Rêu | `ui/icons/moss-warden.png` | M |
-| I05 | Nhà Thuốc Lá | `ui/icons/herb-hut.png` | M |
+| I05 | Lều Thuốc Nam | `ui/icons/herb-hut.png` | M |
 | I06 | Bình Máu Nhỏ | `ui/icons/potion-small.png` | M |
 | I07 | Tim Rồng (trang bị) | `ui/icons/dragon-heart.png` | G |
 | I08 | Vảy Cứng (trang bị) | `ui/icons/hard-scale.png` | G |
@@ -92,7 +92,7 @@ Icon: Moss Warden ally soldier: head and shoulders of a friendly stout wooden gu
 Flat pure #FF00FF magenta background, perfectly uniform, no gradient, no shadow, no glow on it; the subject contains no pink, magenta or bright purple at all.
 ```
 
-### I05 · Nhà Thuốc Lá
+### I05 · Lều Thuốc Nam
 
 **I05** · icon · `ui/icons/herb-hut.png` · 1024×1024
 

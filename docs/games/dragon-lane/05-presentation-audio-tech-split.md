@@ -264,7 +264,7 @@ Lá héo "xào" → bung lá vàng úa · Gỗ mục "cộp" → nứt dọc, d�
 | Nhóm | Ví dụ | Chờ | Hoạt động | Hỏng, ngã |
 |---|---|---|---|---|
 | Hào quang | Cột Chậm, Chuông Gió, Đài Khuếch Chữ | Rune thở chậm | Vòng tầm sáng; Xung khi đủ 5 Năng: sóng vòng | Nứt, khói, ánh tắt dần |
-| Hồi, khiên | Nhà Thuốc Lá, Vòm Khiên, Gốc Gọi Hồn, Đèn Đom Đóm, Chuông Bạc | Giọt sáng lơ lửng | Giọt bay tới đồng minh; vòm bật | Như trên |
+| Hồi, khiên | Lều Thuốc Nam, Vòm Khiên, Gốc Gọi Hồn, Đèn Đom Đóm, Chuông Bạc | Giọt sáng lơ lửng | Giọt bay tới đồng minh; vòm bật | Như trên |
 | Hỗ trợ bẫy | Lò Rèn Dã Chiến | Bễ phì khói | Tia lửa nhỏ bay tới bẫy | Như trên |
 | Vàng, trinh sát | Giếng Vàng, Tháp Canh | Gợn nước; cờ bay | Đồng vàng bay về ô Vàng; mắt cú đánh dấu quái | Như trên |
 | Lính chặn | Vệ Binh Rêu, Gấu Khiên Đá, Người Rơm Mồi | Đứng thủ | Đỡ khiên, quét; khiêu khích: vòng cam nhạt tỏa ra | Ngã thành nụ cây, hồi sinh tại chỗ có vòng giờ |
