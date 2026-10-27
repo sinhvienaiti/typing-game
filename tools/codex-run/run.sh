@@ -8,12 +8,14 @@
 # Logs: .local/codex-runs/<name>/{brief.md, events.jsonl, last.md, err.txt}
 set -u
 [ $# -ge 2 ] || { echo "usage: run.sh <name> <brief.md> [cwd] [effort] [sandbox]" >&2; exit 2; }
-name=$1; brief=$2; cwd=${3:-.}; effort=${4:-high}; sandbox=${5:-workspace-write}
+name=$1; brief=$2; cwd=${3:-.}; effort=${4:-ultra}; sandbox=${5:-workspace-write}
 model=${CODEX_MODEL:-gpt-6.1-sol}
 root=$(cd "$(dirname "$0")/../.." && pwd)
 codex=${CODEX_BIN:-$(ls -d "$HOME"/.cursor/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | sort -V | tail -1)}
 [ -n "$codex" ] && [ -x "$codex" ] || { echo "Codex CLI not found (set CODEX_BIN)" >&2; exit 127; }
-case "$effort" in high|xhigh|max) ;; *) echo "effort must be high, xhigh or max" >&2; exit 2 ;; esac
+case "$effort" in high|xhigh|max|ultra) ;; *) echo "effort must be high, xhigh, max or ultra" >&2; exit 2 ;; esac
+# Owner 27/10: every run at ultra; a lower effort in a lane file is raised (CODEX_EFFORT_EXACT=1 keeps it).
+[ "${CODEX_EFFORT_EXACT:-0}" = 1 ] || effort=ultra
 case "$sandbox" in read-only|workspace-write|danger-full-access) ;; *) echo "bad sandbox: $sandbox" >&2; exit 2 ;; esac
 
 log="$root/.local/codex-runs/$name"

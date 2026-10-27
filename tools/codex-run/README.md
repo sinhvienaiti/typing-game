@@ -7,7 +7,7 @@ Mục đích: giao cho Codex những việc **hình ảnh, prompt âm thanh và 
 - **Codex CLI:** dùng bản **0.164.0** chính thức tải từ GitHub `openai/codex`, đặt ở `D:\_tools\codex-0.164.0\codex-x86_64-pc-windows-msvc.exe`, kèm `codex-code-mode-host.exe` và `codex.cmd`.
   - Bản 0.146 trong extension Cursor chỉ gọi được `gpt-5.6-sol`. Với `gpt-6.x`, máy chủ báo "not supported when using Codex with a ChatGPT account".
 - **Đăng nhập:** bằng ChatGPT (`~/.codex/auth.json` của Windows). **Không dùng API key**: `run.ps1` xóa `OPENAI_API_KEY`, `CODEX_API_KEY`.
-- **Model mặc định:** `gpt-6.1-sol`, suy luận `high` (chủ dự án chọn: 6.1 sol, high trở lên). Có thể truyền `-Effort xhigh` hoặc `max`.
+- **Model mặc định:** `gpt-6.1-sol`, suy luận **`ultra`** (chủ dự án 27/10: "cho nó lên ultra ở model 6.1 sol"; trước đó high). Ultra là suy luận tối đa, kèm tự chia việc cho agent con (`multi_agent` của model), nên tốn hạn mức ChatGPT nhanh hơn. `run.sh` nâng mọi effort thấp hơn trong file làn lên `ultra`, kể cả các dòng làn cũ ghi `high`; muốn giữ đúng effort của dòng thì đặt `CODEX_EFFORT_EXACT=1`. `run.ps1` trên Dell chưa nhận `ultra`.
 - **Trên Mac mini M4:** Codex CLI có sẵn trong extension ChatGPT của Cursor (không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-<bản>/bin/macos-aarch64/codex`. Bản 0.162.0-alpha.17.2 gọi được `gpt-6.1-sol` (thử ngày 25/10/2026), nên trên Mac không cần ≥ 0.164. Mac không có `pwsh`, nên dùng hai bản bash cùng cách làm:
   - `tools/codex-run/run.sh <tên> <phiếu> [thư mục] [effort] [sandbox]`;
   - `tools/codex-run/queue.sh <danh sách>`: cùng định dạng danh sách, tự chờ khi hết hạn mức (tối đa 12 lần), chạy lại khi rớt kết nối (tối đa 4 lần).

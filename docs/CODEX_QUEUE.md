@@ -7,7 +7,7 @@ Thứ tự ưu tiên:
 2. Nhạc và âm sinh trên Mac (audio-lab). Trên Dell chỉ chuẩn bị spec và prompt.
 3. 3D: viết một file yêu cầu trước, tạo model sau.
 
-Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng model `gpt-6.1-sol`, suy luận high. Phiếu nằm ở [`docs/codex-queue/`](codex-queue/).
+Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng model `gpt-6.1-sol`, suy luận **ultra** từ 27/10 (chủ dự án; trước đó high). Phiếu nằm ở [`docs/codex-queue/`](codex-queue/).
 
 | # | Phiếu | Game | Loại | Trạng thái |
 |---|---|---|---|---|
@@ -39,7 +39,7 @@ Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng
 | 018 | [Tuyến Cuối: chép kit mới, kiểm "86116"](codex-queue/018-ts-kit-sync-numbers.md): `feedback/numbers.ts` theo bản sửa của làn Rồng, mã băm 152 trận không đổi, khe mực giữa hai số ở hai cỡ | Tuyến Cuối | Mã (nhỏ) | Chờ làn Tuyến Cuối sửa xong (không sửa cùng lúc một cây thư mục) |
 | 019 | [Lời Gọi: kiểm lại độc lập lượt sửa sau test 27/10](codex-queue/019-td-test-pass-recheck.md) (chỉ đọc): đối chiếu changelog với diff, cổng, tái hiện từng lỗi nặng ở hai cỡ, chơi hồi quy | Lời Gọi | Phản biện | Làn G trên Mac từ 27/10 (`.local/codex-lane-mac-g.txt`), sau lượt sửa `aa87eca`; sandbox `workspace-write` (quyền đầy đủ bị chặn), phần trình duyệt bị chặn thì Claude chạy |
 | 020 | [Làm lại 9 ảnh 2D dưới 8 điểm](codex-queue/020-2d-below-8-redo.md) (T3, C9, C10, C22, C23, C25, S15-v2, S16-v2, V35), sửa bằng công cụ trước, tạo lại tối đa 3 lượt; không đổi tên ảnh đang dùng | Rồng, Lời Gọi | Ảnh | Làn D trên Mac từ 27/10 12:00 (`.local/codex-lane-mac-d.txt`). Luật mới của chủ dự án 27/10: ảnh 2D từ 8 điểm, chỉ model 3D giữ luật 7 |
-| 020b | [Vẽ lại chân dung Mộc Tinh C21](codex-queue/020b-td-moc-tinh-portrait.md) (đầu, ngực, nét cọ tím tự nhiên), tối đa 3 lượt | Lời Gọi | Ảnh | Làn E trên Mac từ 27/10 |
+| 020b | [Vẽ lại chân dung Mộc Tinh C21](codex-queue/020b-td-moc-tinh-portrait.md) (đầu, ngực, nét cọ tím tự nhiên), tối đa 3 lượt | Lời Gọi | Ảnh | **Xong** 11:40 27/10, một lượt ([báo cáo](codex-queue/020b-report.md)). Claude duyệt: 8 (Codex 8,5), Đạt; md5 43 file cũ không đổi; đã thay vào `portraits/moc-tinh.png`, bản cũ `.v1` |
 | 020c | [Vẽ lại Lò Đúc Tiền V37 với lò nguội](codex-queue/020c-td-gold-foundry-cold.md) (ảnh nguồn Tripo, luật không ánh sáng), tối đa 3 lượt | Lời Gọi | Ảnh | Chờ 020b xong (làn F) |
 | 021 | [Lời Gọi: 5 việc nhỏ còn mở sau test 27/10](codex-queue/021-td-small-fixes.md) do agent sửa viết sẵn (nhãn kho đè Draconis, nhãn thẻ kết, nút Chép số bấm hai lần, đo cổng 5b, dải nghĩa đè bảng HUD); gói "/" còn 0,19 kB, mã đúng trần 10.500 dòng | Lời Gọi | Mã (nhỏ) | Làn G, sau 019; Claude đọc diff, chạy lại kiểm rồi commit |
 | 016 | [Gom ảnh cần dựng 3D vào `D:\tripo-upload\`](codex-queue/016-tripo-upload-folder.md), nhóm theo face | Rồng, Lời Gọi, Tuyến Cuối | Gom ảnh | **Xong** 25/10 13:59:<br>• 57 model, 65 ảnh gốc, 7 nhóm face; 60 credit rig; 86 model chờ ảnh.<br>• **Claude duyệt: đạt.** Ảnh chép nguyên byte, cấu trúc và `tripo.txt` đúng.<br>• Chạy lại sau 015 để bổ sung |
