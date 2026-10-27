@@ -4,8 +4,8 @@
 #
 #   tools/codex-run/queue.sh .local/codex-lane-mac-a.txt
 #
-# List lines: name | brief | cwd | effort | sandbox   (blank lines and lines starting with # are skipped;
-# effort defaults to ultra (owner, 27/10), sandbox to workspace-write; backslashes in paths are read as /).
+# List lines: name | brief | cwd | effort | sandbox | model   (blank lines and lines starting with # are skipped;
+# effort defaults to high, sandbox to workspace-write, model to gpt-6.1-sol (pick by the work: README); backslashes in paths are read as /).
 # A run that hits the usage limit waits until the time Codex names ("try again at 8:54 AM", else 30 minutes)
 # and runs again, up to 12 times; a dropped connection runs again after 2 minutes, up to 4 times.
 # Failed log dirs are kept as <name>-prev-<MMddHHmm>.
@@ -30,15 +30,15 @@ resume_at() {
   echo $(( at + 120 ))
 }
 
-grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | while IFS='|' read -r name brief cwd effort sandbox; do
+grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | while IFS='|' read -r name brief cwd effort sandbox model; do
   name=$(echo "$name" | xargs); brief=$(echo "$brief" | xargs)
-  cwd=$(echo "${cwd:-.}" | xargs); effort=$(echo "${effort:-ultra}" | xargs); sandbox=$(echo "${sandbox:-workspace-write}" | xargs)
+  cwd=$(echo "${cwd:-.}" | xargs); effort=$(echo "${effort:-high}" | xargs); sandbox=$(echo "${sandbox:-workspace-write}" | xargs); model=$(echo "${model:-gpt-6.1-sol}" | xargs)
   log="$root/.local/codex-runs/$name"
   limits=0; drops=0
   while :; do
     [ -d "$log" ] && mv "$log" "$log-prev-$(date +%m%d%H%M)"
-    echo "$(stamp) start $name ($effort, $sandbox)"
-    "$run" "$name" "$brief" "$cwd" "$effort" "$sandbox" > /dev/null < /dev/null
+    echo "$(stamp) start $name ($model, $effort, $sandbox)"
+    "$run" "$name" "$brief" "$cwd" "$effort" "$sandbox" "$model" > /dev/null < /dev/null
     code=$?
     events="$log/events.jsonl"
     # Only a run that failed or left no report counts: a finished run's events may quote these words from files it read.

@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 # Run one Codex task (a markdown brief) non-interactively on the Mac and keep its logs (bash twin of run.ps1).
 #
-#   tools/codex-run/run.sh <name> <brief.md> [cwd] [effort] [sandbox]
+#   tools/codex-run/run.sh <name> <brief.md> [cwd] [effort] [sandbox] [model]
 #   tools/codex-run/run.sh 005a-td-vs-images-characters docs/codex-queue/005a-td-vs-images-characters.md games/typing-defense
 #
 # Codex CLI: $CODEX_BIN, else the newest copy inside Cursor's ChatGPT extension (0.162.0-alpha reaches gpt-6.1-sol).
 # Logs: .local/codex-runs/<name>/{brief.md, events.jsonl, last.md, err.txt}
 set -u
-[ $# -ge 2 ] || { echo "usage: run.sh <name> <brief.md> [cwd] [effort] [sandbox]" >&2; exit 2; }
-name=$1; brief=$2; cwd=${3:-.}; effort=${4:-ultra}; sandbox=${5:-workspace-write}
-model=${CODEX_MODEL:-gpt-6.1-sol}
+[ $# -ge 2 ] || { echo "usage: run.sh <name> <brief.md> [cwd] [effort] [sandbox] [model]" >&2; exit 2; }
+# Owner 27/10: pick the model and effort by the kind of work (README, "Chọn model"), not ultra for everything.
+name=$1; brief=$2; cwd=${3:-.}; effort=${4:-high}; sandbox=${5:-workspace-write}
+model=${6:-${CODEX_MODEL:-gpt-6.1-sol}}
 root=$(cd "$(dirname "$0")/../.." && pwd)
 codex=${CODEX_BIN:-$(ls -d "$HOME"/.cursor/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | sort -V | tail -1)}
 [ -n "$codex" ] && [ -x "$codex" ] || { echo "Codex CLI not found (set CODEX_BIN)" >&2; exit 127; }
-case "$effort" in high|xhigh|max|ultra) ;; *) echo "effort must be high, xhigh, max or ultra" >&2; exit 2 ;; esac
-# Owner 27/10: every run at ultra; a lower effort in a lane file is raised (CODEX_EFFORT_EXACT=1 keeps it).
-[ "${CODEX_EFFORT_EXACT:-0}" = 1 ] || effort=ultra
+case "$effort" in low|medium|high|xhigh|max|ultra) ;; *) echo "effort must be low, medium, high, xhigh, max or ultra" >&2; exit 2 ;; esac
+case "$model" in gpt-6.1-sol|gpt-6-astra|gpt-6-luna|gpt-6-sol) ;; *) echo "model not in the list of README (Chọn model): $model" >&2; exit 2 ;; esac
 case "$sandbox" in read-only|workspace-write|danger-full-access) ;; *) echo "bad sandbox: $sandbox" >&2; exit 2 ;; esac
 
 log="$root/.local/codex-runs/$name"

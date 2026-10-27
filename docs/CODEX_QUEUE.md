@@ -7,7 +7,7 @@ Thứ tự ưu tiên:
 2. Nhạc và âm sinh trên Mac (audio-lab). Trên Dell chỉ chuẩn bị spec và prompt.
 3. 3D: viết một file yêu cầu trước, tạo model sau.
 
-Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Dùng model `gpt-6.1-sol`, suy luận **ultra** từ 27/10 (chủ dự án; trước đó high). **Hạn mức Codex rất thấp** (chủ dự án 27/10, cửa sổ 5 giờ): xác định trước mọi ảnh cần tạo, giao Codex làm ảnh trước; ảnh xong mới giao việc khác. Không chạy phiếu ảnh và phiếu khác cùng lúc. Phiếu nằm ở [`docs/codex-queue/`](codex-queue/).
+Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Model và mức suy luận chọn theo loại việc ([README, "Chọn model"](../tools/codex-run/README.md)): ảnh và mã nhỏ `gpt-6.1-sol` high, kiểm lại độc lập `gpt-6.1-sol` xhigh, việc vặt `gpt-6-luna` medium; ultra hay `gpt-6-astra` chỉ khi chủ dự án đồng ý từng phiếu (chủ dự án 27/10: không dùng ultra cho mọi việc). **Hạn mức Codex rất thấp** (chủ dự án 27/10, cửa sổ 5 giờ): xác định trước mọi ảnh cần tạo, giao Codex làm ảnh trước; ảnh xong mới giao việc khác. Không chạy phiếu ảnh và phiếu khác cùng lúc. Phiếu nằm ở [`docs/codex-queue/`](codex-queue/).
 
 | # | Phiếu | Game | Loại | Trạng thái |
 |---|---|---|---|---|
