@@ -32,3 +32,13 @@ docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
 | Tuyến Cuối (`games/typing-survival`) | Game Studio, `threejs-*` | the game's `docs/` (`docs/survival` in Space until the split) |
 | Tu Tiên Thủ Ải (`games/immortality-cultivation`) | Game Studio, `threejs-*` | [`docs/games/tu-tien`](docs/games/tu-tien) |
 | Portal, nginx, launch scripts | `game-ci-resumable` for CI/Git resumes | [split plan](docs/games/SPLIT_PLAN.md) §9–10 |
+
+## In-game names (owner, 27/10/2026)
+
+The games teach English, so the player sees game nouns in English: towers,
+traps, houses, units and soldiers, enemy kinds, items, guns (for example
+"Pine Bomb", not "Bom Hạt Thông"). Sentences, hints and menus stay Vietnamese
+around those names, and a name's first showing (debut card, shop tooltip) may
+add a short Vietnamese gloss. Unique characters keep their proper names (the
+dragons, Draconis, named bosses). Any new or reworded player-facing text uses
+English nouns; existing names change in a per-game naming pass, not in passing.
