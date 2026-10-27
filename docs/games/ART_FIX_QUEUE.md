@@ -125,6 +125,29 @@ Việc tùy chọn, không chặn game. Ngoại lệ: bước "trước Tripo" c
 - **V36** Mỏ Vàng, Hầm Sâu (P2, 8; INDEX P2 #26): thiếu miệng giếng, dáng gần nhà gốc. Gửi Tripo như ảnh hiện có.
 - **title-horizon** (P3, 8,5): lệch phong cách với màn tựa 3D; src chưa nạp ảnh.
 
+### 5.4 Kết quả phiếu 017 (27/10)
+
+Codex làm 14 mục ([báo cáo](../codex-queue/017-report.md)). Claude chạy lại kiểm md5 nguồn (không đổi), xem hai tờ `_review/017-dh.jpg`, `_review/017-td.jpg` và chấm lại theo luật 2D từ 8. Codex tự chấm và Claude chấm cùng mức thì không cần người chấm thứ ba.
+
+| Mã | File nhận | Claude chấm | Kết quả |
+|---|---|---:|---|
+| V18 | `kits/farm-kit-l2.alpha.png` | 8,5 | Nhận; đã thay vào bộ gửi Tripo (#10) |
+| V69 | `projectiles/seed-drop.flat.png` | 8,5 | Nhận; đã thay vào bộ gửi Tripo (#37) |
+| V37 | ảnh gốc giữ nguyên | 8,5 (gốc) | **Không nhận bản sửa**: hai lượt tô thành mảng đỏ phẳng. Ảnh gốc còn lò sáng, trái luật không ánh sáng, nên vẽ lại với lò nguội (phiếu [020c](../codex-queue/020c-td-gold-foundry-cold.md)); chưa gửi Tripo |
+| C21 | không | 7,5 | Khung đầu, ngực đã đúng, nhưng vệt mực là hai dải phẳng. Vẽ lại: phiếu [020b](../codex-queue/020b-td-moc-tinh-portrait.md) |
+| T2 | ảnh gốc giữ nguyên | 8,5 (gốc) | **Không nhận bản chỉnh màu**: ngả vàng, ghép xen A/B lộ thành ô cờ, mép kém hơn gốc. Ảnh gốc đã đạt theo luật 2D |
+| T3 | `ground/pine-river/moss.1024.png` (chỉ đổi khổ) | 7,5 | Đổi khổ không nâng điểm; vẽ lại ở phiếu 020 |
+| T7 | `ground/pine-river/rock.1024.png` | 8,5 | Nhận (đổi khổ, mép giữ) |
+| D4 | `decals/pine-river/moss-puddles.v1.tone.png` | 8,5 | Nhận: rêu xanh đậm hơn, hết px tím |
+| D2 | `decals/pine-river/flower-clusters.015.1024.png` | 9 | Nhận, Đạt; rời ART_REPLACE_LATER |
+| D3 | `decals/pine-river/forest-litter.clean.png` | 8,5 | Nhận (33 px xanh đã xóa) |
+| I08 | `_review/017/hard-scale.warm.retry.256.png`, `.64.png` (lượt 2) | 8,5 | Nhận lượt 2; bản lượt 1 ở `icons/normalized/hard-scale.warm.*` có ranh gắt, không dùng |
+| I11 | `icons/normalized/015-skill-roar.256.png`, `.64.png` | 8,5 | Nhận |
+| U2 | `ui/buildings/archer.flag.png` | 8,5 | Nhận |
+| U4 | `ui/buildings/normalized/barracks-v2.trim.256.png`, `.64.png` | 8,5 | Claude làm lại từ `buildings/barracks-v2.png`: bản của Codex vẫn là nhà dài thấp cũ, khác tháp hai tầng đang dùng trong game. Viền mực mảnh hơn icon cùng bộ |
+
+Nhận ở đây là nhận file nguồn trong `art-src`. Đưa vào game (đổi đường dẫn nạp, chạy lại bản dựng) là bước nhập riêng của từng game.
+
 ## 6. Số lượng
 
 **27/10, luật 2D từ 8 điểm:** bảng dưới là số của lượt chấm lại 26/10 theo luật cũ. Theo luật mới, mọi ảnh 2D 8–8,5 trong cột "Tạm chấp nhận" là Đạt. Còn 10 ảnh 2D dưới 8 phải sửa hoặc tạo lại: 9 ảnh ở mục 3b và C21 ở mục 2. Model 3D tạm chấp nhận còn 6: E01, U1, K03, K04, K07, rainbow-tank.

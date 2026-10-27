@@ -6,6 +6,8 @@ Chủ dự án (27/10) giao một phần việc nhỏ cho Codex và yêu cầu l
 
 **Thư mục làm việc:** `games/typing-survival`. Lệnh kit chạy ở gốc repo cha (`../..`).
 
+**Quyền chạy:** Codex chạy với sandbox `workspace-write`, thư mục gốc là repo cha. Sandbox có thể chặn mở cổng dev server hay Chrome. Gặp chặn thì ghi rõ lệnh nào, lỗi gì vào báo cáo, làm hết các phần còn lại (sync, `pnpm check`, mã băm). Claude sẽ chạy phần trình duyệt; không tìm cách vượt sandbox.
+
 **Được sửa:**
 - `src/kit/**` (chỉ bằng lệnh sync, không sửa tay);
 - mã game ở `src/view/**`, `src/app/**`, chỉ khi `pnpm check` hỏng vì API kit đổi, và sửa ít nhất có thể;

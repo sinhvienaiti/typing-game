@@ -76,6 +76,6 @@ Mức cần (mục 3) vẫn quyết **làm ảnh nào trước**: P1, rồi P2; 
 ## 4. Ai chấm, ghi ở đâu
 
 - **Codex** tự chấm từng ảnh khi giao, ghi điểm và mức vào README giao nhận của phiếu.
-- **Claude** chấm lại khi duyệt. Ảnh sát ngưỡng thì hai người chấm độc lập: model 3D từ 6 tới 7,5 hoặc mức "Tạo lại", ảnh 2D từ 7,5 tới 8,5. Lệch nhau từ 2 điểm thì có người thứ ba.
+- **Claude** chấm lại khi duyệt. Ảnh sát ngưỡng thì hai người chấm độc lập: model 3D từ 6 tới 7,5 hoặc mức "Tạo lại", ảnh 2D từ 7,5 tới 8,5. Codex tự chấm và Claude chấm lại được tính là hai người khi cùng một phía ngưỡng; hai điểm ở hai phía ngưỡng, hoặc lệch nhau từ 2 điểm, thì có người thứ ba.
 - **Model Tripo** (chủ dự án tạo tay trên web) chấm theo cùng thang, trên ảnh render ba góc. Claude chỉ đề nghị tạo lại khi model dưới 7 và không sửa được bằng preset hay Blender.
 - Báo cáo kiểm ảnh ghi **điểm và mức**, không chỉ "đạt" hay "chưa đạt".

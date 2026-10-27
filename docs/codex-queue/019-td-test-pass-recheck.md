@@ -1,6 +1,6 @@
 # Phiếu 019 · Lời Gọi · kiểm lại độc lập lượt sửa sau đợt test 27/10 (chỉ đọc)
 
-**Bối cảnh:** ba người test của Claude chơi Lời Gọi ngày 27/10 và tìm ra 13 lỗi nặng, 34 lỗi nhẹ. Một agent Claude đã sửa phần lớn, ở các commit `dfd574f`, `fe5186a`, `f7d43fc`, `d6c98cf` và commit giấy tờ sau đó. Bảng lỗi nằm ở `games/typing-defense/docs/changelog/2026-10-27-test-pass.md`. Phiếu này là lượt kiểm lại độc lập, thay cho agent kiểm lại của Claude. Codex không viết bản sửa nào nên nhìn không bị lệch theo người sửa (giống phiếu 011).
+**Bối cảnh:** ba người test của Claude chơi Lời Gọi ngày 27/10 và tìm ra 13 lỗi nặng, 34 lỗi nhẹ. Một agent Claude đã sửa phần lớn, ở các commit `dfd574f`, `fe5186a`, `f7d43fc`, `d6c98cf`, `ce2a8c2` và commit giấy tờ `aa87eca` (đã đẩy lên origin/main). Bảng lỗi nằm ở `games/typing-defense/docs/changelog/2026-10-27-test-pass.md`. Phiếu này là lượt kiểm lại độc lập, thay cho agent kiểm lại của Claude. Codex không viết bản sửa nào nên nhìn không bị lệch theo người sửa (giống phiếu 011).
 
 Chủ dự án (27/10) giao một phần việc cho Codex và yêu cầu làm đúng, không sai sót. Mọi kết luận phải có bằng chứng: ảnh đã xem, số đo, đầu ra lệnh. Không chắc thì ghi "chưa chắc", không đoán.
 
@@ -15,11 +15,13 @@ Chủ dự án (27/10) giao một phần việc cho Codex và yêu cầu làm đ
 - lệnh git có ghi (chỉ được `log`, `show`, `diff`);
 - đụng media, game khác, Tu Tiên.
 
+**Quyền chạy:** Codex chạy với sandbox `workspace-write`, thư mục gốc là repo cha (`cd games/typing-defense` trước khi làm). Sandbox có thể chặn mở cổng dev server hay Chrome. Gặp chặn thì ghi rõ lệnh nào, lỗi gì vào báo cáo, làm hết các phần còn lại (đọc mã, `pnpm check`, golden, bot Node). Claude sẽ chạy phần trình duyệt; không tìm cách vượt sandbox.
+
 **Máy dùng chung:** mọi lệnh nặng chạy qua `../../.local/bin/heavy.sh` (`--gpu` cho trình duyệt). Dev server riêng ở cổng 4291 (`pnpm exec vite --host 127.0.0.1 --port 4291 --strictPort`, chạy nền), tắt khi xong.
 
 ## Việc
 
-1. **Đối chiếu changelog với diff.** Với mỗi dòng "Đã sửa" trong bảng của `2026-10-27-test-pass.md`, tìm đoạn mã trong diff `5c3b939..HEAD` làm đúng điều dòng đó nói. Mỗi dòng ghi: khớp, khớp một phần (thiếu gì) hoặc không thấy mã.
+1. **Đối chiếu changelog với diff.** Với mỗi dòng "Đã sửa" trong bảng của `2026-10-27-test-pass.md`, tìm đoạn mã trong diff `cc0c2c1..aa87eca` làm đúng điều dòng đó nói. Mỗi dòng ghi: khớp, khớp một phần (thiếu gì) hoặc không thấy mã.
 2. **Cổng.**
    - `pnpm check`: số test, kích thước gói "/" so với trần 85 kB, số dòng so với trần 10.500.
    - `pnpm td:golden:check`: hai file phải `same: true`.
@@ -44,4 +46,8 @@ Chủ dự án (27/10) giao một phần việc cho Codex và yêu cầu làm đ
 
 ## Repro của người sửa
 
-(Claude điền sau khi lượt sửa xong.)
+Đọc mục **"Kiểm lại các lỗi nặng đã sửa (cho lượt kiểm của Codex)"** của `games/typing-defense/docs/changelog/2026-10-27-test-pass.md`: mỗi lỗi nặng có màn, kịch bản, cỡ và chỗ phải nhìn. Bằng chứng của người sửa ở `games/typing-defense/tmp/mac-2026-10-27/test/verify-fix/`; chỉ dùng để so, kết luận phải từ lượt chạy của chính Codex.
+
+Hai lỗi nặng người sửa để mở (Đêm 4 quá nhàn, Thuồng Luồng lọt Lũy lúc boss tới) là việc cân bằng chờ chủ dự án. Chỉ ghi lại số đo nếu tình cờ thấy, không cần tái hiện.
+
+Người sửa tự ghi một chỗ hở: ở ảnh `td-1b-tour-07-choang-1280x720.png`, thẻ Dồn lửa vẫn che boss lúc choáng khi các cột không tách được. Đo tần suất chỗ hở này ở hai cỡ, khoảng 20 lần choáng mỗi cỡ, và ghi số.
