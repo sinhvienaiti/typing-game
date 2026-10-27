@@ -236,7 +236,7 @@ Theo công thức 00 §4.9: hạ quái 60 % (chia theo ĐĐ, cụm bầy trả m
 ### 7.1 Luật chung
 - Đặt vào **ô bẫy** trên đường (`slots.kind = "trap"`). Mỗi đường 3–5 ô, cách nhau 5–7 m, không ô nào trong 8 m quanh tâm.
 - Ba kiểu: **Sàn** (trúng quái đất, quái bị Hạ Cánh, quái bay bị Đóng băng rơi), **Trụ** (đứng bên đường, trúng cả bay thấp), **Ẩn** (quái không thấy, trúng con đầu tiên).
-- **Một lần rồi nạp lại**, trừ Gai Chông và Bùn Lầy chạy liên tục. Vòng hồi hiện quanh bẫy.
+- **Một lần rồi nạp lại**, trừ Gai Chông và Bùn Lầy chạy liên tục. Vòng hồi hiện quanh bẫy. Trong đợt, một chip cạnh mỗi bẫy và trên mỗi nhà hiện sẵn sàng, đang nạp (vòng và số giây) và vừa nổ ("Nổ!", "Bắn!", "Xung!"); lúc nghỉ, menu ô ghi luật kích và trạng thái (00 D33 (1)).
 - **Kích:** bẫy lớn có hai chế độ, đổi bằng vòng menu. **Tự**: kích khi đủ ngưỡng quái trong vùng. **Chữ**: hiện Từ Kích, gõ để kích, hiệu lực ×1,3 (mục 10.3). Mặc định **Tự tới hết C3** (00 D13); từ C4 mặc định Chữ. Người chơi đổi được mặc định trong cài đặt.
 - **Quái phá bẫy** (thẻ `sapper`, phần quái) làm bẫy **Kẹt** 10 s, không phá hẳn. Hạ quái đó thì gỡ Kẹt ngay. Thợ Bẫy Sóc gỡ Kẹt một lần mỗi đợt. Đẩy và Kéo không đưa quái ra khỏi đường.
 
@@ -247,8 +247,8 @@ Theo công thức 00 §4.9: hạ quái 60 % (chia theo ĐĐ, cụm bầy trả m
 | 2 | Bùn Lầy | `mire` | Sàn, liên tục | Chậm 40 %, Ướt | Tròn 4 m | — | 60 | — |
 | 3 | Cọc Bật | `spring-log` | Sàn | Đẩy lùi 6 m ÷ sức nặng, Choáng 0,5 s | 2,5 m | 14 s | 70 | Tự |
 | 4 | Mìn Ấn | `rune-mine` | Ẩn | 260 P lên con đầu tiên, 100 P quanh 2 m. Ưu tiên quái To | 2 m | 30 s | 80 | Tự |
-| 5 | Lưới Phóng | `net-launcher` | Trụ | Bắn lưới quái bay thấp gần nhất: Hạ Cánh 3 s | 10 m | 15 s | 80 | Tự |
-| 6 | Bom Hạt Thông | `pine-bomb` | Sàn | 120 VL, đẩy 2 m | 3 m | 22 s | 90 | Tự (≥ 3 quái) / Chữ |
+| 5 | Lưới Phóng | `net-launcher` | Trụ | Bắn lưới quái bay thấp gần nhất: Hạ Cánh 3 s. Chỉ bắn quái bay; ô và cửa hàng ghi rõ (00 D33 (1)) | 10 m | 15 s | 80 | Tự |
+| 6 | Bom Hạt Thông | `pine-bomb` | Sàn | 30 VL, đẩy 2 m (00 D33 (1): bản đầu 120 VL khi kích ở ≥ 3 quái) | 3 m | 22 s | 90 | Tự (≥ 2 quái, hoặc 1 quái đang bị lính chặn) / Chữ |
 | 7 | Nấm Độc | `spore-cap` | Sàn | Mây 6 s: Độc 6 C/s, −50 % hồi máu | 3 m | 20 s | 90 | Tự |
 | 8 | Hố Gió | `gale-pit` | Sàn | Kéo quái trong 5 m về tâm 1,2 s | 5 m | 16 s | 100 | Tự (≥ 3 quái) / Chữ |
 | 9 | Lưới Dây Leo | `vine-snare` | Sàn | Giam tối đa 4 quái 2,5 s | 3 m | 18 s | 100 | Tự |
@@ -292,7 +292,7 @@ Theo công thức 00 §4.9: hạ quái 60 % (chia theo ĐĐ, cụm bầy trả m
 ### 8.1 Luật chung
 - Đặt vào **bệ nhà** (`slots.kind = "house"`). Vòng trong 7–10 m quanh tâm: 4–6 bệ. Vòng ngoài 14–20 m, gần chỗ đường tách hoặc nhập: 2–4 bệ.
 - Nhà có máu (600 ở cấp 1, +40 % mỗi cấp). Quái thẻ `breaker` và quái tầm xa có thể đánh nhà. Hết máu thì Đổ Nát: tắt, không mất. Sửa bằng 30 % giá đã chi, hoặc tự sửa 50 % khi hết đợt.
-- Hào quang cùng loại không cộng; lấy mạnh nhất. Câm từ quái làm nhà tắt hào quang trong thời gian đó. Mỗi nhà có **Năng** (5 đèn lồng nhỏ, mục 10.2). Đủ đèn thì phát một **Xung**.
+- Hào quang cùng loại không cộng; lấy mạnh nhất. Câm từ quái làm nhà tắt hào quang trong thời gian đó. Mỗi nhà có **Năng** (5 đèn lồng nhỏ, mục 10.2; Lều Thuốc Nam 3, 00 D33 (1)). Đủ đèn thì phát một **Xung**.
 
 ### 8.2 Danh sách nhà
 | # | Nhà | id | Tác dụng cấp 1 | Xung (khi đủ Năng) | Vùng | Giá | Giới hạn |
@@ -346,7 +346,7 @@ Theo công thức 00 §4.9: hạ quái 60 % (chia theo ĐĐ, cụm bầy trả m
 ### 10.2 Cộng Hưởng
 - Đòn từ trúng quái **đang đứng trong vùng** một bẫy đang hồi: bẫy đó −0,8 s hồi. Chớp hoặc Hoàn hảo: −1,2 s.
 - Trần: Cộng Hưởng rút tối đa 50 % thời gian hồi gốc mỗi chu kỳ của bẫy.
-- Đòn từ **hạ** quái đứng trong vùng một nhà: nhà +1 Năng. 5 Năng thì phát Xung (bảng 8.2), rồi về 0. Năng giữ qua đợt.
+- Đòn từ **hạ** quái đứng trong vùng một nhà: nhà +1 Năng. 5 Năng (Lều Thuốc Nam: 3, 00 D33 (1)) thì phát Xung (bảng 8.2), rồi về 0. Năng giữ qua đợt.
 - Hệ quả: chọn mục tiêu là quyết định. Đánh quái trong vùng bẫy để nạp bẫy, hay đánh quái nguy hiểm đang ở chỗ khác.
 
 ### 10.3 Từ Kích
