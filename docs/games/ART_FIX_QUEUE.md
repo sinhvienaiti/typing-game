@@ -34,6 +34,24 @@ Thêm 27/10 từ Codex 015b lượt 3 (Codex tự chấm, Claude duyệt ảnh x
 
 Bản hiện có của V34 (6,5) và V35 (5,5) giữ nguyên trong `art-src`, làm mẫu và làm bản dự phòng.
 
+## 3b. Ảnh 2D dưới 8 (luật 27/10)
+
+Chủ dự án 27/10: chỉ model 3D tiết kiệm theo luật 7 điểm; ảnh 2D phải từ 8 điểm mới đạt (ART_ACCEPTANCE §2.2). Chín ảnh 2D dưới đây trước ở ART_REPLACE_LATER.md (7–7,5), nay phải sửa hoặc tạo lại tới từ 8 điểm, tối đa 3 lượt một ảnh. Phiếu Codex [020](../codex-queue/020-2d-below-8-redo.md). C21 Chân dung Mộc Tinh (6, mục 2) đang sửa bằng công cụ ở phiếu 017; bản sửa chưa tới 8 thì tạo lại theo cùng luật.
+
+V35 là ảnh nguồn Tripo (INDEX P2 #41): **chưa gửi Tripo** tới khi có bản từ 8 điểm.
+
+| Mã | File | Mức cần | Điểm | Thiếu gì | Cách làm |
+|---|---|---|---:|---|---|
+| T3 Rêu dưới tán | [moss.png](../../games/dragon-hold/art-src/ground/pine-river/moss.png) | P1 | 7,5 | Rêu xanh đậm thành mảng tròn, khe lam lục tối; ghép 2×2 và 3×3 không thấy đường nối. Thiếu: mảng rêu đổ bóng như gò nổi, nhìn từ trên giống tán bụi; tương phản cao, tối hơn hẳn cỏ A/B; thêm lá tím lam và cành nâu ngoài đề, khá rối; khổ 1254×1254 thay 1024×1024. | Giữ prompt moss, nhấn: mảng rêu phẳng, chỉ chênh màu, không bóng, không gò; tương phản thấp ngang cỏ A; chỉ hai ba sắc xanh rêu và lam lục, không lá, cành hay kim thông; 1024×1024, lặp liền mép. |
+| C23 | [draconis-ult.png](../../games/typing-defense/art-src/portraits/draconis-ult.png) | P1 | 7 | Rồng trắng cánh lông/giáp đen vàng rõ, chuyển động sang phải. Lửa thành xoáy hơn mưa lông xuống; nét dày chi tiết, nền đỏ hơn cam đào; cần kiểm dải cắt 3:1. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| C9 | [lam.png](../../games/typing-defense/art-src/portraits/lam.png) | P2 | 7 | Giữ Lam và lửa xanh nhưng ra toàn thân, chưa cười lớn, ít viền mực; cần cắt đầu–thân trên, thêm lề phía tai/lửa, chuẩn hóa khổ và tách nền. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| C10 | [tre.png](../../games/typing-defense/art-src/portraits/tre.png) | P2 | 7 | Tre giữ đồ và màu chuẩn, nhưng ra toàn thân, thiếu chuồn chuồn, búa chưa đặt trên vai và ít viền mực. Cần cắt chân dung, chuẩn hóa khổ/lề và nền. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| C25 | [tre-ult.png](../../games/typing-defense/art-src/portraits/tre-ult.png) | P2 | 7 | Tre và búa/giàn tre đọc rõ; động tác vung ngang thay vì giơ cao, giàn giống đang vỡ hơn đang dựng. Nét nhiều chi tiết, cần kiểm dải cắt 3:1; giữ ảnh theo luật 7 điểm. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| C22 | [dai-bang-tinh.png](../../games/typing-defense/art-src/portraits/dai-bang-tinh.png) | P2 | 7 | Đại Bàng Tinh giữ lông, mỏ, vòng vỏ sò/đồng; toàn thân quay trái, thiếu vệt mực và ít viền. Cần cắt đầu–ngực, lật ngang, bổ sung vệt mực/viền, xóa nét giống chữ nhỏ trên đồng, chuẩn hóa nền. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| S15-v2 | [olive-tree-v2.png](../../games/typing-defense/art-src/scenery/coast/olive-tree-v2.png) | P2 | 7 | Giữ ô-liu cùng màu/nét v1; dáng nghiêng phải chưa rõ và còn gần v1, lá nhỏ nhiều. Cần thêm lề/đổi sang khổ dọc và khóa nền; không tạo lại. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| S16-v2 | [casuarina-v2.png](../../games/typing-defense/art-src/scenery/coast/casuarina-v2.png) | P2 | 7 | Giữ phi lao và tán theo gió, nhưng thân vẫn gần thẳng/ngả trái nhẹ, khá gần v1, lá chi tiết. Cần thêm lề gốc và khóa nền; không tạo lại. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
+| V35 Trại Lính, nhánh Giáo Dài | [barracks-giao-dai.png](../../games/typing-defense/art-src/branches/barracks-giao-dai.png) | P2 | 7,5 | Vẽ lại 27/10 theo tháp hai tầng. Thấp hơn tháp v2 khoảng 23 %; bó giáo còn khe giữa các mũi; một chấm xanh nhỏ ở sàn canh (do nền). | Prompt 015c, nhấn: giá giáo bó kín thành một khối, cao bằng tháp v2. |
+
 ## 4. Chờ kinh phí
 
 Không có mục Tạo lại mức P3; các mục Tạm chấp nhận chờ thay khi có kinh phí ghi ở [ART_REPLACE_LATER.md](ART_REPLACE_LATER.md).
@@ -108,6 +126,8 @@ Việc tùy chọn, không chặn game. Ngoại lệ: bước "trước Tripo" c
 - **title-horizon** (P3, 8,5): lệch phong cách với màn tựa 3D; src chưa nạp ảnh.
 
 ## 6. Số lượng
+
+**27/10, luật 2D từ 8 điểm:** bảng dưới là số của lượt chấm lại 26/10 theo luật cũ. Theo luật mới, mọi ảnh 2D 8–8,5 trong cột "Tạm chấp nhận" là Đạt. Còn 10 ảnh 2D dưới 8 phải sửa hoặc tạo lại: 9 ảnh ở mục 3b và C21 ở mục 2. Model 3D tạm chấp nhận còn 6: E01, U1, K03, K04, K07, rainbow-tank.
 
 Theo game và mức:
 
