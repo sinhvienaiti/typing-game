@@ -416,7 +416,7 @@ Không đụng làn nào đang chạy: spike làm trong một worktree mới tá
 
 | Game | Có sẵn | Còn thiếu | Ai làm, khi nào |
 |---|---|---|---|
-| Rồng | 13 GLB pine-river (`public/assets/dragon-hold/models/m0b/props/`); 8 ô đất, 4 decal (phiếu 001, 006) | Spike sẽ nói (có thể: đèn, rào, đá vách, hoa) | Nếu thiếu: danh sách ảnh → một lô ảnh Codex → chủ dự án dựng Tripo |
+| Rồng | 12 GLB pine-river (`public/assets/dragon-hold/models/m0b/props/`; đếm lại theo sổ 025 ngày 28/10); 8 ô đất, 4 decal (phiếu 001, 006) | Spike sẽ nói (có thể: đèn, rào, đá vách, hoa) | Nếu thiếu: danh sách ảnh → một lô ảnh Codex → chủ dự án dựng Tripo |
 | Lời Gọi | Bộ tranh `art-src/scenery/meadow/` (12 loại × v1, v2: mountain-pine, bamboo-clump, almond-tree, raspberry-bush, tall-grass, reed-clump, wildflowers, fern, rock-small, rock-medium, rotten-log, canopy-block), `scenery/shared/tree-stump`, chấm 8,5–9,5; phông `backdrops/w1-silverfall/`; ảnh nguồn 3 mốc `landmarks/{vach-thac-bac,cau-go,choi-canh-doi}.png` | 6 ô đất liền mép, 2 tờ decal (đất mòn; hoa, sỏi); nền 3 ảnh mốc chưa phẳng; 3 model Tripo | Giai đoạn 4: một lô ảnh Codex (ô đất, decal) theo quy ước `art-src/scenery/<vùng>/`; sửa nền mốc bằng `tools/art-normalize`; chủ dự án dựng 3 mốc trên Tripo |
 
 Giai đoạn 1–2 không thêm ảnh nào. Không chép media giữa các game: khi cần model của game khác, mỗi game nhập vào media của chính nó (`prepare-models --import`).
@@ -623,7 +623,7 @@ Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất 
 
 **Tham chiếu model**
 - `proto` (ví dụ `mountain-pine`) là tên trong file kit `registry/kits/<kit>.json`.
-- Kit trỏ tới id trong sổ 025 (`<game>:<id runtime>`) cho model, hoặc ô atlas cho billboard. Spec không bao giờ trỏ thẳng vào đường dẫn file.
+- Kit trỏ tới id trong sổ 025 cho model (file kit ghi `game` một lần ở cấp kit, nên `asset` là `<id runtime>` không kèm tiền tố, theo phiếu 031), hoặc ô atlas cho billboard. Spec không bao giờ trỏ thẳng vào đường dẫn file.
 - `proto` viết tiếng Anh dạng kebab-case, theo luật "In-game names" (27/10). Tên hiện ra cho người chơi (Watchtower, Wooden Bridge) đi qua đợt đặt tên của từng game.
 
 **Ngân sách** (`budget`): trần cho từng tier. `propTriangles` là tam giác prop của bản đồ (không tính lưới đất, chưa tính bóng); `drawCalls` ước bằng công thức 4.2; `loadMs` là trần phần sinh lúc nạp.
