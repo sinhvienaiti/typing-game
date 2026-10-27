@@ -133,7 +133,7 @@ Codex làm 14 mục ([báo cáo](../codex-queue/017-report.md)). Claude chạy l
 |---|---|---:|---|
 | V18 | `kits/farm-kit-l2.alpha.png` | 8,5 | Nhận; đã thay vào bộ gửi Tripo (#10) |
 | V69 | `projectiles/seed-drop.flat.png` | 8,5 | Nhận; đã thay vào bộ gửi Tripo (#37) |
-| V37 | ảnh gốc giữ nguyên | 8,5 (gốc) | **Không nhận bản sửa**: hai lượt tô thành mảng đỏ phẳng. Ảnh gốc còn lò sáng, trái luật không ánh sáng, nên vẽ lại với lò nguội (phiếu [020c](../codex-queue/020c-td-gold-foundry-cold.md)); chưa gửi Tripo |
+| V37 | ảnh gốc giữ nguyên | 8,5 (gốc) | **Không nhận bản sửa**: hai lượt tô thành mảng đỏ phẳng. Ảnh gốc còn lò sáng, trái luật không ánh sáng, nên vẽ lại với lò nguội (phiếu [020c](../codex-queue/020c-td-gold-foundry-cold.md)): **xong 27/10**, lượt 3, Codex 8,5, Claude 8,5, Đạt; giảm 99,8 % px sáng gắt ở miệng lò và máng. `branches/gold-mine-lo-duc-tien.png` nay là bản mới (gốc giữ `.v1`), đã thay vào bộ gửi Tripo (#27), gửi được |
 | C21 | không | 7,5 | Khung đầu, ngực đã đúng, nhưng vệt mực là hai dải phẳng. Vẽ lại ở phiếu [020b](../codex-queue/020b-td-moc-tinh-portrait.md): **xong 27/10**, lượt 1, Codex 8,5, Claude 8 (cùng phía ngưỡng), Đạt. `portraits/moc-tinh.png` nay là bản mới; bản cũ giữ `moc-tinh.v1.png` |
 | T2 | ảnh gốc giữ nguyên | 8,5 (gốc) | **Không nhận bản chỉnh màu**: ngả vàng, ghép xen A/B lộ thành ô cờ, mép kém hơn gốc. Ảnh gốc đã đạt theo luật 2D |
 | T3 | `ground/pine-river/moss.1024.png` (chỉ đổi khổ) | 7,5 | Đổi khổ không nâng điểm; vẽ lại ở phiếu 020 |
