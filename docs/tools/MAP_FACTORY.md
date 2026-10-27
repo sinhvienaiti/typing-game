@@ -483,7 +483,7 @@ Spec trong game nằm ngoài phần `compile.ts` băm, nên băm nội dung và 
 
 ### 8.1 Ví dụ đầy đủ: `w1-silverfall`
 
-Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất (xây khắp sân, cây luật, cầu, mỏ). Tọa độ là cm nguyên.
+Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất (xây khắp sân, cây luật, cầu, mỏ). Tọa độ là cm nguyên. `gameplay.commit` và `gameplay.hash` là commit ghim và băm lớp chơi của phiếu 028 (§8.3).
 
 ```json
 {
@@ -497,7 +497,8 @@ Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất 
     "factory": "0.1.0",
     "layers": { "fields": 1, "height": 1, "water": 1, "paths": 1, "dressing": 1, "vegetation": 1, "paint": 1 }
   },
-  "gameplay": { "adapter": "typing-defense@1", "commit": "86b7258", "hash": "<sha256 của bản trích chuẩn>" },
+  "gameplay": { "adapter": "typing-defense@1", "commit": "10ce627ff4e1c91f29e808cb658c086f51bd97d6",
+                "hash": "7faeaa7c0d5bf39803019444b1ae8056c36d3914a916a74baaed834e76ef4b23" },
   "registry": { "scan": "2026-10-27", "kit": "meadow@1" },
   "extent": { "fieldHalfCm": 4800, "skirtCm": 4000, "cellCm": 50, "skirtCellCm": 200 },
   "review": { "pitchesDeg": [55, 85, 15], "yawsDeg": [0, 90, 180, 270] },
@@ -573,7 +574,8 @@ Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất 
 {
   "format": "map-spec/0", "id": "L2-cau", "game": "dragon-hold", "unit": "cm", "seed": 20261028,
   "generator": { "factory": "0.1.0", "layers": { "fields": 1, "height": 1, "water": 1, "paths": 1, "vegetation": 1, "paint": 1 } },
-  "gameplay": { "adapter": "dragon-hold@1", "commit": "3f3390d", "hash": "<sha256>" },
+  "gameplay": { "adapter": "dragon-hold@1", "commit": "83da970eacbf85ea64da89f62a4d1b6622bc5c7b",
+                "hash": "c852b4d70147c8d2bf87f22999334f090646d0ae87bde6a9873b35de45d9659a" },
   "registry": { "scan": "2026-10-27", "kit": "pine-river@1" },
   "extent": { "playRadiusCm": 3200, "worldHalfCm": 7200, "cellCm": 50, "skirtCellCm": 200 },
   "review": { "pitchesDeg": [40, 55, 75], "yawsDeg": [0, 90, 180, 270] },
@@ -628,50 +630,63 @@ Chọn Lời Gọi làm ví dụ đầy đủ vì nó có nhiều luật nhất 
 
 ### 8.3 Lớp chơi đã trích (cm nguyên)
 
+Định dạng chính xác (từng khóa, nguồn, cách đổi đơn vị, `canonicalJson`, cách băm) nằm ở [phiếu 028](../codex-queue/028-map-gameplay-adapters.md) §5. Bản đầy đủ là hai fixture `tools/map-factory/test/fixtures/gameplay/*.json`, do `extract.mjs all --write` làm ra. Hai khối dưới chỉ rút gọn, cùng khóa và cùng số với phiếu.
+
+- Commit ghim (27/10): Lời Gọi `10ce627ff4e1c91f29e808cb658c086f51bd97d6`, Rồng `83da970eacbf85ea64da89f62a4d1b6622bc5c7b`.
+- Băm lớp chơi: Lời Gọi `7faeaa7c0d5bf39803019444b1ae8056c36d3914a916a74baaed834e76ef4b23`, Rồng `c852b4d70147c8d2bf87f22999334f090646d0ae87bde6a9873b35de45d9659a`. Băm bỏ `commit` và `hash`, nên commit cha `10ce627^` (chỉ khác đợt quái) và `3f3390d` (M0b) ra cùng băm.
+- `10ce627` chưa lên `origin/main` của Lời Gọi; `3f3390d` chỉ có trên nhánh cục bộ. Commit ghim mất (rebase, gộp nén) thì ghim lại và làm lại fixture.
+
 Lời Gọi (rút gọn):
 
 ```json
 {
-  "format": "map-gameplay/0", "adapter": "typing-defense@1", "commit": "86b7258",
-  "unit": "cm",
+  "format": "map-gameplay/0", "adapter": "typing-defense@1", "game": "typing-defense",
+  "map": "w1-silverfall", "contentMapId": "td-sandbox", "unit": "cm",
+  "commit": "10ce627ff4e1c91f29e808cb658c086f51bd97d6", "hash": "7faeaa7c…4b23",
   "field": { "halfCm": 4800, "buildHalfCm": 4600 },
-  "rules": { "roadHalfCm": 190, "roadClearCm": 190, "keepClearCm": 1100, "gapCm": 100,
-             "treeRadiusCm": 150, "footprintCm": { "S": 200, "M": 230, "L": 270, "XL": 350 } },
-  "gate": [-1000, -4600], "keep": [0, 4000],
+  "rules": { "roadHalfCm": 190, "roadClearCm": 190, "keepClearCm": 1100, "gapCm": 100, "snapCm": 25, "nodeSnapCm": 150,
+             "treeRadiusCm": 150, "footprintCm": { "S": 200, "M": 230, "L": 270, "XL": 350 },
+             "rallyRadiusCm": 1200, "rallyRoadMaxCm": 300 },
+  "gate": [-1000, -4600], "keep": { "at": [0, 4000], "footprintCm": 350 },
   "routeKnots": [
     [[-1000, -4600], [-400, -4000], [600, -3400], [-1200, -2000], [-1000, 0], [0, 1200], [-600, 2000], [600, 3000], [0, 4000]],
     [[-1000, -4600], [-400, -4000], [600, -3400], [1600, -2000], [1200, 200], [0, 1200], [-600, 2000], [600, 3000], [0, 4000]]
   ],
-  "routes": [["mỗi 25 cm theo groundLanes của game: [x, z] cm …"], ["…"]],
+  "routes": [{ "lengthCm": 11880, "points": [[-1000, -4600], [-983, -4582], "… 476 điểm, mẫu đều của groundLanes"] },
+             { "lengthCm": 11472, "points": ["… 459 điểm"] }],
   "fly": { "points": [[-1000, -4600], [2000, -2000], [0, 4000]], "heightCm": 300 },
   "water": [{ "x0": -2550, "x1": -2250, "z0": -4800, "z1": 4800 }],
   "bridges": [{ "x0": -2550, "x1": -2250, "z0": -1550, "z1": -1250 }, { "x0": -2550, "x1": -2250, "z0": 2450, "z1": 2750 }],
   "nodes": [{ "at": [2600, -3000], "richness": 3 }, { "at": [-1200, 3200], "richness": 1 }, { "at": [-3400, 800], "richness": 2 }],
   "trees": [[-2100, -4400], [-1750, -4450], "… đủ 36 cây; chỉ số là id"],
   "preset": [
-    { "kind": "archer", "at": [-800, 1200], "footprintCm": 200 },
-    { "kind": "cannon", "at": [700, 1200], "footprintCm": 230 },
-    "… barracks (300, 1800), gold-mine (2600, -3000), farm (-1700, 4000), mỗi nhà một bán kính nền"
+    { "kind": "archer", "at": [-800, 1200], "footprint": "S", "footprintCm": 200 },
+    { "kind": "cannon", "at": [700, 1200], "footprint": "M", "footprintCm": 230 },
+    "… barracks (300, 1800) M, gold-mine (2600, -3000) L, farm (-1700, 4000) L"
   ]
 }
 ```
 
-Bán kính nền thật của từng nhà lấy từ nội dung game (cỡ S/M/L/XL của nhà đó); hai số trên chỉ minh họa.
+`footprint` là cỡ của nhà đó trong `SLICE_1A.buildings`; `footprintCm` là `BUILD.footprintR` của cỡ ấy, đổi ra cm.
 
 Rồng (rút gọn):
 
 ```json
 {
-  "format": "map-gameplay/0", "adapter": "dragon-hold@1", "commit": "3f3390d", "unit": "cm",
-  "dais": { "at": [0, 0], "radiusCm": 400 },
+  "format": "map-gameplay/0", "adapter": "dragon-hold@1", "game": "dragon-hold", "map": "L2-cau", "unit": "cm",
+  "commit": "83da970eacbf85ea64da89f62a4d1b6622bc5c7b", "hash": "c852b4d7…659a",
+  "dais": { "at": [0, 0], "radiusCm": 400, "heroHoverCm": 250, "guideAt": [-260, 200] },
   "lanes": [
     { "id": "cau", "halfWidthCm": 150, "points": [[850, -2900], [500, -2250], [220, -1540], [120, -1000], [40, -600]],
-      "bridges": [{ "fromCm": 1050, "toCm": 1840, "halfWidthCm": 170 }] },
-    { "id": "suoi", "halfWidthCm": 130, "points": [[-3000, 700], "…"], "fords": [{ "fromCm": 690, "toCm": 1400 }] }
+      "bridges": [{ "fromCm": 1050, "toCm": 1840, "halfWidthCm": 170 }], "fords": [] },
+    { "id": "suoi", "halfWidthCm": 130, "points": [[-3000, 700], "…"], "bridges": [], "fords": [{ "fromCm": 690, "toCm": 1400 }] }
   ],
   "sky": [{ "id": "troi", "points": [[3050, -850], [2000, -700], [730, -180]], "altitudeCm": 300 }],
-  "slots": [{ "id": "cau-t1", "kind": "trap", "lane": "cau", "at": [660, -2548] }, "… 11 ô làn, 6 ô nhà"],
-  "river": { "points": [[7000, -3300], "…"], "widthsCm": [800, "…"], "depthCm": 120, "bankCm": 40 }
+  "slots": [{ "id": "cau-t1", "kind": "trap", "lane": "cau", "atCm": 400, "at": [660, -2548] },
+            { "id": "h-nw", "kind": "house", "ring": "inner", "at": [-550, -650] }, "… 11 ô làn, 6 ô nhà"],
+  "river": { "points": [[7000, -3300], "…"], "widthsCm": [800, "…"], "depthCm": 120, "bankCm": 40,
+             "shallows": [{ "at": [-2050, 260], "radiusCm": 350 }] },
+  "terrain": { "seed": 20261023, "sizeCm": 14400, "playRadiusCm": 3200, "reliefCm": 160, "kit": "pine-river" }
 }
 ```
 
@@ -731,13 +746,13 @@ Quy ước chung cho mọi phiếu:
 - chạy trong worktree riêng của repo cha (9.4); không mạng; không cổng; không trình duyệt; không lệnh git có ghi (`git archive`, `git status` được phép);
 - không ghi vào `games/**`;
 - không cài gói, chỉ dùng thư viện chuẩn của Node và `node_modules` sẵn có của `shared/game-kit` (TypeScript 6.0.3, vitest);
-- `git status --short` chỉ được có các đường dẫn cho phép;
+- giữ `git status --short --untracked-files=all` lúc bắt đầu; lúc cuối chỉ được có **thêm** các đường dẫn cho phép. Các phiếu trong một làn có thể chạy liền nhau, không commit xen giữa, nên file chưa commit của phiếu trước có thể đã có sẵn; không được có dòng ` M`, ` D` mới ngoài phạm vi ghi;
 - Claude đọc diff, chạy lại kiểm và phản biện trước khi commit.
 
 | # | Việc | Phạm vi ghi | Kiểm (bắt buộc) | Sau |
 |---|---|---|---|---|
 | 027 | Lõi tất định: `hash32`, `layerSeed`, `cellSeed`, `rankOf`; lint tất định | `shared/game-kit/map/{tsconfig.json,index.ts,hash.ts,seeds.ts}`, `map/*.test.ts` | `pnpm --dir shared/game-kit exec vitest run map` đạt; `tsc -p map/tsconfig.json` đạt; bảng 12 băm vàng (Claude ghi sẵn trong phiếu) khớp. Lint dùng `ts.createScanner`: bắt từng token cấm trong mẫu mã (`Math.sin/cos/tan/atan2/pow/hypot/exp/log/cbrt/random`, `Date`, `performance`, toán tử `**`); **không** bắt `/** … */`, chuỗi `"enumerate"`, chú thích `// Math.sin`; cho phép `performance` trong `*.test.ts`. Một mẫu có `enum`, dịch trong RAM bằng API TypeScript với tùy chọn của `map/tsconfig.json`, phải báo lỗi (không để file mẫu trong `map/`) | — |
-| 028 | Bộ đọc lớp chơi ở commit ghim, cho 2 bản đồ | `tools/map-factory/{lib/ts-hook.mjs,adapters/*.mjs,test/adapters.test.mjs,test/fixtures/gameplay/*.json}`; thêm `tools/map-factory/.cache/` và `out/` vào `.gitignore` | `node --test tools/map-factory/test/*.test.mjs` đạt; chạy 2 lần cùng byte; `git -C games/<id> status --porcelain` trước và sau giống hệt. Lời Gọi: 36 cây đúng thứ tự; 5 nhà đặt sẵn có bán kính nền; `TREE.radiusM`, `BUILD.roadClearM/keepClearM/gapM`; tuyến lấy mẫu mỗi 25 cm từ `groundLanes` của game, lệch ≤ 1 cm so với `Lane.xs/zs`. Rồng: làn từ `compileLanes`, u chia hết cho 600 ở mọi điểm (in số điểm không chia hết, phải bằng 0); 6 ô nhà, 11 ô làn. Băm bản trích ở `10ce627^` bằng băm ở `10ce627` (commit chỉ đổi đợt quái); băm đổi khi sửa một tọa độ cây trong RAM | — |
+| 028 | Bộ đọc lớp chơi ở commit ghim, cho 2 bản đồ | `tools/map-factory/{lib/ts-hook.mjs,adapters/*.mjs,test/adapters.test.mjs,test/fixtures/gameplay/*.json}`; thêm `tools/map-factory/.cache/` và `out/` vào `.gitignore` | `node --test tools/map-factory/test/*.test.mjs` đạt; chạy 2 lần cùng byte; `git status --porcelain` của repo game (bản checkout chính, `/Users/toandx/htdocs/typing-game/games/<id>`; thư mục `games/*` của worktree rỗng) trước và sau giống hệt. Lời Gọi: 36 cây đúng thứ tự; 5 nhà đặt sẵn có bán kính nền; `TREE.radiusM`, `BUILD.roadClearM/keepClearM/gapM`; tuyến lấy mẫu mỗi 25 cm từ `groundLanes` của game, lệch ≤ 1 cm so với `Lane.xs/zs`. Rồng: làn từ `compileLanes`, u chia hết cho 600 ở mọi điểm (in số điểm không chia hết, phải bằng 0); 6 ô nhà, 11 ô làn. Băm bản trích ở `10ce627^` bằng băm ở `10ce627` (commit chỉ đổi đợt quái); băm đổi khi sửa một tọa độ cây trong RAM | — |
 | 029 | Trường: tô lưới (đường có bề rộng, rect, đĩa, đa giác) và biến đổi khoảng cách số nguyên (Meijster) | `shared/game-kit/map/{raster,edt}.ts`, test | Bằng đúng cách tính vét cạn trên 200 lưới có seed (≤ 64²); băm vàng bộ trường của hai mẫu ở 50 cm (dùng fixture của 028); in thời gian, đích ≤ 60 ms cho 4 trường 288² trên M4; lint 027 đạt | 027, 028 |
 | 030 | Rải theo ô, xếp hạng, mật độ theo vị trí, có ghim | `shared/game-kit/map/scatter.ts`, test | Khoảng cách tối thiểu đúng với mọi cặp (vét cạn); trên 100 seed, tập 350 ‰ nằm trọn trong tập 550 ‰; không vật nào trong vùng cấm; ghim `keep` sống khi giảm mật độ; ghim thêm thì xóa vật trong khoảng cách tối thiểu; băm vàng. **In** bán kính thay đổi khi sửa một đĩa cấm (trung vị, p95, lớn nhất trên 100 seed): số báo cáo, không phải cổng | 029, spike |
 | 031 | MapSpec v0 tối thiểu: kiểu, `validateSpec`, lệnh `cli validate` | `shared/game-kit/map/spec.ts`, test, `tools/map-factory/cli.mjs`, `maps/*/*/map.spec.json` (chép từ 8.1), `test/fixtures/bad-spec/` | 2 spec mẫu thoát 0; 6 spec hỏng thoát 1 với đúng mã lỗi (số lẻ, ‰ > 1000, proto lạ, băm lớp chơi lệch, id ghim sai dạng, thiếu ngân sách); vitest, `node --test`, `tsc` đạt | 027, 028, spike |
@@ -766,6 +781,7 @@ Quy ước chung cho mọi phiếu:
 - **Mỗi thư mục một người ghi tại một thời điểm.** Claude chỉ ghi `shared/game-kit/map/layers/` khi không có phiếu Codex nào đang mở trên `shared/game-kit/map/`. Ở giai đoạn 1, Claude chỉ ghi worktree spike và `docs/`.
 - **Hàng Codex:** phiếu mã Map Factory xếp sau các phiếu ảnh đang chờ (luật hạn mức 27/10). Giai đoạn 1–2 không có phiếu ảnh.
 - **Kit sync** vào game do điều phối viên chạy ở bước đưa vào game, có dòng `DRIFT.md`.
+  - Việc phải làm ở bước đó (giai đoạn 3): `scripts/sync-game-kit.mjs` chép mọi file không phải test, nên sẽ chép cả `map/tsconfig.json` vào `games/<id>/src/kit/map/`. File này `extends ../tsconfig.json`, mà `src/kit/` của game không có tsconfig. Vite đọc tsconfig gần nhất của từng file, nên dựng game sẽ hỏng: đã thử với Vite 7.3.7 ngày 27/10 và 28/10 (dự án nháp có `src/kit/map/tsconfig.json`), lỗi `failed to resolve "extends":"../tsconfig.json"`. Cách sửa: kit sync bỏ qua `map/tsconfig.json`, hoặc game có tsconfig cha phù hợp. Phiếu 027 không sửa chỗ này.
 
 ---
 

@@ -10,6 +10,8 @@ Phiếu này làm phần nền của lõi:
 Phiếu 028 và 029 chạy ngay sau phiếu này, trong cùng worktree. Phiếu 029 dùng lại `hash32` và lint của phiếu này.
 
 **Thư mục làm việc:** worktree của repo cha `/Users/toandx/htdocs/typing-game-wt/map-codex` (nhánh `map-factory`), cwd `.`. Mọi đường dẫn tương đối trong phiếu tính từ thư mục này. Bản checkout chính `/Users/toandx/htdocs/typing-game` (tên trong phần luật chung ở đầu) không được ghi.
+- Worktree có thể đã có file chưa commit từ trước, ví dụ chính các file phiếu. Chúng không thuộc phiếu này: không sửa, không xóa.
+- Trước khi ghi gì, chạy `git status --short --untracked-files=all` và giữ kết quả cho Kiểm 7.
 
 **Chỉ được ghi:**
 - `shared/game-kit/map/tsconfig.json`;
@@ -224,7 +226,7 @@ Chạy từ cwd `.` của worktree. Dán lệnh và kết quả (dòng tổng) v
 4. Lint (nằm trong lệnh 1): danh sách file đã quét có ít nhất 3 file và 0 vi phạm; 19 mẫu cấm, mỗi mẫu đúng 1 vi phạm; 11 mẫu sạch, 0 vi phạm; ba mẫu `enum`, `namespace`, tham số thuộc tính có lỗi 1294; mẫu đối chứng 0 lỗi.
 5. Không hỏng phần còn lại của kit: `pnpm --dir shared/game-kit exec vitest run` đạt (trước phiếu: 36 file, 289 test, đều đạt), và `pnpm --dir shared/game-kit exec tsc -p tsconfig.json --noEmit` thoát 0.
 6. Chạy lại lệnh 1 lần thứ hai: cùng số test, cùng kết quả.
-7. `git status --short --untracked-files=all` chỉ có file trong `shared/game-kit/map/` và `docs/codex-queue/027-report.md`.
+7. Chạy lại `git status --short --untracked-files=all` và so với kết quả đã giữ lúc bắt đầu. Lúc cuối chỉ được có **thêm** file trong `shared/game-kit/map/` và `docs/codex-queue/027-report.md`. Các dòng đã có lúc bắt đầu ghi lại vào báo cáo, nhưng không đụng.
 
 ## Báo cáo `docs/codex-queue/027-report.md`
 
