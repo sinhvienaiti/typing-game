@@ -19,6 +19,8 @@ Chủ dự án (27/10) giao một phần việc cho Codex và yêu cầu làm đ
 
 **Máy dùng chung:** mọi lệnh nặng chạy qua `../../.local/bin/heavy.sh` (`--gpu` cho trình duyệt). Dev server riêng ở cổng 4291 (`pnpm exec vite --host 127.0.0.1 --port 4291 --strictPort`, chạy nền), tắt khi xong.
 
+**Lượt trước:** một lượt chạy 11:56–12:15 ngày 27/10 bị dừng có chủ ý, để dành hạn mức cho ảnh. Bằng chứng dở nằm ở `tmp/codex-019/` (check, golden, diff đã rút). Dùng lại được nếu HEAD vẫn là `aa87eca`; khác thì chạy lại.
+
 ## Việc
 
 1. **Đối chiếu changelog với diff.** Với mỗi dòng "Đã sửa" trong bảng của `2026-10-27-test-pass.md`, tìm đoạn mã trong diff `cc0c2c1..aa87eca` làm đúng điều dòng đó nói. Mỗi dòng ghi: khớp, khớp một phần (thiếu gì) hoặc không thấy mã.
