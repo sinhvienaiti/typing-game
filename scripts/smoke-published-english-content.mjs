@@ -1,6 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson } from "./english-content-core.mjs";
+import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
 import { buildGameEnglishActivityDataset } from "../shared/english-content/game-adapters.mjs";
 import {
   buildPublishedGameEnglishActivityDataset,
@@ -8,11 +9,19 @@ import {
 } from "../shared/english-content/activity-source.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
-const [dictionaryManifest,grammarManifest,sentenceManifest]=await Promise.all([
+const [dictionaryManifest,grammarManifest,sentenceManifest,e11TypingTextReviewShards]=await Promise.all([
   readJson(path.join(root,"shared","dictionary","manifest.json")),
   readJson(path.join(root,"shared","grammar","manifest.json")),
   readJson(path.join(root,"shared","sentences","manifest.json")),
+  readE11TypingTextReviewShards(root),
 ]);
+const e11TypingTextExpansionCount=e11TypingTextReviewShards.reduce(
+  (count,shard)=>count+shard.records.length,
+  0,
+);
+const expectedTypingTextExampleCount=300+e11TypingTextExpansionCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount;
+const expectedExampleCount=1513+e11TypingTextExpansionCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -62,16 +71,16 @@ const commonMistakes=sentenceRecords.filter(record=>String(record.id??"").starts
 if (dictionaryManifest.count!==900) errors.push("published dictionary runtime must contain 900 E03 records");
 if (lexemes.length!==300||senses.length!==300||usages.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
-if (sentenceManifest.count!==3401) errors.push("published sentence runtime must contain 3401 reviewed records");
-if (topics.length!==300||examples.length!==1513||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
-  errors.push("published runtime split must be 300 topics + 1513 examples + 1400 exercises + 100 dialogues + 388 common mistakes");
+if (sentenceManifest.count!==expectedSentenceManifestCount) errors.push("published sentence runtime must contain "+expectedSentenceManifestCount+" reviewed records");
+if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
+  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + 1400 exercises + 100 dialogues + 388 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
 if (tatoebaExamples.length!==300||tatoebaTranslations.length!==300) errors.push("published Tatoeba slices must expose 300 sentences + 300 translations");
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
-if (typingTextExamples.length!==300||typingTextCloze.length!==300) errors.push("published typing-text slice must expose 300 examples + 300 cloze exercises");
+if (typingTextExamples.length!==expectedTypingTextExampleCount||typingTextCloze.length!==300) errors.push("published typing-text slices must expose "+expectedTypingTextExampleCount+" examples + 300 pilot cloze exercises");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
 if (correctionExercises.length!==100||transformationExercises.length!==100) {
@@ -296,6 +305,7 @@ const report={
   tatoebaTranslations:tatoebaTranslations.length,
   typingTextExamples:typingTextExamples.length,
   typingTextCloze:typingTextCloze.length,
+  e11TypingTextExpansionCount,
   grammarManifestCount:grammarManifest.count,
   sentenceManifestCount:sentenceManifest.count,
   runtimeActivitySource:{
