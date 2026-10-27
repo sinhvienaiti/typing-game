@@ -8,7 +8,12 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build"
+    "build": "tsc --noEmit && vite build",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@fontsource/be-vietnam-pro": "^5.3.0",
+    "@fontsource/exo-2": "^5.3.0"
   },
   "devDependencies": {
     "typescript": "^5.9.2",

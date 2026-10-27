@@ -1,0 +1,119 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "typing-defense",
+  "id": "word-hit",
+  "group": "word-reward",
+  "family": "thuong",
+  "description": "Lô 0: một nốt đàn tranh VCSL (CC0) qua bộ phát mẫu, dời tối đa 3 bán cung (mục 3.2). Ba ứng viên cho câu hỏi quãng tám (mục 16 #4): C5 như tài liệu game, C4 theo đề xuất hạ một quãng tám, và C5 lối rung (vibrato). Dải 1–4 kHz bị khoét nhẹ và đuôi được làm mờ để nhường giọng đọc (mục 6.2). Đây là nốt mẫu để chọn hướng; bộ 7 file theo thang làm sau khi chủ dự án chọn. Vòng 2: thẻ ảnh cho thấy các họa âm 1–4 kHz ngân suốt 800 ms (năng lượng 1–4 kHz chỉ giảm 4,7 dB sau 100 ms, mục 6.2 cần ≥ 15 dB). Tách hai lớp: tiếng gảy đủ dải chỉ giữ 120 ms, phần ngân lọc thấp 1 kHz. Bản 3 lấy tiếng gảy thường và phần ngân rung (vibrato), vì mẫu vibrato tự nó lên mất 11 ms (L1 chặn ở 10 ms).",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "pluck",
+      "role": "attack",
+      "source": {
+        "sampler": {
+          "instrument": "dan-tranh.normal",
+          "notes": "0:C5:0.8:100"
+        }
+      },
+      "fadeOutMs": 90,
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "sampler": {
+              "instrument": "dan-tranh.normal",
+              "notes": "0:C4:0.8:100"
+            }
+          },
+          {
+            "sampler": {
+              "instrument": "dan-tranh.normal",
+              "notes": "0:C5:0.8:100"
+            }
+          }
+        ]
+      },
+      "trim": {
+        "endMs": 120
+      }
+    },
+    {
+      "id": "ring",
+      "role": "tail",
+      "source": {
+        "sampler": {
+          "instrument": "dan-tranh.normal",
+          "notes": "0:C5:0.8:100"
+        }
+      },
+      "fadeOutMs": 250,
+      "vary": {
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "sampler": {
+              "instrument": "dan-tranh.normal",
+              "notes": "0:C4:0.8:100"
+            }
+          },
+          {
+            "sampler": {
+              "instrument": "dan-tranh.vibrato",
+              "notes": "0:C5:0.8:100"
+            }
+          }
+        ]
+      },
+      "filters": [
+        {
+          "type": "lowpass",
+          "hz": 1000,
+          "order": 4
+        }
+      ],
+      "fadeInMs": 0,
+      "gainDb": -4
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 40,
+    "filters": [
+      {
+        "type": "peak",
+        "hz": 2500,
+        "gainDb": -3,
+        "q": 0.7
+      }
+    ],
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.5
+    },
+    "maxLengthMs": 900,
+    "tail": {
+      "floorDb": -60,
+      "fadeMs": 200
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 60,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 3,
+    "seed": 800,
+    "includeBase": true
+  },
+  "export": {
+    "path": "sfx/reward/word-hit",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}

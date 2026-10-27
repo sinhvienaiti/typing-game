@@ -1,0 +1,200 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: dragon.down
+game: dragon-hold
+status: draft
+manual_fields: [purpose, prompt.text, critic.intent]
+when: 'Thua: Hỏa Long kiệt sức'
+purpose: 'Hỏa Long kiệt sức: tiếng rên dài rơi xuống của thú lớn, thân nặng đổ xuống, lửa tắt; vang thung lũng dài'
+category: creature
+family: sinh-vat
+source_class: creature
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'M0_SOUND_LIST §1: Tiếng lẻ mono. Nhạc và nền stereo'
+  bus: dragon
+  priority: 1
+  min_gap_ms: 2000
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 1600
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 1280
+  max_ms: 1920
+  basis: src/audio/catalog.ts lengthMs (nguồn chuẩn của độ dài)
+  category_range_ms: [200, 1600]
+  music: null
+onset:
+  class: creature
+  rise_max_ms: 30
+  lead_silence_max_ms: 15
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 1
+  min: 1
+  max: 2
+  basis: '§4.3.3: Rồng chính 1–2 biến thể'
+randomisation:
+  group: default
+  pitch_cents: null
+  gain_db: null
+  rules:
+    - '§5.3 chưa có nhóm này: giữ cách đổi ngẫu nhiên hiện tại của mã'
+  current_code: ±4 % cao độ (khoảng ±68 cent), ±1,5 dB, lệch 0–12 ms (catalog vary)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: body
+      range_hz: [120, 800]
+      role: Thân lửa, thân quái
+    - band: sub
+      range_hz: [20, 120]
+      role: Thân gầm rồng, Bom Hạt Thông
+  voice_band: free
+  voice_band_text: Không phát dày; vẫn tránh ngân dài ở 1–4 kHz khi đang đọc từ
+  spectrum: AST nên gắn Roar, Growling hoặc Animal, không gắn Speech (cờ)
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'M0_SOUND_LIST §1: Tiếng lẻ chuẩn hóa đỉnh −1 dBTP'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: dragon
+  bus_gain: 0.75
+  bus_gain_db: -2.5
+  gain_db: 0
+  gain_basis: src/audio/catalog.ts gainDb (mặc định 0 dB), mức trước bus
+  relative_db: -2.5
+  pronunciation_duck_db: -3.0
+  mix_target:
+    metric: lufs-m-max
+    range: [-20, -15]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Exhausted dragon: a long falling groan from a huge creature, heavy body collapsing onto earth, fire guttering out, long low valley echo, 1.6 s'
+  suffix: null
+  style_root: painterly fantasy forest, warm, organic, outdoor
+  sweetener: than hồng lách tách và đàn hạc
+  variants:
+    - 'A: TrackType: SFX, a huge dragon collapses, a long weary groan sinking in pitch, heavy body falling onto the ground with scales scraping, flames dying with a soft hiss, long low valley echo'
+    - 'B: Giant beast slowly going down, deep tired moan, the ground shaking under a heavy body, embers fizzling out, dark reverberation across hills'
+    - 'C: TrackType: SFX, fantasy dragon defeat, strained fading roar, massive body slumping onto rock and dirt, a last breath of fire hissing out, wide forest echo, sad and weighty'
+    - 'D: Large creature exhaling its last strength, long low groan, heavy collapse with dust and stones, crackling fire dying away, long outdoor reverb tail'
+  basis: docs/audio/M0_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [cc0-layer]
+      detail: Ghép tiếng thú thật CC0, hạ 5–12 bán cung rồi xếp lớp
+    - rank: 2
+      kinds: [model-later]
+      detail: Stable Audio 3 (tốt cho kết cấu; tiếng kêu chưa kiểm chứng)
+    - rank: 3
+      kinds: [owner-recording]
+      detail: Chủ dự án tự gầm vào điện thoại, Claude hạ giọng
+  needs_now: [chu-du-an-tai-freesound]
+  needs_later: [buoc-0]
+  note: Cấm nhãn Speech
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, owner-original]
+  conditional:
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Hai Rồng có hai tính cách riêng: ghép tiếng thú khác nhau rồi hạ giọng (§8.1)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: creature
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Fire]
+    forbid: [Speech]
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: 30
+  head_max_ms: 15
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'Exhausted dragon: a long falling groan from a huge creature, heavy body collapsing onto earth, fire guttering out, long low valley echo, 1.6 s'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [chu-du-an-tai-freesound]
+origin:
+  code:
+    file: src/audio/catalog.ts
+    present: true
+    asset_stem: sfx/dragon/down
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/M0_SOUND_LIST.md
+    present: true
+    section: 5.2 Hỏa Long (bus `dragon`, trừ báo nguy ở `stingers`)
+  plan: []
+notes: 'Q6 (24/10): sinh vật lớn: rên (chuẩn bị), đổ xuống (phát), lửa tắt (thân), vang thung lũng dài (đuôi). Độ dài giữ 1,6 s.'

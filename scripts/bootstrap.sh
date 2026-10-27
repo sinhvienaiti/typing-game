@@ -5,13 +5,18 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${1:-all}"
 
 case "$TARGET" in
-  all|monkeytype|shooter|recall|karaoke|space)
+  all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien)
     ;;
   *)
-    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space]"
+    echo "Usage: $0 [all|monkeytype|shooter|recall|karaoke|space|dragon|td|survival|tutien]"
     exit 1
     ;;
 esac
+
+if [[ "$TARGET" == "tutien" && ! -f "$ROOT_DIR/games/immortality-cultivation/package.json" ]]; then
+  echo "  • Tu Tiên Thủ Ải is not checked out yet; skipped."
+  exit 0
+fi
 
 cd "$ROOT_DIR"
 
@@ -45,13 +50,78 @@ update_submodule_branch() {
   echo "  ✓ $path: $(git -C "$path" rev-parse --short HEAD) ($branch)"
 }
 
+update_submodule_pinned() {
+  local path="$1"
+  local pinned_sha
+  local actual_sha
+
+  pinned_sha="$(git rev-parse "HEAD:$path")"
+  echo "  → Restoring $path to the platform-pinned gitlink ${pinned_sha:0:12}..."
+  git submodule update --init --recursive "$path"
+  actual_sha="$(git -C "$path" rev-parse HEAD)"
+
+  if [[ "$actual_sha" != "$pinned_sha" ]]; then
+    echo "ERROR: $path did not land on the platform gitlink." >&2
+    echo "  expected: $pinned_sha" >&2
+    echo "  actual:   $actual_sha" >&2
+    exit 1
+  fi
+
+  echo "  ✓ $path: $(git -C "$path" rev-parse --short HEAD) (platform gitlink)"
+}
+
+update_space_submodule() {
+  if [[ "${TYPING_GAME_SPACE_FOLLOW_BRANCH:-0}" == "1" ]]; then
+    echo "  ! TYPING_GAME_SPACE_FOLLOW_BRANCH=1: explicitly following the Space Typing branch hint."
+    update_submodule_branch "games/space-typing" "games/space-typing"
+    return
+  fi
+
+  update_submodule_pinned "games/space-typing"
+}
+
+# New games are local repos until their submodules are registered.
+update_new_game() {
+  local path="$1"
+  local label="${2:-$path}"
+
+  if [[ "$path" == "games/immortality-cultivation" && ! -f "$path/package.json" ]]; then
+    echo "  • $label is not checked out yet; skipped."
+    return
+  fi
+
+  if git config -f .gitmodules --get "submodule.$path.path" >/dev/null 2>&1; then
+    update_submodule_branch "$path" "$path"
+  elif [[ -f "$path/package.json" ]]; then
+    echo "  ✓ $path is a local checkout (not a submodule yet)."
+  else
+    echo "  • $path is not checked out yet; skipped."
+  fi
+}
+
+require_new_game() {
+  local path="$1"
+  local label="$2"
+
+  update_new_game "$path"
+  if [[ ! -f "$path/package.json" ]]; then
+    echo "$label is not checked out yet: $path/package.json is missing." >&2
+    echo "See docs/games/SPLIT_PLAN.md for how the game is added." >&2
+    exit 1
+  fi
+}
+
 case "$TARGET" in
   all)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
     update_submodule_branch "games/vocab-shooter" "games/vocab-shooter"
     update_submodule_branch "games/recall-typing" "games/recall-typing"
     update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
-    update_submodule_branch "games/space-typing" "games/space-typing"
+    update_space_submodule
+    update_new_game "games/dragon-hold"
+    update_new_game "games/typing-defense"
+    update_new_game "games/typing-survival"
+    update_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
   monkeytype)
     update_submodule_branch "games/monkeytype" "games/monkeytype"
@@ -66,7 +136,19 @@ case "$TARGET" in
     update_submodule_branch "games/karaoke-typing" "games/karaoke-typing"
     ;;
   space)
-    update_submodule_branch "games/space-typing" "games/space-typing"
+    update_space_submodule
+    ;;
+  dragon)
+    require_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    ;;
+  td)
+    require_new_game "games/typing-defense" "Lời Gọi"
+    ;;
+  survival)
+    require_new_game "games/typing-survival" "Tuyến Cuối"
+    ;;
+  tutien)
+    require_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
 esac
 
@@ -96,6 +178,18 @@ install_space() {
   pnpm --dir games/space-typing install
 }
 
+install_new_game() {
+  local path="$1"
+  local label="$2"
+
+  if [[ ! -f "$path/package.json" ]]; then
+    echo "Skipping $label: $path is not checked out yet."
+    return
+  fi
+  echo "Installing $label..."
+  pnpm --dir "$path" install
+}
+
 install_monkeytype() {
   echo "Installing Monkeytype..."
   (
@@ -118,6 +212,10 @@ case "$TARGET" in
     install_karaoke
     install_space
     install_monkeytype
+    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    install_new_game "games/typing-defense" "Lời Gọi"
+    install_new_game "games/typing-survival" "Tuyến Cuối"
+    install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
   monkeytype)
     install_monkeytype
@@ -133,6 +231,18 @@ case "$TARGET" in
     ;;
   space)
     install_space
+    ;;
+  dragon)
+    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    ;;
+  td)
+    install_new_game "games/typing-defense" "Lời Gọi"
+    ;;
+  survival)
+    install_new_game "games/typing-survival" "Tuyến Cuối"
+    ;;
+  tutien)
+    install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
 esac
 

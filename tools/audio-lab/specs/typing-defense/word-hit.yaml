@@ -1,0 +1,202 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: word-hit
+game: typing-defense
+status: draft
+manual_fields: []
+when: Gõ xong một từ
+purpose: Thưởng, có nhạc tính
+category: word-reward
+family: thuong
+source_class: folk-instrument
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §1: mono cho tiếng ngắn, stereo cho nhạc và âm nền'
+  bus: typing
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 800
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 640
+  max_ms: 960
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [150, 900]
+  music: null
+onset:
+  class: other
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu)
+variants:
+  target: 7
+  min: 7
+  max: 7
+  basis: '6 nốt và 1 bản vuốt lên: mỗi nốt một file (THEME_SOUND_LIST §2, §9 #21); §9 #21: 7 file'
+randomisation:
+  group: word-reward
+  pitch_cents: 30
+  gain_db: 1
+  rules: ['±20–30 cent, hoặc leo một bậc thang âm', Phát sau mỗi từ nên cần chút khác biệt]
+  current_code: Nốt theo bậc Chuỗi trên ngũ cung; Chớp có vuốt lên; Ẩu thấp một bậc (mã tổng hợp)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: pitched
+      range_hz: null
+      role: word-hit đàn tranh theo thang Hò–Xự–Xang–Xê–Cống
+  voice_band: decay-15db-100ms
+  voice_band_text: Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng; phần ngân dưới 1 kHz hoặc trên 4 kHz (§6.2)
+  spectrum: Nốt đúng thang, lệch không quá 10 cent. Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng (§6.2)
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §1: Tiếng ngắn đỉnh −1 dBTP (TK 24.9)'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: typing
+  bus_gain: 1.0
+  bus_gain_db: 0.0
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: nhánh TypingAudio nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: 0
+  pronunciation_duck_db: null
+  mix_target:
+    metric: lufs-m-max
+    range: [-22, -16]
+    text: Từ −22 (bậc C) đến −16 (bậc S)
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: Single plucked note on a Vietnamese đàn tranh zither, bright attack, short warm ring 0.8 s; record one file per pitch C5, D5, F5, G5, A5, C6 and a version with an upward slide into the note.
+  suffix: Single isolated sound effect, close and dry, starts instantly, clean natural end, 48 kHz.
+  style_root: bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor
+  sweetener: tre, chuông đồng và đàn tranh
+  variants: []
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches:
+  notes: [C5, D5, F5, G5, A5, C6]
+  count: 6
+  scale: null
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  proposal:
+    notes: [C4, D4, F4, G4, A4, C5]
+    basis: 'AUDIO_PIPELINE §8.2, §16 #4: hạ một quãng tám thành C4–C5 vì mẫu VCSL chỉ có B1–B4 (chờ chủ dự án duyệt)'
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [sample-player]
+  later: []
+  ranked:
+    - rank: 1
+      kinds: [sample-player]
+      detail: 'VCSL Dan Tranh (Normal và Gliss) qua bộ phát mẫu Python, dời tối đa 3 bán cung (§9 #21)'
+    - rank: 2
+      kinds: [owner-recording]
+      detail: Tự ghi đàn tranh
+    - rank: 3
+      kinds: [synth]
+      detail: Tổng hợp như hiện nay
+  needs_now: []
+  needs_later: []
+  note: null
+  batch1:
+    n: 21
+    why: Phát sau mỗi từ
+    source: VCSL Dan Tranh (Normal và Gliss) qua bộ phát mẫu Python, dời tối đa 3 bán cung. Mặc định C4–C5 (chờ duyệt)
+    variants: 7 file
+  style_board: true
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code, owner-original]
+  conditional:
+    - licence: release-CC0-or-transfer
+      condition: 'Bản ghi của người khác: cần giấy đồng ý (§10.4)'
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - Mẫu VCSL, VSCO-2-CE (CC0); MIDI do Claude viết; mido là MIT (chưa kiểm lại)
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - Đàn tranh có luyến láy bằng tay trái (§8.2)
+  - Bản vuốt lên lấy từ thư mục Gliss của VCSL (§8.2)
+  - 'Chất liệu: tre, gỗ, chuông đồng, cồng, giấy, trống cơm, sáo trúc, đàn tranh. Không laser, không tiếng máy, không synth điện tử'
+  - Thang ngũ cung Hò, Xự, Xang, Xê, Cống (gần C D F G A); nốt của chữ và nhạc cùng một thang (TK 24.8)
+  - 'Không tôn giáo (TK 22.1): không chuông chùa, không mõ chùa, không tụng; cồng là cồng hội làng; phách tre thay mõ'
+  - 'Tránh âm Trung Quốc hay Nhật Bản dán nhãn Việt: nhị dẫn giai điệu, shakuhachi, taiko (§8.2)'
+board:
+  contexts: [trong-tran, lap-20]
+  contexts_before_phase3: [lap-20]
+  dense: true
+  repeat_interval_ms: 1500
+  repeat_basis: Đề xuất theo bot 40 WPM (§6.1); chỉnh khi có nhịp thật của game
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: reward
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: [Zither]
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: true
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: 0.667
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: Single plucked note on a Vietnamese đàn tranh zither, bright attack, short warm ring 0.8 s; record one file per pitch C5, D5, F5, G5, A5, C6 and a version with an upward slide into the note.
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: [chu-du-an-duyet]
+origin:
+  code:
+    file: src/view/audio-min.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: 2. Tiếng gõ và lời gọi (bus `typing`)
+  plan:
+    - 'AUDIO_PIPELINE §9 #21 (lô 1)'
+    - AUDIO_PIPELINE §9 (âm chữ ký của bảng phong cách)
+notes: ''

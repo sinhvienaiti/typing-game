@@ -1,0 +1,699 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-20T11:47:36.894285+00:00",
+  "scope": "static audit and live metadata discovery; no behavioral benchmark",
+  "heads": {
+    ".": "1b6d90d28af81c9deaf245d571936ac7c166727a",
+    "games/space-typing": "8941c1cc9ce5565d09da5921e057aabfc355a6dd",
+    "games/monkeytype": "e27ec8ffc2e1b005538067dff2f74fdd5ccf93fa"
+  },
+  "projectSkills": [
+    {
+      "name": "admin-runtime-authoring",
+      "path": ".agents/skills/admin-runtime-authoring/SKILL.md",
+      "description": "Change Space Typing Administrator authoring, media selection, validation, publishing, and production previews while preserving the Admin-to-runtime authority chain. Use for Admin editing workflows or config changes; use gameplay skills for player combat rules.",
+      "entryBytes": 2172,
+      "entryCharacters": 2160,
+      "nameDescriptionCharacters": 283,
+      "referenceBytes": 4586,
+      "sha256": "384f403a51ed2857fd27e48ad131d7623fb595bef8e433b34914ec1c6fcf471c"
+    },
+    {
+      "name": "combat-vfx-audio",
+      "path": ".agents/skills/combat-vfx-audio/SKILL.md",
+      "description": "Change Space Typing projectile, impact, explosion, boss/skill effects, pickups, announcer, SFX, or music interaction. Use for combat presentation and audio readability; coordinate authoritative damage timing with gameplay or PvP skills.",
+      "entryBytes": 1801,
+      "entryCharacters": 1801,
+      "nameDescriptionCharacters": 252,
+      "referenceBytes": 4469,
+      "sha256": "7a45500f9468c30b6ef60c73f5241d5ed50d02e860e92aa33573ffca6d4096ee"
+    },
+    {
+      "name": "game-asset-2d-to-3d",
+      "path": ".agents/skills/game-asset-2d-to-3d/SKILL.md",
+      "description": "Prepare and integrate Space Typing concepts, reference images, sprites, relief bundles, and authored GLB/glTF assets. Use for 2D-to-3D generation, Blender cleanup, animation, model optimization, or runtime asset validation.",
+      "entryBytes": 2285,
+      "entryCharacters": 2285,
+      "nameDescriptionCharacters": 242,
+      "referenceBytes": 5052,
+      "sha256": "3f505bcdf23a0ba8f6abde3ca99ffae94092d2be06347f37c8bc94d3ce3915db"
+    },
+    {
+      "name": "game-ci-resumable",
+      "path": ".agents/skills/game-ci-resumable/SKILL.md",
+      "description": "Resume Typing Game or Space Typing CI and Git work; use for outdated checkpoints, remote updates or concurrent workers while preserving current HEAD, dirty work and verification gates.",
+      "entryBytes": 1976,
+      "entryCharacters": 1976,
+      "nameDescriptionCharacters": 201,
+      "referenceBytes": 2052,
+      "sha256": "2f037afb11fd55a4bae9d14bf959620a459b9d0ccdcba2f707722c27b43e6c06"
+    },
+    {
+      "name": "game-performance-quality",
+      "path": ".agents/skills/game-performance-quality/SKILL.md",
+      "description": "Measure and improve Space Typing frame time, responsiveness, Canvas/WebGL cost, asset/memory load, and quality tiers. Use for FPS regressions, profiling, High/Ultra tuning, rendering budgets, or performance acceptance.",
+      "entryBytes": 1855,
+      "entryCharacters": 1855,
+      "nameDescriptionCharacters": 242,
+      "referenceBytes": 3463,
+      "sha256": "1ed93f822b215509728deab15fd96c419274045e300d405b0c08e48a4e65b0b8"
+    },
+    {
+      "name": "game-ui-ux-review",
+      "path": ".agents/skills/game-ui-ux-review/SKILL.md",
+      "description": "Review or improve rendered Space Typing player/HUD and Administrator workflows for clarity, typing visibility, feedback, responsive layout, and accessible controls. Use for UX review or UI changes; source-only review cannot establish visual acceptance.",
+      "entryBytes": 1913,
+      "entryCharacters": 1913,
+      "nameDescriptionCharacters": 269,
+      "referenceBytes": 3079,
+      "sha256": "e9bb37475ca8741199f8d311f2ae8a22a8193a0d3d417ac10d55f309f91be739"
+    },
+    {
+      "name": "progression-economy",
+      "path": ".agents/skills/progression-economy/SKILL.md",
+      "description": "Implement or review Space Typing progression, unlocks, currencies, rewards, shop pricing and Warp stamina; use for spending, regeneration, settlement, persistence or economy balance changes.",
+      "entryBytes": 1557,
+      "entryCharacters": 1557,
+      "nameDescriptionCharacters": 209,
+      "referenceBytes": 6741,
+      "sha256": "cbb53f81d732949994965d7e44daf99e1fc5bd9bb00e7541e58d7b2c22e79256"
+    },
+    {
+      "name": "realtime-duel-pvp",
+      "path": ".agents/skills/realtime-duel-pvp/SKILL.md",
+      "description": "Implement or review Space Typing real-time Duel input, network authority, accuracy attacks, projectile timing, health, rounds and presentation; use for PvP synchronization or fairness changes.",
+      "entryBytes": 1525,
+      "entryCharacters": 1515,
+      "nameDescriptionCharacters": 209,
+      "referenceBytes": 4471,
+      "sha256": "094be1ac43258a445463ad19d66309ee9e8e13c294a37714cd576752a3b66a15"
+    },
+    {
+      "name": "space-typing-director",
+      "path": ".agents/skills/space-typing-director/SKILL.md",
+      "description": "Route broad Space Typing tasks across project contracts and specialists when work spans gameplay, input, online, assets, admin, UX, performance or delivery.",
+      "entryBytes": 3091,
+      "entryCharacters": 3091,
+      "nameDescriptionCharacters": 177,
+      "referenceBytes": 2976,
+      "sha256": "401f7d5d2336422d59701f8be19d115a34d06d72fece715b965cc400e6447e3c"
+    },
+    {
+      "name": "space-typing-gameplay",
+      "path": ".agents/skills/space-typing-gameplay/SKILL.md",
+      "description": "Implement or review Space Typing stage flow, enemies, bosses, objectives, skills, equipment and combat timing; use when gameplay behavior or campaign integration changes.",
+      "entryBytes": 1714,
+      "entryCharacters": 1714,
+      "nameDescriptionCharacters": 191,
+      "referenceBytes": 4897,
+      "sha256": "baa97df6ee1d1a4f2700f111512933e1b48b95d612dcddf87345c44052742424"
+    },
+    {
+      "name": "space-typing-playtest",
+      "path": ".agents/skills/space-typing-playtest/SKILL.md",
+      "description": "Run real-browser Space Typing QA with representative typing, gameplay, canvas, asset/audio, layout and interaction evidence. Use after user-visible changes or for playtesting; unit tests and synthetic input do not establish real IME, listening, or perceptual acceptance.",
+      "entryBytes": 2135,
+      "entryCharacters": 2135,
+      "nameDescriptionCharacters": 291,
+      "referenceBytes": 4875,
+      "sha256": "5dfdf0a9bf9f5cff1931a5a28b6498054c307503b5a5fc16b048767276766cb2"
+    },
+    {
+      "name": "typing-input-ime",
+      "path": ".agents/skills/typing-input-ime/SKILL.md",
+      "description": "Diagnose or change Space Typing keyboard, correction, accuracy and Vietnamese IME behavior; use for composing text, Backspace, caret, word boundaries or English input regressions.",
+      "entryBytes": 1698,
+      "entryCharacters": 1698,
+      "nameDescriptionCharacters": 195,
+      "referenceBytes": 4693,
+      "sha256": "290db89da4f3801215261202a53a50298b660dc114447583d3b22f2ec4350aa7"
+    },
+    {
+      "name": "voice-typing-runtime",
+      "path": ".agents/skills/voice-typing-runtime/SKILL.md",
+      "description": "Implement or diagnose Space Typing Typing, Voice and Hybrid modes, ASR sessions, microphone lifecycle, transcript feedback and speech-to-combat routing; use when recognition or input ownership changes.",
+      "entryBytes": 1909,
+      "entryCharacters": 1909,
+      "nameDescriptionCharacters": 221,
+      "referenceBytes": 5131,
+      "sha256": "44bb2f77d2b20cfb6a6c080bc53e7c510a1d3c69c132f2464c1525a1325c4b7d"
+    }
+  ],
+  "totals": {
+    "projectSkills": 13,
+    "entryBytes": 25631,
+    "referenceBytes": 56485,
+    "nameDescriptionCharacters": 2982
+  },
+  "installedProvenanceChecks": [
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-3d-generator",
+      "files": 6,
+      "treeSha256": "f346e1b376b1c3a1772c90bf8d78282800399b71ea5ebaaf8af361425eca171d",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-aaa-graphics-builder",
+      "files": 9,
+      "treeSha256": "7450c8774e35dc51b71e6f3cb1cb34cc1dd85b84568a1aa3ea4b545084870d4c",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-audio-generator",
+      "files": 4,
+      "treeSha256": "d19c1a42c0afef3a1f2a1f1c6d926e6c204a3ba46cae339e76e741a6b9eedc32",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-debug-profiler",
+      "files": 3,
+      "treeSha256": "0af10725505b8f6ee0f2f1242318e212d071bcfe43c2722ef71077c4bd896336",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-game-director",
+      "files": 7,
+      "treeSha256": "012210a2837972f2a9de66dfe2334e2c2b0f10a2bcd4fb465de59c1b3ac8c793",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-game-ui-designer",
+      "files": 3,
+      "treeSha256": "d574229af0aa753611b036a43e9e3e0eb2b69e3bc0d200a963ad396a71a66fd8",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-gameplay-systems",
+      "files": 33,
+      "treeSha256": "e2359526caf979bf65a10997c95fdb744d36ee41b31960cbeb9e9100e48dcf72",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-image-generator",
+      "files": 3,
+      "treeSha256": "70d37d79f08b524b5f57b5ea32e0f28a90c5b9a27c5b893aec52a83ff4b6e9d1",
+      "matchesRecorded": true
+    },
+    {
+      "source": "threejs-game-skills",
+      "name": "threejs-qa-release",
+      "files": 6,
+      "treeSha256": "016d2b8f7b336597210f2fb8422b4fca2aa267c20f6f501451195581f40ae2e0",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "game-playtest",
+      "files": 2,
+      "treeSha256": "622d5480645c595fb5cc6abbc96f67749bada4fe93eea36f46811326469ae135",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "game-studio",
+      "files": 2,
+      "treeSha256": "a1b51ee07964f0fa9c1d32dba5fa31e0d1fc1edf81daba18679337cac1ae3f94",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "game-ui-frontend",
+      "files": 2,
+      "treeSha256": "db0700034de06154e6a15063019fbfbc4951e52b39a79f545cb4791ce72a282a",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "phaser-2d-game",
+      "files": 2,
+      "treeSha256": "b44b41e7eead31526a00f1033f38e69694f9c8013be8289262d9c232915775e6",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "react-three-fiber-game",
+      "files": 2,
+      "treeSha256": "c28319378761151c248b45aa4a806f0daaebab948e81bf12acfe8c8e3995fe01",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "sprite-pipeline",
+      "files": 2,
+      "treeSha256": "f7e57f91108c2d2af25b9c6b2a3d895628079066f29532169f0918de989ff97a",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "three-webgl-game",
+      "files": 2,
+      "treeSha256": "26be8d3efabaccf05a8c6357d0860e6eb50e81973d2d58e6a8eafb1bb518cd6c",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "web-3d-asset-pipeline",
+      "files": 2,
+      "treeSha256": "d42f98aef48260fc1cd2387e536d4081d9f718e6c4a17d45962f29f9189dbae7",
+      "matchesRecorded": true
+    },
+    {
+      "source": "game-studio@openai-curated",
+      "name": "web-game-foundations",
+      "files": 2,
+      "treeSha256": "27cccda627c00d1224ac17310f0f338aa0204c55a801ac4d8d3e3862cf483792",
+      "matchesRecorded": true
+    }
+  ],
+  "discovery": {
+    "data": [
+      {
+        "cwd": "/Users/toandx/htdocs/typing-game",
+        "errors": [],
+        "skills": [
+          {
+            "name": "admin-runtime-authoring",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/admin-runtime-authoring/SKILL.md"
+          },
+          {
+            "name": "combat-vfx-audio",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/combat-vfx-audio/SKILL.md"
+          },
+          {
+            "name": "game-asset-2d-to-3d",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/game-asset-2d-to-3d/SKILL.md"
+          },
+          {
+            "name": "game-ci-resumable",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/game-ci-resumable/SKILL.md"
+          },
+          {
+            "name": "game-performance-quality",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/game-performance-quality/SKILL.md"
+          },
+          {
+            "name": "game-ui-ux-review",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/game-ui-ux-review/SKILL.md"
+          },
+          {
+            "name": "imagegen",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/imagegen/SKILL.md"
+          },
+          {
+            "name": "openai-docs",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/openai-docs/SKILL.md"
+          },
+          {
+            "name": "progression-economy",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/progression-economy/SKILL.md"
+          },
+          {
+            "name": "realtime-duel-pvp",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/realtime-duel-pvp/SKILL.md"
+          },
+          {
+            "name": "review-agent",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/review-agent/SKILL.md"
+          },
+          {
+            "name": "skill-creator",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/skill-creator/SKILL.md"
+          },
+          {
+            "name": "skill-installer",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/skill-installer/SKILL.md"
+          },
+          {
+            "name": "space-typing-director",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/space-typing-director/SKILL.md"
+          },
+          {
+            "name": "space-typing-gameplay",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/space-typing-gameplay/SKILL.md"
+          },
+          {
+            "name": "space-typing-playtest",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/space-typing-playtest/SKILL.md"
+          },
+          {
+            "name": "threejs-3d-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-3d-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-aaa-graphics-builder",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-aaa-graphics-builder/SKILL.md"
+          },
+          {
+            "name": "threejs-audio-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-audio-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-debug-profiler",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-debug-profiler/SKILL.md"
+          },
+          {
+            "name": "threejs-game-director",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-game-director/SKILL.md"
+          },
+          {
+            "name": "threejs-game-ui-designer",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-game-ui-designer/SKILL.md"
+          },
+          {
+            "name": "threejs-gameplay-systems",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-gameplay-systems/SKILL.md"
+          },
+          {
+            "name": "threejs-image-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-image-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-qa-release",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-qa-release/SKILL.md"
+          },
+          {
+            "name": "typing-input-ime",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/typing-input-ime/SKILL.md"
+          },
+          {
+            "name": "voice-typing-runtime",
+            "scope": "repo",
+            "enabled": true,
+            "path": "/Users/toandx/htdocs/typing-game/.agents/skills/voice-typing-runtime/SKILL.md"
+          }
+        ]
+      },
+      {
+        "cwd": "/Users/toandx/htdocs/typing-game/games/space-typing",
+        "errors": [],
+        "skills": [
+          {
+            "name": "imagegen",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/imagegen/SKILL.md"
+          },
+          {
+            "name": "openai-docs",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/openai-docs/SKILL.md"
+          },
+          {
+            "name": "review-agent",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/review-agent/SKILL.md"
+          },
+          {
+            "name": "skill-creator",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/skill-creator/SKILL.md"
+          },
+          {
+            "name": "skill-installer",
+            "scope": "system",
+            "enabled": true,
+            "path": "/Users/toandx/.codex/skills/.system/skill-installer/SKILL.md"
+          },
+          {
+            "name": "threejs-3d-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-3d-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-aaa-graphics-builder",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-aaa-graphics-builder/SKILL.md"
+          },
+          {
+            "name": "threejs-audio-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-audio-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-debug-profiler",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-debug-profiler/SKILL.md"
+          },
+          {
+            "name": "threejs-game-director",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-game-director/SKILL.md"
+          },
+          {
+            "name": "threejs-game-ui-designer",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-game-ui-designer/SKILL.md"
+          },
+          {
+            "name": "threejs-gameplay-systems",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-gameplay-systems/SKILL.md"
+          },
+          {
+            "name": "threejs-image-generator",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-image-generator/SKILL.md"
+          },
+          {
+            "name": "threejs-qa-release",
+            "scope": "user",
+            "enabled": true,
+            "path": "/Users/toandx/.agents/skills/threejs-qa-release/SKILL.md"
+          }
+        ]
+      }
+    ],
+    "plugin": {
+      "name": "game-studio",
+      "id": "game-studio@openai-curated",
+      "installed": true,
+      "enabled": true,
+      "availability": "AVAILABLE",
+      "disabledReason": null,
+      "localVersion": "0.1.0",
+      "version": null,
+      "marketplaceName": "openai-curated",
+      "skills": [
+        {
+          "name": "game-studio:game-playtest",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/game-playtest/SKILL.md"
+        },
+        {
+          "name": "game-studio:game-studio",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/game-studio/SKILL.md"
+        },
+        {
+          "name": "game-studio:game-ui-frontend",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/game-ui-frontend/SKILL.md"
+        },
+        {
+          "name": "game-studio:phaser-2d-game",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/phaser-2d-game/SKILL.md"
+        },
+        {
+          "name": "game-studio:react-three-fiber-game",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/react-three-fiber-game/SKILL.md"
+        },
+        {
+          "name": "game-studio:sprite-pipeline",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/sprite-pipeline/SKILL.md"
+        },
+        {
+          "name": "game-studio:three-webgl-game",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/three-webgl-game/SKILL.md"
+        },
+        {
+          "name": "game-studio:web-3d-asset-pipeline",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/web-3d-asset-pipeline/SKILL.md"
+        },
+        {
+          "name": "game-studio:web-game-foundations",
+          "enabled": true,
+          "path": "/Users/toandx/.codex/.tmp/plugins/plugins/game-studio/skills/web-game-foundations/SKILL.md"
+        }
+      ]
+    }
+  },
+  "protectedFileHashes": {
+    ".agents/skill-sources.json": "8c7843de94ebe94acd258212c3e999487ccf8b244d4c28056c3eb5c8448e96ba",
+    ".agents/skills/space-typing-playtest/SKILL.md": "5dfdf0a9bf9f5cff1931a5a28b6498054c307503b5a5fc16b048767276766cb2",
+    ".agents/skills/space-typing-playtest/references/scenarios.md": "995c4486e258c831bdbe2aa69a2f2ab49ef9090d76f16fc2dede33fcdcf4bc1f",
+    ".agents/skills/progression-economy/SKILL.md": "cbb53f81d732949994965d7e44daf99e1fc5bd9bb00e7541e58d7b2c22e79256",
+    ".agents/skills/progression-economy/references/economy-contracts.md": "33d79eba42d2f6e354bd4a72c608bd72d65204eccff907d3c013fe3f8de47cf0",
+    ".agents/skills/space-typing-gameplay/SKILL.md": "baa97df6ee1d1a4f2700f111512933e1b48b95d612dcddf87345c44052742424",
+    ".agents/skills/space-typing-gameplay/references/gameplay-contracts.md": "d150cc30cc23725c45644d0c9dbb4c32e03d395e8e74c6108eb716b1e501447d",
+    ".agents/skills/combat-vfx-audio/SKILL.md": "7a45500f9468c30b6ef60c73f5241d5ed50d02e860e92aa33573ffca6d4096ee",
+    ".agents/skills/combat-vfx-audio/references/presentation-map.md": "f0834193ee1e6d4eb9a971452073f00c743f4c27cca21b253eea43c9e8aa5770",
+    ".agents/skills/typing-input-ime/SKILL.md": "290db89da4f3801215261202a53a50298b660dc114447583d3b22f2ec4350aa7",
+    ".agents/skills/typing-input-ime/references/input-contracts.md": "4059aa3cadadca0385da3ea1cc88802b64c966d09676d1c7fceba1fd3f069a02",
+    ".agents/skills/admin-runtime-authoring/SKILL.md": "384f403a51ed2857fd27e48ad131d7623fb595bef8e433b34914ec1c6fcf471c",
+    ".agents/skills/admin-runtime-authoring/references/authority-map.md": "4b7b6a2bf1ef38c8d3c769bc86c300fa079bc06cf016dd1b99ba53031aaa8359",
+    ".agents/skills/game-performance-quality/SKILL.md": "1ed93f822b215509728deab15fd96c419274045e300d405b0c08e48a4e65b0b8",
+    ".agents/skills/game-performance-quality/references/profiling-map.md": "7ef2fccdda0dd788e9137414424b017d7ee413e35529be6f8f44a35df87a34ff",
+    ".agents/skills/game-asset-2d-to-3d/SKILL.md": "3f505bcdf23a0ba8f6abde3ca99ffae94092d2be06347f37c8bc94d3ce3915db",
+    ".agents/skills/game-asset-2d-to-3d/references/asset-map.md": "30682e2fadb7556c47bcd92786e1bcac08249f19e13f2a1800360b7a9c7df1f9",
+    ".agents/skills/space-typing-director/SKILL.md": "401f7d5d2336422d59701f8be19d115a34d06d72fece715b965cc400e6447e3c",
+    ".agents/skills/space-typing-director/references/project-map.md": "7434c3c49927cece37a4e1b820c6519e16fc5ba1309e497edbe624c7808cc860",
+    ".agents/skills/realtime-duel-pvp/SKILL.md": "094be1ac43258a445463ad19d66309ee9e8e13c294a37714cd576752a3b66a15",
+    ".agents/skills/realtime-duel-pvp/references/duel-contracts.md": "e529f98ef1453f369f7d5422d705892306986fb1f1886f8d3b678eb03c424b6d",
+    ".agents/skills/game-ci-resumable/SKILL.md": "2f037afb11fd55a4bae9d14bf959620a459b9d0ccdcba2f707722c27b43e6c06",
+    ".agents/skills/game-ci-resumable/references/ci-map.md": "661388bade5418fe3d4378094646bd1ab0b1a231d36bdcd73c3a46cd7f026c26",
+    ".agents/skills/game-ui-ux-review/SKILL.md": "e9bb37475ca8741199f8d311f2ae8a22a8193a0d3d417ac10d55f309f91be739",
+    ".agents/skills/game-ui-ux-review/references/review-map.md": "dbcd7ac01543b8f87be51ade38a20202cb5cb873ca4ac7a679a244b3e9e3985c",
+    ".agents/skills/voice-typing-runtime/SKILL.md": "44bb2f77d2b20cfb6a6c080bc53e7c510a1d3c69c132f2464c1525a1325c4b7d",
+    ".agents/skills/voice-typing-runtime/references/voice-contracts.md": "b83b4b2a4c9407fdc34b29ef452d82dae98eadac6c5cc855db521ce2f01b28c4",
+    ".claude/.agent-skills-sync.json": "e70b3c6f61f0448a27fe1748d18153e0d44eabdba71f65660a3b939bb59d73b1",
+    ".claude/skills/space-typing-playtest/SKILL.md": "5dfdf0a9bf9f5cff1931a5a28b6498054c307503b5a5fc16b048767276766cb2",
+    ".claude/skills/space-typing-playtest/references/scenarios.md": "995c4486e258c831bdbe2aa69a2f2ab49ef9090d76f16fc2dede33fcdcf4bc1f",
+    ".claude/skills/progression-economy/SKILL.md": "cbb53f81d732949994965d7e44daf99e1fc5bd9bb00e7541e58d7b2c22e79256",
+    ".claude/skills/progression-economy/references/economy-contracts.md": "33d79eba42d2f6e354bd4a72c608bd72d65204eccff907d3c013fe3f8de47cf0",
+    ".claude/skills/space-typing-gameplay/SKILL.md": "baa97df6ee1d1a4f2700f111512933e1b48b95d612dcddf87345c44052742424",
+    ".claude/skills/space-typing-gameplay/references/gameplay-contracts.md": "d150cc30cc23725c45644d0c9dbb4c32e03d395e8e74c6108eb716b1e501447d",
+    ".claude/skills/combat-vfx-audio/SKILL.md": "7a45500f9468c30b6ef60c73f5241d5ed50d02e860e92aa33573ffca6d4096ee",
+    ".claude/skills/combat-vfx-audio/references/presentation-map.md": "f0834193ee1e6d4eb9a971452073f00c743f4c27cca21b253eea43c9e8aa5770",
+    ".claude/skills/typing-input-ime/SKILL.md": "290db89da4f3801215261202a53a50298b660dc114447583d3b22f2ec4350aa7",
+    ".claude/skills/typing-input-ime/references/input-contracts.md": "4059aa3cadadca0385da3ea1cc88802b64c966d09676d1c7fceba1fd3f069a02",
+    ".claude/skills/admin-runtime-authoring/SKILL.md": "384f403a51ed2857fd27e48ad131d7623fb595bef8e433b34914ec1c6fcf471c",
+    ".claude/skills/admin-runtime-authoring/references/authority-map.md": "4b7b6a2bf1ef38c8d3c769bc86c300fa079bc06cf016dd1b99ba53031aaa8359",
+    ".claude/skills/game-performance-quality/SKILL.md": "1ed93f822b215509728deab15fd96c419274045e300d405b0c08e48a4e65b0b8",
+    ".claude/skills/game-performance-quality/references/profiling-map.md": "7ef2fccdda0dd788e9137414424b017d7ee413e35529be6f8f44a35df87a34ff",
+    ".claude/skills/game-asset-2d-to-3d/SKILL.md": "3f505bcdf23a0ba8f6abde3ca99ffae94092d2be06347f37c8bc94d3ce3915db",
+    ".claude/skills/game-asset-2d-to-3d/references/asset-map.md": "30682e2fadb7556c47bcd92786e1bcac08249f19e13f2a1800360b7a9c7df1f9",
+    ".claude/skills/space-typing-director/SKILL.md": "401f7d5d2336422d59701f8be19d115a34d06d72fece715b965cc400e6447e3c",
+    ".claude/skills/space-typing-director/references/project-map.md": "7434c3c49927cece37a4e1b820c6519e16fc5ba1309e497edbe624c7808cc860",
+    ".claude/skills/realtime-duel-pvp/SKILL.md": "094be1ac43258a445463ad19d66309ee9e8e13c294a37714cd576752a3b66a15",
+    ".claude/skills/realtime-duel-pvp/references/duel-contracts.md": "e529f98ef1453f369f7d5422d705892306986fb1f1886f8d3b678eb03c424b6d",
+    ".claude/skills/game-ci-resumable/SKILL.md": "2f037afb11fd55a4bae9d14bf959620a459b9d0ccdcba2f707722c27b43e6c06",
+    ".claude/skills/game-ci-resumable/references/ci-map.md": "661388bade5418fe3d4378094646bd1ab0b1a231d36bdcd73c3a46cd7f026c26",
+    ".claude/skills/game-ui-ux-review/SKILL.md": "e9bb37475ca8741199f8d311f2ae8a22a8193a0d3d417ac10d55f309f91be739",
+    ".claude/skills/game-ui-ux-review/references/review-map.md": "dbcd7ac01543b8f87be51ade38a20202cb5cb873ca4ac7a679a244b3e9e3985c",
+    ".claude/skills/voice-typing-runtime/SKILL.md": "44bb2f77d2b20cfb6a6c080bc53e7c510a1d3c69c132f2464c1525a1325c4b7d",
+    ".claude/skills/voice-typing-runtime/references/voice-contracts.md": "b83b4b2a4c9407fdc34b29ef452d82dae98eadac6c5cc855db521ce2f01b28c4",
+    "AGENTS.md": "7cb96c3090b6e9299f60c6fa1f24739f349dc127b5103d18b49ec112c97b3f44",
+    "package.json": "d2429f1db4cd60b60cadc6387b54d4082137abff7c49561ae01e4a8b5a2cd6e3",
+    "pnpm-lock.yaml": "31ff189023796cf55f29f336eb9afeb2efbbfdd4b57f91bf44901166482e83a4",
+    "games/space-typing/package.json": "a42f318b9945105dd12fb784710d3c9e75a34c0a01312afed43fc72106aaaea6",
+    "games/space-typing/pnpm-lock.yaml": "49ccb20a5dda9f570ffd25931e3c42245b8bb1a9a8f76772d8431eb29da41539",
+    "games/monkeytype/AGENTS.md": "4f64bbfae8281beeef3e4afbd2b21ee99d02908ea9aa869fa13bdd1c82e01221",
+    "scripts/sync-agent-skills.sh": "68e9a4cb4860c54c151f33228bafe638cd0fa10389d9f03785a903b0ffed73d1",
+    "scripts/validate-agent-skills.mjs": "fcda74fb4f83db002559e7a30e296982565900a23b9237f3df645113749cba26",
+    "scripts/sync-agent-skills.mjs": "e5ed4ea7f6e424e3ef927251812bd771aa0e70caf20aa4d2f43df77f8e26e367"
+  },
+  "hashMethod": "SHA-256 over recursive per-directory name.localeCompare sorting (Node host locale), entries relative POSIX path + NUL + hex file SHA-256 + LF; ignores .DS_Store and __pycache__",
+  "candidatePluginState": {
+    "superpowers": {
+      "installed": false,
+      "enabled": false,
+      "localVersion": "5.0.7",
+      "availability": "AVAILABLE"
+    },
+    "plugin-eval": {
+      "installed": false,
+      "enabled": false,
+      "localVersion": "0.1.0",
+      "availability": "AVAILABLE"
+    }
+  },
+  "verification": {
+    "projectValidator": "PASS: 13 skills, 0 errors, 0 warnings",
+    "claudeSyncCheck": "PASS: 0 file changes, manifest current",
+    "gitDiffCheck": "PASS",
+    "liveModelBenchmark": "NOT_RUN",
+    "blenderExecution": "NOT_RUN; not found in PATH or /Applications/Blender.app/Contents/MacOS/Blender",
+    "nativeImeAndBrowserAcceptance": "NOT_RUN; skill audit only"
+  },
+  "auditProtection": {
+    "checkedFiles": 63,
+    "changedFiles": [],
+    "result": "PASS"
+  },
+  "decisions": {
+    "projectSkills": "keep 13; narrow routing and update references in a later implementation",
+    "gameStudio": "keep installed",
+    "majidThreeJs": "keep installed, select specialists per task",
+    "cloudAiX": "candidate only; validate against project Three.js version",
+    "blender": "shortlist Scenario Labs and EL4CTEO; neither selected or installed",
+    "superpowers": "do not install as mandatory workflow",
+    "pluginEval": "not installed or benchmarked",
+    "newCustomVisualSkills": "do not add four new skills without demonstrated gap"
+  }
+}

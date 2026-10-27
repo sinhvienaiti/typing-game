@@ -1,0 +1,266 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-survival",
+ "id": "kill.elite",
+ "group": "death-big",
+ "family": "chet",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Lính tinh nhuệ nổ 500 ms (400–600): thép xé toạc, nổ trầm có thân, phóng điện lách tách, mảnh rơi, vang hành lang thép. Thân là bản Stable Audio 3 prompt E–H của lô 1c, cửa sổ 560 ms từ 4 ms trước đỉnh 5 ms (một đầu tiếng, xen theo prompt): bản thô kêu ngay từ mẫu đầu nên 21/24 bản xử lý có đầu tiếng chưa xác minh, không nghe được nguyên khối. Lọc cao 45 Hz; năm tiếng tách điện tổng hợp 2–8 kHz thưa dần tới 300 ms. Đuôi hàm mũ từ 420 ms. Lô 1 dùng thân A–D (đã bỏ). Biến thể n dùng thân n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "body",
+   "role": "body",
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 45,
+     "order": 2
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__E__s3004.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__E__s3004.json",
+     "window": [
+      0.0559,
+      0.6159
+     ],
+     "gainDb": -2.8
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__F__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__F__s3001.json",
+       "window": [
+        0.01,
+        0.57
+       ],
+       "gainDb": -2.0
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__G__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__G__s3002.json",
+       "window": [
+        0.0489,
+        0.6089
+       ],
+       "gainDb": -3.0
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__H__s3002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__H__s3002.json",
+       "window": [
+        0.0399,
+        0.5999
+       ],
+       "gainDb": -5.2
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__F__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__F__s3004.json",
+       "window": [
+        0.1497,
+        0.7097
+       ],
+       "gainDb": 1.7
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__G__s3005.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-survival/kill.elite/b1c/raw/kill.elite__G__s3005.json",
+       "window": [
+        0.0828,
+        0.6428
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "arc0",
+   "role": "sweetener",
+   "offsetMs": 30,
+   "gainDb": -16,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 18,
+     "attackMs": 0.3,
+     "decayMs": 14,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -15,
+     15
+    ]
+   }
+  },
+  {
+   "id": "arc1",
+   "role": "sweetener",
+   "offsetMs": 85,
+   "gainDb": -18,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 18,
+     "attackMs": 0.3,
+     "decayMs": 14,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -15,
+     15
+    ]
+   }
+  },
+  {
+   "id": "arc2",
+   "role": "sweetener",
+   "offsetMs": 140,
+   "gainDb": -20,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 18,
+     "attackMs": 0.3,
+     "decayMs": 14,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -15,
+     15
+    ]
+   }
+  },
+  {
+   "id": "arc3",
+   "role": "sweetener",
+   "offsetMs": 210,
+   "gainDb": -22,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 18,
+     "attackMs": 0.3,
+     "decayMs": 14,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -15,
+     15
+    ]
+   }
+  },
+  {
+   "id": "arc4",
+   "role": "sweetener",
+   "offsetMs": 300,
+   "gainDb": -25,
+   "source": {
+    "synth": "noise_burst",
+    "params": {
+     "color": "white",
+     "durMs": 18,
+     "attackMs": 0.3,
+     "decayMs": 14,
+     "hpHz": 2000,
+     "lpHz": 8000
+    }
+   },
+   "vary": {
+    "offsetMs": [
+     -15,
+     15
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35.0,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 600,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 420
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 60.0,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 6,
+  "seed": 3530,
+  "includeBase": true,
+  "pitchCents": [
+   -30,
+   30
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/kills/kill-elite",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

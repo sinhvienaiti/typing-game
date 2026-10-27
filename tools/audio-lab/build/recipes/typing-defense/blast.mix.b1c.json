@@ -1,0 +1,204 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "typing-defense",
+ "id": "blast.mix",
+ "group": "blast",
+ "family": "no",
+ "description": "Lô 1c (Q6, DECISIONS): âm theo hình dạng hành động, đủ phát có lực, thân, đuôi vang trong không gian bản đồ; lớp trầm chỉ nằm dưới, có thân và đuôi đè lên. Mỗi bản Stable Audio 3 của lớp thân được cân mức (gainDb của nguồn) theo LUFS-M max của cửa sổ qua bộ lọc của lớp, lên bằng bản to nhất của bể; bản nhỏ hơn quá 10 dB bị loại (sửa sau phản biện: bản thô lệch nhau tới 26 dB). Tháp Pháo 800 ms (640–960): trống lớn nện có thân, giấy và bụi bung tung, mảnh giấy rơi lả tả, vang làng; không lớp nổ lách tách, không chất taiko. Nứt ván Kenney impactPlank (lọc cao 900 Hz, 60 ms) cho tiếng phát; trống khung VCSL đánh mở hoặc timpani VSCO-2-CE làm thân (−3 dB, lọc cao 70 Hz, giữ 500 ms: lô 1 cắt ở 320 ms); lớp giấy, bụi và vang làng là bản Stable Audio 3 prompt E–H (xếp bằng L1, L1b, L2), lọc cao 300 Hz để tiếng trống của chính bản đó không thành đầu tiếng thứ hai, vào sau 12 ms, mờ vào 25 ms, −5 dB, dài tự nhiên tới 960 ms. Đuôi hàm mũ từ 520 ms. Biến thể n dùng nứt n, trống n, lớp giấy n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "crack",
+   "role": "attack",
+   "gainDb": -2,
+   "trim": {
+    "endMs": 60
+   },
+   "fadeOutMs": 30,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 900
+    }
+   ],
+   "source": {
+    "library": "kenney/impact-sounds/Audio/impactPlank_medium_004.ogg"
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlank_medium_002.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlank_medium_000.ogg"
+     },
+     {
+      "library": "kenney/impact-sounds/Audio/impactPlank_medium_004.ogg"
+     }
+    ]
+   }
+  },
+  {
+   "id": "drum",
+   "role": "body",
+   "gainDb": -3,
+   "trim": {
+    "endMs": 500
+   },
+   "fadeOutMs": 300,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 70,
+     "order": 2
+    }
+   ],
+   "source": {
+    "sampler": {
+     "instrument": "frame-drum",
+     "notes": "0:hdruml-hit:0.8:120"
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "sampler": {
+       "instrument": "timpani",
+       "notes": "0:timpani2-hit:1.0:110"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "frame-drum",
+       "notes": "0:hdruml-hit:0.8:110"
+      }
+     },
+     {
+      "sampler": {
+       "instrument": "timpani",
+       "notes": "0:timpani2-hit:1.0:100"
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "paper",
+   "role": "texture",
+   "gainDb": -5,
+   "offsetMs": 12,
+   "fadeInMs": 25,
+   "fadeOutMs": 300,
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 300
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__E__s3001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__E__s3001.json",
+     "window": [
+      0.03425,
+      0.67425
+     ],
+     "gainDb": 0.6
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__F__s3004.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__F__s3004.json",
+       "window": [
+        0.0345,
+        0.6745
+       ],
+       "gainDb": -2.9
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__G__s3003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__G__s3003.json",
+       "window": [
+        0.01975,
+        0.65975
+       ],
+       "gainDb": -2.0
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__H__s3001.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/typing-defense/blast/b1c/raw/blast__H__s3001.json",
+       "window": [
+        0.13825,
+        0.903
+       ],
+       "gainDb": 3.8
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 40,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 960,
+  "tail": {
+   "floorDb": -60,
+   "shape": "exp",
+   "kneeMs": 520
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 4,
+  "seed": 3401,
+  "includeBase": true,
+  "pitchCents": [
+   0,
+   0
+  ],
+  "gainDb": [
+   0,
+   0
+  ]
+ },
+ "export": {
+  "path": "sfx/battle/blast",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "dragon-hold",
+  "id": "wave.horn",
+  "group": "rare-fixed",
+  "family": "nen",
+  "description": "Lô 0: tù và báo đợt, 2,2 s, mono (thẻ spec: hai kèn cách quãng năm và một tiếng trống khung). Bộ phát mẫu: kèn co VSCO-2-CE (CC0) và trống khung VCSL (CC0). Ba ứng viên chọn hướng (swapMode cycle): 1) hai kèn co Rê–La như tài liệu; 2) trombone tenor hạ một quãng tám, tối và thô hơn; 3) kèn co trên trombone (quãng tám), dày hơn. Trống giữ chung. Đi qua chuỗi cuối như các id khác (gộp mono, cắt 2,3 s, làm mờ đuôi), thay cho bản thô stereo 3,6 s của lần trước.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "horns",
+      "role": "body",
+      "source": {"sampler": {"notes": [
+        {"start": 0, "note": "D3", "dur": 1.7, "vel": 100, "instrument": "f-horn.sus", "choke": true},
+        {"start": 0.04, "note": "A3", "dur": 1.66, "vel": 92, "instrument": "f-horn.sus", "choke": true}]}},
+      "fadeOutMs": 300,
+      "vary": {"swapMode": "cycle", "swap": [
+        {"sampler": {"notes": [
+          {"start": 0, "note": "D2", "dur": 1.7, "vel": 100, "instrument": "tenor-trombone.sus", "choke": true},
+          {"start": 0.04, "note": "A2", "dur": 1.66, "vel": 92, "instrument": "tenor-trombone.sus", "choke": true}]}},
+        {"sampler": {"notes": [
+          {"start": 0, "note": "D2", "dur": 1.7, "vel": 96, "instrument": "tenor-trombone.sus", "choke": true},
+          {"start": 0.02, "note": "D3", "dur": 1.68, "vel": 100, "instrument": "f-horn.sus", "choke": true}]}}]}
+    },
+    {
+      "id": "drum",
+      "role": "attack",
+      "source": {"sampler": {"instrument": "frame-drum", "notes": "0:hdruml-hit:0.6:115"}},
+      "gainDb": -3
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 35,
+    "headTrim": {"thresholdDb": -50, "preRollMs": 0.5},
+    "maxLengthMs": 2300,
+    "tail": {"floorDb": -60, "fadeMs": 300},
+    "normalise": {"mode": "lufs-m-max", "target": -20},
+    "limiter": {"ceilingDbtp": -1.0, "releaseMs": 80, "maxGrDb": 6}
+  },
+  "variants": {"count": 3, "seed": 2200, "includeBase": true},
+  "export": {"path": "sfx/stinger/wave-horn", "ogg": true, "oggQuality": 0.6}
+}

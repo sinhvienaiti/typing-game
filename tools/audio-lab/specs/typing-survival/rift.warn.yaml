@@ -1,0 +1,200 @@
+# Thẻ spec âm thanh (AUDIO_PIPELINE §5.1 bước 1). Sinh bởi `pnpm audio:specs generate`; kiểm bằng `pnpm audio:specs validate`.
+# Sửa tay: thêm `manual: true` vào mục đã sửa, hoặc ghi đường dẫn (vd. duration.target_ms) vào manual_fields.
+# status, references, prompt.variants, notes luôn được giữ khi sinh lại. Comment YAML thì không: ghi chú để ở notes.
+schema: 1
+id: rift.warn
+game: typing-survival
+status: draft
+manual_fields: []
+when: Vết nứt báo trước (2,5 s)
+purpose: Tường thép rên, nhiệt dồn lên
+category: warning
+family: nen
+source_class: warning-stinger
+playback:
+  mode: one-shot
+  channels: mono
+  channels_basis: 'THEME_SOUND_LIST §2: mono (trừ nhạc và end.*)'
+  bus: alerts
+  priority: null
+  min_gap_ms: null
+  limit_group: null
+  caps: {}
+  format: OGG Vorbis 48 kHz trong game; gốc WAV 48 kHz (§4.3.1, §11)
+duration:
+  target_ms: 2500
+  tolerance_pct: 20
+  tolerance_ms: null
+  min_ms: 2000
+  max_ms: 3000
+  basis: Prompt trong docs/audio/THEME_SOUND_LIST.md
+  category_range_ms: [250, 2000]
+  music: null
+onset:
+  class: none
+  rise_max_ms: null
+  lead_silence_max_ms: 5
+  basis: 'AUDIO_PIPELINE §4.3.1 (thời gian lên, im lặng ở đầu); THEME_SOUND_LIST §2: cắt im lặng đầu file, tiếng phải bắt đầu ngay, dưới 5 ms'
+variants:
+  target: 1
+  min: 1
+  max: 1
+  basis: AUDIO_PIPELINE §4.3.3 (Báo nguy)
+randomisation:
+  group: rare-fixed
+  pitch_cents: 0
+  gain_db: 0
+  rules:
+    - 'Không đổi ngẫu nhiên: âm hiếm được nhận ra nhờ luôn giống nhau'
+    - Chuỗi thưởng leo nốt theo thang, tối đa 8–12 bậc
+  current_code: Tổng hợp trong mã; khi có file, SceneAudio của kit đổi ±5 % tốc độ phát cho mọi âm (§5.3)
+  basis: AUDIO_PIPELINE §5.3 (mã cần cho mỗi nhóm giá trị riêng, §6.3)
+frequency_role:
+  bands:
+    - band: sub
+      range_hz: [20, 120]
+      role: Sub súng, sub dùng chung hit.sub
+    - band: body
+      range_hz: [120, 800]
+      role: Thân súng, thân tiếng trúng
+  voice_band: short-warning
+  voice_band_text: Báo nguy ngắn; không có âm kéo dài ở 1–4 kHz
+  spectrum: Không có âm kéo dài ở 1–4 kHz
+  basis: AUDIO_PIPELINE §6.4, AUDIO_PIPELINE §4.3.3
+loudness:
+  file:
+    metric: peak-dbtp
+    target: -1
+    basis: 'THEME_SOUND_LIST §2: đỉnh −1 dBFS'
+  proposal:
+    metric: lufs-m-max
+    target: -20
+    pad_s: 0.4
+    true_peak_max_dbtp: -1
+    basis: 'AUDIO_PIPELINE §4.3.3, §5.1 bước 4: đề xuất chuẩn hóa mọi âm ngắn về một mức chung; tài liệu game đang ghi chuẩn hóa đỉnh'
+  bus: alerts
+  bus_gain: 0.8
+  bus_gain_db: -1.94
+  gain_db: 0
+  gain_basis: 'Mã không có mức riêng cho từng id: voice() nối thẳng vào bus, mức nằm trong mã tổng hợp. File phát ở 0 dB vào bus'
+  relative_db: -1.94
+  pronunciation_duck_db: -1.94
+  mix_target:
+    metric: lufs-m-max
+    range: [-17, -14]
+    text: null
+    weight: null
+    basis: AUDIO_PIPELINE §4.3.3 (mức trong bản trộn, bài A và B)
+prompt:
+  text: 'Steel wall groaning under heat and pressure: a rising rumble and creaks building up over 2.5 s, tense, industrial.'
+  suffix: null
+  style_root: industrial, steel, close, punchy
+  sweetener: tia điện và thép ngân
+  variants:
+    - 'A: TrackType: SFX, steel wall groaning under heat and pressure, rising rumble and creaks building up over 2.5 seconds, tense, industrial'
+    - 'B: Metal bulkhead straining as heat builds, deep low drone swelling, stressed steel creaking and ticking, growing tension, industrial station'
+    - 'C: TrackType: SFX, overheating hull plate about to tear, low rumble climbing steadily, sharp metallic creaks and pings, hiss of heat, ominous'
+    - 'D: Huge steel structure under rising pressure, groaning metal, deep vibrating hum getting louder, rivets snapping one by one'
+  basis: docs/audio/THEME_SOUND_LIST.md; gốc prompt theo AUDIO_PIPELINE §5.2 (chốt sau bảng phong cách)
+pitches: null
+parts: null
+layer_plan: null
+references: []
+source_plan:
+  now: [cc0-layer, synth]
+  later: [model-later]
+  ranked:
+    - rank: 1
+      kinds: [model-later]
+      detail: 'Stable Audio 3: tường thép rên, kẽo kẹt, tiếng ầm dâng dần'
+    - rank: 2
+      kinds: [cc0-layer]
+      detail: Ghép tiếng thép rên, kẽo kẹt CC0 (Kenney, Freesound CC0)
+    - rank: 3
+      kinds: [synth]
+      detail: Tổng hợp như hiện nay
+  needs_now: []
+  needs_later: [buoc-0]
+  note: null
+  batch1: null
+  style_board: false
+  sa3_trial: false
+  basis: AUDIO_PIPELINE §3.2 (nguồn theo loại âm), §10.1 (khi chưa có Stable Audio 3)
+licence:
+  allowed: [CC0-1.0, project-code]
+  conditional:
+    - licence: Stability-Community-2024
+      condition: 'Bước 0: đăng ký Community License, chấp nhận AUP và điều khoản Gemma; có licences/stability-registration.txt (§10.1)'
+    - licence: MIT (ACE-Step 1.5)
+      condition: Ghim phiên bản; kiểm giai điệu trước khi bán
+    - licence: Apache-2.0 (MOSS-SoundEffect)
+      condition: Chỉ khi bước 0 trả lời không
+    - licence: CC0-1.0 (Freesound, người tải lên từ chối AI)
+      condition: Chỉ ghép tay, không vào bước AI nào, không vào LoRA (§10.2)
+  forbidden:
+    - non-commercial-weights
+    - freesound-cc-by-nc
+    - freesound-sampling-plus
+    - bbc-sound-effects
+    - pixabay
+    - sound-from-other-games
+    - sonniss-lot-1-2-and-any-ai-step
+    - elevenlabs-or-suno-free-tier-release
+  attribution_required: false
+  notes:
+    - 'Chưa cài: chờ bước 0 của chủ dự án'
+    - Kenney, VCSL, VSCO-2-CE, Freesound CC0. Lưu LICENSE-<ngày>.txt kèm thư viện
+    - Mã của dự án. pedalboard (GPL-3.0) chỉ import trên máy, không chép vào repo (§10.9)
+  record: art-src/audio/SOURCES.json và licences.jsonl (§10.5, §10.6); pnpm audio:licence-check chặn khi thiếu
+  basis: AUDIO_PIPELINE §10.2
+constraints:
+  - 'Âm industrial: thép, súng nặng, điện, kim loại vỡ; khác tiếng laser và nhạc điện tử vũ trụ của Space Typing (THEME_SOUND_LIST)'
+board:
+  contexts: [mot-minh, trong-tran]
+  contexts_before_phase3: [mot-minh, lap-20]
+  dense: false
+  repeat_interval_ms: null
+  repeat_basis: null
+  loudness_match: lufs-m
+  basis: AUDIO_PIPELINE §7
+critic:
+  group: alarm
+  dirty: false
+  weights_batch1:
+    l2: 0.6
+    l3: 0.3
+    l4: 0.1
+    l5: 0.0
+  loop_eval:
+    enabled: false
+    length_s: null
+    plays: null
+    interval_ms: null
+  ast:
+    expected: []
+    forbid: []
+  loop: false
+  stereo: false
+  pitched: false
+  attack_max_ms: null
+  head_max_ms: 5
+  rate_hz: null
+  bpm: null
+  bars: null
+  beats_per_bar: null
+  intent: 'Steel wall groaning under heat and pressure: a rising rumble and creaks building up over 2.5 s, tense, industrial.'
+  refs: []
+  basis: AUDIO_PIPELINE §4.4, §4.5 (L4 chỉ gắn cờ, trọng số tối đa 0,1)
+blocked_by: []
+origin:
+  code:
+    file: src/audio/gun-audio.ts
+    present: true
+    asset_stem: null
+    synth_in_code: true
+  sound_list:
+    file: docs/audio/THEME_SOUND_LIST.md
+    present: true
+    section: '9. S1: súng mới, quái mới, hiểm họa, sao (`src/audio/gun-audio.ts`)'
+  plan: []
+notes: 'Báo nguy, không phải âm hành động: tường thép rên, nhiệt dồn 2,5 s trước khi vết nứt mở (rift.open). Prompt trong danh sách nay ghi ''2.5 s'' để bộ sinh đọc được độ dài (trước đó ghi ''2.5 seconds'', thẻ không có duration.target_ms), và bỏ ''no music''. Nguồn sửa trong RULES: Stable Audio 3 hoặc ghép tiếng thép rên CC0, vì nguồn mặc định của nhóm báo nguy là kèn, cồng. Dài 2,5 s, quá 0,25–2 s của nhóm Báo nguy (chỉ để xếp hạng). Biến thể A–D mới, viết khẳng định.'

@@ -1,0 +1,461 @@
+# Danh sách ảnh 2D cần dựng 3D — mọi game (25/10/2026)
+
+> **Phiếu 003 · Dành cho:** chủ dự án dựng model trong Tripo; Claude nhận GLB để chuẩn cỡ, rig và làm clip trong Blender.
+> **Đợt 1 đã nhập (26/10/2026):** 55 GLB của 54 model trong `tripo-upload/` (cộng chùy Oni từ lần thử CLI) đã ở đúng "Nơi lưu GLB gốc"; còn thiếu `linh-giao-dai-spear` (Lời Gọi); `rainbow-scout` dùng chung model của `rainbow-tank` (chủ dự án, 26/10). Bảng ghép: [`3D_IMPORT_2026-10-26.md`](3D_IMPORT_2026-10-26.md).
+> **Phạm vi:** Rồng Giữ Ải M0; phần Lời Gọi chưa có bản gốc hoặc cần làm lại, gồm bậc P và VS; bản gốc còn thiếu cho Tuyến Cuối S1; Tu Tiên Thủ Ải chờ canon.
+> **Đường dẫn:** mọi đường dẫn đầy đủ trong bảng tính từ gốc `D:\typing-game`. Trạng thái “có” chỉ xác nhận file ảnh hiện diện trên máy, chưa thay cho duyệt mỹ thuật. Ảnh của phiếu 001–002 đang được bổ sung; đã kiểm tồn tại ảnh lúc 25/10/2026 04:14:12 +07:00.
+
+## 1. Tóm tắt
+
+**143 lượt dựng/làm lại**, gồm **142 model chưa có GLB gốc** và **1 bản làm lại Trại Lính** (giữ cùng id `barracks`). Không tính góc phụ thành model riêng; không dựng lại model đã có chỉ vì còn thiếu rig hoặc clip.
+
+| Game / đợt | Tổng danh mục đối chiếu | Đưa vào lượt dựng này | Tripo Biped | Tripo Quadruped | Tự rig Blender | Không rig | Rig lai |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Rồng Giữ Ải · M0 | 24 | 24 | 3 | 0 | 7 | 14 | 0 |
+| Lời Gọi · P | 42, đã có 41 GLB gốc | 2: Draconis mới + Trại Lính làm lại | 0 | 0 | 2 | 0 | 0 |
+| Lời Gọi · VS, đợt sau | 115, chưa có GLB gốc trong danh mục hiện tại | 115 | 0 | 0 | 16 | 99 | 0 |
+| Tuyến Cuối · S1 | Dùng chung thư viện Space; chỉ đếm 2 bản gốc thiếu | 2 | 0 | 0 | 0 | 2 | 0 |
+| Tu Tiên Thủ Ải | Chờ canon | Chưa chốt, không cộng | — | — | — | — | — |
+| **Cộng lượt dựng** | | **143** | **3** | **0** | **25** | **115** | **0** |
+
+- **Credit rig ước tính:** `3 × 20 = 60 credit`. Biped và Quadruped đều 20 credit/lần rig theo phiếu; Blender và không rig: 0 credit rig. Không có model rig lai trong lượt này. Nếu dùng rig lai về sau: Tripo rig thân (20 credit), Blender thêm xương đuôi/cánh/áo và clip; tính model đó vào số lần rig trả phí.
+- **Giá tạo model Tripo:** **theo gói**; các nguồn không nêu giá cố định. 60 credit trên chỉ là rig, chưa gồm tạo model, làm lại hay tăng chất lượng.
+- **Lời Gọi:** 157 model đã định danh = 42 P + 115 VS (45 model nhân vật/đồ gắn + 70 công trình/prop). 41 GLB P đang có đều hiện diện trên máy; không lấy `notMadeYet: {}` trong `SOURCES.json` làm bằng chứng rằng toàn bộ thiết kế đã đủ.
+- **Tuyến Cuối:** hai ảnh Rainbow đã có, thiếu GLB gốc riêng. `rainbow-tank` còn dùng cho Đầu Đàn; không phát sinh model thứ ba. Tổ dùng `rainbow-carrier`, boss dùng `warden-rainbow`; cả hai đã có GLB gốc, không đưa vào lượt dựng.
+- **Chưa định danh:** các thế giới sau, trang phục và nhóm “Sau” của TD mới là danh sách ý tưởng; chưa đủ id/ảnh/face limit để đưa vào thao tác Tripo. Xem §6.
+
+### 1.1. Quy tắc rig của lượt này
+
+1. **Tripo Biped:** chỉ E09, E11, U1 có dáng người tư thế A và bộ clip cơ bản phù hợp. Chọn preset theo hành động trong bảng; E11 cần đúng động tác bắn cung. Nếu thư viện không có clip đủ dùng hoặc rig hỏng: tải GLB không xương, chuyển cho Claude; không thử trả phí rig nhiều lần.
+2. **Tự rig Blender:** trong Tripo vẫn tạo model nhưng **không bấm rig**, tải **GLB không xương**. Áp cho dáng lạ, cánh, nhiều chân, cắn/vồ/húc, nhân vật chữ ký/boss, clip riêng, hoặc bộ phận có khớp cử động. Nhân vật TD chibi và clip nghề/chiêu riêng được đưa sang pipeline Blender đã có.
+3. **Không rig:** đồ tĩnh, đồ cầm gắn socket, đạn, cảnh. Di chuyển cả vật, gió, nhún, co giãn và VFX làm bằng runtime/shader. Hai quái Rainbow giữ cách vẽ instanced của S1, không thêm xương cho đám đông.
+4. Face limit là mức **tạo ở Tripo**. Giảm tam giác khi chuẩn bị bản chạy trong game là bước sau. Riêng 6000 cho hai Rainbow là **đề xuất cho lượt dựng**, dựa vào `triangles: 6000` của preset Space, không phải thiết lập Tripo được đặc tả trong S1.
+
+## 2. Thiết lập Tripo chung
+
+Chép nguyên văn bảng §3.1 của [README Rồng Giữ Ải](dragon-lane/art-requests/m0/README.md#31-chung-giống-bộ-td):
+
+| Mục | Chọn |
+|---|---|
+| Chế độ | Có 2 góc: **Multiview to 3D** theo cột "Ô ảnh" ở 3.2. Một ảnh: **Image to 3D** |
+| Tách nền | Bật (nền xám nhạt `#E6E6E6`) |
+| Texture | Bật, HD cao nhất của gói. **PBR** bật |
+| Lưới | Tam giác (Quad tắt). Smart Low Poly tắt |
+| Face limit | Theo bảng 3.2. Blender giảm số tam giác chạy trong game sau (quái đám đông 1.500–3.000, prop 800–3.000) |
+| Rig | Theo bảng 3.2 |
+| Clip Tripo | Quái thường: đúng **4 clip** Idle, Move, Attack, Death, chọn preset gần nghĩa nhất trong thư viện Tripo. Thiếu preset (cắn, vồ, húc, bay) thì bỏ trống: Blender làm (02 §7.2). Tướng G01: thêm Cast, Hit, Intro nếu có preset |
+| Tải về | **GLB** (bản có xương nếu đã rig). Đổi tên đúng id |
+
+Các số mục “3.2”, “02 §7.2” trong bản chép trên là số mục **của tài liệu nguồn**. Khi thao tác lượt này, lấy face limit, rig và clip từ từng dòng §3 dưới đây; luật chọn rig của phiếu thay cho cột rig cũ.
+
+- Ảnh TD cũ dùng nền khóa màu; vẫn bật tách nền theo ảnh đã có, không đổi nền ảnh chỉ để giống Rồng. Màu nền `#E6E6E6` là quy định của bộ ảnh Rồng.
+- Nhiều ảnh: mỗi ảnh vào một ô Front / Back / Left riêng, không ghép các góc vào một tấm. Ảnh phụ tùy chọn chỉ dùng khi đã có và khớp ảnh chính; không bắt buộc chờ nó để dùng Image to 3D.
+- Bảng dùng tên clip runtime khi nguồn đã quy định. Các tên “Chờ / Kích / Thu gai / Ngắm / Bắn / Hồi / Lật sách” là **đề xuất giao Blender**, cần chốt khi tích hợp, không phải tên preset có sẵn trong Tripo.
+- Rồng thông thường đủ bốn vai Idle, Move, Attack, Death; Walk/Run/Crawl/Fly là Move tương ứng. Ong Gai có thể dùng Hover cho Idle. G01 thêm Cast, Hit, Intro.
+- Gai Chông và Lưới Phóng: chọn Blender theo luật bẫy có bộ phận cử động của phiếu; nguồn M0 cũ dùng shader/cả model. Đây là lựa chọn chuẩn bị asset, chưa thay đổi runtime. Bom Hạt Thông giữ shader vì không có khớp cơ khí.
+
+## 3. Bảng nhóm theo face limit và cách rig
+
+**Cách đọc:** cột ảnh ghi đầy đủ từng file; “chờ ảnh” không có nghĩa là đã gửi yêu cầu tạo ảnh mới. Bậc **VS** là đợt sau, làm sau P; mã `01-VS/…`, `02-VS/…` chỉ rõ file nguồn để tránh trùng mã. Cùng một id chỉ có một GLB đích.
+
+### 3.1. 2000 · Tự rig Blender (2 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · VS | 01-VS/VS2 · `chuon-chuon-tre` | Chuồn Chuồn Tre, bạn đồng hành của Tre | Image = `games/typing-defense/art-src/animals/chuon-chuon-tre.png` | 2000 | Tự rig Blender | Helper_Idle, Helper_Walk, Helper_Assist.craft, Helper_Cheer | Côn trùng có cánh; Blender làm bay lơ lửng và nhịp cánh. | `games/typing-defense/art-src/3d/animals/chuon-chuon-tre.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS14a · `helper-book` | Sách nhỏ Thư Đồng lật ở nhà hỗ trợ | Image = `games/typing-defense/art-src/helpers/helper-book.png` | 2000 | Tự rig Blender | Lật sách theo Helper_Assist.support (tên clip riêng đề xuất) | Sách có hai khối trang mở theo gáy; Blender thêm khớp, không mua rig Tripo. | `games/typing-defense/art-src/3d/helpers/helper-book.glb` | chờ ảnh |
+
+### 3.2. 2000 · Không rig (38 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · VS | 01-VS/VS1b · `tre-mallet` | Búa gỗ to của Tre | Image = `games/typing-defense/art-src/heroes/tre-mallet.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/heroes/tre-mallet.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS1c · `tre-slingshot` | Ná tre của Tre | Image = `games/typing-defense/art-src/heroes/tre-slingshot.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/heroes/tre-slingshot.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS3b · `linh-khien-shield` | Khiên đồng | Image = `games/typing-defense/art-src/units/linh-khien-shield.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/units/linh-khien-shield.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS4b · `linh-giao-dai-spear` | Giáo dài | Image = `games/typing-defense/art-src/units/linh-giao-dai-spear.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/units/linh-giao-dai-spear.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS6b · `oni-club` | Chùy sắt của Oni | Image = `games/typing-defense/art-src/enemies/oni-club.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/enemies/oni-club.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS9b · `dokkaebi-club` | Gậy của Dokkaebi | Image = `games/typing-defense/art-src/enemies/dokkaebi-club.png` | 2000 | Không rig | — | Đồ cầm/gắn cứng vào socket của nhân vật; không cần rig riêng. | `games/typing-defense/art-src/3d/enemies/dokkaebi-club.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS14b · `helper-fan` | Quạt nan Thư Đồng quạt nồi ở nhà hỗ trợ | Image = `games/typing-defense/art-src/helpers/helper-fan.png` | 2000 | Không rig | — | Quạt cứng gắn tay Thư Đồng; động tác quạt nằm trong clip thân. | `games/typing-defense/art-src/3d/helpers/helper-fan.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K01 · `worker-kit-gatekeeper-head` | Mũ sắt tròn + râu bạc dài, lông mày rậm · Lão Gác Cổng (Lũy Chữ) | Image = `games/typing-defense/art-src/workers/worker-kit-gatekeeper-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-gatekeeper-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K02 · `worker-kit-gatekeeper-crossbow` | Nỏ gỗ to · Lão Gác Cổng | Image = `games/typing-defense/art-src/workers/worker-kit-gatekeeper-crossbow.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-gatekeeper-crossbow.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K03 · `worker-kit-en-head` | Tóc búi, nơ đuôi én · Chị Én (Tháp Cung) | Image = `games/typing-defense/art-src/workers/worker-kit-en-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-en-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K04 · `worker-kit-en-bow` | Cung ngắn · Chị Én | Image = `games/typing-defense/art-src/workers/worker-kit-en-bow.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-en-bow.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K05 · `worker-kit-se-head` | Tóc tròn, chỏm như mào sẻ · Em Sẻ (Tháp Cung) | Image = `games/typing-defense/art-src/workers/worker-kit-se-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-se-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K06 · `worker-kit-se-quiver` | Ống tên · Em Sẻ | Image = `games/typing-defense/art-src/workers/worker-kit-se-quiver.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-se-quiver.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K07 · `worker-kit-dong-head` | Kính đồng đẩy lên trán + ria xám dày · Bác Đồng (Tháp Pháo) | Image = `games/typing-defense/art-src/workers/worker-kit-dong-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-dong-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K08 · `worker-kit-dong-rammer` | Cây thông nòng · Bác Đồng | Image = `games/typing-defense/art-src/workers/worker-kit-dong-rammer.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-dong-rammer.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K09 · `worker-kit-lua-head` | Tóc dựng + băng đô · Cậu Lửa (Tháp Pháo) | Image = `games/typing-defense/art-src/workers/worker-kit-lua-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-lua-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K10 · `worker-kit-lua-shot` | Quả đạn vằn xanh ngọc · Cậu Lửa | Image = `games/typing-defense/art-src/workers/worker-kit-lua-shot.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-lua-shot.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K11 · `worker-kit-scholar-head` | Mũ mềm đen + râu dê trắng · Thầy Đồ Mực (Tháp Thư Pháp) | Image = `games/typing-defense/art-src/workers/worker-kit-scholar-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-scholar-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K12 · `worker-kit-sam-head` | Băng đô xanh đậm + ria đen to · Đội trưởng Sấm (Trại Lính) | Image = `games/typing-defense/art-src/workers/worker-kit-sam-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-sam-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K13 · `worker-kit-sam-drumstick` | Dùi trống to (Blender nhân đôi) · Đội trưởng Sấm | Image = `games/typing-defense/art-src/workers/worker-kit-sam-drumstick.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-sam-drumstick.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K14 · `worker-kit-miner-head` | Mũ vải có đèn dầu nhỏ (không lửa) · Ba anh em thợ mỏ (Mỏ Vàng) | Image = `games/typing-defense/art-src/workers/worker-kit-miner-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-miner-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K15 · `worker-kit-miner-pickaxe` | Cuốc chim · Ba anh em thợ mỏ | Image = `games/typing-defense/art-src/workers/worker-kit-miner-pickaxe.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-miner-pickaxe.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K16 · `worker-kit-ma-head` | Nón lá + bím tóc · Cô Mạ (Ruộng Lúa) | Image = `games/typing-defense/art-src/workers/worker-kit-ma-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-ma-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K17 · `worker-kit-ma-seedlings` | Bó mạ xanh · Cô Mạ | Image = `games/typing-defense/art-src/workers/worker-kit-ma-seedlings.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-ma-seedlings.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K18 · `worker-kit-tieu-head` | Khăn ô nâu kem + râu đen ngắn · Chú Tiều (Trại Gỗ) | Image = `games/typing-defense/art-src/workers/worker-kit-tieu-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-tieu-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K19 · `worker-kit-tieu-axe` | Rìu · Chú Tiều | Image = `games/typing-defense/art-src/workers/worker-kit-tieu-axe.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-tieu-axe.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K20 · `worker-kit-tro-head` | Tóc búi nhỏ buộc dây xám xanh · Trò Mực (Đài Ấn) | Image = `games/typing-defense/art-src/workers/worker-kit-tro-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-tro-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K21 · `worker-kit-tro-scroll` | Cuộn giấy trắng · Trò Mực | Image = `games/typing-defense/art-src/workers/worker-kit-tro-scroll.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-tro-scroll.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K22 · `worker-kit-lang-head` | Búi tóc bạc · Bà Lang Thơm (Nhà Thuốc) | Image = `games/typing-defense/art-src/workers/worker-kit-lang-head.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-lang-head.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K23 · `worker-kit-lang-basket` | Giỏ thảo dược · Bà Lang Thơm | Image = `games/typing-defense/art-src/workers/worker-kit-lang-basket.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-lang-basket.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/K24 · `worker-kit-sam-vest` | Áo giáp lá tre · Đội trưởng Sấm | Image = `games/typing-defense/art-src/workers/worker-kit-sam-vest.png` | 2000 | Không rig | — | Bộ gắn cứng vào xương/socket của thân thợ; không có khớp riêng. | `games/typing-defense/art-src/3d/workers/worker-kit-sam-vest.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V13 · `cannon-barrel-l3` | Tháp Pháo cấp 3: nòng vằn | Image = `games/typing-defense/art-src/kits/cannon-barrel-l3.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/cannon-barrel-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V65 · `go-lan` | Gỗ Lăn | Image = `games/typing-defense/art-src/props/go-lan.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/props/go-lan.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V66 · `pebble` | Viên ná của Tre | Image = `games/typing-defense/art-src/projectiles/pebble.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Đạn cứng; quỹ đạo và xoay do runtime điều khiển. | `games/typing-defense/art-src/3d/projectiles/pebble.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V67 · `meteor` | Đá lửa (Mưa Đá Lửa) | Image = `games/typing-defense/art-src/projectiles/meteor.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Đạn cứng; quỹ đạo và xoay do runtime điều khiển. | `games/typing-defense/art-src/3d/projectiles/meteor.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V68 · `quill` | Lông Đại Bàng Tinh | Image = `games/typing-defense/art-src/projectiles/quill.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Đạn cứng; quỹ đạo và xoay do runtime điều khiển. | `games/typing-defense/art-src/3d/projectiles/quill.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V69 · `seed-drop` | Hạt Mộc Tinh | Image = `games/typing-defense/art-src/projectiles/seed-drop.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Đạn cứng; quỹ đạo và xoay do runtime điều khiển. | `games/typing-defense/art-src/3d/projectiles/seed-drop.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V70 · `fire-feather` | Lông lửa Draconis | Image = `games/typing-defense/art-src/projectiles/fire-feather.png` | 2000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Đạn cứng; quỹ đạo và xoay do runtime điều khiển. | `games/typing-defense/art-src/3d/projectiles/fire-feather.glb` | chờ ảnh |
+
+### 3.3. 4000 · Tự rig Blender (2 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | E25 · `thorn-ant` | Kiến Gai | Left = `games/dragon-hold/art-src/enemies/thorn-ant.png`<br>Front = `games/dragon-hold/art-src/enemies/thorn-ant-front.png` | 4000 | Tự rig Blender | Idle, Crawl (Move), Attack (cắn), Death | Sáu chân và hàm cắn; cần chu kỳ chân riêng, không thử rig Hexapod trả phí. | `games/dragon-hold/art-src/3d/enemies/thorn-ant.glb` | có |
+| Rồng Giữ Ải | TR1 · `spikes` | Gai Chông | Image = `games/dragon-hold/art-src/traps/spikes.png` | 4000 | Tự rig Blender | Chờ, Kích (gai trồi), Thu gai (tên clip đề xuất) | Bẫy có khối gai cử động: theo luật phiếu, Blender gắn xương cứng cho phần gai. | `games/dragon-hold/art-src/3d/traps/spikes.glb` | có |
+
+### 3.4. 4000 · Không rig (29 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | TR2 · `pine-bomb` | Bom Hạt Thông | Image = `games/dragon-hold/art-src/traps/pine-bomb.png` | 4000 | Không rig | — (thở/nổ bằng shader và VFX) | Không khớp cơ khí; co giãn cả quả bằng shader, vụn nổ là VFX. | `games/dragon-hold/art-src/3d/traps/pine-bomb.glb` | có |
+| Rồng Giữ Ải | K07 · `rock-boulder` | Đá tảng rêu | Image = `games/dragon-hold/art-src/props/pine-river/rock-boulder.png` | 4000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/rock-boulder.glb` | chờ ảnh |
+| Rồng Giữ Ải | K08 · `rock-slab` | Gờ đá phiến | Image = `games/dragon-hold/art-src/props/pine-river/rock-slab.png` | 4000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/rock-slab.glb` | chờ ảnh |
+| Rồng Giữ Ải | K09 · `river-stones` | Đá kê suối | Image = `games/dragon-hold/art-src/props/pine-river/river-stones.png` | 4000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/river-stones.glb` | chờ ảnh |
+| Rồng Giữ Ải | K10 · `stump` | Gốc thông | Image = `games/dragon-hold/art-src/props/pine-river/stump.png` | 4000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/stump.glb` | chờ ảnh |
+| Rồng Giữ Ải | K11 · `log` | Khúc gỗ đổ | Image = `games/dragon-hold/art-src/props/pine-river/log.png` | 4000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/log.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V7 · `keep-kit-l3` | Lũy cấp 3 | Image = `games/typing-defense/art-src/kits/keep-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/keep-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V8 · `keep-kit-l4` | Lũy cấp 4 | Image = `games/typing-defense/art-src/kits/keep-kit-l4.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/keep-kit-l4.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V9 · `archer-kit-l2` | Tháp Cung cấp 2 | Image = `games/typing-defense/art-src/kits/archer-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/archer-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V10 · `archer-kit-l3` | Tháp Cung cấp 3 | Image = `games/typing-defense/art-src/kits/archer-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/archer-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V11 · `cannon-kit-l2` | Tháp Pháo cấp 2 | Image = `games/typing-defense/art-src/kits/cannon-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/cannon-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V12 · `cannon-kit-l3` | Tháp Pháo cấp 3: cờ | Image = `games/typing-defense/art-src/kits/cannon-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/cannon-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V14 · `barracks-kit-l2` | Trại Lính cấp 2 | Image = `games/typing-defense/art-src/kits/barracks-kit-l2.png` | 4000 | Không rig | — (hiệu ứng nâng cấp do runtime) | Bộ mái/sàn canh gắn lên nhà; không gồm cánh cổng cần khớp riêng. | `games/typing-defense/art-src/3d/kits/barracks-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V15 · `barracks-kit-l3` | Trại Lính cấp 3 | Image = `games/typing-defense/art-src/kits/barracks-kit-l3.png` | 4000 | Không rig | — (hiệu ứng nâng cấp do runtime) | Bộ mái/sàn canh gắn lên nhà; không gồm cánh cổng cần khớp riêng. | `games/typing-defense/art-src/3d/kits/barracks-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V16 · `gold-mine-kit-l2` | Mỏ Vàng cấp 2 | Image = `games/typing-defense/art-src/kits/gold-mine-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/gold-mine-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V17 · `gold-mine-kit-l3` | Mỏ Vàng cấp 3 | Image = `games/typing-defense/art-src/kits/gold-mine-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/gold-mine-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V18 · `farm-kit-l2` | Ruộng Lúa cấp 2 | Image = `games/typing-defense/art-src/kits/farm-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/farm-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V19 · `farm-kit-l3` | Ruộng Lúa cấp 3 | Image = `games/typing-defense/art-src/kits/farm-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/farm-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V20 · `seal-dais-kit-l2` | Đài Ấn cấp 2 | Image = `games/typing-defense/art-src/kits/seal-dais-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/seal-dais-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V21 · `seal-dais-kit-l3` | Đài Ấn cấp 3 | Image = `games/typing-defense/art-src/kits/seal-dais-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/seal-dais-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V22 · `scribe-kit-l2` | Tháp Thư Pháp cấp 2 | Image = `games/typing-defense/art-src/kits/scribe-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/scribe-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V23 · `scribe-kit-l3` | Tháp Thư Pháp cấp 3: cọ lơ lửng | Image = `games/typing-defense/art-src/kits/scribe-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/scribe-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V24 · `infirmary-kit-l2` | Nhà Thuốc cấp 2 | Image = `games/typing-defense/art-src/kits/infirmary-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/infirmary-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V25 · `infirmary-kit-l3` | Nhà Thuốc cấp 3 | Image = `games/typing-defense/art-src/kits/infirmary-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/infirmary-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V26 · `lumber-kit-l2` | Trại Gỗ cấp 2 | Image = `games/typing-defense/art-src/kits/lumber-kit-l2.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/lumber-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V27 · `lumber-kit-l3` | Trại Gỗ cấp 3 | Image = `games/typing-defense/art-src/kits/lumber-kit-l3.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/lumber-kit-l3.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V62 · `scaffold-bamboo` | Giàn tre | Image = `games/typing-defense/art-src/props/scaffold-bamboo.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/props/scaffold-bamboo.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V63 · `rao-tre` | Rào Tre | Image = `games/typing-defense/art-src/props/rao-tre.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/props/rao-tre.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V64 · `cau-tre` | Cầu Tre | Image = `games/typing-defense/art-src/props/cau-tre.png` | 4000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/props/cau-tre.glb` | chờ ảnh |
+
+### 3.5. 5000 · Tự rig Blender (4 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | E01 · `thorn-wasp` | Ong Gai | Front = `games/dragon-hold/art-src/enemies/thorn-wasp.png` (Image to 3D khi cần); góc Left cũ và ứng viên `games/dragon-hold/art-src/enemies/thorn-wasp-side-015.png` chỉ để đối chiếu, không dùng Multiview | 5000 | Tự rig Blender | Idle/Hover, Fly (Move), Attack (chổng bụng bắn ngòi), Death | Côn trùng có cánh; cần bay và xoay bụng, không dùng rig Avian của Tripo. | `games/dragon-hold/art-src/3d/enemies/thorn-wasp.glb` | 015: đã thử thêm 1 lần; vẫn lộ mặt cánh, chưa đạt Left. Giữ Front; không yêu cầu tạo lại GLB đã nhập. |
+| Lời Gọi · VS | 01-VS/VS3a · `linh-khien` | Lính Khiên (nhánh Khiên Đồng) | Image = `games/typing-defense/art-src/units/linh-khien.png` | 5000 | Tự rig Blender | Unit_Idle, Unit_Walk, Unit_Attack, Unit_Hit, Unit_Death, Unit_Cheer, Unit_Skill; nên có Unit_Charge | Lính chibi và clip Khiên Tường riêng; Blender giữ chân, tay khiên và giáo. | `games/typing-defense/art-src/3d/units/linh-khien.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS4a · `linh-giao-dai` | Lính Giáo Dài (nhánh Giáo Dài) | Image = `games/typing-defense/art-src/units/linh-giao-dai.png` | 5000 | Tự rig Blender | Unit_Idle, Unit_Walk, Unit_Attack, Unit_Hit, Unit_Death, Unit_Cheer; nên có Unit_Charge | Lính chibi, đâm giáo dài xuyên hai mục tiêu; dùng pipeline Lính Giáo để giữ tay và chân. | `games/typing-defense/art-src/3d/units/linh-giao-dai.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS5a · `worker-base` | Thân thợ chung của 10 tổ thợ | Image = `games/typing-defense/art-src/workers/worker-base.png` | 5000 | Tự rig Blender | Worker_Idle, Worker_Walk, Worker_Work, Worker_Strike; nên có Worker_Cheer | Thân chibi 2,25 đầu, dùng chung 10 tổ; động tác nghề theo nhịp chữ cần clip riêng. | `games/typing-defense/art-src/3d/workers/worker-base.glb` | chờ ảnh |
+
+### 3.6. 5000 · Không rig (2 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | K05 · `bush-moss` | Bụi rêu | Image = `games/dragon-hold/art-src/props/pine-river/bush-moss.png` | 5000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/bush-moss.glb` | chờ ảnh |
+| Rồng Giữ Ải | K06 · `bush-blossom` | Bụi hoa kem, tím | Image = `games/dragon-hold/art-src/props/pine-river/bush-blossom.png` | 5000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/bush-blossom.glb` | chờ ảnh |
+
+### 3.7. 6000 · Tripo Biped (3 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | E09 · `moss-grunt` | Yêu Rêu Lính | Front = `games/dragon-hold/art-src/enemies/moss-grunt.png`<br>Back = `games/dragon-hold/art-src/enemies/moss-grunt-back.png` | 6000 | Tripo Biped | Idle, Walk, Attack (chém), Death | Hai chân tư thế A; bốn preset cơ bản đủ cho quái bầy. | `games/dragon-hold/art-src/3d/enemies/moss-grunt.glb` | chờ ảnh (có Front; thiếu Back) |
+| Rồng Giữ Ải | E11 · `moss-archer` | Yêu Rêu Cung | Front = `games/dragon-hold/art-src/enemies/moss-archer.png`<br>Back = `games/dragon-hold/art-src/enemies/moss-archer-back.png` | 6000 | Tripo Biped | Idle, Walk, Attack (bắn cung), Death | Hai chân tư thế A; dùng preset Attack bắn cung, kiểm tay và dây cung khi duyệt. | `games/dragon-hold/art-src/3d/enemies/moss-archer.glb` | có |
+| Rồng Giữ Ải | U1 · `moss-warden` | Vệ Binh Rêu | Front = `games/dragon-hold/art-src/units/moss-warden.png`<br>Back = `games/dragon-hold/art-src/units/moss-warden-back.png`<br>Ứng viên Front 015 = `games/dragon-hold/art-src/units/moss-warden-015.png` (chưa thay cặp gốc) | 6000 | Tripo Biped | Idle, Walk, Attack (quét chày/đỡ khiên), Death | Theo §1.1 chỉ dùng Tripo Biped khi ảnh tư thế A đạt, tay chân tách rõ; rig/preset lỗi thì GLB không xương giao Blender, không trả phí thử nhiều lần. | `games/dragon-hold/art-src/3d/units/moss-warden.glb` | 015: 2 lượt Front; tay thoáng hơn nhưng khiên còn xiên/khuất tay, nền chưa phẳng. Chưa duyệt rig; không sinh Back mới theo ảnh chưa đạt. |
+
+### 3.8. 6000 · Tự rig Blender (8 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | E18 · `blight-wolf` | Sói Mục | Left = `games/dragon-hold/art-src/enemies/blight-wolf.png`<br>Front = `games/dragon-hold/art-src/enemies/blight-wolf-front.png` | 6000 | Tự rig Blender | Idle, Run, Attack (cắn/vồ), Death | Cắn và vồ cần clip riêng, đuôi và thân chồng lớp; tải GLB không xương. | `games/dragon-hold/art-src/3d/enemies/blight-wolf.glb` | có |
+| Rồng Giữ Ải | TR3 · `net-launcher` | Lưới Phóng | Image = `games/dragon-hold/art-src/traps/net-launcher.png` | 6000 | Tự rig Blender | Chờ, Ngắm, Bắn, Hồi (tên clip đề xuất) | Bẫy có đầu phóng cử động: theo luật phiếu, Blender làm khớp đầu phóng; lưới bung là VFX. | `games/dragon-hold/art-src/3d/traps/net-launcher.glb` | có |
+| Lời Gọi · VS | 01-VS/VS7 · `tat-phuong` | Tất Phương, chim một chân tự nổ | Image = `games/typing-defense/art-src/enemies/tat-phuong.png` | 6000 | Tự rig Blender | Enemy_Idle, Enemy_Move, Enemy_Attack, Enemy_Hit, Enemy_Skill, Enemy_Death | Chim một chân, lò cò và báo nổ; dáng không chuẩn cho Biped/Quadruped. | `games/typing-defense/art-src/3d/enemies/tat-phuong.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS8 · `ma-da` | Ma Da, hồn nước tàng hình | Image = `games/typing-defense/art-src/enemies/ma-da.png` | 6000 | Tự rig Blender | Enemy_Idle, Enemy_Move, Enemy_Attack, Enemy_Hit, Enemy_Death | Hồn nước không thấy chân, trôi và Kéo Chân; không có dáng người chuẩn để auto rig. | `games/typing-defense/art-src/3d/enemies/ma-da.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS9a · `dokkaebi` | Yêu Tinh Dokkaebi, gọi Ma Trơi | Image = `games/typing-defense/art-src/enemies/dokkaebi.png` | 6000 | Tự rig Blender | Enemy_Idle, Enemy_Move, Enemy_Attack, Enemy_Hit, Enemy_Skill, Enemy_Death | Chibi có động tác Phong Gậy/gọi Ma Trơi riêng; cần clip và đồ gắn theo đòn. | `games/typing-defense/art-src/3d/enemies/dokkaebi.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS10 · `kamaitachi` | Chồn Liềm, bay thấp trên lốc | Image = `games/typing-defense/art-src/enemies/kamaitachi.png` | 6000 | Tự rig Blender | Enemy_Idle, Enemy_Move, Enemy_Attack, Enemy_Hit, Enemy_Death | Chồn bay thấp, chạy quanh lốc; cần phối hợp thân/đuôi, không chỉ preset Run. | `games/typing-defense/art-src/3d/enemies/kamaitachi.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS12 · `trau` | Trâu (trâu Mộng của Ruộng Lúa) | Left = `games/typing-defense/art-src/animals/trau.png`<br>Front (tùy chọn) = `games/typing-defense/art-src/animals/trau-front.png` | 6000 | Tự rig Blender | Worker_Work, Worker_Strike, Worker_Cheer, Unit_Charge; Idle, Walk/Run | Trâu Mộng cần kéo cày và húc riêng; Blender kiểm chân trụ và động tác đầu/sừng. | `games/typing-defense/art-src/3d/animals/trau.glb` | chờ ảnh |
+| Lời Gọi · VS | 01-VS/VS13 · `piggy` | Heo Đất Vàng | Image = `games/typing-defense/art-src/animals/piggy.png` | 6000 | Tự rig Blender | Enemy_Move, Enemy_Idle, Enemy_Hit, Enemy_Death | Heo gốm chân ngắn, thân tròn; Blender làm bước chạy và phản ứng, vỡ gốm là VFX. | `games/typing-defense/art-src/3d/animals/piggy.glb` | chờ ảnh |
+
+### 3.9. 6000 · Không rig (3 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | K03 · `pine-young` | Thông non | Image = `games/dragon-hold/art-src/props/pine-river/pine-young.png` | 6000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/pine-young.glb` | chờ ảnh |
+| Tuyến Cuối · dùng chung Space | S1 · `rainbow-scout` | Lính họ Rainbow | Image = `games/space-typing/art-src/enemies/rainbow-scout.png` | 6000 | Không rig | Enemy_Idle (Blender); di chuyển/trúng/hạ bằng shader instanced | Chủ dự án 26/10: dùng chung model rainbow-tank theo ghi chú nhập đầu file. Đám đông S1 giữ shader instanced, không thêm xương hoặc yêu cầu nguồn mới. | `games/space-typing/art-src/3d/enemies/rainbow-scout.glb` | Có; 015 giữ nguyên nguồn chung Space, không sinh ảnh/model mới. |
+| Tuyến Cuối · dùng chung Space | S1 · `rainbow-tank` | Trâu / Đầu Đàn họ Rainbow | Image = `games/space-typing/art-src/enemies/rainbow-tank.png` | 6000 | Không rig | Enemy_Idle (Blender); di chuyển/trúng/hạ bằng shader instanced | GLB đã nhập đợt 1 theo ghi chú đầu file; dùng cho Trâu/Đầu Đàn và scout. Đám đông S1 chuyển động bằng shader, không rig theo §1.1. | `games/space-typing/art-src/3d/enemies/rainbow-tank.glb` | Có; 015 giữ nguyên nguồn chung Space, không sinh ảnh/model mới. |
+
+### 3.10. 8000 · Tự rig Blender (1 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | E19 · `tusk-boar` | Heo Nanh Đá | Left = `games/dragon-hold/art-src/enemies/tusk-boar.png`<br>Front = `games/dragon-hold/art-src/enemies/tusk-boar-front.png` | 8000 | Tự rig Blender | Idle, Walk, Attack (cào đất/húc), Death | Húc có lấy đà và trượt theo đà cần clip riêng toàn thân. | `games/dragon-hold/art-src/3d/enemies/tusk-boar.glb` | có |
+
+### 3.11. 8000 · Không rig (17 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · VS | 02-VS/V6 · `keep-kit-l2` | Lũy cấp 2 | Image = `games/typing-defense/art-src/kits/keep-kit-l2.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Bộ cấp gắn lên nhà bằng socket; hiệu ứng nâng cấp không cần xương. | `games/typing-defense/art-src/3d/kits/keep-kit-l2.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V46 · `ruin-s` | Đổ nát cỡ S | Image = `games/typing-defense/art-src/ruins/ruin-s.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/ruins/ruin-s.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V47 · `ruin-m` | Đổ nát cỡ M | Image = `games/typing-defense/art-src/ruins/ruin-m.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/ruins/ruin-m.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V48 · `ruin-l` | Đổ nát cỡ L | Image = `games/typing-defense/art-src/ruins/ruin-l.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/ruins/ruin-l.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V49 · `ruin-xl` | Đổ nát cỡ XL | Image = `games/typing-defense/art-src/ruins/ruin-xl.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/ruins/ruin-xl.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V50 · `vach-thac-bac` | Vách Thác Bạc | Image = `games/typing-defense/art-src/landmarks/vach-thac-bac.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/vach-thac-bac.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V51 · `cau-go` | Cầu gỗ | Image = `games/typing-defense/art-src/landmarks/cau-go.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/cau-go.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V52 · `choi-canh-doi` | Chòi canh trên đồi | Image = `games/typing-defense/art-src/landmarks/choi-canh-doi.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/choi-canh-doi.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V53 · `hai-dang` | Hải đăng | Image = `games/typing-defense/art-src/landmarks/hai-dang.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/hai-dang.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V54 · `cau-tau` | Cầu tàu | Image = `games/typing-defense/art-src/landmarks/cau-tau.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/cau-tau.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V55 · `nha-rai-da` | Nhà Rái Đá trên cọc | Image = `games/typing-defense/art-src/landmarks/nha-rai-da.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/nha-rai-da.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V56 · `them-da-trang` | Thềm Đá Trắng | Image = `games/typing-defense/art-src/landmarks/them-da-trang.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/them-da-trang.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V57 · `goc-da-rong` | Gốc đa rỗng | Image = `games/typing-defense/art-src/landmarks/goc-da-rong.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/goc-da-rong.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V58 · `cau-do` | Cầu Đỏ | Image = `games/typing-defense/art-src/landmarks/cau-do.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/cau-do.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V59 · `da-ke` | Đá Kê | Image = `games/typing-defense/art-src/landmarks/da-ke.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/da-ke.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V60 · `re-vom` | Rễ khổng lồ uốn qua đường | Image = `games/typing-defense/art-src/landmarks/re-vom.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/re-vom.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V61 · `thac-ho-sut` | Thác đổ vào Hố Sụt | Image = `games/typing-defense/art-src/landmarks/thac-ho-sut.png` | 8000 | Không rig | — (chuyển động cả vật/socket hoặc shader khi cần) | Prop/mốc cảnh tĩnh; VFX, gió hoặc di chuyển cả vật không cần rig. | `games/typing-defense/art-src/3d/landmarks/thac-ho-sut.glb` | chờ ảnh |
+
+### 3.12. 9000 · Tự rig Blender (1 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · VS | 01-VS/VS6a · `oni` | Quỷ Oni, phá nhà | Image = `games/typing-defense/art-src/enemies/oni.png` | 9000 | Tự rig Blender | Enemy_Idle, Enemy_Move, Enemy_Attack, Enemy_Hit, Enemy_Death | Quái chibi to, đập chùy có lấy đà và thả chùy; Blender làm chuyển động có trọng lượng. | `games/typing-defense/art-src/3d/enemies/oni.glb` | chờ ảnh |
+
+### 3.13. 10000 · Tự rig Blender (4 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | G01 · `moss-banner` | Yêu Rêu Cầm Cờ | Front = `games/dragon-hold/art-src/generals/moss-banner.png`<br>Back = `games/dragon-hold/art-src/generals/moss-banner-back.png`<br>Ứng viên Front 015 = `games/dragon-hold/art-src/generals/moss-banner-015.png` (chưa thay cặp gốc) | 10000 | Tự rig Blender | Idle, Walk, Attack, Cast, Hit, Death, Intro | Tướng có cắm/phất cờ, cờ và thân chuyển động chồng lớp; preset cơ bản chưa đủ. | `games/dragon-hold/art-src/3d/generals/moss-banner.glb` | 015: 2 lượt Front; tay cờ thẳng hơn nhưng góc dạng tay chưa đạt đủ, nền chưa phẳng. Giữ Blender theo §1.1; không sinh Back mới hoặc dựng model trùng. |
+| Lời Gọi · P | 02/P5 · `barracks` | Trại Lính, bản làm lại cao hơn | Image = `games/typing-defense/art-src/buildings/barracks-v2.png` | 10000 | Tự rig Blender | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin; mở/đóng cổng (Blender) | Thay model tạm 1,8 m; nhà giữ cứng, chỉ gắn xương cánh cổng theo luật vật có phần cử động. | `games/typing-defense/art-src/3d/buildings/barracks.glb` | 015 kiểm trên máy: đã có barracks-v2.png và prompt; giữ rig cổng Blender theo §1.1, không sinh lại ảnh. |
+| Lời Gọi · VS | 02-VS/V34 · `barracks-khien-dong` | Trại Lính, nhánh Khiên Đồng | Image = `games/typing-defense/art-src/branches/barracks-khien-dong.png` | 10000 | Tự rig Blender | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin; mở/đóng cổng (Blender) | Nhánh Trại Lính giữ nhà cứng, Blender gắn xương cánh cổng cử động. | `games/typing-defense/art-src/3d/branches/barracks-khien-dong.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V35 · `barracks-giao-dai` | Trại Lính, nhánh Giáo Dài | Image = `games/typing-defense/art-src/branches/barracks-giao-dai.png` | 10000 | Tự rig Blender | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin; mở/đóng cổng (Blender) | Nhánh Trại Lính giữ nhà cứng, Blender gắn xương cánh cổng cử động. | `games/typing-defense/art-src/3d/branches/barracks-giao-dai.glb` | chờ ảnh |
+
+### 3.14. 10000 · Không rig (26 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Rồng Giữ Ải | H1 · `herb-hut` | Nhà Thuốc Lá | Image = `games/dragon-hold/art-src/houses/herb-hut.png` | 10000 | Không rig | — | Nhà tĩnh; giọt sáng và vòng hồi máu là VFX. | `games/dragon-hold/art-src/3d/houses/herb-hut.glb` | chờ ảnh |
+| Rồng Giữ Ải | K01 · `pine-tall` | Thông cao | Image = `games/dragon-hold/art-src/props/pine-river/pine-tall.png` | 10000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/pine-tall.glb` | chờ ảnh |
+| Rồng Giữ Ải | K02 · `pine-round` | Thông dù già | Image = `games/dragon-hold/art-src/props/pine-river/pine-round.png` | 10000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/pine-round.glb` | chờ ảnh |
+| Rồng Giữ Ải | K04 · `tree-violet` | Cây tán tím | Image = `games/dragon-hold/art-src/props/pine-river/tree-violet.png` | 10000 | Không rig | — | Cây/bụi tĩnh; gió và lay tán làm bằng shader. | `games/dragon-hold/art-src/3d/props/pine-river/tree-violet.glb` | chờ ảnh |
+| Rồng Giữ Ải | K12 · `bridge-old` | Cầu gỗ cũ | Image = `games/dragon-hold/art-src/props/pine-river/bridge-old.png` | 10000 | Không rig | — | Prop tĩnh, không có bộ phận cần khớp. | `games/dragon-hold/art-src/3d/props/pine-river/bridge-old.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V1 · `scribe` | Tháp Thư Pháp cấp 1 | Image = `games/typing-defense/art-src/buildings/scribe.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/buildings/scribe.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V2 · `infirmary` | Nhà Thuốc cấp 1 | Image = `games/typing-defense/art-src/buildings/infirmary.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/buildings/infirmary.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V3 · `lumber` | Trại Gỗ cấp 1 | Image = `games/typing-defense/art-src/buildings/lumber.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/buildings/lumber.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V4 · `farm-ao-ca` | Ruộng, skin Ao Cá | Image = `games/typing-defense/art-src/buildings/farm-ao-ca.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/buildings/farm-ao-ca.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V5 · `farm-nuong` | Ruộng, skin Nương | Image = `games/typing-defense/art-src/buildings/farm-nuong.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/buildings/farm-nuong.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V28 · `archer-en-bao` | Cung, nhánh Én Bão | Image = `games/typing-defense/art-src/branches/archer-en-bao.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/archer-en-bao.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V29 · `archer-than-tien` | Cung, nhánh Thần Tiễn | Image = `games/typing-defense/art-src/branches/archer-than-tien.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/archer-than-tien.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V30 · `cannon-coi-lon` | Pháo, nhánh Cối Lớn | Image = `games/typing-defense/art-src/branches/cannon-coi-lon.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/cannon-coi-lon.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V31 · `cannon-vac-lua` | Pháo, nhánh Vạc Lửa | Image = `games/typing-defense/art-src/branches/cannon-vac-lua.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/cannon-vac-lua.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V32 · `scribe-but-loi` | Thư Pháp, nhánh Bút Lôi | Image = `games/typing-defense/art-src/branches/scribe-but-loi.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/scribe-but-loi.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V33 · `scribe-muc-bang` | Thư Pháp, nhánh Mực Băng | Image = `games/typing-defense/art-src/branches/scribe-muc-bang.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/scribe-muc-bang.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V36 · `gold-mine-ham-sau` | Mỏ, nhánh Hầm Sâu | Image = `games/typing-defense/art-src/branches/gold-mine-ham-sau.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/gold-mine-ham-sau.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V37 · `gold-mine-lo-duc-tien` | Mỏ, nhánh Lò Đúc Tiền | Image = `games/typing-defense/art-src/branches/gold-mine-lo-duc-tien.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/gold-mine-lo-duc-tien.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V38 · `farm-bac-thang` | Ruộng, nhánh Bậc Thang | Image = `games/typing-defense/art-src/branches/farm-bac-thang.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/farm-bac-thang.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V39 · `farm-chuong-trau` | Ruộng, nhánh Chuồng Trâu | Image = `games/typing-defense/art-src/branches/farm-chuong-trau.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/farm-chuong-trau.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V40 · `lumber-xuong-cua` | Trại Gỗ, nhánh Xưởng Cưa | Image = `games/typing-defense/art-src/branches/lumber-xuong-cua.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/lumber-xuong-cua.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V41 · `lumber-xuong-rao` | Trại Gỗ, nhánh Xưởng Rào | Image = `games/typing-defense/art-src/branches/lumber-xuong-rao.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/lumber-xuong-rao.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V42 · `seal-dais-phong-an` | Đài Ấn, nhánh Phong Ấn | Image = `games/typing-defense/art-src/branches/seal-dais-phong-an.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/seal-dais-phong-an.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V43 · `seal-dais-vang-am` | Đài Ấn, nhánh Vang Âm | Image = `games/typing-defense/art-src/branches/seal-dais-vang-am.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/seal-dais-vang-am.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V44 · `infirmary-vuon-thao-duoc` | Nhà Thuốc, nhánh Vườn Thảo Dược | Image = `games/typing-defense/art-src/branches/infirmary-vuon-thao-duoc.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/infirmary-vuon-thao-duoc.glb` | chờ ảnh |
+| Lời Gọi · VS | 02-VS/V45 · `infirmary-tram-cuu-thuong` | Nhà Thuốc, nhánh Trạm Cứu Thương | Image = `games/typing-defense/art-src/branches/infirmary-tram-cuu-thuong.png` | 10000 | Không rig | Building_Idle, Building_Fire; nên có Building_Work, Building_Hit, Building_Ruin (shader/cả khối) | Công trình tĩnh; VFX và chuyển động cả khối/socket làm trong runtime. | `games/typing-defense/art-src/3d/branches/infirmary-tram-cuu-thuong.glb` | chờ ảnh |
+
+### 3.15. 20000 · Tự rig Blender (1 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · VS | 01-VS/VS1a · `tre` | Tướng Tre, cô thợ mộc tre | Front = `games/typing-defense/art-src/heroes/tre.png`<br>Left = `games/typing-defense/art-src/heroes/tre-side.png`<br>Back = `games/typing-defense/art-src/heroes/tre-back.png` | 20000 | Tự rig Blender | Hero_Idle, Hero_Run, Hero_Attack, Hero_Skill1, Hero_Skill2, Hero_Ult, Hero_Assist, Hero_Hit, Hero_Death, Hero_Respawn, Hero_Victory | Tướng chữ ký, chibi, cần bắn ná, sửa nhà, dựng cầu và lớp phụ kiện. | `games/typing-defense/art-src/3d/heroes/tre.glb` | chờ ảnh |
+
+### 3.16. 30000 · Tự rig Blender (2 model)
+
+| Game | Mã · id | Tên | Ô ảnh Tripo · đường dẫn ảnh 2D | Face limit | Rig | Clip cần có | Lý do chọn rig | Nơi lưu GLB gốc | Trạng thái ảnh 2D |
+|---|---|---|---|---:|---|---|---|---|---|
+| Lời Gọi · P | 01/P18 · `draconis` | Draconis Phượng Long | Front = `games/typing-defense/art-src/heroes/draconis.png`<br>Left = `games/typing-defense/art-src/heroes/draconis-side.png`<br>Back = `games/typing-defense/art-src/heroes/draconis-back.png` | 30000 | Tự rig Blender | Hero_Fly, Hero_Idle_Hover, Hero_Boost, Hero_Attack_L, Hero_Attack_R, Hero_Attack_Both, Hero_Cast, Hero_Hit, Hero_Death, Hero_Victory, Hero_Intro; Hero_Skill1, Hero_Skill2, Hero_Ult, Hero_Takeoff, Hero_Land, Hero_Perch_Assist | Rồng chữ ký có cánh; rig Tripo ngăn build_winged_rig, cần clip bay và chồng lớp toàn thân. | `games/typing-defense/art-src/3d/heroes/draconis.glb` | 015 kiểm trên máy: đã có đủ Front/Left/Back và prompt; README-tripo ghi dùng guides/draconis-v4. Không sinh lại vì trạng thái chờ cũ. |
+| Lời Gọi · VS | 01-VS/VS11 · `dai-bang-tinh` | Boss Đại Bàng Tinh | Left = `games/typing-defense/art-src/bosses/dai-bang-tinh.png`<br>Front = `games/typing-defense/art-src/bosses/dai-bang-tinh-front.png` | 30000 | Tự rig Blender | Boss_Intro, Boss_Idle, Boss_Move, Boss_Attack, Boss_Skill.snatch, Boss_Skill.gale, Boss_Skill.quill, Boss_Skill.steal, Boss_Channel, Boss_Stun, Boss_Hit, Boss_Phase, Boss_Death | Boss có cánh, sà cắp và bão cánh; cần clip bay và chồng lớp toàn thân. | `games/typing-defense/art-src/3d/bosses/dai-bang-tinh.glb` | chờ ảnh |
+
+## 4. Thứ tự làm đề xuất
+
+1. **Duyệt mẫu Rồng trước: E09 → E18 → E01.** Chốt dấu Héo A/B và ảnh chính/phụ theo README §2; HT-A/HT-B chỉ là ảnh thử, không gửi Tripo. E09 dùng nhóm 6000 · Tripo Biped; E18 dùng 6000 · tự rig Blender; E01 dùng 5000 · tự rig Blender. Chủ dự án duyệt hình model, Claude làm clip mẫu rồi duyệt chuyển động trước khi dựng hàng loạt sinh vật còn lại.
+2. **Sau cổng mẫu, làm hết P đang thiếu:** Draconis 30000 · Blender, Trại Lính 10000 · Blender; hai Rainbow 6000 · không rig có thể làm cùng đợt vì đã có ảnh. Trại Lính chờ đưa ảnh `barracks-v2.png` từ máy Mac về đường dẫn trong bảng.
+3. **Gom theo từng cặp thiết lập §3:** 6000 · Tripo Biped (E11, U1 sau E09); các nhóm Blender theo face limit tăng dần; các nhóm không rig 2000 → 4000 → 5000 → 6000 → 8000 → 10000. Đổi face limit hoặc cách rig thì sang nhóm mới. Prop Rồng không phụ thuộc dấu Héo, có thể làm trong lúc chờ duyệt sinh vật.
+4. **Bậc VS làm sau P**, vẫn theo đúng các cặp face limit/rig đã gom chung. Cùng nhóm có cả Rồng và TD thì giữ riêng ảnh tham chiếu/phong cách, không dùng ảnh game này làm tham chiếu cho game kia.
+5. **Tu Tiên:** chỉ xếp lịch sau khi có canon mỹ thuật và danh sách M0b. Không chi credit dựa trên tài liệu đánh giá cũ.
+
+## Ưu tiên Lời Gọi đợt 2 (26/10/2026)
+
+`typing-game-handoff-2026-10-25/tripo-upload-dot2/` có 92 ảnh của 87 model Lời Gọi, đã xếp mức cần theo [ART_ACCEPTANCE.md](ART_ACCEPTANCE.md) §3. Bảng đủ, thứ tự và lý do ở [`INDEX.md`](../../typing-game-handoff-2026-10-25/tripo-upload-dot2/INDEX.md), mục "Ưu tiên (26/10/2026)". Cần gửi 86 model; Trại Lính không làm lại (dưới đây).
+
+**Thư mục handoff không được vào Git, nhưng `.gitignore` chưa loại nó.** Lúc kiểm (26/10) cả `typing-game-handoff-2026-10-25/` chưa track, có 420 PNG, 55 GLB, 3 BIN. Chạy `git add -A` hay `git add .` ở repo cha sẽ đưa media vào Git. Chỉ add từng file văn bản cần; nên thêm dòng `typing-game-handoff-2026-10-25/` vào `.gitignore`.
+
+| Mức | Model | Credit (30 mỗi model, chưa tính rig) |
+|---|---:|---:|
+| P1 | 7 | 210 |
+| P2 | 41 | 1.230 |
+| P3 | 38 | 1.140 |
+| **Cộng** | **86** | **2.580** |
+
+**P1, làm trước** (game đang có, cảnh 3D 1C của bản đồ 1 cần, chưa có GLB):
+1. Draconis Phượng Long (`loigoi_draconis`, multiview, face 30000, không bấm rig).
+2. Lông lửa Draconis (`loigoi_fire-feather`): Tối Thượng có trong truyện từ Ngày 3.
+3. Giàn tre (`loigoi_scaffold-bamboo`): công trường của mọi nhà.
+4. Cầu gỗ (`loigoi_cau-go`): 2 cầu qua suối của bản đồ hiện tại.
+5. Vách Thác Bạc (`loigoi_vach-thac-bac`): Khe Nứt, chỗ quái ra và Mộc Tinh trồi lên.
+6. Rìu Chú Tiều (`loigoi_worker-kit-tieu-axe`): dân chặt cây.
+7. Nón lá Cô Mạ (`loigoi_worker-kit-ma-head`): nông dân của Ruộng.
+
+**Trại Lính: không làm lại.** `games/typing-defense/art-src/3d/buildings/barracks.glb` đã là bản Tripo dựng từ `barracks-v2.png` ngày 24/10 (`wooden+fortress+3d+model2410.glb`). Chấm lại 26/10: hai người 9,5 và 9, điểm 9,5/10, Đạt, mức cần P2 (1C cần 6 nhà bậc P). Đạt thì dùng (ART_ACCEPTANCE §2): không gửi Tripo, không tốn credit, không ghi ART_REPLACE_LATER.md. Việc còn lại là của Claude ([ART_FIX_QUEUE.md](ART_FIX_QUEUE.md) §1): chạy lại preset `buildings/barracks` (bản trong `public/` vẫn là nhà 1,8 m cũ), sửa ảnh nguồn và `downloadedAs` cũ trong `SOURCES.json`. Dòng 02/P5 ở §3, câu "1 bản làm lại Trại Lính" ở §1 và mục 2 của §4 trên đây đã cũ.
+
+**Mức P2 của tám ảnh nguồn 3D VS.** K04, K10, K13 (đồ nghề tổ thợ), V18 (Ruộng cấp 2), V36, V37 (hai nhánh Mỏ Vàng), V68 (lông Đại Bàng Tinh), V69 (hạt Mộc Tinh) nằm ở P2 của INDEX. ART_REPLACE_LATER.md, ART_FIX_QUEUE.md và IMAGE_AUDIT §7 cũng ghi P2. V18, V37, V69 là ảnh Tạm chấp nhận: làm bước "trước Tripo" ở ART_FIX_QUEUE.md §5.1 rồi gửi file mới trong `art-src`, không gửi bản trong thư mục handoff.
+
+**Bốn ảnh Trại Lính P2 đã chấm (26/10):** bộ cấp 2, 3 (V14, V15) và hai nhánh Khiên Đồng, Giáo Dài (V34, V35) vẽ theo `barracks.png` cũ, nên được chấm so với `barracks-v2.png` và render `barracks.glb` (hai người độc lập, người thứ ba cho V15, V34, V35):
+- V14 bộ cấp 2 (INDEX P2 #38): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: thu nhỏ đều, đặt vào dải sân phải trong rào `barracks.glb`, render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
+- V15 bộ cấp 3 (#39): **8, Tạm chấp nhận.** Gửi ảnh hiện có (face 4000, không rig). Sau khi có GLB: chỉnh tỉ lệ từng trục cho mái ngói chụp kín mái rơm `barracks.glb` (nâng Z khoảng 15–25 %), render ba góc rồi chấm lại. Đã ghi ART_REPLACE_LATER.md.
+- V34 nhánh Khiên Đồng (#40): **6,5, Tạo lại P2.** V35 nhánh Giáo Dài (#41): **5,5, Tạo lại P2.** Cả hai chỉ cao khoảng nửa tháp v2, luật 02 §8 cấm kéo dãn riêng chiều cao, nên không ghép được. Không gửi bản hiện có; vẽ lại 2D một lần theo `barracks-v2.png` (ART_FIX_QUEUE.md §3), từ 7 điểm mới gửi Tripo face 10000. **27/10, đã vẽ lại một lần (Codex 015c):** V34 bản mới 8, V35 bản mới 7,5, cả hai tạm chấp nhận, cao 79 % và 77 % tháp v2 cùng bề ngang chân; ảnh trong `tripo-upload-dot2` đã thay bằng bản mới, gửi Tripo được. Bản 26/10 giữ đuôi `.v1.png`.
+
+## 5. Việc sau khi có GLB
+
+Đây là hướng dẫn cho lượt nhận model sau; phiếu này chỉ lập danh sách, chưa tạo ảnh, model, rig hay đẩy media.
+
+1. Đổi tên và chép GLB gốc vào đúng cột **Nơi lưu GLB gốc** (`art-src/3d/…`). Không đặt vào `public/assets/…` hoặc dùng file đã giảm mặt làm bản gốc. Trại Lính mới vẫn đích `games/typing-defense/art-src/3d/buildings/barracks.glb`: giữ bản cũ riêng trước khi thay theo changelog; không tạo thêm id runtime `barracks-v2`.
+2. Trong **WSL Ubuntu**, tại gốc repo `/mnt/d/typing-game`, cập nhật danh mục của game vừa nhận GLB, rồi sao lưu:
+
+   ```bash
+   pnpm models:index --root games/dragon-hold
+   pnpm models:index --root games/typing-defense
+   # Hai Rainbow được dùng chung từ Space:
+   pnpm models:index --root games/space-typing
+   pnpm media:push
+   ```
+
+   Chỉ chạy dòng index tương ứng game có GLB mới; mẫu tổng quát là `pnpm models:index --root games/<game>`. Không index hai Rainbow dưới `games/typing-survival`: game đó dùng `/assets/space-typing/models/`. Cấu hình hiện tại `media/media.config.json` đã liệt kê cả bốn game; lời nhắc cũ “media chỉ quét Space” đã lỗi thời.
+3. **Model tự rig: báo Claude** game, id, GLB gốc, ảnh chính/phụ, clip theo bảng, và “GLB chưa có xương”. Claude đo lại lưới rồi làm preset riêng, không coi preset của loài khác là đã tương thích. Bản xử lý xuất riêng vào `art-src/models/…`, giữ nguyên GLB Tripo.
+4. Với Tripo Biped, báo đã có rig và các clip thực tế xuất được. Blender ánh xạ tên clip, thêm socket, chuẩn hướng/cỡ/gốc, khóa chuyển động gốc nếu trượt; rig hỏng thì dùng bản không xương. Với model không rig, chạy pipeline tĩnh; các clip co giãn/cả vật của S1 không cần thêm xương.
+5. Duyệt ảnh model và chuỗi khung clip trong góc camera game trước khi đưa vào manifest. Kiểm chân trụ, giãn lưới, vùng dính tay/thân, cánh, socket và nhịp đòn. Việc index/sao lưu không thay cho chuẩn bị và tích hợp runtime.
+
+### 5.1. Công cụ Blender đã có
+
+| Công cụ | Dùng cho lượt nhận GLB |
+|---|---|
+| `games/typing-defense/scripts/models/blender/td_rig_tools.py` | Nhập model không xương, chuẩn hướng/cỡ, xương, vùng trọng lượng, socket; dùng xương Mesh2Motion và xích phụ theo preset. |
+| `games/typing-defense/scripts/models/blender/td_rig_clips.py`, `td_rig_creatures.py`, `td_rig_post.py`, `td_rig_attach.py` | Chuyển clip người CC0, clip theo khóa, rắn/khối mềm, lớp chuyển động, IK, lò xo đuôi/tai/áo, đồ cầm. Cần thêm preset/clip cho loài mới. |
+| `games/typing-defense/scripts/models/blender/td_rig_review.py`, `td_rig_compare.py` | Đo giãn cạnh, tam giác sập, trượt chân, đầu cứng và mối nối vòng lặp; ảnh camera game và thử tư thế khó. |
+| `games/space-typing/scripts/models/blender/space_typing_model_tools.py` | `build_winged_rig`, `make_flight_clips`, `make_dragon_clips`, `make_guide_clips`; `rigid_islands` trong cấu hình vùng tách giúp các mảnh gai/vảy/lông rời theo một xương, tránh kéo giãn thành mảnh dài. Không phải rig dùng được ngay cho mọi côn trùng. |
+| `scripts/models/blender/static_model_tools.py` | Model tĩnh: nhập gộp đỉnh ở đường nối UV, hướng/cỡ/gốc, giảm mặt, vật liệu, socket, xuất bản xử lý; không nhận model đã có armature. |
+
+### 5.2. Có GLB rồi, không gửi Tripo tạo lại
+
+Các mục dưới đây là việc **rig/clip/duyệt**, không nằm trong 143 lượt và không cộng credit rig Tripo:
+
+| Model / nhóm | Hiện trạng và việc tiếp theo | Cách rig / lý do |
+|---|---|---|
+| Lam `heroes/lam` | Có GLB gốc, đã có rig/clip Blender và bản sửa duyệt 24/10. | Blender: rig Tripo cũ gắn 14.071/14.132 đỉnh cứng vào Hips, không dùng lại. |
+| Cương Thi, Lính Giáo, Tanuki, Troll | Có GLB gốc; đã có pipeline rig, còn các mục chủ dự án duyệt bằng mắt trong README công cụ. | Blender: nhảy cứng, tay đồ cầm, đuôi/lá/váy và clip đặc thù đã có; không mua lại rig. |
+| Nuppeppō, Thuồng Luồng, Mầm Gỗ, Thư Đồng | Có GLB gốc và preset/clip; changelog ghi kiểm lô sinh vật, một số kiểm chỉ ở chế độ xương hoặc không xuất. | Blender: khối mềm, rắn chuỗi, cây và cánh cần dáng riêng; không coi kết quả kiểm xương là đã duyệt mọi clip. |
+| Alicanto `enemies/alicanto` | Có GLB gốc; tiếp tục rig cánh/clip nếu bản chạy chưa đủ. | Blender: chim bay, cần vỗ cánh và clip riêng; không tạo lại chỉ vì thiếu animation. |
+| Mộc Tinh `bosses/moc-tinh` | Có `games/typing-defense/art-src/3d/bosses/moc-tinh.glb`. Changelog 24/10 mới có Boss_Idle, chưa có bản xuất hoàn chỉnh. Tiếp tục Rễ Trồi, Quật cành, choáng, rút lui và kiểm bản xuất. | Blender: boss cây yêu, tán/rễ chuyển động chồng lớp; GLB gốc đã có. |
+| Xe goòng `props/gold-mine-cart`, Rễ Trồi `projectiles/root-burst` | Cả hai có tên trong SOURCES và có GLB thật trên máy. Không yêu cầu dựng lại. | Không rig riêng: goòng chạy cả vật trên ray; rễ trồi/rút cả model theo runtime. |
+| Lũy/các nhà hiện có, rương và đồ gắn | Giữ model đã có; tách cánh cổng Lũy, nắp rương và làm clip theo bước Blender còn thiếu của README. | Blender cho khớp cổng/nắp rương; phần nhà/đồ tĩnh không rig. Đây là xử lý GLB hiện có, không phải lượt tạo model mới. |
+
+## 6. Tu Tiên Thủ Ải và những mục chưa chốt
+
+### 6.1. Tu Tiên Thủ Ải · Phiếu 007 (25/10/2026)
+
+**Đã có canon và bộ nguồn M0b.** Nguồn thắng: [00-canon.md](tu-tien/00-canon.md) §0, §2, §8–12, §14.5, §20–21, D03/D23/D27/D36; [bộ prompt](tu-tien/art-requests/m0b/README.md); [báo cáo ảnh](../../games/immortality-cultivation/art-src/README-m0b.md). Mọi ảnh phục vụ dựng 3D hoặc duyệt vật liệu 3D; không dùng ảnh cảnh/bán thân làm model.
+
+**19 GLB duy nhất:** 14 GLB ước trong canon §21.3 + 4 cơ quan §8.3 + Hậu Thổ Ấn §14.5. **1 Tripo Biped, 7 tự rig Blender, 11 không rig; 20 credit rig theo quy ước §1.1, chưa gồm tạo model.** Bot/tướng/tinh anh/biến chủng dùng chung GLB, không cộng thêm model hoặc phí rig. Face limit dưới đây là **đề xuất tạo nguồn Tripo** của phiếu, không thay ngân sách runtime canon.
+
+**Hiện vật: 40 đầu ra image_gen = 38 ảnh danh mục + 2 bản đầu bị loại.** Trong 38 ảnh danh mục, góc T03-S sau thử lại vẫn không đạt; Hỏa Nha chỉ dùng Front. Nguồn chính có cho 18/19 model; Hậu Thổ Ấn chờ PNG. Mọi nguồn cần chuẩn hóa nền về #E6E6E6 trước gửi Tripo: đã đo thấy nền xám lệch nhẹ và dao động, chưa xác nhận đạt nền phẳng tuyệt đối. Ảnh hiện diện chưa thay duyệt mỹ thuật.
+
+Các dòng Tu Tiên “chờ canon” và tổng 143 ở ngoài mục này là trạng thái trước Phiếu 007, được giữ nguyên theo phạm vi sửa; **không dùng chúng để thao tác Tu Tiên**. Cộng riêng danh mục Tu Tiên mới là 19, chưa cộng lại các tổng toàn file.
+
+Trước khi làm hàng loạt, anh duyệt hai ảnh bản sắc rồi ba model mẫu **Kiếm tu, Phong Lang, Thiết Bối Lang Vương** và chuyển động (canon §21.2). Tiếp tục hướng **3D trước, có đo**: người/bot/tướng/Vương/chiêu lớn giữ 3D; bầy 3D nếu HN0 đạt, chỉ phần trượt D36 mới xuống impostor nướng cùng GLB. Phiếu này không xác nhận HN0 hoặc HN1.
+
+#### Model cần dựng
+
+| Mã · id | Ô ảnh Multiview / Image to 3D · đường dẫn | Face limit | Cách rig kèm lý do | Clip cần có | Nơi lưu GLB gốc | Trạng thái ảnh |
+|---|---|---:|---|---|---|---|
+| NV01-F · `kiem-tu` | Multiview: Front = `games/immortality-cultivation/art-src/cultivators/kiem-tu.png`; Back = `games/immortality-cultivation/art-src/cultivators/kiem-tu-back.png` | 20000 | Tự rig Blender. Nhân vật chữ ký; dáng đi bộ, áo xẻ và động tác Kiếm riêng. | Idle, Run, Cast_Short, Cast_Heavy, Dash, Hit, Down, Victory | `games/immortality-cultivation/art-src/3d/cultivators/kiem-tu.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| V01-S · `thiet-boi-lang-vuong` | Multiview: Left = `games/immortality-cultivation/art-src/kings/thiet-boi-lang-vuong.png`; Front = `games/immortality-cultivation/art-src/kings/thiet-boi-lang-vuong-front.png` | 30000 | Tự rig Blender. Thú Vương bốn chân; vồ, húc, chuyển pha và ngã riêng. | Idle, Move, Pounce, Howl_Summon, Charge_Windup, Charge, Hit, Stagger, Phase_Change, Death | `games/immortality-cultivation/art-src/3d/kings/thiet-boi-lang-vuong.glb` | Có 2 góc; Front đã sửa một lần. Bỏ file rejected-1; chờ duyệt/nền. |
+| T01-S · `thach-thu` | Multiview: Left = `games/immortality-cultivation/art-src/beasts/thach-thu.png`; Front = `games/immortality-cultivation/art-src/beasts/thach-thu-front.png` | 4000 | Tự rig Blender. Bốn chân, cắn; cần chu kỳ bầy ổn định để nướng VAT. | Idle, Move, Attack, Death (Move: chạy; Attack: cắn) | `games/immortality-cultivation/art-src/3d/beasts/thach-thu.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| T02-S · `phong-lang` | Multiview: Left = `games/immortality-cultivation/art-src/beasts/phong-lang.png`; Front = `games/immortality-cultivation/art-src/beasts/phong-lang-front.png` | 6000 | Tự rig Blender. Bốn chân, cắn và vồ; chung rig với Lang Đầu Đàn. | Idle, Move, Attack, Death (Move: chạy; Attack: cắn/vồ) | `games/immortality-cultivation/art-src/3d/beasts/phong-lang.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| T03-F · `hoa-nha` | Image = `games/immortality-cultivation/art-src/beasts/hoa-nha.png`; Left **không dùng** = `games/immortality-cultivation/art-src/beasts/hoa-nha-side.png` (cánh chưa khớp) | 5000 | Tự rig Blender. Cánh, bay và bổ nhào; không dùng Biped/Quadruped Tripo. | Idle, Move, Attack, Death (Idle: lơ lửng; Move: bay; Attack: bổ nhào; Death: rơi) | `games/immortality-cultivation/art-src/3d/beasts/hoa-nha.glb` | Có Front; góc Left đã thử lại một lần vẫn sai cánh, không dùng Multiview. Chờ duyệt/nền. |
+| T04-F · `nham-vien` | Multiview: Front = `games/immortality-cultivation/art-src/beasts/nham-vien.png`; Back = `games/immortality-cultivation/art-src/beasts/nham-vien-back.png` | 8000 | Tự rig Blender. Tỉ lệ tay dài của Viên và clip ném riêng; không phải người chuẩn. | Idle, Move, Attack, Death (Move: bước nặng; Attack: ném) | `games/immortality-cultivation/art-src/3d/beasts/nham-vien.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| T05-S · `thiet-giap-tru` | Multiview: Left = `games/immortality-cultivation/art-src/beasts/thiet-giap-tru.png`; Front = `games/immortality-cultivation/art-src/beasts/thiet-giap-tru-front.png` | 8000 | Tự rig Blender. Bốn chân, húc và chiếm nhãn; chuyển trọng lượng phải đúng. | Idle, Move, Attack, Death (Attack: húc; chuẩn bị và lao tách nhịp) | `games/immortality-cultivation/art-src/3d/beasts/thiet-giap-tru.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| NV02-F · `tho-the-tu` | Multiview: Front = `games/immortality-cultivation/art-src/cultivators/tho-the-tu.png`; Back = `games/immortality-cultivation/art-src/cultivators/tho-the-tu-back.png` | 10000 | Tripo Biped · 20 credit. Người hai chân chuẩn, áo ngắn; rig cơ bản đủ, Blender thêm chiêu Thổ. | Idle, Run, Cast_Short, Cast_Heavy, Dash, Hit, Down, Victory | `games/immortality-cultivation/art-src/3d/cultivators/tho-the-tu.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| P01 · `tran-tam` | Image to 3D = `games/immortality-cultivation/art-src/props/tran-tam.png` | 10000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/props/tran-tam.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| P02 · `tran-tru` | Image to 3D = `games/immortality-cultivation/art-src/props/tran-tru.png` | 8000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/props/tran-tru.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| P03 · `cong-ai` | Image to 3D = `games/immortality-cultivation/art-src/props/cong-ai.png` | 10000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/props/cong-ai.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| P04 · `da-voi` | Image to 3D = `games/immortality-cultivation/art-src/props/da-voi.png` | 6000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/props/da-voi.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| P05 · `tung-co` | Image to 3D = `games/immortality-cultivation/art-src/props/tung-co.png` | 10000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/props/tung-co.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| CQ01 · `kiem-thung` | Image to 3D = `games/immortality-cultivation/art-src/mechanisms/kiem-thung.png` | 6000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/mechanisms/kiem-thung.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| CQ02 · `loi-phu-tru` | Image to 3D = `games/immortality-cultivation/art-src/mechanisms/loi-phu-tru.png` | 6000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/mechanisms/loi-phu-tru.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| CQ03 · `phong-an-vong` | Image to 3D = `games/immortality-cultivation/art-src/mechanisms/phong-an-vong.png` | 6000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/mechanisms/phong-an-vong.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| CQ04 · `me-vu-tran` | Image to 3D = `games/immortality-cultivation/art-src/mechanisms/me-vu-tran.png` | 5000 | Không rig. Đồ tĩnh; hiệu ứng và di chuyển cả vật do runtime, không có khớp. | — | `games/immortality-cultivation/art-src/3d/mechanisms/me-vu-tran.glb` | Có; chờ anh duyệt và chuẩn hóa nền. |
+| PB01-F · `thanh-phong-kiem` | Image = `games/immortality-cultivation/art-src/treasures/thanh-phong-kiem.png`; Left còn thiếu = `games/immortality-cultivation/art-src/treasures/thanh-phong-kiem-side.png` | 4000 | Không rig. Đạn và pháp bảo gắn cứng; bay bằng runtime, 150/300/500 bản dùng chung mesh. | — | `games/immortality-cultivation/art-src/3d/treasures/thanh-phong-kiem.glb` | Có mặt chính; góc cạnh thiếu vì trần 40. Dùng Image to 3D; chờ duyệt/nền. |
+| PB02 · `hau-tho-an` | Image to 3D = `games/immortality-cultivation/art-src/treasures/hau-tho-an.png` | 4000 | Không rig. Pháp bảo tĩnh; gắn socket hoặc chuyển động cả vật. | — | `games/immortality-cultivation/art-src/3d/treasures/hau-tho-an.glb` | Chờ PNG, đã có prompt; lùi vì trần 40. |
+
+- **Blender:** tạo hình ở Tripo nhưng không bấm rig, tải GLB không xương. Áp cho Kiếm tu chữ ký, bốn chân có cắn/vồ/húc, Nham Viên tay dài, Hỏa Nha có cánh và Thú Vương. Không mua Quadruped hoặc thử trả rig nhiều lần.
+- **Thổ thể tu:** người hai chân chuẩn, tư thế A → Tripo Biped một lần 20 credit theo §1.1; Idle/Run và clip người cơ bản chọn gần nghĩa trong thư viện. Cast_Heavy, Dash, Down, Victory hoặc chiêu riêng thiếu thì Blender bổ sung. Rig lỗi: tải GLB không xương.
+- **Đồ tĩnh:** không rig. Phi kiếm bay bằng runtime, cơ quan ở trạng thái bất động; sét/lưới/sương/giáp nứt là runtime/shader. Không có khớp cơ khí trong thiết kế nguồn của phiếu.
+- **Clip:** tên trong bảng là mục tiêu runtime/Blender, không khẳng định đều có preset Tripo. Thú có Idle/Move/Attack/Death; Move có thể là chạy/bay/bước, Attack là cắn/vồ/húc/ném/bổ nhào theo loài. Tướng thêm Howl_Summon/Hit/Intro/Stagger trên rig sói; Vương đủ 10 clip như bảng.
+- **LOD sau dựng:** đám đông ≤1.000/1.800/3.000 tam giác Low/Medium/High; người 8.000–30.000; Vương 12.000–45.000; phi kiếm 300–800. “Vạn kiếm” của **Thiên Hà Kiếm Vũ** dùng chung một mesh 150/300/500 bản theo §20.2, không dựng một GLB cho mỗi kiếm.
+
+#### Mẫu dùng chung GLB · không tạo model mới
+
+Ảnh dưới chỉ duyệt màu, cỡ và thứ bậc. Giữ đúng lưới gốc; hào quang, Ấn, hồi phục và biểu tượng hệ làm trong runtime, không có trong ảnh nguồn. Không gửi các mẫu này để tạo thêm GLB; cột ô ảnh chỉ chỉ góc đối chiếu.
+
+| Mã · id | Ô ảnh đối chiếu · đường dẫn | Face limit gốc | Rig kèm lý do | Clip cần có | GLB dùng chung | Trạng thái ảnh |
+|---|---|---:|---|---|---|---|
+| TG01-S · `lang-dau-dan` | Left = `games/immortality-cultivation/art-src/commanders/lang-dau-dan.png`; Front = `games/immortality-cultivation/art-src/commanders/lang-dau-dan-front.png` | 6000 (không tạo thêm) | Dùng rig Phong Lang trong Blender. Chung GLB Phong Lang theo canon §21.2; thêm clip Tru Đàn, không dựng model mới. | Idle, Move, Attack, Death, Howl_Summon, Hit, Intro, Stagger | `games/immortality-cultivation/art-src/3d/beasts/phong-lang.glb` | Có 2 góc mẫu; chờ duyệt màu/nền. |
+| BOT01-F · `bot-dao-dong-tho` | Front = `games/immortality-cultivation/art-src/bots/bot-dao-dong-tho.png`; Back = `games/immortality-cultivation/art-src/bots/bot-dao-dong-tho-back.png` | 10000 (không tạo thêm) | Dùng rig Thổ thể tu. Bot dùng trường phái còn lại, chỉ đổi màu áo; không dựng hoặc rig thêm. | Idle, Run, Cast_Short, Cast_Heavy, Dash, Hit, Down, Victory | `games/immortality-cultivation/art-src/3d/cultivators/tho-the-tu.glb` | Có 2 góc mẫu; chờ duyệt màu/nền. |
+| TA01-S · `phong-lang-cuong` | Left = `games/immortality-cultivation/art-src/elites/phong-lang-cuong.png`; Front = `games/immortality-cultivation/art-src/elites/phong-lang-cuong-front.png` | 6000 (không tạo thêm) | Dùng rig Phong Lang. Cuồng là thuộc tính; cùng GLB, chỉ đổi chất liệu và cỡ ×1,25. | Idle, Move, Attack, Death | `games/immortality-cultivation/art-src/3d/beasts/phong-lang.glb` | Có 2 góc mẫu; chờ duyệt màu/nền. |
+| TA02-S · `thiet-giap-tru-thiet-bi` | Left = `games/immortality-cultivation/art-src/elites/thiet-giap-tru-thiet-bi.png`; Front = `games/immortality-cultivation/art-src/elites/thiet-giap-tru-thiet-bi-front.png` | 8000 (không tạo thêm) | Dùng rig Thiết Giáp Trư. Thiết Bì là chất liệu trên lưới gốc; không thêm giáp hình học. | Idle, Move, Attack, Death | `games/immortality-cultivation/art-src/3d/beasts/thiet-giap-tru.glb` | Có 2 góc mẫu; chờ duyệt màu/nền. |
+| TA03-S · `phong-lang-hoi-nguyen` | Left = `games/immortality-cultivation/art-src/elites/phong-lang-hoi-nguyen.png`; Front = `games/immortality-cultivation/art-src/elites/phong-lang-hoi-nguyen-front.png` | 6000 (không tạo thêm) | Dùng rig Phong Lang. Hồi Nguyên là thuộc tính; giữ GLB và rig gốc. | Idle, Move, Attack, Death | `games/immortality-cultivation/art-src/3d/beasts/phong-lang.glb` | Có 2 góc mẫu; chờ duyệt màu/nền. |
+| BT01-S · `dang-thu` | Left = `games/immortality-cultivation/art-src/variants/dang-thu.png`; Front = `games/immortality-cultivation/art-src/variants/dang-thu-front.png` | 4000 (không tạo thêm) | Dùng rig Thạch Thử. Cùng GLB, đổi vật liệu Mộc, từ trận 4 theo D23. | Idle, Move, Attack, Death | `games/immortality-cultivation/art-src/3d/beasts/thach-thu.glb` | Chờ 2 PNG, đã đủ prompt; lùi vì trần 40. |
+| BT02-F · `khe-vien` | Front = `games/immortality-cultivation/art-src/variants/khe-vien.png`; Back = `games/immortality-cultivation/art-src/variants/khe-vien-back.png` | 8000 (không tạo thêm) | Dùng rig Nham Viên. Cùng GLB, đổi vật liệu Thủy; M1 theo D23. | Idle, Move, Attack, Death | `games/immortality-cultivation/art-src/3d/beasts/nham-vien.glb` | Chờ 2 PNG, đã đủ prompt; lùi vì trần 40. |
+
+**Còn lại vì trần 40:** PB01-S (cạnh Thanh Phong Kiếm), PB02 (Hậu Thổ Ấn), BT01-S/F (Đằng Thử, Mộc), BT02-F/B (Khê Viên, Thủy, M1). T03-S là góc đã thử lại nhưng còn lỗi, không tính vào sáu ảnh chưa tạo. Phù, pet và thú sau MVP chưa chốt hình, không tự mở danh mục. Hai ảnh bản sắc nằm ở `games/immortality-cultivation/art-src/identity/`, không gửi thẳng Tripo.
+
+**Anh cần xem:** hai ảnh bản sắc và tên game; ba mẫu/clip trước lô lớn; chuẩn hóa nền; bỏ góc Hỏa Nha sai; dáng Thạch Thử, mái Cổng ải, tán Tùng cổ, bình Mê Vụ Trận và dấu tinh anh. Chưa tạo GLB, chưa chi credit hoặc đổi runtime. Media nằm tại art-src, được art-src/.gitignore bỏ qua; sao lưu và cấu hình media giao anh kiểm sau.
+
+Bậc “Sau” của TD (§12 file 01, §7 file 02): các thế giới 2–5, bộ Trợ Thủ/thợ mới, trang phục, bộ skin thế giới và CGI dựng sẵn chưa có bộ id/ảnh đầy đủ. CGI dùng lại model, Bà Cú Mực và người đón ở Thư Thành dùng tranh 2D. Chỉ VS đã định danh đủ 115 model được đưa vào bảng; không biến các nhóm ý tưởng thành model mới tự đặt tên.
+
+Rồng M0 không gồm Bệ Rồng, Hỏa Long mới hay 5 prop M2. Bệ dùng khối tạm theo README §7; 8 ô đất, 4 tấm decal, phông xa, 20 icon, HT-A/HT-B là ảnh dùng thẳng/thử dáng, không gửi Tripo. Vì vậy 67 ảnh của bộ M0 không đồng nghĩa 67 model.
+
+## 7. Nguồn và các chỗ mâu thuẫn
+
+### 7.1. Nguồn đối chiếu
+
+- Rồng: [README §2–3](dragon-lane/art-requests/m0/README.md), [01 sinh vật](dragon-lane/art-requests/m0/01-creatures.md), [02 phe ta](dragon-lane/art-requests/m0/02-allies-traps.md), [03 prop](dragon-lane/art-requests/m0/03-pine-river-props.md), [04 đất/decal/phông](dragon-lane/art-requests/m0/04-2d-ground-decals-backdrop.md), [05 icon](dragon-lane/art-requests/m0/05-icons.md).
+- Lời Gọi: [SOURCES hiện tại](../../games/typing-defense/art-src/3d/SOURCES.json), [README công cụ model](../../games/typing-defense/scripts/models/README.md), [changelog rig sinh vật](../../games/typing-defense/docs/changelog/2026-10-24-models-creature-rigs.md), [changelog sửa rig và Trại Lính](../../games/typing-defense/docs/changelog/2026-10-24-models-rig-fixes.md).
+- Bộ yêu cầu TD trước khi tách game: [README](../../games/space-typing/docs/art-requests/td/README.md), [01 P](../../games/space-typing/docs/art-requests/td/01-tripo-characters-enemies.md), [02 P](../../games/space-typing/docs/art-requests/td/02-tripo-buildings-props.md), cùng [01 VS](../../games/space-typing/docs/art-requests/td/01-tripo-characters-enemies-vs.md), [02 VS](../../games/space-typing/docs/art-requests/td/02-tripo-buildings-props-vs.md) được hai file P dẫn tới.
+- Tuyến Cuối: [BUILD_S1 §1.1, §6, §12](../../games/typing-survival/docs/BUILD_S1.md), [BUILD_S0](../../games/typing-survival/docs/BUILD_S0.md), [kế hoạch](../../games/typing-survival/docs/SURVIVAL_MODE_PLAN.md), [BUILD_NOTES](../../games/typing-survival/docs/BUILD_NOTES.md), [preset model Space](../../games/space-typing/scripts/models/presets/campaign3d-models.json), [SOURCES Space](../../games/space-typing/art-src/3d/SOURCES.json), cùng `games/typing-survival/src/view/crowd.ts` để xác nhận id đang dùng.
+- Công cụ rig/tĩnh: các file §5.1; sao lưu: `media/media.config.json`. Canon Tu Tiên chờ đúng đường dẫn §6.
+
+### 7.2. Cách xử lý mâu thuẫn / thông tin cũ
+
+| Chỗ lệch | Kết luận dùng trong phiếu này |
+|---|---|
+| README Rồng §1 ghi “24 model (2 + 7 sinh vật, 5 phe ta, 12 prop)” | Hai ảnh thử Héo không phải model. Đếm đúng 24 dòng §3.2 = 7 địch (6 quái + G01) + 5 phe ta (U1, H1, TR1–TR3) + 12 prop. Không cộng thêm 2. |
+| README Rồng §2–3.2 từng chọn E18/E19 Quadruped, E01 Avian, E25 Hexapod, G01 Biped | Face limit và ảnh giữ nguyên. Luật phiếu này ưu tiên Blender cho cắn/vồ/húc, côn trùng/cánh và tướng có clip riêng. E09/E11/U1 giữ Tripo Biped. |
+| File 02 Rồng nói bẫy không rig, trồi gai bằng shader, quay cả trụ bằng mã | Phiếu này phân TR1/TR3 sang Blender để có khớp cử động theo luật bẫy; TR2 vẫn không rig. Tên clip/khớp là đề xuất cần Claude làm khi nhận GLB; runtime chưa đổi. |
+| README Rồng §4 nói thư mục game chưa có, ảnh ở Downloads, media chỉ quét Space | `games/dragon-hold/art-src/` đã có trên máy; bảng kiểm đúng các đường dẫn trong game. `media/media.config.json` đã có cả dragon-hold, typing-defense, typing-survival. Không dùng đường Downloads làm đích hiện tại. |
+| README công cụ TD và `SOURCES.history` còn nói xe goòng chưa có; file 01/02 P nói Rễ Trồi chưa có | Bảng `SOURCES.files` hiện có **41** GLB, gồm goòng và Rễ Trồi, đã đối chiếu tồn tại thật. Hai mục này không nằm trong lượt dựng. |
+| SOURCES TD có `notMadeYet: {}`, nhưng P18 và VS chưa có | SOURCES là kiểm kê file đã nhập, không phải danh mục thiết kế. Đối chiếu 42 P và 115 VS: thiếu Draconis P18 và toàn bộ VS; Trại Lính cũ có nhưng phải làm lại theo changelog. |
+| Prompt TD cũ dùng `games/space-typing/art-src/td/…`, manifest `/assets/td/…` và nhiều rig Tripo | Theo nguồn game đã tách, ảnh TD dùng `games/typing-defense/art-src/…`, GLB dùng `art-src/3d/…`; rig theo luật phiếu và công cụ mới. Không giữ đoạn `td/` thừa, không chép đè media của Space. |
+| Trại Lính cũ 1,8 m; ảnh mới chỉ được ghi ở `~/Downloads/td-tripo-2d/buildings/barracks-v2.png` trên Mac | Ghi “chờ ảnh” tại đích repo; không lấy `barracks.png` cũ thay ảnh làm lại. Model đích vẫn `barracks.glb`, face limit 10000. Rig cổng Blender là lựa chọn của phiếu, không phải yêu cầu bấm auto rig nhà trong Tripo. |
+| Changelog TD ghi Mộc Tinh chưa có GLB đã rig; SOURCES lại có GLB | Hai loại file khác nhau: gốc `art-src/3d/bosses/moc-tinh.glb` đã có; bản rig `art-src/models/…` và clip hoàn chỉnh là việc Blender. Không yêu cầu tạo lại. |
+| S1 nói scout/tank đã sẵn, đồng thời gọi chúng là bản sao tạm của Prism | Manifest có bản chạy giữ chỗ; GLB gốc `enemies/rainbow-scout.glb`, `enemies/rainbow-tank.glb` chưa có. Chỉ hai bản gốc thiếu được đưa vào bảng. Preset còn chỉ rõ tank tạm lấy **prism-scout**, không suy thành prism-tank. |
+| S1 không quy định face limit Tripo cho hai Rainbow; phần lớn chỉ có Idle | Đề xuất 6000 theo ngân sách preset Space, đánh dấu rõ ở §1.1. Không rig vì chuyển động S1 là shader instanced; không tự thêm yêu cầu rig boss/Tổ đã có. |
+| Mức chung TD nói phần nhánh 4000; bảng VS có nhánh 10000 và `keep-kit-l2` 8000 | File VS ghi rõ nhánh là công trình trọn, nên theo mức riêng từng dòng: 10000; vòng tường Lũy L2 là 8000. Không hạ tất cả về 4000. |
+
+**Chủ dự án cần xem:** ba model mẫu Rồng và dấu Héo A/B; ảnh Trại Lính mới cần đưa về máy này; các lựa chọn khớp bẫy/cổng và clip đặc thù giao Blender; face limit đề xuất 6000 cho Rainbow. Tu Tiên tiếp tục chờ canon.
+

@@ -1,0 +1,122 @@
+# SPACE ACADEMY — Detailed Plans V2 (Self-Reviewed)
+
+**Date:** 2026-10-09
+**Detailed section files:** 106
+
+## V2 corrections
+
+- Removed automatic keyword-based domain classification.
+- Assigned one explicit primary owner/domain per section.
+- Secondary domains are integrations only; their DB/UI rules are no longer merged blindly.
+- Concept/principle/example files no longer invent dedicated schemas.
+- Added explicit scope, data ownership, performance, safety and review guardrails.
+- Preserved every original section from the consolidated source.
+
+## Files
+
+- [0. Executive Summary](./000_executive_summary.md) — primary `product`
+- [1. Product Reframing](./001_product_reframing.md) — primary `product`
+- [2. What We Borrow From Online Games — And What We Do Not](./002_what_we_borrow_from_online_games_and_what_we_do_not.md) — primary `product`
+- [3. Core Product Principles](./003_core_product_principles.md) — primary `product`
+- [4. Target User Personas](./004_target_user_personas.md) — primary `product`
+- [5. Experience Styles](./005_experience_styles.md) — primary `product`
+- [6. School / Academy as the Organizing Metaphor](./006_school_academy_as_the_organizing_metaphor.md) — primary `classroom`; integrates `product`
+- [7. Space Academy Areas](./007_space_academy_areas.md) — primary `product`
+- [8. Class System](./008_class_system.md) — primary `classroom`; integrates `social`
+- [9. Teacher Roles](./009_teacher_roles.md) — primary `npc`; integrates `classroom`
+- [10. NPC / AI Philosophy](./010_npc_ai_philosophy.md) — primary `npc`; integrates `classroom, social`
+- [11. Class Time & Lesson Structure](./011_class_time_lesson_structure.md) — primary `classroom`; integrates `learning`
+- [12. Lesson as a Sequence, Not a Page](./012_lesson_as_a_sequence_not_a_page.md) — primary `learning`; integrates `classroom`
+- [13. Weekly Class Structure](./013_weekly_class_structure.md) — primary `classroom`; integrates `liveops`
+- [14. Lesson Builder](./014_lesson_builder.md) — primary `admin`; integrates `classroom`
+- [15. Before / During / After Class](./015_before_during_after_class.md) — primary `classroom`; integrates `social`
+- [16. Break Time](./016_break_time.md) — primary `social`; integrates `classroom`
+- [17. Clubs](./017_clubs.md) — primary `social`; integrates `classroom`
+- [18. Class Progression](./018_class_progression.md) — primary `classroom`; integrates `economy, prestige`
+- [19. Attendance & Class Participation](./019_attendance_class_participation.md) — primary `classroom`; integrates `learning`
+- [20. Class Competition](./020_class_competition.md) — primary `prestige`; integrates `classroom`
+- [21. School Terms / Seasons](./021_school_terms_seasons.md) — primary `liveops`; integrates `classroom`
+- [22. Graduation & Alumni](./022_graduation_alumni.md) — primary `classroom`; integrates `social, prestige`
+- [23. Core Learning Tracks](./023_core_learning_tracks.md) — primary `learning`; integrates `ielts, typing`
+- [24. IELTS as a First-Class Track](./024_ielts_as_a_first_class_track.md) — primary `ielts`; integrates `learning`
+- [25. Mission-Based Learning Structure](./025_mission_based_learning_structure.md) — primary `learning`; integrates `economy`
+- [26. Typing Experience](./026_typing_experience.md) — primary `typing`; integrates `learning, media`
+- [27. Personalized Learning Intelligence](./027_personalized_learning_intelligence.md) — primary `learning`; integrates `platform`
+- [28. Knowledge / Codex / Collections](./028_knowledge_codex_collections.md) — primary `learning`; integrates `economy`
+- [29. Books as Progress Objects](./029_books_as_progress_objects.md) — primary `learning`; integrates `economy`
+- [30. User Identity System](./030_user_identity_system.md) — primary `identity`; integrates `avatar, prestige`
+- [31. Avatar Direction — Current Preferred Decision](./031_avatar_direction_current_preferred_decision.md) — primary `avatar`; integrates `identity`
+- [32. 2D Avatar Layer System](./032_2d_avatar_layer_system.md) — primary `avatar`; integrates `identity`
+- [33. Avatar Technical Template](./033_avatar_technical_template.md) — primary `avatar`; integrates `media`
+- [34. Avatar Pose](./034_avatar_pose.md) — primary `avatar`; integrates `identity`
+- [35. Avatar Shop Preview](./035_avatar_shop_preview.md) — primary `avatar`; integrates `economy`
+- [36. Cosmetic Content Strategy](./036_cosmetic_content_strategy.md) — primary `media`; integrates `avatar, economy`
+- [37. Item Sets](./037_item_sets.md) — primary `economy`; integrates `avatar`
+- [38. Cosmetic Rarity](./038_cosmetic_rarity.md) — primary `avatar`; integrates `economy, media`
+- [39. Visual / Audio Brand Spine](./039_visual_audio_brand_spine.md) — primary `media`; integrates `product`
+- [40. Audio Design](./040_audio_design.md) — primary `media`; integrates `learning`
+- [41. NPC Voice](./041_npc_voice.md) — primary `npc`; integrates `classroom, media`
+- [42. VFX Language](./042_vfx_language.md) — primary `media`; integrates `media`
+- [43. Reward System](./043_reward_system.md) — primary `economy`; integrates `learning`
+- [44. Daily Check-In](./044_daily_check_in.md) — primary `economy`; integrates `liveops`
+- [45. Active Session Rewards](./045_active_session_rewards.md) — primary `economy`; integrates `learning`
+- [46. Daily Activity Meter](./046_daily_activity_meter.md) — primary `economy`; integrates `learning`
+- [47. Weekly Rewards](./047_weekly_rewards.md) — primary `economy`; integrates `liveops`
+- [48. Long-Term Rewards](./048_long_term_rewards.md) — primary `economy`; integrates `learning, prestige`
+- [49. Reward Center](./049_reward_center.md) — primary `economy`; integrates `liveops`
+- [50. Economy](./050_economy.md) — primary `economy`; integrates `platform`
+- [51. Shop System](./051_shop_system.md) — primary `economy`; integrates `avatar`
+- [52. Stationery as a Signature Cosmetic System](./052_stationery_as_a_signature_cosmetic_system.md) — primary `economy`; integrates `avatar, brand`
+- [53. Limited & Seasonal Items](./053_limited_seasonal_items.md) — primary `economy`; integrates `liveops, prestige`
+- [54. Prestige System](./054_prestige_system.md) — primary `prestige`; integrates `economy`
+- [55. Ranking Center](./055_ranking_center.md) — primary `prestige`; integrates `social`
+- [56. Personal Best & Improvement Prestige](./056_personal_best_improvement_prestige.md) — primary `prestige`; integrates `learning`
+- [57. Hall of Fame](./057_hall_of_fame.md) — primary `prestige`; integrates `liveops`
+- [58. Exclusive Prestige Cosmetics](./058_exclusive_prestige_cosmetics.md) — primary `prestige`; integrates `avatar`
+- [59. Item Provenance](./059_item_provenance.md) — primary `prestige`; integrates `economy`
+- [60. Tournaments & Exams](./060_tournaments_exams.md) — primary `prestige`; integrates `liveops, ielts, typing`
+- [61. Scheduled Events](./061_scheduled_events.md) — primary `liveops`; integrates `economy`
+- [62. Event Calendar](./062_event_calendar.md) — primary `liveops`; integrates `classroom`
+- [63. School Events](./063_school_events.md) — primary `liveops`; integrates `classroom`
+- [64. Social System](./064_social_system.md) — primary `social`; integrates `classroom`
+- [65. Social Presence](./065_social_presence.md) — primary `social`; integrates `classroom`
+- [66. Study Rooms](./066_study_rooms.md) — primary `social`; integrates `learning`
+- [67. Friend Challenges](./067_friend_challenges.md) — primary `social`; integrates `typing, learning`
+- [68. Group Activities / Mini-Games](./068_group_activities_mini_games.md) — primary `learning`; integrates `typing`
+- [69. Space Typing’s Role](./069_space_typings_role.md) — primary `typing`; integrates `learning`
+- [70. Content & Learning Data Foundation](./070_content_learning_data_foundation.md) — primary `content_ops`; integrates `learning, platform`
+- [71. Content Sources & Licensing](./071_content_sources_licensing.md) — primary `content_ops`; integrates `learning`
+- [72. Media Production Strategy](./072_media_production_strategy.md) — primary `media`; integrates `content_ops, platform`
+- [73. Performance Philosophy](./073_performance_philosophy.md) — primary `platform`; integrates `media`
+- [74. Asset Performance Budgets](./074_asset_performance_budgets.md) — primary `platform`; integrates `media`
+- [75. Mobile as a First-Class Experience](./075_mobile_as_a_first_class_experience.md) — primary `platform`; integrates `media`
+- [76. Reward / Economy Anti-Patterns to Avoid](./076_reward_economy_anti_patterns_to_avoid.md) — primary `economy`; integrates `learning`
+- [77. Prestige Integrity](./077_prestige_integrity.md) — primary `prestige`; integrates `typing, platform`
+- [78. Admin / Game Master / Learning Operations Console](./078_admin_game_master_learning_operations_console.md) — primary `admin`; integrates `platform`
+- [79. Reward Simulator](./079_reward_simulator.md) — primary `admin`; integrates `economy`
+- [80. Lesson Simulator](./080_lesson_simulator.md) — primary `admin`; integrates `classroom`
+- [81. LiveOps Admin](./081_liveops_admin.md) — primary `admin`; integrates `liveops`
+- [82. Proposed Master Plan Document Split](./082_proposed_master_plan_document_split.md) — primary `product`
+- [83. Recommended Build Order](./083_recommended_build_order.md) — primary `product`
+- [84. Important Non-Goals / Current Rejections](./084_important_non_goals_current_rejections.md) — primary `product`
+- [85. Core UX Example — Simple Learner](./085_core_ux_example_simple_learner.md) — primary `product`; integrates `learning`
+- [86. Core UX Example — Social Learner](./086_core_ux_example_social_learner.md) — primary `product`; integrates `social, classroom`
+- [87. Core UX Example — Competitive User](./087_core_ux_example_competitive_user.md) — primary `product`; integrates `prestige`
+- [88. Core UX Example — Cosmetic / Collector User](./088_core_ux_example_cosmetic_collector_user.md) — primary `product`; integrates `economy, avatar`
+- [89. Core UX Example — Teacher](./089_core_ux_example_teacher.md) — primary `product`; integrates `classroom`
+- [90. Brand Direction](./090_brand_direction.md) — primary `media`; integrates `product`
+- [91. Why “Academic Objects” Matter](./091_why_academic_objects_matter.md) — primary `economy`; integrates `avatar`
+- [92. Recognition & Status](./092_recognition_status.md) — primary `prestige`; integrates `product`
+- [93. What Must Never Be Sold](./093_what_must_never_be_sold.md) — primary `prestige`; integrates `economy`
+- [94. What Can Be Purchased With Earned Credits](./094_what_can_be_purchased_with_earned_credits.md) — primary `economy`; integrates `avatar`
+- [95. “Living Even When Alone” Principle](./095_living_even_when_alone_principle.md) — primary `npc`; integrates `classroom`
+- [96. Social Retention Principle](./096_social_retention_principle.md) — primary `social`; integrates `classroom`
+- [97. Learning Retention Principle](./097_learning_retention_principle.md) — primary `learning`; integrates `product`
+- [98. Reward Retention Principle](./098_reward_retention_principle.md) — primary `economy`; integrates `learning`
+- [99. Event Retention Principle](./099_event_retention_principle.md) — primary `liveops`; integrates `product`
+- [100. Final Design Thesis](./100_final_design_thesis.md) — primary `product`
+- [101. Product Philosophy Statements to Preserve](./101_product_philosophy_statements_to_preserve.md) — primary `product`
+- [102. Open Questions for Claude Review](./102_open_questions_for_claude_review.md) — primary `review`
+- [103. Suggested Review Output From Claude](./103_suggested_review_output_from_claude.md) — primary `review`
+- [104. Current Direction to Treat as Most Important](./104_current_direction_to_treat_as_most_important.md) — primary `product`; integrates `platform`
+- [105. Closing Vision](./105_closing_vision.md) — primary `product`

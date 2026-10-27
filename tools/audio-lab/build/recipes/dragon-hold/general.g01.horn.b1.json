@@ -1,0 +1,178 @@
+{
+ "$schema": "../../schemas/recipe.schema.json",
+ "schema": "audiolab.recipe/1",
+ "game": "dragon-hold",
+ "id": "general.g01.horn",
+ "group": "rare-fixed",
+ "family": "nen",
+ "description": "Lô 1 (BATCH1_BRIEF #6): tù và của tướng G01, trầm hơn wave.horn, mở dần, 'gỗ, rêu', đáng sợ. Kèn co quãng thấp Rê2–La2 (không trombone: anh chấm trombone 1–2/5), chỉ quãng năm Rê–La (không Si, Si giáng; câu hỏi 16 #8 còn mở): lớp nhẹ (velocity thấp) chuyển dần sang lớp to (vào từ 0,3 s, mở trong 0,7 s) để có tiếng mở dần; kết cấu gỗ Stable Audio 3 ('low wooden war horn, mossy') nhỏ bên dưới; một tiếng trống khung. Kết cấu chỉ tô phần mở dần (cắt ở 650 ms, lọc thấp 2 kHz): các bản Stable Audio 3 của tù và tắt dải cao đột ngột quanh 0,8 s. Biến thể n dùng kết cấu n.",
+ "channels": 1,
+ "layers": [
+  {
+   "id": "soft",
+   "role": "body",
+   "source": {
+    "sampler": {
+     "notes": [
+      {
+       "start": 0,
+       "note": "D2",
+       "dur": 1.2,
+       "vel": 40,
+       "instrument": "f-horn.sus",
+       "choke": true
+      },
+      {
+       "start": 0.05,
+       "note": "A2",
+       "dur": 1.15,
+       "vel": 36,
+       "instrument": "f-horn.sus",
+       "choke": true
+      }
+     ]
+    }
+   },
+   "trim": {
+    "endMs": 1100
+   },
+   "fadeOutMs": 650
+  },
+  {
+   "id": "full",
+   "role": "body",
+   "source": {
+    "sampler": {
+     "notes": [
+      {
+       "start": 0,
+       "note": "D2",
+       "dur": 1.75,
+       "vel": 112,
+       "instrument": "f-horn.sus",
+       "choke": true
+      },
+      {
+       "start": 0.04,
+       "note": "A2",
+       "dur": 1.71,
+       "vel": 104,
+       "instrument": "f-horn.sus",
+       "choke": true
+      }
+     ]
+    }
+   },
+   "offsetMs": 300,
+   "fadeInMs": 700,
+   "fadeOutMs": 350
+  },
+  {
+   "id": "texture",
+   "role": "sweetener",
+   "gainDb": -9,
+   "fadeInMs": 300,
+   "fadeOutMs": 350,
+   "trim": {
+    "endMs": 650
+   },
+   "filters": [
+    {
+     "type": "highpass",
+     "hz": 70
+    },
+    {
+     "type": "lowpass",
+     "hz": 2000,
+     "order": 4
+    }
+   ],
+   "source": {
+    "gen": {
+     "tool": "stable-audio-3 (sa3_batch.py)",
+     "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+     "licence": "LicenseRef-Stability-Community-2024",
+     "file": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2001.f32.wav",
+     "record": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2001.json",
+     "window": [
+      0.024,
+      1.784
+     ]
+    }
+   },
+   "vary": {
+    "swapMode": "cycle",
+    "swap": [
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2002.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2002.json",
+       "window": [
+        0.021,
+        1.781
+       ]
+      }
+     },
+     {
+      "gen": {
+       "tool": "stable-audio-3 (sa3_batch.py)",
+       "model": "stabilityai/stable-audio-3-optimized@08b17423649b5714b22eab20f96bf00751f2358a",
+       "licence": "LicenseRef-Stability-Community-2024",
+       "file": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2003.f32.wav",
+       "record": "/Users/toandx/AudioLab/work/dragon-hold/general.g01.horn/b1/raw/general.g01.horn__A__s2003.json",
+       "window": [
+        0.07825,
+        1.83825
+       ]
+      }
+     }
+    ]
+   }
+  },
+  {
+   "id": "drum",
+   "role": "attack",
+   "source": {
+    "sampler": {
+     "instrument": "frame-drum",
+     "notes": "0:hdruml-hit:0.6:96"
+    }
+   },
+   "gainDb": -6
+  }
+ ],
+ "chain": {
+  "dcHpfHz": 35,
+  "headTrim": {
+   "thresholdDb": -50,
+   "preRollMs": 0.5
+  },
+  "maxLengthMs": 2500,
+  "tail": {
+   "floorDb": -60,
+   "fadeMs": 400
+  },
+  "normalise": {
+   "mode": "lufs-m-max",
+   "target": -20
+  },
+  "limiter": {
+   "ceilingDbtp": -1.0,
+   "releaseMs": 80,
+   "maxGrDb": 6
+  }
+ },
+ "variants": {
+  "count": 3,
+  "seed": 2414,
+  "includeBase": true
+ },
+ "export": {
+  "path": "sfx/general/g01-horn",
+  "ogg": true,
+  "oggQuality": 0.6
+ }
+}

@@ -1,0 +1,252 @@
+{
+  "$schema": "../../schemas/recipe.schema.json",
+  "schema": "audiolab.recipe/1",
+  "game": "dragon-hold",
+  "id": "trap.pine-bomb.trigger",
+  "group": "blast",
+  "family": "no",
+  "description": "Lô 0: Bom Hạt Thông nổ trầm, hạt văng (mục 8.1: bẫy duy nhất nổ). Tiếng nứt gỗ Kenney Impact Wood, thân nổ trầm Kenney Sci-fi lowFrequency_explosion lọc thấp để bỏ chất sci-fi, cắt bỏ 135 ms đầu (đoạn phồng chậm) để tiếng nổ đạt đỉnh ngay ở đầu (L1: lên ≤ 10 ms), sub 60→35 Hz, bốn hạt văng (Kenney Impact Wood light) rơi lệch giờ. Vòng 2: thẻ ảnh cho thấy 99 % năng lượng dưới 150 Hz, không có tiếng nứt 2–8 kHz ở 30 ms đầu và mất 18 dB trên loa nhỏ (AST nghe thành 'tim đập'); thêm lớp nứt nhiễu 2–8 kHz 30 ms, tăng tiếng gỗ, mở lọc thân nổ lên 2,5 kHz, sub 240 ms.",
+  "channels": 1,
+  "layers": [
+    {
+      "id": "crack",
+      "role": "attack",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactWood_heavy_001.ogg"
+      },
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 600
+        }
+      ],
+      "fadeOutMs": 120,
+      "trim": {
+        "endMs": 320
+      },
+      "vary": {
+        "pitchCents": [
+          -100,
+          60
+        ],
+        "swapMode": "cycle",
+        "swap": [
+          {
+            "library": "kenney/impact-sounds/Audio/impactWood_heavy_003.ogg"
+          },
+          {
+            "library": "kenney/impact-sounds/Audio/impactPlank_medium_002.ogg"
+          }
+        ]
+      },
+      "gainDb": 4
+    },
+    {
+      "id": "snap",
+      "role": "attack",
+      "source": {
+        "synth": "noise_burst",
+        "params": {
+          "color": "white",
+          "durMs": 30,
+          "attackMs": 0.2,
+          "decayMs": 25,
+          "hpHz": 2000,
+          "lpHz": 8000
+        }
+      },
+      "gainDb": -6,
+      "vary": {
+        "gainDb": [
+          -1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "boom",
+      "role": "body",
+      "source": {
+        "library": "kenney/sci-fi-sounds/Audio/lowFrequency_explosion_000.ogg"
+      },
+      "filters": [
+        {
+          "type": "lowpass",
+          "hz": 2500,
+          "order": 2
+        }
+      ],
+      "gainDb": -4,
+      "fadeOutMs": 300,
+      "trim": {
+        "startMs": 135,
+        "endMs": 1450
+      },
+      "vary": {
+        "pitchCents": [
+          -150,
+          150
+        ]
+      },
+      "fadeInMs": 2
+    },
+    {
+      "id": "sub",
+      "role": "sub",
+      "source": {
+        "synth": "sub_thump",
+        "params": {
+          "startHz": 62,
+          "endHz": 35,
+          "glideMs": 120,
+          "durMs": 240,
+          "decayMs": 220
+        }
+      },
+      "gainDb": -8
+    },
+    {
+      "id": "seed1",
+      "role": "debris",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactWood_light_000.ogg"
+      },
+      "offsetMs": 140,
+      "gainDb": -15,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 900
+        }
+      ],
+      "vary": {
+        "offsetMs": [
+          -30,
+          30
+        ],
+        "pitchCents": [
+          -150,
+          150
+        ]
+      }
+    },
+    {
+      "id": "seed2",
+      "role": "debris",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactWood_light_002.ogg"
+      },
+      "offsetMs": 270,
+      "gainDb": -17,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 900
+        }
+      ],
+      "vary": {
+        "offsetMs": [
+          -40,
+          40
+        ],
+        "pitchCents": [
+          -150,
+          150
+        ]
+      }
+    },
+    {
+      "id": "seed3",
+      "role": "debris",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactWood_light_003.ogg"
+      },
+      "offsetMs": 410,
+      "gainDb": -19,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 900
+        }
+      ],
+      "vary": {
+        "offsetMs": [
+          -50,
+          50
+        ],
+        "pitchCents": [
+          -150,
+          150
+        ]
+      }
+    },
+    {
+      "id": "seed4",
+      "role": "debris",
+      "source": {
+        "library": "kenney/impact-sounds/Audio/impactWood_light_004.ogg"
+      },
+      "offsetMs": 560,
+      "gainDb": -22,
+      "filters": [
+        {
+          "type": "highpass",
+          "hz": 1200
+        }
+      ],
+      "vary": {
+        "offsetMs": [
+          -60,
+          60
+        ],
+        "pitchCents": [
+          -150,
+          150
+        ]
+      }
+    }
+  ],
+  "chain": {
+    "dcHpfHz": 30,
+    "filters": [
+      {
+        "type": "peak",
+        "hz": 2500,
+        "gainDb": -3,
+        "q": 0.7
+      }
+    ],
+    "headTrim": {
+      "thresholdDb": -50,
+      "preRollMs": 0.5
+    },
+    "maxLengthMs": 1250,
+    "tail": {
+      "floorDb": -66,
+      "fadeMs": 150
+    },
+    "normalise": {
+      "mode": "lufs-m-max",
+      "target": -20
+    },
+    "limiter": {
+      "ceilingDbtp": -1.0,
+      "releaseMs": 80,
+      "maxGrDb": 6
+    }
+  },
+  "variants": {
+    "count": 3,
+    "seed": 1100,
+    "includeBase": true,
+    "pitchCents": [
+      -150,
+      150
+    ]
+  },
+  "export": {
+    "path": "sfx/trap/pine-bomb-trigger",
+    "ogg": true,
+    "oggQuality": 0.6
+  }
+}
