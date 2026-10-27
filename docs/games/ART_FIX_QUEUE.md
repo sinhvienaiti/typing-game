@@ -52,6 +52,24 @@ V35 là ảnh nguồn Tripo (INDEX P2 #41): **chưa gửi Tripo** tới khi có 
 | S16-v2 | [casuarina-v2.png](../../games/typing-defense/art-src/scenery/coast/casuarina-v2.png) | P2 | 7 | Giữ phi lao và tán theo gió, nhưng thân vẫn gần thẳng/ngả trái nhẹ, khá gần v1, lá chi tiết. Cần thêm lề gốc và khóa nền; không tạo lại. | Tạo lại theo prompt cạnh ảnh (`.prompt.txt`), nhấn đúng chỗ ở cột Thiếu gì. |
 | V35 Trại Lính, nhánh Giáo Dài | [barracks-giao-dai.png](../../games/typing-defense/art-src/branches/barracks-giao-dai.png) | P2 | 7,5 | Vẽ lại 27/10 theo tháp hai tầng. Thấp hơn tháp v2 khoảng 23 %; bó giáo còn khe giữa các mũi; một chấm xanh nhỏ ở sàn canh (do nền). | Prompt 015c, nhấn: giá giáo bó kín thành một khối, cao bằng tháp v2. |
 
+### Kết quả phiếu 020 (27/10)
+
+Codex làm 12 lượt sinh và 9 bản hậu kỳ ([báo cáo](../codex-queue/020-report.md)). Claude kiểm lại md5 của 9 ảnh gốc (không đổi), xem tờ `_review/020-dh.jpg`, `_review/020-td.jpg` và chấm lại. Cả 9 đạt từ 8; ảnh đang dùng đã thay bằng bản mới, bản cũ giữ `.v1` (V35: `.v2`, vì `.v1` là bản 26/10).
+
+| Mã | Bản nhận | Codex | Claude | Ghi chú |
+|---|---|---:|---:|---|
+| T3 | `ground/pine-river/moss.png` (lượt 1 + hậu kỳ, 1024) | 8,5 | 8 | Rêu phẳng, tương phản thấp, mép liền. Lặp 3×3 còn thấy vệt chéo đều; nét mềm hơn cỏ A. `moss.1024.png` của phiếu 017 là bản cũ, bỏ |
+| C23 | `portraits/draconis-ult.png` (lượt 2) | 9 | 9 | Mưa lông, nền cam đào, trọn dải 3:1 |
+| C9 | `portraits/lam.png` (lượt 2) | 9 | 9 | Cười lớn, đầu và thân trên, lửa xanh đủ lề |
+| C10 | `portraits/tre.png` (lượt 1) | 8,5 | 8,5 | Búa trên vai, có chuồn chuồn (nhỏ ở 64 px) |
+| C25 | `portraits/tre-ult.png` (lượt 2) | 9 | 9 | Giơ búa cao, giàn đang dựng, trọn dải 3:1 |
+| C22 | `portraits/dai-bang-tinh.png` (sửa bằng công cụ) | 8,5 | 8 | Bản `.fix` của Codex còn 4 nét mực lạc và ngực bị cắt thẳng (Claude chấm 7,5). Claude xóa nét lạc theo khối liền, dời ảnh để ngực tràn mép như chân dung, ra `dai-bang-tinh.fix2.png`. Còn thiếu vệt mực tím như Mộc Tinh |
+| S15-v2 | `scenery/coast/olive-tree-v2.png` (lượt 1) | 8,5 | 8 | Nghiêng phải rõ, khác v1; lá còn nhiều nét nhỏ |
+| S16-v2 | `scenery/coast/casuarina-v2.png` (lượt 1) | 8,5 | 8 | Thân ngả gió rõ; tán còn nhiều nét nhỏ |
+| V35 | `branches/barracks-giao-dai.png` (lượt 2) | 8,5 | 8,5 | Cao 98 % tháp v2 cùng bề ngang chân (Claude đo lại theo hộp bao), bó giáo kín; đã thay vào bộ gửi Tripo (#41), gửi được |
+
+Chân dung mới có nền trong suốt; chân dung cũ cùng thư mục nền xanh `#00FF00`. Bước nhập vào game xử lý cả hai.
+
 ## 4. Chờ kinh phí
 
 Không có mục Tạo lại mức P3; các mục Tạm chấp nhận chờ thay khi có kinh phí ghi ở [ART_REPLACE_LATER.md](ART_REPLACE_LATER.md).
