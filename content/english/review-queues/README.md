@@ -52,7 +52,7 @@ node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
 node scripts/prepare-english-content-e11-review-queue.mjs --per-target-limit 12
 ```
 
-`typing-text-e11-next-review.json` advances through typing-text candidates after excluding controlled records and existing review decisions.
+`typing-text-e11-next-review.json` advances through typing-text candidates after excluding controlled records and existing review decisions. Controlled record IDs must never be reintroduced into an E11 editorial slice to fill a packet; always regenerate the packet from the current controlled source and review ledger after a repair or concurrent branch advance.
 
 `e11-sentence-gap-next-review.json` reads the current E11 readiness report, follows its exact sentence-source paths, overlays the review ledger, and selects unreviewed records only for sentence targets that are still below their locked minimum. Each selected record includes `batchId`, `recordSetId` and `sourceDigest` so a later review decision can be tied to the exact source revision.
 
