@@ -36,6 +36,12 @@ Chủ dự án nói "đọc mục 0 rồi tiếp tục": đọc mục này, mụ
   - Tuyến Cuối bỏ bước chuẩn bị chạy cân bằng đa luồng (chưa cần).
   - Đang chạy: Rồng `wdjy8as6w`, Lời Gọi `wofl4j6v2`, Tuyến Cuối `w3sugg0rb`.
   - Codex 015b xong 60/60 đích P1/P2 lúc 21:38; 015c (vẽ lại 2 nhánh Trại Lính) chạy ở làn B.
+- **27/10 trưa: ba làn xong đợt test chia theo màn và lượt sửa** (bản gọn, chạy lại sau lần hết hạn mức thứ 7 lúc 11:10):
+  - Rồng Giữ Ải `17b1547`: 8 lỗi nặng đã sửa, người kiểm lại xác nhận; 7 lỗi nặng chờ chủ dự án hoặc M0b (bom và lưới gần như không chạy, G01 cắm cờ, đường cong theo đợt, đỉnh không chữ, khối tạm, người mới tập, bầy Sói Mục).
+  - Lời Gọi `aa87eca`: 10/12 lỗi nặng; Đêm 4 nhàn và Thuồng Luồng lọt Lũy chờ chủ dự án.
+  - Tuyến Cuối `c319b24`: 12/13 lỗi nặng; hiệu ứng từng chữ trên sân (N4) và hạ quái to (N6) vẫn nhạt, đang có một lượt riêng (một agent làm, một agent chấm).
+  - Codex chia việc nhỏ (chủ dự án 27/10): ảnh trước (017, 020, 020b, 020c), rồi 019, 021, 022, 018; sandbox `workspace-write` không mở được cổng nên phần trình duyệt do Claude chạy.
+  - `heavy.sh`: mutex rỗng không pid (một tiến trình bị kill giữa `mkdir` và lúc ghi pid) quá 5 s thì coi là cũ. Lúc 11:28 nó làm mọi agent đứng chờ.
 - **Luật duyệt ảnh 7 điểm (chủ dự án, 26/10):** [`docs/games/ART_ACCEPTANCE.md`](games/ART_ACCEPTANCE.md), danh sách thay sau [`ART_REPLACE_LATER.md`](games/ART_REPLACE_LATER.md).
   - Workflow `art-rescore-7` (`wf_e87ec2b1-402`) chấm lại 111 ảnh và model đang bị xếp "lỗi": 75 đạt, 36 tạm chấp nhận, không ảnh nào phải sửa hay tạo lại.
   - Xếp ưu tiên:
