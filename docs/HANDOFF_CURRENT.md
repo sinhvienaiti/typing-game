@@ -15,6 +15,21 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Rồng: L2-cau, 10 đợt;
   - Lời Gọi: 1A và 1B (2D);
   - Tuyến Cuối: chương 1.
+- **Mục tiêu (chủ dự án 28/10): map 1 của từng game đạt chuẩn production** để chủ dự án test.
+  - Rồng: L2-cau.
+  - Lời Gọi: w1-silverfall, **làm 3D (bước 1C) cho riêng map 1**, vì hôm nay nó vẫn vẽ bằng khung gỡ lỗi `src/view/debug-2d.ts`.
+  - Tuyến Cuối: ải đầu của chương 1, gồm sửa việc game đọc model của Space lúc chạy.
+- **Cổng production của map 1, đề xuất; lượt kiểm kê phải đo từng cổng:**
+  1. 0 lỗi P0 và P1; 0 lỗi console; bot và phím CDP thật chơi trọn map ở 1280 và 1920.
+  2. Hình:
+     - giám khảo độc lập chấm từ 8 cho cảnh map và các màn chính;
+     - không còn hình tạm (khối, viên nang, vẽ gỡ lỗi).
+  3. Cảm giác: đòn chính đạt chuẩn VFX 5 pha; có âm thanh; thẻ chữ đọc rõ.
+  4. Hiệu năng: trong ngân sách ở High và Medium; nạp nhanh; không khung dài.
+  5. Trải nghiệm: luồng lần đầu, menu, tạm dừng, cài đặt, kết quả; câu tiếng Việt và tên tiếng Anh đúng.
+  6. Cân bằng: cổng bot của map 1 đạt.
+  7. Build production tự đủ (không đọc file của repo cha hay Space), chạy qua `typing-game.local`.
+- **Rồng "nhàn"** (40–66 % thời gian đợt không có chữ) là vấn đề cảm giác lớn nhất của map 1 Rồng. Mọi cách đo 27–28/10 đều gãy cổng, nên cần đề xuất hướng mới cho chủ dự án.
 - **Demo chạy trên Mac ở nhà** qua `typing-game.local` (`scripts/play.sh`, nginx). Chưa đưa lên mạng.
 - **Bước kế:** một lượt kiểm kê lỗi và chỗ xấu, chỗ giật cho từng game. Chơi thật trên trình duyệt ở 1280 và 1920, gộp với các mục còn mở trong changelog và test pass. Kết quả là một danh sách theo mức: P0 chặn demo, P1 làm xấu ấn tượng đầu, P2 để sau. Sau đó sửa theo danh sách; Codex làm ảnh và các sửa nhỏ kiểm được.
 - **Vẫn giữ, vì làm đẹp nội dung có sẵn:**
