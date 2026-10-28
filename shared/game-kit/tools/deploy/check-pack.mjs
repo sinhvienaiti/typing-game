@@ -23,7 +23,7 @@ function localPath(url, base) {
 }
 
 /** Check a package synchronously. maxFiles is exclusive; maxFileBytes is inclusive. */
-export function checkPack(dir, { gameId, budgets = {} } = {}) {
+export function checkPack(dir, { gameId, budgets = {}, allowLocalHost = false } = {}) {
   if (!GAME_IDS.includes(gameId)) throw new TypeError(`Unknown game id: ${gameId}`);
   if (!object(budgets)) throw new TypeError('budgets must be an object');
   const limits = { ...DEFAULT_BUDGETS, ...budgets };
@@ -38,6 +38,8 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
   const directories = new Set();
   const problems = [];
   const external = new Map();
+  let localHost = 0;
+  const vocabularyNotShipped = new Set();
   let bytes = 0;
   const problem = (code, path, detail) => problems.push({ code, path, detail });
 
@@ -84,7 +86,9 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
         problem('foreign-asset', path, `References /assets/${id}/ from ${gameId}`);
       }
     }
-    if (/typing-game\.local/i.test(text)) {
+    const localHostCount = [...text.matchAll(/typing-game\.local/gi)].length;
+    localHost += localHostCount;
+    if (localHostCount && !allowLocalHost) {
       problem('local-host', path, 'Contains typing-game.local');
     }
     if (/["']\.\.\/(?:assets|vocabulary|shared)\//.test(text)) {
@@ -109,6 +113,29 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
     }
   }
 
+  const vocabManifest = 'vocabulary/vocab-manifest.json';
+  const hasVocabManifest = files.has(vocabManifest);
+  const manifestTargets = new Set();
+  if (hasVocabManifest) {
+    const manifest = json(vocabManifest, 'missing-vocabulary');
+    if (manifest && !object(manifest.files)) {
+      problem('missing-vocabulary', vocabManifest, 'Expected files: { path: sha256 }');
+    } else if (manifest) {
+      for (const [file, expected] of Object.entries(manifest.files)) {
+        const target = localPath(file, 'vocabulary');
+        if (target) manifestTargets.add(target);
+        if (!target || !files.has(target)) {
+          problem('missing-vocabulary', vocabManifest, `Missing sha256 file: ${file}`);
+          continue;
+        }
+        const actual = createHash('sha256').update(readFileSync(join(root, target))).digest('hex');
+        if (typeof expected !== 'string' || actual !== expected.toLowerCase()) {
+          problem('missing-vocabulary', target, `sha256 mismatch: expected ${expected}, got ${actual}`);
+        }
+      }
+    }
+  }
+
   const indexPath = 'vocabulary/index.json';
   if (files.has(indexPath)) {
     const index = json(indexPath, 'missing-vocabulary');
@@ -117,28 +144,11 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
     } else if (index) {
       for (const level of index.levels) {
         const target = localPath(level?.file, 'vocabulary');
-        if (!target || !files.has(target)) {
+        if (!target || (!hasVocabManifest && !files.has(target))) {
           problem('missing-vocabulary', indexPath, `Missing level file: ${level?.file ?? '(no file)'}`);
-        }
-      }
-    }
-  }
-
-  const vocabManifest = 'vocabulary/vocab-manifest.json';
-  if (files.has(vocabManifest)) {
-    const manifest = json(vocabManifest, 'missing-vocabulary');
-    if (manifest && !object(manifest.files)) {
-      problem('missing-vocabulary', vocabManifest, 'Expected files: { path: sha256 }');
-    } else if (manifest) {
-      for (const [file, expected] of Object.entries(manifest.files)) {
-        const target = localPath(file, 'vocabulary');
-        if (!target || !files.has(target)) {
-          problem('missing-vocabulary', vocabManifest, `Missing sha256 file: ${file}`);
-          continue;
-        }
-        const actual = createHash('sha256').update(readFileSync(join(root, target))).digest('hex');
-        if (typeof expected !== 'string' || actual !== expected.toLowerCase()) {
-          problem('missing-vocabulary', target, `sha256 mismatch: expected ${expected}, got ${actual}`);
+        } else if (!files.has(target) && !manifestTargets.has(target)) {
+          // A pinned index may describe more levels than this game ships.
+          vocabularyNotShipped.add(level.file);
         }
       }
     }
@@ -179,6 +189,11 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
     report: {
       files: files.size,
       bytes,
+      localHost,
+      vocabularyNotShipped: {
+        count: vocabularyNotShipped.size,
+        examples: [...vocabularyNotShipped].slice(0, 5),
+      },
       external: [...external].sort(([a], [b]) => a.localeCompare(b, 'en'))
         .map(([host, count]) => ({ host, count })),
     },
@@ -186,11 +201,12 @@ export function checkPack(dir, { gameId, budgets = {} } = {}) {
 }
 
 function main(args) {
-  const usage = 'Usage: node check-pack.mjs <package-dir> --game <id> [--json]';
+  const usage = 'Usage: node check-pack.mjs <package-dir> --game <id> [--json] [--allow-local-host]';
   try {
     let dir;
     let gameId;
     let asJson = false;
+    let allowLocalHost = false;
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];
       if (arg === '--game' && gameId === undefined) {
@@ -198,6 +214,8 @@ function main(args) {
         if (!gameId || gameId.startsWith('--')) throw new TypeError('Missing --game value');
       } else if (arg === '--json' && !asJson) {
         asJson = true;
+      } else if (arg === '--allow-local-host' && !allowLocalHost) {
+        allowLocalHost = true;
       } else if (!arg.startsWith('-') && dir === undefined) {
         dir = arg;
       } else {
@@ -205,7 +223,7 @@ function main(args) {
       }
     }
     if (!dir || !gameId) throw new TypeError('Package directory and --game are required');
-    const checked = checkPack(dir, { gameId });
+    const checked = checkPack(dir, { gameId, allowLocalHost });
     if (asJson) process.stdout.write(`${JSON.stringify(checked, null, 2)}\n`);
     else for (const { code, path, detail } of checked.problems) {
       process.stdout.write(`${code}: ${path}: ${detail.replace(/[\r\n]/g, ' ')}\n`);

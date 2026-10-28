@@ -75,7 +75,9 @@ test('clean package passes every gate and reports exact file and byte totals', (
   }
   count(dir);
   assert.deepEqual(result(dir), {
-    ok: true, problems: [], report: { ...totals, external: [] },
+    ok: true, problems: [], report: {
+      ...totals, localHost: 0, vocabularyNotShipped: { count: 0, examples: [] }, external: [],
+    },
   });
 });
 
@@ -159,7 +161,21 @@ test('local-host rejects the root and game subdomains and omits them from extern
   const dir = fixture(t);
   put(dir, js, '"https://typing-game.local"; "https://dh.typing-game.local/x"');
   hasCode(dir, 'local-host');
+  assert.equal(result(dir).report.localHost, 2);
   assert.deepEqual(result(dir).report.external, []);
+});
+
+test('local-host API allows local hosts and counts every occurrence across text files', (t) => {
+  const dir = fixture(t);
+  put(dir, js, '"https://typing-game.local"; "https://dh.typing-game.local/x"');
+  put(dir, 'style.css', '/* https://TYPING-GAME.LOCAL */');
+  const checked = checkPack(dir, { gameId, allowLocalHost: true });
+  assert.equal(checked.ok, true);
+  assert.deepEqual(checked.problems, []);
+  assert.equal(checked.report.localHost, 3);
+  assert.deepEqual(checked.report.external, []);
+  assert.equal(result(dir).ok, false);
+  assert.equal(result(dir).report.localHost, 3);
 });
 
 test('local-host accepts a production host', (t) => {
@@ -201,6 +217,60 @@ test('missing-vocabulary rejects a one-byte content change', (t) => {
 
 test('missing-vocabulary accepts matching sha256 files', (t) => {
   assert.equal(result(fixture(t)).ok, true);
+});
+
+function threeLevelVocabulary(t) {
+  const dir = fixture(t);
+  const levels = Array.from({ length: 100 }, (_, i) => ({
+    file: `levels/${String(i + 1).padStart(3, '0')}.json`,
+  }));
+  put(dir, 'vocabulary/index.json', JSON.stringify({ levels }));
+  put(dir, 'vocabulary/levels/002.json', '[{"word":"forest"}]\n');
+  put(dir, 'vocabulary/levels/003.json', '[{"word":"mountain"}]\n');
+  const paths = ['index.json', 'ATTRIBUTION.md', ...levels.slice(0, 3).map((level) => level.file)];
+  const files = Object.fromEntries(paths.map((path) => [
+    path, hash(readFileSync(join(dir, 'vocabulary', path))),
+  ]));
+  put(dir, 'vocabulary/vocab-manifest.json', JSON.stringify({ version: 1, files }));
+  return dir;
+}
+
+test('missing-vocabulary accepts a 3 level manifest with a 100 level pinned index', (t) => {
+  const checked = result(threeLevelVocabulary(t));
+  assert.equal(checked.ok, true, JSON.stringify(checked.problems));
+  assert.deepEqual(checked.problems, []);
+  assert.deepEqual(checked.report.vocabularyNotShipped, {
+    count: 97,
+    examples: ['levels/004.json', 'levels/005.json', 'levels/006.json',
+      'levels/007.json', 'levels/008.json'],
+  });
+});
+
+test('missing-vocabulary only reports unshipped files absent from the manifest', (t) => {
+  const dir = threeLevelVocabulary(t);
+  put(dir, 'vocabulary/levels/004.json', '[{"word":"lake"}]\n');
+  rmSync(join(dir, 'vocabulary/levels/003.json'));
+  const checked = result(dir);
+  assert.equal(checked.ok, false);
+  assert.deepEqual(checked.problems.map((p) => p.code), ['missing-vocabulary']);
+  assert.equal(checked.problems[0].path, 'vocabulary/vocab-manifest.json');
+  assert.match(checked.problems[0].detail, /levels\/003\.json/);
+  assert.deepEqual(checked.report.vocabularyNotShipped, {
+    count: 96,
+    examples: ['levels/005.json', 'levels/006.json', 'levels/007.json',
+      'levels/008.json', 'levels/009.json'],
+  });
+});
+
+test('missing-vocabulary rejects a missing manifest level even when absent from the index', (t) => {
+  const dir = fixture(t);
+  const path = 'vocabulary/vocab-manifest.json';
+  const manifest = JSON.parse(readFileSync(join(dir, path), 'utf8'));
+  manifest.files['levels/002.json'] = hash('required level');
+  put(dir, path, JSON.stringify(manifest));
+  const problems = hasCode(dir, 'missing-vocabulary');
+  assert.equal(problems[0].path, path);
+  assert.match(problems[0].detail, /levels\/002\.json/);
 });
 
 test('missing-vocabulary still checks index levels without a hash manifest', (t) => {
@@ -327,6 +397,33 @@ function run(args) {
   return child;
 }
 
+test('CLI --allow-local-host allows the demo host while the default still rejects it', (t) => {
+  const dir = fixture(t);
+  put(dir, js, '"https://typing-game.local"; "https://typing-game.local/portal"');
+  const args = [dir, '--game', gameId, '--json'];
+  const allowed = run([...args, '--allow-local-host']);
+  assert.equal(allowed.status, 0);
+  assert.equal(allowed.stderr, '');
+  assert.equal(JSON.parse(allowed.stdout).ok, true);
+  assert.equal(JSON.parse(allowed.stdout).report.localHost, 2);
+  assert.deepEqual(JSON.parse(allowed.stdout), checkPack(dir, { gameId, allowLocalHost: true }));
+  assert.equal(run([dir, '--allow-local-host', '--game', gameId]).status, 0);
+  const rejected = run(args);
+  assert.equal(rejected.status, 1);
+  assert.equal(JSON.parse(rejected.stdout).report.localHost, 2);
+  assert.deepEqual(JSON.parse(rejected.stdout).problems.map((p) => p.code), ['local-host']);
+});
+
+test('CLI --allow-local-host still rejects other package errors', (t) => {
+  const dir = fixture(t);
+  put(dir, js, '"https://typing-game.local"; "/assets/space-typing/model.glb"');
+  const child = run([dir, '--game', gameId, '--allow-local-host', '--json']);
+  assert.equal(child.status, 1);
+  const checked = JSON.parse(child.stdout);
+  assert.equal(checked.report.localHost, 1);
+  assert.deepEqual(checked.problems.map((p) => p.code), ['foreign-asset']);
+});
+
 test('CLI exits 0 with JSON for a clean package and 1 with one line per problem', (t) => {
   const dir = fixture(t);
   let child = run([dir, '--game', gameId, '--json']);
@@ -350,6 +447,7 @@ test('CLI exits 2 for missing, unknown, duplicate or unusable arguments', (t) =>
   for (const args of [[], [dir], [dir, '--game'], [dir, '--game', 'unknown'],
     [dir, '--game', gameId, '--wat'], [dir, '--game', gameId, 'extra'],
     [dir, '--game', gameId, '--game', gameId], [dir, '--game', gameId, '--json', '--json'],
+    [dir, '--game', gameId, '--allow-local-host', '--allow-local-host'],
     [join(dir, 'missing'), '--game', gameId], [join(dir, js), '--game', gameId]]) {
     const child = run(args);
     assert.equal(child.status, 2, JSON.stringify(args));
