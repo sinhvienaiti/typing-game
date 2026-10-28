@@ -1,4 +1,4 @@
-# Bàn giao điều phối (cập nhật 28/10/2026, khoảng 19:40)
+# Bàn giao điều phối (cập nhật 29/10/2026, khoảng 03:50)
 
 File này để **một session mới** nối tiếp mà không cần đọc lại lịch sử chat.
 - Mỗi lần dừng hay chuyển session, cập nhật file này.
@@ -56,22 +56,18 @@ Mục 3 bên dưới là lịch sử.
 
 ## 3. Đang chạy (28/10, 19:40)
 
-### Codex: hai làn (cập nhật 22:30)
-
-Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
+### Codex: hai làn (cập nhật 29/10, 03:50)
 
 | Làn | Còn lại | Ghi chú |
 |---|---|---|
-| Ảnh M4, rồi M6 | 098, 099, 100 → 106 (26 ảnh cảnh vật v3, v4) | `.local/codex-lane-mac-m4.txt`, `-m6.txt` |
-| Mã M3, rồi M5 | 102 → 104b, 105b | `-m3.txt`, `-m5.txt` |
+| Ảnh M10, rồi M11 | 113 (đang chạy), 114 → 115, 116, 117, 118, 119, 120, 122, 123, 124, 128 | `.local/codex-lane-mac-m10.txt`, `-m11.txt` (M11 chờ M10 xong rồi tự chạy) |
+| Mã M8, rồi M9 | 132 (đang chạy) → 111b | `-m8.txt`, `-m9.txt` |
 
-**Đã nhận, commit trên nhánh Codex, chưa gộp:**
-- `ts-codex`: 090, 092, 104 (4/5). Gộp vào `main` Tuyến Cuối sau khi làn V-ts gộp 035;
-- `dh-codex`: 080, 094, 101, 105 (phần 1). Thứ tự gộp vào `main` Rồng: map pilot → VFX → `dh-codex`.
-
-**Đã gộp:** `td-codex` (091, 103) vào `a2-days` (`91ac625`).
-
-**Ảnh đã nhận:** 088, 089, 093, 095, 096, 097.
+- **Chờ quyết định, chưa xếp làn:** 121, 125, 126, 127 (Last Line, chờ chủ dự án chọn hướng từ 112); 129 (Wordwoven, chờ chủ dự án đồng ý dựng lại sáu nhà mái tranh).
+- **Xong, chờ Claude duyệt:** 112 (tờ `games/typing-survival/art-src/_review/112-directions.jpg`, đã gửi chủ dự án), 130, 131 (chữ tiếng Anh trên nhánh Codex của từng game).
+- **Đã nhận, commit trên nhánh Codex, chưa gộp:** `ts-codex` 104b (`02d1a05`); `dh-codex` 080, 094, 101, 105, 105b (`5a83f70`). Thứ tự gộp vào `main` Rồng: VFX (`dh-vfx`) → `dh-codex`.
+- **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
+- **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
 ### Làn Claude (agent nền của coordinator-2, trừ làn cuối)
 
@@ -109,6 +105,11 @@ Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
   - Tuyến Cuối: ải 2 tên "ẢI 2 · SĂN PACK LEADER", biển viết hoa cả câu (phiếu 104).
 - **Trần media Medium của Lời Gọi** (chủ dự án 28/10, khoảng 23:20): tổng ≤ 9 MB, bộ khởi động ≤ 3,5 MB, tải dần theo ngày, byte tới Đêm 1 ≤ 6 MB.
 - **Trần media High của Lời Gọi** (chủ dự án 28/10, khoảng 23:55): tổng ≤ 16 MB; High là bậc người chơi tự chọn trong Cài đặt, lần chơi đầu vẫn Medium.
+- **Hỏi chủ dự án ngày 29/10, khoảng 03:50 (chưa trả lời):**
+  - chọn hướng Last Line A Iron Warden, B Lightbearer hay C Rampart (tờ 112; người chỉ đạo mỹ thuật và Claude khuyên B);
+  - dựng Tripo bằng tay: Dragonhold 6 mốc (phiếu 124, ~180 credit), Wordwoven 5 mốc (phiếu 128, ~150), Last Line nhân vật và 5 súng (~180, sau khi chọn hướng);
+  - đồng ý hay không việc dựng lại sáu nhà mái tranh của Wordwoven (phiếu 129, ~180 credit);
+  - nhận 109 (bốn ảnh ải Last Line) làm bản tạm cho tới khi 126 xong.
 - **Sudo nginx một lần**, khi `pnpm build:local` xong.
 - **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
 - **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.
