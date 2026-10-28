@@ -45,28 +45,29 @@ Mục 3 bên dưới là lịch sử.
 
 ## 3. Đang chạy (28/10, 19:40)
 
-### Codex: hai làn
+### Codex: hai làn (cập nhật 22:30)
 
-| Làn | Phiếu | Ghi chú |
+Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
+
+| Làn | Còn lại | Ghi chú |
 |---|---|---|
-| Ảnh M1, rồi M4 | 089 (đang chạy, từ 19:05) → 095, 096, 097, 098, 099, 100 | `.local/codex-lane-mac-m1.txt`, `-m4.txt`. M4 tự chạy khi M1 xong |
-| Mã M2, rồi M3 | 090 (đang chạy, từ 19:12) → 092, 091 → 080, 094, 101, 103, 104, 105, 102 | `-m2.txt`, `-m3.txt`. M3 tự chạy khi M2 xong |
+| Ảnh M4, rồi M6 | 098, 099, 100 → 106 (26 ảnh cảnh vật v3, v4) | `.local/codex-lane-mac-m4.txt`, `-m6.txt` |
+| Mã M3, rồi M5 | 102 → 104b, 105b | `-m3.txt`, `-m5.txt` |
 
-Worktree Codex:
-- `games/.wt-ts-codex` (`ts-codex`): 090, 092, 104;
-- `games/.wt-td-codex` (`td-codex`): 091, 103;
-- `games/.wt-dh-codex` (`dh-codex`): 080, 094, 101, 105.
+**Đã nhận, commit trên nhánh Codex, chưa gộp:**
+- `ts-codex`: 090, 092, 104 (4/5). Gộp vào `main` Tuyến Cuối sau khi làn V-ts gộp 035;
+- `dh-codex`: 080, 094, 101, 105 (phần 1). Thứ tự gộp vào `main` Rồng: map pilot → VFX → `dh-codex`.
 
-Phiếu 102 ghi vào `shared/game-kit/tools/` của repo cha.
+**Đã gộp:** `td-codex` (091, 103) vào `a2-days` (`91ac625`).
 
-**Đã duyệt hôm nay:** 035–037, 065–075, 085, 088, 093. Xem cột trạng thái của `CODEX_QUEUE.md`.
+**Ảnh đã nhận:** 088, 089, 093, 095, 096, 097.
 
 ### Làn Claude (agent nền của coordinator-2, trừ làn cuối)
 
 | Làn | Nơi làm | Việc | Khi xong |
 |---|---|---|---|
 | **R** (map Rồng) | `games/.wt-dh-mappilot`, nhánh `map-pilot` (f0b101b, chưa gộp) | Nhập 8 model Tripo đợt 3 (preset, kit); vòng sửa A2 theo mã góp ý FB-08, 09, 10, 11, 16, 18, 03, V2; chụp bộ khung cho giám khảo | Chạy một giám khảo độc lập (`tools/map-factory/docs/judge.md`); cổng A cần trung vị ≥ 7,5 (chặng A được 7,125) |
-| **L** (Lời Gọi 1C) | main checkout `a2-days`, rồi `games/.wt-td-1c` (nhánh `td-1c`) | Gộp 036 vào `a2-days`, dừng V4a; viết C0; làm C1 | Duyệt C0 với chủ dự án (câu 5); làm tiếp C2 |
+| **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: gộp 036 (`66d032d`), C0 (`docs/td/BUILD_1C_MAP1.md`, chủ dự án duyệt), C1. Đang làm: gộp `a2-days` vào `td-1c`, rồi C2, C4, C3 | Gửi tờ khung sân, đất, camera |
 | **V-ts** (VFX Tuyến Cuối) | `games/.wt-ts-vfx` rồi fast-forward `main` | TS-M1-04 (gộp 035); TS-M1-05 (5 pha cho Pulse Gun, Heat Beam, tàu bị đánh) | Gửi chủ dự án tờ khung trước/sau |
 | **vfx-dh-v2** (session cũ) | `games/.wt-dh-vfx` | VFX Rồng: chấm 1a, Sky Fire, VFX quái | Gộp vào làn V |
 
