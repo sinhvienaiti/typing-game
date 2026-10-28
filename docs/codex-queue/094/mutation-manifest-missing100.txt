@@ -1,0 +1,46 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ❯ tests/vocab-pin.test.ts (7 tests | 1 failed) 488ms
+   ✓ pinned vocabulary (G7) > includes the complete ordered inventory and every configured file 9ms
+   ✓ pinned vocabulary (G7) > agrees on the full commit pin and index version 2ms
+   × pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest 12ms
+     → expected [ 'ATTRIBUTION.md', …(100) ] to deeply equal [ 'ATTRIBUTION.md', …(101) ]
+   ✓ pinned vocabulary (G7) > covers the kit's entire curriculum using each index file field 16ms
+   ✓ pinned vocabulary (G7) > keeps each level nonempty after adult and child filtering and deck selection 164ms
+   ✓ pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate 271ms
+   ✓ pinned vocabulary (G7) > contains no parent vocabulary path outside the copied kit 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest
+AssertionError: expected [ 'ATTRIBUTION.md', …(100) ] to deeply equal [ 'ATTRIBUTION.md', …(101) ]
+
+- Expected
++ Received
+
+@@ -98,7 +98,6 @@
+    "levels/095.json",
+    "levels/096.json",
+    "levels/097.json",
+    "levels/098.json",
+    "levels/099.json",
+-   "levels/100.json",
+  ]
+
+ ❯ tests/vocab-pin.test.ts:50:41
+     48|   it("matches every SHA-256 and keeps a sorted, formatted manifest", (…
+     49|     expect(Object.keys(manifest)).toEqual(["pin", "version", "files"]);
+     50|     expect(Object.keys(manifest.files)).toEqual([...config.files].sort…
+       |                                         ^
+     51|     expect(readFileSync(join(vocabulary, "vocab-manifest.json"), "utf8…
+     52|     for (const file of config.files) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  19:44:12
+   Duration  1.55s (transform 325ms, setup 0ms, collect 511ms, tests 488ms, environment 0ms, prepare 88ms)
+

@@ -1,0 +1,88 @@
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ✓ tests/boundary.test.ts (9 tests) 1130ms
+   ✓ dragon-hold boundary > keeps sim/, typing/ and content/ pure: no DOM, clock, Math.random, trig, pow or **  431ms
+   ✓ dragon-hold boundary > keeps every kit file the rules import, directly or through a barrel, pure as well  533ms
+ ✓ tests/sim/bot-hands.test.ts (8 tests) 1438ms
+   ✓ bot hands > types 25 WPM at C(E) of the words it meets, through the kit router  349ms
+   ✓ bot hands > types 35 WPM at C(E) of the words it meets, through the kit router  393ms
+   ✓ bot hands > types 60 WPM at C(E) of the words it meets, through the kit router  404ms
+ ✓ tests/audio/limiter.test.ts (11 tests) 302ms
+ ✓ tests/sim/battle-waves.test.ts (16 tests) 1829ms
+   ✓ battle waves: the director at run time > spawns each group of a wave when the plan says (one tick per 16.7 ms) and every head of it  844ms
+   ✓ battle waves: the director at run time > plays the whole M0 stage: an ideal fast typist wins with stars, nobody typing loses in wave 1  601ms
+ ✓ tests/sim/bot-words.test.ts (4 tests) 1974ms
+   ✓ bot typist on the words store > keeps C(E) at 25 WPM on the words the store deals  579ms
+   ✓ bot typist on the words store > never sticks on a word the world locked under it (a slip before a switch)  862ms
+ ✓ tests/sim/bot-policy.test.ts (9 tests) 2314ms
+   ✓ bot tactics > the weak buyer places by the dais, never upgrades, never buys Tim Rồng; the others fill and upgrade  1738ms
+   ✓ bot tactics > presses Enter in an Easy break (00 §4.5) once the shop is done  442ms
+ ✓ tests/view/view-terrain.test.ts (15 tests) 2426ms
+   ✓ view-terrain height field > is deterministic and finite everywhere, skirt included  1173ms
+   ✓ view-terrain scatter > keeps trees off lanes, water, slots, the dais and the sky lane  738ms
+   ✓ view-terrain scatter > keeps bushes and rocks off the lanes and out of the river  355ms
+ ✓ tests/sim/battle-damage.test.ts (12 tests) 214ms
+ ✓ tests/ui/tags-bodies.test.ts (21 tests) 557ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > lays out 20 tags among 40 bodies within the frame budget  525ms
+ ✓ tests/sim/battle-species.test.ts (11 tests) 254ms
+ ✓ tests/golden/golden.test.ts (10 tests) 2767ms
+   ✓ golden M0 > replays b35-seed1 to its stored hashes  632ms
+   ✓ golden M0 > runs b35-seed1 to the stored command log  443ms
+   ✓ golden M0 > replays sloppy-hard-off-seed3 to its stored hashes  604ms
+   ✓ golden M0 > runs sloppy-hard-off-seed3 to the stored command log  665ms
+ ✓ tests/audio/catalog.test.ts (9 tests) 402ms
+ ✓ tests/sim/ourside-shop.test.ts (13 tests) 202ms
+ ✓ tests/sim/balance-pressure.test.ts (10 tests) 216ms
+ ✓ tests/sim/bot-run.test.ts (9 tests) 2675ms
+   ✓ bot runs > plays the same seed the same way  370ms
+   ✓ bot runs > stops a run that stalls and says where  1351ms
+ ✓ tests/typing-tags.test.ts (10 tests) 229ms
+ ✓ tests/view/view-crowd-fx-effects.test.ts (19 tests) 102ms
+ ✓ tests/sim/ourside-units.test.ts (7 tests) 80ms
+ ✓ tests/typing-words.test.ts (22 tests) 526ms
+ ✓ tests/sim/ourside-status.test.ts (9 tests) 224ms
+ ✓ tests/sim/battle-determinism.test.ts (6 tests) 3949ms
+   ✓ battle determinism > replays a whole M0 stage to the same hash every 10 s for the same seed  1881ms
+   ✓ battle determinism > differs for another seed (spawn jitter comes from the seeded spawn stream only)  901ms
+   ✓ battle determinism > keeps every number of the battle state an integer through a whole run  331ms
+   ✓ battle determinism > keeps every hashed number of the whole world an integer, at each difficulty and after a whole run  500ms
+   ✓ battle determinism > runs a whole stage at well over 200 × real time headless (00 §8)  316ms
+ ✓ tests/sim/ourside-economy.test.ts (8 tests) 101ms
+ ✓ tests/view/lane-cue.test.ts (4 tests) 465ms
+   ✓ lane cue > fades a cued dirt lane in over a quarter second and out again; a quiet sky lane dims and its chevrons stop  460ms
+ ✓ tests/sim/ourside-traps.test.ts (7 tests) 116ms
+ ✓ tests/sim/ourside-wiring.test.ts (2 tests) 88ms
+ ✓ tests/sim/battle-auras.test.ts (8 tests) 170ms
+ ✓ tests/sim/smoke.test.ts (5 tests) 193ms
+ ✓ tests/sim/ourside-houses.test.ts (5 tests) 80ms
+ ✓ tests/view/crowd-rig.test.ts (11 tests) 91ms
+ ✓ tests/ui/tags-animation.test.ts (2 tests) 16ms
+ ✓ tests/view/view-crowd-fx-crowd.test.ts (13 tests) 65ms
+ ✓ tests/sim/bot-load.test.ts (7 tests) 31ms
+ ✓ tests/view/m0b-banners.test.ts (3 tests) 9ms
+ ✓ tests/content/map.test.ts (11 tests) 11ms
+ ✓ tests/ui/results.test.ts (4 tests) 26ms
+ ✓ tests/app/typing-pace.test.ts (25 tests) 62ms
+ ✓ tests/typing-learning.test.ts (17 tests) 29ms
+ ✓ tests/app/pace-card.test.ts (10 tests) 12ms
+ ✓ tests/audio/music-plan.test.ts (6 tests) 14ms
+ ✓ tests/app/loop-router.test.ts (6 tests) 18ms
+ ✓ tests/audio/map-events.test.ts (13 tests) 4ms
+ ✓ tests/view/number-field.test.ts (4 tests) 9ms
+ ✓ tests/ui/screen-zones.test.ts (3 tests) 46ms
+ ✓ tests/audio/engine.test.ts (3 tests) 6ms
+ ✓ tests/ui/shop-strip.test.ts (4 tests) 13ms
+ ✓ tests/view/model-specs.test.ts (6 tests) 6ms
+ ✓ tests/ui/hud.test.ts (7 tests) 16ms
+ ✓ tests/ui/placement.test.ts (6 tests) 40ms
+ ✓ tests/ui/debut-card.test.ts (3 tests) 3ms
+ ✓ tests/audio/mix.test.ts (7 tests) 5ms
+ ✓ tests/ui/wave-card.test.ts (3 tests) 5ms
+
+ Test Files  51 passed (51)
+      Tests  453 passed (453)
+   Start at  19:37:55
+   Duration  6.96s (transform 3.76s, setup 0ms, collect 17.97s, tests 25.56s, environment 11ms, prepare 5.89s)
+

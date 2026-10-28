@@ -1,0 +1,37 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ❯ tests/vocab-pin.test.ts (7 tests | 1 failed) 260ms
+   ✓ pinned vocabulary (G7) > includes the complete ordered inventory and every configured file 3ms
+   ✓ pinned vocabulary (G7) > agrees on the full commit pin and index version 0ms
+   × pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest 17ms
+     → levels/057.json: expected 'eef90d0aaaac7c5a6eefce8b84f4be3732b9c…' to be 'e1a6e582ef4fc7289965596a798a4a3d21b14…' // Object.is equality
+   ✓ pinned vocabulary (G7) > covers the kit's entire curriculum using each index file field 2ms
+   ✓ pinned vocabulary (G7) > keeps each level nonempty after adult and child filtering and deck selection 53ms
+   ✓ pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate 146ms
+   ✓ pinned vocabulary (G7) > contains no parent vocabulary path outside the copied kit 37ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest
+AssertionError: levels/057.json: expected 'eef90d0aaaac7c5a6eefce8b84f4be3732b9c…' to be 'e1a6e582ef4fc7289965596a798a4a3d21b14…' // Object.is equality
+
+Expected: "e1a6e582ef4fc7289965596a798a4a3d21b145c770fe7eb42996d0493ee7ad8c"
+Received: "eef90d0aaaac7c5a6eefce8b84f4be3732b9c0e4268d5c682014fca6b9dbf959"
+
+ ❯ tests/vocab-pin.test.ts:54:42
+     52|     for (const file of config.files) {
+     53|       const hash = createHash("sha256").update(readFileSync(join(vocab…
+     54|       expect(manifest.files[file], file).toBe(hash);
+       |                                          ^
+     55|     }
+     56|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  19:44:10
+   Duration  820ms (transform 209ms, setup 0ms, collect 315ms, tests 260ms, environment 0ms, prepare 56ms)
+

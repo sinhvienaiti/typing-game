@@ -1,0 +1,45 @@
+{
+  "golden": {
+    "exitCode": 0,
+    "outputBytes": 0
+  },
+  "whitespace": {
+    "exitCode": 0,
+    "outputBytes": 0
+  },
+  "preservation": {
+    "baselineFiles": 118,
+    "unchangedFiles": 118,
+    "changedFiles": []
+  },
+  "existingAssets": {
+    "totalJsBytes": 1241854,
+    "jsChunks": 5,
+    "previewFiles": [
+      "ui-preview-jAwQWz9e.js"
+    ],
+    "freshBuild": false
+  },
+  "testExecution": {
+    "before": null,
+    "after": null,
+    "newAuthoredCases": 5,
+    "reason": "Chỉ dẫn phiên cấm chạy build và bộ test; đang chờ chủ xác nhận ngoại lệ."
+  },
+  "results": {
+    "changed": false,
+    "reason": "Esc đang mở bảng trong đoạn chờ thắng; dừng theo điều kiện phiếu, chờ làm rõ."
+  },
+  "scope": {
+    "statusExitCode": 0,
+    "beforeStatusLines": 118,
+    "afterStatusLines": 122,
+    "addedPaths": [
+      "docs/changelog/2026-10-29-portal-button.md",
+      "src/app/portal.ts",
+      "src/main.ts",
+      "tests/app/portal.test.ts"
+    ],
+    "baselineChanged": []
+  }
+}

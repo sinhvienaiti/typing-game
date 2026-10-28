@@ -1,0 +1,125 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+stderr | tests/vocab-pin.test.ts > pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate
+dragon-hold: vocabulary did not load Error: ENOENT: no such file or directory, open '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+    at readFileSync (node:fs:483:20)
+    at /Users/toandx/htdocs/typing-game/games/.wt-dh-codex/tests/vocab-pin.test.ts:88:27
+    at mockCall (file:///Users/toandx/htdocs/typing-game/games/.wt-dh-codex/node_modules/.pnpm/@vitest+spy@3.2.7/node_modules/@vitest/spy/dist/index.js:96:15)
+    at spy (file:///Users/toandx/htdocs/typing-game/games/.wt-dh-codex/node_modules/.pnpm/tinyspy@4.0.6/node_modules/tinyspy/dist/index.js:47:80)
+    at /Users/toandx/htdocs/typing-game/games/.wt-dh-codex/src/kit/vocab/vocabulary.ts:505:30
+    at loadRawVocabularyLevel (/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/src/kit/vocab/vocabulary.ts:526:5)
+    at loadVocabularyLevel (/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/src/kit/vocab/vocabulary.ts:474:21)
+    at /Users/toandx/htdocs/typing-game/games/.wt-dh-codex/src/app/learning.ts:236:36
+    at Array.map (<anonymous>)
+    at defaultEntries (/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/src/app/learning.ts:236:8) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+}
+
+ ❯ tests/vocab-pin.test.ts (7 tests | 5 failed) 325ms
+   × pinned vocabulary (G7) > includes the complete ordered inventory and every configured file 8ms
+     → expected [ 'ATTRIBUTION.md', …(101) ] to deeply equal [ 'ATTRIBUTION.md', …(102) ]
+   ✓ pinned vocabulary (G7) > agrees on the full commit pin and index version 0ms
+   × pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest 6ms
+     → ENOENT: no such file or directory, open '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+   × pinned vocabulary (G7) > covers the kit's entire curriculum using each index file field 5ms
+     → levels/100.json: expected false to be true // Object.is equality
+   × pinned vocabulary (G7) > keeps each level nonempty after adult and child filtering and deck selection 55ms
+     → ENOENT: no such file or directory, open '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+   × pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate 240ms
+     → saved level 99: expected 0 to be greater than 0
+   ✓ pinned vocabulary (G7) > contains no parent vocabulary path outside the copied kit 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > includes the complete ordered inventory and every configured file
+AssertionError: expected [ 'ATTRIBUTION.md', …(101) ] to deeply equal [ 'ATTRIBUTION.md', …(102) ]
+
+- Expected
++ Received
+
+@@ -98,8 +98,7 @@
+    "levels/095.json",
+    "levels/096.json",
+    "levels/097.json",
+    "levels/098.json",
+    "levels/099.json",
+-   "levels/100.json",
+    "vocab-manifest.json",
+  ]
+
+ ❯ tests/vocab-pin.test.ts:38:92
+     36|     const expected = ["index.json", ...Array.from({ length: kitLevelLi…
+     37|     expect(config.files).toEqual(expected);
+     38|     expect(filesUnder(vocabulary).map((path) => path.slice(vocabulary.…
+       |                                                                                            ^
+     39|     for (const file of config.files) expect(existsSync(join(vocabulary…
+     40|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > matches every SHA-256 and keeps a sorted, formatted manifest
+Error: ENOENT: no such file or directory, open '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+ ❯ tests/vocab-pin.test.ts:53:48
+     51|     expect(readFileSync(join(vocabulary, "vocab-manifest.json"), "utf8…
+     52|     for (const file of config.files) {
+     53|       const hash = createHash("sha256").update(readFileSync(join(vocab…
+       |                                                ^
+     54|       expect(manifest.files[file], file).toBe(hash);
+     55|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > covers the kit's entire curriculum using each index file field
+AssertionError: levels/100.json: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/vocab-pin.test.ts:65:68
+     63|     for (const level of index.levels) {
+     64|       expect(config.files, level.file).toContain(level.file);
+     65|       expect(existsSync(join(vocabulary, level.file)), level.file).toB…
+       |                                                                    ^
+     66|     }
+     67|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > keeps each level nonempty after adult and child filtering and deck selection
+Error: ENOENT: no such file or directory, open '/Users/toandx/htdocs/typing-game/games/.wt-dh-codex/public/vocabulary/levels/100.json'
+ ❯ readJson tests/vocab-pin.test.ts:13:56
+     11| const root = fileURLToPath(new URL("..", import.meta.url));
+     12| const vocabulary = join(root, "public/vocabulary");
+     13| const readJson = (path: string): unknown => JSON.parse(readFileSync(pa…
+       |                                                        ^
+     14| const config = readJson(join(root, "vocab.config.json")) as { pin: str…
+     15| const manifest = readJson(join(vocabulary, "vocab-manifest.json")) as …
+ ❯ tests/vocab-pin.test.ts:71:24
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/vocab-pin.test.ts > pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate
+AssertionError: saved level 99: expected 0 to be greater than 0
+ ❯ tests/vocab-pin.test.ts:103:61
+    101|         try {
+    102|           const deck = await client.buildDeck(STAGE_M0);
+    103|           expect(deck.words.length, `saved level ${level}`).toBeGreate…
+       |                                                             ^
+    104|           // defaultEntries filters [L, L+1] through the index before …
+    105|           const loaded = index.levels.filter((item) => item.level === …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+   Start at  19:44:16
+   Duration  1.03s (transform 229ms, setup 0ms, collect 353ms, tests 325ms, environment 0ms, prepare 58ms)
+

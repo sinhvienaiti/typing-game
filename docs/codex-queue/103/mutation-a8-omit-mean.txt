@@ -1,0 +1,36 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-codex
+
+ ❯ tests/td-sheet-cards.test.ts (8 tests | 2 failed) 15ms
+   ✓ 103 A6: Knowledge on the results card > balanced with 0 Knowledge: visible false 6ms
+   ✓ 103 A6: Knowledge on the results card > learn with 0 Knowledge: visible true 1ms
+   ✓ 103 A6: Knowledge on the results card > challenge with 3 Knowledge: visible true 1ms
+   ✓ 103 A8: measured meaning strips take space in the column > keeps an upper meaning strip clear of the next word in the same column 0ms
+   ✓ 103 A8: measured meaning strips take space in the column > reserves every meaning box even when the old 240 px rise is full 0ms
+   ✓ 103 A8: measured meaning strips take space in the column > uses the full meaning width and height when separating neighbouring columns 0ms
+   × 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1280 4ms
+     → expected { setProperty: [Function setProperty] } to have property "transform"
+   × 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1920 1ms
+     → expected { setProperty: [Function setProperty] } to have property "transform"
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/td-sheet-cards.test.ts > 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1280
+ FAIL  tests/td-sheet-cards.test.ts > 103 A8: draw includes mean cards for exactly 1000 ms > keeps the meaning strips above the next word at width 1920
+AssertionError: expected { setProperty: [Function setProperty] } to have property "transform"
+ ❯ tests/td-sheet-cards.test.ts:82:32
+     80|         const lower = stacked[k - 1]!;
+     81|         expect(upper.y + upper.height).toBeLessThanOrEqual(lower.y - 4…
+     82|         expect(upper.el.style).toHaveProperty("transform");
+       |                                ^
+     83|         expect(upper.leave).toBe("mean");
+     84|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  19:52:36
+   Duration  405ms (transform 164ms, setup 0ms, collect 235ms, tests 15ms, environment 0ms, prepare 29ms)
+
