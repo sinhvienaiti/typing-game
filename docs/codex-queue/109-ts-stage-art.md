@@ -22,6 +22,8 @@
 
 ## Phong cách
 
+- **Mức chất lượng (chủ dự án 28/10 tối):** ngang ảnh chủ đạo của game thương mại, với ánh sáng điện ảnh, chiều sâu lớn và quy mô hùng vĩ. Ảnh tham chiếu của chủ dự án nằm ở `games/typing-survival/art-src/_refs/owner-epic-2026-10-28.webp`: lấy mức chi tiết, ánh sáng và cảm giác quy mô, không lấy nội dung. Chữ trên ảnh (nếu có) là tiếng Anh; ảnh này không có chữ.
+
 - **Theo game, không theo màn tựa cũ:** dùng các ảnh của phiếu 088 làm mẫu chất liệu và màu: `games/typing-survival/art-src/arena/concept-fight.png`, `hull-left.png`, `far-structures.png`. Kiểu là 3D gọn, khối rõ, thép than chì, sọc cam đen, đèn LED xanh điện, hố đen cam.
 - **Không** vẽ như ảnh chụp, không sàn ướt. `title-horizon.png` lệch phong cách, nên không dùng làm mẫu.
 - **Quái là Bầy Hố Đen:** thân tối, gân năng lượng sáng (cam ở Swarm; vàng hổ phách ở Brute; vàng kim ở Pack Leader; xanh ở Scout và Shield Guard). Dáng lấy theo `games/typing-survival/art-src/ui/foes/*.png` (phiếu 089).

@@ -40,15 +40,19 @@ phases (charge, release at the caster, travel, impact, aftermath), the caster
 side first. Every VFX brief names the standard, the reference image, the
 action class, the capture scenario and the acceptance numbers.
 
-## In-game names (owner, 27/10/2026)
+## Language, names and art level (owner, 28/10/2026, night)
 
-The games teach English, so the player sees game nouns in English: towers,
-traps, houses, units and soldiers, enemy kinds, items, guns (for example
-"Pine Bomb", not "Bom Hạt Thông"). Sentences, hints and menus stay Vietnamese
-around those names, and a name's first showing (debut card, shop tooltip) may
-add a short Vietnamese gloss. Unique characters keep their proper names (the
-dragons, Draconis, named bosses). Any new or reworded player-facing text uses
-English nouns; existing names change in a per-game naming pass, not in passing.
+These are English games. Everything the player reads is in English:
+- titles, menus, buttons, hints, briefings, results, tooltips;
+- game nouns (towers, traps, houses, units, enemy kinds, items, guns).
+
+Vietnamese stays only where the game teaches it: the meaning of the word being learned (for example "thank · cảm ơn"), and optional glosses inside learning panels.
+
+The games are named **Dragonhold** (was Rồng Giữ Ải), **Wordwoven** (was Lời Gọi) and **Last Line** (was Tuyến Cuối). Unique characters keep their proper names (the dragons, Draconis, named bosses).
+
+The 27/10 rule (English nouns inside Vietnamese sentences) is replaced. Convert the existing text in a per-game language pass, not in passing.
+
+Art must reach commercial-game level. Backgrounds, title screens, key art, map scenes and skies are scored against a board of commercial-game references (epic, majestic, cinematic light), not against our own style guide. Nothing the player sees is a code-drawn stand-in for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. Shaders and VFX that meet the VFX standard are fine. Every UI detail carries real art, not text alone. Sound is real audio files made through `docs/games/AUDIO_PIPELINE.md`, not synthesized placeholders.
 
 ## Test captures (owner, 28/10/2026)
 
