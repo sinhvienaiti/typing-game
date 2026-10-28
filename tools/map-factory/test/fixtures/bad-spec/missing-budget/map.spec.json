@@ -1,0 +1,16 @@
+{
+  "format": "map-spec/0", "id": "L2-cau", "game": "dragon-hold", "unit": "cm", "seed": 20261028,
+  "generator": { "factory": "0.1.0", "layers": { "fields": 1, "height": 1, "water": 1, "paths": 1, "vegetation": 1, "paint": 1 } },
+  "gameplay": { "adapter": "dragon-hold@1", "commit": "83da970eacbf85ea64da89f62a4d1b6622bc5c7b",
+                "hash": "c852b4d70147c8d2bf87f22999334f090646d0ae87bde6a9873b35de45d9659a" },
+  "registry": { "scan": "2026-10-27", "kit": "pine-river@1" },
+  "extent": { "playRadiusCm": 3200, "worldHalfCm": 7200, "cellCm": 50, "skirtCellCm": 200 },
+  "review": { "pitchesDeg": [40, 55, 75], "yawsDeg": [0, 90, 180, 270] },
+  "layers": {
+    "height": { "stamps": [{ "id": "north-bluff", "kind": "cliff", "line": [[-3000, -5200], [2000, -5600]], "heightCm": 800, "outsidePlay": true }] },
+    "water": { "river": "fromGameplay", "ponds": [{ "id": "west-pond", "at": [-1800, 2200], "radiusCm": 450 }] },
+    "paths": { "footpaths": [{ "id": "fp-pond", "from": "dais", "to": "pond/west-pond", "widthCm": 90 }], "neverEndAt": "slots" },
+    "vegetation": { "groves": { "count": [5, 8], "radiusCm": [400, 900], "densityPermille": 650 }, "keepClearOf": ["lanes", "sky", "slots", "dais"] },
+    "paint": { "canopyDirtCm": 240, "routeWornCm": 80 }
+  }
+}
