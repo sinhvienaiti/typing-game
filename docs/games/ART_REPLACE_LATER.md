@@ -36,6 +36,8 @@ Cột:
 | MF-I4 Leaf Fall | [leaf-fall.png](../../games/dragon-hold/art-src/fx/life/leaf-fall.png) | 8,5 | 4×4 ô 32, đúng lưới. 4 khung chỉ là xoay 90°, nên lá rơi trông quay đều. | P3 | Thêm lật và co phối cảnh ở runtime; vẽ lại chỉ khi vẫn trông quay đều. | 28/10/2026 |
 | MF-I4 Smoke Puff | [smoke-puff.png](../../games/dragon-hold/art-src/fx/life/smoke-puff.png) | 8,5 | 6 ô 128, xám thuần, alpha giảm đều. | P3 | Phát một lượt, gối nhiều làn ở runtime. | 28/10/2026 |
 | MF-I4 Firefly | [firefly.png](../../games/dragon-hold/art-src/fx/life/firefly.png) | 8,5 | 32², lõi vàng ấm; lệch #FFC83A ΔE2000 20,9. | P3 | Chỉnh màu ở shader khi lắp. | 28/10/2026 |
+| MF-I5 meadow-calm-a, meadow-calm-b | [meadow-calm-a.png](../../games/dragon-hold/art-src/ground/pine-river/meadow-calm-a.png), [meadow-calm-b.png](../../games/dragon-hold/art-src/ground/pine-river/meadow-calm-b.png) | 8 | Hue và độ rối đạt; mép đã làm liền bằng công cụ (phiếu 093). Cỏ A: mảng sáng tối còn đậm (±5,8 %), trục X còn hơi cao (1,26). Cỏ B: mảng tối hai tông mép cứng, sâu −7,9 %; lặp chéo rõ khi lát; nét mượt như phun sơn; sáng và vàng hơn grass-a. | P3 | Làm dịu mảng tối về ±5 % bằng công cụ; vẽ lại chỉ khi vẫn thấy lặp trong game. | 28/10/2026 |
+| MF-I5 soil-worn-pale | [soil-worn-pale.png](../../games/dragon-hold/art-src/ground/pine-river/soil-worn-pale.png) | 8,5 | Luma 0,687 đúng đích; gần như một mảng phẳng, xám hơn path/earth (S 0,19 so với 0,41) nên dễ đọc như vữa. Đã làm liền mép (093). | P3 | Dùng `soil-worn-pale.try2` (luma 0,661, chất đất rõ hơn) qua cùng bước làm liền mép nếu trong game trông như vữa. | 28/10/2026 |
 
 ## Lời Gọi
 

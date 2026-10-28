@@ -1,5 +1,7 @@
 # Lô Codex 1 cho map 1 (28/10/2026)
 
+**Đã tách thành phiếu (28/10, điều phối viên):** phiếu ảnh 094–099 của lô là 095–100 trong hàng (số +1); phiếu 100 của lô là 094; phiếu mã 101–105 giữ số. Xem `docs/CODEX_QUEUE.md`.
+
 Nguồn: `MAP1_PRODUCTION.md` (cùng thư mục). Mỗi mục `## Phiếu` dưới đây tách thành `docs/codex-queue/<số>-<tên>.md`. Khối "Luật chung" ở mục 1 chép nguyên vào đầu mỗi phiếu cùng loại.
 
 ## 0. Hàng chạy
