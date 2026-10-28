@@ -60,6 +60,25 @@ describe("model URLs", () => {
 });
 
 describe("manifest parsing", () => {
+  it("accepts extra kinds only when listed, retaining Space kinds and dropping unlisted kinds", () => {
+    const raw = {
+      version: 1,
+      models: {
+        "buildings/barracks": entry("buildings", "barracks", { high: { url: "buildings/barracks.glb", bytes: 123 } }),
+        "props/crate": entry("props", "crate", { high: { url: "props/crate.glb", bytes: 45 } }),
+        "kits/starter": entry("kits", "starter", { high: { url: "kits/starter.glb", bytes: 67 } }),
+      },
+    };
+    const standard = parseModelManifest(raw, GAME)!;
+    expect(Object.keys(standard.models)).toEqual(["props/crate"]);
+    expect(standard.dropped).toBe(2);
+    const extended = parseModelManifest(raw, GAME, ["buildings"] as const)!;
+    expect(Object.keys(extended.models)).toEqual(["buildings/barracks", "props/crate"]);
+    expect(extended.dropped).toBe(1);
+    expect(extended.models["props/crate"]).toEqual(standard.models["props/crate"]);
+    expect(isModelKind("buildings")).toBe(false);
+  });
+
   it("takes only version 1 with a models object", () => {
     expect(parseModelManifest(null, GAME)).toBeNull();
     expect(parseModelManifest({ version: 2, models: {} }, GAME)).toBeNull();
@@ -93,6 +112,48 @@ describe("manifest parsing", () => {
 });
 
 describe("model library", () => {
+  it.each([false, true])("loads buildings only when opted in, with tiers and size (extra kinds: %s)", async (extended) => {
+    const raw = {
+      version: 1,
+      models: {
+        "buildings/barracks": entry("buildings", "barracks", {
+          high: { url: "buildings/barracks.high.glb", bytes: 900 },
+          medium: { url: "buildings/barracks.medium.glb", bytes: 450 },
+        }, { size: [4, 3, 5], sockets: [], clips: [] }),
+        "props/crate": entry("props", "crate", { high: { url: "props/crate.glb", bytes: 12 } }),
+      },
+    };
+    const library = new ModelLibrary({ manifests: GAME, fetcher: fakeFetch({ [GAME]: raw }), ...(extended ? { kinds: ["buildings"] as const } : {}) });
+    const building = await library.entry("buildings", "barracks");
+    if (extended) {
+      expect(building).toEqual({
+        ...raw.models["buildings/barracks"],
+        tiers: {
+          high: { url: "/assets/dragon-hold/models/buildings/barracks.high.glb", bytes: 900 },
+          medium: { url: "/assets/dragon-hold/models/buildings/barracks.medium.glb", bytes: 450 },
+        },
+      });
+      expect(await library.url("buildings", "barracks", "medium")).toBe("/assets/dragon-hold/models/buildings/barracks.medium.glb");
+      expect(await library.url("buildings", "barracks", "high")).toBe("/assets/dragon-hold/models/buildings/barracks.high.glb");
+      expect(await library.url("buildings", "barracks", "low")).toBeNull();
+    } else {
+      expect(building).toBeNull();
+      expect(await library.url("buildings", "barracks", "high")).toBeNull();
+    }
+    expect(await library.entry("props", "crate")).toMatchObject({ kind: "props", id: "crate", size: [1, 2, 1] });
+    expect(await library.url("props", "crate", "high")).toBe("/assets/dragon-hold/models/props/crate.glb");
+  });
+
+  it.each(["Bad Name", "", "Buildings", "1building", "bad_name", "bad/name", "building\n"])("rejects an invalid extra kind: %j", (kind) => {
+    expect(() => new ModelLibrary({ manifests: GAME, kinds: [kind] })).toThrow(expect.objectContaining({ message: expect.stringContaining(kind) }));
+  });
+
+  it("accepts lowercase extra kinds with digits and hyphens", async () => {
+    const raw = { version: 1, models: { "game-kit2/starter": entry("game-kit2", "starter", { high: { url: "starter.glb", bytes: 1 } }) } };
+    const library = new ModelLibrary({ manifests: GAME, kinds: ["game-kit2"] as const, fetcher: fakeFetch({ [GAME]: raw }) });
+    expect(await library.entry("game-kit2", "starter")).toMatchObject({ kind: "game-kit2", id: "starter" });
+  });
+
   const game = { version: 1, models: { "guides/bach-long": entry("guides", "bach-long", { high: { url: "guides/bach-long.high.glb", bytes: 1 } }) } };
   const space = {
     version: 1,

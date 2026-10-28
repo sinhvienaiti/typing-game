@@ -1,0 +1,28 @@
+{
+  "tests_before": 700,
+  "tests_after": 711,
+  "test_files": 46,
+  "model_tests_before": 9,
+  "model_tests_after": 20,
+  "test_first_failed": 10,
+  "typecheck_errors": 0,
+  "compatibility": {
+    "dragon-hold": {
+      "exit_code": 0,
+      "errors": 0
+    },
+    "typing-survival": {
+      "exit_code": 0,
+      "errors": 0
+    }
+  },
+  "mutation_failed": 3,
+  "temporary_copies_removed": true,
+  "new_status_paths_outside_allowlist": [],
+  "preexisting_outside_allowlist": [
+    "shared/game-kit/tools/cdp-port.mjs",
+    "shared/game-kit/tools/cdp-port.test.ts",
+    "shared/game-kit/tools/cdp-run.mjs"
+  ],
+  "literal_status_gate_passed": false
+}
