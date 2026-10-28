@@ -83,6 +83,10 @@ Mục 3 bên dưới là lịch sử.
 | **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: C0, C1, C2 (sân khấu, camera), C3 (đất, suối, cầu), C4 phần A. Đang làm C4 phần B, rồi chuẩn bị C6 (cần phiếu kit 107) | Cập nhật C0 §5 theo quyết định của chủ dự án (Medium ≤ 9 MB, bộ khởi động ≤ 3,5 MB, ≤ 6 MB tới Đêm 1); làm tiếp C6 khi kit 107 xong |
 | **V-ts** (VFX Last Line) | đã gộp vào `main` `e26e898` (cùng `ts-codex`), đã đẩy | TS-M1-04 đạt. TS-M1-05 **trượt giám khảo độc lập**: Pulse Gun 5,5, Heat Beam 5, tàu bị đánh 4,5, Pulse Gun trên nền sáng 4. Lóe bắn là đĩa trắng tròn quanh tàu, mất màu súng; đốm trúng trắng che bầy; khói mờ; thiếu lớp tối | Vòng 2 khi có chỗ trống (tối đa 4 làn) |
 | **V-dh** (VFX Rồng, nhận từ session cũ 28/10 22:30) | `games/.wt-dh-vfx`, nhánh `dh-vfx` (25160fe, chưa gộp) | Vòng sửa ngắn cho 1a (người chấm vòng 2: 7 và 7,5; lõi trắng quá to, không ra lửa); Sky Fire từ phần sửa dở; VFX quái (gộp `main` vào trước) | Sau 1a, điều phối viên chạy một giám khảo độc lập (cần ≥ 8), rồi gửi chủ dự án tờ 1a |
+| **J-dh** (giám khảo độc lập, 29/10 04:20) | chỉ đọc `games/.wt-dh-vfx/tmp/vfx/final4/` | Chấm đòn chữ 1a vòng 4 (`dh-vfx` `f3b4d24`; vòng 3 bị chấm mạnh 6, thường 5,5). Đạt khi mỗi đòn ≥ 8, không pha nào < 7 | Kết luận ở `judge-r4/verdict.md`; gửi V-dh nếu trượt, gửi chủ dự án tờ 1a nếu đạt |
+| **E** (duyệt chữ tiếng Anh, 29/10 04:20) | `.wt-ts-codex`, `.wt-dh-codex`, rồi `.wt-td-codex` khi 132 xong | Duyệt, sửa, kiểm trình duyệt ở 1280 và 1920, commit 130, 131, 132 trên nhánh Codex. Quyết định cho 131: trang dev âm thanh không ra bản build thì loại khỏi test quét bằng danh sách đường có chú thích | Điều phối gộp vào nhánh chính, rồi mở làn gắn ảnh |
+
+**Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R (map Rồng A3) vẫn dừng, chờ có chỗ trống. Ổ đĩa còn 10 GB lúc 04:15; `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
 
 ## 4. Việc chờ, theo thứ tự
 
