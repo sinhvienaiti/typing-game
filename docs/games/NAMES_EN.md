@@ -1,8 +1,29 @@
 # Bảng đề xuất tên tiếng Anh trong ba game
 
-Ngày 27/10/2026 · Phiếu 026 · **Bản đề xuất để Claude duyệt, chưa đổi chuỗi trong game.**
+Ngày 27/10/2026 · Phiếu 026 · Cập nhật 29/10/2026 theo luật ngôn ngữ 28/10 (lượt duyệt phiếu 130–132).
 
-Áp dụng mục “In-game names” trong `AGENTS.md` của repo cha: tên danh từ của thực thể, đồ, súng và tài nguyên dùng tiếng Anh; câu, hướng dẫn và menu giữ tiếng Việt. Nhân vật độc nhất giữ tên riêng. Cột nghĩa Việt dùng cho lần ra mắt/chú thích đầu, không phải hậu tố thường trực.
+## Luật ngôn ngữ (chủ dự án, 28/10/2026 tối)
+
+Nguồn: `AGENTS.md` của repo cha, mục "Language, names and art level". Luật này thay luật 27/10 ("danh từ tiếng Anh trong câu tiếng Việt").
+
+- **Đây là các game tiếng Anh. Mọi chữ người chơi đọc là tiếng Anh:**
+  - tên game, menu, nút, gợi ý phím, bảng tin, kết quả, tooltip, banner, câu truyện;
+  - danh từ game: trụ, bẫy, nhà, lính, loại quái, tướng địch, món đồ, súng, tài nguyên;
+  - cả chỉ số, chế độ, tên nơi chốn và ải, nhãn cơ chế, nhãn học, mục tiêu, sự kiện.
+- **Tiếng Việt chỉ còn ở chỗ game dạy nó:**
+  - nghĩa của từ đang học (trường `vi`, ví dụ "thank · cảm ơn");
+  - chú thích tùy chọn trong bảng học.
+- **Tên game:** Dragonhold (trước là Rồng Giữ Ải), Wordwoven (trước là Lời Gọi), Last Line (trước là Tuyến Cuối).
+- **Nhân vật độc nhất giữ tên riêng, viết đủ dấu:**
+  - Dragonhold: Hỏa Long, Bạch Long;
+  - Wordwoven: Draconis, Mộc Tinh (boss), Bà Cú Mực, Chấm, Phẩy, Gạch;
+  - Last Line: Vanguard, Draconis.
+
+  Test quét chữ Việt của mỗi game chỉ cho qua đúng danh sách tên riêng của game đó.
+- Tên phe không phải nhân vật độc nhất: "Bầy Hố Đen" của Last Line là **Black Hole Horde**.
+- Mỗi game đổi trong một lượt ngôn ngữ riêng, không đổi lẻ tẻ: phiếu 130 (Last Line), 131 (Dragonhold), 132 (Wordwoven).
+
+Các cột "Tên Việt hiện tại" trong bảng dưới là hiện trạng lúc kiểm kê 27/10, giữ để tra cứu.
 
 ## Cách đọc và phạm vi đếm
 
@@ -28,15 +49,7 @@ Người duyệt: Claude, sau phiếu 026. Các quyết định dưới đây đ
   - món đồ, súng, tài nguyên (Gold, Wood, Rice, Seeds, Knowledge, Dragon Rage);
   - kỹ năng mang tên một vật: Fire Breath, Sky Fire, Dragon Roar, Inferno, Fire Feather Rain, Word Shot;
   - hiểm họa là một vật trên sân: Rift.
-- **Giữ tiếng Việt:**
-  - chỉ số (Giáp, Khiên, Kháng phép, Mạng, Vỏ);
-  - chế độ (Thư giãn, Cân bằng, Thử thách, Học, Hộp cát, Hành trình, Trận thử);
-  - tên nơi chốn: bản đồ, đường, chương, ải (Đồng Cỏ Thác Bạc, Đường Cầu, Hành Lang VC-7…);
-  - nhãn cơ chế và loại từ gõ (Chữ Chiêu, Từ Khẩn, Từ Ngắt, Từ Trợ, Từ Kích, Cụm Ấn, Ấn Phá, Héo lan, Vùng Chữ, Tối Thượng);
-  - lời gọi là động từ (Xây, Gặt, Chặt, Đào, Bắn mạnh, Hỏi bài, Ngắt, Neo, Phá Khiên, Cắm Cờ, Nhổ cờ);
-  - nhãn học (Thẻ Ôn, Học trước, Sổ Từ Ải, Sổ ôn), nhãn lớp trên thẻ chữ (Quái, Bầy, Tinh anh, Tướng, Bộ phận, Vật), mục tiêu, sự kiện, trạng thái.
-
-  Chúng là menu, câu và gợi ý, mà luật giữ những thứ này bằng tiếng Việt.
+- **Những thứ còn lại** (chỉ số, chế độ, nơi chốn, nhãn cơ chế, lời gọi, nhãn học) cũng sang tiếng Anh theo luật 28/10 ở trên, trong lượt ngôn ngữ của từng game.
 - **Giữ tên riêng:** Hỏa Long, Bạch Long, Draconis, Mộc Tinh, Bà Cú Mực, Chấm, Phẩy, Gạch, Vanguard. Tên phe "Bầy Hố Đen" cũng là tên riêng.
 
 **Đã chốt các dòng "Cần Claude xem":**
@@ -45,8 +58,20 @@ Người duyệt: Claude, sau phiếu 026. Các quyết định dưới đây đ
 |---|---|---|
 | Rồng Giữ Ải | Phun Lửa | **Fire Breath** (hơi lửa rồng) |
 | Rồng Giữ Ải | Viêm Đế | **Inferno** (biển lửa), trùng id `inferno` trong mã |
-| Tuyến Cuối | Vết nứt (hiểm họa) | **Rift** (vết nứt không gian). Tên ải "Vách nứt" giữ tiếng Việt |
-| cả ba | các dòng còn lại | giữ tiếng Việt theo ranh giới trên |
+| Tuyến Cuối | Vết nứt (hiểm họa) | **Rift** (vết nứt không gian) |
+| cả ba | các dòng còn lại | tiếng Anh theo luật 28/10, chốt trong lượt ngôn ngữ của từng game |
+
+**Tên ải của Last Line (lượt duyệt phiếu 130, 29/10):**
+
+| id | Tên Việt cũ | Tên tiếng Anh | Trạng thái |
+|---|---|---|---|
+| `s0` | Trận thử | **Trial** | dùng trong game |
+| `c1-s1` | Ca trực đầu | **First Shift** | dùng trong game |
+| `c1-s2` | Săn Pack Leader | **Leader Hunt** | tạm, Claude đặt (tên dài hơn làm tiêu đề thẻ vào trận xuống dòng); chủ dự án có thể đổi |
+| `c1-s3` | Vách nứt | **Rift Wall** | dùng trong game |
+| `c1-s4` | Khiên sáng | **Shining Shields** | tạm, Claude đặt; chủ dự án có thể đổi |
+
+Chương: **Chapter 1 · VC-7 Corridor**.
 
 **Đã sửa tên đề xuất trong bảng:**
 
@@ -91,7 +116,7 @@ Nguồn: `src/content/data/{enemies,generals,our-side,maps,stages,waves}.ts`, `s
 | `small-potion` | Bình Máu Nhỏ | Small Potion | bình hồi máu nhỏ | Đồ tiêu hao | **3 chỗ**; `games/dragon-hold/src/app/app.ts:826`; `games/dragon-hold/src/content/data/our-side.ts:172`; `games/dragon-hold/src/ui/hud.ts:399` | Có tên rút gọn Bình Máu trong HUD và cảnh báo. Biến thể: `Bình Máu`. |
 | `dragon-heart` | Tim Rồng | Dragon Heart | tim rồng | Món nâng cấp | **1 chỗ**; `games/dragon-hold/src/content/data/our-side.ts:191` | id trong HERO_UPGRADES; không đổi id. |
 | `hard-scale` | Vảy Cứng | Hard Scale | vảy cứng | Món nâng cấp | **1 chỗ**; `games/dragon-hold/src/content/data/our-side.ts:206` | id trong HERO_UPGRADES; đây là món tăng Giáp, không phải tiền Vảy Rồng. |
-| `gold` | Vàng | Gold | vàng | Tài nguyên | **16 chỗ**; `games/dragon-hold/src/ui/hud.ts:161,242`; `games/dragon-hold/src/ui/learning-frame.ts:492,645`; `games/dragon-hold/src/ui/placement-ui.ts:72,81,533,636,649,651`; `games/dragon-hold/src/ui/results.ts:299,300`; `games/dragon-hold/src/ui/shop-strip.ts:84,215,216`; `games/dragon-hold/src/ui/wave-card.ts:368` | Đổi nhãn và danh từ trong giá/thưởng/cảnh báo; câu xung quanh giữ tiếng Việt; trùng từ gõ: 5 (A1 Foundation 005; 005.json) |
+| `gold` | Vàng | Gold | vàng | Tài nguyên | **16 chỗ**; `games/dragon-hold/src/ui/hud.ts:161,242`; `games/dragon-hold/src/ui/learning-frame.ts:492,645`; `games/dragon-hold/src/ui/placement-ui.ts:72,81,533,636,649,651`; `games/dragon-hold/src/ui/results.ts:299,300`; `games/dragon-hold/src/ui/shop-strip.ts:84,215,216`; `games/dragon-hold/src/ui/wave-card.ts:368` | Đổi nhãn và danh từ trong giá/thưởng/cảnh báo; câu xung quanh cũng tiếng Anh (luật 28/10); trùng từ gõ: 5 (A1 Foundation 005; 005.json) |
 | `rage` | Long Nộ | Dragon Rage | nộ khí rồng | Tài nguyên | **4 chỗ**; `games/dragon-hold/src/ui/hud.ts:164,332,337`; `games/dragon-hold/src/ui/wave-card.ts:368` | Thanh năng lượng nạp Tối Thượng; không phải tên nhân vật. |
 | `RINGS.daisMm; hero` | Bệ Rồng | Dragon Platform | bệ đứng của rồng | Công trình | **2 chỗ**; `games/dragon-hold/src/ui/hud.ts:432`; `games/dragon-hold/src/ui/results.ts:293` | Không có id Placeable riêng; chuỗi hiện trong thông báo thất thủ. |
 | `plant-banner; flag` | cờ | Banner | cờ hiệu | Vật thể | **3 chỗ**; `games/dragon-hold/src/ui/debut-card.ts:27`; `games/dragon-hold/src/ui/tags.ts:461`; `games/dragon-hold/src/view/banners.ts:248` | Vật được tướng cắm; nhãn hành động Cắm Cờ/Nhổ cờ nằm ở bảng cần xem; trùng từ gõ: 12 (A1 Foundation 012; 012.json) |
@@ -335,16 +360,16 @@ Nguồn: `src/content/{guns,foes,chapter-1,stage-rules,stage-s0,threat,rules}.ts
 | `SHIP.hp; w.hp` | GIÁP | — | — | Chỉ số sinh tồn | **6 chỗ**; `games/typing-survival/src/app/main.ts:179`; `games/typing-survival/src/view/hud.ts:131`; `games/typing-survival/src/view/screens-journey.ts:32,55,68,119` | HUD viết hoa; menu, kết quả và tiếp tế dùng Giáp/giáp. Biến thể: `Giáp`. |
 | `view (title.lead)` | Bầy Hố Đen | — | — | Tên phe | **1 chỗ**; `games/typing-survival/src/app/main.ts:282` | Tên tập thể riêng trong lời giới thiệu, chưa tự dịch. |
 | `OBJECTIVE_LABELS.hold` | Trụ vững | — | — | Mục tiêu | **4 chỗ**; `games/typing-survival/src/app/journey.ts:304`; `games/typing-survival/src/app/main.ts:189`; `games/typing-survival/src/content/stage-rules.ts:62`; `games/typing-survival/src/view/screens.ts:129` | Tên mục tiêu, không tự đổi. |
-| `OBJECTIVE_LABELS.hunt` | Săn Đầu Đàn | — | — | Mục tiêu | **1 chỗ**; `games/typing-survival/src/content/stage-rules.ts:62` | Phần động từ Săn giữ Việt; danh từ quái bên trong theo hàng Leader nếu đổi. |
+| `OBJECTIVE_LABELS.hunt` | Săn Đầu Đàn | — | — | Mục tiêu | **1 chỗ**; `games/typing-survival/src/content/stage-rules.ts:62` | Nay là Hunt Pack Leaders (phiếu 130). |
 | `LEARN_RULES.standard` | Chuẩn | — | — | Luật học | **3 chỗ**; `games/typing-survival/src/app/main.ts:244`; `games/typing-survival/src/app/results.ts:82`; `games/typing-survival/src/content/stage-rules.ts:74` | Tên luật học, không phải băng đạn như trong thiết kế. |
 | `LEARN_RULES.missing` | Thiếu chữ | — | — | Luật học | **2 chỗ**; `games/typing-survival/src/content/stage-rules.ts:75`; `games/typing-survival/src/view/screens-journey.ts:17` | Tên luật học. |
 | `FORGE` | Rèn | — | — | Cơ chế nâng cấp | **4 chỗ**; `games/typing-survival/src/content/stage-rules.ts:149`; `games/typing-survival/src/view/screens-journey.ts:55,68,92` | Động từ/cấp nâng súng, chưa có cửa thưởng trong mã hiện đọc. |
 | `Hud (bay === 2)` | MỐC | — | — | Mốc tiến trình | **1 chỗ**; `games/typing-survival/src/view/hud.ts:161` | Chuỗi MỞ Ở MỐC có trong HUD, cơ chế chương tương lai; không suy ra vật phẩm. |
 | `renderJourney` | HÀNH LANG VC-7 | — | — | Tên vùng | **1 chỗ**; `games/typing-survival/src/view/screens-journey.ts:53` | Tên chương hiển thị trên screens-journey.ts. |
-| `c1-s1` | Ca trực đầu | — | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:41` | Tên ải 1. |
-| `c1-s2` | Đầu Đàn | — | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:59` | Trùng literal tên quái nhưng là stage.name; tránh đổi theo tìm-thay toàn cục. |
-| `c1-s3` | Vách nứt | — | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:76` | Tên ải 3 khác nhãn hiểm họa Vết nứt. |
-| `c1-s4` | Khiên sáng | — | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:93` | Tên ải 4, không tự đổi thành tên loại quái. |
+| `c1-s1` | Ca trực đầu | First Shift | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:41` | Tên ải 1. |
+| `c1-s2` | Đầu Đàn | Leader Hunt (tạm) | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:59` | Trùng literal tên quái nhưng là stage.name; tránh đổi theo tìm-thay toàn cục. |
+| `c1-s3` | Vách nứt | Rift Wall | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:76` | Tên ải 3 khác nhãn hiểm họa Vết nứt. |
+| `c1-s4` | Khiên sáng | Shining Shields (tạm) | — | Tên ải | **1 chỗ**; `games/typing-survival/src/content/chapter-1.ts:93` | Tên ải 4, không tự đổi thành tên loại quái. |
 | `s0` | Trận thử | — | — | Chế độ/ải | **5 chỗ**; `games/typing-survival/src/app/main.ts:229,295,304`; `games/typing-survival/src/content/guns.ts:130`; `games/typing-survival/src/content/stage-s0.ts:56` | Tên bản thử. |
 | `journey` | Hành trình | — | — | Chế độ | **3 chỗ**; `games/typing-survival/src/app/main.ts:228,264`; `games/typing-survival/src/view/screens-journey.ts:52` | Tên luồng menu/chương. |
 | `relax` | Thư giãn | — | — | Chế độ | **1 chỗ**; `games/typing-survival/src/content/balance.ts:28` | Tên chế độ. |
