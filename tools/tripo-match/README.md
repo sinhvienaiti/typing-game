@@ -99,6 +99,7 @@ node --test tools/tripo-match/test/*.test.mjs
 node --input-type=module - <<'JS'
 import { readFile } from 'node:fs/promises';
 import { runMatch, parseAnswers, evaluate } from './tools/tripo-match/match.mjs';
+// Thư mục đợt 1 đã xóa ngày 28/10; ảnh và GLB của nó còn trong games/<game>/art-src.
 const result = await runMatch({ upload: 'typing-game-handoff-2026-10-25/tripo-upload' });
 const answers = parseAnswers(await readFile('docs/games/3D_IMPORT_2026-10-26.md', 'utf8'));
 const m = evaluate(result, answers);
