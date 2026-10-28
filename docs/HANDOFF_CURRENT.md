@@ -38,6 +38,8 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - VFX Rồng: đòn chữ, Sky Fire, VFX quái;
   - Codex 065, 067 (ô cỏ, Campfire Ring cho map đầu).
 
+**Session điều phối mới:** `coordinator-2` (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7), mở 28/10 khoảng 17:40. Session cũ (157c54d6) chỉ chạy nốt 4 lượt ở mục 3, rồi nhắn kết quả sang.
+
 ## 1. Bắt đầu session mới
 
 1. Đọc file này, rồi `docs/CODEX_QUEUE.md` (dòng 035 trở đi).
