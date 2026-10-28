@@ -10,9 +10,11 @@
 - **Mã:** worktree `games/.wt-ts-codex` (nhánh `ts-codex`). Phiếu 090 có thể đã sửa worktree này trước (từ vựng): **giữ nguyên** thay đổi của 090, không hoàn lại.
 
 **Chỉ được ghi:**
-- `games/.wt-ts-codex/src/app/dev.ts`, `src/app/main.ts` (chỉ đoạn gọi `installDevHandle`, khoảng dòng 681);
+- `games/.wt-ts-codex/src/app/dev.ts`;
+- `games/.wt-ts-codex/src/app/main.ts`, chỉ ba chỗ: dòng import từ `./dev` (dòng 33), câu chú thích ở dòng khoảng 50, và dòng gọi `installDevHandle` (dòng 681);
 - `games/.wt-ts-codex/tests/dev-handle.test.ts` (mới);
 - `games/.wt-ts-codex/docs/changelog/2026-10-28-dev-handle.md` (mới, tiếng Việt);
+- `games/.wt-ts-codex/dist/` và cache trong `node_modules/` (Git bỏ qua);
 - `docs/codex-queue/092-report.md`, `docs/codex-queue/092/`.
 
 **Cấm:**
@@ -29,9 +31,12 @@
    export function devHandleWanted(dev: boolean, search: string): boolean
    ```
    Trả `true` khi `dev` là `true`, hoặc khi `new URLSearchParams(search)` có khóa `debug` với giá trị `"1"`. Trả `false` với mọi trường hợp khác, kể cả `?debug=0`, `?debug=`, `?debug=true`, `?nodebug=1`.
-2. Trong `src/app/main.ts`, chỉ cài handle khi `devHandleWanted(import.meta.env.DEV, location.search)` trả `true`. Giữ nguyên đối tượng truyền vào `installDevHandle` từng ký tự; chỉ bọc lời gọi trong `if`. Sửa câu chú thích ở dòng khoảng 50 của `main.ts` ("window.__survival lets the browser …") để ghi điều kiện mới.
-3. Nếu có kịch bản trong `scripts/` chạy trên bản build (không phải dev server) và đọc `__survival`, ghi tên nó vào báo cáo, **không sửa**. Claude sẽ thêm `?debug=1`.
-4. **Test `tests/dev-handle.test.ts`** cho `devHandleWanted`, ít nhất 8 ca:
+2. Trong `src/app/main.ts`:
+   - thêm `devHandleWanted` vào dòng import từ `./dev` (dòng 33);
+   - đổi đúng dòng 681 thành `if (devHandleWanted(import.meta.env.DEV, location.search)) installDevHandle({`. **Không** thụt lề lại các dòng sau; đối tượng bên trong giữ nguyên từng ký tự. Dạng này đã được thử: tsc và build đạt;
+   - sửa câu chú thích ở dòng khoảng 50 ("window.__survival lets the browser …") để ghi điều kiện mới.
+3. Nếu có kịch bản trong `scripts/` chạy trên bản build (không phải dev server) và đọc `__survival`, ghi tên nó vào báo cáo, **không sửa**. Claude sẽ thêm `?debug=1`. (Người phê bình phiếu đã thấy cả 16 kịch bản `scripts/visual/scenarios/*.mjs` dùng `DEV_URL`; hãy xác nhận lại.)
+4. **Test `tests/dev-handle.test.ts`** cho `devHandleWanted`: đúng 9 ca dưới đây, mỗi ca một `it` (hoặc một dòng của `it.each`), để số test sau = trước + 9:
    - `(true, "")` → true; `(true, "?debug=0")` → true;
    - `(false, "")` → false; `(false, "?debug=1")` → true; `(false, "?card=1&debug=1")` → true;
    - `(false, "?debug=0")`, `(false, "?debug=")`, `(false, "?debug=true")`, `(false, "?nodebug=1")` → false.
@@ -43,7 +48,7 @@
 2. `node --import tsx scripts/chapter-hashes.ts`: không đổi so với trước khi sửa (chạy trước và sau, `diff` rỗng).
 3. **Đột biến:** đổi `"1"` thành `"0"` trong `devHandleWanted` → `pnpm vitest run tests/dev-handle.test.ts` đỏ; trả lại → xanh.
 4. `pnpm build`, rồi `grep -c "__survival" dist/assets/*.js`: chuỗi vẫn có (handle vẫn được build, chỉ không cài), ghi số. Không cần kiểm trình duyệt: Claude kiểm.
-5. `git -C games/.wt-ts-codex diff --stat`: chỉ có file của phiếu này và của phiếu 090. Dán đầu ra.
+5. `git -C games/.wt-ts-codex diff --stat` và `git -C games/.wt-ts-codex status --short -uall`: chỉ có file của phiếu này và của phiếu 090. Dán đầu ra.
 
 ## Báo cáo `docs/codex-queue/092-report.md`
 

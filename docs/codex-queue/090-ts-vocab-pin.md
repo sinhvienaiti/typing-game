@@ -15,6 +15,8 @@
 - `games/.wt-ts-codex/tests/vocab-pin.test.ts` (mới);
 - `games/.wt-ts-codex/tests/survival/typist-bot.ts`, `tests/survival/bot.ts`, `scripts/replay.ts`, `vite.config.ts`;
 - `games/.wt-ts-codex/docs/changelog/2026-10-28-vocab-pin.md` (mới, tiếng Việt);
+- `games/.wt-ts-codex/dist/` và cache trong `node_modules/` (Git bỏ qua, do `pnpm build`, `pnpm check` ghi);
+- `$TMPDIR/ts-090-alone/**` (bản chép tạm của Kiểm 3);
 - `docs/codex-queue/090-report.md`, `docs/codex-queue/090/` (log, số đo).
 
 **Cấm:**
@@ -34,7 +36,7 @@
    - `git -C /Users/toandx/htdocs/typing-game show <pin>:shared/vocabulary/<file> > games/.wt-ts-codex/public/vocabulary/<file>`;
    - không đọc từ cây làm việc của `shared/`.
 3. **`vocab.config.json`** ở gốc worktree: `{ "pin": "<pin đủ 40 ký tự>", "files": [ năm đường ở trên, theo thứ tự đó ] }`.
-4. **`public/vocabulary/vocab-manifest.json`:** `{ "pin": "<pin>", "version": <giá trị "version" của index.json>, "files": { "<đường>": "<sha256 hex>" } }`. Khóa xếp theo thứ tự chữ; JSON thụt 2 dấu cách, có xuống dòng cuối file.
+4. **`public/vocabulary/vocab-manifest.json`:** `{ "pin": "<pin>", "version": <giá trị "version" của index.json>, "files": { "<đường>": "<sha256 hex>" } }`. Khóa ngoài theo thứ tự `pin`, `version`, `files`. Khóa của `files` xếp theo thứ tự mã ký tự, nên `ATTRIBUTION.md` đứng đầu. JSON thụt 2 dấu cách, có xuống dòng cuối file.
 5. **Test, bot, replay đọc bản chép:**
    - `tests/survival/typist-bot.ts` dòng 275 và `tests/survival/bot.ts` dòng 49: `new URL("../../public/vocabulary/levels/…", import.meta.url)`;
    - `scripts/replay.ts` dòng 34: `new URL("../public/vocabulary/levels/…", import.meta.url)`; sửa câu chú thích dòng 8 cho đúng ("rebuilt from the pinned copy in public/vocabulary");
@@ -46,9 +48,9 @@
 7. **Test mới `tests/vocab-pin.test.ts`** (vitest, chỉ đọc file trong repo game):
    - năm file của `vocab.config.json` có trong `public/vocabulary/`, và sha256 từng file khớp `vocab-manifest.json`;
    - `pin` của manifest bằng `pin` của config; `version` của manifest bằng `version` của `index.json`;
-   - mọi level mà trang hỏi (1, 2, 3; xem `loadVocab` trong `src/app/vocab.ts`) có file;
+   - mọi level mà trang hỏi (1, 2, 3; xem `loadVocab` trong `src/app/vocab.ts`) có file: lấy trường `file` của level n trong `index.json` (như `loadRawVocabularyLevel` của kit) và kiểm file đó có trong `public/vocabulary/`;
    - `deckHash(buildDeck([level 1, 2, 3]))` bằng `"7f073fa2"` (`deckHash` từ `src/app/vocab.ts`, `buildDeck` từ `src/content/deck.ts`);
-   - không còn file nào trong `src/`, `tests/`, `scripts/` chứa chuỗi `shared/vocabulary` ở dạng đường dẫn đọc file. Được phép trong chú thích của `src/kit/**`.
+   - quét mọi file trong `src/` (trừ `src/kit/**`), `tests/`, `scripts/`: không có lần nào chứa chuỗi tìm, kể cả trong chú thích. **Ghép chuỗi tìm từ hai phần** (`"shared" + "/vocabulary"`) để test không tự bắt chính nó.
 8. **Changelog** `docs/changelog/2026-10-28-vocab-pin.md`: làm gì, vì sao (G7), cách cập nhật bản ghim (chạy lại bước 2–4 với pin mới), số đo.
 
 ## Kiểm (bắt buộc, ghi đầu ra vào báo cáo)
@@ -59,15 +61,17 @@
    - `tests/s0-trace.test.ts` đạt, và `git -C games/.wt-ts-codex diff --stat -- tests/golden` rỗng.
 3. **Đứng riêng:** chép worktree (trừ `node_modules`) sang một thư mục tạm **ngoài** repo cha, ví dụ `$TMPDIR/ts-090-alone/game`, để `../../shared` không còn. Ở đó:
    - `ln -s` thư mục `node_modules` của worktree vào;
-   - `pnpm test` xanh;
-   - `pnpm build` xong, và `dist/vocabulary/` có đủ năm file cộng `vocab-manifest.json`, cùng sha256.
-   Xóa thư mục tạm sau khi ghi số.
+   - `pnpm --config.verify-deps-before-run=false test` xanh. Không gọi `pnpm test` trơn: pnpm 11 kiểm dependency, đòi cài lại và dừng với `ERR_PNPM_UNSAFE_MODULES_DIR` vì `node_modules` là symlink. Có thể thay bằng `./node_modules/.bin/vitest run`;
+   - `pnpm --config.verify-deps-before-run=false build` xong (hoặc `./node_modules/.bin/tsc --noEmit && ./node_modules/.bin/vite build`), và `dist/vocabulary/` có đủ năm file cộng `vocab-manifest.json`, cùng sha256.
+   Ghi số rồi xóa bằng `rm -rf "$TMPDIR/ts-090-alone"`: không có `/` cuối, không xóa riêng `node_modules`. Hôm nay ở bản chép riêng, 5/14 file test hỏng vì ENOENT `…/shared/vocabulary/levels/001.json`; sau phiếu phải 14/14 file đạt và đủ số test.
 4. **Đột biến (mỗi cái chạy `pnpm vitest run tests/vocab-pin.test.ts`, phải đỏ; xong thì trả lại):**
    - đổi một byte của `public/vocabulary/levels/002.json`;
    - xóa dòng `ATTRIBUTION.md` khỏi manifest;
    - đổi `pin` trong config.
-5. `grep -rn "shared/vocabulary" src tests scripts vite.config.ts` trong worktree: chỉ còn chú thích trong `src/kit/**`. Dán đầu ra.
-6. `git -C games/.wt-ts-codex status --short`: chỉ có các file trong "Chỉ được ghi". Dán đầu ra.
+5. `grep -rn "shared/vocabulary" src tests scripts vite.config.ts` trong worktree: chỉ còn dòng trong `src/kit/**`. Dán đầu ra.
+6. `git -C games/.wt-ts-codex status --short -uall`: chỉ có các file trong "Chỉ được ghi". Dán đầu ra.
+
+**Số trước, đã đo ngày 28/10 trên `bf0e6f9`** (để đối chiếu): `pnpm test` 14 file, 142/142; `chapter-hashes.ts` 152 dòng, chạy khoảng 15 s.
 
 ## Báo cáo `docs/codex-queue/090-report.md`
 
