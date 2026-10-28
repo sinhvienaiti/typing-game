@@ -1,5 +1,7 @@
 # Phiếu 094 · Rồng Giữ Ải · Bản chép từ vựng ghim trong repo game (cổng G7)
 
+**Nguồn:** lô Codex 1 (`docs/games/map1/CODEX_BATCH.md`) gọi phiếu này là 100 (DH-01, P0); phiếu 094 ở đây đã gộp phần của lô.
+
 **Vì sao:** cổng production G7 của map 1 đòi bản build tự đủ, không đọc file của repo cha. Hôm nay Rồng có từ vựng chỉ nhờ alias nginx hay plugin dev trỏ tới `shared/` của repo cha. Rồng không có bộ từ dự phòng, nên bản đứng riêng có bộ bài 0 chữ và màn không chơi được. Thiết kế: `docs/games/DEPLOY_INDEPENDENCE.md` §3 dòng 1 và 3, §8. Làm cùng mẫu với phiếu 090 (Tuyến Cuối) và 091 (Lời Gọi). Phần báo lỗi khi bộ bài rỗng là việc của Claude, không thuộc phiếu này.
 
 **Báo cáo:** `docs/codex-queue/094-report.md`.
@@ -42,6 +44,7 @@
    - `pin` của manifest bằng `pin` của config; `version` của manifest bằng `version` của `index.json`;
    - mỗi level trong mảng `levels` của `index.json` (1 … 100) có file theo trường `file` của nó;
    - mỗi level có ít nhất một mục sau `filterVocabularyEntries` (từ `src/kit/vocab`): bộ bài không bao giờ rỗng;
+   - **mọi level mã có thể hỏi đều có file.** Tìm trong `src/app/learning.ts` (khoảng dòng 315) và `src/kit/vocab/` level lớn nhất có thể lưu, và việc tải `[L, L+1]`. Test lấy giới hạn đó từ mã (import hằng nếu có), không ghi số cứng. Nếu mã có thể hỏi level 101 thì ghi vào báo cáo như một lỗi cho Claude, không sửa `src/`;
    - quét mọi file trong `src/` (trừ `src/kit/**`), `tests/`, `scripts/`, cùng `vite.config.ts`: không có lần nào chứa chuỗi tìm, kể cả trong chú thích. **Ghép chuỗi tìm từ hai phần** (`"shared" + "/vocabulary"`) để test không tự bắt chính nó.
 7. **Changelog** `docs/changelog/2026-10-28-vocab-pin.md`: làm gì, vì sao (G7), cách cập nhật bản ghim, số đo.
 
@@ -54,7 +57,7 @@
    - `pnpm --config.verify-deps-before-run=false test` xanh. Không gọi `pnpm test` trơn: pnpm 11 đòi cài lại và dừng với `ERR_PNPM_UNSAFE_MODULES_DIR` vì `node_modules` là symlink. Có thể thay bằng `./node_modules/.bin/vitest run`;
    - `pnpm --config.verify-deps-before-run=false build` xong, và `dist/vocabulary/` có đủ 102 file cộng `vocab-manifest.json`, cùng sha256.
    Ghi số rồi xóa bằng `rm -rf "$TMPDIR/dh-094-alone"`: không có `/` cuối.
-4. **Đột biến** (mỗi cái chạy `pnpm vitest run tests/vocab-pin.test.ts`, phải đỏ; xong thì trả lại): đổi một byte của `public/vocabulary/levels/057.json`; xóa dòng `levels/100.json` khỏi manifest; đổi `pin` trong config.
+4. **Đột biến** (mỗi cái chạy `pnpm vitest run tests/vocab-pin.test.ts`, phải đỏ; xong thì trả lại): đổi một byte của `public/vocabulary/levels/057.json`; xóa dòng `levels/100.json` khỏi manifest; đổi `pin` trong config; xóa file `public/vocabulary/levels/100.json`.
 5. `grep -rn "shared/vocabulary" src tests scripts vite.config.ts` trong worktree: chỉ còn dòng trong `src/kit/**`. Dán đầu ra.
 6. `git -C games/.wt-dh-codex status --short -uall`: chỉ có file trong "Chỉ được ghi" (và file của phiếu 080 nếu nó chạy trước). Vì danh sách dài, dán số dòng theo thư mục, cộng các dòng ngoài `public/vocabulary/`.
 
