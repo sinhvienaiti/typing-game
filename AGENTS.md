@@ -49,3 +49,14 @@ around those names, and a name's first showing (debut card, shop tooltip) may
 add a short Vietnamese gloss. Unique characters keep their proper names (the
 dragons, Draconis, named bosses). Any new or reworded player-facing text uses
 English nouns; existing names change in a per-game naming pass, not in passing.
+
+## Test captures (owner, 28/10/2026)
+
+Browser and render captures go under the game's own `tmp/` (or the
+worktree's), never into `art-src`, `public` or `docs`. Raw frames filled the
+disk on 28/10: 77 GB of PNG and JPG in `tmp/`. So when a capture step ends,
+the agent that took the frames keeps only what the report needs (contact
+sheets, compare shots, images a doc links, numbers as JSON or Markdown) and
+deletes its own raw frames. It never deletes files it did not create.
+`.local/bin/heavy.sh --gpu` makes a browser run wait while less than 10 GB is
+free, then gives up with exit 75.
