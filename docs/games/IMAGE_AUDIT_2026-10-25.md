@@ -821,7 +821,7 @@ Mục tạm chấp nhận theo mức cần:
 | Lời Gọi | 2 | 18 | 2 | P1: U2, U4. P2: S2-v2, S3-v1, S4-v1, S4-v2, S5-v1, S6-v2, S12-v1, S12-v2, S13-v1, S13-v2, F5, F6, V14, V15, V18, V36, V37, V69. P3: V43, V59 |
 | Tuyến Cuối | 1 | 1 | 4 | P1: rainbow-tank (Lính, Trâu, Đầu Đàn). P2: nova. P3: title-horizon, gun-tan, gun-ray, gun-phao-sao |
 
-Mức cần của mười hai ảnh nguồn 3D VS (K04, K10, K13, V14, V15, V18, V34, V35, V36, V37, V68, V69) là P2, khớp [INDEX đợt 2](../../typing-game-handoff-2026-10-25/tripo-upload-dot2/INDEX.md) (P2 #10, #14–16, #26, #27, #36–41): cùng nhóm tổ thợ, bộ cấp, nhánh nhà bản đồ 1, Đại Bàng Tinh, Mộc Tinh đầy đủ. Bước trước Tripo của V18, V37, V69 ([ART_FIX_QUEUE.md](ART_FIX_QUEUE.md) §5.1) phải xong trước khi gửi.
+Mức cần của mười hai ảnh nguồn 3D VS (K04, K10, K13, V14, V15, V18, V34, V35, V36, V37, V68, V69) là P2, khớp [INDEX đợt 2](tripo-index/2026-10-dot2-INDEX.md) (P2 #10, #14–16, #26, #27, #36–41): cùng nhóm tổ thợ, bộ cấp, nhánh nhà bản đồ 1, Đại Bàng Tinh, Mộc Tinh đầy đủ. Bước trước Tripo của V18, V37, V69 ([ART_FIX_QUEUE.md](ART_FIX_QUEUE.md) §5.1) phải xong trước khi gửi.
 
 Việc không tốn kinh phí trước khi dùng ghi ở ô ghi chú từng dòng. Ví dụ: xoay cánh E01, tách cán cờ G01, xóa chùy và nửa khiên thừa U1, sửa vật liệu K03, K04, K07 trong Blender; art-normalize cho D2, I09–I12 và ảnh 2D Lời Gọi, Tuyến Cuối; tô tối miệng lò V37.
 
