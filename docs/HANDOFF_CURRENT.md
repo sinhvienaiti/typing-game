@@ -4,6 +4,25 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - Mỗi lần dừng hay chuyển session, cập nhật file này.
 - Luật của chủ dự án nằm ở memory (tự nạp) và `AGENTS.md`. Ở đây chỉ nhắc ý chính.
 
+## 0. Giai đoạn hiện tại (chủ dự án 28/10): sửa lỗi và làm đẹp để demo
+
+- **Dừng phát triển phần sau:**
+  - bản đồ: chặng B–D và các map mới; phiếu 076–084;
+  - thư viện tài sản: phiếu 063, 064, 084, 086, 087;
+  - thử luật D27, D31;
+  - nội dung mới.
+- **Làm:** sửa lỗi, làm đẹp, làm mượt phần đang chơi được của cả ba game:
+  - Rồng: L2-cau, 10 đợt;
+  - Lời Gọi: 1A và 1B (2D);
+  - Tuyến Cuối: chương 1.
+- **Demo chạy trên Mac ở nhà** qua `typing-game.local` (`scripts/play.sh`, nginx). Chưa đưa lên mạng.
+- **Bước kế:** một lượt kiểm kê lỗi và chỗ xấu, chỗ giật cho từng game. Chơi thật trên trình duyệt ở 1280 và 1920, gộp với các mục còn mở trong changelog và test pass. Kết quả là một danh sách theo mức: P0 chặn demo, P1 làm xấu ấn tượng đầu, P2 để sau. Sau đó sửa theo danh sách; Codex làm ảnh và các sửa nhỏ kiểm được.
+- **Vẫn giữ, vì làm đẹp nội dung có sẵn:**
+  - sửa khói Tuyến Cuối;
+  - chặng A của map L2-cau (map của demo);
+  - VFX Rồng: đòn chữ, Sky Fire, VFX quái;
+  - Codex 065, 067 (ô cỏ, Campfire Ring cho map đầu).
+
 ## 1. Bắt đầu session mới
 
 1. Đọc file này, rồi `docs/CODEX_QUEUE.md` (dòng 035 trở đi).
