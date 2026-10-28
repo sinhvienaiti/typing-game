@@ -13,7 +13,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Tuyến Cuối: c1-s1.
 - **Kế hoạch chung:** [`docs/games/MAP1_PRODUCTION.md`](games/MAP1_PRODUCTION.md). Nó có 7 cổng cho từng game, danh sách P0, P1, P2, bốn làn T, V, R, L với lịch theo ngày, việc của chủ dự án và rủi ro. Ngày dự kiến đủ 7 cổng: Tuyến Cuối 03/11, Rồng 06/11, Lời Gọi 12/11.
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
-- **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` chỉ còn chạy làn `vfx-dh-v2`; xong bước nào thì nó nhắn kết quả sang.
+- **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
 **Cập nhật cuối của session cũ (28/10, sau 22:10):** session cũ (157c54d6) đã xong cả 4 lượt và gửi kết quả sang `coordinator-2`. Từ đây mọi việc thuộc session mới:
 - `codex-review-28-10`: kết quả nằm trong tin nhắn.
@@ -69,7 +69,7 @@ Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
 | **R** (map Rồng) | `games/.wt-dh-mappilot`, nhánh `map-pilot` (f0b101b, chưa gộp) | Nhập 8 model Tripo đợt 3 (preset, kit); vòng sửa A2 theo mã góp ý FB-08, 09, 10, 11, 16, 18, 03, V2; chụp bộ khung cho giám khảo | Chạy một giám khảo độc lập (`tools/map-factory/docs/judge.md`); cổng A cần trung vị ≥ 7,5 (chặng A được 7,125) |
 | **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: gộp 036 (`66d032d`), C0 (`docs/td/BUILD_1C_MAP1.md`, chủ dự án duyệt), C1. Đang làm: gộp `a2-days` vào `td-1c`, rồi C2, C4, C3 | Gửi tờ khung sân, đất, camera |
 | **V-ts** (VFX Tuyến Cuối) | `games/.wt-ts-vfx` rồi fast-forward `main` | TS-M1-04 (gộp 035); TS-M1-05 (5 pha cho Pulse Gun, Heat Beam, tàu bị đánh) | Gửi chủ dự án tờ khung trước/sau |
-| **vfx-dh-v2** (session cũ) | `games/.wt-dh-vfx` | VFX Rồng: chấm 1a, Sky Fire, VFX quái | Gộp vào làn V |
+| **V-dh** (VFX Rồng, nhận từ session cũ 28/10 22:30) | `games/.wt-dh-vfx`, nhánh `dh-vfx` (25160fe, chưa gộp) | Vòng sửa ngắn cho 1a (người chấm vòng 2: 7 và 7,5; lõi trắng quá to, không ra lửa); Sky Fire từ phần sửa dở; VFX quái (gộp `main` vào trước) | Sau 1a, điều phối viên chạy một giám khảo độc lập (cần ≥ 8), rồi gửi chủ dự án tờ 1a |
 
 ## 4. Việc chờ, theo thứ tự
 
