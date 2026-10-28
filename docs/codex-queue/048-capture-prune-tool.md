@@ -12,6 +12,7 @@
 - `tools/capture-prune/prune.mjs`: Node ESM, không gói ngoài;
 - `tools/capture-prune/test/prune.test.mjs`;
 - `tools/capture-prune/README.md` (tiếng Việt);
+- `tools/capture-prune/.gitignore` chứa một dòng `.tmp/` (giống `tools/art-normalize/.gitignore`);
 - `docs/codex-queue/048-report.md`.
 
 **Cấm:**
@@ -65,7 +66,7 @@ node tools/capture-prune/prune.mjs <thư mục>... [--apply] [--min-age-min 30] 
    - tính `md5 -r` cho 200 file ảnh bất kỳ dưới `games/*/tmp`, trước và sau bước 2;
    - đối chiếu `find games -path '*/tmp/*' -type f | wc -l` trước và sau;
    - cả hai phải không đổi.
-4. `git status --short`: so với lúc bắt đầu, chỉ **thêm** file trong `tools/capture-prune/` và `docs/codex-queue/048-report.md`. Thư mục `tools/capture-prune/.tmp/` phải nằm trong `.gitignore`; nếu chưa có thì ghi điều đó vào báo cáo, không sửa `.gitignore`.
+4. `git status --short`: so với lúc bắt đầu, chỉ **thêm** file trong `tools/capture-prune/` và `docs/codex-queue/048-report.md`. `git check-ignore tools/capture-prune/.tmp/dry-run.json` phải in ra luật của `tools/capture-prune/.gitignore`.
 
 ## Báo cáo `docs/codex-queue/048-report.md`
 
