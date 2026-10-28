@@ -1,0 +1,123 @@
+✖ foreign-asset rejects another game in .html (11.008ms)
+✖ foreign-asset rejects another game in .js (2.69275ms)
+✖ foreign-asset rejects another game in .css (2.163334ms)
+✖ foreign-asset rejects another game in .json (2.115167ms)
+✖ foreign-asset rejects every known foreign id (2.094959ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 68.937875
+
+✖ failing tests:
+
+test at shared/game-kit/tools/deploy/check-pack.test.mjs:131:3
+✖ foreign-asset rejects another game in .html (11.008ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at hasCode (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:55:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:134:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/game-kit/tools/deploy/check-pack.test.mjs:131:3
+✖ foreign-asset rejects another game in .js (2.69275ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at hasCode (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:55:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:134:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/game-kit/tools/deploy/check-pack.test.mjs:131:3
+✖ foreign-asset rejects another game in .css (2.163334ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at hasCode (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:55:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:134:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/game-kit/tools/deploy/check-pack.test.mjs:131:3
+✖ foreign-asset rejects another game in .json (2.115167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at hasCode (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:55:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:134:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at shared/game-kit/tools/deploy/check-pack.test.mjs:138:1
+✖ foreign-asset rejects every known foreign id (2.094959ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at hasCode (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:55:10)
+      at TestContext.<anonymous> (file:///Users/toandx/htdocs/typing-game/shared/game-kit/tools/deploy/check-pack.test.mjs:142:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
