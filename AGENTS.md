@@ -57,6 +57,9 @@ worktree's), never into `art-src`, `public` or `docs`. Raw frames filled the
 disk on 28/10: 77 GB of PNG and JPG in `tmp/`. So when a capture step ends,
 the agent that took the frames keeps only what the report needs (contact
 sheets, compare shots, images a doc links, numbers as JSON or Markdown) and
-deletes its own raw frames. It never deletes files it did not create.
+deletes its own raw frames with
+`node tools/capture-prune/prune.mjs <its capture folder> --apply` (run it
+without `--apply` first to see the list). It never deletes files it did not
+create.
 `.local/bin/heavy.sh --gpu` makes a browser run wait while less than 10 GB is
 free, then gives up with exit 75.
