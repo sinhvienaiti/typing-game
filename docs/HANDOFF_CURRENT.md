@@ -15,6 +15,17 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` chỉ còn chạy làn `vfx-dh-v2`; xong bước nào thì nó nhắn kết quả sang.
 
+**Cập nhật cuối của session cũ (28/10, sau 22:10):** session cũ (157c54d6) đã xong cả 4 lượt và gửi kết quả sang `coordinator-2`. Từ đây mọi việc thuộc session mới:
+- `codex-review-28-10`: kết quả nằm trong tin nhắn.
+- `map-pilot-a`: trung vị 7,125, chưa đạt cổng A; nhánh `map-pilot`.
+- `map1-production-audit`: `docs/games/MAP1_PRODUCTION.md`, `docs/games/map1/`.
+- `vfx-dh-v2`:
+  - bước 1a đã làm 2 vòng, người chấm cho 7/7,5, cần một vòng sửa lõi trắng;
+  - Sky Fire dở, có sửa chưa commit trong `games/.wt-dh-vfx`;
+  - VFX quái chưa làm.
+
+Mục 3 bên dưới là lịch sử.
+
 ## 1. Bắt đầu session mới
 
 1. Đọc file này, `MAP1_PRODUCTION.md` §4, rồi `docs/CODEX_QUEUE.md` (các dòng 088 trở đi).
