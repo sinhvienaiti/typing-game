@@ -67,7 +67,7 @@ Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
 | Làn | Nơi làm | Việc | Khi xong |
 |---|---|---|---|
 | **R** (map Rồng) | `games/.wt-dh-mappilot`, nhánh `map-pilot` | A2 xong, **cổng A đạt** (1080p hợp lệ: trung vị 8,0, thấp nhất 7,5; ba lượt khác mất mẫu spike, xem ghi chú trong `judge.md`), đã gộp vào `main` Rồng `0bf5918` và đã đẩy. Đang làm A3 theo 10 góp ý chung, hướng cổng C (khung mặc định và 4 góc 55° mỗi khung ≥ 8) | Chạy lại phép thử §7 của `judge.md` (dải spike) rồi gọi giám khảo |
-| **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: C0, C1, C2 (sân khấu, camera), C3 (đất, suối, cầu), C4 phần A. Đang làm C4 phần B, rồi chuẩn bị C6 (cần phiếu kit 107) | Chủ dự án quyết trần media Medium (đề xuất 9 MB, ≤ 6 MB tới Đêm 1) |
+| **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: C0, C1, C2 (sân khấu, camera), C3 (đất, suối, cầu), C4 phần A. Đang làm C4 phần B, rồi chuẩn bị C6 (cần phiếu kit 107) | Cập nhật C0 §5 theo quyết định của chủ dự án (Medium ≤ 9 MB, bộ khởi động ≤ 3,5 MB, ≤ 6 MB tới Đêm 1); làm tiếp C6 khi kit 107 xong |
 | **V-ts** (VFX Tuyến Cuối) | `games/.wt-ts-vfx` rồi fast-forward `main` | TS-M1-04 (gộp 035); TS-M1-05 (5 pha cho Pulse Gun, Heat Beam, tàu bị đánh) | Gửi chủ dự án tờ khung trước/sau |
 | **V-dh** (VFX Rồng, nhận từ session cũ 28/10 22:30) | `games/.wt-dh-vfx`, nhánh `dh-vfx` (25160fe, chưa gộp) | Vòng sửa ngắn cho 1a (người chấm vòng 2: 7 và 7,5; lõi trắng quá to, không ra lửa); Sky Fire từ phần sửa dở; VFX quái (gộp `main` vào trước) | Sau 1a, điều phối viên chạy một giám khảo độc lập (cần ≥ 8), rồi gửi chủ dự án tờ 1a |
 
@@ -96,6 +96,7 @@ Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
   - C0 của Lời Gọi được duyệt;
   - Lời Gọi chấp nhận khoảng chờ ban ngày, đo lại sau 1C;
   - Tuyến Cuối: ải 2 tên "ẢI 2 · SĂN PACK LEADER", biển viết hoa cả câu (phiếu 104).
+- **Trần media Medium của Lời Gọi** (chủ dự án 28/10, khoảng 23:20): tổng ≤ 9 MB, bộ khởi động ≤ 3,5 MB, tải dần theo ngày, byte tới Đêm 1 ≤ 6 MB.
 - **Sudo nginx một lần**, khi `pnpm build:local` xong.
 - **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
 - **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.
