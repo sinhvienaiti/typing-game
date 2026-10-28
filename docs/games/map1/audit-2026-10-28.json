@@ -1,0 +1,964 @@
+{
+  "summary": "Audit map 1 of Rồng, Lời Gọi and Tuyến Cuối against seven production gates by playing them in the browser and reading open items; one prioritised gap list and work plan per game, then one combined plan",
+  "agentCount": 4,
+  "logs": [],
+  "result": {
+    "audits": [
+      {
+        "key": "rong",
+        "gates": [
+          {
+            "gate": "G1 lỗi, console, bot và phím CDP thật ở 1280x720 và 1920x1080",
+            "status": "pass",
+            "evidence": "main 02fe9c7, Vite riêng 127.0.0.1:4140. dh-keyboard-only (speed 4): 1280 thắng 10/10, mã băm phát lại khớp 911e5e15 (837 lệnh), trễ phím TB 14,3 ms, tối đa 22,8 ms; 1920 thắng 10/10, khớp 195c876f, trễ phím TB 14,6 ms, tối đa 20,4 ms. Chơi cả ải bằng phím CDP thật ở tốc độ 1 (35 WPM, 1280x720, từ thẻ tốc độ): thắng 10/10 trong 682 s. Lối người mới ở 1920 (thẻ tốc độ, Học trước, Bày binh, đặt bẫy bằng phím, menu tạm dừng, thẻ tốc độ mở từ menu, màn che khi mất tiêu điểm, thua, chơi lại): chạy hết. dh-words 4/4 ok, dh-crowd 1280 ok, ui-preview 22 màn 0 chồng. Mọi lượt: 0 lỗi console, 0 exception, 0 tài nguyên lỗi. Ở bản dev không có lỗi P0 hay P1 về chức năng; có một lỗi chữ ở results.ts:196 (DH-16). Lỗi P0 của bản production nằm ở G7. Lượt 35 WPM ở 1920 và 70 WPM ở 1280 tốc độ 1 lấy từ đợt kiểm 28/10, cùng sim."
+          },
+          {
+            "gate": "G2 hình: giám khảo độc lập ≥ 8/10, không còn hình tạm",
+            "status": "fail",
+            "evidence": "Tôi chấm khi không làm cho làn nào, nên chưa phải giám khảo độc lập chính thức. Cảnh map: 7/10 ở 1080p, 6,5/10 ở 720p. HUD và menu 7,5. Thẻ tốc độ, màn kết quả: 8. Lý do: đồng cỏ giữa map trống, chỉ có chấm bụi tối; quái cao 20–45 px ở camera mặc định; nhìn từ trên xuống, Hỏa Long chỉ là một nét đỏ mảnh. Lỗi đã biết vẫn còn trên main (sheet-13): G01 Moss Bannerman thành khối rêu, Herb Hut giống bụi cây quanh bệ, Spikes che Blight Wolf. Hình tạm: ở High và Medium không còn. Low (?q=low) vẫn là khối tạm (Rồng hình capsule, quái capsule, cây hình nón; sheet-14); người chơi chỉ vào được Low bằng URL. Làn map pilot A (.wt-dh-mappilot) đang làm đất, đồng cỏ, vách, ao, mép rừng. Phần đó chưa gộp nên tôi không chấm."
+          },
+          {
+            "gate": "G3 cảm giác: VFX 5 pha, âm thanh, thẻ chữ đọc được",
+            "status": "fail",
+            "evidence": "VFX trên main chưa đạt chuẩn: đòn chữ chỉ là một chấm cam nhỏ, miệng Rồng lóe vài pixel (sheet-07). Fire Breath, Sky Fire, Dragon Roar, Inferno, cả ba bẫy, Herb Hut, Grove Warden, đòn quái, G01 cắm cờ và chết đều thiếu pha (VFX_STANDARD §2.1). Làn VFX: bước 1a (đòn chữ) đã xong trên nhánh dh-vfx, chưa gộp; Sky Fire và đòn quái đang làm. Âm thanh có đủ: khoảng 14.700 lần phát nguồn âm trong một ván; khi hạ quái có 11–20 nguồn âm trong 200 ms; nhạc thủ tục 4 lớp. Mọi âm đều tổng hợp bằng mã, chưa ai nghe vì chạy headless, và không có chỉnh âm lượng. Thẻ chữ đạt: dh-words 0 chồng, 0 thiếu, chữ nhỏ nhất 16 px (720p) và 20 px (1080p); 242 lần đo trong ván 35 WPM đều 0 chồng; dh-crowd 0/17.692 khung có quái bị che ≥ 40 %. Nhàn: 52,4 % thời gian đợt không có chữ nào trên màn (35 WPM, 1280, đo mỗi 100 ms); 43,6 % thời gian có đúng 1 chữ; tối đa 3 chữ cùng lúc. Cả 10 đợt đều thử tua nhanh và bị từ chối: \"Quái đã vào Vùng Chữ, chữ sắp hiện\". Người chơi không thấy nguy: máu không bao giờ tụt quá 33 dưới mức đầu đợt, kết thúc 100 %."
+          },
+          {
+            "gate": "G4 hiệu năng High và Medium, nạp nhanh, không có khung dài",
+            "status": "partial",
+            "evidence": "dh-perf 1920x1080, không khóa khung, cả 10 đợt, chạy --perf. High: trung bình 4,82–5,21 ms, p95 ≤ 9,8 ms, khung dài nhất 12,4 ms, ≤ 55 draw call, 1,57 M tam giác. Medium: trung bình 5,22–5,66 ms, p95 ≤ 9,2 ms, khung dài nhất 15,1 ms, 0,98 M tam giác. Cả hai đạt cổng ≤ 8 / ≤ 12 ms và ≤ 150 draw call. Khi khóa khung 60 Hz ở speed 4: một khung 66,7 ms trong 12.112 khung. Nạp: lần đầu ở High tải 12,4–12,7 MB (ngân sách ≤ 5 MB), trong đó hai GLB Rồng High đã 7,5 MB. dist nặng 23 MB, có cả draconis-v3 mà không mã nào dùng. Trần tam giác của bench (3,09 M so với 2 M) vẫn trượt như ở M0b."
+          },
+          {
+            "gate": "G5 trải nghiệm: lần đầu, menu, tạm dừng, cài đặt, kết quả, tên tiếng Anh",
+            "status": "partial",
+            "evidence": "Phần chạy tốt: thẻ tốc độ (lần sau gợi ý \"Số đo: 40 WPM, đúng 98 %\"), Học trước 8 từ, Bày binh bằng phím, thẻ đợt, thẻ ra mắt, Esc mở menu tạm dừng, đổi tốc độ từ menu vẫn giữ tốc độ đang dùng, màn che với đếm 3-2-1, giữ màn thắng 2,3 s, màn thua nêu nguyên nhân, Sổ Từ Ải, chơi lại. Tên tiếng Anh đúng ở HUD, cửa hàng, thẻ đợt, thẻ ra mắt (Spikes, Pine Bomb, Net Launcher, Grove Warden, Herb Hut, Small Potion, Dragon Heart, Hard Scale, Moss Grunt, Thorn Ant, Moss Bannerman, Dragon Rage, Dragon Platform). Còn thiếu: màn tựa và nút bắt đầu (màn đầu tiên là câu hỏi tốc độ); màn cài đặt (âm lượng, chất lượng hình, cỡ thẻ, đổi phím theo 00 §6); lối về cổng game. Menu tạm dừng chỉ có Tiếp tục, Chơi lại ải, Tốc độ gõ; màn kết quả chỉ có Chơi lại. Tên ải vẫn ghi \"Bản thử: Cầu và Suối\". Câu thua khi chưa gõ phím nào sai về điều khiển: \"Gõ chữ trên đầu quái để Hỏa Long dùng Fire Breath hạ chúng\" (Fire Breath là chiêu ⌥1)."
+          },
+          {
+            "gate": "G6 cân bằng: cổng bot của map 1",
+            "status": "partial",
+            "evidence": "Sim không đổi từ 83da970: golden SHA giữ nguyên, lần đổi sang tên tiếng Anh chỉ sửa nameVi. Vì vậy số bot trên main là số của owner-decisions §8.3; tôi không chạy lại. Đạt: G1 86,7 %, G3 85,8 %, G5 0 %, G6 thua 120/120 ở đợt 1, G9 1,40, G8 30,3 %, G10, G11 1,2 %, G13, G15 22,7 %, D23a 12,8 %; B2–B6, B8 đạt ở cả hai bộ seed. Trượt: B1 (6 ô lệch theo dải D27) và B7 (2 ô). Nhàn I ở Cân bằng: b35 20,8, Khá 26,6, Nhanh 30,7, b60 29,5 %, đều trên dải D27 ≤ 20 %. B9 chưa có số (chờ anh chơi thử). G16 171,5 s, nhưng cổng này áp từ ải 15. Bot và người chơi thật lệch nhau: bot mất khoảng 150 máu mỗi đợt vì Héo lan, còn người gõ thật gần như không mất."
+          },
+          {
+            "gate": "G7 bản production tự đứng, chạy qua typing-game.local",
+            "status": "fail",
+            "evidence": "tsc và vite build đạt; danh sách file build lại trùng hẳn dist/ (bản 12:41). Không có public/vocabulary: phục vụ bản build trên server tĩnh thì /vocabulary/index.json trả 404, quái không có chữ, Rồng thua ở đợt 1, người chơi không được báo gì (lỗi chỉ hiện ở console warning; sheet-06). Khi tôi phục vụ thêm /vocabulary/ (giả lập alias nginx sang shared/ của repo cha), bản build chơi được: 0 request hỏng, một nguồn. Nhưng như vậy game đọc từ repo cha lúc chạy, trái DEPLOY_INDEPENDENCE. nginx đang cài (/opt/homebrew/etc/nginx/servers/typing-game.local.conf) không có server dragon; /etc/hosts không có dragon.typing-game.local, nên curl báo không phân giải được host. portal/dist build từ 22/10, games.json trong đó chưa có Rồng Giữ Ải."
+          }
+        ],
+        "gaps": [
+          {
+            "id": "DH-01",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "Bản build không có từ vựng. Thiếu /vocabulary/ thì quái không có chữ và Rồng thua ở đợt 1; có nó thì game lại đọc shared/ của repo cha lúc chạy",
+            "fix": "Viết script vocab:sync ở repo cha, đọc theo commit ghim, ghi public/vocabulary/** (index, level 1–100, ATTRIBUTION.md, vocab-manifest.json với sha256), theo DEPLOY_INDEPENDENCE §5. Thêm test: mọi level mã có thể hỏi đều có trong bản chép, version khớp",
+            "who": "codex-code",
+            "effortHours": 2.5
+          },
+          {
+            "id": "DH-02",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "Bộ từ rỗng mà người chơi không được báo gì; play.conf và dev.conf còn alias /vocabulary/ sang shared/",
+            "fix": "Khi deck rỗng, hiện thông báo chặn chơi bằng câu tiếng Việt, không vào đợt. Có DH-01 rồi thì bỏ alias /vocabulary/ và /typing-texts/ ở server dragon trong infra/nginx, rồi kiểm lại bản build trên server tĩnh không có alias",
+            "who": "claude",
+            "effortHours": 1.5
+          },
+          {
+            "id": "DH-03",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "dragon.typing-game.local không chạy: nginx đang cài không có server dragon, hosts không có tên, portal/dist (22/10) chưa có Rồng",
+            "fix": "Anh chạy sudo scripts/setup-nginx.sh để cài cấu hình mới (gồm server dragon) và thêm hosts, rồi chạy pnpm build:local (build lại portal và game). Agent không được chạy setup-nginx",
+            "who": "owner",
+            "effortHours": 0.5
+          },
+          {
+            "id": "DH-04",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "Chưa kiểm chơi qua cổng game sau khi cài nginx",
+            "fix": "Sau DH-01 đến DH-03: kịch bản CDP mở https://typing-game.local, vào Rồng, chơi đợt 1 ở 1280 và 1920, đếm 0 request hỏng, 0 request sang nguồn khác, quái có chữ, cầu học (learning bridge) nhận sự kiện",
+            "who": "claude",
+            "effortHours": 1
+          },
+          {
+            "id": "DH-05",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Nhàn: 52,4 % thời gian đợt không có chữ (35 WPM, 1280); 28/10 đo 40 % ở 35 WPM 1920 và 66 % ở 70 WPM. Tua nhanh bị từ chối ở cả 10 đợt",
+            "fix": "Bước 0, chỉ đổi phần trình bày, sim và golden giữ nguyên: khi không còn chữ sống và theo sim chưa quái nào sắp có chữ trong 1,5 s tới (cùng phép tính với inWordZone), thời gian tự chạy ×1,75 và hiện dấu »; chữ đầu tiên hiện thì về ×1 ngay. Cần anh đồng ý sửa luật tua 06 §10. Đo lại bằng kịch bản chơi thật đo mỗi 100 ms",
+            "who": "claude",
+            "effortHours": 5.5
+          },
+          {
+            "id": "DH-06",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Gốc của nhàn: quái chết ở bẫy và Grove Warden, cách bệ 26–35 m, ngoài Vùng Chữ. Mọi núm cho chữ hiện sớm hơn đã đo đều làm G1 vượt 90 %",
+            "fix": "Bước 1, đổi sim, đo trên nhánh s7-trap-words: Chữ Bẫy. Khi quái vào vùng kích của Pine Bomb hay Net Launcher, bẫy hiện một từ 3–4 chữ cái (lấy từ bộ ôn). Gõ đúng thì bẫy nổ ngay với sức như hôm nay; gõ Ẩu được 70 %; không gõ thì bẫy tự nổ theo luật cũ nhưng chỉ 70 % sức. Chữ Bẫy tính vào sổ chữ cái và N_max, và không hiện khi đã có từ 4 chữ quái sống. Chi tiết và cách đo ở notes",
+            "who": "claude",
+            "effortHours": 16
+          },
+          {
+            "id": "DH-07",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "VFX ngoài phạm vi làn VFX hiện tại: bẫy (Spikes đâm, Pine Bomb có ngòi, Net Launcher không có lưới bay), xung Herb Hut, Grove Warden (đòn trúng dùng màu lửa phe ta), Fire Breath, Dragon Roar (tỏa ra từ tâm bệ, không từ miệng), Inferno (tia không neo ở miệng), G01 cắm cờ và chết, quái xuất hiện",
+            "fix": "Làm mỗi hành động đủ 5 pha theo VFX_STANDARD §3.3, phía người ra đòn trước, chấm tờ khung ở 1280 và 1920, đo dh-perf ở High. Bắt đầu sau khi anh duyệt bước 1a và 2 của làn VFX",
+            "who": "claude",
+            "effortHours": 20
+          },
+          {
+            "id": "DH-08",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Người chơi không thấy nguy: 35 WPM thật kết thúc 100 % máu, máu không tụt quá 33 dưới mức đầu đợt. Bot lại mất khoảng 150 máu mỗi đợt, nên G1 86,7 % của bot không khớp cảm giác chơi",
+            "fix": "Sửa bot gõ cho giống dữ liệu chơi thật (chọn từ gần nhất, độ trễ khi chữ vừa hiện), đo lại G1 và B4. Nếu người thật vẫn quá dễ, đề xuất tăng sức ép ±10 % trong dữ liệu ở mức Thường",
+            "who": "claude",
+            "effortHours": 5
+          },
+          {
+            "id": "DH-09",
+            "priority": "P1",
+            "gate": "G6",
+            "what": "B1 lệch 6 ô, B7 lệch 2 ô; nhàn I của b35, Khá, Nhanh, b60 trên dải D27; B9 chưa đo; các nhánh s1–s6 vẫn chờ quyết định",
+            "fix": "Anh chọn hướng cho D27, D31, D33 (owner-decisions §8.7) và hướng chống nhàn (DH-05, DH-06), rồi chơi thử B9 một ván 10 đợt trên bản build",
+            "who": "owner",
+            "effortHours": 1.5
+          },
+          {
+            "id": "DH-10",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Ở camera mặc định khó đọc: G01 thành khối rêu và có hai lá cờ khi đã cắm; Herb Hut giống bụi cây; Spikes che Blight Wolf; Hỏa Long chỉ là nét đỏ mảnh",
+            "fix": "Clip Idle và Move cho cán cờ G01 ngả khoảng 30°, ẩn cờ trên tay khi đã cắm (mặt nạ xương). Herb Hut: wash ấm và nền đá. Spikes: hạ chiều cao khung để thấp hơn sói. Rồng: viền và rim sáng hơn, hoặc to lên khoảng 1,15 lần ở camera chơi. Chụp lại trước và sau",
+            "who": "claude",
+            "effortHours": 6
+          },
+          {
+            "id": "DH-11",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Chưa có điểm của giám khảo độc lập. Tôi chấm cảnh map 7/10 (1080p), 6,5/10 (720p); dưới 8",
+            "fix": "Gộp map pilot A khi làn xong, rồi một agent không làm làn nào chấm cảnh map và các màn chính (thẻ tốc độ, Bày binh, đợt, menu, kết quả) ở 1280 và 1920 theo visual-scorecard. Điểm 7,5–8,5 thì thêm người chấm thứ hai",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "DH-12",
+            "priority": "P1",
+            "gate": "G7",
+            "what": "Rủi ro khi gộp map pilot: ô đất và decal chỉ nạp từ /art-src ở bản dev, bản build chỉ còn bảng màu",
+            "fix": "Trước khi gộp pilot: bản build phải mang ô đất và decal đã xử lý dưới /assets/dragon-hold/ (MF-C24, phiếu 080), hoặc mang ảnh đất đã nướng sẵn; kiểm bằng bản build trên server tĩnh",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "DH-13",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Không có màn tựa: mở game là gặp câu hỏi tốc độ, không có tên game, nút bắt đầu hay hướng dẫn ngắn",
+            "fix": "Thêm màn tựa trên nền cảnh map: tên game, Enter để bắt đầu, ba dòng cách chơi (gõ chữ trên đầu quái; phím 1–8 mua và đặt; Esc tạm dừng), về cổng game. Chọn bằng phím và chuột",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "DH-14",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Chưa có chữ logo hay hình tựa 2D cho màn tựa",
+            "fix": "Phiếu Codex: logo chữ \"Rồng Giữ Ải\", nền trong, cỡ 1024 và 256, phải đạt từ 8/10 theo ART_ACCEPTANCE, sửa rồi sinh lại tối đa 3 lần; Claude chấm trước khi dùng",
+            "who": "codex-image",
+            "effortHours": 1.5
+          },
+          {
+            "id": "DH-15",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Không có màn cài đặt; chất lượng hình và cỡ thẻ chỉ đặt được bằng URL",
+            "fix": "Thêm mục Cài đặt vào menu tạm dừng: âm lượng nhạc, hiệu ứng, giọng; chất lượng High hoặc Medium; cỡ thẻ chữ 80–150 %; về cổng game. Lưu localStorage, đi được hoàn toàn bằng phím. Đổi phím (00 §6) để P2",
+            "who": "claude",
+            "effortHours": 5
+          },
+          {
+            "id": "DH-16",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Câu chữ: tên ải ghi \"Bản thử: Cầu và Suối\"; câu thua ở results.ts:196 dùng sai Fire Breath (chiêu ⌥1) cho đòn chữ",
+            "fix": "Anh chọn tên ải 1 (ví dụ \"Ải 1 · Cầu và Suối\"), sửa ở stages.ts. Sửa câu thành \"Gõ chữ trên đầu quái để Hỏa Long phun lửa vào chúng.\" Sửa test ui theo",
+            "who": "codex-code",
+            "effortHours": 0.5
+          },
+          {
+            "id": "DH-17",
+            "priority": "P1",
+            "gate": "G4",
+            "what": "Lần chơi đầu ở High tải 12,4–12,7 MB (ngân sách ≤ 5 MB); riêng hai GLB Rồng High là 7,5 MB; dist có cả draconis-v3 không dùng",
+            "fix": "Nén texture GLB Rồng (KTX2 hoặc WebP) qua preset model; lần đầu nạp Medium rồi mới tải High; bỏ draconis-v3 khỏi bản build. Đo lại số byte và thời gian tới khi chơi được",
+            "who": "claude",
+            "effortHours": 4
+          },
+          {
+            "id": "DH-18",
+            "priority": "P2",
+            "gate": "G2",
+            "what": "Mức Low vẫn là khối tạm (Rồng, quái hình capsule, cây hình nón)",
+            "fix": "Cho Low dùng model Medium với đám đông ≤ 100 con như 05 §8, hoặc bỏ Low khỏi lựa chọn trong màn cài đặt",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "DH-19",
+            "priority": "P2",
+            "gate": "G4",
+            "what": "Trần tam giác: bench 220 quái ở High 3,09 M (trần 2 M); Medium chỉ thu nhỏ texture",
+            "fix": "Bậc Medium giảm nửa số tam giác, bóng mờ dùng hình Medium, bụi nhỏ không đổ bóng (đòn bẩy trong changelog M0b §6)",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "DH-20",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Thẻ chữ nhảy trong lúc đang giữ chỗ 0,5 s: 22 lần, xa tới 218 px trong dh-crowd 1280 (ngoại lệ D32 chờ anh)",
+            "fix": "Giới hạn quãng nhảy khi đang giữ chỗ, hoặc thay nhảy bằng mờ thẻ; đo lại dh-crowd ở cả hai cỡ",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "DH-21",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Số sát thương của cụm Thorn Ant xếp thành cột đi lên khoảng 250 px, xa đàn kiến",
+            "fix": "Gộp các số của cùng một cụm thành một số ×N tại tâm cụm",
+            "who": "claude",
+            "effortHours": 1.5
+          },
+          {
+            "id": "DH-22",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Mọi âm thanh và nhạc đều tổng hợp bằng mã; chưa ai nghe kiểm",
+            "fix": "Anh nghe 2 phút trước. Nếu chưa đạt: làm nhạc nền và khoảng 10 SFX chính qua AUDIO_PIPELINE (Audio Lab, Stable Audio), đặt ở /assets/dragon-hold/audio/",
+            "who": "claude",
+            "effortHours": 6
+          },
+          {
+            "id": "DH-23",
+            "priority": "P2",
+            "gate": "G7",
+            "what": "Bản build còn chunk ui-preview, file .woff thừa; chưa có bước tự kiểm khi deploy",
+            "fix": "Loại ui-preview khỏi bản production; viết script kiểm deploy theo DEPLOY_INDEPENDENCE §11 (URL tuyệt đối, đủ file, 0 request sang nguồn khác, số chữ > 0)",
+            "who": "codex-code",
+            "effortHours": 2
+          },
+          {
+            "id": "DH-24",
+            "priority": "P2",
+            "gate": "G5",
+            "what": "Màn kết quả chỉ có Chơi lại; không có lối về cổng game",
+            "fix": "Thêm nút \"Về cổng game\" (Esc), đi được bằng phím mũi tên và Enter",
+            "who": "codex-code",
+            "effortHours": 1
+          }
+        ],
+        "sheets": "Tờ khung, sau khi đã xóa ảnh thô bằng prune --apply (nhật ký /Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/.pruned-20261028-1837.txt):\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-01-first-time-flow-1920.jpg (lối người mới, 12 màn)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-02-keyboard-only-1280.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-03-keyboard-only-1920.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-04-words-crowd.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-05-ui-preview.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-06-standalone-prod.jpg (bản production không có từ vựng)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-07-word-attack-crop-1280.jpg (đòn chữ trên main, cắt phóng 2×)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-08-feel-35wpm-1280-moments.jpg (đỉnh 9–10 quái mà 0–1 chữ)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-09-feel-end-screens-1280.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-10-g01-move-burst-1280.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-11-letters-burst-1280.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-12-heo-lan-hp-loss-1280.jpg\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-13-readability-crops-1280.jpg (Spikes che sói, Herb Hut như bụi cây, G01)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-14-quality-tiers-1920.jpg (Low là khối tạm, so với High)\n/Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/sheets/sheet-15-perf-wave5-1920.jpg\nBurst theo từng đợt của ván 35 WPM: /Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/feel-35-1280/sheet-*.jpg (17 tờ).\nSố liệu: /Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/numbers.json, /Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/feel-35-1280/idle.json và samples.json (mẫu mỗi 100 ms), các report.json trong từng thư mục con. Kịch bản kiểm: /Users/toandx/htdocs/typing-game/games/dragon-hold/tmp/map1-audit/scen/ (ux.mjs, feel.mjs có thêm bộ lấy mẫu, standalone.mjs, static.mjs, tiers.mjs, idle-samples.mjs, sheet.sh).",
+        "notes": "Tóm tắt: map 1 của Rồng Giữ Ải (L2-cau, main 02fe9c7) chưa đạt mức production. G1 đạt; G4, G5, G6 đạt một phần; G2, G3, G7 trượt. Có 4 việc P0, đều thuộc G7 (từ vựng chưa nằm trong game, chưa có host dragon trên nginx, portal chưa có Rồng); làm xong mấy việc này thì anh mới thử được qua typing-game.local. Khi chạy bằng Vite dev, game chơi trọn được từ đầu tới cuối và không có lỗi.\n\nPhạm vi và cách đo:\n- Không sửa mã game, không commit. Chạy Vite riêng ở 127.0.0.1:4140 với --strictPort; hai server tĩnh 4141 và 4142 để thử bản build. Cả ba đã tắt. Mọi lượt trình duyệt chạy qua heavy.sh --gpu, lượt đo hiệu năng qua --perf. Máy là Mac mini M4 dùng chung.\n- Không chạm .wt-dh-mappilot, .wt-dh-vfx, .wt-ts-vfx, .wt-td-vfx, Tu Tiên. Một lượt chụp Medium bị bỏ vì hàng chờ GPU dài; Medium đã có số của dh-perf.\n- Không chạy lại bot cân bằng, vì sim và golden trùng 83da970 (đợt đổi tên tiếng Anh chỉ sửa nameVi); số bot lấy từ owner-decisions §8.3.\n- G2 là điểm tôi chấm. Tôi không làm làn nào nên độc lập với các làn, nhưng vẫn cần một giám khảo độc lập chính thức (DH-11).\n\nLàn đang chạy đã phủ những gì, để không đếm hai lần:\n- Map pilot A: đất, đồng cỏ, vách, ao, lối mòn, mép rừng, ánh sáng. Chưa gộp. Rủi ro G7: ô đất chỉ nạp từ /art-src ở bản dev (DH-12).\n- Làn VFX:\n  - bước 1a, đòn chữ của Hỏa Long đủ 5 pha: xong trên nhánh dh-vfx, chưa gộp, trận thật đo 5,19 ms;\n  - Sky Fire: bước 2;\n  - đòn quái: bước 4.\n- DH-07 chỉ gồm phần làn VFX chưa nhận.\n\nHướng cho vấn đề nhàn (đề xuất, mỗi bước đều giữ cổng):\n\n1. Số đo hôm nay:\n   - 35 WPM ở 1280, phím thật, tốc độ 1: 52,4 % thời gian đợt không có chữ nào. Tỉ lệ thời gian theo số chữ trên màn: 0 chữ 52,4 %, 1 chữ 43,6 %, 2 chữ 3,9 %, 3 chữ 0,1 %. Quãng không chữ dài trung vị 1,5 s, p90 4,2 s, dài nhất 5,9 s.\n   - Theo đợt: 39–70 %; đợt 1 nhàn nhất (69,6 %).\n   - Lúc đông nhất có 9–10 quái sống mà 0–1 chữ (sheet-08). Tua nhanh bị từ chối ở cả 10 đợt.\n   - Nguyên nhân: Vùng Chữ là vòng 26 m cộng T_a. Bẫy và Grove Warden hạ quái ở 26–35 m, ngoài vùng đó.\n   - Mọi núm cho chữ hiện sớm (D27 (i), D30, D31) đều làm Chuẩn thắng quá 90 %, vì chữ chính là sát thương.\n   - Vì vậy phải thêm việc gõ không cộng thêm sát thương, hoặc lấy sát thương từ chỗ khác bù lại.\n\n2. Bước 0 (DH-05), không đổi sim:\n   - Thời gian tự chạy ×1,75 khi không có chữ sống và sim tính được chưa quái nào sắp vào Vùng Chữ trong 1,5 s tới. Chữ đầu tiên hiện thì về ×1 ngay. Hiện dấu ».\n   - Golden và mọi cổng bot giữ nguyên theo cách làm, vì bot đo theo tick.\n   - Ước tính: thời gian thật không có chữ còn khoảng 39 % ở 35 WPM và khoảng 50 % ở 70 WPM.\n   - Cần anh đồng ý sửa luật tua 06 §10.\n\n3. Bước 1 (DH-06), đổi sim, đo trên nhánh riêng: Chữ Bẫy.\n   - Khi quái vào vùng kích của Pine Bomb hay Net Launcher (bẫy đứng ngoài 26 m), bẫy hiện một từ ngắn lấy từ bộ ôn: vừa lấp nhàn vừa ôn từ.\n   - Gõ đúng thì bẫy nổ ngay với sức như hôm nay; gõ Ẩu được 70 %; không gõ thì bẫy tự nổ theo luật cũ nhưng chỉ 70 % sức.\n   - Vì sao giữ được cổng:\n     - Bot Chuẩn rảnh tay 20 % nên sẽ gõ chữ bẫy, sát thương của nó vẫn như cũ, G1 và G8 gần như giữ.\n     - Không gõ thì bẫy yếu đi, G6 càng chắc.\n     - Gõ Ẩu bị phạt, nên B4 có lợi.\n     - Chữ Bẫy tính vào sổ chữ cái và N_max, và không hiện khi đã có từ 4 chữ quái sống, nên đỉnh tải G9 không tăng.\n   - Nếu còn nhàn: Than Lửa. Có 1,5 s không chữ thì hiện một từ ở bệ; gõ nó rút 3 s hồi chiêu Sky Fire. Đồng thời tăng hồi chiêu gốc 24 lên 30 s, để bot Chuẩn ra chiêu với nhịp như cũ.\n   - Gõ mini-game giữa hai đợt không giải quyết được nhàn, vì nhàn I chỉ tính lúc đang có đợt. Thẻ Ôn lúc nghỉ đã có rồi.\n\n4. Cách đo, chỉ giữ bước nào qua đủ cổng:\n   - pnpm dh:balance ở cả ba chế độ, 2 × 60 seed; thêm 300 seed để chấm B4 và trần 90 % của Nhanh.\n   - Ngưỡng giữ: G1 75–90 % ở cả hai bộ seed; G3 ≥ 70 %; G5 ≤ 40 %; G6 thua hết trước đợt 3; G8 20–35 %; G9 ≤ 1,40 và chữ sống ≤ N_max; D23a ≤ 15 %; B2–B8 đạt ở từng bộ seed.\n   - Đích: I ở Cân bằng ≤ 20 % cho b35, Khá, Nhanh, b60 (hôm nay 20,8 / 26,6 / 30,7 / 29,5 %).\n   - Chỉ số mới: số Chữ Bẫy hiện và được gõ; phần lần bẫy nổ do người chơi gõ.\n   - Trình duyệt: chơi thật bằng phím CDP, tốc độ 1, ở 35 WPM 1920 và 70 WPM 1280, đo mỗi 100 ms (scen/feel.mjs). Đích: không chữ ≤ 20 % ở 35 WPM và ≤ 30 % ở 70 WPM, quãng không chữ p90 ≤ 4 s, dh-words và dh-crowd vẫn ok, máu thấp nhất mỗi đợt cho thấy có nguy.\n   - Sau cùng anh chơi thử B9.\n\nSố chính khác:\n- dh-perf High: trung bình ≤ 5,21 ms, p95 ≤ 9,8 ms. Medium: ≤ 5,66 ms, p95 ≤ 9,2 ms.\n- Lần chơi đầu tải 12,4–12,7 MB.\n- Bản build không có /vocabulary/: quái không có chữ, thua ở đợt 1, không có thông báo.\n\nƯớc lượng giờ:\n- P0: 5,5 h.\n- P1: 73 h. Phần lớn là VFX ngoài làn (20 h) và Chữ Bẫy (16 h).\n- P2: 18,5 h.\n\nHai câu cần anh trả lời:\n1. Có cho tự tua nhanh lúc không có chữ không (sửa luật 06 §10)?\n2. Có đo Chữ Bẫy trên nhánh riêng không?"
+      },
+      {
+        "key": "loigoi",
+        "gates": [
+          {
+            "gate": "G1 lỗi, console, chơi trọn map ở 1280 và 1920",
+            "status": "partial",
+            "evidence": "Bản 2D hôm nay (a5cc147, build production của tôi, server tĩnh 127.0.0.1:4150 giống nginx play.conf). Hai lượt chơi trọn truyện bằng phím chữ CDP thật (48 WPM, 885/879 phím, 201/200 từ), xây theo thứ tự STANDARD gửi qua __td như cú bấm chuột. Ở 1280×720: thắng lúc 746 s, còn 5 mạng, 1★. Ở 1920×1080: thua ở Đêm 5 (10 → 0 mạng ở đỉnh boss), thẻ thua và 'Chơi lại Ngày 5' hiện đúng. Cả 5 lượt trình duyệt: 0 lỗi console, 0 exception, nhật ký chạy lại trên Node khớp hash. pnpm test 350/350, td:golden:check giống hệt, tsc đạt. Không thấy lỗi P0/P1 ở luật chơi, nhưng còn lỗi P0 ở G7 và P1 ở G5. Map 1 bản production là 3D (1C), chưa có nên chưa đo được. Lượt 1920 đầu tiên bị lane khác điều khiển giữa chừng do trùng cổng DevTools (gap A11), đã chạy lại trên cổng cố định 4158/4159."
+          },
+          {
+            "gate": "G2 hình ≥ 8/10, không hình tạm",
+            "status": "fail",
+            "evidence": "Cảnh map vẫn là src/view/debug-2d.ts: nhà và quái là đĩa tròn ghi chữ tắt ('Fort', 'R', 'M', 'L', 'CT'), tháp là emoji 🏹 🧨, Mộc Tinh là đĩa xanh vẽ mặt, đất là các dải phẳng. Ở 1920×1080 sân chỉ là một dải dọc, khoảng 2/3 màn hình là nền trống. Điểm tôi tự chấm (không phải giám khảo độc lập; lượt này không gọi được subagent): cảnh map 3,5–4/10, HUD 6,5/10, màn đầu 8,5/10, thẻ Cài đặt, Hồ sơ gõ, Tạm dừng, thắng và thua 8/10. Tờ: sheet-1280x720.jpg, sheet-1920x1080.jpg, sheet-keyframes.jpg."
+          },
+          {
+            "gate": "G3 cảm giác: VFX 5 pha, âm thanh, thẻ chữ",
+            "status": "fail",
+            "evidence": "VFX: theo VFX_STANDARD §2.3 (đã đối chiếu ảnh chụp), tháp bắn không có pha R và I, cầu lửa Draconis vẽ thành mũi tên mực, quái trúng đòn không lóe, mọi loài chết giống nhau. Làn V4a 2D ở games/.wt-td-vfx chưa gộp. Âm: chỉ có tiếng tổng hợp WebAudio (folk.ts, audio-min.ts, music.ts), chưa có file thật nào trong khoảng 40 id của THEME_SOUND_LIST, chưa ai nghe bằng tai. Thẻ chữ đạt: 379 lần nhìn ở hai cỡ, 0 thẻ dưới 18 px, 0 thẻ chồng nhau, 0 thẻ đè HUD, 0 thẻ ra ngoài màn; diện tích thẻ tối đa 5,7 % ở 1280 và 3,4 % ở 1920 (trần 6 %). Còn một lỗi nhỏ: dải nghĩa lúc rời đi đè lên thẻ kế."
+          },
+          {
+            "gate": "G4 hiệu năng High/Medium, nạp nhanh, không khung dài",
+            "status": "partial",
+            "evidence": "Bản 2D, cả trận: update p95 0,3–0,4 ms; draw p95 0,7–0,8 ms, lâu nhất 3,5 ms. Long task: 2 ở 1280 (lâu nhất 123 ms), 1 ở 1920 (53 ms). Khung rAF quá 50 ms: 3 và 2 trên khoảng 45.000 khung, có lẽ do lúc chụp màn; muốn chắc phải chạy trace. Gói '/' 84,91 kB gzip, chỉ còn 0,09 kB headroom. Từ 'Bắt đầu' tới chơi được dưới 1 s. Không có bậc High/Medium vì game còn 2D, nên phần ngân sách của bước 1C (3D) chưa đo được."
+          },
+          {
+            "gate": "G5 trải nghiệm: lần đầu, menu, tạm dừng, cài đặt, kết quả, tên",
+            "status": "partial",
+            "evidence": "Đạt: màn đầu, Cài đặt, Hồ sơ gõ, Tạm dừng, thẻ thắng (sao, Kỷ lục mới, Chest +150 Gold) và thẻ thua (gợi ý, Chơi lại Ngày 5) ở cả hai cỡ. Đợt đặt tên đã gộp (a5cc147): danh từ game tiếng Anh, câu tiếng Việt; tên Việt cũ chỉ còn trong chú thích mã. Trượt: (1) lượt người mới (không xây, không gửi Draconis) không có chữ nào suốt Ngày 1 (74/74 mẫu), từ đầu tiên ở giây 106; câu Ngày 1 nói 'Rice chín, bác Farmer gọi' trong khi lúc đầu chưa có Rice Field; bong bóng Chặt mờ nằm ngay ngoài vòng 14 m của Draconis. (2) HUD ở 1280×720 chiếm 14,3–16 % ban ngày, 12,6–15,2 % ban đêm (TK 23.5: trong trận ≤ 10 %); ở 1920 là 7,6–9,8 %. (3) Đang khóa từ thì phải bấm Esc hai lần mới tạm dừng (escToPause = 2). (4) Thẻ kết vẫn ghi 'Knowledge 0' ngoài chế độ Học."
+          },
+          {
+            "gate": "G6 cân bằng: cổng bot map 1",
+            "status": "partial",
+            "evidence": "Số trên Node (làn A2, 28/10; sim không đổi từ đó, golden giống hệt): B1–B8 đạt trên seed 1–80; dải chặt 6/6 (thắng 80–86 %); §12 trên 5 seed đạt. Trượt: §12 trên 20 seed, 5a 8,48 s (trần 8) và 5b 29,5 % (cần ≥ 30 %). B9 thiếu số chơi thật của chủ dự án. Seed 81–160: B1 và B7 sát mép. Trên trình duyệt, cùng bot và cùng thứ tự xây mất 6–7/20 mạng ở Đêm 1 ở cả hai cỡ; Đêm 5 lúc mất 2 mạng (thắng), lúc mất 10 mạng (thua). Không có giây nào mà mọi phase đều có chữ: 62–84 % số mẫu 1 s không có từ nào trên màn."
+          },
+          {
+            "gate": "G7 build tự đủ, chạy qua typing-game.local",
+            "status": "fail",
+            "evidence": "Lúc chạy, /vocabulary/ do nginx đọc từ shared/vocabulary của repo cha (play.conf:174-178); thiếu thì game dùng bộ từ dự phòng không có nghĩa. Origin cha https://typing-game.local ghi cứng trong kit/learning/contract.ts. tests/td/typing.ts:23 và scripts/td/replay.ts:31 đọc ../../../../shared/vocabulary. dist 23 MB, trong đó khoảng 19,8 MB là GLB không dùng (game 2D). Máy hôm nay: conf nginx đã cài (/opt/homebrew/etc/nginx/servers/typing-game.local.conf) không có host td; /etc/hosts không có td.typing-game.local (curl trả 000, ép resolve thì 503); portal/dist (22/10) không có thẻ Lời Gọi dù portal/public/games.json đã có."
+          }
+        ],
+        "gaps": [
+          {
+            "id": "A10",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "typing-game.local không mở được Lời Gọi: conf nginx đã cài thiếu host td, /etc/hosts thiếu td.typing-game.local, portal/dist cũ (22/10) không có thẻ Lời Gọi.",
+            "fix": "Chạy pnpm build:local (portal và các game), rồi scripts/setup-nginx.sh play, thêm dòng hosts cho dragon., td., survival. (cần sudo). Kiểm: curl https://td.typing-game.local/ trả 200 và portal có thẻ Lời Gọi.",
+            "who": "owner",
+            "effortHours": 0.5
+          },
+          {
+            "id": "C0",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Bước 1C cho riêng map 1 chưa có kế hoạch và ngân sách. Gói '/' chỉ còn 0,09 kB; mã .ts 10.499/10.500 dòng (làn V4a đã nâng trần lên 10.900); chưa có ngân sách cho chunk 3D và media.",
+            "fix": "Viết docs/td/BUILD_1C_MAP1.md, nêu rõ: chỉ map 1; giữ 2D làm bậc Low và đường lùi; chunk view3d (three.js) nạp sau màn đầu nên gói '/' vẫn ≤ 85 kB; trần dòng mới (+~6.000); ngân sách media map 1 (High ~12 MB, Medium ~6 MB, chỉ model map 1); draw call và tam giác theo TK 23.10, §25.12. Chủ dự án duyệt.",
+            "who": "claude",
+            "effortHours": 4
+          },
+          {
+            "id": "C1",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Game chưa có module three trong kit, và view bị buộc vào DebugView.",
+            "fix": "Thêm 'three' vào kit.config.json (điều phối viên sync từ shared/game-kit, ghi DRIFT.md). Tách giao diện View từ DebugView (resize, project(x,y,z), unproject, callAt, keepOut, panBy, zoomAt, draw); main.ts chỉ đổi chỗ new DebugView. Chunk view3d nạp lười, WebGL lỗi thì lùi về 2D. tests/boundary giữ xanh.",
+            "who": "claude",
+            "effortHours": 8
+          },
+          {
+            "id": "C2",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Chưa có sân khấu 3D và camera RTS. Ở 1920 sân 2D chỉ là một dải dọc.",
+            "fix": "Sửa từ games/dragon-hold/src/view/stage.ts và camera.ts (chép, ghi nguồn ở đầu file). Camera theo TK 23.6: 55° ở 58 m, zoom 22–120 m, kéo trái để pan, kéo phải để xoay và nghiêng, lăn chuột zoom vào con trỏ, F1–F3, không bao giờ tự chạy, rung chỉ trên canvas. Ánh sáng và hậu kỳ theo StylePack Sách tranh. Ba bậc High, Medium, Low.",
+            "who": "claude",
+            "effortHours": 12
+          },
+          {
+            "id": "C3",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Chưa có đất, đường, suối, cầu, sân Fort cho w1-silverfall.",
+            "fix": "Làm trong game theo MAP_FACTORY §8.1 và luật decor §6.4, không chờ lõi Map Factory: sân 96 m cộng viền 40 m; dấu cao (Đồi Cầu Vồng, vách Thác Bạc ngoài sân); dải đường lấy mẫu từ groundLanes, có mép mòn; suối uốn nhẹ trong rect nước, có bờ và lau sậy; 2 Wooden Bridge khớp đúng rect; sân đá quanh Fort và quặng. Shader đất vẽ tay dùng ô đất và decal của I1, I2.",
+            "who": "claude",
+            "effortHours": 14
+          },
+          {
+            "id": "C4",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Phần lớn model map 1 có GLB nhưng chưa qua preset hay chưa vào manifest. Bộ cấp L2/L3 của 5 nhà và Fort, gold-mine-cart, scaffold-bamboo, fire-feather, seed-drop, vach-thac-bac, cau-go, choi-canh-doi chưa xử lý. thuong-luong, nuppeppo, mam-go, helper-owlet đã dựng nhưng chưa vào manifest. barracks.glb nguồn (24/10 08:52) mới hơn bản đã xử lý (02:57), có thể vẫn là bản tạm 1,8 m.",
+            "fix": "Thêm vào typing-defense-static.json và áp ghi chú sửa của 3D_IMPORT_2026-10-28: keep-kit-l2 tách loose parts và khép vòng; keep-kit-l3 xóa màng xám, dời FX_top/perch/word; archer-kit-l3 dời socket lên tầng mới; cannon-kit-l2 xoay mặt hở ra trước, đặt nòng; barracks-kit-l3 nâng mái; gold-mine-kit-l3 xoay 90°; fire-feather xoay 90°; vach-thac-bac sáng +25 % và chừa khe thác; scaffold co theo 4 cỡ vòng. Dựng lại barracks và kiểm cao 4,5–5 m. Chạy models:blender, rồi models:index; điền usedBy trong SOURCES.json; media:push.",
+            "who": "claude",
+            "effortHours": 10
+          },
+          {
+            "id": "C5",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Còn thiếu rig và clip: Mộc Tinh mới có xương và Boss_Idle, chưa xuất GLB; Draconis P18 (33,5k tam giác) chưa rig; dân làng (worker-base) chưa rig.",
+            "fix": "Mộc Tinh: thêm Boss_Intro, Move, Attack (quật), Skill.roots, Skill.summon, Stun, Hit, Phase, Retreat, Death bằng bộ td_rig_*; decimate cho bậc Medium. Draconis: tạm nhập bản draconis-v2 đã rig (prepare-models --import vào media riêng của Lời Gọi) với bí danh clip của TK 23.9; rig bản P18 để sau. worker-base: rig người, các clip Worker_Work/Strike/Walk/Carry và đồ gắn (rìu, cuốc, bó mạ). Có thể dùng cách rig bằng mã của Rồng (crowd-rig.ts).",
+            "who": "claude",
+            "effortHours": 18
+          },
+          {
+            "id": "C6",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Nhà chưa có hình 3D và các trạng thái.",
+            "fix": "Model theo loại và cấp, bộ cấp chồng lên, socket FX_top/word/perch/lantern_0..4. Trạng thái: xây (giàn tre, model mọc 1,2 s), nâng cấp (bộ cấp rơi nảy, vòng tầm quét ra), bán (ván bay đi), tê vì rễ. Đèn lồng Nhiệt, huy hiệu nhịp, cờ cấp. Bóng ma đặt nhà: vòng xanh hoặc đỏ, cây luật đỏ, cây cảnh mờ. Ô Rice Field theo trạng thái (I3), đống vàng của Gold Mine.",
+            "who": "claude",
+            "effortHours": 14
+          },
+          {
+            "id": "C7",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Quái, lính, dân, Helper, cây luật vẫn là đĩa tròn và chữ tắt.",
+            "fix": "Chép crowd.ts và crowd-rig.ts của Rồng: quái instanced với clip nướng, lóe khi trúng, màu trạng thái (cháy, choáng, vòm, trống Tanuki, hào quang Zombie Leader), chết theo loài (Split Blob tách, Sapling héo), thanh máu instanced. Soldier dùng linh-giao; dân, Farmer, Builder dùng worker-base và đồ gắn; Helper dùng owlet và đồ gắn; Ghost Flame là sprite VFX (I4). 36 cây luật: billboard, gốc cây, trạng thái chặt, mọc lại mỗi sáng.",
+            "who": "claude",
+            "effortHours": 20
+          },
+          {
+            "id": "C8",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Draconis và Mộc Tinh chưa có cảnh 3D. Hôm nay boss là đĩa xanh, Draconis là đĩa chữ D.",
+            "fix": "Draconis: bay, đậu FX_perch, đòn thường, Fire Feather Rain (bay lên, miệng sáng, lông bung lên trời rồi rơi đúng bóng báo). Mộc Tinh: trồi ở khúc nhập; decal báo Rễ Trồi ≥ 1,2 s; quật; Sapling rơi từ seed-drop; rễ hút tới Fort; sao choáng; pha 2; rút lui. Khung cận cảnh 320×180 lúc boss ra mắt; Chest khi rút.",
+            "who": "claude",
+            "effortHours": 16
+          },
+          {
+            "id": "C9",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Chưa có cảnh vật: cây, bụi, đá, mép rừng, phông xa. Thiếu những thứ này thì map 3D vẫn là sân trống, không đạt 8/10.",
+            "fix": "Viết scripts/td/prepare-scenery.mjs: tách nền, cắt sát, viền mực, nở màu, pháp tuyến phồng, tấm bóng, xếp atlas WebP; chạy cho 12 loại meadow (v1, v2) và tree-stump. Shader billboard: ramp 3 bậc, đung đưa, dither, alpha-to-coverage ở High. Mép rừng bằng canopy-block. Phông 140/220/320 m và trời w1-silverfall. Rải decor theo §6.4: clearOnBuild, cây cảnh cách cây luật ≥ 4 m, cây đổ 0,3 s khi đặt nhà. Ngân sách High 1.500 + 4.000, Medium 1.000 + 1.600, ≤ 6 draw call.",
+            "who": "claude",
+            "effortHours": 22
+          },
+          {
+            "id": "C10",
+            "priority": "P0",
+            "gate": "G3",
+            "what": "Thẻ chữ đang neo theo phép chiếu 2D. Chưa có khay mép, mặt nạ vùng yên, chữ bay vào nhà, hiệu ứng theo từng phím.",
+            "fix": "Neo thẻ ở FX_top + 0,6 m qua phép chiếu 3D, giữ bộ xếp làn lanes.ts. Khay mép ≤ 6; bấm khay thì camera lướt 0,45 s. Mặt nạ vùng yên cho hạt cộng sáng. Kẹp cột tránh HUD khi zoom (BUILD_NOTES 1.9). Chữ bay vào FX_core thành hạt chữ cái; mỗi phím đúng có một nhịp nhìn thấy (thanh chất lượng của chủ dự án). Cổng: td-words, td-scale, td-hud-budget.",
+            "who": "claude",
+            "effortHours": 12
+          },
+          {
+            "id": "C11",
+            "priority": "P0",
+            "gate": "G3",
+            "what": "Đòn chính chưa đủ 5 pha (VFX_STANDARD V4b, TK §26.1 cần viết lại các pha A–F).",
+            "fix": "Dùng thư viện VFX với preset màu mực cho: Archer Tower và Word Shot, Cannon Tower (lóe nòng, khói, đạn cầu vồng có dấu chỗ rơi, nổ 3 lớp, vết cháy), nỏ Fort, cầu lửa Draconis, Fire Feather Rain, lính giáp lá cà, trống Tanuki, vòng nước River Serpent, trúng theo chất liệu, chết theo loài, bộ đòn Mộc Tinh. Có cài đặt giảm chuyển động. Mỗi đòn có tờ khung và số chấp nhận theo chuẩn. Texture lấy từ I5.",
+            "who": "claude",
+            "effortHours": 24
+          },
+          {
+            "id": "C12",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Chưa có đồ bay về HUD (đồng, Rice, Wood, Mảnh Chữ). HUD dùng chữ cái và emoji thay ảnh, và vượt ngân sách ở 1280×720 (14–16 %, trần 10 %).",
+            "fix": "Đồng bung ra rồi bay về ô Gold; Rice, Wood về ô của chúng; Mảnh Chữ về Draconis; Chest lúc boss rút. Bộ bay viết riêng trong game; chuyển Credit Crystal sang kit để sau. Làm lại skin HUD theo cỡ TK 23.5: thanh trợ lực 260×64 dùng chân dung thật (art-src/portraits); icon nhà, tài nguyên, nhịp, đèn lồng lấy từ art-src/ui; gộp khung Mẹo. Kiểm: HUD ≤ 10 % ở 1280.",
+            "who": "claude",
+            "effortHours": 14
+          },
+          {
+            "id": "C13",
+            "priority": "P1",
+            "gate": "G4",
+            "what": "Hiệu năng, bậc chất lượng và tốc độ nạp của bản 3D chưa đo.",
+            "fix": "Chạy td-1b-perf trên 3D (boss, flood 300, Tối Thượng) ở High và Medium. Giữ trần draw call, tam giác, hạt (2.400/1.200); không khung nào quá 50 ms. Nạp model theo bậc, chỉ model map 1. Low hoặc WebGL lỗi thì dùng 2D. Gói deploy chỉ chứa model map 1.",
+            "who": "claude",
+            "effortHours": 10
+          },
+          {
+            "id": "C14",
+            "priority": "P1",
+            "gate": "G1",
+            "what": "Cần chạy lại mọi cổng trên bản 3D và chấm hình độc lập.",
+            "fix": "Chạy mọi td-* ở hai cỡ, thêm td-words, td-scale, td-hud-budget, td-loot, td-scenery, cộng map1-play và map1-newplayer của lượt này. Giám khảo độc lập chấm ≥ 8/10 ở 3 góc nghiêng × 4 hướng. Golden không đổi (chỉ sửa view). Chủ dự án chơi thử.",
+            "who": "claude",
+            "effortHours": 12
+          },
+          {
+            "id": "A1",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Người mới không có chữ nào để gõ trong 106 s đầu nếu không biết bấm Xây (Insert) hay gửi Draconis. Câu Ngày 1 nói tới Rice Field và Farmer chưa có; bong bóng Chặt mờ nằm ngay ngoài vòng 14 m của Draconis.",
+            "fix": "Viết lại câu Ngày 1 thành một việc đầu có hướng dẫn: 'Bấm Xây (Insert), đặt Rice Field cạnh Fort', có mũi tên trên nút Xây; hoặc cho vòng của Draconis lúc đầu chạm cụm cây gần Fort để có chữ trong 5 s. Nếu đổi sim thì làm lại golden. Kiểm: map1-newplayer, từ đầu tiên ≤ 10 s.",
+            "who": "claude",
+            "effortHours": 5
+          },
+          {
+            "id": "A2",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Trận 'nhàn': ở 48 WPM, 62–84 % số mẫu 1 s không có từ nào trên màn, ở mọi Ngày và Đêm. Do thiết kế: trần gõ 8 s mỗi 20 s, 5b nhắm 30–45 %. Đây là cùng lời than chủ dự án đã nêu ở Rồng.",
+            "fix": "Chủ dự án chọn hướng: chấp nhận khoảng chờ và lấp bằng hành động đáng xem (VFX, đồ bay của 1C), hay tăng nguồn lời gọi hoặc đổi trần 5a/5b. Claude đo lại bằng map1-play sau 1C.",
+            "who": "owner",
+            "effortHours": 1
+          },
+          {
+            "id": "A3",
+            "priority": "P1",
+            "gate": "G6",
+            "what": "Cân bằng: §12 trên 20 seed trượt 5a (8,48 s) và 5b (29,5 %); thiếu B9. Trên trình duyệt, Đêm 1 lấy 6–7/20 mạng với thứ tự xây chuẩn ở 48 WPM; Đêm 5 dao động từ 2 tới 10 mạng.",
+            "fix": "Chủ dự án chơi một lượt và bấm 'Chép số chơi thử' để có B9. Lượt cân bằng chung đo 5a/5b cùng mạng mất ở Đêm 1 trên 20 và 80 seed, trên cả bộ seed 81–160. Gói a2-package-v2.patch là điểm bắt đầu.",
+            "who": "claude",
+            "effortHours": 8
+          },
+          {
+            "id": "A9",
+            "priority": "P1",
+            "gate": "G7",
+            "what": "Build chưa tự đủ: /vocabulary/ đọc từ shared/ của repo cha qua nginx; origin cha ghi cứng trong kit learning; test và replay đọc ../../../../shared; dist mang 19,8 MB GLB không dùng.",
+            "fix": "Làm DEPLOY_INDEPENDENCE §4 và §8 bước 1: vocab:sync bản ghim vào public/vocabulary (7 file, 124 kB, kèm ATTRIBUTION.md); tests/td/typing.ts và scripts/td/replay.ts đọc bản chép; bỏ plugin shared trong vite.config.ts; deploy.config bỏ models và .vite tới khi 1C nạp model; VITE_PORTAL_ORIGINS. Kiểm: deploy:standalone xanh, flags().vocabulary = 'vocabulary', golden giữ nguyên.",
+            "who": "codex-code",
+            "effortHours": 4
+          },
+          {
+            "id": "A11",
+            "priority": "P1",
+            "gate": "G1",
+            "what": "cdp-run.mjs chọn ngẫu nhiên cổng DevTools trong 9300–9899. Khi ba lane trình duyệt chạy song song có thể trùng cổng: hôm nay script của lane Rồng điều khiển Chrome của lượt 1920 này sang trang Rồng ở giây 171, bằng chứng hỏng mà không báo gì.",
+            "fix": "Trong shared/game-kit/tools/cdp-run.mjs: dùng --remote-debugging-port=0 rồi đọc DevToolsActivePort trong thư mục profile (hoặc thử bind trước), cho phép CDP_PORT; sync vào các game. Kiểm: chạy 3 lượt song song 20 lần, 0 lượt trùng.",
+            "who": "codex-code",
+            "effortHours": 1.5
+          },
+          {
+            "id": "A13",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Âm chỉ có tiếng tổng hợp; chưa có file thật nào cho khoảng 40 tiếng và nhạc map 1; chưa ai nghe bằng tai.",
+            "fix": "Làm một lượt Audio Lab (Stable Audio 3) theo THEME_SOUND_LIST: bắn, trúng, gọi, boss, UI, nhạc map 1, âm nền ngày và đêm. Ra OGG ở public/assets/typing-defense/audio, có manifest và bộ nạp, giữ bus. Chủ dự án nghe duyệt.",
+            "who": "claude",
+            "effortHours": 12
+          },
+          {
+            "id": "I1",
+            "priority": "P0",
+            "gate": "G2",
+            "what": "Thiếu bộ ô đất meadow cho mặt đất 3D.",
+            "fix": "Phiếu ảnh Codex: 6 ô 1024² liền mép, ánh sáng phẳng (cỏ A, cỏ B có cỏ ba lá, đường đất, mép đường mòn, bờ suối bùn sỏi, sân đá lát cho Fort và quặng). Đặt ở art-src/scenery/meadow/ground/. Chấm từ 8 điểm, tối đa 3 lần tạo lại.",
+            "who": "codex-image",
+            "effortHours": 3
+          },
+          {
+            "id": "I2",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Thiếu hai tờ decal mặt đất.",
+            "fix": "Hai atlas alpha 4×2: (a) đất mòn, đất dưới tán, mảng ngã ba, mẩu lối mòn; (b) khóm hoa dại, sỏi, lá rụng, gốc cây nhìn từ trên, vòng vụn gỗ (dấu cây luật).",
+            "who": "codex-image",
+            "effortHours": 2
+          },
+          {
+            "id": "I3",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Ô ruộng của Rice Field chưa có ảnh cho từng trạng thái.",
+            "fix": "Bốn hoặc năm ô nhìn từ trên: bùn ngập nước, mạ non, lúa xanh, lúa chín vàng, gốc rạ.",
+            "who": "codex-image",
+            "effortHours": 1.5
+          },
+          {
+            "id": "I4",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Ghost Flame không có model (là VFX); tờ khung chỉ có prompt, chưa có ảnh.",
+            "fix": "Làm art-src/vfx/ma-troi-sheet.png từ ma-troi-sheet.prompt.txt có sẵn, alpha theo chuẩn phiếu 038.",
+            "who": "codex-image",
+            "effortHours": 1
+          },
+          {
+            "id": "I5",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "11 ảnh VFX chưa chấm lại; thiếu ảnh cho bộ đòn 1C.",
+            "fix": "Phiếu 043: chấm lại 11 ảnh ở art-src/vfx, đưa alpha về chuẩn 038. Thêm: khói mực biến thể, vết cháy giấy, decal vết nứt rễ báo trước cho Mộc Tinh, dải bọt thác lặp được.",
+            "who": "codex-image",
+            "effortHours": 3
+          },
+          {
+            "id": "A4",
+            "priority": "P2",
+            "gate": "G5",
+            "what": "Đang khóa từ thì Esc đầu chỉ bỏ từ, phải bấm Esc lần hai mới tạm dừng.",
+            "fix": "Thêm gợi ý 'Esc lần nữa: tạm dừng' trên dải chữ lúc vừa bỏ khóa, hoặc cho Shift+Esc tạm dừng ngay.",
+            "who": "claude",
+            "effortHours": 1
+          },
+          {
+            "id": "A6",
+            "priority": "P2",
+            "gate": "G5",
+            "what": "Thẻ kết ghi 'Knowledge 0' ngoài chế độ Học.",
+            "fix": "Trong src/ui/sheets.ts chỉ hiện dòng Knowledge ở chế độ Học hoặc khi > 0. Kiểm td-1b-story và td-theme ở hai cỡ.",
+            "who": "codex-code",
+            "effortHours": 0.5
+          },
+          {
+            "id": "A7",
+            "priority": "P2",
+            "gate": "G2",
+            "what": "Nhãn kho cây '998/1000' chồng nhau và đè bong bóng Chặt quanh Fort.",
+            "fix": "Chỉ hiện nhãn khi rê chuột hay chọn cây, hoặc khi kho < 30 %. Ở 1C đổi thành tooltip 3D.",
+            "who": "codex-code",
+            "effortHours": 1
+          },
+          {
+            "id": "A8",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Dải nghĩa lúc rời đi đè lên thẻ kế ('kind · loại, hạng, kiểu' dưới 'walk', Đêm 3, 1280).",
+            "fix": "Trong view/words/cards.ts, đưa hộp của dải nghĩa (trạng thái mean) vào bước tách cột. Cùng nhóm với việc 5 của danh sách Codex trong changelog test pass.",
+            "who": "codex-code",
+            "effortHours": 1
+          },
+          {
+            "id": "I6",
+            "priority": "P2",
+            "gate": "G2",
+            "what": "Khung HUD Sách tranh (gỗ, giấy) nếu CSS hiện có chưa đủ sau C12.",
+            "fix": "Ảnh 9-slice khung gỗ và giấy cho bảng HUD; chỉ làm khi giám khảo chấm HUD dưới 8.",
+            "who": "codex-image",
+            "effortHours": 1.5
+          },
+          {
+            "id": "C15",
+            "priority": "P2",
+            "gate": "G2",
+            "what": "Phần 1C để sau map 1: chuyển Credit Crystal sang kit, impostor, biến thể cảnh v3–v4, StylePack Neon, rig Draconis P18 thay bản tạm.",
+            "fix": "Lên lịch sau khi map 1 qua các cổng; không chặn demo.",
+            "who": "claude",
+            "effortHours": 16
+          }
+        ],
+        "sheets": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/sheet-1280x720.jpg (25 khung: màn đầu tới thẻ thắng, 1280×720); /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/sheet-1920x1080.jpg (23 khung tới thẻ thua Đêm 5, 1920×1080); /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/sheet-newplayer-1280x720.jpg (người mới: Ngày 1 không có chữ); /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/sheet-keyframes.jpg (8 khung lớn: màn đầu, Ngày 1 người mới và có xây, Đêm 3, Tối Thượng bị từ chối, boss, thẻ thắng, Đêm 4 ở 1920); /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/crop-result-sheet-1920.jpg (thẻ thua). Số liệu đi kèm: /Users/toandx/htdocs/typing-game/games/typing-defense/tmp/map1-audit/{1280x720,1920x1080,newplayer,smoke2}/m1-report-*.json",
+        "notes": "Lời Gọi (a2-days a5cc147) chưa đạt chuẩn production cho map 1. Lý do chính là hình: map vẫn vẽ bằng khung gỡ lỗi 2D, nên phải làm bước 1C. Phần luật chơi chạy ổn: chơi trọn truyện ở cả 1280 và 1920 bằng phím CDP thật, 0 lỗi console, nhật ký chạy lại trên Node khớp hash.\n\n**Cách đo**\n- Build production vào tmp/map1-audit/dist. Phục vụ bằng server Node tĩnh của tôi trên 127.0.0.1:4150 (có /vocabulary/, giống play.conf) và 4151 (không có từ vựng). Tôi dùng server tĩnh thay vì vite preview, vì vite preview không phục vụ /vocabulary/.\n- Kịch bản: tmp/map1-audit/map1-play.mjs và map1-newplayer.mjs, chạy bằng bản chép tmp/map1-audit/cdp-run.mjs với cổng DevTools cố định 4156/4158/4159. Mọi lượt qua heavy.sh --gpu.\n- Phím chữ là phím CDP thật. Việc xây, gửi Draconis, đánh dấu cây được gửi bằng lệnh __td (như cú bấm chuột).\n\n**Kết quả**\n- Ở 1280: thắng, còn 5 mạng.\n- Ở 1920: thua ở Đêm 5, mất 10 → 0 mạng ở đỉnh boss.\n- Người mới (không xây, không gửi Draconis): Ngày 1 không có chữ nào; từ đầu tiên ở giây 106.\n- Tests 350/350, golden giống hệt, tsc đạt.\n- Số cân bằng lấy từ làn A2 (28/10); sim không đổi từ đó.\n\n**Hạn chế của lượt này**\n- Không có giám khảo độc lập: điểm hình là tôi tự chấm.\n- Không đo hiệu năng bản 3D vì chưa có.\n- Không chạy lại td:balance.\n- Lượt 1920 đầu bị lane khác điều khiển (trùng cổng DevTools; xem A11) và một lượt bị kẹt ở thẻ Tạm dừng; cả hai đã chạy lại.\n\n**Đã dọn**\n- Ảnh thô đã xóa bằng prune --apply (70 file, 18,1 MB; nhật ký .pruned-20261028-1851.txt).\n- Hai server đã tắt, bản build trong dist đã xóa.\n- Không sửa mã game, không commit.\n\n**1C cho map 1, theo thứ tự**\n- C0 kế hoạch và ngân sách → C1 kit và đường nối view → C2 sân khấu và camera → song song C3 đất, C4 lô model, C5 rig (Mộc Tinh là đường găng) → C6 nhà, C7 đám đông, C8 Draconis và boss → C9 cảnh → C10 thẻ chữ 3D → C11 VFX 5 pha → C12 đồ bay và HUD → C13 hiệu năng và gói → C14 kiểm cổng.\n- Ước tính: khoảng 210 giờ Claude (C0–C14). Codex khoảng 12 giờ ảnh (I1–I6) và 8 giờ mã nhỏ (A6–A11).\n- Chủ dự án khoảng 2 giờ: duyệt C0, sudo cho nginx và hosts (A10), chơi lấy B9, quyết hướng 'nhàn' (A2), nghe âm.\n- Không cần dựng thêm model Tripo cho map 1: 3 mốc (vach-thac-bac, cau-go, choi-canh-doi) và các bộ cấp đã có GLB từ đợt 2.\n- Ảnh 2D mới phải là phiếu Codex: I1 ô đất (P0), I2 decal, I3 ô lúa, I4 tờ khung Ghost Flame, I5 phiếu 043 VFX, I6 khung HUD nếu cần.\n\n**Để ý:** gói '/' chỉ còn 0,09 kB headroom và mã đúng trần 10.499/10.500 dòng. Vì vậy 1C phải nạp chunk 3D lười và cần chủ dự án duyệt trần dòng mới (C0)."
+      },
+      {
+        "key": "tuyencuoi",
+        "gates": [
+          {
+            "gate": "G1 lỗi, console, bot + phím CDP thật chơi trọn map ở 1280 và 1920",
+            "status": "partial",
+            "evidence": "Chơi như người mới từ màn chính, profile Chrome trống, dev server riêng 127.0.0.1:4180, phím CDP thật khoảng 45 WPM, trượt 3 %. Luồng: màn chính → Cài đặt, Hồ sơ gõ, Kho súng → Hành trình → bảng tin → nạp súng (phím 1, 2) → thẻ ải → ải 1. Giữa trận Esc → Cài đặt → Esc → chơi tiếp. Kết quả ải 1: 1280x720 thắng, giáp 70, 3 sao, 128 từ, 99 %; 1920x1080 thắng, giáp 75, 3 sao, 123 từ, 97 %. Ở 1280 chơi tiếp ải 2 (Săn Pack Leader 3/5) và thắng, giáp 74. Cả bốn lượt (gồm hai lượt bản production): 0 lỗi console, 0 ngoại lệ, 0 request hỏng. Thẻ kết thúc vừa khung (0 phần tử tràn). Kiểm tĩnh: vitest 142/142, tsc sạch, verify-kit 59 file OK, vite build OK. Bot: 3.600 + 3.600 trận cân bằng, G8 replay khớp mã băm. Còn mở theo chính AGENTS.md (\"fix it before the owner's play test\"): khung 3D đen 267 ms sau khi nạp Rail Gun, chưa tìm ra nguyên nhân. Lượt của tôi không chọn Rail Gun nên chưa thấy lại, và chưa có khung nào trễ quá 50 ms."
+          },
+          {
+            "gate": "G2 hình ≥ 8/10 do giám khảo độc lập chấm, không còn hình tạm",
+            "status": "fail",
+            "evidence": "Đây là điểm của người kiểm kê, không phải giám khảo độc lập (vẫn cần một lượt chấm độc lập). Màn chính 7,5; Cài đặt, Hồ sơ, Hành trình 7; bảng tin và nạp súng 6,5 (thẻ súng chỉ có chữ, dày đặc, chữ 11–13 px ở 720p); thẻ ải 7; cảnh trận 7–7,5; thẻ kết thúc 7. Sân \"Vành Chân Trời\" chưa từng được thiết kế: chỉ là hành lang thép, rào sọc cam và hố đen, hai bên trống, 150 s không đổi cảnh. Ở màn đầu tiên có lỗi hình: hai vệt động cơ của tàu Vanguard chụm thành chữ V dưới thân, trông như nét vẽ gỡ lỗi (sheet-zoom-title-engine-v). 5 icon súng đã đạt 8–8,5 nằm sẵn trong art-src/ui/icons (gun-xung, tia, tan, ray, phao-sao) mà game không dùng. Hình tạm: qua alias nginx thì không còn khối; nhưng bản build đứng riêng thay tàu bằng khối dẹt, model quái không nạp được, và hiện băng đỏ \"Từ dự phòng (máy chủ không có từ vựng)\" (sheet-prod-standalone-vs-nginx). Scout, Brute và Pack Leader dùng chung một dáng model (rainbow-tank, 8,5, trong ART_REPLACE_LATER)."
+          },
+          {
+            "gate": "G3 cảm giác: VFX 5 pha, âm thanh, thẻ chữ đọc rõ",
+            "status": "fail",
+            "evidence": "VFX: theo bảng VFX_STANDARD §2.2 (đối chiếu với khung chụp), cặp súng người mới gặp đầu tiên còn thiếu pha. Pulse Gun: pha A gồng mỏng, pha F dư âm thiếu. Heat Beam: thiếu pha A, cột tia gần trắng nên mất màu súng. Scatter Gun thiếu A và F; Rail Gun thiếu F; Star Mortar thiếu A ở tàu; tàu bị đánh thiếu F. Các lóe cũ vẫn mất khung đầu (44–64 %): Codex 035 đang chờ duyệt trên nhánh ts-vfx và đụng shots.ts/fx.ts của bản sửa khói. Chỉ big kill và phím đúng đủ 5 pha. Âm thanh: ải 1 phát 26 id gồm music.calm, music.surge, ui.move, ui.select, ui.back, key.ok, key.bad, gun.xung, gun.tia.*, hit.*, kill.*, word.*, end.win, star.get. Tất cả là âm tổng hợp bằng mã, chưa ai nghe bằng tai để chấm. Thẻ chữ: dòng từ 42 px (63 px ở 1080p), từ trên bến 32 px, 22 px khi bến đang gõ (dạng mục từ điển), tương phản 7,8:1 (số đo 27/10), đọc rõ trên mọi khung đã chụp. Còn mở: khoảng mắt đi từ chữ tới chỗ trúng 223–226 px, đích 210."
+          },
+          {
+            "gate": "G4 hiệu năng ở High và Medium, nạp nhanh, không khung dài",
+            "status": "partial",
+            "evidence": "High, chơi trọn ải 1 (dev server, GPU dùng chung với các làn khác). Khung JS trung bình 1,04 / 1,08 ms, p95 1,8 / 1,9 ms (ngân sách 6 / 10). Khoảng giữa hai khung rAF p95 16,7 ms, p99 16,8 ms, tối đa 16,8 ms (1280) và 33,3 ms (1920), 0 khung trên 50 ms. Ải 2: tối đa 50 ms, 4 khung trên 25 ms. Draw call 41–42 (đích ≤ 60), 35 chương trình shader không đổi. Còn 4–5 khung dài 62–125 ms nhưng chỉ lúc nạp trang, trước khi sẵn sàng. Bản production qua server kiểu nginx: sẵn sàng sau 0,67 s (High) và 1,18 s (Medium) trên localhost. Lần nạp đầu tải 9,06 MB ở High và 8,25 MB ở Medium, trong khi ngân sách là ≤ 4 MB (HOSTING_PLAN §7) → trượt. Lý do: Medium vẫn nạp GLB High của quái và tàu (crowd.ts:180, ship.ts:111), và manifest Space 131 kB. Medium: draw call 26, 26 chương trình; nhịp khung khi đánh trọn ải ở Medium chưa đo được: lượt đo đã xếp hàng nhưng tôi phải hủy, vì một lượt dh-perf giữ cả 3 suất GPU hơn 28 phút. Số §17 ngày 28/10 ở 1920 (bản sửa khói, khe --perf): p95 ≤ 3,4 ms, 0 khung lỡ nhịp."
+          },
+          {
+            "gate": "G5 trải nghiệm: lần đầu, menu, tạm dừng, cài đặt, kết quả; câu Việt, danh từ Anh",
+            "status": "partial",
+            "evidence": "Mọi màn đều đi được bằng bàn phím và Esc quay đúng chỗ. Tạm dừng → Cài đặt → quay lại → chơi tiếp đều đúng; trong trận thì Tàu và Chất lượng hình bị khóa, có ghi lý do. Thẻ kết thúc có sao, số liệu, 10 từ, lời khuyên đúng cho trận đầu. Enter vào thẳng Ải 2 và giữ bộ súng đã chọn. Thiếu cho lần chơi đầu: không có hướng dẫn. Người mới phải chọn 2 trong 5 súng từ bảng khắc chế dày đặc, nút ghi \"BẮT ĐẦU · CÒN ⚠\", và trận đầu không có gợi ý \"gõ từ trên bến để nạp súng\". Ô bến 3 ghi \"MỞ Ở MỐC\", nhưng bản R1 chưa có Mốc. Lúc hiện \"VƯỢT ẢI!\" bầy vẫn đứng trên sân, súng vẫn bắn. Esc ở thẻ ải không làm gì. Tên gọi: còn trộn \"ẢI 2 · ĐẦU ĐÀN\" với \"Săn 3 trong 5 Pack Leader\" trên cùng một thẻ; biển \"Swarm RÚT LUI!\" lệch kiểu chữ hoa thường (đang chờ chủ dự án quyết); câu Luật học dài và nặng thuật ngữ. Quét src: không còn danh từ game bằng tiếng Việt ngoài tên ải, tên phe và các chỉ số (Vỏ, Giáp) mà NAMES_EN cho giữ."
+          },
+          {
+            "gate": "G6 cân bằng: cổng bot của map 1",
+            "status": "fail",
+            "evidence": "Báo cáo c1-s1, 100 seed, chạy cả hai bộ seed (1–100 và 101–200). Đạt: B2, B3, B4, B5, B8, G3c (súng kém nhất 72 % / 65 %), G3m, G5, G8, §7.6. Trượt: (1) B1: ở Cân bằng, bot steady, standard, skilled, fast thắng 92–96 % với Biên S 68–76 % trên seed 1–100, và 82–92 % trên seed 101–200. (2) B6 ở Cân bằng: chỉ +6,0 và +9,0 điểm, cần ≥ +10. (3) B7: ô tắt bộ điều nhịp có S 73–78 %. Ở Thử thách thứ bậc bị đảo: fast thắng 36 % / 44 %, sloppy 49 % / 36 %, trong khi novice thắng 59 % / 51 %. B9 chưa có số người thật. Người mới (E 35, Cân bằng): bot standard thắng 82–93 %. Lượt chơi thật 45 WPM thắng với giáp 70–75 và 3 sao, nên áp lực thấp."
+          },
+          {
+            "gate": "G7 build production tự đủ, chạy qua typing-game.local",
+            "status": "fail",
+            "evidence": "vite build ra 45 file, 1,5 MB, không có media, trong tmp/map1-audit/dist. Khi chạy, game vẫn đọc ngoài repo: /vocabulary/ (thư mục shared của repo cha) và /assets/space-typing/models/: 11 request sang game khác = manifest + 10 GLB (5 quái, vanguard, 4 đạn skills/*-bolt), 7,68 MB. AL-23 chỉ liệt kê 7 model nên thiếu 4 đạn; chọn Draconis thì còn thêm draconis-v3 và dragon-fireball. AL-23 còn bị chặn vì cần AL-19 và AL-17/18, mà AL-17/18 đang tạm dừng. Server tĩnh không có alias: hai request 404 (vocabulary/index.json, manifest), tàu thành khối, quái không có model, từ dự phòng hash 28a73ed5 thay cho 7f073fa2. typing-game.local chưa phục vụ game: cấu hình nginx đang cài (/opt/homebrew/etc/nginx/servers, 18/10) không có host survival; /etc/hosts thiếu survival.typing-game.local; portal/dist/games.json (22/10) không có Tuyến Cuối. Nên chưa chạy được qua scripts/play.sh. Ngoài ra window.__survival (flood, send, place) vẫn có trong bản production."
+          }
+        ],
+        "gaps": [
+          {
+            "id": "TS-M1-01",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "Lúc chạy, game đọc model của Space: manifest 131 kB + 10 GLB (5 quái, vanguard, 4 đạn skills/*-bolt); thêm draconis-v3 và dragon-fireball khi chọn Draconis. Không có alias thì tàu thành khối và quái không có model. AL-23 chỉ chép 7 model và đang bị chặn vì AL-17/18/19 tạm dừng.",
+            "fix": "Không chờ AL-19. Đi đường DEPLOY_INDEPENDENCE §5.1 (pnpm models:prepare --import, cách đã làm Draconis cho Rồng), chép 12 id bậc High và Medium vào public/assets/typing-survival/models với manifest riêng. Sửa src/view/models.ts:9 sang manifest đó; bỏ modelsDir trong vite.config.ts và alias trong play.conf, dev.conf, validate-play-mode. Chạy media:push, commit media.md5. Sửa AL-23 từ 7 thành 12 id. Kiểm: 0 request /assets/space-typing/, s0-trace golden không đổi.",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "TS-M1-02",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "Từ vựng chỉ có qua alias nginx tới shared/ của repo cha. Bản đứng riêng hiện \"Từ dự phòng\" (khoảng 60 từ, hash 28a73ed5). Test, bot và replay cũng đọc ../../../../shared.",
+            "fix": "Ghim một bản chép index.json, levels/001–003 và ATTRIBUTION.md vào public/vocabulary/ (69 kB). Trỏ tests/survival/typist-bot.ts:275, bot.ts:49, scripts/replay.ts:34 vào bản chép. Bỏ sharedRoot trong vite.config.ts và alias /vocabulary/. Kiểm: hash bộ bài 7f073fa2, pnpm check xanh trên bản clone riêng.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-03",
+            "priority": "P0",
+            "gate": "G7",
+            "what": "typing-game.local chưa chạy được Tuyến Cuối: nginx đang cài (18/10) không có host survival, /etc/hosts thiếu survival.typing-game.local, portal/dist (22/10) không có thẻ game.",
+            "fix": "Claude: pnpm build:portal và pnpm build:survival (sau 01, 02), rồi kiểm lại play.conf và validate-play-mode. Chủ dự án (cần sudo): bash scripts/setup-nginx.sh play, rồi scripts/play.sh. Claude mở https://survival.typing-game.local để kiểm 0 lỗi, 0 request chéo.",
+            "who": "owner",
+            "effortHours": 0.5
+          },
+          {
+            "id": "TS-M1-04",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Các lóe cũ (lóe nòng, sao trúng, lóe khi hạ thường) và đèn súng vẫn mất khung đầu, chỉ hiện 44–64 %. Codex 035 (ts-vfx, 5d9c8cb) đang chờ duyệt và xung đột với bản sửa khói ở shots.ts/fx.ts.",
+            "fix": "Duyệt rồi gộp 035 vào main. Giữ đời quả cầu lửa 0,3–0,45 s và hai dòng gl_FragDepth của shader khói. Chạy lại f5, f6b, f8 ở 1280 và 1920, pnpm check, chapter-hashes.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-05",
+            "priority": "P1",
+            "gate": "G3",
+            "what": "Cặp súng người mới gặp đầu tiên chưa đủ 5 pha: Pulse Gun có A mỏng và thiếu F; Heat Beam thiếu A, cột tia trắng mất màu súng; tàu bị đánh thiếu F (VFX_STANDARD §2.2).",
+            "fix": "Làn .wt-ts-vfx làm theo §3.3. Pulse Gun: gồng ở nòng theo tiến độ gõ, dư âm là vết cháy và tàn lửa. Heat Beam: lóe mồi trong luật 50 ms, giữ màu cam ở lõi cột. Tàu: khói và tia lửa trên vỏ khi trúng. Chụp tờ khung theo §5.6, giám khảo chấm ≥ 8 ở hai cỡ, sim không đổi.",
+            "who": "claude",
+            "effortHours": 8
+          },
+          {
+            "id": "TS-M1-06",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Ở màn đầu tiên, hai vệt động cơ của tàu Vanguard chụm thành chữ V dưới thân, trông như nét vẽ gỡ lỗi (ship.ts drawEngines với camera màn chính).",
+            "fix": "Lấy hướng vệt theo trục tàu trong không gian camera của màn chính, hoặc tắt strip và chỉ giữ quầng sáng khi ở màn chính. Chụp lại màn chính ở 1280 và 1920.",
+            "who": "claude",
+            "effortHours": 0.5
+          },
+          {
+            "id": "TS-M1-07",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Sân \"Vành Chân Trời\" chưa từng được thiết kế: hành lang thép trống, hai bên chỉ có nền xoáy và hố đen, 150 s không đổi cảnh. Đây là lý do chính khiến cảnh trận chỉ được khoảng 7/10.",
+            "fix": "Codex làm ảnh 2D (từ 8 điểm): tờ ý tưởng hai bên hành lang, 2–3 lớp nền xa (cấu trúc trạm, vành sáng), decal sàn. Claude dựng lại thành lớp nền, decal, ánh sáng và một nhịp đổi khi tràn sóng (không dựng công trình bằng mã). Nếu cần đạo cụ 3D hai bên: chủ dự án dựng trên Tripo, tùy chọn. Đo lại khung hình, draw call ≤ 60.",
+            "who": "codex-image",
+            "effortHours": 4
+          },
+          {
+            "id": "TS-M1-08",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Phần code của TS-M1-07: tích hợp lớp nền, decal sàn và ánh sáng cho sân.",
+            "fix": "Nạp ảnh của Codex làm nền nhiều lớp và decal trong scene.ts. Giữ độ sáng nền dưới dòng từ trong giới hạn +0,02 (FEEL §4.1); f8 về độ phủ sáng phải đạt.",
+            "who": "claude",
+            "effortHours": 6
+          },
+          {
+            "id": "TS-M1-09",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Thẻ súng ở nạp súng, kho súng và đầu bến chỉ có chữ, dù 5 icon súng (8–8,5 điểm) đã có trong art-src/ui/icons. Bảng tin không có hình quái.",
+            "fix": "Claude: đưa 5 icon vào public/assets/typing-survival/ui (media:push) rồi gắn vào thẻ súng và đầu bến. Codex: phiếu 6 chân dung quái cho bảng tin (Swarm, Scout, Brute, Pack Leader, Shield Guard, Splitter), mỗi ảnh từ 8 điểm.",
+            "who": "codex-image",
+            "effortHours": 3
+          },
+          {
+            "id": "TS-M1-10",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Phần code của TS-M1-09: gắn icon súng và chân dung quái vào DOM.",
+            "fix": "Gắn ảnh vào thẻ súng (screens-journey.ts, screens.ts), đầu bến (hud.ts) và bảng tin. Kiểm survival-s1-loadout: không tràn, chữ ≥ 26 px.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-11",
+            "priority": "P1",
+            "gate": "G5",
+            "what": "Lần chơi đầu không có hướng dẫn: phải chọn 2 trong 5 súng từ bảng khắc chế dày đặc, nút ghi \"BẮT ĐẦU · CÒN ⚠\", trận đầu không có gợi ý cách nạp súng.",
+            "fix": "Hành trình lần đầu: chọn sẵn Pulse Gun + Heat Beam kèm nhãn \"Khuyên dùng\" và đặt con trỏ lên nút bắt đầu. Đổi nhãn thành \"BẮT ĐẦU\" kèm chú thích chưa khắc Brute. Trong trận đầu, hiện gợi ý \"Gõ từ trên bến để nạp súng\" cạnh dòng từ, tắt sau 2 lần nạp. Kiểm bằng kịch bản người mới.",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "TS-M1-12",
+            "priority": "P1",
+            "gate": "G6",
+            "what": "Ải 1 ở Cân bằng quá dễ với steady, standard, skilled, fast (thắng 82–96 %, S 66–76 %), nên B1 trượt. B6 chỉ +6 và +9 (cần +10). B7 trượt ở ô tắt bộ điều nhịp. Ở Thử thách thứ bậc bị đảo (fast 36–44 % < novice 51–59 %).",
+            "fix": "Chỉnh theo N13. Luật §5.1 cho bến đầy (Khá và Nhanh ngồi không). Thêm áp lực đều ở ải 1. Hạ k của Thử thách cho người gõ nhanh, hoặc bù bằng sức ép thay cho mật độ. Chạy 100 seed trên cả hai bộ; người điều phối chốt số biến thể.",
+            "who": "claude",
+            "effortHours": 6
+          },
+          {
+            "id": "TS-M1-13",
+            "priority": "P1",
+            "gate": "G1",
+            "what": "Khung 3D đen 267 ms sau khi nạp Rail Gun ở tick 74 của cảnh kick (4/4 lần, chưa rõ nguyên nhân). AGENTS.md ghi phải sửa trước buổi chơi thử của chủ dự án.",
+            "fix": "Tái hiện bằng survival-feel-ship kick-ray. Đo GL error và kiểm uniform/NaN trong shader beams, lights và bloom ở khung đó. Sửa ở view, rồi đếm khung đen = 0 trên 10 lần chạy ở hai cỡ.",
+            "who": "claude",
+            "effortHours": 3
+          },
+          {
+            "id": "TS-M1-14",
+            "priority": "P1",
+            "gate": "G4",
+            "what": "Lần nạp đầu tải 9,06 MB (High) và 8,25 MB (Medium), quá ngân sách 4 MB. Medium và Low vẫn nạp GLB High của quái và tàu.",
+            "fix": "Truyền bậc chất lượng vào loadMesh ở crowd.ts:180 và ship.ts:111. Dùng manifest riêng nhỏ (sau TS-M1-01). Cân nhắc nạp sau 4 đạn chưa dùng ở ải 1, và chọn Medium cho lần đầu trên máy yếu. Đo lại byte nạp ở High và Medium.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-15",
+            "priority": "P1",
+            "gate": "G2",
+            "what": "Chưa có giám khảo độc lập chấm cảnh map và các màn chính; điểm hiện có là của người kiểm kê (6,5–7,5).",
+            "fix": "Sau TS-M1-06 đến 10: một agent chấm độc lập trên tờ khung 1280 và 1920 (màn chính, Hành trình, bảng tin, nạp súng, thẻ ải, trận, kết thúc) theo visual-scorecard. Đạt khi mọi màn ≥ 8.",
+            "who": "claude",
+            "effortHours": 1.5
+          },
+          {
+            "id": "TS-M1-16",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Các súng khác chưa đủ 5 pha: Scatter Gun thiếu A và F, Rail Gun thiếu F (vết cháy), Star Mortar thiếu A ở tàu và có vệt bay ngắn.",
+            "fix": "Lô VFX thứ hai của làn ts-vfx theo VFX_STANDARD §3.3 và §5.6.",
+            "who": "claude",
+            "effortHours": 6
+          },
+          {
+            "id": "TS-M1-17",
+            "priority": "P2",
+            "gate": "G4",
+            "what": "Chưa đo nhịp khung khi đánh trọn ải ở Medium, vì hàng đợi GPU bị một lượt perf khác giữ.",
+            "fix": "Chạy lại tmp/map1-audit/scripts/map1-newplayer.mjs với Q=q=medium trong khe --perf sau TS-M1-14; báo p95, p99 và số khung trên 50 ms.",
+            "who": "claude",
+            "effortHours": 0.5
+          },
+          {
+            "id": "TS-M1-18",
+            "priority": "P2",
+            "gate": "G5",
+            "what": "Chữ và nhãn chưa gọn: \"ẢI 2 · ĐẦU ĐÀN\" đi cùng \"Pack Leader\" trên một thẻ; \"Swarm RÚT LUI!\" lệch hoa thường; câu Luật học dài; ô bến 3 ghi \"MỞ Ở MỐC\" dù chưa có Mốc; Esc ở thẻ ải không làm gì.",
+            "fix": "Phiếu nhỏ có phép kiểm: rút gọn câu Luật học; bến 3 chỉ hiện khóa; Esc ở thẻ ải quay về nạp súng. Tên ải 2 và kiểu chữ hoa của biển chờ chủ dự án quyết (HANDOFF §5).",
+            "who": "codex-code",
+            "effortHours": 1.5
+          },
+          {
+            "id": "TS-M1-19",
+            "priority": "P2",
+            "gate": "G5",
+            "what": "Khi hết giờ trụ, \"VƯỢT ẢI!\" hiện trong lúc bầy vẫn đứng trên sân và súng vẫn bắn, không có khoảnh khắc thắng rõ.",
+            "fix": "Chỉ ở view: bầy còn lại tan hoặc rút cùng với banner, súng im, nhạc chuyển sang end.win. Golden và hash không đổi.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-20",
+            "priority": "P2",
+            "gate": "G7",
+            "what": "window.__survival (flood, send, place, hold) vẫn có trong bản production.",
+            "fix": "Chỉ cài khi import.meta.env.DEV hoặc có ?debug=1. Các kịch bản dev vẫn chạy như cũ.",
+            "who": "codex-code",
+            "effortHours": 0.5
+          },
+          {
+            "id": "TS-M1-21",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Khoảng mắt đi từ chữ tới chỗ trúng là 223–226 px, đích 210 (F8, mở từ bước 1). Cloud-fix còn 3 khung đơn có độ lệch luma dưới 0,12.",
+            "fix": "Đo lại sau TS-M1-04 và 05. Kéo số trúng về gần dòng từ hoặc hạ cỡ chùm nổ Star Mortar trong hộp quanh một lần hạ to.",
+            "who": "claude",
+            "effortHours": 2
+          },
+          {
+            "id": "TS-M1-22",
+            "priority": "P2",
+            "gate": "G3",
+            "what": "Toàn bộ âm thanh tổng hợp bằng mã, chưa ai nghe bằng tai để chấm (THEME_SOUND_LIST).",
+            "fix": "Chủ dự án nghe 2 phút ải 1 (súng, phím, nhạc, UI) rồi chọn: giữ, hay thay bằng file thật theo AUDIO_PIPELINE.",
+            "who": "owner",
+            "effortHours": 0.5
+          },
+          {
+            "id": "TS-M1-23",
+            "priority": "P2",
+            "gate": "G1",
+            "what": "Mã vượt trần dòng: src 12.787 so với trần 12.500 (main.ts, hud.ts). Chunk BufferGeometryUtils 547 kB vượt mức cảnh báo 500 kB của vite.",
+            "fix": "Tách main.ts và hud.ts như kế hoạch R2; tách chunk three bằng manualChunks.",
+            "who": "claude",
+            "effortHours": 3
+          }
+        ],
+        "sheets": "Tờ ghép (đã xóa ảnh thô; nhật ký xóa ở /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/.pruned-20261028-1812.txt):\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-menus-a-1280x720.jpg (Cài đặt, Hồ sơ gõ, Kho súng, Hành trình)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-menus-b-1280x720.jpg (bảng tin ải 1, nạp súng đã chọn, thẻ ải, đầu trận)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-c1s1-fight-1280x720.jpg (ải 1, mỗi 10 s, 16 khung)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-pause-end-1280x720.jpg (tạm dừng, cài đặt trong trận, banner thắng, thẻ kết thúc, bảng tin và thẻ ải 2)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-c1s2-fight-1280x720.jpg (ải 2 Săn Pack Leader, kèm thẻ kết thúc)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-c1s1-fight-1920x1080.jpg (ải 1 ở 1920, mỗi 10 s)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-screens-1920x1080.jpg (màn chính, bảng tin, nạp súng, đầu trận, tạm dừng, kết thúc)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-menus-1920x1080.jpg (cài đặt, kho súng, Hành trình, thẻ ải, banner thắng, cài đặt trong trận)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-prod-standalone-vs-nginx-1280x720.jpg (bản production đứng riêng: tàu thành khối, từ dự phòng; so với bản qua alias ở High và Medium)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-prod-tiers-1280x720.jpg (thẻ ải bản đứng riêng; Medium so với High)\n/Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/sheets/sheet-zoom-title-engine-v-1280x720.jpg (vệt động cơ chữ V ở màn chính)\nSố liệu: /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/run-1280/result-1280x720.json, /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/run-1920/result-1920x1080.json, /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/prod/prod-1280x720.json, /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/balance-c1s1-seeds1-100.md, /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/balance-c1s1-seeds101-200.md. Kịch bản dùng lại được: /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/scripts/map1-newplayer.mjs, map1-prod.mjs, serve.mjs. Bản build: /Users/toandx/htdocs/typing-game/games/typing-survival/tmp/map1-audit/dist.",
+        "notes": "Phạm vi: Tuyến Cuối main bf0e6f9, chỉ đọc. Không sửa mã, không commit, git status sạch. Map 1 là ải 1 \\\"Ca trực đầu\\\" (c1-s1, Trụ vững 2:30). Buổi chơi đầu đi được tới ải 2 (Săn Pack Leader), nên tôi chơi cả ải 2 ở 1280.\n\nCách đo: một vite riêng ở 127.0.0.1:4180 và hai server tĩnh 4181 (đứng riêng) và 4182 (giả alias nginx), đều đã tắt. Trình duyệt chạy qua heavy.sh --gpu, phím CDP thật. Cân bằng chạy qua heavy.sh: hai báo cáo 100 seed cho c1-s1 kèm --g3c, mỗi báo cáo 204 s.\n\nTại sao chưa đo được Medium: hàng đợi GPU có hơn 10 lượt chờ, và một lượt dh-perf giữ cả 3 suất hơn 28 phút. Vì vậy tôi đã hủy lượt Medium để không giữ chỗ trong hàng (TS-M1-17). Số Medium hiện có là byte nạp, draw call và chương trình shader lấy từ lượt bản production.\n\nVề chấm hình (G2): điểm là của người kiểm kê, không phải giám khảo độc lập (TS-M1-15).\n\nPhát hiện đáng chú ý:\n- AL-23 thiếu 4 GLB đạn (skills/*-bolt), và 2 model nữa nếu chọn Draconis. AL-23 còn bị chặn vì cần AL-19 và AL-17/18 đang tạm dừng. Đề xuất chép trực tiếp bằng models:prepare.\n- Bậc Medium vẫn nạp model High.\n- typing-game.local chưa có Tuyến Cuối: nginx và portal/dist đã cũ, /etc/hosts thiếu host. Bước cần sudo phải do chủ dự án chạy (scripts/setup-nginx.sh play).\n- Ở Thử thách, người gõ nhanh thua nhiều hơn người mới.\n\nThứ tự đề xuất:\n1. P0: TS-M1-01, 02, 03 (chủ dự án chạy setup-nginx sau khi Claude build xong).\n2. P1: TS-M1-04 (gộp 035) → 06 → 13 → 14 → 11 → 12. Song song, giao Codex phiếu ảnh 07 và 09, rồi làm 08, 10, 05 trong làn ts-vfx. Cuối cùng chấm độc lập (TS-M1-15).\n3. P2: để sau.\n\nKhông đụng các worktree đang chạy (.wt-dh-mappilot, .wt-dh-vfx, .wt-ts-vfx, .wt-td-vfx) và không đụng Tu Tiên."
+      }
+    ],
+    "plan": "Đã viết xong hai file:\n\n- `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/scratchpad/map1/MAP1_PRODUCTION.md`\n- `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/scratchpad/map1/CODEX_BATCH.md`\n\n**Tình hình chung**\n- Chưa game nào qua đủ bảy cổng. Rồng chỉ qua G1. Lời Gọi và Tuyến Cuối chưa qua trọn cổng nào.\n- G7 chặn cả ba game theo cùng một cách: từ vựng còn đọc từ repo cha, và nginx đang cài chưa có host của game. Kế hoạch gom việc G7 vào một làn chung, nên chủ dự án chỉ chạy sudo một lần.\n- Ngày dự kiến đủ bảy cổng:\n\n| Game | Dự kiến | Trễ nhất |\n|---|---|---|\n| Tuyến Cuối | 03/11 | 05/11 |\n| Rồng Giữ Ải | 06/11 | 09/11 |\n| Lời Gọi | 12/11 | 16/11 |\n\n- Lời Gọi là đường găng, vì map 1 phải lên 3D (bước 1C, khoảng 210 giờ). Làn 1C bắt đầu ngay 29/10.\n\n**Bốn làn Claude**\n- Làn T: G7 của cả ba game, rồi Tuyến Cuối. Từ 03/11 chuyển sang Lời Gọi.\n- Làn V: gộp hai làn VFX của Rồng và Tuyến Cuối thành một. Từ 05/11 chuyển sang Lời Gọi.\n- Làn R: tiếp làn map pilot của Rồng, rồi các việc P1 còn lại. Từ 06/11 chuyển sang Lời Gọi.\n- Làn L: Lời Gọi 1C, thay làn VFX 2D. Đề xuất gộp 036 rồi dừng làn VFX 2D, vì bản 2D chỉ còn là bậc Low.\n\n**Việc của chủ dự án: khoảng 3 giờ**\n- Một tin trả lời 7 câu hỏi; câu nào cũng có đề xuất sẵn.\n- Một lần sudo cho nginx.\n- Duyệt VFX Rồng bước 1a và 2.\n- Nghe âm và chơi một ván B9 cho mỗi game.\n\n**Đối chiếu với repo, phát hiện bốn chỗ lệch so với bản kiểm kê**\n- Phiếu 088–093 đã có trong hàng chờ, nên lô mới bắt đầu từ 094.\n- Phiếu 043 đã nhận, nên I5 của Lời Gọi chỉ còn hai ảnh.\n- Pin từ vựng là `18338405`. DEPLOY_INDEPENDENCE §8 còn ghi `56d3721d`, cần sửa.\n- Rồng chưa có worktree cho Codex. Phải tạo `.wt-dh-codex` trước khi lane M2 tới phiếu 100.\n\n**Chống nhàn ở Rồng:** bước 0 là tự tua ×1,75 khi không có chữ (không đổi sim), bước 1 là Chữ Bẫy (đo trên nhánh riêng), bước 2 là Than Lửa (chỉ khi còn nhàn). Tôi đổi thứ tự so với bản kiểm kê: làm DH-08 (bot giống người) trước Chữ Bẫy. Lý do: bot hôm nay mất khoảng 150 máu mỗi đợt, còn người thật gần như không mất, nên đo trên bot đó sẽ cho kết luận sai. Bảng ngưỡng giữ cổng và cách đo bằng bot và trình duyệt nằm ở mục 5.\n\n**Lô Codex 1: 12 phiếu**\n- Ảnh (094–099): ô đất Lời Gọi (P0), huy hiệu màn tựa Rồng, decal đất, ô Rice Field, Ghost Flame, decal nứt rễ và dải bọt thác.\n- Mã nhỏ (100–105): từ vựng ghim cho Rồng (P0), hai câu chữ, cổng DevTools trong kit, thẻ kết của Lời Gọi, ba nhãn của Tuyến Cuối, nút \"Về cổng game\".\n- Mỗi phiếu có đường được ghi, việc cấm, kiểm bắt buộc và điều kiện xong, kèm sẵn dòng thêm vào lane M1 và M2.\n- Phiếu 095 tách chữ logo thành phần thử, vì công cụ tạo ảnh hay viết sai dấu tiếng Việt. Nếu không đúng hết dấu thì Claude đặt chữ bằng font của game.\n- Dự phòng: nếu tới trưa 30/10 Codex chưa tới phiếu 100, làn T tự làm DH-01.\n\nTôi không sửa mã game và không commit."
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Audit"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "Plan"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "audit:rong",
+      "phaseIndex": 1,
+      "phaseTitle": "Audit",
+      "agentId": "aa350cea1bf4e415e",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793183698293,
+      "queuedAt": 1793183698276,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Tờ khung, sau khi đã xóa ảnh thô bằng prune --apply (nhật k…",
+      "promptPreview": "Owner goal (28/10): \"finish map 1 of each game so I can test it, it must be at the level of a game going to production\". New features are paused. Seven production gates for map 1:\nG1 no P0 or P1 bugs, no console errors; a bot and real CDP key presses play the whole map at 1280x720 and 1920x1080.\nG2 visuals: an independent judge scores the map scene and the main screens at 8/10 or more; no placehol…",
+      "promptFramed": true,
+      "lastProgressAt": 1793187582295,
+      "tokens": 386846,
+      "toolCalls": 165,
+      "durationMs": 3884002,
+      "resultPreview": "{\"gates\":[{\"gate\":\"G1 lỗi, console, bot và phím CDP thật ở 1280x720 và 1920x1080\",\"status\":\"pass\",\"evidence\":\"main 02fe9c7, Vite riêng 127.0.0.1:4140. dh-keyboard-only (speed 4): 1280 thắng 10/10, mã băm phát lại khớp 911e5e15 (837 lệnh), trễ phím TB 14,3 ms, tối đa 22,8 ms; 1920 thắng 10/10, khớp 195c876f, trễ phím TB 14,6 ms, tối đa 20,4 ms. Chơi cả ải bằng phím CDP thật ở tốc độ 1 (35 WPM, 1280…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "audit:loigoi",
+      "phaseIndex": 1,
+      "phaseTitle": "Audit",
+      "agentId": "a2279d0aea8960f35",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793183698293,
+      "queuedAt": 1793183698276,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "/Users/toandx/htdocs/typing-game/games/typing-defense/tmp/m…",
+      "promptPreview": "Owner goal (28/10): \"finish map 1 of each game so I can test it, it must be at the level of a game going to production\". New features are paused. Seven production gates for map 1:\nG1 no P0 or P1 bugs, no console errors; a bot and real CDP key presses play the whole map at 1280x720 and 1920x1080.\nG2 visuals: an independent judge scores the map scene and the main screens at 8/10 or more; no placehol…",
+      "promptFramed": true,
+      "lastProgressAt": 1793188486165,
+      "tokens": 486682,
+      "toolCalls": 215,
+      "durationMs": 4787048,
+      "resultPreview": "{\"gates\":[{\"gate\":\"G1 lỗi, console, chơi trọn map ở 1280 và 1920\",\"status\":\"partial\",\"evidence\":\"Bản 2D hôm nay (a5cc147, build production của tôi, server tĩnh 127.0.0.1:4150 giống nginx play.conf). Hai lượt chơi trọn truyện bằng phím chữ CDP thật (48 WPM, 885/879 phím, 201/200 từ), xây theo thứ tự STANDARD gửi qua __td như cú bấm chuột. Ở 1280×720: thắng lúc 746 s, còn 5 mạng, 1★. Ở 1920×1080: th…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "audit:tuyencuoi",
+      "phaseIndex": 1,
+      "phaseTitle": "Audit",
+      "agentId": "a5091e913ffea724b",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793183698293,
+      "queuedAt": 1793183698276,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "lastToolSummary": "Tờ ghép (đã xóa ảnh thô; nhật ký xóa ở /Users/toandx/htdocs…",
+      "promptPreview": "Owner goal (28/10): \"finish map 1 of each game so I can test it, it must be at the level of a game going to production\". New features are paused. Seven production gates for map 1:\nG1 no P0 or P1 bugs, no console errors; a bot and real CDP key presses play the whole map at 1280x720 and 1920x1080.\nG2 visuals: an independent judge scores the map scene and the main screens at 8/10 or more; no placehol…",
+      "promptFramed": true,
+      "lastProgressAt": 1793186107004,
+      "tokens": 356485,
+      "toolCalls": 163,
+      "durationMs": 2407887,
+      "resultPreview": "{\"gates\":[{\"gate\":\"G1 lỗi, console, bot + phím CDP thật chơi trọn map ở 1280 và 1920\",\"status\":\"partial\",\"evidence\":\"Chơi như người mới từ màn chính, profile Chrome trống, dev server riêng 127.0.0.1:4180, phím CDP thật khoảng 45 WPM, trượt 3 %. Luồng: màn chính → Cài đặt, Hồ sơ gõ, Kho súng → Hành trình → bảng tin → nạp súng (phím 1, 2) → thẻ ải → ải 1. Giữa trận Esc → Cài đặt → Esc → chơi tiếp. K…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "plan",
+      "phaseIndex": 2,
+      "phaseTitle": "Plan",
+      "agentId": "a8eb67ec69a7c56f3",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1793188487261,
+      "queuedAt": 1793188487258,
+      "attempt": 1,
+      "lastToolName": "Write",
+      "lastToolSummary": "/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/15…",
+      "promptPreview": "Owner goal (28/10): \"finish map 1 of each game so I can test it, it must be at the level of a game going to production\". New features are paused. Seven production gates for map 1:\nG1 no P0 or P1 bugs, no console errors; a bot and real CDP key presses play the whole map at 1280x720 and 1920x1080.\nG2 visuals: an independent judge scores the map scene and the main screens at 8/10 or more; no placehol…",
+      "promptFramed": true,
+      "lastProgressAt": 1793189470913,
+      "tokens": 263402,
+      "toolCalls": 27,
+      "durationMs": 983651,
+      "resultPreview": "Đã viết xong hai file:\n\n- `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/scratchpad/map1/MAP1_PRODUCTION.md`\n- `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/scratchpad/map1/CODEX_BATCH.md`\n\n**Tình hình chung**\n- Chưa game nào qua đủ bảy cổng. Rồng chỉ qua G1. Lời Gọi và Tuyến Cuối chưa qua trọn cổng nà…"
+    }
+  ],
+  "totalTokens": 1493415,
+  "totalToolCalls": 570
+}
