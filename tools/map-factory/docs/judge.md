@@ -37,6 +37,8 @@ magick games/.wt-dh-mapspike/tmp/shots/mapspike/final2/1920x1080-default.png -st
 - M0b và spike là hai mốc giữa thang. Giám khảo không biết chúng là gì.
 - Khi có kit khác (violet-glade…), kit đó cần ảnh mẫu riêng và ba mẫu kiểm riêng (MAP_PLAN §2.7 mục 2); bộ này chỉ cho pine-river.
 
+> **Ghi chú hiệu chuẩn (28/10, vòng A2 của L2-cau):** bốn giám khảo liên tiếp chấm mẫu spike 6,0; 5,5; 5,5; 5,5, trong khi dải nhận là 6,0–7,5. Ba lượt bị bỏ theo §5.1. Các giám khảo vẫn chấm ảnh mẫu và M0b đúng dải, và điểm ảnh thật giữa họ lệch nhau không quá 0,25. Cần chạy lại phép thử ở §7 rồi xem có dời dải của spike xuống (đề xuất 5,25–6,75, đích 6,0) không, trước khi chấm vòng sau. Lượt hợp lệ duy nhất của A2 (1080p): trung vị 8,0, thấp nhất 7,5.
+
 ## 3. Chạy một lượt chấm (người điều phối)
 
 **Loại ảnh và tên trung tính:**
