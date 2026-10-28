@@ -1,0 +1,129 @@
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 73 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, learning, speech, audio, ui, tools, typing, three, feedback, balance)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-dh-codex
+
+ ✓ tests/ui/results-screen.test.ts (10 tests) 29ms
+ ✓ tests/vocab-pin.test.ts (7 tests) 1004ms
+   ✓ pinned vocabulary (G7) > loads only pinned files for every supported saved level and its next-level candidate  848ms
+ ✓ tests/sim/battle-waves.test.ts (16 tests) 1549ms
+   ✓ battle waves: the director at run time > spawns each group of a wave when the plan says (one tick per 16.7 ms) and every head of it  688ms
+   ✓ battle waves: the director at run time > plays the whole M0 stage: an ideal fast typist wins with stars, nobody typing loses in wave 1  457ms
+ ✓ tests/sim/bot-hands.test.ts (8 tests) 1110ms
+   ✓ bot hands > types 25 WPM at C(E) of the words it meets, through the kit router  309ms
+ ✓ tests/sim/bot-words.test.ts (4 tests) 2037ms
+   ✓ bot typist on the words store > keeps C(E) at 25 WPM on the words the store deals  438ms
+   ✓ bot typist on the words store > keeps C(E) at 35 WPM on the words the store deals  437ms
+   ✓ bot typist on the words store > never sticks on a word the world locked under it (a slip before a switch)  965ms
+ ✓ tests/view/view-terrain.test.ts (15 tests) 2307ms
+   ✓ view-terrain height field > is deterministic and finite everywhere, skirt included  1059ms
+   ✓ view-terrain scatter > keeps trees off lanes, water, slots, the dais and the sky lane  802ms
+   ✓ view-terrain scatter > keeps bushes and rocks off the lanes and out of the river  393ms
+ ✓ tests/sim/smoke.test.ts (5 tests) 89ms
+ ✓ tests/sim/bot-policy.test.ts (9 tests) 2379ms
+   ✓ bot tactics > the weak buyer places by the dais, never upgrades, never buys Tim Rồng; the others fill and upgrade  1681ms
+   ✓ bot tactics > presses Enter in an Easy break (00 §4.5) once the shop is done  641ms
+ ✓ tests/typing-words.test.ts (22 tests) 333ms
+ ✓ tests/golden/golden.test.ts (10 tests) 2648ms
+   ✓ golden M0 > replays b35-seed1 to its stored hashes  564ms
+   ✓ golden M0 > runs b35-seed1 to the stored command log  387ms
+   ✓ golden M0 > replays sloppy-hard-off-seed3 to its stored hashes  555ms
+   ✓ golden M0 > runs sloppy-hard-off-seed3 to the stored command log  756ms
+ ✓ tests/sim/ourside-status.test.ts (9 tests) 206ms
+ ✓ tests/sim/bot-run.test.ts (9 tests) 2423ms
+   ✓ bot runs > never types or buys when its plan says so  402ms
+   ✓ bot runs > stops a run that stalls and says where  1213ms
+ ✓ tests/boundary.test.ts (9 tests) 1174ms
+   ✓ dragon-hold boundary > keeps sim/, typing/ and content/ pure: no DOM, clock, Math.random, trig, pow or **  457ms
+ ✓ tests/sim/ourside-shop.test.ts (13 tests) 280ms
+ ✓ tests/sim/ourside-units.test.ts (7 tests) 258ms
+ ✓ tests/sim/battle-determinism.test.ts (6 tests) 3625ms
+   ✓ battle determinism > replays a whole M0 stage to the same hash every 10 s for the same seed  1428ms
+   ✓ battle determinism > differs for another seed (spawn jitter comes from the seeded spawn stream only)  1071ms
+   ✓ battle determinism > keeps every number of the battle state an integer through a whole run  392ms
+   ✓ battle determinism > keeps every hashed number of the whole world an integer, at each difficulty and after a whole run  354ms
+   ✓ battle determinism > runs a whole stage at well over 200 × real time headless (00 §8)  309ms
+ ✓ tests/view/lane-cue.test.ts (4 tests) 256ms
+ ✓ tests/audio/catalog.test.ts (9 tests) 369ms
+ ❯ tests/ui/tags-bodies.test.ts (21 tests | 1 failed) 484ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > moves off another foe's body standing right where the tag would sit 2ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > never moves for its own foe's body 1ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > sits over bodies only when no clear spot is free, and still never overlaps another tag 7ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > over bodies, takes the free spot that hides the least of one, not the first (dh-crowd 720p seed 5: a wordless foe 83 % under a tag) 1ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > over bodies, keeps its last spot unless another hides clearly less (no jitter) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > counts what tags placed before it hide of a body: two tags never add up past the clear share (1080p: 42 % of an archer under two tags) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > keeps its spot over a body inside its hold (no jumping), leaves it once the hold is over 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > leaves its spot inside its hold when a foe arrives under it past the hold's limit (dh-crowd 720p seed 1: a wordless foe 83 % under a held tag) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > a held tag that grew (a meaning line) leaves a spot that now hides a body past the limit 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > over bodies, does not stay on a last spot past the hold's limit when another hides less 1ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > the last resort (rings round the anchor) keeps off its own foe (dh-crowd 1080p seed 6: a ring spot hid its own foe 56 %) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > the last resort weighs every body round the anchor, below it too (26/10 review: a ring spot under the anchor hid another foe 56 %) 1ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > ring-slot tags keep off bodies, their own foe's too; edge chips ignore them (26/10 review: ring tags hid foes within 10 m up to 92 %) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > after a move for a body inside its hold, moves again only for a foe 40 % hidden (26/10 review: tags jumped again inside the hold) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > inside its hold it never goes back to the spot it just left while another is free; with none, it does (26/10 review: 216–240 px and back in 100–150 ms) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > a tag laid out afresh keeps off a held tag's spot while another is free (26/10: most moves inside a hold were held tags pushed off) 17ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > over bodies, a last spot past the hold's limit stays unless another hides at least 5 points less (no jump for a point or two) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > whose best spot in reach still hides 40 % of a body takes a clean ring spot within twice the reach (dh-crowd 720p 70 WPM seed 1: a held tag stayed over an archer 80 % for 24 frames) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > holds a ring spot where it was drawn, below the anchor too (it used to snap to row 0 the next frame) 0ms
+   ✓ word tags keep the crowd and its warnings visible (round 2) > weighs the bodies under its last spot even out of the pushes' reach (a ring spot 210 px away over a foe) 0ms
+   × word tags keep the crowd and its warnings visible (round 2) > lays out 20 tags among 40 bodies within the frame budget 451ms
+     → expected 1.3046968750000019 to be less than 1
+ ✓ tests/sim/battle-auras.test.ts (8 tests) 229ms
+ ✓ tests/sim/balance-pressure.test.ts (10 tests) 384ms
+ ✓ tests/audio/limiter.test.ts (11 tests) 251ms
+ ✓ tests/sim/battle-species.test.ts (11 tests) 277ms
+ ✓ tests/view/crowd-rig.test.ts (11 tests) 62ms
+ ✓ tests/sim/ourside-houses.test.ts (5 tests) 90ms
+ ✓ tests/sim/ourside-traps.test.ts (7 tests) 211ms
+ ✓ tests/typing-tags.test.ts (10 tests) 227ms
+ ✓ tests/view/view-crowd-fx-effects.test.ts (19 tests) 218ms
+ ✓ tests/sim/ourside-economy.test.ts (8 tests) 186ms
+ ✓ tests/sim/bot-load.test.ts (7 tests) 67ms
+ ✓ tests/view/number-field.test.ts (4 tests) 83ms
+ ✓ tests/sim/ourside-wiring.test.ts (2 tests) 183ms
+ ✓ tests/sim/battle-damage.test.ts (12 tests) 252ms
+ ✓ tests/view/view-crowd-fx-crowd.test.ts (13 tests) 85ms
+ ✓ tests/ui/results.test.ts (4 tests) 18ms
+ ✓ tests/app/loop-router.test.ts (6 tests) 6ms
+ ✓ tests/audio/map-events.test.ts (13 tests) 10ms
+ ✓ tests/content/map.test.ts (11 tests) 12ms
+ ✓ tests/ui/tags-animation.test.ts (2 tests) 20ms
+ ✓ tests/view/model-specs.test.ts (6 tests) 7ms
+ ✓ tests/typing-learning.test.ts (17 tests) 30ms
+ ✓ tests/app/typing-pace.test.ts (25 tests) 15ms
+ ✓ tests/ui/shop-strip.test.ts (4 tests) 8ms
+ ✓ tests/audio/mix.test.ts (7 tests) 8ms
+ ✓ tests/audio/engine.test.ts (3 tests) 6ms
+ ✓ tests/view/m0b-banners.test.ts (3 tests) 14ms
+ ✓ tests/ui/screen-zones.test.ts (3 tests) 5ms
+ ✓ tests/audio/music-plan.test.ts (6 tests) 7ms
+ ✓ tests/app/pace-card.test.ts (10 tests) 13ms
+ ✓ tests/ui/debut-card.test.ts (3 tests) 3ms
+ ✓ tests/ui/hud.test.ts (7 tests) 9ms
+ ✓ tests/ui/placement.test.ts (6 tests) 11ms
+ ✓ tests/ui/wave-card.test.ts (3 tests) 5ms
+ ✓ tests/app/portal.test.ts (5 tests) 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/ui/tags-bodies.test.ts > word tags keep the crowd and its warnings visible (round 2) > lays out 20 tags among 40 bodies within the frame budget
+AssertionError: expected 1.3046968750000019 to be less than 1
+ ❯ tests/ui/tags-bodies.test.ts:330:16
+    328|       ms = Math.min(ms, (performance.now() - start) / runs);
+    329|     }
+    330|     expect(ms).toBeLessThan(1);
+       |                ^
+    331|   });
+    332| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 53 passed (54)
+      Tests  1 failed | 474 passed (475)
+   Start at  23:57:39
+   Duration  7.21s (transform 3.18s, setup 0ms, collect 17.72s, tests 25.58s, environment 12ms, prepare 6.61s)
+
+[ELIFECYCLE] Test failed. See above for more details.
+[ELIFECYCLE] Command failed with exit code 1.
