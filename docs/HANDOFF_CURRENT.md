@@ -1,142 +1,91 @@
-# Bàn giao điều phối (cập nhật 28/10/2026, khoảng 15:00)
+# Bàn giao điều phối (cập nhật 28/10/2026, khoảng 19:40)
 
 File này để **một session mới** nối tiếp mà không cần đọc lại lịch sử chat.
 - Mỗi lần dừng hay chuyển session, cập nhật file này.
 - Luật của chủ dự án nằm ở memory (tự nạp) và `AGENTS.md`. Ở đây chỉ nhắc ý chính.
 
-## 0. Giai đoạn hiện tại (chủ dự án 28/10): sửa lỗi và làm đẹp để demo
+## 0. Giai đoạn và mục tiêu (chủ dự án 28/10)
 
-- **Dừng phát triển phần sau:**
-  - bản đồ: chặng B–D và các map mới; phiếu 076–084;
-  - thư viện tài sản: phiếu 063, 064, 084, 086, 087;
-  - thử luật D27, D31;
-  - nội dung mới.
-- **Làm:** sửa lỗi, làm đẹp, làm mượt phần đang chơi được của cả ba game:
-  - Rồng: L2-cau, 10 đợt;
-  - Lời Gọi: 1A và 1B (2D);
-  - Tuyến Cuối: chương 1.
-- **Mục tiêu (chủ dự án 28/10): map 1 của từng game đạt chuẩn production** để chủ dự án test.
-  - Rồng: L2-cau.
-  - Lời Gọi: w1-silverfall, **làm 3D (bước 1C) cho riêng map 1**, vì hôm nay nó vẫn vẽ bằng khung gỡ lỗi `src/view/debug-2d.ts`.
-  - Tuyến Cuối: ải đầu của chương 1, gồm sửa việc game đọc model của Space lúc chạy.
-- **Cổng production của map 1, đề xuất; lượt kiểm kê phải đo từng cổng:**
-  1. 0 lỗi P0 và P1; 0 lỗi console; bot và phím CDP thật chơi trọn map ở 1280 và 1920.
-  2. Hình:
-     - giám khảo độc lập chấm từ 8 cho cảnh map và các màn chính;
-     - không còn hình tạm (khối, viên nang, vẽ gỡ lỗi).
-  3. Cảm giác: đòn chính đạt chuẩn VFX 5 pha; có âm thanh; thẻ chữ đọc rõ.
-  4. Hiệu năng: trong ngân sách ở High và Medium; nạp nhanh; không khung dài.
-  5. Trải nghiệm: luồng lần đầu, menu, tạm dừng, cài đặt, kết quả; câu tiếng Việt và tên tiếng Anh đúng.
-  6. Cân bằng: cổng bot của map 1 đạt.
-  7. Build production tự đủ (không đọc file của repo cha hay Space), chạy qua `typing-game.local`.
-- **Rồng "nhàn"** (40–66 % thời gian đợt không có chữ) là vấn đề cảm giác lớn nhất của map 1 Rồng. Mọi cách đo 27–28/10 đều gãy cổng, nên cần đề xuất hướng mới cho chủ dự án.
-- **Demo chạy trên Mac ở nhà** qua `typing-game.local` (`scripts/play.sh`, nginx). Chưa đưa lên mạng.
-- **Bước kế:** một lượt kiểm kê lỗi và chỗ xấu, chỗ giật cho từng game. Chơi thật trên trình duyệt ở 1280 và 1920, gộp với các mục còn mở trong changelog và test pass. Kết quả là một danh sách theo mức: P0 chặn demo, P1 làm xấu ấn tượng đầu, P2 để sau. Sau đó sửa theo danh sách; Codex làm ảnh và các sửa nhỏ kiểm được.
-- **Vẫn giữ, vì làm đẹp nội dung có sẵn:**
-  - sửa khói Tuyến Cuối;
-  - chặng A của map L2-cau (map của demo);
-  - VFX Rồng: đòn chữ, Sky Fire, VFX quái;
-  - Codex 065, 067 (ô cỏ, Campfire Ring cho map đầu).
-
-**Session điều phối mới:** `coordinator-2` (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7), mở 28/10 khoảng 17:40. Session cũ (157c54d6) chỉ chạy nốt 4 lượt ở mục 3, rồi nhắn kết quả sang.
+- **Tạm dừng tính năng mới.** Chỉ sửa lỗi, làm đẹp, làm mượt phần đang chơi được.
+- **Mục tiêu:** map 1 của từng game đạt chuẩn production, để chủ dự án chơi thử qua `typing-game.local` trên Mac ở nhà (chưa đưa lên mạng):
+  - Rồng: L2-cau;
+  - Lời Gọi: w1-silverfall, làm 3D (bước 1C) cho riêng map 1;
+  - Tuyến Cuối: c1-s1.
+- **Kế hoạch chung:** [`docs/games/MAP1_PRODUCTION.md`](games/MAP1_PRODUCTION.md). Nó có 7 cổng cho từng game, danh sách P0, P1, P2, bốn làn T, V, R, L với lịch theo ngày, việc của chủ dự án và rủi ro. Ngày dự kiến đủ 7 cổng: Tuyến Cuối 03/11, Rồng 06/11, Lời Gọi 12/11.
+- **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
+- **Session điều phối:** coordinator-3 (CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` chỉ còn chạy làn `vfx-dh-v2`; xong bước nào thì nó nhắn kết quả sang.
 
 ## 1. Bắt đầu session mới
 
-1. Đọc file này, rồi `docs/CODEX_QUEUE.md` (dòng 035 trở đi).
-2. Kiểm kết quả các lượt chạy ở mục 3:
-   - workflow ghi file trong `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/tasks/<id>.output`;
-   - journal của workflow ở `~/.claude/projects/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/subagents/workflows/<run>/journal.jsonl`;
-   - Codex ghi nhật ký vào `.local/codex-runs/<tên phiếu>/` và báo cáo vào `docs/codex-queue/<số>-report.md`.
-3. Nếu một lượt chạy bị ngắt khi đóng session cũ: chạy lại bằng `resumeFromRunId`, hoặc `tools/codex-run/queue.sh` với file lane (phiếu đã có báo cáo thì bỏ khỏi lane).
+1. Đọc file này, `MAP1_PRODUCTION.md` §4, rồi `docs/CODEX_QUEUE.md` (các dòng 088 trở đi).
+2. Kiểm các làn ở mục 3: `pgrep -fl codex-lane-mac` cho Codex; nhật ký Codex ở `.local/codex-runs/<phiếu>/`, báo cáo ở `docs/codex-queue/<số>-report.md`.
+3. Làn Claude là agent nền của session điều phối. Session đó dừng thì làn cũng dừng: xem `git log` trong worktree của làn, rồi mở lại bằng một agent mới có ghi chú RESUME.
 
 ## 2. Luật chính (chi tiết ở memory)
 
-- **Giao tiếp và quyết định:**
-  - Trả lời chủ dự án bằng tiếng Việt.
-  - Tự làm theo khuyến nghị; chỉ hỏi quyết định thật sự chặn việc.
-  - Cổng nào gãy thì báo kèm số.
-- **Git và media:**
-  - Không media trong Git.
-  - Repo game đẩy qua SSH, không force.
-  - Chỉ Claude chạy `pnpm media:push`.
-  - Không đụng Tu Tiên.
-- **Codex:**
-  - Không chạy lệnh git có ghi; Claude duyệt rồi mới commit.
-  - Giao **một danh sách** việc, **ảnh trước**. Chủ dự án muốn Codex không rảnh.
-- **Làn và ảnh test:**
-  - Tối đa 4 workflow cùng lúc.
-  - Ảnh test: giữ tờ ghép, xóa ảnh thô bằng `node tools/capture-prune/prune.mjs <thư mục> --apply`.
-  - Muốn xóa thứ khác ngoài ảnh test của mình thì hỏi chủ dự án.
-- **Mức nhận:**
-  - Ảnh 2D nhận từ 8 điểm.
-  - Model 3D nhận từ 7 điểm; 7–8,5 ghi vào `ART_REPLACE_LATER`.
-  - Tên danh từ trong game bằng tiếng Anh (`docs/games/NAMES_EN.md`).
+- **Giao tiếp:** trả lời chủ dự án bằng tiếng Việt; tự làm theo khuyến nghị, chỉ hỏi quyết định thật sự chặn việc; cổng nào gãy thì báo kèm số.
+- **Git và media:** không media trong Git; repo game đẩy qua SSH, không force; chỉ Claude chạy `pnpm media:push`; không đụng Tu Tiên.
+- **Codex** (chủ dự án 28/10: "tăng gấp đôi công việc cho codex"):
+  - luôn chạy **hai làn cùng lúc**, một làn ảnh và một làn mã, ghi vào các đường khác nhau;
+  - giao một danh sách việc, ảnh trước;
+  - Codex không chạy git có ghi; Claude duyệt rồi mới commit.
+- **Làn Claude:** tối đa 4 cùng lúc. Ảnh test: giữ tờ ghép, xóa ảnh thô bằng `tools/capture-prune`.
+- **Mức nhận:** ảnh 2D từ 8 điểm; model 3D từ 7 điểm; điểm 7–8,5 ghi vào `ART_REPLACE_LATER.md`.
 
-## 3. Đang chạy lúc bàn giao
+## 3. Đang chạy (28/10, 19:40)
 
-| Lượt | Làm gì | Khi xong thì |
+### Codex: hai làn
+
+| Làn | Phiếu | Ghi chú |
 |---|---|---|
-| Workflow `map1-production-audit` (wf_eef732af-d52, từ 17:30) | Kiểm kê map 1 của ba game theo 7 cổng production: chơi thật trên trình duyệt, đọc các mục còn mở; ra `MAP1_PRODUCTION.md` và `CODEX_BATCH.md` trong scratchpad `map1/` | Duyệt; chép vào `docs/games/MAP1_PRODUCTION.md`; tách đợt Codex (ảnh trước); bắt đầu sửa theo thứ tự P0, P1 |
-| ~~`ts-cloud-fix`~~ **xong 17:00** | Đạt người chấm độc lập; Tuyến Cuối `main` bf0e6f9 (gồm đổi tên tiếng Anh) đã đẩy; con trỏ đã bump | Chú ý khi gộp Codex 035 (`ts-vfx`): giữ đời lửa 0,3–0,45 s và hai dòng độ sâu của shader khói, chạy lại f6b |
-| Workflow `ts-cloud-fix` (wf_aa65bb85-96b) | Tuyến Cuối: khói sau big kill che quái 1–3 s (lỗi người chấm vòng 2 tìm ra trên `main` ea8e0f9 đã đẩy). Một agent sửa, một người chấm | Duyệt; rồi gộp nhánh `ts-names` (d96b376, đổi tên tiếng Anh đã kiểm) vào `main` Tuyến Cuối, `pnpm check`, đẩy, bump con trỏ |
-| Workflow `map-pilot-a` (wf_d13ecef8-0d5) | Bản thử bản đồ Rồng L2-cau, chặng A, trong `games/.wt-dh-mappilot` (nhánh `map-pilot`). Gồm bộ giám khảo (`tools/map-factory/docs/judge.md`), người dựng, giám khảo mới | Xem điểm (cổng A: trung vị ≥ 7,5, không ảnh < 6,5, khung hình +≤ 2 ms); gửi chủ dự án tờ ảnh; sang chặng B (`docs/tools/map-factory/MAP_PLAN.md` §3) |
-| **Làn VFX Rồng: đã chạy lại 16:30 trong session cũ** (`w1jp69fiq`, cùng run wf_0ab38d58-be4). Nếu nó dừng giữa chừng, session mới khởi động lại theo ghi chú ở ô này | Lượt cũ dừng lúc 13:45 khi lượt điều phối bị ngắt. Nhánh `dh-vfx` ở `games/.wt-dh-vfx` (f3fe49c): bước 1a (đòn chữ Hỏa Long) đã dựng, chưa chấm. Còn: chấm 1a; Sky Fire đủ 5 pha (VFX_STANDARD §5.3 phần 2); **VFX quái** (vệt chém, mũi tên Moss Archer, lóe và mảnh khi trúng, hiệu ứng xuất hiện; chủ dự án hỏi 28/10). Lời nhắc từng bước nằm trong `~/.claude/projects/-Users-toandx-htdocs-typing-game/157c54d6-5a15-4acc-b09d-0aae10862f93/workflows/scripts/vfx-dh-v2-wf_0ab38d58-be4.js`: chép sang workflow mới (resume chỉ chạy trong session cũ) | Gửi chủ dự án tờ trước/sau từng bước; chưa gộp vào `main` Rồng. Ước 6–9 giờ cho cả ba bước |
-| Codex lane Z2 (`b52i9ktmr`) | Thư viện AL-13, AL-14, AL-15 (phiếu 085–087): ảnh nhỏ, trang `library/out/catalog.html`, cây Finder `library/browse/` song ngữ. AL-12 (Claude duyệt tên, 1.831 dòng) đã commit 98a1f0e2 | Duyệt; chạy `pnpm lib:scan` để mục lục nhận tên đã duyệt (lệnh tìm hiện còn đọc bản quét 13:17); mở `library/browse/creature (quái)/` gửi chủ dự án. Còn quyết: nâng trần 60 KB của `taxonomy.json`; luật chọn khi một nhóm con có ở hai loại (bridge, gate, wall, jetty, weapon, portrait, decal) |
-| Ghi chú 16:20 | `ts-cloud-fix` và `map-pilot-a` cũng dừng lúc 13:45 vì cùng lý do; đã chạy lại (resume) trong session cũ lúc 16:20. Codex hết hạn mức ChatGPT lúc 15:32, tự chạy lại lúc 18:37 (các tiến trình hàng đợi nằm trong session cũ, đừng lưu trữ session đó) | |
-| Codex chuỗi X → Y (`b8l2173ul`) | X: phiếu 065–080 (6 ảnh bản đồ đã xong 14:50; đang làm mã MF-C01…). Y: 063, 064 (AL-17, AL-18), 081–083 (MF-C06–C08), 084 (sửa đường bộ nhớ đệm của thư viện) | Duyệt từng phiếu; ảnh 065–070 chấm lại theo mức 8 |
+| Ảnh M1, rồi M4 | 089 (đang chạy, từ 19:05) → 095, 096, 097, 098, 099, 100 | `.local/codex-lane-mac-m1.txt`, `-m4.txt`. M4 tự chạy khi M1 xong |
+| Mã M2, rồi M3 | 090 (đang chạy, từ 19:12) → 092, 091 → 080, 094, 101, 103, 104, 105, 102 | `-m2.txt`, `-m3.txt`. M3 tự chạy khi M2 xong |
+
+Worktree Codex:
+- `games/.wt-ts-codex` (`ts-codex`): 090, 092, 104;
+- `games/.wt-td-codex` (`td-codex`): 091, 103;
+- `games/.wt-dh-codex` (`dh-codex`): 080, 094, 101, 105.
+
+Phiếu 102 ghi vào `shared/game-kit/tools/` của repo cha.
+
+**Đã duyệt hôm nay:** 035–037, 065–075, 085, 088, 093. Xem cột trạng thái của `CODEX_QUEUE.md`.
+
+### Làn Claude (agent nền của coordinator-3, trừ làn cuối)
+
+| Làn | Nơi làm | Việc | Khi xong |
+|---|---|---|---|
+| **R** (map Rồng) | `games/.wt-dh-mappilot`, nhánh `map-pilot` (f0b101b, chưa gộp) | Nhập 8 model Tripo đợt 3 (preset, kit); vòng sửa A2 theo mã góp ý FB-08, 09, 10, 11, 16, 18, 03, V2; chụp bộ khung cho giám khảo | Chạy một giám khảo độc lập (`tools/map-factory/docs/judge.md`); cổng A cần trung vị ≥ 7,5 (chặng A được 7,125) |
+| **L** (Lời Gọi 1C) | main checkout `a2-days`, rồi `games/.wt-td-1c` (nhánh `td-1c`) | Gộp 036 vào `a2-days`, dừng V4a; viết C0; làm C1 | Duyệt C0 với chủ dự án (câu 5); làm tiếp C2 |
+| **V-ts** (VFX Tuyến Cuối) | `games/.wt-ts-vfx` rồi fast-forward `main` | TS-M1-04 (gộp 035); TS-M1-05 (5 pha cho Pulse Gun, Heat Beam, tàu bị đánh) | Gửi chủ dự án tờ khung trước/sau |
+| **vfx-dh-v2** (session cũ) | `games/.wt-dh-vfx` | VFX Rồng: chấm 1a, Sky Fire, VFX quái | Gộp vào làn V |
 
 ## 4. Việc chờ, theo thứ tự
 
-1. **Duyệt kết quả mục 3** khi từng lượt xong.
-2. **Codex 035, 036, 037 (làn VFX S) chưa duyệt.** Báo cáo:
-   - 035: `docs/codex-queue/035-report.md`;
-   - 036: `docs/codex-queue/036-report.md`;
-   - 037: `typing-game-wt/vfx/docs/codex-queue/037-report.md`.
+1. **Duyệt đầu ra Codex** khi từng phiếu xong. Phiếu mã thì chạy lại kiểm và đọc diff; phiếu đụng giao diện thì kiểm trên trình duyệt ở 1280 và 1920. Sau đó gộp:
+   - `ts-codex` vào `main` Tuyến Cuối;
+   - `td-codex` vào `a2-days`;
+   - `dh-codex` vào `main` Rồng, theo thứ tự gộp map pilot → VFX → `dh-codex`.
+2. **Làn T** (chưa mở; bắt đầu khi 090–094 đã gộp):
+   - TS-M1-01: model riêng của Tuyến Cuối;
+   - DH-02: báo lỗi khi bộ chữ rỗng; bỏ alias nginx;
+   - `pnpm build:local`, rồi báo chủ dự án chạy sudo nginx;
+   - kiểm cả ba game qua `typing-game.local`.
+   Xem `MAP1_PRODUCTION.md` §4.3.
+3. **Media:** sau khi nhận ảnh Codex hay model mới, chạy `pnpm media:push --yes`, commit `media.md5` của game, bump con trỏ.
+4. **Repo cha:** nhánh `feat/space-typing-admin-uiux` chưa đẩy. Nhánh `map-factory` (Codex 071–075) chưa gộp vì đang tạm dừng.
 
-   Mã:
-   - 035: Tuyến Cuối khung đầu, `games/.wt-ts-vfx`;
-   - 036: ống FX Lời Gọi, `games/.wt-td-vfx`;
-   - 037: công cụ `tools/vfx-sheet`, `typing-game-wt/vfx`.
+## 5. Chủ dự án
 
-   035 và 036 cần kiểm trên trình duyệt. Sau khi 036 gộp: làn Lời Gọi b-ui rồi verify.
-3. **Phiếu thư viện còn lại:**
-   - AL-19 đến AL-22 (chép, kiểm) theo `docs/tools/asset-library/TICKETS.md`;
-   - AL-21 cần phối hợp `kit:sync`, vì thêm file vào kit làm `kit:check` của game đỏ.
-4. **Bản đồ:**
-   - phiếu MF-C09 đến C19 cần Claude viết thuật toán chính xác vào phiếu (CL-02);
-   - MF-C25 đến C28 cần đồ thị mẫu (CL-07).
-5. **Media:** sau khi nhận ảnh Codex mới, chạy `pnpm media:push --yes`; commit `media.md5` của game; bump con trỏ.
-6. **Repo cha:** nhánh `feat/space-typing-admin-uiux` hơn origin 58 commit, chưa đẩy. Lời Gọi: nhánh `a2-days` chưa đẩy.
+- **7 câu hỏi** (`MAP1_PRODUCTION.md` §4.4), đã gửi 28/10 tối. Quá 24 giờ chưa trả lời thì làm theo đề xuất trên nhánh riêng, chưa gộp.
+- **Sudo nginx một lần**, khi `pnpm build:local` xong.
+- **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
+- **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.
+- **librsvg** cho 62 ảnh nhỏ SVG của thư viện: chờ chủ dự án cho cài. Không gấp, vì thư viện đang tạm dừng.
 
-## 5. Quyết định chờ chủ dự án
+## 6. Tài liệu chính
 
-- **OW-01:** dựng 8 model đợt 3 (`typing-game-handoff-2026-10-25/tripo-upload-dot3`, khoảng 240 credit) cho chặng C của bản thử bản đồ.
-- **Rồng "nhàn":** hướng cho D27/D31. Mọi bước đo ngày 27–28/10 đều gãy G1 hay trần 90 %; số ở `games/dragon-hold/docs/changelog/2026-10-27-owner-decisions.md` §8.7.
-- **Tuyến Cuối, biển viết hoa:** tên tiếng Anh tạm giữ kiểu hoa đầu từ ("Pack Leader 2/3"). Anh có thể đổi sang viết hoa hết.
-- **Maple Tree:** chỉ dựng nếu cây nhuộm ấm < 8 điểm ở chặng A.
-
-## 6. Nhánh và worktree
-
-- **Rồng** (`main` 02fe9c7, đã đẩy):
-  - `.wt-dh-mappilot` (bản thử bản đồ, Claude);
-  - `.wt-dh-mapcodex` (Codex);
-  - `.wt-dh-vfx` (VFX);
-  - `.wt-dh-mapspike` (spike vòng 1, giữ để so);
-  - `.wt-dh-d27c` (D27, không giữ);
-  - `.wt-dh-demo`, `.wt-play-dragon-hold`.
-- **Lời Gọi** (`a2-days` a5cc147): `.wt-td-vfx` (036), `.wt-play-typing-defense`.
-- **Tuyến Cuối** (`main` ea8e0f9):
-  - `.wt-ts-names` (chờ gộp);
-  - `.wt-ts-vfx` (035);
-  - worktree tạm `tmp/mac-2026-10-28/cloud-fix/wt-base` của làn sửa khói.
-- **Repo cha:**
-  - `typing-game-wt/map-codex` (nhánh `map-factory`, Codex bản đồ);
-  - `typing-game-wt/vfx` (037).
-
-## 7. Tài liệu chính
-
-- `docs/tools/map-factory/MAP_PLAN.md`, `TICKETS.md`: kế hoạch bản đồ v2, bản thử L2-cau.
-- `docs/tools/ASSET_LIBRARY.md`, `docs/tools/asset-library/TICKETS.md`: thư viện tài sản.
-- `docs/games/VFX_STANDARD.md`: VFX nhiều lớp. VFX quái của cả ba game nay là bước riêng.
-- `docs/games/3D_IMPORT_2026-10-28.md`: Tripo đợt 2, đủ 86/86 model. `docs/games/3D_REQUESTS.md`.
-- `docs/games/BALANCE.md`, `docs/games/NAMES_EN.md`, `docs/CODEX_QUEUE.md`.
+- `docs/games/MAP1_PRODUCTION.md`, `docs/games/map1/`;
+- `docs/games/VFX_STANDARD.md`, `docs/games/DEPLOY_INDEPENDENCE.md`;
+- `docs/tools/map-factory/MAP_PLAN.md`, `tools/map-factory/docs/judge.md`;
+- `docs/games/ART_ACCEPTANCE.md`, `ART_REPLACE_LATER.md`, `NAMES_EN.md`, `BALANCE.md`;
+- `docs/CODEX_QUEUE.md`.
