@@ -76,7 +76,14 @@ Phiếu 102 ghi vào `shared/game-kit/tools/` của repo cha.
 
 ## 5. Chủ dự án
 
-- **7 câu hỏi** (`MAP1_PRODUCTION.md` §4.4), đã gửi 28/10 tối. Quá 24 giờ chưa trả lời thì làm theo đề xuất trên nhánh riêng, chưa gộp.
+- **7 câu hỏi** (`MAP1_PRODUCTION.md` §4.4): chủ dự án **đồng ý cả 7 đề xuất** ngày 28/10, khoảng 19:45:
+  - Rồng tự tua ×1,75 khi không có chữ (DH-05 bước 0; sửa 06 §10);
+  - Chữ Bẫy đo trên nhánh riêng, sau DH-08;
+  - D27, D31, D33 chưa đổi núm nào;
+  - tên ải 1 của Rồng "Ải 1 · Cầu và Suối" (phiếu 101);
+  - C0 của Lời Gọi được duyệt;
+  - Lời Gọi chấp nhận khoảng chờ ban ngày, đo lại sau 1C;
+  - Tuyến Cuối: ải 2 tên "ẢI 2 · SĂN PACK LEADER", biển viết hoa cả câu (phiếu 104).
 - **Sudo nginx một lần**, khi `pnpm build:local` xong.
 - **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
 - **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.

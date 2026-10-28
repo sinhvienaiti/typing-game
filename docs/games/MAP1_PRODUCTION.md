@@ -221,7 +221,7 @@ Mốc kiểm giữa chừng của Lời Gọi: **06/11** một giám khảo đ�
 
 ### 4.4. Việc của chủ dự án
 
-1. **29/10 sáng, trả lời một tin (khoảng 15 phút).** Mỗi câu có đề xuất sẵn. Quá 24 giờ chưa trả lời thì Claude làm theo đề xuất trên nhánh riêng và chưa gộp.
+1. **Đã trả lời 28/10 khoảng 19:45: chủ dự án đồng ý cả 7 đề xuất dưới đây.** (Lúc viết: trả lời một tin, mỗi câu có đề xuất sẵn.)
    1. Rồng: cho tự tua ×1,75 khi không có chữ (sửa 06 §10)? **Đề xuất: có.**
    2. Rồng: đo Chữ Bẫy trên nhánh riêng, chỉ gộp khi qua đủ cổng? **Đề xuất: có.**
    3. Rồng: hướng D27, D31, D33 (owner-decisions §8.7)? **Đề xuất: chưa đổi núm nào** (mọi núm đã đo đều đẩy G1 quá 90 %); đánh giá lại B1, B7 sau Chữ Bẫy.
