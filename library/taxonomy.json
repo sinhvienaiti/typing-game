@@ -1,0 +1,1981 @@
+{
+  "audioCategoryMap": {
+    "ambience": "ambience",
+    "blast": "explosion",
+    "creature": "creature",
+    "death-big": "death",
+    "death-swarm": "death",
+    "fx-other": "foley",
+    "hit-heavy": "impact",
+    "hit-small": "impact",
+    "key-bad": "typing",
+    "key-ok": "typing",
+    "music": "music",
+    "shot": "shot",
+    "stinger": "stinger",
+    "ui": "ui",
+    "warning": "stinger",
+    "word-reward": "reward"
+  },
+  "audioFamilyMap": {
+    "ban": "shot",
+    "chet": "death",
+    "nen": "ambience",
+    "nhac": "music",
+    "no": "explosion",
+    "phim-ui": "ui",
+    "sinh-vat": "creature",
+    "thuong": "reward",
+    "trung": "impact"
+  },
+  "biomes": {
+    "any": "Mọi vùng",
+    "coast": "Ven biển",
+    "hill": "Đồi",
+    "meadow": "Đồng cỏ",
+    "pine-forest": "Rừng thông",
+    "rainforest": "Rừng mưa",
+    "river": "Sông",
+    "space": "Vũ trụ",
+    "village": "Làng"
+  },
+  "folderMap": {
+    "dragon-hold": {
+      "2d": {
+        "kind": "prop"
+      },
+      "2d/samples": {
+        "kind": "prop"
+      },
+      "3d": {
+        "kind": "prop"
+      },
+      "backdrops": {
+        "kind": "backdrop"
+      },
+      "decals": {
+        "kind": "ground"
+      },
+      "decals/pine-river": {
+        "kind": "ground"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "generals": {
+        "kind": "character"
+      },
+      "ground": {
+        "kind": "ground"
+      },
+      "ground/pine-river": {
+        "kind": "ground"
+      },
+      "houses": {
+        "kind": "building"
+      },
+      "icons": {
+        "kind": "ui"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/props": {
+        "kind": "prop"
+      },
+      "models/units": {
+        "kind": "character"
+      },
+      "props": {
+        "kind": "prop"
+      },
+      "props/pine-river": {
+        "biomes": [
+          "pine-forest",
+          "river"
+        ],
+        "items": {
+          "bridge-old": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "bush-blossom": {
+            "kind": "nature",
+            "subkind": "bush"
+          },
+          "bush-moss": {
+            "kind": "nature",
+            "subkind": "bush"
+          },
+          "cliff-rock-a": {
+            "kind": "nature",
+            "subkind": "cliff"
+          },
+          "cliff-rock-b": {
+            "kind": "nature",
+            "subkind": "cliff"
+          },
+          "grass-tuft": {
+            "kind": "nature",
+            "subkind": "grass"
+          },
+          "lantern-post": {
+            "kind": "prop",
+            "subkind": "post"
+          },
+          "log": {
+            "kind": "nature",
+            "subkind": "log"
+          },
+          "pine-round": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "pine-young": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "rail-fence": {
+            "kind": "prop",
+            "subkind": "fence"
+          },
+          "reed-clump": {
+            "kind": "nature",
+            "subkind": "reed"
+          },
+          "river-stones": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "rock-boulder": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "stump": {
+            "kind": "nature",
+            "subkind": "stump"
+          },
+          "tree-violet": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "wildflower-clump": {
+            "kind": "nature",
+            "subkind": "flower"
+          },
+          "wooden-jetty": {
+            "kind": "structure",
+            "subkind": "jetty"
+          }
+        },
+        "kind": "nature",
+        "perItem": true
+      },
+      "refs": {
+        "kind": "prop"
+      },
+      "traps": {
+        "kind": "trap"
+      },
+      "ui": {
+        "kind": "ui"
+      },
+      "units": {
+        "kind": "character"
+      },
+      "vfx": {
+        "kind": "vfx"
+      }
+    },
+    "space-typing": {
+      "3d": {
+        "kind": "prop"
+      },
+      "Dota-Sounds": {
+        "kind": "foley",
+        "licence": "private-valve",
+        "media": "audio",
+        "notForRelease": true,
+        "perItem": true,
+        "private": true
+      },
+      "bosses": {
+        "kind": "creature"
+      },
+      "combat-vfx": {
+        "kind": "vfx"
+      },
+      "combat-vfx-sequences": {
+        "kind": "motion"
+      },
+      "defense": {
+        "kind": "building"
+      },
+      "duel-targets": {
+        "kind": "prop"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "expansion-v2": {
+        "kind": "prop"
+      },
+      "expansion-v2/boss-parts": {
+        "kind": "creature"
+      },
+      "expansion-v2/conditions": {
+        "kind": "ui"
+      },
+      "expansion-v2/elite": {
+        "kind": "creature"
+      },
+      "expansion-v2/encounter-recipes": {
+        "kind": "ui"
+      },
+      "expansion-v2/expedition": {
+        "kind": "backdrop"
+      },
+      "expansion-v2/flow": {
+        "kind": "ui"
+      },
+      "expansion-v2/learning": {
+        "kind": "ui"
+      },
+      "expansion-v2/meta": {
+        "kind": "ui"
+      },
+      "expansion-v2/relics": {
+        "kind": "item"
+      },
+      "expansion-v2/typing-patterns": {
+        "kind": "ui"
+      },
+      "fx": {
+        "kind": "vfx"
+      },
+      "g01": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g02": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g03": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g04": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g05": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g06": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g07": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g08": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g09": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "g10": {
+        "biomes": [
+          "space"
+        ],
+        "itemPrefixes": {
+          "atlas-life": {
+            "kind": "prop"
+          },
+          "atlas-rocks": {
+            "kind": "prop"
+          },
+          "dust": {
+            "kind": "vfx"
+          },
+          "glow": {
+            "kind": "vfx"
+          }
+        },
+        "kind": "backdrop",
+        "perItem": true
+      },
+      "icons": {
+        "kind": "ui"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/bosses": {
+        "kind": "creature"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/items": {
+        "kind": "item"
+      },
+      "models/raw": {
+        "kind": "prop"
+      },
+      "models/ships": {
+        "kind": "vehicle"
+      },
+      "models/skills": {
+        "kind": "vfx"
+      },
+      "pickups": {
+        "kind": "item"
+      },
+      "projectiles": {
+        "kind": "projectile"
+      },
+      "public/assets/audio": {
+        "items": {
+          "announcer-base": {
+            "kind": "voice"
+          }
+        },
+        "kind": "foley",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/ambient": {
+        "kind": "ambience",
+        "media": "audio"
+      },
+      "public/assets/audio/announcer": {
+        "kind": "voice",
+        "media": "audio"
+      },
+      "public/assets/audio/dragon": {
+        "items": {
+          "combust": {
+            "kind": "explosion"
+          },
+          "fire-breath": {
+            "kind": "shot"
+          },
+          "fire-burst": {
+            "kind": "shot"
+          },
+          "fire-explosion": {
+            "kind": "explosion"
+          },
+          "fireball-explosion": {
+            "kind": "explosion"
+          },
+          "fireball-swell": {
+            "kind": "shot"
+          },
+          "roar": {
+            "kind": "creature"
+          }
+        },
+        "kind": "shot",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/duel": {
+        "kind": "foley",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/music": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/music/songs": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/duel/sfx": {
+        "items": {
+          "bomb-impact": {
+            "kind": "explosion"
+          },
+          "bomb-launch": {
+            "kind": "shot"
+          },
+          "cataclysm": {
+            "kind": "explosion"
+          },
+          "disrupt-emp": {
+            "kind": "impact"
+          },
+          "energy-impact": {
+            "kind": "impact"
+          },
+          "heavy-launch": {
+            "kind": "shot"
+          },
+          "intercept": {
+            "kind": "impact"
+          },
+          "kinetic-impact": {
+            "kind": "impact"
+          },
+          "laser-launch": {
+            "kind": "shot"
+          },
+          "lock-acquire": {
+            "kind": "ui"
+          },
+          "missile-impact": {
+            "kind": "explosion"
+          },
+          "missile-launch": {
+            "kind": "shot"
+          },
+          "precision": {
+            "kind": "reward"
+          },
+          "repair-energy": {
+            "kind": "reward"
+          },
+          "round-draw": {
+            "kind": "stinger"
+          },
+          "round-loss": {
+            "kind": "stinger"
+          },
+          "round-win": {
+            "kind": "stinger"
+          },
+          "scan-pulse": {
+            "kind": "ui"
+          },
+          "shield-break": {
+            "kind": "impact"
+          },
+          "shield-hit": {
+            "kind": "impact"
+          },
+          "ship-destruction": {
+            "kind": "death"
+          },
+          "typing-miss": {
+            "kind": "typing"
+          }
+        },
+        "kind": "impact",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/duel/war": {
+        "items": {
+          "explosion-a": {
+            "kind": "explosion"
+          },
+          "explosion-b": {
+            "kind": "explosion"
+          },
+          "explosion-big": {
+            "kind": "explosion"
+          },
+          "gun-a": {
+            "kind": "shot"
+          },
+          "gun-b": {
+            "kind": "shot"
+          },
+          "gunshot-real": {
+            "kind": "shot"
+          },
+          "hit-a": {
+            "kind": "impact"
+          },
+          "hit-b": {
+            "kind": "impact"
+          },
+          "hit-heavy": {
+            "kind": "impact"
+          },
+          "impact-design": {
+            "kind": "impact"
+          },
+          "laser-impact": {
+            "kind": "impact"
+          },
+          "missile": {
+            "kind": "shot"
+          },
+          "railgun": {
+            "kind": "shot"
+          },
+          "rocket": {
+            "kind": "shot"
+          },
+          "shield": {
+            "kind": "impact"
+          },
+          "tank-fire": {
+            "kind": "shot"
+          }
+        },
+        "kind": "shot",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/music": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/music/songs": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/music/worlds": {
+        "kind": "music",
+        "media": "audio"
+      },
+      "public/assets/audio/sfx": {
+        "kind": "foley",
+        "media": "audio"
+      },
+      "public/assets/audio/sfx/kenney": {
+        "items": {
+          "confirm": {
+            "kind": "ui"
+          },
+          "crystal-break": {
+            "kind": "foley"
+          },
+          "crystal-hit": {
+            "kind": "impact"
+          },
+          "engine-large": {
+            "kind": "movement"
+          },
+          "error": {
+            "kind": "ui"
+          },
+          "explosion-crunch": {
+            "kind": "explosion"
+          },
+          "explosion-crunch-big": {
+            "kind": "explosion"
+          },
+          "explosion-crunch-chain": {
+            "kind": "explosion"
+          },
+          "explosion-low": {
+            "kind": "explosion"
+          },
+          "force-field": {
+            "kind": "impact"
+          },
+          "force-field-cast": {
+            "kind": "shot"
+          },
+          "laser-large": {
+            "kind": "shot"
+          },
+          "laser-small": {
+            "kind": "shot"
+          },
+          "thruster": {
+            "kind": "movement"
+          }
+        },
+        "kind": "ui",
+        "media": "audio",
+        "perItem": true
+      },
+      "public/assets/audio/stingers": {
+        "kind": "stinger",
+        "media": "audio"
+      },
+      "puzzle": {
+        "kind": "prop"
+      },
+      "relics": {
+        "kind": "item"
+      },
+      "ships": {
+        "kind": "vehicle"
+      },
+      "src/assets/audio": {
+        "kind": "foley",
+        "media": "audio",
+        "perItem": true
+      },
+      "src/assets/audio/ui": {
+        "items": {
+          "reward-big": {
+            "kind": "reward"
+          },
+          "reward-shimmer": {
+            "kind": "reward"
+          },
+          "reward-small": {
+            "kind": "reward"
+          },
+          "streak": {
+            "kind": "reward"
+          }
+        },
+        "kind": "ui",
+        "media": "audio",
+        "perItem": true
+      },
+      "td": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/enemies": {
+        "kind": "creature",
+        "style": "viet-village"
+      },
+      "td/generation-2026-10-22-p8-p9-p12": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/generation-l1-l3-s1-s3-s12": {
+        "kind": "prop",
+        "perItem": true,
+        "style": "viet-village"
+      },
+      "td/helpers": {
+        "kind": "character",
+        "style": "viet-village"
+      },
+      "td/scenery": {
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/coast": {
+        "biomes": [
+          "coast"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/meadow": {
+        "biomes": [
+          "meadow"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/rainforest": {
+        "biomes": [
+          "rainforest"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/scenery/shared": {
+        "biomes": [
+          "any"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature",
+        "style": "viet-village"
+      },
+      "td/ui": {
+        "kind": "ui",
+        "style": "viet-village"
+      },
+      "td/units": {
+        "kind": "character",
+        "style": "viet-village"
+      }
+    },
+    "typing-defense": {
+      "2d-prompts": {
+        "kind": "prop"
+      },
+      "3d": {
+        "kind": "prop"
+      },
+      "anim": {
+        "kind": "motion"
+      },
+      "animals": {
+        "kind": "creature"
+      },
+      "backdrops": {
+        "kind": "backdrop"
+      },
+      "bosses": {
+        "kind": "creature"
+      },
+      "branches": {
+        "kind": "building"
+      },
+      "buildings": {
+        "kind": "building"
+      },
+      "enemies": {
+        "kind": "creature"
+      },
+      "helpers": {
+        "kind": "character"
+      },
+      "heroes": {
+        "kind": "character"
+      },
+      "kits": {
+        "kind": "building",
+        "subkind": "kit-part"
+      },
+      "landmarks": {
+        "items": {
+          "cau-do": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "cau-go": {
+            "kind": "structure",
+            "subkind": "bridge"
+          },
+          "cau-tau": {
+            "kind": "structure",
+            "subkind": "jetty"
+          },
+          "choi-canh-doi": {
+            "kind": "building",
+            "subkind": "hut"
+          },
+          "da-ke": {
+            "kind": "nature",
+            "subkind": "rock"
+          },
+          "goc-da-rong": {
+            "kind": "nature",
+            "subkind": "tree"
+          },
+          "hai-dang": {
+            "kind": "structure",
+            "subkind": "lighthouse"
+          },
+          "nha-rai-da": {
+            "kind": "building",
+            "subkind": "house"
+          },
+          "re-vom": {
+            "kind": "structure",
+            "subkind": "arch"
+          },
+          "thac-ho-sut": {
+            "kind": "nature",
+            "subkind": "waterfall"
+          },
+          "them-da-trang": {
+            "kind": "structure",
+            "subkind": "stairs"
+          },
+          "vach-thac-bac": {
+            "kind": "nature",
+            "subkind": "cliff"
+          }
+        },
+        "kind": "structure",
+        "perItem": true
+      },
+      "loot": {
+        "kind": "item"
+      },
+      "models": {
+        "kind": "prop"
+      },
+      "models/attachments": {
+        "kind": "weapon"
+      },
+      "models/buildings": {
+        "kind": "building"
+      },
+      "models/enemies": {
+        "kind": "creature"
+      },
+      "models/helpers": {
+        "kind": "character"
+      },
+      "models/heroes": {
+        "kind": "character"
+      },
+      "models/loot": {
+        "kind": "item"
+      },
+      "models/projectiles": {
+        "kind": "projectile"
+      },
+      "models/props": {
+        "kind": "prop"
+      },
+      "models/units": {
+        "kind": "character"
+      },
+      "portraits": {
+        "kind": "character"
+      },
+      "projectiles": {
+        "kind": "projectile"
+      },
+      "props": {
+        "kind": "prop"
+      },
+      "ruins": {
+        "kind": "structure",
+        "subkind": "ruin"
+      },
+      "scenery": {
+        "kind": "nature"
+      },
+      "scenery/coast": {
+        "biomes": [
+          "coast"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/meadow": {
+        "biomes": [
+          "meadow"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/rainforest": {
+        "biomes": [
+          "rainforest"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "scenery/shared": {
+        "biomes": [
+          "any"
+        ],
+        "hyphenVariants": true,
+        "kind": "nature"
+      },
+      "tripo-spares": {
+        "kind": "prop"
+      },
+      "ui": {
+        "kind": "ui"
+      },
+      "units": {
+        "kind": "character"
+      },
+      "vfx": {
+        "kind": "vfx"
+      },
+      "workers": {
+        "kind": "character"
+      }
+    },
+    "typing-survival": {
+      "ui": {
+        "kind": "ui"
+      }
+    }
+  },
+  "gameStyles": {
+    "dragon-hold": "mythic-forest",
+    "space-typing": "sci-fi-space",
+    "typing-defense": "viet-village",
+    "typing-survival": "steel-station"
+  },
+  "kinds": {
+    "audio": {
+      "ambience": {
+        "label": "Âm nền",
+        "subkinds": {
+          "engine": "Động cơ",
+          "forest": "Rừng",
+          "river": "Sông",
+          "station": "Trạm",
+          "wind": "Gió"
+        }
+      },
+      "creature": {
+        "label": "Tiếng sinh vật",
+        "subkinds": {
+          "call": "Kêu",
+          "growl": "Gừ",
+          "howl": "Hú",
+          "roar": "Gầm"
+        }
+      },
+      "death": {
+        "label": "Âm chết",
+        "subkinds": {
+          "destruction": "Phá hủy",
+          "large": "Quái lớn",
+          "swarm": "Bầy nhỏ"
+        }
+      },
+      "explosion": {
+        "label": "Âm nổ",
+        "subkinds": {
+          "blast": "Vụ nổ",
+          "chain": "Nổ dây chuyền",
+          "fire": "Lửa"
+        }
+      },
+      "foley": {
+        "label": "Tiếng động",
+        "subkinds": {
+          "break": "Vỡ",
+          "cloth": "Vải",
+          "knock": "Gõ cửa",
+          "mechanical": "Cơ khí"
+        }
+      },
+      "impact": {
+        "label": "Âm va chạm",
+        "subkinds": {
+          "heavy": "Nặng",
+          "metal": "Kim loại",
+          "shield": "Khiên",
+          "small": "Nhẹ",
+          "stone": "Đá",
+          "wood": "Gỗ"
+        }
+      },
+      "movement": {
+        "label": "Âm di chuyển",
+        "subkinds": {
+          "footstep": "Bước chân",
+          "thruster": "Động cơ đẩy",
+          "whoosh": "Lướt",
+          "wing": "Cánh"
+        }
+      },
+      "music": {
+        "label": "Nhạc",
+        "subkinds": {
+          "boss": "Trùm",
+          "calm": "Êm dịu",
+          "combat": "Giao chiến",
+          "menu": "Trình đơn"
+        }
+      },
+      "reward": {
+        "label": "Âm thưởng",
+        "subkinds": {
+          "coin": "Nhận xu",
+          "level": "Thăng cấp",
+          "streak": "Chuỗi đúng",
+          "word": "Hoàn thành từ"
+        }
+      },
+      "shot": {
+        "label": "Âm phóng, bắn",
+        "subkinds": {
+          "breath": "Khạc",
+          "gun": "Súng",
+          "laser": "Laser",
+          "launch": "Phóng"
+        }
+      },
+      "stinger": {
+        "label": "Âm báo chuyển cảnh",
+        "subkinds": {
+          "defeat": "Thất bại",
+          "round": "Hiệp",
+          "victory": "Chiến thắng",
+          "warning": "Báo nguy"
+        }
+      },
+      "typing": {
+        "label": "Âm gõ phím",
+        "subkinds": {
+          "correction": "Sửa chữ",
+          "key-bad": "Phím sai",
+          "key-ok": "Phím đúng"
+        }
+      },
+      "ui": {
+        "label": "Âm giao diện",
+        "subkinds": {
+          "click": "Bấm",
+          "close": "Đóng",
+          "confirm": "Xác nhận",
+          "error": "Lỗi",
+          "hover": "Rê chuột",
+          "open": "Mở"
+        }
+      },
+      "voice": {
+        "label": "Giọng người",
+        "subkinds": {
+          "announcer": "Xướng giọng",
+          "dialogue": "Hội thoại"
+        }
+      }
+    },
+    "visual": {
+      "backdrop": {
+        "label": "Phông cảnh",
+        "subkinds": {
+          "atlas": "Tập ảnh",
+          "plate": "Lớp cảnh",
+          "sky": "Bầu trời",
+          "world": "Thế giới"
+        }
+      },
+      "building": {
+        "label": "Công trình",
+        "subkinds": {
+          "barracks": "Doanh trại",
+          "farm": "Nông trại",
+          "house": "Nhà",
+          "hut": "Chòi, lều",
+          "keep": "Thành lũy",
+          "kit-part": "Bộ phận lắp ghép",
+          "mine": "Mỏ",
+          "shrine": "Miếu",
+          "tower": "Tháp",
+          "workshop": "Xưởng"
+        }
+      },
+      "character": {
+        "label": "Nhân vật",
+        "subkinds": {
+          "general": "Tướng",
+          "guide": "Người hướng dẫn",
+          "helper": "Trợ thủ",
+          "hero": "Anh hùng",
+          "portrait": "Chân dung",
+          "unit": "Quân",
+          "worker": "Thợ"
+        }
+      },
+      "creature": {
+        "label": "Sinh vật",
+        "subkinds": {
+          "animal": "Động vật",
+          "boss": "Trùm",
+          "dragon": "Rồng",
+          "enemy": "Địch",
+          "insect": "Côn trùng"
+        }
+      },
+      "ground": {
+        "label": "Mặt đất",
+        "subkinds": {
+          "decal": "Dấu phủ",
+          "path": "Đường đi",
+          "terrain": "Địa hình",
+          "tile": "Ô nền"
+        }
+      },
+      "item": {
+        "label": "Vật phẩm",
+        "subkinds": {
+          "chest": "Rương",
+          "coin": "Đồng xu",
+          "equipment": "Trang bị",
+          "loot": "Chiến lợi phẩm",
+          "pickup": "Vật phẩm nhặt",
+          "relic": "Di vật",
+          "resource": "Tài nguyên"
+        }
+      },
+      "motion": {
+        "label": "Chuyển động",
+        "subkinds": {
+          "animation": "Hoạt ảnh",
+          "clip": "Đoạn chuyển động",
+          "pose": "Tư thế",
+          "sequence": "Chuỗi hình"
+        }
+      },
+      "nature": {
+        "label": "Thiên nhiên",
+        "subkinds": {
+          "bamboo": "Tre",
+          "bush": "Bụi cây",
+          "cliff": "Vách đá",
+          "flower": "Hoa",
+          "grass": "Cỏ",
+          "log": "Khúc gỗ",
+          "reed": "Lau sậy",
+          "rock": "Đá",
+          "stump": "Gốc cây",
+          "tree": "Cây",
+          "water": "Nước",
+          "waterfall": "Thác"
+        }
+      },
+      "projectile": {
+        "label": "Đạn bay",
+        "subkinds": {
+          "arrow": "Mũi tên",
+          "beam": "Tia",
+          "bullet": "Viên đạn",
+          "fireball": "Cầu lửa",
+          "missile": "Tên lửa"
+        }
+      },
+      "prop": {
+        "label": "Đạo cụ",
+        "subkinds": {
+          "barrel": "Thùng tròn",
+          "basket": "Giỏ",
+          "cart": "Xe đẩy",
+          "crate": "Thùng",
+          "debris": "Mảnh vụn",
+          "fence": "Hàng rào rời",
+          "lantern": "Đèn lồng",
+          "post": "Cột",
+          "scaffold": "Giàn"
+        }
+      },
+      "structure": {
+        "label": "Kết cấu",
+        "subkinds": {
+          "arch": "Vòm",
+          "bridge": "Cầu",
+          "dais": "Bệ",
+          "fence": "Hàng rào",
+          "gate": "Cổng",
+          "jetty": "Cầu tàu",
+          "lighthouse": "Hải đăng",
+          "ruin": "Phế tích",
+          "stairs": "Bậc thang",
+          "wall": "Tường",
+          "well": "Giếng"
+        }
+      },
+      "trap": {
+        "label": "Bẫy",
+        "subkinds": {
+          "bomb": "Bom",
+          "mine": "Mìn",
+          "snare": "Bẫy giữ",
+          "spike": "Chông"
+        }
+      },
+      "ui": {
+        "label": "Giao diện",
+        "subkinds": {
+          "badge": "Huy hiệu",
+          "button": "Nút",
+          "card": "Thẻ",
+          "cursor": "Con trỏ",
+          "icon": "Biểu tượng",
+          "panel": "Bảng"
+        }
+      },
+      "vehicle": {
+        "label": "Phương tiện",
+        "subkinds": {
+          "fighter": "Tiêm kích",
+          "ship": "Tàu",
+          "tank": "Xe tăng",
+          "transport": "Vận tải"
+        }
+      },
+      "vfx": {
+        "label": "Hiệu ứng",
+        "subkinds": {
+          "aftermath": "Dư âm",
+          "aura": "Hào quang",
+          "charge": "Tụ lực",
+          "explosion": "Vụ nổ",
+          "impact": "Va chạm",
+          "release": "Phóng",
+          "trail": "Vệt bay"
+        }
+      },
+      "weapon": {
+        "label": "Vũ khí",
+        "subkinds": {
+          "axe": "Rìu",
+          "bow": "Cung",
+          "cannon": "Đại bác",
+          "crossbow": "Nỏ",
+          "gun": "Súng",
+          "hammer": "Búa",
+          "shield": "Khiên",
+          "spear": "Giáo"
+        }
+      }
+    }
+  },
+  "pipeline": {
+    "concept-only": "Chỉ có ảnh ý tưởng",
+    "glb-original": "GLB gốc",
+    "processed": "Đã xử lý",
+    "runtime": "Đang dùng trong game",
+    "tripo-requested": "Đã yêu cầu Tripo"
+  },
+  "related": [
+    [
+      "hut",
+      "house"
+    ],
+    [
+      "jetty",
+      "bridge"
+    ],
+    [
+      "click",
+      "knock"
+    ],
+    [
+      "stone",
+      "cliff"
+    ],
+    [
+      "bush",
+      "tree"
+    ],
+    [
+      "bow",
+      "arrow"
+    ]
+  ],
+  "schemaVersion": 1,
+  "status": {
+    "draft": "Nháp",
+    "pass": "Đạt",
+    "private": "Riêng tư",
+    "provisional": "Dùng tạm",
+    "rejected": "Bị loại",
+    "requested": "Đã yêu cầu",
+    "review": "Chờ duyệt",
+    "shipped": "Đã phát hành",
+    "unscored": "Chưa chấm"
+  },
+  "styles": {
+    "mythic-forest": "Rừng huyền thoại",
+    "neutral": "Trung tính",
+    "sci-fi-space": "Vũ trụ khoa học viễn tưởng",
+    "steel-station": "Trạm thép",
+    "viet-village": "Làng Việt"
+  },
+  "synonyms": [
+    [
+      "ant",
+      "kien",
+      "kiến"
+    ],
+    [
+      "arrow",
+      "arrows",
+      "ten",
+      "tên"
+    ],
+    [
+      "axe",
+      "riu",
+      "rìu"
+    ],
+    [
+      "bamboo",
+      "tre"
+    ],
+    [
+      "bandana",
+      "headband",
+      "khan",
+      "khăn"
+    ],
+    [
+      "basket",
+      "gio",
+      "giỏ"
+    ],
+    [
+      "bird",
+      "chim"
+    ],
+    [
+      "black",
+      "den",
+      "đen"
+    ],
+    [
+      "blossom",
+      "flower",
+      "flowering",
+      "hoa"
+    ],
+    [
+      "blue",
+      "xanh"
+    ],
+    [
+      "book",
+      "sach",
+      "sách"
+    ],
+    [
+      "bow",
+      "crossbow",
+      "cung",
+      "no",
+      "nỏ"
+    ],
+    [
+      "bridge",
+      "cầu"
+    ],
+    [
+      "brown",
+      "nau",
+      "nâu"
+    ],
+    [
+      "buffalo",
+      "trau",
+      "trâu"
+    ],
+    [
+      "bush",
+      "shrub",
+      "bui",
+      "bụi"
+    ],
+    [
+      "click",
+      "tap",
+      "tick",
+      "gõ",
+      "bấm",
+      "bam"
+    ],
+    [
+      "cliff",
+      "vach",
+      "vách"
+    ],
+    [
+      "club",
+      "chuy",
+      "gay",
+      "chùy",
+      "gậy"
+    ],
+    [
+      "dragonfly",
+      "chuồn chuồn",
+      "chuon chuon"
+    ],
+    [
+      "fan",
+      "quat",
+      "quạt"
+    ],
+    [
+      "feather",
+      "long",
+      "lông"
+    ],
+    [
+      "goggles",
+      "kinh",
+      "kính"
+    ],
+    [
+      "gold",
+      "golden",
+      "yellow",
+      "vang",
+      "vàng"
+    ],
+    [
+      "hair",
+      "hairstyle",
+      "toc",
+      "tóc"
+    ],
+    [
+      "hammer",
+      "mallet",
+      "bua",
+      "búa"
+    ],
+    [
+      "hat",
+      "helmet",
+      "mu",
+      "non",
+      "mũ",
+      "nón"
+    ],
+    [
+      "house",
+      "home",
+      "nhà",
+      "nha"
+    ],
+    [
+      "hut",
+      "cottage",
+      "leu",
+      "shack",
+      "cabin",
+      "chòi",
+      "choi",
+      "lều"
+    ],
+    [
+      "insect",
+      "bug"
+    ],
+    [
+      "jetty",
+      "dock",
+      "pier",
+      "wharf",
+      "cầu tàu",
+      "cau tau"
+    ],
+    [
+      "knock",
+      "gõ cửa",
+      "go cua"
+    ],
+    [
+      "leaf",
+      "leafy",
+      "la",
+      "lá"
+    ],
+    [
+      "moss",
+      "mossy",
+      "reu",
+      "rêu"
+    ],
+    [
+      "mustache",
+      "moustache",
+      "ria"
+    ],
+    [
+      "pickaxe",
+      "cuoc",
+      "cuốc"
+    ],
+    [
+      "pig",
+      "piggy",
+      "heo"
+    ],
+    [
+      "pine",
+      "evergreen",
+      "thong",
+      "thông"
+    ],
+    [
+      "purple",
+      "violet",
+      "tim",
+      "tím"
+    ],
+    [
+      "red",
+      "do",
+      "đỏ"
+    ],
+    [
+      "scaffold",
+      "gian",
+      "giàn"
+    ],
+    [
+      "shield",
+      "khien",
+      "khiên"
+    ],
+    [
+      "spike",
+      "spikes",
+      "chong"
+    ],
+    [
+      "stone",
+      "rock",
+      "rocks",
+      "rocky",
+      "stones",
+      "đá"
+    ],
+    [
+      "tree",
+      "cay",
+      "cây"
+    ],
+    [
+      "wasp",
+      "ong"
+    ],
+    [
+      "water",
+      "nuoc",
+      "nước"
+    ],
+    [
+      "waterfall",
+      "thac",
+      "thác"
+    ],
+    [
+      "white",
+      "trang",
+      "trắng"
+    ],
+    [
+      "wolf",
+      "soi",
+      "sói"
+    ],
+    [
+      "wood",
+      "wooden",
+      "go",
+      "timber",
+      "gỗ"
+    ]
+  ],
+  "tags": [
+    "aftermath",
+    "ambience",
+    "animation",
+    "ant",
+    "archer",
+    "arrow",
+    "atlas",
+    "aura",
+    "axe",
+    "backdrop",
+    "badge",
+    "bamboo",
+    "bandana",
+    "barracks",
+    "barrel",
+    "basket",
+    "bell",
+    "bird",
+    "black",
+    "blossom",
+    "blue",
+    "boar",
+    "bomb",
+    "book",
+    "boss",
+    "boulder",
+    "bow",
+    "branch",
+    "bridge",
+    "bright",
+    "bronze",
+    "brown",
+    "buffalo",
+    "bullet",
+    "bush",
+    "button",
+    "call",
+    "cannon",
+    "canopy",
+    "card",
+    "cart",
+    "cartoon",
+    "charge",
+    "chest",
+    "chime",
+    "click",
+    "cliff",
+    "clip",
+    "close",
+    "cloth",
+    "coast",
+    "coin",
+    "cold",
+    "confirm",
+    "copper",
+    "crate",
+    "creature",
+    "crossbow",
+    "crystal",
+    "cursor",
+    "dais",
+    "dark",
+    "death",
+    "debris",
+    "decal",
+    "defeat",
+    "dragon",
+    "dragonfly",
+    "drum",
+    "dry",
+    "electric",
+    "enemy",
+    "energy",
+    "engine",
+    "equipment",
+    "error",
+    "evergreen",
+    "explosion",
+    "fan",
+    "fantasy",
+    "farm",
+    "feather",
+    "fence",
+    "fighter",
+    "fire",
+    "flame",
+    "flower",
+    "flute",
+    "foley",
+    "footstep",
+    "forest",
+    "frost",
+    "gate",
+    "general",
+    "glass",
+    "glow",
+    "goggles",
+    "gold",
+    "gong",
+    "grass",
+    "gravel",
+    "green",
+    "ground",
+    "growl",
+    "guide",
+    "hair",
+    "hammer",
+    "harp",
+    "hat",
+    "healer",
+    "heavy",
+    "helmet",
+    "helper",
+    "hero",
+    "hill",
+    "house",
+    "hover",
+    "howl",
+    "hut",
+    "ice",
+    "icon",
+    "impact",
+    "insect",
+    "intact",
+    "iron",
+    "jetty",
+    "keep",
+    "kinetic",
+    "knock",
+    "lantern",
+    "large",
+    "laser",
+    "leaf",
+    "leather",
+    "light",
+    "log",
+    "long",
+    "lookout",
+    "loop",
+    "loot",
+    "loss",
+    "low",
+    "meadow",
+    "mechanical",
+    "medium",
+    "metal",
+    "mine",
+    "missile",
+    "mossy",
+    "motion",
+    "movement",
+    "mud",
+    "music",
+    "neutral",
+    "new",
+    "old",
+    "open",
+    "ornate",
+    "panel",
+    "path",
+    "pickaxe",
+    "pickup",
+    "pig",
+    "pine",
+    "pitched",
+    "plasma",
+    "plate",
+    "pose",
+    "post",
+    "projectile",
+    "purple",
+    "rainforest",
+    "red",
+    "reed",
+    "release",
+    "relic",
+    "resource",
+    "reward",
+    "river",
+    "roar",
+    "rock",
+    "rocket",
+    "root",
+    "rope",
+    "round",
+    "ruined",
+    "rustic",
+    "sand",
+    "scaffold",
+    "sci-fi",
+    "seamless",
+    "sequence",
+    "shield",
+    "ship",
+    "short",
+    "shot",
+    "shrine",
+    "silver",
+    "sky",
+    "small",
+    "snare",
+    "snow",
+    "soft",
+    "soil",
+    "space",
+    "spear",
+    "spike",
+    "square",
+    "steel",
+    "stilts",
+    "stinger",
+    "stone",
+    "stump",
+    "stylized",
+    "tall",
+    "tank",
+    "tap",
+    "terrain",
+    "thatch",
+    "thruster",
+    "tick",
+    "tile",
+    "timber",
+    "tower",
+    "trail",
+    "transport",
+    "trap",
+    "tree",
+    "typing",
+    "ui",
+    "unit",
+    "vehicle",
+    "vfx",
+    "victory",
+    "village",
+    "voice",
+    "wall",
+    "warm",
+    "warning",
+    "wasp",
+    "water",
+    "waterfall",
+    "well",
+    "white",
+    "whoosh",
+    "win",
+    "wing",
+    "wolf",
+    "wood",
+    "wooden",
+    "worker",
+    "workshop",
+    "world",
+    "zither"
+  ],
+  "viTokens": {
+    "cau": {
+      "folders": [
+        "typing-defense:landmarks"
+      ],
+      "word": "bridge"
+    },
+    "da": {
+      "folders": [
+        "scenery/",
+        "landmarks/"
+      ],
+      "word": "stone"
+    }
+  }
+}
