@@ -170,6 +170,8 @@ test('index: mirror rule, readers and SOURCES.json for a game without Space\'s s
   assert.equal(mirrorImage('ships/ship-01-vanguard.glb'), 'art-src/ships/vanguard-top-hd.png');
   assert.equal(mirrorImage('skills/dragon-fireball.glb'), null);
   assert.equal(mirrorImage('units/warden.glb', 'art'), 'art/units/warden.png');
+  assert.equal(mirrorImage('kits/keep-kit-l2.fix1.glb'), 'art-src/kits/keep-kit-l2.png');
+  assert.equal(mirrorImage('kits/keep-kit-l2.fixed.glb'), 'art-src/kits/keep-kit-l2.fixed.png');
   assert.deepEqual(readers({ models: { 'units/a': { source: 'units/a.glb', placeholder: 'units/b.glb' } } }, [{ id: 'razor', rawModelSources: ['ship-02-razor.glb'] }]), {
     'units/a.glb': ['units/a'], 'units/b.glb': ['units/a (placeholder)'], 'ships/ship-02-razor.glb': ['ships/razor'],
     'bosses/tyrant-g01.glb': ['bosses/tyrant-g01', 'bosses/3d/tyrant-g01 (prepare-boss-3d)', 'bosses/auriel-hero (--hero-clips)'],

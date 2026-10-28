@@ -33,7 +33,8 @@ export function mirrorImage(file, artSrc = 'art-src') {
   if (TEXT_TO_3D.some((folder) => file.startsWith(folder))) return null;
   if (file === 'ships/ship-01-vanguard.glb') return artSrc + '/ships/vanguard-top-hd.png';
   if (file.startsWith('ships/')) return artSrc + '/' + file.replace(/\.glb$/, '-2d.png');
-  return artSrc + '/' + file.replace(/\.glb$/, '.png');
+  // A fixed copy (<name>.fixN.glb, the original left untouched) mirrors the original's image.
+  return artSrc + '/' + file.replace(/(\.fix\d+)?\.glb$/, '.png');
 }
 
 /** Build entries that read each file: the preset, the ship catalog and the G01 packagers. */
