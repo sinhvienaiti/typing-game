@@ -1,0 +1,44 @@
+[
+  {
+    "query": "hut",
+    "filters": {"type": "3d"},
+    "mustInclude": ["dragon-hold:houses/herb-hut", "typing-defense:landmarks/choi-canh-doi", "typing-defense:landmarks/nha-rai-da", "typing-defense:kits/barracks-kit-l2"],
+    "topN": 6
+  },
+  {
+    "query": "chòi",
+    "filters": {"type": "3d"},
+    "mustInclude": ["dragon-hold:houses/herb-hut", "typing-defense:landmarks/choi-canh-doi", "typing-defense:landmarks/nha-rai-da", "typing-defense:kits/barracks-kit-l2"],
+    "topN": 6
+  },
+  {
+    "query": "choi",
+    "filters": {"type": "3d"},
+    "mustInclude": ["dragon-hold:houses/herb-hut", "typing-defense:landmarks/choi-canh-doi", "typing-defense:landmarks/nha-rai-da", "typing-defense:kits/barracks-kit-l2"],
+    "topN": 6
+  },
+  {
+    "query": "jetty",
+    "filters": {"type": "3d"},
+    "mustInclude": ["typing-defense:landmarks/cau-tau"],
+    "topN": 3
+  },
+  {
+    "query": "bridge",
+    "filters": {},
+    "mustInclude": ["typing-defense:landmarks/cau-go", "dragon-hold:props/pine-river/bridge-old"],
+    "topN": 5
+  },
+  {
+    "query": "rock",
+    "filters": {"biome": "pine-forest"},
+    "mustInclude": ["dragon-hold:props/pine-river/rock-boulder", "dragon-hold:props/pine-river/rock-slab", "dragon-hold:props/pine-river/river-stones"],
+    "topN": 20
+  },
+  {
+    "query": "wood click",
+    "filters": {"type": "audio"},
+    "mustInclude": ["kenney:impact-sounds/Audio/impactWood_light"],
+    "topN": 3
+  }
+]

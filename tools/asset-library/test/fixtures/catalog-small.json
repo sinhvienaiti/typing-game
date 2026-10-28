@@ -1,0 +1,44 @@
+{
+  "schema": "asset-library/1",
+  "cards": [
+    {
+      "uid": "dragon-hold:houses/herb-hut",
+      "origin": "dragon-hold",
+      "type": "model3d",
+      "name": "Herb Hut",
+      "aliases": ["Lều thuốc", "H1"],
+      "kind": "building",
+      "subkind": "hut",
+      "tags": ["wood", "thatch"],
+      "biome": ["pine-forest", "river"],
+      "style": "mythic-forest",
+      "status": "shipped",
+      "pipeline": "runtime",
+      "quality": {"score2d": 9.5, "score3d": 9},
+      "model": {"triangles": {"original": 9858, "high": 4400, "medium": 2000}, "skinned": true, "clips": ["idle"]},
+      "provenance": {"tripoFile": "fantasy+cottage+3d+model.glb"},
+      "usedBy": [{"game": "dragon-hold", "shipped": true}, {"game": "typing-defense", "imported": true}],
+      "files": [
+        {"path": "games/dragon-hold/art-src/3d/houses/herb-hut.glb", "role": "glb-original", "onDrive": "yes"},
+        {"path": "games/dragon-hold/public/assets/dragon-hold/models/herb-hut.high.glb", "role": "runtime-high", "onDrive": "no"},
+        {"path": "games/dragon-hold/art-src/houses/herb-hut.prompt.txt", "role": "prompt", "hidden": true, "onDrive": "yes"},
+        {"path": "games/dragon-hold/art-src/icons/herb-hut.png", "role": "icon-256", "onDrive": "yes"},
+        {"path": "games/dragon-hold/art-src/houses/obsolete-needle.png", "role": "rejected", "hidden": true, "onDrive": "no"}
+      ]
+    },
+    {"uid": "typing-defense:landmarks/choi-canh-doi", "origin": "typing-defense", "type": "model3d", "aliases": ["Chòi canh", "thatched hut 3d model"], "kind": "building", "subkind": "hut", "status": "pass", "pipeline": "glb-original", "quality": {"score3d": 9}, "model": {"triangles": {"original": 7733}}, "files": []},
+    {"uid": "typing-defense:landmarks/nha-rai-da", "origin": "typing-defense", "type": "model3d", "aliases": ["Nhà Rái Đá", "thatched hut 3d model"], "kind": "building", "subkind": "house", "status": "provisional", "pipeline": "glb-original", "quality": {"score2d": 9.5, "score3d": 8.5}, "model": {"triangles": {"original": 7289}}, "files": []},
+    {"uid": "typing-defense:kits/barracks-kit-l2", "origin": "typing-defense", "type": "model3d", "name": "Barracks", "aliases": ["wooden hut 3d model"], "kind": "building", "subkind": "kit-part", "status": "pass", "files": []},
+    {"uid": "typing-defense:landmarks/cau-tau", "origin": "typing-defense", "type": "model3d", "name": "Wooden Jetty", "aliases": ["Cầu tàu"], "kind": "structure", "subkind": "jetty", "status": "pass", "files": []},
+    {"uid": "typing-defense:landmarks/cau-go", "origin": "typing-defense", "type": "model3d", "name": "Wooden Bridge", "aliases": ["Cầu gỗ"], "kind": "structure", "subkind": "bridge", "status": "pass", "files": []},
+    {"uid": "dragon-hold:props/pine-river/rock-boulder", "origin": "dragon-hold", "type": "image", "name": "Rock Boulder", "kind": "nature", "subkind": "rock", "biome": ["pine-forest", "river"], "status": "unscored", "quality": {"score2d": 8}, "files": []},
+    {"uid": "kenney:impact-sounds/Audio/impactWood_light", "origin": "kenney", "type": "audio", "name": "impactWood_light", "aliases": ["impactwood-light", "impact/wood"], "kind": "impact", "subkind": "wood", "tags": ["impact", "wood"], "status": "unscored", "quality": {"score": 4}, "files": [{"path": "~/AudioLab/libraries/kenney/impact-sounds/Audio/impactWood_light_000.ogg", "role": "variant", "onDrive": "external"}]},
+    {"uid": "test:draft", "type": "image", "name": "Hut draft", "status": "draft", "files": []},
+    {"uid": "test:rejected", "type": "image", "name": "Hut rejected", "status": "rejected", "files": []},
+    {"uid": "test:review", "type": "image", "name": "Hut review", "status": "review", "files": []},
+    {"uid": "test:requested", "type": "model3d", "name": "Hut requested", "status": "requested", "files": []},
+    {"uid": "test:hidden", "type": "image", "name": "Hut hidden", "status": "unscored", "hidden": true, "files": []},
+    {"uid": "test:work", "type": "audio", "name": "Hut work", "status": "unscored", "files": [{"path": "~/AudioLab/work/example/master.wav", "role": "master"}]},
+    {"uid": "test:private", "type": "music", "name": "Example Music", "status": "private", "licence": {"private": true}, "files": [{"path": "example/music.ogg", "role": "master", "onDrive": "private"}]}
+  ]
+}

@@ -5,6 +5,9 @@ import { imageHeader, inspectGlb } from '../map-factory/registry/scan-assets.mjs
 import { groupFiles } from './lib/grammar.mjs';
 import { load, kindFor, styleFor } from './lib/taxonomy.mjs';
 import { createHashCache } from './lib/hash-cache.mjs';
+import { catalogFile, gitMetadata, loadGameJoins, joinCards, parseMd5 } from './lib/joins.mjs';
+import { mergeDocFacts } from './doc-facts.mjs';
+import { scanAudio } from './scan-audio.mjs';
 
 export const REPO_ROOT = fileURLToPath(new URL('../../', import.meta.url));
 export const GAMES = ['dragon-hold', 'typing-defense', 'typing-survival', 'space-typing'];
@@ -44,6 +47,32 @@ async function readJson(repoRoot, rel, io, allowed, warnings, optional = true) {
     if (error.code === 'ENOENT') { warnings.push(`${rel}: ENOENT — file đã biến mất`); return {}; }
     throw error;
   }
+}
+
+async function readText(repoRoot, rel, io, allowed, warnings) {
+  if (!allowed(rel)) return null;
+  try {
+    if (!(await safeInfo(repoRoot, rel, io))?.isFile()) return null;
+    return await io.readFile(path.join(repoRoot, rel), 'utf8');
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    return null;
+  }
+}
+
+// AL-06 chỉ được ghi library/out. Đọc cache AL-05 làm mồi, cache mới ở out/.
+function outputCacheIo(repoRoot, io) {
+  const original = path.join(repoRoot, 'library/.cache/hash.json');
+  const output = path.join(repoRoot, 'library/out/hash.json');
+  return { ...io,
+    async readFile(file, ...args) {
+      if (file !== original) return io.readFile(file, ...args);
+      try { return await io.readFile(output, ...args); }
+      catch (error) { if (error.code !== 'ENOENT') throw error; return io.readFile(original, ...args); }
+    },
+    mkdir: (file, ...args) => io.mkdir(file === path.dirname(original) ? path.dirname(output) : file, ...args),
+    writeFile: (file, ...args) => io.writeFile(file === original ? output : file, ...args),
+  };
 }
 
 async function walk(repoRoot, rel, io, allowed, warnings, found, optional = false) {
@@ -125,8 +154,9 @@ function report(catalog, stats) {
   const roles = {};
   for (const file of files) roles[file.role] = (roles[file.role] ?? 0) + 1;
   const unknown = files.filter(file => file.role === 'unknown');
-  return `# Báo cáo quét lõi 2D và 3D\n\nQuét lúc: ${catalog.scannedAt}\n\n`
+  return `# Báo cáo quét 2D, 3D và nối sổ\n\nQuét lúc: ${catalog.scannedAt}\n\nChế độ: ${catalog.mode}.\n\n`
     + `Số thẻ: **${catalog.cards.length}**. Số file: **${files.length}**.\n\n`
+    + `File ẩn: **${files.filter(file => file.hidden).length}**. Bản sao: **${catalog.cards.reduce((n, card) => n + card.copies.length, 0)}**.\n\n`
     + '| Vai trò | Số file |\n|---|---:|\n'
     + Object.keys(roles).sort(cmp).map(role => `| ${role} | ${roles[role]} |`).join('\n')
     + `\n\nUnknown: **${unknown.length}** (${files.length ? (100 * unknown.length / files.length).toFixed(4) : '0.0000'}%).\n\n`
@@ -138,9 +168,9 @@ function report(catalog, stats) {
     + (catalog.warnings.length ? catalog.warnings.map(w => `- ${w}`).join('\n') : 'Không có.') + '\n';
 }
 
-/** Chỉ ghi ba sản phẩm AL-05. io và hooks phục vụ cây mẫu/test biến mất giữa lượt. */
+/** Chỉ ghi library/out. io và hooks phục vụ cây mẫu/test biến mất giữa lượt. */
 export async function scan({ repoRoot = REPO_ROOT, game, scanDate = new Date().toISOString(),
-  io = fs, hooks = {} } = {}) {
+  io = fs, hooks = {}, locksOnly = false, all = false } = {}) {
   if (game !== undefined && !GAMES.includes(game)) throw new Error(`Game không được phép: ${game}`);
   if (typeof scanDate !== 'string' || !/^\d{4}-\d\d-\d\dT/u.test(scanDate) || !Number.isFinite(Date.parse(scanDate))) {
     throw new Error('--scan-date cần ngày ISO hợp lệ');
@@ -150,43 +180,66 @@ export async function scan({ repoRoot = REPO_ROOT, game, scanDate = new Date().t
   const sources = JSON.parse(await io.readFile(path.join(repoRoot, 'library/sources.json'), 'utf8'));
   const taxonomy = load();
   const allowed = p => pathAllowed(p, sources);
-  const cache = await createHashCache({ repoRoot, io, allowPath: p => allowed(p)
-    && GAMES.some(id => beneath(p, `games/${id}`)) });
+  const cache = locksOnly ? { stats: { hit: 0, seeded: 0, hashed: 0, bytesHashed: 0 }, save: async () => {} }
+    : await createHashCache({ repoRoot, io: outputCacheIo(repoRoot, io), allowPath: p => allowed(p)
+      && GAMES.some(id => beneath(p, `games/${id}`)) });
   const stats = { hash: cache.stats, registry: 0, inspected: 0 };
-  const cards = [];
-  for (const id of GAMES.filter(id => !game || id === game)) {
+  let cards = [];
+  const selectedGames = GAMES.filter(id => !game || id === game);
+  const tracked = locksOnly ? new Set(hooks.trackedFiles ?? await gitMetadata(repoRoot, selectedGames, allowed, warnings)) : new Set();
+  const joins = [];
+  const readers = {
+    readText: p => readText(repoRoot, p, io, allowed, warnings),
+    readJson: p => readJson(repoRoot, p, io, allowed, warnings),
+    async readBinary(p) {
+      if (!allowed(p) || !(await safeInfo(repoRoot, p, io))?.isFile()) return null;
+      return io.readFile(path.join(repoRoot, p));
+    },
+    walk: (p, found) => walk(repoRoot, p, io, allowed, warnings, found, true),
+  };
+  const privateLock = parseMd5(await readers.readText('media/private.md5'), '', allowed);
+  for (const id of selectedGames) {
     const found = new Set();
-    for (const root of sources.roots) {
+    for (const root of locksOnly ? [] : sources.roots) {
       if (root.game !== id || !['art-src', 'public', 'src/assets'].some(p => root.path === `games/${id}/${p}`)) continue;
       await walk(repoRoot, root.path, io, allowed, warnings, found, true);
     }
     const prefix = `games/${id}/`;
     const logical = p => p.slice(prefix.length).replace(/^art-src\//u, '');
+    const data = await loadGameJoins({ game: id, found, locksOnly, tracked, allowed, ...readers });
+    joins.push(data);
     const physical = new Map();
-    for (const p of [...found].sort(cmp)) {
-      if (IMAGE.test(p) || /\.glb$/iu.test(p) || /\.prompt\.txt$/iu.test(p)
-        || /(?:^|\/)README[^/]*\.md$/iu.test(p)
-        || /\/(?:\.reports|\.campaign3d-model-cache)\/[^/]+\.json$/iu.test(p)
-        || /\/vs-(?:buildings|characters)-(?:run|\d+[a-z]?(?:-continuation)?)\.json$/u.test(p)) physical.set(logical(p), p);
+    for (const p of [...new Set([...found, ...data.virtual.keys()])].sort(cmp)) {
+      if (allowed(p) && catalogFile(p)) physical.set(logical(p), p);
     }
-    const source = await readJson(repoRoot, `${prefix}art-src/3d/SOURCES.json`, io, allowed, warnings);
-    // AL-05 dùng liên kết image; nối preset/manifest, lock và tuyển chọn ở AL-06.
-    const sourceFiles = Object.fromEntries(Object.entries(source.files ?? {}).filter(([p, row]) =>
-      allowed(`${prefix}art-src/3d/${p}`) && (!row.image || allowed(`${prefix}${row.image.startsWith('art-src/') ? row.image : 'art-src/' + row.image}`))));
-    const registry = await readJson(repoRoot, `tools/map-factory/registry/out/assets.${id}.json`, io, allowed, warnings);
+    const sourceFiles = { ...data.source.notMadeYet, ...data.source.files };
+    const registry = locksOnly ? {} : await readJson(repoRoot, `tools/map-factory/registry/out/assets.${id}.json`, io, allowed, warnings);
     const registryByFile = new Map((registry.assets ?? []).map(row => [row.file, row]));
-    for (const group of groupFiles(physical.keys(), { game: id, taxonomy, sources: { files: sourceFiles } })) {
+    for (const group of groupFiles(physical.keys(), { game: id, taxonomy, sources: { files: sourceFiles }, preset: data.preset, links: data.links })) {
       if (!allowed(`${prefix}art-src/${group.stem}`)) continue;
       const files = [];
       for (const parsed of group.files) {
         const p = physical.get(parsed.path);
         await hooks.beforeFile?.(p);
         try {
-          const info = await safeInfo(repoRoot, p, io);
+          const { path: _, ...metadata } = parsed;
+          const expected = data.virtual.get(p);
+          if (locksOnly) {
+            files.push({ ...metadata, path: p, md5: expected?.md5 ?? null, bytes: expected?.bytes ?? null, local: false });
+            continue;
+          }
+          // Lock vẫn dựng được thẻ khi media chưa kéo về máy.
+          let info;
+          try { info = await safeInfo(repoRoot, p, io); }
+          catch (error) {
+            if (error.code !== 'ENOENT' || !expected) throw error;
+            if (found.has(p)) throw error;
+            files.push({ ...metadata, path: p, md5: expected.md5 ?? null, bytes: expected.bytes ?? null, local: false });
+            continue;
+          }
           if (!info?.isFile()) { warnings.push(`${p}: không còn là file thường`); continue; }
           const cached = await cache.get(p, info);
           const row = cached.row;
-          const { path: _, ...metadata } = parsed;
           const file = { ...metadata, path: p, md5: row.md5, sha256: row.sha256, bytes: info.size, local: true };
           if (IMAGE.test(p)) {
             if (!row.image && !row.imageError) {
@@ -226,14 +279,37 @@ export async function scan({ repoRoot = REPO_ROOT, game, scanDate = new Date().t
         origin: id, kind: kindFor(id, group.stem), subkind: rule.subkind ?? null,
         style: rule.style ?? styleFor(id), biome: rule.biomes ?? [], files });
     }
+    // Preset không còn media và dòng notMadeYet vẫn có danh tính để tìm kiếm.
+    for (const source of [...Object.keys(data.source.notMadeYet), ...Object.values(data.preset.models).map(row => row.source)]) {
+      const stem = source.replace(/^art-src\/(?:3d\/)?|^3d\//u, '').replace(/\.glb$/iu, '');
+      if (cards.some(card => card.uid === `${id}:${stem}`) || !allowed(`${prefix}art-src/${stem}`)) continue;
+      cards.push({ uid: `${id}:${stem}`, short: `${id}:${stem.split('/').at(-1)}`, origin: id,
+        type: 'model3d', kind: kindFor(id, stem), style: styleFor(id), files: [], requested: true });
+    }
   }
+  // Ghi nhớ dòng tuyển chọn đã đọc để doc facts giữ đúng độ ưu tiên của AL-06.
+  const curatedForDocs = [];
+  cards = await joinCards({ cards, games: joins, privateLock, ...readers,
+    readText: async p => {
+      const text = await readers.readText(p);
+      if (p.startsWith('library/curated/') && p.endsWith('.jsonl')) for (const line of (text ?? '').split(/\r?\n/u)) {
+        try { const row = JSON.parse(line); if (row && typeof row.uid === 'string') curatedForDocs.push(row); } catch { /* AL-06 báo lỗi JSON. */ }
+      }
+      return text;
+    }, allowed, locksOnly, warnings,
+    handoffRoots: sources.roots.filter(root => root.mode === 'copies-only' && allowed(root.path)).map(root => root.path) });
+  mergeDocFacts(cards, await readers.readJson('library/out/doc-facts.json'), { curated: curatedForDocs });
+  const audio = await scanAudio({ repoRoot, game, io, locksOnly, all });
+  cards.push(...audio.cards);
+  warnings.push(...audio.warnings, ...audio.duplicates.map(group => `Âm trùng byte (sha256 ${group.sha256}): ${group.paths.join(' = ')}`));
+  stats.audio = audio.stats;
   cards.sort((a, b) => cmp(a.uid, b.uid));
   const allFiles = cards.flatMap(card => card.files);
   const unknownCount = allFiles.filter(file => file.role === 'unknown').length;
   if (unknownCount > allFiles.length * 0.01) {
     warnings.push(`Unknown vượt ngưỡng thiết kế 1%: ${unknownCount}/${allFiles.length} (${(100 * unknownCount / allFiles.length).toFixed(4)}%); cần duyệt ngữ pháp tên file`);
   }
-  const catalog = { schema: 'asset-library/1', scannedAt: scanDate, cards,
+  const catalog = { schema: 'asset-library/1', scannedAt: scanDate, mode: locksOnly ? 'locks-only' : 'full', cards,
     warnings: [...new Set(warnings)].sort(cmp) };
   await cache.save();
   await io.mkdir(path.join(repoRoot, 'library/out'), { recursive: true });
@@ -245,6 +321,8 @@ export async function scan({ repoRoot = REPO_ROOT, game, scanDate = new Date().t
 export async function main(args = process.argv.slice(2), options = {}) {
   const parsed = {};
   for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--all') { parsed.all = true; continue; }
+    if (args[i] === '--locks-only') { parsed.locksOnly = true; continue; }
     const key = { '--game': 'game', '--scan-date': 'scanDate' }[args[i]];
     if (!key || !args[i + 1] || args[i + 1].startsWith('--')) throw new Error(`Cờ không hợp lệ: ${args[i]}`);
     parsed[key] = args[++i];
