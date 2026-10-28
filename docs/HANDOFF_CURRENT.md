@@ -28,6 +28,13 @@ Mục 3 bên dưới là lịch sử.
 
 - **Luật chủ dự án 28/10 tối:** mọi chi tiết giao diện (thẻ, nút, ô, nhãn, biển, bảng tin, kết quả, cửa hàng) phải có hình thật đi kèm, không chỉ có chữ. **Tuyệt đối không dùng hình vẽ bằng mã để thay hình thật**: không SVG hay canvas vẽ cảnh, không icon bằng CSS, không emoji, không tranh dự phòng. Thiếu ảnh thì mở phiếu Codex. Âm thanh cũng phải là file thật, có chất lượng, làm theo `docs/games/AUDIO_PIPELINE.md`. Lượt rà toàn bộ giao diện và âm thanh đang chạy; kết quả sẽ ở `docs/games/map1/UI_IMAGERY.md` và `UI_IMAGERY_CODEX.md`.
 
+- **Quyết định của chủ dự án 28/10 tối** (đã ghi vào `AGENTS.md`):
+  - toàn bộ chữ trong game bằng tiếng Anh, tiếng Việt chỉ ở nghĩa của từ;
+  - tên game: Dragonhold, Wordwoven, Last Line;
+  - Wordwoven theo hướng sử thi: làm lại nền, trời, màn tựa, ảnh chủ đạo, khung UI; giữ 117 model và chỉnh ánh sáng;
+  - cả ba game được chấm lại so với game thương mại, cái nào dưới 8 thì làm lại.
+  Làn chỉ đạo mỹ thuật đang viết `docs/games/ART_DIRECTION_2026-10-28.md` và các phiếu từ 112. Phiếu 106, 110 đã rút khỏi làn ảnh M6.
+
 ## 1. Bắt đầu session mới
 
 1. Đọc file này, `MAP1_PRODUCTION.md` §4, rồi `docs/CODEX_QUEUE.md` (các dòng 088 trở đi).
@@ -70,7 +77,7 @@ Codex hết hạn mức lúc 20:05; hai làn tự chạy lại lúc 23:41.
 |---|---|---|---|
 | **R** (map Rồng) | `games/.wt-dh-mappilot`, nhánh `map-pilot` | A2 xong, **cổng A đạt** (1080p hợp lệ: trung vị 8,0, thấp nhất 7,5; ba lượt khác mất mẫu spike, xem ghi chú trong `judge.md`), đã gộp vào `main` Rồng `0bf5918` và đã đẩy. Đang làm A3 theo 10 góp ý chung, hướng cổng C (khung mặc định và 4 góc 55° mỗi khung ≥ 8) | Chạy lại phép thử §7 của `judge.md` (dải spike) rồi gọi giám khảo |
 | **L** (Lời Gọi 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | Đã xong: C0, C1, C2 (sân khấu, camera), C3 (đất, suối, cầu), C4 phần A. Đang làm C4 phần B, rồi chuẩn bị C6 (cần phiếu kit 107) | Cập nhật C0 §5 theo quyết định của chủ dự án (Medium ≤ 9 MB, bộ khởi động ≤ 3,5 MB, ≤ 6 MB tới Đêm 1); làm tiếp C6 khi kit 107 xong |
-| **V-ts** (VFX Tuyến Cuối) | `games/.wt-ts-vfx` rồi fast-forward `main` | TS-M1-04 (gộp 035); TS-M1-05 (5 pha cho Pulse Gun, Heat Beam, tàu bị đánh) | Gửi chủ dự án tờ khung trước/sau |
+| **V-ts** (VFX Last Line) | đã gộp vào `main` `e26e898` (cùng `ts-codex`), đã đẩy | TS-M1-04 đạt. TS-M1-05 **trượt giám khảo độc lập**: Pulse Gun 5,5, Heat Beam 5, tàu bị đánh 4,5, Pulse Gun trên nền sáng 4. Lóe bắn là đĩa trắng tròn quanh tàu, mất màu súng; đốm trúng trắng che bầy; khói mờ; thiếu lớp tối | Vòng 2 khi có chỗ trống (tối đa 4 làn) |
 | **V-dh** (VFX Rồng, nhận từ session cũ 28/10 22:30) | `games/.wt-dh-vfx`, nhánh `dh-vfx` (25160fe, chưa gộp) | Vòng sửa ngắn cho 1a (người chấm vòng 2: 7 và 7,5; lõi trắng quá to, không ra lửa); Sky Fire từ phần sửa dở; VFX quái (gộp `main` vào trước) | Sau 1a, điều phối viên chạy một giám khảo độc lập (cần ≥ 8), rồi gửi chủ dự án tờ 1a |
 
 ## 4. Việc chờ, theo thứ tự
