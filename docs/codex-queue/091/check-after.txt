@@ -1,0 +1,144 @@
+$ pnpm check
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 31 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, learning, tools, balance)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-codex
+
+ ✓ tests/td-stage.test.ts (5 tests) 429ms
+   ✓ Chơi lại Ngày n (BUILD_1B §4.3) > records the tick each day's world stands at; the log replayed to it reaches the same hash  320ms
+ ✓ tests/td-boss.test.ts (21 tests) 2352ms
+   ✓ Mộc Tinh in the fight (BUILD_1B §5.1–§5.4) > Rễ hút sinh khí (R3): from its rise every 30 s wherever it stands, warned 1.2 s × the mode's warnK, then −1 life counted at the peak; the stagger starts its clock again  522ms
+ ✓ tests/td-tips.test.ts (6 tests) 1238ms
+   ✓ the teaching frame (BossBanner, R3) > at most two lines a phase, none twice; a day replayed (its events gone) gets its row; the sandbox shows the boss's rows only; no table, no row  542ms
+   ✓ what a building does (§12: on its card, read when wanted) > in the story, once open, until its row: Tháp Cung on day 1 only, Trại Lính from day 2, never in the sandbox  433ms
+ ✓ tests/td-pace.test.ts (12 tests) 2804ms
+   ✓ the run header and pace k (BALANCE.md §4.1) > keeps the attention budget at every k: the R3 typist at 35 WPM never types more than 8 s in 20 s, director on  2191ms
+   ✓ the pace director in the sim (BALANCE.md §4.2, the step table of §9.2) > by day moves only the call clocks, and does nothing at all when the setting is off  329ms
+ ✓ tests/td-agents.test.ts (11 tests) 668ms
+ ✓ tests/td-hud.test.ts (13 tests) 779ms
+   ✓ the status panel > the call button promises the gold an early night pays, at every tick of the day  541ms
+ ✓ tests/td-placement.test.ts (12 tests) 778ms
+   ✓ placement (TK 12.5) > checks in the design's fixed order: of two failing checks, the earlier one is the reason (no slopes in 1A; trees are its scenery)  413ms
+ ✓ tests/boundary.test.ts (17 tests) 4731ms
+   ✓ Lời Gọi boundary (TK 25.3, SPLIT_PLAN §3) > the rules use no clock, host global, storage, locale, Math.random, trigonometry, powers or logarithms  4199ms
+ ✓ tests/td-chunks.test.ts (4 tests) 341ms
+ ✓ tests/td-test-pass.test.ts (8 tests) 316ms
+ ✓ tests/td-r3-abilities.test.ts (6 tests) 230ms
+stdout | tests/td-lanes.test.ts > the lane spreader > lays out 20 cards in ≤ 0.3 ms
+td lanes: 0.0214 ms a frame for 20 cards
+
+ ✓ tests/td-lanes.test.ts (10 tests) 125ms
+ ✓ tests/td-input.test.ts (24 tests) 1238ms
+   ✓ the sandbox preset and the suggested spots > offers mines the free nodes, and others the places by the road canPlace allows (gold aside), nearest a bend first, both ways round  618ms
+ ✓ tests/td-flow.test.ts (7 tests) 6369ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > types through the commands at the bot's own speed and accuracy, and measures every run (flow, pace, kill time, the learning gate)  2624ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > plays Học as the page plans it (R3, BUILD_1B §18.1): the cold start deals fresh words, the 20-word book brings Từ Ôn back; B8 R3 holds (≤ 8 fresh, none in a call that runs out or on the boss night)  1310ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > folds a cell into the kit's summary and prints the §3 table and every gate (missing cells are THIẾU SỐ, never ĐẠT)  2428ms
+ ✓ tests/td-calls.test.ts (20 tests) 6506ms
+   ✓ invariants (§12 gate 6) and replay > random play on the real vocabulary: bright ≤ cap, one lock on a bright call, one word a bright call, distinct first letters; the log replays to the same hash  4087ms
+   ✓ invariants (§12 gate 6) and replay > ignoring every call (Chữ Chiêu and direct calls too, BUILD_1B §21.3) never lowers the chain and loses nothing: gold falls only by seeds bought, food only by soldiers' meals, wood never  1948ms
+stdout | tests/td-content.test.ts > 1A content > every word can be typed in its scoring clock (TK 25.4): L_w ≥ 1.2 + 12·(len + 1)/(E·d) at every E, mode and band
+td life: 128 (mode, E, length) cells below 1.2 s + typing time, all in challenge; first: challenge E30 3 letters: 2.70 s, challenge E30 4 letters: 2.88 s, challenge E30 5 letters: 3.24 s
+
+ ✓ tests/td-content.test.ts (13 tests) 102ms
+ ✓ tests/td-learn.test.ts (20 tests) 643ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps 300 enemies, 9 soldiers, 200 shots, 10 buildings, 4 farms, 9 villagers and 20 trees in ≤ 2 ms
+td sim step (300 enemies): median 0.057 ms, p95 0.582 ms
+
+ ✓ tests/td-scorer.test.ts (7 tests) 64ms
+ ✓ tests/td-sim-block.test.ts (9 tests) 259ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps TK 25.12's full load (640 enemies, 64 soldiers, 512 shots, 20 buildings) in ≤ 2 ms
+td sim step (640 enemies, 64 soldiers, 512 shots, 20 buildings): median 0.062 ms, p95 0.970 ms
+
+ ✓ tests/td-sim-combat.test.ts (11 tests) 719ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps Mộc Tinh's peak under a flood of 300 (its Mầm Gỗ among them) with Tối Thượng's rain falling (BUILD_1B §20) in ≤ 2 ms
+td sim step (boss, 300 flooded, Tối Thượng): median 0.138 ms, p95 0.737 ms
+
+ ✓ tests/td-golden.test.ts (6 tests) 1460ms
+   ✓ golden run > runs the same twice, and its command log replays to the same hashes  1320ms
+ ✓ tests/td-sim-perf.test.ts (4 tests) 675ms
+ ✓ tests/td-rewards.test.ts (7 tests) 167ms
+ ✓ tests/td-learn-app.test.ts (9 tests) 702ms
+   ✓ the store and the plan (§11.3, §11.4) > counts a word seen up to 3 times; past 3,000 ids the oldest goes  682ms
+ ✓ tests/td-r2.test.ts (14 tests) 263ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 32ms
+ ✓ tests/td-router.test.ts (9 tests) 86ms
+ ✓ tests/td-settings.test.ts (6 tests) 4ms
+ ✓ tests/td-letters.test.ts (7 tests) 4ms
+ ✓ tests/td-sim-economy.test.ts (29 tests) 8382ms
+   ✓ day, night and dawn (§2) > Shift+Enter calls the night early, by day only: up to 30 gold by the day's share left, draining from its first second (owner, 26/10/2026)  323ms
+   ✓ villagers and trees (§4.2) > two villagers start; unmarked they chop the trees nearest the Bastion within 30 m, one a tree; the wood comes as the chop goes, from the tree's reserve; the tree stands on  310ms
+   ✓ sites and builders (§4.3) > no sequence of builds, upgrades (the Bastion's too), sales at 60 %, undos and free sandbox levels makes gold or wood (property; BUILD_1B §7, G7)  6379ms
+ ✓ tests/td-b9.test.ts (3 tests) 7608ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > holds the numbers B9 reads and the run in the replay's shape; replayed on Node it reaches the page's hash  1397ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > grades B9 against a bot typing at the owner's measured E, a and CV (an old file with the numbers alone too)  6094ms
+stdout | tests/td-nav.test.ts > A* on the walking grid (TK 25.9) > one search takes ≤ 0.5 ms (TK 25.12): the longest ways on the sandbox field, across the stream
+td A*: median 0.167 ms, p95 0.905 ms
+
+ ✓ tests/td-nav.test.ts (10 tests) 9241ms
+   ✓ A* on the walking grid (TK 25.9) > pulls the path tight without cutting a blocked cell or a blocked corner: at most 64 points, the goal last  489ms
+   ✓ A* on the walking grid (TK 25.9) > walks every way across the stream on the painted bridges: 400 random crossings never leave them (cells wholly on a bridge)  831ms
+   ✓ A* on the walking grid (TK 25.9) > a helper built over beside the stream, by the bridge, never lands in the water and still reaches the mine  7604ms
+ ✓ tests/td-balance-gates.test.ts (10 tests) 4ms
+
+ Test Files  33 passed (33)
+      Tests  355 passed (355)
+   Start at  19:23:52
+   Duration  15.40s (transform 2.19s, setup 0ms, collect 19.85s, tests 59.32s, environment 5ms, prepare 3.71s)
+
+$ tsc --noEmit && vite build && node scripts/bundle-budget.mjs
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 108 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    0.86 kB │ gzip:  0.51 kB
+dist/assets/baloo-2-vietnamese-800-normal-ConLnEgt.woff2           4.80 kB
+dist/assets/baloo-2-vietnamese-600-normal-C5EqHgu0.woff2           5.39 kB
+dist/assets/baloo-2-vietnamese-800-normal-GQACmpuv.woff            6.74 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-By_5yT39.woff     6.89 kB
+dist/assets/baloo-2-vietnamese-600-normal-CGkk4Wtx.woff            7.34 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-4Hjo2OtD.woff      9.19 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/be-vietnam-pro-vietnamese-700-normal-Csr0PCuG.woff2   12.47 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-ext-700-normal-C8_gqRu2.woff2    13.85 kB
+dist/.vite/manifest.json                                          14.93 kB │ gzip:  1.36 kB
+dist/assets/baloo-2-latin-ext-800-normal-C_Iwmf1s.woff2           15.07 kB
+dist/assets/baloo-2-latin-ext-600-normal-DiVeaYrH.woff2           15.98 kB
+dist/assets/be-vietnam-pro-latin-700-normal-C2EtzaOi.woff         16.91 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/baloo-2-latin-800-normal-BbF3Etk1.woff2               18.63 kB
+dist/assets/baloo-2-latin-600-normal-tIfxVoAe.woff2               19.50 kB
+dist/assets/baloo-2-latin-ext-800-normal-D-iCxxqE.woff            19.67 kB
+dist/assets/baloo-2-latin-ext-600-normal-CFaB2nBN.woff            20.39 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-700-normal-DlW1Zbsh.woff2        22.15 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/baloo-2-latin-800-normal-B8BXfZF7.woff                22.60 kB
+dist/assets/baloo-2-latin-600-normal-B4tNaogw.woff                23.54 kB
+dist/assets/index-JQROR5l-.css                                    29.81 kB │ gzip:  7.26 kB
+dist/assets/profile-CCJeLIRv.js                                    1.57 kB │ gzip:  0.95 kB
+dist/assets/sandbox-U0aPXEjq.js                                    1.74 kB │ gzip:  0.93 kB
+dist/assets/retry-Bmq_sjVm.js                                      1.94 kB │ gzip:  1.01 kB
+dist/assets/tips-Ca0-evzI.js                                       2.05 kB │ gzip:  1.16 kB
+dist/assets/settings-DDYpKcGu.js                                   2.88 kB │ gzip:  1.31 kB
+dist/assets/dev-tools-3X9aUQdi.js                                  3.50 kB │ gzip:  1.52 kB
+dist/assets/sheets-Db5_0OdF.js                                     4.38 kB │ gzip:  2.26 kB
+dist/assets/learn-BTLpI872.js                                      8.00 kB │ gzip:  3.22 kB
+dist/assets/title-CRTWgStk.js                                     11.66 kB │ gzip:  4.67 kB
+dist/assets/audio-min-DOUP-eLj.js                                 11.68 kB │ gzip:  4.44 kB
+dist/assets/index-Dt-ddlZ8.js                                    214.74 kB │ gzip: 80.24 kB
+✓ built in 1.44s
+bundle budget (BUILD_1B §20) /: start 84.91 kB gzip (entry + ui/title.ts) ≤ 85 kB, headroom 0.09 kB; later 16.80 kB (app/dev-tools.ts 1.51, app/learn.ts 3.22, app/retry.ts 1.01, app/sandbox.ts 0.93, ui/profile.ts 0.95, ui/settings.ts 1.31, ui/sheets.ts 2.26, ui/tips.ts 1.16, view/audio-min.ts 4.44); total 101.70 kB
+bundle budget (BUILD_1B §20) /?title=0: start 83.46 kB gzip (entry + app/learn.ts) ≤ 85 kB, headroom 1.54 kB; later 18.25 kB (app/dev-tools.ts 1.51, app/retry.ts 1.01, app/sandbox.ts 0.93, ui/profile.ts 0.95, ui/settings.ts 1.31, ui/sheets.ts 2.26, ui/tips.ts 1.16, ui/title.ts 4.67, view/audio-min.ts 4.44); total 101.70 kB
+
+Exit code: 0

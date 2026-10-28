@@ -1,0 +1,23 @@
+DEV_URL = process.env.URL ?? "http://127.0.0.1:3007/" (common.mjs:5)
+
+survival-feel-guns.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-feel-ship.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-feel.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-s0-balance.mjs -> common.mjs, survival-s0-balance.mjs, survival-s0-lib.mjs
+survival-s0-boot.mjs -> common.mjs, survival-s0-boot.mjs, survival-s0-lib.mjs
+survival-s0-fight.mjs -> common.mjs, survival-s0-lib.mjs
+survival-s0-frames.mjs -> common.mjs, survival-s0-lib.mjs
+survival-s0-keys.mjs -> common.mjs, survival-s0-lib.mjs
+survival-s0-menu.mjs -> common.mjs, survival-s0-lib.mjs, survival-s0-menu.mjs
+survival-s0-perf.mjs -> common.mjs, survival-s0-lib.mjs
+survival-s1-guns.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-s1-hazards.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-s1-latency.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-s1-loadout.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-loadout.mjs
+survival-s1-perf.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+survival-s1-stage.mjs -> common.mjs, survival-s0-lib.mjs, survival-s1-lib.mjs
+
+16/16 entry scenarios use DEV_URL directly or via helpers.
+No build/preview-specific __survival consumer found under scripts/.
+scripts/replay.ts mentions __survival.snapshot() in a comment; reads saved JSON in Node, not a browser handle.
+URL override may point to a build; current navigation helpers reconstruct index.html?... and do not forward debug=1 from the base URL. Claude must add debug=1 to the final page query for any build run.

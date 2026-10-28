@@ -1,0 +1,90 @@
+$ pnpm --config.verify-deps-before-run=false test
+Cwd: /var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/td-091-alone/game
+$ vitest run
+
+ RUN  v3.2.7 /private/var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/td-091-alone/game
+
+ ✓ tests/td-boss.test.ts (21 tests) 2363ms
+   ✓ Mộc Tinh's peak (BUILD_1B §4.4) > the lull's clock holds while a heavy foe walks the roads' shared end, from the merge to the Bastion (test pass 27/10, row 8)  407ms
+ ✓ tests/td-pace.test.ts (12 tests) 2460ms
+   ✓ the run header and pace k (BALANCE.md §4.1) > keeps the attention budget at every k: the R3 typist at 35 WPM never types more than 8 s in 20 s, director on  1925ms
+ ✓ tests/td-tips.test.ts (6 tests) 654ms
+ ✓ tests/boundary.test.ts (17 tests) 4487ms
+   ✓ Lời Gọi boundary (TK 25.3, SPLIT_PLAN §3) > the rules use no clock, host global, storage, locale, Math.random, trigonometry, powers or logarithms  3715ms
+   ✓ Lời Gọi boundary (TK 25.3, SPLIT_PLAN §3) > the game's own storage keys start with td. or typing-defense:, or are the kit's skill profile key typing-defense.skill (BALANCE.md §2) or Học's typing-defense.learn (BUILD_1B §11.1)  300ms
+ ✓ tests/td-golden.test.ts (6 tests) 2437ms
+   ✓ golden run > runs the same twice, and its command log replays to the same hashes  2017ms
+   ✓ boss golden run > hashes the world every 60 ticks as td-1b-boss.json says; again and from its log alike  379ms
+ ✓ tests/td-input.test.ts (24 tests) 2224ms
+   ✓ the tactical pause (BUILD_1A6 §8) > the tactical pause steps nothing, yet the hand's orders act at once on the tick the world waits on, so none is given twice; keys wait; a replay meets the run (review R2)  304ms
+   ✓ the sandbox preset and the suggested spots > offers mines the free nodes, and others the places by the road canPlace allows (gold aside), nearest a bend first, both ways round  1076ms
+ ✓ tests/td-placement.test.ts (12 tests) 591ms
+   ✓ placement (TK 12.5) > checks in the design's fixed order: of two failing checks, the earlier one is the reason (no slopes in 1A; trees are its scenery)  364ms
+ ✓ tests/td-hud.test.ts (13 tests) 711ms
+   ✓ the status panel > the call button promises the gold an early night pays, at every tick of the day  396ms
+ ✓ tests/td-sim-combat.test.ts (11 tests) 830ms
+   ✓ leaks and determinism > the same seed and commands give the same hash, and a replay of the log matches  434ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps 300 enemies, 9 soldiers, 200 shots, 10 buildings, 4 farms, 9 villagers and 20 trees in ≤ 2 ms
+td sim step (300 enemies): median 0.048 ms, p95 0.407 ms
+
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps TK 25.12's full load (640 enemies, 64 soldiers, 512 shots, 20 buildings) in ≤ 2 ms
+td sim step (640 enemies, 64 soldiers, 512 shots, 20 buildings): median 0.142 ms, p95 0.433 ms
+
+ ✓ tests/td-agents.test.ts (11 tests) 426ms
+ ✓ tests/td-flow.test.ts (7 tests) 6389ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > types through the commands at the bot's own speed and accuracy, and measures every run (flow, pace, kill time, the learning gate)  2501ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > plays Học as the page plans it (R3, BUILD_1B §18.1): the cold start deals fresh words, the 20-word book brings Từ Ôn back; B8 R3 holds (≤ 8 fresh, none in a call that runs out or on the boss night)  750ms
+   ✓ the stage matrix and its report (BALANCE.md §3, §7) > folds a cell into the kit's summary and prints the §3 table and every gate (missing cells are THIẾU SỐ, never ĐẠT)  3117ms
+ ✓ tests/td-learn-app.test.ts (9 tests) 831ms
+   ✓ the store and the plan (§11.3, §11.4) > counts a word seen up to 3 times; past 3,000 ids the oldest goes  797ms
+stdout | tests/td-sim-perf.test.ts > simulation step cost > steps Mộc Tinh's peak under a flood of 300 (its Mầm Gỗ among them) with Tối Thượng's rain falling (BUILD_1B §20) in ≤ 2 ms
+td sim step (boss, 300 flooded, Tối Thượng): median 0.201 ms, p95 1.910 ms
+
+ ✓ tests/td-calls.test.ts (20 tests) 6686ms
+   ✓ invariants (§12 gate 6) and replay > random play on the real vocabulary: bright ≤ cap, one lock on a bright call, one word a bright call, distinct first letters; the log replays to the same hash  3277ms
+   ✓ invariants (§12 gate 6) and replay > ignoring every call (Chữ Chiêu and direct calls too, BUILD_1B §21.3) never lowers the chain and loses nothing: gold falls only by seeds bought, food only by soldiers' meals, wood never  2487ms
+ ✓ tests/td-sim-perf.test.ts (4 tests) 765ms
+ ✓ tests/td-chunks.test.ts (4 tests) 498ms
+   ✓ lazy chunks: every import() of main.ts stays out of the entry chunk (vite.config.ts LAZY, chunkOf) > names each dynamically imported module, and the entry's own modules are not lazy  426ms
+ ✓ tests/td-test-pass.test.ts (8 tests) 281ms
+ ✓ tests/td-learn.test.ts (20 tests) 879ms
+ ✓ tests/td-sim-block.test.ts (9 tests) 184ms
+ ✓ tests/td-stage.test.ts (5 tests) 667ms
+   ✓ Chơi lại Ngày n (BUILD_1B §4.3) > records the tick each day's world stands at; the log replayed to it reaches the same hash  444ms
+ ✓ tests/td-r2.test.ts (14 tests) 518ms
+ ✓ tests/td-r3-abilities.test.ts (6 tests) 104ms
+stdout | tests/td-lanes.test.ts > the lane spreader > lays out 20 cards in ≤ 0.3 ms
+td lanes: 0.0623 ms a frame for 20 cards
+
+ ✓ tests/td-lanes.test.ts (10 tests) 93ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 30ms
+ ✓ tests/td-rewards.test.ts (7 tests) 235ms
+ ✓ tests/td-router.test.ts (9 tests) 155ms
+stdout | tests/td-content.test.ts > 1A content > every word can be typed in its scoring clock (TK 25.4): L_w ≥ 1.2 + 12·(len + 1)/(E·d) at every E, mode and band
+td life: 128 (mode, E, length) cells below 1.2 s + typing time, all in challenge; first: challenge E30 3 letters: 2.70 s, challenge E30 4 letters: 2.88 s, challenge E30 5 letters: 3.24 s
+
+ ✓ tests/td-content.test.ts (13 tests) 129ms
+ ✓ tests/td-scorer.test.ts (7 tests) 139ms
+ ✓ tests/td-sim-economy.test.ts (29 tests) 8798ms
+   ✓ sites and builders (§4.3) > no sequence of builds, upgrades (the Bastion's too), sales at 60 %, undos and free sandbox levels makes gold or wood (property; BUILD_1B §7, G7)  6819ms
+ ✓ tests/td-settings.test.ts (6 tests) 3ms
+ ✓ tests/td-letters.test.ts (7 tests) 9ms
+ ✓ tests/td-b9.test.ts (3 tests) 7763ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > holds the numbers B9 reads and the run in the replay's shape; replayed on Node it reaches the page's hash  793ms
+   ✓ the play-test file and B9 (BUILD_1B §22, BALANCE.md §7 B9) > grades B9 against a bot typing at the owner's measured E, a and CV (an old file with the numbers alone too)  6825ms
+stdout | tests/td-nav.test.ts > A* on the walking grid (TK 25.9) > one search takes ≤ 0.5 ms (TK 25.12): the longest ways on the sandbox field, across the stream
+td A*: median 0.176 ms, p95 1.027 ms
+
+ ✓ tests/td-nav.test.ts (10 tests) 9681ms
+   ✓ A* on the walking grid (TK 25.9) > pulls the path tight without cutting a blocked cell or a blocked corner: at most 64 points, the goal last  680ms
+   ✓ A* on the walking grid (TK 25.9) > walks every way across the stream on the painted bridges: 400 random crossings never leave them (cells wholly on a bridge)  915ms
+   ✓ A* on the walking grid (TK 25.9) > a helper built over beside the stream, by the bridge, never lands in the water and still reaches the mine  7673ms
+ ✓ tests/td-balance-gates.test.ts (10 tests) 6ms
+
+ Test Files  33 passed (33)
+      Tests  355 passed (355)
+   Start at  19:24:55
+   Duration  16.34s (transform 2.36s, setup 0ms, collect 21.54s, tests 62.03s, environment 6ms, prepare 4.29s)
+
+
+Exit code: 0

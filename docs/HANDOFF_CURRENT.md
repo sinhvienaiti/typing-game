@@ -13,7 +13,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Tuyến Cuối: c1-s1.
 - **Kế hoạch chung:** [`docs/games/MAP1_PRODUCTION.md`](games/MAP1_PRODUCTION.md). Nó có 7 cổng cho từng game, danh sách P0, P1, P2, bốn làn T, V, R, L với lịch theo ngày, việc của chủ dự án và rủi ro. Ngày dự kiến đủ 7 cổng: Tuyến Cuối 03/11, Rồng 06/11, Lời Gọi 12/11.
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
-- **Session điều phối:** coordinator-3 (CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` chỉ còn chạy làn `vfx-dh-v2`; xong bước nào thì nó nhắn kết quả sang.
+- **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` chỉ còn chạy làn `vfx-dh-v2`; xong bước nào thì nó nhắn kết quả sang.
 
 ## 1. Bắt đầu session mới
 
@@ -50,7 +50,7 @@ Phiếu 102 ghi vào `shared/game-kit/tools/` của repo cha.
 
 **Đã duyệt hôm nay:** 035–037, 065–075, 085, 088, 093. Xem cột trạng thái của `CODEX_QUEUE.md`.
 
-### Làn Claude (agent nền của coordinator-3, trừ làn cuối)
+### Làn Claude (agent nền của coordinator-2, trừ làn cuối)
 
 | Làn | Nơi làm | Việc | Khi xong |
 |---|---|---|---|

@@ -1,0 +1,38 @@
+$ pnpm vitest run tests/vocab-pin.test.ts
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-td-codex
+
+ ❯ tests/vocab-pin.test.ts (5 tests | 1 failed) 19ms
+   ✓ the pinned vocabulary > includes all seven configured files with their exact manifest checksums 2ms
+   × the pinned vocabulary > keeps the manifest pin and version aligned with the config and index 3ms
+     → expected '18338405eebd9cfdbd6d6bf666ea79361c00a…' to be '08338405eebd9cfdbd6d6bf666ea79361c00a…' // Object.is equality
+   ✓ the pinned vocabulary > contains every level the game can request at the index's file path 0ms
+   ✓ the pinned vocabulary > compiles the filtered levels into the established real deck hash 4ms
+   ✓ the pinned vocabulary > keeps game source, tests and scripts independent of the parent vocabulary 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/vocab-pin.test.ts > the pinned vocabulary > keeps the manifest pin and version aligned with the config and index
+AssertionError: expected '18338405eebd9cfdbd6d6bf666ea79361c00a…' to be '08338405eebd9cfdbd6d6bf666ea79361c00a…' // Object.is equality
+
+Expected: "08338405eebd9cfdbd6d6bf666ea79361c00a564"
+Received: "18338405eebd9cfdbd6d6bf666ea79361c00a564"
+
+ ❯ tests/vocab-pin.test.ts:38:26
+     36|   it("keeps the manifest pin and version aligned with the config and i…
+     37|     expect(config.pin).toMatch(/^[a-f0-9]{40}$/);
+     38|     expect(manifest.pin).toBe(config.pin);
+       |                          ^
+     39|     expect(manifest.version).toBe(index.version);
+     40|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  19:24:30
+   Duration  482ms (transform 66ms, setup 0ms, collect 86ms, tests 19ms, environment 0ms, prepare 59ms)
+
+
+Exit code: 1

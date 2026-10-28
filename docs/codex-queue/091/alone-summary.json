@@ -1,0 +1,81 @@
+{
+  "destination": "/var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/td-091-alone/game",
+  "outsideParent": true,
+  "parentSharedExists": false,
+  "copyExcluded": [
+    "node_modules",
+    ".git",
+    "dist"
+  ],
+  "commands": [
+    {
+      "command": [
+        "pnpm",
+        "--config.verify-deps-before-run=false",
+        "test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "pnpm",
+        "--config.verify-deps-before-run=false",
+        "build"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "distFiles": [
+    {
+      "file": "ATTRIBUTION.md",
+      "bytes": 3101,
+      "sha256": "8f162dc2d3a977ab521537d3fdd770ca200bec144623854dbba95301d65c9269",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "index.json",
+      "bytes": 12195,
+      "sha256": "a0cbb72a84bf8d224d203df5891461b25230807248627e60018070dec4ff9b9b",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "levels/001.json",
+      "bytes": 17371,
+      "sha256": "75857e4a581f33dbbbb366e820cc28c68ca25206a748558d09af7231dc40096f",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "levels/002.json",
+      "bytes": 18046,
+      "sha256": "d775598e98c47926d6f56079e98ba448db4029367dfa669cf3e5a7e6c200c07c",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "levels/003.json",
+      "bytes": 18363,
+      "sha256": "b3ab7ad8a63b08323ddff1230f485d6f8ab00cd893cebaf35d73b9a973dbff31",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "levels/004.json",
+      "bytes": 26688,
+      "sha256": "766386de1dc7cbbefa71d0edb66d3c537c704b37f63845109fa37824f6fce3a1",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "levels/005.json",
+      "bytes": 28067,
+      "sha256": "0781d04d0df20229d772c875d51cd88852139e7117e08146c6c9186bccc79fed",
+      "matchesPinnedCopy": true
+    },
+    {
+      "file": "vocab-manifest.json",
+      "bytes": 720,
+      "sha256": "f92b36089e7ddc04898d38401808bfb261ad36f00647cfdee45a9c58123fcdbb",
+      "matchesPinnedCopy": true
+    }
+  ],
+  "distVocabularyBytes": 124551,
+  "temporaryDirectoryRemoved": true,
+  "worktreeNodeModulesRetained": true
+}

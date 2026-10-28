@@ -1,0 +1,67 @@
+{
+  "directory": "/var/folders/d7/2x1km_3s363175h285_zlz680000gn/T/ts-090-alone/game",
+  "excluded": [
+    "node_modules",
+    ".git"
+  ],
+  "node_modules_symlink": "/Users/toandx/htdocs/typing-game/games/.wt-ts-codex/node_modules",
+  "parent_shared_exists": false,
+  "results": {
+    "test": {
+      "command": [
+        "pnpm",
+        "--config.verify-deps-before-run=false",
+        "test"
+      ],
+      "exit_code": 0
+    },
+    "build": {
+      "command": [
+        "pnpm",
+        "--config.verify-deps-before-run=false",
+        "build"
+      ],
+      "exit_code": 0
+    }
+  },
+  "dist_vocabulary": [
+    {
+      "file": "ATTRIBUTION.md",
+      "bytes": 3101,
+      "sha256": "8f162dc2d3a977ab521537d3fdd770ca200bec144623854dbba95301d65c9269"
+    },
+    {
+      "file": "index.json",
+      "bytes": 12195,
+      "sha256": "a0cbb72a84bf8d224d203df5891461b25230807248627e60018070dec4ff9b9b"
+    },
+    {
+      "file": "levels/001.json",
+      "bytes": 17371,
+      "sha256": "75857e4a581f33dbbbb366e820cc28c68ca25206a748558d09af7231dc40096f"
+    },
+    {
+      "file": "levels/002.json",
+      "bytes": 18046,
+      "sha256": "d775598e98c47926d6f56079e98ba448db4029367dfa669cf3e5a7e6c200c07c"
+    },
+    {
+      "file": "levels/003.json",
+      "bytes": 18363,
+      "sha256": "b3ab7ad8a63b08323ddff1230f485d6f8ab00cd893cebaf35d73b9a973dbff31"
+    },
+    {
+      "file": "vocab-manifest.json",
+      "bytes": 538,
+      "sha256": "bc981715c00f4c3b1bb622b599186ffab884f2337a1009400fb353787baf8252"
+    }
+  ],
+  "vocabulary_total_bytes": 69614,
+  "pinned_five_bytes": 69076,
+  "cleanup": {
+    "method": "shutil.rmtree(base), with path and symlink guards",
+    "reason": "exec rejected rm -rf: rm -f style commands are not permitted. Use a safer approach",
+    "directory_removed": true,
+    "worktree_node_modules_exists": true
+  }
+}
