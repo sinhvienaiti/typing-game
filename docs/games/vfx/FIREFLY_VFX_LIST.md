@@ -7,6 +7,8 @@ Chủ dự án, 29/10/2026 tối: sau clip thử `fire-burst__v1`, lửa của R
 - **Chỉ model Firefly Video của Adobe** (nhãn "Commercially safe"). Model đối tác (Veo, Kling, Seedance, Runway, Ray…) chỉ để tham khảo, không đưa vào game.
 - Người điều phối tạo trong tab Firefly chủ dự án đã đăng nhập; không đăng nhập hộ, không mua credit. Lô mới hay vượt số clip đã duyệt thì hỏi chủ dự án trước.
 - Cài đặt: 1080p, 24 fps, 5 giây; tỉ lệ theo bảng dưới.
+- **Không tốn credit** (đo 29/10): tài khoản ghi "Standard features: Unlimited access", số dư đứng 8.900/10.010 sau 25 clip. Nhưng có **giới hạn tốc độ**: gửi dồn quá khoảng 10 lệnh thì báo "Something went wrong" hoặc "try again at …" (chờ vài phút). Gửi cách nhau 8–30 giây.
+- **Tải về:** nút Download của trang không lưu file trong khung trình duyệt của app. Bấm từng ô ở dải lịch sử bên phải để trang nạp video, đọc `src` của thẻ video (link ký tên, hết hạn sau 4 giờ, không chia sẻ), tải bằng `curl`, so cỡ với `x-resource-length`, rồi xóa file chứa link.
 - Video là media, không vào Git. Clip gốc: `~/VFXLab/inbox/firefly/dragon-hold/<id>/<id>__vN.mp4`, kèm `<id>__vN.txt` ghi model, cài đặt, prompt, ngày, credit trước và sau.
 - Flipbook ra: `~/VFXLab/out/dragon-hold/<id>/` (công cụ `tools/vfx-flipbook/`), rồi chép bản chọn vào `games/dragon-hold/art-src/vfx/firefly/` khi V-dh2 dùng.
 
@@ -33,6 +35,16 @@ Riêng `smoke-roll` dùng nền trắng (khói tối trên trắng tách bằng 
 | `ground-fire` | F dư âm | đám lửa cháy trên đất sau Sky Fire | 1:1 | có | additive | 2 | 256 |
 
 Tổng 22 clip mới, cộng `fire-burst__v1` đã có. Còn khoảng 3 lượt cho bản hỏng.
+
+**Đã tạo (29/10, khoảng 20:10–20:40):** 24 clip mới, đủ chín id; `impact-burst__v1` là bản chép của clip thử 16:9. Nhận xét nhanh của điều phối (chưa chấm):
+- `muzzle-flash` v1–v3 mỏng (sao lóe kèm vệt nhỏ); v4, v5 dùng prompt mạnh hơn (dưới đây) nên ra luồng lửa dày, cuộn khói, nhưng chạy chéo từ dưới trái lên trên phải, cần xoay.
+- `fireball-head` v1 vẽ tay đẹp, bay sang trái; v2 tô phẳng kiểu hoạt hình, loại.
+- `impact-burst` v2, v3 và `impact-big` v1–v3 đều dùng được: lóe sao, khối lửa cuộn, vành khói tối viền đỏ.
+- `charge-orb` ra xoáy lốc; `embers` ra chùm tia đầu tròn; `flame-trail` ra dải lửa có lỗ, hơi giống dung nham.
+- `ground-fire` v1 là bức tường lửa thấp nhìn ngang; v2 là nêm lửa chéo, loại.
+- `smoke-roll` khói xám đậm trên nền trắng, đẹp nhưng nở tràn mép khung từ giữa clip: dùng đoạn đầu và làm mờ mép.
+
+Prompt `muzzle-flash` v4, v5 (phần giữa): a powerful cone-shaped blast of fire erupts from the left edge and fills the left half of the frame: a bright white-yellow flash at the source, then a wide cone of thick rolling orange flames with ragged tongues of uneven length bursts to the right, the flames curl, break apart and fade into embers and a little dark smoke within one second.
 
 ### Prompt (phần giữa)
 

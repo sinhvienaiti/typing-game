@@ -84,6 +84,14 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Lửa Rồng nhắm 9 (29/10 tối)
+
+- **Chủ dự án:** "cố gắng lên 9, 8,5 vẫn chấp nhận được" (ghi ở `VFX_STANDARD.md` §5.6). Duyệt khoảng 25 clip Firefly.
+- **Firefly Video không trừ credit:** tài khoản ghi "Standard features: Unlimited access"; số dư đứng 8.900/10.010 sau khi bấm tạo. Credit chỉ dùng cho model đối tác (không dùng).
+- **Clip:** điều phối tạo trong tab Firefly của chủ dự án theo `docs/games/vfx/FIREFLY_VFX_LIST.md` (22 lệnh lúc khoảng 21:00, một lệnh báo "Something went wrong"); tải về `~/VFXLab/inbox/firefly/dragon-hold/<id>/`.
+- **Làn FXV** (agent nền, mở lại): dựng `tools/vfx-flipbook/` (`run.sh ingest`, `run.sh all`), không commit, báo danh sách file để điều phối duyệt.
+- **Làn V-dh2** (agent nền): `games/.wt-dh-vfx` nhánh `dh-vfx`; gộp `main`, làm 15 sửa của hai giám khảo vòng 7, lớp flipbook, rồi chụp vòng 8. Không tự chấm thay giám khảo: điều phối gửi hai giám khảo độc lập (mức 9, sàn 8,5).
+
 ### Làn Claude (agent nền của coordinator-2, trừ làn cuối)
 
 | Làn | Nơi làm | Việc | Khi xong |
