@@ -112,7 +112,8 @@ Mục 3 bên dưới là lịch sử.
 - P1: 173, 124, 128, 117, 118, 174, 134, 135, 136, 141, 142, 143, 144, 145;
 - P2: 179, 155, 162, 181, 163, 164, 146, 147, 148, 176;
 - P3: 125, 156, 121, 127, 126, 157, 175, 149, 150, 151, 153, 152, 177;
-- P4: 133, 172, 180, 171, 165, 166, 167.
+- P4: 133, 172, 180, 171, 165, 166, 167;
+- P5 (sau P4, chủ dự án bảo giao thêm): 187, 188, 183, 184, 185, 186.
 Đã xong chờ chấm nhận: 119, 120, 122 (tự báo chưa đạt), 123, 140 (lượt b), 158, 159, 160, 161, 178; mã 170 chờ duyệt; 182 âm thanh (đường Firefly thay thế).
 
 **29/10 19:55, chủ dự án bảo dừng hết việc khoảng 10 phút** (sẽ đăng nhập Firefly trong khung trình duyệt của app để Claude tự xem). Đã dừng bốn làn Claude giữa chừng, gửi tin để chạy tiếp từ chỗ dừng: TF2 (hiệu ứng gõ, đang làm cú nổ riêng từng kiểu), M-dh (model, đang thêm nén KTX2), FF (danh sách âm Firefly và bước ingest), FXV (danh sách video Firefly và công cụ flipbook). Ba làn Codex vẫn chạy.
