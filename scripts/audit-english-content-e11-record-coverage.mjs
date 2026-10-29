@@ -6,6 +6,7 @@ import {
   overlayEnglishReviewDecisions,
   readEnglishReviewLedger,
 } from "./english-review-core.mjs";
+import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -25,6 +26,15 @@ for (const batch of batchManifest.batches ?? []) {
       requiredChecks: set.requiredChecks ?? [],
     });
   }
+}
+const reviewedTypingTextPath = "content/english/sentences/e06-reviewed-typing-text-sentences.json";
+const reviewedTypingTextContext = batchSetsByPath.get(reviewedTypingTextPath);
+const e11TypingTextReviewShards = await readE11TypingTextReviewShards(root);
+if (e11TypingTextReviewShards.length > 0 && reviewedTypingTextContext === undefined) {
+  throw new TypeError(`${reviewedTypingTextPath}: missing manifest record-set context`);
+}
+for (const shard of e11TypingTextReviewShards) {
+  batchSetsByPath.set(shard.relativePath, reviewedTypingTextContext);
 }
 
 const PUBLISHABLE_SENTENCE_TARGETS = new Set([
@@ -176,6 +186,12 @@ function manifestSources(targetId) {
 
 function sourcesForTarget(target) {
   const merged = [...(target.sources ?? []), ...manifestSources(target.id)];
+  if (target.id === "example-sentences") {
+    merged.push(...e11TypingTextReviewShards.map((shard) => ({
+      path: shard.relativePath,
+      collection: "records",
+    })));
+  }
   const seen = new Set();
   return merged.filter((source) => {
     const key = sourceKey(source);
