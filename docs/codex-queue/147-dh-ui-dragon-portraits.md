@@ -2,7 +2,7 @@
 
 **Nguồn:** kiểm kê hình ảnh UI map 1, 29/10 (`docs/games/map1/UI_IMAGERY.md`; dàn ý `UIC-DH-6` trong `docs/games/map1/UI_IMAGERY_CODEX.md`). Chủ dự án 28/10 tối: mọi chi tiết UI phải có hình thật, không chỉ có chữ; không hình vẽ bằng mã. Hướng mỹ thuật: `docs/games/ART_DIRECTION_2026-10-28.md`.
 
-**Chạy khi:** chờ Claude dựng ảnh tham chiếu từ GLB rồng.
+**Chạy khi:** chạy ngay (29/10). Codex không chạy được Blender: nếu chưa có ảnh render trong `games/dragon-hold/art-src/_refs/dragons/`, dùng ảnh 2D gốc của hai rồng có sẵn trong `games/dragon-hold/art-src/` (tìm tên có `draconis`, `dragon`, `long`; chỉ đọc) làm tham chiếu dáng và màu, và ghi rõ trong báo cáo.
 
 **Báo cáo:** `docs/codex-queue/147-report.md`, thư mục `_review/147/` của game.
 

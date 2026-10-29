@@ -64,6 +64,8 @@ Mục 3 bên dưới là lịch sử.
 | Mã M8, M9 | xong (130–132, 111b) | |
 | Ảnh M15 (sau M14) | 155 đường đá Dragonhold, 125, 156 (Tripo Lightbearer và 5 súng canh), 121, 127, 126, 157 | `-m15.txt` (hướng B) |
 | Ảnh M16 (sau M12) | 149, 150, 151, 153, 152: icon UI Last Line | `-m16.txt` |
+| Ảnh M18 (sau M15) | 145, 147, 173, 176 | `-m18.txt` |
+| Ảnh M19 (sau M17) | 174, 175, 177 | `-m19.txt` |
 | **M17, làn thứ ba song song** (từ 29/10 10:45, chủ dự án: Codex còn nhiều hạn mức) | mã 168, 169, 170, 171 → ảnh 162, 148, 163, 164, 165, 166, 167, 146 | `-m17.txt`. Ba worktree Codex đã tua tới nhánh chính và có lượt đồng bộ kit chưa commit (kit 154, check-pack); Claude commit cùng phiếu 168–170 sau khi duyệt |
 
 **Codex hết hạn mức 29/10 05:49, tự chạy lại lúc 09:45** (M11 dừng ở 116, M13 dừng ở 140).
@@ -101,6 +103,13 @@ Mục 3 bên dưới là lịch sử.
 | **E** (duyệt chữ tiếng Anh, xong 29/10) | — | 130, 131, 132 đạt sau sửa, đã gộp: Last Line `main` `b904a54`, Dragonhold `main` `4f61c6e`, Wordwoven `a2-days` `1048f8a` (132 `c5c4f8c`, màn tựa bỏ hình vẽ bằng mã `c7942eb`: không cò, dây đèn, đom đóm, con dấu; thiếu tranh thì nền phẳng và `console.warn`). `NAMES_EN.md` theo luật 28/10 (`7617e17d`) | Tên file chơi thử `loi-goi-choi-thu-*.json` đổi ở lượt dọn công cụ (cùng `scripts/td/b9.ts`) |
 
 **Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R chạy lại dưới tên R2 lúc 05:00. Ổ đĩa còn 10 GB lúc 04:15 (74 GB lúc 05:00 sau khi V-dh dọn); `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
+
+**Khi Claude có lại hạn mức (chủ dự án 29/10 11:40: hạn mức Claude sắp hết, giao Codex một lượt dài):** Codex chạy ba làn liền (khoảng 50 phiếu). Việc đầu tiên khi quay lại:
+1. Đọc nhật ký làn `.local/codex-runs/` và báo cáo `docs/codex-queue/<số>-report.md` của mọi phiếu xong.
+2. Chấm nhận ảnh theo lô (một agent giám khảo như `accept-29-10`), làm lại theo luật hậu kỳ §5; ảnh đạt thì báo làn game gắn.
+3. Duyệt phiếu mã 168–171 trong ba worktree Codex (có lượt đồng bộ kit chưa commit), commit, gộp, đẩy.
+4. Gửi chủ dự án danh sách dựng Tripo (124, 128, 156) kèm luật số mặt `MODEL_QUALITY.md`.
+5. Kiểm các làn Claude còn chạy: V-dh (vòng 7), M-dh (model theo mức), TF (module gõ chữ, Lab), L4 (C10 vòng 4), AU-keys (tiếng phím); làn nào chết thì gửi tin cho nó chạy tiếp.
 
 ## 4. Việc chờ, theo thứ tự
 
