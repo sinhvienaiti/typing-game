@@ -50,6 +50,20 @@ Lỗi nằm ở bước xử lý của ta, không nằm ở file gốc Tripo:
 
    Phiếu ảnh nguồn Tripo của Codex ghi dòng này cho chủ dự án.
 
+## 2b. Theo mức chất lượng (chủ dự án 29/10, sau khi biết lỗi do ta cắt)
+
+"Việc bạn giảm là không sai, nhưng nên ở chế độ nào: Ultra thì phải tăng mạnh lên, Low thì để như bạn cắt giảm còn hợp lý, chứ chế độ nào cũng giảm thì không nên."
+
+| Mức trong Cài đặt | Số mặt | Texture và map | Vật liệu |
+|---|---|---|---|
+| **Ultra** | 100 % file gốc Tripo | màu 2048, normal map, roughness map | vật liệu có ánh sáng dùng đủ map |
+| **High** (mặc định) | theo sàn mục 2, tối đa bằng file gốc (quái gần như giữ nguyên; cây khoảng 8.000) | màu 2048, normal map | dùng normal map |
+| **Medium** | khoảng 50 % của High | màu 1024, normal map | dùng normal map |
+| **Low** | như bản cắt hiện nay được (ví dụ quái 2.400, cây 900–1.600) | màu 1024, không map | tô phẳng của game |
+
+- Sàn 2.000 tam giác ở mục 2.1 áp cho Ultra, High và Medium; Low được giữ mức cắt hiện nay.
+- Máy yếu tự chọn Medium hay Low; người chơi chọn được Ultra trong Cài đặt.
+
 ## 3. Hiệu năng: đồ họa trước, cân lại khi đo thấy chậm
 
 - **Mặc định là giữ số mặt và map.** Chỉ cân lại khi đo trên máy Mac của dự án thấy vượt ngân sách:
@@ -65,6 +79,6 @@ Lỗi nằm ở bước xử lý của ta, không nằm ở file gốc Tripo:
 
 ## 4. Model đang có
 
-- **Giữ nguyên tới khi chủ dự án cho sửa** (29/10). Danh sách ở mục 1 là các model dưới luật mới.
+- **Chủ dự án cho sửa ngày 29/10** (sau khi biết lỗi do bước xử lý của ta): Dragonhold dựng lại bốn mức theo mục 2b từ file gốc, làn model riêng. Wordwoven và Last Line kiểm theo mục 2b khi làn của game chạm tới model.
 - **Cách sửa rẻ khi được phép:** xử lý lại từ file gốc Tripo đang có trong `art-src/3d/`. Nâng `triangles` trong preset lên sàn mục 2, và bỏ bước xóa map của `m0b-strip.mjs`. Cách này không tốn credit Tripo. Đo `dh-bench` và `dh-crowd` trước và sau.
 - Wordwoven (preset `games/typing-defense/scripts/models/presets/typing-defense-static.json`, 10.000–15.000 tam giác) và Last Line cũng được kiểm theo luật này khi làn của game chạm tới model.
