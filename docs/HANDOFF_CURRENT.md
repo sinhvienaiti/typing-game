@@ -1,4 +1,4 @@
-# Bàn giao điều phối (cập nhật 29/10/2026, khoảng 03:50)
+# Bàn giao điều phối (cập nhật 29/10/2026, khoảng 08:40)
 
 File này để **một session mới** nối tiếp mà không cần đọc lại lịch sử chat.
 - Mỗi lần dừng hay chuyển session, cập nhật file này.
@@ -61,7 +61,11 @@ Mục 3 bên dưới là lịch sử.
 | Làn | Còn lại | Ghi chú |
 |---|---|---|
 | Ảnh M10, rồi M11 | 113 (đang chạy), 114 → 115, 116, 117, 118, 119, 120, 122, 123, 124, 128 | `.local/codex-lane-mac-m10.txt`, `-m11.txt` (M11 chờ M10 xong rồi tự chạy) |
-| Mã M8, rồi M9 | 132 (đang chạy) → 111b | `-m8.txt`, `-m9.txt` |
+| Mã M8, M9 | xong (130–132, 111b) | |
+| Ảnh M15 (sau M14) | 155 đường đá Dragonhold, 125, 156 (Tripo Lightbearer và 5 súng canh), 121, 127, 126, 157 | `-m15.txt` (hướng B) |
+| Ảnh M16 (sau M12) | 149, 150, 151, 153, 152: icon UI Last Line | `-m16.txt` |
+
+**Codex hết hạn mức 29/10 05:49, tự chạy lại lúc 09:45** (M11 dừng ở 116, M13 dừng ở 140).
 | Ảnh M12 (sau M11) | 133–136, 141–144: icon UI Wordwoven | `-m12.txt` |
 | Ảnh M13 (sau M9, chiếm chỗ làn mã khi hết phiếu mã) | 137–140: icon UI Dragonhold | `-m13.txt` |
 
@@ -79,11 +83,12 @@ Mục 3 bên dưới là lịch sử.
 
 | Làn | Nơi làm | Việc | Khi xong |
 |---|---|---|---|
-| **R2** (map Rồng, chờ ảnh) | `games/.wt-dh-mappilot`, nhánh `map-pilot` (`ee6b6e4`, đã gộp `main` `4f61c6e`, chưa gộp ngược) | A3 xong: nắng thấp, sương, đất thông ô liu, vách hoa cương gấp đôi, impostor 16° cho màn tựa, tán bẻ sáng, dải ven làn; DH-12 (bản build đủ 12 ô đất, `b1d3e7e`). Tự chấm M 5,5–6,5. `dh-crowd` đạt; `dh-bench` +0,24 ms (đạt, đo lại khi máy rảnh); tương phản quái ở 1280 kém main một bậc (yếu 8,8 % so với 3,4 %) | **Dừng chờ** phiếu 120 (trời) và 124 (mốc, Tripo). Gộp `map-pilot` vào `main` sau giám khảo AFTER (xem A1 tương phản). Nếu tới lúc dựng demo chưa gộp: làn T cherry-pick `b1d3e7e` (ô đất) vào `main` |
-| **L2** (Lời Gọi 1C, thay L từ 29/10 05:00) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | L xong C6 (`d354716`) và chỉnh ánh sáng, màu theo bible (`6a6659d`, tự chấm M 3 → 4; cỏ hue 124°, bão hòa 0,40). L hết ngữ cảnh; L2 làm C10 (cảm giác gõ theo TYPING_BREAK_STUDY, thẻ neo 3D, tối đa +2 draw call). **Lệch kế hoạch:** mốc giữa (giám khảo ≥ 7 trước C10) chưa chạy, vì cảnh còn chờ ảnh Codex 114, 116–118, 122, 123; chạy mốc giữa khi ảnh đã gắn | Gọi giám khảo cho C10; chấm ảnh Codex trước khi gắn |
+| **R2** (map Rồng, chờ ảnh) | `games/.wt-dh-mappilot`, nhánh `map-pilot` (`ee6b6e4`, đã gộp `main` `4f61c6e`, chưa gộp ngược) | A3 xong: nắng thấp, sương, đất thông ô liu, vách hoa cương gấp đôi, impostor 16° cho màn tựa, tán bẻ sáng, dải ven làn; DH-12 (bản build đủ 12 ô đất, `b1d3e7e`). Tự chấm M 5,5–6,5. `dh-crowd` đạt; `dh-bench` +0,24 ms (đạt, đo lại khi máy rảnh); tương phản quái ở 1280 kém main một bậc (yếu 8,8 % so với 3,4 %) | **Việc kế (chưa giao, chờ chỗ trống):** hệ thống đường Dragonhold theo PATH_QUALITY, ảnh của phiếu 155. **Dừng chờ** phiếu 120 (trời) và 124 (mốc, Tripo). Gộp `map-pilot` vào `main` sau giám khảo AFTER (xem A1 tương phản). Nếu tới lúc dựng demo chưa gộp: làn T cherry-pick `b1d3e7e` (ô đất) vào `main` |
+| **L2** (Wordwoven 1C) | `games/.wt-td-1c` (nhánh `td-1c`, chưa gộp) | C10 xong (`58ec47b`: dấu đóng chữ, vòng ấn, rung khi sai, bóp nảy khi xong, Word Shot đủ 5 pha, chuỗi lớn dần; +2 draw call; bảng id âm `src/view/sound-map.ts`, 26 id mới chờ file). Đang: gộp `a2-days` `1048f8a`, phần còn của C10 (khay mép, kẹp thẻ khi zoom), rồi **hệ thống đường** theo PATH_QUALITY bằng texture đang có | Gắn 122/123 khi J2 hay điều phối nhận; mốc giữa chạy khi ảnh cảnh đã gắn |
 | **V-ts** (VFX Last Line) | đã gộp vào `main` `e26e898` (cùng `ts-codex`), đã đẩy | TS-M1-04 đạt. TS-M1-05 **trượt giám khảo độc lập**: Pulse Gun 5,5, Heat Beam 5, tàu bị đánh 4,5, Pulse Gun trên nền sáng 4. Lóe bắn là đĩa trắng tròn quanh tàu, mất màu súng; đốm trúng trắng che bầy; khói mờ; thiếu lớp tối | Vòng 2 khi có chỗ trống (tối đa 4 làn) |
 | **V-dh** (VFX Rồng, nhận từ session cũ 28/10 22:30) | `games/.wt-dh-vfx`, nhánh `dh-vfx` (25160fe, chưa gộp) | Vòng sửa ngắn cho 1a (người chấm vòng 2: 7 và 7,5; lõi trắng quá to, không ra lửa); Sky Fire từ phần sửa dở; VFX quái (gộp `main` vào trước) | Sau 1a, điều phối viên chạy một giám khảo độc lập (cần ≥ 8), rồi gửi chủ dự án tờ 1a |
-| **J-dh** (giám khảo độc lập, xong 29/10 04:35) | `games/.wt-dh-vfx/tmp/vfx/judge-r4/verdict.md` | 1a vòng 4 **trượt**: mạnh 6,5, thường 6,0 (A 5/5, R 6,5/6, T 7,25/6,75, I 7,25/6,75, F 5,9/5,4). Lớp nào cũng là mảng cam phẳng, không lõi nóng, không lớp tối; số sát thương cao hơn đầu quái 55–65 px | Đã gửi V-dh: làm 1a vòng 5 trước Sky Fire, rồi chạy giám khảo mới |
+| **J1** (giám khảo, 29/10 08:40) | chỉ đọc | 1a vòng 5 của Dragonhold (`dh-vfx` `5a7046f`, tờ `final5/`; vòng 4: 6,5/6,0) và C10 của Wordwoven (`td-1c` `58ec47b`, tự chấm 7) | Kết luận ở `judge-r5/verdict.md` và `judge-c10/verdict.md` |
+| **J2** (nhận ảnh Codex, 29/10 08:40) | chỉ đọc, ghi `docs/codex-queue/accept-29-10/` | Chấm lại M và Q cho 113, 114, 115 (Wordwoven) và 137, 138, 139 (icon Dragonhold) | Ảnh đạt: gửi L2 gắn 113/114; ảnh trượt: phiếu làm lại |
 | **E** (duyệt chữ tiếng Anh, xong 29/10) | — | 130, 131, 132 đạt sau sửa, đã gộp: Last Line `main` `b904a54`, Dragonhold `main` `4f61c6e`, Wordwoven `a2-days` `1048f8a` (132 `c5c4f8c`, màn tựa bỏ hình vẽ bằng mã `c7942eb`: không cò, dây đèn, đom đóm, con dấu; thiếu tranh thì nền phẳng và `console.warn`). `NAMES_EN.md` theo luật 28/10 (`7617e17d`) | Tên file chơi thử `loi-goi-choi-thu-*.json` đổi ở lượt dọn công cụ (cùng `scripts/td/b9.ts`) |
 
 **Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R chạy lại dưới tên R2 lúc 05:00. Ổ đĩa còn 10 GB lúc 04:15 (74 GB lúc 05:00 sau khi V-dh dọn); `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
@@ -120,6 +125,7 @@ Mục 3 bên dưới là lịch sử.
   - dựng Tripo bằng tay: Dragonhold 6 mốc (phiếu 124, ~180 credit), Wordwoven 5 mốc (phiếu 128, ~150), Last Line nhân vật và 5 súng (~180, sau khi chọn hướng);
   - đồng ý hay không việc dựng lại sáu nhà mái tranh của Wordwoven (phiếu 129, ~180 credit);
   - nhận 109 (bốn ảnh ải Last Line) làm bản tạm cho tới khi 126 xong.
+- **29/10 sáng, chủ dự án:** chọn Last Line hướng **B · Lightbearer** (bỏ tàu; ART_DIRECTION §4.3 đã đánh dấu chọn). Luật mới về đường đi: "phần đường đi cũng phải làm thật đẹp, chứ đường đi nhìn như kiểu lấy ngón tay quệt dài như kia nó rất xấu" → `docs/games/PATH_QUALITY.md` (áp ba game; ảnh: 122/123 tờ c cho Wordwoven, 155 cho Dragonhold, 125 cho Last Line; mã: làn map từng game).
 - **Sudo nginx một lần**, khi `pnpm build:local` xong.
 - **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
 - **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.
