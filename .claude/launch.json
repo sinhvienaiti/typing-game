@@ -43,6 +43,22 @@
       "port": 4186
     },
     {
+      "name": "ts-typefx-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-typefx",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4193",
+        "--strictPort"
+      ],
+      "port": 4193
+    },
+    {
       "name": "ts-codex-prod",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [

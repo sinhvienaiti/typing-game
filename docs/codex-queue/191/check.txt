@@ -1,0 +1,140 @@
+$ node src/kit/verify-kit.mjs && pnpm test && pnpm build
+src/kit OK: 81 files match kit-manifest.json (kit 0.1.0, modules platform, input, vocab, speech, learning, three, tools, feedback, audio, balance, ui)
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/games/.wt-ts-typefx
+
+ ✓ tests/boundary.test.ts (4 tests) 190ms
+ ✓ tests/english-ui.test.ts (5 tests) 504ms
+   ✓ English player text (ticket 130) > has no Vietnamese literals outside kit and vocabulary meanings  463ms
+ ✓ tests/keyboard-sounds.test.ts (23 tests) 80ms
+ ✓ tests/deploy-pack.test.ts (8 tests) 1780ms
+stdout | tests/first-frame.test.ts > first frame > 1: a three-frame star starts whole and fades once per frame
+035 star3F [1,0.444444,0.111111,0]
+
+stdout | tests/first-frame.test.ts > first frame > 2: two to six-frame bursts have exactly one full frame and their designed visible life
+035 burst 2F [1,0.25,0,0]
+035 burst 3F [1,0.444444,0.111111,0,0]
+035 burst 4F [1,0.5625,0.25,0.0625,0,0]
+035 burst 5F [1,0.64,0.36,0.16,0.04,0,0]
+035 burst 6F [1,0.694444,0.444444,0.25,0.111111,0.027778,0,0]
+
+stdout | tests/first-frame.test.ts > first frame > 7: each flash matches held power at age zero and then follows lightLevel
+035 light xung [1,0.444444,0.111111,0,0]
+035 light xungFirst [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light tiaPrime [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light tan [1,0.626736,0.340278,0.140625,0.027778,0,0]
+035 light ray [1,0.694444,0.444444,0.25,0.111111,0.027778,0,0]
+035 light phao [1,0.741512,0.521605,0.340278,0.197531,0.093364,0.027778,0.000772,0,0]
+035 light big [1,0.790123,0.604938,0.444444,0.308642,0.197531,0.111111,0.049383,0.012346,0,0]
+
+ ✓ tests/first-frame.test.ts (9 tests) 17ms
+ ✓ tests/vocab-pin.test.ts (5 tests) 13ms
+ ✓ tests/survival-boundary.test.ts (5 tests) 1427ms
+   ✓ Sinh Tồn boundary > the rules use no DOM, clock, storage, locale, Math.random, trigonometry or powers  1338ms
+ ✓ tests/learning.test.ts (1 test) 4ms
+ ✓ tests/intro-key.test.ts (23 tests) 19ms
+ ✓ tests/ship-motion.test.ts (6 tests) 4ms
+ ✓ tests/overrides.test.ts (5 tests) 7ms
+ ✓ tests/gun-feel.test.ts (6 tests) 6ms
+ ✓ tests/type-feel.test.ts (6 tests) 5ms
+ ✓ tests/small-labels.test.ts (3 tests) 6ms
+ ✓ tests/quick-settings.test.ts (7 tests) 6ms
+ ✓ tests/survival-input.test.ts (5 tests) 4ms
+ ✓ tests/vfx-pair.test.ts (3 tests) 3ms
+ ✓ tests/theme.test.ts (9 tests) 18ms
+ ✓ tests/dev-handle.test.ts (9 tests) 3ms
+ ✓ tests/guns.test.ts (25 tests) 275ms
+ ✓ tests/balance.test.ts (17 tests) 4508ms
+   ✓ skill profile (BALANCE.md §2) > learns from a played run: speed, accuracy, spread and seconds to the first key, by familiarity  851ms
+   ✓ skill profile (BALANCE.md §2) > leaves quits, AFK runs, short runs and outliers out (the kit's rules), counting the trend  475ms
+   ✓ pace k and the run header (BALANCE.md §4.1) > scales spawn rates by k, surges' size by k, walking speed by half of it, all over the mode; the header is in the hash  993ms
+   ✓ the pace director in the sim (BALANCE.md §4.2, this game's step table) > judges a whole run within the kit's caps and goes into the hash; off ('Tắt') it never steps  560ms
+   ✓ bots and the report (BALANCE.md §6, §7) > bots press keys through the page's input path; the session's log replays to the same world  596ms
+   ✓ bots and the report (BALANCE.md §6, §7) > summarises bot × mode cells and gives every gate B1–B9  980ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms
+survival sim step (700 foes, ~2000 rounds): median 0.546 ms, p95 1.207 ms
+
+ ✓ tests/stage-rules.test.ts (16 tests) 4855ms
+   ✓ Săn Đầu Đàn (§7.1) > walks the leaders in at their times with an escort ahead and a horn; the director never adds or removes one  957ms
+   ✓ Săn Đầu Đàn (§7.1) > is won once `need` leaders fall: the horde pulls back, harmless, for 2 s, then the stage ends  333ms
+   ✓ Săn Đầu Đàn (§7.1) > is lost when more leaders get through than it can spare (leaders − need)  384ms
+   ✓ the attention budget (§7.6) > never starts two telegraphs within 4 s, nor a rift in a surge's first seconds or in a storm: stages 1–4 × 20 seeds × 3 modes  2152ms
+   ✓ stage runs replay (G8) > a bot's stage run, replayed from its log with the same header, gives the same hash  380ms
+stdout | tests/survival-sim.test.ts > step cost (BUILD_S0 §8, BUILD_S1 §17) > steps a chapter stage's peak (700 foes, 2,000 rounds, 63 shells + Pháo Sao's own, 32 shields, 3 bays firing) in ≤ 1.5 ms (§17)
+survival chapter step (before {"foes":700,"rounds":2000,"shells":63,"shields":32}, fewest after {"foes":513,"rounds":1543,"shells":54,"shields":26}, launches 5): median 0.863 ms, p95 1.797 ms
+
+ ✓ tests/survival-sim.test.ts (20 tests) 4955ms
+   ✓ determinism > the same seed and command log give the same hash; a replay matches the live run  362ms
+   ✓ determinism > matches tick by tick over a whole stage, hit stops and a flood included  1216ms
+   ✓ spawns (BUILD_S0 §4, the run's plan) > follow the plan: calm × tide, surges × their strength, lulls after them, all × mode and k; groups of 4–12  445ms
+   ✓ the stage plays > the standard bot (35 WPM, typed like a person, k = 1) sees 35–80 foes in the calm, a flood at a surge and far more at a storm, fights in the ship's half, and wins most runs  1896ms
+   ✓ step cost (BUILD_S0 §8, BUILD_S1 §17) > steps 700 foes and 2,000 rounds in ≤ 1.5 ms  370ms
+ ✓ tests/s0-trace.test.ts (18 tests) 4937ms
+   ✓ the S0 trial's event trace (golden) > novice seed 1  574ms
+   ✓ the S0 trial's event trace (golden) > novice seed 2  425ms
+   ✓ the S0 trial's event trace (golden) > novice seed 3  390ms
+   ✓ the S0 trial's event trace (golden) > novice seed 5  302ms
+
+ Test Files  24 passed (24)
+      Tests  238 passed (238)
+   Start at  23:25:15
+   Duration  6.15s (transform 1.97s, setup 0ms, collect 11.76s, tests 23.62s, environment 2ms, prepare 1.54s)
+
+$ tsc --noEmit && vite build
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 180 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                    0.94 kB │ gzip:   0.53 kB
+dist/assets/chakra-petch-vietnamese-700-normal-gQuUA8Wu.woff       5.08 kB
+dist/assets/chakra-petch-vietnamese-600-normal-Pvj4qcw_.woff       5.11 kB
+dist/assets/chakra-petch-vietnamese-500-normal-BVzUBLGs.woff       5.12 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-CA0HL1e4.woff     6.85 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-DkpCIyan.woff     6.88 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-CfdwVo8-.woff     6.88 kB
+dist/assets/chakra-petch-thai-700-normal-B7WL5pBr.woff2            7.29 kB
+dist/assets/chakra-petch-thai-500-normal-DeexCGiz.woff2            7.51 kB
+dist/assets/chakra-petch-thai-600-normal-C620THcd.woff2            7.56 kB
+dist/assets/chakra-petch-latin-ext-500-normal-gA6791b0.woff2       9.03 kB
+dist/assets/chakra-petch-latin-ext-600-normal-CdGvbdDU.woff2       9.06 kB
+dist/assets/chakra-petch-latin-ext-700-normal-DAkvJhej.woff2       9.07 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-BvOXQlBN.woff      9.18 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-CK0UkkKf.woff      9.20 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BeUwKxhG.woff      9.22 kB
+dist/assets/chakra-petch-thai-700-normal-vZLZ_5L8.woff             9.70 kB
+dist/assets/chakra-petch-latin-700-normal-CnDBPjkL.woff2           9.90 kB
+dist/assets/chakra-petch-thai-500-normal-CJG_V2_m.woff             9.91 kB
+dist/assets/chakra-petch-thai-600-normal-BiM5MXH8.woff             9.95 kB
+dist/assets/chakra-petch-latin-500-normal-BR1ody1F.woff2           9.96 kB
+dist/assets/chakra-petch-latin-600-normal-DVQm9bgb.woff2           9.97 kB
+dist/assets/be-vietnam-pro-vietnamese-500-normal-DREgrEoJ.woff2   12.17 kB
+dist/assets/chakra-petch-latin-ext-700-normal-BeviJPUl.woff       12.17 kB
+dist/assets/be-vietnam-pro-vietnamese-600-normal-nyU-ZL2p.woff2   12.18 kB
+dist/assets/chakra-petch-latin-ext-500-normal-BCHeNDEx.woff       12.18 kB
+dist/assets/chakra-petch-latin-ext-600-normal-nL80L4xU.woff       12.22 kB
+dist/assets/be-vietnam-pro-vietnamese-800-normal-D4LFh2W4.woff2   12.40 kB
+dist/assets/chakra-petch-latin-700-normal-D1s_c2du.woff           13.33 kB
+dist/assets/chakra-petch-latin-500-normal-CnUQnZ4D.woff           13.41 kB
+dist/assets/chakra-petch-latin-600-normal-DQKfcdKo.woff           13.43 kB
+dist/assets/be-vietnam-pro-latin-ext-500-normal-h0Fp6aX0.woff2    13.55 kB
+dist/assets/be-vietnam-pro-latin-ext-600-normal-BNd8euf0.woff2    13.61 kB
+dist/assets/be-vietnam-pro-latin-ext-800-normal-GEpNgheG.woff2    13.75 kB
+dist/assets/be-vietnam-pro-latin-800-normal-Cwp5p0gU.woff         16.99 kB
+dist/assets/be-vietnam-pro-latin-500-normal-BJkVuMHw.woff         17.00 kB
+dist/assets/be-vietnam-pro-latin-600-normal-5IO4e7bK.woff         17.02 kB
+dist/assets/be-vietnam-pro-latin-500-normal-B6LVzGNe.woff2        21.89 kB
+dist/assets/be-vietnam-pro-latin-600-normal-BZDkUTrt.woff2        22.03 kB
+dist/assets/be-vietnam-pro-latin-800-normal-BpHZASpI.woff2        22.32 kB
+dist/assets/index-CMDKGi5U.css                                    53.62 kB │ gzip:  18.75 kB
+dist/assets/meshopt_decoder.module-BbCP70j-.js                    22.41 kB │ gzip:   5.94 kB
+dist/assets/GLTFLoader-BM60796l.js                                45.05 kB │ gzip:  13.32 kB
+dist/assets/index-Dg8U30Ud.js                                    454.47 kB │ gzip: 158.38 kB
+dist/assets/BufferGeometryUtils-Dnx6px1C.js                      547.18 kB │ gzip: 138.52 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.01s
