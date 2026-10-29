@@ -271,3 +271,36 @@ Bản 1280 chưa chụp: lần chụp chờ GPU của làn khác quá giờ.
      - Hồ sơ còn "pending" thì giữ tiếng tổng hợp cũ (`audio.key` / `audio.keyBad`) và báo anh. Hồ sơ sẵn sàng thì thay. "Off" thì tắt cả hai.
    - **Cài đặt:** `survival.settings.typingFx` qua `sanitizeTypingFx`. Các dòng Options (Letter effect, Effect strength, Word size, Keyboard sound, Keyboard volume) chuyển vào quick-settings của bước 4.
    - **Kiểm:** `pnpm check` xanh; golden không đổi (chỉ sửa view và app); tờ khung 1280 và 1920 cho phím, phím sai, xong từ, combo qua `heavy.sh --gpu`; xóa khung thô; changelog `docs/changelog/2026-10-29-typing-fx.md`; commit trên `ts-typefx`, không merge, không push.
+
+## 21. Khảo sát thư viện (làn TF2, 29/10)
+
+Luật: `SHARED_SYSTEMS_BAR.md` §5. Giấy phép đọc tại nguồn (file LICENSE trong repo hoặc trang giấy phép), cỡ gói đo bằng esbuild, minify, gzip -9, chỉ phần import thật dùng.
+
+| Ứng viên | Bản | Giấy phép (nguồn) | Cỡ gzip | Kết luận |
+|---|---|---|---|---|
+| Motion (`motion`) | 14.7.1 | MIT (`LICENSE.md` repo motiondivision/motion) | `animate` 25,1 kB; `motion/mini` 3,3 kB; `spring` 1,9 kB | **Không dùng cho dải.** Xem lý do 1–3 |
+| anime.js v4 (`animejs`) | 4.5.0 | MIT (`LICENSE.md` repo juliangarnier/anime) | `animate` 12,6 kB; thêm timeline 16,8 kB; `createSpring` 1,8 kB | **Không dùng cho dải**, cùng lý do |
+| GSAP | 3.15.0 | "Standard no charge" của Webflow (gsap.com/standard-license), không phải MIT/BSD/ISC/Apache/MPL; Webflow đổi điều khoản thì dùng tiếp là chấp nhận; cấm dùng trong công cụ dựng animation trực quan | — | **Loại**: giấy phép ngoài danh sách §5 |
+| SplitType | 0.3.4 | ISC (npm) | 4,5 kB | Không cần: dải tự dựng mỗi chữ một span từ chuỗi |
+| tsParticles (`@tsparticles/slim`) | 4.5.0 | MIT | 48,3 kB | **Loại**: vòng lặp và canvas riêng, cấu hình theo cảnh, không bắn theo từng chữ; nặng gấp 4 lần cả module |
+| three.quarks | 0.17.1 | MIT (`LICENSE` repo) | — | **Loại**: đòi `three >= 0.182`, ba game đang ở 0.170; lại chỉ vẽ trong cảnh 3D |
+| three-nebula | 13.3.0 | MIT | — | Không giúp dải DOM; hạt 3D của game đã có `three/` của kit |
+| pmndrs `postprocessing` | 6.39.5 | Zlib (`LICENSE.md` repo): dễ dãi nhưng **không có trong danh sách §5** | — | Không dùng: glow của dải là canvas 2D, bloom chỉ áp cảnh 3D. Muốn dùng cho cảnh thì xin anh duyệt Zlib |
+| a11y-dialog | 8.1.5 | MIT (`LICENSE` repo KittyGiraudel/a11y-dialog) | 1,7 kB | **Dùng** cho hai bảng quick-settings: bẫy Tab, `Esc` đóng, trả focus về ô gõ, `aria-modal` |
+| `@zag-js/slider` | 1.47.0 | MIT | 9,7 kB | Không dùng: cần lớp dán vanilla riêng; `<input type="range">` gốc đã truy cập được (phím mũi tên, Home/End, trình đọc màn hình) và nhận ảnh thật qua CSS |
+
+**Vì sao dải không dùng thư viện tween:**
+1. Phong cách đã chốt là bước theo khung 60 Hz như Typing Break (§17, T1–T2): mỗi khung là một tư thế đặt sẵn, mắt đọc "con dấu", không đọc đường tween. Tween mượt của Motion hay anime.js làm mất chính cái chất đó.
+2. Chữ (DOM) và hạt (canvas) chạy chung một `requestAnimationFrame`, nên vết sơn hiện đúng khung chữ chạm đáy (50 ms). WAAPI của Motion chạy trên compositor, lệch nhịp với canvas.
+3. Ở 15 phím/giây, mỗi phím tạo một animation mới là cấp phát và GC; dải hiện không cấp phát gì theo phím. Cả module nặng ~12 kB gzip, Wordwoven nạp lười.
+
+Chỗ còn thiếu để lên 9 nằm ở **tranh** (vết mực, tia lửa, dấu ấn thật) và nhịp từng kiểu, không ở bộ tween. Vì vậy:
+
+**Gói tài sản đề xuất (chưa tải, chờ anh duyệt từng gói):**
+
+| Gói | Nguồn | Giấy phép (trang gói) | Cỡ | Cắm vào |
+|---|---|---|---|---|
+| Kenney Splat Pack | https://kenney.nl/assets/splat-pack | CC0 | 30 file | `setTextures({ ink })`: vết mực dưới chữ Stamp, vết đỏ khi gõ sai |
+| Kenney Particle Pack | https://kenney.nl/assets/particle-pack | CC0 | 80 file, 512 × 512 | `spark`, `ember`, `star`: tia và ánh lóe cho Flare, Smash, Rune |
+
+Hai gói CC0 không bắt ghi công (vẫn ghi vào `THIRD_PARTY.md` khi dùng). Codex 173–175 vẫn là đường chính; gói Kenney là đường nhanh nếu anh muốn xem trước.

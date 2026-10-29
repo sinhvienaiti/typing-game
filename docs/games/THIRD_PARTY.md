@@ -20,3 +20,6 @@ Sổ ghi mọi thư viện mã và tài sản (âm thanh, animation, texture, ph
 | `@three.ez/instanced-mesh` 0.3.16 | MIT (repo `agargaro/instanced-mesh`), peer `three >= 0.159` | Chưa chọn: skin từng con bằng mixer CPU, đắt hơn texture xương của ta khi trên 200 con; xem lại nếu cần cull hay LOD trên 400 con | Claude, 29/10 |
 | OpenVAT (add-on Blender) | GPL-3.0 cho add-on (tác giả nói đầu ra tự do), MIT cho shader engine; theo trang của tác giả và trang tiện ích Blender, chưa đọc `LICENSE` của repo `sharpen3d/openvat` | Không dùng: ta tự nướng texture xương | Claude, 29/10 |
 | Kenney Animated Characters 1–3 | CC0 (trang Kenney) | Không dùng: clip gắn với nhân vật của Kenney, ít giá trị cho model Tripo | Claude, 29/10 |
+| a11y-dialog | 8.1.5 | mã | https://github.com/KittyGiraudel/a11y-dialog | MIT (file `LICENSE` trong repo) | kit `shared/game-kit/ui/quick-settings/` (hai bảng Settings và Sound), qua `package.json` từng game | không bắt buộc (giữ chú thích giấy phép trong gói) | TF2, 29/10/2026 |
+
+Đã xét và **không dùng** (TF2, 29/10/2026; chi tiết `TYPING_FEEDBACK_REVIEW.md` §21): GSAP (giấy phép "Standard no charge" của Webflow, ngoài danh sách §5), Motion và anime.js v4 (MIT, nhưng không hợp dải chữ bước theo khung), tsParticles, three.quarks (đòi three ≥ 0.182), pmndrs `postprocessing` (Zlib, ngoài danh sách §5).
