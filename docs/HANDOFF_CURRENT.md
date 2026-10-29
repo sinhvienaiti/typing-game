@@ -148,6 +148,7 @@ Mục 3 bên dưới là lịch sử.
   - dựng Tripo bằng tay: Dragonhold 6 mốc (phiếu 124, ~180 credit), Wordwoven 5 mốc (phiếu 128, ~150), Last Line nhân vật và 5 súng (~180, sau khi chọn hướng);
   - đồng ý hay không việc dựng lại sáu nhà mái tranh của Wordwoven (phiếu 129, ~180 credit);
   - nhận 109 (bốn ảnh ải Last Line) làm bản tạm cho tới khi 126 xong.
+- **29/10 chiều, chủ dự án (2):** mỗi game có nút bánh răng và nút loa ngay trong trận, mở bảng cài đặt chung và bảng âm thanh, không phải ra màn cài đặt: `docs/games/IN_GAME_SETTINGS.md`, dòng trong AGENTS.md; kit `shared/game-kit/ui/quick-settings/` giao TF (gắn Last Line trước); icon ở phiếu Codex 180 (đầu làn M18).
 - **29/10 chiều, chủ dự án:** tiếng phím Audio Lab, hiệu ứng gõ chữ và animation nhân vật là hệ dùng chung, phải đạt **từ 9** (hai giám khảo độc lập, không hạng mục con dưới 8,5; chủ dự án duyệt cuối): `docs/games/SHARED_SYSTEMS_BAR.md`, dòng trong AGENTS.md. Đã báo TF và AU-keys; làn **AN** (thiết kế animation) đang rà và viết `docs/games/CHARACTER_ANIMATION.md`.
 - **29/10 sáng, chủ dự án:** chọn Last Line hướng **B · Lightbearer** (bỏ tàu; ART_DIRECTION §4.3 đã đánh dấu chọn). Luật mới về đường đi: "phần đường đi cũng phải làm thật đẹp, chứ đường đi nhìn như kiểu lấy ngón tay quệt dài như kia nó rất xấu" → `docs/games/PATH_QUALITY.md` (áp ba game; ảnh: 122/123 tờ c cho Wordwoven, 155 cho Dragonhold, 125 cho Last Line; mã: làn map từng game).
 - Symlink lạc `shared/shared` → `shared` đã xóa 29/10 theo lời chủ dự án.

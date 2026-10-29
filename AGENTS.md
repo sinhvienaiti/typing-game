@@ -58,6 +58,8 @@ Art must reach commercial-game level. Backgrounds, title screens, key art, map s
 
 Shared systems need 9 or more (owner, 29/10/2026): the typing feedback (focus strip and letter effects), the Audio Lab keyboard sound profiles and character animation are reused across games, so each is accepted only when two independent judges both score it 9 or higher, compared with the references in `docs/games/SHARED_SYSTEMS_BAR.md`; the owner signs off last.
 
+Every game has a Settings gear and a Sound speaker in play (owner, 29/10/2026), opening overlay panels for general and audio settings without leaving the game; one kit component, spec in `docs/games/IN_GAME_SETTINGS.md`.
+
 ## Test captures (owner, 28/10/2026)
 
 Browser and render captures go under the game's own `tmp/` (or the
