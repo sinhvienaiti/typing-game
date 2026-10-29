@@ -84,7 +84,11 @@ type Layer = {
   dirty: Uint8Array;
   /** The word's release level (PRIORITY) while leaving. */
   release: number;
+  /** Letters shown as "_" (bit i: letter i), the game's missing-letter rule. */
+  mask: number;
 };
+
+const MASK_CHAR = "_";
 
 const FLY_TRAIL_LAG = 0.06;
 /** Share of a flight spent lifting off the word before the dive. */
@@ -268,7 +272,7 @@ export class FocusStrip implements TypingFxSink {
       text: "", len: 0, sx: new Float32Array(this.max), rowY: 0, baseY: 0, width: 0, height: 0, rowW: 0,
       state: 0, t0: 0, typed: 0,
       fx: new Uint8Array(this.max), fxAt: new Float64Array(this.max), fxPhase: new Uint8Array(this.max), fxOwner: new Int32Array(this.max), dirty: new Uint8Array(this.max),
-      release: 0,
+      release: 0, mask: 0,
     };
     for (let i = 0; i < this.max; i += 1) {
       const g = this.doc.createElement("span");
@@ -488,7 +492,11 @@ export class FocusStrip implements TypingFxSink {
 
   // ── The sink: what the driver calls ───────────────────────────────────
 
-  setWord(text: string, meaning: string, typed = 0, now: number = this.clock()): void {
+  /**
+   * A new active word. `mask`: bit i set hides letter i as "_" until it is
+   * typed or revealed (a game's missing-letter rule; the strip never decides it).
+   */
+  setWord(text: string, meaning: string, typed = 0, now: number = this.clock(), mask = 0): void {
     const word = text.slice(0, this.max);
     const busy = this.live;
     // The other layer than the live one; else a hidden one; else the one that started leaving first.
@@ -499,14 +507,11 @@ export class FocusStrip implements TypingFxSink {
     if (layer.state !== 0) this.hide(layer);
     layer.text = word;
     layer.len = word.length;
+    layer.mask = mask & ~((1 << Math.max(0, typed)) - 1);
     for (let i = 0; i < this.max; i += 1) {
       const g = layer.glyph[i]!;
       if (i < layer.len) {
-        const ch = word[i]!;
-        layer.base[i]!.textContent = ch;
-        layer.hot[i]!.textContent = ch;
-        layer.ga[i]!.textContent = ch;
-        layer.gb[i]!.textContent = ch;
+        this.writeChar(layer, i, (layer.mask & (1 << i)) !== 0 ? MASK_CHAR : word[i]!);
         g.style.display = "";
         g.className = "tfx-g" + (i < typed ? " is-typed" : i === typed ? " is-due" : "");
       } else if (g.style.display !== "none") g.style.display = "none";
@@ -552,6 +557,7 @@ export class FocusStrip implements TypingFxSink {
     if (layer === null || index < 0 || index >= layer.len) return;
     if (layer.state === 3) this.show(layer, now);
     this.stats.keys += 1;
+    if ((layer.mask & (1 << index)) !== 0) this.unmask(layer, layer.mask & ~(1 << index));
     const g = layer.glyph[index]!;
     g.className = "tfx-g is-typed";
     const next = layer.glyph[index + 1];
@@ -585,6 +591,44 @@ export class FocusStrip implements TypingFxSink {
       this.aim(layer, index, now, this.serial, PRIORITY.key);
       this.recipe.spawnWrong(this.ctx);
     }
+  }
+
+  /** The game's hidden letters now (a wrong key may reveal one): cleared bits show their letter. */
+  mask(hidden: number, now: number = this.clock()): void {
+    const layer = this.live;
+    void now;
+    if (layer !== null && (layer.mask & ~hidden) !== 0) this.unmask(layer, layer.mask & hidden);
+  }
+
+  private writeChar(layer: Layer, i: number, ch: string): void {
+    layer.base[i]!.textContent = ch;
+    layer.hot[i]!.textContent = ch;
+    layer.ga[i]!.textContent = ch;
+    layer.gb[i]!.textContent = ch;
+  }
+
+  /** Shows the real letters of bits leaving the mask, then measures again (a letter is wider than "_"). */
+  private unmask(layer: Layer, next: number): void {
+    const gone = layer.mask & ~next;
+    layer.mask = next;
+    for (let i = 0; i < layer.len; i += 1) if ((gone & (1 << i)) !== 0) this.writeChar(layer, i, layer.text[i]!);
+    this.measure(layer);
+    if (this.live === layer) this.fitPlate(layer);
+  }
+
+  /** Bottom centre of letter `index` of the shown word (root px): where a game's own key effect may leave from. */
+  glyphPoint(index: number, out: { x: number; y: number }): boolean {
+    const layer = this.live ?? (this.layers[0].state === 2 ? this.layers[0] : this.layers[1].state === 2 ? this.layers[1] : null);
+    if (layer === null || index < 0 || index >= layer.len) return false;
+    out.x = this.originX + layer.sx[index]!;
+    out.y = this.originY + layer.rowY + this.size * 0.5;
+    return true;
+  }
+
+  /** The plate's box now (root px), for a game's keep-out zones (damage numbers never cover the word). */
+  rect(): { x: number; y: number; w: number; h: number } {
+    const padY = this.size * 0.06;
+    return { x: this.originX - this.plateW / 2, y: this.originY - padY, w: this.plateW, h: this.plateH };
   }
 
   stray(now: number = this.clock()): void {

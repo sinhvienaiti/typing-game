@@ -11,7 +11,8 @@ function recorder(): TypingFxSink & { log: string[] } {
   const log: string[] = [];
   return {
     log,
-    setWord: (text, _meaning, typed) => log.push(`word ${text} ${typed}`),
+    setWord: (text, _meaning, typed, _now, mask) => log.push(`word ${text} ${typed}` + (mask ? ` mask ${mask}` : "")),
+    mask: (hidden) => log.push(`mask ${hidden}`),
     key: (index) => log.push(`key ${index}`),
     wrong: (index) => log.push(`wrong ${index}`),
     stray: () => log.push("stray"),
@@ -123,6 +124,18 @@ describe("typing-fx driver", () => {
     driver.progress({ kind: "show", word: 3, text: "frog", meaning: "", typed: 0, combo: 0 }, 1);
     driver.progress({ kind: "advance", word: 3, text: "frog", meaning: "", typed: 1, combo: 0 }, 2);
     expect(sink.log).toEqual(["word frog 0", "key 0"]);
+  });
+
+  it("a game's hidden letters go with the word; a reveal is passed on once", () => {
+    const sink = recorder();
+    const driver = new TypingFxDriver([sink]);
+    const p: TypingFxProgress = { kind: "lock", word: 7, text: "planet", meaning: "", typed: 1, combo: 0, mask: 0b10100 };
+    driver.progress(p, 1);
+    p.kind = "wrong";
+    p.mask = 0b10000; // the wrong key revealed letter 2
+    driver.progress(p, 2);
+    driver.progress(p, 3); // unchanged: nothing more
+    expect(sink.log).toEqual(["word planet 0 mask 20", "key 0", "mask 16", "wrong 1", "wrong 1"]);
   });
 
   it("every sink gets the same calls (strip and sounds stay in step)", () => {

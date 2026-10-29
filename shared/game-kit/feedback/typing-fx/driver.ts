@@ -10,8 +10,10 @@
 
 /** Whatever shows or plays typing feedback. Every method is optional but `key`. */
 export type TypingFxSink = {
-  /** A new active word (a lock, a switch, the next word); `typed` letters are already in. */
-  setWord?(text: string, meaning: string, typed: number, now: number): void;
+  /** A new active word (a lock, a switch, the next word); `typed` letters are already in; `mask` bit i hides letter i. */
+  setWord?(text: string, meaning: string, typed: number, now: number, mask: number): void;
+  /** The word's hidden letters changed (a wrong key revealed one). */
+  mask?(hidden: number, now: number): void;
   /** The letter at `index` was typed right. */
   key(index: number, now: number): void;
   /** A wrong key while the letter at `index` was due. */
@@ -46,6 +48,8 @@ export type TypingFxProgress = {
   combo: number;
   /** The game's grade; when unset the driver counts wrong keys on the word itself. */
   perfect?: boolean;
+  /** Letters the game hides (bit i: letter i shows as "_" until typed or revealed); unset: none. */
+  mask?: number;
 };
 
 /**
@@ -66,6 +70,7 @@ export class TypingFxDriver {
   typed = 0;
   errors = 0;
   length = 0;
+  hidden = 0;
 
   constructor(readonly sinks: readonly TypingFxSink[]) {}
 
@@ -88,7 +93,11 @@ export class TypingFxDriver {
       this.typed = before;
       this.errors = 0;
       this.length = p.text.length;
-      for (const sink of sinks) sink.setWord?.(p.text, p.meaning, before, now);
+      this.hidden = p.mask ?? 0;
+      for (const sink of sinks) sink.setWord?.(p.text, p.meaning, before, now, this.hidden);
+    } else if (p.mask !== undefined && p.mask !== this.hidden) {
+      this.hidden = p.mask;
+      for (const sink of sinks) sink.mask?.(p.mask, now);
     }
     if (p.kind === "wrong") {
       this.errors += 1;

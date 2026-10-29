@@ -170,9 +170,9 @@ const today: TypingFxSink = {
 
 /** Routes the driver's calls to the look being compared; sounds hear both. */
 const look: TypingFxSink = {
-  setWord: (t, m, n, now) => {
-    strip.setWord(t, m, n, now);
-    today.setWord?.(t, m, n, now);
+  setWord: (t, m, n, now, mask) => {
+    strip.setWord(t, m, n, now, mask);
+    today.setWord?.(t, m, n, now, mask);
   },
   key: (i, now) => (mode === "new" ? strip.key(i, now) : today.key(i, now)),
   wrong: (i, now) => (mode === "new" ? strip.wrong(i, now) : today.wrong?.(i, now)),
