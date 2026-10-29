@@ -1,5 +1,5 @@
 // Source: games/space-typing/src/render3d/model-loader.ts (kit copy: manifest URLs are a parameter, several manifests, URLs resolved; log fixes in shared/game-kit/DRIFT.md)
-import { isModelKind, modelKey, type ModelManifest, type ModelManifestEntry, type ModelTier } from "./model-contracts";
+import { MODEL_TIERS, isModelKind, modelKey, type ModelManifest, type ModelManifestEntry, type ModelTier } from "./model-contracts";
 
 /**
  * Finds and loads models listed in model manifests (a game's own, then any
@@ -8,7 +8,9 @@ import { isModelKind, modelKey, type ModelManifest, type ModelManifestEntry, typ
  * placeholder.
  *
  * Tier per quality: Low never loads 3D; Medium loads the ".medium" file
- * (smaller textures); High and Ultra load ".high".
+ * (smaller textures); High the ".high" one; Ultra the ".ultra" one when the
+ * manifest lists it (the whole original with every map, MODEL_QUALITY §2b),
+ * else ".high". A missing tier falls back to the lighter one first.
  */
 type GLTF = import("three/examples/jsm/loaders/GLTFLoader.js").GLTF;
 type GLTFLoader = import("three/examples/jsm/loaders/GLTFLoader.js").GLTFLoader;
@@ -39,12 +41,12 @@ const strings = (value: unknown): string[] => (Array.isArray(value) ? value.filt
 function parseEntry(raw: unknown, manifestUrl: string, extraKinds: readonly string[] = []): ModelManifestEntry | null {
   if (!isRecord(raw) || typeof raw.kind !== "string" || (!isModelKind(raw.kind) && !extraKinds.includes(raw.kind)) || typeof raw.id !== "string" || raw.id.length === 0 || !isRecord(raw.tiers)) return null;
   const tiers: Partial<Record<ModelTier, { url: string; bytes: number }>> = {};
-  for (const name of ["high", "medium"] as const) {
+  for (const name of MODEL_TIERS) {
     const file = raw.tiers[name];
     if (!isRecord(file) || typeof file.url !== "string" || file.url.length === 0) continue;
     tiers[name] = { url: resolveModelUrl(file.url, manifestUrl), bytes: typeof file.bytes === "number" && Number.isFinite(file.bytes) ? file.bytes : 0 };
   }
-  if (tiers.high === undefined && tiers.medium === undefined) return null;
+  if (Object.keys(tiers).length === 0) return null;
   const size: [number, number, number] =
     Array.isArray(raw.size) && raw.size.length === 3 && raw.size.every((n) => typeof n === "number" && Number.isFinite(n)) ? [raw.size[0], raw.size[1], raw.size[2]] : [1, 1, 1];
   return {
@@ -77,10 +79,16 @@ export function parseModelManifest(json: unknown, manifestUrl: string, extraKind
   return { version: 1, generatedAt: typeof json.generatedAt === "string" ? json.generatedAt : "", models, dropped };
 }
 
+/** Tiers tried per quality, in order: the quality's own, then lighter, then heavier. */
+const TIER_ORDER: Readonly<Record<Exclude<VisualQuality, "low">, readonly ModelTier[]>> = {
+  medium: ["medium", "high", "ultra"],
+  high: ["high", "medium", "ultra"],
+  ultra: ["ultra", "high", "medium"],
+};
+
 export function pickModelTier(entry: ModelManifestEntry, quality: VisualQuality): string | null {
   if (quality === "low") return null;
-  const preferred: readonly ModelTier[] = quality === "medium" ? ["medium", "high"] : ["high", "medium"];
-  for (const tier of preferred) {
+  for (const tier of TIER_ORDER[quality]) {
     const file = entry.tiers[tier];
     if (file !== undefined) return file.url;
   }

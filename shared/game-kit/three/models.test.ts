@@ -57,6 +57,17 @@ describe("model URLs", () => {
     expect(pickModelTier({ ...both, tiers: { high: { url: "h", bytes: 2 } } }, "medium")).toBe("h");
     expect(pickModelTier({ ...both, tiers: { medium: { url: "m", bytes: 1 } } }, "ultra")).toBe("m");
   });
+
+  it("pick the ultra file on ultra only, the lighter tier first when one is missing (MODEL_QUALITY 2b)", () => {
+    const three = { kind: "enemies" as const, id: "x", tiers: { ultra: { url: "u", bytes: 3 }, high: { url: "h", bytes: 2 }, medium: { url: "m", bytes: 1 } }, triangles: 0, sockets: [], clips: [], size: [1, 1, 1] as [number, number, number] };
+    expect(pickModelTier(three, "low")).toBeNull();
+    expect(pickModelTier(three, "medium")).toBe("m");
+    expect(pickModelTier(three, "high")).toBe("h");
+    expect(pickModelTier(three, "ultra")).toBe("u");
+    expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 }, medium: { url: "m", bytes: 1 } } }, "high")).toBe("m");
+    expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 } } }, "medium")).toBe("u");
+    expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 } } }, "low")).toBeNull();
+  });
 });
 
 describe("manifest parsing", () => {
@@ -108,6 +119,29 @@ describe("manifest parsing", () => {
       medium: { url: "/assets/dragon-hold/models/enemies/e09/e09.medium.glb?v=2", bytes: 0 },
     });
     expect(manifest.models["units/ve-binh-reu"]).toMatchObject({ size: [1, 1, 1], sockets: ["FX_CORE"], clips: [], triangles: 1200 });
+  });
+
+  it("keeps an ultra tier, and an entry that lists only ultra; ignores unknown tier names", () => {
+    const manifest = parseModelManifest(
+      {
+        version: 1,
+        models: {
+          "enemies/e09": entry("enemies", "e09", {
+            ultra: { url: "enemies/e09/e09.ultra.glb?v=3", bytes: 2000 },
+            high: { url: "enemies/e09/e09.high.glb?v=1", bytes: 900 },
+            medium: { url: "enemies/e09/e09.medium.glb?v=2", bytes: 300 },
+            low: { url: "enemies/e09/e09.low.glb", bytes: 100 },
+          }),
+          "props/tree": entry("props", "tree", { ultra: { url: "props/tree.ultra.glb", bytes: 5 } }),
+          "props/odd": entry("props", "odd", { epic: { url: "props/odd.epic.glb", bytes: 5 } }),
+        },
+      },
+      GAME,
+    )!;
+    expect(manifest.dropped).toBe(1);
+    expect(Object.keys(manifest.models["enemies/e09"]!.tiers)).toEqual(["ultra", "high", "medium"]);
+    expect(manifest.models["enemies/e09"]!.tiers.ultra).toEqual({ url: "/assets/dragon-hold/models/enemies/e09/e09.ultra.glb?v=3", bytes: 2000 });
+    expect(pickModelTier(manifest.models["props/tree"]!, "high")).toBe("/assets/dragon-hold/models/props/tree.ultra.glb");
   });
 });
 
