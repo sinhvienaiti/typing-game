@@ -17,6 +17,8 @@ Mọi game sau này dùng lại các hệ này, nên chúng là nền chất lư
 - **Đạt khi cả hai giám khảo độc lập chấm từ 9 trở lên**, và không hạng mục con nào dưới 8,5.
 - Mức 7–8 của các luật khác (VFX_STANDARD §5.6 là 8, ảnh 2D là 8) **không đủ** cho ba hệ này.
 - Chủ dự án là cổng cuối: nghe hay xem trực tiếp, đồng ý thì mới gắn rộng ra các game.
+- **Riêng âm thanh:** agent không nghe được bằng tai. Hai "giám khảo" của tiếng phím là (1) bộ phê bình nhiều lớp của Audio Lab (L1–L6, `docs/games/AUDIO_PIPELINE.md` §4) phải đạt mọi cổng, và (2) chủ dự án nghe mù trên Bảng Nghe, chấm từ 9. Khi có bản thu bàn phím thật được duyệt, bài nghe mù đặt xen bản thật.
+- **Hai chỗ lệch của tiếng phím đã nhận (điều phối 29/10):** thời gian lên của phím ≤ 10 ms (đầu tiếng ≤ 2 ms, tiếng chính tới trong 15 ms) thay cho 3 ms, vì cú gõ thật có tiếng chạm keycap trước tiếng chạm đáy; mức chung −27 LUFS-M max thay cho −20, vì nén lên −20 làm mềm tiếng click.
 
 ## 3. Cách chấm
 
