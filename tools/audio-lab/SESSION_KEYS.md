@@ -104,3 +104,65 @@ Dữ liệu: `~/AudioLab/work/_keys/<hồ sơ>/r1|r2/` (`raw/`, `strokes/`, `cri
 Chủ dự án nghe năm file 20 giây (bộ máy xếp đầu của mỗi hồ sơ) và **trả cả năm**: "âm nghe chán thật, xạn, nghe rất nhựa, cái clack nghe đúng kiểu nhựa lởm, bàn phím gõ âm hay phải theo phím nhôm chất lượng cao… xào xạc quá lởm".
 
 Nhãn chê: nhựa, rẻ (clack nhựa), xạn và xào xạc (nhiễu, tiếng sột soạt), chán. Không hồ sơ nào được dùng. Hướng mới: bản thu thật của bàn phím **vỏ nhôm cao cấp** (custom, switch lube, keycap tốt), xử lý sạch nhiễu; tiếng do mô hình tạo chỉ còn là phương án phụ nếu bản thu thật chưa có.
+
+## Bàn giao cho Codex (AU-keys, 29/10/2026)
+
+Chủ dự án giao tiếng phím cho Codex. Làn AU-keys dừng ở đây; chưa tải gì về máy.
+
+### Pipeline làm được gì
+
+`bash tools/audio-lab/run.sh keys <bước>` (mã: `tools/audio-lab/keys/`, 7 test: `bash tools/audio-lab/run.sh test tools/audio-lab/keys/tests`):
+
+| Bước | Việc |
+|---|---|
+| `generate [--profiles] [--prompts A,B,C,D] [--seeds] [--run]` | Stable Audio 3 từ prompt trong `keys/specs/<hồ sơ>.yaml` (A, B, E: đoạn gõ 10 s; C, D, F: cú đơn 1 s), lọc chữ cấm Q2, Q6, chờ mô hình nặng khác |
+| `slice [--run] [--force]` | Đoạn thu → từng cú gõ (`keys/strokes.py`): nhấn + nhả của chính phím, cách phím khác ≥ 150 ms, đầu tiếng ≤ 2 ms, rút khoảng giữ phím khi quá 180 ms (cách 260 ms), đuôi mũ hàm mũ; `SOURCES.json`, sổ giấy phép, `<stem>.proc.json` |
+| `critic [--run]` | Bộ chấm L1, L1b, L2, L3, L4, thẻ ảnh mù |
+| `pick --runs r1,r2` | Cổng (L1, lỗi mô hình L1b, đáy phím nhòe > 6 ms, tiếng chính > 15 ms, không tới −27 LUFS-M chỉ bằng tăng mức), điểm Q, chọn bộ 10 + 3 đều theo khoảng Kenney Impact P10–P90 (`keys/pick.py`, `keys/family.py`) → `~/AudioLab/work/_keys/<hồ sơ>/pick.json` |
+| `master [--choice hồ sơ=vai trò]` | −27 LUFS-M max cho mọi file, WAV 24-bit + OGG q0,6 → `sets/<vai trò>/` |
+| `recheck`, `render`, `session`, `stage [--from-ratings]` | Kiểm lại L1 trên master; câu gõ 60/100 WPM như kit phát (`keys/phrases.py`); phiên Bảng Nghe `keys-1`; staging theo bố cục kit `<base>/<id>/keys-manifest.json` (có bản Python của `keyboardFiles()` kiểm manifest) |
+
+Hiện **không có gì trong staging**: `~/AudioLab/review/staging/keys/keys-manifest.json` ghi "nothing staged" vì chủ dự án trả cả năm.
+
+### Dữ liệu ở đâu
+
+- Khoảng 600 cú gõ ứng viên: `~/AudioLab/work/_keys/<hồ sơ>/r1|r2/strokes/` (WAV 24-bit, `_strokes.json`, `<stem>.proc.json`), bản thô `raw/` (589 bản tạo), kết quả chấm `critic/`.
+- Năm bộ bị trả (và các bộ khác nhất, bộ dò): `~/AudioLab/work/_keys/<hồ sơ>/sets/top|distinct|probe/` (`masters/`, `runtime/`, `phrase-60wpm.wav`, `phrase-100wpm.wav`, `critic/`); tóm tắt `~/AudioLab/work/_keys/master.json`. Khoảng 900 MB, xóa được.
+- Phiên nghe: `~/AudioLab/review/keys/sessions/keys-1.json`.
+
+### Bản thu thật đã tìm (chưa tải; giấy phép kiểm tại trang nguồn ngày 29/10)
+
+Freesound bắt buộc đăng nhập để tải; Wikimedia Commons thì không. Không trang Freesound nào hiện "tùy chọn AI".
+
+| Hồ sơ đề xuất | Bản thu | URL | Giấy phép | Định dạng, dung lượng | Bàn phím, switch |
+|---|---|---|---|---|---|
+| Creamy Linear, Marbly | Techrul, "Typing on a rainy 75" | https://freesound.org/people/Techrul/sounds/815614/ | CC0 1.0 | MP3 204 kbps 48 kHz stereo, 58 s, 1,4 MB | Rainy 75 (vỏ nhôm); tag creamy, thocky; switch, plate không ghi |
+| Deep Thock | Reina0613, "Mechanical keyboard typing sounds" | https://freesound.org/people/Reina0613/sounds/709460/ | CC0 1.0 | WAV 24-bit 48 kHz stereo, 48 s, 13,3 MB | ikki68 Aurora custom, WS Brown tactile lube tay, Zoom H8; vỏ, plate không ghi |
+| Deep Thock | grcekh, "Keyboard Typing 4/5/9/10 (WhiteFox, Mechanical)" | https://freesound.org/people/grcekh/sounds/546167/ (gói https://freesound.org/people/grcekh/packs/30755/) | CC0 1.0 | MP3 320 kbps 44,1 kHz, 2:49, 6,5 MB (546167) | WhiteFox (vỏ nhôm), Hako Violet tactile, Yeti Nano, không hậu kỳ; cuối clip có phím gõ rời |
+| Clean Clack | Seth_Makes_Sounds, "Typing On Keyboard (cherry mx browns)" | https://freesound.org/people/Seth_Makes_Sounds/sounds/618064/ | CC0 1.0 | WAV 24-bit 44,1 kHz stereo, 1:10, 17,8 MB | Cherry MX Brown, AT2035; bàn phím không ghi |
+| Clean Clack | tofu_delivery, "Custom Mechanical Keyboard" | https://freesound.org/people/tofu_delivery/sounds/588650/ | CC0 1.0 | WAV 16-bit 44,1 kHz stereo, 47 s, 7,9 MB | custom, AT2035; bàn phím, switch không ghi |
+| Soft Dome | grcekh, "Keyboard Typing 1/2/3/6/7 (HHKB, Topre)" | https://freesound.org/people/grcekh/sounds/546033/ | CC0 1.0 | MP3 152 kbps 48 kHz, 3:16, 3,6 MB (546033) | HHKB Pro Hybrid Topre 45g (vỏ nhựa), Yeti Nano; chưa tìm được Topre vỏ nhôm có giấy phép rõ |
+| Thock (dự phòng) | aliyahb, "Thocky Keyboard Typing" | https://freesound.org/people/aliyahb/sounds/869164/ | CC0 1.0 | M4A 131 kbps mono, 33 s, 530 KB | không ghi |
+| Clicky (nếu còn giữ) | SamsterBirdies, "Typing on a keyboard" | https://freesound.org/people/SamsterBirdies/sounds/489424/ | CC0 1.0 | FLAC 24-bit 44,1 kHz, 1:35, 13,3 MB | Cherry MX Blue, BOYA BY-M1 |
+| Classic Spring (nếu còn giữ) | Raymangold22, "Typing - Model M 1986.ogg" | https://commons.wikimedia.org/wiki/File:Typing_-_Model_M_1986.ogg | CC0 1.0 | Ogg Vorbis 112 kbps, 12 s, 165 KB | IBM Model M 1986 (cũng có Model F 1984, cùng tác giả, CC0) |
+
+- Đã xét, không nên dùng: Commons "Typing on Keychron V1 Ultra (Red Linear Switch).wav" (vỏ nhựa, thu bằng mic MacBook, giấy phép ghi lệch CC BY 4.0 và CC BY-SA 4.0); bàn phím gaming và laptop trên Freesound; Monkeytype, Bucklespring, keyboardsounds (GPL); gói Mechvibes, wayclick, keebsound (không có giấy phép rõ cho file âm); Sonniss (không phải CC0/CC-BY); OpenGameArt "Keyboard Soundpack #1" (Cherry KC 1000 màng cao su).
+- Khoảng trống: Freesound CC0 gần như không có bản thu đặt tên rõ một bàn phím nhôm cao cấp (Keychron Q, Mode, custom 65 %) với switch, plate, keycap. Không tìm thấy bản nào cho "Marbly" (plate POM) và Topre vỏ nhôm. Đường chắc nhất cho mức 9: chủ dự án tự thu một bàn phím nhôm thật bằng mic gần (bản ghi của chủ dự án là nguồn sạch giấy phép nhất, kế hoạch §3.1 hạng 4), hoặc thu từ người quen có giấy đồng ý (§10.4).
+- Freesound trả HTTP 429 khi tìm nhiều; tìm tiếp nên giãn cách.
+
+### Chuỗi làm sạch đã viết (`keys/clean.py`, có test)
+
+`clean_take(x, sr, params)` trước khi cắt cú gõ:
+
+1. lọc cao 60 Hz, bậc 4, pha không (tiếng ù bàn, máy lạnh);
+2. cổng phổ: phổ nhiễu là trung bình STFT của 15 % khung lặng nhất (giữa các cú gõ), bin dưới nhiễu + 6 dB bị hạ 24 dB, mặt nạ làm mượt theo thời gian và tần số, chỉ hạ chứ không nâng (không tạo tiếng vọng trước);
+3. bỏ tiếng tách chỉ khi là lỗi: gai ≤ 3 mẫu, cách đầu tiếng của cú gõ trên 6 ms, nội suy lại; đầu tiếng của cú gõ (vẫn còn kêu 2–6 ms sau) không bao giờ bị sửa;
+4. EQ theo hồ sơ: nâng nhẹ 250 Hz (+2 dB, Q 0,8) cho tiếng "thock" chắc, hạ 6 kHz (−2,5 dB) cho bớt xạn; cấm nâng dải 4–8 kHz.
+
+Sau khi cắt: `stroke_gate` (bộ giãn xuống, ngưỡng −48 dB so với đỉnh cú gõ, tối đa 30 dB) để không còn tiếng phòng dưới và sau tiếng nhấn, tiếng nhả. Báo cáo ghi nền nhiễu và tiếng xì 4–8 kHz trong khung lặng trước và sau.
+
+**Chưa nối vào pipeline:** cần một bước `ingest` đọc bản thu đã tải (WAV, FLAC; MP3 tùy bản libsndfile), chạy `clean_take`, ghi thành bản thô dạng `audiolab.keys.take/1` (nguồn, tác giả, URL, giấy phép CC0) để `slice` cắt như bản tạo, áp `stroke_gate` cho mỗi cú gõ, rồi ghi `docs/games/THIRD_PARTY.md` và sổ giấy phép. `slice` hiện chỉ đọc hồ sơ Stable Audio 3 (`gen/sa3.read_record`).
+
+### Năm hồ sơ đề xuất (người điều phối, 29/10)
+
+Creamy Linear (linear lube, keycap PBT), Deep Thock (tactile, plate đồng thau hoặc PC), Marbly (plate POM, linear), Clean Clack (ABS doubleshot dày trên vỏ nhôm, sáng mà chắc), Soft Dome (Topre trên vỏ nhôm). Kit `typing-fx` đang dùng id `creamy, thock, clicky, dome, spring` (`KEYBOARD_PROFILES` trong `audio.ts`); đổi id thì làn typing-feedback sửa theo.

@@ -81,3 +81,27 @@ def test_kit_reader_sees_only_the_runtime_files():
            "format": {"master": "WAV 48 kHz (_art-src/x/masters/<name>.wav)"},
            "other": ["../x/key-03.ogg", "/abs/key-04.ogg", "https://h/key-05.ogg"]}
     assert pipeline.kit_files(man) == {"key": ["key-01.ogg", "key-02.ogg"], "space": ["space-01.ogg"]}
+
+
+def test_clean_chain_lowers_hiss_keeps_strokes_and_repairs_only_artefact_spikes():
+    from keys import clean
+    rng = np.random.default_rng(5)
+    x = _take([(0.30, 0.5), (1.10, 0.5)], seconds=1.6)
+    x += 10 ** (-50 / 20) * rng.standard_normal(len(x))            # room hiss
+    x += 0.05 * np.sin(2 * np.pi * 20 * np.arange(len(x)) / SR)     # rumble
+    spike = int(0.75 * SR)
+    x[spike] += 0.3                                                 # a lone digital click between strokes
+    y, rep = clean.clean_take(x, SR)
+    assert rep["after"]["hiss_4k8k_db"] < rep["before"]["hiss_4k8k_db"] - 10
+    assert rep["declick"]["spikes_repaired"] >= 1 and abs(y[spike]) < 0.05
+    for t in (0.30, 1.10):                                          # strokes keep their level and onset
+        a = int(t * SR)
+        assert abs(20 * np.log10(np.abs(y[a:a + 2400]).max() / np.abs(x[a:a + 2400]).max())) < 3.0
+    assert clean.onsets(y, SR)[0] / SR == pytest_approx(0.30)
+
+
+def pytest_approx(v, tol=0.002):
+    class _A:
+        def __eq__(self, o):
+            return abs(o - v) <= tol
+    return _A()
