@@ -84,6 +84,12 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Codex chạy song song (29/10, 23:25; chủ dự án: "tăng việc song song", "cho nó làm song song")
+
+- Dừng P1, P2, P3, P5 lúc đang chờ hết giới hạn (không phiếu nào chạy dở) và dừng vòng lặp P6b (phiếu 191 vẫn chạy tới hết). Chia việc còn lại thành 10 làn chạy cùng lúc, cách nhau 10 giây: `p1a` 142, 143; `p1b` 144, 145; `p2a` 148, 176; `p3a` 175, 149, 150; `p3b` 151, 153; `p3c` 152, 177; `p5a` 188, 183, 184; `p5b` 185, 186; `p6c` 192 (`.wt-dh-keys`); `p6d` 193 (`.wt-td-keys`). Danh sách ở `.local/codex-lane-mac-<làn>.txt`.
+- Gặp giới hạn thì `queue.sh` tự chờ rồi chạy lại phiếu đó. Hạn mức Codex là trần thật, nhiều làn chỉ làm hàng đợi cạn nhanh hơn khi còn hạn mức.
+- Workflow `codex-next-tickets` đang soạn 18–24 phiếu mới (194 trở đi) cho làn P7–P10; xong thì duyệt, thêm hàng vào `docs/CODEX_QUEUE.md`, chạy song song.
+
 ### Lửa Rồng nhắm 9 (29/10 tối)
 
 - **Vòng 8 xong (29/10, khoảng 23:20):** V-dh2 commit trên `dh-vfx` (`bea3528` gộp main, `47efd27`, `210e94c`, `cc9d15c`, `e16fbf2` changelog), chưa gộp, chưa push. Đủ chín flipbook theo bản chọn; §5.6 đạt trừ thân sáng lóe / đầu đạn đòn mạnh 1,11–1,44 (dưới 1,5); `dh-perf` High trận 3,84–4,56 / 5,4–6,3 ms. Còn mở: bộ nhớ texture VFX khoảng 101 MB High (trần đề xuất 32 MB), số Sky Fire chồng thẻ chữ đang gập 3–5 khung (sửa ở `src/ui/tags.ts`). Media flipbook chờ `media:push` (Drive cần chủ dự án kết nối lại). Tờ và clip: `games/.wt-dh-vfx/tmp/vfx/final8/`. **Đang chấm:** workflow `dh-fire-judges-r8`, hai giám khảo độc lập (`judge-r8a`, `judge-r8b`), giám khảo thứ ba nếu chia đôi quanh 8,5.
