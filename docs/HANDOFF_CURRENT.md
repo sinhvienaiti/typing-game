@@ -66,7 +66,8 @@ Mục 3 bên dưới là lịch sử.
 | Ảnh M16 (sau M12) | 149, 150, 151, 153, 152: icon UI Last Line | `-m16.txt` |
 | Ảnh M18 (sau M15) | 145, 147, 173, 176 | `-m18.txt` |
 | Ảnh M19 (sau M17) | 174, 175, 177 | `-m19.txt` |
-| **M17, làn thứ ba song song** (từ 29/10 10:45, chủ dự án: Codex còn nhiều hạn mức) | mã 168, 169, 170, 171 → ảnh 162, 148, 163, 164, 165, 166, 167, 146 | `-m17.txt`. Ba worktree Codex đã tua tới nhánh chính và có lượt đồng bộ kit chưa commit (kit 154, check-pack); Claude commit cùng phiếu 168–170 sau khi duyệt |
+| **M17b** (thay phần còn lại của M17 từ 13:40) | 170, 119, 120 (đã sửa thiết kế vòng), 178, 179, 117, 118, 171, 162, 148, 163–167, 146 | `-m17b.txt`; M19 chờ tên `m17` nên vẫn nối sau |
+| ~~M17~~ (dừng 13:40) (từ 29/10 10:45, chủ dự án: Codex còn nhiều hạn mức) | mã 168, 169, 170, 171 → ảnh 162, 148, 163, 164, 165, 166, 167, 146 | `-m17.txt`. Ba worktree Codex đã tua tới nhánh chính và có lượt đồng bộ kit chưa commit (kit 154, check-pack); Claude commit cùng phiếu 168–170 sau khi duyệt |
 
 **Codex hết hạn mức 29/10 05:49, tự chạy lại lúc 09:45** (M11 dừng ở 116, M13 dừng ở 140).
 | Ảnh M12 (sau M11) | 133–136, 141–144: icon UI Wordwoven | `-m12.txt` |
@@ -99,7 +100,7 @@ Mục 3 bên dưới là lịch sử.
 | **L4** (Wordwoven C10 vòng 4, 29/10 10:55) | `games/.wt-td-1c` (`bc05e67`) | 5 sửa của J4, số ít "1 foe", chụp cặp thẻ cùng chữ đầu | Hai giám khảo độc lập |
 | **J3** (giám khảo C10 vòng 2, xong) | `tmp/lane-l2/judge-c10-r2/verdict.md` | **Trượt** 7,0 (phím đúng 7, sai 7,5, xong từ 6,5, Word Shot 7,5, combo 7): vòng tối vẫn đè từ; thẻ mới hiện cùng khung nổ; đích đáp lại +125–208 ms; số combo nghỉ 13 px; lõi R nửa bán kính | Đã giao L3 |
 | **L3** (Wordwoven, xong 29/10 10:30) | `games/.wt-td-1c` (`td-1c` `bc05e67`, chưa gộp) | C10 vòng 3 (`012774b`: vòng ấn dưới mép thẻ, nổ tại thẻ rồi bóp, nhà lóe 65–89 ms, combo 34 px, khay mép, kẹp thẻ mọi zoom; tự chấm 7,7). Đường (`bc05e67`: đá bờ hết viền đen do GTAO, vai tối hơn; lõi − cỏ 0,159/0,155; tự chấm M 5,5, còn "vệt quệt" ở camera mặc định). Còn: lõi R có thể > 30 %; chưa chụp cặp bậc 2; nét trắng mảnh lượn trên cỏ (chưa rõ nguồn); khay mép cần icon nhà và mũi tên bằng ảnh thật; emoji ở thẻ chờ phiếu 133 | Giám khảo J4 chấm C10 vòng 3; đường chờ ảnh 122, 123c |
-| **TF** (phản hồi gõ chữ, xong 29/10 10:40) | `535850f2`: `shared/game-kit/feedback/typing-fx/`, `tools/typing-feedback-lab/` (launch `typing-fx-lab`, cổng 4192), `docs/games/TYPING_FEEDBACK_REVIEW.md` (duyệt có sửa) | 6 kiểu (Stamp 8, Smash 8, Flare 7, Shatter 7, Rune 7, Minimal 5 tự chấm), xong từ 8; 60 FPS ở 15 phím/s; dải là span DOM + canvas 2D nhỏ (Wordwoven không dùng Three). Nối vào game: §18 của bản duyệt | Chủ dự án thử Lab và chọn kiểu, cường độ, vị trí (đã gửi tờ tổng hợp 13:15). Gợi ý của điều phối: thêm tùy chọn cỡ dải, mặc định to hơn |
+| **TF** (phản hồi gõ chữ) | `535850f2`; tiếp: `games/.wt-ts-typefx` (nhánh `ts-typefx` từ `main` `79db628`) | Chủ dự án chọn **Stamp** làm mặc định (29/10 13:30). Đang: Stamp mặc định, tùy chọn cỡ dải (Large mặc định), rồi gắn dải vào Last Line và trang Cài đặt | Rồi Dragonhold, Wordwoven khi làn rảnh |
 | **E** (duyệt chữ tiếng Anh, xong 29/10) | — | 130, 131, 132 đạt sau sửa, đã gộp: Last Line `main` `b904a54`, Dragonhold `main` `4f61c6e`, Wordwoven `a2-days` `1048f8a` (132 `c5c4f8c`, màn tựa bỏ hình vẽ bằng mã `c7942eb`: không cò, dây đèn, đom đóm, con dấu; thiếu tranh thì nền phẳng và `console.warn`). `NAMES_EN.md` theo luật 28/10 (`7617e17d`) | Tên file chơi thử `loi-goi-choi-thu-*.json` đổi ở lượt dọn công cụ (cùng `scripts/td/b9.ts`) |
 
 **Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R chạy lại dưới tên R2 lúc 05:00. Ổ đĩa còn 10 GB lúc 04:15 (74 GB lúc 05:00 sau khi V-dh dọn); `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
@@ -112,6 +113,8 @@ Mục 3 bên dưới là lịch sử.
 3. Duyệt phiếu mã 168–171 trong ba worktree Codex (có lượt đồng bộ kit chưa commit), commit, gộp, đẩy.
 4. Gửi chủ dự án danh sách dựng Tripo (124, 128, 156) kèm luật số mặt `MODEL_QUALITY.md`.
 5. Kiểm các làn Claude còn chạy: V-dh (vòng 7), M-dh (model theo mức), TF (module gõ chữ, Lab), L4 (C10 vòng 4), AU-keys (tiếng phím); làn nào chết thì gửi tin cho nó chạy tiếp.
+
+**Ảnh đã nhận, chờ gắn (29/10, `docs/codex-queue/accept-29-10b/verdict.md` mục "Sẵn sàng gắn"):** Wordwoven 116 (cây v3/v4), 158 `title-backdrop.v2` (cắt 16:9 `1536x864+0+80`, logo `logo.alpha.png` khoảng 45 % rộng); Dragonhold 140 (chín icon kết quả); cùng lượt a: 113 keyart, logo, emblem; 114 sky-beast; 115 banner, portrait-ring, crest, divider; 137 (8), 138 (10), 139 (9). Chưa có làn gắn ảnh UI: mở khi các làn game rảnh.
 
 ## 4. Việc chờ, theo thứ tự
 

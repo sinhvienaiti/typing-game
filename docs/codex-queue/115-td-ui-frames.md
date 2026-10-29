@@ -4,7 +4,7 @@
 
 **Báo cáo:** `docs/codex-queue/115-report.md`.
 
-**Thứ tự:** sau 114.
+**Thứ tự:** chỉ là thứ tự hàng đợi, không phải phụ thuộc nội dung. Chạy ngay, không chờ phiếu khác (Claude 29/10).
 
 ## Luật chung (phiếu ảnh, mức chợ từ 28/10)
 

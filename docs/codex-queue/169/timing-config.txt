@@ -1,0 +1,13 @@
+import { defineConfig, mergeConfig } from "vitest/config";
+import base from "../../vitest.config";
+
+export default mergeConfig(base, defineConfig({
+  plugins: [{
+    name: "ticket-169-timing-evidence",
+    enforce: "pre",
+    transform(code, id) {
+      if (!id.endsWith("/tests/ui/tags-bodies.test.ts")) return;
+      return code.replace("expect(ms).toBeLessThan(1);", 'console.info("TICKET_169_MS=" + ms); expect(ms).toBeLessThan(1);');
+    },
+  }],
+}));

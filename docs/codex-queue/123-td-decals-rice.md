@@ -6,7 +6,7 @@
 
 **Luật hậu kỳ (bắt buộc, 29/10):** `docs/games/ART_ACCEPTANCE.md` §5: tờ "bản sinh | bản hậu kỳ" cho mỗi ảnh; công cụ không được xóa, san phẳng hay phủ phần vẽ; ngưỡng số mâu thuẫn với tranh thì dừng và ghi lại; tự chấm trên bản hậu kỳ.
 
-**Thứ tự:** sau 122 (dùng bản chọn của 122 để thử ghép).
+**Thứ tự:** chỉ là thứ tự hàng đợi, không phải phụ thuộc nội dung. Chạy ngay, không chờ phiếu khác (Claude 29/10).
 
 ## Luật chung (phiếu ảnh, mức chợ từ 28/10)
 

@@ -6,7 +6,17 @@
 
 **Luật hậu kỳ (bắt buộc, 29/10):** `docs/games/ART_ACCEPTANCE.md` §5: tờ "bản sinh | bản hậu kỳ" cho mỗi ảnh; công cụ không được xóa, san phẳng hay phủ phần vẽ; ngưỡng số mâu thuẫn với tranh thì dừng và ghi lại; tự chấm trên bản hậu kỳ.
 
-**Thứ tự:** sau 119.
+**Thứ tự:** chỉ là thứ tự hàng đợi, không phải phụ thuộc nội dung. Chạy ngay, không chờ phiếu khác (Claude 29/10).
+
+## Sửa bắt buộc 29/10 (thay các dòng tương ứng bên dưới; đọc trước khi làm)
+
+Chấm nhận 29/10 (`docs/codex-queue/accept-29-10b/verdict.md`, mục 119, 120) thấy thiết kế vòng của phiếu này đã hỏng ở Wordwoven (114, 159): mép lặng 8 % làm vòng thành những "đảo", xếp lật gương làm thành vạn hoa. Vì vậy:
+1. **Bỏ** câu "The left 8% and the right 8% … calm and plain … when mirrored" trong khối RING, và câu "The left 8% and the right 8% are plain open sky … no cloud touches or crosses the left or right edge, so tiles join … when mirrored" trong khối SKY.
+2. **Vòng 170 m và vòm trời: bốn ô khác nhau vẽ nối tiếp** `a | b | c | d`. Mỗi ô sau sinh bằng sửa ảnh nối tiếp từ 25 % mép phải của ô trước; khép vòng `d → a` bằng sửa ảnh ở dải nối. **Vòng 260 m và 380 m: hai ô khác nhau, không lật** `L | L2 | L | L2`.
+3. **Kiểm nền sạch 10 px:** chỉ kiểm phía trên đường chân núi. Hai cạnh bên và đáy dưới chân núi là tranh.
+4. **Bỏ** kiểm dải 8 % và "≤ 6/255 hai dải trời". **Thay bằng:** ghép vòng 6144 px; cắt góc nhìn 90° tại cả bốn mối; không trục gương, không mối nào thấy được ở 1 : 1.
+5. **Bỏ** ngưỡng "≤ 5 % cột alpha mềm". **Thay bằng:** soi ×2 trên trời sáng và trời tối, không quầng, không viền hồng.
+6. Màu và nắng lấy theo ảnh của phiếu 119 nếu đã có; chưa có thì theo bible §3.3, không chờ.
 
 ## Luật chung (phiếu ảnh, mức chợ từ 28/10)
 

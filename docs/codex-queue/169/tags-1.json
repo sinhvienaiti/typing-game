@@ -1,0 +1,14 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "tests/ui/tags-bodies.test.ts",
+    "--config",
+    "tmp/169/timing.config.ts"
+  ],
+  "exitCode": 0,
+  "seconds": 1.156,
+  "log": "tags-1.log"
+}

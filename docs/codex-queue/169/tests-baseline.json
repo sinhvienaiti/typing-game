@@ -1,0 +1,18 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "vitest",
+    "run",
+    "tests/sim/bot-run.test.ts",
+    "tests/sim/balance-pressure.test.ts",
+    "tests/english-ui.test.ts",
+    "tests/vocab-pin.test.ts",
+    "--reporter=default",
+    "--reporter=json",
+    "--outputFile.json=../../docs/codex-queue/169/tests-baseline-results.json"
+  ],
+  "exitCode": 1,
+  "seconds": 2.095,
+  "log": "tests-baseline.log"
+}
