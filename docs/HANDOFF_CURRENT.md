@@ -86,6 +86,8 @@ Mục 3 bên dưới là lịch sử.
 
 ### Lửa Rồng nhắm 9 (29/10 tối)
 
+- **Vòng 8 xong (29/10, khoảng 23:20):** V-dh2 commit trên `dh-vfx` (`bea3528` gộp main, `47efd27`, `210e94c`, `cc9d15c`, `e16fbf2` changelog), chưa gộp, chưa push. Đủ chín flipbook theo bản chọn; §5.6 đạt trừ thân sáng lóe / đầu đạn đòn mạnh 1,11–1,44 (dưới 1,5); `dh-perf` High trận 3,84–4,56 / 5,4–6,3 ms. Còn mở: bộ nhớ texture VFX khoảng 101 MB High (trần đề xuất 32 MB), số Sky Fire chồng thẻ chữ đang gập 3–5 khung (sửa ở `src/ui/tags.ts`). Media flipbook chờ `media:push` (Drive cần chủ dự án kết nối lại). Tờ và clip: `games/.wt-dh-vfx/tmp/vfx/final8/`. **Đang chấm:** workflow `dh-fire-judges-r8`, hai giám khảo độc lập (`judge-r8a`, `judge-r8b`), giám khảo thứ ba nếu chia đôi quanh 8,5.
+
 - **Chủ dự án:** "cố gắng lên 9, 8,5 vẫn chấp nhận được" (ghi ở `VFX_STANDARD.md` §5.6). Duyệt khoảng 25 clip Firefly.
 - **Firefly Video không trừ credit:** tài khoản ghi "Standard features: Unlimited access"; số dư đứng 8.900/10.010 sau khi bấm tạo. Credit chỉ dùng cho model đối tác (không dùng).
 - **Clip:** điều phối tạo trong tab Firefly của chủ dự án theo `docs/games/vfx/FIREFLY_VFX_LIST.md` (22 lệnh lúc khoảng 21:00, một lệnh báo "Something went wrong"); tải về `~/VFXLab/inbox/firefly/dragon-hold/<id>/`.
