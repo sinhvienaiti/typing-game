@@ -145,6 +145,7 @@ Mục 3 bên dưới là lịch sử.
    - Việc: khảo sát cả 408 file, chọn bản hay cho năm hồ sơ `creamy`, `thock`, `marbly`, `clack`, `dome`, cắt `key-01` … `key-10`, `space-01` … `space-03`, làm sạch, cân độ to, ghi `keys-manifest.json` đúng định dạng `shared/game-kit/feedback/typing-fx/audio.ts`, file nghe 20 giây mỗi hồ sơ và một file so sánh.
    - Mức nhận: từ 9 (`SHARED_SYSTEMS_BAR.md`: bộ phê bình Audio Lab đạt mọi cổng, rồi chủ dự án nghe). Thay bộ Stable Audio và bộ Codex 182 đã bị trả.
    - Không đưa vào game trước khi chủ dự án nghe và đồng ý. File âm không vào Git.
+   - **Chủ dự án 29/10, khoảng 22:00:** "tôi đánh giá âm typing hiện tại được rồi, không cần tạo thêm". Không tạo lô Firefly mới (ba giám khảo của workflow đoán bộ này chỉ 7–8,5 theo số đo và đã viết sẵn prompt bổ sung; tai chủ dự án là cổng cuối nên dựng từ 408 file này). Sau khi dựng xong, gửi file nghe để chủ dự án chốt từng hồ sơ.
    - **Đang chạy (29/10, khoảng 20:55):** workflow `keys-from-firefly` (khảo sát → ba giám khảo chọn nguồn → dựng → hai người kiểm bác bỏ → sửa, tối đa ba vòng). Mã ở `tools/audio-lab/keys/firefly.py`, đầu ra ở `tmp/keys-firefly/` (hồ sơ, `listen/<id>-20s.mp3`, `so-sanh-5-ban-phim.mp3`, `metrics.json`, `spectra.png`). Khi xong: duyệt mã, commit, gửi file nghe cho chủ dự án.
 1. **Duyệt đầu ra Codex** khi từng phiếu xong. Phiếu mã thì chạy lại kiểm và đọc diff; phiếu đụng giao diện thì kiểm trên trình duyệt ở 1280 và 1920. Sau đó gộp:
    - `ts-codex` vào `main` Tuyến Cuối;
