@@ -78,7 +78,7 @@ def main(style_dir: str, out: str) -> None:
             row(ours("key"), f"Ours · {d.name} · key 'a' of 'thank' ({d.parent.name})", font_l, font_s),
             row(ours("wrong"), "Ours · wrong key 'x' while 'n' is due (Typing Break shows nothing, study §2.3)", font_l, font_s),
             row([f.crop(WORD_PLATES) for f in word], "Typing Break · word done (FLAME, f1651): T3 rim pop", font_l, font_s),
-            row(ours_word, "Ours · word done: rim pop, seal, letters lift off to fly to the dragon", font_l, font_s),
+            row(ours_word, f"Ours · word done: rim pop, {d.name}'s own release, letters lift off to fly to the target", font_l, font_s),
         ]
     width = max(r.width for r in rows)
     sheet = Image.new("RGB", (width, sum(r.height for r in rows) + 60), (8, 8, 12))

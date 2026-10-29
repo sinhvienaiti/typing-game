@@ -3,11 +3,12 @@ import { describe, expect, it } from "vitest";
 import { comboParticles, INTENSITY, levelFor } from "./intensity";
 import { ParticlePool } from "./pool";
 import { TYPING_FX_STYLES } from "./settings";
-import { FRAME_MS, flyEase, newPose, popEnvelope, squeeze, STYLES, wrongPose, WRONG_MS, type GlyphPose, type SpawnCtx } from "./styles";
+import { FRAME_MS, flyEase, newPose, popEnvelope, spawnWrongBeat, squeeze, STYLES, wrongPose, WRONG_MS, type GlyphPose, type SpawnCtx } from "./styles";
+import { PK } from "./pool";
 
 const ctx = (pool: ParticlePool, mult = 1, still = false): SpawnCtx => {
   let seed = 11;
-  return { pool, owner: 1, prio: 1, x: 300, y: 120, h: 52, glyph: 0, now: 0, mult, size: 1, still, random: () => ((seed = (seed * 16807) % 2147483647) / 2147483647), light: () => {} };
+  return { pool, owner: 1, prio: 1, x: 300, y: 120, h: 52, glyph: 0, now: 0, mult, size: 1, still, random: () => ((seed = (seed * 16807) % 2147483647) / 2147483647), light: () => {}, key: 0 };
 };
 
 const isRest = (p: GlyphPose): boolean => p.scale === 1 && p.rot === 0 && p.dx === 0 && p.dy === 0 && p.alpha === 1 && p.hot === 0 && !p.aOn && !p.bOn;
@@ -112,7 +113,7 @@ describe("typing-fx styles", () => {
     for (let age = 0; age <= WRONG_MS; age += 4) {
       const p = wrongPose(age, 1, out);
       expect(p.scale).toBe(1);
-      expect(Math.abs(p.dx)).toBeLessThanOrEqual(0.07);
+      expect(Math.abs(p.dx)).toBeLessThanOrEqual(0.12);
       moved ||= p.dx !== 0;
     }
     expect(moved).toBe(true);
@@ -123,6 +124,43 @@ describe("typing-fx styles", () => {
       const pool = new ParticlePool(50);
       STYLES[id].spawnWrong(ctx(pool));
       for (let i = 0; i < pool.count; i += 1) expect(Math.max(pool.size[i]!, pool.size2[i]!), id).toBeLessThanOrEqual(0.7 * 52 * 1.4);
+    }
+  });
+
+  it("the shared wrong beat stays under the row: a kicked bar, and the typed letter only when the game says it", () => {
+    const pool = new ParticlePool(50);
+    const c = ctx(pool);
+    spawnWrongBeat(c);
+    expect(pool.count).toBe(1);
+    expect(pool.kind[0]).toBe(PK.bar);
+    c.key = "x".charCodeAt(0);
+    spawnWrongBeat(c);
+    expect(pool.count).toBe(3);
+    const glyph = [...pool.kind.subarray(0, pool.count)].indexOf(PK.glyph);
+    expect(pool.aux[glyph]).toBe(120);
+    // Off the row (centre 120, letter 52 px): the bar under the baseline, the bounced letter above the cap line, going left.
+    for (let i = 0; i < pool.count; i += 1) expect(Math.abs(pool.y[i]! - 120), String(pool.kind[i])).toBeGreaterThan(0.45 * 52);
+    expect(pool.vx[glyph]!).toBeLessThan(0);
+    expect(pool.vy[glyph]!).toBeLessThan(0);
+    // Stamp's own red blot lies under the line too.
+    const stamp = new ParticlePool(50);
+    STYLES.stamp.spawnWrong(ctx(stamp));
+    for (let i = 0; i < stamp.count; i += 1) expect(stamp.y[i]!).toBeGreaterThan(120 + 0.45 * 52);
+  });
+
+  it("each style has its own word release: something at Normal, nothing at Low/Off, bounded at Ultra", () => {
+    const sx = new Float32Array([-90, -45, 0, 45, 90]);
+    const word = (pool: ParticlePool, mult: number) => ({ pool, owner: 1, prio: 3, gold: false, cx: 400, cy: 120, rowW: 230, h: 52, len: 5, sx, now: 0, mult, still: false, random: () => 0.37 });
+    for (const id of TYPING_FX_STYLES) {
+      const normal = new ParticlePool(400);
+      STYLES[id].spawnRelease(word(normal, 1));
+      expect(normal.count, id).toBeGreaterThan(0);
+      const off = new ParticlePool(400);
+      STYLES[id].spawnRelease(word(off, 0));
+      expect(off.count, id).toBe(0);
+      const ultra = new ParticlePool(400);
+      STYLES[id].spawnRelease(word(ultra, 2.2));
+      expect(ultra.count, id).toBeLessThanOrEqual(32);
     }
   });
 

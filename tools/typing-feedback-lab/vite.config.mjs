@@ -1,8 +1,8 @@
 // Typing Feedback Lab: a Vite page to try the kit's focus strip, letter styles and key sounds before
 // they go into a game (docs/games/TYPING_FEEDBACK_REVIEW.md). Run from the parent repo:
 //   shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
-// Read-only mounts: the games' pinned vocabulary and font files, the Audio Lab's staged keyboard
-// sounds (~/AudioLab/review/staging/keys, owner 29/10) and backdrops kept in this tool's tmp/.
+// Read-only mounts: the games' pinned vocabulary and font files, keyboard sounds only when LAB_KEYS
+// names a folder (paused, owner 29/10), and backdrops kept in this tool's tmp/.
 import { createReadStream, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";

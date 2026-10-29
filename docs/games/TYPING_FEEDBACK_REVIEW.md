@@ -304,3 +304,30 @@ Chỗ còn thiếu để lên 9 nằm ở **tranh** (vết mực, tia lửa, d�
 | Kenney Particle Pack | https://kenney.nl/assets/particle-pack | CC0 | 80 file, 512 × 512 | `spark`, `ember`, `star`: tia và ánh lóe cho Flare, Smash, Rune |
 
 Hai gói CC0 không bắt ghi công (vẫn ghi vào `THIRD_PARTY.md` khi dùng). Codex 173–175 vẫn là đường chính; gói Kenney là đường nhanh nếu anh muốn xem trước.
+
+## 22. Sáu kiểu sau làn TF2 (29/10)
+
+**Đổi chung (mọi kiểu):**
+- **Gõ sai** có thêm một nhịp chung `spawnWrongBeat`, không đè chữ sau và không đè dòng nghĩa:
+  - gạch chân dưới chữ đang chờ bị đập xuống rồi bật lại theo khung 60 Hz, hai khung đầu trắng nóng rồi đỏ, có quầng đỏ;
+  - chữ người chơi gõ sai bật ra **phía trên** chữ đang chờ, xoay, bay lên trái rồi mờ (game truyền chữ qua `TypingFxProgress.key`; không có thì bỏ phần này);
+  - chữ đang chờ giật ngang mạnh hơn (0,11 em, 100 ms), viền đỏ của tấm sáng hơn và lâu hơn (0,95, 200 ms).
+- **Xong từ** giờ là việc của từng kiểu (`StyleRecipe.spawnRelease`), chồng lên rim pop, vòng sốc và tia chung.
+- Mỗi kiểu có ánh sáng lan sang chữ bên (`c.light`).
+- Hạt có cột `sy` để vẽ vòng cỡ cả từ thành hình elip.
+
+| Kiểu | Phím | Gõ sai | Xong từ | Tự chấm | Tờ A/B (1920 / 1280) |
+|---|---|---|---|---|---|
+| **Stamp** | vết mực mới đọc được trên tấm tối: thân đậm (accent pha mực), viền ướt sáng, chấm sáng, quầng lan; chữ sáng nổi trên vết | vệt đỏ nằm dẹt dưới dòng, giọt bắn ngang, cộng nhịp chung | con dấu khung đôi, hai vết ở góc | phím 9, sai 9, xong từ 8,5–9 | `tools/typing-feedback-lab/tmp/sheets/ab-stamp-1920x1080.jpg`, `…-1280x720.jpg` |
+| Smash | T2 như cũ, ánh sáng lan mạnh sang chữ sau | vòng đỏ hở + nhịp chung | T2 cỡ cả từ: lóe trắng phủ từ 2 khung, vòng trắng dày, vòng accent trên mép tối, cung trắng xoay rồi mờ | 8,5–9 | `ab-smash-*.jpg` |
+| Flare | thêm hai đốm than bay lên nguội dần sang vàng; ánh sáng lan | vòng đỏ + nhịp chung | một vệt sáng cứng cắt ngang cả từ, dài quá từ ở khung 2, tắt trước khi từ mới hiện; than bay lên từ mọi chữ | 8,5 | `ab-flare-*.jpg` |
+| Shatter | như cũ, ánh sáng lan | vết nứt đỏ + nhịp chung | một đường nứt chéo qua cả từ, mỗi chữ vỡ ba mảnh văng ra hai phía có trọng lực | 8,5 | `ab-shatter-*.jpg` |
+| Rune | như cũ, ánh sáng lan hai bên | vòng phù văn gãy + nhịp chung | hai vòng phù văn elip quanh cả từ, nằm như dấu trên mặt đất, quay ngược nhau | 8,5–9 | `ab-rune-*.jpg` |
+| Minimal | thêm nhấc nhẹ 0,04 em và ánh sáng nhẹ sang chữ sau, vẫn không hạt | nhịp chung (gạch chân và chữ sai), không hạt riêng | một đường gạch chân vẽ từ trái sang phải trong 90 ms | 8 (cố ý nhẹ) | `ab-minimal-*.jpg` |
+
+Mọi tờ ở `tools/typing-feedback-lab/tmp/sheets/` (không vào Git). Hàng Typing Break cắt từ `typing_break.mov` cùng thời điểm.
+
+**Chưa đạt 9 ở đâu, theo thứ tự:**
+1. Vết mực, tia, than, dấu ấn vẫn vẽ bằng thủ tục. Tranh thật (Codex 173–175, hoặc gói Kenney CC0 ở §21 nếu anh duyệt) là bước lên 9 rõ nhất cho Stamp, Flare và Rune; móc `setTextures` đã sẵn (`ember` giờ cũng nằm ở hai đầu vệt sáng của Flare).
+2. Phím của Flare, Shatter, Rune gần như giữ bản của TF; chưa có bóng hay độ sâu riêng.
+3. Cần hai giám khảo độc lập chấm từ các tờ trên (luật `SHARED_SYSTEMS_BAR.md` §3).

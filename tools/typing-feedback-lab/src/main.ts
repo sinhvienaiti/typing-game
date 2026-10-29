@@ -175,7 +175,7 @@ const look: TypingFxSink = {
     today.setWord?.(t, m, n, now, mask);
   },
   key: (i, now) => (mode === "new" ? strip.key(i, now) : today.key(i, now)),
-  wrong: (i, now) => (mode === "new" ? strip.wrong(i, now) : today.wrong?.(i, now)),
+  wrong: (i, now, key) => (mode === "new" ? strip.wrong(i, now, key) : today.wrong?.(i, now)),
   stray: (now) => strip.stray(now),
   back: (n, now) => strip.back(n, now),
   complete: (p, c, now) => (mode === "new" ? strip.complete(p, c, now) : today.complete?.(p, c, now)),
@@ -195,6 +195,7 @@ function push(kind: TypingFxProgress["kind"], now: number): void {
   progress.typed = typed;
   progress.combo = combo;
   progress.perfect = kind === "done" ? errors === 0 : undefined;
+  progress.key = kind === "wrong" ? lastKey : undefined;
   driver.progress(progress, now);
 }
 
@@ -216,8 +217,11 @@ const keyTimes: number[] = [];
 let pendingKeyAt = -1;
 const latency = { last: 0, max: 0, sum: 0, n: 0 };
 
+let lastKey = "";
+
 function type(letter: string, now = clock()): void {
   if (current.en === "") return;
+  lastKey = letter;
   keyTimes.push(performance.now());
   if (typed < current.en.length && current.en[typed] === letter) {
     typed += 1;
