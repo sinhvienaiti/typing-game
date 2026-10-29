@@ -850,6 +850,7 @@ Một hiệu ứng, hay một lô, đạt khi qua đủ sáu điều:
      - nhịp và độ "đã";
      - hợp chủ đề game.
    - Đạt từ 8 điểm. Điểm 7,5–8,5 thì thêm một người chấm độc lập.
+   - **Lửa của Rồng ở Dragonhold** (đòn chữ, Sky Fire; chủ dự án 29/10 tối, sau clip Firefly thử): **nhắm 9, nhận từ 8,5**. Hai giám khảo độc lập đều phải từ 8,5; so cạnh game thương mại cùng loại, không so với vòng trước. Chất lửa (nổ, khói, cầu lửa, tàn lửa) lấy từ flipbook video Firefly của Adobe (`docs/games/vfx/FIREFLY_VFX_LIST.md`).
    - Chấm ở cả 1280×720 và 1920×1080.
 6. **Anh xem:**
    - Anh xem bản đầu (đòn chữ và Sky Fire); mỗi lô sau có một clip ngắn.
