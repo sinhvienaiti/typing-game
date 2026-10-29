@@ -1,8 +1,7 @@
-// Keyboard sound profiles in the Lab (owner 29/10, Codex ticket 182: Creamy Linear, Deep Thock, Marbly,
-// Clean Clack, Soft Dome). /lab-keys/ serves Codex's output (<repo>/tmp/keys-codex/<id>/keys-manifest.json)
-// once that folder exists, else the Audio Lab staging folder (~/AudioLab/review/staging/keys); LAB_KEYS
-// overrides both. Until a profile is there it shows as pending and stays silent. The kit synth is a
-// labelled test sound, Lab only.
+// Keyboard sound profiles in the Lab: creamy (Creamy Linear), thock (Deep Thock), marbly, clack (Clean
+// Clack), dome (Soft Dome). Keyboard-sound work is paused (owner 29/10: he sources the sounds himself), so
+// no folder is wired and every profile shows as pending and stays silent. /lab-keys/ is mounted only when
+// LAB_KEYS names a folder of <id>/keys-manifest.json. The kit synth is a labelled test sound, Lab only.
 import { KEYBOARD_PROFILES, type TypingSoundProfile } from "../../../shared/game-kit/feedback/typing-fx";
 
 /** Where the game would give its own base URL; the Lab's is the staging mount. */
@@ -19,7 +18,7 @@ export const SYNTH_TEST: TypingSoundProfile = {
 };
 
 export const PROFILE_NOTES: Readonly<Record<string, string>> = {
-  pending: "Pending: no files for this profile yet (Codex ticket 182). Silent until they arrive.",
+  pending: "Pending: keyboard sounds are paused until the owner picks them. Silent.",
   partial: "Staged in part: plays the files it has.",
   ready: "Audio Lab files, staged for review.",
   "synth-test": "Code-made test sound from the kit. Lab only, never in a game.",

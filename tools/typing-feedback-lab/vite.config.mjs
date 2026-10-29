@@ -4,16 +4,15 @@
 // Read-only mounts: the games' pinned vocabulary and font files, the Audio Lab's staged keyboard
 // sounds (~/AudioLab/review/staging/keys, owner 29/10) and backdrops kept in this tool's tmp/.
 import { createReadStream, existsSync, statSync } from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, "../..");
-// Keyboard profiles: Codex's ticket 182 output (<repo>/tmp/keys-codex/<id>/) once it exists, else the Audio Lab staging folder.
-const CODEX_KEYS = path.join(repo, "tmp/keys-codex");
+// Keyboard sounds are paused (owner 29/10: he sources them himself). No folder is wired: every profile
+// stays pending and silent. LAB_KEYS=<dir with <id>/keys-manifest.json> mounts one on purpose.
 const MOUNTS = {
-  "/lab-keys/": process.env.LAB_KEYS ?? (existsSync(CODEX_KEYS) ? CODEX_KEYS : path.join(os.homedir(), "AudioLab/review/staging/keys")),
+  ...(process.env.LAB_KEYS ? { "/lab-keys/": process.env.LAB_KEYS } : {}),
   "/lab-vocab/dragon-hold/": path.join(repo, "games/dragon-hold/public/vocabulary"),
   "/lab-vocab/typing-defense/": path.join(repo, "games/typing-defense/public/vocabulary"),
   "/lab-vocab/typing-survival/": path.join(repo, "games/typing-survival/public/vocabulary"),
