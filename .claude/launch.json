@@ -1,0 +1,123 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "dh-demo",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-demo",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4155",
+        "--strictPort"
+      ],
+      "port": 4155
+    },
+    {
+      "name": "ts-codex-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-codex",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4186",
+        "--strictPort"
+      ],
+      "port": 4186
+    },
+    {
+      "name": "ts-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-ts-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4187",
+        "--strictPort"
+      ],
+      "port": 4187
+    },
+    {
+      "name": "td-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-td-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4157",
+        "--strictPort"
+      ],
+      "port": 4157
+    },
+    {
+      "name": "dh-codex-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-dh-codex",
+        "exec",
+        "vite",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4147",
+        "--strictPort"
+      ],
+      "port": 4147
+    },
+    {
+      "name": "td-play-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/.wt-play-typing-defense",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4158",
+        "--strictPort"
+      ],
+      "port": 4158
+    },
+    {
+      "name": "typing-fx-lab",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "shared/game-kit/node_modules/vite/bin/vite.js",
+        "--config",
+        "tools/typing-feedback-lab/vite.config.mjs"
+      ],
+      "port": 4192
+    }
+  ]
+}

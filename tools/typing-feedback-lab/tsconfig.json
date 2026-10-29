@@ -1,0 +1,5 @@
+{
+  "extends": "../../shared/game-kit/tsconfig.json",
+  "compilerOptions": { "types": [], "typeRoots": ["../../shared/game-kit/node_modules/@types"] },
+  "include": ["src/**/*.ts"]
+}
