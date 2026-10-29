@@ -84,6 +84,12 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Codex vừa phải (30/10, 00:00; chủ dự án: "khi Codex có quota lại, hãy giao việc vừa phải thôi, không cần làm song song nhiều agent nữa")
+
+- Mười làn song song chạm giới hạn chỉ vài phút sau khi mở (23:35). Đã dừng cả mười khi đang chờ, gom phần còn lại vào **ba làn**: `m1` 192, 193, 176, 177; `m2` 142, 143, 144, 145, 148, 186; `m3` 149, 150, 151, 153, 152, 183, 184, 185. Cả ba chạy tiếp khi hết giới hạn (khoảng 00:05).
+- Đã xong từ 23:15: 175, 188, 191 (Last Line: 7 bộ phím, mặc định Deep, 238 test xanh; chờ Claude kiểm trình duyệt và `media:push`).
+- Phiếu mới của workflow `codex-next-tickets` (194 trở đi) nối vào cuối ba làn này, không mở làn mới.
+
 ### Codex chạy song song (29/10, 23:25; chủ dự án: "tăng việc song song", "cho nó làm song song")
 
 - Dừng P1, P2, P3, P5 lúc đang chờ hết giới hạn (không phiếu nào chạy dở) và dừng vòng lặp P6b (phiếu 191 vẫn chạy tới hết). Chia việc còn lại thành 10 làn chạy cùng lúc, cách nhau 10 giây: `p1a` 142, 143; `p1b` 144, 145; `p2a` 148, 176; `p3a` 175, 149, 150; `p3b` 151, 153; `p3c` 152, 177; `p5a` 188, 183, 184; `p5b` 185, 186; `p6c` 192 (`.wt-dh-keys`); `p6d` 193 (`.wt-td-keys`). Danh sách ở `.local/codex-lane-mac-<làn>.txt`.
