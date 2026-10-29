@@ -4,6 +4,8 @@
 
 **Báo cáo:** `docs/codex-queue/122-report.md`.
 
+**Luật hậu kỳ (bắt buộc, 29/10):** `docs/games/ART_ACCEPTANCE.md` §5: tờ "bản sinh | bản hậu kỳ" cho mỗi ảnh; công cụ không được xóa, san phẳng hay phủ phần vẽ; ngưỡng số mâu thuẫn với tranh thì dừng và ghi lại; tự chấm trên bản hậu kỳ.
+
 **Thứ tự:** sau 121 (nhóm "còn dưới 8"). Làn L cần trước C9 nếu được.
 
 ## Luật chung (phiếu ảnh, mức chợ từ 28/10)

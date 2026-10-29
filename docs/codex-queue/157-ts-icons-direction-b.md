@@ -4,6 +4,8 @@
 
 **Báo cáo:** `docs/codex-queue/157-report.md`.
 
+**Luật hậu kỳ (bắt buộc, 29/10):** `docs/games/ART_ACCEPTANCE.md` §5: tờ "bản sinh | bản hậu kỳ" cho mỗi ảnh; công cụ không được xóa, san phẳng hay phủ phần vẽ; ngưỡng số mâu thuẫn với tranh thì dừng và ghi lại; tự chấm trên bản hậu kỳ.
+
 **Chạy khi:** sau phiếu 156 (ảnh nguồn súng canh), để icon súng khớp dáng súng canh đã chọn.
 
 ## Luật chung
