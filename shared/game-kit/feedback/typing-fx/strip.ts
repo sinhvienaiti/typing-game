@@ -18,14 +18,16 @@ import type { TypingFxSink } from "./driver";
 import { comboParticles, comboSize, isMilestone, levelFor, PRIORITY, wordPriority, type IntensityLevel } from "./intensity";
 import { ParticlePool, PK } from "./pool";
 import { flyEase, newPose, popEnvelope, restPose, squeeze, STYLES, TONE, WRONG_MS, wrongPose, type GlyphPose, type SpawnCtx, type StyleRecipe } from "./styles";
-import { DEFAULT_TYPING_FX, type TypingFxSettings } from "./settings";
+import { DEFAULT_TYPING_FX, stripCapPx, type TypingFxSettings } from "./settings";
 
 export type FocusStripOptions = {
   /** The game's overlay (positioned); the strip and its flying letters live inside it. */
   root: HTMLElement;
   /** Top centre of the strip as fractions of the root (default 0.5, 0.2: upper middle, clear of a top HUD). */
   anchor?: { x: number; y: number };
-  /** Word size at a 1080 px tall root (default 52 px; scales with the root, 28–84 px). */
+  /** Which edge of the strip the anchor holds: "top" (default) or "bottom" (the strip grows upward from a line). */
+  anchorEdge?: "top" | "bottom";
+  /** A fixed font size at a 1080 px tall root, over the size setting's cap height (tests, special screens). */
   fontPx?: number;
   font?: string;
   weight?: number;
@@ -118,7 +120,14 @@ export class FocusStrip implements TypingFxSink {
   private media: MediaQueryList | null = null;
   private palette: TypingFxPalette = { ...DEFAULT_PALETTE };
   private anchor = { x: 0.5, y: 0.2 };
-  private fontPx: number;
+  /** A pixel anchor set by the game (root px), over the fractional one. */
+  private anchorPx: { x: number; y: number } | null = null;
+  private anchorEdge: "top" | "bottom" = "top";
+  /** The strip's top centre in root px, as placed now (flying letters start from it). */
+  private originX = 0;
+  private originY = 0;
+  private capRatio = 0;
+  private fontPx: number | null;
   private size = 52;
   private rootW = 0;
   private rootH = 0;
@@ -162,8 +171,9 @@ export class FocusStrip implements TypingFxSink {
     this.gap = options.gapMs ?? 110;
     this.clock = options.clock ?? (() => performance.now());
     this.random = options.random ?? Math.random;
-    this.fontPx = options.fontPx ?? 52;
+    this.fontPx = options.fontPx ?? null;
     if (options.anchor) this.anchor = { ...options.anchor };
+    this.anchorEdge = options.anchorEdge ?? "top";
     this.reducedPref = options.reducedMotion ?? "system";
     this.pool = new ParticlePool(400);
     this.level = levelFor("normal", false);
@@ -287,6 +297,7 @@ export class FocusStrip implements TypingFxSink {
 
   /** Style, intensity (and the sound fields, kept for the game's save). Reduced motion follows the option. */
   configure(settings: Partial<TypingFxSettings>): void {
+    const resize = settings.size !== undefined && settings.size !== this.settings.size;
     this.settings = { ...this.settings, ...settings };
     this.recipe = STYLES[this.settings.style] ?? STYLES.stamp;
     this.reduced = this.reducedPref === "system" ? this.media?.matches === true : this.reducedPref;
@@ -304,6 +315,7 @@ export class FocusStrip implements TypingFxSink {
       }
     }
     this.vars("--tfx-typed", this.typedColor());
+    if (resize && this.rootH > 0) this.layout();
   }
 
   get current(): Readonly<TypingFxSettings> {
@@ -356,7 +368,47 @@ export class FocusStrip implements TypingFxSink {
 
   setAnchor(x: number, y: number): void {
     this.anchor = { x, y };
+    this.anchorPx = null;
     this.layout();
+  }
+
+  /** Anchors the strip at (x, y) root px; `edge` "bottom" keeps its bottom on that line (it grows upward). */
+  setAnchorPx(x: number, y: number, edge: "top" | "bottom" = this.anchorEdge): void {
+    const moved = this.anchorPx === null || this.anchorPx.x !== x || this.anchorPx.y !== y || edge !== this.anchorEdge;
+    this.anchorPx = { x, y };
+    this.anchorEdge = edge;
+    if (moved) this.place();
+  }
+
+  /** The word's font size now (px). */
+  get fontSize(): number {
+    return this.size;
+  }
+
+  /** Cap height over font size of the strip's font (measured once a layout; 0.7 when it cannot be). */
+  private measureCap(): number {
+    try {
+      const canvas = this.doc.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (ctx === null) return 0.7;
+      ctx.font = `${this.weight()} 100px ${this.family()}`;
+      const ascent = ctx.measureText("H").actualBoundingBoxAscent;
+      return ascent > 40 && ascent < 95 ? ascent / 100 : 0.7;
+    } catch {
+      return 0.7;
+    }
+  }
+
+  /** Puts the strip's top centre where the anchor says (once a layout, a word, or an anchor move). */
+  private place(): void {
+    const x = this.anchorPx !== null ? this.anchorPx.x : this.anchor.x * this.rootW;
+    const y = this.anchorPx !== null ? this.anchorPx.y : this.anchor.y * this.rootH;
+    const top = this.anchorEdge === "bottom" ? y - this.plateH + this.size * 0.06 : y;
+    if (x === this.originX && top === this.originY) return;
+    this.originX = x;
+    this.originY = top;
+    this.el.style.left = x + "px";
+    this.el.style.top = top + "px";
   }
 
   /** The game's word chain (escalates key effects); complete() sets it too. */
@@ -369,21 +421,23 @@ export class FocusStrip implements TypingFxSink {
   layout(): void {
     this.rootW = this.root.clientWidth;
     this.rootH = this.root.clientHeight;
-    this.size = Math.max(28, Math.min(84, Math.round((this.fontPx * (this.rootH || 1080)) / 1080)));
+    this.capRatio = this.measureCap();
+    const height = this.rootH || 1080;
+    const font = this.fontPx !== null ? (this.fontPx * height) / 1080 : stripCapPx(this.settings.size, height) / this.capRatio;
+    this.size = Math.max(24, Math.min(150, Math.round(font)));
     this.ctx.h = this.size;
     this.vars("--tfx-size", this.size + "px");
-    this.el.style.left = this.anchor.x * 100 + "%";
-    this.el.style.top = this.anchor.y * 100 + "%";
-    const width = Math.min(Math.max(this.rootW, 320), this.size * 24);
-    const height = this.size * 4.6;
-    if (width !== this.canvasW || height !== this.canvasH) {
-      this.canvasW = width;
-      this.canvasH = height;
-      this.fx.resize(width, height, typeof devicePixelRatio === "number" ? devicePixelRatio : 1);
+    const canvasW = Math.min(Math.max(this.rootW, 320), this.size * 24);
+    const canvasH = this.size * 4.6;
+    if (canvasW !== this.canvasW || canvasH !== this.canvasH) {
+      this.canvasW = canvasW;
+      this.canvasH = canvasH;
+      this.fx.resize(canvasW, canvasH, typeof devicePixelRatio === "number" ? devicePixelRatio : 1);
     }
     for (const layer of this.layers) if (layer.len > 0) this.measure(layer);
     const live = this.live ?? this.layers.find((layer) => layer.state === 2) ?? null;
     if (live !== null) this.fitPlate(live);
+    this.place();
   }
 
   private measure(layer: Layer): void {
@@ -428,6 +482,7 @@ export class FocusStrip implements TypingFxSink {
     this.plate.style.width = this.plateW + "px";
     this.plate.style.height = this.plateH + "px";
     this.plate.style.transform = `translate(${-layer.width / 2 - padX}px, ${-padY}px)`;
+    if (this.anchorEdge === "bottom") this.place();
     this.badge.style.transform = `translate(${layer.width / 2 - this.size * 0.2}px, ${-this.size * 0.62}px)`;
   }
 
@@ -657,8 +712,8 @@ export class FocusStrip implements TypingFxSink {
   /** Sends the word's letters to the target: a curved flight, slow start, fast arrival; trails behind. */
   private launch(layer: Layer, prio: number, now: number): void {
     const has = this.options.target?.(this.targetPt) ?? false;
-    const ax = this.anchor.x * this.rootW;
-    const ay = this.anchor.y * this.rootH;
+    const ax = this.originX;
+    const ay = this.originY;
     const trails = this.level.trails;
     const gold = prio >= PRIORITY.perfect;
     // Slots round-robin: a word in flight keeps flying while the next one launches.

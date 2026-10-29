@@ -5,6 +5,8 @@ import {
   FocusStrip,
   TYPING_FX_INTENSITIES,
   TYPING_FX_INTENSITY_NAMES,
+  TYPING_FX_SIZE_NAMES,
+  TYPING_FX_SIZES,
   TYPING_FX_STYLE_NAMES,
   TYPING_FX_STYLES,
   TypingFxDriver,
@@ -13,6 +15,7 @@ import {
   type TypingFxIntensity,
   type TypingFxProgress,
   type TypingFxSettings,
+  type TypingFxSize,
   type TypingFxSink,
   type TypingFxStyle,
 } from "../../../shared/game-kit/feedback/typing-fx";
@@ -357,6 +360,10 @@ segment<TypingFxStyle>("styles", TYPING_FX_STYLES, (v) => TYPING_FX_STYLE_NAMES[
 segment<TypingFxIntensity>("intensity", TYPING_FX_INTENSITIES, (v) => TYPING_FX_INTENSITY_NAMES[v], () => settings.intensity, (v) => {
   settings.intensity = v;
   strip.configure({ intensity: v });
+});
+segment<TypingFxSize>("sizes", TYPING_FX_SIZES, (v) => TYPING_FX_SIZE_NAMES[v], () => settings.size, (v) => {
+  settings.size = v;
+  strip.configure({ size: v });
 });
 $<HTMLInputElement>("reduced").addEventListener("change", (event) => strip.setReducedMotion((event.target as HTMLInputElement).checked));
 

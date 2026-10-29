@@ -2,16 +2,40 @@
 import { describe, expect, it } from "vitest";
 import { comboFactor, comboParticles, comboSize, INTENSITY, isMilestone, levelFor, PRIORITY, wordPriority } from "./intensity";
 import { ParticlePool, PK } from "./pool";
-import { DEFAULT_TYPING_FX, sanitizeTypingFx, TYPING_FX_INTENSITIES, TYPING_FX_STYLES } from "./settings";
+import { DEFAULT_TYPING_FX, sanitizeTypingFx, stripCapPx, TYPING_FX_INTENSITIES, TYPING_FX_SIZES, TYPING_FX_STYLES } from "./settings";
 
 describe("typing-fx settings", () => {
   it("keeps good values and drops each bad field to its default on its own", () => {
-    expect(sanitizeTypingFx({ style: "rune", intensity: "ultra", soundProfile: "thock", volume: 0.25 })).toEqual({ style: "rune", intensity: "ultra", soundProfile: "thock", volume: 0.25 });
+    expect(sanitizeTypingFx({ style: "rune", intensity: "ultra", size: "huge", soundProfile: "thock", volume: 0.25 })).toEqual({ style: "rune", intensity: "ultra", size: "huge", soundProfile: "thock", volume: 0.25 });
+    expect(sanitizeTypingFx({ size: "giant" }).size).toBe("large");
+    // An old save without the size field gets the default.
+    expect(sanitizeTypingFx({ style: "smash", intensity: "low", soundProfile: "off", volume: 0.5 }).size).toBe("large");
     expect(sanitizeTypingFx({ style: "laser", intensity: "max", soundProfile: "../x", volume: 7 })).toEqual({ ...DEFAULT_TYPING_FX, volume: 1 });
     expect(sanitizeTypingFx(null)).toEqual(DEFAULT_TYPING_FX);
     expect(sanitizeTypingFx("stamp")).toEqual(DEFAULT_TYPING_FX);
     expect(sanitizeTypingFx({ volume: Number.NaN }).volume).toBe(DEFAULT_TYPING_FX.volume);
     expect(sanitizeTypingFx({ volume: -1 }).volume).toBe(0);
+  });
+
+  it("Stamp, Normal and Large by default (owner 29/10)", () => {
+    expect(DEFAULT_TYPING_FX.style).toBe("stamp");
+    expect(DEFAULT_TYPING_FX.size).toBe("large");
+    expect(TYPING_FX_SIZES).toEqual(["medium", "large", "huge"]);
+  });
+
+  it("the word's cap height: Large about 40 / 56 px, Huge about 52 / 72 px at 720 / 1080, growing with the view", () => {
+    expect(stripCapPx("large", 720)).toBe(40);
+    expect(stripCapPx("large", 1080)).toBe(56);
+    expect(stripCapPx("huge", 720)).toBe(52);
+    expect(stripCapPx("huge", 1080)).toBe(72);
+    expect(stripCapPx("large", 900)).toBe(48);
+    expect(stripCapPx("large", 1440)).toBeCloseTo(74.67, 2);
+    expect(stripCapPx("large", 540)).toBe(30);
+    expect(stripCapPx("medium", 1080)).toBeLessThan(stripCapPx("large", 1080));
+    for (const h of [480, 720, 900, 1080, 1440, 2160]) {
+      expect(stripCapPx("medium", h)).toBeLessThan(stripCapPx("large", h));
+      expect(stripCapPx("large", h)).toBeLessThan(stripCapPx("huge", h));
+    }
   });
 
   it("offers six styles and the five intensities, Normal by default", () => {

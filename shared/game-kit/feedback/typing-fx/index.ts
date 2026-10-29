@@ -1,5 +1,8 @@
 // Kit module feedback/typing-fx: the focus strip (the active word big, a chosen letter-effect style), key sounds and their settings.
-export { DEFAULT_TYPING_FX, sanitizeTypingFx, TYPING_FX_FIELD, TYPING_FX_INTENSITIES, TYPING_FX_INTENSITY_NAMES, TYPING_FX_STYLE_NAMES, TYPING_FX_STYLES, type TypingFxIntensity, type TypingFxSettings, type TypingFxStyle } from "./settings";
+export {
+  DEFAULT_TYPING_FX, sanitizeTypingFx, stripCapPx, TYPING_FX_CAP, TYPING_FX_FIELD, TYPING_FX_INTENSITIES, TYPING_FX_INTENSITY_NAMES, TYPING_FX_SIZE_NAMES, TYPING_FX_SIZES, TYPING_FX_STYLE_NAMES, TYPING_FX_STYLES,
+  type TypingFxIntensity, type TypingFxSettings, type TypingFxSize, type TypingFxStyle,
+} from "./settings";
 export { comboFactor, comboParticles, comboSize, INTENSITY, isMilestone, levelFor, PRIORITY, wordPriority, type IntensityLevel, type Priority } from "./intensity";
 export { ParticlePool, PK, type ParticleKind } from "./pool";
 export { kitKind, TypingFxDriver, type TypingFxKind, type TypingFxProgress, type TypingFxSink } from "./driver";
