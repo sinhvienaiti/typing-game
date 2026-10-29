@@ -107,6 +107,8 @@ Mục 3 bên dưới là lịch sử.
 
 **Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R chạy lại dưới tên R2 lúc 05:00. Ổ đĩa còn 10 GB lúc 04:15 (74 GB lúc 05:00 sau khi V-dh dọn); `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
 
+**29/10 18:10:** Claude và Codex cùng hết hạn mức khoảng 14:50–18:10. Đã gửi lại bốn làn Claude (TF2, V-dh, L4, M-dh); ba làn Codex tự chạy lại 18:09 ở 122, 160, 120. Phiếu đã xong chờ chấm nhận: 119 (màn tựa Dragonhold), 170 (Wordwoven pack-and-kit, chưa duyệt), 182 (âm thanh, tạm dừng).
+
 **Claude có lại hạn mức 29/10 13:10; Codex hết hạn mức 10:45, tự chạy lại 14:47 (ba làn chờ ở 122, 160, 170).** Đã gửi lại bốn làn Claude (AU-keys, V-dh, M-dh, L4); giám khảo nhận ảnh lô 2 (116–120, 140, 158, 159) đang chạy, kết quả ở `docs/codex-queue/accept-29-10b/`.
 
 **Khi Claude có lại hạn mức (chủ dự án 29/10 11:40: hạn mức Claude sắp hết, giao Codex một lượt dài):** Codex chạy ba làn liền (khoảng 50 phiếu). Việc đầu tiên khi quay lại:
