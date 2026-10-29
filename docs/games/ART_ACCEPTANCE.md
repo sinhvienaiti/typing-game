@@ -79,3 +79,13 @@ Mức cần (mục 3) vẫn quyết **làm ảnh nào trước**: P1, rồi P2; 
 - **Claude** chấm lại khi duyệt. Ảnh sát ngưỡng thì hai người chấm độc lập: model 3D từ 6 tới 7,5 hoặc mức "Tạo lại", ảnh 2D từ 7,5 tới 8,5. Codex tự chấm và Claude chấm lại được tính là hai người khi cùng một phía ngưỡng; hai điểm ở hai phía ngưỡng, hoặc lệch nhau từ 2 điểm, thì có người thứ ba.
 - **Model Tripo** (chủ dự án tạo tay trên web) chấm theo cùng thang, trên ảnh render ba góc. Claude chỉ đề nghị tạo lại khi model dưới 7 và không sửa được bằng preset hay Blender.
 - Báo cáo kiểm ảnh ghi **điểm và mức**, không chỉ "đạt" hay "chưa đạt".
+
+## 5. Hậu kỳ không được phá tranh (29/10/2026)
+
+Lượt chấm nhận 29/10 (`docs/codex-queue/accept-29-10/verdict.md`) thấy 4/6 phiếu có lượt sinh đã đạt, nhưng bước công cụ làm hỏng nó: hộp tối nung vào trời, mép núi san phẳng, khung bị bỏ phần vẽ, gamma làm phai icon. Bản tự chấm vẫn ghi 8. Từ nay, cho mọi phiếu ảnh:
+
+- Mỗi ảnh giao có một tờ **"bản sinh | bản hậu kỳ"** cạnh nhau, cùng cỡ.
+- Bước công cụ chỉ được cắt, tách nền, đổi cỡ, sửa mép, làm liền mép, chỉnh sáng nhẹ toàn ảnh (±10 %). Không được xóa, san phẳng, phủ mảng màu hay thay phần vẽ.
+- Khi một ngưỡng số mâu thuẫn với tranh (muốn đạt số phải làm bẩn tranh), dừng lại, giữ tranh đẹp, ghi mâu thuẫn trong báo cáo để Claude quyết.
+- Tự chấm M trên bản hậu kỳ, không trên bản sinh.
+- Người chấm nhận ảnh xem ảnh giao ở cỡ đầy đủ và cỡ trong game, không chỉ tờ của người làm.
