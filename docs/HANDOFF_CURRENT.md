@@ -141,6 +141,11 @@ Mục 3 bên dưới là lịch sử.
 
 ## 4. Việc chờ, theo thứ tự
 
+0. **Ưu tiên sớm (chủ dự án 29/10, 20:50): tiếng phím từ Firefly của chủ dự án.** Chủ dự án đã tạo 408 file WAV bằng Adobe Firefly Generate Sound Effects ở `~/Downloads/typing-mp3/` (9 thư mục `Adobe_2026-10-29*`, 8 thư mục 50 file và 1 thư mục 8 file; mỗi file 12 giây, 48 kHz, stereo 16-bit; tên file mở bằng "An edited Foley sequence of isol…").
+   - Việc: khảo sát cả 408 file, chọn bản hay cho năm hồ sơ `creamy`, `thock`, `marbly`, `clack`, `dome`, cắt `key-01` … `key-10`, `space-01` … `space-03`, làm sạch, cân độ to, ghi `keys-manifest.json` đúng định dạng `shared/game-kit/feedback/typing-fx/audio.ts`, file nghe 20 giây mỗi hồ sơ và một file so sánh.
+   - Mức nhận: từ 9 (`SHARED_SYSTEMS_BAR.md`: bộ phê bình Audio Lab đạt mọi cổng, rồi chủ dự án nghe). Thay bộ Stable Audio và bộ Codex 182 đã bị trả.
+   - Không đưa vào game trước khi chủ dự án nghe và đồng ý. File âm không vào Git.
+   - **Đang chạy (29/10, khoảng 20:55):** workflow `keys-from-firefly` (khảo sát → ba giám khảo chọn nguồn → dựng → hai người kiểm bác bỏ → sửa, tối đa ba vòng). Mã ở `tools/audio-lab/keys/firefly.py`, đầu ra ở `tmp/keys-firefly/` (hồ sơ, `listen/<id>-20s.mp3`, `so-sanh-5-ban-phim.mp3`, `metrics.json`, `spectra.png`). Khi xong: duyệt mã, commit, gửi file nghe cho chủ dự án.
 1. **Duyệt đầu ra Codex** khi từng phiếu xong. Phiếu mã thì chạy lại kiểm và đọc diff; phiếu đụng giao diện thì kiểm trên trình duyệt ở 1280 và 1920. Sau đó gộp:
    - `ts-codex` vào `main` Tuyến Cuối;
    - `td-codex` vào `a2-days`;
