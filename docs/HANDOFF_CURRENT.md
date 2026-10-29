@@ -134,7 +134,7 @@ Mục 3 bên dưới là lịch sử.
   - đồng ý hay không việc dựng lại sáu nhà mái tranh của Wordwoven (phiếu 129, ~180 credit);
   - nhận 109 (bốn ảnh ải Last Line) làm bản tạm cho tới khi 126 xong.
 - **29/10 sáng, chủ dự án:** chọn Last Line hướng **B · Lightbearer** (bỏ tàu; ART_DIRECTION §4.3 đã đánh dấu chọn). Luật mới về đường đi: "phần đường đi cũng phải làm thật đẹp, chứ đường đi nhìn như kiểu lấy ngón tay quệt dài như kia nó rất xấu" → `docs/games/PATH_QUALITY.md` (áp ba game; ảnh: 122/123 tờ c cho Wordwoven, 155 cho Dragonhold, 125 cho Last Line; mã: làn map từng game).
-- **Hỏi chủ dự án:** xóa symlink lạc `shared/shared` → `shared` (tạo 28/10 12:17, không làn nào nhận; làm Vite chết vì vòng liên kết)?
+- Symlink lạc `shared/shared` → `shared` đã xóa 29/10 theo lời chủ dự án.
 - **Sudo nginx một lần**, khi `pnpm build:local` xong.
 - **Tripo đợt 4** (Campfire Ring, Woodpile, 60 credit): chủ dự án đang dựng. GLB thả vào `typing-game-handoff-2026-10-25/tripo-upload-dot4/_GLB tải về/`.
 - **Tripo đợt 3** (8 model): đã xong, nằm trong `tripo-upload-dot3/_GLB tải về/`. Làn R đang nhập.
