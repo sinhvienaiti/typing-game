@@ -99,6 +99,7 @@ class Item:
     quiet_db: float = 0.0            # how far under the session target the item plays (true-peak cap)
     source_id: str | None = None     # real id behind a neutral calibration id (never sent to the page)
     rendered: list[str] = field(default_factory=list)   # rendered contexts every candidate has a file for
+    ctx_labels: dict[str, str] = field(default_factory=dict)  # owner-visible names of rendered contexts (keys: typing phrases)
 
     def by_label(self, label: str) -> Candidate | None:
         return next((c for c in self.candidates if c.label == label), None)
@@ -317,11 +318,15 @@ def _item(raw, where: str, base: Path, index: int, sess: dict, seen: set[str]) -
     for pos, ci in enumerate(order):
         cands[ci].label = LETTERS[pos]
     src_id = raw.get("source_id")
+    labels = raw.get("ctx_labels") or {}
+    if not isinstance(labels, dict) or any(k not in config.RENDERED_CONTEXTS or not isinstance(v, str) or not v.strip()
+                                           or len(v) > 40 for k, v in labels.items()):
+        raise _err(where, f"'ctx_labels' phải là {{bối cảnh dựng sẵn: tên ≤ 40 ký tự}}, bối cảnh trong {config.RENDERED_CONTEXTS}")
     return Item(key=key, index=index, id=sound_id.strip(), desc=str(raw.get("desc") or ""),
                 family=item["family"], group=item["group"], mode=mode, contexts=usable or ["alone"],
                 probe=probe, anchor=bool(raw.get("anchor")), anchor_of=raw.get("anchor_of"),
                 loop=loop, candidates=cands, source_id=src_id if isinstance(src_id, str) and src_id else None,
-                rendered=rendered)
+                rendered=rendered, ctx_labels={k: v.strip() for k, v in labels.items()})
 
 
 def build(raw: dict, path: Path, cache: loudness.MeasureCache | None,
@@ -393,6 +398,7 @@ def item_view(item: Item) -> dict:
         "modeLabel": config.MODES[item.mode],
         "contexts": item.contexts,
         "rendered": item.rendered,
+        **({"ctxLabels": item.ctx_labels} if item.ctx_labels else {}),
         "loop": {k: item.loop[k] for k in ("interval_ms", "jitter", "cents", "db", "offset_ms", "gap_ms",
                                            "avoid", "count", "seamless") if k in item.loop},
         "candidates": [

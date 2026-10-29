@@ -520,7 +520,7 @@ function renderHead() {
           class: (c.key === S.ctx ? "on " : "") + (it.contexts.includes(c.key) ? "sug" : ""),
           disabled: !available(it, c), title: c.hint || (it.contexts.includes(c.key) ? "Gợi ý cho họ âm này" : ""),
           onclick: () => setContext(c.key),
-        }, c.key === "loop" ? `Lặp ${it.loop.count || 20} lần` : c.label, !c.enabled ? h("small", {}, " (giai đoạn 3)") : null))),
+        }, c.key === "loop" ? `Lặp ${it.loop.count || 20} lần` : (it.ctxLabels && it.ctxLabels[c.key]) || c.label, !c.enabled ? h("small", {}, " (giai đoạn 3)") : null))),
       h("div", { class: "ctxhint" }, kbd("↑"), " ", kbd("↓"), " đổi bối cảnh · ", ctxHint(it))));
 }
 function ctxHint(it) {
@@ -530,7 +530,7 @@ function ctxHint(it) {
     return `${p.count || 20} lần, cách ~${fmt(p.interval_ms, 0)} ms, ±${fmt(p.cents, 0)} cent, ±${fmt(p.db, 1)} dB`;
   }
   if (S.ctx === "small") return `lọc cao ${fmt(S.cfg.smallSpeakerHz, 0)} Hz`;
-  if (isRendered(S.ctx)) return ctxInfo(S.ctx).hint || "bản dựng sẵn";
+  if (isRendered(S.ctx)) return (it.ctxLabels && it.ctxLabels[S.ctx]) ? `bản dựng sẵn: ${it.ctxLabels[S.ctx]}` : ctxInfo(S.ctx).hint || "bản dựng sẵn";
   return "phát riêng từng bản";
 }
 

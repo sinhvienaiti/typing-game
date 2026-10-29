@@ -85,3 +85,19 @@ def test_rating_keeps_the_scene_context_and_its_files(srv):
     assert line["context"] == "scene" and set(line["contexts_heard"]) == {"scene", "alone"}
     assert all("scene" in v for v in line["ctx_files"].values())
     assert "ngắt quãng" in config.TAG_NAMES
+
+
+def test_ctx_labels_name_the_renders_on_the_page(tmp_path):
+    """Keyboard sounds (keys/): the renders are typing phrases, so an item names its rendered contexts."""
+    a, b = tone(tmp_path / "a.wav", 300), tone(tmp_path / "b.wav", 500)
+    item = {"id": "keys.creamy", "family": "phim-ui", "contexts": ["scene", "burst", "loop"],
+            "ctx_labels": {"scene": "Gõ 60 WPM", "burst": "Gõ 100 WPM"},
+            "candidates": [{"files": [str(a), str(b)], "ctx": {"scene": str(a), "burst": str(b)}}]}
+    s = session.load(write_session(tmp_path, "k1", [item]))
+    view = session.item_view(s.items[0])
+    assert view["ctxLabels"] == {"scene": "Gõ 60 WPM", "burst": "Gõ 100 WPM"}
+    plain = session.item_view(session.load(write_session(tmp_path, "k2", [{"id": "x", "candidates": [str(a)]}])).items[0])
+    assert "ctxLabels" not in plain
+    bad = write_session(tmp_path, "k3", [{**item, "ctx_labels": {"loop": "x"}}])
+    with pytest.raises(session.SessionError):
+        session.load(bad)

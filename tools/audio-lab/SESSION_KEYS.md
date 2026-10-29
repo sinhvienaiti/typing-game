@@ -1,0 +1,100 @@
+# Tiếng phím · phiên nghe `keys-1` (5 bàn phím, 29/10/2026)
+
+Năm hồ sơ tiếng phím để người chơi chọn trong Settings: **Creamy, Thock, Clicky, Soft Dome, Classic Spring**. Mỗi hồ sơ có 10 tiếng phím (`key-01…key-10`) và 3 tiếng phím cách (`space-01…space-03`). Tất cả làm trong Audio Lab bằng Stable Audio 3 Small-SFX trên máy này: không gói tải về, không âm tổng hợp bằng mã.
+
+Không có gì ở đây đã vào game. Tai anh là cổng cuối; theo `docs/games/SHARED_SYSTEMS_BAR.md` hệ này còn cần hai giám khảo độc lập chấm từ 9.
+
+## Mở
+
+```bash
+bash tools/audio-lab/run.sh board --game keys --open      # hoặc: pnpm audio:board --game keys
+```
+
+Trang mở ở `http://127.0.0.1:3191` (bận thì 3192). Chọn phiên **`keys-1`**. Khoảng 15 phút. Nghe bằng **tai nghe**, giữ âm lượng máy cố định.
+
+## Phiên có gì
+
+Sáu mục:
+
+| Mục | Nghe gì |
+|---|---|
+| `keys.creamy` … `keys.spring` (5 mục) | Mỗi bản là **một bộ 13 file** của bàn phím đó. Máy đưa bộ đứng đầu và bộ khác nhất; Soft Dome và Classic Spring có thêm một bộ dò lấy từ nửa dưới. Thock chỉ có một bộ (không bộ thứ hai nào đủ khác mà vẫn qua cổng): chấm sao, hoặc `0` nếu chưa đạt. Anh không biết bản nào là bản nào |
+| `keys.compare` | Năm bàn phím cạnh nhau (bộ máy xếp đầu, câu gõ 60 WPM). Chấm sao cho từng bàn phím, ghi chú nếu hai bàn phím nghe giống nhau |
+
+Bối cảnh của mỗi mục (phím `↑` `↓`):
+
+| Bối cảnh | Là gì |
+|---|---|
+| **Gõ 60 WPM** (mở đầu) | Câu "the quick brown fox jumps over the lazy dog" gõ bằng bộ đó, đúng cách kit `typing-fx` sẽ phát: lấy biến thể theo vòng xáo trộn, không lặp liền, ±3 % tốc độ phát, ±8 % mức, phím 0,55, phím cách 0,6. Mọi bộ gõ cùng một nhịp: chỉ tiếng khác. Không cân độ to, nên bộ nào to hơn sẽ nghe ra |
+| **Gõ 100 WPM** | Như trên, nhanh hơn |
+| **Lặp 20 lần** | Bài mỏi tai: 20 lần, cách ~200 ms, ±50 cent, ±0,7 dB, không lặp hai bản gần nhất |
+| **Một mình** | 13 file lần lượt: 10 phím rồi 3 phím cách |
+| **Loa nhỏ** | Như "Một mình", lọc cao 200 Hz |
+
+## Chấm
+
+- `⇧1`…`⇧5`: sao cho bộ đang chọn. `V`: bộ tốt nhất. `0`: **không bộ nào đạt**.
+- Nhãn hay dùng: `R` rè/lỗi (tiếng "AI", nhòe, xì), `S` sai chất liệu (không giống bàn phím đó), `E` rẻ tiền, `P` nhàm khi lặp, `C` chói, `D` đục, `M` chậm (phím phát trễ), `K` quá dài, `H` hay.
+- `/` ghi chú (gõ tiếng Việt được), `Enter` lưu. Thẻ số đo của máy chỉ hiện sau khi chấm.
+- Xin anh ghi một điểm 0–10 cho mỗi bàn phím trong ghi chú (mức 9 là "ngang bàn phím cao cấp thật, muốn bật").
+
+## Sau khi anh chấm
+
+```bash
+bash tools/audio-lab/run.sh keys stage --from-ratings     # đưa bộ anh chọn vào staging; hồ sơ "không bộ nào đạt" bị rút ra
+```
+
+Staging: `~/AudioLab/review/staging/keys/<hồ sơ>/` (`key-01.ogg … space-03.ogg`, `keys-manifest.json`, đúng chỗ kit đọc: `<base>/<id>/keys-manifest.json`), chỉ mục chung `~/AudioLab/review/staging/keys/keys-manifest.json`, master WAV và `SOURCES.json`, `licences.jsonl` ở `~/AudioLab/review/staging/keys/_art-src/<hồ sơ>/`. Hiện staging giữ bộ máy xếp đầu, trạng thái "candidate".
+
+## Máy đã làm gì
+
+| Hồ sơ | Nguồn bộ đầu | Ứng viên | Qua cổng (phím / cách) | Bộ đầu: audiobox PQ, khớp hồ sơ | Dài phím / cách |
+|---|---|---|---|---|---|
+| Creamy | đoạn gõ 10 s, prompt A (3 đoạn) | 81 bản tạo → 113 cú gõ | 38 / 13 | 7,43 · 0,90 | 116–180 / 213–225 ms |
+| Thock | đoạn gõ A, B và cú đơn C (5 bản) | 81 → 91 | 26 / 28 | 7,80 · 0,81 | 129–180 / 90–258 ms |
+| Clicky | đoạn gõ B (3 đoạn) | 108 → 182 | 49 / 24 | 7,77 · 0,94 | 112–148 / 127–258 ms |
+| Soft Dome | đoạn gõ A, E (vòng 2) | 135 → 141 | 34 / 34 | 7,27 · 0,81 | 125–180 / 97–100 ms |
+| Classic Spring | cú đơn C (10 bản) | 81 → 85 | 29 / 15 | 7,10 · 0,91 | 101–131 / 227–230 ms |
+
+- **Tạo:** Stable Audio 3 Small-SFX, mỗi hồ sơ 4 prompt (A, B: đoạn gõ 10 s; C, D: một cú gõ 1 s), seed 101–124 cho cú đơn, 101–103 cho đoạn gõ. Vòng 2 (prompt E, F) cho Soft Dome và phím cách Clicky, vì vòng 1 ra tiếng phím cách Topre đục như tiếng thụp (98 % năng lượng dưới 800 Hz) và phím cách Clicky thiếu tiếng click. Prompt ở `keys/specs/<hồ sơ>.yaml`, đã qua lọc chữ cấm Q2, Q6.
+- **Cắt cú gõ** (`keys/strokes.py`): mỗi cú là tiếng nhấn và tiếng nhả của chính nó; trước đó phải lặng, cách phím khác ít nhất 150 ms; bắt đầu 1 ms trước đầu tiếng (đầu tiếng ≤ 2 ms). Cú dài quá 180 ms (phím cách 260 ms) thì rút ngắn khoảng lặng giữa nhấn và nhả (thời gian giữ phím), không cắt tiếng.
+- **Tai AI:** L1 (chặn), L1b, L2, L3 audiobox, L4 CLAP và AST, thẻ ảnh mù; rồi chọn bộ (`keys/pick.py`): cổng L1, lỗi mô hình L1b (xì, xoáy pha, nền nhiễu, rung cao độ, vạch lược) bị loại, đáy phím nhòe (> 6 ms) bị loại, tiếng chính đến muộn (> 15 ms) bị loại; điểm Q = khớp hồ sơ 0,35 + audiobox 0,25 + AST "Typing/Computer keyboard" 0,20 + điểm tổng của bộ chấm 0,20, trừ cờ L1b. Bộ 10 phím phải đều theo khoảng P10–P90 của 26 họ Kenney Impact (khoảng cách mel 0–50 ms, không bản sinh đôi, không bản lạc).
+- **Độ to:** mọi file của cả năm hồ sơ về **−27 LUFS-M max** chỉ bằng tăng giảm mức (không nén), đỉnh thật ≤ −1,45 dBTP; OGG giải mã lệch tối đa 0,4 dB. Câu gõ 60 WPM của năm hồ sơ cùng −25,1 LUFS-I: đổi hồ sơ không nhảy âm lượng.
+- **Định dạng:** master WAV 48 kHz 24-bit mono, bản chạy OGG Vorbis 48 kHz mono chất lượng 0,6 (5–9 KB mỗi file).
+
+## Chỗ lệch kế hoạch (cần anh duyệt)
+
+| Chỗ | Kế hoạch | Ở đây | Vì sao |
+|---|---|---|---|
+| Thời gian lên 10–90 % (§4.3.1) | Phím ≤ 3 ms | ≤ 10 ms | Phím ≤ 3 ms viết cho tiếng tick làm bằng mã. Cú gõ thật là ngón chạm keycap rồi mới chạm đáy: Creamy vòng 1 trung vị 5,5 ms, chỉ 3/113 cú dưới 3 ms. Đầu tiếng vẫn ≤ 2 ms; tiếng chính phải tới trong 15 ms; cú lên nhanh được xếp cao hơn |
+| Mức chung (§4.3.3) | −20 LUFS-M max | −27 LUFS-M max | Cú gõ có crest 20–28 dB: chỉ bằng tăng mức, trung vị chỉ tới −25…−27 trước khi chạm −1 dBTP. Nén để lên −20 sẽ làm mềm tiếng click. Khi ghép vào game, mức phím của kit (0,55) có lẽ phải nâng; làn typing-feedback chỉnh |
+
+## Máy nghi ngờ gì
+
+- Tiếng do mô hình tạo có đáy phím mềm hơn bản thu thật: dải trên 2 kHz lên mất trung vị 3,5–4,5 ms (cổng loại trên 6 ms). Đây là lý do lớn nhất có thể làm hồ sơ chưa tới 9.
+- Classic Spring: 10 cú đơn rất giống nhau (lệch trọng tâm phổ 78 cent, dưới P10 của Kenney): có thể "nhàm khi lặp".
+- Thock: bộ đầu ghép 3 prompt (5 bản tạo), kém đều hơn các hồ sơ khác.
+- Soft Dome: phím cách vẫn yếu (khớp hồ sơ 0,57); một file của bộ đầu bị cờ L1b "xì cao tần" khi kiểm lại master.
+- Không có bản thu bàn phím thật nào trên máy để nghe mù xen kẽ. Đã gửi người điều phối danh sách bản thu CC0 thật (Freesound, Wikimedia Commons; `docs/games/THIRD_PARTY.md`), chờ anh đồng ý tải từng gói.
+
+## Nếu anh chê một hồ sơ
+
+1. Có bản thu CC0 thật được duyệt: cắt cú gõ bằng chính `keys/strokes.py`, chấm và chọn như trên, đưa vào phiên `keys-2` cạnh bản Audio Lab (nghe mù).
+2. Không có: thêm prompt "slow typing, one key at a time" (đoạn 10 s, 12 seed) để có thêm cú gõ cùng một bàn phím, tối đa 3 vòng prompt (§5.5).
+3. "Rè/lỗi", "nhòe": siết cổng đáy phím (≤ 3 ms) và loại mọi cờ L1b; "chói": hạ 3 dB ở 2,5–5 kHz; "đục": lọc cao 80–120 Hz (§5.4).
+4. Sau 3 vòng vẫn chưa được: hồ sơ đó chỉ còn đường bản thu thật (CC0 hoặc anh tự thu bàn phím của anh), không phát hành ở mức 8.
+
+## Lệnh
+
+```bash
+R="bash tools/audio-lab/run.sh keys"
+$R generate --prompts C,D --seeds 101-124 --run r1      # rồi --prompts A,B --seeds 101-103
+$R slice --run r1 --force
+$R critic --run r1                                     # một mô hình nặng mỗi lúc (chờ làn khác)
+$R pick --runs r1,r2
+$R master [--choice creamy=distinct]
+$R recheck && $R render && $R session [--force] && $R stage [--from-ratings]
+bash tools/audio-lab/run.sh test tools/audio-lab/keys/tests
+```
+
+Dữ liệu: `~/AudioLab/work/_keys/<hồ sơ>/r1|r2/` (`raw/`, `strokes/`, `critic/`), `pick.json`, `sets/<vai trò>/` (master, runtime, câu gõ, kiểm lại), `~/AudioLab/work/_keys/master.json`. Không có âm nào trong Git.

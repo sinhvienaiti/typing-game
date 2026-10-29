@@ -1,0 +1,85 @@
+# Keyboard sound profile 'clicky' (keypress-sound lane, 29/10/2026). Two cards: single keys and the spacebar.
+# Read by keys/pipeline.py (Stable Audio 3 prompts, slicing, picks) and by the critic (--spec this file).
+# Prompt keys: A, B, E = a 10 s typing passage sliced into single strokes; C, D, F = a 1 s single-stroke take (E, F: round 2, 29/10).
+# Prompts follow DECISIONS Q2 and Q6 (checked by the pipeline against gen/sa3.py Q2_TERMS + Q6_TERMS).
+- schema: 1
+  id: key.clicky
+  game: keys
+  status: draft
+  profile: {id: clicky, name: 'Clicky', order: 3, part: key}
+  purpose: "Single keystroke: crisp click-jacket switches (box-jade style), bright click, tight and not harsh"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 40, max_ms: 180}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 10}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Close-up recording of typing on a mechanical keyboard with clicky switches, crisp bright click on every key press, tight clean clicks, dry quiet room"
+      - "B: Clicky mechanical keyboard typing ASMR, box jade click switches, crisp sharp clicks, slow steady typing, close microphone, no reverb"
+      - "C: One single keystroke on a clicky mechanical keyboard switch, crisp bright click, close-up, dry, isolated"
+      - "D: A single key press and release on a premium mechanical keyboard with click bar switches, crisp tight click, close microphone, studio quality"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [3500, 6500], bad: [2200, 8500], weight: 1.5}
+    click_share: {good: [0.75, 1], bad: [0.45, 1], weight: 1.0}
+    share_above_10k: {good: [0, 0.12], bad: [0, 0.28], weight: 1.0}
+    decay_ms: {good: [15, 50], bad: [5, 90], weight: 0.5}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [40, 180]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 6
+    intent: "a keystroke on a mechanical keyboard with clicky box jade switches"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}
+- schema: 1
+  id: space.clicky
+  game: keys
+  status: draft
+  profile: {id: clicky, name: 'Clicky', order: 3, part: space}
+  purpose: "Spacebar / long key: crisp click-jacket switches (box-jade style), bright click, tight and not harsh"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 60, max_ms: 260}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 3}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Pressing the spacebar again and again on a mechanical keyboard with clicky switches, crisp click with a deeper spacebar body, slow, close-up, dry quiet room"
+      - "C: One single spacebar press on a clicky mechanical keyboard, crisp click and deep spacebar body, close-up, dry, isolated"
+      - "E: Pressing the spacebar again and again on a clicky mechanical keyboard, a crisp click with a solid stabilized spacebar clack, slow, close-up, dry room"
+      - "F: One spacebar press on a clicky mechanical keyboard, crisp click and a solid clack, close-up, dry"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [1200, 4000], bad: [500, 6000], weight: 1.5}
+    click_share: {good: [0.5, 1], bad: [0.2, 1], weight: 1.0}
+    share_below_800: {good: [0.1, 0.65], bad: [0.02, 0.9], weight: 1.0}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [60, 260]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 1.5
+    intent: "a spacebar press on a mechanical keyboard with clicky box jade switches"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}

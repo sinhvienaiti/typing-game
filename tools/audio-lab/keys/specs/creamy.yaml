@@ -1,0 +1,84 @@
+# Keyboard sound profile 'creamy' (keypress-sound lane, 29/10/2026). Two cards: single keys and the spacebar.
+# Read by keys/pipeline.py (Stable Audio 3 prompts, slicing, picks) and by the critic (--spec this file).
+# Prompt keys: A, B, E = a 10 s typing passage sliced into single strokes; C, D, F = a 1 s single-stroke take (E, F: round 2, 29/10).
+# Prompts follow DECISIONS Q2 and Q6 (checked by the pipeline against gen/sa3.py Q2_TERMS + Q6_TERMS).
+- schema: 1
+  id: key.creamy
+  game: keys
+  status: draft
+  profile: {id: creamy, name: 'Creamy', order: 1, part: key}
+  purpose: "Single keystroke: lubed linear switches, PBT caps, a soft deep creamy bottom-out, no click"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 40, max_ms: 180}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 10}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Close-up recording of typing on a custom mechanical keyboard with lubed linear switches and thick PBT keycaps, deep creamy muted keystrokes, smooth, no clicks, dry quiet room"
+      - "B: Keyboard typing ASMR, lubed linear mechanical switches, creamy soft bottom-out, deep and smooth, slow steady typing, close microphone, no reverb"
+      - "C: One single keystroke on a lubed linear mechanical keyboard, PBT keycap, deep creamy soft bottom-out, close-up, dry, isolated"
+      - "D: A single key press and release on a premium custom mechanical keyboard with linear switches, creamy muted sound, close microphone, studio quality"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [1800, 3600], bad: [900, 5000], weight: 1.5}
+    share_above_5k: {good: [0, 0.25], bad: [0, 0.45], weight: 1.0}
+    click_share: {good: [0, 0.8], bad: [0, 0.95], weight: 1.0}
+    share_below_800: {good: [0.12, 0.6], bad: [0.03, 0.85], weight: 1.0}
+    decay_ms: {good: [25, 70], bad: [10, 110], weight: 0.5}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [40, 180]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 6
+    intent: "a keystroke on a custom mechanical keyboard with lubed linear switches and thick PBT keycaps"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}
+- schema: 1
+  id: space.creamy
+  game: keys
+  status: draft
+  profile: {id: creamy, name: 'Creamy', order: 1, part: space}
+  purpose: "Spacebar / long key: lubed linear switches, PBT caps, a soft deep creamy bottom-out, no click"
+  playback: {mode: one-shot, channels: mono, bus: keys, format: "OGG Vorbis 48 kHz in game, WAV 48 kHz 24-bit master"}
+  duration: {min_ms: 60, max_ms: 260}
+  onset: {class: key, rise_max_ms: 10, lead_silence_max_ms: 2}
+  variants: {target: 3}
+  loudness:
+    file: {metric: lufs-m-max, pad_s: 0.4, true_peak_max_dbtp: -1, basis: 'one target for every file of every profile (AUDIO_PIPELINE 4.3.3, 5.1 step 4)'}
+  prompt:
+    style_root: premium mechanical keyboard, close-miked, dry
+    variants:
+      - "A: Pressing the spacebar again and again on a custom mechanical keyboard with lubed linear switches and PBT keycaps, deep creamy spacebar with smooth stabilizers, slow, close-up, dry quiet room"
+      - "C: One single spacebar press on a custom mechanical keyboard with lubed linear switches, deep creamy muted spacebar, smooth stabilizer, close-up, dry, isolated"
+  fit:   # profile targets for keys/family.py fit_score (trapezoids: 1 inside good, 0 at bad); starting points from the sound target, not tuned to takes
+    centroid_hz: {good: [700, 2200], bad: [300, 3500], weight: 1.5}
+    share_below_800: {good: [0.25, 0.75], bad: [0.08, 0.95], weight: 1.0}
+    share_above_5k: {good: [0, 0.2], bad: [0, 0.4], weight: 0.5}
+    t_main_ms: {good: [0, 8], bad: [0, 15], weight: 1.0}
+    attack_ms: {good: [0, 5], bad: [0, 12], weight: 1.0}
+    hit_rise_ms: {good: [0, 2.5], bad: [0, 6], weight: 1.5}   # bottom-out sharpness (> 2 kHz rise), against model smear
+  critic:
+    group: key_ok
+    family: phim-ui
+    duration_ms: [60, 260]
+    attack_max_ms: 10   # deviation, owner to confirm: §4.3.1 says 3 ms for code-made ticks; a recorded-style keystroke is a finger touch then the bottom-out (creamy r1: median 5.5 ms, P90 11 ms). Head silence stays <= 2 ms; pick also gates the hit at <= 15 ms and ranks faster rises higher (fit attack_ms)
+    head_max_ms: 2
+    rate_hz: 1.5
+    intent: "a spacebar press on a custom mechanical keyboard with lubed linear switches and thick PBT keycaps"
+    ast: {expected: [Typing, Computer keyboard], forbid: [Speech]}
+    clap:
+      labels: [a mechanical keyboard keystroke, a computer keyboard typing, a typewriter key, a mouse click, a user interface click, a wooden knock, a metal clang, a finger snap, a clock tick, a spring boing]
+      expected: [a mechanical keyboard keystroke, a computer keyboard typing]
+      contrast: [[a premium mechanical keyboard keystroke, a cheap plastic click]]
+  licence: {source: Stable Audio 3 Small-SFX (Stability AI Community License, owner registered 23/10/2026), allowed: [LicenseRef-Stability-Community-2024], no downloaded packs}
