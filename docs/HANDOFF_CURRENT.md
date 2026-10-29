@@ -86,6 +86,7 @@ Mục 3 bên dưới là lịch sử.
 
 ### Codex vừa phải (30/10, 00:00; chủ dự án: "khi Codex có quota lại, hãy giao việc vừa phải thôi, không cần làm song song nhiều agent nữa")
 
+- **00:02, một làn (chủ dự án: "tạm thời cho Codex về 1 làn thôi cũng được, khi nào tôi yêu cầu thì sửa sau"):** dừng ba làn `m1`–`m3` khi đang chờ giới hạn (không phiếu chạy dở), gom vào **một làn `s1`**: 192, 193, 142, 143, 144, 145, 148, 186, 149, 150, 151, 153, 152, 183, 184, 185, 176, 177. Phiếu mới (194 trở đi) nối vào cuối `s1`. Chỉ mở thêm làn khi chủ dự án bảo.
 - Mười làn song song chạm giới hạn chỉ vài phút sau khi mở (23:35). Đã dừng cả mười khi đang chờ, gom phần còn lại vào **ba làn**: `m1` 192, 193, 176, 177; `m2` 142, 143, 144, 145, 148, 186; `m3` 149, 150, 151, 153, 152, 183, 184, 185. Cả ba chạy tiếp khi hết giới hạn (khoảng 00:05).
 - Đã xong từ 23:15: 175, 188, 191 (Last Line: 7 bộ phím, mặc định Deep, 238 test xanh; chờ Claude kiểm trình duyệt và `media:push`).
 - Phiếu mới của workflow `codex-next-tickets` (194 trở đi) nối vào cuối ba làn này, không mở làn mới.
