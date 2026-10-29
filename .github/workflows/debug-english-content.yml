@@ -44,9 +44,6 @@ jobs:
       - name: Run English content tests
         run: pnpm english-content:test
 
-      - name: Run E11 runtime-count freshness regression
-        run: node --test scripts/check-english-content-e11-runtime-counts.test.mjs
-
       - name: Run MultiWOZ editorial handoff tests
         run: node --test scripts/multiwoz-editorial-handoff-core.test.mjs
 
@@ -74,6 +71,9 @@ jobs:
 
       - name: Publish runtime artifacts
         run: pnpm english-content:publish
+
+      - name: Run E11 runtime-count freshness regression
+        run: node --test scripts/check-english-content-e11-runtime-counts.test.mjs
 
       - name: Check runtime exact dedupe
         run: pnpm english-content:dedupe
