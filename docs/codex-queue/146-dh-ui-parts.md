@@ -2,7 +2,7 @@
 
 **Nguồn:** kiểm kê hình ảnh UI map 1, 29/10 (`docs/games/map1/UI_IMAGERY.md`; dàn ý `UIC-DH-5` trong `docs/games/map1/UI_IMAGERY_CODEX.md`). Chủ dự án 28/10 tối: mọi chi tiết UI phải có hình thật, không chỉ có chữ; không hình vẽ bằng mã. Hướng mỹ thuật: `docs/games/ART_DIRECTION_2026-10-28.md`.
 
-**Chạy khi:** chờ khung UI Dragonhold (chưa có phiếu AD).
+**Chạy khi:** sau phiếu 162 (khung UI Dragonhold); đính kèm các khung đã chọn của 162.
 
 **Báo cáo:** `docs/codex-queue/146-report.md`, thư mục `_review/146/` của game.
 

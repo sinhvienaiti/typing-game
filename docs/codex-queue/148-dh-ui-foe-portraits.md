@@ -2,7 +2,7 @@
 
 **Nguồn:** kiểm kê hình ảnh UI map 1, 29/10 (`docs/games/map1/UI_IMAGERY.md`; dàn ý `UIC-DH-7` trong `docs/games/map1/UI_IMAGERY_CODEX.md`). Chủ dự án 28/10 tối: mọi chi tiết UI phải có hình thật, không chỉ có chữ; không hình vẽ bằng mã. Hướng mỹ thuật: `docs/games/ART_DIRECTION_2026-10-28.md`.
 
-**Chạy khi:** chờ Claude thử cắt chân dung từ ảnh có sẵn.
+**Chạy khi:** chạy ngay (29/10: Codex còn nhiều hạn mức, bỏ bước Claude cắt thử; mục "Trước phiếu này" không áp dụng).
 
 **Báo cáo:** `docs/codex-queue/148-report.md`, thư mục `_review/148/` của game.
 

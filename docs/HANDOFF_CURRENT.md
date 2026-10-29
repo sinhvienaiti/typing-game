@@ -64,6 +64,7 @@ Mục 3 bên dưới là lịch sử.
 | Mã M8, M9 | xong (130–132, 111b) | |
 | Ảnh M15 (sau M14) | 155 đường đá Dragonhold, 125, 156 (Tripo Lightbearer và 5 súng canh), 121, 127, 126, 157 | `-m15.txt` (hướng B) |
 | Ảnh M16 (sau M12) | 149, 150, 151, 153, 152: icon UI Last Line | `-m16.txt` |
+| **M17, làn thứ ba song song** (từ 29/10 10:45, chủ dự án: Codex còn nhiều hạn mức) | mã 168, 169, 170, 171 → ảnh 162, 148, 163, 164, 165, 166, 167, 146 | `-m17.txt`. Ba worktree Codex đã tua tới nhánh chính và có lượt đồng bộ kit chưa commit (kit 154, check-pack); Claude commit cùng phiếu 168–170 sau khi duyệt |
 
 **Codex hết hạn mức 29/10 05:49, tự chạy lại lúc 09:45** (M11 dừng ở 116, M13 dừng ở 140).
 | Ảnh M12 (sau M11) | 133–136, 141–144: icon UI Wordwoven | `-m12.txt` |
