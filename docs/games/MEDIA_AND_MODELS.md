@@ -118,6 +118,9 @@ pnpm media:push --only runtime
 
 ## 7. Giới hạn cần biết
 
+- **Số mặt và vật liệu (chủ dự án 29/10):** sàn tam giác, giữ normal và roughness map, thứ tự cân hiệu năng ở `docs/games/MODEL_QUALITY.md`. Không model nào người chơi thấy gần dưới 2.000 tam giác.
+
+
 - Bộ Blender (`scripts/models/blender/space_typing_model_tools.py`) giống hệt file của Space. Nó chỉ nhận loại `ships`, `enemies`, `bosses`, `skills`, `items`, `heroes`, `guides`. Loại mới (ví dụ `units`, `props`) cần sửa bộ Blender trước.
 - `models:blender` ghi vào `<root>/art-src`, nên không nhận `--art-src`.
 - Chạy `models:blender` cho Space sẽ build lại mọi model: khoá cache tính cả file đóng gói của repo cha. Kết quả giống hệt, chỉ tốn thời gian. Space cứ dùng script của mình.

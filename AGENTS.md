@@ -54,6 +54,8 @@ The 27/10 rule (English nouns inside Vietnamese sentences) is replaced. Convert 
 
 Art must reach commercial-game level. Backgrounds, title screens, key art, map scenes and skies are scored against a board of commercial-game references (epic, majestic, cinematic light), not against our own style guide. Nothing the player sees is a code-drawn stand-in for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. Shaders and VFX that meet the VFX standard are fine. Every UI detail carries real art, not text alone. Sound is real audio files made through `docs/games/AUDIO_PIPELINE.md`, not synthesized placeholders.
 
+3D models favour detail over weight (owner, 29/10/2026): no model a player sees up close goes under 2,000 triangles; keep the Tripo originals' face count, normal and roughness maps where the floors in `docs/games/MODEL_QUALITY.md` say so; cut only when measured frame time breaks the budget, in the order that doc gives. Existing models stay as they are until the owner asks.
+
 ## Test captures (owner, 28/10/2026)
 
 Browser and render captures go under the game's own `tmp/` (or the
