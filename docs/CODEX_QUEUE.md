@@ -203,7 +203,7 @@ Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Model
 | 186 | [Dragonhold: ô đất v3 theo bible (thông, ô liu, hoa cương), 6 ô](codex-queue/186-dh-ground-v3.md); `gpt-6.1-sol` high | Dragonhold | Ảnh | Làn P5 (sau P4) |
 | 187 | [Dragonhold: bản build không trỏ về cổng game ở nhà](codex-queue/187-dh-portal-link.md) (lỗi production của 169); `gpt-6.1-sol` high | Dragonhold | Mã | Làn P5 (sau P4) |
 | 188 | [Ba game và kit: kiểm giấy phép mọi thư viện mã, điền THIRD_PARTY, đoạn Credits](codex-queue/188-third-party-audit.md); `gpt-6.1-sol` high | Chung | Mã/tài liệu | Làn P5 (sau P4) |
-| 189 | [Bộ tiếng phím từ âm Firefly của chủ dự án: mỗi thư mục một bộ, nghe thử 1 s](codex-queue/189-keys-firefly-sets.md); `gpt-6.1-sol` high | Chung | Âm/mã | Làn P6 (chạy 29/10 22:10) |
+| 189 | [Bộ tiếng phím từ âm Firefly của chủ dự án: mỗi thư mục một bộ, nghe thử 1 s](codex-queue/189-keys-firefly-sets.md); `gpt-6.1-sol` high | Chung | Âm/mã | Làn P6 (chạy 29/10 21:59) |
 | 190 | [Kit: chọn tiếng phím từ danh mục, rê chuột nghe thử 1 s](codex-queue/190-kit-keyboard-picker.md); `gpt-6.1-sol` high | Kit | Mã | Làn P6 sau 189 |
 | 191 | [Last Line: gắn bộ tiếng phím Firefly vào game](codex-queue/191-ts-keys-in-game.md); `gpt-6.1-sol` high | Last Line | Mã/media | Làn P6b: Claude mở sau khi duyệt 189–190 và đồng bộ kit |
 | 192 | [Dragonhold: nút Settings, nút loa và bộ tiếng phím](codex-queue/192-dh-keys-and-panels.md); `gpt-6.1-sol` high | Dragonhold | Mã/media | Làn P6b |
