@@ -84,6 +84,14 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Dừng hết để chủ dự án khởi động lại máy (30/10, 00:18)
+
+Chủ dự án: "dừng lại mọi thứ để tôi reset máy". Không còn tiến trình nào chạy (đã kiểm `queue.sh`, `codex exec`, vite, trình duyệt chụp).
+- **Codex:** làn `s1` đã dừng. Phiếu 192 chưa chạy được vì Codex hết hạn mức tới **04:17 sáng 30/10**. Chạy lại: `tools/codex-run/queue.sh .local/codex-lane-mac-s1.txt` (một làn; còn 192, 193, 142–145, 148, 186, 149–153, 183–185, 176, 177).
+- **Lửa Rồng vòng 9 (V-dh2):** dừng giữa lúc chụp. Trên `dh-vfx` đã commit `31e2191` (chín sửa chung của giám khảo vòng 8) và `196d490`; worktree sạch. Lượt chụp vòng 9 chưa xong: đòn mạnh đã chụp, thường và Sky Fire chưa. Mở lại: một agent mới đọc `docs/changelog` vòng 8, hai phiếu `judge-r8a/b/verdict.md` và hai commit trên, chụp lại đủ bộ vào `tmp/vfx/final9/`, rồi gửi hai giám khảo mới.
+- **Phiếu Codex mới 194–217 (24 phiếu):** workflow `codex-next-tickets` đã viết xong bản nháp nhưng bị dừng trong bước kiểm. Các file chưa commit, chưa xếp làn. Mở lại: kiểm từng phiếu (đường dẫn, trùng, luật Codex), thêm hàng vào `docs/CODEX_QUEUE.md`, nối vào cuối làn `s1`.
+- **Tiếng phím:** 189, 190, 191 xong (191 commit `de7176e` trên `ts-typefx`, mặc định Bright Clack). Chờ `media:push`; Drive cần chủ dự án chạy `pnpm media:setup --reconnect`.
+
 ### Codex vừa phải (30/10, 00:00; chủ dự án: "khi Codex có quota lại, hãy giao việc vừa phải thôi, không cần làm song song nhiều agent nữa")
 
 - **00:02, một làn (chủ dự án: "tạm thời cho Codex về 1 làn thôi cũng được, khi nào tôi yêu cầu thì sửa sau"):** dừng ba làn `m1`–`m3` khi đang chờ giới hạn (không phiếu chạy dở), gom vào **một làn `s1`**: 192, 193, 142, 143, 144, 145, 148, 186, 149, 150, 151, 153, 152, 183, 184, 185, 176, 177. Phiếu mới (194 trở đi) nối vào cuối `s1`. Chỉ mở thêm làn khi chủ dự án bảo.
