@@ -98,3 +98,9 @@ bash tools/audio-lab/run.sh test tools/audio-lab/keys/tests
 ```
 
 Dữ liệu: `~/AudioLab/work/_keys/<hồ sơ>/r1|r2/` (`raw/`, `strokes/`, `critic/`), `pick.json`, `sets/<vai trò>/` (master, runtime, câu gõ, kiểm lại), `~/AudioLab/work/_keys/master.json`. Không có âm nào trong Git.
+
+## Kết quả nghe của chủ dự án (29/10/2026, 14:15)
+
+Chủ dự án nghe năm file 20 giây (bộ máy xếp đầu của mỗi hồ sơ) và **trả cả năm**: "âm nghe chán thật, xạn, nghe rất nhựa, cái clack nghe đúng kiểu nhựa lởm, bàn phím gõ âm hay phải theo phím nhôm chất lượng cao… xào xạc quá lởm".
+
+Nhãn chê: nhựa, rẻ (clack nhựa), xạn và xào xạc (nhiễu, tiếng sột soạt), chán. Không hồ sơ nào được dùng. Hướng mới: bản thu thật của bàn phím **vỏ nhôm cao cấp** (custom, switch lube, keycap tốt), xử lý sạch nhiễu; tiếng do mô hình tạo chỉ còn là phương án phụ nếu bản thu thật chưa có.
