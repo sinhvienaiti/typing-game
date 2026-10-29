@@ -101,3 +101,7 @@ cp -R tmp/keys-firefly/staging/keys-firefly/. "$HOME/AudioLab/review/staging/key
 Chủ dự án cần nghe bài so sánh và các bài 10 giây, nhất là phím cách mượn và mức −34,5 LUFS-M. Nguồn đã được chủ dự án duyệt; **bản xử lý cuối chưa được tôi nghe trực tiếp**, không tự chấm 9+ hay ghi nhận duyệt bản cuối thay chủ dự án. Không tạo UI hover ở phiếu này: đã giao sẵn trường `preview` để phiếu 190 làm danh sách/rê chuột; phiếu 191–193 mới gắn game. Không sửa `games/**`, `shared/**`, Tu Tiên, tài liệu thiết kế hoặc nguồn tải về; không chạy build/test game, lệnh Git có ghi hay tải mạng.
 
 `git status --short -uall` được lưu [trước](189/status-before.txt) và [sau](189/status-after.txt); [đối chiếu phạm vi](189/scope.json). Workspace vốn đã có nhiều thay đổi của tác vụ khác và 408 WAV dưới `typing-mp3/` chưa được theo dõi. Không xóa, giấu hay đưa chúng vào Git để làm status sạch. Phạm vi phiếu chỉ có mã/test dưới `tools/audio-lab/keys`, báo cáo và chứng cứ dưới `docs/codex-queue/189*`; media trong `tmp` được Git bỏ qua. Không có chụp trình duyệt hay khung ảnh thô cần dọn.
+
+## Bộ mặc định (điều phối, 29/10 23:15)
+
+Chủ dự án chưa chọn bộ mặc định. Tạm dùng **Deep** (bộ đầu danh mục); đổi sau chỉ là một dòng cấu hình mặc định mỗi game. Phiếu 191–193: đặt mặc định ở một hằng số dễ thấy, ghi tên hằng số vào báo cáo.
