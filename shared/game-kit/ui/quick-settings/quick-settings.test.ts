@@ -65,6 +65,8 @@ function slide(range: HTMLInputElement, value: number): void {
 }
 
 function choose(row: HTMLElement, value: string): void {
+  const option = row.querySelector<HTMLButtonElement>(`button[role="option"][data-value="${value}"]`);
+  if (option) { option.click(); return; }
   const radio = row.querySelector<HTMLInputElement>(`input[value="${value}"]`)!;
   radio.checked = true;
   radio.dispatchEvent(new Event("change", { bubbles: true }));
@@ -261,9 +263,9 @@ describe("QuickSettings values", () => {
     choose(h.row("keyboard"), "thock");
     expect(h.onChange).toHaveBeenLastCalledWith("keyboard", "thock");
     expect(h.onPreview).toHaveBeenLastCalledWith("keyboard");
-    const pending = h.row("keyboard").querySelector<HTMLInputElement>('input[value="dome"]')!;
+    const pending = h.row("keyboard").querySelector<HTMLButtonElement>('button[data-value="dome"]')!;
     expect(pending.disabled).toBe(true);
-    expect(pending.parentElement!.textContent).toBe("Soft Dome pending");
+    expect(pending.textContent).toBe("Soft Dome pending");
   });
 
   it("toggles switches and settings choices", () => {

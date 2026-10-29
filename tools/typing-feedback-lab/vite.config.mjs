@@ -1,18 +1,19 @@
 // Typing Feedback Lab: a Vite page to try the kit's focus strip, letter styles and key sounds before
 // they go into a game (docs/games/TYPING_FEEDBACK_REVIEW.md). Run from the parent repo:
 //   shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
-// Read-only mounts: the games' pinned vocabulary and font files, keyboard sounds only when LAB_KEYS
-// names a folder (paused, owner 29/10), and backdrops kept in this tool's tmp/.
-import { createReadStream, existsSync, statSync } from "node:fs";
+// Read-only mounts: the games' vocabulary, font and ticket-180 speaker art; external keyboard
+// staging (LAB_KEYS overrides the AudioLab default); backdrops kept in this tool's tmp/.
+import { createReadStream, existsSync, realpathSync, statSync } from "node:fs";
 import path from "node:path";
+import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, "../..");
-// Keyboard sounds are paused (owner 29/10: he sources them himself). No folder is wired: every profile
-// stays pending and silent. LAB_KEYS=<dir with <id>/keys-manifest.json> mounts one on purpose.
+// External staging is read-only. No media is copied into the repo.
 const MOUNTS = {
-  ...(process.env.LAB_KEYS ? { "/lab-keys/": process.env.LAB_KEYS } : {}),
+  "/lab-keys/": process.env.LAB_KEYS ?? path.join(homedir(), "AudioLab/review/staging/keys-firefly"),
+  "/lab-keyboard-icon/": path.join(repo, "games/dragon-hold/art-src/ui/quick-settings/selected"),
   "/lab-vocab/dragon-hold/": path.join(repo, "games/dragon-hold/public/vocabulary"),
   "/lab-vocab/typing-defense/": path.join(repo, "games/typing-defense/public/vocabulary"),
   "/lab-vocab/typing-survival/": path.join(repo, "games/typing-survival/public/vocabulary"),
@@ -29,15 +30,25 @@ const mounts = {
       const url = (req.url ?? "").split("?")[0];
       for (const [prefix, dir] of Object.entries(MOUNTS)) {
         if (!url.startsWith(prefix)) continue;
-        const file = path.resolve(dir, decodeURIComponent(url.slice(prefix.length)));
-        if (!file.startsWith(path.resolve(dir) + path.sep) || !existsSync(file) || !statSync(file).isFile()) {
+        if (req.method !== "GET" && req.method !== "HEAD") {
+          res.statusCode = 405;
+          res.setHeader("Allow", "GET, HEAD");
+          res.end();
+          return;
+        }
+        let relative;
+        try { relative = decodeURIComponent(url.slice(prefix.length)); }
+        catch { res.statusCode = 400; res.end("bad path"); return; }
+        const file = path.resolve(dir, relative);
+        if (!file.startsWith(path.resolve(dir) + path.sep) || !existsSync(file) || !statSync(file).isFile() || !realpathSync(file).startsWith(realpathSync(dir) + path.sep)) {
           res.statusCode = 404;
           res.end("not found");
           return;
         }
         res.setHeader("Content-Type", TYPES[path.extname(file).toLowerCase()] ?? "application/octet-stream");
         res.setHeader("Cache-Control", "no-cache");
-        createReadStream(file).pipe(res);
+        if (req.method === "HEAD") res.end();
+        else createReadStream(file).pipe(res);
         return;
       }
       next();

@@ -33,10 +33,13 @@
       </section>
       <section>
         <h2>Sound</h2>
-        <label for="profile">Profile</label>
-        <select id="profile"></select>
+        <label>Keyboard sound</label>
+        <div id="profile"></div>
         <p class="lab-note" id="profileNote"></p>
-        <label for="volume">Volume <span id="volumeOut"></span></label>
+        <label for="masterVolume">Master</label>
+        <input type="range" id="masterVolume" min="0" max="1" step="0.05" value="1" />
+        <label class="lab-check"><input type="checkbox" id="masterMuted" /> Mute Master</label>
+        <label for="volume">Keyboard volume <span id="volumeOut"></span></label>
         <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7" />
       </section>
       <section>

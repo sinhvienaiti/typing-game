@@ -11,6 +11,8 @@ import {
   TYPING_FX_STYLES,
   TypingFxDriver,
   TypingSounds,
+  KeyboardSoundPreview,
+  loadKeyboardCatalog,
   type KeyboardLoad,
   type TypingFxIntensity,
   type TypingFxProgress,
@@ -19,9 +21,8 @@ import {
   type TypingFxSink,
   type TypingFxStyle,
 } from "../../../shared/game-kit/feedback/typing-fx";
-import { AudioCues } from "../../../shared/game-kit/feedback/audio-cues";
-import { DRAGON } from "../../../shared/game-kit/feedback/profiles";
-import { KEYS_BASE, LAB_KEYBOARDS, PROFILE_NOTES, SYNTH_TEST } from "./profiles";
+import { KEYS_BASE } from "./profiles";
+import { KeyboardSoundChoices, type QuickChoiceOption } from "../../../shared/game-kit/ui/quick-settings";
 
 type GameId = "dragon-hold" | "typing-survival" | "typing-defense";
 type Game = { name: string; backdrop: string; levels: number; target: { x: number; y: number }; accent: string; anchorY: number };
@@ -34,7 +35,9 @@ const GAMES: Readonly<Record<GameId, Game>> = {
 };
 
 const $ = <T extends HTMLElement>(id: string): T => document.getElementById(id) as T;
-const profileSelect = $<HTMLSelectElement>("profile");
+const profileHost = $<HTMLElement>("profile");
+let keyboardOptions: readonly QuickChoiceOption[] = [];
+let keyboardPicker: KeyboardSoundChoices | null = null;
 const profileNote = $<HTMLElement>("profileNote");
 const stage = $<HTMLDivElement>("stage");
 const backdrop = $<HTMLImageElement>("backdrop");
@@ -56,6 +59,10 @@ let combo = 0;
 let wordSerial = 0;
 let mode: "new" | "today" = "new";
 const settings: TypingFxSettings = { ...DEFAULT_TYPING_FX };
+try {
+  const saved = JSON.parse(localStorage.getItem("typing-feedback-lab.keyboard") ?? "null") as { soundProfile?: string } | null;
+  if (typeof saved?.soundProfile === "string") settings.soundProfile = saved.soundProfile;
+} catch { /* Storage unavailable: keep a session-only choice. */ }
 
 // ── Target: the game's power anchor through the backdrop's cover fit ─────
 const targetPoint = (out: { x: number; y: number }): boolean => {
@@ -82,29 +89,24 @@ const strip = new FocusStrip({
   zIndex: 20,
 });
 
-// ── Sounds: the Audio Lab's keyboard profiles (pending until staged), and the kit synth for tests ──
+// ── Sounds: ticket-189 catalogue and the shared ticket-190 picker ──
 const sounds = new TypingSounds({ keyVoices: 6, wordVoices: 2 });
-let cues: AudioCues | null = null;
 const loads = new Map<string, Promise<KeyboardLoad>>();
 const loadReport: Record<string, string> = {};
-sounds.standIn = (event, step) => {
-  if (cues === null) return;
-  if (event === "key") cues.key(true, 0, step);
-  else if (event === "wrong" || event === "stray") cues.key(false, 0, 0);
-  else cues.word(event === "perfect" || event === "combo");
-};
-void sounds.load(SYNTH_TEST);
-
-/** Loads every keyboard profile once (the staging folder may fill while the Lab runs: reload to see it). */
+const keyboardPreview = new KeyboardSoundPreview({
+  sounds,
+  levels: () => ({ master: Number($<HTMLInputElement>("masterVolume").value), keyboard: settings.volume, muted: $<HTMLInputElement>("masterMuted").checked }),
+  onLoad: (result) => { loadReport[result.id] = `${result.state}: ${result.keys} keys, ${result.spaces} spaces`; },
+});
+/** Loads the saved keyboard once; other packs load only when selected. Reload to refresh staging. */
 function loadKeyboard(id: string): Promise<KeyboardLoad> {
-  const name = LAB_KEYBOARDS.find((p) => p.id === id)?.name ?? id;
+  const choice = keyboardOptions.find((p) => p.value === id);
+  const name = choice?.label ?? id;
   if (!loads.has(id)) {
     loads.set(
       id,
-      sounds.loadKeyboard(KEYS_BASE, id, name).then((r) => {
+      (choice?.manifest ? sounds.loadKeyboardManifest(choice.manifest, id, name) : sounds.loadKeyboard(KEYS_BASE, id, name)).then((r) => {
         loadReport[id] = r.state === "pending" ? "pending" : `${r.state}: ${r.keys} keys, ${r.spaces} spaces${r.missing.length ? `, ${r.missing.length} broken` : ""}`;
-        const option = profileSelect.querySelector<HTMLOptionElement>(`option[value="${id}"]`);
-        if (option !== null) option.textContent = name + (r.state === "ready" ? "" : ` (${r.state})`);
         return r;
       }),
     );
@@ -112,30 +114,23 @@ function loadKeyboard(id: string): Promise<KeyboardLoad> {
   return loads.get(id)!;
 }
 
-async function useProfile(id: string): Promise<void> {
+async function useProfile(id: string, preview = true): Promise<void> {
   settings.soundProfile = id;
-  if (id === "off") {
-    sounds.use("off");
-    profileNote.textContent = PROFILE_NOTES.off ?? "";
+  keyboardPicker?.sync(id);
+  try { localStorage.setItem("typing-feedback-lab.keyboard", JSON.stringify({ soundProfile: id })); } catch { /* Session only. */ }
+  if (preview) {
+    const choice = keyboardOptions.find((p) => p.value === id);
+    if (choice) keyboardPreview.select(choice);
     return;
   }
-  if (id === SYNTH_TEST.id) {
-    sounds.use(id);
-    profileNote.textContent = PROFILE_NOTES[id] ?? "";
-    return;
-  }
+  if (id === "off") { sounds.use("off"); return; }
   const r = await loadKeyboard(id);
   if (settings.soundProfile !== id) return;
   sounds.use(r.state === "pending" ? "off" : id);
-  profileNote.textContent = PROFILE_NOTES[r.state] ?? "";
 }
 
 function startAudio(): void {
-  const ctx = sounds.resume();
-  if (cues === null) {
-    cues = new AudioCues({ context: ctx, profile: DRAGON, events: null });
-    cues.resume();
-  }
+  sounds.resume();
 }
 
 // ── "Today": a stand-in for the games' small tag over the target ─────────
@@ -245,7 +240,7 @@ function backspace(now = clock()): void {
 }
 
 window.addEventListener("keydown", (event) => {
-  if (event.target instanceof HTMLSelectElement || event.target instanceof HTMLInputElement) return;
+  if (event.target instanceof HTMLElement && event.target.closest("select,input,button,.kit-keyboards")) return;
   if (event.metaKey || event.ctrlKey || event.altKey) return;
   if (event.key === "`") {
     togglePanel();
@@ -336,7 +331,7 @@ function renderReadouts(): void {
     ["Keys / s", String(keyTimes.length)],
     ["Key → frame", latency.n ? `${latency.last.toFixed(1)} ms (max ${latency.max.toFixed(1)})` : "-"],
     ["Combo", String(combo)],
-    ["Sound files", loadReport[settings.soundProfile] ?? (settings.soundProfile === SYNTH_TEST.id ? "kit synth (test only)" : "-")],
+    ["Sound files", loadReport[settings.soundProfile] ?? "-"],
     ["JS heap", heap ? (heap / 1048576).toFixed(1) + " MB" : "-"],
   ];
   readouts.innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
@@ -381,28 +376,44 @@ $<HTMLDivElement>("ab").addEventListener("click", (event) => {
   button.blur();
 });
 
-profileSelect.innerHTML = [
-  ...LAB_KEYBOARDS.map((p) => `<option value="${p.id}">${p.name}</option>`),
-  `<option value="off">Off</option>`,
-  `<option value="${SYNTH_TEST.id}">${SYNTH_TEST.name}</option>`,
-].join("");
-profileSelect.value = settings.soundProfile;
-profileSelect.addEventListener("change", () => {
-  startAudio();
-  void useProfile(profileSelect.value);
-});
-for (const p of LAB_KEYBOARDS) void loadKeyboard(p.id);
+const catalogueReady = (async () => {
+  // No legacy five-pack fallback in the Lab: absence is visible, never mistaken for real media.
+  const catalogue = await loadKeyboardCatalog(KEYS_BASE, { fallback: [] });
+  keyboardOptions = catalogue.options;
+  if (!keyboardOptions.some((p) => p.value === settings.soundProfile)) settings.soundProfile = keyboardOptions.find((p) => p.value !== "off")?.value ?? "off";
+  profileNote.textContent = catalogue.state === "ready" ? "Hover or focus to hear one second. Choose a name to save; Listen previews only." : "Keyboard catalogue unavailable. Set LAB_KEYS to the ticket-189 staging folder and reload.";
+  keyboardPicker = new KeyboardSoundChoices({
+    document, options: keyboardOptions, label: "Keyboard sound",
+    listenIcon: "/lab-keyboard-icon/hud-sound.64.png",
+    onPreview: (choice, delay) => keyboardPreview.preview(choice, delay),
+    onStop: () => keyboardPreview.stop(),
+    onSelect: (choice) => { startAudio(); void useProfile(choice.value); },
+  });
+  profileHost.replaceChildren(keyboardPicker.element);
+  keyboardPicker.sync(settings.soundProfile);
+  await useProfile(settings.soundProfile, false);
+})();
 
 const volume = $<HTMLInputElement>("volume");
 const volumeOut = $<HTMLElement>("volumeOut");
 const setVolume = (): void => {
   settings.volume = Number(volume.value);
   sounds.setVolume(settings.volume);
-  cues?.setVolume(settings.volume);
+  keyboardPreview.refreshVolume();
   volumeOut.textContent = Math.round(settings.volume * 100) + "%";
 };
 volume.addEventListener("input", setVolume);
 setVolume();
+const syncMaster = (): void => {
+  const master = Number($<HTMLInputElement>("masterVolume").value);
+  const muted = $<HTMLInputElement>("masterMuted").checked;
+  sounds.muted = muted || master <= 0;
+  sounds.setVolume(settings.volume * master);
+  keyboardPreview.refreshVolume();
+};
+$<HTMLInputElement>("masterVolume").addEventListener("input", syncMaster);
+$<HTMLInputElement>("masterMuted").addEventListener("change", syncMaster);
+volume.addEventListener("input", syncMaster);
 
 const gameSelect = $<HTMLSelectElement>("game");
 const levelSelect = $<HTMLSelectElement>("level");
@@ -453,6 +464,7 @@ $<HTMLDivElement>("bot").addEventListener("click", (event) => {
 function togglePanel(force?: boolean): void {
   const hidden = force ?? !panel.classList.contains("is-hidden");
   panel.classList.toggle("is-hidden", hidden);
+  if (hidden) keyboardPreview.stop();
   $<HTMLButtonElement>("collapse").textContent = hidden ? "Show" : "Hide";
 }
 $<HTMLButtonElement>("collapse").addEventListener("click", () => togglePanel());
@@ -483,6 +495,7 @@ async function setGame(id: GameId, level: number): Promise<void> {
 const ready = (async () => {
   fillLevels();
   await setGame(gameId, 1);
+  await catalogueReady;
   await document.fonts.ready;
   strip.layout();
   showWord(current);
@@ -549,5 +562,5 @@ Object.assign(window, {
   },
 });
 
-void useProfile(settings.soundProfile);
+window.addEventListener("pagehide", () => keyboardPreview.stop());
 requestAnimationFrame(frame);
