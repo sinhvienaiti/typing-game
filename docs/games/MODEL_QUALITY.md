@@ -69,6 +69,7 @@ Lỗi nằm ở bước xử lý của ta, không nằm ở file gốc Tripo:
 - **Mặc định là giữ số mặt và map.** Chỉ cân lại khi đo trên máy Mac của dự án thấy vượt ngân sách:
   - p95 thời gian khung ở High 1080p vượt trần của game;
   - hoặc bench đám đông (Dragonhold `dh-bench`, `dh-crowd`; Wordwoven `td-scale`; Last Line bench bầy) trượt.
+- **Cổng High của Dragonhold trên Mac dự án (từ 29/10, người điều phối theo luật đồ họa trước):** `dh-bench` 220 quái, 1080p, trung bình ≤ 10 ms, p95 ≤ 14 ms (trước là 8 / 12 ms).
 - **Cân theo thứ tự này**, dừng ngay khi đạt:
   1. instancing, gộp lưới theo vật liệu;
   2. LOD theo khoảng cách (vật xa dùng bản ít mặt);
