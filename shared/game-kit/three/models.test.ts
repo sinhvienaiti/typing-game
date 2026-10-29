@@ -1,7 +1,7 @@
 // Source: new for the kit: manifest parsing, URL resolution and the multi-manifest library (no WebGL)
 import { describe, expect, it } from "vitest";
 import { MODEL_CONTRACTS, MODEL_KINDS, isModelKind, missingClips, missingSockets, modelKey } from "./model-contracts";
-import { ModelLibrary, SPACE_MODEL_MANIFEST_URL, parseModelManifest, pickModelTier, resolveModelUrl, type ManifestFetch } from "./model-loader";
+import { ModelLibrary, SPACE_MODEL_MANIFEST_URL, enableKtx2, ktx2Enabled, parseModelManifest, pickModelTier, resolveModelUrl, type ManifestFetch } from "./model-loader";
 
 const GAME = "/assets/dragon-hold/models/manifest.json";
 
@@ -67,6 +67,18 @@ describe("model URLs", () => {
     expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 }, medium: { url: "m", bytes: 1 } } }, "high")).toBe("m");
     expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 } } }, "medium")).toBe("u");
     expect(pickModelTier({ ...three, tiers: { ultra: { url: "u", bytes: 3 } } }, "low")).toBeNull();
+  });
+});
+
+describe("KTX2 textures", () => {
+  it("are off until enabled with a transcoder folder; the first call wins", () => {
+    expect(ktx2Enabled()).toBe(false);
+    expect(() => enableKtx2("", {} as never)).toThrow(/transcoder/);
+    expect(ktx2Enabled()).toBe(false);
+    enableKtx2("/vendor/basis", { extensions: { has: () => false } } as never);
+    expect(ktx2Enabled()).toBe(true);
+    enableKtx2("/elsewhere/", {} as never);
+    expect(ktx2Enabled()).toBe(true);
   });
 });
 
