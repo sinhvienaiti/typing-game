@@ -26,7 +26,7 @@ Kế hoạch đầy đủ: `docs/games/SPLIT_PLAN.md` §4.
 | `learning/` | Gửi sự kiện học về portal (`gameId` bắt buộc), hàng đợi khi chạy riêng | Space `src/learning/shared.ts`, `shared/learning/message-contract.mjs` |
 | `speech/` | Đọc từ bằng giọng máy, cài đặt hẹp `{ enabled, rate, volume }` | Space `src/speech.ts` |
 | `audio/` | Bộ trộn nhiều bus, nhận bảng âm của từng game | Space `src/scene3d/sfx.ts`, `src/audio/mix.ts` |
-| `ui/` | Màu ngữ nghĩa, biến CSS, font chữ trận, khung học cơ bản | Mới |
+| `ui/` | Màu ngữ nghĩa, biến CSS, font chữ trận, khung học cơ bản, bảng cài đặt nhanh trong trận (`quick-settings/`) | Mới |
 | `tools/` | `cdp-run.mjs` (chạy kịch bản trình duyệt), plugin Vite phục vụ `/vocabulary/`, `/typing-texts/` | Space `scripts/visual/cdp-run.mjs`, `scripts/dev/vite.worktree.config.ts` |
 | `typing/` | Bộ định tuyến gõ, chữ, chọn từ, chấm điểm | Space `src/td/typing/*` (làn Kit B) |
 | `three/` | Nạp model, vật liệu, hạt, sân khấu 3D | Space `render3d/*`, `scene3d/*` (làn Kit B) |
@@ -52,6 +52,26 @@ Game tự lưu hồ sơ (khóa `<game>.skill`), tự cấp bảng bậc và tự
 | `gates.ts` | `summarizeRuns` gộp các lượt của một bot ở một chế độ; `runGates` chấm B1–B9 (thiếu số thì "THIẾU SỐ", không bao giờ "ĐẠT"); `formatGates` in bảng Markdown chung |
 
 `typing/tempo.ts` vẫn giữ `paceFactor` cũ (chỉ giãn, trần 1,0 theo D06). Việc mới dùng `paceK` của `balance/` (BALANCE.md §9.1 thay D06).
+
+### `ui/quick-settings/` (`docs/games/IN_GAME_SETTINGS.md`)
+
+Hai nút trong trận, **Settings** và **Sound**, ở góc trên phải của `host` (cùng góc ở mọi game), mở hai bảng phủ lên trận.
+Bảng dùng `a11y-dialog` 8.1.5 (MIT): giữ Tab trong bảng, trả focus về ô gõ khi đóng. Thanh trượt là `<input type="range">` gốc.
+
+| Phần | Nội dung |
+|---|---|
+| Tạo | `new QuickSettings({ host, getValues, onChange, onPreview, onPause, onResume, onQuit, icons, skin, countdownMs, zIndex })`; `open("settings" \| "sound")`, `close()`, `toggle()`, `isOpen`, `panel`, `blocking`, `refresh()`, `setIcons()`, `destroy()` |
+| Phím | `F1` mở Settings, `F2` mở Sound, bấm lại hoặc `Esc` thì đóng. Phím chữ không bao giờ mở bảng. Nút góc mở bằng chuột mà không lấy focus của ô gõ |
+| Dừng | Mở bảng gọi `onPause`. Đóng thì đếm 3, 2, 1 (mỗi bước `countdownMs`, mặc định 500 ms; 0 là chơi tiếp ngay; có thể là hàm, ví dụ trả 0 ở màn tựa) rồi gọi `onResume`. Mở lại lúc đang đếm thì hủy đếm, trận vẫn dừng. `Quit to title` gọi `onQuit`, không đếm |
+| Khóa gõ | Khi bảng mở và lúc đếm, `blocking === true`. Một listener capture trên `window` nuốt mọi phím nhắm ra ngoài bảng; phím trong bảng đi vào nút, thanh trượt, rồi dừng ở gốc bảng. Game có listener capture riêng (trên `document`, hoặc trên `window` đăng ký trước kit) thì tự kiểm `qs.blocking` |
+| Hàng | Dữ liệu: `slider`, `choice`, `toggle`, `button`, `slot`, `heading`. `defaultSoundRows(options)` và `defaultSettingsRows(options)` dựng đúng thứ tự spec; game lọc, đổi chỗ hay thêm hàng rồi đưa vào `soundRows`/`settingsRows`. Mục riêng của game: `gameRows`, `mountGameItems`; ô xem thử hiệu ứng gõ: `mountPreview`. Ô `slot` chỉ được gắn khi bảng mở, hàm dọn chạy khi đóng |
+| Giá trị | Id cố định: `master`, `muted`, `music`, `effects`, `keyboard`, `keyboardVolume`, `voice`, `ui`, `fxStyle`, `fxIntensity`, `fxSize`, `quality`, `reducedMotion`, `learnMeaning`, `learnIpa`. Âm lượng 0–100. Đọc `getValues()` khi mở bảng; mỗi thay đổi gọi `onChange` ngay, game áp ngay và lưu vào save của mình (không có nút Lưu). Kéo thanh trượt gọi `onPreview(nhóm)` tối đa mỗi 150 ms; chọn hồ sơ phím gọi `onPreview("keyboard")` |
+| Hình | Icon theo tên (phiếu Codex 180: `hud-settings`, `hud-sound`, `hud-sound-muted`, `vol-*`) qua `icons`/`setIcons`. Thiếu ảnh hoặc ảnh lỗi thì nút là chữ thường ("Settings", "Sound", "Sound off"), không vẽ icon bằng CSS, SVG, canvas hay emoji. Khung, nút, thanh trượt là ảnh qua `skin`. Màu là biến CSS `--kit-qs-*` trên `.kit-qs`; chữ trong bảng ≥ 7:1 (có test) |
+
+**Mỗi game chép `ui` phải thêm `a11y-dialog@8.1.5` vào `package.json` của mình** (lệnh chép không kiểm gói npm).
+Hiện `dragon-hold` và `immortality-cultivation` chép `ui`.
+
+Test DOM dùng `happy-dom` (devDependency của kit) và ghi `// @vitest-environment happy-dom` ở đầu file; môi trường mặc định của kit vẫn là `node`.
 
 ## Lệnh
 

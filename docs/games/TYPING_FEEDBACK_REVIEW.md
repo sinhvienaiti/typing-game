@@ -331,3 +331,15 @@ Mọi tờ ở `tools/typing-feedback-lab/tmp/sheets/` (không vào Git). Hàng 
 1. Vết mực, tia, than, dấu ấn vẫn vẽ bằng thủ tục. Tranh thật (Codex 173–175, hoặc gói Kenney CC0 ở §21 nếu anh duyệt) là bước lên 9 rõ nhất cho Stamp, Flare và Rune; móc `setTextures` đã sẵn (`ember` giờ cũng nằm ở hai đầu vệt sáng của Flare).
 2. Phím của Flare, Shatter, Rune gần như giữ bản của TF; chưa có bóng hay độ sâu riêng.
 3. Cần hai giám khảo độc lập chấm từ các tờ trên (luật `SHARED_SYSTEMS_BAR.md` §3).
+
+**Hiệu năng (perf.mjs, 1920 × 1080, bot ~15 phím/giây, 4 % phím sai, 5 s mỗi ô):** cả 12 ô (sáu kiểu × Normal, Ultra) giữ 60 FPS, khung p95 16,7–16,8 ms, `update()` p95 ≤ 0,5 ms, tối đa 0,7 ms. Số đo: `tools/typing-feedback-lab/tmp/tf2-perf/perf-1920x1080.json`.
+
+## 23. Bảng cài đặt nhanh (kit `ui/quick-settings/`, TF2 29/10)
+
+- `QuickSettings`: nút Settings và Sound ở góc trên phải host, `F1`/`F2` mở, `Esc` hay phím cũ đóng; mở thì gọi `onPause()`, phím ngoài bảng bị nuốt (`blocking` đúng cả lúc đếm 3-2-1); đóng thì đếm 3 × 500 ms rồi `onResume()`; Quit gọi `onQuit()` không đếm.
+- Bảng Sound: Master (thanh trượt + Mute), Music, Effects, Keyboard sound (Off + năm hồ sơ, hồ sơ chưa có file thì tắt và ghi "pending"), Keyboard volume, Voice, Interface. Bảng Settings: Letter style, Effect strength, Word size, ô xem trước (`mountPreview`), Quality, Reduced motion, hai công tắc học, mục riêng của game, Resume, Quit to title.
+- Hàng dữ liệu (slider, choice, toggle, button, slot, heading), giá trị đọc qua `getValues()`, đổi đi qua `onChange(id, value)` ngay; `onPreview(group)` hạn 150 ms mỗi nhóm.
+- Icon ảnh thật theo tên phiếu Codex 180; thiếu ảnh thì nút chữ. Khung, nút, thanh trượt nhận ảnh qua `skin`.
+- Thư viện: a11y-dialog 8.1.5 (MIT) cho bẫy Tab, `Esc`, trả focus; thanh trượt là `<input type="range">` gốc.
+- **Game nào chép `ui` phải thêm `a11y-dialog@8.1.5` vào `package.json` của mình** (Dragonhold chép `ui` hôm nay).
+- Test: 36 (17 logic ở node, 19 DOM ở happy-dom). Chưa xem bằng mắt trong Lab; hình thật ở tờ khung Last Line.
