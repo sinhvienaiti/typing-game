@@ -37,7 +37,7 @@ function grossWpm(typed: readonly TypedWord[], hz = 60): number {
 const keyEvents = (typed: readonly TypedWord[]) => typed.flatMap((word) => word.events.filter((event) => event.kind === "key"));
 
 describe("HumanTypist", () => {
-  it("types familiar words at E within 5 %", () => {
+  it("types familiar words at E within 5%", () => {
     for (const id of ["novice", "standard", "skilled", "fast"] as const) {
       const params = botParams(id);
       expect(Math.abs(grossWpm(plans(params)) / params.wpm - 1)).toBeLessThan(0.05);
@@ -154,15 +154,15 @@ describe("HumanTypist", () => {
   it("carries §6's standard bot set", () => {
     const rows = STANDARD_BOTS.map((bot) => [bot.label, bot.wpm, bot.accuracy, bot.cv, bot.tactics]);
     expect(rows).toEqual([
-      ["Trẻ em", 15, 0.88, 0.4, "poor"],
-      ["Mới", 25, 0.92, 0.35, "fair"],
-      ["Chậm chắc", 25, 0.99, 0.2, "fair"],
-      ["Chuẩn", 35, 0.95, 0.25, "fair"],
-      ["Khá", 50, 0.96, 0.2, "good"],
-      ["Ẩu", 50, 0.85, 0.35, "fair"],
-      ["Nhanh", 70, 0.97, 0.15, "good"],
-      ["Không gõ", 0, 1, 0, "good"],
-      ["Chỉ gõ", 35, 0.95, 0.25, "none"],
+      ["Child", 15, 0.88, 0.4, "poor"],
+      ["Novice", 25, 0.92, 0.35, "fair"],
+      ["Steady", 25, 0.99, 0.2, "fair"],
+      ["Standard", 35, 0.95, 0.25, "fair"],
+      ["Skilled", 50, 0.96, 0.2, "good"],
+      ["Sloppy", 50, 0.85, 0.35, "fair"],
+      ["Fast", 70, 0.97, 0.15, "good"],
+      ["No typing", 0, 1, 0, "good"],
+      ["Typing only", 35, 0.95, 0.25, "none"],
     ]);
     const ids: BotId[] = STANDARD_BOTS.map((bot) => bot.id);
     expect(new Set(ids).size).toBe(9);

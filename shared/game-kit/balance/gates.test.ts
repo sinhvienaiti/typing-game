@@ -6,7 +6,7 @@ import { formatGates, gate, pct, runGates, summarizeRuns, type BotModeSummary, t
 
 const flow = (overrides: Partial<FlowSummary> = {}): FlowSummary => ({ outcome: "won", ticks: 20000, p: 250, i: 50, o: 20, s: 500, hpMin: 400, n: 0.5, kills: 80, q: 600, support: 300, ...overrides });
 
-/** A cell that sits mid-band in Balanced (win 80 %, S 50 %, P 25 %, I 5 %, O 2 %). */
+/** A cell that sits mid-band in Balanced (win 80%, S 50%, P 25%, I 5%, O 2%). */
 const cell = (bot: string, mode: BandMode, overrides: Partial<BotModeSummary> = {}): BotModeSummary => ({
   bot, mode, director: true, runs: 20, win: 800, s: 500, p: 250, i: 50, o: 20, n: 0.5, q: 600, support: 300,
   killSeconds: 3, stepsPerWave: 1.2, maxWaveSteps: 2, spawnMin: 930, spawnMax: 1070, learnOk: true, ...overrides,
@@ -55,7 +55,7 @@ describe("balance gates", () => {
     const b1 = gate("B1", { summaries: rows });
     expect(b1.status).toBe("fail");
     const fast = b1.checks.find((check) => check.label === "fast")!;
-    expect([fast.pass, fast.threshold]).toEqual([false, "lệch: Áp lực P thấp, Nhàn I cao"]);
+    expect([fast.pass, fast.threshold]).toEqual([false, "deviation: Pressure P low, Idle I high"]);
   });
 
   it("B2 catches an easy stage; B3 a hard one", () => {
@@ -67,9 +67,9 @@ describe("balance gates", () => {
 
   it("B4 compares steady with sloppy, and kill time (or Q) of standard with sloppy", () => {
     const rows = matrix();
-    expect(gate("B4", { summaries: rows }).checks.map((check) => check.measured)).toEqual(["S 60 % vs 45 %", "hạ quái 3.00 s vs 3.40 s"]);
+    expect(gate("B4", { summaries: rows }).checks.map((check) => check.measured)).toEqual(["S 60% vs 45%", "kill time 3.00 s vs 3.40 s"]);
     const noTimes = rows.map((row) => ({ ...row, killSeconds: null, q: row.bot === "sloppy" ? 650 : row.q }));
-    expect(gate("B4", { summaries: noTimes }).checks[1]).toMatchObject({ measured: "Q 60 % vs 65 %", pass: true });
+    expect(gate("B4", { summaries: noTimes }).checks[1]).toMatchObject({ measured: "Q 60% vs 65%", pass: true });
     const sloppyWins = rows.map((row) => (row.bot === "sloppy" ? { ...row, s: 700 } : row));
     expect(gate("B4", { summaries: sloppyWins }).status).toBe("fail");
   });
@@ -85,29 +85,29 @@ describe("balance gates", () => {
     expect(gate("B6", { summaries: rows }).checks.map((check) => check.pass)).toEqual([true, false]);
   });
 
-  it("B7 checks steps a wave, the ±15 % spawn cap and the standard bot with the director off", () => {
+  it("B7 checks steps a wave, the ±15% spawn cap and the standard bot with the director off", () => {
     const busy = matrix().map((row) => (row.bot === "skilled" ? { ...row, stepsPerWave: 3.5 } : row));
     expect(gate("B7", { summaries: busy }).status).toBe("fail");
     const wide = matrix().map((row) => (row.bot === "skilled" ? { ...row, spawnMin: 800 } : row));
     expect(gate("B7", { summaries: wide }).status).toBe("fail");
     const offBand = matrix().map((row) => (!row.director ? { ...row, p: 60 } : row));
-    expect(gate("B7", { summaries: offBand }).checks.at(-1)).toMatchObject({ label: "standard · tắt nhịp", pass: false });
+    expect(gate("B7", { summaries: offBand }).checks.at(-1)).toMatchObject({ label: "standard · director off", pass: false });
   });
 
-  it("B8 reads the game's learning gate; B9 compares a human play-test within 15 %", () => {
+  it("B8 reads the game's learning gate; B9 compares a human play-test within 15%", () => {
     const rows = matrix().map((row) => (row.bot === "sloppy" ? { ...row, learnOk: false } : row));
     expect(gate("B8", { summaries: rows }).status).toBe("fail");
     const human = { s: 500, p: 300, i: 40, o: 20, n: 1, q: 600 };
     const close = { s: 560, p: 330, i: 60, o: 40, n: 1.1, q: 650 };
     expect(gate("B9", { summaries: rows, options: { human: [{ label: "chủ dự án · ải 3", human, bot: close }] } }).status).toBe("pass");
     const far = { ...close, p: 400 };
-    expect(gate("B9", { summaries: rows, options: { human: [{ label: "chủ dự án · ải 3", human, bot: far }] } }).checks[0]).toMatchObject({ pass: false, threshold: "lệch: Áp lực P" });
+    expect(gate("B9", { summaries: rows, options: { human: [{ label: "chủ dự án · ải 3", human, bot: far }] } }).checks[0]).toMatchObject({ pass: false, threshold: "deviation: Pressure P" });
   });
 
   it("skip, never pass, when cells are missing", () => {
     const rows = matrix().filter((row) => row.bot !== "novice");
     const b1 = gate("B1", { summaries: rows });
-    expect([b1.status, b1.missing]).toEqual(["skip", ["novice · Cân bằng"]]);
+    expect([b1.status, b1.missing]).toEqual(["skip", ["novice · Balanced"]]);
     expect(gate("B3", { summaries: rows }).status).toBe("skip");
     expect(status({ summaries: [] })).toEqual({ B1: "skip", B2: "skip", B3: "skip", B4: "skip", B5: "skip", B6: "skip", B7: "skip", B8: "skip", B9: "skip" });
   });
@@ -115,10 +115,10 @@ describe("balance gates", () => {
   it("print the same Markdown table in every game", () => {
     const text = formatGates(runGates({ summaries: matrix() }));
     const lines = text.split("\n");
-    expect(lines[0]).toBe("| # | Cổng | Kết quả | Số đo |");
+    expect(lines[0]).toBe("| # | Gate | Result | Measurements |");
     expect(lines).toHaveLength(11);
-    expect(lines[2]).toMatch(/^\| B1 \| Cùng vùng cuốn \| ĐẠT \| ✓ novice: Thắng 80 %/);
-    expect(lines[10]).toBe("| B9 | Khớp người thật | THIẾU SỐ | thiếu: buổi chơi thử của người thật |");
-    expect([pct(800), pct(25), pct(30), pct(null)]).toEqual(["80 %", "2.5 %", "3 %", "—"]);
+    expect(lines[2]).toMatch(/^\| B1 \| Shared flow band \| PASS \| ✓ novice: Win 80%/);
+    expect(lines[10]).toBe("| B9 | Matches human play | MISSING DATA | missing: human playtest |");
+    expect([pct(800), pct(25), pct(30), pct(null)]).toEqual(["80%", "2.5%", "3%", "—"]);
   });
 });

@@ -43,9 +43,9 @@ describe("target bands", () => {
   });
 
   it("prints ranges for a report", () => {
-    expect(rangeText("p", BANDS.balanced.p)).toBe("15–35 %");
-    expect(rangeText("win", BANDS.relax.win)).toBe("≥ 92 %");
-    expect(rangeText("o", BANDS.relax.o)).toBe("≤ 3 %");
+    expect(rangeText("p", BANDS.balanced.p)).toBe("15–35%");
+    expect(rangeText("win", BANDS.relax.win)).toBe("≥ 92%");
+    expect(rangeText("o", BANDS.relax.o)).toBe("≤ 3%");
     expect(rangeText("n", BANDS.balanced.n)).toBe("0.3–1");
   });
 });

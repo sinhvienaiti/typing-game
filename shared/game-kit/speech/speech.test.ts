@@ -108,6 +108,7 @@ describe("pronunciation lifecycle hardening", () => {
     voices=[];const notice=vi.fn();setSpeechNotice(notice);
     void prepareEnglishVoice();await vi.advanceTimersByTimeAsync(2000);expect(notice).not.toHaveBeenCalled();
     speakEnglish("first request",settings);await vi.advanceTimersByTimeAsync(2000);expect(notice).toHaveBeenCalledTimes(1);
+    expect(notice).toHaveBeenCalledWith("No English voice is available on this device.");
   });
   it("waits for a stable initial list, persists the chosen URI and reuses it next page", async () => {
     const warm = prepareEnglishVoice();
@@ -132,6 +133,7 @@ describe("pronunciation lifecycle hardening", () => {
     await vi.advanceTimersByTimeAsync(2000);
     expect(gate).not.toHaveBeenCalled();
     expect(notice).toHaveBeenCalledTimes(1);
+    expect(notice).toHaveBeenCalledWith("No English voice is available on this device.");
   });
   it("unpins failed backends but keeps a voice after ordinary cancellation", async () => {
     speakEnglish("first", settings);

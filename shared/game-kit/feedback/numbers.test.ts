@@ -324,7 +324,7 @@ describe("profiles", () => {
     };
     expect(SHIP.numbers.colors.some(gold)).toBe(true);
     expect(DRAGON.numbers.colors.some(gold)).toBe(false);
-    expect(DRAGON.numbers.label).toBe("HOÀN HẢO");
+    expect(DRAGON.numbers.label).toBe("PERFECT");
   });
 });
 
@@ -392,7 +392,7 @@ describe("the glyph atlas", () => {
     const digits = painted.filter((p) => p.font === A.digitFont);
     expect(digits.map((p) => p.text).join("")).toBe(A.glyphs);
     digits.forEach((p, index) => expect([p.x, p.y]).toEqual([index * cell + cell / 2, A.digitMidY]));
-    const label = painted.find((p) => p.text === "HOÀN HẢO")!;
+    const label = painted.find((p) => p.text === "PERFECT")!;
     expect(label.font).toBe(A.labelFont);
     expect(label.y).toBe(A.labelTop + A.labelRowH / 2);
     // The accents' top (ascent + outline) stays inside the label row, and the row starts below the digit row.

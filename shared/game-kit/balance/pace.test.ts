@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { DRAGON_C_REF, capacity, effectiveE, familiarityMix, newWordShare, paceK, peakLanes, scaleTicks, skillAdvice, suggestDifficulty, telegraphScale, telegraphTicks } from "./pace";
 import { blendSkill, newSkillProfile, skillDefaults } from "./profile";
+import { ADVICE_EN, ADVICE_VI } from "./index";
 
 const dragon = (len: number) => ({ len, d: 0.86, ref: DRAGON_C_REF });
 
@@ -46,6 +47,12 @@ describe("effective speed and pace k", () => {
 });
 
 describe("other before-stage levers", () => {
+  it("exports English advice for every advice id and preserves the legacy alias", () => {
+    expect(ADVICE_VI).toBe(ADVICE_EN);
+    expect(Object.keys(ADVICE_EN)).toEqual(["rest", "slow-down", "accuracy", "steady", "new-words", "crowd", "keep-going"]);
+    expect(ADVICE_EN[skillAdvice(skillDefaults("adult", "balanced"))]).toBe("You're making steady progress. Keep it up!");
+  });
+
   it("new-word share drops for a < 90 % or slow new-word recognition, never below the floor", () => {
     const view = blendSkill(newSkillProfile());
     expect(newWordShare(view, 0.3)).toBe(0.3);
