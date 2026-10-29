@@ -7,7 +7,7 @@ import { FRAME_MS, flyEase, newPose, popEnvelope, squeeze, STYLES, wrongPose, WR
 
 const ctx = (pool: ParticlePool, mult = 1, still = false): SpawnCtx => {
   let seed = 11;
-  return { pool, owner: 1, prio: 1, x: 300, y: 120, h: 52, glyph: 0, now: 0, mult, size: 1, still, random: () => ((seed = (seed * 16807) % 2147483647) / 2147483647) };
+  return { pool, owner: 1, prio: 1, x: 300, y: 120, h: 52, glyph: 0, now: 0, mult, size: 1, still, random: () => ((seed = (seed * 16807) % 2147483647) / 2147483647), light: () => {} };
 };
 
 const isRest = (p: GlyphPose): boolean => p.scale === 1 && p.rot === 0 && p.dx === 0 && p.dy === 0 && p.alpha === 1 && p.hot === 0 && !p.aOn && !p.bOn;

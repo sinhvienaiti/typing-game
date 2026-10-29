@@ -52,6 +52,15 @@ export function toneColors(p: TypingFxPalette): string[] {
   return [p.hot, p.accent, mixHex(p.accent, "#ffffff", 0.55), p.ink, p.warn, p.gold, mixHex(p.warn, p.ink, 0.55)];
 }
 
+/**
+ * A painted sprite sheet a game theme gives (Codex's packs, tickets 173–175): `cols` × `rows` cells,
+ * drawn additive (glows, sparks) or normal (ink, seals). Missing: the procedural shape draws instead.
+ */
+export type TypingFxAtlas = { readonly image: CanvasImageSource; readonly cols: number; readonly rows: number; readonly additive?: boolean };
+
+/** Which texture each effect reads: glyph-spark (glints), ink-splash (splats, droplets), seal-stamp (the word seal), ember. */
+export type TypingFxTextures = Partial<Record<"spark" | "ink" | "seal" | "ember", TypingFxAtlas>>;
+
 const TAU = Math.PI * 2;
 const easeOut = (t: number): number => 1 - (1 - t) * (1 - t);
 
@@ -68,6 +77,7 @@ export class FxCanvas {
   private readonly baseline = [0, 0];
   private font = "800 52px sans-serif";
   private painted = false;
+  private textures: TypingFxTextures = {};
   width = 0;
   height = 0;
   dpr = 1;
@@ -93,6 +103,28 @@ export class FxCanvas {
   setPalette(p: TypingFxPalette): void {
     this.tones = toneColors(p);
     this.sprites = this.tones.map((color) => softDisc(color));
+  }
+
+  /** A game theme's painted sprites; {} goes back to the procedural shapes. */
+  setTextures(textures: TypingFxTextures): void {
+    this.textures = { ...textures };
+  }
+
+  /** Cell `variant` of `atlas`, centred on (x, y), w × h, turned `rot`. */
+  private cell(atlas: TypingFxAtlas, variant: number, x: number, y: number, w: number, h: number, rot: number, alpha: number): void {
+    const ctx = this.ctx;
+    const image = atlas.image as HTMLImageElement & { width: number; height: number };
+    const n = Math.max(1, atlas.cols * atlas.rows);
+    const k = variant % n;
+    const cw = image.width / atlas.cols;
+    const ch = image.height / atlas.rows;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    if (atlas.additive) ctx.globalCompositeOperation = "lighter";
+    ctx.translate(x, y);
+    if (rot !== 0) ctx.rotate(rot);
+    ctx.drawImage(image, (k % atlas.cols) * cw, Math.floor(k / atlas.cols) * ch, cw, ch, -w / 2, -h / 2, w, h);
+    ctx.restore();
   }
 
   /** Word layer `set`'s letters (canvas x of each centre, the baseline y, the CSS font) for the rune trace. */
@@ -158,6 +190,15 @@ export class FxCanvas {
           break;
         case PK.star:
           this.star(pool, i, now, age);
+          break;
+        case PK.splat:
+          this.splat(pool, i, now, age);
+          break;
+        case PK.contact:
+          this.contact(pool, i, age);
+          break;
+        case PK.seal:
+          this.seal(pool, i, now, age);
           break;
       }
     }
@@ -305,6 +346,28 @@ export class FxCanvas {
   private ink(pool: ParticlePool, i: number, now: number, age: number): void {
     const ctx = this.ctx;
     const p = pool.position(i, now, this.pos);
+    const floor = pool.aux[i]!;
+    if (floor > 0 && p[1]! >= floor && pool.vy[i]! + pool.grav[i]! > 0) {
+      // Landed: a flat drop on the line, fading.
+      const r = pool.size[i]!;
+      ctx.fillStyle = this.tones[TONE.ink]!;
+      ctx.globalAlpha = 0.5 * (1 - age);
+      ctx.beginPath();
+      ctx.ellipse(p[0]!, floor + r * 0.25, r * 2.1, r * 0.75, 0, 0, TAU);
+      ctx.fill();
+      ctx.fillStyle = this.color(pool, i);
+      ctx.globalAlpha = 1 - age;
+      ctx.beginPath();
+      ctx.ellipse(p[0]!, floor, r * 1.9, r * 0.55, 0, 0, TAU);
+      ctx.fill();
+      return;
+    }
+    const tex = this.textures.ink;
+    if (tex !== undefined) {
+      const s = pool.size[i]! * 3.2 * (1 - 0.3 * age);
+      this.cell(tex, pool.variant[i]!, p[0]!, p[1]!, s, s, pool.rot[i]!, 1 - age * age);
+      return;
+    }
     const r = pool.size[i]! * (1 - 0.35 * age);
     const t = Math.max(0, now - pool.born[i]!) / 1000;
     const vy = pool.vy[i]! * Math.exp(-pool.drag[i]! * t) + pool.grav[i]! * t;
@@ -440,7 +503,12 @@ export class FxCanvas {
   private star(pool: ParticlePool, i: number, now: number, age: number): void {
     const ctx = this.ctx;
     const p = pool.position(i, now, this.pos);
-    const s = pool.size[i]! * (age < 0.25 ? age / 0.25 : 1 - (age - 0.25) / 0.75);
+    const s = pool.size[i]! * (age < 0.25 ? 0.5 + age * 2 : 1 - (age - 0.25) / 0.75);
+    const tex = this.textures.spark;
+    if (tex !== undefined) {
+      this.cell(tex, pool.variant[i]!, p[0]!, p[1]!, s * 2.4, s * 2.4, pool.rot[i]!, 1);
+      return;
+    }
     const w = s * 0.16;
     ctx.fillStyle = this.color(pool, i);
     ctx.globalAlpha = 1;
@@ -456,7 +524,118 @@ export class FxCanvas {
     ctx.closePath();
     ctx.fill();
   }
+
+  /**
+   * A paint splat: a dark under-edge offset down-right, then the colour, a lumpy round blot with
+   * satellite drops (or an ink texture cell). Lands at 70 % of its size, opens fully in 40 ms.
+   */
+  private splat(pool: ParticlePool, i: number, now: number, age: number): void {
+    const ctx = this.ctx;
+    const ms = now - pool.born[i]!;
+    const grow = ms < 40 ? 0.7 + 0.3 * (ms / 40) : 1;
+    const r = pool.size[i]! * grow;
+    const alpha = age < 0.45 ? 0.85 : 0.85 * (1 - (age - 0.45) / 0.55);
+    const x = pool.x[i]!;
+    const y = pool.y[i]!;
+    const tex = this.textures.ink;
+    if (tex !== undefined) {
+      this.cell(tex, pool.variant[i]!, x, y, r * 2.6, r * 2.6, pool.rot[i]!, alpha);
+      return;
+    }
+    const seed = pool.aux[i]!;
+    const off = r * 0.09;
+    for (let pass = 0; pass < 2; pass += 1) {
+      ctx.fillStyle = pass === 0 ? this.tones[TONE.ink]! : this.color(pool, i);
+      ctx.globalAlpha = pass === 0 ? alpha * 0.7 : alpha * 0.62;
+      const dx = pass === 0 ? off : 0;
+      ctx.beginPath();
+      for (let k = 0; k <= 18; k += 1) {
+        const a = (k / 18) * TAU + pool.rot[i]!;
+        const rr = r * (1 + 0.15 * Math.sin(5 * a + seed) + 0.09 * Math.sin(9 * a + seed * 1.7));
+        const px = x + dx + Math.cos(a) * rr;
+        const py = y + dx * 1.4 + Math.sin(a) * rr * 0.86;
+        if (k === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      for (let k = 0; k < 4; k += 1) {
+        const a = seed * 0.37 + k * 1.9 + pool.rot[i]!;
+        const d = r * (1.22 + 0.18 * Math.sin(seed + k * 3.1));
+        const dr = r * (0.09 + 0.05 * Math.sin(seed * 0.5 + k));
+        ctx.beginPath();
+        ctx.arc(x + dx + Math.cos(a) * d, y + dx * 1.4 + Math.sin(a) * d * 0.86, dr, 0, TAU);
+        ctx.fill();
+      }
+    }
+  }
+
+  /** A flat ring where the stamp meets the line: an ellipse three times wider than tall, growing and thinning. */
+  private contact(pool: ParticlePool, i: number, age: number): void {
+    const ctx = this.ctx;
+    const rx = pool.size[i]! + (pool.size2[i]! - pool.size[i]!) * easeOut(age);
+    ctx.beginPath();
+    ctx.ellipse(pool.x[i]!, pool.y[i]!, rx, rx * 0.26, 0, 0, TAU);
+    ctx.strokeStyle = this.tones[TONE.ink]!;
+    ctx.globalAlpha = 0.45 * (1 - age);
+    ctx.lineWidth = pool.aux[i]! * (1 - 0.6 * age) + 3;
+    ctx.stroke();
+    ctx.strokeStyle = this.color(pool, i);
+    ctx.globalAlpha = 1 - age;
+    ctx.lineWidth = pool.aux[i]! * (1 - 0.6 * age);
+    ctx.stroke();
+  }
+
+  /**
+   * The word's seal (Stamp's release): a double-ruled frame around the word slams down in three
+   * frames (1.45 → 1.2 → 1, turning −5° → 0), holds, fades; a seal texture when the game gives one.
+   */
+  private seal(pool: ParticlePool, i: number, now: number, age: number): void {
+    const ctx = this.ctx;
+    const f = Math.floor((now - pool.born[i]!) / FRAME_MS);
+    const s = f <= 0 ? 1.45 : f === 1 ? 1.2 : 1;
+    const turn = (f <= 0 ? -5 : f === 1 ? -2.5 : 0) * (Math.PI / 180);
+    const w = pool.size[i]! * s;
+    const h = pool.size2[i]! * s;
+    const alpha = age < 0.4 ? 1 : 1 - (age - 0.4) / 0.6;
+    const x = pool.x[i]!;
+    const y = pool.y[i]!;
+    const tex = this.textures.seal;
+    if (tex !== undefined) {
+      this.cell(tex, pool.variant[i]!, x, y, w * 2.2, h * 2.2, turn, alpha * 0.9);
+      return;
+    }
+    const line = pool.aux[i]!;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(turn);
+    for (let pass = 0; pass < 2; pass += 1) {
+      ctx.strokeStyle = pass === 0 ? this.tones[TONE.ink]! : this.color(pool, i);
+      ctx.globalAlpha = (pass === 0 ? 0.55 : 1) * alpha;
+      const grow = pass === 0 ? 3 : 0;
+      ctx.lineWidth = line + grow;
+      roundRect(ctx, -w, -h, w * 2, h * 2, h * 0.35);
+      ctx.stroke();
+      ctx.lineWidth = line * 0.45 + grow;
+      roundRect(ctx, -w + line * 1.8, -h + line * 1.8, w * 2 - line * 3.6, h * 2 - line * 3.6, h * 0.25);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
 }
+
+function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number): void {
+  const k = Math.max(0, Math.min(r, w / 2, h / 2));
+  ctx.beginPath();
+  ctx.moveTo(x + k, y);
+  ctx.arcTo(x + w, y, x + w, y + h, k);
+  ctx.arcTo(x + w, y + h, x, y + h, k);
+  ctx.arcTo(x, y + h, x, y, k);
+  ctx.arcTo(x, y, x + w, y, k);
+  ctx.closePath();
+}
+
+export {};
 
 /** A soft round sprite of `color` (opaque centre, clear edge), made once per palette. */
 function softDisc(color: string): HTMLCanvasElement {

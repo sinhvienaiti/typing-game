@@ -25,12 +25,17 @@ export type GlyphPose = {
   dy: number;
   alpha: number;
   hot: number;
+  /** Squash (+: flattened, −: stretched): the letter's scale is (1 + 0.6 q, 1 − q) times `scale`. */
+  squash: number;
   aOn: boolean;
+  aAlpha: number;
   aScale: number;
   aRot: number;
   aDx: number;
   aDy: number;
   bOn: boolean;
+  bScale: number;
+  bAlpha: number;
   bRot: number;
   bDx: number;
   bDy: number;
@@ -43,12 +48,16 @@ export const restPose = (out: GlyphPose): GlyphPose => {
   out.dy = 0;
   out.alpha = 1;
   out.hot = 0;
+  out.squash = 0;
   out.aOn = false;
+  out.aAlpha = 1;
   out.aScale = 1;
   out.aRot = 0;
   out.aDx = 0;
   out.aDy = 0;
   out.bOn = false;
+  out.bScale = 1;
+  out.bAlpha = 1;
   out.bRot = 0;
   out.bDx = 0;
   out.bDy = 0;
@@ -75,6 +84,8 @@ export type SpawnCtx = {
   /** Reduced motion: particles do not travel, rings do not grow. */
   still: boolean;
   random: () => number;
+  /** Lights the letter `offset` places from this one by `amount` (0 … 1) for a moment: a style's light spilling onto its neighbours. */
+  light: (offset: number, amount: number) => void;
 };
 
 export type StyleRecipe = {
@@ -87,6 +98,8 @@ export type StyleRecipe = {
   readonly ghost: "hot" | "light";
   /** Particle phases after the key (ms): stamp's land at 50 ms, the rest at once. */
   readonly phases: readonly number[];
+  /** The finished word's own release on top of the rim pop: Stamp seals the word. */
+  readonly release?: "seal";
   keyPose(age: number, motion: number, out: GlyphPose): GlyphPose;
   spawnKey(phase: number, c: SpawnCtx): void;
   spawnWrong(c: SpawnCtx): void;
@@ -143,24 +156,33 @@ function sparks(c: SpawnCtx, n: number, toneA: number, toneB: number, deg: numbe
   }
 }
 
-// ── Stamp (T1): a big copy slams down onto the letter in four frames, paint bursts where it lands.
+// ── Stamp (T1): a big copy slams down onto the letter in three frames over its own falling shadow,
+// lands with a squash, an overshoot and a settle, splashes paint with a dark under-edge, throws
+// droplets that splat on the line, and its light spills onto the next letters for a moment.
 const STAMP_S = [3.0, 2.35, 1.6];
 const STAMP_R = [-9, -6, -3];
 const STAMP_X = [-0.28, -0.18, -0.08];
 const STAMP_Y = [-0.95, -0.6, -0.25];
+/** The shadow under the falling copy: on the slot, smaller and darker as the copy comes down. */
+const SHADOW_S = [1.75, 1.45, 1.2];
+const SHADOW_A = [0.3, 0.45, 0.62];
+/** After the landing frame: squash, then a stretch past rest, then settled (60 Hz frames). */
+const LAND_Q = [0.17, 0.09, -0.06, -0.03, 0.015, 0];
+const LAND_Y = [0.05, 0.03, -0.025, -0.01, 0, 0];
 const STAMP_LAND = 50;
 
 const stamp: StyleRecipe = {
   id: "stamp",
-  keyMs: 115,
+  keyMs: 150,
   clip: null,
   ghost: "light",
   phases: [STAMP_LAND],
+  release: "seal",
   keyPose(age, m, out) {
     restPose(out);
     if (age < 0 || age >= this.keyMs) return out;
     if (m <= 0) {
-      out.hot = age < STAMP_LAND + 34 ? 1 - clamp01((age - STAMP_LAND) / 34) : 0;
+      out.hot = age < STAMP_LAND + 40 ? 1 - clamp01((age - STAMP_LAND) / 40) : 0;
       return out;
     }
     if (age < STAMP_LAND) {
@@ -171,30 +193,70 @@ const stamp: StyleRecipe = {
       out.aRot = STAMP_R[f]! * m;
       out.aDx = STAMP_X[f]! * m;
       out.aDy = STAMP_Y[f]! * m;
+      out.bOn = true;
+      out.bScale = 1 + (SHADOW_S[f]! - 1) * m;
+      out.bAlpha = SHADOW_A[f]!;
+      out.bRot = STAMP_R[f]! * 0.4 * m;
+      out.bDx = 0.07 * m;
+      out.bDy = 0.1 * m;
       return out;
     }
-    const t = clamp01((age - STAMP_LAND) / 65);
-    out.scale = 1 + 0.16 * m * (1 - t) * (1 - t);
-    out.hot = age < STAMP_LAND + 34 ? 1 - (age - STAMP_LAND) / 34 : 0;
+    const f = frameOf(age - STAMP_LAND);
+    out.squash = (LAND_Q[f] ?? 0) * m;
+    out.dy = (LAND_Y[f] ?? 0) * m;
+    out.scale = f === 0 ? 1 + 0.06 * m : 1;
+    out.hot = age < STAMP_LAND + 45 ? 1 - (age - STAMP_LAND) / 45 : 0;
     return out;
   },
   spawnKey(_phase, c) {
-    disc(c, TONE.hot, 70, 0.62 * c.h * c.size);
-    ring(c, TONE.accent, 180, 0.42 * c.h, 1.0 * c.h * c.size, 0.2 * c.h);
-    const n = count(c, 7, 3);
-    for (let k = 0; k < n; k += 1) {
-      const i = spawn(c, PK.ink, k % 3 === 2 ? TONE.hot : k % 3 === 1 ? TONE.light : TONE.accent, rand(c, 230, 330));
-      if (i < 0) return;
-      c.pool.size[i] = rand(c, 0.045, 0.1) * c.h;
-      fling(c, i, -90 + rand(c, -120, 120), rand(c, 9, 18) * c.h, 7, 30 * c.h);
+    // The splat under the letter (paint with a dark under-edge, or an ink texture), the flash, the contact ring.
+    const sp = spawn(c, PK.splat, TONE.accent, 300);
+    if (sp >= 0) {
+      c.pool.size[sp] = 0.6 * c.h * c.size;
+      c.pool.rot[sp] = c.random() * Math.PI * 2;
+      c.pool.variant[sp] = Math.floor(c.random() * 4);
+      c.pool.aux[sp] = c.random() * 1000;
     }
+    disc(c, TONE.hot, 70, 0.62 * c.h * c.size);
+    const ct = spawn(c, PK.contact, TONE.hot, 170, c.x, c.y + 0.36 * c.h);
+    if (ct >= 0) {
+      c.pool.size[ct] = 0.45 * c.h;
+      c.pool.size2[ct] = c.still ? 0.45 * c.h : 1.3 * c.h * c.size;
+      c.pool.aux[ct] = 0.07 * c.h;
+    }
+    // A glint where the stamp bites (a glyph-spark texture cell when the game gives one).
+    const g = spawn(c, PK.star, TONE.hot, 130, c.x - 0.34 * c.h, c.y - 0.3 * c.h);
+    if (g >= 0) {
+      c.pool.size[g] = 0.42 * c.h * c.size;
+      c.pool.variant[g] = Math.floor(c.random() * 4);
+    }
+    // Droplets: thrown up and out, they fall and splat on the line under the word.
+    const n = count(c, 7, 4);
+    for (let k = 0; k < n; k += 1) {
+      const i = spawn(c, PK.ink, k % 3 === 2 ? TONE.hot : k % 3 === 1 ? TONE.light : TONE.accent, rand(c, 300, 420));
+      if (i < 0) break;
+      c.pool.size[i] = rand(c, 0.04, 0.09) * c.h;
+      c.pool.aux[i] = c.y + rand(c, 0.55, 0.75) * c.h;
+      fling(c, i, -90 + (k % 2 === 0 ? -1 : 1) * rand(c, 25, 115), rand(c, 9, 17) * c.h, 5, 34 * c.h);
+    }
+    // Its light spills onto the neighbours, brighter on the next letter.
+    c.light(1, 0.5);
+    c.light(2, 0.2);
+    c.light(-1, 0.3);
   },
   spawnWrong(c) {
-    disc(c, TONE.warn, 130, 0.42 * c.h);
+    const sp = spawn(c, PK.splat, TONE.warn, 220);
+    if (sp >= 0) {
+      c.pool.size[sp] = 0.36 * c.h;
+      c.pool.rot[sp] = c.random() * Math.PI * 2;
+      c.pool.variant[sp] = Math.floor(c.random() * 4);
+      c.pool.aux[sp] = c.random() * 1000;
+    }
     for (let k = 0; k < 3; k += 1) {
-      const i = spawn(c, PK.ink, TONE.warn, rand(c, 180, 240));
+      const i = spawn(c, PK.ink, TONE.warn, rand(c, 200, 260));
       if (i < 0) return;
       c.pool.size[i] = rand(c, 0.035, 0.06) * c.h;
+      c.pool.aux[i] = c.y + 0.6 * c.h;
       fling(c, i, 90 + rand(c, -35, 35), rand(c, 2, 5) * c.h, 4, 22 * c.h);
     }
   },

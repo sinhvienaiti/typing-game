@@ -18,6 +18,9 @@ export const PK = {
   crack: 8, // a zigzag line across a glyph
   shock: 9, // an ellipse around the whole word
   star: 10, // a four-point glint
+  splat: 11, // a paint splat with a dark under-edge (or an ink texture cell)
+  contact: 12, // a flat ring where a stamp meets the line
+  seal: 13, // a seal frame stamped over the whole word (or a seal texture)
 } as const;
 export type ParticleKind = (typeof PK)[keyof typeof PK];
 
@@ -47,6 +50,8 @@ export class ParticlePool {
   readonly spin: Float32Array;
   /** Free per-kind value (glyph index for a trace, gap for a ring…). */
   readonly aux: Float32Array;
+  /** Which cell of a texture atlas (or which procedural shape) the particle draws. */
+  readonly variant: Uint8Array;
   private live: number;
 
   constructor(readonly capacity: number) {
@@ -67,6 +72,7 @@ export class ParticlePool {
     this.rot = new Float32Array(capacity);
     this.spin = new Float32Array(capacity);
     this.aux = new Float32Array(capacity);
+    this.variant = new Uint8Array(capacity);
     this.live = capacity;
   }
 
@@ -127,6 +133,7 @@ export class ParticlePool {
     this.rot[slot] = 0;
     this.spin[slot] = 0;
     this.aux[slot] = 0;
+    this.variant[slot] = 0;
     return slot;
   }
 
@@ -186,6 +193,7 @@ export class ParticlePool {
       this.rot[i] = this.rot[last]!;
       this.spin[i] = this.spin[last]!;
       this.aux[i] = this.aux[last]!;
+      this.variant[i] = this.variant[last]!;
     }
     this.count = last;
   }

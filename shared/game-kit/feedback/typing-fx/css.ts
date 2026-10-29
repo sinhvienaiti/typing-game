@@ -29,6 +29,8 @@ export const TYPING_FX_CSS = `
 .tfx-h{color:var(--tfx-hot);text-shadow:0 0 .08em var(--tfx-accent),0 0 .28em var(--tfx-accent),0 0 .55em var(--tfx-accent)}
 .tfx-a,.tfx-b{color:var(--tfx-ghost);text-shadow:0 .05em 0 rgba(0,0,0,.55),0 0 .3em rgba(0,0,0,.25)}
 .tfx--ghost-hot .tfx-a,.tfx--ghost-hot .tfx-b{color:var(--tfx-hot);text-shadow:0 0 .1em var(--tfx-accent),0 0 .32em var(--tfx-accent)}
+.tfx--stamp .tfx-a{text-shadow:0 .05em 0 rgba(0,0,0,.45),0 0 .35em color-mix(in srgb,var(--tfx-accent) 55%,transparent)}
+.tfx--stamp .tfx-b{color:rgba(3,2,8,.9);text-shadow:0 0 .1em rgba(0,0,0,.7),0 0 .22em rgba(0,0,0,.45)}
 .tfx-mean{font-size:calc(var(--tfx-size)*.36);font-weight:600;color:var(--tfx-meaning);padding:.12em 1em .55em;white-space:normal;max-width:24em;text-align:center;line-height:1.28;text-shadow:0 1px 0 rgba(0,0,0,.65)}
 .tfx-mean:empty{display:none}
 .tfx-badge{position:absolute;left:0;top:0;opacity:0;font-size:calc(var(--tfx-size)*.4);font-weight:800;letter-spacing:.08em;color:var(--tfx-gold);white-space:nowrap;text-shadow:0 0 .35em rgba(255,196,80,.85),0 .07em 0 rgba(0,0,0,.6)}

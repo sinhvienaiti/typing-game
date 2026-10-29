@@ -7,7 +7,7 @@ export { comboFactor, comboParticles, comboSize, INTENSITY, isMilestone, levelFo
 export { ParticlePool, PK, type ParticleKind } from "./pool";
 export { kitKind, TypingFxDriver, type TypingFxKind, type TypingFxProgress, type TypingFxSink } from "./driver";
 export { FRAME_MS, STYLES, TONE, WRONG_MS, flyEase, popEnvelope, squeeze, wrongPose, type GlyphPose, type SpawnCtx, type StyleRecipe } from "./styles";
-export { DEFAULT_PALETTE, FxCanvas, mixHex, toneColors, type TypingFxPalette } from "./draw";
+export { DEFAULT_PALETTE, FxCanvas, mixHex, toneColors, type TypingFxAtlas, type TypingFxPalette, type TypingFxTextures } from "./draw";
 export { injectTypingFxCss, TYPING_FX_CSS } from "./css";
 export { FocusStrip, type FocusStripOptions } from "./strip";
 export {

@@ -203,3 +203,71 @@ Chung cho cả ba game:
 - Anh chọn kiểu mặc định (đề xuất: Stamp hoặc Smash), cường độ và vị trí dải trong Lab.
 - Audio Lab giao năm hồ sơ phím; Lab tự nhận khi `keys-manifest.json` có mặt (tải lại trang). Sau đó đo lại tiếng bằng `perf.mjs` với `PROFILE=<id>`.
 - Làn từng game: nối theo §18, bọc tấm bằng art thật, rồi chạy kịch bản trình duyệt của game.
+
+## 20. Cập nhật 29/10 chiều: việc đã làm và việc còn lại (dừng vì hết ngữ cảnh)
+
+**Đã làm (commit trong repo cha, chưa push):**
+- `33836dc2`: cài đặt cỡ dải `size` (Medium / Large / Huge, mặc định Large: chữ hoa ~40 px ở 720p, ~56 px ở 1080p; Huge ~52 / 72). Mặc định Stamp. `setAnchorPx(x, y, "bottom")` để game ghim đáy dải vào một đường. Lab có nút Size.
+- `9fb51362`: mặt nạ chữ (`mask`, luật "Thiếu chữ" của Last Line: chữ ẩn hiện "_" tới khi gõ hoặc lộ ra), `glyphPoint()` (gốc tia 3D của Last Line), `rect()` (vùng cấm số sát thương).
+- Commit này nâng cấp Stamp theo mức 9 điểm:
+  - bóng tối rơi dưới bản sao chữ;
+  - chạm đáy thì bẹp, vọt rồi đứng (khung 60 Hz);
+  - vết sơn có mép tối;
+  - giọt sơn rơi có trọng lực, đập xuống đường kẻ thì bẹt ra;
+  - vòng chạm dẹt ở chân chữ, ánh lóe;
+  - ánh sáng lan sang chữ kế bên;
+  - xong từ thì đóng một con dấu khung đôi lên cả từ.
+- Móc texture `setTextures({ spark, ink, seal, ember })` cho gói tranh Codex 173–175. Chưa có texture thì vẽ hình thủ tục.
+- `scripts/ab_sheet.py`: tờ A/B cạnh khung Typing Break cắt thẳng từ `typing_break.mov`, cùng thời điểm, cùng cỡ.
+- Kit 48 test xanh.
+
+**Tờ A/B Stamp:** `tools/typing-feedback-lab/tmp/sheets/ab-stamp-1920x1080.jpg`. Điểm tự chấm sau nâng cấp, chưa đạt 9:
+
+| Hạng mục | Điểm | Còn thiếu |
+|---|---|---|
+| Phím | 8,5 | Vết sơn dưới chữ thiếu tương phản trên tấm tối; cần sprite `ink-splash` thật hoặc tấm sáng hơn quanh chữ đang gõ |
+| Xong từ | 8,5–9 | Đạt dáng; cần judge |
+| Gõ sai | 8 | Cần một nhịp mạnh hơn mà không che chữ sau, ví dụ vết đỏ dưới chữ và gạch chân giật |
+
+Bản 1280 chưa chụp: lần chụp chờ GPU của làn khác quá giờ.
+
+**Còn lại, theo thứ tự người điều phối (29/10):**
+
+1. **Khảo sát thư viện miễn phí** (luật mới §5 của `SHARED_SYSTEMS_BAR.md`: MIT, BSD, ISC, Apache-2.0, MPL-2.0; không GPL hay NC; kiểm giấy phép tại nguồn; ghi `docs/games/THIRD_PARTY.md`).
+   - Ứng viên: Motion, anime.js v4 (MIT), GSAP (kiểm điều khoản "no charge" của Webflow), một thư viện tách chữ.
+   - Hạt: tsParticles chỉ khi hợp DOM + canvas nhỏ; với Three thì three.quarks hoặc three-nebula, pmndrs `postprocessing` cho glow.
+   - Chọn theo chất lượng, độ mượt, cỡ gói (Wordwoven phải nạp lười) rồi ghi lý do vào đây.
+   - Gói tài sản (texture, âm) cần anh duyệt từng gói: chỉ liệt kê tên, nguồn, giấy phép, cỡ.
+2. **Nâng Stamp lên 9:** áp các sửa của bảng trên, chụp lại hai cỡ, rồi hai judge chấm.
+3. **Nâng năm kiểu kia lên 9** cùng cách: bóng hoặc độ sâu, theo đà, ánh sáng lan sang chữ bên, cách xong từ riêng của từng kiểu, móc texture.
+   - Smash: vòng hai tông quanh cả từ.
+   - Flare: chùm sáng và tia lửa `ember`.
+   - Shatter: cả từ vỡ thành mảnh trước khi bay.
+   - Rune: vòng phù văn bao cả từ.
+   - Minimal: giữ nhẹ nhưng tinh.
+   Mỗi kiểu có tờ A/B (`ab_sheet.py`) trước khi gọi là xong.
+4. **Kit `shared/game-kit/ui/quick-settings/`** (spec `docs/games/IN_GAME_SETTINGS.md`, chưa đọc). Có test.
+   - Hai nút trong trận: bánh răng Settings và loa Sound, cùng góc trên phải ở mọi game; mở bằng chuột, `F1`/`F2`; đóng bằng `Esc`.
+   - Panel mở thì game dừng và gõ không nhận phím. Đóng thì đếm 3-2-1, không mất từ đang gõ.
+   - Đổi là áp ngay và lưu vào save của game.
+   - Panel Sound: Master (thanh trượt và tắt tiếng), Music, Effects, Voice, Interface; Keyboard sound (Off và năm hồ sơ, nghe thử khi chọn); Keyboard volume.
+   - Panel Settings: kiểu chữ, cường độ, cỡ (có xem trước nhỏ); đồ họa Low–Ultra; giảm chuyển động; các công tắc học; Resume và Quit to title; một chỗ cho mục riêng của game.
+   - Icon là ảnh thật (Codex 180) nhận theo tên. Chưa có ảnh thì dùng nút chữ, không vẽ bằng CSS.
+   - Cân nhắc thư viện slider hoặc panel có sẵn, truy cập được, nếu tốt hơn bản tự làm.
+5. **Last Line** (worktree `games/.wt-ts-typefx`, nhánh `ts-typefx` từ `79db628`, kit đã đồng bộ ở `9fb51362`, chưa sửa mã game). Cần đồng bộ lại sau mỗi commit kit. Kế hoạch đã dò:
+   - **Module mới `src/view/type-fx.ts`** giữ `FocusStrip`, `TypingSounds`, `TypingFxDriver`:
+     - đáy dải ghim ở đường cũ: `setAnchorPx(stage.width / 2, line, "bottom")`; `line` lấy từ `Hud.layout`, thêm `placed.line`;
+     - đích chữ bay: `ship.core(v)` rồi `stage.project(v.x, -v.z, v.y, out)`, như `TypeFeel.probe`;
+     - màu theo súng: `--xung` / `--tia` = `--volt` / `--hot`, `#ffc53d`, `#8fa3ff`, `#ff3f6c`. Gọi `setPalette` khi súng đổi; nên thêm bộ đệm sprite theo bảng màu trong `FxCanvas`.
+   - **Sự kiện, trong `TypeFeel.read`:**
+     - `EV.keyOk` (`slot`, `value` = số chữ đã gõ) → `advance`. Id từ = `slot * 100000 + chỉ số deck`. Nếu cùng tick có `EV.word` của ô đó thì lấy chỉ số deck từ `R.ref` của nó, vì `T.word[slot]` có thể đã đổi.
+     - `EV.keyBad`: ô −1 → `stray`, còn lại → `wrong`, với `mask = T.hidden[s] & ~T.shown[s]`.
+     - `EV.word` → `done`: `perfect` = `FLAG.perfect`, combo = `streak.n` sau khi `streak.word()`.
+     - Mỗi khung: khóa mất thì `release`; `T.typed` giảm thì `back`.
+   - **`WordStrip` cũ:** ẩn tấm `.sv-strip` và `.sv-strip-ghost` bằng class trên `#svHud`. Giữ đèn chuỗi "CLEAN ×N", cảnh báo rift và vạch quái gần, nhưng đặt theo `rect()` của dải mới (thêm chế độ `host` trong `strip.ts`). `TypeFeel.land` dùng `glyphPoint()` thay `strip.anchor()`. `Hud.protectedRects` dùng hộp rộng nhất của dải mới.
+   - **Âm phím:**
+     - `TypingSounds({ context, destination })` nối vào context và bus sfx của `ThemeAudio`; cần thêm getter context và bus vào `theme-audio.ts`.
+     - Gốc URL `/assets/typing-survival/audio/keys/`.
+     - Hồ sơ còn "pending" thì giữ tiếng tổng hợp cũ (`audio.key` / `audio.keyBad`) và báo anh. Hồ sơ sẵn sàng thì thay. "Off" thì tắt cả hai.
+   - **Cài đặt:** `survival.settings.typingFx` qua `sanitizeTypingFx`. Các dòng Options (Letter effect, Effect strength, Word size, Keyboard sound, Keyboard volume) chuyển vào quick-settings của bước 4.
+   - **Kiểm:** `pnpm check` xanh; golden không đổi (chỉ sửa view và app); tờ khung 1280 và 1920 cho phím, phím sai, xong từ, combo qua `heavy.sh --gpu`; xóa khung thô; changelog `docs/changelog/2026-10-29-typing-fx.md`; commit trên `ts-typefx`, không merge, không push.

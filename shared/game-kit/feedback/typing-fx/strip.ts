@@ -13,7 +13,7 @@
  * new word can show while the last one leaves.
  */
 import { injectTypingFxCss } from "./css";
-import { DEFAULT_PALETTE, FxCanvas, mixHex, type TypingFxPalette } from "./draw";
+import { DEFAULT_PALETTE, FxCanvas, mixHex, type TypingFxPalette, type TypingFxTextures } from "./draw";
 import type { TypingFxSink } from "./driver";
 import { comboParticles, comboSize, isMilestone, levelFor, PRIORITY, wordPriority, type IntensityLevel } from "./intensity";
 import { ParticlePool, PK } from "./pool";
@@ -86,6 +86,9 @@ type Layer = {
   release: number;
   /** Letters shown as "_" (bit i: letter i), the game's missing-letter rule. */
   mask: number;
+  /** Light spilled onto each letter by a neighbour's key: when, and how bright (0 … 1). */
+  litAt: Float64Array;
+  lit: Float32Array;
 };
 
 const MASK_CHAR = "_";
@@ -235,7 +238,7 @@ export class FocusStrip implements TypingFxSink {
       this.hitEl.push(span);
     }
 
-    this.ctx = { pool: this.pool, owner: 0, prio: 1, x: 0, y: 0, h: 52, glyph: 0, now: 0, mult: 1, size: 1, still: false, random: this.random };
+    this.ctx = { pool: this.pool, owner: 0, prio: 1, x: 0, y: 0, h: 52, glyph: 0, now: 0, mult: 1, size: 1, still: false, random: this.random, light: this.lightNeighbour };
     this.setFont(options.font ?? '"Be Vietnam Pro", "Segoe UI", system-ui, sans-serif', options.weight ?? 800);
     this.setPalette(options.palette ?? {});
     if (this.reducedPref === "system" && typeof matchMedia === "function") {
@@ -252,6 +255,27 @@ export class FocusStrip implements TypingFxSink {
   }
 
   private readonly onMotion = (): void => this.configure({});
+
+  /** The glyph a spawn is aimed at (layer and index), for a style's light on its neighbours. */
+  private aimLayer: Layer | null = null;
+  private aimIndex = 0;
+  private aimNow = 0;
+
+  /** A style's light spilling onto the letter `offset` places away (SpawnCtx.light). */
+  private readonly lightNeighbour = (offset: number, amount: number): void => {
+    const layer = this.aimLayer;
+    if (layer === null) return;
+    const i = this.aimIndex + offset;
+    if (i < 0 || i >= layer.len) return;
+    layer.litAt[i] = this.aimNow;
+    layer.lit[i] = Math.max(0, Math.min(1, amount));
+    layer.dirty[i] = 1;
+  };
+
+  /** A game theme's painted sprites (Codex packs 173–175: glyph-spark, ink-splash, seal-stamp, ember); {}: procedural. */
+  setTextures(textures: TypingFxTextures): void {
+    this.fx.setTextures(textures);
+  }
 
   private readonly tick = (): void => {
     this.update(this.clock());
@@ -272,7 +296,7 @@ export class FocusStrip implements TypingFxSink {
       text: "", len: 0, sx: new Float32Array(this.max), rowY: 0, baseY: 0, width: 0, height: 0, rowW: 0,
       state: 0, t0: 0, typed: 0,
       fx: new Uint8Array(this.max), fxAt: new Float64Array(this.max), fxPhase: new Uint8Array(this.max), fxOwner: new Int32Array(this.max), dirty: new Uint8Array(this.max),
-      release: 0, mask: 0,
+      release: 0, mask: 0, litAt: new Float64Array(this.max).fill(-1e9), lit: new Float32Array(this.max),
     };
     for (let i = 0; i < this.max; i += 1) {
       const g = this.doc.createElement("span");
@@ -706,6 +730,9 @@ export class FocusStrip implements TypingFxSink {
     c.prio = prio;
     c.mult = this.level.particles * comboParticles(this.combo);
     c.size = comboSize(this.combo);
+    this.aimLayer = layer;
+    this.aimIndex = index;
+    this.aimNow = now;
   }
 
   private spawnWord(layer: Layer, prio: number, now: number): void {
@@ -716,6 +743,27 @@ export class FocusStrip implements TypingFxSink {
     const cy = this.canvasH / 2;
     this.serial += 1;
     const owner = this.serial;
+    if (this.recipe.release === "seal") {
+      // Stamp seals the word: a double-ruled frame slams over it, paint splats at two corners.
+      const seal = pool.spawn(PK.seal, owner, prio, cx, cy, now, 420);
+      if (seal >= 0) {
+        pool.tone[seal] = gold ? TONE.gold : TONE.accent;
+        pool.size[seal] = layer.rowW / 2 + 0.12 * h;
+        pool.size2[seal] = 0.62 * h;
+        pool.aux[seal] = 0.07 * h;
+        pool.variant[seal] = Math.floor(this.random() * 4);
+      }
+      for (let k = 0; k < 2; k += 1) {
+        const side = k === 0 ? -1 : 1;
+        const sp = pool.spawn(PK.splat, owner, prio, cx + side * (layer.rowW / 2 + 0.05 * h), cy + (k === 0 ? -0.45 : 0.45) * h, now, 380);
+        if (sp < 0) break;
+        pool.tone[sp] = gold ? TONE.gold : TONE.accent;
+        pool.size[sp] = 0.32 * h;
+        pool.rot[sp] = this.random() * Math.PI * 2;
+        pool.variant[sp] = Math.floor(this.random() * 4);
+        pool.aux[sp] = this.random() * 1000;
+      }
+    }
     const shock = pool.spawn(PK.shock, owner, prio, cx, cy, now, prio === PRIORITY.milestone ? 320 : 240);
     if (shock >= 0) {
       pool.tone[shock] = gold ? TONE.gold : TONE.hot;
@@ -886,25 +934,35 @@ export class FocusStrip implements TypingFxSink {
       this.writePose(layer, i, wrongPose(age, m, this.pose));
       return;
     }
+    // At rest: a neighbour's spilled light, else one reset after an effect.
+    const litAge = now - layer.litAt[i]!;
+    if (litAge >= 0 && litAge < 220 && layer.lit[i]! > 0) {
+      layer.hot[i]!.style.opacity = String(layer.lit[i]! * Math.exp(-litAge / 70));
+      layer.dirty[i] = 1;
+      return;
+    }
     if (layer.dirty[i]) this.writeRest(layer, i);
   }
 
   private writePose(layer: Layer, i: number, p: GlyphPose): void {
     const base = layer.base[i]!.style;
-    base.transform = p.scale === 1 && p.rot === 0 && p.dx === 0 && p.dy === 0 ? "" : `translate(${p.dx}em,${p.dy}em) rotate(${p.rot}deg) scale(${p.scale})`;
+    base.transform =
+      p.scale === 1 && p.rot === 0 && p.dx === 0 && p.dy === 0 && p.squash === 0
+        ? ""
+        : `translate(${p.dx}em,${p.dy}em) rotate(${p.rot}deg) scale(${p.scale * (1 + 0.6 * p.squash)},${p.scale * (1 - p.squash)})`;
     base.opacity = p.alpha === 1 ? "" : String(p.alpha);
     const hot = layer.hot[i]!.style;
     hot.opacity = p.hot > 0.01 ? String(p.hot) : "0";
     hot.transform = base.transform;
     const a = layer.ga[i]!.style;
     if (p.aOn) {
-      a.opacity = "1";
+      a.opacity = String(p.aAlpha);
       a.transform = `translate(${p.aDx}em,${p.aDy}em) rotate(${p.aRot}deg) scale(${p.aScale})`;
     } else if (a.opacity !== "0") a.opacity = "0";
     const b = layer.gb[i]!.style;
     if (p.bOn) {
-      b.opacity = "1";
-      b.transform = `translate(${p.bDx}em,${p.bDy}em) rotate(${p.bRot}deg) scale(${p.aScale})`;
+      b.opacity = String(p.bAlpha);
+      b.transform = `translate(${p.bDx}em,${p.bDy}em) rotate(${p.bRot}deg) scale(${p.bScale})`;
     } else if (b.opacity !== "0") b.opacity = "0";
     layer.dirty[i] = 1;
   }
