@@ -32,7 +32,7 @@
 **Nơi ghi:** `games/typing-defense/art-src/scenery/meadow/decals-v2/` và `games/typing-defense/art-src/scenery/meadow/rice-v2/` (thư mục mới).
 
 **Chỉ được ghi:**
-- `decals-v2/ground-decals-a.*`, `decals-v2/ground-decals-b.*` (lượt sinh `-left.tryN.*`, `-right.tryN.*`; hai nửa chọn `-left.png`, `-right.png`; tờ ghép `.png` trên nền `#FF00FF`; `.alpha.png`);
+- `decals-v2/ground-decals-a.*`, `decals-v2/ground-decals-b.*`, `decals-v2/road-edges-c.*` (lượt sinh `-left.tryN.*`, `-right.tryN.*`; hai nửa chọn `-left.png`, `-right.png`; tờ ghép `.png` trên nền `#FF00FF`; `.alpha.png`);
 - `rice-v2/<tên>.tryN.png`, `.tryN.prompt.txt`, `<tên>.png`, `<tên>.prompt.txt`;
 - `games/typing-defense/art-src/_review/123-*.jpg`, `games/typing-defense/art-src/_review/123/`;
 - `docs/codex-queue/123-report.md`.
@@ -60,12 +60,14 @@ Seen straight from above with no perspective. Flat, even, shadowless light: no c
 
 **Dòng nền M:** `Flat pure #FF00FF magenta background, perfectly uniform, no gradient, no shadow, no glow on it; the subject contains no pink, magenta or bright purple at all.`
 
-### Decal: hai tờ, mỗi tờ lưới 4 × 2, 2048 × 1024, ô 512 × 512 (4 m)
+### Decal: ba tờ, mỗi tờ lưới 4 × 2, 2048 × 1024, ô 512 × 512 (4 m)
 
 Sinh hai ảnh vuông 2 × 2 (bốn món mỗi ảnh, `-left` và `-right`), rồi ghép bằng script thành một tờ, như 097.
 
 - **Tờ a (đất):** đất mòn sáng ×2; đất dưới tán (sẫm, lá rụng) ×2; ngã ba của ba lối mòn ×1; mẩu lối mòn thẳng ×1; mẩu lối mòn cong ×1; một mảng đá lát cổ lún dưới cỏ ×1. Mép mềm làm bằng công cụ: sau khi tách nền, làm mềm alpha 12–24 px vào trong hình.
 - **Tờ b (vật nhỏ):** khóm hoa dã quỳ vàng nhìn từ trên ×1; khóm hoa huệ trắng ×1; sỏi đá vôi rải ×2; lá bàng đỏ rụng ×1; gốc cây cổ thụ nhìn từ trên ×1; vòng vụn gỗ (dấu cây luật đã chặt) ×1; một vũng nước nhỏ có lá sen ×1. Mép rõ, không viền mực.
+
+- **Tờ c (mép đường, chủ dự án 29/10: đường không được trông như vệt quệt, xem `docs/games/PATH_QUALITY.md`):** mọi món nhìn từ trên, chạy dọc trục đứng của ô, hợp với `road-paved` và `trail-worn` của 122 (đính kèm hai ô đó làm ảnh tham chiếu chất liệu). Viên đá bờ vôi xếp thẳng ×1; viên đá bờ xếp theo khúc cong ×1; phiến đá lát vỡ tràn ra cỏ ×1; quạt sỏi vôi ở mép đường ×1; khóm cỏ trùm qua mép đá ×1; vệt bánh xe có vũng nước bạc ×1; ngã ba có ba phiến đá lớn mòn ×1; bậc đá ba phiến lún dưới cỏ ×1. Mép rõ, không viền mực; làm mềm alpha 6–12 px.
 
 ### Rice Field: năm ô 1024 × 1024, sRGB, không alpha, liền mép
 

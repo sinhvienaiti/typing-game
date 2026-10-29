@@ -2,7 +2,7 @@
 
 **Nguồn:** kiểm kê hình ảnh UI map 1, 29/10 (`docs/games/map1/UI_IMAGERY.md`; dàn ý `UIC-LL-3` trong `docs/games/map1/UI_IMAGERY_CODEX.md`). Chủ dự án 28/10 tối: mọi chi tiết UI phải có hình thật, không chỉ có chữ; không hình vẽ bằng mã. Hướng mỹ thuật: `docs/games/ART_DIRECTION_2026-10-28.md`.
 
-**Chạy khi:** chờ chủ dự án chọn hướng (112).
+**Chạy khi:** chủ dự án đã chọn hướng **B · Lightbearer** (29/10). Chạy sau 121 và 127, để có khối STYLE-UI và khung UI của hướng B.
 
 **Báo cáo:** `docs/codex-queue/151-report.md`, thư mục `_review/151/` của game.
 
@@ -96,7 +96,7 @@ Script đã dùng lưu ở `_review/151/`, chạy lại được.
 ## Chung cho Last Line
 
 **Chung cho các phiếu Last Line:**
-- **Chờ chủ dự án chọn hướng ở phiếu 112:** A Iron Warden, B Lightbearer hay C Rampart.
+- **Hướng đã chọn (29/10): B · Lightbearer.** Khối STYLE-UI nguyên văn ở `docs/games/ART_DIRECTION_2026-10-28.md` §4.3; ảnh hướng `games/typing-survival/art-src/concepts/b-lightbearer-*.png`.
 - **Phong cách:** style: to take the art director's new STYLE block (bible Last Line, khối STYLE-UI của phiếu 121 theo hướng đã chọn).
 - **Định dạng theo** `games/typing-survival/docs/art-requests/015-s1-s2.md`:
   - hình khối gọn, đọc được ở 32–64 px;
@@ -104,7 +104,7 @@ Script đã dùng lưu ở `_review/151/`, chạy lại được.
 - Không chép câu "industrial pictogram… gunmetal" nếu hướng mới khác.
 - **Ảnh tham chiếu bắt buộc:**
   - `games/typing-survival/art-src/ui/icons/gun-xung.norm.256.png` (cỡ vật);
-  - ảnh chọn của 121 khi có.
+  - ảnh chọn của 121 và khung của 127 khi có.
 - **Thư mục `_review`:** `games/typing-survival/art-src/_review/151-*.jpg` và `_review/151/`.
 - `--ui` của Last Line là 1 ở 720p và 1,5 ở 1080p.
 

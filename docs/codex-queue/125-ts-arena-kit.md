@@ -58,6 +58,8 @@ Environment asset for a 3D typing action game. This layer sits behind the words 
 
 ### Tám ảnh
 
+**Đường đi (chủ dự án 29/10):** "phần đường đi cũng phải làm thật đẹp, chứ đường đi nhìn như kiểu lấy ngón tay quệt dài như kia nó rất xấu". Làn đường đắp là thứ người chơi nhìn suốt trận. `deck-tile` phải có chất liệu chạy dọc đường (tấm thép và phiến đá xếp theo hướng đi, khe nối, vết mòn giữa làn), `deck-edge` là một gờ thật có độ cao, và `deck-decals` dùng để phá sự lặp ở mép làn. Xem `docs/games/PATH_QUALITY.md` §2. Kiểm thêm trên tờ thử: làn không được trông như một dải màu đều có mép mờ.
+
 | Tên | Khổ giao | Alpha | Phần riêng |
 |---|---|---|---|
 | `deck-tile` | 1024 × 1024, liền mép | không | `Seamless tileable deck texture, edges wrap on all four sides, seen straight from above with no perspective, flat shadowless light: big plates of dark graphite steel with bands of pale ancient stone set between them, worn smooth, faint dim cyan glyph inlays in the stone. One tile covers 6 by 6 metres.` |

@@ -315,9 +315,9 @@ Giữ tàu (hôm nay) chấm 6,5–7: không phải "rõ ràng tốt nhất", n�
 
 **Phiếu 112** vẽ mỗi hướng hai ảnh 1536 × 1024 (cảnh trận từ camera game, ảnh chủ đạo). Chủ dự án chọn từ `games/typing-survival/art-src/_review/112-directions.jpg`.
 
-### 4.3 Bible Last Line (hướng B, **chờ chủ dự án chọn**)
+### 4.3 Bible Last Line (hướng B, **chủ dự án chọn 29/10**)
 
-Chủ dự án chọn A hay C thì tôi viết lại mục này và các phiếu 121, 125, 126, 127 trước khi xếp vào làn.
+Chủ dự án chọn hướng B · Lightbearer ngày 29/10/2026 sáng. Các phiếu 121, 125, 126, 127 và ảnh nguồn Tripo (phiếu 156) chạy theo mục này.
 
 **STYLE**
 ```text
