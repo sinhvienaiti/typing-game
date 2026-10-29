@@ -12,6 +12,8 @@ Audio Lab from Stable Audio 3 Small-SFX (no downloaded packs, no synth stand-ins
   run.sh keys session  [--run r1]          # Listening Board session keys-1
   run.sh keys stage    [--run r1]          # ~/AudioLab/review/staging/keys/<profile>/ + keys-manifest.json
   run.sh keys all      [--run r1]
+  run.sh keys firefly survey [--folders 0,3] [--limit N]   # khảo sát chỉ đọc nguồn Firefly
+  run.sh keys firefly build [--out DIR]                  # bộ 10+3 và preview 1 giây (phiếu 189)
 
 Data: ~/AudioLab/work/_keys/<profile>/<run>/ (raw/, strokes/, critic/, masters/, runtime/), never in Git.
 """
@@ -770,6 +772,11 @@ def cmd_stage(a) -> int:
 # ---------------------------------------------------------------- CLI
 
 def main(argv: list[str] | None = None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["firefly"]:                  # its own sub-commands and --help
+        from keys import firefly
+        env.apply()
+        return firefly.main(argv[1:])
     ap = argparse.ArgumentParser(prog="keys", description="Năm bộ tiếng phím (Audio Lab).")
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("generate", help="Stable Audio 3: đoạn gõ 10 s và cú gõ đơn 1 s")
@@ -802,6 +809,9 @@ def main(argv: list[str] | None = None) -> int:
     sg = sub.add_parser("stage", help="~/AudioLab/review/staging/keys/<profile>/ + keys-manifest.json")
     sg.add_argument("--choice", help="bộ cho từng hồ sơ, vd. creamy=distinct (mặc định: bộ đã chọn ở master)")
     sg.add_argument("--from-ratings", action="store_true", help="lấy bộ anh chọn trên Bảng Nghe (phiên keys-1)")
+    ff = sub.add_parser("firefly", help="bản Adobe Firefly của chủ dự án: survey (chỉ đọc), build (phiếu 189)",
+                        add_help=False)
+    ff.add_argument("rest", nargs=argparse.REMAINDER)
     a = ap.parse_args(argv)
     env.apply()
     return {"generate": cmd_generate, "slice": cmd_slice, "critic": cmd_critic, "pick": cmd_pick,

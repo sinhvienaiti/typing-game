@@ -74,7 +74,7 @@ def prepare(x: np.ndarray, sr: int) -> tuple[np.ndarray, dict]:
     mono, how = dsp.to_channels(x2, 1)
     m = mono[:, 0]
     m = signal.sosfiltfilt(signal.butter(2, 30.0, "high", fs=sr, output="sos"), m)
-    m = dsp.resample(m, sr, SR)[:, 0]
+    m = dsp.as2d(dsp.resample(m, sr, SR))[:, 0]   # resample returns 1-D unchanged when sr is already 48 kHz
     return m, {"stereo_corr": None if corr is None else round(corr, 4), "mono": how, "hpf_hz": 30, "sr_in": sr}
 
 
