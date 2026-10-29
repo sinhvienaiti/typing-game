@@ -264,14 +264,14 @@ describe("typing sounds: the Audio Lab's keyboard layout", () => {
 
   it("with nothing staged a profile is pending and silent: nothing stands in for it", async () => {
     const sounds = new TypingSounds({ context: new FakeContext() as unknown as AudioContext });
-    expect(await sounds.loadKeyboard("/staging/keys", "clicky", "Clicky", json(undefined))).toEqual({ id: "clicky", state: "pending", keys: 0, spaces: 0, missing: [] });
-    expect(await sounds.loadKeyboard("/staging/keys", "spring", "Classic Spring", json({ files: [] }))).toMatchObject({ state: "pending" });
-    expect(sounds.use("clicky")).toBe(false);
+    expect(await sounds.loadKeyboard("/staging/keys", "marbly", "Marbly", json(undefined))).toEqual({ id: "marbly", state: "pending", keys: 0, spaces: 0, missing: [] });
+    expect(await sounds.loadKeyboard("/staging/keys", "clack", "Clean Clack", json({ files: [] }))).toMatchObject({ state: "pending" });
+    expect(sounds.use("marbly")).toBe(false);
   });
 
   it("the owner's five profiles, and the gap the Audio Lab still owes", () => {
-    expect(KEYBOARD_PROFILES.map((p) => p.id)).toEqual(["creamy", "thock", "clicky", "dome", "spring"]);
-    expect(KEYBOARD_PROFILES.map((p) => p.name)).toEqual(["Creamy", "Thock", "Clicky", "Soft Dome", "Classic Spring"]);
+    expect(KEYBOARD_PROFILES.map((p) => p.id)).toEqual(["creamy", "thock", "marbly", "clack", "dome"]);
+    expect(KEYBOARD_PROFILES.map((p) => p.name)).toEqual(["Creamy Linear", "Deep Thock", "Marbly", "Clean Clack", "Soft Dome"]);
     expect(TYPING_SOUND_SET.key.want).toBe(10);
     expect(TYPING_SOUND_SET.space.want).toBe(3);
     expect(profileGaps({ ...PROFILE, files: { key: files(1, 10, 8), space: files(40, 1, 8) } })).toEqual([{ set: "space", have: 1, ...TYPING_SOUND_SET.space }]);

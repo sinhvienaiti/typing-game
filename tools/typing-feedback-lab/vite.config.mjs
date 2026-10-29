@@ -10,8 +10,10 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, "../..");
+// Keyboard profiles: Codex's ticket 182 output (<repo>/tmp/keys-codex/<id>/) once it exists, else the Audio Lab staging folder.
+const CODEX_KEYS = path.join(repo, "tmp/keys-codex");
 const MOUNTS = {
-  "/lab-keys/": process.env.LAB_KEYS ?? path.join(os.homedir(), "AudioLab/review/staging/keys"),
+  "/lab-keys/": process.env.LAB_KEYS ?? (existsSync(CODEX_KEYS) ? CODEX_KEYS : path.join(os.homedir(), "AudioLab/review/staging/keys")),
   "/lab-vocab/dragon-hold/": path.join(repo, "games/dragon-hold/public/vocabulary"),
   "/lab-vocab/typing-defense/": path.join(repo, "games/typing-defense/public/vocabulary"),
   "/lab-vocab/typing-survival/": path.join(repo, "games/typing-survival/public/vocabulary"),
