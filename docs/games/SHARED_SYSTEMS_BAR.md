@@ -33,3 +33,16 @@ Mọi game sau này dùng lại các hệ này, nên chúng là nền chất lư
 - **Hiệu ứng gõ:** độ trễ (hiện ngay khung đầu), độ đẹp của từng kiểu, đọc được chữ kế tiếp, xong từ, gõ sai, combo, đồng bộ hình và tiếng, độ mỏi mắt sau năm phút, hiệu năng (60 FPS ở 15 phím/giây).
 - **Tiếng phím:** độ thật, độ "sang", độ đều giữa các biến thể, không mỏi tai sau 20 lần, độ trễ, độ to đúng mức so với nhạc và tiếng trận.
 - **Animation:** chuẩn bị và theo đà, cảm giác khối lượng, chuyển tiếp mượt giữa các clip, phản ứng khi bị đánh, chết, đi và đứng, đám đông không đồng bộ máy móc, nhìn rõ ở camera chơi.
+
+## 5. Dùng thư viện có sẵn trước (chủ dự án, 29/10/2026)
+
+"Với 3 phần này, hãy ưu tiên nếu có thư viện nào hỗ trợ thì nên tái sử dụng để áp dụng nó, miễn sao nó miễn phí và không làm vi phạm bản quyền hay gì khác khi tôi đưa site public là được, vì khả năng nếu để bạn tự làm sẽ khó đạt hay, đẹp, mượt, phù hợp được."
+
+- **Trước khi tự viết**, mỗi làn tìm thư viện mã và kho tài sản đã được dùng rộng rãi, chọn cái giúp đạt 9 nhanh nhất. Tự viết chỉ khi không có thư viện phù hợp, hoặc thư viện làm game chậm hay khó hợp phong cách.
+- **Giấy phép được dùng khi đưa site công khai:**
+  - mã: MIT, BSD, ISC, Apache-2.0, MPL-2.0 (chỉ dùng nguyên, không sửa file của thư viện);
+  - tài sản (âm thanh, animation, texture): CC0; CC-BY được dùng nếu ghi công đầy đủ trong trang Credits của game.
+- **Không dùng:** GPL, AGPL, LGPL khi phải sửa hay gộp tĩnh; mọi giấy phép "phi thương mại" (NC), "không phái sinh" (ND); tài sản chỉ ghi "free", "royalty-free" mà không có giấy phép rõ; tài sản của game khác (kể cả Monkeytype, GPL-3.0); dịch vụ cấm dùng trong sản phẩm (đọc điều khoản trước).
+- **Kiểm giấy phép tại nguồn** (file LICENSE trong repo, trang giấy phép của gói), không tin mô tả của bên thứ ba. Ghi mọi thư viện và tài sản vào `docs/games/THIRD_PARTY.md`: tên, phiên bản, nguồn, giấy phép, cách dùng, ghi công cần có.
+- **Tải tài sản (âm thanh, animation, texture) về máy cần chủ dự án đồng ý từng gói** (tên, nguồn, giấy phép, dung lượng). Cài gói mã qua pnpm là việc làm thường ngày, theo chỉ thị này.
+- Thư viện là công cụ, không thay mức nhận: vẫn phải có hai giám khảo từ 9.
