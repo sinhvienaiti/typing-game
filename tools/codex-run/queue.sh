@@ -6,8 +6,8 @@
 #
 # List lines: name | brief | cwd | effort | sandbox | model   (blank lines and lines starting with # are skipped;
 # effort defaults to high, sandbox to workspace-write, model to gpt-6.1-sol (pick by the work: README); backslashes in paths are read as /).
-# A run that hits the usage limit waits until the time Codex names ("try again at 8:54 AM", else 30 minutes)
-# and runs again, up to 12 times; a dropped connection runs again after 2 minutes, up to 4 times.
+# On a usage limit a run waits until the time Codex gives ("try again at 8:54 AM"), else 30 minutes,
+# and runs again, up to 12 times; a dropped stream or "at capacity" runs again in 2 min, up to 4 times.
 # Failed log dirs are kept as <name>-prev-<MMddHHmm>.
 set -u
 [ $# -ge 1 ] || { echo "usage: queue.sh <list>" >&2; exit 2; }
@@ -52,7 +52,7 @@ grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | whil
       while [ "$(date +%s)" -lt "$until_ts" ]; do sleep 60; done
       continue
     fi
-    if [ "$code" -ne 0 ] && grep -q 'stream disconnected' "$events" 2>/dev/null; then
+    if [ "$code" -ne 0 ] && grep -qE 'stream disc|at capac' "$events" 2>/dev/null; then
       drops=$((drops + 1))
       echo "$(stamp) end $name exit $code (connection dropped $drops)"
       [ "$drops" -ge 4 ] && { echo "$(stamp) giving up on $name"; break; }

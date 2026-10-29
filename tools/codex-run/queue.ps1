@@ -55,7 +55,7 @@ foreach ($line in $items) {
     $events = Join-Path $log 'events.jsonl'
     $limited = (Test-Path $events) -and (Select-String -Path $events -Pattern 'usage limit' -Quiet)
     # A dropped connection ends the run without a report; image tickets skip finished files, so a rerun is cheap.
-    $dropped = ($code -ne 0) -and (Test-Path $events) -and (Select-String -Path $events -Pattern 'stream disconnected' -Quiet)
+    $dropped = ($code -ne 0) -and (Test-Path $events) -and (Select-String -Path $events -Pattern 'stream disconnected|at capacity' -Quiet)
     "$(Stamp) end $name exit $code$(if ($limited) { ' (usage limit)' } elseif ($dropped) { ' (connection dropped)' })"
     if ($dropped) { Start-Sleep -Seconds 120; continue }
     if (-not $limited) { break }
