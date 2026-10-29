@@ -86,13 +86,20 @@ jobs:
           pnpm english-content:derive:typing-texts
           node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
 
-      - name: Synchronize E11 readiness report
+      - name: Synchronize E11 readiness and runtime artifacts
         shell: bash
         run: |
           node scripts/report-english-content-e11-readiness.mjs --write
-          git add content/english/reports/e11-readiness.json
+          node scripts/report-english-content-e11-runtime-counts.mjs
+          git add \
+            shared/dictionary \
+            shared/grammar \
+            shared/sentences \
+            shared/phrases \
+            content/english/reports/e11-readiness.json \
+            content/english/reports/e11-runtime-counts.json
           if git diff --cached --quiet; then
-            echo 'E11 readiness report already synchronized.'
+            echo 'E11 readiness and runtime artifacts already synchronized.'
             exit 0
           fi
           git fetch origin feature/english-learning-content-system
@@ -102,7 +109,7 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'chore(content): refresh E11 readiness report'
+          git commit -m 'chore(content): refresh E11 readiness and runtime artifacts'
           git push origin HEAD:feature/english-learning-content-system
 
       - name: Check E11 readiness report freshness
