@@ -84,6 +84,12 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Sau khi khởi động lại (30/10, khoảng 00:25)
+
+- Làn Codex `s1` chạy lại (tự chờ hạn mức tới 04:17). Chủ dự án: "Codex bao giờ xong thì kêu nó làm tiếp" — hết `s1` thì duyệt và nối phiếu 194–217.
+- V-dh2 được gửi tin chụp tiếp vòng 9.
+- **Việc mới của chủ dự án:** đưa tiếng phím Firefly và hiệu ứng gõ chữ vào **Monkeytype** (`games/monkeytype`, repo riêng, nhánh `feature/en-vn-translation`), cài đặt nằm trong tab "custom" của cửa sổ Custom Text (mã của chủ dự án ở `frontend/src/ts/custom/en-vn-translation/`). Workflow `monkeytype-typing-feel` đang chạy: ba người đọc, thiết kế, làm trên nhánh mới `feature/typing-feel`, hai người kiểm. Thử trình duyệt do điều phối làm sau. File âm không vào Git (script chép từ `~/AudioLab/review/staging/keys-firefly`).
+
 ### Dừng hết để chủ dự án khởi động lại máy (30/10, 00:18)
 
 Chủ dự án: "dừng lại mọi thứ để tôi reset máy". Không còn tiến trình nào chạy (đã kiểm `queue.sh`, `codex exec`, vite, trình duyệt chụp).
