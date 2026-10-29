@@ -108,6 +108,13 @@ Mục 3 bên dưới là lịch sử.
 
 **Đã xong 29/10:** kiểm kê hình ảnh và âm thanh UI (commit `330b4527`, `docs/games/map1/UI_IMAGERY.md`); chỉ đạo mỹ thuật (`b2b54ec5`). Làn R chạy lại dưới tên R2 lúc 05:00. Ổ đĩa còn 10 GB lúc 04:15 (74 GB lúc 05:00 sau khi V-dh dọn); `.wt-dh-vfx/tmp` 16 GB, đã bảo V-dh dọn khung thô của các vòng đã đóng.
 
+**29/10 19:50, phiên mở lại:** mọi làn Codex cũ (M11–M20) đã dừng khi phiên khép. Chủ dự án bảo giao nhiều việc cho Codex: dựng lại bốn làn song song từ mọi phiếu chưa xong (`.local/codex-lane-mac-p1…p4.txt`):
+- P1: 173, 124, 128, 117, 118, 174, 134, 135, 136, 141, 142, 143, 144, 145;
+- P2: 179, 155, 162, 181, 163, 164, 146, 147, 148, 176;
+- P3: 125, 156, 121, 127, 126, 157, 175, 149, 150, 151, 153, 152, 177;
+- P4: 133, 172, 180, 171, 165, 166, 167.
+Đã xong chờ chấm nhận: 119, 120, 122 (tự báo chưa đạt), 123, 140 (lượt b), 158, 159, 160, 161, 178; mã 170 chờ duyệt; 182 âm thanh (đường Firefly thay thế).
+
 **29/10 19:55, chủ dự án bảo dừng hết việc khoảng 10 phút** (sẽ đăng nhập Firefly trong khung trình duyệt của app để Claude tự xem). Đã dừng bốn làn Claude giữa chừng, gửi tin để chạy tiếp từ chỗ dừng: TF2 (hiệu ứng gõ, đang làm cú nổ riêng từng kiểu), M-dh (model, đang thêm nén KTX2), FF (danh sách âm Firefly và bước ingest), FXV (danh sách video Firefly và công cụ flipbook). Ba làn Codex vẫn chạy.
 
 **29/10 18:10:** Claude và Codex cùng hết hạn mức khoảng 14:50–18:10. Đã gửi lại bốn làn Claude (TF2, V-dh, L4, M-dh); ba làn Codex tự chạy lại 18:09 ở 122, 160, 120. Phiếu đã xong chờ chấm nhận: 119 (màn tựa Dragonhold), 170 (Wordwoven pack-and-kit, chưa duyệt), 182 (âm thanh, tạm dừng).
