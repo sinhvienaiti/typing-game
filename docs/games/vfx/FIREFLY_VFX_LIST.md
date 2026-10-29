@@ -64,3 +64,18 @@ Prompt `muzzle-flash` v4, v5 (phần giữa): a powerful cone-shaped blast of fi
 - Lặp (`charge-orb`, `fireball-head`, `flame-trail`, `ground-fire`): chọn đoạn 1–2 giây đều nhất, nối vòng bằng hòa chéo; không nháy ở chỗ nối.
 - Đen nền về 0 (crush), căn tâm theo khối sáng, cắt vuông hay chữ nhật theo bảng, atlas PNG lũy thừa 2, JSON `{ cols, rows, fps, loop, blend, cell, pivot, source }`, tờ xem trên nền sáng và nền tối.
 - Lõi trắng ≤ 30 % bán kính (VFX_STANDARD); nếu clip quá trắng thì hạ đỉnh, không cắt màu.
+
+### Cách chạy công cụ
+
+Từ repo cha (Python lấy venv của Audio Lab, có numpy, scipy, Pillow; đổi bằng `VFXFLIP_PY`; cần `ffmpeg`):
+
+```bash
+tools/vfx-flipbook/run.sh all dragon-hold                      # mọi clip đang có trong inbox
+tools/vfx-flipbook/run.sh ingest dragon-hold impact-big v2     # một bản; bỏ vN thì chạy mọi bản của id
+tools/vfx-flipbook/run.sh test -q                              # test bằng clip tổng hợp
+```
+
+- Bảng thông số mỗi id: `tools/vfx-flipbook/dragon-hold.json` (lặp, blend, ô, bố cục, trục, phía lõi…). Chỉnh riêng một bản bằng `"versions": { "v2": { "start": 20, "end": 60, "flipX": true, "rotate": 15 } }`, rồi chạy lại id đó.
+- Mỗi bản ra 5 file ở `~/VFXLab/out/dragon-hold/<id>/`: `.atlas.png` (RGB cho additive, RGBA alpha thẳng cho normal), `.json` (cols, rows, fps, loop, blend, cell, pivot, source, frames, trim), `.sheet.jpg` (mọi khung trên nền tối và nền sáng), `.preview.mp4`, `.metrics.json`. `summary.json` gom dòng tóm tắt và cờ của cả game.
+- Clip Firefly thường không có lóe: khối lửa lớn dần 1–3 giây. Khi đó công cụ bắt đầu ở khung đạt 35 % đỉnh (`growthStart`) và ghi chú "no flash"; lóe ≥ 95 % ở khung đầu phải do lớp lóe của game đảm nhận.
+- Lõi trắng quá 30 % bán kính: mặc định làm ấm phần ngoài của lõi về trắng-vàng (`whiteFix: "warm"`, giữ kênh sáng nhất, không cắt màu). `"peak"` là cách hạ đỉnh nguyên văn, làm lõi xám đi; `"off"` chỉ báo cờ.
