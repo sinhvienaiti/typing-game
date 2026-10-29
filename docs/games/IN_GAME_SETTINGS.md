@@ -23,7 +23,7 @@ Chủ dự án, 29/10/2026: "trong mỗi game đều phải có icon setting đ�
 | Master | thanh trượt 0–100 và nút tắt tiếng | |
 | Music | thanh trượt | |
 | Effects | thanh trượt | tiếng trận, kỹ năng, quái |
-| Keyboard sound | chọn: Off, Creamy, Thock, Clicky, Soft Dome, Classic Spring | nghe thử ngay khi chọn (một chuỗi gõ ngắn) |
+| Keyboard sound | chọn: Off, Creamy Linear, Deep Thock, Marbly, Clean Clack, Soft Dome (id `creamy`, `thock`, `marbly`, `clack`, `dome`; đổi 29/10 sau khi chủ dự án trả bộ cũ) | nghe thử ngay khi chọn (một chuỗi gõ ngắn) |
 | Keyboard volume | thanh trượt | |
 | Voice | thanh trượt | đọc từ, phát âm, lời thoại |
 | Interface | thanh trượt | tiếng nút, bảng |

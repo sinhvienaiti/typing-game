@@ -33,6 +33,7 @@ Mức nhận: **từ 9** (`docs/games/SHARED_SYSTEMS_BAR.md`); chủ dự án ng
    - các biến thể nghe như cùng một bàn phím, khác phím: lệch nhỏ cao độ, âm sắc, nhịp; không hai file giống hệt, không file lạc;
    - cân độ to giữa các hồ sơ (mục tiêu như lượt trước: −27 LUFS-M max cho mỗi file, câu gõ 60 WPM khoảng −25 LUFS-I).
 3. **Làm sạch** (bắt buộc, chỗ lượt trước hỏng): không còn nhiễu nền giữa các cú gõ, không tiếng xì 4–8 kHz, không xoáy pha, không tiếng sột soạt; giữ phần trầm 150–400 Hz chắc và phần trên sạch. Viết chuỗi làm sạch thành script chạy lại được trong `tools/audio-lab/keys/` (có test).
+3b. **Nối chuỗi làm sạch vào đường ống:** Claude đã viết `tools/audio-lab/keys/clean.py` (có test) nhưng chưa nối. Thêm bước `ingest`: đọc một bản thu (khi chủ dự án đã tải), chạy `clean_take`, ghi thành bản thô có nguồn và giấy phép, để `slice` cắt như với bản tạo. Bước này phải chạy được ngay khi có file, dù hôm nay chưa có bản thu nào trên máy.
 4. **Bản thu thật:** không tải gì về. Nếu tìm được bản thu CC0 hay CC-BY của bàn phím nhôm cao cấp tốt hơn danh sách `KEYS_SOURCES.md`, ghi tên, URL, giấy phép (kiểm tại trang nguồn), định dạng, cỡ, bàn phím, switch, plate, keycap vào báo cáo để Claude xin chủ dự án duyệt.
 5. **File nghe cho chủ dự án** (chủ dự án đang ở máy khác, nghe qua file): mỗi hồ sơ một file `<id>-20s.mp3` dài 20 giây, gõ xen 60 và 100 từ/phút như trong game (biến thể xoay vòng, lệch tốc độ ±3 %, mức ±8 %), MP3 192 kbps stereo. Thêm `so-sanh-5-ban-phim.mp3`: năm hồ sơ nối nhau, mỗi hồ sơ 6 giây.
 
