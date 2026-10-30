@@ -134,6 +134,22 @@
         "tools/typing-feedback-lab/vite.config.mjs"
       ],
       "port": 4192
+    },
+    {
+      "name": "monkeytype-feel-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--dir",
+        "games/monkeytype/frontend",
+        "exec",
+        "vite",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4194",
+        "--strictPort"
+      ],
+      "port": 4194
     }
   ]
 }

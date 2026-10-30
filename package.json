@@ -19,7 +19,7 @@
     "build:portal": "pnpm --dir portal build",
     "build:shooter": "pnpm --dir games/vocab-shooter build",
     "build:recall": "pnpm --dir games/recall-typing build",
-    "build:monkeytype": "cd games/monkeytype && LOCAL_STATIC=true pnpm build-fe",
+    "build:monkeytype": "cd games/monkeytype && (pnpm --dir frontend sync-keys || echo 'build:monkeytype: keyboard sounds not synced (no ~/AudioLab staging); the typing feel list shows Off only') && LOCAL_STATIC=true pnpm build-fe",
     "build:local": "pnpm build:portal && pnpm build:shooter && pnpm build:recall && pnpm build:karaoke && pnpm build:space && pnpm build:monkeytype && bash scripts/game-dir.sh skip dragon-hold pnpm build:dragon && bash scripts/game-dir.sh skip typing-defense pnpm build:td && bash scripts/game-dir.sh skip typing-survival pnpm build:survival && bash scripts/game-dir.sh skip immortality-cultivation pnpm build:tutien",
     "setup:dev": "bash scripts/setup-nginx.sh dev",
     "setup:play": "bash scripts/setup-nginx.sh play",
