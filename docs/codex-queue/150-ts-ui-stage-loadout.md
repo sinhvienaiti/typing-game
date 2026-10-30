@@ -1,5 +1,7 @@
 # Phiếu 150 · Last Line · Thẻ ải và nạp súng (11 ảnh, P1)
 
+> **Chạy lại (30/10, 13:08, điều phối):** lượt 30/10 khoảng 01:40–02:05 không sinh đủ ảnh vì `image_gen` trả HTTP 429. Hạn mức nay đã có lại. Đọc `150-report.md` và thư mục của phiếu: giữ mọi bản đã sinh và hậu kỳ, sinh phần còn thiếu, làm tiếp đến hết phiếu. Nếu vẫn 429 thì dừng, ghi giờ.
+
 **Nguồn:** kiểm kê hình ảnh UI map 1, 29/10 (`docs/games/map1/UI_IMAGERY.md`; dàn ý `UIC-LL-2` trong `docs/games/map1/UI_IMAGERY_CODEX.md`). Chủ dự án 28/10 tối: mọi chi tiết UI phải có hình thật, không chỉ có chữ; không hình vẽ bằng mã. Hướng mỹ thuật: `docs/games/ART_DIRECTION_2026-10-28.md`.
 
 **Chạy khi:** chủ dự án đã chọn hướng **B · Lightbearer** (29/10). Chạy sau 121 và 127, để có khối STYLE-UI và khung UI của hướng B.
