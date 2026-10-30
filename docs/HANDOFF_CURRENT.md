@@ -84,6 +84,13 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Tiếng phím: 80 bộ trở lên (30/10, khoảng 08:40)
+
+- Chủ dự án thấy chỉ có 7 bộ ("tôi tải hơn 400 file âm cơ mà"), rồi chốt: **80 bộ trở lên, mỗi bộ 70–100 biến thể, khoảng 6 điểm là được**. Giữ 7 id cũ (mặc định Bright Clack) cho bộ tốt nhất mỗi họ.
+- Phiếu Codex 218 (dựng bộ), 219 (kit: danh sách theo họ, nhiều biến thể). Làn `s4` thay `s3` sau khi 194 xong: 218, 219 chạy trước, rồi phần còn lại của `s3`. Vẫn một làn.
+- Sau 218–219: Claude chép bản giao `tmp/keys-firefly/staging-v2/` sang `~/AudioLab/review/staging/keys-firefly/`, đồng bộ kit vào `ts-typefx`, `dh-keys`, `td-keys`, chép kit vào Monkeytype (`frontend/src/ts/custom/typing-feel/kit/`), chạy `pnpm sync-keys`, thử trình duyệt.
+- Đã tạo 4 clip khói Firefly (chủ dự án đồng ý), cắt thành `~/VFXLab/out/dragon-hold/smoke-mask/`, giao V-dh2 cho vòng 10.
+
 ### Lửa Rồng vòng 9 đã chấm (30/10, khoảng 08:10): chưa đạt 8,5
 
 - Giám khảo A: mạnh 7,9, thường 7,4, Sky Fire 7,9; giám khảo B: 8,0, 7,5, 8,0. Tiến trình: vòng 7 khoảng 7,4, vòng 8 khoảng 7,75, vòng 9 khoảng 7,8. Đã ngang game thương mại: T của đòn mạnh 8,5, R của Sky Fire 8,5, T của Sky Fire 9,0.
