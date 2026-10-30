@@ -2,17 +2,16 @@
 // they go into a game (docs/games/TYPING_FEEDBACK_REVIEW.md). Run from the parent repo:
 //   shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
 // Read-only mounts: the games' vocabulary, font and ticket-180 speaker art; external keyboard
-// staging (LAB_KEYS overrides the AudioLab default); backdrops kept in this tool's tmp/.
+// staging (LAB_KEYS overrides the ticket-218 v2 default); backdrops kept in this tool's tmp/.
 import { createReadStream, existsSync, realpathSync, statSync } from "node:fs";
 import path from "node:path";
-import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, "../..");
 // External staging is read-only. No media is copied into the repo.
 const MOUNTS = {
-  "/lab-keys/": process.env.LAB_KEYS ?? path.join(homedir(), "AudioLab/review/staging/keys-firefly"),
+  "/lab-keys/": process.env.LAB_KEYS ?? path.join(repo, "tmp/keys-firefly/staging-v2/keys-firefly"),
   "/lab-keyboard-icon/": path.join(repo, "games/dragon-hold/art-src/ui/quick-settings/selected"),
   "/lab-vocab/dragon-hold/": path.join(repo, "games/dragon-hold/public/vocabulary"),
   "/lab-vocab/typing-defense/": path.join(repo, "games/typing-defense/public/vocabulary"),

@@ -13,7 +13,7 @@ import {
   TypingSounds,
   KeyboardSoundPreview,
   loadKeyboardCatalog,
-  type KeyboardLoad,
+  type KeyboardSoundChoice,
   type TypingFxIntensity,
   type TypingFxProgress,
   type TypingFxSettings,
@@ -22,7 +22,7 @@ import {
   type TypingFxStyle,
 } from "../../../shared/game-kit/feedback/typing-fx";
 import { KEYS_BASE } from "./profiles";
-import { KeyboardSoundChoices, type QuickChoiceOption } from "../../../shared/game-kit/ui/quick-settings";
+import { KeyboardSoundChoices } from "../../../shared/game-kit/ui/quick-settings";
 
 type GameId = "dragon-hold" | "typing-survival" | "typing-defense";
 type Game = { name: string; backdrop: string; levels: number; target: { x: number; y: number }; accent: string; anchorY: number };
@@ -36,7 +36,7 @@ const GAMES: Readonly<Record<GameId, Game>> = {
 
 const $ = <T extends HTMLElement>(id: string): T => document.getElementById(id) as T;
 const profileHost = $<HTMLElement>("profile");
-let keyboardOptions: readonly QuickChoiceOption[] = [];
+let keyboardOptions: readonly KeyboardSoundChoice[] = [];
 let keyboardPicker: KeyboardSoundChoices | null = null;
 const profileNote = $<HTMLElement>("profileNote");
 const stage = $<HTMLDivElement>("stage");
@@ -91,42 +91,19 @@ const strip = new FocusStrip({
 
 // ── Sounds: ticket-189 catalogue and the shared ticket-190 picker ──
 const sounds = new TypingSounds({ keyVoices: 6, wordVoices: 2 });
-const loads = new Map<string, Promise<KeyboardLoad>>();
 const loadReport: Record<string, string> = {};
 const keyboardPreview = new KeyboardSoundPreview({
   sounds,
   levels: () => ({ master: Number($<HTMLInputElement>("masterVolume").value), keyboard: settings.volume, muted: $<HTMLInputElement>("masterMuted").checked }),
   onLoad: (result) => { loadReport[result.id] = `${result.state}: ${result.keys} keys, ${result.spaces} spaces`; },
 });
-/** Loads the saved keyboard once; other packs load only when selected. Reload to refresh staging. */
-function loadKeyboard(id: string): Promise<KeyboardLoad> {
-  const choice = keyboardOptions.find((p) => p.value === id);
-  const name = choice?.label ?? id;
-  if (!loads.has(id)) {
-    loads.set(
-      id,
-      (choice?.manifest ? sounds.loadKeyboardManifest(choice.manifest, id, name) : sounds.loadKeyboard(KEYS_BASE, id, name)).then((r) => {
-        loadReport[id] = r.state === "pending" ? "pending" : `${r.state}: ${r.keys} keys, ${r.spaces} spaces${r.missing.length ? `, ${r.missing.length} broken` : ""}`;
-        return r;
-      }),
-    );
-  }
-  return loads.get(id)!;
-}
-
+/** Selection and startup share the same progressive loader and cancellation lifecycle. */
 async function useProfile(id: string, preview = true): Promise<void> {
   settings.soundProfile = id;
   keyboardPicker?.sync(id);
   try { localStorage.setItem("typing-feedback-lab.keyboard", JSON.stringify({ soundProfile: id })); } catch { /* Session only. */ }
-  if (preview) {
-    const choice = keyboardOptions.find((p) => p.value === id);
-    if (choice) keyboardPreview.select(choice);
-    return;
-  }
-  if (id === "off") { sounds.use("off"); return; }
-  const r = await loadKeyboard(id);
-  if (settings.soundProfile !== id) return;
-  sounds.use(r.state === "pending" ? "off" : id);
+  const choice = keyboardOptions.find((p) => p.value === id);
+  if (choice) keyboardPreview.select(choice, preview);
 }
 
 function startAudio(): void {
@@ -465,6 +442,7 @@ function togglePanel(force?: boolean): void {
   const hidden = force ?? !panel.classList.contains("is-hidden");
   panel.classList.toggle("is-hidden", hidden);
   if (hidden) keyboardPreview.stop();
+  else keyboardPicker?.sync(settings.soundProfile);
   $<HTMLButtonElement>("collapse").textContent = hidden ? "Show" : "Hide";
 }
 $<HTMLButtonElement>("collapse").addEventListener("click", () => togglePanel());

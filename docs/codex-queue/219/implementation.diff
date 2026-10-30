@@ -1,0 +1,726 @@
+diff --git a/shared/game-kit/feedback/typing-fx/audio.ts b/shared/game-kit/feedback/typing-fx/audio.ts
+index 05ee6c72..37b2188c 100644
+--- a/shared/game-kit/feedback/typing-fx/audio.ts
++++ b/shared/game-kit/feedback/typing-fx/audio.ts
+@@ -1,14 +1,14 @@
+ // Source: new for the kit: keyboard sound profiles on preloaded AudioBuffers (TYPING_FEEDBACK_REVIEW.md §4, §6; owner 29/10)
+ /**
+  * Keypress sounds from recorded files (owner 29/10: every one made in the
+- * Audio Lab, no downloaded packs). A keyboard profile is `key-01 … key-10`
+- * and `space-01 … space-03`, loudness-matched across profiles, listed in a
++ * Audio Lab, no downloaded packs). A keyboard profile has numbered key and
++ * space samples (including 70–100 variants), loudness-matched, listed in a
+  * `keys-manifest.json` beside them; the game gives the base URL
+- * (`<base>/<profile>/keys-manifest.json`). Everything is fetched and decoded
+- * before play: a key never waits on a file.
++ * (`<base>/<profile>/keys-manifest.json`). Files decode in bounded batches; the first decoded samples can play
++ * while the rest load. A key never waits on a file.
+  *
+- * Each play takes the next variant of a shuffled round (never the same twice
+- * in a row), nudges pitch and level a little, and takes a voice: at most
++ * Each play takes the next variant of a shuffled round (avoiding the last eight
++ * when enough variants exist), nudges pitch and level a little, and takes a voice: at most
+  * `keyVoices` key sounds at once (the oldest is cut with a 4 ms fade), and a
+  * separate `wordVoices` for the space set so a burst of keys never cuts a
+  * word's sound. Letters (right, wrong or stray) play the key set; a word done
+@@ -40,7 +40,7 @@ export const TYPING_SOUND_MAP: Readonly<Record<TypingSoundEvent, { set: TypingSo
+   combo: { set: "space", gain: 0.88 },
+ };
+ 
+-/** Files a keyboard profile has (owner 29/10): ten keys, three spaces; fewer still plays, the Lab lists the gap. */
++/** Legacy readiness floors: ten keys, three spaces. Larger manifests load every file. */
+ export const TYPING_SOUND_SET: Readonly<Record<TypingSoundSet, { min: number; want: number }>> = {
+   key: { min: 6, want: 10 },
+   space: { min: 1, want: 3 },
+@@ -72,12 +72,12 @@ export type TypingSoundProfile = {
+   readonly level?: number;
+ };
+ 
+-const FILE = /(?:^|\/)(key|space)-(\d{2})\.(?:ogg|opus|webm|m4a|mp3|wav|flac)$/i;
++const FILE = /(?:^|\/)(key|space)-(\d{2,3})\.(?:ogg|opus|webm|m4a|mp3|wav|flac)$/i;
+ 
+ /**
+  * The files a `keys-manifest.json` names, as URLs under `base` (the profile's
+- * folder). Any JSON shape works: every string that ends in `key-NN.<ext>` or
+- * `space-NN.<ext>` is taken (a list, `files`, objects with `file`/`path`…),
++ * folder). Any JSON shape works: every string that ends in `key-NN[N].<ext>` or
++ * `space-NN[N].<ext>` is taken (a list, `files`, objects with `file`/`path`…),
+  * sorted by number, duplicates dropped.
+  */
+ export function keyboardFiles(manifest: unknown, base: string): Record<TypingSoundSet, string[]> {
+@@ -110,42 +110,48 @@ export type KeyboardLoad = {
+   missing: string[];
+ };
+ 
+-/**
+- * A shuffled round of `n` variants: each plays once per round in random
+- * order, and a new round never starts with the one that just played.
+- */
++/** A shuffled round: equal use, with up to eight recent variants excluded across rounds. */
+ export class VariantPicker {
+-  private readonly order: Int16Array;
++  private readonly order: number[];
+   private cursor: number;
+-  private last = -1;
++  private started = false;
++  private readonly recent: number[] = [];
+ 
+-  constructor(readonly n: number, private readonly random: () => number = Math.random) {
+-    this.order = new Int16Array(Math.max(1, n));
+-    for (let i = 0; i < this.order.length; i += 1) this.order[i] = i;
++  constructor(n: number, private readonly random: () => number = Math.random) {
++    this.order = Array.from({ length: Math.max(1, n) }, (_, i) => i);
+     this.cursor = this.order.length;
+   }
+ 
++  get n(): number { return this.order.length; }
++
++  /** Newly decoded samples join the unplayed part without resetting recent history. */
++  grow(n: number): void {
++    for (let i = this.order.length; i < n; i += 1) this.order.push(i);
++    if (!this.started) this.cursor = this.order.length;
++  }
++
+   next(): number {
++    this.started = true;
+     const n = this.order.length;
+-    if (n === 1) return 0;
++    if (n === 1) { this.recent.splice(0, this.recent.length, 0); return 0; }
+     if (this.cursor >= n) {
+       for (let i = n - 1; i > 0; i -= 1) {
+         const j = Math.floor(this.random() * (i + 1));
+-        const t = this.order[i]!;
+-        this.order[i] = this.order[j]!;
+-        this.order[j] = t;
+-      }
+-      if (this.order[0] === this.last) {
+-        const j = 1 + Math.floor(this.random() * (n - 1));
+-        const t = this.order[0]!;
+-        this.order[0] = this.order[j]!;
+-        this.order[j] = t;
++        [this.order[i], this.order[j]] = [this.order[j]!, this.order[i]!];
+       }
+       this.cursor = 0;
+     }
+-    this.last = this.order[this.cursor]!;
+-    this.cursor += 1;
+-    return this.last;
++    // Each round still uses every sample exactly once. Only its first few
++    // positions can conflict with the preceding round's recent history.
++    const excluded = this.recent.slice(-Math.min(8, n - 1));
++    if (excluded.includes(this.order[this.cursor]!)) {
++      const next = this.order.findIndex((value, i) => i > this.cursor && !excluded.includes(value));
++      if (next >= 0) [this.order[this.cursor], this.order[next]] = [this.order[next]!, this.order[this.cursor]!];
++    }
++    const value = this.order[this.cursor++]!;
++    this.recent.push(value);
++    while (this.recent.length > 8) this.recent.shift();
++    return value;
+   }
+ }
+ 
+@@ -210,6 +216,8 @@ type Loaded = { profile: TypingSoundProfile; buffers: Partial<Record<TypingSound
+ export type SoundStandIn = (event: TypingSoundEvent, step: number, gain: number) => void;
+ 
+ const STEAL_FADE_S = 0.004;
++/** Bounds concurrent fetch/decode work; rendering gets a turn between batches. */
++export const KEYBOARD_DECODE_BATCH_SIZE = 16;
+ 
+ export class TypingSounds implements TypingFxSink {
+   private ctx: AudioContext | null = null;
+@@ -271,41 +279,66 @@ export class TypingSounds implements TypingFxSink {
+     if (this.out !== null) this.out.gain.value = this.volume;
+   }
+ 
+-  /**
+-   * Fetches and decodes every file of `profile` before play. Missing or
+-   * broken files are listed, the rest load.
+-   */
+-  async load(profile: TypingSoundProfile, fetchBytes: (url: string) => Promise<ArrayBuffer> = defaultFetch, activate = true): Promise<{ loaded: number; missing: string[] }> {
++  /** Decode at most one batch concurrently, publishing samples as each completes. */
++  async load(profile: TypingSoundProfile, fetchBytes: (url: string) => Promise<ArrayBuffer> = defaultFetch, activate = true, signal?: AbortSignal): Promise<{ loaded: number; missing: string[] }> {
++    if (signal?.aborted) return { loaded: 0, missing: [] };
++    this.release(profile.id);
+     const entry: Loaded = { profile, buffers: {}, pickers: {} };
++    this.loaded.set(profile.id, entry);
++    if (activate) this.use(profile.id);
++    const live = (): boolean => !signal?.aborted && this.loaded.get(profile.id) === entry;
++    const cancel = (): void => { if (this.loaded.get(profile.id) === entry) this.release(profile.id); };
++    signal?.addEventListener("abort", cancel, { once: true });
+     const missing: string[] = [];
+     let loaded = 0;
+-    if (profile.source !== "synth") {
+-      const ctx = this.resume();
+-      for (const set of TYPING_SOUND_SETS) {
+-        const urls = profile.files[set] ?? [];
+-        const buffers: AudioBuffer[] = [];
+-        await Promise.all(
+-          urls.map(async (url, index) => {
++    try {
++      if (profile.source !== "synth") {
++        const ctx = this.resume();
++        const jobs = TYPING_SOUND_SETS.flatMap((set) => (profile.files[set] ?? []).map((url) => ({ set, url })));
++        for (let start = 0; start < jobs.length && live(); start += KEYBOARD_DECODE_BATCH_SIZE) {
++          await Promise.all(jobs.slice(start, start + KEYBOARD_DECODE_BATCH_SIZE).map(async ({ set, url }) => {
+             try {
+-              buffers[index] = await ctx.decodeAudioData(await fetchBytes(url));
++              const bytes = await fetchBytes(url);
++              if (!live()) return;
++              const buffer = await ctx.decodeAudioData(bytes);
++              if (!live()) return;
++              const buffers = entry.buffers[set] ?? (entry.buffers[set] = []);
++              buffers.push(buffer);
++              const picker = entry.pickers[set];
++              if (picker) picker.grow(buffers.length);
++              else entry.pickers[set] = new VariantPicker(buffers.length, this.random);
+               loaded += 1;
+-            } catch {
+-              missing.push(url);
+-            }
+-          }),
+-        );
+-        const kept = buffers.filter((buffer): buffer is AudioBuffer => buffer !== undefined);
+-        if (kept.length > 0) {
+-          entry.buffers[set] = kept;
+-          entry.pickers[set] = new VariantPicker(kept.length, this.random);
++            } catch { if (live()) missing.push(url); }
++          }));
++          // A macrotask gives rendering/input a turn even with cached fetches.
++          if (start + KEYBOARD_DECODE_BATCH_SIZE < jobs.length && live()) await new Promise<void>((resolve) => setTimeout(resolve, 0));
+         }
+       }
+-    }
+-    this.loaded.set(profile.id, entry);
+-    if (activate && (this.current?.profile.id === profile.id || this.current === null)) this.current = entry;
++    } finally { signal?.removeEventListener("abort", cancel); }
+     return { loaded, missing };
+   }
+ 
++  /** Release a pack and any voices retaining its buffers; late decodes cannot repopulate it. */
++  release(id: string): void {
++    const entry = this.loaded.get(id);
++    if (!entry) return;
++    this.loaded.delete(id);
++    if (this.current === entry) this.current = null;
++    const buffers = new Set(Object.values(entry.buffers).flat());
++    for (const [sources, pool] of [[this.keySources, this.keyPool], [this.wordSources, this.wordPool]] as const) {
++      sources.forEach((source, i) => {
++        if (!source || !source.buffer || !buffers.has(source.buffer)) return;
++        try { source.stop(); } catch { /* Already ended. */ }
++        source.disconnect();
++        source.buffer = null;
++        sources[i] = null;
++        pool.ends[i] = -Infinity;
++      });
++    }
++    entry.buffers = {};
++    entry.pickers = {};
++  }
++
+   /**
+    * Loads keyboard profile `id` from `<base>/<id>/keys-manifest.json` (the
+    * Audio Lab's layout). No manifest, or no file in it: "pending", and the
+@@ -317,7 +350,7 @@ export class TypingSounds implements TypingFxSink {
+   }
+ 
+   /** Loads the explicit manifest URL from a catalogue (its directory owns the sample files). */
+-  async loadKeyboardManifest(url: string, id: string, name = id, fetchJson: (url: string) => Promise<unknown> = defaultJson, fetchBytes: (url: string) => Promise<ArrayBuffer> = defaultFetch, activate = false): Promise<KeyboardLoad> {
++  async loadKeyboardManifest(url: string, id: string, name = id, fetchJson: (url: string) => Promise<unknown> = defaultJson, fetchBytes: (url: string) => Promise<ArrayBuffer> = defaultFetch, activate = false, signal?: AbortSignal): Promise<KeyboardLoad> {
+     const folder = url.slice(0, url.lastIndexOf("/") + 1);
+     let manifest: unknown = null;
+     try {
+@@ -325,18 +358,20 @@ export class TypingSounds implements TypingFxSink {
+     } catch {
+       manifest = null;
+     }
+-    const files = manifest === null ? { key: [], space: [] } : keyboardFiles(manifest, folder);
++    const files = manifest === null || signal?.aborted ? { key: [], space: [] } : keyboardFiles(manifest, folder);
+     if (files.key.length === 0 && files.space.length === 0) return { id, state: "pending", keys: 0, spaces: 0, missing: [] };
+-    const result = await this.load({ id, name, source: "audio-lab", licence: "project-owned (Audio Lab)", files }, fetchBytes, activate);
++    const result = await this.load({ id, name, source: "audio-lab", licence: "project-owned (Audio Lab)", files }, fetchBytes, activate, signal);
+     const keys = this.loaded.get(id)?.buffers.key?.length ?? 0;
+     const spaces = this.loaded.get(id)?.buffers.space?.length ?? 0;
+-    const full = keys >= TYPING_SOUND_SET.key.want && spaces >= TYPING_SOUND_SET.space.want;
++    const full = keys === files.key.length && spaces === files.space.length && keys >= TYPING_SOUND_SET.key.want && spaces >= TYPING_SOUND_SET.space.want;
+     return { id, state: keys === 0 ? "pending" : full ? "ready" : "partial", keys, spaces, missing: result.missing };
+   }
+ 
+   /** Switches to a loaded profile ("off" or unknown: silent). */
+   use(id: string): boolean {
+-    this.current = this.loaded.get(id) ?? null;
++    const next = this.loaded.get(id) ?? null;
++    if (next && this.current && this.current !== next) this.release(this.current.profile.id);
++    this.current = next;
+     return this.current !== null;
+   }
+ 
+@@ -394,6 +429,11 @@ export class TypingSounds implements TypingFxSink {
+     voice.setValueAtTime(gain, t);
+     const source = new AudioBufferSourceNode(ctx, { buffer, playbackRate: rate });
+     source.connect(gains[slot]!);
++    source.onended = () => {
++      source.disconnect();
++      source.buffer = null;
++      if (sources[slot] === source) sources[slot] = null;
++    };
+     source.start(t);
+     sources[slot] = source;
+     this.stats.played += 1;
+@@ -434,6 +474,7 @@ export class TypingSounds implements TypingFxSink {
+   }
+ 
+   dispose(): void {
++    for (const id of this.loaded.keys()) this.release(id);
+     for (const source of [...this.keySources, ...this.wordSources]) {
+       try {
+         source?.stop();
+@@ -473,6 +514,8 @@ export type KeyboardSoundChoice = {
+   readonly label: string;
+   readonly manifest?: string;
+   readonly preview?: string;
++  readonly family?: string;
++  readonly score?: number;
+   readonly disabled?: boolean;
+   readonly note?: string;
+ };
+@@ -502,7 +545,11 @@ export async function loadKeyboardCatalog(base: string, options: {
+       const row = entry as Record<string, unknown>;
+       if (typeof row.id !== "string" || !/^[a-z0-9][a-z0-9-]{0,31}$/.test(row.id) || seen.has(row.id) || typeof row.name !== "string" || !row.name.trim() || typeof row.manifest !== "string" || typeof row.preview !== "string" || typeof row.order !== "number" || !Number.isFinite(row.order)) continue;
+       try {
+-        const choice = { value: row.id, label: row.name, manifest: resolve(row.manifest), preview: resolve(row.preview) };
++        const choice: KeyboardSoundChoice = {
++          value: row.id, label: row.name, manifest: resolve(row.manifest), preview: resolve(row.preview),
++          ...(typeof row.family === "string" && row.family.trim() ? { family: row.family.trim() } : {}),
++          ...(typeof row.score === "number" && Number.isFinite(row.score) ? { score: row.score } : {}),
++        };
+         seen.add(row.id);
+         ordered.push({ choice, order: row.order });
+       } catch { /* A malformed entry cannot prevent the other packs loading. */ }
+@@ -514,9 +561,9 @@ export async function loadKeyboardCatalog(base: string, options: {
+   }
+   const merged: KeyboardSoundChoice[] = [{ value: "off", label: "Off" }];
+   const seen = new Set(["off"]);
+-  // Game-specific choices (e.g. Relay) are appended and may override a catalogue entry.
++  // Game-specific choices follow Off and may override a catalogue entry.
+   const extras = options.extra ?? [];
+-  for (const choice of [...choices.filter((c) => !extras.some((extra) => extra.value === c.value)), ...extras]) {
++  for (const choice of [...extras, ...choices]) {
+     if (seen.has(choice.value)) continue;
+     seen.add(choice.value);
+     merged.push(choice);
+@@ -543,7 +590,7 @@ export function keyboardPreviewGain(levels: KeyboardPreviewLevels): number {
+ export class KeyboardSoundPreview {
+   private readonly sounds: TypingSounds;
+   private readonly buffers = new Map<string, Promise<AudioBuffer>>();
+-  private readonly packs = new Map<string, Promise<KeyboardLoad>>();
++  private pack: { key: string; abort: AbortController; result: Promise<KeyboardLoad> } | null = null;
+   private timer: ReturnType<typeof setTimeout> | null = null;
+   private generation = 0;
+   private selection = 0;
+@@ -641,27 +688,38 @@ export class KeyboardSoundPreview {
+   }
+ 
+   /** The caller persists the id synchronously; samples load in parallel with exactly one preview. */
+-  select(choice: KeyboardSoundChoice): void {
++  select(choice: KeyboardSoundChoice, preview = true): void {
+     if (this.disposed || choice.disabled) return;
+     const selection = ++this.selection;
+-    this.sounds.use("off");
+-    this.preview(choice, 0);
++    if (preview) this.preview(choice, 0);
++    else this.stop();
++    const key = choice.value + "\n" + (choice.manifest ?? "");
++    if (this.pack?.key !== key) {
++      this.pack?.abort.abort();
++      this.pack = null;
++      const old = this.sounds.profile;
++      if (old && (old.id !== choice.value || choice.manifest)) this.sounds.release(old.id);
++      this.sounds.use("off");
++    }
+     if (choice.value === "off") return;
+     if (!choice.manifest) {
+       this.sounds.use(choice.value);
+       this.options.onUse?.(choice);
+       return;
+     }
+-    const key = choice.value + "\n" + choice.manifest;
+-    if (!this.packs.has(key)) {
+-      this.packs.set(key, this.sounds.loadKeyboardManifest(choice.manifest, choice.value, choice.label, this.options.fetchJson, this.options.fetchBytes));
++    if (!this.pack) {
++      const abort = new AbortController();
++      // Activate at publication time, so the first decoded samples can sound.
++      const result = this.sounds.loadKeyboardManifest(choice.manifest, choice.value, choice.label, this.options.fetchJson, this.options.fetchBytes, true, abort.signal);
++      this.pack = { key, abort, result };
+     }
+-    void this.packs.get(key)!.then((result) => {
+-      if (result.state !== "ready") this.packs.delete(key);
+-      if (this.disposed || selection !== this.selection) return;
++    const pack = this.pack;
++    void pack.result.then((result) => {
++      if (this.disposed || selection !== this.selection || pack !== this.pack) return;
+       this.sounds.use(result.state === "pending" ? "off" : choice.value);
+       this.options.onLoad?.(result);
+-    }).catch(() => { this.packs.delete(key); });
++      if (result.state !== "ready") this.pack = null;
++    }).catch(() => { if (this.pack === pack) this.pack = null; });
+   }
+ 
+   destroy(): void {
+@@ -669,7 +727,8 @@ export class KeyboardSoundPreview {
+     this.disposed = true;
+     this.selection += 1;
+     this.buffers.clear();
+-    this.packs.clear();
++    this.pack?.abort.abort();
++    this.pack = null;
+     if (!this.options.sounds) {
+       // Let the 30 ms fade finish before closing our context.
+       setTimeout(() => this.sounds.dispose(), KEYBOARD_PREVIEW_FADE_SECONDS * 1000);
+diff --git a/shared/game-kit/feedback/typing-fx/index.ts b/shared/game-kit/feedback/typing-fx/index.ts
+index 810924d1..81f0a30e 100644
+--- a/shared/game-kit/feedback/typing-fx/index.ts
++++ b/shared/game-kit/feedback/typing-fx/index.ts
+@@ -11,7 +11,7 @@ export { DEFAULT_PALETTE, FxCanvas, mixHex, toneColors, type TypingFxAtlas, type
+ export { injectTypingFxCss, TYPING_FX_CSS } from "./css";
+ export { FocusStrip, type FocusStripOptions } from "./strip";
+ export {
+-  KEYBOARD_PROFILES, keyboardFiles, profileGaps, TYPING_SOUND_EVENTS, TYPING_SOUND_MAP, TYPING_SOUND_SET, TYPING_SOUND_SETS, TypingSounds, VariantPicker, VoicePool,
++  KEYBOARD_DECODE_BATCH_SIZE, KEYBOARD_PROFILES, keyboardFiles, profileGaps, TYPING_SOUND_EVENTS, TYPING_SOUND_MAP, TYPING_SOUND_SET, TYPING_SOUND_SETS, TypingSounds, VariantPicker, VoicePool,
+   type KeyboardLoad, type SoundStandIn, type TypingSoundEvent, type TypingSoundProfile, type TypingSoundSet, type TypingSoundsOptions,
+ } from "./audio";
+ 
+diff --git a/shared/game-kit/ui/quick-settings/keyboard-choices.ts b/shared/game-kit/ui/quick-settings/keyboard-choices.ts
+index f408fc13..43b0fccf 100644
+--- a/shared/game-kit/ui/quick-settings/keyboard-choices.ts
++++ b/shared/game-kit/ui/quick-settings/keyboard-choices.ts
+@@ -1,11 +1,13 @@
+ // Ticket 190: shared keyboard-sound picker for QuickSettings and the Typing Feedback Lab.
+ import type { QuickChoiceOption } from "./types";
++import type { KeyboardSoundChoice } from "../../feedback/typing-fx/audio";
+ 
+ const STYLE_ID = "kit-keyboard-choices";
++let nextGroupId = 0;
+ /** Kept separate from TF2's quick-settings/css.ts. 9 × 34 px at 720p, independently scrollable. */
+ export const KEYBOARD_CHOICES_CSS = `
+ .kit-keyboards{display:grid;grid-template-columns:minmax(0,1fr) auto;max-height:306px;overflow:auto;overscroll-behavior:contain;width:100%;border:1px solid var(--kit-qs-line,#4A505C);border-radius:6px;background:var(--kit-qs-control,#232731)}
+-.kit-keyboards__list,.kit-keyboards__listens{display:flex;flex-direction:column;min-width:0}
++.kit-keyboards__list,.kit-keyboards__listens,.kit-keyboards__group{display:flex;flex-direction:column;min-width:0}
+ .kit-keyboards button{box-sizing:border-box;display:block;flex:0 0 34px;height:34px;min-height:34px;margin:0;border:0;border-radius:0;padding:0 10px;font:inherit;text-align:left;background:transparent;color:var(--kit-qs-text,#F3F4F6);cursor:pointer}
+ .kit-keyboards__option{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .kit-keyboards button:focus-visible{outline:2px solid var(--kit-qs-focus,#FFD166);outline-offset:-3px}
+@@ -14,6 +16,7 @@ export const KEYBOARD_CHOICES_CSS = `
+ .kit-keyboards button:disabled{color:var(--kit-qs-muted,#C3C9D3);cursor:not-allowed}
+ .kit-keyboards__listen{min-width:44px;text-align:center!important}
+ .kit-keyboards__listen img{display:block;width:24px;height:24px;object-fit:contain;pointer-events:none}
++.kit-keyboards__family{box-sizing:border-box;height:28px;min-height:28px;flex:0 0 28px;padding:4px 10px;font-size:.82em;font-weight:700;color:var(--kit-qs-muted,#C3C9D3)}
+ .kit-keyboards__note{font-size:.82em;margin-left:.35em}
+ .kit-keyboards__spacer{height:34px;flex:0 0 34px}
+ .kit-qs__row--keyboards{align-items:start}
+@@ -25,10 +28,12 @@ export class KeyboardSoundChoices {
+   private readonly buttons: HTMLButtonElement[] = [];
+   private readonly listens: HTMLButtonElement[] = [];
+   private pointerFocus = false;
++  private destroyed = false;
++  private readonly families: { family: string; index: number }[] = [];
+ 
+   constructor(private readonly config: {
+     readonly document: Document;
+-    readonly options: readonly QuickChoiceOption[];
++    readonly options: readonly KeyboardSoundChoice[];
+     readonly label: string;
+     readonly onSelect: (choice: QuickChoiceOption) => void;
+     /** delay=0 for the explicit Listen button; otherwise the 150 ms dwell. */
+@@ -54,7 +59,33 @@ export class KeyboardSoundChoices {
+     const listens = doc.createElement("div");
+     listens.className = "kit-keyboards__listens";
+     root.append(list, listens);
++    let parent = list;
++    let family: string | undefined;
+     config.options.forEach((choice, index) => {
++      // Contiguous groups preserve the catalogue's order even when a family recurs.
++      const nextFamily = choice.value === "off" ? undefined : choice.family?.trim() || undefined;
++      if (nextFamily !== family) {
++        family = nextFamily;
++        parent = list;
++        if (family) {
++          const group = doc.createElement("div");
++          group.className = "kit-keyboards__group";
++          group.setAttribute("role", "group");
++          const heading = doc.createElement("div");
++          heading.className = "kit-keyboards__family";
++          heading.id = `kit-keyboards-family-${++nextGroupId}`;
++          heading.textContent = family;
++          group.setAttribute("aria-labelledby", heading.id);
++          group.append(heading);
++          list.append(group);
++          parent = group;
++          this.families.push({ family, index });
++          const spacer = doc.createElement("span");
++          spacer.className = "kit-keyboards__family";
++          spacer.setAttribute("aria-hidden", "true");
++          listens.append(spacer);
++        }
++      }
+       const button = doc.createElement("button");
+       button.type = "button";
+       button.className = "kit-keyboards__option";
+@@ -95,14 +126,20 @@ export class KeyboardSoundChoices {
+         }
+         const enabled = this.buttons.map((b, i) => b.disabled ? -1 : i).filter((i) => i >= 0);
+         const at = enabled.indexOf(index);
+-        const target = event.key === "Home" ? enabled[0] : event.key === "End" ? enabled.at(-1) : event.key === "ArrowDown" ? enabled[Math.min(enabled.length - 1, at + 1)] : event.key === "ArrowUp" ? enabled[Math.max(0, at - 1)] : undefined;
++        const currentFamily = [...this.families].reverse().find((group) => group.index <= index);
++        const familyTarget = event.key === "PageDown"
++          ? this.families.find((group) => group.index > index && group !== currentFamily)
++          : [...this.families].reverse().find((group) => group.index < (currentFamily?.index ?? index));
++        const pageTarget = familyTarget && enabled.find((i) => i >= familyTarget.index && i < (this.families.find((group) => group.index > familyTarget.index)?.index ?? this.buttons.length));
++        if (event.key === "PageUp" || event.key === "PageDown") event.preventDefault();
++        const target = event.key === "PageUp" || event.key === "PageDown" ? pageTarget : event.key === "Home" ? enabled[0] : event.key === "End" ? enabled.at(-1) : event.key === "ArrowDown" ? enabled[Math.min(enabled.length - 1, at + 1)] : event.key === "ArrowUp" ? enabled[Math.max(0, at - 1)] : undefined;
+         if (target === undefined) return;
+         event.preventDefault();
+-        this.buttons[target]!.focus();
+-        this.buttons[target]!.scrollIntoView?.({ block: "nearest" });
++        this.buttons[target]!.focus({ preventScroll: true });
++        this.scrollTo(this.buttons[target]!);
+       });
+       this.buttons.push(button);
+-      list.append(button);
++      parent.append(button);
+       if (choice.preview && !choice.disabled) {
+         const listen = doc.createElement("button");
+         listen.type = "button";
+@@ -135,6 +172,23 @@ export class KeyboardSoundChoices {
+     const focused = this.buttons.indexOf(this.config.document.activeElement as HTMLButtonElement);
+     const selected = this.buttons.findIndex((button) => button.dataset.value === value && !button.disabled);
+     this.rove(focused >= 0 ? focused : selected >= 0 ? selected : this.buttons.findIndex((button) => !button.disabled));
++    // QuickSettings syncs just before dialog.show(); measure after it becomes visible.
++    queueMicrotask(() => {
++      if (!this.destroyed && this.element.isConnected) {
++        const button = this.buttons.find((b) => b.getAttribute("aria-selected") === "true");
++        if (button) this.scrollTo(button);
++      }
++    });
++  }
++
++  /** Scroll only this control, keeping the surrounding settings panel stationary. */
++  private scrollTo(button: HTMLButtonElement): void {
++    const box = this.element.getBoundingClientRect();
++    const target = button.getBoundingClientRect();
++    const top = box.top + this.element.clientTop;
++    const bottom = top + this.element.clientHeight;
++    if (target.top < top) this.element.scrollTop += target.top - top;
++    else if (target.bottom > bottom) this.element.scrollTop += target.bottom - bottom;
+   }
+ 
+   setListenIcon(url?: string): void {
+@@ -150,6 +204,7 @@ export class KeyboardSoundChoices {
+   }
+ 
+   destroy(): void {
++    this.destroyed = true;
+     this.config.onStop();
+     this.element.remove();
+   }
+diff --git a/shared/game-kit/ui/quick-settings/keyboard-sound.test.ts b/shared/game-kit/ui/quick-settings/keyboard-sound.test.ts
+index 2fb3164a..4234833d 100644
+--- a/shared/game-kit/ui/quick-settings/keyboard-sound.test.ts
++++ b/shared/game-kit/ui/quick-settings/keyboard-sound.test.ts
+@@ -111,10 +111,10 @@ describe("190 catalogue", () => {
+     expect(result.options.map((p) => p.value)).toEqual(["off", "deep", "warm"]);
+     expect(result.options[1]?.label).toBe("DEEP");
+   });
+-  it("lets games append and override their own choices such as Relay", async () => {
++  it("lets games place and override their own choices after Off such as Relay", async () => {
+     const relay = { value: "relay", label: "Relay" };
+     const result = await loadKeyboardCatalog("/keys", { fetchJson: async () => ({ profiles: [rootEntry("deep", 0), rootEntry("relay", 1)] }), extra: [relay, relay, OFF] });
+-    expect(result.options).toEqual([OFF, expect.objectContaining({ value: "deep" }), relay]);
++    expect(result.options).toEqual([OFF, relay, expect.objectContaining({ value: "deep" })]);
+   });
+   it("removed stored id resolves to the first available pack, Off stays Off", () => {
+     const row = defaultSoundRows({ keyboardProfiles: OPTIONS })[3] as QuickChoiceRow;
+diff --git a/tools/typing-feedback-lab/README.md b/tools/typing-feedback-lab/README.md
+index 66b8b648..5c90a2b3 100644
+--- a/tools/typing-feedback-lab/README.md
++++ b/tools/typing-feedback-lab/README.md
+@@ -1,33 +1,31 @@
+ # Typing Feedback Lab
+ 
+-Lab dùng focus strip của kit và **cùng thành phần `KeyboardSoundChoices`** với bảng Sound trong `QuickSettings`. Danh sách lấy từ manifest gốc phiếu 189; không còn liệt kê cố định năm hồ sơ cũ, không tải trước mọi bộ.
++Lab dùng focus strip của kit và **cùng thành phần `KeyboardSoundChoices`** với bảng Sound trong `QuickSettings`. Phiếu 219 chuyển mặc định sang danh mục v2 của phiếu 218, có `family`, `score` và bộ nhiều biến thể. Danh mục cũ của phiếu 190 vẫn đọc được; Lab chỉ tải sample của bộ đang chọn.
+ 
+ ## Chạy
+ 
+ Từ thư mục gốc repo, sau khi có phụ thuộc sẵn của kit:
+ 
+ ```bash
+-LAB_KEYS="$HOME/AudioLab/review/staging/keys-firefly" \
++LAB_KEYS="$PWD/tmp/keys-firefly/staging-v2/keys-firefly" \
+   shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
+ ```
+ 
+-Mở `http://127.0.0.1:4192/`. Biến `LAB_KEYS` là **đường dẫn thư mục**, mặc định chính đường dẫn AudioLab trên; Vite phục vụ tại `/lab-keys/` bằng GET/HEAD chỉ đọc. Bên trong cần có `keys-manifest.json` gốc chứa `profiles[]` (`id`, `name`, `manifest`, `preview`, `order`) và các đường dẫn tương đối tới manifest/preview từng bộ.
++Mở `http://127.0.0.1:4192/`. `LAB_KEYS` là **đường dẫn thư mục**, mặc định là thư mục v2 trong lệnh trên; Vite phục vụ tại `/lab-keys/` bằng GET/HEAD chỉ đọc. Có thể trỏ `LAB_KEYS` sang thư mục giao nhận khác, kể cả ngoài repo. Bên trong cần có `keys-manifest.json` gốc chứa `profiles[]` (`id`, `name`, `manifest`, `preview`, `order`, thêm `family` và `score` ở v2), cùng manifest/preview/sample tương ứng.
+ 
+-Nếu bản giao 189 vẫn ở vị trí tạm trong repo, dùng:
++Có thể đổi base URL bằng `http://127.0.0.1:4192/?keysBase=/lab-keys/`. Một base HTTP khác cần tự cho phép CORS; không dùng đường dẫn filesystem làm URL. Không có danh mục thì Lab chỉ hiện **Off** và thông báo thiếu staging. Không chép âm hoặc ghi ngược staging. Muốn thử bản cũ, đặt `LAB_KEYS="$PWD/tmp/keys-firefly/staging/keys-firefly"`.
+ 
+-```bash
+-LAB_KEYS="$PWD/tmp/keys-firefly/staging/keys-firefly" \
+-  shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
+-```
+-
+-Có thể đổi base URL bằng `http://127.0.0.1:4192/?keysBase=/lab-keys/`. Một base HTTP khác cần tự cho phép CORS; không dùng đường dẫn filesystem làm URL. Không có danh mục thì Lab chỉ hiện **Off** và thông báo thiếu staging. Không chép âm vào repo, không ghi ngược staging.
++Danh mục được đọc nguyên thứ tự `order`, không lọc theo `score` hoặc giới hạn số bộ. **Tại lúc làm phiếu 219, v2 mới có 32 bộ/7 họ**, chưa đạt đầu vào hơn 80 bộ của phiếu 218. Vitest dùng thêm danh mục giả lập 84 bộ; khi phiếu 218 bổ sung, tải lại trang để đọc đủ danh mục mới.
+ 
+ ## Thử bộ phím
+ 
+-- Rê chuột lên tên hoặc dùng Tab/mũi tên lên xuống/Home/End để focus: sau **150 ms** nghe **1 giây**. Focus không đổi lựa chọn.
+-- Rời tên, chuyển focus, đổi bộ hay ẩn bảng: dừng, tắt dần **30 ms**; bản kế tiếp chờ hết đuôi cũ. Preview được fetch/giải mã lần đầu cần nghe và cache trong phiên. Kết quả tải đến sau khi đã rời không được phát.
+-- Click tên, Enter hoặc Space: chọn, lưu id vào `localStorage` với khóa `typing-feedback-lab.keyboard`, tải đủ file bộ đó và phát một preview. Bộ lưu cũ đã mất chuyển về bộ đầu tiên; Off được giữ nguyên.
+-- Nút ảnh loa riêng: nghe mà không chọn, dùng được trên cảm ứng. Ảnh là `hud-sound.64.png` bộ Dragonhold của phiếu 180, qua mount `/lab-keyboard-icon/`; không có ảnh thì hiện chữ **Listen**, không vẽ icon thay thế. Danh sách có khung cuộn riêng, tối đa 9 dòng ở desktop; trên cảm ứng hàng cao 44 px.
++- **Off** đứng đầu; lựa chọn riêng của game như **Relay** đứng ngay sau Off. Các bộ có `family` nằm dưới tiêu đề họ tương ứng (Deep, Warm, …); tiêu đề là nhãn nhóm ARIA, không chọn được. Danh mục không có họ vẫn là danh sách phẳng.
++- Rê chuột lên tên hoặc dùng Tab/mũi tên lên xuống/Home/End để focus: sau **150 ms** nghe **1 giây**. Focus không đổi lựa chọn. Mũi tên bỏ qua tiêu đề và bộ bị vô hiệu hóa; **PageUp/PageDown** chuyển tới bộ đầu tiên có thể chọn của họ trước/sau.
++- Rời tên, chuyển focus, đổi bộ hay ẩn bảng: dừng preview, tắt dần **30 ms**; bản kế tiếp chờ hết đuôi cũ. Preview được fetch/giải mã lần đầu cần nghe và cache trong phiên. Kết quả tải đến sau khi đã rời không được phát.
++- Click tên, Enter hoặc Space: chọn, lưu id vào `localStorage` với khóa `typing-feedback-lab.keyboard`, tải đủ file bộ đó và phát một preview. Bộ lưu cũ đã mất chuyển về bộ đầu tiên; Off được giữ nguyên. Khôi phục bộ đã lưu dùng cùng bộ tải nhưng không tự phát preview.
++- Sample giải mã tối đa **16 file/lô**, nhường một lượt cho luồng giao diện giữa các lô. Những sample đầu đã giải mã dùng được ngay khi gõ. Bộ 70–100 biến thể xoay hết một lượt trước khi xoay lại, không lặp trong **8 cú gần nhất** khi có đủ biến thể; số biến thể ít hơn dùng cửa sổ tối đa `n − 1`.
++- Đổi bộ hoặc chọn Off hủy việc công bố sample đang tải của bộ cũ, nhả buffer/sample và voice của bộ đó. Chọn lại bộ đã rời sẽ tải lại sample; preview 1 giây vẫn được cache riêng. `TypingSounds.release(id)` cho caller chủ động nhả bộ; `use(id)` chuyển giữa hai bộ đã tải cũng nhả bộ trước. API cũ `use("off")` vẫn chỉ làm im tiếng; luồng chọn danh mục chịu trách nhiệm nhả bộ khi chọn Off.
++- Nút ảnh loa riêng: nghe mà không chọn, dùng được trên cảm ứng. Ảnh là `hud-sound.64.png` bộ Dragonhold của phiếu 180, qua mount `/lab-keyboard-icon/`; không có ảnh thì hiện chữ **Listen**. Danh sách có khung cuộn riêng tối đa **306 px** ở desktop; hàng cảm ứng cao **44 px**, tiêu đề họ cao **28 px**. Mở bảng tự cuộn tới bộ đã chọn, không cuộn trang/bảng ngoài.
+ - Preview theo **Master × Keyboard volume**, bỏ qua Effects; Mute Master hoặc Master bằng 0 thì không phát. Hai thanh âm lượng và Mute áp dụng ngay cả khi đang nghe.
+ 
+ Kit không sở hữu save của game. Khi tích hợp, game đọc danh mục trước lúc dựng QuickSettings, truyền `keyboardProfiles: catalogue.options`, `keyboardSounds: sounds` (đúng instance gameplay) và lưu `onChange("keyboard", id)` vào `typingFx.soundProfile` của save. Lựa chọn riêng như Relay được truyền qua `extra`; bộ không có manifest do game xử lý bằng `onKeyboardUse` hoặc callback preview cũ.
+@@ -44,7 +42,7 @@ const quick = new QuickSettings({
+ });
+ ```
+ 
+-`DEFAULT_KEYBOARD_PROFILES` chỉ dùng dự phòng cho game chưa có danh mục. Bộ có manifest được tải từ URL manifest thật trong danh mục, không suy ra bắt buộc `<id>/`. Game vẫn phải tải bộ đã lưu khi khởi động gameplay, như trước; mở bảng không tự thay phần khởi tạo âm của game.
++`DEFAULT_KEYBOARD_PROFILES` chỉ dùng dự phòng cho game chưa có danh mục. Bộ có manifest được tải từ URL manifest thật trong danh mục, không suy ra bắt buộc `<id>/`. Game vẫn phải tải bộ đã lưu khi khởi động gameplay; mở bảng không tự thay phần khởi tạo âm của game.
+ 
+ ## Kiểm tra không mở trình duyệt
+ 
+@@ -52,6 +50,7 @@ const quick = new QuickSettings({
+ pnpm --dir shared/game-kit test
+ pnpm --dir shared/game-kit typecheck
+ shared/game-kit/node_modules/.bin/tsc -p tools/typing-feedback-lab/tsconfig.json --noEmit
++node --check tools/typing-feedback-lab/vite.config.mjs
+ ```
+ 
+-Phiếu 190 không chạy dev server, trình duyệt, mạng hoặc build/test game. Vitest kiểm hành vi bằng đồng hồ giả, DOM giả và Web Audio giả; hiển thị thật ở 1280 × 720, thao tác thiết bị cảm ứng và nghe thực tế vẫn cần Claude duyệt trước khi đồng bộ vào game.
++Phiếu 219 không chạy dev server, trình duyệt, mạng hoặc build/test game. Vitest kiểm hành vi bằng đồng hồ giả, DOM giả và Web Audio giả; hiển thị thật ở 1280 × 720, thao tác thiết bị cảm ứng và nghe thực tế vẫn cần Claude duyệt trước khi đồng bộ vào game.
+diff --git a/tools/typing-feedback-lab/src/main.ts b/tools/typing-feedback-lab/src/main.ts
+index 31ca498c..de590401 100644
+--- a/tools/typing-feedback-lab/src/main.ts
++++ b/tools/typing-feedback-lab/src/main.ts
+@@ -13,7 +13,7 @@ import {
+   TypingSounds,
+   KeyboardSoundPreview,
+   loadKeyboardCatalog,
+-  type KeyboardLoad,
++  type KeyboardSoundChoice,
+   type TypingFxIntensity,
+   type TypingFxProgress,
+   type TypingFxSettings,
+@@ -22,7 +22,7 @@ import {
+   type TypingFxStyle,
+ } from "../../../shared/game-kit/feedback/typing-fx";
+ import { KEYS_BASE } from "./profiles";
+-import { KeyboardSoundChoices, type QuickChoiceOption } from "../../../shared/game-kit/ui/quick-settings";
++import { KeyboardSoundChoices } from "../../../shared/game-kit/ui/quick-settings";
+ 
+ type GameId = "dragon-hold" | "typing-survival" | "typing-defense";
+ type Game = { name: string; backdrop: string; levels: number; target: { x: number; y: number }; accent: string; anchorY: number };
+@@ -36,7 +36,7 @@ const GAMES: Readonly<Record<GameId, Game>> = {
+ 
+ const $ = <T extends HTMLElement>(id: string): T => document.getElementById(id) as T;
+ const profileHost = $<HTMLElement>("profile");
+-let keyboardOptions: readonly QuickChoiceOption[] = [];
++let keyboardOptions: readonly KeyboardSoundChoice[] = [];
+ let keyboardPicker: KeyboardSoundChoices | null = null;
+ const profileNote = $<HTMLElement>("profileNote");
+ const stage = $<HTMLDivElement>("stage");
+@@ -91,42 +91,19 @@ const strip = new FocusStrip({
+ 
+ // ── Sounds: ticket-189 catalogue and the shared ticket-190 picker ──
+ const sounds = new TypingSounds({ keyVoices: 6, wordVoices: 2 });
+-const loads = new Map<string, Promise<KeyboardLoad>>();
+ const loadReport: Record<string, string> = {};
+ const keyboardPreview = new KeyboardSoundPreview({
+   sounds,
+   levels: () => ({ master: Number($<HTMLInputElement>("masterVolume").value), keyboard: settings.volume, muted: $<HTMLInputElement>("masterMuted").checked }),
+   onLoad: (result) => { loadReport[result.id] = `${result.state}: ${result.keys} keys, ${result.spaces} spaces`; },
+ });
+-/** Loads the saved keyboard once; other packs load only when selected. Reload to refresh staging. */
+-function loadKeyboard(id: string): Promise<KeyboardLoad> {
+-  const choice = keyboardOptions.find((p) => p.value === id);
+-  const name = choice?.label ?? id;
+-  if (!loads.has(id)) {
+-    loads.set(
+-      id,
+-      (choice?.manifest ? sounds.loadKeyboardManifest(choice.manifest, id, name) : sounds.loadKeyboard(KEYS_BASE, id, name)).then((r) => {
+-        loadReport[id] = r.state === "pending" ? "pending" : `${r.state}: ${r.keys} keys, ${r.spaces} spaces${r.missing.length ? `, ${r.missing.length} broken` : ""}`;
+-        return r;
+-      }),
+-    );
+-  }
+-  return loads.get(id)!;
+-}
+-
++/** Selection and startup share the same progressive loader and cancellation lifecycle. */
+ async function useProfile(id: string, preview = true): Promise<void> {
+   settings.soundProfile = id;
+   keyboardPicker?.sync(id);
+   try { localStorage.setItem("typing-feedback-lab.keyboard", JSON.stringify({ soundProfile: id })); } catch { /* Session only. */ }
+-  if (preview) {
+-    const choice = keyboardOptions.find((p) => p.value === id);
+-    if (choice) keyboardPreview.select(choice);
+-    return;
+-  }
+-  if (id === "off") { sounds.use("off"); return; }
+-  const r = await loadKeyboard(id);
+-  if (settings.soundProfile !== id) return;
+-  sounds.use(r.state === "pending" ? "off" : id);
++  const choice = keyboardOptions.find((p) => p.value === id);
++  if (choice) keyboardPreview.select(choice, preview);
+ }
+ 
+ function startAudio(): void {
+@@ -465,6 +442,7 @@ function togglePanel(force?: boolean): void {
+   const hidden = force ?? !panel.classList.contains("is-hidden");
+   panel.classList.toggle("is-hidden", hidden);
+   if (hidden) keyboardPreview.stop();
++  else keyboardPicker?.sync(settings.soundProfile);
+   $<HTMLButtonElement>("collapse").textContent = hidden ? "Show" : "Hide";
+ }
+ $<HTMLButtonElement>("collapse").addEventListener("click", () => togglePanel());
+diff --git a/tools/typing-feedback-lab/src/profiles.ts b/tools/typing-feedback-lab/src/profiles.ts
+index 5b40aba4..e33bf1c0 100644
+--- a/tools/typing-feedback-lab/src/profiles.ts
++++ b/tools/typing-feedback-lab/src/profiles.ts
+@@ -1,3 +1,3 @@
+-// Ticket 190: the root ticket-189 catalogue, mounted read-only by Vite.
++// Ticket 190: the root ticket-218 v2 catalogue (legacy catalogues also work), mounted read-only by Vite.
+ /** Override with ?keysBase=/another-mounted-folder/ (or an HTTP base with suitable CORS). */
+ export const KEYS_BASE = new URLSearchParams(window.location.search).get("keysBase") ?? "/lab-keys/";
+diff --git a/tools/typing-feedback-lab/vite.config.mjs b/tools/typing-feedback-lab/vite.config.mjs
+index 46954155..7b7b2226 100644
+--- a/tools/typing-feedback-lab/vite.config.mjs
++++ b/tools/typing-feedback-lab/vite.config.mjs
+@@ -2,17 +2,16 @@
+ // they go into a game (docs/games/TYPING_FEEDBACK_REVIEW.md). Run from the parent repo:
+ //   shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs
+ // Read-only mounts: the games' vocabulary, font and ticket-180 speaker art; external keyboard
+-// staging (LAB_KEYS overrides the AudioLab default); backdrops kept in this tool's tmp/.
++// staging (LAB_KEYS overrides the ticket-218 v2 default); backdrops kept in this tool's tmp/.
+ import { createReadStream, existsSync, realpathSync, statSync } from "node:fs";
+ import path from "node:path";
+-import { homedir } from "node:os";
+ import { fileURLToPath } from "node:url";
+ 
+ const here = path.dirname(fileURLToPath(import.meta.url));
+ const repo = path.resolve(here, "../..");
+ // External staging is read-only. No media is copied into the repo.
+ const MOUNTS = {
+-  "/lab-keys/": process.env.LAB_KEYS ?? path.join(homedir(), "AudioLab/review/staging/keys-firefly"),
++  "/lab-keys/": process.env.LAB_KEYS ?? path.join(repo, "tmp/keys-firefly/staging-v2/keys-firefly"),
+   "/lab-keyboard-icon/": path.join(repo, "games/dragon-hold/art-src/ui/quick-settings/selected"),
+   "/lab-vocab/dragon-hold/": path.join(repo, "games/dragon-hold/public/vocabulary"),
+   "/lab-vocab/typing-defense/": path.join(repo, "games/typing-defense/public/vocabulary"),

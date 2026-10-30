@@ -111,10 +111,10 @@ describe("190 catalogue", () => {
     expect(result.options.map((p) => p.value)).toEqual(["off", "deep", "warm"]);
     expect(result.options[1]?.label).toBe("DEEP");
   });
-  it("lets games append and override their own choices such as Relay", async () => {
+  it("lets games place and override their own choices after Off such as Relay", async () => {
     const relay = { value: "relay", label: "Relay" };
     const result = await loadKeyboardCatalog("/keys", { fetchJson: async () => ({ profiles: [rootEntry("deep", 0), rootEntry("relay", 1)] }), extra: [relay, relay, OFF] });
-    expect(result.options).toEqual([OFF, expect.objectContaining({ value: "deep" }), relay]);
+    expect(result.options).toEqual([OFF, relay, expect.objectContaining({ value: "deep" })]);
   });
   it("removed stored id resolves to the first available pack, Off stays Off", () => {
     const row = defaultSoundRows({ keyboardProfiles: OPTIONS })[3] as QuickChoiceRow;

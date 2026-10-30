@@ -1,0 +1,122 @@
+$ vitest run
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/shared/game-kit
+
+ ✓ platform/rng.test.ts (7 tests) 54ms
+stdout | map/lint.test.ts > map deterministic lint > scans every core file recursively in filename order
+Map core files (8): along.ts, edt.ts, hash.ts, index.ts, raster.ts, seeds.ts, sha256.ts, spec.ts; violations: 0
+
+stdout | map/fields-sample.test.ts > sample field sets from ticket 028 fixtures > matches golden Dragon bytes, counts and maxima twice
+field dragon-hold.L2-cau.json lanes mask=613 max=43573
+field dragon-hold.L2-cau.json river mask=3794 max=38597
+field dragon-hold.L2-cau.json dais mask=208 max=38088
+field dragon-hold.L2-cau.json slots mask=445 max=33800
+field-set dragon-hold.L2-cau.json ca039deb73b5dc47e0a90ba7cd354719fed12419de77c7602a44e04cae2542b4 1327159
+
+stdout | map/fields-sample.test.ts > sample field sets from ticket 028 fixtures > matches golden Defense bytes, counts and maxima twice
+field typing-defense.w1-silverfall.json roads mask=2632 max=8689
+field typing-defense.w1-silverfall.json water mask=1152 max=19881
+field typing-defense.w1-silverfall.json keep mask=1402 max=31705
+field typing-defense.w1-silverfall.json blockers mask=1692 max=5941
+field-set typing-defense.w1-silverfall.json 885278a7f3e1547fee5d7c0c04fde305d54cec8c4cc6cf35f6717c2090f30507 589882
+
+ ✓ balance/typist.test.ts (11 tests) 314ms
+stdout | map/fields-sample.test.ts > sample field sets from ticket 028 fixtures > builds four Dragon fields in a median of at most 250 ms
+field-timing dragon-hold.L2-cau.json median=14.222ms samples=14.222,8.020,36.131,18.816,6.851ms
+
+ ✓ map/fields-sample.test.ts (3 tests) 182ms
+stdout | map/raster.test.ts > raster cell-center rules > matches BigInt for 200 seeded shapes and preserves existing cells
+raster brute-force: 200 cases; 209439 cells compared
+
+stdout | english-strings.test.ts > English kit strings > keeps UI and developer report literals in English
+English string scan: 96 source files; 0 violations
+
+ ✓ english-strings.test.ts (5 tests) 265ms
+stdout | map/along.test.ts > along integer arithmetic > matches Newton BigInt on 10000 seeded inputs and square boundaries
+along roots: 22002 inputs; 10000 seeded
+
+ ✓ map/raster.test.ts (46 tests) 537ms
+   ✓ raster cell-center rules > matches BigInt for 200 seeded shapes and preserves existing cells  490ms
+stdout | map/along.test.ts > along yaw > compares all 381200 specified vectors with atan2
+along yaw: 381200 vectors; max=0.499990793deg; different=0
+
+stdout | map/along.test.ts > along placement > matches golden totals, counts, hashes, endpoints and repeats exactly
+along golden td-route0: total=12163917; items=14; hash=1811293709; edges=[[1,1075200,41,-113,-4160,23,-280],[2,1843200,71,287,-3370,37,280],[3,2611200,101,422,-2801,149,-280],[15,11827200,461,417,3942,133,-280]]
+along golden dh-cau: total=2517567; items=12; hash=1575973982; edges=[[0,74752,0,991,-2741,118,-200],[1,204800,0,931,-2629,118,-200],[2,276480,0,898,-2567,118,-200],[19,2373632,3,264,-699,101,-200]]
+along golden synthetic: total=31636035; items=808; hash=440583006; edges=[[1,30720,1,30,-45,0,-45],[2,89088,1,87,45,0,45],[6,220160,1,215,45,0,45],[811,30709760,11,15689,-15803,317,-45]]
+
+ ✓ map/seeds.test.ts (34 tests) 84ms
+ ✓ feedback/typing-fx/audio-progressive.test.ts (18 tests) 651ms
+stdout | map/sha256.test.ts > sha256Hex > matches node:crypto for 200 seeded byte sequences
+sha256 seeded sequences: 200
+
+ ✓ map/sha256.test.ts (16 tests) 46ms
+ ✓ feedback/numbers.test.ts (30 tests) 155ms
+ ✓ speech/speech.test.ts (15 tests) 42ms
+ ✓ feedback/motion.test.ts (15 tests) 30ms
+ ✓ map/spec.test.ts (101 tests) 36ms
+stdout | map/edt.test.ts > Meijster squared EDT > matches brute force on 200 seeded grids
+edt brute-force: 200 grids; 219549 cells compared
+
+ ✓ platform/safe-storage.test.ts (8 tests) 22ms
+ ✓ balance/director.test.ts (11 tests) 30ms
+ ✓ feedback/typing-fx/audio.test.ts (14 tests) 15ms
+ ✓ feedback/typing-fx/styles.test.ts (11 tests) 34ms
+ ✓ feedback/debris.test.ts (2 tests) 11ms
+ ✓ typing/session.test.ts (3 tests) 1190ms
+   ✓ a stream on the shared vocabulary > keeps every live first letter unique (tier 1), every pair told apart by its second letter, no two words one edit apart  1187ms
+ ✓ feedback/typing-fx/logic.test.ts (14 tests) 9ms
+ ✓ vocab/vocabulary.test.ts (12 tests) 8ms
+ ✓ vocab/kit-vocab.test.ts (11 tests) 5ms
+ ✓ typing/router.test.ts (18 tests) 7ms
+ ✓ tools/vite-shared-plugin.test.ts (3 tests) 7ms
+ ✓ three/scene.test.ts (6 tests) 7ms
+ ✓ balance/profile.test.ts (8 tests) 4ms
+ ✓ tools/cdp-port.test.ts (27 tests) 14ms
+ ✓ audio/scene-audio.test.ts (4 tests) 13ms
+ ✓ platform/frame-loop.test.ts (8 tests) 4ms
+ ✓ ui/quick-settings/logic.test.ts (17 tests) 11ms
+ ✓ typing/letters.test.ts (8 tests) 9ms
+ ✓ balance/gates.test.ts (11 tests) 5ms
+ ✓ map/edt.test.ts (14 tests) 1818ms
+   ✓ Meijster squared EDT > matches brute force on 200 seeded grids  1130ms
+   ✓ Meijster squared EDT > handles maximum dimensions and their exact farthest squared distance  684ms
+ ✓ three/models.test.ts (23 tests) 11ms
+ ✓ map/hash.test.ts (25 tests) 4ms
+ ✓ typing/scorer.test.ts (10 tests) 7ms
+ ✓ learning/events.test.ts (5 tests) 5ms
+ ✓ feedback/typing-fx/driver.test.ts (11 tests) 6ms
+ ✓ learning/bridge.test.ts (6 tests) 8ms
+ ✓ typing/budget.test.ts (3 tests) 4ms
+ ✓ balance/bands.test.ts (4 tests) 5ms
+ ✓ balance/flow.test.ts (9 tests) 9ms
+ ✓ input/keys.test.ts (5 tests) 7ms
+ ✓ audio/mix.test.ts (6 tests) 5ms
+ ✓ map/lint.test.ts (63 tests) 1958ms
+   ✓ map deterministic lint > enforces erasableSyntaxOnly on virtual sources with a clean control  1918ms
+ ✓ feedback/profiles.test.ts (4 tests) 2ms
+ ✓ feedback/kill-translation.test.ts (7 tests) 3ms
+ ✓ balance/pace.test.ts (9 tests) 6ms
+ ✓ input/text.test.ts (8 tests) 6ms
+ ✓ platform/canvas-state.test.ts (2 tests) 2ms
+ ✓ feedback/audio-cues.test.ts (4 tests) 11ms
+ ✓ typing/tempo.test.ts (3 tests) 3ms
+ ✓ ui/ui.test.ts (5 tests) 3ms
+ ✓ ui/quick-settings/keyboard-sound.test.ts (34 tests) 67ms
+ ✓ ui/quick-settings/keyboard-families.test.ts (9 tests) 69ms
+ ✓ ui/quick-settings/quick-settings.test.ts (19 tests) 139ms
+stdout | map/along.test.ts > along placement > matches BigInt and all geometric properties on 103 routes
+along errors td-route0: arc=0.526497559cm; side=0.428899920cm; yaw=0.498565676deg
+along errors dh-cau: arc=0.574439165cm; side=0.262327960cm; yaw=0.491477012deg
+along errors synthetic: arc=0.701951017cm; side=0.276925691cm; yaw=0.224425926deg
+along BigInt/properties: routes=103; items=17621; maxArc=0.708027956cm; maxSide=0.840979371cm; maxYaw=0.499872366deg
+
+ ✓ map/along.test.ts (82 tests) 3360ms
+   ✓ along integer arithmetic > matches Newton BigInt on 10000 seeded inputs and square boundaries  518ms
+   ✓ along placement > matches BigInt and all geometric properties on 103 routes  2754ms
+
+ Test Files  56 passed (56)
+      Tests  867 passed (867)
+   Start at  09:11:12
+   Duration  3.73s (transform 1.55s, setup 0ms, collect 4.18s, tests 11.32s, environment 597ms, prepare 2.97s)
+
