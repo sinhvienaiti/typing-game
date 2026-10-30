@@ -36,6 +36,27 @@ Codex chạy ba làn (owner 30/10 11:15):
 
 Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ được nối vào sau ba làn. 213 nối sau `s8`.
 
+**30/10, khoảng 18:00: các phiếu Codex trong ngày đã duyệt và commit xong.** Tất cả nằm trên nhánh worktree, chưa gộp vào main của từng game, chưa đẩy:
+
+| Game | Worktree | Nhánh và commit |
+|---|---|---|
+| Dragonhold | `.wt-dh-codex` | `dh-codex`: 187, 194, 195, 197, 223, 235 (6 commit), `c96ef50` |
+| Last Line | `.wt-ts-codex` | `ts-codex`: 205, 207, 210 (`ba6d70e`), 220 (`28ba10e`) |
+| Last Line | `.wt-ts-art` | `ts-art`: 206 (`ce94c1a`) |
+| Wordwoven | `.wt-td-scenery` | `td-scenery`: 199, 202 |
+| Wordwoven | `.wt-td-ui` | `td-ui`: 200 (`49bffbb`), 203A (`b3a542d`) |
+| Wordwoven | `.wt-td-codex` | `td-codex`: 170 + 208 (`cab37f7`), 229 (`2b6f282`) |
+
+- **Repo cha:** 212, 213, 214, 215 + 228 + 234, 216, 217, 221 đã commit.
+- **Tiếng phím:**
+  - Raindrop Tile (bộ 33) đã vào `ts-typefx`, `dh-keys`, `td-keys` và Monkeytype; Monkeytype đã đẩy GitHub và GitLab ở `be5943667`.
+  - Hail Stone (bộ 34) đang gắn.
+- **Còn chờ:**
+  - gộp các nhánh vào main của từng game;
+  - `media:push` (rclone chưa kết nối lại);
+  - F1 của 222 (SVG, tranh gỗ CSS của Dragonhold) chờ chấm ảnh;
+  - lỗi kit: dòng đang chọn trong danh sách bộ phím khó đọc khi con trỏ còn trên nó.
+
 **30/10, 15:25: chủ dự án tạm dừng Codex, chuyển việc cho Claude.**
 - Đã dừng mọi làn và lệnh chờ phiếu ảnh 19:48. Không chạy lại Codex khi chủ dự án chưa bảo.
 - Claude làm qua workflow `claude-takes-over-codex-235-234-230-232` (`wf_5a8d7c6d-8af`):
