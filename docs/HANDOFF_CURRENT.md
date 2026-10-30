@@ -84,6 +84,12 @@ Mục 3 bên dưới là lịch sử.
 - **Đã gộp:** `td-codex` (091, 103) vào `a2-days`; `ts-codex` cũ vào `main` Tuyến Cuối `e26e898`.
 - **Ảnh đã nhận:** 088, 089, 093, 095, 096, 097; 098–100 xong nhưng bị chấm lại theo mức chợ, thay bằng 116–118, 122, 123.
 
+### Lửa Rồng vòng 9 đã chấm (30/10, khoảng 08:10): chưa đạt 8,5
+
+- Giám khảo A: mạnh 7,9, thường 7,4, Sky Fire 7,9; giám khảo B: 8,0, 7,5, 8,0. Tiến trình: vòng 7 khoảng 7,4, vòng 8 khoảng 7,75, vòng 9 khoảng 7,8. Đã ngang game thương mại: T của đòn mạnh 8,5, R của Sky Fire 8,5, T của Sky Fire 9,0.
+- Kéo xuống: khói pha F 6,0–6,5 ở cả ba đòn (mảng ô liu phẳng trên cỏ, dải mép thẳng trên sông), lửa tắt thành mảng đỏ cắt cứng, Sky Fire trúng còn đĩa hồng đào và chưa có vòng hay vòm theo bán kính luật, ngôi sao sticker ở đòn mạnh, quái lóe kem 4–5 khung ở đòn thường, vết cháy như cái lỗ, đòn Perfect chưa có vệt chữ. Tờ Sky 1280x720 play-dark bị lớp tạm dừng che, phải chụp lại.
+- **Vòng 10** đã gửi V-dh2 (`judge-r9a/b/verdict.md`). Khói đổi sang mặt nạ mật độ, tô màu trong shader (than ấm, sáng trên, ửng lửa dưới). Clip Firefly khói trắng trên nền đen làm mặt nạ: hỏi chủ dự án trước khi tạo (đã dùng hết khoảng 25 clip được duyệt).
+
 ### Sau khi khởi động lại (30/10, khoảng 00:25)
 
 - Làn Codex `s1` chạy lại; 00:36 chủ dự án báo Codex đã có hạn mức, khởi động lại `s1` để chạy ngay (192 bắt đầu 00:36). Vẫn **một làn**. Chủ dự án: "Codex bao giờ xong thì kêu nó làm tiếp" — hết `s1` thì duyệt và nối phiếu 194–217.
