@@ -72,6 +72,9 @@ jobs:
       - name: Publish runtime artifacts
         run: pnpm english-content:publish
 
+      - name: Refresh E11 readiness for runtime regression
+        run: node scripts/report-english-content-e11-readiness.mjs --write
+
       - name: Run E11 runtime-count freshness regression
         run: node --test scripts/check-english-content-e11-runtime-counts.test.mjs
 
