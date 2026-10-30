@@ -1217,12 +1217,22 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--out", type=Path, default=firefly_build.STAGING)
     b.add_argument("--work", type=Path, default=firefly_build.WORK)
     b.add_argument("--evidence", type=Path, default=firefly_build.EVIDENCE)
+    from keys import firefly_v2
+    v = sub.add_parser("build-v2", help="bộ 70–100 phím và 6–10 cách theo âm sắc (phiếu 218)")
+    v.add_argument("--src", type=Path, default=SRC)
+    v.add_argument("--survey", type=Path, default=OUT)
+    v.add_argument("--out", type=Path, default=firefly_v2.STAGING)
+    v.add_argument("--work", type=Path, default=firefly_v2.WORK)
+    v.add_argument("--evidence", type=Path, default=firefly_v2.EVIDENCE)
+    v.add_argument("--prepare-only", action="store_true", help="chỉ chuẩn bị ứng viên và đo nguồn")
     a = ap.parse_args(argv)
     if a.cmd == "survey":
         fl = [int(v) for v in a.folders.split(",")] if a.folders else None
         survey(Path(a.src), Path(a.out), fl, a.limit, not a.no_sheets, not a.no_export)
     elif a.cmd == "build":
         firefly_build.build(a.src, a.survey, a.out, a.work, a.evidence)
+    elif a.cmd == "build-v2":
+        firefly_v2.build(a.src, a.survey, a.out, a.work, a.evidence, a.prepare_only)
     return 0
 
 
