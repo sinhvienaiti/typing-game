@@ -92,7 +92,24 @@ Mục 3 bên dưới là lịch sử.
     - `s4`: 212 → 214, 215, 216, 217, 206;
     - `s6`: 199, 202 trong `.wt-td-scenery` → 200 trong `.wt-td-ui`; khi `s6` xong, `s7` tự chạy 194 → 195 → 197 trong `.wt-dh-codex` (194 lượt 10:43 dừng vì phần dở của 195, bị cắt lúc đổi làn 08:43; đã ghi chú vào ba phiếu).
   - Hai worktree Wordwoven mới cắt từ `td-1c` `2a1f61d`, có liên kết media như `.wt-td-1c`.
-  - Đã bỏ lệnh chờ `s5`, vì 194 nay nằm trong `s6`.
+  - Đã bỏ lệnh chờ `s5`, vì 194 nay nằm trong `s7`.
+- **Nghe xong 32 bộ (30/10, khoảng 11:20):**
+  - Chủ dự án thấy "âm nào cũng hơi giống nhau". 7 bộ bản 1 nghe khác hẳn nhau (ông gọi là clack, cream, poppy, thock, click).
+  - Claude mở một vòng chẩn đoán, chủ dự án bảo dừng: "không cần chẩn đoán nữa, tạm thời cứ dùng 32 file âm đó". Đã dừng; chưa có kết luận lỗi do Codex hay do nguồn.
+  - Nếu sau này cần bộ khác nhau rõ hơn: xem `KEYS_FIREFLY_HANDOFF.md` §5. Cách dễ thử nhất là chỉ giữ các bộ khác nhau nhất, hoặc dựng lại với vùng lấy mẫu mỗi bộ hẹp hơn.
+- **Đã gắn 32 bộ** (chưa gộp, chưa đẩy):
+  - Last Line: `ts-typefx` `e1c7d15`, `8956257`, `804429a`;
+  - Dragonhold: `dh-keys` `2a8933f` (Codex 192), `7c84b64`, `255b452`;
+  - Wordwoven: `td-keys` `0a63df2` (Codex 193), `023b995`;
+  - Monkeytype: `feature/typing-feel-32` `8dead1a6d`, `44945ad4a`.
+  - Workflow `keys-32-review-fixes` đang sửa các lỗi người kiểm tìm ra:
+    - Dragonhold: đổi bộ không giải phóng bộ cũ;
+    - Wordwoven: mất tiếng gõ sai, thiếu test bảng;
+    - Monkeytype: danh sách vẽ lại toàn bộ.
+  - Còn chờ:
+    - Claude kiểm trình duyệt;
+    - `media:push` sau khi gộp;
+    - quyết định có làm manifest gọn cho game không (mỗi game hiện thêm khoảng 5 MB JSON vào Git, mỗi bộ khoảng 170 KB tải khi chọn).
 - **Kết quả và quyết định (30/10, khoảng 10:45):** phiếu 218 chỉ ra 32 bộ (458 trên 490 bộ đạt điểm bị loại vì gần trùng). Chủ dự án nghe 10 bộ bị loại và chốt: **tạm giữ 32 bộ**, sau cần thì làm thêm. Cách làm thêm ghi ở `docs/games/audio/KEYS_FIREFLY_HANDOFF.md` §5 (hạ `MIN_DISTANCE`, sửa điểm độ lặp, ồn nền, hoặc tạo âm Firefly mới). Tài liệu đó cũng là README cho folder âm trên Drive.
 
 - Chủ dự án thấy chỉ có 7 bộ ("tôi tải hơn 400 file âm cơ mà"), rồi chốt: **80 bộ trở lên, mỗi bộ 70–100 biến thể, khoảng 6 điểm là được**. Giữ 7 id cũ (mặc định Bright Clack) cho bộ tốt nhất mỗi họ.
