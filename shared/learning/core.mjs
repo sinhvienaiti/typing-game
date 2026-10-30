@@ -288,6 +288,17 @@ function applyParsedLearningEvent(next, event) {
     record.sourceGames = [...record.sourceGames, event.gameId];
   }
 
+  record.recentSamples = boundedAppendChronological(
+    record.recentSamples ?? [],
+    {
+      occurredAt: event.occurredAt,
+      gameId: event.gameId,
+      activityType: event.activityType,
+      result: event.result,
+      hintUsed: event.hintUsed,
+    },
+  );
+
   if (event.result === "wrong") {
     record.recentMistakes = boundedAppendChronological(
       record.recentMistakes ?? [],

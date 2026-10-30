@@ -1,4 +1,28 @@
-import type { LearningEntityType } from "./core.mjs";
+import type { LearningEntityType, LearningSample } from "./core.mjs";
+
+export const LOOKUP_MAX_IDS: 200;
+/** True when every LearningSample field has its declared type. */
+export function isLearningSample(sample: unknown): sample is LearningSample;
+export type LearningLookup = {
+  entityType: LearningEntityType;
+  entityIds: string[];
+};
+export type LearningLookupResult = {
+  entityType: LearningEntityType;
+  items: Array<LearningQueryItem & { recentSamples: LearningSample[] }>;
+};
+export function parseLearningLookup(input: unknown): LearningLookup;
+export function lookupLearningRecords(
+  profileInput: unknown,
+  lookupInput: unknown,
+  now?: string,
+): LearningLookupResult;
+/** Accepts the result of parseLearningLookup. */
+export function lookupParsedLearningRecords(
+  profileInput: unknown,
+  lookup: LearningLookup,
+  now?: string,
+): LearningLookupResult;
 
 export type LearningStatus =
   | "needs-review"

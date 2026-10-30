@@ -1,6 +1,7 @@
 import {
   calculateMastery,
   calculateReviewPriority,
+  normalizeVocabularyKey,
   viewLearningProfile,
 } from "./core.mjs";
 
@@ -17,6 +18,11 @@ export const REVIEW_SORTS = new Set([
 ]);
 
 const ENTITY_TYPES = new Set(["vocabulary", "grammar", "sentence"]);
+export const LOOKUP_MAX_IDS = 200;
+const PROTOTYPE_IDS = new Set(
+  Object.getOwnPropertyNames(Object.prototype)
+    .flatMap((id) => [id, normalizeVocabularyKey(id)]),
+);
 const PAGE_SIZES = new Set([10, 25, 50, 100]);
 const STATUS_VALUES = new Set([
   "needs-review",
@@ -27,6 +33,39 @@ const STATUS_VALUES = new Set([
 
 function plainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+const SAMPLE_RESULTS = new Set(["correct", "wrong"]);
+
+// LearningSample in core.d.mts: three strings, a known result and a boolean.
+export function isLearningSample(sample) {
+  return (
+    plainObject(sample) &&
+    typeof sample.occurredAt === "string" &&
+    typeof sample.gameId === "string" &&
+    typeof sample.activityType === "string" &&
+    SAMPLE_RESULTS.has(sample.result) &&
+    typeof sample.hintUsed === "boolean"
+  );
+}
+
+// Rebuild each sample from the five contract fields; drop a whole sample
+// with a wrong type instead of coercing it.
+function contractSamples(samples) {
+  if (!Array.isArray(samples)) return [];
+  const result = [];
+  for (const sample of samples) {
+    if (!plainObject(sample)) continue;
+    const projected = {
+      occurredAt: sample.occurredAt,
+      gameId: sample.gameId,
+      activityType: sample.activityType,
+      result: sample.result,
+      hintUsed: sample.hintUsed,
+    };
+    if (isLearningSample(projected)) result.push(projected);
+  }
+  return result;
 }
 
 function optionalString(value, field, max = 200) {
@@ -53,6 +92,41 @@ function parseDate(value, field) {
     throw new TypeError(`${field} must be a date-time`);
   }
   return new Date(timestamp).toISOString();
+}
+
+export function parseLearningLookup(input) {
+  if (
+    !plainObject(input) ||
+    (Object.getPrototypeOf(input) !== Object.prototype &&
+      Object.getPrototypeOf(input) !== null)
+  ) {
+    throw new TypeError("learning lookup must be a plain object");
+  }
+  if (!ENTITY_TYPES.has(input.entityType)) {
+    throw new TypeError("entityType is not supported");
+  }
+  if (
+    !Array.isArray(input.entityIds) ||
+    input.entityIds.length < 1 ||
+    input.entityIds.length > LOOKUP_MAX_IDS
+  ) {
+    throw new TypeError(`entityIds must contain 1 to ${LOOKUP_MAX_IDS} ids`);
+  }
+
+  const ids = new Set();
+  for (const value of input.entityIds) {
+    if (typeof value !== "string") {
+      throw new TypeError("entityIds must contain strings");
+    }
+    const trimmed = value.trim();
+    if (trimmed.length > 200) throw new TypeError("entityId is too long");
+    const id = input.entityType === "vocabulary"
+      ? normalizeVocabularyKey(trimmed)
+      : trimmed;
+    if (id !== "") ids.add(id);
+  }
+  if (ids.size === 0) throw new TypeError("entityIds must contain a non-empty id");
+  return { entityType: input.entityType, entityIds: [...ids] };
 }
 
 export function parseLearningQuery(input) {
@@ -229,6 +303,49 @@ function collectionFor(profile, entityType) {
   return profile.sentences;
 }
 
+function queryItem(record, entityType, now) {
+  const mastery = calculateMastery(record, now);
+  return {
+    ...record,
+    ...(record.recentSamples === undefined ? {} : {
+      recentSamples: contractSamples(record.recentSamples),
+    }),
+    entityType,
+    entityId: entityId(record, entityType),
+    mastery,
+    reviewPriority: calculateReviewPriority(record, now),
+    status: statusForMastery(mastery),
+  };
+}
+
+export function lookupLearningRecords(
+  profileInput,
+  lookupInput,
+  now = new Date().toISOString(),
+) {
+  return lookupParsedLearningRecords(profileInput, parseLearningLookup(lookupInput), now);
+}
+
+// Accept only the result of parseLearningLookup; normalization may expand ids.
+export function lookupParsedLearningRecords(
+  profileInput,
+  lookup,
+  now = new Date().toISOString(),
+) {
+  const profile = viewLearningProfile(profileInput);
+  const collection = collectionFor(profile, lookup.entityType);
+  const items = [];
+  for (const id of lookup.entityIds) {
+    if (PROTOTYPE_IDS.has(id) || !Object.hasOwn(collection, id)) continue;
+    const record = collection[id];
+    items.push({
+      recentSamples: [],
+      ...queryItem(record, lookup.entityType, now),
+    });
+  }
+  return { entityType: lookup.entityType, items };
+}
+
 function dateValue(value, fallback) {
   if (value == null) return fallback;
   const parsed = Date.parse(value);
@@ -282,17 +399,7 @@ export function queryLearningProfile(
   const source = Object.values(collectionFor(profile, query.entityType));
 
   const items = source
-    .map((record) => {
-      const mastery = calculateMastery(record, now);
-      return {
-        ...record,
-        entityType: query.entityType,
-        entityId: entityId(record, query.entityType),
-        mastery,
-        reviewPriority: calculateReviewPriority(record, now),
-        status: statusForMastery(mastery),
-      };
-    })
+    .map((record) => queryItem(record, query.entityType, now))
     .filter((item) => {
       const filters = query.filters;
       if (

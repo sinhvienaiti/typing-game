@@ -3,6 +3,7 @@ import {
   migrateLearningProfile,
   normalizeVocabularyKey,
 } from "./core.mjs";
+import { isLearningSample } from "./query.mjs";
 
 export const LEARNING_BACKUP_FORMAT = "typing-game-learning-profile";
 export const LEARNING_BACKUP_VERSION = 1;
@@ -127,6 +128,11 @@ function validateRecord(entityType, key, record) {
   }
 
   validateSamples(record.recentMistakes ?? [], "recentMistakes");
+  if (record.recentSamples !== undefined) {
+    validateSamples(record.recentSamples, "recentSamples");
+    // Drop samples that break LearningSample types; record is a clone.
+    record.recentSamples = record.recentSamples.filter(isLearningSample);
+  }
 
   if (entityType === "sentence") {
     validateSamples(record.recentAnswers ?? [], "recentAnswers");

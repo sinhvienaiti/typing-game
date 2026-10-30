@@ -1,11 +1,15 @@
 import { parseLearningEvent } from "./core.mjs";
-import { parseLearningQuery } from "./query.mjs";
+import { parseLearningLookup, parseLearningQuery } from "./query.mjs";
+
+export { LOOKUP_MAX_IDS } from "./query.mjs";
 
 export const LEARNING_MESSAGE_NAMESPACE = "typing-game:learning:v1";
 export const LEARNING_ATTEMPT_MESSAGE =
   `${LEARNING_MESSAGE_NAMESPACE}:attempt`;
 export const LEARNING_QUERY_MESSAGE =
   `${LEARNING_MESSAGE_NAMESPACE}:query`;
+export const LEARNING_LOOKUP_MESSAGE =
+  `${LEARNING_MESSAGE_NAMESPACE}:lookup`;
 export const LEARNING_ACK_MESSAGE = `${LEARNING_MESSAGE_NAMESPACE}:ack`;
 export const LEARNING_QUERY_RESULT_MESSAGE =
   `${LEARNING_MESSAGE_NAMESPACE}:query-result`;
@@ -54,6 +58,13 @@ export function parseLearningMessage(value) {
       query: parseLearningQuery(value.query),
     };
   }
+  if (value.type === LEARNING_LOOKUP_MESSAGE) {
+    return {
+      type: LEARNING_LOOKUP_MESSAGE,
+      requestId: id,
+      lookup: parseLearningLookup(value.query),
+    };
+  }
   throw new TypeError("learning message type is not supported");
 }
 
@@ -78,10 +89,11 @@ export function makeLearningError(requestIdValue, code, message) {
     requestId: requestId(requestIdValue),
     error: {
       code: typeof code === "string" ? code.slice(0, 64) : "invalid-request",
-      message:
-        typeof message === "string"
+      ...(message === undefined ? {} : {
+        message: typeof message === "string"
           ? message.slice(0, 300)
           : "Learning request failed",
+      }),
     },
   };
 }

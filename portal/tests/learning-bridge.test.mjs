@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { applyLearningEvents } from "../../shared/learning/core.mjs";
+import { parseLearningProfileBackup } from "../../shared/learning/profile-backup.mjs";
 
 // The bridge schedules flushes through window timers.
 globalThis.window ??= globalThis;
@@ -191,3 +193,69 @@ test("bridge ignores messages from a window other than the game frame", async ()
   assert.equal(frame.posted.length, 0);
   assert.equal(stranger.posted.length, 0);
 });
+
+// 233 P1-233-01: an answer nested inside a sample field must not reach the game frame.
+const PREFIX = "typing-game:learning:v1:";
+const SAMPLE_FIELDS = ["occurredAt", "gameId", "activityType", "result", "hintUsed"];
+const NESTED = {
+  object: () => ({ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }),
+  array: () => [{ userAnswer: "PRIVATE_NESTED_USER_ANSWER", expectedAnswer: "PRIVATE_NESTED_EXPECTED_ANSWER" }],
+};
+
+function twoSampleProfile() {
+  const sample = { version: 1, entityType: "vocabulary", entityId: "lantern", gameId: "dragon-hold" };
+  return applyLearningEvents(null, [
+    { ...sample, activityType: "meaning-recall", result: "correct", occurredAt: "2026-10-30T06:00:00.000Z" },
+    { ...sample, activityType: "listening", result: "correct", occurredAt: "2026-10-30T06:01:00.000Z", hintUsed: true },
+  ]);
+}
+
+async function askFromFrame(profile, type) {
+  const game = registeredGame("dragon-hold");
+  const origin = new URL(game.appUrl).origin;
+  const frame = makeFrame();
+  const store = {
+    profile, loads: 0,
+    async load() { this.loads++; return this.profile; },
+    async applyMany() { throw new Error("unexpected write"); },
+  };
+  const query = type === "lookup" ? { entityType: "vocabulary", entityIds: ["lantern"] } : { entityType: "vocabulary" };
+  new ParentLearningBridge(store).handleMessage(
+    { data: { type: PREFIX + type, requestId: "f2-types", query }, origin, source: frame.contentWindow },
+    frame,
+    game,
+  );
+  // Query handlers are fire-and-forget; one turn drains them.
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(frame.posted.length, 1);
+  assert.equal(frame.posted[0].targetOrigin, origin);
+  assert.equal(frame.posted[0].message.type, PREFIX + "query-result");
+  assert.equal(frame.posted[0].message.requestId, "f2-types");
+  assert.equal(store.loads, 1);
+  return frame.posted;
+}
+
+for (const source of ["stored", "backup"]) {
+  for (const field of SAMPLE_FIELDS) {
+    for (const type of ["lookup", "query"]) {
+      test(`F2 types ${type} from a ${source} profile drops a sample whose ${field} nests an answer`, async () => {
+        for (const [kind, nested] of Object.entries(NESTED)) {
+          let profile = twoSampleProfile();
+          const kept = structuredClone(profile.vocabulary.lantern.recentSamples[1]);
+          profile.vocabulary.lantern.recentSamples[0][field] = nested();
+          if (source === "backup") {
+            profile = parseLearningProfileBackup(JSON.stringify(profile));
+            assert.deepEqual(profile.vocabulary.lantern.recentSamples, [kept], kind);
+          }
+          const before = structuredClone(profile);
+          const posted = await askFromFrame(profile, type);
+          const samples = posted[0].message.result.items[0].recentSamples;
+          assert.deepEqual(samples, [kept], kind);
+          assert.deepEqual(Object.keys(samples[0]).sort(), [...SAMPLE_FIELDS].sort());
+          assert.doesNotMatch(JSON.stringify(posted), /PRIVATE_NESTED_/, kind);
+          assert.deepEqual(profile, before, kind);
+        }
+      });
+    }
+  }
+}

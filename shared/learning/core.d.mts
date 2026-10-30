@@ -1,6 +1,14 @@
 export type LearningEntityType = "vocabulary" | "grammar" | "sentence";
 export type LearningResult = "correct" | "wrong";
 
+export type LearningSample = {
+  occurredAt: string;
+  gameId: string;
+  activityType: string;
+  result: LearningResult;
+  hintUsed: boolean;
+};
+
 export type LearningEvent = {
   version: 1;
   entityType: LearningEntityType;
@@ -33,6 +41,7 @@ export type LearningRecord = {
   reviewPriority: number;
   nextReviewAt: string | null;
   sourceGames: string[];
+  recentSamples?: LearningSample[];
   recentMistakes?: Array<Record<string, unknown>>;
   recentAnswers?: Array<Record<string, unknown>>;
   errorTypes?: Record<string, number>;
