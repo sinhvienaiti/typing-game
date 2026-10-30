@@ -23,6 +23,9 @@
     "embers":        { "phase": "I", "aspect": "1:1", "variants": 2, "greyCut": 0.12 },
     "ground-fire":   { "phase": "F", "aspect": "1:1", "loop": true, "variants": 2, "layout": "bbox", "greyCut": 0.15 },
     "fire-burst":    { "phase": "I", "aspect": "16:9", "variants": 1, "greyCut": 0.22,
-                       "note": "trial clip before batch 1; impact-burst look" }
+                       "note": "trial clip before batch 1; impact-burst look" },
+    "smoke-mask":    { "phase": "F", "aspect": "1:1", "variants": 4, "layout": "bbox", "flash": false, "greyCut": 0.0,
+                       "maxSec": 4.0, "startFrac": 0.05, "edgeFade": "radial", "stopAtEdge": ["top", "left", "right"],
+                       "note": "white smoke on black (round 10, owner 30/10): a density mask; the game reads luminance as alpha and colours the smoke in the shader" }
   }
 }
