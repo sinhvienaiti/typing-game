@@ -16,14 +16,15 @@
 Đây là **ý tưởng mới**, nên tính lượt lại từ đầu. Đặt tên `<tên>.c2-try1`, `c2-try2`, `c2-try3`. Giữ chất liệu kim loại trắng ngà viền vàng và lõi lam như chín icon đã nhận. Khung bao gần vuông (không quá 1,3:1). Không vẽ chữ.
 
 - `menu-journey`: một tấm bản đồ sao nhỏ, có đường đi cong nối ba điểm mốc. Điểm cuối là một ghim định vị lam sáng.
-- `next-stage`: hai mũi tên chevron lớn chồng nhau, chỉ sang phải. Có thể có một vạch đích mảnh phía sau.
-  - Phải khác `menu-play`, vốn là một chevron đơn. Kiểm bằng ô so sánh hai icon cạnh nhau.
+- `next-stage`: một mũi tên dày, thân thẳng, chỉ sang phải, xuyên qua một vòng cổng tròn mở (cổng sang ải sau). Vòng cổng có lõi lam.
+  - **Không dùng chevron.** `menu-play` là một chevron đơn; `streak` (đã nhận ở 237, 31/10) là hai chevron.
+  - Kiểm bằng ô so sánh với cả hai icon đó.
 - `menu-armory`: một giá súng nhìn thẳng, hai hoặc ba bóng súng dựng đứng trong khung giá dày. Hoặc một hòm vũ khí mở nắp có lõi sáng.
   - Phải khác `equipment` của 150 (hai súng bắt chéo). Kiểm bằng ô so sánh.
 
 **Kiểm nhỏ (bắt buộc):**
 - Ô 20 và 24 px trên nền tối và nền sáng.
-- Ô so sánh: `next-stage` cạnh `menu-play`; `menu-armory` cạnh `equipment` và `chapter-crest`.
+- Ô so sánh: `next-stage` cạnh `menu-play` và `streak`; `menu-armory` cạnh `equipment` và `chapter-crest`.
 
 **Giới hạn ảnh:** công cụ ảnh trả 429 hoặc báo thử lại sau thì dừng, giữ nguyên mọi file, và ghi dòng cuối `CODEX-WAIT-UNTIL: HH:MM`.
 
