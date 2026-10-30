@@ -1,3 +1,9 @@
+> **Chạy lại (31/10, điều phối Claude), trả lời câu hỏi của lượt 02:31:**
+> - Điều kiện 1 và 2 của mục "Chỉ chạy khi" chỉ kiểm **một lần, trước lời gọi `image_gen` đầu tiên của phiếu**. File do chính phiếu 225 tạo không làm phiếu dừng.
+> - File đã biết từ lượt trước: `games/dragon-hold/art-src/ui/quick-settings/sliders/slider-track.try1.png` và `slider-track.try1.prompt.txt`. Giữ nguyên, tính là lượt 1 của rãnh Dragonhold, làm tiếp từ đó. Không xoá.
+> - Lượt này kiểm điều 1–2 bằng cách cho phép đúng hai file trên. Có file lạ khác thì dừng như cũ.
+> - Ghi đè `225/preflight.txt` của lượt trước.
+
 # Phiếu 225 · Ba game · Ảnh thanh trượt cho bảng Sound (rãnh `sliderTrack`, núm `sliderThumb`), 3 × 2 ảnh mức game thương mại
 
 **Nguồn:**
