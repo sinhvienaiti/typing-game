@@ -2,6 +2,8 @@
 
 > **Chạy lại (30/10, 12:58, điều phối):** lượt 11:24 dừng vì `docs/changelog/2026-10-30-kit-audio-file-bank.md` chưa được theo dõi. File đó của phiếu 198 và nay đã commit (`git log -1 -- docs/changelog/2026-10-30-kit-audio-file-bank.md`). Các file chưa commit của 214 trong `portal/` là file đã biết; không sửa phần của 214 ngoài những gì 215 cần, và báo cáo ghi rõ đoạn nào là của 215. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
 
+> **Chạy lại lần 3 (30/10, 13:00, điều phối):** repo cha có nhiều đầu ra chưa commit của các phiếu Codex khác. Các file sau là **file đã biết**, không phải file lạ: mọi đường mà báo cáo `212`–`217` liệt kê (kể cả `docs/changelog/2026-10-30-*.md` của 214, 216, 217; `portal/**` của 214; `nginx`/`scripts` của 216; `tools/audio-lab/**` của 217) và `docs/codex-queue/**`. Chỉ dừng khi có file trong vùng ghi của 215 mà không báo cáo nào nhận. Không sửa phần của phiếu khác. Các lệnh kiểm của phiếu là bắt buộc.
+
 **Nguồn:**
 - `docs/games/SPLIT_PLAN.md` §9.2, hàng "Truy vấn học": "Thêm `typing-game:learning:v1:lookup` theo danh sách ≤ 200 `entityId`, trả cả `recentSamples`".
 - `docs/games/DEPLOY_INDEPENDENCE.md` §7, hàng 6: "portal từ chối tin `lookup` của Rồng". Cách sửa ghi ở đó: "một bộ xử lý `lookup` theo `gameId`. Thêm game không cần sửa portal".

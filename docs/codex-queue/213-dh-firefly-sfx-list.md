@@ -1,5 +1,7 @@
 # Phiếu 213 · Dragonhold · Map 1 (L2-cau): danh sách âm Firefly ghép với các clip VFX lửa Firefly
 
+> **Chạy lại (30/10, 13:00, điều phối):** 212 đã được Claude duyệt và commit (`git log -1 -- docs/games/audio/firefly/README.md`; `check.mjs` thoát 0, selftest 3/3). Điều kiện "212 xong, duyệt, commit" đã đạt. Đầu ra chưa commit của 214–217 trong repo cha là file đã biết.
+
 **Nguồn:**
 - `docs/HANDOFF_CURRENT.md` §3, làn "Âm thanh: đường Firefly". Chủ dự án tự tạo âm trong Adobe Firefly (Generate Sound Effects, model của Adobe, dùng thương mại được). Làn FF phải soạn danh sách âm theo mã sự kiện: prompt tiếng Anh, gợi ý diễn bằng giọng, nhịp VFX. Danh sách đó chưa có: `docs/games/audio/` chưa tồn tại.
 - `docs/games/MAP1_PRODUCTION.md` §1.1, cổng G3 của Dragonhold: "Âm chưa ai nghe".
