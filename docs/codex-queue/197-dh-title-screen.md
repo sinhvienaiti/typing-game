@@ -1,5 +1,7 @@
 # Phiếu 197 · Dragonhold · Màn tựa kiêm màn tải (DH-13)
 
+> **Chạy lại (30/10, 10:55, điều phối):** lượt trước dừng vì 195 chưa xong. Lượt này chạy sau 194 và 195 trong cùng làn. File chưa commit của 187, 194, 195 là file đã biết (xem báo cáo của từng phiếu); không sửa phần của chúng. Chỉ chạy khi `194-report.md` và `195-report.md` đều ghi hoàn tất; chưa thì dừng, ghi lý do.
+
 **Nguồn:**
 - `docs/games/MAP1_PRODUCTION.md` §1.2 mục 8: "DH-13 · P1 · G5. Không có màn tựa. **Sửa:** màn tựa trên nền cảnh map: tên game, Enter để bắt đầu, ba dòng cách chơi, về cổng game; đi được bằng phím và chuột."
 - `docs/games/map1/UI_IMAGERY.md` §2: "Thiếu màn tựa là chỗ hở lớn nhất."

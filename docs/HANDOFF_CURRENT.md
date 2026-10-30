@@ -90,10 +90,9 @@ Mục 3 bên dưới là lịch sử.
   - Đã gửi chủ dự án 32 file nghe, mỗi bộ 9 giây, cùng nhịp và cùng độ to. File ở `tmp/keys-firefly/listen-sets/`, dựng bằng `bash tools/audio-lab/run.sh tools/audio-lab/keys/firefly_listen_sets.py`.
   - Chủ dự án bảo tăng thêm một làn Codex, nên giờ chạy **hai làn** song song:
     - `s4`: 212 → 214, 215, 216, 217, 206;
-    - `s6`: 194 chạy lại trong `.wt-dh-codex` → 199, 202 trong `.wt-td-scenery` → 200 trong `.wt-td-ui`.
+    - `s6`: 199, 202 trong `.wt-td-scenery` → 200 trong `.wt-td-ui`; khi `s6` xong, `s7` tự chạy 194 → 195 → 197 trong `.wt-dh-codex` (194 lượt 10:43 dừng vì phần dở của 195, bị cắt lúc đổi làn 08:43; đã ghi chú vào ba phiếu).
   - Hai worktree Wordwoven mới cắt từ `td-1c` `2a1f61d`, có liên kết media như `.wt-td-1c`.
   - Đã bỏ lệnh chờ `s5`, vì 194 nay nằm trong `s6`.
-  - Sau 194: duyệt và commit 187 cùng 194, rồi xếp 195 và 197 chạy lại.
 - **Kết quả và quyết định (30/10, khoảng 10:45):** phiếu 218 chỉ ra 32 bộ (458 trên 490 bộ đạt điểm bị loại vì gần trùng). Chủ dự án nghe 10 bộ bị loại và chốt: **tạm giữ 32 bộ**, sau cần thì làm thêm. Cách làm thêm ghi ở `docs/games/audio/KEYS_FIREFLY_HANDOFF.md` §5 (hạ `MIN_DISTANCE`, sửa điểm độ lặp, ồn nền, hoặc tạo âm Firefly mới). Tài liệu đó cũng là README cho folder âm trên Drive.
 
 - Chủ dự án thấy chỉ có 7 bộ ("tôi tải hơn 400 file âm cơ mà"), rồi chốt: **80 bộ trở lên, mỗi bộ 70–100 biến thể, khoảng 6 điểm là được**. Giữ 7 id cũ (mặc định Bright Clack) cho bộ tốt nhất mỗi họ.

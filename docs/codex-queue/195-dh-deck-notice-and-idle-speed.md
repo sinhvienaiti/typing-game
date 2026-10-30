@@ -1,5 +1,7 @@
 # Phiếu 195 · Dragonhold · Báo khi bộ từ lỗi hay thiếu, chặn Low ở bản phát hành, tự tua ×1,75 khi không có chữ
 
+> **Chạy lại (30/10, 10:55, điều phối):** lượt đầu (08:43) bị điều phối cắt giữa chừng khi đổi làn; lượt 09:20 dừng vì thấy chính phần dở đó. Các file sau là **việc dở của chính phiếu này**: `src/app/app.css`, `src/app/deck-boot.ts`, `src/app/idle-speed.ts`, `src/app/quality.ts`, `tests/app/deck-boot.test.ts`, `tests/app/idle-estimate.test.ts`, `tests/app/idle-speed.test.ts`, `tests/app/pinned-deck.test.ts`, `tests/app/quality.test.ts`, cùng các đoạn trong `src/app/app.ts` và `src/app/learning.ts` về khởi động lại bộ từ, chất lượng và tăng tốc lúc không có từ (`fast-forward`). Đọc `git diff`, giữ phần đúng, làm tiếp đến hết phiếu. File chưa commit của 187 và 194 (xem `194-report.md`) cũng là file đã biết; không sửa phần của chúng. File lạ ngoài tập 187, 194, 195 thì dừng.
+
 **Nguồn:**
 - `docs/games/MAP1_PRODUCTION.md` §1.2 mục 2 (DH-02 · P0 · G7): "Bộ từ rỗng mà người chơi không được báo … không vào đợt". Luật ngôn ngữ 28/10 trong `AGENTS.md` thay chữ "thông báo tiếng Việt" của MAP1: bảng báo viết tiếng Anh.
 - Cùng mục, mục 10: DH-18 gộp vào DH-15, "không cho chọn Low, và `?q=low` ở bản production dùng Medium". Bảng Settings là việc của phiếu 192. Phiếu này chỉ làm luật chất lượng.

@@ -208,10 +208,10 @@ Cách chạy: [`tools/codex-run/README.md`](../tools/codex-run/README.md). Model
 | 191 | [Last Line: gắn bộ tiếng phím Firefly vào game](codex-queue/191-ts-keys-in-game.md); `gpt-6.1-sol` high | Last Line | Mã/media | Làn P6b: Claude mở sau khi duyệt 189–190 và đồng bộ kit |
 | 192 | [Dragonhold: nút Settings, nút loa và bộ tiếng phím](codex-queue/192-dh-keys-and-panels.md); `gpt-6.1-sol` high | Dragonhold | Mã/media | Làn P6b |
 | 193 | [Wordwoven: nút Settings, nút loa và bộ tiếng phím](codex-queue/193-td-keys-and-panels.md); `gpt-6.1-sol` high | Wordwoven | Mã/media | Làn P6b |
-| 194 | [Dragonhold: Đường ảnh UI: gắn 36 icon đã nhận thay SVG, emoji và rêu CSS](codex-queue/194-dh-ui-art-icons.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s6 (chạy lại, 30/10 10:45) |
-| 195 | [Dragonhold: Báo khi bộ từ lỗi hay thiếu, chặn Low ở bản phát hành, tự tua ×1,75 khi không có chữ](codex-queue/195-dh-deck-notice-and-idle-speed.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s3 sau 194 |
+| 194 | [Dragonhold: Đường ảnh UI: gắn 36 icon đã nhận thay SVG, emoji và rêu CSS](codex-queue/194-dh-ui-art-icons.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s7 (chạy lại lần 3, sau s6) |
+| 195 | [Dragonhold: Báo khi bộ từ lỗi hay thiếu, chặn Low ở bản phát hành, tự tua ×1,75 khi không có chữ](codex-queue/195-dh-deck-notice-and-idle-speed.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s7, chạy lại sau 194 |
 | 196 | [Dragonhold: Ổ icon và khung thanh HUD (8 ảnh: ô kỹ năng, ô vật phẩm, ổ icon, ổ sao, khung máu và Rage)](codex-queue/196-dh-hud-sockets.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s3 |
-| 197 | [Dragonhold: Màn tựa kiêm màn tải (DH-13)](codex-queue/197-dh-title-screen.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s3 sau 194, 195 |
+| 197 | [Dragonhold: Màn tựa kiêm màn tải (DH-13)](codex-queue/197-dh-title-screen.md); `gpt-6.1-sol` high | Dragonhold | Phiếu 29–30/10 | Làn s7, chạy lại sau 195 |
 | 198 | [Kit dùng chung: Kho âm từ file theo manifest v2: biến thể, giải mã lười, nhạc qua bus](codex-queue/198-kit-audio-file-bank.md); `gpt-6.1-sol` high | Kit dùng chung | Phiếu 29–30/10 | Làn s3 |
 | 199 | [Wordwoven: C9: `prepare-scenery.mjs`, atlas màu và pháp tuyến cùng manifest từ tám cây 116](codex-queue/199-td-prepare-scenery.md); `gpt-6.1-sol` high | Wordwoven | Phiếu 29–30/10 | Làn s6, worktree `.wt-td-scenery` đã cắt |
 | 200 | [Wordwoven: Gắn ảnh đã nhận vào màn tựa và thẻ kết (nền 158, logo và favicon 113, crest, banner, divider 115)](codex-queue/200-td-title-results-art.md); `gpt-6.1-sol` high | Wordwoven | Phiếu 29–30/10 | Làn s6, worktree `.wt-td-ui` đã cắt |

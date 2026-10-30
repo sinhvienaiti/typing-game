@@ -12,6 +12,8 @@
 
 > **Chạy lại (30/10, 08:44, điều phối):** lượt đầu (08:28) bị ngắt vì chủ dự án đổi tài khoản Codex (401 `token_revoked`). Các thay đổi chưa commit trong worktree là việc dở của chính phiếu này. Đọc `git status` và `git diff`, giữ phần đúng, làm tiếp cho đủ phiếu, rồi kiểm như thường; ghi đè báo cáo cũ nếu có.
 
+> **Chạy lại lần 3 (30/10, 10:55, điều phối):** lượt 10:43 dừng vì thấy file lạ. Các file đó là phần dở của **phiếu 195**: `src/app/app.css`, `src/app/deck-boot.ts`, `src/app/idle-speed.ts`, `src/app/quality.ts`, `tests/app/deck-boot.test.ts`, `tests/app/idle-estimate.test.ts`, `tests/app/idle-speed.test.ts`, `tests/app/pinned-deck.test.ts`, `tests/app/quality.test.ts`, cùng các đoạn trong `src/app/app.ts` và `src/app/learning.ts` về khởi động lại bộ từ, chất lượng và tăng tốc lúc không có từ (`fast-forward`). Lượt đầu của 195 (08:43) bị điều phối cắt khi đổi làn. Chúng là file **đã biết**, không phải file lạ. Không sửa, không hoàn tác chúng; chỉ làm phần 194. Báo cáo ghi rõ đoạn nào trong `app.ts`, `learning.ts`, `results.ts`, `README.md` là của 194. File lạ ngoài tập 187, 194, 195 thì vẫn dừng.
+
 ## Chỉ chạy khi
 
 - Phiếu 187 đã chạy xong (có `docs/codex-queue/187-report.md`). Tốt nhất Claude đã duyệt và commit 187; chưa commit thì vẫn chạy theo ý dưới.
