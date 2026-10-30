@@ -606,6 +606,20 @@ Muốn Admin sửa `default` và `effects` được, game phải đọc chúng t
   - Dòng "Saved sound · unavailable" giống hệt Wordwoven.
 - `pendingKeyboardChoices(savedId, builtIn)`: danh sách tạm (Off, âm gốc, id đã lưu hiện "Loading…") để dựng bảng Sound **ngay**, trước khi danh mục về.
 - `QuickSettings.setChoiceOptions(id, options)`: thay danh sách một hàng chọn sau khi bảng đã dựng.
+  - Sửa sau G3 (31/10): dựng lại danh sách **không** phát preview, không dừng preview đang phát, không dời focus bàn phím (giữ trên đúng dòng đó; dòng đó không còn thì về dòng đang chọn), giữ dòng đang chọn và vị trí cuộn. Chỉ focus, rê chuột hay chọn của người chơi mới phát preview.
+  - Chuột đứng yên mà dòng khác trượt tới dưới nó: Chrome gửi `pointerover`/`pointerenter` cho dòng đó khoảng 0,8 s sau, không có `pointermove`. Kit không phát, không dừng gì cho tới khi chuột thật sự di chuyển.
+    - `QuickSettings` nhớ chỗ chuột cuối cùng (`pointermove`, `pointerdown`, `pointerover`) và đưa cho danh sách mới (`KeyboardSoundChoices` nhận `settle: { pointer }`).
+    - Sự kiện chuột đúng chỗ đó là trình duyệt bắt kịp bố cục. Ở chỗ khác là người chơi, và từ đó mọi rê chuột lại phát preview. Chưa biết chỗ chuột thì sự kiện đầu tiên danh sách thấy cho biết chỗ đó.
+  - Bảng đang mở mà cao lên hay thấp đi khi dựng lại thì giữ nguyên mép trên tới khi đóng (hoặc khung đổi cỡ). Trước đó bảng căn giữa lại, nhảy lên khoảng 80–100 px khi danh mục về, nên cú bấm nhắm vào Relay có thể rơi vào bộ khác. Bảng dài xuống dưới, không vừa thì cuộn; lần mở sau lại căn giữa.
+- `QuickSettings` nhận thêm (sửa sau G3, 31/10, đều tuỳ chọn, không phá):
+  - `keyboardFetch: { fetchJson?, fetchBytes? }`: hàm tải mà hàng âm phím của bảng Sound dùng. `fetchJson` tải manifest bộ âm người chơi chọn (game truyền `timedJson(3000, { cache: "default" })`). `fetchBytes` tải file mẫu và mọi preview (game truyền `timedBytes()`). Bỏ trống thì dùng fetch của kit, không hạn giờ, như trước.
+  - `onKeyboardLoad(result)`: bộ chọn trong bảng tải xong, mọi trạng thái (`pending` là không có mẫu nào).
+  - `onKeyboardFail(choice)`: bộ chọn trong bảng không phát được (không có mẫu nào, hoặc nạp lỗi). Game cho âm gốc phát thay, không lưu (mục 5.3). Chỉ lần chọn mới nhất báo.
+  - Hai hook này đi qua `KeyboardSoundPreview` (`onLoad`, `onFail` mới).
+- `timedBytes(timeoutMs = 8000, { cache })`: `fetchBytes` có hạn giờ, cùng cách với `timedJson` (`KEYBOARD_SAMPLE_TIMEOUT_MS`). Hết giờ, lỗi mạng hay mã khác 2xx thì từ chối, file đó tính là thiếu, nên tải một bộ luôn kết thúc.
+- `TypingSounds.load` dừng khi đợt đầu không giải mã được file nào: phần còn lại không tải, ghi vào `missing`. Host treo thì một bộ kết thúc sau **một** lần hết giờ (8 s), không phải 8 s cho mỗi đợt.
+  - Trước đó bộ đủ (80 phím, 8 space: 6 đợt) chọn trong bảng im khoảng 48 s rồi mới báo `onKeyboardFail`. Lúc khởi động Last Line tự đếm lỗi đợt đầu nên không bị; nay luật ở kit, cả bảng Sound lẫn lúc khởi động đều có, game không cần tự đếm.
+- Dòng vừa đang chọn vừa bị tắt ("Saved sound · unavailable") đọc được: chữ `--kit-qs-muted` trên nền `--kit-qs-bg`, có vạch màu accent bên trái. Dòng đang chọn giữ nền accent khi rê chuột. Mọi trạng thái từ 4,5:1 trở lên (`keyboard-panel.test.ts`).
 - Đợt giải mã đầu: tối đa `KEYBOARD_FIRST_BATCH_SPACES` (4) space, phần còn lại là phím. Bộ thiếu loại nào thì chỗ trống chuyển cho loại kia, đợt vẫn 16 file.
 
 ### 4.7 API module chung (bước code)
@@ -680,7 +694,11 @@ export interface TypingFeel {
 ### 5.1 Bước dữ liệu: một game làm gì
 
 1. Lúc build: `VITE_TYPING_FEEL_ORIGIN`. **Mã không có giá trị mặc định**; script build đặt nó, cùng cách với `VITE_PORTAL_ORIGIN` của HOSTING_PLAN bước 1:
-   - `pnpm build:local` ở repo cha và `pnpm dev` của game: `https://feel.typing-game.local`;
+   - `dev:<game>:app` và `build:<game>` của repo cha đặt `https://feel.typing-game.local` (nên `pnpm dev`, `pnpm build:local` và `./play.sh` ở repo cha đều có);
+   - `pnpm dev`, `pnpm build` hay `pnpm check` chạy riêng trong repo game không đặt gì: Typing Feel tắt, game vẫn chơi (mục 5.3).
+     - `./play.sh` kiểm mỗi lần chạy, trước khi mở trang: game có `vite.config.ts` đọc biến này mà `dist/index.html` thiếu `preconnect` tới origin của `build:<game>` thì build lại bằng `pnpm build:<game>`; vẫn thiếu thì dừng và in lệnh cần chạy.
+     - Game có `vite.config.ts` đọc biến này mà `build:<game>` của cha không đặt biến thì `./play.sh` dừng ngay và in hai script cần sửa (`build:<game>`, `dev:<game>:app`). Không có chốt này thì game đã bỏ bản chép vẫn được phục vụ với Typing Feel tắt mà không ai biết. Vì vậy bước B của một game phải vào cùng lần merge với hai dòng script đó.
+     - Host play đọc thẳng `games/<game>/dist` (nginx, không build). Chạy `pnpm build` hay `pnpm check` trong repo game **sau** `./play.sh` thì host play lại có bản Typing Feel tắt, tới khi chạy lại `./play.sh` hoặc `pnpm build:<game>`.
    - `deploy:pack` cho bản online: `https://feel.<tên-miền>`;
    - clone riêng hay CI không đặt gì: Typing Feel tắt, game vẫn chơi (mục 5.3).
    - Không ghi giá trị máy nhà vào `.env.production` đã commit: bản online sẽ mang `typing-game.local`, và `check-pack` báo `local-host`.
@@ -689,6 +707,7 @@ export interface TypingFeel {
 4. Dựng bảng Sound **ngay** với `pendingKeyboardChoices(saved, builtIn)`. Đọc trường save **thô**, trước khi mặc định cứng của game điền vào.
 5. Khi có danh mục: `settleKeyboardChoice(trường save thô hoặc null, …)`, rồi `quick.setChoiceOptions('keyboard', settled.options)`. Chỉ lưu khi `repaired`.
    - Manifest bộ âm tải bằng `timedJson(3000, { cache: "default" })`: host feel treo thì bộ đó coi như hỏng, phát âm gốc. Nhờ vậy `GameKeyboard.preload` của Dragonhold (`keyboard.ts:51/60`) không chờ mãi.
+   - Bảng Sound dùng cùng hàm tải: `new QuickSettings({ …, keyboardFetch: { fetchJson: timedJson(3000, { cache: "default" }), fetchBytes: timedBytes() }, onKeyboardFail })`. Trong `onKeyboardFail`, bộ người chơi vừa chọn không phát được thì cho âm gốc phát thay, không lưu; lần chọn sau thì thôi thay. Không cần lớp con `TypingSounds` để đổi hàm tải mặc định.
 6. Cổng vào trận chờ đợt âm đầu **tối đa 1,5 s**, rồi vào trận dù chưa có âm.
 
 ### 5.2 Lỗi hôm nay phải sửa trước khi đọc từ host khác

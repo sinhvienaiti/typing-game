@@ -111,6 +111,31 @@ describe("219 progressive decoding and memory", () => {
     expect(await loading).toEqual({ loaded: 99, missing: ["key-19.ogg"] });
     expect(fetchBytes).toHaveBeenCalledTimes(100); expect(sounds.play("key")).toBe(true);
   });
+  it("a first batch that decodes nothing ends the load: the rest is never asked for and is listed as missing (TYPING_FEEL_SERVICE.md §5.3)", async () => {
+    const { sounds } = player();
+    const fetchBytes = vi.fn(async (url: string): Promise<ArrayBuffer> => { throw new Error(url + ": 404"); });
+    const loading = sounds.load(profile(), fetchBytes); await vi.runAllTimersAsync();
+    expect(await loading).toEqual({ loaded: 0, missing: names() });
+    expect(fetchBytes).toHaveBeenCalledTimes(KEYBOARD_DECODE_BATCH_SIZE);
+    // Files that arrive but cannot be decoded end it the same way.
+    const { ctx, sounds: other } = player();
+    ctx.decodeAudioData.mockRejectedValue(new Error("EncodingError"));
+    bytes.mockClear();
+    const undecodable = other.loadKeyboardManifest("/deep/keys-manifest.json", "deep", "Deep", async () => ({ files: names() }), bytes, true);
+    await vi.runAllTimersAsync();
+    expect(await undecodable).toEqual({ id: "deep", state: "pending", keys: 0, spaces: 0, missing: names().map((name) => "/deep/" + name) });
+    expect(bytes).toHaveBeenCalledTimes(KEYBOARD_DECODE_BATCH_SIZE);
+  });
+  it("one sample decoded in the first batch keeps the load going; a set of one batch or less is asked for whole", async () => {
+    const { sounds } = player();
+    const fetchBytes = vi.fn(async (url: string) => { if (url !== "key-07.ogg") throw new Error(url + ": 404"); return bytes(url); });
+    const loading = sounds.load(profile(), fetchBytes); await vi.runAllTimersAsync();
+    expect(await loading).toEqual({ loaded: 1, missing: names().filter((name) => name !== "key-07.ogg") });
+    expect(fetchBytes).toHaveBeenCalledTimes(100);
+    const short = vi.fn(async (url: string): Promise<ArrayBuffer> => { throw new Error(url + ": 404"); });
+    const small = sounds.load(profile("warm", KEYBOARD_DECODE_BATCH_SIZE), short); await vi.runAllTimersAsync();
+    expect(await small).toEqual({ loaded: 0, missing: names(KEYBOARD_DECODE_BATCH_SIZE) });
+  });
   it("switching releases the old pack and voice buffers, and switching back requires a reload", async () => {
     const { sounds } = player();
     const sources: Source[] = [];

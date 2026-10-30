@@ -402,14 +402,16 @@ describe("QuickSettings choice options after the catalogue (setChoiceOptions)", 
     expect(h.row("keyboard").querySelector<HTMLImageElement>(".kit-keyboards__listen img")?.getAttribute("src")).toBe(`${ART}listen.png`);
   });
 
-  it("while the Sound panel is open, focus stays in the list the player was moving through", () => {
+  it("while the Sound panel is open, focus stays on the option the player was on, in the new list", () => {
     const h = setup({ keyboardProfiles: pendingKeyboardChoices("creamy", RELAY), countdownMs: 0 });
     h.qs.open("sound");
     listed(h)[1]!.focus();
     expect(h.row("keyboard").contains(document.activeElement)).toBe(true);
     h.qs.setChoiceOptions("keyboard", settleKeyboardChoice("creamy", CATALOG, RELAY).options);
     expect(h.qs.isOpen).toBe(true);
-    expect((document.activeElement as HTMLElement | null)?.dataset.value).toBe("creamy");
+    // Relay, not the selected set: a rebuild never moves keyboard focus.
+    expect((document.activeElement as HTMLElement | null)?.dataset.value).toBe("relay");
+    expect(listed(h).find((b) => b.getAttribute("aria-selected") === "true")?.dataset.value).toBe("creamy");
   });
 
   it("new options that lack the saved id repair it through onChange, as at construction", () => {
