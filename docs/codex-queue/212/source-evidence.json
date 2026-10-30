@@ -1,0 +1,202 @@
+{
+  "key.ok": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:120; games/typing-survival/src/audio/theme-audio.ts:222",
+    "condition": "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+  },
+  "key.bad": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:129; games/typing-survival/src/audio/theme-audio.ts:228",
+    "condition": "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+  },
+  "word.load": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/theme-audio.ts:234–238",
+    "condition": "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+  },
+  "word.perfect": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/theme-audio.ts:234–238",
+    "condition": "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+  },
+  "word.full": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:140–146; games/typing-survival/src/audio/type-audio.ts:72–77",
+    "condition": "Từ vẫn hoàn tất khi bến đã đầy: view/typing-feel.ts:140–146; content/chapter-1.ts:39–53"
+  },
+  "streak.up": {
+    "calls": "games/typing-survival/src/view/typing-feel.ts:160–162; games/typing-survival/src/audio/type-audio.ts:81–86",
+    "condition": "Gõ trong bất kỳ bến súng nào; content/chapter-1.ts:39–53"
+  },
+  "gun.xung": {
+    "calls": "games/typing-survival/src/view/shots.ts:178; games/typing-survival/src/audio/theme-audio.ts:248–250",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.xung.tail": {
+    "calls": "games/typing-survival/src/view/shots.ts:181,431; games/typing-survival/src/audio/theme-audio.ts:254–256",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.tia.start": {
+    "calls": "games/typing-survival/src/view/combat.ts:261–266; games/typing-survival/src/audio/theme-audio.ts:260–267",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.tia.end": {
+    "calls": "games/typing-survival/src/view/combat.ts:269–271; games/typing-survival/src/audio/theme-audio.ts:270–271",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.tia.loop": {
+    "calls": "games/typing-survival/src/view/beams.ts:172–184; games/typing-survival/src/audio/theme-audio.ts:206–214",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.tia.pulse": {
+    "calls": "games/typing-survival/src/view/combat.ts:193,294; games/typing-survival/src/audio/theme-audio.ts:275–280",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.tan.fire": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:71–72",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.ray.armed": {
+    "calls": "games/typing-survival/src/view/beams.ts:163–165; games/typing-survival/src/audio/gun-audio.ts:76",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.ray.charge": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:73–74",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.ray.fire": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:75–76",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.phao.launch": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:77–78",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "gun.phao.burst": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:79–82; games/typing-survival/src/view/combat.ts:197–198",
+    "condition": "Chọn súng tương ứng trong 2/5; app/journey.ts:142,162,194–205; content/chapter-1.ts:39–53"
+  },
+  "hit.t1": {
+    "calls": "games/typing-survival/src/view/combat.ts:185–198; games/typing-survival/src/audio/theme-audio.ts:294–303",
+    "condition": "Đòn thường/crit/perfect có T1–T3; content/chapter-1.ts:39–53"
+  },
+  "hit.t2": {
+    "calls": "games/typing-survival/src/view/combat.ts:185–198; games/typing-survival/src/audio/theme-audio.ts:294–303",
+    "condition": "Đòn thường/crit/perfect có T1–T3; content/chapter-1.ts:39–53"
+  },
+  "hit.t4": {
+    "calls": "games/typing-survival/src/view/combat.ts:186,198; games/typing-survival/src/audio/theme-audio.ts:298; games/typing-survival/src/kit/feedback/tiers.ts:38–39",
+    "condition": "Ngoài mọi ải hiện tại: chỉ một nơi gọi audio.hit, view/combat.ts:186,198, t tối đa 3; tail cần T4, kit/feedback/tiers.ts:38–39; quái lớn chết không gọi audio.hit"
+  },
+  "hit.armour": {
+    "calls": "games/typing-survival/src/view/combat.ts:185–190; games/typing-survival/src/audio/theme-audio.ts:82",
+    "condition": "Brute Armor 4 từ 80 s; content/foes.ts:46; content/chapter-1.ts:49; affix giáp còn có ở sim/pace.ts:244–250"
+  },
+  "kill.swarm": {
+    "calls": "games/typing-survival/src/view/combat.ts:351–366; games/typing-survival/src/audio/theme-audio.ts:319",
+    "condition": "Swarm và Brute không mang cờ Scout; content/foes.ts:44,46; content/chapter-1.ts:39–53"
+  },
+  "kill.elite": {
+    "calls": "games/typing-survival/src/view/combat.ts:351–366; games/typing-survival/src/audio/theme-audio.ts:319",
+    "condition": "Cụm có Scout từ 12 s, không lấy kích cỡ làm cờ; content/chapter-1.ts:48; view/combat.ts:337,351,366"
+  },
+  "foe.shot": {
+    "calls": "games/typing-survival/src/view/combat.ts:233–235; games/typing-survival/src/audio/theme-audio.ts:336",
+    "condition": "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+  },
+  "foe.shot.down": {
+    "calls": "games/typing-survival/src/view/combat.ts:237–240; games/typing-survival/src/audio/theme-audio.ts:344",
+    "condition": "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+  },
+  "hurt.hull": {
+    "calls": "games/typing-survival/src/view/combat.ts:223–228; games/typing-survival/src/audio/theme-audio.ts:352–365",
+    "condition": "Scout từ 12 s; content/chapter-1.ts:48; foe.shot.down cần Pulse Gun trong lựa chọn 2/5"
+  },
+  "hurt.breach": {
+    "calls": "games/typing-survival/src/view/combat.ts:213–218; games/typing-survival/src/audio/theme-audio.ts:352–360",
+    "condition": "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+  },
+  "hurt.drain": {
+    "calls": "games/typing-survival/src/view/combat.ts:245–250; games/typing-survival/src/audio/theme-audio.ts:372–378",
+    "condition": "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+  },
+  "support.repair": {
+    "calls": "games/typing-survival/src/view/combat.ts:253–258; games/typing-survival/src/sim/pace.ts:229–233",
+    "condition": "Director bật và chọn support khi nguy; content/chapter-1.ts:52; content/stage-rules.ts:103; sim/pace.ts:97–98,229–233"
+  },
+  "alarm.surge": {
+    "calls": "games/typing-survival/src/app/main.ts:649; games/typing-survival/src/audio/theme-audio.ts:392–399",
+    "condition": "Hai surge gốc 50/115 s; content/chapter-1.ts:47; pace có thể dời, sim/pace.ts:223–225"
+  },
+  "end.win": {
+    "calls": "games/typing-survival/src/view/combat.ts:283–285; games/typing-survival/src/audio/theme-audio.ts:403–409",
+    "condition": "Giữ đủ 150 s; content/chapter-1.ts:42"
+  },
+  "end.lose": {
+    "calls": "games/typing-survival/src/view/combat.ts:283–285; games/typing-survival/src/audio/theme-audio.ts:403–415",
+    "condition": "Để quái áp sát/vượt tuyến hoặc Armor cạn; content/chapter-1.ts:24,42–53; sim/pace.ts:119–145"
+  },
+  "ui.move": {
+    "calls": "games/typing-survival/src/app/main.ts:393,472,502; games/typing-survival/src/app/journey.ts:222,235",
+    "condition": "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+  },
+  "ui.select": {
+    "calls": "games/typing-survival/src/app/main.ts:416,579; games/typing-survival/src/app/journey.ts:205,261",
+    "condition": "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+  },
+  "ui.back": {
+    "calls": "games/typing-survival/src/app/main.ts:398,483; games/typing-survival/src/app/journey.ts:200,267",
+    "condition": "Menu, cài đặt và chọn súng quanh First Shift; app/journey.ts:142,194–205; app/main.ts:390–416"
+  },
+  "star.get": {
+    "calls": "games/typing-survival/src/app/main.ts:182–186",
+    "condition": "Ải khác s0 và stars.some(Boolean); app/main.ts:182–186; content/chapter-1.ts:39–42"
+  },
+  "music.calm": {
+    "calls": "games/typing-survival/src/audio/theme-audio.ts:131–151",
+    "condition": "Có thể phát trong/ngoài trận nhưng loại khỏi SFX; app/main.ts:651; content/chapter-1.ts:39–53"
+  },
+  "music.surge": {
+    "calls": "games/typing-survival/src/app/main.ts:651; games/typing-survival/src/audio/theme-audio.ts:434–443",
+    "condition": "Có thể phát trong/ngoài trận nhưng loại khỏi SFX; app/main.ts:651; content/chapter-1.ts:39–53"
+  },
+  "leader.horn": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:90–91",
+    "condition": "Ngoài ải; đầu tiên c1-s2, objective hunt; content/chapter-1.ts:57–60; c1-s1 chỉ hold, :42"
+  },
+  "leader.down": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:92–96",
+    "condition": "Ngoài ải; đầu tiên c1-s2, objective hunt; content/chapter-1.ts:57–60; c1-s1 chỉ hold, :42"
+  },
+  "rift.warn": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:101–104",
+    "condition": "Ngoài ải; đầu tiên c1-s3; content/chapter-1.ts:74–78; c1-s1 hazard null, :43"
+  },
+  "rift.open": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:105–107",
+    "condition": "Ngoài ải; đầu tiên c1-s3; content/chapter-1.ts:74–78; c1-s1 hazard null, :43"
+  },
+  "shield.hit": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:83–84",
+    "condition": "Ngoài ải; đầu tiên c1-s4; content/chapter-1.ts:91–101; c1-s1 chỉ brute, :49"
+  },
+  "shield.break": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:85–87",
+    "condition": "Ngoài ải; đầu tiên c1-s4; content/chapter-1.ts:91–101; c1-s1 chỉ brute, :49"
+  },
+  "foe.split": {
+    "calls": "games/typing-survival/src/view/gunfx.ts:88–89; games/typing-survival/src/sim/projectiles.ts:51",
+    "condition": "Ngoài ải; chưa có ải đầu tiên trong mã; content/chapter-1.ts:36–107 và content/stage-s0.ts:67 không có splitter pack; sim/spawn.ts:180–184 bỏ loại thiếu cấu hình"
+  },
+  "hit.sub": {
+    "calls": "games/typing-survival/src/audio/theme-audio.ts:294–303",
+    "condition": "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; Sự kiện nền tảng có trong ải."
+  },
+  "hit.tail": {
+    "calls": "games/typing-survival/src/audio/theme-audio.ts:294–307",
+    "condition": "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; T4 chưa đạt trong ải."
+  },
+  "kill.chime": {
+    "calls": "games/typing-survival/src/audio/theme-audio.ts:315–328",
+    "condition": "Lớp dự kiến tách file, chưa có id riêng trong SOUND_IDS. AUDIO_PIPELINE §6.3 mục 3 / §8.3; Sự kiện nền tảng có trong ải."
+  },
+  "gun.xung.loop": {
+    "calls": "games/typing-survival/src/audio/gun-audio.ts:37; games/typing-survival/src/view/shots.ts:178–181,431",
+    "condition": "Không còn sự kiện loop cơ khí riêng; per-shot và tail thay thế trong hướng B."
+  }
+}

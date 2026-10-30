@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "soundIds": 46,
+  "specIds": 46,
+  "specOnly": [
+    "gun.xung.loop",
+    "hit.sub",
+    "hit.tail",
+    "kill.chime"
+  ],
+  "codeOnly": [
+    "word.full",
+    "streak.up",
+    "gun.tia.loop",
+    "gun.ray.armed"
+  ],
+  "rows": 37,
+  "excluded": 12,
+  "excludedByReason": {
+    "Tiếng phím do bộ Firefly 189–191 phụ trách, không làm trùng.": 2,
+    "Nhạc là stem 96 BPM La thứ theo AUDIO_PIPELINE §8.3, không phải SFX.": 2,
+    "Cần Pack Leader, chỉ objective hunt đưa vào.": 1,
+    "Cần tiến độ hunt tăng sau khi hạ Pack Leader.": 1,
+    "Cần telegraph Rift; First Shift hazard null.": 1,
+    "Cần Rift mở; First Shift hazard null.": 1,
+    "Cần Shield Guard; First Shift chỉ có brute pack.": 2,
+    "Cần Splitter; chưa có ải nào trong CHAPTER_1 hoặc Trial khai báo splitter pack.": 1,
+    "Không đạt T4: combat.ts chỉ truyền T1–T3 vào audio.hit; chưa có ải đầu tiên phát được trong mã hiện tại.": 1
+  },
+  "retired": 1,
+  "counts": {
+    "schemaErrors": 0,
+    "missing": 0,
+    "duplicates": 0,
+    "unknown": 0,
+    "promptErrors": 0,
+    "vietnameseNames": 0,
+    "markdownErrors": 0,
+    "calculationErrors": 0,
+    "specErrors": 0
+  },
+  "totals": {
+    "rows": 37,
+    "takes": 66,
+    "byPriority": {
+      "P0": 50,
+      "P1": 11,
+      "P2": 5
+    }
+  },
+  "longestPrompt": {
+    "id": "gun.phao.launch",
+    "characters": 289
+  },
+  "selftest": [
+    {
+      "name": "missing row",
+      "caught": true
+    },
+    {
+      "name": "forbidden pop",
+      "caught": true
+    },
+    {
+      "name": "unknown id",
+      "caught": true
+    }
+  ],
+  "selftestPassed": 3,
+  "details": {
+    "schemaErrors": [],
+    "missing": [],
+    "duplicates": [],
+    "unknown": [],
+    "promptErrors": [],
+    "vietnameseNames": [],
+    "markdownErrors": [],
+    "calculationErrors": [],
+    "specErrors": []
+  }
+}

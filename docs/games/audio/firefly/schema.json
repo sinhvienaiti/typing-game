@@ -1,0 +1,390 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Danh sách Adobe Firefly SFX dùng chung ba game",
+  "type": "object",
+  "properties": {
+    "game": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "direction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assumptions": {
+      "type": "object",
+      "properties": {
+        "fileSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "silenceMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxHitsPerTake": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "usableFraction": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "p0ReserveTakes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "note": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "fileSeconds",
+        "silenceMs",
+        "maxHitsPerTake",
+        "usableFraction",
+        "p0ReserveTakes",
+        "note"
+      ],
+      "additionalProperties": false
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "playerName": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "when": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bus": {
+            "type": "string",
+            "minLength": 1
+          },
+          "vfxSync": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priorityWhy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prompt": {
+            "type": "string",
+            "minLength": 1
+          },
+          "voiceHint": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "inbox": {
+            "type": "string",
+            "minLength": 1
+          },
+          "eraNote": {
+            "type": "string",
+            "minLength": 1
+          },
+          "specCard": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "phase": {
+            "enum": [
+              "charge",
+              "release",
+              "travel",
+              "impact",
+              "aftermath",
+              null
+            ]
+          },
+          "priority": {
+            "enum": [
+              "P0",
+              "P1",
+              "P2"
+            ]
+          },
+          "shape": {
+            "enum": [
+              "hits",
+              "single",
+              "loop"
+            ]
+          },
+          "targetMs": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "min",
+              "max"
+            ],
+            "additionalProperties": false
+          },
+          "variants": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "hitsPerTake": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "takes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "loop": {
+            "type": "boolean"
+          },
+          "era": {
+            "enum": [
+              "kept",
+              "reworded"
+            ]
+          },
+          "basis": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "branchOnly": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clips": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "clip": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "phase": {
+                  "enum": [
+                    "A",
+                    "R",
+                    "T",
+                    "I",
+                    "F"
+                  ]
+                },
+                "startMs": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "lengthMs": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "syncNote": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "clip",
+                "phase",
+                "startMs",
+                "lengthMs",
+                "syncNote"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "clipsWhy": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "playerName",
+          "when",
+          "bus",
+          "vfxSync",
+          "priorityWhy",
+          "prompt",
+          "voiceHint",
+          "inbox",
+          "eraNote",
+          "specCard",
+          "phase",
+          "priority",
+          "shape",
+          "targetMs",
+          "variants",
+          "hitsPerTake",
+          "takes",
+          "loop",
+          "era",
+          "basis"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "firstStage": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "basis": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "reason",
+          "firstStage",
+          "basis"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "retired": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basis": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "reason",
+          "basis"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "totals": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "takes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "byPriority": {
+          "type": "object",
+          "properties": {
+            "P0": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "P1": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "P2": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "P0",
+            "P1",
+            "P2"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "rows",
+        "takes",
+        "byPriority"
+      ],
+      "additionalProperties": false
+    },
+    "sourceCommits": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{7,40}$"
+      }
+    }
+  },
+  "required": [
+    "game",
+    "stage",
+    "direction",
+    "assumptions",
+    "rows",
+    "excluded",
+    "retired",
+    "totals"
+  ],
+  "additionalProperties": false
+}
