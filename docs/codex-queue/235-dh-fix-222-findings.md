@@ -1,5 +1,13 @@
 # Phiếu 235 · Dragonhold · Sửa ba lỗi nặng mà kiểm lại 222 tìm ra (F2, F3, F4)
 
+> **Chạy lại (30/10, 15:22, điều phối):**
+> - Năm đường mà lượt 15:18 thấy lạ là của **phiếu 223** (bot giống người, DH-08). 223 chạy sau 222 trong cùng worktree; xem `223-report.md`. Năm đường đó:
+>   - `scripts/balance/bot.ts`, `scripts/balance/run.ts` (sửa);
+>   - `scripts/balance/human.ts`, `tests/sim/bot-human.test.ts`, `docs/changelog/2026-10-30-human-like-bot.md` (mới).
+> - Chúng là file **đã biết**; không sửa. Tập đã biết nay là 51 đường của 222 cộng năm đường này.
+> - Clone sạch ở mục Kiểm cũng chép năm file này.
+> - Ghi đè `235/status-before.txt` và `235/preflight.json` của lượt dừng.
+
 **Nguồn:**
 - `docs/codex-queue/222-report.md` §5:
   - **F2 (major, 197):** lớp màn tựa ghi đè mọi tiêu đề giao diện;
