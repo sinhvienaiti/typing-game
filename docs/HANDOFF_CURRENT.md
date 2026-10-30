@@ -15,6 +15,27 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**30/10, 11:20: chủ dự án bảo Claude dừng mọi việc, chỉ giao việc cho Codex (ba làn, nhiều việc), rồi chờ giao việc.**
+
+Việc của Claude đã dừng, và chỗ dừng của từng việc:
+
+- **Sửa lỗi sau khi gắn 32 bộ phím:** workflow `wf_ef77bd64-ccb`. Bốn bản sửa đã commit, chưa gộp, chưa đẩy:
+  - Last Line: `ts-typefx` `d15fed0`, `7a793c3`;
+  - Dragonhold: `dh-keys` `568eb35`;
+  - Wordwoven: `td-keys` `646e889`;
+  - Monkeytype: `feature/typing-feel-32` `2bf28b79a`.
+
+  Last Line và Dragonhold đã kiểm lại, đạt. Wordwoven và Monkeytype bị dừng giữa lúc kiểm lại. Làm tiếp: `Workflow({scriptPath: ".../workflows/scripts/keys-32-review-fixes-wf_ef77bd64-ccb.js", resumeFromRunId: "wf_ef77bd64-ccb"})`. Sau đó Claude kiểm bốn game trên trình duyệt.
+- **Phân tích cách Codex xử lý âm phím, kèm bản mẫu tốt hơn** (chủ dự án yêu cầu): workflow `wf_5d707009-95f`. Mới xong nhánh "pipeline". Kết luận sơ bộ: khâu cắt và xử lý âm phần lớn ổn; 32 bộ nghe giống nhau là do cách v2 gom tiếng gõ thành bộ. Chưa phản biện. Làm tiếp bằng `resumeFromRunId: "wf_5d707009-95f"`; đầu ra ở `tmp/keys-firefly/diagnose/`.
+- **Lửa Rồng vòng 11:** V-dh2 dừng giữa chừng khi đang thêm vòng sóng bám mặt đất cho Sky Fire. Có thay đổi chưa commit trong `games/.wt-dh-vfx`: `src/view/fx.ts`, `skyfire.ts`, `flipbook.ts`, `vfx-layers.ts`, `actors.ts`, `crowd.ts` và hai kịch bản chụp. Mốc commit cuối là `ca64509`.
+
+Codex chạy ba làn (owner 30/10 11:15):
+- `s7`: 194 → 195 → 197 trong `.wt-dh-codex`;
+- `s8`: 214 → 215 → 216 → 217 → 206;
+- `s9`: 199 → 202 → 200.
+
+Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ được nối vào sau ba làn. 213 nối sau `s8`.
+
 **Cập nhật cuối của session cũ (28/10, sau 22:10):** session cũ (157c54d6) đã xong cả 4 lượt và gửi kết quả sang `coordinator-2`. Từ đây mọi việc thuộc session mới:
 - `codex-review-28-10`: kết quả nằm trong tin nhắn.
 - `map-pilot-a`: trung vị 7,125, chưa đạt cổng A; nhánh `map-pilot`.
