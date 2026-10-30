@@ -9,7 +9,7 @@ const contract = JSON.parse(await read("games/space-typing/contracts/space-typin
 const [roomSource, rulesSource, modelSource, botsSource, localMatchSource, timingSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/room.ts"), read("games/space-typing/src/duel/rules.ts"), read("games/space-typing/src/duel/model.ts"),
   read("games/space-typing/src/duel/bots.ts"), read("games/space-typing/src/duel/local-match.ts"), read("games/space-typing/src/duel/presentation-timing.ts"),
-  read("portal/src/admin/space-typing-duel-phase-b.ts"), read("portal/src/admin/space-typing-phase-b.ts"), read("portal/src/admin/space-typing.ts"),
+  read("portal/src/admin/space-typing-duel-phase-b.ts"), read("portal/src/admin/space-typing-phase-b.ts"), Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")),
   read("admin/server.mjs"), read("admin/space-typing-phase-b-map.v1.json"),
 ]);
 
@@ -57,7 +57,7 @@ assert(!uiSource.includes("manualProjectileImpactDelayMs"), "unsupported impact 
 
 assert(routerSource.includes("renderPhaseBDuel"), "Duel renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/duel`"), "Duel route is not wired into Phase B");
-assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, this.navigate);"), "Space Typing shell must invoke Phase B router");
+assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, navigate);"), "Space Typing shell must invoke Phase B router");
 assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Duel/mock renderer must remain unreachable");
 assert(serverSource.includes("/api/admin/space-typing/duel/contract"), "Admin server Duel contract endpoint is missing");
 const phaseMap = JSON.parse(phaseMapSource);

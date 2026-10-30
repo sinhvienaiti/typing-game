@@ -6,7 +6,7 @@ const contract = JSON.parse(await readFile("games/space-typing/contracts/space-t
 const page = await readFile("portal/src/admin/space-typing-ui-assets-phase-b.ts", "utf8");
 const router = await readFile("portal/src/admin/space-typing-phase-b.ts", "utf8");
 const server = await readFile("admin/server.mjs", "utf8");
-const nav = await readFile("portal/src/admin/space-typing.ts", "utf8");
+const nav = await Promise.all([readFile("portal/src/admin/admin-shell.ts", "utf8"), readFile("portal/src/admin/areas/space-typing.ts", "utf8"), readFile("portal/src/admin/areas/shared.ts", "utf8"), readFile("portal/src/admin/areas/registry.ts", "utf8")]).then((parts) => parts.join("\n"));
 const command = await readFile("portal/src/admin/space-typing-command.ts", "utf8");
 const phaseMap = JSON.parse(await readFile("admin/space-typing-phase-b-map.v1.json", "utf8"));
 const developerManifest = createDeveloperToolsManifest();

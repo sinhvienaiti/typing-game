@@ -9,116 +9,20 @@ import "./space-typing-ui.css";
 import "./space-typing-phase-b.css";
 import "./space-typing-remediation.css";
 import "./v2/admin-v2.css";
+import "./admin-shell.css";
 import { SpaceTypingAdminApi } from "./api";
-import { renderPhaseBAdminScreen } from "./space-typing-phase-b";
 import { adminNavIcon } from "./space-typing-icons";
 import { installAdminCommandShortcut, openAdminCommandPalette } from "./space-typing-command";
 import { AdminHelpScope } from "./v2/admin-help";
-import { renderAdminV2Dashboard } from "./v2/dashboard";
-import { renderAdminV2DeveloperTools } from "./v2/developer-tools";
-import { renderAdminV2MediaLibrary } from "./v2/media-library";
 
-type NavItem = {
-  label: string;
-  path: string;
-  icon: string;
-  description: string;
-};
-
-type NavGroup = {
-  id: string;
-  label: string;
-  description: string;
-  items: readonly NavItem[];
-  requiredPermission?: string;
-};
-
+import { ADMIN_AREAS, ADMINISTRATION, areaForPath, isAdministrationPath, renderAdministrationPage } from "./areas/registry";
+import type { AdminArea } from "./areas/types";
+import { getAdminStatus } from "./shared-overview";
+const ALL_NAV_GROUPS = [...ADMIN_AREAS.flatMap((area) => area.navGroups), ADMINISTRATION];
 const ADMIN_BASE = "/admin/space-typing";
 const NAV_STATE_KEY = "typing-game:space-admin-collapsed-groups";
+const AREA_STATE_KEY = "typing-game:admin-last-area";
 const DEVELOPER_PERMISSION = "developer.runtime-inspect";
-
-const NAV_GROUPS: readonly NavGroup[] = [
-  {
-    id: "dashboard",
-    label: "Dashboard",
-    description: "Published state, drafts and administrator activity that need attention now.",
-    items: [
-      { label: "Overview", path: ADMIN_BASE, icon: "◫", description: "See real Admin state, pending drafts and recent administrator activity." },
-    ],
-  },
-  {
-    id: "content",
-    label: "Content",
-    description: "Manage worlds, stages and learning-content assignments backed by canonical game data.",
-    items: [
-      { label: "Worlds & Stages", path: `${ADMIN_BASE}/stages`, icon: "⌘", description: "Manage supported world and stage configuration through the revision-backed workflow." },
-      { label: "Typing Content", path: `${ADMIN_BASE}/typing-content`, icon: "Aa", description: "Browse canonical English-learning content used by Space Typing without creating a duplicate content database." },
-    ],
-  },
-  {
-    id: "gameplay",
-    label: "Gameplay",
-    description: "Manage revision-backed gameplay entities currently connected to the Space Typing runtime.",
-    items: [
-      { label: "Ships", path: `${ADMIN_BASE}/ships`, icon: "△", description: "Manage the ship properties currently supported by the canonical runtime." },
-      { label: "Equipment", path: `${ADMIN_BASE}/equipment`, icon: "◇", description: "Manage supported equipment definitions, stats and perks." },
-      { label: "Skills", path: `${ADMIN_BASE}/skills`, icon: "ϟ", description: "Manage supported combat-skill definitions and parameters." },
-      { label: "Enemies", path: `${ADMIN_BASE}/enemies`, icon: "✦", description: "Manage supported enemy admission and projectile policy values." },
-      { label: "Bosses", path: `${ADMIN_BASE}/bosses`, icon: "✹", description: "Manage supported boss identity values through the canonical revision workflow." },
-    ],
-  },
-  {
-    id: "economy-live-ops",
-    label: "Economy",
-    description: "Manage canonical Shop merchandising.",
-    items: [
-      { label: "Shop", path: `${ADMIN_BASE}/shop`, icon: "▱", description: "Manage supported Shop offers, pricing and merchandising through the canonical Shop owner." },
-    ],
-  },
-  {
-    id: "players-live-ops",
-    label: "Players & Live Ops",
-    description: "Online accounts (Cloudflare Worker + D1), chat moderation, Daily Hub mail and gift codes, and the read-only event catalog.",
-    items: [
-      { label: "Players", path: `${ADMIN_BASE}/players`, icon: "☺", description: "Look up pilots, their cloud save, Daily Hub progress, rewards and sessions; ban, sign out, restore saves, send gifts." },
-      { label: "Mail & Gift Codes", path: `${ADMIN_BASE}/liveops-mail`, icon: "✉", description: "Send gifts and announcements to every player and create gift codes; read the email outbox and account audit." },
-      { label: "Chat Moderation", path: `${ADMIN_BASE}/chat`, icon: "☏", description: "Read world chat, delete messages, mute players, handle reports and post system announcements." },
-      { label: "Feedback", path: `${ADMIN_BASE}/feedback`, icon: "✎", description: "Read ideas, bug reports and contact messages players send from the game; mark them handled or reply by in-game mail." },
-      { label: "Events (read-only)", path: `${ADMIN_BASE}/events`, icon: "⌁", description: "Read the in-stage event catalog owned by the game code. Scheduling is not available yet." },
-    ],
-  },
-  {
-    id: "media",
-    label: "Media",
-    description: "Browse canonical game media, upload Admin-managed assets and keep source-owned runtime media read-only.",
-    items: [
-      { label: "Media Library", path: `${ADMIN_BASE}/media`, icon: "▧", description: "Browse images, models, music, SFX and Admin uploads, with immutable version history and usage." },
-      { label: "Music Library", path: `${ADMIN_BASE}/music-library`, icon: "♫", description: "Browse, upload and manage the legacy authored music capability while it is migrated into Media V2." },
-      { label: "SFX", path: `${ADMIN_BASE}/sfx`, icon: "◉", description: "Inspect production sample-backed sound effects and test the exact committed runtime assets without changing game policy." },
-      { label: "World / Stage Music", path: `${ADMIN_BASE}/world-music`, icon: "◎", description: "Assign music to global, galaxy, world and stage contexts and preview the canonical result." },
-    ],
-  },
-  {
-    id: "system",
-    label: "System",
-    description: "Manage safe global settings, access review and the revision lifecycle.",
-    items: [
-      { label: "Audio Defaults", path: `${ADMIN_BASE}/audio`, icon: "◖", description: "Set default audio behavior while preserving player-specific preferences." },
-      { label: "General Settings", path: `${ADMIN_BASE}/settings`, icon: "⚙", description: "Manage global game defaults, network behavior and maintenance settings." },
-      { label: "Roles & Permissions", path: `${ADMIN_BASE}/roles`, icon: "◈", description: "Review server-enforced role templates, dangerous permissions and this deployment's effective access." },
-      { label: "History & Publish", path: `${ADMIN_BASE}/history`, icon: "↶", description: "Review drafts, validate complete change scope, publish or roll back safely." },
-    ],
-  },
-  {
-    id: "developer",
-    label: "Developer Tools",
-    description: "Runtime contracts, capability diagnostics and isolated QA tools separated from normal administrator workflows.",
-    requiredPermission: DEVELOPER_PERMISSION,
-    items: [
-      { label: "Developer Tools", path: `${ADMIN_BASE}/developer-tools`, icon: "⌬", description: "Open permission-gated runtime, economy, Live Ops, PvP, visual and QA diagnostics." },
-    ],
-  },
-];
 
 /** Pages reached from inside a section that should keep its nav item lit. */
 const NAV_ALIASES: Readonly<Record<string, string>> = {
@@ -180,7 +84,17 @@ function statusBadge(
   return element("span", `st-admin-status ${tone}`, label);
 }
 
-function normalizedAdminPath(path: string): string {
+export const ADMIN_ROUTE_REDIRECTS: Readonly<Record<string, string>> = {
+  "/admin": "/admin/shared",
+  "/admin/space-typing/media": "/admin/media",
+  "/admin/space-typing/roles": "/admin/roles",
+  "/admin/space-typing/typing-content": "/admin/shared/learning-content",
+};
+
+export function normalizedAdminPath(path: string): string {
+  path = path.replace(/\/+$/, "") || "/";
+  const redirected = ADMIN_ROUTE_REDIRECTS[path];
+  if (redirected) return redirected;
   if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;
   return path;
 }
@@ -188,7 +102,7 @@ function normalizedAdminPath(path: string): string {
 function readCollapsedGroups(): Set<string> {
   try {
     const raw = localStorage.getItem(NAV_STATE_KEY);
-    if (raw === null) return new Set(NAV_GROUPS.map((group) => group.id));
+    if (raw === null) return new Set(ALL_NAV_GROUPS.map((group) => group.id));
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return new Set();
     return new Set(parsed.filter((value): value is string => typeof value === "string"));
@@ -206,12 +120,55 @@ function writeCollapsedGroups(groups: Set<string>): void {
 }
 
 function routeLabel(path: string): string {
-  const primary = NAV_GROUPS.flatMap((group) => group.items).find((item) => item.path === path);
+  const primary = ALL_NAV_GROUPS.flatMap((group) => group.items).find((item) => item.path === path);
   return primary?.label ?? LEGACY_ROUTE_LABELS[path] ?? "Admin";
 }
 
-export class SpaceTypingAdmin {
+type AreaStorage = Pick<Storage, "getItem" | "setItem">;
+
+/**
+ * Administration pages (Media Library, Roles) belong to every area, so they keep
+ * the area the user came from. The last area also lives in sessionStorage so a
+ * reload keeps it; a fresh tab or direct load starts in All games.
+ */
+export class AdminAreaMemory {
+  private lastAreaId: string | null;
+
+  constructor(private readonly storage: () => AreaStorage = () => sessionStorage) {
+    try {
+      this.lastAreaId = this.storage().getItem(AREA_STATE_KEY);
+    } catch {
+      this.lastAreaId = null;
+    }
+  }
+
+  /** An old /admin/space-typing/media or /roles link came from Space, so its page keeps that area. */
+  remember(areaId: string): void {
+    this.lastAreaId = areaId;
+    try {
+      this.storage().setItem(AREA_STATE_KEY, areaId);
+    } catch {
+      // The in-memory field still keeps the area for this page session.
+    }
+  }
+
+  areaFor(path: string): AdminArea {
+    const area = areaForPath(path, this.lastAreaId);
+    if (!isAdministrationPath(path) && area.id !== this.lastAreaId) {
+      this.lastAreaId = area.id;
+      try {
+        this.storage().setItem(AREA_STATE_KEY, area.id);
+      } catch {
+        // The in-memory field still keeps the area for this page session.
+      }
+    }
+    return area;
+  }
+}
+
+export class TypingGameAdmin {
   private readonly help = new AdminHelpScope();
+  private readonly areas = new AdminAreaMemory();
   private developerToolsAllowed = false;
   private renderGeneration = 0;
 
@@ -224,14 +181,18 @@ export class SpaceTypingAdmin {
     this.developerToolsAllowed = false;
     const generation = ++this.renderGeneration;
     const canonicalPath = normalizedAdminPath(path);
+    if (canonicalPath !== path) history.replaceState({}, "", canonicalPath + location.search + location.hash);
+    document.title = `Typing Game Admin · ${routeLabel(canonicalPath)}`;
+    if (canonicalPath !== path && path.startsWith(`${ADMIN_BASE}/`) && isAdministrationPath(canonicalPath)) this.areas.remember("space-typing");
+    const area = this.areas.areaFor(canonicalPath);
     const root = element("main", "st-admin");
     const shell = element("div", "st-admin-shell");
-    shell.append(this.renderSidebar(canonicalPath));
+    shell.append(this.renderSidebar(canonicalPath, area));
 
     const main = element("div", "st-admin-main");
-    main.append(this.renderTopbar(canonicalPath));
+    main.append(this.renderTopbar(canonicalPath, area));
     const content = element("div", "st-admin-content");
-    content.append(this.renderPage(canonicalPath));
+    content.append(this.renderPage(canonicalPath, area));
     main.append(content);
 
     shell.append(main);
@@ -256,37 +217,47 @@ export class SpaceTypingAdmin {
     }
   }
 
-  private renderSidebar(path: string): HTMLElement {
+  private renderSidebar(path: string, area: AdminArea): HTMLElement {
     const aside = element("aside", "st-admin-sidebar");
     const brand = element("div", "st-admin-brand");
     const mark = element("div", "st-admin-brand-mark");
     mark.append(
-      element("span", "st-admin-brand-logo", "ST"),
-      element("span", undefined, "Space Typing"),
+      element("span", "st-admin-brand-logo", "TG"),
+      element("span", undefined, "Typing Game"),
     );
     brand.append(
       mark,
-      element("h2", undefined, "Command Center"),
+      element("h2", undefined, "Typing Game Admin"),
       element("p", undefined, "Game Management"),
     );
     const env = element("div", "st-admin-env-row");
     env.append(
       element("span", "st-admin-env", "LOCAL"),
-      element("span", "st-admin-status good", "SERVICE CONNECTED"),
+      element("span", "st-admin-status good", "LOCAL SERVICE"),
     );
     brand.append(env);
     aside.append(brand);
 
+    const selector = element("div", "st-admin-area-selector");
+    selector.setAttribute("role", "group");
+    selector.setAttribute("aria-label", "Admin area");
+    for (const entry of ADMIN_AREAS) {
+      const choice = button(entry.label, () => this.navigate(entry.base), `st-admin-btn${area.id === entry.id ? " primary" : ""}`);
+      choice.setAttribute("aria-pressed", String(area.id === entry.id));
+      selector.append(choice);
+    }
+    aside.append(selector);
+    const groups = [...area.navGroups, ADMINISTRATION];
     const collapsed = readCollapsedGroups();
-    const activeGroup = NAV_GROUPS.find((group) => group.items.some((item) => item.path === path));
+    const activeGroup = groups.find((group) => group.items.some((item) => item.path === path));
     if (activeGroup) collapsed.delete(activeGroup.id);
     writeCollapsedGroups(collapsed);
 
     const nav = element("nav", "st-admin-nav");
-    nav.setAttribute("aria-label", "Space Typing Admin sections");
+    nav.setAttribute("aria-label", "Typing Game Admin sections");
     let activeButton: HTMLButtonElement | null = null;
 
-    for (const group of NAV_GROUPS) {
+    for (const group of groups) {
       const wrapper = element("section", "st-admin-nav-group");
       if (group.requiredPermission) {
         wrapper.dataset.adminPermission = group.requiredPermission;
@@ -355,11 +326,11 @@ export class SpaceTypingAdmin {
     return aside;
   }
 
-  private renderTopbar(path: string): HTMLElement {
+  private renderTopbar(path: string, area: AdminArea): HTMLElement {
     const bar = element("div", "st-admin-topbar");
     const breadcrumb = element("div", "st-admin-breadcrumb");
     breadcrumb.append(
-      document.createTextNode("Space Typing / "),
+      document.createTextNode(`${isAdministrationPath(path) ? "Administration" : area.label} / `),
       element("strong", undefined, routeLabel(path)),
     );
     bar.append(breadcrumb);
@@ -374,10 +345,10 @@ export class SpaceTypingAdmin {
 
     const localAdmin = element("span", "st-admin-v2-topbar-help");
     localAdmin.append(
-      element("span", "st-admin-revision", "LOCAL ADMIN · CONNECTED"),
+      element("span", "st-admin-revision", "LOCAL ADMIN"),
       this.help.infoIcon({
         title: "Local Admin",
-        content: "Connected to the local Space Typing Admin service. Saved drafts do not affect the active game until an explicit publish succeeds.",
+        content: "Uses the local Typing Game Admin service. Saved drafts do not affect the active game until an explicit publish succeeds.",
         placement: "bottom",
         interaction: "popover",
         label: "About the local Admin connection",
@@ -388,13 +359,30 @@ export class SpaceTypingAdmin {
     return bar;
   }
 
-  private renderPage(path: string): HTMLElement {
-    if (path === ADMIN_BASE) return renderAdminV2Dashboard(this.navigate, this.help);
-    if (path === `${ADMIN_BASE}/media`) return renderAdminV2MediaLibrary(this.help);
-    if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools(this.navigate, this.help);
-    const phaseB = renderPhaseBAdminScreen(path, this.navigate);
-    if (phaseB !== null) return phaseB;
-    return this.renderUnknown(path);
+  private renderPage(path: string, area: AdminArea): HTMLElement {
+    const context = { navigate: this.navigate, help: this.help };
+    const administration = renderAdministrationPage(path, context);
+    if (administration) return administration;
+    if (area.id !== "space-typing") return area.renderPage(path, context) ?? this.renderUnknown(path);
+    const host = element("div");
+    host.append(element("p", "st-admin-notice", "Checking Space Typing availability…"));
+    const renderSpacePage = () => host.replaceChildren(area.renderPage(path, context) ?? this.renderUnknown(path));
+    void getAdminStatus().then((status) => {
+      if (!host.isConnected) return;
+      if (status.spaceStatus === "failed") {
+        host.replaceChildren(element("h1", undefined, "Space Typing failed to start — see the Admin server log"));
+        return;
+      }
+      if (!status.spaceAvailable) {
+        host.replaceChildren(element("h1", undefined, "Space Typing is not checked out"));
+        return;
+      }
+      renderSpacePage();
+    }).catch(() => {
+      // Without the probe, render the page anyway: its own API calls report their errors.
+      if (host.isConnected) renderSpacePage();
+    });
+    return host;
   }
 
   private renderUnknown(path: string): HTMLElement {
@@ -403,8 +391,8 @@ export class SpaceTypingAdmin {
     panel.append(
       element("div", "st-admin-eyebrow", "Navigation"),
       element("h1", undefined, "Screen not found"),
-      element("p", undefined, `This Admin URL is not registered. Use the sidebar or Search command to open a supported Space Typing screen. Requested path: ${path}.`),
-      button("Back to Overview", () => this.navigate(ADMIN_BASE), "st-admin-btn primary"),
+      element("p", undefined, `This Admin URL is not registered. Use the sidebar or Search command to open a supported Admin screen. Requested path: ${path}.`),
+      button("Back to Overview", () => this.navigate("/admin/shared"), "st-admin-btn primary"),
     );
     page.append(panel);
     return page;

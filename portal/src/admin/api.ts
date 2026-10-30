@@ -361,7 +361,7 @@ export class SpaceTypingAdminApi {
   }
 
   getActor(): Promise<AdminActor> {
-    return this.request<AdminActor>("/api/admin/space-typing/actor");
+    return this.request<AdminActor>("/api/admin/shared/actor");
   }
 
   getAudit(limit = 8): Promise<AdminAuditPayload> {

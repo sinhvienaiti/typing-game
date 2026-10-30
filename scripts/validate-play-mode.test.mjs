@@ -148,3 +148,31 @@ test("CLI rejects malformed braces and duplicate hosts in either config", () => 
     }
   }
 });
+
+// The Portal server must proxy the whole Admin API and the Typing Feel runtime before its SPA fallback.
+const ADMIN_BLOCK = "location /api/admin/ {";
+const FEEL_BLOCK = "location /api/runtime/typing-feel/ {";
+test("CLI play-conf rejects an Admin proxy narrowed to /api/admin/space-typing/", () => {
+  assert.ok(configs.play.includes(ADMIN_BLOCK));
+  const result = run("--play-conf", fixture(configs.play.replace(ADMIN_BLOCK, "location /api/admin/space-typing/ {")));
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.stderr, /does not proxy Admin API requests/);
+});
+test("CLI play-conf rejects a missing Typing Feel runtime proxy", () => {
+  assert.ok(configs.play.includes(FEEL_BLOCK));
+  const result = run("--play-conf", fixture(configs.play.replace(FEEL_BLOCK, "location /api/runtime/other/ {")));
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.stderr, /does not proxy Typing Feel runtime requests/);
+});
+test("CLI play-conf rejects Admin and Typing Feel proxies declared after the SPA fallback", () => {
+  const fallback = "location / { try_files $uri $uri/ /index.html; }";
+  const start = configs.play.indexOf(FEEL_BLOCK);
+  const end = configs.play.indexOf(fallback, start);
+  assert.ok(start > 0 && end > start);
+  const moved = configs.play.slice(0, start) + fallback + "\n    " +
+    configs.play.slice(start, end).trimEnd() + configs.play.slice(end + fallback.length);
+  const result = run("--play-conf", fixture(moved));
+  assert.equal(result.status, 1, result.stderr);
+  assert.match(result.stderr, /Admin API proxy must be declared before/);
+  assert.match(result.stderr, /Typing Feel runtime proxy must be declared before/);
+});

@@ -13,7 +13,7 @@ const [help, components, dialog, componentStyles, dialogStyles, styles, shell] =
   read("portal/src/admin/v2/admin-components.css"),
   read("portal/src/admin/v2/admin-dialog.css"),
   read("portal/src/admin/v2/admin-v2.css"),
-  read("portal/src/admin/space-typing.ts"),
+  Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")),
 ]);
 
 // Tooltip semantics and interaction contract.
@@ -86,7 +86,7 @@ assert.match(shell, /this\.help\.observeRoot\(root\)/, "Admin shell must teardow
 assert.match(shell, /this\.help\.tooltip\(groupButton/, "Navigation groups must expose contextual tooltip help.");
 assert.match(shell, /this\.help\.tooltip\(navButton/, "Navigation items must expose contextual tooltip help.");
 assert.match(shell, /this\.help\.infoIcon\(/, "Admin shell must demonstrate the reusable click/tap info trigger.");
-assert.doesNotMatch(shell, /\.title\s*=/, "Admin shell must not rely on browser-native title help.");
+assert.doesNotMatch(shell, /(?<!document)\.title\s*=/, "Admin shell must not rely on browser-native title help.");
 assert.doesNotMatch(shell, /element\("small",\s*"st-admin-nav-description"/, "Permanent per-item navigation descriptions must be removed from primary DOM.");
 assert.doesNotMatch(shell, /element\("small",\s*undefined,\s*group\.description/, "Permanent group descriptions must be removed from primary DOM.");
 assert.doesNotMatch(shell, /PHASE B · RUNTIME INTEGRATED/, "Technical Phase B milestone text must not remain in the primary shell.");

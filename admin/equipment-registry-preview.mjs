@@ -20,7 +20,7 @@ export async function runEquipmentRegistryPreview({
     throw new EquipmentRegistryPreviewError("Unsupported Space Typing Equipment preview protocol.");
   }
 
-  const childDir = resolve(rootDir, "games/space-typing");
+  const childDir = resolve(rootDir, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
   const child = spawn("pnpm", ["--dir", childDir, "equipment:admin-preview"], {
     cwd: rootDir,
     env: process.env,

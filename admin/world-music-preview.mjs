@@ -33,7 +33,7 @@ export async function runWorldMusicPreview({
     throw new WorldMusicPreviewError("stageNumber must be an integer from 1 to 1000.");
   }
 
-  const childDir = resolve(rootDir, "games/space-typing");
+  const childDir = resolve(rootDir, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
   const child = spawn("pnpm", ["--dir", childDir, "music:admin-preview"], {
     cwd: rootDir,
     env: process.env,

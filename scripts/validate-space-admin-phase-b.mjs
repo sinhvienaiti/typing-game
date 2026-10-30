@@ -8,7 +8,7 @@ const map = JSON.parse(await readText("admin/space-typing-phase-b-map.v1.json"))
 const defaultConfig = await readText("admin/default-config.mjs");
 const store = await readText("admin/store.mjs");
 const api = await readText("portal/src/admin/api.ts");
-const main = await readText("portal/src/admin/space-typing.ts");
+const main = await Promise.all([readText("portal/src/admin/admin-shell.ts"), readText("portal/src/admin/areas/space-typing.ts"), readText("portal/src/admin/areas/shared.ts"), readText("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n"));
 const phaseBRouter = await readText("portal/src/admin/space-typing-phase-b.ts");
 const phaseBCore = await readText("portal/src/admin/space-typing-phase-b-core.ts");
 const settingsPhaseB = await readSurface("portal/src/admin/space-typing-settings-phase-b.ts", "portal/src/admin/space-typing-settings-phase-b-legacy.ts");

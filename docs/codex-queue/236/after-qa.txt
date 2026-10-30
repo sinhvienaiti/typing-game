@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: QA audit is stale: audited=22a35dd24e25cd9e6881aba350977eb6f42889f2 pinned-child=847771556b29b8c08ce967a6eafa495141f1adaf. Re-audit Test Lab before changing the SHA.
++ actual - expected
+
++ '847771556b29b8c08ce967a6eafa495141f1adaf'
+- '22a35dd24e25cd9e6881aba350977eb6f42889f2'
+
+    at file:///Users/toandx/htdocs/typing-game-wt/admin-ia/scripts/validate-space-admin-qa.mjs:41:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: '847771556b29b8c08ce967a6eafa495141f1adaf',
+  expected: '22a35dd24e25cd9e6881aba350977eb6f42889f2',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.0

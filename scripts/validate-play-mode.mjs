@@ -308,13 +308,17 @@ export async function main(args = process.argv.slice(2)) {
   if (portalPlayServer === null) {
     failures.push("Play nginx is missing the typing-game.local HTTPS server block.");
   } else {
-    const adminLocation = "location /api/admin/space-typing/";
+    // Whole-prefix blocks only: "location /api/admin/space-typing/" must not satisfy this.
     const spaFallback = "location / { try_files $uri $uri/ /index.html; }";
-    const adminLocationIndex = portalPlayServer.indexOf(adminLocation);
+    const adminLocationIndex = portalPlayServer.search(/location \/api\/admin\/\s*\{/);
+    const feelRuntimeIndex = portalPlayServer.search(/location \/api\/runtime\/typing-feel\/\s*\{/);
     const spaFallbackIndex = portalPlayServer.indexOf(spaFallback);
 
     if (adminLocationIndex < 0) {
-      failures.push("Play nginx does not proxy Space Typing Admin API requests.");
+      failures.push("Play nginx does not proxy Admin API requests (location /api/admin/ {).");
+    }
+    if (feelRuntimeIndex < 0) {
+      failures.push("Play nginx does not proxy Typing Feel runtime requests (location /api/runtime/typing-feel/ {).");
     }
     if (!portalPlayServer.includes("proxy_pass http://127.0.0.1:3199;")) {
       failures.push("Play nginx Space Typing Admin API does not target the Admin service on port 3199.");
@@ -323,6 +327,9 @@ export async function main(args = process.argv.slice(2)) {
       failures.push("Play nginx Portal server is missing its SPA fallback.");
     } else if (adminLocationIndex >= 0 && adminLocationIndex > spaFallbackIndex) {
       failures.push("Play nginx Admin API proxy must be declared before the Portal SPA fallback.");
+    }
+    if (spaFallbackIndex >= 0 && feelRuntimeIndex > spaFallbackIndex) {
+      failures.push("Play nginx Typing Feel runtime proxy must be declared before the Portal SPA fallback.");
     }
   }
 

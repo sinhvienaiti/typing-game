@@ -93,33 +93,33 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function validateCatalogPayload(value: unknown, expectedKind: CatalogKind): CatalogPayload {
-  if (!isRecord(value)) throw new Error("Typing Content catalog response is not an object.");
+  if (!isRecord(value)) throw new Error("Learning Content catalog response is not an object.");
   if (value["protocolVersion"] !== 1 || value["mode"] !== "canonical-readonly" || value["kind"] !== expectedKind) {
-    throw new Error("Typing Content catalog response does not match the canonical read-only protocol.");
+    throw new Error("Learning Content catalog response does not match the canonical read-only protocol.");
   }
   if (typeof value["owner"] !== "string" || !Array.isArray(value["items"]) || !isRecord(value["canonicalTotals"]) || !isRecord(value["tabs"])) {
-    throw new Error("Typing Content catalog response is missing canonical catalog metadata.");
+    throw new Error("Learning Content catalog response is missing canonical catalog metadata.");
   }
   const totals = value["canonicalTotals"];
   for (const key of ["vocabulary", "vocabularyLevels", "typingText", "typingTextLevels"] as const) {
     if (typeof totals[key] !== "number" || !Number.isFinite(totals[key])) {
-      throw new Error(`Typing Content catalog response is missing canonicalTotals.${key}.`);
+      throw new Error(`Learning Content catalog response is missing canonicalTotals.${key}.`);
     }
   }
   for (const key of ["bossText", "recall", "objectives"] as const) {
     if (!isRecord(value["tabs"][key]) || typeof value["tabs"][key]["status"] !== "string" || typeof value["tabs"][key]["source"] !== "string") {
-      throw new Error(`Typing Content catalog response is missing tabs.${key}.`);
+      throw new Error(`Learning Content catalog response is missing tabs.${key}.`);
     }
   }
   if (typeof value["total"] !== "number" || typeof value["offset"] !== "number" || typeof value["limit"] !== "number") {
-    throw new Error("Typing Content catalog pagination metadata is invalid.");
+    throw new Error("Learning Content catalog pagination metadata is invalid.");
   }
   return value as unknown as CatalogPayload;
 }
 
 async function fetchCatalog(params: URLSearchParams): Promise<CatalogPayload> {
   const expectedKind = params.get("kind") === "typing-text" ? "typing-text" : "vocabulary";
-  const payload = await api.requestJson<unknown>(`/api/admin/space-typing/typing-content/catalog?${params.toString()}`);
+  const payload = await api.requestJson<unknown>(`/api/admin/shared/learning-content/catalog?${params.toString()}`);
   return validateCatalogPayload(payload, expectedKind);
 }
 
@@ -136,15 +136,14 @@ export function renderPhaseBTypingContent(navigate: Navigate): HTMLElement {
   const header = el("header", "st-admin-page-head");
   const copy = el("div", "st-admin-page-head-copy");
   copy.append(
-    el("div", "st-admin-eyebrow", "Game Content · Canonical Learning Catalog"),
-    el("h1", undefined, "Typing Content"),
-    el("p", undefined, "Browse the canonical English Learning Content System used by Space Typing. This surface is read-only: vocabulary and typing-text records stay owned by the shared learning pipeline."),
+    el("div", "st-admin-eyebrow", "All games · Canonical Learning Catalog"),
+    el("h1", undefined, "Learning Content"),
+    el("p", undefined, "Browse the canonical English Learning Content System shared across games. This surface is read-only: vocabulary and typing-text records stay owned by the shared learning pipeline."),
   );
   const actions = el("div", "st-admin-page-actions");
   actions.append(
     badge("CANONICAL · READ ONLY", "good"),
-    button("Worlds & Stages", () => navigate("/admin/space-typing/stages")),
-    button("History", () => navigate("/admin/space-typing/history")),
+    button("All games", () => navigate("/admin/shared")),
   );
   header.append(copy, actions);
   page.append(header);
@@ -312,10 +311,10 @@ export function renderPhaseBTypingContent(navigate: Navigate): HTMLElement {
         );
       } catch (error: unknown) {
         if (generation !== renderGeneration) return;
-        setAdminStatus(status, "Typing Content is unavailable.", "error");
+        setAdminStatus(status, "Learning Content is unavailable.", "error");
         renderAdminFailureState(tableHost, {
           title: "Canonical content unavailable",
-          fallbackMessage: "The Typing Content catalog could not be verified. Check the local Admin runtime and try again.",
+          fallbackMessage: "The Learning Content catalog could not be verified. Check the local Admin runtime and try again.",
           error,
           onRetry: () => { void load(false); },
         });
@@ -340,10 +339,10 @@ export function renderPhaseBTypingContent(navigate: Navigate): HTMLElement {
         lastMetadata = await fetchCatalog(new URLSearchParams({ kind: "vocabulary", limit: "1" }));
       } catch (error: unknown) {
         if (generation !== renderGeneration) return;
-        setAdminStatus(status, "Typing Content is unavailable.", "error");
+        setAdminStatus(status, "Learning Content is unavailable.", "error");
         renderAdminFailureState(content, {
           title: "Consumer metadata unavailable",
-          fallbackMessage: "The canonical Typing Content metadata could not be loaded. Check the local Admin runtime and try again.",
+          fallbackMessage: "The canonical Learning Content metadata could not be loaded. Check the local Admin runtime and try again.",
           error,
           onRetry: () => { void renderContent(); },
         });
@@ -359,7 +358,7 @@ export function renderPhaseBTypingContent(navigate: Navigate): HTMLElement {
 
   renderTabs();
   void renderContent().catch((error: unknown) => {
-    setAdminStatus(status, adminErrorMessage(error, "Typing Content could not be rendered."), "error");
+    setAdminStatus(status, adminErrorMessage(error, "Learning Content could not be rendered."), "error");
   });
   return page;
 }

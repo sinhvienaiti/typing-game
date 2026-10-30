@@ -117,9 +117,9 @@ async function run(rootDir, command, args, timeoutMs = 30_000) {
 }
 
 export class MusicAssetService {
-  constructor({ rootDir }) {
+  constructor({ rootDir, childRoot = resolve(rootDir, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing") }) {
     this.rootDir = rootDir;
-    this.childDir = resolve(rootDir, "games/space-typing");
+    this.childDir = resolve(childRoot);
     this.musicRoot = resolve(this.childDir, "public/assets/audio/music");
     this.catalogPath = resolve(this.childDir, "src/audio/world-music-catalog.json");
   }

@@ -65,6 +65,7 @@ const CLASSIFICATIONS: Readonly<Record<string, ClassificationDefinition>> = Obje
   "/admin/space-typing/feature-gates": SIMULATION,
   "/admin/space-typing/flags": SIMULATION,
   "/admin/space-typing/typing-content": NOT_APPLICABLE,
+  "/admin/shared/learning-content": NOT_APPLICABLE,
   "/admin/space-typing/history": NOT_APPLICABLE,
   "/admin/space-typing/qa": NOT_APPLICABLE,
 });
