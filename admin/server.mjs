@@ -34,6 +34,7 @@ import { bootstrapMediaReferences } from "./media-bootstrap.mjs";
 import { createMediaV2HttpHandler } from "./media-http.mjs";
 import { createMediaRuntimeHttpHandler } from "./media-runtime.mjs";
 import { createAccountAdminHttpHandler } from "./account-bridge.mjs";
+import { startTypingFeel } from "./typing-feel/setup.mjs";
 import {
   ADMIN_PERMISSIONS,
   AdminAuthorizationError,
@@ -135,6 +136,24 @@ function authorized(request) {
   return sameAdminToken(Array.isArray(given) ? given[0] : given, token);
 }
 
+// DNS rebinding: a page on another name that resolves to 127.0.0.1 reaches this
+// service with its own Host header and could send the default token. Admin routes
+// and the Typing Feel preview answer only local names: 127.0.0.1, localhost,
+// typing-game.local (nginx sends it) and their subdomains, plus
+// TYPING_GAME_ADMIN_ALLOWED_HOSTS (comma-separated). A request without Host
+// (HTTP/1.0, in-process tests) passes: every browser sends one.
+const allowedHosts = new Set(["127.0.0.1", "localhost", "::1", "typing-game.local", ...(process.env.TYPING_GAME_ADMIN_ALLOWED_HOSTS ?? "").split(",").map((name) => name.trim().toLowerCase()).filter(Boolean)]);
+export function localHostHeader(value) {
+  if (value === undefined) return true;
+  let hostname;
+  try {
+    hostname = new URL(`http://${Array.isArray(value) ? value[0] : value}`).hostname.toLowerCase().replace(/^\[|\]$/g, "");
+  } catch {
+    return false;
+  }
+  return allowedHosts.has(hostname) || hostname.endsWith(".localhost") || hostname.endsWith(".typing-game.local");
+}
+
 function reportAuditDegradation(error) {
   console.error("Space Typing Admin audit append degraded after mutation:", error);
 }
@@ -150,6 +169,14 @@ const handleMediaV2Request = createMediaV2HttpHandler({
 });
 const handleMediaRuntimeRequest = createMediaRuntimeHttpHandler({ store: mediaAssetsV2 });
 const handleAccountAdminRequest = createAccountAdminHttpHandler({ auditLog, onAuditError: reportAuditDegradation, adminTokenWeak: isWeakAdminToken(token) });
+// All games → Typing Feel: its own store, export and routes; never needs Space Typing (§3.3, §3.12).
+const { typingFeel, handleTypingFeelRequest, handleTypingFeelRuntimeRequest } = await startTypingFeel({
+  root,
+  env: process.env,
+  mediaStore: mediaAssetsV2,
+  auditLog,
+  onAuditError: reportAuditDegradation,
+});
 
 async function revisionChangeScope(revisionId) {
   const target = await store.getRevision(revisionId);
@@ -177,7 +204,12 @@ async function rollbackChangeScope(targetRevision) {
 export const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
+    if ((url.pathname.startsWith("/api/admin/") || url.pathname.startsWith("/api/runtime/typing-feel/")) && !localHostHeader(request.headers.host)) {
+      json(response, 403, { error: "forbidden-host", message: "The Admin service answers only local host names (127.0.0.1, localhost, typing-game.local)." });
+      return;
+    }
     if (await handleMediaRuntimeRequest({ request, response, url })) return;
+    if (await handleTypingFeelRuntimeRequest({ request, response, url })) return;
 
     if (!spaceAvailable && url.pathname.startsWith("/api/runtime/space-typing/")) {
       json(response, 503, spaceUnavailableBody);
@@ -212,13 +244,14 @@ export const server = createServer(async (request, response) => {
 
     const actor = createLocalAdminActorFromRequest(request);
     if (await handleMediaV2Request({ request, response, url, actor })) return;
+    if (await handleTypingFeelRequest({ request, response, url, actor })) return;
     // Cheap availability probe for the shell: reads no Typing Feel or Space files.
     if (request.method === "GET" && url.pathname === "/api/admin/shared/status") {
       json(response, 200, { spaceAvailable, spaceStatus });
       return;
     }
     if (request.method === "GET" && url.pathname === "/api/admin/shared/overview") {
-      json(response, 200, await readSharedOverview({ rootDir: root, spaceAvailable, spaceStatus }));
+      json(response, 200, await readSharedOverview({ rootDir: root, spaceAvailable, spaceStatus, catalogueFile: typingFeel.locations.publicDir ? resolve(typingFeel.locations.publicDir, "v1/keys/keys-manifest.json") : undefined, typingFeelStatus: typingFeel.status }));
       return;
     }
     if (request.method === "GET" && url.pathname === "/api/admin/shared/actor") {

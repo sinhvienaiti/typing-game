@@ -32,6 +32,9 @@ async function startServer(t, space) {
     TYPING_GAME_ADMIN_TOKEN: "shared-ia-test", TYPING_GAME_ADMIN_ROLE: "super-admin",
     TYPING_GAME_ADMIN_PERMISSION_OVERRIDES: "",
     TYPING_GAME_ADMIN_SPACE_DIR: spaceDir,
+    // Typing Feel moves with the data dir (all three or none), so it never reads or writes the real store or typing-feel/public.
+    TYPING_GAME_ADMIN_SHARED_DIR: resolve(dir, "shared/typing-feel"),
+    TYPING_FEEL_PUBLIC_DIR: resolve(dir, "typing-feel-public"),
   };
   const previous = Object.fromEntries(Object.keys(env).map((key) => [key, process.env[key]]));
   Object.assign(process.env, env);
@@ -63,7 +66,7 @@ for (const space of ["present", "missing", "failed"]) {
     const { get, logs } = await startServer(t, space);
     const available = space === "present";
     const spaceStatus = { present: "available", missing: "not-checked-out", failed: "failed" }[space];
-    for (const path of ["/api/admin/shared/status", "/api/admin/shared/overview", "/api/admin/shared/learning-content/catalog", "/api/admin/shared/actor", "/api/admin/space-typing/media/assets"]) {
+    for (const path of ["/api/admin/shared/status", "/api/admin/shared/overview", "/api/admin/shared/learning-content/catalog", "/api/admin/shared/actor", "/api/admin/space-typing/media/assets", "/api/admin/shared/typing-feel/state", "/api/admin/shared/typing-feel/history"]) {
       assert.equal((await get(path, false)).status, 401, `${path} requires a token`);
     }
     assert.deepEqual(await get("/api/admin/shared/status"), { status: 200, data: { spaceAvailable: available, spaceStatus } });
@@ -86,6 +89,15 @@ for (const space of ["present", "missing", "failed"]) {
       assert.equal(result.status, available ? 200 : 503, path);
       if (!available) assert.deepEqual(result.data, UNAVAILABLE[space], path);
     }
+    // Typing Feel runs whatever the Space checkout: not imported yet in this temp data dir.
+    const typingFeel = await get("/api/admin/shared/typing-feel/state");
+    assert.equal(typingFeel.status, 200);
+    assert.equal(typingFeel.data.initialized, false);
+    assert.equal(typingFeel.data.startup.status, "not-initialized");
+    assert.equal(overview.data.typingFeelStatus, "not-initialized");
+    assert.equal(overview.data.catalogue, null, "the overview reads the catalogue of TYPING_FEEL_PUBLIC_DIR");
+    // The preview needs no token (it is not under /api/admin/); an unknown revision is a 404.
+    assert.equal((await get("/api/runtime/typing-feel/preview/seed-v1/keys/keys-manifest.json", false)).status, 404);
     const media = await get("/api/admin/space-typing/media/assets");
     assert.equal(media.status, 200);
     // A missing media ID is still handled by Media V2, not the Space availability guard.

@@ -161,7 +161,9 @@ async function renderPreview(
   }
 
   const image = version.components.find((component) => component.mimeType.startsWith("image/"));
-  const audio = version.components.find((component) => component.mimeType.startsWith("audio/"));
+  // A keyboard set holds dozens of key takes: its preview role is the one to play.
+  const audio = version.components.find((component) => component.role === "preview" && component.mimeType.startsWith("audio/"))
+    ?? version.components.find((component) => component.mimeType.startsWith("audio/"));
   const component = image ?? audio ?? version.components[0];
   if (!component) {
     host.replaceChildren(previewPlaceholder("No preview available", "This version has no media component."));
@@ -503,7 +505,9 @@ export function renderAdminV2MediaLibrary(helpScope: AdminHelpScope): HTMLElemen
 
     const ownershipNote = adminOwned
       ? element("div", "st-admin-v2-media-readonly", "This is an Admin-managed asset. New uploads create immutable versions; old versions stay available for rollback/reference history.")
-      : element("div", "st-admin-v2-media-readonly", "Read-only here. This asset is owned by Space Typing runtime/project files or a generator pipeline. Admin can reference its exact version but cannot replace or archive the source-owned asset.");
+      : detail.asset.tags.includes("typing-feel")
+        ? element("div", "st-admin-v2-media-readonly", "Read-only here. This asset is owned by Typing Feel (All games): its files are a published set folder in typing-feel/public. Change it in Keyboard Sounds; Admin can reference its exact version but cannot replace or archive it here.")
+        : element("div", "st-admin-v2-media-readonly", "Read-only here. This asset is owned by Space Typing runtime/project files or a generator pipeline. Admin can reference its exact version but cannot replace or archive the source-owned asset.");
 
     detailBody.replaceChildren(head, chips, preview, ownershipNote, metaSection, renderUsage(detail.references), renderVersions(detail), technicalDetails(detail, version));
     if (actions.childElementCount > 0) detailBody.append(actions);

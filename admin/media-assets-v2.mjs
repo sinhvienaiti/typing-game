@@ -1,6 +1,7 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, readFile, rename, unlink, writeFile } from "node:fs/promises";
-import { extname, join } from "node:path";
+import { mkdir, readFile, rename, stat, unlink, writeFile } from "node:fs/promises";
+import { dirname, extname, join, resolve } from "node:path";
 
 export class MediaAssetError extends Error {}
 
@@ -158,6 +159,128 @@ function assertUniqueRoles(components) {
   }
 }
 
+function normalizeBundleInput(components) {
+  if (!Array.isArray(components) || components.length === 0) throw new MediaAssetError("components must not be empty.");
+  const inputs = components.map((component, index) => {
+    if (component === null || typeof component !== "object" || Array.isArray(component)) {
+      throw new MediaAssetError(`components[${index}] must be an object.`);
+    }
+    if (!Buffer.isBuffer(component.buffer) || component.buffer.length === 0) {
+      throw new MediaAssetError(`components[${index}].buffer must contain bytes.`);
+    }
+    const mimeType = cleanText(component.mimeType, `components[${index}].mimeType`, { max: 120 }).toLowerCase();
+    if (!MIME_PATTERN.test(mimeType)) throw new MediaAssetError(`components[${index}].mimeType is invalid.`);
+    return {
+      role: cleanRole(component.role),
+      filename: cleanOptionalText(component.filename, `components[${index}].filename`, 500),
+      mimeType,
+      buffer: component.buffer,
+      width: optionalPositiveInteger(component.width, `components[${index}].width`),
+      height: optionalPositiveInteger(component.height, `components[${index}].height`),
+      durationSeconds: optionalPositiveNumber(component.durationSeconds, `components[${index}].durationSeconds`),
+    };
+  });
+  assertUniqueRoles(inputs);
+  return inputs;
+}
+
+// One write lock per registry file for the whole process: every MediaAssetStore
+// on the same folder (Media HTTP, Typing Feel, bootstrap) shares it, so two
+// read-modify-write admissions of registry.json can never lose one another.
+// The lock is re-entrant inside one async call chain, so a caller may group
+// several store writes under withWriteLock without deadlocking.
+// Across processes (the Admin service and a command such as the Typing Feel
+// import on the same folder) the outermost holder in each process also owns
+// registry.json.lock, created with O_EXCL. A lock left by a process that is gone,
+// or older than REGISTRY_LOCK_STALE_MS, is broken; a live holder is waited for.
+const registryWriteTails = new Map();
+const heldRegistryLocks = new AsyncLocalStorage();
+export const REGISTRY_LOCK_WAIT_MS = 30_000;
+export const REGISTRY_LOCK_STALE_MS = 10 * 60_000;
+
+function processAlive(pid) {
+  if (!Number.isInteger(pid) || pid <= 0) return false;
+  if (pid === process.pid) return true;
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    return error?.code === "EPERM";
+  }
+}
+
+async function readLockHolder(lockPath) {
+  try {
+    const [text, stats] = await Promise.all([readFile(lockPath, "utf8"), stat(lockPath)]);
+    try {
+      const holder = JSON.parse(text);
+      return { text, pid: holder?.pid ?? null, at: Date.parse(holder?.at) };
+    } catch {
+      // Empty while its writer is between create and write, or torn by a holder that died then.
+      return { text, pid: null, at: stats.mtimeMs };
+    }
+  } catch (error) {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
+/** Takes registry.json.lock for this process; returns its release function. */
+export async function acquireRegistryFileLock(registryPath, { waitMs = REGISTRY_LOCK_WAIT_MS, staleMs = REGISTRY_LOCK_STALE_MS } = {}) {
+  const lockPath = `${resolve(registryPath)}.lock`;
+  const mine = JSON.stringify({ pid: process.pid, at: new Date().toISOString(), token: randomUUID() });
+  const deadline = Date.now() + waitMs;
+  for (;;) {
+    try {
+      await writeFile(lockPath, mine, { encoding: "utf8", flag: "wx" });
+      return async () => {
+        // Remove only our own lock (a stale-lock breaker never removes a live one).
+        if ((await readLockHolder(lockPath))?.text === mine) await unlink(lockPath).catch(() => undefined);
+      };
+    } catch (error) {
+      if (error?.code === "ENOENT") {
+        await mkdir(dirname(lockPath), { recursive: true });
+        continue;
+      }
+      if (error?.code !== "EEXIST") throw error;
+    }
+    const holder = await readLockHolder(lockPath);
+    if (holder === null) continue;
+    const age = Date.now() - holder.at;
+    const stale = holder.pid === null ? !(age < 5_000) : !processAlive(holder.pid) || !(age < staleMs);
+    if (stale) {
+      // Re-read right before removing, so a lock another breaker has just taken stays.
+      if ((await readLockHolder(lockPath))?.text === holder.text) await unlink(lockPath).catch(() => undefined);
+      continue;
+    }
+    if (Date.now() >= deadline) {
+      throw new MediaAssetError(`The Media registry is busy: process ${holder.pid} holds ${lockPath}. Try again when it has finished; if no such process runs, delete that file.`);
+    }
+    await new Promise((done) => setTimeout(done, 25));
+  }
+}
+
+export function withMediaRegistryLock(registryPath, operation) {
+  const key = resolve(registryPath);
+  const held = heldRegistryLocks.getStore();
+  if (held?.has(key)) return Promise.resolve().then(operation);
+  const run = () => heldRegistryLocks.run(new Set([...(held ?? []), key]), async () => {
+    const release = await acquireRegistryFileLock(key);
+    try {
+      return await operation();
+    } finally {
+      await release();
+    }
+  });
+  const next = (registryWriteTails.get(key) ?? Promise.resolve()).then(run, run);
+  const settled = next.then(() => undefined, () => undefined);
+  registryWriteTails.set(key, settled);
+  settled.then(() => {
+    if (registryWriteTails.get(key) === settled) registryWriteTails.delete(key);
+  });
+  return next;
+}
+
 function createEmptyRegistry() {
   return {
     schemaVersion: MEDIA_REGISTRY_SCHEMA_VERSION,
@@ -239,7 +362,16 @@ export class MediaAssetStore {
     this.uuid = uuid;
   }
 
+  /** Runs `operation` under the process-wide write lock of this registry (re-entrant). */
+  withWriteLock(operation) {
+    return withMediaRegistryLock(this.registryPath, operation);
+  }
+
   async initialize() {
+    return this.withWriteLock(() => this.#initialize());
+  }
+
+  async #initialize() {
     await mkdir(this.blobsDir, { recursive: true });
     try {
       const registry = validateRegistry(JSON.parse(await readFile(this.registryPath, "utf8")));
@@ -309,7 +441,7 @@ export class MediaAssetStore {
     return structuredClone(version);
   }
 
-  async createUploadAsset({ kind, title, filename, mimeType, buffer, actorId = "local-admin", tags = [] }) {
+  async #createUploadAsset({ kind, title, filename, mimeType, buffer, actorId = "local-admin", tags = [] }) {
     const assetId = `media.${this.uuid()}`;
     const now = this.now().toISOString();
     const registry = await this.readRegistry();
@@ -329,15 +461,8 @@ export class MediaAssetStore {
     return this.createUploadVersion({ assetId, filename, mimeType, buffer, actorId, makeCurrent: true });
   }
 
-  async createUploadVersion({ assetId, filename, mimeType, buffer, actorId = "local-admin", role = "primary", makeCurrent = true, width, height, durationSeconds }) {
-    const id = cleanId(assetId, "assetId");
-    if (!Buffer.isBuffer(buffer) || buffer.length === 0) throw new MediaAssetError("buffer must contain uploaded bytes.");
-    const cleanMime = cleanText(mimeType, "mimeType", { max: 120 }).toLowerCase();
-    if (!MIME_PATTERN.test(cleanMime)) throw new MediaAssetError("mimeType is invalid.");
-    const registry = await this.readRegistry();
-    const asset = registry.assets[id];
-    if (!asset) throw new MediaAssetError(`Unknown asset: ${id}.`);
-
+  /** Stores `buffer` as a content-addressed blob (never overwritten) and returns its admin-blob component. */
+  async #writeBlobComponent({ role, filename, mimeType, buffer, width, height, durationSeconds }) {
     const sha256 = createHash("sha256").update(buffer).digest("hex");
     const extension = safeExtension(filename);
     const storageKey = `blobs/${sha256}${extension}`;
@@ -353,8 +478,8 @@ export class MediaAssetStore {
 
     const component = {
       role: cleanRole(role),
-      mimeType: cleanMime,
-      format: extension ? extension.slice(1) : cleanMime.split("/")[1]?.split("+")[0] || "bin",
+      mimeType,
+      format: extension ? extension.slice(1) : mimeType.split("/")[1]?.split("+")[0] || "bin",
       byteSize: buffer.length,
       sha256,
       storageClass: "admin-blob",
@@ -366,6 +491,83 @@ export class MediaAssetStore {
     if (normalizedWidth !== undefined) component.width = normalizedWidth;
     if (normalizedHeight !== undefined) component.height = normalizedHeight;
     if (normalizedDuration !== undefined) component.durationSeconds = normalizedDuration;
+    return component;
+  }
+
+  async #createUploadBundleAsset({ kind, title, tags = [], components, source, actorId = "local-admin" }) {
+    const assetId = `media.${this.uuid()}`;
+    const now = this.now().toISOString();
+    const registry = await this.readRegistry();
+    registry.assets[assetId] = {
+      assetId,
+      kind: oneOf(kind, "kind", MEDIA_KINDS),
+      title: cleanText(title, "title", { max: 240 }),
+      lifecycle: "active",
+      currentVersionId: null,
+      tags: normalizeTags(tags),
+      createdAt: now,
+      createdBy: cleanText(actorId, "actorId", { max: 120 }),
+      updatedAt: now,
+      updatedBy: cleanText(actorId, "actorId", { max: 120 }),
+    };
+    // Check every component before the asset row is written, so a bad bundle leaves nothing behind.
+    normalizeBundleInput(components);
+    await this.writeRegistry(registry);
+    return this.createUploadBundleVersion({ assetId, components, source, actorId, makeCurrent: true });
+  }
+
+  /**
+   * One immutable Admin-upload version made of several components (for example
+   * key-01…, space-01…, preview, manifest, report). Each component becomes a
+   * content-addressed blob; the version fingerprint covers every component and
+   * the source, so the same bytes and source always give the same fingerprint.
+   */
+  async #createUploadBundleVersion({ assetId, components, source = {}, actorId = "local-admin", makeCurrent = true }) {
+    const id = cleanId(assetId, "assetId");
+    const inputs = normalizeBundleInput(components);
+    const normalizedSource = normalizeSource(source);
+    if (normalizedSource.owner === undefined) normalizedSource.owner = "admin-media-v2";
+    const registry = await this.readRegistry();
+    const asset = registry.assets[id];
+    if (!asset) throw new MediaAssetError(`Unknown asset: ${id}.`);
+
+    const written = [];
+    for (const input of inputs) written.push(await this.#writeBlobComponent(input));
+    written.sort((a, b) => a.role.localeCompare(b.role));
+
+    const now = this.now().toISOString();
+    const assetVersionId = `media-version.${this.uuid()}`;
+    const version = {
+      assetVersionId,
+      assetId: id,
+      provenance: "admin-upload",
+      storageClass: "admin-blob",
+      contentFingerprint: versionFingerprint({ provenance: "admin-upload", components: written, source: normalizedSource }),
+      components: written,
+      source: normalizedSource,
+      createdAt: now,
+      createdBy: cleanText(actorId, "actorId", { max: 120 }),
+    };
+    registry.versions[assetVersionId] = version;
+    if (makeCurrent) {
+      asset.currentVersionId = assetVersionId;
+      asset.updatedAt = now;
+      asset.updatedBy = version.createdBy;
+    }
+    await this.writeRegistry(registry);
+    return { asset: structuredClone(asset), version: structuredClone(version) };
+  }
+
+  async #createUploadVersion({ assetId, filename, mimeType, buffer, actorId = "local-admin", role = "primary", makeCurrent = true, width, height, durationSeconds }) {
+    const id = cleanId(assetId, "assetId");
+    if (!Buffer.isBuffer(buffer) || buffer.length === 0) throw new MediaAssetError("buffer must contain uploaded bytes.");
+    const cleanMime = cleanText(mimeType, "mimeType", { max: 120 }).toLowerCase();
+    if (!MIME_PATTERN.test(cleanMime)) throw new MediaAssetError("mimeType is invalid.");
+    const registry = await this.readRegistry();
+    const asset = registry.assets[id];
+    if (!asset) throw new MediaAssetError(`Unknown asset: ${id}.`);
+
+    const component = await this.#writeBlobComponent({ role, filename, mimeType: cleanMime, buffer, width, height, durationSeconds });
 
     const now = this.now().toISOString();
     const assetVersionId = `media-version.${this.uuid()}`;
@@ -391,7 +593,23 @@ export class MediaAssetStore {
     return { asset: structuredClone(asset), version: structuredClone(version) };
   }
 
-  async registerReferenceAsset({ assetId, kind, title, provenance, components, actorId = "bootstrap", tags = [], source = {} }) {
+  /**
+   * Read only: the version registerReferenceAsset would return for this input
+   * without writing (same asset and content fingerprint), or null when it would
+   * create one. Lets a caller check a whole plan before any write.
+   */
+  async findReferenceVersion({ assetId, provenance, components, source = {} }) {
+    const id = cleanId(assetId, "assetId");
+    const normalizedProvenance = oneOf(provenance, "provenance", MEDIA_PROVENANCE.filter((value) => value !== "admin-upload"));
+    if (!Array.isArray(components) || components.length === 0) throw new MediaAssetError("components must not be empty.");
+    const normalizedComponents = components.map(normalizeReferenceComponent).sort((a, b) => a.role.localeCompare(b.role));
+    const fingerprint = versionFingerprint({ provenance: normalizedProvenance, components: normalizedComponents, source: normalizeSource(source) });
+    const registry = await this.readRegistry();
+    const existing = Object.values(registry.versions).find((version) => version.assetId === id && version.contentFingerprint === fingerprint);
+    return existing ? structuredClone(existing) : null;
+  }
+
+  async #registerReferenceAsset({ assetId, kind, title, provenance, components, actorId = "bootstrap", tags = [], source = {} }) {
     const id = cleanId(assetId, "assetId");
     const normalizedProvenance = oneOf(provenance, "provenance", MEDIA_PROVENANCE.filter((value) => value !== "admin-upload"));
     if (!Array.isArray(components) || components.length === 0) throw new MediaAssetError("components must not be empty.");
@@ -444,7 +662,7 @@ export class MediaAssetStore {
     return { asset: structuredClone(asset), version: structuredClone(version), created: true };
   }
 
-  async archiveAsset(assetId, { actorId = "local-admin", archived = true } = {}) {
+  async #archiveAsset(assetId, { actorId = "local-admin", archived = true } = {}) {
     const id = cleanId(assetId, "assetId");
     const registry = await this.readRegistry();
     const asset = registry.assets[id];
@@ -456,7 +674,7 @@ export class MediaAssetStore {
     return structuredClone(asset);
   }
 
-  async addReference({ assetId, assetVersionId, domain, entityType, entityId, field, revisionId, actorId = "local-admin" }) {
+  async #addReference({ assetId, assetVersionId, domain, entityType, entityId, field, revisionId, actorId = "local-admin" }) {
     const id = cleanId(assetId, "assetId");
     const versionId = cleanId(assetVersionId, "assetVersionId");
     const registry = await this.readRegistry();
@@ -498,7 +716,65 @@ export class MediaAssetStore {
     return structuredClone(reference);
   }
 
-  async removeReference(referenceId) {
+  /**
+   * Admits several references with one registry write. Existing identical
+   * references are reused, so a repeated call writes nothing.
+   * Returns { references, created }.
+   */
+  async #addReferences(inputs, { actorId = "local-admin" } = {}) {
+    if (!Array.isArray(inputs)) throw new MediaAssetError("references must be an array.");
+    const registry = await this.readRegistry();
+    const references = [];
+    let created = 0;
+    for (const [index, input] of inputs.entries()) {
+      if (input === null || typeof input !== "object") throw new MediaAssetError(`references[${index}] must be an object.`);
+      const id = cleanId(input.assetId, `references[${index}].assetId`);
+      const versionId = cleanId(input.assetVersionId, `references[${index}].assetVersionId`);
+      const asset = registry.assets[id];
+      const version = registry.versions[versionId];
+      if (!asset || !version || version.assetId !== id) throw new MediaAssetError(`references[${index}]: reference asset/version pair is invalid.`);
+      const normalized = {
+        domain: cleanText(input.domain, "domain", { max: 200 }),
+        entityType: cleanText(input.entityType, "entityType", { max: 200 }),
+        entityId: cleanText(input.entityId, "entityId", { max: 200 }),
+        field: cleanText(input.field, "field", { max: 200 }),
+        revisionId: cleanOptionalText(input.revisionId, "revisionId", 200),
+      };
+      const duplicate = Object.values(registry.references).find((reference) =>
+        reference.assetId === id &&
+        reference.assetVersionId === versionId &&
+        reference.domain === normalized.domain &&
+        reference.entityType === normalized.entityType &&
+        reference.entityId === normalized.entityId &&
+        reference.field === normalized.field &&
+        (reference.revisionId ?? undefined) === normalized.revisionId
+      );
+      if (duplicate) {
+        references.push(structuredClone(duplicate));
+        continue;
+      }
+      const referenceId = `media-ref.${this.uuid()}`;
+      const reference = {
+        referenceId,
+        assetId: id,
+        assetVersionId: versionId,
+        domain: normalized.domain,
+        entityType: normalized.entityType,
+        entityId: normalized.entityId,
+        field: normalized.field,
+        createdAt: this.now().toISOString(),
+        createdBy: cleanText(input.actorId ?? actorId, "actorId", { max: 120 }),
+      };
+      if (normalized.revisionId !== undefined) reference.revisionId = normalized.revisionId;
+      registry.references[referenceId] = reference;
+      references.push(structuredClone(reference));
+      created += 1;
+    }
+    if (created > 0) await this.writeRegistry(registry);
+    return { references, created };
+  }
+
+  async #removeReference(referenceId) {
     const id = cleanId(referenceId, "referenceId");
     const registry = await this.readRegistry();
     const reference = registry.references[id];
@@ -517,7 +793,7 @@ export class MediaAssetStore {
       .map((reference) => structuredClone(reference));
   }
 
-  async hardDeleteVersion(assetVersionId) {
+  async #hardDeleteVersion(assetVersionId) {
     const versionId = cleanId(assetVersionId, "assetVersionId");
     const registry = await this.readRegistry();
     const version = registry.versions[versionId];
@@ -543,6 +819,18 @@ export class MediaAssetStore {
     }
     return structuredClone(version);
   }
+
+  // Every registry write goes through the shared write lock (see withMediaRegistryLock).
+  createUploadAsset(input) { return this.withWriteLock(() => this.#createUploadAsset(input)); }
+  createUploadVersion(input) { return this.withWriteLock(() => this.#createUploadVersion(input)); }
+  createUploadBundleAsset(input) { return this.withWriteLock(() => this.#createUploadBundleAsset(input)); }
+  createUploadBundleVersion(input) { return this.withWriteLock(() => this.#createUploadBundleVersion(input)); }
+  registerReferenceAsset(input) { return this.withWriteLock(() => this.#registerReferenceAsset(input)); }
+  archiveAsset(assetId, options) { return this.withWriteLock(() => this.#archiveAsset(assetId, options)); }
+  addReference(input) { return this.withWriteLock(() => this.#addReference(input)); }
+  addReferences(inputs, options) { return this.withWriteLock(() => this.#addReferences(inputs, options)); }
+  removeReference(referenceId) { return this.withWriteLock(() => this.#removeReference(referenceId)); }
+  hardDeleteVersion(assetVersionId) { return this.withWriteLock(() => this.#hardDeleteVersion(assetVersionId)); }
 
   async resolveComponent(assetVersionId, role = "primary") {
     const version = await this.getVersion(assetVersionId);

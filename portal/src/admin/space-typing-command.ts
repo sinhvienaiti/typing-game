@@ -10,11 +10,17 @@ export type AdminCommandOptions = { includeDeveloperTools?: boolean };
 /** Hidden search words per path, for example a screen's former name. */
 const COMMAND_KEYWORDS: Readonly<Record<string, string>> = {
   "/admin/shared/learning-content": "Typing Content vocabulary typing texts",
+  "/admin/shared/keyboard-sounds": "Typing Feel key sounds keyboard audio sound sets default family",
+  "/admin/shared/typing-effects": "Typing Feel letter effects style intensity size key volume",
+  "/admin/shared/release": "Typing Feel publish rollback history audit release",
 };
 
 const PRIMARY_COMMANDS = [
   ["All games Overview", "/admin/shared", "All games"],
   ["Learning Content", "/admin/shared/learning-content", "All games"],
+  ["Keyboard Sounds", "/admin/shared/keyboard-sounds", "All games · Typing Feel"],
+  ["Typing Effects", "/admin/shared/typing-effects", "All games · Typing Feel"],
+  ["Release & History", "/admin/shared/release", "All games · Typing Feel"],
   ["Overview", BASE, "Space Typing · Dashboard"],
   ["Shop", `${BASE}/shop`, "Economy & Live Ops"],
   ["Events (read-only)", `${BASE}/events`, "Players & Live Ops"],

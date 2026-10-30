@@ -121,6 +121,9 @@ function mediaErrorMessage(payload: unknown, fallback: string): string {
   return fallback;
 }
 
+const TYPING_FEEL_KEYS_PREFIX = "/v1/keys/";
+const TYPING_FEEL_PUBLISHED_BASE = "/api/runtime/typing-feel/published/keys/";
+
 export class MediaAdminApi {
   constructor(private readonly admin = new SpaceTypingAdminApi()) {}
 
@@ -176,7 +179,12 @@ export class MediaAdminApi {
 
   async previewHandle(assetVersionId: string, component: MediaComponent): Promise<MediaPreviewHandle | null> {
     if (component.runtimeUrl) {
-      return { url: component.runtimeUrl, revoke: () => undefined };
+      // Typing Feel set files live at /v1/keys/… on the Typing Feel host, which the Admin and portal
+      // origins do not serve; the Admin's no-token route serves the same published files.
+      const url = component.runtimeUrl.startsWith(TYPING_FEEL_KEYS_PREFIX)
+        ? `${TYPING_FEEL_PUBLISHED_BASE}${component.runtimeUrl.slice(TYPING_FEEL_KEYS_PREFIX.length)}`
+        : component.runtimeUrl;
+      return { url, revoke: () => undefined };
     }
     if (component.storageClass !== "admin-blob") return null;
 

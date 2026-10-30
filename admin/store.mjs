@@ -198,11 +198,15 @@ function validateFeatureFlags(featureFlags) {
   }
 }
 
+export const DEFAULT_SEED_REVISION = "seed-v1";
+export const DEFAULT_SEED_MESSAGE = "Initial Space Typing Admin seed";
+
 export class RevisionStore {
-  constructor({ rootDir, contract, now = () => new Date() }) {
+  constructor({ rootDir, contract, now = () => new Date(), seedMessage = DEFAULT_SEED_MESSAGE }) {
     this.rootDir = rootDir;
     this.contract = contract;
     this.now = now;
+    this.seedMessage = seedMessage;
     this.revisionsDir = join(rootDir, "revisions");
     this.statePath = join(rootDir, "state.json");
   }
@@ -231,7 +235,12 @@ export class RevisionStore {
     return config;
   }
 
-  async initialize(seedConfig) {
+  /**
+   * Writes the first revision and state once; later calls return the state.
+   * `revision`, `message` and `author` name the seed (default seed-v1, the
+   * store's seedMessage, "system").
+   */
+  async initialize(seedConfig, { revision: seedRevision = DEFAULT_SEED_REVISION, message = this.seedMessage, author = "system" } = {}) {
     this.validateConfig(seedConfig);
     await mkdir(this.revisionsDir, { recursive: true });
     try {
@@ -241,11 +250,11 @@ export class RevisionStore {
     }
 
     const revision = {
-      revision: "seed-v1",
+      revision: seedRevision,
       parentRevision: null,
       createdAt: this.now().toISOString(),
-      author: "system",
-      message: "Initial Space Typing Admin seed",
+      author,
+      message,
       config: structuredClone(seedConfig),
     };
     const revisionPath = this.revisionPath(revision.revision);

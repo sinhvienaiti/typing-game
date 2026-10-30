@@ -50,6 +50,10 @@ function humanAction(event: AdminAuditEvent): string {
   if (action === "revision.rollback") return "Rolled back a published version";
   if (action === "media.music.upload") return "Uploaded a music track";
   if (action === "media.music.delete") return "Removed an Admin-uploaded music track";
+  // Typing Feel (All games) has its own action names so it is never counted as a Space publish (§3.12).
+  if (action === "typing-feel.revision.create") return "Saved a Typing Feel draft";
+  if (action === "typing-feel.publish") return "Published Typing Feel to all games";
+  if (action === "typing-feel.rollback") return "Rolled back Typing Feel for all games";
   return action.replaceAll(".", " ");
 }
 

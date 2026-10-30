@@ -98,13 +98,9 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
   if (!store) throw new TypeError("createMediaV2HttpHandler requires store.");
   if (!auditLog) throw new TypeError("createMediaV2HttpHandler requires auditLog.");
 
-  // Serialize Media writes so independent HTTP read-modify-write mutations cannot lose one another.
-  let mutationTail = Promise.resolve();
-  const serializeMutation = (operation) => {
-    const next = mutationTail.then(operation, operation);
-    mutationTail = next.then(() => undefined, () => undefined);
-    return next;
-  };
+  // Media writes share the store's process-wide registry lock with every other
+  // writer (Typing Feel included), so read-modify-write admissions cannot lose one another.
+  const serializeMutation = (operation) => store.withWriteLock(operation);
 
   const requireAdminOwnedAsset = async (assetId) => {
     const asset = await store.getAsset(assetId);
