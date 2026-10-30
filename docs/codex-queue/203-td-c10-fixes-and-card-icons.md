@@ -1,5 +1,11 @@
 # Phiếu 203 · Wordwoven · C10: năm sửa của giám khảo trên thẻ chữ, rồi icon gọi 133, huy hiệu thẻ 172 và icon khay 165 thay emoji và chấm CSS
 
+> **Giao (30/10, 14:16, điều phối):**
+> - 200 đã xong (`200-report.md`, 405/405). File chưa commit của 200 trong `games/.wt-td-ui` là file đã biết.
+> - Không có làn Claude nào sửa `src/view/words/` lúc này.
+> - 133, 165, 172 **chưa được chấm**, nên chỉ làm Phần A. Phần B tự bỏ đúng như phiếu.
+> - Các lệnh kiểm là bắt buộc. Điều phối cho phép thay chủ dự án, thắng mọi luật chung kiểu "không chạy build hay toàn bộ test".
+
 **Nguồn:**
 - `docs/HANDOFF_CURRENT.md` §3, hàng L4 (C10 đạt 8,0), việc cho vòng sau: "giữ màu đã gõ trên mọi thẻ khớp; mũi chỉ khay dùng chữ V ở mọi mép (vòng hở ở mép trái đọc thành chữ "C"); ×N và chữ đóng dấu không ra khỏi màn, không đè HUD (kiểm `overHud` mọi khung); nét viền cứng 1–2 khung khi gõ xong; chữ đóng dấu hiện ngay khung phím".
 - Hai giám khảo C10 vòng 4, cùng 8,0 sát ngưỡng (khay mép 7,0 và 7,5):
