@@ -139,13 +139,13 @@ case "$TARGET" in
     update_space_submodule
     ;;
   dragon)
-    require_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    require_new_game "games/dragon-hold" "Dragonhold"
     ;;
   td)
-    require_new_game "games/typing-defense" "Lời Gọi"
+    require_new_game "games/typing-defense" "Wordwoven"
     ;;
   survival)
-    require_new_game "games/typing-survival" "Tuyến Cuối"
+    require_new_game "games/typing-survival" "Last Line"
     ;;
   tutien)
     require_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
@@ -212,9 +212,9 @@ case "$TARGET" in
     install_karaoke
     install_space
     install_monkeytype
-    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
-    install_new_game "games/typing-defense" "Lời Gọi"
-    install_new_game "games/typing-survival" "Tuyến Cuối"
+    install_new_game "games/dragon-hold" "Dragonhold"
+    install_new_game "games/typing-defense" "Wordwoven"
+    install_new_game "games/typing-survival" "Last Line"
     install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"
     ;;
   monkeytype)
@@ -233,13 +233,13 @@ case "$TARGET" in
     install_space
     ;;
   dragon)
-    install_new_game "games/dragon-hold" "Rồng Giữ Ải"
+    install_new_game "games/dragon-hold" "Dragonhold"
     ;;
   td)
-    install_new_game "games/typing-defense" "Lời Gọi"
+    install_new_game "games/typing-defense" "Wordwoven"
     ;;
   survival)
-    install_new_game "games/typing-survival" "Tuyến Cuối"
+    install_new_game "games/typing-survival" "Last Line"
     ;;
   tutien)
     install_new_game "games/immortality-cultivation" "Tu Tiên Thủ Ải"

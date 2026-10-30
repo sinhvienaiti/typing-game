@@ -18,9 +18,9 @@ usage() {
 shift 2
 
 case "$DIR" in
-  dragon-hold) LABEL="Rồng Giữ Ải (dragon-hold)" ;;
-  typing-defense) LABEL="Lời Gọi (typing-defense)" ;;
-  typing-survival) LABEL="Tuyến Cuối (typing-survival)" ;;
+  dragon-hold) LABEL="Dragonhold (dragon-hold)" ;;
+  typing-defense) LABEL="Wordwoven (typing-defense)" ;;
+  typing-survival) LABEL="Last Line (typing-survival)" ;;
   immortality-cultivation) LABEL="Tu Tiên Thủ Ải (immortality-cultivation)" ;;
   *) LABEL="$DIR" ;;
 esac

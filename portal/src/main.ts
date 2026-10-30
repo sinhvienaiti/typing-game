@@ -1,4 +1,6 @@
 import "./styles.css";
+import { gameCardModel, hideImageOnError } from "./game-card";
+import type { GameArtImage } from "./game-card";
 import { SpaceTypingAdmin } from "./admin/space-typing";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
@@ -52,7 +54,8 @@ type Game = {
   description: string;
   path: string;
   appUrl: string;
-  icon: string;
+  icon?: string;
+  art?: { icon?: string; cover?: string };
   group?: string;
 };
 
@@ -239,15 +242,33 @@ function makeButton(label: string, path: string): HTMLButtonElement {
   return button;
 }
 
+function makeGameImage(art: GameArtImage, className: string, onHide?: () => void): HTMLImageElement {
+  const img = document.createElement("img");
+  img.className = className;
+  img.alt = art.alt;
+  img.width = art.width;
+  img.height = art.height;
+  img.loading = "lazy";
+  img.decoding = "async";
+  hideImageOnError(img, onHide);
+  img.src = art.src;
+  return img;
+}
+
 function makeGameButton(game: Game): HTMLButtonElement {
+  const model = gameCardModel(game);
   const button = document.createElement("button");
   button.className = "nav-game";
   const icon = document.createElement("span");
   icon.className = "nav-game-icon";
   icon.setAttribute("aria-hidden", "true");
-  icon.textContent = game.icon;
+  if (model.icon !== null) {
+    icon.append(makeGameImage(model.icon, "nav-game-art-icon"));
+  } else if (model.glyph !== null) {
+    icon.textContent = model.glyph;
+  }
   const label = document.createElement("span");
-  label.textContent = game.name;
+  label.textContent = model.title;
   button.append(icon, label);
   button.addEventListener("click", () => navigate(game.path));
   navButtons.set(game.path, button);
@@ -467,26 +488,51 @@ function renderHome(): HTMLElement {
   const grid = document.createElement("section");
   grid.className = "game-grid";
   for (const game of registry.games) {
+    const model = gameCardModel(game);
     const card = document.createElement("button");
     card.className = "game-card";
 
-    const icon = document.createElement("div");
-    icon.className = "game-icon";
-    icon.textContent = game.icon;
+    if (model.cover !== null) {
+      const cover = document.createElement("div");
+      cover.className = "game-cover";
+      card.classList.add("has-game-cover");
+      cover.append(makeGameImage(model.cover, "game-cover-image", () => {
+        cover.hidden = true;
+        card.classList.remove("has-game-cover");
+      }));
+      card.append(cover);
+    }
+
+    if (model.glyph !== null) {
+      const icon = document.createElement("div");
+      icon.className = "game-icon";
+      icon.textContent = model.glyph;
+      card.append(icon);
+    } else {
+      card.classList.add("game-card-art");
+    }
 
     const copy = document.createElement("div");
     copy.className = "game-copy";
     const title = document.createElement("h2");
-    title.textContent = game.name;
+    title.textContent = model.title;
     const desc = document.createElement("p");
-    desc.textContent = game.description;
-    copy.append(title, desc);
+    desc.textContent = model.description;
+    if (model.glyph === null) {
+      const heading = document.createElement("div");
+      heading.className = "game-card-heading";
+      if (model.icon !== null) heading.append(makeGameImage(model.icon, "game-art-icon"));
+      heading.append(title);
+      copy.append(heading, desc);
+    } else {
+      copy.append(title, desc);
+    }
 
     const play = document.createElement("div");
     play.className = "play";
     play.textContent = "PLAY →";
 
-    card.append(icon, copy, play);
+    card.append(copy, play);
     card.addEventListener("click", () => navigate(game.path));
     grid.append(card);
   }
