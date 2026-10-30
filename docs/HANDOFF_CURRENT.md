@@ -40,6 +40,7 @@ Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ đư
 - `feature/en-vn-translation` lên GitHub `sinhvienaiti/monkeytype` qua SSH, `85a8667a1..02d511788`, không ép. Gồm âm và hiệu ứng gõ, 32 bộ phím, các bản sửa, và commit mirror GitLab của chủ dự án đã gộp vào.
 - Đã kiểm: lint, `ts-check`, 1.485/1.485 test; hai người kiểm độc lập; thử trên trình duyệt (danh sách 32 bộ theo họ, nghe thử khi rê chuột, chọn bộ, gõ có hiệu ứng).
 - File âm không theo Git. Chủ dự án đã nhận zip 32 bộ (`tmp/keys-firefly/zip/keys-firefly-32-monkeytype.zip`). Máy khác: giải nén vào `~/AudioLab/review/staging/`, rồi `pnpm sync-keys`.
+- **GitLab (máy Mac mini M2 ở công ty chỉ dùng GitLab):** workflow mirror trên GitHub chết từ 08/10. Đã đẩy tay `feature/en-vn-translation` lên `gitlab.com/sinhvienaiti/monkeytype`, `7d84bfb70..02d511788`, không ép, đầu nhánh khớp GitHub. Khóa dùng được là `~/htdocs/key/id_ed25519_github`; GitLab nhận khóa này là tài khoản `@toanjaco2`.
 - Repo cha chưa đẩy: `build:monkeytype` có bước sync và `KEYS_FIREFLY_HANDOFF.md` chưa có trên remote; con trỏ `games/monkeytype` trong repo cha chưa cập nhật.
 
 **Cập nhật 13:35:** Codex vẫn chạy ba làn.
