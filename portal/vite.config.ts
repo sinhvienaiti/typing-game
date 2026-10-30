@@ -14,6 +14,10 @@ export default defineConfig({
       clientPort: 443,
     },
     proxy: {
+      "/api/runtime/typing-feel": {
+        target: "http://127.0.0.1:3199",
+        changeOrigin: false,
+      },
       "/api/admin": {
         target: "http://127.0.0.1:3199",
         changeOrigin: false,

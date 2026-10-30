@@ -1,7 +1,7 @@
 import "./styles.css";
 import { gameCardModel, hideImageOnError } from "./game-card";
 import type { GameArtImage } from "./game-card";
-import { SpaceTypingAdmin } from "./admin/space-typing";
+import { TypingGameAdmin } from "./admin/admin-shell";
 import { ParentLearningBridge } from "./learning/bridge";
 import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
@@ -144,7 +144,7 @@ const learningBridge = new ParentLearningBridge(
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
 const learningMaintenance = new LearningMaintenancePage(navigate);
-const spaceTypingAdmin = new SpaceTypingAdmin(navigate);
+const typingGameAdmin = new TypingGameAdmin(navigate);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -395,8 +395,8 @@ function updateNavigation(path: string): void {
     const active =
       buttonPath === "/review"
         ? path === "/review" || path.startsWith("/review/")
-        : buttonPath === "/admin/space-typing"
-          ? path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")
+        : buttonPath === "/admin"
+          ? path === "/admin" || path.startsWith("/admin/")
           : path === buttonPath;
     button.classList.toggle("active", active);
     if (active) button.setAttribute("aria-current", "page");
@@ -447,7 +447,7 @@ music.onPlaybackChange(() => {
 brand.addEventListener("click", () => navigate("/"));
 links.append(makeButton("Home", "/"));
 links.append(makeButton("Smart Review", "/review"));
-links.append(makeButton("Space Admin", "/admin/space-typing"));
+links.append(makeButton("Admin", "/admin"));
 for (const [id, label, games] of groupedGames(registry.games)) {
   links.append(makeNavGroup(id, label, games).element);
 }
@@ -615,6 +615,7 @@ function renderMissing(): HTMLElement {
 }
 
 function renderRoute(): void {
+  document.title = "Typing Games";
   const path = normalizedPath();
   const previousGame = currentGame;
   if (
@@ -661,9 +662,9 @@ function renderRoute(): void {
     return;
   }
 
-  if (path === "/admin/space-typing" || path.startsWith("/admin/space-typing/")) {
+  if (path === "/admin" || path.startsWith("/admin/")) {
     music.setKaraokeActive(false);
-    routeHost.replaceChildren(spaceTypingAdmin.render(path));
+    routeHost.replaceChildren(typingGameAdmin.render(path));
     return;
   }
 

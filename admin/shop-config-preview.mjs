@@ -31,7 +31,7 @@ export async function runShopConfigPreview({
     throw new ShopConfigPreviewError("Unsupported Space Typing Shop preview protocol.");
   }
 
-  const childDir = resolve(rootDir, "games/space-typing");
+  const childDir = resolve(rootDir, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
   const child = spawn("pnpm", ["--dir", childDir, "shop:admin-preview"], {
     cwd: rootDir,
     env: process.env,

@@ -162,7 +162,7 @@ export function renderAdminV2Dashboard(navigate: (path: string) => void, helpSco
   root.append(createAdminPageHeader({
     eyebrow: "Command Center",
     title: "Dashboard",
-    subtitle: "Live administrator state from the revision store, audit log and canonical music catalog — no placeholder metrics.",
+    subtitle: "Live administrator state, recent activity and the canonical music catalog.",
     helpScope,
     help: {
       title: "Dashboard data",

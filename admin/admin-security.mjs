@@ -13,6 +13,7 @@ export class AdminAuthorizationError extends Error {
 export const ADMIN_PERMISSIONS = Object.freeze({
   CONFIG_DRAFT: "config.draft",
   CONFIG_PUBLISH: "config.publish",
+  SHARED_PUBLISH: "shared.publish",
   CONFIG_ROLLBACK: "config.rollback",
   MEDIA_UPLOAD: "media.upload",
   MEDIA_DELETE: "media.delete",
@@ -31,6 +32,7 @@ export const ADMIN_PERMISSIONS = Object.freeze({
 export const ADMIN_PERMISSION_CATALOG = Object.freeze([
   { id: ADMIN_PERMISSIONS.CONFIG_DRAFT, label: "Create drafts", group: "Configuration", dangerous: false },
   { id: ADMIN_PERMISSIONS.CONFIG_PUBLISH, label: "Publish configuration", group: "Configuration", dangerous: true },
+  { id: ADMIN_PERMISSIONS.SHARED_PUBLISH, label: "Publish shared settings to all games", group: "All games", dangerous: true },
   { id: ADMIN_PERMISSIONS.CONFIG_ROLLBACK, label: "Roll back published configuration", group: "Configuration", dangerous: true },
   { id: ADMIN_PERMISSIONS.MEDIA_UPLOAD, label: "Upload media", group: "Media", dangerous: false },
   { id: ADMIN_PERMISSIONS.MEDIA_DELETE, label: "Archive / delete Admin media", group: "Media", dangerous: true },
@@ -51,7 +53,7 @@ const KNOWN_PERMISSIONS = new Set(SUPER_ADMIN_PERMISSIONS);
 
 export const ADMIN_ROLE_TEMPLATES = Object.freeze([
   Object.freeze({ id: "super-admin", label: "Super Admin", description: "Full local administration and Developer Tools access.", permissions: SUPER_ADMIN_PERMISSIONS }),
-  Object.freeze({ id: "publisher", label: "Publisher", description: "Prepare, publish and roll back configuration with audit visibility.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.CONFIG_PUBLISH, ADMIN_PERMISSIONS.CONFIG_ROLLBACK, ADMIN_PERMISSIONS.AUDIT_READ]) }),
+  Object.freeze({ id: "publisher", label: "Publisher", description: "Prepare, publish and roll back configuration with audit visibility.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.SHARED_PUBLISH, ADMIN_PERMISSIONS.CONFIG_PUBLISH, ADMIN_PERMISSIONS.CONFIG_ROLLBACK, ADMIN_PERMISSIONS.AUDIT_READ]) }),
   Object.freeze({ id: "editor", label: "Content Editor", description: "Prepare revision-backed changes and upload media, without publish or destructive media access.", permissions: Object.freeze([ADMIN_PERMISSIONS.CONFIG_DRAFT, ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.AUDIT_READ]) }),
   Object.freeze({ id: "media-manager", label: "Media Manager", description: "Upload and retire Admin-managed media without configuration publish rights.", permissions: Object.freeze([ADMIN_PERMISSIONS.MEDIA_UPLOAD, ADMIN_PERMISSIONS.MEDIA_DELETE, ADMIN_PERMISSIONS.AUDIT_READ]) }),
   Object.freeze({ id: "support", label: "Player Support", description: "Look up players, handle bans, save restores and password help, send compensation mail, answer feedback.", permissions: Object.freeze([ADMIN_PERMISSIONS.PLAYERS_READ, ADMIN_PERMISSIONS.PLAYERS_MODERATE, ADMIN_PERMISSIONS.PLAYERS_SAVE, ADMIN_PERMISSIONS.PLAYERS_CREDENTIALS, ADMIN_PERMISSIONS.LIVEOPS_MAIL, ADMIN_PERMISSIONS.CHAT_MODERATE, ADMIN_PERMISSIONS.FEEDBACK_READ, ADMIN_PERMISSIONS.FEEDBACK_MANAGE, ADMIN_PERMISSIONS.AUDIT_READ]) }),

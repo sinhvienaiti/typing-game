@@ -16,7 +16,7 @@ const [stageScheduler, galaxyHazards, rareTargets, anomaly, recallBonus, rewardC
   read("games/space-typing/src/Game.ts"),
   read("portal/src/admin/space-typing-events-phase-b.ts"),
   read("portal/src/admin/space-typing-phase-b.ts"),
-  read("portal/src/admin/space-typing.ts"),
+  Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")),
   read("admin/server.mjs"),
   read("admin/space-typing-phase-b-map.v1.json"),
   read("admin/shop-capability.mjs"),
@@ -73,11 +73,11 @@ assert(!uiSource.includes("End At"), "A11 must not fabricate schedule end contro
 assert(routerSource.includes("renderPhaseBEvents"), "Events/Live Ops renderer is not wired into Phase B");
 assert(routerSource.includes("renderPhaseBEvents(navigate)"), "Live Ops must receive canonical navigation for Shop ownership handoff");
 assert(routerSource.includes("`${BASE}/events`"), "Events route is not wired into Phase B");
-const phaseBCall = 'const phaseB = renderPhaseBAdminScreen(path, this.navigate);';
+const phaseBCall = 'const phaseB = renderPhaseBAdminScreen(path, navigate);';
 assert(shellSource.includes(phaseBCall), "Space Typing shell must invoke the Phase B router");
 assert(shellSource.includes('if (phaseB !== null) return phaseB;'), "Space Typing shell must return the canonical Phase B renderer");
 assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Events/mock renderer must not remain reachable from the production shell");
-assert(shellSource.includes("return this.renderUnknown(path);"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
+assert(shellSource.includes("?? this.renderUnknown(path)"), "Unknown Admin routes must terminate at the explicit unknown-route guard");
 assert(serverSource.includes("space-typing-admin-events.v1.json"), "Admin server must load Events from the pinned child contract");
 assert(serverSource.includes("/api/admin/space-typing/events/contract"), "Admin server Events contract endpoint is missing");
 assert(serverSource.includes("/api/admin/space-typing/shop/capabilities"), "Admin server Shop capability endpoint is missing");

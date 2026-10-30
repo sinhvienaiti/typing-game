@@ -9,7 +9,7 @@ const contract = JSON.parse(await read("games/space-typing/contracts/space-typin
 const [rankedSource, authoritySource, serviceSource, wsSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/ranked.ts"), read("games/space-typing/src/duel/authority.ts"), read("games/space-typing/server/duel/ranked-service.ts"),
   read("games/space-typing/server/duel/ws-server.ts"), read("portal/src/admin/space-typing-ranked-phase-b.ts"), read("portal/src/admin/space-typing-phase-b.ts"),
-  read("portal/src/admin/space-typing.ts"), read("admin/server.mjs"), read("admin/space-typing-phase-b-map.v1.json"),
+  Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")), read("admin/server.mjs"), read("admin/space-typing-phase-b-map.v1.json"),
 ]);
 
 const ranked = contract.ranked;
@@ -54,7 +54,7 @@ assert(!uiSource.includes("seasonRewards"), "Ranked UI must not fabricate season
 
 assert(routerSource.includes("renderPhaseBRanked"), "Ranked renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/ranked`"), "Ranked route is not wired into Phase B");
-assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, this.navigate);"), "Space Typing shell must invoke Phase B router");
+assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, navigate);"), "Space Typing shell must invoke Phase B router");
 assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Ranked/mock renderer must remain unreachable");
 assert(serverSource.includes("/api/admin/space-typing/ranked/contract"), "Admin server Ranked contract endpoint is missing");
 const phaseMap = JSON.parse(phaseMapSource);

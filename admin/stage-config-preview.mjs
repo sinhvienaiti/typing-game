@@ -14,7 +14,7 @@ export async function runStageConfigPreview({ rootDir, contract, policy, timeout
   if (protocol?.version !== 1 || protocol?.command !== "pnpm stages:admin-preview") {
     throw new StageConfigPreviewError("Unsupported Space Typing Stages preview protocol.");
   }
-  const childDir = resolve(rootDir, "games/space-typing");
+  const childDir = resolve(rootDir, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
   const child = spawn("pnpm", ["--dir", childDir, "stages:admin-preview"], {
     cwd: rootDir, env: process.env, stdio: ["pipe", "pipe", "pipe"], shell: false,
   });

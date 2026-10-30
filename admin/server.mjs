@@ -1,4 +1,6 @@
+import { readSharedOverview } from "./shared-overview.mjs";
 import { createServer } from "node:http";
+import { existsSync, realpathSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -45,27 +47,45 @@ import {
 } from "./admin-security.mjs";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const contract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin.v1.json"), "utf8"));
-const shopContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-shop.v1.json"), "utf8"));
-const eventsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-events.v1.json"), "utf8"));
-const duelContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-duel.v1.json"), "utf8"));
-const rankedContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-ranked.v1.json"), "utf8"));
-const alternativeModesContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-alternative-modes.v1.json"), "utf8"));
-const backgroundsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-backgrounds.v1.json"), "utf8"));
-const vfxContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-vfx.v1.json"), "utf8"));
-const uiAssetsContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-ui-assets.v1.json"), "utf8"));
-const qaContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-qa.v1.json"), "utf8"));
-const telemetryContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-telemetry.v1.json"), "utf8"));
-const expeditionContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-expedition.v1.json"), "utf8"));
-const dailyWeeklyContract = JSON.parse(await readFile(resolve(root, "games/space-typing/contracts/space-typing-admin-daily-weekly.v1.json"), "utf8"));
+const spaceDir = resolve(root, process.env.TYPING_GAME_ADMIN_SPACE_DIR || "games/space-typing");
 const adminDataDir = process.env.TYPING_GAME_ADMIN_DATA_DIR || resolve(root, ".local/admin/space-typing");
-const store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract, shopContract });
-const musicAssets = new MusicAssetService({ rootDir: root });
 const mediaAssetsV2 = new MediaAssetStore({ rootDir: adminDataDir });
 const auditLog = new LocalAdminAuditLog({ rootDir: adminDataDir });
-await store.initialize(createDefaultSpaceTypingConfig(contract));
 await mediaAssetsV2.initialize();
-await bootstrapMediaReferences({ store: mediaAssetsV2, childRoot: resolve(root, "games/space-typing") });
+let contract, shopContract, eventsContract, duelContract, rankedContract, alternativeModesContract, backgroundsContract, vfxContract, uiAssetsContract, qaContract, telemetryContract, expeditionContract, dailyWeeklyContract;
+let store, musicAssets;
+// "available", "not-checked-out" (no Space checkout at spaceDir) or "failed" (checkout present, start-up threw).
+let spaceStatus = "not-checked-out";
+const spaceContractPath = resolve(spaceDir, "contracts/space-typing-admin.v1.json");
+try {
+  contract = JSON.parse(await readFile(spaceContractPath, "utf8"));
+  shopContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-shop.v1.json"), "utf8"));
+  eventsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-events.v1.json"), "utf8"));
+  duelContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-duel.v1.json"), "utf8"));
+  rankedContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-ranked.v1.json"), "utf8"));
+  alternativeModesContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-alternative-modes.v1.json"), "utf8"));
+  backgroundsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-backgrounds.v1.json"), "utf8"));
+  vfxContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-vfx.v1.json"), "utf8"));
+  uiAssetsContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-ui-assets.v1.json"), "utf8"));
+  qaContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-qa.v1.json"), "utf8"));
+  telemetryContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-telemetry.v1.json"), "utf8"));
+  expeditionContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-expedition.v1.json"), "utf8"));
+  dailyWeeklyContract = JSON.parse(await readFile(resolve(spaceDir, "contracts/space-typing-admin-daily-weekly.v1.json"), "utf8"));
+  store = new SpaceTypingRevisionStore({ rootDir: adminDataDir, contract, shopContract });
+  await store.initialize(createDefaultSpaceTypingConfig(contract));
+  musicAssets = new MusicAssetService({ rootDir: root, childRoot: spaceDir });
+  await bootstrapMediaReferences({ store: mediaAssetsV2, childRoot: spaceDir });
+  spaceStatus = "available";
+} catch (error) {
+  if (existsSync(spaceContractPath)) {
+    spaceStatus = "failed";
+    console.error("Space Typing failed to start; shared Admin and Media V2 remain available:", error?.stack ?? error);
+  } else {
+    console.warn(`Space Typing is not checked out at ${spaceDir}; shared Admin and Media V2 remain available.`);
+  }
+}
+const spaceAvailable = spaceStatus === "available";
+const spaceUnavailableBody = { error: spaceStatus === "failed" ? "space-typing-unavailable" : "space-typing-not-checked-out" };
 const host = "127.0.0.1";
 const port = Number.parseInt(process.env.TYPING_GAME_ADMIN_PORT || "3199", 10);
 const token = process.env.TYPING_GAME_ADMIN_TOKEN || "local-dev";
@@ -154,11 +174,15 @@ async function rollbackChangeScope(targetRevision) {
   });
 }
 
-const server = createServer(async (request, response) => {
+export const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url || "/", `http://${host}:${port}`);
     if (await handleMediaRuntimeRequest({ request, response, url })) return;
 
+    if (!spaceAvailable && url.pathname.startsWith("/api/runtime/space-typing/")) {
+      json(response, 503, spaceUnavailableBody);
+      return;
+    }
     const runtimeHandlers = {
       "/api/runtime/space-typing/ships": (s, c) => createShipRuntimeEnvelope(s, c),
       "/api/runtime/space-typing/equipment": (s, c) => createEquipmentRuntimeEnvelope(s, c),
@@ -188,6 +212,28 @@ const server = createServer(async (request, response) => {
 
     const actor = createLocalAdminActorFromRequest(request);
     if (await handleMediaV2Request({ request, response, url, actor })) return;
+    // Cheap availability probe for the shell: reads no Typing Feel or Space files.
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/status") {
+      json(response, 200, { spaceAvailable, spaceStatus });
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/overview") {
+      json(response, 200, await readSharedOverview({ rootDir: root, spaceAvailable, spaceStatus }));
+      return;
+    }
+    if (request.method === "GET" && url.pathname === "/api/admin/shared/actor") {
+      json(response, 200, actor);
+      return;
+    }
+    // Keep the former learning-content URL as a shared, read-only API alias.
+    if (request.method === "GET" && ["/api/admin/shared/learning-content/catalog", "/api/admin/space-typing/typing-content/catalog"].includes(url.pathname)) {
+      json(response, 200, await queryTypingContentCatalog({ rootDir: root, searchParams: url.searchParams }));
+      return;
+    }
+    if (!spaceAvailable && url.pathname.startsWith("/api/admin/space-typing/")) {
+      json(response, 503, spaceUnavailableBody);
+      return;
+    }
     if (await handleAccountAdminRequest({ request, response, url, actor })) return;
 
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/actor") {
@@ -271,10 +317,6 @@ const server = createServer(async (request, response) => {
         activeRevision: (await store.getState()).activeRevision,
         config: await store.getRuntimeConfig(),
       });
-      return;
-    }
-    if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/typing-content/catalog") {
-      json(response, 200, await queryTypingContentCatalog({ rootDir: root, searchParams: url.searchParams }));
       return;
     }
     if(request.method==="GET"&&url.pathname==="/api/admin/space-typing/shop/capabilities") {
@@ -508,7 +550,17 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(port, host, () => {
-  console.log(`Space Typing Admin service: http://${host}:${port}`);
+// ESM resolves import.meta.url to the real path, so compare real paths: a symlinked launch path must still listen.
+function launchedDirectly() {
+  if (!process.argv[1]) return false;
+  try {
+    return realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+}
+
+if (launchedDirectly()) server.listen(port, host, () => {
+  console.log(`Typing Game Admin service: http://${host}:${server.address().port}`);
   if (token === "local-dev") console.log("Admin auth token: local-dev (local development default)");
 });

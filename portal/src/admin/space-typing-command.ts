@@ -7,13 +7,20 @@ const STATUS_ID = "space-admin-command-status";
 type Navigate = (path: string) => void;
 export type AdminCommandOptions = { includeDeveloperTools?: boolean };
 
+/** Hidden search words per path, for example a screen's former name. */
+const COMMAND_KEYWORDS: Readonly<Record<string, string>> = {
+  "/admin/shared/learning-content": "Typing Content vocabulary typing texts",
+};
+
 const PRIMARY_COMMANDS = [
-  ["Overview", BASE, "Dashboard"],
+  ["All games Overview", "/admin/shared", "All games"],
+  ["Learning Content", "/admin/shared/learning-content", "All games"],
+  ["Overview", BASE, "Space Typing · Dashboard"],
   ["Shop", `${BASE}/shop`, "Economy & Live Ops"],
-  ["Live Ops", `${BASE}/events`, "Economy & Live Ops"],
-  ["Audio Defaults", `${BASE}/audio`, "System"], ["Media Library", `${BASE}/media`, "Media"], ["Music Library", `${BASE}/music-library`, "Media"], ["SFX", `${BASE}/sfx`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
-  ["Ships", `${BASE}/ships`, "Gameplay"], ["Equipment", `${BASE}/equipment`, "Gameplay"], ["Skills", `${BASE}/skills`, "Gameplay"], ["Enemies", `${BASE}/enemies`, "Gameplay"], ["Bosses", `${BASE}/bosses`, "Gameplay"], ["Worlds & Stages", `${BASE}/stages`, "Content"], ["Typing Content", `${BASE}/typing-content`, "Content"],
-  ["General Settings", `${BASE}/settings`, "System"], ["Roles & Permissions", `${BASE}/roles`, "System"], ["History & Publish", `${BASE}/history`, "System"],
+  ["Events (read-only)", `${BASE}/events`, "Players & Live Ops"],
+  ["Audio Defaults", `${BASE}/audio`, "System"], ["Media Library", "/admin/media", "Administration"], ["Music Library", `${BASE}/music-library`, "Media"], ["SFX", `${BASE}/sfx`, "Media"], ["World / Stage Music", `${BASE}/world-music`, "Media"],
+  ["Ships", `${BASE}/ships`, "Gameplay"], ["Equipment", `${BASE}/equipment`, "Gameplay"], ["Skills", `${BASE}/skills`, "Gameplay"], ["Enemies", `${BASE}/enemies`, "Gameplay"], ["Bosses", `${BASE}/bosses`, "Gameplay"], ["Worlds & Stages", `${BASE}/stages`, "Content"],
+  ["General Settings", `${BASE}/settings`, "System"], ["Roles & Permissions", "/admin/roles", "Administration"], ["History & Publish", `${BASE}/history`, "System"],
 ] as const;
 
 const DEVELOPER_COMMANDS = [
@@ -76,7 +83,7 @@ export function openAdminCommandPalette(navigate: Navigate, options: AdminComman
   const resultButtons = (): HTMLButtonElement[] => Array.from(results.querySelectorAll<HTMLButtonElement>("button.stx-command-result:not([disabled])"));
   const render = () => {
     const query = input.value.trim().toLowerCase();
-    const matches = commands.filter(([label, , group]) => `${label} ${group}`.toLowerCase().includes(query)).slice(0, 12);
+    const matches = commands.filter(([label, path, group]) => `${label} ${group} ${COMMAND_KEYWORDS[path] ?? ""}`.toLowerCase().includes(query)).slice(0, 12);
     results.replaceChildren();
     for (const [label, path, group] of matches) {
       const button = document.createElement("button");
@@ -164,7 +171,7 @@ export function installAdminCommandShortcut(
   getOptions: () => AdminCommandOptions = () => ({}),
 ): () => void {
   const listener = (event: KeyboardEvent) => {
-    if (!location.pathname.startsWith(BASE)) return;
+    if (!(location.pathname === "/admin" || location.pathname.startsWith("/admin/"))) return;
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
       openAdminCommandPalette(navigate, getOptions());

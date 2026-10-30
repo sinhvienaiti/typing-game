@@ -6,7 +6,8 @@ const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
 const exists = (file) => fs.existsSync(path.join(root, file));
 
-const mainFile = "portal/src/admin/space-typing.ts";
+const mainFile = "portal/src/admin/admin-shell.ts";
+const areaFiles = ["portal/src/admin/areas/space-typing.ts", "portal/src/admin/areas/shared.ts", "portal/src/admin/areas/registry.ts"];
 const routerFile = "portal/src/admin/space-typing-phase-b.ts";
 const coreFile = "portal/src/admin/space-typing-phase-b-core.ts";
 const telemetryFile = "portal/src/admin/space-typing-telemetry-phase-b.ts";
@@ -27,6 +28,7 @@ const packageFile = "portal/package.json";
 
 const requiredFiles = [
   mainFile,
+  ...areaFiles,
   routerFile,
   coreFile,
   telemetryFile,
@@ -49,7 +51,7 @@ for (const file of requiredFiles) {
   if (!exists(file)) throw new Error(`Required Admin UI file is missing: ${file}`);
 }
 
-const main = read(mainFile);
+const main = [mainFile, ...areaFiles].map(read).join("\n");
 const router = read(routerFile);
 const core = read(coreFile);
 const telemetry = read(telemetryFile);
@@ -118,9 +120,8 @@ const primaryRoutes = new Map([
   ["Enemies", "/enemies"],
   ["Bosses", "/bosses"],
   ["Worlds & Stages", "/stages"],
-  ["Typing Content", "/typing-content"],
   ["Shop", "/shop"],
-  ["Live Ops", "/events"],
+  ["Events (read-only)", "/events"],
   ["General Settings", "/settings"],
   ["History & Publish", "/history"],
 ]);
@@ -128,7 +129,7 @@ const v2OnlyPrimaryRoutes = new Map([
   ["Media Library", "/media"],
   ["Roles & Permissions", "/roles"],
 ]);
-const developerRoutes = new Map(routes.filter(([label]) => !primaryRoutes.has(label)));
+const developerRoutes = new Map(routes.filter(([label, suffix]) => !primaryRoutes.has(label) && !["/typing-content", "/events"].includes(suffix)));
 const developerManifestPaths = new Set(
   developerManifest.sections.flatMap((section) => section.tools.map((tool) => tool.path)),
 );
@@ -148,7 +149,7 @@ for (const [label, suffix] of primaryRoutes) {
 }
 for (const [label, suffix] of v2OnlyPrimaryRoutes) {
   assert(main.includes(`label: "${label}"`), `Admin V2 primary navigation is missing ${label}`);
-  assert(main.includes(`path: \`\${ADMIN_BASE}${suffix}\``), `Admin V2 primary navigation path is missing ${label} (${suffix})`);
+  assert(main.includes(`path: "/admin${suffix}"`), `Administration path is missing ${label} (${suffix})`);
   assert(command.includes(`"${label}"`), `Primary command palette is missing ${label}`);
 }
 
@@ -165,7 +166,7 @@ assert(main.includes('label: "Developer Tools"'), "Primary navigation is missing
 assert(main.includes('requiredPermission: DEVELOPER_PERMISSION'), "Developer Tools primary entry is not permission-gated");
 
 // The shell must still delegate to canonical Phase B runtime owners while V2 migrates presentation incrementally.
-assert(main.includes('const phaseB = renderPhaseBAdminScreen(path, this.navigate);'), "Main Admin shell does not delegate legacy/direct routes to the Phase B router");
+assert(main.includes('const phaseB = renderPhaseBAdminScreen(path, navigate);'), "Main Admin shell does not delegate legacy/direct routes to the Phase B router");
 assert(main.includes('if (phaseB !== null) return phaseB;'), "Main Admin shell does not return the canonical Phase B renderer result");
 assert(main.includes('if (path === ADMIN_BASE) return renderAdminV2Dashboard'), "Admin root does not render the real-data V2 Dashboard before Phase B fallback");
 assert(main.includes('if (path === `${ADMIN_BASE}/developer-tools`) return renderAdminV2DeveloperTools'), "Developer Tools hub route is missing");
@@ -176,7 +177,7 @@ assert(!main.includes('renderDailyWeekly'), "Legacy Daily/Weekly mock renderer r
 assert(!main.includes('openMusicUploadMockDialog'), "Legacy Music Library mock workflow remains reachable from the production Admin shell");
 assert(!main.includes('space-typing-mock'), "Production Admin shell still imports mock data");
 assert(!main.includes('UI MOCK DATA'), "Production Admin shell still advertises mock data");
-assert(main.includes('return this.renderUnknown(path);'), "Unknown-route guard is missing");
+assert(main.includes('?? this.renderUnknown(path)'), "Unknown-route guard is missing");
 assert(main.includes('if (path === `${ADMIN_BASE}/flags`) return `${ADMIN_BASE}/feature-gates`;'), "Legacy Feature Flags alias is not normalized to canonical Feature Gates route");
 
 // A1/A2 shell behavior: permanent developer-style helper copy is replaced with reusable contextual help.

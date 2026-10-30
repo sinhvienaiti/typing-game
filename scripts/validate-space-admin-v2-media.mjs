@@ -41,7 +41,7 @@ const [
   readFile("portal/src/admin/v2/media-library.css", "utf8"),
   readFile("portal/src/admin/v2/asset-picker.ts", "utf8"),
   readFile("portal/src/admin/v2/asset-picker.css", "utf8"),
-  readFile("portal/src/admin/space-typing.ts", "utf8"),
+  Promise.all([readFile("portal/src/admin/admin-shell.ts", "utf8"), readFile("portal/src/admin/areas/space-typing.ts", "utf8"), readFile("portal/src/admin/areas/shared.ts", "utf8"), readFile("portal/src/admin/areas/registry.ts", "utf8")]).then((parts) => parts.join("\n")),
   readFile("portal/src/admin/space-typing-command.ts", "utf8"),
   readFile("games/space-typing/package.json", "utf8"),
   readFile("games/space-typing/art-src/README.md", "utf8"),
@@ -151,7 +151,7 @@ assert.match(server, /import \{ bootstrapMediaReferences \} from "\.\/media-boot
 assert.match(server, /import \{ createMediaV2HttpHandler \} from "\.\/media-http\.mjs"/);
 assert.match(server, /new MediaAssetStore\(\{ rootDir: adminDataDir \}\)/);
 assert.match(server, /await mediaAssetsV2\.initialize\(\)/);
-assert.match(server, /await bootstrapMediaReferences\(\{ store: mediaAssetsV2, childRoot: resolve\(root, "games\/space-typing"\) \}\)/);
+assert.match(server, /await bootstrapMediaReferences\(\{ store: mediaAssetsV2, childRoot: spaceDir \}\)/);
 assert.match(server, /createMediaV2HttpHandler\(\{/);
 assert.match(server, /if \(await handleMediaV2Request\(\{ request, response, url, actor \}\)\) return/);
 assert.ok(
@@ -214,10 +214,10 @@ assert.match(pickerStyles, /\.st-admin-v2-picker-version\.selected/);
 assert.match(pickerStyles, /@media\(max-width:780px\)/);
 
 // Shell/command navigation: Media V2 is a real administrator workflow, not a Developer Tools inspector.
-assert.match(shell, /import \{ renderAdminV2MediaLibrary \} from "\.\/v2\/media-library"/);
-assert.match(shell, /label: "Media Library", path: `\$\{ADMIN_BASE\}\/media`/);
-assert.match(shell, /if \(path === `\$\{ADMIN_BASE\}\/media`\) return renderAdminV2MediaLibrary\(this\.help\)/);
-assert.match(command, /\["Media Library", `\$\{BASE\}\/media`, "Media"\]/);
+assert.match(shell, /import \{ renderAdminV2MediaLibrary \} from "\.\.\/v2\/media-library"/);
+assert.match(shell, /label: "Media Library", path: "\/admin\/media"/);
+assert.match(shell, /if \(path === "\/admin\/media"\) return renderAdminV2MediaLibrary\(help\)/);
+assert.match(command, /\["Media Library", "\/admin\/media", "Administration"\]/);
 
 assert.match(security, /MEDIA_UPLOAD: "media\.upload"/);
 assert.match(security, /MEDIA_DELETE: "media\.delete"/);

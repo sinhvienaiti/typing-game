@@ -9,7 +9,7 @@ const contract = JSON.parse(await read("games/space-typing/contracts/space-typin
 const [authoritySource, duelProtocolSource, uiSource, routerSource, shellSource, serverSource, phaseMapSource] = await Promise.all([
   read("games/space-typing/src/duel/authority.ts"), read("games/space-typing/src/duel/protocol.ts"),
   read("portal/src/admin/space-typing-alternative-modes-phase-b.ts"), read("portal/src/admin/space-typing-phase-b.ts"),
-  read("portal/src/admin/space-typing.ts"), read("admin/server.mjs"), read("admin/space-typing-phase-b-map.v1.json"),
+  Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")), read("admin/server.mjs"), read("admin/space-typing-phase-b-map.v1.json"),
 ]);
 
 const modes = contract.alternativeModes;
@@ -57,7 +57,7 @@ assert(!uiSource.includes("chainRule"), "unsupported Word Chain tuning must not 
 
 assert(routerSource.includes("renderPhaseBAlternativeModes"), "Alternative Modes renderer is not wired into Phase B");
 assert(routerSource.includes("`${BASE}/alternative-modes`"), "Alternative Modes route is not wired into Phase B");
-assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, this.navigate);"), "Space Typing shell must invoke Phase B router");
+assert(shellSource.includes("const phaseB = renderPhaseBAdminScreen(path, navigate);"), "Space Typing shell must invoke Phase B router");
 assert(!shellSource.includes("renderExtendedAdminScreen"), "Legacy Alternative Modes/mock renderer must remain unreachable");
 assert(serverSource.includes("/api/admin/space-typing/alternative-modes/contract"), "Admin server Alternative Modes endpoint is missing");
 const phaseMap = JSON.parse(phaseMapSource);

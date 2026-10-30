@@ -8,7 +8,7 @@ const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const read = (file) => readFile(resolve(root, file), "utf8");
 
 const [shell, command, dashboard, developerTools, server, api] = await Promise.all([
-  read("portal/src/admin/space-typing.ts"),
+  Promise.all([read("portal/src/admin/admin-shell.ts"), read("portal/src/admin/areas/space-typing.ts"), read("portal/src/admin/areas/shared.ts"), read("portal/src/admin/areas/registry.ts")]).then((parts) => parts.join("\n")),
   read("portal/src/admin/space-typing-command.ts"),
   read("portal/src/admin/v2/dashboard.ts"),
   read("portal/src/admin/v2/developer-tools.ts"),
@@ -19,14 +19,17 @@ const [shell, command, dashboard, developerTools, server, api] = await Promise.a
 // Root Dashboard must be a real V2 surface, while old Phase B routes remain available as migration routes.
 assert.match(shell, /if \(path === ADMIN_BASE\) return renderAdminV2Dashboard/, "Admin root must render Dashboard V2 before the Phase B router.");
 assert.match(shell, /if \(path === `\$\{ADMIN_BASE\}\/developer-tools`\) return renderAdminV2DeveloperTools/, "Developer Tools hub route is missing.");
-assert.match(shell, /const phaseB = renderPhaseBAdminScreen\(path, this\.navigate\)/, "Legacy canonical routes must still delegate to Phase B during incremental migration.");
+assert.match(shell, /const phaseB = renderPhaseBAdminScreen\(path, navigate\)/, "Legacy canonical routes must still delegate to Phase B during incremental migration.");
 assert.match(shell, /LEGACY_ROUTE_LABELS/, "Legacy direct routes must retain breadcrumb metadata during migration.");
 
 // Primary navigation is administrator-first and intentionally excludes developer-only/read-only inspector screens.
 for (const primaryLabel of [
   "Overview",
   "Worlds & Stages",
-  "Typing Content",
+  "Learning Content",
+  "Shop",
+  "Players",
+  "Events (read-only)",
   "Ships",
   "Equipment",
   "Skills",
@@ -41,7 +44,7 @@ for (const primaryLabel of [
 ]) {
   assert.match(shell, new RegExp(`label: "${primaryLabel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`), `Primary navigation is missing ${primaryLabel}.`);
 }
-for (const diagnosticLabel of ["Shop", "Currencies", "Rewards & Drops", "Events", "Duel Settings", "Ranked", "Backgrounds", "VFX", "UI Assets", "QA Sandbox"]) {
+for (const diagnosticLabel of ["Currencies", "Rewards & Drops", "Events", "Duel Settings", "Ranked", "Backgrounds", "VFX", "UI Assets", "QA Sandbox"]) {
   assert.doesNotMatch(shell, new RegExp(`label: "${diagnosticLabel.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`), `${diagnosticLabel} must not remain a primary navigation item in A2.`);
 }
 assert.match(shell, /requiredPermission: DEVELOPER_PERMISSION/, "Developer Tools navigation must declare its permission boundary.");
@@ -75,7 +78,7 @@ assert.match(api, /getAudit\(limit = 8\)/, "Typed Admin API is missing audit sup
 const manifest = createDeveloperToolsManifest();
 assert.equal(manifest.permission, "developer.runtime-inspect");
 const devPaths = manifest.sections.flatMap((section) => section.tools.map((tool) => tool.path));
-assert.ok(devPaths.includes("/admin/space-typing/shop"), "Shop runtime contract must migrate into Developer Tools until A4 makes it writable.");
+assert.ok(!devPaths.includes("/admin/space-typing/shop"), "Shop is an administrator workflow since A4 and must stay primary.");
 assert.ok(devPaths.includes("/admin/space-typing/events"), "Events runtime diagnostics must migrate into Developer Tools until A11 provides a real scheduler.");
 assert.ok(!devPaths.includes("/admin/space-typing/ships"), "Ships must remain an administrator workflow.");
 assert.ok(!devPaths.includes("/admin/space-typing/music-library"), "Music Library must remain an administrator workflow.");

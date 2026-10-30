@@ -20,7 +20,7 @@ const [page, qaEmbedCss, shellScrollCss, router, server, nav, command, gamesSour
   readFile(resolve(root, "portal/src/admin/space-typing-shell-scroll-fix.css"), "utf8"),
   readFile(resolve(root, "portal/src/admin/space-typing-phase-b.ts"), "utf8"),
   readFile(resolve(root, "admin/server.mjs"), "utf8"),
-  readFile(resolve(root, "portal/src/admin/space-typing.ts"), "utf8"),
+  Promise.all([readFile(resolve(root, "portal/src/admin/admin-shell.ts"), "utf8"), readFile(resolve(root, "portal/src/admin/areas/space-typing.ts"), "utf8"), readFile(resolve(root, "portal/src/admin/areas/shared.ts"), "utf8"), readFile(resolve(root, "portal/src/admin/areas/registry.ts"), "utf8")]).then((parts) => parts.join("\n")),
   readFile(resolve(root, "portal/src/admin/space-typing-command.ts"), "utf8"),
   readFile(resolve(root, "portal/public/games.json"), "utf8"),
   readFile(resolve(root, "admin/space-typing-phase-b-map.v1.json"), "utf8").then(JSON.parse),
