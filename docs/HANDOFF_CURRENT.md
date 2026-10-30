@@ -32,7 +32,14 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - `ts-typefx` `0391738`;
   - `dh-keys` `b17dbfe`;
   - `td-keys` `d054a34`.
-- **G3 (Last Line, B3) đang chạy:** workflow `typing-feel-g3-last-line` (`wf_8398184f-0eb`) trong `.wt-ts-typefx`. Thử trình duyệt bằng một server tĩnh tạm, vì host feel chưa sống.
+- **G3 Last Line (B3) xong:** commit `07895db` trên `ts-typefx`, `pnpm check` 265/265. Đã thử trên trình duyệt: host chạy, host chết, HTML 200, host treo, không có origin.
+  - Hai việc ở repo cha chưa làm: dòng `VITE_TYPING_FEEL_ORIGIN` của `build:survival` và `dev:survival:app` trong `package.json` (đang chờ commit chung với G4), và `typing-feel/media.md5` (sinh ra khi `media:push`).
+- **Sửa kit theo G3, rồi B4 (Dragonhold) và B5 (Wordwoven):** workflow `typing-feel-kit-fix-b4-b5` (`wf_900342b5-42f`).
+- **G4 Monkeytype đang chạy:** workflow `typing-feel-g4-monkeytype` (`wf_41f1fa24-d63`), nhánh Monkeytype `feature/typing-feel-host`.
+- **Ảnh Codex:**
+  - phiếu 149: nhận 7/10;
+  - phiếu 150: nhận 8/11;
+  - phiếu 237 và 238 (làm lại các icon chưa đạt) nằm ở làn s26, chạy sau s25.
 - **Phiếu 236 (G5, Codex):** đã xong trong worktree `admin-ia`. Claude kiểm trình duyệt đạt ở 1280 và 1920, có và thiếu Space. Đang chờ hai người kiểm mã (`wf_c214c3c4-1d9`), rồi sửa và commit trên nhánh `admin-shared-ia`.
 
 **31/10, khoảng 01:00: chủ dự án cho Codex chạy lại một làn.**
