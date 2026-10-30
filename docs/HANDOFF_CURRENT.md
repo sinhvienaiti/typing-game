@@ -41,10 +41,10 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Repo cha: `feel:pack` và con trỏ Monkeytype (`85ef5df8`).
   - Chủ dự án đã nhận `tmp/typing-feel-pack/typing-feel-v1-r1.zip` (15 MB) cho máy công ty. Các bước ở `docs/CUSTOM_TYPING_FEEL.md` của Monkeytype.
   - **Các dòng cũ dưới đây nhắc `sync-keys` hay zip 32 bộ đã lỗi thời.**
-- **Ảnh Codex:**
-  - phiếu 149: nhận 7/10;
-  - phiếu 150: nhận 8/11;
-  - phiếu 237 và 238 (làm lại các icon chưa đạt) nằm ở làn s26, chạy sau s25.
+- **Ảnh Codex:** bộ UI Last Line 149–153 đã nhận đủ (31/10 05:15), kể cả các lượt làm lại 237–240. Ảnh chưa chép vào `public/`; việc đó thuộc làn gắn ảnh (mục kiểm kê UI 29/10).
+  - Làn s27: phiếu 225 (ảnh thanh trượt ba game) gặp giới hạn công cụ ảnh; bộ chạy tự chờ tới 05:23 rồi chạy lại.
+  - Bộ chạy mới đã chứng minh tự chạy tiếp sau hạn mức, hai lần trong đêm 31/10 (03:05 → 04:04 và 04:53 → 05:23).
+- **31/10 05:10: hai workflow hết hạn mức phiên ở bước kiểm**, đã cho chạy tiếp bằng `resumeFromRunId`: `wf_065fd408-7ca` (G6) và `wf_900342b5-42f` (kit, B4, B5).
 - **G5 (phiếu 236) xong và đã gộp** vào `feat/space-typing-admin-uiux` (`4ac4884b`). Đó là Admin nhiều khu: All games (Overview, Learning Content), Space Typing, Administration. Đã qua hai người kiểm, một lượt sửa và một lần kiểm lại. Worktree `admin-ia` đã dọn.
 
 **31/10, khoảng 01:00: chủ dự án cho Codex chạy lại một làn.**
