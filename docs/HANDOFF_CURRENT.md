@@ -36,6 +36,23 @@ Codex chạy ba làn (owner 30/10 11:15):
 
 Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ được nối vào sau ba làn. 213 nối sau `s8`.
 
+**30/10, 15:25: chủ dự án tạm dừng Codex, chuyển việc cho Claude.**
+- Đã dừng mọi làn và lệnh chờ phiếu ảnh 19:48. Không chạy lại Codex khi chủ dự án chưa bảo.
+- Claude làm qua workflow `claude-takes-over-codex-235-234-230-232` (`wf_5a8d7c6d-8af`):
+  - sửa 235 (Dragonhold F2–F4 của 222) và 234 (vá nốt F2 của phần học), mỗi bản có người kiểm độc lập;
+  - kiểm lại 230 (Last Line 206 và 220) và 232 (Wordwoven 200 và 203).
+- **Đã kiểm, commit được:** 199 và 202 (231: không P0/P1); 229 (233).
+- **Chưa commit được:**
+  - 228: chờ 234;
+  - Dragonhold 187, 194, 195, 197: chờ 235;
+  - F1 của 222 (SVG, tranh gỗ CSS) chờ chấm ảnh.
+- **Kết quả đo:**
+  - 220 (luật bến đầy Last Line): chưa ứng viên nào đạt, giữ mặc định tắt;
+  - 223 (bot giống người Dragonhold) xong;
+  - 226 (gói cân bằng Wordwoven) xong.
+- **Danh sách âm Firefly:** 212 (Last Line, đã commit), 213 (Dragonhold), 221 (Wordwoven).
+- **Ảnh 149–153 và 225:** chờ hạn mức ảnh (mở 19:47) và chờ chủ dự án cho chạy lại Codex.
+
 **Monkeytype đã đẩy (30/10, 14:25, chủ dự án bảo):**
 - `feature/en-vn-translation` lên GitHub `sinhvienaiti/monkeytype` qua SSH, `85a8667a1..02d511788`, không ép. Gồm âm và hiệu ứng gõ, 32 bộ phím, các bản sửa, và commit mirror GitLab của chủ dự án đã gộp vào.
 - Đã kiểm: lint, `ts-check`, 1.485/1.485 test; hai người kiểm độc lập; thử trên trình duyệt (danh sách 32 bộ theo họ, nghe thử khi rê chuột, chọn bộ, gõ có hiệu ứng).
