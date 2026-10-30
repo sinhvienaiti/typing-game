@@ -101,6 +101,7 @@ Mục 3 bên dưới là lịch sử.
 
 - Làn Codex `s1` chạy lại; 00:36 chủ dự án báo Codex đã có hạn mức, khởi động lại `s1` để chạy ngay (192 bắt đầu 00:36). Vẫn **một làn**. Chủ dự án: "Codex bao giờ xong thì kêu nó làm tiếp" — hết `s1` thì duyệt và nối phiếu 194–217.
 - V-dh2 được gửi tin chụp tiếp vòng 9.
+- **Monkeytype typing feel: xong (30/10, khoảng 09:05).** Nhánh `feature/typing-feel` trong `games/monkeytype` (6 commit, chưa gộp vào `feature/en-vn-translation`, chưa push; checkout của chủ dự án đang ở nhánh này). Hai vòng kiểm độc lập: vòng 2 đạt. 1.457 test, oxlint và tsc sạch. Claude thử trình duyệt: nhóm "typing feel" ở tab custom, rê chuột tải đúng preview, chọn Bright Clack tải đủ 15 file và lưu, gõ chữ vẽ hiệu ứng trên hai canvas. `pnpm build:monkeytype` ở repo cha nay chạy `sync-keys` trước (commit `43a44fbf`). Khi có 80 bộ (218, 219): chép kit mới vào `frontend/src/ts/custom/typing-feel/kit/` và chạy `pnpm sync-keys` từ staging mới.
 - **Việc mới của chủ dự án:** đưa tiếng phím Firefly và hiệu ứng gõ chữ vào **Monkeytype** (`games/monkeytype`, repo riêng, nhánh `feature/en-vn-translation`), cài đặt nằm trong tab "custom" của cửa sổ Custom Text (mã của chủ dự án ở `frontend/src/ts/custom/en-vn-translation/`). Workflow `monkeytype-typing-feel` đang chạy: ba người đọc, thiết kế, làm trên nhánh mới `feature/typing-feel`, hai người kiểm. Thử trình duyệt do điều phối làm sau. File âm không vào Git (script chép từ `~/AudioLab/review/staging/keys-firefly`).
 
 ### Dừng hết để chủ dự án khởi động lại máy (30/10, 00:18)
