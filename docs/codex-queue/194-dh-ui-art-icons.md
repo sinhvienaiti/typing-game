@@ -10,6 +10,8 @@
 
 **Không trùng:** 137–140, 161, 163, 164 chỉ vẽ ảnh; 080 là ô đất; 171 là manifest media; 180 và 192 là nút Settings, nút Sound. Phiếu này dựng đường ảnh UI và gắn icon.
 
+> **Chạy lại (30/10, 08:44, điều phối):** lượt đầu (08:28) bị ngắt vì chủ dự án đổi tài khoản Codex (401 `token_revoked`). Các thay đổi chưa commit trong worktree là việc dở của chính phiếu này. Đọc `git status` và `git diff`, giữ phần đúng, làm tiếp cho đủ phiếu, rồi kiểm như thường; ghi đè báo cáo cũ nếu có.
+
 ## Chỉ chạy khi
 
 - Phiếu 187 đã chạy xong (có `docs/codex-queue/187-report.md`). Tốt nhất Claude đã duyệt và commit 187; chưa commit thì vẫn chạy theo ý dưới.
