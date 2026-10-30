@@ -184,6 +184,15 @@ Chủ dự án: "dừng lại mọi thứ để tôi reset máy". Không còn ti
 
 ## 4. Việc chờ, theo thứ tự
 
+0a. **Đẩy âm gõ phím lên Drive khi Codex xong hết (chủ dự án 30/10, khoảng 09:35).** Chủ dự án: "sau khi Codex làm xong toàn bộ, đẩy toàn bộ file âm gốc thành một folder riêng lên Drive, và file âm đã cắt thành folder riêng; folder âm cắt có cả file handoff để tải về máy khác biết đặt ở đâu, cần làm gì để chạy được sau khi pull code".
+   - **Chờ:** phiếu 218 (80 bộ trở lên), 219 (kit theo họ) xong, Claude duyệt và gắn vào ba game và Monkeytype.
+   - **Drive:** rclone `tgmedia:` (gốc là thư mục `typing-game-media`). Token hết hạn (`invalid_grant`, kiểm 30/10 09:38): chủ dự án chạy `rclone config reconnect tgmedia:` hoặc `pnpm media:setup --reconnect` trước khi đẩy.
+   - **Folder 1, âm gốc:** `~/Downloads/typing-mp3/` (408 WAV, khoảng 889 MB) → `tgmedia:audio-sources/typing-firefly-original/`, giữ nguyên 9 thư mục. Đẩy bằng `rclone copy`, kiểm md5 (`rclone check`).
+   - **Folder 2, âm đã cắt:** bản giao cuối (`~/AudioLab/review/staging/keys-firefly/` sau 218) → `tgmedia:audio-sources/typing-keys-cut/`, kèm `README.md` lấy từ `docs/games/audio/KEYS_FIREFLY_HANDOFF.md`. README ghi:
+     - đặt folder ở đâu: `~/AudioLab/review/staging/keys-firefly/`; âm gốc ở `~/Downloads/typing-mp3/` (đường mặc định của `tools/audio-lab/keys/firefly.py`);
+     - lệnh sau khi pull code: Monkeytype `pnpm --dir games/monkeytype/frontend sync-keys`; ba game: chép vào `public/assets/<game>/audio/keys/` hay `pnpm media:pull`; Lab `LAB_KEYS=...`;
+     - cách dựng lại từ âm gốc: `bash tools/audio-lab/run.sh keys firefly survey` rồi `build` (hay `build-v2`).
+   - Báo chủ dự án hai đường dẫn Drive và dung lượng.
 0. **Ưu tiên sớm (chủ dự án 29/10, 20:50): tiếng phím từ Firefly của chủ dự án.** Chủ dự án đã tạo 408 file WAV bằng Adobe Firefly Generate Sound Effects ở `~/Downloads/typing-mp3/` (9 thư mục `Adobe_2026-10-29*`, 8 thư mục 50 file và 1 thư mục 8 file; mỗi file 12 giây, 48 kHz, stereo 16-bit; tên file mở bằng "An edited Foley sequence of isol…").
    - Việc: khảo sát cả 408 file, chọn bản hay cho năm hồ sơ `creamy`, `thock`, `marbly`, `clack`, `dome`, cắt `key-01` … `key-10`, `space-01` … `space-03`, làm sạch, cân độ to, ghi `keys-manifest.json` đúng định dạng `shared/game-kit/feedback/typing-fx/audio.ts`, file nghe 20 giây mỗi hồ sơ và một file so sánh.
    - Mức nhận: từ 9 (`SHARED_SYSTEMS_BAR.md`: bộ phê bình Audio Lab đạt mọi cổng, rồi chủ dự án nghe). Thay bộ Stable Audio và bộ Codex 182 đã bị trả.
