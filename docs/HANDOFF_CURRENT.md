@@ -50,7 +50,8 @@ Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ đư
 - **Repo cha:** 212, 213, 214, 215 + 228 + 234, 216, 217, 221 đã commit.
 - **Tiếng phím:**
   - Raindrop Tile (bộ 33) đã vào `ts-typefx`, `dh-keys`, `td-keys` và Monkeytype; Monkeytype đã đẩy GitHub và GitLab ở `be5943667`.
-  - Hail Stone (bộ 34) đang gắn.
+  - Hail Stone (bộ 34) đã vào `ts-typefx` `22d22dc`, `dh-keys` `b7e8e63`, `td-keys` `0cff05e` và Monkeytype; Monkeytype `feature/en-vn-translation` ở `4f1fcf3b0` trên cả GitHub và GitLab. Zip 34 bộ đã gửi chủ dự án.
+  - 31/10: chủ dự án giữ nguyên Hail Stone (không cắt phần dạo đầu của 7 phím trễ tiếng chính). Mờ 10 ms cuối preview để dành cho lần dựng lại sau (bước Format của Typing Feel).
 - **Còn chờ:**
   - gộp các nhánh vào main của từng game;
   - `media:push` (rclone chưa kết nối lại);

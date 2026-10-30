@@ -343,7 +343,8 @@ Nâng `tmp/keys-firefly/raindrop/build2.py` **bản A** và `analyse.py` thành 
 - Thu hẹp chênh lệch độ to **một phần: 60%, tối đa 9 dB** (`even_out(amount=0.6, limit=9.0)`).
 - Biến thể đến từ **các cú gõ thật**, không chép rồi đổi cao độ.
 - **Space:** 8 cú chính có khoảng lặng phía sau dài nhất (đuôi dài nhất, `gapToNextMs`), **hạ 3 nửa cung**, nâng 1,5 dB.
-- Ghi OGG Vorbis 48 kHz, cả bộ chuẩn đỉnh −2 dBFS. Preview 1 s: một đoạn gõ dựng từ chính bộ đó.
+- Ghi OGG Vorbis 48 kHz, cả bộ chuẩn đỉnh −2 dBFS. Preview 1 s: một đoạn gõ dựng từ chính bộ đó, **10 ms cuối mờ dần** (preview của Hail Stone dừng ở −51 dBFS không mờ, có thể kêu tách).
+- **Không tự cắt phần dạo đầu.** Khi một cú gõ mở bằng tiếng tách nhỏ rồi tiếng chính mới tới, `report.json` liệt kê phím đó và độ trễ của tiếng chính, chủ dự án quyết. Ngày 31/10 chủ dự án giữ nguyên Hail Stone, dù 7/25 phím (04, 06, 12, 16, 20, 23, 25) và 4 space có tiếng chính tới sau 35–205 ms.
 - Hạt ngẫu nhiên cố định (7 và 11, như build2) cho nhịp của bản nghe 70 WPM và preview.
 - **Chạy lại ra cùng mẫu âm, không cùng byte OGG.** Đã thử ngày 30/10 trong venv Audio Lab: ghi cùng một mảng hai lần bằng `soundfile` (libsndfile) ra hai OGG khác md5, vì số serial của luồng Ogg là ngẫu nhiên. Vì vậy:
   - test so mẫu PCM (WAV trung gian hoặc OGG đã giải mã), không so md5 của OGG;
