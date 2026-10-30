@@ -20,15 +20,22 @@ Tài liệu này đi kèm folder âm đã cắt trên Drive (chép thành `READM
 1. Tải folder âm đã cắt từ Drive, đặt vào `~/AudioLab/review/staging/keys-firefly/`. Kiểm: trong thư mục có `keys-manifest.json` và 32 thư mục con.
 2. (Chỉ khi muốn dựng lại bộ âm) tải folder âm gốc, đặt vào `~/Downloads/typing-mp3/`, giữ nguyên 9 thư mục con.
 
-## 3. Sau khi pull code: lệnh để có tiếng
+## 3. Sau khi pull code: lệnh để có tiếng (Typing Feel, 31/10)
+
+Từ 31/10 các game không còn giữ bản sao bộ âm. Mọi game đọc từ **Typing Feel**:
+- thiết kế ở [`docs/games/TYPING_FEEL_SERVICE.md`](../TYPING_FEEL_SERVICE.md);
+- dữ liệu ở `typing-feel/public/v1/keys/` của repo cha (danh mục r1, 34 bộ);
+- host máy nhà là `https://feel.typing-game.local`.
 
 | Nơi | Lệnh | Ghi chú |
 |---|---|---|
-| **Monkeytype** | `pnpm --dir games/monkeytype/frontend sync-keys` | Chép từ `~/AudioLab/review/staging/keys-firefly` vào `frontend/static/sounds/keys/`. `--check` để kiểm. `pnpm build:monkeytype` ở repo cha tự chạy lệnh này. Đổi nguồn bằng biến `KEYS_FIREFLY_DIR`. |
-| **Last Line, Dragonhold, Wordwoven** | `pnpm media:pull` ở repo cha (khi media đã được đẩy lên Drive), hoặc chép tay thư mục staging vào `games/<game>/public/assets/<game>/audio/keys/` (bỏ file `.wav`) | Danh mục và manifest JSON nằm trong Git của từng game; OGG có trong `media.md5`. |
+| **Repo cha** | `pnpm media:pull` (lấy OGG của `typing-feel/` từ Drive), `pnpm setup:play` một lần | Danh mục và manifest bộ nằm trong Git. OGG nằm trong `typing-feel/media.md5` và trên Drive, sau khi Claude chạy `media:push`. Bộ mới đi vào bằng `pnpm feel:import <staging>` (tới G7 thì bằng nút Format trong Admin). |
+| **Last Line, Dragonhold, Wordwoven** | không cần lệnh | `pnpm build:<game>` hay `pnpm dev:<game>:app` ở repo cha đặt `VITE_TYPING_FEEL_ORIGIN`. Chạy riêng trong repo game thì Typing Feel tắt, chỉ có Off và âm gốc của game. Dragonhold và Wordwoven đang chuyển (B4, B5). |
+| **Monkeytype, máy nhà** | `pnpm build:monkeytype` | Đặt `TYPING_FEEL_URL=https://feel.typing-game.local`. |
+| **Monkeytype, máy công ty (chỉ GitLab)** | `pnpm feel:pack` ở máy nhà, rồi `pnpm --dir frontend feel:mirror <zip>` ở máy công ty | Các bước ở `docs/CUSTOM_TYPING_FEEL.md` của Monkeytype. Lần đầu xoá `frontend/static/sounds/keys` cũ do `sync-keys` để lại. |
 | **Typing Feedback Lab** | `LAB_KEYS="$HOME/AudioLab/review/staging/keys-firefly" shared/game-kit/node_modules/.bin/vite --config tools/typing-feedback-lab/vite.config.mjs` | Mở `http://127.0.0.1:4192/`. |
 
-Không có file âm thì danh sách chỉ hiện Off, kèm dòng báo "sound files not installed". Game vẫn chạy bình thường.
+Host feel không trả lời thì game vẫn chạy: chỉ có Off và âm gốc của game, kèm dòng "Keyboard sounds unavailable". Bộ người chơi đã lưu được giữ nguyên.
 
 ## 4. Dựng lại bộ âm từ âm gốc
 

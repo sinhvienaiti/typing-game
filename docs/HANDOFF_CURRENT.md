@@ -35,7 +35,11 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **G3 Last Line (B3) xong:** commit `07895db` trên `ts-typefx`, `pnpm check` 265/265. Đã thử trên trình duyệt: host chạy, host chết, HTML 200, host treo, không có origin.
   - Hai việc ở repo cha chưa làm: dòng `VITE_TYPING_FEEL_ORIGIN` của `build:survival` và `dev:survival:app` trong `package.json` (đang chờ commit chung với G4), và `typing-feel/media.md5` (sinh ra khi `media:push`).
 - **Sửa kit theo G3, rồi B4 (Dragonhold) và B5 (Wordwoven):** workflow `typing-feel-kit-fix-b4-b5` (`wf_900342b5-42f`).
-- **G4 Monkeytype đang chạy:** workflow `typing-feel-g4-monkeytype` (`wf_41f1fa24-d63`), nhánh Monkeytype `feature/typing-feel-host`.
+- **G4 Monkeytype xong (B6):** commit `2cc987e8f`, đã đẩy lên `feature/en-vn-translation` ở cả GitHub và GitLab (31/10).
+  - Monkeytype đọc từ `TYPING_FEEL_URL`, không còn `sync-keys`.
+  - Repo cha: `feel:pack` và con trỏ Monkeytype (`85ef5df8`).
+  - Chủ dự án đã nhận `tmp/typing-feel-pack/typing-feel-v1-r1.zip` (15 MB) cho máy công ty. Các bước ở `docs/CUSTOM_TYPING_FEEL.md` của Monkeytype.
+  - **Các dòng cũ dưới đây nhắc `sync-keys` hay zip 32 bộ đã lỗi thời.**
 - **Ảnh Codex:**
   - phiếu 149: nhận 7/10;
   - phiếu 150: nhận 8/11;
