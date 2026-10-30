@@ -1,0 +1,51 @@
+# No media in Git (docs/games/TYPING_FEEL_SERVICE.md §6.1). Sound files live on
+# Drive through media.md5; the JSON beside them (catalogue, set manifests,
+# health) stays tracked. Every media extension of media/media.config.json is
+# ignored anywhere in this folder, not only under public/, and character
+# classes keep the rules case-blind on Linux.
+*.[oO][gG][gG]
+*.[oO][pP][uU][sS]
+*.[mM][pP]3
+*.[wW][aA][vV]
+*.[mM]4[aA]
+*.[aA][aA][cC]
+*.[fF][lL][aA][cC]
+*.[wW][eE][bB][mM]
+*.[mM][pP]4
+*.[mM][oO][vV]
+*.[pP][nN][gG]
+*.[jJ][pP][gG]
+*.[jJ][pP][eE][gG]
+*.[wW][eE][bB][pP]
+*.[aA][vV][iI][fF]
+*.[gG][iI][fF]
+*.[bB][mM][pP]
+*.[tT][gG][aA]
+*.[tT][iI][fF]
+*.[tT][iI][fF][fF]
+*.[pP][sS][dD]
+*.[sS][vV][gG]
+*.[iI][cC][oO]
+*.[hH][dD][rR]
+*.[eE][xX][rR]
+*.[kK][tT][xX]2
+*.[bB][aA][sS][iI][sS]
+*.[gG][lL][bB]
+*.[gG][lL][tT][fF]
+*.[bB][iI][nN]
+*.[fF][bB][xX]
+*.[oO][bB][jJ]
+*.[bB][lL][eE][nN][dD]
+*.[uU][sS][dD][zZ]
+# Owner uploads (art-src/raw/<sha256>.wav) and anything else under art-src:
+# Drive originals only, never Git.
+/art-src/*
+# Media store stamp, a set folder the importer left half-written, a temp file
+# of an atomic write, scratch folders and build output (§6.1: dist is not committed).
+.media-pulled
+.incoming-*/
+*.tmp
+/tmp/
+/dist/
+node_modules/
+.DS_Store

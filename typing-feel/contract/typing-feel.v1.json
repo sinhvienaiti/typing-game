@@ -1,0 +1,150 @@
+{
+  "schema": "typing-feel/contract-1",
+  "contract": 1,
+  "design": "docs/games/TYPING_FEEL_SERVICE.md (owner approved 31/10/2026)",
+  "versioning": {
+    "rule": "Inside v1 fields and URLs are only added, never renamed or removed. Readers ignore unknown fields. A breaking change goes to /v2/, served beside /v1/ until every game has moved.",
+    "readersIgnoreUnknownFields": true
+  },
+  "urls": {
+    "base": "/v1/",
+    "catalogue": { "path": "/v1/keys/keys-manifest.json", "schema": "typing-feel/catalogue-3", "cacheControl": "no-cache" },
+    "setManifest": { "path": "/v1/keys/sets/<id>/<fp12>/keys-manifest.json", "schema": "typing-feel/set-1", "cacheControl": "public, max-age=31536000, immutable" },
+    "setAudio": { "path": "/v1/keys/sets/<id>/<fp12>/<file>", "files": ["key-NN.ogg", "space-NN.ogg", "preview.ogg"], "contentType": "audio/ogg", "cacheControl": "public, max-age=31536000, immutable" },
+    "health": { "path": "/v1/health.json", "cacheControl": "no-cache" },
+    "reservedForCodeStep": [
+      { "path": "/v1/typing-feel.js", "cacheControl": "no-cache" },
+      { "path": "/v1/next/typing-feel.js", "cacheControl": "no-cache" },
+      { "path": "/r/<build>/typing-feel.js", "cacheControl": "public, max-age=31536000, immutable" }
+    ],
+    "everyResponse": {
+      "Access-Control-Allow-Origin": "*",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+      "X-Content-Type-Options": "nosniff"
+    },
+    "missingFile": "404, never an SPA fallback page with status 200",
+    "cookies": "none"
+  },
+  "id": {
+    "pattern": "^[a-z0-9][a-z0-9-]{0,31}$",
+    "appliesTo": ["set id (profiles[].id)", "family id (families[].id, profiles[].familyId)", "catalogue default"],
+    "kit": "shared/game-kit/feedback/typing-fx/audio.ts loadKeyboardCatalog",
+    "reserved": ["off"],
+    "reservedNote": "\"off\" is the kit's silent choice and the saved value for silence; loadKeyboardCatalog drops a row with that id. No set and no default may use a reserved id.",
+    "rules": [
+      "A published id never changes: player saves store it. Renaming changes name only.",
+      "A retired id is never used again."
+    ]
+  },
+  "paths": {
+    "relativeTo": "/v1/keys/ (the catalogue's folder) for profiles[].manifest and profiles[].preview; the set folder for set-1 files[].file and preview",
+    "kitResolver": "shared/game-kit/feedback/typing-fx/audio.ts loadKeyboardCatalog resolve()",
+    "rejectEmpty": true,
+    "rejectLeadingSlash": true,
+    "forbiddenCharacters": [":", "\\", "?", "#", "%"],
+    "forbiddenSegments": [".", ".."],
+    "segmentPattern": "^[a-z0-9][a-z0-9._-]{0,63}$",
+    "note": "The kit resolver refuses an empty path, a leading /, any of forbiddenCharacters and any . or .. segment. The exporter is stricter: every segment must match segmentPattern, so there are no empty segments and no upper case."
+  },
+  "fingerprint": {
+    "name": "fp12",
+    "pattern": "^[0-9a-f]{12}$",
+    "seed": {
+      "appliesTo": "set folders written by typing-feel/tools/import-staging.mjs (seed r1, phase G1)",
+      "rule": "First 12 hex of sha256 over the canonical JSON of the folder's set-1 manifest without its name (schema, id, licence, recipe, files, preview) plus \"audio\": [ { \"bytes\": <size>, \"file\": <name>, \"sha256\": <hex> } ], every audio file of the folder (key-NN, space-NN, preview) sorted by name.",
+      "rename": "The name is left out, so a rename alone keeps the folder and its URL: the folder's set manifest keeps the name it was written with and the catalogue carries the new one. Any other change (audio bytes, durations, licence, recipe, file list) gives a new fp12, so a new folder under a new revision.",
+      "canonicalJson": "Object keys sorted at every level, JSON.stringify with 2-space indent, then a trailing newline (the same serialization as admin/media-assets-v2.mjs hashJson).",
+      "why": "A Media V2 reference component needs a runtimeUrl that would contain the fp12 itself, so the seed cannot use the Media V2 contentFingerprint."
+    },
+    "admin": {
+      "appliesTo": "set folders written by an Admin Publish (phase G6 onward)",
+      "rule": "First 12 hex of the Media V2 version contentFingerprint (admin/media-assets-v2.mjs versionFingerprint).",
+      "keepSeedPaths": "G6 import-staging records each seed folder path on its Media V2 version and keeps it, so the first Publish does not move any URL."
+    },
+    "neverOverwrite": "A set folder is immutable. If sets/<id>/<fp12>/ exists, every audio file must match byte for byte (sha256) and the set manifest must match byte for byte apart from its name; any other difference is an error, never a rewrite."
+  },
+  "statuses": ["published", "provisional"],
+  "labels": {
+    "legacy-218": "One of the 32 sets of ticket 218 (keys-firefly/218 builder, scored by its 218 metric), kept by the owner on 30/10/2026 (decision 6). The Admin library can hide or retire each one."
+  },
+  "recipes": {
+    "natural-v1": "Owner pick 30/10/2026: each tap kept to the next one, at most 450 ms, no EQ, levels evened 60% (TYPING_FEEL_SERVICE.md §3.9). The only recipe the Admin Format step offers.",
+    "firefly-218": "The ticket 218 builder (tools/audio-lab keys/firefly_v2*.py). Import only, never offered by Format."
+  },
+  "catalogue": {
+    "schema": "typing-feel/catalogue-3",
+    "supersetOf": "typing-keys-firefly/catalogue-2: today's kit loadKeyboardCatalog reads it unchanged",
+    "required": ["schema", "contract", "revision", "publishedAt", "default", "effects", "families", "profiles"],
+    "optional": [],
+    "fields": {
+      "revision": "Id of the published revision; the seed is \"r1\".",
+      "publishedAt": "ISO 8601 UTC without milliseconds. Kept as is when a rerun changes nothing.",
+      "default": "Id of the default set: must be in profiles, published, not provisional.",
+      "effects": "Typing effect defaults, see effects.defaults below; a game uses them only while its save has no value."
+    },
+    "family": {
+      "required": ["id", "name", "order"],
+      "optional": [],
+      "order": "Contiguous from 0."
+    },
+    "profile": {
+      "required": ["id", "name", "family", "familyId", "order", "score", "ownerPick", "status", "keys", "spaces", "manifest", "preview"],
+      "optional": ["labels", "note"],
+      "kitRequired": ["id", "name", "manifest", "preview", "order"],
+      "fields": {
+        "family": "Family name (the kit shows it as the group heading).",
+        "familyId": "families[].id.",
+        "order": "Sorted by family order, then set order; contiguous from 0, so each family is one run.",
+        "score": "Number or null, as in the staging catalogue (the ticket 218 machine score, not an owner score).",
+        "ownerPick": "true for a set the owner picked by ear.",
+        "status": "One of statuses.",
+        "keys": "Number of key-NN files.",
+        "spaces": "Number of space-NN files.",
+        "manifest": "sets/<id>/<fp12>/keys-manifest.json, under the path rules.",
+        "preview": "sets/<id>/<fp12>/preview.ogg, under the path rules.",
+        "labels": "Optional list of label ids from labels (added in v1, additive).",
+        "note": "Optional free text (owner picks keep their pick note)."
+      },
+      "hiddenAndRetired": "Hidden and retired sets are left out of the catalogue. None today."
+    }
+  },
+  "set": {
+    "schema": "typing-feel/set-1",
+    "required": ["schema", "id", "name", "licence", "recipe", "files", "preview"],
+    "optional": [],
+    "file": {
+      "required": ["file", "set", "durationMs"],
+      "optional": [],
+      "filePattern": "^(key|space)-[0-9]{2,3}\\.ogg$",
+      "sets": ["key", "space"],
+      "durationMs": "Positive integer (milliseconds, rounded)."
+    },
+    "previewPattern": "^preview\\.ogg$",
+    "minimum": { "key": 10, "space": 3 },
+    "fields": {
+      "name": "Name when the folder was written; the catalogue name wins after a rename.",
+      "recipe": "One of recipes.",
+      "files": "Keys by number, then spaces by number. The kit keyboardFiles takes every key-NN / space-NN string."
+    },
+    "note": "Measurements stay in the Admin report.json, never in the game copy.",
+    "size": "The 4 KB budget (TYPING_FEEL_SERVICE.md §8.4) is the transfer size: the feel host gzips application/json (nginx gzip on, Cloudflare later). The 72-80-key legacy-218 sets are 4.4-5.2 KB raw and under 1 KB gzip; the owner picks are about 2 KB raw."
+  },
+  "health": {
+    "required": ["contract", "revision", "build", "builtAt"],
+    "optional": [],
+    "fields": {
+      "revision": "The catalogue revision.",
+      "build": "Before the code step: \"data-\" plus the first 12 hex of sha256 of the keys-manifest.json bytes. From the code step on: the module build id.",
+      "builtAt": "ISO 8601 UTC without milliseconds; kept when a rerun changes nothing."
+    }
+  },
+  "effects": {
+    "kit": "shared/game-kit/feedback/typing-fx/settings.ts",
+    "styles": ["stamp", "flare", "smash", "shatter", "rune", "minimal"],
+    "intensities": ["off", "low", "normal", "high", "ultra"],
+    "sizes": ["medium", "large", "huge"],
+    "volume": { "min": 0, "max": 1 },
+    "defaults": { "style": "stamp", "intensity": "normal", "size": "large", "volume": 1 },
+    "defaultsNote": "The games' current defaults (Last Line FX_DEFAULTS, Dragonhold, Wordwoven and Monkeytype at full key volume); each game converts volume to its own scale."
+  }
+}

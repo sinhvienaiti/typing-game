@@ -9,6 +9,26 @@ export const SELF_SERVED_HOSTS = [
   "survival.typing-game.local",
 ];
 export const SHARED_DATA_ROUTES = ["/vocabulary/", "/typing-texts/", "/shared/typing-texts/"];
+// Folders a game host must never alias: shared data, and Typing Feel, which games
+// read across origins from FEEL_HOST (a same-origin alias would hide CORS bugs).
+export const SHARED_DATA_ROOTS = ["__ROOT_DIR__/shared/", "__ROOT_DIR__/typing-feel/"];
+
+// Typing Feel host (docs/games/TYPING_FEEL_SERVICE.md §4.2, §6.2): static files only.
+export const FEEL_HOST = "feel.typing-game.local";
+export const FEEL_CATALOGUE = "typing-feel/public/v1/keys/keys-manifest.json";
+const FEEL_ROOT = "__ROOT_DIR__/typing-feel/";
+const FEEL_HEADERS = [
+  ["Access-Control-Allow-Origin", "*"],
+  ["Cross-Origin-Resource-Policy", "cross-origin"],
+  ["X-Content-Type-Options", "nosniff"],
+];
+const IMMUTABLE = "public, max-age=31536000, immutable";
+const FEEL_LOCATIONS = [
+  { route: "/v1/keys/sets/", alias: `${FEEL_ROOT}public/v1/keys/sets/`, cache: IMMUTABLE, ogg: true },
+  { route: "= /v1/health.json", alias: `${FEEL_ROOT}public/v1/health.json`, cache: "no-cache" },
+  { route: "/v1/keys/", alias: `${FEEL_ROOT}public/v1/keys/`, cache: "no-cache" },
+  { route: "/", cache: "no-cache", tryFiles: ["$uri", "=404"] },
+];
 
 // Tokenize nginx directives while keeping source offsets and ignoring comments.
 // Quoted or escaped braces are values, never block delimiters.
@@ -116,14 +136,14 @@ export function sharedDataAliases(config, host) {
         const entry = { host, route, line: offset + node.line };
         const forbidden = SHARED_DATA_ROUTES.some((prefix) => route.startsWith(prefix.slice(0, -1)));
         const sharedTarget = (children) => children.some((child) =>
-          (["alias", "root"].includes(child.name) && child.args[0]?.startsWith("__ROOT_DIR__/shared/")) ||
+          (["alias", "root"].includes(child.name) && SHARED_DATA_ROOTS.some((root) => child.args[0]?.startsWith(root))) ||
           (child.name !== "location" && sharedTarget(child.children)));
         if (forbidden || sharedTarget(node.children)) found.push(entry);
         visit(node.children, entry);
       } else {
         // A server-level shared root also violates self-serving, without a location.
         if (!location && ["alias", "root"].includes(node.name) &&
-            node.args[0]?.startsWith("__ROOT_DIR__/shared/")) {
+            SHARED_DATA_ROOTS.some((root) => node.args[0]?.startsWith(root))) {
           found.push({ host, route: "/", line: offset + node.line });
         }
         visit(node.children, location);
@@ -131,6 +151,120 @@ export function sharedDataAliases(config, host) {
     }
   }
   visit(configTree(block).servers[0].children);
+  return found;
+}
+
+function headerArgs(node, name) {
+  return node.children.filter((child) => child.name === "add_header" && child.args[0]?.toLowerCase() === name.toLowerCase());
+}
+
+/**
+ * Typing Feel host problems: one HTTPS block with http2 and gzip for JSON (the
+ * §8.4 set manifest budget is the transfer size), every location repeats the
+ * CORS, CORP and nosniff headers (a location's add_header drops the server's)
+ * plus a Cache-Control, no SPA fallback anywhere (try_files ends in =404, no
+ * error_page), alias without try_files, OGG typed audio/ogg and never gzipped,
+ * and only typing-feel/ served. The immutable Cache-Control has no "always",
+ * so a 404 is never cached for a year.
+ */
+export function feelHostErrors(config) {
+  const errors = [];
+  const servers = configTree(config).servers.filter((server) => namesHost(server, FEEL_HOST) &&
+    server.children.some((child) => child.name === "listen" && child.args.includes("443")));
+  if (servers.length !== 1) return [`must have exactly one HTTPS server_name ${FEEL_HOST}; block (found ${servers.length})`];
+  const server = servers[0];
+  if (!server.children.some((child) => child.name === "http2" && child.args[0] === "on")) {
+    errors.push(`${FEEL_HOST} must turn on HTTP/2 (http2 on;, line ${server.line})`);
+  }
+  const gzipTypes = server.children.filter((child) => child.name === "gzip_types").flatMap((child) => child.args);
+  if (!server.children.some((child) => child.name === "gzip" && child.args[0] === "on") || !gzipTypes.includes("application/json")) {
+    errors.push(`${FEEL_HOST} must gzip JSON (gzip on; gzip_types application/json;, line ${server.line}): set manifests are over 4 KB raw (§8.4)`);
+  }
+  if (gzipTypes.some((type) => type === "*" || type.startsWith("audio/"))) {
+    errors.push(`${FEEL_HOST} must not gzip audio (gzip_types ${gzipTypes.join(" ")}, line ${server.line})`);
+  }
+  const locations = [];
+  const visit = (nodes) => {
+    for (const node of nodes) {
+      const where = `${FEEL_HOST} line ${node.line}`;
+      if (node.name === "location") locations.push(node);
+      if (node.name === "error_page") errors.push(`${where}: error_page can turn a missing file into a page; a missing file must stay 404`);
+      if (node.name === "gzip" && node.args[0] !== "on") errors.push(`${where}: gzip ${node.args.join(" ")} undoes the server's JSON gzip`);
+      if (node.name === "try_files" && (node.args.at(-1) !== "=404" || node.args.some((arg) => arg.includes("index.html")))) {
+        errors.push(`${where}: try_files ${node.args.join(" ")} is an SPA fallback; end it with =404`);
+      }
+      if (["proxy_pass", "return", "rewrite"].includes(node.name)) errors.push(`${where}: ${node.name} has no place on the static Typing Feel host`);
+      if (["alias", "root"].includes(node.name) && !node.args[0]?.startsWith(FEEL_ROOT)) {
+        errors.push(`${where}: ${node.name} ${node.args[0]} is outside typing-feel/`);
+      }
+      if (node.name !== "types") visit(node.children);
+    }
+  };
+  visit(server.children);
+  for (const location of locations) {
+    const route = location.args.join(" ");
+    const where = `${FEEL_HOST} location ${route} (line ${location.line})`;
+    for (const [name, value] of FEEL_HEADERS) {
+      if (!headerArgs(location, name).some((node) => node.args[1] === value && node.args[2] === "always")) {
+        errors.push(`${where} lacks add_header ${name} "${value}" always`);
+      }
+    }
+    if (headerArgs(location, "Cache-Control").length !== 1) errors.push(`${where} needs exactly one add_header Cache-Control`);
+    const alias = location.children.some((child) => child.name === "alias");
+    if (alias && location.children.some((child) => child.name === "try_files")) errors.push(`${where}: alias with try_files; alias answers 404 itself`);
+  }
+  for (const want of FEEL_LOCATIONS) {
+    const location = locations.find((node) => node.args.join(" ") === want.route);
+    if (!location) {
+      errors.push(`${FEEL_HOST} is missing location ${want.route}`);
+      continue;
+    }
+    const where = `${FEEL_HOST} location ${want.route} (line ${location.line})`;
+    const cache = headerArgs(location, "Cache-Control")[0];
+    if (cache && cache.args[1] !== want.cache) errors.push(`${where}: Cache-Control must be "${want.cache}"`);
+    if (cache && want.cache === IMMUTABLE && cache.args.includes("always")) {
+      errors.push(`${where}: the immutable Cache-Control must not use always (a 404 would be cached for a year)`);
+    }
+    if (want.alias && !location.children.some((child) => child.name === "alias" && child.args[0] === want.alias)) {
+      errors.push(`${where}: must alias ${want.alias}`);
+    }
+    if (want.tryFiles && !location.children.some((child) => child.name === "try_files" && child.args.join(" ") === want.tryFiles.join(" "))) {
+      errors.push(`${where}: must use try_files ${want.tryFiles.join(" ")}`);
+    }
+    if (want.ogg && !location.children.some((child) => child.name === "types" &&
+        child.children.some((type) => type.name === "audio/ogg" && type.args.includes("ogg")))) {
+      errors.push(`${where}: must map ogg to audio/ogg (types { audio/ogg ogg; ... })`);
+    }
+  }
+  return errors;
+}
+
+/**
+ * Every place an HTTPS host other than FEEL_HOST serves typing-feel/ through
+ * alias or root: games read Typing Feel across origins from FEEL_HOST, so a
+ * same-origin copy would hide CORS bugs (the Codex 216 rule, for every host).
+ */
+export function feelAliases(config) {
+  const found = [];
+  for (const server of configTree(config).servers) {
+    if (!server.children.some((child) => child.name === "listen" && child.args.includes("443"))) continue;
+    if (namesHost(server, FEEL_HOST)) continue;
+    const host = server.children.find((child) => child.name === "server_name")?.args.join(" ") ?? "";
+    const visit = (nodes, location) => {
+      for (const node of nodes) {
+        if (node.name === "location") {
+          visit(node.children, node);
+          continue;
+        }
+        if (["alias", "root"].includes(node.name) && node.args[0]?.startsWith(FEEL_ROOT)) {
+          const route = location ? location.args.filter((arg) => !["=", "^~", "~", "~*"].includes(arg)).join(" ") : "/";
+          found.push({ host, route, line: (location ?? node).line });
+        }
+        visit(node.children, location);
+      }
+    };
+    visit(server.children, null);
+  }
   return found;
 }
 
@@ -326,6 +460,9 @@ export async function main(args = process.argv.slice(2)) {
     }
   }
 
+  if (!setupNginx.includes(`"${FEEL_HOST}"`)) failures.push(`setup-nginx.sh HOSTS is missing ${FEEL_HOST}`);
+  if (!leafPlay.includes(FEEL_CATALOGUE)) failures.push(`scripts/play.sh does not check ${FEEL_CATALOGUE}`);
+
   for (const [name, config] of [
     ["play", nginx],
     ["dev", devNginx],
@@ -333,9 +470,16 @@ export async function main(args = process.argv.slice(2)) {
     for (const error of configStructureErrors(config)) failures.push(`${name} nginx ${error}`);
     for (const host of SELF_SERVED_HOSTS) {
       for (const { route, line } of sharedDataAliases(config, host)) {
-        failures.push(`${name} nginx ${host} must serve its own pinned vocabulary; remove ${route} (line ${line})`);
+        failures.push(`${name} nginx ${host} must serve its own pinned vocabulary and read Typing Feel from ${FEEL_HOST}; remove ${route} (line ${line})`);
       }
     }
+    for (const { host, route, line } of feelAliases(config)) {
+      // The three self-served hosts are already reported above.
+      if (SELF_SERVED_HOSTS.includes(host)) continue;
+      failures.push(`${name} nginx ${host} must read Typing Feel from ${FEEL_HOST}, never serve typing-feel/ itself; remove ${route} (line ${line})`);
+    }
+    for (const error of feelHostErrors(config)) failures.push(`${name} nginx ${error}`);
+    if (!httpRedirectBlock(config).includes(` ${FEEL_HOST}`)) failures.push(`${name} nginx HTTP redirect is missing ${FEEL_HOST}`);
     if (config.includes("/Users/jokerit/")) {
       failures.push(`${name} nginx config still hard-codes the old macOS project path`);
     }
@@ -378,7 +522,7 @@ export async function main(args = process.argv.slice(2)) {
   }
 
   console.log(
-    "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered; dragon, td, survival serve their own pinned vocabulary without shared data aliases.",
+    "Play mode contract PASS: static apps, shared runtime data, Space Typing Admin API routing, Portal shared-learning rebuild dependency, and the dragon/td/survival/tutien hosts are covered; dragon, td, survival serve their own pinned vocabulary without shared data aliases; the Typing Feel host (feel.typing-game.local) is static, HTTP/2, gzips JSON, CORS in every location, 404 without SPA fallback, and no other host serves typing-feel/.",
   );
   return 0;
 }

@@ -45,6 +45,8 @@
     "media:pull": "node scripts/media/media.mjs pull",
     "media:check": "node scripts/media/media.mjs check",
     "media:test": "node --test scripts/media/test/*.test.mjs",
+    "feel:import": "node typing-feel/tools/import-staging.mjs",
+    "feel:test": "node --test typing-feel/tests/*.test.mjs",
     "models:prepare": "node scripts/models/prepare-models.mjs",
     "models:index": "node scripts/models/index-3d-sources.mjs",
     "models:blender": "node scripts/models/prepare-3d-models.mjs",

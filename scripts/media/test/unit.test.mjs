@@ -461,7 +461,7 @@ test('no OAuth token or client secret is committed in the parent repo', () => {
 
 test('config: games[] keeps Space first with the exact lock, Drive folder and lock copy it had', () => {
   const config = loadConfig(REPO_ROOT);
-  assert.deepEqual(config.games.map((game) => game.id), ['space-typing', 'dragon-hold', 'typing-defense', 'typing-survival', 'immortality-cultivation']);
+  assert.deepEqual(config.games.map((game) => game.id), ['space-typing', 'dragon-hold', 'typing-defense', 'typing-survival', 'immortality-cultivation', 'typing-feel']);
   assert.equal(config.game, undefined, 'the old single block is gone after loading');
   const space = config.games[0];
   // The values the single `game` block had: Drive paths must not move, or everything uploads again.
@@ -484,7 +484,50 @@ test('config: games[] keeps Space first with the exact lock, Drive folder and lo
     assert.equal(setDefinitions(config, game).runtime.lockFile, `games/${id}/media.md5`);
     assert.equal(lockCopyName(game), `${id}.media.md5`);
   }
+  // Typing Feel is a parent-repo folder, not a game submodule (TYPING_FEEL_SERVICE.md §6.1).
+  const feel = findGame(config, 'typing-feel');
+  assert.deepEqual(feel, { id: 'typing-feel', title: 'Typing Feel', dir: 'typing-feel', lock: 'media.md5', pulledStamp: '.media-pulled' });
+  assert.equal(setDefinitions(config, feel).runtime.remoteBase, 'repo/typing-feel');
+  assert.equal(setDefinitions(config, feel).originals.lockFile, 'typing-feel/media.md5');
+  assert.equal(lockCopyName(feel), 'typing-feel.media.md5');
   assert.deepEqual(Object.keys(setDefinitions(config, null)), ['private'], 'no game: the private set only');
+});
+
+test('sets: typing-feel puts public OGG in runtime and art-src WAV in originals; its tracked JSON stays out', async (t) => {
+  const fx = makeFixture();
+  t.after(() => rmSync(fx.base, { recursive: true, force: true }));
+  // Tracked in the parent repo, like the committed catalogue and set manifests.
+  write(fx.repo, 'typing-feel/package.json', '{"name":"@typing-game/typing-feel"}\n');
+  write(fx.repo, 'typing-feel/public/v1/keys/keys-manifest.json', '{"schema":"typing-feel/catalogue-3"}\n');
+  write(fx.repo, 'typing-feel/public/v1/keys/sets/deep/0123456789ab/keys-manifest.json', '{"schema":"typing-feel/set-1"}\n');
+  git(fx.repo, 'add', 'typing-feel');
+  git(fx.repo, 'commit', '-q', '-m', 'typing-feel json');
+  // Media: never tracked.
+  write(fx.repo, 'typing-feel/public/v1/keys/sets/deep/0123456789ab/key-01.ogg', 'OggS deep key 1');
+  write(fx.repo, 'typing-feel/public/v1/keys/sets/deep/0123456789ab/preview.ogg', 'OggS deep preview');
+  write(fx.repo, 'typing-feel/art-src/raw/ab12.wav', 'RIFF owner upload');
+  write(fx.repo, 'typing-feel/.media-pulled', '2026-10-31T00:00:00Z\n');
+  write(fx.repo, 'typing-feel/tests/notes.txt', 'not media');
+  const ctx = createContext({ root: fx.repo, out: { write() {} } });
+  assert.ok(presentGames(ctx).some((game) => game.id === 'typing-feel'));
+  const feel = withGame(ctx, 'typing-feel');
+  const { sets, notes } = await scanSets(feel, ['originals', 'runtime']);
+  assert.deepEqual(sets.runtime.map((entry) => [entry.key, entry.rel]), [
+    ['public/v1/keys/sets/deep/0123456789ab/key-01.ogg', 'typing-feel/public/v1/keys/sets/deep/0123456789ab/key-01.ogg'],
+    ['public/v1/keys/sets/deep/0123456789ab/preview.ogg', 'typing-feel/public/v1/keys/sets/deep/0123456789ab/preview.ogg'],
+  ]);
+  assert.deepEqual(sets.originals.map((entry) => entry.key), ['art-src/raw/ab12.wav']);
+  assert.deepEqual(notes.unsafe, []);
+  // Other games' sets do not change when typing-feel appears.
+  const space = await scanSets(withGame(ctx, 'space-typing'), ['originals', 'runtime']);
+  assert.ok([...space.sets.originals, ...space.sets.runtime].every((entry) => entry.rel.startsWith('games/space-typing/')));
+  const state = await loadState(feel, ['originals', 'runtime']);
+  assert.equal(state.gameLockExists, false);
+  assert.equal(state.perSet.runtime.definition.remoteBase, 'repo/typing-feel');
+  assert.deepEqual(state.perSet.runtime.plan.added, ['public/v1/keys/sets/deep/0123456789ab/key-01.ogg', 'public/v1/keys/sets/deep/0123456789ab/preview.ogg']);
+  assert.deepEqual(state.perSet.originals.plan.added, ['art-src/raw/ab12.wav']);
+  const planned = planPush(feel, state, ['originals', 'runtime'], {});
+  assert.equal(planned.problems.length, 0, JSON.stringify(planned.problems));
 });
 
 test('config: an older single game block still loads; bad or duplicate games are refused', (t) => {

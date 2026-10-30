@@ -46,6 +46,7 @@ HOSTS=(
   "td.typing-game.local"
   "survival.typing-game.local"
   "tutien.typing-game.local"
+  "feel.typing-game.local"
 )
 
 ensure_hosts() {
@@ -130,6 +131,27 @@ create_certificate() {
   rm -rf "$temp_dir"
 }
 
+nginx_version() {
+  local binary="nginx"
+  if [[ "$PLATFORM" == "macos" ]]; then
+    binary="$NGINX_BIN"
+  elif ! command -v nginx >/dev/null 2>&1; then
+    binary="/usr/sbin/nginx"
+  fi
+  "$binary" -v 2>&1 | sed -n 's|.*nginx/\([0-9][0-9.]*\).*|\1|p' | head -n 1
+}
+
+# `http2 on;` (the Typing Feel host) exists from nginx 1.25.1; an older nginx
+# (Ubuntu 24.04 apt ships 1.24) refuses the whole file, every host with it.
+# An unknown version keeps the line, so nginx -t reports it.
+nginx_has_http2_directive() {
+  local version
+  version="$(nginx_version)"
+  [[ "$version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+) ]] || return 0
+  local major="${BASH_REMATCH[1]}" minor="${BASH_REMATCH[2]}" patch="${BASH_REMATCH[3]}"
+  (( major > 1 || (major == 1 && (minor > 25 || (minor == 25 && patch >= 1))) ))
+}
+
 render_config() {
   local destination="$1"
   sed \
@@ -137,6 +159,11 @@ render_config() {
     -e "s|__SSL_CERT__|$CERT|g" \
     -e "s|__SSL_KEY__|$KEY|g" \
     "$SOURCE" > "$destination"
+  if ! nginx_has_http2_directive; then
+    echo "nginx $(nginx_version) is older than 1.25.1: dropping 'http2 on;', so feel.typing-game.local serves HTTP/1.1. Install nginx 1.25.1 or newer for HTTP/2." >&2
+    sed '/^[[:space:]]*http2 on;[[:space:]]*$/d' "$destination" > "$destination.http2"
+    mv "$destination.http2" "$destination"
+  fi
 }
 
 macos_nginx_running() {

@@ -34,6 +34,16 @@ do
   fi
 done
 
+# Typing Feel keyboard sounds (feel.typing-game.local): the catalogue is in Git,
+# its sound files come from Drive.
+FEEL_CATALOGUE="$ROOT_DIR/typing-feel/public/v1/keys/keys-manifest.json"
+if [[ ! -f "$FEEL_CATALOGUE" ]]; then
+  echo "Typing Feel catalogue is missing: $FEEL_CATALOGUE"
+  echo "Run: pnpm feel:import ~/AudioLab/review/staging/keys-firefly"
+  echo "     (on a fresh clone the catalogue comes with Git; get its sound files with: pnpm media:pull)"
+  exit 1
+fi
+
 open_url() {
   if command -v open >/dev/null 2>&1; then
     open "$URL"

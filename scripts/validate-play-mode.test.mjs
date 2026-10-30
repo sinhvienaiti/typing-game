@@ -148,3 +148,88 @@ test("CLI rejects malformed braces and duplicate hosts in either config", () => 
     }
   }
 });
+
+// Typing Feel host (docs/games/TYPING_FEEL_SERVICE.md §6.2).
+const FEEL = validator.FEEL_HOST;
+/** Applies `edit` to the feel server block only. */
+function editFeel(config, edit) {
+  const at = config.indexOf(`server_name ${FEEL};`);
+  assert.ok(at > 0, "feel block present");
+  const start = config.lastIndexOf("server {", at);
+  const end = config.indexOf("\n}\n", at) + 3;
+  const block = config.slice(start, end);
+  const changed = edit(block);
+  assert.notEqual(changed, block, "the edit changed the feel block");
+  return config.slice(0, start) + changed + config.slice(end);
+}
+const once = (from, to) => (block) => block.replace(from, to);
+const inLocation = (route, from, to) => (block) => {
+  const at = block.indexOf(`location ${route} {`);
+  return block.slice(0, at) + block.slice(at).replace(from, to);
+};
+const FEEL_BREAKS = [
+  ["no http2", once("    http2 on;\n", ""), /HTTP\/2/],
+  ["no gzip", once("    gzip on;\n", ""), /must gzip JSON/],
+  ["no JSON in gzip_types", once("    gzip_types application/json;", "    gzip_types text/css;"), /must gzip JSON/],
+  ["gzipped audio", once("    gzip_types application/json;", "    gzip_types application/json audio/ogg;"), /must not gzip audio/],
+  ["gzip off in a location", inLocation("/v1/keys/", "alias __ROOT_DIR__/typing-feel/public/v1/keys/;", "alias __ROOT_DIR__/typing-feel/public/v1/keys/;\n        gzip off;"), /undoes the server's JSON gzip/],
+  ["no CORS on the catalogue", inLocation("/v1/keys/", '        add_header Access-Control-Allow-Origin "*" always;\n', ""), /location \/v1\/keys\/ .*lacks add_header Access-Control-Allow-Origin/],
+  ["no CORP on health", inLocation("= /v1/health.json", '        add_header Cross-Origin-Resource-Policy "cross-origin" always;\n', ""), /lacks add_header Cross-Origin-Resource-Policy/],
+  ["no nosniff on /", inLocation("/", '        add_header X-Content-Type-Options "nosniff" always;\n', ""), /lacks add_header X-Content-Type-Options/],
+  ["CORS without always", inLocation("/v1/keys/sets/", 'add_header Access-Control-Allow-Origin "*" always;', 'add_header Access-Control-Allow-Origin "*";'), /lacks add_header Access-Control-Allow-Origin "\*" always/],
+  ["an SPA fallback", inLocation("/", "try_files $uri =404;", "try_files $uri $uri/ /index.html;"), /SPA fallback/],
+  ["an error_page", once("    root __ROOT_DIR__", "    error_page 404 =200 /index.html;\n    root __ROOT_DIR__"), /error_page/],
+  ["try_files on an alias", inLocation("/v1/keys/", "alias __ROOT_DIR__/typing-feel/public/v1/keys/;", "alias __ROOT_DIR__/typing-feel/public/v1/keys/;\n        try_files $uri =404;"), /alias with try_files/],
+  ["an immutable header with always", once('add_header Cache-Control "public, max-age=31536000, immutable";', 'add_header Cache-Control "public, max-age=31536000, immutable" always;'), /must not use always/],
+  ["no audio/ogg type", once("        types { audio/ogg ogg; application/json json; }\n", ""), /audio\/ogg/],
+  ["an alias outside typing-feel", once("alias __ROOT_DIR__/typing-feel/public/v1/keys/sets/;", "alias __ROOT_DIR__/shared/vocabulary/;"), /outside typing-feel\//],
+  ["a proxy", once("    root __ROOT_DIR__", "    location /api/ { proxy_pass http://127.0.0.1:3199; }\n    root __ROOT_DIR__"), /proxy_pass/],
+  ["a missing location", (block) => block.replace(/    location = \/v1\/health\.json \{[^}]*\}\n/, ""), /missing location = \/v1\/health\.json/],
+];
+for (const [mode, config] of Object.entries(configs)) {
+  test(`${mode}: the real feel host passes every Typing Feel check`, () => {
+    assert.deepEqual(validator.feelHostErrors(config), []);
+  });
+  for (const [label, edit, pattern] of FEEL_BREAKS) {
+    test(`${mode}: feel host catches ${label}`, () => {
+      const errors = validator.feelHostErrors(editFeel(config, edit));
+      assert.ok(errors.some((message) => pattern.test(message)), errors.join("\n") || "no error");
+    });
+  }
+  test(`${mode}: exactly one feel HTTPS block`, () => {
+    assert.match(validator.feelHostErrors(config.replace(`server_name ${FEEL};`, "server_name unused.local;")).join("\n"), /found 0/);
+    assert.match(validator.feelHostErrors(`${config}\nserver { listen 443 ssl; server_name ${FEEL}; }\n`).join("\n"), /found 2/);
+  });
+  test(`${mode}: no real host but the feel host serves typing-feel/`, () => {
+    assert.deepEqual(validator.feelAliases(config), []);
+  });
+  for (const host of ["monkeytype.typing-game.local", "space.typing-game.local", "typing-game.local", "tutien.typing-game.local", ...HOSTS]) {
+    test(`${mode}: ${host} may not serve typing-feel/ (alias or root)`, () => {
+      const alias = insert(config, host, "location /v1/keys/ { alias __ROOT_DIR__/typing-feel/public/v1/keys/; }");
+      assert.deepEqual(validator.feelAliases(alias).map((entry) => [entry.host, entry.route]), [[host, "/v1/keys/"]]);
+      const root = insert(config, host, "location ^~ /feel/ { root __ROOT_DIR__/typing-feel/public; }");
+      assert.deepEqual(validator.feelAliases(root).map((entry) => [entry.host, entry.route]), [[host, "/feel/"]]);
+    });
+  }
+  for (const host of HOSTS) {
+    test(`${mode}: ${host} may not alias Typing Feel data`, () => {
+      const found = validator.sharedDataAliases(insert(config, host, "location /keys/ { alias __ROOT_DIR__/typing-feel/public/v1/keys/; }"), host);
+      assert.deepEqual(found.map((entry) => entry.route), ["/keys/"]);
+    });
+  }
+}
+test("CLI rejects the monkeytype and space hosts aliasing typing-feel/", () => {
+  for (const [mode, host] of [["play", "monkeytype.typing-game.local"], ["dev", "space.typing-game.local"]]) {
+    const result = run(`--${mode}-conf`, fixture(insert(configs[mode], host, "location /v1/keys/ { alias __ROOT_DIR__/typing-feel/public/v1/keys/; }")));
+    assert.equal(result.status, 1, result.stderr);
+    assert.match(result.stderr, new RegExp(`${mode} nginx ${host.replaceAll(".", "\\.")} must read Typing Feel from feel\\.typing-game\\.local.*remove /v1/keys/ \\(line \\d+\\)`));
+  }
+});
+test("CLI rejects a broken feel host and a redirect without it", () => {
+  const broken = run("--play-conf", fixture(editFeel(configs.play, once("    http2 on;\n", ""))));
+  assert.equal(broken.status, 1, broken.stderr);
+  assert.match(broken.stderr, /play nginx feel\.typing-game\.local must turn on HTTP\/2/);
+  const redirect = run("--dev-conf", fixture(configs.dev.replace(` ${FEEL};`, ";")));
+  assert.equal(redirect.status, 1, redirect.stderr);
+  assert.match(redirect.stderr, /dev nginx HTTP redirect is missing feel\.typing-game\.local/);
+});
