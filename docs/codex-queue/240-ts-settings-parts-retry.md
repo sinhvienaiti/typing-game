@@ -24,11 +24,15 @@ Giữ chất liệu và bảng màu của các ảnh đã nhận. Bóng hình ph
 - `reduced-motion`: một quả cầu đặc có ba vệt tốc độ, các vệt bị một vòng kẹp giữ lại và mờ dần. Đọc ra "chuyển động dịu lại" ở 20 px.
   - Phải khác hẳn `shake` khi đặt cạnh nhau.
 - `stat-evenness`: khung bao gần vuông, ba cột cao bằng nhau trên một bệ, lõi lam đều. Đọc ra "đều tay".
+- `station-crest` (thêm 31/10 sau khi chấm 238, tờ `_review/238-sheet-delivery.jpg`): bản `try3` là một ngọn tháp mảnh; ở 20 px chỉ còn một sợi.
+  - Ba lượt cũ đã dùng hết, nên làm ý tưởng mới `station-crest.c2-try1..3`: một huy hiệu khối đặc (khiên hoặc lục giác viền vàng dày), giữa có hình trạm hay tháp nhỏ và lõi lam.
+  - Phải khác `chapter-crest` (tháp đôi) khi đặt cạnh nhau.
+  - Ghi vào `ui/icons/`. Chép bản chốt cũ sang `_review/240/prev/` trước khi ghi đè.
 - `mag-empty`: cùng dáng với `mag-full` đã nhận. Viền vàng sáng và dày hơn; lòng rãnh tối có mép lam rất mờ. Ở 10 px trên nền tối vẫn thấy rõ một ô rỗng; đặt cạnh `mag-full` phải phân biệt ngay.
 
 **Kiểm nhỏ (bắt buộc):**
 - Ô 20, 24 px (icon) hoặc 10, 15 px (`mag-empty`) trên nền tối và nền sáng.
-- Ô so sánh `shake` cạnh `reduced-motion`; `mag-empty` cạnh `mag-full`.
+- Ô so sánh `shake` cạnh `reduced-motion`; `mag-empty` cạnh `mag-full`; `station-crest` cạnh `chapter-crest`, ở 20 và 30 px.
 
 **Giới hạn ảnh:** công cụ ảnh trả 429 hoặc báo thử lại sau thì dừng, giữ nguyên mọi file, và ghi dòng cuối `CODEX-WAIT-UNTIL: HH:MM`.
 
@@ -36,7 +40,8 @@ Giữ chất liệu và bảng màu của các ảnh đã nhận. Bóng hình ph
 
 - `games/typing-survival/art-src/ui/icons/{shake,reduced-motion}.c2-try*.*` và `stat-evenness.try2.*`, `.try3.*` (mới).
 - `games/typing-survival/art-src/ui/parts/mag-empty.try2.*`, `.try3.*` (mới).
-- Bản chốt của **đúng bốn tên này**.
+- `games/typing-survival/art-src/ui/icons/station-crest.c2-try*.*` (mới).
+- Bản chốt của **đúng năm tên này** (thêm `station-crest`).
   - Được ghi đè vì Claude chưa nhận chúng.
   - Trước khi ghi đè, chép bản cũ sang `art-src/_review/240/prev/`.
 - `games/typing-survival/art-src/_review/240*`.
