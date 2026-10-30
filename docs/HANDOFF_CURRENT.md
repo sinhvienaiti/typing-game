@@ -22,7 +22,18 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - commit ghi duyệt (`b785b0f3`) và con trỏ Monkeytype `4f1fcf3b0` (`56a113fd`);
   - bốn nơi và staging cùng 34 bộ, cùng danh sách id.
 - **G0, phần của chủ dự án (chưa làm):** `pnpm setup:play` (sudo, thêm `feel.typing-game.local` vào hosts và chứng chỉ, sau khi G1 commit) và `pnpm media:setup --reconnect` (token rclone hết hạn 30/10).
-- **G1 và G2:** workflow `typing-feel-g1-g2` (`wf_959df1c3-8f9`): G1 làm `typing-feel/`, `feel:import`, nginx, media; G2 thêm API vào kit và đồng bộ vào ba worktree. Mỗi phần hai người kiểm và một lượt sửa. Làm tiếp nếu đứt: `Workflow({scriptPath: ".../workflows/scripts/typing-feel-g1-g2-wf_959df1c3-8f9.js", resumeFromRunId: "wf_959df1c3-8f9"})`.
+- **G1 xong** (`4a3c94ef`):
+  - `typing-feel/` với danh mục r1, 34 bộ, 2.744 OGG chép đúng byte (OGG bị Git bỏ qua);
+  - block nginx `feel.typing-game.local`;
+  - kiểm `validate-play-mode`;
+  - nhóm media.
+  - Còn hai việc: chủ dự án chạy `pnpm setup:play` để host sống; Claude chạy `media:push` sau khi chủ dự án nối lại rclone.
+- **G2 xong** (`590864fb`): API kit theo §4.6 (mục "API đã làm ở G2"). Kit đã đồng bộ vào ba nhánh, `pnpm check` xanh:
+  - `ts-typefx` `0391738`;
+  - `dh-keys` `b17dbfe`;
+  - `td-keys` `d054a34`.
+- **G3 (Last Line, B3) đang chạy:** workflow `typing-feel-g3-last-line` (`wf_8398184f-0eb`) trong `.wt-ts-typefx`. Thử trình duyệt bằng một server tĩnh tạm, vì host feel chưa sống.
+- **Phiếu 236 (G5, Codex):** đã xong trong worktree `admin-ia`. Claude kiểm trình duyệt đạt ở 1280 và 1920, có và thiếu Space. Đang chờ hai người kiểm mã (`wf_c214c3c4-1d9`), rồi sửa và commit trên nhánh `admin-shared-ia`.
 
 **31/10, khoảng 01:00: chủ dự án cho Codex chạy lại một làn.**
 - Làn s24: phiếu 236 (G5, Admin nhiều khu), trong worktree `typing-game-wt/admin-ia`, nhánh `admin-shared-ia`. Ở đó `games/space-typing` là worktree tách rời của Space ở `84777155`.
