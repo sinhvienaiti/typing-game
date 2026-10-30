@@ -478,6 +478,10 @@ Khi server khởi động, nếu `revision` trong danh mục khác bản đang c
 | `/r/<build>/typing-feel.js` (bước code) | bản cố định, để ghim và lùi | immutable |
 
 - `<fp12>`: 12 ký tự hex đầu của `contentFingerprint` của bản Media V2 (`versionFingerprint`, `media-assets-v2.mjs:149`: băm nguồn gốc, sha256 từng thành phần và `source`). Byte đổi thì URL đổi.
+- **Bộ seed (G1, 31/10) dùng luật riêng:** thành phần tham chiếu của Media V2 cần `runtimeUrl`, mà URL đó lại chứa chính `<fp12>`, nên seed không lấy được dấu của Media V2.
+  - `pnpm feel:import` lấy 12 hex đầu của sha256 trên JSON chuẩn hoá của manifest bộ âm (`set-1`) **bỏ `name`**, cộng `audio: [{ file, bytes, sha256 }]` của mọi file âm (`key-NN`, `space-NN`, `preview`), xếp theo tên. Luật ghi ở `typing-feel/contract/typing-feel.v1.json` (`fingerprint.seed`).
+  - Đổi tên bộ thì giữ thư mục và URL: manifest bộ giữ tên cũ, danh mục mang tên mới. Đổi gì khác (byte âm, `durationMs`, `licence`, `recipe`) thì ra `<fp12>` mới, thư mục mới, cần `--revision` mới.
+  - `import-staging` của G6 **phải giữ nguyên** các đường seed này: ghi đường thư mục lên bản Media V2 của từng bộ, để lần Publish đầu không dời URL nào.
 - Không có fallback kiểu SPA: file thiếu trả **404**. Trả `index.html` mã 200 sẽ làm hỏng giải mã âm ("Unexpected token '<'", DEPLOY_INDEPENDENCE §3).
 - Mọi đường gửi `Access-Control-Allow-Origin: *`, `Cross-Origin-Resource-Policy: cross-origin`, `X-Content-Type-Options: nosniff`. Không cookie.
 - Bộ phân giải của kit nhận đúng các đường này: tương đối, không `/` đầu, không `..`, `:`, `?`, `#`, `%` (`audio.ts:531–535`).
@@ -581,6 +585,29 @@ Thêm vào `TypingSounds.load` (`audio.ts:297`): đợt giải mã đầu trộn
 
 Muốn Admin sửa `default` và `effects` được, game phải đọc chúng từ danh mục. Đây là lý do `KeyboardCatalog` có thêm `defaultId` và `effects`.
 
+**API đã làm ở G2 (31/10), khác bản phác trên ở mấy chỗ:**
+- `loadKeyboardCatalog(base, …)` nhận `base` là `null`: không gọi mạng, trả `missing`. Đúng với trường hợp `typingFeelKeysBase` trả `null`.
+- `revision`, `defaultId`, `effects` chỉ có khi danh mục `ready`.
+  - `defaultId`: chỉ khi `default` trỏ đúng một bộ danh mục có và kit giữ lại.
+  - `effects`: kiểm từng trường; giá trị sai bị bỏ, không ép về gần đúng. `volume` trong [0, 1].
+  - `revision`: chuỗi 1–128 ký tự.
+- **Danh mục tải được mà không còn bộ nào hợp lệ** thì là `invalid`, không phải `ready`, để không sửa save của mọi người chơi về âm gốc.
+- `timedJson(timeoutMs = 3000, { cache })`:
+  - giờ hạn tối đa 2^31−1 ms;
+  - HTML hoặc thân không phải JSON thì từ chối;
+  - mặc định `cache: "no-cache"` (đúng cho danh mục).
+  - Manifest bộ âm là immutable, nên game truyền `timedJson(3000, { cache: "default" })` cho `loadKeyboardManifest`.
+- `settleKeyboardChoice(savedId: string | null | undefined, …)`:
+  - `null` hay `undefined` nghĩa là save chưa có trường này: lấy mặc định, `repaired: false`;
+  - id không hợp lệ: lấy mặc định, `repaired: true`.
+  - "Bộ đầu tiên" là bộ bật được đầu tiên có manifest (`options[0]` là Off).
+  - `builtIn` luôn có trong danh sách trả về.
+  - Id đã lưu trùng một dòng bị tắt thì được sửa khi danh mục `ready`.
+  - Dòng "Saved sound · unavailable" giống hệt Wordwoven.
+- `pendingKeyboardChoices(savedId, builtIn)`: danh sách tạm (Off, âm gốc, id đã lưu hiện "Loading…") để dựng bảng Sound **ngay**, trước khi danh mục về.
+- `QuickSettings.setChoiceOptions(id, options)`: thay danh sách một hàng chọn sau khi bảng đã dựng.
+- Đợt giải mã đầu: tối đa `KEYBOARD_FIRST_BATCH_SPACES` (4) space, phần còn lại là phím. Bộ thiếu loại nào thì chỗ trống chuyển cho loại kia, đợt vẫn 16 file.
+
 ### 4.7 API module chung (bước code)
 
 Game chép `src/kit/typing-feel-client/` qua `scripts/sync-game-kit.mjs` (khai `"typing-feel-client"` trong `kit.config.json`).
@@ -659,8 +686,9 @@ export interface TypingFeel {
    - Không ghi giá trị máy nhà vào `.env.production` đã commit: bản online sẽ mang `typing-game.local`, và `check-pack` báo `local-host`.
 2. `index.html` thêm `<link rel="preconnect" href="https://feel.<host>" crossorigin>`.
 3. Khởi động **không chờ** danh mục. Gọi `loadKeyboardCatalog(typingFeelKeysBase(origin), { extra: [builtIn], fallback: [], fetchJson: timedJson(3000) })` song song với phần còn lại.
-4. Khi có danh mục: `settleKeyboardChoice(...)`. Chỉ lưu khi `repaired`.
-5. Dựng bảng Sound với danh sách đó. Danh mục chưa về thì hàng âm phím hiện "Loading…".
+4. Dựng bảng Sound **ngay** với `pendingKeyboardChoices(saved, builtIn)`. Đọc trường save **thô**, trước khi mặc định cứng của game điền vào.
+5. Khi có danh mục: `settleKeyboardChoice(trường save thô hoặc null, …)`, rồi `quick.setChoiceOptions('keyboard', settled.options)`. Chỉ lưu khi `repaired`.
+   - Manifest bộ âm tải bằng `timedJson(3000, { cache: "default" })`: host feel treo thì bộ đó coi như hỏng, phát âm gốc. Nhờ vậy `GameKeyboard.preload` của Dragonhold (`keyboard.ts:51/60`) không chờ mãi.
 6. Cổng vào trận chờ đợt âm đầu **tối đa 1,5 s**, rồi vào trận dù chưa có âm.
 
 ### 5.2 Lỗi hôm nay phải sửa trước khi đọc từ host khác
@@ -682,7 +710,7 @@ Cùng nguồn thì các lỗi này bị che. Khác host thì chúng phá luật 
 
 | Tình huống | Game làm gì |
 |---|---|
-| Không có biến `VITE_TYPING_FEEL_ORIGIN` (clone riêng, CI) | Không gọi mạng. Off và âm gốc. |
+| Không có biến `VITE_TYPING_FEEL_ORIGIN` (clone riêng, CI) | Không gọi mạng. Off và âm gốc. Không hiện "Keyboard sounds unavailable". Id Firefly đã lưu vẫn giữ trong save và hiện "Saved sound · unavailable" (cùng luật với khi host hỏng), để lần sau có Typing Feel thì người chơi có lại bộ của mình. |
 | Host không trả lời, 404, CORS, HTML mã 200, treo 10 s | Sau tối đa 3 s: Off, âm gốc, và "Keyboard sounds unavailable". Bộ đã lưu giữ nguyên. Không lỗi chưa bắt. |
 | Danh mục về, một bộ không tải được | Bộ đó không được tải lại trong phiên tới khi người chơi chọn lại (luật của Dragonhold). Phát âm gốc. |
 | Danh mục về, bộ đã lưu đã bị ẩn hoặc retire | Chuyển về `default` của danh mục, lưu. |
@@ -751,9 +779,15 @@ server {
     ssl_certificate __SSL_CERT__;
     ssl_certificate_key __SSL_KEY__;
     root __ROOT_DIR__/typing-feel/dist;          # bước code; trước đó thư mục chưa có, mọi đường ngoài /v1/keys/ trả 404
+    gzip on;                                     # nén JSON, xem dưới
+    gzip_vary on;
+    gzip_types application/json;
+    gzip_min_length 256;
     location /v1/keys/sets/ {
         alias __ROOT_DIR__/typing-feel/public/v1/keys/sets/;   # alias tự trả 404 khi thiếu file
-        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        types { audio/ogg ogg; application/json json; }
+        default_type application/octet-stream;
+        add_header Cache-Control "public, max-age=31536000, immutable";   # không "always", xem dưới
         add_header Access-Control-Allow-Origin "*" always;
         add_header Cross-Origin-Resource-Policy "cross-origin" always;
         add_header X-Content-Type-Options "nosniff" always;
@@ -777,13 +811,19 @@ server {
         add_header Cache-Control "no-cache" always;
         add_header Access-Control-Allow-Origin "*" always;
         add_header Cross-Origin-Resource-Policy "cross-origin" always;
+        add_header X-Content-Type-Options "nosniff" always;
     }
 }
 ```
 
 - `add_header` phải lặp lại trong mỗi `location`: location có `add_header` riêng thì bỏ hết header cấp server.
+- Dòng `Cache-Control` immutable **không có `always`** (sửa lúc làm G1, 31/10). Có `always` thì cả 404 cũng mang immutable: một OGG chưa `media:pull` sẽ bị trình duyệt giữ 404 một năm. Không `always`, nginx chỉ thêm dòng này cho 200, 206, 304 và chuyển hướng (301…), không thêm cho 404. CORS, CORP và `nosniff` vẫn có `always`.
+- `types { audio/ogg ogg; … }` trong location bộ âm: OGG luôn ra `audio/ogg`, không phụ thuộc `mime.types` của máy.
+- `gzip` chỉ cho `application/json` (thêm lúc sửa G1, 31/10). 32 bộ `legacy-218` có 72–80 phím nên manifest bộ dài 4,4–5,2 KB thô; nén còn dưới 1 KB. Mức 4 KB của mục 8.4 tính theo byte tải về. OGG không nén. ETag thành ETag yếu, `If-None-Match` vẫn ra 304.
 - Location dùng `alias` không thêm `try_files`: `alias` tự trả 404 khi thiếu file (như `/vocabulary/` của portal hôm nay), còn `alias` đi cùng `try_files $uri` là chỗ nginx hay ghép sai đường.
 - `http2 on;` để đợt đầu 16 file tải song song (mục 5.4).
+  - Lệnh `http2` cần nginx 1.25.1 trở lên. nginx cũ hơn (apt của Ubuntu 24.04 là 1.24) từ chối cả file, mọi host chết theo. Nên `scripts/setup-nginx.sh` đọc `nginx -v`: bản cũ thì bỏ dòng `http2 on;` và báo; host feel chạy HTTP/1.1.
+  - Chỉ host feel có HTTP/2. Mọi host dùng chung một chứng chỉ và 127.0.0.1, nên trình duyệt có thể gửi yêu cầu của host game qua kết nối HTTP/2 của host feel; nginx trả **421** và trình duyệt tự gửi lại qua kết nối mới. Dòng 421 trong DevTools là bình thường, không phải lỗi.
 - Thêm `feel.typing-game.local` vào `HOSTS` của `scripts/setup-nginx.sh` (dòng 38) để `/etc/hosts` và chứng chỉ mkcert có tên này, và vào `server_name` của block chuyển cổng 80 (`play.conf:3`, `dev.conf:3`).
 - `scripts/validate-play-mode.mjs` thêm kiểm: host feel có CORS ở mọi location, không fallback SPA. Host game vẫn không được alias dữ liệu chung (luật của Codex 216).
 - Publish ghi thẳng vào thư mục nginx phục vụ: **có hiệu lực ở lần tải sau, admin tắt cũng được**.
@@ -928,7 +968,7 @@ Mỗi bước giữ mọi game chơi được và chỉ động tới một nơi
   - test kit đã chuyển sang;
   - test chụp nhanh hợp đồng: `v1.d.ts` sinh ra phải bằng bản đã commit; bỏ hoặc đổi tên là lỗi, trừ khi vào `/v2`;
   - `contract/typing-feel.v1.json` khớp `TYPING_FX_STYLES`, `TYPING_FX_INTENSITIES`, `TYPING_FX_SIZES` và regex id;
-  - `feel:pack` **chặn** khi: một dòng danh mục không phân giải được, sha256 lệch, file không giải mã được, đỉnh thật trên −1 dBTP (AUDIO_PIPELINE §4.3), vượt ngân sách số file hay cỡ, `_headers` thiếu CORS, còn `typing-game.local`.
+  - `feel:pack` **chặn** khi: danh mục không có bộ nào, một dòng danh mục không phân giải được, sha256 lệch, file không giải mã được, đỉnh thật trên −1 dBTP (AUDIO_PIPELINE §4.3), vượt ngân sách số file hay cỡ, `_headers` thiếu CORS, còn `typing-game.local`.
   - `feel:pack` chỉ **báo** (không chặn) các số độ to và thời gian lên (LUFS-M max −27, đầu tiếng ≤ 2 ms, tiếng chính tới trong 15 ms, SHARED_SYSTEMS_BAR §2). Lý do:
     - các cổng này thuộc bước Format và bộ phê bình, không thuộc bước đóng gói;
     - công thức natural chuẩn theo đỉnh −2 dBFS, không chuẩn theo LUFS;
@@ -967,7 +1007,7 @@ Mỗi bước giữ mọi game chơi được và chỉ động tới một nơi
 | Cú gõ đầu tiên có tiếng | ≥ 19/20 lần |
 | Game thứ hai lấy bộ âm từ cache đĩa | có |
 | Trận bắt đầu khi Typing Feel chậm hoặc hỏng | ≤ 1,5 s sau khi sẵn sàng |
-| Manifest bộ âm game tải | ≤ 4 KB |
+| Manifest bộ âm game tải | ≤ 4 KB tải về (đã nén gzip, mục 6.2) |
 | Publish tới khi máy nhà thấy | lần tải sau, không build |
 
 ---
@@ -980,7 +1020,7 @@ Cỡ việc (việc của agent, chưa tính thời gian chủ dự án nghe): *
 |---|---|---|---|
 | G0 | B0: duyệt, `setup:play`, nối lại rclone, cho vào thay đổi dở, chốt Hail Stone | chủ dự án đã trả lời mục 10; `git status` của các file ở B0 sạch; bốn nơi cùng một danh sách bộ | S |
 | G1 | B1: `typing-feel/`, `feel:import`, nginx, media | curl đạt mục 4.2; mọi bộ ở staging (34) có trên Drive; không game nào đổi | M |
-| G2 | B2: thêm vào kit | test kit xanh; `kit:sync --check` xanh ở ba nhánh | S |
+| G2 | B2: thêm vào kit | test kit xanh; `kit:sync --check --target games/.wt-*` xanh ở ba nhánh | S |
 | G3 | B3–B5: Last Line, Dragonhold, Wordwoven, lần lượt | mỗi game: đọc từ host feel, bỏ mọi dòng `audio/keys` của md5, test dùng danh mục mẫu, đạt mục 5.3 khi chặn `feel.*`, merge | M mỗi game |
 | G4 | B6: Monkeytype | CI xanh khi không có biến; local đọc Typing Feel; đã đẩy GitHub và GitLab | M |
 | G5 | Admin IA: vùng, nút chọn khu, Administration, chuyển đường cũ, `/admin`, nginx `/api/admin/` và `/api/runtime/typing-feel/`, server chạy khi thiếu Space | mọi URL cũ chạy; `validate-admin-shared-ia`, 11 script `validate-space-admin-*` và `validate-play-mode` xanh; đi trình duyệt 1280 và 1920 | M |

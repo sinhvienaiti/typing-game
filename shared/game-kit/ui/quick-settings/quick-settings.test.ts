@@ -1,5 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { pendingKeyboardChoices, settleKeyboardChoice, type KeyboardSoundChoice } from "../../feedback/typing-fx/audio";
 import { QUICK_SETTINGS_STYLE_ID } from "./css";
 import { QuickSettings, type QuickSettingsOptions } from "./quick-settings";
 import type { QuickValue } from "./types";
@@ -364,5 +365,66 @@ describe("QuickSettings destroy", () => {
     expect(h.qs.isOpen).toBe(false);
     vi.advanceTimersByTime(2000);
     expect(h.onResume).not.toHaveBeenCalled();
+  });
+});
+
+describe("QuickSettings choice options after the catalogue (setChoiceOptions)", () => {
+  const OFF: KeyboardSoundChoice = { value: "off", label: "Off" };
+  const RELAY: KeyboardSoundChoice = { value: "relay", label: "Relay" };
+  const pack = (id: string): KeyboardSoundChoice => ({ value: id, label: id.toUpperCase(), family: "Feel", manifest: `/v1/keys/sets/${id}/f/keys-manifest.json`, preview: `/v1/keys/sets/${id}/f/preview.ogg` });
+  const CATALOG = { state: "ready" as const, options: [OFF, RELAY, pack("creamy"), pack("deep")] };
+  const listed = (h: Harness) => [...h.row("keyboard").querySelectorAll<HTMLButtonElement>('button[role="option"]')];
+  // Choosing a set previews and loads it: keep that off the network.
+  const fetch = vi.fn(async (url: string) => { throw new Error(`offline: ${url}`); });
+  beforeEach(() => vi.stubGlobal("fetch", fetch));
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("placeholder options without the saved set make the kit overwrite it (the bug pendingKeyboardChoices avoids)", () => {
+    const h = setup({ keyboardProfiles: [OFF, RELAY] });
+    expect(h.onChange).toHaveBeenCalledWith("keyboard", "relay");
+  });
+
+  it("a panel built before the catalogue keeps the saved set as Loading…, then lists the sets in place", () => {
+    const h = setup({ keyboardProfiles: pendingKeyboardChoices("creamy", RELAY) });
+    expect(h.onChange).not.toHaveBeenCalled();
+    expect(listed(h).map((b) => [b.textContent, b.disabled, b.getAttribute("aria-selected")])).toEqual([["Off", false, "false"], ["Relay", false, "false"], ["Loading…", true, "true"]]);
+    const settled = settleKeyboardChoice(String(h.values.keyboard), CATALOG, RELAY);
+    expect(h.qs.setChoiceOptions("keyboard", settled.options)).toBe(true);
+    expect(h.onChange).not.toHaveBeenCalled();
+    expect(h.values.keyboard).toBe("creamy");
+    expect(listed(h).map((b) => b.dataset.value)).toEqual(["off", "relay", "creamy", "deep"]);
+    expect(listed(h).find((b) => b.getAttribute("aria-selected") === "true")?.dataset.value).toBe("creamy");
+    expect(h.row("keyboard").querySelectorAll(".kit-keyboards")).toHaveLength(1);
+    // The new list is live: a choice saves at once, and icons reach its Listen buttons.
+    choose(h.row("keyboard"), "deep");
+    expect(h.onChange).toHaveBeenLastCalledWith("keyboard", "deep");
+    h.qs.setIcons({ "hud-sound": `${ART}listen.png` });
+    expect(h.row("keyboard").querySelector<HTMLImageElement>(".kit-keyboards__listen img")?.getAttribute("src")).toBe(`${ART}listen.png`);
+  });
+
+  it("while the Sound panel is open, focus stays in the list the player was moving through", () => {
+    const h = setup({ keyboardProfiles: pendingKeyboardChoices("creamy", RELAY), countdownMs: 0 });
+    h.qs.open("sound");
+    listed(h)[1]!.focus();
+    expect(h.row("keyboard").contains(document.activeElement)).toBe(true);
+    h.qs.setChoiceOptions("keyboard", settleKeyboardChoice("creamy", CATALOG, RELAY).options);
+    expect(h.qs.isOpen).toBe(true);
+    expect((document.activeElement as HTMLElement | null)?.dataset.value).toBe("creamy");
+  });
+
+  it("new options that lack the saved id repair it through onChange, as at construction", () => {
+    const h = setup({ keyboardProfiles: pendingKeyboardChoices("creamy", RELAY) });
+    h.qs.setChoiceOptions("keyboard", [OFF, RELAY, pack("deep")]);
+    expect(h.onChange).toHaveBeenCalledWith("keyboard", "relay");
+  });
+
+  it("a radio choice row takes new options too; an unknown row or a destroyed panel: false", () => {
+    const h = setup();
+    expect(h.qs.setChoiceOptions("quality", [{ value: "low", label: "Low" }, { value: "high", label: "High" }])).toBe(true);
+    const radios = [...h.row("quality").querySelectorAll<HTMLInputElement>('input[type="radio"]')];
+    expect(radios.map((r) => [r.value, r.checked])).toEqual([["low", false], ["high", true]]);
+    expect(h.qs.setChoiceOptions("nope", [])).toBe(false);
+    h.qs.destroy();
+    expect(h.qs.setChoiceOptions("quality", [{ value: "low", label: "Low" }])).toBe(false);
   });
 });

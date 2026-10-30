@@ -2,6 +2,7 @@
 // Copies shared/game-kit modules into a game's src/kit with a sha256 manifest (docs/games/SPLIT_PLAN.md §4.2).
 //   node scripts/sync-game-kit.mjs --target games/<id> [--allow-missing]
 //   node scripts/sync-game-kit.mjs --check     every games/<id> with kit.config.json is current and untouched
+//   node scripts/sync-game-kit.mjs --check --target games/<dir>   that one game only (a games/.wt-* worktree too)
 //   node scripts/sync-game-kit.mjs --drift     kit vs its Space originals (informational, exit 0)
 // --root <dir> runs against another checkout (tests).
 import { execFileSync } from "node:child_process";
@@ -480,7 +481,7 @@ function printDrift(root) {
 }
 
 function usage() {
-  return "Usage: node scripts/sync-game-kit.mjs (--target games/<id> [--allow-missing] | --check | --drift) [--root <dir>]";
+  return "Usage: node scripts/sync-game-kit.mjs (--target games/<id> [--allow-missing] | --check [--target games/<id>] | --drift) [--root <dir>]";
 }
 
 export function main(argv) {
@@ -516,7 +517,8 @@ export function main(argv) {
     return 0;
   }
   if (mode === "check") {
-    const results = checkAll(root);
+    // --target checks that one game, worktrees (dot-folders) included; checkAll skips those.
+    const results = target === null ? checkAll(root) : [{ game: toPosix(path.relative(root, path.resolve(root, target))), problems: checkGame({ root, gameDir: path.resolve(root, target) }) }];
     if (results.length === 0) console.log("No game has kit.config.json.");
     let failed = 0;
     for (const { game, problems } of results) {

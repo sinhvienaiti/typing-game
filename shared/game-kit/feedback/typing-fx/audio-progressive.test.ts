@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { RngStream } from "../../platform/rng";
-import { KEYBOARD_DECODE_BATCH_SIZE, KeyboardSoundPreview, TypingSounds, VariantPicker, keyboardFiles, type TypingSoundProfile } from "./audio";
+import { KEYBOARD_DECODE_BATCH_SIZE, KEYBOARD_FIRST_BATCH_SPACES, KeyboardSoundPreview, TypingSounds, VariantPicker, keyboardFiles, type TypingSoundProfile } from "./audio";
 
 const deferred = <T>() => {
   let resolve!: (value: T) => void;
@@ -136,6 +136,60 @@ describe("219 progressive decoding and memory", () => {
     const loading = sounds.load(profile(), bytes); await flush(); sounds.dispose();
     pending.resolve({ duration: 1 } as AudioBuffer); await vi.runAllTimersAsync(); await loading;
     expect(sounds.use("deep")).toBe(false); expect(bytes).toHaveBeenCalledTimes(KEYBOARD_DECODE_BATCH_SIZE);
+  });
+});
+
+describe("first decode batch mixes keys and spaces (TYPING_FEEL_SERVICE.md §4.6)", () => {
+  const spaceNames = (n: number) => Array.from({ length: n }, (_, i) => `space-${String(i + 1).padStart(2, "0")}.ogg`);
+  /** Spaces decode to ids 200+, keys to their number. */
+  const mixedBytes = vi.fn(async (url: string) => {
+    const space = /space-(\d+)/.exec(url);
+    return new Uint8Array([space ? 200 + Number(space[1]) : Number(/key-(\d+)/.exec(url)?.[1] ?? 0)]).buffer;
+  });
+  const mixed = (keys: number, spaces: number): TypingSoundProfile => ({ id: "mixed", name: "mixed", source: "audio-lab", licence: "project-owned", pitch: 0, level: 0, files: { key: names(keys), space: spaceNames(spaces) } });
+
+  it("a ticket-218 set (80 keys, 8 spaces): 12 keys and 4 spaces first, and a word sounds as a word before batch two", async () => {
+    mixedBytes.mockClear();
+    const { sounds } = player();
+    const sources: Source[] = [];
+    vi.stubGlobal("AudioBufferSourceNode", class extends Source { constructor(ctx: unknown, options: { buffer: AudioBuffer }) { super(ctx, options); sources.push(this); } });
+    const loading = sounds.load(mixed(80, 8), mixedBytes);
+    await flush();
+    const first = mixedBytes.mock.calls.map(([url]) => url);
+    expect(KEYBOARD_DECODE_BATCH_SIZE).toBe(16);
+    expect(KEYBOARD_FIRST_BATCH_SPACES).toBe(4);
+    expect(first).toEqual([...names(12), ...spaceNames(4)]);
+    // Only the first batch is in: the space set already plays a finished word.
+    expect(sounds.play("word")).toBe(true);
+    expect((sources.at(-1)!.buffer as unknown as { id: number }).id).toBeGreaterThan(200);
+    await vi.runAllTimersAsync();
+    expect(await loading).toEqual({ loaded: 88, missing: [] });
+    expect(mixedBytes.mock.calls.map(([url]) => url)).toEqual([...names(12), ...spaceNames(4), ...names(80).slice(12), ...spaceNames(8).slice(4)]);
+  });
+
+  it.each([
+    // keys, spaces → first batch keys, first batch spaces (a short set gives its slots to the other; the batch stays 16)
+    [80, 3, 13, 3],
+    [80, 1, 15, 1],
+    [80, 0, 16, 0],
+    [10, 8, 10, 6],
+    [5, 20, 5, 11],
+    [0, 3, 0, 3],
+    [10, 3, 10, 3],
+    [11, 4, 11, 4],
+  ])("%i keys and %i spaces: the first batch holds %i keys and %i spaces, the rest follow in order", async (keys, spaces, firstKeys, firstSpaces) => {
+    mixedBytes.mockClear();
+    const { sounds } = player();
+    const loading = sounds.load(mixed(keys, spaces), mixedBytes);
+    await flush();
+    const first = mixedBytes.mock.calls.map(([url]) => url);
+    expect(first).toEqual([...names(keys).slice(0, firstKeys), ...spaceNames(spaces).slice(0, firstSpaces)]);
+    expect(first.length).toBe(Math.min(KEYBOARD_DECODE_BATCH_SIZE, keys + spaces));
+    await vi.runAllTimersAsync();
+    expect(await loading).toEqual({ loaded: keys + spaces, missing: [] });
+    expect(mixedBytes.mock.calls.map(([url]) => url)).toEqual([
+      ...names(keys).slice(0, firstKeys), ...spaceNames(spaces).slice(0, firstSpaces), ...names(keys).slice(firstKeys), ...spaceNames(spaces).slice(firstSpaces),
+    ]);
   });
 });
 

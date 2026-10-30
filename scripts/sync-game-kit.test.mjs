@@ -169,6 +169,26 @@ describe("tamper detection", () => {
     write(root, "games/.wt-demo/kit.config.json", JSON.stringify({ modules: ["alpha"] }));
     assert.deepEqual(checkAll(root).map((result) => result.game), ["games/demo"]);
   });
+
+  it("the CLI --check --target checks that one game, a worktree included, and ignores the others", () => {
+    const root = fixture();
+    write(root, "games/.wt-demo/kit.config.json", JSON.stringify({ modules: ["alpha"] }));
+    syncGame({ root, target: "games/.wt-demo" });
+    // games/demo is never synced: plain --check fails on it, --target on the worktree does not look at it.
+    const all = spawnSync(process.execPath, [SCRIPT, "--root", root, "--check"], { encoding: "utf8" });
+    assert.equal(all.status, 1);
+    assert.doesNotMatch(all.stdout + all.stderr, /\.wt-demo/);
+    for (const args of [["--check", "--target", "games/.wt-demo"], ["--target", "games/.wt-demo", "--check"]]) {
+      const good = spawnSync(process.execPath, [SCRIPT, "--root", root, ...args], { encoding: "utf8" });
+      assert.equal(good.status, 0, good.stderr);
+      assert.equal(good.stdout.trim(), "games/.wt-demo: OK");
+    }
+    appendFileSync(path.join(root, "games/.wt-demo/src/kit/alpha/util.ts"), "// hand edit\n");
+    const bad = spawnSync(process.execPath, [SCRIPT, "--root", root, "--check", "--target", "games/.wt-demo"], { encoding: "utf8" });
+    assert.equal(bad.status, 1);
+    assert.match(bad.stderr, /games\/\.wt-demo: 1 problem\(s\)\n {2}edited by hand: alpha\/util\.ts/);
+    assert.doesNotMatch(bad.stderr, /games\/demo:/);
+  });
 });
 
 describe("git and pinning", () => {
