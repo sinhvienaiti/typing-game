@@ -11,6 +11,15 @@
 
 > **Chạy lại lần 3 (30/10, 13:05, điều phối):** năm file `docs/changelog/2026-10-30-scenery-layout.md`, `scripts/td/scenery-layout-sheet.ts`, `src/view/3d/scenery-layout.ts`, `tests/golden/td-scenery-layout.json`, `tests/td-scenery-layout.test.ts` là của **phiếu 202**. 202 chạy cùng worktree, cùng nhánh `td-scenery`, theo phiếu của nó. Chúng là file **đã biết**, được phép cùng tồn tại. Không sửa chúng. Ở mục kiểm phạm vi, so phần chênh với tập 199 cộng năm file này. `pnpm check` có thể đỏ ở test của 202 khi chưa có manifest của 199; đó là việc phiếu này phải sửa bằng cách xuất manifest. Làm tiếp đến hết phiếu theo quyết định 12:58.
 
+> **Quyết định thứ hai của điều phối (30/10, 13:28) cho điểm chặn lượt 12:58:**
+> - Các điểm bị bắt có giá trị như (40,17,34,255) và (9,4,8,255) là điểm **gần đen** trong bóng cây, không phải viền màu khóa. Màu khóa là hồng tím sáng; ở vùng tối, sắc độ không ổn định nên bộ kiểm báo nhầm.
+> - Từ nay phép kiểm gần màu khóa (hue 300±20, S cao) chỉ áp cho điểm có độ sáng **V ≥ 0,25**, ở mọi alpha.
+> - Điểm V < 0,25 được miễn. Ghi số điểm miễn theo từng sprite và từng cấp.
+> - Quyết định 12:58 về alpha 0 vẫn giữ.
+> - Nếu sau đó vẫn còn điểm V ≥ 0,25 bị bắt: thử q92, rồi q95. Vẫn còn thì **làm tiếp**, ghi số điểm, giá trị RGBA lớn nhất, tọa độ và ảnh phóng ×4 vào báo cáo để Claude chấm bằng mắt. Không dừng vì điểm này nữa.
+> - Ghi `public/`, manifest, ba tờ nghiệm thu. Các lệnh kiểm là bắt buộc.
+> - File của 202 trong worktree là file đã biết.
+
 **Nguồn:**
 - Chủ dự án 29/10/2026: "tăng thêm việc cho codex cho tôi".
 - `docs/games/MAP1_PRODUCTION.md` C9 (P0, G2, 22 h): "`scripts/td/prepare-scenery.mjs` (atlas WebP)".
