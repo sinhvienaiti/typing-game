@@ -11,6 +11,8 @@
 
 Chưa có thì dừng, ghi vào báo cáo.
 
+> **Chạy lại 30/10 sáng (điều phối):** lượt đầu của chính phiếu này (29/10 khoảng 23:35) bị cắt giữa chừng vì hết hạn mức, nên worktree **không sạch**: các thay đổi chưa commit trong đó là việc dở của chính phiếu này, không phải của ai khác. Đừng dừng ở bước "git status phải sạch". Đọc `git status` và `git diff`, giữ phần đúng, làm tiếp cho đủ phiếu, rồi kiểm như thường. Báo cáo lượt trước (chỉ ghi "dừng vì worktree không sạch") nằm ở thư mục `docs/codex-queue/` của worktree; ghi đè bằng báo cáo mới.
+
 ## Khác với 192
 
 - **Nơi làm:** worktree `games/.wt-td-keys`, nhánh `td-keys`, cắt từ `a2-days` (nhánh chính hiện tại của Wordwoven). `git status` phải sạch.

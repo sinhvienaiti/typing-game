@@ -10,6 +10,8 @@ Bộ âm do phiếu 189 dựng; danh sách chọn và nghe thử do phiếu 190 
 
 **Chỉ chạy khi** Claude đã duyệt 189 và 190, tạo worktree dưới đây và đồng bộ kit mới vào đó (module `ui` có quick-settings; `feedback` có typing-fx audio). Chưa có thì dừng, ghi vào báo cáo.
 
+> **Chạy lại 30/10 sáng (điều phối):** lượt đầu của chính phiếu này (29/10 khoảng 23:35) bị cắt giữa chừng vì hết hạn mức, nên worktree **không sạch**: các thay đổi chưa commit trong đó là việc dở của chính phiếu này, không phải của ai khác. Đừng dừng ở bước "git status phải sạch". Đọc `git status` và `git diff`, giữ phần đúng, làm tiếp cho đủ phiếu, rồi kiểm như thường. Báo cáo lượt trước (chỉ ghi "dừng vì worktree không sạch") nằm ở thư mục `docs/codex-queue/` của worktree; ghi đè bằng báo cáo mới.
+
 ## Nơi làm
 
 - Worktree `games/.wt-dh-keys`, nhánh `dh-keys`, cắt từ `main` Dragonhold. `git status` phải sạch.
