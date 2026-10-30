@@ -21,7 +21,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - commit phiếu Codex 171, JSON runtime trong kho media (`f126089c`); `media:test` 57/57;
   - commit ghi duyệt (`b785b0f3`) và con trỏ Monkeytype `4f1fcf3b0` (`56a113fd`);
   - bốn nơi và staging cùng 34 bộ, cùng danh sách id.
-- **G0, phần của chủ dự án (chưa làm):** `pnpm setup:play` (sudo, thêm `feel.typing-game.local` vào hosts và chứng chỉ, sau khi G1 commit) và `pnpm media:setup --reconnect` (token rclone hết hạn 30/10).
+- **G0, phần của chủ dự án:**
+  - `pnpm setup:play`: **xong 31/10 khoảng 05:35.** Hosts và chứng chỉ có `feel.typing-game.local`.
+    - Host feel đã kiểm bằng curl: HTTP/2, CORS, no-cache và 304, immutable, `audio/ogg`, 404.
+    - Monkeytype trên host chơi thật đọc r1 (Chrome headless: 90 yêu cầu feel, không lỗi).
+    - Khung trình duyệt trong app chặn mọi yêu cầu chéo giữa các host `*.typing-game.local`, nên phải kiểm bằng Chrome thật (`cdp-run`).
+  - `pnpm media:setup --reconnect` (token rclone hết hạn 30/10): **chưa làm.**
 - **G1 xong** (`4a3c94ef`):
   - `typing-feel/` với danh mục r1, 34 bộ, 2.744 OGG chép đúng byte (OGG bị Git bỏ qua);
   - block nginx `feel.typing-game.local`;
