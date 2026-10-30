@@ -227,6 +227,7 @@ jobs:
           git add \
             content/english/releases/2026.10.0.json \
             content/english/reports/e10-batch-report.json \
+            content/english/reports/e12-maintenance-audit.json \
             content/english/reports/e12-quality-sample.json
           if git diff --cached --quiet; then
             echo 'E10/E12 generated metadata already synchronized.'
