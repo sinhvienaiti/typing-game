@@ -44,7 +44,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - phiếu 149: nhận 7/10;
   - phiếu 150: nhận 8/11;
   - phiếu 237 và 238 (làm lại các icon chưa đạt) nằm ở làn s26, chạy sau s25.
-- **Phiếu 236 (G5, Codex):** đã xong trong worktree `admin-ia`. Claude kiểm trình duyệt đạt ở 1280 và 1920, có và thiếu Space. Đang chờ hai người kiểm mã (`wf_c214c3c4-1d9`), rồi sửa và commit trên nhánh `admin-shared-ia`.
+- **G5 (phiếu 236) xong và đã gộp** vào `feat/space-typing-admin-uiux` (`4ac4884b`). Đó là Admin nhiều khu: All games (Overview, Learning Content), Space Typing, Administration. Đã qua hai người kiểm, một lượt sửa và một lần kiểm lại. Worktree `admin-ia` đã dọn.
 
 **31/10, khoảng 01:00: chủ dự án cho Codex chạy lại một làn.**
 - Làn s24: phiếu 236 (G5, Admin nhiều khu), trong worktree `typing-game-wt/admin-ia`, nhánh `admin-shared-ia`. Ở đó `games/space-typing` là worktree tách rời của Space ở `84777155`.
