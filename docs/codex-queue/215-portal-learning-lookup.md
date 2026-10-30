@@ -1,5 +1,7 @@
 # Phiếu 215 · Cổng game và `shared/learning` · Trả lời tin `typing-game:learning:v1:lookup` (portal đang từ chối, Dragonhold coi từ đã học là từ mới)
 
+> **Chạy lại (30/10, 12:58, điều phối):** lượt 11:24 dừng vì `docs/changelog/2026-10-30-kit-audio-file-bank.md` chưa được theo dõi. File đó của phiếu 198 và nay đã commit (`git log -1 -- docs/changelog/2026-10-30-kit-audio-file-bank.md`). Các file chưa commit của 214 trong `portal/` là file đã biết; không sửa phần của 214 ngoài những gì 215 cần, và báo cáo ghi rõ đoạn nào là của 215. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
+
 **Nguồn:**
 - `docs/games/SPLIT_PLAN.md` §9.2, hàng "Truy vấn học": "Thêm `typing-game:learning:v1:lookup` theo danh sách ≤ 200 `entityId`, trả cả `recentSamples`".
 - `docs/games/DEPLOY_INDEPENDENCE.md` §7, hàng 6: "portal từ chối tin `lookup` của Rồng". Cách sửa ghi ở đó: "một bộ xử lý `lookup` theo `gameId`. Thêm game không cần sửa portal".

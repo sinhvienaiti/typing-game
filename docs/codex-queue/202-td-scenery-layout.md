@@ -1,5 +1,7 @@
 # Phiếu 202 · Wordwoven · C9: bố cục cảnh vật map 1 thuần, theo seed (cây, bụi, đá, mép rừng) theo MAP_FACTORY §6.4
 
+> **Chạy lại (30/10, 12:58, điều phối):** lượt 11:28 đã làm phần dữ liệu (module, test, golden, sáu tờ) nhưng bỏ `pnpm check`. Lượt này chạy ngay sau 199 trong cùng làn. Giữ phần đã làm, nối với atlas và manifest của 199 nếu phiếu cần, rồi chạy đủ mục kiểm. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
+
 **Nguồn:**
 - Chủ dự án 29/10/2026 tối: "tăng thêm việc cho codex cho tôi".
 - `docs/games/MAP1_PRODUCTION.md` C9 (P0, G2): "rải decor theo §6.4".

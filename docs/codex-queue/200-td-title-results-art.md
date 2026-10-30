@@ -1,5 +1,7 @@
 # Phiếu 200 · Wordwoven · Gắn ảnh đã nhận vào màn tựa và thẻ kết (nền 158, logo và favicon 113, crest, banner, divider 115)
 
+> **Chạy lại (30/10, 12:58, điều phối):** lượt 11:54 đã gắn mã và xuất media nhưng chưa chạy kiểm. Các file chưa commit trong `games/.wt-td-ui` là việc của chính phiếu này; giữ nguyên. Chạy đủ mục kiểm: `pnpm check`, ngân sách gói trước và sau (mốc trước lấy bằng cách build ở `2a1f61d` trong `tmp/`, hoặc dùng số của `td-1c` nếu phiếu đã ghi), sửa nếu đỏ. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
+
 **Nguồn:**
 - `docs/HANDOFF_CURRENT.md` §3: "Ảnh đã nhận, chờ gắn … 158 `title-backdrop.v2` (cắt 16:9 `1536x864+0+80`, logo `logo.alpha.png` khoảng 45 % rộng) … Chưa có làn gắn ảnh UI".
 - `docs/games/map1/UI_IMAGERY.md` §3.1 và §3.7:

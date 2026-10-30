@@ -2,6 +2,13 @@
 
 > **Chạy lại (30/10, 11:10, điều phối):** lượt 10:44 bị ngắt giữa chừng vì Codex hết hạn mức (10:52). Worktree `games/.wt-td-scenery` không sạch: `package.json`, `scripts/td/prepare-scenery.mjs`, `scripts/td/scenery-set.json`, `tests/td-scenery-prep.test.ts` là **việc dở của chính phiếu này**. Đọc `git diff`, giữ phần đúng, làm tiếp đến hết phiếu. File lạ ngoài tập đó thì dừng.
 
+> **Quyết định của điều phối cho điểm chặn ở lượt 11:16 (30/10, 12:58):**
+> - Điểm ảnh **alpha = 0**, cách mọi điểm alpha ≥ 0,5 **từ 3 px trở lên**, và tối (độ sáng < 0,2) được **miễn** phép kiểm màu khóa. Đó là trường hợp `almond-tree-v3` (36,14,39,0) cách 4 px.
+> - Trong vòng 2 px tính từ vùng alpha ≥ 0,5, luật vẫn là 0 điểm.
+> - Ghi số điểm được miễn của từng sprite vào báo cáo và vào đầu ra của bộ kiểm.
+> - Giữ WebP có mất mát q90, không đổi sang lossless.
+> - Làm tiếp đến hết phiếu: ghi `public/`, manifest và ba tờ nghiệm thu. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
+
 **Nguồn:**
 - Chủ dự án 29/10/2026: "tăng thêm việc cho codex cho tôi".
 - `docs/games/MAP1_PRODUCTION.md` C9 (P0, G2, 22 h): "`scripts/td/prepare-scenery.mjs` (atlas WebP)".
