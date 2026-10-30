@@ -218,6 +218,13 @@ class Checker:
                 self.err("missing-release", where, "bản ghi của người khác chưa có giấy đồng ý (mục 10.4)")
         if cond == "subscription" and not row.get("subscription"):
             self.err("missing-record", where, "âm ElevenLabs cần ghi kỳ đăng ký gói trả phí (subscription)")
+        if cond == "adobe-model":
+            # Adobe-owned models only; match the approved family at the start.
+            model = row.get("model")
+            if not policy.adobe_model_allowed(model):
+                self.err("adobe-model", where, "thiếu model hoặc model không thuộc danh sách Adobe được phép")
+            if row.get("raw_redistribution_allowed") is True:
+                self.err("adobe-raw", where, "âm Firefly không được phát lại hay bán file thô")
         lib_key = row.get("libraryKey")
         if lib_key and lib_key not in self._rows:
             self.err("missing-record", where, f"thiếu dòng thư viện {lib_key} trong licences.jsonl")

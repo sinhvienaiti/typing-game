@@ -19,6 +19,7 @@ from common import env  # noqa: E402
 
 # One place to map pnpm script names to code. "node:" runs a Node script with the same env.
 ENTRYPOINTS = {
+    "firefly": "firefly",
     "critic": "critic",                       # critic/__main__.py
     "board": "board",                         # board/__main__.py (or "node:board/server.mjs")
     "specs": "specs",                         # specs/__main__.py

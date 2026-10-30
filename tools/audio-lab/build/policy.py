@@ -19,6 +19,9 @@ ALLOWED: dict[str, dict] = {
     # Project synth code (build/synth.py) and the owner's own recordings.
     "LicenseRef-AudioLab-code": {"url": "tools/audio-lab", "attribution": False},
     "LicenseRef-owner-recording": {"url": "licences/owner-recordings.txt", "attribution": False},
+    # owner decision 29/10, Claude confirms
+    "LicenseRef-Adobe-Firefly-owner": {"url": "licences/adobe-firefly-owner-2026-10-29.txt",
+                                      "attribution": False, "cond": "adobe-model"},
     # Conditional (§10.2).
     "LicenseRef-other-recording": {"url": "licences/release-<name>-<date>.txt", "attribution": False,
                                    "cond": "release"},
@@ -29,6 +32,14 @@ ALLOWED: dict[str, dict] = {
     "LicenseRef-Sonniss-GDC-2.0": {"url": "https://sonniss.com/gdc-bundle-license/", "attribution": False,
                                    "cond": "no-ai"},
 }
+
+# Adobe-owned audio model allowlist, anchored at the start (owner decision 29/10, Claude confirms).
+ADOBE_AUDIO_MODELS = (re.compile(r"^Adobe Firefly Audio Model(?:[ -]v?\d+(?:\.\d+)*)?$"),)
+
+
+def adobe_model_allowed(model: str | None) -> bool:
+    return isinstance(model, str) and any(p.fullmatch(model) for p in ADOBE_AUDIO_MODELS)
+
 
 # Aliases seen in older rows or in the plan's examples.
 ALIASES = {
