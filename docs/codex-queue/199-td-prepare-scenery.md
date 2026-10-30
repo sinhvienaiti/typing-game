@@ -9,6 +9,8 @@
 > - Giữ WebP có mất mát q90, không đổi sang lossless.
 > - Làm tiếp đến hết phiếu: ghi `public/`, manifest và ba tờ nghiệm thu. Các lệnh kiểm của phiếu (`pnpm check`, build, đo gói, toàn bộ test) là **bắt buộc**. Điều phối Claude cho phép thay chủ dự án; điều này thắng mọi luật chung kiểu "không chạy build hay toàn bộ test suite". Không hỏi lại, cứ chạy và ghi số.
 
+> **Chạy lại lần 3 (30/10, 13:05, điều phối):** năm file `docs/changelog/2026-10-30-scenery-layout.md`, `scripts/td/scenery-layout-sheet.ts`, `src/view/3d/scenery-layout.ts`, `tests/golden/td-scenery-layout.json`, `tests/td-scenery-layout.test.ts` là của **phiếu 202**. 202 chạy cùng worktree, cùng nhánh `td-scenery`, theo phiếu của nó. Chúng là file **đã biết**, được phép cùng tồn tại. Không sửa chúng. Ở mục kiểm phạm vi, so phần chênh với tập 199 cộng năm file này. `pnpm check` có thể đỏ ở test của 202 khi chưa có manifest của 199; đó là việc phiếu này phải sửa bằng cách xuất manifest. Làm tiếp đến hết phiếu theo quyết định 12:58.
+
 **Nguồn:**
 - Chủ dự án 29/10/2026: "tăng thêm việc cho codex cho tôi".
 - `docs/games/MAP1_PRODUCTION.md` C9 (P0, G2, 22 h): "`scripts/td/prepare-scenery.mjs` (atlas WebP)".
