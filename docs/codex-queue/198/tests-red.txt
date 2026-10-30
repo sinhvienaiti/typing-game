@@ -1,0 +1,181 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/shared/game-kit
+
+ ❯ audio/scene-audio-files.test.ts (8 tests | 8 failed) 10ms
+   × scene file playback > fetches a lazy id on first play without playing late; measures the selected variant at its rate 3ms
+     → Cannot read properties of undefined (reading 'startsWith')
+   × scene file playback > manifest files override table URLs while table bus/gain/gap remain authoritative 1ms
+     → audio.ready is not a function
+   × scene file playback > missing hooks use the same gain/pan/bus nodes and gap as synth 0ms
+     → Cannot read properties of undefined (reading 'startsWith')
+   × scene file playback > counts silence, never runs hooks for loops or an unavailable explicit variant of ready files 0ms
+     → Cannot read properties of undefined (reading 'startsWith')
+   × scene file playback > keeps identical playback logs and node counts for absent, empty, and 404 manifests 0ms
+     → Cannot read properties of undefined (reading 'startsWith')
+   × scene music > routes both music APIs through a destination bus, independent of sfxVolume, with pronunciation duck 0ms
+     → audio.ready is not a function
+   × scene music > without musicBus keeps direct destination routing 0ms
+     → audio.ready is not a function
+   × scene music > cancels a pending track on stop or replacement, preserving the newest request 4ms
+     → expected [ FakeNode{ kind: 'source', …(8) } ] to have a length of +0 but got 1
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  audio/file-bank.test.ts [ audio/file-bank.test.ts ]
+Error: Cannot find module './file-bank' imported from '/Users/toandx/htdocs/typing-game/shared/game-kit/audio/file-bank.test.ts'
+ ❯ audio/file-bank.test.ts:2:1
+      1| import { afterEach, beforeEach, describe, expect, it, vi } from "vites…
+      2| import { FileBank, LayeredBank } from "./file-bank";
+       | ^
+      3| import { buffer, deferred, FakeContext, FakeFetch, flush } from "./fak…
+      4| let f: FakeFetch; let ctx: FakeContext;
+
+Caused by: Error: Failed to load url ./file-bank (resolved id: ./file-bank) in /Users/toandx/htdocs/typing-game/shared/game-kit/audio/file-bank.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/.pnpm/vite@7.3.7_@types+node@24.19.2/node_modules/vite/dist/node/chunks/config.js:22907:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  audio/manifest.test.ts [ audio/manifest.test.ts ]
+Error: Cannot find module './manifest' imported from '/Users/toandx/htdocs/typing-game/shared/game-kit/audio/manifest.test.ts'
+ ❯ audio/manifest.test.ts:2:1
+      1| import { afterEach, describe, expect, it, vi } from "vitest";
+      2| import { loadAudioManifest, parseAudioManifest } from "./manifest";
+       | ^
+      3| import { FakeFetch } from "./fake-audio.test-helper";
+      4| afterEach(() => vi.unstubAllGlobals());
+
+Caused by: Error: Failed to load url ./manifest (resolved id: ./manifest) in /Users/toandx/htdocs/typing-game/shared/game-kit/audio/manifest.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/.pnpm/vite@7.3.7_@types+node@24.19.2/node_modules/vite/dist/node/chunks/config.js:22907:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  audio/variants.test.ts [ audio/variants.test.ts ]
+Error: Cannot find module './variants' imported from '/Users/toandx/htdocs/typing-game/shared/game-kit/audio/variants.test.ts'
+ ❯ audio/variants.test.ts:2:1
+      1| import { describe, expect, it } from "vitest";
+      2| import { VariantPicker } from "./variants";
+       | ^
+      3| function seeded() { let seed = 198; return () => ((seed = (Math.imul(s…
+      4| describe("variants", () => {
+
+Caused by: Error: Failed to load url ./variants (resolved id: ./variants) in /Users/toandx/htdocs/typing-game/shared/game-kit/audio/variants.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/.pnpm/vite@7.3.7_@types+node@24.19.2/node_modules/vite/dist/node/chunks/config.js:22907:33
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 8 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > fetches a lazy id on first play without playing late; measures the selected variant at its rate
+TypeError: Cannot read properties of undefined (reading 'startsWith')
+ ❯ audioUrl audio/util.ts:10:12
+      8| /** A sound path under the audio base; absolute paths and full URLs ar…
+      9| export function audioUrl(path: string, audioBase = DEFAULT_AUDIO_BASE)…
+     10|   if (path.startsWith("/") || /^[a-z][a-z0-9+.-]*:/i.test(path)) retur…
+       |            ^
+     11|   return (audioBase.endsWith("/") ? audioBase : audioBase + "/") + pat…
+     12| }
+ ❯ new SceneAudio audio/scene-audio.ts:84:36
+ ❯ audio/scene-audio-files.test.ts:12:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > manifest files override table URLs while table bus/gain/gap remain authoritative
+TypeError: audio.ready is not a function
+ ❯ audio/scene-audio-files.test.ts:25:33
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > missing hooks use the same gain/pan/bus nodes and gap as synth
+TypeError: Cannot read properties of undefined (reading 'startsWith')
+ ❯ audioUrl audio/util.ts:10:12
+      8| /** A sound path under the audio base; absolute paths and full URLs ar…
+      9| export function audioUrl(path: string, audioBase = DEFAULT_AUDIO_BASE)…
+     10|   if (path.startsWith("/") || /^[a-z][a-z0-9+.-]*:/i.test(path)) retur…
+       |            ^
+     11|   return (audioBase.endsWith("/") ? audioBase : audioBase + "/") + pat…
+     12| }
+ ❯ new SceneAudio audio/scene-audio.ts:84:36
+ ❯ audio/scene-audio-files.test.ts:32:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > counts silence, never runs hooks for loops or an unavailable explicit variant of ready files
+TypeError: Cannot read properties of undefined (reading 'startsWith')
+ ❯ audioUrl audio/util.ts:10:12
+      8| /** A sound path under the audio base; absolute paths and full URLs ar…
+      9| export function audioUrl(path: string, audioBase = DEFAULT_AUDIO_BASE)…
+     10|   if (path.startsWith("/") || /^[a-z][a-z0-9+.-]*:/i.test(path)) retur…
+       |            ^
+     11|   return (audioBase.endsWith("/") ? audioBase : audioBase + "/") + pat…
+     12| }
+ ❯ new SceneAudio audio/scene-audio.ts:84:36
+ ❯ audio/scene-audio-files.test.ts:43:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > keeps identical playback logs and node counts for absent, empty, and 404 manifests
+TypeError: Cannot read properties of undefined (reading 'startsWith')
+ ❯ audioUrl audio/util.ts:10:12
+      8| /** A sound path under the audio base; absolute paths and full URLs ar…
+      9| export function audioUrl(path: string, audioBase = DEFAULT_AUDIO_BASE)…
+     10|   if (path.startsWith("/") || /^[a-z][a-z0-9+.-]*:/i.test(path)) retur…
+       |            ^
+     11|   return (audioBase.endsWith("/") ? audioBase : audioBase + "/") + pat…
+     12| }
+ ❯ new SceneAudio audio/scene-audio.ts:84:36
+ ❯ run audio/scene-audio-files.test.ts:52:15
+ ❯ audio/scene-audio-files.test.ts:60:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene music > routes both music APIs through a destination bus, independent of sfxVolume, with pronunciation duck
+TypeError: audio.ready is not a function
+ ❯ audio/scene-audio-files.test.ts:66:33
+     64|   it("routes both music APIs through a destination bus, independent of…
+     65|     const audio = new SceneAudio({ sounds: {}, buses, musicBus: "music…
+     66|     audio.unlock(); await audio.ready(); expect(f.calls).toEqual([]); …
+       |                                 ^
+     67|     const ctx = context(); const bus = ctx.gains[2]!; const gain = ctx…
+     68|     expect(gain.connections).toEqual([bus]); expect(bus.connections).t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene music > without musicBus keeps direct destination routing
+TypeError: audio.ready is not a function
+ ❯ audio/scene-audio-files.test.ts:75:108
+     73|   });
+     74|   it("without musicBus keeps direct destination routing", async () => {
+     75|     const audio = new SceneAudio({ sounds: {}, buses, dragonSamples: f…
+       |                                                                                                            ^
+     76|     expect(context().sources[0]!.connections[0]!.connections).toEqual(…
+     77|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene music > cancels a pending track on stop or replacement, preserving the newest request
+AssertionError: expected [ FakeNode{ kind: 'source', …(8) } ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ audio/scene-audio-files.test.ts:80:141
+     78|   it("cancels a pending track on stop or replacement, preserving the n…
+     79|     const pending = f.hold("/assets/audio/slow"); const audio = new Sc…
+     80|     const slow = audio.playMusic("slow"); await audio.playMusic(null);…
+       |                                                                                                                                             ^
+     81|     const a = f.hold("/assets/audio/a"); const first = audio.playMusic…
+     82|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  4 failed (4)
+      Tests  8 failed (8)
+   Start at  09:25:13
+   Duration  248ms (transform 99ms, setup 0ms, collect 67ms, tests 10ms, environment 0ms, prepare 162ms)
+

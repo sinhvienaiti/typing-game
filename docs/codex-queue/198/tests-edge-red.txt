@@ -1,0 +1,86 @@
+
+ RUN  v3.2.7 /Users/toandx/htdocs/typing-game/shared/game-kit
+
+ ❯ audio/file-bank.test.ts (8 tests | 1 failed) 8ms
+   ✓ file bank loading > loads manifest, ordered priority ids, then legacy; leaves other ids and music lazy 2ms
+   × file bank loading > keeps first-play lazy requests behind all priority ids, even while the manifest is pending 3ms
+     → expected [ '/assets/audio/manifest', …(2) ] to deeply equal [ '/assets/audio/manifest', …(1) ]
+   ✓ file bank loading > never starts more fetch/decode jobs than its concurrency, and loads every variant 1ms
+   ✓ file bank loading > defaults concurrency to four and shares cached file jobs 0ms
+   ✓ file bank loading > measures durations, replaces hints, and reports only differences over 20ms 0ms
+   ✓ file bank loading > loops are retrieved as buffers; music loads only on request 0ms
+   ✓ file bank loading > failed variants keep original indices; errors are observable and do not throw 0ms
+   ✓ layered selection > selects existing game hooks only until a file is ready, excluding loops 0ms
+ ❯ audio/scene-audio-files.test.ts (9 tests | 2 failed) 12ms
+   ✓ scene file playback > fetches a lazy id on first play without playing late; measures the selected variant at its rate 3ms
+   × scene file playback > loads dragon recordings at unlock alongside legacy files, without waiting for their completion 3ms
+     → expected [ '/assets/audio/old' ] to include '/assets/audio/dragon'
+   ✓ scene file playback > manifest files override table URLs while table bus/gain/gap remain authoritative 1ms
+   ✓ scene file playback > missing hooks use the same gain/pan/bus nodes and gap as synth 1ms
+   ✓ scene file playback > counts silence, never runs hooks for loops or an unavailable explicit variant of ready files 1ms
+   ✓ scene file playback > keeps identical playback logs and node counts for absent, empty, and 404 manifests 2ms
+   × scene music > routes both music APIs through a destination bus, independent of sfxVolume, with pronunciation duck 1ms
+     → expected "spy" to be called with arguments: [ 2 ]
+
+Number of calls: 0
+
+   ✓ scene music > without musicBus keeps direct destination routing 0ms
+   ✓ scene music > cancels a pending track on stop or replacement, preserving the newest request 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  audio/file-bank.test.ts > file bank loading > keeps first-play lazy requests behind all priority ids, even while the manifest is pending
+AssertionError: expected [ '/assets/audio/manifest', …(2) ] to deeply equal [ '/assets/audio/manifest', …(1) ]
+
+- Expected
++ Received
+
+  [
+    "/assets/audio/manifest",
+    "/assets/audio/key",
++   "/assets/audio/lazy",
+  ]
+
+ ❯ audio/file-bank.test.ts:25:36
+     23|     const ready = bank.unlock(ctx.audio); bank.select("lazy");
+     24|     meta.resolve(f.response({ sounds: { key: ["key"], ui: ["ui"], lazy…
+     25|     await flush(); expect(f.calls).toEqual(["/assets/audio/manifest", …
+       |                                    ^
+     26|     key.resolve(f.response()); await ready; await flush();
+     27|     expect(f.calls).toEqual(["/assets/audio/manifest", "/assets/audio/…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene file playback > loads dragon recordings at unlock alongside legacy files, without waiting for their completion
+AssertionError: expected [ '/assets/audio/old' ] to include '/assets/audio/dragon'
+ ❯ audio/scene-audio-files.test.ts:26:21
+     24|     const audio = new SceneAudio({ sounds: { hit: "old" }, dragonSampl…
+     25|     audio.unlock(); await flush();
+     26|     expect(f.calls).toContain("/assets/audio/dragon");
+       |                     ^
+     27|     old.resolve(f.response()); await audio.ready();
+     28|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  audio/scene-audio-files.test.ts > scene music > routes both music APIs through a destination bus, independent of sfxVolume, with pronunciation duck
+AssertionError: expected "spy" to be called with arguments: [ 2 ]
+
+Number of calls: 0
+
+ ❯ audio/scene-audio-files.test.ts:80:34
+     78|     const pending = f.hold("/assets/audio/next");
+     79|     const next = audio.playMusic("next");
+     80|     expect(ctx.sources[0]!.stop).toHaveBeenCalledWith(2);
+       |                                  ^
+     81|     pending.resolve(f.response()); await next; expect(ctx.sources.at(-…
+     82|     await audio.playTrack(null); expect(ctx.sources.at(-1)!.stop).toHa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  3 failed | 14 passed (17)
+   Start at  09:29:12
+   Duration  240ms (transform 72ms, setup 0ms, collect 96ms, tests 21ms, environment 0ms, prepare 85ms)
+
