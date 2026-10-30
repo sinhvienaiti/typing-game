@@ -1,3 +1,13 @@
+> **Chạy lại sau hạn mức (31/10, điều phối Claude):**
+> - Lượt 02:56 dừng vì hết hạn mức. Nó chạy theo bản phiếu cũ, nên `next-stage` khi đó còn là chevron.
+> - File đã có của lượt đó là file đã biết. Giữ nguyên, không xoá:
+>   - `menu-journey.c2-try1..3`;
+>   - `menu-armory.c2-try1`;
+>   - `next-stage.c2-try1..2`.
+> - `menu-journey` và `menu-armory`: làm tiếp từ các lượt đã có. `menu-journey` đã dùng đủ 3 lượt, nên chỉ chọn trong ba bản đó và chốt.
+> - `next-stage`: hai bản `c2` theo ý tưởng chevron cũ **không tính lượt**. Ý tưởng mới (mũi tên xuyên cổng, mục Việc) đặt tên `next-stage.c3-try1..3`, tối đa 3 lượt.
+> - Ghi đè `239-report.md` nếu lượt trước đã viết dở.
+
 # Phiếu 239 · Last Line · Đổi ý tưởng ba icon menu của 151
 
 **Nguồn:**
