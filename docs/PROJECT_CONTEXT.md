@@ -4226,3 +4226,14 @@ Portal build: PASS
 ~~~
 
 For future continuation, reconstruct from parent `main` and these gitlinks rather than any older SHA in this document.
+
+
+## English learning content system checkpoint — 2026-10-03
+
+Source-of-truth plan: `docs/ENGLISH_LEARNING_CONTENT_SYSTEM_MASTER_PLAN.md`.
+
+Active implementation branch: `feature/english-learning-content-system`.
+
+Foundation implemented: 300-topic machine curriculum, rich-content schemas, provenance/license gates, stable IDs, dedupe/semantic validation, parent curriculum query API, reviewed-only publisher, 300 lexeme seed pilot, 12 grammar-topic pilot, 36 sentence pilot and 24 exercise pilot. Legacy `shared/vocabulary/levels/*.json` v1 remains unchanged.
+
+Draft PR #48 exists to run Platform CI. Do not treat authoring pilot records as published runtime content; publication requires `quality.state=published`.

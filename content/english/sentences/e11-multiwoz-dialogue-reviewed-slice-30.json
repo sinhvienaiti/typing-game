@@ -1,0 +1,1233 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.pmul2031.json",
+      "scenario": "Getting the address and entrance fee for People's Portraits Exhibition at Girton College",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for People's Portraits Exhibition at Girton College. Could I have its address?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "It is at Girton College, Huntingdon Road, in the west part of town. The postcode is CB3 0JG."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Is there an entrance fee?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "No, there is no entrance fee."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I need. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "PMUL2031.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.pmul3413.json",
+      "scenario": "Finding a Friday train from Peterborough to Cambridge after 16:30",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a train from Peterborough to Cambridge on Friday, leaving after 16:30."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Train TR0992 leaves Peterborough at 16:48 and arrives in Cambridge at 17:38."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That works for me. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Have a nice trip."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "PMUL3413.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.pmul4275.json",
+      "scenario": "Finding a Monday train from Cambridge to Peterborough and a cheap guesthouse with Wi-Fi",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I need a train from Cambridge to Peterborough on Monday."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "What time do you need to arrive?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "I need to arrive by 15:30."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Train TR7786 arrives in Peterborough at 15:24."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What is the travel time and fare?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The journey takes 50 minutes, and the fare is £16.50."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Great. I also need a cheap place to stay in Cambridge with free Wi-Fi."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Alexander Bed and Breakfast is a guesthouse at 56 Saint Barnabas Road. It offers free Wi-Fi and free parking."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That sounds good. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "PMUL4275.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.pmul4596.json",
+      "scenario": "Checking table availability at a cheap restaurant in north Cambridge",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a cheap restaurant in the north part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Two options are Royal Spice, which serves Indian food, and Da Vinci Pizzeria, which serves Italian food."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Is a table for five available at Royal Spice on Wednesday at 18:45?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Yes, a table is available at that time. Would you like to make a reservation?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Not right now, thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "PMUL4596.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng0358.json",
+      "scenario": "Finding a Saturday train from Cambridge to London Kings Cross after 14:00",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I need a train from Cambridge to London Kings Cross on Saturday, leaving after 14:00."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Train TR6203 leaves at 15:00 and arrives at 15:51."
+        },
+        {
+          "speaker": "Learner",
+          "text": "How long is the journey, and what is the fare?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The journey takes 51 minutes, and the fare is £18.88."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I needed. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Enjoy your trip."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG0358.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng0434.json",
+      "scenario": "Finding a Wednesday train from Peterborough to Cambridge arriving by 08:30",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a train from Peterborough to Cambridge on Wednesday that arrives by 08:30."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Train TR8935 leaves Peterborough at 07:19 and arrives in Cambridge at 08:09."
+        },
+        {
+          "speaker": "Learner",
+          "text": "How long is the journey?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The journey takes 50 minutes."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I need. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Have a great day."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG0434.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng0677.json",
+      "scenario": "Finding a cheap Italian restaurant in west Cambridge and getting its postcode",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a cheap restaurant in the west part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There is a Vietnamese restaurant and an Italian restaurant that match."
+        },
+        {
+          "speaker": "Learner",
+          "text": "I'd prefer the Italian one."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "La Margherita is a cheap Italian restaurant at 15 Magdalene Street, City Centre."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What is the postcode?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The postcode is CB3 0AF."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG0677.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng0717.json",
+      "scenario": "Choosing a moderately priced Indian restaurant in east Cambridge and getting its postcode",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a moderately priced restaurant in the east part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are three options. Would you prefer Indian or Italian food?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "I'd like Indian food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Curry Prince and Rajmahal are both moderately priced Indian restaurants in the east."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I have the address and postcode for Curry Prince?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Curry Prince is at 451 Newmarket Road, Fen Ditton, postcode CB5 8JJ."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I need. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Goodbye."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG0717.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng1009.json",
+      "scenario": "Finding a moderately priced four-star place in east Cambridge with free Wi-Fi",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I'm looking for a moderately priced four-star place to stay in the east."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are three options. Do you need free Wi-Fi or parking?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "I need free Wi-Fi."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Carolina Bed and Breakfast has free Wi-Fi."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I have the address and postcode?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "It is at 138 Perne Road, postcode CB1 3NX."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I need. Thanks."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG1009.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng1058.json",
+      "scenario": "Switching from unavailable nightclubs to a college in west Cambridge",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Are there any nightclubs in the west part of town?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "No, there are no nightclubs listed in the west. Would another type of attraction work?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "How about a college?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are five colleges in the west. Clare College is one option."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What is the address?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Clare College is on Trinity Lane."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I need. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Have a great day."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG1058.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng1234.json",
+      "scenario": "Finding a Monday train from Cambridge to Stansted Airport after 15:45",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I need a train from Cambridge to Stansted Airport on Monday, leaving after 15:45."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Train TR1088 leaves Cambridge at 16:40."
+        },
+        {
+          "speaker": "Learner",
+          "text": "What time does it arrive?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "It arrives at 17:08."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That works for me. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Have a good trip."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG1234.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.sng1235.json",
+      "scenario": "Finding a Wednesday train from Cambridge to Norwich arriving by 15:30",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I need a train from Cambridge to Norwich on Wednesday, arriving by 15:30."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are nine trains that match. Would you like the one that arrives closest to 15:30?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Yes. What is the departure time and travel time?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The train leaves at 13:38 and arrives at 14:55."
+        },
+        {
+          "speaker": "Learner",
+          "text": "How long is the journey?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The travel time is 79 minutes."
+        },
+        {
+          "speaker": "Learner",
+          "text": "That's all I needed. Thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You're welcome. Have a nice day."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "SNG1235.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_012.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    }
+  ]
+}

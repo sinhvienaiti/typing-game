@@ -1,0 +1,585 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.word-class-conversion",
+      "cefr": "C2",
+      "title": "Word-class conversion",
+      "objective": "Recognize and use noun↔verb/adjective shifts without overt morphology in contemporary English.",
+      "concept": {
+        "en": "English freely converts forms between noun, verb, and adjective uses without overt derivational morphology when syntax and convention license the shift.",
+        "vi": "Tiếng Anh thường chuyển đổi từ giữa danh từ, động từ và tính từ mà không thêm hình vị phái sinh khi cú pháp và quy ước cho phép."
+      },
+      "formulae": [
+        "noun ↔ verb conversion",
+        "adjective/noun used in newly licensed syntactic slot"
+      ],
+      "whenToUse": [
+        "Use conversion where it is established or transparently productive, and avoid novel conversions that obscure meaning in formal prose."
+      ],
+      "forms": {
+        "positive": [
+          "The team benchmarked the new parser against three established systems.",
+          "Please email the signed declaration to the secretariat before noon.",
+          "The policy aims to mainstream accessibility rather than treat it as a late-stage check."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.01.1",
+        "sent.grc2.04.01.2",
+        "sent.grc2.04.01.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.01"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.01",
+        "ex.translation.grc2.04.01"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.word-class-conversion",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.pragmatic-tense-modal",
+      "cefr": "C2",
+      "title": "Pragmatic meanings of tense and modality",
+      "objective": "Use tense/modal choices for politeness, distancing, tentativeness and interpersonal stance.",
+      "concept": {
+        "en": "Tense and modal forms can encode interpersonal distance, politeness, tentativeness, and stance beyond their literal temporal or logical meanings.",
+        "vi": "Thì và modal có thể mã hóa khoảng cách liên cá nhân, lịch sự, dè dặt và lập trường vượt ngoài nghĩa thời gian hay logic trực tiếp."
+      },
+      "formulae": [
+        "past tense for social distance",
+        "modal remoteness for tentative proposals",
+        "progressive for softened intention"
+      ],
+      "whenToUse": [
+        "Interpret tense/modality pragmatically when literal time alone does not explain the speaker's choice."
+      ],
+      "forms": {
+        "positive": [
+          "I was wondering whether you might have a moment to discuss the revised terms.",
+          "We were hoping to avoid reopening the entire negotiation at this stage.",
+          "Could we perhaps frame the recommendation more cautiously?"
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.02.1",
+        "sent.grc2.04.02.2",
+        "sent.grc2.04.02.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.02"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.02",
+        "ex.translation.grc2.04.02"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.pragmatic-tense-modal",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.evidential-distancing",
+      "cefr": "C2",
+      "title": "Evidential and reporting distance",
+      "objective": "Attribute claims and manage commitment through reportedly, be said to, seem and related grammar.",
+      "concept": {
+        "en": "Evidential and reporting constructions identify the source or status of information and let writers calibrate responsibility for a claim.",
+        "vi": "Cấu trúc evidential và reporting chỉ ra nguồn/trạng thái thông tin và cho phép người viết điều chỉnh trách nhiệm đối với một tuyên bố."
+      },
+      "formulae": [
+        "reportedly/allegedly/apparently + clause",
+        "be said/reported/thought + to-infinitive",
+        "seem/appear + to-infinitive"
+      ],
+      "whenToUse": [
+        "Choose distancing language that matches evidence strength and avoids presenting unattributed allegations as established fact."
+      ],
+      "forms": {
+        "positive": [
+          "The subsidiary is reported to have transferred the assets shortly before the investigation began.",
+          "Reportedly, several bidders withdrew after the timetable was changed.",
+          "The discrepancy appears to reflect a coding change rather than an underlying trend."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.03.1",
+        "sent.grc2.04.03.2",
+        "sent.grc2.04.03.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.03"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.03",
+        "ex.translation.grc2.04.03"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.evidential-distancing",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.concessive-inversion",
+      "cefr": "C2",
+      "title": "Concessive inversion with adjective/adverb + though/as",
+      "objective": "Use patterns such as Difficult though it was... in formal/literary style.",
+      "concept": {
+        "en": "Formal concessive clauses can front an adjective, adverb, or noun phrase before though/as, producing a marked pattern equivalent to although.",
+        "vi": "Mệnh đề nhượng bộ trang trọng có thể đưa tính từ, trạng từ hoặc cụm danh từ lên trước though/as, tạo mẫu nhấn mạnh tương đương although."
+      },
+      "formulae": [
+        "adjective/adverb + though/as + subject + verb",
+        "noun + though/as + subject + be"
+      ],
+      "whenToUse": [
+        "Use concessive inversion for controlled formal or literary emphasis, not routine conversation."
+      ],
+      "forms": {
+        "positive": [
+          "Difficult though the transition was, the team completed it without interrupting customer service.",
+          "Carefully as the protocol had been designed, one failure mode had been overlooked.",
+          "Experienced negotiator though she is, she still asks a colleague to review every settlement clause."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.04.1",
+        "sent.grc2.04.04.2",
+        "sent.grc2.04.04.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.04"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.04",
+        "ex.translation.grc2.04.04"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.concessive-inversion",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.formal-conditional-register",
+      "cefr": "C2",
+      "title": "Formal and legal-style conditional constructions",
+      "objective": "Interpret and produce subject to/provided that/in the event that/should structures without overusing them.",
+      "concept": {
+        "en": "Legal and institutional English uses highly explicit conditional markers to specify prerequisites, exceptions, and contingency procedures.",
+        "vi": "Tiếng Anh pháp lý và thể chế dùng các dấu hiệu điều kiện rất tường minh để quy định điều kiện tiên quyết, ngoại lệ và thủ tục dự phòng."
+      },
+      "formulae": [
+        "subject to + noun/-ing",
+        "provided/provided that + clause",
+        "in the event that + clause",
+        "should + subject + verb"
+      ],
+      "whenToUse": [
+        "Use formal conditionals when precision and scope justify them; prefer simpler if when no legal or procedural distinction is gained."
+      ],
+      "forms": {
+        "positive": [
+          "The authorization remains valid subject to the operator maintaining the required insurance coverage.",
+          "In the event that either party terminates the agreement, confidential material must be returned within ten working days.",
+          "Should any discrepancy arise, the signed paper record will take precedence."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.05.1",
+        "sent.grc2.04.05.2",
+        "sent.grc2.04.05.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.05"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.05",
+        "ex.translation.grc2.04.05"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.formal-conditional-register",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "gr.c2.dense-noun-phrases",
+      "cefr": "C2",
+      "title": "Dense noun phrases and noun stacks",
+      "objective": "Parse and edit long premodification chains for clarity in technical/academic prose.",
+      "concept": {
+        "en": "Dense technical noun phrases can stack classifiers, nominal modifiers, participles, and postmodifiers, but excessive stacking hides semantic relations.",
+        "vi": "Cụm danh từ kỹ thuật dày có thể chồng classifier, noun modifier, participle và hậu bổ nghĩa, nhưng chồng quá mức sẽ che quan hệ nghĩa."
+      },
+      "formulae": [
+        "premodifier stack + head noun + postmodifier",
+        "unpack noun stack with of/for/relative clause where needed"
+      ],
+      "whenToUse": [
+        "Parse the head and modifier relations first, then unpack any stack whose interpretation is not immediate."
+      ],
+      "forms": {
+        "positive": [
+          "The committee approved the high-risk supplier data-retention policy review schedule.",
+          "We revised the schedule for reviewing the data-retention policy applied to high-risk suppliers.",
+          "The newly proposed cross-border payment fraud detection reporting standard requires further consultation."
+        ]
+      },
+      "variations": [],
+      "relatedCollocationIds": [],
+      "exampleIds": [
+        "sent.grc2.04.06.1",
+        "sent.grc2.04.06.2",
+        "sent.grc2.04.06.3"
+      ],
+      "commonMistakeIds": [
+        "err.grc2.04.06"
+      ],
+      "contrastTopicIds": [],
+      "dialogueIds": [],
+      "prerequisiteIds": [],
+      "exerciseIds": [
+        "ex.cloze.grc2.04.06",
+        "ex.translation.grc2.04.06"
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetPresence": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "sourceId": "gr.c2.dense-noun-phrases",
+            "sourceUrl": "content/english/grammar/e05-scale-c2-04-topics.json",
+            "snapshot": "2026-10",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ],
+        "note": "Project-original controlled C2 grammar-body content; publication is review-ledger only."
+      }
+    }
+  ]
+}

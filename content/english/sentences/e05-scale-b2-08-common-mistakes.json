@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.08.01",
+      "incorrect": "She reviewed last night carefully the contract.",
+      "corrections": [
+        "She carefully reviewed the contract last night."
+      ],
+      "explanationVi": "Trạng từ cách thức như carefully thường đứng trước động từ chính hoặc sau tân ngữ; trạng ngữ thời gian thường về cuối câu nếu không được đưa lên đầu để nhấn mạnh.",
+      "targetIds": [
+        "gr.b2.word-order-adverbials"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.08.02",
+      "incorrect": "We arrived to the station just before noon.",
+      "corrections": [
+        "We arrived at the station just before noon."
+      ],
+      "explanationVi": "Arrive dùng at với địa điểm cụ thể nhỏ như station và in với thành phố/quốc gia; không dùng arrive to trong mẫu chuẩn này.",
+      "targetIds": [
+        "gr.b2.preposition-choice-meaning"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    }
+  ]
+}

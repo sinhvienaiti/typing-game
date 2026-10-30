@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/long-term-targets.schema.json",
+  "title": "Long-term English-content targets",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "targets"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "label",
+          "minimum",
+          "sources"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "maxLength": 80
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "minimum": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000000
+          },
+          "maximum": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000000
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "collection"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "pattern": "^content/english/",
+                  "maxLength": 500
+                },
+                "collection": {
+                  "type": "string",
+                  "enum": [
+                    "records",
+                    "topics"
+                  ]
+                },
+                "filterField": {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                "filterValues": {
+                  "type": "array",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

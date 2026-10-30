@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "counts": {
+    "typing-texts": 300,
+    "translation-pairs": 600,
+    "cloze-exercises": 600,
+    "dialogue-examples": 100,
+    "common-mistakes": 388,
+    "writing-exercises": 100
+  },
+  "readinessReconciliation": {
+    "state": "matched",
+    "compared": [
+      {
+        "runtimeMetric": "translation-pairs",
+        "e11Target": "translation-pairs",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "runtimeMetric": "cloze-exercises",
+        "e11Target": "cloze-exercises",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "runtimeMetric": "dialogue-examples",
+        "e11Target": "dialogue-examples",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      },
+      {
+        "runtimeMetric": "common-mistakes",
+        "e11Target": "common-mistakes",
+        "runtimeCount": 388,
+        "readinessCount": 388
+      },
+      {
+        "runtimeMetric": "writing-exercises",
+        "e11Target": "sentence-transformations",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      }
+    ],
+    "targetCoverage": [
+      {
+        "e11Target": "grammar-topics",
+        "runtimeCount": 300,
+        "readinessCount": 300
+      },
+      {
+        "e11Target": "verb-patterns",
+        "runtimeCount": 510,
+        "readinessCount": 510
+      },
+      {
+        "e11Target": "collocations",
+        "runtimeCount": 5000,
+        "readinessCount": 5000
+      },
+      {
+        "e11Target": "phrasal-verbs",
+        "runtimeCount": 1000,
+        "readinessCount": 1000
+      },
+      {
+        "e11Target": "idioms-chunks",
+        "runtimeCount": 3185,
+        "readinessCount": 3185
+      },
+      {
+        "e11Target": "common-mistakes",
+        "runtimeCount": 388,
+        "readinessCount": 388
+      },
+      {
+        "e11Target": "example-sentences",
+        "runtimeCount": 1681,
+        "readinessCount": 1681
+      },
+      {
+        "e11Target": "translation-pairs",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "e11Target": "cloze-exercises",
+        "runtimeCount": 600,
+        "readinessCount": 600
+      },
+      {
+        "e11Target": "sentence-transformations",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      },
+      {
+        "e11Target": "dialogue-examples",
+        "runtimeCount": 100,
+        "readinessCount": 100
+      }
+    ],
+    "excluded": [
+      {
+        "runtimeMetric": "typing-texts",
+        "reason": "Legacy typing-text runtime corpus has no locked E11 long-term target."
+      }
+    ]
+  },
+  "definitions": {
+    "typing-texts": {
+      "source": "shared/typing-texts/index.json",
+      "metric": "totalPassages"
+    },
+    "translation-pairs": {
+      "source": "shared/sentences/exercises/*.json",
+      "filter": {
+        "type": "translation"
+      }
+    },
+    "cloze-exercises": {
+      "source": "shared/sentences/exercises/*.json",
+      "filter": {
+        "type": "cloze"
+      }
+    },
+    "dialogue-examples": {
+      "source": "shared/sentences/dialogues/*.json",
+      "metric": "published runtime records"
+    },
+    "common-mistakes": {
+      "source": "shared/sentences/mistakes/*.json",
+      "metric": "published runtime records"
+    },
+    "writing-exercises": {
+      "source": "shared/sentences/exercises/*.json",
+      "filter": {
+        "type": "transformation"
+      },
+      "canonicalE11Target": "sentence-transformations",
+      "note": "Runtime alias for the locked E11 sentence-transformations target; no separate writing-exercises corpus exists."
+    }
+  }
+}

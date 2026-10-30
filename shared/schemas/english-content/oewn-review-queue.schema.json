@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/oewn-review-queue.schema.json",
+  "title": "Open English WordNet pilot review queue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "snapshot",
+    "records",
+    "errors"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "oewn"
+    },
+    "snapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey",
+          "sourceUrl",
+          "synsets"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\.[a-z0-9._-]+$"
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "sourceUrl": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "synsets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "synsetId",
+                "partOfSpeech",
+                "definitions",
+                "examples",
+                "memberLemmas",
+                "sourceSenseIds",
+                "pronunciations"
+              ],
+              "properties": {
+                "synsetId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "ili": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 100
+                },
+                "lexname": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 100
+                },
+                "partOfSpeech": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20
+                },
+                "definitions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 3000
+                  }
+                },
+                "examples": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 3000
+                  }
+                },
+                "memberLemmas": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300
+                  }
+                },
+                "sourceSenseIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 300
+                  }
+                },
+                "pronunciations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "value"
+                    ],
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      },
+                      "variety": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "maxLength": 40
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "message"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    }
+  }
+}

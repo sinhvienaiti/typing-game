@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/viwiktionary-review-queue.schema.json",
+  "title": "Vietnamese Wiktionary English-entry review queue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "sourceSnapshot",
+    "sourceSha256",
+    "records",
+    "misses",
+    "metrics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "viwiktionary-en"
+    },
+    "sourceSnapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey",
+          "entries",
+          "quality",
+          "provenance"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "entries": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "pos",
+                "senses"
+              ],
+              "properties": {
+                "pos": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "ipa": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  }
+                },
+                "senses": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "sourceSenseIndex",
+                      "glossesVi"
+                    ],
+                    "properties": {
+                      "sourceSenseIndex": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "glossesVi": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 3000
+                        }
+                      },
+                      "tags": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 120
+                        }
+                      },
+                      "examples": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 3000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quality": {
+            "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+          },
+          "provenance": {
+            "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+          }
+        }
+      }
+    },
+    "misses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "mapped",
+        "mappedRate",
+        "entries",
+        "senses",
+        "withIpa"
+      ],
+      "properties": {
+        "requested": {
+          "const": 300
+        },
+        "mapped": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "mappedRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "entries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "senses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "withIpa": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        }
+      }
+    }
+  }
+}

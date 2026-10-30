@@ -4,6 +4,14 @@ import { SharedMusicPlayer } from "./music";
 import { SmartReviewDashboard } from "./review/dashboard";
 import { SmartReviewFlow } from "./review/session";
 import { LearningMaintenancePage } from "./review/maintenance";
+import { EnglishPracticePage } from "./english-content/page";
+import {
+  clearPendingEnglishActivity,
+  postPendingEnglishActivity,
+  queuePublishedEnglishActivity,
+  readPendingEnglishActivity,
+  type RichPracticeGameId,
+} from "./english-content/activity-session";
 import {
   clearPendingMonkeyReview,
   postPendingMonkeyReview,
@@ -123,6 +131,10 @@ const learningBridge = new ParentLearningBridge(
 const reviewDashboard = new SmartReviewDashboard(navigate);
 const reviewFlow = new SmartReviewFlow(navigate, startReview);
 const learningMaintenance = new LearningMaintenancePage(navigate);
+const englishPractice = new EnglishPracticePage(
+  registry.games,
+  startEnglishActivity,
+);
 
 function normalizedPath(): string {
   return location.pathname.replace(/\/$/, "") || "/";
@@ -148,6 +160,23 @@ function clearPendingReviewForGame(
 function navigate(path: string): void {
   if (normalizedPath() !== path) history.pushState({}, "", path);
   renderRoute();
+}
+
+async function startEnglishActivity(
+  gameId: RichPracticeGameId,
+  activity: string,
+  limit: number,
+): Promise<void> {
+  const game = registry.games.find((item) => item.id === gameId);
+  if (game === undefined) {
+    throw new Error(
+      "The selected English Practice game is not registered.",
+    );
+  }
+  clearPendingReviewForGame(gameId);
+  cancelMixedReviewSegmentStart();
+  await queuePublishedEnglishActivity(gameId, activity, limit);
+  navigate(game.path);
 }
 
 async function startReview(plan: ReviewPlan): Promise<void> {
@@ -249,6 +278,7 @@ music.onPlaybackChange(() => {
 brand.addEventListener("click", () => navigate("/"));
 links.append(makeButton("Home", "/"));
 links.append(makeButton("Smart Review", "/review"));
+links.append(makeButton("English Practice", "/english"));
 for (const game of registry.games) {
   links.append(makeButton(game.name, game.path));
 }
@@ -333,22 +363,43 @@ function renderGame(game: Game): HTMLElement {
       loading.classList.add("done");
       sendSharedMusicState();
 
+      const englishPending = postPendingEnglishActivity(
+        frame,
+        game.id,
+        game.appUrl,
+      );
       const pending =
-        game.id === "monkeytype"
-          ? postPendingMonkeyReview(frame, game.appUrl)
-          : game.id === "recall-typing"
-            ? postPendingRecallReview(frame, game.appUrl)
-            : game.id === "vocab-shooter"
-              ? postPendingShooterReview(frame, game.appUrl)
-              : game.id === "space-typing"
-                ? postPendingSpaceReview(frame, game.appUrl)
-                : game.id === "karaoke-typing"
-                  ? postPendingKaraokeReview(frame, game.appUrl)
-                  : null;
-      if (pending !== null) {
+        englishPending === null
+          ? game.id === "monkeytype"
+            ? postPendingMonkeyReview(frame, game.appUrl)
+            : game.id === "recall-typing"
+              ? postPendingRecallReview(frame, game.appUrl)
+              : game.id === "vocab-shooter"
+                ? postPendingShooterReview(frame, game.appUrl)
+                : game.id === "space-typing"
+                  ? postPendingSpaceReview(frame, game.appUrl)
+                  : game.id === "karaoke-typing"
+                    ? postPendingKaraokeReview(frame, game.appUrl)
+                    : null
+          : null;
+      if (englishPending !== null) {
         reviewStatus.hidden = false;
         reviewStatus.textContent =
-          `Starting Smart Review · ${pending.items.length} item${pending.items.length === 1 ? "" : "s"} · ${pending.goal}`;
+          "Starting English Practice · " +
+          String(englishPending.items.length) +
+          " item" +
+          (englishPending.items.length === 1 ? "" : "s") +
+          " · " +
+          englishPending.activity;
+      } else if (pending !== null) {
+        reviewStatus.hidden = false;
+        reviewStatus.textContent =
+          "Starting Smart Review · " +
+          String(pending.items.length) +
+          " item" +
+          (pending.items.length === 1 ? "" : "s") +
+          " · " +
+          pending.goal;
       }
 
       window.setTimeout(() => loading.remove(), 180);
@@ -378,6 +429,9 @@ function renderRoute(): void {
     clearPendingReviewForGame(previousGame.id);
     cancelMixedReviewSegmentStart();
   }
+  if (previousGame !== null && previousGame.path !== path) {
+    clearPendingEnglishActivity(undefined, previousGame.id);
+  }
   updateNavigation(path);
 
   music.setSpeechActive(false);
@@ -394,6 +448,12 @@ function renderRoute(): void {
   if (path === "/review") {
     music.setKaraokeActive(false);
     routeHost.replaceChildren(reviewDashboard.render());
+    return;
+  }
+
+  if (path === "/english") {
+    music.setKaraokeActive(false);
+    routeHost.replaceChildren(englishPractice.render());
     return;
   }
 
@@ -446,6 +506,44 @@ window.addEventListener("message", (event: MessageEvent<unknown>) => {
   ) {
     const requestId =
       typeof data["requestId"] === "string" ? data["requestId"] : undefined;
+    const englishPending = readPendingEnglishActivity();
+    if (
+      requestId !== undefined &&
+      englishPending !== null &&
+      englishPending.gameId === currentGame.id &&
+      englishPending.requestId === requestId
+    ) {
+      clearPendingEnglishActivity(requestId, currentGame.id);
+      if (currentReviewStatus !== null) {
+        currentReviewStatus.hidden = false;
+        if (
+          data["type"] ===
+          "typing-game:learning:v1:review-ready"
+        ) {
+          currentReviewStatus.textContent =
+            "English Practice ready · " +
+            String(englishPending.items.length) +
+            " item" +
+            (englishPending.items.length === 1 ? "" : "s") +
+            " · " +
+            englishPending.activity;
+          const statusToClear = currentReviewStatus;
+          window.setTimeout(() => {
+            if (currentReviewStatus !== statusToClear) return;
+            statusToClear.remove();
+            currentReviewStatus = null;
+          }, 1800);
+        } else {
+          currentReviewStatus.classList.add("error");
+          currentReviewStatus.textContent =
+            typeof data["message"] === "string"
+              ? "English Practice error: " + data["message"]
+              : "English Practice dataset could not be applied.";
+        }
+      }
+      return;
+    }
+
     const pending =
       currentGame.id === "monkeytype"
         ? readPendingMonkeyReview()

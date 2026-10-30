@@ -1,0 +1,14 @@
+{
+  "records": [
+    ["patch internet-facing application flaw", "vá lỗ hổng của ứng dụng công khai trên Internet", "C1"],
+    ["prioritize critical vulnerability remediation", "ưu tiên khắc phục lỗ hổng nghiêm trọng", "C1"],
+    ["scan container image dependencies", "quét các phụ thuộc của ảnh container", "C1"],
+    ["pin trusted package checksum", "ghim mã kiểm tra của gói tin cậy", "C1"],
+    ["validate software bill of materials", "xác thực danh mục thành phần phần mềm", "C1"],
+    ["monitor certificate expiration window", "theo dõi khoảng thời gian sắp hết hạn của chứng thư", "C1"],
+    ["renew expiring TLS certificate", "gia hạn chứng thư TLS sắp hết hạn", "B2"],
+    ["rotate production encryption key", "luân chuyển khóa mã hóa môi trường production", "C1"],
+    ["verify key-management audit trail", "xác minh dấu vết kiểm toán quản lý khóa", "C1"],
+    ["review firewall rule exception", "rà soát ngoại lệ của quy tắc tường lửa", "B2"]
+  ]
+}

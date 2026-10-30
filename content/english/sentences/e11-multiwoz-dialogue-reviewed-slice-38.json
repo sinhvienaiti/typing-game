@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20177.json",
+      "scenario": "Finding a cheap Portuguese restaurant in central Cambridge and getting its address",
+      "cefr": "A2",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I would like a cheap restaurant that serves Portuguese food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I found one in the south part of town and one in the centre."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I have the address of the restaurant in the centre, please?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Nandos is at 33–34 Saint Andrews Street."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You’re welcome. Goodbye."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20177.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_014.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20295.json",
+      "scenario": "Switching from unavailable cheap Malaysian food to a cheap Italian restaurant and getting Zizzi Cambridge contact details",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Hello. I am looking for a cheap restaurant that serves Malaysian food."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "I’m sorry, but there are no matches for cheap Malaysian food."
+        },
+        {
+          "speaker": "Learner",
+          "text": "How about Italian food instead?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Which area would you prefer?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "I don’t have an area preference."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Zizzi Cambridge is a cheap Italian restaurant in the centre of the city."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could I have the address and phone number, please?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Zizzi Cambridge is at 47–53 Regent Street, and the phone number is 01223 365599."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Thank you. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You’re welcome. Have a great day."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20295.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_014.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20447.json",
+      "scenario": "Finding a moderately priced Indian restaurant in east Cambridge and getting Rajmahal contact details and postcode",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "I’d like a moderately priced restaurant in the east part of town."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are three moderately priced restaurants in the east. Would you prefer Indian or Italian food?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "I don’t have a preference. Either one is fine."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Rajmahal is a moderately priced Indian restaurant in the east. Would you like more information?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Yes, please. Could I have the address, phone number, and postcode?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Rajmahal is at 7 Barnwell Road, Fen Ditton. The phone number is 01223 244955, and the postcode is CB5 8RG."
+        },
+        {
+          "speaker": "Learner",
+          "text": "No, thank you. That’s all I need."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You’re welcome. Goodbye."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20447.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_014.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "dlg.multiwoz.woz20559.json",
+      "scenario": "Relaxing a French restaurant price preference and getting Cote contact details",
+      "cefr": "B1",
+      "turns": [
+        {
+          "speaker": "Learner",
+          "text": "Can you recommend a French restaurant that is not too expensive?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "There are no French restaurants matching that request. Would you like to consider any price range?"
+        },
+        {
+          "speaker": "Learner",
+          "text": "Yes. How about a French restaurant in any price range?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Cote is an expensive French restaurant in the city centre."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Could you give me the address and phone number, please?"
+        },
+        {
+          "speaker": "Assistant",
+          "text": "Cote is on Bridge Street, City Centre, and the phone number is 01223 311053."
+        },
+        {
+          "speaker": "Learner",
+          "text": "Thank you. That is all I needed. Goodbye."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "You’re welcome. Goodbye."
+        }
+      ],
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "sourcePin": {
+            "status": "pass",
+            "method": "multiwoz-git-blob-pin-v1"
+          },
+          "dialogueStructure": {
+            "status": "pass",
+            "method": "editorial-alternating-dialogue-v1"
+          },
+          "identifierSafety": {
+            "status": "pass",
+            "method": "editorial-identifier-safety-v1"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "nearDuplicate": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "grammar": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "translation": {
+            "status": "not-applicable",
+            "method": "english-only-dialogue"
+          },
+          "naturalness": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "targetStructure": {
+            "status": "not-applicable",
+            "method": "dialogue-free-production"
+          },
+          "cefr": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          },
+          "license": {
+            "status": "pass",
+            "method": "e11-multiwoz-editorial-finalization-v1"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "multiwoz",
+            "sourceId": "WOZ20559.json",
+            "sourceUrl": "https://github.com/budzianowski/multiwoz/blob/fe0c8e65cfcd8462bd33c86e35f21addc84ca82b/data/MultiWOZ_2.2/train/dialogues_014.json",
+            "snapshot": "fe0c8e65cfcd8462bd33c86e35f21addc84ca82b",
+            "license": "MIT",
+            "attribution": "MultiWOZ 2.2 · Paweł Budzianowski and contributors",
+            "modified": true
+          }
+        ],
+        "note": "Editorially normalized from the pinned MultiWOZ 2.2 dialogue during the E11 controlled review intake; immutable source identity is retained."
+      }
+    }
+  ]
+}

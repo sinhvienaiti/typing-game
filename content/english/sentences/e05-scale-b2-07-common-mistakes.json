@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.01",
+      "incorrect": "The board did a decision after reviewing the evidence.",
+      "corrections": [
+        "The board made a decision after reviewing the evidence."
+      ],
+      "explanationVi": "Decision kết hợp tự nhiên với make, không phải do, trong collocation chuẩn make a decision.",
+      "targetIds": [
+        "gr.b2.lexical-collocation-core"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.02",
+      "incorrect": "Despite the plan is expensive, it could save money in the long term.",
+      "corrections": [
+        "Although the plan is expensive, it could save money in the long term."
+      ],
+      "explanationVi": "Despite là giới từ nên theo sau bởi danh từ/cụm V-ing; trước một mệnh đề đầy đủ nên dùng although/though.",
+      "targetIds": [
+        "gr.b2.concession-discourse"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.03",
+      "incorrect": "Due to the server failed, several services were unavailable.",
+      "corrections": [
+        "Because the server failed, several services were unavailable."
+      ],
+      "explanationVi": "Due to cần một cụm danh từ như due to the server failure; nếu theo sau là mệnh đề đầy đủ, dùng because/because of theo đúng cấu trúc.",
+      "targetIds": [
+        "gr.b2.cause-effect-formal"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.04",
+      "incorrect": "She spoke quietly so as the children wouldn't wake up.",
+      "corrections": [
+        "She spoke quietly so that the children wouldn't wake up."
+      ],
+      "explanationVi": "So as to phải theo sau bằng động từ nguyên mẫu và thường cùng chủ ngữ; khi cần chủ ngữ riêng the children, dùng so that + mệnh đề.",
+      "targetIds": [
+        "gr.b2.purpose-result-clauses"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.05",
+      "incorrect": "The supplier missed two deadlines. It has delayed the entire project when the intended reference is the whole preceding situation.",
+      "corrections": [
+        "The supplier missed two deadlines. This has delayed the entire project."
+      ],
+      "explanationVi": "Khi quy chiếu về toàn bộ sự việc vừa nêu, this/that rõ nghĩa hơn it, vốn dễ bị hiểu là thay cho một danh từ cụ thể.",
+      "targetIds": [
+        "gr.b2.discourse-reference"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.06",
+      "incorrect": "We haven't received the data, and neither the research team has.",
+      "corrections": [
+        "We haven't received the data, and neither has the research team."
+      ],
+      "explanationVi": "Sau neither/nor mang nghĩa đồng tình phủ định, dùng đảo trợ động từ trước chủ ngữ.",
+      "targetIds": [
+        "gr.b2.substitution-ellipsis"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.07",
+      "incorrect": "I want you to clarify the final requirement in a polite first-contact email.",
+      "corrections": [
+        "I was wondering if you could clarify the final requirement."
+      ],
+      "explanationVi": "Mệnh lệnh/ý muốn trực tiếp có thể quá mạnh trong ngữ cảnh trang trọng; cấu trúc hedged request giúp điều chỉnh mức độ lịch sự.",
+      "targetIds": [
+        "gr.b2.formal-informal-requests"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "err.grb2.07.08",
+      "incorrect": "Sounds good, isn't it?",
+      "corrections": [
+        "Sounds good, doesn't it?"
+      ],
+      "explanationVi": "Question tag thường lặp lại trợ động từ tương ứng với mệnh đề; với Sounds good, dùng does/doesn't chứ không dùng is/isn't.",
+      "targetIds": [
+        "gr.b2.spoken-ellipsis-tags"
+      ],
+      "evidenceType": "pedagogical",
+      "quality": {
+        "state": "draft",
+        "checks": {
+          "schema": {
+            "status": "pass",
+            "method": "e05-grammar-scale-authoring-v2"
+          },
+          "grammar": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "translation": {
+            "status": "pending",
+            "method": "bilingual-review-required"
+          },
+          "exactDuplicate": {
+            "status": "pass",
+            "method": "stable-id-and-local-exact-dedup-v1"
+          },
+          "nearDuplicate": {
+            "status": "pending",
+            "method": "cross-runtime-near-dedup-review-required"
+          },
+          "naturalness": {
+            "status": "pending",
+            "method": "editor-review-required"
+          },
+          "cefr": {
+            "status": "pending",
+            "method": "cefr-review-required"
+          },
+          "license": {
+            "status": "pending",
+            "method": "project-original-license-review-required"
+          },
+          "targetStructure": {
+            "status": "pending",
+            "method": "linked-content-target-review-required"
+          }
+        }
+      },
+      "provenance": {
+        "sources": [
+          {
+            "dataset": "project-original",
+            "license": "LicenseRef-Project-Original",
+            "modified": false
+          }
+        ]
+      }
+    }
+  ]
+}
