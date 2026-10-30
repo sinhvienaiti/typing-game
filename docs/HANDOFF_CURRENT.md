@@ -36,6 +36,12 @@ Codex chạy ba làn (owner 30/10 11:15):
 
 Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ được nối vào sau ba làn. 213 nối sau `s8`.
 
+**Monkeytype đã đẩy (30/10, 14:25, chủ dự án bảo):**
+- `feature/en-vn-translation` lên GitHub `sinhvienaiti/monkeytype` qua SSH, `85a8667a1..02d511788`, không ép. Gồm âm và hiệu ứng gõ, 32 bộ phím, các bản sửa, và commit mirror GitLab của chủ dự án đã gộp vào.
+- Đã kiểm: lint, `ts-check`, 1.485/1.485 test; hai người kiểm độc lập; thử trên trình duyệt (danh sách 32 bộ theo họ, nghe thử khi rê chuột, chọn bộ, gõ có hiệu ứng).
+- File âm không theo Git. Chủ dự án đã nhận zip 32 bộ (`tmp/keys-firefly/zip/keys-firefly-32-monkeytype.zip`). Máy khác: giải nén vào `~/AudioLab/review/staging/`, rồi `pnpm sync-keys`.
+- Repo cha chưa đẩy: `build:monkeytype` có bước sync và `KEYS_FIREFLY_HANDOFF.md` chưa có trên remote; con trỏ `games/monkeytype` trong repo cha chưa cập nhật.
+
 **Cập nhật 13:35:** Codex vẫn chạy ba làn.
 
 - **Đã xong, chờ Claude duyệt và commit:**
