@@ -86,6 +86,8 @@ Mục 3 bên dưới là lịch sử.
 
 ### Tiếng phím: 80 bộ trở lên (30/10, khoảng 08:40)
 
+- **Kết quả và quyết định (30/10, khoảng 10:45):** phiếu 218 chỉ ra 32 bộ (458 trên 490 bộ đạt điểm bị loại vì gần trùng). Chủ dự án nghe 10 bộ bị loại và chốt: **tạm giữ 32 bộ**, sau cần thì làm thêm. Cách làm thêm ghi ở `docs/games/audio/KEYS_FIREFLY_HANDOFF.md` §5 (hạ `MIN_DISTANCE`, sửa điểm độ lặp, ồn nền, hoặc tạo âm Firefly mới). Tài liệu đó cũng là README cho folder âm trên Drive.
+
 - Chủ dự án thấy chỉ có 7 bộ ("tôi tải hơn 400 file âm cơ mà"), rồi chốt: **80 bộ trở lên, mỗi bộ 70–100 biến thể, khoảng 6 điểm là được**. Giữ 7 id cũ (mặc định Bright Clack) cho bộ tốt nhất mỗi họ.
 - Phiếu Codex 218 (dựng bộ), 219 (kit: danh sách theo họ, nhiều biến thể). Làn `s4` thay `s3` sau khi 194 xong: 218, 219 chạy trước, rồi phần còn lại của `s3`. Vẫn một làn.
 - Sau 218–219: Claude chép bản giao `tmp/keys-firefly/staging-v2/` sang `~/AudioLab/review/staging/keys-firefly/`, đồng bộ kit vào `ts-typefx`, `dh-keys`, `td-keys`, chép kit vào Monkeytype (`frontend/src/ts/custom/typing-feel/kit/`), chạy `pnpm sync-keys`, thử trình duyệt.
