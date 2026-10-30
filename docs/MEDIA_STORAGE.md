@@ -23,6 +23,8 @@ Viết cờ **không có `--`** đứng trước: `pnpm media:push --dry-run`. S
 
 Từ 23/10, `originals` và `runtime` tính riêng cho từng game trong `games[]` của `media/media.config.json`: Space Typing, Rồng Giữ Ải, Lời Gọi, Tuyến Cuối. Mỗi game có `media.md5` riêng và thư mục `repo/games/<id>/` riêng trên Drive. Game chưa có thư mục thì lệnh bỏ qua, chỉ in một dòng báo. Đường dẫn của Space giữ nguyên. Chi tiết: [docs/games/MEDIA_AND_MODELS.md](games/MEDIA_AND_MODELS.md).
 
+`runtime` nhận thêm mọi file JSON dưới `games/<id>/public/assets/<id>/` chưa được Git theo dõi, kể cả khi thư mục bị `.gitignore` bỏ qua (ví dụ `ground/manifest.json`, `decals/manifest.json` của Dragonhold). JSON đã vào Git vẫn do Git giữ. Cache và file tạm bị loại theo `sets.runtime.jsonExclude`, cùng quy tắc bỏ thư mục và file rác sẵn có. Push ghi md5 của JSON vào `media.md5` sau khi xác minh trên Drive; pull nhận JSON cả khi máy chưa có file. Hai nhóm `originals`, `private` giữ nguyên.
+
 Đo ngày 21/10 trên Mac: originals 834 file (2,9 GB), runtime 423 file (371 MB), private 208 file (481 MB). Tổng khoảng 1.465 file, 3,7 GB.
 
 Không đưa lên:

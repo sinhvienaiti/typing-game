@@ -119,5 +119,7 @@ export function runtimeReferences(gameRoot, gameConfig) {
 
 /** Lock entries in folders the manifests own; only these may be forgotten automatically. */
 export function isManifestOwned(key, gameConfig) {
-  return [gameConfig.modelsDir, gameConfig.ships3dDir].some((dir) => Boolean(dir) && key.startsWith(`${dir}/`));
+  // Missing manifests must be pulled, even inside a model folder.
+  return path.posix.extname(key).toLowerCase() !== '.json'
+    && [gameConfig.modelsDir, gameConfig.ships3dDir].some((dir) => Boolean(dir) && key.startsWith(`${dir}/`));
 }

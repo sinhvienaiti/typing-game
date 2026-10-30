@@ -115,6 +115,13 @@ function under(rel, folder) {
   return rel === folder || rel.startsWith(`${folder}/`);
 }
 
+/** JSON belongs to runtime only inside this game's assets, outside scratch files. */
+function isRuntimeJson(config, game, key) {
+  return path.posix.extname(key).toLowerCase() === '.json'
+    && key.startsWith(`public/assets/${game.id}/`)
+    && !matchesAny(key, config.sets.runtime.jsonExclude);
+}
+
 async function walk(root, startRel, { skipDir, isJunk, onUnsafe }) {
   const files = [];
   const visit = async (rel) => {
@@ -240,7 +247,8 @@ export async function scanSets(ctx, names, options = {}) {
     const extensions = new Set(config.mediaExtensions.map((ext) => `.${ext.toLowerCase()}`));
     const skipDir = (rel) => isPrivate(rel) || matchesAny(rel.slice(game.length + 1), skipDirs);
     for (const rel of await walk(root, game, { ...walkOptions, skipDir })) {
-      if (!extensions.has(path.posix.extname(rel).toLowerCase())) continue;
+      const key = toKey(definitions.runtime, rel);
+      if (!extensions.has(path.posix.extname(rel).toLowerCase()) && !isRuntimeJson(config, gameEntry, key)) continue;
       if (junk(rel) || tracked.has(rel) || isPrivate(rel)) continue;
       await add('runtime', rel);
     }
@@ -291,7 +299,7 @@ export function lockKeyProblem(config, kind, key, game = null) {
   if (privateRoots.some((folder) => under(`${game.dir}/${key}`, folder))) return 'thuộc nhóm private';
   if (gameLockSetOf(config, key) === 'originals') return null;
   const extensions = new Set(config.mediaExtensions.map((ext) => `.${ext.toLowerCase()}`));
-  if (!extensions.has(path.posix.extname(key).toLowerCase())) return 'không phải file media';
+  if (!extensions.has(path.posix.extname(key).toLowerCase()) && !isRuntimeJson(config, game, key)) return 'không phải file media';
   for (let index = 1; index < parts.length; index += 1) {
     if (matchesAny(parts.slice(0, index).join('/'), config.sets.runtime.skipDirs)) return 'thư mục không thuộc runtime';
   }

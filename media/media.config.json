@@ -124,6 +124,14 @@
       "duplicateOf3d": "models/raw"
     },
     "runtime": {
+      "jsonExclude": [
+        "**/{.cache,cache,caches,.tmp,tmp,.temp,temp}/**",
+        "**/*-cache/**",
+        "**/*.{cache,tmp,temp,part,partial,bak,backup}.json",
+        "**/{cache,tmp,temp}.json",
+        "**/.#*.json",
+        "**/*~.json"
+      ],
       "skipDirs": [
         "**/node_modules",
         "**/dist",
