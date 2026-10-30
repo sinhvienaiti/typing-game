@@ -24,7 +24,11 @@ Hạn mức Codex rất thấp (cửa sổ 5 giờ). Làm ảnh trước, ảnh 
 `run.sh` chỉ nhận các model trong bảng (`gpt-6-sol` là bản cũ, để dự phòng).
 - **Trên Mac mini M4:** Codex CLI có sẵn trong extension ChatGPT của Cursor (không nằm trong PATH): `~/.cursor/extensions/openai.chatgpt-<bản>/bin/macos-aarch64/codex`. Bản 0.162.0-alpha.17.2 gọi được `gpt-6.1-sol` (thử ngày 25/10/2026), nên trên Mac không cần ≥ 0.164. Mac không có `pwsh`, nên dùng hai bản bash cùng cách làm:
   - `tools/codex-run/run.sh <tên> <phiếu> [thư mục] [effort] [sandbox]`;
-  - `tools/codex-run/queue.sh <danh sách>`: cùng định dạng danh sách, tự chờ khi hết hạn mức (tối đa 12 lần), chạy lại khi rớt kết nối (tối đa 4 lần).
+  - `tools/codex-run/queue.sh <danh sách>`: cùng định dạng danh sách. **Hạn mức không bao giờ làm bỏ phiếu** (chủ dự án 31/10: hết hạn mức thì chờ, có lại thì chạy tiếp, không dừng hẳn):
+    - hết hạn mức ChatGPT: chờ tới giờ Codex báo ("try again at …") cộng 2 phút, không biết giờ thì 30 phút, rồi chạy lại phiếu; không giới hạn số lần;
+    - công cụ trong phiếu hết lượt (ví dụ `image_gen` trả 429) hoặc phiếu ghi "chưa được chạy trước 19:48": theo luật trong `run.sh`, Codex ghi dòng cuối `CODEX-WAIT-UNTIL: HH:MM` (hoặc `unknown`); hàng chờ chờ tới giờ đó rồi chạy lại phiếu, lần sau làm tiếp từ chỗ đã xong;
+    - rớt kết nối: chạy lại sau 2 phút, từ lần thứ năm thì 15 phút một lần.
+    - Bản Windows `queue.ps1` chưa đổi: vẫn giới hạn 12 và 4 lần.
   - Hai script tự tìm bản mới nhất trong extension Cursor; đặt `CODEX_BIN` nếu muốn dùng bản khác.
   - Trên Mac dùng sandbox `workspace-write` (không cần `danger-full-access`, vì git, node, ImageMagick chạy thẳng, không qua WSL).
 

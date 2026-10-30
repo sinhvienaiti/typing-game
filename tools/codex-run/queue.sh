@@ -6,8 +6,11 @@
 #
 # List lines: name | brief | cwd | effort | sandbox | model   (blank lines and lines starting with # are skipped;
 # effort defaults to high, sandbox to workspace-write, model to gpt-6.1-sol (pick by the work: README); backslashes in paths are read as /).
-# On a usage limit a run waits until the time Codex gives ("try again at 8:54 AM"), else 30 minutes,
-# and runs again, up to 12 times; a dropped stream or "at capacity" runs again in 2 min, up to 4 times.
+# Limits never end a ticket (owner, 31/10: wait for the quota, then carry on; never stop while waiting):
+# - a ChatGPT usage limit waits until the time Codex gives ("try again at 8:54 AM"), else 30 minutes, and runs again;
+# - a tool limit inside a finished run (image_gen 429, a "not before 19:48" precondition) is reported by Codex as a last
+#   line "CODEX-WAIT-UNTIL: HH:MM" or "CODEX-WAIT-UNTIL: unknown" (rule in run.sh); the queue waits the same way and runs again;
+# - a dropped stream or "at capacity" runs again in 2 min, then every 15 min after the fourth drop.
 # Failed log dirs are kept as <name>-prev-<MMddHHmm>.
 set -u
 [ $# -ge 1 ] || { echo "usage: queue.sh <list>" >&2; exit 2; }
@@ -17,6 +20,19 @@ list=$1
 cd "$root" || exit 2
 
 stamp() { date '+%d/%m %H:%M'; }
+
+# "CODEX-WAIT-UNTIL: 19:48" (24-hour) on the report's last line -> that moment today (tomorrow if passed) + 2 minutes;
+# "unknown" or anything else -> 30 minutes from now. Prints nothing when the report has no such line.
+tool_wait_at() {
+  local line t at
+  line=$(grep -v '^[[:space:]]*$' "$1" 2>/dev/null | tail -1 | tr -d '`*' | sed 's/^[[:space:]]*//')
+  case "$line" in CODEX-WAIT-UNTIL:*) ;; *) return ;; esac
+  t=$(echo "$line" | grep -o '[0-9]\{1,2\}:[0-9]\{2\}' | head -1)
+  [ -n "$t" ] && at=$(date -j -f '%Y-%m-%d %H:%M' "$(date +%Y-%m-%d) $t" +%s 2>/dev/null)
+  if [ -z "${at:-}" ]; then echo $(( $(date +%s) + 1800 )); return; fi
+  [ "$at" -le "$(date +%s)" ] && at=$(( at + 86400 ))
+  echo $(( at + 120 ))
+}
 
 # "try again at 8:54 AM" -> that moment today (tomorrow if passed) + 2 minutes, as epoch seconds.
 resume_at() {
@@ -34,7 +50,7 @@ grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | whil
   name=$(echo "$name" | xargs); brief=$(echo "$brief" | xargs)
   cwd=$(echo "${cwd:-.}" | xargs); effort=$(echo "${effort:-high}" | xargs); sandbox=$(echo "${sandbox:-workspace-write}" | xargs); model=$(echo "${model:-gpt-6.1-sol}" | xargs)
   log="$root/.local/codex-runs/$name"
-  limits=0; drops=0
+  limits=0; drops=0; tools=0
   while :; do
     [ -d "$log" ] && mv "$log" "$log-prev-$(date +%m%d%H%M)"
     echo "$(stamp) start $name ($model, $effort, $sandbox)"
@@ -46,7 +62,6 @@ grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | whil
     if [ "$failed" -eq 1 ] && grep -q 'usage limit' "$events" 2>/dev/null; then
       limits=$((limits + 1))
       echo "$(stamp) end $name exit $code (usage limit $limits)"
-      [ "$limits" -ge 12 ] && { echo "$(stamp) giving up on $name"; break; }
       until_ts=$(resume_at "$events")
       echo "$(stamp) waiting for the limit to reset at $(date -r "$until_ts" '+%d/%m %H:%M')"
       while [ "$(date +%s)" -lt "$until_ts" ]; do sleep 60; done
@@ -55,9 +70,18 @@ grep -v '^[[:space:]]*#' "$list" | grep -v '^[[:space:]]*$' | tr '\\' '/' | whil
     if [ "$code" -ne 0 ] && grep -qE 'stream disc|at capac' "$events" 2>/dev/null; then
       drops=$((drops + 1))
       echo "$(stamp) end $name exit $code (connection dropped $drops)"
-      [ "$drops" -ge 4 ] && { echo "$(stamp) giving up on $name"; break; }
-      sleep 120
+      if [ "$drops" -ge 4 ]; then sleep 900; else sleep 120; fi
       continue
+    fi
+    if [ "$code" -eq 0 ]; then
+      until_ts=$(tool_wait_at "$log/last.md")
+      if [ -n "$until_ts" ]; then
+        tools=$((tools + 1))
+        echo "$(stamp) end $name exit 0 (tool limit $tools)"
+        echo "$(stamp) waiting for the tool to reopen at $(date -r "$until_ts" '+%d/%m %H:%M')"
+        while [ "$(date +%s)" -lt "$until_ts" ]; do sleep 60; done
+        continue
+      fi
     fi
     echo "$(stamp) end $name exit $code"
     break

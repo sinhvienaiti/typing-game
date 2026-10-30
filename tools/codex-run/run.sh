@@ -35,6 +35,7 @@ House rules for this task:
 - Sounds must follow tools/audio-lab/DECISIONS.md Q6 (shaped by the action, no cheap puff/pop/thump sounds); write prompts affirmatively.
 - Docs in Vietnamese with full diacritics, in the existing style of the folder.
 - End with a short report: what you made (paths), what you skipped and why, anything the owner must look at.
+- If a limit stops the task before it is done (a tool such as image_gen answers HTTP 429 or says to try later, or the task says not to start before a time), do not give up: keep every file as it is, write your report, and make the very last line of your final message exactly `CODEX-WAIT-UNTIL: HH:MM` (24-hour local time the tool or the task gives) or `CODEX-WAIT-UNTIL: unknown`. The runner waits until then and runs the task again; on that run, continue from what is already done.
 
 TASK
 EOF
