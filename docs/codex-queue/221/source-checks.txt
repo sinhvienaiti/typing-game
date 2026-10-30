@@ -1,0 +1,22 @@
+$ git -C games/typing-defense grep -n amb- td-1c -- src
+[exit 1]
+
+$ git -C games/typing-defense grep -n dusk td-1c -- src
+td-1c:src/ui/theme.css:23:  --vd-dusk-high: #2f2a5a; --vd-dusk-mid: #b8577a; --vd-dusk-low: #f08a4b; --vd-dusk-glow: #ffd27a;
+td-1c:src/ui/title.css:6:.tt-screen { position: fixed; inset: 0; z-index: 10; overflow: hidden; background: var(--vd-dusk-high); color: var(--vd-ink); font: 500 15px/1.4 var(--vd-font); user-select: none; }
+td-1c:src/ui/title.css:14:/* A soft dusk veil keeps the name and the menu readable over any picture. */
+td-1c:src/ui/title.css:31:.tt-entry.is-focus .tt-stars { color: var(--vd-dusk-glow); } /* gold on the seal-red focus, not red on red */
+td-1c:src/ui/title.ts:2: * The title screen (SPLIT_PLAN §1.2, D7; TK 22.1, 22.9): the painted backdrop (/assets/typing-defense/ui/title-dusk.webp,
+td-1c:src/ui/title.ts:17:const ART = "/assets/typing-defense/ui/title-dusk.webp";
+[exit 0]
+
+$ git -C games/typing-defense grep -n FX.fire td-1c -- src
+td-1c:src/sim/systems/combat.ts:86:  w.events.ring.push(FX.fire, x, z, kind, w.tick);
+td-1c:src/view/fx-pipe.ts:43:      if (ring.kind[slot] === FX.fire) {
+td-1c:src/view/sound-map.ts:48:export const ringSound = (kind: number, value: number): string | null => (kind === FX.fire ? (FIRES[value] ?? null) : (RING[kind] ?? null));
+[exit 0]
+
+Lệnh sau đã chạy đúng một lần trong phiên, chép lại stdout đã nhận (không chạy lại):
+$ git -C games/typing-defense log -1 --format=%s 646e889
+fix(keys): wrong and stray letters keep their own cue on Firefly sets; saved set active from its first batch; unknown id falls back to Bright Clack; Settings/Sound tests
+[exit 0]

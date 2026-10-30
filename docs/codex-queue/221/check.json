@@ -1,0 +1,123 @@
+{
+  "ok": true,
+  "soundIds": 65,
+  "extraIds": [],
+  "directPlayIds": [
+    "day-countdown"
+  ],
+  "uiIds": [
+    "ui-move",
+    "ui-pick",
+    "ui-off",
+    "ui-lamp"
+  ],
+  "specIds": 30,
+  "unionIds": 71,
+  "map1Fired": 62,
+  "map1PolicyExceptions": [
+    "key-right: mục 6 bắt buộc excluded bộ phím 189–193 dù thực sự phát ở map 1"
+  ],
+  "rows": 61,
+  "excluded": 10,
+  "retired": 0,
+  "withSpec": 23,
+  "withoutSpec": 38,
+  "groups": [
+    {
+      "name": "gõ và lời gọi",
+      "rows": 16,
+      "takes": 25
+    },
+    {
+      "name": "đạn, trúng, chết",
+      "rows": 13,
+      "takes": 25
+    },
+    {
+      "name": "boss Mộc Tinh",
+      "rows": 12,
+      "takes": 14
+    },
+    {
+      "name": "ngày và đêm",
+      "rows": 8,
+      "takes": 8
+    },
+    {
+      "name": "công trình và kinh tế",
+      "rows": 8,
+      "takes": 9
+    },
+    {
+      "name": "UI và nền",
+      "rows": 4,
+      "takes": 4
+    }
+  ],
+  "totals": {
+    "rows": 61,
+    "takes": 85,
+    "byPriority": {
+      "P0": 43,
+      "P1": 30,
+      "P2": 12
+    }
+  },
+  "longestPrompt": {
+    "id": "word-hit",
+    "characters": 463
+  },
+  "gongRows": [
+    "night-fall",
+    "leak",
+    "defeat"
+  ],
+  "sourceCommits": {
+    "td-1c": "2a1f61d7da2ee6e6ca4abdc23f8775f872d9c9e7",
+    "a2-days": "f9abfd09987dadd519233c2f38692758d35cefca"
+  },
+  "counts": {
+    "missing": 0,
+    "unknown": 0,
+    "duplicates": 0,
+    "schemaErrors": 0,
+    "firedErrors": 0,
+    "map1Errors": 0,
+    "calculationErrors": 0,
+    "loopErrors": 0,
+    "inboxErrors": 0,
+    "specErrors": 0,
+    "asciiPromptErrors": 0,
+    "asciiNameErrors": 0,
+    "properNameErrors": 0,
+    "bannedErrors": 0,
+    "negativeErrors": 0,
+    "gongErrors": 0,
+    "markdownErrors": 0,
+    "busErrors": 0,
+    "sourceCommitErrors": 0,
+    "basisErrors": 0
+  },
+  "details": {
+    "missing": [],
+    "unknown": [],
+    "duplicates": [],
+    "schemaErrors": [],
+    "firedErrors": [],
+    "map1Errors": [],
+    "calculationErrors": [],
+    "loopErrors": [],
+    "inboxErrors": [],
+    "specErrors": [],
+    "asciiPromptErrors": [],
+    "asciiNameErrors": [],
+    "properNameErrors": [],
+    "bannedErrors": [],
+    "negativeErrors": [],
+    "gongErrors": [],
+    "markdownErrors": [],
+    "busErrors": [],
+    "sourceCommitErrors": [],
+    "basisErrors": []
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-30T12:55:47.045994+07:00",
+  "decision": "STOP: prerequisite 1 has no commit hash",
+  "commands": [
+    {
+      "command": "git log -1 --format=%h -- docs/games/audio/firefly/schema.json docs/games/audio/firefly/README.md",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git -C games/dragon-hold branch --show-current",
+      "exitCode": 0,
+      "stdout": "main\n",
+      "stderr": ""
+    },
+    {
+      "command": "git status --short -uall -- docs/games/audio/firefly/schema.json docs/games/audio/firefly/README.md docs/codex-queue/212/check.mjs",
+      "exitCode": 0,
+      "stdout": "?? docs/codex-queue/212/check.mjs\n?? docs/games/audio/firefly/README.md\n?? docs/games/audio/firefly/schema.json\n",
+      "stderr": ""
+    }
+  ],
+  "exports": [
+    {
+      "line": 10,
+      "text": "export function validateList(value, schema) {"
+    },
+    {
+      "line": 43,
+      "text": "export function calculateTakes(row, assumptions) {"
+    },
+    {
+      "line": 50,
+      "text": "export function calculateTotals(rows) {"
+    },
+    {
+      "line": 55,
+      "text": "export function readSoundIds() {"
+    },
+    {
+      "line": 84,
+      "text": "export function audit(list, schema, soundIds, specIds, md) {"
+    }
+  ],
+  "schemaFields": {
+    "sourceCommits": true,
+    "branchOnly": true,
+    "clips": true,
+    "clipsWhy": true
+  },
+  "gates": {
+    "committed212": false,
+    "exportedValidator": true,
+    "schemaFields": true,
+    "gameMain": true
+  }
+}

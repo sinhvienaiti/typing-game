@@ -1,0 +1,934 @@
+{
+  "sourceCommits": {
+    "main": "1f1de48",
+    "dh-vfx": "ca64509"
+  },
+  "catalog": {
+    "type.key": {
+      "bus": "typing",
+      "priority": 2,
+      "lengthMs": 60,
+      "loop": false,
+      "line": 67
+    },
+    "type.miss": {
+      "bus": "typing",
+      "priority": 2,
+      "lengthMs": 60,
+      "loop": false,
+      "line": 68
+    },
+    "type.back": {
+      "bus": "typing",
+      "priority": 2,
+      "lengthMs": 45,
+      "loop": false,
+      "line": 69
+    },
+    "type.switch": {
+      "bus": "typing",
+      "priority": 2,
+      "lengthMs": 80,
+      "loop": false,
+      "line": 70
+    },
+    "type.word": {
+      "bus": "typing",
+      "priority": 2,
+      "lengthMs": 320,
+      "loop": false,
+      "line": 71
+    },
+    "fire.cast": {
+      "bus": "world",
+      "priority": 4,
+      "lengthMs": 750,
+      "loop": false,
+      "line": 75
+    },
+    "fire.impact.a": {
+      "bus": "world",
+      "priority": 4,
+      "lengthMs": 600,
+      "loop": false,
+      "line": 76
+    },
+    "fire.impact.b": {
+      "bus": "world",
+      "priority": 4,
+      "lengthMs": 640,
+      "loop": false,
+      "line": 77
+    },
+    "fire.impact.c": {
+      "bus": "world",
+      "priority": 4,
+      "lengthMs": 1000,
+      "loop": false,
+      "line": 78
+    },
+    "impact.multi": {
+      "bus": "world",
+      "priority": 4,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 79
+    },
+    "dragon.hurt": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 600,
+      "loop": false,
+      "line": 80
+    },
+    "dragon.low": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 900,
+      "loop": false,
+      "line": 81
+    },
+    "dragon.heartbeat": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 420,
+      "loop": false,
+      "line": 82
+    },
+    "dragon.down": {
+      "bus": "dragon",
+      "priority": 1,
+      "lengthMs": 1600,
+      "loop": false,
+      "line": 83
+    },
+    "dragon.breath": {
+      "bus": "world",
+      "priority": 3,
+      "lengthMs": 1650,
+      "loop": false,
+      "line": 84
+    },
+    "dragon.skyfire.cast": {
+      "bus": "world",
+      "priority": 3,
+      "lengthMs": 900,
+      "loop": false,
+      "line": 85
+    },
+    "dragon.skyfire.impact": {
+      "bus": "world",
+      "priority": 3,
+      "lengthMs": 1800,
+      "loop": false,
+      "line": 86
+    },
+    "dragon.roar": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 1300,
+      "loop": false,
+      "line": 87
+    },
+    "dragon.rage": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 1000,
+      "loop": false,
+      "line": 88
+    },
+    "dragon.inferno": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 2400,
+      "loop": false,
+      "line": 89
+    },
+    "dragon.skill-ready": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 90
+    },
+    "dragon.level": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 900,
+      "loop": false,
+      "line": 91
+    },
+    "dragon.potion": {
+      "bus": "dragon",
+      "priority": 3,
+      "lengthMs": 750,
+      "loop": false,
+      "line": 92
+    },
+    "enemy.biped.spawn": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 95
+    },
+    "enemy.biped.windup": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 260,
+      "loop": false,
+      "line": 96
+    },
+    "enemy.biped.attack": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 240,
+      "loop": false,
+      "line": 97
+    },
+    "enemy.biped.shoot": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 300,
+      "loop": false,
+      "line": 98
+    },
+    "enemy.biped.hit": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 200,
+      "loop": false,
+      "line": 99
+    },
+    "enemy.biped.death": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 560,
+      "loop": false,
+      "line": 100
+    },
+    "enemy.biped.march": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 4000,
+      "loop": true,
+      "line": 101
+    },
+    "enemy.quadruped.spawn": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 420,
+      "loop": false,
+      "line": 102
+    },
+    "enemy.quadruped.windup": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 300,
+      "loop": false,
+      "line": 103
+    },
+    "enemy.quadruped.attack": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 220,
+      "loop": false,
+      "line": 104
+    },
+    "enemy.quadruped.charge": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 420,
+      "loop": false,
+      "line": 105
+    },
+    "enemy.quadruped.howl": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 1100,
+      "loop": false,
+      "line": 106
+    },
+    "enemy.quadruped.hit": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 200,
+      "loop": false,
+      "line": 107
+    },
+    "enemy.quadruped.death": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 600,
+      "loop": false,
+      "line": 108
+    },
+    "enemy.quadruped.march": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 4000,
+      "loop": true,
+      "line": 109
+    },
+    "enemy.flyer.spawn": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 360,
+      "loop": false,
+      "line": 110
+    },
+    "enemy.flyer.windup": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 320,
+      "loop": false,
+      "line": 111
+    },
+    "enemy.flyer.attack": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 300,
+      "loop": false,
+      "line": 112
+    },
+    "enemy.flyer.hit": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 180,
+      "loop": false,
+      "line": 113
+    },
+    "enemy.flyer.death": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 114
+    },
+    "enemy.flyer.march": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 4000,
+      "loop": true,
+      "line": 115
+    },
+    "enemy.swarm.spawn": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 300,
+      "loop": false,
+      "line": 116
+    },
+    "enemy.swarm.attack": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 140,
+      "loop": false,
+      "line": 117
+    },
+    "enemy.swarm.hit": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 140,
+      "loop": false,
+      "line": 118
+    },
+    "enemy.swarm.death": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 119
+    },
+    "enemy.swarm.march": {
+      "bus": "enemies",
+      "priority": 5,
+      "lengthMs": 4000,
+      "loop": true,
+      "line": 120
+    },
+    "kill.chime": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 220,
+      "loop": false,
+      "line": 121
+    },
+    "warn.strike": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 260,
+      "loop": false,
+      "line": 124
+    },
+    "warn.telegraph": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 125
+    },
+    "general.g01.horn": {
+      "bus": "enemies",
+      "priority": 3,
+      "lengthMs": 2200,
+      "loop": false,
+      "line": 128
+    },
+    "general.g01.attack": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 600,
+      "loop": false,
+      "line": 129
+    },
+    "general.g01.skill": {
+      "bus": "enemies",
+      "priority": 3,
+      "lengthMs": 1100,
+      "loop": false,
+      "line": 130
+    },
+    "general.g01.aura": {
+      "bus": "enemies",
+      "priority": 4,
+      "lengthMs": 420,
+      "loop": false,
+      "line": 131
+    },
+    "general.g01.death": {
+      "bus": "enemies",
+      "priority": 3,
+      "lengthMs": 1800,
+      "loop": false,
+      "line": 132
+    },
+    "general.aura.break": {
+      "bus": "enemies",
+      "priority": 3,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 133
+    },
+    "trap.spikes.arm": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 136
+    },
+    "trap.spikes.trigger": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 260,
+      "loop": false,
+      "line": 137
+    },
+    "trap.pine-bomb.arm": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 520,
+      "loop": false,
+      "line": 138
+    },
+    "trap.pine-bomb.trigger": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 1100,
+      "loop": false,
+      "line": 139
+    },
+    "trap.net.arm": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 560,
+      "loop": false,
+      "line": 140
+    },
+    "trap.net.trigger": {
+      "bus": "traps",
+      "priority": 4,
+      "lengthMs": 620,
+      "loop": false,
+      "line": 141
+    },
+    "unit.warden.place": {
+      "bus": "units",
+      "priority": 4,
+      "lengthMs": 620,
+      "loop": false,
+      "line": 144
+    },
+    "unit.warden.down": {
+      "bus": "units",
+      "priority": 4,
+      "lengthMs": 900,
+      "loop": false,
+      "line": 145
+    },
+    "house.herb.place": {
+      "bus": "units",
+      "priority": 4,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 146
+    },
+    "house.herb.pulse": {
+      "bus": "units",
+      "priority": 4,
+      "lengthMs": 900,
+      "loop": false,
+      "line": 147
+    },
+    "unit.hit": {
+      "bus": "units",
+      "priority": 4,
+      "lengthMs": 180,
+      "loop": false,
+      "line": 148
+    },
+    "ui.select": {
+      "bus": "ui",
+      "priority": 2,
+      "lengthMs": 70,
+      "loop": false,
+      "line": 151
+    },
+    "ui.confirm": {
+      "bus": "ui",
+      "priority": 2,
+      "lengthMs": 260,
+      "loop": false,
+      "line": 152
+    },
+    "ui.deny": {
+      "bus": "ui",
+      "priority": 2,
+      "lengthMs": 220,
+      "loop": false,
+      "line": 153
+    },
+    "ui.gold": {
+      "bus": "ui",
+      "priority": 2,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 154
+    },
+    "wave.horn": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 2200,
+      "loop": false,
+      "line": 157
+    },
+    "wave.clear": {
+      "bus": "stingers",
+      "priority": 3,
+      "lengthMs": 1300,
+      "loop": false,
+      "line": 158
+    },
+    "stinger.victory": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 3600,
+      "loop": false,
+      "line": 159
+    },
+    "stinger.defeat": {
+      "bus": "stingers",
+      "priority": 1,
+      "lengthMs": 3600,
+      "loop": false,
+      "line": 160
+    },
+    "learn.new": {
+      "bus": "learning",
+      "priority": 0,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 163
+    },
+    "learn.right": {
+      "bus": "learning",
+      "priority": 0,
+      "lengthMs": 420,
+      "loop": false,
+      "line": 164
+    },
+    "learn.wrong": {
+      "bus": "learning",
+      "priority": 0,
+      "lengthMs": 380,
+      "loop": false,
+      "line": 165
+    },
+    "amb.forest": {
+      "bus": "ambience",
+      "priority": 5,
+      "lengthMs": 6000,
+      "loop": true,
+      "line": 168
+    },
+    "amb.river": {
+      "bus": "ambience",
+      "priority": 5,
+      "lengthMs": 5000,
+      "loop": true,
+      "line": 169
+    },
+    "amb.bird": {
+      "bus": "ambience",
+      "priority": 5,
+      "lengthMs": 700,
+      "loop": false,
+      "line": 170
+    }
+  },
+  "own": {
+    "enemy.moss-grunt.spawn": {
+      "foe": "moss-grunt",
+      "slot": "spawn",
+      "fallback": "enemy.biped.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-grunt.move": {
+      "foe": "moss-grunt",
+      "slot": "move",
+      "fallback": "enemy.biped.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-grunt.attack": {
+      "foe": "moss-grunt",
+      "slot": "attack",
+      "fallback": "enemy.biped.attack",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-grunt.hit": {
+      "foe": "moss-grunt",
+      "slot": "hit",
+      "fallback": "enemy.biped.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-grunt.death": {
+      "foe": "moss-grunt",
+      "slot": "death",
+      "fallback": "enemy.biped.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-archer.spawn": {
+      "foe": "moss-archer",
+      "slot": "spawn",
+      "fallback": "enemy.biped.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-archer.move": {
+      "foe": "moss-archer",
+      "slot": "move",
+      "fallback": "enemy.biped.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-archer.attack": {
+      "foe": "moss-archer",
+      "slot": "attack",
+      "fallback": "enemy.biped.shoot",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-archer.hit": {
+      "foe": "moss-archer",
+      "slot": "hit",
+      "fallback": "enemy.biped.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.moss-archer.death": {
+      "foe": "moss-archer",
+      "slot": "death",
+      "fallback": "enemy.biped.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.tusk-boar.spawn": {
+      "foe": "tusk-boar",
+      "slot": "spawn",
+      "fallback": "enemy.quadruped.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.tusk-boar.move": {
+      "foe": "tusk-boar",
+      "slot": "move",
+      "fallback": "enemy.quadruped.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.tusk-boar.attack": {
+      "foe": "tusk-boar",
+      "slot": "attack",
+      "fallback": "enemy.quadruped.charge",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.tusk-boar.hit": {
+      "foe": "tusk-boar",
+      "slot": "hit",
+      "fallback": "enemy.quadruped.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.tusk-boar.death": {
+      "foe": "tusk-boar",
+      "slot": "death",
+      "fallback": "enemy.quadruped.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.blight-wolf.spawn": {
+      "foe": "blight-wolf",
+      "slot": "spawn",
+      "fallback": "enemy.quadruped.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.blight-wolf.move": {
+      "foe": "blight-wolf",
+      "slot": "move",
+      "fallback": "enemy.quadruped.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.blight-wolf.attack": {
+      "foe": "blight-wolf",
+      "slot": "attack",
+      "fallback": "enemy.quadruped.attack",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.blight-wolf.hit": {
+      "foe": "blight-wolf",
+      "slot": "hit",
+      "fallback": "enemy.quadruped.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.blight-wolf.death": {
+      "foe": "blight-wolf",
+      "slot": "death",
+      "fallback": "enemy.quadruped.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-wasp.spawn": {
+      "foe": "thorn-wasp",
+      "slot": "spawn",
+      "fallback": "enemy.flyer.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-wasp.move": {
+      "foe": "thorn-wasp",
+      "slot": "move",
+      "fallback": "enemy.flyer.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-wasp.attack": {
+      "foe": "thorn-wasp",
+      "slot": "attack",
+      "fallback": "enemy.flyer.attack",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-wasp.hit": {
+      "foe": "thorn-wasp",
+      "slot": "hit",
+      "fallback": "enemy.flyer.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-wasp.death": {
+      "foe": "thorn-wasp",
+      "slot": "death",
+      "fallback": "enemy.flyer.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-ant.spawn": {
+      "foe": "thorn-ant",
+      "slot": "spawn",
+      "fallback": "enemy.swarm.spawn",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-ant.move": {
+      "foe": "thorn-ant",
+      "slot": "move",
+      "fallback": "enemy.swarm.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-ant.attack": {
+      "foe": "thorn-ant",
+      "slot": "attack",
+      "fallback": "enemy.swarm.attack",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-ant.hit": {
+      "foe": "thorn-ant",
+      "slot": "hit",
+      "fallback": "enemy.swarm.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "enemy.thorn-ant.death": {
+      "foe": "thorn-ant",
+      "slot": "death",
+      "fallback": "enemy.swarm.death",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "acceptedOnly": false
+    },
+    "general.moss-banner.spawn": {
+      "foe": "moss-banner",
+      "slot": "spawn",
+      "fallback": "general.g01.horn",
+      "sources": [],
+      "acceptedOnly": true
+    },
+    "general.moss-banner.move": {
+      "foe": "moss-banner",
+      "slot": "move",
+      "fallback": "enemy.biped.march",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "acceptedOnly": false
+    },
+    "general.moss-banner.attack": {
+      "foe": "moss-banner",
+      "slot": "attack",
+      "fallback": "general.g01.attack",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "acceptedOnly": false
+    },
+    "general.moss-banner.hit": {
+      "foe": "moss-banner",
+      "slot": "hit",
+      "fallback": "enemy.biped.hit",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "acceptedOnly": false
+    },
+    "general.moss-banner.death": {
+      "foe": "moss-banner",
+      "slot": "death",
+      "fallback": "general.g01.death",
+      "sources": [],
+      "acceptedOnly": true
+    }
+  },
+  "metadata": {
+    "path": "games/dragon-hold/public/assets/dragon-hold/vfx/firefly/manifest.json",
+    "sha256": "8806cba24513f1dc5aa99e17e6715ad59cd784b81d97a3f7e647b11b221da105",
+    "note": "Metadata media hiện có ở checkout chính, ngoài Git; không thuộc commit, sao chụp để tái tính fps. fire-burst chưa có metadata; smoke-column chưa có trong cấu hình công cụ."
+  },
+  "unregistered": [
+    "enemy.moss-archer.skill",
+    "enemy.blight-wolf.skill",
+    "enemy.tusk-boar.skill",
+    "enemy.thorn-wasp.skill",
+    "general.moss-banner.skill",
+    "trap.place",
+    "trap.spikes.stab",
+    "trap.pine-bomb.blast",
+    "trap.net.shoot",
+    "trap.net.wrap",
+    "house.place",
+    "house.down",
+    "unit.place",
+    "unit.warden.hit",
+    "unit.down",
+    "item.potion.drink",
+    "buy.heart",
+    "buy.scale"
+  ]
+}

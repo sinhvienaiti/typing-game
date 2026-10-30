@@ -1,0 +1,1561 @@
+{
+  "stage": "L2-cau",
+  "sourceCommits": {
+    "main": "1f1de48",
+    "dh-vfx": "ca64509"
+  },
+  "ids": [
+    {
+      "id": "type.key",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:347",
+        "main:games/dragon-hold/src/audio/map-events.ts:341"
+      ],
+      "status": "routed",
+      "condition": "Mỗi phím đúng (khóa từ, gõ tiếp, cặp chữ đầu). Chuông nhỏ lên 1 bán cung mỗi chữ, tối đa 12"
+    },
+    {
+      "id": "type.miss",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:357",
+        "main:games/dragon-hold/src/audio/map-events.ts:351"
+      ],
+      "status": "routed",
+      "condition": "Phím sai, phím lạc"
+    },
+    {
+      "id": "type.back",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:353",
+        "main:games/dragon-hold/src/audio/map-events.ts:347"
+      ],
+      "status": "routed",
+      "condition": "Backspace"
+    },
+    {
+      "id": "type.switch",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:350",
+        "main:games/dragon-hold/src/audio/map-events.ts:344"
+      ],
+      "status": "routed",
+      "condition": "Đổi sang từ khác"
+    },
+    {
+      "id": "type.word",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:277",
+        "main:games/dragon-hold/src/audio/map-events.ts:271"
+      ],
+      "status": "routed",
+      "condition": "Xong một từ. Hoàn hảo thêm nốt năm; Chớp thêm nốt thứ ba lấp lánh"
+    },
+    {
+      "id": "fire.cast",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:278",
+        "main:games/dragon-hold/src/audio/map-events.ts:272"
+      ],
+      "status": "routed",
+      "condition": "Xong từ có mục tiêu: Hỏa Long khạc cầu lửa"
+    },
+    {
+      "id": "fire.impact.a",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:388",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:389",
+        "main:games/dragon-hold/src/audio/map-events.ts:382",
+        "main:games/dragon-hold/src/audio/map-events.ts:383"
+      ],
+      "status": "routed",
+      "condition": "Cầu lửa trúng (biến thể 1)"
+    },
+    {
+      "id": "fire.impact.b",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:388",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:389",
+        "main:games/dragon-hold/src/audio/map-events.ts:382",
+        "main:games/dragon-hold/src/audio/map-events.ts:383"
+      ],
+      "status": "routed",
+      "condition": "Cầu lửa trúng (biến thể 2)"
+    },
+    {
+      "id": "fire.impact.c",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:388",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:389",
+        "main:games/dragon-hold/src/audio/map-events.ts:382",
+        "main:games/dragon-hold/src/audio/map-events.ts:383"
+      ],
+      "status": "routed",
+      "condition": "Đòn to: bậc T3 trở lên, Hoàn hảo, Chớp"
+    },
+    {
+      "id": "impact.multi",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:181",
+        "main:games/dragon-hold/src/audio/map-events.ts:175"
+      ],
+      "status": "routed",
+      "condition": "Một đòn chữ trúng 3 quái trở lên trong 45 ms"
+    },
+    {
+      "id": "dragon.hurt",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:371",
+        "main:games/dragon-hold/src/audio/map-events.ts:365"
+      ],
+      "status": "routed",
+      "condition": "Hỏa Long trúng đòn"
+    },
+    {
+      "id": "dragon.low",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:210",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:112",
+        "main:games/dragon-hold/src/audio/index.ts:205",
+        "main:games/dragon-hold/src/audio/map-events.ts:106"
+      ],
+      "status": "routed",
+      "condition": "Máu Hỏa Long vừa xuống dưới 35 %"
+    },
+    {
+      "id": "dragon.heartbeat",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:210",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:120",
+        "main:games/dragon-hold/src/audio/index.ts:205",
+        "main:games/dragon-hold/src/audio/map-events.ts:114"
+      ],
+      "status": "routed",
+      "condition": "Mỗi 1,4 s khi máu còn dưới 35 %"
+    },
+    {
+      "id": "dragon.down",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:214",
+        "main:games/dragon-hold/src/audio/map-events.ts:208"
+      ],
+      "status": "routed",
+      "condition": "Thua: Hỏa Long kiệt sức"
+    },
+    {
+      "id": "dragon.breath",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:447",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:448",
+        "main:games/dragon-hold/src/audio/map-events.ts:436",
+        "main:games/dragon-hold/src/audio/map-events.ts:437"
+      ],
+      "status": "routed",
+      "condition": "Phun Lửa (Alt + 1)"
+    },
+    {
+      "id": "dragon.skyfire.cast",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:447",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:448",
+        "main:games/dragon-hold/src/audio/map-events.ts:436",
+        "main:games/dragon-hold/src/audio/map-events.ts:437"
+      ],
+      "status": "routed",
+      "condition": "Thiên Hỏa (Alt + 2): khối lửa rơi"
+    },
+    {
+      "id": "dragon.skyfire.impact",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:452",
+        "main:games/dragon-hold/src/audio/map-events.ts:441"
+      ],
+      "status": "routed",
+      "condition": "Thiên Hỏa chạm đất; Viêm Đế nổ"
+    },
+    {
+      "id": "dragon.roar",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:447",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:448",
+        "main:games/dragon-hold/src/audio/map-events.ts:436",
+        "main:games/dragon-hold/src/audio/map-events.ts:437"
+      ],
+      "status": "routed",
+      "condition": "Long Hống (Từ Khẩn)"
+    },
+    {
+      "id": "dragon.rage",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:287",
+        "main:games/dragon-hold/src/audio/map-events.ts:281"
+      ],
+      "status": "routed",
+      "condition": "Long Nộ đầy"
+    },
+    {
+      "id": "dragon.inferno",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:447",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:448",
+        "main:games/dragon-hold/src/audio/map-events.ts:436",
+        "main:games/dragon-hold/src/audio/map-events.ts:437"
+      ],
+      "status": "routed",
+      "condition": "Viêm Đế (tối thượng)"
+    },
+    {
+      "id": "dragon.skill-ready",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:442",
+        "main:games/dragon-hold/src/audio/map-events.ts:431"
+      ],
+      "status": "routed",
+      "condition": "Một kỹ năng hồi xong"
+    },
+    {
+      "id": "dragon.level",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:294",
+        "main:games/dragon-hold/src/audio/map-events.ts:288"
+      ],
+      "status": "routed",
+      "condition": "Hỏa Long lên cấp trong ải"
+    },
+    {
+      "id": "dragon.potion",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:307",
+        "main:games/dragon-hold/src/audio/map-events.ts:301"
+      ],
+      "status": "routed",
+      "condition": "Dùng Bình Máu Nhỏ"
+    },
+    {
+      "id": "enemy.biped.spawn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227",
+        "main:games/dragon-hold/src/audio/map-events.ts:221"
+      ],
+      "status": "routed",
+      "condition": "Quái hai chân xuất hiện"
+    },
+    {
+      "id": "enemy.biped.windup",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:237",
+        "main:games/dragon-hold/src/audio/map-events.ts:231"
+      ],
+      "status": "routed",
+      "condition": "Lên đòn"
+    },
+    {
+      "id": "enemy.biped.attack",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Chém cận chiến"
+    },
+    {
+      "id": "enemy.biped.shoot",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Bắn tên, gai (E11)"
+    },
+    {
+      "id": "enemy.biped.hit",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:393",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398",
+        "main:games/dragon-hold/src/audio/map-events.ts:388"
+      ],
+      "status": "routed",
+      "condition": "Bị lính đánh trúng"
+    },
+    {
+      "id": "enemy.biped.death",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:422",
+        "main:games/dragon-hold/src/audio/map-events.ts:412"
+      ],
+      "status": "routed",
+      "condition": "Chết (gộp theo khung)"
+    },
+    {
+      "id": "enemy.biped.march",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163",
+        "main:games/dragon-hold/src/audio/index.ts:158"
+      ],
+      "status": "routed",
+      "condition": "Vòng lặp bước chân khi có quái hai chân"
+    },
+    {
+      "id": "enemy.quadruped.spawn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227",
+        "main:games/dragon-hold/src/audio/map-events.ts:221"
+      ],
+      "status": "routed",
+      "condition": "Thú bốn chân xuất hiện"
+    },
+    {
+      "id": "enemy.quadruped.windup",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:237",
+        "main:games/dragon-hold/src/audio/map-events.ts:231"
+      ],
+      "status": "routed",
+      "condition": "Lên đòn, cào đất"
+    },
+    {
+      "id": "enemy.quadruped.attack",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Cắn (E18)"
+    },
+    {
+      "id": "enemy.quadruped.charge",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Húc (E19)"
+    },
+    {
+      "id": "enemy.quadruped.hit",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:393",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398",
+        "main:games/dragon-hold/src/audio/map-events.ts:388"
+      ],
+      "status": "routed",
+      "condition": "Bị lính đánh trúng"
+    },
+    {
+      "id": "enemy.quadruped.death",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:422",
+        "main:games/dragon-hold/src/audio/map-events.ts:412"
+      ],
+      "status": "routed",
+      "condition": "Chết"
+    },
+    {
+      "id": "enemy.quadruped.march",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163",
+        "main:games/dragon-hold/src/audio/index.ts:158"
+      ],
+      "status": "routed",
+      "condition": "Vòng lặp vó chạy"
+    },
+    {
+      "id": "enemy.flyer.spawn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227",
+        "main:games/dragon-hold/src/audio/map-events.ts:221"
+      ],
+      "status": "routed",
+      "condition": "Ong Gai xuất hiện"
+    },
+    {
+      "id": "enemy.flyer.windup",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:237",
+        "main:games/dragon-hold/src/audio/map-events.ts:231"
+      ],
+      "status": "routed",
+      "condition": "Chuẩn bị bổ nhào"
+    },
+    {
+      "id": "enemy.flyer.attack",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Bổ nhào, chích"
+    },
+    {
+      "id": "enemy.flyer.hit",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:393",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398",
+        "main:games/dragon-hold/src/audio/map-events.ts:388"
+      ],
+      "status": "routed",
+      "condition": "Bị trúng"
+    },
+    {
+      "id": "enemy.flyer.death",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:422",
+        "main:games/dragon-hold/src/audio/map-events.ts:412"
+      ],
+      "status": "routed",
+      "condition": "Chết, rơi xoáy"
+    },
+    {
+      "id": "enemy.flyer.march",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163",
+        "main:games/dragon-hold/src/audio/index.ts:158"
+      ],
+      "status": "routed",
+      "condition": "Vòng lặp vo ve khi có quái bay"
+    },
+    {
+      "id": "enemy.swarm.spawn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227",
+        "main:games/dragon-hold/src/audio/map-events.ts:221"
+      ],
+      "status": "routed",
+      "condition": "Cụm Kiến Gai xuất hiện"
+    },
+    {
+      "id": "enemy.swarm.attack",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "Cắn nhỏ"
+    },
+    {
+      "id": "enemy.swarm.hit",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:393",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398",
+        "main:games/dragon-hold/src/audio/map-events.ts:388"
+      ],
+      "status": "routed",
+      "condition": "Bị trúng"
+    },
+    {
+      "id": "enemy.swarm.death",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:422",
+        "main:games/dragon-hold/src/audio/map-events.ts:412"
+      ],
+      "status": "routed",
+      "condition": "Chết (cả cụm gộp lại)"
+    },
+    {
+      "id": "enemy.swarm.march",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163",
+        "main:games/dragon-hold/src/audio/index.ts:158"
+      ],
+      "status": "routed",
+      "condition": "Vòng lặp lạo xạo khi có bầy"
+    },
+    {
+      "id": "kill.chime",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:437",
+        "main:games/dragon-hold/src/audio/map-events.ts:426"
+      ],
+      "status": "routed",
+      "condition": "Mỗi khung có quái chết; hạ liên tiếp trong 1 s thì lên nốt"
+    },
+    {
+      "id": "warn.strike",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:236",
+        "main:games/dragon-hold/src/audio/map-events.ts:230"
+      ],
+      "status": "routed",
+      "condition": "Quái lên đòn nhắm Hỏa Long hoặc Bạch Long"
+    },
+    {
+      "id": "warn.telegraph",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:252",
+        "main:games/dragon-hold/src/audio/map-events.ts:246"
+      ],
+      "status": "routed",
+      "condition": "Tướng địch (sau này boss) báo đòn; bật luật hạ \"báo đòn\" trong suốt thời gian báo"
+    },
+    {
+      "id": "general.g01.horn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:224",
+        "main:games/dragon-hold/src/audio/map-events.ts:218"
+      ],
+      "status": "routed",
+      "condition": "G01 xuất hiện"
+    },
+    {
+      "id": "general.g01.attack",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243",
+        "main:games/dragon-hold/src/audio/map-events.ts:237"
+      ],
+      "status": "routed",
+      "condition": "G01 chém"
+    },
+    {
+      "id": "general.g01.skill",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:253",
+        "main:games/dragon-hold/src/audio/map-events.ts:247"
+      ],
+      "status": "routed",
+      "condition": "Cắm Cờ: hô lệnh, cờ cắm xuống đất, trống"
+    },
+    {
+      "id": "general.g01.aura",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:331",
+        "main:games/dragon-hold/src/audio/map-events.ts:325"
+      ],
+      "status": "routed",
+      "condition": "Hào quang Xung Phong áp lên quân"
+    },
+    {
+      "id": "general.g01.death",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:408",
+        "main:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "routed",
+      "condition": "G01 chết"
+    },
+    {
+      "id": "general.aura.break",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:331",
+        "main:games/dragon-hold/src/audio/map-events.ts:325"
+      ],
+      "status": "routed",
+      "condition": "Hào quang tắt (Ấn Phá)"
+    },
+    {
+      "id": "trap.spikes.arm",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:297",
+        "main:games/dragon-hold/src/audio/map-events.ts:291"
+      ],
+      "status": "routed",
+      "condition": "Đặt Gai Chông"
+    },
+    {
+      "id": "trap.spikes.trigger",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:264",
+        "main:games/dragon-hold/src/audio/map-events.ts:258"
+      ],
+      "status": "routed",
+      "condition": "Gai Chông đâm"
+    },
+    {
+      "id": "trap.pine-bomb.arm",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:297",
+        "main:games/dragon-hold/src/audio/map-events.ts:291"
+      ],
+      "status": "routed",
+      "condition": "Đặt Bom Hạt Thông"
+    },
+    {
+      "id": "trap.pine-bomb.trigger",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:264",
+        "main:games/dragon-hold/src/audio/map-events.ts:258"
+      ],
+      "status": "routed",
+      "condition": "Bom Hạt Thông nổ (số quái trúng làm tiếng to hơn)"
+    },
+    {
+      "id": "trap.net.arm",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:297",
+        "main:games/dragon-hold/src/audio/map-events.ts:291"
+      ],
+      "status": "routed",
+      "condition": "Đặt Lưới Phóng"
+    },
+    {
+      "id": "trap.net.trigger",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:264",
+        "main:games/dragon-hold/src/audio/map-events.ts:258"
+      ],
+      "status": "routed",
+      "condition": "Lưới Phóng bắn, kéo quái bay xuống"
+    },
+    {
+      "id": "unit.warden.place",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:316",
+        "main:games/dragon-hold/src/audio/map-events.ts:310"
+      ],
+      "status": "routed",
+      "condition": "Đặt Vệ Binh Rêu; lính hồi sinh (nhỏ hơn)"
+    },
+    {
+      "id": "unit.warden.down",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:313",
+        "main:games/dragon-hold/src/audio/map-events.ts:307"
+      ],
+      "status": "routed",
+      "condition": "Vệ Binh Rêu ngã thành nụ cây"
+    },
+    {
+      "id": "house.herb.place",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:297",
+        "main:games/dragon-hold/src/audio/map-events.ts:291"
+      ],
+      "status": "routed",
+      "condition": "Dựng Nhà Thuốc Lá"
+    },
+    {
+      "id": "house.herb.pulse",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:325",
+        "main:games/dragon-hold/src/audio/map-events.ts:319"
+      ],
+      "status": "routed",
+      "condition": "Nhà Thuốc Lá hồi máu (Xung)"
+    },
+    {
+      "id": "unit.hit",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:375",
+        "main:games/dragon-hold/src/audio/map-events.ts:369"
+      ],
+      "status": "routed",
+      "condition": "Lính hoặc nhà bị đánh"
+    },
+    {
+      "id": "ui.select",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:265",
+        "main:games/dragon-hold/src/audio/index.ts:260"
+      ],
+      "status": "routed",
+      "condition": "Chọn ô, rê qua món (làn UI gọi `audio.ui(\"select\")`)"
+    },
+    {
+      "id": "ui.confirm",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:265",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:301",
+        "main:games/dragon-hold/src/audio/index.ts:260",
+        "main:games/dragon-hold/src/audio/map-events.ts:295"
+      ],
+      "status": "routed",
+      "condition": "Mua, nâng cấp"
+    },
+    {
+      "id": "ui.deny",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:265",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:310",
+        "main:games/dragon-hold/src/audio/index.ts:260",
+        "main:games/dragon-hold/src/audio/map-events.ts:304"
+      ],
+      "status": "routed",
+      "condition": "Lệnh bị từ chối (thiếu vàng, sai ô)"
+    },
+    {
+      "id": "ui.gold",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:265",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:284",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:304",
+        "main:games/dragon-hold/src/audio/index.ts:260",
+        "main:games/dragon-hold/src/audio/map-events.ts:278",
+        "main:games/dragon-hold/src/audio/map-events.ts:298"
+      ],
+      "status": "routed",
+      "condition": "Bán, thưởng cuối đợt"
+    },
+    {
+      "id": "wave.horn",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:193",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:202",
+        "main:games/dragon-hold/src/audio/map-events.ts:187",
+        "main:games/dragon-hold/src/audio/map-events.ts:196"
+      ],
+      "status": "routed",
+      "condition": "Báo đợt (pha `warning`), hoặc đầu đợt nếu chưa có báo"
+    },
+    {
+      "id": "wave.clear",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:206",
+        "main:games/dragon-hold/src/audio/map-events.ts:200"
+      ],
+      "status": "routed",
+      "condition": "Hết đợt"
+    },
+    {
+      "id": "stinger.victory",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:210",
+        "main:games/dragon-hold/src/audio/map-events.ts:204"
+      ],
+      "status": "routed",
+      "condition": "Thắng ải"
+    },
+    {
+      "id": "stinger.defeat",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:215",
+        "main:games/dragon-hold/src/audio/map-events.ts:209"
+      ],
+      "status": "routed",
+      "condition": "Thua ải"
+    },
+    {
+      "id": "learn.new",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:269",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:279",
+        "main:games/dragon-hold/src/audio/index.ts:264",
+        "main:games/dragon-hold/src/audio/map-events.ts:273"
+      ],
+      "status": "routed",
+      "condition": "Hạ một từ mới lần đầu (sự kiện có điểm, 00 D14)"
+    },
+    {
+      "id": "learn.right",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:269",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:283",
+        "main:games/dragon-hold/src/audio/index.ts:264",
+        "main:games/dragon-hold/src/audio/map-events.ts:277"
+      ],
+      "status": "routed",
+      "condition": "Thẻ Ôn đúng, Học trước đúng"
+    },
+    {
+      "id": "learn.wrong",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:269",
+        "main:games/dragon-hold/src/audio/index.ts:264"
+      ],
+      "status": "routed",
+      "condition": "Thẻ Ôn sai (làn học gọi `audio.learning(\"wrong\")`)"
+    },
+    {
+      "id": "amb.forest",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:166",
+        "main:games/dragon-hold/src/audio/index.ts:161"
+      ],
+      "status": "routed",
+      "condition": "Luôn chạy; nhỏ lại trong đợt"
+    },
+    {
+      "id": "amb.river",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:167",
+        "main:games/dragon-hold/src/audio/index.ts:162"
+      ],
+      "status": "routed",
+      "condition": "Luôn chạy (bản đồ có suối)"
+    },
+    {
+      "id": "amb.bird",
+      "branches": [
+        "main",
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:171",
+        "main:games/dragon-hold/src/audio/index.ts:166"
+      ],
+      "status": "routed",
+      "condition": "Mỗi 4–11 s khi chuẩn bị và nghỉ đợt"
+    },
+    {
+      "id": "enemy.moss-grunt.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.spawn"
+    },
+    {
+      "id": "enemy.moss-grunt.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.march"
+    },
+    {
+      "id": "enemy.moss-grunt.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.attack"
+    },
+    {
+      "id": "enemy.moss-grunt.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.hit"
+    },
+    {
+      "id": "enemy.moss-grunt.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.death"
+    },
+    {
+      "id": "enemy.moss-archer.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.spawn"
+    },
+    {
+      "id": "enemy.moss-archer.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.march"
+    },
+    {
+      "id": "enemy.moss-archer.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.shoot"
+    },
+    {
+      "id": "enemy.moss-archer.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.hit"
+    },
+    {
+      "id": "enemy.moss-archer.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.death"
+    },
+    {
+      "id": "enemy.tusk-boar.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.spawn"
+    },
+    {
+      "id": "enemy.tusk-boar.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.march"
+    },
+    {
+      "id": "enemy.tusk-boar.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.charge"
+    },
+    {
+      "id": "enemy.tusk-boar.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.hit"
+    },
+    {
+      "id": "enemy.tusk-boar.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.death"
+    },
+    {
+      "id": "enemy.blight-wolf.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.spawn"
+    },
+    {
+      "id": "enemy.blight-wolf.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.march"
+    },
+    {
+      "id": "enemy.blight-wolf.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.attack"
+    },
+    {
+      "id": "enemy.blight-wolf.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.hit"
+    },
+    {
+      "id": "enemy.blight-wolf.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.quadruped.death"
+    },
+    {
+      "id": "enemy.thorn-wasp.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.flyer.spawn"
+    },
+    {
+      "id": "enemy.thorn-wasp.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.flyer.march"
+    },
+    {
+      "id": "enemy.thorn-wasp.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.flyer.attack"
+    },
+    {
+      "id": "enemy.thorn-wasp.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.flyer.hit"
+    },
+    {
+      "id": "enemy.thorn-wasp.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.flyer.death"
+    },
+    {
+      "id": "enemy.thorn-ant.spawn",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:227"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.swarm.spawn"
+    },
+    {
+      "id": "enemy.thorn-ant.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.swarm.march"
+    },
+    {
+      "id": "enemy.thorn-ant.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.swarm.attack"
+    },
+    {
+      "id": "enemy.thorn-ant.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.swarm.hit"
+    },
+    {
+      "id": "enemy.thorn-ant.death",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:423"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.swarm.death"
+    },
+    {
+      "id": "general.moss-banner.move",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/index.ts:163"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.march"
+    },
+    {
+      "id": "general.moss-banner.attack",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:243"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "general.g01.attack"
+    },
+    {
+      "id": "general.moss-banner.hit",
+      "branches": [
+        "dh-vfx"
+      ],
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:392",
+        "dh-vfx:games/dragon-hold/src/audio/map-events.ts:398"
+      ],
+      "status": "file-conditional",
+      "condition": "Có file riêng; move chọn loài dẫn đầu của lớp khi khởi tạo bed.",
+      "fallback": "enemy.biped.hit"
+    }
+  ],
+  "manifestOnly": [
+    {
+      "id": "general.moss-banner.spawn",
+      "reason": "G01 trả về sớm trước đường spawn/death lớp; manifest nhận nhưng chưa gọi riêng.",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:252",
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:258",
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:262"
+      ]
+    },
+    {
+      "id": "general.moss-banner.death",
+      "reason": "G01 trả về sớm trước đường spawn/death lớp; manifest nhận nhưng chưa gọi riêng.",
+      "sources": [
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:252",
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:258",
+        "dh-vfx:games/dragon-hold/src/audio/catalog.ts:262"
+      ]
+    }
+  ],
+  "scope": {
+    "foes": [
+      "moss-grunt",
+      "moss-archer",
+      "tusk-boar",
+      "blight-wolf",
+      "thorn-wasp",
+      "thorn-ant",
+      "moss-banner"
+    ],
+    "carry": [
+      "spikes",
+      "pine-bomb",
+      "net-launcher",
+      "moss-warden",
+      "herb-hut",
+      "small-potion"
+    ],
+    "skills": [
+      "breath",
+      "skyfire",
+      "roar",
+      "inferno"
+    ]
+  },
+  "foeSfxTotal": 35,
+  "foeSfxOutsideMap": 0
+}
