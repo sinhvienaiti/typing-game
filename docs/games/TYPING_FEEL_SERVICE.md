@@ -1,6 +1,6 @@
 # Typing Feel: âm phím và hiệu ứng gõ dùng chung cho mọi game (30/10/2026)
 
-> **Trạng thái:** bản thiết kế, **chờ chủ dự án duyệt** (mục 10). Chưa sửa code nào.
+> **Trạng thái:** **chủ dự án đã duyệt cả 17 quyết định ở mục 10 theo đúng đề xuất (31/10/2026, "Duyệt tất cả").** Đang làm G0 rồi G1 (mục 9).
 >
 > **Chủ dự án yêu cầu (30/10):**
 > - Thêm bộ âm phím không cần code: upload một file âm gốc đúng định dạng, bấm nút xử lý, bộ âm vào danh sách trong trang quản trị, mọi game nhận.
@@ -994,9 +994,9 @@ Cỡ việc (việc của agent, chưa tính thời gian chủ dự án nghe): *
 
 ---
 
-## 10. Quyết định cần chủ dự án duyệt
+## 10. Quyết định của chủ dự án
 
-Mỗi câu có đề xuất. Chủ dự án chỉ cần trả lời "đồng ý" hoặc ghi lựa chọn khác.
+**Đã duyệt 31/10/2026:** chủ dự án trả lời "Duyệt tất cả". Mỗi câu dưới đây lấy đúng phần **Đề xuất** làm quyết định. Muốn đổi câu nào thì ghi ngày và lựa chọn mới ngay dưới câu đó.
 
 1. **Tên host:** `feel.typing-game.local` bây giờ, `feel.<tên-miền>` khi lên Cloudflare.
    **Đề xuất:** đồng ý.
