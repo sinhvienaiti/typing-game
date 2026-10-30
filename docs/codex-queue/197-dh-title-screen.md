@@ -2,6 +2,8 @@
 
 > **Chạy lại (30/10, 10:55, điều phối):** lượt trước dừng vì 195 chưa xong. Lượt này chạy sau 194 và 195 trong cùng làn. File chưa commit của 187, 194, 195 là file đã biết (xem báo cáo của từng phiếu); không sửa phần của chúng. Chỉ chạy khi `194-report.md` và `195-report.md` đều ghi hoàn tất; chưa thì dừng, ghi lý do.
 
+> **Chạy lại lần 2 (30/10, 11:42, điều phối):** 194 đã gắn xong ảnh trong phạm vi của nó. Điều duy nhất nó chưa đạt là `pnpm check` đỏ do phần dở của 195. Lúc 11:38, 195 đã hoàn tất và `pnpm check` xanh 568/568, golden 10/10. Coi điều kiện "194 và 195 xong" là **đã đạt**. Trước khi làm, chạy `pnpm check` trong worktree: xanh thì làm tiếp; đỏ thì dừng, ghi lý do.
+
 **Nguồn:**
 - `docs/games/MAP1_PRODUCTION.md` §1.2 mục 8: "DH-13 · P1 · G5. Không có màn tựa. **Sửa:** màn tựa trên nền cảnh map: tên game, Enter để bắt đầu, ba dòng cách chơi, về cổng game; đi được bằng phím và chuột."
 - `docs/games/map1/UI_IMAGERY.md` §2: "Thiếu màn tựa là chỗ hở lớn nhất."
