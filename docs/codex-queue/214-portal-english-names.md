@@ -1,5 +1,7 @@
 # Phiếu 214 · Cổng game (repo cha) · Tên và mô tả tiếng Anh cho Dragonhold, Wordwoven, Last Line; ảnh thật thay emoji
 
+> **Chạy lại (30/10, 11:10, điều phối):** lượt 10:50 bị ngắt giữa chừng vì Codex hết hạn mức (10:53). Các thay đổi chưa commit trong `portal/` (`games.json`, `main.ts`, `styles.css`, `src/game-card.ts`, `tests/game-card.test.mjs`, `tests/fixtures/`) và thư mục `214/` là **việc dở của chính phiếu này**. Không coi là file lạ. Giữ `214/status-before.txt` và `214/git-before.txt` của lượt đầu làm mốc. Đọc `git diff`, giữ phần đúng, làm tiếp đến hết phiếu.
+
 **Nguồn:**
 - `AGENTS.md`, mục "Language, names and art level" (chủ dự án 28/10/2026 tối):
   - "These are English games. Everything the player reads is in English", kể cả tên game;

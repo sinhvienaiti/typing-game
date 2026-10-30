@@ -1,5 +1,7 @@
 # Phiếu 199 · Wordwoven · C9: `prepare-scenery.mjs`, atlas màu và pháp tuyến cùng manifest từ tám cây 116
 
+> **Chạy lại (30/10, 11:10, điều phối):** lượt 10:44 bị ngắt giữa chừng vì Codex hết hạn mức (10:52). Worktree `games/.wt-td-scenery` không sạch: `package.json`, `scripts/td/prepare-scenery.mjs`, `scripts/td/scenery-set.json`, `tests/td-scenery-prep.test.ts` là **việc dở của chính phiếu này**. Đọc `git diff`, giữ phần đúng, làm tiếp đến hết phiếu. File lạ ngoài tập đó thì dừng.
+
 **Nguồn:**
 - Chủ dự án 29/10/2026: "tăng thêm việc cho codex cho tôi".
 - `docs/games/MAP1_PRODUCTION.md` C9 (P0, G2, 22 h): "`scripts/td/prepare-scenery.mjs` (atlas WebP)".
