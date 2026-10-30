@@ -48,6 +48,7 @@ Làn `s7`, chạy sau 220. 220 làm ở `.wt-ts-codex` và không đụng worktr
 - **Mọi lệnh build, test, đo chạy trong bản chép** `games/dragon-hold/tmp/codex-222/tree`. Đây là `tmp/` của checkout chính, Git đã bỏ qua.
   - cwd của làn là repo cha (`.`); lệnh `pnpm` chạy trong `tree`.
   - `TMPDIR` là đường tuyệt đối của `games/dragon-hold/tmp/codex-222/tmpdir`, cho mọi lệnh.
+  - Mỗi lệnh shell có thể chạy trong một shell mới, biến không còn. Đặt lại `GIT_OPTIONAL_LOCKS=0`, `R`, `W`, `C`, `TMPDIR` ở đầu mỗi lệnh, hoặc dùng đường dẫn tuyệt đối.
 
 ### Dựng bản chép (đúng thứ tự này)
 
@@ -79,7 +80,7 @@ Vì sao làm như vậy:
   - Nếu dùng liên kết, các file này rơi vào worktree. Worktree đã có hai thư mục đó từ các lượt trước; không đụng tới chúng.
 - **`public/assets` là liên kết tuyệt đối** tới `games/dragon-hold/public/assets`.
   - Liên kết của worktree là tương đối (`../../dragon-hold/public/assets`), chép sang sẽ gãy.
-  - Liên kết này không có trong `ls-files`, vì Git bỏ qua `public/assets/**`.
+  - Liên kết này không có trong `ls-files`: dòng 7 của `games/dragon-hold/.git/info/exclude` (`public/assets`) bỏ qua nó. Mẫu `public/assets/**` của `.gitignore` chỉ bỏ qua file bên trong.
 - **`samples.json`:** `tests/app/idle-estimate.test.ts:16` (của 195) đọc `resolve("../dragon-hold/tmp/map1-audit/feel-35-1280/samples.json")` theo cwd.
   - Trong worktree, đường này trỏ vào `tmp/` của checkout chính.
   - Trong bản chép, nó trỏ vào `games/dragon-hold/tmp/codex-222/dragon-hold/...`, nên phải chép file vào đúng chỗ đó.
@@ -91,6 +92,12 @@ Claude đã thử đúng quy trình này ngày 30/10 lúc 12:59, rồi xóa bả
 - `pnpm check` chạy được trong bản chép;
 - `find games/.wt-dh-codex -newer start.marker` không in gì, tức là không có gì ghi vào worktree;
 - bỏ bước chép `samples.json` thì có đúng 1 test đỏ (ENOENT ở `idle-estimate.test.ts`).
+
+Lượt kiểm phiếu (30/10, 13:24) dựng lại bản chép ở một thư mục tạm ngoài repo, cùng các lệnh trên, rồi xóa:
+- `diff` hai bản sha256 rỗng, 473 file;
+- `pnpm check` mã 0: 69 file test, 593 test, kit 75 file, build xanh;
+- `prepare-ui-art --check` mã 0; `deploy:pack` mã 0, 402 file, 0 `localHost`; `node --check` 7/7;
+- `find games/.wt-dh-codex -newer start.marker` không in gì.
 
 ### `pnpm` và `tsx` trong sandbox
 
@@ -172,7 +179,8 @@ Claude đã thử đúng quy trình này ngày 30/10 lúc 12:59, rồi xóa bả
    - chốt 0,3 s trước khi bật;
    - ×2 bấm tay thắng, không nhân dồn với ×1,75;
    - tự tua chỉ đổi số bước sim mỗi khung;
-   - xét đòn báo trước của quái (`telegraph`) và Héo lan khi đang tua. `195-report.md` §4 nêu `src/audio/map-events.ts:245–247` và `src/view/fx.ts:1294` hẹn giờ theo thời gian thật trong khi sim tua. Xếp mức cho rủi ro này.
+   - xét đòn báo trước của quái (`telegraph`) và Héo lan khi đang tua. `195-report.md` §4 nêu `src/audio/map-events.ts:245–247` và `src/view/fx.ts:1294` hẹn giờ theo thời gian thật trong khi sim tua. Xếp mức cho rủi ro này;
+   - hàng "Tự tua × 1,75" mà 195 thêm vào `docs/games/dragon-lane/06-other-systems.md` §10 ở repo cha (`git diff -- docs/games/dragon-lane/06-other-systems.md`: 2 dòng thêm, 1 dòng bớt) khớp mã: 1,5 s nhìn trước, chốt 0,3 s, Alt + → thắng tự tua. Đây là file repo cha duy nhất của bốn phiếu; ghi nó riêng trong báo cáo, không đưa vào `paths` của `attribution.json`.
 
    **197:**
    - thứ tự: màn tựa → Start → thẻ tốc độ (khi không có `?wpm=`) → `begin()`. Có `?wpm=` thì Start vào thẳng `begin()`. `?title=0` bỏ qua màn tựa;
@@ -218,6 +226,11 @@ Claude đã thử đúng quy trình này ngày 30/10 lúc 12:59, rồi xóa bả
    - Thêm danh sách việc Claude cần xem trên trình duyệt, ở 1280 × 720 và 1920 × 1080. Lấy từ `197/browser-handoff.md` cộng các rủi ro bạn tìm thấy. Mỗi dòng: một thao tác và điều cần thấy.
    - Không sửa gì, cả trong worktree lẫn trong bản chép (trừ thư mục test dò).
 6. **Dọn.**
+   - Trước khi xóa, theo đúng thứ tự:
+     1. chạy Kiểm 1: `status-after.txt`, `worktree-after.sha256` (dùng `ls-files` chạy lại), HEAD, `find games/.wt-dh-codex -newer $C/start.marker`. Marker nằm trong `$C`, nên phải chạy trước khi xóa;
+     2. chạy lần hai sha256 của Kiểm 2 trên bản chép;
+     3. ghi `parent-status-after.txt` (`git status --short` của repo cha);
+     4. chép `$C/logs/*` và test dò vào `222/`.
    - Gỡ liên kết trước: `rm $C/tree/public/assets`. Rồi `rm -rf $C`.
    - Kiểm `games/dragon-hold/public/assets/dragon-hold/ui/icons/` vẫn đủ file như lúc đầu (lúc soạn phiếu: 160).
 
@@ -229,7 +242,7 @@ Claude đã thử đúng quy trình này ngày 30/10 lúc 12:59, rồi xóa bả
   - xóa `dist/` hay `tmp/` của nó.
 - Mọi lệnh git có ghi, ở repo cha, worktree hay checkout chính.
 - Chạy `pnpm prepare-ui-art` mà không có `--check`. Ghi vào `games/dragon-hold` ngoài `tmp/codex-222/`.
-- Đụng worktree khác (`.wt-dh-vfx`, `.wt-dh-keys`, `.wt-dh-models`, `.wt-dh-mappilot`, `.wt-td-*`, `.wt-ts-*`), game khác, Tu Tiên.
+- Đụng mọi worktree khác trong `games/.wt-*`. Lúc soạn có `.wt-dh-d27c`, `.wt-dh-demo`, `.wt-dh-keys`, `.wt-dh-mapcodex`, `.wt-dh-mappilot`, `.wt-dh-mapspike`, `.wt-dh-models`, `.wt-dh-vfx`, `.wt-play-*`, `.wt-td-*`, `.wt-ts-*`. Đụng game khác, Tu Tiên.
 - Dev server, `vite preview`, trình duyệt, mạng. `kit:sync`, `dh:golden:update`.
 - Sửa lỗi tìm thấy. Viết lại hay "dọn" báo cáo của phiếu khác.
 

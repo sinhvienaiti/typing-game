@@ -36,6 +36,22 @@ Codex chạy ba làn (owner 30/10 11:15):
 
 Lô phiếu mới 220+ đang soạn qua workflow `codex-batch-220` và sẽ được nối vào sau ba làn. 213 nối sau `s8`.
 
+**Cập nhật 13:35:** Codex vẫn chạy ba làn.
+
+- **Đã xong, chờ Claude duyệt và commit:**
+  - 194, 195, 197 (Dragonhold, `.wt-dh-codex`; 197 xanh 593/593);
+  - 200 (Wordwoven, `.wt-td-ui`; 405/405, gói 82,3 kB);
+  - 206, 214, 215, 216, 217, 213.
+- **Đã commit:** 212 (`83217b53`) và changelog của 198.
+- **Ảnh 149–153:** `image_gen` của Codex vẫn trả 429 lúc 13:07, dù phần làm code đã có hạn mức. Chạy lại khi có hạn mức ảnh.
+- **199:** quyết định lần hai lúc 13:28: phép kiểm màu khóa chỉ áp cho điểm có độ sáng ≥ 0,25.
+- **Ba làn:**
+  - `s13`: 199 → 202 → 226;
+  - `s14`: 220, rồi lệnh chờ tự chạy `s14b`: 222 → 223;
+  - `s15`: 221 → 227 → 224 → 225 (225 là ảnh, có thể gặp 429).
+- **Lô 220–227** đã qua người kiểm, có hàng trong `CODEX_QUEUE.md`.
+- **Vẫn chờ Claude chấm ảnh:** 203 (ảnh 133, 165, 172), 204 (lô UI Wordwoven), 211 (ảnh 149–153 và khung 127).
+
 **Cập nhật cuối của session cũ (28/10, sau 22:10):** session cũ (157c54d6) đã xong cả 4 lượt và gửi kết quả sang `coordinator-2`. Từ đây mọi việc thuộc session mới:
 - `codex-review-28-10`: kết quả nằm trong tin nhắn.
 - `map-pilot-a`: trung vị 7,125, chưa đạt cổng A; nhánh `map-pilot`.
