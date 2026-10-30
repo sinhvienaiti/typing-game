@@ -24,6 +24,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **G0, phần của chủ dự án (chưa làm):** `pnpm setup:play` (sudo, thêm `feel.typing-game.local` vào hosts và chứng chỉ, sau khi G1 commit) và `pnpm media:setup --reconnect` (token rclone hết hạn 30/10).
 - **G1 và G2:** workflow `typing-feel-g1-g2` (`wf_959df1c3-8f9`): G1 làm `typing-feel/`, `feel:import`, nginx, media; G2 thêm API vào kit và đồng bộ vào ba worktree. Mỗi phần hai người kiểm và một lượt sửa. Làm tiếp nếu đứt: `Workflow({scriptPath: ".../workflows/scripts/typing-feel-g1-g2-wf_959df1c3-8f9.js", resumeFromRunId: "wf_959df1c3-8f9"})`.
 
+**31/10, khoảng 01:00: chủ dự án cho Codex chạy lại một làn.**
+- Làn s24: phiếu 236 (G5, Admin nhiều khu), trong worktree `typing-game-wt/admin-ia`, nhánh `admin-shared-ia`. Ở đó `games/space-typing` là worktree tách rời của Space ở `84777155`.
+- Làn s25 (phiếu ảnh 149–153, 225) tự bắt đầu khi s24 xong; vẫn một làn tại một lúc.
+- Bộ chạy không bỏ phiếu vì hạn mức nữa (`04016a9a`). Luật: hết hạn mức thì chờ rồi chạy tiếp; không tắt làn đang chờ.
+- Claude giữ một nhịp `CronCreate` 20 phút một lần (phút 7, 27, 47) để tự làm tiếp khi rảnh hoặc sau khi hết hạn mức. Session mới phải tạo lại nhịp này.
+
 **30/10, 11:20: chủ dự án bảo Claude dừng mọi việc, chỉ giao việc cho Codex (ba làn, nhiều việc), rồi chờ giao việc.**
 
 Việc của Claude đã dừng, và chỗ dừng của từng việc:
