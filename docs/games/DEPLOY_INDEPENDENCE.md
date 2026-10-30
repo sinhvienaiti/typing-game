@@ -1,5 +1,20 @@
 # Mỗi game triển khai riêng (26/10/2026)
 
+> **Sửa luật (chủ dự án, 30/10/2026):** "phải sửa ý tưởng cũ đi, vì cách làm này sau này sẽ áp dụng được cho nhiều game, tránh bị phải mỗi game lại 1 source gây conflict hoặc thiếu sót."
+>
+> Âm phím và hiệu ứng gõ (về sau có thể thêm các hệ thống dùng chung khác) chuyển thành **một hệ thống chung, deploy riêng**, tạm gọi là **Typing Feel**. Code và kho bộ âm nằm một chỗ; mọi game, kể cả Monkeytype, gọi tới lúc chạy. Bộ âm mới được thêm qua trang quản trị (upload, Format, nghe thử, Publish), không cần sửa code game.
+>
+> Vì vậy, với Typing Feel, ba điều trong mục 1 đổi như sau:
+> - **Điều 3:** game được nạp Typing Feel qua một hợp đồng có phiên bản (ví dụ `/v1/`).
+> - **Điều 5:** ngoài postMessage với portal, game có thêm hợp đồng với Typing Feel.
+> - **Điều 8:** không còn chép kit âm và hiệu ứng gõ vào từng game.
+>
+> Hai điều vẫn giữ:
+> - **Điều 6:** không tải được Typing Feel thì game vẫn chơi được, chỉ tắt âm phím và hiệu ứng gõ.
+> - **Điều 7:** sửa một game vẫn chỉ deploy lại game đó. Sửa Typing Feel thì chỉ deploy lại Typing Feel, và mọi game nhận ở lần tải sau.
+>
+> Thiết kế chi tiết: `docs/games/TYPING_FEEL_SERVICE.md`, chờ chủ dự án duyệt. Phần còn lại của tài liệu này vẫn đúng cho mọi thứ khác: từ vựng, model, ảnh, gói game.
+
 > **Quy tắc của chủ dự án (26/10, "lưu ý quan trọng"):** "đảm bảo sau này mỗi game đều có thể triển khai riêng mà không phải phụ thuộc vào nhau, chứ không sau này cứ phải đẩy toàn bộ code và media cùng nhau thì sẽ khiến site bị rất nặng".
 >
 > **Trả lời ngắn: làm được, và gói mỗi game nhẹ hơn nhiều so với kế hoạch 25/10.**
