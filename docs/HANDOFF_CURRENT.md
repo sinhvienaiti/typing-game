@@ -15,6 +15,15 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**31/10: Typing Feel bắt đầu làm.** Chủ dự án duyệt cả 17 quyết định của [`TYPING_FEEL_SERVICE.md`](games/TYPING_FEEL_SERVICE.md) đúng theo đề xuất ("Duyệt tất cả").
+- **G0 (B0), phần của Claude đã xong:**
+  - commit sửa kit dở của TF2 (`0a9a40a2`);
+  - commit phiếu Codex 171, JSON runtime trong kho media (`f126089c`); `media:test` 57/57;
+  - commit ghi duyệt (`b785b0f3`) và con trỏ Monkeytype `4f1fcf3b0` (`56a113fd`);
+  - bốn nơi và staging cùng 34 bộ, cùng danh sách id.
+- **G0, phần của chủ dự án (chưa làm):** `pnpm setup:play` (sudo, thêm `feel.typing-game.local` vào hosts và chứng chỉ, sau khi G1 commit) và `pnpm media:setup --reconnect` (token rclone hết hạn 30/10).
+- **G1 và G2:** workflow `typing-feel-g1-g2` (`wf_959df1c3-8f9`): G1 làm `typing-feel/`, `feel:import`, nginx, media; G2 thêm API vào kit và đồng bộ vào ba worktree. Mỗi phần hai người kiểm và một lượt sửa. Làm tiếp nếu đứt: `Workflow({scriptPath: ".../workflows/scripts/typing-feel-g1-g2-wf_959df1c3-8f9.js", resumeFromRunId: "wf_959df1c3-8f9"})`.
+
 **30/10, 11:20: chủ dự án bảo Claude dừng mọi việc, chỉ giao việc cho Codex (ba làn, nhiều việc), rồi chờ giao việc.**
 
 Việc của Claude đã dừng, và chỗ dừng của từng việc:
