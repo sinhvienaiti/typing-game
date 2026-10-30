@@ -91,6 +91,12 @@ Mục 3 bên dưới là lịch sử.
 - Sau 218–219: Claude chép bản giao `tmp/keys-firefly/staging-v2/` sang `~/AudioLab/review/staging/keys-firefly/`, đồng bộ kit vào `ts-typefx`, `dh-keys`, `td-keys`, chép kit vào Monkeytype (`frontend/src/ts/custom/typing-feel/kit/`), chạy `pnpm sync-keys`, thử trình duyệt.
 - Đã tạo 4 clip khói Firefly (chủ dự án đồng ý), cắt thành `~/VFXLab/out/dragon-hold/smoke-mask/`, giao V-dh2 cho vòng 10.
 
+### Lửa Rồng vòng 10 đã chấm (30/10, khoảng 10:30): chưa đạt, đi ngang
+
+- V-dh2 commit `5587bd7`, `c2a6f9b`, `8b028ce`, `d91586f`, `ca64509` trên `dh-vfx` (mặt nạ khói Firefly, sửa nêm 1/6 của mặt nạ vết nứt, Sky Fire vẽ đè quái, lóe đòn thường bằng flipbook…). Giám khảo A: mạnh 8,0, thường 7,7, Sky Fire 8,1; giám khảo B: 7,8, 7,4, 7,8. Vòng 8 khoảng 7,75, vòng 9 khoảng 7,8, vòng 10 khoảng 7,8: **đi ngang quanh 8**.
+- Lỗi lặp lại cả ba vòng: lửa tắt bằng alpha trên cỏ ra vàng mù tạt, ô liu (cộng màu cam mờ lên xanh lá); khói còn phẳng; Sky Fire chưa có vòng sóng hay vòm, nổ không to hơn đòn chữ; vết cháy và lưới nứt quá đều. Clip PLAIN của vòng 10 chụp nhầm đòn mạnh (PERFECT 128).
+- Phiếu: `games/.wt-dh-vfx/tmp/vfx/judge-r10a/verdict.md`, `judge-r10b/verdict.md`. Đang hỏi chủ dự án: làm vòng 11 có kiểm màu tại chỗ trước khi chấm, hay dừng ở khoảng 8 và gộp.
+
 ### Lửa Rồng vòng 9 đã chấm (30/10, khoảng 08:10): chưa đạt 8,5
 
 - Giám khảo A: mạnh 7,9, thường 7,4, Sky Fire 7,9; giám khảo B: 8,0, 7,5, 8,0. Tiến trình: vòng 7 khoảng 7,4, vòng 8 khoảng 7,75, vòng 9 khoảng 7,8. Đã ngang game thương mại: T của đòn mạnh 8,5, R của Sky Fire 8,5, T của Sky Fire 9,0.
