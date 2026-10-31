@@ -34,6 +34,10 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 21:45: chủ dự án quyết lửa rồng.**
+- "tạm thời cứ lấy bản tốt nhất cho phần lửa rổng đang có đi, tôi sẽ kêu chatgpt tìm hiểu xem sao": dùng **vòng 10** (`ca64509`, giám khảo mù 6,0/6,5) cho demo; **dừng tự làm lửa rồng**. Chủ dự án nhờ ChatGPT tìm gói VFX/icon có sẵn theo `docs/games/vfx/ASSET_SEARCH_BRIEF.md` (`1933c0ff`); gói nào về thì thử trên bàn thử, hai giám khảo mù, dừng nếu không tới 8 trong một ngày.
+- Workflow `dh-fire-r10-merge` (`wf_dbeac042-1d8`) gộp vòng 10 vào nhánh `dh-fire-r10` (từ `main`, worktree `games/.wt-dh-fire-merge`), mang media vòng 10, kiểm và có người kiểm độc lập. Đưa vào `main` sau khi workflow gắn ảnh bảng nhanh xong (nó đang sửa `main` Dragonhold); rồi chép media vào thư mục game chính và `media:push`.
+
 **31/10 khoảng 21:30: thử lửa B chưa đạt** (Dragonhold `dh-fire-b` `ec486d6` trong `.wt-dh-fire-a`, `?fire=b`, chưa gộp, chưa đẩy).
 - Hai giám khảo mới (X = vòng 10, Y = B, Z = A; giám khảo A tự ghi "mù chưa trọn" vì báo cáo người dựng nằm trong đề có lộ khoá — lỗi đề của điều phối, lần sau không chép báo cáo người dựng nguyên văn vào đề chấm):
   - tổng: vòng 10 6,0 / 6,5; **B 5,5 / 6,0**; A 4,5 / 5,0. Không bản nào tới 8.
