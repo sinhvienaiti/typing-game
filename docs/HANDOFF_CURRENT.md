@@ -15,7 +15,18 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 01:45 (mới nhất, đọc trước).**
+**01/11 khoảng 03:30 (mới nhất, đọc trước).** Chủ dự án vắng tới khoảng 9h; việc cần họ ghi ở `docs/OWNER_QUEUE.md`; cron một lần lúc 8:57 nhắc gửi báo cáo.
+- **Luật mới:** mức nhận 8,5 cho mọi thứ người chơi thấy, không gắn tạm (`AGENTS.md`, `ART_ACCEPTANCE.md`, `24e556ee`). Đã gắn tạm trước đó, nay là nợ: icon 247, màn tựa 119 (7,5; Dragonhold `main`; phiếu 251 vẽ lại nền), lửa C.
+- **Map: viết ý tưởng từng map trước**, ChatGPT (Chat, High, không dùng Work; tab-14 đã chỉnh) duyệt và vẽ concept. Workflow `wf_fd05445b-ba9` viết `docs/games/maps/<game>-MAP_CONCEPTS.md` và `docs/games/FREE_ASSET_SOURCES.md`.
+- **Chẩn đoán:**
+  - Dragonhold và Last Line: `wf_bd91f3bd-3b2`, ra `docs/games/QUALITY_RESCUE_2026-11-01.md`.
+  - Wordwoven (xong): 3D không vẽ quái, lính, dân, cây hay trời; camera 55°, 58 m; đêm như ngày; tự chấm 2/10.
+- **Wordwoven đang chạy:**
+  - `td-3d-default` (`wf_adb0b68c-1f1`): bật 3D mặc định và hàng Quality. **Chưa gộp tới khi 3D vẽ quái.**
+  - `td-units-3d` (`wf_163ccc93-022`): `units.ts`, camera mới, đêm.
+  - Gộp cả hai rồi mới bật 3D.
+
+**01/11 khoảng 01:45.**
 - **Phiếu 247 do Claude tự vẽ bằng Adobe Firefly Image 5** trong tab Firefly (chủ dự án: "bạn tạo luôn được chứ"). Đã gạch 247 khỏi hàng Antigravity (`5f83b267`). Cách làm:
   - nền phẳng magenta hoặc xanh lá;
   - lấy blob ra bằng form POST tới `127.0.0.1:8765` (`scratchpad/ff-recv/recv-img.py`);
