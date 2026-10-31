@@ -304,8 +304,6 @@ export async function main(args = process.argv.slice(2)) {
       host: "survival.typing-game.local",
       port: 3007,
       script: "survival",
-      // Remove with the nginx alias once ticket 205 (own models) is merged.
-      aliases: ["/assets/space-typing/models/"],
     },
     {
       dir: "immortality-cultivation",

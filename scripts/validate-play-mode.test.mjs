@@ -85,7 +85,7 @@ for (const [mode, config] of Object.entries(configs)) {
         "# location /vocabulary/ { alias __ROOT_DIR__/shared/vocabulary/; }\n    location /safe/ { # alias __ROOT_DIR__/shared/vocabulary/;\n        try_files $uri =404;\n    }"), host), []);
     });
   }
-  test(`${mode}: other hosts and survival models stay allowed`, () => {
+  test(`${mode}: other hosts stay allowed and survival serves its own models`, () => {
     for (const host of ["tutien.typing-game.local", "space.typing-game.local", "typing-game.local"]) {
       assert.ok(config.includes(`server_name ${host};`));
       // The CLI scopes enforcement to SELF_SERVED_HOSTS; inspection remains reusable.
@@ -93,7 +93,10 @@ for (const [mode, config] of Object.entries(configs)) {
         "location /words/ { alias __ROOT_DIR__/shared/vocabulary/; }"), target), []);
     }
     const survival = HOSTS[2];
-    assert.ok(config.includes("location /assets/space-typing/models/"));
+    // Since ticket 205 Last Line ships its own models: its server block has no Space model alias.
+    const at = config.indexOf(`server_name ${survival};`);
+    const block = config.slice(at, config.indexOf("\n}\n", at));
+    assert.ok(at > 0 && !block.includes("/assets/space-typing/"));
     assert.deepEqual(validator.sharedDataAliases(config, survival), []);
   });
   test(`${mode}: rejects missing and early closing braces`, () => {
