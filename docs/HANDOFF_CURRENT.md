@@ -58,7 +58,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Con trỏ ở repo cha `acf0f75c`.
   - Kiểm trên host chơi bằng Chrome headless: đọc r1, 34 bộ; chặn host feel thì game vẫn chạy.
   - 10 ảnh bảng Settings/Sound của Wordwoven đã chép (kiểm md5) vào thư mục game chính rồi build lại.
-- **31/10 khoảng 12:30: gộp các nhánh đã duyệt (chưa đẩy lên remote):**
+- **31/10 khoảng 12:30: gộp các nhánh đã duyệt; 31/10 khoảng 12:45 đã đẩy lên GitHub theo lời chủ dự án ("Đẩy lên"):** Last Line `main` `f72ad6e`, Dragonhold `main` `d5bcbd8`, Wordwoven `a2-days` `2937654`. Không force, không có file media.
   - Last Line `main`: `ts-codex` (`51f3818`), `ts-art` (`4f4d275`), ghi chú AGENTS (`f72ad6e`). Model riêng (205) đã nạp; ảnh UI 206 đã chuẩn bị.
   - Dragonhold `main`: `dh-codex` (`25b602f`), sửa lỗi Quit về màn tựa (`d5bcbd8`).
   - Wordwoven `a2-days`: `td-codex` (`2937654`).
