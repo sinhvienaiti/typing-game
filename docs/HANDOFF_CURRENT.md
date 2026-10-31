@@ -15,6 +15,22 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**31/10 khoảng 16:30: ảnh UI lượt 3 (mới nhất, đọc trước).**
+- **Đã gộp lượt 2 vào nhánh chơi** (con trỏ repo cha `7988eb18`, chưa đẩy):
+  - Last Line `main` `651d44a` (`ts-ui-wire`): icon 149–153, khung 127, bảng nhanh mang khung game. Hai giám khảo trong game: **7,3 và 7,1** (lượt 1: 6,2 và 6,3).
+  - Dragonhold `main` `45219fe` (`dh-sliders`): ảnh thanh trượt, trạng thái núm, hàng tắt tiếng, khung chín mảnh.
+  - Hai host chơi đã build lại, Chrome headless: Last Line 43 yêu cầu ảnh UI, Dragonhold 10, không lỗi, 0 exception.
+  - Giám khảo bảng nhanh Dragonhold/Wordwoven: **6,5** (listbox web, rãnh không có phần đầy, nút Close là chữ, năm icon hàng đọc sai).
+- **Codex làn s29 (chỉ ảnh), chạy từ 16:14:** phiếu 242–246, viết từ lượt chấm hai. Luật chung ở 242: khối SMALL-SIZE, chấm ở cỡ thật trên mảnh UI thật, kiểm độ đặc (mở 2×2 giữ ≥ 80 %), độ phủ ≥ 30 %, đọc mù, tên `.r2` không ghi đè.
+  - 242: 11 icon HUD, kết quả, hồ sơ của Last Line.
+  - 243: icon Settings/Sound/Options của Last Line (6 vẽ lại, 4 mới: ship, letter-style, effect-strength, word-size).
+  - 244: icon hàng bảng Sound Dragonhold/Wordwoven, bánh răng Wordwoven, phần đầy/rỗng thanh trượt ba game.
+  - 245: hàng danh sách, nút Close ba game, bóng hình quái cỡ nhỏ Last Line.
+  - 246: sọc cảnh báo, thanh vỏ tàu, tấm bến khoá của Last Line (thay CSS).
+  - Xong phiếu nào thì Claude chấm **trong game ở cỡ thật**, rồi gắn.
+- **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
+- **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
+
 **31/10: Typing Feel bắt đầu làm.** Chủ dự án duyệt cả 17 quyết định của [`TYPING_FEEL_SERVICE.md`](games/TYPING_FEEL_SERVICE.md) đúng theo đề xuất ("Duyệt tất cả").
 - **G0 (B0), phần của Claude đã xong:**
   - commit sửa kit dở của TF2 (`0a9a40a2`);
