@@ -34,6 +34,11 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 23:50: ảnh chuyển sang Antigravity** (chủ dự án: "tạm thời hãy kêu antigravity tạo ảnh cho bạn, codex khả năng chắc phải 2 ngày nữa mới có hạn mức").
+- Làn Codex s29 (đang thử lại 245 mỗi 30 phút, 11 lần chạm hạn mức) và s30 (chờ s29) đã tạm dừng. 245 Codex đã giao đủ 13 ảnh trước khi hết hạn mức, chỉ bước cuối bị cắt; **cần Claude chấm 245**.
+- Antigravity không có lệnh dòng lệnh; chủ dự án dán một câu cho agent của Antigravity mỗi phiếu. Luật và câu dán: `docs/codex-queue/ANTIGRAVITY_LANE.md` (thứ tự 250, 249, 247, 246, 248).
+- Khi Codex có hạn mức lại: chỉ xếp các phiếu Antigravity chưa làm.
+
 **31/10 khoảng 22:55: lửa rồng vòng 10 đã vào Dragonhold `main` `4b0b860`** (con trỏ `3355a80e`, chưa đẩy): gộp `dh-vfx` `ca64509` vào `main` (giữ UI, kit, âm phím của `main`), đòn đánh dở của quái tắt sau cờ `FOE_BLOWS_DEFAULT = false` (`?foeblows=1` để xem), lửa theo Reduced motion trong game; người kiểm độc lập OK; 734 test; host chơi 0 ảnh hỏng, 0 yêu cầu lỗi, 0 exception; 13 flipbook lửa đã có trên Drive. Lưu ý: số đo chớp ở miệng rồng hơi dưới mốc (0,945–0,979 so với 0,95) vì `main` tua nhanh tới chữ sớm hơn 30 khung nên tư thế bay khác; lửa giống vòng 10.
 - Gói miễn phí theo V3 (chủ dự án "Cho tải và thử"): AD_FX FREE 01 chỉ là trái tim hồng; Kenney (CC0) dùng làm lớp phụ; Taproot tải về là bản Unreal. Hồ sơ `docs/games/vfx/PACKS.md`. Workflow `dragon-fire-test-c` (`wf_9b83f4d7-f20`, nhánh `dh-fire-c` trong `.wt-dh-fire-a`): đỉnh vòng 10 + dư âm sạch kiểu B + tia lửa và vết cháy Kenney + sóng chấn vẽ bằng code, hai giám khảo mù (đề chỉ có clip), luật dừng 8.
 - `media:push` chạy nền cho ảnh bảng nhanh mới (log `.local/media-push-20261031-panels.log`).
