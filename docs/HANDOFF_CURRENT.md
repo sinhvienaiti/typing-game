@@ -58,6 +58,21 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Con trỏ ở repo cha `acf0f75c`.
   - Kiểm trên host chơi bằng Chrome headless: đọc r1, 34 bộ; chặn host feel thì game vẫn chạy.
   - 10 ảnh bảng Settings/Sound của Wordwoven đã chép (kiểm md5) vào thư mục game chính rồi build lại.
+- **31/10 khoảng 12:30: gộp các nhánh đã duyệt (chưa đẩy lên remote):**
+  - Last Line `main`: `ts-codex` (`51f3818`), `ts-art` (`4f4d275`), ghi chú AGENTS (`f72ad6e`). Model riêng (205) đã nạp; ảnh UI 206 đã chuẩn bị.
+  - Dragonhold `main`: `dh-codex` (`25b602f`), sửa lỗi Quit về màn tựa (`d5bcbd8`).
+  - Wordwoven `a2-days`: `td-codex` (`2937654`).
+  - Mỗi lần gộp đều có người kiểm độc lập (đạt). Con trỏ ở repo cha `c67ebe10`.
+  - Repo cha `68cbda29`: `VITE_PORTAL_URL` cho build và dev của ba game; bỏ alias model Space của host Last Line (nginx sống sẽ nhận ở lần `setup:play` sau).
+- **Chưa gộp:**
+  - cần kiểm thêm: `map-pilot`; `td-ui`/`td-1c`/`td-scenery` (vượt ngân sách gói 0,76 kB, phím F1–F3 của camera 3D trùng bảng Settings);
+  - cần chủ dự án quyết: `dh-vfx` (lửa vòng 11), `dh-models` (KTX2 dở);
+  - chỉ giữ làm hồ sơ: s1–s6, `d27-counter`.
+  - Kế hoạch đầy đủ ở `wf_6ac54865-14b`.
+- **Làn gắn ảnh UI đang chạy:** workflow `ui-art-wiring` (`wf_950c1f1e-a53`).
+  - Last Line ở `.wt-ts-ui-wire`: icon 149–153 và thanh trượt.
+  - Dragonhold `.wt-dh-sliders` và Wordwoven `.wt-td-sliders`: ảnh thanh trượt.
+- Sau lệnh đẩy hiện tại cần `media:push` lần nữa: 24 GLB và 50 ảnh UI mới của Last Line.
 - **Media:** `pnpm media:push` toàn bộ chạy nền từ khoảng 11:00 (27.331 file, 9,1 GB, phần lớn là `_review/` của Codex). Log ở `.local/media-push-originals-20261031.log`. Xong thì commit các `media.md5`.
 - **Đang chạy:** workflow `typing-feel-merge-and-g7` (`wf_835c6f92-41c`), phần G7. Phần gộp nhánh đã xong:
   - gộp `ts-typefx` vào `main` của Last Line, `dh-keys` vào `main` của Dragonhold, `td-keys` vào `a2-days` của Wordwoven (nhánh thư mục game chính đang dùng), rồi kiểm trên host chơi bằng Chrome headless;
