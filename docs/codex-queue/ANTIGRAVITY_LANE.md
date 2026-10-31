@@ -32,7 +32,7 @@ Owner, 31/10/2026 about 23:45: "tạm thời hãy kêu antigravity tạo ảnh c
 |---|---|---|
 | 1 | `docs/codex-queue/250-quick-panel-icons-round2.md` | Quick-panel icons in all three games: three-quarter keycap, keyboard volume, empty Settings rows, Wordwoven corner speaker, Last Line reduced-motion, quality, read-aloud |
 | 2 | `docs/codex-queue/249-ts-guns-menu-parts.md` | Last Line gun art at 44–96 px, horizontal magazine rounds, four menu icons |
-| 3 | `docs/codex-queue/247-ts-icons-new-concepts.md` | Last Line: Steadiness, New-word read, Rift, Adapt pace, Screen shake |
+| 3 | ~~`docs/codex-queue/247-ts-icons-new-concepts.md`~~ | **Taken by Claude with Adobe Firefly Image 5 on 01/11 (00:30). Do not run it.** |
 | 4 | `docs/codex-queue/246-ts-hud-chrome-parts.md` | Last Line: hazard strip, hull bar, sealed bay plate |
 | 5 | `docs/codex-queue/248-ts-victory-bg.md` | Last Line: a victory background that reads as victory |
 
