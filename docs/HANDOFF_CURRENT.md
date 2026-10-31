@@ -76,7 +76,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Đang chấm lại bản đã sửa (`wf_2650d89f-85d`) trước khi gộp.
   - Việc kit còn lại: thanh trượt có lớp hiện mức đầy; rãnh vẽ ba mảnh.
 - **G7 xong** (`c9148813`, thêm `f8465575`).
-- **Phân tích lửa rồng:** báo cáo `docs/games/vfx/DRAGON_FIRE_DIAGNOSIS_2026-10-31.md`. Chờ chủ dự án duyệt làm thử phương án A một ngày.
+- **Lửa rồng:** báo cáo phân tích ở `docs/games/vfx/DRAGON_FIRE_DIAGNOSIS_2026-10-31.md`.
+  - Chủ dự án duyệt làm thử phương án A (31/10 khoảng 13:40, "Làm thử A").
+  - Workflow `dragon-fire-test-a` (`wf_493631c1-983`) chạy trong worktree `games/.wt-dh-fire-a`, nhánh `dh-fire-a`, từ vòng 10 (`ca64509`). Phạm vi: chỉ đòn mạnh, ba loại nền, hai giám khảo mới.
+  - Điều kiện đạt: pha dư âm, màu/độ nóng và va chạm đều từ 8 trở lên.
+  - Điều kiện dừng: pha dư âm dưới 7,5 thì đổi nguồn clip (phương án C hoặc B).
+  - Phần vòng 11 chưa commit vẫn nằm nguyên trong `.wt-dh-vfx`.
 - **Tích hợp bản 3D của Wordwoven** (`td-ui` gồm `td-1c`, `td-scenery`) vào nhánh `td-integrate` đang chạy (`wf_4dcc3fee-723`), có giám khảo C10.
   - Last Line ở `.wt-ts-ui-wire`: icon 149–153 và thanh trượt.
   - Dragonhold `.wt-dh-sliders` và Wordwoven `.wt-td-sliders`: ảnh thanh trượt.
