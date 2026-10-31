@@ -28,6 +28,8 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - 245: hàng danh sách, nút Close ba game, bóng hình quái cỡ nhỏ Last Line.
   - 246: sọc cảnh báo, thanh vỏ tàu, tấm bến khoá của Last Line (thay CSS).
   - Xong phiếu nào thì Claude chấm **trong game ở cỡ thật**, rồi gắn.
+  - **243 chấm 31/10 17:40:** nhận 8 (menu-settings, hud-settings, vol-effects, vol-interface `.r2`; ship, letter-style, effect-strength, word-size); pace-director, shake trượt → thêm vào 247.
+  - **244 chấm 31/10 18:00: nhận cả phiếu** (8 icon bảng Sound Dragonhold/Wordwoven, 4 ảnh rãnh đầy/rỗng). Gắn sau khi workflow kit bảng nhanh (`wf_6b035d93-2d0`) xong: `QuickSkin.sliderFill`/`sliderEmpty`; Wordwoven dùng cặp fill + empty mới; Last Line fill cần slice riêng (ngắn 12 px mỗi đầu).
   - **242 chấm 31/10 17:05:** nhận 8 icon `.r2` (next-stage, bay-full, kills, stat-accuracy, stat-words, keyboard, clock, hazard); trượt stat-evenness, stat-new-word, rift → phiếu 247 (ý mới), làn s30 chờ s29. Tám icon nhận sẽ gắn cùng 243 sau khi workflow nền/logo xong (cùng sửa Last Line `main`); `stat-words` cần sửa mã để thẻ Words dùng nó thay icon bàn phím.
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
