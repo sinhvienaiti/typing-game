@@ -22,6 +22,7 @@ export function describeTypingFeelChangeScope({ baseRevision = null, targetRevis
   const retiredBefore = new Set(baseConfig?.keyboard?.retiredIds ?? []);
   const scope = {
     added: [],
+    addedDetails: [],
     hidden: [],
     shown: [],
     retired: [],
@@ -73,8 +74,18 @@ export function describeTypingFeelChangeScope({ baseRevision = null, targetRevis
 
   const summary = [];
   const list = (ids) => ids.join(", ");
-  if (scope.added.length) summary.push(`Add ${list(scope.added)}.`);
-  if (scope.reformatted.length) summary.push(`New sound for ${list(scope.reformatted)}.`);
+  // Decision 5 (§8.3): whoever publishes to every game sees a new sound's status, owner score and, for a
+  // Provisional set, its reason, in the Review and in the audit change scope.
+  const verdict = (id) => {
+    const set = target.get(id);
+    const status = set.status === "provisional" ? "Provisional" : set.status === "published" ? "Published" : set.status;
+    const score = typeof set.ownerScore === "number" ? `, owner score ${set.ownerScore}` : "";
+    const reason = set.status === "provisional" && typeof set.note === "string" ? `: ${set.note}` : "";
+    return `${id} (${status}${score}${reason})`;
+  };
+  scope.addedDetails = scope.added.map((id) => ({ id, status: target.get(id).status, ownerScore: target.get(id).ownerScore ?? null, note: target.get(id).note ?? null }));
+  for (const id of scope.added) summary.push(`Add ${verdict(id)}.`);
+  for (const id of scope.reformatted) summary.push(`New sound for ${verdict(id)}.`);
   if (scope.hidden.length) summary.push(`Hide ${list(scope.hidden)}: players using it move to the default on their next load.`);
   if (scope.shown.length) summary.push(`Show ${list(scope.shown)} again.`);
   if (scope.retired.length) summary.push(`Retire ${list(scope.retired)} for good: the id is never used again.`);

@@ -150,4 +150,27 @@ export class TypingFeelRevisionStore extends RevisionStore {
     }
     return [...reserved].sort();
   }
+
+  /**
+   * Every set id of every revision that was ever published, with the Media versions
+   * it was published with (§3.13: ids are fixed). A Rollback can take an id out of the
+   * live catalogue, but players who picked it keep it in their saves, so the id never
+   * names a different sound later. Returns Map<setId, Set<assetVersionId>>.
+   */
+  async publishedSetVersions() {
+    const published = new Map();
+    for (const publication of await this.listPublications()) {
+      try {
+        const revision = await this.getRevision(publication.revision);
+        for (const set of revision.config?.keyboard?.sets ?? []) {
+          if (typeof set?.id !== "string") continue;
+          if (!published.has(set.id)) published.set(set.id, new Set());
+          if (typeof set.assetVersionId === "string") published.get(set.id).add(set.assetVersionId);
+        }
+      } catch (error) {
+        if (error?.code !== "ENOENT") throw error;
+      }
+    }
+    return published;
+  }
 }

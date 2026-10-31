@@ -282,3 +282,38 @@ export function localChangeSummary(source: TypingFeelConfig, working: TypingFeel
   if (canonicalJson(source.effects) !== canonicalJson(working.effects)) parts.push("typing effects");
   return { count: parts.length, parts };
 }
+
+/** Decision 5: an owner score of `threshold` (9) or more is Published; under it only Provisional, with a reason. */
+export function acceptStatus(score: number | null, threshold = 9): "published" | "provisional" | null {
+  if (score === null || !Number.isFinite(score) || score < 0 || score > 10) return null;
+  return score >= threshold ? "published" : "provisional";
+}
+
+/** Why `setId` cannot name a new set in this working copy, or null (§3.4: a live id or a retired id is never reused). */
+export function newSetIdProblem(config: TypingFeelConfig, setId: string, options: { idPattern?: string; reserved?: readonly string[]; retired?: readonly string[] } = {}): string | null {
+  const pattern = new RegExp(options.idPattern ?? "^[a-z0-9][a-z0-9-]{0,31}$");
+  if (!pattern.test(setId)) return "The id needs 1 to 32 lower-case letters, digits or dashes, starting with a letter or digit.";
+  if ((options.reserved ?? ["off"]).includes(setId)) return `"${setId}" is reserved for the games' silent choice.`;
+  if (config.keyboard.sets.some((set) => set.id === setId)) return `"${setId}" is already a set in this draft; choose a new id.`;
+  if (config.keyboard.retiredIds.includes(setId) || (options.retired ?? []).includes(setId)) return `"${setId}" was retired and is never used again; choose another id.`;
+  return null;
+}
+
+/**
+ * Adds a set accepted in Add sound set (§3.8 step 4) at the end of its family.
+ * The row comes from the server's Accept; the draft then goes through Save draft → Review → Publish.
+ */
+export function addSet(config: TypingFeelConfig, row: TypingFeelSet, options: { idPattern?: string; reserved?: readonly string[]; retired?: readonly string[]; threshold?: number } = {}): EditResult {
+  const problem = newSetIdProblem(config, row.id, options);
+  if (problem) return fail(problem);
+  if (!config.keyboard.families.some((family) => family.id === row.family)) return fail(`Family ${row.family} is not in this draft.`);
+  const status = acceptStatus(row.ownerScore, options.threshold);
+  if (status === null) return fail("The set needs the owner's listening score (0 to 10).");
+  if (row.status !== status) return fail(status === "provisional" ? `A score under ${options.threshold ?? 9} can only be Provisional.` : "A set scored 9 or more is Published.");
+  if (row.status === "provisional" && !row.note?.trim()) return fail("A Provisional set needs a note giving the reason.");
+  const next = cloneConfig(config);
+  const set = { ...row, ...(row.labels ? { labels: [...row.labels] } : {}) };
+  set.order = familySets(next, row.family).reduce((max, entry) => Math.max(max, entry.order + 1), 0);
+  next.keyboard.sets.push(set);
+  return ok(next);
+}

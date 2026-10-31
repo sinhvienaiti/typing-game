@@ -74,8 +74,8 @@ for (const area of ADMIN_AREAS) {
   for (const group of [...area.navGroups, ADMINISTRATION]) {
     for (const item of group.items) {
       assert.ok(render(item.path), `${area.label}: dead navigation route ${item.path}`);
-      // Audit (no page yet) and Add sound set (G7) stay out of the navigation until they exist (P12).
-      assert.doesNotMatch(item.path, /\/audit$|keyboard-sounds\/new/);
+      // Audit (no page yet) stays out of the navigation until it exists (P12).
+      assert.doesNotMatch(item.path, /\/audit$/);
       navCount++;
     }
   }
@@ -128,7 +128,7 @@ assert.deepEqual(attachCalls.map(([name, renderer, ...args]) => [name, renderer,
   ["attachProductionPreviewClassification", "renderPhaseBTypingContent", "/admin/shared/learning-content"],
   ["attachRoleAwareActionGates", "renderPhaseBTypingContent"],
 ]);
-// G6: the TYPING FEEL group of All games has its three pages, each wrapped in the role gates.
+// G6 + G7: the TYPING FEEL group of All games has its four pages, each wrapped in the role gates.
 const typingFeelRoutes = load(resolve(root, "portal/src/admin/typing-feel/routes.ts"));
 const { TYPING_FEEL_ROUTES, TYPING_FEEL_PERMISSIONS } = typingFeelRoutes;
 const sharedNav = ADMIN_AREAS.find((area) => area.id === "shared").navGroups;
@@ -137,12 +137,14 @@ const typingFeelGroup = sharedNav[1];
 assert.equal(typingFeelGroup.label, "Typing Feel");
 assert.deepEqual(Array.from(typingFeelGroup.items, (item) => [item.label, item.path]), [
   ["Keyboard Sounds", "/admin/shared/keyboard-sounds"],
+  ["Add sound set", "/admin/shared/keyboard-sounds/new"],
   ["Typing Effects", "/admin/shared/typing-effects"],
   ["Release & History", "/admin/shared/release"],
 ]);
-assert.deepEqual({ ...TYPING_FEEL_ROUTES }, { keyboardSounds: "/admin/shared/keyboard-sounds", typingEffects: "/admin/shared/typing-effects", release: "/admin/shared/release" });
+assert.deepEqual({ ...TYPING_FEEL_ROUTES }, { keyboardSounds: "/admin/shared/keyboard-sounds", addSoundSet: "/admin/shared/keyboard-sounds/new", typingEffects: "/admin/shared/typing-effects", release: "/admin/shared/release" });
 for (const [path, renderer] of [
   ["/admin/shared/keyboard-sounds", "renderTypingFeelKeyboardSounds"],
+  ["/admin/shared/keyboard-sounds/new", "renderTypingFeelAddSoundSet"],
   ["/admin/shared/typing-effects", "renderTypingFeelTypingEffects"],
   ["/admin/shared/release", "renderTypingFeelRelease"],
 ]) {
@@ -152,11 +154,14 @@ for (const [path, renderer] of [
   assert.deepEqual(attachCalls.map(([name, rendered]) => [name, rendered]), [["attachRoleAwareActionGates", renderer]], `${path} is wrapped in the role gates`);
   assert.equal(shell.normalizedAdminPath(`${path}/`), path);
 }
-assert.equal(render("/admin/shared/keyboard-sounds/new"), null, "Add sound set is G7: no route yet");
-for (const path of Object.values(TYPING_FEEL_ROUTES)) assert.ok(command.includes(`"${path}"`), `Command palette missing ${path}`);
+assert.equal(render("/admin/shared/keyboard-sounds/jobs"), null, "Add sound set has one page; jobs open inside it (no dead /jobs route)");
+// The command palette (space-typing-command.ts) is outside the G7 admin brief; Add sound set is reached
+// from the navigation and the Keyboard Sounds header until the palette gets its entry.
+const PALETTE_PENDING = new Set([TYPING_FEEL_ROUTES.addSoundSet]);
+for (const path of Object.values(TYPING_FEEL_ROUTES)) if (!PALETTE_PENDING.has(path)) assert.ok(command.includes(`"${path}"`), `Command palette missing ${path}`);
 
 // §3.13: every Typing Feel action carries an explicit data-admin-permission; Publish and Rollback need shared.publish.
-assert.deepEqual({ ...TYPING_FEEL_PERMISSIONS }, { edit: "config.draft", saveDraft: "config.draft", publish: "shared.publish", rollback: "shared.publish" });
+assert.deepEqual({ ...TYPING_FEEL_PERMISSIONS }, { edit: "config.draft", saveDraft: "config.draft", publish: "shared.publish", rollback: "shared.publish", upload: "media.upload", format: "shared.publish", accept: "shared.publish", discard: "shared.publish" });
 const typingFeelUi = read("portal/src/admin/typing-feel/ui.ts");
 assert.match(typingFeelUi, /export function permissionButton\([^)]*\)[^{]*\{\s*const node = button\(label, onClick, className\);\s*node\.dataset\["adminPermission"\] = permission;\s*node\.hidden = !allowed;/, "permissionButton sets data-admin-permission and hides the button without the permission");
 const releaseBar = read("portal/src/admin/typing-feel/release-bar.ts");
@@ -166,11 +171,23 @@ assert.match(releaseBar, /actions\.append\(save, arrow\([^)]*\), reviewButton, a
 assert.match(read("portal/src/admin/typing-feel/typing-feel.css"), /\.tf-page \[hidden\] \{ display: none !important; \}/, "A button hidden for a missing permission must not stay visible through .st-admin-btn's display");
 const releasePage = read("portal/src/admin/typing-feel/release.ts");
 assert.match(releasePage, /permissionButton\("Roll back to this",\s*TYPING_FEEL_PERMISSIONS\.rollback,\s*ready\.permissions\.rollback/, "Rollback carries shared.publish");
-for (const file of ["keyboard-sounds.ts", "typing-effects.ts", "release.ts", "release-bar.ts"]) {
+for (const file of ["keyboard-sounds.ts", "typing-effects.ts", "release.ts", "release-bar.ts", "add-sound-set.ts"]) {
   const source = read(`portal/src/admin/typing-feel/${file}`);
-  assert.ok(!/\bbutton\(\s*"(?:Publish|Roll ?back|Save draft)/i.test(source), `${file}: Publish, Rollback and Save draft must use permissionButton`);
-  assert.ok(!/["'`][^"'`\n]*keyboard-sounds\/new/.test(source), `${file}: no link to the G7 Add sound set page yet`);
+  assert.ok(!/\bbutton\(\s*"(?:Publish|Roll ?back|Save draft|Format|Add to draft|Discard job)/i.test(source), `${file}: Publish, Rollback, Save draft, Format, Add to draft and Discard must use permissionButton`);
+  assert.ok(!/["'`]\/admin\/shared\/keyboard-sounds\/new["'`]/.test(source), `${file}: link to Add sound set through TYPING_FEEL_ROUTES.addSoundSet`);
 }
+// G7 Add sound set (§3.8, §3.13): Format, Add to draft and Discard carry shared.publish; the file input carries media.upload.
+const addSoundSet = read("portal/src/admin/typing-feel/add-sound-set.ts");
+assert.match(addSoundSet, /permissionButton\([^,]*"Format"[^,]*,\s*TYPING_FEEL_PERMISSIONS\.format,/, "Format carries shared.publish");
+assert.match(addSoundSet, /permissionButton\([^,]*"Add to draft",\s*TYPING_FEEL_PERMISSIONS\.accept,/, "Add to draft carries shared.publish");
+assert.match(addSoundSet, /permissionButton\("Discard job",\s*TYPING_FEEL_PERMISSIONS\.discard,/, "Discard carries shared.publish");
+assert.match(addSoundSet, /input\.dataset\["adminPermission"\] = TYPING_FEEL_PERMISSIONS\.upload/, "the WAV input carries media.upload");
+// G7 review fixes: an accepted set whose draft row was lost goes back with config.draft only (nothing is stored
+// again); a failed job can be discarded at once; Format sends only a typed id (the server steps the default).
+assert.match(addSoundSet, /permissionButton\("Add to draft",\s*TYPING_FEEL_PERMISSIONS\.edit,\s*ready\.permissions\.draft,/, "Add to draft again (accepted job) carries config.draft");
+assert.match(addSoundSet, /view\.job\.status === "failed"\) \{\s*const drop = permissionButton\("Discard job",\s*TYPING_FEEL_PERMISSIONS\.discard,/, "A failed job offers Discard");
+assert.match(addSoundSet, /\.\.\.\(typedId !== null \? \{ setId: typedId \} : \{\}\)/, "Format sends the set id only when one was typed");
+assert.match(read("portal/src/admin/typing-feel/keyboard-sounds.ts"), /permissionButton\("Add sound set", TYPING_FEEL_PERMISSIONS\.format, true, \(\) => navigate\(TYPING_FEEL_ROUTES\.addSoundSet\)/, "Keyboard Sounds links to Add sound set");
 const keyboardSounds = read("portal/src/admin/typing-feel/keyboard-sounds.ts");
 for (const label of ["Hide", "Set default", "Rename", "Retire"]) assert.ok(keyboardSounds.includes(`"${label}"`), `Keyboard Sounds offers ${label}`);
 assert.match(keyboardSounds, /TYPING_FEEL_PERMISSIONS\.edit/, "Keyboard Sounds edit controls carry config.draft");

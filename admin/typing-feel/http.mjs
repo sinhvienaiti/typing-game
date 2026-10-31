@@ -6,11 +6,15 @@
 //                                        one): read-only files of a checked revision.
 //   /api/runtime/typing-feel/published/* no token: read-only set files as published under
 //                                        TYPING_FEEL_PUBLIC_DIR (public anyway), for Media previews.
+//   /api/admin/shared/typing-feel/capabilities, sources/check, jobs/*  Add sound set (G7, §3.8,
+//                                        §3.12): reads for any role; the upload check, Format, Accept
+//                                        and Discard need shared.publish (JOB_PERMISSIONS).
 // Both handlers return true when they answered, false otherwise (like createMediaV2HttpHandler).
-import { ADMIN_PERMISSIONS, AdminAuthorizationError, hasAdminPermission, runAuthorizedAdminMutation } from "../admin-security.mjs";
+import { ADMIN_PERMISSIONS, AdminAuthorizationError, hasAdminPermission, requireAdminPermission, runAuthorizedAdminMutation } from "../admin-security.mjs";
 import { MediaAssetError } from "../media-assets-v2.mjs";
 import { AdminConflictError, AdminValidationError } from "../store.mjs";
 import { TypingFeelExportError } from "./export.mjs";
+import { JOB_FILE } from "./jobs.mjs";
 import { editorOptions } from "./policy.mjs";
 import { TypingFeelNotFoundError, TypingFeelNotReadyError } from "./service.mjs";
 
@@ -21,6 +25,20 @@ export const TYPING_FEEL_PERMISSIONS = Object.freeze({
   publish: ADMIN_PERMISSIONS.SHARED_PUBLISH,
   rollback: ADMIN_PERMISSIONS.SHARED_PUBLISH,
 });
+/**
+ * Add sound set (§3.8). The coordinator's G7 brief puts the job steps under
+ * shared.publish: a set accepted here is one Save draft away from every game.
+ * The WAV upload itself is the existing Media V2 route (media.upload).
+ */
+export const JOB_PERMISSIONS = Object.freeze({
+  check: ADMIN_PERMISSIONS.SHARED_PUBLISH,
+  format: ADMIN_PERMISSIONS.SHARED_PUBLISH,
+  accept: ADMIN_PERMISSIONS.SHARED_PUBLISH,
+  discard: ADMIN_PERMISSIONS.SHARED_PUBLISH,
+  upload: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
+  draft: ADMIN_PERMISSIONS.CONFIG_DRAFT,
+});
+const JOB_ROUTE = /^\/jobs\/(j[0-9]{8}-[0-9]{6}-[0-9a-f]{6})(?:\/(accept|discard|files\/([^/]{1,40})))?$/;
 const JSON_BODY_LIMIT = 1024 * 1024;
 const PREVIEW_PATH = /^\/preview\/([a-zA-Z0-9._-]{1,120})\/keys\/((?:sets\/[a-z0-9][a-z0-9-]{0,31}\/[0-9a-f]{12}\/(?:keys-manifest\.json|preview\.ogg|(?:key|space)-[0-9]{2,3}\.ogg))|keys-manifest\.json)$/;
 // The games' own published copy of one set file (any revision, hidden sets too), for the
@@ -102,6 +120,7 @@ export function createTypingFeelHttpHandler({ typingFeel, auditLog, onAuditError
         rollback: hasAdminPermission(actor, TYPING_FEEL_PERMISSIONS.rollback),
       };
 
+      if (await handleJobRoute({ request, response, route, actor, jobs: typingFeel.jobs, mutation })) return true;
       if (request.method === "GET" && route === "/state") {
         json(response, 200, { ...(await service.state()), startup: typingFeel.startup ?? null, permissions, requiredPermissions: TYPING_FEEL_PERMISSIONS, options: editorOptions(service.contract) });
         return true;
@@ -204,6 +223,99 @@ export function createTypingFeelHttpHandler({ typingFeel, auditLog, onAuditError
       return true;
     }
   };
+}
+
+/** Add sound set routes (§3.8, §3.12). Returns true when it answered. */
+async function handleJobRoute({ request, response, route, actor, jobs, mutation }) {
+  const isJobs = route === "/capabilities" || route === "/sources/check" || route === "/jobs" || route.startsWith("/jobs/");
+  if (!isJobs) return false;
+  if (!jobs) {
+    json(response, 503, { error: "typing-feel-unavailable", message: "Format jobs are off on this Admin service; see its log." });
+    return true;
+  }
+  const permissions = Object.fromEntries(Object.entries(JOB_PERMISSIONS).map(([key, permission]) => [key, hasAdminPermission(actor, permission)]));
+  if (request.method === "GET" && route === "/capabilities") {
+    json(response, 200, { ...(await jobs.capabilities()), permissions, requiredPermissions: JOB_PERMISSIONS });
+    return true;
+  }
+  if (request.method === "POST" && route === "/sources/check") {
+    const input = await readJsonBody(request);
+    requireAdminPermission(actor, JOB_PERMISSIONS.check);
+    json(response, 200, await jobs.check(input.sourceAssetVersionId));
+    return true;
+  }
+  if (request.method === "GET" && route === "/jobs") {
+    json(response, 200, await jobs.list());
+    return true;
+  }
+  if (request.method === "POST" && route === "/jobs") {
+    const input = await readJsonBody(request);
+    const job = await mutation(actor, {
+      permission: JOB_PERMISSIONS.format,
+      action: "typing-feel.job.format",
+      entityType: "typing-feel-job",
+      changeScope: { model: "typing-feel-job", operation: "format", recipe: input.recipe ?? null, sourceAssetVersionId: input.sourceAssetVersionId ?? null, setId: input.setId ?? null, affects: "nothing until a draft with the set is published" },
+      resolveEntityId: (created) => created.jobId,
+      operation: () => jobs.create({ sourceAssetVersionId: input.sourceAssetVersionId, recipe: input.recipe, setId: input.setId, name: input.name, family: input.family, actorId: actor.actorId }),
+    });
+    json(response, 202, { jobId: job.jobId, job });
+    return true;
+  }
+  const match = JOB_ROUTE.exec(route);
+  if (!match) {
+    json(response, 404, { error: "not-found" });
+    return true;
+  }
+  const [, jobId, action, fileName] = match;
+  if (request.method === "GET" && !action) {
+    json(response, 200, await jobs.get(jobId));
+    return true;
+  }
+  if (request.method === "GET" && fileName !== undefined) {
+    let name;
+    try {
+      name = decodeURIComponent(fileName);
+    } catch {
+      name = "";
+    }
+    const file = JOB_FILE.test(name) ? await jobs.file(jobId, name) : null;
+    if (!file) {
+      json(response, 404, { error: "not-found", message: `Job ${jobId} has no file ${JSON.stringify(name)}.` });
+      return true;
+    }
+    response.writeHead(200, { "content-type": file.contentType, "content-length": file.body.length, "cache-control": "no-store", "x-content-type-options": "nosniff" });
+    response.end(file.body);
+    return true;
+  }
+  if (request.method === "POST" && action === "accept") {
+    const input = await readJsonBody(request);
+    const result = await mutation(actor, {
+      permission: JOB_PERMISSIONS.accept,
+      action: "typing-feel.job.accept",
+      entityType: "typing-feel-job",
+      entityId: jobId,
+      changeScope: { model: "typing-feel-job", operation: "accept", setId: input.setId ?? null, ownerScore: input.ownerScore ?? null, affects: "nothing until a draft with the set is published" },
+      resolveChangeScope: (accepted) => ({ model: "typing-feel-job", operation: "accept", setId: accepted.row.id, status: accepted.row.status, ownerScore: accepted.row.ownerScore, assetId: accepted.asset.assetId, assetVersionId: accepted.version.assetVersionId, affects: "nothing until a draft with the set is published" }),
+      operation: () => jobs.accept(jobId, input, { actorId: actor.actorId }),
+    });
+    json(response, 201, result);
+    return true;
+  }
+  if (request.method === "POST" && action === "discard") {
+    await readJsonBody(request);
+    const job = await mutation(actor, {
+      permission: JOB_PERMISSIONS.discard,
+      action: "typing-feel.job.discard",
+      entityType: "typing-feel-job",
+      entityId: jobId,
+      changeScope: { model: "typing-feel-job", operation: "discard", affects: "nothing in the games" },
+      operation: () => jobs.discard(jobId, { actorId: actor.actorId }),
+    });
+    json(response, 200, { job });
+    return true;
+  }
+  json(response, 405, { error: "method-not-allowed" });
+  return true;
 }
 
 /** No-token, read-only preview of a checked revision's export (§3.12), served before the token check. */

@@ -2,14 +2,21 @@
 // problem list, so Save draft and Review can show every problem, one per line.
 import { SpaceTypingAdminApi } from "../api";
 import type {
+  TypingFeelAcceptInput,
+  TypingFeelAcceptResult,
+  TypingFeelCapabilities,
   TypingFeelChangeScope,
   TypingFeelConfig,
   TypingFeelExportStatus,
   TypingFeelHistory,
+  TypingFeelJob,
+  TypingFeelJobListEntry,
+  TypingFeelJobView,
   TypingFeelLibrary,
   TypingFeelPublishResult,
   TypingFeelRevision,
   TypingFeelState,
+  TypingFeelUploadCheck,
   TypingFeelValidation,
 } from "./types";
 
@@ -72,7 +79,31 @@ export const typingFeelApi = {
   rollbackChangeScope: (targetRevision: string) => post<TypingFeelChangeScope>("/rollback-change-scope", { targetRevision }),
   publish: (revision: string, expectedActiveRevision: string) => post<TypingFeelPublishResult>("/publish", { revision, expectedActiveRevision }),
   rollback: (targetRevision: string, expectedActiveRevision: string) => post<TypingFeelPublishResult>("/rollback", { targetRevision, expectedActiveRevision }),
+  // Add sound set (G7): capabilities, the upload check and Format jobs.
+  capabilities: () => request<TypingFeelCapabilities>("/capabilities"),
+  checkSource: (sourceAssetVersionId: string) => post<TypingFeelUploadCheck>("/sources/check", { sourceAssetVersionId }),
+  jobs: () => request<{ jobs: TypingFeelJobListEntry[]; running: string | null }>("/jobs"),
+  job: (jobId: string) => request<TypingFeelJobView>(`/jobs/${encodeURIComponent(jobId)}`),
+  format: (input: { sourceAssetVersionId: string; setId?: string; name: string; family: string | null }) => post<{ jobId: string; job: TypingFeelJob }>("/jobs", { ...input, recipe: "natural-v1" }),
+  accept: (jobId: string, input: TypingFeelAcceptInput) => post<TypingFeelAcceptResult>(`/jobs/${encodeURIComponent(jobId)}/accept`, input),
+  discard: (jobId: string) => post<{ job: TypingFeelJob }>(`/jobs/${encodeURIComponent(jobId)}/discard`, {}),
 };
+
+/**
+ * One file of a Format job as an object URL: the job routes need the Admin token,
+ * which <audio> cannot send, so the page fetches with it (as media-api.ts does).
+ * The caller revokes the URL.
+ */
+export async function jobFileUrl(jobId: string, name: string): Promise<string> {
+  let response: Response;
+  try {
+    response = await fetch(`${BASE}/jobs/${encodeURIComponent(jobId)}/files/${encodeURIComponent(name)}`, { cache: "no-store", headers: { "x-typing-game-admin-token": new SpaceTypingAdminApi().getToken() } });
+  } catch {
+    throw new TypingFeelApiError("The local Admin service could not be reached.", 0, "network-error");
+  }
+  if (!response.ok) throw new TypingFeelApiError(`${name} could not be loaded (HTTP ${response.status}).`, response.status, "file");
+  return URL.createObjectURL(await response.blob());
+}
 
 // A revision is immutable, so its library (sets with their Media facts) is cached per revision for the tab.
 const libraries = new Map<string, Promise<TypingFeelLibrary>>();

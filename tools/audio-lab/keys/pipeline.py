@@ -14,6 +14,8 @@ Audio Lab from Stable Audio 3 Small-SFX (no downloaded packs, no synth stand-ins
   run.sh keys all      [--run r1]
   run.sh keys firefly survey [--folders 0,3] [--limit N]   # khảo sát chỉ đọc nguồn Firefly
   run.sh keys firefly build [--out DIR]                  # bộ 10+3 và preview 1 giây (phiếu 189)
+  run.sh keys natural <take.wav> --check [--json]          # Typing Feel: upload rules (§3.8), writes nothing
+  run.sh keys natural <take.wav> --out DIR [--id --name --family]   # Format natural-v1 (§3.9)
 
 Data: ~/AudioLab/work/_keys/<profile>/<run>/ (raw/, strokes/, critic/, masters/, runtime/), never in Git.
 """
@@ -777,6 +779,10 @@ def main(argv: list[str] | None = None) -> int:
         from keys import firefly
         env.apply()
         return firefly.main(argv[1:])
+    if argv[:1] == ["natural"]:                  # Typing Feel Format natural-v1 (TYPING_FEEL_SERVICE.md §3.9)
+        from keys import natural
+        env.apply()
+        return natural.main(argv[1:])
     ap = argparse.ArgumentParser(prog="keys", description="Năm bộ tiếng phím (Audio Lab).")
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("generate", help="Stable Audio 3: đoạn gõ 10 s và cú gõ đơn 1 s")
@@ -812,6 +818,9 @@ def main(argv: list[str] | None = None) -> int:
     ff = sub.add_parser("firefly", help="bản Adobe Firefly của chủ dự án: survey (chỉ đọc), build (phiếu 189)",
                         add_help=False)
     ff.add_argument("rest", nargs=argparse.REMAINDER)
+    nt = sub.add_parser("natural", help="Typing Feel: Format natural-v1 from one WAV (--check: upload rules only)",
+                        add_help=False)
+    nt.add_argument("rest", nargs=argparse.REMAINDER)
     a = ap.parse_args(argv)
     env.apply()
     return {"generate": cmd_generate, "slice": cmd_slice, "critic": cmd_critic, "pick": cmd_pick,

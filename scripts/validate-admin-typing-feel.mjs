@@ -8,6 +8,7 @@
 //   4. server.mjs serves the preview before the token check and the Admin routes after it;
 //   5. admin:test runs every Typing Feel test;
 //   6. source guards for the G6 review fixes (Host check, git read, registry lock, Publish gate, focus, radio keys).
+//   7. G7 source guards: Format jobs never run through a shell.
 // Never writes typing-feel/public, .local/admin or ~/AudioLab.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
@@ -114,6 +115,12 @@ check(/acquireRegistryFileLock\(key\)/.test(source("admin/media-assets-v2.mjs"))
 check(/publish\.disabled = !publishable/.test(source("portal/src/admin/typing-feel/release-bar.ts")), "Publish must need a review that is valid and still on the live revision");
 check(/data-focus-group/.test(source("portal/src/admin/typing-feel/ui.ts")), "keepFocus must fall back to the card or row when its control is disabled");
 check(/ArrowRight/.test(source("portal/src/admin/typing-feel/typing-effects.ts")) && /tabIndex = value === checked \? 0 : -1/.test(source("portal/src/admin/typing-feel/typing-effects.ts")), "effect choices must follow the ARIA radio pattern (one Tab stop, arrow keys)");
+// G7 Format jobs: the tool runs without a shell, arguments as one array, paths only from the store.
+const jobsSource = source("admin/typing-feel/jobs.mjs");
+check(/spawn\(this\.tool\.command, args, \{[^}]*shell: false/.test(jobsSource), "Format jobs must spawn the tool with an argument array and shell: false");
+check(/^import \{ spawn \} from "node:child_process";$/m.test(jobsSource) && !/execSync|execFile|child_process"\)\.exec/.test(jobsSource), "Format jobs import only spawn from node:child_process (no exec, no shell)");
+check(/`--src=\$\{sourceFile\}`, `--out=\$\{outDir\}`/.test(jobsSource), "Format jobs pass only the copied source and the job's out folder as paths");
+check(/requireAdminPermission\(actor, JOB_PERMISSIONS\.check\)/.test(source("admin/typing-feel/http.mjs")), "the upload check needs its permission");
 const adminTest = JSON.parse(readFileSync(join(root, "package.json"), "utf8")).scripts["admin:test"] ?? "";
 for (const name of readdirSync(join(root, "admin/typing-feel")).filter((file) => file.endsWith(".test.mjs"))) {
   check(adminTest.includes(`admin/typing-feel/${name}`), `admin:test does not run admin/typing-feel/${name}`);

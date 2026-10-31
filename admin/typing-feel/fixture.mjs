@@ -5,6 +5,7 @@
 import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { importStaging } from "../../typing-feel/tools/import-staging.mjs";
 import { makeStaging } from "../../typing-feel/tests/fixture.mjs";
 import { LocalAdminAuditLog } from "../admin-security.mjs";
@@ -102,4 +103,12 @@ export async function tempDir(t, prefix = "typing-feel-admin-") {
   const dir = await mkdtemp(join(tmpdir(), prefix));
   t.after(() => rm(dir, { recursive: true, force: true }));
   return dir;
+}
+
+/** The stand-in for `bash tools/audio-lab/run.sh keys natural` in the Format job tests (G7). */
+export const FAKE_NATURAL_TOOL = fileURLToPath(new URL("./fake-natural-tool.mjs", import.meta.url));
+
+/** Bytes the fake tool accepts as a WAV take (it only looks at the RIFF magic). */
+export function fakeWav(salt = "") {
+  return Buffer.concat([Buffer.from("RIFF"), Buffer.alloc(64, 7), Buffer.from(salt)]);
 }

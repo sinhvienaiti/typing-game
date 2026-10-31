@@ -3,6 +3,7 @@
 
 export const TYPING_FEEL_ROUTES = {
   keyboardSounds: "/admin/shared/keyboard-sounds",
+  addSoundSet: "/admin/shared/keyboard-sounds/new",
   typingEffects: "/admin/shared/typing-effects",
   release: "/admin/shared/release",
 } as const;
@@ -18,4 +19,10 @@ export const TYPING_FEEL_PERMISSIONS = {
   saveDraft: "config.draft",
   publish: "shared.publish",
   rollback: "shared.publish",
+  // Add sound set (G7): the WAV goes up through Media V2 (media.upload); the upload
+  // check, Format, Accept and Discard need shared.publish (admin/typing-feel/http.mjs JOB_PERMISSIONS).
+  upload: "media.upload",
+  format: "shared.publish",
+  accept: "shared.publish",
+  discard: "shared.publish",
 } as const;

@@ -1,7 +1,7 @@
 // Keyboard Sounds (/admin/shared/keyboard-sounds): the sound-set library every
 // game offers, by family order (docs/games/TYPING_FEEL_SERVICE.md §3.7). Every
 // action edits the shared working copy only; the P05 bar saves, reviews and
-// publishes it. Add sound set (/keyboard-sounds/new) is G7 and not linked yet (P12).
+// publishes it. Add sound set (/keyboard-sounds/new, G7) adds a new set to the same working copy.
 import { openAdminConfirmDialog } from "../v2/admin-dialog";
 import { createAdminPageHeader, createAdminSearchInput, createAdminValidationMessage } from "../v2/admin-components";
 import { cachedLibrary, clearLibraryCache, typingFeelErrorProblems } from "./api";
@@ -22,7 +22,7 @@ import {
   type EditResult,
 } from "./draft-model";
 import { createTypingFeelReleaseBar, focusTypingFeelNotice } from "./release-bar";
-import { TYPING_FEEL_PERMISSIONS } from "./routes";
+import { TYPING_FEEL_PERMISSIONS, TYPING_FEEL_ROUTES } from "./routes";
 import { typingFeelSession as session } from "./session";
 import type { TypingFeelLibrary, TypingFeelLibrarySet, TypingFeelSet } from "./types";
 import { bindSession, button, chip, el, focusGroup, focusKey, keepFocus, permissionButton, sessionGate } from "./ui";
@@ -44,11 +44,13 @@ export function renderTypingFeelKeyboardSounds(navigate: (path: string) => void)
     clearLibraryCache();
     void session.load();
   });
+  // Add sound set: Format, Accept and Discard need shared.publish (the WAV upload also needs media.upload; the page says so).
+  const addButton = permissionButton("Add sound set", TYPING_FEEL_PERMISSIONS.format, true, () => navigate(TYPING_FEEL_ROUTES.addSoundSet), "st-admin-btn primary");
   page.append(createAdminPageHeader({
     eyebrow: "All games · Typing Feel",
     title: "Keyboard Sounds",
     subtitle: "The key-sound sets every game offers, in the order players see them. Reorder, hide, rename or change the default here; nothing reaches the games until the draft is published.",
-    actions: [reload],
+    actions: [addButton, reload],
   }));
   const body = el("div", "tf-body");
   page.append(body, createTypingFeelReleaseBar(session, "keyboard-sounds", navigate));
@@ -179,6 +181,8 @@ export function renderTypingFeelKeyboardSounds(navigate: (path: string) => void)
     if (playing === set.id) play.textContent = "■ Stop";
     play.setAttribute("aria-label", `Play the 1 second preview of ${set.name}`);
     play.disabled = media === null;
+    // A set added in this tab (Add sound set) has its sound in the next saved draft, not in the revision shown.
+    if (media === null && !library?.sets.some((entry) => entry.id === set.id)) play.title = "New in this draft: Save draft to listen here.";
     head.append(play);
     root.append(head);
 
@@ -198,8 +202,9 @@ export function renderTypingFeelKeyboardSounds(navigate: (path: string) => void)
       row.append(el("dt", undefined, term), el("dd", undefined, value));
       meta.append(row);
     };
-    fact("Keys", media ? String(media.keys) : "…");
-    fact("Spaces", media ? String(media.spaces) : "…");
+    const fresh = media === null && library !== null && !library.sets.some((entry) => entry.id === set.id);
+    fact("Keys", media ? String(media.keys) : fresh ? "after Save draft" : "…");
+    fact("Spaces", media ? String(media.spaces) : fresh ? "after Save draft" : "…");
     fact("Recipe", set.recipe);
     if (set.ownerScore !== null) fact("Owner score", String(set.ownerScore));
     root.append(meta);

@@ -97,7 +97,7 @@ export class TypingFeelService {
   async checkConfig(config, { baseConfig = null } = {}) {
     const problems = configProblems(config, this.contract);
     if (problems.length) return { problems, described: new Map() };
-    if (baseConfig) problems.push(...baseProblems(config, baseConfig, { reservedIds: await this.store.reservedRetiredIds() }));
+    if (baseConfig) problems.push(...baseProblems(config, baseConfig, { reservedIds: await this.store.reservedRetiredIds(), publishedVersions: await this.store.publishedSetVersions() }));
     const { described, problems: media } = await describeConfigSets({ config, mediaStore: this.mediaStore, publicDir: this.publicDir, contract: this.contract, baseConfig });
     problems.push(...media);
     return { problems, described };

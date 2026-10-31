@@ -80,6 +80,11 @@ test("Typing Feel runs through the Admin server without Space Typing", { timeout
     assert.equal((await call("GET", path, { auth: false })).status, 401, `${path} needs the token`);
   }
   assert.equal((await call("POST", "/api/admin/shared/typing-feel/publish", { auth: false, body: { revision: before.revision, expectedActiveRevision: seed } })).status, 401);
+  // G7 Add sound set: capabilities, the upload check and every job route sit behind the token too.
+  for (const [method, path] of [["GET", "capabilities"], ["GET", "jobs"], ["POST", "jobs"], ["POST", "sources/check"], ["GET", "jobs/j20261031-000000-abcdef/files/preview.ogg"]]) {
+    assert.equal((await call(method, `/api/admin/shared/typing-feel/${path}`, { auth: false, body: method === "POST" ? {} : undefined })).status, 401, `${method} ${path} needs the token`);
+  }
+  assert.deepEqual((await call("GET", "/api/admin/shared/typing-feel/capabilities")).data.recipes, ["natural-v1"]);
   const state = await call("GET", "/api/admin/shared/typing-feel/state");
   assert.equal(state.status, 200);
   assert.equal(state.data.state.activeRevision, before.revision);
@@ -131,6 +136,12 @@ test("a viewer reads Typing Feel but cannot publish to all games", { timeout: 20
   const state = await call("GET", "/api/admin/shared/typing-feel/state");
   assert.equal(state.status, 200);
   assert.deepEqual(state.data.permissions, { draft: false, publish: false, rollback: false });
+  const capabilities = await call("GET", "/api/admin/shared/typing-feel/capabilities");
+  assert.equal(capabilities.status, 200);
+  assert.equal(capabilities.data.permissions.format, false);
+  const format = await call("POST", "/api/admin/shared/typing-feel/jobs", { body: { sourceAssetVersionId: "media-version.anything", recipe: "natural-v1" } });
+  assert.equal(format.status, 403);
+  assert.equal(format.data.permission, "shared.publish");
   const { revision, config } = await activeConfig(fx.store);
   assert.equal((await call("POST", "/api/admin/shared/typing-feel/revisions", { body: { baseRevision: revision, config } })).status, 403);
   const draft = await fx.service.saveDraft({ baseRevision: revision, config: { ...config, keyboard: { ...config.keyboard, defaultSet: "deep" } } });

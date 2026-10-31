@@ -16,6 +16,10 @@ const ACTIONS: Readonly<Record<string, string>> = {
   "typing-feel.revision.create": "Saved a draft",
   "typing-feel.publish": "Published to all games",
   "typing-feel.rollback": "Rolled back all games",
+  // Add sound set (G7): these change Media V2 only, never a revision or the games.
+  "typing-feel.job.format": "Formatted a take",
+  "typing-feel.job.accept": "Accepted a new sound set",
+  "typing-feel.job.discard": "Discarded a Format job",
 };
 
 function relationChip(entry: TypingFeelHistoryEntry): HTMLElement {

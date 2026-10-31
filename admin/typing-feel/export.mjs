@@ -73,7 +73,7 @@ function folderFromReference(component, problems, label) {
  * (name, sha256, size, where the bytes are), its parsed set-1 manifest and counts.
  * Returns { description, problems }: problems are owner-readable sentences.
  */
-export async function describeSetVersion({ mediaStore, publicDir, assetVersionId, setId, contract }) {
+export async function describeSetVersion({ mediaStore, publicDir, assetVersionId, setId, contract, readAccept = false }) {
   const label = `Set ${setId}`;
   const problems = [];
   let version;
@@ -162,6 +162,8 @@ export async function describeSetVersion({ mediaStore, publicDir, assetVersionId
     for (const name of names) if (!audio.has(name)) problems.push(`${label}: the set manifest lists ${name}, which Media V2 does not hold.`);
   }
   if (problems.length) return { description: null, problems };
+  // Decision 5: an Admin-upload set carries the owner's Accept record (score and status) in its report component.
+  const accept = readAccept && version.provenance === "admin-upload" ? await acceptRecord(mediaStore, version) : null;
   // An Admin-upload set names the Media version of its source WAV (§3.6: source.sourcePath).
   let sourceAssetVersionId = null;
   if (typeof version.source?.sourcePath === "string" && /^media-version\.[a-z0-9._:-]+$/.test(version.source.sourcePath)) {
@@ -181,9 +183,49 @@ export async function describeSetVersion({ mediaStore, publicDir, assetVersionId
       recipe: manifest.recipe,
       manifestName: manifest.name,
       files: files.sort((a, b) => a.name.localeCompare(b.name)),
+      ...(accept ? { accept } : {}),
     },
     problems,
   };
+}
+
+/**
+ * The Accept record of an Admin-upload set version: report.json's `accept` block,
+ * written server-side by jobs.accept (§3.8 step 4), the only code that makes
+ * Admin-upload set bundles. Returns { ownerScore, status, reason }, null when the
+ * version has no record (a bundle not made by Accept: the client rules of
+ * baseProblems still apply), or { missing: why } when a report is there but
+ * cannot be trusted (never throws).
+ */
+async function acceptRecord(mediaStore, version) {
+  if (!version.components.some((component) => component.role === "report")) return null;
+  try {
+    const component = await mediaStore.resolveComponent(version.assetVersionId, "report");
+    if (!component.absolutePath) return null;
+    const bytes = await readFile(component.absolutePath);
+    if (sha256(bytes) !== component.sha256) return { missing: "its report does not match its Media V2 sha256" };
+    const block = JSON.parse(bytes.toString("utf8"))?.accept;
+    if (block === undefined || block === null) return null;
+    if (typeof block.ownerScore !== "number" || typeof block.status !== "string") return { missing: "its Accept record has no owner score or status" };
+    return { ownerScore: block.ownerScore, status: block.status, reason: typeof block.reason === "string" ? block.reason : null };
+  } catch (error) {
+    return { missing: `its report cannot be read (${error.code === "ENOENT" ? "file missing; run pnpm media:pull" : error.message})` };
+  }
+}
+
+const STATUS_WORD = Object.freeze({ published: "Published", provisional: "Provisional" });
+
+/**
+ * Decision 5 (§8.3) against what the owner did, not what a client sent: a draft row
+ * of an Admin-upload set keeps the status and owner score recorded at Accept. Save
+ * draft cannot turn a Provisional set (scored under 9) into a Published one; a new
+ * score needs a new Format and Accept.
+ */
+function acceptProblem(set, accept) {
+  if (!accept) return null;
+  if (accept.missing) return `Set ${set.id}: its Media version cannot show the owner's Accept (${accept.missing}); accept the set again from Add sound set.`;
+  if (set.status === accept.status && set.ownerScore === accept.ownerScore) return null;
+  return `Set ${set.id}: the owner accepted this sound as ${STATUS_WORD[accept.status] ?? accept.status}, owner score ${accept.ownerScore}; the draft says ${STATUS_WORD[set.status] ?? set.status}, owner score ${set.ownerScore ?? "none"}. The status and score come from Accept: Format and accept the take again to change them.`;
 }
 
 /** Describes every set of `config`; returns { described: Map<setId, description>, problems }. */
@@ -193,9 +235,12 @@ export async function describeConfigSets({ config, mediaStore, publicDir, contra
   const baseVersions = new Map((baseConfig?.keyboard?.sets ?? []).map((set) => [set.id, set.assetVersionId]));
   const seen = new Map();
   for (const set of config.keyboard.sets) {
-    const { description, problems: found } = await describeSetVersion({ mediaStore, publicDir, assetVersionId: set.assetVersionId, setId: set.id, contract });
+    // A draft (baseConfig given) is checked against the owner's Accept records too.
+    const { description, problems: found } = await describeSetVersion({ mediaStore, publicDir, assetVersionId: set.assetVersionId, setId: set.id, contract, readAccept: baseConfig !== null });
     problems.push(...found);
     if (!description) continue;
+    const decided = acceptProblem(set, description.accept);
+    if (decided) problems.push(decided);
     if (seen.has(description.assetVersionId)) problems.push(`Sets ${seen.get(description.assetVersionId)} and ${set.id} use the same Media version.`);
     seen.set(description.assetVersionId, set.id);
     // §3.4: a sound newly chosen in a draft never comes from an archived asset (a rollback or re-export may still use one).

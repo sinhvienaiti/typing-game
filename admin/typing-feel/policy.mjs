@@ -223,9 +223,12 @@ export function validateTypingFeelConfig(config, contract) {
  * - a set id the base had is kept or retired, never dropped (player saves store it);
  * - a retired id stays retired; an id retired in any published revision is never reused;
  * - a set that is new or re-formatted (other assetVersionId) is Published only with
- *   an owner score of 9 or more, otherwise it is Provisional with a reason (§8.3).
+ *   an owner score of 9 or more, otherwise it is Provisional with a reason (§8.3);
+ * - an id that was live in any published revision (and left the catalogue by a
+ *   Rollback) comes back only with a sound it was published with: player saves may
+ *   still hold it (`publishedVersions`: Map<setId, Set<assetVersionId>>).
  */
-export function baseProblems(config, baseConfig, { reservedIds = [] } = {}) {
+export function baseProblems(config, baseConfig, { reservedIds = [], publishedVersions = new Map() } = {}) {
   const problems = [];
   const sets = config?.keyboard?.sets ?? [];
   const retired = new Set(config?.keyboard?.retiredIds ?? []);
@@ -242,6 +245,8 @@ export function baseProblems(config, baseConfig, { reservedIds = [] } = {}) {
     const base = baseSets.get(set.id);
     if (reserved.has(set.id) && base?.assetVersionId !== set.assetVersionId) {
       problems.push(`Set id ${set.id} was retired in a published revision and is never used again; choose another id.`);
+    } else if (!base && publishedVersions.has(set.id) && !publishedVersions.get(set.id).has(set.assetVersionId)) {
+      problems.push(`Set id ${set.id} was published before with another sound, and player saves may still hold it; give the new sound a new id.`);
     }
     const changedSound = !base || base.assetVersionId !== set.assetVersionId;
     if (changedSound && set.status === "published" && !(typeof set.ownerScore === "number" && set.ownerScore >= PUBLISHED_OWNER_SCORE)) {

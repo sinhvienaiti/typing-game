@@ -114,6 +114,8 @@ export type TypingFeelChangeScope = {
   targetRevision: string | null;
   changed: boolean;
   added: string[];
+  /** Decision 5: status, owner score and (Provisional) reason of each added set; the summary lines carry them too. */
+  addedDetails?: { id: string; status: string; ownerScore: number | null; note: string | null }[];
   hidden: string[];
   shown: string[];
   retired: string[];
@@ -180,3 +182,150 @@ export type TypingFeelPublishResult = {
   folders: { created: string[]; reused: string[] };
   referencesCreated: number;
 };
+
+// Add sound set (G7, admin/typing-feel/jobs.mjs): capabilities, the upload check and Format jobs.
+
+export type TypingFeelUploadRule = { id: string; label: string; ok: boolean; level: "error" | "warning"; value: unknown; limit: unknown; message: string };
+
+export type TypingFeelTakeFacts = {
+  file?: string;
+  bytes?: number;
+  sha256?: string;
+  format?: string;
+  subtype?: string;
+  sampleRate?: number;
+  channels?: number;
+  durationS?: number | null;
+  peakDbfs?: number;
+  noiseFloorDbfs?: number;
+  tapsFound?: number;
+  tapsUsable?: number;
+  tapsMain?: number;
+  tapsPerSecond?: number;
+};
+
+export type TypingFeelMachine = { ready: boolean; venv?: boolean; ffmpeg?: boolean; problems: string[]; setupCommand?: string };
+
+/** POST sources/check: the §3.8 upload rules on one uploaded take. */
+export type TypingFeelUploadCheck = {
+  ok: boolean;
+  errors: string[];
+  warnings: string[];
+  notes: string[];
+  rules: TypingFeelUploadRule[];
+  source: TypingFeelTakeFacts;
+  machine?: TypingFeelMachine;
+  message?: string;
+};
+
+export type TypingFeelJobPermissions = { check: boolean; format: boolean; accept: boolean; discard: boolean; upload: boolean; draft: boolean };
+
+export type TypingFeelCapabilities = {
+  recipes: string[];
+  machine: TypingFeelMachine;
+  upload: {
+    formats: string[];
+    sampleFormats: string[];
+    sampleRates: number[];
+    channels: number[];
+    minSeconds: number;
+    maxSeconds: number;
+    maxBytes: number;
+    minUsableTaps: number;
+    usableWithinDb: number;
+    usableGapMs: number;
+    fullScale: number;
+    noiseFloorDbfs: number;
+    tapsPerSecond: number;
+    sourceTags: string[];
+  };
+  timeoutSeconds: number;
+  publishedOwnerScore: number;
+  defaultLicence: string;
+  running: string | null;
+  permissions: TypingFeelJobPermissions;
+  requiredPermissions: Record<keyof TypingFeelJobPermissions, string>;
+};
+
+export type TypingFeelJobStatus = "queued" | "running" | "succeeded" | "failed" | "accepted" | "discarded";
+
+export type TypingFeelJobSource = { assetId: string; assetVersionId: string; title: string; fileName: string; sha256: string; byteSize: number };
+
+export type TypingFeelJob = {
+  jobId: string;
+  recipe: string;
+  status: TypingFeelJobStatus;
+  failure: null | { kind: string; message: string; errors?: string[]; setupCommand?: string };
+  source: TypingFeelJobSource;
+  set: { id: string; name: string; family: string | null };
+  createdAt: string;
+  createdBy: string;
+  startedAt: string | null;
+  finishedAt: string | null;
+  exitCode: number | null;
+  accepted: null | { setId: string; name: string; family: string; status: string; ownerScore: number; assetId: string; assetVersionId: string; folder: string; acceptedAt: string; row: TypingFeelSet };
+};
+
+export type TypingFeelReportFile = {
+  file: string;
+  set: "key" | "space";
+  durationMs: number;
+  peakDbfs?: number | null;
+  truePeakDbtp?: number | null;
+  lufsMMax?: number | null;
+  riseMs?: number | null;
+  mainStrikeMs?: number | null;
+  leadIn?: boolean;
+  tickDb?: number | null;
+  energyAfter120msPct?: number | null;
+  stereoCorrelation?: number | null;
+  phaseWarning?: boolean;
+  gates?: Record<string, boolean>;
+};
+
+/** report.json of keys natural (typing-feel/natural-report-1); only what the page reads. */
+export type TypingFeelFormatReport = {
+  status: "formatted" | "refused";
+  upload?: TypingFeelUploadCheck;
+  warnings: string[];
+  counts?: { key: number; space: number };
+  minimum?: { key: number; space: number };
+  acceptAllowed?: boolean;
+  taps?: { found: number; usable: number; main: number };
+  lengthsMs?: { key: [number, number] | null; space: [number, number] | null };
+  loudness?: { min: number | null; max: number | null; spreadDb: number | null; truePeakMaxDbtp: number | null; peakMaxDbfs: number | null };
+  leadIns?: { file: string; set: string; mainStrikeMs: number; tickDb: number | null }[];
+  gates?: { pass: boolean; failed: string[] };
+  files?: TypingFeelReportFile[];
+  preview?: { durationMs: number; lufsMMax?: number | null; truePeakDbtp?: number | null; endLevelDb?: number | null; fadeOutMs?: number };
+  ab?: { rawCut?: { lufsI: number | null; seconds: number; wpm: number; recipe?: string }; natural?: { lufsI: number | null; seconds: number; wpm: number; recipe?: string } };
+  seconds?: number;
+  accept?: { ownerScore: number; status: string; reason: string | null };
+};
+
+export type TypingFeelJobView = {
+  job: TypingFeelJob;
+  log: string;
+  report: TypingFeelFormatReport | null;
+  elapsedSeconds: number | null;
+  timeoutSeconds: number;
+  filesBase: string;
+};
+
+export type TypingFeelJobListEntry = {
+  jobId: string;
+  status: TypingFeelJobStatus;
+  recipe: string;
+  source: TypingFeelJobSource;
+  set: { id: string; name: string; family: string | null };
+  createdAt: string;
+  finishedAt: string | null;
+  failure: null | { kind: string; message: string };
+  accepted: null | { setId: string; assetVersionId: string; status: string };
+  counts: { key: number; space: number } | null;
+  acceptAllowed: boolean | null;
+};
+
+export type TypingFeelAcceptInput = { setId: string; name: string; family: string; licence: string; ownerScore: number; reason?: string; note?: string };
+
+export type TypingFeelAcceptResult = { job: TypingFeelJob; row: TypingFeelSet; version: { assetVersionId: string; assetId: string; contentFingerprint: string } };

@@ -3,6 +3,7 @@ import { renderSharedOverview } from "../shared-overview";
 import { renderPhaseBTypingContent } from "../space-typing-typing-content-phase-b";
 import { attachProductionPreviewClassification } from "../v2/preview/preview-classification";
 import { attachRoleAwareActionGates } from "../v2/security/permission-gates";
+import { renderTypingFeelAddSoundSet } from "../typing-feel/add-sound-set";
 import { renderTypingFeelKeyboardSounds } from "../typing-feel/keyboard-sounds";
 import { renderTypingFeelRelease } from "../typing-feel/release";
 import { TYPING_FEEL_ROUTES } from "../typing-feel/routes";
@@ -26,10 +27,10 @@ export const sharedArea: AdminArea = {
       { label: "Learning Content", path: LEARNING_CONTENT, icon: "Aa", description: "Browse shared vocabulary and typing texts. Read only." },
     ],
   }, {
-    // Add sound set (/admin/shared/keyboard-sounds/new) joins this group in G7 (P12: no dead routes).
     id: "typing-feel", label: "Typing Feel", description: "Keyboard sounds and typing effects every game shares: edit a draft, review it, publish it to all games.",
     items: [
       { label: "Keyboard Sounds", path: TYPING_FEEL_ROUTES.keyboardSounds, icon: "◖", description: "Order, hide, rename and choose the default key-sound set for every game." },
+      { label: "Add sound set", path: TYPING_FEEL_ROUTES.addSoundSet, icon: "+", description: "Upload a take, Format it (natural), listen A/B, score it and add it to the draft." },
       { label: "Typing Effects", path: TYPING_FEEL_ROUTES.typingEffects, icon: "✧", description: "Default typing-effect style, intensity, size and key volume for new players." },
       { label: "Release & History", path: TYPING_FEEL_ROUTES.release, icon: "↶", description: "Live revision, Git and Drive status, the draft, Publish and Rollback with audit." },
     ],
@@ -39,6 +40,7 @@ export const sharedArea: AdminArea = {
     if (path === LEARNING_CONTENT) return decorated(path, renderPhaseBTypingContent(navigate));
     // Role gates only: the explicit data-admin-permission of every Typing Feel button wins over label rules (§3.13).
     if (path === TYPING_FEEL_ROUTES.keyboardSounds) return attachRoleAwareActionGates(renderTypingFeelKeyboardSounds(navigate));
+    if (path === TYPING_FEEL_ROUTES.addSoundSet) return attachRoleAwareActionGates(renderTypingFeelAddSoundSet(navigate));
     if (path === TYPING_FEEL_ROUTES.typingEffects) return attachRoleAwareActionGates(renderTypingFeelTypingEffects(navigate));
     if (path === TYPING_FEEL_ROUTES.release) return attachRoleAwareActionGates(renderTypingFeelRelease(navigate));
     return null;

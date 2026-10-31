@@ -186,3 +186,67 @@
 @media (prefers-reduced-motion: reduce) {
   .tf-set-card, .tf-family, .tf-families-summary::before { transition: none; }
 }
+
+/* Add sound set (G7, §3.8) */
+.tf-add-layout { display: grid; gap: 14px; min-width: 0; }
+.tf-add-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; min-width: 0; }
+.tf-add-step[data-step="listen"], .tf-add-step[data-step="accept"] { grid-column: 1 / -1; }
+.tf-add-step .st-admin-panel-head h2::first-letter { color: var(--st-admin-accent); }
+.tf-rules-wrap summary { cursor: pointer; color: var(--st-admin-accent); font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.tf-rules { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: .66rem; }
+.tf-rules th, .tf-rules td { padding: 6px 8px; border-bottom: 1px solid rgba(111,231,255,.08); text-align: left; vertical-align: top; }
+.tf-rules thead th { color: var(--st-admin-faint); font-size: .56rem; letter-spacing: .1em; text-transform: uppercase; }
+.tf-rules tbody th { color: var(--st-admin-text); font-weight: 700; white-space: nowrap; }
+.tf-rules td { color: var(--st-admin-dim); }
+.tf-rules td.bad { color: #ff9aa5; white-space: nowrap; }
+.tf-rules td.warn { color: var(--st-admin-warn); white-space: nowrap; }
+.tf-upload-row, .tf-format-row, .tf-preview-row, .tf-accept-actions, .tf-ab-controls, .tf-job-status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-width: 0; }
+.tf-file { max-width: 100%; color: var(--st-admin-dim); font-size: .7rem; }
+.tf-file::file-selector-button { margin-right: 10px; padding: 7px 12px; border: 1px solid var(--st-admin-line-strong); color: #fff; background: rgba(95,227,255,.1); font: 700 .7rem/1 var(--st-admin-display); cursor: pointer; }
+.tf-busy { color: var(--st-admin-accent); font-size: .68rem; }
+.tf-check { display: grid; gap: 8px; padding: 10px 12px; border: 1px solid rgba(61,255,149,.3); background: rgba(61,255,149,.035); }
+.tf-check.bad { border-color: rgba(255,93,108,.4); background: rgba(255,93,108,.05); }
+.tf-check-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.tf-check-head strong { font: 800 .74rem/1.2 var(--st-admin-display); }
+.tf-check-lines { display: grid; gap: 4px; margin: 0; padding-left: 18px; color: var(--st-admin-dim); font-size: .66rem; line-height: 1.45; }
+.tf-check-lines li.bad { color: #ffc1c7; }
+.tf-check-lines li.warn { color: #ffdba2; }
+.tf-recipe { font-size: .66rem; }
+.tf-format-row .tf-hint { flex: 1 1 260px; }
+.tf-job-status code { font-size: .64rem; }
+.tf-log { max-height: 220px; margin: 0; padding: 8px 10px; overflow: auto; border: 1px solid rgba(111,231,255,.12); background: rgba(2,7,16,.8); color: #bfe6f2; font: 500 .62rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.tf-ab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tf-ab-take { display: grid; gap: 6px; align-content: start; padding: 12px; border: 1px solid rgba(111,231,255,.16); background: linear-gradient(160deg, rgba(9,21,42,.92), rgba(5,11,25,.92)); clip-path: polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); }
+.tf-ab-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.tf-ab-head strong { color: #fff; font: 800 .86rem/1.2 var(--st-admin-display); }
+.tf-loop-count { color: var(--st-admin-accent); font: 700 .66rem/1 var(--st-admin-display); font-variant-numeric: tabular-nums; }
+.tf-ab-controls [aria-pressed="true"], .tf-key-play[aria-pressed="true"] { border-color: var(--st-admin-accent); color: #fff; background: rgba(95,227,255,.14); }
+.tf-preview-row strong { font: 800 .74rem/1.2 var(--st-admin-display); letter-spacing: .06em; text-transform: uppercase; }
+.tf-preview-row .tf-hint { flex: 1 1 260px; }
+.tf-report-facts div { grid-template-columns: minmax(96px, 120px) minmax(0, 1fr); }
+.tf-sub { margin: 4px 0 0; color: var(--st-admin-faint); font: 800 .6rem/1.2 var(--st-admin-display); letter-spacing: .12em; text-transform: uppercase; }
+.tf-key-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(108px, 1fr)); gap: 6px; }
+.tf-key { display: grid; gap: 3px; justify-items: start; padding: 7px 8px; border: 1px solid rgba(111,231,255,.12); background: rgba(3,10,22,.62); }
+.tf-key.space { border-color: rgba(160,123,255,.26); background: rgba(160,123,255,.05); }
+.tf-key.has-warning { border-color: rgba(255,181,71,.38); }
+.tf-page .tf-key-play { min-height: 26px; padding: 3px 8px; font-size: .64rem; font-variant-numeric: tabular-nums; }
+.tf-key-length { color: var(--st-admin-text); font: 700 .66rem/1.2 var(--st-admin-display); font-variant-numeric: tabular-nums; }
+.tf-key-flag { color: var(--st-admin-warn); font-size: .58rem; }
+.tf-warnings summary { cursor: pointer; color: var(--st-admin-warn); font-size: .66rem; font-weight: 700; }
+.tf-warnings .tf-check-lines { margin-top: 6px; }
+.tf-accept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 14px; }
+.tf-field { display: grid; gap: 5px; align-content: start; min-width: 0; }
+.tf-field-label { color: var(--st-admin-faint); font-size: .58rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.tf-field .st-admin-input, .tf-field .st-admin-select { width: 100%; height: 34px; font-size: .76rem; }
+.tf-field textarea.st-admin-input { height: auto; min-height: 52px; padding: 7px 9px; resize: vertical; font: inherit; font-size: .74rem; }
+.tf-score-row { display: flex; align-items: center; gap: 10px; }
+.tf-page .tf-score-row .tf-score { width: 96px; font: 800 1rem/1 var(--st-admin-display); text-align: center; }
+.tf-accepted { display: grid; gap: 10px; min-width: 0; }
+.tf-accept-actions .danger { background: transparent; border-color: rgba(255,93,108,.3); color: #ff9aa5; }
+@media (max-width: 1180px) {
+  .tf-add-steps, .tf-ab { grid-template-columns: 1fr; }
+  .tf-accept-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .tf-accept-grid { grid-template-columns: 1fr; }
+}
