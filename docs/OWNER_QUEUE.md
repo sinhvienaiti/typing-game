@@ -13,6 +13,7 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
 | 3 | Wordwoven: dựng lại 6 nhà mái tranh trên Tripo (phiếu 129, khoảng 180 credit) hay giữ model hiện có | Tốn credit Tripo của chủ dự án | Đặt nhà hiện có, đợi ý tưởng map được ChatGPT duyệt |
 | 4 | Wordwoven: Draconis dùng bản v2 của Dragonhold (đã có khung xương) hay dựng bản riêng trên Tripo | Model mới cần Tripo | Gắn tạm bản v2 để có nhân vật, coi là nợ tới 8,5 |
 | 5 | Wordwoven: dời ngày xong map 1 từ 12/11 sang khoảng 15–16/11 | Lịch đã duyệt | Làm tiếp theo kế hoạch ba đợt |
+| 6 | **O1–O10** của `docs/games/QUALITY_RESCUE_2026-11-01.md` §3 đợt 3 và §4.2. Đề xuất của Claude ghi ngay trong bảng ở đó. Các việc chính: bỏ kiểu vẽ "đồ chơi" của Dragonhold để theo hướng painterly-realistic (O1); sửa dòng "giữ bloom" trong VFX_STANDARD để đạn Last Line hết nhòe (O4); màu phe địch của Last Line (O5); ô súng bản A hay C (O7); model Tripo nhân vật nữ, drone và 5 súng (210–300 credit) | Đổi hướng mỹ thuật đã duyệt; đụng tài liệu chuẩn; tốn credit Tripo | Làm phần không cần duyệt (đợt 1): D1–D4, L2–L4 vào main. L1 (bloom) để sẵn trên nhánh `ts-wave1-bloom`. Có O1 và O4 thì gộp ngay |
 
 ## Đã tự quyết (không cần chờ), ghi để chủ dự án biết
 
