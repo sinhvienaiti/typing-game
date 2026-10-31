@@ -23,6 +23,7 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
 |---|---|---|
 | 1 | Chủ dự án dựng model Tripo: 7 model Last Line, 6 mốc Dragonhold | Claude gom prompt và ảnh nguồn vào một file `docs/games/TRIPO_TODO.md` trước 9h |
 | 2 | Ký cuối cho chữ "sống" trên thẻ súng (hệ thống dùng chung) | Sau khi hai giám khảo cùng từ 9 |
+| 3 | Đính kèm ba ảnh nền vào ba cuộc chat ChatGPT để nó vẽ concept đè lên ảnh thật. Trình duyệt trong app không gửi được ảnh: trang https chặn ảnh từ máy, và phím dán giả lập không lấy được clipboard. Ảnh ở `games/<game>/art-src/_review/maps/map1-base-1280x720.png`; chat Dragonhold, Wordwoven, Last Line (link trong `docs/games/maps/*-CHATGPT_REVIEW.md`). Kéo thả ảnh vào chat rồi gõ: "Now paint the concept over this base image using your prompt" | Khoảng 1 phút mỗi game. Trong lúc chờ, Claude vẽ thử bằng Firefly với ảnh nền làm tham chiếu (lượt 1 của Dragonhold còn kiểu cũ của ảnh chụp, chưa đạt) |
 
 ## Đã tự quyết (không cần chờ), ghi để chủ dự án biết
 

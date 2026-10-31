@@ -1,29 +1,41 @@
-# Last Line: map concepts, stage by stage (01/11/2026)
+# Last Line: map concepts, stage by stage (01/11/2026, revision 2)
 
-> **For:** the owner, ChatGPT (review, then concept paintings), the map lane.
+> **For:** the owner, ChatGPT (art-director review, then one concept painting over a base image), the map lane.
 > **Game:** Last Line (`games/typing-survival`). Typed words load guns that hold one straight lane on a space station against the Black Hole Horde.
 > **Status:** concepts only. No code changed. Rules, sim and camera stay as they are; only what the player sees changes.
-> **Sources read:** `docs/SURVIVAL_MODE_PLAN.md`, `docs/BUILD_S1.md` (§6 foes, §7 hazards and boss, §8 chapter table), `docs/FEEL_PASS_S1.md`, `src/content/{chapter-1,stage-s0,rules,foes}.ts`, `src/view/scene.ts`, `src/view/models.ts`, the model manifest, parent `docs/games/ART_DIRECTION_2026-10-28.md` §1 and §4 (Lightbearer bible), `docs/games/MAP1_PRODUCTION.md` §3, `docs/games/PATH_QUALITY.md`, `docs/games/THIRD_PARTY.md`, the arena kit report `docs/codex-queue/125-report.md`, today's captures in `games/typing-survival/tmp/diag-0111/`.
-> **Art bar:** the owner's reference `games/dragon-hold/art-src/_refs/owner-epic-2026-10-28.webp` (a hero seen from behind, a colossal creature in the sky, a deep land running far away, warm low light). Every painting and every in-game capture is scored M (market scale, ART_DIRECTION §1.3) and Q; accepted at **M ≥ 8 and Q ≥ 8**. Everything the player reads is English. No code-drawn stand-ins for art.
+> **Revision 2 (01/11, after the critic's five fixes):** every screen coordinate is recomputed with one projection script; the battle frame shows **no sky and no horizon**; the gun cards sit at variant A (owner O7); the hero is the woman gunner with a support drone (owner); the Horde is purple (owner O5); life first, and creatures without a source are gone; the Tripo list follows what the battle frame shows; only verified free commercial-safe sources. **Map 1** (Chapter 1, stage 1, "First Shift") is complete and has a base image; the other maps are short.
+> **Sources read:** `docs/SURVIVAL_MODE_PLAN.md`, `docs/BUILD_S1.md` (§6 foes, §7 hazards and boss, §8 chapter table), `docs/FEEL_PASS_S1.md`, `src/content/{chapter-1,stage-s0,rules,foes}.ts`, `src/view/{scene,hud,probes}.ts`, the variant-A layout on branch `ts-wave1` (`hud.ts` `CARDS`), parent `docs/OWNER_QUEUE.md` (01/11), `docs/games/QUALITY_RESCUE_2026-11-01.md` (§3 L4, L7, §4), `docs/games/MONSTER_MODEL_INVENTORY.md` (§5, §6.1), `docs/games/FREE_ASSET_SOURCES.md` (§0, §9, §11), `docs/games/TRIPO_TODO.md`, `docs/games/ART_DIRECTION_2026-10-28.md` §1 and §4, `docs/games/MAP1_PRODUCTION.md` §3, `docs/games/VFX_STANDARD.md`, the arena kit report `docs/codex-queue/125-report.md`, a play-host capture of `c1-s1` at 1280 × 720 (01/11).
+> **Projection script:** `games/typing-survival/tmp/map-concepts/project.mjs` (not tracked). It copies the camera of `src/view/scene.ts` and prints every table in §1 and §4 (`node project.mjs`); `--json --mvg` writes the base image's draw files; `place.mjs` beside it places the other maps' landmarks (§6); `capture.mjs` takes the frame on the play host and `build-base.sh` rebuilds the base image from it (the raw frames were pruned after use, so capture again first). Checked against the game's own projection: the foes reported by `__survival.foes()` land on the script's rows to 1–2 px.
+> **Art bar:** the owner's reference `games/dragon-hold/art-src/_refs/owner-epic-2026-10-28.webp` (a hero seen from behind, something colossal, deep space falling away, warm low light) and the board of commercial references (ART_DIRECTION §1.3). Acceptance is **8.5** for everything the player sees (AGENTS.md; "chấm C" in QUALITY_RESCUE: two blind independent judges both ≥ 8.5, in game at 1280 × 720 and 1920 × 1080, High and Ultra, beside commercial references). Everything the player reads is English. No code-drawn stand-ins for art.
 
 ---
 
 ## 0. How to use this file with ChatGPT
 
-1. Paste §1 (fixed rules) and one stage section at a time. Ask: "Review this map concept as a senior art director of a commercial sci-fi action game. Keep the gameplay layout and camera. Is the landmark strong enough? Does anything hide play? Propose a better idea if you have one."
-2. When the concept is agreed, ask for the painting with the stage's prompt. Attach `games/typing-survival/art-src/concepts/b-lightbearer-fight.png` with the line "Use the attached image only to keep the same heroine, sentinels, foes, materials and colours."
-3. Reject and ask again when: the deck is not a straight lane from bottom centre to a gate near the top; the heroine is big (more than about 12% of image height); the landmark sits over the deck; the deck just ahead of the heroine is bright; any text, number, logo or UI appears; the foes are not black glass with orange cracks. At most three tries a painting, then keep the best and write down what is missing.
+1. Send the paste-ready message `docs/games/maps/typing-survival-CHATGPT_MESSAGE.md` with the base image `games/typing-survival/art-src/_review/maps/map1-base-1280x720.png` attached. Its legend is `map1-base-legend.md` in the same folder.
+2. ChatGPT first reviews map 1 as a senior art director, then paints **over the base image**. The base fixes the camera, the lane, the gate band, the Line, the heroine and drone, the landmark blocks and the grey HUD zones. The painting decides only light, materials, mood and scale.
+3. Optional second attachment, for identity only: `games/typing-survival/art-src/ui/screens-epic/results-lose-bg.png` (the heroine and her white-gold drone with the cyan eye).
+4. Reject and ask again when the painting:
+   - moves the lane, the gate sill, the Line, the heroine or a grey zone;
+   - shows a horizon, a sky band or a skyline;
+   - draws the heroine bigger than her block (68 px at 720p);
+   - puts anything bright behind a grey zone, under the word line or right behind the lane;
+   - paints foes that are not black glass with purple veins;
+   - uses red anywhere except a foe attack;
+   - shows any text, number, logo or UI.
+
+   At most three tries per painting, then keep the best and write down what is missing.
 
 ---
 
-## 1. Fixed rules for every map (the sim and the camera do not change)
+## 1. Fixed rules for every map
 
-### 1.1 The field
+### 1.1 The field (the sim does not change)
 
-- One straight lane, **24 m wide, 40 m long** (`FIELD` in `src/content/rules.ts`). x runs across (−12 … +12), z runs away from the heroine.
-- **Foes enter over the gate at z 40**, across the full width, in packs of 4–12 (block, wedge or line). Packs wait in a queue up to z 52. Five vanguard packs (6–8 foes) already stand at z 18, 26, 34, 42 and 50 when a fight starts.
+- One straight lane, **24 m wide, 40 m long** (`FIELD` in `src/content/rules.ts`). x runs across (−12 … +12), z runs away from the heroine, y is up.
+- **Foes enter over the gate at z 40**, across the full width, in packs of 4–12 (block, wedge or line). Packs wait in a queue up to z 52. Five vanguard packs (6–8 foes) stand at z 18, 26, 34, 42 and 50 when a fight starts.
 - **The defended point is the Line at z 2.4.** A foe that reaches it costs armour. From z 14 in (chapter stages) every foe bleeds armour; the near zone is z ≤ 7.
-- **The heroine stands at z 0**, centre. Her guns are the sentinels beside her; each bay (a DOM panel) feeds one sentinel.
+- **The heroine stands at z 0**, centre. Bay 1's gun is in her hands, bay 2's gun is on her drone (§1.7).
 - Hazards and objectives that need room on the map:
   - **Rift**: a crack opens at the foot of the left or right wall (seeded), z 9–13, 2.5 s of warning, then 8 foes pour out.
   - **Gravity well**: centred at x ±4 (seeded), z 18, radius 8 m.
@@ -32,634 +44,544 @@
   - **Pack Leaders**: big foes with a gold beacon column.
   - **Boss**: stands at z 22, then 15, then 8.
 
-### 1.2 The camera and the screen at 1280 × 720
+### 1.2 The camera at 1280 × 720 (recomputed)
 
-The fight camera stays: pitch 36° below the horizon, vertical FOV 42°, about 20 m up and 18 m behind the heroine (`src/view/scene.ts`). The horizon is 15° **above** the top edge of the screen. Everything beside the lane is therefore seen looking **down**: the side areas show what lies below and beside the causeway, from deck level near the lane down to kilometres of depth.
+The fight camera stays as it is (`src/view/scene.ts`): pitch 36° below the horizon, vertical FOV 42° (horizontal 68.6°), **19.8 m up and 17.75 m behind the heroine**.
 
-Measured from the current camera:
+**Decision: no sky in battle.** Every view ray points down: 15.0° below horizontal at the top centre, 12.6° at the top corners, 36° at the centre, 57° at the bottom. The horizon never enters the frame, so **no battle painting shows a horizon, a sky band or a skyline**. Beyond the deck's far end the frame shows only what lies below the causeway: the abyss, the accretion disk, the black hole's shadow ahead and below, and structures rising from far below. The sky belongs to the title, the stage card and the 2.5 s intro sweep (§2).
 
-| Depth z | Screen y | Deck spans x |
+The deck plane leaves the top edge at z 56.2. At the gate (z 40) the top edge is only **4.3 m** above the deck, and at z 30 only 7.0 m: anything taller there leaves the frame.
+
+| Depth z | What | Screen y | Deck x (lane ±12) | Wall posts x (±12.73) |
+|---:|---|---:|---|---|
+| 56.2 | top edge | 0 | 482–798 | 473–807 |
+| 52 | queue end | 16 | 475–805 | 465–815 |
+| 40 | gate | 72 | 447–833 | 435–845 |
+| 30 | | 135 | 416–864 | 403–877 |
+| 22 | boss P1 | 203 | 383–897 | 367–913 |
+| 18 | well | 245 | 363–917 | 346–934 |
+| 13 | rift top | 307 | 332–948 | 313–967 |
+| 9 | rift foot | 368 | 302–978 | 281–999 |
+| 7 | near zone | 404 | 285–995 | 263–1017 |
+| 4.4 | word line, near end | 455 | 259–1021 | 236–1044 |
+| 2.4 | the Line | 500 | 237–1043 | 213–1067 |
+| 0 | heroine's feet | 562 | 207–1073 | 181–1099 |
+| −4.9 | bottom edge | 720 | 130–1150 | 98–1182 |
+
+Heights on screen, standing on the lane's centre line:
+
+| What | Screen y | Height |
+|---|---|---:|
+| the heroine, 2.6 m, at z 0 | 494–562 | 68 px |
+| a 1.8 m person at z 0 | 515–562 | 46 px |
+| a wall lamp post, 1.82 m, at the Line | 454–500 | 46 px |
+| a 2 m foe at the gate | 40–72 | 32 px |
+| a 2 m foe at the queue end | −13–16 | 29 px |
+| the boss, 6 m, at z 22 | 76–203 | 127 px |
+
+**The frame covers little ground beside the lane.** At deck level it reaches about ±15 m from the centre at the bottom edge and ±49 m at the top edge. Lower down the view widens, so a landmark must be far and low:
+
+| Ground point (x, z) | Anything higher than this leaves the frame top | Screen x there |
 |---|---:|---|
-| 52 (queue end) | 16 | 475–805 |
-| 40 (gate) | 72 | 447–833 |
-| 30 | 135 | 416–864 |
-| 22 (boss P1) | 203 | 383–897 |
-| 18 (well) | 245 | 363–917 |
-| 13 (rift top) | 307 | 332–948 |
-| 7 (near zone) | 404 | 285–995 |
-| 2.4 (the Line) | 500 | 237–1043 |
-| 0 (heroine's feet) | 561 | 207–1073 |
-| −4.9 (bottom edge) | 720 | 129–1151 |
+| −200, 300 | −65 m | 29 |
+| −600, 900 | −226 m | 6 |
+| 700, 1,250 | −320 m | 1,176 |
+| −2,289, 5,424 | −1,438 m | 232 |
+| 300, 100 | (outside the frame at any height) | 3,112 |
+| 300, 400 | (outside the frame at any height) | 1,337 |
+
+So a landmark is **seen from above**: its crown sits well below the causeway, or its arms leave the frame top. Revision 1's landmarks "300 m to the side, 400 m tall, filling the upper corner" are outside the frame.
+
+**Tall things at the deck edge lean outward on screen, into the gun cards.** A 10 m mast at x 14, z 2 runs from (1115, 510) to (1244, 201), across gun card 2. A 6 m pylon at x 14, z 12 runs from (1008, 322) to (1048, 176). So nothing along the lane stands taller than the parapet's lamp posts (1.82 m) from z −5 to z 30.
+
+### 1.3 HUD and gun cards (variant A, owner O7)
+
+The gun cards moved up beside the lane, outside both walls (branch `ts-wave1`, `hud.ts` `CARDS`): bays 1–2 from 30 % of the height, bays 3–4 from 47 %, 2.5 % in from the screen's edge. A card is 230 × 100 px at 720p, a sealed bay's chip 132 × 34 px. The top HUD was measured on the play host.
+
+| Zone | x | y |
+|---|---|---|
+| Armour (HULL) bar | 14–376 | 12–58 |
+| Stage clock | 386–543 | 12–58 |
+| Kill counter | 1028–1178 | 12–80 |
+| Settings gear and Sound speaker | 1188–1268 | 12–48 |
+| Word line (word and meaning), over the deck | about 500–780 (the width follows the word; at its widest the game protects 372–908) | 352–458 |
+| Gun card 1 (bay 1, the heroine's gun), its tab above | 32–262 (tab 44–86) | 216–316 (tab 176–216) |
+| Gun card 2 (bay 2, the drone's gun), its tab above | 1018–1248 (tab 1194–1236) | 216–316 (tab 176–216) |
+| Bay 3 chip (a full card from stage 5) | 32–164 | 338–372 |
+| Bay 4 chip | 1116–1248 | 338–372 |
+
+**Free zones for a landmark's bright part:**
+- the upper-left band, x 0–440, y 58–176;
+- the upper-right band, x 840–1280, y 80–176.
+
+**Other areas:**
+- The strips between a card and the deck edge are narrow (40–100 px).
+- The lower side areas below the chips (y 372–720) sit next to the player's eye: keep them dark and slow.
+
+### 1.4 Screen map at 1280 × 720 (map 1)
 
 ```text
-y   0 +-[hull bar 15-375][timer 388-545]--(free sky 545-1020)--[kills 1020-1175][gear]-+
-      |                     \  horde queue + black hole shadow  /                     |
-y  72 |   LEFT WEDGE         \======= gate (z 40), 386 px =====/        RIGHT WEDGE    |
-      |   landmark box        \                                /     landmark box     |
-      |   x 0-400, y 80-330    \        boss z 22 (y 203)     /   x 880-1280, y 80-330|
-y 245 |                         \       well z 18 (y 245)    /                        |
-y 307 |   rift side ->           \     rift z 9-13          /          <- rift side   |
-y 400 |                           \ [ word line 400-456 ]  /                          |
-y 500 |   ------------------- THE LINE (z 2.4, x 237-1043) -------------------        |
-y 561 | [locked 40-200][bay 1 235-465]   HEROINE   [bay 2 815-1045][locked 1080-1240] |
-y 720 +------------------------------------------------------------------------------+
+y   0 +[HULL 14-376][CLOCK 386-543]   muster ground z 40-56   [KILLS 1028-1178][gear 1188-1268]+
+      |  Broken Ring arc  shadow lobe  \  x 448-832, y 0-70   / shadow lobe       shuttles      |
+y  72 |  x 0-470,         x 192-470     \== gate sill z 40 ==/  x 810-1088        x 1109-1178   |
+      |  y 0-172                         \ deck x 447-833    /                    y 110-136     |
+y 176 | [tab1]                            \                 /                          [tab2]  |
+y 216 | [GUN CARD 1 32-262, 216-316]       \ boss z 22 y 203/      [GUN CARD 2 1018-1248, 216-316]|
+y 307 |                                     \ rift z 9-13   /                                    |
+y 338 | [CHIP 3 32-164]   outriggers   [WORD LINE 500-780, 352-458]   outriggers   [CHIP 4]       |
+y 404 |   disk far below                    near zone z 7                 disk, cross-span     |
+y 500 |   ------------------- THE LINE  z 2.4, x 235-1045, y 495-504 -------------------          |
+y 562 |                  HEROINE x 623-657, y 484-571 | DRONE x 668-704, y 486-518               |
+y 720 +---------------------------------------------------------------------------------------+
 ```
 
-Rules that follow from this:
-- **The landmark lives in a side wedge** (upper-left or upper-right box) or in the free sky strip above the gate. Nothing big ever stands on the deck.
-- Tall things at the deck edge lean **outward** on screen (they cannot cover the lane). A 10 m tower at x 14, z 2 runs from (1116, 509) to (1244, 201); a 30 m pylon at z 20 rises from (951, 245) up and out of the top right of the frame.
-- **The deck under the word line (y 400–456, z 4.4–7) stays dark**: at most +0.02 luma over today (FEEL_PASS_S1 §4.1). Light pools from guns are the only bright things there.
-- Light from the sky must not wash the horde out (the `f8` grade: ≤ 10 %). The brightest region of each map is in a wedge, never behind the lane.
-- The heroine at 2.8 m stands from y 487 to y 561 (74 px). Her sentinels at 1.6 m height, ±1.5 m, sit near (584/696, 520). Keep the deck round her dark and quiet except her own glyph ring.
-- Map budget: ≤ 60 draw calls for the whole frame on High (MAP1_PRODUCTION TS-M1-08); models seen up close ≥ 2,000 triangles (`MODEL_QUALITY.md`).
+### 1.5 Rules that follow
 
-### 1.3 One idea for all of Chapter 1: a causeway over the disk
+- **The landmark's brightest region lives in a free band (§1.3)**, never behind a card, never right behind the lane, never in the lower side areas.
+- **The deck under and round the word line stays dark** (z 4.4–10, y 340–456): at most +0.02 luma over today (FEEL_PASS_S1 §4.1). Light pools from the guns are the only bright things there.
+- Light from the abyss must not wash the horde out (the `f8` grade: ≤ 10 %).
+- No mast, pylon or tower taller than 1.82 m along the lane from z −5 to z 30 (§1.2). Tall structures live far out and far below.
+- The heroine stands from y 494 to 562 (68 px). The drone sits at her right shoulder (x 668–704, y 486–518). The deck round her stays dark and quiet except her own glyph ring.
+- Budgets:
+  - ≤ 60 draw calls for the whole frame on High (MAP1_PRODUCTION TS-M1-08);
+  - models seen up close ≥ 2,000 triangles (`MODEL_QUALITY.md`);
+  - the heroine ≥ 20,000 triangles at High (QUALITY_RESCUE §4.3).
 
-Chapter 1 (in game "CHAPTER 1 · VC-7 CORRIDOR") is drawn as the **VC-7 causeway**: a 4 km bridge of graphite steel and pale ancient stone that runs from the station's citadel out over the accretion disk toward the black hole. The Horde crawls out of the black hole's shadow and walks the causeway toward the citadel.
+### 1.6 Colours reserved for signals
 
-- **Looking down past the deck edge you see the disk below**: a sea of orange-gold plasma spiralling far beneath the bridge, lit from below, crossed by the station's lower decks, pylons and other causeways falling away into haze. This is how a top-down camera gets "epic" (ART_DIRECTION §1.2: the field stands on a high plateau and its edge is a cliff). Today that space is a flat poster.
-- **Each stage is a different span of VC-7**, one step farther from the citadel (presentation only; the sim field is the same). The heroine pushes the Line out span by span to the Breach where the Warden holds the gate open. So the disk grows, the ruins break more and the light warms from stage 1 to stage 10, and no two stages look alike.
-- **Stage intro sweep** (view only, during the stage card): 2.5 s from a low camera over her shoulder, aimed at the stage's landmark, then down into the fight view. The title camera blend in `scene.ts` already does this move. Any key skips; reduced motion cuts straight.
+| Colour | Means | Rule |
+|---|---|---|
+| Purple, violet | the Horde: foe veins, rifts, nests, glints in the queue (owner O5) | no other purple near the lane |
+| Red | a foe attack only (the boss's slam lane) | today's red Line goes cyan-white; the Mortar's ring goes pale orange with a white rim (VFX_STANDARD §3.6.3) |
+| Gold | Pack Leaders: beacon column, lane mark, crest | other gold stays low near the lane |
+| Cyan | the heroine, her drone, the Line, the Pulse Gun, friendly lamps | — |
+| Orange | the Heat Beam | the disk's orange-gold lives only in the abyss, never on the deck |
+| Blue | Shield Guards' shields | — |
+| White-blue / amber / vermilion | Rail Gun / Scatter Gun / Star Mortar | — |
 
-### 1.4 Shared kit for Chapter 1 (referred to by K-numbers below)
+Today's orange-and-black hazard stripes on both walls break this table (they are the loudest pixels and match the foes' cracks). They go.
 
-| Id | Piece | Size and count | Comes from |
+### 1.7 The hero group (owner, 01/11)
+
+- **The heroine** (working name Lightbearer) is a woman gunner in white-gold ceramic armour over graphite, with a dark helmet, a cyan visor slit and a navy three-panel cape with gold filigree.
+  - Heroic scale 2.6 m: 68 px at 720p, 100 px at 1080p.
+  - Seen from behind and about 46° above, so her cyan visor faces the foes and the player never sees it. The cape, the cyan seams down her back and the helmet's crest fins carry her read.
+  - She **holds bay 1's gun** (the left card) and fires it.
+- **Five hand-held guns** (QUALITY_RESCUE §4.4 prompts): Pulse Gun, Heat Beam, Scatter Gun, Rail Gun, Star Mortar.
+- **The support drone** (0.9–1.0 m) floats at her **right shoulder**.
+  - It **fires bay 2's gun** (the right card) from its own emitter.
+  - It also does her support work: her work light, the repair pod.
+- **View only:** the sim, the trial's golden trace and the chapter hashes do not change.
+- **Who builds them:** the owner makes **7 Tripo models** on the Tripo web (heroine, drone, 5 guns; `TRIPO_TODO.md` rows 7–13).
+- **Open (not decided):** from stage 5, bays 3 and 4 open, and nothing shoots them yet. All bays fire on the same tick, so one pair of hands cannot hold two guns. Choices for the owner: (a) a second drone at her left shoulder, (b) a shoulder-mounted launcher. This file does not paint bays 3–4.
+
+### 1.8 The Horde (owner O5; reuse before new)
+
+- **Look:** black glass and dark chitin with glowing **purple-violet veins**, which replace the orange cracks (QUALITY_RESCUE L7).
+- **Each kind keeps its read:**
+  - Swarm: small.
+  - Scout: winged.
+  - Brute: broad.
+  - Shield Guard: a large faceted blue shield.
+  - Splitter: round, with seams.
+  - Pack Leader: 1.25 × a Brute, gold crest and beacon.
+- **Models** (`MONSTER_MODEL_INVENTORY.md` §6.1):
+  - The main horde is Space's `cosmic` family: 14 models in void purple, work S. Their gold trim is toned down by the shader, except on Leaders.
+  - Machine foes: Space's unused `drone`, `lock-on` and `bomb`.
+  - Boss candidates for the Warden: `tyrant-g05` or `warden-shadow`.
+  - Until then, today's five `rainbow-*` copies, tinted.
+- **No new Tripo foe for Chapter 1.**
+
+---
+
+## 2. One idea for all of Chapter 1: a causeway over the disk
+
+Chapter 1 (in game "CHAPTER 1 · VC-7 CORRIDOR") is drawn as the **VC-7 causeway**: a 4 km bridge of graphite steel and pale ancient stone. It runs from the station's citadel (behind the camera) out over the accretion disk toward the black hole, which lies **ahead and below** the causeway's far end. The Horde crawls out of the black hole's shadow and walks the causeway toward the citadel.
+
+- **In battle the player looks down past the deck edges into the abyss.** Far below, a sea of orange-gold plasma spirals. The black hole's shadow shows ahead and below, on both sides of the gate band. Station structures rise out of the depth: rings, monoliths, lower spans.
+  - This is how a camera that looks down gets "epic" (ART_DIRECTION §1.2: the field stands high and its edge is a drop).
+  - There is no sky in this frame (§1.2).
+- **Each stage is a different span of VC-7**, one step farther from the citadel. This is presentation only; the sim field is the same. The disk grows, the ruins break more and the light warms from stage 1 to stage 10.
+- **Stage intro sweep** (view only, during the stage card): 2.5 s from a low camera over her shoulder, aimed at the stage's landmark, then down into the fight view.
+  - This is where the sky, the black hole's full disc and the landmark's crown are seen.
+  - The title camera blend in `scene.ts` already does this move. Any key skips it; reduced motion cuts straight.
+
+### 2.1 Shared kit for Chapter 1 (K-numbers below)
+
+Only sources that are ours or verified free for commercial use (`FREE_ASSET_SOURCES.md` §0, §9):
+- Quaternius kits use a custom licence (QAL) and wait for the owner to accept it.
+- Kenney and KayKit are grey-box only.
+- Sketchfab and Fab are not used.
+
+| Id | Piece | Seen in the battle frame | Source |
 |---|---|---|---|
-| K1 | **Deck surface**: long graphite plates and pale stone bands running along the lane, inset seams, worn centre, dim cyan glyph inlays | 24 × 46 m, plates 6 × 1.5 m along z | `art-src/arena-v2/deck-tile.png` (ticket 125, self-scored 8, **not judged, not wired**) as albedo, plus a free CC0 PBR stone and worn-metal set for normal and roughness detail; trim-sheet strips along the edges. Anisotropic filtering 8–16× so the far deck stays sharp |
-| K2 | **Deck decals**: scorch with orange cracks, black glass shards, glyph ring, stone crack | 12–20 a stage, seeded, none inside the word-line box | `art-src/arena-v2/deck-decals-alpha-v3.png` (125) |
-| K3 | **Parapet**: 1 m stone wall capped with steel, a cyan running light that pulses toward the heroine | both sides, 46 m | real mesh from a free CC0 PBR sci-fi modular kit (wall, cap, post); `deck-edge-alpha-v3.png` (125) as look reference; the running light is an emissive strip (today's conduit shader on a real mesh) |
-| K4 | **Edge pylons**: slim stone-and-steel pylons outside the parapet, leaning out, a cyan lamp and a light banner each | 10 a side, every 4–5 m, 6–9 m tall | one Tripo model by the owner (or a CC0 kit assembly), instanced; banner is a cloth-like light shader |
-| K5 | **Bastion dais** (foreground): semicircular stone dais under the heroine, radius 10 m, her glyph ring inlaid; two bastion towers at x ±14, z 1–3, 10–12 m tall, leaning out of the bottom corners | 1 dais, 2 towers | towers: Tripo by the owner (seen up close, ≥ 2,000 triangles); glyph ring from `deck-decals-alpha-v3.png` |
-| K6 | **Underside**: the causeway's truss, 6–10 m deep, visible at the inner edge of the wedges; cyan coolant falls pouring off broken edges into the void | truss along both edges; 2–4 falls a stage | CC0 kit girders, instanced; falls are a flow shader (VFX standard) |
-| K7 | **Midground structures**: monoliths, pylons and station-ring bases rising out of the abyss 150–600 m beside the causeway | 4–6 a stage | near ones (≤ 300 m): Tripo or CC0 kit composites; farther ones: painted alpha cards from ChatGPT, 2–3 layers each for parallax; `wall-left-alpha-v3.png`, `wall-right-alpha-v3.png` (125) are candidates |
-| K8 | **Far layer**: titanic broken rings and other causeways spiralling down toward the disk, 1–5 km away | 1–2 cards a stage | `art-src/arena-v2/far-ring-alpha-v3.png` (125) plus new ChatGPT cards per stage |
-| K9 | **Sky and abyss**: black hole shadow beyond the gate, lensed photon ring, accretion disk as a **world-space ring mesh below and ahead of the causeway** (plasma streams, Doppler-bright side, inner glow), starfield only in the top corners | 1 | shaders (allowed when they meet `VFX_STANDARD.md`); today's `SKY_FRAGMENT` is the start; `art-src/arena-v2/sky-disk.png` (125) is the colour target; starfield cubemap from a free tool whose output we own, or a CC0 one |
-| K10 | **Atmosphere**: height fog layers in the abyss, dust motes in the light, light shafts from the disk, heat shimmer at the gate | per stage | Kenney Particle Pack and Smoke Particles (CC0, already in `THIRD_PARTY.md`) for motes and smoke; three.js examples (MIT) for god rays and lens flare; fog is a shader |
-| K11 | **Horde reservoir**: the Horde massing on the causeway beyond the gate in the black hole's shadow, orange crack glints | 150–300 silhouettes, z 40–80 | impostor cards rendered from the five rainbow models in `public/assets/typing-survival/models/` (or instanced lowest LOD), one draw call |
-| K12 | **Heroine group**: the Lightbearer (woman gunner, white-and-gold ceramic armour over graphite, cyan visor, navy cape with gold seams), one sentinel gun-drone per bay at her shoulders (Pulse cyan, Heat Beam orange, Scatter amber, Rail white-blue, Star Mortar vermilion), and **a small support drone** above her right shoulder that carries her work light and delivers the repair pod | 2.6–2.8 m heroic scale (65–74 px at 720p) | Tripo by the owner from `art-src/models-src/lightbearer-{front,back,left}.png` and `sentinel-*.png` (ticket 156; not built yet); support drone needs a new source picture; clips from the CC0 libraries already proposed in `THIRD_PARTY.md` (Quaternius UAL, Mesh2Motion; waiting for the owner's OK) |
-| K13 | **Ambient life**: void mantas gliding far below, debris shoals, evacuation shuttles (tiny lights) crossing the top corners, maintenance drones on the parapets | 2–3 mantas, 1 shoal (instanced), 3–6 shuttles, 2–4 drones | mantas: painted cards or one Tripo model; rocks: CC0 instanced; shuttles: light sprites |
-| K14 | **Light rig**: key = the disk, low and **from ahead and below** (back light and up light, warm); fill = navy from above; the heroine's cyan; image-based light from the sky so every model gets rim light; one shadow-casting light on the near deck (High and Ultra) | 1 | three.js (MIT): DirectionalLight, PMREM from the sky; today's light pools stay |
+| K1 | **Deck**: long graphite plates and pale stone bands along the lane, inset seams, worn centre, dim cyan glyph inlays; 24 × 60 m in frame, plates 6 × 1.5 m | always, the frame's centre | Our own Blender mesh. Albedo: ticket 125's `art-src/arena-v2/deck-tile.png` (ours; not judged yet). Normal and roughness: ambientCG metal plates and painted metal (CC0). Anisotropy 8–16× so the far deck stays sharp |
+| K2 | **Decals**: scorches, black glass shards with purple veins, stone cracks, her glyph ring | 12–20 a stage, none under the word line | Ticket 125's `deck-decals-alpha-v3.png` (ours), shard veins re-tinted to purple |
+| K3 | **Parapet**: 1 m stone wall capped with steel, lamp posts 1.82 m (as today), a cyan running light pulsing toward the heroine | both edges, the whole length | Our own Blender mesh with ambientCG materials (CC0). Ticket 125's `deck-edge-alpha-v3.png` is a look reference. The light is an emissive strip |
+| K4 | **Span gate**: a raised sill across the deck at z 40 (0.6 m) and two squat bastions outside the parapets (2.5 m; they would leave the frame if taller) | always, the top band | Blender + ambientCG. A Tripo bastion only if this misses 8.5 at its 90 px size |
+| K5 | **Bastion dais**: dark stone under the heroine, z −8 … 2.4; **the Line is its front lip** (a thin cyan-white light); her glyph ring inlaid | always, the bottom third | Part of K1. Glyph ring from `deck-decals-alpha-v3.png` |
+| K6 | **Outriggers**: buttresses under the deck edge every 12 m (x ±13.2…±16.5, 0.4–6 m down); two pour cyan coolant falls into the abyss. The camera cannot see the deck's underside or side faces from above the lane; the outriggers carry the read of a deep structure | always, both sides | Blender + ambientCG. Falls: a flow shader to VFX_STANDARD, Kenney Smoke Particles (CC0, already in `THIRD_PARTY.md`) for spray |
+| K7 | **Midground structures**: rings, monoliths, lower spans 0.7–6 km out and 0.3–2 km below the deck | one landmark + 1–2 pieces a stage | Painted alpha cards from ChatGPT (our generated art), 2–3 layers for the intro sweep's parallax. Ticket 125's `far-ring-alpha-v3.png`, `wall-left/right-alpha-v3.png` are candidates |
+| K8 | **The black hole's shadow**: ahead and below the far end, a near-black disc 24° in radius, its middle hidden by the deck; a thin, dim photon ring | always, two lobes beside the gate band | Shader (three.js, MIT) to VFX_STANDARD; ticket 125's `sky-disk.png` as the colour target |
+| K9 | **Accretion disk**: a world-space ring mesh far below (plasma streams, the Doppler-bright side on the left, inner glow) | always, every side area | Shader. No starfield in battle |
+| K10 | **Atmosphere**: height fog in the abyss, dust motes in the disk light, light shafts rising from below, heat shimmer at the gate | per stage | Kenney Particle Pack and Smoke Particles (CC0, in `THIRD_PARTY.md`); Unity Labs flipbooks (CC0); three.js examples (MIT) for god rays; fog is a shader |
+| K11 | **Muster ground**: the deck past the gate sill where the queue waits (z 40–56 is all the frame shows) | always, the top centre | The sim's queued packs. No impostor reservoir beyond z 56 in battle (it is out of frame); the reservoir belongs to the intro sweep |
+| K12 | **The hero group** (§1.7) | always, the bottom centre | 7 Tripo models by the owner. Clips: Mesh2Motion (CC0, already on disk) first. Quaternius UAL is QAL and waits for the owner |
+| K13 | **Life beside the fight**: evacuation shuttles fleeing toward the citadel; coolant falls; lamps pulsing on surge warnings | per stage | Shuttles: Space's own ship models (ours, `space-typing/art-src/3d/ships/`), recoloured white and cyan |
+| K14 | **Light rig**: key = the disk, **from below and ahead** (warm up-light and back light); fill = navy from above; the heroine's cyan; image-based light from our own PMREM of the abyss shader so every model gets a rim; one shadow-casting light on the near deck (High and Ultra) | — | three.js (MIT): DirectionalLight, PMREMGenerator; today's gun light pools stay |
 
-Quality tiers: Medium drops shadows, fog layers and K13; Low keeps K1–K5, K9 and one card layer.
+Dropped from revision 1:
+- **Edge pylons and the two bastion towers:** they lean into the gun cards (§1.2).
+- **The impostor reservoir beyond z 56:** out of frame.
+- **The starfield in the top corners:** there is no sky.
+- **Void mantas and Horde climbers:** they had no source.
 
----
-
-## 2. Trial (`s0`, outside the chapter): "The Proving Span"
-
-**Story beat.** Before her first watch, the Lightbearer proves herself on the outer span of the citadel while the Horde tests the gate.
-
-**Gameplay layout.** Hold 180 s. No hazard. Five vanguard packs at z 18–50, two surges (55 s, 145 s), scouts from 12 s. The lane, gate, Line and bays as §1.
-
-```text
- z                x=-12                       x=+12
- 52   . . . . . [ horde reservoir, thin ] . . . . .
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 34        |  . vanguard pack (8)          |
- 26        |       . vanguard pack (7)     |   (R) LANTERN TOWER
- 18        |  . vanguard pack (6)          |       400 m out, right
-  7        |. . . . near zone . . . . . . .|
-  2.4      |=========== THE LINE ==========|
-  0        |       S1   HEROINE   S2       |
- -3        \_______ bastion dais __________/
-```
-
-**Hero landmark.** **The Lantern of VC-7**: the citadel's beacon tower, about 400 m tall, standing on a pier 300 m to the right and rising out of the abyss. Its crown holds a slow sweeping cyan lamp. In frame it fills the upper-right box (x 900–1280, y 80–330); its beam sweeps across the free sky strip every 8 s, never across the deck.
-
-**Depth layers.**
-- Foreground frame: K5 dais and bastion towers, dark, rim-lit in cyan.
-- Playfield: K1 deck, new and clean (few decals), K3 parapets, K4 pylons.
-- Midground: the Lantern tower; two low station blocks on the left at 200 m.
-- Far background: the citadel's outer ring curving away on the left, lit windows.
-- Sky: the black hole small and distant (shadow radius 0.12 of view height), disk a thin gold ellipse far below; mostly navy and stars.
-- Time and light: "cold watch". The disk is dim amber, low ahead; cool navy fill; the Lantern is the only strong cyan. No weather; slow dust.
-- Colour script: navy and graphite 70 %, cyan 15 %, amber 15 %.
-
-**Set dressing.** Dais 1; bastion towers 2 (10 m); edge pylons 20 (7 m); light banners 6 (white-gold, the Lightbearer order's crest as an abstract shape); station blocks 2 (60–90 m); Lantern tower 1 (400 m); citadel ring card 1; coolant falls 2.
-
-**Life on the map.** The vanguard packs walking in; a thin reservoir (about 100 silhouettes) beyond the gate; 4 shuttles leaving the citadel with tiny white lights; 2 maintenance drones gliding along the left parapet; the Lantern's beam.
-
-**Sources.** K1–K14; Lantern tower: lower 60 m as one Tripo model (seen at 300 m, medium detail), the rest a two-layer ChatGPT alpha card; citadel ring: ChatGPT card.
-
-**What is wrong today.** The trial uses the same scene as every stage: the industrial corridor of §9. Nothing tells the player this is a practice span at the citadel.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, seen exactly from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel plates and pale stone bands that runs from the bottom centre to a far gate near the top. The heroine stands small at bottom centre: a woman gunner in white-and-gold ceramic armour, cyan visor, long navy cape, two floating white-gold sentinel gun drones at her shoulders and a small support drone above. A thin white-gold barrier line crosses the deck just ahead of her; the deck right ahead of her stays dark and calm. Small packs of black glass creatures with glowing orange cracks walk in from the gate. To the upper right, a 400 metre beacon tower rises out of a deep abyss beside the causeway, its cyan lamp sweeping. Far below, a dim amber accretion disk; the black hole small and distant. Cold navy light, cyan rim light. Painterly-realistic, crisp big shapes. Landscape 16:9. No text, UI, letters or numbers.
-```
+Quality tiers:
+- Medium drops shadows, the fog layers and K13.
+- Low keeps K1–K6, K8, K9 and one card layer.
 
 ---
 
-## 3. Chapter 1 · VC-7 Corridor, stage 1 (`c1-s1`): "First Shift"
+## 3. Trial (`s0`, outside the chapter): "The Proving Span" (short)
 
-**Story beat.** The first real watch on Span One: the Horde comes over the gate in earnest, and the first Brutes push through the swarm.
+- **Beat.** Before her first watch, the heroine proves herself on the citadel's outer span while the Horde tests the gate.
+- **Gameplay.** Hold 180 s. No hazard. Five vanguard packs at z 18–50, two surges (55 s, 145 s), scouts from 12 s.
+- **Set.** **Map 1's set at "cold watch" light**, so the frame needs no new assets:
+  - the disk dim amber, navy fill;
+  - the Broken Ring unlit, a dark arc in the upper-left band;
+  - fewer decals, a clean deck.
+- **Landmark.** The citadel's Lantern, recomputed:
+  - A beacon tower beside the citadel is outside the frame at any height (a point 300 m to the side at z 100 is at screen x 3,112).
+  - So in battle only its **beam** shows: a slow cyan sweep across the abyss haze every 8 s, below the deck and in the side areas, never across the deck.
+  - The tower itself is in the intro sweep.
+- **Life.** The vanguard packs, the queue at the sill, the shuttles leaving with tiny white lights.
+- **Sources.** Map 1's. The beam is a light shader (VFX_STANDARD). The tower for the intro sweep is a painted card.
 
-**Gameplay layout.** Hold 150 s. No hazard. Calm rate 4.4 a second, surges at 50 s and 115 s, scouts from 12 s, Brute packs (a Brute and 5 swarm behind it) from 80 s. Armour drain ×2. Two bays.
+---
 
-```text
- z                x=-12                       x=+12
- 52   . . . . [ horde reservoir, dense ] . . . . .
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36  (L) BROKEN RING  |  packs 4-12 (block, wedge, line)|
- 30   base pylon at   |                          |
- 22   x -60, z 30     |      Brute + 5 (from 80 s)|
- 14        |. . . . . armour drain from here . . . |
-  7        |. . . . near zone . . . . . . . . . . .|
-  2.4      |============== THE LINE ===============|
-  0        |  [bay 1] S1  HEROINE  S2 [bay 2]      |
- -3        \__________ bastion dais ______________/
-```
+## 4. Map 1: Chapter 1 · VC-7 Corridor, stage 1 (`c1-s1`): "First Shift"
 
-**Hero landmark.** **The Broken Ring of VC-7**: a colossal station ring, about 2 km across, standing on edge to the left of the causeway and broken at its top. Its base pylon rises out of the abyss 60 m left of the lane at z 30; the ring's pale inner face blazes in the disk light. In frame: the lower arc fills the upper-left box (x 0–420, y 80–330) and leaves the top edge; the brightest region of the map is the lit inner face near (150, 180). This matches the accepted stage card `art-src/ui/stages-v2/c1-s1.png`.
+### 4.1 Story and gameplay
 
-**Depth layers.**
-- Foreground frame: K5, the two bastion towers, banners stirring.
-- Playfield: K1 with light wear, 12 decals (scorches far up the lane, none near the Line).
-- Midground: the ring's base pylon (300 m tall, its lower half in frame), gantries linking it to the causeway's underside; two monoliths on the right at 250 m and 450 m.
-- Far background: the ring's far arc and floating ring fragments; a second causeway 1 km below on the right.
-- Sky: the black hole shadow centred above the top edge, its lower rim visible in the free sky strip; the disk's near side a vast gold band below both wedges; the photon ring brightest on the left (the side turning toward us).
-- Time and light: "first light". The disk low ahead-left, warm gold; long shadows from pylons point toward the heroine; cyan fill on her; light dust shafts slanting from the upper left.
-- Colour script: graphite and navy 60 %, orange-gold 30 % (left), cyan 10 %.
+- **Story beat.** The first real watch on Span One: the Horde comes over the gate in earnest, and the first Brutes push through the swarm.
+- **Gameplay.**
+  - Hold 150 s. No hazard. Armour drain ×2.
+  - Calm rate 4.4 a second, surges at 50 s and 115 s, scouts from 12 s.
+  - Brute packs (a Brute and 5 swarm behind it) from 80 s.
+  - Two bays, default guns: Pulse Gun on bay 1 (in her hands), Heat Beam on bay 2 (the drone).
 
-**Set dressing.** Dais 1; bastion towers 2 (11 m); edge pylons 20 (6–9 m); banners 6; ring base pylon 1 (300 m); ring arc card 1 (2 km); right monoliths 2 (180 m, 260 m); ring fragments 8–12 (20–80 m, instanced); coolant falls 3 (left two, right one); debris shoal 1 (40 rocks).
+### 4.2 The battle frame and its base image
 
-**Life on the map.**
-- Vanguard packs at z 18–50 on the first frame; a dense reservoir (250 silhouettes) beyond the gate, glints shifting.
-- One void manta (wingspan 150 m) gliding slowly below the right wedge, crossing in 40 s.
-- Shuttles fleeing toward the citadel at the top corners.
-- Light banners and the pylons' lamps pulse once on each surge warning.
+**Base image** (fix 1 of the critic): `games/typing-survival/art-src/_review/maps/map1-base-1280x720.png`, legend `map1-base-legend.md` beside it.
 
-**Sources.** K1–K14. Ring base pylon: Tripo by the owner (one model, used again in stage 7); ring arc and fragments: ChatGPT alpha cards in two layers; right monoliths: `wall-right-alpha-v3.png` (125) as a far card, one Tripo monolith as the near one (used again in stage 2); manta: ChatGPT card with a flap shader, or Tripo.
+**How the base was made:**
+- It is the real `c1-s1` frame on the play host (main `bb9d1d7`, seed 3, High, 1.4 s in, held clock, every DOM layer hidden).
+- Today's ship was taken out.
+- Flat translucent blocks mark each planned element at its projected place and height. Blocks below the deck are hidden by it, as the camera would hide them.
+- Grey boxes mark the HUD and the variant-A gun cards.
+- It has no text.
 
-**What is wrong today.**
-- The lane is a code-drawn steel corridor with orange-and-black hazard stripes on both walls and a red-brown glow over the lower deck: it reads as a loading dock, not a mythic causeway.
-- The only landmark, the black hole, is a 116 px disc at y 50, behind the timer and a thin torus arch: in play it is almost invisible.
-- About 37 % of the screen (the side wedges) is a flat poster with a swirl. Nothing lies below the deck, so the corridor floats on wallpaper.
+| Element | World (m) | Screen at 1280 × 720 (px) | Base colour |
+|---|---|---|---|
+| The heroine, 2.6 m, holding bay 1's gun | x 0, z 0 | x 623–657, y 484–571 | cyan |
+| Support drone, 0.9 m, fires bay 2's gun | x +1.2, z 0, 2.0–2.6 m up | x 668–704, y 486–518 | white |
+| The Line, front lip of the dais | z 2.4 | x 235–1045, y 495–504 | pale cyan-white |
+| Vanguard packs (gameplay, kept from the capture) | z 18–34 | y 120–270 | — |
+| Span gate: the sill | z 40, 0.6 m high | x 445–835, y 61–74 | lime |
+| Span gate: two squat bastions, 2.5 m | x ±13.2…±17.5, z 38.5–41.5 | x 345–432 (mostly behind the clock) and 848–935, y 24–80 | lime |
+| Muster ground: the queue past the gate | z 40–56 | x 448–832, y 0–70 | violet |
+| Outriggers, every 12 m | x ±13.2…±16.5, 0.4–6 m below the deck, z 6–54 | both sides along the deck edge | blue |
+| **The Broken Ring** (hero landmark) | centre x −2,289, z 5,424, 958 m below the deck; radius 1,210 m; nearly upright | lower arc x 0–472, y 0–172; brightest x 150–330, y 110–172 | pale gold |
+| Black hole shadow | straight ahead, 14° below horizontal, radius 24° | lobes x 192–470 and 810–1088, y 0–≈240 | near-black |
+| Accretion disk far below | km below the deck | every side area no other block covers | orange |
+| Lower cross-span | from x 100, z 500 to x 1,500, z 900, 700 m below | x 1100–1280, y 515–600 | lavender |
+| Evacuation shuttles (3) | x 650–760, z 1,100–1,400, 420–560 m below | x 1109–1178, y 110–136 | pink |
+
+### 4.3 Hero landmark: the Broken Ring of VC-7
+
+- **What it is.** A colossal station ring, **2.4 km across**, standing nearly upright **6 km out on the left**, its centre about 1 km below the deck. It is broken at its top.
+- **In the battle frame** only its lower arc shows: a U that drops from the top edge at x 7 to its lowest point near (230, 141), then rises back to the top edge at x 426.
+  - Its broken top lies above the frame, behind the hull bar and the clock.
+  - Its pale stone-and-steel inner face blazes in the disk's up-light: **the brightest region of the frame**, at about x 150–330, y 110–172. This is the free band above gun card 1.
+- **Behind it** the black hole's left shadow lobe gives the lit arc a black backdrop. Below it the disk's Doppler-bright side glows.
+- **Match.** It matches the accepted stage card `art-src/ui/stages-v2/c1-s1.png` (Broken Ring upper left). The intro sweep shows its whole broken circle against the sky.
+
+### 4.4 Depth layers (all inside the battle frame)
+
+- **Foreground:**
+  - The bastion dais of dark stone with her glyph ring.
+  - The Line as its front lip, a thin cyan-white light.
+  - The heroine and her drone; the parapet and its lamp posts.
+- **Playfield:**
+  - The deck K1 with light wear.
+  - About 12 decals beyond z 9, none under the word line.
+  - The vanguard packs.
+- **Gate band (y 0–80):**
+  - The sill and the two squat bastions.
+  - Past them, the muster ground with the queued packs.
+- **Midground below the deck edge:**
+  - The outriggers.
+  - Two cyan coolant falls (left z 18, right z 30) dropping into the abyss.
+- **Far:**
+  - The Broken Ring.
+  - The lower cross-span off the right edge.
+  - The shuttle convoy in the upper-right band.
+- **Abyss:**
+  - The accretion disk fills both side areas.
+  - The black hole's shadow shows as two dark lobes beside the gate band, with a thin dim photon ring.
+  - No sky, no horizon.
+
+### 4.5 Light and colour
+
+- **"First light".**
+  - **Key:** the disk, from below and ahead-left, a warm gold up-light. It catches the outriggers' undersides, the ring's inner face, the foes' undersides and the parapet's outer rim.
+  - **Fill:** cool navy from above.
+  - **The heroine:** cyan.
+  - Light dust shafts rise from the abyss on the left.
+- **The lane stays graphite and dark.** The disk light reaches the deck only as a warm rim on the parapet's outer edge.
+- **Colour script:**
+
+  | Share | Colour |
+  |---:|---|
+  | 55 % | graphite and navy |
+  | 30 % | orange-gold (abyss, left) |
+  | 10 % | black (the shadow lobes) |
+  | 5 % | cyan (the heroine, the Line, the lamps) |
+
+  Purple is only on foes. Gold appears near the lane only on Leaders (none in stage 1).
+
+### 4.6 Life (where the player looks)
+
+- **Foes first.**
+  - On the first frame the vanguard packs stand at z 18, 26 and 34 (y 120–270).
+  - The muster ground past the sill (y 0–70) holds 2–3 queued packs at z 42–52, purple veins glinting, shuffling.
+  - On a surge warning the queue thickens and presses against the sill. Brutes show there before they cross.
+- **The defenders.**
+  - The heroine stands in a combat stance, her cape stirring, her gun raised as each word loads it.
+  - The drone bobs at her right shoulder, its eye light sweeping the near deck. It fires on bay 2's loads.
+- **Beside the fight.**
+  - A convoy of 3 shuttles crosses the upper-right band every 30–40 s, fleeing toward the citadel.
+  - The coolant falls pour.
+  - The outriggers' lamps and the parapet's running light pulse once on each surge warning.
+- **Removed:**
+  - The void manta (no source).
+  - The banners on the bastion towers (the towers are gone).
+
+### 4.7 Sources for map 1 (licences checked)
+
+| Element | Source | Licence | State |
+|---|---|---|---|
+| Heroine, drone, 5 guns | Tripo by the owner from our source pictures (`art-src/models-src/lightbearer-*`, QUALITY_RESCUE §4.4) | ours | to make (7 models) |
+| Foes | Space's `cosmic` family through `pnpm models:prepare --import`; today's `rainbow-*` meanwhile | ours | reuse, work S |
+| Deck, parapet, gate sill and bastions, outriggers | Claude in Blender; ambientCG materials; ticket 125 deck tile | CC0 / ours | to make |
+| The Broken Ring | ChatGPT painted alpha cards, 2 layers (`far-ring-alpha-v3.png` is a candidate) | ours | to paint after this concept |
+| Black hole shadow, disk, coolant falls | shaders to VFX_STANDARD | three.js MIT | to write |
+| Lower cross-span | painted alpha card | ours | to paint |
+| Shuttles | Space ship models, recoloured | ours | reuse |
+| Dust, spray, smoke | Kenney Particle Pack and Smoke Particles; Unity Labs flipbooks | CC0 | Kenney in use; Unity Labs to record in `THIRD_PARTY.md` before use |
+| Not used | Quaternius (QAL, waits for the owner), Kenney and KayKit models (grey-box only), Sketchfab and Fab (licence) | — | — |
+
+### 4.8 What is wrong today
+
+- The lane is a code-drawn steel corridor with orange-and-black hazard stripes on both walls and a red line over a red-brown glow: a loading dock, not a mythic causeway.
+- The black hole is a poster disc behind the timer and a thin torus arch. Its white glow sits right behind the queue and washes it out.
+- About 37 % of the screen (the side areas) is a flat poster with a swirl. Nothing lies below the deck, so the corridor floats on wallpaper.
 - The hero is a 100 × 80 px faceless ship.
-- The accepted stage card shows the Broken Ring, the heroine and a causeway; the fight then shows none of them.
+- The accepted stage card shows the Broken Ring, the heroine and a causeway. The fight then shows none of them.
 
-**ChatGPT prompt.**
+### 4.9 Painting prompt (over the base image)
+
+A compact repaint request for the same chat, after the review (the message's sections (a)–(c) carry the same content). It covers only light, materials, mood and scale; the layout comes from the base image.
+
 ```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone that runs from the bottom centre to a far gate near the top. The heroine stands small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, two white-gold sentinel gun drones at her shoulders, firing a cyan pulse stream and an orange heat beam, a small support drone above. The deck just ahead of her stays dark. A swarm of black glass creatures with orange cracks pours over the gate, one heavy brute among them. To the upper left a colossal broken station ring rises out of the abyss beside the causeway, its pale inner face blazing gold. Below both sides of the causeway, a vast orange-gold accretion disk spirals in haze; the black hole's shadow sits beyond the gate. Low warm back light, cyan rim light, dust shafts. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
+Paint over the attached base image, a frame from the game camera of Last Line, a premium sci-fi typing survival game. Keep its exact camera, perspective and layout: the straight causeway from the bottom centre to the gate sill near the top, the Line across the deck, the heroine and drone blocks, every coloured block's place and size, and every grey box left flat neutral grey. The coloured blocks are labels, not paint colours: paint the real thing in each.
+Materials: a causeway of long dark graphite steel plates and pale ancient stone bands with inset seams and faint cyan glyph inlays; a low stone parapet capped with steel and short lamp posts; heavy steel buttresses under the deck edge; a squat steel gate sill and two low bastions; the heroine, small and seen from behind, in white-gold ceramic armour, dark helmet and a navy cape with gold filigree, a compact energy carbine in her hands; a white-gold teardrop drone with one cyan eye at her right shoulder; foes of black glass and dark chitin with glowing purple veins, packed in the queue past the gate and walking the lane.
+Scale and depth: we look down from high above; beside the causeway the ground falls away kilometres into an abyss. Far below lies a vast sea of orange-gold plasma, the accretion disk. On the upper left, the lower arc of a colossal broken station ring, kilometres away and far below, its pale inner face blazing in the light from below. At the top on both sides, the black hole's shadow, a deep black with a thin dim rim. Tiny evacuation shuttles far out on the right; a lower service bridge far below at the lower right.
+Light and mood: warm gold up-light from the disk below and ahead, cool navy fill from above, cyan rim light on the heroine, dust shafts rising from the abyss; heroic, vast, lonely. The deck stays dark graphite, darkest round the heroine and under the grey word box; the brightest thing in the picture is the ring's lit face.
+No horizon, no sky, no stars above a horizon. No red. No text, letters, numbers, UI or logos. Painterly-realistic, crisp large shapes, commercial game quality. 1280 x 720.
 ```
 
 ---
 
-## 4. Stage 2 (`c1-s2`): "Leader Hunt"
+## 5. What map 1 needs, ordered by "seen in the battle frame"
 
-**Story beat.** On Span Two the Horde sends Pack Leaders; bring down three of five and the swarm breaks and flees.
+Only what the frame needs (fix 5). No Tripo request beyond the owner's 7 hero-group models.
 
-**Gameplay layout.** Hunt 3 of 5 Pack Leaders (arrive at 20, 58, 96, 134, 172 s), cap 240 s. Each Leader walks behind 8 swarm. One surge at 70 s. Brute packs from 30 s. A Leader is read by its size (1.25 × a Brute), gold veins, a gold beacon column and a lane mark on the deck.
+| Rank | Item | Seen | Size at 720p | Source | Tripo |
+|---:|---|---|---|---|---|
+| 1 | The heroine | always, bottom centre | 68 px tall | Tripo by the owner (`TRIPO_TODO` row 7) | yes |
+| 2 | Support drone | always, at her right shoulder | ≈ 36 × 32 px | Tripo (row 8) | yes |
+| 3 | Pulse Gun in her hands (stage 1's bay 1), then Heat Beam, Scatter Gun, Rail Gun, Star Mortar | always | 15–25 px | Tripo (rows 9–13) | yes |
+| 4 | Foes: vanguard packs and the queue | always | 25–60 px | Space `cosmic` family (reuse) | no |
+| 5 | Deck, dais, parapet and lamp posts | always, the frame's centre | half the frame | Blender + ambientCG (CC0) + ticket 125 tile | no |
+| 6 | Gate sill and bastions | always, top band | ≈ 90 × 56 px each bastion | Blender + ambientCG | only if it misses 8.5 |
+| 7 | Outriggers and coolant falls | always, both sides | 60–150 px | Blender + ambientCG; flow shader | no |
+| 8 | The Broken Ring | always, upper left | 470 × 172 px arc | ChatGPT painted cards | no |
+| 9 | Black hole shadow and disk | always | side areas | shaders | no |
+| 10 | Shuttles | every 30–40 s | 13–16 px | Space ship models | no |
+| 11 | Lower cross-span | always, lower-right corner | ≈ 180 × 85 px | painted card | no |
 
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36        |   escort 8 swarm                 |  (R) HERALD MONOLITH
- 30        |      [L] Pack Leader + beacon    |   tilted, 500 m,
- 22        |   Brute + 5                       |   x +80, z 60
- 14        |. . . . . armour drain . . . . . . |
-  7        |. . . . near zone . . . . . . . . .|
-  2.4      |============== THE LINE ===========|
-  0        |  [bay 1] S1  HEROINE  S2 [bay 2]  |
- -3        \__________ bastion dais __________/
-  lane mark: a gold strip runs down the deck under each live Leader
-```
-
-**Hero landmark.** **The Herald Monolith**: a gigantic tilted monolith of dark stone wrapped in steel gantries, about 500 m tall, standing in the abyss 80 m right of the causeway, leaning toward the lane. Its broad pale face catches the strongest disk light. A horn-like antenna array crowns it; when a Leader arrives the array glows gold (the Leader's horn sound has a source in the world). In frame: upper-right box, brightest region near (1120, 160). Matches `art-src/ui/stages-v2/c1-s2.png`.
-
-**Depth layers.**
-- Foreground frame: K5; the right bastion tower damaged (cracked crown).
-- Playfield: K1, more scorches, fallen stone blocks against the parapets (outside the lane).
-- Midground: the monolith; three smaller leaning pylons on the left at 150–300 m.
-- Far background: Span One and the Broken Ring behind and left, half lost in haze (seen only in the intro sweep).
-- Sky: black hole shadow above the top edge; the disk bigger than stage 1; the Doppler-bright side on the right this time.
-- Time and light: "beacon gold". The disk ahead-right, warmer and higher; gold dust; long shadows of the pylons fall leftward across the void (not over the deck).
-- Colour script: graphite 55 %, gold 35 %, cyan 10 %. Gold is the language of Leaders: keep other gold accents low so beacons read.
-
-**Set dressing.** Dais 1; bastion towers 2; edge pylons 20; banners 4 (two torn); fallen stone blocks 6–8 (2–4 m) outside the lane; left pylons 3 (120–220 m); Herald Monolith 1 (500 m); antenna array crown 1; coolant falls 2; debris shoal 1.
-
-**Life on the map.**
-- Reservoir beyond the gate parts like a crowd when a Leader comes through, so the player sees it coming 2 s before it crosses z 40.
-- The monolith's crown glows gold on each Leader arrival; shuttles avoid it.
-- Two mantas far below on the left.
-- When the hunt is won, the reservoir visibly scatters back into the black hole's shadow.
-
-**Sources.** K1–K14. Herald Monolith: near part (base and gantries, 150 m of it in frame) as Tripo by the owner (reused from stage 1's monolith with a new texture), upper part a ChatGPT card; antenna glow is a shader; fallen blocks: CC0 rock or ruin kit.
-
-**What is wrong today.** Identical to First Shift. The Leader's beacon is the only new visual; the map says nothing about a hunt. The beacon column and the gold lane mark fight with the orange hazard stripes on the walls.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, two white-gold sentinel gun drones at her shoulders, a small support drone above. The deck just ahead of her stays dark. Mid-lane, a huge black glass Pack Leader with a golden crest walks behind a wedge of smaller cracked creatures, a thin gold beacon of light rising from it. To the upper right a gigantic tilted monolith rises out of the abyss beside the causeway, its pale face blazing gold, a crown of antennas glowing. Far below, a vast accretion disk spirals in haze. Warm gold back light from ahead right, long shadows, cyan rim light. Painterly-realistic, big readable shapes. Landscape 16:9. No text, UI, letters or numbers.
-```
+Dropped from revision 1:
+- **The ring's base pylon** (Tripo): behind the deck from this camera.
+- **The two right monoliths** (Tripo): outside the frame.
+- **Bastion towers and edge pylons** (Tripo): they cross the gun cards.
 
 ---
 
-## 5. Stage 3 (`c1-s3`): "Rift Wall"
+## 6. The other maps (short; placements recomputed with `place.mjs`)
 
-**Story beat.** Span Three crosses a wound in space: the void tears open under the bridge and the Horde climbs out of the cracks beside the Line.
+Each landmark below is placed for this camera:
+- far out and well below the deck;
+- its bright part in a free band (§1.3);
+- anything the frame cannot show moves to the intro sweep.
 
-**Gameplay layout.** Hold 165 s. **Rift** every 30 s from 25 s: a crack at the foot of the left or right wall (seeded), z 9–13, warns 2.5 s (it glows orange), then 8 foes pour out within gun range. Surges at 55 s and 140 s.
+Prompts for these maps are written after map 1's painting is agreed.
 
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 30        |                                  |
- 22  (L) THE TEAR: a 600 m crack in space under the bridge, wide on the left,
- 18        |                                  |   narrow on the right
- 13    /// |rift L (seeded)      rift R (seeded)| \\\
-  9    /// |   8 foes pour out here            | \\\
-  7        |. . . . near zone . . . . . . . . .|
-  2.4      |============== THE LINE ===========|
-  0        |  [bay 1] S1  HEROINE  S2 [bay 2]  |
- floating slabs drift up beside both parapets at z 8-20
-```
+### 6.1 Stage 2 (`c1-s2`): "Leader Hunt"
 
-**Hero landmark.** **The Torn Span**: a vast tear in space running **under** the causeway, wide and blazing on the left, narrowing on the right. Its edges burn orange and violet; inside is a deep black with faint stars of another place. Slabs of the causeway's underside have broken loose and float up beside the parapets. The rifts on the deck are where this tear reaches up through the wall: when a rift warns, the tear below brightens on that side. In frame: the wide end fills the left wedge (x 0–330, y 150–420), the narrow end the lower-right wedge. **The tear never crosses the deck** (the accepted stage card draws it across the lane; in the fight that would hide play).
+- **Gameplay.** Hunt 3 of 5 Pack Leaders (20, 58, 96, 134, 172 s), cap 240 s. Each Leader walks behind 8 swarm. One surge at 70 s. Brutes from 30 s.
+- **Landmark: the Herald Monolith.** A tilted 700 m monolith of dark stone in steel gantries, rising from the abyss on the right and leaning toward the lane.
+  - Its crown is 1.6 km out at about x 700, z 1,300, 540 m below the deck. It shows at (1110, 140) in the upper-right band, where 100 m is 67 px.
+  - Its horn-like antenna crown glows gold when a Leader arrives. Gold is the Leaders' colour; the world's other gold stays low.
+- **Light.** "Beacon gold": the disk brighter on the right.
+- **Life.** The queue at the sill parts when a Leader comes up, 2 s before it crosses z 40. When the hunt is won, the queue scatters back.
+- **Sources.** Painted cards for the monolith; the antenna glow is a shader.
 
-**Depth layers.**
-- Foreground frame: K5; the left bastion tower tilted, one of its stones floating.
-- Playfield: K1 with cracks running in from both walls at z 9–13 (decals, dark until a rift warns).
-- Midground: floating slabs (8–14, 3–12 m) rising slowly beside the parapets; the torn underside truss.
-- Far background: the disk seen through the tear's edges; ring fragments.
-- Sky: black hole high; its light partly hidden by drifting station debris so the tear is the brightest thing.
-- Time and light: "torn violet". The tear lights the deck edges from below; the disk is a softer gold behind. Weather: slow upward drift of dust and small slabs (gravity broken here); heat shimmer over the tear.
-- Colour script: graphite 50 %, orange 25 %, violet 15 % (only at the tear), cyan 10 %.
+### 6.2 Stage 3 (`c1-s3`): "Rift Wall"
 
-**Set dressing.** Dais 1; bastion towers 2 (left tilted); edge pylons 16 (4 broken stubs); floating slabs 8–14 (3–12 m); tear 1 (600 m long); cracked wall segments at z 9–13 both sides (4); coolant falls 2, bending sideways into the tear; debris shoal 2.
+- **Gameplay.** Hold 165 s. A rift every 30 s from 25 s (wall foot, z 9–13, y 307–368).
+- **Landmark: the Torn Span.** A tear in space about 400 m below the causeway, wide and burning violet on the left, narrow on the right.
+  - It fills the lower-left side area (x 0–260, y 380–720) and a thin strip at the lower right. It never crosses the deck.
+  - It stays dim until a rift warns; then it brightens on that side. The world gives the warning a source.
+- **Light.** "Torn violet". Violet here is the Horde's colour, which is right: the foes come out of it.
+- **Life.** Slabs of the causeway's underside float up beside the outriggers; dust drifts upward.
+- **Sources.** A tear shader on a world-space mesh (five phases: glow, open, crawl, burst, embers) and a painted interior card. The slabs use our K1/K3 meshes, broken.
 
-**Life on the map.**
-- Small Horde climbers crawl along the tear's edges far below, always moving toward the bridge (cheap cards).
-- Slabs turn slowly; one breaks off and rises every 20 s.
-- The cracked wall segment on the warned side glows hotter through the 2.5 s warning, matching the sound.
-- Reservoir beyond the gate as usual.
+### 6.3 Stage 4 (`c1-s4`): "Shining Shields"
 
-**Sources.** K1–K14. Tear: a shader on a world-space mesh under the bridge (meets the VFX standard: charge = glow, release = open, travel = foes crawl, impact = burst, aftermath = embers), plus a ChatGPT card for its deep interior; floating slabs: CC0 rock or ruin kit pieces in the deck's materials, instanced; cracked wall: K3 variant mesh.
+- **Gameplay.** Hold 165 s. Shield Guard packs from 20 s; Missing-letters rule.
+- **Landmark: the Aegis Array.** Three shield-emitter pylons rising from the abyss on the right.
+  - Their crowns are 1.5–1.9 km out and 510–590 m below the deck, at (1000, 130) and (1150, 110) in the upper-right band.
+  - They hold a cracked hexagonal curtain of blue light across the right side area. The Shield Guards' walls are pieces of it.
+  - The Void Leviathan's shadow rises faintly inside the right shadow lobe on each surge.
+- **Light.** "Aegis blue": cold blue from the right, warm gold from the left.
+- **Sources.**
+  - Emitters: painted cards.
+  - Curtain: the Shield Guard wall shader at landmark scale.
+  - Leviathan shadow: ticket 125's `void-leviathan-alpha-v3.png` (ours), dim.
 
-**What is wrong today.** The rift is a crack drawn in a shader at the wall's foot of the same industrial corridor. There is no tear, no broken bridge, no reason in the world for foes to appear there. The wall stripes make the warning glow hard to see.
+### 6.4 Stage 5 (`c1-s5`, planned, checkpoint): "Buried Nests"
 
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape blown back, two white-gold sentinel gun drones, a small support drone. The deck just ahead of her stays dark. Under the causeway a vast tear in space runs across the abyss, wide and blazing orange and violet on the left, narrow on the right; broken slabs of the bridge float upward beside both walls. On the left wall, one glowing crack lets black glass creatures with orange cracks climb onto the deck. The tear never crosses the deck. Far behind, the black hole and a softer gold accretion disk. Light from below, violet edges, rising dust. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
+- **Gameplay.** Destroy 2 Nests, cap 300 s. Winning lights the checkpoint and opens bay 3 (see the open item in §1.7).
+- **Landmark: the Hive Hulk.** A capsized freighter whose bow crashed onto the causeway's left edge past the gate. Its stern hangs into the abyss.
+  - In frame: its pulsing belly glows at (250, 120) in the upper-left band, 900 m out and 290 m below the deck, where 100 m is 116 px.
+  - Its bow on the causeway (z 44–56) is in the top band beside the muster ground, mostly behind the hull bar and the clock.
+- **Light.** "Ember brood", in purple-violet instead of orange, since the brood is the Horde's.
+- **Life.** Swarm drop from the hull's cracks onto the muster ground. The belly pulses with the nests' spawn timer. On victory the checkpoint light runs down both parapets.
+- **Sources.** Painted cards in 3 layers; resin decals (a new ChatGPT decal sheet).
 
----
+### 6.5 Stage 6 (`c1-s6`, planned): "Ion Storm"
 
-## 6. Stage 4 (`c1-s4`): "Shining Shields"
+- **Gameplay.** Hold 165 s. The ion storm numbs one bay at a time.
+- **Landmark: the Storm Conductor.** A broken antenna spire rising from the storm on the right.
+  - Its forked crown is at (1150, 120), 1.5 km out and 470 m below the deck.
+  - Its bolt is the hazard's source: the charge runs up the spire, then a bolt arcs across the abyss to the warned bay's shooter (bay 1: the heroine's gun, bay 2: the drone).
+  - The bolt crosses the deck for 2–3 frames only.
+- **Light.** "Storm": violet-blue clouds boil up in both side areas and hide most of the disk.
+- **Sources.**
+  - Spire: painted cards.
+  - Clouds: JangaFX Cloud Pack VDBs (CC0) rendered to cards, or layered cards with a flow shader.
+  - Lightning: to VFX_STANDARD.
 
-**Story beat.** Span Four runs past the station's old shield array: the Horde has stolen its light and walks behind walls of blue.
+### 6.6 Stage 7 (`c1-s7`, planned): "Splitter Swarm"
 
-**Gameplay layout.** Hold 165 s. No hazard. Learning rule "missing letters". Shield Guard packs (a Shield Guard and a wedge of 6) from 20 s; the shield is a 2.6 m blue energy wall 0.8 m in front of its bearer, facing the heroine. A surge turns violent 25 % of the time. One bay starts at level 2.
+- **Gameplay.** Hunt 4 of 6 Leaders; rifts; splitters.
+- **Landmark: the Shattered Twin.** A parallel causeway broken into a dozen drifting segments, falling away on the left.
+  - The nearest segment is 260–420 m out and 140–260 m below the deck, in the lower-left side area under chip 3 (x 60–300, y 400–600). There 100 m is 250–380 px.
+  - Farther segments step up into the upper-left band (x 60–300, y 90–170), 0.8–1.4 km out.
+  - The Broken Ring from map 1 reappears far behind (same card).
+- **Light.** "Shatter": strong side light from the disk's bright left; every segment edge rim-lit.
+- **Sources.** Our K1/K3 meshes as broken sections (no new art); the ring card reused.
 
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 30        |    ( ) ( )  Shield Guards in wedges |  (R) AEGIS ARRAY
- 22        |      )   (    blue walls face her   |   three emitter pylons,
- 14        |. . . . . armour drain . . . . . . . |   a cracked hex curtain
-  7        |. . . . near zone . . . . . . . . . .|   across the void
-  2.4      |============== THE LINE ==============|
-  0        |  [bay 1] S1  HEROINE  S2 [bay 2]     |
- -3        \__________ bastion dais _____________/
-```
+### 6.7 Stage 8 (`c1-s8`, planned): "Black Well"
 
-**Hero landmark.** **The Aegis Array**: three colossal shield-emitter pylons (250–350 m) standing in the abyss to the right, still projecting a vast cracked hexagonal curtain of blue light that hangs across the void, flickering, with holes burned through it. The Shield Guards' blue walls are pieces of this light. Far behind, inside the black hole, the Void Leviathan's shadow rises for the first time. In frame: pylons and curtain in the upper-right box; the curtain's brightest cells near (1050, 220); the Leviathan shadow only in the free sky strip, low contrast.
+- **Gameplay.** Destroy 3 Nests. A gravity well at x ±4, z 18 (y 245).
+- **Landmark: the Sink.** The station's collapsed core, a pale cracked sphere 200–300 m across, 1.1 km out and 690 m below the deck, under the well's side.
+  - Its centre is near (150–220, 500) in the lower side area, about 190–280 px across. Its inner edge is hidden by the deck.
+  - A slow spiral of debris rises from it to the upper band.
+  - On the deck, plates lift a few centimetres round the well (view only).
+- **Light.** "Sink": desaturated toward the well; the core glows pale white-violet from inside.
+- **Sources.** A sphere shader with a ChatGPT texture; debris from our K-meshes, instanced.
 
-**Depth layers.**
-- Foreground frame: K5; two dead shield emitters (small, 3 m) on the bastion, sparking.
-- Playfield: K1; hex-shaped scorch decals where shields broke.
-- Midground: the three emitter pylons and the curtain; one fallen emitter dish in the left wedge (80 m).
-- Far background: the Leviathan's dark head and horns inside the black hole's shadow.
-- Sky: the disk partly hidden by the curtain on the right, blazing on the left.
-- Time and light: "aegis blue". Two lights fight: cold blue from the right (curtain), warm gold from ahead-left (disk). Weather: ion sparks falling from the curtain like snow.
-- Colour script: graphite 50 %, blue-cyan 25 % (right), gold 20 % (left), violet 5 % (Leviathan).
+### 6.8 Stage 9 (`c1-s9`, planned): "Voice of the Station"
 
-**Set dressing.** Dais 1; bastion towers 2; dead small emitters 2; edge pylons 20; emitter pylons 3 (250–350 m); hex curtain 1 (1.2 km wide); fallen dish 1 (80 m); hex scorch decals 6; ion spark particles; coolant falls 2.
+- **Gameplay.** Hold 180 s. Meaning rule. Rifts.
+- **Landmark: the Archive Spire.** A slender white stone and gold spire on the left, ringed by three slow-turning rings of abstract glyphs (shapes, never letters).
+  - The rings are seen from above as ellipses at (210, 120) in the upper-left band, 1.4 km out and 450 m below the deck.
+  - They brighten with each finished word, but never past the deck limit near the word line.
+- **Light.** "Choir dawn": white-gold from the rings, gold from the disk.
+- **Sources.** Painted cards. The rings are shader rings with a glyph texture in the style of ticket 125's glyph ring.
 
-**Life on the map.**
-- The curtain's cells flicker and die one by one through the stage; a hole opens on each surge.
-- Ion sparks drift down past the right parapet.
-- The Leviathan's shadow lifts slightly at each surge (ART_DIRECTION §8.3: "the void beast rises in the black hole on a surge").
-- Reservoir with blue glints (Shield Guards waiting).
+### 6.9 Stage 10 (`c1-s10`, planned, boss): "The Warden"
 
-**Sources.** K1–K14. Emitter pylons: one Tripo model by the owner, instanced three times with different scale; curtain: a hex energy shader (reuse the Shield Guard wall shader in `src/view/hazard-fx.ts` at landmark scale); Leviathan shadow: `art-src/arena-v2/void-leviathan-alpha-v3.png` (125) as a dim card; fallen dish: CC0 kit or Tripo.
-
-**What is wrong today.** Same corridor. The blue shield walls are the only blue in a frame that is otherwise orange and black; nothing in the world explains where shields come from. Orange stripes on the walls compete with the shield flashes.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, two white-gold sentinel gun drones firing at the lane, a small support drone above. The deck just ahead of her stays dark. Mid-lane, black glass creatures with orange cracks advance behind floating faceted walls of blue light. To the upper right, three colossal shield emitter pylons rise out of the abyss, projecting a vast cracked hexagonal curtain of blue light across the void. Far beyond the gate, inside the black hole, the faint shadow of a gigantic horned creature rises. Cold blue light from the right, warm gold from the accretion disk on the left, falling sparks. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
-
----
-
-## 7. Stage 5 (`c1-s5`, planned, checkpoint): "Buried Nests"
-
-**Story beat.** Span Five passes a capsized freighter fused to the bridge; the Horde has nested inside it. Burn both nests and the span becomes the checkpoint.
-
-**Gameplay layout.** Destroy 2 Nests, cap 300 s. Nests appear at z 30–36 and crawl to z 10, spawning 6 swarm every 7 s (down to 3.5 s). A nest guard (a Brute and 2 Shield Guards) at 40 s. Low calm rate (1.6 a second). Winning lights the checkpoint and opens bay 3.
-
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36  (L) HIVE HULK  | [N1] nest appears          |
- 30   capsized      |              [N2]          |
- 22   freighter,    |  nests crawl toward z 10   |
- 14   bow on the    |. . . . armour drain . . . .|
- 10   parapet       |  nests stop here           |
-  2.4      |============== THE LINE ===========|
-  0        |  [bay 1] S1  HEROINE  S2 [bay 2]  |   checkpoint beacon on the
- -3        \__________ bastion dais __________/   right bastion tower
-```
-
-**Hero landmark.** **The Hive Hulk**: a capsized freighter, about 400 m long, its bow crashed onto the causeway's left side beyond the gate and its stern hanging into the abyss. Its belly is cracked open and pulses with orange egg-light; ropes of black glass resin run from the cracks onto the bridge. In frame: the hull fills the upper-left box and the top-left corner; its pulsing belly glows near (200, 140). The nests on the deck read as pieces broken off it.
-
-**Depth layers.**
-- Foreground frame: K5; the right bastion tower carries the dark checkpoint beacon that ignites white-gold on victory.
-- Playfield: K1 with resin stains (dark glossy decals with orange veins) from the gate down to z 10.
-- Midground: the Hulk; its torn cargo containers hanging below on chains.
-- Far background: the disk, larger; Span Four's curtain faint behind.
-- Sky: black hole shadow; the disk's glow dimmed by the Hulk's smoke on the left.
-- Time and light: "ember brood". Deep red-orange inner light from the Hulk; smoke drifting right over the void; the checkpoint beacon is the one cool light.
-- Colour script: graphite 55 %, deep orange-red 30 %, cyan 10 %, white-gold 5 % (beacon).
-
-**Set dressing.** Dais 1; bastion towers 2 (beacon on the right); edge pylons 18; Hulk 1 (400 m); hanging containers 6–8 (12 m); resin decals 10–14; smoke plume 1 (slow, out over the void); coolant falls 1; debris 1 shoal.
-
-**Life on the map.**
-- The Hulk's belly pulses in step with the nests' spawn timer (a 2 s brighter pulse before each brood).
-- Swarm crawl out of the Hulk's cracks far up and drop onto the bridge beyond the gate (reservoir feeding).
-- On victory: the checkpoint beacon lights, its light runs down both parapets to the gate, the Hulk's glow dies.
-
-**Sources.** K1–K14. Hulk: ChatGPT painted cards in three layers (it is 150 m+ away) plus one Tripo bow section where it touches the causeway; containers: CC0 sci-fi kit; resin decals: new ChatGPT decal sheet; checkpoint beacon: part of the bastion tower model, emissive.
-
-**What is wrong today.** The stage does not exist yet (R2). If it shipped on today's scene, the nests would crawl out of nowhere on the same striped corridor.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, two white-gold sentinel gun drones, a small support drone above. The deck just ahead of her stays dark. Two pulsing hive nests of black glass and orange light crawl down the lane, small creatures spilling from them. To the upper left, a huge capsized freighter has crashed onto the far end of the causeway, its cracked belly glowing deep orange, its stern hanging into the abyss, dark smoke drifting over the void. Far below, the accretion disk. Deep red-orange light from the wreck, a cool white-gold beacon on a tower beside her. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
+- **Gameplay.** The boss in three phases at z 22, 15 and 8. A slam lane in red (the only red).
+- **Landmarks.**
+  - **The Breach Gate** at z 60–80 is **out of the battle frame**: the deck leaves the top edge at z 56, and at the gate only 4.3 m shows. It appears only in the intro sweep. In battle, its chains hang into the abyss beside the gate band.
+  - **The Void Leviathan** coils up out of the black hole on the right. Its head is at (1090, 130) in the upper-right band, 2 km out and 670 m below the deck, where 100 m is 53 px. It looks **up** at the Line and roars, a head lift with a purple flare, on each phase change.
+- **The Warden.** Space's `tyrant-g05` or `warden-shadow` (inventory L4), animated by us.
+- **Sources.** The Leviathan uses ticket 125's `void-leviathan-alpha-v3.png` and `art-src/ui/boss/boss-void-leviathan.png` as looks. In game it is painted cards with a flow shader on the veins.
 
 ---
 
-## 8. Stage 6 (`c1-s6`, planned): "Ion Storm"
+## 7. Later chapters (planned in `SURVIVAL_MODE_PLAN.md` §4.0, not in code)
 
-**Story beat.** Past the checkpoint, Span Six runs into an ion storm boiling up from the disk; lightning numbs her sentinels one at a time.
+Each chapter is one map with one foe family and one boss. The same camera rules apply (§1.2–1.5): no sky in battle, landmarks far out and below, bright parts in the free bands.
 
-**Gameplay layout.** Hold 165 s. **Ion storm** every 30 s from 20 s: one bay (seeded, never the same twice) flashes blue for 2.5 s, then its sentinel stops firing for 6 s; typing still loads it. Three bays (bay 3 open). Shield Guards and Brutes.
+| Chapter | Hazard | Setting |
+|---|---|---|
+| 2 · Ashfall Belt | meteor rain | a moon's split half far below on the left; meteor streaks fall through the side areas and strike marked circles on the deck |
+| 3 · Nebula Locks | nebula fog | lock gates; a dry dock with a dead capital ship below on the right; fog rolls over the far half of the deck only |
+| 4 · Sunward Array | glare pulses | mirror panels; a ring of giant mirrors below that catch a blue companion star (in the intro sweep) |
+| 5 · The Cargo Maze | minefield, moving walls | a stacked container city below both sides, cranes rising from the depth |
+| 6 · The Twin Spans | two lanes swap | a central pylon below that rotates to swap the spans |
 
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 30        |                                  |  (R) STORM CONDUCTOR
- 22        |   Brutes, Shield Guards           |   broken antenna spire,
- 14        |. . . . armour drain . . . . . . . |   lightning to the clouds
-  2.4      |============== THE LINE ===========|
-  0        | [bay 1] S1  S3 HEROINE  S2 [bay 2]|  <- a bolt from the storm
- -3        \__________ bastion dais __________/     hits the warned sentinel
- storm clouds boil below both wedges
-```
-
-**Hero landmark.** **The Storm Conductor**: a broken antenna spire, about 450 m, on the right, its top shattered into forked prongs that drink lightning from the storm clouds below. Its lightning is the hazard's source: the warning is a charge running up the spire, the strike is a bolt that arcs across the void to the warned sentinel. In frame: upper-right box; bolts travel from (1150, 120) toward the sentinel at the bottom, outside the deck where possible (they cross the near deck for 2–3 frames only).
-
-**Depth layers.**
-- Foreground frame: K5; banners whipping; rain of sparks.
-- Playfield: K1, wet-looking only where lightning hits (small, quick).
-- Midground: the spire; storm clouds of violet-blue plasma boiling up from below in both wedges, hiding the disk.
-- Far background: lightning flashes inside clouds; the disk seen through gaps.
-- Sky: black hole dim behind the storm.
-- Time and light: "storm". The disk's gold is muted to patches; cold blue-white flashes light the scene for 2–4 frames; between flashes it is the darkest stage.
-- Colour script: navy-violet 60 %, blue-white 20 % (flashes), gold 15 %, cyan 5 %.
-
-**Set dressing.** Dais 1; bastion towers 2; edge pylons 20 (lamps flickering); storm spire 1 (450 m); cloud banks 3 layers (shader volumes or cards); lightning bolts (VFX); spark rain; coolant falls 0 (frozen).
-
-**Life on the map.** Clouds roll; distant lightning every 3–6 s (dim, never during a surge's first seconds); the spire's charge runs up during each warning; one manta fleeing through the clouds.
-
-**Sources.** K1–K14. Spire: ChatGPT cards in two layers plus a Tripo base section if it comes closer than 300 m; clouds: three.js volume-cloud example (MIT) or layered cards with a flow shader; lightning: VFX standard five phases (charge on the spire, release, travel to the sentinel, impact on the bay's sentinel, aftermath sparks).
-
-**What is wrong today.** Not built (R2). The planned warning is a blue flash on the DOM bay only: the world gives no cause.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape whipping, three white-gold sentinel gun drones around her, a small support drone above. The deck just ahead of her stays dark. Black glass creatures with orange cracks advance, some behind blue shield walls. To the upper right a broken antenna spire rises from the abyss, a bolt of blue-white lightning leaping from its forked crown toward one of her sentinels. Violet-blue storm clouds boil up from below on both sides, hiding most of the accretion disk. Dark stormy light, cold flashes, warm gaps. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
+Chapters 7–60 reuse these kits with new foe families, light scripts and one new landmark each.
 
 ---
 
-## 9. Stage 7 (`c1-s7`, planned): "Splitter Swarm"
-
-**Story beat.** Span Seven runs beside its twin, which has shattered and drifts apart; the Horde here shatters too, each body breaking into shards.
-
-**Gameplay layout.** Hunt 4 of 6 Pack Leaders (every 25 s from 20 s), cap 240 s. Rift (every 35 s). Splitters (break into 3 shards on death) 14 % of foes.
-
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36  (L) THE SHATTERED |  [L] leader + escort       |
- 30   TWIN: a parallel |   splitters (break in 3)   |
- 22   causeway broken  |                            |
- 13   into drifting  //|rift (seeded)  rift (seeded)|\\
-  9   segments       //|                            |\\
-  2.4      |============== THE LINE ===============|
-  0        |  [bay 1] S1  S3  HEROINE  S2 [bay 2]  |
-```
-
-**Hero landmark.** **The Shattered Twin**: a second causeway, parallel to VC-7, 120 m to the left and 40 m lower, broken into a dozen great segments drifting apart, each still carrying its parapets, pylons and dead lamps; one segment tilts almost vertical. In frame: the segments step away from the lane through the left wedge from (300, 400) up to (0, 80); the Broken Ring base from stage 1 reappears far behind (same model, new place).
-
-**Depth layers.**
-- Foreground frame: K5.
-- Playfield: K1 with glass shard decals everywhere (the splitters' remains), but none under the word line.
-- Midground: the twin's segments (40–120 m each).
-- Far background: ring base pylon (reused), fragments.
-- Sky: the disk now fills the lower half of both wedges; the black hole bigger.
-- Time and light: "shatter". Strong side light from the disk's bright left side; every segment's edge rim-lit; glass glints.
-- Colour script: graphite 50 %, orange-gold 35 %, cyan 10 %, white glints 5 %.
-
-**Set dressing.** Twin segments 10–12 (40–120 m, instanced variants of one kit causeway section); dead lamps on them; shard decals 16; ring base pylon 1 (reused); edge pylons 14 (several leaning); debris shoals 2.
-
-**Life on the map.** Segments drift and rotate very slowly; one grinds against another every 30 s with sparks; shard glints on the deck flash when a gun light passes.
-
-**Sources.** K1–K14; twin segments: the K1 and K3 meshes reused as a broken section (no new art); ring base pylon from stage 1 (Tripo).
-
-**What is wrong today.** Not built (R2).
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, three white-gold sentinel gun drones, a small support drone above. The deck just ahead of her stays dark. Round black glass creatures with orange seams burst into shards under her fire; a huge Pack Leader with a golden crest walks behind them. On the left, a second parallel causeway lies broken into great drifting segments stepping away into the abyss, one tilted almost upright, all rim-lit. Below both sides a vast blazing accretion disk; the black hole beyond the gate. Strong golden side light, glinting glass. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
-
----
-
-## 10. Stage 8 (`c1-s8`, planned): "Black Well"
-
-**Story beat.** Span Eight crosses the station's collapsed core; its gravity bleeds up through the deck and drags the Horde (and her shots) into a knot.
-
-**Gameplay layout.** Destroy 3 Nests, cap 300 s. **Gravity well** at x ±4 (seeded), z 18, radius 8 m: pulls foes toward its centre and bends Pulse rounds and Scatter pellets; Rail and Heat Beam fly straight; Star Mortar shells drift 1 m toward it.
-
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36        | [N1]          [N3]               |
- 26        |     .---- well r 8 m ----.       |
- 18        |    (  W at x -4 or +4     )      |   THE SINK below the bridge:
- 10        |     '---- (seeded) -----'  [N2]  |   a collapsed core sphere,
-  2.4      |============== THE LINE ===========|   debris spiralling into it
-  0        |  [bay 1] S1  S3 HEROINE  S2 [bay 2]|
-```
-
-**Hero landmark.** **The Sink**: the station's collapsed core, a pale sphere about 300 m across, 200 m below the causeway, wrapped in a slow spiral of debris, plates and chains being drawn into it. It sits under the well's side (left or right, seeded) and shows in that wedge; its debris spiral reaches across both wedges. The well on the deck is where the core's pull comes through: plates around it lift a few centimetres and glow faintly at the seams. In frame: the core in the lower half of the well's wedge (y 250–450), its spiral rising to the top corners.
-
-**Depth layers.**
-- Foreground frame: K5; chains from the bastion towers pulled taut toward the core.
-- Playfield: K1 with a ring of lifted plates round the well (a view-only displacement on the deck mesh, ≤ 6 cm, no dark overlay over foes).
-- Midground: the core and the debris spiral; bent pylons leaning toward it.
-- Far background: the disk bending (lensing ripple) around the core's edge.
-- Sky: the black hole large; the disk fills most of both wedges.
-- Time and light: "sink". The scene is desaturated toward the well; the core glows pale white-violet from within; light bends.
-- Colour script: graphite 55 %, pale white-violet 15 %, gold 25 %, cyan 5 %.
-
-**Set dressing.** Core sphere 1 (300 m); debris spiral (60–120 instanced pieces, 1–20 m); taut chains 4; bent edge pylons 8; lifted-plate ring 1; nests 3 (gameplay).
-
-**Life on the map.** The spiral turns once a minute; small debris streak past the well's side of the deck; the well's ring of plates breathes with the pull.
-
-**Sources.** K1–K14; core: a shader sphere with a ChatGPT texture (cracked pale shell); debris: CC0 rocks and kit pieces, instanced; lensing ripple: screen-space distortion limited to the wedge.
-
-**What is wrong today.** Not built (R2).
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, three white-gold sentinel gun drones, a small support drone above. The deck just ahead of her stays dark. Left of the lane's middle, a circle of deck plates lifts slightly and bends the light, dragging black glass creatures with orange cracks into a tight knot; crawling hive nests approach. Below the left side of the causeway, a pale cracked sphere hangs in the abyss, a slow spiral of debris and chains falling into it. The accretion disk bends around it. Desaturated light, pale violet glow from below, gold rims. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
-
----
-
-## 11. Stage 9 (`c1-s9`, planned): "Voice of the Station"
-
-**Story beat.** On Span Nine the station's archive spire still speaks; it shows the meanings and she must answer with the words, while the void keeps tearing.
-
-**Gameplay layout.** Hold 180 s. Learning rule "meaning" (the bay shows the Vietnamese meaning; she types the English word). Rift every 30 s. Three surges (55, 120, 160 s). Brutes, splitters, Shield Guards.
-
-```text
- z                x=-12                       x=+12
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 36  (L) ARCHIVE SPIRE |                         |
- 30   rings of light   |  mixed packs            |
- 22   turning slowly   |                         |
- 13              /// |rift (seeded)  rift (seeded)| \\\
-  2.4      |============== THE LINE ===========|
-  0        |  [bay 1] S1  S3 HEROINE  S2 [bay 2]|
-```
-
-**Hero landmark.** **The Archive Spire**: a slender white stone and gold spire, about 600 m, on the left, ringed by three slow-turning rings of abstract glyphs (shapes, never readable letters) that brighten each time she completes a word. It is the calmest, most sacred place of the chapter, the last thing the station built. In frame: upper-left box, rings brightest near (180, 200).
-
-**Depth layers.**
-- Foreground frame: K5 with fresh white-gold banners (the order's colours).
-- Playfield: K1, cleaner; the glyph inlays in the stone bands glow faintly white-gold.
-- Midground: the spire; two smaller lectern towers on the right (150 m).
-- Far background: the disk and the black hole now huge; the Breach visible as a dark notch at the far end in the intro sweep.
-- Sky: the brightest stage overall, but the brightness lives in the left wedge.
-- Time and light: "choir dawn". White-gold light from the spire's rings plus the disk's gold; soft, reverent; few particles.
-- Colour script: graphite 50 %, white-gold 30 %, orange 15 %, cyan 5 %.
-
-**Set dressing.** Spire 1 (600 m); glyph rings 3 (80–160 m across); lectern towers 2; banners 6 (white-gold); edge pylons 20; rift-cracked wall segments 4.
-
-**Life on the map.** Rings turn and pulse with her finished words (view-only, read from the word event, never brighter than the deck limit near the word line); glowing motes rise from the spire; rifts tear as in stage 3, but their violet is the only dark note.
-
-**Sources.** K1–K14; spire: ChatGPT cards in two layers; glyph rings: shader rings with an abstract glyph texture from ChatGPT (`deck-decals-alpha-v3.png`'s glyph ring as the style match); lectern towers: Tripo or CC0 kit.
-
-**What is wrong today.** Not built (R2).
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight causeway of graphite steel and pale stone from the bottom centre to a far gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, three white-gold sentinel gun drones, a small support drone above. The deck just ahead of her stays dark. Mixed black glass creatures with orange cracks advance; a violet crack opens at the foot of the right wall. To the upper left, a slender white stone and gold spire rises out of the abyss, ringed by three slow turning rings of glowing abstract glyphs, never letters. Below, a vast golden accretion disk; the black hole looms large beyond the gate. Soft white-gold light, reverent and calm, gold rims. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
-
----
-
-## 12. Stage 10 (`c1-s10`, planned, boss): "The Warden"
-
-**Story beat.** At the Breach, the end of VC-7 at the edge of the event horizon, the Warden holds the gate open for the Horde, and behind it the Void Leviathan rises from the black hole.
-
-**Gameplay layout.** Boss, 5,000 HP, three phases. Steps through the gate at 20 s; stands at z 22 (P1, max 50 s), z 15 (P2, max 50 s), z 8 (P3). Escorts: 6 swarm every 8 s from beside it (P1), Shield Guard packs (P2), splitters (P3). **Slam**: a red lane with warning stripes from the boss to the Line, plus a block word; type it in time to block.
-
-```text
- z                x=-12                       x=+12
- 52   . . . . THE BREACH GATE (ring gate, torn open) . . . .
- 40  ABYSS =========== GATE (spawn) ===========  ABYSS
- 22        |        [WARDEN]  P1              |  (R) VOID LEVIATHAN rising
- 15        |        [WARDEN]  P2              |   out of the black hole,
-  8        |        [WARDEN]  P3              |   coiling up the right side
-           |        ||| slam lane |||          |
-  2.4      |============== THE LINE ===========|
-  0        |  [bay 1] S1  S3 HEROINE  S2 [bay 2]|
-```
-
-**Hero landmark.** Two pieces, one on each side of the gate so they never cover the lane:
-- **The Breach Gate**: a ring gate 300 m tall at the causeway's end (z 60–80), its frame torn open, chains hanging; the black hole's shadow fills it. In frame its lower half crowns the free sky strip and both upper corners.
-- **The Void Leviathan**: a colossal serpent of black glass with orange cracks and a crown of spines, coiling up out of the black hole on the right. In frame: its body rises through the upper-right box, its head near (1080, 110) looking down at the Line. It roars (a head lift and an orange flare) on each phase change.
-
-**Depth layers.**
-- Foreground frame: K5; the bastion towers' banners burning; the heroine's dais glyph ring at full light.
-- Playfield: K1 heavily scarred, scorched, cracked; red slam lanes as a VFX on top.
-- Midground: the Breach Gate and its chains; the Warden on the deck (the boss model).
-- Far background: the Leviathan's coils and the event horizon; the disk fills both wedges edge to edge.
-- Sky: the black hole's shadow huge beyond the gate; the photon ring arcs over the top of the frame.
-- Time and light: "event horizon". Molten gold everywhere except the black shadow; violet in the Leviathan's cracks; red only for the slam. Weather: embers and ash streaming toward the black hole (the pull), heat shimmer.
-- Colour script: black 35 %, molten gold 40 %, violet 10 %, cyan 10 % (her), red 5 % (slam only).
-
-**Set dressing.** Breach Gate 1 (300 m); chains 6 (100 m); Leviathan 1 (2 km long); broken edge pylons 12; burning banners 4; scorch and crack decals 20 (none under the word line); ember stream particles.
-
-**Life on the map.** The Leviathan breathes and shifts its coils; the Horde reservoir pours out of the gate's shadow at every escort call; the gate's chains swing when the Warden roars; on the boss's death the Leviathan sinks back with a long flare (the chapter's ending shot, and a tease for the next chapter).
-
-**Sources.** K1–K14. Warden: today's `warden-rainbow` boss model is not in this game's manifest; the owner makes it in Tripo (or it is imported from Space's library through `pnpm models:prepare --import`), animated by us (procedural motion and VFX are ours). Breach Gate: ChatGPT cards plus one Tripo section of the gate's foot. Leviathan: `art-src/arena-v2/void-leviathan-alpha-v3.png` and `art-src/ui/boss/boss-void-leviathan.png` as source looks; in game a set of painted alpha cards (head, coils) with a slow flow shader on the cracks; a Tripo model only if the intro sweep needs real parallax.
-
-**What is wrong today.** Not built (R3). The boss has no arena, no Breach and no Leviathan in the game; only a splash image exists.
-
-**ChatGPT prompt.**
-```text
-Gameplay concept painting for Last Line, a premium sci-fi typing survival game, from the game camera: high behind and above a lone heroine, looking down about 36 degrees along a straight, scarred causeway of graphite steel and pale stone from the bottom centre to a torn ring gate near the top. The heroine is small at bottom centre: a woman gunner in white-and-gold armour, cyan visor, navy cape, three white-gold sentinel gun drones, a small support drone above. Mid-lane stands a towering armoured warden of black glass and orange cracks, a red warning lane on the deck leading from it to her. Beyond the gate, the black hole's shadow fills a colossal broken ring gate hung with chains. On the upper right a gigantic void serpent of black glass with orange cracks and a crown of spines coils up out of the black hole, looking down at her. A molten gold accretion disk fills the abyss on both sides. Embers stream toward the gate. Painterly-realistic. Landscape 16:9. No text, UI, letters or numbers.
-```
-
----
-
-## 13. Later chapters (planned in `SURVIVAL_MODE_PLAN.md` §4.0, not in code)
-
-The plan has 60 chapters of 10 stages; each chapter is **one map** with one foe family and one boss, and the plan names nebulae, asteroid belts and broken stations as settings. The sim field stays 24 × 40 m in every chapter. Short concepts for the chapters that teach the remaining hazards:
-
-- **Chapter 2 · Ashfall Belt** (hazard: meteor rain). The causeway threads a debris ring of a shattered moon. Landmark: the moon's split half on the upper left, a 10 km cliff of rock and old mining scaffolds; meteor streaks fall across the wedges and strike marked circles on the deck (the warning). Colour: rust and grey with cyan. Sources: CC0 rock sets instanced, ChatGPT cards for the moon, a meteor VFX by the standard.
-- **Chapter 3 · Nebula Locks** (hazard: nebula fog that hides the far lane). A causeway of lock gates through a violet-teal nebula. Landmark: a dry dock holding a dead capital ship on the right. The fog rolls in from the wedges and over the far half of the deck as a shader, never over the near zone. Colour: violet, teal, white-gold.
-- **Chapter 4 · Sunward Array** (hazard: horizon glare in pulses). A bridge of mirror panels facing a blue companion star that rises over the gate. Landmark: a ring of giant mirrors swinging toward the star; each glare pulse is a mirror catching it. Colour: blue-white and gold.
-- **Chapter 5 · The Cargo Maze** (hazards: minefield, moving walls). A docking causeway where cargo blocks slide across the lane on rails (moving walls) and drifting mines tumble. Landmark: a stacked container city on both sides, cranes the size of towers. Colour: graphite, signal amber, cyan.
-- **Chapter 6 · The Twin Spans** (hazard: two lanes swap). Two parallel causeways side by side with crossover bridges; the heroine's lane is lit, the other dark until the swap. Landmark: a central pylon that rotates to swap them. Colour: navy, cyan, gold.
-
-Chapters 7–60 reuse these biome kits with new foe families, light scripts and one new landmark each.
-
----
-
-## 14. Why the current maps fail (Last Line, 01/11/2026)
-
-**1. The map is a code-drawn stand-in, not art.** Every surface in `src/view/scene.ts` is made in code: the deck's plates, rivets, lane dashes and chevrons are a fragment shader; the parapets and posts are grey boxes with amber box lamps; the far arch is a squashed torus; the "conduits" are 14 cm boxes. AGENTS.md now forbids code-drawn scenery. Shaders are fine for light and VFX, not as the painting of the world.
-
-**2. It is the wrong world.** The owner chose direction B (Lightbearer, a causeway of graphite steel and pale ancient stone at the edge of a black hole) on 29/10. The menus, the stage cards and the logo already show that world (tickets 121, 126, accepted). The fight still shows the old direction A corridor: orange-and-black hazard stripes on both walls, a red line, a red-brown glow over the lower deck. Going from the stage card to the fight is a downgrade the player sees every time.
-
-**3. The landmark is hidden.** The black hole is the game's whole promise ("Last Line before the black hole"). In the fight view it is a 116 px disc centred at y 50 of 720, under the timer panel and behind the thin arch. Nothing in the frame is ten or a hundred times bigger than the hero (ART_DIRECTION §1.1, "something that makes the player small").
-
-**4. More than a third of the screen is wallpaper.** The camera looks down 36°, so the side areas beside the deck (about 37 % of the frame, nearly half with the strip above the gate) look down past the deck edge. Today they show a camera-facing plane with a swirl and a few stars. There is nothing below or beside the causeway: no abyss, no structures, no fog, no parallax. The corridor reads as a flat strip floating on a poster.
-
-**5. No depth layers, no light direction.** There is no foreground frame, no midground, no far layer; just deck and backdrop. Light is a uniform warm wash plus three directional lights; no shadows, no image-based light, no rim on the foes or the hero. The "danger glow" turns the whole near deck red-brown.
-
-**6. The loudest colours are in the wrong place.** Orange-black stripes on both walls are the most saturated pixels in the frame, and they are orange like the foes' cracks: the eye goes to the walls, and the horde blends into them at the edges.
-
-**7. The hero is a small faceless ship.** The Vanguard ship is about 100 × 80 px at the bottom. The Lightbearer, her sentinels and a support drone have source pictures (ticket 156) but no model in the game.
-
-**8. Every stage looks the same.** First Shift, Leader Hunt, Rift Wall and Shining Shields, and the Trial, share one scene. Only the foes and the hazard effects change; no stage has its own landmark, light or weather.
-
-**9. No life outside the fight.** Apart from the foes and the conduit pulses, nothing moves: no creatures, no ships, no banners, no horde massing beyond the gate before it enters.
-
-**10. It looks soft.** The deck has no texel detail (it is a noise shader), the bloom halo spreads over it, and High renders at a pixel ratio of 1.5. Even with sharp foes the frame reads blurry, which matches the owner's note that Last Line's shots are blurry.
-
-**11. Good art exists but sits unused.** The arena kit v2 (`art-src/arena-v2/`, ticket 125: deck tile, causeway edge, two walls, far rings, black hole sky, Leviathan, decals) was made on 29/10, self-scored 8, and was never judged or wired. Even used, it is a set of flat cards: on its own it cannot give the depth below the deck that this camera needs.
+## 8. Why the current maps fail (Last Line, 01/11/2026)
+
+1. **The map is a code-drawn stand-in, not art.**
+   - Every surface in `src/view/scene.ts` is made in code: the deck is a fragment shader, the parapets are grey boxes, the far arch is a squashed torus.
+   - AGENTS.md forbids code-drawn scenery. Shaders are fine for light and VFX, not as the painting of the world.
+2. **It is the wrong world.**
+   - The owner chose direction B (the heroine on a causeway at the edge of a black hole) on 29/10. The menus, the stage cards and the logo show that world.
+   - The fight still shows the old industrial corridor: orange-and-black stripes, a red line, a red-brown glow.
+3. **The landmark is hidden, and the camera cannot see the sky.**
+   - The black hole is a poster disc under the timer.
+   - Revision 1 of this file placed landmarks where this camera cannot look. Revision 2 places them far out and below.
+4. **More than a third of the screen is wallpaper.** The side areas look down past the deck edge, and today they show a camera-facing poster. There is no abyss, no structure, no fog, no parallax.
+5. **No depth layers, no light direction.** Uniform warm wash, no shadows, no image-based light, no rim.
+6. **The loudest colours are in the wrong place.** The wall stripes are orange like the foes' cracks.
+7. **The hero is a small faceless ship.**
+   - Owner, 01/11: the woman gunner with a support drone replaces it.
+   - Seven Tripo models are to make.
+8. **Every stage looks the same.** No stage has its own landmark, light or weather.
+9. **No life outside the fight.**
+10. **It looks soft.**
+    - No texel detail on the deck.
+    - Bloom spreads over the deck (QUALITY_RESCUE L1).
+    - No MSAA on High and Ultra (L2).
+11. **Good art exists but sits unused.** Ticket 125's arena kit, never judged or wired.
 
 **What fixes it, in order:**
-1. Build the K-kit (§1.4) as real 3D: a textured deck, parapets, pylons and the bastion from free CC0 PBR kits and the 125 textures, and the heroine group from the owner's Tripo models.
-2. Put the abyss under the causeway: the disk as a world-space mesh below the bridge, midground structures rising from it, fog layers, painted cards only beyond 300 m.
-3. Give each stage its landmark in a side wedge, its light script and its weather, all from data.
-4. Score every stage in game at 1280 and 1920 against the owner's reference and the stage's agreed concept painting: M ≥ 8, the word-line luma limit kept, horde wash-out ≤ 10 %, ≤ 60 draw calls on High.
+1. Agree map 1's concept and painting with ChatGPT over the base image.
+2. Build the hero group (owner's Tripo models) and the K-kit:
+   - the deck, parapet, gate and outriggers in Blender with CC0 materials;
+   - the abyss, disk and black hole as shaders.
+3. Paint the landmark cards per stage.
+4. Score every stage in game with "chấm C" at 1280 and 1920 against the owner's reference and the agreed painting:
+   - acceptance 8.5;
+   - the word-line luma limit kept;
+   - horde wash-out ≤ 10 %;
+   - ≤ 60 draw calls on High.
