@@ -3,6 +3,7 @@ import { ADMIN_PERMISSIONS, runAuthorizedAdminMutation } from "./admin-security.
 import { MediaAssetError } from "./media-assets-v2.mjs";
 
 export const MAX_MEDIA_UPLOAD_BYTES = 96 * 1024 * 1024;
+export const MAX_KEYBOARD_SOURCE_BYTES = 50 * 1024 * 1024;
 const JSON_BODY_LIMIT = 64 * 1024;
 const MEDIA_BASE = "/api/admin/space-typing/media";
 
@@ -182,7 +183,8 @@ export function createMediaV2HttpHandler({ store, auditLog, onAuditError = () =>
         const fileName = header(request, "x-media-file-name", true);
         const mimeType = header(request, "content-type", true);
         const tags = parseTags(header(request, "x-media-tags"));
-        const bytes = await readBody(request, MAX_MEDIA_UPLOAD_BYTES);
+        // A Typing Feel take is refused over 50 MB at upload, the same limit the check and Format apply (§3.8).
+        const bytes = await readBody(request, tags.includes("keyboard-source") ? MAX_KEYBOARD_SOURCE_BYTES : MAX_MEDIA_UPLOAD_BYTES);
         const result = await serializeMutation(() => runAuthorizedAdminMutation({
           actor,
           permission: ADMIN_PERMISSIONS.MEDIA_UPLOAD,
