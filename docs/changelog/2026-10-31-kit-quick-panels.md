@@ -73,3 +73,29 @@ có changelog riêng `docs/changelog/2026-10-31-kit-quick-panels.md`. Không s�
   50, 100 % (lệch ≤ 0,5 px), mọi rãnh bằng nhau, 0 ảnh hỏng, 0 yêu cầu lỗi, 0 ngoại lệ, Tab ở trong bảng, Esc đóng, một
   phím một tiếng trên bộ Typing Feel vừa chọn.
 
+
+## Lượt sửa (giám khảo 31/10, tối)
+
+Giám khảo chấm bảng của Dragonhold và Wordwoven sau bước Games và ghi 11 mục; 6 mục thuộc kit, sửa ở `b8a224d0`, rồi
+chép lại vào hai game (`--check` OK cho cả hai). Last Line vẫn chưa nhận bản kit này.
+
+| Mục | Kit làm gì | Game dùng thế nào |
+|---|---|---|
+| Núm bị rãnh và phần đầy vẽ đè khi đứng yên | Lớp rãnh và phần đầy `z-index: 0`, ô trượt `position: relative; z-index: 1`: núm luôn trên ảnh, không cần hover hay focus | Không phải làm gì |
+| Settings ở màn tựa có Resume và Quit to title | `QuickContext` (`"title"` \| `"play"`): tuỳ chọn `context` (giá trị hoặc hàm, đọc mỗi lần `open()` và `refresh()`), `setContext()`, `context`; ở `"title"` hàng `button` có `action` `"resume"`/`"quit"` ẩn, hàng nút trống cũng ẩn, nút riêng của game vẫn hiện; focus đang ở nút bị ẩn thì sang Close; gốc lớp có `data-context` | Dragonhold `context: () => (run ? "play" : "title")`; Wordwoven `QuickHooks.context`, `main.ts` truyền `titleUp` |
+| Danh sách âm phím cắt cứng, dòng chọn nằm ở mép dưới | Mép trên/dưới mờ 10 px × `--kit-qs-s` (`mask-image`) chỉ khi còn dòng phía đó (`data-more-above`/`-below`); `scroll-snap-type: y proximity`, dòng và tiêu đề họ bám đầu; mở bảng thì dòng chọn ra giữa; mũi tên cuộn ít nhất và dừng đúng chỗ bám | Không phải làm gì |
+| Tab đi qua mọi nút nghe thử | Chỉ nút Listen của dòng đang focus (hoặc đang chọn) có `tabindex="0"`; Tab từ danh sách tới Keyboard volume trong tối đa 2 lần | Không phải làm gì |
+| Rê chuột trên dòng danh sách không thấy | `--kit-qs-list-hover-filter`, mặc định sáng 1,3 kèm quầng `--kit-qs-glow` | Dragonhold đặt quầng than hồng; Wordwoven dùng mặc định |
+| Chữ thân là sans web | `--kit-qs-button-font` (nút, chip, nút chữ ở góc, dòng âm phím), `--kit-qs-label-font` (nhãn, tiêu đề mục, tiêu đề họ), `--kit-qs-note-font` (ghi chú, mặc định font trận) | Dragonhold Cormorant Garamond 700, Wordwoven Baloo 2 600 |
+
+5 mục còn lại là CSS và skin của game (khung không lặp, hàng cao đều, Story mode một dòng, gắn cặp phần đầy/rỗng 244 đã
+nhận, rê chuột trên nút của Wordwoven); chi tiết trong changelog của từng game.
+
+Kiểm:
+
+- `pnpm kit:test`: **64 file, 1038 test** (trước 63 file, 1026), đều qua; 12 test mới ở
+  `ui/quick-settings/quick-panels-judge.test.ts`; ba test cũ của danh sách đổi từ "dòng chọn ở mép dưới" sang "ở giữa"
+  như giám khảo yêu cầu.
+- Hai game: Dragonhold 710 test qua (1 bỏ qua), Wordwoven 653; `pnpm build:dragon`, `pnpm build:td` OK; kiểm trên host
+  chơi ở 1280 × 720 và 1920 × 1080 (núm trên ảnh ở 0/50/100, màn tựa ẩn hai nút, Tab tới Keyboard volume sau 2 lần,
+  mép mờ, 0 yêu cầu lỗi, 0 ngoại lệ).
