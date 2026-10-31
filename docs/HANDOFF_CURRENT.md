@@ -21,7 +21,11 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - lấy blob ra bằng form POST tới `127.0.0.1:8765` (`scratchpad/ff-recv/recv-img.py`);
   - tách nền và căn bằng `scratchpad/g247/tools/key.py`;
   - nạp ảnh mẫu phong cách (clock.r2, stat-accuracy.r2, kills.r2) qua `<img crossOrigin>` từ `127.0.0.1:8767`, vì fetch bị chặn.
-- **Lượt 1** (không ảnh mẫu): hai giám khảo mù cho chưa icon nào đạt 8 (máy đếm nhịp 7 và 7, các icon khác 5–6,5). **Lượt 2** (`.r4`, có ảnh mẫu, theo góp ý của giám khảo) đang chấm: workflow `wf_fccd7d23-ea6`, khoá mù ở `scratchpad/g247/judge2-key.json`. Mọi lượt đều trong `art-src/ui/icons/*.r3-try*`, `*.r4-try*` (kèm `.raw.png` và `.prompt.txt`).
+- **Kết quả (02:40): không nhận icon nào.**
+  - Ba vòng, 21 lượt, sáu giám khảo mù. Bản tốt nhất 6,5–7, icon đang trong game 4–5,5.
+  - Đã lưu `stat-evenness.r3`, `stat-new-word.r5`, `rift.r3`, `pace-director.r5`, `shake.r5` (kèm cỡ 256/128/64), chưa gắn vào game.
+  - Báo cáo `docs/codex-queue/247-report.md` (`cab7381c`). Chủ dự án chọn: gắn tạm, tìm nguồn khác, hay giao Codex với góp ý vòng 3.
+  - Ảnh mẫu phong cách (vòng 2) làm icon rối hơn ở 28 px.
 - **Lửa C thành lửa mặc định của Dragonhold:** hai giám khảo mù xếp C đầu (7 và 7,5; vòng 10 6,5 và 6), chưa đạt 8 nên không mở vòng mới.
   - Đang gộp ở `games/.wt-dh-fire-c-merge`, nhánh `dh-fire-c-merge`, commit gộp `0d9b9da`. Workflow `wf_fff43a7e-d45` chạy tiếp sau khi lượt trước bị cắt vì hết hạn mức; xong có soát độc lập.
   - Sau đó Claude: fast-forward `main`, chạy `prepare-fire-c.mjs` ở checkout chính, `media:push`, commit con trỏ.
