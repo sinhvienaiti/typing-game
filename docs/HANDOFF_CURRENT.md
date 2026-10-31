@@ -34,6 +34,15 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 21:30: thử lửa B chưa đạt** (Dragonhold `dh-fire-b` `ec486d6` trong `.wt-dh-fire-a`, `?fire=b`, chưa gộp, chưa đẩy).
+- Hai giám khảo mới (X = vòng 10, Y = B, Z = A; giám khảo A tự ghi "mù chưa trọn" vì báo cáo người dựng nằm trong đề có lộ khoá — lỗi đề của điều phối, lần sau không chép báo cáo người dựng nguyên văn vào đề chấm):
+  - tổng: vòng 10 6,0 / 6,5; **B 5,5 / 6,0**; A 4,5 / 5,0. Không bản nào tới 8.
+  - B tốt nhất ở đọc rõ (8 / 7,5), màu/độ nóng (7 / 7), dư âm (5,5 / 5,5): không đen, không cháy giấy, không che quái và rồng, sạch sau 2,5 s.
+  - B thua ở va chạm (5,5 / 6): **quá nhỏ** (1,8× quái, không lớn hơn đầu đạn; phiếu dựng đã đặt 1,6–2,2× theo lời chê A "to gấp mấy lần quái" — sửa quá tay), sao phẳng như hình dán, vòng cuối thành vòng ngắm đỏ mảnh; khói một cục xám, vết cháy trông như bóng quái.
+  - Vòng 10 có đỉnh nổ đẹp nhất (va chạm 7 / 7,5) nhưng khói đục che quái và rồng khoảng 1 s.
+- Số đo: B đạt nhiều cổng hơn A (lõi trắng, hue, peach, near-black, không đọng lại, khói); còn trượt rim, cạnh thẳng 1080.
+- **Chờ chủ dự án quyết hướng sau** (xem báo cáo trong hội thoại 31/10 21:30).
+
 **31/10 khoảng 21:05: kit bảng nhanh xong, gắn ảnh 243/244 đang chạy.**
 - Kit bảng nhanh xong: giám khảo Dragonhold 7,0, Wordwoven 6,6 (trước 11 mục sửa). Dragonhold `main` `0ca70a8` (710 test), Wordwoven `a2-days` `47a1698` (653 test), con trỏ `9b99fe11`, chưa đẩy.
 - Workflow `panels-art-wiring` (`wf_8bfb1618-227`): ba game song song gắn ảnh đã nhận (244: phần đầy/rỗng rãnh, icon bảng Sound Dragonhold/Wordwoven; 243: icon Last Line), Last Line nhận kit mới; rồi hai giám khảo và một lượt sửa.
