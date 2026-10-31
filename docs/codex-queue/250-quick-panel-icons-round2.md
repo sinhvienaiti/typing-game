@@ -72,3 +72,39 @@ Thư mục `ui/quick-settings/` cho icon `vol-*`, `ui/icons/` cho icon hàng Set
 - `games/typing-survival/art-src/ui/icons/{reduced-motion.r3,quality.r2,read-aloud.r2}*`.
 - `games/{dragon-hold,typing-defense,typing-survival}/art-src/_review/250*`.
 - `docs/codex-queue/250-report.md`, `docs/codex-queue/250/`.
+
+## Lượt 2 (Claude chấm 01/11 00:15, tờ tự dựng ở 24 px 1× trên khung bảng thật, bản cũ đặt cạnh bản mới)
+
+Bản tự chấm 10/10 cho cả 20 icon **không đúng**: chấm ở cỡ thật chỉ 4 icon đạt từ 8. Mỗi icon mới dùng 1 lượt, nên còn 2 lượt (`try2`, `try3`; bản chọn ghi đè được vì Claude chưa nhận, nhưng phải chép bản cũ sang `art-src/_review/250/prev/` trước). Tự chấm phải làm ở ô 720p 1×, và phải viết ra một câu "trông giống gì" trước khi so với ý phiếu (Kiểm 8 của 242).
+
+**Nhận (không làm lại):**
+- Dragonhold `gfx-quality`;
+- Wordwoven `pace`;
+- Last Line `quality.r2`, `read-aloud.r2`.
+
+**Lỗi chung:**
+- Icon tối và mảnh trên nền tối: nâu trên đá ở Dragonhold, xanh trên ngọc ở Wordwoven. Dùng màu nhấn sáng của game cho thân icon:
+  - Dragonhold: vàng than hồng và kem;
+  - Wordwoven: vàng lá và kem, lõi ngọc;
+  - Last Line: trắng ngà và lam.
+- Viền tối dày, khối đặc, không nét mảnh. Bóng hình phải chiếm đủ 70 % ô.
+
+| Game · tên | Điểm | Lỗi | Sửa (EN) |
+|---|---|---|---|
+| Dragonhold · `vol-keyboard.r3` | 7,5 | phím nâu tối, sóng âm mờ | a big three-quarter keycap with a bright cream-gold top face and a thick dark outline, two bold ember-gold sound arcs clearly separated from the cap |
+| Dragonhold · `vol-keyboard-volume.r2` | 7 | nêm cam đọc thành loa/phễu | the same keycap beside a short vertical slider with a bright round knob (a volume control), no wedge |
+| Dragonhold · `gfx-motion` | 6,5–7 | đường sóng và "‖" mảnh, đọc thành chữ | a bold round badge holding a thick ribbon wave that ends in a chunky pause sign (two fat bars) |
+| Dragonhold · `learn-meaning` | 7 | khối nâu, không đọc ra bong bóng thoại | an open book with a big rounded speech bubble above it holding two bright dots, no letters |
+| Dragonhold · `learn-ipa` | 7 | hai gạch chéo đọc thành chữ N | a bold ear shape with two sound arcs entering it (listen to how it is said) |
+| Wordwoven · `vol-keyboard.r3` | 6,5–7 | phím ngọc nhỏ, không có sóng âm | như Dragonhold `vol-keyboard`, phím ngọc viền vàng lá dày, hai sóng âm vàng rõ |
+| Wordwoven · `vol-keyboard-volume.r2` | 6,5 | nêm trắng đọc thành bút chì | như Dragonhold `vol-keyboard-volume`, chất liệu Wordwoven |
+| Wordwoven · `story-mode` | 7,5 | sách và lửa nhỏ, hơi rối | an open storybook seen from the front with a single bright lantern glow above the pages, bigger and simpler |
+| Wordwoven · `gfx-motion` | 6 | xanh trên ngọc, gần như mất | như Dragonhold `gfx-motion`, thân vàng lá trên đĩa ngọc sẫm |
+| Wordwoven · `learn-meaning` | 7,5 | sách ổn nhưng thiếu bong bóng | như Dragonhold `learn-meaning` |
+| Wordwoven · `learn-ipa` | 6,5 | đọc thành chữ N, đường ngoằn ngoèo | như Dragonhold `learn-ipa` |
+| Wordwoven · `hud-sound.r2`, `hud-sound-muted.r2` | 6,5 | loa quá nhỏ trong đĩa ngọc, ở 32 px chỉ thấy đồng xu | keep the round jade plate, but the gold speaker fills about 70 % of the plate with thick outlines; muted: the same speaker with a bold slash |
+| Last Line · `vol-keyboard.r2` | 7,5 | phím trắng rõ, không thấy sóng âm | add two bold cyan sound arcs beside the keycap |
+| Last Line · `vol-keyboard-volume` | 7,5 | nêm lam nhỏ | như Dragonhold `vol-keyboard-volume`, phím trắng ngà và núm lam |
+| Last Line · `reduced-motion.r3` | 7 | đúng nghĩa (không còn "tăng tốc") nhưng mảnh | như Dragonhold `gfx-motion`, thép và lam |
+
+Các icon trên lấy tên `try2` (rồi `try3` nếu cần) theo đúng tên phiếu. Ô so sánh Keyboard sound cạnh Keyboard volume của cùng game ở 24 px phải khác nhau ngay (IoU ≤ 0,80).
