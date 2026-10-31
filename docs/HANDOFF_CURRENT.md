@@ -22,7 +22,11 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - Dragonhold và Last Line: `wf_bd91f3bd-3b2`, ra `docs/games/QUALITY_RESCUE_2026-11-01.md`.
   - Wordwoven (xong): 3D không vẽ quái, lính, dân, cây hay trời; camera 55°, 58 m; đêm như ngày; tự chấm 2/10.
 - **Wordwoven đang chạy:**
-  - `td-3d-default` (`wf_adb0b68c-1f1`): bật 3D mặc định và hàng Quality. **Chưa gộp tới khi 3D vẽ quái.**
+  - `td-3d-default` (xong): commit `8d27221` và `909d9b3` ở `.wt-td-3d-default`.
+    - `FIRST_TIER` medium; hàng "Quality · new runs" ở F1; lùi về 2D khi không có WebGL 2.
+    - Hiệu năng Medium 1,07 ms; media High 15,25 / 16 MB; gói khởi động 84,95 / 85 kB (cần tách chunk trước thay đổi kế tiếp).
+    - Giám khảo mù chấm bản 3D 4,5/10.
+    - Người soát: chưa gộp cho tới khi 3D vẽ quái; nếu gộp sớm thì để `FIRST_TIER` = "low".
   - `td-units-3d` (`wf_163ccc93-022`): `units.ts`, camera mới, đêm.
   - Gộp cả hai rồi mới bật 3D.
 
