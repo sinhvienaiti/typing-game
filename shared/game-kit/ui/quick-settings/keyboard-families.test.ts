@@ -113,7 +113,7 @@ describe("219 family picker", () => {
     expect(p.control.element.querySelectorAll('[role="group"]')).toHaveLength(3);
     p.option("1").focus(); key(p.option("1"), "PageDown"); expect(document.activeElement).toBe(p.option("2"));
   });
-  it("opening Sound scrolls to the selected pack, only inside the list, on each reopen", async () => {
+  it("opening Sound centres the selected pack, only inside the list, on each reopen", async () => {
     const qs = new QuickSettings({ keyboardProfiles: await options(), getValues: () => ({ keyboard: "pack-80" }), onChange: () => {}, countdownMs: 0 });
     cleanups.push(() => qs.destroy());
     const root = qs.root.querySelector<HTMLElement>('.kit-keyboards')!;
@@ -123,17 +123,19 @@ describe("219 family picker", () => {
     Object.defineProperty(root, "clientHeight", { configurable: true, value: 306 });
     const outerScroll = outer.scrollTop;
     qs.open("sound"); await Promise.resolve();
-    expect(root.scrollTop).toBe(2228);
+    // Centred (31/10 judges: it opened at the list's bottom edge): row 2500..2534 in a 306 px view.
+    expect(root.scrollTop).toBe(2517 - 153);
     expect(outer.scrollTop).toBe(outerScroll);
     qs.close(); root.scrollTop = 0; qs.open("sound"); await Promise.resolve();
-    expect(root.scrollTop).toBe(2228);
+    expect(root.scrollTop).toBe(2517 - 153);
     expect(outer.scrollTop).toBe(outerScroll);
   });
-  it("scrolls upward only as far as needed and avoids scrolling after destruction", async () => {
+  it("reveals a selection above the view in the middle, leaves a visible one alone and avoids scrolling after destruction", async () => {
     const p = picker(await options()); const root = p.control.element;
     geometry(root, () => 100, 306); geometry(p.option("pack-0"), () => 580 - root.scrollTop, 34);
     Object.defineProperty(root, "clientHeight", { configurable: true, value: 306 });
-    root.scrollTop = 500; p.control.sync("pack-0"); await Promise.resolve(); expect(root.scrollTop).toBe(480);
+    root.scrollTop = 500; p.control.sync("pack-0"); await Promise.resolve(); expect(root.scrollTop).toBe(497 - 153);
+    root.scrollTop = 400; p.control.sync("pack-0"); await Promise.resolve(); expect(root.scrollTop).toBe(400);
     root.scrollTop = 500; p.control.sync("pack-0"); p.control.destroy(); await Promise.resolve(); expect(root.scrollTop).toBe(500);
   });
 });

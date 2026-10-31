@@ -260,11 +260,11 @@ describe("QuickSettings.setChoiceOptions: a rebuild is not the player's doing", 
     await flush();
     expect(list.scrollTop).toBe(120);
     expect(p.option("deep").getAttribute("aria-selected")).toBe("true");
-    // Opening the panel again still brings the selection into view.
+    // Opening the panel again still brings the selection into view, in the middle of the list.
     p.qs.close();
     p.qs.open("sound");
     await flush();
-    expect(list.scrollTop).toBe(120 + 2034 - 406);
+    expect(list.scrollTop).toBe(120 + (2000 + 2034) / 2 - 100 - 306 / 2);
   });
 
   it("a resting pointer over an option previews nothing when the list under it is rebuilt; moving to another option does", async () => {
