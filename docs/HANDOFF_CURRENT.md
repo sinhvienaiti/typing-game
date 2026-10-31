@@ -40,7 +40,20 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **G3 Last Line (B3) xong:** commit `07895db` trên `ts-typefx`, `pnpm check` 265/265. Đã thử trên trình duyệt: host chạy, host chết, HTML 200, host treo, không có origin.
   - Hai việc ở repo cha chưa làm: dòng `VITE_TYPING_FEEL_ORIGIN` của `build:survival` và `dev:survival:app` trong `package.json` (đang chờ commit chung với G4), và `typing-feel/media.md5` (sinh ra khi `media:push`).
 - **Sửa kit theo G3, rồi B4 (Dragonhold) và B5 (Wordwoven):** workflow `typing-feel-kit-fix-b4-b5` (`wf_900342b5-42f`).
-- **G6 (kho Typing Feel trong Admin) đang chạy:** workflow `typing-feel-g6-admin-store` (`wf_065fd408-7ca`). Chỉ thử trên dữ liệu chép tạm; không ghi vào `typing-feel/public` thật hay `.local/admin`.
+- **G6 xong** (`217f5f0a`; tài liệu `6b2320ee`):
+  - kho Typing Feel, Publish và Rollback;
+  - ba trang Keyboard Sounds, Typing Effects, Release & History.
+  - Đã nạp `seed-v1` vào kho Admin thật lúc 06:15. Bản sao lưu trước khi nạp: `.local/admin-backup-20261031-before-typing-feel-seed.tgz`.
+  - Trang Keyboard Sounds trên host chơi hiện 34 bộ, 7 họ, `seed-v1 · r1`.
+- **Kit + B4 + B5 xong:**
+  - kit `fdb8bc14` (repo cha);
+  - Last Line `9e169b9`, Dragonhold `d47ef93`, Wordwoven `926a3d9` (nhánh game).
+- **Media:**
+  - `media:push --only runtime` xong 06:21: 2.942 file, md5 khớp 3.587/3.587; `typing-feel/media.md5` và hai `media.md5` game đã commit (`7ce2432b`).
+  - Nhóm originals còn khoảng 27.300 file (khoảng 12 GB). Sẽ đẩy sau khi gộp nhánh xong, để không đụng `media.md5` lúc đang gộp.
+- **Đang chạy:** workflow `typing-feel-merge-and-g7` (`wf_835c6f92-41c`):
+  - gộp `ts-typefx` vào `main` của Last Line, `dh-keys` vào `main` của Dragonhold, `td-keys` vào `a2-days` của Wordwoven (nhánh thư mục game chính đang dùng), rồi kiểm trên host chơi bằng Chrome headless;
+  - song song làm G7 (nút Format).
 - **G4 Monkeytype xong (B6):** commit `2cc987e8f`, đã đẩy lên `feature/en-vn-translation` ở cả GitHub và GitLab (31/10).
   - Monkeytype đọc từ `TYPING_FEEL_URL`, không còn `sync-keys`.
   - Repo cha: `feel:pack` và con trỏ Monkeytype (`85ef5df8`).
