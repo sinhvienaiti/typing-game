@@ -32,6 +32,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 17:45: thử lửa B (chủ dự án "Làm thử B").**
+- Firefly Video có chế độ **Transparent background** (540p, 16:9; ẩn khi chọn preset Style hay Camera): mỗi clip là một video màu (đã ghép trên nền của Firefly) và một video alpha xám. Nút Download không lưu file trong khung trình duyệt của app; CSP của trang chặn fetch nhưng không chặn `form-action`, nên điều phối gửi hai blob bằng một form tới chỗ nhận chỉ chạy trên 127.0.0.1 (cách làm ở `FIREFLY_VFX_LIST.md` §5). `window.open` trong khung trình duyệt chuyển chính tab đi: đừng dùng.
+- Giới hạn tốc độ: khoảng 2–3 lần tạo rồi "try again later" khoảng 4 phút. Gói ghi "unlimited use", credit cao cấp đứng 8.660/10.000.
+- 5 clip (đúng mức của kế hoạch) ở `~/VFXLab/inbox/firefly/dragon-hold/{impact-cel,smoke-cel}/`: lửa v2 (nổ anime, chính), v3 (cầu lửa cuộn, nguội vàng → đỏ thẫm), khói v2 dùng được; lửa v1 và khói v1 loại. Prompt tả theo mốc thời gian và đặt vật giữa khung thì đúng hơn hẳn.
+- Công cụ flipbook nhận cặp màu + alpha (`4e851ee4`, 23 test). Workflow `dragon-fire-test-b` (`wf_9ee05652-06a`) dựng B trên nhánh `dh-fire-b` (từ `dh-fire-a`, cùng worktree `.wt-dh-fire-a`), rồi hai giám khảo mới chấm mù B, A và vòng 10.
+
 **31/10 khoảng 17:40: lửa A trượt, Wordwoven 1C đã gộp.**
 - **Thử lửa A (đòn mạnh) trượt** (Dragonhold `dh-fire-a` `38834b2`, chưa gộp; công cụ flipbook ở repo cha `6130d72b`). Hai giám khảo mới chấm mù, tốc độ thật, có clip thương mại làm mốc:
   - test A 5,0 và 6,0; vòng 10 (cùng cách chấm) 5,5 và 5,3. Dư âm 4,5 và 5,0, va chạm 5 và 6, màu/độ nóng 4,5 và 5,5.
