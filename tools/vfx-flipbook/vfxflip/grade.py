@@ -1,4 +1,4 @@
-"""Colour work on float RGB frames in [0, 1]: black crush, luma matte, highlight shoulder, fades.
+"""Colour work on float RGB frames in [0, 1]: black crush, luma matte, matte video, highlight shoulder, fades.
 
 Every curve here scales R, G and B by one factor per pixel, so hue never shifts and no channel
 clips on its own (the "do not clip colour" rule of FIREFLY_VFX_LIST §4).
@@ -126,6 +126,110 @@ def widen_coverage(alpha: np.ndarray, px: float = 2.5, temporal: int = 1) -> np.
     if temporal > 0 and len(out) > 1:
         out = ndimage.maximum_filter1d(out, size=2 * int(temporal) + 1, axis=0, mode="nearest")
     return np.clip(out, 0.0, 1.0).astype(np.float32)
+
+
+def alpha_levels(matte: np.ndarray, t0: float, k: float = 0.02, top: float = 0.97) -> np.ndarray:
+    """Matte video (grey 0..1) -> alpha: codec noise up to t0 goes to exactly 0 through a soft knee, and `top` and
+    above are opaque (H.264 leaves the flat interior of the matte at 0.95-1.0)."""
+    a = knee(matte, t0, k) / max(top - t0 - k / 2.0, 1e-3)
+    return np.clip(a, 0.0, 1.0).astype(np.float32)
+
+
+def _fill(values: np.ndarray, weight: np.ndarray, sigmas: tuple[float, ...]) -> tuple[np.ndarray, np.ndarray]:
+    """Normalised convolution: the weighted mean of `values` (H, W, C) around each pixel, fine scales first, each
+    coarser scale filling only what the finer ones did not reach. Returns (filled, how much was reached 0..1)."""
+    out = np.zeros(values.shape, np.float32)
+    have = np.zeros(weight.shape, np.float32)
+    vw = values * weight[..., None]
+    for s in sigmas:
+        den = ndimage.gaussian_filter(weight, s)
+        num = ndimage.gaussian_filter(vw, [s, s, 0])
+        take = smoothstep(0.02, 0.2, den) * (1.0 - have)
+        out += take[..., None] * (num / np.maximum(den, 1e-6)[..., None])
+        have += take
+    return out, have
+
+
+def clean_plate(rgb: np.ndarray, clear: np.ndarray, factor: int = 4) -> np.ndarray:
+    """The backdrop the colour video was rendered on, under the effect: the colour of the clear pixels (matte 0)
+    filled inward. Firefly's backdrop is a smooth gradient that brightens with the effect, so this works per frame
+    at 1/`factor` resolution and is scaled back up bilinearly."""
+    h, w = clear.shape
+    hh, ww = -(-h // factor), -(-w // factor)
+    pad = ((0, hh * factor - h), (0, ww * factor - w))
+    wgt = np.pad(clear.astype(np.float32), pad, mode="edge")
+    col = np.pad(rgb, pad + ((0, 0),), mode="edge") * wgt[..., None]
+    den = wgt.reshape(hh, factor, ww, factor).mean((1, 3))
+    num = col.reshape(hh, factor, ww, factor, 3).mean((1, 3))
+    coarse = num / np.maximum(den, 1e-6)[..., None]
+    plate, have = _fill(coarse, den, (1.0, 3.0, 8.0, 24.0))
+    rest = (num.sum((0, 1)) / den.sum()) if den.sum() > 0 else np.zeros(3, np.float32)
+    plate += (1.0 - have)[..., None] * rest
+    plate = ndimage.zoom(plate, (factor, factor, 1), order=1, mode="nearest", grid_mode=True)
+    return plate[:h, :w].astype(np.float32)
+
+
+def decontaminate(rgb: np.ndarray, alpha: np.ndarray, plate: np.ndarray, trust: tuple[float, float] = (0.05, 0.35),
+                  spread_px: float = 1.5) -> np.ndarray:
+    """Colour video over its own backdrop + alpha -> RGBA, straight alpha, with the backdrop taken out of the edges.
+
+    The colour is C = a F + (1 - a) B (measured on Firefly's transparent clips), so F = (C - (1 - a) B) / a. Where
+    alpha is small that division mostly amplifies codec noise, so below `trust` the colour moves to that of the
+    nearest solid pixel (alpha >= 0.5), slightly blurred; that colour also fills the clear area, so RGB is defined
+    everywhere and filtering or mipmaps never pull the backdrop (or black) into the edge."""
+    a = alpha[..., None]
+    p = np.minimum(np.clip(rgb - (1.0 - a) * plate, 0.0, None), a)   # premultiplied foreground, F <= 1
+    f = p / np.maximum(a, 1e-4)
+    solid = alpha >= 0.5
+    if solid.any():
+        _, (iy, ix) = ndimage.distance_transform_edt(~solid, return_indices=True)
+        ext = f[iy, ix]
+        if spread_px > 0:
+            ext = ndimage.gaussian_filter(ext, [spread_px, spread_px, 0])
+    elif alpha.sum() > 0:
+        ext = np.broadcast_to((p.reshape(-1, 3).sum(0) / alpha.sum()).astype(np.float32), f.shape)
+    else:
+        ext = np.zeros_like(f)
+    w = smoothstep(trust[0], trust[1], alpha)[..., None]
+    out = w * f + (1.0 - w) * ext
+    return np.concatenate([np.clip(out, 0.0, 1.0), a], -1).astype(np.float32)
+
+
+def matte_video_rgba(rgb: np.ndarray, matte: np.ndarray, t0: float) -> np.ndarray:
+    """One frame of a transparent Firefly clip (colour frame + its matte frame, float) -> RGBA, straight alpha."""
+    alpha = alpha_levels(matte, t0)
+    clear = ndimage.binary_erosion(matte <= t0, iterations=2)
+    return decontaminate(rgb, alpha, clean_plate(rgb, clear))
+
+
+def edge_fringe(frames: np.ndarray, band: int = 4) -> dict:
+    """Dark or grey fringe check for RGBA frames: the straight colour of the soft edge (0.1 < alpha < 0.6) against
+    the solid colour just inside it (alpha > 0.95, within `band` px). Luma and saturation ratios near 1 mean a
+    clean edge; a backdrop or black left in the edge pulls them down."""
+    se = ss = sl = si = 0.0
+    n_edge = 0
+    for f in frames:
+        a = f[..., 3]
+        edge = (a > 0.1) & (a < 0.6)
+        if edge.sum() < 20:
+            continue
+        inside = (a > 0.95) & ndimage.binary_dilation(edge, iterations=band)
+        if inside.sum() < 20:
+            continue
+        rgb = f[..., :3]
+        lum = luma(rgb)
+        mx = rgb.max(-1)
+        sat = np.where(mx > 1e-4, (mx - rgb.min(-1)) / np.maximum(mx, 1e-4), 0.0)
+        ne, ni = int(edge.sum()), int(inside.sum())
+        sl += float(lum[edge].mean()) * ne
+        si += float(lum[inside].mean()) * ne
+        se += float(sat[edge].mean()) * ne
+        ss += float(sat[inside].mean()) * ne
+        n_edge += ne
+    if n_edge == 0:
+        return {"edgeVsInsideLuma": None, "edgeVsInsideSat": None, "edgePixels": 0}
+    return {"edgeVsInsideLuma": round(sl / max(si, 1e-6), 3), "edgeVsInsideSat": round(se / max(ss, 1e-6), 3),
+            "edgePixels": n_edge}
 
 
 def shoulder(rgb: np.ndarray, peak: float, knee_at: float = 0.6) -> np.ndarray:

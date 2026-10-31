@@ -6,6 +6,7 @@
 #   tools/vfx-flipbook/run.sh probe <clip.mp4>          # ffprobe summary
 #   tools/vfx-flipbook/run.sh test [-q]                 # synthetic-clip tests (pytest)
 # Input:  $VFXLAB_HOME/inbox/firefly/<game>/<id>/<id>__vN.mp4   (VFXLAB_HOME defaults to ~/VFXLab)
+#         or <id>__vN.rgb.mp4 + <id>__vN.alpha.mp4 (Firefly transparent mode: colour + matte, "matte": "alpha-video")
 # Output: $VFXLAB_HOME/out/<game>/<id>/<id>__vN.{atlas.png,json,sheet.jpg,preview.mp4,metrics.json}
 # Python: needs numpy, scipy, Pillow, pytest; the Audio Lab venv has them (override with VFXFLIP_PY).
 set -euo pipefail

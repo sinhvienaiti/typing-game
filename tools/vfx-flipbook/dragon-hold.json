@@ -33,6 +33,13 @@
     "smoke-mask-a":   { "from": "smoke-mask", "phase": "F", "aspect": "1:1", "variants": 4, "layout": "bbox", "flash": false, "greyCut": 0.0,
                         "maxSec": 4.0, "startFrac": 0.05, "edgeFade": "radial", "stopAtEdge": ["top", "left", "right"],
                         "matte": "coverage", "matteOpaque": 0.3, "matteWidenPx": 2.0, "matteTemporal": 1,
-                        "note": "fire test A: smoke-mask's cut as RGBA (coverage = density, RGB = the clip's own shading)" }
+                        "note": "fire test A: smoke-mask's cut as RGBA (coverage = density, RGB = the clip's own shading)" },
+    "impact-cel":     { "phase": "I", "aspect": "16:9", "variants": 3, "blend": "normal", "matte": "alpha-video", "cell": [512, 512],
+                        "flash": false, "greyCut": 0.0, "startFrac": 0.01, "maxSec": 2.5, "endAtGap": 0.1, "whiteFix": "off",
+                        "note": "fire test B (31/10, DRAGON_FIRE_DIAGNOSIS §2): cel fire from Firefly's transparent mode (<id>__vN.rgb.mp4 + .alpha.mp4); RGBA straight alpha, the backdrop taken out of the edges; cut from the first visible frame to the first empty gap (0.1 s: v3 replays after 3 empty frames); white core reported, not warmed (set whiteFix warm to fix it)" },
+    "smoke-cel":      { "phase": "F", "aspect": "16:9", "variants": 2, "blend": "normal", "matte": "alpha-video", "cell": [256, 256],
+                        "layout": "bbox", "flash": false, "greyCut": 0.0, "startFrac": 0.01, "maxSec": 4.0, "endAtGap": 0.25,
+                        "whiteFix": "off",
+                        "note": "fire test B: cel smoke from Firefly's transparent mode, RGBA straight alpha" }
   }
 }

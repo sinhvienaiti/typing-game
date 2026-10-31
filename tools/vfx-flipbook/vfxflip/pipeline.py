@@ -16,6 +16,8 @@ TOOL_DIR = Path(__file__).resolve().parent.parent
 TOOL_VERSION = 1
 STRIP_OVERLAP = 0.15  # extra width cut for the horizontal-tiling crossfade
 VERSION_RE = re.compile(r"^(?P<id>.+)__(?P<v>v\d+)\.mp4$")
+# Firefly "Transparent background" clips come as two files: <id>__vN.rgb.mp4 (colour) + <id>__vN.alpha.mp4 (matte).
+PAIR_RE = re.compile(r"^(?P<id>.+)__(?P<v>v\d+)\.rgb\.mp4$")
 
 DEFAULTS = {"loop": False, "blend": "additive", "background": "black", "cell": [256, 256],
             "frames": 32, "step": 1, "layout": "centre", "margin": 0.06, "greyCut": 0.15,
@@ -25,7 +27,11 @@ DEFAULTS = {"loop": False, "blend": "additive", "background": "black", "cell": [
             "edgeFade": "auto", "stopAtEdge": None, "whiteFix": "warm",
             # "coverage": black-background clips get an alpha channel (the luma matte against black, opaque at
             # matteOpaque luma, widened matteWidenPx and maxed over +-matteTemporal frames); RGB stays as graded.
-            "matte": None, "matteOpaque": 0.25, "matteWidenPx": 2.5, "matteTemporal": 1}
+            # "alpha-video": the clip is a colour + matte pair (PAIR_RE); alpha comes from the matte video and the
+            # colour has the clip's own backdrop taken out of its soft edges (grade.matte_video_rgba).
+            "matte": None, "matteOpaque": 0.25, "matteWidenPx": 2.5, "matteTemporal": 1,
+            # one-shots: the effect ends at the first run of endAtGap seconds of empty frames after it starts
+            "endAtGap": None}
 
 
 def lab_home() -> Path:
@@ -52,19 +58,31 @@ def clip_params(table: dict, cid: str, version: str | None = None) -> dict:
     return p
 
 
+def alpha_pair(mp4: Path) -> Path | None:
+    """The matte video next to a <id>__vN.rgb.mp4 colour video (None for a plain clip)."""
+    if not mp4.name.endswith(".rgb.mp4"):
+        return None
+    return mp4.with_name(mp4.name[: -len(".rgb.mp4")] + ".alpha.mp4")
+
+
 def find_versions(inbox: Path, cid: str) -> list[tuple[str, Path]]:
-    found = []
+    """(vN, clip) per version: a plain <id>__vN.mp4, or the colour file of a <id>__vN.rgb.mp4 + .alpha.mp4 pair
+    (the pair wins if both exist)."""
+    found: dict[str, Path] = {}
     for f in sorted((inbox / cid).glob(f"{cid}__v*.mp4")):
         m = VERSION_RE.match(f.name)
         if m and m.group("id") == cid:
-            found.append((m.group("v"), f))
-    found.sort(key=lambda vf: int(vf[0][1:]))
-    return found
+            found.setdefault(m.group("v"), f)
+        m = PAIR_RE.match(f.name)
+        if m and m.group("id") == cid and alpha_pair(f).is_file():
+            found[m.group("v")] = f
+    return sorted(found.items(), key=lambda vf: int(vf[0][1:]))
 
 
 def read_note(mp4: Path) -> dict:
     """The clip's .txt (model, settings, prompt): kept as data, never run."""
-    txt = mp4.with_suffix(".txt")
+    base = alpha_pair(mp4) and mp4.with_name(mp4.name[: -len(".rgb.mp4")] + ".mp4")
+    txt = (base or mp4).with_suffix(".txt")
     if not txt.is_file():
         return {}
     text = txt.read_text(encoding="utf-8", errors="replace")
@@ -172,17 +190,45 @@ def _fix_white_core(frames: np.ndarray, limit: float, mode: str = "warm") -> tup
                                                      "peak": round(lo, 4), "frame": at, "reached": True}
 
 
+def _fix_white_core_rgba(frames: np.ndarray, limit: float, mode: str) -> tuple[np.ndarray, dict | None]:
+    """_fix_white_core for straight-alpha RGBA: measured and fixed on the colour over black (premultiplied), and
+    the per-channel gain it applied is carried back to the straight colour."""
+    a = frames[..., 3:4]
+    prem = frames[..., :3] * a
+    fixed, info = _fix_white_core(prem, limit, mode)
+    if info is None:
+        return frames, None
+    gain = np.where(prem > 1e-4, fixed / np.maximum(prem, 1e-4), 1.0)
+    out = frames.copy()
+    out[..., :3] = np.clip(frames[..., :3] * gain, 0.0, 1.0)
+    return out, info
+
+
+def _premultiplied(frames: np.ndarray) -> np.ndarray:
+    return frames[..., :3] * frames[..., 3:4]
+
+
 class _Analysis:
     """Analysis-grid view of a clip (about 480 px wide), with any rotate/hflip pre-filters."""
 
-    def __init__(self, mp4: Path, size: tuple[int, int], params: dict, pre: str = ""):
+    def __init__(self, mp4: Path, size: tuple[int, int], params: dict, pre: str = "", alpha: Path | None = None):
         self.size = size
         self.pre = pre
         an = media.decode_analysis(mp4, size[0], size[1], pre=pre)
+        self.t0 = self.noise = None
+        if alpha is not None:
+            am = media.decode_analysis(alpha, size[0], size[1], pre=pre)
+            n = min(len(an), len(am))
+            an, am = an[:n], am[:n]
         self.n = len(an)
         anf = grade.to_float(an)
-        self.t0 = self.noise = None
-        if params["background"] == "white":
+        if alpha is not None:
+            # the matte video is the weight; "hot" is the bright, solid part (alpha x luma above 0.5)
+            self.t0, self.noise = grade.estimate_black_level(am)
+            self.weight = grade.alpha_levels(grade.to_float(am[..., 0]), self.t0)
+            lit = self.weight * grade.luma(anf)
+            self.hot = np.where(lit > 0.5, lit, 0.0).reshape(self.n, -1).sum(1)
+        elif params["background"] == "white":
             self.weight = grade.luma_matte(anf, grade.background_plate(grade.luma(anf)))[..., 3]
             self.hot = self.weight.reshape(self.n, -1).sum(1)
         else:
@@ -192,12 +238,13 @@ class _Analysis:
         self.energy = self.weight.reshape(self.n, -1).sum(1)
 
 
-def _orient(mp4: Path, info: dict, params: dict, warnings: list[str], fill: str) -> tuple[_Analysis, dict]:
+def _orient(mp4: Path, info: dict, params: dict, warnings: list[str], fill: str,
+            alpha: Path | None = None) -> tuple[_Analysis, dict]:
     """Directional clips: rotate a tilted axis to horizontal and mirror a clip that points the
     wrong way (table: axis "horizontal", coreSide "left" or "right"; per-version rotate/flipX
     override the automatic choice)."""
     size = (info["width"], info["height"])
-    an = _Analysis(mp4, size, params)
+    an = _Analysis(mp4, size, params, alpha=alpha)
     orient = {"rotate": 0.0, "flipX": False, "tiltMeasured": None}
     begin = timing.leading_black(an.energy)
     acc = an.weight[begin:].sum(0)
@@ -209,12 +256,12 @@ def _orient(mp4: Path, info: dict, params: dict, warnings: list[str], fill: str)
             rot = -ang
         if rot:
             flt, ow, oh = media.rotate_filter(float(rot), size[0], size[1], fill)
-            an2 = _Analysis(mp4, (ow, oh), params, pre=flt)
+            an2 = _Analysis(mp4, (ow, oh), params, pre=flt, alpha=alpha)
             ang2, _ = layout.principal_axis(an2.weight[begin:].sum(0))
             if rot == -ang and abs(ang2) > abs(ang):  # wrong sense: turn the other way
                 rot = ang
                 flt, ow, oh = media.rotate_filter(float(rot), size[0], size[1], fill)
-                an2 = _Analysis(mp4, (ow, oh), params, pre=flt)
+                an2 = _Analysis(mp4, (ow, oh), params, pre=flt, alpha=alpha)
                 ang2, _ = layout.principal_axis(an2.weight[begin:].sum(0))
             an, size = an2, (ow, oh)
             orient["rotate"] = round(float(rot), 2)
@@ -232,7 +279,7 @@ def _orient(mp4: Path, info: dict, params: dict, warnings: list[str], fill: str)
                 warnings.append(f"pointed the wrong way (hot core on the {side}): mirrored")
     if flip:
         pre = f"{an.pre},hflip" if an.pre else "hflip"
-        an = _Analysis(mp4, size, params, pre=pre)
+        an = _Analysis(mp4, size, params, pre=pre, alpha=alpha)
         orient["flipX"] = True
     mask_pre = []
     if orient["rotate"]:
@@ -281,8 +328,28 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     if params.get("aspect") and params["aspect"] != _aspect_label(info["width"], info["height"]):
         warnings.append(f"aspect {_aspect_label(info['width'], info['height'])} (table says {params['aspect']})")
 
+    alpha_mp4 = alpha_pair(mp4)
+    if alpha_mp4 is not None and params.get("matte") != "alpha-video":
+        if params.get("matte"):
+            warnings.append(f"matte {params['matte']!r} in the table, but the clip is a colour + matte pair: alpha-video used")
+        params = dict(params, matte="alpha-video")
+    vmatte = params.get("matte") == "alpha-video"
+    if vmatte:
+        if alpha_mp4 is None or not alpha_mp4.is_file():
+            raise FileNotFoundError(f"matte alpha-video needs {mp4.name[:-4]}.rgb.mp4 + .alpha.mp4 (got {mp4.name})")
+        ainfo = media.probe(alpha_mp4)
+        if (ainfo["width"], ainfo["height"]) != (info["width"], info["height"]):
+            raise media.MediaError(f"{alpha_mp4.name} is {ainfo['width']}x{ainfo['height']}, "
+                                   f"the colour video {info['width']}x{info['height']}")
+        if ainfo["frames"] != info["frames"]:
+            warnings.append(f"matte has {ainfo['frames']} frames, colour {info['frames']}: the shorter count used")
+        if params["blend"] != "normal":
+            warnings.append(f"alpha-video gives RGBA straight alpha for normal blend (table says {params['blend']})")
+            params = dict(params, blend="normal")
+    else:
+        alpha_mp4 = None
     additive = params["blend"] == "additive"
-    white_bg = params["background"] == "white"
+    white_bg = params["background"] == "white" and not vmatte
     fill = "white" if white_bg else "black"
     loop = bool(params["loop"])
     mode = params["layout"]
@@ -291,7 +358,7 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     out_w = int(round(cw * (1 + STRIP_OVERLAP))) if tile_x else cw
 
     # --- analysis pass (orientation fixed first) ---
-    an, orient = _orient(mp4, info, params, warnings, fill)
+    an, orient = _orient(mp4, info, params, warnings, fill, alpha=alpha_mp4)
     sw, sh = an.size
     n_src = an.n
 
@@ -314,7 +381,9 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
                                    max_sec=float(params["maxSec"]), fade_frac=float(params["fadeFrac"]),
                                    start_frac=float(params["startFrac"]), flash_window=float(params["flashWindow"]),
                                    growth_start=float(params["growthStart"]), n_max=int(params["frames"]),
-                                   force_start=params["start"], force_end=params["end"], stop=stop)
+                                   force_start=params["start"], force_end=params["end"], stop=stop,
+                                   gap_end=(max(1, int(round(float(params["endAtGap"]) * fps)))
+                                            if params.get("endAtGap") else None))
         span = list(range(plan["start"], plan["end"]))
     idx = plan["indices"]
 
@@ -331,7 +400,7 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         edges = []  # the rotated canvas has new, empty borders; the source check ran before
     if edges:
         warnings.append("effect reaches the video frame edge: " + ",".join(edges))
-    if white_bg:
+    if white_bg or vmatte:
         core = layout.centroid(weight[idx[0]]) or c
     elif loop:
         cores = [p for p in (layout.core_centroid(weight[i]) for i in idx[: plan["frames"]]) if p]
@@ -364,6 +433,10 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
 
     # --- output pass: crop + lanczos at cell size, then grade ---
     cells = media.decode_crop(mp4, (sw, sh), src_rect, out_w, ch, fill, pre=an.pre)
+    mattes = None
+    if vmatte:
+        mattes = media.decode_crop(alpha_mp4, (sw, sh), src_rect, out_w, ch, "black", pre=an.pre)[..., 0]
+        cells, mattes = cells[:n_src], mattes[:n_src]
     params = dict(params, _maskPre=orient["maskPre"])
     fade, fade_notes = _edge_fade(params, (info["width"], info["height"]), (sw, sh), src_rect, out_w, ch, tile_x)
     warnings += fade_notes
@@ -378,7 +451,12 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         return img * fade[..., None]
 
     cache: dict[int, np.ndarray] = {}
-    if white_bg:
+    if vmatte:
+        def graded(i: int) -> np.ndarray:
+            if i not in cache:
+                cache[i] = faded(grade.matte_video_rgba(grade.to_float(cells[i]), grade.to_float(mattes[i]), an.t0))
+            return cache[i]
+    elif white_bg:
         plate = grade.background_plate(grade.luma(grade.to_float(cells)), sigma=3.0)
         if float(np.median(plate)) < 0.85:
             warnings.append(f"background not white (plate median {float(np.median(plate)):.2f})")
@@ -430,7 +508,12 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
             plan = dict(plan, start=best[1], end=best[1] + plan["frames"] * int(plan["step"]), indices=best[2])
         idx = plan["indices"]
     frames = assemble(idx)
-    del cells, cache
+    raw_fringe = None
+    if vmatte:  # the same edges straight from the colour video, for comparison
+        raw_fringe = grade.edge_fringe(
+            np.concatenate([grade.to_float(cells[i]), grade.alpha_levels(grade.to_float(mattes[i]), an.t0)[..., None]], -1)
+            for i in idx)
+    del cells, cache, mattes
     tail_faded = 0
     if not loop and not plan["faded"]:
         tail_faded = max(2, int(math.ceil(float(params["tailFade"]) * len(frames))))
@@ -441,6 +524,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     peak_fix = None
     if additive:
         frames, peak_fix = _fix_white_core(frames, metrics.LIMITS["whiteCore"], str(params["whiteFix"]))
+    elif vmatte:
+        frames, peak_fix = _fix_white_core_rgba(frames, metrics.LIMITS["whiteCore"], str(params["whiteFix"]))
     frames = np.clip(frames, 0.0, 1.0)
     final = atlas.to_uint8(frames).astype(np.float32) / 255.0  # checks run on what the atlas holds
     coverage = None
@@ -467,8 +552,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
             warnings.append(f"no flash in the clip (the burst grows for {grow:.1f} s to its peak): started at "
                             f"{float(params['growthStart']):.0%} of that peak, first frame {ffg:.0%} of the "
                             f"flipbook peak; the flash must come from the game's flash layer")
-    if additive:
-        wc, wc_at = metrics.white_core(final)
+    if additive or vmatte:
+        wc, wc_at = metrics.white_core(_premultiplied(final) if vmatte else final)
         checks["whiteCore"] = {"value": round(wc, 3), "frame": wc_at, "limit": metrics.LIMITS["whiteCore"],
                                "peakFix": peak_fix}
         if wc > metrics.LIMITS["whiteCore"]:
@@ -510,8 +595,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         if elong >= 1.4 and abs(ang) > float(params["maxTilt"]):
             flags.append(f"axis {ang:+.0f} deg")
     ramp = []
-    if additive:
-        ramp, mworst, mbad = metrics.colour_ramp(final)
+    if additive or vmatte:
+        ramp, mworst, mbad = metrics.colour_ramp(_premultiplied(final) if vmatte else final)
         checks["mustard"] = {"worst": round(mworst, 3), "frames": mbad, "limit": metrics.LIMITS["mustard"]}
         if mbad:
             flags.append(f"mustard x{len(mbad)}")
@@ -523,6 +608,13 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         warnings.append(f"capped at maxSec {params['maxSec']} s")
     if tail_faded:
         warnings.append(f"no fade-out in the cut: cooling fade over the last {tail_faded} frames")
+    if vmatte:
+        fr = grade.edge_fringe(final)
+        checks["fringe"] = dict(fr, raw=raw_fringe, matteLevel=round(an.t0 * 255, 2),
+                                note="soft edge (alpha 0.1-0.6) vs solid colour just inside; raw = colour video as is")
+        if fr["edgeVsInsideLuma"] is not None and fr["edgeVsInsideLuma"] < 0.85:
+            warnings.append(f"soft edge darker than the colour inside it (luma x{fr['edgeVsInsideLuma']:.2f}): "
+                            f"a dark fringe or the art's own outline")
 
     if coverage is not None:
         raw = np.stack([grade.coverage_matte(f, opaque_at=float(params["matteOpaque"])) for f in final])
@@ -558,6 +650,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
                  "flashPeak": plan.get("flashPeak"), "crossfade": plan["crossfade"], "tailFade": tail_faded},
         "tool": f"tools/vfx-flipbook v{TOOL_VERSION}",
     }
+    if vmatte:
+        meta["source"]["matte"] = alpha_mp4.name
     (out_dir / f"{stem}.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     status = "OK" if not flags else "FLAG " + "; ".join(flags)

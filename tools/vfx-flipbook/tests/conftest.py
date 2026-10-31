@@ -48,9 +48,17 @@ def lab(tmp_path: Path):
         mp4.with_suffix(".txt").write_text("Source: synthetic test clip\nPrompt: none\n", encoding="utf-8")
         return mp4
 
+    def add_pair(cid: str, colour: np.ndarray, matte: np.ndarray, version: str = "v1") -> Path:
+        """A Firefly transparent clip: <id>__vN.rgb.mp4 (colour over its own backdrop) + .alpha.mp4 (grey matte)."""
+        d = home / "inbox" / "firefly" / GAME / cid
+        encode(colour, d / f"{cid}__{version}.rgb.mp4")
+        encode(np.repeat(matte[..., None], 3, -1), d / f"{cid}__{version}.alpha.mp4")
+        (d / f"{cid}__{version}.txt").write_text("model: synthetic\nprompt: none\n", encoding="utf-8")
+        return d / f"{cid}__{version}.rgb.mp4"
+
     def write_table(clips: dict, defaults: dict | None = None) -> None:
         (table_dir / f"{GAME}.json").write_text(json.dumps({"game": GAME, "defaults": defaults or {},
                                                             "clips": clips}), encoding="utf-8")
 
-    return SimpleNamespace(home=home, table_dir=table_dir, add_clip=add_clip, write_table=write_table,
+    return SimpleNamespace(home=home, table_dir=table_dir, add_clip=add_clip, add_pair=add_pair, write_table=write_table,
                            blob=blob, fire=fire, game=GAME)

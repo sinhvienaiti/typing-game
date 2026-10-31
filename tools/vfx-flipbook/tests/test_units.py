@@ -142,3 +142,30 @@ def test_coverage_matte_widens_and_holds_over_neighbour_frames():
     grown = int((row > 0.5).sum()) - int((cov[1, 32] > 0.5).sum())
     assert 4 <= grown <= 6, grown                                    # about 2.5 px on each side
     assert wide[0, 32, 32] == 1.0 and wide[2, 32, 32] == 1.0         # held over the neighbouring frames
+
+
+def test_decontaminate_takes_the_backdrop_out_of_soft_edges():
+    h = w = 64
+    d = np.hypot(*np.mgrid[-32:32, -32:32]).astype(np.float32)
+    a = np.clip((20 - d) / 8.0, 0, 1).astype(np.float32)
+    fg = np.array([0.95, 0.5, 0.1], np.float32)
+    bg = np.array([0.3, 0.12, 0.0], np.float32)
+    rgb = (a[..., None] * fg + (1 - a[..., None]) * bg).astype(np.float32)
+    out = grade.matte_video_rgba(rgb, a, t0=0.02)
+    soft = (out[..., 3] > 0.1) & (out[..., 3] < 0.9)
+    assert np.abs(out[..., :3][soft] - fg).max() < 0.03            # straight colour = the effect's, not the mix
+    assert np.abs(out[0, 0, :3] - fg).max() < 0.03                 # clear area carries the edge colour, not black
+    assert out[0, 0, 3] == 0.0 and out[32, 32, 3] == 1.0
+    over = out[..., :3] * out[..., 3:4] + (1 - out[..., 3:4]) * bg
+    assert np.abs(over - rgb).max() < 0.04                         # over its own backdrop it is the source again
+
+
+def test_oneshot_gap_end_stops_before_a_repeat():
+    e = np.zeros(80)
+    e[5:25] = np.linspace(1, 10, 20)
+    e[25:30] = [8, 6, 4, 2, 1]
+    e[50:70] = 5.0                                                  # the burst plays again later
+    old = timing.plan_oneshot(e, e, 24.0, flash=False, max_sec=3.0, start_frac=0.05)
+    assert old["end"] > 50
+    new = timing.plan_oneshot(e, e, 24.0, flash=False, max_sec=3.0, start_frac=0.05, gap_end=6)
+    assert new["faded"] and new["end"] == 30 and max(new["indices"]) < 30

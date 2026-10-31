@@ -150,3 +150,70 @@ def test_wrong_way_projectile_is_mirrored(lab):
     rep, meta, atlas = _run(lab, "head")
     assert meta["source"]["flipX"] is True
     assert meta["pivot"][0] > 0.5                            # the hot head now leads on the right
+
+
+def _transparent_burst(h=216, w=384, n=72, core=None):
+    """A Firefly-style transparent clip: a disc grows from frame 6, fades by frame 30, and the burst plays again
+    from frame 48. The colour video is the disc composited over a brown backdrop gradient (C = a F + (1 - a) B),
+    the matte video is the disc's alpha with a soft 6 px edge."""
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    d = np.hypot(xx - w / 2, yy - h / 2)
+    backdrop = np.stack([0.30 + 0.15 * yy / h, 0.12 + 0.05 * yy / h, np.zeros_like(yy)], -1)
+    orange = np.array([1.0, 0.45, 0.08], np.float32)
+    colour = np.repeat(backdrop[None], n, 0).copy()
+    matte = np.zeros((n, h, w), np.float32)
+    for t0 in (6, 54):
+        for k in range(24):
+            t = t0 + k
+            if t >= n:
+                break
+            r = 12 + 58 * min(1.0, k / 19)
+            a = np.clip((r - d) / 6.0, 0.0, 1.0) * (1.0 if k < 20 else (24 - k) / 5)
+            f = np.broadcast_to(orange, (h, w, 3)).copy()
+            if core is not None:                      # a flat white core of `core` x the radius
+                f[d < core * r] = 1.0
+            colour[t] = a[..., None] * f + (1 - a[..., None]) * backdrop
+            matte[t] = a
+    return colour, matte, orange
+
+
+def test_transparent_pair_is_found_cut_at_the_gap_and_edges_lose_the_backdrop(lab):
+    colour, matte, orange = _transparent_burst()
+    lab.add_pair("cel", colour, matte)
+    lab.write_table({"cel": {"blend": "normal", "matte": "alpha-video", "cell": [128, 128], "flash": False,
+                             "startFrac": 0.01, "maxSec": 2.0, "endAtGap": 0.25, "whiteFix": "off"}})
+    assert [v for v, _ in pipeline.find_versions(lab.home / "inbox" / "firefly" / lab.game, "cel")] == ["v1"]
+    rep, meta, atlas = _run(lab, "cel")
+    assert meta["channels"] == "rgba" and meta["blend"] == "normal" and not meta["premultiplied"]
+    assert meta["source"]["matte"] == "cel__v1.alpha.mp4"
+    trim = meta["trim"]
+    assert trim["start"] == 6 and 28 <= trim["end"] <= 30         # empty lead and the empty gap are left out
+    assert all(i < 48 for i in trim["indices"])                    # the second play of the burst is not in the cut
+    cells = _cells(meta, atlas)
+    a = cells[..., 3]
+    assert a[:, :3, :3].max() == 0.0                               # clear outside the effect
+    peak = int(np.argmax(a.sum((1, 2))))
+    assert a[peak].max() == 1.0
+    edge = (a > 0.15) & (a < 0.6)
+    assert edge.sum() > 100
+    err = np.abs(cells[..., :3][edge] - orange).mean()
+    assert err < 0.06, err                                         # the soft edge keeps the effect's own colour
+    fr = rep["checks"]["fringe"]
+    assert fr["edgeVsInsideLuma"] > 0.9 and fr["raw"]["edgeVsInsideLuma"] < fr["edgeVsInsideLuma"] - 0.1
+    assert "whiteCore" in rep["checks"] and not rep["flags"], rep["flags"]
+
+
+def test_transparent_pair_warms_a_wide_white_core_when_the_table_asks(lab):
+    colour, matte, _ = _transparent_burst(core=0.6)
+    lab.add_pair("celw", colour, matte)
+    row = {"blend": "normal", "matte": "alpha-video", "cell": [128, 128], "flash": False, "startFrac": 0.01,
+           "maxSec": 2.0, "endAtGap": 0.25}
+    lab.write_table({"celw": dict(row, whiteFix="off")})
+    rep_off = _run(lab, "celw")[0]
+    assert rep_off["checks"]["whiteCore"]["value"] > 0.45 and any("white-core" in f for f in rep_off["flags"])
+    lab.write_table({"celw": dict(row, whiteFix="warm")})
+    rep, meta, atlas = _run(lab, "celw")
+    wc = rep["checks"]["whiteCore"]
+    assert wc["value"] <= 0.30 and wc["peakFix"]["mode"] == "warm"
+    cells = _cells(meta, atlas)
+    assert cells[..., 3].max() == 1.0                              # alpha untouched by the colour fix

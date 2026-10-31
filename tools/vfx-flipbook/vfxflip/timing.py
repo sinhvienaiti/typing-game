@@ -73,11 +73,15 @@ def plan_oneshot(energy: np.ndarray, hot: np.ndarray, fps: float, *, flash: bool
                  max_sec: float = 2.5, fade_frac: float = 0.03, start_frac: float = 0.05,
                  flash_window: float = 1.5, growth_start: float = 0.35,
                  n_min: int = 24, n_max: int = 32, force_start: int | None = None,
-                 force_end: int | None = None, stop: np.ndarray | None = None) -> dict:
+                 force_end: int | None = None, stop: np.ndarray | None = None,
+                 gap_end: int | None = None) -> dict:
     """Drop leading black; start on the flash (first frame >= 95 % of a flash peak that comes
     within flash_window s), or for a burst that only grows, on the frame where it reaches
     growth_start of its peak (the trigger); without a flash (smoke), on the first frame above
-    start_frac. End when the effect has faded out (or at max_sec); then 24-32 even frames."""
+    start_frac. End when the effect has faded out (or at max_sec); then 24-32 even frames.
+    gap_end (frames): the effect has also ended at the first run of that many faded frames after
+    the start, even if it comes back later (Firefly fills 5 s and may play the burst again); the
+    faded run is left out."""
     n = len(energy)
     begin = leading_black(energy)
     info: dict = {"droppedBlack": begin, "flashPeak": None}
@@ -103,8 +107,12 @@ def plan_oneshot(energy: np.ndarray, hot: np.ndarray, fps: float, *, flash: bool
     epk = start + int(np.argmax(tail))
     thr = fade_frac * float(tail.max())
     end, faded = n, False
-    for t in range(epk, n):
-        if (energy[t:] < thr).all():
+    gap = int(gap_end) if gap_end else 0
+    for t in range(start + 1 if gap else epk, n):  # with gap_end: the first burst, not the clip's biggest
+        if gap and (energy[t:t + gap] < thr).all():
+            end, faded = t, True  # the faded run itself is empty: leave it out
+            break
+        if not gap and (energy[t:] < thr).all():
             end, faded = t + 1, True
             break
     max_len = max(n_min, int(round(max_sec * fps)))
