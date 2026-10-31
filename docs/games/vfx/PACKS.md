@@ -27,3 +27,14 @@ Both allow shipping the effects inside a public, commercial web game without pay
   - SCORCH's `blast-core` ends in brown smoke over grass, the colour every judge round penalised;
   - Pyroclast's big effects (Fireball Burst, Ground Blast, Shockwave Ring) are paid.
 - Possible later uses: `cinder-drift` and Ember Puff as spark layers, and `flashover` or `fire-line` for ground fire.
+
+## Second batch, 31/10 about 22:45 (free-only plan V3, owner: "Cho tải và thử")
+
+| Pack | File | Size | Source | Licence (from the files) | What it really is |
+|---|---|---|---|---|---|
+| AD_FX FREE 01 | `Free.zip` | 3.7 MB | https://ad-fx.itch.io/free | CC0 (page) | **One animation, a pink heart bursting** (9 frames, 1024 px, a sheet and a GIF). Not fire; unusable for dragon fire. |
+| Kenney Smoke Particles | `kenney_smoke-particles.zip` | 6.0 MB | https://kenney.nl/assets/smoke-particles | `license.txt`: CC0, "You may use these graphics in personal and commercial projects." Credit optional. | Soft, near-photographic smoke and explosion sprites (black smoke, explosion, flash, white puff). Generic. Usable as a secondary smoke layer. |
+| Kenney Particle Pack | `kenney_particle-pack.zip` | 15.0 MB | https://kenney.nl/assets/particle-pack | `License.txt`: CC0 | 80 particle textures, 512 px (transparent and black-backed), including `fire_*`, `flame_*`, `spark_*`, `flare_*`, `smoke_*`, `muzzle_*`, `circle_*` and **`scorch_01–03`**. Good support layers. |
+| Taproot Free Surface Decals | `free-surface-decals-raw.zip` (name-your-price, $0) | 2.1 MB | https://taproot-solutions-llc.itch.io/free-surface-decals | `LICENSE.txt`: "Royalty-free for commercial and personal projects. No attribution required." No resale as an asset pack. | The file served was the **Unreal project** (`.uasset`), not the raw PNG maps. Not used; Kenney's `scorch_*` covers the scorch. |
+
+The Kenney zips were saved through the site's own download flow in the in-app browser. A plain `curl` to the signed link got 403, so it was not retried with a faked user agent.
