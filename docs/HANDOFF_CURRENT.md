@@ -37,7 +37,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 **31/10 khoảng 21:05: kit bảng nhanh xong, gắn ảnh 243/244 đang chạy.**
 - Kit bảng nhanh xong: giám khảo Dragonhold 7,0, Wordwoven 6,6 (trước 11 mục sửa). Dragonhold `main` `0ca70a8` (710 test), Wordwoven `a2-days` `47a1698` (653 test), con trỏ `9b99fe11`, chưa đẩy.
 - Workflow `panels-art-wiring` (`wf_8bfb1618-227`): ba game song song gắn ảnh đã nhận (244: phần đầy/rỗng rãnh, icon bảng Sound Dragonhold/Wordwoven; 243: icon Last Line), Last Line nhận kit mới; rồi hai giám khảo và một lượt sửa.
-- `media:push` trượt vì 8 file trùng tên trên Drive (1 Dragonhold, 7 Last Line, sinh ra lúc đẩy bị treo khi mất DNS). Lệnh sửa `pnpm media:check --only originals --remote --fix-duplicates` (chỉ bỏ bản trùng cùng md5) bị bộ phân loại chặn vì xoá file trên Drive: **chờ chủ dự án chạy hoặc cho phép**, rồi chạy lại `media:push`.
+- `media:push` **xong 31/10 21:20**: 8 file trùng tên trên Drive (1 Dragonhold, 7 Last Line, sinh ra lúc đẩy bị treo khi mất DNS) được bỏ bằng `pnpm media:check --only originals --remote --fix-duplicates` (chủ dự án cho phép: "Cho bạn chạy"); đẩy lại 28.494 file (9,3 GB), Drive khớp md5 37.401/37.401, bản sao `_locks/2026-10-31_141232Z/`. `media.md5` đã commit: Dragonhold `43ac4e4`, Wordwoven `0cb5faa`, Last Line `8d75d32` (con trỏ repo cha commit cùng lượt gắn ảnh).
 
 **31/10 20:35: chạy tiếp sau giới hạn phiên (khoảng 19:00–20:30).**
 - Kit bảng nhanh: kit `18722b41` + sửa `b8a224d0`; Dragonhold `main` `e52cfac`, Wordwoven `a2-days` `e5e22de` đã có kit mới và skin; giám khảo đã chấm; lượt sửa bị cắt giữa chừng (sửa dở chưa commit trong hai game) → chạy tiếp workflow `wf_6b035d93-2d0` có ghi chú.
