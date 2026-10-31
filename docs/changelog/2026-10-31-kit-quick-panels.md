@@ -99,3 +99,18 @@ Kiểm:
 - Hai game: Dragonhold 710 test qua (1 bỏ qua), Wordwoven 653; `pnpm build:dragon`, `pnpm build:td` OK; kiểm trên host
   chơi ở 1280 × 720 và 1920 × 1080 (núm trên ảnh ở 0/50/100, màn tựa ẩn hai nút, Tab tới Keyboard volume sau 2 lần,
   mép mờ, 0 yêu cầu lỗi, 0 ngoại lệ).
+
+
+## Lượt sửa sau bước gắn ảnh của Last Line (giám khảo 31/10, đêm)
+
+Giám khảo chấm bảng của Last Line sau bước gắn ảnh và ghi 6 mục; 3 mục thuộc kit. Phần Tab và Shift+Tab đã có ở
+`ba2b4d65` (`focus.ts`, một người sửa khác làm); lượt này thêm ba phần còn lại và chỉ chép vào Last Line.
+
+| Mục | Kit làm gì | Game dùng thế nào |
+|---|---|---|
+| Master khi tắt tiếng nhìn yếu: nút vẫn ghi "Mute", icon hàng vẫn là loa thường, con số không gạch | `QuickSliderRow.toggle.pressedLabel` (nút đọc chữ này khi nhấn) và `QuickSliderRow.mutedIcon` (icon hàng khi nút nhấn hoặc giá trị ở `min`); hàng nhận `kit-qs__row--muted` (thanh trượt mờ qua `--kit-qs-muted-filter`, mặc định `grayscale(.7) brightness(.6)`; con số gạch, mờ 0,55) và `kit-qs__row--silent`. Hàng Master mặc định: `pressedLabel: "Unmute"`, `mutedIcon: "hud-sound-muted"` | Last Line: tự có, ảnh loa tắt `hud-sound-muted` đã nằm trong `icons`. Dragonhold và Wordwoven đang tự làm phần này trong `src/app/quick.ts` (`watchMute`) và CSS: khi chép bản kit này phải xoá bản riêng đó (nếu không, lúc tải save đang tắt tiếng `watchMute` sẽ giữ chữ "Unmute" làm nhãn gốc) |
+| Nút Listen không có phản hồi khi rê, khi nhấn, không cho biết mẫu đang kêu; icon cố định 24 px | Icon `calc(24px * var(--kit-qs-s,1))`; rê chuột trên tấm danh sách: `brightness(1.2) var(--kit-qs-glow-filter)`; nhấn: icon thu `scale(.84)`; `is-playing` (icon sáng 1,35 kèm quầng `--kit-qs-glow`) trong đúng thời gian mẫu kêu: `KeyboardSoundPreview` có `onPlaying(choice \| null)`, `KeyboardSoundChoices.playing(value \| null)`, `QuickSettings` nối hai cái | Không phải làm gì |
+| Thanh cuộn của danh sách âm phím là thanh xám của hệ điều hành (Windows) | `.kit-keyboards`: `scrollbar-width: thin`, `scrollbar-color: var(--kit-qs-scroll-thumb) transparent` (mặc định `--kit-qs-line`) | Last Line đặt màu xanh của game; chưa có ảnh con trượt cuộn nào được nhận, nên chưa dùng ảnh |
+
+Kiểm: `pnpm kit:test` **66 file, 1058 test** đều qua (sau `ba2b4d65`: 65 file, 1048; 10 test mới ở
+`ui/quick-settings/quick-panels-feedback.test.ts`; test icon cũ đổi: Master ở 0 nay mang loa tắt).

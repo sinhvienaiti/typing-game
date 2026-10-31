@@ -325,6 +325,9 @@ describe("QuickSettings icons", () => {
     expect(sound.querySelector("img")!.getAttribute("src")).toBe(ICONS["hud-sound"]);
     slide(h.row("master").querySelector<HTMLInputElement>("input[type=range]")!, 0);
     expect(sound.querySelector("img")!.getAttribute("src")).toBe(ICONS["hud-sound-muted"]);
+    // The Master row's own speaker follows the corner (its mutedIcon), then comes back above 0.
+    expect(h.row("master").querySelector(".kit-qs__icon-cell img")!.getAttribute("src")).toBe(ICONS["hud-sound-muted"]);
+    slide(h.row("master").querySelector<HTMLInputElement>("input[type=range]")!, 40);
     expect(h.row("master").querySelector(".kit-qs__icon-cell img")!.getAttribute("src")).toBe(ICONS["vol-master"]);
     expect(h.row("music").querySelector(".kit-qs__icon-cell")!.childElementCount).toBe(0);
   });
