@@ -51,7 +51,15 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Media:**
   - `media:push --only runtime` xong 06:21: 2.942 file, md5 khớp 3.587/3.587; `typing-feel/media.md5` và hai `media.md5` game đã commit (`7ce2432b`).
   - Nhóm originals còn khoảng 27.300 file (khoảng 12 GB). Sẽ đẩy sau khi gộp nhánh xong, để không đụng `media.md5` lúc đang gộp.
-- **Đang chạy:** workflow `typing-feel-merge-and-g7` (`wf_835c6f92-41c`):
+- **G3 xong (31/10 khoảng 10:55):** ba nhánh âm phím đã gộp, chưa đẩy lên remote:
+  - Last Line `main` `48659cc`;
+  - Dragonhold `main` `2701477`;
+  - Wordwoven `a2-days` `01f75bc`.
+  - Con trỏ ở repo cha `acf0f75c`.
+  - Kiểm trên host chơi bằng Chrome headless: đọc r1, 34 bộ; chặn host feel thì game vẫn chạy.
+  - 10 ảnh bảng Settings/Sound của Wordwoven đã chép (kiểm md5) vào thư mục game chính rồi build lại.
+- **Media:** `pnpm media:push` toàn bộ chạy nền từ khoảng 11:00 (27.331 file, 9,1 GB, phần lớn là `_review/` của Codex). Log ở `.local/media-push-originals-20261031.log`. Xong thì commit các `media.md5`.
+- **Đang chạy:** workflow `typing-feel-merge-and-g7` (`wf_835c6f92-41c`), phần G7. Phần gộp nhánh đã xong:
   - gộp `ts-typefx` vào `main` của Last Line, `dh-keys` vào `main` của Dragonhold, `td-keys` vào `a2-days` của Wordwoven (nhánh thư mục game chính đang dùng), rồi kiểm trên host chơi bằng Chrome headless;
   - song song làm G7 (nút Format).
 - **G4 Monkeytype xong (B6):** commit `2cc987e8f`, đã đẩy lên `feature/en-vn-translation` ở cả GitHub và GitLab (31/10).
