@@ -438,6 +438,30 @@ nginx và Vite:
 
 Khi server khởi động, nếu `revision` trong danh mục khác bản đang chạy thì xuất lại, và thêm lại tham chiếu Media V2 còn thiếu (trường hợp server dừng giữa bước 6 và 7). Rollback đi đúng đường này với cấu hình của bản đích. Publish lỗi ở bước 5 có thể để lại thư mục bộ âm mới chưa ai dùng; không sao, vì thư mục theo nội dung.
 
+**Đã làm ở G6 (31/10, commit `217f5f0a`):**
+- **Thứ tự Publish:**
+  1. kiểm `expectedActiveRevision`;
+  2. kiểm schema, luật bản gốc và Media;
+  3. ghi hoặc kiểm thư mục bộ;
+  4. ghi file tạm của danh mục;
+  5. ghi bản ghi xuất bản (`publications/<revision>.json`: `catalogueRevision`, `publishedAt`, `builtAt`);
+  6. `store.publish`; hỏng thì xoá file tạm và bản ghi mới;
+  7. đổi tên nguyên tử, rồi `health.json`;
+  8. tham chiếu Media.
+  - Nhờ bản ghi xuất bản, Rollback trả lại đúng từng byte của danh mục và `health.json` cũ.
+- **Khi khởi động:** chỉ dọn file tạm do chính bộ xuất ghi. Danh mục trên đĩa khác bản đang chạy thì xuất lại. Lỗi thì ghi log, server vẫn chạy.
+- **Kho trống không tự nạp.** Nạp hay khôi phục bằng lệnh `node admin/typing-feel/import-staging.mjs` (mục 3.5 và 6.3).
+- **Route thêm, không token:**
+  - `GET /api/runtime/typing-feel/preview/<revision>/keys/…` (bản nháp đã kiểm);
+  - `GET /api/runtime/typing-feel/published/keys/sets/<id>/<fp12>/<file>` (cho Media Library nghe thử).
+- **Kiểm Host** cho `/api/admin/*` và `/api/runtime/typing-feel/*`: chỉ nhận tên máy cục bộ, `typing-game.local` và tên miền con, cùng `TYPING_GAME_ADMIN_ALLOWED_HOSTS`. Luật này thay câu "không cần lọc theo 127.0.0.1".
+- **Biến môi trường:** `TYPING_GAME_ADMIN_DATA_DIR`, `TYPING_GAME_ADMIN_SHARED_DIR` và `TYPING_FEEL_PUBLIC_DIR` phải cùng giữ mặc định, hoặc cùng đặt. Chỉ đặt một phần thì Typing Feel tắt (trả 503) và không ghi gì. Test luôn đặt cả ba.
+- **Khoá ghi Media V2** là `media-v2/registry.json.lock`, dùng chung cho mọi tiến trình, nên lệnh nạp chạy được khi Admin đang chạy.
+- **Quyền:**
+  - xem: mọi vai trò;
+  - Save draft: `config.draft`;
+  - Publish và Rollback: chỉ `shared.publish`.
+
 ### 3.13 Quyền và bảo vệ
 
 - **Thêm đúng một quyền:** `shared.publish`, nhãn "Publish shared settings to all games", **nguy hiểm**. Gồm Publish và Rollback của khu All games.
@@ -855,6 +879,10 @@ server {
 4. Admin thấy `.local/admin/shared/typing-feel` trống: dựng lại registry từ danh mục đã commit và file đã pull, thành bản `runtime-reference` (cùng kiểu `admin/media-bootstrap.mjs`), và một bản sửa `restored-<revision>`. Nháp chưa Publish thì mất; ghi rõ điều này ở Release & History.
    - Bộ dựng lại là bản tham chiếu, không phải blob của Admin. Re-format một bộ như vậy cần WAV gốc (pull từ nhóm originals) và ra một bản `admin-upload` mới.
 5. Format bộ mới cần venv Audio Lab và ffmpeg.
+
+- **Đã làm ở G6:** khôi phục là lệnh tường minh `node admin/typing-feel/import-staging.mjs --restore --public typing-feel/public`, ghi bản `restored-<revision>`. Bộ nạp ban đầu (§3.5) đã chạy một lần trên máy nhà ngày 31/10 khoảng 06:15, ra bản `seed-v1` khớp r1 (đã sao lưu `.local/admin` trước).
+  - Id có thư mục bộ mà không có dòng danh mục: một thư mục đủ file thì thành dòng ẩn trong họ "Restored"; còn lại vào `retiredIds`. Một id từng retire mà còn đúng một thư mục sẽ hiện lại dưới dạng ẩn, chủ dự án cần retire lại.
+  - Mất registry Media mà còn kho: dời kho sang chỗ khác, chạy `--restore`, khởi động lại Admin.
 
 ### 6.4 Cloudflare sau này (cùng HOSTING_PLAN bước 0–3)
 
