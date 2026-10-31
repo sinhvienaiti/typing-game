@@ -34,6 +34,13 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 22:25: bảng nhanh ba game đã gắn ảnh 243/244 và sửa theo giám khảo** (con trỏ `7a6743ea`, chưa đẩy).
+- Dragonhold `main` `8f4c1f8`, Wordwoven `a2-days` `9b45259`, Last Line `main` `15c39fb`; kit cha `ba2b4d65` (Tab đi vòng trong bảng) và `fc7f4a11` (hàng tắt tiếng Master trong kit, nút Listen sáng khi phát, thanh cuộn danh sách). Giám khảo trước lượt sửa: Dragonhold 7,1 (Settings 6,2, Sound 7,6), Wordwoven 6,8 (6,1 / 7,2), Last Line Settings 7, Sound 7,3.
+- **Wordwoven `/?title=0` còn 0,04 kB dưới ngân sách 85 kB**: thay đổi tiếp theo vào chunk đầu phải tách chunk trước.
+- Icon còn đọc sai và ô trống → phiếu 250 (làn s30). File ảnh mới đã chép vào `public/` của các game: cần `media:push` (cùng media lửa vòng 10).
+- Sự cố: tin nhắn chuyển lời của điều phối tới fixer đang chạy trong workflow đã mở lại bản sao, hai bản cùng sửa một thư mục; đã dừng các bản sao, mỗi game chỉ một commit. Bài học trong bộ nhớ `no-messages-to-live-workflow-agents`.
+- Giải pháp lửa V2 của chủ dự án (ChatGPT): nhận xét "nhận có sửa đổi" ở `docs/games/vfx/VFX_SOLUTION_V2_REVIEW.md` (`b3433453`): giữ bộ chạy flipbook sẵn có, chưa cần three.quarks và breath ribbon; thử Pyroclast trước, SCORCH sau, không dùng Taproot; **chờ chủ dự án cho tải bản demo miễn phí**.
+
 **31/10 khoảng 21:45: chủ dự án quyết lửa rồng.**
 - "tạm thời cứ lấy bản tốt nhất cho phần lửa rổng đang có đi, tôi sẽ kêu chatgpt tìm hiểu xem sao": dùng **vòng 10** (`ca64509`, giám khảo mù 6,0/6,5) cho demo; **dừng tự làm lửa rồng**. Chủ dự án nhờ ChatGPT tìm gói VFX/icon có sẵn theo `docs/games/vfx/ASSET_SEARCH_BRIEF.md` (`1933c0ff`); gói nào về thì thử trên bàn thử, hai giám khảo mù, dừng nếu không tới 8 trong một ngày.
 - Workflow `dh-fire-r10-merge` (`wf_dbeac042-1d8`) gộp vòng 10 vào nhánh `dh-fire-r10` (từ `main`, worktree `games/.wt-dh-fire-merge`), mang media vòng 10, kiểm và có người kiểm độc lập. Đưa vào `main` sau khi workflow gắn ảnh bảng nhanh xong (nó đang sửa `main` Dragonhold); rồi chép media vào thư mục game chính và `media:push`.
