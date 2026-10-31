@@ -48,3 +48,9 @@ Mọi game sau này dùng lại các hệ này, nên chúng là nền chất lư
 - **Kiểm giấy phép tại nguồn** (file LICENSE trong repo, trang giấy phép của gói), không tin mô tả của bên thứ ba. Ghi mọi thư viện và tài sản vào `docs/games/THIRD_PARTY.md`: tên, phiên bản, nguồn, giấy phép, cách dùng, ghi công cần có.
 - **Tải tài sản (âm thanh, animation, texture) về máy cần chủ dự án đồng ý từng gói** (tên, nguồn, giấy phép, dung lượng). Cài gói mã qua pnpm là việc làm thường ngày, theo chỉ thị này.
 - Thư viện là công cụ, không thay mức nhận: vẫn phải có hai giám khảo từ 9.
+- **Mở rộng ngày 01/11/2026, theo lời chủ dự án:** "có thể dùng các loại tài nguyên, thư viện, source có sẵn miễn sao nó miễn phí và được cho phép thương mại ở game của chúng ta, chứ k dùng các loại bị giới hạn". Từ ngày này, áp dụng cho mọi phần của ba game, không chỉ ba hệ dùng chung:
+  - **mã:** thêm Zlib, ví dụ pmndrs `postprocessing`. Zlib cho dùng thương mại; chỉ cần giữ thông báo bản quyền trong file nguồn;
+  - **tài sản:** thêm các giấy phép riêng miễn phí, cho dùng thương mại, không bắt trả tiền hay ghi công trong game, và chỉ cấm bán lại chính tài sản đó thành gói. Ví dụ Quaternius Asset License v1.0 (QAL). Ghi ngày tải và nguyên văn giấy phép vào `THIRD_PARTY.md`, vì QAL §7 áp dụng bản giấy phép có hiệu lực lúc tải;
+  - **model của bên thứ ba** (gói CC0 hoặc QAL) được đưa vào game. Câu "Real models come from the owner as GLB" của `games/dragon-hold/AGENTS.md` không còn chặn chúng;
+  - **tải gói miễn phí hợp các điều trên** không cần xin từng gói nữa; vẫn ghi đủ vào `THIRD_PARTY.md`;
+  - **vẫn không dùng:** NC, ND, GPL khi sửa hay gộp tĩnh; Mixamo (điều khoản Adobe chưa kiểm được); "Fab Standard" và "Sketchfab Standard" (giấy phép thương mại riêng, có điều kiện); mọi tài sản không có giấy phép rõ.

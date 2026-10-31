@@ -34,3 +34,4 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
   - Khi đã bật 3D, máy không có WebGL sẽ hiện màn "Cần WebGL", không lùi về bảng 2D vẽ bằng mã. `?view=2d` chỉ giữ cho bot và test.
 - **Trần dòng 1C (16.500)** tạm vượt khi cần, ghi số mỗi lần vượt. Trần này là luật kế hoạch, không phải luật của chủ dự án; chủ dự án muốn giữ thì báo.
 - **Camera Wordwoven** chọn kiểu nhìn chéo 40–45°, có dải trời và chân trời. Ý tưởng map gửi ChatGPT duyệt theo kiểu này.
+- **Giấy phép, theo lời chủ dự án 01/11** (ghi ở `SHARED_SYSTEMS_BAR.md` §5): được dùng Zlib (thư viện hậu kỳ pmndrs `postprocessing`), Quaternius Asset License (miễn phí, dùng thương mại, chỉ cấm bán lại thành gói) và model bên thứ ba CC0 hoặc QAL. Tải gói miễn phí không cần xin từng gói. Vẫn không dùng NC, ND, GPL, Mixamo, Fab hay Sketchfab Standard. Chủ dự án muốn chặt hơn thì báo lúc 9h.
