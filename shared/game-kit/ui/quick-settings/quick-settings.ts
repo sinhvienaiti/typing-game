@@ -15,6 +15,7 @@ import A11yDialog from "a11y-dialog";
 import { KeyboardSoundPreview, type KeyboardLoad, type TypingSounds } from "../../feedback/typing-fx/audio";
 import { KeyboardSoundChoices, type KeyboardPointer } from "./keyboard-choices";
 import { cssUrl, installQuickSettingsStyles } from "./css";
+import { nextStop, tabStops } from "./focus";
 import {
   QUICK_KEYS,
   createKeyedThrottle,
@@ -392,6 +393,14 @@ export class QuickSettings {
 
   private readonly onWindowKey = (event: Event): void => {
     const key = event as KeyboardEvent;
+    if (event.type === "keydown" && key.key === "Tab" && this.current !== null && !key.ctrlKey && !key.metaKey && !key.altKey) {
+      // Tab goes round the open panel's controls (focus.ts), from anywhere, ahead of a11y-dialog's trap.
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      const { box } = this.panels[this.current];
+      nextStop(tabStops(box), this.doc.activeElement, box, key.shiftKey)?.focus();
+      return;
+    }
     const inside = isNode(event.target) && this.root.contains(event.target);
     const decision = routeQuickKey({ panel: this.current, blocking: this.blocking }, { type: event.type, key: key.key, repeat: key.repeat, inside });
     if (decision.swallow) {

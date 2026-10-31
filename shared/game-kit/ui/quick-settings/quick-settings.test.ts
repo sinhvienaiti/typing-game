@@ -161,8 +161,13 @@ describe("QuickSettings typing freeze", () => {
     const range = h.row("music").querySelector<HTMLInputElement>("input[type=range]")!;
     const seen: string[] = [];
     range.addEventListener("keydown", (event) => seen.push(event.key));
-    for (const key of ["ArrowRight", "a", "Tab"]) expect(press(range, key).defaultPrevented).toBe(false);
-    expect(seen).toEqual(["ArrowRight", "a", "Tab"]);
+    for (const key of ["ArrowRight", "a"]) expect(press(range, key).defaultPrevented).toBe(false);
+    expect(seen).toEqual(["ArrowRight", "a"]);
+    // Tab is the panel's own: focus goes round its controls (focus.ts), from the range to the next one.
+    range.focus();
+    expect(press(range, "Tab").defaultPrevented).toBe(true);
+    expect(document.activeElement).not.toBe(range);
+    expect(h.dialog("sound").contains(document.activeElement)).toBe(true);
     expect(h.gameKeys).toEqual([]);
   });
 });
