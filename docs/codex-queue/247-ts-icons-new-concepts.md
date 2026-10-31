@@ -1,4 +1,4 @@
-# Phiếu 247 · Last Line · Đổi ý tưởng ba icon còn trượt của 242
+# Phiếu 247 · Last Line · Đổi ý tưởng năm icon còn trượt của 242 và 243
 
 **Nguồn:**
 - **Luật chung của đợt: mục "Luật chung của đợt 242–246" trong `docs/codex-queue/242-ts-icons-real-size.md`** (khối SMALL-SIZE, Kiểm 1–10, giới hạn ảnh, cấm, nhận). Phiếu này chỉ ghi chỗ khác.
@@ -23,12 +23,14 @@ Ba ý mới đều là **khối gọn, gần vuông** (hộp bao không quá 1,2
 | `stat-evenness` | Steadiness | 28 / 40 | thanh ngang nhỏ | a metronome seen front-on: a tall solid wedge body with a thick upright pendulum arm and a bright cyan weight, standing still at the centre | `clock.r2`, `stat-wpm.v2`, `bay-full.r2` |
 | `stat-new-word` | New-word read | 28 / 40 | khuôn mặt, rô-bốt | an open book seen from the front, thick pages, with one bright four-point spark star rising above the spine | `stat-words`, `learning-rule` |
 | `rift` | Rift | 24 / 32 | hạt tím, viên thuốc | a round dark portal disc split by one jagged violet crack from top to bottom, violet light bursting out of the crack; the disc fills the frame | `surge`, `warning`, `hazard.r2` |
+| `pace-director` (thêm 31/10 17:40, sau khi chấm 243) | Adapt pace to your typing | 28 / 40 | mái vòm nhỏ, mũ (bản `.r2` nửa mặt đồng hồ, dẹt) | a full round speed gauge seen front-on: a thick circular rim, a bold arc of three coloured segments (cyan, gold, orange) along the top, one thick needle from the centre hub, and a small up-and-down double arrow inside the lower half | `clock.r2`, `stat-accuracy.r2` |
+| `shake` (thêm 31/10 17:40, sau khi chấm 243) | Screen shake | 28 / 40 | hộp dẹt, máy chiếu (bản `.r2` hai màn lệch, dẹt) | a square screen seen front-on with a bold zigzag jolt line across its face and short thick motion marks at its four corners, as if the screen is shaking; square overall | `reduced-motion`, `quality`, `keyboard.r2` |
 
 - `rift` giữ sắc tím: đó là màu của mối nguy rift trong game. Số M (sắc gần magenta) có thể vượt 0,2 %; ghi số, không đổi màu để ép số.
-- **Kiểm riêng:** độ rộng thật của bóng hình (alpha > 128) ở cỡ 720p phải chiếm **≥ 70 %** bề ngang ô và **≥ 70 %** chiều cao ô. Ghi số. Ô so sánh `stat-new-word` cạnh `stat-words` và `learning-rule`, `stat-evenness` cạnh `clock.r2`, ở 28 px 1×.
+- **Kiểm riêng:** độ rộng thật của bóng hình (alpha > 128) ở cỡ 720p phải chiếm **≥ 70 %** bề ngang ô và **≥ 70 %** chiều cao ô. Ghi số. Ô so sánh `stat-new-word` cạnh `stat-words` và `learning-rule`, `stat-evenness` và `pace-director` cạnh `clock.r2`, `shake` cạnh `reduced-motion`, ở 28 px 1×.
 
 ## Chỉ được ghi
 
-- `games/typing-survival/art-src/ui/icons/{stat-evenness,stat-new-word,rift}.r3-try*.*`, `.r3.*` (mới).
+- `games/typing-survival/art-src/ui/icons/{stat-evenness,stat-new-word,rift,pace-director,shake}.r3-try*.*`, `.r3.*` (mới).
 - `games/typing-survival/art-src/_review/247*`.
 - `docs/codex-queue/247-report.md`, `docs/codex-queue/247/`.
