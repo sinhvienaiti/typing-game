@@ -34,6 +34,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 20:35: chạy tiếp sau giới hạn phiên (khoảng 19:00–20:30).**
+- Kit bảng nhanh: kit `18722b41` + sửa `b8a224d0`; Dragonhold `main` `e52cfac`, Wordwoven `a2-days` `e5e22de` đã có kit mới và skin; giám khảo đã chấm; lượt sửa bị cắt giữa chừng (sửa dở chưa commit trong hai game) → chạy tiếp workflow `wf_6b035d93-2d0` có ghi chú.
+- Thử lửa B: phần dựng bị cắt (dở, chưa commit, nhánh `dh-fire-b`) → chạy tiếp `wf_9ee05652-06a` có ghi chú.
+- `media:push` lần dài kết thúc nhưng trượt bước kiểm md5 trên Drive (`games/dragon-hold`, lỗi đọc một ảnh `_review/120`), nên `media.md5` chưa đổi → chạy lại (log `.local/media-push-20261031-retry.log`). Không sửa `media.md5` khi đang đẩy.
+- Codex làn s29: phiếu 245 chạm hạn mức nhiều lần, bộ chạy tự chờ (tới 20:55).
+
 **31/10 khoảng 18:45: Last Line UI lượt 3 xong** (`main` `484700d`, con trỏ `b99a84bf`, chưa đẩy): 8 icon 242, cảnh báo vẽ bằng ảnh, thẻ kết quả lệch trái nhường chỗ nhân vật, sao 80 px, bảng nạp súng có hàng chip quái trên tấm vẽ, một chip rift, sửa lỗi giám khảo; 509 test, 60/60 kiểm trình duyệt. Hai giám khảo **7,4 và 7,3** (lượt hai 7,3/7,1). Còn lại là ảnh: bóng hình quái (245 đang làm), tranh súng, ô băng đạn đọc thành ‖, bốn icon menu → phiếu 249 (làn s30); icon 243 và thanh trượt 244 chờ gắn cùng kit (bánh răng góc vẫn là bản cũ nên vẫn bị đọc thành bông hoa).
 
 **31/10 khoảng 17:45: thử lửa B (chủ dự án "Làm thử B").**
