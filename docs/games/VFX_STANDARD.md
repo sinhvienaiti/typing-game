@@ -376,7 +376,11 @@ Về nhịp tổng thể: hiệu ứng nhanh hơn khoảng một nhịp tim (~60
      - Giữ ngưỡng 1,6. Đây là lựa chọn có chủ ý: chỉ phép và lửa được sáng lóa, đất nắng thì không (`05` §2.1; chú thích ở `DH view/stage.ts:242`).
      - Lõi VFX đẩy lên HDR 2–6 với `toneMapped: false` [S14] để qua ngưỡng.
      - Chỉ bật bloom ở High khi đo trên cảnh M0b (DPR 1,25, 220 quái) mà vẫn vừa cổng 8 ms. Nếu không vừa, High dùng quầng sprite vẽ sẵn, không qua hậu kỳ; bloom ở lại Ultra, và đưa anh quyết (§6.2).
-   - **Tuyến Cuối:** giữ bloom như `FEEL` §4.1 (ngưỡng 1,0; bán kính 0,3 sau lần Ray làm trắng sân). Chỉ sửa màu lõi, không sửa bloom.
+   - **Tuyến Cuối (Last Line), sửa 01/11/2026, chủ dự án duyệt O4:** bloom cũ (0,85 / 0,3 / ngưỡng 1,0) và ACES làm vệt đạn rộng gấp 2,5–3,5 lần và ngả trắng ở High/Ultra (`QUALITY_RESCUE_2026-11-01.md` §2.3). Từ nay:
+     - chỉ lõi mảnh HDR 3–6 được bloom; quầng, haze và cột sàn giữ ≤ 0,9;
+     - strength 0,4–0,5, radius 0,1–0,15;
+     - tone map AgX hoặc Neutral thay ACES nếu giữ được màu lõi.
+     Bản cũ "giữ bloom, chỉ sửa màu lõi" bỏ.
    - **Lời Gọi (2D):** không bloom; lớp cộng sáng vẽ bằng `globalCompositeOperation = "lighter"`.
 2. **Không dựa hết vào bloom.** Bậc không có bloom vẫn phải đạt, nhờ quầng và viền màu vẽ sẵn trong sprite, nhờ đèn và nhờ lớp tối. Với Rồng Giữ Ải, đây chính là bậc High mặc định.
 3. **Lõi trắng nhỏ, thân màu lớn.**
