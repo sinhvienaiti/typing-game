@@ -56,6 +56,8 @@ Art must reach commercial-game level. Backgrounds, title screens, key art, map s
 
 3D models favour detail over weight (owner, 29/10/2026): no model a player sees up close goes under 2,000 triangles; keep the Tripo originals' face count, normal and roughness maps where the floors in `docs/games/MODEL_QUALITY.md` say so; cut only when measured frame time breaks the budget, in the order that doc gives. Existing models stay as they are until the owner asks.
 
+Acceptance bar 8.5, no provisional passes (owner, 01/11/2026): "tôi không muốn dùng tạm được nữa, tôi muốn phải đạt trên 8.5 trở lên". Every piece the player sees is accepted only when two independent blind judges both score it 8.5 or higher in the built play host at the player's settings, with no URL flags. This covers art, 3D models, maps, VFX, UI and audio, 2D and 3D alike. There is no "best of 3 tries" and no "better than before" pass. Anything already wired below 8.5 (marked provisional) is an open debt to redo to 8.5, not done work. Shared systems keep their bar of 9.
+
 Shared systems need 9 or more (owner, 29/10/2026): the typing feedback (focus strip and letter effects), the Audio Lab keyboard sound profiles and character animation are reused across games, so each is accepted only when two independent judges both score it 9 or higher, compared with the references in `docs/games/SHARED_SYSTEMS_BAR.md`; the owner signs off last.
 
 Every game has a Settings gear and a Sound speaker in play (owner, 29/10/2026), opening overlay panels for general and audio settings without leaving the game; one kit component, spec in `docs/games/IN_GAME_SETTINGS.md`.

@@ -6,6 +6,16 @@ Từ 26/10/2026, áp dụng cho mọi game. Chủ dự án:
 - ảnh tạm chấp nhận phải ghi lại, để sau có kinh phí thì thay;
 - ưu tiên ảnh cần thiết.
 
+**Sửa ngày 01/11/2026 (chủ dự án), thay mọi mức bên dưới:** "tôi không muốn dùng tạm được nữa, tôi muốn phải đạt trên 8.5 trở lên, tôi cần bạn phải làm mọi thứ thật tốt cho từng chi tiết chứ k chỉ là tạm được".
+- **Mức nhận chung là 8,5**, cho cả ảnh 2D, model 3D, map, VFX, UI và âm thanh. Hai giám khảo mù độc lập phải cùng cho từ 8,5, chấm trên bản chơi đã build, đúng cài đặt của người chơi, không tham số URL.
+- **Không còn đường "tạm":**
+  - không có "dùng bản tốt nhất sau 3 lượt";
+  - không có "tốt hơn bản cũ thì gắn";
+  - không có bảng "7 điểm cho 3D".
+- Chưa đạt 8,5 thì sửa hoặc làm lại tới khi đạt. Hết cách thì đổi hướng: nguồn có sẵn miễn phí, ảnh mẫu, công cụ khác. Không gắn rồi coi như xong.
+- Những gì đã gắn tạm dưới 8,5 là **nợ phải làm lại**, ghi ở `docs/games/QUALITY_RESCUE_2026-11-01.md`.
+- Các bảng mục 2 bên dưới giữ để tra lịch sử. Chỗ nào ghi 7 hay 8, nay hiểu là 8,5.
+
 **Sửa ngày 27/10/2026 (chủ dự án):** "chỉ tiết kiệm chi phí với ảnh 3D, còn ảnh 2D thì cứ phải đạt trên 8 điểm thì mới cho pass, vì ảnh 2D chi phí sẽ luôn rẻ hơn".
 - **Model 3D** (Tripo, Meshy) giữ luật 7 điểm ở trên.
 - **Ảnh 2D** (sprite, icon, ô đất, decal, chân dung, phông, và cả ảnh nguồn gửi Tripo) phải **từ 8 điểm** mới đạt. Ảnh 2D dưới 8 thì sửa bằng công cụ, sửa không lên được thì tạo lại.

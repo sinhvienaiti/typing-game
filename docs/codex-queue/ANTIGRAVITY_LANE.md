@@ -4,6 +4,8 @@ Owner, 31/10/2026 about 23:45: "tạm thời hãy kêu antigravity tạo ảnh c
 
 ## Rules for the Antigravity agent (read before every ticket)
 
+0. **Acceptance bar 8.5 (owner, 01/11/2026).** Every image is accepted only at 8.5 or higher on every score, judged at real size in the game. Where a ticket says 8, read 8.5. There is no "keep the best try" pass. Do not self-grade generously: grade at 720p 1x first, as the tickets say.
+
 1. Open the ticket file named in the prompt and do exactly what it says. Read every file it names first: earlier tickets and reports, style blocks, reference images, `docs/games/ART_ACCEPTANCE.md`, and for tickets 245–250 the section "Luật chung của đợt 242–246" in `docs/codex-queue/242-ts-icons-real-size.md`.
 2. The tickets were written for Codex. Read them with these changes:
    - Where a ticket says `image_gen` or "công cụ ảnh", use **your own built-in image generation tool**. Use no other image service. In the report, give the tool's and model's name.
