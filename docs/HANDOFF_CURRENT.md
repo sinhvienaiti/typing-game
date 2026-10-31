@@ -15,7 +15,19 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**31/10 khoảng 16:30: ảnh UI lượt 3 (mới nhất, đọc trước).**
+**01/11 khoảng 01:45 (mới nhất, đọc trước).**
+- **Phiếu 247 do Claude tự vẽ bằng Adobe Firefly Image 5** trong tab Firefly (chủ dự án: "bạn tạo luôn được chứ"). Đã gạch 247 khỏi hàng Antigravity (`5f83b267`). Cách làm:
+  - nền phẳng magenta hoặc xanh lá;
+  - lấy blob ra bằng form POST tới `127.0.0.1:8765` (`scratchpad/ff-recv/recv-img.py`);
+  - tách nền và căn bằng `scratchpad/g247/tools/key.py`;
+  - nạp ảnh mẫu phong cách (clock.r2, stat-accuracy.r2, kills.r2) qua `<img crossOrigin>` từ `127.0.0.1:8767`, vì fetch bị chặn.
+- **Lượt 1** (không ảnh mẫu): hai giám khảo mù cho chưa icon nào đạt 8 (máy đếm nhịp 7 và 7, các icon khác 5–6,5). **Lượt 2** (`.r4`, có ảnh mẫu, theo góp ý của giám khảo) đang chấm: workflow `wf_fccd7d23-ea6`, khoá mù ở `scratchpad/g247/judge2-key.json`. Mọi lượt đều trong `art-src/ui/icons/*.r3-try*`, `*.r4-try*` (kèm `.raw.png` và `.prompt.txt`).
+- **Lửa C thành lửa mặc định của Dragonhold:** hai giám khảo mù xếp C đầu (7 và 7,5; vòng 10 6,5 và 6), chưa đạt 8 nên không mở vòng mới.
+  - Đang gộp ở `games/.wt-dh-fire-c-merge`, nhánh `dh-fire-c-merge`, commit gộp `0d9b9da`. Workflow `wf_fff43a7e-d45` chạy tiếp sau khi lượt trước bị cắt vì hết hạn mức; xong có soát độc lập.
+  - Sau đó Claude: fast-forward `main`, chạy `prepare-fire-c.mjs` ở checkout chính, `media:push`, commit con trỏ.
+- `media:push` 245 và ảnh gốc Antigravity xong (37.786/37.786 khớp md5): ba game `8bfd2f0`, `4aabd09`, `3a9d93d`, con trỏ `01089f83`.
+
+**31/10 khoảng 16:30: ảnh UI lượt 3.**
 - **Đã gộp lượt 2 vào nhánh chơi** (con trỏ repo cha `7988eb18`, chưa đẩy):
   - Last Line `main` `651d44a` (`ts-ui-wire`): icon 149–153, khung 127, bảng nhanh mang khung game. Hai giám khảo trong game: **7,3 và 7,1** (lượt 1: 6,2 và 6,3).
   - Dragonhold `main` `45219fe` (`dh-sliders`): ảnh thanh trượt, trạng thái núm, hàng tắt tiếng, khung chín mảnh.
