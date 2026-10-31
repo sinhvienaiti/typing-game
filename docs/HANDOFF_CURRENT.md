@@ -15,6 +15,20 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**01/11 khoảng 04:40 (mới nhất, đọc trước).** Chủ dự án chốt O1–O10 theo đề xuất (`docs/OWNER_QUEUE.md`).
+- **Tripo:** Claude được dùng; API trước (`tripo` CLI, 970 credit); `face_limit` theo loại (12–50k, không để tối đa); texture HD và PBR, khoảng 40 credit một model. Chỉ dựng khi ảnh nguồn đạt 8,5 (`docs/games/TRIPO_TODO.md`).
+  - Nguồn 124 cũ trượt (5–7,5). Workflow `wf_ed3a3e5c-374` đang vẽ lại trên Firefly ở tab-17 rồi chấm mù.
+- **Luật mới:**
+  - tái dùng quái giữa các game (`AGENTS.md`; `docs/games/MONSTER_MODEL_INVENTORY.md`, 195 model);
+  - giấy phép nới theo lời chủ dự án (`SHARED_SYSTEMS_BAR.md` §5);
+  - VFX_STANDARD đã sửa dòng bloom của Last Line.
+- **Đang chạy:**
+  - đợt 1 cứu chất lượng `wf_8c34cbe4-1b6` (nhánh `dh-wave1`, `ts-wave1`, `ts-wave1-bloom`; gộp được, kể cả nhánh bloom, vì O4 đã duyệt);
+  - Wordwoven `wf_163ccc93-022` (`td-units-3d`);
+  - ý tưởng map v1.1 `wf_64d899df-b88`: ảnh nền chụp từ camera thật ở `art-src/_review/maps/`, tin nhắn ChatGPT ở `docs/games/maps/*-CHATGPT_MESSAGE.md`;
+  - tab-14 là ChatGPT, đã chỉnh Chat, High.
+- **Cron:** một lần lúc 8:57 báo chủ dự án.
+
 **01/11 khoảng 03:30 (mới nhất, đọc trước).** Chủ dự án vắng tới khoảng 9h; việc cần họ ghi ở `docs/OWNER_QUEUE.md`; cron một lần lúc 8:57 nhắc gửi báo cáo.
 - **Luật mới:** mức nhận 8,5 cho mọi thứ người chơi thấy, không gắn tạm (`AGENTS.md`, `ART_ACCEPTANCE.md`, `24e556ee`). Đã gắn tạm trước đó, nay là nợ: icon 247, màn tựa 119 (7,5; Dragonhold `main`; phiếu 251 vẽ lại nền), lửa C.
 - **Map: viết ý tưởng từng map trước**, ChatGPT (Chat, High, không dùng Work; tab-14 đã chỉnh) duyệt và vẽ concept. Workflow `wf_fd05445b-ba9` viết `docs/games/maps/<game>-MAP_CONCEPTS.md` và `docs/games/FREE_ASSET_SOURCES.md`.
