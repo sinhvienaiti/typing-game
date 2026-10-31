@@ -32,6 +32,16 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Claude chấm 121 và 126 (đã chờ từ 29/10):** nhận sáu nền màn hình, logo "Last Line" (bản alpha sạch) và bốn ảnh ải v2 (thay 109). Workflow `ts-backgrounds-logo` (`wf_5a214b35-b98`) đang gắn trên Last Line `main`, có giám khảo và một lượt sửa.
 - **Việc kit còn lại (Claude, sau khi gộp `td-integrate`):** lớp phần đầy thanh trượt (`QuickSkin.sliderFill`), hàng danh sách mang ảnh, icon từng hàng, nút Close bằng ảnh, rãnh Master cùng độ dài; rồi đồng bộ kit sang ba game.
 
+**31/10 khoảng 17:40: lửa A trượt, Wordwoven 1C đã gộp.**
+- **Thử lửa A (đòn mạnh) trượt** (Dragonhold `dh-fire-a` `38834b2`, chưa gộp; công cụ flipbook ở repo cha `6130d72b`). Hai giám khảo mới chấm mù, tốc độ thật, có clip thương mại làm mốc:
+  - test A 5,0 và 6,0; vòng 10 (cùng cách chấm) 5,5 và 5,3. Dư âm 4,5 và 5,0, va chạm 5 và 6, màu/độ nóng 4,5 và 5,5.
+  - Lỗi chung: thân lửa là một khối cam phẳng viền tối (như miếng dán), vết cháy đen như vết mực không phai, tắt dần như giấy cháy, khói là vài cục xám như đá. Ưu điểm: hết bóng nâu và ô liu ở phần lớn lượt chạy; khói không che quái.
+  - Số đo: ô liu đạt 2/6, bóng nâu 6/6, cạnh thẳng 1080 trượt, bậc sáng trượt, hai kiểm màu 1080 chỉ đạt 1/3 nền với grade hiện tại (3/3 nếu có "vai vàng", quyết định 3 của chủ dự án).
+  - **Điều kiện dừng đã chạm** (dư âm < 7,5): theo kế hoạch đã duyệt, đổi nguồn clip (B: clip Firefly kiểu cel, cần phiên Firefly; C: mô phỏng, Blender có sẵn ở `/Applications/Blender.app`, không cần tải). **Chờ chủ dự án chọn.**
+  - Cách chấm mới cho vòng 10 chỉ 5,3–5,5 (cách cũ 7,5–8): mức thật của lửa rồng xa 8,5 hơn ta tưởng.
+- **Wordwoven `a2-days` `7c6c71c`** (con trỏ `ec92d78b`, chưa đẩy): gộp `td-integrate` (1C map 1, cảnh, Codex 199/200/202/203A; âm phím một lần; phím camera Home/PageDown/End; giám khảo C10 8,0 và 8,5, đã sửa P1/P2) rồi `td-sliders` (gỡ tay hai xung đột: mục lục changelog, `quick.css`). `pnpm check` 647 test; build host chơi; Chrome headless ở 1280 và 1920: 0 ảnh hỏng, 0 yêu cầu lỗi, 0 exception.
+- **Last Line `main` `4e6a6b3`**: sáu nền, logo, ảnh ải 126 đã gắn (giám khảo 7,1 trước sửa; đã sửa nút góc, khung banner, chữ "Last"). Còn: nền mờ ở 1920 (cần công cụ phóng ảnh, chưa có trên máy), màn thắng chưa toát chiến thắng → phiếu 248. Workflow `ts-ui-pass-3` (`wf_4e812b72-8b2`) đang gắn 8 icon 242 và sửa các mục mã của lượt chấm hai.
+
 **31/10: Typing Feel bắt đầu làm.** Chủ dự án duyệt cả 17 quyết định của [`TYPING_FEEL_SERVICE.md`](games/TYPING_FEEL_SERVICE.md) đúng theo đề xuất ("Duyệt tất cả").
 - **G0 (B0), phần của Claude đã xong:**
   - commit sửa kit dở của TF2 (`0a9a40a2`);
