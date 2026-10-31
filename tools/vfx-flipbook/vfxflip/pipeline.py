@@ -22,7 +22,10 @@ DEFAULTS = {"loop": False, "blend": "additive", "background": "black", "cell": [
             "flash": True, "flashWindow": 1.5, "growthStart": 0.35, "maxSec": 2.5, "fadeFrac": 0.03,
             "tailFade": 0.3, "crossfade": 8, "startFrac": 0.05, "axis": None, "coreSide": None,
             "maxTilt": 8.0, "start": None, "end": None, "flipX": None, "rotate": None,
-            "edgeFade": "auto", "stopAtEdge": None, "whiteFix": "warm"}
+            "edgeFade": "auto", "stopAtEdge": None, "whiteFix": "warm",
+            # "coverage": black-background clips get an alpha channel (the luma matte against black, opaque at
+            # matteOpaque luma, widened matteWidenPx and maxed over +-matteTemporal frames); RGB stays as graded.
+            "matte": None, "matteOpaque": 0.25, "matteWidenPx": 2.5, "matteTemporal": 1}
 
 
 def lab_home() -> Path:
@@ -440,6 +443,11 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         frames, peak_fix = _fix_white_core(frames, metrics.LIMITS["whiteCore"], str(params["whiteFix"]))
     frames = np.clip(frames, 0.0, 1.0)
     final = atlas.to_uint8(frames).astype(np.float32) / 255.0  # checks run on what the atlas holds
+    coverage = None
+    if params.get("matte") == "coverage" and not white_bg:
+        cov = np.stack([grade.coverage_matte(f, opaque_at=float(params["matteOpaque"])) for f in final])
+        cov = grade.widen_coverage(cov, float(params["matteWidenPx"]), int(params["matteTemporal"]))
+        coverage = atlas.to_uint8(cov).astype(np.float32) / 255.0
 
     # --- checks ---
     flags: list[str] = []
@@ -516,6 +524,14 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     if tail_faded:
         warnings.append(f"no fade-out in the cut: cooling fade over the last {tail_faded} frames")
 
+    if coverage is not None:
+        raw = np.stack([grade.coverage_matte(f, opaque_at=float(params["matteOpaque"])) for f in final])
+        checks["coverage"] = {"opaqueAt": float(params["matteOpaque"]), "widenPx": float(params["matteWidenPx"]),
+                              "temporal": int(params["matteTemporal"]),
+                              "meanAlpha": round(float(coverage.mean()), 4),
+                              "grownShare": round(float((coverage > 0.02).sum() / max(1, (raw > 0.02).sum())), 3)}
+        final = np.concatenate([final, coverage[..., None]], -1)
+
     # --- write ---
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{cid}__{version}"
@@ -576,11 +592,13 @@ def ingest(game: str, cid: str, version: str | None = None, home: Path | None = 
     home = home or lab_home()
     inbox = home / "inbox" / "firefly" / game
     table = load_table(game, table_dir)
-    versions = find_versions(inbox, cid)
+    # A row with "from": another export of that id's clips under its own name (e.g. an RGBA re-cut).
+    src = str(table.get("clips", {}).get(cid, {}).get("from") or cid)
+    versions = find_versions(inbox, src)
     if version:
         versions = [vf for vf in versions if vf[0] == version]
     if not versions:
-        raise FileNotFoundError(f"không thấy clip {inbox / cid}/{cid}__{version or 'vN'}.mp4")
+        raise FileNotFoundError(f"không thấy clip {inbox / src}/{src}__{version or 'vN'}.mp4")
     return [process(mp4, home / "out" / game / cid, game, cid, v, clip_params(table, cid, v))
             for v, mp4 in versions]
 

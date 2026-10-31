@@ -126,3 +126,19 @@ def test_principal_axis_sign():
         img[80 - i // 2, 40 + i] = 1.0
     ang, elong = layout.principal_axis(img)
     assert -30 < ang < -22 and elong > 3
+
+
+def test_coverage_matte_widens_and_holds_over_neighbour_frames():
+    """Fire on black -> coverage: opaque from opaque_at luma, 0 on black, widened 2-3 px, max over +-1 frame."""
+    from vfxflip import grade
+    h = w = 64
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    frames = np.zeros((3, h, w, 3), np.float32)
+    frames[1][np.hypot(xx - 32, yy - 32) <= 10] = (0.8, 0.4, 0.1)   # a disc in the middle frame only
+    cov = np.stack([grade.coverage_matte(f, opaque_at=0.25) for f in frames])
+    assert cov[1, 32, 32] == 1.0 and cov[1, 2, 2] == 0.0 and cov[0].max() == 0.0
+    wide = grade.widen_coverage(cov, 2.5, 1)
+    row = wide[1, 32]
+    grown = int((row > 0.5).sum()) - int((cov[1, 32] > 0.5).sum())
+    assert 4 <= grown <= 6, grown                                    # about 2.5 px on each side
+    assert wide[0, 32, 32] == 1.0 and wide[2, 32, 32] == 1.0         # held over the neighbouring frames

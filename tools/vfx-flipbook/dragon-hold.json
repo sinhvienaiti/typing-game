@@ -26,6 +26,13 @@
                        "note": "trial clip before batch 1; impact-burst look" },
     "smoke-mask":    { "phase": "F", "aspect": "1:1", "variants": 4, "layout": "bbox", "flash": false, "greyCut": 0.0,
                        "maxSec": 4.0, "startFrac": 0.05, "edgeFade": "radial", "stopAtEdge": ["top", "left", "right"],
-                       "note": "white smoke on black (round 10, owner 30/10): a density mask; the game reads luminance as alpha and colours the smoke in the shader" }
+                       "note": "white smoke on black (round 10, owner 30/10): a density mask; the game reads luminance as alpha and colours the smoke in the shader" },
+    "impact-burst-a": { "from": "impact-burst", "phase": "I", "aspect": "1:1", "variants": 3, "greyCut": 0.22,
+                        "matte": "coverage", "matteOpaque": 0.25, "matteWidenPx": 2.5, "matteTemporal": 1,
+                        "note": "fire test A (31/10, DRAGON_FIRE_DIAGNOSIS §3 step 1): impact-burst's cut as RGBA, coverage from the luma matte widened 2.5 px and maxed over +-1 frame; the game colours it through a ramp" },
+    "smoke-mask-a":   { "from": "smoke-mask", "phase": "F", "aspect": "1:1", "variants": 4, "layout": "bbox", "flash": false, "greyCut": 0.0,
+                        "maxSec": 4.0, "startFrac": 0.05, "edgeFade": "radial", "stopAtEdge": ["top", "left", "right"],
+                        "matte": "coverage", "matteOpaque": 0.3, "matteWidenPx": 2.0, "matteTemporal": 1,
+                        "note": "fire test A: smoke-mask's cut as RGBA (coverage = density, RGB = the clip's own shading)" }
   }
 }

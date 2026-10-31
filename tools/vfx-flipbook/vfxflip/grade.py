@@ -102,6 +102,32 @@ def luma_matte(rgb: np.ndarray, plate: np.ndarray, t: float = 0.015, k: float = 
     return np.concatenate([colour, alpha[..., None]], -1).astype(np.float32)
 
 
+def coverage_matte(rgb: np.ndarray, t: float = 0.004, k: float = 0.02, opaque_at: float = 0.25) -> np.ndarray:
+    """Bright effect on black (fire, white smoke) -> coverage 0..1: the luma matte read against a black plate.
+
+    The frames are already black-crushed, so the plate is 0: coverage rises from the black level through a soft
+    knee and is opaque from `opaque_at` luma. The game colours the effect itself; this only says where it is."""
+    lum = luma(rgb)
+    a = knee(lum, t, k) / max(opaque_at - t - k / 2.0, 1e-3)
+    return np.clip(a, 0.0, 1.0).astype(np.float32)
+
+
+def widen_coverage(alpha: np.ndarray, px: float = 2.5, temporal: int = 1) -> np.ndarray:
+    """Coverage (T, H, W) widened by `px` (grey dilation over a disc, then a 0.6 px blur so the new edge stays
+    soft) and the max over +-`temporal` neighbouring frames, so a frame blended toward the next never thins to a
+    see-through veil where the two shapes do not overlap."""
+    out = alpha.astype(np.float32)
+    if px > 0:
+        r = int(np.ceil(px))
+        yy, xx = np.mgrid[-r:r + 1, -r:r + 1]
+        disc = (np.hypot(xx, yy) <= px + 0.25)[None]
+        out = ndimage.grey_dilation(out, footprint=disc)
+        out = ndimage.gaussian_filter(out, [0.0, 0.6, 0.6])
+    if temporal > 0 and len(out) > 1:
+        out = ndimage.maximum_filter1d(out, size=2 * int(temporal) + 1, axis=0, mode="nearest")
+    return np.clip(out, 0.0, 1.0).astype(np.float32)
+
+
 def shoulder(rgb: np.ndarray, peak: float, knee_at: float = 0.6) -> np.ndarray:
     """Lower the peak (1.0 -> peak) with a smooth, hue-preserving shoulder above knee_at.
     Monotonic for peak >= 0.8."""
