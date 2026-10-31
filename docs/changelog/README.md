@@ -25,7 +25,7 @@ This folder is the chronological engineering history of the typing-game platform
 
 | Date | Main work completed | Detail |
 | --- | --- | --- |
-| 2026-10-31 | Kit: bảng Settings/Sound trong trận, đợt da mới (phần đầy thanh trượt, cột Mute, tấm danh sách âm phím, icon mọi hàng, Close dạng icon, focus quầng sáng, font tựa); chưa đồng bộ vào game. | [2026-10-31-kit-quick-panels](./2026-10-31-kit-quick-panels.md) |
+| 2026-10-31 | Kit: bảng Settings/Sound trong trận, đợt da mới (phần đầy thanh trượt, cột Mute, tấm danh sách âm phím, icon mọi hàng, Close dạng icon, focus quầng sáng, font tựa); đã đồng bộ và đổi da ở Dragonhold và Wordwoven, Last Line chưa. | [2026-10-31-kit-quick-panels](./2026-10-31-kit-quick-panels.md) |
 | 2026-10-24 | Máy Dell nhận việc từ Mac: dựng lại môi trường WSL và đo hiệu năng bằng GPU qua Chrome Windows; chốt và kiểm tra độc lập việc dở của 4 game; luật âm Q6; đánh giá game tu tiên giữ ải thú triều (`docs/games/tu-tien`). | [2026-10-24](./2026-10-24.md) |
 | 2026-10-23 | Ba game mới trên portal: thiết kế Rồng Giữ Ải và kế hoạch tách, portal theo nhóm, nginx 3 host, media và công cụ model cho nhiều game; con trỏ Space Typing tới TD 1A.6 đã gộp. | [2026-10-23](./2026-10-23.md) |
 | 2026-10-22 | Kho media trên Google Drive: lệnh `pnpm media:*` (rclone, chỉ copy, so md5), `media.md5` trong Space Typing, hướng dẫn `docs/MEDIA_STORAGE.md`. | [2026-10-22](./2026-10-22.md) |

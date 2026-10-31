@@ -55,3 +55,21 @@ Mọi biến và mặc định: `QUICK_SETTINGS_VARS` trong `css.ts`. README c�
   giám khảo thấy rãnh ngắn, cách còn lại là đưa Mute vào ô icon của hàng Master (cái loa bấm được); cách đó đổi nút chữ
   thành nút icon nên `watchMute` của hai game phải sửa.
 - Last Line nhận bản kit này sau khi workflow đang chạy ở đó xong.
+
+## Đồng bộ vào game (bước Games, 31/10)
+
+Kit `18722b41` đã chép vào Dragonhold (`main`, `e52cfac`) và Wordwoven (`a2-days`, `e5e22de`); Last Line chưa. Mỗi game
+có changelog riêng `docs/changelog/2026-10-31-kit-quick-panels.md`. Không sửa kit ở bước này.
+
+- Cả hai game: phần đầy chạy trên rãnh đã nhận (`sliderEmpty` = rãnh; phần rỗng xám tối, phần đầy sáng có quầng), cột
+  Mute theo bề rộng "Unmute", bảng Sound rộng 640 px (rãnh 720p: Dragonhold 187,5 px, Wordwoven 219 px), tấm đang bật
+  qua `buttonActive`, danh sách âm phím trên tấm nút (dòng chọn trên tấm active), quầng focus theo màu game, font tựa
+  của game, icon Keyboard volume dùng tạm `vol-keyboard`.
+- Danh sách âm phím lớn theo bảng trong CSS của game (dòng, tiêu đề họ, icon nghe thử và mép tấm nhân `--kit-qs-s`):
+  kit vẽ 34 px ở mọi cỡ, nên ở 1080p chữ lấp kín tấm. Nếu Last Line cũng cần, nên đưa việc này vào kit.
+- Dragonhold thêm: nút và chip là tấm 162 chín mảnh cao 32 px (lề trong suốt đẩy ra ngoài bằng `border-image-outset`),
+  danh sách cao 7,5 dòng để bảng Sound vừa khung ở 720p.
+- Kiểm trên host chơi (1280 × 720 và 1920 × 1080, màn tựa và trong trận): phần đầy đo bằng điểm ảnh khớp giá trị ở 0,
+  50, 100 % (lệch ≤ 0,5 px), mọi rãnh bằng nhau, 0 ảnh hỏng, 0 yêu cầu lỗi, 0 ngoại lệ, Tab ở trong bảng, Esc đóng, một
+  phím một tiếng trên bộ Typing Feel vừa chọn.
+
