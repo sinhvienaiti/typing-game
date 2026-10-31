@@ -83,3 +83,12 @@ Tờ chấm của từng vòng và khoá mù nằm ở `games/typing-survival/ar
    - vết rách rộng có ánh tím tràn ra;
    - vòng mũi tên bằng ngà hoặc vàng thay vì nét lam phẳng;
    - mặt màn hình sáng hơn và sóng rung dày hơn.
+
+## Quyết định của chủ dự án (01/11)
+
+- Chủ dự án chọn **"Gắn tạm"**: năm bản tốt nhất vào game như bản tạm, chưa được nhận.
+- Đã gắn ở Last Line `main` `a4d2b97`. Trong selection, năm mục đều có `ticket: "247"`, `provisional: true` và lời phán "Tạm 01/11". Changelog: `games/typing-survival/docs/changelog/2026-11-01-icons-247-provisional.md`.
+- Kiểm trong game ở 720p và 1080p:
+  - kỹ thuật đạt ở mọi chỗ: Options, bảng Settings nhanh, Profile, dải cảnh báo Rift;
+  - so với icon thật đang có trong game (các bản gốc, không phải `.r2`), điểm cũ → mới: Steadiness 5 → 5,5; New-word read 3,5 → 6; Rift 4,5 → 6,5; Adapt pace 5 → 6; Screen shake 4 → 5,5.
+- **Chỉnh lại một chỗ của bảng kết luận:** cột "Icon trong game" ở trên thật ra chấm các bản `.r2` của phiếu 242/243. Các bản này chưa từng được gắn vào game; game vẫn dùng bản gốc. Điểm trong game của bản gốc là dòng "cũ" ngay trên.

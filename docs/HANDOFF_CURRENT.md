@@ -24,11 +24,13 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả (02:40): không nhận icon nào.**
   - Ba vòng, 21 lượt, sáu giám khảo mù. Bản tốt nhất 6,5–7, icon đang trong game 4–5,5.
   - Đã lưu `stat-evenness.r3`, `stat-new-word.r5`, `rift.r3`, `pace-director.r5`, `shake.r5` (kèm cỡ 256/128/64), chưa gắn vào game.
-  - Báo cáo `docs/codex-queue/247-report.md` (`cab7381c`). Chủ dự án chọn: gắn tạm, tìm nguồn khác, hay giao Codex với góp ý vòng 3.
+  - Báo cáo `docs/codex-queue/247-report.md` (`cab7381c`).
+  - **Chủ dự án: "Gắn tạm"** → Last Line `a4d2b97` (`provisional: true`). Kiểm trong game đạt. Khi Codex có hạn mức thì giao lại với góp ý vòng 3.
   - Ảnh mẫu phong cách (vòng 2) làm icon rối hơn ở 28 px.
 - **Lửa C thành lửa mặc định của Dragonhold:** hai giám khảo mù xếp C đầu (7 và 7,5; vòng 10 6,5 và 6), chưa đạt 8 nên không mở vòng mới.
   - Đang gộp ở `games/.wt-dh-fire-c-merge`, nhánh `dh-fire-c-merge`, commit gộp `0d9b9da`. Workflow `wf_fff43a7e-d45` chạy tiếp sau khi lượt trước bị cắt vì hết hạn mức; xong có soát độc lập.
-  - Sau đó Claude: fast-forward `main`, chạy `prepare-fire-c.mjs` ở checkout chính, `media:push`, commit con trỏ.
+  - **Đã vào Dragonhold `main` `e1ed394`** (fast-forward từ `dh-fire-c-merge`). Có thêm chốt `fireCReady()`: thiếu media của C thì cả đòn là vòng 10.
+  - 743 phép thử đạt. Host chơi đã build lại và tải `fire-c`. Giấy phép Kenney ghi ở `THIRD_PARTY.md` (`7ee752db`).
 - `media:push` 245 và ảnh gốc Antigravity xong (37.786/37.786 khớp md5): ba game `8bfd2f0`, `4aabd09`, `3a9d93d`, con trỏ `01089f83`.
 
 **31/10 khoảng 16:30: ảnh UI lượt 3.**
