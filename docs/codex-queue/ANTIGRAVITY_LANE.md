@@ -35,6 +35,7 @@ Owner, 31/10/2026 about 23:45: "tạm thời hãy kêu antigravity tạo ảnh c
 | 3 | ~~`docs/codex-queue/247-ts-icons-new-concepts.md`~~ | **Taken by Claude with Adobe Firefly Image 5 on 01/11 (00:30). Do not run it.** |
 | 4 | `docs/codex-queue/246-ts-hud-chrome-parts.md` | Last Line: hazard strip, hull bar, sealed bay plate |
 | 5 | `docs/codex-queue/248-ts-victory-bg.md` | Last Line: a victory background that reads as victory |
+| 6 | `docs/codex-queue/251-dh-title-backdrop-v2.md` | Dragonhold: title backdrop v2 (one focal point: the gate and the fire dragon whole in frame, the blight horde in the pass, at least 2560 px) and logo r2 |
 
 Ticket 245 (list rows, Close buttons, foe silhouettes) was already delivered by Codex; do not redo it.
 
