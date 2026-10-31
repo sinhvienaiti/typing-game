@@ -69,7 +69,15 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - cần chủ dự án quyết: `dh-vfx` (lửa vòng 11), `dh-models` (KTX2 dở);
   - chỉ giữ làm hồ sơ: s1–s6, `d27-counter`.
   - Kế hoạch đầy đủ ở `wf_6ac54865-14b`.
-- **Làn gắn ảnh UI đang chạy:** workflow `ui-art-wiring` (`wf_950c1f1e-a53`).
+- **Gắn ảnh UI xong lượt đầu, đã commit trên nhánh riêng (chưa gộp):**
+  - Last Line `ts-ui-wire` `67f3056`: 52 icon và mảnh UI của 149–153, chân dung Shard, thanh trượt.
+  - Dragonhold `dh-sliders` `769f21b`, Wordwoven `td-sliders` `4703bcc`: ảnh thanh trượt.
+  - Người chấm cho 7 và 7,5 trước lượt sửa; các lỗi P2 đã sửa.
+  - Đang chấm lại bản đã sửa (`wf_2650d89f-85d`) trước khi gộp.
+  - Việc kit còn lại: thanh trượt có lớp hiện mức đầy; rãnh vẽ ba mảnh.
+- **G7 xong** (`c9148813`, thêm `f8465575`).
+- **Phân tích lửa rồng:** báo cáo `docs/games/vfx/DRAGON_FIRE_DIAGNOSIS_2026-10-31.md`. Chờ chủ dự án duyệt làm thử phương án A một ngày.
+- **Tích hợp bản 3D của Wordwoven** (`td-ui` gồm `td-1c`, `td-scenery`) vào nhánh `td-integrate` đang chạy (`wf_4dcc3fee-723`), có giám khảo C10.
   - Last Line ở `.wt-ts-ui-wire`: icon 149–153 và thanh trượt.
   - Dragonhold `.wt-dh-sliders` và Wordwoven `.wt-td-sliders`: ảnh thanh trượt.
 - Sau lệnh đẩy hiện tại cần `media:push` lần nữa: 24 GLB và 50 ảnh UI mới của Last Line.
