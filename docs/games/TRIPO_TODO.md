@@ -86,3 +86,5 @@ Lỗi chung theo giám khảo: sáu ảnh không thành một bộ (năm kiểu 
 - **Màu:** ngà sứ và graphite, đường sáng cyan mảnh, **không dùng vàng**. Vàng dành cho Pack Leader (theo ChatGPT duyệt map 1); áo choàng xanh đen, chỉ ngà rất mảnh.
 - **Nhân vật và drone:** làm tờ xoay bốn góc trước, rồi cắt thành bốn ảnh cho multiview. Có thêm ô kiểm ở 68 px.
 - Ảnh ở `games/typing-survival/art-src/models-src/hero-v2/`.
+
+**Chủ dự án, 01/11 khoảng 9h:** "Chờ ảnh đạt 8,5". Không dựng thử model nào dưới mốc này, kể cả tượng rồng v2b.
