@@ -12,6 +12,10 @@ Từ 26/10/2026, áp dụng cho mọi game. Chủ dự án:
   - không có "dùng bản tốt nhất sau 3 lượt";
   - không có "tốt hơn bản cũ thì gắn";
   - không có bảng "7 điểm cho 3D".
+- **Sức hút (chủ dự án, tối 01/11):** "phần hình ảnh chúng ta phải làm nó thật đẹp, nhìn cuốn hút, phong cách, sang trọng, thời trang, hiện đại… đừng làm hình ảnh của game trở nên nhàm chán, đơn giản, thiếu đi sự hấp dẫn".
+  - Giám khảo chấm thêm điểm **sức hút**: cuốn hút, phong cách, sang trọng, hiện đại, giàu chi tiết. Điểm này chấm cạnh điểm mức thị trường.
+  - Thứ sạch sẽ, đúng kỹ thuật nhưng đơn giản, trơn hoặc chung chung thì không qua 8,5.
+  - Với thiết kế mang tính gu (nhân vật chính, title, UI chính), đưa chủ dự án xem vài phương án trước khi làm tiếp.
 - Chưa đạt 8,5 thì sửa hoặc làm lại tới khi đạt. Hết cách thì đổi hướng: nguồn có sẵn miễn phí, ảnh mẫu, công cụ khác. Không gắn rồi coi như xong.
 - Những gì đã gắn tạm dưới 8,5 là **nợ phải làm lại**, ghi ở `docs/games/QUALITY_RESCUE_2026-11-01.md`.
 - Các bảng mục 2 bên dưới giữ để tra lịch sử. Chỗ nào ghi 7 hay 8, nay hiểu là 8,5.
