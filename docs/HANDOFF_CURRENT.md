@@ -15,7 +15,25 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 21:50 (mới nhất, đọc trước). Tập trung 100 % vào Last Line.** Chủ dự án: "tạm thời dừng toàn bộ các phần game khác, tập trung 100% vào Last Line cho tôi… mỗi action đều có hiệu ứng, có hiển thị, có cảm giác sống động, tôi không muốn bất kỳ một cái gì hiển thị chỉ đơ ra".
+**02/11 khoảng 06:30 (mới nhất, đọc trước).** Last Line, theo `games/typing-survival/docs/ALIVE_PLAN.md`.
+- **Đã gộp vào `main` của game:**
+  - đợt 1 cùng lượt sửa (`1679ea6`);
+  - AL-00 phần nền (`b9ebc76`): bảng phủ trong mã, kịch bản `survival-alive`, tách tệp, `PilotRig`.
+- **Đợt 1:**
+  - AL-01 chuyển màn, nhánh `ts-al-01`: giám khảo 6,8 (bản cũ 3,3).
+  - AL-05 hiệu ứng gõ chữ, mốc 9, nhánh `ts-al-05`: 7,6 (bản cũ 6,0).
+  - Vòng sửa đang chạy (`wf_c31386a1-7bf`).
+  - AL-02 đường âm, nhánh `ts-al-02`: review cho gộp. Gộp sau AL-01 và AL-05, nối tay ba chỗ `speakEnglish` sang `audio.say`, `installAudioCues` và `destination` của `type-fx.ts`; chép 35 file âm thử (`audition`) và chạy `media:push`.
+  - Commit kit và lab của AL-05 (`7a4bd53a`…`42f2b4b1`) nằm trên nhánh cha `feat/space-typing-admin-uiux`.
+- **Âm chiến đấu:** chủ dự án chê âm "nhỏ nhẹ". Hướng mới đã vào skill `game-art-pipeline` audio §5 (`7f9c60e6`). Bộ 6 âm mẫu và demo ở `~/AudioLab/work/typing-survival/slice-0211/` chờ chủ dự án nghe. Q8 (súng hạ −3 hay −6 dB khi đọc) chưa chốt.
+- **Phong cách:**
+  - tranh 2D nữ xạ thủ theo 3 kiểu (X vẽ tay, Y truyện tranh, Z anime) đã gửi chủ dự án;
+  - bản thử 3D trong game đang chạy (`wf_be35f3db-c16`);
+  - chờ chủ dự án chọn.
+- **Đang hoãn:** trang thử hào quang vòng 3 (`.wt-ts-presence`), chờ chọn phong cách. Tìm thư viện qua ChatGPT (`wf_468c9e85-45a`) cũng để sau.
+- **Hạn mức:** chỉ chạy tối đa 2 workflow nặng cùng lúc; ngày 01–02/11 đã bị cắt 4 lần.
+
+**01/11 khoảng 21:50. Tập trung 100 % vào Last Line.** Chủ dự án: "tạm thời dừng toàn bộ các phần game khác, tập trung 100% vào Last Line cho tôi… mỗi action đều có hiệu ứng, có hiển thị, có cảm giác sống động, tôi không muốn bất kỳ một cái gì hiển thị chỉ đơ ra".
 - **Tạm dừng, giữ nguyên trong nhánh:**
   - **Dragonhold `dh-wave2`:** đã commit tới `292da81` (lỗi hình, nước D7, look Epic D5, AO D6, đất). Bước quái và rồng còn chưa commit trong `src/view/{actors,crowd,heroes,scatter,stage,terrain,water}.ts`.
   - **Wordwoven `td-units-3d`:** đã commit tới `da9d00f` (thẻ gọi, Draconis, cây, đất, ánh sáng, đêm, Sun-Star). `AGENTS.md`, `docs/td/BUILD_1C_MAP1.md` và changelog `2026-11-01-3d-wave2.md` còn chưa commit.
