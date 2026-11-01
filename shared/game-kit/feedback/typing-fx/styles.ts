@@ -12,7 +12,7 @@ import { ParticlePool, PK, type ParticleKind } from "./pool";
 import type { TypingFxStyle } from "./settings";
 
 /** Palette slots a particle's `tone` names; the renderer maps them to colours. */
-export const TONE = { hot: 0, accent: 1, light: 2, ink: 3, warn: 4, gold: 5, warnInk: 6, deep: 7 } as const;
+export const TONE = { hot: 0, accent: 1, light: 2, ink: 3, warn: 4, gold: 5, warnInk: 6, deep: 7, crimson: 8, glass: 9 } as const;
 
 export const FRAME_MS = 1000 / 60;
 
@@ -88,6 +88,8 @@ export type SpawnCtx = {
   light: (offset: number, amount: number) => void;
   /** A wrong key: the char code the player typed (0: the game did not say). */
   key: number;
+  /** The clean streak's tier (0 … 4; Load's key adds rays and shifts its hue by it). */
+  tier: number;
 };
 
 /** The finished word, for a style's own release on top of the shared rim pop, shock ring and sparks. */
@@ -112,7 +114,8 @@ export type WordCtx = {
 };
 
 export type StyleRecipe = {
-  readonly id: TypingFxStyle;
+  /** A player's style, or "load": the host mode's key (load.ts), never in the players' list. */
+  readonly id: TypingFxStyle | "load";
   /** How long a key's pose runs (ms). */
   readonly keyMs: number;
   /** Ghost copies clip (shatter's halves); null: whole glyph. */

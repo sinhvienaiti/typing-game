@@ -18,8 +18,8 @@ export type TypingFxSink = {
   key(index: number, now: number): void;
   /** A wrong key while the letter at `index` was due. */
   wrong?(index: number, now: number, key?: string): void;
-  /** A key that started nothing (no word locked). */
-  stray?(now: number): void;
+  /** A key that started nothing (no word locked); `key`: the key typed, when the game says. */
+  stray?(now: number, key?: string): void;
   /** Letters taken back: `typed` remain. */
   back?(typed: number, now: number): void;
   /** The word is typed: one effect for the whole word, upgraded by `perfect` and the combo. */
@@ -50,7 +50,7 @@ export type TypingFxProgress = {
   perfect?: boolean;
   /** Letters the game hides (bit i: letter i shows as "_" until typed or revealed); unset: none. */
   mask?: number;
-  /** A wrong key: what the player typed (the strip drops it away under the row); unset: not shown. */
+  /** A wrong or stray key: what the player typed (the strip drops it away under the row); unset: not shown. */
   key?: string;
 };
 
@@ -79,7 +79,7 @@ export class TypingFxDriver {
   progress(p: TypingFxProgress, now: number = nowMs()): void {
     const sinks = this.sinks;
     if (p.kind === "stray") {
-      for (const sink of sinks) sink.stray?.(now);
+      for (const sink of sinks) sink.stray?.(now, p.key);
       return;
     }
     if (p.kind === "release") {

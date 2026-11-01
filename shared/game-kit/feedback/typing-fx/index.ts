@@ -10,6 +10,8 @@ export { FRAME_MS, STYLES, TONE, WRONG_MS, flyEase, popEnvelope, squeeze, wrongP
 export { DEFAULT_PALETTE, FxCanvas, mixHex, toneColors, type TypingFxAtlas, type TypingFxPalette, type TypingFxTextures } from "./draw";
 export { injectTypingFxCss, TYPING_FX_CSS } from "./css";
 export { FocusStrip, type FocusStripOptions } from "./strip";
+// The Load host mode (Last Line only; ALIVE_PLAN AL-05): finished words fly into the host's target, stepped key marks, the painted plate's motion.
+export { LOAD, LOAD_KEY, LEARN_HOLD, loadTier, type LoadHost, type LoadRect } from "./load";
 export {
   KEYBOARD_DECODE_BATCH_SIZE, KEYBOARD_FIRST_BATCH_SPACES, KEYBOARD_PROFILES, keyboardFiles, profileGaps, TYPING_SOUND_EVENTS, TYPING_SOUND_MAP, TYPING_SOUND_SET, TYPING_SOUND_SETS, TypingSounds, VariantPicker, VoicePool,
   type KeyboardLoad, type SoundStandIn, type TypingSoundEvent, type TypingSoundProfile, type TypingSoundSet, type TypingSoundsOptions,

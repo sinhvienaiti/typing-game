@@ -7,6 +7,7 @@
  */
 import { FRAME_MS, TONE } from "./styles";
 import { PK, type ParticlePool } from "./pool";
+import { LOAD, loadFrame } from "./load";
 
 export type TypingFxPalette = {
   /** The game's typing colour (hex #rrggbb): typed letters, glows. */
@@ -47,9 +48,9 @@ export function mixHex(a: string, b: string, t: number): string {
   return "#" + c(0) + c(1) + c(2);
 }
 
-/** Tone index → colour, in TONE order. */
+/** Tone index → colour, in TONE order (crimson: a wrong key's magenta-red in Load; glass: crystal white-cyan, Load's flawless and hidden letters). */
 export function toneColors(p: TypingFxPalette): string[] {
-  return [p.hot, p.accent, mixHex(p.accent, "#ffffff", 0.55), p.ink, p.warn, p.gold, mixHex(p.warn, p.ink, 0.55), mixHex(p.accent, p.ink, 0.64)];
+  return [p.hot, p.accent, mixHex(p.accent, "#ffffff", 0.55), p.ink, p.warn, p.gold, mixHex(p.warn, p.ink, 0.55), mixHex(p.accent, p.ink, 0.64), mixHex(p.warn, "#d0105e", 0.6), mixHex(p.accent, "#eafcff", 0.78)];
 }
 
 /**
@@ -167,7 +168,8 @@ export class FxCanvas {
     this.painted = true;
     for (let i = 0; i < pool.count; i += 1) {
       const age = pool.age(i, now);
-      if (age >= 1) continue;
+      // A phase spawned ahead (Load's shards at f3, f9) waits for its time.
+      if (age >= 1 || now < pool.born[i]!) continue;
       ctx.globalAlpha = 1;
       const sy = pool.sy[i]!;
       if (sy !== 1) {
@@ -233,6 +235,21 @@ export class FxCanvas {
           break;
         case PK.smashWord:
           this.smashWord(pool, i, now);
+          break;
+        case PK.loadKey:
+          this.loadKey(pool, i, now);
+          break;
+        case PK.crystal:
+          this.crystal(pool, i, now, age);
+          break;
+        case PK.crackGlyph:
+          this.crackGlyph(pool, i, now, age);
+          break;
+        case PK.slide:
+          this.slide(pool, i, age);
+          break;
+        case PK.glassCrack:
+          this.glassCrack(pool, i, now);
           break;
       }
       if (sy !== 1) ctx.restore();
@@ -832,6 +849,253 @@ export class FxCanvas {
       ctx.stroke();
     }
     ctx.restore();
+  }
+
+  /**
+   * Load's key mark (E1), one particle stepped by 60 Hz frame (`size`: the font size, `aux`: the streak's
+   * tier, `rot`: where the arcs open, toward the next letter): f0 a white star (4–10 rays by tier) over a
+   * glow; f1 a disc in the key's tone with a white core of 30 %; f2 a thick white ring; f3–4 the dark glyph
+   * ring with ticks and a thin line of colour inside; f5 a thin white arc; f6–8 a dark arc turning 40° a
+   * frame, fading. White, then dark, then colour (VFX_STANDARD §3.4).
+   */
+  private loadKey(pool: ParticlePool, i: number, now: number): void {
+    const ctx = this.ctx;
+    const h = pool.size[i]!;
+    const x = pool.x[i]!;
+    const y = pool.y[i]!;
+    const tier = pool.aux[i]! | 0;
+    const f = loadFrame(now - pool.born[i]!);
+    const K = LOAD.key;
+    const hot = this.tones[TONE.hot]!;
+    const tint = this.color(pool, i);
+    const glow = this.sprites[pool.tone[i]!];
+    if (f === 0) {
+      const rays = LOAD.rays[Math.min(tier, LOAD.rays.length - 1)]!;
+      const r = K.star * h * (1 + 0.1 * tier);
+      if (glow !== undefined) {
+        ctx.globalAlpha = 0.7;
+        ctx.drawImage(glow, x - r * 1.15, y - r * 1.15, r * 2.3, r * 2.3);
+      }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = hot;
+      ctx.beginPath();
+      for (let k = 0; k < rays * 2; k += 1) {
+        // Diagonal first: the long rays leave from the 2.6× letter's corners, the short ones from its sides.
+        const a = pool.rot[i]! - Math.PI / 4 + (k * Math.PI) / rays;
+        const rr = k % 2 === 1 ? K.starIn * h : (rays <= 4 || k % 4 === 0 ? 1 : 0.55) * r;
+        const px = x + Math.cos(a) * rr;
+        const py = y + Math.sin(a) * rr;
+        if (k === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      return;
+    }
+    if (f === 1) {
+      const r = K.disc * h;
+      if (glow !== undefined) {
+        ctx.globalAlpha = 0.95;
+        ctx.drawImage(glow, x - r * 1.5, y - r * 1.5, r * 3, r * 3);
+      }
+      ctx.globalAlpha = 0.82;
+      ctx.fillStyle = tint;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, TAU);
+      ctx.fill();
+      // The white core: at most 30 % of the disc (VFX_STANDARD §3.4).
+      const core = this.sprites[TONE.hot];
+      if (core !== undefined) {
+        ctx.globalAlpha = 1;
+        ctx.drawImage(core, x - r * 0.55, y - r * 0.55, r * 1.1, r * 1.1);
+      }
+      ctx.fillStyle = hot;
+      ctx.beginPath();
+      ctx.arc(x, y, r * K.core, 0, TAU);
+      ctx.fill();
+      return;
+    }
+    if (f === 2) {
+      const r = K.ring * h;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, TAU);
+      ctx.strokeStyle = this.tones[TONE.ink]!;
+      ctx.globalAlpha = 0.5;
+      ctx.lineWidth = r * K.ringStroke + 3;
+      ctx.stroke();
+      ctx.strokeStyle = hot;
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = r * K.ringStroke;
+      ctx.stroke();
+      return;
+    }
+    if (f <= 4) {
+      // The glyph ring: dark and thick, compass ticks round it, a thin line of the key's colour inside.
+      const r = K.dark * h * (f === 4 ? 1.04 : 1);
+      const w = r * K.darkStroke;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, TAU);
+      ctx.strokeStyle = LOAD.dark;
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = w;
+      ctx.stroke();
+      ctx.beginPath();
+      for (let k = 0; k < K.ticks; k += 1) {
+        const a = pool.rot[i]! + (k * TAU) / K.ticks + (f === 4 ? 0.12 : 0);
+        const inner = k % 3 === 0 ? r - w * 1.1 : r - w * 0.2;
+        ctx.moveTo(x + Math.cos(a) * inner, y + Math.sin(a) * inner);
+        ctx.lineTo(x + Math.cos(a) * (r + w * 0.9), y + Math.sin(a) * (r + w * 0.9));
+      }
+      ctx.lineWidth = Math.max(1, w * 0.28);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x, y, r - w * 0.62, 0, TAU);
+      ctx.strokeStyle = tint;
+      ctx.globalAlpha = f === 3 ? 0.9 : 0.6;
+      ctx.lineWidth = Math.max(1, w * 0.18);
+      ctx.stroke();
+      return;
+    }
+    const gap = K.gap;
+    const from = pool.rot[i]! + gap / 2;
+    if (f === 5) {
+      // A thin white arc, open toward the next letter.
+      const r = K.arc * h;
+      ctx.beginPath();
+      ctx.arc(x, y, r, from, from + TAU - gap);
+      ctx.strokeStyle = this.tones[TONE.ink]!;
+      ctx.globalAlpha = 0.5;
+      ctx.lineWidth = 0.05 * h + 3;
+      ctx.stroke();
+      ctx.strokeStyle = hot;
+      ctx.globalAlpha = 1;
+      ctx.lineWidth = 0.05 * h;
+      ctx.stroke();
+      return;
+    }
+    // f6–8: the dark arc turns about 40° a frame and fades: the caret of the study; a hairline of the key's colour on its outer edge keeps it on a dark plate.
+    const r = K.arc * h * 1.04;
+    const turn = from + (f - 5) * K.turn;
+    const fade = Math.max(0, 1 - (f - 5) / 4);
+    const w = 0.075 * h;
+    ctx.beginPath();
+    ctx.arc(x, y, r, turn, turn + TAU - gap * 1.6);
+    ctx.strokeStyle = LOAD.dark;
+    ctx.globalAlpha = fade;
+    ctx.lineWidth = w;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(x, y, r + w * 0.5, turn, turn + TAU - gap * 1.6);
+    ctx.strokeStyle = tint;
+    ctx.globalAlpha = 0.9 * fade;
+    ctx.lineWidth = Math.max(1, 0.022 * h);
+    ctx.stroke();
+  }
+
+  /** A crystal shard (`aux`: 0 dark with a bright edge, 1 glass, 2 crimson): a long kite turning as it flies. */
+  private crystal(pool: ParticlePool, i: number, now: number, age: number): void {
+    const ctx = this.ctx;
+    const p = pool.position(i, now, this.pos);
+    const t = Math.max(0, now - pool.born[i]!) / 1000;
+    const a = pool.rot[i]! + pool.spin[i]! * t;
+    const s = pool.size[i]! * (1 - 0.35 * age);
+    const c = Math.cos(a);
+    const n = Math.sin(a);
+    const look = pool.aux[i]! | 0;
+    ctx.beginPath();
+    ctx.moveTo(p[0]! + c * s * 1.6, p[1]! + n * s * 1.6);
+    ctx.lineTo(p[0]! - n * s * 0.42, p[1]! + c * s * 0.42);
+    ctx.lineTo(p[0]! - c * s * 0.9, p[1]! - n * s * 0.9);
+    ctx.lineTo(p[0]! + n * s * 0.42, p[1]! - c * s * 0.42);
+    ctx.closePath();
+    const alpha = 1 - age * age;
+    ctx.globalAlpha = alpha * (look === 1 ? 0.55 : 0.95);
+    ctx.fillStyle = look === 0 ? LOAD.dark : look === 2 ? this.tones[TONE.warnInk]! : this.color(pool, i);
+    ctx.fill();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = look === 0 ? this.color(pool, i) : look === 2 ? this.tones[TONE.crimson]! : this.tones[TONE.hot]!;
+    ctx.lineWidth = Math.max(1, s * 0.16);
+    ctx.stroke();
+  }
+
+  /** A wrong key's letter (`aux` its char code), cracked, crimson on a dark edge, dropping `size2` px by its end. */
+  private crackGlyph(pool: ParticlePool, i: number, now: number, age: number): void {
+    const ctx = this.ctx;
+    const ms = now - pool.born[i]!;
+    const f = loadFrame(ms);
+    const size = pool.size[i]! * (f === 0 ? 1.25 : 1);
+    const x = pool.x[i]!;
+    const y = pool.y[i]! + pool.size2[i]! * age * age;
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.font = this.font.replace(/[\d.]+px/, size.toFixed(1) + "px");
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.globalAlpha = age < 0.7 ? 1 : 1 - (age - 0.7) / 0.3;
+    const ch = String.fromCharCode(pool.aux[i]!);
+    ctx.lineWidth = size * 0.14;
+    ctx.strokeStyle = this.tones[TONE.ink]!;
+    ctx.strokeText(ch, 0, 0);
+    ctx.fillStyle = f < 1 ? this.tones[TONE.hot]! : this.color(pool, i);
+    ctx.fillText(ch, 0, 0);
+    // The crack: a zigzag through the letter, white on its first frames, then dark.
+    ctx.beginPath();
+    const s = size * 0.5;
+    ctx.moveTo(-s * 0.55, -s * 0.8);
+    ctx.lineTo(-s * 0.05, -s * 0.2);
+    ctx.lineTo(-s * 0.3, s * 0.1);
+    ctx.lineTo(s * 0.25, s * 0.85);
+    ctx.strokeStyle = f < 2 ? this.tones[TONE.hot]! : this.tones[TONE.ink]!;
+    ctx.lineWidth = Math.max(1.2, size * 0.06);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  /** The caret sliding back under the row: from `x` to `aux` in its life, a white-hot bar in a glow of the accent. */
+  private slide(pool: ParticlePool, i: number, age: number): void {
+    const ctx = this.ctx;
+    const k = easeOut(age);
+    const x = pool.x[i]! + (pool.aux[i]! - pool.x[i]!) * k;
+    const y = pool.y[i]!;
+    const w = pool.size[i]!;
+    const t = pool.size2[i]!;
+    const glow = this.sprites[TONE.accent];
+    if (glow !== undefined) {
+      ctx.globalAlpha = 0.7 * (1 - age);
+      ctx.drawImage(glow, x - w * 1.4, y - t * 3, w * 2.8, t * 6);
+    }
+    ctx.globalAlpha = 1 - 0.6 * age;
+    ctx.fillStyle = this.tones[TONE.hot]!;
+    roundRect(ctx, x - w, y - t / 2, w * 2, t, t / 2);
+    ctx.fill();
+  }
+
+  /** Cracks across a hidden letter's glass as it is revealed: five lines out from a point, growing f0–2, fading by f6. */
+  private glassCrack(pool: ParticlePool, i: number, now: number): void {
+    const ctx = this.ctx;
+    const f = (now - pool.born[i]!) / FRAME_MS;
+    const r = pool.size[i]!;
+    const grow = Math.min(1, (f + 1) / 3);
+    const fade = f < 2 ? 1 : Math.max(0, 1 - (f - 2) / 4);
+    const x = pool.x[i]! - 0.1 * r;
+    const y = pool.y[i]! - 0.15 * r;
+    ctx.beginPath();
+    for (let k = 0; k < 5; k += 1) {
+      const a = pool.rot[i]! + (k * TAU) / 5 + 0.3 * Math.sin(k * 2.1);
+      const len = r * grow * (0.7 + 0.3 * Math.sin(k * 1.7 + 1));
+      const bend = a + 0.35 * (k % 2 === 0 ? 1 : -1);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + Math.cos(a) * len * 0.5, y + Math.sin(a) * len * 0.5);
+      ctx.lineTo(x + Math.cos(bend) * len, y + Math.sin(bend) * len);
+    }
+    ctx.strokeStyle = this.tones[TONE.ink]!;
+    ctx.globalAlpha = 0.6 * fade;
+    ctx.lineWidth = Math.max(1, 0.05 * r) + 2;
+    ctx.stroke();
+    ctx.strokeStyle = this.color(pool, i);
+    ctx.globalAlpha = fade;
+    ctx.lineWidth = Math.max(1, 0.05 * r);
+    ctx.stroke();
   }
 }
 

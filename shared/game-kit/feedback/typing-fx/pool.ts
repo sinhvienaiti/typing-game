@@ -26,6 +26,11 @@ export const PK = {
   beam: 16, // a light beam along the whole word (Flare's release)
   sweep: 17, // an underline drawn across the whole word (Minimal's release)
   smashWord: 18, // T2's stepped two-tone ring round the whole word (Smash's release)
+  loadKey: 19, // Load's stepped key mark: star, disc, white ring, dark glyph ring, arcs (load.ts)
+  crystal: 20, // a crystal shard: dark with a bright edge, glass or crimson (`aux` its look)
+  crackGlyph: 21, // a wrong key's letter, cracked, dropping (Load)
+  slide: 22, // the caret sliding back under the row (Load's backspace)
+  glassCrack: 23, // cracks over a hidden letter's glass as it is revealed (Load)
 } as const;
 export type ParticleKind = (typeof PK)[keyof typeof PK];
 
