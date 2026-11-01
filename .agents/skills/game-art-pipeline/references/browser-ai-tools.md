@@ -42,7 +42,8 @@ These recipes were tried in the app's in-app browser (`mcp__Claude_Browser__*`, 
   - Without a base frame, ChatGPT drifts from the layout: layout scores were 5.5–7.5.
   - With a base frame, give a coordinate legend in the frame's pixels and ask it to keep every position.
 - **Research as a second opinion.**
-  - Ask for a URL behind each claim.
+  - Ask for a thorough search: many sources, official pages and repos, not one listicle. Ask for a URL behind each claim.
+  - Before using the answer, send a self-review message (owner, 01/11: "luôn phải kêu chatgpt tìm thật kỹ, tự review lại trước khi bàn giao"): reopen each link and confirm it exists and does what was said; re-check each licence on the official page or LICENSE file; drop anything the licence rules forbid; mark what is uncertain; add strong options it missed; give the corrected final list. Use only the corrected list.
   - Open the key sources and mark each claim verified, partly verified, unsupported or wrong.
   - Add what it missed, write your own evaluation and say where you disagree. Run your own research in parallel when the decision matters.
   - Owner, 01/11: "bạn và chatgpt chỉ là trao đổi và tham khảo".
