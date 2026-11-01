@@ -15,7 +15,16 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 07:55 (mới nhất, đọc trước).** Mốc mới của chủ dự án: mọi thứ người chơi thấy cần hai giám khảo mù cùng cho từ 8,5, chấm trên bản chơi đã build; không còn "tạm".
+**01/11 khoảng 12:25 (mới nhất, đọc trước).**
+- **Tu Tiên:** chủ dự án cho làm tiếp trong session riêng chạy Fable 5.1, tên "Tu Tiên: tiếp tục, ưu tiên hình, âm, VFX" (`local_a5f48644-c74d-4f89-9251-1e16e63d075b`). Session điều phối vẫn không đụng Tu Tiên. Session đó nhắn sang trước khi chạy `pnpm media:push`. Bài học cho game mới ở `docs/games/LESSONS_FROM_THREE_GAMES.md`.
+- **ChatGPT:** chế độ Chat dùng bình thường; hạn mức "1%" là của Work.
+- **Tranh ý tưởng map 1:**
+  - Wordwoven (v3-try1, ChatGPT vẽ trên ảnh nền chủ dự án đính kèm): đẹp 7,4/7,5, bố cục 8,3/8,5, dễ đọc 6,8/7,5;
+  - Dragonhold và Last Line chưa có ảnh nền: đẹp khoảng 7–7,5, bố cục 5,5–7,5;
+  - chờ chủ dự án đính kèm ảnh nền cho hai chat đó.
+- **Tripo:** chủ dự án quyết "Chờ ảnh đạt 8,5".
+
+**01/11 khoảng 07:55.** Mốc mới của chủ dự án: mọi thứ người chơi thấy cần hai giám khảo mù cùng cho từ 8,5, chấm trên bản chơi đã build; không còn "tạm".
 
 **Đợt 1 đã xong, chưa gộp.** Kết quả ở `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/f97baf5f-4f81-4f84-8ec0-79083d7e3ba9/tasks/w5pwzul4f.output`.
 
