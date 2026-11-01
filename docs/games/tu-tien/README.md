@@ -9,6 +9,7 @@ Thư mục này đánh giá một game mới cho portal: **giữ ải chống th
 
 ## Đọc theo thứ tự
 
+0. [`ART_AUDIO_VFX_PLAN.md`](ART_AUDIO_VFX_PLAN.md) (01/11/2026): **kế hoạch gốc hình, âm thanh, VFX, model 3D** từ grey box M0a lên map 1 mức thương mại: đánh giá giải pháp, số đo camera thật, bộ mẫu Demo 1 (8,5 rồi mới nhân rộng), danh sách 2D, âm, VFX, model Tripo, câu hỏi chờ chủ dự án. Chờ duyệt trước khi tạo ảnh hay tiêu credit.
 1. [`00-canon.md`](00-canon.md): **nguồn chân lý duy nhất**: định danh, từ điển, sổ quyết định, luật, công thức, bảng số, bảng phím, cổng bot, ngân sách hiệu năng và bench HN0. Thắng mọi tệp khác.
 2. [`M0A_PLAN.md`](M0A_PLAN.md): kế hoạch xây M0a (hộp xám) và bản thử Tĩnh Tu: khung repo, nối repo cha, làn có đường dẫn sở hữu riêng, thứ tự, nghiệm thu, cổng, cách đo GPU.
 3. [`DANH_GIA_2026-10-24.md`](DANH_GIA_2026-10-24.md): kết luận, đánh giá Codex V2.2, vòng chơi, bảng hệ thống, solo và đội, lộ trình mốc, rủi ro, quyết định của anh (mục 8, đã trả lời 24–25/10). Lý do của canon; chỗ nào khác canon thì canon thắng.
