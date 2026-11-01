@@ -88,3 +88,20 @@ Lỗi chung theo giám khảo: sáu ảnh không thành một bộ (năm kiểu 
 - Ảnh ở `games/typing-survival/art-src/models-src/hero-v2/`.
 
 **Chủ dự án, 01/11 khoảng 9h:** "Chờ ảnh đạt 8,5". Không dựng thử model nào dưới mốc này, kể cả tượng rồng v2b.
+
+## Hướng thứ hai: model miễn phí có sẵn (01/11, 11:30–12:30)
+
+Đã tìm 82 ứng viên trên Sketchfab (CC0/CC-BY), Poly Haven, BlenderKit, OpenGameArt, Quaternius và Kenney. Sau khi đọc lại giấy phép trên trang từng mục, giữ 58 ứng viên (bảng chi tiết trong kết quả workflow `wf_6089c9ed-958`). Hai giám khảo mù chấm từng ứng viên; **không ứng viên nào đạt 8,5**.
+
+| Công trình | Ứng viên tốt nhất | Điểm thị trường / độ hợp |
+|---|---|---|
+| Vòm đổ | A7: bản quét khải hoàn môn sa thạch | 7 / 7 |
+| Tượng rồng | S10: bản sculpt rồng nằm cuộn, chưa có texture, có thể là fan-art | 6,5–7 / 7–7,5 |
+| Cổng, tường, tháp canh | Bản quét các công trình có thật; Poly Haven Modular Fort 01 (CC0, cần dán lại texture) | khoảng 6–6,5 |
+| Chậu lửa | B1, B7 | khoảng 6–6,5 |
+
+Các ứng viên tốt nhất không thành một bộ: đá, thời kỳ và ánh sáng nướng sẵn khác nhau. Giám khảo ước nếu khử ánh sáng và dán lại texture cả bộ thì cũng chỉ được khoảng 7–7,5.
+
+Bị loại vì giấy phép: BlenderKit "Royalty Free", ShareTextures "Custom CC0", RenderCrate (điều khoản cấm AI), các mục gắn NoAI, NC, ND, SA, GPL.
+
+**Kết luận:** hướng này không qua được mốc. Hướng kế tiếp: thử nhờ ChatGPT (chế độ Chat) vẽ ảnh nguồn cho cả bộ theo một chuẩn chung, vì tranh ý tưởng nó vẽ có chất liệu tốt hơn Firefly.
