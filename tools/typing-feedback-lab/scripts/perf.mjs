@@ -3,7 +3,8 @@
 // A perf run takes the whole GPU pool:
 //   .local/bin/heavy.sh --perf node shared/game-kit/tools/cdp-run.mjs tools/typing-feedback-lab/scripts/perf.mjs --width=1920 --height=1080
 // Env: URL, OUT_DIR, SECONDS (per cell, default 6), STYLES, INTENSITIES, PROFILE (keyboard profile, default
-// creamy; a pending one is silent, so voices read 0 until the Audio Lab stages it).
+// creamy; a pending one is silent, so voices read 0 until the Audio Lab stages it), LOAD=1 (Last Line's Load host mode,
+// GAME=typing-survival by default then; the report is perf-<size>-load.json).
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -16,9 +17,11 @@ export default async function perf(page) {
   const styles = (process.env.STYLES ?? "stamp,flare,smash,shatter,rune,minimal").split(",");
   const intensities = (process.env.INTENSITIES ?? "normal,ultra").split(",");
   const profile = process.env.PROFILE ?? "creamy";
+  const load = process.env.LOAD === "1";
   await page.goto(url, { settle: 500 });
   await page.eval("window.__lab.ready.then(() => true)");
   await page.eval("(window.__lab.panel(false), true)");
+  if (load) await page.eval(`window.__lab.game(${JSON.stringify(process.env.GAME ?? "typing-survival")}, 1).then(() => (window.__lab.load(true), true))`);
   // A click starts audio (the flag allows autoplay; the click makes it explicit), then the profile loads.
   await page.mouse(20, 20, "mousePressed");
   await page.mouse(20, 20, "mouseReleased");
@@ -67,9 +70,9 @@ export default async function perf(page) {
     await sleep(40);
   }
   const latency = await page.eval("window.__lab.stats().latency");
-  const report = { url, seconds, profile, sounds: await page.eval("window.__lab.loadReport"), cells, latency: { keys: typed, ...latency } };
+  const report = { url, seconds, profile, load, landed: load ? await page.eval("window.__lab.landed()") : null, sounds: await page.eval("window.__lab.loadReport"), cells, latency: { keys: typed, ...latency } };
   mkdirSync(out, { recursive: true });
   const size = await page.eval("innerWidth + 'x' + innerHeight");
-  writeFileSync(join(out, `perf-${size}.json`), JSON.stringify(report, null, 2));
+  writeFileSync(join(out, `perf-${size}${load ? "-load" : ""}.json`), JSON.stringify(report, null, 2));
   return report;
 }
