@@ -5,6 +5,7 @@
 > **Phạm vi:** Rồng Giữ Ải (`games/dragon-hold`), Lời Gọi (`games/typing-defense`), Tuyến Cuối (`games/typing-survival`) và Space Typing.
 > **Dựa trên:** 7 hướng nghiên cứu làm ngày 23/10/2026, hai bản thử "tai AI" chạy thật trên máy của chủ dự án (số liệu ở [phụ lục A](#phụ-lục-a-bản-thử-tai-ai-số-liệu-và-cách-chạy-lại)), và hai bản phản biện. Nguồn ghi bằng số [n], bấm vào để mở link. Danh sách đủ ở cuối bài. Ý nào chưa kiểm chứng thì ghi "(chưa kiểm chứng)".
 > **Thứ tự ưu tiên:** tài liệu và mã của từng game (`catalog.ts`, `THEME_SOUND_LIST.md`, `M0_SOUND_LIST.md`) thắng tài liệu này. Con số nào ở đây khác tài liệu game thì chỉ là **đề xuất**. Phải sửa tài liệu game, có chủ dự án duyệt, rồi mới dùng.
+> **Âm chiến đấu (02/11/2026):** chủ dự án chê âm chiến đấu của Last Line "quá kiểu nhỏ nhẹ và thiếu sự mạnh mẽ, bùng nổ, âm thanh vang vọng". Mọi âm chiến đấu của mọi game (bắn, phép, bẫy, trúng, chết, nổ, đòn quái, surge, boss) theo [skill `game-art-pipeline`, `references/audio.md` §5](../../.agents/skills/game-art-pipeline/references/audio.md#5-combat-sound-power-layering-space): ghép lớp từ nguyên liệu, bậc độ to theo loại sự kiện, đuôi nướng sẵn cộng send vang trong game, ưu tiên, giới hạn số tiếng và ducking. Các luật dưới đây viết cho tiếng phím (mềm, đuôi ngắn, không mỏi tai, cắt nhanh dải 1–4 kHz, một mức to chung) **chỉ áp cho phím, UI và âm xong từ**. Chỗ nào trong tài liệu này khác skill §5 về âm chiến đấu thì skill thắng.
 
 ---
 
@@ -270,7 +271,7 @@ Nghiên cứu bên ngoài cho kết quả tương tự:
 
 Bảng này là **điểm xuất phát** để xếp hạng và gắn cờ. Không dùng để loại ở lô 1. Khi một họ âm có từ 5 âm đã duyệt, mỗi ngưỡng được thay bằng khoảng P10–P90 của bộ âm đó.
 
-**Độ to:** mọi âm ngắn được chuẩn hóa về **một mức chung**: LUFS-M max −20, đo sau khi đệm im lặng cho đủ 0,4 s. Mức tương đối giữa các âm chỉ nằm trong `gainDb` của catalog và mức bus. Cột "Mức trong bản trộn" dưới đây là thứ bài thử A và B kiểm trên bản trộn, không phải đích của từng file.
+**Độ to:** phím, UI và âm xong từ được chuẩn hóa về **một mức chung**: LUFS-M max −20, đo sau khi đệm im lặng cho đủ 0,4 s. Mức tương đối giữa các âm này chỉ nằm trong `gainDb` của catalog và mức bus. **Âm chiến đấu thì không** (02/11): mỗi file mang bậc độ to của nó (T2–T6 ở skill `game-art-pipeline` `references/audio.md` §5.4), vì một mức chung xóa mất thứ bậc giữa phát súng thường và vụ nổ lớn. Cột "Mức trong bản trộn" dưới đây là thứ bài thử A và B kiểm trên bản trộn. Với phím, UI và âm xong từ, đó không phải đích của từng file; với âm chiến đấu, file đặt đúng bậc nên gần bằng mức trong bản trộn.
 
 | Nhóm | Ví dụ id | Dài | Mức trong bản trộn (LUFS-M max) | Phổ, độ nảy | Số biến thể |
 |---|---|---|---|---|---|
@@ -278,12 +279,12 @@ Bảng này là **điểm xuất phát** để xếp hạng và gắn cờ. Khô
 | Phím sai | `key.bad`, `type.miss`, `key-wrong` | 60–150 ms | Nhỏ hơn phím đúng ít nhất 3 dB | Năng lượng ở 150–600 Hz. Phần trên 3 kHz thấp hơn ít nhất 20 dB [[59]][s59] | 2–3 |
 | UI | `ui.*`, `ui-*` | 10–250 ms | −30 đến −22, không to hơn phím | 1–5 kHz, mềm | 1–3 |
 | Thưởng xong từ | `word.load`, `type.word`, `word-hit`, `fire.cast` | 150–900 ms, tùy bậc | Từ −22 (bậc C) đến −16 (bậc S) | Nốt đúng thang, lệch không quá 10 cent. **Năng lượng 1–4 kHz giảm ít nhất 15 dB trong 100 ms sau đầu tiếng** (mục 6.2) | 1–3 |
-| Bắn, khạc | `gun.xung`, `arrow-fire` | 80–350 ms | −24 đến −18 | Súng: từ 25 % năng lượng dưới 150 Hz, crest từ 12 dB. Khạc hoặc phóng: dưới 120 Hz thấp hơn ít nhất 12 dB | 4–6 |
-| Trúng nhỏ | `hit.t1`, `enemy.*.hit` | 50–150 ms | −22 đến −20 | Đầu tiếng 2–6 kHz, thân 200–800 Hz, crest từ 12 dB | 6–8 |
-| Trúng vừa, nặng | `fire.impact.*`, lớp `hit.*` | 120–600 ms | Vừa: −19 đến −17. Nặng: −16 đến −14 | Tiếng nặng có sub 40–90 Hz, dài không quá 150 ms | 3–6 |
-| Nổ | `blast`, `trap.pine-bomb.trigger` | 0,6–2 s | LUFS-S max −15 đến −12 | Tiếng nứt 2–8 kHz trong 30 ms đầu. Sub dài không quá 300 ms | 3–5 |
-| Chết bầy | `kill.swarm`, `enemy.swarm.death`, `ink-puff` | 80–200 ms | −24 đến −21 | Dải giữa và cao, nhẹ | 8–10 |
-| Chết lớn | `kill.elite`, `enemy.quadruped.death` | 400–900 ms | −20 đến −15 | Tiếng thịch 60–150 Hz | 3–4 |
+| Bắn, khạc | `gun.xung`, `arrow-fire` | Khô 80–350 ms; đuôi riêng 0,3–3 s | Bắn nhanh: −19 đến −17 (T2). Súng nặng, phép lớn: −15 đến −12 (T4) | Súng: từ 25 % năng lượng dưới 150 Hz, crest từ 12 dB. Khạc hoặc phóng: dưới 120 Hz thấp hơn ít nhất 12 dB. Ghép lớp theo skill §5.3 | 4–6 |
+| Trúng nhỏ | `hit.t1`, `enemy.*.hit` | 50–150 ms | −20 đến −16 (T3) | Tick sáng có cao độ cộng thân chắc; đầu tiếng 2–6 kHz, thân 200 Hz–2 kHz, crest từ 12 dB | 6–8, gần như cố định |
+| Trúng vừa, nặng | `fire.impact.*`, lớp `hit.*` | 120–600 ms | Vừa: −19 đến −16 (T3). Nặng: −15 đến −12 (T4) | Tiếng nặng có sub 40–90 Hz, dài không quá 220 ms. Bậc cao thêm lớp, không chỉ thêm gain | 3–6 |
+| Nổ | `blast`, `trap.pine-bomb.trigger` | 0,6–2 s, gồm đuôi vang | LUFS-M max −12 đến −9 (T5) | Tiếng nứt 2–8 kHz trong 30 ms đầu. Sub dài không quá 300 ms. Đuôi vang cuộn 1–2 s. Cắt mềm trước limiter để đạt bậc ở ≤ −1 dBTP | 3–5 |
+| Chết bầy | `kill.swarm`, `enemy.swarm.death`, `ink-puff` | 100–220 ms | −20 đến −17 (T3) | Giòn, có cú thịch trầm ngắn. Tối đa 3–4 tiếng; dày hơn thì một lớp chết hàng loạt | 8–10 |
+| Chết lớn | `kill.elite`, `enemy.quadruped.death` | 0,4–2 s, gồm đuôi | Elite: −15 đến −12 (T4). Big kill, boss: −12 đến −9 (T5) | Tiếng thịch 60–150 Hz, sub, đuôi vang dài | 3–4 |
 | Tiếng sinh vật | `*.spawn`, `dragon.hurt`, `dragon.roar` | 0,2–1,6 s | −20 đến −15 | AST nên gắn Roar, Growling hoặc Animal, không gắn Speech (cờ) | 3–4. Rồng chính: 1–2 |
 | Báo nguy | `warn.*`, `alarm.surge`, `leak` | 0,25–2 s | −17 đến −14 | Không có âm kéo dài ở 1–4 kHz | 1, cố định |
 | Nền lặp | `amb.*`, `*.march` | Theo tài liệu game | LUFS-I theo tài liệu game (nền −26) | Phần lớn năng lượng dưới 300 Hz và ở 4–10 kHz | 1 |
@@ -379,7 +380,7 @@ Các nguyên tắc từ những game được khen được viết thành luật
    - Làm mờ phần đuôi. Lọc cao 30–40 Hz để bỏ DC và tiếng ù trầm.
    - Đổi tần số lấy mẫu sang 48 kHz bằng `aresample=resampler=soxr`.
    - Gộp về mono: nếu mất khi gộp không quá 3 dB thì lấy kênh giữa; nếu hơn thì lấy kênh tốt hơn.
-   - Giới hạn đỉnh thật ở −1 dBTP. Chuẩn hóa âm ngắn về LUFS-M max −20. Nhạc và nền theo LUFS-I của tài liệu game.
+   - Giới hạn đỉnh thật ở −1 dBTP. Chuẩn hóa phím, UI và âm xong từ về LUFS-M max −20. Âm chiến đấu: ghép lớp và xử lý theo chuỗi ffmpeg đã thử ở skill `game-art-pipeline` `references/audio.md` §5.7, rồi đặt theo bậc ở §5.4 của skill. Nhạc và nền theo LUFS-I của tài liệu game.
 5. **Cổng L1** trên file gốc và file đã sửa. Bản trượt bị loại, lý do được ghi lại.
 6. **Xếp hạng L2–L5** theo trọng số ở mục 4.5. Ghi cờ L1b, L4.
 7. **Claude đọc thẻ ảnh và JSON** của top-6, bản dò và mọi ca bị cờ. Claude lập danh sách nghe theo mục 4.6 bước 2.
@@ -398,7 +399,7 @@ Thời gian máy cho mỗi id ước khoảng 1–2 phút, chưa tính thời gi
 
 - **Bảng phong cách trước lô 1, cho từng game.** Claude dựng 2–3 hướng âm. Mỗi hướng gồm 3–4 âm chữ ký, đặt trong một đoạn trận 20 s có nền nhạc thô đúng giọng và BPM. Chủ dự án chọn một hướng. Với Lời Gọi, chủ dự án duyệt luôn phần văn hóa. Âm của hướng thắng là âm tham chiếu đầu tiên.
 - **Gốc prompt cho mỗi game**, chốt sau bảng phong cách. Mỗi id thêm phần đuôi riêng. Điểm xuất phát:
-  - Tuyến Cuối: *industrial, steel, close, punchy*. Đuôi kim loại trong không gian rộng là **một lớp riêng** dùng chung (`hit.tail`, mục 6.3), không nằm trong gốc prompt. Nhờ vậy gốc prompt không còn mâu thuẫn với bảng âm ở mục 8.3.
+  - Tuyến Cuối: *industrial, steel, close, punchy*. Đuôi kim loại trong không gian rộng là **một lớp riêng** dùng chung (`hit.tail`, mục 6.3), không nằm trong gốc prompt. Nhờ vậy gốc prompt không còn mâu thuẫn với bảng âm ở mục 8.3. Từ 02/11, prompt âm chiến đấu của mọi game viết theo skill §5.6: mỗi lớp một prompt, ngắn, ngăn bằng dấu phẩy, có từ chỉ cường độ; không bao giờ "small, quiet, faint, soft, gentle, restrained, compact", số tần số hay "followed by".
   - Lời Gọi: *bamboo, wood, bronze, paper, Vietnamese village, dry, outdoor*.
   - Rồng Giữ Ải: *painterly fantasy forest, warm, organic, outdoor*.
 - **Các bậc dùng chung lớp.** Tuyến Cuối ghép bậc trúng lúc chạy từ các lớp riêng (mục 6.3). Rồng Giữ Ải: `fire.impact.c` gồm `fire.impact.a` cộng thêm tiếng bùng lửa.
@@ -444,7 +445,8 @@ Mã hiện tại đổi ngẫu nhiên như nhau cho mọi âm. Rồng Giữ Ải
 | rè, lỗi | Loại. Thêm mẫu vào bộ chỉnh L1b | Tạo lại |
 | sai chất liệu | Viết lại prompt bằng từ chỉ chất liệu. Negative prompt chỉ khi đã bật CFG > 1 | Chuyển sang mẫu thật hoặc tự ghi |
 | lạc thể loại | Thêm từ trong bảng âm của game (mục 8) | Đổi âm tham chiếu |
-| nhàm khi lặp | Thêm biến thể, hạ 2 dB, giảm độ chói | Cho mỗi biến thể khác lớp hơn |
+| nhàm khi lặp | Thêm biến thể, hạ 2 dB, giảm độ chói. Âm chiến đấu: rút ngắn đỉnh và phân tầng (phát thường nhỏ hơn sự kiện lớn), không hạ cả bậc | Cho mỗi biến thể khác lớp hơn |
+| nhỏ nhẹ, thiếu lực (âm chiến đấu) | Ghép lớp đầu tiếng, thân, sub, đuôi vang; đặt đúng bậc; soát glue nhanh và makeup tự động trong mix (skill §5) | Viết lại prompt: mỗi lớp một prompt, từ chỉ cường độ (skill §5.6) |
 | rẻ tiền | Thêm một lớp, thêm đuôi phòng ngắn | Đổi nguồn |
 | khó nghe tiếng đọc | Giảm năng lượng ở 1–4 kHz, rút ngắn phần 1–4 kHz của âm thưởng | Sửa mức nhường tiếng hoặc thời điểm đọc (mục 6.2) |
 | chậm | Cắt đầu đến dưới 2 ms | Đổi cách tải âm |
@@ -467,11 +469,11 @@ Mọi bài thử dựng tiếng bằng **bộ trộn thật của game** trong `
 
 | Bài thử | Cách làm | Đo gì | Đạt khi |
 |---|---|---|---|
-| **A. Độ to theo bus** | Dựng 5–10 phút chơi bằng bot | LUFS-I của cả bản trộn, đỉnh thật, LRA, phần đóng góp của từng bus, và mức của từng nhóm âm | −18 ± 2 LUFS-I, đỉnh ≤ −1 dBTP, LRA 8–15 LU, suy từ khoảng của thiết bị di động trong IESD [[51]][s51], vì web không có chuẩn riêng. Mỗi nhóm nằm trong cột "Mức trong bản trộn" (mục 4.3.3) ±2 LU |
+| **A. Độ to theo bus** | Dựng 5–10 phút chơi bằng bot | LUFS-I của cả bản trộn, đỉnh thật, LRA, phần đóng góp của từng bus, và mức của từng nhóm âm | −18 ± 2 LUFS-I, đỉnh ≤ −1 dBTP, LRA 8–15 LU, suy từ khoảng của thiết bị di động trong IESD [[51]][s51], vì web không có chuẩn riêng. Game có trận: LRA 10–18 LU, và sự kiện T5 cao hơn mức tích hợp 6–10 LU trong cửa sổ ngắn (skill §5.4). Mỗi nhóm nằm trong cột "Mức trong bản trộn" (mục 4.3.3) ±2 LU |
 | **B. Thay file không làm lệch mix** | So từng id: bản file với bản tổng hợp hiện tại | Chênh lệch độ to trong bản trộn | Lệch không quá 1 LU lúc mới thay. Sau đó chủ dự án mới chỉnh tiếp |
 | **C. Giọng đọc từ trong trận** | **Mẫu giọng:** Claude ghi 2–3 giọng tiếng Anh của macOS bằng `say -v <giọng> -o <file>`. Giọng "Google US English" của Chrome là giọng qua mạng, chỉ có khi chủ dự án ghi lại (tùy chọn). **Chuỗi thật:** (1) khóa từ → giọng đọc, trong lúc bot gõ; (2) gõ xong từ → âm thưởng (`fire.cast`, `word-hit`, `word.load`) → giọng đọc; (3) trận dày nhất. Quét mức giọng ±6 dB, và độ trễ bắt đầu đọc 0, 150 và 400 ms | Trong 300 ms đầu của giọng: giọng cao hơn phần còn lại bao nhiêu ở 1–4 kHz. SII bằng MoSQITo `sii_ansi` [[19]][s19] | Ở ca xấu nhất: giọng cao hơn ít nhất 10 dB ở 1–4 kHz. SII từ khoảng 0,75 (chưa kiểm chứng). Chủ dự án nghe ca xấu nhất để xác nhận. Lý do: 1–4 kHz chiếm khoảng 71 % trọng số dễ hiểu, và người nghe không phải bản ngữ cần tỉ số tín hiệu trên nhiễu tốt hơn 1–7 dB [[53]][s53] |
 | **D. Mật độ** | Rồng Giữ Ải: 200 quái tràn lên. Tuyến Cuối: 40 con chết trong 120 ms cộng `gun.xung` 5 lần mỗi giây. Lời Gọi: tên bắn 4 lần mỗi giây × số tháp, cộng `ink-puff` 8 lần mỗi giây | Số tiếng cùng lúc, thời gian bộ giới hạn ép hơn 3 dB, clip, độ chói ở 2–5 kHz, và **nhóm nào chiếm từng dải** | Số tiếng không vượt trần. Thời gian ép hơn 3 dB dưới 5 %. Không clip. Độ chói dưới mức P90 của âm tham chiếu. Mỗi dải do đúng nhóm đã định chiếm (mục 6.4) |
-| **E. Mỏi tai** | Dựng **10 phút** ở WPM của bot, gồm mọi âm phát theo từ và tần suất cao: phím, `fire.cast`, `word.load`, `word-hit`, `coin` (3 lần/s), `arrow-fire` (4 lần/s), `ink-puff` (8 lần/s), `gun.xung` | Độ chói và độ gắt trung bình của tổng các bus, tỉ lệ biến thể bị lặp liền | Không biến thể nào phát 2 lần liền. Độ chói dưới P90 tham chiếu. Chủ dự án nghe 3 phút, bắt đầu quanh phút thứ 8, và không gắn nhãn "nhàm khi lặp" |
+| **E. Mỏi tai** | Dựng **10 phút** ở WPM của bot, gồm mọi âm phát theo từ và tần suất cao: phím, `fire.cast`, `word.load`, `word-hit`, `coin` (3 lần/s), `arrow-fire` (4 lần/s), `ink-puff` (8 lần/s), `gun.xung` | Độ chói và độ gắt trung bình của tổng các bus, tỉ lệ biến thể bị lặp liền | Không biến thể nào phát 2 lần liền. Độ chói dưới P90 tham chiếu. Chủ dự án nghe 3 phút, bắt đầu quanh phút thứ 8, và không gắn nhãn "nhàm khi lặp". Mỏi tai sửa bằng đỉnh ngắn và phân tầng, không bằng làm nhỏ âm chiến đấu |
 | **F. Loa nhỏ** | Lọc cao 200 Hz. Mỗi lô, chủ dự án mở bản trộn trên điện thoại và laptop một lần (chép qua mạng nội bộ, không xuất bản) | Lượng mất đi ở phím, UI và báo nguy | Mất không quá 6 dB. Chủ dự án không gắn nhãn "khó nghe" |
 | **G. Độ trễ** | Đọc `baseLatency` và `outputLatency` trên Safari và Chrome | Độ trễ từ lúc bấm phím đến lúc ra tiếng | Không quá 50 ms. Khuyến nghị là 20–70 ms [[52]][s52]. Phím và UI phải giải mã sẵn khi mở game |
 | **H. Hit-stop** | Phát đòn có hit-stop | Tiếng có bị khựng hay chậm lại không | Âm phát đúng khung trúng và vẫn phát trong lúc dừng hình. Không tạm dừng hay làm chậm `AudioContext` [[55]][s55] |
@@ -493,7 +495,7 @@ Vấn đề: ở Rồng Giữ Ải, từ mới được đọc khi khóa từ v�
 **Khi nào làm:** sau khi các làn cân bằng merge, hoặc trong một worktree riêng. Lý do: các làn đó đang sửa cả ba game.
 
 1. **Kit `SceneAudio`** đang có 4 hạn chế: mỗi id chỉ có một file, mọi file được giải mã hết lúc `unlock()`, không có bản tổng hợp dự phòng, và nhạc nối thẳng ra loa nên không đi qua bus. Cách sửa: đưa `FileBank`, `LayeredBank` và schema manifest của Rồng Giữ Ải vào `shared/game-kit/audio`. Thêm biến thể, độ dài đo từ file, ngẫu nhiên theo nhóm, nhạc đi qua bus (mức nhường theo tài liệu từng game), và tải theo độ ưu tiên.
-2. **Kit `AudioCues`** hiện hạ tiếng `shots` và `hits` khi giọng đã cất lên, không hạ `kills`. Sửa theo mục 6.2 bước 4, và thêm `kills`.
+2. **Kit `AudioCues`** hiện hạ tiếng `shots` và `hits` khi giọng đã cất lên, không hạ `kills`. Sửa theo mục 6.2 bước 4. Theo hướng 02/11 (skill §5.4), phần hạ sâu là nhạc, đuôi và vang trả về; tiếng súng, trúng, chết khô chỉ hạ tối đa −3 dB, khi tài liệu game đổi và chủ dự án duyệt.
 3. **Bậc trúng của Tuyến Cuối ghép lúc chạy.** `flush()` trong `theme-audio.ts` đang gộp 6 bậc T0–T5 vào 3 id, chỉnh độ to theo log2 số viên trúng, kéo dài tiếng thép theo bậc, thêm trầm từ T2 và đuôi từ T4. Nếu nướng sub và đuôi vào file `hit.t2`, `hit.t4` thì mất các tầng này và có thể bị chồng lớp. Cách sửa: mỗi bậc có file **đầu tiếng + thân** riêng. Thêm một file **sub dùng chung** (`hit.sub`) và một file **đuôi dùng chung** (`hit.tail`). Mã ghép lớp theo cờ `bass` và `tail` của `tiers.ts`, và giữ trong mã phần độ to theo số viên và độ dài theo bậc. Bài I kiểm kết quả. Hai id mới cần thêm vào `THEME_SOUND_LIST.md` của Tuyến Cuối.
 4. **Bộ giới hạn của Rồng Giữ Ải** đang tính chỗ cho tiếng theo `lengthMs` của bản tổng hợp. Đổi sang độ dài thật của file.
 5. **Harness của Rồng Giữ Ải** mới chỉ thử bank tổng hợp. Thêm chế độ file (`files: true`), xuất WAV, và nhận mẫu giọng của bài C.
@@ -502,13 +504,17 @@ Vấn đề: ở Rồng Giữ Ải, từ mới được đọc khi khóa từ v�
 
 ### 6.4 Vai trò tần số theo game
 
-Bảng này là điểm xuất phát. Bài D kiểm nhóm nào thực sự chiếm từng dải. Dải 1–4 kHz dành cho giọng đọc từ, nên âm phát dày không được ngân lâu ở đó.
+Bảng này là điểm xuất phát. Bài D kiểm nhóm nào thực sự chiếm từng dải. Dải 1–4 kHz dành cho giọng đọc từ:
+
+- **Phím và âm xong từ** không được ngân lâu ở đó (mục 6.2).
+- **Âm chiến đấu** (02/11, skill §5.5) được có thân ở đó trong 80–250 ms. Đuôi, vòng lặp, vang trả về và nhạc hạ 2–4 dB ở dải này và nhường giọng đọc bằng ducking. Đuôi vang lọc cao 150–250 Hz và lọc thấp 6–7 kHz.
+- Cắt thân và đuôi của âm chiến đấu để giữ dải "sạch" là cái bẫy đã làm âm chiến đấu nhỏ nhẹ (skill §5.1).
 
 | Dải | Tuyến Cuối | Lời Gọi | Rồng Giữ Ải |
 |---|---|---|---|
-| Dưới 120 Hz | Sub súng, sub dùng chung `hit.sub` | Trống, `blast` | Thân gầm rồng, Bom Hạt Thông |
+| Dưới 120 Hz | Sub súng nặng, nổ, big kill; sub dùng chung `hit.sub` | Trống, `blast` | Thân gầm rồng, Bom Hạt Thông |
 | 120–800 Hz | Thân súng, thân tiếng trúng | Thân gỗ, thân tre | Thân lửa, thân quái |
-| 1–4 kHz (giọng) | Chỉ đầu tiếng rất ngắn; báo nguy ngắn | Chỉ đầu tiếng rất ngắn | Chỉ đầu tiếng rất ngắn |
+| 1–4 kHz (giọng) | Phím, âm xong từ, báo nguy: chỉ đầu tiếng rất ngắn. Súng, trúng: thân 80–250 ms; đuôi nhường giọng đọc | Phím, âm xong từ: chỉ đầu tiếng rất ngắn. Đòn đánh: thân ngắn; đuôi nhường giọng đọc | Phím, âm xong từ: chỉ đầu tiếng rất ngắn. Lửa, đòn: thân ngắn; đuôi nhường giọng đọc |
 | 4–8 kHz | Tách phím, lách tách điện, đầu tiếng `hit.t1` | Tách tre, giấy, `ink-puff` | Lách tách than hồng, tiếng tách phím gỗ |
 | Có cao độ | `kill.chime` theo ngũ cung La thứ | `word-hit` đàn tranh theo thang Hò–Xự–Xang–Xê–Cống | Chuông nhỏ và đàn hạc theo ngũ cung |
 
@@ -628,18 +634,22 @@ Trường `roles` chỉ ghi vào file, không hiện trên bảng.
 
 ### 8.3 Tuyến Cuối (trạm thép bên mép hố đen)
 
-- **Súng:** ghép bốn lớp.
-  - Tiếng thịch: sub 40–90 Hz, dài không quá 120 ms.
-  - Lớp cơ khí: khóa nòng, rơ-le, servo. Giữ ngắn để không ngân ở 1–4 kHz.
-  - Lớp năng lượng.
-  - Đuôi kim loại trong không gian rộng: dùng chung lớp `hit.tail`.
+- **Hướng chiến đấu (02/11):** theo [skill `game-art-pipeline`, `references/audio.md` §5](../../.agents/skills/game-art-pipeline/references/audio.md#5-combat-sound-power-layering-space). Âm chiến đấu mạnh, bùng nổ, vang vọng, mức game thương mại; họ âm "hướng B" (vòng glyph, tinh thể, kính) không còn dùng cho âm chiến đấu. Kế hoạch theo gói ở `games/typing-survival/docs/ALIVE_PLAN.md` (AL-02 mix, AL-03 nội dung).
+- **Súng:** ghép lớp theo skill §5.3, mỗi lớp một prompt hay một nguồn.
+  - Crack (HEAD) sáng ở 2–8 kHz, 15–40 ms.
+  - Cơ khí (MECH): khóa nòng, rơ-le, servo, đi trước tiếng bắn vài ms.
+  - Thân năng lượng (BODY) dày, có bão hòa, 80–250 ms.
+  - Sub 40–80 Hz: Pulse Gun ngắn 60–120 ms; Scatter Gun, Rail Gun, Star Mortar 120–300 ms.
+  - Đuôi vang nướng sẵn riêng từng súng nặng (`<id>.tail`), cộng send vang chung của trận. Trúng dùng chung `hit.tail`.
 
   Hai mẹo của DOOM: một xung ngắn cắt gọn thành im lặng rồi mới tới tiếng bắn, và làm méo nhẹ tiếng kim loại cho "chắc" [[54]][s54]. Đây là họ "bẩn có chủ ý" (mục 4.4).
+- **Không gian:** causeway thép rộng bên hố đen. IR lớn 1,5–3 s (IR tự tạo hoặc IR CC0, skill §5.8) cộng slapback 150–350 ms từ tường xa.
 - **Điện:** tiếng lách tách 2–8 kHz cộng tiếng ù 50/100 Hz. Khi đông quái, giới hạn tổng năng lượng ở 2–5 kHz bằng chỉ số độ chói.
 - **Bầy quái:**
   - Gộp tiếng chết và đặt trần theo họ quái.
   - Ưu tiên theo vị trí trên màn hình và mức đe dọa với tuyến. Torchlight III dùng cách này (nguồn thứ cấp).
   - `kill.chime` là thanh thép leo ngũ cung, tách riêng để mã chỉnh được cao độ.
+  - Quái chết vỡ như kính đen và chitin nặng, có cú thịch trầm, không leng keng.
 - **Bậc trúng:** ghép lúc chạy từ lớp đầu tiếng và thân của từng bậc, cộng `hit.sub` và `hit.tail` dùng chung (mục 6.3).
 - **Nhạc:** 96 BPM, La thứ. Lớp chiến là những cú "bùng" ngắn, nghịch phách. Khi đánh, không dùng pad dài ở dải giữa, theo cách của Mick Gordon [[54]][s54]. Dựng bằng MIDI, bộ phát mẫu Python, mẫu bộ gõ kim loại VCSL Anvil, Brake Drum [[84]][s84], và synth tổng hợp bằng mã (Surge XT nếu chủ dự án cài).
 - **Phím:** tiếng rơ-le thép khô.
@@ -654,7 +664,8 @@ Trường `roles` chỉ ghi vào file, không hiện trên bảng.
 
 | Nguồn | Nguyên tắc | Thành luật nào |
 |---|---|---|
-| DOOM 2016 [[54]][s54] | Vũ khí là "nhân vật chính", tiếng kim loại hơi méo cho "chắc" | Ở đây ưu tiên số 0 là giọng đọc từ (mục 6.2). Súng có crest từ 12 dB. Súng thuộc họ bẩn, audiobox không được phạt |
+| DOOM 2016 [[54]][s54] | Vũ khí là "nhân vật chính", không bao giờ bị hạ, kể cả dưới lời thoại; vang theo không gian nướng thành một lớp của tiếng súng; tiếng kim loại hơi méo cho "chắc" | Giọng đọc từ vẫn phải nghe rõ (mục 6.2), nhưng được giữ bằng thời điểm và bằng cách hạ nhạc, đuôi, vang; súng khô hạ tối đa −3 dB (skill §5.4). Súng có đuôi nướng sẵn cộng send vang. Súng có crest từ 12 dB. Súng thuộc họ bẩn, audiobox không được phạt |
+| Halo Infinite, Battlefield (HDR) (02/11, skill §5.11) | Asset dài, nén nặng, bão hòa làm mỏi tai; đầu tiếng sắc, tắt nhanh; lớp Impact, Mech, Sci-fi, Tails; đuôi theo không gian. Mọi âm đều quan trọng, nhưng không cùng lúc | Âm chiến đấu ghép lớp và có bậc độ to (skill §5.3, §5.4); phát thường nhỏ hơn để sự kiện lớn được lớn; mỏi tai sửa bằng đỉnh ngắn, không bằng làm nhỏ |
 | Mick Gordon [[54]][s54] | Nhạc khi đánh là những cú bùng ngắn, không dùng nốt dài | Stem chiến không có pad kéo dài ở 300 Hz–3 kHz |
 | Dead Cells, Sakurai [[55]][s55] | Đòn chí mạng có tiếng riêng. Hit-stop dài hơn khi sát thương lớn hơn, nhưng có trần | Có lớp chí mạng riêng. Âm không dừng theo hit-stop |
 | Overwatch, Riot [[56]][s56] | Chơi được bằng tai. Mức gây chú ý của âm phải bằng mức quan trọng | Mỗi sự kiện có chữ ký riêng (mục 6.4). Đòn lớn có âm báo trước |
@@ -890,7 +901,7 @@ art-src/audio/*
 
 Sau khi đổi, kiểm bằng `git check-ignore -v` trên ba file mẫu: một `manifest.json` (phải được theo dõi), một `ratings.jsonl` (phải được theo dõi) và một `.wav` (phải bị bỏ qua).
 
-**Manifest v2:** schema hiện tại của Rồng Giữ Ải ánh xạ id thành mảng đường dẫn. Bản v2 mở rộng mà vẫn tương thích ngược, vì bộ tải của kit nhận được cả hai dạng. Manifest do script sinh ra từ thư mục masters. Manifest **không** chứa mức to: mọi file đã chuẩn hóa về một mức chung, mức tương đối chỉ nằm trong `gainDb` của catalog và mức bus.
+**Manifest v2:** schema hiện tại của Rồng Giữ Ải ánh xạ id thành mảng đường dẫn. Bản v2 mở rộng mà vẫn tương thích ngược, vì bộ tải của kit nhận được cả hai dạng. Manifest do script sinh ra từ thư mục masters. Manifest **không** chứa mức to: phím, UI và âm xong từ đã chuẩn hóa về một mức chung, âm chiến đấu đã đặt đúng bậc (skill §5.4); mức tương đối còn lại chỉ nằm trong `gainDb` của catalog và mức bus.
 
 ```json
 {

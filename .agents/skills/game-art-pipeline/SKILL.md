@@ -53,6 +53,7 @@ This skill is the method. Each game keeps its own data: reference board, signal 
    - Tripo makes the look. Rig, clips, motion and VFX are ours.
 10. **Audio** ([audio](references/audio.md)).
     - Real files only, made through [AUDIO_PIPELINE.md](../../../docs/games/AUDIO_PIPELINE.md).
+    - Combat sound is powerful, explosive and reverberant ([audio](references/audio.md) §5): layered ingredients, loudness tiers, a baked tail plus an in-game reverb send, priority and ducking. Never "small, quiet, faint" for combat; the keyboard rules stay with keys and UI.
     - Agents cannot hear: the Audio Lab critic gates and the owner's ears decide.
 11. **Close out.**
     - Record licence rows in `docs/games/THIRD_PARTY.md`, Tripo credits in the game's Tripo log, and the update in the game's changelog.
@@ -78,5 +79,5 @@ This skill is the method. Each game keeps its own data: reference board, signal 
 - [browser-ai-tools.md](references/browser-ai-tools.md): ChatGPT, Gemini and Firefly rules and recipes, the local receiver, tab hygiene.
 - [tripo.md](references/tripo.md): wallet, dry-run, face limits, one model first, credit log, import.
 - [licences.md](references/licences.md): allowed and banned licences, verifying on the page, sourcing when iteration stalls.
-- [audio.md](references/audio.md): audio route, who judges sound, stop rule, banned sources.
+- [audio.md](references/audio.md): audio route, who judges sound, stop rule, banned sources; combat sound (§5): layer recipes, tiers, frequency roles, Firefly wording, the tested ffmpeg chain, reverb, the trap we fell into.
 - [worked-examples.md](references/worked-examples.md): what went wrong in Dragonhold, Wordwoven, Last Line and Tu Tien, and the rule each case produced.

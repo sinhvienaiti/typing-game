@@ -38,6 +38,19 @@ These are real cases from the split games, kept as examples only. The rules they
   - Run the mechanical checks before judging.
   - Spend no credit below the bar.
 
+## Last Line combat sound (02/11)
+
+- **What happened:**
+  - The owner called the combat sounds small and light, with no power, no explosions and no echo.
+  - The rules written for keyboard sounds (soft, short tails, 1–4 kHz cut fast, one loudness for every short file) had been applied to guns and kills.
+  - The Firefly prompts said "small, quiet, faint, restrained", in long sentences chained with "followed by".
+  - Each sound was one take, with no layers and no space.
+  - A fast glue compressor on every bus (attack 2 ms, ratio 8, automatic makeup gain) squeezed 12 dB of range into 3.8 dB.
+- **Rules:**
+  - Combat follows its own direction ([audio.md](audio.md) §5): layered ingredients, loudness tiers, a baked tail plus a reverb send, priority and ducking.
+  - Fix fatigue with short peaks and hierarchy, never with smaller combat sounds.
+  - Write Firefly prompts as short comma-separated traits, one layer per prompt.
+
 ## Last Line heroine and drone (01/11 evening)
 
 - **What happened:**
