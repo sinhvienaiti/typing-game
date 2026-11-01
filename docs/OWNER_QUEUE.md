@@ -21,7 +21,7 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
 
 | # | Việc | Ghi chú |
 |---|---|---|
-| 1 | Chủ dự án dựng model Tripo: 7 model Last Line, 6 mốc Dragonhold | Claude gom prompt và ảnh nguồn vào một file `docs/games/TRIPO_TODO.md` trước 9h |
+| 1 | ~~Chủ dự án dựng model Tripo~~ **Không cần nữa**: theo lời chủ dự án 01/11 khoảng 03:50, Claude dựng qua API (ví 970 credit), sau khi ảnh nguồn qua hai giám khảo 8,5 và chạy `--dry-run` | Tiến độ ở `docs/games/TRIPO_TODO.md`. 07:50: sáu mốc Dragonhold đã vẽ hai vòng, chưa vòng nào đạt 8,5 (tốt nhất là tượng rồng M 8,0/8,3), nên **chưa tốn credit**. Vòng 3 đang vẽ, lần này cả bộ dùng một chuẩn chất liệu. Nữ xạ thủ, drone và 5 súng đang vẽ vòng 1 (ngà sứ, không vàng) |
 | 2 | Ký cuối cho chữ "sống" trên thẻ súng (hệ thống dùng chung) | Sau khi hai giám khảo cùng từ 9 |
 | 3 | Đính kèm ba ảnh nền vào ba cuộc chat ChatGPT để nó vẽ concept đè lên ảnh thật. Trình duyệt trong app không gửi được ảnh: trang https chặn ảnh từ máy, và phím dán giả lập không lấy được clipboard. Ảnh ở `games/<game>/art-src/_review/maps/map1-base-1280x720.png`; chat Dragonhold, Wordwoven, Last Line (link trong `docs/games/maps/*-CHATGPT_REVIEW.md`). Kéo thả ảnh vào chat rồi gõ: "Now paint the concept over this base image using your prompt" | Khoảng 1 phút mỗi game. Trong lúc chờ, Claude vẽ thử bằng Firefly với ảnh nền làm tham chiếu (lượt 1 của Dragonhold còn kiểu cũ của ảnh chụp, chưa đạt) |
 
@@ -34,5 +34,5 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
 - **Wordwoven chưa bật 3D làm mặc định** cho tới khi 3D vẽ được quái, lính, dân và cây. Chẩn đoán 01/11 cho thấy 3D hiện không vẽ con nào; bật lúc này thì game không chơi được.
   - Khi đã bật 3D, máy không có WebGL sẽ hiện màn "Cần WebGL", không lùi về bảng 2D vẽ bằng mã. `?view=2d` chỉ giữ cho bot và test.
 - **Trần dòng 1C (16.500)** tạm vượt khi cần, ghi số mỗi lần vượt. Trần này là luật kế hoạch, không phải luật của chủ dự án; chủ dự án muốn giữ thì báo.
-- **Camera Wordwoven** chọn kiểu nhìn chéo 40–45°, có dải trời và chân trời. Ý tưởng map gửi ChatGPT duyệt theo kiểu này.
+- **Camera Wordwoven** chọn kiểu nhìn chéo 42°, **không có trời**: ở góc này mép trên khung thấp hơn chân trời 21°, nên không vẽ dải trời (sửa lại quyết định ban đầu "có dải trời", vốn sai về hình học). Ý tưởng map gửi ChatGPT duyệt theo kiểu này.
 - **Giấy phép, theo lời chủ dự án 01/11** (ghi ở `SHARED_SYSTEMS_BAR.md` §5): được dùng Zlib (thư viện hậu kỳ pmndrs `postprocessing`), Quaternius Asset License (miễn phí, dùng thương mại, chỉ cấm bán lại thành gói) và model bên thứ ba CC0 hoặc QAL. Tải gói miễn phí không cần xin từng gói. Vẫn không dùng NC, ND, GPL, Mixamo, Fab hay Sketchfab Standard. Chủ dự án muốn chặt hơn thì báo lúc 9h.

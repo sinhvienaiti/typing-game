@@ -15,7 +15,37 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 04:40 (mới nhất, đọc trước).** Chủ dự án chốt O1–O10 theo đề xuất (`docs/OWNER_QUEUE.md`).
+**01/11 khoảng 07:55 (mới nhất, đọc trước).** Mốc mới của chủ dự án: mọi thứ người chơi thấy cần hai giám khảo mù cùng cho từ 8,5, chấm trên bản chơi đã build; không còn "tạm".
+
+**Đợt 1 đã xong, chưa gộp.** Kết quả ở `/private/tmp/claude-501/-Users-toandx-htdocs-typing-game/f97baf5f-4f81-4f84-8ec0-79083d7e3ba9/tasks/w5pwzul4f.output`.
+
+| Game | Nhánh | Điểm chấm mù | Kết luận review |
+|---|---|---|---|
+| Dragonhold | `dh-wave1` | 4,5 → 6,5 | Gộp được. Cần chép 128 file media theo changelog §9 |
+| Last Line | `ts-wave1` | 5,5 → 6,5 | Sửa trước. L1 làm mất dấu phím trên sân (`fieldMin` 4–5,5k, cần ≥ 8k) |
+| Wordwoven | `td-units-3d` | — | Sửa trước. Boss trồi lên lại lúc thắng; trần wisp; thiếu `ma-troi.webp` |
+
+**Vòng sửa** `wf_dba4398d-9d4` đang chạy:
+- sửa lỗi review và các điểm tệ đi của từng nhánh;
+- Wordwoven gộp thêm `td-3d-default`;
+- sau đó review lại và chấm mù.
+
+Khi xong: gộp, chép media, `media:push`, build lại host chơi.
+
+**Ảnh nguồn Tripo.** Sáu mốc Dragonhold: hai vòng chưa đạt (bảng ở `docs/games/TRIPO_TODO.md`), chưa tốn credit. Workflow `wf_2e7a0bda-835` chạy hai làn Firefly:
+- tab-17: mốc v3, một chuẩn chất liệu chung;
+- tab-7: nữ xạ thủ, drone và 5 súng Last Line, ngà sứ, không vàng.
+
+Bộ nhận ảnh chạy trên 8765 (task `bfhx0lx08`, đã nới tên file); ảnh tham chiếu phục vụ trên 8767.
+
+**ChatGPT duyệt ba map 1** (Chat, High): Dragonhold 8,1, Wordwoven 7,9, Last Line 8,0. Góp ý và prompt ở `docs/games/maps/*-CHATGPT_REVIEW.md`; chưa gộp vào file concept.
+
+**Đợt 2 (sau khi gộp):**
+- Dragonhold: D5–D9 (Epic look, AO, shader nước, đất Ultra, gói miễn phí);
+- Last Line: L5–L10 (đạn năm pha, chữ sống, flipbook);
+- Wordwoven: dân, Draconis, cây.
+
+**01/11 khoảng 04:40.** Chủ dự án chốt O1–O10 theo đề xuất (`docs/OWNER_QUEUE.md`).
 - **Tripo:** Claude được dùng; API trước (`tripo` CLI, 970 credit); `face_limit` theo loại (12–50k, không để tối đa); texture HD và PBR, khoảng 40 credit một model. Chỉ dựng khi ảnh nguồn đạt 8,5 (`docs/games/TRIPO_TODO.md`).
   - Nguồn 124 cũ trượt (5–7,5). Workflow `wf_ed3a3e5c-374` đang vẽ lại trên Firefly ở tab-17 rồi chấm mù.
 - **Luật mới:**
@@ -29,7 +59,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - tab-14 là ChatGPT, đã chỉnh Chat, High.
 - **Cron:** một lần lúc 8:57 báo chủ dự án.
 
-**01/11 khoảng 03:30 (mới nhất, đọc trước).** Chủ dự án vắng tới khoảng 9h; việc cần họ ghi ở `docs/OWNER_QUEUE.md`; cron một lần lúc 8:57 nhắc gửi báo cáo.
+**01/11 khoảng 03:30.** Chủ dự án vắng tới khoảng 9h; việc cần họ ghi ở `docs/OWNER_QUEUE.md`; cron một lần lúc 8:57 nhắc gửi báo cáo.
 - **Luật mới:** mức nhận 8,5 cho mọi thứ người chơi thấy, không gắn tạm (`AGENTS.md`, `ART_ACCEPTANCE.md`, `24e556ee`). Đã gắn tạm trước đó, nay là nợ: icon 247, màn tựa 119 (7,5; Dragonhold `main`; phiếu 251 vẽ lại nền), lửa C.
 - **Map: viết ý tưởng từng map trước**, ChatGPT (Chat, High, không dùng Work; tab-14 đã chỉnh) duyệt và vẽ concept. Workflow `wf_fd05445b-ba9` viết `docs/games/maps/<game>-MAP_CONCEPTS.md` và `docs/games/FREE_ASSET_SOURCES.md`.
 - **Chẩn đoán:**

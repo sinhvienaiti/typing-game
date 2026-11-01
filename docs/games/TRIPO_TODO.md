@@ -57,3 +57,32 @@ Không ảnh nào đạt 8,5 về mức thị trường, nên chưa tiêu credit
 | brazier | 7,5 | 8,5 | Vân sắt nhiễu, chậu rỗng, lệch kiểu vẽ |
 
 Hướng vẽ lại: dùng Firefly Image 5 và ảnh mẫu `owner-epic`; kiểu painterly-realistic (O1); đá sa thạch ấm, phong hoá; góc ba phần tư 35°, nhìn từ trên 30°; nền phẳng màu khóa. Sửa từng ảnh theo góp ý của hai giám khảo.
+
+## Vòng v2 và v2b (01/11, 04:00–07:45, Firefly Image 5, bốn giám khảo mù L, M, N, O)
+
+Chưa ảnh nào được cả hai giám khảo cho từ 8,5, nên **chưa tốn credit**.
+
+| Ảnh | v2: M (L / M) | v2b: M (N / O) | v2b: hợp Tripo (N / O) | Ghi chú |
+|---|---|---|---|---|
+| hold-gate | chưa có | 6,8 / 6,8 | 7,5 / 8,0 | Kiểu tranh vẽ tay, gạch nhỏ gấp 4–5 lần khối của tường |
+| hold-wall | chưa có | 7,0 / 6,8 | 6,5 / 6,5 | Lỗ châu mai thành ký hiệu mũi tên, có bóng đổ |
+| watchtower | chưa có | chưa có | — | Firefly vẽ tháp chạm mép trên ở khung vuông; vòng sau dùng khung dọc 3:4 |
+| dragon-statue | 6,5 / 6,5 | **8,0 / 8,3** | **8,5 / 8,5** | Gần đạt nhất. Thân lai sư tử, cánh nhỏ, đầu rồng có râu lệch với cả bộ |
+| ruined-arch | 6 / 6 | 6,7 / 6,3 | 7,0 / 6,0 | Kiểu đất nặn, vệt mưa trắng |
+| brazier | 6,5 / 7 | 8,2 / 7,6 | 8,0 / 7,8 | Chất liệu tốt; tay rồng mảnh, có móng không thân |
+
+Lỗi chung theo giám khảo: sáu ảnh không thành một bộ (năm kiểu dựng hình, năm màu đá, bốn kiểu đầu rồng, năm màu nền xanh).
+
+**Vòng v3** (bắt đầu 07:55) dùng một chuẩn chung:
+- chất liệu lấy theo tượng rồng v2b và chậu lửa v2b: sa thạch khối lớn kiểu ảnh quét 3D, sắt rèn đai đồng;
+- một thiết kế đầu rồng có sừng vuốt ngược, không râu;
+- cùng một hướng sáng, không bóng đổ, nền #00FF00, lề ≥ 6–8 %;
+- tháp canh dùng khung 3:4.
+
+Ảnh ở `games/dragon-hold/art-src/landmarks/<tên>.v3.png` (vòng làm lại: `.v3b.png`).
+
+## Last Line, vòng v1 (bắt đầu 07:55)
+
+- **Màu:** ngà sứ và graphite, đường sáng cyan mảnh, **không dùng vàng**. Vàng dành cho Pack Leader (theo ChatGPT duyệt map 1); áo choàng xanh đen, chỉ ngà rất mảnh.
+- **Nhân vật và drone:** làm tờ xoay bốn góc trước, rồi cắt thành bốn ảnh cho multiview. Có thêm ô kiểm ở 68 px.
+- Ảnh ở `games/typing-survival/art-src/models-src/hero-v2/`.
