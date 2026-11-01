@@ -18,8 +18,10 @@ const MOUNTS = {
   "/lab-vocab/typing-survival/": path.join(repo, "games/typing-survival/public/vocabulary"),
   "/lab-fonts/": path.join(repo, "games/dragon-hold/node_modules/@fontsource/be-vietnam-pro/files"),
   "/lab-backdrop/": path.join(here, "tmp/backdrops"),
+  // Last Line's UI art (the word plate for the Load host mode), read-only from its own asset folder.
+  "/lab-ui/typing-survival/": path.join(repo, "games/typing-survival/public/assets/typing-survival/ui"),
 };
-const TYPES = { ".json": "application/json", ".ogg": "audio/ogg", ".wav": "audio/wav", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };
+const TYPES = { ".webp": "image/webp", ".json": "application/json", ".ogg": "audio/ogg", ".wav": "audio/wav", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp" };
 
 /** Serves each mount read-only; a path that leaves its folder is refused. */
 const mounts = {

@@ -20,6 +20,7 @@ import {
   type TypingFxSize,
   type TypingFxSink,
   type TypingFxStyle,
+  type LoadHost,
 } from "../../../shared/game-kit/feedback/typing-fx";
 import { KEYS_BASE } from "./profiles";
 import { KeyboardSoundChoices } from "../../../shared/game-kit/ui/quick-settings";
@@ -87,7 +88,38 @@ const strip = new FocusStrip({
   reducedMotion: false,
   clock,
   zIndex: 20,
+  plateClass: "lab-plate",
 });
+
+// ── Load (Last Line's host mode): finished words fly into the stand-in bay's next magazine cell ──
+const labBay = $<HTMLDivElement>("labBay");
+let loadCell = 0;
+let landed = 0;
+const loadHost: LoadHost = {
+  target(out) {
+    const cells = labBay.querySelectorAll<HTMLElement>(".lab-mags i");
+    const cell = cells[loadCell % cells.length];
+    if (labBay.hidden || cell === undefined) return false;
+    const r = cell.getBoundingClientRect();
+    const o = stage.getBoundingClientRect();
+    out.x = r.left - o.left - 3;
+    out.y = r.top - o.top - 3;
+    out.w = r.width + 6;
+    out.h = r.height + 6;
+    loadCell += 1;
+    return true;
+  },
+  onLand() {
+    landed += 1;
+  },
+  flawlessClass: "lab-chip",
+  learnClass: "lab-chip",
+};
+function setLoad(on: boolean): void {
+  labBay.hidden = !on;
+  strip.setLoad(on ? loadHost : null);
+  $<HTMLInputElement>("load").checked = on;
+}
 
 // ── Sounds: ticket-189 catalogue and the shared ticket-190 picker ──
 const sounds = new TypingSounds({ keyVoices: 6, wordVoices: 2 });
@@ -148,7 +180,7 @@ const look: TypingFxSink = {
   },
   key: (i, now) => (mode === "new" ? strip.key(i, now) : today.key(i, now)),
   wrong: (i, now, key) => (mode === "new" ? strip.wrong(i, now, key) : today.wrong?.(i, now)),
-  stray: (now) => strip.stray(now),
+  stray: (now, key) => strip.stray(now, key),
   back: (n, now) => strip.back(n, now),
   complete: (p, c, now) => (mode === "new" ? strip.complete(p, c, now) : today.complete?.(p, c, now)),
   clear: (now) => (mode === "new" ? strip.clear(now) : today.clear?.(now)),
@@ -342,6 +374,7 @@ segment<TypingFxSize>("sizes", TYPING_FX_SIZES, (v) => TYPING_FX_SIZE_NAMES[v], 
   strip.configure({ size: v });
 });
 $<HTMLInputElement>("reduced").addEventListener("change", (event) => strip.setReducedMotion((event.target as HTMLInputElement).checked));
+$<HTMLInputElement>("load").addEventListener("change", (event) => setLoad((event.target as HTMLInputElement).checked));
 
 $<HTMLDivElement>("ab").addEventListener("click", (event) => {
   const button = (event.target as HTMLElement).closest("button");
@@ -517,6 +550,17 @@ Object.assign(window, {
     },
     reduced(on: boolean) {
       strip.setReducedMotion(on);
+    },
+    /** Load (Last Line's host mode) on or off; words that landed so far. */
+    load(on: boolean) {
+      setLoad(on);
+    },
+    landed: () => landed,
+    stray(letter: string) {
+      lastKey = letter;
+      progress.kind = "stray";
+      progress.key = letter;
+      driver.progress(progress, clock());
     },
     panel(show: boolean) {
       togglePanel(!show);

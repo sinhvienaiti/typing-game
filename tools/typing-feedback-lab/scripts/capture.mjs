@@ -3,7 +3,8 @@
 //   .local/bin/heavy.sh --gpu node shared/game-kit/tools/cdp-run.mjs tools/typing-feedback-lab/scripts/capture.mjs --width=1920 --height=1080
 // Env: URL (default http://127.0.0.1:4192/), OUT_DIR (default tools/typing-feedback-lab/tmp/frames),
 // STYLES (comma list), GAME (dragon-hold | typing-survival | typing-defense), INTENSITY (default normal),
-// REDUCED=1, COMBO (combo before the word, default 3).
+// REDUCED=1, COMBO (combo before the word, default 3), LOAD=1 (Last Line's Load host mode: words fly into the
+// stand-in bay; frames are tagged "<size>-load").
 // For each style: 13 frames over 1 s around a key, a wrong key and a word complete.
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -18,16 +19,18 @@ export default async function capture(page) {
   const intensity = process.env.INTENSITY ?? "normal";
   const reduced = process.env.REDUCED === "1";
   const combo = Number(process.env.COMBO ?? 3);
+  const load = process.env.LOAD === "1";
   await page.goto(url, { settle: 400 });
   await page.eval("window.__lab.ready.then(() => true)");
   await page.eval(`window.__lab.game(${JSON.stringify(game)}, 1).then(() => true)`);
   await page.eval("(window.__lab.panel(false), document.fonts.ready.then(() => true))");
+  if (load) await page.eval("(window.__lab.load(true), true)");
   const view = await page.eval("({ w: innerWidth, h: innerHeight, size: parseFloat(getComputedStyle(document.querySelector('.tfx')).getPropertyValue('--tfx-size')) })");
   const { w, h, size } = view;
   // The strip and the canvas around it; the word's release in a half-size full frame.
   const strip = { x: Math.round(w / 2 - 7 * size), y: Math.round(0.2 * h - 1.7 * size), width: Math.round(14 * size), height: Math.round(4.6 * size) };
   const full = { x: 0, y: 0, width: w, height: h, scale: 960 / w };
-  const tag = `${w}x${h}`;
+  const tag = `${w}x${h}` + (load ? "-load" : "");
   const report = { view, strip, game, intensity, reduced, combo, styles: {} };
   for (const style of styles) {
     const dir = join(out, tag, style);
