@@ -12,7 +12,7 @@
  *   frame (f6–8), clean at f9 (150 ms); a clean streak's tier adds rays and
  *   moves the hue toward glass;
  * - a finished word: every letter white for a frame and the rim 0.36 em out
- *   (f0), the letters squeezed (f1–3), then the word as one line with a
+ *   (f0), the letters squeezed (f1–2), then the word as one line with a
  *   ribbon flying into the host's target (the bay's magazine cell) over
  *   f3–12, the cell flashing white when it lands; the plate dims 70 % and
  *   folds toward the target (f3–9); the meaning gets its own beat after f12;
@@ -74,7 +74,7 @@ export const LOAD = {
   rays: [4, 6, 8, 8, 10],
   /** The dark of the glyph ring and the arcs (rgba(20,12,12,.85), the study's E1). */
   dark: "rgba(20,12,12,0.85)",
-  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.66, 0.5], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.32, thread: 0.36, land: 8, line: [0.8, 0.92], lineEnd: [0.32, 0.6], ring: [0.6, 2.4] },
+  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.72], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.32, thread: 0.36, land: 8, line: [0.72, 0.92], lineEnd: [0.32, 0.6], ring: [0.6, 2.4] },
   learn: { at: 12, rise: 0.14, in: 8, hold: 650, out: 8 },
   flaw: { scale: [1.35, 1.12, 1], hold: 8, out: 4 },
   wrong: { twitch: [0.053, -0.053, 0.035, 0], bar: 6, drop: 0.21, crack: 9, shards: [2, 3] },
@@ -107,7 +107,7 @@ export function sweepAt(age: number): number {
 /** The plate's rim breathing while a word is typed, 0 … 1 over 1.5 s. */
 export const breathe = (t: number): number => 0.5 - 0.5 * Math.cos((2 * Math.PI * t) / LOAD.lock.breathe);
 
-/** A finished word's letters, squeezed toward the middle (f1–3), then gone into the flying line: scaleX, or 0 once it flies. */
+/** A finished word's letters, squeezed toward the middle (f1–2), then handed to the flying line at f3 (same width): scaleX, or 0 once it flies. */
 export function wordSqueeze(age: number): number {
   const f = frameOf(age);
   if (f <= 0) return 1;

@@ -886,7 +886,7 @@ export class FocusStrip implements TypingFxSink {
   /**
    * Load's finished word (E3): the rim out 0.36 em and every letter white
    * for a frame (two when flawless, glass-white), the letters squeezed
-   * (f1–3), then one line flying into the host's target with a ribbon
+   * (f1–2), then one line flying into the host's target with a ribbon
    * (f3–12); the plate dims and folds toward it; FLAWLESS (f0–8); the
    * meaning's beat from f12. Never gold: gold is the Pack Leader's.
    */
@@ -1489,7 +1489,7 @@ export class FocusStrip implements TypingFxSink {
       const u = flightAt(age);
       if (u < 1) {
         flightPoint(u, fl.x0, fl.y0, fl.cx, fl.cy, fl.x1, fl.y1, this.pt);
-        // Out of the squeeze at 0.8 × 0.92 of the strip's word, shrinking into the cell.
+        // Out of the squeeze at its width (0.72 × 0.92 of the strip's word), shrinking into the cell.
         const [lx, ly] = LOAD.word.line;
         const sx = lx + (fl.s1 - lx) * u;
         const sy = ly + (fl.s1 - ly) * u;

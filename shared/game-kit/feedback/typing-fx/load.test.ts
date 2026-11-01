@@ -85,13 +85,15 @@ describe("Load: the numbers (E1–E3)", () => {
     expect(pool.life[kinds.indexOf(PK.bar)]).toBeCloseTo(6 * F);
   });
 
-  it("a finished word flies f3–12, squeezes f1–3, the plate dims 70 % from f1 and folds f3–9", () => {
+  it("a finished word squeezes f1–2, flies f3–12, the plate dims 70 % from f1 and folds f3–9", () => {
     expect(flightAt(at(2))).toBe(-1);
     expect(flightAt(3 * F)).toBeCloseTo(0, 2);
     expect(flightAt(12 * F)).toBe(1);
     expect(flightAt(at(7))).toBeGreaterThan(0.2);
     expect(flightAt(at(7))).toBeLessThan(0.6);
-    expect([0, 1, 2, 3, 4].map((f) => wordSqueeze(at(f)))).toEqual([1, 0.86, 0.66, 0.5, 0]);
+    expect([0, 1, 2, 3, 4].map((f) => wordSqueeze(at(f)))).toEqual([1, 0.86, 0.72, 0, 0]);
+    // The line takes over at f3 at the squeezed word's width.
+    expect(LOAD.word.line[0]).toBe(LOAD.word.squeeze.at(-1));
     expect(plateAfterWord(at(0))).toEqual({ alpha: 1, fold: 1 });
     expect(plateAfterWord(at(1)).alpha).toBeCloseTo(0.3);
     expect(plateAfterWord(at(6)).fold).toBeLessThan(1);
