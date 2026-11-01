@@ -15,7 +15,31 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 16:45 (mới nhất, đọc trước).**
+**01/11 khoảng 16:50: chủ dự án tắt máy ("dừng toàn bộ để tôi tắt máy"). Đọc trước khi chạy tiếp.**
+- **Đã dừng:**
+  - workflow đợt 2 `wf_a2147192-3c4` (vừa chạy khoảng 10 phút);
+  - workflow review và chấm Last Line `wf_dba4398d-9d4`;
+  - `pnpm media:push`, đang đẩy dở;
+  - bộ nhận ảnh 8765 và server ảnh tham chiếu 8767;
+  - cron nhịp chạy `e4224464`. Cron chỉ sống trong session; khi mở lại, tạo lại cron 7,27,47 nếu cần.
+- **Chạy lại theo thứ tự:**
+  1. **Dragonhold:** `pnpm media:push` ở repo cha (128 file model của đợt 1 đã chép vào `games/dragon-hold/public`, chưa lên Drive). Sau đó commit `media.md5` của Dragonhold và con trỏ repo cha.
+  2. **Last Line:** chạy lại review và chấm mù cho `ts-wave1` (đầu nhánh `d8d3923`, lượt sửa đã xong): `Workflow({scriptPath: ".../wave1-fix-round-wf_dba4398d-9d4.js", resumeFromRunId: "wf_dba4398d-9d4"})`. Có kết quả thì gộp vào `main`.
+  3. **Đợt 2:** `Workflow({scriptPath: ".../wave2-dh-td-wf_a2147192-3c4.js", resumeFromRunId: "wf_a2147192-3c4"})`.
+     - Dragonhold `dh-wave2` mới có `c3aa644` (vá `cdp-run` chọn cổng trống).
+     - Wordwoven `td-units-3d` ở `cf4a10a`, chưa có commit mới.
+     - Builder chạy lại sẽ thấy các commit đó.
+  4. Bật lại bộ nhận ảnh trước mọi bước dùng Firefly hay ChatGPT:
+     - `scratchpad/ff-recv/recv-img.py`, cổng 8765;
+     - `scratchpad/g247/tools/serve-ref.py`, cổng 8767.
+     - Scratchpad nằm trong `/private/tmp`, có thể mất khi khởi động lại máy. Nếu mất, viết lại theo mô tả ở mục 01/11 03:30.
+- **Còn chờ chủ dự án:**
+  - nhân vật Last Line dựng từ 1 ảnh chính diện hay 4 góc;
+  - Ultra trên màn Retina giữ chi tiết hay giới hạn;
+  - đính kèm ảnh nền cho chat ChatGPT Dragonhold và Last Line;
+  - Tu Tiên đang tạm dừng.
+
+**01/11 khoảng 16:45.**
 - **Tu Tiên:** chủ dự án tạm dừng: "tạm thời tôi tạm dừng game tu tiên để hoàn thành xong 3 game này đã". Session Tu Tiên (Fable 5.1) đứng yên; kết quả bước 0–1 nằm trong session đó (commit `d4d16aa` ở repo game, chưa push).
 - **Dragonhold:** đợt 1 cùng lượt sửa đã gộp vào `main` (`c8379cf`), đã chép 128 file model; `pnpm media:push` đang chạy; host chơi đã build lại bằng `pnpm build:dragon`. Giám khảo mù vẫn chấm khoảng 6,5.
 - **Đợt 2** (`wf_a2147192-3c4`):
