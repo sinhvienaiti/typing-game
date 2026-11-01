@@ -930,9 +930,13 @@ export class FxCanvas {
       return;
     }
     if (f <= 4) {
-      // The glyph ring: dark and thick, compass ticks round it, a thin line of the key's colour inside.
+      // The glyph ring: dark and thick on a glow of the key's colour (a dark band reads on the dark plate), compass ticks round it, a thin line of colour inside.
       const r = K.dark * h * (f === 4 ? 1.04 : 1);
       const w = r * K.darkStroke;
+      if (glow !== undefined) {
+        ctx.globalAlpha = f === 3 ? 0.7 : 0.5;
+        ctx.drawImage(glow, x - r * 1.45, y - r * 1.45, r * 2.9, r * 2.9);
+      }
       ctx.beginPath();
       ctx.arc(x, y, r, 0, TAU);
       ctx.strokeStyle = LOAD.dark;
@@ -978,6 +982,10 @@ export class FxCanvas {
     const turn = from + (f - 5) * K.turn;
     const fade = Math.max(0, 1 - (f - 5) / 4);
     const w = 0.075 * h;
+    if (glow !== undefined) {
+      ctx.globalAlpha = 0.35 * fade;
+      ctx.drawImage(glow, x - r * 1.35, y - r * 1.35, r * 2.7, r * 2.7);
+    }
     ctx.beginPath();
     ctx.arc(x, y, r, turn, turn + TAU - gap * 1.6);
     ctx.strokeStyle = LOAD.dark;

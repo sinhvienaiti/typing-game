@@ -55,8 +55,9 @@ export const TYPING_FX_CSS = `
 .tfx-stray{font-size:var(--tfx-size);font-weight:var(--tfx-weight,800);line-height:1;color:var(--tfx-warn);text-shadow:0 0 .14em var(--tfx-warn),0 .05em 0 rgba(0,0,0,.75),0 0 .4em rgba(0,0,0,.5)}
 .tfx-line{position:absolute;left:0;top:0;display:none;font-size:var(--tfx-size);font-weight:var(--tfx-weight,800);line-height:1;white-space:nowrap;letter-spacing:-.02em;color:var(--tfx-hot);text-shadow:0 0 .1em var(--tfx-accent),0 0 .35em var(--tfx-accent)}
 .tfx-line.is-flaw{color:var(--tfx-glass);text-shadow:0 0 .1em var(--tfx-glass),0 0 .4em var(--tfx-accent)}
-.tfx-rib{position:absolute;left:0;top:0;display:none;width:100px;height:10px;border-radius:5px;transform-origin:0 50%;background:linear-gradient(90deg,color-mix(in srgb,var(--tfx-accent) 70%,transparent),var(--tfx-accent));box-shadow:0 0 6px var(--tfx-accent)}
+.tfx-rib{position:absolute;left:0;top:0;display:none;width:100px;height:10px;border-radius:5px;transform-origin:0 50%;background:linear-gradient(180deg,transparent 4%,var(--tfx-accent) 30%,color-mix(in srgb,var(--tfx-accent) 45%,var(--tfx-hot)) 50%,var(--tfx-accent) 70%,transparent 96%);box-shadow:0 0 10px var(--tfx-accent)}
 .tfx-rib.is-thread{background:var(--tfx-hot);box-shadow:none}
+.tfx-land-ring{position:absolute;left:0;top:0;display:none;border-radius:50%;border:2px solid var(--tfx-hot);box-shadow:0 0 8px var(--tfx-accent),inset 0 0 6px var(--tfx-accent)}
 .tfx-land{position:absolute;left:0;top:0;display:none;border-radius:3px;background:radial-gradient(ellipse at 50% 50%,var(--tfx-hot) 0 40%,color-mix(in srgb,var(--tfx-accent) 70%,transparent) 72%,transparent);box-shadow:0 0 12px var(--tfx-accent),0 0 3px var(--tfx-hot)}
 `;
 

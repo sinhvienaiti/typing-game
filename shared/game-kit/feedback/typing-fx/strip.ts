@@ -108,7 +108,7 @@ const F = FRAME_MS;
 
 /** A finished word's line in flight to its target (Load): the curve, the end scale, whether it has a target, flawless, landed. */
 type Flight = { on: boolean; at: number; x0: number; y0: number; cx: number; cy: number; x1: number; y1: number; s1: number; has: boolean; still: boolean; landed: boolean; rect: LoadRect };
-type LoadEls = { sweep: HTMLDivElement; breathe: HTMLDivElement; flaw: HTMLDivElement; learn: HTMLDivElement; stray: HTMLDivElement; land: HTMLDivElement; lines: HTMLSpanElement[]; ribs: HTMLSpanElement[][] };
+type LoadEls = { sweep: HTMLDivElement; breathe: HTMLDivElement; flaw: HTMLDivElement; learn: HTMLDivElement; stray: HTMLDivElement; land: HTMLDivElement; landRing: HTMLDivElement; lines: HTMLSpanElement[]; ribs: HTMLSpanElement[][] };
 
 const FLY_TRAIL_LAG = 0.06;
 /** Share of a flight spent lifting off the word before the dive. */
@@ -352,6 +352,7 @@ export class FocusStrip implements TypingFxSink {
     if (this.options.load?.learnClass) learn.classList.add(...this.options.load.learnClass.split(/\s+/).filter(Boolean));
     const stray = div("tfx-stray", this.stage);
     const land = div("tfx-land", this.flyLayer);
+    const landRing = div("tfx-land-ring", this.flyLayer);
     const lines: HTMLSpanElement[] = [];
     const ribs: HTMLSpanElement[][] = [];
     for (let k = 0; k < 2; k += 1) {
@@ -369,7 +370,7 @@ export class FocusStrip implements TypingFxSink {
       this.flyLayer.appendChild(line);
       lines.push(line);
     }
-    this.loadEl = { sweep, breathe, flaw, learn, stray, land, lines, ribs };
+    this.loadEl = { sweep, breathe, flaw, learn, stray, land, landRing, lines, ribs };
   }
 
   private readonly tick = (): void => {
@@ -944,7 +945,7 @@ export class FocusStrip implements TypingFxSink {
     fl.cy = this.pt.y;
     fl.x1 = x1;
     fl.y1 = y1;
-    fl.s1 = has ? Math.max(0.22, Math.min(0.6, (r.h * 1.8) / this.size)) : 0.5;
+    fl.s1 = has ? Math.max(LOAD.word.lineEnd[0], Math.min(LOAD.word.lineEnd[1], (r.h * 1.8) / this.size)) : 0.5;
     fl.has = has;
     fl.still = !this.level.fly || this.reduced;
     fl.landed = false;
@@ -1488,8 +1489,10 @@ export class FocusStrip implements TypingFxSink {
       const u = flightAt(age);
       if (u < 1) {
         flightPoint(u, fl.x0, fl.y0, fl.cx, fl.cy, fl.x1, fl.y1, this.pt);
-        const sx = 0.5 + (fl.s1 - 0.5) * u;
-        const sy = 1 + (fl.s1 - 1) * u;
+        // Out of the squeeze at 0.8 × 0.92 of the strip's word, shrinking into the cell.
+        const [lx, ly] = LOAD.word.line;
+        const sx = lx + (fl.s1 - lx) * u;
+        const sy = ly + (fl.s1 - ly) * u;
         line.style.display = "block";
         line.style.opacity = "1";
         line.style.transform = `translate(${this.pt.x.toFixed(1)}px,${this.pt.y.toFixed(1)}px) translate(-50%,-50%) scale(${sx.toFixed(3)},${sy.toFixed(3)})`;
@@ -1534,11 +1537,21 @@ export class FocusStrip implements TypingFxSink {
     // The target's white flash (the bay's own slam is the host's, onLand).
     const flash = landFlash(now - this.landAt);
     const land = els.land;
+    const ring = els.landRing;
     if (flash.alpha <= 0) {
       if (land.style.display !== "none") land.style.display = "none";
+      if (ring.style.display !== "none") ring.style.display = "none";
       return;
     }
     const r = this.landRect;
+    // A thin white ring opening off the cell (gone by f8), under reduced motion standing still.
+    const k = Math.min(1, (now - this.landAt) / (LOAD.word.land * F));
+    const [r0, r1] = LOAD.word.ring;
+    const d = Math.max(r.w, r.h) * 1.3;
+    ring.style.display = "block";
+    ring.style.width = ring.style.height = d.toFixed(1) + "px";
+    ring.style.opacity = (1 - k).toFixed(3);
+    ring.style.transform = `translate(${(r.x + r.w / 2 - d / 2).toFixed(1)}px,${(r.y + r.h / 2 - d / 2).toFixed(1)}px) scale(${(this.reduced ? 1 : r0 + (r1 - r0) * (1 - (1 - k) * (1 - k))).toFixed(3)})`;
     land.style.display = "block";
     land.style.width = r.w.toFixed(1) + "px";
     land.style.height = r.h.toFixed(1) + "px";

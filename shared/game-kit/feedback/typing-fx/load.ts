@@ -74,7 +74,7 @@ export const LOAD = {
   rays: [4, 6, 8, 8, 10],
   /** The dark of the glyph ring and the arcs (rgba(20,12,12,.85), the study's E1). */
   dark: "rgba(20,12,12,0.85)",
-  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.66, 0.5], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.2, thread: 0.36, land: 8 },
+  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.66, 0.5], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.32, thread: 0.36, land: 8, line: [0.8, 0.92], lineEnd: [0.32, 0.6], ring: [0.6, 2.4] },
   learn: { at: 12, rise: 0.14, in: 8, hold: 650, out: 8 },
   flaw: { scale: [1.35, 1.12, 1], hold: 8, out: 4 },
   wrong: { twitch: [0.053, -0.053, 0.035, 0], bar: 6, drop: 0.21, crack: 9, shards: [2, 3] },
