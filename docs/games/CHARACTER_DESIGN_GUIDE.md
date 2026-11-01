@@ -446,7 +446,7 @@ Cỡ tính ở tỉ lệ 2,6 m; "720p / 1080p".
 
 | Lớp | Neo | Hình và cỡ | Màu | Loại sáng | Bậc |
 |---|---|---|---|---|---|
-| P3 Hào quang | `FX_HALO` trên giá gắn ở gáy hay cổ quạt | Vòng chia 3–4 cung (khe 8–12°); đường kính khoảng 2,2 lần đầu ≈ 19 / 28 px. Thân glow rộng 2,5 / 3,5 px, lõi 1–1,5 / 1,5–2 px. Pháp tuyến hướng về camera chơi (nghiêng khoảng 45° so với phương đứng) nên thấy gần tròn; xoay quanh trục đứng của thân theo camera; vị trí theo lò xo trễ 60–100 ms. Cung quay chậm, chu kỳ ≥ 8 s | Lõi trắng ngà, rìa cyan | Thân glow ≤ 0,9. Lõi ≤ 0,9 khi nghỉ, HDR 3–4 theo bậc chuỗi gõ, đỉnh 5–6 trong ≤ 3 khung | Mọi bậc (Low: đứng yên) |
+| P3 Hào quang | `FX_HALO` trên giá gắn ở gáy hay cổ quạt | Vòng chia 3–4 cung (khe 8–12°); đường kính ≈ 19 / 28 px, tức khoảng **0,5 m** ở tỉ lệ 2,6 m: mặt phẳng nhìn của camera chơi có khoảng 38 px/m ở 720p (57 ở 1080p) tại chỗ nàng; 26 px/m chỉ đúng cho chiều cao thân, vốn bị co theo cos 46°, nên vòng 0,72 m (2,2 lần đầu) ra 27 / 40 px (đo lab Last Line 01/11). Thân glow rộng 1,5–2,5 / 2,2–3,5 px, lõi 1–1,5 / 1,5–2 px. Pháp tuyến hướng về camera chơi (nghiêng khoảng 45° so với phương đứng) nên thấy gần tròn; xoay quanh trục đứng của thân theo camera; vị trí theo lò xo trễ 60–100 ms. Cung quay chậm, chu kỳ ≥ 8 s. Vòng 2 của hai giám khảo (01/11) đổi hình, chỗ đặt và chuyển động: xem ghi chú dưới bảng | Lõi trắng ngà, rìa cyan | Thân glow ≤ 0,9. **Đường vòng ≤ 0,9 ở mọi trạng thái; HDR chỉ ở các điểm lóe** (chấm ≤ 1–1,5 / 1,5–2 px ở đầu tia hay giữa cung): khi nghỉ không có; theo bậc chuỗi gõ 1,35–1,7; lúc phóng 1,5 trong ≤ 3 khung. Số cũ (lõi HDR 3–4 chạy hết đường vòng, đỉnh 5–6) làm vòng thành đĩa trắng ở 68 px: loe bloom 2,8× / 2,6× so với trần 1,5×; điểm lóe 2,5–3,5 còn loe 1,3×. Ở 1,35–1,7: loe 1,00–1,05×, ánh sáng của vòng (cả bloom) ra tới ≤ 1,1 lần cỡ vòng khi phóng, ≤ 1 khi nghỉ | Mọi bậc (Low: đứng yên) |
 | P9 Lõi lưng | `FX_BACK_CORE` | Lõi ≤ 1,5 / 2 px giữa một quầng glow 3 / 4 px, trên nền graphite tối của model; vỏ trong model rộng ≥ 6 / 9 px | Trắng ngà | Lõi core HDR 3, thở 3 ± 0,4 chu kỳ 3–4 s: điểm sáng duy nhất của nàng được bloom khi nghỉ; quầng glow ≤ 0,9 | Mọi bậc |
 | P2 Kênh phát sáng | Map phát sáng của model | 2–3 kênh (sống lưng, mép vạt áo, gân cánh hay cờ), rộng ≥ 2 / 3 px | Cyan nhạt | Glow 0,4–0,6 khi nghỉ. Mỗi từ gõ xong: một dải sáng chạy từ hông lên hào quang trong 0,3 s; chỉ đường giữa kênh (≤ 1,5 / 2 px) lên HDR 3 | Medium trở lên |
 | P1 Viền fresnel | Vật liệu của model | Mũ 3–4, cường độ 0,25–0,4; thân trên 1×, chân 0,3× (chân tối, thân trên sáng); không phủ da mặt | Cyan ngà | Glow ≤ 0,9, không bao giờ HDR | Mọi bậc |
@@ -456,6 +456,11 @@ Cỡ tính ở tỉ lệ 2,6 m; "720p / 1080p".
 | P6 Quầng thân | Quanh thân | Chỉ cung trên của mandorla, hay vỏ fresnel độ đục ≤ 0,25; chỉ khi chuỗi gõ lên đỉnh và khi thắng | Ngà | Glow | High trở lên |
 | P8 Đèn | Một đèn trong kho | Không dùng khi nghỉ (kho `DECK_LIGHTS` dành cho đòn); chỉ khi thắng, ở Ultra, và chỉ khi đo cho phép | — | — | Ultra |
 | P10 Méo không khí | — | Không dùng | — | — | — |
+
+**P3 sau vòng 1 của hai giám khảo mù (01/11, trang thử Last Line, thân thế chỗ là hình nộm; chưa nghiệm thu):** số đo và lý do ở `games/typing-survival/docs/changelog/2026-11-01-presence-lab.md` §9 (nhánh `ts-presence-lab`). Tóm tắt, chưa phải quy cách chốt:
+- Hình vương miện, không phải vòng có tâm: hở dưới (70°, hai đầu vuốt nhọn), khe đỉnh, hai khe hông, 4 tia ở nửa trên; không quay, gắn cứng (không lò xo: lúc trúng đòn vòng không trượt khỏi thân).
+- Ở camera chơi, vạch đỏ đi ngang đầu và vai nàng (68 px ở 720p), nên vòng không đặt sau đầu mà treo xuống lưng, đỉnh vòng ngay dưới lõi lưng, cách mép dưới dải vạch đỏ ≥ 3 px ở mọi tư thế; không đặt phía trên vạch (sẽ nằm trong làn quái). `FX_BACK_CORE` trên model thật phải đủ thấp cho chỗ này.
+- Lõi lưng thành một dấu hình thoi 3 × 3,8 px, glow, không HDR khi nghỉ: khi nghỉ không có gì của nàng được bloom.
 
 ### 5.2 Lớp của drone
 
