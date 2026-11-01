@@ -32,7 +32,7 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   4. Bật lại bộ nhận ảnh trước mọi bước dùng Firefly hay ChatGPT:
      - `scratchpad/ff-recv/recv-img.py`, cổng 8765;
      - `scratchpad/g247/tools/serve-ref.py`, cổng 8767.
-     - Scratchpad nằm trong `/private/tmp`, có thể mất khi khởi động lại máy. Nếu mất, viết lại theo mô tả ở mục 01/11 03:30.
+     - Scratchpad nằm trong `/private/tmp`, có thể mất khi khởi động lại máy. Bản sao của 4 script (`recv-img.py`, `serve-ref.py`, `framecheck.py`, `shadowcheck.py`) để ở `.local/ff-bridge/` (thư mục này không vào Git). Đường dẫn thư mục nhận ảnh và thư mục ảnh tham chiếu trong script phải sửa theo scratchpad mới.
 - **Còn chờ chủ dự án:**
   - nhân vật Last Line dựng từ 1 ảnh chính diện hay 4 góc;
   - Ultra trên màn Retina giữ chi tiết hay giới hạn;
