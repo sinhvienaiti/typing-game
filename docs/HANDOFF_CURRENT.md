@@ -15,6 +15,21 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**01/11 khoảng 21:50 (mới nhất, đọc trước). Tập trung 100 % vào Last Line.** Chủ dự án: "tạm thời dừng toàn bộ các phần game khác, tập trung 100% vào Last Line cho tôi… mỗi action đều có hiệu ứng, có hiển thị, có cảm giác sống động, tôi không muốn bất kỳ một cái gì hiển thị chỉ đơ ra".
+- **Tạm dừng, giữ nguyên trong nhánh:**
+  - **Dragonhold `dh-wave2`:** đã commit tới `292da81` (lỗi hình, nước D7, look Epic D5, AO D6, đất). Bước quái và rồng còn chưa commit trong `src/view/{actors,crowd,heroes,scatter,stage,terrain,water}.ts`.
+  - **Wordwoven `td-units-3d`:** đã commit tới `da9d00f` (thẻ gọi, Draconis, cây, đất, ánh sáng, đêm, Sun-Star). `AGENTS.md`, `docs/td/BUILD_1C_MAP1.md` và changelog `2026-11-01-3d-wave2.md` còn chưa commit.
+  - **Chạy lại đợt 2:** `Workflow({scriptPath: ".../wave2-dh-td-wf_a2147192-3c4.js", resumeFromRunId: "wf_a2147192-3c4"})`, nhớ sửa ghi chú RESUME trong script.
+- **Last Line đang chạy:**
+  - hạ MSAA của High và đổi màu thẻ Rail trước khi gộp `ts-wave1` (`wf_8c2a82c3-740`);
+  - phương án nữ xạ thủ và drone, cùng trang thử hào quang (`wf_33a34adc-e49`);
+  - soát toàn bộ để game "sống" (`wf_5aafed55-2ee`): snapshot ở `games/.wt-ts-audit`, ra `games/typing-survival/docs/ALIVE_PLAN.md` gồm bảng phủ và các gói việc.
+- **Đã chốt:**
+  - cách làm nhân vật B + D, C cho phần dính thân (`docs/games/CHARACTER_DESIGN_GUIDE.md` §7);
+  - phụ kiện riêng gắn xương: chủ dự án "Cho phép";
+  - 4 skill dùng chung (`b9e7009f`).
+- **Để sau:** tìm thư viện qua ChatGPT (`wf_468c9e85-45a`) và đưa nghiên cứu vào skill.
+
 **01/11 khoảng 16:50: chủ dự án tắt máy ("dừng toàn bộ để tôi tắt máy"). Đọc trước khi chạy tiếp.**
 - **Đã dừng:**
   - workflow đợt 2 `wf_a2147192-3c4` (vừa chạy khoảng 10 phút);
