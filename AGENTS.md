@@ -33,6 +33,8 @@ docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
 | Tu Tiên Thủ Ải (`games/immortality-cultivation`) | Game Studio, `threejs-*` | [`docs/games/tu-tien`](docs/games/tu-tien) |
 | Portal, nginx, launch scripts | `game-ci-resumable` for CI/Git resumes | [split plan](docs/games/SPLIT_PLAN.md) §9–10 |
 
+Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs are for handoff and records): `game-art-pipeline` (making art and media with AI tools, blind judging at 8.5, Tripo, licences), `game-map-concept` (a map concept from the real play camera before building), `game-character-design` (research-first character design, the appeal checklist, four consistent views), `game-hero-presence-vfx` (halos, motes, rim glow and other presence layers, built and judged one by one). They apply to every game in this repo, Space Typing included.
+
 Combat VFX in Rồng Giữ Ải, Tuyến Cuối and Lời Gọi follow
 [the layered VFX standard](docs/games/VFX_STANDARD.md) through the
 `game-vfx-layered` skill. Every shot, skill, trap or enemy attack has five
@@ -60,7 +62,7 @@ Acceptance bar 8.5, no provisional passes (owner, 01/11/2026): "tôi không mu�
 
 Appeal is the goal (owner, 01/11/2026, evening): "phần hình ảnh chúng ta phải làm nó thật đẹp, nhìn cuốn hút, phong cách, sang trọng, thời trang, hiện đại… đừng làm hình ảnh của game trở nên nhàm chán, đơn giản, thiếu đi sự hấp dẫn". Visuals and effects are the focus. Every visual brief (art, models, maps, VFX, UI) asks for captivating, stylish, luxurious, fashionable, modern design with rich detail: layered forms, premium materials, light accents, strong silhouettes. Judges score appeal next to market level, and a piece that is technically clean but plain, simple or generic fails the 8.5 bar. For subjective designs (heroes, title art, key UI), show the owner options before building on one.
 
-Research before any character design (owner, 01/11/2026, evening): before briefing a hero, companion, dragon, boss or named character, research myth and legend, xianxia, royal and warrior references (or reuse `docs/games/CHARACTER_DESIGN_GUIDE.md`) and run its character appeal checklist. Every character gets a radiance kit (a halo or mandorla, emissive channels, light motes or orbiting ornaments, a cape or ribbons in motion). Which parts are model geometry and which are engine VFX follows the researched pipeline decision in that guide (§7), not a guess. Show the owner a few directions before building one.
+Research before any character design (owner, 01/11/2026, evening): before briefing a hero, companion, dragon, boss or named character, research myth and legend, xianxia, royal and warrior references and run the character appeal checklist (skill `game-character-design`). Every character gets a radiance kit (a halo or mandorla, emissive channels, light motes or orbiting ornaments, a cape or ribbons in motion). Which parts are model geometry and which are engine VFX follows the researched pipeline decision in that skill (`references/pipeline-decision.md`), not a guess. Show the owner a few directions before building one.
 
 Reuse monsters before making new ones (owner, 01/11/2026): every game already has 3D foes, and many of them have rigs and clips. Before any new monster model or monster image, search `docs/games/MONSTER_MODEL_INVENTORY.md` and reuse across games first: retexture, recolour, rescale, re-rig. A ticket for a new monster says why nothing in the inventory fits.
 

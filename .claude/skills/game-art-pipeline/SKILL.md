@@ -1,0 +1,82 @@
+---
+name: game-art-pipeline
+description: Make player-facing art and media with AI tools and accept a piece only by two blind judges, in any game of this repo (for example Dragonhold, Wordwoven, Last Line, Tu Tien, Space Typing) or a later one. Use when briefing, generating, sourcing or reviewing 2D art, UI art and icons, title or key art, backgrounds, 3D model sources or Tripo models, or audio files; when driving ChatGPT, Gemini, Firefly or Tripo in the in-app browser or CLI; when an art round stalls; and whenever you must decide whether something the player sees or hears is accepted. Characters start in game-character-design, maps in game-map-concept, combat VFX in game-vfx-layered and always-on character glow in game-hero-presence-vfx; use those first, with this skill for their tools, judging and Tripo steps. Not for runtime import, rigging, animation or audio-mixing code.
+---
+
+# Game art pipeline: make with AI, accept by blind judges
+
+Everything the player sees or hears is accepted only when **two independent blind judges both score it 8.5 or higher** in the built play host at the player's settings, with no URL flags. Shared systems (typing feedback, keyboard sounds, character animation) need **9**. There is no provisional pass, no "best of three tries" and no "better than before". Owner, 01/11/2026: "tôi không muốn dùng tạm được nữa, tôi muốn phải đạt trên 8.5 trở lên". Living rule text: [ART_ACCEPTANCE.md](../../../docs/games/ART_ACCEPTANCE.md) (01/11 block) and [AGENTS.md](../../../AGENTS.md).
+
+This skill is the method. Each game keeps its own data: reference board, signal colours, judging files, Tripo list. Game names in this skill are examples, not scope. Related skills: [game-character-design](../game-character-design/SKILL.md) for any character, [game-map-concept](../game-map-concept/SKILL.md) for maps and scenes, [game-vfx-layered](../game-vfx-layered/SKILL.md) for combat VFX. Space Typing's [game-asset-2d-to-3d](../game-asset-2d-to-3d/SKILL.md) covers only that game's runtime.
+
+## Procedure
+
+1. **Reuse before you make.**
+   - Look at accepted art in every game.
+   - For any foe, search [MONSTER_MODEL_INVENTORY.md](../../../docs/games/MONSTER_MODEL_INVENTORY.md) first and retexture, recolour, rescale or re-rig. A ticket for a new monster says why nothing there fits.
+   - Check free, commercial-safe sources ([licences](references/licences.md)).
+2. **Brief for appeal.**
+   - Every visual brief asks for captivating, stylish, luxurious, modern design with rich detail ([briefs](references/briefs-and-sets.md) §1).
+   - A piece that is correct but plain, simple or generic fails 8.5.
+   - For taste calls (heroes, title art, key UI), research first and show the owner a few options before building on one.
+3. **Fix one set standard before the first image of a set** ([briefs](references/briefs-and-sets.md) §2). The same block goes into every prompt of the set:
+   - one render phrase and one light;
+   - one material sentence per object and one motif;
+   - one background;
+   - margins of at least 6–8 % and no cast shadow;
+   - tall objects in a 3:4 frame.
+4. **Pick the tool** ([browser AI tools](references/browser-ai-tools.md)).
+   - **ChatGPT**, Chat mode, thinking High, never Work or agent mode: concepts, Tripo sources, four-view sheets, paintings over a base image, web research.
+   - **Gemini** when ChatGPT refuses because of its image limit. Never mix tools inside one set: redo the whole set in one Gemini chat.
+   - **Adobe Firefly**, Adobe models only: transparent video VFX, sound effects, alternative images.
+   - **Tripo** only from an accepted source.
+   - Never sign in or type credentials. If a tool is signed out, stop and tell the owner.
+   - Work in your own tab and close it at the end. The in-app browser holds about 9 tabs.
+5. **Get files out and record them.**
+   - Run a copy of the local receiver from `.local/ff-bridge/` and post images to it ([recipe](references/browser-ai-tools.md) §4).
+   - Name each try `<id>.v<n>-try<k>.<ext>` and save the exact prompt beside it as `.prompt.txt`.
+6. **Check mechanically before any judge** ([briefs](references/briefs-and-sets.md) §4). This covers frame margins, one connected object, no cast shadow, and a contact sheet of the whole set. Also make a "generated | post-processed" pair that proves the tool step did not damage the painting.
+7. **Judge blind, where the player sees it** ([judging](references/judging.md)).
+   - Use two fresh judges, neutral labels and a key outside their folder.
+   - Each judge writes what they see before any score.
+   - Score market level against the commercial reference board, appeal, and fitness for the next step.
+   - Grade icons and UI at real size in their UI spot. Grade world art, models, VFX and layout in the built play host.
+   - Your own grade and a tool's self-grade do not count.
+8. **Iterate with a stop rule.**
+   - Fix exactly what both judges named.
+   - After two rounds without a real gain, change method in the same report: ready-made free sources, a lookdev reference, another tool, or a search brief for the owner.
+   - Never wire a piece below the bar. Anything already wired below it is a debt in `docs/games/QUALITY_RESCUE_2026-11-01.md`.
+9. **3D** ([tripo](references/tripo.md)).
+   - Generate on Tripo only after both judges give the source 8.5, including Tripo fitness.
+   - Dry-run first, build one model first, set `face_limit` by class, and log credits.
+   - Keep detail per [MODEL_QUALITY.md](../../../docs/games/MODEL_QUALITY.md).
+   - Tripo makes the look. Rig, clips, motion and VFX are ours.
+10. **Audio** ([audio](references/audio.md)).
+    - Real files only, made through [AUDIO_PIPELINE.md](../../../docs/games/AUDIO_PIPELINE.md).
+    - Agents cannot hear: the Audio Lab critic gates and the owner's ears decide.
+11. **Close out.**
+    - Record licence rows in `docs/games/THIRD_PARTY.md`, Tripo credits in the game's Tripo log, and the update in the game's changelog.
+    - Prune raw capture frames, close your tabs and stop your receivers.
+
+## Hard rules
+
+- **No code-drawn stand-ins** for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. A missing image is a ticket, never a drawing in code. Shaders and VFX that meet [VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md) are allowed. Sound counts too: no synthesized placeholder sounds.
+- **Every UI detail carries real art:** cards, buttons, bays, labels, tooltips, briefings, results and shop items. Text alone is not enough.
+- **Language:** everything the player reads is English, game nouns included; unique characters keep their proper names. Vietnamese appears only where the game teaches it: the meaning of the word being learned and optional glosses in learning panels.
+- **No media in Git:** no images, audio, `.glb`, `.gltf` or `.bin`. Stage explicit paths, never `git add -A`. Media travels by `pnpm media:push`.
+- **Captures** go under the game's or worktree's `tmp/`, never `art-src`, `public` or `docs`.
+  - When a step is scored, keep sheets, compare shots and numbers, and delete your own raw frames: `node tools/capture-prune/prune.mjs <folder>` first, then `--apply`.
+  - Never delete files you did not create.
+  - GPU browser runs go through `.local/bin/heavy.sh --gpu`.
+- **ChatGPT is a second opinion,** never an authority. Verify each key claim at its source and say where you disagree. Weigh its art critiques; do not copy them.
+- **Never feed a cloud AI** (ChatGPT, Gemini, Tripo) with NoAI-tagged assets, Sketchfab or Fab "Standard" assets, Mixamo files, Poly Pizza service assets or Sonniss audio. For Sonniss this includes Claude: touch it only through local signal measurements ([licences](references/licences.md) §4).
+
+## References
+
+- [judging.md](references/judging.md): bar, blind-round setup, judge brief template, where to grade, scores you cannot trust.
+- [briefs-and-sets.md](references/briefs-and-sets.md): appeal language, set standard, four consistent views, post-checks, post-processing limits.
+- [browser-ai-tools.md](references/browser-ai-tools.md): ChatGPT, Gemini and Firefly rules and recipes, the local receiver, tab hygiene.
+- [tripo.md](references/tripo.md): wallet, dry-run, face limits, one model first, credit log, import.
+- [licences.md](references/licences.md): allowed and banned licences, verifying on the page, sourcing when iteration stalls.
+- [audio.md](references/audio.md): audio route, who judges sound, stop rule, banned sources.
+- [worked-examples.md](references/worked-examples.md): what went wrong in Dragonhold, Wordwoven, Last Line and Tu Tien, and the rule each case produced.
