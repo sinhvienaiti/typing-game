@@ -113,3 +113,28 @@ Viết cho game mới, trước hết là Tu Tiên Thủ Ải (`games/immortalit
   - **Ảnh chụp:** để dưới `tmp/` của game; xong thì dọn ảnh thô của chính mình bằng `node tools/capture-prune/prune.mjs <thư mục> --apply`.
   - **Tab:** đóng các tab mình mở, dùng tab riêng, không đụng tab của session khác.
   - **Media:** không đưa media vào Git; media đi qua `pnpm media:push`. Mỗi lần cập nhật có changelog.
+
+## 11. Thiết kế nhân vật và cách làm việc với AI tạo ảnh (bổ sung tối 01/11)
+
+Phần này rút ra khi làm nữ xạ thủ và drone của Last Line. Áp dụng được cho nhân vật ở mọi game: anh hùng, bạn đồng hành, rồng, boss, nhân vật có tên.
+
+- **Lỗi:** viết prompt vẽ ngay, không nghiên cứu.
+  - Hai lần liền ra nhân vật trơn, giống phản diện (mặt nạ đen kín mặt, hai vây như sừng ở tai, giáp nhựa trơn).
+  - Lần thứ ba vẽ luôn vòng sáng vào ảnh nhân vật; chủ dự án thấy lạ và hỏi có xử lý được không.
+  - Firefly không giữ được một thiết kế qua 4 góc nhìn. ChatGPT giữ được, nếu vẽ trong cùng một cuộc chat: vẽ tờ xoay 4 góc trước, rồi vẽ từng góc.
+- **Luật:**
+  - **Sức hút là mục tiêu.** Hình phải cuốn hút, phong cách, sang trọng, thời trang, hiện đại. Đơn giản hay trơn thì trượt 8,5, kể cả khi không sai gì (`ART_ACCEPTANCE.md`, `AGENTS.md`).
+  - **Nghiên cứu trước khi thiết kế nhân vật:** thần thoại, truyền thuyết, tu tiên, hoàng gia, chiến binh, cách game thương mại thiết kế anh hùng, hiệu ứng hào quang. Kết quả và danh sách kiểm sức hút nằm ở `docs/games/CHARACTER_DESIGN_GUIDE.md`.
+  - **Bộ hào quang:** vòng sáng, kênh sáng trên giáp, đốm sáng bay quanh, áo choàng hay dải lụa chuyển động. Phần nào làm thành hình khối, phần nào làm bằng hiệu ứng trong game thì theo kết luận nghiên cứu ở mục 7 của guide, có bằng chứng. Không đoán, và không gộp mọi thứ vào một ảnh rồi sửa mãi.
+  - **Học cách người khác làm hiệu ứng:** thư viện, công thức, bài chia sẻ của các studio. Ghi lại thành bài học dùng lại được ở `docs/games/HERO_PRESENCE_VFX.md`, và có trang thử để làm, chấm từng lớp hiệu ứng.
+  - **Đưa chủ dự án xem vài phương án** trước khi dựng 4 góc, dựng Tripo hay làm UI chính.
+  - **ChatGPT là ý kiến thứ hai:**
+    - nhờ nó tìm tài liệu trên mạng, đòi có đường dẫn cho mỗi ý;
+    - mở nguồn ra kiểm lại từng ý chính: đúng, đúng một phần, không có căn cứ hay sai;
+    - tự đánh giá thêm, chỗ nào không đồng ý thì nói rõ;
+    - không bao giờ nhận ngay mà không kiểm.
+  - **Công cụ tạo ảnh:**
+    - ChatGPT chế độ Chat, mức High, không dùng Work.
+    - Hết hạn mức thì sang Gemini; chủ dự án đã đăng nhập sẵn.
+    - Firefly chỉ dùng model của Adobe.
+    - Không bao giờ tự đăng nhập hay gõ mật khẩu.
