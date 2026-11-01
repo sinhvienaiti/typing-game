@@ -1,8 +1,10 @@
-# Wordwoven: map concepts for every stage (v2, 01/11/2026)
+# Wordwoven: map concepts for every stage (v1.2, 01/11/2026)
 
 Game: **Wordwoven** (repo id `typing-defense`, folder `games/typing-defense`). Written by the map designer after the owner's note of 01/11/2026: the maps of all three games are unacceptable; write one concept per map, have ChatGPT review and paint it, redo whatever falls short, and use only free resources that allow commercial use.
 
-**v2 (01/11/2026, after the critic's review).** What changed from v1:
+**v1.2 (01/11/2026): the ChatGPT art-director review of map 1 (7.9/10, [`typing-defense-CHATGPT_REVIEW.md`](typing-defense-CHATGPT_REVIEW.md)) is folded into section 3 (read order, materials, light budget, value hierarchy, colour reservations, removals, buildability, its verbatim painting prompt in 3.10) and its idea notes into section 4; layout and camera unchanged.**
+
+**v1.1 (01/11/2026, after the critic's review; this file called it "v2").** What changed from v1:
 
 - **The camera is the real one.** v1 designed for a 50° / 76 m "Battle view" nobody picked. v2 uses the battle camera being built on branch `td-units-3d`: 42° tilt, 46 m, 42° lens (owner 01/11: an oblique 40–45° view). Every on-screen number comes from one projection script, checked against the engine (section 1.3).
 - **No sky in the battle frame.** The owner's 01/11 line asks for an oblique 40–45° view *with a sky band*. With a 42° lens that cannot happen: the top edge looks 21° below the horizon. The concept paints no horizon. Decision D1 in 3.2.
@@ -18,14 +20,16 @@ Game: **Wordwoven** (repo id `typing-defense`, folder `games/typing-defense`). W
 - **The Tripo list is ordered by "seen in the battle frame".** For map 1 it is empty (3.8).
 - **Map 1 stays complete; maps 2–7 are shortened.** They keep their ideas; their screen numbers are removed until each layout is checked with the script.
 
-The paste-ready message for ChatGPT is [`typing-defense-CHATGPT_MESSAGE.md`](typing-defense-CHATGPT_MESSAGE.md). This file is the full design behind it.
+The paste-ready message for ChatGPT is [`typing-defense-CHATGPT_MESSAGE.md`](typing-defense-CHATGPT_MESSAGE.md). This file is the full design behind it. ChatGPT's answer is [`typing-defense-CHATGPT_REVIEW.md`](typing-defense-CHATGPT_REVIEW.md).
 
 ---
 
 ## 0. For the reviewer (ChatGPT): what to do with this file
 
+**Status (v1.2).** Steps 1 and 4 are done for map 1 (ChatGPT, Chat mode, High, 01/11: 7.9/10, 8.8–9.0 expected after the changes now in section 3). Next is step 2, with the prompt and the base image in 3.10, then step 3.
+
 1. **Review map 1** as a senior art director of a commercial top-down game, against the bar in 1.2. Score it 0–10, list the gaps, and propose concrete improvements that keep the gameplay layout and the camera.
-2. **Paint one concept image over the attached base image.** Keep the exact layout, camera and grey HUD boxes. Replace the coloured placement blocks with what the legend names. No text, no sky, no horizon.
+2. **Paint one concept image over the attached base image.** Keep the exact layout, camera and grey HUD boxes. Replace the coloured placement blocks with what the legend names, as section 3 now describes it (3.10). No text, no sky, no horizon.
 3. **Score your own painting** against 1.2. 8.5 is the acceptance bar. Below it, say what is missing and paint again (at most three tries).
 4. Give the other maps (section 4) a quick idea review: one or two lines each.
 
@@ -142,7 +146,7 @@ This table drives every landmark decision:
   - thatched huts, bamboo walls, wooden country shacks;
   - windmills, tea hills, rainbows, striped lighthouses;
   - cartoon daisies, strawberry bushes, ink-outlined clip-art, candy-floss trees.
-  - The current thatched houses stay until this concept is approved (owner, 01/11). The painting may show them with tile or stone roofs on the same silhouettes, and the review should say which reads better.
+  - The current thatched houses stay until this concept is approved (owner, 01/11). The review chose **dark fired-tile roofs** on the same silhouettes for the painting (3.6).
 - **No religious buildings or objects:** no pagodas, temples, shrines, torii, altars, incense, Buddha or deity statues.
   - Secular forms are fine: tiered stone watchtowers, gatehouses, granaries.
   - Allowed motifs: Dong Son sun-star rings, cranes as carvings, cloud scrolls, Ly-dynasty dragon balustrades.
@@ -154,7 +158,7 @@ This table drives every landmark decision:
 - **Colours reserved for signals:**
   - word-card ivory and gold, typed-letter glow, shot and hit flashes (warm white-gold);
   - Ghost Flame cold cyan;
-  - the Rift's indigo-black with a cold rim.
+  - the Rift's indigo-black with a cold rim (a blue-leaning near-black, never violet).
   - The world never uses saturated versions of these. No bright pink, magenta or purple (keying colours).
 - **Light:**
   - Day: one sun from the south-west (lower left of the frame), 40° high, long sharp shadows toward the upper right, drifting cloud shadows. This is the stage's `SUN` vector.
@@ -191,7 +195,7 @@ The sandbox (`?sandbox=1`) plays on map 1's field.
 
 1. **Lock the layout in the real battle frame.** Run `project.mjs` on the layout; compute the height budget; mark the HUD boxes. Fix any lane, crossing or resource under the HUD.
 2. **Base image.** Capture the real camera at 1280 × 720 and draw translucent blocks for every planned landmark and key figure at its projected position and height, with grey HUD boxes and a legend.
-3. **Concept painting over the base** (ChatGPT). Accepted at 8.5 or more against 1.2, with lanes, foes and our units readable in a half-size grey copy.
+3. **Concept painting over the base** (ChatGPT image, or Adobe Firefly Image 5 with the base as composition reference). Accepted at 8.5 or more against 1.2, with lanes, foes and our units readable in a half-size grey copy.
 4. **Life before polish.** Foes, Draconis, Helpers, villagers, Spearmen and the choppable trees on screen before more ground polish.
 5. **Ground, water and light**, then the cropped landmarks, then dressing.
 6. **Judge in-game screenshots** in the battle frame at both sizes (day, night, boss) beside the painting and the reference board, by two independent judges ("chấm C").
@@ -199,6 +203,8 @@ The sandbox (`?sandbox=1`) plays on map 1's field.
 ---
 
 ## 3. W1-1 Silverfall Meadow (`w1-silverfall`): full concept
+
+Where v1.1 and the ChatGPT review disagreed, the review wins, because none of its changes moves gameplay (roads, plazas, houses, trees, HUD and camera stay; uneven tree spacing is done without moving the 36 sim trees): the Commons stops being a focal point, the spur loses its glowing gold, the world edge becomes a cropped karst wall instead of a pinnacle, flower drifts become sparse muted colonies, rocks are clustered, roofs are dark fired tile, and Draconis drops to the third or fourth read.
 
 ### 3.1 Name and story beat
 
@@ -245,21 +251,40 @@ Layout from `src/content/slice-1a.ts` (identical on `main` and `td-units-3d`, 01
   - Moving the camera does not solve it: at look x −4 the bridge's centre clears the panel, but the whole frame shifts 5 m west and the Gold Mine (then at x 1039) crowds the corner icons and the teaching rows.
 - **D4. Layout v2 is withdrawn.** No golden, balance or scenario change.
 
-### 3.3 What carries the scale in this frame
+### 3.3 Read order and what carries the scale
 
-At 42° nothing tall can stand in the top half without being cut, and nothing tall may stand in the lower half without hiding play (rule: nothing over 3 m south of a lane or build ground). So:
+**Read order.** The concept is edited, not redesigned: it was held back by hierarchy, not asset quality, because every idea tried to be memorable at once. The frame reads in this order, and nothing lower may outshine anything higher:
 
-1. **The Rift's ink tide (threat, top centre).** The ink lies on the ground, so it reads from above.
-   - An indigo-black spill runs from the top edge down the shared road to the fork plaza. Its edges peel up like burnt paper and the meadow beside it withers to grey.
-   - Cold rim light glows where the ink meets the grass, and thin ink smoke rises out of the frame.
-   - The first pack waits in it.
-2. **The forest edge overhang (top band).** The 29 choppable trees in frame all stand above y 165; in the gate and north-east groves only their trunks and lowest boughs fit. Painted as a dark canopy overhang along the top edge, with sun shafts between the trunks, they frame the play the way a theatre's top border does.
-3. **The gold spur (top right).** A gold-veined limestone spur, 9 m, rises out of the top edge behind the Gold Mine; only its lowest 3 m are in frame.
-4. **The Sun-Star Commons (frame centre).** A 16 m Dong Son sun-star ring of worn limestone is inlaid in the turf inside the road loop, half overgrown with moss. It is flat, so houses may stand on it. It gives the empty centre a focal point at four times the Fort's footprint, and it foreshadows the Seal Dais of later maps.
-5. **The Silver Brook (left third).** The water runs in a limestone cleft with two 0.8 m cascades, reeds and river stones. It is silver in daylight and carries the sky's colour into a frame with no sky.
-6. **The world edge (top-right corner, partly under the corner icons).** East of x 48 the meadow ends at a lip. Below it, the Silverfall gorge breathes mist up over the north-east grove, and the side of a karst pinnacle shows through the mist. This is atmosphere only.
-7. **Giant shadows.** Cumulus shadows drift across the whole field. On Day 3 the sky turtle's shadow, about 60 m long, crosses the meadow in about 20 s.
-8. **Life** (3.5): the muster pack, the walking packs, Draconis' shadow sweeping the road, the Spearmen's line at the merge.
+1. **The Rift and the invasion** (top centre): the ink and the muster pack.
+2. **The roads and the defensive line**: the flagstone road and the three Spearmen at the merge, the second story point.
+3. **The huge meadow and the gorge**: the jade-teal field, the brook, the world edge, the cloud shadows.
+4. **The secondary life**: Draconis (third or fourth, never second), the owlets, the villagers, the lanterns.
+
+The forest edge, the gold spur and the Sun-Star Commons are support. They give depth and texture and are never a focal point of their own.
+
+**What carries the scale.** At 42° nothing tall can stand in the top half without being cut, and nothing tall may stand in the lower half without hiding play (rule: nothing over 3 m south of a lane or build ground). So:
+
+1. **The Rift's ink tide: the main focal point (x 429–758, y 0–66).** The ink lies on the ground, so it reads from above.
+   - A near-black indigo mass (value 8–15 %) runs from the top edge down the shared road to the fork plaza. Two or three big curled edges, like scorched paper, not many tendrils.
+   - A narrow cold rim where the ink meets the grass, well below the brightness of the Ghost Flame cyan. No strong glow.
+   - The grass within 1–2 m of the ink turns charcoal grey.
+   - Thin smoke rises and leaves the frame at once; it never hangs over the road.
+2. **The muster pack (fork plaza).** 5–7 Hopping Zombies in earth-grey robes (in game a muted robe tint, the model unchanged), staggered so they read as one silhouette in the ink. It is the view-only preview of D2, so its size does not touch the sim. The night-5 boss bar may cover this spot, so the story cannot depend on small details here.
+3. **The forest edge (top band).** The 29 choppable trees in frame all stand above y 165; in the gate and north-east groves only their trunks and lowest boughs fit.
+   - Paint only trunks, low boughs and crowns overhanging from beyond the top edge, at uneven spacing, with dark gaps between trunks and warm sun shafts through them. No flat wall of canopy.
+   - Keep a clear visual channel over the road where it enters at x 480–560: the crowns of the two nearest trees, (−14.5, −42.5) west and (−1.5, −44) east, lean away from it.
+   - The north-east grove is softer: lower contrast, in the gorge mist.
+   - The 36 sim positions stay. The unevenness comes from crown size, species, lean and non-choppable trees beyond the top edge.
+4. **The gold spur (top right, behind the Gold Mine).** 9 m tall, rising out of the top edge; only its lowest 3 m are in frame. Pale limestone strata with muted ochre mineral seams. No glowing gold.
+5. **The Silver Brook (left third).** An irregular limestone cleft, never a straight line: jade-silver water, then dark wet stone, then reeds. Underwater stones break the line. Foam only at the two 0.8 m drops. It carries the light into a frame with no sky.
+6. **The world edge (top-right corner, x 1161–1280, y 0–117, partly under the corner icons).** East of x 48: the meadow lip, a limestone fracture, a mist-filled void and a huge karst wall cropped by the right edge. Not a small free-standing karst pinnacle. Atmosphere only.
+7. **Giant shadows.** One or two huge cloud shadows drift across the field, never mottled patches. On Day 3 the sky turtle's shadow, about 60 m long, crosses the meadow in about 20 s. Draconis' large shadow on the road carries his height (3.5).
+8. **Life** (3.5): the muster pack, the walking packs, the Spearmen's line at the merge, Draconis' shadow sweeping the road.
+
+**The Sun-Star Commons (frame centre): a quiet floor, not a focal point.** A 16 m Dong Son sun-star ring of worn limestone stays inlaid in the turf inside the road loop, flush with it.
+- Only 10–15 % lighter than the turf, with 15–20 % of it hidden under moss, dirt and wear; a low-contrast engraving.
+- Archaeological, not mystical: no glow, no crisp lines. It must not show in the grey blur test.
+- It is flat, so houses may stand on it. It still foreshadows the Seal Dais of later maps.
 
 The Silverfall cliff and the Guardian statue of v1 stood outside this frame and are dropped from the battle concept.
 
@@ -267,15 +292,15 @@ The Silverfall cliff and the Guardian statue of v1 stood outside this frame and 
 
 | Element | World position and size | Screen box at 720p | Source |
 |---|---|---|---|
-| Rift ink spill | gate (−10, −46) to the fork plaza (6, −34), 6–10 m wide, ground level | x 429–758, y 0–66 | Shader and VFX on our own art: `art-src/vfx/ink-smoke.png`, `ink-splat.png`, `paper-scraps.png`, plus Unity Labs CC0 smoke flipbooks; five phases per the VFX standard |
-| Muster pack | (5, −35), 8 × 3.5 m | x 614–719, y 5–48 | Existing foe models (3.5) |
-| Gold spur | (31, −35), 9 × 6 m, 9 m tall | x 928–1102, y 0–55 | Poly Haven CC0 rock or cliff mesh, decimated, with a gold-seam material |
-| Sun-Star Commons | centre (2, −10), radius 6.3–8 m, flat | x 488–758, y 146–297 | A painted decal (new small 2D ticket) or an ambientCG CC0 paving material through a ring mask |
-| Silver Brook cleft | x −26.5 … −21.5 | left third | three r170 `Water2` (MIT) with flow maps and CC0 normal maps; CC0 limestone material on the banks |
-| Cascades | (−24, −31), (−24, −3), 0.8 m | (246–320, 47–64) under the run panel; (81–189, 267–292) | Water shader, `art-src/vfx/waterfall-foam.png`, `water-splash.png` |
+| Rift ink spill | gate (−10, −46) to the fork plaza (6, −34), 6–10 m wide, ground level; two or three big curled edges, a narrow cold rim, charcoal-grey grass 1–2 m around it | x 429–758, y 0–66 | Shader and VFX on our own art: `art-src/vfx/ink-smoke.png`, `ink-splat.png`, `paper-scraps.png`, plus Unity Labs CC0 smoke flipbooks; five phases per the VFX standard |
+| Muster pack | (5, −35), 8 × 3.5 m; 5–7 Hopping Zombies, staggered, one silhouette | x 614–719, y 5–48 | Existing foe models (3.5) |
+| Gold spur | (31, −35), 9 × 6 m, 9 m tall; lowest 3 m in frame | x 928–1102, y 0–55 | CC0 modular limestone rock or cliff mesh with a pale-strata material and muted ochre seams, no emissive |
+| Sun-Star Commons | centre (2, −10), radius 6.3–8 m, flat; 10–15 % lighter than the turf, 15–20 % covered | x 488–758, y 146–297 | A decal or a displaced mesh: a painted decal (new small 2D ticket) or an ambientCG CC0 paving material through a ring mask, vertex-blended into the turf |
+| Silver Brook cleft | x −26.5 … −21.5; irregular banks, underwater stones | left third | three r170 `Water2` (MIT) with flow maps and CC0 normal maps; CC0 limestone material on the banks, dark and wet at the waterline |
+| Cascades | (−24, −31), (−24, −3), 0.8 m; the only foam on the brook | (246–320, 47–64) under the run panel; (81–189, 267–292) | Water shader, `art-src/vfx/waterfall-foam.png`, `water-splash.png` |
 | Stone arch bridge | (−24, −14), 8 × 3.5 m | x 120–280, y 133–193, under the run panel | Keep `3d/props/cau-go.glb`, relit, until D3 frees the spot |
-| World-edge window | east of x 48, z −44 … −22 | x 1161–1280, y 0–117 | Terrain beyond the field (code), CC0 cliff material, mist particles; the pinnacle is a CC0 rock face scaled up |
-| Choppable trees | 36 sim positions, 8–14 m | 29 in the top band | Free 3D trees first (Poly Haven CC0; Quaternius Stylized Nature MegaKit only if the owner accepts QAL); the accepted 116 billboards as the fallback |
+| World-edge window | east of x 48, z −44 … −22; meadow lip, limestone fracture, mist void, karst wall | x 1161–1280, y 0–117 | Terrain lip and fracture beyond the field (code), fog and mist shader, one CC0 rock-wall mesh scaled up and cropped by the right edge |
+| Choppable trees | 36 sim positions, 8–14 m; varied crowns, a road channel at x 480–560 | 29 in the top band | Free modular 3D trees first (Poly Haven CC0; Quaternius Stylized Nature MegaKit only if the owner accepts QAL); the accepted 116 billboards as the fallback |
 
 ### 3.5 Life in the frame (first, before any polish)
 
@@ -294,22 +319,27 @@ The Silverfall cliff and the Guardian statue of v1 stood outside this frame and 
 On `td-units-3d` the foes and Spearmen are drawn in 3D (the base image shows nine foes and three Spearmen). On `main` the 3D view still draws none.
 
 **Where the player sees them:**
-- **Dusk:** the ink spills down the shared road, and the first pack musters at the fork plaza (D2).
+- **Dusk:** the ink spills down the shared road, and the first pack musters at the fork plaza (D2): 5–7 Hopping Zombies in earth-grey robes, staggered into one silhouette.
 - **Night:** packs walk in from the top edge and split at the fork. Ghost Flames follow the flight line at 3 m over the east meadow, a faint ink trail behind them, the only cold-cyan lights in the frame.
 - **The merge plaza is the killing ground.** Arrows and cannon shots cross it, and the Spearmen hold the line.
 
-**Our side:**
-- **Draconis** (`games/dragon-hold/public/assets/dragon-hold/models/heroes/draconis-v2/`, 22,000 triangles, 25 bones, Fly, Idle_Hover, Boost, Attack, Cast clips). He glides at 5–6.5 m over the west branch with his shadow on the road, and perches on the roof of the house he powers.
-- **Three owlet Helpers** (`art-src/models/helpers/helper-owlet.glb`, rigged, 13 clips, wing-band attachments). They work beside the crew at the Cannon Tower.
-- **Spearmen** (`units/linh-giao`, rigged, 8 clips) hold the merge.
-- **Villagers** (`art-src/3d/workers/worker-base.glb` + 24 kit items) chop in the west-bank grove (axe swings, wood chips; a tree falls only when it is empty). They are Tripo originals and are not rigged yet: rig them with the Mesh2Motion human rig (CC0), or with Quaternius UAL if the owner accepts QAL.
+**Our side** (in read order: the Spearmen second, after the Rift; Draconis third or fourth; the rest after him):
+- **Spearmen** (`units/linh-giao`, rigged, 8 clips) hold the merge: the frame's second story point. A warm rim on shoulders and spear tips, long shadows to the upper right, no showy VFX.
+- **Draconis** (`games/dragon-hold/public/assets/dragon-hold/models/heroes/draconis-v2/`, 22,000 triangles, 25 bones, Fly, Idle_Hover, Boost, Attack, Cast clips). He glides at 5–6.5 m over the west branch and perches on the roof of the house he powers.
+  - Banked steeply, so his body reads compact and his wings follow the road.
+  - Deep ember red, never bright red. In game this is a darker tint on Wordwoven's instance; the model itself stays as it is.
+  - His large shadow on the road carries his height. He is noticed third or fourth, never second.
+- **Three owlet Helpers** (`art-src/models/helpers/helper-owlet.glb`, rigged, 13 clips, wing-band attachments) work beside the crew at the Cannon Tower.
+  - Natural brown, grey and cream plumage; the shipped model's brief already asks for grey-brown down, a beige face and a cream cap.
+  - Working poses: carrying, pulling, inspecting.
+- **Villagers** (`art-src/3d/workers/worker-base.glb` + 24 kit items): a small group at the west-bank grove (−16.5, −25), beside the west branch, never on the road, with fresh logs and wood chips around them (axe swings; a tree falls only when it is empty). They are Tripo originals and are not rigged yet: rig them with the Mesh2Motion human rig (CC0), or with Quaternius UAL if the owner accepts QAL.
 
 **Ambient (VFX and shaders only):**
 - mist from the gorge and the brook;
-- fireflies along the brook at night (`@pmndrs/vanilla` `Sparkles`, MIT);
-- paper lanterns drifting north on night 3;
-- cloud shadows, and the sky turtle's shadow (our accepted `sky-beast-top.png`, 114, as a shadow cookie);
-- wind in grass and boughs; pennants and lanterns on the towers.
+- fireflies along the brook at night (`@pmndrs/vanilla` `Sparkles`, MIT): dim, sparse cool-green points, never gold or cyan, so they never read as typed letters, shots or Ghost Flames;
+- paper lanterns drifting north on night 3: small amber cores like the tower lanterns, never in front of a word card;
+- one or two huge cloud shadows (never mottled patches), and the sky turtle's shadow (our accepted `sky-beast-top.png`, 114, as a shadow cookie);
+- wind in grass and boughs; pennants on the towers, and lanterns with small amber cores.
 
 **Removed (no source, or out of frame):** egrets, swifts, fish, dragonflies, water buffalo (`trau.glb` exists, unrigged, and its west-bank spot is under the run panel), Alicanto (not in map 1's waves).
 
@@ -317,58 +347,104 @@ On `td-units-3d` the foes and Spearmen are drawn in 3D (the base image shows nin
 
 | Layer (battle frame) | What |
 |---|---|
-| Top border | The forest-edge overhang (trunks, low boughs, canopy shadow), the Rift's ink and smoke, the gold spur rising out of frame, the world-edge mist at the top right |
-| Playfield | Jade-teal meadow with moss patches and wildflowers in drifts (not dots); limestone flagstone road with a worn verge and kerb stones; the Sun-Star Commons; the brook cleft; the merge plaza |
-| Bottom edge | The road leaving toward the Fort (out of frame); warm lamp glow from the Fort at night, reaching the bottom edge |
+| Top border | The forest edge (trunks, low boughs, overhanging crowns at uneven spacing, dark gaps, warm shafts), the Rift's ink and smoke, the spur's lowest 3 m, the world-edge mist and cropped karst wall at the top right. It steps back in values (dark trunks and gaps, warm shafts, the softer misted north-east grove), so it never reads as one flat wall |
+| Playfield | Deep jade-teal meadow in broad bands; the wet limestone flag road; the Sun-Star Commons, low-contrast; the brook cleft; the merge plaza |
+| Bottom edge | The road leaving toward the Fort (out of frame); at night a faint warm spill from the Fort's lamps along the bottom edge, inside the road's value band, not a pool of light |
+
+**Materials.**
+
+| Surface | Look |
+|---|---|
+| Road | Wet fitted limestone flags with worn centres, broken moss lines, puddles and darker damp joints. One clear value step above the meadow. Near the top edge the detail resolves into large masses |
+| Meadow | Deep jade-teal in broad bands: short grass, damp grass, moss, trampled ground. Sparse flower colonies in muted tones. Never mint; no flower decals |
+| House pads | Quiet ground around each house, under 60 % brightness |
+| Houses | **Dark fired-tile roofs** instead of thatch, on today's silhouettes (the rebuild waits for the owner's approval of the painting) |
+| Silver Brook | Jade-silver water, then dark wet stone, then reeds, in an irregular limestone cleft; underwater stones; foam only at the two drops |
+| Sun-Star Commons | Worn limestone 10–15 % lighter than the turf, 15–20 % under moss, dirt and wear |
+| Gold spur | Pale limestone strata with muted ochre seams |
+| World edge | Meadow lip, limestone fracture, mist in the void, a huge karst wall cropped by the right edge |
+
+**Light budget.**
+- One source: a golden sun from the south-west (lower left), low at dusk, long shadows to the upper right.
+- One or two huge cloud shadows, not mottled patches.
+- Shadows jade-teal, never black.
+- Lanterns are small amber cores, not pools of light.
+- The Rift gives only a narrow cold edge and lights nothing else.
+- Speculars on wet flags and water stay inside their surface's band in the value table; nothing in the world reaches the word cards.
+
+**Value hierarchy for gameplay** (grey value, 0 % black to 100 % white):
+
+| Element | Value |
+|---|---|
+| Rift interior | 8–15 % |
+| Deep vegetation and shadow | 20–30 % |
+| Meadow | 30–42 % |
+| House pads | 35–50 % |
+| Road | 48–58 % |
+| Sunlit limestone | 55–65 % |
+| Word cards and VFX | above all of these |
+
+The shared rules of 1.3–1.4 still hold on top: ground under a word card below luma 0.6, the road at least 0.15 luma above the grass beside it.
+
+**Colour reservations on this map.**
+- Bright gold: only the signals of 1.4 (word cards, typed letters, shots). The spur's seams are muted ochre and the mine's gold does not glow.
+- Red: Draconis is deep ember red, never bright red; cinnabar stays a small accent.
+- The Rift: indigo-black (blue-leaning, never violet) with a narrow cold rim, dimmer than the Ghost Flame cyan, which is the only cyan light.
+- No pink, magenta or purple (keying colours).
+
+**Remove:** flower decals; glowing gold; strong Rift glow; evenly spaced trees; scattered small rocks; detail inside the word-card zones; high-contrast ring engraving; bright red on Draconis.
 
 **One beat per day and night** (the sun stays south-west; height, colour and weather change):
 
 | Beat | What happens | Light, weather, colour |
 |---|---|---|
-| Day 1 | Fort, Archer Tower, villagers chop | Morning after rain, wet stones shining, mist lifting off the brook; jade and gold |
-| Night 1 | 10 Hopping Zombies; the Rift opens for the first time | Clear; low cold moon from the upper right; ink glow at the top edge; amber lanterns on the towers |
+| Day 1 | Fort, Archer Tower, villagers chop | Morning after rain, wet flags with speculars kept inside the road's value band, mist lifting off the brook; jade and soft gold light |
+| Night 1 | 10 Hopping Zombies; the Rift opens for the first time | Clear; low cold moon from the upper right; the ink's narrow cold rim at the top edge, no glow; small amber lantern cores on the towers |
 | Day 2 | Barracks | High thin cloud, wind in the grass |
 | Night 2 | Zombies and the first Ghost Flames | Ground mist along the brook; the Ghost Flames are the only cyan lights |
-| Day 3 | Gold Mine, Cannon Tower, Fort level 2 | Bright summer gold, big cumulus shadows; the sky turtle's shadow crosses the field |
-| Night 3 | Split Blobs | Lantern night: paper lanterns drift north over the field |
+| Day 3 | Gold Mine, Cannon Tower, Fort level 2 | Clear high summer sun, warm but never the word cards' gold, one or two huge cumulus shadows; the sky turtle's shadow crosses the field |
+| Night 3 | Split Blobs | Lantern night: paper lanterns drift north over the field, small amber cores, not pools of light |
 | Day 4 | Upgrades | Warm haze, dust motes in the sun shafts under the boughs |
 | Night 4 | Raccoon Dogs (drums), a River Serpent, packs | Fog banks roll in from the gorge; foes appear out of the fog |
 | Day 5 | Fort level 3 | A storm front darkens the top edge; low light breaks under it; wind bends the boughs |
-| Night 5 | River Serpents, then **Mộc Tinh rises** on the road | Thunderstorm, rain, lightning; the ink tide reaches the fork; the mist shifts 20 % toward the boss's amber-moss; root cracks spread across the road; when it retreats the rain stops |
+| Night 5 | River Serpents, then **Mộc Tinh rises** on the road | Thunderstorm, rain, lightning off frame (a short cold lift in the mist, below the word cards); the ink tide reaches the fork; the mist shifts 20 % toward the boss's amber-moss; root cracks spread across the road; when it retreats the rain stops |
 
 ### 3.7 Set dressing (only what the frame shows)
 
 | Item | Count and scale |
 |---|---|
-| Road | Flagstone lane 3.8 m wide (±15 %), worn verge 0.5 m; junction plazas at the fork and the merge; a dressing item every 2–6 m (kerb stones, grass tufts, broken slabs, puddles); 4 roadside lantern posts (2.5 m) at the two plazas |
-| Sun-Star Commons | 1 ring, 16 m across, flush with the turf, moss in the grooves |
-| Silver Brook | 3 m of water, 1 m banks, 2 cascades, 30 reed clumps (1.5–2.5 m), 20 river stones |
-| Gold spur and node | 1 spur (9 m) with gold seams; gold piles and the mine cart (existing `3d/props/gold-mine-cart.glb`, `gold-pile-1…4.glb`) |
-| Trees | 36 choppable trees (sea-almond, mountain pine, 8–14 m); stumps regrow at dawn |
-| Understory | Ferns and shrubs (1–2 m) only at grove edges; wildflower drifts; grass blades 1,600 (Medium) to 4,000 (High) |
-| Rocks | 40 limestone boulders (0.6–2.5 m), never on a lane or a build spot the player uses often |
-| World-edge window | Lip rocks, mist, one pinnacle side |
+| Road | Wet fitted limestone flags, lane 3.8 m wide (±15 %), worn centres, broken moss lines, darker damp joints, worn verge 0.5 m; junction plazas at the fork and the merge; a dressing item every 2–6 m (kerb stones in the flags' own grey, grass tufts, broken slabs, puddles); in the top band the detail merges into large masses; 4 roadside lantern posts (2.5 m) at the two plazas, small amber cores |
+| Sun-Star Commons | 1 ring, 16 m across, flush with the turf, 10–15 % lighter than it, moss and dirt over 15–20 % of it, low-contrast grooves |
+| Silver Brook | 3 m of water in an irregular cleft, 1 m banks of dark wet stone, 2 cascades (the only foam), 30 reed clumps (1.5–2.5 m), 20 river stones, some under water to break the line |
+| Gold spur and node | 1 spur (9 m, lowest 3 m in frame) of pale limestone strata with muted ochre seams; gold piles and the mine cart (existing `3d/props/gold-mine-cart.glb`, `gold-pile-1…4.glb`), not glowing |
+| Trees | 36 choppable trees (sea-almond, mountain pine, 8–14 m) at their sim positions, varied in crown size, species and lean; non-choppable trees beyond the top edge fill the overhang at uneven spacing (view only, not in `slice-1a.ts`, never on the shared road or the gate); stumps regrow at dawn |
+| Understory | Ferns and shrubs (1–2 m) only at grove edges; sparse flower colonies in muted tones, no decals; grass blades 1,600 (Medium) to 4,000 (High) |
+| Rocks | Up to 40 limestone boulders (0.6–2.5 m), only in clusters (grove edges, brook banks, the world-edge lip); no scattered small rocks; never on a lane or a build spot the player uses often |
+| Houses | Today's silhouettes with dark fired-tile roofs (concept); quiet pads under 60 % brightness; no detail inside the word-card zones above them |
+| World-edge window | Meadow lip, a limestone fracture, mist in the void, one huge karst wall cropped by the right edge |
 
 ### 3.8 Sources and the Tripo list
 
 | Piece | Source | Status |
 |---|---|---|
-| Fort, towers, mine, kits | `art-src/3d/buildings/*.glb`, `3d/kits/*` | Keep (owner 01/11) until the review; relight |
+| Fort, towers, mine, kits | `art-src/3d/buildings/*.glb`, `3d/kits/*` | Keep (owner 01/11) until the owner approves the painting; relight; then dark fired-tile roofs on the same silhouettes |
 | Bridge, kerb stones | `3d/props/cau-go.glb`, `3d/props/da-ke.glb` | Keep, relight |
-| Ground: meadow, moss, road, verge | ambientCG and Poly Haven CC0 PBR ground sets (mossy grass, wet earth, gravel, flagstone) with our painted decals on top; Quick_Grass (MIT) for blades | Asset download with the licence recorded |
-| Trees and rocks | Free packs first, as for Dragonhold (owner 01/11): Poly Haven CC0; Quaternius only after the owner accepts QAL; the accepted 116 billboards as the fallback | To try |
-| Water | three r170 `Water2` (MIT) + CC0 normal and flow maps; our foam and splash art | Code |
+| Ground: meadow, moss, road, verge | Tiling ambientCG and Poly Haven CC0 PBR ground sets (mossy grass, wet earth, gravel, flagstone), vertex-blended into the meadow's bands, with our painted decals on top (no flower decals); Quick_Grass (MIT) for blades | Asset download with the licence recorded |
+| Trees and rocks | Free modular packs first, as for Dragonhold (owner 01/11): Poly Haven CC0 trees and CC0 modular limestone rocks; Quaternius only after the owner accepts QAL; the accepted 116 billboards as the fallback | To try |
+| Water, mist, gorge edge | three r170 `Water2` (MIT) + CC0 normal and flow maps; our foam and splash art; mist and fog shaders; the gorge edge is terrain, fog and one cropped CC0 rock wall | Code |
 | Rift, Ghost Flames | Our ink art + Unity Labs CC0 flipbooks, five-phase VFX | Art exists |
-| Sun-Star Commons | New small 2D decal ticket (Codex) or a CC0 paving material through a mask | New |
+| Sun-Star Commons | A decal or a displaced mesh: new small 2D decal ticket (Codex) or a CC0 paving material through a mask | New |
 | Light | Poly Haven CC0 HDRI for image-based light (no visible sky); r170 `GodRaysShader` (MIT) for the shafts; cloud-shadow shader with CC0 noise | Code |
 | Characters | All listed in 3.5 | Exist; rigs needed for villagers and Mộc Tinh |
+
+**No bespoke environment model is needed** (review): CC0 limestone and modular rocks, tiling ground materials, a decal or displaced mesh for the ring, vertex blending, water and mist shaders, VFX and modular trees cover the frame.
 
 **Tripo, ordered by "seen in the battle frame": none for map 1.** Everything the frame shows exists or comes from free packs and shaders. Not requested now:
 - the Guardian statue (out of frame);
 - the dragon stairway and the bronze-drum terrace (the knoll is gone; the flat sun-star ring replaces the terrace);
 - ruined watchtowers, hamlet houses and the cliff wall (out of frame);
 - the stone arch bridge (under the run panel until D3);
-- the houses (after the review, owner 01/11).
+- the houses (dark fired-tile roofs on the same silhouettes, after the owner approves the painting).
 
 ### 3.9 What is wrong with today's version
 
@@ -380,19 +456,23 @@ Evidence: the Home capture on `td-units-3d`, High, 1280 × 720, day 1 with the s
 4. **The brook is a concrete gutter**: a straight grey strip with a plank bridge, and half of it sits under the run panel.
 5. **No scale.** The top band is bare lawn: nothing is cropped by the edge, nothing rises, no edge of the world. Nothing stands taller than the Archer Tower.
 6. **The centre is empty.** The road loop encloses about a sixth of the frame, all plain lawn.
-7. **Off-bible thatched houses** (kept until the review).
+7. **Off-bible thatched houses** (kept until the owner approves the concept, which paints dark fired-tile roofs).
 8. **HUD over play**: the bridge, the north cascade and 7 trees under the run panel (D3).
 
-### 3.10 The base image and the image prompt
+### 3.10 The base image and the concept painting prompt
 
-- **Base image:** `games/typing-defense/art-src/_review/maps/map1-base-1280x720.png`.
-- **Legend:** `map1-base-legend.md` beside it. It lists every colour, world position and screen box. The coloured blocks are placement codes, not colours to paint.
+- **Base image to attach:** `games/typing-defense/art-src/_review/maps/map1-base-1280x720.png`.
+- **Legend:** `map1-base-legend.md` beside it. It lists every colour, world position and screen box. The coloured blocks are placement codes, not colours to paint. Its words for the gold spur ("gold-veined") and the world edge ("a karst pinnacle") are v1.1; where they differ, this section and the prompt win. Its purple (Rift), pink (owlets), cyan (cascades, bridge) and yellow (spur) blocks are codes only: the painting has no purple or pink, no cyan light and no glowing gold.
+- **Tool:** ChatGPT image in Chat mode with High effort, or Adobe Firefly Image 5 with the base image as composition reference.
+- **Acceptance:** 8.5 or more from two blind judges against 1.2; lanes, foes and our units readable in a half-size grey copy, and the Commons gone in the grey blur test. ChatGPT expects 8.8–9.0 for a painting that follows this section.
+
+**Concept painting prompt** (ChatGPT, verbatim, 01/11/2026):
 
 ```text
-Paint over the attached base image. It is a real frame of the game: keep its camera, perspective and layout exactly - every road edge, the fork and merge plazas, the stream, every house, foe and soldier in place and at its size, and the grey HUD boxes flat grey. Replace each coloured block with what the legend names. No text, no sky, no horizon.
-
-Moment: dusk of the first night in Silverfall Meadow, a high meadow on the brink of a misty gorge. Light: low golden sun from the lower left, long sharp shadows reaching to the upper right, warm rim light on stone; cool jade-teal in every shadow, never black. At the top edge, the ink of a rift spills down the old flagstone road, indigo-black with a cold rim, its edges curling like burnt paper, grey wisps rising out of frame; a pack of hopping zombies waits in it at the fork. Along the top edge a forest of sea-almond and mountain pine overhangs from beyond the frame, sun shafts between the trunks; at the top right a gold-veined limestone spur rises out of frame and gorge mist breathes over the trees. Materials: wet fitted limestone flagstones with worn verges and moss, a jade-teal meadow with drifts of wildflowers, a silver-jade brook in a limestone cleft with small cascades and reeds, a worn sun-star ring inlaid in the turf in the centre, half overgrown. Life: an ember-red winged dragon glides over the left road, his shadow on the stones; spearmen hold the merge; owlet helpers work at the cannon tower; villagers chop in the grove on the left. Lanterns lit on the towers. Painterly-realistic, epic scale, bold readable shapes; keep the ground under houses calm and darker than the word cards will be.
+Use the supplied Wordwoven gameplay capture as the exact composition reference. Preserve the 42° battle camera, framing, roads, stream, plazas, four house silhouettes, soldiers, foes and gameplay spacing. Upgrade only the world into a painterly-realistic commercial fantasy key frame at dusk. At the north edge, show indigo-black Rift ink entering from off-screen, curling like scorched paper over the shared road, with a restrained cold rim, grey-withered grass and thin smoke cropped by the frame. Keep a small readable zombie pack in the fork. Build a cropped forest edge across the top: sea-almond and mountain-pine trunks, low boughs and overhanging crowns, warm sun shafts, no visible sky. Add the low limestone spur behind the mine with muted ochre mineral seams, not glowing gold. Inside the loop, inlay a worn 16 m radial limestone sun-star ring flush with turf, mossy and low-contrast. Render the Silver Brook as silver-jade water in a limestone cleft with reeds, stones and two small cascades. At right, show the meadow lip, gorge mist and a cropped karst wall. Keep Draconis banked and readable, emphasizing his long shadow. Add owlet workers, villagers chopping, amber tower lanterns, wet flagstones, jade-teal shadows and drifting cloud shadows. Replace thatch with dark fired-tile roofs. Keep HUD and word-card zones flat dark grey. No text, sky, horizon, religious objects, pink, magenta or purple.
 ```
+
+The v1.1 prompt is superseded; git history keeps it.
 
 ---
 
@@ -404,6 +484,15 @@ Rules each of these must meet in the 42° battle frame (from 1.3):
 - the muster ground sits at least 45 px below the top edge (3.5 m in frame);
 - no lane, crossing or resource under a HUD box.
 
+ChatGPT's idea review (01/11, with map 1) is applied in each entry below:
+
+| Map | Idea score | Verdict |
+|---|---|---|
+| Whitestone Bay | 8.6 | Strong for this camera |
+| Old Rootwood | 8.8 | The strongest for this camera |
+| Goldstair Terraces | 8.2 | Beautiful but risky: gold and the festival can overpower roads and cards |
+| Starsea Rift | 7.3 | The weakest: its premise needs sky and a vertical drop |
+
 ### 4.1 W1-2 Whitestone Bay (`w1-whitestone`)
 
 - **Story.** The Storm Eagle has seized the Stone Otters' boats and gold. Two Rifts open on the beach while the tide turns; winning back the bay returns the feather that carries half of the banyan's lost name.
@@ -412,7 +501,8 @@ Rules each of these must meet in the 42° battle frame (from 1.3):
   - The Boat Cove (fish ponds) in the west; the rich headland in the east under the flight line.
   - The Tide changes every two waves: low tide favours the west Rift and pays the ponds ×1.5; high tide the reverse.
 - **Scale in the 42° frame.**
-  - The surf line and wet sand are the top band; seen from above, waves roll in through the arches of a colossal three-arched sea gate whose feet stand in the surf and whose roofs leave the frame.
+  - Review (8.6): strong for this camera. The surf lines, the wet tide flats and the sea gate's huge shadow carry the scale.
+  - The surf line and wet sand are the top band; seen from above, waves roll in through the arches of a colossal three-arched sea gate whose feet stand in the surf and whose roofs leave the frame. Keep the arches mostly cropped; the gate's huge shadow across the tide flats shows its size.
   - The tide visibly moves the waterline ±6 m (a shader uniform, wet-sand darkening).
   - A stone lantern tower on the headland replaces the old striped lighthouse.
   - The sea pillars are seen only on the title.
@@ -432,9 +522,9 @@ Rules each of these must meet in the 42° battle frame (from 1.3):
   - Two Rifts at the side edges and two separate trails that meet just before the Fort.
   - The Root River divides the map, with three crossings: stepping stones (only Lam can jump them), Tre's bridging point and the Red Bridge.
   - Walkers off the trails move 30 % slower. The Canopy rule: three or more trees near a house cut ranged damage by 40 %.
-- **Scale in the 42° frame.** Ideal for this camera:
+- **Scale in the 42° frame.** Review (8.8): the strongest idea for this camera. The giant roots cropped by the top edge and the central sinkhole give real depth; **the roots must never hide the trails**.
   - giant aerial roots arch across the top band like the vaults of a hall, cropped by the edge;
-  - root walls 2–3 m high snake across the ground;
+  - root walls 2–3 m high snake across the ground, never across a trail and never just south of one, where they would hide it;
   - a 10 m sinkhole with a waterfall pouring into darkness sits at the centre and reads from above;
   - dapple light through the canopy.
   - The banyan's trunk itself is never in frame.
@@ -452,13 +542,14 @@ Rules each of these must meet in the 42° battle frame (from 1.3):
   - One Rift on the highest terrace.
   - One stair-road zigzags down four terrace levels (2–3 m drops with retaining walls).
   - Houses on a higher ledge get +10 % range.
-- **Scale in the 42° frame.**
-  - The terraces themselves are the giant: flooded paddies as gold mirrors stepping toward the camera.
+- **Scale in the 42° frame.** Review (8.2): beautiful but risky, because gold reflections and the festival can overpower the roads and the word cards. So:
+  - The terraces themselves are the giant: flooded paddies stepping toward the camera as muted mirrors, darker than the stair-road, with no gold glint next to a lane or under a card zone. Gold stays the word cards' colour.
+  - The festival lives at the frame's edges and in small amber lantern cores, never on the stair-road or around houses.
   - Thin silver falls spill between levels.
   - An ancient aqueduct's arches are cropped by the top edge.
 - **Life.**
   - Farmers from `worker-base`.
-  - Golden Piggy (`piggy.glb`, flagged cute: rebuild as a gilded bronze piggy spirit).
+  - Golden Piggy (`piggy.glb`, flagged cute: rebuild as a gilded bronze piggy spirit, muted gilt that never glows).
   - Water buffalo (`trau.glb`, needs a rig).
   - Cranes removed (no source).
 - **Needs.** Retaining walls and paddies from CC0 materials and terrain. Tripo only for the aqueduct piece the frame shows, after the layout check.
@@ -467,15 +558,17 @@ Rules each of these must meet in the 42° battle frame (from 1.3):
 
 - **Story.** The mountaintop where Draconis fell through a tear in the sky; the stolen constellation's name still burns in the crater.
 - **Layout (to re-check).**
-  - Floating rock islands over a cloud sea, joined by light bridges that switch on and off by wave (a lane detours 20 m when one is off).
+  - Floating rock islands over a cloud sea, joined by bridges that switch on and off by wave (a lane detours 20 m when one is off).
   - Two Rifts; the Fort island at the south.
-- **Scale in the 42° frame.**
-  - Looking down between the islands onto the cloud sea gives the depth this camera lacks elsewhere: the void is below, so it is in frame.
-  - The star-fall from the sky tear lights the top band; the tear itself stays out of frame.
+- **Scale in the 42° frame.** Review (7.3): the weakest idea, because its premise needs sky and a vertical drop, and light bridges clash with the signal colours. Rework it this way before its layout check:
+  - The depth comes from dark voids between the islands and the islands' undersides (hanging rock and roots) seen from above; the cloud sea lies far down and dim. No sky.
+  - The bridges keep their on/off rule but use no reserved signal colour (word-card ivory and gold, typed-letter glow, Ghost Flame cyan, the Rift's cold rim): for example stone spans that rise and sink.
+  - The Neon material, the star-touched seams and the tear light keep off those signal colours too, and off pink, magenta and purple (1.4).
+  - The star-fall from the sky tear shows only as light in the top band; the tear itself stays out of frame.
 - **Life.**
   - Foes: the World 1 models with a star-touched glow at their seams.
   - Rift Warden boss: no model yet. Candidates: Space Typing's `warden-*` bosses (inventory §6.3, style change needed).
-- **Needs.** CC0 rock and crystal meshes with the Neon material; Tripo only for the crash crater; shaders for the tear, bridges and cloud sea.
+- **Needs.** CC0 rock and crystal meshes with the Neon material; Tripo only for the crash crater; shaders for the tear light, bridges and cloud sea.
 
 ### 4.5 Later worlds (one line each)
 
@@ -498,7 +591,7 @@ Only map 1 exists. These reasons would repeat on every later map if the method s
 6. **No verticals and no edges**, so the light has nothing to act on.
 7. **Day and night were the same picture.** `td-units-3d` adds a night light (moon, blue mist, the Fort's lamps), not judged yet.
 8. **Water treated as a rectangle.**
-9. **Off-direction models** (thatch), now parked until the review.
+9. **Off-direction models** (thatch), now parked until the owner approves the painting (dark fired-tile roofs, 3.6).
 10. **We scored ourselves** against our own earlier screens.
 
 **What changes now:**

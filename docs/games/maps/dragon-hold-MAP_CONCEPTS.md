@@ -1,4 +1,6 @@
-# Dragonhold · Map Concepts (revision 2, 01/11/2026, for ChatGPT review)
+# Dragonhold · Map Concepts (v1.2, 01/11/2026)
+
+**Version.** v1.2, 01/11/2026: map 1 folds in ChatGPT's art-director review (8.1/10, `dragon-hold-CHATGPT_REVIEW.md`) and carries its image prompt; chapter 1 and the later chapters take its notes. Layout and camera unchanged.
 
 **What this is.** One concept per map, written before any map is built, for the owner to review and to send to ChatGPT (normal chat, High reasoning, not the work mode) for critique and a concept painting. A map is built only after its painting is accepted; the build is then judged against that painting, side by side at 1280×720.
 
@@ -9,12 +11,12 @@
 **What this document covers.**
 - Section 1: the camera, measured with one projection script; the sky decision; HUD zones.
 - Section 2: the kit (repo, Tripo, free packs, systems, creatures).
-- Section 3: Map 1 in full, with its base image for ChatGPT.
+- Section 3: Map 1 in full, with its base image and its concept painting prompt.
 - Section 4: Chapter 1 (20 stages), short.
 - Section 5: Chapters 2–26, one line each.
 - Sections 6–7: why the current maps fail; what needs the owner.
 
-## Changes in this revision (01/11, after the critic)
+## Changes in v1.1 (revision 2, 01/11, after the critic)
 
 - **Owner decisions of 01/11** (`docs/OWNER_QUEUE.md`):
   - Painterly-realistic replaces the "painted toy diorama" (O1).
@@ -48,7 +50,7 @@
 2. Capture it at 1280×720 from the battle camera on the play host, canvas only (word tags and HUD hidden).
 3. `make-base.mjs` draws each planned piece as a flat translucent block at its projected position and height, and greys the HUD.
 4. Write a legend mapping colours to pieces.
-5. ChatGPT reviews the concept as a senior art director, then paints **over** the base image: same layout, same camera, HUD zones grey, no text. The prompt covers only light, materials, mood and scale.
+5. ChatGPT reviews the concept as a senior art director and writes the image prompt. The painting is made **over** the base image (ChatGPT image in Chat mode with High effort, or Adobe Firefly Image 5 with the base image as composition reference): same layout, same camera, HUD zones grey, no text. The prompt locks the layout and changes only the look.
 6. Two blind judges score the painting against the commercial board. It needs 8.5.
 
 Reject and repaint if:
@@ -61,7 +63,7 @@ Reject and repaint if:
 - a horizon or sky shows;
 - the layout or camera moved off the base image.
 
-Map 1's paste-ready message is `docs/games/maps/dragon-hold-CHATGPT_MESSAGE.md`.
+Map 1's paste-ready message is `docs/games/maps/dragon-hold-CHATGPT_MESSAGE.md`; its review is `docs/games/maps/dragon-hold-CHATGPT_REVIEW.md` (8.1/10), folded into section 3 in v1.2.
 
 ---
 
@@ -155,9 +157,9 @@ So the battle image shows **no sky and no horizon**. Land runs past every edge. 
 
 | Rank | Model | Map 1 use | Frame share: default (O3) | Note |
 |---|---|---|---|---|
-| 1 | `dragon-statue` | The West Warden, scaled ×1.8 (≈22 m), crouched on a cliff ledge | 74,920 px, 8.1 % (65,824 px) | The hero. The new source must be colossal: a big head, wings with depth, weathered granite |
-| 2 | `hold-wall` | The Hold's north rampart, 8 m, along the bottom band | 25,560 px, 2.8 % (20,852 px) | Only the battlements and wall walk show above the HUD; the wall face matters little in this map |
-| 3 | `watchtower` | Rampart east end, (29, 15) | 23,764 px, 2.6 % (18,412 px) | |
+| 1 | `dragon-statue` | The West Warden, scaled ×1.8 (≈22 m), crouched on a cliff ledge | 74,920 px, 8.1 % (65,824 px) | The hero. The new source must be colossal: a big head, wings with depth, weathered granite, rooted in broken rock so it can grow out of the cliff (3.2) |
+| 2 | `hold-wall` | The Hold's north rampart, 8 m, along the bottom band | 25,560 px, 2.8 % (20,852 px) | Only the battlements and wall walk show above the HUD; the wall face matters little in this map. The source carries the Hold's masonry language (3.4) |
+| 3 | `watchtower` | Rampart east end, (29, 15) | 23,764 px, 2.6 % (18,412 px) | Same masonry language as the wall (3.4) |
 | 4 | `ruined-arch` | North gate, the Bridge Lane comes out under it | 10,556 px, 1.1 % (11,968 px) | Also the hero of S10 at ×2 |
 | 5 | `brazier` | Two flank the platform's north stair; four on the wall walk | 4,280 px, 0.5 % (4,492 px) | Small but the brightest points after the dragon; at the centre of play |
 | 6 | `hold-gate` | Not in the map 1 frame | 0 | First needed in S1 (the Hold's East Gate, left wing) and S17 |
@@ -166,8 +168,8 @@ So the battle image shows **no sky and no horizon**. Land runs past every edge. 
 
 | Rank | Model | Why | Until then |
 |---|---|---|---|
-| N1 | Dragon Platform: octagonal granite bastion, 8 m across, three stairs, two brazier sockets | At the centre of every map (≈ 8,800 px) | The current terrain dais with PBR granite (ambientCG) |
-| N2 | Old single-arch stone bridge, about 8 m span, deck 3.4 m | Map 1's choke point at the top centre (6,588 px); also C2 | The plank bridge stays; it is on the retire list once the stone bridge exists |
+| N1 | Dragon Platform: octagonal cream-granite bastion in the Hold's masonry language (3.4), 8 m across, three stairs, two brazier sockets | At the centre of every map (≈ 8,800 px) | The current terrain dais with PBR granite (ambientCG) |
+| N2 | Old single-arch granite bridge, damp and mossy, about 8 m span, deck 3.4 m | Map 1's choke point at the top centre (6,588 px); also C2 | The plank bridge stays; it is on the retire list once the stone bridge exists |
 | Later | One hero piece per chapter-1 stage (section 4: beacon basket, mill, dragon pillars, hive, mast, dam, causeway, Elder Bones, aqueduct, keep and granary, palisade) | Each is measured with its own stage's base image before it is asked | — |
 
 ### 2.3 Free, commercial-safe sources (verified on the source page, `FREE_ASSET_SOURCES.md`)
@@ -193,12 +195,12 @@ So the battle image shows **no sky and no horizon**. Land runs past every edge. 
 - **Light.** Poly Haven HDRI for image-based light; cascaded shadows for long dawn shadows; GTAO contact shadows; SMAA; a filmic tone map and one colour lookup per map and hour. Bloom only on fire and magic.
 - **Terrain.** Real cliffs from the height field with triplanar granite (P1), up to 30 m. Retire the "cliff blocks widened into a face".
 - **Water.**
-  - Rivers: flow-map shader (`Water2`) with depth colour, Fresnel, sun specular, foam from speed and around rocks and piers, rapids on drops.
+  - Rivers: flow-map shader (`Water2`) with depth colour, Fresnel, sun specular, foam from speed and around rocks and piers, rapids on drops. A per-map foam mask limits where foam shows (map 1: piers, cascade and stepping stones only, 3.4).
   - Waterfalls: a mesh with scrolling foam, spray particles and mist cards.
 - **Atmosphere.** Height fog pooled in river beds and hollows; light shafts at dawn and dusk; cloud shadows crossing the map every 10–15 s.
 - **Wind.** One wind field for pines, grass, banners (cloth vertex shader) and pennants.
 - **Grass.** 40–60 k instanced tufts (Quick_Grass method), kept 1.5 m off lanes and slots.
-- **Blight.** An animated violet creep at the gates, Black Mist volumes, and grass that withers along a lane after a wave passes.
+- **Blight.** An animated, low violet haze at the gates (thin and see-through on map 1, 3.4), Black Mist volumes, and grass that withers along a lane after a wave passes.
 - **Muster ground (view only).** During the build phase and the wave warning, the next wave's first groups stand at their gate: idle foes in the shade with glowing eyes. They walk onto the lane when the sim spawns them. The sim never reads it; the golden hashes stay the same.
 - **Occluder dither** (05 §3) for anything between the camera and a lane or a tag.
 
@@ -230,7 +232,9 @@ So the battle image shows **no sky and no horizon**. Land runs past every edge. 
 
 ## 3. Map 1 (playable today) · Bridge and Brook · `L2-cau`
 
-**Story beat.** The blight comes down the valley to the Hold's north face. Hỏa Long holds the river crossings below the West Warden, the stone dragon that has watched this pass for a thousand years.
+**Story beat.** The blight comes down the valley to the Hold's north face. Hỏa Long holds the river crossings below the West Warden, the stone dragon that has watched this pass for a thousand years. The picture is a dialogue between the two: living fire on the platform, dead stone on the cliff.
+
+**What v1.2 changes.** Only the look (sections 3.2–3.6 and 3.8); the layout of 3.1 and the camera stay. Where ChatGPT's review and v1.1 disagreed, the review wins unless it would move gameplay or readability; each case is marked in one italic line.
 
 ### 3.1 Gameplay layout (sim unchanged: lanes, slots, river path and golden hashes stay)
 
@@ -272,68 +276,113 @@ Both gates, both crossings and the platform sit in the clear middle of the HUD a
 
 ### 3.2 Hero landmark: the West Warden
 
-- **What it is.** A colossal stone dragon carved out of the west granite wall: the 124 `dragon-statue` scaled ×1.8 (≈22 m to the folded wing tops, head at ≈17 m). It crouches on a ledge with its wings folded and its head turned east, toward the bridge and the platform. Its two eyes are iron fire basins, dark until the map is won.
+- **What it is.** A colossal stone dragon that grows out of the west granite wall: the 124 `dragon-statue` scaled ×1.8 (≈22 m to the folded wing tops, head at ≈17 m). It crouches on a ledge with its wings folded and its head turned east, toward the bridge and the platform.
+  - It is carved from the mountain, not set on it: the wing roots sink into the rock, the talons merge with cracked ledges, and the cliff's erosion lines run on across the sculpture.
+  - Its two eyes are iron fire basins, dead and black until the map is won, so the living fire dragon keeps the strongest fire.
+  - With Hỏa Long it carries the map's main visual dialogue (3.3).
 - **Where it sits.** Centre (−33, −8), 34 m from the platform, outside the play circle, 15 m north of the Brook Lane's start and 18 m west of the river.
   - Default: base (187, 320), head (159, 157), wing tops (84, 98), all below the status bar.
   - O3: base (111, 317), head (70, 102); the wing tops crop at the left edge on purpose.
-  - Lit gold by the dawn sun on its east face. It leans outward, away from the play.
-  - Behind it the **west granite wall** (terrain with CC0 rock scans): 25–30 m, x −46…−37, z −34…+3, with three ledges and scree fans, running off the top-left corner.
+  - Dawn gold falls only on its east planes (brow, muzzle, shoulder, the leading edge of the folded wing); the rest stays cool granite in shade. It leans outward, away from the play.
+  - Behind it the **west granite wall** (terrain with CC0 rock scans): 25–30 m, x −46…−37, z −34…+3, with three ledges and scree fans, running off the top-left corner. Fractured cool grey granite with oversized fractures (5–10 m long), not the Hold's cream blocks (3.4).
+- **Scale cues.** Only young pines, 4–8 m, at its feet and on its ledges, so they read very small against it; the 14–24 m forest wall stays north of it and off its silhouette. The two lookouts on its shoulder ledge (3.5) give the human measure.
+- **Build notes.**
+  - Sink the Tripo statue 2–3 m into the cliff terrain; sculpt the height field's ledges up to its talons and wing roots.
+  - One world-space triplanar granite (P1, cool grey) on both statue and cliff, so erosion lines, lichen and moss streaks run across the seam; GTAO and a scree-and-moss blend hide what is left of it.
+  - The redone 124 `dragon-statue` source shows the statue rooted in broken rock, so Tripo gives a base that can merge (`TRIPO_TODO.md` row 1).
+  - Eye basins: no emissive and no fire until victory.
 - **Break-time conflict.** In prep and breaks the wave card prefers the top left and covers the Warden's head (13–341 × 67–293 at wave 1). Request to the UI lane: add the Warden's screen box to the wave card's keep-out zones (`screen-zones.ts`), so on this map the card goes to the top right or top centre. In waves the left wing is clear.
-- **Supporting pieces** (they frame the hero and do not compete with it):
-  - **North gate.** The 124 `ruined-arch`, 8 m, at (8.8, −30.5); the Bridge Lane comes out under it. Screen: base (747, 101), top (754, 25). Blight creep pours out under it.
+- **Supporting pieces.** They frame the hero and never compete with it. The north gate, the watchtower and the cascade sit 15–25 % below the Warden in contrast and detail: in shade, with flatter texture contrast and fewer small details.
+  - **North gate.** The 124 `ruined-arch`, 8 m, at (8.8, −30.5); the Bridge Lane comes out under it. Screen: base (747, 101), top (754, 25). It stands in pine shadow; a low, thin violet haze seeps out under it (3.4).
   - **The Hold's north rampart.** 124 `hold-wall` segments, 8 m, at z +18…+20 from x −28 to +28.
+    - It frames the foreground as a heavy dark band along the bottom: shadow side, slightly oversized battlements (fewer, larger merlons), dark pine crowns beyond both ends in the lower corners.
+    - The battlements grow in proportion only; the wall top stays at 8 m (y 598) so the south pads stay clear at every tilt. *The review's "oversized" does not raise the wall (gameplay).*
     - Its battlements and wall walk show as a strip at y ≈ 590–637 above the typing bar; the face is under the HUD.
     - The road from the platform's south stair runs to a gate passage behind the typing bar. The gatehouse itself is out of frame.
-  - **Watchtower.** 124 `watchtower`, 14 m, at the rampart's east end (29, 15): base (1101, 613), top (1173, 505). At O3 its top crops at the right edge.
+  - **Watchtower.** 124 `watchtower`, 14 m, at the rampart's east end (29, 15): base (1101, 613), top (1173, 505). At O3 its top crops at the right edge. Mostly in its own shade, lit along one edge only.
   - **Braziers.** 124 `brazier`, 3 m:
     - two on the platform at (±2.9, −2.9), flanking the north stair where the main lane arrives, clear of Bạch Long and the Sky Lane's end (747, 366);
-    - four on the wall walk.
-  - **The cascade.** The river drops twice (3 m and 2 m) at x 36…46, z −29…−23: screen 1080–1235 × 87–168. White water that moves in the corner of the eye. The new-foe card covers it for a few seconds when it shows.
-  - **The bridge.** An old single-arch stone bridge (not asked yet, 2.2 N2) replaces the plank bridge, same place and length: screen 633–718 × 169–285.
+    - four on the wall walk, burning low with no bloom, so the foreground band stays dark (3.3).
+  - **The cascade.** The river drops twice (3 m and 2 m) at x 36…46, z −29…−23: screen 1080–1235 × 87–168. A pale vertical rhythm, partly hidden by pines in front of it (all outside the play circle, none over the Sky Lane); foam and spray only at its two drops. No extra structures there. The new-foe card covers it for a few seconds when it shows. *v1.1 made it a white-water eye-catcher; the review wins.*
+  - **The bridge.** An old single-arch granite bridge (not asked yet, 2.2 N2) replaces the plank bridge, same place and length: screen 633–718 × 169–285. Older and wetter than the Hold: darker damp stone, moss on the arch ring and spandrels, wet stains under the deck line. Dawn gold only on the parapet crowns; foam only at the piers.
 
-### 3.3 Depth layers, light, colour
+### 3.3 Depth layers, focal order, light and colour
 
 | Layer | Content |
 |---|---|
-| Foreground frame (bottom band, mostly under the HUD) | Rampart battlements, the east watchtower, four braziers, banners; dark pine crowns beyond the wall ends. Shadow side, 25–35 % darker than the playfield |
-| Playfield (≤ 32 m) | Olive meadow with gold sun patches; granite outcrops. The river in a real bed: gravel bars, boulders, foam at the bridge. Bridge Lane in worn granite flags with gravel shoulders; Brook Lane in packed earth with a stone edge and wheel ruts. Roadside stones, tufts and puddles every 2–6 m |
-| Wings (32–46 m) | West: the granite wall, its ledges, the Warden, two scree fans. East: a forested ridge with the cascade, and a blighted dead pine at the Sky Lane's entry where the wasps gather |
-| Far band (top, z −32…−43) | The dark pine forest wall climbing north. Violet Black Mist at the north gate. The muster ground |
-| Sky | Never in frame (section 1). Present only as river reflections (dawn gold to cool blue), cloud shadows every 10–15 s and light shafts through the river mist |
+| Foreground frame (bottom band, mostly under the HUD) | A heavy dark band: rampart with slightly oversized battlements, the east watchtower, four braziers, banners; dark pine crowns in both lower corners. Shadow side, 25–35 % darker than the playfield |
+| Playfield (≤ 32 m) | Subdued olive meadow, no gold patches; low granite outcrops. The river in a real bed: gravel bars, boulders, foam only at the bridge piers and the ford's stepping stones. The two lanes, each in its own material (3.4), are the clearest and brightest ground. Within 2–4 m of a lane edge or the platform the ground stays simple: short grass, a few low stones and puddles |
+| Wings (32–46 m) | West: the fractured grey wall, its ledges, the Warden with young pines at its feet, two scree fans. East: a forested ridge with the cascade half hidden in pines, and a blighted dead pine at the Sky Lane's entry where the wasps gather |
+| Far band (top, z −32…−43) | The pine forest wall climbing north, darker and softer than the playfield (lower contrast, no fine detail). A low, thin violet haze at the north gate. The muster ground, half lost in pine shadow |
+| Sky | Never in frame (section 1). Present only as river reflections (cool slate blue with narrow warm highlights, never a gold sheet: the light budget below), cloud shadows every 10–15 s and faint light shafts through the river mist |
 
-- **Time:** dawn.
-- **Sun:** bearing 70° (east-north-east), elevation 24°.
-  - Long shadows fall west-south-west across the meadow.
-  - The Warden's east face takes the warm light. It is the largest lit mass but stays under 0.75 luma.
-  - The brightest points are the dragon's fire and the braziers.
-- **Weather:** clear, light breeze. Mist 0–3 m deep in the river bed; spray at the cascade.
-- **Colour script.**
-  - Shadows: deep pine green and slate blue.
-  - Light: dawn gold on granite and grass tips.
-  - Granite: cream.
-  - River: slate-teal with white foam, not turquoise.
-  - Blight: muted violet at the gates only.
-  - Ember orange: only on braziers and the dragon.
-- **Style:** painterly-realistic (O1). Real material response (wet stone, lichen, bark, needles) with a painterly grade, never toy plastic.
+**Depth.** The platform and the lanes are crisp. A slight mist lies in the river bed in the middle distance (0–3 m deep). The top pine wall reads farther because it is darker and softer, not because of fog. No uniform fog over the map.
 
-### 3.4 Set dressing
+**Focal order** (what the eye reads, in this order):
+1. Hỏa Long over the platform and the West Warden: the main dialogue, living fire against dead stone, the Warden's head turned to the dragon.
+2. The platform and the two lanes: the crispest and brightest ground.
+3. The bridge (the choke point) and the ford.
+4. The north gate and its muster: shadow and tiny eyes.
+5. The rampart, the watchtower and the cascade: the frame, never the subject.
 
+**Light budget and value hierarchy.**
+- **Time:** dawn. **Sun:** bearing 70° (east-north-east), elevation 24°: dawn gold from the upper right, long deep pine-green shadows falling west-south-west toward the lower left.
+- **Brightest:** Hỏa Long's fire and the two platform braziers. Only they bloom.
+- **Dawn gold lands on four things only:** the Warden's east planes, the bridge's parapet crowns, the platform rim and selected grass edges. The Warden's east planes are the largest lit mass and stay under 0.75 luma.
+- **Lanes:** core luma ≥ meadow + 0.15, and ≤ 0.6 under the word-tag band (section 1).
+- **Meadow:** subdued olive; with the lane rule it stays at about 0.45 luma or below. *v1.1 had gold sun patches on the meadow; the review wins.*
+- **Supporting landmarks:** watchtower, cascade, north gate 15–25 % below the Warden in contrast and detail.
+- **Top band:** the pine wall darker and softer than the playfield.
+- **Foreground band:** 25–35 % darker than the playfield.
+- **Weather:** clear, light breeze. Mist 0–3 m deep in the river bed; spray at the cascade; light shafts stay faint, never a gold field.
+
+**Colour reservations.**
+- Shadows: deep pine green and slate blue.
+- Dawn gold: only the four places above.
+- Granite: four families (3.4): cream blocks for the Hold, cool grey for the cliff and the Warden, dark damp stone for the bridge, worn polished flags on the Bridge Lane.
+- River: dark slate-teal; white only at the piers, the cascade and the stepping stones; never turquoise.
+- Ember orange and red: only Hỏa Long and the braziers. The banners are a dark, weathered ember cloth in shade, well below the signal orange.
+- Violet: only the thin haze at the two gates and the Moss Bannerman's banner.
+- Yellow-green `#C8D24A`: only foe eyes and blight cracks.
+
+**Style.** Painterly-realistic (O1). Real material response (wet stone, lichen, bark, needles) with a painterly grade, never toy plastic.
+
+### 3.4 Materials and set dressing
+
+**Materials** (each family keeps one language, so granite, grass and pine do not repeat):
+
+| Family | Look | Build note |
+|---|---|---|
+| The Hold (rampart, watchtower, platform) | Huge fitted cream granite blocks in large courses (1–1.5 m), dark iron cramps, worn chamfers, drainage grooves, lichen in sheltered joints, patches of repaired masonry. Narrow wall stairs (about 1 m). The rampart is the heaviest piece | The redone 124 `hold-wall` and `watchtower` sources and the N1 platform ask carry this language, so Tripo bakes it; decals add the repairs and joint lichen |
+| Cliff and the Warden | Fractured cool grey granite, oversized fractures 5–10 m long, lichen and moss streaks, scree at the foot | Triplanar P1 granite on terrain and statue (3.2); P2 rock scans for the faces |
+| The bridge | Older and wetter than the Hold: darker damp stone, moss, wet stains, one arch | N2 ask; until it exists the plank bridge stays |
+| Bridge Lane | Engineered: granite flags with wheel wear and polished worn edges, gravel shoulders | Road art (155) with a wheel-wear and edge-polish mask (lower roughness on worn edges) |
+| Brook Lane | Primitive: packed earth, gravel, damp footprints; stepping stones at the ford | Splat of P1 earth and gravel. A footprint decal needs a verified CC0 source logged in `THIRD_PARTY.md`; until then damp patches only |
+| River | Dark slate-teal water, gravel seen in the shallows and on the bars, narrow highlights only, never a turquoise stripe | `Water2` flow map with depth colour; foam mask limited to piers, cascade and stepping stones |
+| Meadow | Subdued olive grass, a few sun-catching edges | P1 ground under the grass instances |
+
+Both lanes stay brighter than the grass (section 1). *v1.1 gave the Brook Lane a stone edge and wheel ruts; the review moves wheel wear to the Bridge Lane.*
+
+**Set dressing.**
 - **Conifers** (P2):
-  - 160–220 tall pines and spruces, 14–24 m, in the forest walls (north, the north-east ridge, beyond the rampart ends);
-  - three inner stands of 6–9 pines: the north-west wedge across the river, by the SE pad, south of the ford;
-  - 40 young pines, 4–8 m, at the margins.
+  - 160–220 tall pines and spruces, 14–24 m, in the forest walls (north, the north-east ridge, beyond the rampart ends), never inside the Warden's silhouette;
+  - three inner stands of 6–9 pines: the north-west wedge across the river, by the SE pad, south of the ford; each stand stays 4 m or more from a lane edge and the platform;
+  - 40 young pines, 4–8 m, at the margins and at the Warden's feet and ledges;
+  - a few pines in front of the cascade, partly hiding it (3.2).
   - No round broadleaf crowns, no red crowns.
 - **Granite** (terrain with P1, scans from P2):
-  - the west wall, 25–30 m high, about 60 m long, three ledges, lichen and moss streaks;
+  - the west wall, 25–30 m high, about 60 m long, three ledges, oversized fractures, lichen and moss streaks;
   - two scree fans;
   - 14 boulders, 2–5 m, along the river; 30–40 river stones;
-  - six flat outcrops, 4–8 m, on the meadow, 3 m or more from the lanes.
-- **River.** A 6–8 m channel, 1.2 m deep; rapids over two ledges; two boulder islands; gravel bars on the inside of bends; foam lines at the bridge piers.
-- **Ford.** Nine flat stepping stones beside a sunken causeway visible under 20 cm of water; two broken causeway posts with iron rings.
-- **Platform.** Granite, two lit braziers by the north stair, stairs north, west and south.
-- **The Hold.** About five wall segments, one watchtower, four braziers on the wall walk, six hanging banners (ember cloth, dark iron dragon sigil, no letters).
-- **Ground cover.** 40–60 k grass tufts on the meadow; 300 ferns at the forest edges; moss on north faces.
-- **Blight.** Animated violet creep 8–10 m deep at both gates; three dead blighted pines at each gate; withered grass along a lane after a wave.
+  - six flat, low outcrops, 4–8 m, on the meadow, 4 m or more from the lanes.
+- **River.** A 6–8 m channel, 1.2 m deep; the cascade's two drops; two boulder islands; gravel bars on the inside of bends. Foam only at the bridge piers, the cascade and the ford's stepping stones; boulders and islands get a dark wake, not foam.
+- **Ford.** Nine flat stepping stones beside a sunken causeway visible under 20 cm of water; two broken causeway posts with iron rings. Foes still wade beside the stones (3.1).
+- **Platform.** An octagonal cream-granite bastion (N1; until then the terrain dais in the same granite), two lit braziers by the north stair, stairs north, west and south; dawn gold on its rim.
+- **The Hold.** About five wall segments with oversized battlements, one watchtower, four braziers on the wall walk, six hanging banners (dark weathered ember cloth, dark iron dragon sigil, no letters).
+- **Ground cover.** 40–60 k grass tufts on the meadow; 300 ferns at the forest edges; moss on north faces. Within 2–4 m of a lane edge and the platform the vegetation thins: short grass only, from none at 1.5 m to full density at 4 m; no ferns, tall tufts or young pines there. *v1.1 put roadside tufts every 2–6 m; the review wins.*
+- **Blight.** A low, thin violet haze (knee height, see-through) reaching 8–10 m out from both gates; three dead blighted pines at each gate; withered grass along a lane after a wave. *v1.1 had a thick creep; the review wins.*
+
+**Not on this map.** Gold patches on the meadow; turquoise water; foam outside the piers, the cascade and the stepping stones; uniform fog; extra structures (none at the cascade, nothing the lists above do not name); extra creatures; tall vegetation near the lanes and the platform; lit Warden eyes before victory; sky or horizon.
 
 ### 3.5 Life on the map
 
@@ -344,8 +393,8 @@ Both gates, both crossings and the platform sit in the clear middle of the HUD a
   - What stands there is the wave's real mix:
     - Moss Grunts thumping their stone knives;
     - Thorn Ant swarms boiling in a hollow;
-    - Moss Archers from wave 2, Tusk Boars pawing from wave 3, a Blight Wolf line pacing from wave 7;
-    - eyes glow `#C8D24A`.
+    - Moss Archers from wave 2, Tusk Boars pawing from wave 3, a Blight Wolf line pacing from wave 7.
+  - They half fade into the pine shadow and the thin haze: no rim light, bodies in shade, only their eyes show as tiny yellow-green points (`#C8D24A`).
   - In waves 5 and 10 the Moss Bannerman's tattered violet banner rises over the west cleft before he steps out.
 - **Wasps.** From wave 2, Thorn Wasps circle the blighted dead pine at the Sky Lane's entry (1069, 289).
 - **Defenders (Grove Wardens).** On structures only, never near a lane, so they are not mistaken for placed blockers:
@@ -355,18 +404,19 @@ Both gates, both crossings and the platform sit in the clear middle of the HUD a
   - two on the watchtower.
   - When a wave starts, they raise shields, the braziers flare and a horn sounds from the wall (a real audio file).
   - On victory the Warden's eye basins ignite and stay lit for the results camera.
-- **Ambient (no animals).** Mist drifts down the river; spray at the cascade; pines, grass and banners move in one wind; cloud shadows pass; embers rise from the braziers; chimney smoke rises from behind the rampart.
-- **Removed:** the two crows and the hawk of revision 1 (no verified animated source).
+  - *The review asks for tiny defenders; the 1.4× character scale (section 1) stays for readability, so the scale reads from the large masonry courses, the narrow stairs and the cliff fractures instead.*
+- **Ambient (no animals).** Mist drifts down the river; spray at the cascade; pines, grass and banners move in one wind; cloud shadows pass; embers and sparks rise from the braziers; chimney smoke rises from behind the rampart; dust puffs under marching foes on the Brook Lane's earth (none in the ford, little on the Bridge Lane's flags; P5 particles at foot contacts, view only).
+- **Removed:** the two crows and the hawk of the first draft (no verified animated source).
 
 ### 3.6 Where every piece comes from
 
 | Source | Pieces |
 |---|---|
-| Repo | Dragons; foes rebuilt from their Tripo originals; Grove Warden; traps; Herb Hut; road art (155) for the Bridge Lane flags; fire C for the braziers |
+| Repo | Dragons; foes rebuilt from their Tripo originals; Grove Warden; traps; Herb Hut; road art (155) for the Bridge Lane flags, with a wheel-wear and edge-polish mask; fire C for the braziers |
 | Tripo now (owner, after the redone 124 sources pass 8.5) | `dragon-statue`, `hold-wall`, `watchtower`, `ruined-arch`, `brazier` (`hold-gate` is not in this frame) |
 | Not asked | Dragon Platform (N1), stone bridge (N2); until then the terrain dais and the plank bridge stay |
-| Free sources | P1 granite, forest floor, meadow, river gravel; P2 pines, rock faces, boulders; P3 dawn HDRI for light; P5 spray, mist, embers; P6 water, shadows, AO, grade, grass code; P7 river and wind ambience |
-| Shaders | Flow-map river, cascade and foam; height fog and light shafts; cloud shadows; wind; blight creep; muster crowd; physically based scenery and the dawn grade |
+| Free sources | P1 granite (cream and cool grey), forest floor, meadow, packed earth, river gravel; P2 pines, rock faces, boulders; P3 dawn HDRI for light; P5 spray, mist, embers, sparks, dust; P6 water, shadows, AO, grade, grass code; P7 river and wind ambience. Footprint decals: no verified source yet |
+| Shaders | Flow-map river with a limited foam mask, cascade; river-bed mist and faint light shafts; cloud shadows; wind; thin blight haze; muster crowd; physically based scenery, triplanar cliff-and-Warden granite and the dawn grade |
 
 ### 3.7 What is wrong with today's version (Ultra and High, 01/11, `tmp/diag-0111/`)
 
@@ -381,31 +431,20 @@ Both gates, both crossings and the platform sit in the clear middle of the HUD a
 9. **Paths are smears:** even-width sand ribbons, the "finger smear" `PATH_QUALITY.md` bans.
 10. **The map is empty between waves:** no garrison, no muster, no banners, no smoke. Foes appear from nowhere at the lane end.
 
-### 3.8 ChatGPT: base image and prompt
+### 3.8 Concept painting: base image and prompt
 
-- **Base image:** `games/dragon-hold/art-src/_review/maps/map1-base-1280x720.png`. It is the real battle-camera capture (wave 1, canvas only, desaturated) with translucent blocks for the planned pieces and grey HUD boxes. No text.
+- **Base image to attach:** `games/dragon-hold/art-src/_review/maps/map1-base-1280x720.png`. It is the real battle-camera capture (wave 1, canvas only, desaturated) with translucent blocks for the planned pieces and grey HUD boxes. No text.
+- **Tool:** ChatGPT image in Chat mode with High effort, with the base image attached; or Adobe Firefly Image 5 with the base image as the composition reference. Claude's browser could not attach the image on 01/11, so the owner attaches it.
 - **Legend:** `games/dragon-hold/art-src/_review/maps/map1-base-legend.md`.
 - **Made by:** `games/dragon-hold/tmp/map-concepts/{scenario-base.mjs, map1-plan.mjs, make-base.mjs}`.
 - **The message:** `docs/games/maps/dragon-hold-CHATGPT_MESSAGE.md` (review brief, constraints, this concept condensed, the other maps in one paragraph).
+- **The review:** `docs/games/maps/dragon-hold-CHATGPT_REVIEW.md`: 8.1/10, with 8.7–9.0 expected once sections 3.2–3.5 are carried out.
+- **Acceptance:** two blind judges, both 8.5 or higher, against the commercial board and the owner's reference; then the reject list of section 0.
 
-The image prompt covers light, materials, mood and scale only; the layout comes from the base image:
+**Concept painting prompt** (ChatGPT, verbatim; the layout comes from the base image):
 
 ```text
-Paint over the attached base image. Keep its exact camera, framing and layout: every lane, the river,
-the ford, the platform, the dragons, the foes and every coloured block stay where they are; replace each
-block with the piece the legend names; keep the grey HUD boxes plain grey. No sky, no horizon, no text.
-Light: dawn, low sun from the upper right (east-north-east, about 24 degrees), long shadows falling
-toward the lower left, warm gold on the east faces of granite, cool slate-blue shadows, mist lying in the
-river bed, spray at the cascade, light shafts through the mist.
-Materials: painterly-realistic, top commercial fantasy strategy quality. Weathered cream granite with
-lichen and moss, wet river stones, olive meadow grass with gold tips, worn granite flagstones on the
-bridge road, packed earth with wheel ruts on the ford road, tall dark pines with real needle mass, a fast
-slate-teal river with white foam (not turquoise), iron and ember-cloth on the rampart.
-Mood: an ancient mountain pass at first light, quiet before the attack; the blight is muted violet mist
-and creep at the two gates only; small glowing yellow-green eyes in the shade where the next wave waits.
-Scale: the stone dragon on the left is ten times a soldier's height and makes everything else small;
-foes and defenders are small but readable; the rampart along the bottom is massive. Not a miniature,
-not a diorama, not toy-like.
+Use the supplied base capture as an exact composition reference. Preserve the identical high strategy camera, 55° downward angle, 30° vertical FOV, framing, terrain boundaries and every gameplay position. Do not move the two lanes, river, ford, bridge, central platform, dragons, foes, gates or HUD zones. Replace placeholder scenery with a painterly-realistic ancient mountain fortress environment at dawn. Transform the central dais into an octagonal cream-granite bastion with north, west and south stairs. Keep the red-orange fire dragon hovering above it and the pearl-white dragon at the southwest edge. Build the colossal weathered West Warden stone dragon into the left cliff, its folded wings and ledges merging naturally with 25–30 m fractured granite. Replace the plank bridge with a damp mossy single-arch granite bridge. Create dark pine forest around the ruined north arch, localized muted-violet blight mist and shadowed enemy muster groups. Make Bridge Lane worn granite flags and Brook Lane packed earth with stepping-stone ford, both clearly readable. Add slate-teal river water, gravel bars, restrained white foam, cascade spray and low river mist. Add the Hold rampart, watchtower, braziers, Grove Wardens, banners and smoke. Dawn gold comes from upper right; deep pine-green shadows fall lower left. Keep HUD areas plain dark grey and empty. No text, sky, horizon, extra creatures or new structures.
 ```
 
 ---
@@ -420,6 +459,11 @@ not a diorama, not toy-like.
 - Light moves dawn → morning → noon → golden hour → dusk → blue hour; no full night.
 - A system that is not yet open has no slot on the map: trap slots from S2, block points from S6, house pads from S16 (04 §6.1).
 - Camera as map 1 unless noted. Wing heroes use the slots of section 1: centre at |x| 31–35, z −14…0.
+- **One unmistakable dominant silhouette per stage** (ChatGPT review). Grass, pine, granite and river repeat across the chapter, so each stage is remembered by one shape: its hero landmark, at least 22 m (section 1), alone on its wing, with a ground and stone that set it apart from its neighbours.
+  - The benchmarks: S3 (the dragon-head quarry), S11 (the granite needle above the cloud sea), S14 (the dragon-head spillway dam), S15 (the elder-dragon fossil), S18 (the hanging glacier), S20 (the boar lord's den).
+  - The weakest were the mill (S7), the herb terraces (S16) and the granary (S17); v1.2 gives each a bigger silhouette below.
+  - A stage whose hero is under 22 m, or shares its silhouette with another stage, is redesigned before its prompt is written.
+- **Map 1's look rules apply** (3.3–3.4): one focal dialogue, a light budget, separate stone families, lanes as the clearest ground, thin vegetation near the lanes.
 - **Life in every stage:** a muster ground at each gate (the stage's own foes), Grove Wardens on structures, the dragons. No ambient animals.
 - **Before a stage is built:** grey-box it, capture its base image, measure its frame shares, then write its prompt (light, materials, mood, scale) and send it to ChatGPT.
 
@@ -431,7 +475,7 @@ not a diorama, not toy-like.
 | 4 | The Ant Hills | A burned logging slope | L1-s | Thorn Ant swarms | The Fallen King pine, right wing · P2 pine scan laid down plus a root plate (not asked) | Golden morning |
 | 5 | The Bannerman | Signal Hill | L1-thang | General, aura, Seal Break | The Beacon of the Pass, left wing · 124 `watchtower` ×1.4 crowned with `brazier` ×3 (reuse) | Late afternoon |
 | 6 | Wardens of the Grove | The Elder Grove | L1-s | Grove Warden | The Elder Pine, right wing · P2 giant conifer plus terrain roots | Morning shafts |
-| 7 | The Mill Race | The Hold's mill | L1-thang | Small Potion | The Great Mill, right wing · not asked | Misty morning |
+| 7 | The Mill Race | The Hold's mill | L1-thang | Small Potion | The Mill Tower and its trestle flume, right wing · not asked | Misty morning |
 | 8 | Horns at Noon | The Long Stair | L1-s | Call waves early | The Long Stair, left wing · terrain stair; dragon pillars not asked | Noon |
 | 9 | The Warm Springs | Hot spring terraces | L1-thang (short) | Review | The Steam Falls, top right · terrain, travertine (P1), shaders | Soft morning |
 | 10 | The Captain's Gate | The old outer wall | L1-s | Mini-boss: Moss Bannerman at W 16 | The Broken Gate, right wing · 124 `ruined-arch` ×2 and `hold-wall` stubs (Tripo now) | Dusk |
@@ -440,8 +484,8 @@ not a diorama, not toy-like.
 | 13 | Nets and Wind | The Windgap | L1-s + sky | Net Launcher | The Windgap Mast, left wing · not asked | Breaking overcast |
 | 14 | The Flood Bridge | Below the Upper Dam | L1 with bridge and ford | Pine Bomb; flood | The Upper Dam, right wing · not asked (dam, causeway) | Bright morning, spray |
 | 15 | Dragon's Rage | The Elder Bones | L1-thang | Dragon Rage, Inferno | The Elder Bones, left wing · not asked | Afternoon gold |
-| 16 | The Herb Terraces | Healers' terraces | L1-s | Herb Hut | The Aqueduct, right wing · not asked | Morning |
-| 17 | Hold the Granary | The Hold's bailey | L1-thang | Dragon Heart, Hard Scale; Granary objective | The Inner Keep, left wing · 124 `hold-wall`, `watchtower`, `hold-gate` kit; granary not asked | Harvest gold |
+| 16 | The Herb Terraces | Healers' terraces | L1-s | Herb Hut | The Great Aqueduct, two tiers, right wing · not asked | Morning |
+| 17 | Hold the Granary | The Hold's bailey | L1-thang | Dragon Heart, Hard Scale; Granary objective | The Inner Keep and the fresh breach, left wing · 124 `hold-wall`, `watchtower`, `hold-gate` kit; keep and granary not asked | Harvest gold |
 | 18 | The Roar | The Echo Cirque | L1-s | Urgent word, Dragon Roar | The Hanging Glacier, left wing and top · terrain and ice shader | Cold bright morning |
 | 19 | Campfire | The last camp | L1-thang (short) | Review; boss preview | The Tusk Wall palisade, top band · not asked | Blue hour, campfire |
 | 20 | Tuskfather | The Den | L1-thang (long charges) | Boss B01 | The broken Tusk Wall and the lair mound · palisade not asked; boss = `tusk-boar` scaled | Violet haze → sunburst |
@@ -474,7 +518,7 @@ not a diorama, not toy-like.
   - Grove Wardens step out of the root hollows when placed.
 - **S7 The Mill Race.**
   - Straight lane crossing the mill race on a low culvert (no slowdown).
-  - A three-storey granite-and-timber mill with a 10 m turning wheel on the right wing.
+  - The Mill Tower: a 24 m granite mill tower on a cliff spur at the right wing, its 16 m overshot wheel fed by a timber flume on tall trestles that comes down the wing from the north; the race falls white off the wheel into the gorge. The silhouette is the wheel and the trestle line against dark pines. *v1.1's three-storey mill with a 10 m wheel was under the 22 m hero rule and lacked drama (review).*
   - Keep it massive and cool, never a cozy village.
 - **S8 Horns at Noon.**
   - An S-lane switching back down a terraced slope.
@@ -507,12 +551,13 @@ not a diorama, not toy-like.
   - The stone-fossil skeleton of an elder dragon on the left wing: a 10 m skull and ribs of 12–15 m. Embers glow in the skull as Rage fills. Stone and moss, never gore.
 - **S16 The Herb Terraces.**
   - S-lane down terraces; house pads appear.
-  - Three 18 m aqueduct arches on the right wing, one span broken into a white ribbon fall.
+  - The Great Aqueduct: two tiers of granite arches, 30 m, striding across a gorge on the right wing and running off the frame edge so it reads endless; one upper span is broken and pours a white ribbon fall. *v1.1's three 18 m arches lacked drama (review).*
+  - The terraces are held by massive granite retaining walls, 4–6 m, stepping down the slope, so it reads as a mountain stair, not a garden.
   - Herb beds in sage, silver and white; no lavender (it reads as blight).
 - **S17 Hold the Granary.**
-  - Straight lane through a breach in the outer wall.
+  - Straight lane through a fresh breach in the outer wall: a rubble fan that stops 2 m short of the lane, broken timber hoardings, smoke from a fire on the wall walk.
   - The granary (objective) at (−9, 7), 11.4 m from the platform, kept low so it never covers the platform or a pad.
-  - The inner keep, its top cropped, on the left wing.
+  - The Inner Keep is the stage's one silhouette: a 32 m square granite keep on the left wing, top cropped, timber hoardings on its crown, a 12 m dragon-sigil war banner (no letters) down its face, harvest light raking it. *v1.1's keep and granary lacked drama (review).*
 - **S18 The Roar.**
   - S-lane over dark wet scree.
   - The glacier and its snow stay on the left wing and the top-left band only, never behind the tags. Dragon Roar shakes snow off the glacier lip.
@@ -529,6 +574,8 @@ not a diorama, not toy-like.
 ## 5. Chapters 2–26 (one line each)
 
 Each chapter is 20 stages in one region (04 §2.1). Stages 1, 10 and 20 are hand-built and get their own concept page, base image and prompt before production. Kits keep their signature mechanic (04); each chapter gets one hero set piece. No temples, shrines or worship objects. The boss source follows `MONSTER_MODEL_INVENTORY.md` §6.2 and §7.
+
+**Review notes (ChatGPT, 01/11).** The direction holds because each chapter changes scale, material, vegetation and atmosphere; keep that. The weakest idea is a Black Mist chapter that only recolours an earlier one: each Mist version changes silhouettes, damage, particles and materials. The floating-granite rift stays for the very end (C26): no floating islands or levitating rock before it.
 
 | Ch | Region, mood · title | Signature and hero set piece | Boss · model source |
 |---|---|---|---|
@@ -550,8 +597,8 @@ Each chapter is 20 stages in one region (04 §2.1). Stages 1, 10 and 20 are hand
 | C17 | Pine River, winter · The Frozen Hold | Deep snow; lanes swept dark for the tags; the Warden capped with snow | B17 Frost Stag · **no source** |
 | C18 | Violet Glade, bloom · The Flowering Wood | Pale blossom drifts | B18 Deep Centipede · **no source** |
 | C19 | Volcano, eruption · The Burning Sky | Lava lake, ash fall; red in the light, not the ground | B19 Black Wyrm · `draconis-v3` re-materialled |
-| C20–25 | The Black Mist (Act III) | Earlier regions under the Mist layer, with each chapter's rule (02 §4.4). In C25 the Hold is in ruins: the Warden broken, the bridge fallen | Twin bosses from above |
-| C26 | The Mist Rift · Heart of the Mist | A chasm with floating granite islands; three lanes on bridges; the drop shows at the wings and lower corners | B20 Mist Mother · Space shadow bosses (inventory D16) |
+| C20–25 | The Black Mist (Act III) | Earlier regions under the Mist layer, with each chapter's rule (02 §4.4). Each one changes silhouettes (landmarks broken, collapsed or overgrown), damage, particles and materials, never only the colour. In C25 the Hold is in ruins: the Warden broken, the bridge fallen | Twin bosses from above |
+| C26 | The Mist Rift · Heart of the Mist | A chasm with floating granite islands, the only floating rock in the campaign; three lanes on bridges; the drop shows at the wings and lower corners | B20 Mist Mother · Space shadow bosses (inventory D16) |
 
 ---
 
@@ -572,6 +619,7 @@ Each chapter is 20 stages in one region (04 §2.1). Stages 1, 10 and 20 are hand
 
 ## 7. What needs the owner
 
+- **Map 1 concept painting.** Attach the base image and paste the prompt of 3.8 in ChatGPT (Chat mode, High effort), or run them in Firefly Image 5; then two blind judges at 8.5.
 - **Tripo, now.** The six 124 landmarks, after their Firefly sources pass 8.5 (`TRIPO_TODO.md` rows 1–6). For map 1 the order is `dragon-statue`, `hold-wall`, `watchtower`, `ruined-arch`, `brazier`, then `hold-gate` (first needed in S1).
 - **Tripo, later (not asked).** N1 Dragon Platform, then N2 stone bridge. Then one hero piece per stage, each measured on its own base image first.
 - **Camera O3.** Map 1 works at both cameras: the Warden's head and the arch stay in frame. The owner picks after Claude's camera trial images. If O3 becomes the default, the base image is recaptured with `--cam=o3`.

@@ -318,6 +318,8 @@ Bản chơi được đầu tiên có khoảng 4–5 ngày sau khi có GLB.
 
 ### 4.4 Prompt cho Tripo
 
+> **Sửa màu 01/11, khoảng 07:55** (theo ChatGPT duyệt map 1 Last Line): vàng dành cho Pack Leader. Nhân vật, drone và súng dùng **gốm ngà và graphite**, không dùng vàng hay trắng-vàng. Áo choàng xanh đen, chỉ có đường ngà rất mảnh, bỏ viền vàng. Drone là giọt nước nhọn hơn, chỉ một khe cyan hẹp. Ở mọi prompt dưới đây, đọc "white-gold" thành "ivory".
+
 Giữ nguyên văn các khối MODEL, TAIL-HERO và TAIL-GUN, nền `#00FF00` và phép kiểm 1254 px của phiếu `docs/codex-queue/156-ts-lightbearer-tripo.md`.
 
 **Nhân vật.** Dùng MODEL và TAIL-HERO, bốn góc trước, sau, trái, phải. Đính kèm `results-lose-bg.png`, `menu-bg.png` và `lightbearer-front.png`.
