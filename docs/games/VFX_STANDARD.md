@@ -946,6 +946,7 @@ Những điểm dưới đây em làm theo mặc định; anh chỉ cần lên t
   - `~/.agents/skills/threejs-*`;
   - `docs/games/{ART_ACCEPTANCE,NAMES_EN,DEPLOY_INDEPENDENCE}.md`;
   - `tools/codex-run/README.md`, `docs/CODEX_QUEUE.md`, `docs/tools/MAP_FACTORY.md` §9.2.
+- **Hào quang nhân vật (presence):** `docs/games/HERO_PRESENCE_VFX.md` (thư viện, công thức, cách thử; chia hình khối hay VFX ở `docs/games/CHARACTER_DESIGN_GUIDE.md` §7).
 
 ### Web (truy cập ngày 28/10/2026)
 
