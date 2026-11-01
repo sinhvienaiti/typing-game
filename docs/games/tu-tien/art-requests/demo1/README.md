@@ -3,13 +3,15 @@
 > **Vai:** prompt nguyên văn cho mọi ảnh của Demo 1 ([`../../ART_AUDIO_VFX_PLAN.md`](../../ART_AUDIO_VFX_PLAN.md) §4.2–4.3), theo chuẩn D52 (painterly-realistic) và D47 (quý phái). Chỉ model Adobe (Firefly Image 5). Mỗi prompt ≤ 1024 ký tự. Ảnh ra lưu `games/immortality-cultivation/art-src/<nhóm>/<id>.v<n>-try<k>.png` kèm `.prompt.txt`; không vào Git.
 > **Cổng:** hai giám khảo mù ≥ 8,5 (mức thị trường và, với ảnh nguồn 3D, mức hợp Tripo) trước khi dùng hay dựng. Kết quả chấm ghi ở `JUDGING.md` cùng thư mục.
 
-## 0. Khối chuẩn chung (dán vào cuối mọi prompt ảnh nguồn 3D)
+## 0. Khối chuẩn chung (dán vào cuối mọi prompt ảnh nguồn 3D) — bản 2, 01/11 ~14:00
+
+Bản 1 ("painterly-realistic AAA game concept sheet", nền `#00FF00`) làm Firefly vẽ kiểu truyện tranh và nền xanh loang hắt màu (`JUDGING.md`, Phong Lang v2 try1). Bản 2 dùng câu "photorealistic 3D render" và nền xám phẳng:
 
 ```text
-STYLE: painterly-realistic AAA game concept sheet, physically correct materials (weathered grey-blue limestone with lichen, dark ironwood grain, indigo-grey glazed tile, ivory jade, cold forged steel, layered silk with fine embroidery), cinematic key light from upper right 45°, soft cool fill, no cast shadow on the background, no ground plane. FRAMING: single solid object, flat base, three-quarter view from 32° above, centered, 8% margin on every side, uniform flat #00FF00 background. NO text, no logo, no effects, no particles, no extra objects, no duplicate views.
+Photorealistic 3D render, Unreal Engine 5 look, studio product shot: <CHỦ THỂ>. Not cartoon, not anime. <GÓC: Three-quarter view from 32 degrees above, facing front-left | Front view from 32 degrees above, facing the camera>. One cinematic key light from upper right 45 degrees, soft cool fill, no cast shadow, no ground plane, no platform. Single solid object, centered, 8 percent empty margin on every side, uniform flat medium-grey studio background. No text, no logo, no effects, no particles, no extra objects.
 ```
 
-Ảnh cảnh và tờ chuẩn không dùng nền `#00FF00` (xem từng prompt).
+Chuẩn chất liệu để prompt "nhìn" theo: ảnh chụp trang lookdev của game (xem `JUDGING.md`, kết luận sau ba vòng), không phải tờ Firefly.
 
 ## 1. Tờ chuẩn chất liệu `refs/material-sheet` (bước 1 của §3.1)
 
@@ -23,7 +25,35 @@ Kiểm sau khi tạo: 8 ô đủ, không chữ, ánh sáng cùng hướng, khôn
 
 ## 2. Ảnh nguồn 3D cho ba model mẫu (bước 2)
 
-Viết sau khi có kết quả chấm 26 ảnh Codex (`JUDGING.md`): prompt sửa đúng lỗi giám khảo nêu, giữ thiết kế đã duyệt (chân dung A cho Kiếm tu; Phong Lang và Thiết Bối Lang Vương theo `../m0b/02-five-families.md`, `../m0b/05-beast-kings.md`).
+Sửa đúng lỗi của `JUDGING.md` (một chuẩn, lề 8 %, cặp góc cùng khổ và tỉ lệ, chất tiên hiệp, Kiếm tu cầm kiếm, sói chỉ huy và Vương khác sói thường), giữ thiết kế đã duyệt (chân dung A; `../m0b/02-five-families.md`, `../m0b/05-beast-kings.md`). Mỗi prompt = phần chủ thể dưới đây + **khối chuẩn §0**. Đặt `STYLE` sau chủ thể. Cặp góc của một model tạo cùng một phiên, cùng tỉ lệ khung, mô tả y hệt, chỉ đổi câu góc nhìn.
+
+### 2.1 Kiếm tu nữ (`cultivators/kiem-nu.v2`, 3:4, hai góc: `-front`, `-back`)
+
+```text
+Full-body FRONT view, A-pose, arms open 30 degrees away from the body, of a noble young female sword cultivator with royal bearing and a tall straight posture: layered ivory silk robe with indigo trim and fine gold-thread cloud-and-crane embroidery, wide sleeves gathered into a few large clean folds, indigo sash with a white jade pendant, small jade crown on a high bun, calm dignified face, soft boots. Her sheathed sword Thanh Phong (cold blue steel hilt, indigo scabbard, jade fittings) hangs at her left hip. Large readable shapes, no loose hair strands, no flowing ribbons.
+```
+
+Góc sau: thay câu đầu bằng `Full-body BACK view, same A-pose, same character and outfit seen from behind, head not turned, the sword scabbard visible at the left hip,` rồi giữ nguyên phần còn lại.
+
+### 2.2 Phong Lang (`beasts/phong-lang.v2`, 1:1, hai góc: ba phần tư `-q` và trước `-front`)
+
+```text
+A lean corrupted spirit wolf standing with all four paws on the ground, head low and alert, ears back, lips drawn showing teeth: ash-grey fur in large clean clumps, black ink-wash corruption veins spreading over the shoulders and along the spine, faint pale-violet glow in the eyes, slightly larger than a real wolf, deep chest, long tail held low. Menacing, not cute. THREE-QUARTER view from 32 degrees above, the wolf facing front-left.
+```
+
+Góc trước: `... FRONT view from 32 degrees above, the wolf facing the camera.`
+
+### 2.3 Thiết Bối Lang Vương (`kings/thiet-boi-lang-vuong.v2`, 1:1, `-q` và `-front`)
+
+```text
+A massive ancient beast king wolf, two and a half times a wolf, standing square and heavy, head lowered in threat: dark iron-grey fur, the back and shoulders armoured with jagged black stone-and-iron plates rising like a mountain ridge, a crest of three stone spikes behind the skull, heavy dark-bronze chains with ivory jade seal tags hanging from the neck, old scars glowing faint violet with ink corruption, pale-violet eyes, huge jaw. Royal, menacing, ancient, one solid mass. THREE-QUARTER view from 32 degrees above, facing front-left.
+```
+
+Góc trước như 2.2.
+
+### 2.4 Sau khi tạo
+
+Script kiểm khung (lề ≥ 8 %, một khối, không bóng) → nới nền `#00FF00` nếu thiếu lề → hai giám khảo mù (M và T) → chỉ ảnh đạt 8,5 từ cả hai mới `--dry-run` rồi dựng, Phong Lang trước.
 
 ## 3. Cách chạy Firefly trong app
 
