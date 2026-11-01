@@ -16,6 +16,7 @@ Claude ghi vào đây mọi việc cần chủ dự án quyết hay tự tay là
 | O2 Model Dragonhold | Cây và đá thử gói miễn phí trước; **6 mốc lớn dựng trên Tripo** (khoảng 180 credit, chủ dự án dựng) |
 | Wordwoven | Draconis dùng lại bản v2 của Dragonhold; nhà giữ bản hiện có, quyết sau khi ChatGPT duyệt concept map |
 | Tripo dựng thử (01/11, 9h) | **Chờ ảnh đạt 8,5.** Không dựng thử tượng rồng v2b (8,0 / 8,3). Chỉ tiêu credit khi ảnh nguồn được hai giám khảo cùng cho từ 8,5 |
+| Nhân vật Last Line (01/11, khoảng 17:00) | **Đủ 4 góc** cho nữ xạ thủ và drone (Tripo multiview). Vẽ bằng ChatGPT (chế độ Chat), vì Firefly không giữ được một thiết kế qua 4 góc |
 | Còn lại | Duyệt hết theo đề xuất: dời Wordwoven sang 15–16/11; Claude thử camera Dragonhold rồi gửi ảnh; 6 loại flipbook đạn bằng Firefly; cây xa dùng bậc 4.000 tam giác |
 
 ## Còn chờ
