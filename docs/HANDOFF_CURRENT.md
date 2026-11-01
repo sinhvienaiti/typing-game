@@ -15,7 +15,16 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**01/11 khoảng 12:25 (mới nhất, đọc trước).**
+**01/11 khoảng 16:45 (mới nhất, đọc trước).**
+- **Tu Tiên:** chủ dự án tạm dừng: "tạm thời tôi tạm dừng game tu tiên để hoàn thành xong 3 game này đã". Session Tu Tiên (Fable 5.1) đứng yên; kết quả bước 0–1 nằm trong session đó (commit `d4d16aa` ở repo game, chưa push).
+- **Dragonhold:** đợt 1 cùng lượt sửa đã gộp vào `main` (`c8379cf`), đã chép 128 file model; `pnpm media:push` đang chạy; host chơi đã build lại bằng `pnpm build:dragon`. Giám khảo mù vẫn chấm khoảng 6,5.
+- **Đợt 2** (`wf_a2147192-3c4`):
+  - Dragonhold, nhánh `dh-wave2`, worktree `games/.wt-dh-wave2`: lỗi render, shader nước, look Epic, AO, đất và vách, quái và rồng;
+  - Wordwoven, nhánh `td-units-3d`: thẻ chữ trong 3D, dân làng và Draconis, cây, đất và ánh sáng theo concept v3-try1.
+- **Last Line:** lượt sửa đợt 1 đã xong, đang chờ review và chấm mù (`wf_dba4398d-9d4` chạy lại). Có kết quả thì gộp, rồi mở đợt 2 (L5–L10).
+- **Lưu ý:** `scripts/visual/cdp-run.mjs` chọn cổng DevTools ngẫu nhiên nên có thể chiếm Chrome của làn khác. Các làn đợt 2 sẽ tự vá bản của mình.
+
+**01/11 khoảng 12:25.**
 - **Tu Tiên:** chủ dự án cho làm tiếp trong session riêng chạy Fable 5.1, tên "Tu Tiên: tiếp tục, ưu tiên hình, âm, VFX" (`local_a5f48644-c74d-4f89-9251-1e16e63d075b`). Session điều phối vẫn không đụng Tu Tiên. Session đó nhắn sang trước khi chạy `pnpm media:push`. Bài học cho game mới ở `docs/games/LESSONS_FROM_THREE_GAMES.md`.
 - **ChatGPT:** chế độ Chat dùng bình thường; hạn mức "1%" là của Work.
 - **Tranh ý tưởng map 1:**
