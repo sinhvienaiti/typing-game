@@ -4,6 +4,9 @@
  * no effect ever covers a letter or the meaning line. Colours are resolved
  * once per palette; soft discs are pre-rendered sprites (no gradient made
  * per frame); a frame with no particle is not drawn, one clear after the last.
+ * A guard (setGuard, Load's G5) clears a soft-edged band behind the letters
+ * not typed yet after the key marks are drawn; a wrong key's own marks (its
+ * line, its cracked copy), the caret and the glass cracks are drawn after it.
  */
 import { FRAME_MS, TONE } from "./styles";
 import { PK, type ParticlePool } from "./pool";
@@ -81,6 +84,13 @@ export class FxCanvas {
   private font = "800 52px sans-serif";
   private painted = false;
   private textures: TypingFxTextures = {};
+  /** The guard band (canvas px): from x0 to the canvas's right edge, y0 … y1; x0 < 0 when off. */
+  private guardX = -1;
+  private guardY0 = 0;
+  private guardY1 = 0;
+  private guardFeather = 0;
+  private guardEdge = 0;
+  private ramps: HTMLCanvasElement[] | null = null;
   width = 0;
   height = 0;
   dpr = 1;
@@ -149,6 +159,47 @@ export class FxCanvas {
     this.font = font;
   }
 
+  /**
+   * G5's guard: nothing of the marks shows behind the letters not typed yet. From `x0` (the gap before the
+   * next letter) to the right edge, `y0` … `y1`, soft over `feather` to the left and `edge` up and down
+   * (canvas px). `x0` < 0 turns it off.
+   */
+  setGuard(x0: number, y0 = 0, y1 = 0, feather = 0, edge = 0): void {
+    this.guardX = x0;
+    this.guardY0 = y0;
+    this.guardY1 = y1;
+    this.guardFeather = feather;
+    this.guardEdge = edge;
+  }
+
+  /** The guard's band: is it on? */
+  get guarded(): boolean {
+    return this.guardX >= 0;
+  }
+
+  /** Clears the guard band, soft at its edges (alpha ramps made once; no gradient per frame). */
+  private clearGuard(): void {
+    const ctx = this.ctx;
+    const ramps = (this.ramps ??= makeRamps());
+    const x0 = this.guardX;
+    const y0 = this.guardY0;
+    const y1 = this.guardY1;
+    const fe = this.guardFeather;
+    const ed = this.guardEdge;
+    const w = this.width - x0;
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(x0, y0, w, y1 - y0);
+    if (fe > 0) ctx.drawImage(ramps[0]!, x0 - fe, y0, fe, y1 - y0);
+    if (ed > 0) {
+      ctx.drawImage(ramps[1]!, x0, y0 - ed, w, ed);
+      ctx.drawImage(ramps[2]!, x0, y1, w, ed);
+    }
+    ctx.restore();
+  }
+
   /** Draws every live particle at `now`; `still` (reduced motion) keeps rings and arcs from growing. */
   draw(pool: ParticlePool, now: number, still: boolean): void {
     const ctx = this.ctx;
@@ -166,10 +217,28 @@ export class FxCanvas {
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     this.painted = true;
+    if (this.guardX < 0) {
+      this.pass(pool, now, still, 0);
+      return;
+    }
+    // Guarded: the marks, the band cleared behind the letters not typed yet, then a wrong key's own marks and the caret.
+    this.pass(pool, now, still, 1);
+    this.clearGuard();
+    this.pass(pool, now, still, 2);
+  }
+
+  /** One pass over the pool: `which` 0 every particle, 1 the guarded ones, 2 the ones drawn over the guard. */
+  private pass(pool: ParticlePool, now: number, still: boolean, which: number): void {
+    const ctx = this.ctx;
     for (let i = 0; i < pool.count; i += 1) {
       const age = pool.age(i, now);
       // A phase spawned ahead (Load's shards at f3, f9) waits for its time.
       if (age >= 1 || now < pool.born[i]!) continue;
+      if (which !== 0) {
+        const k = pool.kind[i];
+        const over = k === PK.bar || k === PK.crackGlyph || k === PK.slide || k === PK.glassCrack;
+        if (over !== (which === 2)) continue;
+      }
       ctx.globalAlpha = 1;
       const sy = pool.sy[i]!;
       if (sy !== 1) {
@@ -250,6 +319,9 @@ export class FxCanvas {
           break;
         case PK.glassCrack:
           this.glassCrack(pool, i, now);
+          break;
+        case PK.implode:
+          this.implode(pool, i, age);
           break;
       }
       if (sy !== 1) ctx.restore();
@@ -853,10 +925,12 @@ export class FxCanvas {
 
   /**
    * Load's key mark (E1), one particle stepped by 60 Hz frame (`size`: the font size, `aux`: the streak's
-   * tier, `rot`: where the arcs open, toward the next letter): f0 a white star (4–10 rays by tier) over a
-   * glow; f1 a disc in the key's tone with a white core of 30 %; f2 a thick white ring; f3–4 the dark glyph
-   * ring with ticks and a thin line of colour inside; f5 a thin white arc; f6–8 a dark arc turning 40° a
-   * frame, fading. White, then dark, then colour (VFX_STANDARD §3.4).
+   * tier, `rot`: where the arcs open, toward the next letter): f0 a soft glow up and back where the 2.2×
+   * letter stands, a glint at its top corner and, from tier 1, rays fanned up and back (never across the
+   * letters); f1 a soft disc, a white core of 30 % fading into the key's tone; f2 a thick white ring; f3–4
+   * the dark glyph ring with ticks and a thin line of colour inside; f5 a thin white arc; f6–8 a dark arc
+   * turning 40° a frame, fading. Every ring opens toward the next letter. White, then dark, then colour
+   * (VFX_STANDARD §3.4). The guard (setGuard) clears whatever still reaches the letters not typed yet.
    */
   private loadKey(pool: ParticlePool, i: number, now: number): void {
     const ctx = this.ctx;
@@ -869,56 +943,81 @@ export class FxCanvas {
     const hot = this.tones[TONE.hot]!;
     const tint = this.color(pool, i);
     const glow = this.sprites[pool.tone[i]!];
+    const core = this.sprites[TONE.hot];
+    const open = pool.rot[i]!;
     if (f === 0) {
-      const rays = LOAD.rays[Math.min(tier, LOAD.rays.length - 1)]!;
-      const r = K.star * h * (1 + 0.1 * tier);
+      // Where the 2.2× letter stands: up and back from the letter (it grows from its own right foot).
+      const gx = x + K.glowAt[0]! * h;
+      const gy = y + K.glowAt[1]! * h;
+      const r = K.glow * h * (1 + 0.08 * tier);
+      ctx.globalCompositeOperation = "lighter";
       if (glow !== undefined) {
-        ctx.globalAlpha = 0.7;
-        ctx.drawImage(glow, x - r * 1.15, y - r * 1.15, r * 2.3, r * 2.3);
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(glow, gx - r * 1.2, gy - r, r * 2.4, r * 2);
       }
+      if (core !== undefined) {
+        ctx.globalAlpha = 0.85;
+        ctx.drawImage(core, gx - r * 0.5, gy - r * 0.42, r, r * 0.84);
+      }
+      ctx.globalCompositeOperation = "source-over";
+      // From tier 1: rays fanned up and back from behind the letter (4 → 10 with the streak).
+      const rays = tier > 0 ? LOAD.rays[Math.min(tier, LOAD.rays.length - 1)]! : 0;
+      if (rays > 0) {
+        ctx.fillStyle = hot;
+        ctx.globalAlpha = 0.9;
+        ctx.beginPath();
+        for (let k = 0; k < rays; k += 1) {
+          // A fan from straight back (π) to straight up (1.5 π) and a little past each side.
+          const a = Math.PI * (0.9 + (0.7 * k) / Math.max(1, rays - 1));
+          const len = (k % 2 === 0 ? 1.25 : 0.8) * h;
+          const half = 0.045 * h;
+          const ca = Math.cos(a);
+          const sa = Math.sin(a);
+          ctx.moveTo(gx - sa * half, gy + ca * half);
+          ctx.lineTo(gx + ca * len, gy + sa * len);
+          ctx.lineTo(gx + sa * half, gy - ca * half);
+        }
+        ctx.fill();
+      }
+      // A glint at the big letter's top corner (white, four points).
+      const sx = gx - 0.42 * h;
+      const sy = gy - 0.5 * h;
+      const s = 0.26 * h * (1 + 0.1 * tier);
       ctx.globalAlpha = 1;
       ctx.fillStyle = hot;
       ctx.beginPath();
-      for (let k = 0; k < rays * 2; k += 1) {
-        // Diagonal first: the long rays leave from the 2.6× letter's corners, the short ones from its sides.
-        const a = pool.rot[i]! - Math.PI / 4 + (k * Math.PI) / rays;
-        const rr = k % 2 === 1 ? K.starIn * h : (rays <= 4 || k % 4 === 0 ? 1 : 0.55) * r;
-        const px = x + Math.cos(a) * rr;
-        const py = y + Math.sin(a) * rr;
-        if (k === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
+      for (let k = 0; k < 8; k += 1) {
+        const a = (k * Math.PI) / 4;
+        const rr = k % 2 === 0 ? s : 0.12 * s;
+        if (k === 0) ctx.moveTo(sx + Math.cos(a) * rr, sy + Math.sin(a) * rr);
+        else ctx.lineTo(sx + Math.cos(a) * rr, sy + Math.sin(a) * rr);
       }
       ctx.closePath();
       ctx.fill();
       return;
     }
     if (f === 1) {
+      // A soft disc: a white-hot core (30 %) fading into the key's tone, no hard edge.
       const r = K.disc * h;
+      ctx.globalCompositeOperation = "lighter";
       if (glow !== undefined) {
-        ctx.globalAlpha = 0.95;
+        ctx.globalAlpha = 1;
         ctx.drawImage(glow, x - r * 1.5, y - r * 1.5, r * 3, r * 3);
+        ctx.drawImage(glow, x - r, y - r, r * 2, r * 2);
       }
-      ctx.globalAlpha = 0.82;
-      ctx.fillStyle = tint;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, TAU);
-      ctx.fill();
-      // The white core: at most 30 % of the disc (VFX_STANDARD §3.4).
-      const core = this.sprites[TONE.hot];
       if (core !== undefined) {
         ctx.globalAlpha = 1;
-        ctx.drawImage(core, x - r * 0.55, y - r * 0.55, r * 1.1, r * 1.1);
+        ctx.drawImage(core, x - r * K.core * 2, y - r * K.core * 2, r * K.core * 4, r * K.core * 4);
       }
-      ctx.fillStyle = hot;
-      ctx.beginPath();
-      ctx.arc(x, y, r * K.core, 0, TAU);
-      ctx.fill();
+      ctx.globalCompositeOperation = "source-over";
       return;
     }
     if (f === 2) {
+      // A thick white ring, open toward the next letter.
       const r = K.ring * h;
+      const from = open + K.ringGap / 2;
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, TAU);
+      ctx.arc(x, y, r, from, from + TAU - K.ringGap);
       ctx.strokeStyle = this.tones[TONE.ink]!;
       ctx.globalAlpha = 0.5;
       ctx.lineWidth = r * K.ringStroke + 3;
@@ -930,22 +1029,24 @@ export class FxCanvas {
       return;
     }
     if (f <= 4) {
-      // The glyph ring: dark and thick on a glow of the key's colour (a dark band reads on the dark plate), compass ticks round it, a thin line of colour inside.
+      // The glyph ring: dark and thick on a glow of the key's colour (a dark band reads on the dark plate), compass ticks round it, a thin line of colour inside; open toward the next letter.
       const r = K.dark * h * (f === 4 ? 1.04 : 1);
       const w = r * K.darkStroke;
+      const from = open + K.darkGap / 2 + (f === 4 ? 0.12 : 0);
+      const span = TAU - K.darkGap;
       if (glow !== undefined) {
         ctx.globalAlpha = f === 3 ? 0.7 : 0.5;
         ctx.drawImage(glow, x - r * 1.45, y - r * 1.45, r * 2.9, r * 2.9);
       }
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, TAU);
+      ctx.arc(x, y, r, from, from + span);
       ctx.strokeStyle = LOAD.dark;
       ctx.globalAlpha = 1;
       ctx.lineWidth = w;
       ctx.stroke();
       ctx.beginPath();
-      for (let k = 0; k < K.ticks; k += 1) {
-        const a = pool.rot[i]! + (k * TAU) / K.ticks + (f === 4 ? 0.12 : 0);
+      for (let k = 0; k <= K.ticks; k += 1) {
+        const a = from + (k * span) / K.ticks;
         const inner = k % 3 === 0 ? r - w * 1.1 : r - w * 0.2;
         ctx.moveTo(x + Math.cos(a) * inner, y + Math.sin(a) * inner);
         ctx.lineTo(x + Math.cos(a) * (r + w * 0.9), y + Math.sin(a) * (r + w * 0.9));
@@ -953,7 +1054,7 @@ export class FxCanvas {
       ctx.lineWidth = Math.max(1, w * 0.28);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(x, y, r - w * 0.62, 0, TAU);
+      ctx.arc(x, y, r - w * 0.62, from, from + span);
       ctx.strokeStyle = tint;
       ctx.globalAlpha = f === 3 ? 0.9 : 0.6;
       ctx.lineWidth = Math.max(1, w * 0.18);
@@ -961,7 +1062,7 @@ export class FxCanvas {
       return;
     }
     const gap = K.gap;
-    const from = pool.rot[i]! + gap / 2;
+    const from = open + gap / 2;
     if (f === 5) {
       // A thin white arc, open toward the next letter.
       const r = K.arc * h;
@@ -1032,7 +1133,8 @@ export class FxCanvas {
     const ms = now - pool.born[i]!;
     const f = loadFrame(ms);
     const size = pool.size[i]! * (f === 0 ? 1.25 : 1);
-    const x = pool.x[i]!;
+    // A shake in pixel steps (f0–4; `rot` 0 under reduced motion), never a scale.
+    const x = pool.x[i]! + (pool.rot[i]! !== 0 ? (LOAD.wrong.shake[f] ?? 0) * pool.size[i]! / LOAD.wrong.size : 0);
     const y = pool.y[i]! + pool.size2[i]! * age * age;
     ctx.save();
     ctx.translate(x, y);
@@ -1072,6 +1174,20 @@ export class FxCanvas {
       ctx.globalAlpha = 0.7 * (1 - age);
       ctx.drawImage(glow, x - w * 1.4, y - t * 3, w * 2.8, t * 6);
     }
+    // Its first two frames leave a trail of light back from where it started (right to left).
+    const from = pool.x[i]!;
+    if (age < 0.67 && Math.abs(from - x) > 1) {
+      const fade = 1 - age / 0.67;
+      ctx.globalAlpha = 0.85 * fade;
+      ctx.fillStyle = this.tones[TONE.light]!;
+      ctx.beginPath();
+      ctx.moveTo(x, y - t * 0.7);
+      ctx.lineTo(from + w, y - t * 0.15);
+      ctx.lineTo(from + w, y + t * 0.15);
+      ctx.lineTo(x, y + t * 0.7);
+      ctx.closePath();
+      ctx.fill();
+    }
     ctx.globalAlpha = 1 - 0.6 * age;
     ctx.fillStyle = this.tones[TONE.hot]!;
     roundRect(ctx, x - w, y - t / 2, w * 2, t, t / 2);
@@ -1105,6 +1221,51 @@ export class FxCanvas {
     ctx.lineWidth = Math.max(1, 0.05 * r);
     ctx.stroke();
   }
+
+  /** A word let go (Load): `aux` short streaks drawn in from round the row (`size`, `size2`: the ellipse) to its middle, thinning and fading over the fold. */
+  private implode(pool: ParticlePool, i: number, age: number): void {
+    const ctx = this.ctx;
+    const x = pool.x[i]!;
+    const y = pool.y[i]!;
+    const rx = pool.size[i]!;
+    const ry = pool.size2[i]!;
+    const n = pool.aux[i]! | 0;
+    const k = easeOut(age);
+    const outer = 1 - 0.8 * k;
+    const inner = Math.max(0, outer - 0.32);
+    ctx.strokeStyle = this.color(pool, i);
+    ctx.globalAlpha = 1 - age;
+    ctx.lineWidth = Math.max(1.5, 0.1 * ry * (1 - 0.5 * age));
+    ctx.beginPath();
+    for (let j = 0; j < n; j += 1) {
+      const a = pool.rot[i]! + (j * TAU) / n;
+      const c = Math.cos(a);
+      const s = Math.sin(a);
+      ctx.moveTo(x + c * rx * outer, y + s * ry * outer);
+      ctx.lineTo(x + c * rx * inner, y + s * ry * inner);
+    }
+    ctx.stroke();
+  }
+}
+
+/** The guard's soft edges: alpha ramps (left → right, top → bottom, bottom → top), made once. */
+function makeRamps(): HTMLCanvasElement[] {
+  const ramp = (w: number, h: number, at: (k: number) => number): HTMLCanvasElement => {
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (ctx === null) return canvas;
+    const n = Math.max(w, h);
+    for (let k = 0; k < n; k += 1) {
+      ctx.fillStyle = `rgba(0,0,0,${at((k + 0.5) / n).toFixed(3)})`;
+      if (w > h) ctx.fillRect(k, 0, 1, h);
+      else ctx.fillRect(0, k, w, 1);
+    }
+    return canvas;
+  };
+  const smooth = (t: number): number => t * t * (3 - 2 * t);
+  return [ramp(32, 1, smooth), ramp(1, 32, smooth), ramp(1, 32, (t) => smooth(1 - t))];
 }
 
 function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number): void {

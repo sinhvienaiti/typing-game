@@ -31,6 +31,7 @@ export const PK = {
   crackGlyph: 21, // a wrong key's letter, cracked, dropping (Load)
   slide: 22, // the caret sliding back under the row (Load's backspace)
   glassCrack: 23, // cracks over a hidden letter's glass as it is revealed (Load)
+  implode: 24, // short white streaks drawn in to the row's middle (Load's release)
 } as const;
 export type ParticleKind = (typeof PK)[keyof typeof PK];
 

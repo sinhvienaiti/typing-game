@@ -20,8 +20,8 @@ import { ParticlePool, PK } from "./pool";
 import { flyEase, FRAME_MS, newPose, popEnvelope, restPose, spawnWrongBeat, squeeze, STYLES, TONE, WRONG_MS, wrongPose, type GlyphPose, type SpawnCtx, type StyleRecipe, type WordCtx } from "./styles";
 import { DEFAULT_TYPING_FX, stripCapPx, type TypingFxSettings } from "./settings";
 import {
-  breathe, caretSlide, flawAt, flightAt, loadFrame, flightControl, flightPoint, glassBurst, glassReveal, glassShine, landFlash, learnAt, LOAD, LOAD_KEY, loadBackPose, loadRevealPose, loadTier, loadWrongBeat, loadWrongPose,
-  lockScale, plateAfterWord, releaseFold, strayAt, sweepAt, wordSqueeze, type LoadHost, type LoadRect,
+  backDust, breathe, caretSlide, flawAt, flightAt, loadFrame, flightControl, flightPoint, glassBurst, glassReveal, glassShine, landFlash, learnAt, LOAD, LOAD_KEY, loadBackPose, loadRevealPose, loadTier, loadWrongBeat, loadWrongPose,
+  lockScale, plateAfterWord, plusAt, raysAt, releaseFold, releaseImplode, strayAt, strayShatter, sweepAt, wordSqueeze, type LoadHost, type LoadRect,
 } from "./load";
 
 export type FocusStripOptions = {
@@ -73,6 +73,8 @@ type Layer = {
   len: number;
   /** Glyph centres, x in stage px (0 = the anchor), and the row's centre and baseline (stage y). */
   sx: Float32Array;
+  /** Each letter's left edge (its box, side bearing in), from the row's centre (px): Load's G5 guard starts before the next one. */
+  lx: Float32Array;
   rowY: number;
   baseY: number;
   width: number;
@@ -107,8 +109,8 @@ const MASK_GLASS = "\u2007";
 const F = FRAME_MS;
 
 /** A finished word's line in flight to its target (Load): the curve, the end scale, whether it has a target, flawless, landed. */
-type Flight = { on: boolean; at: number; x0: number; y0: number; cx: number; cy: number; x1: number; y1: number; s1: number; has: boolean; still: boolean; landed: boolean; rect: LoadRect };
-type LoadEls = { sweep: HTMLDivElement; breathe: HTMLDivElement; flaw: HTMLDivElement; learn: HTMLDivElement; stray: HTMLDivElement; land: HTMLDivElement; landRing: HTMLDivElement; lines: HTMLSpanElement[]; ribs: HTMLSpanElement[][] };
+type Flight = { on: boolean; at: number; x0: number; y0: number; cx: number; cy: number; x1: number; y1: number; s1: number; has: boolean; still: boolean; landed: boolean; flaw: boolean; rect: LoadRect };
+type LoadEls = { sweep: HTMLDivElement; breathe: HTMLDivElement; flaw: HTMLDivElement; flawSweep: HTMLSpanElement; learn: HTMLDivElement; stray: HTMLDivElement; land: HTMLDivElement; landRing: HTMLDivElement; landRays: HTMLDivElement; plus: HTMLDivElement; lines: HTMLSpanElement[]; heads: HTMLSpanElement[]; ribs: HTMLSpanElement[][] };
 
 const FLY_TRAIL_LAG = 0.06;
 /** Share of a flight spent lifting off the word before the dive. */
@@ -162,6 +164,9 @@ export class FocusStrip implements TypingFxSink {
   private rootH = 0;
   private canvasW = 0;
   private canvasH = 0;
+  /** The row (the stage's px) the canvas centres on, once placed. */
+  private canvasRow = 0;
+  private canvasPlaced = false;
   private serial = 0;
   private lastKeyOwner = -1;
   private combo = 0;
@@ -202,6 +207,9 @@ export class FocusStrip implements TypingFxSink {
   private learnStart = -1e9;
   private strayStart = -1e9;
   private landAt = -1e9;
+  private landFlaw = false;
+  /** Half the plate's width when the last word was done (its meaning stands beside it). */
+  private learnHalf = 0;
   private readonly landRect: LoadRect = { x: 0, y: 0, w: 0, h: 0 };
   private readonly flights: Flight[] = [];
   private flightCursor = 0;
@@ -327,7 +335,7 @@ export class FocusStrip implements TypingFxSink {
     this.load = host;
     if (this.loadEl !== null) {
       this.loadEl.flaw.className = "tfx-flaw" + (host?.flawlessClass ? " " + host.flawlessClass : "");
-      this.loadEl.flaw.textContent = host?.flawless ?? "FLAWLESS";
+      this.loadEl.flaw.replaceChildren(host?.flawless ?? "FLAWLESS", this.loadEl.flawSweep);
       this.loadEl.learn.className = "tfx-learn" + (host?.learnClass ? " " + host.learnClass : "");
     }
     this.reset();
@@ -346,14 +354,21 @@ export class FocusStrip implements TypingFxSink {
     const sweep = div("tfx-sweep", this.plate);
     const breathe = div("tfx-breathe", this.plate);
     const flaw = div("tfx-flaw", this.stage);
-    flaw.textContent = this.options.load?.flawless ?? "FLAWLESS";
+    // The light across the stamp (f4–10), a child so it is clipped to the stamp.
+    const flawSweep = this.doc.createElement("span");
+    flawSweep.className = "tfx-flaw-sweep";
+    flaw.append(this.options.load?.flawless ?? "FLAWLESS", flawSweep);
     if (this.options.load?.flawlessClass) flaw.classList.add(...this.options.load.flawlessClass.split(/\s+/).filter(Boolean));
     const learn = div("tfx-learn", this.stage);
     if (this.options.load?.learnClass) learn.classList.add(...this.options.load.learnClass.split(/\s+/).filter(Boolean));
     const stray = div("tfx-stray", this.stage);
     const land = div("tfx-land", this.flyLayer);
     const landRing = div("tfx-land-ring", this.flyLayer);
+    const landRays = div("tfx-land-rays", this.flyLayer);
+    const plus = div("tfx-plus", this.flyLayer);
+    plus.textContent = "+1";
     const lines: HTMLSpanElement[] = [];
+    const heads: HTMLSpanElement[] = [];
     const ribs: HTMLSpanElement[][] = [];
     for (let k = 0; k < 2; k += 1) {
       const set: HTMLSpanElement[] = [];
@@ -365,12 +380,17 @@ export class FocusStrip implements TypingFxSink {
         set.push(span);
       }
       ribs.push(set);
+      // The line's hot head (in front of it as it flies), then the line.
+      const head = this.doc.createElement("span");
+      head.className = "tfx-head";
+      this.flyLayer.appendChild(head);
+      heads.push(head);
       const line = this.doc.createElement("span");
       line.className = "tfx-line";
       this.flyLayer.appendChild(line);
       lines.push(line);
     }
-    this.loadEl = { sweep, breathe, flaw, learn, stray, land, landRing, lines, ribs };
+    this.loadEl = { sweep, breathe, flaw, flawSweep, learn, stray, land, landRing, landRays, plus, lines, heads, ribs };
   }
 
   private readonly tick = (): void => {
@@ -389,7 +409,7 @@ export class FocusStrip implements TypingFxSink {
     el.appendChild(mean);
     const layer: Layer = {
       el, row, mean, marker: this.doc.createElement("span"), glyph: [], base: [], hot: [], ga: [], gb: [],
-      text: "", len: 0, sx: new Float32Array(this.max), rowY: 0, baseY: 0, width: 0, height: 0, rowW: 0,
+      text: "", len: 0, sx: new Float32Array(this.max), lx: new Float32Array(this.max), rowY: 0, baseY: 0, width: 0, height: 0, rowW: 0,
       state: 0, t0: 0, typed: 0,
       fx: new Uint8Array(this.max), fxAt: new Float64Array(this.max), fxPhase: new Uint8Array(this.max), fxOwner: new Int32Array(this.max), dirty: new Uint8Array(this.max),
       release: 0, mask: 0, litAt: new Float64Array(this.max).fill(-1e9), lit: new Float32Array(this.max), meaning: "", hint: 0,
@@ -575,9 +595,10 @@ export class FocusStrip implements TypingFxSink {
     for (let i = 0; i < layer.len; i += 1) {
       const g = layer.glyph[i]!;
       layer.sx[i] = rowLeft + g.offsetLeft + g.offsetWidth / 2;
+      layer.lx[i] = rowLeft + g.offsetLeft;
     }
     // The canvas centres on the row; its own coordinates for the trace.
-    this.canvasEl.style.transform = `translate(${-this.canvasW / 2}px, ${layer.rowY - this.canvasH / 2}px)`;
+    this.centreCanvas(layer.rowY);
     const xs = this.scratchX(layer);
     this.fx.setGlyphs(this.layers.indexOf(layer), layer.text, xs, layer.baseY - layer.rowY + this.canvasH / 2, `${this.weight()} ${this.size}px ${this.family()}`);
   }
@@ -819,6 +840,36 @@ export class FocusStrip implements TypingFxSink {
     if (key.length === 0 || this.loadEl === null || !this.level.fx) return;
     this.strayStart = now;
     this.loadEl.stray.textContent = key.slice(0, 1);
+    // Its shards at f5, where the ghost stands (the canvas centres on the row the strip measured last).
+    if (this.level.particles > 0) {
+      this.serial += 1;
+      const c = this.ctx;
+      // No word on the strip: the canvas comes to the ghost's row (before any word it was never placed).
+      const row = this.strayRow();
+      if (this.live === null && (!this.canvasPlaced || Math.abs(row - this.canvasRow) > 0.5)) this.centreCanvas(row);
+      c.x = this.canvasW / 2;
+      c.y = this.canvasH / 2 + (row - this.canvasRow) + LOAD.stray.drop * this.size;
+      c.h = this.size;
+      c.now = now;
+      c.owner = this.serial;
+      c.prio = PRIORITY.key;
+      c.mult = this.level.particles;
+      c.size = 1;
+      strayShatter(c);
+    }
+  }
+
+  /** Centres the canvas on stage row `row` (px). */
+  private centreCanvas(row: number): void {
+    this.canvasPlaced = true;
+    this.canvasRow = row;
+    this.canvasEl.style.transform = `translate(${-this.canvasW / 2}px, ${row - this.canvasH / 2}px)`;
+  }
+
+  /** The stray ghost's row (the stage's px): over the line the strip grows from (bottom anchor), or under its top. */
+  private strayRow(): number {
+    const layer = this.live ?? this.layers[0];
+    return this.anchorEdge === "bottom" ? this.plateH - this.size * 0.72 : layer.len > 0 ? layer.rowY : this.size * 0.66;
   }
 
   back(typed: number, now: number = this.clock()): void {
@@ -833,7 +884,7 @@ export class FocusStrip implements TypingFxSink {
     }
     layer.typed = keep;
     if (keep === 0) {
-      this.leave(layer, now, -1);
+      this.letGo(layer, now);
       return;
     }
     // Load: each letter taken back shrinks to the caret and fades (4 f); the caret slides back (3 f).
@@ -849,7 +900,27 @@ export class FocusStrip implements TypingFxSink {
       const from = (was < layer.len ? layer.sx[was]! : layer.sx[layer.len - 1]! + 0.62 * this.size) + this.canvasW / 2;
       this.aim(layer, keep, now, this.serial, PRIORITY.key);
       caretSlide(this.ctx, from);
+      backDust(this.ctx);
     }
+  }
+
+  /** Load's release: the streaks drawn in to the row's middle (releaseImplode). */
+  private releaseStreaks(layer: Layer, now: number): void {
+    this.serial += 1;
+    const w = (this.word ??= { pool: this.pool, owner: 0, prio: 0, gold: false, cx: 0, cy: 0, rowW: 0, h: 0, len: 0, sx: layer.sx, now: 0, mult: 1, still: false, random: this.random });
+    w.owner = this.serial;
+    w.prio = PRIORITY.key;
+    w.gold = false;
+    w.cx = this.canvasW / 2;
+    w.cy = this.canvasH / 2;
+    w.rowW = layer.rowW;
+    w.h = this.size;
+    w.len = layer.len;
+    w.sx = layer.sx;
+    w.now = now;
+    w.mult = this.level.particles;
+    w.still = this.reduced;
+    releaseImplode(w);
   }
 
   complete(perfect: boolean, combo: number, now: number = this.clock()): void {
@@ -896,6 +967,7 @@ export class FocusStrip implements TypingFxSink {
     this.rim.classList.toggle("is-crystal", perfect);
     layer.el.classList.toggle("is-flaw", perfect);
     this.doneAt = now;
+    this.learnHalf = this.plateW / 2;
     this.flawStart = perfect ? now : -1e9;
     this.learnStart = layer.meaning.length > 0 ? now : -1e9;
     els.learn.replaceChildren();
@@ -925,7 +997,7 @@ export class FocusStrip implements TypingFxSink {
   /** Load: the finished word as one line to the host's target (a full bay: it rises and fades); under reduced motion the target only flashes at f3. */
   private launchLine(layer: Layer, perfect: boolean, now: number): void {
     const els = this.loadEl!;
-    const r = { x: 0, y: 0, w: 0, h: 0 };
+    const r: LoadRect = { x: 0, y: 0, w: 0, h: 0 };
     const has = this.load!.target(r);
     const x0 = this.originX;
     const y0 = this.originY + layer.rowY;
@@ -933,7 +1005,7 @@ export class FocusStrip implements TypingFxSink {
     const y1 = has ? r.y + r.h / 2 : y0 - this.size * 1.2;
     flightControl(x0, y0, x1, y1, this.pt);
     this.foldRight = has && x1 > x0;
-    if (this.flights.length === 0) for (let k = 0; k < els.lines.length; k += 1) this.flights.push({ on: false, at: 0, x0: 0, y0: 0, cx: 0, cy: 0, x1: 0, y1: 0, s1: 1, has: false, still: false, landed: false, rect: { x: 0, y: 0, w: 0, h: 0 } });
+    if (this.flights.length === 0) for (let k = 0; k < els.lines.length; k += 1) this.flights.push({ on: false, at: 0, x0: 0, y0: 0, cx: 0, cy: 0, x1: 0, y1: 0, s1: 1, has: false, still: false, landed: false, flaw: false, rect: { x: 0, y: 0, w: 0, h: 0 } });
     const slot = this.flightCursor;
     this.flightCursor = (this.flightCursor + 1) % this.flights.length;
     const fl = this.flights[slot]!;
@@ -949,24 +1021,37 @@ export class FocusStrip implements TypingFxSink {
     fl.has = has;
     fl.still = !this.level.fly || this.reduced;
     fl.landed = false;
+    fl.flaw = perfect;
+    // The flight keeps its own box and the host's id for it: onLand hands back this flight's, not the latest aim.
     fl.rect.x = r.x;
     fl.rect.y = r.y;
     fl.rect.w = r.w;
     fl.rect.h = r.h;
+    fl.rect.id = r.id;
     const line = els.lines[slot]!;
     line.textContent = layer.text;
     line.classList.toggle("is-flaw", perfect);
     line.style.display = "none";
+    const head = els.heads[slot]!;
+    head.classList.toggle("is-flaw", perfect);
+    head.style.display = "none";
     for (let k = 0; k < els.ribs[slot]!.length; k += 1) {
       const rib = els.ribs[slot]![k]!;
       rib.classList.toggle("is-thread", k >= LOAD.word.ribs);
+      rib.classList.toggle("is-flaw", perfect);
       rib.style.display = "none";
     }
     this.stats.flyers += 1;
   }
 
   clear(now: number = this.clock()): void {
-    if (this.live !== null) this.leave(this.live, now, -1);
+    if (this.live !== null) this.letGo(this.live, now);
+  }
+
+  /** The live word let go unfinished (backspace to 0, or the game's release): it fades, or in Load folds down while streaks draw in to its middle. */
+  private letGo(layer: Layer, now: number): void {
+    if (this.load !== null && layer.state === 1 && this.level.fx && this.level.particles > 0) this.releaseStreaks(layer, now);
+    this.leave(layer, now, -1);
   }
 
   private leave(layer: Layer, now: number, prio: number): void {
@@ -1167,7 +1252,23 @@ export class FocusStrip implements TypingFxSink {
     if (this.loadEl !== null && this.load !== null) this.animateLoad(now);
     this.pool.expire(now);
     this.stats.maxParticles = Math.max(this.stats.maxParticles, this.pool.count);
+    if (this.load !== null) this.guard();
     this.fx.draw(this.pool, now, this.reduced);
+  }
+
+  /** Load's G5 guard: the canvas band behind the live word's letters not typed yet (from the gap before the next one). */
+  private guard(): void {
+    const layer = this.live;
+    if (layer === null || layer.state !== 1 || layer.typed >= layer.len) {
+      if (this.fx.guarded) this.fx.setGuard(-1);
+      return;
+    }
+    const G = LOAD.guard;
+    const h = this.size;
+    // Clear from a little before the next letter's box (its side bearing in), soft over the letter just typed.
+    const x0 = layer.lx[layer.typed]! - G.lead * h;
+    const cy = this.canvasH / 2;
+    this.fx.setGuard(x0 + this.canvasW / 2, cy - G.top * h, cy + G.bottom * h, G.feather * h, G.edge * h);
   }
 
   private animateGlyph(layer: Layer, i: number, now: number): void {
@@ -1467,6 +1568,7 @@ export class FocusStrip implements TypingFxSink {
       if (!fl.on) continue;
       const age = now - fl.at;
       const line = els.lines[slot]!;
+      const head = els.heads[slot]!;
       const set = els.ribs[slot]!;
       if (fl.still) {
         // Reduced motion: no flight; the target flashes at f3.
@@ -1496,8 +1598,18 @@ export class FocusStrip implements TypingFxSink {
         line.style.display = "block";
         line.style.opacity = "1";
         line.style.transform = `translate(${this.pt.x.toFixed(1)}px,${this.pt.y.toFixed(1)}px) translate(-50%,-50%) scale(${sx.toFixed(3)},${sy.toFixed(3)})`;
+        // The hot head just ahead of the line, along the curve.
+        const hx = this.pt.x;
+        const hy = this.pt.y;
+        flightPoint(Math.min(1, u + 0.06), fl.x0, fl.y0, fl.cx, fl.cy, fl.x1, fl.y1, this.pt2);
+        const d = LOAD.word.head * this.size * (0.6 + 0.4 * sy);
+        head.style.display = "block";
+        head.style.width = head.style.height = d.toFixed(1) + "px";
+        head.style.opacity = (0.75 + 0.25 * u).toFixed(3);
+        head.style.transform = `translate(${(hx + (this.pt2.x - hx) * 0.8 - d / 2).toFixed(1)}px,${(hy + (this.pt2.y - hy) * 0.8 - d / 2).toFixed(1)}px)`;
       } else {
         if (line.style.display !== "none") line.style.display = "none";
+        if (head.style.display !== "none") head.style.display = "none";
         if (!fl.landed) this.landLine(fl, now);
       }
       // The ribbon: n segments behind the head, each `rib` of the flight later, tapering; past the target they catch up and vanish.
@@ -1534,8 +1646,29 @@ export class FocusStrip implements TypingFxSink {
       }
       if (shown === 0 && v > 1) fl.on = false;
     }
-    // The target's white flash (the bay's own slam is the host's, onLand).
-    const flash = landFlash(now - this.landAt);
+    // The target's white flash (the bay's own slam is the host's, onLand), its "+1" rising.
+    const r = this.landRect;
+    const plus = plusAt(now - this.landAt);
+    const pl = els.plus;
+    if (plus.alpha > 0) {
+      pl.style.display = "block";
+      pl.classList.toggle("is-hot", plus.hot);
+      pl.classList.toggle("is-flaw", this.landFlaw);
+      pl.style.opacity = plus.alpha.toFixed(3);
+      pl.style.transform = `translate(${(r.x + r.w / 2).toFixed(1)}px,${(r.y - (this.reduced ? 0 : plus.rise) * this.size).toFixed(1)}px) translate(-50%,-100%) scale(${this.reduced ? 1 : plus.scale})`;
+    } else if (pl.style.display !== "none") pl.style.display = "none";
+    // 10 rays thrown off the cell (12 of glass for a flawless word), f0–5.
+    const rays = raysAt(now - this.landAt, this.reduced);
+    const ry = els.landRays;
+    if (rays.alpha > 0) {
+      const d = Math.max(r.w, r.h) + LOAD.word.rays.reach * this.size;
+      ry.style.display = "block";
+      ry.classList.toggle("is-flaw", this.landFlaw);
+      ry.style.width = ry.style.height = d.toFixed(1) + "px";
+      ry.style.opacity = rays.alpha.toFixed(3);
+      ry.style.transform = `translate(${(r.x + r.w / 2 - d / 2).toFixed(1)}px,${(r.y + r.h / 2 - d / 2).toFixed(1)}px) scale(${rays.scale.toFixed(3)})`;
+    } else if (ry.style.display !== "none") ry.style.display = "none";
+    const flash = landFlash(now - this.landAt, this.landFlaw);
     const land = els.land;
     const ring = els.landRing;
     if (flash.alpha <= 0) {
@@ -1543,11 +1676,12 @@ export class FocusStrip implements TypingFxSink {
       if (ring.style.display !== "none") ring.style.display = "none";
       return;
     }
-    const r = this.landRect;
-    // A thin white ring opening off the cell (gone by f8), under reduced motion standing still.
+    land.classList.toggle("is-flaw", this.landFlaw);
+    ring.classList.toggle("is-flaw", this.landFlaw);
+    // A white ring opening off the cell, two to three times its old reach (gone by f8), under reduced motion standing still.
     const k = Math.min(1, (now - this.landAt) / (LOAD.word.land * F));
     const [r0, r1] = LOAD.word.ring;
-    const d = Math.max(r.w, r.h) * 1.3;
+    const d = Math.max(r.w, r.h) * 1.3 + LOAD.word.ringReach * this.size;
     ring.style.display = "block";
     ring.style.width = ring.style.height = d.toFixed(1) + "px";
     ring.style.opacity = (1 - k).toFixed(3);
@@ -1564,11 +1698,13 @@ export class FocusStrip implements TypingFxSink {
     fl.landed = true;
     if (!fl.has) return;
     this.landAt = now;
+    this.landFlaw = fl.flaw;
     this.landRect.x = fl.rect.x;
     this.landRect.y = fl.rect.y;
     this.landRect.w = fl.rect.w;
     this.landRect.h = fl.rect.h;
-    this.load?.onLand?.();
+    this.landRect.id = fl.rect.id;
+    this.load?.onLand?.(fl.rect);
   }
 
   /** Load's stamps: FLAWLESS (f0–8, above the plate), the meaning's beat (from f12, rising 8 px at 720p, held 650 ms), the stray ghost, the glass shimmer of hidden letters. */
@@ -1580,19 +1716,25 @@ export class FocusStrip implements TypingFxSink {
     if (flaw.alpha > 0) {
       els.flaw.style.opacity = flaw.alpha.toFixed(3);
       els.flaw.style.transform = `translate(-50%,-100%) translateY(${top.toFixed(1)}px) scale(${this.reduced ? 1 : flaw.scale})`;
+      els.flawSweep.style.opacity = flaw.sweep >= 0 && !this.reduced ? Math.sin(Math.PI * flaw.sweep).toFixed(3) : "0";
+      if (flaw.sweep >= 0) els.flawSweep.style.transform = `translateX(${(-120 + 340 * flaw.sweep).toFixed(1)}%) skewX(-20deg)`;
     } else if (els.flaw.style.opacity !== "0") els.flaw.style.opacity = "0";
     const learn = learnAt(now - this.learnStart);
     if (learn.alpha > 0) {
+      // Beside the plate, on the side the word flew to (never stacked on the next word's plate), at the row.
+      const side = this.foldRight ? 1 : -1;
+      const x = side * (Math.max(this.learnHalf, this.plateW / 2) + LOAD.learn.aside * this.size);
+      const row = this.anchorEdge === "bottom" ? this.plateH - this.size * 0.72 : this.size * 0.66;
       els.learn.style.opacity = learn.alpha.toFixed(3);
-      els.learn.style.transform = `translate(-50%,-100%) translateY(${(top + (this.reduced ? 0 : learn.rise * this.size)).toFixed(1)}px)`;
+      els.learn.style.transform = `translate(${x.toFixed(1)}px,${(row + (this.reduced ? 0 : learn.rise * this.size)).toFixed(1)}px) translate(${side > 0 ? "0" : "-100%"},-50%)`;
     } else if (els.learn.style.opacity !== "0") els.learn.style.opacity = "0";
     const stray = strayAt(now - this.strayStart, this.reduced);
     if (stray.alpha > 0) {
       // Where the word's row stands: over the line the strip grows from (bottom anchor), or under its top.
-      const layer = this.live ?? this.layers[0];
-      const row = this.anchorEdge === "bottom" ? this.plateH - this.size * 0.72 : layer.len > 0 ? layer.rowY : this.size * 0.66;
+      const row = this.strayRow();
+      els.stray.classList.toggle("is-hot", stray.hot);
       els.stray.style.opacity = stray.alpha.toFixed(3);
-      els.stray.style.transform = `translate(-50%,-50%) translateY(${(row + stray.drop * this.size).toFixed(1)}px) scale(${stray.scale})`;
+      els.stray.style.transform = `translate(-50%,-50%) translate(${(stray.dx * this.size).toFixed(1)}px,${(row + stray.drop * this.size).toFixed(1)}px) scale(${stray.scale})`;
     } else if (els.stray.style.opacity !== "0") els.stray.style.opacity = "0";
     const live = this.live;
     if (this.load?.glass === true && live !== null && live.mask !== 0) {

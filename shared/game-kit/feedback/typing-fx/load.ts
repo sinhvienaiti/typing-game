@@ -5,24 +5,37 @@
  * stays as it was), and the strip then follows the juice study's E1–E3
  * (docs/games/TYPING_BREAK_STUDY.md §2.2–2.4, measured frame by frame) in the
  * game's own look (glyph rings, crystal shards, glass; never gold):
- * - a right key: the letter at 2.6× with a white star (f0), a disc in the
- *   gun's colour with a white core of 30 % (f1), a thick white ring (f2), a
+ * - a right key: the letter at 2.2×, white-hot in the gun's glow, standing
+ *   on the letter's own right foot so it grows up and back over the typed
+ *   letters, never over the next one, in a soft glow with a glint (f0; the
+ *   clean streak's tier adds rays, fanned up and back); a soft disc, a white
+ *   core of 30 % fading into the gun's colour (f1); a thick white ring (f2), a
  *   dark glyph ring with ticks and 2–4 dark crystal shards (f3–4), a thin
- *   white arc open toward the next letter (f5), a dark arc turning 40° a
- *   frame (f6–8), clean at f9 (150 ms); a clean streak's tier adds rays and
- *   moves the hue toward glass;
- * - a finished word: every letter white for a frame and the rim 0.36 em out
- *   (f0), the letters squeezed (f1–2), then the word as one line with a
- *   ribbon flying into the host's target (the bay's magazine cell) over
- *   f3–12, the cell flashing white when it lands; the plate dims 70 % and
- *   folds toward the target (f3–9); the meaning gets its own beat after f12;
+ *   white arc (f5), a dark arc turning 40° a frame (f6–8), each ring open
+ *   toward the next letter; clean at f9 (150 ms); the tier moves the hue
+ *   toward glass;
+ * - the letters not typed yet keep their own ground (G5): nothing of a key's
+ *   mark shows behind them (the canvas guard, draw.ts), and a key lights only
+ *   the letter before it;
+ * - a finished word: every letter white for a frame, the rim 0.36 em out and
+ *   a slash of light along the row (f0), the letters squeezed (f1–2), then
+ *   the word as one line with a thick ribbon and a hot head flying into the
+ *   host's target (the bay's magazine cell) over f3–12; the cell flashes
+ *   white with a wide ring, 10 rays (12 of glass for a flawless word) and a
+ *   "+1" when it lands; the plate dims 70 % and
+ *   folds toward the target (f3–9); the meaning gets its own beat after f12,
+ *   beside the plate on the side the word flew to;
  * - a wrong key: the due letter twitches in pixel steps (never a scale), a
- *   crimson underline (f0–5), a cracked copy of the key typed drops 12 px and
- *   breaks at f9; never a red flash of the plate;
- * - a stray key: its ghost in red where the word stands, 1.4 → 1, dropping;
- * - backspace: the letter taken back shrinks to the caret and fades (4 f),
- *   the caret slides back (3 f); a release folds the strip down (8 f);
- * - a flawless word: a FLAWLESS stamp (f0–8) and a white thread in the ribbon;
+ *   crimson underline (f0–5), a cracked copy of the key typed (0.74 of the
+ *   font) shakes, drops 12 px and breaks at f9; never a red flash of the plate;
+ * - a stray key: its ghost where the word stands, white-hot to crimson on a
+ *   dark halo, 1.4 → 1, shaking, then shattered into crimson shards at f5;
+ * - backspace: the letter taken back greys, shrinks to the caret and fades
+ *   (4 f) over a little dust, the caret slides back with a trail (3 f); a
+ *   release folds the strip down (8 f) while streaks draw in to its middle;
+ * - a flawless word: a crystal FLAWLESS stamp slammed 1.6 → 1 (f0–3) with a
+ *   light across it, glass shards off the plate, a glass ribbon with a white
+ *   thread, a longer glass flash on the cell;
  * - hidden letters: the host's glass tiles (when it has the art) shimmer,
  *   crack and melt on a reveal, shatter when typed.
  * The player's Stamp (the default) plays as Load's key; other styles keep
@@ -33,15 +46,15 @@ import { PK } from "./pool";
 import { FRAME_MS, TONE, restPose, type GlyphPose, type SpawnCtx, type StyleRecipe, type WordCtx } from "./styles";
 import type { TypingFxStyle } from "./settings";
 
-/** A box in the strip's root (px). */
-export type LoadRect = { x: number; y: number; w: number; h: number };
+/** A box in the strip's root (px); `id`: the host's own name for it (a bay's cell), handed back on landing. */
+export type LoadRect = { x: number; y: number; w: number; h: number; id?: number };
 
 /** What a game gives to turn the Load mode on. */
 export type LoadHost = {
   /** Where a finished word lands (root px), the bay's magazine cell; false: it rises and fades (a full bay takes nothing). */
   target(out: LoadRect): boolean;
-  /** The word reached its target (f12): the host's own impact on top of the kit's white flash. */
-  onLand?(): void;
+  /** A word reached its target (f12): the host's own impact on top of the kit's white flash; `target` is that flight's own box and id (as target() set them), not the latest aim. */
+  onLand?(target: Readonly<LoadRect>): void;
   /** The player style that plays Load's key (default "stamp", the owner's pick and every game's default). */
   style?: TypingFxStyle;
   /** The host draws hidden letters as glass tiles (its CSS on `.tfx-g.is-masked`, `--tfx-shine` 0 … 1); false: "_". */
@@ -68,19 +81,25 @@ const clamp01 = (v: number): number => (v < 0 ? 0 : v > 1 ? 1 : v);
  * 0.68 here as a radius).
  */
 export const LOAD = {
-  key: { ms: 150, copy: 2.6, lift: 0.28, tilt: -3, star: 1.2, starIn: 0.09, disc: 0.68, core: 0.3, ring: 0.72, ringStroke: 0.2, dark: 0.76, darkStroke: 0.17, ticks: 12, arc: 0.83, gap: 1.15, turn: (40 * Math.PI) / 180, shards: 2, shardsMax: 4 },
+  key: { ms: 150, copy: 2.2, lift: 0.04, tilt: -5, glow: 1.05, glowAt: [-0.32, -0.46], disc: 0.62, core: 0.3, ring: 0.72, ringStroke: 0.2, ringGap: 1.6, dark: 0.76, darkStroke: 0.17, darkGap: 1.3, ticks: 12, arc: 0.83, gap: 1.6, turn: (40 * Math.PI) / 180, shards: 2, shardsMax: 4 },
+  /**
+   * G5: the letters not typed yet keep their own ground. The canvas clears a band over them (from `lead`
+   * of the font before the next letter's box to the row's end, `top` … `bottom` of the font round the
+   * row's middle), its edges soft over `feather` (left, over the letter just typed) and `edge` (top, bottom).
+   */
+  guard: { lead: 0.1, feather: 0.16, edge: 0.14, top: 0.74, bottom: 0.64 },
   /** The clean streak's tiers (Last Line's 3, 6, 10, 20 clean words) and the star's rays at each. */
   tiers: [3, 6, 10, 20],
   rays: [4, 6, 8, 8, 10],
   /** The dark of the glyph ring and the arcs (rgba(20,12,12,.85), the study's E1). */
   dark: "rgba(20,12,12,0.85)",
-  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.72], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.32, thread: 0.36, land: 8, line: [0.72, 0.92], lineEnd: [0.32, 0.6], ring: [0.6, 2.4] },
-  learn: { at: 12, rise: 0.14, in: 8, hold: 650, out: 8 },
-  flaw: { scale: [1.35, 1.12, 1], hold: 8, out: 4 },
-  wrong: { twitch: [0.053, -0.053, 0.035, 0], bar: 6, drop: 0.21, crack: 9, shards: [2, 3] },
-  stray: { from: 1.4, drop: 0.35, frames: 15 },
-  back: { frames: 4, to: 0.6, slide: 3 },
-  release: { frames: 8 },
+  word: { flash: 1, flashPerfect: 2, rim: 0.36, squeeze: [0.86, 0.72], flyAt: 3, flyFrames: 9, dim: 0.3, foldAt: 3, foldFrames: 6, gap: 150, ribs: 8, rib: 0.07, ribWidth: 0.44, thread: 0.36, land: 8, landPerfect: 3, line: [0.72, 0.92], lineEnd: [0.32, 0.6], ring: [0.7, 3], ringReach: 0.9, head: 0.95, plus: { frames: 30, rise: 0.5 }, rays: { frames: 6, reach: 1.5, scale: [0.55, 1.35] }, slash: 120, glass: 8 },
+  learn: { at: 12, rise: 0.14, in: 8, hold: 620, out: 8, aside: 0.28 },
+  flaw: { scale: [1.6, 1.3, 1.08, 1], hold: 9, out: 4, sweepFrom: 4, sweepTo: 10 },
+  wrong: { twitch: [0.07, -0.07, 0.05, -0.02, 0], bar: 6, drop: 0.21, crack: 9, size: 0.74, shake: [0.06, -0.06, 0.045, -0.03, 0.015], shards: [2, 3] },
+  stray: { from: 1.4, drop: 0.12, frames: 5, shake: [0, 0.05, -0.05, 0.035, -0.02], shards: 8 },
+  back: { frames: 4, to: 0.6, slide: 3, dust: 3 },
+  release: { frames: 8, streaks: 8 },
   lock: { scale: [0.9, 0.96, 1.02, 1.04, 1.03, 1.01, 1], sweepFrom: 2, sweepTo: 12, breathe: 1500 },
   mask: { shimmer: 2400, phase: 0.7, reveal: 6, hint: 0.62 },
 } as const;
@@ -151,11 +170,33 @@ export function flightControl(x0: number, y0: number, x1: number, y1: number, ou
   return out;
 }
 
-/** The target's white flash `age` ms after the line lands: whole on its first frame, gone by f8; its scale 1.25 → 1. */
-export function landFlash(age: number): { alpha: number; scale: number } {
-  if (age < 0 || age >= LOAD.word.land * F) return { alpha: 0, scale: 1 };
+/**
+ * The target's white flash `age` ms after the line lands: whole on its first frame, gone by f8; its scale
+ * 1.25 → 1. A flawless word's holds whole for 3 frames and fades over 8 more.
+ */
+export function landFlash(age: number, flaw = false): { alpha: number; scale: number } {
+  const hold = flaw ? LOAD.word.landPerfect : 1;
+  if (age < 0 || age >= (LOAD.word.land + hold - 1) * F) return { alpha: 0, scale: 1 };
   const f = frameOf(age);
-  return { alpha: f === 0 ? 1 : Math.exp(-(age - F) / 40) * 0.9, scale: f === 0 ? 1.25 : f === 1 ? 1.1 : 1 };
+  return { alpha: f < hold ? 1 : Math.exp(-(age - hold * F) / 40) * 0.9, scale: f === 0 ? (flaw ? 1.35 : 1.25) : f === 1 ? 1.12 : 1 };
+}
+
+/** The landing cell's rays `age` ms after it lands: whole and smallest on its frame, thrown out and gone by f6; reduced motion: none. */
+export function raysAt(age: number, still: boolean): { alpha: number; scale: number } {
+  const R = LOAD.word.rays;
+  if (still || age < 0 || age >= R.frames * F) return { alpha: 0, scale: 1 };
+  const t = age / (R.frames * F);
+  const f = frameOf(age);
+  return { alpha: f === 0 ? 1 : 1 - t, scale: R.scale[0] + (R.scale[1] - R.scale[0]) * (1 - (1 - t) * (1 - t)) };
+}
+
+/** The "+1" over the landing cell `age` ms after it lands: 1.4× white-hot on its frame, then rising and fading by f30. */
+export function plusAt(age: number): { alpha: number; scale: number; rise: number; hot: boolean } {
+  const T = LOAD.word.plus.frames * F;
+  if (age < 0 || age >= T) return { alpha: 0, scale: 1, rise: 0, hot: false };
+  const f = frameOf(age);
+  const t = age / T;
+  return { alpha: t < 0.6 ? 1 : 1 - (t - 0.6) / 0.4, scale: f === 0 ? 1.4 : f === 1 ? 1.15 : 1, rise: LOAD.word.plus.rise * (1 - (1 - t) * (1 - t)), hot: f < 3 };
 }
 
 /** The meaning's beat `age` ms after the word completed: alpha and rise (shares of the font size); it starts at f12. */
@@ -172,23 +213,31 @@ export function learnAt(age: number): { alpha: number; rise: number } {
 /** How long the meaning stays fully readable (ms). */
 export const LEARN_HOLD = LOAD.learn.hold;
 
-/** The FLAWLESS stamp `age` ms after a flawless word: its scale in steps (f0–2), held to f8, gone by f12. */
-export function flawAt(age: number): { alpha: number; scale: number } {
-  if (age < 0) return { alpha: 0, scale: 1 };
+/** The FLAWLESS stamp `age` ms after a flawless word: slammed in steps 1.6 → 1 (f0–3), held to f9, gone by f13; `sweep` the light across it (0 … 1, f4–10; −1 outside). */
+export function flawAt(age: number): { alpha: number; scale: number; sweep: number } {
+  if (age < 0) return { alpha: 0, scale: 1, sweep: -1 };
   const f = frameOf(age);
   const scale = LOAD.flaw.scale[f] ?? 1;
-  if (f < LOAD.flaw.hold) return { alpha: 1, scale };
+  const s = (age - LOAD.flaw.sweepFrom * F) / ((LOAD.flaw.sweepTo - LOAD.flaw.sweepFrom) * F);
+  const sweep = s < 0 || s > 1 ? -1 : s;
+  if (f < LOAD.flaw.hold) return { alpha: 1, scale, sweep };
   const alpha = 1 - (age - LOAD.flaw.hold * F) / (LOAD.flaw.out * F);
-  return { alpha: alpha > 1e-6 ? alpha : 0, scale };
+  return { alpha: alpha > 1e-6 ? alpha : 0, scale, sweep };
 }
 
-/** A stray key's ghost: scale 1.4 → 1, dropping 0.35 of the font size (20 px at 720p) over 15 frames, fading. */
-export function strayAt(age: number, still: boolean): { alpha: number; scale: number; drop: number } {
+/**
+ * A stray key's ghost: 1.4× white-hot on its frame, then crimson at 1×, shaking in pixel steps and sinking
+ * a little; at f5 it shatters (the shards are the canvas's, strayShatter) and is gone. `hot` while white;
+ * `dx` the shake (em). Reduced motion: still, no shake, it fades instead of shattering.
+ */
+export function strayAt(age: number, still: boolean): { alpha: number; scale: number; drop: number; dx: number; hot: boolean } {
   const T = LOAD.stray.frames * F;
-  if (age < 0 || age >= T) return { alpha: 0, scale: 1, drop: 0 };
-  const t = age / T;
+  const off = { alpha: 0, scale: 1, drop: 0, dx: 0, hot: false };
+  if (age < 0) return off;
   const f = frameOf(age);
-  return { alpha: f < 2 ? 1 : 1 - (t - (2 * F) / T) / (1 - (2 * F) / T), scale: still ? 1 : f === 0 ? LOAD.stray.from : f === 1 ? 1.15 : 1, drop: still ? 0 : LOAD.stray.drop * t * t };
+  if (still) return age >= 3 * T ? off : { alpha: f < 2 ? 1 : 1 - (age - 2 * F) / (3 * T - 2 * F), scale: 1, drop: 0, dx: 0, hot: f === 0 };
+  if (age >= T) return off;
+  return { alpha: 1, scale: f === 0 ? LOAD.stray.from : f === 1 ? 1.12 : 1, drop: LOAD.stray.drop * (age / T), dx: LOAD.stray.shake[f] ?? 0, hot: f === 0 };
 }
 
 /** The shimmer of hidden letter `i`'s glass at `now` (0 … 1, 2.4 s a cycle, each letter 0.7 rad behind the one before). */
@@ -274,7 +323,8 @@ export const LOAD_KEY: StyleRecipe = {
         out.hot = 1;
         return out;
       }
-      // f0: the letter at 2.6×, high and a little tilted, white-hot and flat (the study: no shadow), the star's rays round it.
+      // f0: the letter at 2.2×, white-hot in the gun's glow, tilted back; it stands on its own right foot (the CSS origin of
+      // `.tfx--load .tfx-a`), so it grows up and over the typed letters and never covers the next one (G5).
       out.alpha = 0;
       out.aOn = true;
       out.aScale = 1 + (LOAD.key.copy - 1) * m;
@@ -299,8 +349,8 @@ export const LOAD_KEY: StyleRecipe = {
         // The arcs open toward the next letter (+x); a hair of turn so no two keys look stamped.
         c.pool.rot[i] = (c.random() - 0.5) * 0.3;
       }
-      c.light(1, 0.45);
-      c.light(-1, 0.25);
+      // Only the letter before lights: the next one keeps its own ink (G5).
+      c.light(-1, 0.3);
       return;
     }
     // f3: 2–4 dark crystal shards thrown off the dark ring (more with the streak).
@@ -308,15 +358,17 @@ export const LOAD_KEY: StyleRecipe = {
     crystals(c, c.mult > 0 ? n : 0, c.x, c.y, LOAD.key.dark * c.h, 0, keyTone(c.tier), 150);
   },
   spawnRelease(w: WordCtx) {
-    // The study's f4–6: a thin white ring round the whole word as it squeezes.
+    // A slash of light along the row as the word charges (f0–6; never a ring round it: an ellipse and a slash read as "no").
     if (w.mult <= 0) return;
-    const i = w.pool.spawn(PK.shock, w.owner, w.prio, w.cx, w.cy, w.now, 120);
-    if (i < 0) return;
-    w.pool.tone[i] = w.gold ? TONE.glass : TONE.hot;
-    w.pool.size[i] = w.rowW / 2 + 0.25 * w.h;
-    w.pool.size2[i] = 0.62 * w.h;
-    w.pool.rot[i] = 0.035 * w.h;
-    w.pool.aux[i] = w.still ? 0 : 0.12;
+    const i = w.pool.spawn(PK.beam, w.owner, w.prio, w.cx, w.cy - 0.04 * w.h, w.now, LOAD.word.slash);
+    if (i >= 0) {
+      w.pool.tone[i] = w.gold ? TONE.glass : TONE.accent;
+      w.pool.size[i] = w.rowW / 2 + 0.3 * w.h;
+      w.pool.size2[i] = 0.2 * w.h;
+      w.pool.variant[i] = 0;
+    }
+    // A flawless word: glass shards off the plate, out from every letter.
+    if (w.gold) loadGlassBurst(w);
   },
   spawnWrong(c) {
     loadWrongBeat(c);
@@ -337,14 +389,64 @@ export function loadWrongBeat(c: SpawnCtx): void {
     c.pool.aux[b] = Math.max(3, 0.1 * c.h);
   }
   if (c.key <= 32) return;
-  const g = spawn(c, PK.crackGlyph, TONE.crimson, LOAD.wrong.crack * F, c.x, c.y - 0.95 * c.h);
+  // The copy stands over the due letter, clear of the row (its foot 0.3 of the font above the letters' tops).
+  const up = 1.12 * c.h;
+  const g = spawn(c, PK.crackGlyph, TONE.crimson, LOAD.wrong.crack * F, c.x, c.y - up);
   if (g >= 0) {
-    c.pool.size[g] = 0.56 * c.h;
+    c.pool.size[g] = LOAD.wrong.size * c.h;
     c.pool.aux[g] = c.key;
     c.pool.size2[g] = c.still ? 0 : LOAD.wrong.drop * c.h;
+    c.pool.rot[g] = c.still ? 0 : 1;
   }
   const n = LOAD.wrong.shards[0] + (c.random() < 0.5 ? 0 : 1);
-  crystals(c, n, c.x, c.y - 0.95 * c.h + (c.still ? 0 : LOAD.wrong.drop * c.h), 0.12 * c.h, 2, TONE.crimson, 130, LOAD.wrong.crack * F, 1);
+  crystals(c, n, c.x, c.y - up + (c.still ? 0 : LOAD.wrong.drop * c.h), 0.14 * c.h, 2, TONE.crimson, 130, LOAD.wrong.crack * F, 1);
+}
+
+/** A stray key's ghost shatters at f5 into 8 crimson shards where it stood (`c.x`, `c.y`: its middle on the canvas). */
+export function strayShatter(c: SpawnCtx): void {
+  if (c.still) return;
+  crystals(c, LOAD.stray.shards, c.x, c.y, 0.2 * c.h, 2, TONE.crimson, 190, LOAD.stray.frames * F);
+}
+
+/** A letter taken back (backspace): a little dark dust falls under it (below the row, clear of the letters). */
+export function backDust(c: SpawnCtx): void {
+  crystals(c, LOAD.back.dust, c.x, c.y + 0.7 * c.h, 0.08 * c.h, 0, TONE.deep, 150, 0, 1);
+}
+
+/** A flawless word: glass shards off the plate, out from every letter (up to LOAD.word.glass). */
+export function loadGlassBurst(w: WordCtx): void {
+  if (w.mult <= 0) return;
+  const n = Math.min(LOAD.word.glass, Math.max(4, w.len));
+  for (let k = 0; k < n; k += 1) {
+    const x = w.cx + (w.sx[k % w.len] ?? 0);
+    const up = k % 2 === 0;
+    const dir = (up ? -Math.PI / 2 : Math.PI / 2) + (w.random() * 2 - 1) * 0.9;
+    const i = w.pool.spawn(PK.crystal, w.owner, w.prio, x + Math.cos(dir) * 0.3 * w.h, w.cy + Math.sin(dir) * 0.55 * w.h, w.now, 220 * (0.85 + 0.3 * w.random()));
+    if (i < 0) return;
+    w.pool.tone[i] = TONE.glass;
+    w.pool.aux[i] = 1;
+    w.pool.size[i] = (0.13 + 0.07 * w.random()) * w.h;
+    w.pool.rot[i] = dir;
+    w.pool.spin[i] = w.still ? 0 : (w.random() * 2 - 1) * 12;
+    if (w.still) continue;
+    const speed = (9 + 6 * w.random()) * w.h;
+    w.pool.vx[i] = Math.cos(dir) * speed;
+    w.pool.vy[i] = Math.sin(dir) * speed;
+    w.pool.drag[i] = 6;
+    w.pool.grav[i] = 6 * w.h;
+  }
+}
+
+/** A word let go: short white streaks drawn in to the row's middle over the fold (8 f). */
+export function releaseImplode(w: WordCtx): void {
+  if (w.mult <= 0 || w.still) return;
+  const i = w.pool.spawn(PK.implode, w.owner, w.prio, w.cx, w.cy, w.now, LOAD.release.frames * F);
+  if (i < 0) return;
+  w.pool.tone[i] = TONE.hot;
+  w.pool.size[i] = w.rowW / 2 + 0.35 * w.h;
+  w.pool.size2[i] = 0.62 * w.h;
+  w.pool.aux[i] = LOAD.release.streaks;
+  w.pool.rot[i] = w.random() * 0.6;
 }
 
 /** A hidden letter typed right: its glass bursts into glass shards and a small star (a reward for remembering it). */
