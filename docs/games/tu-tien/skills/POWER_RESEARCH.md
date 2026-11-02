@@ -68,3 +68,26 @@ Chọn mục tiêu có giữ chỗ:
   - móc âm theo sự kiện, mẫu Vạn Kiếm Triều Tông.
 - **Danh mục chiêu mới:** nghiên cứu nguồn Trung Quốc song song ở ChatGPT và Gemini (Argon), xem [`SKILL_CATALOG_V2_RESEARCH.md`](SKILL_CATALOG_V2_RESEARCH.md) khi xong.
 - **Âm thanh** (tiếng hiệu ứng và tiếng hô tiếng Trung) tạo trong Firefly, theo [`WEAPON_AUDIO.md`](WEAPON_AUDIO.md) và D58.
+
+## Kết quả lượt 1 (03/11, khoảng 03:15)
+
+Lượt 1 có 12 commit dựng (`3cd207d`…`193f15a`), changelog ở `docs/changelog/2026-11-03-lab-power-pass.md` của repo game. Sau đó một agent soát đối kháng tìm ra 7 lỗi thật và sửa cả 7 (`c05eea4`…`662eaa2`):
+- NaN vào bloom ở Ultra;
+- một đòn cũ giữ đòn mới thành 83 ms;
+- bộ điều chỉnh độ phân giải hạ nhầm;
+- nhát kết vượt bảng bậc;
+- rung và tách màu sai tỉ lệ theo độ cao màn hình;
+- kiếm xoay phụ thuộc tốc độ khung;
+- tạo chuỗi mỗi đòn.
+
+Đo lại: phím tới đòn 33 ms; High p95 phím 7 là 8,4 ms, K5 là 9,7 ms.
+
+**Hai giám khảo mù: 5,8 và 5,5** (trần 8,5). Hai người cùng thấy:
+- ở cận cảnh, tuyệt kỹ và chiêu cả sân ra khỏi khung;
+- màn hình tối chưa đủ (độ sáng chỉ giảm từ 66 xuống 62), nhát kết là sương sữa;
+- kiếm phím 7 thành "đống que sáng" một màu, không có thanh chủ;
+- quái phản ứng ít, sau chiêu xoáy còn đứng trắng bệch như lỗi;
+- số sát thương nhiều và rối, có số ra ngoài sân;
+- cảnh cận đứng im như băng quảng cáo, tranh tả thực không khớp nhân vật tạm trên sân, chữ Hán đứng trước tên tiếng Anh.
+
+**Lượt 2** (workflow `wf_38571378-1ef`) sửa đúng các điểm này, rồi soát đối kháng và cho hai giám khảo mới chấm. Theo luật ba lần thử: nếu tới lượt 3 vẫn không tăng rõ, Claude bàn hướng khác với ChatGPT trước lượt 4.
