@@ -333,3 +333,19 @@ Bản 10 (`showcase-clear-wind.v10-try1`) sửa tiếp trên bản 9 theo 5 đi�
 Lỗi gốc hai giám khảo mới cùng đo được, có ở mọi bản từ bản 4: **lưỡi chỉ chiếm 51–55 % chiều dài kiếm** (đĩa, chuôi và núm gần một nửa). Ở 25 px kiếm đọc thành "chìa khóa" hay "dao găm có vòng". Kiếm Hán dài cần lưỡi khoảng 70–75 %, đĩa khoảng 2,5 lần bề rộng lưỡi, chuôi ngắn lại. Ngoài ra bản 9 có mũi lệch kiểu mũi đục (gợi tantō), và rãnh nào có khắc bên trong cũng bị model vẽ thành chữ giả.
 
 **Chững lại và đổi cách.** Vòng 6–12 dao động 7,2–8,2, không vòng nào lên thật. Sửa tại chỗ từng chút kéo qua lại giữa "giàu chi tiết" (M, A lên) và "rõ ở cỡ nhỏ" (F lên). Bản 11 sẽ vẽ mới hoàn toàn (không sửa trên ảnh cũ), từ một mô tả gom đủ bài học: tỉ lệ lưỡi dài gấp ba phần chuôi và đĩa cộng lại; mũi Hán cân; đĩa và núm của bản 9 nhưng gọn hơn; trục thẳng của bản 8; không khắc gì trong rãnh; ngọc nhạt và nhỏ; điểm sáng nằm trên chính thanh kiếm.
+
+## Vòng 13: bản 11 vẽ mới (02/11/2026, tối) và đổi quy trình
+
+Bản 11 (`showcase-clear-wind.v11-try1`) vẽ mới hoàn toàn từ prompt ChatGPT gom bài học vòng 6–12. Hai giám khảo mới W25, W26. Nhãn: C = bản 9, D = bản 11.
+
+| Bản | W25 (M / A / F) | W26 (M / A / F) |
+|---|---|---|
+| Bản 9 (C) | 7,6 / 7,8 / 6,6 | 7,4 / 7,6 / 6,6 |
+| Bản 11 (D) | 7,4 / 7,3 / 7,5 | 7,4 / 7,3 / 7,4 |
+
+Bản 11 sửa được tỉ lệ (lưỡi 71–72 % chiều dài, mũi Hán cân, không chữ) nhưng lưỡi trơn, chuôi chỉ 5–7 % chiều dài (không đủ cầm), mây trên đĩa phồng như bông, vòng giữa như thấu kính, nền núi mây cạnh tranh với vũ khí. Hai giám khảo đề nghị: tỉ lệ của bản 11 cộng cán, đĩa, núm của bản 9.
+
+**Chủ dự án dừng vòng lặp (02/11, tối):** "việc bạn tạo đi tạo lại ảnh đang k đúng hướng r, sai mãi vẫn sai… kêu chatgpt đưa vài mẫu mà bạn cảm thấy trên 9 điểm, sau đó đưa tôi review, nếu đạt thì kêu gpt dựa vào ảnh đó để đưa ra prompt tạo lại nhưng cải tiến 1 chút, sau đó đưa ra prompt thử tạo 3-5 ảnh". Từ đây không tạo lại theo ghi chú giám khảo nữa:
+1. ChatGPT tìm 12 mẫu kiếm chính thức được yêu thích (chat `6ae888dc`, Genshin Impact và Wuthering Waves; chưa tìm được ảnh kiếm của game hay donghua tiên hiệp Trung Quốc). Claude chấm làm mẫu tham chiếu: 9 trở lên là Primordial Jade Cutter, Mistsplitter Reforged, Haran Geppaku Futsu, Light of Foliar Incision, Absolution, Azurelight, Emerald of Genesis, Blazing Brilliance. Tờ ảnh đã gửi chủ dự án.
+2. Chủ dự án chọn mẫu. ChatGPT viết prompt từ mẫu đó: giữ mức chất lượng, cách dựng sáng và chất liệu, cải tiến một chút, nhưng giữ thiết kế riêng của Clear Wind (kiếm Hán, đĩa bích), không chép vũ khí của game khác.
+3. Tạo 3–5 ảnh cùng lúc, gửi chủ dự án hết, rồi mới chấm mù.
