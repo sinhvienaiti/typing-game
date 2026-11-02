@@ -387,3 +387,24 @@ Chủ dự án chỉ ra lỗi cách làm: "đáng lẽ bạn nên phân tích h�
 - **Clear Wind ngọc:** trơn như ảnh sản phẩm; hộ thủ ngang thành chữ thập Tây; hoa văn trên hộ thủ thành chữ giả.
 
 Giám khảo khác nhau nhiều (Thunder Seal 6,4–8,2), nên cần chủ dự án chọn hướng trước khi làm tiếp theo quy trình mẫu: chọn thanh, rồi ChatGPT viết prompt cải tiến từ chính ảnh đó và vẽ 3–5 ảnh.
+
+## Vòng 16: 5 chiến lược prompt tu tiên (02/11/2026, tối)
+
+5 ảnh từ `XIANXIA_PROMPTS.md` (sau thảo luận với ChatGPT), mỗi ảnh một chat mới (`x5-*.v1-try1`). Luật bộ mới cho ảnh trình diễn: cho phép vàng hay kim loại ấm và tua kiếm; vẫn không chữ. Hai giám khảo mới W31, W32. Nhãn: C = Ember Crest, H = Clear Wind, L = Winter Vein, R = Thunder Seal, V = Verdant Branch.
+
+| Vũ khí (chiến lược) | W31 (M / A / F) | W32 (M / A / F) |
+|---|---|---|
+| Ember Crest (lò rèn thần) | 7,8 / 7,9 / 8 | 7,8 / 8 / 7,8 |
+| Verdant Branch (linh vật sống) | 7,7 / 7,9 / 7,2 | 8,1 / 8,3 / 7,2 |
+| Winter Vein (cảnh giới trăng băng) | 7,9 / 8,2 / 7,4 | 8 / 8,2 / 7,1 |
+| Thunder Seal (thiên lệnh) | 7,5 / 7,5 / 7 | 7,6 / 7,7 / 7 |
+| Clear Wind (bảo vật gia truyền) | 7,4 / 7,3 / 7,8 | 7,5 / 7,4 / 7,5 |
+
+Đọc ra: M và A tăng rõ so với vòng 15 (từ 6–7,9 lên 7,3–8,3); chủ dự án: "đẹp đó, hơn hẳn ảnh cũ, chỉ là vấn đề họa tiết của kiếm, tôi thấy nó khá đẹp nhưng cầu kỳ". Chưa món nào đạt 8,5.
+- Lỗi chung: ở 25–60 px khử màu, bốn thanh kiếm chỉ còn một vạch mảnh và một đốm; độ hút dựa nhiều vào nền.
+- Ember Crest: dáng đọc rõ nhất, nhưng mặt lưỡi như đá dung nham kiểu ARPG; hộ thủ mái lầu và khung cổng trông như dán vào, có khối gần giống chữ 开 hay 门.
+- Verdant Branch, Winter Vein: hút nhất nhưng hộ thủ là bó hoa hay bó pha lê lộn xộn; bông tuyết mang chất Tây; mép trong suốt mất khi nhỏ.
+- Thunder Seal: lưỡi tím đen thuôn mũi kim; ô hồi văn ở núm đọc như chữ "alc", "ED".
+- Clear Wind: chuôi và đĩa bích đậm chất Trung Hoa nhất bộ, nhưng khoảng 60 % là lưỡi trơn; có một mũi nhọn nhỏ lòi ra trong lỗ đĩa (lỗi cấu trúc). Cần gân giữa nổi khảm bạc và vàng, rãnh ngọc phát sáng, hoa văn mây trên khoảng 60 % lưỡi, lưỡi rộng hơn khoảng 20 %.
+
+Chủ dự án chọn Clear Wind để làm trọn một thanh (model và chiêu). Ảnh nguồn cho Tripo: `clearwind-src3q.v1-try1(-pad)`, chấm ở vòng 17.
