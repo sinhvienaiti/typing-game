@@ -63,7 +63,7 @@ These recipes were tried in the app's in-app browser (`mcp__Claude_Browser__*`, 
 
 **Why it is needed:**
 - Download buttons do not save files from the in-app browser frame.
-- Page CSPs (ChatGPT, Firefly) block `fetch` to localhost.
+- Page CSPs (ChatGPT, Gemini, Firefly's image pages) block `fetch` to localhost. On 03/11/2026 Firefly's Generate Sound Effects and Generate Speech pages allowed a `fetch` POST to `127.0.0.1`, so check per page.
 - They do not block `form-action`, so a multipart form POST to a receiver on `127.0.0.1` gets through.
 
 **Set it up:**
@@ -126,4 +126,17 @@ f.appendChild(i); document.body.appendChild(f); f.submit();
   - Each clip comes out as a colour video and a grey alpha video. Post both blobs to the receiver.
   - About 2–3 generations, then "try again later" for about 4 minutes.
   - Ingest and numbers: `docs/games/vfx/FIREFLY_VFX_LIST.md` (§5) and [game-vfx-layered](../../game-vfx-layered/SKILL.md).
-- **Sound effects:** see [audio.md](audio.md).
+- **Sound effects and speech** (Claude generates them since 03/11; rules in [audio.md](audio.md)):
+  - **Page anatomy.** Everything sits in shadow roots, so walk them with a deep query.
+    - Sound Effects: a `TEXTAREA` with `aria-label="Prompt"`; an `SP-SLIDER` with `label="Duration"` (minimum 1 s); an `SP-BUTTON` reading "Generate".
+    - Speech: a tiptap `ProseMirror` editor; `SP-PICKER`s for the model (`tts-model-firefly-dnt` is Adobe's Firefly Speech) and the language (`zh-CN` for Mandarin); voices are `role="option"` rows.
+    - Results are `<audio src="blob:…">` elements.
+  - **Fill and start.** Set the prompt with the native value setter plus `input` and `change` events, set the slider's `value` and dispatch the same events, then click Generate.
+  - **Collect.** Wait for blob audio not yet posted, `fetch` each blob, and post a `FormData` to a receiver on `127.0.0.1`.
+    - The receiver must be threaded (`ThreadingHTTPServer`): one stalled request hung a single-threaded one.
+  - **Output:** each sound generation gives 4 WAV takes at 48 kHz stereo, peak-normalized near 0 dBFS. Speech gives 1 take and costs 1 credit.
+  - **Keep the Firefly tab in front, and run one job at a time across tabs.** A background tab stalls its generations, and a second tab's job blocked the first.
+  - **Retry dropped results.** The results panel sometimes resets and drops a generation: count the takes per id and regenerate the missing ones.
+  - **Run long batches inside the page** as an async loop that logs to `window`. Poll the log with short calls (the JS tool times out at 45 s).
+  - **Partner models** (ElevenLabs and others) open a consent dialog: partner terms and an 18+ confirmation. That click is the owner's; press Cancel.
+  - **Firefly Speech** reads Mandarin cleanly, but in a narration tone. Use short lines with a dash or ellipsis before the key word for a shout's shape.

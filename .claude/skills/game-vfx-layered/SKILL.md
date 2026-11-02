@@ -1,6 +1,6 @@
 ---
 name: game-vfx-layered
-description: "Build or review combat and skill VFX in any game of this repo (Dragonhold, Wordwoven, Last Line, Tu Tien and later games) as layered effects with all five phases: charge, release at the caster, travel, impact, aftermath. Use for any shot, skill or spell (xianxia sword arts, formations and talismans included), ultimate, trap, enemy attack, death or boss effect. Also use when building a skill demo or VFX lab for the owner to review before the effect goes into the game, and for \"pale\", \"weak\" or \"plain\" feedback complaints. Not for a character's always-on glow (game-hero-presence-vfx), and not for making source images, textures or audio or judging art (game-art-pipeline)."
+description: "Build or review combat and skill VFX in any game of this repo (Dragonhold, Wordwoven, Last Line, Tu Tien and later games) as layered effects with all five phases: charge, release at the caster, travel, impact, aftermath. Use for any shot, skill or spell (xianxia sword arts, formations and talismans included), ultimate, trap, enemy attack, death or boss effect. Also use when building a skill demo or VFX lab for the owner to review before the effect goes into the game, when designing or redesigning a whole skill catalog or kit, when skills feel weak, small or unimpressive (screen effects, foe reactions, damage numbers, cut-ins, callouts), and for \"pale\", \"weak\" or \"plain\" feedback complaints. Not for a character's always-on glow (game-hero-presence-vfx), and not for making source images, textures or audio or judging art (game-art-pipeline)."
 ---
 
 # Layered combat and skill VFX
@@ -54,6 +54,10 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
    - Last Line High had about 0.7 ms left (02/11).
    - Measure a new game first.
    - When headroom is tight, add an overdraw count (transparent layers per pixel, against the §3.7 caps) to the lab capture's `meta.json`.
+   - **Retina screens:**
+     - On the M4 at 1920×1080 CSS, a fixed DPR 2 frame cost 3–6× the DPR 1 frame, and MSAA 4 added about 3 ms even at DPR 1 (Tu Tien, 03/11/2026).
+     - Use dynamic resolution instead of a fixed ratio: `games/immortality-cultivation/src/view/dynamic-resolution.ts` with the renderer's `pinPixelRatio`.
+     - Pin the ratio for captures and perf runs so numbers compare.
 8. **Sound with every effect.**
    - Each phase that flashes also sounds, on the same frame.
    - Combat and skill sounds are layered, loud by tier, explosive and reverberant ([game-art-pipeline audio](../game-art-pipeline/references/audio.md) §5). The soft key-sound rules apply only to keys and light UI.
@@ -90,6 +94,32 @@ Every layer keeps the light rule of step 6: thin HDR cores at 3–6, halos and r
 - **WebGPU and TSL: later.** The games stay on WebGL2 with GLSL (VFX_STANDARD §4.1).
 
 **A shared kit `vfx/` module** is extracted only when Tu Tien's first effect passes 8.5 and a second game needs the same pieces.
+
+## Power layer: what makes a skill feel strong
+
+An effect alone is not a skill. The owner scored a lab of good-looking blades about 6/10 because nothing around them reacted: "quá nhiều chiêu phải tích 1 lúc mới thi triển, nó không hề có hiệu ứng màn ảnh, quá thiếu đi sự khủng bố của tu tiên" (Tu Tien canon D58, 03/11/2026). Every skill ships with all of these (recipe and numbers: `docs/games/tu-tien/skills/POWER_RESEARCH.md`; building blocks in `games/immortality-cultivation/`):
+
+- **Instant cast.** The last correct key is the release frame. The charge shows only while typing, and a new release cuts any running hit-stop. Building blocks: `src/lab/skills-main.ts`, `src/lab/feel.ts`.
+- **Screen effects by tier** (basic, skill, ultimate), in `src/view/screen-fx.ts`:
+  - shake from trauma squared on smooth noise, plus a FOV punch;
+  - hit-stop per tier, and slow motion as a world-time scale;
+  - darkening, flash and an edge-only chromatic split in one pass before the OutputPass. It never touches DOM text, word tags or the number overlay.
+  - One intensity setting governs all of them.
+- **Foe reactions** that change the silhouette, in `src/lab/herd.ts` and `src/lab/death-fx.ts`:
+  - a 2–4 frame rim flash in the attacker's colour, and a 5–30 cm recoil along the blow;
+  - a stagger only on elites and big strikes, with an immunity window so it is never restarted; the boss never moves at the root;
+  - deaths that transform: a burst, wisps, ink, shards.
+- **Compiled damage numbers**, in `src/view/hitfx.ts` (`SkillNumberField`) and `src/view/damage-compile.ts`:
+  - per target over about 150 ms (500 ms for field-wide skills), with one cluster total when 5 or more small foes are hit;
+  - crits at 120–135 % with a gold edge, placed below-right of the foe and never over word tags.
+- **An ultimate cut-in** of about 1 s, after F0 has already hit. It pauses the sim and the typing timer, and uses owner-approved art only.
+- **A sound bus** on the same frame, in `src/lab/sound.ts` and `src/lab/events.ts`:
+  - impacts grouped per material in 30–50 ms buckets, never one sound per hit;
+  - fly-bys only for the nearest 8–12 objects;
+  - world-change events (open, hush, climax, close), and the callout.
+- **Wide and field-wide skills.** A self-hunting field skill, in `src/view/skills/van-kiem.ts`, needs four readable states: the sky changes, the weapons gather, they visibly choose prey, and one decisive end.
+  - Targeting reserves foes (by size 2, 5 or 10 weapons; retarget on death; 15–20 % scatter) and recycles instanced weapons.
+- **Designing a whole skill kit:** [skill-kit design](references/skill-kit-design.md).
 
 ## Demo or lab first, then the game
 

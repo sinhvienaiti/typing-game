@@ -19,9 +19,14 @@ The living pipeline is [AUDIO_PIPELINE.md](../../../../docs/games/AUDIO_PIPELINE
 
 - **Firefly Generate Sound Effects** (Adobe's Firefly Audio model; never partner models) is the current route, set by the owner on the evening of 29/10 (`docs/HANDOFF_CURRENT.md`, the Firefly sound row). The steps are list, generate, score, ingest:
   1. Write the per-event list with English prompts in the game's file under `docs/games/audio/firefly/`. Combat ids get one prompt per layer (§5.6).
-  2. Generate takes into `~/AudioLab/inbox/firefly/<game>/<event-id>/`, keeping Firefly's own file names. The owner generates them on his account; an agent does it in his signed-in Firefly tab only when he asks for that batch.
+  2. Generate takes into `~/AudioLab/inbox/firefly/<game>/<event-id>/` as `<event-id>.v<n>-try<k>-var<j>.wav`.
+     - Since 03/11/2026 Claude generates the batches in the owner's signed-in Firefly tab ("chúng ta có firefly cơ mà, sao bạn không tạo"). The recipe is in [browser-ai-tools.md](browser-ai-tools.md) §5.
+     - Cast callouts are voice, made in Generate Speech: Adobe's Firefly Speech, or a partner voice model only where the owner allowed it for callouts and clicked Firefly's partner-model consent himself.
   3. Ingest with Audio Lab (`tools/audio-lab/`): trim, onset, loudness, hygiene, OGG, and a manifest with licence rows, landing in staging. Combat layers are stacked and processed offline first (§5.7).
-  4. Send the owner previews. Wire a sound only after his OK.
+  4. Send the owner previews: a listening page with every take, its length, LUFS and peak, and a pick button that saves his choices to a file (Tu Tien, 03/11: `~/AudioLab/review/<game>-firefly-<n>/`).
+     - Wire a sound into the game only after his OK.
+     - A dev lab may carry provisional pre-mixed layers so he hears skills in context. Name them as unapproved in the lab's `SOURCES.json` and in the batch doc.
+     - Mix one file per bus event from layer takes (§5.3), set the level by tier (§5.4), limit it, and leave headroom for the codec's overshoot.
 - **Other sources** follow AUDIO_PIPELINE §3 by category: CC0 libraries, sounds built in code only where the pipeline allows it, and local models with commercial-safe licences. They also follow its licence log (§10).
 
 ## 3. Who judges sound
