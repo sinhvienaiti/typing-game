@@ -245,3 +245,28 @@ Danh sách sửa cho bản 7 (cả hai giám khảo):
 8. Chuôi quấn dây lụa chàm xoắn, khâu bạc hai đầu; cổ chuôi có tai mây cuộn. Bản 6 vẫn đan thoi kiểu da hay tsuka.
 
 Luật dừng: điểm đã chững ở khoảng 7,8 sau ba vòng (6, 7, 8). Đổi cách lần nữa: bản 7 là chỉnh sửa tại chỗ trên bản 6 (giữ bố cục, đĩa, núm mây), không vẽ lại từ đầu, để không mất phần đã tốt.
+
+## Vòng 9: bản 7, sửa tại chỗ trên bản 6 (02/11/2026, tối)
+
+Bản 7 (`showcase-clear-wind.v7-try1`, ghi chú sửa lưu cạnh ảnh) là chỉnh sửa trên bản 6 theo 8 điểm của vòng 8. Hai giám khảo mới W17, W18 chấm lần lượt. Nhãn: J = bản 6, K = bản 7.
+
+| Bản | W17 (M / A / F) | W18 (M / A / F) |
+|---|---|---|
+| Bản 6 (J) | 7,4 / 7,2 / 7,6 | 7,4 / 7,3 / 7,4 |
+| Bản 7 (K) | 7,8 / 7,9 / 6,9 | 8 / 8,1 / 7,3 |
+
+Đọc ra: sửa tại chỗ có tác dụng. Bản 7 lần đầu có điểm 8 trở lên (W18: M 8, A 8,1): sứ trắng bóng, chạm mây sắc, viền hạt bạc, núm hải đường có ngọc, hồi văn sạch. Nhưng F giảm vì:
+- **Phạm luật cấm vàng:** nét viền màu sâm panh (khoảng sRGB 202,180,161) trên mây, đai đốc và núm.
+- **Tỉ lệ:** đĩa bích chiếm 28–30 % chiều dài kiếm; thu nhỏ và nghiêng thì đọc thành "kính lúp" hoặc "vòng cắm que".
+- **Lưỡi:** thuôn liên tục thành mũi kim, giống rapier, không phải kiếm Hán; lưỡi trống trơn sau đoạn hồi văn.
+- **Lắp ghép lệch tâm:** khâu chuôi tì vành dưới trái, lưỡi mọc ra từ trên phải.
+- **Chuôi tối:** khử màu ở 25–40 px thì chuôi gần như đen, núm như rời ra.
+- **Hào quang:** trăng xám phẳng đặt lệch.
+
+Danh sách sửa cho bản 8 (sửa tiếp trên bản 7, giữ phần đã được khen):
+1. Mọi nét viền sâm panh hoặc vàng thành bạc lạnh hoặc ngọc nhạt.
+2. Thu đĩa còn khoảng 22–24 % chiều dài kiếm; lỗ khoảng 45 % đường kính đĩa.
+3. Lắp ghép đúng tâm: khâu chuôi và chân lưỡi gặp nhau trên đường trục qua tâm lỗ; một cầu thẳng trục, đủ chắc để dựng 3D, hai đầu cuộn như ý nhỏ.
+4. Lưỡi song song khoảng 80 % chiều dài rồi vào mũi ngắn kiểu Hán; đường ngọc khảm mảnh và vân lôi bạc mờ dần tới khoảng 2/3 lưỡi; ánh sáng lạnh dọc mép.
+5. Chuôi chàm sáng hơn, thêm đai bạc cách quãng.
+6. Hào quang đặt giữa phía sau đốc; ngọc phát sáng dịu.
