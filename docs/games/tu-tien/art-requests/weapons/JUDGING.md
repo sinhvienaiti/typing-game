@@ -115,3 +115,22 @@ Sau góp ý của chủ dự án ("đã lấy 1 số hình ảnh để tham kh�
 - **Ngọc:** hạt ngọc ở tâm hộ thủ thành đá quý tâm điểm.
 - **Ánh sáng:** xanh lam như laser.
 - **Hướng của cả hai giám khảo:** giữ vật liệu và ánh sáng của L, ghép với vòng bích rỗng một lỗ của K, lưỡi kiếm Hán (hai cạnh song song, mũi ngắn), bản sắc phải còn khi tắt phát sáng. Đã giao vẽ bản 3.
+
+## Vòng 5 (02/11/2026): Clear Wind bản 3
+
+Hai giám khảo mới (W9, W10). M là bản 2, N là bản 3 (vòng bích một lỗ, kiếm Hán hai cạnh song song, ánh ngọc nhạt).
+
+| Nhãn | W9 (M / A / F) | W10 (M / A / F) |
+|---|---|---|
+| M (bản 2) | 7,5 / 7,7 / 6,8 | 7,5 / 7,8 / 6,5 |
+| N (bản 3) | 7,3 / 7 / 7,7 | 7,6 / 7,2 / 8 |
+
+Bản 3 đúng cấu trúc hơn: F lên 7,7–8, là mức cao nhất từ đầu. Nhưng nó sạch mà trơn, nên độ hấp dẫn tụt.
+
+Hướng chung của hai giám khảo: giữ cấu trúc bản 3, mượn độ rực bản 2. Việc cụ thể:
+- **Lưỡi:** tự phát sáng (lõi ngọc trắng trong rãnh, điểm lóe ở mũi), gân sống khảm sứ chạm mây, khâu nối gốc lưỡi kiểu Hán.
+- **Vòng bích:** nhiều lớp (gờ hạt, vân hạt cốc nổi thấp, nét chạm lấp bạc tối, viền ngọc quanh lỗ), lỗ rộng bằng nửa đường kính.
+- **Đốc:** đầu như ý.
+- **Ánh sáng:** ba chấm ngọc ở đúng điểm thứ bậc, tương phản mạnh hơn.
+
+Đã giao vẽ bản 4.
