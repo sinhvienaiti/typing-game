@@ -424,3 +424,18 @@ Chủ dự án chọn Clear Wind (bản gia truyền, vòng 16) để làm trọ
 3. Trả lại đám mây trắng có cánh vươn ra ngoài vành phía trên đĩa (W35); kéo cổ lưỡi bạc chạm thủng tới khoảng 1/5 lưỡi (W36).
 4. Vành bạc kép thu về một vành mảnh, đĩa nhỏ đi khoảng 10 % (W35); một phần ba phía mũi rộng thêm khoảng 25 % cho cạnh gần song song (W35).
 5. Lỗ đĩa để trống là chủ ý (vòng 16 coi mũi nhọn trong lỗ là lỗi cấu trúc).
+
+## Vòng 19: ảnh nguồn Clear Wind bản 4 (02/11/2026, tối)
+
+Bản 4 (`clearwind-src3q.v4-try1-pad`) sửa bản 1 theo danh sách vòng 18. Hai giám khảo mới W37, W38. Nhãn: K = bản 1, N = bản 4.
+
+| Ảnh nguồn | W37 (M / A / F) | W38 (M / A / F) |
+|---|---|---|
+| Bản 1 (K) | 8 / 7,6 / 6,8 | 7,9 / 7,7 / 6,8 |
+| Bản 4 (N) | 8,2 / 8,2 / 7,6 | 8,2 / 8,3 / 7,8 |
+
+Đọc ra: bản 4 khớp thiết kế đã duyệt gần như từng bộ phận (mây sứ viền vàng, cánh móc mây, cổ lưỡi chạm thủng có chữ V vàng, núm sen-mây sứ nở), M và A lên 8,2–8,3. F còn thiếu:
+1. Vẫn gần như nhìn chính diện, đĩa gần tròn: cần góc ba phần tư thật (cao khoảng 30°, đĩa thành elip tỉ lệ khoảng 0,8) để thấy độ dày đĩa, vách ngoài vành bạc, độ nổi mây và sống lưỡi.
+2. Chỗ mảnh: vành bạc ngoài chỉ khoảng 0,7 % chiều dài kiếm, mũi móc mây nhọn như kim, nhánh lá vàng cạnh ngọc mỏng như giấy. Làm dày vành, làm tù mũi móc, đổi giá vàng thành phù điêu đặc.
+3. Tương phản giá trị ở cỡ nhỏ: mặt khuất của vành bạc tối hơn, viền vàng đậm hơn để vòng đĩa giữ nét.
+4. Lỗ đĩa: hai giám khảo vòng 19 nhắc mũi nhọn trong lỗ của D, vòng 16 coi đó là lỗi cấu trúc. Giữ lỗ trống có chủ ý và ghi rõ trong README chấm.
