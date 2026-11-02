@@ -318,3 +318,18 @@ Danh sách sửa cho bản 10 (sửa tiếp trên bản 9):
 3. Đĩa nhỏ đi khoảng 15 %; chạm thủng gom thành 4–6 ô lớn rõ; vòng ngọc sáng hơn hẳn vành bạc để khử màu vẫn thấy hai vòng; lỗ giữa tối.
 4. Một khối đúc: gốc lưỡi mọc từ vành đĩa, cầu như ý nằm phẳng trong mặt đĩa.
 5. Chất liệu: sứ men bóng, bạc gương có điểm sáng cứng, ngọc trong có lõi sáng; ánh viền điện ảnh.
+
+## Vòng 12: bản 10, gom chi tiết cho rõ (02/11/2026, tối)
+
+Bản 10 (`showcase-clear-wind.v10-try1`) sửa tiếp trên bản 9 theo 5 điểm của vòng 11. Hai giám khảo mới W23, W24 chấm lần lượt. Nhãn: L = bản 10, N = bản 9.
+
+| Bản | W23 (M / A / F) | W24 (M / A / F) |
+|---|---|---|
+| Bản 10 (L) | 7,4 / 7,5 / 7 | 7,6 / 7,7 / 7 |
+| Bản 9 (N) | 7,8 / 7,7 / 6,8 | 7,9 / 7,8 / 7,3 |
+
+Đọc ra: bản 10 tụt. Ngọc bạc hà quá bão hòa như đèn neon; sống như ý to bè lấp lòng đĩa (ở 25–40 px đọc thành đĩa có chữ thập); lưỡi hình nêm thuôn kiểu dao găm; chạm như kem bắt hoa. Bản 9 vẫn nhỉnh hơn, nhưng vòng này chỉ được 7,8–7,9 (vòng 11 là 8,1–8,2), tức là độ lệch giữa các giám khảo khoảng 0,3.
+
+Lỗi gốc hai giám khảo mới cùng đo được, có ở mọi bản từ bản 4: **lưỡi chỉ chiếm 51–55 % chiều dài kiếm** (đĩa, chuôi và núm gần một nửa). Ở 25 px kiếm đọc thành "chìa khóa" hay "dao găm có vòng". Kiếm Hán dài cần lưỡi khoảng 70–75 %, đĩa khoảng 2,5 lần bề rộng lưỡi, chuôi ngắn lại. Ngoài ra bản 9 có mũi lệch kiểu mũi đục (gợi tantō), và rãnh nào có khắc bên trong cũng bị model vẽ thành chữ giả.
+
+**Chững lại và đổi cách.** Vòng 6–12 dao động 7,2–8,2, không vòng nào lên thật. Sửa tại chỗ từng chút kéo qua lại giữa "giàu chi tiết" (M, A lên) và "rõ ở cỡ nhỏ" (F lên). Bản 11 sẽ vẽ mới hoàn toàn (không sửa trên ảnh cũ), từ một mô tả gom đủ bài học: tỉ lệ lưỡi dài gấp ba phần chuôi và đĩa cộng lại; mũi Hán cân; đĩa và núm của bản 9 nhưng gọn hơn; trục thẳng của bản 8; không khắc gì trong rãnh; ngọc nhạt và nhỏ; điểm sáng nằm trên chính thanh kiếm.
