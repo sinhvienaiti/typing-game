@@ -40,16 +40,18 @@ Claude theo hướng đó, với hai chỗ sửa theo anh:
 
 | Bậc | Rung | Khựng | Chậm | Tối / chớp | Cảnh cận |
 |---|---|---|---|---|---|
-| Đánh thường | 2 px, tắt trong 75 ms | 12–16 ms, chỉ quanh chỗ trúng | không | chớp α 0,05 trong 40 ms | không |
-| Chiêu | 4 px, 120 ms | 24–30 ms ở đòn chính | 0,85× trong 80 ms ở nhát kết | tối α 0,10 trong 150 ms; chớp α 0,10 trong 45 ms | không |
-| Tuyệt kỹ | 8 px + nghiêng ≤ 0,1°, 220 ms; đẩy zoom 2 % | 60 ms ở cao trào | 0,45× trong 180 ms | tối α 0,28 trong 450 ms; chớp α 0,14 trong 45 ms | có, khoảng 1 s, dừng game và giờ gõ |
+| Đánh thường | 3 px, tắt trong 90 ms | 14 ms, chỉ con thú trúng đòn | không | không chớp toàn màn; chớp tại chỗ trúng α 0,4 trong 70 ms, bán kính 130 px | không |
+| Chiêu | 7 px, 200 ms; đẩy zoom 1,5 % ở nhát kết | 50 ms ở đòn chính, 67 ms ở nhát kết | 0,6× trong 140 ms ở nhát kết | lúc ra chiêu đèn thế giới giảm 22 % trong 300 ms (Ngự Kiếm Quyết thì không); chớp tại chỗ α 0,42, bán kính 190 px; nhát kết: chớp toàn màn α 0,3 trong 3 khung, mờ tỏa tâm 80 ms, viền màu 6 px | không |
+| Tuyệt kỹ và chiêu cả sân | 16 px + nghiêng ≤ 0,35°, 350 ms; đẩy zoom 4 % | 50 ms mỗi đợt, 100 ms ở cao trào | 0,3× trong 280 ms | suốt chiêu (tuyệt kỹ: từ lúc vào cảnh cận) đèn thế giới còn 55 %, thế giới mất 60 % màu, viền tối quanh khung: độ sáng trung bình của sân giảm 35–50 %; cao trào: chớp α 0,42 trong 3 khung rồi trả nhanh về khung tối, mờ tỏa tâm 80 ms, viền màu 12 px | có, khoảng 1 s, dừng game và giờ gõ |
+
+Sửa ở lượt 2 (03/11): hai giám khảo mù không thấy màn hình phản ứng ở tốc độ thật (độ sáng sân chỉ giảm từ 66 xuống 62, nhát kết thành sương sữa, đòn thường và Ngự Kiếm Quyết nhuộm xanh cả màn như bộ lọc), nên rung và khựng gần gấp đôi, tối bằng cách hạ đèn thế giới (VFX giữ nguyên độ sáng), chớp toàn màn chỉ ở nhát kết.
 
 **Chiêu cả sân mẫu: Vạn Kiếm Triều Tông** (萬劍朝宗, Ten-Thousand Sword Convergence), dựng làm mẫu trong lab. Tên và ô chốt theo danh mục chiêu mới.
 
 | Thời điểm | Diễn biến |
 |---|---|
 | F0, phím cuối | 8 kiếm thật rời tay ngay tới thú gần |
-| F1–4 | Thế giới tối khoảng 8 %; một vệt sông kiếm hiện chéo trên trời |
+| F1–20 | Thế giới tối dần (lượt 2: đèn thế giới còn 55 %, độ sáng sân giảm khoảng 45 %, lượt 1 chỉ 8 % nên không thấy); một vệt sông kiếm hiện chéo trên trời |
 | F4–30 | 64 hạt kiếm bay lên; sông kiếm phủ gần 40 m, 320 kiếm ở High |
 | F30–168 | Săn: mỗi 100 ms có 24–36 kiếm tách ra lao xuống. Kiếm được tái dùng nên thấy được 700–900 nhát |
 | F168–192 | Kiếm còn lại bay lên, xoắn một vòng, xếp thành một nét chéo khổng lồ |
