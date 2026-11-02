@@ -54,7 +54,10 @@ These recipes were tried in the app's in-app browser (`mcp__Claude_Browser__*`, 
 - Send the same message, in your own tab. The same gates apply.
 - **Never mix tools inside one set.** If a set started in ChatGPT, redo the whole set (turnaround and every view, or every piece of the set) in one Gemini chat with the same standard block.
 - The "Adobe models only" rule applies inside Firefly, not to Gemini's own site.
-- The image-out route has not yet been recorded for Gemini. On the first image, try §4 and write down here what worked.
+- **Driving it** (Tu Tien, 02/11/2026): the mode picker is the button whose aria-label starts "Mở công cụ chọn chế độ" (models such as 3.8 Flash, 3.1 Pro, 4 Argon, plus a thinking level). For images, open "Nội dung tải lên và công cụ" and pick "Tạo hình ảnh"; a "Hình ảnh" chip then shows. The prompt box is `rich-textarea .ql-editor` (`execCommand('insertText')` works, newlines included); send with the button labelled "Gửi tin nhắn". Start the prompt with "Create an image." An image takes about a minute.
+- **Image out:** the inline image is a 1024 px blob preview. The button "Tải hình ảnh có kích thước đầy đủ xuống" downloads the full size (2528×1696 for 3:2) to `~/Downloads/Gemini_Generated_Image_*.png`. That is a browser download: move your own file into `art-src` right away and say so in the report.
+- **Reference images cannot be pushed in from this machine:** the page's CSP blocks `fetch` and `<img>` from 127.0.0.1, writing the clipboard from a local page is denied, and in the in-app browser `window.open` replaces the current tab, so there is no opener to post to. Either generate from text only (describe the frame and presentation in words), or ask the owner to drag the reference files into the chat.
+- **Visible logo:** Gemini stamps a small sparkle in the bottom-right corner. Crop it off (for example 2380×1580 from the top left) before a blind round, or the judges know the tool.
 
 ## 4. Getting files out: the local receiver
 
