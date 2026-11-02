@@ -152,6 +152,90 @@ Hai giám khảo mù mới: **MJ3 6,1, MJ4 6,5** (vòng 1: 5,4 và 5,4). Chưa t
 
 Vòng 3 chạy sau khi xong việc đưa Clear Wind vào lab (cùng các file), dùng chính danh sách trên.
 
+## Kết quả vòng 3 (03/11/2026, rạng sáng; commit game `e502e62`, `e59e71b`, changelog `9ec67eb`)
+
+Yêu cầu của chủ dự án (03/11, khoảng 02:00; canon D58 (8)): tay, chân, thân phải chi tiết và khớp từng chiêu khi thi triển. Chi tiết nằm trong changelog `docs/changelog/2026-11-03-lab-motion-round3.md` của repo game.
+
+**Đã làm:**
+- **Bộ cử chỉ thi triển** (`src/lab/anim/gestures.ts`): kiếm chỉ 剑指, kiếm chỉ chỉ trời 敕令, vung tay tung quạt kiếm, đâm cung bộ 弓步, hai tay chỉ trời, thủ trụ mã bộ, cúi thấp lướt.
+- **Pha của mỗi cử chỉ:** lấy đà lớn dần theo chữ gõ, nhả trong ≤ 50 ms sau phím cuối, giữ, vượt rồi lắng, thu chiêu.
+- **Phần thân đi kèm mỗi cử chỉ:**
+  - chuyển trọng tâm;
+  - dáng chân bước bằng IK hai đốt (chân sau của bước lướt neo yên);
+  - cổ tay, đầu ngước;
+  - rút bớt độ xoay thân của clip nền;
+  - quất đuôi.
+- **Biên độ ×1,3** ở camera chơi.
+- **Ánh xạ là dữ liệu:** `SLOT_GESTURES` và `SLOT_CLIP`. Phím 7 (Vạn Kiếm Triều Tông) dùng kiếm chỉ chỉ trời. `caster.prime` lấy đà cho đánh thường tự phát.
+- **Danh sách vòng 2:**
+  - Ngực và đầu bị giới hạn mềm ở 720 °/s. Cú "150° trong 4 khung" thật ra là ngực quay 1.590 °/s ở cú nhả K2.
+  - Chiêu xoay sẵn về mục tiêu trong lúc gõ; cú xoay khi ra chiêu tối đa 600 °/s.
+  - Đầu và thân dẫn trước khi xoay.
+  - Trúng đòn: lên 3 khung, khựng 3 khung, gối khuỵu, tay hất, nhảy lùi 0,28 m, vòng đỏ ở ngực.
+  - Dash: bóng lưu ảnh màu xanh của Lam, nén sâu khi tiếp đất.
+  - Đuôi trễ theo bước, xoay, dash và dừng.
+  - Bước chỉnh thế khi dừng.
+- **Ba lỗi cũ tìm ra khi đo:**
+  - Thân quay 194° theo đường dài sau một lần đi ngang.
+  - Đầu ngửa 70° khi chuyển đi bộ sang chạy (nay 15°).
+  - Cánh tay vung 95° khi thu chiêu.
+- **Blender 60 fps:** không cần. Cú vung do lò xo thủ tục chạy ở 60 Hz điều khiển, clip 24 fps chỉ làm nền.
+
+**Số đo, trước → sau** (60 Hz, 45 WPM, gõ chữ):
+
+| Mục | Trước | Sau | Ngưỡng |
+|---|---|---|---|
+| Phím cuối → thân nhả | 33 ms | 33 ms (120 Hz: 42 ms) | ≤ 50 ms |
+| Khung gần tư thế bind | 0 | 0 | 0 |
+| Trượt chân trụ p95 | 0,188 m/s | 0,183 m/s | 0,05 m/s |
+| Xoay gốc lớn nhất | 278 °/s | 433 °/s | không khung > 1.800 °/s |
+| Xoay ngực lớn nhất | 1.590 °/s | 720 °/s | 720 °/s |
+| Ngực / đầu dẫn trước khi xoay | 0,7 / 3,3 khung | 4,4 / 8,9 khung | 4–6 khung |
+| Chuyển clip vượt 1,5 × đỉnh clip | 3/27 | 5/28 | 0 |
+
+Hai chuyển clip vượt thêm là bước chân thủ tục: bước cung bộ của K2 (1,64) và cú nhảy lùi khi trúng đòn (2,14). Mốc so là đỉnh clip Idle, nên bước nào cũng vượt.
+
+**Giám khảo mù** (so với Genshin, Star Rail, Wuthering Waves): bản đầu được giám khảo 1 chấm **4,7**. Bản làm lại được hai giám khảo chấm lần lượt **A 5,3** và **B 5,7**. Điểm từng hạng mục của A / B:
+- lấy đà 5,5 / 6;
+- khối lượng 5,5 / 6;
+- chuyển tiếp 5 / 6;
+- trúng đòn 5 / 5;
+- đi, xoay, đứng 6 / 6,5;
+- đọc rõ ở camera chơi 4,5 / 4,5;
+- cử chỉ khớp chiêu 5,5 / 5,5.
+
+Chưa tới 7, nên chưa làm clip 60 fps cho anh. Bộ giám khảo mới chấm nặng phần đọc rõ ở camera chơi, nên không so trực tiếp với 6,1 và 6,5 của vòng 2.
+
+**Còn thiếu, theo cả hai giám khảo:**
+- **Đọc rõ ở 50–70 px.**
+  - Camera từ sau lưng, nên mũ trùm che tay đưa ra trước.
+  - Cần đẩy dáng gấp 1,5–2 lần: tay và kiếm thoát hẳn khỏi bóng thân, hông hạ 20–25 % chiều cao.
+  - Giữ dáng nhả 6–8 khung trước khi VFX lên đỉnh.
+- **Lấy đà còn đứng hình:** cuộn 25–35° lớn dần theo chữ, mỗi phím thêm 2–3°, dáng cực ở phím cuối.
+- **Trúng đòn toàn thân:** hông lùi 10–15 cm, gối khuỵu, tay hất, một bước loạng choạng, hồi trong 0,35–0,5 s.
+- **Dáng giữ:** mọi dáng giữ cần thở và trôi nhẹ. K5 thoát dáng giữ trong 10–14 khung thay vì 3.
+- **Cử chỉ riêng:**
+  - K5 hai tay thật sự lên trên đầu;
+  - K4 vung theo chuỗi hông → ngực → vai → tay;
+  - K7 nâng tay lớn hơn và nhón chân;
+  - khi xoay, đầu dẫn 20–30°.
+
+**Cần làn khác:**
+- `skills-main.ts`:
+  - phím 7 gọi `caster.release("k7", …)` thay cho `"k1"`;
+  - đồng hồ đánh thường gọi `caster.prime("auto", …, 0.25)` trước khi phát.
+- VFX:
+  - làm mờ vòng sáng dưới chân nhân vật;
+  - không phủ lóe lên thân trong 6–8 khung đầu sau khi nhả;
+  - kiếm trên tay không tắt rồi bật lại;
+  - kiếm K4 xuyên mũ trùm;
+  - lóe trắng của dash.
+
+**Luật ba lần thử:** vòng 1 được 5,4; vòng 2 được 6,1 và 6,5; vòng 3 được 4,7, rồi 5,3 và 5,7. Chưa có bước tăng rõ. Trước lần thử thứ tư cần bàn với ChatGPT một cách khác. Ví dụ:
+- cảnh cận khi ra chiêu;
+- dáng thiết kế để đọc được từ phía sau;
+- clip Blender riêng cho từng cử chỉ thay cho lớp thủ tục.
+
 ## Phụ lục (báo cáo chỉ đọc, 02/11/2026)
 
 ### A. Kiểm kê rig và clip của Lam
