@@ -153,3 +153,23 @@ Bản 4 cao nhất từ đầu và cân bằng cả ba trục, nhưng vẫn dư�
 - **Ánh sáng:** đường ngọc sáng nối rãnh vào vòng; bỏ lóe sao và vệt lóa, giảm bloom; hào quang khác hình với vòng bích.
 
 Đã giao vẽ bản 5.
+
+## So sánh Firefly và ChatGPT (02/11/2026)
+
+ChatGPT trong trình duyệt của app bị đăng xuất. Chủ dự án nhờ thử Firefly Image 5 (model của Adobe) với cùng mẫu prompt, rút về dưới 1.024 ký tự. Hai giám khảo mù (FJ1, FJ2).
+
+| Ảnh | Nguồn | FJ1 (M / A / F) | FJ2 (M / A / F) | Đọc ra |
+|---|---|---|---|---|
+| Clear Wind | ChatGPT bản 4 | 7,8 / 8 / 7,6 | 7,6 / 7,8 / 7,2 | Trung Hoa |
+| Clear Wind | Firefly | 6,8 / 6,7 / 5,5 | 6,5 / 6 / 4,5 | lai, nghiêng Nhật |
+| Ember Crest | Firefly | 6,3 / 6,4 / 4,8 | 6 / 5,5 / 4 | Nhật (katana) |
+| Ember Crest | ChatGPT | 7,9 / 8 / 6,9 | 7,8 / 8 / 7 | phần lớn Trung Hoa |
+| Sky Thread | Firefly | 6,4 / 6,2 / 4,8 | 6,2 / 6 / 5 | mũi tên kiểu Tây |
+
+Firefly kém rõ ở cả ba trục.
+- Ba trên bốn ảnh kéo về katana: chuôi tsuka-ito, tsuba, mũi kissaki.
+- Nét cel phẳng kiểu tranh TV, ít chi tiết, không rực.
+- Hay phạm luật bộ (tua, dải lụa) và lệch đề bài.
+- Điểm mạnh duy nhất là hình gọn, đọc rõ ở cỡ nhỏ.
+
+Kết luận: Firefly không hợp để vẽ bộ vũ khí ở mức 8,5. Chỉ dùng làm nháp nhanh khi không có công cụ khác.

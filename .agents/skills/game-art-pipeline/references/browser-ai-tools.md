@@ -117,6 +117,7 @@ f.appendChild(i); document.body.appendChild(f); f.submit();
   - Firefly does not hold one design across views (use ChatGPT, [briefs-and-sets.md](briefs-and-sets.md) §3).
   - It does not keep a flat `#00FF00` background.
   - It refused some gun prompts; reword the request or use ChatGPT.
+  - Chinese weapons drift to Japanese ones (katana tsuka-ito, tsuba, kissaki tip) and come out as flat cel illustrations with little detail. Tu Tien test, 02/11: Firefly 6–6.8 market and appeal and 4–5.5 fitness, against 7.6–8 for ChatGPT with the same prompt template. Use ChatGPT, or Gemini if ChatGPT is unavailable, for hero weapons and items.
 - **Video VFX:**
   - "Transparent background" mode gives 540p, 16:9, 24 fps, 5 s. It is hidden while a Style or Camera preset is on.
   - Each clip comes out as a colour video and a grey alpha video. Post both blobs to the receiver.
