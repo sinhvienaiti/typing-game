@@ -16,6 +16,10 @@ description: "Build or review combat and skill VFX in any game of this repo (Dra
 - **Last Line:** `games/typing-survival/docs/ALIVE_PLAN.md` (AL-08 guns).
 - **Dragonhold:** `docs/games/dragon-lane/`.
 
+## Style target
+
+Spectacle, not realism (owner, 02/11/2026: "chúng ta k làm ra kiểu âm thanh như thật, hay hình ảnh hiệu ứng như thật… phải bùng nổ, đẹp, hào quang, thu hút của các phim anime hoặc các thần thoại, tiểu thuyết"). Skill and combat VFX aim at anime, donghua and mythic spectacle: explosive bursts, radiant halos and auras, luminous trails, glowing runes and sigils, sparkle and light shafts, bold shapes with strong colour accents, the way Genshin Impact, Honkai: Star Rail, Wuthering Waves and donghua such as Soul Land or Battle Through the Heavens stage a skill. Physically plausible but plain effects fail. The bloom and white-out limits below keep spectacle readable; they never justify a dull effect.
+
 ## Method
 
 1. **Trace the event.**

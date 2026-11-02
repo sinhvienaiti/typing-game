@@ -53,6 +53,8 @@ The living pipeline is [AUDIO_PIPELINE.md](../../../../docs/games/AUDIO_PIPELINE
 
 Owner, 02/11/2026, on Last Line's combat sounds: "nó quá kiểu nhỏ nhẹ và thiếu sự mạnh mẽ, bùng nổ, âm thanh vang vọng, tại sao bạn cứ làm ra những cái âm thanh nghe kiểu đơn giản, thiếu sự chiến đấu, bùng nổ, đầy chiến ý vậy".
 
+**Style: cinematic and magical, not realistic** (owner, 02/11/2026: "chúng ta k làm ra kiểu âm thanh như thật… phải bùng nổ, đẹp, hào quang, thu hút của các phim anime hoặc các thần thoại"). Fantasy and xianxia skills sound like anime and mythic spectacle: energy surges, shimmering whooshes, crystalline chimes, choir or synth swells, sub booms, sparkling tails, huge reverberant impacts. Real recordings (steel, stone, water) are raw ingredients under a magical layer, never the whole cue; a foley-real cue fails even when it is clean. A modern-military game such as Last Line keeps its weapons grounded but just as big and cinematic.
+
 This section covers every combat event in every game: shots, skills, traps, impacts, kills, explosions, enemy attacks, surges and bosses. Keys, UI and word-done sounds keep their own rules (§3, AUDIO_PIPELINE §6.2). Sources were read on 02/11/2026 and are listed in §5.11. Numbers marked "start" are starting values to tune by ear in the play mix.
 
 ### 5.1 The trap we fell into
