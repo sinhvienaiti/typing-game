@@ -236,6 +236,81 @@ Chưa tới 7, nên chưa làm clip 60 fps cho anh. Bộ giám khảo mới ch�
 - dáng thiết kế để đọc được từ phía sau;
 - clip Blender riêng cho từng cử chỉ thay cho lớp thủ tục.
 
+## Vòng 4 (03/11/2026, sáng; commit game `eb8698f`, `db727f2`, `bf39ccb`, `52d2a2f`, changelog `3a7c5f4`)
+
+Ba vòng đầu không có bước tăng rõ, nên theo luật ba lần thử đã bàn với ChatGPT một cách khác. Claude nhận bước 1 của ChatGPT:
+- giữ kỹ thuật thủ tục (inertialization, IK, lò xo, probe);
+- thêm lớp còn thiếu là các dáng khóa do người làm, thiết kế theo khung hình của camera chơi;
+- thử trên một người đại diện có tỉ lệ người, chỉ có thân, vật liệu phẳng.
+
+Vòng này làm một chiêu: Lạc Kiếm Trận (k4, quét tung quạt kiếm). Chi tiết nằm trong `docs/changelog/2026-11-03-lab-motion-round4.md` của repo game.
+
+**Đã làm:**
+- **Người đại diện `?hero=human`:**
+  - người của Mesh2Motion, 13.757 tam giác, 66 khớp có ngón, CC0;
+  - cao 1,65 m, vật liệu xám phẳng, clip riêng chạy như tác giả làm;
+  - kiếm Clear Wind trong `hand_r`;
+  - hồ sơ rig ở `src/lab/hero-select.ts`. Lam vẫn là mặc định. Mọi chiêu khác chạy trên cả hai nhân vật.
+- **Sáu dáng khóa là dữ liệu** (`src/lab/anim/key-pose.ts`, `fan-sweep-poses.ts`, nướng từ `fan-sweep-spec.ts`):
+  - góc xoay xương theo tên chuẩn, cộng độ hạ hông và thế chân;
+  - chữ gõ đẩy cuộn từng bậc; giữa hai phím cuộn vẫn bò tiếp, có vòng giữ dáng;
+  - phím cuối nhả ngay trên khung đó;
+  - lớp diễn xuất thủ tục tắt với chiêu này; IK chân và lò xo giữ nguyên.
+- **Đo theo khung hình camera** (`src/lab/pose-probe.ts`, `__labPose`) và kịch bản `scripts/visual/scenarios/lab-keypose.mjs`.
+
+**Số đo bản v3** (camera chơi, 45 WPM, chữ 6 ký tự):
+- phím cuối → sự kiện chiêu: 0 ms;
+- thân động ngay khung phím cuối, đi được 85 % đường nhả sau 2 khung;
+- bề ngang bóng hình 1,87 × (cuộn) và 2,2 × (nhả) so với Idle;
+- hông hạ 23,8 % chiều cao hông;
+- cuộn −3 → −30° theo từng phím;
+- tay kiếm ngoài bóng thân 0,22–0,33 chiều cao người, tay kia 0,30–0,39;
+- đoạn đứng hình dài nhất lúc gõ 83 ms.
+
+Mọi luật dáng đều đạt.
+
+**Kiểm tra mù pha và hướng** (96 mục: 8 hướng × 3 pha × 30/50/70 px, ảnh tĩnh và dải 6 khung, chỉ thân; ngưỡng pha ≥ 80 %, hướng ≥ 90 %):
+
+| Bản | Pha | Hướng |
+|---|---|---|
+| v1, kiếm kéo về sau | 49 % | 41 % |
+| v2, kiếm giơ cao nhắm mục tiêu | 75 % | 95 % |
+| v3, hồi chiêu đứng dậy và hạ kiếm, người kiểm 3 | **97 %** | **96 %** |
+| v3, người kiểm 4 | **100 %** | **94 %** |
+
+v3 đạt. Bài học: ở 30–70 px người xem đọc theo đường lưỡi kiếm, nên lưỡi kiếm phải luôn nằm trên đường đòn, và pha phân biệt bằng độ cao lưỡi kiếm. Điểm yếu còn lại là lúc cuộn với hướng về phía camera.
+
+**Giám khảo mù** (VFX bật; camera chơi và cận cảnh; so với Genshin, Star Rail, Wuthering Waves): **4,6**.
+- lấy đà 4,5;
+- khối lượng 4;
+- chuyển tiếp 4,5;
+- đọc rõ ở camera chơi 5;
+- cử chỉ khớp chiêu 4;
+- thân và VFX khớp nhịp 5,5.
+
+Giám khảo nói:
+- dáng cuộn là một chữ V gần như đứng yên;
+- kiếm giơ lên trời giống triệu hồi hơn là ném;
+- theo đà giữ cứng, không quá đường đòn;
+- chớp sáng lúc nhả che dáng đỉnh.
+
+**Giả thuyết bước 1: giữ được một nửa.**
+- Dáng khóa trên người đại diện làm pha và hướng đọc rõ hẳn ở 30–70 px.
+- Ấn tượng chung không lên: 4,6, dự đoán của ChatGPT là 6,5–7,2, vòng 3 được 5,3 và 5,7 trên toàn bộ chiêu.
+- Có xung đột: bài kiểm tra thưởng cho lưỡi kiếm luôn trên đường đòn, còn giám khảo muốn lấy đà kéo ngược kiểu cổ điển, chính kiểu đã làm v1 trượt.
+- Chưa tới 7 nên chưa gửi demo cho chủ dự án.
+
+**Bước tiếp theo (cần bàn lại với ChatGPT trước lần thử sau):**
+- Cuộn thấy được theo từng phím: kéo kiếm về sau đầu như cầm lao, mũi vẫn chĩa lên và về phía đích.
+- Nhả theo chuỗi hông → ngực → tay, có vệt nhòe 3–4 khung.
+- Theo đà quá đường đòn 10–15°, rồi về thế thủ trong 300–500 ms.
+- Người ngả 15–20° về phía vùng khi nhả.
+- Gửi làn VFX:
+  - kiếm bay ra từ cung quét về vùng đích;
+  - chớp sáng ở người nhỏ đi hoặc dời về phía vùng;
+  - vòng sáng dưới chân mờ đi lúc gõ.
+- Idle_A cầm kiếm dựng đứng, trông như đang giơ kiếm: cần chỉnh tay cầm hoặc dùng Idle khác.
+
 ## Phụ lục (báo cáo chỉ đọc, 02/11/2026)
 
 ### A. Kiểm kê rig và clip của Lam
