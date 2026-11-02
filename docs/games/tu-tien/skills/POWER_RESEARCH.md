@@ -159,3 +159,36 @@ Bản chẩn đoán gốc: [`source/vfx-diagnosis-chatgpt-2026-11-03.md`](source
 - **Bước tiếp:** vẽ lại cả 6 khung đè lên một ảnh chụp thật của game ở camera chơi. Việc này cần anh kéo ảnh vào chat ChatGPT, vì trang ChatGPT chặn ảnh từ máy cục bộ.
 
 **Họa tiết khung va chạm vẽ tay** (ChatGPT, mực đen trên nền trắng) đã có: tia mực xuyên tâm, sao nổ, vệt chém trăng khuyết, trường vệt kiếm, mực vỡ. Bản gốc, mặt nạ alpha 1024 px và prompt ở `games/immortality-cultivation/art-src/skills/impact-tex/`.
+
+## Kết quả lượt 3a (03/11, khoảng 06:30)
+
+**Đã làm:** dựng 8 commit (`f39a5ea`…`580bee3`) gồm:
+- kiểm chuỗi hậu kỳ (lớp sương xám là do pass màn hình);
+- khung va chạm đồ họa dùng họa tiết vẽ tay (khung cao trào 81–84 % đen hoặc 57–66 % trắng; vùng xám giữa dưới 12 %, trước là 76–93 %);
+- lõi kiếm đưa vào bloom 5–7,5, trước là khoảng 2;
+- kiếm ba tầng chỉ trắng và lam;
+- quái phân tầng phản ứng;
+- tối đa 8 con số;
+- đòn cơ bản có vụ nổ trên mục tiêu.
+
+Hiệu năng: High p95 phím 7 9,3 ms, K5 10,8 ms.
+
+**Hai giám khảo mới: 5,3 và 5,1.**
+- **Khen:** khung va chạm tối rồi đảo trắng là hình mạnh nhất. Hai giám khảo chấm lại bản lượt 2 để so: lớp sương lượt 2 chỉ được 2,5.
+- **Chê:**
+  - tuyệt kỹ là xoáy phẳng dưới đất, không phải mưa kiếm, tổng sát thương thấp hơn chiêu sông kiếm;
+  - khung va chạm chỉ 1–2 khung nên trông như nhấp nháy;
+  - sông kiếm thành kim lấm tấm;
+  - nhát kết là mấy đường laser mảnh;
+  - quái chưa bị hất, chém;
+  - vòng HUD dưới chân;
+  - cảnh cận là ảnh tả thực đứng im.
+- **Đánh giá:** đúng dự đoán của ChatGPT, bước gọt bỏ chỉ dọn nền; điểm chỉ lên khi có hình được thiết kế.
+
+**Lượt 3b** (workflow `wf_3d0628db-70e`) dựng:
+- tuyệt kỹ thành mưa kiếm từ cổng trời;
+- giữ khung va chạm 3–5 khung;
+- sông kiếm thân dày, kiếm có thiết kế;
+- vệt kiếm khí dày ở nhát kết;
+- quái chết lần lượt dọc vết chém;
+- trận đồ tu tiên khi tụ lực.
