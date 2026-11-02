@@ -21,6 +21,16 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - heroine v9 và năm súng kiểu render (`wf_223f83fa-2f5`);
   - bản thử bố cục (`wf_42ed032a-062`).
 - **Nhịp mới `1a85813c`** (7,27,47), chỉ lo Last Line.
+- **Chủ dự án: "tăng thêm agent để xử lý nhanh hơn".** Thêm hai workflow:
+  - **AL-08** súng và đạn (`wf_3088cb57-a32`). Có làn flipbook Firefly Video và hai làn súng song song:
+    - A: Pulse Gun, Scatter Gun, Star Mortar ở `.wt-ts-al08`;
+    - B: Heat Beam, Rail Gun ở `.wt-ts-al08b`.
+  - **AL-10 phần A** thế giới (`wf_b6592701-049`), ba làn song song:
+    - sàn, Line, dais ở `.wt-ts-al10`;
+    - lan can làm bằng Blender ở `.wt-ts-al10b`;
+    - đèn và AA ở `.wt-ts-al10c`.
+  - Đang chạy tổng 5 workflow. Đo khung qua `heavy.sh --perf` (độc quyền GPU).
+  - Đổi camera thuộc bản thử bố cục: AL-10 không đụng camera.
 
 **02/11 khoảng 09:30. Chủ dự án dừng toàn bộ Last Line để sang Tu Tiên** ("tạm thời tôi muốn dừng lại toàn bộ để qua game tu tiên yêu cầu xử lý tạo các kỹ năng để review trước").
 
