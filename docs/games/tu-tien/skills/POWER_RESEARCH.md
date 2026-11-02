@@ -144,3 +144,18 @@ Bản chẩn đoán gốc: [`source/vfx-diagnosis-chatgpt-2026-11-03.md`](source
 - tuyệt kỹ theo chiều đứng: cổng trời, cột sáng, mưa kiếm phủ ≥ 70 % sân;
 - flipbook vẽ tay cho nổ, khói, mực;
 - cảnh cận có dáng hành động.
+
+**Hai giám khảo chấm khung mục tiêu (ảnh tĩnh): 6,6 và 6,8**, chưa đạt ngưỡng 8 để làm chuẩn.
+- **Mạnh:** khung 3–5 có ý hay và sức mạnh cao (thị trường 7–7,5, cuốn hút 7,5–8, sức mạnh 7,5–9).
+- **Yếu:**
+  - không vẽ đè lên ảnh chụp thật của game, nên lệch sân, ánh sáng và mẫu quái giữa các khung;
+  - vẽ to gấp 3–5 lần tỉ lệ thật (nhân vật 30–70 px);
+  - có kiếm đâm ngược chuôi ở khung 4;
+  - khung 4 thiếu thứ bậc sáng;
+  - đòn cơ bản thiếu sức nặng: cần ấn dưới chân, vệt dày ≥ 4 px;
+  - nhân vật thiếu "bộ hào quang";
+  - khung 5 vẽ từ camera thấp, không phải camera chơi;
+  - khung 6 chưa rõ con nào chết.
+- **Bước tiếp:** vẽ lại cả 6 khung đè lên một ảnh chụp thật của game ở camera chơi. Việc này cần anh kéo ảnh vào chat ChatGPT, vì trang ChatGPT chặn ảnh từ máy cục bộ.
+
+**Họa tiết khung va chạm vẽ tay** (ChatGPT, mực đen trên nền trắng) đã có: tia mực xuyên tâm, sao nổ, vệt chém trăng khuyết, trường vệt kiếm, mực vỡ. Bản gốc, mặt nạ alpha 1024 px và prompt ở `games/immortality-cultivation/art-src/skills/impact-tex/`.
