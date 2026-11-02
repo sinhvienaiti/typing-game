@@ -173,3 +173,18 @@ Firefly kém rõ ở cả ba trục.
 - Điểm mạnh duy nhất là hình gọn, đọc rõ ở cỡ nhỏ.
 
 Kết luận: Firefly không hợp để vẽ bộ vũ khí ở mức 8,5. Chỉ dùng làm nháp nhanh khi không có công cụ khác.
+
+### Phép thử Firefly lần 2: tách lỗi prompt và lỗi công cụ (đang làm)
+
+Chủ dự án hỏi Firefly yếu do prompt hay do công cụ. Phép thử đầu không công bằng, vì năm điểm:
+1. Prompt có phủ định ("not a katana, no tassel"). Báo cáo trên diễn đàn Adobe cho thấy Firefly bỏ qua phủ định và lại vẽ đúng thứ bị cấm (ví dụ https://community.adobe.com/questions-404/firefly-doesn-t-recognise-when-you-tell-it-not-to-do-something-1474571). Adobe đã gỡ ô negative prompt.
+2. Firefly không có bối cảnh của cả cuộc trò chuyện như ChatGPT.
+3. Không dùng ảnh tham khảo.
+4. Mỗi điều kiện chỉ một ảnh, chỉ thử model Image 5.
+5. Có thuật ngữ Hán mà Firefly có thể không hiểu (jian, yanmaodao, bi disc).
+
+Điều kiện 1 (Image 5, prompt chỉ câu khẳng định, từ ngữ hình ảnh, `ff-clearwind.v2-try1`):
+- **Prompt sửa được:** hết tua, chuôi thành dây lụa quấn xoắn, đốc vòng, vòng bích có gờ hạt và vân mây.
+- **Vẫn còn:** lưỡi dáng katana, vòng bích nằm sau một tsuba, nét phẳng ít chi tiết, không rực.
+
+Điều kiện 2 (có ảnh tham khảo) và 3 (Image 4 Ultra) chờ trình duyệt của app rảnh, vì workflow chuyển động đang dùng nó.
