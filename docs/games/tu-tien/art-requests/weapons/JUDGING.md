@@ -365,3 +365,25 @@ Chủ dự án duyệt cả 12 mẫu ("12 mẫu này đều khá đẹp… hãy 
 Đọc ra: cả 5 ảnh là một thanh kiếm, chỉ khác cách trình bày. Nền đêm tối (P) làm bạc và ngọc nổi nhất, được cao nhất. Lỗi chung: lưỡi trơn và ngắn (64–67 %), mũi nhọn ba cánh kiểu hoa diên vĩ ở gốc lưỡi, mây sứ mềm như kem bơ, toàn tông sáng nên khử màu ở cỡ nhỏ lưỡi biến mất.
 
 Chủ dự án chỉ ra lỗi cách làm: "đáng lẽ bạn nên phân tích hình ảnh kiếm để đưa ra prompt phù hợp hơn chứ, chứ 5 ảnh đều y 1 mẫu vậy". Nguyên nhân: mọi prompt bị khóa vào một thiết kế và vẽ chung một chat. Lượt sau phân tích từng mẫu, mỗi prompt một phong cách, mỗi ảnh một chat mới: xem `REFERENCE_PROMPTS.md` và vòng 15.
+
+## Vòng 15: 5 vũ khí, mỗi thanh một phong cách mẫu (02/11/2026, tối)
+
+5 ảnh từ `REFERENCE_PROMPTS.md` (bản cuối do ChatGPT duyệt), mỗi ảnh một chat mới (`ref5-*.v1-try1`). Hai giám khảo mới W29, W30. Nhãn: B = Winter Vein, D = Ember Crest, G = Clear Wind ngọc, M = Tidal Crescent, T = Thunder Seal.
+
+| Vũ khí (theo mẫu) | W29 (M / A / F) | W30 (M / A / F) |
+|---|---|---|
+| Ember Crest (Blazing Brilliance) | 7,6 / 7,5 / 7,6 | 7,7 / 7,5 / 7,2 |
+| Thunder Seal (Mistsplitter) | 6,8 / 6,4 / 7,3 | 7,9 / 7,5 / 8,2 |
+| Tidal Crescent (Haran) | 7,2 / 7 / 5,5 | 7,8 / 8 / 6,9 |
+| Winter Vein (Azurelight) | 7 / 7 / 6 | 7,3 / 7,4 / 6,4 |
+| Clear Wind ngọc (Primordial Jade Cutter) | 6,5 / 6 / 6,5 | 6,7 / 6,2 / 5,9 |
+
+Đọc ra:
+- Cả hai giám khảo xác nhận năm thanh đã khác nhau thật về loại vũ khí, bảng màu và mô-típ. Chưa thanh nào đạt 8,5.
+- **Ember Crest** ổn định nhất (7,2–7,7): dáng ngưu vĩ đao đọc rõ Trung Hoa, còn ra dáng ở 25 px khi khử màu. Lỗi: kim loại trầy xước kiểu dark-fantasy thay vì đánh bóng anime; khối hộ thủ hồi văn nặng, lệch, có chỗ đọc như số "51"; đai thép xoắn và núm khối búa mang chất phương Tây.
+- **Thunder Seal** có F cao nhất (8,2 ở W30): vòng bát giác hồi văn là dấu nhận diện tốt nhất bộ ở 25 px. Lỗi: render phẳng như clip-art, lưỡi hẹp trơn, nhìn chính diện.
+- **Tidal Crescent** hút mắt nhất với W30 (A 8) nhưng lưỡi tối và mảnh nên mất ở cỡ chơi; hộ thủ và núm trăng lưỡi liềm gợi Trung Đông.
+- **Winter Vein:** đẹp phần lớn nhờ nền; bản thân kiếm mảnh như kim, chuôi quấn trắng gợi Nhật hoặc Tây.
+- **Clear Wind ngọc:** trơn như ảnh sản phẩm; hộ thủ ngang thành chữ thập Tây; hoa văn trên hộ thủ thành chữ giả.
+
+Giám khảo khác nhau nhiều (Thunder Seal 6,4–8,2), nên cần chủ dự án chọn hướng trước khi làm tiếp theo quy trình mẫu: chọn thanh, rồi ChatGPT viết prompt cải tiến từ chính ảnh đó và vẽ 3–5 ảnh.
