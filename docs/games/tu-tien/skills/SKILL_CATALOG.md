@@ -1,23 +1,23 @@
 # Danh mục chiêu Tu Tiên Thủ Ải: bản ChatGPT + kiểm của Claude (02/11/2026)
 
 > **Nguồn:** ChatGPT (Chat, thinking High) nghiên cứu Quỷ Cốc Bát Hoang, *Ta Là Tà Đế*, *Vạn Cổ Chí Tôn*, rồi thiết kế, tự review và xuất bản cuối hợp nhất 1/3, 2/3, 3/3: https://chatgpt.com/c/6ae8024e-5b30-83ec-bf0b-d5e4033fbf1c. Thẻ đầy đủ mỗi chiêu (10 dòng: vùng, VFX 5 pha, phản ứng thú, âm, cách làm 3D và 2D, khung đỉnh, hình 40 px) nằm trong chat; file này giữ bảng tổng và bản kiểm. Tóm tắt nghiên cứu: [`CHATGPT_SKILL_RESEARCH_REPLY.md`](CHATGPT_SKILL_RESEARCH_REPLY.md).
-> **Chủ dự án 02/11:** bỏ vòng Gemini, dùng ChatGPT; Claude kiểm độ hợp và khả năng triển khai; thứ quá khó ghi để sau. **Trạng thái: chờ chủ dự án review.**
+> **Chủ dự án 02/11:** bỏ vòng Gemini, dùng ChatGPT; Claude kiểm độ hợp và khả năng triển khai; thứ quá khó ghi để sau. **Đã chốt 02/11 (canon D54):** Hỏa dùng lửa cam đỏ thật, các hệ còn lại giữ luật màu và có sắc nhạt riêng (cột "Sắc riêng" §1); **làm 3D trước**, 2D sau (dựa vào tranh 2D).
 
 ## 1. Ngữ pháp hình dạng (một họ một kiểu hình, nhận ra ở 40 px đen trắng)
 
-| Họ | Ý chính | Màu (phe ta, tránh 4 màu tín hiệu) |
-|---|---|---|
-| Kiếm | trật tự, số lượng: đường mảnh, kiếm thật, trận kiếm | bạc lạnh, ngà, lam khói rất nhạt |
-| Đao | trọng lượng ngang: trăng khuyết dày, cung rộng | thép xanh xám, ngà đục, mực |
-| Thương | động lượng dọc trục: điểm, trục, mũi nhọn, nan hoa | bạc xám, ngà, lam thép nhạt |
-| Kim | vật chất vô cơ hoàn hảo: phiến, facet đối xứng, vành răng | bạc, bạch kim ngà, xám lam |
-| Mộc | sinh trưởng: rễ chữ Y, bụi gai, cây nhìn từ trên | lục rêu xám, ngọc tối, gỗ mực |
-| Thủy | khối nước chảy: sóng dày, chữ S, lòng sông | chàm sâu, lam thép, bọt ngà |
-| Hỏa (linh hỏa) | lan, mép răng lửa | lõi ngà trắng, thân lam cobalt, đầu lửa tím lan rất ít |
-| Thổ | địa hình, khối: khe gãy, ô vuông, địa tầng | đá vôi xanh xám, ngà bụi |
-| Lôi | điểm nối, nhịp giật: node, ziczac | trắng bạc, lam tím lạnh (periwinkle) |
-| Phong | trường vận tốc: dải mảnh nhọn, nhiều khoảng trống | trắng xám, lam khói |
-| Băng | khóa và vỡ: nêm rạn, ô kính bất quy tắc, tuyết hoa | trắng lam lạnh, xám băng |
+| Họ | Ý chính | Màu (phe ta) | Sắc riêng (đề xuất, chỉnh ở lab) |
+|---|---|---|---|
+| Kiếm | trật tự, số lượng: đường mảnh, kiếm thật, trận kiếm | bạc lạnh, ngà, lam khói rất nhạt | lam thép rất nhạt `#A9B8C8` |
+| Đao | trọng lượng ngang: trăng khuyết dày, cung rộng | thép xanh xám, ngà đục, mực | đồng xỉn `#8C7B62` |
+| Thương | động lượng dọc trục: điểm, trục, mũi nhọn, nan hoa | bạc xám, ngà, lam thép nhạt | chàm viền `#3D4A7A` |
+| Kim | vật chất vô cơ hoàn hảo: phiến, facet đối xứng, vành răng | bạc, bạch kim ngà, xám lam | bạch kim champagne `#D6CFC0` |
+| Mộc | sinh trưởng: rễ chữ Y, bụi gai, cây nhìn từ trên | lục rêu xám, ngọc tối, gỗ mực | rêu `#6E8B5E`, ngọc tối `#3F6B5A` |
+| Thủy | khối nước chảy: sóng dày, chữ S, lòng sông | chàm sâu, lam thép, bọt ngà | chàm sâu `#2E4A78` |
+| Hỏa | lan, mép răng lửa | ~~linh hỏa lam~~ → lửa cam đỏ thật (D54) | (D54: lửa cam đỏ thật) lõi `#FFE9C2` → cam `#FF7A2A` → mép đỏ thẫm `#B8321A` |
+| Thổ | địa hình, khối: khe gãy, ô vuông, địa tầng | đá vôi xanh xám, ngà bụi | đất son nhạt `#A08C6A` |
+| Lôi | điểm nối, nhịp giật: node, ziczac | trắng bạc, lam tím lạnh (periwinkle) | periwinkle `#9AA6FF` |
+| Phong | trường vận tốc: dải mảnh nhọn, nhiều khoảng trống | trắng xám, lam khói | celadon nhạt `#BFD8C8` |
+| Băng | khóa và vỡ: nêm rạn, ô kính bất quy tắc, tuyết hoa | trắng lam lạnh, xám băng | lam băng `#CFE6F5` |
 
 ## 2. Bảng chiêu (43)
 
@@ -88,7 +88,7 @@ Các hệ nguyên tố chỉ có ô 2, 4, 5 (theo thư: 2 chiêu diện rộng +
 3. **Dừng hình:** thẻ đề xuất tuyệt kỹ dừng toàn cục 25–30 ms; hồ sơ phản hồi hiện tại là T3 30 ms, T5 70 ms. Lab thử cả hai, giám khảo chọn.
 4. **Số mới của Đao, Thương và các hệ** (tầm, số đỡ, thời lượng) là đề xuất thiết kế, chưa qua cân bằng; chỉ dùng cho lab hình.
 
-### 3.3 Cần anh quyết
+### 3.3 Đã hỏi chủ dự án (02/11: màu chọn (b) cho Hỏa, (a) cho các hệ khác; 3D trước, 2D sau)
 
 1. **Màu.** Vì luật màu tín hiệu (đỏ địch, cam khẩn, vàng tiền, xanh ngọc gõ chữ), 8/11 họ dồn về trắng, bạc, lam (Kiếm, Thương, Kim, Thủy, Hỏa lam, Lôi, Phong, Băng). Hình dạng vẫn khác nhau, nhưng cả bộ dễ thành "toàn màu lạnh", trái với ý anh muốn hấp dẫn, sang trọng. Hai hướng:
    - (a) giữ luật, mỗi hệ thêm một sắc riêng ở độ bão hòa thấp;
@@ -110,3 +110,5 @@ Chữ thành chiêu (hệ dùng chung, mốc 9); đòn và cái chết của 5 h
 1. **Bảng hình dạng:** 43 hình chủ đen trắng ở 40 px trên cùng một tờ (kiểm nhanh các cặp dễ nhầm trước khi dựng thật).
 2. **Lab bộ Kiếm** (trường phái của game): 7 chiêu, bản 3D và 2D, đủ 5 pha và âm, trên sân thật với 60 thú; anh xem clip và tờ khung.
 3. **Tuyệt kỹ các họ khác:** Đ5, T5 và 8 tuyệt kỹ nguyên tố trên cùng một sân, một đàn thú.
+
+Trọc khí của địch (vân mực, mắt): tím xám tối `#5E516E`, độ bão hòa thấp; không hệ phe ta nào dùng tím xám.
