@@ -15,6 +15,20 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**03/11 đêm, phiên Tu Tiên** (`local_a5f48644-c74d-4f89-9251-1e16e63d075b`). Chủ dự án treo máy tới 9h, đã chốt sẵn D57 và D58.
+- **Canon:**
+  - D57: camera toàn sân có zoom cận 12 m; độ phân giải động cho High và Ultra, vì DPR 2 trên M4 quá ngân sách.
+  - D58: chiêu phải có uy lực; tiếng hô tiếng Trung; tuyệt kỹ có cảnh cận; làm lại toàn bộ bộ chiêu.
+- **Đã có:**
+  - danh mục chiêu V2 chờ duyệt: `docs/games/tu-tien/skills/SKILL_CATALOG_V2.md`;
+  - lô Firefly 184 bản tiếng và 6 tiếng hô (`skills/FIREFLY_BATCH_2026-11-03.md`), trang nghe ở `127.0.0.1:8781`;
+  - lớp uy lực lượt 1 trong lab (repo game `3cd207d`…`662eaa2`), giám khảo mù 5,8 và 5,5;
+  - skill mới `game-character-animation`, mục "Power layer" và `skill-kit-design` trong `game-vfx-layered`.
+- **Đang chạy:**
+  - lượt 2 lớp uy lực (workflow `wf_38571378-1ef`);
+  - vòng 3 chuyển động (agent `ab25b6b07835bc54f`, chỉ sửa `src/lab/anim/**` và `caster.ts`).
+- **Giới hạn:** tối đa 3 agent cùng lúc (chủ dự án 03/11).
+
 **02/11 khoảng 12:28 (mới nhất, đọc trước). Chủ dự án cho dừng toàn bộ** ("bạn dừng lại được rồi đó"; trước đó dặn dừng lúc 12:30).
 - **Đã dừng:** năm workflow và nhịp `1a85813c`. Lịch dừng 12:30 cũng đã xóa.
 - **Chạy tiếp:** dùng `Workflow({scriptPath, resumeFromRunId})`. Script ở `~/.claude/projects/-Users-toandx-htdocs-typing-game/f97baf5f-4f81-4f84-8ec0-79083d7e3ba9/workflows/scripts/`.
