@@ -184,7 +184,13 @@ Gemini phần 2–3 thiết kế ô 1 rộng hơn nhiều (14–18 m) so với C
 - **Đội hình 12 thương binh ảo dựng hàng** cho ô 1 Thương.
 - **Ấn chuông đồng cổ khổng lồ** làm nền cho tuyệt kỹ Kim.
 
-Gemini phần 4 chưa xong lúc viết bản này. Có ý gì mới thì bổ sung vào mục này.
+Gemini phần 4 (tự chấm) thêm các ý sau, đều trùng hướng với bản ChatGPT nên ghép được:
+- **Tuyệt kỹ Đao, "thế giới trượt lệch":** dùng một shader hậu kỳ cắt đôi khung hình 3D rồi trượt hai nửa lệch khoảng 24 px, sau một giây lặng tiếng. Lớp nhãn chữ vẫn nguyên, không bị cắt. Rẻ mà gây choáng nhất.
+- **Thủy:** mặt sân hóa cửa sổ vực biển tối, bóng thủy long bơi dưới chân thú, hai con mắt khổng lồ mở dưới đáy. Nền tối còn làm nhãn chữ trắng nổi gấp đôi. Đây là cách dựng Huyền Hải Khai Giới.
+- **Kiếm:** bầy kiếm tự săn bơi thành 4 dòng theo luật bầy đàn (boids). Ô 2 có trận 240 sợi kiếm quang.
+- **Thổ:** sáu ấn núi ngọc vuông tự trượt tới bầy thú, hút thú vào ô vuông rồi dập dẹt, để lại dấu chữ 【镇】 trên đá. Ý này cho ô 4 của Thổ có hình riêng, khác "đường đứt gãy".
+- **Kỹ thuật:** một shader "hóa tượng" chung cho mọi thú, ba chất liệu (vàng, đá có mạch dung nham, băng), và một hệ mảnh vỡ chung. Ba kiểu chết theo hệ, giá dựng của một.
+- **Hai cụm trùng Gemini tự nhận** (Kim, Phong, Băng cùng là "lốc xoay đi khắp sân"; ba tuyệt kỹ cùng "hóa tượng rồi mưa gai"). Khớp với cảnh báo của ChatGPT ở mục 6: mỗi hệ phải khác ở cách di chuyển, không chỉ khác màu.
 
 ## 8. Đề xuất thứ tự dựng (anh chốt)
 
