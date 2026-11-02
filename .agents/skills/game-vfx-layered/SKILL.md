@@ -20,6 +20,10 @@ description: "Build or review combat and skill VFX in any game of this repo (Dra
 
 Spectacle, not realism (owner, 02/11/2026: "chúng ta k làm ra kiểu âm thanh như thật, hay hình ảnh hiệu ứng như thật… phải bùng nổ, đẹp, hào quang, thu hút của các phim anime hoặc các thần thoại, tiểu thuyết"). Skill and combat VFX aim at anime, donghua and mythic spectacle: explosive bursts, radiant halos and auras, luminous trails, glowing runes and sigils, sparkle and light shafts, bold shapes with strong colour accents, the way Genshin Impact, Honkai: Star Rail, Wuthering Waves and donghua such as Soul Land or Battle Through the Heavens stage a skill. Physically plausible but plain effects fail. The bloom and white-out limits below keep spectacle readable; they never justify a dull effect.
 
+## Smooth motion
+
+Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mượt, và lưu ý về animation của nhân vật cũng vậy, từng cử chỉ, yển chuyển của chân tay, cơ thể, đầu cũng cần phải xử lý thật mượt". Every layer eases in and out (no sprite or ribbon pops on or off), blades and trails never snap between poses, motion is frame-rate independent, and a fixed-step sim is drawn with render interpolation. The caster's clips cross-fade or inertialize; turning and moving are damped, never instant. Check it on frame sheets and on a half-speed clip, and measure pops (a layer's alpha or size jumping more than 30 % in one frame outside an intended flash). When two judges score motion at 7 or more, send the owner a movement demo with what is done so far; keep going to 8.5.
+
 ## Method
 
 1. **Trace the event.**

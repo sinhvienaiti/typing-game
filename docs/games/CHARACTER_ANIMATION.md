@@ -14,6 +14,10 @@ Hệ animation nhân vật cho Dragonhold (`games/dragon-hold`), Wordwoven (`gam
 
 ## 1. Luật áp
 
+> **Chủ dự án, 02/11/2026 (Tu Tiên):** "đảm bảo animation của các chiêu thức phải mượt, và lưu ý về animation của nhân vật cũng vậy, từng cử chỉ, yển chuyển của chân tay, cơ thể, đầu cũng cần phải xử lý thật mượt… khi đạt điểm từ 7 trở lên hãy cho tôi xem demo di chuyển, mục tiêu vẫn là đạt 8.5".
+> - Khi hai giám khảo chấm chuyển động từ 7 trở lên, gửi anh clip demo di chuyển kèm danh sách đã làm được và còn thiếu gì tới 8,5.
+> - Mức cuối của hệ dùng chung vẫn là 9 (SHARED_SYSTEMS_BAR).
+
 | Luật | Nguồn |
 |---|---|
 | Từ 9 với cả hai giám khảo, không hạng mục nào dưới 8,5; chủ dự án xem trực tiếp là cổng cuối | `SHARED_SYSTEMS_BAR.md` §2 |
