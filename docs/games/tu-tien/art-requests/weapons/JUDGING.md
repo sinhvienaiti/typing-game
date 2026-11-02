@@ -218,3 +218,30 @@ Danh sách sửa chung cho bản 6 (hai giám khảo cùng nêu hoặc không m�
 9. Thêm một nét riêng trong mặt phẳng lưỡi (ví dụ hai cánh như ý nhỏ ở đỉnh và đáy bích).
 
 Luật dừng (skill game-art-pipeline §8): vòng 6 → 7 không tăng thật, nên đổi cách trong bản 6: ChatGPT viết lại prompt từ danh sách trên, rồi vẽ cùng một prompt ở cả ChatGPT và Gemini (chủ dự án vừa đăng nhập Gemini) để so công cụ.
+
+## Vòng 8: bản 6 bằng ChatGPT và bằng Gemini (02/11/2026, tối)
+
+Prompt bản 6 do ChatGPT viết lại từ danh sách sửa của vòng 7 và tự soát theo 5 câu hỏi (lưu cạnh ảnh, `showcase-clear-wind.v6-try1.prompt.txt`). ChatGPT vẽ trong chat có bản 4 và bản 5. Gemini (chế độ 4 Argon, tư duy Cao, công cụ Tạo hình ảnh) vẽ cùng prompt nhưng chỉ có chữ, không có ảnh tham khảo, vì trang Gemini chặn mọi đường đưa ảnh từ máy vào (`gm-clearwind.v6-try1`; logo Gemini đã cắt trước khi chấm). Hai giám khảo mới W15, W16 chấm lần lượt. Nhãn: X = Gemini bản 6, Y = bản 4, Z = ChatGPT bản 6.
+
+| Bản | W15 (M / A / F) | W16 (M / A / F) |
+|---|---|---|
+| Gemini bản 6 (X) | 6,5 / 6 / 7,5 | 6,5 / 5,8 / 7 |
+| ChatGPT bản 4 (Y) | 7,5 / 8 / 6,8 | 7,3 / 7,6 / 6,4 |
+| ChatGPT bản 6 (Z) | 7,8 / 7,6 / 7,4 | 7,8 / 7,7 / 7,3 |
+
+Đọc ra:
+- **Bản 6 ChatGPT tốt nhất và cân nhất từ đầu:** đĩa bích dày bằng sứ chạm mây, hai núm như ý ở đỉnh và đáy, một khối liền, đọc ra Trung Hoa rõ nhất, đọc tốt nhất khi thu nhỏ và nghiêng.
+- **Gemini kém rõ:** nét phẳng gần vector, kiểu icon game di động, lưỡi bè, mũi vát kiểu Tây. Điểm đáng học: tương phản rãnh tối với mép sáng, lỗ bích sạch, chuôi dây lụa đúng, hồi văn sạch. Phép thử này chưa hoàn toàn công bằng (Gemini không có ảnh tham khảo), nhưng độ hoàn thiện nét vẽ thấp hơn hẳn. Kết luận: giữ ChatGPT cho bộ vũ khí.
+- **Bản 4** vẫn hấp dẫn nhất (A 7,6–8) nhưng kém nhất làm nguồn thiết kế (F 6,4–6,8) vì bloom nuốt hình khối.
+
+Danh sách sửa cho bản 7 (cả hai giám khảo):
+1. Dải hồi văn ở gốc lưỡi của bản 6 biến thành chữ Latin giả (phạm luật không chữ): thay bằng hồi văn sạch, đều.
+2. Bỏ chuỗi nút mây chạy suốt lưỡi (trông như dây xích dán lên): sống giữa sắc với rãnh tối, một chỉ ngọc ngắn, 2–3 ô mây nhỏ ở gốc; 2/3 trên là bạc gương sạch, vát cạnh sắc, ánh sáng mép chạy dọc lưỡi.
+3. Mũi kiếm Hán dài và thanh, một điểm sáng nhỏ ở mũi, không chớp sao.
+4. Tách sáng tối và chất liệu: sứ men trắng ấm, bạc lạnh có hõm tối, ngọc phát sáng dịu; viền bạc đậm quanh đĩa; bớt một tông xanh tím chung.
+5. Cầu qua lỗ bích thu mảnh (tối đa 1/4 bề rộng lỗ), cong chữ S như bản 4, để lỗ đọc rõ ở 25 px.
+6. Chạm khắc kiểu ngọc cổ: cắt sâu, mép sắc, ba tầng (khối lớn, khối vừa, nét mảnh); viền hạt bạc quanh vành đĩa như bản 4. Không phồng bóng như kem.
+7. Núm chuôi: núm hoa hải đường bằng sứ có ngọc ở tâm như bản 4, to hơn một chút (núm chữ C hở với hạt lệch trông như lỗi).
+8. Chuôi quấn dây lụa chàm xoắn, khâu bạc hai đầu; cổ chuôi có tai mây cuộn. Bản 6 vẫn đan thoi kiểu da hay tsuka.
+
+Luật dừng: điểm đã chững ở khoảng 7,8 sau ba vòng (6, 7, 8). Đổi cách lần nữa: bản 7 là chỉnh sửa tại chỗ trên bản 6 (giữ bố cục, đĩa, núm mây), không vẽ lại từ đầu, để không mất phần đã tốt.
