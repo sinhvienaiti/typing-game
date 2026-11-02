@@ -408,3 +408,19 @@ Giám khảo khác nhau nhiều (Thunder Seal 6,4–8,2), nên cần chủ dự 
 - Clear Wind: chuôi và đĩa bích đậm chất Trung Hoa nhất bộ, nhưng khoảng 60 % là lưỡi trơn; có một mũi nhọn nhỏ lòi ra trong lỗ đĩa (lỗi cấu trúc). Cần gân giữa nổi khảm bạc và vàng, rãnh ngọc phát sáng, hoa văn mây trên khoảng 60 % lưỡi, lưỡi rộng hơn khoảng 20 %.
 
 Chủ dự án chọn Clear Wind để làm trọn một thanh (model và chiêu). Ảnh nguồn cho Tripo: `clearwind-src3q.v1-try1(-pad)`, chấm ở vòng 17.
+
+## Vòng 18: ảnh nguồn 3D của Clear Wind (02/11/2026, tối)
+
+Chủ dự án chọn Clear Wind (bản gia truyền, vòng 16) để làm trọn một thanh. ChatGPT vẽ ảnh nguồn cho Tripo trong chính chat của bản gia truyền (`6ae89984`): tách nền xám, bỏ tua và chuỗi hạt (sẽ làm trong engine), một vật liền khối, lề nới lên khoảng 8 % bằng cùng màu nền. Bản 2 và 3 thêm gân mây khảm ở lưỡi theo góp ý vòng 16 (bản 2 lưỡi hình nêm nên bỏ). Vòng 17 dừng giữa chừng để chấm cả hai bản cùng lúc. Hai giám khảo mới W35, W36, đối chiếu với thiết kế đã duyệt (D = bản gia truyền). Nhãn: P = bản 3, Q = bản 1.
+
+| Ảnh nguồn | W35 (M / A / F) | W36 (M / A / F) |
+|---|---|---|
+| Bản 1 (Q) | 8,1 / 7,9 / 7,6 | 8,1 / 7,9 / 7,4 |
+| Bản 3, lưỡi khảm mây (P) | 7,8 / 7,8 / 6,8 | 7,8 / 7,7 / 6,8 |
+
+Đọc ra: bản 3 bị coi là một thiết kế khác (lưỡi rộng hình nêm, gân mây nổi dọc lưỡi, thiếu cổ lưỡi chạm thủng), nên với ảnh nguồn phải bám sát thiết kế đã duyệt, không sửa thêm ý mới. Bản 1 khớp D về lưỡi nhưng còn thiếu, theo cả hai giám khảo:
+1. Góc ba phần tư thật: xoay khoảng 25–30° quanh trục dọc, nhìn xuống khoảng 30°, để đĩa thành elip (tỉ lệ khoảng 0,8) và thấy độ dày vành, gờ lưỡi.
+2. Mây trên đĩa và cánh núm bằng sứ trắng men bóng viền vàng nhạt như D, không phải bạc; núm là đóa sen nở, ngọc ở tâm quay ra ngoài.
+3. Trả lại đám mây trắng có cánh vươn ra ngoài vành phía trên đĩa (W35); kéo cổ lưỡi bạc chạm thủng tới khoảng 1/5 lưỡi (W36).
+4. Vành bạc kép thu về một vành mảnh, đĩa nhỏ đi khoảng 10 % (W35); một phần ba phía mũi rộng thêm khoảng 25 % cho cạnh gần song song (W35).
+5. Lỗ đĩa để trống là chủ ý (vòng 16 coi mũi nhọn trong lỗ là lỗi cấu trúc).
