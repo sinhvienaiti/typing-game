@@ -15,7 +15,35 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**02/11 khoảng 06:30 (mới nhất, đọc trước).** Last Line, theo `games/typing-survival/docs/ALIVE_PLAN.md`.
+**02/11 khoảng 09:30 (mới nhất, đọc trước). Chủ dự án dừng toàn bộ Last Line để sang Tu Tiên** ("tạm thời tôi muốn dừng lại toàn bộ để qua game tu tiên yêu cầu xử lý tạo các kỹ năng để review trước").
+
+- **Đã dừng:**
+  - Bốn workflow: vòng sửa đợt 1, bản chơi thử phong cách, thiết kế heroine v9 và súng, bản thử bố cục.
+  - Nhịp cron `f80ee294`. Khi chạy tiếp Last Line thì tạo lại nhịp.
+- **Chủ dự án đã chốt sáng 02/11** (ghi ở `ALIVE_PLAN.md` §5, game `main` `a4762c6`, chưa đẩy):
+  - "Chốt 3D thật": bỏ hướng nét mực.
+  - Vẽ lại tranh súng (nợ AL-G) và đạn (AL-08 chạy ngay sau đợt 1).
+  - Bố cục: thẻ bay sát lan can, tấm chữ dưới nhân vật; chủ dự án chơi bản thử rồi chốt.
+  - Báo tiến độ chuỗi heroine ở mỗi lần báo cáo.
+- **Chạy tiếp Last Line:** mỗi việc là `Workflow({scriptPath, resumeFromRunId})`. Script nằm ở `~/.claude/projects/-Users-toandx-htdocs-typing-game/f97baf5f-4f81-4f84-8ec0-79083d7e3ba9/workflows/scripts/`.
+  1. **Vòng sửa đợt 1:** `last-line-wave1-fix-wf_c31386a1-7bf.js`, run `wf_c31386a1-7bf`.
+     - AL-05 r2 (`ts-al-05` `3716943`): review cho gộp được, giám khảo 7,5 và 7,0, chưa tới 9. Vòng sau theo bố cục mới.
+     - AL-01 r2 (`ts-al-01` `ba93404`): đang review lúc dừng.
+     - AL-02 gộp được (xem khối 06:30).
+  2. **Heroine v9 và năm súng, chỉ kiểu render:** `last-line-hero-guns-design-wf_9083e3c1-1b2.js`, run `wf_223f83fa-2f5`.
+     - Đã có hai tờ súng render `ts-gun-pulse-sheetrender.v3-try1/2.png` trong scratchpad `g247/raw`.
+     - Chat ChatGPT của v8: `https://chatgpt.com/c/6ae773f1-4edc-83ec-a11e-6050384c4ec1`.
+  3. **Bản thử bố cục:** `last-line-layout-test-wf_42ed032a-062.js`, run `wf_42ed032a-062`. Worktree `games/.wt-ts-layout` (nhánh `ts-layout-test` từ `3716943`, chưa commit gì).
+  4. **Bản chơi thử phong cách:** không cần nữa, vì phong cách đã chốt. `ts-style-test` đã gộp main (`4ae8061`) và còn 7 tệp sửa dở. Lab còn để tham khảo.
+- **Chuẩn bị cho Tu Tiên** (repo cha): skill `game-vfx-layered` mở cho mọi game, gồm Tu Tiên, chiêu kiếm, trận pháp, phù. Skill thêm:
+  - cách làm lab xem trước;
+  - mức hai giám khảo 8,5;
+  - luật bloom, khói, MSAA;
+  - âm đi cùng hiệu ứng.
+
+  Dòng VFX trong `AGENTS.md` cũng sửa theo.
+
+**02/11 khoảng 06:30.** Last Line, theo `games/typing-survival/docs/ALIVE_PLAN.md`.
 - **Đã gộp vào `main` của game:**
   - đợt 1 cùng lượt sửa (`1679ea6`);
   - AL-00 phần nền (`b9ebc76`): bảng phủ trong mã, kịch bản `survival-alive`, tách tệp, `PilotRig`.

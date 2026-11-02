@@ -35,9 +35,11 @@ docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
 
 Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs are for handoff and records): `game-art-pipeline` (making art and media with AI tools, blind judging at 8.5, Tripo, licences), `game-map-concept` (a map concept from the real play camera before building), `game-character-design` (research-first character design, the appeal checklist, four consistent views), `game-hero-presence-vfx` (halos, motes, rim glow and other presence layers, built and judged one by one). They apply to every game in this repo, Space Typing included.
 
-Combat VFX in Rồng Giữ Ải, Tuyến Cuối and Lời Gọi follow
+Combat and skill VFX in every game (Dragonhold, Last Line, Wordwoven,
+Tu Tiên Thủ Ải and later games) follow
 [the layered VFX standard](docs/games/VFX_STANDARD.md) through the
-`game-vfx-layered` skill. Every shot, skill, trap or enemy attack has five
+`game-vfx-layered` skill; skills the owner reviews first are built in a
+dev-only lab before they go into the game. Every shot, skill, trap or enemy attack has five
 phases (charge, release at the caster, travel, impact, aftermath), the caster
 side first. Every VFX brief names the standard, the reference image, the
 action class, the capture scenario and the acceptance numbers.
