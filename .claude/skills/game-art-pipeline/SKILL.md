@@ -19,6 +19,7 @@ This skill is the method. Each game keeps its own data: reference board, signal 
    - Every visual brief asks for captivating, stylish, luxurious, modern design with rich detail ([briefs](references/briefs-and-sets.md) §1).
    - A piece that is correct but plain, simple or generic fails 8.5.
    - For taste calls (heroes, title art, key UI), research first and show the owner a few options before building on one.
+   - **Research loved designs before any object** (owner, 02/11: "mỗi khi thiết kế một thứ gì, bạn nên kêu chatgpt tham khảo các mẫu được nhiều người yêu thích… tránh copy nhưng phải có nét đẹp riêng"). Before the first image or model of a weapon, item, relic, prop, UI frame, icon or effect shape, ask ChatGPT to research the most-loved designs of that kind with links (checked or from memory), why players love them, design principles, and three clearly different directions of our own. Make it self-review: links real, nothing too close to an existing design. Verify its key sources, then draw, judge blind and show the owner. A plain shape drawn straight from your own prompt (a box guard on a plain blade) is the failure this rule exists for.
 3. **Fix one set standard before the first image of a set** ([briefs](references/briefs-and-sets.md) §2). The same block goes into every prompt of the set:
    - one render phrase and one light;
    - one material sentence per object and one motif;
@@ -42,6 +43,7 @@ This skill is the method. Each game keeps its own data: reference board, signal 
    - Score market level against the commercial reference board, appeal, and fitness for the next step.
    - Grade icons and UI at real size in their UI spot. Grade world art, models, VFX and layout in the built play host.
    - Your own grade and a tool's self-grade do not count.
+   - **The owner reviews every sample and signs off last** (owner, 02/11: "hình ảnh, hiệu ứng, âm thanh, vfx, đều phải gửi tôi mẫu để tôi review"). Send each image, model render, VFX clip or sheet and sound file to the owner as soon as it exists (SendUserFile, one-line caption with the direction, try and any judge scores). Nothing is built on, sent to Tripo or wired into a game before the owner picks or approves it.
 8. **Iterate with a stop rule.**
    - Fix exactly what both judges named.
    - After two rounds without a real gain, change method in the same report: ready-made free sources, a lookdev reference, another tool, or a search brief for the owner.

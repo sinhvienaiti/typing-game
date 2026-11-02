@@ -112,3 +112,8 @@ Chữ thành chiêu (hệ dùng chung, mốc 9); đòn và cái chết của 5 h
 3. **Tuyệt kỹ các họ khác:** Đ5, T5 và 8 tuyệt kỹ nguyên tố trên cùng một sân, một đàn thú.
 
 Trọc khí của địch (vân mực, mắt): tím xám tối `#5E516E`, độ bão hòa thấp; không hệ phe ta nào dùng tím xám.
+
+## 5. Tiến độ lab và tranh hướng (02/11/2026)
+
+- **Lab 3D bộ Kiếm** (`games/immortality-cultivation/skills-lab.html`, dev-only; repo game `e6acbaa`): 7 chiêu đủ 5 pha theo tick canon, kiếm quang instanced, trận đồ trên đất theo tiến độ gõ, chụp tờ khung bằng `scripts/visual/scenarios/lab-skills.mjs` (camera chơi và cận cảnh). Nhân vật (Lam của Wordwoven) và thú (sói, lợn rừng của Dragonhold, chồn của Wordwoven) là đồ dùng tạm. Hai lượt chỉnh, chưa chấm.
+- **Tranh hướng v1** (Firefly Image 5, một tranh mỗi chiêu, `art-src/skills/keyframes/key-<chiêu>.v1-try1.png`, không vào Git): chủ dự án 02/11 chê **thanh kiếm "quá xấu, quá cơ bản, không có gì nổi bật"**. Việc tiếp: nghiên cứu kiếm tu tiên được yêu thích (ChatGPT, cùng chat), 3 hướng thiết kế kiếm Thanh Phong cho chủ dự án chọn, rồi mới vẽ lại tranh hướng và thay kiếm trong lab.
