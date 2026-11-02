@@ -293,3 +293,28 @@ Danh sách sửa cho bản 9 (sửa tiếp trên bản 8):
 3. Thay trục tròn bằng một sống như ý chạm khắc nối tiếp gân lưỡi qua lỗ, liền khối với hai nút mây, mảnh để lỗ vẫn thoáng.
 4. Chuôi nhiều tầng: cổ bạc chạm mây, cổ sứ dài hơn, lụa có ánh dệt, đai bạc sáng hơn, núm hải đường to hơn với cánh xếp lớp.
 5. Trình bày điện ảnh: ánh sáng chính có hướng, rim light mạnh, điểm phản chiếu sắc trên bạc, men sứ trong, ánh lóe nhỏ ở mép, một điểm nhấn sáng chỗ bích gặp lưỡi, hào quang rực hơn và nền chuyển sắc; vật thể vẫn sắc nét, không bị bloom phủ.
+
+## Vòng 11: bản 9, thêm độ giàu chi tiết (02/11/2026, tối)
+
+Bản 9 (`showcase-clear-wind.v9-try1`) sửa tiếp trên bản 8 theo 5 điểm của vòng 10. Hai giám khảo mới W21, W22 chấm lần lượt. Nhãn: R = bản 8, S = bản 9.
+
+| Bản | W21 (M / A / F) | W22 (M / A / F) |
+|---|---|---|
+| Bản 8 (R) | 7,7 / 7,5 / 8,1 | 7,4 / 7,2 / 7,6 |
+| Bản 9 (S) | 8,1 / 8,2 / 7,5 | 7,8 / 7,9 / 7,2 |
+
+Đọc ra: cả hai chọn bản 9. M và A lên tới 8,1–8,2 nhờ đĩa chạm thủng, vòng ngọc dày, bịt chân lưỡi, đai chạm. F lại tụt vì:
+- **Chữ giả lần nữa:** trong rãnh ngọc là một dãy ký hiệu nhòe như chữ viết (phạm luật không chữ, thành nhiễu ở 25–60 px). Nét khắc mảnh trong rãnh hẹp là chỗ model ảnh hay sinh chữ giả: bản 6 (dải hồi văn) và bản 9 (rãnh ngọc).
+- **Lưỡi:** rộng khoảng 1:11, mặt thép xước xám, ở cỡ chơi khử màu thì hòa vào nền.
+- **Đĩa:** vẫn hơi to; chạm thủng vỡ thành chấm khi thu nhỏ; ngọc và bạc cùng độ sáng nên khử màu chập thành một vành.
+- **Lắp ghép:** cầu như ý vắt đè lên đĩa như que xiên; ống bọc gốc lưỡi nằm ngoài vành, chưa ra một khối đúc.
+- **Chất render:** sứ như thạch cao, ngọc không trong, mây đối xứng lặp lại.
+
+Quy luật qua các vòng 7–11: mỗi lần sửa thêm chi tiết thì M, A lên mà F xuống; mỗi lần dọn cho gọn thì F lên mà A xuống. Bản tốt nhất phải giữ được cả hai: chi tiết gom thành ít khối lớn, rõ ở cỡ nhỏ.
+
+Danh sách sửa cho bản 10 (sửa tiếp trên bản 9):
+1. Rãnh ngọc trơn, phát sáng từ bên trong, không khắc gì bên trong; thu nhọn cách mũi khoảng 1/6 lưỡi.
+2. Lưỡi thon lại giữa bản 8 và bản 9; gờ giữa hình thoi sắc, hai mép vát sáng, bạc lạnh sáng như gương (bỏ vân xước); một dải khảm bạc và sứ ngắn trên gờ ở một phần ba gần chuôi.
+3. Đĩa nhỏ đi khoảng 15 %; chạm thủng gom thành 4–6 ô lớn rõ; vòng ngọc sáng hơn hẳn vành bạc để khử màu vẫn thấy hai vòng; lỗ giữa tối.
+4. Một khối đúc: gốc lưỡi mọc từ vành đĩa, cầu như ý nằm phẳng trong mặt đĩa.
+5. Chất liệu: sứ men bóng, bạc gương có điểm sáng cứng, ngọc trong có lõi sáng; ánh viền điện ảnh.
