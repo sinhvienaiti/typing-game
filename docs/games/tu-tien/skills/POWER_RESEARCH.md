@@ -115,3 +115,32 @@ Lượt 1 có 12 commit dựng (`3cd207d`…`193f15a`), changelog ở `docs/chan
   - đòn cơ bản quá nhỏ;
   - cảnh cận đẹp nhưng tĩnh.
 - **Kết luận:** hai lượt bám danh sách không tăng điểm. Vấn đề nằm ở hướng mỹ thuật và kỹ thuật dựng (thứ bậc giá trị sáng tối, chất liệu, sprite vẽ bằng code), không ở việc thiếu mục. Claude đã gửi ChatGPT chẩn đoán trước lượt 3: https://chatgpt.com/c/6ae90a5c-7d00-83ec-b620-e2cf41e2b534
+
+## Lượt 3: đổi cách làm theo chẩn đoán (03/11, khoảng 05:30)
+
+Bản chẩn đoán gốc: [`source/vfx-diagnosis-chatgpt-2026-11-03.md`](source/vfx-diagnosis-chatgpt-2026-11-03.md). Bản tóm tắt:
+- **Gốc lỗi là thứ bậc sáng tối.** Lóe cộng màu trong không gian tuyến tính, mờ xuyên tâm, tách màu 12 px và thân kiếm cộng sáng trong suốt cùng kéo cả khung về vùng xám giữa.
+- **Hướng đúng:** lõi trắng nhỏ, một dải lam bão hòa hẹp, trên nền tối sạch. Hình đồ họa vẽ có chủ đích, không cộng dồn hiệu ứng.
+
+**Khung mục tiêu ("hợp đồng hình")** do Claude vẽ bằng ChatGPT trước khi code (chat https://chatgpt.com/c/6ae90c2e-7d20-83ec-acb9-d513107b7055). Có 6 khung ở camera chơi:
+1. đòn cơ bản lúc phóng;
+2. đòn cơ bản lúc trúng;
+3. mưa kiếm cả sân lúc tụ;
+4. mưa kiếm cả sân lúc đỉnh;
+5. khung va chạm tuyệt kỹ đảo màu kiểu anime;
+6. cảnh sau tuyệt kỹ.
+
+Ảnh và prompt nguyên văn ở `games/immortality-cultivation/art-src/skills/targets/` (không đưa vào Git); bảng ghép ở `tmp/shots/targets/target-frames-sheet.jpg`. Hai giám khảo mù chấm khung mục tiêu trước khi dùng làm chuẩn.
+
+**Lượt 3a** (agent, đang chạy) bỏ phần sai và dựng nền:
+- kiểm chuỗi hậu kỳ;
+- khung va chạm đồ họa 1–3 khung;
+- kiếm ba tầng trắng và lam, vàng chỉ cho kiếm chủ;
+- quái phân tầng phản ứng;
+- tối đa 8 con số;
+- dựng lại đòn cơ bản.
+
+**Lượt 3b** dựng theo khung mục tiêu:
+- tuyệt kỹ theo chiều đứng: cổng trời, cột sáng, mưa kiếm phủ ≥ 70 % sân;
+- flipbook vẽ tay cho nổ, khói, mực;
+- cảnh cận có dáng hành động.
