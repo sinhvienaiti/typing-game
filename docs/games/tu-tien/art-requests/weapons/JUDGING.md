@@ -270,3 +270,26 @@ Danh sách sửa cho bản 8 (sửa tiếp trên bản 7, giữ phần đã đư
 4. Lưỡi song song khoảng 80 % chiều dài rồi vào mũi ngắn kiểu Hán; đường ngọc khảm mảnh và vân lôi bạc mờ dần tới khoảng 2/3 lưỡi; ánh sáng lạnh dọc mép.
 5. Chuôi chàm sáng hơn, thêm đai bạc cách quãng.
 6. Hào quang đặt giữa phía sau đốc; ngọc phát sáng dịu.
+
+## Vòng 10: bản 8, sửa tiếp trên bản 7 (02/11/2026, tối)
+
+Bản 8 (`showcase-clear-wind.v8-try1`) sửa 6 điểm của vòng 9. Hai giám khảo mới W19, W20 chấm lần lượt. Nhãn: G = bản 8, H = bản 7.
+
+| Bản | W19 (M / A / F) | W20 (M / A / F) |
+|---|---|---|
+| Bản 8 (G) | 7,8 / 7,7 / 7,9 | 7,8 / 7,6 / 8 |
+| Bản 7 (H) | 8 / 8,1 / 6,8 | 7,6 / 7,9 / 6,8 |
+
+Đọc ra: bản 8 cân nhất từ đầu. Trục thấp nhất là 7,6, F lên 7,9–8, và ảnh đúng luật màu (0 % điểm ảnh ấm; bản 7 có 2,4 %). Cả hai giám khảo chọn bản 8. Phần còn thiếu để tới 8,5 là độ hút và độ giàu chi tiết:
+- **Lưỡi trơn:** ngoài nửa gốc, lưỡi là một dải bạc phẳng. Thiếu gân sống, vát hai tầng, mặt mờ và mặt gương tách nhau, bản gốc lưỡi chạm mây.
+- **Lưỡi mảnh:** ở 25–40 px khử màu thì lưỡi còn một vệt 1 px.
+- **Đốc chạm một tầng:** trắng đều; trục tròn qua lỗ trông như trục bánh xe, hai nút mây như dán thêm.
+- **Chuôi kém cấp hơn đốc:** lụa như lưới phẳng, đai trơn, núm phẳng một lớp.
+- **Trình bày hiền:** hào quang là trăng mờ, nhiều mảng tối trống, thiếu rim light, ánh lóe ở mép, điểm nhấn sáng.
+
+Danh sách sửa cho bản 9 (sửa tiếp trên bản 8):
+1. Lưỡi rộng thêm 15–20 %; gân sống giữa, vát hai tầng, mặt mờ tối hơn và mép gương sáng; rãnh ngọc và hồi văn chạy tới gần mũi; bản gốc lưỡi chạm mây chỗ lưỡi ra khỏi bích.
+2. Đốc hai đến ba tầng: vành bạc nổi vát sắc, viền hạt nổi, mây chạm sâu có bóng trong khe, chạm thủng một phần, vòng ngọc trong dày hơn và có vát; chỉ tông bạc lạnh.
+3. Thay trục tròn bằng một sống như ý chạm khắc nối tiếp gân lưỡi qua lỗ, liền khối với hai nút mây, mảnh để lỗ vẫn thoáng.
+4. Chuôi nhiều tầng: cổ bạc chạm mây, cổ sứ dài hơn, lụa có ánh dệt, đai bạc sáng hơn, núm hải đường to hơn với cánh xếp lớp.
+5. Trình bày điện ảnh: ánh sáng chính có hướng, rim light mạnh, điểm phản chiếu sắc trên bạc, men sứ trong, ánh lóe nhỏ ở mép, một điểm nhấn sáng chỗ bích gặp lưỡi, hào quang rực hơn và nền chuyển sắc; vật thể vẫn sắc nét, không bị bloom phủ.
