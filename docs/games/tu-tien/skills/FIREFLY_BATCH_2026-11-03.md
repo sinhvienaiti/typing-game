@@ -45,3 +45,28 @@ Theo canon D58, anh muốn Claude tự tạo âm thanh cho chiêu ("chúng ta c�
   - ElevenLabs v4 có thẻ cảm xúc (`[shouting]`), nhưng các giọng mặc định là giọng Anh nói tiếng Trung.
 - **Firefly chỉ chạy một việc tạo mỗi lúc,** và tab chạy nền bị trình duyệt hãm. Tạo âm phải để tab Firefly ở phía trước.
 - **Audio Lab chưa nhận game này** (chỉ có `dragon-hold`, `typing-defense`, `typing-survival`). Bước cắt, đặt mức theo bậc, OGG và dòng giấy phép làm khi anh chọn xong. Giấy phép: tiếng hiệu ứng theo điều khoản model Adobe; tiếng hô ghi riêng model đã dùng.
+
+## Gắn tạm vào lab (chưa duyệt, 03/11 khoảng 02:40)
+
+Để anh nghe chiêu có tiếng ngay trong lab, Claude trộn sẵn từng sự kiện của bus âm thanh (`src/lab/sound.ts`) từ nhiều lớp. Mỗi sự kiện có tối đa 3 biến thể, lấy từ các bản có độ to gần trung vị.
+
+- **Xử lý:** cắt lặng đầu, độ to theo bậc (nhát kết −12 LUFS, trúng −15, phát −14 đến −20, vụt qua −21, chuông −18), giới hạn đỉnh, Ogg Opus.
+- **Nơi đặt:** `games/immortality-cultivation/art-src/lab/audio/<event>/01–03.ogg`, cùng `manifest.json` và `SOURCES.json` (bản nào vào lớp nào). Không đưa vào Git.
+- **Cách ghép lớp:**
+
+| Sự kiện | Lớp |
+|---|---|
+| trúng thịt | chém vào thịt + thân chém nặng |
+| trúng đá, giáp | kiếm chạm giáp đá + vỏ giáp |
+| trúng linh | phép trúng + Kim nổ |
+| thú chết | tan thành linh quang + bắn mực |
+| phát K1 | rút kiếm + phép phát |
+| phát K2 | vung kiếm + Kim bùng + kiếm ngân |
+| phát K4 | rút kiếm + Kim bùng + sub |
+| phát phím 7 | rút kiếm + sông kiếm dâng |
+| tuyệt kỹ mở | tiếng nền dâng + bầy kiếm |
+| tuyệt kỹ cao trào | nhát chém khổng lồ + sấm + sub |
+| tuyệt kỹ khép | chuông ngọc + đuôi vang |
+| tiếng hô | 疾！ (chiêu nhỏ); 剑心所至，天地皆开！ (K5); 万剑……朝宗！ (phím 7) |
+
+Khi anh chọn bản trên trang nghe, Claude dựng lại từ đúng các bản anh chọn.
