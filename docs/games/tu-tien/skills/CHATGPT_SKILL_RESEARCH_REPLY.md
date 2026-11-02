@@ -28,17 +28,11 @@
 
 Thử thêm: mỗi hệ phải nhận ra được ở ảnh 40×40 px **đã bỏ màu**.
 
-## Phần 2: Kiếm, Đao, Thương
+## Phần 2–4 và bản cuối
 
-ChatGPT đã xong (trong chat). Theo chủ dự án 02/11: Claude chưa đọc, chờ Gemini 4 Argon (thinking Cao) review bản cuối; cả ChatGPT và Gemini cùng đạt thì Claude mới đọc và đánh giá.
+Bản cuối hợp nhất 1/3 (tự review + Kiếm, Đao, Thương), 2/3 (Kim, Mộc, Thủy, Hỏa), 3/3 (Thổ, Lôi, Phong, Băng + kiểm tổng, để sau, câu hỏi mở) nằm trong chat. Chủ dự án 02/11 bỏ vòng Gemini. Bảng tổng và bản kiểm của Claude: [`SKILL_CATALOG.md`](SKILL_CATALOG.md).
 
-## Phần 3: nguyên tố
-
-ChatGPT đã xong (trong chat); như Phần 2.
-
-## Phần 4: tự review và bản cuối hợp nhất
-
-Đang làm (yêu cầu bản cuối tự đứng được để gửi nguyên văn cho Gemini).
+Ghi chú: 2/3 ra sau 3/3 vì Claude đọc nhầm dòng "Còn Bản cuối 2/3" là đã xuất và nhắn thẳng "3/3"; ChatGPT tự báo thiếu, Claude yêu cầu xuất bù.
 
 ## Ghi chú kỹ thuật (02/11)
 
