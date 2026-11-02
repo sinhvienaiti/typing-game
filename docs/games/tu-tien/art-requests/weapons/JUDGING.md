@@ -457,3 +457,14 @@ Bản 5 (`clearwind-src3q.v5-try1-pad`) vẽ lại bản 4 ở góc ba phần t�
 ## Bản 6 của ảnh nguồn Clear Wind (02/11/2026, khuya)
 
 Bản 6 (`clearwind-src3q.v6-try1-pad`) sửa tại chỗ bản 4 (cùng góc máy) theo cả hai giám khảo vòng 20, và làm giàu lưỡi theo ngôn ngữ của chính thiết kế: gờ sống giữa, lõi ngọc trong hơn có vân gió-lá, ray bạc sắc, chạm mây-sóng dọc hai mép lõi ngọc ở nửa lưỡi gần chuôi, ngạnh vàng dài hơn; dải bạc chạm khắc chạy hết vòng, vành bạc dày hơn; núm và chuôi nhỏ lại theo tỉ lệ thẻ; nền xám tối. **Chủ dự án duyệt thay đổi thiết kế này (22:30): "Duyệt bản 6".** Vòng chấm 21 lần đầu hỏng vì hết giới hạn phiên lúc 22:13 và được chạy lại sau 22:30.
+
+## Vòng 21: ảnh nguồn bản 6 so với bản 4 (02/11/2026, khuya)
+
+README ghi rõ lưỡi làm giàu đã được chủ dự án duyệt. Hai giám khảo mới W41, W42. Nhãn: X = bản 6, Y = bản 4.
+
+| Ảnh nguồn | W41 (M / A / F) | W42 (M / A / F) |
+|---|---|---|
+| Bản 4 (Y) | 8,3 / 8,2 / 8,1 | 8,3 / 8,2 / 8 |
+| Bản 6 (X) | 8,2 / 8,1 / 7,6 | 8,1 / 8,1 / 7,6 |
+
+Đọc ra: bản 6 trôi ở đúng bộ phận nhận diện: vòng bạc mảnh hai tầng có khe thành một khối trống bạc đặc như đồng xu, to hơn khoảng 15 %; thêm một cụm mây thừa ở mép lỗ; núm sen nhỏ và khép; dải chạm ở lưỡi đọc như dây bện chứ không phải mây-sóng. Cả hai chọn sửa bản 4: lưỡi làm giàu đã duyệt (gờ sống giữa, mây-sóng nổi nông hai bên lõi ngọc, chữ V vàng dài hơn); nền xám trung tính đậm (khoảng #505050–#5a5a5a); vòng ngoài và vòng trong dày khoảng 1,5 lần (từ 14 px trở lên); đầu móc mây tù hơn, cành vàng có nền đặc đỡ; núm nhỏ đi khoảng 20 %; nghiêng thật khoảng 30°; rãnh chạm và bóng bạc sâu hơn.
