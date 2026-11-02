@@ -53,6 +53,7 @@ This skill is the method. Each game keeps its own data: reference board, signal 
 8. **Iterate with a stop rule.**
    - Fix exactly what both judges named.
    - After two rounds without a real gain, change method in the same report: ready-made free sources, a lookdev reference, another tool, or a search brief for the owner.
+   - **Reference first, then a batch** (owner, 02/11, after 13 Clear Wind rounds swung between 7.2 and 8.2: "sai mãi vẫn sai… kêu chatgpt đưa vài mẫu mà bạn cảm thấy trên 9 điểm, sau đó đưa tôi review"). Stop regenerating from judge notes. Have ChatGPT show 10–12 existing loved designs of that kind as pictures with source links; send the owner the ones you rate 9+; from the one he approves, have ChatGPT write a prompt that keeps its quality and rendering, improves it a little and keeps our own design identity (no copying another game's item); generate 3–5 candidates at once and send them all to the owner before any judge.
    - Never wire a piece below the bar. Anything already wired below it is a debt in `docs/games/QUALITY_RESCUE_2026-11-01.md`.
 9. **3D** ([tripo](references/tripo.md)).
    - Generate on Tripo only after both judges give the source 8.5, including Tripo fitness.
