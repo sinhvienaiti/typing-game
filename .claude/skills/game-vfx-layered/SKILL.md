@@ -77,6 +77,7 @@ Show the owner the clips and sheets, take his notes, and wire a skill into the g
   - Shared systems (typing feedback, key sounds, character animation) need ≥ 9.
   - Dragon fire in Dragonhold aims at 9.
 - **Records:** write the game's changelog with before/after frame sheets at 720p and 1080p, and give the owner a short clip.
+- **Three tries, then discuss** (owner, 02/11): when an effect or a motion has been reworked three times without a clear gain in the judges' scores, stop and work out a different approach with ChatGPT (show it the clips or sheets, the judges' notes and what was tried) before the fourth try. Sheets for blind judges never print metrics.
 
 ## Techniques beyond this repo
 
