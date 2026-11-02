@@ -38,6 +38,7 @@ tripo generate image-to-model <ảnh nguồn> -p texture_quality=detailed -p pbr
 | 7 | Last Line | Nữ xạ thủ (Lightbearer) | Firefly, 4 góc khớp `results-lose-bg.png` (`QUALITY_RESCUE` §4.4) | Chưa có, Claude làm | 50.000 | 40 (multiview) | — |
 | 8 | Last Line | Drone hỗ trợ | Firefly, 4 góc | Chưa có | 25.000 | 40 | — |
 | 9–13 | Last Line | 5 súng cầm tay: Pulse, Heat Beam, Scatter, Rail, Star Mortar | Firefly, ba phần tư | Chưa có | 15.000 mỗi súng | 5 × 40 | — |
+| 14 | Tu Tiên | Kiếm Clear Wind `clear-wind` | `games/immortality-cultivation/art-src/weapons/clearwind-src3q.v4-try1-pad.png` | **Ngoại lệ của chủ dự án** (02/11 khuya, "Dựng thử bản 4"): nguồn chững ở 8,2–8,3 / 8–8,2 / 7,9–8,2 sau vòng 18–22 (`docs/games/tu-tien/art-requests/weapons/JUDGING.md`); model phải qua 8,5 trong lab | 15.000 | 40 | **Đã dựng** 02/11 23:12, task `0038a002-69f4-46e6-8ebc-3d1cd584a22c`, 40 credit (số dư 970 → 930). 14.728 tam giác, map màu, normal và ORM 4096. Gốc ở `games/immortality-cultivation/art-src/3d/weapons/clear-wind.glb`. Chờ đưa vào lab và chấm 8,5 |
 
 Tổng dự kiến 13 × 40 = **520 credit**. Còn khoảng 450 credit cho làm lại, hoặc nâng geometry `detailed` cho nhân vật.
 
