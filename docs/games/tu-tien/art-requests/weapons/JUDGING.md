@@ -349,3 +349,21 @@ Bản 11 sửa được tỉ lệ (lưỡi 71–72 % chiều dài, mũi Hán câ
 1. ChatGPT tìm 12 mẫu kiếm chính thức được yêu thích (chat `6ae888dc`, Genshin Impact và Wuthering Waves; chưa tìm được ảnh kiếm của game hay donghua tiên hiệp Trung Quốc). Claude chấm làm mẫu tham chiếu: 9 trở lên là Primordial Jade Cutter, Mistsplitter Reforged, Haran Geppaku Futsu, Light of Foliar Incision, Absolution, Azurelight, Emerald of Genesis, Blazing Brilliance. Tờ ảnh đã gửi chủ dự án.
 2. Chủ dự án chọn mẫu. ChatGPT viết prompt từ mẫu đó: giữ mức chất lượng, cách dựng sáng và chất liệu, cải tiến một chút, nhưng giữ thiết kế riêng của Clear Wind (kiếm Hán, đĩa bích), không chép vũ khí của game khác.
 3. Tạo 3–5 ảnh cùng lúc, gửi chủ dự án hết, rồi mới chấm mù.
+
+## Vòng 14: 5 ảnh từ prompt dựa trên mẫu, cùng một thiết kế (02/11/2026, tối)
+
+Chủ dự án duyệt cả 12 mẫu ("12 mẫu này đều khá đẹp… hãy thử vài prompt"). 3 prompt do ChatGPT viết (thẻ vũ khí, ra mắt 3D, tranh tiên hiệp) và 2 do Claude viết (thẻ, ra mắt 3D), vẽ cùng chat `6ae888dc` (`ref-clearwind-*.v1-try1`). Hai giám khảo mới W27, W28. Nhãn: H = GPT 3, J = Claude A, K = GPT 1, P = Claude B, Q = GPT 2.
+
+| Ảnh | W27 (M / A / F) | W28 (M / A / F) |
+|---|---|---|
+| GPT 3, tranh tiên hiệp (H) | 7,5 / 7,8 / 6,8 | 7,4 / 7,6 / 6,3 |
+| Claude A, thẻ (J) | 7,2 / 6,9 / 6,6 | 7,3 / 7 / 7 |
+| GPT 1, thẻ thẳng đứng (K) | 6,8 / 6,2 / 7,7 | 6,5 / 5,8 / 7,4 |
+| Claude B, ra mắt 3D nền đêm (P) | 7,8 / 8 / 7,1 | 7,9 / 8,1 / 6,8 |
+| GPT 2, ra mắt 3D (Q) | 7,5 / 7,6 / 6,9 | — |
+
+(W28 chấm Q nằm trong phần bị cắt của kết quả; xem `subagents/workflows/wf_b71b27b3-fa1/journal.jsonl`.)
+
+Đọc ra: cả 5 ảnh là một thanh kiếm, chỉ khác cách trình bày. Nền đêm tối (P) làm bạc và ngọc nổi nhất, được cao nhất. Lỗi chung: lưỡi trơn và ngắn (64–67 %), mũi nhọn ba cánh kiểu hoa diên vĩ ở gốc lưỡi, mây sứ mềm như kem bơ, toàn tông sáng nên khử màu ở cỡ nhỏ lưỡi biến mất.
+
+Chủ dự án chỉ ra lỗi cách làm: "đáng lẽ bạn nên phân tích hình ảnh kiếm để đưa ra prompt phù hợp hơn chứ, chứ 5 ảnh đều y 1 mẫu vậy". Nguyên nhân: mọi prompt bị khóa vào một thiết kế và vẽ chung một chat. Lượt sau phân tích từng mẫu, mỗi prompt một phong cách, mỗi ảnh một chat mới: xem `REFERENCE_PROMPTS.md` và vòng 15.
