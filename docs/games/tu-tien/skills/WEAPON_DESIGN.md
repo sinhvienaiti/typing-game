@@ -57,6 +57,7 @@ Hình nhỏ ở góc tranh H1 không phải góc 55° từ trên xuống. Từ t
 - **Đao:** Ẩm Tuyết Đao (Phong Vân), Viên Nguyệt Loan Đao (Cổ Long), Hổ Phách (Thần Binh Huyền Kỳ), Đồ Long Đao (Ỷ Thiên Đồ Long Ký), Cát Lộc Đao (Tiêu Thập Nhất Lang), Kinh Tịch, Thiên Nhận (Phong Vân).
 - **Thương:** Hỏa Tiêm Thương (Phong Thần), Bạch Ngân Long Thương (Đấu La III), Bá Vương Thương (Thất Chủng Vũ Khí), Lượng Ngân Thương (truyền thống Triệu Vân), Trượng Bát Xà Mâu, Vortex Vanquisher, Calamity Queller, Primordial Jade Winged-Spear (Genshin).
 - ChatGPT tự ghi rõ cái nào kiểm trên trang, cái nào là quan sát tranh chuyển thể. "Được yêu thích nhất" không có bảng xếp hạng chung đáng tin; danh sách là các thiết kế biểu tượng.
+- Claude kiểm lại: Calamity Queller "rèn từ một tinh thể lạ, ánh xanh nhạt" khớp mô tả trong game. Viên Nguyệt Loan Đao: lưỡi hình trăng tròn chỉ thấy trong mô tả game chuyển thể, chưa thấy trong nguyên tác; chất liệu "Hàn Sơn Minh Thiết" chưa xác nhận được.
 
 ## 5. Ngôn ngữ chung của bộ
 
