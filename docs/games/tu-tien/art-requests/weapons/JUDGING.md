@@ -134,3 +134,22 @@ Hướng chung của hai giám khảo: giữ cấu trúc bản 3, mượn độ 
 - **Ánh sáng:** ba chấm ngọc ở đúng điểm thứ bậc, tương phản mạnh hơn.
 
 Đã giao vẽ bản 4.
+
+## Vòng 6 (02/11/2026): Clear Wind bản 4
+
+Hai giám khảo mới (W11, W12). P là bản 3, Q là bản 4: cấu trúc bản 3 cộng độ rực bản 2, prompt tiếng Anh do Claude viết theo mẫu.
+
+| Nhãn | W11 (M / A / F) | W12 (M / A / F) |
+|---|---|---|
+| P (bản 3) | 7,2 / 7,1 / 7,5 | 7,3 / 7,2 / 7,8 |
+| Q (bản 4) | 7,7 / 7,8 / 7,8 | 7,7 / 7,8 / 7,8 |
+
+Bản 4 cao nhất từ đầu và cân bằng cả ba trục, nhưng vẫn dưới 8,5. Việc chung của hai giám khảo:
+- **Lưỡi:** dáng riêng. Kiếm Hán song song tới 4/5, gân sứ chia đoạn mây viền men chàm, ô khảm sứ và ngọc xuyên thấu ở gốc.
+- **Hoa văn:** có kỷ luật (lôi văn, tường vân đối xứng), không nét ngoằn ngoèo.
+- **Vòng bích:** viền bạc dày, ba bậc, bốn cánh mây nhỏ phá đường tròn.
+- **Chuôi:** dây lụa quấn nổi, sáng hơn, có đai bạc.
+- **Đốc:** vòng bích nhỏ.
+- **Ánh sáng:** đường ngọc sáng nối rãnh vào vòng; bỏ lóe sao và vệt lóa, giảm bloom; hào quang khác hình với vòng bích.
+
+Đã giao vẽ bản 5.
