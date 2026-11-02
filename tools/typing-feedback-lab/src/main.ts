@@ -95,6 +95,8 @@ const strip = new FocusStrip({
 const labBay = $<HTMLDivElement>("labBay");
 let loadCell = 0;
 let landed = 0;
+/** The cells words landed in, in landing order (each flight's own id, never the latest aim). */
+const landedCells: number[] = [];
 const loadHost: LoadHost = {
   target(out) {
     const cells = labBay.querySelectorAll<HTMLElement>(".lab-mags i");
@@ -106,11 +108,14 @@ const loadHost: LoadHost = {
     out.y = r.top - o.top - 3;
     out.w = r.width + 6;
     out.h = r.height + 6;
+    out.id = loadCell % cells.length;
     loadCell += 1;
     return true;
   },
-  onLand() {
+  onLand(r) {
     landed += 1;
+    landedCells.push(r.id ?? -1);
+    if (landedCells.length > 64) landedCells.shift();
   },
   flawlessClass: "lab-chip",
   learnClass: "lab-chip",
@@ -556,6 +561,8 @@ Object.assign(window, {
       setLoad(on);
     },
     landed: () => landed,
+    /** The cells the last words landed in (their flights' own ids). */
+    landedCells: () => [...landedCells],
     stray(letter: string) {
       lastKey = letter;
       progress.kind = "stray";
