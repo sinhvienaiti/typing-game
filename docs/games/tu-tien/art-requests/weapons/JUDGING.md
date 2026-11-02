@@ -194,3 +194,27 @@ Kết quả hai điều kiện còn lại (cùng prompt viết riêng cho Firefl
 - **Điều kiện 3, Image 4 Ultra không ảnh tham khảo:** một thanh katana kiểu ảnh chụp thật, có vòng sáng. Kém nhất, không lưu.
 
 Kết luận (Claude, chủ dự án đồng ý dừng): prompt có lỗi thật. Phủ định kéo theo katana và tua, và sửa bằng câu khẳng định đã cải thiện được chuôi và tua. Nhưng giới hạn chính là của model: kéo về kiếm Nhật, nét phẳng, ít chi tiết. Firefly không tự đứng được cho vũ khí; chỉ dùng tạo biến thể khi đã có ảnh tham khảo tốt từ ChatGPT. Dừng Firefly, chờ chủ dự án đăng nhập lại ChatGPT.
+
+## Vòng 7: Clear Wind bản 5 (02/11/2026, tối)
+
+ChatGPT đã đăng nhập lại (tab ChatGPT bị đăng xuất lúc 14:03 là tab cũ; trình duyệt của app mở lại tab mới thì đã đăng nhập). Bản 5 (`showcase-clear-wind.v5-try1`) sửa 6 điểm của vòng 6. Hai giám khảo mới W13, W14 chấm lần lượt (không quá 2 agent), nhãn trung lập T = bản 5, U = bản 4.
+
+| Bản | W13 (M / A / F) | W14 (M / A / F) |
+|---|---|---|
+| Bản 5 (T) | 7,4 / 7,3 / 7,6 | 7,4 / 7,2 / 7,8 |
+| Bản 4 (U) | 7,8 / 7,9 / 7,3 | 7,7 / 7,8 / 7,2 |
+
+Đọc ra: bản 5 rõ hơn để làm nguồn thiết kế (F tăng 0,3–0,6): mây chạm thủng đậm, lỗ bích tối và thoáng, mũi lộ. Nhưng nó mất độ sang và độ rực (M và A giảm 0,3–0,6): lưỡi bạc phẳng như nhựa, chuỗi mây viền coban như decal, cel-anime gọn kiểu game di động. Cả hai giám khảo chọn bản 4 nhỉnh hơn và cùng đề nghị ghép: cấu trúc cầu như ý và độ rực của bản 4, cộng độ sắc và lỗ bích to của bản 5.
+
+Danh sách sửa chung cho bản 6 (hai giám khảo cùng nêu hoặc không mâu thuẫn):
+1. Lưỡi kiếm Hán dài, hơi thuôn, mũi vòm nhọn thấy rõ. Kim loại nhiều tầng: mặt vát, gờ sống, highlight mép sắc, hõm tối.
+2. Glow là VFX: thân kiếm không bị bloom phủ trắng; ánh sáng ở sau và quanh vật.
+3. Hoa văn là phù điêu mây như ý và lôi văn đậm, sắc, có chủ đích; không nét cuộn ngẫu nhiên kiểu AI.
+4. Lắp ghép một khối: chuôi ngầm đi qua tâm lỗ bích, một lưỡi, trục thẳng; cầu như ý mảnh gắn trên mặt, không chia đôi lỗ.
+5. Bích và lỗ to hơn khoảng 20–25 %, vành ngoài liền khối sáng (bốn mấu mây của bản 5 đọc như bánh răng ở 25–40 px); có độ dày và viền sáng để khi bay nghiêng vẫn đọc.
+6. Khảm sống lưỡi lún vào lòng lưỡi, bạc và sứ, không viền coban.
+7. Chuôi quấn dây lụa chàm xoắn kiểu Trung Hoa, sáng hơn một bậc, khâu bạc hai đầu; không chần trám kiểu da, không đan thoi kiểu tsuka-ito.
+8. Ngọc nhỏ nhưng thấy rõ (vòng ngọc trong mảnh, hạt ngọc ở núm gắn liền); không hạt lơ lửng.
+9. Thêm một nét riêng trong mặt phẳng lưỡi (ví dụ hai cánh như ý nhỏ ở đỉnh và đáy bích).
+
+Luật dừng (skill game-art-pipeline §8): vòng 6 → 7 không tăng thật, nên đổi cách trong bản 6: ChatGPT viết lại prompt từ danh sách trên, rồi vẽ cùng một prompt ở cả ChatGPT và Gemini (chủ dự án vừa đăng nhập Gemini) để so công cụ.
