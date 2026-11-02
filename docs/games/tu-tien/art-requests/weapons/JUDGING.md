@@ -468,3 +468,16 @@ README ghi rõ lưỡi làm giàu đã được chủ dự án duyệt. Hai giá
 | Bản 6 (X) | 8,2 / 8,1 / 7,6 | 8,1 / 8,1 / 7,6 |
 
 Đọc ra: bản 6 trôi ở đúng bộ phận nhận diện: vòng bạc mảnh hai tầng có khe thành một khối trống bạc đặc như đồng xu, to hơn khoảng 15 %; thêm một cụm mây thừa ở mép lỗ; núm sen nhỏ và khép; dải chạm ở lưỡi đọc như dây bện chứ không phải mây-sóng. Cả hai chọn sửa bản 4: lưỡi làm giàu đã duyệt (gờ sống giữa, mây-sóng nổi nông hai bên lõi ngọc, chữ V vàng dài hơn); nền xám trung tính đậm (khoảng #505050–#5a5a5a); vòng ngoài và vòng trong dày khoảng 1,5 lần (từ 14 px trở lên); đầu móc mây tù hơn, cành vàng có nền đặc đỡ; núm nhỏ đi khoảng 20 %; nghiêng thật khoảng 30°; rãnh chạm và bóng bạc sâu hơn.
+
+## Vòng 22: ảnh nguồn bản 7 (02/11/2026, khuya) và điểm chững
+
+Bản 7 (`clearwind-src3q.v7-try1-pad`) lấy bản 4 làm gốc, thêm lưỡi mây-sóng đã duyệt, vòng bạc dày hơn, núm nhỏ lại, nền xám đậm. Hai giám khảo mới W43, W44. Nhãn: U = bản 7, V = bản 4.
+
+| Ảnh nguồn | W43 (M / A / F) | W44 (M / A / F) |
+|---|---|---|
+| Bản 4 (V) | 8,2 / 8 / 7,9 | 8,3 / 8,1 / 7,9 |
+| Bản 7 (U) | 7,9 / 7,8 / 7 | 8,1 / 7,9 / 7,3 |
+
+Đọc ra: lần sửa này lại trôi: vòng bạc hai tầng thành vòng đệm trơn như ổ bi, lệch tâm, có khe hở thấy nền; lưỡi thuôn hình nêm như dao găm; lõi ngọc chỉ còn nửa lưỡi; vàng dày hơn. Phần chạm lưỡi thì được khen. Bản 4 vẫn tốt nhất; cần: lưỡi hai cạnh gần song song tới khoảng 80 % rồi mũi ngắn; núm nhỏ đi khoảng 25 %; góc ba phần tư thật; nền xám trung tính khoảng 120–128; chạm lưỡi đã duyệt; chạm cổ lưỡi sắc hơn.
+
+**Điểm chững của ảnh nguồn:** vòng 18–22 (5 vòng) bản tốt nhất luôn quanh 8,2 / 8–8,2 / 7,9–8,2 (bản 4). Mỗi lần nhờ model ảnh sửa một nhóm chi tiết, nó vẽ trôi bộ phận khác (vòng bạc, dáng lưỡi, chất liệu, núm). Theo luật dừng phải đổi cách; hướng đề xuất trình chủ dự án: dựng thử một model Tripo từ bản 4 (cần chủ dự án cho ngoại lệ với mốc 8,5 của ảnh nguồn), rồi làm giàu lưỡi và sửa tỉ lệ ngay trên model 3D và texture, chấm model trong lab ở mốc 8,5.
