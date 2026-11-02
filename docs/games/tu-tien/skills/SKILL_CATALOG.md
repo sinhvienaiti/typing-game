@@ -1,5 +1,7 @@
 # Danh mục chiêu Tu Tiên Thủ Ải: bản ChatGPT + kiểm của Claude (02/11/2026)
 
+> **Bị thay (canon D58, 03/11/2026):** anh loại bộ 43 chiêu này vì chán. Đề xuất mới: [`SKILL_CATALOG_V2.md`](SKILL_CATALOG_V2.md). Bản này giữ làm hồ sơ.
+
 > **Nguồn:** ChatGPT (Chat, thinking High) nghiên cứu Quỷ Cốc Bát Hoang, *Ta Là Tà Đế*, *Vạn Cổ Chí Tôn*, rồi thiết kế, tự review và xuất bản cuối hợp nhất 1/3, 2/3, 3/3: https://chatgpt.com/c/6ae8024e-5b30-83ec-bf0b-d5e4033fbf1c. Thẻ đầy đủ mỗi chiêu (10 dòng: vùng, VFX 5 pha, phản ứng thú, âm, cách làm 3D và 2D, khung đỉnh, hình 40 px) nằm trong chat; file này giữ bảng tổng và bản kiểm. Tóm tắt nghiên cứu: [`CHATGPT_SKILL_RESEARCH_REPLY.md`](CHATGPT_SKILL_RESEARCH_REPLY.md).
 > **Chủ dự án 02/11:** bỏ vòng Gemini, dùng ChatGPT; Claude kiểm độ hợp và khả năng triển khai; thứ quá khó ghi để sau. **Đã chốt 02/11 (canon D54):** Hỏa dùng lửa cam đỏ thật, các hệ còn lại giữ luật màu và có sắc nhạt riêng (cột "Sắc riêng" §1); **làm 3D trước**, 2D sau (dựa vào tranh 2D).
 
