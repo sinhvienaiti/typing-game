@@ -99,3 +99,19 @@ Không tấm nào đạt. Điểm chung của cả hai giám khảo:
 
 - **Thiết kế bằng chữ trước:** ba nhà thiết kế độc lập theo ba góc: bóng dáng trước, sang trọng 5 sao, chuyện thần thoại. Hai giám khảo thiết kế chấm từng món và chọn phương án thắng. Một art director gộp lại thành một prompt cho mỗi món.
 - **Vẽ dạng giới thiệu:** mỗi ảnh một vũ khí, lớn, xếp chéo, như tranh ra mắt vũ khí 5 sao, thay cho tấm nhiều món.
+
+## Vòng 4 (02/11/2026): thử một món, Clear Wind dạng ảnh trưng bày
+
+Sau góp ý của chủ dự án ("đã lấy 1 số hình ảnh để tham khảo… chưa"), quy trình đổi sang: ảnh tham khảo thật, ChatGPT review và viết lại prompt (`WEAPON_PROMPT_TEMPLATE.md`), thử một món, chấm, rồi mới làm phần còn lại. Hai giám khảo mới (W7, W8). K là `showcase-clear-wind.v1-try1` (prompt kiểu đặc tả), L là `showcase-clear-wind.v2-try1` (mẫu prompt mới).
+
+| Nhãn | W7 (M / A / F) | W8 (M / A / F) |
+|---|---|---|
+| K | 7 / 6,5 / 7,5 | 6,5 / 6 / 6,5 |
+| L | 7,5 / 7,5 / 6,5 | 7,5 / 7,8 / 6,8 |
+
+- **L hấp dẫn hơn hẳn,** độ hấp dẫn tăng khoảng 1–1,8 điểm, nhưng mất độ rõ hình.
+- **Hộ thủ:** đĩa có bốn ô quanh trụ giữa đọc ra chữ thập trong vòng tròn, giống thánh giá Celtic hoặc bánh lái tàu.
+- **Lưỡi:** thon đều kiểu estoc, mũi tan vào quầng sáng.
+- **Ngọc:** hạt ngọc ở tâm hộ thủ thành đá quý tâm điểm.
+- **Ánh sáng:** xanh lam như laser.
+- **Hướng của cả hai giám khảo:** giữ vật liệu và ánh sáng của L, ghép với vòng bích rỗng một lỗ của K, lưỡi kiếm Hán (hai cạnh song song, mũi ngắn), bản sắc phải còn khi tắt phát sáng. Đã giao vẽ bản 3.
