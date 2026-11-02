@@ -112,6 +112,31 @@ Cách quay và nộp:
 - Clip CC0 trên tỉ lệ cách điệu dễ trượt chân: xử lý bằng khóa chân.
 - Clip 24 fps có thể vẫn máy móc sau khi lấy mẫu lại: khi đó làm lại đoạn vung ở 60 fps trong Blender.
 
+## Kết quả vòng 1 (02/11/2026, tối; commit game `ca730aa`)
+
+Bước 1–4 đã làm trong lab (chi tiết trong các changelog `2026-11-02-lab-motion-*` và `2026-11-02-lab-vfx-smoothing` của repo game; bảng số ở `tmp/shots/motion/final/metrics-table.md`). Số đo ở 60 Hz, trước → sau:
+
+| Mục | Trước | Sau | Ngưỡng |
+|---|---|---|---|
+| Chuyển clip vượt 1,5 × đỉnh | 5/20 | 2/26 (bắt đầu đi, dừng) | 0 |
+| Khung qua tư thế bind | 24 | 0 | 0 |
+| Trượt chân trụ p95 | 1,42 m/s | 0,26 m/s (tốc Lam 0,12) | 0,05 |
+| Xoay gốc lớn nhất | 10.800 °/s | 487 °/s | — |
+| Phím cuối → thân nhả | tới 817 ms | 33 ms | ≤ 50 ms |
+| Lớp VFX bật / tắt phụt | 102 / 33 | 0 / 0 | 0 |
+| Lỗi kiếm (hiện, tắt, đổi cỡ, giật hướng) | 37 / 27 / 22 / 306 | 0 | 0 |
+
+Hai giám khảo mù (MJ1, MJ2) chấm demo: **5,4 và 5,4**. Kỹ thuật đã mượt, nhưng thiếu phần diễn:
+- thân gần như đứng yên khi ra chiêu, không lấy đà, không vặn thân, VFX gánh hết lực;
+- sau K5 nhân vật dang ngang tay đứng im khoảng 1,5 s, sau K2 quay gần 180°;
+- trúng đòn chỉ đổi màu cả người trong một khung; quái không phản ứng;
+- dash không đổ người, không nén, không bước hãm;
+- hộ thân và K4 dùng chung một clip;
+- mọi chiêu cùng một khuôn trận trắng; lóe lúc nhả xóa mất nhân vật ở cận cảnh;
+- ở camera chơi nhân vật chỉ cao 30–70 px nên khó đọc.
+
+Chưa gửi demo cho chủ dự án (mốc gửi là 7). Vòng 2 đang chạy: làn diễn xuất (lấy đà, phát lực, giữ thế, hồi chiêu, dash, trúng đòn, bước xoay và bước dừng), rồi làn va chạm (hit-stop, rung camera, lóe khu trú, mờ dần, mỗi chiêu một hình và màu riêng, quái phản ứng, vòng sáng dưới chân), mỗi làn có phản biện, sau đó demo và hai giám khảo mới.
+
 ## Phụ lục (báo cáo chỉ đọc, 02/11/2026)
 
 ### A. Kiểm kê rig và clip của Lam
