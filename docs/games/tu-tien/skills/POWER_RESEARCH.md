@@ -93,3 +93,25 @@ Lượt 1 có 12 commit dựng (`3cd207d`…`193f15a`), changelog ở `docs/chan
 - cảnh cận đứng im như băng quảng cáo, tranh tả thực không khớp nhân vật tạm trên sân, chữ Hán đứng trước tên tiếng Anh.
 
 **Lượt 2** (workflow `wf_38571378-1ef`) sửa đúng các điểm này, rồi soát đối kháng và cho hai giám khảo mới chấm. Theo luật ba lần thử: nếu tới lượt 3 vẫn không tăng rõ, Claude bàn hướng khác với ChatGPT trước lượt 4.
+
+## Kết quả lượt 2 (03/11, khoảng 05:00)
+
+- **Dựng:** 10 commit (`3eba149`…`32b027a`), changelog `docs/changelog/2026-11-03-lab-power-pass-r2.md` của repo game. Sau đó soát đối kháng, sửa 4 lỗi (`d005f07`…`1332702`):
+  - lóe cao trào không hiện khung đầu;
+  - chữ số bị cắt trong atlas;
+  - số chồng nhau ở mép xa;
+  - reset còn sót mặt cắt chết.
+- **Đo lại:**
+  - từ phím tới hiệu ứng 0 ms, tới thân 33 ms;
+  - High p95: phím 7 10,5 ms, K5 10,9 ms;
+  - thế giới tối thêm khoảng 40–45 %;
+  - số sát thương trên phím 7 từ 271 còn 61.
+- **Hai giám khảo mới: 5,4 và 5,4.** Không tăng, dù đã làm đủ danh sách lượt 1. Cả hai cùng chỉ ra:
+  - lóe cao trào thành lớp sương xanh xám "như lỗi render";
+  - kiếm như nhựa, que tăm, bốn màu không có thứ bậc;
+  - tuyệt kỹ K5 là đĩa phẳng nhỏ như mặt đồng hồ HUD;
+  - quái phản ứng vẫn nhỏ;
+  - số còn rối;
+  - đòn cơ bản quá nhỏ;
+  - cảnh cận đẹp nhưng tĩnh.
+- **Kết luận:** hai lượt bám danh sách không tăng điểm. Vấn đề nằm ở hướng mỹ thuật và kỹ thuật dựng (thứ bậc giá trị sáng tối, chất liệu, sprite vẽ bằng code), không ở việc thiếu mục. Claude đã gửi ChatGPT chẩn đoán trước lượt 3: https://chatgpt.com/c/6ae90a5c-7d00-83ec-b620-e2cf41e2b534
