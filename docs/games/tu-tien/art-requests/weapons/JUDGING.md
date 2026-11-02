@@ -188,3 +188,9 @@ Chủ dự án hỏi Firefly yếu do prompt hay do công cụ. Phép thử đ�
 - **Vẫn còn:** lưỡi dáng katana, vòng bích nằm sau một tsuba, nét phẳng ít chi tiết, không rực.
 
 Điều kiện 2 (có ảnh tham khảo) và 3 (Image 4 Ultra) chờ trình duyệt của app rảnh, vì workflow chuyển động đang dùng nó.
+
+Kết quả hai điều kiện còn lại (cùng prompt viết riêng cho Firefly):
+- **Điều kiện 2, Image 5 có ảnh tham khảo** là Clear Wind bản 4 của ChatGPT (`ff-clearwind.v2-try2-ref`). Đây là ảnh Firefly đẹp nhất: rực, đúng vòng bích và cầu mây. Nhưng nó gần như chép lại thiết kế của ảnh tham khảo, chỉ mềm hơn và ít chi tiết hơn. Giá trị đến từ bản ChatGPT, không phải từ Firefly.
+- **Điều kiện 3, Image 4 Ultra không ảnh tham khảo:** một thanh katana kiểu ảnh chụp thật, có vòng sáng. Kém nhất, không lưu.
+
+Kết luận (Claude, chủ dự án đồng ý dừng): prompt có lỗi thật. Phủ định kéo theo katana và tua, và sửa bằng câu khẳng định đã cải thiện được chuôi và tua. Nhưng giới hạn chính là của model: kéo về kiếm Nhật, nét phẳng, ít chi tiết. Firefly không tự đứng được cho vũ khí; chỉ dùng tạo biến thể khi đã có ảnh tham khảo tốt từ ChatGPT. Dừng Firefly, chờ chủ dự án đăng nhập lại ChatGPT.
