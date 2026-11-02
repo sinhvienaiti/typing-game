@@ -439,3 +439,17 @@ Bản 4 (`clearwind-src3q.v4-try1-pad`) sửa bản 1 theo danh sách vòng 18. 
 2. Chỗ mảnh: vành bạc ngoài chỉ khoảng 0,7 % chiều dài kiếm, mũi móc mây nhọn như kim, nhánh lá vàng cạnh ngọc mỏng như giấy. Làm dày vành, làm tù mũi móc, đổi giá vàng thành phù điêu đặc.
 3. Tương phản giá trị ở cỡ nhỏ: mặt khuất của vành bạc tối hơn, viền vàng đậm hơn để vòng đĩa giữ nét.
 4. Lỗ đĩa: hai giám khảo vòng 19 nhắc mũi nhọn trong lỗ của D, vòng 16 coi đó là lỗi cấu trúc. Giữ lỗ trống có chủ ý và ghi rõ trong README chấm.
+
+## Vòng 20: ảnh nguồn bản 5, góc ba phần tư (02/11/2026, khuya)
+
+Bản 5 (`clearwind-src3q.v5-try1-pad`) vẽ lại bản 4 ở góc ba phần tư thật, làm dày các phần mảnh. README chấm ghi rõ hai chủ ý: bỏ tua và để trống lỗ đĩa. Hai giám khảo mới W39, W40. Nhãn: E = bản 5, J = bản 4.
+
+| Ảnh nguồn | W39 (M / A / F) | W40 (M / A / F) |
+|---|---|---|
+| Bản 4 (J) | 8,2 / 8 / 8,2 | 8,2 / 8,1 / 8,2 |
+| Bản 5 (E) | 7,6 / 7,4 / 6,8 | 7,9 / 7,8 / 7 |
+
+Đọc ra:
+- Vẽ lại ở góc khác thì model ảnh trôi thiết kế: bản 5 đổi bạc chạm thành sứ ở cổ lưỡi, đai chuôi và núm, đổi núm thành búp sen khép, phủ vàng dày; bị coi là "không phải cùng một thanh kiếm", kiểu đồ chơi hay trang sức mobile. Bài học: ảnh nguồn chỉ sửa tại chỗ, không xoay camera.
+- Bản 4 lên F 8,2 (khi README ghi rõ chủ ý). Còn thiếu: dải bạc chạm khắc chạy hết vòng trong giữa vành và đĩa, cụm mây sứ nhỏ ở 7 giờ (W39); lõi ngọc trong hơn có vân gió-lá rõ, ray bạc sắc (W39); vành bạc ngoài dày khoảng 1,6 lần, các lọn vàng dày và gắn chắc (W40); núm nhỏ đi khoảng 15 %, đoạn quấn chuôi ngắn đi 15–20 % (W40); vàng về tông nhạt (W40); nền xám tối hơn (130–145) để mép vát dưới của lưỡi không lẫn nền (W39).
+- **Trần của thiết kế (W40):** chính thiết kế đã duyệt có khoảng 65 % là lưỡi trơn, nên một nguồn trung thành với nó khó vượt khoảng 8,3. Muốn lên 8,5 cần làm giàu lưỡi theo ngôn ngữ của chính thiết kế (chạm mây-sóng dọc hai mép rãnh ngọc, gờ sống giữa, ngạnh vàng dài hơn): đây là thay đổi thiết kế, cần chủ dự án duyệt.
