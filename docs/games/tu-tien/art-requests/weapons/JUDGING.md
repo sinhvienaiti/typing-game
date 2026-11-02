@@ -360,9 +360,7 @@ Chủ dự án duyệt cả 12 mẫu ("12 mẫu này đều khá đẹp… hãy 
 | Claude A, thẻ (J) | 7,2 / 6,9 / 6,6 | 7,3 / 7 / 7 |
 | GPT 1, thẻ thẳng đứng (K) | 6,8 / 6,2 / 7,7 | 6,5 / 5,8 / 7,4 |
 | Claude B, ra mắt 3D nền đêm (P) | 7,8 / 8 / 7,1 | 7,9 / 8,1 / 6,8 |
-| GPT 2, ra mắt 3D (Q) | 7,5 / 7,6 / 6,9 | — |
-
-(W28 chấm Q nằm trong phần bị cắt của kết quả; xem `subagents/workflows/wf_b71b27b3-fa1/journal.jsonl`.)
+| GPT 2, ra mắt 3D (Q) | 7,5 / 7,6 / 6,9 | 7,5 / 7,5 / 6,4 |
 
 Đọc ra: cả 5 ảnh là một thanh kiếm, chỉ khác cách trình bày. Nền đêm tối (P) làm bạc và ngọc nổi nhất, được cao nhất. Lỗi chung: lưỡi trơn và ngắn (64–67 %), mũi nhọn ba cánh kiểu hoa diên vĩ ở gốc lưỡi, mây sứ mềm như kem bơ, toàn tông sáng nên khử màu ở cỡ nhỏ lưỡi biến mất.
 
