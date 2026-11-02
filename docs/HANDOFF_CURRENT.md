@@ -15,7 +15,14 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**02/11 khoảng 09:30 (mới nhất, đọc trước). Chủ dự án dừng toàn bộ Last Line để sang Tu Tiên** ("tạm thời tôi muốn dừng lại toàn bộ để qua game tu tiên yêu cầu xử lý tạo các kỹ năng để review trước").
+**02/11 khoảng 12:00 (mới nhất, đọc trước). Chạy tiếp Last Line** (chủ dự án: "tiếp tục phần công việc cho"). Tu Tiên chạy song song ở phiên riêng `tu-tien-fable`.
+- **Ba workflow chạy lại:**
+  - vòng sửa đợt 1 (`wf_c31386a1-7bf`);
+  - heroine v9 và năm súng kiểu render (`wf_223f83fa-2f5`);
+  - bản thử bố cục (`wf_42ed032a-062`).
+- **Nhịp mới `1a85813c`** (7,27,47), chỉ lo Last Line.
+
+**02/11 khoảng 09:30. Chủ dự án dừng toàn bộ Last Line để sang Tu Tiên** ("tạm thời tôi muốn dừng lại toàn bộ để qua game tu tiên yêu cầu xử lý tạo các kỹ năng để review trước").
 
 - **Đã dừng:**
   - Bốn workflow: vòng sửa đợt 1, bản chơi thử phong cách, thiết kế heroine v9 và súng, bản thử bố cục.
