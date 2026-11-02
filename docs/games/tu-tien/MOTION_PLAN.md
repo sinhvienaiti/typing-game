@@ -137,6 +137,21 @@ Hai giám khảo mù (MJ1, MJ2) chấm demo: **5,4 và 5,4**. Kỹ thuật đã 
 
 Chưa gửi demo cho chủ dự án (mốc gửi là 7). Vòng 2 đang chạy: làn diễn xuất (lấy đà, phát lực, giữ thế, hồi chiêu, dash, trúng đòn, bước xoay và bước dừng), rồi làn va chạm (hit-stop, rung camera, lóe khu trú, mờ dần, mỗi chiêu một hình và màu riêng, quái phản ứng, vòng sáng dưới chân), mỗi làn có phản biện, sau đó demo và hai giám khảo mới.
 
+## Kết quả vòng 2 (02/11/2026, khuya; commit game `b46db93`)
+
+Làn diễn xuất (ba pha cho mọi chiêu, thu chiêu không còn dang tay, K4 tách khỏi hộ thân, dash nén và bước hãm, trúng đòn loạng choạng có viền sáng, bước xoay và bước dừng) và làn va chạm (hit-stop, rung camera, lóe khu trú, mờ dần có easing, mỗi chiêu một hình trận và màu, quái phản ứng, vòng sáng dưới chân), mỗi làn có phản biện. Các mốc vòng 1 giữ nguyên (VFX bật/tắt 0/0, lỗi kiếm 0, khung bind 0, phím cuối tới thân nhả 33 ms); xoay gốc 487 → 278 °/s; tay dang hỏng 0.
+
+Hai giám khảo mù mới: **MJ3 6,1, MJ4 6,5** (vòng 1: 5,4 và 5,4). Chưa tới 7 nên chưa gửi demo. Còn thiếu, theo cả hai:
+- Đánh thường và K4 vẫn thiếu lấy đà bằng thân; thân xoay gần 150° trong 4 khung khi quay về mục tiêu (cần giới hạn khoảng 600–720 °/s có easing hoặc xoay sẵn trong pha gồng); ở camera chơi biên độ tay và thân cần phóng đại khoảng 1,3 lần.
+- Trúng đòn: đầu ngửa trong 1 khung; cần tăng trong 2 khung, khựng 3–4 khung, lùi 0,3–0,5 m có bước, vòng đỏ đặt ở ngực; đạn địch to và sáng hơn.
+- Dash: lóe trắng 6–8 khung làm thân gần trong suốt; cần giới hạn sáng quanh nhân vật, bóng lưu ảnh màu nhân vật, tư thế cúi lấy đà và nén khi tiếp đất.
+- VFX: va chạm dạng bong bóng của K2 bật trong 1 khung; mưa kiếm K5 chỉ hiện 1–2 khung (cần rơi 6–8 khung, kéo giãn, tia lửa khi cắm); cột sáng cuối K5 cần tăng dần 3 khung; thanh K1 còn lơ lửng nên quay về hoặc tan thành đốm sáng.
+- Chuyển động phụ: đuôi cứng khi đi (cần lò xo trễ theo bước, lúc quay, dash, dừng); khi quay tại chỗ đầu và thân dẫn trước chân 4–6 khung; dừng có bước chỉnh thế.
+- Kiếm bay là trường kiếm phẳng kiểu châu Âu: sẽ thay bằng model Clear Wind (đang đưa vào lab).
+- Lỗi cách chụp: đầu tờ chuyển tiếp in số liệu (tỉ số, tốc xương); tờ cho giám khảo mù phải bỏ số.
+
+Vòng 3 chạy sau khi xong việc đưa Clear Wind vào lab (cùng các file), dùng chính danh sách trên.
+
 ## Phụ lục (báo cáo chỉ đọc, 02/11/2026)
 
 ### A. Kiểm kê rig và clip của Lam
