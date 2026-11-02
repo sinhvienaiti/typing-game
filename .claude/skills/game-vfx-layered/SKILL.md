@@ -29,6 +29,7 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
 1. **Trace the event.**
    - Find the sim event that starts the action and its timing: wind-up, release and strike ticks, and the delay to impact.
    - VFX lives in the view only. It never changes sim, content or goldens.
+   - One sim tick emits the release or strike. The caster's body, every VFX layer, the sound, the camera and the hit-stop react on that same frame. No `setTimeout`. Clip markers align to the tick and never delay the sim ([game-character-animation events](../game-character-animation/references/events-and-sync.md)).
 2. **Pick the action class** (§3.3: key, basic shot, rapid fire, skill, ultimate, trap, enemy attack, death, boss) and take its required layers per phase.
 3. **Give each action its own shape.** Every gun, skill or spell gets its own flash, projectile, hit and smoke shapes, not one sprite atlas recoloured.
    - Last Line's audit found five guns sharing one star, which the owner called plain.
@@ -52,12 +53,43 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
    - Dragonhold High had about 2 ms left (28/10).
    - Last Line High had about 0.7 ms left (02/11).
    - Measure a new game first.
+   - When headroom is tight, add an overdraw count (transparent layers per pixel, against the §3.7 caps) to the lab capture's `meta.json`.
 8. **Sound with every effect.**
    - Each phase that flashes also sounds, on the same frame.
    - Combat and skill sounds are layered, loud by tier, explosive and reverberant ([game-art-pipeline audio](../game-art-pipeline/references/audio.md) §5). The soft key-sound rules apply only to keys and light UI.
 9. **Textures and flipbooks:**
    - Firefly Video flipbooks (Adobe models only) and CC0 packs (Unity Labs, Kenney, ambientCG, JangaFX free sets) through game-art-pipeline.
    - Record every source in the game's THIRD_PARTY list.
+   - Sources, render, atlas, VRAM and judging for flipbooks: [flipbooks](references/flipbooks.md).
+
+## Techniques by layer
+
+Reuse these building blocks before writing a new pool. Short names in the table:
+- **fxkit:** `games/immortality-cultivation/src/view/skills/fxkit.ts`: `SpritePool`, `RibbonPool`, `BeamPool`, `GroundSigil`, and helpers (`approach`, `lifeFade`, `pulse`, `Rand`, easings). Preallocated, no allocation per frame.
+- **kit:** `shared/game-kit/three/particles.ts` (`ParticlePool`, `Ribbon`, `FlameTrail`, `LightTrail`) and the fresnel shaders in `shared/game-kit/three/materials.ts` (beam, shield, pillar).
+- **DH:** `games/dragon-hold/src/view/vfx-layers.ts` (`Streak`, `ShellPool`, `StreakSparks`, `FissurePool`, `RuneCircle`) and `games/dragon-hold/src/view/flipbook.ts`.
+- **feel:** `games/immortality-cultivation/src/lab/feel.ts` (`CameraKick`, `CameraShake`, `HitStop`, `FlashLights`).
+
+| Layer | Technique | Start from |
+|---|---|---|
+| Ribbon trail | Camera-facing strip sampled by world time (same length at any frame rate, still in a hit-stop), UV scroll, noise, alpha shaping | fxkit `RibbonPool`; kit `Ribbon`, `FlameTrail`, `LightTrail`; DH `Streak` |
+| Beam | Strip with a thin HDR core, a halo and energy ripples; soft ends | fxkit `BeamPool`; kit beam shader |
+| Fresnel shell | Dome, cone, shield or shockwave mesh, bright at the rim, eroding as it fades | kit shield and pillar shaders; DH `ShellPool` |
+| Ground sigil or decal | Ground plane with a procedural shader that reveals with the typing progress; cracks, scorch, runes | fxkit `GroundSigil`; DH `FissurePool`, `RuneCircle` |
+| Velocity-stretched sprite | Instanced billboard stretched along its velocity; additive light or normal-blended ink; camera- or ground-facing | fxkit `SpritePool` (`stretch`); DH `StreakSparks`; kit `ParticlePool` (round points only) |
+| Flipbook | Atlas frames blended in time, a pivot, soft against the ground, fire and smoke blends | DH `flipbook.ts`; `tools/vfx-flipbook`; [flipbooks](references/flipbooks.md) |
+| Light | Pooled point lights built at load (idle at 0); a flash far from a lit light takes the dimmest, so no lit spot jumps | feel `FlashLights`; tier caps in VFX_STANDARD §3.7 |
+| Camera | Kick on a damped spring fed impulses; shake that dies fast; hit-stop counted to part frames, easing out | feel `CameraKick`, `CameraShake`, `HitStop`; kit `shared/game-kit/feedback/hitstop.ts` |
+
+Every layer keeps the light rule of step 6: thin HDR cores at 3–6, halos and rings at or below 0.9 a channel.
+
+**Library decisions:**
+- **three.quarks: not used.** Its current version needs three ≥ 0.182, and the kit and every game pin three 0.170.0 (their `package.json`). Its emitter and behaviour model is reading only (VFX_STANDARD §4.3).
+- **pmndrs `postprocessing`: a lab A/B benchmark only,** when a tier is over budget. Adopting it needs a kit and boundary change, and a re-judge of the shared typing marks at 9. The owner decides.
+- **Wawa VFX and Three-VFX: not used.**
+- **WebGPU and TSL: later.** The games stay on WebGL2 with GLSL (VFX_STANDARD §4.1).
+
+**A shared kit `vfx/` module** is extracted only when Tu Tien's first effect passes 8.5 and a second game needs the same pieces.
 
 ## Demo or lab first, then the game
 

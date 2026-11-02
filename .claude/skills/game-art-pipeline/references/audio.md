@@ -33,6 +33,7 @@ The living pipeline is [AUDIO_PIPELINE.md](../../../../docs/games/AUDIO_PIPELINE
 - **Machine scores rank and flag; they do not choose.** Optimising toward the critic's numbers pulls sound toward clean but bland (Goodhart's law). Keep a "most different" take, and a low-ranked one, in the listening list.
 - **Key sounds stay natural.** The owner picked the take that kept its tails, droplets, highs and loud/soft contrast. Hard cuts, heavy EQ and equal levels killed the effect. This is a rule for keys, never for combat (§5.1).
 - **Test sounds in context,** in the game's real mix: the "word done, reward sound, spoken word" chain is where the voice gets masked most easily, and a big wave at top typing speed is where combat gets flattened.
+- **Key latency probe, for the next Typing Feel change:** at 10–20 keys/s, measure keydown to sound start (p50 and p95), jitter, voice cuts and GC pauses (`shared/game-kit/feedback/typing-fx/audio.ts`, TYPING_FEEL_SERVICE §8). Proposed bar: p95 ≤ `outputLatency` + 20 ms. The kit already plays native Web Audio: no switch to Howler or Tone.js.
 
 ## 4. Stop rule and banned sources
 

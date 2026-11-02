@@ -19,6 +19,9 @@ List every piece the accepted painting shows, ordered by how much of the battle 
 1. **Lock the layout** with the projection script, and grey-box it in the game.
 2. **Life first:** foes, defenders, hero creatures, workers, and the gameplay objects that must be seen (Wordwoven's 36 choppable trees were not drawn at all). An empty stage with polished ground still scores as empty.
 3. **Ground, water and light,** the biggest share of the frame.
+   - Light first: a CC0 HDRI through PMREM gives the image-based light and the reflections, in place of `RoomEnvironment` (Tu Tien's lab does this in `games/immortality-cultivation/src/lab/look.ts`).
+   - ambientCG maps add detail under the game's own shading: its ramp, palette and grade stay. The scene stays anime and mythic (owner, 02/11); scans and HDRIs are light and raw material, never a photoreal target.
+   - Judge the lit scene in the play build.
 4. **The landmarks** (cropped, on the wings, below the surface).
 5. **Dressing:** clusters, roadside items, vegetation thinned near the lanes.
 6. **Atmosphere and grade:** mist in the hollows, cloud shadows, one colour lookup per map and hour.

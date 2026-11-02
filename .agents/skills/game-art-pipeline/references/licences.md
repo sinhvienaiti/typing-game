@@ -35,10 +35,12 @@ The rule text lives in [SHARED_SYSTEMS_BAR.md](../../../../docs/games/SHARED_SYS
 
 - **Read the licence on the asset's own page** or in the repo's LICENSE file. Quote the exact words in `THIRD_PARTY.md` and note the date.
   - Do not trust aggregator lists, ChatGPT summaries or a pack's description on another site.
+- **Check the repo's identity first:** open the official owner's repo or page directly (owner and name, its LICENSE file, the package metadata), not a fork, a mirror or a search result.
 - **Read the clauses, not only the licence name:** attribution, "no redistribution as a pack", AI use, NFT. FREE_ASSET_SOURCES.md §9 has the checks done so far.
   - Shipping files inside a web game is fine under "no pack redistribution" clauses.
   - Merging assets into our own GLBs and KTX2 atlases keeps them from looking like a loose pack.
 - **When two pages of one source disagree, follow the stricter.** Quaternius's pack pages say CC0 while its licence page says QAL; treat it as QAL.
+- **Browser-side decoders ship with the game** (Draco, Basis for KTX2, meshopt): enabling one adds its `THIRD_PARTY.md` row and its notice on the Credits page.
 - **No scraping, no scripted bulk downloads.** Poly Haven's terms forbid scraping, and ShareTextures forbids automated downloads. Download item by item.
 - **Downloads:**
   - Free packs that meet §1 no longer need per-pack approval from the owner (01/11). They still need a full row in `THIRD_PARTY.md`.
@@ -54,6 +56,7 @@ Never send these to ChatGPT, Gemini, Tripo or any cloud AI:
 - Mixamo files;
 - assets taken through the Poly Pizza service (its terms forbid AI use);
 - Sonniss audio, or any sound or image with a Sonniss layer. This includes Claude: touch Sonniss files only through local signal measurements (AUDIO_PIPELINE §10.2).
+  - The GDC bundle EULA v2.0 (effective 27/08/2026, read at sonniss.com/gdc-bundle-license on 03/11) heads its AI clause "NO AI TRAINING OR USAGE", and says "Re-designed and manipulated sounds remain licensed material".
 
 Screenshots of CC0 assets are fine as visual references.
 
@@ -68,3 +71,11 @@ Screenshots of CC0 assets are fine as visual references.
   - Flat low-poly packs (Kenney, KayKit, Poly Pizza) read as toys. Use them for blockout only, never as main art.
   - Mixed free assets rarely form a set: the best of 58 checked landmark models scored 7, and they did not match each other.
   - Real-world-scan materials, HDRIs and rendered flipbooks (Poly Haven, ambientCG, cgbookcase, Unity Labs, JangaFX) are what move a scene toward the reference.
+
+## 6. AI tools and models: check the whole chain
+
+Heavy local models are not used on the Mac mini M4 (owner, 03/11). For any AI tool or model that is proposed:
+- **Check each component on its own:** code, weights, text encoder, VAE, preprocessors, background remover, LoRA. One non-commercial part blocks the chain (RMBG-2.0, a background remover some 3D wrappers pull in, is CC BY-NC 4.0).
+- **Wrappers and node packs download weights silently.** List what they fetch before running them.
+- **The tool's licence is not the output's licence.** Read both.
+- **Record the revision or hash** of every component in `THIRD_PARTY.md`.
