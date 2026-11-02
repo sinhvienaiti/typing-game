@@ -15,7 +15,21 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
-**02/11 khoảng 12:00 (mới nhất, đọc trước). Chạy tiếp Last Line** (chủ dự án: "tiếp tục phần công việc cho"). Tu Tiên chạy song song ở phiên riêng `tu-tien-fable`.
+**02/11 khoảng 12:28 (mới nhất, đọc trước). Chủ dự án cho dừng toàn bộ** ("bạn dừng lại được rồi đó"; trước đó dặn dừng lúc 12:30).
+- **Đã dừng:** năm workflow và nhịp `1a85813c`. Lịch dừng 12:30 cũng đã xóa.
+- **Chạy tiếp:** dùng `Workflow({scriptPath, resumeFromRunId})`. Script ở `~/.claude/projects/-Users-toandx-htdocs-typing-game/f97baf5f-4f81-4f84-8ec0-79083d7e3ba9/workflows/scripts/`.
+  1. **Vòng sửa đợt 1** (`last-line-wave1-fix-wf_c31386a1-7bf.js`, run `wf_c31386a1-7bf`):
+     - AL-05 r2 `3716943`: giám khảo 7,5 và 7,0, chưa tới 9;
+     - AL-01 r2 `ba93404`: review đang chạy dở.
+  2. **Heroine v9 và súng** (`last-line-hero-guns-design-wf_9083e3c1-1b2.js`, run `wf_223f83fa-2f5`): design r1 đang làm dở, chưa có ảnh mới ngoài hai tờ súng render.
+  3. **Bản thử bố cục** (`last-line-layout-test-wf_42ed032a-062.js`, run `wf_42ed032a-062`): `.wt-ts-layout` có 8 tệp sửa dở, chưa commit.
+  4. **AL-08** (`last-line-al08-guns-wf_3088cb57-a32.js`, run `wf_3088cb57-a32`):
+     - foundation sửa dở 12 tệp ở `.wt-ts-al08`, chưa commit;
+     - làn flipbook báo **BLOCKED**: trình duyệt trong app không mở được tab (có thể do giới hạn số tab, hoặc phiên Tu Tiên đang dùng). Kiểm tab trước khi chạy lại.
+  5. **AL-10 phần A** (`last-line-al10a-world-wf_b6592701-049.js`, run `wf_b6592701-049`): bước 0 xong, `ts-al-10` `20e1001` (khung `src/view/world/`, hình chưa đổi). Ba làn vừa bắt đầu, chưa commit gì.
+  6. Khi chạy lại thì tạo lại nhịp 7,27,47.
+
+**02/11 khoảng 12:00. Chạy tiếp Last Line** (chủ dự án: "tiếp tục phần công việc cho"). Tu Tiên chạy song song ở phiên riêng `tu-tien-fable`.
 - **Ba workflow chạy lại:**
   - vòng sửa đợt 1 (`wf_c31386a1-7bf`);
   - heroine v9 và năm súng kiểu render (`wf_223f83fa-2f5`);
