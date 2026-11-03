@@ -409,9 +409,9 @@ Nếu take không đạt, dùng sine rơi của audio.md §5.7 bước 2 làm l�
 
 | Id | Prompt | Cắt | Đợt |
 |---|---|---|---|
-| `tt-sfx-elem-kim-ignite` | `radiant metal energy surging, bright glittering sparkle, sharp attack` | 100–400 ms | S1 |
-| `tt-sfx-elem-kim-burst` | `explosive radiant metal shard burst, sharp shimmering impact, powerful` | 100–500 ms | S1 |
-| `tt-sfx-elem-kim-residue` | `glittering silver energy sparks scattering, shimmering metallic dust, radiant, lingering` | 1–2,5 s | S1 |
+| `tt-sfx-elem-metal-ignite` | `radiant metal energy surging, bright glittering sparkle, sharp attack` | 100–400 ms | S1 |
+| `tt-sfx-elem-metal-burst` | `explosive radiant metal shard burst, sharp shimmering impact, powerful` | 100–500 ms | S1 |
+| `tt-sfx-elem-metal-residue` | `glittering silver energy sparks scattering, shimmering metallic dust, radiant, lingering` | 1–2,5 s | S1 |
 | `tt-sfx-elem-loi-ignite` | `thunder spell igniting, violent crackling arc snap, sharp attack` | 100–400 ms | Đổi |
 | `tt-sfx-elem-loi-burst` | `divine lightning strike, explosive electric crack, very loud, booming` | 100–600 ms | Đổi |
 | `tt-sfx-elem-loi-residue` | `lingering divine thunder energy crackling, fierce glittering sparks, powerful` | 1–2,5 s | Đổi |

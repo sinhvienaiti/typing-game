@@ -99,15 +99,16 @@ Anh nghe video mẫu và nhận xét: tiếng hiệu ứng hầu hết đạt, r
 ## Anh chọn giọng nữ 3 và muốn vang hay hơn (03/11 khoảng 10:00)
 
 - **Anh nhận xét:** hầu hết giọng chưa thích, nhưng phần vang làm anh "khá thích"; tạm dùng **giọng nữ 3 (Brittney, cao độ +3, tốc độ 1,1)**; chỉnh vang hay hơn nữa. Giọng nam vẫn tạm dùng Liam.
-- **Bộ câu hô phái Kiếm bằng giọng 3** (`tt-vo-lam-<câu>-brittney-p3`): 剑心所至，天地皆开！, 万锋——听诏！, 七星，列锋！, 不动。, 喝！, 哈！; 万剑——朝宗！ dùng lại `tt-vo-shoutf-brittney-p3`.
+- **Bộ câu hô phái Kiếm bằng giọng 3** (`tt-vo-callout-<line>-brittney-p3`: `sky-opens`, `hear-the-edict`, `seven-stars`, `unmoved`; tiếng hét `tt-vo-shout-hey-brittney-p3`, `tt-vo-shout-ha-brittney-p3`): 剑心所至，天地皆开！, 万锋——听诏！, 七星，列锋！, 不动。, 喝！, 哈！; 万剑——朝宗！ dùng lại `tt-vo-shoutf-brittney-p3`.
+- **Đổi tên sang tiếng Anh** (anh, 03/11: tên file, thư mục, mã đều tiếng Anh): các mã phiên âm cũ `tt-vo-lam-*` và `tt-sfx-elem-kim-*` đã đổi thành `tt-vo-callout-*`, `tt-vo-shout-*` và `tt-sfx-elem-metal-*`, cả thư mục trong AudioLab lẫn `SOURCES.json`.
 - **Bốn kiểu vang gửi anh chọn** (`games/immortality-cultivation/tmp/shots/morning/tu-tien-callout-reverb-4.mp4`). Phản hồi xung đều tự tạo, không cần giấy phép.
 
 | Kiểu | Cách làm |
 |---|---|
-| 1 Phòng | 1,8 giây, thấp hơn giọng 10 LU (bản anh đã nghe) |
-| 2 Đại điện | phần sớm sáng 0,7 giây + phần muộn tối 3,2 giây, trễ đầu 40 ms, thấp hơn giọng 7 LU |
-| 3 Vọng núi | Đại điện (−9 LU) + 3 tiếng dội ở 0,33 / 0,66 / 0,99 giây, mỗi lần nhỏ hơn 6 dB và tối hơn, luân phiên trái phải |
-| 4 Thiên âm | Đại điện + đuôi 8 giây nâng một quãng tám (còn khoảng 4 giây), lọc trên 1,2 kHz, thấp hơn giọng 7 LU |
+| 1 Room | 1,8 giây, thấp hơn giọng 10 LU (bản anh đã nghe) |
+| 2 Grand Hall | phần sớm sáng 0,7 giây + phần muộn tối 3,2 giây, trễ đầu 40 ms, thấp hơn giọng 7 LU |
+| 3 Valley Echo | Grand Hall (−9 LU) + 3 tiếng dội ở 0,33 / 0,66 / 0,99 giây, mỗi lần nhỏ hơn 6 dB và tối hơn, luân phiên trái phải |
+| 4 Heavenly Shimmer | Grand Hall + đuôi 8 giây nâng một quãng tám (còn khoảng 4 giây), lọc trên 1,2 kHz, thấp hơn giọng 7 LU |
 
 - **Gắn tạm vào lab** (chờ anh chọn kiểu vang), tất cả qua chuỗi "làm trong" rồi vang, Ogg Opus 160 kb/s:
 

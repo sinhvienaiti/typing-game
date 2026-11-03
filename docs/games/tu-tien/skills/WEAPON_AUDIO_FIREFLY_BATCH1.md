@@ -13,11 +13,11 @@ Lô đầu của lát cắt demo: Clear Wind với K0 Phi Kiếm và K1 Ngự Ki
 | 3 | `tt-sfx-sword-ring` | `enchanted steel blade ringing, bright shimmering ping, sharp attack, dry, isolated` | 1 | 4 | nốt xác nhận trúng |
 | 4 | `tt-sfx-sword-hit-head` | `spirit sword striking stone armor, sharp metallic crack, punchy, dry, isolated` | 2 | 8 | đầu tiếng trúng |
 | 5 | `tt-sfx-sword-hit-body` | `heavy sword energy slash impact, dense, punchy, saturated, cinematic, dry` | 2 | 8 | thân trúng |
-| 6 | `tt-sfx-elem-kim-burst` | `explosive radiant metal shard burst, sharp shimmering impact, powerful` | 1 | 4 | hệ Kim khi trúng |
+| 6 | `tt-sfx-elem-metal-burst` | `explosive radiant metal shard burst, sharp shimmering impact, powerful` | 1 | 4 | hệ Kim khi trúng |
 | 7 | `tt-sfx-magic-cast` | `swift sparkling spell burst, bright shimmering whoosh, sharp attack, dry` | 2 | 8 | phát K0, K1; lóe kiếm rời vai |
 | 8 | `tt-sfx-sword-draw` | `fantasy sword unsheathed, bright ringing steel shing, sharp attack, dry, isolated` | 2 | 8 | đầu tiếng phát |
 | 9 | `tt-sfx-sword-swing` | `powerful sword slash, energy-charged whoosh, fast, heavy, cinematic, dry` | 2 | 8 | thân phát |
-| 10 | `tt-sfx-elem-kim-ignite` | `radiant metal energy surging, bright glittering sparkle, sharp attack` | 1 | 4 | hệ Kim khi phát; vệt bay |
+| 10 | `tt-sfx-elem-metal-ignite` | `radiant metal energy surging, bright glittering sparkle, sharp attack` | 1 | 4 | hệ Kim khi phát; vệt bay |
 | 11 | `tt-sfx-magic-trail` | `glittering magical energy streak, fast shimmering whoosh, bright, intense` | 1 | 4 | bay; hạt lấp lánh khi kiếm hiện |
 | 12 | `tt-sfx-sword-flyby` | `enchanted flying sword whizzing past, sharp singing whoosh, fast, intense` | 2 | 8 | bay K0; mỗi kiếm K1 rời vai |
 | 13 | `tt-sfx-magic-aura` | `glowing magical aura shimmer, sparkling crystalline tail, ethereal, wide, no transient` | 1 | 4 | đuôi hào quang |
