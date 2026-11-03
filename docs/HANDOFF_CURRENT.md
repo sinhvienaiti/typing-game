@@ -15,6 +15,37 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - **Kết quả kiểm kê gốc:** `docs/games/map1/audit-2026-10-28.json`. Lô Codex 1: `docs/games/map1/CODEX_BATCH.md`, đã tách thành phiếu 094–105.
 - **Session điều phối:** coordinator-2 (local_5e0da15c-bdaa-4ce5-b009-0c06fc42b9d7, CLI `f97baf5f`, mở 28/10 khoảng 18:15). Session cũ `157c54d6` đã xong và giao hết việc; chủ dự án có thể lưu trữ nó.
 
+**03/11 sáng tới khoảng 12:15, phiên Tu Tiên** (CLI `0cd1bde2`). Chủ dự án làm từ máy khác qua remote: gửi video, không gửi link localhost.
+- **Anh chốt:**
+  - cut-in tuyệt kỹ phong cách **C** (thủy mặc pha ánh sáng);
+  - tạm dùng giọng nữ 3 (Firefly Speech, Brittney, cao độ +3, tốc độ 1,1); giọng nam tạm Liam;
+  - **D59:** người chơi chọn hệ riêng, độc lập với vũ khí; hệ làm chủ chất liệu của chiêu;
+  - mọi **tên** (file, thư mục, mã, tên chiêu, phụ đề) là tiếng Anh, tiếng Việt chỉ ở văn bản; xem memory `english-game-nouns`;
+  - "làm lần lượt theo plan": Hỏa trước, rồi Thủy.
+- **Đã xong (game repo, chưa push):**
+  - kiếm thật Clear Wind trong mọi chiêu (`0a9d8b0`…`5425c62`);
+  - cut-in C hai khung, tụ lực rồi hô đúng chữ 天 của câu hô, 1,7 s; hai vòng duyệt mã đã sửa (`71a0350`, `31b0258`, `757b669`); khung C nâng 2× bằng Firefly Upscaler (`f5ef5bc`);
+  - tiếng hô giọng 3 cho bộ Kiếm gắn tạm vào lab;
+  - lab ghi tiếng để video có tiếng thật: `__lab.soundRecord()`, `scripts/visual/mix-lab-sound.mjs`.
+  - Changelog: `docs/changelog/2026-11-03-lab-cutin-c-callouts.md`.
+- **Repo cha:**
+  - canon D59;
+  - thiết kế [`skills/ELEMENT_LAYER.md`](games/tu-tien/skills/ELEMENT_LAYER.md);
+  - nguồn `source/element-materials-chatgpt-part1..3`;
+  - đổi các mã âm thanh phiên âm sang tiếng Anh;
+  - skill art-pipeline thêm: kiểm tốc độ và cao độ Speech, Firefly Upscaler.
+- **Firefly Video có "Transparent background"** khi chọn model Firefly Video (trang mặc định là Veo 3.1, model đối tác, phải đổi). Video tạo ra gồm một file màu và một file alpha riêng. 5 clip lửa ở `~/VFXLab/inbox/firefly/immortality-cultivation/tt-vfx-fire-*`, máy nhận video ở cổng 8782.
+- **Đang chạy:** workflow `tu-tien-sword-fire` (run `wf_43486b1c-cc6`, task `w57icdgee`):
+  - nền móng mã (đổi `kiem.ts` thành `sword-skills.ts`, `van-kiem.ts` thành `myriad-swords.ts`, lớp hệ, Metal không đổi hình) và nguồn lửa chạy song song;
+  - rồi bộ Fire cho phím 1 và phím 7;
+  - rồi kiểm và video cho anh. Brief: scratchpad `element-fire-brief.md`.
+- **Chờ anh:**
+  - kiểu vang tiếng hô (Room, Grand Hall, Valley Echo, Heavenly Shimmer);
+  - các điểm mở của D59;
+  - duyệt danh mục V2;
+  - nhân vật nữ 3D (Tripo, Cascadeur);
+  - đợt đổi tên tiếng Anh cho phần có từ trước (thư mục `docs/games/tu-tien`, các file `analysis/*`, danh từ trong game).
+
 **03/11 đêm tới 8:40, phiên Tu Tiên** (`local_a5f48644-c74d-4f89-9251-1e16e63d075b`). Chủ dự án treo máy tới 9h, đã chốt D57 và D58.
 - **Đã có:**
   - danh mục chiêu V2 chờ duyệt (`docs/games/tu-tien/skills/SKILL_CATALOG_V2.md`);
