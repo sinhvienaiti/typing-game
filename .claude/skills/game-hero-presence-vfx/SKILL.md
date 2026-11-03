@@ -5,6 +5,8 @@ description: "Build or review the always-on presence of a character, or of a wea
 
 # Hero presence VFX
 
+**The look of every layer** (aura bands, glints, motes, halos) **comes from [game-vfx-production](../game-vfx-production/SKILL.md)**: Firefly Video or Blender art, never code-drawn shapes (owner, 03-04/11/2026). This skill owns which layers, states and budgets.
+
 **Objects need presence too.** The owner, 03/11/2026: "những hiệu ứng như vậy xung quanh vật phẩm, trang bị, kỹ năng là rất cần thiết, nó đem lại cái nhìn cho người chơi hứng thú hơn".
 - **What gets it:** every item, piece of equipment, weapon and skill object the player sees gets a planned presence layer around it: a flying sword, a talisman, a relic, a drop, a shop or inventory item, an equipment card.
 - **Which layers:** a sheath or aura, motes, streamers, afterimages, a tip star, or a rarity glow, from [the layer menu](references/layers.md).

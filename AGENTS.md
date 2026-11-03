@@ -35,6 +35,8 @@ docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
 
 Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs are for handoff and records): `game-art-pipeline` (making art and media with AI tools, blind judging at 8.5, Tripo, licences), `game-map-concept` (a map concept from the real play camera before building), `game-character-design` (research-first character design, the appeal checklist, four consistent views), `game-hero-presence-vfx` (halos, motes, rim glow and other presence layers, built and judged one by one). They apply to every game in this repo, Space Typing included.
 
+Making any VFX, CGI or SFX starts with the `game-vfx-production` skill (owner, 04/11/2026: "luôn ưu tiên dùng blender hoặc fire[fly] nếu 2 thứ này làm tốt hơn bạn"). The look comes from the best art tool (Firefly Video or Image, Blender sims rendered to flipbooks, painted masks), and code only places, times and animates it. Code-drawn flames, auras, stars, cracks and scorch were rejected as crude, "under 6". `game-vfx-layered` and `game-hero-presence-vfx` follow it for phases and always-on layers.
+
 Combat and skill VFX in every game (Dragonhold, Last Line, Wordwoven,
 Tu Tiên Thủ Ải and later games) follow
 [the layered VFX standard](docs/games/VFX_STANDARD.md) through the

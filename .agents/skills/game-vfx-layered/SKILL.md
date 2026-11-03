@@ -5,6 +5,8 @@ description: "Build or review combat and skill VFX in any game of this repo (Dra
 
 # Layered combat and skill VFX
 
+**Start with [game-vfx-production](../game-vfx-production/SKILL.md)** for the look of every effect: the tool choice (Firefly, Blender, painted art), candidates, the quality rubric. This skill then owns phases, timing, light and budgets.
+
 **The standard:** [docs/games/VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md) (Vietnamese). Read §3 before building and §5.6 before claiming done.
 
 **References:**
