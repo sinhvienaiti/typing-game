@@ -95,3 +95,30 @@ Anh nghe video mẫu và nhận xét: tiếng hiệu ứng hầu hết đạt, r
   - Vang: một phản hồi xung tự tạo (1,8 giây), đặt thấp hơn giọng khô 10 LU.
 - **File gốc:** `~/AudioLab/inbox/firefly/immortality-cultivation/tt-vo-shoutf-<giọng>-p3/` và `tt-vo-shout-liam-p1/`, không đưa vào Git.
 - **Bước sau:** anh chọn giọng nữ (và giữ hay đổi giọng nam). Claude tạo lại cả bộ câu hô của các chiêu bằng giọng và cài đặt đó, rồi gắn lại vào `art-src/lab/audio/callout*`.
+
+## Anh chọn giọng nữ 3 và muốn vang hay hơn (03/11 khoảng 10:00)
+
+- **Anh nhận xét:** hầu hết giọng chưa thích, nhưng phần vang làm anh "khá thích"; tạm dùng **giọng nữ 3 (Brittney, cao độ +3, tốc độ 1,1)**; chỉnh vang hay hơn nữa. Giọng nam vẫn tạm dùng Liam.
+- **Bộ câu hô phái Kiếm bằng giọng 3** (`tt-vo-lam-<câu>-brittney-p3`): 剑心所至，天地皆开！, 万锋——听诏！, 七星，列锋！, 不动。, 喝！, 哈！; 万剑——朝宗！ dùng lại `tt-vo-shoutf-brittney-p3`.
+- **Bốn kiểu vang gửi anh chọn** (`games/immortality-cultivation/tmp/shots/morning/tu-tien-callout-reverb-4.mp4`). Phản hồi xung đều tự tạo, không cần giấy phép.
+
+| Kiểu | Cách làm |
+|---|---|
+| 1 Phòng | 1,8 giây, thấp hơn giọng 10 LU (bản anh đã nghe) |
+| 2 Đại điện | phần sớm sáng 0,7 giây + phần muộn tối 3,2 giây, trễ đầu 40 ms, thấp hơn giọng 7 LU |
+| 3 Vọng núi | Đại điện (−9 LU) + 3 tiếng dội ở 0,33 / 0,66 / 0,99 giây, mỗi lần nhỏ hơn 6 dB và tối hơn, luân phiên trái phải |
+| 4 Thiên âm | Đại điện + đuôi 8 giây nâng một quãng tám (còn khoảng 4 giây), lọc trên 1,2 kHz, thấp hơn giọng 7 LU |
+
+- **Gắn tạm vào lab** (chờ anh chọn kiểu vang), tất cả qua chuỗi "làm trong" rồi vang, Ogg Opus 160 kb/s:
+
+| Sự kiện | Câu | Vang | Độ to |
+|---|---|---|---|
+| `callout` (chiêu nhỏ, k1, dash) | 喝！, 哈！ | 1 | −14 LUFS |
+| `callout-k2` | 七星，列锋！ | 2 | −14 |
+| `callout-guard` | 不动。 | 2 | −15 |
+| `callout-k4` | 万锋——听诏！ | 2 | −13 |
+| `callout-k5` (tuyệt kỹ) | 剑心所至，天地皆开！ | 3 | −13 |
+| `callout-k7` | 万剑——朝宗！ | 3 | −13 |
+
+- Bus âm thanh của lab (`src/lab/sound.ts`) có thêm `callout-k2`, `callout-guard`, `callout-k4`. File cũ (giọng Jessica) được cất trong scratchpad của phiên.
+- **Cut-in và câu hô:** chữ 天 của câu tuyệt kỹ bắt đầu ở 1,08 giây, nên clip thử cut-in dài 1,7 giây và đổi sang khung hô đúng lúc đó.
