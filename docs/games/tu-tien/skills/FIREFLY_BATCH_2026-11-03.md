@@ -70,3 +70,14 @@ Theo canon D58, anh muốn Claude tự tạo âm thanh cho chiêu ("chúng ta c�
 | tiếng hô | 疾！ (chiêu nhỏ); 剑心所至，天地皆开！ (K5); 万剑……朝宗！ (phím 7) |
 
 Khi anh chọn bản trên trang nghe, Claude dựng lại từ đúng các bản anh chọn.
+
+## Thử 10 giọng hô mới (03/11 khoảng 08:50)
+
+Anh nghe video mẫu và nhận xét: tiếng hiệu ứng hầu hết đạt, riêng giọng hô chưa ưng. Anh muốn thử 10 giọng khác, trẻ hơn, cả nam lẫn nữ, tông cao hơn vì đây là tiếng hô.
+
+- **Cách tạo:** Firefly Speech (model Adobe `tts-model-firefly-dnt`), tiếng Phổ thông, câu 万剑——朝宗！, tốc độ 1,1.
+- **Nữ, cao độ +2:** Mia, Hannah, Melody, Sola, Kim.
+- **Nam, cao độ +1:** Liam, Nicholas, Channing, King, Gordon.
+- **File gốc:** `~/AudioLab/inbox/firefly/immortality-cultivation/tt-vo-shout-<giọng>/`, không đưa vào Git.
+- **Video gửi anh:** `games/immortality-cultivation/tmp/shots/morning/tu-tien-callout-voices-10.mp4` (63,5 giây, mỗi giọng hai lần, có thẻ tên).
+- **Bước sau:** anh chọn giọng. Claude tạo lại cả bộ câu hô của các chiêu bằng giọng và cao độ đó, rồi gắn lại vào `art-src/lab/audio/callout*`.
