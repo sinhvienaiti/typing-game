@@ -1,6 +1,8 @@
 # Hào quang kiếm bay (sword aura): ba hướng cho anh chọn (03/11/2026)
 
-**Trạng thái:** đề xuất, đã sửa theo một lượt phản biện độc lập cùng ngày (§8). Chưa có mã. Bước tiếp là **bước 0** (§5.0): bảng hình tham chiếu và phác ý tưởng vẽ chồng lên khung chụp thật, gửi anh chọn **trước khi** dựng bằng mã. Chỉ hướng anh chọn mới được dựng. Mọi con số chi phí là ước tính, chưa đo; cổng thật là số đo ở §6.
+**Trạng thái (03/11/2026, tối):** anh đã chọn **"A + sao mũi của C"**: hướng A (Wind-Silk Mantle) cộng đúng một lớp của C, `TipStar` (khối "Quyết định của anh" đầu §7). Q2, Q5, Q6 do người điều phối quyết theo quyền anh giao; Q3 và Q4 còn mở. Đang ở bước chuẩn bị dựng: bốn mẫu texture vệt khí cho thân áo chờ anh duyệt, và kế hoạch dựng theo §5.3. Chưa có mã game.
+
+**Trạng thái trước khi anh chọn:** đề xuất, đã sửa theo một lượt phản biện độc lập cùng ngày (§8); bước 0 (§5.0) đã làm (bảng hình, nguồn tiếng Trung, phác ý tưởng chồng lên khung chụp thật). Mọi con số chi phí là ước tính, chưa đo; cổng thật là số đo ở §6.
 
 **Đầu vào** (đã đọc hết):
 - Nghiên cứu các thiết kế được yêu thích, mỗi tệp có bảng kiểm nguồn và đánh giá của Claude:
@@ -319,7 +321,11 @@ Các trạng thái dùng ở mọi bảng:
 | `MantleHull` (A2 `AuraHull`) | Kiếm chủ, High và Ultra | Vỏ ngược phồng 1,5 px + 0,015 m theo pháp tuyến đã làm mượt; chỉ phủ lưỡi, không phủ chắn. Vỏ là một lưới vô hình 200–600 tam giác dựng trong Blender, chỉ bọc lưỡi. Nếu không đạt thì tính pháp tuyến mượt lúc nạp vào một thuộc tính mới của LOD (hiện chưa có thuộc tính nào như vậy) | Cùng hàm chất với A1 (mảnh và đường may chiếu lên vỏ) | Vẽ mặt sau, `depthWrite` tắt | Không | Giữ |
 | `SilkTail` | Kiếm chủ phím 7, kiếm bay phím 1 | Dải `RibbonPool` từ sau đốc, **thay** dải sáng (và ở phím 1 thay luôn dải lụa sẵn có: một dải thay hai). Dài 0,9 `L` ở phím 1, 0,6 `L` ở kiếm chủ phím 7. Rộng 0,11 → 0,16 m (ở 25 %) → 0,03 m. Rung theo `pushSilk` sẵn có: sin(t·15), sin(t·23), cos(t·11) rad/s (≈ 2,4 / 3,7 / 1,75 Hz) | Metal: thân lụa `silkLight` (`#A9C4EA` × 0,7) pha 30 % thân của hệ, ≤ 0,7, alpha thật 0,85; mép tối `silkDeep` (`#2E3A78` × 0,55) alpha thật. Fire: chính dải lửa sẵn có (chất lửa, không có lụa) | Chương trình premultiplied của `RibbonPool` với chế độ theo từng dải (§5.2) | Không | Làm dịu: ngắn 0,6×, không rung |
 | `MantleHalo` (A3 `ImpostorHalo`) | Kiếm xa | Trong shader impostor, **tính giải tích**: khoảng cách tới đường viền lấy từ `AuraAnchors.profile` (`DataTexture` 96 × 1) theo trục của quad, nhân hệ số bề ngang của hàng lăn (`rollWidth`, thêm vào meta). Áo 2 px CSS, viền mực 1 px; mảnh và khe không có (quá nhỏ); mũi kim 0,08 `L` khi kiếm ≥ 60 px, dưới đó không có. Lề quad nới thêm khi trọng số hào quang > 0. Tia `BeamPool` sau đốc giữ, tô màu lụa (thay kiểu, không thêm) | Như A1, không nhân `SWORD_LIGHT` | Trên quad impostor đã nới lề | Không | Giữ |
+| `TipStar` (lấy từ §3.C, anh chọn 03/11 tối) | Kiếm chủ phím 7 và kiếm phím 1 luôn có; kiếm giữa chỉ khi trên ngọn sóng sáng (`brightAt` ≥ 0,7) hoặc khi bổ xuống; kiếm xa không | Sao bốn cánh ở mũi + 0,02 `L`, tức ở gốc mũi kim của `MantleSheath`; cánh trước chạy dọc mũi kim. Cánh dọc hướng bay 0,12 `L` (0,37 m ở kiếm 3,06 m, ~12 px ở 100 px), cánh ngang 0,04 `L`. Hướng cánh đổi theo vận tốc trong 4 khung | Lõi đĩa ≤ 2 px, core 3,0 (0,7 màu lõi hệ + ≤ 0,3 trắng). Cánh glow ≤ 0,85, thon dần. Sau sao có một sao mực to 1,3× alpha 0,3, **trong cùng shader**. Lấp lánh: nền 0,6, mỗi 1,4–2,2 s (seed riêng) lên 1,0 trong 10 khung. Metal: lõi `[0.62, 0.88, 1.0]` × 3,0. Fire: "tia mặt trời" của §3.C (lõi trắng vàng, cánh là lá flipbook lửa, thân cánh cam `#FF8A2A`, hổ phách chỉ sát lõi) | Pool mới `SwordAuraSprites` (premultiplied, sáng và mực trong một shader, có tone map), `renderOrder` 14 | Lõi sao | Làm dịu: sao đứng yên, không lấp lánh |
 
+- `TipStar` theo trạng thái, như §3.C: chờ sau vai mờ 0,4; phóng sáng đủ ngay f0; bay đều 0,6 và thỉnh thoảng lấp lánh; rẽ thì cánh xoay theo hướng mới trong 4 khung; bổ, trúng thì bùng 1,6× cỡ, core 3,6 ở f0–2, co lại trong 6 khung; về, tan thì tắt trước lưỡi trong 4 khung. Theo bậc: Low chỉ kiếm chủ (phải đọc được khi không bloom: glow 0,85 + sao mực); Ultra thêm kiếm giữa cả khi rẽ.
+- Ở mũi, `TipStar` và mũi kim là hai lớp trong suốt ở cùng điểm ảnh, đúng trần ≤ 2 (Q6); không lớp thứ ba nào (hạt rơi, dải) được vẽ ở mũi.
+- Chi phí thêm của `TipStar`: +1 lệnh vẽ (`SwordAuraSprites`), 0,01–0,02 ms ở phím 7 lúc săn (ước tính §3.C). Tổng A + `TipStar`, Metal: +0,09–0,19 ms, +3 lệnh vẽ.
 - Ở kiếm chủ, thẻ và vỏ thay chỗ nhau theo góc nhìn:
   - trọng số thẻ = `smoothstep(0.85, 0.6, |dir·view|)`; vỏ lấy phần còn lại;
   - khi kiếm chĩa vào camera, tấm phẳng không lộ ra và hai lớp không chồng nhau.
@@ -698,12 +704,12 @@ Thêm:
    - Mọi sàn tính bằng px CSS × `uDpr`, nên bề ngang không phập phồng khi DPR trôi.
 6. **Thay, không chồng (D59).** Mỗi hướng thay các lớp vệt sẵn có theo bảng dưới. Không lớp hiện có nào ở lại chồng với lớp mới cùng vai.
 
-   | Chỗ | Đang có, Metal | Đang có, Fire | A | B | C |
+   | Chỗ | Đang có, Metal | Đang có, Fire | A (+ `TipStar`, anh chọn 03/11 tối) | B | C |
    |---|---|---|---|---|---|
-   | Phím 1, chờ | Tia lóe chạy dọc lưỡi mỗi 0,9 s (`twinkle`) | `SwordHooks.waiting`: `sheathAt` nguội + tàn lửa bốc lên | `MantleSheath` thay tia lóe / thay `sheathAt`; giữ tàn lửa | `StanceEcho` thay tia lóe / thay `sheathAt`; giữ tàn lửa | `WaitMandorla` + `RingHalo` thay tia lóe / thay `sheathAt`; giữ tàn lửa |
-   | Phím 1, bay | Dải sáng (`TrailLook.widthM` 0,14 m) + dải lụa + sao lóe mũi + hạt rơi | Dải lửa + `sheathAt` + tàn lửa 40/s | `SilkTail` thay dải sáng và dải lụa (Fire: dải lửa sẵn có là `SilkTail`); `MantleSheath` thay `sheathAt`; mũi kim thay sao lóe mũi; giữ hạt rơi / tàn lửa | `EchoTrail` thay dải sáng, dải lụa / dải lửa; `BowWave` thay sao lóe mũi; bỏ `sheathAt`; giữ hạt rơi; tàn lửa 20/s | `GuardStreamers` thay dải sáng và dải lụa / dải lửa; `TipStar` thay sao lóe mũi; `OrbitMotes` thay hạt rơi; bỏ `sheathAt`; tàn lửa giữ |
-   | Phím 7, 6 kiếm chủ | Dải `RibbonPool` màu `trailCore` | Dải lửa + `sheathAt` (`StreamHooks.travel`, cls 0) | `SilkTail` thay dải; `MantleSheath` + `MantleHull` thay `sheathAt` | `EchoTrail` 3 bóng thay dải; bỏ `sheathAt` | `GuardStreamers` thay dải; bỏ `sheathAt` |
-   | Phím 7, 24 kiếm giữa | Tia `BeamPool` một khung sau đốc: 0,45 `L` sông, 0,9 `L` bổ, 0,6 `L` gom | Như Metal, tông lửa (không có vỏ lửa) | Đuôi áo trong thẻ thay tia | `EchoTrail` 2 bóng thay tia | Tia giữ, vẽ thành hai lõi mảnh (đổi kiểu) |
+   | Phím 1, chờ | Tia lóe chạy dọc lưỡi mỗi 0,9 s (`twinkle`) | `SwordHooks.waiting`: `sheathAt` nguội + tàn lửa bốc lên | `MantleSheath` thay tia lóe / thay `sheathAt` (vai tia lóe chạy dọc lưỡi chuyển sang hạt sáng chạy trên đường may của áo); `TipStar` mờ 0,4; giữ tàn lửa | `StanceEcho` thay tia lóe / thay `sheathAt`; giữ tàn lửa | `WaitMandorla` + `RingHalo` thay tia lóe / thay `sheathAt`; giữ tàn lửa |
+   | Phím 1, bay | Dải sáng (`TrailLook.widthM` 0,14 m) + dải lụa + sao lóe mũi + hạt rơi | Dải lửa + `sheathAt` + tàn lửa 40/s | `SilkTail` thay dải sáng và dải lụa (Fire: dải lửa sẵn có là `SilkTail`); `MantleSheath` thay `sheathAt`; **`TipStar` thay sao lóe mũi** (`twinkle` cưỡi mũi hôm nay); mũi kim của áo giữ, sao nằm ở gốc mũi kim; giữ hạt rơi / tàn lửa | `EchoTrail` thay dải sáng, dải lụa / dải lửa; `BowWave` thay sao lóe mũi; bỏ `sheathAt`; giữ hạt rơi; tàn lửa 20/s | `GuardStreamers` thay dải sáng và dải lụa / dải lửa; `TipStar` thay sao lóe mũi; `OrbitMotes` thay hạt rơi; bỏ `sheathAt`; tàn lửa giữ |
+   | Phím 7, 6 kiếm chủ | Dải `RibbonPool` màu `trailCore` | Dải lửa + `sheathAt` (`StreamHooks.travel`, cls 0) | `SilkTail` thay dải; `MantleSheath` + `MantleHull` thay `sheathAt`; `TipStar` thêm (hôm nay không có sao mũi, nên không thay lớp nào) | `EchoTrail` 3 bóng thay dải; bỏ `sheathAt` | `GuardStreamers` thay dải; bỏ `sheathAt` |
+   | Phím 7, 24 kiếm giữa | Tia `BeamPool` một khung sau đốc: 0,45 `L` sông, 0,9 `L` bổ, 0,6 `L` gom | Như Metal, tông lửa (không có vỏ lửa) | Đuôi áo trong thẻ thay tia; `TipStar` chỉ khi `brightAt` ≥ 0,7 hoặc bổ (thêm, không có lớp cùng vai); hạt lóe rơi từ đầu kiếm đang bổ (`glint`) giữ, vì là vai hạt rơi | `EchoTrail` 2 bóng thay tia | Tia giữ, vẽ thành hai lõi mảnh (đổi kiểu) |
    | Phím 7, 64 kiếm xa | Tia như kiếm giữa, sáng × 0,55 | Như Metal, tông lửa | Tia giữ, tô màu lụa / than (đổi kiểu); `MantleHalo` trong impostor | `EchoTrail` 1 bóng thay tia | Tia mảnh giữ; chấm O và viền trong impostor |
 
    - Phép thử `tests/view/sword-aura.test.ts` đếm số lớp đang sống ở mỗi chỗ trong bảng, theo hướng và theo hệ.
@@ -927,6 +933,27 @@ Thêm một video `owner-aura-off-<date>.mp4` cùng các cảnh, làm mốc so (
 | Mã | `tsc`, `pnpm test`, `pnpm build` xanh; grep `dist` không thấy mã lab hay mã hào quang của lab | Như các lượt trước |
 
 ## 7. Câu hỏi cho anh
+
+### Quyết định của anh (03/11/2026, tối)
+
+- **Q1, hướng: "A + sao mũi của C".** Dựng hướng A (Wind-Silk Mantle) với đủ các lớp của §3.A, thêm đúng một lớp của C: `TipStar`, sao bốn cánh ở mũi lấp lánh chậm (hàng `TipStar` nay nằm trong bảng lớp của A, dòng của nó ở bảng thay §4.6).
+  - Không lấy gì khác của B hay C: không `RingHalo`, `GuardStreamers`, `OrbitMotes`, `HairlineRim`, `WaitMandorla`, không lớp nào của B. Các đề xuất §2.7 của B và C không áp dụng.
+  - Mã hướng `a` = `wind-silk-mantle`; công tắc `?aura=off|a` (§5.1).
+  - `TipStar` cần pool `SwordAuraSprites` (§5.2): pool này nay dựng cho A, chỉ mang sao mũi (không hạt quỹ đạo, không mandorla).
+- **Q2, Metal cũng đổi:** có. Người điều phối quyết theo quyền anh giao (27/10). Hào quang áp cho cả Metal; `?aura=off` giữ đúng hình hôm nay để so.
+- **Q3, lưỡi Fire: còn mở.** Bản dựng chỉ làm đề xuất sau cờ lab `?bladeHeat=edge` (`heatFrom` 0,55, `char` 0,4); mặc định không đổi. Anh quyết sau khi xem khung.
+- **Q4, vòng ngọc: còn mở.** Bản dựng không chạm vòng ngọc, không sửa mặt nạ `JADE`, không vẽ lại texture.
+- **Q5, ngân sách:** như §1.2 và §6 (người điều phối quyết). Metal: hào quang trừ `off` ≤ +0,6 ms p95 lúc săn, ≤ +0,5 ms ở gom và nhát kết. Fire: phần Fire hơn Metal tính vào trần 0,85 ms của Fire. Không cửa sổ nào vượt 11,5 ms.
+- **Q6, chồng lớp:** cổng là ≤ 2 lớp trong suốt ở mọi điểm ảnh **trong vùng của từng kiếm**; con số cả sân chỉ báo cáo (người điều phối quyết).
+- **Đề xuất §2.7 cho A mà bản dựng nhận:**
+  - **Khe mực 1 px giữa mép thép và áo: nhận.** Nó trả lời đúng rủi ro chính của A: ở 35–60 px áo nhập vào lưỡi thành một "kiếm béo, mờ". Trong `MantleSheath`, một vùng mực ở mép trong của áo (từ mép thép ra 1 px CSS × `uDpr`), cùng shader, premultiplied, thêm vào viền mực ngoài sẵn có; thân áo bắt đầu sau khe, sàn 2 px của áo tính từ ngoài khe. Khe giữ ở mọi cỡ, kể cả 35 px.
+  - **Mảnh không đều, nhạt dần về cổ áo: dựng thành một tùy chọn lab** cạnh mảnh đều của §3.A (mỗi bên 2–3 mảnh lớn nhỏ khác nhau, khe là khoảng trống thật, thân đặc ở mũi, tan thành sợi về phía chắn). Chọn giữa hai kiểu sau khi chấm trên khung chụp, không chọn trước.
+- **Luật lấp lánh (AGENTS.md, "Skill effects sparkle too", 03/11):** hào quang phải đọc thành một lớp áo khí sang, long lanh ở 35–130 px, không thành viền mềm.
+  - Đường may của áo mang những hạt sáng chạy dọc từ cổ áo tới mũi kim (thay vai của tia lóe chạy dọc lưỡi hôm nay), trong cùng shader của áo. Lõi ≤ 1 px, mỗi điểm ảnh chỉ sáng đỉnh trong ≤ 2 khung khi hạt đi qua; nhịp lệch pha theo từng thanh. Không có ở kiếm xa.
+  - `TipStar` lấp lánh như hàng của nó.
+- **Bước chuẩn bị (03/11 tối):** bốn mẫu texture vệt khí cho thân áo (§3.A, qua `game-art-pipeline`), tấm `games/immortality-cultivation/tmp/shots/sword-aura/streak/streak-candidates.jpg`, anh duyệt mẫu trước khi dùng; kế hoạch dựng theo §5.3 ở `games/immortality-cultivation/tmp/shots/sword-aura/build-plan.md` (không vào Git).
+
+### Câu hỏi đã gửi anh (giữ để tra)
 
 - **Q1. Hướng nào:** A (Wind-Silk Mantle), B (Echo Cascade) hay C (Celestial Regalia)? Anh trả lời sau khi xem bảng hình và các bản phác ở bước 0. Nếu anh muốn thấy chuyển động trước khi chọn, Claude làm một phép thử rẻ (§5.0 mục 6). Claude nghiêng về A (§3.D, là ý kiến).
 - **Q2. Metal cũng đổi.** Lớp hệ từng hứa "Metal không đổi". Nhưng thanh kiếm anh chê là chính bộ Metal, nên hào quang phải áp cho Metal. Anh đồng ý chứ? Bản `off` vẫn giữ để so.
