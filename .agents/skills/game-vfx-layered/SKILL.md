@@ -38,6 +38,11 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
      - A bare model in flight reads crude, even a good one.
      - On 03/11, Tu Tien swapped code-drawn swords for the real model and dropped every layer around the blade, and the owner found the flying swords crude.
      - Swapping in real art removes the stand-in, never the aura. The aura wraps the object and keeps it readable as itself.
+   - **Every shape sparkles.** The owner, later on 03/11: "bạn luôn thiếu các hiệu ứng xung quanh… bây giờ là với kỹ năng, bạn cũng cần phải xử lý để nó lấp lánh, long lanh hào quang đẹp hơn".
+     - The main shape of each phase carries a radiance layer around it: a charge, release flash, flame, slash, seal, beam, burst or burning ground.
+     - The radiance layer is made of glints and star twinkles, fine motes and glitter, soft halos and light rings (≤ 0.9), shimmering rims and thin rays.
+     - Brief it beside the shape, judge it with the shape, and keep it off word tags and foes.
+     - Tu Tien's first Sword × Fire had flames, seals and slashes with no sparkle around them. The owner found them plain even after the colour fixes.
 4. **Build the caster side first.**
    - A (charge) and R (release at the mouth, muzzle, hand or tower) come before I (impact). This was the owner's complaint of 28/10.
    - Key-to-release stays ≤ 50 ms. A clip follows typing progress; it never holds the shot back.
