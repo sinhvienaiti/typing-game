@@ -145,3 +145,8 @@ f.appendChild(i); document.body.appendChild(f); f.submit();
     - Set the inner `input[type=range]` with the native value setter plus `input` and `change` events.
     - Before each Generate, read the selected voice's chips (`aria-label` `speed-button` and `pitch-button`, for example "1.1x" and "High" for +3) and the voice's name; skip the job when they differ.
     - The history cards show each take's speed and pitch: check them after a batch. Measure the median F0 too (High lifted one voice from 262 to 372 Hz).
+- **Upscale a painting 2× (Adobe's own model, 03/11):** Firefly web, Edit > Upscale, "Firefly Upscaler · Adobe models" (powered by Photoshop). It added real detail to a 1836 px ChatGPT painting (lashes, hair strands, halo cracks), where a plain Lanczos 2× only blurred.
+  - Open `https://firefly.adobe.com/hub?hData=…"workflow":"upscaleImage"…` (the home page's "Upscale image" link).
+  - Feed the image without a file dialog: `fetch` it from a local CORS server (the page allows `127.0.0.1`), put it in a `DataTransfer`, set `files` on the hidden `INPUT#empty-state-uploader-file-input` (deep query), and dispatch `change`.
+  - Click the `SP-BUTTON[aria-label="Upscale"]`. The result is a new blob `IMG` about 2× wide (JPEG); `fetch` it and post it to the receiver. The panel then offers 4×.
+  - Name the result `<id>-up2x.v<n>-try<k>.jpg` and note the source and tool in its `.prompt.txt`.
