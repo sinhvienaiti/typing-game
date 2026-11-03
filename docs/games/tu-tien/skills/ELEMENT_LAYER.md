@@ -20,6 +20,7 @@ Tài liệu này là thiết kế để dựng. Nguồn nghiên cứu: ChatGPT (
 - **Bộ hiện tại của Kiếm (trắng bạc, lam ngọc, mép trắng nóng) là bộ chất Metal.**
 - **Không vẽ riêng từng tổ hợp:** 3 bộ hình × 8 bộ chất, thay vì 24 tổ hợp × 6 chiêu.
 - **Hào quang quanh kiếm bay** là một lớp **hình** của vũ khí; hệ chỉ cấp chất cho nó qua mục `swordAura` (`SwordAuraLook`) của bộ chất. Ba hướng cho anh chọn: [`SWORD_AURA.md`](SWORD_AURA.md).
+- **Kiểu lửa và lớp lấp lánh quanh các hình của chiêu** (lửa va chạm, tia lửa, sao, vòng, tia sáng, ánh chạy trên ấn; lời anh 03/11: lửa phím 1 "hơi xấu", tia lửa "khá là thô", chiêu phải "lấp lánh, long lanh hào quang"): chẩn đoán, nghiên cứu đã kiểm, ba hướng trên bảng hình và kế hoạch lab ở [`FIRE_STYLE.md`](FIRE_STYLE.md).
 
 ## 2. Luật và cách đọc của từng hệ
 
