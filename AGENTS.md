@@ -53,6 +53,20 @@ phases (charge, release at the caster, travel, impact, aftermath), the caster
 side first. Every VFX brief names the standard, the reference image, the
 action class, the capture scenario and the acceptance numbers.
 
+## Plan with ChatGPT and Gemini (owner, 04/11/2026)
+
+"trước khi triển khai gì, nên tham khảo ý kiến của cả chatgpt và gemini để bổ sung ý tưởng cho nhau để đưa ra 1 plan tốt nhất, tối ưu nhất".
+
+Before building any feature, effect, art, system or rework:
+1. Give ChatGPT (Chat mode, thinking High, never Work) and Gemini (4 Argon, High) the same brief.
+2. Send each the other's key ideas for a second round, so they complement each other.
+3. Verify their key claims at the sources.
+4. Merge everything into one plan that says what each contributed and where you disagree. Only then implement.
+
+Save their answers verbatim with a check table in the game's docs `source/` folder.
+
+Only purely mechanical work skips this step: a typo, a one-line bug fix, re-running a measurement, moving files.
+
 ## Language, names and art level (owner, 28/10/2026, night)
 
 These are English games. Everything the player reads is in English:
