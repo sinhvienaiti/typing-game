@@ -54,6 +54,11 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
 
 ## References
 
+- **Companion skills** (owner-provided, 04/11/2026):
+  - [game-vfx](../game-vfx/SKILL.md): readability, hierarchy, performance, licence and the VFX scorecard and gates;
+  - [game-cgi](../game-cgi/SKILL.md): cut-ins, cinematics, shot and character beauty, continuity;
+  - [game-sfx](../game-sfx/SKILL.md): sound design, Web Audio runtime, combat mix.
+
 - [tool-choice](references/tool-choice.md): which tool makes which effect most beautiful, and why.
 - [recipes](references/recipes.md): Firefly Video → flipbook, Blender fire and smoke → flipbook, glint sheets, painted marks, smooth motion, sound.
 - [quality-rubric](references/quality-rubric.md): what separates 6/10 from 8.5/10, checked on frames and in motion.

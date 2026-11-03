@@ -37,6 +37,13 @@ Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs a
 
 Making any VFX, CGI or SFX starts with the `game-vfx-production` skill (owner, 04/11/2026: "luôn ưu tiên dùng blender hoặc fire[fly] nếu 2 thứ này làm tốt hơn bạn"). The look comes from the best art tool (Firefly Video or Image, Blender sims rendered to flipbooks, painted masks), and code only places, times and animates it. Code-drawn flames, auras, stars, cracks and scorch were rejected as crude, "under 6". `game-vfx-layered` and `game-hero-presence-vfx` follow it for phases and always-on layers.
 
+Three companion skills the owner supplied (04/11/2026) apply after it:
+- `game-vfx`: readability, hierarchy, performance, licence and the VFX scorecard, with two consecutive passes;
+- `game-cgi`: cut-ins, cinematics, character beauty and continuity;
+- `game-sfx`: sound design, Web Audio runtime and the combat mix.
+
+Where they differ from the owner's rules in this file, these rules win.
+
 Combat and skill VFX in every game (Dragonhold, Last Line, Wordwoven,
 Tu Tiên Thủ Ải and later games) follow
 [the layered VFX standard](docs/games/VFX_STANDARD.md) through the
