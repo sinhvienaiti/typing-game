@@ -2,6 +2,8 @@
 
 **Trạng thái:** chẩn đoán, chưa sửa mã game. Đo trên đúng bản lab anh đang thử: `games/immortality-cultivation` `9cb7bcd` (Sword × Fire vòng 3, cổng 3161), xuất bằng `git archive` ra thư mục riêng, chạy trên server riêng (không HMR), đồng hồ cố định 60 Hz. Hào quang kiếm (`SWORD_AURA.md`) đang được dựng ở checkout chính, **chưa có** trong bản đo này. Mọi thí nghiệm chỉ đổi trong trang (JavaScript trong tab của tôi), không sửa mã.
 
+**Phản biện độc lập (§9):** nguyên nhân 1 đứng vững; nguyên nhân 2 đúng cơ chế nhưng không phải nguyên nhân riêng; nguyên nhân 3 đúng mức độ nhưng sai cơ chế, và cổng C1 đo sai chỗ. Hai đoạn "sửa mô phỏng" trong video không nên gửi như hiện tại.
+
 **Lời anh (03/11, tối, thử lab trên Mac):** "tôi thấy đang gặp 1 vấn đề, là khó nhìn thấy được hình ảnh kiếm mỗi khi thi triển kỹ năng, tôi không rõ là do tốc độ kiếm nhanh quá, hay là do hình ảnh kiếm kém chất lượng bị mờ".
 
 **Để xem** (ngoài Git, chỉ cho anh):
@@ -317,3 +319,132 @@ Tất cả ở `games/immortality-cultivation/tmp/sword-readability/` (ngoài Gi
   - `batch1.sh` … `batch5.sh`: các ma trận đã chạy; `data/tables.md`: bảng của mọi lượt.
   - `refs.mjs`: khung video tham chiếu.
 - Đo lại sau khi hào quang vào: chạy `measure.mjs` với `PIX=1` trên bản mới. Cổng đề xuất: T4, Weber ≥ 2 (C1), phủ ≤ 5 % khi bay (C2), phím 2 phủ ≤ 20 % (C3).
+
+## 9. Phản biện (03/11/2026)
+
+**Cách kiểm.** Một lượt độc lập, không dùng `probe.js` hay số của lượt đầu:
+- **Bản đo:** `9cb7bcd` xuất riêng bằng `git archive` vào `games/immortality-cultivation/tmp/sword-readability/verify/app/`. Cấu hình Vite riêng (cổng 3187, `cacheDir` riêng, không HMR, không theo dõi tệp).
+- **Điều kiện:** High 1920 × 1080, DPR 1, đồng hồ cố định 60 Hz, camera chơi; thêm cận cảnh và 0,25× cho phím 1.
+- **Đầu dò riêng** (`verify/tools/vprobe.js`):
+  - Hình học đọc thẳng từ `BladeSet`: đốc, mũi, tâm chiếu lên màn.
+  - Ảnh: cùng một khung vẽ lại sáu lần. Kiếm được ẩn bằng `colorWrite = false`, nên bóng kiếm vẫn còn (lượt đầu dùng `visible = false`, bóng mất theo). Mặt nạ lưỡi lấy từ hai lần vẽ có bloom 0.
+  - Kiểm vẽ lại: khung vẽ lại và khung sau khi trả mọi thứ về đều trùng khung gốc từng byte.
+  - Ngoài Weber trung bình, đầu dò còn đo:
+    - tỉ lệ điểm ảnh lưỡi lệch độ chói nền ≥ 50 %;
+    - phân vị p10 và p90 của độ lệch ấy;
+    - ΔE OKLab so với nền đá, và so với nền thật trong ảnh cuối (có VFX);
+    - phần lưỡi nằm trên VFX.
+- **Bản anh đang mở:** thư mục `owner-preview` nay khác `9cb7bcd` ở camera xoay quanh của lab (phím O) và các ảnh cut-in thử (`orbit.ts`, `cutin.ts`, `skills-main.ts`). Mã kiếm giống hệt, nên chẩn đoán vẫn áp dụng. Server của anh nay ở cổng 3160.
+
+### 9.1 Nguyên nhân 1, chuyến bay ngắn và nhanh: xác nhận, nhưng nói quá ở ba chỗ
+
+Số đo khớp:
+
+| | Lượt đầu | Đo lại |
+|---|---|---|
+| Phím 1, mỗi thanh | 6 khung bay, 42 / 58 px/khung | 5–6 khung. Thanh 1: 35, 39, 44, 50, 58. Thanh 2, 3: 39, 39, 42, 47, 54, 63 |
+| Phím 1 cận cảnh | 128 / 138, rời khung sau 4 khung | 122–153 px/khung; thanh 2 cất cánh ở f32, ra khỏi mép trên ở f35–36 |
+| Phím 2 | 12 khung, 35 / 60 | 12 khung, giảm dần 66 → 9 px/khung |
+| Phím 0 | 18 khung, 15 / 19 | 17 khung, 13–21 px/khung (trung vị 16) |
+| Phím 1 ở 0,25× | 16 / 25 khung đọc được | Thanh 2, 3: 16 / 25 ở ngưỡng 12 px/khung, 25 / 25 ở ngưỡng 20 |
+
+Ba chỗ nói quá:
+1. **Ngưỡng 12 px/khung quyết định kết quả ở phím 0 và phím 5.**
+   - Phím 0 bay 17 khung, dài 77–98 px từ khung thứ 3, chạy 13–21 px/khung (~23–37°/s, vẫn trong vùng mắt bám theo được). Ở ngưỡng 12 nó có 0 khung đọc được; ở ngưỡng 20 có 13 / 17.
+   - Phím 5 (Lạc Kiếm Trận): mỗi kiếm có 0–4 khung đạt ngưỡng 12, và 1–7 khung đạt ngưỡng 20, trên 9–10 khung bay.
+   - Phím 1 thì vẫn 0 khung ở cả ngưỡng 20 lẫn 30.
+   - Phím 2 đạt 3 / 12 ở ngưỡng 20 và 6 / 12 ở ngưỡng 30. Nửa đầu nhanh (f2–f8, 66 → 29 px/khung) bị vạch và chớp phủ 66–84 % (Metal); ba khung chậm cuối (f10–f12, 20 → 12 px/khung) thì sạch, chỉ bị phủ 5–20 %.
+   - Vậy chỉ phím 1 và nửa đầu phím 2 chắc chắn hỏng vì tốc độ. Phím 0 và phím 5 ở ranh giới, không nên xếp chung nhóm "0 khung đọc được".
+2. **"Mọi hệ, mọi tầng"** (bảng §5) trái với bảng §2.1 của chính tài liệu này: kiếm giữa và kiếm xa phím 7 có 63–71 % khung bay đạt ngưỡng. Ở phím 7, tốc độ không phải nguyên nhân chính.
+3. **Clip "sửa mô phỏng" không đạt cổng T4 mà tài liệu đề xuất.** Trong lúc làm chậm, kiếm vẫn chạy 13–23 px/khung (`clips/k1-fire-fix/clip.json`), trên ngưỡng 12.
+   - Nếu anh thấy clip ấy đã đọc được, thì ngưỡng 12 chặt hơn mức cần.
+   - Ngưỡng của T4 nên chỉnh theo mắt anh trên clip, không cố định ở 12 từ đầu.
+
+### 9.2 Nguyên nhân 2, kiếm lớn dần khi bay: cơ chế đúng, nhưng không phải nguyên nhân riêng
+
+- **Cơ chế đúng.** `BLADE_IN_S` 0,12 s = 7,2 khung, dài hơn 6 khung bay.
+  - Thanh 1 phím 1 dài 17, 32, 46, 57, 64 px trong 5 khung bay; khi đứng yên nó dài 69 px, thanh 2 và 3 dài 77–87 px.
+  - Phím 2: 18, 35, 52, 68 px, rồi 78–82 px.
+  - Phím 0: 20, 40 px, rồi 61–98 px.
+- **Không thêm khung đọc được nào.** Mọi khung "chưa đủ lớn" cũng là khung nhanh: phím 1 chạy 35–50 px/khung, phím 2 chạy 66–48, phím 0 chạy 15–16.
+  - Nếu kiếm đủ lớn ngay từ đầu (chỉ làm T2), theo đúng luật "đọc được" của tài liệu này vẫn có **0 khung đọc được** thêm.
+  - T2 chỉ có giá trị khi đi cùng T1 hoặc T3.
+- **Phần lớn là chuyện của lab.** Theo D58 (1), pha gồng hiện trong lúc gõ: ba thanh phím 1 hiện ở 15, 45 và 75 % của từ, kiếm phím 2 hiện ở tay. Trong game, phím 1 và phím 2 không lớn dần khi bay. Phím 0 (không có từ) thì vẫn lớn dần, nhưng chỉ ở 2 khung đầu.
+- **Đề nghị:** gộp vào nguyên nhân 1 như một chi tiết. Với bản Fire anh đang thử, lưỡi Fire (§9.3) nên đứng hạng 2.
+
+### 9.3 Nguyên nhân 3, lưỡi Fire tối: đúng mức độ, sai cơ chế, cổng C1 đo sai chỗ
+
+Cùng VFX Fire, ba kiểu lưỡi: Metal, Fire (`furnace`, `char` 0,12) và Fire với thép sáng của Metal (`steel`). Mỗi ô là trung vị theo khung, ghi theo thứ tự Metal / Fire / Fire `steel`.
+
+| Pha | Weber trung bình so với đá | Điểm ảnh lệch nền ≥ 50 % | ΔE OKLab so với đá (× 100) | ΔE trong ảnh cuối (× 100) | Phần lưỡi nằm trên VFX |
+|---|---|---|---|---|---|
+| Phím 1, chờ sau vai (thanh 2, 3; f12–30) | 5,19 / 0,52 / 5,19 | 93 / 83 / 93 % | 39 / 23 / 39 | 34 / 20 / 33 | 26 / 62 / 62 % |
+| Phím 1, bay (≥ 20 px/khung) | 3,81 / 0,50 / 3,81 | 94 / 76 / 95 % | 30 / 18 / 30 | 28 / 14,5 / 29 | 13 / 80 / 80 % |
+| Phím 0, bay | 4,05 / 0,67 / 3,99 | 94 / 75 / 94 % | 31 / 18 / 31 | 30 / 15 / 29 | 14 / 78 / 78 % |
+
+**Phần đứng vững:**
+- Số Weber của lượt đầu lặp lại đúng: Fire 0,50, Metal 3,81.
+- Thép sáng dưới đúng VFX Fire đưa ảnh cuối về mức Metal (ΔE 29–33).
+- Lưỡi Fire là nguyên nhân thật và lớn của bản Fire: trong ảnh cuối, nó chỉ tách nền khoảng một nửa so với Metal.
+
+**Phần sai: cơ chế.** Lưỡi Fire **không** "sáng gần bằng nền đá", và cũng không phải "một vệt sắt tối trên đá tối".
+- 75–83 % điểm ảnh của lưỡi lệch nền từ 50 % trở lên. Khi bay, p10 là −0,82: chuôi, chắn và phần than tối hơn nền 82 %. P90 là +3,2: dải nhiệt và mép nóng màu cam sáng gấp ~4 lần nền.
+- Weber trung bình chỉ còn ~0,5 vì hai phần sáng và tối triệt tiêu nhau.
+- Ở cỡ thật trên màn (tấm `verify/sheets/k1-metal-fire-3x.jpg`, phóng × 3), kiếm Fire đọc như một lưỡi cam có chuôi đen, không hòa vào đá.
+- Khi kiếm bay ~40 px/khung, mắt gộp sáng và tối lại, nên Weber trung bình là thước đúng lúc bay. Lúc kiếm đứng chờ sau vai, mắt thấy được cấu trúc đen và cam, nên con số "Weber 0,5" làm kiếm chờ trông tệ hơn thực tế.
+
+**Phần tài liệu bỏ sót:**
+- 62 % (lúc chờ) đến 80 % (lúc bay) diện tích lưỡi Fire nằm trên chính VFX Fire: quạt lửa sau vai, vỏ lửa, vệt cam. Ở Metal con số này là 13–26 %.
+- Cột "Bị VFX phủ" (21–42 %) chỉ đếm VFX vẽ **đè lên** lưỡi, không đếm VFX nằm **sau** lưỡi.
+- Trên nền lửa, lưỡi Fire chỉ tách nền ΔE 15–20, ngang mức trên đá. Lưỡi thép trên cùng nền lửa tách ΔE 30–36.
+
+**Phím 5 Fire.** "Lưỡi tối hơn nền" (Weber −0,3) đúng cho pha kiếm đã cắm xuống đất (f14–200: −0,34). Lúc bay (f1–13), Weber là +0,65. Bảng §2.1 trộn hai pha này. Ẩn kiếm kiểu lượt đầu (mất cả bóng) chỉ làm Weber lệch 0,05–0,07, nên chỗ khác biệt này không đến từ bóng.
+
+**Hệ quả cho cách sửa:**
+- Cổng C1 "Weber ≥ 2 so với đá" đo sai chỗ và có thể lách: một lưỡi hai tông có thể có Weber ~0 mà vẫn nổi, hoặc đạt Weber 2 so với đá mà vẫn chìm trong lửa của chính nó.
+- Đề nghị đo trong ảnh cuối, so với nền thật có VFX, cả lúc chờ lẫn lúc bay: ΔE OKLab ≥ 0,25 (Metal đạt 0,28–0,34), kèm Weber trong ảnh cuối ≥ 2.
+- C2 phải tính cả quạt lửa sau vai và vệt sau kiếm, không chỉ vỏ lửa.
+
+### 9.4 Video cho anh (`owner/sword-speed-compare.mp4`)
+
+**Phần đúng:**
+- **Tốc độ thật (0–7,5 s):** khung trong video trùng khung tôi vẽ lại độc lập ở cùng thời điểm: cùng vị trí, PSNR 31–34 dB ở vùng kiếm (`verify/sheets/source-vs-owner-video.jpg`). Nén chỉ làm ảnh mềm đi một chút, không làm mất kiếm.
+- **Đoạn 0,25×:** đúng như chú thích (kiếm chạy 8–17 px/khung, trung vị ~11), nhưng nó làm chậm cả lửa, chớp và thú.
+
+**Phần cần sửa:**
+- **Chú thích đoạn Fire tốc độ thật**, "almost as dark as the stone", sai vì lý do ở §9.3. Nên ghi: lưỡi đen và cam, trung bình bằng nền đá, 80 % lưỡi nằm trên lửa của chính nó.
+- **Hai đoạn "TWO FIXES SIMULATED"** chưa công bằng:
+  1. Đoạn này làm chậm cả thế giới, nên các đòn trúng muộn dần, tới ~29 khung (~0,5 s) ở thanh thứ ba phím 1. T1 thì giữ nguyên tick trúng. Riêng thanh 1 phím 1, cảnh này chính là T3 (dời tick trúng canon), việc anh chưa quyết.
+  2. Kiếm vẫn chạy 13–23 px/khung, không phải đường bay ≤ 12 px/khung mà T1 và T4 đề xuất.
+  3. Thanh 1 vẫn lớn dần trong lúc bay (17 → 66 px), tức T2 không được mô phỏng.
+  4. Tốc độ và lưỡi thép bị gộp làm một, nên không biết cái nào có tác dụng. Ở phím 7, phần làm chậm chỉ có 0,5 s đầu (58 khung); phần còn lại chỉ khác ở lưỡi thép. Vậy chỗ trông tốt hơn ở phím 7 là do lưỡi, không phải do tốc độ (tấm `verify/sheets/k7-metal-fire-steel-f70.jpg`).
+  5. "Bright steel" là thép sáng của Metal, trái với lựa chọn của anh tối 03/11 (SWORD_AURA Q3: lưỡi Fire là thép tối, mép nóng). Nó chỉ là vật thử độ tương phản, không phải đề xuất ngoại hình, nhưng chú thích không nói rõ điều đó.
+
+**Kết luận:**
+- Gửi được phần tốc độ thật và phần 0,25×, sau khi sửa chú thích Fire.
+- Không gửi hai đoạn mô phỏng như hiện tại. Thay bằng hai đoạn tách riêng: (a) chỉ đổi tốc độ, giữ lưỡi Fire và giữ tick trúng; (b) chỉ đổi lưỡi, chạy tốc độ thật.
+- Nên thêm một đoạn Metal ở 0,25× để anh thấy riêng tác dụng của tốc độ, không lẫn với màu lửa.
+
+### 9.5 Xếp hạng sau phản biện
+
+1. **Thời gian bay:** phím 1 và nửa đầu phím 2; phím 0 và phím 5 ở ranh giới.
+2. **Lưỡi Fire:** sáng và tối triệt tiêu nhau, và lưỡi nằm trên lửa của chính nó. Hạng 2 cho bản Fire.
+3. **VFX phủ:** phím 2, và kiếm vừa cắm sau khi trúng.
+4. **Kiếm lớn dần khi bay:** gộp vào nguyên nhân 1; phần lớn do lab đánh tức thì.
+
+Các nguyên nhân 5–7 chưa được kiểm lại trong lượt này. Riêng thí nghiệm "kiếm × 1,4 vẫn 0 khung đọc được" (§3.6) không chứng minh được gì: luật "đọc được" chỉ xét tốc độ tính bằng px, mà phóng to kiếm không đổi tốc độ, nên kết quả 0 là tất nhiên.
+
+**Thứ tự sửa:**
+- T1 + T4, với ngưỡng T4 chỉnh theo mắt anh.
+- C1 + C2, đo bằng cổng mới trong ảnh cuối.
+- R1.
+- T2 chỉ làm cùng T1 hoặc T3.
+
+### 9.6 Tệp
+
+Tất cả ở `games/immortality-cultivation/tmp/sword-readability/verify/` (ngoài Git):
+- `tools/`: `vprobe.js` (đầu dò), `vmeasure.mjs` (kịch bản CDP, biến `STEEL=1` và `HIDEVIS=1`), `vanalyze.mjs` và `vphase.mjs` (tóm tắt), `vcrops.mjs` (cắt khung).
+- `data/*.json.gz`: Metal, Fire, Fire `steel`, cận cảnh, 0,25×, ẩn kiếm bằng `visible`.
+- `sheets/`: năm tấm so sánh.
+
+Khung thô đã xóa; server 3187 đã tắt.
