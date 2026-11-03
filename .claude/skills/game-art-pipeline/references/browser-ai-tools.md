@@ -140,3 +140,8 @@ f.appendChild(i); document.body.appendChild(f); f.submit();
   - **Run long batches inside the page** as an async loop that logs to `window`. Poll the log with short calls (the JS tool times out at 45 s).
   - **Partner models** (ElevenLabs and others) open a consent dialog: partner terms and an 18+ confirmation. That click is the owner's; press Cancel.
   - **Firefly Speech** reads Mandarin cleanly, but in a narration tone. Use short lines with a dash or ellipsis before the key word for a shout's shape.
+  - **Speech speed and pitch: verify before you generate.** On 03/11 a whole 10-voice batch came out at the defaults (1x, Normal) while its labels said +2 and 1.1. The cause was page state, not the API:
+    - The `Speed` (0.7–1.5, step 0.05) and `Pitch` (−3…+3, step 1) `SP-SLIDER`s exist only while the Voice list is collapsed. The list is a `<details>` in `FIREFLY-EXPANDABLE-PICKER`'s shadow root, and "View more" opens a separate "Voice options" panel that closes with its "Go back" `SP-BUTTON` (match it by `textContent`; `innerText` misses it).
+    - Set the inner `input[type=range]` with the native value setter plus `input` and `change` events.
+    - Before each Generate, read the selected voice's chips (`aria-label` `speed-button` and `pitch-button`, for example "1.1x" and "High" for +3) and the voice's name; skip the job when they differ.
+    - The history cards show each take's speed and pitch: check them after a batch. Measure the median F0 too (High lifted one voice from 262 to 372 Hz).

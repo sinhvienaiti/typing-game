@@ -75,9 +75,23 @@ Khi anh chọn bản trên trang nghe, Claude dựng lại từ đúng các bả
 
 Anh nghe video mẫu và nhận xét: tiếng hiệu ứng hầu hết đạt, riêng giọng hô chưa ưng. Anh muốn thử 10 giọng khác, trẻ hơn, cả nam lẫn nữ, tông cao hơn vì đây là tiếng hô.
 
-- **Cách tạo:** Firefly Speech (model Adobe `tts-model-firefly-dnt`), tiếng Phổ thông, câu 万剑——朝宗！, tốc độ 1,1.
-- **Nữ, cao độ +2:** Mia, Hannah, Melody, Sola, Kim.
-- **Nam, cao độ +1:** Liam, Nicholas, Channing, King, Gordon.
+- **Cách tạo:** Firefly Speech (model Adobe `tts-model-firefly-dnt`), tiếng Phổ thông, câu 万剑——朝宗！.
+- **Nữ:** Mia, Hannah, Melody, Sola, Kim. **Nam:** Liam, Nicholas, Channing, King, Gordon.
+- **Đính chính:** thẻ tên trong video ghi nữ cao độ +2, nam +1, tốc độ 1,1, nhưng lô này thật ra được tạo ở **cao độ mặc định (Normal) và tốc độ 1x**. Lỗi nằm ở cách điều khiển trang: thanh trượt Speed và Pitch chỉ có trên trang khi danh sách giọng đã thu gọn, nên lệnh đặt không tìm thấy chúng. Thẻ lịch sử của Firefly ghi "1x · Normal" cho cả lô, và mọi bản đều dài 2,55 giây.
 - **File gốc:** `~/AudioLab/inbox/firefly/immortality-cultivation/tt-vo-shout-<giọng>/`, không đưa vào Git.
 - **Video gửi anh:** `games/immortality-cultivation/tmp/shots/morning/tu-tien-callout-voices-10.mp4` (63,5 giây, mỗi giọng hai lần, có thẻ tên).
-- **Bước sau:** anh chọn giọng. Claude tạo lại cả bộ câu hô của các chiêu bằng giọng và cao độ đó, rồi gắn lại vào `art-src/lab/audio/callout*`.
+- **Anh nhận xét:** giọng nam số 6 (Liam, cao độ mặc định) tạm ổn; giọng nữ cần cao hơn, trong hơn, hay hơn.
+
+## Lô giọng nữ cao hơn (03/11 khoảng 09:30)
+
+- **Cách tạo:** như trên, nhưng đặt thật **cao độ +3 (High, mức cao nhất) và tốc độ 1,1**. Mỗi bản chỉ được tạo sau khi thẻ của giọng đang chọn hiện "1.1x" và "High".
+- **15 giọng nữ trẻ:**
+  - 10 giọng chưa thử: Jackie, Jessica, Brittney, Makhyli, Alics, Vinita, Elizabeth, Alex, Lisa, Katlin.
+  - 5 giọng lô trước, tạo lại ở +3: Mia, Hannah, Melody, Sola, Kim.
+- **Thêm:** Liam ở cao độ +1, tốc độ 1,1, để anh so với bản mặc định anh đã nghe.
+- **Đo cao độ (F0 trung vị):** High nâng giọng thật, ví dụ Jessica từ 262 lên 372 Hz, Brittney từ 203 lên 239 Hz.
+- **Bản "làm trong":** mỗi giọng được nghe hai lần, bản gốc rồi bản đã xử lý, cả hai cùng chuẩn −16 LUFS và đỉnh −1,5 dBTP.
+  - Lọc: cắt dưới 140 Hz, giảm 3 dB quanh 300 Hz, nâng 3,5 dB quanh 3,2 kHz, nâng 4 dB từ 8,5 kHz, khử xì nhẹ, nén nhẹ.
+  - Vang: một phản hồi xung tự tạo (1,8 giây), đặt thấp hơn giọng khô 10 LU.
+- **File gốc:** `~/AudioLab/inbox/firefly/immortality-cultivation/tt-vo-shoutf-<giọng>-p3/` và `tt-vo-shout-liam-p1/`, không đưa vào Git.
+- **Bước sau:** anh chọn giọng nữ (và giữ hay đổi giọng nam). Claude tạo lại cả bộ câu hô của các chiêu bằng giọng và cài đặt đó, rồi gắn lại vào `art-src/lab/audio/callout*`.
