@@ -43,6 +43,10 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
    - Key-to-release stays ≤ 50 ms. A clip follows typing progress; it never holds the shot back.
 5. **Layers and timing** in frames at 60 Hz (§3.4):
    - A flash is fully bright on its first frame: write a new burst at age 0, never one frame late.
+   - **Fast attack, slow decay.** Impact and aftermath linger: hold the peak a moment, then burn down by erosion and cooling, never a quick alpha fade.
+     - The owner, 03/11/2026, on Tu Tien's fire: "hình như tôi thấy hiệu ứng bị biến mất hơi nhanh". The impact flame then lived about 0.6 s.
+     - A slowed flipbook blends frames or holds and erodes; it never drops to a visibly lower frame rate.
+     - In crowded skills, cap the lingering pieces so they never veil the field, word tags or foes. Grow pools so nothing is cut short.
    - Layers are offset 2–3 frames.
    - Put a dark layer behind bright ones.
    - The core is at most 30 % white.
