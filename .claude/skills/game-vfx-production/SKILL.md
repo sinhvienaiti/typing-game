@@ -12,7 +12,10 @@ description: "Make the LOOK of any VFX, CGI or SFX truly beautiful in any game o
 
 What he liked came from real art: a Firefly Video flame flipbook ("rực cháy khá mềm mượt và nhìn khá chân thật"), and ChatGPT and Firefly paintings. What he rejected was drawn by code.
 
-**The rule.** The look of an effect (its shape, texture, motion and sparkle) comes from the best art tool available. Code only places, sizes, times, colours, erodes and blends that art. A code-drawn shape is never the look, however clever the shader.
+**The rule.** The goal is beauty at 8.5, not a favourite tool.
+- The owner asked for Firefly and Blender because effects made in code kept failing his bar: "ưu tiên… nếu 2 thứ này làm tốt hơn bạn".
+- So the look of an effect (its shape, texture, motion and sparkle) comes from whichever tool makes it most beautiful. Today that is Firefly, Blender or painted art. Code places, sizes, times, colours, erodes and blends that art.
+- Code may make the look only if a blind A/B against Firefly or Blender versions shows code wins.
 
 ## Procedure (every effect, every time)
 
@@ -39,7 +42,7 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
 
 ## Hard rules
 
-- **Code-drawn shapes are banned as the look.** That covers flame bodies, auras, stars and glints, cracks, scorch and seams. Allowed in code: noise and erosion masks, analytic thin rings and lines, placement, motion curves, colour grading, alpha thresholds, blending.
+- **No code-drawn look without a won A/B.** Flame bodies, auras, stars and glints, cracks, scorch and seams drawn in code scored under 6 every time (03-04/11/2026). Ship one only after two blind judges prefer it over Firefly or Blender versions. Allowed in code: noise and erosion masks, analytic thin rings and lines, placement, motion curves, colour grading, alpha thresholds, blending.
 - **Tools.**
   - **Firefly:** Adobe models only (Firefly Video, Firefly Image, the Upscaler, sound effects); never partner models; never sign in or click consent for the owner.
   - **Blender:** `/Applications/Blender.app`, run headless. It is not local AI. Heavy sims and renders go through `.local/bin/heavy.sh --cores=N`.
