@@ -11,6 +11,20 @@
 - Tấm cắt: `games/immortality-cultivation/tmp/sword-readability/owner/sword-crops.jpg`: thanh kiếm đúng cỡ trên màn, từng khung, qua phím 1 và một kiếm chủ phím 7, dưới mỗi ô là dài và tốc độ.
 - Khung tham chiếu: `games/immortality-cultivation/tmp/sword-readability/owner/reference-frames.jpg` (khung từ video chính thức, chỉ để anh xem, không đưa vào công cụ AI nào).
 
+## Quyết định của anh (03/11/2026, tối)
+
+- **T3: có.** Anh trả lời "Có, cho khựng":
+  - Thanh đầu phím 1 treo một nhịp, mũi chỉ vào đích, rồi mới lao.
+  - Nhát trúng đầu lùi khoảng 0,2 s, từ +6 lên khoảng +18 khung.
+  - Đây là đổi luật lối chơi (canon §12.1). Lượt sửa phải cập nhật canon, `src/content` và golden hash có chủ đích (`pnpm ic:golden:update`), rồi ghi lý do.
+  - Cùng tinh thần cho phím 0 và phím 2 nếu số đo cho thấy cần, nhưng phải đo và báo trước khi đổi.
+- **Làm sau khi hào quang kiếm vào**, vì cùng tệp (`sword-skills.ts`, `myriad-swords.ts`):
+  - T1, T2, T4 như §6, với ngưỡng T4 chỉnh theo §9;
+  - C1, C2 đo bằng ΔE trong ảnh cuối có VFX, theo §9;
+  - R1: khử răng cưa rẻ ở High.
+- **Lab:** vẫn đánh tức thì (D58). R2 (sàn độ phân giải khi ra chiêu) để sau, đo trên M4 trước.
+- **Video gửi anh:** chỉ phần tốc độ thật và 0,25× (`owner/sword-speed-real-and-slow.mp4`). Phần "sửa mô phỏng" bị cắt theo §9.
+
 ## 0. Trả lời câu hỏi của anh
 
 **Cả hai, nhưng không ngang nhau.** Nguyên nhân lớn nhất là **thời gian**: ở phím 0, 1 và 2 không có khung bay nào mà thanh kiếm vừa dài ≥ 40 px vừa chạy chậm hơn 12 px/khung. Phím 1 bay đúng 6 khung (0,1 s) với 42 px/khung (p90 58), ngắn hơn thời gian mắt kịp nhảy tới một vật mới (~0,2 s). Ở cận cảnh (phím Z) tốc độ lên 128 px/khung và kiếm ra khỏi khung hình sau 4 khung. Thanh đầu tiên còn đang lớn dần từ 5 lên 64 px **trong lúc bay**, nên chưa bao giờ hiện nguyên hình trước khi trúng.
