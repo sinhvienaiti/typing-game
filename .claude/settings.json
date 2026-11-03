@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Browser__find",
+      "Bash(identify *)",
+      "Bash(magick identify *)",
+      "mcp__Claude_Browser__tabs_context",
+      "Bash(pnpm test)",
+      "Bash(pnpm -s test)",
+      "Bash(ffprobe *)",
+      "mcp__Claude_Browser__get_page_text",
+      "Bash(shasum *)",
+      "mcp__Claude_Browser__read_console_messages",
+      "Bash(system_profiler *)",
+      "Bash(pnpm config get *)",
+      "mcp__Claude_Browser__read_network_requests",
+      "Bash(diskutil info *)",
+      "mcp__Claude_Browser__read_page",
+      "mcp__Claude_Browser__preview_logs"
+    ]
+  }
+}
