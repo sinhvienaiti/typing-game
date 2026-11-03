@@ -131,7 +131,10 @@ ChatGPT và Gemini đưa ra cùng một chồng lớp. **Đây không phải b�
   - ChatGPT thêm một luật hay: 6 kiếm chủ thỉnh thoảng phải "chứng minh" cả dòng là Clear Wind, bằng một lần ngọc lóe.
 - **Ngôn ngữ ngọc, mây, sáng tối.** Bài Developer Insight về Xiao (Genshin, Claude đã đọc) nói ngọc cho cảm giác trường thọ, vải có hoa văn mây cho vẻ cổ, và sáng tối đan nhau trong đòn đánh. Clear Wind có đúng vòng ngọc, chắn mây và tua.
 - **Kiềm chế để đọc được.** Trang VFX của Riot (Claude đã kiểm) nói nghệ sĩ mang "heavy burden of restraint": hiệu ứng phải đẹp mà vẫn rõ đòn của ai.
-- **Còn thiếu:** phần "được yêu thích" ở trên chủ yếu là lời fan chưa kiểm, chưa có bảng hình. Bảng hình 6–9 khung mỗi hướng (từ trailer và trang chính thức đã kiểm: Qingxiao 3.6/3.7, Yanqing, Wuchen, Phàm Nhân Tu Tiên) và lượt nguồn tiếng Trung làm ở bước 0, trước khi gửi anh (§5.0).
+- **Còn thiếu:** phần "được yêu thích" ở trên chủ yếu là lời fan chưa kiểm.
+  - Lượt nguồn tiếng Trung đã chạy ngày 03/11 (§2.7). Nó thêm nguồn của người làm nghề đã kiểm, nhưng vẫn chưa có lời người chơi kiểm được nói riêng về hình kiếm bay: NGA và 巴哈姆特 chặn, Zhihu không có trong chỉ mục.
+  - Bảng hình 9 khung mỗi hướng đã làm ngày 03/11, chỉ từ kênh chính thức đã kiểm (Qingxiao 3.6, Yanqing, Wuchen, Phàm Nhân Tu Tiên của Made By Bilibili): `games/immortality-cultivation/tmp/shots/sword-aura/concept/board/board-a.jpg`, `board-b.jpg`, `board-c.jpg`, nguồn từng khung trong `board-sources.md` cùng thư mục (không vào Git).
+  - Còn phác ý tưởng vẽ chồng lên khung chụp thật (§5.0 mục 3–4) trước khi gửi anh.
 
 ### 2.3 Hai bên cùng đồng ý (nên lấy)
 
@@ -184,7 +187,7 @@ ChatGPT và Gemini đưa ra cùng một chồng lớp. **Đây không phải b�
 | Phép thử chữ gõ vẫn đọc được | Cổng ở §6 |
 | Phép thử kiếm vẫn đọc được | Đo phần điểm ảnh lưỡi, vòng ngọc, chắn giữ màu bằng mặt nạ hình học (§6) |
 | Cách anh duyệt | Bước 0: bảng hình và phác ý tưởng chồng lên khung chụp thật; sau khi chọn: video và tấm ảnh ở 35, 70, 130 px, nền sáng, nền tối, ảnh xám, Low không bloom (§5) |
-| Nguồn tiếng Trung (Bilibili, Zhihu, GameRes, UOD) | Chạy ở bước 0, trước khi gửi anh (§5.0) |
+| Nguồn tiếng Trung (Bilibili, Zhihu, GameRes, UOD) | Đã chạy ngày 03/11 ở bước 0 (§2.7, [`source/sword-aura-chinese-2026-11-03.md`](source/sword-aura-chinese-2026-11-03.md)): GameRes, báo chí, Bilibili, TapTap, trang chính thức đã kiểm; Zhihu, NGA, 巴哈姆特 không đọc được |
 
 ### 2.6 Chọn ba hướng nào, và vì sao
 
@@ -209,6 +212,39 @@ Không hướng nào chép hình chữ ký của một game cụ thể:
 - không dùng bố cục tuyệt kỹ của Yanqing;
 - không dùng nhịp mưa kiếm của Wuchen;
 - không dùng chữ Hán hay chữ thư pháp của ai.
+
+### 2.7 Nguồn tiếng Trung thêm gì (03/11/2026)
+
+Nguồn: [`source/sword-aura-chinese-2026-11-03.md`](source/sword-aura-chinese-2026-11-03.md) (ChatGPT Chat, thinking High, có tự rà soát; Gemini 4 Argon; Claude kiểm từng nguồn ở mục G, đánh giá ở mục H).
+
+**Thêm, đã kiểm:**
+- **Hình trước, sáng sau.** Bốn nguồn nói cùng một ý:
+  - đạo diễn mỹ thuật 《仙逆》: chiêu đi từ "quang hiệu đơn thuần" sang vật có hình, tránh pháp trận sáng diện rộng;
+  - họa sĩ 《逆水寒》: gió, khí, đao quang phải quy về hình học có đường viền và hướng, hạt vụn khó lên hình;
+  - 网易雷火: "特效并不是无脑加一些发光的效果就可以";
+  - 《剑来》: kiếm khí thủy mặc là cách 化繁为简.
+  Điều này củng cố luật "không viền phát sáng chung chung" (§1.2) và ý mảnh có hình của A.
+- **Lớp tối rộng, tắt chậm dưới lớp sáng mảnh, tắt nhanh** (NEXT Studios; một blog học tập thêm: lớp đen tắt sau cùng). Khớp lớp mực và lõi HDR của mình. Điều mới là **thứ tự tắt**: mực ở lại sau lõi.
+- **Nhịp là chuẩn số một** của chất lượng hiệu ứng, và màu phong phú không có nghĩa là nhiều màu (网易游戏学堂). Củng cố §2.3: bay đều là pha yên nhất, sự kiện mới sáng.
+- **Vạn kiếm khác nhau từng thanh:** cảnh 万剑归宗 của phim 《风云Ⅱ》 điều khiển tốc độ, hướng, cảm giác nặng của từng thanh. Gợi ý cho dòng sông 94 thanh.
+- **Người chơi đòi thứ bậc, không đòi ít hiệu ứng hơn.** Lời chê "光污染", "特效太花" kiểm được đều ở game khác, và có người chơi "不想关闭特效影响爽感". Không có lời khen hay chê nào kiểm được nói riêng về hình kiếm bay.
+- **Neo văn hóa** để trình bày với anh: 剑影分光术 (kiếm quang hóa thành bóng kiếm), 剑丝 của 大庚剑阵, và cặp "thân kiếm trầm, uy nghiêm" với "kiếm khí rực rỡ" làm nền cho nhau trong lời quảng cáo của NetEase.
+
+**Mâu thuẫn, hoặc cần dè chừng:**
+- Trong truyện, bóng của 剑影分光 giống hệt phi kiếm. B vẫn giữ "bóng chỉ là lưỡi", để không đọc thành thêm kiếm.
+- Cả hai công cụ đề nghị ghép A (nhận diện), B (chuyển động), C (thứ bậc). Đó là suy luận của chúng từ một đề bài đã liệt kê ba hướng, không phải nguồn. Quy trình giữ nguyên: anh chọn một hướng; mượn lớp của hướng khác chỉ sau khi hướng đó đạt (§3.D).
+- Lời quảng cáo kiếm bay của Trung Quốc hay dùng vàng; Metal của mình không có vàng (§4.4).
+- Không có nguồn tiếng Trung riêng cho "lửa liếm quanh lưỡi, không như sắt nung". Phần Fire vẫn dựa trên luật lửa chung (vài nhóm lưỡi lửa, tia lửa, lớp tối tắt sau cùng) và chẩn đoán ở §1.1.
+
+**Đề xuất (chưa áp vào §3; chỉ xét cho hướng anh chọn):**
+
+| Hướng | Đề xuất 1 | Đề xuất 2 |
+|---|---|---|
+| A | **Khe mực 1 px giữa mép thép và áo** (mực ở mép trong, thêm vào viền mực ngoài sẵn có), để ở 35–60 px áo không nhập vào lưỡi thành "kiếm béo", tức rủi ro chính của A. Gemini đề xuất; khớp lớp tối tách lớp sáng của NEXT | **Mảnh không đều, nhạt dần về cổ áo:** mỗi bên 2–3 mảnh lớn nhỏ khác nhau thay cho 4 mảnh đều, khe là khoảng trống thật; thân áo đặc ở mũi, tan thành sợi về phía chắn. ChatGPT và Gemini; khớp "quy về hình học" của 逆水寒 |
+| B | **Sóng mũi là sự kiện:** chỉ hiện khi tăng tốc, rẽ vào và bổ (vài khung), không thường trực khi bay đều. ChatGPT; khớp "nhịp là chuẩn số một" | **Bóng nguội dần cả sắc lẫn độ sáng**, không chỉ alpha: bóng 1 có viền sáng mảnh, bóng 2–3 chuyển chàm tối có mực, để mắt tách kiếm thật với bóng. Gemini |
+| C | **Sao mũi thành tia lóe theo trục kiếm**, đỉnh sáng chỉ ở phóng và trúng; hạt quỹ đạo chỉ khi chờ và bay chậm. Bớt rủi ro "lấp lánh rẻ tiền" (§3.C). Cả hai công cụ | **Quầng là "vòng ngọc vọng" có khuyết:** 2–3 cung hở rõ, lòng trong suốt, để vòng ngọc thật luôn thắng. ChatGPT |
+
+Cho cả ba (đề xuất): lớp mực tắt sau lõi sáng khi tan; ở dòng sông, lệch pha nhỏ theo từng thanh cho nhịp hào quang (thở, lấp lánh, độ dài vệt), để dòng không "xếp hàng".
 
 ## 3. Ba hướng
 
