@@ -13,6 +13,10 @@ Living rule text: [ART_ACCEPTANCE.md](../../../../docs/games/ART_ACCEPTANCE.md) 
   - A clean, technically correct piece that is plain, simple or generic does not pass 8.5.
 - **VFX** must also meet the measured checks of [VFX_STANDARD.md](../../../../docs/games/VFX_STANDARD.md) (§5.6). The score bar is still 8.5.
 - **A piece already wired below the bar** is an open debt in `docs/games/QUALITY_RESCUE_2026-11-01.md`, not done work.
+- **Checkpoint at 7: report it with a demo video** (owner, 03/11: "mọi hình ảnh, hiệu ứng từ 7 trở lên thì cứ báo cáo tôi, gửi tôi video demo để tôi đánh giá"). It extends the 02/11 rule for motion.
+  - As soon as both judges score a piece (image, VFX, model, map, UI, motion) at 7 or more, send the owner a real-speed demo video, with sound where the piece has sound.
+  - Add the two scores, what is done, and what still separates it from 8.5. The owner works remotely, so send a file, never a localhost link.
+  - It is a checkpoint for his review, not a pass: keep going to 8.5.
 
 ## 2. Setting up a blind round
 
