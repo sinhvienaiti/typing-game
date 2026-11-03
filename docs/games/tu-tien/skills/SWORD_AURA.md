@@ -1,6 +1,6 @@
 # Hào quang kiếm bay (sword aura): ba hướng cho anh chọn (03/11/2026)
 
-**Trạng thái (03/11/2026, tối):** anh đã chọn **"A + sao mũi của C"**: hướng A (Wind-Silk Mantle) cộng đúng một lớp của C, `TipStar` (khối "Quyết định của anh" đầu §7). Q2, Q5, Q6 do người điều phối quyết theo quyền anh giao; Q3 và Q4 còn mở. Đang ở bước chuẩn bị dựng: bốn mẫu texture vệt khí cho thân áo chờ anh duyệt, và kế hoạch dựng theo §5.3. Chưa có mã game.
+**Trạng thái (03/11/2026, tối):** anh đã chọn **"A + sao mũi của C"**: hướng A (Wind-Silk Mantle) cộng đúng một lớp của C, `TipStar` (khối "Quyết định của anh" đầu §7). Q3 anh trả lời "Có, đổi": lưỡi Fire mặc định thành thép tối nóng mép, lửa liếm **quanh** lưỡi, cả khi bật lẫn khi tắt hào quang; lưỡi "sắt nung" cũ chỉ còn sau cờ lab `?bladeHeat=furnace` để so; Metal giữ trùng khít. Q2, Q5, Q6 do người điều phối quyết theo quyền anh giao; Q4 còn mở. Đang ở bước chuẩn bị dựng: bốn mẫu texture vệt khí cho thân áo chờ anh duyệt, và kế hoạch dựng theo §5.3. Chưa có mã game.
 
 **Trạng thái trước khi anh chọn:** đề xuất, đã sửa theo một lượt phản biện độc lập cùng ngày (§8); bước 0 (§5.0) đã làm (bảng hình, nguồn tiếng Trung, phác ý tưởng chồng lên khung chụp thật). Mọi con số chi phí là ước tính, chưa đo; cổng thật là số đo ở §6.
 
@@ -184,7 +184,7 @@ ChatGPT và Gemini đưa ra cùng một chồng lớp. **Đây không phải b�
 
 | Thiếu | Ở đây |
 |---|---|
-| Lửa phải **liếm**, không như sắt nung | Mỗi hướng có cách riêng để lửa vượt ra ngoài viền kiếm, chia tầng để dòng sông không thành "tấm ván cháy" (§3); đề xuất bớt dải nhiệt trên mặt lưỡi (Q3) |
+| Lửa phải **liếm**, không như sắt nung | Mỗi hướng có cách riêng để lửa vượt ra ngoài viền kiếm, chia tầng để dòng sông không thành "tấm ván cháy" (§3); bớt dải nhiệt trên mặt lưỡi (Q3, anh duyệt 03/11 tối: thép tối nóng mép là mặc định của Fire) |
 | Gắn với việc gõ | Kiếm chờ lớn hào quang theo ba bậc của mức gõ; hạng `perfect`/`flash` của từ cho một nhịp lóe ở vòng ngọc (§4.9) |
 | Phép thử chữ gõ vẫn đọc được | Cổng ở §6 |
 | Phép thử kiếm vẫn đọc được | Đo phần điểm ảnh lưỡi, vòng ngọc, chắn giữ màu bằng mặt nạ hình học (§6) |
@@ -379,7 +379,7 @@ Các trạng thái dùng ở mọi bảng:
     - lõi trắng vàng `#FFFDF0` × 2,4, chỉ ở gốc lửa sát mép, ≤ 1 px.
   - Áo này **thay** vỏ lửa `sheathAt` ở `SwordHooks.waiting`, `SwordHooks.travel` và `StreamHooks.travel` (cls 0). Kiếm sông vốn không có vỏ lửa.
   - Tàn lửa (`EmberPool`) giữ 40/s cho kiếm phím 1 đang bay; thêm 8/s cho kiếm giữa đang có lưỡi lửa.
-  - Đề xuất kèm (Q3): lưỡi chế độ `furnace` nhẹ hơn, để lưỡi là thép tối nóng mép còn lửa nằm quanh.
+  - Lưỡi (Q3, anh duyệt 03/11 tối): thép tối nóng mép, lửa nằm quanh; là mặc định của Fire cả khi tắt hào quang; lưỡi `furnace` cũ sau `?bladeHeat=furnace` (§7, §4.8).
 - **Water** (`mode: "water"`), phác:
   - áo thành ống nước bám kiếm; mảnh thành các tấm nước cuộn, thân chàm alpha thật 0,9, đường bọt cứng ở mép;
   - dòng chữ S bằng flow map hai pha (Vlachos, Portal 2);
@@ -767,7 +767,7 @@ Thêm:
      - `ElementStage` không giữ hào quang; hệ chỉ cấp `SwordAuraLook` qua kit.
      - Đổi vũ khí là đổi neo; đổi hệ là đổi uniform hoặc define; không thêm tấm.
      - Fire chuyển phần `sheathAt` vào `swordAura.mode = "flame"`.
-     - Đề xuất kèm cho Fire (Q3): thêm vào `BladeLook` trường `heatFrom` (hiện 0,05; đề xuất 0,55) và `char` 0,12 → 0,4. Dải nhiệt khi đó chỉ còn sát mép, lưỡi là thép tối nóng mép.
+     - Lưỡi Fire (Q3, anh duyệt 03/11 tối): thêm vào `BladeLook` trường `heatFrom` (hằng 0,05 hôm nay, thành uniform trong `SWORD_LOOK`, dùng ở cả shader lưỡi lẫn impostor); Fire mặc định `heatFrom` 0,55 và `char` 0,12 → 0,4. Dải nhiệt chỉ còn sát mép, lưỡi là thép tối nóng mép. `?bladeHeat=furnace` trả lại 0,05 và 0,12 để so.
 9. **Gắn với việc gõ.**
    - **Kiếm chờ:** hào quang lớn theo ba bậc của mức gõ (`ChargeFrameArgs.level`; ở phím 1 là ba thanh hiện ở 0,15 / 0,45 / 0,75).
    - **Từ không lỗi:** từ có hạng `perfect` hoặc `flash` (`src/typing/grading.ts`, `gradeOf`) cho một nhịp lóe ≤ 0,9 trong 8 khung ở vòng ngọc lúc phóng. Lab hiện chưa nối hạng; bước 2 nối `gradeOf` vào lượt gõ của lab. Khi chưa có hạng thì không lóe, không lấy mức gõ thay (nếu lấy thì lần gõ đủ nào cũng lóe).
@@ -829,7 +829,7 @@ Thêm:
 
 | Hệ thống | Dùng cho | Thay đổi |
 |---|---|---|
-| `sword-material.ts` | Bảng bề ngang lưỡi; mặt nạ đo | `edgeField` giữ lại mảng `half[]` (hiện bị bỏ) và xuất `bladeProfile()`; một `DataTexture` 96 × 1 cho mỗi vũ khí. **Không** đổi đường mép. Đề xuất Fire `heatFrom` sau cờ `?bladeHeat=edge` (Q3). Mặt nạ vòng ngọc theo hình học chỉ khi anh duyệt Q4 |
+| `sword-material.ts` | Bảng bề ngang lưỡi; mặt nạ đo | `edgeField` giữ lại mảng `half[]` (hiện bị bỏ) và xuất `bladeProfile()`; một `DataTexture` 96 × 1 cho mỗi vũ khí. **Không** đổi đường mép. Q3 (anh duyệt): `heatFrom` thành uniform của `SWORD_LOOK` (shader lưỡi và impostor); Fire mặc định 0,55 / `char` 0,4, lưỡi cũ sau `?bladeHeat=furnace`; Metal không đọc. Mặt nạ vòng ngọc theo hình học chỉ khi anh duyệt Q4 |
 | `real-swords.ts` | Kiếm xa của hướng được chọn; bóng của B | `iFx` từ vec2 thành vec3 (glow, flash, **trọng số hào quang**, mặc định 0); chỉ `myriad-swords.ts` đẩy 1, nên vòng 16 kiếm cổng trời của K5 (`gateSwords`, `depthTest` false) không đổi. Nhánh hào quang giải tích theo define của hướng: áo (A), sóng mũi (B), chấm O và viền (C), dùng `profile` và `rollWidth`; nới lề quad khi trọng số > 0. Không nhân `SWORD_LIGHT`. B: chế độ `"echo"` cho `SwordImpostors` (tham số constructor): màu phẳng, chỉ lưỡi (`m.g`), cắt viên nang theo đốc và mũi hiện tại của từng instance |
 | `scripts/models/blender/bake_sword_impostor.py` | Meta | Chỉ thêm vào `clear-wind-impostor.json`: `ringU`, `ringR`, `rollWidth`. **Không** có atlas hào quang mới; atlas màu đã duyệt giữ nguyên |
 | Mới: `src/view/skills/sword-aura.ts` | Phần chung | `SwordAura` (chủ: `begin / push / end` như `SwordImpostors`, đếm mật độ, bảng tư thế 94 × 2), `SwordAuraCards` (thẻ instanced, một lệnh vẽ cho mọi thanh; hàm hình theo hướng), `SwordAuraHull` (vỏ ngược, chỉ A), `SwordAuraSprites` (pool premultiplied mới: sáng và mực trong một shader, quỹ đạo trong vertex shader từ bảng tư thế, có tone map, lá flipbook cho sao lửa; chỉ C), `SWORD_AURA_LOOK` và `applySwordAuraLook` |
@@ -857,7 +857,7 @@ Một commit một bước. Sau mỗi bước, `tsc`, `pnpm test` và `pnpm buil
 3. **Dải** (A và C): chương trình `RibbonPool` có `aMode`; parity Metal.
 4. **Impostor:** trọng số hào quang theo instance, nhánh giải tích, meta `ringU`/`ringR`/`rollWidth`; B thêm chế độ echo. Kiểm parity K5 với `?aura=<hướng>`.
 5. **Hướng, Metal.**
-6. **Hướng, Fire:** chia tầng, trần lưỡi lửa, thay `sheathAt`.
+6. **Hướng, Fire:** chia tầng, trần lưỡi lửa, thay `sheathAt`. Lưỡi thép tối nóng mép (Q3, anh duyệt) là một commit riêng đi trước, vì nó đổi Fire cả khi `?aura=off`: `heatFrom` vào `SWORD_LOOK`, cờ `?bladeHeat=furnace`, parity Metal và Fire cũ (§6), đo lại các cổng Fire trên lưỡi mới.
 7. **Bay mẫu và kịch bản chụp:** `__lab.auraSolo()`, `lab-sword-aura.mjs`, biến `AURA` của `lab-element-perf.mjs`.
 8. **Changelog** `docs/changelog/<date>-lab-sword-aura.md` (`<date>` dạng YYYY-MM-DD): ảnh trước và sau, số đo, các điểm nhìn để anh quyết.
 
@@ -918,7 +918,7 @@ Thêm một video `owner-aura-off-<date>.mp4` cùng các cảnh, làm mốc so (
 | Thời gian khung | Mốc: phím 7 săn 10,2–10,5 ms, nhát kết 10,3–10,9 ms. **Metal:** hào quang trừ `off` ≤ **+0,6 ms** p95 lúc săn (mục tiêu ≤ +0,45) và ≤ **+0,5 ms** ở gom và nhát kết (F168–207). **Fire:** (Fire hào quang − Metal hào quang) tính vào trần 0,85 ms của Fire, phần thân và vật bay ≤ 0,20 ms. Không cửa sổ nào (nghỉ, phím 7 săn, gom, nhát kết, K5, phím 1) có trung vị p95 vượt **11,5 ms**, cả Metal lẫn Fire | `lab-element-perf.mjs` với `AURA=off,<hướng>` xen kẽ: 7 vòng × 3–5 lượt, DPR ghim 1, máy rảnh, qua `heavy.sh --perf`. Báo trung vị và trung bình p95. Vì nhiễu p95 giữa các vòng tới ±1,5 ms, chi phí **từng lớp** đo bằng `GpuTimer` bọc từng lệnh vẽ của hào quang (trung vị trên ≥ 600 khung); nếu trình duyệt không có extension thì bật tắt từng lớp với nhiều vòng hơn. Báo thêm một lượt DPR 2, DPR trung bình của độ phân giải động, và Ultra (không chặn) |
 | Từ phím tới lúc phóng | Không đổi: VFX 0 ms, thân 33 ms, cổng ≤ 50 ms. Khung chậm nhất của lần phóng đầu ≤ 50 ms (hiện 46) khi đã `prewarm` | `lab-power.mjs PHASE=latency`; trang mới mở |
 | Không NaN | Không NaN hay Inf trong bộ đệm sáng của bloom | Quét ≥ 2.000 khung, mọi chiêu, High và Ultra (MSAA 4), camera chơi và cận cảnh |
-| Kiếm đọc được | Phần điểm ảnh lưỡi giữ màu (ΔE OKLab ≤ 0,04 so với `off` cùng khung): ≥ 90 % ở kiếm chủ và kiếm giữa, ≥ 85 % ở kiếm xa. Vòng ngọc và chắn mây ≥ 95 % ở **từng khung**. Không lớp nào phủ > 10 % lưỡi (chớp ≤ 3 khung: 20 %); bóng của B phủ lưỡi, chắn, vòng ngọc ≤ 3 %. Ảnh xám ở 40–100 px vẫn thấy lưỡi, vòng ngọc, chắn. "Thấy tua" chỉ đòi ở kiếm cầm tay, nơi có vẽ tua | `__lab.bladeKeep()`: cùng khung cố định vẽ hai lần (`off`, rồi bật). Mặt nạ lưỡi, vòng ngọc, chắn lấy từ một lượt vẽ mã màu theo **hình học**: dải y đơn vị `ring.y ± ring.r` và `guardFrom … bladeFrom` của `AuraAnchors`; kiếm xa theo `guardU`, `bladeFromU`, `ringU` của meta (không dùng mặt nạ `JADE` theo sắc, vì vòng ngọc hiện ra bạc). Đo độ phủ **khi tắt bloom**, rồi một số riêng khi bật bloom (bloom của lõi loang lên lưỡi). Nếu Q3 được duyệt, mốc so là `off` có cùng cờ `?bladeHeat`. Lấy mẫu phím 7 F60–F160 mỗi 10 khung, gom F168–207, và phím 1 lúc bay. Giám khảo xem ảnh xám |
+| Kiếm đọc được | Phần điểm ảnh lưỡi giữ màu (ΔE OKLab ≤ 0,04 so với `off` cùng khung): ≥ 90 % ở kiếm chủ và kiếm giữa, ≥ 85 % ở kiếm xa. Vòng ngọc và chắn mây ≥ 95 % ở **từng khung**. Không lớp nào phủ > 10 % lưỡi (chớp ≤ 3 khung: 20 %); bóng của B phủ lưỡi, chắn, vòng ngọc ≤ 3 %. Ảnh xám ở 40–100 px vẫn thấy lưỡi, vòng ngọc, chắn. "Thấy tua" chỉ đòi ở kiếm cầm tay, nơi có vẽ tua | `__lab.bladeKeep()`: cùng khung cố định vẽ hai lần (`off`, rồi bật). Mặt nạ lưỡi, vòng ngọc, chắn lấy từ một lượt vẽ mã màu theo **hình học**: dải y đơn vị `ring.y ± ring.r` và `guardFrom … bladeFrom` của `AuraAnchors`; kiếm xa theo `guardU`, `bladeFromU`, `ringU` của meta (không dùng mặt nạ `JADE` theo sắc, vì vòng ngọc hiện ra bạc). Đo độ phủ **khi tắt bloom**, rồi một số riêng khi bật bloom (bloom của lõi loang lên lưỡi). Q3 đã duyệt: mốc so của Fire là `off` với cùng lưỡi (thép tối nóng mép mặc định; khi chụp `?bladeHeat=furnace` thì `off` cũng mang cờ đó). Lấy mẫu phím 7 F60–F160 mỗi 10 khung, gom F168–207, và phím 1 lúc bay. Giám khảo xem ảnh xám |
 | Chữ gõ đọc được | Phần điểm ảnh gần trắng (độ sáng > 0,92) ở 70 % trên của khung ≤ `off` + 0,15 % mỗi khung. Khi vào game: tương phản thẻ chữ ≥ 7 : 1 ở p99. Hào quang thêm ≤ 10 % độ sáng trong vùng chữ | Như phép đo Fire (changelog Fire phần 2); trong game, thanh chữ là DOM ngoài canvas |
 | Nền sáng, nền tối | Đá `#d6d0c2`: phần "nhạt" ≤ 10 % điểm ảnh hào quang. Nền `#2a2c30`: phần điểm ảnh hào quang tối hơn nền quá 0,05 độ sáng ≤ 20 % (không vành đen). Đường viền kiếm tương phản với nền **cao hơn** khi bật | Ba nền như phép đo Fire |
 | Bloom và trắng xóa | Điểm ảnh > 1 do hào quang thêm ≤ +0,3 % khung (`__lab.bright`, HdrProbe). Độ sáng ≥ 0,95 ≤ 6 % sân lúc đỉnh. Riêng hào quang, khi không có chiêu nào khác, ≤ 1 % | Ba nền, camera chơi và cận cảnh |
@@ -929,6 +929,7 @@ Thêm một video `owner-aura-off-<date>.mp4` cùng các cảnh, làm mốc so (
 | Thay, không chồng | Số lớp sống ở mỗi chỗ đúng như bảng §4.6 | `tests/view/sword-aura.test.ts` |
 | Mượt | Không lớp nào nhảy alpha hay cỡ quá 30 % trong một khung ngoài chớp. 60 Hz và 120 Hz giống nhau. Đứng yên khi dừng hình | Motion probe của lab; một clip nửa tốc độ |
 | Metal `off` không đổi | `?aura=off` trùng khít điểm ảnh với bản trước, cả phím 1, phím 7 và K5 | `lab-element-parity.mjs` |
+| Fire cũ còn so được (Q3) | `?aura=off&bladeHeat=furnace` trùng khít điểm ảnh với Fire trước khi đổi lưỡi, cả phím 1, phím 7 và K5. Lưỡi mặc định mới: thân lưỡi không còn dải cam phủ cả mặt (phần điểm ảnh lưỡi có sắc 15–40° và độ sáng > 0,5 giảm rõ so với `furnace`), mép nóng vẫn đọc ra ở 35 px | `lab-element-parity.mjs`; bản đồ điểm ảnh trong mặt nạ lưỡi |
 | K5 không đổi | Với `?aura=<hướng>`, vòng kiếm cổng trời của K5 trùng khít với `off` | `lab-element-parity.mjs`, khung K5 |
 | Mã | `tsc`, `pnpm test`, `pnpm build` xanh; grep `dist` không thấy mã lab hay mã hào quang của lab | Như các lượt trước |
 
@@ -941,7 +942,13 @@ Thêm một video `owner-aura-off-<date>.mp4` cùng các cảnh, làm mốc so (
   - Mã hướng `a` = `wind-silk-mantle`; công tắc `?aura=off|a` (§5.1).
   - `TipStar` cần pool `SwordAuraSprites` (§5.2): pool này nay dựng cho A, chỉ mang sao mũi (không hạt quỹ đạo, không mandorla).
 - **Q2, Metal cũng đổi:** có. Người điều phối quyết theo quyền anh giao (27/10). Hào quang áp cho cả Metal; `?aura=off` giữ đúng hình hôm nay để so.
-- **Q3, lưỡi Fire: còn mở.** Bản dựng chỉ làm đề xuất sau cờ lab `?bladeHeat=edge` (`heatFrom` 0,55, `char` 0,4); mặc định không đổi. Anh quyết sau khi xem khung.
+- **Q3, lưỡi Fire: có, đổi** (anh trả lời 03/11/2026, tối: "Có, đổi"). Lưỡi Fire thành **thép tối nóng mép**; lửa liếm **quanh** lưỡi thay cho cả thanh cam như sắt nung.
+  - Đây là **mặc định của Fire**, cả với `?aura=a` lẫn `?aura=off`.
+  - Lưỡi `furnace` cũ chỉ còn sau cờ lab `?bladeHeat=furnace`, để so.
+  - Cách làm (§4.8): `BladeLook` thêm `heatFrom`, đi vào `SWORD_LOOK` thay cho hằng 0,05 ở cả shader lưỡi (`sword-material.ts`) lẫn shader impostor (`real-swords.ts`). Fire mặc định `heatFrom` 0,55 và `char` 0,4 (điểm xuất phát, chỉnh trên khung chụp); `?bladeHeat=furnace` đặt lại 0,05 và 0,12.
+  - **Metal trùng khít:** chế độ `steel` không đọc `heat`, `char`, `heatFrom`. Kiểm bằng `lab-element-parity.mjs` (Metal, mọi khung, sai khác 0).
+  - **Fire cũ trùng khít:** `?aura=off&bladeHeat=furnace` trùng khít bản trước, cũng bằng `lab-element-parity.mjs`.
+  - Hình lưỡi Fire mặc định đổi, nên các cổng Fire đã đo trên lưỡi cũ (sắc thân, phần nhạt, bloom, màu dành riêng) được đo lại trên lưỡi mới.
 - **Q4, vòng ngọc: còn mở.** Bản dựng không chạm vòng ngọc, không sửa mặt nạ `JADE`, không vẽ lại texture.
 - **Q5, ngân sách:** như §1.2 và §6 (người điều phối quyết). Metal: hào quang trừ `off` ≤ +0,6 ms p95 lúc săn, ≤ +0,5 ms ở gom và nhát kết. Fire: phần Fire hơn Metal tính vào trần 0,85 ms của Fire. Không cửa sổ nào vượt 11,5 ms.
 - **Q6, chồng lớp:** cổng là ≤ 2 lớp trong suốt ở mọi điểm ảnh **trong vùng của từng kiếm**; con số cả sân chỉ báo cáo (người điều phối quyết).
@@ -957,7 +964,7 @@ Thêm một video `owner-aura-off-<date>.mp4` cùng các cảnh, làm mốc so (
 
 - **Q1. Hướng nào:** A (Wind-Silk Mantle), B (Echo Cascade) hay C (Celestial Regalia)? Anh trả lời sau khi xem bảng hình và các bản phác ở bước 0. Nếu anh muốn thấy chuyển động trước khi chọn, Claude làm một phép thử rẻ (§5.0 mục 6). Claude nghiêng về A (§3.D, là ý kiến).
 - **Q2. Metal cũng đổi.** Lớp hệ từng hứa "Metal không đổi". Nhưng thanh kiếm anh chê là chính bộ Metal, nên hào quang phải áp cho Metal. Anh đồng ý chứ? Bản `off` vẫn giữ để so.
-- **Q3. Lưỡi Fire.** Đề xuất bớt dải cam trên mặt lưỡi: lưỡi thành thép tối nóng mép, còn lửa liếm **quanh** lưỡi, thay cho cả thanh cam như sắt nung. Việc này đổi hình lưỡi Fire đã chụp. Anh đồng ý chứ?
+- **Q3. Lưỡi Fire.** Đề xuất bớt dải cam trên mặt lưỡi: lưỡi thành thép tối nóng mép, còn lửa liếm **quanh** lưỡi, thay cho cả thanh cam như sắt nung. Việc này đổi hình lưỡi Fire đã chụp. Anh đồng ý chứ? (Đã trả lời 03/11 tối: "Có, đổi"; xem khối trên.)
 - **Q4. Vòng ngọc.** Model Tripo hiện cho vòng ngọc màu bạc như crôm, trong khi ảnh đã duyệt là ngọc trắng viền vàng. Hướng nào cũng làm vòng ngọc nổi hơn (C nhất). Sửa nghĩa là đổi model đã duyệt, nên cần anh cho phép, và không phải việc nhỏ:
   - mặt nạ `JADE` hiện chọn theo sắc trên texture màu, không bắt được vòng crôm;
   - cách làm đề xuất: mặt nạ vòng ngọc theo hình học trong `sword-material.ts` (dải `ring.y ± ring.r`), cho màu ngọc trắng viền vàng nhạt, giữ sắc và độ sáng xa vàng tiền `#FFC83A`; nếu không đạt thì vẽ lại texture qua `game-art-pipeline`;
