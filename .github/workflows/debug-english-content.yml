@@ -288,6 +288,28 @@ jobs:
           git commit -m 'chore(content): refresh enrichment link evidence'
           git push origin HEAD:feature/english-learning-content-system
 
+      - name: Capture generated source/runtime drift diagnostics
+        shell: bash
+        run: |
+          {
+            echo '## git status --short -- shared content/english'
+            git status --short -- shared content/english
+            echo
+            echo '## git diff --name-status -- shared content/english'
+            git diff --name-status -- shared content/english
+            echo
+            echo '## git diff -- shared content/english'
+            git diff -- shared content/english
+          } > /tmp/english-content-drift.txt
+
+      - name: Upload generated source/runtime drift diagnostics
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-content-drift-${{ github.sha }}
+          path: /tmp/english-content-drift.txt
+          if-no-files-found: error
+          retention-days: 1
+
       - name: Verify generated source/runtime artifacts are reproducible
         shell: bash
         run: |
