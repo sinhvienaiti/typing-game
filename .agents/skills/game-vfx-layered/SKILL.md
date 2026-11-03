@@ -83,7 +83,8 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
      - Paint a set with one set standard and 4–8 variants.
      - Pack the channels: shape, a growth or age gradient, hot lines, alpha. The shader reveals, glows, cools, erodes and adds glints from those channels.
      - Rotate, scale and flip the variants against repetition.
-     - Procedural code is for noise, erosion and analytic thin geometry (rings, stars), not for the mark's look.
+     - Procedural code is for noise, erosion and analytic thin rings, not for the mark's look.
+     - Stars, glints and auras with motion also come from painted or Firefly Video art. On 03/11 the owner found Tu Tien's analytic tip star "thực sự không đẹp", and the shader-only sword mantle crude and static.
      - A pack image that fails (Kenney's scorch star read as ink) is replaced by a better image, never by code.
 
 ## Techniques by layer
