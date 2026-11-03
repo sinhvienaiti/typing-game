@@ -4,6 +4,47 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
 - Mỗi lần dừng hay chuyển session, cập nhật file này.
 - Luật của chủ dự án nằm ở memory (tự nạp) và `AGENTS.md`. Ở đây chỉ nhắc ý chính.
 
+## Tu Tiên: trạng thái 04/11/2026, khoảng 00:40 (phiên CLI `0cd1bde2`; anh nghỉ tới khoảng 8:00)
+
+- **Dự án đã chuyển sang SSD rời.**
+  - `~/htdocs/typing-game` là liên kết tới `/Volumes/SS990TPRO/htdocs/typing-game`, `typing-game-wt` cũng vậy.
+  - Bản dự phòng: `~/htdocs/typing-game.pre-ssd`. Chỉ xóa khi anh đồng ý.
+  - pnpm `store-dir` = `~/Library/pnpm/store`.
+  - Kế hoạch và kiểm tra: `docs/SSD_MIGRATION_PLAN.md`.
+- **Luật mới của anh (AGENTS.md, các skill, memory):**
+  - Lập plan với cả ChatGPT và Gemini trước khi triển khai.
+  - Skill `game-vfx-production` là bước đầu của mọi việc VFX, CGI, SFX. Cái nhìn phải đẹp tới 8,5; Firefly, Blender hoặc tranh vẽ làm cái nhìn, code chỉ đặt và cho chuyển động, trừ khi code thắng một lượt A/B mù.
+  - Thêm 3 skill anh gửi: `game-vfx`, `game-cgi`, `game-sfx`.
+  - Vết nứt và hình có thiết kế làm từ tranh vẽ.
+  - Bùng nhanh, tắt chậm.
+  - Mọi hình của chiêu phải lấp lánh.
+- **Anh đã chốt:**
+  - hào quang kiếm A Wind-Silk Mantle + sao mũi của C;
+  - lưỡi Hỏa là thép tối nóng mép (Q3);
+  - vòng ngọc trắng viền vàng nhạt (Q4);
+  - cut-in mặt hô **C3** Radiant Resolve, có chỉnh màu da;
+  - kiếm phím 1 khựng một nhịp, nhát trúng đầu từ +6 lên khoảng +18 (`SWORD_READABILITY.md`);
+  - lửa trộn: thân A, tia lửa và sao B, vòng C chỉ ở đòn lớn (`FIRE_STYLE.md`).
+- **Anh chê, phải làm lại:**
+  - hào quang vòng 1 (shader, đứng yên, sao xấu);
+  - lửa hiện tại ("nhìn như rác");
+  - vết nứt và vết cháy vẽ bằng code;
+  - chiêu quá hẹp trước thú đông.
+- **Đang chạy:** workflow `w016s17rs`:
+  - nghiên cứu pipeline VFX (`docs/games/VFX_PRODUCTION_PIPELINE.md`);
+  - lửa Blender Mantaflow;
+  - clip Firefly (khí lụa, lửa liếm, sao lấp lánh, bộ lửa trộn);
+  - rồi hai giám khảo mù chấm.
+- **Kế tiếp:**
+  1. Plan ChatGPT + Gemini để lắp vào lab: hào quang vòng 2, vòng ngọc, cut-in C3 vào mã chính, camera xoay phím O vào mã chính, lửa trộn, sửa độ rõ của kiếm.
+  2. Video và chấm mù hai lượt.
+  3. Làm tiếp vết nứt bằng tranh vẽ (`MARKS_ART.md`) và phạm vi chiêu (`SKILL_REACH.md`); hai workflow này đã dừng giữa chừng và cần chạy lại.
+  4. Nghiên cứu và làm thử một chiêu rồng Trung Quốc.
+- **Bản lab cố định cho anh:**
+  - 3160 (`tmp/owner-preview`): Hỏa vòng 3, cut-in C3 mặc định, phím O;
+  - 3162 (`tmp/owner-preview-aura`): hào quang vòng 1.
+  - Hai bản này chạy qua launch.json `ic-owner-preview` và `ic-owner-preview-aura`.
+
 ## 0. Giai đoạn và mục tiêu (chủ dự án 28/10)
 
 - **Tạm dừng tính năng mới.** Chỉ sửa lỗi, làm đẹp, làm mượt phần đang chơi được.
