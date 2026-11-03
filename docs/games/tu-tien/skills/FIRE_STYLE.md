@@ -8,6 +8,28 @@ Tài liệu thiết kế và nghiên cứu, chưa có mã. Mục đích: trả l
 - **Kiểm từng chiêu, từng pha** (phím 0–7, Metal và Fire), xếp hạng chỗ thiếu và lớp dùng chung cho mọi hệ: [`SKILL_RADIANCE.md`](SKILL_RADIANCE.md). Tài liệu đó dùng lại `GlintPool`, vệt của `EmberPool` và vòng mảnh của §5.1.
 - **Luật áp dụng:** `AGENTS.md` mục "Skill effects sparkle too"; skill `game-vfx-layered` bước 3 "Every shape sparkles"; chuẩn [`VFX_STANDARD.md`](../../VFX_STANDARD.md); trần 0,85 ms ở [`ELEMENT_LAYER.md`](ELEMENT_LAYER.md) §5.
 
+## Quyết định của anh (03/11/2026, tối)
+
+Anh trả lời "đồng ý trộn" cho đề xuất của Claude. Hướng là trộn ba phần:
+
+- **Thân lửa theo A · Brushfire Calligraphy** (khung 1, 3):
+  - 3 nét lửa lớn cong theo lực nhát kiếm, thêm 4–5 nét phụ và vài mẩu rời;
+  - mép sắc trên lớp lót tối, dải màu theo bậc, lõi trắng ≤ 5 %;
+  - tắt bằng cách các nét tách ra và tan từ đầu lưỡi.
+- **Tia lửa và sao lấp lánh theo B · Starfire Jewel** (khung 6, 7, 8):
+  - tia lửa là vệt mảnh, đầu trắng vàng, đuôi đỏ nguội, ba độ dài, bắn thành 2–3 chùm theo hướng đòn, rơi theo trọng lực, vài vệt nảy một lần;
+  - mỗi đòn 1 sao bốn cánh lớn và 2 sao nhỏ lóe nối nhau ở camera chơi (mức vừa, §5.3); dư âm có bụi vàng lấp lánh.
+- **Vòng hào quang theo C · Halo Seal** (khung 9, 10), **chỉ ở đòn lớn:** phát chiêu từ ấn, kiếm dẫn đầu phím 7 bổ xuống, nhát kết, tuyệt kỹ. Đòn thường không có vòng.
+
+Claude giữ hai điểm, trừ khi anh muốn khác:
+- lửa giữ tông cam đỏ (D54), không thêm màu ngọc bích "dị hỏa";
+- hơi nóng méo hình chỉ bật ở cận cảnh, làm sau cùng Water.
+
+Thứ tự làm:
+1. Trong lúc hào quang kiếm đang dựng, làm clip Firefly Video (A1 thân lửa, B2 tia lửa, B3 sao lấp lánh, C3 vòng và tia) và gửi anh xem. Bước này không đụng mã.
+2. Sau khi hào quang kiếm vào, dựng các mảnh dùng chung (§5.1), rồi làm 3–5 bản ứng viên trong lab: hai mức lấp lánh, hai dải màu, vòng ở mọi đòn hoặc chỉ đòn lớn.
+3. Anh thử bằng link local và chọn một bản.
+
 ## 0. Hai lời anh (nguyên văn)
 
 1. Về khung F88 của `stills-fixed-light-dark.jpg` (hoa sen lửa va chạm của phím 1 và các hạt tàn lửa tròn): "với cả k thể làm ngọn lửa đẹp hơn sao, nhìn nó hơi xấu, bao gồm cả tia lửa nhìn cũng khá là thô".
