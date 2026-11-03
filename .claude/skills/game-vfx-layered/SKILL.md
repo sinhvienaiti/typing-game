@@ -78,6 +78,13 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
    - Firefly Video flipbooks (Adobe models only) and CC0 packs (Unity Labs, Kenney, ambientCG, JangaFX free sets) through game-art-pipeline.
    - Record every source in the game's THIRD_PARTY list.
    - Sources, render, atlas, VRAM and judging for flipbooks: [flipbooks](references/flipbooks.md).
+   - **Designed marks come from painted images; the shader only animates them.** This covers cracks, scorch, cut seams, rifts, sigils, runes and impact decals.
+     - The owner, 03/11/2026, on Tu Tien's code-drawn element cracks and char: "việc bạn tự style ra những cái đó nó chưa được đẹp lắm".
+     - Paint a set with one set standard and 4–8 variants.
+     - Pack the channels: shape, a growth or age gradient, hot lines, alpha. The shader reveals, glows, cools, erodes and adds glints from those channels.
+     - Rotate, scale and flip the variants against repetition.
+     - Procedural code is for noise, erosion and analytic thin geometry (rings, stars), not for the mark's look.
+     - A pack image that fails (Kenney's scorch star read as ink) is replaced by a better image, never by code.
 
 ## Techniques by layer
 
