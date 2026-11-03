@@ -9,6 +9,18 @@ These examples only show how the procedure meets a real game. Check the current 
 - **Judge at the size the player sees.** Icons accepted on 256 px sheets scored 6.2 in game at 16–24 px. The Last Line heroine is 68–100 px tall in play; a Tu Tien cultivator has a floor of 64 px at 1080p. Presence is judged there, not on a close-up.
 - **A URL flag is not the player's setting.** A layer that reads only with a flag (`?bloom=1`, `?debug=1`) has not been seen by the player. Judge with no flags.
 
+## Tu Tien (`games/immortality-cultivation`): flying swords without an aura (03/11/2026)
+
+- **What happened.**
+  - In the morning the owner rejected the code-drawn skill swords. The fix put the approved Clear Wind model in every skill: the full mesh, a 3,200-triangle LOD and a baked impostor for far swords.
+  - The same fix removed every layer around the blade, keeping only a thin edge line, a soft rim, the jade's glow, a hit flash and a 0.14 m trail.
+  - The owner then found the flying swords crude: "vì sao các thanh kiếm đều chưa được xử lý để có hiệu ứng xung quanh thanh kiếm vậy… nhìn các thanh kiếm bay kiểu hơi thô". He made the rule general: effects around items, equipment and skills are essential.
+- **The lesson.**
+  - Replacing a stand-in with real art does not remove the need for presence. Design the aura that dresses the real object in the same pass.
+  - Fire's first sheath, a heat-field band hugging the blade, read as heated iron, not licking flame. A sheath's material has to read as the element's matter at the play camera, so swords 35–130 px long at 1080p.
+- **Budget context.** Key 7 flies about 6 full swords, 24 LOD swords and 64 impostors on High, at a p95 of about 10.3 ms against an 11.5 ms ceiling. So the aura must work on all three tiers: shell or rim on the meshes, a card along the impostor.
+- **Design source:** the sword aura design (three directions for the owner, 03/11) sits beside `docs/games/tu-tien/skills/ELEMENT_LAYER.md`, which supplies each aura's material per element.
+
 ## Last Line (`games/typing-survival`): Lightbearer and drone
 
 - **What the camera sees.** Pitch 36°, FOV 42. A 2.6 m heroine is about 68 px tall at 720p and 100 px at 1080p, seen from behind and from 46° above (QUALITY_RESCUE §4.1). Her cyan visor faces the enemies, so the player never sees it. Presence lives on the back core (`FX_BACK_CORE`), the cape lines, a ring and the drone, not on the face.

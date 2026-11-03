@@ -34,6 +34,10 @@ Owner, 02/11/2026: "đảm bảo animation của các chiêu thức phải mư�
 3. **Give each action its own shape.** Every gun, skill or spell gets its own flash, projectile, hit and smoke shapes, not one sprite atlas recoloured.
    - Last Line's audit found five guns sharing one star, which the owner called plain.
    - In a xianxia game, a sword art, a formation, a talisman and a thunder strike each read as a different thing.
+   - **Dress what travels** (owner, 03/11: "những hiệu ứng như vậy xung quanh vật phẩm, trang bị, kỹ năng là rất cần thiết, nó đem lại cái nhìn cho người chơi hứng thú hơn"). A flying sword, talisman, bullet or thrown relic carries an aura for its whole flight: a sheath in the element's material, afterimages, streamers, motes or a tip star, chosen from [game-hero-presence-vfx](../game-hero-presence-vfx/SKILL.md)'s layer menu.
+     - A bare model in flight reads crude, even a good one.
+     - On 03/11, Tu Tien swapped code-drawn swords for the real model and dropped every layer around the blade, and the owner found the flying swords crude.
+     - Swapping in real art removes the stand-in, never the aura. The aura wraps the object and keeps it readable as itself.
 4. **Build the caster side first.**
    - A (charge) and R (release at the mouth, muzzle, hand or tower) come before I (impact). This was the owner's complaint of 28/10.
    - Key-to-release stays ≤ 50 ms. A clip follows typing progress; it never holds the shot back.

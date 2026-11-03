@@ -1,11 +1,19 @@
 ---
 name: game-hero-presence-vfx
-description: "Build or review the always-on presence of a character in any game of this repo (Dragonhold, Wordwoven, Last Line, Tu Tien and later games; three.js or 2D canvas): rim glow, emissive channels, halos and light rings, orbiting motes, light ribbons, aura pulses, ground glow, a character light, and how they change in idle, ready, action, hit, victory and defeat. Use when a hero, companion, drone, dragon, elite or boss should look radiant, divine or premium, or reads as plain, flat or lost on the map; for the runtime side of the radiance kit; and before adding glow, bloom, tone mapping or exposure changes to make a character shine. Not for designing the character, its source images or the geometry-or-VFX split (game-character-design), combat shots, skills and impacts (game-vfx-layered), or capes and hair on bones (character animation)."
+description: "Build or review the always-on presence of a character, or of a weapon, piece of equipment, item or skill object (flying swords, talismans, relics, drops, shop, inventory and equipment cards), in any game of this repo (Dragonhold, Wordwoven, Last Line, Tu Tien and later games; three.js or 2D canvas): rim glow, sheaths and auras, emissive channels, halos and light rings, orbiting motes, light ribbons, aura pulses, ground glow, a character light, and how they change in idle, ready, action, hit, victory and defeat. Use when a hero, companion, drone, dragon, elite or boss should look radiant, divine or premium, or reads as plain, flat or lost on the map; for the runtime side of the radiance kit; and before adding glow, bloom, tone mapping or exposure changes to make a character shine. Not for designing the character, its source images or the geometry-or-VFX split (game-character-design), combat shots, skills and impacts (game-vfx-layered), or capes and hair on bones (character animation)."
 ---
 
 # Hero presence VFX
 
-Presence is the set of layers that make a character feel radiant while nothing is being cast. Unlike a shot, it is on screen every frame: its cost never goes away, and every mistake (a washed screen, a hidden word tag, a glow in a reserved colour) stays in view the whole game. Build it as separate, switchable layers, judge each alone, then judge the whole at the size the player sees.
+**Objects need presence too.** The owner, 03/11/2026: "những hiệu ứng như vậy xung quanh vật phẩm, trang bị, kỹ năng là rất cần thiết, nó đem lại cái nhìn cho người chơi hứng thú hơn".
+- **What gets it:** every item, piece of equipment, weapon and skill object the player sees gets a planned presence layer around it: a flying sword, a talisman, a relic, a drop, a shop or inventory item, an equipment card.
+- **Which layers:** a sheath or aura, motes, streamers, afterimages, a tip star, or a rarity glow, from [the layer menu](references/layers.md).
+- **When to plan it:** in the first brief. It is not polish for later.
+- **The object stays itself:** the layer dresses the real model or art and never hides or replaces it.
+- **Owners:** the weapon owns the layer's shape; an element or rarity system supplies its material.
+- **Why** ([worked examples](references/worked-examples.md), Tu Tien): flying swords with no aura read crude.
+
+Presence is the set of layers that make a character or object feel radiant while nothing is being cast. Unlike a shot, it is on screen every frame: its cost never goes away, and every mistake (a washed screen, a hidden word tag, a glow in a reserved colour) stays in view the whole game. Build it as separate, switchable layers, judge each alone, then judge the whole at the size the player sees.
 
 This skill holds the reusable method and recipes. A recipe verified in any game is recorded in [recipes](references/recipes.md) §4, not in a docs file. Each game's docs keep its measured numbers and decisions, which win over this skill's starting caps for that game:
 - [docs/games/VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md): §3.5 bloom and colour, §3.6 readability, §3.7 budgets, §3.8 reduced motion, §4.5 lab and captures.
@@ -39,6 +47,7 @@ This skill holds the reusable method and recipes. A recipe verified in any game 
 ## Boundaries
 
 - Shots, skills, impacts, traps and enemy attacks belong to [game-vfx-layered](../game-vfx-layered/SKILL.md). The release flash at the caster belongs there too: presence may swell into it and settle after, never replace it.
+- The object a skill throws (a flying sword, a talisman) is dressed for its whole flight with this skill's layer menu. game-vfx-layered still owns the phases, the timing and the impact.
 - Capes, hair, tails and cloth on bones are character animation (`docs/games/CHARACTER_ANIMATION.md`, bar 9), not presence. Light ribbons that are not part of the mesh are presence.
 - Sockets, emissive maps and model cleanup go through the game's model pipeline. Ask for a missing socket instead of guessing an offset.
 - An aura that carries a game rule (an elite marker, a leader's buff radius) is a signal, owned by the game's rules; presence must not look like it.
