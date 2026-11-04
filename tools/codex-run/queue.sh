@@ -35,8 +35,15 @@ tool_wait_at() {
 }
 
 # "try again at 8:54 AM" -> that moment today (tomorrow if passed) + 2 minutes, as epoch seconds.
+# Codex also writes the date: "try again at Nov 5th, 2026 12:52 AM" (04/11/2026: the old pattern missed it and fell
+# back to 30 minutes, so the lane retried 49 minutes early).
 resume_at() {
-  local t at
+  local t d at
+  d=$(grep -o 'try again at [A-Z][a-z]\{2\} [0-9]\{1,2\}[a-z]\{0,2\}, [0-9]\{4\} [0-9]\{1,2\}:[0-9]\{2\} *[AaPp][Mm]' "$1" 2>/dev/null | tail -1 | sed 's/try again at //; s/\([0-9]\)[a-z][a-z],/\1/')
+  if [ -n "$d" ]; then
+    at=$(date -j -f '%b %d %Y %I:%M %p' "$(echo "$d" | tr 'apm' 'APM')" +%s 2>/dev/null)
+    if [ -n "${at:-}" ]; then echo $(( at + 120 )); return; fi
+  fi
   t=$(grep -o 'try again at [0-9]\{1,2\}:[0-9]\{2\} *[AaPp][Mm]' "$1" 2>/dev/null | tail -1 | sed 's/try again at //')
   if [ -n "$t" ]; then
     at=$(date -j -f '%Y-%m-%d %I:%M %p' "$(date +%Y-%m-%d) $(echo "$t" | tr 'apm' 'APM')" +%s 2>/dev/null)
