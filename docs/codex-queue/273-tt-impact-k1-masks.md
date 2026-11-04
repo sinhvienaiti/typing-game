@@ -95,6 +95,15 @@ Mọi phép tính làm **trên từng ô 384×384** (k = 0…23, theo thứ tự
 - Ra `.local/codex-runs/273-out/preview-ticks.png`: 11 ô liền nhau, nhãn tick tiếng Anh.
 - Thêm tấm từng kênh `channels-k00-k23.png`: hàng atlas RGBA, A.R, A.G, A.B, A.A, B.R; 6 cột chọn k = 0, 4, 8, 12, 16, 20.
 
+## Claude chốt mục 3 (21:03, sau lần chạy đầu)
+Lần chạy đầu dừng đúng chỗ: "mọi ô dùng cùng một B.R" mâu thuẫn với "ngoài vỏ: 1", vì vỏ mỗi ô một khác. Lời giải đã chốt:
+- B.R chỉ **tính một lần**, trên **hợp các vỏ** của 24 ô: `U = dilate(max_k(A.R_k) > 0,5, 2 px)`.
+- Trong `U`: quãng đường dọc đường tâm như đã viết (0 ở gốc, 1 ở mũi; điểm cách đường tâm hơn 40 px lấy giá trị của nét gần nhất), làm mềm σ = 1 px.
+- Ngoài `U`: 1.
+- Mọi ô dùng chung đúng map này. Kiểm 3 đo trên map chung.
+
+**Chạy lại:** giữ nguyên các file và số đo của mục 1–2 đã đạt (atlas RGBA, maskA, phần maskA trong `masks.json`), không tạo lại. Làm tiếp mục 3, 4 (maskB và phần còn lại của `masks.json`), 5 (xem trước) và mọi Kiểm. Ghi đè chỉ `masks.json` và các file của `273-out/` khi cần, với `--force` cho đúng các file đó.
+
 ## Kiểm bắt buộc
 1. Mục 1: sai số dựng ngược ≤ 1 mức trên mọi điểm có alpha. In số điểm vượt (phải là 0).
 2. Mục 2 trên mọi ô:
