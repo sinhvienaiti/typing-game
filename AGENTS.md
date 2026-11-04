@@ -115,6 +115,15 @@ Skill effects sparkle too (owner, 03/11/2026, later the same day): "bạn luôn 
 - The radiance layer is made of glints and star twinkles, fine light motes and glitter, soft halos and light rings (at most 0.9 a channel), shimmering rims and thin light rays.
 - No main shape ships bare. Its radiance is designed in the first brief, beside the shape, and judged with it. Skill: `game-vfx-layered`, method step 3.
 
+Reference images, never a prompt alone (owner, 05/11/2026): "việc sử dụng ảnh tham chiếu là cần thiết, k chỉ sử dụng mỗi prompt như vậy được, bạn đã mắc lỗi này rất nhiều lần r".
+- Every AI generation starts from our own reference images: images, video, 3D sources, cut-in art, VFX stills and map paintings, in ChatGPT, Gemini, Firefly or Tripo.
+- Feed the tool approved art. Use it as a style or composition reference, a first or last frame for image-to-video, an image to edit, or a base to paint over.
+- Video of anything with a shape is image-to-video from an approved still. Text-to-video only for pure material: flow, sparks, embers, smoke, dust.
+- A brief, ticket or job list names its reference images and writes their paths into each output's prompt file. A generation job without one is refused, unless it is pure material or the still is being made for the owner to pick.
+- Never use third-party images as references.
+- Before any batch, look at two samples and send them to the owner, even under a deadline.
+- Skills: `game-art-pipeline` (hard rules) and `game-vfx-production` (reference image first, then video).
+
 Research before any character design (owner, 01/11/2026, evening): before briefing a hero, companion, dragon, boss or named character, research myth and legend, xianxia, royal and warrior references and run the character appeal checklist (skill `game-character-design`). Every character gets a radiance kit (a halo or mandorla, emissive channels, light motes or orbiting ornaments, a cape or ribbons in motion). Which parts are model geometry and which are engine VFX follows the researched pipeline decision in that skill (`references/pipeline-decision.md`), not a guess. Show the owner a few directions before building one.
 
 Reuse monsters before making new ones (owner, 01/11/2026): every game already has 3D foes, and many of them have rigs and clips. Before any new monster model or monster image, search `docs/games/MONSTER_MODEL_INVENTORY.md` and reuse across games first: retexture, recolour, rescale, re-rig. A ticket for a new monster says why nothing in the inventory fits.

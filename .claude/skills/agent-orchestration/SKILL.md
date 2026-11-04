@@ -176,6 +176,14 @@ The owner: "thảo luận xong 1 việc rồi hãy qua gemini nhờ nó đánh g
 
 The owner still reviews every sample, and acceptance is still two blind judges at 8.5 or more in the play build (`game-art-pipeline`).
 
+## Every generation brief names its reference images (owner, 05/11/2026)
+
+Before handing image, video, 3D or VFX generation to ChatGPT, Gemini, Firefly, Tripo, Codex or an agent:
+- **References:** the brief lists the approved reference images by path and says how each is used (style or composition reference, first frame, image to edit).
+- **Samples first:** the first two outputs are looked at and sent to the owner before any batch.
+
+A brief or job list with prompts only is wrong (owner: "bạn đã mắc lỗi này rất nhiều lần r"). Rule in [game-art-pipeline](../game-art-pipeline/SKILL.md), hard rules.
+
 ## Codex: the worker for code, logic and sound
 
 The owner (04/11): "với codex thì nó cũng như 1 agent của bạn, cứ sai nó thực hiện code, test, hoặc tạo ảnh nếu 2 đứa kia chạm giới hạn". Treat Codex as one of Claude's own agents for code, tests and logic. Using it saves Claude's tokens, since its quota is separate.

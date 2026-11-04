@@ -77,6 +77,19 @@ This skill is the method. Each game keeps its own data: reference board, signal 
 
 ## Hard rules
 
+- **Reference images, never a prompt alone** (owner, 05/11/2026: "việc sử dụng ảnh tham chiếu là cần thiết, k chỉ sử dụng mỗi prompt như vậy được, bạn đã mắc lỗi này rất nhiều lần r").
+  - **Every generation is fed our own approved art.** This covers ChatGPT, Gemini, Firefly Image and Video, and Tripo. The art goes in as:
+    - a style or composition reference;
+    - an image to edit or paint over;
+    - a first or last frame for image-to-video;
+    - accepted views for Tripo.
+  - **A prompt alone gives generic shapes.** On 05/11 it gave flat clip-art dragons and lotuses. The same mistake was made many times before: regenerating stalled images, and new effects from text.
+  - **Every brief, ticket and job list names its reference paths.** Each output's `.prompt.txt` records them.
+  - **A job without a reference is refused.** Two exceptions:
+    - pure material such as flow, sparks, embers, smoke and dust;
+    - a first still made for the owner to pick, which itself uses the nearest approved art as its style reference.
+  - **Never a third-party image.**
+  - **Two samples go to the owner before any batch.**
 - **No code-drawn stand-ins** for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. A missing image is a ticket, never a drawing in code. Shaders and VFX that meet [VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md) are allowed. Sound counts too: no synthesized placeholder sounds.
 - **Every UI detail carries real art:** cards, buttons, bays, labels, tooltips, briefings, results and shop items. Text alone is not enough.
 - **Language:** everything the player reads is English, game nouns included; unique characters keep their proper names. Vietnamese appears only where the game teaches it: the meaning of the word being learned and optional glosses in learning panels.
