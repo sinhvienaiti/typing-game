@@ -181,6 +181,7 @@ The owner still reviews every sample, and acceptance is still two blind judges a
 Before handing image, video, 3D or VFX generation to ChatGPT, Gemini, Firefly, Tripo, Codex or an agent:
 - **References:** the brief lists the approved reference images by path and says how each is used (style or composition reference, first frame, image to edit).
 - **Samples first:** the first two outputs are looked at and sent to the owner before any batch.
+- **No reference fits?** Make one first in ChatGPT, Gemini or Firefly Image, styled from the nearest approved art; the owner picks it; then go on. We always have tools to make a good 2D reference.
 
 A brief or job list with prompts only is wrong (owner: "bạn đã mắc lỗi này rất nhiều lần r"). Rule in [game-art-pipeline](../game-art-pipeline/SKILL.md), hard rules.
 

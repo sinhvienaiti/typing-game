@@ -88,6 +88,7 @@ This skill is the method. Each game keeps its own data: reference board, signal 
   - **A job without a reference is refused.** Two exceptions:
     - pure material such as flow, sparks, embers, smoke and dust;
     - a first still made for the owner to pick, which itself uses the nearest approved art as its style reference.
+  - **No fitting reference? Make one first** (owner, 05/11: "chúng ta có rất nhiều công cụ tạo ảnh, chatgpt, gemini, fire, bạn luôn có thể tạo ra ảnh 2d chất lượng để dùng tham chiếu cho các phần khác cần thiết"). Paint it in ChatGPT, Gemini or Firefly Image from the nearest approved art; the owner picks it; then continue. Never skip to a prompt-only generation.
   - **Never a third-party image.**
   - **Two samples go to the owner before any batch.**
 - **No code-drawn stand-ins** for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. A missing image is a ticket, never a drawing in code. Shaders and VFX that meet [VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md) are allowed. Sound counts too: no synthesized placeholder sounds.

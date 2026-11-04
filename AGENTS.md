@@ -120,6 +120,7 @@ Reference images, never a prompt alone (owner, 05/11/2026): "việc sử dụng 
 - Feed the tool approved art. Use it as a style or composition reference, a first or last frame for image-to-video, an image to edit, or a base to paint over.
 - Video of anything with a shape is image-to-video from an approved still. Text-to-video only for pure material: flow, sparks, embers, smoke, dust.
 - A brief, ticket or job list names its reference images and writes their paths into each output's prompt file. A generation job without one is refused, unless it is pure material or the still is being made for the owner to pick.
+- No approved reference fits? Make one first. The owner, the same night: "chúng ta có rất nhiều công cụ tạo ảnh, chatgpt, gemini, fire, bạn luôn có thể tạo ra ảnh 2d chất lượng để dùng tham chiếu cho các phần khác cần thiết". Use ChatGPT, Gemini or Firefly Image, styled from the nearest approved art; the owner picks it; then go on. "No reference yet" is never a reason to generate from a prompt alone.
 - Never use third-party images as references.
 - Before any batch, look at two samples and send them to the owner, even under a deadline.
 - Skills: `game-art-pipeline` (hard rules) and `game-vfx-production` (reference image first, then video).
