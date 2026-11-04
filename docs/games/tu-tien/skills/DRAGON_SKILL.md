@@ -282,107 +282,120 @@ Anh chọn hướng nào để dựng trước: **A · Twin Dragons, One Burning
 
 ## 8. Hộp xám: kết quả đo (04/11/2026)
 
-**Đo gì:** hộp xám của A · Song Long trong `games/immortality-cultivation` (HEAD `6e68958`: sim `e91a787`, lab `7ee98f0`, changelog `docs/changelog/2026-11-04-lab-twin-dragons-greybox.md`). Chiêu chỉ chạy khi header trận có cờ `swordKey2: "twin-pearl"`; mặc định tắt. Bài đo so nó với ô 2 hôm nay (Nhất Tuyến Xuyên Vân, đường thẳng 14 × 1,2 m) theo §2 luật 4 và [`BALANCE.md`](../../BALANCE.md), rồi thử hai biến thể số trong bộ nhớ làm chứng cứ. Không sửa file nào của game; canon và [`00-canon.md`](../00-canon.md) giữ nguyên; mọi số vẫn là số thử.
+**Đo gì:** hộp xám của A · Song Long trong `games/immortality-cultivation`.
+- **Bản hiện tại** (sau review, 04/11 chiều): HEAD `033b3f4`.
+  - Sim `68be1b8`: ngân sách mỗi bên, một trần cụm cho cả lần tung, hệ số giảm dần riêng mỗi bên, một thứ tự đánh cho cả hai đường.
+  - Lab `4e0800f`.
+  - Changelog `docs/changelog/2026-11-04-twin-pearl-review-fixes.md`.
+- **Bản trước sửa:** HEAD `6e68958` (sim `e91a787`, lab `7ee98f0`). Số của nó được giữ ở cột "trước sửa" để so.
 
-### 8.0 Kết luận
+Chiêu chỉ chạy khi header trận có cờ `swordKey2: "twin-pearl"`; mặc định tắt, và trận mặc định giữ đúng từng byte như `1a78a82`. Bài đo so Song Long với ô 2 hôm nay (Nhất Tuyến Xuyên Vân, đường thẳng 14 × 1,2 m) theo §2 luật 4 và [`BALANCE.md`](../../BALANCE.md), rồi quét mức ngân sách làm chứng cứ cho anh. Canon và [`00-canon.md`](../00-canon.md) giữ nguyên; mọi số vẫn là số thử. Review và các sửa: §8.11.
 
-1. **Số thú khác nhau bị trúng: vượt xa đích.**
-   - Khi có 35–45 thú trên hai đường, Song Long trúng 36,4 con mỗi lần tung (p10–p90: 32–41), tức 90 % số thú đang sống. Đích là 12–20; hôm nay 2,8.
-   - Ở mức đông này không lần tung nào rơi vào 12–20. Đích chỉ đạt ở mức thưa: 15–24 thú trên hai đường, 53 % số lần tung.
-2. **Phủ đường, quạ và đòn đầu: đạt.**
-   - Phủ 100 % đường đi của cả hai cổng (hôm nay 3 % và 13 %).
-   - Trúng 96 % số quạ đang bay (hôm nay 2 %).
-   - Đòn đầu ở F0 hoặc F1 (0–17 ms; hôm nay 12 tick = 200 ms). Ngoại lệ 0,2 % số lần tung (§8.2), phần lớn khi trên sân chỉ còn Vương đang gầm.
-3. **Trái/phải: đạt ở trung vị, chưa đều.** Trung vị 57,5/42,5 lúc 35–45 thú; 64 % số lần tung nằm trong 40/60–60/40 (hôm nay 2 %, vì đường thẳng chỉ trúng một bên). Phần lớn độ lệch theo chính triều thú: lúc đỉnh, cổng A đông hơn (54/46).
-4. **Quá mạnh, mạnh hơn cả tuyệt kỹ.**
-   - Mọi bot Mới → Nhanh thắng 95–100 % (dải Cân bằng 75–90 %).
-   - Ô 2 chiếm 57–62 % sát thương cả trận; canon §7.3 cho mỗi chiêu vùng ≤ 20 %.
-   - Lúc đông, mỗi lần tung ra 13,2 W hiệu dụng và hạ 21 con. Một lần tuyệt kỹ hôm nay chỉ ra trung bình 4,1 W. Ô 2 lại tung 5–7 lần mỗi phút.
-   - Đây không phải "tuyệt kỹ thu nhỏ" mà là một tuyệt kỹ lặp lại mỗi 8 s.
-5. **Nhưng nó sửa đúng chỗ gãy của [`SKILL_REACH.md`](SKILL_REACH.md):**
-   - Áp lực P từ 67–75 % xuống 41–52 % (đích 15–35 %).
-   - Quãng Q từ 72–82 % xuống 54–64 %, vào dải 50–70 %.
-   - Đợt 2 (mở cổng thứ hai): thú lọt từ 10–18 % xuống 5–8 %; Trận Lực mất trong đợt từ 21–31 % xuống 4–9 %.
-   - CB3 (ô 1 ≤ 30 % sát thương gõ) lần đầu đạt.
-6. **Hai biến thể thử không đưa được về đích** (§8.6):
-   - "Hẹp" (mọi khối trúng hẹp một nửa) vẫn trúng 29,4 con lúc đông, đường chỉ còn phủ 68 %, thắng vẫn 85–100 %.
-   - "Ngân sách" (sàn giảm dần 40 % → 10 %) hạ còn 7,3 con mỗi lần tung, thắng 75–100 %, nhưng S tụt còn 9–45 % và ô 2 vẫn chiếm 43–52 % sát thương.
-   - Bài học: phủ trọn hai đường thì trúng 72–94 % số thú đang sống, kể cả khi mọi khối hẹp đi một nửa. Sức mạnh phải hãm bằng ngân sách mỗi lần tung, không bằng bề rộng (câu hỏi ở §8.8).
+### 8.0 Kết luận (sau sửa)
+
+1. **Số thú khác nhau bị trúng: đạt đích nhờ ngân sách.**
+   - Khi có 35–45 thú trên hai đường, Song Long trúng 17,2 con mỗi lần tung (p10–p90: 14–21); 80 % số lần tung nằm trong 12–20. Hôm nay: 2,8 con. Trước sửa: 36,4 con, 0 % trong đích.
+   - Ở 25–34 thú: 14,4 con, 78 % trong đích. Ở 15–24 thú: 10,9 con, 42 %.
+   - Không có trần số con. Ngân sách mỗi bên cạn trước khi rồng chạy hết đường.
+2. **Phủ đường, quạ và đòn đầu: đạt, với một cái giá.**
+   - Các khối trúng vẫn phủ trọn hai đường và hai góc trời (định nghĩa ở §8.1).
+   - Lúc đông, sát thương thật chỉ tới 15,4 m (tây) và 20,2 m (đông) tính từ Trận Tâm (trung vị). Cổng cách 23,3 m. Chỉ 26 % số thú ở xa hơn 12 m bị trúng (chưa có ngân sách: 74 %).
+   - Trúng 92 % số quạ đang bay (hôm nay 2 %).
+   - Đòn đầu ở F0 hoặc F1 (0–17 ms; hôm nay 200 ms). Trong lab, phím → khung hiện ≤ 17–31 ms.
+3. **Trái/phải: đạt.** Trung vị 50/50 lúc 35–45 thú; 92 % số lần tung nằm trong 40/60–60/40. Trước sửa: 57,5/42,5 và 64 %, vì đường A được lợi do thứ tự tính.
+4. **Vẫn mạnh, dù đã giảm hơn một nửa.**
+   - Lúc đông: 5,9 W hiệu dụng và 7,8 con hạ mỗi lần tung (trước sửa 13,2 W và 21,3 con). Một lần tuyệt kỹ hôm nay ra 4,1 W.
+   - Ô 2 chiếm 41–50 % sát thương cả trận (trước sửa 57–62 %; canon §7.3 ≤ 20 %).
+   - Mọi bot Mới → Nhanh thắng 95–100 % (dải Cân bằng 75–90 %); Trẻ em 5 %.
+5. **Vẫn sửa đúng chỗ gãy của [`SKILL_REACH.md`](SKILL_REACH.md):**
+   - Áp lực P từ 67–75 % xuống 49–60 % (đích 15–35 %).
+   - Quãng Q từ 72–82 % xuống 68–71 %, sát mép trên của dải 50–70 %.
+   - Đợt 2 (mở cổng thứ hai) với bot Chuẩn: thú lọt từ 14 % xuống 6,6 %, Trận Lực mất từ 30 % xuống 8,8 %.
+6. **Quét ngân sách** (§8.6): không mức nào đưa ô 2 về ≤ 20 % mà vẫn giữ được tầm và tỉ lệ thắng. Tỉ lệ thắng có một "vách" giữa 1,25 và 2,5 W mỗi bên. Câu hỏi cho anh ở §8.8.
 
 ### 8.1 Cách đo
 
-- **Bot** (ngoài Git, `games/immortality-cultivation/tmp/skill-reach/`), chính bot của [`SKILL_REACH.md`](SKILL_REACH.md) §3.1, thêm phần chọn ô 2:
-  - hồ sơ không hậu tố: ô 2 hôm nay;
-  - `@twin-pearl`: Song Long (cờ header);
-  - `@twin-pearl+narrow`, `@twin-pearl+budget`: hai biến thể số trong bộ nhớ (`key2-numbers.ts`, nạp trước sim).
-- **Ghi từng lần tung ô 2** (`key2-measure.ts`, chỉ đọc world và sự kiện): số thú lúc tung theo cổng, thú khác nhau bị trúng, đòn, hạ, sát thương hiệu dụng và tiềm năng, phần thừa, trái/phải, quạ, đòn đầu, phần đường được phủ, sát thương theo từng phần của chiêu.
-- **Kiểm bot không đổi sim:**
-  - Với cờ tắt, 36 file kiểu golden (9 hồ sơ × 4 seed, 1.693 mốc băm world và local) trùng từng byte với `golden-after` của bước dựng.
-  - 340 trận "hôm nay" trùng từng byte (kết quả, chỉ số, sổ sát thương) với lần đo SKILL_REACH ngày 03/11 (HEAD `c5267d0`). Vì vậy cột "hôm nay" dưới đây chính là số của SKILL_REACH §3.
-- **Ma trận:** như SKILL_REACH §3: 17 hồ sơ × 20 seed, Cân bằng, bộ điều nhịp bật, Đứng yên. Bốn biến thể là 1.360 trận (2,5 phút trên 6 lõi).
+- **Bot** (ngoài Git, `games/immortality-cultivation/tmp/skill-reach/`): chính bot của [`SKILL_REACH.md`](SKILL_REACH.md) §3.1, thêm phần chọn ô 2.
+  - Hồ sơ không hậu tố: ô 2 hôm nay.
+  - `@twin-pearl`: Song Long (cờ header), với ngân sách mặc định 2,5 W mỗi bên.
+  - `@twin-pearl+pool<N>`: chỉ đổi ngân sách mỗi bên thành N (W × 100) trong bộ nhớ (`key2-numbers.ts`, nạp trước sim). `+pool100000s100000` là "không giới hạn".
+- **Ghi từng lần tung ô 2** (`key2-measure.ts`, chỉ đọc world và sự kiện): số thú lúc tung theo cổng, thú khác nhau bị trúng, đòn, hạ, sát thương hiệu dụng và tiềm năng, phần thừa, trái/phải, quạ, đòn đầu, phần đường được phủ, đòn xa nhất trên đất mỗi bên, phần thú xa bị trúng, sát thương theo từng phần của chiêu.
+- **Kiểm cờ tắt:**
+  - 9 hồ sơ × 4 seed với `BOT_HASHES=1`: 36/36 file trùng `golden-before` của bước dựng (chính là `1a78a82`) ở mọi trường bot cũ có ghi, gồm 1 693 mốc băm world và local.
+  - 340 trận "hôm nay" của ma trận mới trùng lần đo sáng 04/11, nên cột "hôm nay" vẫn là số của SKILL_REACH §3.
+  - Có thêm test ghim băm trong `tests/sim/twin-pearl.test.ts`.
+- **Ma trận:** như SKILL_REACH §3: 17 hồ sơ × 20 seed, Cân bằng, bộ điều nhịp bật, Đứng yên. Chín biến thể (hôm nay, Song Long, không giới hạn, sáu mức quét) là 3 060 trận, 5 phút trên 6 lõi.
 - **Hai cách lấy lần tung:**
-  - **Trận thật:** mọi lần bot tung ô 2. Với Song Long, sân thưa hẳn nên trong cả ma trận chỉ có 6 lần tung lúc 35–45 thú trên hai đường.
-  - **Quét đỉnh** (`key2-dense.ts`): bot chơi trận cờ tắt; ở lúc đông nhất trên hai đường của mỗi đợt (≥ 15 con), dựng lại world từ replay, tung ô 2 đúng tick đó trong bản sao, rồi chạy tiếp 110 tick không lệnh nào. Mọi biến thể dùng cùng các world đó: 1.653–1.665 lần tung mỗi biến thể, trong đó 92 lần lúc 35–45 thú (78 lần ở đỉnh đợt 6). Đây là nguồn số chính cho §2 luật 4.
+  - **Trận thật:** mọi lần bot tung ô 2. Với Song Long sân thưa hơn, nên cả ma trận chỉ có 14 lần tung lúc 35–45 thú.
+  - **Quét đỉnh** (`key2-dense.ts`): bot chơi trận cờ tắt. Ở lúc đông nhất trên hai đường của mỗi đợt (≥ 15 con), dựng lại world từ replay, tung ô 2 đúng tick đó trong bản sao, rồi chạy tiếp 110 tick không lệnh nào. Mọi biến thể dùng cùng các world đó: 1 665 lần tung mỗi biến thể, 92 lần lúc 35–45 thú. Đây là nguồn số chính cho §2 luật 4.
+  - Sau review, bản sao bỏ các đòn đường thẳng ô 2 còn chờ của trận gốc trước khi tung, để chúng không bị tính cho lần tung đang đo (review thấy 5 lần như vậy).
 - **Định nghĩa:**
-  - **Thú khác nhau bị trúng:** số con nhận ít nhất một đòn hiệu dụng của lần tung, kể cả con sinh ra sau khi tung (rồng còn ở cổng tới F96).
-  - **Phủ đường:** phần đường đi của mỗi cổng (từ cổng tới mép Trận Tâm, mẫu 0,25 m) nằm trong một khối trúng trên đất của lần tung, ở bất kỳ tick nào.
-  - **Trái/phải:** sát thương hiệu dụng lên thú cổng A (và quạ ở x < 0) so với cổng B; chỉ tính lần tung có thú ở cả hai đường.
+  - **Thú khác nhau bị trúng:** số con nhận ít nhất một đòn hiệu dụng của lần tung, kể cả con sinh ra sau khi tung (vệt rồng còn trúng tới F96).
+  - **Phủ đường (hình học):** phần đường đi của mỗi cổng (từ cổng tới mép Trận Tâm, mẫu 0,25 m) nằm trong một khối trúng trên đất của lần tung, ở bất kỳ tick nào. Phép đo tính mọi khối, kể cả hộp giữ F0 và phần nửa của hoa sen. Riêng thân rồng chỉ phủ 66,7 % đường: đầu rồng xuất phát ở điểm gặp, nên không chạm 8,6 m cuối từ khúc quanh vào Trận Tâm. Hộp giữ và hoa sen phủ đoạn đó.
+  - **Đòn xa nhất (mới):** khoảng cách tới Trận Tâm của đòn hiệu dụng xa nhất lên thú đất mỗi bên, trung vị qua các lần tung. Hai cổng cách 23,3 m.
+  - **Thú xa bị trúng (mới):** trong số thú đất ở xa hơn 12 m lúc tung, phần nhận ít nhất một đòn.
+  - **Trái/phải:** sát thương hiệu dụng lên bên tây (thú cổng A, quạ ở x < 0) so với bên đông; chỉ tính lần tung có thú ở cả hai đường.
   - **Trúng quạ:** phần quạ sống lúc tung bị trúng.
   - **Đòn đầu:** số tick từ F0 tới đòn hiệu dụng đầu tiên (1 tick = 16,7 ms).
-  - **Thừa:** phần dư của các đòn kết liễu (đòn tiềm năng P × M_q × bucket × hệ số giảm dần, chưa tính trần cụm và ×1,5 phá thế, trừ máu còn), chia cho tổng sát thương tiềm năng của lần tung.
+  - **Thừa:** phần dư của các đòn kết liễu (đòn tiềm năng P × M_q × bucket × hệ số giảm dần, chưa tính trần cụm, ngân sách và ×1,5 phá thế, trừ máu còn), chia cho tổng sát thương tiềm năng của lần tung.
+  - **Lần tung mỗi phút:** tính trên phút đánh (không tính giờ nghỉ và chuẩn bị). Tính trên cả trận thì Song Long 4,5 lần mỗi phút, hôm nay 3,9.
 
 ### 8.2 Tầm mỗi lần tung (§2 luật 4)
 
-Quét đỉnh, lúc 35–45 thú trên hai đường; 92 lần tung mỗi cột (91 ở cột ngân sách).
+Quét đỉnh, lúc 35–45 thú trên hai đường; 92 lần tung mỗi cột.
 
-| Chỉ số | Đích | Hôm nay (đường thẳng) | Song Long | Thử: hẹp | Thử: ngân sách |
+| Chỉ số | Đích | Hôm nay (đường thẳng) | Trước sửa | Sau sửa, không giới hạn | **Song Long (sau sửa)** |
 |---|---|---|---|---|---|
-| Thú trên hai đường lúc tung | ~40 | 38,2 | 38,2 | 38,2 | 38,3 |
-| Thú khác nhau bị trúng (p10–p90) | 12–20 | 2,8 (1–5) | **36,4** (32–41) | 29,4 (19–38) | 38,2 (35–43) |
-| Lần tung trong 12–20 | | 0 % | 0 % | 14 % | 0 % |
-| Phần thú đang sống bị trúng | | 7 % | 90 % | 72 % | 94 % |
-| Phủ đường cổng A / B | | 3 % / 13 % | 100 % / 100 % | 68 % / 68 % | 100 % / 100 % |
-| Trái/phải, trung vị (p10–p90 phần trái) | 40/60–60/40 | một bên (0 hoặc 100 %) | 57,5/42,5 (46–65 %) | 59/41 (45–67 %) | 54/46 (43–67 %) |
-| Lần tung trong 40/60–60/40 | | 2 % | 64 % | 53 % | 66 % |
-| Trúng quạ | | 2 % | 96 % | 81 % | 96 % |
-| Đòn đầu | ≤ 50 ms | 12 tick = 200 ms | F0 (89 %) hoặc F1: 0–17 ms | F0–F1 | F0–F1 |
-| Hạ mỗi lần tung | | 2,4 | 21,3 | 17,1 | 7,3 |
-| Sát thương hiệu dụng mỗi lần | | 1,1 W | 13,2 W | 10,5 W | 6,3 W |
-| Thừa | | 71 % | 22 % | 24 % | 15 % |
+| Thú trên hai đường lúc tung | ~40 | 38,2 | 38,2 | 38,2 | 38,2 |
+| Thú khác nhau bị trúng (p10–p90) | 12–20 | 2,8 (1–5) | 36,4 (32–41) | 31,5 (28–36) | **17,2 (14–21)** |
+| Lần tung trong 12–20 | | 0 % | 0 % | 0 % | **80 %** |
+| Phần thú đang sống bị trúng | | 7 % | 90 % | 77 % | 43 % |
+| Phủ đường cổng A / B (hình học) | | 3 % / 13 % | 100 % / 100 % | 100 % / 100 % | 100 % / 100 % |
+| Đòn xa nhất trên đất, tây / đông | | 5,4 / 2 m | | 22,9 / 22,0 m | 15,4 / 20,2 m |
+| Thú xa hơn 12 m bị trúng | | 0 % | | 74 % | 26 % |
+| Trái/phải, trung vị (p10–p90 phần trái) | 40/60–60/40 | một bên (0 hoặc 100 %) | 57,5/42,5 (46–65 %) | 58/42 (47–66 %) | **50/50 (43–57 %)** |
+| Lần tung trong 40/60–60/40 | | 2 % | 64 % | 55 % | **92 %** |
+| Trúng quạ | | 2 % | 96 % | 96 % | 92 % |
+| Đòn đầu | ≤ 50 ms | 12 tick = 200 ms | F0 (89 %) hoặc F1 | F0 (82 lần) hoặc F1 (10 lần) | F0 (82 lần) hoặc F1 (10 lần): 0–17 ms |
+| Hạ mỗi lần tung | | 2,4 | 21,3 | 15,0 | 7,8 |
+| Sát thương hiệu dụng mỗi lần | | 1,1 W | 13,2 W | 11,8 W | 5,9 W |
+| Thừa | | 71 % | 22 % | 17 % | 27 % |
 
 **Theo mật độ** (quét đỉnh; số thú khác nhau bị trúng, trong ngoặc là phần lần tung rơi vào 12–20):
 
-| Thú trên hai đường | Số lần tung | Hôm nay | Song Long | Hẹp | Ngân sách |
-|---|---|---|---|---|---|
-| 15–24 | 1.168 | 2,1 (0 %) | 19,7 (53 %) | 15,1 (82 %) | 20,4 (44 %) |
-| 25–34 | 402 | 2,6 (0 %) | 26,7 (4 %) | 20,0 (53 %) | 27,7 (2 %) |
-| 35–45 | 92 | 2,8 (0 %) | 36,4 (0 %) | 29,4 (14 %) | 38,2 (0 %) |
+| Thú trên hai đường | Số lần tung | Hôm nay | Trước sửa | Song Long (sau sửa) |
+|---|---|---|---|---|
+| 15–24 | 1 168 | 2,1 (0 %) | 19,7 (53 %) | 10,9 (42 %) |
+| 25–34 | 402 | 2,6 (0 %) | 26,7 (4 %) | 14,4 (78 %) |
+| 35–45 | 92 | 2,8 (0 %) | 36,4 (0 %) | 17,2 (80 %) |
 
-- **Trận thật khớp quét đỉnh:** Song Long lúc 35–45 thú (6 lần) trúng 36,0 con, 90 % số đang sống; lúc 25–34 thú (170 lần) 27,6 con. Tính mọi lần tung của cả trận (phần lớn lúc thưa): hôm nay 1,9 con mỗi lần, Song Long 10,0, hẹp 8,1, ngân sách 10,5.
-- **Đòn đầu trong trận thật:** Song Long F0 ở 21 %, F1 ở 78 % số lần tung. 36/14.765 lần (0,2 %) tới muộn, đã soi lại từng loại trên replay:
-  - 32 lần trên sân chỉ còn một con; 31 lần trong đó là Vương đang gầm (miễn sát thương) ngay trong vùng giữ, nên đòn hiệu dụng đầu là hoa sen ở F51;
-  - 1 lần chỉ còn quạ: không có điểm chạm trên đất, đòn đầu là đuôi quét trời ở F31;
-  - 3 lần con gần Trận Tâm nhất là một Thạch Thử đứng một mình còn 1 máu: trần cụm 60 % làm tròn xuống 0, nên điểm chạm F1 ra 0 máu và đòn hiệu dụng đầu tới ở F16–F17.
-- **Thú bầy còn 1 máu đứng một mình không chết vì đòn vùng** (luật có từ trước, không riêng Song Long): trần cụm là 60 % máu cả cụm làm tròn xuống, nên với 1 máu nó là 0. Chỉ đòn đơn mục tiêu (ô 1, Phi Kiếm) kết liễu được. Đây là việc kỹ thuật của luật sát thương, không cần anh quyết.
-- **Lệch trái nhỏ do thứ tự tính:** mỗi tick, đường A được tính trước đường B, nên thú cổng A lấy các chỗ đầu của hệ số giảm dần.
-  - Phần trái của sát thương trừ đi phần trái của số thú: +1 điểm trên mọi mật độ, +4 điểm lúc 35–45 thú, +5 điểm với biến thể ngân sách (giảm dần dốc hơn).
-  - Đây là việc kỹ thuật, không cần anh quyết: xen kẽ hai đường theo khoảng cách tới Trận Tâm.
+- **Trận thật khớp quét đỉnh:**
+  - Lúc 35–45 thú (14 lần tung): 17,9 con, 44 % số đang sống.
+  - Lúc 25–34 thú (282 lần): 15,3 con.
+  - Tính mọi lần tung của cả trận (phần lớn lúc thưa): hôm nay 1,9 con mỗi lần, Song Long 6,7.
+- **Đòn đầu trong trận thật:**
+  - 15 374 lần tung: F0 ở 28 %, F1 ở 72 %.
+  - 3 lần tới muộn (F31, F51, F51) và 1 lần không trúng (0,03 %).
+  - Trước sửa có 36 lần tới muộn, phần lớn vì chiêu giải khi trên sân chỉ còn Vương đang gầm. Nay chiêu không giải trong trường hợp đó.
+- **Trái/phải không còn lệch do thứ tự tính.** Mỗi bên có hệ số giảm dần và ngân sách riêng, và mỗi tick đánh theo một thứ tự chung cho cả hai đường. Có test: đám thú đối xứng gương nhận đòn đối xứng, sinh bên nào trước cũng vậy.
+- **Thú bầy còn 1 máu đứng một mình không chết vì đòn vùng.** Đây là luật có từ trước trong `combat.ts`, không riêng Song Long: trần cụm là 60 % máu cả cụm làm tròn xuống, nên với 1 máu nó là 0. Chưa sửa, vì sửa sẽ đổi trận mặc định; sẽ làm riêng, kèm golden.
 
 ### 8.3 Sát thương theo phần của chiêu
 
 Quét đỉnh, 35–45 thú. Mỗi ô: phần sát thương · số đòn mỗi lần tung · số con hạ mỗi lần tung.
 
-| Phần | Khung | Song Long | Hẹp | Ngân sách |
+| Phần | Khung | Trước sửa | Sau sửa, không giới hạn | Song Long (sau sửa) |
 |---|---|---|---|---|
-| Đòn giữ 8 × 8 m trước Trận Tâm | F0 | 8,7 % · 6,1 · 2,1 | 6,7 % · 3,6 · 1,3 | 14,5 % · 6,3 · 1,8 |
-| Điểm chạm trên hai đường | F1–F2 | 8,5 % · 6,5 · 0,6 | 11,3 % · 6,5 · 1,3 | 8,1 % · 6,5 · 0,4 |
-| Thân và vệt trên đất | F3–F96 | 52,1 % · 20,3 · 12,4 | 54,9 % · 16,3 · 10,8 | 42,3 % · 21,7 · 1,2 |
-| Đuôi quét trời | F30–F50 | 6,3 % · 1,7 · 0,1 | 6,7 % · 1,5 · 0,1 | 3,4 % · 1,7 · 0 |
-| Hoa sen, phần đầy (hai cánh dài và vùng giữ) | F51–F71 | 19,4 % · 8,4 · 4,0 | 20,5 % · 7,1 · 3,7 | 26,2 % · 12,7 · 3,5 |
-| Hoa sen, phần nửa (ngoài cánh) | F51–F71 | 5,0 % · 4,3 · 2,0 | không còn (r 4,5 m nằm trọn trong cánh và vùng giữ) | 5,4 % · 5,2 · 0,4 |
+| Đòn giữ 8 × 8 m trước Trận Tâm | F0 | 8,7 % · 6,1 · 2,1 | 10,8 % · 5,8 · 2,8 | 10,1 % · 2,7 · 1,2 |
+| Điểm chạm trên hai đường | F1–F2 | 8,5 % · 6,5 · 0,6 | 10,9 % · 6,3 · 1,4 | 3,5 % · 1,2 · 0,4 |
+| Thân và vệt trên đất | F3–F96 | 52,1 % · 20,3 · 12,4 | 49,2 % · 16,6 · 8,4 | 41,0 % · 7,2 · 3,3 |
+| Đuôi quét trời | F30–F50 | 6,3 % · 1,7 · 0,1 | 7,0 % · 1,7 · 0,1 | 12,0 % · 1,7 · 0,1 |
+| Hoa sen, phần đầy (hai cánh dài và vùng giữ) | F51–F71 | 19,4 % · 8,4 · 4,0 | 19,9 % · 5,5 · 2,2 | 26,0 % · 5,0 · 2,3 |
+| Hoa sen, phần nửa (ngoài cánh) | F51–F71 | 5,0 % · 4,3 · 2,0 | 2,2 % · 1,5 · 0,2 | 7,4 % · 2,4 · 0,4 |
 
-- **Chia thật so với thiết kế:** thiết kế chia chạm 15 %, hành lang 45 %, hoa sen 40 %. Đo được 17 / 58 / 24 %: hoa sen thiếu, vì khi nó nở ở F51 thân rồng đã hạ 12 con.
-- **Thừa:** Song Long 22 %, so với 71 % của đường thẳng hôm nay. Đòn 2,5 W của đường thẳng rơi vào Thạch Thử 30 máu.
+- **Chia thật so với thiết kế:** thiết kế chia chạm 15 %, hành lang 45 %, hoa sen 40 %. Sau sửa đo được 14 / 53 / 33 % (trước sửa 17 / 58 / 24 %). Ngân sách giữ riêng phần của hoa sen, nên hoa sen không còn bị thân rồng "ăn" trước.
+- **Đòn giữ F0 lấy gần hết phần "chạm"** của mỗi bên, vì nó đánh trước và vào đúng chỗ nguy nhất. Lúc đông, hai sợi sáng F1–F2 vì vậy gần như không còn sát thương. Đây là hệ quả của thứ tự tới trước; phần nhìn vẫn vẽ chúng.
+- **Thừa:** Song Long 27 %, so với 71 % của đường thẳng hôm nay. Đòn 2,5 W của đường thẳng rơi vào Thạch Thử 30 máu.
 
 ### 8.4 Các chỉ số của BALANCE.md
 
@@ -395,167 +408,193 @@ Quét đỉnh, 35–45 thú. Mỗi ô: phần sát thương · số đòn mỗi 
 
 Dải đích Cân bằng: Thắng 75–90 % · S trung vị 35–65 % · P 15–35 % · I ≤ 10 % · O ≤ 8 % · N 0,3–1 · Q trung vị 50–70 %.
 
-**Hôm nay · Song Long** (mỗi ô: số hôm nay · số Song Long):
+**Hôm nay · Song Long sau sửa** (mỗi ô: số hôm nay · số Song Long):
 
 | Hồ sơ | Thắng | S | P | I | O | N | Q | Gõ | Ô 1/gõ | Ô 2/cả trận | Đánh nền | Phút | Thua ở đợt |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 30 WPM 90 % | 0 · 100 % | 0 · 38 % | 74 · 50 % | 0,6 · 1,3 % | 0 · 0 % | 0 · 0,25 | 79 · 61 % | 80 · 87 % | 39 · 16 % | 23 · 59 % | 10,5 · 6,3 % | 8,0 · 12,2 | 4: 3 · 5: 16 · 6: 1 / — |
-| 30 WPM 97 % | 5 · 100 % | 0 · 47 % | 71 · 47 % | 0,7 · 1,5 % | 0 · 0 % | 0,05 · 0,05 | 77 · 59 % | 81 · 88 % | 42 · 18 % | 21 · 59 % | 8,7 · 5,1 % | 9,1 · 11,3 | 4: 1 · 5: 7 · 6: 11 / — |
-| 45 WPM 90 % | 0 · 100 % | 0 · 36 % | 71 · 51 % | 0,3 · 1,9 % | 0 · 0 % | 0 · 0,15 | 76 · 60 % | 82 · 88 % | 45 · 20 % | 20 · 58 % | 8,0 · 5,2 % | 7,7 · 10,5 | 5: 17 · 6: 3 / — |
-| 45 WPM 97 % | 0 · 100 % | 0 · 50 % | 69 · 46 % | 0,4 · 2,3 % | 0 · 0 % | 0 · 0 | 75 · 59 % | 83 · 89 % | 48 · 20 % | 19 · 60 % | 6,6 · 4,0 % | 8,2 · 9,8 | 5: 7 · 6: 13 / — |
-| 60 WPM 90 % | 0 · 100 % | 0 · 43 % | 72 · 51 % | 0,2 · 2,5 % | 0 · 0 % | 0 · 0,10 | 76 · 60 % | 84 · 89 % | 48 · 23 % | 20 · 57 % | 6,2 · 4,4 % | 7,1 · 9,1 | 5: 14 · 6: 6 / — |
-| 60 WPM 97 % | 0 · 100 % | 0 · 56 % | 69 · 44 % | 0,6 · 3,3 % | 0 · 0 % | 0 · 0 | 73 · 59 % | 85 · 90 % | 51 · 23 % | 18 · 59 % | 5,2 · 3,4 % | 7,8 · 8,7 | 5: 7 · 6: 13 / — |
-| 80 WPM 90 % | 0 · 100 % | 0 · 39 % | 70 · 50 % | 0,6 · 2,9 % | 0 · 0 % | 0 · 0,15 | 74 · 59 % | 84 · 90 % | 50 · 24 % | 19 · 57 % | 5,6 · 3,9 % | 7,5 · 8,9 | 5: 9 · 6: 11 / — |
-| 80 WPM 97 % | 40 · 100 % | 0 · 57 % | 67 · 42 % | 1,2 · 2,8 % | 0 · 0 % | 0,40 · 0 | 72 · 56 % | 85 · 91 % | 52 · 23 % | 18 · 59 % | 5,1 · 3,0 % | 8,4 · 8,6 | 5: 3 · 6: 9 / — |
-| Trẻ em (15 WPM 88 %) | 0 · 5 % | 0 · 0 % | 83 · 63 % | 0,2 · 0,7 % | 0 · 0 % | 0 · 0 | 94 · 70 % | 72 · 81 % | 22 · 8 % | 26 · 62 % | 20,0 · 10,6 % | 5,4 · 9,7 | 3: 15 · 4: 5 / 4: 1 · 5: 10 · 6: 8 |
-| Mới (25 WPM 92 %) | 0 · 95 % | 0 · 36 % | 74 · 52 % | 0,4 · 1,1 % | 0 · 0 % | 0 · 0,30 | 82 · 64 % | 78 · 86 % | 37 · 14 % | 22 · 60 % | 12,1 · 7,3 % | 8,5 · 13,1 | 4: 5 · 5: 12 · 6: 3 / 6: 1 |
-| Chậm chắc (25 WPM 99 %) | 0 · 100 % | 0 · 48 % | 71 · 47 % | 0,6 · 1,6 % | 0 · 0 % | 0 · 0,05 | 78 · 59 % | 80 · 88 % | 39 · 16 % | 22 · 61 % | 9,6 · 5,6 % | 9,9 · 12,2 | 5: 9 · 6: 11 / — |
-| Chuẩn (35 WPM 95 %) | 0 · 100 % | 0 · 42 % | 72 · 49 % | 0,3 · 1,8 % | 0 · 0 % | 0 · 0,10 | 76 · 61 % | 81 · 88 % | 44 · 19 % | 20 · 59 % | 8,4 · 5,0 % | 8,5 · 10,6 | 5: 10 · 6: 10 / — |
-| Khá (50 WPM 96 %) | 5 · 100 % | 0 · 58 % | 70 · 45 % | 0,6 · 3,2 % | 0 · 0 % | 0,05 · 0 | 75 · 55 % | 83 · 90 % | 48 · 20 % | 20 · 61 % | 6,3 · 3,8 % | 8,6 · 9,1 | 5: 2 · 6: 17 / — |
-| Ẩu (50 WPM 85 %) | 0 · 100 % | 0 · 35 % | 73 · 52 % | 0,3 · 1,9 % | 0,1 · 0 % | 0 · 0,25 | 77 · 61 % | 82 · 88 % | 45 · 20 % | 21 · 58 % | 8,2 · 5,3 % | 7,5 · 10,4 | 4: 4 · 5: 10 · 6: 6 / — |
-| Nhanh (70 WPM 97 %) | 10 · 100 % | 0 · 64 % | 68 · 41 % | 1,3 · 3,9 % | 0 · 0 % | 0,10 · 0 | 74 · 54 % | 85 · 91 % | 51 · 21 % | 19 · 62 % | 5,3 · 3,1 % | 8,4 · 8,5 | 5: 2 · 6: 16 / — |
-| Không gõ | 0 · 0 % | 0 · 0 % | 82 · 82 % | 0 · 0 % | 0 · 0 % | 0 · 0 | 100 · 100 % | 0 · 0 % | — | 0 · 0 % | 74,8 · 74,8 % | 1,0 · 1,0 | 1: 20 / 1: 20 |
-| Chỉ gõ (35 WPM 95 %, không mua) | 0 · 100 % | 0 · 38 % | 75 · 50 % | 0,5 · 1,8 % | 0 · 0 % | 0 · 0,35 | 78 · 61 % | 90 · 95 % | 42 · 17 % | 23 · 65 % | 9,5 · 5,2 % | 7,8 · 10,9 | 4: 2 · 5: 13 · 6: 5 / — |
+| 30 WPM 90 % | 0 · 100 % | 0 · 42 % | 74 · 55 % | 0,6 · 1,3 % | 0 · 0 % | 0 · 0,1 | 79 · 70 % | 80 · 84 % | 39 · 24 % | 23 · 47 % | 10,5 · 8 % | 8 · 12,7 | 4: 3 · 5: 16 · 6: 1 / — |
+| 30 WPM 97 % | 5 · 100 % | 0 · 57 % | 71 · 50 % | 0,7 · 1,5 % | 0 · 0 % | 0,05 · 0 | 77 · 69 % | 81 · 85 % | 42 · 25 % | 21 · 48 % | 8,7 · 6,4 % | 9,1 · 11,9 | 4: 1 · 5: 7 · 6: 11 / — |
+| 45 WPM 90 % | 0 · 100 % | 0 · 37 % | 71 · 56 % | 0,3 · 1,5 % | 0 · 0 % | 0 · 0,25 | 76 · 70 % | 82 · 85 % | 45 · 29 % | 20 · 45 % | 8 · 6,3 % | 7,7 · 10,9 | 5: 17 · 6: 3 / — |
+| 45 WPM 97 % | 0 · 100 % | 0 · 47 % | 69 · 53 % | 0,4 · 1,6 % | 0 · 0 % | 0 · 0,2 | 75 · 68 % | 83 · 87 % | 48 · 29 % | 19 · 45 % | 6,6 · 5,2 % | 8,2 · 10,2 | 5: 7 · 6: 13 / — |
+| 60 WPM 90 % | 0 · 100 % | 0 · 36 % | 72 · 60 % | 0,2 · 1,6 % | 0 · 0 % | 0 · 0,35 | 76 · 70 % | 84 · 86 % | 48 · 33 % | 20 · 41 % | 6,2 · 5,7 % | 7,1 · 9,6 | 5: 14 · 6: 6 / — |
+| 60 WPM 97 % | 0 · 100 % | 0 · 49 % | 69 · 54 % | 0,6 · 1,6 % | 0 · 0 % | 0 · 0 | 73 · 68 % | 85 · 87 % | 51 · 33 % | 18 · 43 % | 5,2 · 4,4 % | 7,8 · 9,3 | 5: 7 · 6: 13 / — |
+| 80 WPM 90 % | 0 · 100 % | 0 · 39 % | 70 · 58 % | 0,6 · 1,5 % | 0 · 0 % | 0 · 0,1 | 74 · 70 % | 84 · 87 % | 51 · 34 % | 19 · 41 % | 5,6 · 5,3 % | 7,5 · 9,4 | 5: 9 · 6: 11 / — |
+| 80 WPM 97 % | 40 · 100 % | 0 · 52 % | 67 · 51 % | 1,2 · 2,1 % | 0 · 0 % | 0,4 · 0 | 72 · 68 % | 85 · 88 % | 52 · 35 % | 18 · 42 % | 5,1 · 3,9 % | 8,4 · 9,1 | 5: 3 · 6: 9 / — |
+| Trẻ em (15 WPM 88 %) | 0 · 5 % | 0 · 0 % | 83 · 71 % | 0,2 · 0,3 % | 0 · 0 % | 0 · 0,05 | 95 · 81 % | 72 · 76 % | 22 · 13 % | 26 · 48 % | 20 · 15 % | 5,4 · 10,3 | 3: 15 · 4: 5 / 4: 3 · 5: 6 · 6: 10 |
+| Mới (25 WPM 92 %) | 0 · 95 % | 0 · 46 % | 75 · 54 % | 0,4 · 1 % | 0 · 0 % | 0 · 0,1 | 82 · 71 % | 78 · 82 % | 37 · 21 % | 22 · 48 % | 12,1 · 9,2 % | 8,5 · 13,7 | 4: 5 · 5: 12 · 6: 3 / 6: 1 |
+| Chậm chắc (25 WPM 99 %) | 0 · 100 % | 0 · 64 % | 71 · 49 % | 0,6 · 1,2 % | 0 · 0 % | 0 · 0 | 78 · 69 % | 80 · 85 % | 39 · 22 % | 22 · 49 % | 9,6 · 6,9 % | 9,9 · 12,6 | 5: 9 · 6: 11 / — |
+| Chuẩn (35 WPM 95 %) | 0 · 100 % | 0 · 45 % | 72 · 55 % | 0,3 · 1,2 % | 0 · 0 % | 0 · 0,05 | 77 · 70 % | 81 · 85 % | 44 · 27 % | 20 · 46 % | 8,4 · 6,4 % | 8,5 · 11 | 5: 10 · 6: 10 / — |
+| Khá (50 WPM 96 %) | 5 · 100 % | 0 · 54 % | 70 · 53 % | 0,6 · 2 % | 0 · 0 % | 0,05 · 0 | 75 · 68 % | 83 · 87 % | 48 · 28 % | 20 · 46 % | 6,3 · 5 % | 8,6 · 9,6 | 5: 2 · 6: 17 / — |
+| Ẩu (50 WPM 85 %) | 0 · 100 % | 0 · 28 % | 73 · 60 % | 0,3 · 1,3 % | 0 · 0 % | 0 · 0,7 | 77 · 71 % | 82 · 85 % | 45 · 30 % | 21 · 43 % | 8,2 · 6,9 % | 7,5 · 10,8 | 4: 4 · 5: 10 · 6: 6 / — |
+| Nhanh (70 WPM 97 %) | 10 · 100 % | 0 · 60 % | 68 · 51 % | 1,3 · 2,5 % | 0 · 0 % | 0,1 · 0 | 74 · 68 % | 85 · 88 % | 51 · 30 % | 19 · 45 % | 5,3 · 4,3 % | 8,4 · 9 | 5: 2 · 6: 16 / — |
+| Không gõ | 0 · 0 % | 0 · 0 % | 82 · 82 % | 0 · 0 % | 0 · 0 % | 0 · 0 | 100 · 100 % | 0 · 0 % | — | 0 · 0 % | 74,8 · 74,8 % | 1 · 1 | 1: 20 / 1: 20 |
+| Chỉ gõ (35 WPM 95 %, không mua) | 0 · 100 % | 0 · 45 % | 75 · 57 % | 0,5 · 1,5 % | 0 · 0 % | 0 · 0,1 | 79 · 70 % | 91 · 93 % | 42 · 26 % | 23 · 50 % | 9,5 · 6,9 % | 7,8 · 11,1 | 4: 2 · 5: 13 · 6: 5 / — |
 
-**Thêm cho bot Chuẩn** (hôm nay → Song Long):
-- Đợt 2 (mở cổng thứ hai): thú lọt 14 % → 6,7 %; Trận Lực mất trong đợt 30 % → 6,9 %.
-- Ô 2: 5,0 → 5,6 lần mỗi phút đánh; 8,5 → 29,1 W mỗi phút (canon ước ~18); 1,9 → 9,8 con trúng và 1,6 → 5,7 con hạ mỗi lần tung.
-- Phần sát thương cả trận của các chiêu vùng khác: ô 4 15,1 % → 6,9 %, tuyệt kỹ 10,7 % → 5,6 %. Song Long lấy chỗ của cả hai.
-- Sức ra đòn tổng: 43,0 → 49,2 W mỗi phút đánh (D_ref thử 75).
-- Thời gian sống trung bình của một thú (B4): 12,5 s → 8,4 s.
-
-**Hai biến thể thử: hẹp · ngân sách** (mỗi ô: số hẹp · số ngân sách; định nghĩa ở §8.6):
-
-| Hồ sơ | Thắng | S | P | I | O | N | Q | Gõ | Ô 1/gõ | Ô 2/cả trận | Đánh nền | Phút | Thua ở đợt |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 30 WPM 90 % | 95 · 80 % | 28 · 22 % | 57 · 57 % | 1,4 · 1,0 % | 0 · 0 % | 0,55 · 0,55 | 66 · 69 % | 85 · 84 % | 23 · 23 % | 49 · 49 % | 8,2 · 7,7 % | 12,7 · 12,3 | 6: 1 / 5: 1 · 6: 3 |
-| 30 WPM 97 % | 100 · 100 % | 40 · 34 % | 52 · 54 % | 1,7 · 1,0 % | 0 · 0 % | 0,15 · 0,30 | 64 · 67 % | 87 · 86 % | 24 · 24 % | 50 · 50 % | 6,4 · 6,3 % | 11,8 · 11,8 | — / — |
-| 45 WPM 90 % | 100 · 90 % | 26 · 13 % | 56 · 59 % | 1,3 · 1,2 % | 0 · 0 % | 0,65 · 0,65 | 65 · 68 % | 86 · 86 % | 27 · 28 % | 48 · 46 % | 6,5 · 6,2 % | 10,7 · 10,6 | — / 6: 2 |
-| 45 WPM 97 % | 100 · 100 % | 38 · 38 % | 53 · 54 % | 1,9 · 2,3 % | 0 · 0 % | 0,15 · 0,25 | 63 · 67 % | 88 · 87 % | 27 · 29 % | 49 · 46 % | 5,1 · 5,2 % | 10,1 · 10,0 | — / — |
-| 60 WPM 90 % | 100 · 95 % | 37 · 31 % | 59 · 60 % | 1,9 · 1,7 % | 0 · 0 % | 0,10 · 0,30 | 65 · 68 % | 88 · 86 % | 30 · 31 % | 47 · 44 % | 5,4 · 5,5 % | 9,4 · 9,4 | — / 6: 1 |
-| 60 WPM 97 % | 100 · 100 % | 48 · 43 % | 51 · 53 % | 2,2 · 2,2 % | 0 · 0 % | 0,05 · 0,10 | 61 · 66 % | 89 · 88 % | 30 · 32 % | 49 · 45 % | 4,2 · 4,3 % | 9,0 · 9,0 | — / — |
-| 80 WPM 90 % | 100 · 100 % | 45 · 30 % | 55 · 58 % | 2,4 · 1,7 % | 0 · 0 % | 0 · 0,55 | 64 · 68 % | 88 · 87 % | 30 · 32 % | 47 · 43 % | 5,1 · 5,1 % | 9,2 · 9,2 | — / — |
-| 80 WPM 97 % | 100 · 100 % | 44 · 45 % | 50 · 50 % | 2,2 · 2,8 % | 0 · 0 % | 0 · 0,05 | 60 · 66 % | 90 · 88 % | 30 · 33 % | 49 · 45 % | 3,8 · 3,9 % | 8,9 · 8,8 | — / — |
-| Trẻ em (15 WPM 88 %) | 5 · 0 % | 0 · 0 % | 72 · 72 % | 0,5 · 0,4 % | 0 · 0 % | 0,05 · 0 | 76 · 80 % | 78 · 77 % | 13 · 13 % | 50 · 50 % | 13,6 · 13,9 % | 10,1 · 8,1 | 4: 2 · 5: 6 · 6: 11 / 4: 9 · 5: 7 · 6: 4 |
-| Mới (25 WPM 92 %) | 85 · 75 % | 22 · 9 % | 58 · 58 % | 1,0 · 1,0 % | 0 · 0 % | 0,70 · 0,60 | 68 · 70 % | 83 · 83 % | 20 · 20 % | 49 · 49 % | 9,4 · 8,9 % | 13,8 · 13,1 | 6: 3 / 5: 1 · 6: 4 |
-| Chậm chắc (25 WPM 99 %) | 100 · 100 % | 39 · 41 % | 51 · 52 % | 1,4 · 1,2 % | 0 · 0 % | 0 · 0,35 | 65 · 68 % | 86 · 86 % | 22 · 21 % | 50 · 52 % | 7,1 · 6,8 % | 12,8 · 12,5 | — / — |
-| Chuẩn (35 WPM 95 %) | 100 · 90 % | 35 · 21 % | 55 · 58 % | 1,2 · 1,2 % | 0 · 0 % | 0,20 · 0,85 | 65 · 68 % | 86 · 86 % | 25 · 27 % | 49 · 46 % | 6,2 · 6,3 % | 11,0 · 10,9 | — / 6: 2 |
-| Khá (50 WPM 96 %) | 100 · 100 % | 46 · 40 % | 51 · 54 % | 2,7 · 2,3 % | 0 · 0 % | 0,10 · 0,10 | 59 · 66 % | 88 · 87 % | 26 · 28 % | 51 · 46 % | 4,8 · 4,8 % | 9,5 · 9,5 | — / — |
-| Ẩu (50 WPM 85 %) | 85 · 75 % | 20 · 9 % | 58 · 60 % | 1,3 · 1,0 % | 0 · 0 % | 0,75 · 0,65 | 65 · 70 % | 86 · 85 % | 26 · 28 % | 48 · 45 % | 6,5 · 6,5 % | 10,7 · 10,4 | 6: 3 / 6: 5 |
-| Nhanh (70 WPM 97 %) | 100 · 100 % | 56 · 45 % | 48 · 51 % | 3,1 · 2,5 % | 0 · 0 % | 0 · 0 | 59 · 65 % | 90 · 88 % | 27 · 30 % | 52 · 47 % | 4,2 · 4,2 % | 8,8 · 8,8 | — / — |
-| Không gõ | 0 · 0 % | 0 · 0 % | 82 · 82 % | 0 · 0 % | 0 · 0 % | 0 · 0 | 100 · 100 % | 0 · 0 % | — | 0 · 0 % | 74,8 · 74,8 % | 1,0 · 1,0 | 1: 20 / 1: 20 |
-| Chỉ gõ (35 WPM 95 %, không mua) | 100 · 95 % | 33 · 27 % | 55 · 59 % | 1,8 · 0,9 % | 0 · 0 % | 0,40 · 0,75 | 65 · 70 % | 94 · 93 % | 23 · 25 % | 54 · 52 % | 6,4 · 6,6 % | 11,1 · 10,9 | — / 6: 1 |
+**Thêm cho bot Chuẩn** (hôm nay → Song Long sau sửa):
+- Đợt 2 (mở cổng thứ hai): thú lọt 14 % → 6,6 %; Trận Lực mất trong đợt 30 % → 8,8 %.
+- Ô 2:
+  - 5,0 → 5,6 lần mỗi phút đánh;
+  - 8,5 → 21,4 W mỗi phút (canon ước ~18);
+  - 1,9 → 6,5 con trúng và 1,6 → 3,6 con hạ mỗi lần tung.
+- Phần sát thương cả trận của các chiêu vùng khác: ô 4 15,1 % → 10,0 %, tuyệt kỹ 10,7 % → 6,3 %.
+- Mỗi lần tuyệt kỹ (mọi bot gõ): 4,1 → 2,9 W hiệu dụng, vì Song Long đã hạ trước nhiều con.
+- Sức ra đòn tổng: 43,0 → 46,8 W mỗi phút đánh (D_ref thử 75).
+- Thời gian sống trung bình của một thú (B4): 12,5 s → 10,1 s.
 
 ### 8.5 Cổng bot đo được
 
-| Cổng | Hôm nay | Song Long | Thử: hẹp | Thử: ngân sách |
-|---|---|---|---|---|
-| B1 cùng vùng cuốn (Mới → Nhanh) | trượt: thắng 0–10 %, S 0, P 68–75 % | trượt: thắng 95–100 %, P 41–52 % | trượt: thắng 85–100 %, S 20–56 %, P 48–58 % | trượt: thắng 75–100 %, S 9–45 %, P 51–60 % |
-| B2 không quá dễ | đạt | đạt | đạt | đạt |
-| B3, phần bot Mới (≥ 70 %) | trượt: 0 % | đạt: 95 % | đạt: 85 % | đạt: 75 % |
-| B4 chuẩn thắng ẩu | trượt: S 0 và 0 | đạt: S 48 > 35 %, hạ 8,4 < 8,5 s | đạt | đạt |
-| B5 Không gõ thua (Cân bằng) | đạt | đạt | đạt | đạt |
-| B7, phần đo được | 1,9–2,0 bậc mỗi đợt | 1,2–1,9 | 1,4–2,0 | 1,4–2,0 |
-| CB1 | đạt | đạt | đạt | đạt |
-| CB2 phần gõ ≥ 55 % (Chuẩn) | đạt: 81 % | đạt: 88 % | đạt: 86 % | đạt: 86 % |
-| CB3 ô 1 ≤ 30 % sát thương gõ | trượt: 37–51 % | **đạt: 14–21 %** | đạt: 20–27 % | đạt: 20–30 % |
-| CB9 Chuẩn 9–10,5 phút | không chấm (Chuẩn thua mọi seed) | trượt sát: 10,6 phút | trượt: 11,0 | trượt: 11,0 (trận thắng) |
-| HC2 ≤ 8 chữ sống | đạt (8) | đạt (8) | đạt (8) | đạt (7) |
-| §7.3 mỗi chiêu vùng ≤ 20 % (Chuẩn) | đạt sát: ô 2 19,9 % | **trượt: 59,2 %** | trượt: 48,6 % | trượt: 46,2 % |
-| §7.3 đánh nền 12–18 % (báo cáo) | 8,4 % | 5,0 % | 6,2 % | 6,3 % |
+| Cổng | Hôm nay | Trước sửa | Song Long (sau sửa) |
+|---|---|---|---|
+| B1 cùng vùng cuốn (Mới → Nhanh) | trượt: thắng 0–10 %, S 0, P 68–75 % | trượt: thắng 95–100 %, P 41–52 % | trượt: thắng 95–100 %, S 28–64 %, P 49–60 % |
+| B2 không quá dễ | đạt | đạt | đạt |
+| B3, phần bot Mới (≥ 70 %) | trượt: 0 % | đạt: 95 % | đạt: 95 % |
+| B4 chuẩn thắng ẩu | trượt: S 0 và 0 | đạt | đạt: S Chậm chắc 64 % > Ẩu 28 %; Chuẩn hạ thú 10,1 s < Ẩu 10,6 s |
+| B5 Không gõ thua (Cân bằng) | đạt | đạt | đạt |
+| B7, phần đo được | 1,9–2,0 bậc mỗi đợt | 1,2–1,9 | 1,5–2,0 |
+| CB1 | đạt | đạt | đạt |
+| CB2 phần gõ ≥ 55 % (Chuẩn) | đạt: 81 % | đạt: 88 % | đạt: 85 % |
+| CB3 ô 1 ≤ 30 % sát thương gõ | trượt: 37–51 % | đạt: 14–21 % | trượt sát: 21–30 % (bot Nhanh 30,4 %) |
+| CB9 Chuẩn 9–10,5 phút | không chấm (Chuẩn thua mọi seed) | trượt sát: 10,6 phút | trượt: 11,0 phút |
+| HC2 ≤ 8 chữ sống | đạt (8) | đạt (8) | đạt (7) |
+| §7.3 mỗi chiêu vùng ≤ 20 % (Chuẩn) | đạt sát: ô 2 19,9 % | trượt: 59,2 % | **trượt: 45,7 %** |
+| §7.3 đánh nền 12–18 % (báo cáo) | 8,4 % | 5,0 % | 6,4 % |
 
 - **B3:** chỉ chấm phần bot Mới; bot Trẻ em chạy ở Cân bằng, không ở Thư giãn như cổng yêu cầu.
 - **B7:** mọi biến thể ≤ 2 bậc mỗi đợt, khoảng sinh 93–114 % (trong ±15 %). Thiếu lượt Chuẩn tắt nhịp, nên kit ghi "thiếu số".
 - **Bot không đo được:** B6 (chưa có cặp chiến thuật Tốt/Kém), B8, HC1, HC3, HC8 (chưa có sự kiện học nháp), B9 (chưa có buổi chơi thử của người thật).
 
-### 8.6 Hai biến thể số trong bộ nhớ (chứng cứ, không phải đề xuất)
+### 8.6 Quét ngân sách (chứng cứ, không phải đề xuất)
 
-Cả hai đổi đối tượng số trong tiến trình bot, trước khi sim đọc chúng; không file nào của game đổi. Hai biến thể này là hai lần thử duy nhất, chọn trước khi chạy, mỗi lần một đòn bẩy:
+**Luật ngân sách** (`TWIN_PEARL.pool`, số thử):
+- Mỗi bên (tây: thú cổng A và quạ ở x < 0; đông: cổng B và quạ ở x ≥ 0) có 2,5 W cho thú đất và vùng giữ, chia 15/45/40 như phần chạm, hành lang, hoa sen của mỗi con. Thêm 0,8 W cho đuôi quét trời của bên đó (máu một con Hỏa Nha).
+- Ngân sách nhân M_q của Cast và bucket của ghế, như mọi đòn.
+- Mỗi đòn lấy tối đa phần còn lại của bên và loại của nó, theo thứ tự tới trước. Phần nào hết thì lần tung đó không trúng thêm con nào bằng phần ấy.
+- Mốc 2,5 W: mỗi rồng mang đúng sát thương ô 2 hôm nay lên con đầu tiên. Một con thú đơn độc mỗi bên vì vậy nhận đủ như ô 2 hôm nay.
 
-| Biến thể | Đổi gì | Giữ nguyên |
-|---|---|---|
-| **Hẹp** (`+narrow`) | Mọi khối trúng hẹp một nửa: bán kính thân rồng 1,4 → 0,7 m; nửa rộng điểm chạm 2,2 → 1,1 m; nửa rộng cánh sen 2,2 → 1,1 m; bán kính quét trời 2,5 → 1,25 m; bán kính hoa sen 9 → 4,5 m; vùng giữ 8 × 8 → 4 × 8 m | Chiều dài, đường S, vệt 0,9 s, khung, sát thương |
-| **Ngân sách** (`+budget`) | Sàn giảm dần của ô 2 40 % → 10 %: từ con thứ 7 bị trúng trở đi, mỗi con chỉ nhận 10 % thay vì 40 % | Hình học, khung, chia 15/45/40 |
+**Quét:** mỗi mức đổi ngân sách mỗi bên, trời giữ 0,8 W; 17 hồ sơ × 20 seed mỗi mức.
 
-**Đọc kết quả:**
-- **Hẹp:**
-  - Lúc 35–45 thú vẫn trúng 29,4 con (72 % số đang sống); chỉ 14 % số lần tung vào 12–20.
-  - Phủ đường tụt còn 68 %: đường S lệch 0,9 m, lớn hơn bán kính 0,7 m, nên chừa khe giữa đường. Quạ trúng còn 81 %.
-  - Thắng 85–100 %, ô 2 vẫn 47–52 % sát thương cả trận.
-  - Hẹp đi không đổi được sức mạnh, mà làm hỏng lời hứa "giữ trọn hai đường".
-- **Ngân sách:**
-  - Vẫn trúng 38 con, nhưng mỗi lần tung chỉ hạ 7,3 con (từ 21,3) và ra 6,3 W (từ 13,2).
-  - Thắng: Mới 75 %, Chuẩn 90 %, Ẩu 75 %, các bot khác 80–100 % (trừ Trẻ em 0 %).
-  - S tụt còn 9–45 %, nhiều bot dưới dải 35 %. Ô 2 vẫn 43–52 % sát thương cả trận.
-  - Giảm sàn đưa tỉ lệ thắng gần dải, nhưng ô 2 vẫn gánh gần nửa trận, và trận trở nên sát nút ở bot chậm.
-- **Cả ba bản Song Long:**
-  - P vẫn 41–60 %, trên dải 15–35 %.
-  - Đánh nền chỉ còn 3–9 % (Mới → Nhanh).
-  - Ô 4 và tuyệt kỹ mất chỗ: mỗi chiêu còn 4–12 % sát thương cả trận.
+| Mỗi bên | Trúng lúc 35–45 thú (trong 12–20) | W mỗi lần tung | Đòn xa nhất tây / đông | Mới → Nhanh thắng | Chuẩn: thắng · S · P · Q | Ô 2/cả trận (mọi bot gõ) |
+|---|---|---|---|---|---|---|
+| 1,25 W | 11,9 (58 %) | 3,4 | 13,1 / 13,1 m | 0–60 % | 0 · 0 · 67 · 73 % | 29–36 % |
+| 1,5 W | 13,0 (67 %) | 3,9 | 13,4 / 13,6 m | 5–90 % | 40 · 0 · 65 · 72 % | 32–40 % |
+| 1,75 W | 14,3 (84 %) | 4,4 | 14,4 / 13,6 m | 30–100 % | 90 · 10 · 63 · 71 % | 34–43 % |
+| 2,0 W | 15,2 (84 %) | 4,9 | 14,9 / 16,0 m | 45–100 % | 95 · 21 · 60 · 71 % | 37–45 % |
+| **2,5 W (mặc định)** | **17,2 (80 %)** | **5,9** | **15,4 / 20,2 m** | **95–100 %** | **100 · 45 · 55 · 70 %** | **41–50 %** |
+| 3,75 W | 21,8 (35 %) | 8,1 | 17,7 / 21,4 m | 100 % | 100 · 57 · 49 · 67 % | 48–58 % |
+| 5,0 W | 26,2 (2 %) | 9,7 | 19,8 / 21,8 m | 100 % | 100 · 57 · 47 · 67 % | 53–61 % |
+| không giới hạn | 31,5 (0 %) | 11,8 | 22,9 / 22,0 m | 100 % | 100 · 62 · 46 · 65 % | 57–64 % |
 
-### 8.7 Lab: tấm khung và clip ở camera chơi
+**Đọc bảng:**
+- **Tầm 12–20 đạt nhiều nhất ở 1,75–2,5 W** (80–84 % số lần tung).
+- **Thắng có "vách":**
+  - dưới 2,5 W nhiều bot thua lại; ở 1,25 W, Mới → Nhanh chỉ thắng 0–60 %, Chuẩn thua mọi seed;
+  - từ 2,5 W trở lên, mọi bot Mới → Nhanh thắng 95–100 %, vượt dải 75–90 %.
+- **Không mức nào đưa ô 2 về ≤ 20 %.** Ngay ở 1,25 W, khi bot đã thua lại, ô 2 vẫn chiếm 29–36 %.
+- **P của Chuẩn vẫn 46–67 % ở mọi mức** (đích 15–35 %). Riêng ô 2 không cân được cả trận; phần còn lại là việc của nhịp sinh, Kết Giới và các ô khác (SKILL_REACH §5).
+- **Đánh đổi của ngân sách:** càng nhỏ thì sát thương càng dừng gần Trận Tâm. Ở 2,5 W, lúc đông, rồng vẫn chạy tới cổng nhưng chỉ "cắn" thú trong khoảng 15–20 m đầu.
 
-**File** (ngoài Git, trong `games/immortality-cultivation/tmp/shots/dragon/greybox/`):
+**Hai biến thể của bài đo sáng** (trên mã trước sửa, giữ để tham khảo):
+- "Hẹp" (mọi khối hẹp một nửa) vẫn trúng 29,4 con và làm hỏng việc phủ đường (68 %).
+- "Sàn 10 %" (từ con thứ 7 chỉ nhận 10 %) vẫn trúng 38 con, ô 2 vẫn 43–52 % sát thương.
+- Cả hai cho cùng bài học: phải hãm bằng ngân sách mỗi lần tung, không bằng bề rộng. Bản sau sửa làm đúng như vậy.
+
+### 8.7 Lab: tấm khung, clip và phím tới đòn đầu
+
+**Tấm khung và clip ở camera chơi** (ngoài Git, trong `games/immortality-cultivation/tmp/shots/dragon/greybox/`; chụp trên mã trước sửa):
 - `twin-pearl-greybox-play-1280x720-sheet.jpg`: bảy khung chụp ở 1280 × 720, mỗi ô nửa cỡ (tấm 1280 × 1440).
 - `twin-pearl-greybox-play-1920x1080-sheet.jpg`: cùng bảy khung chụp ở 1920 × 1080 (tấm 1920 × 2160).
 - `twin-pearl-greybox-play-1280-real-then-quarter.mp4`: 1280 × 720, 60 fps, 18,4 s. Từ F−20 tới F200 ở tốc độ thật (3,7 s), rồi chính đoạn đó ở 0,25× (14,7 s). Thấy cả hai đường và cả hai góc trời.
 - Số và kịch bản chụp: `section8/capture-1280.json`, `section8/capture-1920.json`, `section8/capture-frames.mjs`.
+- Khối trúng và khung không đổi sau sửa, nên tấm khung và clip vẫn đúng về hình học. Chỉ khác con nào bị trúng: nay ít con đổi màu hơn, nhất là gần cổng.
 
 **Cách chụp:**
 - Lab `skills-lab.html?key2=twin-pearl&fixed=1`. `fixed=1` là chế độ chụp từng bước của lab: không rAF, mỗi khung đúng một tick sim, nên F0 … F200 là tick thật. Không cờ nào khác: chất lượng mặc định High, tỉ lệ điểm ảnh không ghim.
 - Camera chơi mặc định của lab: 55°, FOV 28°, cả sân; lab báo khoảng cách 53,51 m.
 - Bảng phím của lab (góc trên trái, rộng 400 px) che đường A và cổng A ở khổ 1280. Lúc chụp, bảng này được ẩn bằng một dòng đổi style, không phải cờ URL. Băng tên pha ở trên và ô số của hộp xám ở góc dưới phải vẫn giữ.
 - Triều: triều đông nhất lab dựng được, 44 thú đất trên hai đường và 4 quạ (lab tự bơm lại ở cổng). Chạy 200 tick cho triều trải ra, rồi bấm phím 2 ở tick 201.
-- Hai khổ chụp ra cùng một kết quả sim (tất định): 43 con khác nhau, 77 đòn, hạ 16, trái/phải 45/55, quạ 4/4, đòn đầu F0.
 
 **Bảy khung:**
 
 | Khung | Thấy gì |
 |---|---|
-| F0 | Hộp giữ 8 × 8 m trước Trận Tâm lóe; 17 con trúng ngay khung đầu |
-| F2 | Hai hộp chạm trên hai đường, hai sợi sáng nối từ kiếm; 26 con đã trúng |
+| F0 | Hộp giữ 8 × 8 m trước Trận Tâm lóe |
+| F2 | Hai hộp chạm trên hai đường, hai sợi sáng nối từ kiếm |
 | F20 | Hai đầu rồng đi được nửa đường, đường S và vệt sau thân hiện rõ trên cả hai đường |
 | F42 | Hai đầu ở hai cổng; hai cột quét trời ở hai góc; ngọc treo ở điểm gặp (0; −9,25) |
 | F51 | Hoa sen nở: hai cánh dài dọc hai đường, vùng giữ, đĩa r 9 m |
-| F80 | Vệt gần cổng vẫn đang trúng (đòn cuối của sim ở F96); thú bị trúng lần 2 chuyển màu cam |
+| F80 | Vệt gần cổng vẫn là khối trúng (khối cuối của sim ở F96); thú bị trúng lần 2 chuyển màu cam |
 | F200 | Dư âm, chỉ có hình, không còn đòn |
 
-**Lưu ý khi xem:**
-- Dòng "key → drawn" trong ô số không có nghĩa ở chế độ chụp từng bước (nó đo thời gian giữa hai lệnh CDP). Độ trễ thật lấy từ `latency.json` của bước dựng: 2,5–20 ms qua 16 lần bấm thật.
-- Ở 1280 × 720, nhãn chữ nhỏ nhưng đọc được. Ở F42, hai đầu rồng nằm sát mép xa của sân.
-- Đây vẫn là hộp xám: hình trong mờ và nhãn, không có art.
+**Phím tới đòn đầu, đo lại sau sửa** (`section8/` cũ dùng mốc "vẽ xong", review chỉ ra đó chỉ là lúc lệnh vẽ trả về):
+- Kịch bản `review/latency-keys-v2.mjs`, kết quả `review/latency-v2.json`.
+- Chrome không giao diện qua `heavy.sh --perf`, High, 1920 × 1080, khung rAF thật, phím thật qua CDP. 10 lần tung, có cả lần bấm đầu tiên của trang.
+- Đòn đầu ở F0 cả 10 lần.
+- **Phím → hiện ≤ 17,4–30,9 ms:** mốc thời gian của khung rAF kế tiếp sau khung có đòn đầu. Khung kia chắc chắn đã hiện lúc đó, nên đây là cận trên.
+- **Phím → nộp:** 3,3–18,6 ms (lệnh vẽ trả về, cách đo cũ).
+- Cùng lúc lab báo: 41–48 thú sống, 15–20 con khác nhau bị trúng, trái/phải 46/54 tới 52/48, ngân sách mỗi lần tung (594–640 máu) gần cạn.
+- Việc hoãn tạo `AudioContext` tới sau khung của phím nay chỉ áp khi có `?key2=twin-pearl`. Các phiên lab khác mở âm thanh ngay trên phím, như trước. Trong Safari, ngữ cảnh âm thanh có thể bắt đầu ở trạng thái treo tới phím kế tiếp.
+
+**Lưu ý khi xem:** ở 1280 × 720, nhãn chữ nhỏ nhưng đọc được. Ở F42, hai đầu rồng nằm sát mép xa của sân. Đây vẫn là hộp xám: hình trong mờ và nhãn, không có art.
 
 ### 8.8 Câu hỏi cho anh
 
-1. **Giữ đích nào: "phủ trọn hai đường tới tận cổng" hay "12–20 thú khi có 40 thú"?**
-   - Hai đích này không đạt cùng lúc được: rồng chạy hết đường thì trúng 72–94 % số thú đang sống, kể cả khi mọi khối hẹp đi một nửa.
-   - Claude đề xuất giữ phủ trọn hai đường, bỏ đích 12–20, và hãm sức bằng ngân sách mỗi lần tung. Phủ trọn là chỗ trả lời câu "phạm vi quá bé" của anh, và P, Q, đợt 2 đều tốt lên nhờ nó.
-   - Nếu anh muốn giữ 12–20 thì phải đổi thiết kế (ví dụ mỗi rồng chỉ cắn N con đầu đường), không chỉ đổi số.
-2. **Ô 2 được chiếm bao nhiêu sát thương cả trận?**
-   - Canon §7.3 cho mỗi chiêu vùng ≤ 20 %. Song Long đang 57–62 %; hạ sàn giảm dần còn 10 % vẫn 43–52 %.
-   - Muốn về 20 % thì cần một trần tổng mỗi lần tung, như trần 4 W của ô 4. Đó là luật mới trong sim, không chỉ là số.
-   - Anh giữ 20 %, hay cho chiêu rồng (chiêu biểu tượng của bộ Kiếm × Hỏa) một trần riêng cao hơn, ví dụ ≤ 35 %?
+1. **Ô 2 được chiếm bao nhiêu sát thương cả trận?**
+   - Canon §7.3 cho mỗi chiêu vùng ≤ 20 %. Song Long sau sửa chiếm 41–50 %. Quét §8.6 cho thấy không mức ngân sách nào về ≤ 20 % mà bot còn thắng được.
+   - Claude đề xuất cho chiêu biểu tượng của bộ Kiếm × Hỏa một trần riêng cao hơn 20 %, với ngân sách 2–2,5 W mỗi bên (ô 2 chiếm 41–46 % ở bot Chuẩn). Phần còn lại của cân bằng (P quá cao, thắng quá cao ở 2,5 W) làm bằng nhịp sinh và các ô khác theo BALANCE.md. Ngân sách thử giữ 2,5 W tới khi anh chọn.
+   - Nếu anh giữ 20 % thì phải đổi thiết kế chứ không chỉ đổi số, ví dụ hồi chiêu dài hơn nhiều hoặc chỉ một rồng mỗi lần tung.
+2. **Lúc đông, rồng có cần cắn tới tận cổng không?**
+   - Với ngân sách, đích 12–20 thú và việc phủ hình học trọn hai đường cùng đạt. Nhưng lúc đông, sát thương dừng ở 15–20 m từ Trận Tâm; rồng vẫn chạy tới cổng.
+   - Claude đề xuất giữ như vậy (thú gần Trận Tâm nguy hơn). Phần nhìn sẽ cho thấy rồng "hết sức": đầu và vệt nhạt dần khi bên đó cạn ngân sách.
+   - Nếu anh muốn sát thương tới cổng thì phải chia ngân sách theo quãng đường thay vì tới trước, và chấp nhận mỗi con nhận ít hơn.
 
 ### 8.9 Giới hạn của bài đo
 
 1. **Bot là bot đo của SKILL_REACH**, không phải làn 7. Mọi giới hạn ở SKILL_REACH §6 vẫn còn: không Backspace, mua theo thứ tự cố định, Đứng yên, không Học trước.
-   - Với Song Long, bot coi mọi thú sống là "trong tầm" nên tung ô 2 ngay khi sẵn, 5–7 lần mỗi phút. Người thật có thể giữ chiêu chờ lúc đông, khi đó mỗi lần tung còn mạnh hơn.
-2. **"Thừa" đếm thiếu một chút:** đòn tiềm năng chưa tính ×1,5 phá thế. Đòn 0 sát thương (trần cụm đã hết) không có sự kiện nên không thấy.
+   - Với Song Long, bot coi mọi thú sống là "trong tầm" nên tung ô 2 ngay khi sẵn. Người thật có thể giữ chiêu chờ lúc đông; khi đó ngân sách giữ cho mỗi lần tung không mạnh hơn.
+2. **"Thừa" đếm thiếu một chút:** đòn tiềm năng chưa tính ×1,5 phá thế. Đòn 0 sát thương (trần cụm hay ngân sách đã hết) không có sự kiện nên không thấy.
 3. **Phần của chiêu** đọc từ sổ của sim cho mỗi lần tung (mỗi tick một loại đòn mỗi con). Trường hợp hiếm có đòn 0 sát thương xen vào thì loại đòn được đoán theo khung.
 4. **Mẫu lúc 35–45 thú nhỏ:** quét đỉnh chỉ có 92 lần, 85 % từ đỉnh đợt 6. Chỉ các trận còn sống tới đó mới góp mẫu.
 5. **Triều trong lab là triều riêng của lab** (đặt thú theo đường, đông nhất 44 + 4 quạ), không phải ảnh chụp đỉnh của bot.
 6. **Sai số:** 20 seed mỗi hồ sơ, nên tỉ lệ thắng sai khoảng ±10 điểm %. Bot Trẻ em chạy ở Cân bằng.
+7. **"Đòn xa nhất"** đo theo đường chim bay tới Trận Tâm, không theo quãng đường đi của thú.
 
 ### 8.10 Tái lập
 
-Từ `games/immortality-cultivation`. Mọi file ở `tmp/skill-reach/`, ngoài Git; bản bot trước bài này giữ ở `tmp/skill-reach/bot.before-key2-measure.ts`.
+Từ `games/immortality-cultivation`. Mọi file ở `tmp/skill-reach/`, ngoài Git.
 
 | Việc | Lệnh |
 |---|---|
-| Ma trận 4 biến thể (trận thật và quét đỉnh) | `../../.local/bin/heavy.sh --cores=6 tmp/skill-reach/key2-matrix.sh` |
-| Gộp số → `tmp/skill-reach/key2/numbers.json` | `node_modules/.bin/tsx tmp/skill-reach/key2-aggregate.ts` |
+| Ma trận (trận thật và quét đỉnh) | `KEY2_OUT=tmp/skill-reach/key2-fix ../../.local/bin/heavy.sh --cores=6 tmp/skill-reach/key2-matrix.sh line twin-pearl twin-pearl+pool100000s100000 twin-pearl+pool125 twin-pearl+pool150 twin-pearl+pool175 twin-pearl+pool200 twin-pearl+pool375 twin-pearl+pool500` (5 phút trên 6 lõi) |
+| Gộp số → `tmp/skill-reach/key2-fix/numbers.json` và `aggregate.txt` | `KEY2_ROOT=tmp/skill-reach/key2-fix KEY2_VARIANTS="line twin-pearl …" node_modules/.bin/tsx tmp/skill-reach/key2-aggregate.ts` |
 | Một trận lẻ | `node_modules/.bin/tsx tmp/skill-reach/bot.ts <thư mục> w45a97@twin-pearl 1 20` |
-| Kiểm cờ tắt so với golden của bước dựng | `BOT_HASHES=1` với 9 hồ sơ × seed 1–4, so `tail` với `tmp/shots/dragon/greybox/golden-after/` (đã lưu ở `tmp/skill-reach/key2/golden-check/`) |
-| Chụp lab | `vite` cổng 3231 trên cây sạch, rồi `URL=http://127.0.0.1:3231/skills-lab.html OUT_DIR=… CLIP=1 ../../.local/bin/heavy.sh --gpu node src/kit/tools/cdp-run.mjs tmp/shots/dragon/greybox/section8/capture-frames.mjs --width=1280 --height=720`; ghép tấm và clip bằng ffmpeg (xstack, hai đoạn 60 fps và 15 fps) |
+| Kiểm cờ tắt | 9 hồ sơ × seed 1–4 với `BOT_HASHES=1` vào `tmp/skill-reach/key2-review/golden-now/`, so với `tmp/shots/dragon/greybox/golden-before/`; test `tests/sim/twin-pearl.test.ts` có băm ghim |
+| Đo phím tới đòn đầu | `vite --port 3241` trên cây sạch, rồi `URL=http://127.0.0.1:3241/skills-lab.html ../../.local/bin/heavy.sh --perf node src/kit/tools/cdp-run.mjs tmp/shots/dragon/greybox/review/latency-keys-v2.mjs --width=1920 --height=1080` |
+| Chụp lab | như bản sáng: `section8/capture-frames.mjs` với `cdp-run.mjs` (§8.7) |
 
-Khung chụp thô đã xóa; giữ hai tấm khung, clip và số.
+Bản số trước sửa vẫn ở `tmp/skill-reach/key2/numbers.json`. Khung chụp thô đã xóa; giữ hai tấm khung, clip và số.
+
+### 8.11 Review 04/11 chiều: sửa gì, bác gì
+
+Một review độc lập kiểm hộp xám, chạy lại bot ở `6e68958` và `1a78a82`, và thử đột biến trên bản sao. Từng mục đã được kiểm trên mã:
+
+| # | Mục | Việc |
+|---|---|---|
+| 1 | Tầm 35,4 con, đích 12–20 | Đúng. Ngân sách (mục 2) đưa về 17,2 con, 80 % trong đích. Không thêm trần số con. |
+| 2 | Không có ngân sách mỗi lần tung | Đúng. **Sửa:** ngân sách mỗi bên, chia theo phần (§8.6). |
+| 3 | Trần cụm 60 % đặt lại ở mỗi khối, mỗi tick (cụm có thể mất 93,6 %) | Đúng. **Sửa:** cả lần tung là một đòn vùng. |
+| 4 | Test không giữ luật (7 đột biến vẫn qua) | Đúng. **Sửa:** 27 test, có băm ghim của cờ tắt. 11 đột biến đều làm hỏng ít nhất một test. |
+| 5 | Đường A được lợi do thứ tự tính | Đúng. **Sửa:** mỗi bên có hệ số giảm dần và ngân sách riêng; mỗi tick một thứ tự chung. |
+| 6 | `rulesHash` không phủ bảng thử | Đúng. **Sửa:** chỉ khi header có cờ; không có cờ thì giá trị băm như cũ. |
+| 7 | Chiêu giải khi chỉ còn Vương đang gầm | Đúng. **Sửa:** chỉ giải khi có thú nhận được sát thương; thú miễn sát thương không vào sổ. |
+| 8 | Hiệu năng | Đúng, không phải vấn đề (5,3 µs mỗi tick). **Dọn** các chỗ rẻ. |
+| 9 | Lab: hoãn âm thanh ở mọi phiên; mốc "vẽ" chưa phải lúc hiện | Đúng. **Sửa** cả hai (§8.7). |
+| — | Thú bầy 1 máu không chết vì đòn vùng (`combat.ts`) | Đúng, nhưng **không sửa ở đây**: luật chung, sửa sẽ đổi trận mặc định. Làm riêng, kèm golden. |
+| — | Đòn đường thẳng còn chờ bị tính vào lần tung đang đo (5 lần) | Đúng. **Sửa** trong công cụ đo (ngoài Git). |
+
+**Đính chính các số của bản §8 trước:**
+- "Phủ 100 % mỗi đường": chỉ đúng khi tính mọi khối; riêng thân rồng phủ 66,7 % (§8.1).
+- "Khoảng 4 điểm lệch trái do thứ tự tính": review đo được 1–2 điểm ở đỉnh thật và 1,2–3,7 điểm ở đám thú đối xứng. Nay không còn lệch.
+- "5–7 lần tung mỗi phút": là mỗi phút đánh; trên cả trận là 4,5 lần.
+- "Đòn đầu muộn 0,2 %": nay 0,03 %, vì đã bỏ các lần tung chỉ có Vương đang gầm.
+- "Phím tới đòn đầu 2,5–20 ms": là lúc lệnh vẽ trả về; lúc hiện là ≤ 17,4–30,9 ms (§8.7).
+- "Một lần tuyệt kỹ ra 4,1 W": review chưa chạy lại; nay đã kiểm, đúng 4,1 W (hôm nay).
