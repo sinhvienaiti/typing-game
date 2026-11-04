@@ -112,6 +112,7 @@ The owner (04/11): "với codex thì nó cũng như 1 agent của bạn, cứ sa
   - checks it in the browser when it is visible;
   - commits only after review, never on Codex's self-report.
 - **Limits:** `tools/codex-run/queue.sh` waits out every limit. Never kill a waiting lane unless the owner says to stop Codex. A routing change (like 04/11's) stops tickets that no longer fit, keeps their files, and moves the work to the right worker.
+  - **Report Codex's own reset time, never the queue's guess.** The queue falls back to 30 minutes when it cannot read Codex's message. On 04/11 Codex said "try again at Nov 5th, 2026 12:52 AM", and Claude relayed the fallback 00:03 to the owner, who caught it. Before telling the owner, grep `events.jsonl` for "try again at". The parser now reads the dated form.
 - **Paths:** since 03/11 the repo lives at `/Volumes/SS990TPRO/htdocs/typing-game`. Tickets name that path.
 
 Runner usage: `tools/codex-run/README.md`.
