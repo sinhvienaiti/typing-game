@@ -108,6 +108,12 @@ Rules:
    - Each kind of check is a script Claude runs from the main thread in one to three commands: lab parity main against a branch, the GPU probe, the lab sound mix with loudness, a frame sheet and a short MP4.
    - A Claude agent is used only to build a new check, not to run an old one.
 
+8. **Cheap watching** (owner, 05/11: "đảm bảo việc theo dõi không gây tốn nhiều token, tránh tự tạo thêm việc tốn token"). Every wake-up of the main thread re-reads its whole context.
+   - Never use periodic Monitors on the main thread, and never re-arm one every 30 minutes.
+   - Use one-shot background waits that exit only on what needs action: blocked, stalled, done.
+   - Let Codex chains and workflows notify when they end.
+   - Answer routine notifications in one short line, with no tool calls.
+
 5. **Keep Codex full:** Codex works on its own quota, about 15 minutes a ticket. Short tickets in a chained queue beat long tickets that wait on reviews.
 
 ## The double-review protocol (every analysis, plan, design and solution)
