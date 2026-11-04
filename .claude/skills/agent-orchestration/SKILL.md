@@ -46,6 +46,10 @@ Use it before building any feature, effect, art, system or rework. Skip it only 
    - Decide, and write one plan that says what each assistant contributed and where Claude disagrees.
 6. **Record.** Save both conversations verbatim, with a check table of the claims, in the game's docs `source/` folder. Save the plan beside the design doc.
 7. **Stop rule.** If an assistant gets no two consecutive passes within 4 review rounds, stop that run. Record where it keeps failing, then change the brief or the approach ("three tries, then discuss"). Never loop forever.
+   - **Never forward a non-passing answer to Gemini.** On 04/11 an agent did, and the plan's ChatGPT side did not count.
+   - **Size the workstream so it can pass.** Review one package, one layer or one ticket at a time, not a whole roadmap.
+   - A roadmap from a pass that never got its two consecutive PASSes is only a draft. Each of its packages gets its own short double review right before it is built.
+8. **PASS means "correct and accurate"** (owner: "đúng, chính xác"). It does not mean "nothing could be added". Defects fail; style and optional ideas do not (template in `references/double-review.md`).
 
 Prompt templates and the record format: [references/double-review.md](references/double-review.md).
 

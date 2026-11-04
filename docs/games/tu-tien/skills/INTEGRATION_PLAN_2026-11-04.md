@@ -14,6 +14,12 @@
 9. pha bùng cho hình đủ ngay khung 0;
 10. tắt chậm.
 
+> **Claude chốt (04/11/2026, khoảng 11:45).**
+> - ChatGPT không qua quy trình, nên tài liệu này là **bản nháp lộ trình**. Mỗi gói sẽ có một lượt duyệt hai lần riêng, ngắn, ngay trước khi làm.
+> - Luật PASS đã sửa theo đúng lời anh: "đúng, chính xác" (skill `agent-orchestration`). Câu hỏi 7 ở §9 vì vậy không còn phải hỏi anh.
+> - Số phiếu Codex dời lên một bậc, vì 256 đã dùng cho `capture-prune`: CX-A → 257, …, CX-J → 266.
+> - Ảnh chụp và video vào `typing-game-review/` (skill `review-folder`), không vào `captures/tu-tien/integration-r2` trong repo.
+
 ## Đầu vào và quy trình
 
 **Đã đọc:**

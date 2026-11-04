@@ -19,10 +19,12 @@ Add to the first brief: `If you need clarifications, ask all of them in one mess
 ## 2. Self-review (ChatGPT, later Gemini): ask twice in a row, or more after a FAIL
 
 ```text
-Review your latest full answer above against the brief, the facts and the constraints. Check: wrong facts or sources, steps that would not work, missing steps, contradictions with the constraints or the owner's decisions, vague parts that a worker could not execute.
-If nothing at all needs to change, answer with exactly one line: VERDICT: PASS
-Otherwise answer: VERDICT: FAIL, then list each problem, then give the corrected FULL analysis and solution (not a diff).
+Review your latest full answer above against the brief, the facts and the constraints. It FAILS only for a real defect: a wrong fact or source, a step that would not work, a missing step the goal needs, a contradiction with the constraints or the owner's decisions, or a part too vague for a worker to execute. Wording, style and optional extra ideas are not defects.
+If it is correct and accurate, answer with exactly one line: VERDICT: PASS (you may add one line "Optional:" with ideas that do not change the verdict)
+Otherwise answer: VERDICT: FAIL, then list each defect, then give the corrected FULL analysis and solution (not a diff).
 ```
+
+This follows the owner's words, "đúng, chính xác, pass". On 04/11 the stricter prompt ("PASS only if nothing at all needs to change"), run on a 30,000–85,000-character roadmap, made ChatGPT FAIL six times in a row: every review found something more to add.
 
 ## 2b. Handoff (after the two passes, once per assistant)
 
