@@ -32,3 +32,5 @@ Loại sự kiện:
 | 04/11 23:55 | 269 | anh duyệt | Gộp âm theo bậc |
 | 05/11 00:05 | 259 | kiểm trượt | Kiểm 8, 9, 10 trượt; ở hệ Kim đĩa ngọc phẳng, xám |
 | 04/11 cả ngày | phiếu 258, 259, 269, 272 | phản biện FAIL | 3, 4, 3 và 5 vòng FAIL trước khi có PASS |
+| 05/11 00:27 | Firefly sprint | mất thời gian | Firefly tính credit (âm 10 credit/lần, còn 7.540/10.000), không phải "không tốn credit" như bộ nhớ cũ ghi; phải chia credit giữa video và âm |
+| 05/11 00:40 | Firefly sprint | mất thời gian | Hai bộ chạy ở hai tab; tab nằm nền chạy chậm hơn (trình duyệt hạ nhịp tab nền) |
