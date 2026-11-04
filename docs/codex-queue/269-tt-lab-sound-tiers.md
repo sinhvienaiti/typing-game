@@ -10,6 +10,8 @@
 - Sửa sau phản biện vòng 1 lúc 20:50 ngày 04/11: mục 1, 2, 3, 4, 5, Kiểm và "Claude làm sau" đổi theo D1–D10 (xem "Phản biện").
 - Sửa sau phản biện vòng 2 lúc 21:05 ngày 04/11: tên phiếu, mục 4 (`trims`, `ir --check`, luật không ghi đè), mục 5 test 1, Kiểm 4 và 6, "Claude làm sau" đổi theo E1–E3 (xem "Phản biện").
 - Sửa sau phản biện vòng 3 ngày 04/11: mục 4 (`ir`, `ir --check`), Kiểm 6, "Claude làm sau" và dòng E2 đổi theo F1–F2 (xem "Phản biện").
+- Phản biện vòng 4: **PASS**.
+- Claude (người chốt) giao Codex lúc 21:30, khi mới có một PASS sau ba vòng FAIL đã sửa (luật "đừng để Codex ngồi không"). Phiếu chạy ngay sau phiếu 272.
 
 ## Bối cảnh
 - Âm lab: `games/immortality-cultivation/src/lab/sound.ts` (`LabSound`).
