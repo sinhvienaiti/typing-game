@@ -88,6 +88,14 @@ Rules:
    - Short replies.
    - Let Monitors run; no checking by hand.
    - Start a fresh coordinator session from `docs/HANDOFF_CURRENT.md` once a day, or when the main context passes about 300 thousand tokens. Do it at a quiet point, after the lanes and Codex chains of the old session have finished, because their notifications go to the session that started them.
+6. **No Claude critic for ordinary code tickets.**
+   - Codex already acts as one: it checks the ticket against the code before writing and stops at a contradiction. On 04/11 it caught 273's contradiction, 258b's HDR bound and 274's look failure on its own.
+   - Codex's quota is separate, so its reruns cost Claude nothing, while each Claude critic cost about 1–1.5 M tokens.
+   - Keep one Claude critic only for tickets that change the sim, canon or balance numbers, or tickets over about 1,500 words.
+7. **Scripted verification.**
+   - Each kind of check is a script Claude runs from the main thread in one to three commands: lab parity main against a branch, the GPU probe, the lab sound mix with loudness, a frame sheet and a short MP4.
+   - A Claude agent is used only to build a new check, not to run an old one.
+
 5. **Keep Codex full:** Codex works on its own quota, about 15 minutes a ticket. Short tickets in a chained queue beat long tickets that wait on reviews.
 
 ## The double-review protocol (every analysis, plan, design and solution)
