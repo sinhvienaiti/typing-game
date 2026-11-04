@@ -23,7 +23,7 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
    - Write the choice and the reason in the brief.
    - If code is chosen for anything beyond noise, erosion, thin rings, placement or timing, stop and justify it in writing.
 2. **Research loved designs first, with both assistants** (AGENTS.md "Plan with ChatGPT and Gemini").
-   - Give ChatGPT (Chat mode, thinking High) and Gemini the same brief, then send each the other's key ideas for a second round.
+   - Run the double review of [agent-orchestration](../agent-orchestration/SKILL.md): ChatGPT analyses and passes its own review twice in a row, then Gemini reviews and passes twice in a row, then Claude decides.
    - Verify their claims at the source, write down where they disagree, and merge everything into one plan before any making.
    - Build a numbered reference board of 9–12 frames from official footage, for the owner's eyes only.
    - Name what makes the loved ones beautiful: shape, motion, layers, light, sparkle.

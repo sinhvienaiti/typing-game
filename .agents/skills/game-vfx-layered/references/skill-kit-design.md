@@ -9,7 +9,7 @@ Worked example: Tu Tien's catalog V2 (03/11/2026), `docs/games/tu-tien/skills/SK
 - **Use the fans' own sources.** For a xianxia or wuxia game, research Chinese games, novels and donghua in Chinese: Bilibili, Baidu Baike, Zhihu, NGA, TapTap, 17173, Gamersky, Qidian.
   - Search the fans' words for a defining scene or the most handsome skill (名场面, 最帅技能).
   - For each weapon and element, collect 3–5 moves fans rate highest: the source with a link, what fans praise, the visual signature in one line, and the trick that makes it overwhelming.
-- **Two AIs, independently.** Send the same brief to ChatGPT (Chat, thinking High) and Gemini (the mode the owner names). Neither sees the other's answer, and ChatGPT is a second opinion, not an authority (game-art-pipeline).
+- **Two AIs, in the owner's double review** ([agent-orchestration](../../agent-orchestration/SKILL.md), 04/11/2026). ChatGPT (Chat, thinking High) analyses and passes its own review twice in a row. Then Gemini (4 Argon, High) reviews that and passes twice in a row. Then Claude verifies and decides. Neither assistant is an authority (game-art-pipeline).
 - **One long brief, in parts.** Part 1 is research. Parts 2–4 are the kits, a few schools each. The brief says to wait for "Part n", so one reply never truncates.
   - Get files out through the local receiver after each part (game-art-pipeline browser-ai-tools §4).
 

@@ -1,5 +1,9 @@
 # Phiếu 252 · Tu Tiên · Thí điểm: khung đầu và khung cuối cho đòn lửa phím 1 (Brushfire), để Firefly Video tạo chuyển động
 
+> **ĐÃ DỪNG (04/11/2026, khoảng 09:30).** Chủ dự án đổi cách chia việc: ChatGPT và Gemini vẽ ảnh 2D; Codex chỉ làm code, logic và âm thanh, và chỉ vẽ khi cả hai đã chạm giới hạn tạo ảnh (skill `agent-orchestration`).
+> - Ba lượt đầu `fire-impact-k1-v1..v3.try1.png` giữ lại làm mẫu.
+> - Thiết kế khung đầu của phiếu này chuyển vào kế hoạch `docs/games/tu-tien/skills/INTEGRATION_PLAN_2026-11-04.md`, lập theo quy trình duyệt hai lần liên tiếp.
+
 **Vì sao có phiếu này:**
 - Đêm 04/11 hai giám khảo mù chấm 35 ứng viên lửa và hào quang. Cao nhất là 7, đều là bản Firefly Video.
 - Kế hoạch đã lập cùng ChatGPT và Gemini (`docs/games/VFX_PRODUCTION_PIPELINE.md` §10, mục 10, bản C) là: vẽ trước **hình ba nét đã thiết kế**, rồi Claude đưa hình đó vào Firefly Video làm **khung đầu** (và khung cuối) để Firefly cho chuyển động lửa.

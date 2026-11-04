@@ -33,7 +33,7 @@ docs and use Game Studio and `threejs-*`; a Space skill is reference only there.
 | Tu Tiên Thủ Ải (`games/immortality-cultivation`) | Game Studio, `threejs-*` | [`docs/games/tu-tien`](docs/games/tu-tien) |
 | Portal, nginx, launch scripts | `game-ci-resumable` for CI/Git resumes | [split plan](docs/games/SPLIT_PLAN.md) §9–10 |
 
-Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs are for handoff and records): `game-art-pipeline` (making art and media with AI tools, blind judging at 8.5, Tripo, licences), `game-map-concept` (a map concept from the real play camera before building), `game-character-design` (research-first character design, the appeal checklist, four consistent views), `game-hero-presence-vfx` (halos, motes, rim glow and other presence layers, built and judged one by one). They apply to every game in this repo, Space Typing included.
+Cross-game project skills (01/11/2026; reusable know-how lives in skills, docs are for handoff and records): `game-art-pipeline` (making art and media with AI tools, blind judging at 8.5, Tripo, licences), `game-map-concept` (a map concept from the real play camera before building), `game-character-design` (research-first character design, the appeal checklist, four consistent views), `game-hero-presence-vfx` (halos, motes, rim glow and other presence layers, built and judged one by one), `agent-orchestration` (04/11: who does what among Claude, ChatGPT, Gemini, Firefly and Codex; the double review; Codex models and lanes). They apply to every game in this repo, Space Typing included.
 
 Making any VFX, CGI or SFX starts with the `game-vfx-production` skill (owner, 04/11/2026: "luôn ưu tiên dùng blender hoặc fire[fly] nếu 2 thứ này làm tốt hơn bạn"). The look comes from the best art tool (Firefly Video or Image, Blender sims rendered to flipbooks, painted masks), and code only places, times and animates it. Code-drawn flames, auras, stars, cracks and scorch were rejected as crude, "under 6". `game-vfx-layered` and `game-hero-presence-vfx` follow it for phases and always-on layers.
 
@@ -57,13 +57,20 @@ action class, the capture scenario and the acceptance numbers.
 
 "trước khi triển khai gì, nên tham khảo ý kiến của cả chatgpt và gemini để bổ sung ý tưởng cho nhau để đưa ra 1 plan tốt nhất, tối ưu nhất".
 
-Before building any feature, effect, art, system or rework:
-1. Give ChatGPT (Chat mode, thinking High, never Work) and Gemini (4 Argon, High) the same brief.
-2. Send each the other's key ideas for a second round, so they complement each other.
-3. Verify their key claims at the sources.
-4. Merge everything into one plan that says what each contributed and where you disagree. Only then implement.
+How, since 04/11/2026 later that morning (the owner's double review; skill `agent-orchestration`). Before building any feature, effect, art, system or rework:
+1. ChatGPT (Chat mode, thinking High, never Work) researches, analyses and proposes a solution.
+2. ChatGPT reviews its own analysis and solution until it passes **twice in a row**. A FAIL resets the count.
+3. Only then, Gemini (4 Argon, High) reviews ChatGPT's passed solution. It also must pass its own review **twice in a row**.
+4. Claude takes the result as reference: verifies the key claims at the sources, decides ("bạn là người chốt"), and writes one plan that says what each contributed and where Claude disagrees. Only then implement.
 
-Save their answers verbatim with a check table in the game's docs `source/` folder.
+Save both conversations verbatim, with every verdict and a check table, in the game's docs `source/` folder.
+
+Who does what (owner, 04/11/2026):
+- ChatGPT and Gemini do analysis and 2D images.
+- The local Codex is a worker for code, logic and sound. It gets a ticket only once Claude has the complete solution, runs `gpt-6.1-sol` (`xhigh` or `ultra` for code and logic), and works one lane unless the owner asks for more.
+- Codex makes images only when ChatGPT and Gemini have both hit their image limits.
+
+Details are in the `agent-orchestration` skill.
 
 Only purely mechanical work skips this step: a typo, a one-line bug fix, re-running a measurement, moving files.
 

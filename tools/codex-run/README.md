@@ -9,6 +9,25 @@ Mục đích: giao cho Codex những việc **hình ảnh, prompt âm thanh và 
 - **Đăng nhập:** bằng ChatGPT (`~/.codex/auth.json` của Windows). **Không dùng API key**: `run.ps1` xóa `OPENAI_API_KEY`, `CODEX_API_KEY`.
 - **Model mặc định:** `gpt-6.1-sol`, suy luận `high`. Mỗi dòng làn ghi model và mức của nó (cột 4 và 6), chọn theo bảng "Chọn model" dưới đây (chủ dự án 27/10: không dùng ultra cho mọi việc).
 
+### Từ 04/11/2026: Codex là người làm code, logic và âm thanh
+
+Khối này thay mục đích ở đầu trang và bảng 27/10 bên dưới ở chỗ nào hai bên khác nhau. Chủ dự án dặn 04/11: "giao cho nó việc chính là cũng xử lý code, logic, âm thanh… codex chỉ là 1 đứa làm việc thay bạn xử lý code hoặc logic… khi nào 2 đứa chatgpt và gemini đạt giới hạn tạo ảnh thì kêu codex tạo ảnh… ưu tiên dùng 1 luồng… dùng model sol 6.1 medium, high, extra hoặc ultra tuỳ công việc, nếu liên quan tới logic, code thì cứ extra hoặc ultra". Đầy đủ ở skill `agent-orchestration`.
+
+- **Giao gì:** code, logic, âm thanh (chuỗi xử lý âm, mã Web Audio, script trộn). Chỉ giao khi Claude đã có lời giải đầy đủ, sau lượt duyệt hai lần liên tiếp của ChatGPT rồi Gemini, hoặc sau quyết định của chủ dự án.
+- **Không giao:** phân tích, thiết kế, quyết định.
+- **Ảnh:** ChatGPT và Gemini vẽ. Codex chỉ vẽ khi cả hai đã chạm giới hạn tạo ảnh.
+- **Model `gpt-6.1-sol`, mức theo việc:**
+
+  | Loại việc | Mức |
+  |---|---|
+  | Việc vặt | `medium` |
+  | Âm thanh, sửa nhỏ có chỉ dẫn, ảnh khi buộc phải vẽ | `high` |
+  | Code và logic | `xhigh` |
+  | Code lớn nhiều phần hoặc logic khó | `ultra` |
+
+  Code và logic không cần hỏi chủ dự án từng phiếu nữa.
+- **Một làn.** Chỉ mở thêm khi chủ dự án bảo.
+
 ### Chọn model (chủ dự án 27/10)
 
 Hạn mức Codex rất thấp (cửa sổ 5 giờ). Làm ảnh trước, ảnh xong mới giao việc khác. Chọn model và mức theo loại việc:
