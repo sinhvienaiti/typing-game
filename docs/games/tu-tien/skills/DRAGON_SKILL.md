@@ -1,6 +1,6 @@
 # Chiêu rồng (dragon skill): ba hướng cho anh chọn, 04/11/2026
 
-**Trạng thái:** đề xuất thiết kế, chưa dựng, chưa chấm. Không đổi mã game, không đổi số canon. Anh chọn một hướng rồi mới dựng.
+**Trạng thái:** anh đã chọn **A · Twin Dragons, One Burning Pearl** (04/11/2026, sáng: "A · Song Long"). Bước tiếp theo là hộp xám trong lab và đo bằng bot (§6 bước 1). Số canon chưa đổi; B và C để lại cho bộ chiêu Thủy và phần tuyệt kỹ.
 
 **Xem nhanh** (không vào Git):
 - Bảng hình ba hướng: `games/immortality-cultivation/tmp/shots/dragon/directions-board.jpg` (3 hàng × 3 ảnh, có tên hướng).

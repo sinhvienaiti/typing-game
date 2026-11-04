@@ -30,11 +30,29 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - lửa hiện tại ("nhìn như rác");
   - vết nứt và vết cháy vẽ bằng code;
   - chiêu quá hẹp trước thú đông.
-- **Đang chạy:** workflow `w016s17rs`:
-  - nghiên cứu pipeline VFX (`docs/games/VFX_PRODUCTION_PIPELINE.md`);
-  - lửa Blender Mantaflow;
-  - clip Firefly (khí lụa, lửa liếm, sao lấp lánh, bộ lửa trộn);
-  - rồi hai giám khảo mù chấm.
+- **Đêm 04/11 (workflow `w016s17rs`, xong 08:40):**
+  - Cả ba agent đứng từ khoảng 1:04 tới 8:24. Nguyên nhân: phiên ở chế độ `auto`, và lệnh `Write` qua đường dẫn symlink `/Users/...` bị coi là ghi ra ngoài thư mục làm việc nên phải chờ duyệt.
+  - Đã sửa: `.claude/settings.json` cho phép `Read` và `Edit` trên `//Users/toandx/htdocs/typing-game/**`; prompt cho agent chỉ dùng đường dẫn `/Volumes/...` (memory `symlink-path-permission-stall`).
+  - Kết quả:
+    - nghiên cứu: `VFX_PRODUCTION_PIPELINE.md` (commit b83f273a);
+    - Blender: `BLENDER_FIRE.md` (46b89fbc);
+    - Firefly: `FIREFLY_OVERNIGHT_2026-11-04.md` (9bc6e5b7).
+  - Hai giám khảo mù (`tmp/shots/overnight/judge-1.md`, `judge-2.md`):
+    - cao nhất 7, đều là Firefly: lửa bọc lưỡi `ff-f1-c4`, sao mũi `ff-g1-c2`, áo lông vũ `ff-m1-c4` (7 / 6,5), vòng ấn `ff-c3-c3` (7 / 6,5);
+    - Blender tô phẳng chỉ 3,5–4,5. Hướng Blender này dừng lại.
+  - Đã gửi anh tấm cỡ chơi, bảng ứng viên và video picks (bản 720p cho điện thoại).
+- **04/11 sáng:**
+  - Anh đồng ý xóa `typing-game.pre-ssd`; đã xóa, ổ trong từ 2,2 GB lên khoảng 60 GB trống.
+  - Đã dọn khung thô của phiên này trong `tmp/shots` (11 → 4,1 GB) và tắt 5 bộ nhận cũ.
+  - Cursor tự ghi snapshot khoảng 21 GB ở `~/Library/Application Support/Cursor`; không phải của mình.
+  - Codex có lại hạn mức; chạy một làn `.local/codex-lane-mac-s31.txt` từ 09:23.
+    - Phiếu 252 là lượt thí điểm, tối đa 10 lần vẽ: khung đầu và khung cuối của lửa phím 1, cho Firefly image-to-video. Đã viết lại sau khi phản biện tìm ra 15 lỗi (9 lỗi chặn).
+    - Khung đầu chính: nền đen, 1080, khổ vuông, đúng chế độ đã chạy được với `ff-a1-c5`.
+    - 253 và 254 tạm giữ: lửa bọc lưỡi và áo khí đi ngược §0.2 của pipeline (vật gắn lưỡi là lưới mang texture cuộn); vòng ấn là ảnh tĩnh, không qua Video.
+  - **Chiêu rồng:** anh chọn **A · Twin Dragons, One Burning Pearl** (Kiếm ô 2, Hỏa), xem `DRAGON_SKILL.md`, commit 57133934.
+    - Workflow `w4l4pn0nq` đang chạy: dựng hộp xám sau cờ `key2=twin-pearl` (tắt mặc định), đo bằng bot, quay khung, phản biện, sửa.
+    - Kết quả đo ghi vào `DRAGON_SKILL.md` §8.
+  - **Repo game:** commit 1a78a82 gồm phần dở của hào quang vòng 1 (biên dịch shader cho cả hai đích, hook lab, test, changelog). `media.md5` không phải của mình, để nguyên.
 - **Kế tiếp:**
   1. Plan ChatGPT + Gemini để lắp vào lab: hào quang vòng 2, vòng ngọc, cut-in C3 vào mã chính, camera xoay phím O vào mã chính, lửa trộn, sửa độ rõ của kiếm.
   2. Video và chấm mù hai lượt.

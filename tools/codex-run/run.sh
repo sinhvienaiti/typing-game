@@ -25,12 +25,13 @@ workdir=$(cd "$root/$cwd" && pwd) || exit 2
 
 {
   cat <<'EOF'
-You are Codex working for the owner of the typing-game repo (/Users/toandx/htdocs/typing-game) on a Mac mini M4 (macOS).
+You are Codex working for the owner of the typing-game repo on a Mac mini M4 (macOS). Since 03/11/2026 the repo lives on an external SSD at /Volumes/SS990TPRO/htdocs/typing-game; /Users/toandx/htdocs/typing-game is a symlink to it. Always write through the /Volumes path.
 House rules for this task:
 - Do exactly the task below. Touch only the paths it allows. Never run git commit, git push, git reset, git clean or git stash.
-- The task may name paths from the Dell laptop: read D:\typing-game as /Users/toandx/htdocs/typing-game. There is no WSL here: git, node, pnpm, python3 and ImageMagick 7 (/opt/homebrew/bin/magick) run directly. For tools/art-normalize export ART_MAGICK=/opt/homebrew/bin/magick. Font for contact sheets: /System/Library/Fonts/Supplemental/Arial.ttf.
+- The task may name paths from the Dell laptop: read D:\typing-game as /Volumes/SS990TPRO/htdocs/typing-game. There is no WSL here: git, node, pnpm, python3 and ImageMagick 7 (/opt/homebrew/bin/magick) run directly. For tools/art-normalize export ART_MAGICK=/opt/homebrew/bin/magick. Font for contact sheets: /System/Library/Fonts/Supplemental/Arial.ttf.
 - Other agents work in this repo at the same time (game code, game docs, tools/audio-lab). Never edit outside the paths the task allows, and do not run the games' builds or test suites.
-- Tu Tien (games/immortality-cultivation, docs/games/tu-tien) is paused by the owner: do not touch it.
+- Tu Tien (games/immortality-cultivation, docs/games/tu-tien) is the owner's current focus and other agents edit it: write there only the paths the task allows, never its src, scripts, tests or docs.
+- Never send third-party reference images (screenshots or art from commercial games, reference boards) to any image tool; use only the repo's own images the task names.
 - Images: use your built-in image generation tool (image_gen). Save every image where the task says, with its exact prompt next to it as <name>.prompt.txt.
 - Sounds must follow tools/audio-lab/DECISIONS.md Q6 (shaped by the action, no cheap puff/pop/thump sounds); write prompts affirmatively.
 - Docs in Vietnamese with full diacritics, in the existing style of the folder.
