@@ -59,6 +59,15 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
   - Gross errors still read at any size: a missing limb ("cụt 1 tay"), clip-art flatness, a wrong silhouette. Fix those.
   - Fine detail matters only where the image is large and seen clearly: cut-in art, key art, close-ups, UI hero art, and Tripo sources.
   - Judge skill VFX in motion at play size, not as a zoomed still.
+- **Creatures and objects inside a skill are energy forms, not characters** (owner, 05/11/2026: "chúng ta đang làm kỹ năng cơ mà, nên dạng năng lượng là thứ hợp lý, đẹp hơn, mà lại khó bị bắt lỗi hơn vì nó dùng hiệu ứng che đi khuyết điểm, thành ra nó rất phù hợp cho những kỹ năng").
+  - A dragon, phoenix, tiger, sword spirit or lotus summoned by a skill is drawn as translucent fire, qi or light:
+    - the head or key silhouette readable;
+    - the body a flowing ribbon that fades into sparks and motes;
+    - legs tiny or wisps;
+    - soft detail and additive glow.
+  - Examples: legendary dragon-palm strikes and MU-style dragon skills.
+  - Build it from a reference still painted in that energy style, an animated head or key shape, and a body strip along the path. No detailed, solid creature, and no Tripo model, unless a large close-up needs one.
+  - Why: it looks better, reads as a skill, and the glow hides small flaws.
 - **Reference image first, then video** (owner, 05/11/2026: "tôi tưởng là chúng ta sẽ tạo ảnh để tham chiếu trước r mới tạo ra những hình animation").
   - Any effect whose shape matters (a creature, lotus, pearl, gate, seal, halo, burst petals, slash, star, crack or scorch, cut-in element) starts from a still: an approved image, or a new one the owner picks. Firefly Video then moves it (image-to-video).
   - Text-to-video is only for pure material: flow, sparks, embers, smoke, dust, strips.

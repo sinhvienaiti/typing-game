@@ -21,3 +21,5 @@ This applies to every game in this repo (Dragonhold, Wordwoven, Last Line, Tu Ti
 10. **Then 3D and the game.** Tripo through [game-art-pipeline](../game-art-pipeline/SKILL.md) (Space Typing's runtime import stays in [game-asset-2d-to-3d](../game-asset-2d-to-3d/SKILL.md)), with the living numbers in `docs/games/LESSONS_FROM_THREE_GAMES.md` §4 and `docs/games/MODEL_QUALITY.md`. Rig and clips are ours, never Tripo's auto rig (`docs/games/CHARACTER_ANIMATION.md` §5.3). Radiance VFX follows the bloom and budget rules of `docs/games/VFX_STANDARD.md`. Final grade in the built play host, player settings, no URL flags; character animation is a shared system judged at 9, and the owner signs off last.
 
 Read [the failures we hit](references/failures.md) before starting. A worked example (Last Line heroine and drone) is in [worked examples](references/worked-examples.md).
+> **Not for skill creatures** (owner, 05/11/2026). A dragon, beast or spirit summoned by a skill is an energy effect, not a character: translucent fire, qi or light, soft detail. Make it with [game-vfx-production](../game-vfx-production/SKILL.md), not with this skill's four views and Tripo.
+
