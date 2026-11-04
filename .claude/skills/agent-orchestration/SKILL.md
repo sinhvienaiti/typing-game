@@ -24,7 +24,7 @@ This replaces older rules wherever they differ:
 | **Gemini** (gemini.google.com, 4 Argon, High) | Reviews ChatGPT's passed solution. 2D images next to ChatGPT, and when ChatGPT hits its image limit | Has the final word |
 | **Codex** (the local CLI, `tools/codex-run`) | Code, logic and sound work (audio processing chains, Web Audio code, mixing scripts), only from a complete solution Claude hands it. Images **only** when ChatGPT and Gemini have both hit their image limits | Analysis, design or deciding. Browsing, dev servers (the sandbox refuses ports) |
 | **Firefly** (Adobe models only) | Video VFX, sound effects, Adobe images and the image Upscaler, where `game-vfx-production` picks it | Partner models (Veo, Gemini, Flux and the like), the video upscaler (Topaz) |
-| **Claude subagents and workflows** | Making, measuring, judging and browser work in parallel | More than 3 at once (owner, 03/11) |
+| **Claude subagents and workflows** | Making, measuring, judging and browser work in parallel | More than the owner's current cap at once: 2 since 04/11 14:00 (3 from 03/11) |
 
 ## The double-review protocol (every analysis, plan, design and solution)
 

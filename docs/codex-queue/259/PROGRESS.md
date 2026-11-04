@@ -1,23 +1,40 @@
 # Phiếu 259 (CX-C, vòng ngọc): tiến độ
 
-**Cập nhật:** 04/11/2026, khoảng 13:50 (agent viết phiếu dừng theo hạn cứng 14:00 của anh).
+**Cập nhật:** 04/11/2026, chiều (agent viết phiếu, phiên Tu Tiên).
 
-**Trạng thái:** phiếu là **BẢN NHÁP, CHƯA XONG**. Chưa đủ quy trình duyệt hai lần, chưa đưa vào làn Codex.
+**Trạng thái:** phiếu `docs/codex-queue/259-tt-jade-ring-material.md` đã đủ lời giải, đã bỏ dòng "BẢN NHÁP".
+- **Đường duyệt:** Claude tự phân tích; ChatGPT duyệt lượt 1 (FAIL, các lỗi đã xử lý); hai lượt PASS liên tiếp của agent phản biện Claude (ChatGPT/Gemini mất đăng nhập).
+- **Chưa đưa vào làn Codex.** Phải chờ hai lượt PASS của agent phản biện. Worktree `games/.wt-immortality-cultivation-codex` (nhánh `codex/jade-ring-material`) chưa tạo.
 
-## Đã xong
-- Đọc kế hoạch (`INTEGRATION_PLAN_2026-11-04.md`: ghi chú đầu, §2.8, §3 CX-C, §4 "Vòng ngọc"), `SWORD_AURA.md` (Q4, `AuraAnchors`), mã `sword-material.ts`, `blades.ts`, `real-swords.ts`, `clear-wind-impostor.json`, kịch bản `lab-element-parity.mjs`, phiếu 255. Kiểm thứ tự chunk trong three.js 0.170 (`meshphysical.glsl.js` dòng 173–186).
-- Xác định ảnh đã duyệt: `games/immortality-cultivation/art-src/weapons/clearwind-src3q.v4-try1.png` (nguồn Tripo của model). Đo màu trên vùng vòng: ngọc trắng trung vị `#DFDDDF`, vàng nhạt trung vị `#D4B793` (bảng và giá trị tuyến tính trong phiếu).
-- Bản nháp phiếu đầy đủ các mục (lời giải, tệp và hàm, đường ghi, việc cấm, kiểm bắt buộc, báo cáo, model `gpt-6.1-sol` mức `xhigh`): `docs/codex-queue/259-tt-jade-ring-material.md`.
-- ChatGPT (Chat, thinking High): brief đã gửi, trả lời lần đầu xong (34.365 ký tự). Chat: `https://chatgpt.com/c/6aead1ae-67e4-83ec-983f-339fe8bb6531`. Lượt tự duyệt 1 gửi lúc 13:45, kết quả `VERDICT: FAIL` (13:50); bản sửa đầy đủ đang viết dở khi dừng.
-- Bản ghi ChatGPT tới lúc dừng: `docs/games/tu-tien/skills/source/jade-ring-chatgpt-2026-11-04.md` (đã lưu: brief, 4 lượt, lượt cuối chưa xong, bảng kiểm một phần). Bản ghi Gemini chưa có vì chưa bắt đầu.
+## Đã làm sau bản nháp (13:50)
+- ChatGPT và Gemini mất đăng nhập, nên không chạy tiếp lượt duyệt trong trình duyệt (luật 9 của skill `agent-orchestration`). Claude tự phân tích từ mã, GLB và texture.
+- **Đo hình.** Đọc GLB trong Node bằng `tsx`, đưa về lưỡi đơn vị bằng chính `bladeFromObject`, rồi:
+  - vẽ ảnh mặt trước, mặt sau, độ sâu, pháp tuyến;
+  - trải vòng ra tọa độ cực;
+  - cắt lát qua tâm ở 45° và 135°.
+- **Kết quả hình:** đĩa ngọc là xuyến dày, lỗ `rIn` 0,0440 ở (0,0023; −0,0274). Gờ nối mỏng ở z ≈ 0, từ 0,092 tới 0,102. Vành bạc hình elip, từ 0,104 ra 0,113–0,128. Hạt, mây, chữ V và khâu nối nhô cao hơn đỉnh đĩa. Đĩa nghiêng khoảng 2°.
+- **Phát hiện chính:** map màu đã là ngọc trắng (trung vị sRGB 218/215/213) và có nét vàng nhạt (216/181/142), sát màu ảnh đã duyệt. "Crôm" là do ORM:
+  - độ kim loại trung vị 0,15, p90 tới 0,48, đốm 0,61;
+  - độ nhám 0,22–0,26, đốm 0,10.
+- **Lời giải đổi khỏi bản nháp:**
+  - Bỏ dải vàng vẽ bằng hình học. Bản nháp sẽ đặt chỉ vàng lên vành bạc và tô gờ nối thành ngọc.
+  - Thay bằng: vùng đổi theo hình (trong `rCut`, dưới hai mặt phẳng đỉnh cộng biên, không phải hạt), và trong vùng đó tách loại theo chính màu map. Trắng thành ngọc: điện môi, nhám 0,34. Vàng thành vàng kim: 0,85 / 0,30.
+  - Impostor không đổi, vì atlas Blender đã sáng, vòng ở kiếm xa chỉ 5–21 px, và elip không có căn cứ.
+- **Mô phỏng trên map thật** (model đầy đủ và LOD, mặt trước và sau): chỉ đĩa và nét vàng của nó đổi. Hạt, đế, mây, chữ V, khâu nối, vành giữ nguyên. Ảnh mô phỏng nằm ở thư mục nháp của phiên, không lưu vào repo.
+- **Bản tham chiếu chạy được:** `jade-ring-reference.ts` trong thư mục này (hàm `jadeRingOf` và bộ đọc GLB).
+  - Số đo của hai model ghi ở đầu tệp và trong bảng §1 của phiếu.
+  - Vòng tổng hợp của test cho số đúng như thiết kế: nghiêng 2,4° ra độ dốc 0,0426 (0,0445 sau khi `rCut` dời về mép trong gờ), hạt không kéo mặt phẳng.
+  - Đĩa đặc và lưỡi trơn trả `null`.
+- **Đã kiểm ở nguồn:** three 0.170.0 `meshphysical.glsl.js` (thứ tự chunk), `roughnessmap_fragment` (kênh G), `metalnessmap_fragment` (kênh B), `lights_physical_fragment` (đọc `diffuseColor`, `metalnessFactor`, `roughnessFactor`).
 
-## Chưa xong
-1. ChatGPT: hai PASS liên tiếp (tối đa 4 lượt), rồi handoff. Mở lại đúng chat ở trên, đọc lượt tự duyệt 1 (chỉ dòng VERDICT), gửi tiếp lượt 2 theo mẫu `references/double-review.md` §2.
-2. Gemini (4 Argon, High): chưa bắt đầu. Dán handoff của ChatGPT bằng nút Copy và Cmd+V, mẫu §3, hai PASS liên tiếp, handoff.
-3. Lưu nguyên văn phần còn lại của hai chat bằng JS trang và bộ nhận cục bộ (form POST cùng tab; POST qua iframe ẩn bị CSP của ChatGPT chặn, `navigator.clipboard.writeText` bị từ chối).
-4. Claude kiểm các ý chính, quyết ba chỗ ChatGPT khác bản nháp (cách đo vòng, bề rộng chỉ vàng và vành bạc, bán kính dọc của vòng trong impostor theo `rollWidth` hay `cos(roll)`), sửa "Lời giải đã chốt", bỏ dòng "BẢN NHÁP".
-5. Trước khi chạy phiếu: Claude tạo worktree `games/.wt-immortality-cultivation-codex` nhánh `codex/jade-ring-material` từ `bc94110` (worktree của 255 đã gỡ), symlink `node_modules`.
+## Phản biện lượt 1 (agent Claude độc lập): FAIL, đã sửa
+- Ba lỗi, cả ba đúng sau khi Claude kiểm trên mã và số đo; chi tiết ở mục "Phản biện" cuối phiếu.
+  1. Mặt nạ của Kiểm 8 thiếu kiếm cắm của nạn nhân và kiếm trời K5: thêm `__lab.swordMask(on, all)`; `MASK=1` gọi `swordMask(true, true)`.
+  2. Gờ nối có độ bão hòa tuyến tính 0,52–0,59 (không phải 0,26), bị đổi thành vàng lốm đốm: `rCut` dời về mép trong gờ (`rs[a0]`); bảng số, test, tham chiếu cập nhật; thêm `ring-sim.ts` và số bắt buộc ở Kiểm 6.
+  3. `jadeRingOf` thêm `fail?: (step) => void`; `modelOf` in cảnh báo có tên model.
+- Đếm lại hai lượt PASS từ đầu.
 
-## Ghi chú
-- Codex không chạy được server hay trình duyệt, nên các kiểm có ảnh (vòng giữ ≥ 95 %, trùng khít ngoài vòng, màu, thời gian, ảnh trước và sau) là phần Claude chạy khi nhận; Codex viết công cụ `scripts/visual/ring-parity.mjs` và test không cần trình duyệt.
-- Kiếm cầm tay trong lab (`src/lab/hand-sword.ts`) có vật liệu riêng, ngoài phạm vi phiếu này.
+## Còn lại
+1. Hai lượt PASS liên tiếp của agent phản biện Claude, tối đa 4 lượt. FAIL thì sửa phiếu và đếm lại từ đầu.
+2. Claude tạo worktree và nhánh, symlink `node_modules`, rồi đưa phiếu vào làn Codex (`gpt-6.1-sol`, `xhigh`).
+3. Khi Codex xong: Claude chạy Kiểm 6–12 của phiếu, gửi anh ảnh trước và sau.
