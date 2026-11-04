@@ -134,7 +134,9 @@ Runner usage: `tools/codex-run/README.md`.
   - Tell the owner in chat at once, and send a `PushNotification` when he may be away (he works remotely).
 - **Check before reporting "signed out".**
   - On 04/11 an agent reported that ChatGPT, Gemini and Firefly were signed out and stopped its Firefly step. The owner said they were not, and a fresh tab showed all three still signed in.
-  - Before concluding a sign-out, open a fresh tab, load the site's home page, and look for the account avatar against a "Sign in" or "Log in" button.
+  - It happened twice on 04/11. At 18:24 the A4 agent saw "Sign in" on Firefly's home page, with `adobeIMS.isSignedInUser()` false, and Claude saw the same at 18:48. A minute later the owner showed Firefly signed in at `firefly.adobe.com/files`, and he says he was signed in all along. The home page can show "Sign in" while the account's single sign-on session is still valid.
+  - **Before concluding a sign-out, load a page that needs the account** (Firefly `firefly.adobe.com/files` or `/generate/video`, Gemini `gemini.google.com/app`, ChatGPT a new chat), wait 10–15 s for the silent sign-in, and look for the account avatar against a "Sign in" or "Log in" button. Never click "Sign in" and never type credentials.
+  - **If it still looks signed out, report it to the owner at once** (see "Tell the owner at once"), with a screenshot, and end the step so the report reaches him. Never sit on it or work around it for minutes. The owner, 04/11: "sau cái gì bị tắc phải báo cáo luôn cho tôi".
   - Keep one neutral tab open when cleaning up: closing the last tab closes the browser pane.
 - **Agents use the in-app browser only.** Claude in Chrome is the owner's own Chrome, used only when he asks for it. On 04/11 two agents tried it when the in-app browser was full.
 - **Budget browser tabs, not just agents.** The in-app browser holds about 9 tabs. On 04/11 nine agents ran at once and one image agent never got a tab (four tries in 8 minutes).
