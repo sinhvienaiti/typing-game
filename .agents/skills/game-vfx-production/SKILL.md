@@ -72,6 +72,9 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
   - Any effect whose shape matters (a creature, lotus, pearl, gate, seal, halo, burst petals, slash, star, crack or scorch, cut-in element) starts from a still: an approved image, or a new one the owner picks. Firefly Video then moves it (image-to-video).
   - Text-to-video is only for pure material: flow, sparks, embers, smoke, dust, strips.
   - Never prompt a creature name for a fire texture. Never write negatives like "No head": the model draws what you name.
+  - **A clip for a moving sprite stays in place.** Use the same image as first and last frame, and a prompt where only the fire, mane and motes move. The game moves the sprite along its path.
+    - On 05/11, "glides forward" made an energy dragon grow four solid legs and run like a beast.
+    - The in-place version kept it translucent and smooth.
   - No batch starts before two samples have been looked at and sent to the owner. Time pressure is no exception: on 05/11 a 168-clip sprint from text alone gave flat clip-art dragons and lotuses.
 - **Motion must be smooth.**
   - Enough frames (≥ 24 for a burst, a seamless loop for a band).
