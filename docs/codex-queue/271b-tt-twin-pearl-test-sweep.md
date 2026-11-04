@@ -4,7 +4,7 @@
 
 **Báo cáo:** tin nhắn cuối (`.local/codex-runs/271b-tt-twin-pearl-test-sweep/last.md`). Claude chép vào `docs/codex-queue/271b-report.md`.
 
-**Đường duyệt:** Claude viết lúc 20:50 ngày 04/11, khi làn Codex trống. Đặc tả là thiết kế đã duyệt (§9.0–§9.11, hai lượt PASS S3 và S4 cho phiếu 1). Không có quyết định thiết kế mới nào.
+**Đường duyệt:** Claude viết lúc 20:28 ngày 04/11, khi làn Codex trống. Đặc tả là thiết kế đã duyệt (§9.0–§9.11, hai lượt PASS S3 và S4 cho phiếu 1). Không có quyết định thiết kế mới nào.
 
 ## Bối cảnh
 - Thiết kế, chỉ đọc: `/Volumes/SS990TPRO/htdocs/typing-game/docs/codex-queue/271/section9-design.md` §9.2–§9.6 và §9.12 A–D.
