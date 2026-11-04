@@ -127,6 +127,11 @@ Runner usage: `tools/codex-run/README.md`.
 
   Have a check-in look for logs that have been idle too long.
 - **Browser:** close your tabs when done (the in-app browser holds about 9). Never sign in, type credentials or click consent dialogs.
+- **Tell the owner at once when work waits on him** (owner, 04/11/2026 ~18:55: "tại sao fire bị tắc nhưng bạn không hề thông báo cho tôi"). Anything that needs him (a sign-in, a consent, credits, a decision) reaches him within minutes, never only when he asks.
+  - On 04/11 the A4 agent found Firefly signed out at 18:24 and stopped at 18:43. The workflow went on to the next critic, and a workflow tells Claude only when it ends, so Claude learned of it at 18:44, when the owner asked about progress.
+  - In a workflow, a step that can be blocked by the owner checks its own result and `return`s early, or runs as its own workflow.
+  - While lanes run, keep a `Monitor` on each workflow's `journal.jsonl` and on the Codex lane logs, so every step's result reaches Claude as it lands. Re-arm it when it expires.
+  - Tell the owner in chat at once, and send a `PushNotification` when he may be away (he works remotely).
 - **Check before reporting "signed out".**
   - On 04/11 an agent reported that ChatGPT, Gemini and Firefly were signed out and stopped its Firefly step. The owner said they were not, and a fresh tab showed all three still signed in.
   - Before concluding a sign-out, open a fresh tab, load the site's home page, and look for the account avatar against a "Sign in" or "Log in" button.
