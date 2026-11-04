@@ -13,6 +13,7 @@ The list comes from the owner's rejections of 01/11/2026 and from widely taught 
    - It has one or two signature shapes no other character in the game has: a crest, a crown line, a cape cut, a wing, a weapon.
    - Its shape language fits the role. Heroes lean on upward lines, V-shapes and an open chest.
    - A hero carries no villain cues: no closed dark face, no horn-like fins or spikes at the head.
+   - **Paired limbs stay paired in every crop.** Show both arms or forelegs, or neither. A bust or forebody crop with only one visible arm or claw reads as amputated. The owner said this of the Solar Ember Regent dragon on 04/11/2026 ("nhìn hiện tại nó như cụt 1 tay"). Brief it explicitly: name both limbs and what each does (for example the near claw grips the pearl and the far claw is braced behind it), and never write "one claw".
 
 2. **Focal point.** The eye lands on one place first, usually the head and chest (face, crown, chest core).
    - The highest contrast and the strongest light sit there.

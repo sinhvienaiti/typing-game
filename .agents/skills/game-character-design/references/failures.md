@@ -43,3 +43,7 @@ Each entry gives what happened, why it happened, and the rule that now prevents 
 
 11. **Accepting ChatGPT's answer unchecked.**
     - **Rule:** verify each key claim at its source, mark it, and give my own view ([research lenses](research-lenses.md)).
+
+12. **One visible foreleg read as a missing arm** (Tu Tien, Solar Ember Regent dragon, 04/11/2026).
+    - **What:** the prompt asked for "one exquisitely detailed claw reaching toward a single floating pearl" in a head-and-forebody crop. The owner said it looked like it had lost an arm.
+    - **Rule:** paired limbs appear in pairs or not at all, in every crop. Checklist item 1.
