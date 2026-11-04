@@ -115,7 +115,9 @@ Runner usage: `tools/codex-run/README.md`.
 
 ## Claude agents and unattended work
 
-- **At most 3 Claude agents at once:** lean, with no two writing the same files.
+- **Claude agents within the owner's current cap:** 2 at once since 04/11/2026 14:00 (it was 3 from 03/11). Count a workflow by its live agents. Keep it lean, and never let two agents write the same files.
+  - Extra agents he grants for a time box stop at the time he set; never extend it.
+  - Their leftovers go into an ordered queue in `docs/HANDOFF_CURRENT.md`; the next item starts only when a slot frees.
 - **Never send messages to a live workflow agent:** it resumed a duplicate on 31/10. Relay through files or later steps.
 - **Before leaving work unattended,** check:
   - the permission mode;

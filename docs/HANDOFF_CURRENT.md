@@ -62,6 +62,18 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
     - Mỗi thư mục có `ABOUT.md`. Mục lục `INDEX.md` sinh bằng `node scripts/review-index.mjs`.
     - `tmp` của ba game kia (khoảng 5 GB, thư mục 25–28/10 của phiên khác) chưa chuyển, chờ anh.
   - **Anh đang làm từ xa:** mọi bản demo gửi bằng video MP4 dưới 30 MB.
+  - **Từ 14:00 (anh dặn 13:58): tối đa 2 agent Claude chạy cùng lúc.** ChatGPT và Gemini không được làm tắc việc: nếu không dùng được thì Claude tự phân tích, và agent Claude phản biện độc lập cho 2 lượt PASS (skill `agent-orchestration`, bước 9).
+    - **Hai suất đang chạy:**
+      1. thiết kế Song Long toàn sân (§9 của `DRAGON_SKILL.md`);
+      2. workflow giai đoạn A `wvczvsq3l`: đòn lửa phím 1, rồi bộ mặt nạ vẽ.
+    - **Hàng đợi, làm theo thứ tự khi một suất trống:**
+      1. Phiếu 258 FlipbookPool bản 2. Bản nháp ở `docs/codex-queue/258-*.md`, `258/PROGRESS.md`; chat ChatGPT `6aead1a6…`, đã có 7 lỗi cần sửa.
+      2. Phiếu 259 vòng ngọc. Bản nháp ở `docs/codex-queue/259-*.md`; màu đo từ ảnh nguồn kiếm `#DFDDDF` và `#D4B793`.
+      3. Vết cháy hệ Hỏa. Đề bài ở `typing-game-review/captures/tu-tien/fire-marks/brief-r1.txt`. ChatGPT không vào được thì giao Codex vẽ bằng phiếu ảnh.
+      4. Sửa cut-in theo `CUTIN_AUDIT_2026-11-04.md`: đòn đầu trước, cut-in khoảng 1 s, khung có hào quang.
+      5. Âm thanh theo `SOUND_AUDIT_2026-11-04.md`: chỉnh lại thứ bậc to nhỏ, thêm lớp, lớp vang chung, âm cho Song Long.
+      6. Song Long: Codex viết lại mã theo §9, rồi bot đo và cân lại.
+    - **Đầu rồng:** ba hướng đã gửi anh, chờ anh chọn.
   - **Repo game:** commit 1a78a82 gồm phần dở của hào quang vòng 1 (biên dịch shader cho cả hai đích, hook lab, test, changelog). `media.md5` không phải của mình, để nguyên.
 - **Kế tiếp:**
   1. Plan ChatGPT + Gemini để lắp vào lab: hào quang vòng 2, vòng ngọc, cut-in C3 vào mã chính, camera xoay phím O vào mã chính, lửa trộn, sửa độ rõ của kiếm.
