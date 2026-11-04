@@ -1,6 +1,11 @@
-# BOARD · Tu Tiên (cập nhật 05/11/2026, 00:35)
+# BOARD · Tu Tiên (cập nhật 05/11/2026, 00:30)
 
 Luật: tối đa 3 việc đang làm. Mỗi việc kết thúc bằng bản chơi (hoặc bước lab anh đã duyệt) cùng video trước/sau. Cách dùng: `README.md`.
+
+## ƯU TIÊN SỐ 1 HÔM NAY: chạy nước rút Firefly (tài khoản hết hạn sau khoảng 23 giờ, tính từ 00:22 ngày 05/11)
+- Anh chọn: video và âm trước, ảnh sau. Ảnh sau này vẫn nhờ Gemini hoặc ChatGPT vẽ được.
+- Hai agent dựng danh sách việc và bộ chạy tự động trong trang (một tab video, một tab âm), mỗi việc 3 take, tự lưu file. Sau đó Claude chỉ kiểm theo chu kỳ.
+- File: `art-src/lab/firefly-sprint-2026-11-05/`. Trạng thái: `tasks/firefly-sprint.md` và các file `.json`.
 
 ## Đang làm (tối đa 3)
 | Việc | Trạng thái | Kế tiếp | File |

@@ -19,3 +19,5 @@
 | 05/11 00:00 | Quy trình | Giảm duyệt: ChatGPT/Gemini chỉ cho hướng hình mới và thiết kế lớn; phiếu code giao Codex sau khi Claude soát | "Đồng ý giảm duyệt" |
 | 05/11 00:10 | Quy trình | Gemini 4 Argon High trước, ChatGPT khi Gemini hết hạn mức; kiểm 1–2 phút một lần | "ưu tiên dùng gemini 4 argon…" |
 | 05/11 00:30 | Quy trình | Hệ thống file md gọn; báo anh nếu dùng trợ lý tốn hơn tự làm | "nên thiết kế 1 hệ thống đơn giản các file md…" |
+| 05/11 00:20 | Lô 1 (Hỏa) | Vòng ở tay = A `fire-halo-ring`, vòng dưới đất = B `fire-halo-seal-loop`; sao = C `fire-twinkle-set` | nút chọn |
+| 05/11 00:22 | Firefly | Tài khoản Firefly hết hạn sau khoảng 23 giờ: làm hết hiệu ứng, video, âm, hình cần Firefly trong ngày | "còn khoảng 23h nữa là tôi hết hạn tài khoản fire…" |
