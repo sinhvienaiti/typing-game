@@ -7,6 +7,8 @@ Luật: tối đa 3 việc đang làm. Mỗi việc kết thúc bằng bản ch�
 - Hai agent dựng danh sách việc và bộ chạy tự động trong trang (một tab video, một tab âm), mỗi việc 3 take, tự lưu file. Sau đó Claude chỉ kiểm theo chu kỳ.
 - File: `art-src/lab/firefly-sprint-2026-11-05/`. Trạng thái: `tasks/firefly-sprint.md` và các file `.json`.
 
+**Lịch:** rà soát 23:00 mỗi ngày (CronCreate `25 22 * * *`, chạy lúc khoảng 22:55, chỉ sống trong phiên điều phối này; chuyển phiên thì đặt lại). Định dạng: `review/README.md`.
+
 ## Đang làm (tối đa 3)
 | Việc | Trạng thái | Kế tiếp | File |
 |---|---|---|---|

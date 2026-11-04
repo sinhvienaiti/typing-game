@@ -13,6 +13,8 @@ Mục đích: mỗi người làm (Claude, agent, Codex, Gemini, ChatGPT) **ch�
 | `tasks/<id>.md` | Một việc một file: mục tiêu, cách đã chốt, số nghiệm thu, nhật ký trạng thái, đường dẫn | Claude tạo; agent và Codex ghi thêm vào nhật ký | ≤ 150 dòng |
 | `consult/<id>-<gemini\|chatgpt>.md` | Một lần hỏi Gemini hoặc ChatGPT: đề bài gửi đi, **TÓM TẮT ≤ 300 chữ ở đầu**, câu trả lời đầy đủ ở dưới | agent hỏi (trang tự lưu câu trả lời) | người đọc chỉ đọc TÓM TẮT |
 | `USAGE.md` | Chi phí token theo ngày và theo lần hỏi trợ lý | Claude (chạy `tools/agent-usage/usage.py`) | thêm dòng |
+| `QUALITY.md` | Sổ chất lượng: anh duyệt hoặc chê, lỗi Claude, Codex dừng đúng, kiểm trượt, thời gian mất | Claude, ngay khi có sự kiện | thêm dòng |
+| `review/<ngày>.md` | Rà soát 23:00 mỗi ngày: token, làm được gì, chất lượng, thời gian mất, 3 phương án cải thiện | Claude (lịch tự chạy) | khoảng 80 dòng |
 | `archive/` | File cũ, chỉ mở khi cần tra | — | — |
 
 Phiếu Codex vẫn nằm ở `docs/codex-queue/`; file việc trỏ tới chúng. Ảnh, video và số đo vẫn ở `typing-game-review/`.
