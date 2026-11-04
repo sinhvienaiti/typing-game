@@ -49,7 +49,12 @@ Use it before building any feature, effect, art, system or rework. Skip it only 
    - **Never forward a non-passing answer to Gemini.** On 04/11 an agent did, and the plan's ChatGPT side did not count.
    - **Size the workstream so it can pass.** Review one package, one layer or one ticket at a time, not a whole roadmap.
    - A roadmap from a pass that never got its two consecutive PASSes is only a draft. Each of its packages gets its own short double review right before it is built.
-8. **PASS means "correct and accurate"** (owner: "đúng, chính xác"). It does not mean "nothing could be added". Defects fail; style and optional ideas do not (template in `references/double-review.md`).
+9. **ChatGPT and Gemini never block the work** (owner, 04/11/2026, about 14:00: "đừng để chatgpt hay gemini block bạn nữa, hãy triển khai các agent đang bị đợi đó theo cách khác, bạn tự điều tra hoặc xử lý chứ tránh chỉ vì gpt hay gemini làm block"). When an assistant is unreachable, has no free browser tab, is slow, or keeps failing:
+   - **A Claude agent does the analysis itself:** it reads the code, does web research with WebSearch and WebFetch, verifies at the sources, and writes the solution.
+   - **Independent Claude critics replace the review:** fresh agents that did not write the solution. It needs two consecutive PASSes with the same PASS meaning (correct and accurate); a FAIL leads to a fix and resets the count; at most 4 rounds.
+   - **2D images:** when ChatGPT and Gemini cannot be reached, Codex `image_gen` paints from the decided design, run as a Codex image ticket. Firefly Image is the other choice when a tab is free.
+   - Record which path was used. When an assistant becomes reachable again, its review may be added as an extra check, but nothing waits for it.
+10. **PASS means "correct and accurate"** (owner: "đúng, chính xác"). It does not mean "nothing could be added". Defects fail; style and optional ideas do not (template in `references/double-review.md`).
 
 Prompt templates and the record format: [references/double-review.md](references/double-review.md).
 
