@@ -50,8 +50,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
     - Khung đầu chính: nền đen, 1080, khổ vuông, đúng chế độ đã chạy được với `ff-a1-c5`.
     - 253 và 254 tạm giữ: lửa bọc lưỡi và áo khí đi ngược §0.2 của pipeline (vật gắn lưỡi là lưới mang texture cuộn); vòng ấn là ảnh tĩnh, không qua Video.
   - **Chiêu rồng:** anh chọn **A · Twin Dragons, One Burning Pearl** (Kiếm ô 2, Hỏa), xem `DRAGON_SKILL.md`, commit 57133934.
-    - Workflow `w4l4pn0nq` đang chạy: dựng hộp xám sau cờ `key2=twin-pearl` (tắt mặc định), đo bằng bot, quay khung, phản biện, sửa.
-    - Kết quả đo ghi vào `DRAGON_SKILL.md` §8.
+    - Hộp xám đã xong: workflow `w4l4pn0nq`, các commit game e91a787 → 033b3f4, `DRAGON_SKILL.md` §8 ở 9d14adbf. Cờ `swordKey2: "twin-pearl"` ở header trận, `?key2=twin-pearl` trong lab, tắt mặc định; bot chạy trận khi tắt cờ vẫn ra từng byte như cũ.
+    - Sau lượt phản biện và sửa: mỗi lần tung trúng 17,2 con (80 % số lần trong 12–20), chia 50/50, nhát đầu ≤ 31 ms.
+    - **Còn quá mạnh:** ô 2 gánh 41–50 % sát thương (canon ≤ 20 %), bot thắng 95–100 % (dải 75–90 %). Khi tắt cờ, bot chỉ thắng 0–40 %, tức game hiện quá khó.
+    - Việc tiếp: cân lại cả bộ theo `BALANCE.md`, phân tích bằng duyệt hai lần, rồi Codex viết code. Hai câu hỏi cho anh ở §8.8.
+  - **Phím O và mặt C3** đã gộp vào main của game (Codex phiếu 255, commit a900186 cộng merge). tsc sạch, 793 test qua, bản build không chứa mã lab.
+  - **Đang quay video cho anh:** hộp xám sau lượt sửa, và phím O với C3.
   - **Thư mục review** (anh dặn 04/11): `/Volumes/SS990TPRO/htdocs/typing-game-review/`, nằm cạnh source.
     - `captures/<game>/<việc>/` là ảnh chụp làm việc. `tmp/shots` của Tu Tiên đã chuyển vào `captures/tu-tien`, chỗ cũ để lại symlink.
     - `owner-review/<ngày>/<game>/<việc>/` là những gì đã gửi anh.
