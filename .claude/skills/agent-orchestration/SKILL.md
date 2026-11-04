@@ -67,6 +67,18 @@ The rule now:
    - The agent reads back only that summary and returns it with the file path.
 5. **Budget:** at most about 25 steps and 1.5 M effective tokens per consultation. Over budget means stop and report. Measure with `explain-usage` after a few runs.
 
+## Work files (since 05/11/2026)
+
+Coordination lives in `docs/work/` (rules in its `README.md`):
+- `BOARD.md`: at most 3 tasks in flight, the Codex queue, items waiting on the owner, done today; at most 60 lines.
+- `tasks/<id>.md`: goal, decided approach, acceptance numbers, links and a one-line-per-event log.
+- `consult/`: one file per Gemini or ChatGPT question, with the 300-word summary on top.
+- `DECISIONS.md` and `USAGE.md`.
+
+Hand an agent the task file path and one sentence, never a long brief. The agent appends to the task log and returns at most 10 lines. The old 881-line HANDOFF is archived in `docs/work/archive/`, so read only a section a task file points to.
+
+**Report when an assistant costs more.** Log every consultation's cost in `USAGE.md` (`tools/agent-usage/usage.py`). If it cost more than Claude working alone (estimated), or over 1.5 M tokens, tell the owner at once with the numbers. The owner, 05/11: "tôi đưa chatgpt và gemini vào để giúp bạn giảm token, chứ nếu việc đưa nó vào khiến token bị tốn nhiều hơn thì phải báo tôi".
+
 ## Since 05/11/2026: working lean (owner: "bạn đang làm việc quá kém hiệu quả")
 
 Measured on 04/11, besides the browser work:

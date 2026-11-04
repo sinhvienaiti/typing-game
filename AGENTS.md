@@ -53,6 +53,10 @@ phases (charge, release at the caster, travel, impact, aftermath), the caster
 side first. Every VFX brief names the standard, the reference image, the
 action class, the capture scenario and the acceptance numbers.
 
+## Work files (owner, 05/11/2026)
+
+"nên thiết kế 1 hệ thống đơn giản các file md để xử lý, giao việc, ghi lại thông tin, các phần phân tích trao đổi để tránh việc phải đọc lại quá nhiều". Coordination lives in `docs/work/`: `BOARD.md` (at most 60 lines), one `tasks/<id>.md` per task, `consult/` for assistant answers (read only their 300-word summary), `DECISIONS.md`, `USAGE.md`. Agents get a task file path, not a long brief. If ChatGPT or Gemini costs more than Claude working alone, tell the owner at once with the numbers. Rules: `docs/work/README.md`.
+
 ## Plan with ChatGPT and Gemini (owner, 04/11/2026)
 
 "trước khi triển khai gì, nên tham khảo ý kiến của cả chatgpt và gemini để bổ sung ý tưởng cho nhau để đưa ra 1 plan tốt nhất, tối ưu nhất".
