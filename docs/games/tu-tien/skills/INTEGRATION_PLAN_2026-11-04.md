@@ -438,7 +438,12 @@ Việc ảnh (A2–A10) không giao Codex, trừ khi ChatGPT và Gemini cùng ch
 ## 9. Quyết định chỉ anh làm được
 
 1. **Khung đầu va chạm:** v1 (ba vầng trăng lồng nhau) hay v3 (hai nét dài và một nét ngược), sau khi dựng lại vuông và đo. Rồi chọn bản Firefly.
-   - **Anh đã chọn v1a (04/11, khoảng 14:50):** khung đầu `art-src/lab/vfx/fire/impact-k1-r2/` v1a.try3 (cung 156/148/144°, độ thuôn 4,34/3,50/2,97, vạch nóng 2,3 %), khung cuối v1a.end-b.try2. A4 (Firefly) làm khi một làn trống; không cần đăng nhập lại.
+   - **Anh chốt thêm (04/11, khoảng 19:40):**
+    - A4: duyệt lượt 2, đoạn f053–f076 (atlas `fire-impact-k1-r2-v1a.a4.atlas.png`).
+    - A7: `strip-metal-windsilk` cho Metal, `strip-fire-sheath` cho Fire.
+    - A11: giữ bản Firefly Upscaler của mặt C3, đã đổi trong lab.
+    - CX-B (258, 258b) đã gộp vào `main` của game (`ceb51c2`).
+  - **Anh đã chọn v1a (04/11, khoảng 14:50):** khung đầu `art-src/lab/vfx/fire/impact-k1-r2/` v1a.try3 (cung 156/148/144°, độ thuôn 4,34/3,50/2,97, vạch nóng 2,3 %), khung cuối v1a.end-b.try2. A4 (Firefly) làm khi một làn trống; không cần đăng nhập lại.
 2. **Mẫu áo Metal** (mảnh góc cạnh hay sợi lụa) và **mẫu lửa bọc lưỡi** (lưỡi dài hay lớp ngắn).
 3. **Sao mũi:** bản Firefly `ff-g1-c2` đã gọt hay bản vẽ mới, sau khi chấm mù A/B.
 4. **Ấn:** mẫu ấn kiếm hay mẫu mây lửa.
