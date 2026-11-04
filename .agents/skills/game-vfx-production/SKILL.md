@@ -48,6 +48,11 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
   - **Firefly:** Adobe models only (Firefly Video, Firefly Image, the Upscaler, sound effects); never partner models; never sign in or click consent for the owner.
   - **Blender:** `/Applications/Blender.app`, run headless. It is not local AI. Heavy sims and renders go through `.local/bin/heavy.sh --cores=N`.
   - **No local AI models** (no Stable Diffusion, FLUX or ComfyUI).
+- **Reference image first, then video** (owner, 05/11/2026: "tôi tưởng là chúng ta sẽ tạo ảnh để tham chiếu trước r mới tạo ra những hình animation").
+  - Any effect whose shape matters (a creature, lotus, pearl, gate, seal, halo, burst petals, slash, star, crack or scorch, cut-in element) starts from a still: an approved image, or a new one the owner picks. Firefly Video then moves it (image-to-video).
+  - Text-to-video is only for pure material: flow, sparks, embers, smoke, dust, strips.
+  - Never prompt a creature name for a fire texture. Never write negatives like "No head": the model draws what you name.
+  - No batch starts before two samples have been looked at and sent to the owner. Time pressure is no exception: on 05/11 a 168-clip sprint from text alone gave flat clip-art dragons and lotuses.
 - **Motion must be smooth.**
   - Enough frames (≥ 24 for a burst, a seamless loop for a band).
   - Frame blending or hold-and-erode, never a visible step.
