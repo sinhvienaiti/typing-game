@@ -91,6 +91,11 @@ This skill is the method. Each game keeps its own data: reference board, signal 
   - **No fitting reference? Make one first** (owner, 05/11: "chúng ta có rất nhiều công cụ tạo ảnh, chatgpt, gemini, fire, bạn luôn có thể tạo ra ảnh 2d chất lượng để dùng tham chiếu cho các phần khác cần thiết"). Paint it in ChatGPT, Gemini or Firefly Image from the nearest approved art; the owner picks it; then continue. Never skip to a prompt-only generation.
   - **Never a third-party image.**
   - **Two samples go to the owner before any batch.**
+- **Hard 2D goes to ChatGPT or Gemini models, never to Firefly's own models** (owner, 05/11/2026: "nếu fire xử lý ảnh 2d kém, thì tốt nhất không nên giao ảnh 2d khó cho nó mà dùng chatgpt hoặc gemini là được").
+  - Hard 2D means characters, creatures, anatomy (legs, claws, hands), weapons, ornate items and key art.
+  - On 05/11, with the same reference, Firefly Image 5 drew poor dragon legs and claws. GPT Image (inside Firefly, so the reference could be uploaded) drew them cleanly.
+  - Use ChatGPT or Gemini on their own sites, or GPT Image inside Firefly when our reference images must go in.
+  - Firefly's Adobe models stay for simple shapes, material and video.
 - **No code-drawn stand-ins** for art: no SVG or canvas scenery, no CSS-shape icons, no emoji, no fallback paintings. A missing image is a ticket, never a drawing in code. Shaders and VFX that meet [VFX_STANDARD.md](../../../docs/games/VFX_STANDARD.md) are allowed. Sound counts too: no synthesized placeholder sounds.
 - **Every UI detail carries real art:** cards, buttons, bays, labels, tooltips, briefings, results and shop items. Text alone is not enough.
 - **Language:** everything the player reads is English, game nouns included; unique characters keep their proper names. Vietnamese appears only where the game teaches it: the meaning of the word being learned and optional glosses in learning panels.

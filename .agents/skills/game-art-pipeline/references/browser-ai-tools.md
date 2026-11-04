@@ -103,6 +103,8 @@ f.appendChild(i); document.body.appendChild(f); f.submit();
 ## 5. Adobe Firefly (firefly.adobe.com)
 
 - **Adobe models only:** Firefly Image 5, Firefly Video, and the Firefly Audio model in Generate Sound Effects. Never Firefly's partner models (Gemini, GPT Image and others), never buy credits.
+  - **Exception (owner, 05/11/2026, button "GPT Image trong Firefly"):** GPT Image, a partner model inside Firefly Image, may be used for images that need our reference images. ChatGPT and Gemini in the in-app browser cannot receive our files (see §3), but Firefly's page can. The owner's plan lists partner models as unlimited. Other partner models stay banned unless he says so. Never click a partner-terms or age dialog: that click is the owner's.
+  - **Check the model picker before every Generate:** on 05/11 the page defaulted to the partner model Gemini 3.1 (Nano Banana 2).
 - **Prompts:** at most about 1024 characters. Aspect ratios: 1:1 for props and sheets, 3:4 for standing objects, 16:9 for scenes.
 - **Style reference:**
   - Image 5's reference image tends to copy the subject and force its own aspect ratio. Use it only to pull a family finish (for example three accepted icons).

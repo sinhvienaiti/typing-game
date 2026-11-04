@@ -48,6 +48,17 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
   - **Firefly:** Adobe models only (Firefly Video, Firefly Image, the Upscaler, sound effects); never partner models; never sign in or click consent for the owner.
   - **Blender:** `/Applications/Blender.app`, run headless. It is not local AI. Heavy sims and renders go through `.local/bin/heavy.sh --cores=N`.
   - **No local AI models** (no Stable Diffusion, FLUX or ComfyUI).
+- **Soul over fine detail for skills** (owner, 05/11/2026: "đôi lúc không phải cứ vẽ thật chi tiết là hay, nhiều khi chúng ta phải làm chính là cái hồn… skill tung ra một cách hào quang, hiệu ứng ánh sáng, vfx các thứ sẽ bù đắp lại các phần chi tiết bị sai sót nhỏ… trừ khi hình ảnh đó nó to, và hiển thị kiểu dễ nhìn rõ, thì lúc đó mới cần làm chi tiết"; he offered it as a view to weigh, and Claude agrees).
+  - A skill is seen briefly, in motion, at play-camera size, under glow and bloom. What sells it:
+    - a strong silhouette and big shape;
+    - motion (anticipation, release, slow decay);
+    - light hierarchy (core, glow, halo);
+    - colour;
+    - sparkle and sound, all on one frame.
+  - Spend effort there, not on polishing small detail. Glow and VFX hide small detail errors.
+  - Gross errors still read at any size: a missing limb ("cụt 1 tay"), clip-art flatness, a wrong silhouette. Fix those.
+  - Fine detail matters only where the image is large and seen clearly: cut-in art, key art, close-ups, UI hero art, and Tripo sources.
+  - Judge skill VFX in motion at play size, not as a zoomed still.
 - **Reference image first, then video** (owner, 05/11/2026: "tôi tưởng là chúng ta sẽ tạo ảnh để tham chiếu trước r mới tạo ra những hình animation").
   - Any effect whose shape matters (a creature, lotus, pearl, gate, seal, halo, burst petals, slash, star, crack or scorch, cut-in element) starts from a still: an approved image, or a new one the owner picks. Firefly Video then moves it (image-to-video).
   - Text-to-video is only for pure material: flow, sparks, embers, smoke, dust, strips.
