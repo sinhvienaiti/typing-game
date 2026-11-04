@@ -74,6 +74,16 @@ Details are in the `agent-orchestration` skill.
 
 Only purely mechanical work skips this step: a typo, a one-line bug fix, re-running a measurement, moving files.
 
+**Lighter review, since 05/11/2026 (00:00).** The owner agreed ("Đồng ý giảm duyệt") after the 04/11 measurement. That day about 60 % of Claude's tokens went into discussing and reviewing (ChatGPT and Gemini in the browser 43 %, critic loops 18 %), and two session limits cost almost three hours. This replaces the steps above where they differ:
+- The ChatGPT and Gemini double review stays **only** for:
+  - new visual directions (characters, dragons, key art, a new effect look);
+  - large new designs (a new skill, a new system).
+- **Everything else** (code tickets, fixes, wiring, tooling, sound mixing, balance numbers):
+  - Claude writes the solution;
+  - **one** fresh Claude critic PASS sends it to Codex; a FAIL leads to a fix and another critic, at most 3 rounds, then rethink;
+  - Claude then verifies with tests, browser checks and a video for the owner.
+- Priority goes to what the owner sees in the game: replace banned code-drawn shapes with existing art first, and send a before/after video for each batch.
+
 ## Language, names and art level (owner, 28/10/2026, night)
 
 These are English games. Everything the player reads is in English:

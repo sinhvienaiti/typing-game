@@ -26,6 +26,22 @@ This replaces older rules wherever they differ:
 | **Firefly** (Adobe models only) | Video VFX, sound effects, Adobe images and the image Upscaler, where `game-vfx-production` picks it | Partner models (Veo, Gemini, Flux and the like), the video upscaler (Topaz) |
 | **Claude subagents and workflows** | Making, measuring, judging and browser work in parallel | More than the owner's current cap at once: 2 since 04/11 14:00 (3 from 03/11) |
 
+## Since 05/11/2026: lighter review (owner's OK, "Đồng ý giảm duyệt")
+
+The measurement of 04/11 (skill `explain-usage` over the session logs):
+- ChatGPT and Gemini in the browser took 43 % of Claude's tokens; critic loops took 18 %; building and checking took about 16 %.
+- Two session limits cost almost three hours, and the owner saw almost nothing change in the game.
+
+The rule now:
+- **Double review (the protocol below) only for:**
+  - new visual directions (a character, a dragon, key art, a new effect look);
+  - large new designs (a new skill, a new system).
+- **Everything else** (code tickets, fixes, wiring, tooling, sound mixing, balance numbers):
+  - Claude writes the solution;
+  - **one** fresh Claude critic PASS hands it to Codex; a FAIL leads to a fix and another critic, at most 3 rounds, then rethink the approach;
+  - Claude verifies after Codex: tests, a browser check, and a before/after video for the owner.
+- **Visible first:** replace what the owner sees and dislikes (banned code-drawn shapes) with existing art before building new infrastructure.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
