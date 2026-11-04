@@ -115,7 +115,9 @@ Every game has a Settings gear and a Sound speaker in play (owner, 29/10/2026), 
 - **Working captures** (frames, sheets, clips, numbers) go to `captures/<game>/<topic>/`. Tu Tien's `games/immortality-cultivation/tmp/shots` is a link to `captures/tu-tien`, so its old scripts still land there. For other games, link their `tmp/shots` the same way or write to the folder directly.
 - **Everything sent to the owner** (videos, sheets, boards) goes to `owner-review/<yyyy-mm-dd>/<game>/<topic>/`. A hard link to the capture is enough.
 - **Every new topic folder gets an `ABOUT.md`**, a few `key: value` lines: `purpose`, `made-by`, `doc`, `delete-when`.
-- **After adding or deleting,** rebuild the owner's index with `node scripts/review-index.mjs`.
+- **After adding or deleting,** rebuild the owner's index with `node scripts/review-index.mjs` (settings in the folder's `review.config.json`).
+- Since 04/11 the `tmp` folders of Dragonhold, Last Line and Wordwoven are links into `captures/dragonhold`, `captures/last-line` and `captures/wordwoven`. Old scripts there that import game code by relative paths must run from the repo path with `node --preserve-symlinks --preserve-symlinks-main`.
+- The method for every project is in the user skill `review-folder` (`~/.claude/skills/review-folder`).
 - **Never** put captures in `art-src`, `public` or `docs`.
 
 Raw frames filled the
