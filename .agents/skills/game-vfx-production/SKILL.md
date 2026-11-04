@@ -68,6 +68,12 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
   - Examples: legendary dragon-palm strikes and MU-style dragon skills.
   - Build it from a reference still painted in that energy style, an animated head or key shape, and a body strip along the path. No detailed, solid creature, and no Tripo model, unless a large close-up needs one.
   - Why: it looks better, reads as a skill, and the glow hides small flaws.
+  - **One level of detail across the whole form** (owner, 05/11: "phần đầu bạn vẽ lại quá chi tiết, khiến nó đang khác biệt so với thân").
+    - The head is energy too, made of the same loose flame strokes as the body.
+    - A detailed character image used as a reference drags detail in. Use the energy body as the style reference, and the character image only for silhouette and colour, if at all.
+  - **Serpentine motion, never legs.** A Chinese dragon in a skill flies with a travelling S-wave down its body, from head to tail, and never runs.
+    - In the game, a body strip bends along the flight path with that wave; the head leads.
+    - Clips only supply the inner fire motion.
 - **Reference image first, then video** (owner, 05/11/2026: "tôi tưởng là chúng ta sẽ tạo ảnh để tham chiếu trước r mới tạo ra những hình animation").
   - Any effect whose shape matters (a creature, lotus, pearl, gate, seal, halo, burst petals, slash, star, crack or scorch, cut-in element) starts from a still: an approved image, or a new one the owner picks. Firefly Video then moves it (image-to-video).
   - Text-to-video is only for pure material: flow, sparks, embers, smoke, dust, strips.
