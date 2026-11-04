@@ -42,6 +42,31 @@ The rule now:
   - Claude verifies after Codex: tests, a browser check, and a before/after video for the owner.
 - **Visible first:** replace what the owner sees and dislikes (banned code-drawn shapes) with existing art before building new infrastructure.
 
+## Since 05/11/2026: Gemini first, and a cheap consultation (owner)
+
+The owner, 05/11 00:10: "ưu tiên dùng gemini 4 argon ở mức effort high, khi nào mà gemini hết hạn mức, thì mới qua bên chatgpt… giãn ra khoảng 1-2 phút mới check 1 lần… tôi kêu bạn dùng thêm chatgpt để giảm tải lượng token bạn phải làm khi điều tra, chứ làm như này thì có khi còn tốn token hơn là để 1 mình bạn làm".
+
+What went wrong on 04/11:
+- The answers themselves were small (tens of thousands of tokens).
+- The cost came from steps. An agent took 286–402 steps to drive the browser, and every step re-read its whole working context: 340–505 thousand tokens by the end, because a model call always resends the agent's conversation so far.
+- Checking whether ChatGPT was done took 41–105 quick polls per agent, and each poll was a full re-read.
+- The double review multiplied the rounds.
+
+The rule now:
+1. **Gemini 4 Argon, effort High, first. ChatGPT** (Chat mode, High) **only when Gemini has hit its limit.** One assistant per question; no cross-review chain (the double review remains only where the lighter-review section keeps it).
+2. **One small, fresh agent per consultation.**
+   - The brief is at most about 1,500 words.
+   - Paste no big docs into the agent; name the files instead.
+   - A new question or round gets a new agent, never a long-lived one.
+3. **Wait in one call, not many.**
+   - After sending, use ONE `javascript_tool` call that awaits inside the page until the answer is complete. It polls the DOM every 5 s and returns only when the reply has stopped growing for 10 s, or after at most about 120 s.
+   - Repeat that call only if the reply is still running: about one check every 1–2 minutes, never a fast poll.
+4. **Keep the answer out of the agent's context.**
+   - The page's JavaScript posts the full reply to the local receiver as a file (`game-art-pipeline` browser-ai-tools §4).
+   - The brief asks the assistant to end with a "TÓM TẮT" of at most 300 words and to check its own answer once inside the same reply.
+   - The agent reads back only that summary and returns it with the file path.
+5. **Budget:** at most about 25 steps and 1.5 M effective tokens per consultation. Over budget means stop and report. Measure with `explain-usage` after a few runs.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
