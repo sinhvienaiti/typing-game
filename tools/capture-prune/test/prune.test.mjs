@@ -31,6 +31,24 @@ function fixture(t) {
   return { base, repoRoot, target, put, plan };
 }
 
+function reviewFixture(t, name = 'repo-review') {
+  const f = fixture(t);
+  const reviewRoot = path.join(f.base, name);
+  const target = path.join(reviewRoot, 'captures/g/run');
+  fs.mkdirSync(target, { recursive: true });
+  function reviewPut(relative, content = relative) {
+    return f.put(path.relative(f.repoRoot, path.join(reviewRoot, relative)), content);
+  }
+  reviewPut('review.config.json', JSON.stringify({ areas: { g: ['games/g', 'tmp/shots/'] } }));
+  const link = path.join(f.repoRoot, 'games/g/tmp/shots');
+  fs.mkdirSync(path.dirname(link), { recursive: true });
+  fs.symlinkSync(path.join(reviewRoot, 'captures/g'), link, 'dir');
+  return {
+    ...f, reviewRoot, target, reviewPut, linkedTarget: path.join(link, 'run'),
+    plan(args = [target]) { return f.plan(args); },
+  };
+}
+
 test('chạy thử: chỉ ảnh thô; giữ tên, thư mục compare và mọi loại file khác', t => {
   const f = fixture(t);
   for (const name of ['frame.PNG', 'frame.jpg', 'frame.JpEg', 'nested/frame.WEBP',
@@ -145,6 +163,154 @@ test('không theo symlink thư mục hoặc file; symlink ra ngoài ghi refused'
   assert.equal(fs.readFileSync(path.join(outside, 'secret.png'), 'utf8'), 'unchanged');
 });
 
+test('review/captures: tự tìm gốc anh em, nhận đích không cần tmp hoặc nằm trong repo', t => {
+  const f = reviewFixture(t);
+  f.reviewPut('captures/g/run/a.png');
+  const result = f.plan();
+  assert.deepEqual(result.targets, [f.target]);
+  assert.deepEqual(result.files.map(file => file.relative), ['a.png']);
+  assert.deepEqual(result.refused, []);
+  assert.equal(targetRefusal('/review/captures/g/run', '/repo', '/typing-game-wt', '/review'), null);
+});
+
+test('review: từ chối chính gốc, owner-review và thư mục chỉ trùng tiền tố captures', t => {
+  const f = reviewFixture(t);
+  for (const dir of [f.reviewRoot, 'owner-review/2026-11-04/g/run', 'owner-review/tmp/run', 'owner-review/art-src/run', 'captures-old/g/run']) {
+    const target = path.resolve(f.reviewRoot, dir);
+    fs.mkdirSync(target, { recursive: true });
+    const result = f.plan([target]);
+    assert.deepEqual(result.targets, []);
+    assert.deepEqual(result.files, []);
+    assert.deepEqual(result.refused, [{ path: target, reason: 'review-not-captures' }]);
+  }
+  assert.equal(targetRefusal('/review-other/tmp/run', '/repo', '/typing-game-wt', '/review'), 'outside-roots');
+});
+
+for (const reference of [
+  'games/g/tmp/shots/run/a.png',
+  'tmp/shots/run/a.png',
+  'captures/g/run/a.png',
+  '../repo-review/captures/g/run/a.png',
+]) {
+  test(`review: giữ ảnh tài liệu trỏ tới bằng ${reference}, kể cả đích qua symlink cha`, t => {
+    const f = reviewFixture(t);
+    f.reviewPut('captures/g/run/a.png');
+    f.reviewPut('captures/g/run/other/a.png');
+    f.put('docs/report.md', `[ảnh](${reference})`);
+    const result = f.plan();
+    assert.deepEqual(result.files.map(file => file.relative), ['other/a.png']);
+    assert.deepEqual(result.kept.map(file => [file.relative, file.reasons]), [['a.png', ['document-reference']]]);
+    assert.deepEqual(f.plan([f.linkedTarget]), result);
+  });
+}
+
+test('review: ảnh không được tài liệu nhắc vẫn là ảnh thô khi đi trực tiếp hoặc qua symlink cha', t => {
+  const f = reviewFixture(t);
+  f.reviewPut('captures/g/run/a.png');
+  const result = f.plan();
+  assert.deepEqual(result.files.map(file => file.relative), ['a.png']);
+  assert.deepEqual(result.kept, []);
+  assert.deepEqual(f.plan([f.linkedTarget]), result);
+});
+
+test('Markdown: tham chiếu chứa cả tmp/ và captures/ không che khuất dạng còn lại', t => {
+  const f = reviewFixture(t);
+  const capture = f.reviewPut('captures/g/run/a.png');
+  const inRepo = f.put('games/x/tmp/run/a.png');
+  f.put('docs/report.md', 'tmp/archive/captures/g/run/a.png\ncaptures/g/tmp/run/a.png');
+  const result = f.plan([f.target, path.dirname(inRepo)]);
+  assert.deepEqual(result.files, []);
+  assert.deepEqual(result.kept.map(file => [file.path, file.reasons]), [
+    [capture, ['document-reference']], [inRepo, ['document-reference']],
+  ]);
+});
+
+test('review: FORBIDDEN vẫn chặn đích và thư mục con trong captures', t => {
+  const f = reviewFixture(t);
+  for (const name of ['art-src', 'public', 'docs', 'typing-game-handoff', 'immortality-cultivation']) {
+    const file = f.reviewPut(`captures/g/${name}/run/a.png`);
+    const result = f.plan([path.dirname(file)]);
+    assert.deepEqual(result.targets, []);
+    assert.equal(result.refused[0].reason, 'protected-path');
+  }
+  const result = f.plan([path.join(f.reviewRoot, 'captures/g')]);
+  assert.deepEqual(result.files, []);
+  assert.equal(result.refused.filter(item => item.reason === 'protected-path').length, 5);
+});
+
+test('review: dùng tiền tố riêng từng khu, không nhầm ảnh cùng đường dẫn còn lại ở khu khác', t => {
+  const f = reviewFixture(t);
+  f.reviewPut('review.config.json', JSON.stringify({ areas: {
+    g: ['games/g', 'tmp/'], h: ['games/h', 'tmp/shots/'],
+  } }));
+  const a = f.reviewPut('captures/g/run/a.png');
+  const b = f.reviewPut('captures/h/run/a.png');
+  const targets = [path.dirname(a), path.dirname(b)];
+  for (const reference of ['games/g/tmp/run/a.png', 'captures/g/run/a.png']) {
+    f.put('docs/report.md', reference);
+    const result = f.plan(targets);
+    assert.deepEqual(result.kept.map(file => file.path), [a]);
+    assert.deepEqual(result.files.map(file => file.path), [b]);
+  }
+});
+
+test('review: mặc định quét README.md, không quét INDEX.md; --docs vẫn thay thế bộ mặc định', t => {
+  const f = reviewFixture(t);
+  for (const name of ['readme.png', 'index.jpg', 'repo.webp']) f.reviewPut(`captures/g/run/${name}`);
+  f.reviewPut('README.md', 'captures/g/run/readme.png');
+  f.reviewPut('INDEX.md', 'captures/g/run/index.jpg');
+  const doc = f.put('docs/report.md', 'games/g/tmp/shots/run/repo.webp');
+  const result = f.plan();
+  assert.deepEqual(result.files.map(file => file.relative), ['index.jpg']);
+  assert.deepEqual(result.kept.map(file => file.relative), ['readme.png', 'repo.webp']);
+  assert(result.kept.every(file => file.reasons.includes('document-reference')));
+  const override = f.plan([f.target, '--docs', doc]);
+  assert.deepEqual(override.files.map(file => file.relative), ['index.jpg', 'readme.png']);
+  assert.deepEqual(override.kept.map(file => file.relative), ['repo.webp']);
+  // README của review vẫn được quét khi repo giả chưa có cây games.
+  fs.rmSync(path.join(f.repoRoot, 'games'), { recursive: true });
+  assert.deepEqual(f.plan().kept, result.kept);
+});
+
+test('--review-root: nhận gốc tùy chọn qua realpath và truyền từ CLI đến kế hoạch', t => {
+  const f = reviewFixture(t, 'custom-review');
+  f.reviewPut('captures/g/run/a.png');
+  f.put('docs/report.md', 'games/g/tmp/shots/run/a.png');
+  assert.deepEqual(f.plan().targets, []);
+  const alias = path.join(f.base, 'review-alias');
+  fs.symlinkSync(f.reviewRoot, alias, 'dir');
+  const args = [f.linkedTarget, '--review-root', alias];
+  assert.equal(parseArgs(args).reviewRoot, alias);
+  const result = f.plan(args);
+  assert.deepEqual(result.targets, [f.target]);
+  assert.deepEqual(result.files, []);
+  assert.deepEqual(result.kept.map(file => file.reasons), [['document-reference']]);
+  const lines = [];
+  assert.equal(main(args, { repoRoot: f.repoRoot, now: NOW, write: line => lines.push(line) }), 0);
+  assert(lines.some(line => line === 'Tổng: 0 file, 0.000 MB; giữ 1 ảnh, từ chối 0 mục.'));
+});
+
+test('review: thiếu config hoặc areas thì vẫn giữ tham chiếu captures, không tự đoán tiền tố cũ', t => {
+  const f = reviewFixture(t);
+  f.reviewPut('captures/g/run/a.png');
+  f.reviewPut('captures/g/run/b.png');
+  f.put('docs/report.md', 'captures/g/run/a.png\ntmp/shots/run/b.png');
+  const config = f.reviewPut('review.config.json', '{}');
+  for (let i = 0; i < 2; i++) {
+    const result = f.plan();
+    assert.deepEqual(result.files.map(file => file.relative), ['b.png']);
+    assert.deepEqual(result.kept.map(file => [file.relative, file.reasons]), [['a.png', ['document-reference']]]);
+    if (i === 0) fs.unlinkSync(config);
+  }
+});
+
+test('review: gốc chỉ định bị thiếu hoặc config lỗi phải dừng trước khi lập danh sách', t => {
+  const f = reviewFixture(t);
+  assert.throws(() => f.plan([f.target, '--review-root', path.join(f.base, 'missing')]), /ENOENT/);
+  f.reviewPut('review.config.json', '{');
+  assert.throws(() => f.plan(), SyntaxError);
+});
+
 test('--apply chỉ xóa danh sách tính được; nhật ký đúng và MD5 mọi file giữ nguyên', t => {
   const f = fixture(t);
   const raw = ['raw.PNG', 'nested/raw.jpeg'].map(name => f.put(`games/x/tmp/run/${name}`));
@@ -231,13 +397,14 @@ test('JSON chạy thử đủ trường, chạy lại được; không ghi vào 
 
 test('CLI help, lỗi đối số và mã thoát khi mọi đích bị từ chối', t => {
   const f = fixture(t);
-  for (const args of [[], ['x', '--min-age-min', '-1'], ['x', '--min-age-min', 'Infinity'], ['x', '--min-age-min', 'no'], ['x', '--docs'], ['x', '--json'], ['x', '--unknown']]) {
+  for (const args of [[], ['x', '--min-age-min', '-1'], ['x', '--min-age-min', 'Infinity'], ['x', '--min-age-min', 'no'], ['x', '--docs'], ['x', '--json'], ['x', '--review-root'], ['x', '--review-root', '--apply'], ['x', '--unknown']]) {
     assert.throws(() => parseArgs(args));
   }
   const script = fileURLToPath(new URL('../prune.mjs', import.meta.url));
   const help = spawnSync(process.execPath, [script, '--help'], { encoding: 'utf8' });
   assert.equal(help.status, 0);
   assert.match(help.stdout, /--apply/);
+  assert.match(help.stdout, /--review-root/);
   const denied = spawnSync(process.execPath, [script, f.target, '--docs', f.repoRoot], { encoding: 'utf8' });
   assert.equal(denied.status, 2);
   assert.match(denied.stdout, /Từ chối/);

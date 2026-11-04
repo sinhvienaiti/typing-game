@@ -10,15 +10,18 @@ const posix = value => value.split(path.sep).join('/');
 const inside = (root, file) => file === root || file.startsWith(root + path.sep);
 const message = error => `${error.code ?? 'ERROR'}: ${error.message}`;
 
-export function targetRefusal(real, repoRoot, worktreeRoot) {
+export function targetRefusal(real, repoRoot, worktreeRoot, reviewRoot = null) {
+  const inReview = reviewRoot && inside(reviewRoot, real);
+  if (inReview && !inside(path.join(reviewRoot, 'captures'), real)) return 'review-not-captures';
   if (FORBIDDEN.test(posix(real))) return 'protected-path';
+  if (inReview) return null;
   if (!/(\/tmp\/|\/tmp$)/.test(posix(real))) return 'not-tmp';
   if (!inside(repoRoot, real) && !inside(worktreeRoot, real)) return 'outside-roots';
   return null;
 }
 
 export function parseArgs(args) {
-  const result = { targets: [], docs: null, apply: false, minAgeMin: 30, json: null };
+  const result = { targets: [], docs: null, apply: false, minAgeMin: 30, json: null, reviewRoot: null };
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === '--apply') result.apply = true;
@@ -28,10 +31,11 @@ export function parseArgs(args) {
       const start = i;
       while (i + 1 < args.length && !args[i + 1].startsWith('--')) result.docs.push(args[++i]);
       if (i === start) throw new Error('--docs cần ít nhất một đường dẫn.');
-    } else if (arg === '--min-age-min' || arg === '--json') {
+    } else if (arg === '--min-age-min' || arg === '--json' || arg === '--review-root') {
       const value = args[++i];
       if (!value || value.startsWith('--')) throw new Error(`${arg} thiếu giá trị.`);
       if (arg === '--json') result.json = value;
+      else if (arg === '--review-root') result.reviewRoot = value;
       else {
         result.minAgeMin = Number(value);
         if (!Number.isFinite(result.minAgeMin) || result.minAgeMin < 0) {
@@ -45,12 +49,14 @@ export function parseArgs(args) {
   return result;
 }
 
-function defaultDocs(repoRoot) {
+function defaultDocs(repoRoot, reviewRoot = null) {
   const roots = [path.join(repoRoot, 'docs')];
+  if (reviewRoot) roots.push(path.join(reviewRoot, 'README.md'));
   const games = path.join(repoRoot, 'games');
   if (!fs.existsSync(games)) return roots;
   for (const game of fs.readdirSync(games, { withFileTypes: true })) {
-    if (!game.isDirectory() || game.name === 'immortality-cultivation') continue;
+    // Tu Tiên's docs count too since 04/11: its captures moved to the review folder and can be pruned there.
+    if (!game.isDirectory()) continue;
     const dir = path.join(games, game.name);
     roots.push(path.join(dir, 'docs'));
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -72,8 +78,10 @@ function readReferences(roots, optional) {
       for (const name of fs.readdirSync(file).sort()) visit(path.join(file, name));
     } else if (stat.isFile() && /\.md$/i.test(file) && !seen.has(file)) {
       seen.add(file);
-      for (const match of fs.readFileSync(file, 'utf8').matchAll(/tmp\/[^\s)`"'<>]+\.(?:png|jpe?g|webp)/gi)) {
-        refs.add(match[0]);
+      const text = fs.readFileSync(file, 'utf8');
+      // Quét riêng để tmp/ trong tiền tố không nuốt mất tham chiếu captures/ phía sau.
+      for (const pattern of [/tmp\/[^\s)`"'<>]+\.(?:png|jpe?g|webp)/gi, /captures\/[^\s)`"'<>]+\.(?:png|jpe?g|webp)/gi]) {
+        for (const match of text.matchAll(pattern)) refs.add(match[0]);
       }
     }
   }
@@ -81,10 +89,24 @@ function readReferences(roots, optional) {
   return refs;
 }
 
-function referenced(relative, refs) {
+function referenced(real, refs, repoRoot, reviewRoot, areas) {
+  let relatives = [posix(path.relative(repoRoot, real))];
+  if (reviewRoot && inside(path.join(reviewRoot, 'captures'), real)) {
+    const captureRef = posix(path.relative(reviewRoot, real));
+    if (refs.has(captureRef)) return true;
+    const [, area, ...rest] = captureRef.split('/');
+    const mapping = areas[area];
+    if (!Array.isArray(mapping)) return false;
+    const [gameDir, legacyPrefix] = mapping;
+    if (typeof gameDir !== 'string' || typeof legacyPrefix !== 'string') return false;
+    const legacyRef = legacyPrefix + rest.join('/');
+    relatives = [legacyRef, `${gameDir}/${legacyRef}`];
+  }
   // Regex bắt đầu ở tmp/, kể cả khi Markdown ghi games/x/tmp/ảnh.png.
-  for (let index = relative.indexOf('tmp/'); index !== -1; index = relative.indexOf('tmp/', index + 1)) {
-    if (refs.has(relative.slice(index))) return true;
+  for (const relative of relatives) {
+    for (let index = relative.indexOf('tmp/'); index !== -1; index = relative.indexOf('tmp/', index + 1)) {
+      if (refs.has(relative.slice(index))) return true;
+    }
   }
   return false;
 }
@@ -97,7 +119,11 @@ export function planPrune(options, { repoRoot = DEFAULT_ROOT, now = Date.now() }
   repoRoot = fs.realpathSync(repoRoot);
   let worktreeRoot = path.resolve(repoRoot, '../typing-game-wt');
   if (fs.existsSync(worktreeRoot)) worktreeRoot = fs.realpathSync(worktreeRoot);
-  const refs = readReferences(options.docs === null ? defaultDocs(repoRoot) : options.docs.map(p => path.resolve(p)), options.docs === null);
+  let reviewRoot = options.reviewRoot ?? path.resolve(repoRoot, '..', path.basename(repoRoot) + '-review');
+  reviewRoot = options.reviewRoot != null || fs.existsSync(reviewRoot) ? fs.realpathSync(reviewRoot) : null;
+  const config = reviewRoot && path.join(reviewRoot, 'review.config.json');
+  const areas = config && fs.existsSync(config) ? JSON.parse(fs.readFileSync(config, 'utf8')).areas ?? {} : {};
+  const refs = readReferences(options.docs === null ? defaultDocs(repoRoot, reviewRoot) : options.docs.map(p => path.resolve(p)), options.docs === null);
   const result = { targets: [], files: [], kept: [], bytes: 0, refused: [] };
   const seenFiles = new Set();
   const refuse = (file, reason) => result.refused.push({ path: file, reason });
@@ -127,7 +153,7 @@ export function planPrune(options, { repoRoot = DEFAULT_ROOT, now = Date.now() }
         const reasons = [];
         if (/sheet|contact|compare/i.test(name)) reasons.push('name');
         if (posix(path.dirname(real)).split('/').some(part => /^compare/i.test(part))) reasons.push('compare-directory');
-        if (referenced(posix(path.relative(repoRoot, real)), refs)) reasons.push('document-reference');
+        if (referenced(real, refs, repoRoot, reviewRoot, areas)) reasons.push('document-reference');
         if (stat.mtimeMs >= cutoff) reasons.push('too-new');
         const entry = { target, path: real, relative, bytes: stat.size };
         if (reasons.length) result.kept.push({ ...entry, reasons });
@@ -145,7 +171,7 @@ export function planPrune(options, { repoRoot = DEFAULT_ROOT, now = Date.now() }
       if (stat.isSymbolicLink()) { refuse(absolute, 'symlink'); continue; }
       if (!stat.isDirectory()) { refuse(absolute, 'not-directory'); continue; }
       const real = fs.realpathSync(absolute);
-      const reason = targetRefusal(real, repoRoot, worktreeRoot);
+      const reason = targetRefusal(real, repoRoot, worktreeRoot, reviewRoot);
       if (reason) { refuse(absolute, reason); continue; }
       if (result.targets.includes(real)) continue;
       result.targets.push(real);
@@ -227,7 +253,7 @@ export function main(args, context = {}) {
   const options = parseArgs(args);
   const write = context.write ?? (line => process.stdout.write(line + '\n'));
   if (options.help) {
-    write('node tools/capture-prune/prune.mjs <thư mục>... [--apply] [--min-age-min 30] [--docs <gốc tài liệu>...] [--json <file>]');
+    write('node tools/capture-prune/prune.mjs <thư mục>... [--apply] [--min-age-min 30] [--review-root <thư mục>] [--docs <gốc tài liệu>...] [--json <file>]');
     return 0;
   }
   const result = planPrune(options, context);

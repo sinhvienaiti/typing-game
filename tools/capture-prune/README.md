@@ -23,11 +23,34 @@ node tools/capture-prune/prune.mjs games/dragon-hold/tmp/run-cua-ban --apply
 | `<thư mục>...` | Một hoặc nhiều thư mục đích; đường dẫn tương đối tính từ thư mục đang đứng. |
 | `--apply` | Xóa đúng tập ảnh được tính trong lần gọi này; không quét thêm khi xóa. |
 | `--min-age-min N` | Giữ ảnh có mtime cách hiện tại không quá N phút, mặc định 30. N hữu hạn, không âm; ảnh có mtime tương lai cũng được giữ. |
+| `--review-root <thư mục>` | Chỉ định gốc review thay cho thư mục anh em mặc định; dùng đường dẫn thật của thư mục này. |
 | `--docs <gốc>...` | Quét đệ quy `.md` dưới các gốc, hoặc nhận trực tiếp file Markdown. Thay thế bộ gốc mặc định; phải đặt các đích trước `--docs`. Có thể lặp lại tùy chọn này. |
 | `--json <file>` | Ghi kết quả JSON; cần đuôi `.json`, nằm ngoài các đích. Tạo thư mục cha nếu thiếu. Có thể ghi lại file JSON thường, không ghi qua symlink hoặc hard link. |
 | `--help` | In cú pháp và thoát. |
 
 Đầu ra gồm từng ảnh thô cùng số byte, bảng theo thư mục con cấp 1 của từng đích và dòng tổng. Nhóm `.` chứa ảnh trực tiếp ở đích. **MB = 1.000.000 byte**. Ảnh giữ lại không xuất hiện trong danh sách sẽ xóa; JSON chứa chúng trong `kept`.
+
+## Thư mục review cạnh source
+
+Nếu tồn tại, gốc review mặc định là thư mục cùng cấp có tên repo cộng `-review`: với repo này là `/Volumes/SS990TPRO/htdocs/typing-game-review`. Có thể thay bằng `--review-root <thư mục>`; gốc chỉ định phải tồn tại. Công cụ lấy `realpath` rồi đọc `review.config.json` tại đó. Thiếu file cấu hình hoặc thiếu `areas` thì dùng ánh xạ rỗng; cấu hình JSON lỗi làm lệnh dừng.
+
+Chỉ nhận đích có đường dẫn thật trong `<gốc review>/captures/`, vẫn chặn mọi đường dẫn bảo vệ. Các đích này không cần thành phần `tmp` và không cần nằm trong repo/worktree. Chính gốc review, `owner-review/` và các thư mục khác bên trong gốc bị từ chối với mã `review-not-captures`; chủ dự án tự xóa thứ đã gửi duyệt.
+
+Đường dẫn cũ đi qua symlink thư mục cha cũng dùng được. Ví dụ chạy khô từ repo cha:
+
+```bash
+node tools/capture-prune/prune.mjs games/immortality-cultivation/tmp/shots/dragon/greybox-v2
+```
+
+Đích trên được giải thành `captures/tu-tien/dragon/greybox-v2` trong review. Bản thân đích vẫn phải là thư mục thường; không truyền chính symlink `tmp/shots` làm đích.
+
+Với `areas["tu-tien"] = ["games/immortality-cultivation", "tmp/shots/"]`, ảnh `captures/tu-tien/dragon/a.png` được giữ vì `document-reference` khi Markdown có một trong ba dạng:
+
+- `captures/tu-tien/dragon/a.png` (kể cả khi có tiền tố đường dẫn tới gốc review);
+- `tmp/shots/dragon/a.png`;
+- `games/immortality-cultivation/tmp/shots/dragon/a.png`.
+
+Hai dạng cũ được so theo hậu tố `tmp/...` như trước. Tiền tố lấy riêng cho từng khu từ `areas`, không suy đoán khi thiếu cấu hình. Các luật giữ theo tên, thư mục compare và tuổi ảnh vẫn áp dụng. Bộ tài liệu mặc định thêm đúng `<gốc review>/README.md`, không quét `INDEX.md` tự sinh hoặc toàn bộ cây review. `--docs` vẫn thay thế toàn bộ bộ gốc mặc định này.
 
 ## Luật giữ ảnh
 
@@ -39,14 +62,14 @@ Một ảnh được giữ nếu có ít nhất một lý do sau; JSON ghi đủ
 |---|---|
 | `name` | Tên file chứa `sheet`, `contact` hoặc `compare`, không phân biệt hoa thường. |
 | `compare-directory` | Một thư mục trong đường dẫn có tên bắt đầu bằng `compare`, không phân biệt hoa thường. |
-| `document-reference` | Đường dẫn POSIX tính từ repo kết thúc bằng chuỗi ảnh `tmp/...` lấy từ Markdown. |
+| `document-reference` | Ảnh trong repo khớp hậu tố `tmp/...` như trước; ảnh trong review khớp `captures/<khu>/...` hoặc đường dẫn cũ theo `areas` như mục trên. |
 | `too-new` | Mtime ở trong ngưỡng tuổi, kể cả đúng mốc biên hoặc ở tương lai. |
 
-Mặc định quét `docs`, `games/*/docs` và `games/*/*.md`. Không duyệt game `immortality-cultivation` đang tạm dừng. Bộ gốc mặc định chưa tồn tại được bỏ qua; gốc `--docs` chỉ định nhưng không đọc được gây lỗi để tránh xóa khi thiếu tham chiếu. Không đi theo symlink tài liệu. Chuỗi lấy từ Markdown khớp biểu thức `tmp/[^\s)\x60"'<>]+\.(png|jpe?g|webp)`; `\x60` biểu diễn dấu backtick. Cả `tmp/run/a.png` và `games/x/tmp/run/a.png` đều giữ ảnh tương ứng. Không giải mã URL hoặc suy diễn đường dẫn có khoảng trắng ngoài biểu thức này.
+Mặc định quét `docs`, `games/*/docs`, `games/*/*.md` và README của review nếu có. Giữ nguyên ngoại lệ không duyệt `games/immortality-cultivation` trong bộ gốc mặc định; dùng `--docs` để chỉ định tài liệu tại đó khi cần. Bộ gốc mặc định chưa tồn tại được bỏ qua; gốc `--docs` chỉ định nhưng không đọc được gây lỗi để tránh xóa khi thiếu tham chiếu. Không đi theo symlink tài liệu. Chuỗi lấy từ Markdown khớp biểu thức `tmp/[^\s)\x60"'<>]+\.(png|jpe?g|webp)` và biểu thức tương tự bắt đầu bằng `captures/`; `\x60` biểu diễn dấu backtick. Hai dạng được quét riêng để không che khuất nhau khi cùng xuất hiện trong một đường dẫn. Cả `tmp/run/a.png` và `games/x/tmp/run/a.png` đều giữ ảnh tương ứng. Tham chiếu review được lấy từ `captures/`, kể cả khi đường dẫn ghi đủ tới gốc review. Không giải mã URL hoặc suy diễn đường dẫn có khoảng trắng ngoài biểu thức này.
 
 ## Luật từ chối và xóa
 
-- Kiểm tra đường dẫn thật bằng `realpath`: phải có thành phần thư mục `tmp` và nằm trong repo chứa công cụ hoặc cây anh em `../typing-game-wt/`. So ranh giới thư mục, không nhận đường dẫn chỉ trùng tiền tố repo.
+- Kiểm tra đường dẫn thật bằng `realpath`: ngoài gốc review, phải có thành phần thư mục `tmp` và nằm trong repo chứa công cụ hoặc cây anh em `../typing-game-wt/`. Trong gốc review chỉ nhận cây `captures/` như mục trên. So ranh giới thư mục, không nhận đường dẫn chỉ trùng tiền tố repo hoặc `captures`.
 - Từ chối đích có thành phần `art-src`, `public`, `docs`, `typing-game-handoff`, `immortality-cultivation`; cả biến thể nối bằng `-`/`_` cũng được bảo vệ. So theo thành phần để `htdocs` trên Mac không bị hiểu nhầm là `docs`. Không duyệt các thư mục con bảo vệ này.
 - Không nhận đích là symlink, không đi theo symlink thư mục, không chọn file symlink. Symlink gãy cũng bị bỏ qua. Mục có `realpath` ra ngoài đích ghi `outside-target` vào `refused`; symlink còn lại ghi `symlink`.
 - Khi `--apply`, kiểm tra lại file thường, symlink ở các thư mục cha, realpath và bộ nhận dạng `dev`, `ino`, kích thước, mtime, ctime. File đã đổi được bỏ qua và ghi vào `refused`. File xuất hiện sau lúc lập danh sách không bị xóa. Các đích trùng/chồng nhau không làm một ảnh được chọn hai lần.
@@ -65,4 +88,4 @@ Test tự tạo cây giả bằng `fs.mkdtempSync()` dưới `os.tmpdir()`, ch�
 node --test tools/capture-prune/test/*.test.mjs
 ```
 
-Kết quả lệnh nguyên văn và giới hạn kiểm tra đồng thời được ghi riêng trong [báo cáo 048](../../docs/codex-queue/048-report.md).
+Kết quả lệnh nguyên văn và giới hạn kiểm tra đồng thời được ghi riêng trong [báo cáo 048](../../docs/codex-queue/048-report.md). Kiểm hồi quy cho thư mục review và lượt chạy khô greybox được ghi trong [báo cáo 256](../../docs/codex-queue/256-report.md).
