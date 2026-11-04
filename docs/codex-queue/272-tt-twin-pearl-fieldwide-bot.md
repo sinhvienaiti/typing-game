@@ -4,7 +4,7 @@ Thiết kế, chỉ đọc: `/Volumes/SS990TPRO/htdocs/typing-game/docs/codex-qu
 
 **Đường duyệt:**
 - Claude tự phân tích (làn 1), theo bước 9 của skill `agent-orchestration`.
-- Phiếu 2: T1, T2, T3, U1, U2 FAIL, mỗi lỗi đã sửa; **U3 PASS**.
+- Phiếu 2: T1, T2, T3, U1, U2 FAIL, mỗi lỗi đã sửa; **U3 PASS, U4 PASS** (đủ hai lượt liên tiếp, U4 lúc khoảng 21:35).
 - Claude (người chốt) giao khi mới có một PASS, vì làn Codex sắp trống (luật "đừng để Codex ngồi không"). Lượt phản biện kế tiếp chạy song song làm kiểm thêm; lỗi nó tìm ra sẽ thành phiếu sửa nối tiếp.
 
 **Trạng thái mã:** phiếu 271, 271b, 271c đã gộp vào `main` của game ở `35f1b77`.
