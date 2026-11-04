@@ -115,3 +115,5 @@ Runner usage: `tools/codex-run/README.md`.
 
   Have a check-in look for logs that have been idle too long.
 - **Browser:** close your tabs when done (the in-app browser holds about 9). Never sign in, type credentials or click consent dialogs.
+- **Files for the owner live where he can see them.** Every capture goes to `typing-game-review/captures/<game>/<topic>/` beside the source (owner, 04/11/2026). Everything sent to him also goes to `owner-review/<date>/<game>/<topic>/`. Each topic folder has an `ABOUT.md`; rebuild the index with `node scripts/review-index.mjs` (AGENTS.md "Test captures"). Brief every agent and Codex ticket with these paths.
+- **Demos while the owner is remote** go out as a video (an MP4 under 30 MB, so it reaches his phone) through SendUserFile, and the file is kept in `owner-review/`.

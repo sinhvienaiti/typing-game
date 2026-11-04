@@ -52,6 +52,12 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
   - **Chiêu rồng:** anh chọn **A · Twin Dragons, One Burning Pearl** (Kiếm ô 2, Hỏa), xem `DRAGON_SKILL.md`, commit 57133934.
     - Workflow `w4l4pn0nq` đang chạy: dựng hộp xám sau cờ `key2=twin-pearl` (tắt mặc định), đo bằng bot, quay khung, phản biện, sửa.
     - Kết quả đo ghi vào `DRAGON_SKILL.md` §8.
+  - **Thư mục review** (anh dặn 04/11): `/Volumes/SS990TPRO/htdocs/typing-game-review/`, nằm cạnh source.
+    - `captures/<game>/<việc>/` là ảnh chụp làm việc. `tmp/shots` của Tu Tiên đã chuyển vào `captures/tu-tien`, chỗ cũ để lại symlink.
+    - `owner-review/<ngày>/<game>/<việc>/` là những gì đã gửi anh.
+    - Mỗi thư mục có `ABOUT.md`. Mục lục `INDEX.md` sinh bằng `node scripts/review-index.mjs`.
+    - `tmp` của ba game kia (khoảng 5 GB, thư mục 25–28/10 của phiên khác) chưa chuyển, chờ anh.
+  - **Anh đang làm từ xa:** mọi bản demo gửi bằng video MP4 dưới 30 MB.
   - **Repo game:** commit 1a78a82 gồm phần dở của hào quang vòng 1 (biên dịch shader cho cả hai đích, hook lab, test, changelog). `media.md5` không phải của mình, để nguyên.
 - **Kế tiếp:**
   1. Plan ChatGPT + Gemini để lắp vào lab: hào quang vòng 2, vòng ngọc, cut-in C3 vào mã chính, camera xoay phím O vào mã chính, lửa trộn, sửa độ rõ của kiếm.

@@ -81,7 +81,11 @@ This skill is the method. Each game keeps its own data: reference board, signal 
 - **Every UI detail carries real art:** cards, buttons, bays, labels, tooltips, briefings, results and shop items. Text alone is not enough.
 - **Language:** everything the player reads is English, game nouns included; unique characters keep their proper names. Vietnamese appears only where the game teaches it: the meaning of the word being learned and optional glosses in learning panels.
 - **No media in Git:** no images, audio, `.glb`, `.gltf` or `.bin`. Stage explicit paths, never `git add -A`. Media travels by `pnpm media:push`.
-- **Captures** go under the game's or worktree's `tmp/`, never `art-src`, `public` or `docs`.
+- **Captures** go to the owner's review folder beside the source, `/Volumes/SS990TPRO/htdocs/typing-game-review/` (owner, 04/11/2026), never to `art-src`, `public` or `docs`.
+  - Working captures go to `captures/<game>/<topic>/`. A game's `tmp/shots` may be a link there.
+  - What you send the owner goes to `owner-review/<date>/<game>/<topic>/`.
+  - Each topic folder gets an `ABOUT.md` (purpose, made-by, doc, delete-when).
+  - Then run `node scripts/review-index.mjs` (AGENTS.md "Test captures").
   - When a step is scored, keep sheets, compare shots and numbers, and delete your own raw frames: `node tools/capture-prune/prune.mjs <folder>` first, then `--apply`.
   - Never delete files you did not create.
   - GPU browser runs go through `.local/bin/heavy.sh --gpu`.

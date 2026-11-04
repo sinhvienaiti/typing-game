@@ -109,10 +109,16 @@ Shared systems need 9 or more (owner, 29/10/2026): the typing feedback (focus st
 
 Every game has a Settings gear and a Sound speaker in play (owner, 29/10/2026), opening overlay panels for general and audio settings without leaving the game; one kit component, spec in `docs/games/IN_GAME_SETTINGS.md`.
 
-## Test captures (owner, 28/10/2026)
+## Test captures (owner, 28/10/2026; one review folder since 04/11/2026)
 
-Browser and render captures go under the game's own `tmp/` (or the
-worktree's), never into `art-src`, `public` or `docs`. Raw frames filled the
+**Where, since 04/11/2026.** The owner said: "nên tạo 1 folder trong SSD của tôi, cùng cấp với source code, để tôi vào cũng có thể thấy được là trong folder này đang có những gì, để biết được khi nào cần xoá". So every capture and review file lives in one folder beside the source: `/Volumes/SS990TPRO/htdocs/typing-game-review/` (see its `README.md`).
+- **Working captures** (frames, sheets, clips, numbers) go to `captures/<game>/<topic>/`. Tu Tien's `games/immortality-cultivation/tmp/shots` is a link to `captures/tu-tien`, so its old scripts still land there. For other games, link their `tmp/shots` the same way or write to the folder directly.
+- **Everything sent to the owner** (videos, sheets, boards) goes to `owner-review/<yyyy-mm-dd>/<game>/<topic>/`. A hard link to the capture is enough.
+- **Every new topic folder gets an `ABOUT.md`**, a few `key: value` lines: `purpose`, `made-by`, `doc`, `delete-when`.
+- **After adding or deleting,** rebuild the owner's index with `node scripts/review-index.mjs`.
+- **Never** put captures in `art-src`, `public` or `docs`.
+
+Raw frames filled the
 disk on 28/10: 77 GB of PNG and JPG in `tmp/`. So when a capture step ends,
 the agent that took the frames keeps only what the report needs (contact
 sheets, compare shots, images a doc links, numbers as JSON or Markdown) and

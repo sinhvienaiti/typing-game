@@ -50,6 +50,6 @@ Character animation is a shared system: every game reuses it, so it passes only 
 - Always-on glow, halos and motes: [game-hero-presence-vfx](../game-hero-presence-vfx/SKILL.md).
 - Model import, face floors and maps: `docs/games/MODEL_QUALITY.md`. Tripo: [game-art-pipeline tripo](../game-art-pipeline/references/tripo.md).
 - In Space Typing, its contracts and [game-asset-2d-to-3d](../game-asset-2d-to-3d/SKILL.md) come first; this skill is reference there.
-- Captures go under the game's `tmp/`. Prune your own raw frames with `node tools/capture-prune/prune.mjs <folder> --apply` once the sheets and numbers exist.
+- Captures go to the owner's review folder, `typing-game-review/captures/<game>/<topic>/`, beside the source, with an `ABOUT.md` (AGENTS.md "Test captures", 04/11/2026). A game's `tmp/shots` may link there. Prune your own raw frames with `node tools/capture-prune/prune.mjs <folder> --apply` once the sheets and numbers exist.
 
 Techniques beyond this repo (Claude reads these directly): `~/.agents/skills/threejs-gameplay-systems/references/game-feel.md`.
