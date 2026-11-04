@@ -438,7 +438,7 @@ Việc ảnh (A2–A10) không giao Codex, trừ khi ChatGPT và Gemini cùng ch
 ## 9. Quyết định chỉ anh làm được
 
 1. **Khung đầu va chạm:** v1 (ba vầng trăng lồng nhau) hay v3 (hai nét dài và một nét ngược), sau khi dựng lại vuông và đo. Rồi chọn bản Firefly.
-   - **Anh đã chọn v1a (04/11, khoảng 14:50):** khung đầu `art-src/lab/vfx/fire/impact-k1-r2/` v1a.try3 (cung 156/148/144°, độ thuôn 4,34/3,50/2,97, vạch nóng 2,3 %), khung cuối v1a.end-b.try2. A4 (Firefly) chờ anh đăng nhập lại.
+   - **Anh đã chọn v1a (04/11, khoảng 14:50):** khung đầu `art-src/lab/vfx/fire/impact-k1-r2/` v1a.try3 (cung 156/148/144°, độ thuôn 4,34/3,50/2,97, vạch nóng 2,3 %), khung cuối v1a.end-b.try2. A4 (Firefly) làm khi một làn trống; không cần đăng nhập lại.
 2. **Mẫu áo Metal** (mảnh góc cạnh hay sợi lụa) và **mẫu lửa bọc lưỡi** (lưỡi dài hay lớp ngắn).
 3. **Sao mũi:** bản Firefly `ff-g1-c2` đã gọt hay bản vẽ mới, sau khi chấm mù A/B.
 4. **Ấn:** mẫu ấn kiếm hay mẫu mây lửa.
