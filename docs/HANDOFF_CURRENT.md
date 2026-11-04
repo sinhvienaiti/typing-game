@@ -63,7 +63,8 @@ File này để **một session mới** nối tiếp mà không cần đọc l�
     - `tmp` của ba game kia (khoảng 5 GB, thư mục 25–28/10 của phiên khác) chưa chuyển, chờ anh.
   - **Anh đang làm từ xa:** mọi bản demo gửi bằng video MP4 dưới 30 MB.
   - **Từ 14:00 (anh dặn 13:58): tối đa 2 agent Claude chạy cùng lúc.** ChatGPT và Gemini không được làm tắc việc: nếu không dùng được thì Claude tự phân tích, và agent Claude phản biện độc lập cho 2 lượt PASS (skill `agent-orchestration`, bước 9).
-    - **Hai suất đang chạy:**
+    - **14:02, anh dừng toàn bộ.** Danh sách việc làm lần lượt (trạng thái, chỗ làm tiếp, chat đang dở): [`docs/games/tu-tien/WORK_LIST_2026-11-04.md`](games/tu-tien/WORK_LIST_2026-11-04.md). Danh sách đó thay phần hàng đợi bên dưới.
+    - **Hai suất (đến 14:02):**
       1. thiết kế Song Long toàn sân (§9 của `DRAGON_SKILL.md`);
       2. workflow giai đoạn A `wvczvsq3l`: đòn lửa phím 1, rồi bộ mặt nạ vẽ.
     - **Hàng đợi, làm theo thứ tự khi một suất trống:**
