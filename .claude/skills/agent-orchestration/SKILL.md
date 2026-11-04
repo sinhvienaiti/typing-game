@@ -102,6 +102,7 @@ The owner (04/11): "với codex thì nó cũng như 1 agent của bạn, cứ sa
 
   Code and logic always get `xhigh` or `ultra`. The lane line names the effort (column 4) and the model (column 6).
 - **One lane.** Codex's quota is small. Add lanes only when the owner asks. Keep the lane stocked with ready tickets, but only ready ones: a ticket waits until its solution is complete.
+  - **Never let Codex sit idle behind a review queue** (owner, 04/11/2026 18:40: "bạn đã giao cả việc cho codex hay chưa vậy, sao tôi không thấy nó làm gì"). Run the critic rounds of Codex's next ticket before long browser jobs, not after them. If Codex is idle and a ticket has one PASS after its FAIL rounds were all fixed, Claude may hand it over. In that case, record the call in the ticket's review line and keep the second critic running as an extra check; its defects become a follow-up ticket.
 - **Its own tree.** When Claude agents edit the same game, Codex works in its own worktree on a branch (`games/.wt-<game>-codex`). Claude reviews and merges.
 - **Claude owns quality.** Codex never commits. Claude:
   - re-runs the checks;
