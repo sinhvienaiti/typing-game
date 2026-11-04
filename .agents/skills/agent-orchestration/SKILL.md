@@ -126,6 +126,9 @@ Runner usage: `tools/codex-run/README.md`.
 
   Have a check-in look for logs that have been idle too long.
 - **Browser:** close your tabs when done (the in-app browser holds about 9). Never sign in, type credentials or click consent dialogs.
+- **Never close the in-app browser's last tab.** Keep one neutral tab open.
+  - On 04/11 at 14:02 every tab was closed, which closed the browser pane. By 14:10 the ChatGPT, Gemini and Firefly sign-ins were gone, and only the owner can sign in again. The link is likely, not proven.
+  - When cleaning up, close agents' tabs but leave one.
 - **Agents use the in-app browser only.** Claude in Chrome is the owner's own Chrome, used only when he asks for it. On 04/11 two agents tried it when the in-app browser was full.
 - **Budget browser tabs, not just agents.** The in-app browser holds about 9 tabs. On 04/11 nine agents ran at once and one image agent never got a tab (four tries in 8 minutes).
   - Before adding agents, count the tabs (`tabs_context`).
