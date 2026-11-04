@@ -1,6 +1,10 @@
 # Chiêu rồng (dragon skill): ba hướng cho anh chọn, 04/11/2026
 
-**Trạng thái:** anh đã chọn **A · Twin Dragons, One Burning Pearl** (04/11/2026, sáng: "A · Song Long"). Bước tiếp theo là hộp xám trong lab và đo bằng bot (§6 bước 1). Số canon chưa đổi; B và C để lại cho bộ chiêu Thủy và phần tuyệt kỹ.
+**Quyết định mới của anh (04/11/2026, khoảng 11:50):** "tôi nghĩ việc 2 rồng chạy lên cổng là k hợp lý, vì chúng ta đang build skill cố gắng dùng chung, map sau này k phải chỉ có hướng về 2 cổng, nên skill phải áp dụng được ở nhiều map chứ k phải là đi về 2 cổng, nó nên dạng skill diện rộng toàn map thì hợp lý hơn".
+- Song Long giữ ý hai rồng và một viên ngọc, nhưng phải là **chiêu diện rộng toàn sân, không phụ thuộc map**: không dựa vào số cổng hay hình đường đi của một map cụ thể.
+- Hộp xám hiện tại (rồng chạy theo hai hành lang tới hai cổng, §8) chỉ còn là bằng chứng đo. Thiết kế lại ở §9, qua lượt duyệt hai lần, rồi Codex viết lại mã sau cờ.
+
+**Trạng thái trước đó:** anh đã chọn **A · Twin Dragons, One Burning Pearl** (04/11/2026, sáng: "A · Song Long"). Bước tiếp theo là hộp xám trong lab và đo bằng bot (§6 bước 1). Số canon chưa đổi; B và C để lại cho bộ chiêu Thủy và phần tuyệt kỹ.
 
 **Xem nhanh** (không vào Git):
 - Bảng hình ba hướng: `games/immortality-cultivation/tmp/shots/dragon/directions-board.jpg` (3 hàng × 3 ảnh, có tên hướng).
