@@ -1,5 +1,13 @@
 # Báo cáo phiếu 258 · Tu Tiên · FlipbookPool bản 2 (CX-B)
 
+> **Claude duyệt (04/11/2026, 19:25): đạt, đã gộp vào `main` của game (`ceb51c2`).**
+> - Tự chạy lại: tsc 0 lỗi; 907/907 test (sau 258b là 917/917); bản build không chứa shader của lab.
+> - Đọc diff: đúng lời giải của phiếu; `VERTEX`/`FRAGMENT` giữ nguyên (băm khớp).
+> - Kiểm GPU bằng công cụ 258b trên Chrome headless: 9 chương trình khác nhau, thêm đúng 9, mỗi pool 1 lệnh vẽ, không lỗi shader hay GL; GPU so CPU sai tối đa 0,00096 (ngưỡng 1/255) trên 24 ca; mặt nạ PNG giải mã sai 0,00013.
+> - Atlas cũ: `lab-element-parity.mjs` trên `main` và trên nhánh, hệ Hỏa và Kim, **42/42 khung trùng từng điểm ảnh**; lượt đối chứng main với main 21/21 trùng.
+> - Bẫy gặp khi đo: dev server của worktree chặn font (403) vì `node_modules` là symlink ra ngoài gốc, nên chữ vẽ bằng font khác và lần so đầu lệch 13–14 khung. Chạy Vite với cấu hình bọc có `server.fs.allow` thì hết.
+> - Ghi nhận cho phiếu lắp: đường có mặt nạ không nhân `vOcclude` vào alpha (đúng §2.3 của phiếu); xem lại trong lab ở phiếu 264.
+
 Ngày: **04/11/2026**. Trạng thái: **xong phần Codex, chưa commit; chờ Claude duyệt diff và kiểm GPU trong lab**.
 
 ## Phạm vi và mã nền
