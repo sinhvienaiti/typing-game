@@ -67,6 +67,29 @@ The rule now:
    - The agent reads back only that summary and returns it with the file path.
 5. **Budget:** at most about 25 steps and 1.5 M effective tokens per consultation. Over budget means stop and report. Measure with `explain-usage` after a few runs.
 
+## Since 05/11/2026: working lean (owner: "bạn đang làm việc quá kém hiệu quả")
+
+Measured on 04/11, besides the browser work:
+- **Main thread:** 706 calls, each re-reading about 515 thousand tokens of this conversation. 17 of 81 commits were status updates.
+- **Tickets:** 259 grew to 700 lines and 12,900 words, 258 to 9,200 words, after many review rounds. Codex finished short tickets (274: 763 words; 275: 999 words) just as well, in 10–20 minutes.
+- **Spread:** many threads ran at once (dragon, jade ring, sound, cut-in, masks, bot), and nothing reached the play build.
+
+Rules:
+1. **Short tickets:** at most about 1,500 words.
+   - The goal and the decided approach.
+   - The files it may write and the forbidden actions.
+   - The acceptance numbers and checks.
+   - No line-by-line code, unless a formula must be exact.
+   - Codex at `xhigh` fills in the code.
+2. **Small agents:** one question or one task each, about 100 steps at most. Name files and line ranges instead of pasting them. Split anything bigger.
+3. **Focus:** at most 3 items in flight. Each one ends in the play build (or the owner's approved lab step) with a before/after video before a new item starts.
+4. **A lean main thread:**
+   - Update the work list and HANDOFF at milestones only.
+   - Short replies.
+   - Let Monitors run; no checking by hand.
+   - Start a fresh coordinator session from `docs/HANDOFF_CURRENT.md` once a day, or when the main context passes about 300 thousand tokens. Do it at a quiet point, after the lanes and Codex chains of the old session have finished, because their notifications go to the session that started them.
+5. **Keep Codex full:** Codex works on its own quota, about 15 minutes a ticket. Short tickets in a chained queue beat long tickets that wait on reviews.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
