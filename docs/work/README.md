@@ -30,3 +30,4 @@ Phiếu Codex vẫn nằm ở `docs/codex-queue/`; file việc trỏ tới chún
    - ghi chi phí (số bước, token) vào `USAGE.md`.
 5. **Báo anh khi trợ lý làm tốn hơn:** nếu một lần hỏi tốn hơn mức Claude tự làm (ước tính), hoặc hơn 1,5 triệu token, Claude **báo anh ngay** cùng số liệu để anh quyết cách xử lý. Anh dặn 05/11: "tôi đưa chatgpt và gemini vào để giúp bạn giảm token, chứ nếu việc đưa nó vào khiến token bị tốn nhiều hơn thì phải báo tôi".
 6. **Cập nhật `BOARD.md` ở mốc,** không phải mỗi vài phút. Việc xong thì chuyển xuống "Xong hôm nay"; sang ngày thì xóa phần đó (đã có trong git).
+7. **Tiết kiệm token và RAM (anh duyệt 06/11: "Áp dụng cả 6"):** luật ở skill `agent-orchestration`, mục "the coordinator's token budget". Mỗi sáng mở phiên điều phối mới từ `BOARD.md`; việc trình duyệt giao phiên phụ; kiểm trạng thái bằng một script; ảnh để agent xem; xong việc thì đóng tab và tắt máy chủ.

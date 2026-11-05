@@ -120,6 +120,27 @@ Rules:
 
 5. **Keep Codex full:** Codex works on its own quota, about 15 minutes a ticket. Short tickets in a chained queue beat long tickets that wait on reviews.
 
+## Since 06/11/2026: the coordinator's token budget (owner: "Áp dụng cả 6")
+
+**Measured on 05/11:**
+- Total 185 M effective tokens; 151 M of it in the coordinator session.
+- About 1,758 calls, about 63 thousand each, because every call re-reads the whole context (about 500 thousand tokens). A side session with a small context cost about 37 thousand a call.
+
+**Target:** about 100–110 M a day.
+
+**Rules:**
+1. **Small coordinator context.** Start a fresh coordinator session every morning from `docs/work/BOARD.md`. Within a day, compact once the context passes about 250 thousand tokens. Re-create the session-only crons (23:00 review) in the new session.
+2. **The coordinator does not drive browsers.** ChatGPT, Gemini, Firefly and lab clicking run in a side session with a small context. The coordinator gets the files and the result, and decides.
+3. **One call, not ten.**
+   - A status check (lanes, receivers, queues, Codex `.out` tail) is one script that prints everything at once.
+   - A heartbeat wakes the coordinator only when something changed or broke (a Monitor on a status file), not every 20 minutes.
+4. **Images stay out of the coordinator's context unless the owner's decision needs them.** Every image read is re-read on every later call. Agents check contact sheets and report in text.
+5. **No extra independent reads for work the coordinator can do itself.** On 05/11, two agents re-read a reference video and agreed with Claude, at about 3 M. Keep independent reads for decisions that are costly to get wrong.
+6. **Never spend a call on bookkeeping alone.** `update_plan`, the plan list and reports ride along with a real tool call.
+7. **Memory hygiene** (owner, 06/11 00:40, Activity Monitor showed 28.5 GB swap).
+   - Close every browser tab and stop every receiver or server once its job ends: Firefly tabs, assistants' tabs, WebGL lab tabs, review pages.
+   - A review page with many videos plays one clip on hover, never all visible clips.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
