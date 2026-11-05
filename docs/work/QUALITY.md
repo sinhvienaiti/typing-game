@@ -62,3 +62,17 @@ Loại sự kiện:
 | 05/11 15:05 | Codex 287b | rảnh 40 phút, lỗi Claude | 287b xong 14:26 nhưng bộ báo thức của Claude đọc `.log` trong khi làn ghi ra `.out`. Bài học: waiter đọc đúng tệp mà lệnh nohup ghi ra |
 | 05/11 15:10 | Rồng khí 3D v3, v4 | giám khảo 6,9/6,3 rồi 6,8/6,1 | Chững. Lỗi cả 4 vòng: đầu là búi bờm xù (hình khối Tripo: bờm là bụi tấm mỏng). Theo luật 3 lần: dừng chỉnh shader đầu, hỏi ChatGPT cách khác |
 | 05/11 16:20 | Thiết kế phím 2 | lỗi Claude lặp lại | Gọi ChatGPT rồi lại Gemini cho cùng một câu, trái quyết định 00:10 ("Gemini trước, ChatGPT khi Gemini hết hạn mức"). Nguyên nhân: AGENTS.md vẫn ghi "duyệt kép" cho thiết kế lớn, tiêu đề bộ nhớ ghi "hỏi CẢ HAI". Đã sửa AGENTS.md và bộ nhớ: một trợ lý mỗi câu hỏi. Không đọc câu trả lời Gemini đang chạy |
+| 05/11 16:35–17:12 | Danh sách Firefly, ảnh Gemini G1–G24 | anh duyệt | "Duyệt đủ 8 hệ", "tôi thấy đều đạt" (14 ảnh), "Đạt hết" (G15–G24) |
+| 05/11 17:57–18:27 | Firefly video | mất thời gian | 3 làn video bị giới hạn tốc độ ("Whoa there, speed racer"); làn 1 dừng 17:57. Về 2 làn, rồi 1 làn khi Firefly chỉ cho 1 video một lúc (20:30) |
+| 05/11 18:10 | Tuyệt kỹ Thủy, Lôi | anh chê | Thủy có "2 con mắt" (ảnh → video vẽ mặt), Lôi là "cuốn sách dài" (cuộn chiếu chỉ). Vẽ lại; anh chọn T1 (ChatGPT) và L2 (Codex) lúc 18:45 |
+| 05/11 19:12 | Hệ Ám | anh chê | "màu ám vì sao lại giống màu tím vậy": lỗi ở prompt của Claude (tím lam). Anh chọn A đen đỏ thẫm 19:20; clip tím cũ bỏ |
+| 05/11 19:45–19:55 | Phím 2 Nhất Tuyến | anh chê | Lưỡi liềm tự vẽ bằng mã, không dùng ảnh mình thiết kế; Hỏa và Ám không có ảnh. Claude chưa tự mở lab ở từng hệ trước khi gửi link |
+| 05/11 20:20 | 30 ảnh kỹ năng mới | anh duyệt | "Đạt hết" (Codex 300/301, thiết kế Gemini) |
+| 05/11 20:20–20:56 | Firefly video | kẹt 36 phút | Trang giữ "Generating video..." giả, nút Generate khóa (1 video một lúc); phải đưa tab lên trước rồi tải lại |
+| 05/11 20:52 | Vệt chém Ám | anh chê | "bạn vẽ kiểu gì nhìn vệt chém nó lạ và xấu vậy": Ám mượn lưỡi liềm Kim không đổi màu, khói đen thành vệt mực phẳng |
+| 05/11 20:54–23:00 | Firefly âm | mất 2 giờ | Hộp "slow down" chặn âm suốt từ 20:54 tới hết hạn tài khoản; dừng ở 892 bản (329 việc) |
+| 05/11 21:20 | Lưỡi liềm phím 2 | anh chê + lỗi Claude | Claude làm vệt chém lệch một bên (động tác vung) trong khi phái Kiếm bắn kiếm thẳng: phải là lưỡi liềm đối xứng. Codex 302 vẽ lại 14 hệ; anh duyệt 21:53 |
+| 05/11 22:20 | Bài học video quảng cáo | anh duyệt | "Duyệt cả 3": D60 bộ đếm chuỗi từ, D61 chiêu duy trì, D62 sao băng nghiêng |
+| 05/11 22:40 | Clip Ám nền đen | lỗi công cụ | Firefly vẽ thêm nền đá dù prompt ghi nền đen thuần (`dark-big-burst`, `dark-ground-impact`); làm lại v2 với câu "không có nền đất" |
+| 05/11 22:42 | Lưỡi liềm phím 2 | anh chê | "chưa tạo ra hiệu ứng ánh sáng dạng năng lượng mềm đẹp bay theo sau nó": lưỡi liềm bay trước kiếm 1,2 m, dải sáng bám chuôi, sau lưng lưỡi liềm trống. Trái luật 03/11 (vật bay phải có lớp hào quang) |
+| 05/11 22:45 | Bộ đếm chuỗi từ | anh duyệt | Chọn hướng "Hàng 1: mực vàng" (Codex 303) |

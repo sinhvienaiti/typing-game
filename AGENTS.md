@@ -72,7 +72,7 @@ Save both conversations verbatim, with every verdict and a check table, in the g
 Who does what (owner, 04/11/2026):
 - ChatGPT and Gemini do analysis and 2D images.
 - The local Codex is a worker for code, logic and sound. It gets a ticket only once Claude has the complete solution, runs `gpt-6.1-sol` (`xhigh` or `ultra` for code and logic), and works one lane unless the owner asks for more.
-- Codex makes images only when ChatGPT and Gemini have both hit their image limits.
+- Codex makes images when Gemini has hit its image limit (owner, 05/11/2026 18:20: "nếu gemini hết lượt ảnh, bạn có thể kêu codex tạo ảnh cùng nhé"), alongside ChatGPT, always from our reference images.
 
 Details are in the `agent-orchestration` skill.
 

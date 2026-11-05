@@ -176,7 +176,7 @@ The owner: "thảo luận xong 1 việc rồi hãy qua gemini nhờ nó đánh g
 1. the assistants analyse the design first, with the double review;
 2. Claude decides the direction;
 3. ChatGPT (then Gemini) paints it;
-4. Codex paints only when both have hit their image limits.
+4. Codex `image_gen` paints too as soon as Gemini has hit its image limit, alongside ChatGPT (owner 05/11/2026 18:20: "nếu gemini hết lượt ảnh, bạn có thể kêu codex tạo ảnh cùng nhé"), always fed our approved reference images. It no longer waits for both assistants to run out. On 05/11 Codex tickets 298–303 drew 57 stills this way, about 1–2 min an image. Among them the owner passed the 30 expansion skill designs, the 14 symmetric crescents and the Thunder ultimate L2.
 
 The owner still reviews every sample, and acceptance is still two blind judges at 8.5 or more in the play build (`game-art-pipeline`).
 
