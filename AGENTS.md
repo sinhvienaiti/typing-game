@@ -79,9 +79,13 @@ Details are in the `agent-orchestration` skill.
 Only purely mechanical work skips this step: a typo, a one-line bug fix, re-running a measurement, moving files.
 
 **Lighter review, since 05/11/2026 (00:00).** The owner agreed ("Đồng ý giảm duyệt") after the 04/11 measurement. That day about 60 % of Claude's tokens went into discussing and reviewing (ChatGPT and Gemini in the browser 43 %, critic loops 18 %), and two session limits cost almost three hours. This replaces the steps above where they differ:
-- The ChatGPT and Gemini double review stays **only** for:
+- An outside review stays **only** for:
   - new visual directions (characters, dragons, key art, a new effect look);
   - large new designs (a new skill, a new system).
+- **One assistant, not both (owner, 05/11/2026 00:10, repeated 16:20).** "Ưu tiên dùng gemini 4 argon"; at 16:20, after Claude ran ChatGPT and then Gemini on one design: "sao bạn vẫn gọi chatgpt, rồi lại gọi cả gemini vậy? … cứ dùng gemini hoặc chatgpt chứ k dùng cả 2 cho đỡ tốn token".
+  - Ask Gemini (4 Argon, High) alone. It reviews its own answer until it passes twice in a row.
+  - Use ChatGPT (Chat mode, High) only when Gemini has hit its limit.
+  - Never chain both on the same question. This replaces steps 1–3 above.
 - **Everything else** (code tickets, fixes, wiring, tooling, sound mixing, balance numbers):
   - Claude writes the solution;
   - **one** fresh Claude critic PASS sends it to Codex; a FAIL leads to a fix and another critic, at most 3 rounds, then rethink;

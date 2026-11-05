@@ -33,9 +33,13 @@ The measurement of 04/11 (skill `explain-usage` over the session logs):
 - Two session limits cost almost three hours, and the owner saw almost nothing change in the game.
 
 The rule now:
-- **Double review (the protocol below) only for:**
+- **An outside review only for:**
   - new visual directions (a character, a dragon, key art, a new effect look);
   - large new designs (a new skill, a new system).
+- **One assistant, never both (owner 05/11 00:10, repeated 16:20 after Claude chained ChatGPT then Gemini on the key-2 design: "cứ dùng gemini hoặc chatgpt chứ k dùng cả 2 cho đỡ tốn token").**
+  - Gemini 4 Argon High alone, self-review to two consecutive PASSes.
+  - ChatGPT only when Gemini has hit its limit.
+  - The ChatGPT-then-Gemini chain in the protocol below is retired; read it as "one assistant, two self-review PASSes".
 - **Everything else** (code tickets, fixes, wiring, tooling, sound mixing, balance numbers):
   - Claude writes the solution;
   - **one** fresh Claude critic PASS hands it to Codex; a FAIL leads to a fix and another critic, at most 3 rounds, then rethink the approach;
