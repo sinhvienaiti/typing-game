@@ -216,6 +216,13 @@ The owner (04/11): "với codex thì nó cũng như 1 agent của bạn, cứ sa
 
 Runner usage: `tools/codex-run/README.md`.
 
+### Two lessons from 05/11 (Codex sat idle for hours)
+- **Wake on every lane end.** After starting a lane, run a one-shot background wait until the lane log's last line is `queue done`, so Claude is woken the minute Codex stops. Then verify, or start the next ticket.
+  - Codex sat idle 02:52–08:30 and 09:01–10:22 because nothing woke Claude and no next ticket was queued.
+- **A ticket that changes a behaviour lets Codex write that behaviour's tests.** Name the existing test files in "Được ghi", with "update cases that assert the old behaviour, never loosen them".
+  - Tickets 277 and 280 forbade it, so Codex stopped correctly, twice.
+- **Name the build command that works:** the 274 wrapper `.local/codex-runs/274-out/build-no-cache.mjs`. Vite 7's CLI has no `--no-cache`.
+
 ## Claude agents and unattended work
 
 - **Claude agents within the owner's current cap:** 2 at once since 04/11/2026 14:00 (it was 3 from 03/11). Count a workflow by its live agents. Keep it lean, and never let two agents write the same files.
