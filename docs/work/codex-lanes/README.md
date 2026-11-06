@@ -6,8 +6,8 @@ Mỗi làn là một file md chứa danh sách việc làm lần lượt. Codex 
 
 | Làn | Việc | Nơi ghi | File | Trạng thái |
 |---|---|---|---|---|
-| 1 | Mã sim Song Long phím 2 (phiếu 293; sau đó 294 sát thương, 296 trình bày khi Claude viết xong) | `games/.wt-ic-swarm-sim` (nhánh `codex/key2-swarm-sim`) | `docs/codex-queue/293-tt-key2-swarm-sim-routes.md` | đang chạy từ 21:51 |
-| 2 | Video Firefly mới hôm nay → flipbook cho lab (8 việc) | thư mục mới trong `art-src/lab/vfx/` (`foe-i2v`, `foe`, `beast`, `boss`, `world`, `meta`, `cutin-mat`, `expansion-phases`) | `lane-2-flipbooks.md` | đang chạy từ 22:00 |
-| 3 | Ảnh: ấn đủ bộ cho Hỏa rồi 12 hệ còn lại | `…/stills/skills/<hệ>-sigil-*`, `<hệ>-crack-*`, `<hệ>-rift-*` | `lane-3-sigils.md` | đang chạy từ 22:08 (anh duyệt ấn Hỏa 22:05) |
+| 1 | Song Long phím 2: phần A xong (293, `35f3202`); tiếp 294 sát thương, 295 đo cân bằng | `games/.wt-ic-swarm-sim` (nhánh `codex/key2-swarm-sim`) | `lane-1-swarm.md`, `lane-1b-swarm-view.md`, `lane-1c-lab-all-merge.md` | xong 23:24: sim, sát thương, hình, gộp vào lab chung `codex/lab-all` (cổng 3146); cân bằng trượt, chờ anh |
+| 2 | Video Firefly mới hôm nay → flipbook cho lab (8 việc) | thư mục mới trong `art-src/lab/vfx/` (`foe-i2v`, `foe`, `beast`, `boss`, `world`, `meta`, `cutin-mat`, `expansion-phases`) | `lane-2-flipbooks.md` | xong 22:21: 79 flipbook; lượt 2 khi Firefly làm xong số video còn lại |
+| 3 | Ảnh: ấn đủ bộ cho Hỏa rồi 12 hệ còn lại | `…/stills/skills/<hệ>-sigil-*`, `<hệ>-crack-*`, `<hệ>-rift-*` | `lane-3-sigils.md` | xong 23:31: 89 ảnh, 13 tấm ghép gửi anh; gắn vào lab chờ anh duyệt |
 
 Luật chung: không lệnh git ghi (Claude commit); không mở cổng mạng; dòng `CODEX-WAIT-UNTIL` chỉ ghi khi thật sự hết hạn mức.
