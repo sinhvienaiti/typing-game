@@ -4,6 +4,7 @@
 #   tools/vfx-flipbook/run.sh ingest <game> <id> [vN]   # one id; every version when vN is left out
 #   tools/vfx-flipbook/run.sh all <game>                # every clip present in the inbox
 #   tools/vfx-flipbook/run.sh probe <clip.mp4>          # ffprobe summary
+#   tools/vfx-flipbook/run.sh ktx2 <manifest directory> [--only id,id] [--force]
 #   tools/vfx-flipbook/run.sh test [-q]                 # synthetic-clip tests (pytest)
 # Input:  $VFXLAB_HOME/inbox/firefly/<game>/<id>/<id>__vN.mp4   (VFXLAB_HOME defaults to ~/VFXLab)
 #         or <id>__vN.rgb.mp4 + <id>__vN.alpha.mp4 (Firefly transparent mode: colour + matte, "matte": "alpha-video")

@@ -6,12 +6,13 @@ import json
 import sys
 from pathlib import Path
 
-from . import ktx2, media, pipeline, upgrade, video_export
+from . import atlas_ktx2, ktx2, media, pipeline, upgrade, video_export
 
 USAGE = """vfx-flipbook: Firefly Video clip -> game flipbook
   run.sh ingest <game> <id> [vN]   one id (every version when vN is left out)
   run.sh all <game>                every clip in $VFXLAB_HOME/inbox/firefly/<game>/
   run.sh probe <clip.mp4>          ffprobe summary
+  run.sh ktx2 <manifest directory> [--only id,id] [--force]
   run.sh upgrade --like <manifest.json>:<id> --out <directory> --cell WxH --fps N
                  [--frames 64] [--look cool|neutral] [--no-mv] [--ktx2 uastc,etc1s|none]
                  [--videos crf23,720p] [--uastc-level 2] [--etc1s-quality 150]
@@ -26,6 +27,17 @@ def _positive_int(value: str) -> int:
     if number < 1:
         raise argparse.ArgumentTypeError("phải lớn hơn 0")
     return number
+
+
+def _ktx2(args: list[str]) -> int:
+    parser = argparse.ArgumentParser(prog="vfxflip ktx2")
+    parser.add_argument("folder", type=Path)
+    parser.add_argument("--only", help="các id cần nén, phân cách bằng dấu phẩy")
+    parser.add_argument("--force", action="store_true")
+    opts = parser.parse_args(args)
+    only = {cid.strip() for cid in opts.only.split(",") if cid.strip()} if opts.only is not None else None
+    atlas_ktx2.run(opts.folder, only=only, force=opts.force)
+    return 0
 
 
 def _export_video(args: list[str]) -> int:
@@ -81,6 +93,8 @@ def main(argv: list[str]) -> int:
         return 0 if argv else 2
     cmd, args = argv[0], argv[1:]
     try:
+        if cmd == "ktx2":
+            return _ktx2(args)
         if cmd == "upgrade":
             return _upgrade(args)
         if cmd == "export-video":
