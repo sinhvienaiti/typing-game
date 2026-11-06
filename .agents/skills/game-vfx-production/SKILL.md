@@ -38,6 +38,12 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
    - If it would not stand next to official Genshin, Star Rail, Wuthering Waves or Naraka footage, do not show it as a result. Show it as a sample with its gaps named.
 6. **Owner review.** Send the samples (sheets and short videos, or a local link to a fixed snapshot when he is at the Mac). His pick is final before anything is wired.
 7. **Wire with code** through the game's pools: flipbooks, ribbons, decals, sprites.
+   - **Pick the packaging per layer** with [runtime-packaging](references/runtime-packaging.md), the hybrid rule the owner approved on 06/11/2026:
+     - video only for large one-off full-screen moments;
+     - phase-offset flipbooks for anything repeated;
+     - textured strips and decals for anything that follows a direction or length;
+     - particles from painted sprites for sparkle;
+     - code never draws the shape.
    - Then [game-vfx-layered](../game-vfx-layered/SKILL.md) for phases and timing, and [game-hero-presence-vfx](../game-hero-presence-vfx/SKILL.md) for always-on layers.
 8. **Two blind judges ≥ 8.5** in the built play host. At 7 or more, send the owner a demo video, then keep going.
 
@@ -99,6 +105,7 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
 
 - [tool-choice](references/tool-choice.md): which tool makes which effect most beautiful, and why.
 - [recipes](references/recipes.md): Firefly Video → flipbook, Blender fire and smoke → flipbook, glint sheets, painted marks, smooth motion, sound.
+- [runtime-packaging](references/runtime-packaging.md): the hybrid rule (06/11/2026). Which layer plays as video, flipbook, strip or decal, particles or model; settings, budgets and the side-by-side check.
 - [quality-rubric](references/quality-rubric.md): what separates 6/10 from 8.5/10, checked on frames and in motion.
 - The research behind this skill: the VFX production pipeline research in docs/games (VFX_PRODUCTION_PIPELINE, written 04/11/2026) (ChatGPT and Gemini, checked).
 - Existing tools and know-how:

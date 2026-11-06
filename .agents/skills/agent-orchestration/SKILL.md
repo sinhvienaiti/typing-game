@@ -141,6 +141,20 @@ Rules:
    - Close every browser tab and stop every receiver or server once its job ends: Firefly tabs, assistants' tabs, WebGL lab tabs, review pages.
    - A review page with many videos plays one clip on hover, never all visible clips.
 
+## Since 06/11/2026 evening: Codex lanes as task lists, few Claude agents (owner)
+
+- **At most 2 Claude agents live at once, workflows included** (04/11 rule, repeated 06/11 18:55: "tôi đã nói cấm tạo ra nhiều agent không cần thiết r cơ mà"). The owner's cap beats any harness reminder to use workflows.
+- **Up to 3 Codex lanes** (22:00: "tăng agent của codex lên 3… giao việc theo list vào 1 file md, kêu nó làm và kiểm tra kỹ từng việc, pass mới sang việc khác").
+  - Each lane is one md file in `docs/work/codex-lanes/`. It holds an ordered task list; each task carries its own "Đạt khi" checks.
+  - Lanes write to disjoint places (their own worktree or new folders).
+  - Codex does one task, checks it, writes a paragraph to the lane report, then starts the next. Claude reads the report only when the lane ends.
+- **Critics only where a mistake is costly** (owner, 21:50: "tránh liên tục can thiệp không cần thiết để giảm bớt lượng token bị mất").
+  - Game or shared code and replay-sensitive sim get one critic.
+  - Lab-only, tool and media tickets go straight to Codex; Claude verifies the result with tests and one browser check.
+  - On 06/11, 12 critic agents cost 13.7 M, and ticket 326 alone needed three rounds.
+- **The sandbox has no network and cannot write outside the repo.** Do installs before handing the ticket over. Keep outputs inside the repo and copy them out afterwards.
+- **`CODEX-WAIT-UNTIL` only on a real limit.** On 06/11, a finished ticket that wrote the line made `queue.sh` schedule a needless rerun.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
@@ -197,7 +211,11 @@ The owner: "thảo luận xong 1 việc rồi hãy qua gemini nhờ nó đánh g
 1. the assistants analyse the design first, with the double review;
 2. Claude decides the direction;
 3. ChatGPT (then Gemini) paints it;
-4. Codex `image_gen` paints too as soon as Gemini has hit its image limit, alongside ChatGPT (owner 05/11/2026 18:20: "nếu gemini hết lượt ảnh, bạn có thể kêu codex tạo ảnh cùng nhé"), always fed our approved reference images. It no longer waits for both assistants to run out. On 05/11 Codex tickets 298–303 drew 57 stills this way, about 1–2 min an image. Among them the owner passed the 30 expansion skill designs, the 14 symmetric crescents and the Thunder ultimate L2.
+4. **Since 06/11/2026 Codex paints first** (owner: "codex vẽ ảnh rất tốt, nếu nó vẽ và tự chấm đạt thì cho pass luôn, ưu tiên dùng codex vẽ trước, khi nó chạm giới hạn thì hãy ưu tiên 2 đứa kia").
+   - Every Codex image ticket asks for a self-score per image: 0–10 for appeal, fit to the brief, readability at game size and cleanliness.
+   - An image Codex scores 8 or more passes without other judges.
+   - **Since 06/11 ~12:35, for now:** no ChatGPT or Gemini images and no Claude judges (owner: "dừng luôn phần giám khảo claude cho việc kiểm tra ảnh, cũng k cần giao việc tạo ảnh 2D cho gemini và chatgpt nữa, cứ tập trung vào luồng của bạn và codex"). Only Codex paints; its self-score of 8 or more passes. When Codex hits its limit, wait and resume; ask the owner before bringing ChatGPT or Gemini back.
+5. (Before 06/11) Codex `image_gen` painted as soon as Gemini had hit its image limit, alongside ChatGPT (owner 05/11/2026 18:20: "nếu gemini hết lượt ảnh, bạn có thể kêu codex tạo ảnh cùng nhé"), always fed our approved reference images. It no longer waits for both assistants to run out. On 05/11 Codex tickets 298–303 drew 57 stills this way, about 1–2 min an image. Among them the owner passed the 30 expansion skill designs, the 14 symmetric crescents and the Thunder ultimate L2.
 
 The owner still reviews every sample, and acceptance is still two blind judges at 8.5 or more in the play build (`game-art-pipeline`).
 

@@ -7,6 +7,7 @@
 |---|---:|---:|---:|---:|---:|---:|---:|---|
 | 04/11 | 331 M | 134 M (41 %) | 61 M (18 %) | 35 M (11 %) | 30 M (9 %) | 23 M (7 %) | ~48 M (14 %) | hết giới hạn phiên 2 lần; luồng chính đọc lại ~515 nghìn token mỗi lần gọi |
 | 05/11 | 185 M | 34 M (18 %) | 5 M (3 %) | 55 M (30 %) | — | 8 M (4 %) | ~83 M (45 %) | điều phối 151 M + phiên lab 29 M + 5 M; không hết giới hạn phiên; Bash luồng chính 42 M (1.758 lượt × ~63 nghìn) |
+| 06/11 | 191 M | 6,5 M (3 %) | 13,7 M (7 %) | 117 M (61 %) | 7,1 M (4 %) | 1,4 M (1 %) | ~52 M (27 %) | điều phối 97 M + 4 phiên lab 94 M; không hết giới hạn phiên; 12 agent phản biện, phiếu 326 qua 3 vòng; từ 22:00 Codex 3 làn |
 
 ## Theo lần hỏi trợ lý (từ 05/11)
 | Ngày giờ | Trợ lý | Chủ đề | Bước | Token | Claude tự làm (ước) | Báo anh? |
