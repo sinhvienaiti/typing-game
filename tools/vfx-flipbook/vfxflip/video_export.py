@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import subprocess
 import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -107,13 +108,16 @@ def _probe_video(path: Path) -> dict:
         raise VideoExportError(f"ffprobe không đọc được video {path}") from exc
 
 
-def _export_one(plan: ExportPlan) -> dict:
+def _export_one(plan: ExportPlan, *, crf: int = 18, height: int | None = None) -> dict:
     temporary = plan.output.with_suffix(".tmp.mp4")
     try:
+        vf = f"select='between(n,{plan.cut.start},{plan.cut.end - 1})',setpts=N/(24*TB)"
+        if height is not None:
+            vf += f",scale=-2:{height}:flags=lanczos"
         result = subprocess.run(
             ["ffmpeg", "-v", "error", "-nostdin", "-y", "-i", str(plan.source),
-             "-vf", f"select='between(n,{plan.cut.start},{plan.cut.end - 1})',setpts=N/(24*TB)",
-             "-r", "24", "-an", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
+             "-vf", vf,
+             "-r", "24", "-an", "-c:v", "libx264", "-preset", "medium", "-crf", str(crf),
              "-pix_fmt", "yuv420p", "-threads", "4", "-movflags", "+faststart", str(temporary)],
             capture_output=True, text=True)
         if result.returncode:
@@ -142,6 +146,19 @@ def _write_manifest(path: Path, data: dict) -> None:
     finally:
         if temporary is not None:
             temporary.unlink(missing_ok=True)
+
+
+def variant_ssim(output: Path, source: Path, cut: VideoCut, width: int, height: int) -> float:
+    """Compare to the same original-source cut, restoring its dimensions first."""
+    result = subprocess.run([
+        "ffmpeg", "-nostdin", "-i", str(output), "-i", str(source), "-lavfi",
+        f"[1:v]select='between(n,{cut.start},{cut.end - 1})',setpts=N/(24*TB)[r];"
+        f"[0:v]scale={width}:{height}:flags=bicubic[d];[d][r]ssim",
+        "-f", "null", "-"], capture_output=True, text=True)
+    matches = re.findall(r"All:([0-9.]+)", result.stderr)
+    if result.returncode or not matches:
+        raise VideoExportError(f"không đo được SSIM: {result.stderr[-1000:]}")
+    return float(matches[-1])
 
 
 def export_manifest(manifest: Path, *, repo_root: Path, ids: set[str] | None = None,

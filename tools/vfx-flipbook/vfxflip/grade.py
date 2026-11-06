@@ -21,6 +21,16 @@ def luma(rgb: np.ndarray) -> np.ndarray:
     return rgb[..., :3] @ LUMA
 
 
+def neutral_fade(img, f):
+    f = float(np.clip(f, 0.0, 1.0))
+    out = img.copy()
+    if img.shape[-1] == 4:
+        out[..., 3] *= f
+    else:
+        out *= f
+    return out.astype(np.float32)
+
+
 def smoothstep(e0: float, e1: float, x):
     t = np.clip((np.asarray(x, np.float32) - e0) / (e1 - e0), 0.0, 1.0)
     return t * t * (3.0 - 2.0 * t)

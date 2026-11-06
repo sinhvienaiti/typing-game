@@ -31,7 +31,7 @@ DEFAULTS = {"loop": False, "blend": "additive", "background": "black", "cell": [
             # colour has the clip's own backdrop taken out of its soft edges (grade.matte_video_rgba).
             "matte": None, "matteOpaque": 0.25, "matteWidenPx": 2.5, "matteTemporal": 1,
             # one-shots: the effect ends at the first run of endAtGap seconds of empty frames after it starts
-            "endAtGap": None}
+            "endAtGap": None, "fps": None, "look": "cool"}
 
 
 def lab_home() -> Path:
@@ -321,6 +321,16 @@ def _edge_fade(params: dict, orig: tuple[int, int], size: tuple[int, int], rect:
 def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params: dict) -> dict:
     info = media.probe(mp4)
     fps = info["fps"]
+    fixed_step = None
+    if params.get("fps") is not None:
+        target = float(params["fps"])
+        r = fps / target if target > 0 and math.isfinite(target) else 0
+        if r < 1 or not math.isfinite(r) or abs(r - round(r)) > 1e-6:
+            raise media.MediaError(f"fps đích phải chia hết fps nguồn {fps:g}; với nguồn 24 hãy dùng 6, 8, 12 hoặc 24")
+        fixed_step = int(round(r))
+    look = params.get("look", "cool")
+    if look not in ("cool", "neutral"):
+        raise media.MediaError("look phải là cool hoặc neutral")
     note = read_note(mp4)
     warnings: list[str] = []
     if not params["known"]:
@@ -365,7 +375,7 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     # --- timing ---
     if loop:
         plan = timing.plan_loop(an.energy, timing.block_mean(an.weight, 36, 64), fps,
-                                frames=int(params["frames"]), step=int(params["step"]),
+                                frames=int(params["frames"]), step=fixed_step or int(params["step"]),
                                 xfade=int(params["crossfade"]), force_start=params["start"])
         span = list(range(plan["start"], min(n_src, plan["end"] + plan["crossfade"] * int(plan["step"]))))
     else:
@@ -384,6 +394,9 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
                                    force_start=params["start"], force_end=params["end"], stop=stop,
                                    gap_end=(max(1, int(round(float(params["endAtGap"]) * fps)))
                                             if params.get("endAtGap") else None))
+        if fixed_step:
+            plan = timing.fixed_rate(plan, fixed_step, int(params["frames"]))
+            idx = plan["indices"]
         span = list(range(plan["start"], plan["end"]))
     idx = plan["indices"]
 
@@ -474,6 +487,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         if not loop and plan.get("startMode") == "flash":
             hot_cells = np.array([metrics.hot_energy(graded(i)) for i in range(len(cells))])
             plan = timing.refine_start(plan, hot_cells, n_max=int(params["frames"]))
+            if fixed_step:
+                plan = timing.fixed_rate(plan, fixed_step, int(params["frames"]))
             idx = plan["indices"]
 
     def assemble(indices: list[int]) -> np.ndarray:
@@ -481,7 +496,7 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         if tile_x:
             f = _strip_tile(f[:, :, tile_shift:], cw)
         if loop:
-            post = (lambda img, mix: grade.cool_dim(img, 0.8 * mix)) if additive else None
+            post = (lambda img, mix: grade.cool_dim(img, 0.8 * mix)) if additive and look == "cool" else None
             f = timing.crossfade_loop(f, plan["frames"], plan["crossfade"], post)
         return f
 
@@ -520,7 +535,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
         j0 = len(frames) - tail_faded
         for j in range(j0, len(frames)):
             u = (j - j0 + 1) / tail_faded
-            frames[j] = grade.cool_fade(frames[j], 1.0 - float(grade.smoothstep(0.0, 1.0, u)))
+            fade_fn = grade.cool_fade if look == "cool" else grade.neutral_fade
+            frames[j] = fade_fn(frames[j], 1.0 - float(grade.smoothstep(0.0, 1.0, u)))
     peak_fix = None
     if additive:
         frames, peak_fix = _fix_white_core(frames, metrics.LIMITS["whiteCore"], str(params["whiteFix"]))
@@ -607,7 +623,8 @@ def process(mp4: Path, out_dir: Path, game: str, cid: str, version: str, params:
     if not loop and plan.get("capped"):
         warnings.append(f"capped at maxSec {params['maxSec']} s")
     if tail_faded:
-        warnings.append(f"no fade-out in the cut: cooling fade over the last {tail_faded} frames")
+        fade_label = "cooling" if look == "cool" else "neutral"
+        warnings.append(f"no fade-out in the cut: {fade_label} fade over the last {tail_faded} frames")
     if vmatte:
         fr = grade.edge_fringe(final)
         checks["fringe"] = dict(fr, raw=raw_fringe, matteLevel=round(an.t0 * 255, 2),

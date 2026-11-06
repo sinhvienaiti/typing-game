@@ -6,12 +6,16 @@ import json
 import sys
 from pathlib import Path
 
-from . import media, pipeline, video_export
+from . import ktx2, media, pipeline, upgrade, video_export
 
 USAGE = """vfx-flipbook: Firefly Video clip -> game flipbook
   run.sh ingest <game> <id> [vN]   one id (every version when vN is left out)
   run.sh all <game>                every clip in $VFXLAB_HOME/inbox/firefly/<game>/
   run.sh probe <clip.mp4>          ffprobe summary
+  run.sh upgrade --like <manifest.json>:<id> --out <directory> --cell WxH --fps N
+                 [--frames 64] [--look cool|neutral] [--no-mv] [--ktx2 uastc,etc1s|none]
+                 [--videos crf23,720p] [--uastc-level 2] [--etc1s-quality 150]
+                 [--max-atlas 4096] [--game immortality-cultivation] [--repo-root <dir>]
   run.sh export-video --manifest <manifest.json> [--ids a,b,...] [--jobs 3]
                       [--force] [--dry-run] [--repo-root <directory>]
   run.sh test [-q]                 synthetic-clip tests"""
@@ -39,6 +43,31 @@ def _export_video(args: list[str]) -> int:
     return 0
 
 
+def _upgrade(args: list[str]) -> int:
+    parser = argparse.ArgumentParser(prog="vfxflip upgrade")
+    parser.add_argument("--like", required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--cell", required=True)
+    parser.add_argument("--fps", type=float, required=True)
+    parser.add_argument("--frames", type=int, default=64)
+    parser.add_argument("--look")
+    parser.add_argument("--no-mv", action="store_true")
+    parser.add_argument("--ktx2", dest="ktx2_codecs", default="uastc,etc1s")
+    parser.add_argument("--videos", default="")
+    parser.add_argument("--uastc-level", type=int, default=2)
+    parser.add_argument("--etc1s-quality", type=int, default=150)
+    parser.add_argument("--max-atlas", type=int, default=4096)
+    parser.add_argument("--game", default="immortality-cultivation")
+    parser.add_argument("--repo-root", type=Path, default=Path(__file__).resolve().parents[3])
+    opts = vars(parser.parse_args(args))
+    try:
+        opts["cell"] = tuple(int(s) for s in opts["cell"].lower().split("x"))
+    except ValueError as exc:
+        raise media.MediaError("cell cần WxH, ví dụ 768x432") from exc
+    upgrade.run(**opts)
+    return 0
+
+
 def _print(reports: list[dict]) -> None:
     for r in reports:
         print(r["summary"])
@@ -52,6 +81,8 @@ def main(argv: list[str]) -> int:
         return 0 if argv else 2
     cmd, args = argv[0], argv[1:]
     try:
+        if cmd == "upgrade":
+            return _upgrade(args)
         if cmd == "export-video":
             return _export_video(args)
         if cmd == "ingest" and len(args) in (2, 3):
@@ -69,7 +100,7 @@ def main(argv: list[str]) -> int:
         if cmd == "probe" and len(args) == 1:
             print(json.dumps(media.probe(Path(args[0])), indent=2))
             return 0
-    except (FileNotFoundError, media.MediaError, video_export.VideoExportError) as e:
+    except (FileNotFoundError, media.MediaError, video_export.VideoExportError, ktx2.Ktx2Error) as e:
         print(f"vfx-flipbook: {e}", file=sys.stderr)
         return 3
     print(USAGE, file=sys.stderr)

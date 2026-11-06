@@ -48,6 +48,18 @@ def even_indices(start: int, end: int, n_total: int, n_min: int = 24, n_max: int
     return [start + min(length - 1, int(round(i * step))) for i in range(n_max)], step
 
 
+def fixed_rate(plan: dict, step: int, n_max: int) -> dict:
+    """Sample at an integer source-frame step, preserving trim/fade unless capped."""
+    end = plan["end"]
+    idx = list(range(plan["start"], end, step))
+    capped, faded = plan.get("capped", False), plan.get("faded", False)
+    if len(idx) > n_max:
+        idx = idx[:n_max]
+        end = min(end, idx[-1] + step)
+        capped, faded = True, False
+    return dict(plan, indices=idx, step=float(step), frames=len(idx), end=end, capped=capped, faded=faded)
+
+
 def find_flash_peak(hot: np.ndarray, begin: int, min_dip: float = 0.15) -> int | None:
     """First prominent local maximum of the hot energy: at least half the clip maximum and
     followed by a dip of min_dip before anything higher. None when the effect only grows (or

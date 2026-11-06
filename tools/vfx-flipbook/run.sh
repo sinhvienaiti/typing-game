@@ -9,10 +9,21 @@
 #         or <id>__vN.rgb.mp4 + <id>__vN.alpha.mp4 (Firefly transparent mode: colour + matte, "matte": "alpha-video")
 # Output: $VFXLAB_HOME/out/<game>/<id>/<id>__vN.{atlas.png,json,sheet.jpg,preview.mp4,metrics.json}
 # Python: needs numpy, scipy, Pillow, pytest; the Audio Lab venv has them (override with VFXFLIP_PY).
+# Cài riêng cho công cụ (chỉ khi chưa có):
+# uv venv --python ~/AudioLab/python/cpython-3.12-macos-aarch64-none/bin/python3.12 tools/vfx-flipbook/.venv
+# uv pip install --python tools/vfx-flipbook/.venv/bin/python -r tools/vfx-flipbook/requirements.txt
+# npm install --no-audit --no-fund --prefix tools/vfx-flipbook/ktx2
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export VFXLAB_HOME="${VFXLAB_HOME:-$HOME/VFXLab}"
-PY="${VFXFLIP_PY:-$HOME/AudioLab/.venv/bin/python}"
+PY="${VFXFLIP_PY:-}"
+if [ -z "$PY" ]; then
+  if [ -x "$HERE/.venv/bin/python" ]; then
+    PY="$HERE/.venv/bin/python"
+  else
+    PY="$HOME/AudioLab/.venv/bin/python"
+  fi
+fi
 if [ ! -x "$PY" ]; then
   echo "vfx-flipbook: không thấy Python có numpy/scipy/Pillow ở $PY; đặt VFXFLIP_PY" >&2
   exit 2
