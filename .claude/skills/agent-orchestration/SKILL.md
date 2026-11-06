@@ -154,6 +154,17 @@ Rules:
   - On 06/11, 12 critic agents cost 13.7 M, and ticket 326 alone needed three rounds.
 - **The sandbox has no network and cannot write outside the repo.** Do installs before handing the ticket over. Keep outputs inside the repo and copy them out afterwards.
 - **`CODEX-WAIT-UNTIL` only on a real limit.** On 06/11, a finished ticket that wrote the line made `queue.sh` schedule a needless rerun.
+- **Pick the model by difficulty** (owner, 07/11 00:40, "Áp dụng").
+  - The owner asked: "k lẽ bạn cũng cứ tạo agent model xịn cho toàn những việc đơn giản từ trước tới nay ak". On 06/11 every Claude agent inherited the top model, and Codex ran `high`–`ultra` even for media chores.
+
+  | Work | Claude agent | Codex |
+  |---|---|---|
+  | Mechanical: count, list, copy, rename, cut flipbooks, map sounds | `model: "haiku"`, low effort, or one command in the main thread | `medium` |
+  | Reading, auditing, critics of lab, tool or media tickets, ordinary ticket drafts | `model: "sonnet"` | — |
+  | Images | — | `high` (it self-scores) |
+  | Game or shared code, replay-sensitive sim, balance, hard design | the default (Opus), only when needed | `xhigh`; `ultra` only for deterministic sim |
+
+  - Always set `model` explicitly on Agent and workflow `agent()` calls. A missing `model` means the top model.
 
 ## The double-review protocol (every analysis, plan, design and solution)
 
