@@ -224,10 +224,15 @@ jobs:
       - name: Synchronize deterministic E10/E12 metadata
         shell: bash
         run: |
+          # E11 readiness snapshots embed the released counts. E12 updates the
+          # release manifest after the first E11 pass; reconcile it *before*
+          # staging metadata so the same workflow run produces a stable snapshot.
+          node scripts/report-english-content-e11-readiness.mjs --write
           git add \
             content/english/releases/2026.10.0.json \
             content/english/reports/e10-batch-report.json \
             content/english/reports/e10-review-ledger.json \
+            content/english/reports/e11-readiness.json \
             content/english/reports/e12-maintenance-audit.json \
             content/english/reports/e12-quality-sample.json
           if git diff --cached --quiet; then
