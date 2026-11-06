@@ -6,7 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest fully verified E11 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. That run applied the decisions and registered the reviewed slice; the workflow then created registration commit `b9400e88f2c498b8524137aa2317d32ab87b0f81`, followed by generated-metadata commit `9803698754f07d7023bde774b13c249eb8309d91`.
+- Latest verified E11 typing-text checkpoint: editorial commit `1192fcb7eed7f93cd6606e20530c291ce2ea0bfb` — 24/24 Slice 22 sentences have digest-bound published review decisions; English Content Full Validation run `42264784597` passed, including runtime publication, smoke, E11 coverage, E12 and reproducibility. Its four bot-generated runtime/metadata commits ended at `240318b372f4975162247f5fa40266c613690aae`. Bot-authored PR runs may show `action_required`; do not misreport them as success on that SHA.
+- Published Slice 22 runtime snapshot: 1,729 example sentences, 3,617 total sentence records, 14,512 published rich records, 14,512 applied editorial decisions, 900 dictionary records, 300 grammar records and 9,695 phrase records. See live `shared/sentences/manifest.json`, E10 ledger, E12 audit and acceptance report before using these numbers in later work.
+- Historical MultiWOZ slice-51 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. Its registration and generated-metadata commits were `b9400e88f2c498b8524137aa2317d32ab87b0f81` and `9803698754f07d7023bde774b13c249eb8309d91`.
 - MultiWOZ slice 51 is integrated: 22/22 candidates received explicit editorial decisions, with 9 edited records retained and 13 rejected. The registered runtime slice is `content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-51.json`.
 - The pinned MultiWOZ 2.2 source coverage now includes the complete configured source set at immutable upstream commit `fe0c8e65cfcd8462bd33c86e35f21addc84ca82b`: train `dialogues_001.json` through `dialogues_017.json`, dev `dialogues_001.json` and `dialogues_002.json`, and test `dialogues_001.json` and `dialogues_002.json`. There is no configured or upstream-designed `test/dialogues_003.json` lane; never invent one.
 - E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
@@ -22,7 +24,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
 - E04 phrase/pattern architecture + current reviewed publication: complete — 9,695 published records after scale-224
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
-- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — 1,513 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
+- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — historical pre-E11 scale-up baseline was 1,513 examples; current runtime after E11 Slice 22 contains 1,729 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
 - E10 controlled batch/review pipeline: complete and enforced
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
@@ -113,15 +115,13 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 
 ## Current first-unfinished workstream
 
-1. E04 scale-224 is complete; all controlled E04 phrase-family minimums are met. Do not create scale-225 merely for volume.
-2. Translation pairs remain the largest preferred bounded E11 scale-up front because runtime is far below the locked 20,000 target and a Tatoeba source/review pipeline exists. However, the exact pinned Tatoeba cache bytes are not currently available through the reproducible repository/CI path, so this lane remains source-blocked rather than license/review-blocked.
-3. Keep the legacy Tatoeba E06 pilot selector unchanged. The E11 Tatoeba path uses the separate source-ID-based, prefix-monotonic selector and must reject checksum drift instead of silently refreshing moving export URLs.
-4. MultiWOZ dialogue scale-up remains the current reproducible fallback lane. The pipeline has progressed through 51 reviewed slices using immutable source identity, explicit editorial decisions, digest-bound review, normal E10 publication gates and bot registration/metadata refreshes.
-5. The configured MultiWOZ source has been extended through the last designed file currently pinned for this lane: train 001–017, dev 001–002 and test 001–002. Source pin, blob SHA1s, license and attribution remain immutable/reproducible at the pinned upstream commit.
-6. Full Validation #913 verified slice 51 and registered it, but its next-review packet was prepared before the workflow-created registration/metadata commits. Therefore #913's packet must not be reused to decide slice 52.
-7. A fresh English Content Full Validation must run on a HEAD containing the registered slice-51 state. If it emits another bounded MultiWOZ review packet, that packet becomes slice 52 and must go through the same complete editorial/dedupe/digest-bound review path.
-8. If the fresh run reports `source-exhausted` / no next packet, treat the configured MultiWOZ lane as exhausted. Do not invent `test/dialogues_003.json`; instead inspect the current roadmap/source-coverage contracts and move only to the next explicitly designed E11 source/record-type lane.
-9. After any reviewed bounded slice is integrated, regenerate publication, E11 readiness/runtime/record-level coverage and E12 artifacts, then verify the relevant English Content Full Validation before opening the following slice. Platform CI failures outside this content lane are not a reason to replay old completed content work.
+1. E04 scale-224 and its approved controlled phrase-family minimums remain complete. Do not create scale-225 merely to increase volume.
+2. Translation-pair expansion is below its locked E11 target, but the historically pinned Tatoeba raw cache bytes are unavailable through the reproducible repo path. Keep import checksum gates strict; mutable weekly-export URLs are source-intake probes, not replacements for an approved pin.
+3. The pinned MultiWOZ E11 lane is now `source-exhausted` in Full Validation run `42264784597`: 1,171 candidate dialogues, 547 rejected, 625 used, zero remaining and zero selected. It is not a justification to invent `test/dialogues_003.json`.
+4. Reproducible E11 typing-text review is the bounded fallback lane. Slices 21 and 22 use project-original passages with explicit provenance and digest-bound editorial review; Slice 22 adds 24 published examples from six source shards and six decision shards, including three documented self-containment/punctuation edits. All generated publication/dedupe gates passed in Full Validation.
+5. The deterministic next typing-text review packet from run `42264784597` is a **candidate only**, not published Slice 23: 1,000 queue candidates, 300 controlled, 516 reviewed decision IDs, 484 remaining before selection, 24 selected. Its selected range begins `sent.tt.l017-p001.011` and ends `sent.tt.l020-p001.012`. Regenerate against the newest HEAD before reviewing Slice 23.
+6. Platform CI on the Slice 22 *editorial-only* commit `1192fcb7` failed the expected reproducibility diff because the generated `shared/sentences` runtime was not committed yet; Full Validation completed the regeneration and pushed the four metadata/runtime commits, ending at `240318b`. Do not disable the `git diff --exit-code` gate. Re-run the normal PR workflows from a human-authored checkpoint commit on top of synchronized artifacts.
+7. Verify English Content Full Validation, Master Plan Acceptance and Platform CI with no stale generated artifacts before opening the next slice. Respect new HEADs, human-versus-bot PR event behavior, and the current source-update policy.
 
 ## Known non-blocking enrichment debt
 
@@ -129,9 +129,10 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 
 ## Blockers
 
-- Tatoeba translation next-slice: requires the exact pinned source-cache bytes. The moving upstream export URL must not be downloaded and accepted under the old pin merely because the historical cache is unavailable.
-- MultiWOZ is not currently source-cache blocked. The immediate requirement is a fresh Full Validation after slice-51 registration so the deterministic selector can prove either a real next packet or `source-exhausted` against the final configured source set.
+- Tatoeba next translation slice remains source-blocked until the exact pinned source bytes are recovered or a reviewed source upgrade is approved. Never silently update a checksum.
+- The configured MultiWOZ lane is source-exhausted. No additional upstream-designed file should be fabricated.
+- PR workflow runs triggered by bot-generated commits can show `action_required` with no jobs. Validate the synchronized runtime from a subsequent human-authored checkpoint commit instead of treating bot runs as green.
 
 ## Next actionable task
 
-Run English Content Full Validation from the newest live HEAD that contains the registered slice-51 state. Use only the fresh review/intake/editorial-handoff artifacts from that run. If a non-empty packet exists, review the complete bounded packet as slice 52 with exact/near-dedupe checks, grammar/naturalness/CEFR/license review, explicit edit/reject reasons and exact digest binding, then commit it atomically and let the normal apply/register pipeline run. If the fresh run reports `source-exhausted` or produces no next MultiWOZ packet, do not add `test/dialogues_003.json`; inspect the current E11 roadmap/source coverage and continue with the next explicitly designed lane.
+Verify all three required workflows from a new human-authored checkpoint commit on top of the synchronized Slice 22 runtime (generated HEAD `240318b372f4975162247f5fa40266c613690aae`). If checks pass and the branch remains coherent, regenerate the deterministic E11 typing-text next-review packet from the newest HEAD, audit source integrity/grammar/naturalness/CEFR/exact-and-near-duplicates/license, then review and publish only eligible Slice 23 records through digest-bound E10 decisions. Leave the already complete MultiWOZ and E04 lanes untouched.
