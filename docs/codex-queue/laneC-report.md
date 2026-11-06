@@ -76,3 +76,13 @@
 - Mốc cục bộ tốt hơn: i2v-poison-comet-v2 take1, i2v-star-comet take1, i2v-star-caster-seal take1 cùng 7/10; đều REDO, chưa có mốc đạt thương mại 8/10.
 - Kết quả: .local/video-review/results/batch-07.json; 37 prompt tiếng Anh giữ nguyên still I2V; 13 DROP gồm 12 take thừa và Poison comet v1 được v2 thay theo use. Chỉ duyệt, chưa tạo lại ảnh/video.
 - Đã xem đầu/cuối cả 50 clip, thêm 0–0,8 giây đầu của 11 clip và đo 11 loop theo prompt/use dù metadata false; motion dựa trên khung trích, chưa chứng nhận phát thực/trong game. JSON.parse/đủ key/best/REDO đã kiểm; đã xoá khung tạm tự tạo, dừng sau một đợt.
+
+
+### batch-08 — 07/11/2026
+- Đã xem riêng 50/50 tấm 6 khung, đối chiếu 34 still nguồn và đầu/cuối cả 50 clip: 0 PASS, 34 REDO, 16 DROP; 35 job, mỗi job đúng một best.
+- Lỗi thường gặp 1: chuyển động thiếu nhịp lực — cột sét sáng đều, mưa sao thành tia treo, hổ/phượng chuyển tư thế tại chỗ; hai charge chuyển vùng sáng thay vì tích lũy tới đầy.
+- Lỗi thường gặp 2: đổi hình/phóng/cắt khung — biển sâu thành mặt nổi, Void ultimate và băng take1 zoom mất viền, lốc phình; Void affliction bị crop ngay khung đầu dù still đủ ôvan, cần chủ kiểm tra cách đặt ảnh vào khung Firefly.
+- Lỗi thường gặp 3: đoạn tan/nối chưa đúng — hai manifest còn hình hoặc nhiều hạt cuối, Void ground mark mất cả đá, hai slash giữ sáng lâu; loop ẩn trong prompt/use dù metadata false có chênh đầu/cuối, không coi tỷ số MAE là chứng nhận phát vòng.
+- Mốc cục bộ tốt nhất: i2v-ult-ice-cold-silence take2, i2v-ult-thunder-nine-heavens take2, i2v-ult-water-profound-sea-v2 take3 cùng 7,5/10; đều REDO, chưa có mốc đạt 8 để dùng ngay.
+- Kết quả: .local/video-review/results/batch-08.json; 34 prompt tiếng Anh giữ nguyên still I2V, 16 DROP gồm 15 take thừa và Void comet v1 được v2 thay theo use. Chủ cần xem các still vốn sát/cắt biên; prompt chuyển động không sửa được lề khung đầu.
+- Motion dựa trên khung trích, gồm 0/0,2/0,8 giây và khung cuối; đo thêm tám loop theo prompt/use bằng xám 160×90, chưa duyệt phát thực/trong game. JSON.parse/đủ key/best/REDO đã kiểm; đã xoá khung tạm tự tạo, không chạy build/test hay tạo/sửa tài sản; dừng sau một đợt.
