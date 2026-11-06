@@ -1,0 +1,15 @@
+VERDICT: PASS (round 3). The round-1 and round-2 items are all fixed in the ticket text. No instruction contradicts another, and the anchors and symbols match the code at `b8ebd51`.
+
+Checked:
+- Round 1 (all 9): `keyIcon` with the constructor taking only `{ style }`; the tooltip rule (text after the last ` · `, plus the Twin Dragons case); `let bar` at module level, with the bar built after the greybox block (:1735–1737) inside `ui !== "0"`; z 8, under the cut-in root at z 9 (cutin.ts:259), the streak and greybox at 9, the panel at 10 and the caption at 20, above the tags at 5; the typed `__lab` (:2038, :2328); node-only tests; the 8/9 branches split into if/else with `"8"`/`"9"`; the report filter.
+- Round 2: `avoid(el)` is called right after `document.body.append(panel)` (:1879), and its `left` is clamped; `held = cutin.active` is read before `type()`, since `type()` returns early during a cut-in (:1455) and key 6 opens one inside it; `refreshClipSlots` is at module level with a null guard and start value `undefined`; there are new `showcase.onList` and `expansion.onList` registrations (`onList` pushes, showcase.ts:516; only `sc.onList(fill)` exists, :1837); the TS7053 cast is in place.
+- Consistency: there is one place for the overlap check (step 3, after append), one flash rule for 0–7 (step 4), one constructor signature, one z-index. Nothing older is left behind.
+- Compiles: in a scratch strict + `noUncheckedIndexedAccess` check, `keyIcon` (with the cast and `?? null`) and the `selectedId()` body (`current() ?? ids()[0] ?? null`) both type as `string | null`. The private `showcase` field is reachable from a new method (clip-skills.ts:685). `cutin.active` is a getter (cutin.ts:340). Vitest 3.2.7 has `it.skipIf`. Tests run under `environment: "node"`. `boundary.test.ts` does not restrict src/lab beyond its storage and oscillator rules.
+- Assets: all 8 ids plus twin-dragons have 48-px files in both styles under the try1/try2 rule. Recomputed: key 8 is missing only `sky-gate-open-close`, key 9 is missing nothing (30 ids), as the ticket expects.
+- Nothing breaks: every skills-lab capture scenario uses `ui=0`, so there is no bar there, `refreshClipSlots` returns at once, and keys 8/9 behave as before. No test reads skills-main. Baseline in the worktree: `tsc --noEmit` is clean and `vitest run tests/lab` passes 13 files, 71 tests.
+
+Notes (Codex can settle these alone; not a reason to fail):
+1. Step 3 writes `bar.avoid(panel)`. `bar` is `SkillBar | null` (`?bar=0`), so tsc will require `bar?.avoid(panel)`.
+2. Slots 8/9: when the id is null, the tooltip must still be a string, so pass `id ?? ""`.
+3. Round 2 asked that "Xong khi" report the minimum window width at which the bar clears the panel. The line is missing; worth adding when the report is read (about 982 + 12 + bar width + 12 px).
+4. Cosmetic, only with `?key2=twin-pearl`: once `avoid` moves the bar right, the grey box's stats box (bottom-right, z 9) can cover its last slots. Check this in the browser pass.
