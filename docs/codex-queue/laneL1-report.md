@@ -1,6 +1,6 @@
-# Làn 1 · #14 R3-2 · hoàn tất phần mã (07/11/2026)
-- Trong `games/.wt-ic-lab-all`: sửa `src/lab/thunder-travel-r2.ts`, cập nhật `tests/lab/thunder-travel-r2-probe.mjs`, thêm `tests/lab/thunder-guide-r3.test.ts` (172 dòng thêm).
-- Dùng lại `thunder-ribbon-loop`: đầu sáng từ tay lên trời ở 120 ms, tới đỉnh cột ở 180 ms; đuôi thuôn, bề rộng thẻ phần thân 0,5–0,8 m; bỏ đường dẫn cũ, tắt dải đúng khung giáng; `tp2` tắt giữ nguyên B8 và đồng hồ đòn.
-- Đạt 35/35 test riêng (`thunder-guide-r3`, `five-phase-clip`, `clip-skills`), probe `thunder-travel-r2-probe.mjs`, TypeScript các file thay đổi (0 lỗi kể cả phụ thuộc) và `git diff --check`.
-- Không thêm texture, shader, video hay draw call so với R2; tối đa 13 đoạn trong một draw, dùng lại bộ đệm/vector/options; không chạy build, bộ test toàn game, trình duyệt/cổng mạng, không sửa media/manifest hay ghi Git.
-- Chờ Claude làm #15: quay A/B pha bay và cả chiêu ở góc chơi, kiểm tra nối đoạn/đầu sáng/bề rộng thực, đo Δp95 ≤ +1,0 ms và p95 ≤ 11,5 ms, chấm mù; chưa nghiệm thu hình ảnh. Không tự mở cổng #16; dừng sau đúng một việc.
+# Làn 1 · #16 R3-3 · hoàn tất phần mã (07/11/2026)
+- Trong `games/.wt-ic-lab-all`: sửa `src/lab/thunder-aftermath-r2.ts`, chỗ nối `src/lab/clip-skills.ts`, `tests/lab/five-phase-clip.test.ts`, `tests/lab/thunder-aftermath-r2-probe.mjs`; thêm `tests/lab/thunder-ground-r3.test.ts` (172 dòng thêm, gồm 32 dòng mã nguồn).
+- Dùng lại `art-src/lab/vfx/thunder/thunder-ground-mark.atlas.png`: dấu lộ từ tâm khi cột rút ở H0 + 0,55 s, giữ nền tối và khe tím nguội; đoạn ảnh 32–40 ăn mòn mép trong 1,6 s, hết ở H0 + 2,35 s; điện dư hết trước ở H0 + 1,50 s. Card bắt đầu tại cú giáng thật, giữ đủ đuôi cả khi video đứng 3 s.
+- Đạt 40/40 test riêng (`thunder-ground-r3`, `five-phase-clip`, `clip-skills`), probe aftermath (B8 tắt giống nguyên bản, đồng hồ đòn không đổi), TypeScript 4 file thay đổi cùng phụ thuộc (0 lỗi), `git diff --check`; test số kiểm tra tương phản nền sáng/tối, chưa phải nghiệm thu hình ảnh.
+- Không thêm texture, shader, video hay draw call; probe quan sát tối đa 6 draw thêm toàn R2 trong cảnh test, dưới trần 12; không cấp phát mỗi khung ở module. Không chạy build, bộ test toàn game, trình duyệt/cổng mạng, không sửa media/manifest hay ghi Git.
+- Chờ Claude làm #17: quay A/B nền sân sáng/tối tại H0 + 0,55 / 0,75 / 1,50 / 1,95 / 2,35 s, kiểm tra dấu bám đất và khe tím, đo Δp95 ≤ +1,0 ms, p95 ≤ 11,5 ms, chấm mù pha dư âm và cả chiêu ở góc chơi. Chưa nghiệm thu hình ảnh; dừng sau đúng một việc.

@@ -220,3 +220,34 @@ Trôi1,962%,cỡX/Y1,325/0,524%;nềnnguồn p99RGB0,biênMP4≤1,gutter0;ngoạ
 NEE S1-T0-world-light-shafts-speed: chưa xem động24fps/cỡchơi,nền sân/điểmnguồn/cạnhplane12:10,chữ/foe/native/mips/ngân sách; chưa đủ bằng chứng A-PASS,không lỗi vật liệu để chuyển S3. Anh/Claude xem recipe/compare-6/envelope-preview.mp4;không thay trực tiếp field48khung loop cũ.
 Đã xem12ảnh/72khungnguồn,36khungMP4;dọn144PNG riêng(prune:not-tmp),giữ SHAnguồn/prompt;2idphụ chỉ ghi recipe,không tạoAI/Blender/S3 hoặc mởcổng. Không tích hợp/chấm tầngB/browser/build/testgame/sửa mã/manifest/nguồn.
 Bằng chứng đúng phạm vi phiếu vì sandbox không ghi sibling review;đã nối laneS1-report.md,không hết hạn mức,dừng sau một việc.
+
+
+2026-11-07T17:10:36+07:00 · L3 #2 / light-pillar__take1 · A-FAIL→S3; đúng một dòng, #2 giữ todo (lặp), còn 168 dòng todo; đã nhả hai khóa.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/light-pillar/v1/ — MP4 1080×1920, 24 mẫu [24,48) @24/1s, atlas/KTX2, recipe, evidence, envelope từng khung, prompt/SHA và tấm so 6 cặp.
+Mask bỏ quạt chân; trôi tâm năng lượng 2,868%>2% (13 cửa sổ không đạt), cỡ X/Y 4,762/1,160%, lề bên/đáy 11,296%; nền cố định p99 [1,0,0], biên bên/đáy và gutter 0. Mép trên là đầu nối; không loop (seam 6,471×).
+KTX2 2255916 byte/12 mip, MAE 0,498/255, GPU BC7 ước 7,529 MiB; 24/24 mẫu thật, alpha cuối 0. Đã soi 36 khung nguồn/24 khung MP4 trên 8 ảnh, dọn 84 PNG riêng sau prune từ chối not-tmp; giữ nguyên SHA nguồn/prompt.
+Đã thêm S1-T0-light-pillar vào S3: kiểm footprint lõi so với tâm năng lượng, mask/cửa sổ/tái dùng trước render; 3 id lớp chờ cổng/hai mẫu. Anh/Claude xem recipe/compare-6/envelope-preview.mp4, kiểm nối chân, động 24fps/cỡ chơi, đường gọi thật và ngân sách host.
+Gói chưa tích hợp/chấm tầng B; không mở cổng, AI, Blender, browser, build/test game hoặc sửa mã/manifest/nguồn. Bằng chứng đúng phạm vi phiếu vì sandbox không ghi sibling review. Đã nối báo cáo S1; không hết hạn mức, dừng sau một việc.
+
+
+2026-11-07T17:15:45+07:00 · L3 #2 / light-ribbon-loop__take1 · A-PASS tầng A ngoại tuyến cho strip hữu hạn; xong đúng một dòng, #2 giữ todo (lặp), còn 167 dòng todo; đã nhả hai khóa.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/light-ribbon-loop/v1/ — MP4 1080p[25,49)@24/1s, atlas/KTX2, recipe/evidence/envelope/SHA, so6cặp, preview alpha.
+Soi54khung nguồn/10ảnh; lề9,010%,trôi1,890%,cỡX/Y2,640/3,462%,p99/biên0; 24/24mẫu thật. Seam5,212×: không loop/tile. KTX2 gutter0, MAE0,937/255, GPU7,533MiB; previewcuốiRGB0.
+Đã ghi2idphụS3 chờ cổng; Anh/Claude xem recipe/compare-6/ktx2-native-compare/envelope-preview, kiểm hướng dòng và độ đọc nền sáng trong host trước tầngB; chưa đo frame time hay thay entry đang dùng.
+Nguồn/prompt giữ nguyên SHA; dọn 126PNG riêng (prune từ chối not-tmp), giữ số đo/tấm ghép. Không AI/Blender, browser/build/test game hoặc sửa mã/manifest; bằng chứng nằm trong phạm vi phiếu.
+Đã cập nhật stream-1, thêm yêu cầu phụ stream-3, trả trạng thái LANE-3 và nối báo cáo S1; dừng sau một việc, không hết hạn mức.
+
+2026-11-07T17:20:45+07:00 · L3 #2 / light-sparkle__take1 · A-FAIL→S3 bản tách; xong đúng một dòng; #2 giữ todo (lặp), còn 166 dòng todo; đã nhả hai khóa.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/light-sparkle/v1/ — gói thử MP4 1080p[12,36)@24→48fps/0,500s, atlas/KTX2, recipe/evidence/envelope và prompt nguyên văn.
+Soi54khung/8ảnh: glint tắt nhưng tia flare khác xuyên crop, còn mảng nâu, tracking nhảy; lề7,292%,trôi22,149%,nền[3,2,1]/255,biên0,seam9,422×. Không loop/không tích hợp; chưa loại cả nguồn.
+24/24mẫu thật; KTX2 gutter0,MAE0,147/255,GPU4,883MiB. Anh/Claude xem recipe và .local/s1/light-sparkle__take1/compare-6.jpg; S3 kiểm matte/tái dùng trước render, chờ cổng mẫu.
+Đã cập nhật stream-1/thêm S3/trả LANE-3; dọn102PNG riêng sau prune từ chối not-tmp, giữ tấm ghép/số đo trong phạm vi phiếu vì sandbox không ghi sibling review.
+Nguồn/prompt giữ SHA; không AI/Blender/browser/build/test game hoặc sửa mã/manifest đang dùng; chưa kiểm host/tầngB/hiệu năng. Không hết hạn mức; dừng sau một việc.
+
+
+2026-11-07T17:27:49+07:00 · L3 #2 / metal-charge__take1 · NEE; xong đúng một dòng; #2 giữ todo (lặp), còn 165 dòng todo; đã nhả hai khóa.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/metal-charge/v1/ — MP4 1080², 24 mẫu [24,48) @24 phát đảo f47→24/1 s, atlas/KTX2, recipe/evidence/envelope/SHA/prompt; tấm kiểm tại .local/s1/metal-charge__take1/.
+Flow thuận 96,06% hướng ra, đảo 94,60% hướng vào (chẩn đoán); lề 5%, trôi 0,248%, cỡ X/Y 6,210/4,322% do charge co; không sustain/loop (seam 7,403×). Nền/biên/gutter=0; alpha cuối=0. KTX2 1964548 byte/12 mip, GPU ước 4,883 MiB, MAE 1,688/255; 24 mẫu thật.
+NEE S1-T0-metal-charge-reverse-speed: Claude xem preview/compare-6; kiểm động 24 fps/cỡ chơi, đảo tự nhiên, tiến độ gõ/cancel/release, nền/caster/chữ, mip/pivot/đường gọi và hiệu năng host. Chưa chuyển S3; hai id phụ chỉ ghi recipe, chờ parent/cổng.
+Đã xem 10 ảnh, đủ 54 khung nguồn và 24 khung MP4; dọn 126 PNG riêng sau prune:not-tmp, giữ SHA nguồn/prompt. Bằng chứng đúng phạm vi phiếu vì sandbox không cho ghi sibling review folder.
+Không AI/Blender/browser/build/test game, git ghi, sửa mã/manifest/nguồn hoặc tích hợp/chấm tầng B. Đã nối laneS1-report.md; không hết hạn mức, dừng sau một việc.
