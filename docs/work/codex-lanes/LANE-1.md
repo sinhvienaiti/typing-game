@@ -10,8 +10,8 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 2 | R2-1 kịch bản quay và đo | `lane-R2-1b-thunder-measure.md` | high | 1 | | done | `61d7f0e` (video=0) |
 | 3 | ĐO R2-1 (Claude) | — | — | 2 | C | done | Hiệu năng ĐẠT (Δp95 0,000 ms); chấm mù TRƯỢT (+0,5 trục mục tiêu), `docs/work/consult/r2-step1-verdict.md` |
 | 3a | R2-1 thử lại: chỉ đổi nhịp vòng ấn (đỉnh đúng khung phóng) | `lane-R2-1d-retry-timing.md` | high | 3 | | done | commit (Claude chạy đủ vitest 13:30) |
-| 3b | ĐO lại R2-1 (Claude); trượt lần nữa thì dừng và nghĩ lại (§7) | — | — | 3a | C | todo (Claude) | |
-| 4 | R2-2 bay và thân cột | `lane-R2-2-thunder.md` | high | 3b | C: mở khi #3b đạt | todo | |
+| 3b | ĐO lại R2-1 (Claude); trượt lần nữa thì dừng và nghĩ lại (§7) | — | — | 3a | C | done | ĐẠT: tụ lực +4,5/+4,0, phóng +1,0/+1,5, Δp95 0,1 ms (`docs/work/consult/r2-step1b-verdict.md`) |
+| 4 | R2-2 bay và thân cột | `lane-R2-2-thunder.md` | high | 3b | ✅ 13:50 (#3b đạt) | todo | |
 | 5 | ĐO R2-2 (Claude) | — | — | 4 | C | todo (Claude) | |
 | 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | C: mở khi #5 đạt | todo | |
 | 7 | ĐO R2-3 (Claude) | — | — | 6 | C | todo (Claude) | |
