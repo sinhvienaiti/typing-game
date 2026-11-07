@@ -6,6 +6,7 @@ Do việc phân loại toàn kho (T0, luồng 2) điền.
 
 | # | Key / việc | Vai trò · đoạn | Lý do · việc cần làm | Ưu tiên | Trạng thái |
 |---|---|---|---|---|---|
+| S1-5 | `S1-phụ:i2v-poison-comet-v2__take1` | Lớp phụ travel, thân nguồn [12,66) @24; phát một lượt | `s1-poison-droplet-trail-v1` (giọt/vệt có alpha) và `s1-poison-violet-glint-v1` (tia tím additive); parent `i2v-poison-comet-v2__take1`. Tham chiếu, số khung và đường bao: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-poison-comet-v2/v1/recipe.md`. S3 làm Blender, 2 mẫu trong bản ghép trước lô; giữ thân. | P3 | todo |
 | S1-4 | `S1-phụ:i2v-metal-comet-v2__take1` | Release ở caster + travel; thân dùng nguồn [12,84) @24 | Ba lớp chất liệu phụ `s1-metal-tail-stream-v1`, `s1-metal-glint-v1`, `s1-metal-release-pulse-v1`; parent `i2v-metal-comet-v2__take1`. Tham chiếu, đường bao và số khung trong `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-metal-comet-v2/v1/recipe.md`. Hai mẫu trong bản ghép trước lô; không làm lại thân. | P3 | todo |
 
 <!-- T0:header -->

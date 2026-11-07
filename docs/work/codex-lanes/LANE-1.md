@@ -17,8 +17,8 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 7 | ĐO R2-3 (Claude) | — | — | 6 | C | todo (Claude) | |
 | 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | C: mở khi #7 đạt | todo | |
 | 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | todo (Claude) | |
-| 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | blocked: ringBurst cần sửa 2 file src/view/skills ngoài phạm vi phiếu | `docs/codex-queue/laneL1-report.md` |
-| 11 | Sửa vòng phản hồi Framebuffer (glError 1282) | `lane-L1-gl-feedback.md` | high | — | ✅ 12:20 (quay xong) | doing 12:09 | |
+| 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | todo | |
+| 11 | Sửa vòng phản hồi Framebuffer (glError 1282) | `lane-L1-gl-feedback.md` | high | — | ✅ 12:20 (quay xong) | todo | |
 
 **Ghi chú cho runner:**
 - Việc "(Claude)" thì runner **không làm**, coi như cổng.

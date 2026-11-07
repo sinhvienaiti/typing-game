@@ -26,3 +26,6 @@ Nguồn: `docs/work/consult/codex-pilot-verdict.md` §5 (các mục "Sửa cỡ 
 - `npx --no-install tsc --noEmit` sạch.
 - `npx --no-install vitest run --maxWorkers=4` qua toàn bộ.
 - `node --check` kịch bản qua.
+
+## Chốt của Claude (07/11 12:35)
+Được sửa **tối thiểu** 2 file trong `src/view/skills/` cần cho vai trò `ringBurst`, ghi lý do trong báo cáo. Không đổi hình hay nhịp của chiêu khác. Tự chạy `npx --no-install vitest run --maxWorkers=4` toàn bộ.

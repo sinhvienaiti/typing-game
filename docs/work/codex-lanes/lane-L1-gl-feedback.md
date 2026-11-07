@@ -20,3 +20,13 @@ Bằng chứng (Claude, 07/11 10:30, console lab 3146): `GL_INVALID_OPERATION: g
 
 ## Đạt khi
 `npx --no-install tsc --noEmit` sạch và `npx --no-install vitest run --maxWorkers=4` qua toàn bộ.
+
+## Kết quả lượt trước (Claude kiểm 07/11 12:33)
+Bản sửa trong `src/view/screen-fx.ts` (chưa commit, vẫn nằm trong worktree) làm **trượt 2 test**:
+- `late impact and mapped shadow programs (ticket 286) > warms the 'fire' impact display variant without drawing to the display or changing live uniforms`;
+- cùng test đó với 'metal'.
+
+Phải giữ hợp đồng làm ấm của phiếu 286: không vẽ ra màn hình, không đổi uniform đang dùng.
+- Sửa lại cho cả hai cùng đúng.
+- **Tự chạy toàn bộ** `npx --no-install vitest run --maxWorkers=4` (chạy được trong sandbox) trước khi báo xong.
+- Test mới nằm ở `tests/view/screen-fx-feedback.node-test.ts`. Nếu vitest không nhận đuôi `.node-test.ts`, đổi sang `.test.ts`.

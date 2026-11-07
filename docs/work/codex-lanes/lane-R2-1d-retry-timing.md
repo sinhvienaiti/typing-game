@@ -15,3 +15,9 @@ Kết quả chấm mù bước 1: `docs/work/consult/r2-step1-verdict.md`, **TR�
 - test: vòng đạt đỉnh đúng khung phóng, bắt đầu tăng 150 ms trước đó, `tp2` tắt thì không đổi;
 - `npx --no-install tsc --noEmit` sạch;
 - `npx --no-install vitest run --maxWorkers=4` qua toàn bộ.
+
+## Chốt của Claude (07/11 12:35, sau khi lượt trước báo blocked)
+- Phím 8 trong lab tung chiêu tức thì, nên không có "trước lúc phóng". Trong game thật chiêu được tung bằng cách **gõ từ**. Vì vậy: khi lab ở chế độ gõ (`typed=1`, có từ cho chiêu phím 8), vòng ấn **sáng theo tiến độ gõ của từ** (ký tự đúng / độ dài từ, như `charge-fill-fx` của phím 2–7) và đạt đỉnh đúng ký tự cuối (khung phóng). Khi tung tức thì không có từ, vòng hiện ở đỉnh ngay khung phóng rồi tan; không thêm độ trễ.
+- **Được sửa thêm:** `src/lab/five-phase-clip.ts` (chỗ nối nhận tiến độ gõ trước khi phóng) và chỗ đọc tiến độ gõ trong `src/lab/skills-main.ts`, tối thiểu. Không đổi sự kiện hay thời điểm gameplay.
+- **Kịch bản quay:** cảnh `TP` trong `scripts/visual/scenarios/lab-pilot-ab.mjs` thêm `typed=1` cùng `wpm` như các cảnh khác, để có pha tụ lực theo gõ. Ghi vào báo cáo.
+- Tự chạy `npx --no-install vitest run --maxWorkers=4` toàn bộ.
