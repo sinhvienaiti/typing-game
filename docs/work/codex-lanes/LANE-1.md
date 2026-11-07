@@ -42,7 +42,7 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 
 ## Vòng 4 (anh duyệt 07/11 17:55: "Làm vòng 4"): bỏ ngôi sao mực, dời số sát thương, vết cháy mới
 
-> **Tạm dừng từ 07/11 18:10** (anh: "tạm thời dừng lại khi có hạn mức tiếp của codex vậy"). Codex hết hạn mức tuần, mở lại 14/11 09:12. Mọi dòng dưới đây đóng cổng `C: Claude mở lại sau 14/11`.
+> **Tạm dừng từ 07/11 18:10** (anh: "tạm thời dừng lại khi có hạn mức tiếp của codex vậy"). Codex hết hạn mức tuần, mở lại 14/11 09:12. Mọi dòng dưới đây đóng cổng `C: Claude mở lại sau 14/11`. Lịch nạp việc 30 phút (cron `cdefb09f`) đã gỡ; khi mở lại thì tạo lại. Các feed `S1/S2/S4` vẫn chạy nền; feed S1 tự chạy lại 2 lượt chờ vào 14/11, sẽ chỉ ghi "không có việc" vì cổng đã đóng.
 >
 > **Hướng mới của anh (07/11 18:05), thay thứ tự cũ.** Ba vấn đề khiến Cột Lôi không như mong đợi:
 > 1. Cột Lôi chỉ nên là **sét đánh xuống**; video đang dùng có cả **hình trụ bao quanh** nên trông kém chất lượng. Bỏ lớp trụ.
