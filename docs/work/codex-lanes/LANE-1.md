@@ -16,7 +16,7 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | ✅ 14:50 (#5 đạt) | done | commit (Claude chạy đủ vitest 15:00) |
 | 7 | ĐO R2-3 (Claude) | — | — | 6 | C | done | ĐẠT ngưỡng bước (chạm +1,0 nhịp/lực); cả chiêu vẫn 6,5; phản ứng quái chưa thấy rõ; p95 8,7 ms (`docs/work/consult/r2-step3-verdict.md`) |
 | 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | ✅ 15:15 (#7 đạt) | done | commit (Claude chạy đủ vitest 15:30) |
-| 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | doing (Claude): quay và đo từ 15:31 | |
+| 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | done | Dư âm +1,5 nhịp/lực; cả chiêu 6,5 (không tăng từ bước 2); p95 8,4 ms; 3 nút thắt trong `docs/work/consult/r2-step4-verdict.md` |
 | 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | done | commit (Claude chạy đủ vitest 13:30) |
 | 11 | Sửa vòng phản hồi Framebuffer (glError 1282) | `lane-L1-gl-feedback.md` | high | — | ✅ 12:20 (quay xong) | done | commit sửa screen-fx (Claude chạy đủ vitest) |
 
@@ -24,3 +24,5 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 - Việc "(Claude)" thì runner **không làm**, coi như cổng.
 - Việc 10 và 11 không chờ vòng 2; làm khi việc 4, 6, 8 còn bị cổng chặn.
 - Hai việc mã lab không chạy cùng lúc: làn này chỉ có một runner.
+
+**Kết thúc vòng 2 (15:50):** cả chiêu 5,5 → 6,5 sau bước 2, đứng yên qua bước 3 và 4. Dừng theo §7, chờ anh quyết vòng 3 (sửa lần lượt 3 nút thắt).
