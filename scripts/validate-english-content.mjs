@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createSchemaValidator, readJson, stableJson } from "./english-content-core.mjs";
+import { readTatoebaEnglishSnapshot, TATOEBA_ENGLISH_RECORD_SET } from "./tatoeba-english-intake-core.mjs";
+import { validateTatoebaControlledSource } from "./english-tatoeba-reviewed.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const schemaDir=path.join(root,"shared","schemas","english-content");
@@ -2187,6 +2189,17 @@ try {
 } catch (error) {
   if (error?.code!=="ENOENT") errors.push("pinned OEWN pilot validation failed: "+error.message);
 }
+
+try {
+  const {pin,rows}=await readTatoebaEnglishSnapshot(root);
+  const controlled=[];
+  for (const batch of batchManifest?.batches??[]) for (const set of batch.recordSets??[]) {
+    if (set.id!==TATOEBA_ENGLISH_RECORD_SET) continue;
+    const doc=await validateFile(set.path,"sentence-set.schema.json");
+    if (doc) controlled.push(...doc.records);
+  }
+  validateTatoebaControlledSource(controlled,rows,pin);
+} catch (error) { errors.push("Pinned English-only Tatoeba validation failed: "+error.message); }
 
 if (errors.length) { console.error(errors.join("\n")); process.exitCode=1; }
 else console.log("English content PASS: "+expectedSchemas.length+" schemas, 300 curriculum topics, legacy vocabulary ABI preserved.");

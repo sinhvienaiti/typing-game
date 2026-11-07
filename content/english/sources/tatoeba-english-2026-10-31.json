@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "source": "tatoeba",
+  "snapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "license": "CC-BY-2.0-FR",
+  "attribution": "Tatoeba Project (https://tatoeba.org/); per-sentence contributor history and current owner retained",
+  "sourceDocumentation": "https://tatoeba.org/en/downloads",
+  "termsUrl": "https://tatoeba.org/en/terms_of_use",
+  "scope": "English-only canonical extraction; separate from historical English-Vietnamese/link pins",
+  "encoding": "gzip JSONL stored as base64 text; decode before verifying compressed hash",
+  "qualityStatus": "candidate-only; self-reported native levels and experimental community ratings are not local editorial/CEFR approval",
+  "filters": {
+    "ownerEnglishLevel": 5,
+    "independentNativePositiveReviewsMinimum": 1,
+    "excludeFreshNegativeReviews": true,
+    "excludeActionTags": true,
+    "minimumWords": 5,
+    "maximumWords": 30,
+    "maximumCharacters": 300,
+    "asciiTypingSubset": true,
+    "canonicalIdOrder": "ascending"
+  },
+  "upstreamInputs": [
+    {
+      "filename": "eng_sentences_detailed.tsv.bz2",
+      "url": "https://downloads.tatoeba.org/exports/per_language/eng/eng_sentences_detailed.tsv.bz2",
+      "bytes": 34969370,
+      "sha256": "7d8a98a1322c63eb62199b0e928efc5b9afbf8f4bb9bc4b60ebde1ea99a30cda",
+      "lastModified": "Sat, 31 Oct 2026 06:39:48 GMT"
+    },
+    {
+      "filename": "user_languages.tar.bz2",
+      "url": "https://downloads.tatoeba.org/exports/user_languages.tar.bz2",
+      "bytes": 836422,
+      "sha256": "1c4ce6cc013daf2b33d116dc2f4271fd709d23729ebbbfc286546dfd2ef7080b",
+      "lastModified": "Sat, 31 Oct 2026 06:37:06 GMT"
+    },
+    {
+      "filename": "users_sentences.csv",
+      "url": "https://downloads.tatoeba.org/exports/users_sentences.csv",
+      "bytes": 98839258,
+      "sha256": "e3219c3f1a9fbd2962f068ec4487d80af1a00cb66bd8d9083e11c2c41f206a1d",
+      "lastModified": "Sat, 31 Oct 2026 06:14:34 GMT"
+    },
+    {
+      "filename": "tags.tar.bz2",
+      "url": "https://downloads.tatoeba.org/exports/tags.tar.bz2",
+      "bytes": 4893477,
+      "sha256": "a5fd9bbdd05d8dfc3b921ed5923a36ad3c3e5555d016a694d2f4444a82db87ef",
+      "lastModified": "Sat, 31 Oct 2026 06:36:26 GMT"
+    }
+  ],
+  "candidateCount": 122212,
+  "sourceAnalysis": {
+    "englishRows": 2040024,
+    "nativeOwned": 1485016,
+    "structurallyEligibleNativeOwned": 1227390,
+    "sourceEvidenceCandidates": 122212,
+    "twoOrMoreIndependentPositiveRatings": 623
+  },
+  "canonicalShards": [
+    {
+      "path": "content/english/sources/tatoeba-english-2026-10-31/000.jsonl.gz.b64",
+      "count": 25000,
+      "contentBytes": 6963630,
+      "contentSha256": "d8acf47f4bb6fb522642e4f4acb13e7e9da6b05f7cd3d47c8773e59b39492e4c",
+      "compressedBytes": 878038,
+      "compressedSha256": "bf612b09f7e206d1c2de7726b488a0d5223bca8d456b61d92d4a04bfa6102864"
+    },
+    {
+      "path": "content/english/sources/tatoeba-english-2026-10-31/001.jsonl.gz.b64",
+      "count": 25000,
+      "contentBytes": 7178591,
+      "contentSha256": "845795255ab7922e7a6daeecd636623fe90739abf7bd99dd9f70d799e639a4cf",
+      "compressedBytes": 821137,
+      "compressedSha256": "e50feca779c2a82a3e58842a3886ba8e5b1c28db3c950f105b3245ead7186dab"
+    },
+    {
+      "path": "content/english/sources/tatoeba-english-2026-10-31/002.jsonl.gz.b64",
+      "count": 25000,
+      "contentBytes": 7034824,
+      "contentSha256": "97f9f5c98eb5c9f30a9540b6ebcd9abb2a8dfa0bbd9ddefa9189bb3337f82230",
+      "compressedBytes": 710080,
+      "compressedSha256": "2f7088b7c85091147c66a40130c47dd1f6e176a11d25c99a17749713f33736e0"
+    },
+    {
+      "path": "content/english/sources/tatoeba-english-2026-10-31/003.jsonl.gz.b64",
+      "count": 25000,
+      "contentBytes": 7241968,
+      "contentSha256": "4658be312dd9e687ccd7435ea6aba6cc8bd474f34cbd457b4b7c02b8aeb833c1",
+      "compressedBytes": 877269,
+      "compressedSha256": "2540d60cf8a272b26be2726c9c4d4b0875edab64091d1291c6c24c9c23f47f3d"
+    },
+    {
+      "path": "content/english/sources/tatoeba-english-2026-10-31/004.jsonl.gz.b64",
+      "count": 22212,
+      "contentBytes": 6437024,
+      "contentSha256": "a2deb5f85c4ae953e141b6443f52714495cfc249edddb0d1123403dbf9facc90",
+      "compressedBytes": 837891,
+      "compressedSha256": "dda27b1ccd5d3291d4c5a5472ecb094c661ddc833b0b2f10dbc16fb5d7fe17b1"
+    }
+  ]
+}

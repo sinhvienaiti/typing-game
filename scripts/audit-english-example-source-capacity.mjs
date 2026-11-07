@@ -3,9 +3,10 @@ import path from "node:path";
 import crypto from "node:crypto";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
-import { lexicalTokens, normalizeSentenceKey, readJson } from "./english-content-core.mjs";
+import { lexicalTokens, normalizeSentenceKey, readJson, listJsonFiles } from "./english-content-core.mjs";
 import { readEnglishReviewLedger } from "./english-review-core.mjs";
 import { assessExampleSourceCapacity } from "./english-example-capacity-core.mjs";
+import { readTatoebaEnglishSnapshot, selectTatoebaEnglishReview, TATOEBA_ENGLISH_PIN, TATOEBA_ENGLISH_RECORD_SET } from "./tatoeba-english-intake-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = relative => readJson(path.join(root, relative));
@@ -66,11 +67,21 @@ const excluded = new Set([
 ]);
 const queueRemaining = queue.records.filter(r => !excluded.has(r.id)).length;
 const unreviewedRaw = [...raw.keys()].filter(id => !excluded.has(id)).length;
-const capacity = assessExampleSourceCapacity({ minimum: target.minimum, published: published.length, unreviewedRaw });
-const upperBound = capacity.optimisticPublishedUpperBound;
+const originalCapacity = assessExampleSourceCapacity({ minimum: target.minimum, published: published.length, unreviewedRaw });
+const {pin: englishPin, rows: englishRows} = await readTatoebaEnglishSnapshot(root);
+const controlledExamples=[];
+for (const file of await listJsonFiles(path.join(root,"content/english/sentences"))) {
+  const doc=await readJson(file);
+  controlledExamples.push(...(doc.records??[]).filter(row=>row.id?.startsWith("sent.")&&typeof row.text==="string"));
+}
+const englishDecisions=ledger.decisions.filter(row=>row.recordSetId===TATOEBA_ENGLISH_RECORD_SET);
+const englishSelection=selectTatoebaEnglishReview({rows:englishRows,pin:englishPin,controlled:controlledExamples,
+  reviewedIds:new Set(englishDecisions.map(row=>row.recordId)),limit:1}).selection;
+const capacity = assessExampleSourceCapacity({ minimum: target.minimum, published: published.length,
+  unreviewedRaw: unreviewedRaw+englishSelection.available });
 const report = {
-  schemaVersion: 1,
-  scope: "group-1-step-2-current-project-original-intake-capacity",
+  schemaVersion: 2,
+  scope: "group-1-step-2-configured-example-intake-capacity",
   reviewState: capacity.reviewState,
   target: { id: target.id, minimum: target.minimum, published: published.length,
     remainingPublishedDeficit: capacity.remainingPublishedDeficit },
@@ -79,9 +90,24 @@ const report = {
   currentProjectOriginalLane: {
     levels: index.levels.length, passages: passageCount,
     eligibleUniqueRawSentences: raw.size, unreviewedRawSentences: unreviewedRaw,
-    optimisticPublishedUpperBound: upperBound,
-    minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses: capacity.additionalSourceGap,
+    optimisticPublishedUpperBound: originalCapacity.optimisticPublishedUpperBound,
+    minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses: originalCapacity.additionalSourceGap,
     caveat: "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content.",
+  },
+  additionalPinnedLanes: [{
+    source:"tatoeba",snapshot:englishPin.snapshot,license:englishPin.license,
+    pinPath:TATOEBA_ENGLISH_PIN,pinSha256:await fingerprint(TATOEBA_ENGLISH_PIN),
+    canonicalShards:englishPin.canonicalShards.map(shard=>({path:shard.path,sha256:shard.contentSha256})),
+    sourceEvidenceCandidates:englishRows.length,availableAfterControlledExclusions:englishSelection.available,
+    editorialDecisions:englishDecisions.length,
+    publishedExamples:published.filter(row=>row.provenance.sources.some(source=>source.snapshot===englishPin.snapshot)).length,
+    rejected:englishDecisions.filter(row=>row.targetState==="deprecated").length,
+    approval:"candidate-evidence-only-unless-explicitly-reviewed",
+  }],
+  combinedCapacity:{
+    optimisticPublishedUpperBound:capacity.optimisticPublishedUpperBound,
+    minimumAdditionalSourceGap:capacity.additionalSourceGap,
+    caveat:"Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval.",
   },
   source: { id: source.id, snapshot: source.snapshot, license: source.license, publishAllowed: source.publishAllowed },
   sourceFiles: inputs,
@@ -93,12 +119,13 @@ const report = {
     reason: "A capacity audit or a partial corpus expansion does not satisfy the agreed 100,000-reviewed-published-example requirement." },
   remainingWork: [
     "Review remaining local raw candidates only through bounded digest-bound batches; none are approved by this report.",
-    "Prepare sufficient additional versioned, checksum-pinned, license/attribution-reviewed example-source intake before claiming full target capacity.",
+    "Continue explicit bounded editorial review of the new pinned English-only source; experimental upstream ratings never auto-approve grammar, suitability or CEFR.",
     "Preserve Tatoeba source-pin and completed MultiWOZ gates; do not silently substitute mutable exports.",
   ],
 };
 const output = path.join(root, "content/english/reports/example-source-capacity.json");
 await fs.writeFile(output, JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ reviewState: report.reviewState, target: report.target,
-  currentBoundedQueue: report.currentBoundedQueue, capacity: report.currentProjectOriginalLane,
+  currentBoundedQueue: report.currentBoundedQueue, capacity: report.combinedCapacity,
+  additionalPinnedLanes:report.additionalPinnedLanes.map(({canonicalShards,...lane})=>lane),
   transition: report.transition }, null, 2));

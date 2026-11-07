@@ -5,6 +5,7 @@ import { readJson, stableJson } from "./english-content-core.mjs";
 import { overlayEnglishReviewDecisions, readEnglishReviewLedger } from "./english-review-core.mjs";
 import { applyEnglishExampleLinks, readEnglishExampleLinkLedger } from "./english-example-link-core.mjs";
 import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
+import { readReviewedTatoebaEnglish } from "./english-tatoeba-reviewed.mjs";
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"..");
 const [batchManifest,reviewLedger,exampleLinkLedger]=await Promise.all([
@@ -97,6 +98,7 @@ const reviewedE06Exercises=await loadRecords("content/english/sentences/e06-revi
 const reviewedTranslationSentences=await loadRecords("content/english/sentences/e06-reviewed-translation-sentences.json");
 const reviewedTranslations=await loadRecords("content/english/sentences/e06-reviewed-translations.json");
 const reviewedTypingTextSentences=await loadReviewedTypingTextRecords();
+const reviewedTatoebaEnglish=await readReviewedTatoebaEnglish(root,batchManifest,reviewLedger);
 const reviewedCloze=await loadRecords("content/english/sentences/e06-reviewed-cloze.json");
 const reviewedDialogues=await loadRecords("content/english/sentences/e06-reviewed-dialogues.json");
 const reviewedCommonMistakes=await loadRecords("content/english/sentences/e06-reviewed-common-mistakes.json");
@@ -113,7 +115,7 @@ for (const batch of e04Batches) {
 }
 
 const allPublishedExamples=published(
-  [...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences],
+  [...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences,...reviewedTatoebaEnglish],
   "sentences/examples"
 );
 const verbPatternEnrichment=applyEnglishExampleLinks(e04VerbPatterns,exampleLinkLedger,{

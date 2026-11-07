@@ -2,6 +2,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson } from "./english-content-core.mjs";
 import { readE11TypingTextReviewShards } from "./english-typing-text-shards.mjs";
+import { readReviewedTatoebaEnglish } from "./english-tatoeba-reviewed.mjs";
+import { readEnglishReviewLedger } from "./english-review-core.mjs";
 import { buildGameEnglishActivityDataset } from "../shared/english-content/game-adapters.mjs";
 import {
   buildPublishedGameEnglishActivityDataset,
@@ -20,8 +22,13 @@ const e11TypingTextExpansionCount=e11TypingTextReviewShards.reduce(
   0,
 );
 const expectedTypingTextExampleCount=300+e11TypingTextExpansionCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount;
-const expectedExampleCount=1513+e11TypingTextExpansionCount;
+const [batchManifest,reviewLedger]=await Promise.all([
+  readJson(path.join(root,"content/english/batches/manifest.json")),readEnglishReviewLedger(root),
+]);
+const tatoebaEnglishControlled=await readReviewedTatoebaEnglish(root,batchManifest,reviewLedger);
+const tatoebaEnglishPublished=tatoebaEnglishControlled.filter(record=>record.quality.state==="published");
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length;
+const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -77,7 +84,13 @@ if (topics.length!==300||examples.length!==expectedExampleCount||exercises.lengt
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
-if (tatoebaExamples.length!==300||tatoebaTranslations.length!==300) errors.push("published Tatoeba slices must expose 300 sentences + 300 translations");
+if (tatoebaExamples.length!==300+tatoebaEnglishPublished.length||tatoebaTranslations.length!==300) errors.push("published Tatoeba runtime must include the historical 300 pairs and exactly the newly approved English-only examples");
+for (const controlled of tatoebaEnglishControlled) {
+  const matches=examples.filter(record=>record.id===controlled.id);
+  if (controlled.quality.state==="published") {
+    if (matches.length!==1||JSON.stringify(matches[0])!==JSON.stringify(controlled)) errors.push(controlled.id+": runtime differs from digest-bound approved source");
+  } else if (matches.length!==0) errors.push(controlled.id+": unapproved source leaked into runtime");
+}
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));
 if (typingTextExamples.length!==expectedTypingTextExampleCount||typingTextCloze.length!==300) errors.push("published typing-text slices must expose "+expectedTypingTextExampleCount+" examples + 300 pilot cloze exercises");

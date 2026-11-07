@@ -30,14 +30,47 @@ export function tokenJaccard(left,right) {
   return intersection/(a.size+b.size-intersection);
 }
 export function nearDuplicatePairs(records,threshold=0.86) {
+  if (!Number.isFinite(threshold)||threshold<0||threshold>1) throw new RangeError("Jaccard threshold must be between 0 and 1");
+  // Exact prefix filtering: every qualifying pair must share a prefix token in
+  // this one global token order. Length bounds and final full-set intersection
+  // preserve the previous Jaccard semantics; this is not approximate sampling.
+  const rows=records.map(record=>({record,key:normalizeSentenceKey(record.text),tokens:new Set(lexicalTokens(record.text))}));
+  const frequency=new Map();
+  for (const row of rows) for (const token of row.tokens) frequency.set(token,(frequency.get(token)??0)+1);
+  const compare=(a,b)=>frequency.get(a)-frequency.get(b)||(a<b?-1:a>b?1:0);
+  const postings=new Map();
+  const empty=[];
   const pairs=[];
-  for (let i=0;i<records.length;i++) for (let j=i+1;j<records.length;j++) {
-    const left=records[i],right=records[j];
-    if (normalizeSentenceKey(left.text)===normalizeSentenceKey(right.text)) continue;
-    const score=tokenJaccard(left.text,right.text);
-    if (score>=threshold) pairs.push({leftId:left.id,rightId:right.id,score:Number(score.toFixed(4))});
+  for (let j=0;j<rows.length;j++) {
+    const right=rows[j];
+    const size=right.tokens.size;
+    const ordered=[...right.tokens].sort(compare);
+    const prefix=ordered.slice(0,Math.max(0,size-Math.ceil(threshold*size-1e-12)+1));
+    const candidates=new Set();
+    if (threshold===0) for (let i=0;i<j;i++) candidates.add(i);
+    else if (size===0) for (const i of empty) candidates.add(i);
+    else for (const token of prefix) for (const i of postings.get(token)??[]) {
+      const otherSize=rows[i].tokens.size;
+      if (otherSize+1e-12>=threshold*size&&size+1e-12>=threshold*otherSize) candidates.add(i);
+    }
+    for (const i of candidates) {
+      const left=rows[i];
+      if (left.key===right.key) continue;
+      let intersection=0;
+      const smaller=left.tokens.size<size?left.tokens:right.tokens;
+      const larger=smaller===left.tokens?right.tokens:left.tokens;
+      for (const token of smaller) if (larger.has(token)) intersection++;
+      const union=left.tokens.size+size-intersection;
+      const score=union===0?1:intersection/union;
+      if (score>=threshold) pairs.push({i,j,leftId:left.record.id,rightId:right.record.id,score:Number(score.toFixed(4))});
+    }
+    if (size===0) empty.push(j);
+    for (const token of prefix) {
+      if (!postings.has(token)) postings.set(token,[]);
+      postings.get(token).push(j);
+    }
   }
-  return pairs;
+  return pairs.sort((a,b)=>a.i-b.i||a.j-b.j).map(({i,j,...pair})=>pair);
 }
 export async function readJson(file) { return JSON.parse(await fs.readFile(file,"utf8")); }
 export async function listJsonFiles(root) {

@@ -48,7 +48,7 @@
     "learning:test": "node --test shared/learning/*.test.mjs",
     "english-content:generate": "node scripts/generate-english-content.mjs",
     "english-content:validate": "node scripts/validate-english-content.mjs && node scripts/validate-english-grammar-scales.mjs",
-    "english-content:test": "node --test scripts/english-content-core.test.mjs scripts/typing-text-review-core.test.mjs scripts/english-example-capacity-core.test.mjs scripts/english-review-core.test.mjs scripts/oewn-pinned-core.test.mjs scripts/tatoeba-pair-core.test.mjs scripts/multiwoz-dialogue-core.test.mjs scripts/multiwoz-editorial-finalization-core.test.mjs scripts/multiwoz-editorial-finalization-validation-core.test.mjs scripts/multiwoz-batch-registration-core.test.mjs scripts/wiktextract-enrichment-core.test.mjs scripts/check-english-content-e11-readiness.test.mjs shared/english-content/*.test.mjs",
+    "english-content:test": "node --test scripts/english-content-core.test.mjs scripts/typing-text-review-core.test.mjs scripts/english-example-capacity-core.test.mjs scripts/english-review-core.test.mjs scripts/oewn-pinned-core.test.mjs scripts/tatoeba-pair-core.test.mjs scripts/tatoeba-english-intake-core.test.mjs scripts/english-dedup-index.test.mjs scripts/multiwoz-dialogue-core.test.mjs scripts/multiwoz-editorial-finalization-core.test.mjs scripts/multiwoz-editorial-finalization-validation-core.test.mjs scripts/multiwoz-batch-registration-core.test.mjs scripts/wiktextract-enrichment-core.test.mjs scripts/check-english-content-e11-readiness.test.mjs shared/english-content/*.test.mjs",
     "english-content:licenses": "node scripts/check-english-content-licenses.mjs",
     "english-content:dedupe": "node scripts/report-english-content-dedup.mjs",
     "english-content:coverage": "node scripts/report-english-content-coverage.mjs",
@@ -92,7 +92,8 @@
     "english-content:import:simplewiktionary": "node scripts/import-simplewiktionary-pilot.mjs",
     "english-content:e03:morphology": "node scripts/report-english-content-simplewiktionary.mjs",
     "english-content:review:validate": "node scripts/validate-english-content-reviews.mjs",
-    "english-content:runtime:smoke": "node scripts/smoke-published-english-content.mjs"
+    "english-content:runtime:smoke": "node scripts/smoke-published-english-content.mjs",
+    "english-content:e11:english:next": "node scripts/prepare-tatoeba-english-review.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
