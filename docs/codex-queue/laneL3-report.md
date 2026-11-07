@@ -130,3 +130,31 @@ Anh/Claude xem lỗi contain và tách matte theo S1-18; chưa tích hợp/chấ
 Mây cắt mép trên 72/72 khung, thiếu matte mây tối; dùng S1-19 sẵn ở stream-2-image.md, không thêm trùng.
 Bằng chứng: .local/s1/i2v-ult-thunder-nine-heavens__take2/t0-reconciliation.json; recipe: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-thunder-nine-heavens/v1/recipe.md.
 Anh/Claude đối chiếu job v2 trước sửa contain/matte theo S1-19; chưa tích hợp/chấm tầng B. Làn giữ todo (lặp); dừng lượt, không build/test/browser.
+
+2026-11-07T15:32:02+07:00 · L3 · đúng một dòng T0:i2v-ult-water-profound-sea-v2 (bổ sung hàng 20): A-FAIL→S2.
+Đã đối soát 3 SHA-256 nguồn, 10 SHA-256 đầu ra và 11 đường gọi; tái dùng recipe/gói thử take3, không tạo media hoặc duyệt take1/take2 mới.
+Ngọn nước cắt mép trên 63/72 khung; dùng S1-20 sẵn ở stream-2-image.md, không thêm trùng; giữ take1 đang nối.
+Bằng chứng: .local/s1/i2v-ult-water-profound-sea-v2__take3/t0-reconciliation.json; recipe: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-water-profound-sea-v2/v1/recipe.md.
+Anh/Claude xem lỗi contain theo S1-20; chưa tích hợp/chấm tầng B. Làn giữ todo (lặp); đã nhả khóa; dừng lượt, không build/test/browser.
+
+2026-11-07T15:40:10+07:00 · L3 · đúng một dòng T0:mech-seal-net-bind: A-PASS ngoại tuyến cho thân vòm hữu hạn 3 s; #2 giữ todo (lặp), còn 179 dòng todo.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/mech-seal-net-bind/v1/ — MP4 1080p/72 mẫu [12,84)@24, atlas/KTX2, recipe/envelope/evidence/SHA và compare-6.jpg.
+Lề 8.519%, trôi đường bao 1.753%, size X/Y 3.958, 4.240%, p99 RGB 0.000, 0.000, 0.000/255, biên 0; median năng lượng 8.153% do mắt lưới lấp dần, giữ đủ hai số đo.
+Không loop (seam 30.185×), chưa nhận rơi/siết nội lưới; 2 id phụ S3 chờ cổng. KTX2 4034706 byte, GPU 13.50 MiB, gutter 0; đã xem 12 ảnh, dọn 216 PNG riêng; dùng 3 lượt chỉnh, không tạo AI mới.
+Anh/Claude xem recipe/compare-6 và MP4; kiểm host tốc độ 24 fps, camera/che địch/chữ, mips, hủy sớm, nhiều instance/hiệu năng rồi tầng B; chưa tích hợp.
+Không sửa nguồn/mã/manifest đang dùng, không Blender/browser/build/test game; đã nhả hai khóa, dừng sau một việc.
+
+
+**15:45 07/11/2026 · posture-break-shatter__take1 · A-PASS tầng A ngoại tuyến.** Đúng một dòng; soi f12–47, chọn [12,36)@24→48fps/0,500s,24 khung khác nhau; không loop.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/posture-break-shatter/v1/` gồm MP4/PNG atlas/KTX2/compare-6/recipe/evidence/engine-envelope.
+Lề15,093%;trọng tâm toàn cụm trôi1,303%;p99RGB0/0/0;gutterRGB0;KTX2 1.057.088 byte,GPU4,500MiB;seam4,617×. Nở có chủ đích; số đo thành phần đơn3,284% giữ để đối chiếu, không đại diện cả cụm.
+Đã thêm2idphụ vào S3; cần ấn thật trước vỡ và kiểm nhịp/che địch/nền sáng-tối trong host trước tầng B. Không sinh AI,không Blender,không sửa nguồn/manifest/mã,không build/test game.
+Đã xóa84 PNG thô của lượt này, giữ5 tấm kiểm; prune từ chối `.local` (not-tmp),danh sách xóa tại `.local/s1/posture-break-shatter__take1/cleanup.json`. Việc số2 trở lại `todo (lặp)`;dừng sau một việc.
+
+**07/11/2026 15:51 · L3 việc #2 / stagger-stars-loop__take1 · NEE kiểm động cho loop2s/6s.** Đúng một dòng; đã nhả khóa,việc#2 trở lại `todo (lặp)`.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/stagger-stars-loop/v1/` — MP4[12,66)@24/2,250s,54mẫu thật,PNGatlas/KTX2,recipe/envelope/evidence/SHA,compare-6/package-check;script/sốđo tại `.local/s1/stagger-stars-loop__take1/`.
+Mask vòng trong290–315px;lề23,704%,trôi0,272%,sizeX/Y2,893/1,636%,p99RGB2/2/2,biên/gutter0;KTX2 1854367byte,GPU14.29MiB;54/54khung khác nhau,đã xem12ảnh,dọn162PNG riêng(prune:not-tmp).
+Seam54khung4,010×;tìm496cửa sổ,ứng viên39khung[26,65)1,491× chỉ số học,chưa đóng lại/xem10vòng tốc độ thật. Đã thêm `S1-T0-stagger-loop` vào evidence-missing;không tự nhận loop hoặc chuyển Blender.
+Anh/Claude xem recipe/compare-6,đóng lại39khung rồi kiểm10chu kỳ24fps,nền sáng/tối,cỡ chơi,tilt/pivot/che chữ/mips;STUN hiện modulo nên không thay trực tiếp. Chưa kiểm host/hiệu năng/tầngB;2idphụ chỉ ghi recipe,chưa tạo.
+Không sinh AI/Blender/browser/build/test game hoặc sửa nguồn/mã/manifest đang dùng;không mở cổng,không hết hạn mức. Dừng sau đúng một việc.
+

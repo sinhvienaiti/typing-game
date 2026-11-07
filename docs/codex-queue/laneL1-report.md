@@ -1,8 +1,6 @@
-R2-4 · 07/11/2026 15:20: mã xong tại `games/.wt-ic-lab-all`; chờ Claude chạy Vitest toàn bộ nên #8 ghi `blocked`, chưa nghiệm thu hình/hiệu năng.
-Đầu ra: `src/lab/thunder-aftermath-r2.ts` (142 dòng mới), `src/lab/five-phase-clip.ts` (+10 dòng), `src/lab/skills-main.ts` (+1 dòng): tổng +153 dòng runtime; chỉ sau `tp2=1`, dấu đất dùng ngay card/texture của runner, điện dư nhỏ thay đuôi sparkle lớn.
-Kiểm tra ĐẠT: `npx --no-install tsc --noEmit`; `node --import tsx tests/lab/thunder-aftermath-r2-probe.mjs` (117 dòng mới); probe R2-3/R2-2 qua sau khi cập nhật 3 dòng kỳ vọng đuôi sparkle trong `tests/lab/thunder-impact-r2-probe.mjs`; `git diff --check` sạch.
-Probe: 30/60/120 Hz, B8 tắt cờ giữ bộ đệm từng khung, dấu khác không đổi, cast lại/reset, sự kiện/sát thương/status khớp cả atlas và video đứng; AST không cấp phát đường nóng, tái dùng buffer; R2-4 thêm tối đa 1 draw call, cận tổng R2 ≤9/12; texture thêm toàn R2 42.642.091 byte/64 MB, bước này không thêm atlas/shader/video.
-Bỏ khói thấp: đã rà kho beast/foe/meta/boss/fire và xem `art-src/lab/vfx/fire/fire-smoke-roll-white-w2.atlas.png`; nguồn fire là khối khói dựng cao, chưa hợp vai trò. Chuyển nhu cầu hai mẫu khói thấp RGBA sang luồng Blender, không tự tạo. Không sửa media/manifest, không build, không chạy bộ test game hay trình duyệt, không tạo capture/ảnh.
-Claude cần chạy `npx --no-install vitest run --maxWorkers=4`, rồi quay A/B cảnh TP (bản trước bước 4 với `tp2=1` so bản này, cùng seed/camera): H0+0,10/0,22/0,45/0,80/1,20/1,50/1,80/2,50 s và cast liên tiếp; kiểm dấu lộ rồi nguội/ăn mòn, điện thưa và hết trước lượt mới, không đĩa trắng 2–3 s. Đo Δp95 ≤1,0 ms, p95 ≤11,5 ms, phím→phóng ≤50 ms; chấm mù pha dư âm và cả chiêu theo cổng #9, chưa tự mở cổng.
-
-không có việc: chờ Claude chạy Vitest toàn bộ cho việc #8; việc #9 thuộc Claude và còn chờ #8 cùng cổng C.
+# Làn 1 · #12 R3-1 · hoàn tất phần mã (07/11/2026 15:55)
+- Trong `games/.wt-ic-lab-all`: sửa `src/lab/thunder-impact-r2.ts`, `src/lab/herd.ts`, `src/lab/skills-main.ts`; thêm `tests/lab/thunder-body-r3.test.ts` (tổng 182 dòng thêm).
+- Chỉ khi `tp2=1`: nghiêng khỏi điểm giáng 10° ngay H0, đỉnh 14° ở 40 ms; nhún/nảy trong 80 ms theo chiều cao thân, về lại ở 300 ms; giữ viền Lôi 0,1 s, sát thương, choáng và cách chết; làm mới instance cùng khung trúng.
+- Đạt 43/43 test riêng trong `thunder-body-r3`, `five-phase-clip`, `clip-skills`; TypeScript bốn file thay đổi và `git diff --check` đạt; phản ứng dùng bộ đệm cấp trước, không thêm shader/draw call.
+- Không sửa media/manifest, không chạy build hay bộ test toàn game, không mở trình duyệt/cổng mạng hoặc ghi Git; chưa đo p95 hay xác nhận chất lượng hình ảnh.
+- Chờ Claude làm #13: quay A/B góc chơi, đo Δp95 ≤ +1,0 ms và chấm mù pha/cả chiêu; không tự mở cổng #14. Dừng sau đúng một việc.
