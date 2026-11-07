@@ -6,25 +6,36 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest E11 typing-text work: Slices 27, 28 and 29 add 72 digest-bound published decisions and 72 runtime examples, with 18 authoring shards and 18 review shards. Each slice was regenerated and selected sequentially after the preceding slice entered the ledger. All original source sentences and ordinals were verified; 57 documented edits improve standalone context, naturalness or capitalization. Each review note records the source-file SHA-256 and sentence-level editorial rationale.
-- Latest verified remote CI baseline: Slices 24–26 HEAD `4291cae513f6325de30ecb82c55190264c2c74d2`; Platform CI `42328189506`, Master Plan Acceptance `42328189471` and Full Validation `42328184226` all succeeded on that SHA. The combined Slices 27–29 commit must receive fresh remote checks before its CI is claimed complete.
-- Published Slice 29 runtime snapshot: 1,897 example sentences, 3,785 total sentence records, 14,680 published rich records and 14,680 applied editorial decisions; dictionary 900, grammar 300 and phrases 9,695. See live generated manifests/reports before using these numbers in later work.
+- Latest E11 typing-text work: Group 1 / Step 1 reviews all 316 candidates remaining after Slice 29 across Slices 30–43 (thirteen full 24-record slices and a final four-record slice). All 316 have explicit digest-bound publication decisions; 238 documented edits improve standalone context, naturalness, terminology or punctuation. CEFR: 6 A1 + 53 A2 + 176 B1 + 81 B2. Each decision records exact source-file SHA-256 and editorial rationale.
+- Latest verified remote CI baseline: Slice 29 HEAD `b6291881457dbf68dd2cb667c5b15c5ac2be0887`; Platform CI `42331249829`, Master Plan Acceptance `42331249836` and Full Validation `42331244780` all succeeded. Group 1 Step 1 requires fresh remote checks on its published commit before advancing to Step 2.
+- Published Slice 43 runtime snapshot: 2,213 example sentences, 4,101 total sentence records, 14,996 published rich records and 14,996 applied editorial decisions; dictionary 900, grammar 300 and phrases 9,695. The default 1,000-candidate typing-text queue is now source-exhausted. Refer to generated manifests/reports before reusing these counts.
 - Historical MultiWOZ slice-51 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. Its registration and generated-metadata commits were `b9400e88f2c498b8524137aa2317d32ab87b0f81` and `9803698754f07d7023bde774b13c249eb8309d91`.
 - MultiWOZ slice 51 is integrated: 22/22 candidates received explicit editorial decisions, with 9 edited records retained and 13 rejected. The registered runtime slice is `content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-51.json`.
 - The pinned MultiWOZ 2.2 source coverage now includes the complete configured source set at immutable upstream commit `fe0c8e65cfcd8462bd33c86e35f21addc84ca82b`: train `dialogues_001.json` through `dialogues_017.json`, dev `dialogues_001.json` and `dialogues_002.json`, and test `dialogues_001.json` and `dialogues_002.json`. There is no configured or upstream-designed `test/dialogues_003.json` lane; never invent one.
 - E04 scale-224 publication is complete. Do not recreate scale-223/scale-224 artifacts or reopen the 2,000-chunk completion batch.
-- Current phase: mandatory E00–E12 implementation is complete; approved quality-first E11 corpus scale-up is the first unfinished workstream. E04 may continue only when new evidence-backed reviewed enrichment/content is actually available.
+- Current phase: execute the twelve agreed remaining work items as four sequential three-step groups in `docs/ENGLISH_CONTENT_EXECUTION_PLAN.md`. Each step must pass review before the next begins. Current work is Group 1 Step 1; do not mark the 100,000-example target complete merely because the current queue is exhausted.
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
 
-### Slices 27–29 editorial summary
+### Group 1 Step 1 — Slices 30–43
 
 | Slice | Published examples | A1 | A2 | B1 | B2 | Documented edits |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 27 | 24 | 1 | 3 | 12 | 8 | 18 |
-| 28 | 24 | 0 | 4 | 16 | 4 | 18 |
-| 29 | 24 | 3 | 4 | 9 | 8 | 21 |
-| Total | 72 | 4 | 11 | 37 | 20 | 57 |
+| 30 | 24 | 1 | 7 | 12 | 4 | 17 |
+| 31 | 24 | 1 | 3 | 12 | 8 | 16 |
+| 32 | 24 | 1 | 4 | 16 | 3 | 18 |
+| 33 | 24 | 0 | 3 | 16 | 5 | 17 |
+| 34 | 24 | 0 | 6 | 11 | 7 | 17 |
+| 35 | 24 | 0 | 4 | 15 | 5 | 15 |
+| 36 | 24 | 0 | 5 | 14 | 5 | 21 |
+| 37 | 24 | 0 | 3 | 12 | 9 | 19 |
+| 38 | 24 | 0 | 4 | 14 | 6 | 20 |
+| 39 | 24 | 0 | 4 | 14 | 6 | 21 |
+| 40 | 24 | 1 | 5 | 13 | 5 | 19 |
+| 41 | 24 | 1 | 2 | 12 | 9 | 18 |
+| 42 | 24 | 1 | 3 | 12 | 8 | 16 |
+| 43 | 4 | 0 | 0 | 3 | 1 | 4 |
+| Total | 316 | 6 | 53 | 176 | 81 | 238 |
 
 The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub before doing work. If a newer commit exists, adopt it, inspect its changes, preserve completed work, and never reset/revert/overwrite/duplicate it.
 
@@ -34,7 +45,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
 - E04 phrase/pattern architecture + current reviewed publication: complete — 9,695 published records after scale-224
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
-- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — historical pre-E11 scale-up baseline was 1,513 examples; current runtime after E11 Slice 29 contains 1,897 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
+- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — historical pre-E11 baseline was 1,513 examples; current runtime after Slice 43 contains 2,213 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
 - E10 controlled batch/review pipeline: complete and enforced
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
@@ -128,10 +139,10 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 1. E04 scale-224 and its approved controlled phrase-family minimums remain complete. Do not create scale-225 merely to increase volume.
 2. Translation-pair expansion is below its locked E11 target, but the historically pinned Tatoeba raw cache bytes are unavailable through the reproducible repo path. Keep import checksum gates strict; mutable weekly-export URLs are source-intake probes, not replacements for an approved pin.
 3. The pinned MultiWOZ E11 lane is now `source-exhausted` in Full Validation run `42264784597`: 1,171 candidate dialogues, 547 rejected, 625 used, zero remaining and zero selected. It is not a justification to invent `test/dialogues_003.json`.
-4. Reproducible E11 typing-text review is the bounded fallback lane. Slices 27–29 retain project-original provenance, stable IDs and digest-bound review. All 72 sentences were verified against exact source wording and ordinals before editing. Cross-authoring/runtime/new-slice exact dedup found zero duplicates; maximum token-Jaccard overlap was 0.3333, below the 0.86 review threshold. Source checksums, license gates and original typing-text passages remain unchanged.
-5. After Slice 29 the deterministic next packet is a **candidate only**, for Slice 30: 1,000 queue candidates, 300 controlled, 684 reviewed decision IDs, 316 remaining before selection, 24 selected. Regenerate against the newest HEAD before reviewing it; candidate packets are not publication approval.
-6. The user authorized Slices 27, 28 and 29 together. Their bounded 24-record authoring/review sets remain separate; affected runtime, release and deterministic E10/E11/E12/acceptance/enrichment metadata are synchronized together. Keep reproducibility and reviewed-only publication gates strict.
-7. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on the pushed combined Slices 27–29 HEAD before opening Slice 30. Respect new HEADs, human-versus-bot PR event behavior and the current source-update policy.
+4. Group 1 Step 1 consumes the 316 remaining default-queue candidates through Slices 30–43. Source wording/ordinals, licensing, grammar, naturalness, CEFR and cross-authoring/runtime exact/near dedup were explicitly reviewed. Maximum new-record token-Jaccard overlap is 0.5, below the 0.86 review threshold. Original passages and source pins are unchanged.
+5. The default next-review packet is now `source-exhausted`: 1,000 candidates, 1,000 reviewed IDs, zero remaining and zero selected. The selector explicitly handles final partial slices and empty queues. This exhausts the bounded queue, not all project passages and not the 100,000-example target.
+6. The user authorized four groups of three steps, with mandatory self-review before advancing. The durable plan is `docs/ENGLISH_CONTENT_EXECUTION_PLAN.md`. Step 1 review includes the final four-record intake and exhausted-queue CLI regression; complete remote CI sign-off before Step 2.
+7. On the Step 1 commit, verify English Content Full Validation, Master Plan Acceptance and Platform CI against the exact same HEAD. Only then enter Step 2 (reviewed example-corpus expansion to 100,000); subsequent steps remain queued until their predecessors pass.
 
 ## Known non-blocking enrichment debt
 
@@ -145,4 +156,4 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 
 ## Next actionable task
 
-Verify all three required workflows on the pushed Slices 27–29 commit with synchronized runtime and metadata. If checks pass, resolve the newest branch HEAD and regenerate the deterministic typing-text packet for a separately requested Slice 30. Leave the already complete MultiWOZ and E04 lanes untouched.
+Verify the Step 1 commit with all three required workflows and record review evidence. Then assess approved, reproducible source capacity for Step 2 against the actual 100,000-example requirement. Follow the four-group execution plan; source-blocked or partially completed work is not PASS and does not unlock the next step.

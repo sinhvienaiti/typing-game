@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { selectTypingTextReviewSlice } from "./typing-text-review-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const defaultCandidatePath = path.join(
@@ -37,7 +38,7 @@ function parseArgs(argv) {
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (arg === "--limit") {
-      options.limit = Number.parseInt(argv[index + 1] ?? "", 10);
+      options.limit = Number(argv[index + 1] ?? "");
       index += 1;
     } else if (arg === "--candidate-path") {
       options.candidatePath = path.resolve(root, argv[index + 1] ?? "");
@@ -66,17 +67,6 @@ function assertRecordList(document, label) {
   if (!document || !Array.isArray(document.records)) {
     throw new Error(`${label} must contain a records array`);
   }
-}
-
-function assertUniqueIds(records, label) {
-  const seen = new Set();
-  for (const record of records) {
-    const id = String(record?.id ?? "");
-    if (!id) throw new Error(`${label} contains a record without an id`);
-    if (seen.has(id)) throw new Error(`${label} contains duplicate id ${id}`);
-    seen.add(id);
-  }
-  return seen;
 }
 
 function collectDecisionRecordIds(document, output) {
@@ -120,43 +110,22 @@ const [candidateDocument, controlledDocument, decisionIds] = await Promise.all([
 assertRecordList(candidateDocument, "Typing-text candidate queue");
 assertRecordList(controlledDocument, "Controlled typing-text source");
 
-const candidateIds = assertUniqueIds(candidateDocument.records, "Typing-text candidate queue");
-const controlledIds = assertUniqueIds(controlledDocument.records, "Controlled typing-text source");
-const excludedIds = new Set([...controlledIds, ...decisionIds]);
-for (const id of excludedIds) {
-  if (!candidateIds.has(id)) continue;
-}
-
-const remaining = candidateDocument.records.filter(record => !excludedIds.has(record.id));
-if (remaining.length < options.limit) {
-  throw new Error(
-    `Only ${remaining.length} unreviewed typing-text candidates remain; requested ${options.limit}`,
-  );
-}
-const selected = remaining.slice(0, options.limit);
-for (const record of selected) {
-  if (record?.quality?.state !== "candidate") {
-    throw new Error(
-      `Next review record ${record.id} must remain candidate; found ${record?.quality?.state ?? "missing"}`,
-    );
-  }
-}
+const result = selectTypingTextReviewSlice({
+  candidates: candidateDocument.records,
+  controlled: controlledDocument.records,
+  reviewedIds: decisionIds,
+  limit: options.limit,
+});
+const selected = result.records;
 
 const packet = {
   schemaVersion: 1,
   kind: "english-content-review-packet",
   recordSetId,
+  state: result.state,
   sourceQueue: path.relative(root, options.candidatePath).replaceAll(path.sep, "/"),
   controlledSource: path.relative(root, options.controlledPath).replaceAll(path.sep, "/"),
-  selection: {
-    strategy: "generator-order-after-controlled-and-ledger-exclusion-v1",
-    requestedLimit: options.limit,
-    candidateCount: candidateDocument.records.length,
-    controlledCount: controlledIds.size,
-    reviewedDecisionCount: decisionIds.size,
-    excludedCount: excludedIds.size,
-    remainingBeforeSelection: remaining.length,
-  },
+  selection: result.selection,
   records: selected,
 };
 
@@ -167,11 +136,8 @@ console.log(
   "E11 typing-text next review slice:",
   JSON.stringify({
     output: path.relative(root, options.outputPath).replaceAll(path.sep, "/"),
-    candidateCount: candidateDocument.records.length,
-    controlledCount: controlledIds.size,
-    reviewedDecisionCount: decisionIds.size,
-    remainingBeforeSelection: remaining.length,
-    selectedCount: selected.length,
+    state: result.state,
+    ...result.selection,
     selectedIds: selected.map(record => record.id),
   }),
 );

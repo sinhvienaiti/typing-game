@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 1897,
+  "examplesScanned": 2213,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 11,
-    "withoutCandidates": 4989,
-    "coverage": 0.0022,
+    "withCandidates": 13,
+    "withoutCandidates": 4987,
+    "coverage": 0.0026,
     "sampleMatched": [
       {
         "id": "col.00000010",
@@ -173,6 +173,12 @@
         "id": "col.00000016",
         "exampleIds": [
           "sent.grb2.07.01.2"
+        ]
+      },
+      {
+        "id": "col.00000028",
+        "exampleIds": [
+          "sent.tt.l005-p002.012"
         ]
       },
       {
@@ -210,12 +216,6 @@
         "exampleIds": [
           "sent.tt.l014-p001.013"
         ]
-      },
-      {
-        "id": "col.00000200",
-        "exampleIds": [
-          "sent.grb2.05.02.3"
-        ]
       }
     ],
     "sampleMissing": [
@@ -243,14 +243,14 @@
       "col.00000025",
       "col.00000026",
       "col.00000027",
-      "col.00000028"
+      "col.00000029"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 29,
-    "withoutCandidates": 4156,
-    "coverage": 0.0069,
+    "withCandidates": 32,
+    "withoutCandidates": 4153,
+    "coverage": 0.0076,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -285,6 +285,12 @@
         ]
       },
       {
+        "id": "pv.00000012",
+        "exampleIds": [
+          "sent.tt.l005-p002.013"
+        ]
+      },
+      {
         "id": "pv.00000018",
         "exampleIds": [
           "sent.grb1.03.03.1"
@@ -307,14 +313,6 @@
         "exampleIds": [
           "sent.grb2.06.08.1"
         ]
-      },
-      {
-        "id": "chunk.00000010",
-        "exampleIds": [
-          "sent.gra2.02.04.3",
-          "sent.tt.l002-p006.011",
-          "sent.tt.l002-p010.002"
-        ]
       }
     ],
     "sampleMissing": [
@@ -324,7 +322,6 @@
       "pv.00000009",
       "pv.00000010",
       "pv.00000011",
-      "pv.00000012",
       "pv.00000013",
       "pv.00000014",
       "pv.00000015",
@@ -342,14 +339,15 @@
       "pv.00000031",
       "pv.00000032",
       "pv.00000033",
-      "pv.00000034"
+      "pv.00000034",
+      "pv.00000035"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 246,
-    "withoutCandidates": 264,
-    "coverage": 0.4824,
+    "withCandidates": 263,
+    "withoutCandidates": 247,
+    "coverage": 0.5157,
     "sampleMatched": [
       {
         "id": "pat.00000001",
