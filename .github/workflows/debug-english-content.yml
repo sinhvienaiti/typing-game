@@ -89,6 +89,12 @@ jobs:
           pnpm english-content:derive:typing-texts
           node scripts/prepare-typing-text-e11-review-slice.mjs --limit 24
 
+      - name: Prepare pinned English-only Tatoeba review and verify capacity evidence
+        run: |
+          node scripts/prepare-tatoeba-english-review.mjs --limit 24
+          node scripts/audit-english-example-source-capacity.mjs
+          git diff --exit-code -- content/english/reports/example-source-capacity.json
+
       - name: Synchronize E11 readiness and runtime artifacts
         shell: bash
         run: |
