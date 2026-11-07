@@ -26,3 +26,16 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 - Hai việc mã lab không chạy cùng lúc: làn này chỉ có một runner.
 
 **Kết thúc vòng 2 (15:50):** cả chiêu 5,5 → 6,5 sau bước 2, đứng yên qua bước 3 và 4. Dừng theo §7, chờ anh quyết vòng 3 (sửa lần lượt 3 nút thắt).
+
+## Vòng 3 (anh duyệt 07/11 15:55: "Làm vòng 3"): sửa lần lượt 3 nút thắt, đo sau mỗi bước
+
+| # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
+|---|---|---|---|---|---|---|---|
+| 12 | R3-1 quái nhận đòn có lực | `lane-R3-1-foe-reaction.md` | high | 9 | ✅ 15:55 (anh duyệt) | doing 15:50 | |
+| 13 | ĐO R3-1 (Claude): cả chiêu ở góc chơi phải tăng | — | — | 12 | C | todo (Claude) | |
+| 14 | R3-2 đường dẫn thành dải sét | `lane-R3-2-guide-strip.md` | high | 13 | C: mở khi #13 đạt | todo | |
+| 15 | ĐO R3-2 (Claude) | — | — | 14 | C | todo (Claude) | |
+| 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | C: mở khi #15 đạt | todo | |
+| 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | todo (Claude) | |
+
+**Đạt** ở vòng 3 = pha được sửa tăng ≥ 1 ở trục mục tiêu **và cả chiêu ở góc chơi tăng**, không trục nào tụt, trong ngân sách. Cả chiêu không tăng qua hai bước liền thì dừng và báo anh.
