@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 2590,
+  "examplesScanned": 3121,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,10 +153,22 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 14,
-    "withoutCandidates": 4986,
-    "coverage": 0.0028,
+    "withCandidates": 18,
+    "withoutCandidates": 4982,
+    "coverage": 0.0036,
     "sampleMatched": [
+      {
+        "id": "col.00000001",
+        "exampleIds": [
+          "sent.tatoeba.17786"
+        ]
+      },
+      {
+        "id": "col.00000004",
+        "exampleIds": [
+          "sent.tatoeba.16202"
+        ]
+      },
       {
         "id": "col.00000010",
         "exampleIds": [
@@ -204,25 +216,11 @@
         "exampleIds": [
           "sent.tt.l001-p002.015"
         ]
-      },
-      {
-        "id": "col.00000105",
-        "exampleIds": [
-          "sent.tatoeba.71210"
-        ]
-      },
-      {
-        "id": "col.00000119",
-        "exampleIds": [
-          "sent.tatoeba.9048775"
-        ]
       }
     ],
     "sampleMissing": [
-      "col.00000001",
       "col.00000002",
       "col.00000003",
-      "col.00000004",
       "col.00000005",
       "col.00000006",
       "col.00000007",
@@ -243,14 +241,16 @@
       "col.00000025",
       "col.00000026",
       "col.00000027",
-      "col.00000029"
+      "col.00000029",
+      "col.00000030",
+      "col.00000031"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 37,
-    "withoutCandidates": 4148,
-    "coverage": 0.0088,
+    "withCandidates": 51,
+    "withoutCandidates": 4134,
+    "coverage": 0.0122,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -261,7 +261,8 @@
       {
         "id": "pv.00000003",
         "exampleIds": [
-          "sent.tt.l002-p006.003"
+          "sent.tt.l002-p006.003",
+          "sent.tatoeba.6043"
         ]
       },
       {
@@ -273,7 +274,8 @@
       {
         "id": "pv.00000005",
         "exampleIds": [
-          "sent.tt.l008-p001.010"
+          "sent.tt.l008-p001.010",
+          "sent.tatoeba.18091"
         ]
       },
       {
@@ -285,6 +287,12 @@
         ]
       },
       {
+        "id": "pv.00000008",
+        "exampleIds": [
+          "sent.tatoeba.16064"
+        ]
+      },
+      {
         "id": "pv.00000012",
         "exampleIds": [
           "sent.tt.l005-p002.013"
@@ -293,32 +301,28 @@
       {
         "id": "pv.00000018",
         "exampleIds": [
-          "sent.grb1.03.03.1"
+          "sent.grb1.03.03.1",
+          "sent.tatoeba.16666",
+          "sent.tatoeba.18091"
+        ]
+      },
+      {
+        "id": "pv.00000020",
+        "exampleIds": [
+          "sent.tatoeba.18179"
         ]
       },
       {
         "id": "pv.00000026",
         "exampleIds": [
-          "sent.gra1.04.05.3"
-        ]
-      },
-      {
-        "id": "pv.00000027",
-        "exampleIds": [
-          "sent.tt.l002-p007.006"
-        ]
-      },
-      {
-        "id": "pv.00000030",
-        "exampleIds": [
-          "sent.grb2.06.08.1"
+          "sent.gra1.04.05.3",
+          "sent.tatoeba.11825013"
         ]
       }
     ],
     "sampleMissing": [
       "pv.00000002",
       "pv.00000006",
-      "pv.00000008",
       "pv.00000009",
       "pv.00000010",
       "pv.00000011",
@@ -328,7 +332,6 @@
       "pv.00000016",
       "pv.00000017",
       "pv.00000019",
-      "pv.00000020",
       "pv.00000021",
       "pv.00000022",
       "pv.00000023",
@@ -338,16 +341,18 @@
       "pv.00000029",
       "pv.00000031",
       "pv.00000032",
-      "pv.00000033",
       "pv.00000034",
-      "pv.00000035"
+      "pv.00000035",
+      "pv.00000036",
+      "pv.00000037",
+      "pv.00000038"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 270,
-    "withoutCandidates": 240,
-    "coverage": 0.5294,
+    "withCandidates": 306,
+    "withoutCandidates": 204,
+    "coverage": 0.6,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -400,6 +405,13 @@
         ]
       },
       {
+        "id": "pat.00000007",
+        "exampleIds": [
+          "sent.tatoeba.2199",
+          "sent.tatoeba.17845"
+        ]
+      },
+      {
         "id": "pat.00000009",
         "exampleIds": [
           "sent.tt.l005-p001.008"
@@ -426,25 +438,12 @@
         "exampleIds": [
           "sent.tatoeba.5656501"
         ]
-      },
-      {
-        "id": "pat.00000014",
-        "exampleIds": [
-          "sent.gra2.05.01.2",
-          "sent.tatoeba.3024424",
-          "sent.tt.l002-p003.003",
-          "sent.tt.l001-p004.012",
-          "sent.tt.l001-p005.010"
-        ]
       }
     ],
     "sampleMissing": [
       "pat.00000006",
-      "pat.00000007",
       "pat.00000008",
-      "pat.00000013",
       "pat.00000017",
-      "pat.00000018",
       "pat.00000020",
       "pat.00000029",
       "pat.00000031",
@@ -455,15 +454,18 @@
       "pat.00000045",
       "pat.00000047",
       "pat.00000053",
-      "pat.00000054",
       "pat.00000055",
       "pat.00000056",
-      "pat.00000063",
       "pat.00000065",
       "pat.00000067",
       "pat.00000068",
-      "pat.00000069",
-      "pat.00000072"
+      "pat.00000073",
+      "pat.00000075",
+      "pat.00000076",
+      "pat.00000077",
+      "pat.00000078",
+      "pat.00000081",
+      "pat.00000082"
     ]
   }
 }
