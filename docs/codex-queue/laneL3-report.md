@@ -46,3 +46,30 @@ Lề8.611%, trôi1.571%, đổi cỡ1.146, 0.693%, p99RGB0; KTX213 mip, gutter0;
 Recipe có envelope24 mẫu và2 id phụ chờ parent/S3. Anh/Claude cần xem lỗi đá lẫn và chốt nguồn tách; chưa tạo ảnh/Blender, chưa chấm tầng B hoặc kiểm host.
 Đã nối báo cáo S1; không browser/build/test game, không sửa mã/manifest/nguồn; dừng sau một việc.
 
+
+**07/11/2026 14:07 · L3 · việc #2 / dòng S1 #18 · A-FAIL→S2.** `i2v-ult-ice-cold-silence__take2`; hoàn tất đúng một dòng, giữ #2 `todo (lặp)`, đã nhả hai khóa.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-ice-cold-silence/v1/`: MP4 1080p, 36 khung [24,60) @24, atlas/KTX2, recipe/evidence/envelope/SHA-256, so 6 cặp và package-check.
+Lỗi: nhũ băng bị cắt ở mép dưới cả 72 khung khảo sát; thiếu matte cảnh. Gói thử đạt lề 6,302%, trôi 0,931%, p99 nền RGB 0 nhưng không phục hồi hình; đã đánh dấu diagnosticOnly=true, accepted=false.
+Kiểm ngoại tuyến: xem 12 ảnh, 36/36 khung MP4 khác nhau, UASTC 13 mip, gutter 0, MAE ROI 1,743/255; dọn 144 khung PNG riêng. Prune từ chối not-tmp, đã ghi cleanup.
+Chuyển S2-18 để sửa contain và tách base RGBA; hai id phụ ghi trong recipe, chờ parent qua A/cổng Blender. Anh/Claude cần xem recipe/compare-6; manifest hiện dùng take1, không tự thay bằng take2.
+Không tạo ảnh/Blender, tích hợp hoặc chấm tầng B trong phạm vi này; không browser/build/test hoặc sửa nguồn/mã game/manifest. Đã nối báo cáo S1; dừng sau một việc.
+
+**07/11/2026 14:13 · L3 việc #2 / S1 #19 · i2v-ult-thunder-nine-heavens__take2 · A-FAIL→S2.** Soi72khung f12–83; gói thử36khung[24,60) @24; mây cắt mép trên72/72khung, thiếu matte mây tối; không tích hợp.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-thunder-nine-heavens/v1/`: MP4 1080p,atlas/KTX2,recipe/envelope từng khung,evidence/SHA-256,compare-6/package-check.
+TopRGB167–216/255; gói thử lề6.019%,p99RGB1.000, 1.000, 1.000; tâm năng lượng đổi theo sét, không chứng nhận ổn định.36/36khung MP4 khác nhau,UASTC13mip/gutter0/MAEROI1.292/255.
+Đã xem12ảnh,dọn144PNGkhung riêng và ghi cleanup;prune từ chối not-tmp. S2-19 đối chiếu job v2;2idphụ chỉ ghi recipe,chờ parentA/cổngBlender.
+Anh/Claude xem recipe/compare-6 và derived-*.jpg; giữ v2 đang nối,không thay bằng job cũ. Không tạo art/Blender/browser/build/test hoặc chấm tầngB; dừng sau đúng một dòng.
+
+**07/11/2026 14:17 · L3 việc #2 / S1 #20 · i2v-ult-water-profound-sea-v2__take3 · A-FAIL→S2.** Soi72khung f12–83;ngọn nước crop trên63/72khung;gói thử36khung[24,60)@24,không tích hợp.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-water-profound-sea-v2/v1/`:MP4 1080p,atlas/KTX2,recipe/envelope từng khung,evidence/SHA-256,compare-6/package-check.
+Gói thử:lề5.521%,trôi1.035%,sizeX/Y1.690, 3.288%,p99RGB0.000, 0.000, 0.000;không cứu crop nguồn.36/36khung MP4 khác nhau,gutter0,MAEROI2.928/255;không loop(seam6.263×).
+Đã xem12ảnh,dọn144PNGriêng và ghi cleanup;prune từ chối not-tmp. S2-20 sửa contain cùng still;2idphụ chỉ ghi recipe,chờ parentA/cổngBlender.
+Anh/Claude xem recipe/compare-6 và derived-*.jpg;giữ take1 đang nối. Không tạo art/Blender/browser/build/test hoặc chấm tầngB;dừng sau đúng một dòng.
+
+**07/11/2026 14:23 · L3 việc #2 / T0 `beast-hit-heavy-ink-burst__take1` · A-PASS ngoại tuyến cho mask mực phụ.** Đúng một dòng; #2 giữ `todo (lặp)`, đã nhả khóa.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/beast-hit-heavy-ink-burst/v1/` — MP4 mask1080×1080,24 mẫu thật[6,30)@24→48fps/0,5s,RGBA atlas/KTX2,recipe/envelope/evidence/SHA-256,compare-6/package-check.
+Lề25,926%,trôi0,293%,p99nền0,alpha mép0; nởX/Y149,032/197,521% có chủ đích của burst,không sustain. KTX2 348782byte,13mip,gutteralpha0,MAEalphaROI1.357/255,GPU8.00MiB;24/24khung MP4 khác nhau.
+Đã xem6ảnh,xóa72PNG tự trích;prune từ chối not-tmp. Recipe có scale/alpha/reveal/erosion từng khung;2idphụ S3 chờ cổng. Không loop/chấm tầngB.
+Anh/Claude xem recipe/compare-6; kiểm nhịp2×/48fps,tương phản mực trên foe,nội suy/mips,nhiều instance và hiệu năng host trước tích hợp; chưa thay manifest đang dùng.
+Không tạo art/Blender/browser/build/test hoặc sửa nguồn/mã game; chưa làm dòng tiếp theo theo runner.
+
