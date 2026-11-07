@@ -86,3 +86,13 @@
 - Mốc cục bộ tốt nhất: i2v-ult-ice-cold-silence take2, i2v-ult-thunder-nine-heavens take2, i2v-ult-water-profound-sea-v2 take3 cùng 7,5/10; đều REDO, chưa có mốc đạt 8 để dùng ngay.
 - Kết quả: .local/video-review/results/batch-08.json; 34 prompt tiếng Anh giữ nguyên still I2V, 16 DROP gồm 15 take thừa và Void comet v1 được v2 thay theo use. Chủ cần xem các still vốn sát/cắt biên; prompt chuyển động không sửa được lề khung đầu.
 - Motion dựa trên khung trích, gồm 0/0,2/0,8 giây và khung cuối; đo thêm tám loop theo prompt/use bằng xám 160×90, chưa duyệt phát thực/trong game. JSON.parse/đủ key/best/REDO đã kiểm; đã xoá khung tạm tự tạo, không chạy build/test hay tạo/sửa tài sản; dừng sau một đợt.
+
+
+### batch-09 — 07/11/2026
+- Đã xem riêng 50/50 sheet và đối chiếu 18 still nguồn: 0 PASS, 36 REDO, 14 DROP; 39 job, mỗi job đúng một best; dừng sau đợt này.
+- Lỗi thường gặp 1: thiếu nhịp bung–tan; Ice/Light giữ khối trang trí, charge không tích lũy tới đầy; nhiều clip còn nguyên thân sáng ở khung cuối.
+- Lỗi thường gặp 2: đổi hình/phình/cắt biên — gương mất Taiji, Wood seal sinh vòng rune lớn, affliction đổi ôvan; chủ cần xem hình thoi xám sẵn trong still Wood comet v2 và các still vốn sát mép.
+- Lỗi thường gặp 3: erosion/nối chưa đúng — Wind mark khoét từ tâm và sinh cam, Wood mark mất cả đá; 14 loop theo prompt/use đã đối chiếu MAE cuối–đầu/trung vị khung kề (xám 160×90), không coi số đo là chứng nhận loop.
+- Mốc cục bộ tốt hơn: i2v-wind-ground-mark take1, i2v-wind-comet-v2 take1, i2v-wood-comet-v2 take1 cùng 7/10; vẫn REDO, chưa có mốc đạt 8 để dùng ngay.
+- Kết quả: `.local/video-review/results/batch-09.json`; 31 prompt mới (17 I2V giữ nguyên still, 14 chất liệu T2V); 5 needsStill: ice-orb-loop, ice-pillar, ice-ring-burst, ice-sheath-loop, ice-vortex-loop. 14 DROP gồm 11 take thừa, 2 comet v1 được v2 thay và manifest gương cũ trùng r2.
+- Đã đọc prompt cạnh video cho 9 take cột Light thiếu metadata; motion dựa trên 6 khung và 0/0,2/0,8 giây + hai khung cuối cả 50 clip, chưa phát thực/nghiệm thu trong game. JSON.parse/đủ key/best/REDO đã qua; xoá khung tạm tự tạo; không sửa tài sản, không chạy build/test.
