@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 3621,
+  "examplesScanned": 4121,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 21,
-    "withoutCandidates": 4979,
-    "coverage": 0.0042,
+    "withCandidates": 22,
+    "withoutCandidates": 4978,
+    "coverage": 0.0044,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -173,7 +173,9 @@
       {
         "id": "col.00000010",
         "exampleIds": [
-          "sent.tt.l002-p009.018"
+          "sent.tt.l002-p009.018",
+          "sent.tatoeba.33381",
+          "sent.tatoeba.33389"
         ]
       },
       {
@@ -249,9 +251,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 68,
-    "withoutCandidates": 4117,
-    "coverage": 0.0162,
+    "withCandidates": 81,
+    "withoutCandidates": 4104,
+    "coverage": 0.0194,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -263,7 +265,8 @@
         "id": "pv.00000003",
         "exampleIds": [
           "sent.tt.l002-p006.003",
-          "sent.tatoeba.6043"
+          "sent.tatoeba.6043",
+          "sent.tatoeba.34104"
         ]
       },
       {
@@ -279,7 +282,14 @@
           "sent.tt.l008-p001.010",
           "sent.tatoeba.18091",
           "sent.tatoeba.21134",
-          "sent.tatoeba.21997"
+          "sent.tatoeba.21997",
+          "sent.tatoeba.29943"
+        ]
+      },
+      {
+        "id": "pv.00000006",
+        "exampleIds": [
+          "sent.tatoeba.33891"
         ]
       },
       {
@@ -310,30 +320,18 @@
         ]
       },
       {
-        "id": "pv.00000018",
+        "id": "pv.00000014",
         "exampleIds": [
-          "sent.grb1.03.03.1",
-          "sent.tatoeba.16666",
-          "sent.tatoeba.18091"
-        ]
-      },
-      {
-        "id": "pv.00000020",
-        "exampleIds": [
-          "sent.tatoeba.18179"
+          "sent.tatoeba.33706"
         ]
       }
     ],
     "sampleMissing": [
       "pv.00000002",
-      "pv.00000006",
       "pv.00000009",
       "pv.00000010",
       "pv.00000013",
-      "pv.00000014",
       "pv.00000015",
-      "pv.00000016",
-      "pv.00000017",
       "pv.00000019",
       "pv.00000021",
       "pv.00000022",
@@ -349,14 +347,18 @@
       "pv.00000038",
       "pv.00000039",
       "pv.00000040",
-      "pv.00000041"
+      "pv.00000041",
+      "pv.00000042",
+      "pv.00000043",
+      "pv.00000044",
+      "pv.00000045"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 330,
-    "withoutCandidates": 180,
-    "coverage": 0.6471,
+    "withCandidates": 343,
+    "withoutCandidates": 167,
+    "coverage": 0.6725,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -452,11 +454,9 @@
       "pat.00000017",
       "pat.00000029",
       "pat.00000031",
-      "pat.00000043",
       "pat.00000044",
       "pat.00000045",
       "pat.00000047",
-      "pat.00000053",
       "pat.00000056",
       "pat.00000067",
       "pat.00000068",
@@ -469,10 +469,12 @@
       "pat.00000082",
       "pat.00000084",
       "pat.00000085",
-      "pat.00000086",
       "pat.00000087",
       "pat.00000089",
-      "pat.00000103"
+      "pat.00000103",
+      "pat.00000104",
+      "pat.00000105",
+      "pat.00000106"
     ]
   }
 }
