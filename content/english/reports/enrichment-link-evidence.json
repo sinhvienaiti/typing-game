@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 2233,
+  "examplesScanned": 2590,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 13,
-    "withoutCandidates": 4987,
-    "coverage": 0.0026,
+    "withCandidates": 14,
+    "withoutCandidates": 4986,
+    "coverage": 0.0028,
     "sampleMatched": [
       {
         "id": "col.00000010",
@@ -179,6 +179,12 @@
         "id": "col.00000028",
         "exampleIds": [
           "sent.tt.l005-p002.012"
+        ]
+      },
+      {
+        "id": "col.00000043",
+        "exampleIds": [
+          "sent.tatoeba.8613196"
         ]
       },
       {
@@ -209,12 +215,6 @@
         "id": "col.00000119",
         "exampleIds": [
           "sent.tatoeba.9048775"
-        ]
-      },
-      {
-        "id": "col.00000139",
-        "exampleIds": [
-          "sent.tt.l014-p001.013"
         ]
       }
     ],
@@ -248,9 +248,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 32,
-    "withoutCandidates": 4153,
-    "coverage": 0.0076,
+    "withCandidates": 37,
+    "withoutCandidates": 4148,
+    "coverage": 0.0088,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -345,9 +345,9 @@
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 264,
-    "withoutCandidates": 246,
-    "coverage": 0.5176,
+    "withCandidates": 270,
+    "withoutCandidates": 240,
+    "coverage": 0.5294,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -454,7 +454,6 @@
       "pat.00000044",
       "pat.00000045",
       "pat.00000047",
-      "pat.00000050",
       "pat.00000053",
       "pat.00000054",
       "pat.00000055",
@@ -463,7 +462,8 @@
       "pat.00000065",
       "pat.00000067",
       "pat.00000068",
-      "pat.00000069"
+      "pat.00000069",
+      "pat.00000072"
     ]
   }
 }

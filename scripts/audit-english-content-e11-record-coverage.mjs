@@ -124,6 +124,14 @@ function manifestSources(targetId) {
       const relative = String(set?.path ?? "");
       if (!relative) continue;
 
+      if (
+        targetId === "example-sentences" && batch?.phase === "E11" && batch?.category === "sentences" &&
+        /^e11\.tatoeba-english-reviewed-slice-\d+$/u.test(batch.id) && setId === "reviewed-tatoeba-english-examples"
+      ) {
+        sources.push({ path: relative, collection: "records" });
+        continue;
+      }
+
       if (batch?.phase === "E04" && batch?.category === "phrases") {
         if (targetId === "collocations" && (setId === "collocations" || setId === "scale-collocations")) {
           sources.push({ path: relative, collection: "records" });
