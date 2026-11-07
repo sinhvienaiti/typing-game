@@ -1,0 +1,1053 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "id": "review.e11.tatoeba-english-01.8732888",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.8732888",
+      "sourceDigest": "b1c8fcdbea97508860a7789bac136905c0495c1da4081b943c296204f7966232",
+      "targetState": "deprecated",
+      "checks": {
+        "sourceSuitability": {
+          "status": "fail",
+          "method": "standalone-learning-content-rejection-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Reject this generalized regulatory claim: licensing requirements vary by jurisdiction and date; source ratings do not establish current factual scope. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. No publication or CEFR assignment."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.1286",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.1286",
+      "sourceDigest": "887ecad69953b8e6f993272391a662ece720b42e18a22edd30e2ae0413dc8610",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural conversational idiom at a loss for words; idiomatic meaning rather than literal vocabulary sets the level. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.2500."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.16234",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.16234",
+      "sourceDigest": "363b1fdea39248f8d06ae6a53cdfb89fb7c8e0f3b30dcdbfcac7f0ee26206ad8",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Clear school question using present progressive for current studies; common school vocabulary. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR A2. Maximum cross-runtime/new-slice token Jaccard 0.5000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.17019",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.17019",
+      "sourceDigest": "e49284a6979090ac57561117b2eee7c7aa93e549f4b9650a814e31884c92354c",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural British English school marks; well below average and this term require intermediate reading. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.1333."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.17085",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.17085",
+      "sourceDigest": "e14ad13603945466fa2fb00f49972aacb73e778c43686f0ad03d1153f2e7ea9b",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural present-perfect question about the result of an action involving a car. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.3000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.17100",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.17100",
+      "sourceDigest": "6864bc464acfd0aecbf1e12ec637eede1705c0a6920706ba5fdfff4a65fc5b81",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Common polite could request; lend and a couple of days in a concrete everyday situation. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR A2. Maximum cross-runtime/new-slice token Jaccard 0.2308."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.17177",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.17177",
+      "sourceDigest": "3c7a13b7ce3306ba555d219c972b2e60b69c6863ee21755b87fef1df37068c50",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural comparison with seems to be and possessive pronoun mine. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.3000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.20916",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.20916",
+      "sourceDigest": "6e4372e0eb2bae34a2a3d2915bba4a178ca520aad9faf9d4284211113de20057",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Idiomatic do good business with tourists, understandable as a local commerce example. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.2000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.20990",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.20990",
+      "sourceDigest": "828f9a23d9e8c7ab61d4814111368dd4710aa123345eddccce8ea7b18a2d1643",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Grammatical past narration with with his arms folded describing posture. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.1667."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.29357",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.29357",
+      "sourceDigest": "498adaeb4b6a140e581b47a7a8c20ab9102762897f04a93561906490d1040962",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural causal clause; review called off and fell ill as intermediate multiword expressions. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.2000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.29607",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.29607",
+      "sourceDigest": "b487f1d3702f53426533e3f835ccce321fe4be961e8bcc356265309072302c67",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural past-simple who subject question with teach someone to play an instrument. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR A2. Maximum cross-runtime/new-slice token Jaccard 0.4000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.30605",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.30605",
+      "sourceDigest": "08bd38d64b45d731ae22e01f493c4139152c3fd3bd1d42608e94aeea382898ca",
+      "targetState": "deprecated",
+      "checks": {
+        "sourceSuitability": {
+          "status": "fail",
+          "method": "standalone-learning-content-rejection-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Reject the standalone fragment without an established referent or failure scenario; do not invent context. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. No publication or CEFR assignment."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.34327",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.34327",
+      "sourceDigest": "acdec8fb9500d429aefeaeab8fe01c0d0567abd50cfb5e6ecee396930627dd53",
+      "targetState": "deprecated",
+      "checks": {
+        "sourceSuitability": {
+          "status": "fail",
+          "method": "standalone-learning-content-rejection-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Reject the violent threat even though the idiom is authentic and positively rated upstream. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. No publication or CEFR assignment."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.34340",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.34340",
+      "sourceDigest": "535188d9de3094990e582e8329092435b731bfa2fe53fd65e44fb3a6f8f7a8b4",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Grammatical consists of phrase with a familiar football-team example. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.1667."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.35251",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.35251",
+      "sourceDigest": "5fbe2fdd485ae54318ca7d10220d320a186a0b59ff4ce0205a117e261e5f85aa",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural introductory while participle clause; caught in a shower means caught in rain in this bus-waiting context. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.2857."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.37773",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.37773",
+      "sourceDigest": "73e3d8a49f91b1b4a115908d0abee35621f5ddd10d9df68d5c061e722b589e22",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural such a nice day that result construction and everyday street description. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.3158."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.38307",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.38307",
+      "sourceDigest": "4af2faed175041bb69a9432ad8143024c6d581aefa8682850287fa0c9004cabf",
+      "targetState": "deprecated",
+      "checks": {
+        "sourceSuitability": {
+          "status": "fail",
+          "method": "standalone-learning-content-rejection-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Reject this discourse prompt because it provides no subject to express or reformulate in an isolated typing example. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. No publication or CEFR assignment."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.38869",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.38869",
+      "sourceDigest": "eacf773799c459ed3fac340f93d17a9186d884fd0952940deacd3051ce7fc080",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural formal request using would you be so kind as to. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.2857."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.43666",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.43666",
+      "sourceDigest": "166fe11b003908d207f52c1e7bc9475899ccbdc502a0aad6ef6e80ebf195a553",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Edit the cumbersome beyond the scope of my understanding to beyond my understanding; preserve difficulty/meaning. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.4444."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.51773",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.51773",
+      "sourceDigest": "b171b752ff98bd242c8f14bd3613712ee32a9f44cac04caa36057fe7a5592cf0",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural passive obligation with hand in for essay submission and a clear deadline constraint. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.2308."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.54816",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.54816",
+      "sourceDigest": "313975a1aaf1d4e5032754d22e63d1297a2a8b7b162b9aeb103898719cfa037a",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Expand colloquial contact to contact lens so the eye-related example is unambiguous when read alone. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B1. Maximum cross-runtime/new-slice token Jaccard 0.1875."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.58092",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.58092",
+      "sourceDigest": "fed5da79d8e5edb5c679fa7162946945f792661df25d1ada2b86b000d7361796",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural fit for and ocean voyage in a seaworthiness example; statement gives no navigation instructions. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.2500."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.58223",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.58223",
+      "sourceDigest": "839cda2f6a6ec46540a37be7b971ac70a8ae8b89e33832b322e121abf86e10f2",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural sales idiom selling like hot cakes; retain the established two-word spelling variant. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.2000."
+    },
+    {
+      "id": "review.e11.tatoeba-english-01.60190",
+      "batchId": "e11.tatoeba-english-reviewed-slice-01",
+      "recordSetId": "reviewed-tatoeba-english-examples",
+      "recordId": "sent.tatoeba.60190",
+      "sourceDigest": "69ad1c7d94f4be7ad2b5b3b200110b79d94a3f65a6d3245b9e040c516d7cfb64",
+      "targetState": "published",
+      "checks": {
+        "schema": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourcePin": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "grammar": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "sourceSuitability": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "sentence-level-editorial-cefr-v1"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "tatoeba-english-editorial-pilot-v1"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "exact-jaccard-cross-runtime-editorial-v1"
+        },
+        "license": {
+          "status": "pass",
+          "method": "cc-by-2-fr-attribution-source-review-v1"
+        }
+      },
+      "reviewedAt": "2026-11-07T04:46:46.936Z",
+      "reviewedBy": "GPT-6 editorial review",
+      "note": "Natural idiom out of the question meaning impossible or not feasible. Canonical snapshot english-only-weekly-2026-10-31-observed-2026-11-07-v1. Upstream ratings are experimental; local grammar, naturalness, standalone suitability and attribution reviewed explicitly. CEFR B2. Maximum cross-runtime/new-slice token Jaccard 0.3333."
+    }
+  ]
+}

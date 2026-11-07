@@ -42,3 +42,30 @@ pnpm learning:test
 ```
 
 Child games emit attempts; they do not own competing canonical mastery calculations.
+
+## Rich English learning content
+
+The legacy vocabulary ABI remains `shared/vocabulary/levels/*.json` v1. Rich content is stored as sidecar datasets under:
+
+- `shared/dictionary/`
+- `shared/phrases/`
+- `shared/grammar/`
+- `shared/sentences/`
+- `shared/curriculum/`
+- `shared/schemas/english-content/`
+
+Canonical authoring inputs and source/license policy live under `content/english/`.
+
+Commands:
+
+```bash
+pnpm english-content:generate
+pnpm english-content:validate
+pnpm english-content:test
+pnpm english-content:licenses
+pnpm english-content:dedupe
+pnpm english-content:coverage
+pnpm english-content:check
+```
+
+The 300-topic grammar/usage framework is authored in `content/english/grammar/topic-catalog.json` and generated into `shared/curriculum/`. Child games should consume bounded runtime datasets; they must not preload or duplicate future 100k+ sentence corpora.

@@ -1,0 +1,3485 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "id": "review.e03.lexical-14.lex-en-00000001",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000001",
+      "sourceDigest": "3bd8b5fc31d6f3f020a362348bf45499516f74ea20123374abdad206a704b923",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000141",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000141",
+      "sourceDigest": "3a76a615c74e73e260e344ffbb84183315c7556b78941c48bcc503a803e1e647",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000002",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000002",
+      "sourceDigest": "002e30d7bc2288884ad213a70ea4fe8b8d4e8919d5774bddc41ea1ecbda28afe",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000142",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000142",
+      "sourceDigest": "350e7ddceadcc701a9123bca4ea0fe1bc754c727c229c17c38c91b14ee618adc",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000003",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000003",
+      "sourceDigest": "e669df61435d6b3727b26d81a8ffc58ba5c869c867519c2280ed4e3e29a7513c",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000143",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000143",
+      "sourceDigest": "8337b1762c76b4e9b1ddcf93457995d549cff369b3298c39cc235e465ad131b8",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000004",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000004",
+      "sourceDigest": "d127897878b860e04ca54e722a6321f62f053fdcc83d649f3a586ffcb6c7d48f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000144",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000144",
+      "sourceDigest": "7a0127bb66ced8b0b6f85d9d0eeb09d3235fb586232401d928c52067b703e803",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000005",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000005",
+      "sourceDigest": "9c3a07f1ab9d87d37e5ee5e0e72e97713813046bd68aac670196fe442476b35a",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000145",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000145",
+      "sourceDigest": "822d565673d8ffe2a4526749e168be54f37f62e5d98b655df08f0ce13bc8f80c",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000006",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000006",
+      "sourceDigest": "d80094a7df4af1579cbdf2b5f8ac3c078362ed7af54b4e0728079828b967c879",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000146",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000146",
+      "sourceDigest": "cd259896f4c1800f1ee9d753de6f17e625a3cc76938e036491b0fb4ffe32a952",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000007",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000007",
+      "sourceDigest": "eb63bc8d8555491ed1f61881ebbe92990be62b7750f40527ba28df8abc1a809f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000147",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000147",
+      "sourceDigest": "75c0882ea65d0739c55d85d7ece4272dc41c683bda8b0deeb29ddfae60f1a7f9",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000010",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000010",
+      "sourceDigest": "85d00648f4273cf864a3651b5883453585ed91cf4e4fdb3d97f18238b4a2dcd1",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000148",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000148",
+      "sourceDigest": "36b58599c2a60285ca2e24e3597ef3f3a40788df8c5185440337c0cf098098ce",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000011",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000011",
+      "sourceDigest": "e9c3435d8496157e16f9df006523aa0526bdf79ccdc9c189687437d583ce5265",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000149",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000149",
+      "sourceDigest": "912f5b319ee96e5716702234476783add928ccbba3cf7c8772190f5f459e901b",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000012",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000012",
+      "sourceDigest": "3b8f35005a7d3e51b982f4e348700f139c03a8e8d8cca90c5bbc0e0f2eb9f64f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000150",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000150",
+      "sourceDigest": "5241562d674b28b958c3577fe86121fa50af2144e1b9b2a4a30327d275306740",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000013",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000013",
+      "sourceDigest": "d0166ad426a99a3e066b9a11a890316833a2f387567f6d5626b456f48ab57b91",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000151",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000151",
+      "sourceDigest": "7dfc3ce53c49bebc59f1ab86db3241fb904a0b33ec74c3a7f3e167f74a869539",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000014",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000014",
+      "sourceDigest": "413ccbd5fe4585e3636227c85fa99cfbeb1f7f38de6b5a25112b89f0e30dc7c7",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000152",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000152",
+      "sourceDigest": "58b614034c38386b62d33f0a56291731af9abb0ccc134c55ba9d546aca53f860",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000015",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000015",
+      "sourceDigest": "2d7149574b80e2bb5fb4b211aab79b23ae1ad91545a1ee77f6d6d76610579d75",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000153",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000153",
+      "sourceDigest": "5b9810dcb4ab1e6a14fa830707a76d47fa83ad80919050d3fcc660ca8a5ddf87",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000017",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000017",
+      "sourceDigest": "9e0641ea9f0cad271c5f6a466252803ea27bc40463c1cf999c07634efc1bbe6d",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000154",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000154",
+      "sourceDigest": "a0a1b4493898cdbd32ad87a6bd54824bf7bdabad6b0188546f27cf3d2f5b22b5",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000024",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000024",
+      "sourceDigest": "b05c229f897cde088eb2d43dd478c0b8c4ef51e50a53a3ac5e3a336badb9d7a5",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000155",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000155",
+      "sourceDigest": "9e423b5b2a1140c8b1e83205a1b2db8b2523de028334361baa80517508b9259a",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000164",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000164",
+      "sourceDigest": "ed93a2df8071041625a51bfb8e2452862cc39806038680194a429672ac7ff743",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000156",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000156",
+      "sourceDigest": "63609651fd6a17f9e96a3b8389d558388ec70d97d873dfa8aa44c79d5e60800a",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000165",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000165",
+      "sourceDigest": "99ad9e73cd802391b0cfa7aa794eb58416debb5bb8fe0b4b6b8212f444176fef",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000157",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000157",
+      "sourceDigest": "82a2a1c69ea79433a53ba84f65f304f3ee8e58e54b83502a825b6e57e9a42931",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000167",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000167",
+      "sourceDigest": "4b2ee96bdf73ac91b4159ad82738fe880ca25c0a62386289d1bb35711c7cb4f0",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000158",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000158",
+      "sourceDigest": "05367e8e7fe342f01a39ac868505f0407cac1170f5b22738480d6981c6202558",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000168",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000168",
+      "sourceDigest": "cdeccc056f69c34193debeff59d10d892cfdfad8b92a3865085ccf2adf016e58",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000159",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000159",
+      "sourceDigest": "0c9d5209f62be1050db2c82b1c41e23f84a17fad39d21e51f736c7884c8e9c9d",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000169",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000169",
+      "sourceDigest": "e2d51cb4175c3546ef6b1261d7a95699565fa4f1913379c46ba1cd7a806435a1",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000160",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000160",
+      "sourceDigest": "a60062c8b493b5bcde57468a14662c625e7ee9ff5a54d57978e212d4215dcef9",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000170",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000170",
+      "sourceDigest": "f0bcda33d91f5ec91fe040c6a0b5250669af7bb7c4ef947e77bc7344a34bc41f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000161",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000161",
+      "sourceDigest": "606362dec651ca7699143187fdc9d83cceadfeb682aa6ed6925638441f9a4033",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000171",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000171",
+      "sourceDigest": "6c507c248cac802b0241479c54632f7530a682aaa84b0c3024354558f99ae1c6",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000162",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000162",
+      "sourceDigest": "e0b6ef93301769ce2c1909083778e481187855a9b9e22131fc9742e6ee32b3f2",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000172",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000172",
+      "sourceDigest": "305b5fa5ac13f39964cee915510de02c39b812c4ac3c080536b1f5c07166cde8",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000163",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000163",
+      "sourceDigest": "7b6b752eae5175b92fa709974b63307eaf0e910590257c2da8d0fe7d7d69e67f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000173",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000173",
+      "sourceDigest": "f473c4c3ca72cdcc9936f40f2fa3a347498cd81a73e16482c960f61a2de23e92",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000164",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000164",
+      "sourceDigest": "5b76563ed5bff43467c75cc9ced65ea320aa7caeb4e8349c9d83b5c0ecee5ae4",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000174",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000174",
+      "sourceDigest": "4b68993b4ab80010b38f007346fb0ac1dbc120f819fab8bd656155cde979bb70",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000165",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000165",
+      "sourceDigest": "bbbe4de36aa6804dd13ffe4d8d7d07d088156d6e3a47ad1ce35e2a9cacc7ea3f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000175",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000175",
+      "sourceDigest": "9e3044d31283c95b3c1976ab14dacd55808e08c9471eff5238c754660dfbd3b8",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000166",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000166",
+      "sourceDigest": "589336209953cf02a103f4ec08a40725f082877419168f15763b0abbb402b93b",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000176",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000176",
+      "sourceDigest": "48e0157d9229e09e2476bb4670ccf1216b3801b273160fc01b75800e03a98356",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000167",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000167",
+      "sourceDigest": "c1e135dd55dad1713183e39b4b84c38e00d537ca89cac8c9f9aa942b8610df1b",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000177",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000177",
+      "sourceDigest": "9e0c7587dcf2a9cb937baa47e0fcee6370ebcc93cf816f38c37f92e7583aa138",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000168",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000168",
+      "sourceDigest": "f951f9b21d2ef9fd2d914c59f3b237d028f2f2288b9023f163b4e7fcd4af4991",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000178",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000178",
+      "sourceDigest": "d2fd672a59c32caf14e3e7546542327b9017188c16e00fddb1dd7e66c00cd0ba",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000169",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000169",
+      "sourceDigest": "e3381b3d57953731d8a41c569941207988efe2c56c615666966192a8effd473f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000179",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000179",
+      "sourceDigest": "d5ff6b12ce5501cd5095f1bcc8b128241a2e7b8ff7acc86803e55bf980836bd9",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000170",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000170",
+      "sourceDigest": "1715964b39dda8d94155183685106b9fcad0a2d0ce196555290a4fe6946a05e0",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000180",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000180",
+      "sourceDigest": "231204ded2b06e87a3d09b1df81cce7e54fef218dd1ba19b4ccceae98a9e51bf",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000171",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000171",
+      "sourceDigest": "91f49b8a7b15938fd295577acbd4ff868937ba353f49a35789231aa7a6efbd71",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000183",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000183",
+      "sourceDigest": "ee74a71bdfdffd740405ef9e216c3c800b50e3813f61a1c69a12247053c2078a",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000172",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000172",
+      "sourceDigest": "69b800555712950ba987fd8ff2bc43f6b019ae15235113edff9c08fa2ef38df6",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000185",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000185",
+      "sourceDigest": "f5f1fa75e7b39d6ed2e2f3e92af98a03c2cec3319e7f70c8c56c4477c47de2b1",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000173",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000173",
+      "sourceDigest": "06b18470fd7534127f0f4f4bc52c08a65a453ecf0b8ac3bdb58f7992979313d9",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000186",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000186",
+      "sourceDigest": "743ff4dcf6cb1f2d8551b527be062c49567536c80e2a91fac37d9ed987a45354",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000174",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000174",
+      "sourceDigest": "b2ccd7d1f16b7f119ab2fc50f104fff040e32e3ea544fbeb5cd9439bff09365c",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000115",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000115",
+      "sourceDigest": "c0226f3b084fb8e2be97e665bb029b2afcf7582a52c6a7875210cd7e529e5e17",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000175",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000175",
+      "sourceDigest": "4948583d5afa0e5f38307ca7ad781d64ffac249e88be540968fa0806ef46900f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000116",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000116",
+      "sourceDigest": "9d9c78ea3501b959e3baa8171282d3b95598252ca40b0954c6d30fbeb499d1a6",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000176",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000176",
+      "sourceDigest": "8e2e804173bcee5ac727b74ee22080bc13221334e6243e8c5d90837ab79389a0",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000123",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000123",
+      "sourceDigest": "33cf39173b2c5ab0090aece0d310e8c72ce0832f70be5fd52cfd180a49d5df52",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000177",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000177",
+      "sourceDigest": "777464a21778235d72a2338be8558e182995eb33254ca6ff7965e4651ece7c40",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000136",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000136",
+      "sourceDigest": "d82dbec6fc1bfd7a063d7727e488145277e3f0d3ddbdefcda3ce155efdab865f",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000178",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000178",
+      "sourceDigest": "a76c00b0a1c17aeb62880ed683dc232f800eef632051a72f575eda350969aabd",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000144",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000144",
+      "sourceDigest": "e5c8c7e884b4a5ece742f7264c62baac64ebf1e858d5308ead68f7d04b6afc83",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000179",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000179",
+      "sourceDigest": "96d74031814d376ab4c2d6f938e0330ca5ddd6ba07e4c3a646337187e3011704",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    },
+    {
+      "id": "review.e03.lexical-14.lex-en-00000145",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-lexemes",
+      "recordId": "lex.en.00000145",
+      "sourceDigest": "2dd7c97f50a1c39b57379382a729894523824ecdc3759764b40250c433530ab3",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "bilingual-oewn-legacy-sense-review-v14"
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        },
+        "usageLink": {
+          "status": "pass",
+          "method": "e03-reviewed-usage-sidecar-link-v1"
+        }
+      },
+      "reviewedAt": "2026-10-04T06:36:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical editorial review",
+      "note": "Fourteenth controlled E03 lexical promotion. Primary sense, EN/VI wording, CEFR, source/license and exact/near dedup were checked against the pinned OEWN/legacy review packet; secondary senses remain unpublished. Stable usageRefs link added to the deterministic reviewed-sense usage sidecar."
+    },
+    {
+      "id": "review.e03.lexical-14.sense-00000180",
+      "batchId": "e03.lexical-reviewed-slice",
+      "recordSetId": "reviewed-senses",
+      "recordId": "sense.00000180",
+      "sourceDigest": "2e8f2919ac12c39cd8e4593870d054d3fb48fa9882a61cebed92ac95b2510b5a",
+      "targetState": "published",
+      "checks": {
+        "senseAlignment": {
+          "status": "pass",
+          "method": "e03-example-link-sense-review-v1",
+          "note": "Primary-sense example linkage was re-reviewed after enrichment."
+        },
+        "translation": {
+          "status": "pass",
+          "method": "bilingual-en-vi-editorial-review-v14"
+        },
+        "naturalness": {
+          "status": "pass",
+          "method": "editorial-naturalness-review-v14"
+        },
+        "exactDuplicate": {
+          "status": "pass",
+          "method": "stable-id-headword-exact-dedup-v14"
+        },
+        "nearDuplicate": {
+          "status": "pass",
+          "method": "headword-sense-near-dedup-review-v14"
+        },
+        "cefr": {
+          "status": "pass",
+          "method": "legacy-level-plus-editorial-cefr-review-v14"
+        },
+        "license": {
+          "status": "pass",
+          "method": "published-source-license-review-v14"
+        }
+      },
+      "reviewedAt": "2026-10-06T07:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol bilingual lexical/example review",
+      "note": "Primary sense remains published; exampleIds were reviewed against explicit lexical evidence or the controlled E03 project-original fallback set."
+    }
+  ]
+}

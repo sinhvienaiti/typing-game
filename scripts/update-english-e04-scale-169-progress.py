@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import runpy
+ROOT=Path(__file__).resolve().parents[1]
+s=runpy.run_path(str(ROOT/'scripts/english-e04-scale-169-common.py'),run_name='e04_scale169_progress')
+replace_once=s['replace_once']; path=s['PROGRESS_PATH']; text=path.read_text(encoding='utf-8')
+repls=[
+('- Latest fully CI-verified scale-up checkpoint before scale-168 publication: `dea5ba0222c5f3d4ea26baea3f23e765b8cb4b16` — scale-167 publication state verified by English Content Master Plan Acceptance #611, English Content Full Validation #487 and Platform CI #1821; published output: `c1324df33f5b24c8086b053742201dc56c3ca155`.','- Latest fully CI-verified scale-up checkpoint before scale-169 publication: `64cbb05ea2466576834484e9a0162acdd6c0b71f` — scale-168 publication state verified by English Content Master Plan Acceptance #617, English Content Full Validation #494 and Platform CI #1827; published output: `6cf4468b6300332a87f9ebe1779495968dad46df`.','verified scale-168 checkpoint'),
+('- Scale-167 publication checkpoint `dea5ba0222c5f3d4ea26baea3f23e765b8cb4b16` is fully verified; scale-168 is the current publication unit.','- Scale-168 publication checkpoint `64cbb05ea2466576834484e9a0162acdd6c0b71f` is fully verified; scale-169 is the current publication unit.','scale-168 verification state'),
+('- E04 phrase/pattern architecture + current reviewed publication: complete — 7,470 published records after scale-168','- E04 phrase/pattern architecture + current reviewed publication: complete — 7,510 published records after scale-169','E04 publication count'),
+('## Published runtime snapshot after E04 scale-168 publication','## Published runtime snapshot after E04 scale-169 publication','runtime heading'),
+('- phrases: 7,470 records','- phrases: 7,510 records','phrase count'),
+('- total published rich records: 12,071','- total published rich records: 12,111','rich count'),
+('- editorial ledger: 12,071 decisions / 12,071 applied / 12,071 publish decisions','- editorial ledger: 12,111 decisions / 12,111 applied / 12,111 publish decisions','ledger count'),
+('- E04 phrasal-verb frontier: `pv.00000640`','- E04 phrasal-verb frontier: `pv.00000650`','pv frontier'),
+('- E04 chunk frontier: `chunk.00000675`','- E04 chunk frontier: `chunk.00000690`','chunk frontier'),
+('- E04 idiom frontier: `idiom.00000645`','- E04 idiom frontier: `idiom.00000660`','idiom frontier'),
+('1. Scale-167 publication is fully verified at `dea5ba0222c5f3d4ea26baea3f23e765b8cb4b16`; do not duplicate scale-167 artifacts.','1. Scale-168 publication is fully verified at `64cbb05ea2466576834484e9a0162acdd6c0b71f`; do not duplicate scale-168 artifacts.','verified workstream'),
+('2. Scale-168 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.','2. Scale-169 is the current publication unit; do not start another E04 batch until its publication/checkpoint CI completes.','current workstream'),
+('3. After the scale-168 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.','3. After the scale-169 bot publication commit is created, create exactly one normal-user checkpoint and verify English Content Full Validation, Master Plan Acceptance and Platform CI.','checkpoint workstream'),
+('5. Scale-168 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.','5. Scale-169 continues the under-target phrase families with 10 reviewed phrasal verbs, 15 chunks and 15 idioms. After its checkpoint, recalculate deficits from HEAD and continue another bounded phrasal-verb/idiom/chunk batch unless safer reviewed enrichment becomes available.','next family'),
+('Scale-168 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000640`, `chunk.00000675` and `idiom.00000645` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.','Scale-169 is the current publication unit. After its bot publication commit is created, verify remote HEAD and create exactly one normal-user checkpoint. If all mandatory CI PASS, continue the under-target phrase families from frontiers `pv.00000650`, `chunk.00000690` and `idiom.00000660` with another bounded reviewed batch. Recalculate counts and run exact/near dedupe before every write.','next task')]
+for old,new,label in repls: text=replace_once(text,old,new,label)
+path.write_text(text,encoding='utf-8')

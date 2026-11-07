@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/provenance.schema.json",
+  "title": "English content provenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sources"
+  ],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/sourceRef"
+      }
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 1000
+    }
+  }
+}

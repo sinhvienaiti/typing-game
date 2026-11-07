@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/wiktextract-enrichment.schema.json",
+  "title": "Simple Wiktionary English morphology/usage enrichment pilot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "sourceSnapshot",
+    "sourceSha256",
+    "records",
+    "metrics"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "simplewiktionary-en"
+    },
+    "sourceSnapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "sourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "records": {
+      "type": "array",
+      "minItems": 300,
+      "maxItems": 300,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "lexemeId",
+          "headword",
+          "headwordKey",
+          "mapped",
+          "entries",
+          "quality",
+          "provenance"
+        ],
+        "properties": {
+          "lexemeId": {
+            "type": "string",
+            "pattern": "^lex\\.en\\."
+          },
+          "headword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "headwordKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "mapped": {
+            "type": "boolean"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "pos",
+                "forms",
+                "ipa",
+                "senses"
+              ],
+              "properties": {
+                "pos": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                },
+                "forms": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "form",
+                      "tags"
+                    ],
+                    "properties": {
+                      "form": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 300
+                      },
+                      "tags": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 100
+                        }
+                      }
+                    }
+                  }
+                },
+                "ipa": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  }
+                },
+                "senses": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "sourceSenseIndex",
+                      "glossesEn",
+                      "tags",
+                      "examples"
+                    ],
+                    "properties": {
+                      "sourceSenseIndex": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "glossesEn": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 2000
+                        }
+                      },
+                      "tags": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 100
+                        }
+                      },
+                      "examples": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 3000
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "quality": {
+            "$ref": "https://typing-game.local/schemas/english-content/common.schema.json#/$defs/quality"
+          },
+          "provenance": {
+            "$ref": "https://typing-game.local/schemas/english-content/provenance.schema.json"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "mapped",
+        "mappedRate",
+        "entries",
+        "forms",
+        "senses",
+        "withForms",
+        "withUsageLabels",
+        "withIpa"
+      ],
+      "properties": {
+        "requested": {
+          "const": 300
+        },
+        "mapped": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "mappedRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "entries": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "forms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "senses": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "withForms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "withUsageLabels": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        },
+        "withIpa": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 300
+        }
+      }
+    }
+  }
+}

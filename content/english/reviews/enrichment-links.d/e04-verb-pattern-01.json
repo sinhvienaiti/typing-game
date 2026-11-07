@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "links": [
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000001.sent-gra1-04-02-1",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000001",
+      "targetSnapshot": {"lemma": "want", "frame": "verb + to-infinitive"},
+      "exampleId": "sent.gra1.04.02.1",
+      "exampleText": "I want to buy a new notebook.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "The surface form directly realizes want + to-infinitive."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    },
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000003.sent-tt-l002-p004-009",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000003",
+      "targetSnapshot": {"lemma": "hope", "frame": "verb + to-infinitive"},
+      "exampleId": "sent.tt.l002-p004.009",
+      "exampleText": "They also hope to cook lunch outside if the area allows it.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "The surface form directly realizes hope + to-infinitive."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    },
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000005.sent-tt-l002-p003-012",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000005",
+      "targetSnapshot": {"lemma": "decide", "frame": "verb + to-infinitive"},
+      "exampleId": "sent.tt.l002-p003.012",
+      "exampleText": "They decide to keep the picture for the next meeting.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "The surface form directly realizes decide + to-infinitive."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    },
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000010.sent-grc1-01-02-1",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000010",
+      "targetSnapshot": {"lemma": "fail", "frame": "verb + to-infinitive"},
+      "exampleId": "sent.grc1.01.02.1",
+      "exampleText": "This distinction, many policy makers still fail to appreciate.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "Topicalization fronts the object, while fail to appreciate still directly realizes the target complement frame."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    },
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000012.sent-tatoeba-5656501",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000012",
+      "targetSnapshot": {"lemma": "afford", "frame": "verb + to-infinitive"},
+      "exampleId": "sent.tatoeba.5656501",
+      "exampleText": "I couldn't afford to do that.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "The surface form directly realizes afford + to-infinitive."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    },
+    {
+      "id": "enrich.e04.verb-pattern.pat-00000015.sent-grb1-02-06-3",
+      "targetType": "verb-pattern",
+      "targetId": "pat.00000015",
+      "targetSnapshot": {"lemma": "tell", "frame": "verb + object + to-infinitive"},
+      "exampleId": "sent.grb1.02.06.3",
+      "exampleText": "If you see Mia, tell her to call me.",
+      "evidence": {"status": "pass", "method": "manual-frame-review-v1", "note": "The surface form directly realizes tell + object + to-infinitive."},
+      "reviewedAt": "2026-10-06T12:20:00Z",
+      "reviewedBy": "GPT-5.6 Sol editorial review"
+    }
+  ]
+}

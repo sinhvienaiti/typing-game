@@ -1,0 +1,76 @@
+name: Sync English E11 Manifest Coverage
+
+on:
+  push:
+    branches:
+      - prep/e11-manifest-e05-coverage
+    paths:
+      - scripts/report-english-content-e11-readiness.mjs
+      - content/english/batches/manifest.json
+      - content/english/targets/long-term.json
+      - .github/workflows/sync-english-e11-manifest-coverage.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: english-e11-manifest-coverage
+  cancel-in-progress: false
+
+jobs:
+  sync-readiness:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.21.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.11.0
+
+      - name: Generate, verify, and commit E11 readiness snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          report='content/english/reports/e11-readiness.json'
+
+          pnpm english-content:e11
+
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const report=JSON.parse(fs.readFileSync('content/english/reports/e11-readiness.json','utf8'));
+          const targets=new Map(report.targets.map(target=>[target.id,target]));
+          const examples=targets.get('example-sentences');
+          const mistakes=targets.get('common-mistakes');
+          if (examples?.current!==1513) throw new Error(`expected example-sentences=1513, got ${examples?.current}`);
+          if (mistakes?.current!==388) throw new Error(`expected common-mistakes=388, got ${mistakes?.current}`);
+          console.log(JSON.stringify({exampleSentences:examples.current,commonMistakes:mistakes.current},null,2));
+          NODE
+
+          mapfile -t changed < <(git diff --name-only -- shared content/english)
+          if [[ ${#changed[@]} -eq 0 ]]; then
+            echo 'E11 readiness snapshot is already synchronized.'
+            exit 0
+          fi
+          if [[ ${#changed[@]} -ne 1 || "${changed[0]}" != "$report" ]]; then
+            printf 'Unexpected generated artifact drift:\n%s\n' "${changed[*]}" >&2
+            exit 1
+          fi
+
+          cp "$report" /tmp/e11-readiness.expected.json
+          pnpm english-content:e11
+          cmp -s /tmp/e11-readiness.expected.json "$report"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$report"
+          git commit -m 'chore(content): sync E11 readiness snapshot'
+          git push

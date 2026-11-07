@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typing-game.local/schemas/english-content/tatoeba-source-report.schema.json",
+  "title": "Tatoeba E06 source report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "source",
+    "snapshot",
+    "observedContentSha256",
+    "sourcePinned",
+    "candidatePairs",
+    "selectedPairs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "source": {
+      "const": "tatoeba"
+    },
+    "snapshot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "observedContentSha256": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "engSentences",
+        "vieSentences",
+        "links"
+      ],
+      "properties": {
+        "engSentences": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "vieSentences": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "links": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "sourcePinned": {
+      "type": "boolean"
+    },
+    "candidatePairs": {
+      "type": "integer",
+      "minimum": 300
+    },
+    "selectedPairs": {
+      "const": 300
+    }
+  }
+}

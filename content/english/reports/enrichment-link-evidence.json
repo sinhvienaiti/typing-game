@@ -1,0 +1,483 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.10.0",
+  "method": {
+    "lexemeAndSense": "explicit published sentence.lexicalIds only",
+    "fallbackFormEvidence": "whole-form boundary match for manual sense review only; includes inflected forms",
+    "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
+    "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
+  },
+  "examplesScanned": 4966,
+  "lexemes": {
+    "total": 300,
+    "withCandidates": 300,
+    "withoutCandidates": 0,
+    "coverage": 1,
+    "sampleMatched": [
+      {
+        "id": "lex.en.00000101",
+        "exampleIds": [
+          "sent.tt.l001-p005.009",
+          "sent.tt.l001-p005.021",
+          "sent.tt.l001-p005.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000156",
+        "exampleIds": [
+          "sent.tt.l002-p001.007"
+        ]
+      },
+      {
+        "id": "lex.en.00000159",
+        "exampleIds": [
+          "sent.tt.l002-p001.013"
+        ]
+      },
+      {
+        "id": "lex.en.00000245",
+        "exampleIds": [
+          "sent.tt.l002-p005.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000246",
+        "exampleIds": [
+          "sent.tt.l002-p005.013"
+        ]
+      },
+      {
+        "id": "lex.en.00000268",
+        "exampleIds": [
+          "sent.tt.l002-p006.017"
+        ]
+      },
+      {
+        "id": "lex.en.00000131",
+        "exampleIds": [
+          "sent.tt.l001-p006.006"
+        ]
+      },
+      {
+        "id": "lex.en.00000149",
+        "exampleIds": [
+          "sent.tt.l001-p007.011"
+        ]
+      },
+      {
+        "id": "lex.en.00000154",
+        "exampleIds": [
+          "sent.tt.l002-p001.016"
+        ]
+      },
+      {
+        "id": "lex.en.00000181",
+        "exampleIds": [
+          "sent.tt.l002-p002.016"
+        ]
+      }
+    ],
+    "sampleMissing": []
+  },
+  "senses": {
+    "total": 300,
+    "withCandidates": 300,
+    "withoutCandidates": 0,
+    "coverage": 1,
+    "sampleMatched": [
+      {
+        "id": "sense.00000001",
+        "exampleIds": [
+          "sent.tt.l001-p005.009",
+          "sent.tt.l001-p005.021",
+          "sent.tt.l001-p005.011"
+        ]
+      },
+      {
+        "id": "sense.00000002",
+        "exampleIds": [
+          "sent.tt.l002-p001.007"
+        ]
+      },
+      {
+        "id": "sense.00000003",
+        "exampleIds": [
+          "sent.tt.l002-p001.013"
+        ]
+      },
+      {
+        "id": "sense.00000004",
+        "exampleIds": [
+          "sent.tt.l002-p005.011"
+        ]
+      },
+      {
+        "id": "sense.00000005",
+        "exampleIds": [
+          "sent.tt.l002-p005.013"
+        ]
+      },
+      {
+        "id": "sense.00000006",
+        "exampleIds": [
+          "sent.tt.l002-p006.017"
+        ]
+      },
+      {
+        "id": "sense.00000007",
+        "exampleIds": [
+          "sent.tt.l001-p006.006"
+        ]
+      },
+      {
+        "id": "sense.00000008",
+        "exampleIds": [
+          "sent.tt.l001-p007.011"
+        ]
+      },
+      {
+        "id": "sense.00000009",
+        "exampleIds": [
+          "sent.tt.l002-p001.016"
+        ]
+      },
+      {
+        "id": "sense.00000010",
+        "exampleIds": [
+          "sent.tt.l002-p002.016"
+        ]
+      }
+    ],
+    "sampleMissing": []
+  },
+  "e03FallbackFormEvidence": [],
+  "collocations": {
+    "total": 5000,
+    "withCandidates": 24,
+    "withoutCandidates": 4976,
+    "coverage": 0.0048,
+    "sampleMatched": [
+      {
+        "id": "col.00000001",
+        "exampleIds": [
+          "sent.tatoeba.17786",
+          "sent.tatoeba.29107"
+        ]
+      },
+      {
+        "id": "col.00000004",
+        "exampleIds": [
+          "sent.tatoeba.16202"
+        ]
+      },
+      {
+        "id": "col.00000010",
+        "exampleIds": [
+          "sent.tt.l002-p009.018",
+          "sent.tatoeba.33381",
+          "sent.tatoeba.33389"
+        ]
+      },
+      {
+        "id": "col.00000014",
+        "exampleIds": [
+          "sent.tt.l003-p002.002"
+        ]
+      },
+      {
+        "id": "col.00000016",
+        "exampleIds": [
+          "sent.grb2.07.01.2"
+        ]
+      },
+      {
+        "id": "col.00000020",
+        "exampleIds": [
+          "sent.tatoeba.29167"
+        ]
+      },
+      {
+        "id": "col.00000028",
+        "exampleIds": [
+          "sent.tt.l005-p002.012"
+        ]
+      },
+      {
+        "id": "col.00000041",
+        "exampleIds": [
+          "sent.tatoeba.43361"
+        ]
+      },
+      {
+        "id": "col.00000043",
+        "exampleIds": [
+          "sent.tatoeba.8613196"
+        ]
+      },
+      {
+        "id": "col.00000062",
+        "exampleIds": [
+          "sent.grb2.07.02.1"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "col.00000002",
+      "col.00000003",
+      "col.00000005",
+      "col.00000006",
+      "col.00000007",
+      "col.00000008",
+      "col.00000009",
+      "col.00000011",
+      "col.00000012",
+      "col.00000013",
+      "col.00000015",
+      "col.00000017",
+      "col.00000018",
+      "col.00000019",
+      "col.00000021",
+      "col.00000022",
+      "col.00000023",
+      "col.00000024",
+      "col.00000025",
+      "col.00000026",
+      "col.00000027",
+      "col.00000029",
+      "col.00000030",
+      "col.00000031",
+      "col.00000032"
+    ]
+  },
+  "phraseItems": {
+    "total": 4185,
+    "withCandidates": 101,
+    "withoutCandidates": 4084,
+    "coverage": 0.0241,
+    "sampleMatched": [
+      {
+        "id": "pv.00000001",
+        "exampleIds": [
+          "sent.tatoeba.2387444"
+        ]
+      },
+      {
+        "id": "pv.00000003",
+        "exampleIds": [
+          "sent.tt.l002-p006.003",
+          "sent.tatoeba.6043",
+          "sent.tatoeba.34104"
+        ]
+      },
+      {
+        "id": "pv.00000004",
+        "exampleIds": [
+          "sent.gra1.02.01.2",
+          "sent.tatoeba.22357"
+        ]
+      },
+      {
+        "id": "pv.00000005",
+        "exampleIds": [
+          "sent.tt.l008-p001.010",
+          "sent.tatoeba.18091",
+          "sent.tatoeba.21134",
+          "sent.tatoeba.21997",
+          "sent.tatoeba.29943"
+        ]
+      },
+      {
+        "id": "pv.00000006",
+        "exampleIds": [
+          "sent.tatoeba.33891"
+        ]
+      },
+      {
+        "id": "pv.00000007",
+        "exampleIds": [
+          "sent.tt.l002-p005.009",
+          "sent.tt.l001-p008.010",
+          "sent.tt.l002-p001.012"
+        ]
+      },
+      {
+        "id": "pv.00000008",
+        "exampleIds": [
+          "sent.tatoeba.16064",
+          "sent.tatoeba.25330"
+        ]
+      },
+      {
+        "id": "pv.00000011",
+        "exampleIds": [
+          "sent.tatoeba.18821",
+          "sent.tatoeba.40869"
+        ]
+      },
+      {
+        "id": "pv.00000012",
+        "exampleIds": [
+          "sent.tt.l005-p002.013"
+        ]
+      },
+      {
+        "id": "pv.00000014",
+        "exampleIds": [
+          "sent.tatoeba.33706"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "pv.00000002",
+      "pv.00000009",
+      "pv.00000010",
+      "pv.00000013",
+      "pv.00000019",
+      "pv.00000021",
+      "pv.00000022",
+      "pv.00000023",
+      "pv.00000024",
+      "pv.00000028",
+      "pv.00000029",
+      "pv.00000035",
+      "pv.00000037",
+      "pv.00000038",
+      "pv.00000039",
+      "pv.00000040",
+      "pv.00000041",
+      "pv.00000042",
+      "pv.00000043",
+      "pv.00000044",
+      "pv.00000045",
+      "pv.00000046",
+      "pv.00000047",
+      "pv.00000048",
+      "pv.00000049"
+    ]
+  },
+  "verbPatternsLemmaEvidence": {
+    "total": 510,
+    "withCandidates": 352,
+    "withoutCandidates": 158,
+    "coverage": 0.6902,
+    "sampleMatched": [
+      {
+        "id": "pat.00000001",
+        "exampleIds": [
+          "sent.e03.00000154",
+          "sent.gra1.04.02.1",
+          "sent.gra1.04.02.3",
+          "sent.gra2.05.02.1",
+          "sent.tatoeba.1891"
+        ]
+      },
+      {
+        "id": "pat.00000002",
+        "exampleIds": [
+          "sent.gra1.02.03.2",
+          "sent.gra1.03.02.3",
+          "sent.gra1.03.06.3",
+          "sent.gra2.06.01.3",
+          "sent.gra2.06.02.1"
+        ]
+      },
+      {
+        "id": "pat.00000003",
+        "exampleIds": [
+          "sent.e03.00000209",
+          "sent.grb1.03.01.1",
+          "sent.grb1.03.01.3",
+          "sent.tt.l002-p004.009",
+          "sent.tt.l001-p007.018"
+        ]
+      },
+      {
+        "id": "pat.00000004",
+        "exampleIds": [
+          "sent.grb2.04.05.1",
+          "sent.grb2.07.02.1",
+          "sent.tt.l002-p001.016",
+          "sent.tt.l002-p004.002",
+          "sent.tt.l001-p009.004"
+        ]
+      },
+      {
+        "id": "pat.00000005",
+        "exampleIds": [
+          "sent.grc1.01.03.2",
+          "sent.tt.l002-p002.004",
+          "sent.tt.l002-p003.012",
+          "sent.tt.l002-p005.003",
+          "sent.tt.l002-p006.017"
+        ]
+      },
+      {
+        "id": "pat.00000006",
+        "exampleIds": [
+          "sent.tatoeba.18269"
+        ]
+      },
+      {
+        "id": "pat.00000007",
+        "exampleIds": [
+          "sent.tatoeba.2199",
+          "sent.tatoeba.17845",
+          "sent.tatoeba.29109",
+          "sent.tatoeba.42887"
+        ]
+      },
+      {
+        "id": "pat.00000009",
+        "exampleIds": [
+          "sent.tt.l005-p001.008",
+          "sent.tatoeba.18469",
+          "sent.tatoeba.24915"
+        ]
+      },
+      {
+        "id": "pat.00000010",
+        "exampleIds": [
+          "sent.grc1.01.02.1",
+          "sent.tatoeba.40732"
+        ]
+      },
+      {
+        "id": "pat.00000011",
+        "exampleIds": [
+          "sent.00000016",
+          "sent.gra2.05.02.1",
+          "sent.grb2.01.07.1",
+          "sent.tt.l001-p004.002",
+          "sent.tt.l001-p004.016"
+        ]
+      }
+    ],
+    "sampleMissing": [
+      "pat.00000008",
+      "pat.00000017",
+      "pat.00000029",
+      "pat.00000031",
+      "pat.00000044",
+      "pat.00000045",
+      "pat.00000047",
+      "pat.00000056",
+      "pat.00000067",
+      "pat.00000068",
+      "pat.00000073",
+      "pat.00000075",
+      "pat.00000076",
+      "pat.00000077",
+      "pat.00000078",
+      "pat.00000081",
+      "pat.00000082",
+      "pat.00000084",
+      "pat.00000085",
+      "pat.00000089",
+      "pat.00000103",
+      "pat.00000104",
+      "pat.00000105",
+      "pat.00000106",
+      "pat.00000109"
+    ]
+  }
+}
