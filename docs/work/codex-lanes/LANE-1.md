@@ -39,3 +39,18 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | done 17:50: TRƯỢT. Codex chấm mù bộ H/N/Q: dư âm tương tác 5,5 → 6,5 nhưng hình khối và dễ đọc −0,5; cả chiêu 6,5 → 6,5. Vết tím phẳng, không nguội dần, khó đọc ở góc chơi. Hiệu năng ĐẠT (Δp95 −1,6 ms). Không thử lại: cần vẽ ảnh vết cháy mới, anh duyệt mẫu trước. Vòng 3 đóng, gửi anh | `docs/work/consult/r3-step3-verdict.md` |
 
 **Đạt** ở vòng 3 = pha được sửa tăng ≥ 1 ở trục mục tiêu **và cả chiêu ở góc chơi tăng**, không trục nào tụt, trong ngân sách. Cả chiêu không tăng qua hai bước liền thì dừng và báo anh.
+
+## Vòng 4 (anh duyệt 07/11 17:55: "Làm vòng 4"): bỏ ngôi sao mực, dời số sát thương, vết cháy mới
+
+Luật như vòng 3: mỗi bước đo xong mới làm bước kế; **đạt** = pha được sửa tăng ≥ 1 ở trục mục tiêu **và** cả chiêu ở góc chơi tăng, không trục nào tụt. Chấm bằng Codex trên bộ ảnh nhãn mới (`tools/blind-panel/build-panel.sh`). Hai bước liền không làm cả chiêu tăng thì dừng và báo anh. Bước 3a (vẽ mẫu) không phụ thuộc mã nên chạy xen khi Claude đang đo.
+
+| # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
+|---|---|---|---|---|---|---|---|
+| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | ✅ 17:55 (anh duyệt) | todo | |
+| 19 | ĐO R4-1 (Claude) | — | — | 18 | C | todo (Claude) | |
+| 20 | R4-3a vẽ 2 mẫu vết sét cháy | `lane-R4-3a-scorch-samples.md` | high | — | ✅ 17:55 (anh duyệt) | todo | |
+| 21 | Anh duyệt mẫu vết cháy | — | — | 20 | A | todo (anh) | |
+| 22 | R4-2 số sát thương không che quái | `lane-R4-2-numbers-clear.md` | high | 19 | C: mở khi #19 đo xong | todo | |
+| 23 | ĐO R4-2 (Claude) | — | — | 22 | C | todo (Claude) | |
+| 24 | R4-3b lắp vết cháy đã duyệt | `lane-R4-3b-scorch-wire.md` | high | 21, 23 | C: mở khi #23 đo xong và #21 có bản duyệt | todo | |
+| 25 | ĐO R4-3b và gửi anh (Claude) | — | — | 24 | C | todo (Claude) | |
