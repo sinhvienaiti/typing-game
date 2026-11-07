@@ -42,15 +42,24 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 
 ## Vòng 4 (anh duyệt 07/11 17:55: "Làm vòng 4"): bỏ ngôi sao mực, dời số sát thương, vết cháy mới
 
+> **Tạm dừng từ 07/11 18:10** (anh: "tạm thời dừng lại khi có hạn mức tiếp của codex vậy"). Codex hết hạn mức tuần, mở lại 14/11 09:12. Mọi dòng dưới đây đóng cổng `C: Claude mở lại sau 14/11`.
+>
+> **Hướng mới của anh (07/11 18:05), thay thứ tự cũ.** Ba vấn đề khiến Cột Lôi không như mong đợi:
+> 1. Cột Lôi chỉ nên là **sét đánh xuống**; video đang dùng có cả **hình trụ bao quanh** nên trông kém chất lượng. Bỏ lớp trụ.
+> 2. Tia sét **quá mỏng và đơn**. Nên là **nhiều tia sét giáng xuống liên tiếp trong 3–5 s, phạm vi rộng hơn**, cộng dồn thành sức mạnh của cột Lôi.
+> 3. Vết tím sau cú giáng **không giống vết sét đánh**: đất phải **nứt và cháy**, không phải vệt tím.
+>
+> Khi làm lại, Claude viết lại phiếu theo ba điểm này trước (khung va chạm và số sát thương xếp sau). Câu hỏi mở cho anh lúc đó: nhiều tia trong 3–5 s là chỉ hình ảnh (sát thương như cũ) hay đổi cả lối chơi (nhiều cú, phạm vi rộng hơn)? Nguồn dự kiến: tia sét phân nhánh không có trụ (Blender dựng rồi xuất flipbook, hoặc Firefly từ ảnh đầu đã duyệt); vết nứt cháy (Codex vẽ từ ảnh tham chiếu, hoặc Blender).
+
 Luật như vòng 3: mỗi bước đo xong mới làm bước kế; **đạt** = pha được sửa tăng ≥ 1 ở trục mục tiêu **và** cả chiêu ở góc chơi tăng, không trục nào tụt. Chấm bằng Codex trên bộ ảnh nhãn mới (`tools/blind-panel/build-panel.sh`). Hai bước liền không làm cả chiêu tăng thì dừng và báo anh. Bước 3a (vẽ mẫu) không phụ thuộc mã nên chạy xen khi Claude đang đo.
 
 | # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
 |---|---|---|---|---|---|---|---|
-| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | ✅ 17:55 (anh duyệt) | blocked: Codex hết hạn mức tuần 17:54 (lượt lane1-run-26 thoát vì giới hạn), mở lại 14/11 09:12 | |
+| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | blocked: Codex hết hạn mức tuần 17:54 (lượt lane1-run-26 thoát vì giới hạn), mở lại 14/11 09:12 | |
 | 19 | ĐO R4-1 (Claude) | — | — | 18 | C | todo (Claude) | |
-| 20 | R4-3a vẽ 2 mẫu vết sét cháy | `lane-R4-3a-scorch-samples.md` | high | — | ✅ 17:55 (anh duyệt) | todo | |
+| 20 | R4-3a vẽ 2 mẫu vết sét cháy | `lane-R4-3a-scorch-samples.md` | high | — | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
 | 21 | Anh duyệt mẫu vết cháy | — | — | 20 | A | todo (anh) | |
-| 22 | R4-2 số sát thương không che quái | `lane-R4-2-numbers-clear.md` | high | 19 | C: mở khi #19 đo xong | todo | |
+| 22 | R4-2 số sát thương không che quái | `lane-R4-2-numbers-clear.md` | high | 19 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
 | 23 | ĐO R4-2 (Claude) | — | — | 22 | C | todo (Claude) | |
-| 24 | R4-3b lắp vết cháy đã duyệt | `lane-R4-3b-scorch-wire.md` | high | 21, 23 | C: mở khi #23 đo xong và #21 có bản duyệt | todo | |
+| 24 | R4-3b lắp vết cháy đã duyệt | `lane-R4-3b-scorch-wire.md` | high | 21, 23 | C: Claude mở lại sau 14/11 (viết lại theo hướng mới của anh) | todo | |
 | 25 | ĐO R4-3b và gửi anh (Claude) | — | — | 24 | C | todo (Claude) | |
