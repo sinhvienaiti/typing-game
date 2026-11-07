@@ -35,3 +35,4 @@
 
 ## Nhật ký
 - 07/11 10:05 · Claude · lập kế hoạch; P1, P2 đang chạy Firefly (cổng xoáy take1 xong 09:50); S3-1 xong, S3-2 đang chạy; S2 dừng sau bước 01.
+- 07/11 10:00 · Claude · P1, P2 xong trên Firefly (4 take, 09:48–09:57). Giữ hình đúng ảnh try2; chuyển động nhẹ (cổng xoay, vòng lung linh, chưa tự nở) → nhịp nở và tan để engine làm qua `envelope`. Gửi anh tấm 4 take (`owner-review/2026-11-07/tu-tien/pilot-i2v/`). Phiếu lắp nguồn `lane-P-assemble-sources.md` xếp sau S3.
