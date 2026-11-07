@@ -34,11 +34,12 @@ Việc có nhiều take thì chọn `best`, take tốt nhất. Việc đạt n�
 - Sửa đúng điều đã chê. Thêm lớp hào quang quanh hình chính: lấp lánh, sao nhỏ, đốm sáng mịn, quầng và vòng sáng mềm, viền lung linh. Đòn và chiêu phải bùng nổ, nhiều lớp. Màu theo hệ của việc.
 - Giữ nền đen thuần, camera cố định, lề rộng, không chạm mép khung.
 - **Image-to-video:** giữ nguyên ảnh đầu (không đổi `still`), chỉ đổi lời tả chuyển động. Hình của ảnh không được biến mất hay đổi dạng.
-- **Text-to-video:** chỉ cho chất liệu thuần (lửa, khói, tia, bụi, sóng, đốm). Nếu clip tả một vật có hình dạng rõ (rồng, binh khí, ấn, người) mà là text-to-video, ghi `needsStill: true` và mô tả ngắn ảnh cần vẽ trước. Không viết prompt cho loại này.
+- **Text-to-video:** chỉ khi `kind` là `material`, cho chất liệu thuần (lửa, khói, tia, bụi, sóng, đốm). Nếu clip tả một vật có hình dạng rõ (rồng, binh khí, ấn, người) mà là text-to-video, ghi `needsStill: true` và mô tả ngắn ảnh cần vẽ trước. Không viết prompt cho loại này.
 - Không nhắc tên game, hãng hay nhân vật có bản quyền trong prompt.
 
 ## Đầu ra mỗi đợt
-1. `.local/video-review/results/batch-XX.json`: mảng các mục `{ key, job, take, scores: {appeal, detail, power, motion, fit, technical}, overall, verdict, best, reasons, newPrompt, needsStill, stillBrief }`. `reasons` ngắn, tiếng Việt, nói rõ điều thấy được.
+1. `.local/video-review/results/batch-XX.json`: mảng các mục `{ key, job, take, kind, scores: {appeal, detail, power, motion, fit, technical}, overall, verdict, best, reasons, newPrompt, needsStill, stillBrief }`.
+   - `kind`: `material` khi clip chỉ là chất liệu thuần (tia lửa, khói, bụi, sương, dòng chảy, đốm sáng), `shaped` khi có hình rõ (vòng, cổng, ấn, cột, rồng, binh khí, mảnh vỡ có dáng, khung thẻ). Luật của anh (05/11): `shaped` bắt buộc vẽ ảnh và được duyệt trước, rồi mới làm image-to-video; chỉ `material` được làm từ chữ. `reasons` ngắn, tiếng Việt, nói rõ điều thấy được.
 2. Thêm vào `docs/codex-queue/laneC-report.md` một đoạn ≤ 8 dòng cho đợt:
    - số take đã xem, số PASS, REDO, DROP;
    - 3 lỗi hay gặp nhất;
