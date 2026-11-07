@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 4966,
+  "examplesScanned": 5423,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -251,9 +251,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 101,
-    "withoutCandidates": 4084,
-    "coverage": 0.0241,
+    "withCandidates": 113,
+    "withoutCandidates": 4072,
+    "coverage": 0.027,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -308,6 +308,12 @@
         ]
       },
       {
+        "id": "pv.00000010",
+        "exampleIds": [
+          "sent.tatoeba.48809"
+        ]
+      },
+      {
         "id": "pv.00000011",
         "exampleIds": [
           "sent.tatoeba.18821",
@@ -319,18 +325,11 @@
         "exampleIds": [
           "sent.tt.l005-p002.013"
         ]
-      },
-      {
-        "id": "pv.00000014",
-        "exampleIds": [
-          "sent.tatoeba.33706"
-        ]
       }
     ],
     "sampleMissing": [
       "pv.00000002",
       "pv.00000009",
-      "pv.00000010",
       "pv.00000013",
       "pv.00000019",
       "pv.00000021",
@@ -341,7 +340,6 @@
       "pv.00000029",
       "pv.00000035",
       "pv.00000037",
-      "pv.00000038",
       "pv.00000039",
       "pv.00000040",
       "pv.00000041",
@@ -352,14 +350,16 @@
       "pv.00000046",
       "pv.00000047",
       "pv.00000048",
-      "pv.00000049"
+      "pv.00000049",
+      "chunk.00000001",
+      "chunk.00000002"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 352,
-    "withoutCandidates": 158,
-    "coverage": 0.6902,
+    "withCandidates": 363,
+    "withoutCandidates": 147,
+    "coverage": 0.7118,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -423,7 +423,8 @@
           "sent.tatoeba.2199",
           "sent.tatoeba.17845",
           "sent.tatoeba.29109",
-          "sent.tatoeba.42887"
+          "sent.tatoeba.42887",
+          "sent.tatoeba.48548"
         ]
       },
       {
@@ -454,19 +455,15 @@
     ],
     "sampleMissing": [
       "pat.00000008",
-      "pat.00000017",
       "pat.00000029",
-      "pat.00000031",
       "pat.00000044",
       "pat.00000045",
       "pat.00000047",
       "pat.00000056",
-      "pat.00000067",
       "pat.00000068",
       "pat.00000073",
       "pat.00000075",
       "pat.00000076",
-      "pat.00000077",
       "pat.00000078",
       "pat.00000081",
       "pat.00000082",
@@ -477,7 +474,11 @@
       "pat.00000104",
       "pat.00000105",
       "pat.00000106",
-      "pat.00000109"
+      "pat.00000109",
+      "pat.00000117",
+      "pat.00000132",
+      "pat.00000136",
+      "pat.00000138"
     ]
   }
 }
