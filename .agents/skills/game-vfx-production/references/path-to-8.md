@@ -92,3 +92,27 @@ Within one level, fix shape, crop and missing caster side first, then timing, ma
   3. REDO-BLENDER (render recipes and RGBA).
 - Only the integrator (Claude, or one lab lane) edits manifests and lab call sites.
 - Codex cannot drive Firefly: Claude runs image-to-video from approved stills. The driver refuses text-to-video unless the job says `"material": true`.
+
+## 7. Small measured steps and the performance budget (owner, 07/11/2026)
+The owner said, after round 1 of the pilot: "nên chia nhỏ ra, thử làm 1 vài phần nhỏ trước để kiểm tra xem solution làm có thực sự hiệu quả không, có khả thi đạt trên 8 điểm hay k … đẹp, mượt là sự ưu tiên hàng đầu, nhưng k thể bất chấp … chúng ta chấp nhận đánh đổi hiệu năng để làm cho nó đẹp và mượt, nhưng ở 1 mức nào đó mà thôi, k thể cứ viết 1 đống code phình to, hoặc ném nguyên toàn bộ r làm nó giật lag".
+
+**One small step at a time:**
+- Each step changes one phase or one group of layers, behind a flag, and is measured before the next step starts.
+- **Measure** with a framed before/after capture at the play camera (plus a close-up if needed), a blind tier-B score of the phase changed and of the whole effect, and the frame-time delta.
+- **Continue** only if the step raises its target axes, with no axis dropping and the budget kept. After two steps without a real gain, stop and rethink. Never build the whole effect and judge it only at the end.
+
+**Performance budget per effect:**
+- Measured on the M4 lab: 1920×1080, DPR 1, quality High, median of runs, with `scripts/visual/scenarios/lab-element-perf.mjs` or the same method.
+- **Frame time:** at most **+1.0 ms p95** over the same scene without the effect, and frame p95 stays **≤ 11.5 ms**.
+- **Memory:** extra GPU texture ≤ **64 MB**, with KTX2 when available. Atlases load lazily and free when unused.
+- **Draw calls and video:** ≤ **12 extra draw calls** per instance, pooled; **≤ 3 videos** at once.
+- **No allocation per frame** once warm.
+- **Code stays lean:**
+  - reuse the shared flipbook library, pools, players and the existing phase runners;
+  - one small module per pattern, not per skill;
+  - a step adds about **≤ 250 lines** unless the report justifies more;
+  - no new shader unless a measured A/B shows it is needed.
+- **Prefer the cheapest layer that looks the same:**
+  - a sprite or decal over a full-screen flipbook;
+  - a shorter or smaller atlas when the difference cannot be seen at play size.
+- **Over budget:** cut or merge the weakest layer, or lower its resolution or frame rate where the eye cannot tell. Never let the effect stutter.
