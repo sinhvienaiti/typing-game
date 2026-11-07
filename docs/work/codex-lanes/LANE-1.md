@@ -32,7 +32,7 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
 |---|---|---|---|---|---|---|---|
 | 12 | R3-1 quái nhận đòn có lực | `lane-R3-1-foe-reaction.md` | high | 9 | ✅ 15:55 (anh duyệt) | done | `games/.wt-ic-lab-all`: phản ứng thân R3-1; 43 test đạt; chờ Claude đo/chấm #13; `docs/codex-queue/laneL1-report.md` |
-| 13 | ĐO R3-1 (Claude): cả chiêu ở góc chơi phải tăng | — | — | 12 | C | doing (Claude): quay và đo từ 16:01 | |
+| 13 | ĐO R3-1 (Claude): cả chiêu ở góc chơi phải tăng | — | — | 12 | C | doing (Claude): lần 1 TRƯỢT 16:10 (phản ứng quái +0, cả chiêu 6,5 → 6,5; hiệu năng đạt). Thử lại một lần e132c92 (nghiêng 12° → 20°, về sau 0,45 s), quay từ 16:17 | `docs/work/consult/r3-step1-verdict.md` |
 | 14 | R3-2 đường dẫn thành dải sét | `lane-R3-2-guide-strip.md` | high | 13 | C: mở khi #13 đạt | todo | |
 | 15 | ĐO R3-2 (Claude) | — | — | 14 | C | todo (Claude) | |
 | 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | C: mở khi #15 đạt | todo | |

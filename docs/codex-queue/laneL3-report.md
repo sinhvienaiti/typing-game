@@ -158,3 +158,33 @@ Seam54khung4,010×;tìm496cửa sổ,ứng viên39khung[26,65)1,491× chỉ số
 Anh/Claude xem recipe/compare-6,đóng lại39khung rồi kiểm10chu kỳ24fps,nền sáng/tối,cỡ chơi,tilt/pivot/che chữ/mips;STUN hiện modulo nên không thay trực tiếp. Chưa kiểm host/hiệu năng/tầngB;2idphụ chỉ ghi recipe,chưa tạo.
 Không sinh AI/Blender/browser/build/test game hoặc sửa nguồn/mã/manifest đang dùng;không mở cổng,không hết hạn mức. Dừng sau đúng một việc.
 
+
+**07/11/2026 16:06 · L3 việc#2 / strip-fire-sheath-flow-w2__take2 · A-FAIL→S3.** Đúng một dòng;đã nhả khóa,việc#2 trở lại`todo (lặp)`.
+Đầu ra:`games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/strip-fire-sheath-flow-w2/v1/` — MP4[12,66)@24/2,250s/1080p,54mẫu thật,atlas/KTX2,recipe/envelope/evidence/SHA,compare-6/package-check;script/tấmghép tại`.local/s1/strip-fire-sheath-flow-w2__take2/`.
+Tách một dải trên/taper;lề14,635%,p99RGB3/0/0,biên/gutter0;trôi4,450%,sizeY13,825%,seam8,376×;31cửa sổ24khung không đạt đồng thời ổn định. Xem12ảnh,dọn162PNG riêng(prune:not-tmp).
+KTX2đã giải mã13mip,1604080byte,GPU11.43MiB;hạ ô xuống512×288 sau lỗi giới hạntexel encoder,giữ clip1080p. Đã thêm`S1-T0-fire-sheath-flow`vàoS3;chờ cổng/hai mẫu,không tự chạyBlender.
+Anh/Claude xem recipe/compare-6;S3 kiểm footprint/mask cho strip trước quyết định render. Gói thửkhông tích hợp,không thay take3 hiện dùng;chưa kiểm tốc độ thật/10vòng,cỡchơi,hiệu năng,tầngB;3idchấtliệu/glint/emberchỉ ghi recipe.
+Không sinhAI/browser/Blender/build/testgame hoặc sửa nguồn/mã/manifest đang dùng;không mở cổng,không hết hạn mức. Bằng chứng trong phạm vi phiếu;sandbox không ghi review sibling. Dừng sau đúng một việc.
+
+
+**07/11/2026 16:13 · L3 #2 / style-w2-fire-qi-burst__take1 · A-PASS tầng A ngoại tuyến cho vành impact hữu hạn.** Đúng một dòng; #2 trở lại `todo (lặp)`,đã nhả hai khoá.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/style-w2-fire-qi-burst/v1/` — MP4 1080p,24mẫu[12,36)@24→48fps/0,500s,atlas/KTX2,recipe/envelope/evidence/SHA,compare-6 và previewalpha.
+Lề7,037%,trọng tâm toàn vành trôi0,313%,p99RGB3/2/1,biên/gutter0;KTX2 1.583.007byte/12mip,GPU4,500MiB;24/24mẫu thật,previewcuốiRGB0. Nở chủ đích,không loop(seam6,529×).
+Đã xem9ảnh,soi42khung nguồn;đề xuất18khung mở thành24 sau kiểm. Đã dọn115PNG riêng(prune:not-tmp),giữ tấmghép/JSON/gói;nguồn/prompt giữ nguyênSHA. 3idphụS3 chờ cổng/hai mẫu,không tự render.
+Anh/Claude xem recipe/compare-6/ktx2-native-compare/envelope-preview;kiểm tốc độ thật/cỡchơi/nền sáng-tối/mips/phối cảnh/che chữ/nhiềuinstance/hiệu năng và tầngB tronghost. Metadata cũ32khung@12fps không thay trực tiếp.
+Không tích hợp/chấm tầngB,sinhAI/browser/Blender/build/testgame hoặc sửa nguồn/mã/manifest đang dùng;chỉ làm một dòng rồi dừng. Bằng chứng trong phạm vi phiếu,sandbox không ghi review sibling.
+
+
+2026-11-07T16:19:57+07:00 · L3 #2 / style-w2-fire-ribbon__take1 · A-PASS tầng A ngoại tuyến cho thân dải hữu hạn1s; đúng một dòng, #2 giữ todo(lặp), còn174dòngtodo, đã nhả hai khóa.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/style-w2-fire-ribbon/v1/ — MP4 1920×1080,[16,40)@24,atlas/KTX2,recipe/envelope/evidence/SHA,compare-6,previewalpha.
+Xoay24,4°,fit0,85,taperđuôi;lềtheotrục8,906%,trôi0,717%,sizeX/Y0,768/3,878%,p99RGB/biên/gutter0;24/24khungkhácnhau. KTX2 1.458.565byte/13mip,GPU7,533MiB;không loop/tile(seam5,907×).
+Đã xem11ảnh/72khungnguồn,2lượtchỉnh;dọn144PNGriêng(prune:not-tmp),nguồn/prompt giữ nguyênSHA. 2idphụ chỉ ghi recipe,chờ cổng/hai mẫu;không tạoAI/Blender hoặc sửa nguồn/mã/manifest.
+Anh/Claude xem recipe,compare-6,ktx2-native-compare,envelope-preview;kiểm tốc độ thật/cỡchơi/nền sáng-tối/trail/mips/chechữ/nhiềuinstance/hiệu năng và tầngB. Metadata cũloop/tile48khung không thay trực tiếp.
+Chưa tích hợp/chấm tầngB;không browser/build/testgame,mởcổng hoặc làm dòng kế. Bằng chứng trong phạm vi phiếu,sandbox không ghi review sibling;không hết hạn mức.
+
+2026-11-07T16:26:02+07:00 · L3 #2 / thunder-ground-impact__take1 · A-FAIL→S3; đúng một dòng, #2 giữ todo (lặp), còn 173 dòng todo; đã nhả hai khoá.
+Đầu ra: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/thunder-ground-impact/v1/ — MP4 1080p/36 mẫu [12,48)@24→48fps/0,750s, atlas/KTX2, recipe/envelope/evidence/SHA, compare-6 và preview alpha.
+Hai lượt grade/mask còn mảnh xám/tím trong tâm ở crop 1:1, thiếu matte tách; lề 11,019%, trôi 0,335%, p99 RGB/biên/gutter 0 không bù lỗi hình. KTX2 1.630.553 byte/12 mip, GPU 7,500 MiB; 36/36 mẫu thật, preview cuối RGB 0; không loop (seam 5,658×).
+Đã xem 12 ảnh, soi 36 khung nguồn và 36 khung dẫn xuất; dọn 144 PNG riêng (prune:not-tmp), giữ nguyên SHA nguồn/prompt. Thêm S1-T0-thunder-ground vào S3 chờ cổng/hai mẫu; 4 id lớp tách/core/glint trong recipe, chưa render.
+Anh/Claude xem recipe/compare-6 và crop trong .local/s1/thunder-ground-impact__take1/derived-03.jpg; kiểm matte/tái dùng trước render, camera 55°/layFlat/nhịp vòng, mips, nền sáng/tối, cỡ chơi/hiệu năng rồi tầng B. Gói thử chưa tích hợp, không thay metadata cũ 32 khung@12fps.
+Không sinh AI/Blender/browser/build/test game hoặc sửa nguồn/mã/manifest đang dùng; bằng chứng trong phạm vi phiếu, sandbox không ghi review sibling. Không hết hạn mức; dừng sau đúng một việc.
