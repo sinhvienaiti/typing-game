@@ -54,6 +54,7 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
      - an end or loop the engine can shape (curves, erosion, phase offset).
    - The 1–10 score and the 8.5 bar apply to the composited effect in the play host, never to one layer alone: in a commercial game a lone smoke or spark layer does not reach 8 either.
    - Fix the weakest layer of the composite rather than regenerating every source.
+   - The full agreed process (tier A boxes, what fixes what, triage labels, stills for image-to-video, streams) is [path-to-8](references/path-to-8.md).
 
 ## Hard rules
 
@@ -115,6 +116,7 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
 - [recipes](references/recipes.md): Firefly Video → flipbook, Blender fire and smoke → flipbook, glint sheets, painted marks, smooth motion, sound.
 - [runtime-packaging](references/runtime-packaging.md): the hybrid rule (06/11/2026). Which layer plays as video, flipbook, strip or decal, particles or model; settings, budgets and the side-by-side check.
 - [quality-rubric](references/quality-rubric.md): what separates 6/10 from 8.5/10, checked on frames and in motion.
+- [path-to-8](references/path-to-8.md): two-tier judging, what the engine and the source each fix, triage labels, stills for image-to-video, the three streams (07/11/2026).
 - The research behind this skill: the VFX production pipeline research in docs/games (VFX_PRODUCTION_PIPELINE, written 04/11/2026) (ChatGPT and Gemini, checked).
 - Existing tools and know-how:
   - `tools/vfx-flipbook` (atlas, contact sheet, metrics from a clip);
