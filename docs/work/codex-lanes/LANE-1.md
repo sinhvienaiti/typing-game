@@ -13,8 +13,8 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 3b | ĐO lại R2-1 (Claude); trượt lần nữa thì dừng và nghĩ lại (§7) | — | — | 3a | C | done | ĐẠT: tụ lực +4,5/+4,0, phóng +1,0/+1,5, Δp95 0,1 ms (`docs/work/consult/r2-step1b-verdict.md`) |
 | 4 | R2-2 bay và thân cột | `lane-R2-2-thunder.md` | high | 3b | ✅ 13:50 (#3b đạt) | done | `5c4bf30` (Claude chạy đủ vitest 14:30) |
 | 5 | ĐO R2-2 (Claude) | — | — | 4 | C | done | ĐẠT: bay +1,5/+2,5, cột +1,5/+0,5; cả chiêu 5,5 → 6,5 ở góc chơi; p95 9,8 ms (`docs/work/consult/r2-step2-verdict.md`) |
-| 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | ✅ 14:50 (#5 đạt) | todo | |
-| 7 | ĐO R2-3 (Claude) | — | — | 6 | C | todo (Claude) | |
+| 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | ✅ 14:50 (#5 đạt) | done | commit (Claude chạy đủ vitest 15:00) |
+| 7 | ĐO R2-3 (Claude) | — | — | 6 | C | doing (Claude): quay và đo từ 15:01 | |
 | 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | C: mở khi #7 đạt | todo | |
 | 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | todo (Claude) | |
 | 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | done | commit (Claude chạy đủ vitest 13:30) |

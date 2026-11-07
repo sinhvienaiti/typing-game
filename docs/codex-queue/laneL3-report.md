@@ -73,3 +73,34 @@ Lề25,926%,trôi0,293%,p99nền0,alpha mép0; nởX/Y149,032/197,521% có chủ
 Anh/Claude xem recipe/compare-6; kiểm nhịp2×/48fps,tương phản mực trên foe,nội suy/mips,nhiều instance và hiệu năng host trước tích hợp; chưa thay manifest đang dùng.
 Không tạo art/Blender/browser/build/test hoặc sửa nguồn/mã game; chưa làm dòng tiếp theo theo runner.
 
+
+**07/11/2026 14:35 · L3 việc #2 / T0 `boss-death-explosion-r2__take1` · A-FAIL→S3.** Xong đúng một dòng; #2 giữ `todo (lặp)`, đã nhả hai khoá.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/boss-death-explosion-r2/v1/` — gói thử MP4mask1080p,24mẫu thật[12,36)@24→36fps/0,667s,RGBAatlas/KTX2,recipe/envelope/evidence/SHA-256,compare-6/package-check;accepted=false.
+Soi đủ36khung f12–47; bỏ lõi tạo lỗ tròn rõ, khói trắng vẫn dính tia và thiếu alpha thật; chuyển S3 tách chất liệu. Lề15,093%,trôi1,493%,sizeX/Y26,202/45,669% nở burst,p99/biên0 không bù lỗi vai trò/matte.
+KTX2 931056byte,13mip,gutteralpha0,MAEalphaROI1.721/255,GPU8.00MiB;24/24khung khác nhau. Xem7ảnh,dọn84PNG riêng;prune từ chối not-tmp. Recipe có đường bao từng khung và3id lớp tách/radiance chờ parent/cổng.
+Anh/Claude xem recipe/compare-6 và derived-*.jpg; chốt render tia/khói tách lớp, đối chiếu smoke-ring có sẵn. Chưa tích hợp/chấm tầngB hoặc đo host; giữ manifest đang dùng.
+Không tạo AI art/Blender/browser/build/test hoặc sửa nguồn/mã game; dừng sau đúng một việc.
+
+
+**07/11/2026 14:41 · L3 việc #2 / T0 `captain-aura-ground-loop__take1` · A-PASS ngoại tuyến cho viền đỏ phụ hữu hạn.** Đúng một dòng; #2 giữ `todo (lặp)`, đã nhả hai khoá.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/captain-aura-ground-loop/v1/` — MP4 1080×1080,54mẫu[12,66)@24/2,250s,atlas/KTX2,recipe/envelope/evidence/SHA-256,compare-6/package-check.
+Tách sương trung tính,fit tĩnh0,90;lề7.037%,trôi1.769%,sizeX/Y0.996, 0.951%,p99RGB/biên0;54/54khungkhácnhau.KTX2 2478854byte,12mip,gutter0,MAEROI2.273/255,GPU14.29MiB.
+Không loop(seam2.128×),không nhận sương tối hoặc toàn aura;2idphụS3 chờ cổng. Đã xem12ảnh,dọn162PNG riêng;prune từ chối not-tmp. Giảm cell512→448 để qua giới hạn texel encoder,không phải hết hạn mức.
+Anh/Claude xem recipe/compare-6 và ktx2-native-compare;code hiện modulo loop nên không thay trực tiếp. Cần kiểm host tốc độ24fps,nền sáng,camera ground,mips,end envelope,nhiềuinstance/hiệu năng và tầngB.
+Không tạo AI art/Blender/browser/build/test hoặc sửa nguồn/mã/manifest đang dùng;chưa tích hợp. Dừng sau đúng một việc.
+
+
+**07/11/2026 14:47 · L3 việc #2 / T0 `cutin-ember-drift__take1` · A-FAIL→S3.** Xong đúng một dòng; #2 giữ `todo (lặp)`, đã nhả hai khóa.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/cutin-ember-drift/v1/` — gói thử MP4 1920×1080,72mẫu[12,84)@24/3s,atlas/KTX2,recipe/envelope/evidence/SHA-256,compare-6/package-check;accepted=false.
+Mask fleck lớn loại92,347–95,642% năng lượng, mất bụi mịn và để quầng rỗng glint; chuyển S3 tách bụi/glint. Lề5.938%,trôi53.371%,sizeX/Y8.393, 54.352%;nềnRGBp994.000, 1.000, 1.000/255,biên0;không loop(seam3.665×).
+KTX2861292byte,13mip,gutter0,MAEROI0.536/255,GPU13.50MiB;72/72mẫu khác nhau. Xem12ảnh,dọn216PNG tự tạo;prune từ chối not-tmp. Có đường bao từng khung và2id S3 chờ cổng.
+Anh/Claude xem recipe/compare-6; bản thử không tích hợp. Chưa chứng minh gió trái→phải,không chấm tầngB hoặc đo host; mã hiện modulo nên finite clip không thay trực tiếp.
+Không tạo AI art/Blender/browser/build/test hoặc sửa nguồn/mã/manifest đang dùng;dừng sau đúng một việc.
+
+
+**07/11/2026 14:55 · L3 #2 / T0 `cutin-speed-lines-loop__take1` · A-PASS ngoại tuyến hữu hạn.** Xong đúng một dòng; #2 giữ `todo (lặp)`, đã nhả hai khóa.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/cutin-speed-lines-loop/v1/` — MP4 1080p,24mẫu[12,36)@24/1s,atlas/KTX2,recipe/evidence/SHA-256 và preview alpha.
+Tâm rỗng max0/255; hội tụ trôi1,287%; p99RGB1/255 trên cùng nền nguồn (phân lại support sau grade:6/255, ghi rõ trong recipe). Biên tia full-screen có chủ ý; không loop(seam6,606×).
+KTX2 5.007.313byte,13mip,gutter0,MAEROI0,824/255,GPU10,42MiB(fallbackRGBA8 41,68MiB);24/24mẫu khác nhau,preview cuốiRGB0. Xem7ảnh,dọn96PNG riêng;prune từ chối not-tmp.
+Anh/Claude xem `recipe.md`, `compare-6.jpg`, `package-native-1/2.jpg`, `package-bright-6.jpg`, `envelope-preview-1080p.mp4`; còn kiểm host tốc độ thật/upscale/cropband/mips/end/hiệu năng và tầngB. 1id glint phụ chuyểnS3 chờ cổng; mã hiện modulo không thay trực tiếp bằng finite clip.
+Không tạo AI art/Blender/browser/build/test hoặc sửa nguồn/mã/manifest đang dùng; chưa tích hợp. Dừng sau đúng một việc.
