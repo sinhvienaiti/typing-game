@@ -8,6 +8,8 @@ Do việc phân loại toàn kho (T0, luồng 2) điền.
 |---|---|---|---|---|---|
 | S1-T0-stagger-loop | `stagger-stars-loop__take1` | Vòng trong báo choáng trên đầu; King2s/phá thế6s | Đủ source/prompt/hash/use; thiếu kiểm động. Gói thử54khung[12,66)@24 seam4,010×;tìm496cửa sổ,ứng viên39khung[26,65)seam1,491× chỉ số học. Claude đóng lại39khung rồi xem10chu kỳ24fps,cỡ chơi,nền sáng/tối,tilt/pivot/che chữ,mips và tốc độ/quỹ đạo tại nối;không tự nhận loop hoặc chuyển Blender khi chưa thấy lỗi. Recipe/evidence/SHA: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/stagger-stars-loop/v1/recipe.md`. Metadata `loop:false`,không tích hợp vào modulo STUN hiện tại. | P1 | todo |
 
+| S1-T0-world-light-shafts-speed | `world-light-shafts-loop__take1` | Tia nắng chéo môi trường hữu hạn; [24,60) @24/1,5s | Đủ source/prompt/hash/use và góiMP4/atlas/KTX2/recipe; thiếu quan sát động24fps/cỡchơi trên sân sáng/tối, cạnh plane và nhịp sáng. Trôi1,962%,cỡ≤1,325%,p99nềnnguồn0,biên≤1/gutter0; seam8,211×,không loop. Claude kiểm `keep/world-light-shafts-loop/v1/envelope-preview.mp4`, góc tia do plane12:10, chữ/foe/native/mips/ngân sách rồi kết luận A theo vai trò hữu hạn. Không tự chuyển S3 khi chưa thấy lỗi vật liệu. Recipe: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/world-light-shafts-loop/v1/recipe.md`. | P1 | todo |
+
 <!-- T0:header -->
 ## T0 · Định tuyến toàn kho
 
