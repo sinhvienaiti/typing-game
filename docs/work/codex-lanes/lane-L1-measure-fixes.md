@@ -29,3 +29,8 @@ Nguồn: `docs/work/consult/codex-pilot-verdict.md` §5 (các mục "Sửa cỡ 
 
 ## Chốt của Claude (07/11 12:35)
 Được sửa **tối thiểu** 2 file trong `src/view/skills/` cần cho vai trò `ringBurst`, ghi lý do trong báo cáo. Không đổi hình hay nhịp của chiêu khác. Tự chạy `npx --no-install vitest run --maxWorkers=4` toàn bộ.
+
+## Claude chạy toàn bộ vitest (07/11 13:00): còn trượt
+- `tests/lab/pilot-measure-fixes.test.ts` › Blood's real release and the isolated probe share the same grounded ring pool and finish
+- `tests/lab/pilot-measure-fixes.test.ts` › keeps other elements' release unchanged even when their manifest declares a ring
+Sửa cho qua, **không sửa test cũ để che lỗi**. Nếu sandbox không chạy được toàn bộ vitest, chạy riêng từng file test có liên quan bằng `npx --no-install vitest run <file>` và ghi lại kết quả.

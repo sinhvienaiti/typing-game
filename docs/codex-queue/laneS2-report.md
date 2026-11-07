@@ -11,3 +11,22 @@
 - 2026-11-07T12:22:48+07:00: T0 bước 2 — xem 15 tấm 6 khung, xếp 15 key thành 13 việc mới (GIỮ-CHỈNH: 11; LÀM-LẠI-BLENDER: 1; LÀM-LẠI-ẢNH, ảnh=mới: 1); đã xếp 583/640 key thành 446 việc, còn 57 key. Kiểm phủ phần đã xếp: mỗi key đúng một việc, không trùng/sót; không còn key đã chấm chưa xử lý. Gộp ba take twin-fire thành một việc; các đoạn giữ/matte/seam và hướng nội chuyển động cần kiểm frame liên tiếp, chưa chứng nhận tầng A. Dừng trước void-ground-impact; chưa ghi danh sách luồng.
 - 2026-11-07T12:25:51+07:00: T0 bước 2 — xem 15 tấm 6 khung, xếp 15 key thành 14 việc mới (GIỮ-CHỈNH: 11; LÀM-LẠI-BLENDER: 2; LÀM-LẠI-ẢNH, ảnh=mới: 1); đã xếp 598/640 key thành 460 việc, còn 42 key. Kiểm phủ phần đã xếp: mỗi key đúng một việc, không trùng/sót; không còn key đã chấm chưa xử lý. Gộp hai take water-big-burst; đoạn giữ/matte/seam và chuyển động nội cần kiểm frame liên tiếp, chưa chứng nhận tầng A. Dừng trước water-impact; chưa ghi danh sách luồng.
 - 2026-11-07T12:28:37+07:00: T0 bước 2 — xem 15 tấm 6 khung, xếp 15 key thành 14 việc mới (GIỮ-CHỈNH: 9; LÀM-LẠI-BLENDER: 3; LÀM-LẠI-ẢNH, ảnh=mới: 2); đã xếp 613/640 key thành 474 việc, còn 27 key. Kiểm phủ phần đã xếp: mỗi key đúng một việc, không trùng/sót; không còn key đã chấm chưa xử lý. Gộp hai take wind-big-burst; đoạn/matte/seam và chuyển động nội cần kiểm frame liên tiếp, chưa chứng nhận tầng A. Dừng trước wind-impact; chưa ghi danh sách luồng.
+- 2026-11-07T12:32:54+07:00: T0 bước 2 — xem 15 tấm 6 khung, xếp 15 key thành 15 việc mới (GIỮ-CHỈNH: 11; LÀM-LẠI-BLENDER: 3; LÀM-LẠI-ẢNH, ảnh=mới: 1); đã xếp 628/640 key thành 489 việc, còn 12 key. Kiểm phủ phần đã xếp: mỗi key đúng một việc, không trùng/sót; không còn key đã chấm chưa xử lý. Đoạn/matte/seam và chuyển động nội cần kiểm frame liên tiếp, chưa chứng nhận tầng A. Dừng trước wood-pillar; chưa ghi danh sách luồng.
+- 2026-11-07T12:35:19+07:00: T0 bước 2 — xem 12 tấm 6 khung, xếp 12 key cuối thành 12 việc mới (GIỮ-CHỈNH: 8; LÀM-LẠI-ẢNH, ảnh=mới: 3; LÀM-LẠI-BLENDER: 1); đã xếp 640/640 key thành 501 việc, còn 0 key. Kiểm phủ toàn kho: mỗi key đúng một việc, không trùng/sót. Đoạn/matte/seam và chuyển động nội cần kiểm frame liên tiếp, chưa chứng nhận tầng A. Chưa ghi danh sách luồng; lần sau làm bước 3 theo khoá.
+
+- 2026-11-07T12:37:39+07:00: T0 bước 3 — ghi 640 key thành 501 việc vào 5 danh sách dưới khoá; còn 0 key chưa xếp và 0 key chưa ghi. Kiểm phủ bằng `.local/s2/verify-streams.py`: đủ 640, không trùng/sót/ngoại lai; giữ nguyên 20 hàng gốc và các việc phụ của luồng 1. Gộp 2 dòng T0 cũ vào việc v2 tương ứng; không xoá media. Mọi dòng T0 là `todo`, chưa chứng nhận tầng A. Bước kế tiếp: bước 4.
+
+Bảng tổng bước 3 (đếm việc, không đếm take; NEE là trạng thái thiếu bằng chứng):
+
+| Nhãn / trạng thái | P1 | P2 | P3 | P4 | Tổng việc |
+|---|---:|---:|---:|---:|---:|
+| GIỮ-CHỈNH | 21 | 42 | 12 | 115 | 190 |
+| LÀM-LẠI-ẢNH | 57 | 20 | 29 | 102 | 208 |
+| LÀM-LẠI-BLENDER | 25 | 12 | 0 | 54 | 91 |
+| NEE | 0 | 0 | 0 | 12 | 12 |
+| BỎ | 0 | 0 | 0 | 0 | 0 |
+| **Tổng** | 103 | 74 | 41 | 283 | 501 |
+
+Ảnh: giữ 132, sửa 3, mới 73. 20 hàng gốc và các dòng T0 «bổ sung hàng» tính chung một việc; việc phụ do S1 thêm được giữ nguyên và không tính vào 501 việc T0. Biên bản kiểm phủ: `.local/s2/coverage-step3.json`.
+
+- 2026-11-07T12:38:50+07:00: S2b — chờ T0. Bảng stream-2-image.md đã có 208 dòng nhưng checkpoint.json vẫn ở bước 3, next_step=4, còn bước ghi “T0 xong”; chưa chạy image_gen, chưa tạo i2v-jobs.json, chưa đổi trạng thái. Tiếp tục S2b sau xác nhận T0 hoàn tất; lưu ý boss-entrance-vortex-still.v1-try1/try2.png đã tồn tại, try2 là ảnh tham chiếu đã duyệt, cần giữ nguyên khi nối việc.

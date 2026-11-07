@@ -21,3 +21,7 @@ Kết quả chấm mù bước 1: `docs/work/consult/r2-step1-verdict.md`, **TR�
 - **Được sửa thêm:** `src/lab/five-phase-clip.ts` (chỗ nối nhận tiến độ gõ trước khi phóng) và chỗ đọc tiến độ gõ trong `src/lab/skills-main.ts`, tối thiểu. Không đổi sự kiện hay thời điểm gameplay.
 - **Kịch bản quay:** cảnh `TP` trong `scripts/visual/scenarios/lab-pilot-ab.mjs` thêm `typed=1` cùng `wpm` như các cảnh khác, để có pha tụ lực theo gõ. Ghi vào báo cáo.
 - Tự chạy `npx --no-install vitest run --maxWorkers=4` toàn bộ.
+
+## Claude chạy toàn bộ vitest (07/11 13:00): còn trượt
+- `tests/lab/charge-fill-fx.test.ts` › existing lab release timing › observes word changes before typing, updates the last letter before release, and draws before render. Bản sửa nhịp vòng ấn đã đổi thứ tự gọi lúc gõ và lúc phóng mà test này giữ.
+Sửa cho qua, **không sửa test cũ để che lỗi**. Nếu sandbox không chạy được toàn bộ vitest, chạy riêng từng file test có liên quan bằng `npx --no-install vitest run <file>` và ghi lại kết quả.
