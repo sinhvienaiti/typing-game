@@ -184,6 +184,11 @@ That is about 19 M input tokens in 40 minutes. The owner noticed the quota drain
 - **At most 2 Codex lanes** unless the owner asks for more. Pause a lane whose input depends on another lane's output.
 - **Medium** for routing and mechanical work, **high** only where a step needs visual or design judgement.
 - **Check the cost:** sum `usage` in `events.jsonl` after the first runs. If a run passes about 3 M input tokens, split it further.
+- **Daily Codex budget (since 07/11 night review).** On 07/11 the whole weekly quota (plus plan) went in about 12 hours: 136 runs, 162.9 M input tokens after the 05:30 reset. Codex then sat idle until 14/11.
+  - Cap Codex at about 1/7 of the week per day: about 23 M input tokens. Sum `.local/codex-runs/*/events.jsonl` from 00:00 at each feeder check.
+  - At the cap, stop topping up every lane and say so to the owner in one line.
+  - A row whose verdict needs motion seen at real speed ("not enough evidence" from stills) goes to Claude's batch review, never back to a Codex runner.
+- **Fix the base before polishing.** Before small measured steps on an effect, compare its main source with the owner's look rules (for example memory `lightning-strike-look`) and show the owner one frame. On 07/11, three rounds of Thunder Pillar steps moved the score 5.5 → 6.5 while the base pillar video was wrong.
 
 ## The double-review protocol (every analysis, plan, design and solution)
 
