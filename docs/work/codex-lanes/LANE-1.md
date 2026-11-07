@@ -36,6 +36,6 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 14 | R3-2 đường dẫn thành dải sét | `lane-R3-2-guide-strip.md` | high | 13 | ✅ 16:55 (Claude: #13 trượt hai lần, luật vòng 3 dừng khi hai bước liền không tăng) | done 16:43 | `games/.wt-ic-lab-all`: dải sét R3-2; 35 test + probe + TypeScript đạt; chờ Claude đo/chấm #15; `docs/codex-queue/laneL1-report.md` |
 | 15 | ĐO R3-2 (Claude) | — | — | 14 | C | done 17:20: ĐẠT. Codex chấm mù bộ D/R/W: pha bay nhịp và lực 3,5 → 5,5, tương tác 4,5 → 5,5, không trục nào tụt; cả chiêu 6,0 → 6,5. Hiệu năng ĐẠT (Δp95 −1,0 ms). Còn yếu: đầu sáng chưa nổi, đuôi chưa thon | `docs/work/consult/r3-step2-verdict.md` |
 | 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | ✅ 17:20 (#15 đạt) | done 17:19 | `games/.wt-ic-lab-all`: dấu Lôi nguội R3-3; 40 test + probe + TypeScript đạt; chờ Claude đo/chấm #17; `docs/codex-queue/laneL1-report.md` |
-| 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | doing (Claude): R3-3 đã commit (1.602 test); quay A/B và đo từ 17:35 | |
+| 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | doing (Claude): hiệu năng ĐẠT (Δp95 −1,6 ms, p95 7,8 ms); Codex chấm mù bộ H/N/Q từ 17:39 (`lane-R3-3c-judge.md`) | |
 
 **Đạt** ở vòng 3 = pha được sửa tăng ≥ 1 ở trục mục tiêu **và cả chiêu ở góc chơi tăng**, không trục nào tụt, trong ngân sách. Cả chiêu không tăng qua hai bước liền thì dừng và báo anh.
