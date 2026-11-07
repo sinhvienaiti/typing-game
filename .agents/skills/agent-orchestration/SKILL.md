@@ -166,6 +166,25 @@ Rules:
 
   - Always set `model` explicitly on Agent and workflow `agent()` calls. A missing `model` means the top model.
 
+### Since 07/11/2026: small Codex runs (owner: "Giảm và chia nhỏ")
+A Codex run re-sends its whole context at every step, so cost grows faster than the work. This was measured on 07/11 from `.local/codex-runs/<lane>/events.jsonl`, counting input tokens per finished run (about 95 % of them cached):
+
+| Run | Input tokens |
+|---|---|
+| reviewing 50 video sheets | 6.3 M |
+| one lab ticket | 4.3 M |
+| a consult | 2.5 M |
+
+That is about 19 M input tokens in 40 minutes. The owner noticed the quota draining.
+- **One step per run.** A ticket does one item, or one small group, then stops. Its state lives in a checkpoint file, so the next run resumes with a fresh context. Queue one feed line per step; a spare line that finds nothing to do exits cheaply.
+- **Limit images per run:**
+  - reading or routing from JSON: up to about 80 items;
+  - viewing sheets: up to about 15 images;
+  - frame-by-frame checks: one clip.
+- **At most 2 Codex lanes** unless the owner asks for more. Pause a lane whose input depends on another lane's output.
+- **Medium** for routing and mechanical work, **high** only where a step needs visual or design judgement.
+- **Check the cost:** sum `usage` in `events.jsonl` after the first runs. If a run passes about 3 M input tokens, split it further.
+
 ## The double-review protocol (every analysis, plan, design and solution)
 
 Use it before building any feature, effect, art, system or rework. Skip it only for purely mechanical work (a typo, a one-line fix, re-running a measurement, moving files), and say so when you skip.
