@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 1753,
+  "examplesScanned": 1825,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 8,
-    "withoutCandidates": 4992,
-    "coverage": 0.0016,
+    "withCandidates": 10,
+    "withoutCandidates": 4990,
+    "coverage": 0.002,
     "sampleMatched": [
       {
         "id": "col.00000010",
@@ -176,6 +176,12 @@
         ]
       },
       {
+        "id": "col.00000085",
+        "exampleIds": [
+          "sent.tt.l002-p005.017"
+        ]
+      },
+      {
         "id": "col.00000098",
         "exampleIds": [
           "sent.tt.l001-p002.015"
@@ -191,6 +197,12 @@
         "id": "col.00000119",
         "exampleIds": [
           "sent.tatoeba.9048775"
+        ]
+      },
+      {
+        "id": "col.00000139",
+        "exampleIds": [
+          "sent.tt.l014-p001.013"
         ]
       },
       {
@@ -236,9 +248,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 28,
-    "withoutCandidates": 4157,
-    "coverage": 0.0067,
+    "withCandidates": 29,
+    "withoutCandidates": 4156,
+    "coverage": 0.0069,
     "sampleMatched": [
       {
         "id": "pv.00000001",
