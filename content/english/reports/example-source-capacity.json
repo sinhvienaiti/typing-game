@@ -1,12 +1,12 @@
 {
-  "schemaVersion": 1,
-  "scope": "group-1-step-2-current-project-original-intake-capacity",
-  "reviewState": "blocked-source-capacity",
+  "schemaVersion": 2,
+  "scope": "group-1-step-2-configured-example-intake-capacity",
+  "reviewState": "editorial-review-required",
   "target": {
     "id": "example-sentences",
     "minimum": 100000,
-    "published": 2213,
-    "remainingPublishedDeficit": 97787
+    "published": 2233,
+    "remainingPublishedDeficit": 97767
   },
   "currentBoundedQueue": {
     "candidates": 1000,
@@ -18,9 +18,51 @@
     "passages": 300,
     "eligibleUniqueRawSentences": 5588,
     "unreviewedRawSentences": 4588,
-    "optimisticPublishedUpperBound": 6801,
-    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 93199,
+    "optimisticPublishedUpperBound": 6821,
+    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 93179,
     "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
+  },
+  "additionalPinnedLanes": [
+    {
+      "source": "tatoeba",
+      "snapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+      "license": "CC-BY-2.0-FR",
+      "pinPath": "content/english/sources/tatoeba-english-2026-10-31.json",
+      "pinSha256": "a7ec53264d152778ba085af583e2d57e9cff1833ee91044121278b7ae300d6cd",
+      "canonicalShards": [
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/000.jsonl.gz.b64",
+          "sha256": "d8acf47f4bb6fb522642e4f4acb13e7e9da6b05f7cd3d47c8773e59b39492e4c"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/001.jsonl.gz.b64",
+          "sha256": "845795255ab7922e7a6daeecd636623fe90739abf7bd99dd9f70d799e639a4cf"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/002.jsonl.gz.b64",
+          "sha256": "97f9f5c98eb5c9f30a9540b6ebcd9abb2a8dfa0bbd9ddefa9189bb3337f82230"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/003.jsonl.gz.b64",
+          "sha256": "4658be312dd9e687ccd7435ea6aba6cc8bd474f34cbd457b4b7c02b8aeb833c1"
+        },
+        {
+          "path": "content/english/sources/tatoeba-english-2026-10-31/004.jsonl.gz.b64",
+          "sha256": "a2deb5f85c4ae953e141b6443f52714495cfc249edddb0d1123403dbf9facc90"
+        }
+      ],
+      "sourceEvidenceCandidates": 122212,
+      "availableAfterControlledExclusions": 122164,
+      "editorialDecisions": 24,
+      "publishedExamples": 20,
+      "rejected": 4,
+      "approval": "candidate-evidence-only-unless-explicitly-reviewed"
+    }
+  ],
+  "combinedCapacity": {
+    "optimisticPublishedUpperBound": 128985,
+    "minimumAdditionalSourceGap": 0,
+    "caveat": "Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval."
   },
   "source": {
     "id": "project-original",
@@ -111,8 +153,8 @@
     }
   ],
   "currentEvidence": {
-    "sentenceManifestSha256": "f8d30e04a1f57292ff2ab7fba18dc6320a401328130e2fa3fb1dd66c42c55bfa",
-    "reviewLedgerReportSha256": "df34d17506c334efa48d7b7e23ad4caabdc9351a0b3e9aa046c3da26ff99e2ac"
+    "sentenceManifestSha256": "f364e2cb9f5dd40189de9f02a6460f8838147580e125722e98e3a928e21e25d5",
+    "reviewLedgerReportSha256": "25ebbe18764d4eddbd4d6765d4569eaa09ad88416eb04618b92ba0ba1d3dab41"
   },
   "transition": {
     "step2Pass": false,
@@ -122,7 +164,7 @@
   },
   "remainingWork": [
     "Review remaining local raw candidates only through bounded digest-bound batches; none are approved by this report.",
-    "Prepare sufficient additional versioned, checksum-pinned, license/attribution-reviewed example-source intake before claiming full target capacity.",
+    "Continue explicit bounded editorial review of the new pinned English-only source; experimental upstream ratings never auto-approve grammar, suitability or CEFR.",
     "Preserve Tatoeba source-pin and completed MultiWOZ gates; do not silently substitute mutable exports."
   ]
 }
