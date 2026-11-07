@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { lexicalTokens, normalizeSentenceKey, readJson } from "./english-content-core.mjs";
 import { readEnglishReviewLedger } from "./english-review-core.mjs";
+import { assessExampleSourceCapacity } from "./english-example-capacity-core.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = relative => readJson(path.join(root, relative));
@@ -65,21 +66,21 @@ const excluded = new Set([
 ]);
 const queueRemaining = queue.records.filter(r => !excluded.has(r.id)).length;
 const unreviewedRaw = [...raw.keys()].filter(id => !excluded.has(id)).length;
-const upperBound = published.length + unreviewedRaw;
+const capacity = assessExampleSourceCapacity({ minimum: target.minimum, published: published.length, unreviewedRaw });
+const upperBound = capacity.optimisticPublishedUpperBound;
 const report = {
   schemaVersion: 1,
   scope: "group-1-step-2-current-project-original-intake-capacity",
-  reviewState: published.length >= target.minimum ? "target-count-met-full-review-required" :
-    upperBound < target.minimum ? "blocked-source-capacity" : "editorial-review-required",
+  reviewState: capacity.reviewState,
   target: { id: target.id, minimum: target.minimum, published: published.length,
-    remainingPublishedDeficit: Math.max(0, target.minimum - published.length) },
+    remainingPublishedDeficit: capacity.remainingPublishedDeficit },
   currentBoundedQueue: { candidates: queue.records.length, remainingUnreviewed: queueRemaining,
     state: queueRemaining === 0 ? "source-exhausted" : "ready" },
   currentProjectOriginalLane: {
     levels: index.levels.length, passages: passageCount,
     eligibleUniqueRawSentences: raw.size, unreviewedRawSentences: unreviewedRaw,
     optimisticPublishedUpperBound: upperBound,
-    minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses: Math.max(0, target.minimum - upperBound),
+    minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses: capacity.additionalSourceGap,
     caveat: "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content.",
   },
   source: { id: source.id, snapshot: source.snapshot, license: source.license, publishAllowed: source.publishAllowed },
@@ -88,7 +89,7 @@ const report = {
     sentenceManifestSha256: await fingerprint("shared/sentences/manifest.json"),
     reviewLedgerReportSha256: await fingerprint("content/english/reports/e10-review-ledger.json"),
   },
-  transition: { step2Pass: false, step3Unlocked: false, group2Unlocked: false,
+  transition: { step2Pass: capacity.step2Pass, step3Unlocked: capacity.step3Unlocked, group2Unlocked: capacity.group2Unlocked,
     reason: "A capacity audit or a partial corpus expansion does not satisfy the agreed 100,000-reviewed-published-example requirement." },
   remainingWork: [
     "Review remaining local raw candidates only through bounded digest-bound batches; none are approved by this report.",
