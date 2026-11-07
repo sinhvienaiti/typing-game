@@ -12,10 +12,10 @@ User instruction: execute the twelve agreed work items as four groups of three. 
 
 ## Group 1 — current queue, example corpus, translation source
 
-| Step | Deliverable and PASS criterion | State at preparation |
+| Step | Deliverable and PASS criterion | Current reviewed state |
 | --- | --- | --- |
-| 1 | Review all 316 candidates remaining after Slice 29; publish only eligible records. Verify the final four-record slice and an exhausted next-review queue without replaying old records. All content/runtime/report/CI gates pass. | Slices 30–43 authored and reviewed; remote CI sign-off pending |
-| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | Queued behind Step 1; a source/pipeline pilot alone does not satisfy 100,000 |
+| 1 | Review all 316 candidates remaining after Slice 29; publish only eligible records. Verify the final four-record slice and an exhausted next-review queue without replaying old records. All content/runtime/report/CI gates pass. | PASS — all 316 reviewed/published; three workflows passed on `565659b` |
+| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | BLOCKED at capacity review — 2,213 published; current lane upper bound 6,801. See source-capacity evidence below. |
 | 3 | Recover exact pinned Tatoeba EN/VI/link bytes, or complete a separately versioned, fully reviewed source upgrade with checksums, license and attribution. Import validation and reproducibility pass. | Queued behind Step 2; historical source bytes currently unavailable |
 
 The default typing-text candidate queue is bounded at 1,000 candidates. Exhausting that queue is Step 1 completion, not exhaustion of all original passages and not completion of Step 2.
@@ -47,3 +47,28 @@ The default typing-text candidate queue is bounded at 1,000 candidates. Exhausti
 ## Review evidence
 
 Step 1 uses explicit decisions in `content/english/reviews/decisions.d/e06-typing-text-30-*.json` through `e06-typing-text-43-*.json`, authoring shards, generated runtime/manifests and E10/E11/E12 reports. The queue-tail fix is covered by `scripts/typing-text-review-core.test.mjs`, including CLI stale-packet replacement for partial and exhausted queues. Record final CI run links in PR #48; do not create a timestamp-only commit solely to move CI to another SHA.
+
+## Step 1 sign-off and Step 2 capacity review
+
+Step 1 passed on commit `565659b885ffe52e1abdcddfd93c97808e563334`:
+
+- [Platform CI #3201](https://github.com/sinhvienaiti/typing-game/actions/runs/42333877164) — success.
+- [Master Plan Acceptance #1312](https://github.com/sinhvienaiti/typing-game/actions/runs/42333877161) — success.
+- [Full Validation #952](https://github.com/sinhvienaiti/typing-game/actions/runs/42333874055) — success.
+- 90 content/tooling tests, 3 runtime-count tests, all 316 Monkeytype/Karaoke adapter checks, all 28 linked lexical references, exact/near dedup and deterministic artifact regeneration passed.
+
+Step 2 was then assessed with `node scripts/audit-english-example-source-capacity.mjs`. The reproducible report is `content/english/reports/example-source-capacity.json`.
+
+| Capacity measure | Count |
+| --- | ---: |
+| Reviewed published examples | 2,213 |
+| Required minimum | 100,000 |
+| Current published deficit | 97,787 |
+| Eligible unique raw sentences in the current original-source lane | 5,588 |
+| Raw sentences not yet reviewed | 4,588 |
+| Optimistic published upper bound with all remaining local raw sentences accepted | 6,801 |
+| Additional source gap even under that optimistic assumption | 93,199 |
+
+The upper bound covers this configured source lane only. It is not an assertion that no other upstream dataset exists. Further local review is possible, but does not make the full Step 2 deliverable achievable from these inputs alone; future rejection/dedup can reduce the bound. Other upstream sources require a reproducible, licensed, reviewed intake before their potential size can be counted.
+
+Step 2 completion review is **not passed**. Group 1 is **not complete**. Steps 3–12 remain queued, following the user's strict transition rule. The next dependency is sufficient additional pinned and license-reviewed example-source intake; a capacity report is not completion of the 100,000-example target.
