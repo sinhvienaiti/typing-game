@@ -30,3 +30,6 @@ Bảng tổng bước 3 (đếm việc, không đếm take; NEE là trạng thá
 Ảnh: giữ 132, sửa 3, mới 73. 20 hàng gốc và các dòng T0 «bổ sung hàng» tính chung một việc; việc phụ do S1 thêm được giữ nguyên và không tính vào 501 việc T0. Biên bản kiểm phủ: `.local/s2/coverage-step3.json`.
 
 - 2026-11-07T12:38:50+07:00: S2b — chờ T0. Bảng stream-2-image.md đã có 208 dòng nhưng checkpoint.json vẫn ở bước 3, next_step=4, còn bước ghi “T0 xong”; chưa chạy image_gen, chưa tạo i2v-jobs.json, chưa đổi trạng thái. Tiếp tục S2b sau xác nhận T0 hoàn tất; lưu ý boss-entrance-vortex-still.v1-try1/try2.png đã tồn tại, try2 là ảnh tham chiếu đã duyệt, cần giữ nguyên khi nối việc.
+
+- 2026-11-07T13:09:58+07:00: S2b — chờ T0. Chưa có dòng xác nhận “T0 xong” trong stream-2-image.md; checkpoint.json vẫn step=3, next_step=4. Chỉ kiểm tra điều kiện đầu vào; chưa xem ảnh, chưa tạo ảnh hay i2v-jobs.json, chưa đổi trạng thái. Giữ nguyên ảnh try2 đã duyệt và mọi tệp hiện có; tiếp tục sau khi T0 được xác nhận hoàn tất.
+- 2026-11-07T13:30 · Claude: T0 xong (640/640 key đã xếp, các danh sách trong vfx-streams đã ghi). S2b chạy được.

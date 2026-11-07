@@ -7,6 +7,8 @@ Do việc phân loại toàn kho (T0, luồng 2) điền.
 | # | Key / việc | Vai trò · đoạn | Lý do · việc cần làm | Ưu tiên | Trạng thái |
 |---|---|---|---|---|---|
 
+| S1-11 | `S1-11:i2v-dark-slash-arc__take1` | Texture cung đỏ release/travel; đã thử [40,64) @24; ảnh **giữ** `games/immortality-cultivation/art-src/lab/firefly-sprint-2026-11-05/stills/skills/dark-slash-arc-a.v1-try2.png` | Sau 2 fit, đổi cỡ dọc MP4 5,246% >5%, trôi hình học 1,997% sát ngưỡng; không A-PASS. Giữ still palette A, Claude xem recipe/evidence để quyết định ổn định nguồn tiếp hoặc làm lại image-to-video với nội dòng giữ silhouette/size; chưa tạo ảnh mới. `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-dark-slash-arc/v1/recipe.md` | P4 | todo |
+
 <!-- T0:header -->
 ## T0 · Định tuyến toàn kho
 

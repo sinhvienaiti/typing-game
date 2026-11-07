@@ -4,8 +4,8 @@ Chạy bằng `lane-runner.md`. **Cổng:** A = anh duyệt; C = Claude chạy F
 
 | # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
 |---|---|---|---|---|---|---|---|
-| 1 | T0 phân loại: lặp mỗi lần một bước cho tới khi xong và đã ghi danh sách | `lane-S2-t0-step.md` | high | — | | doing (lặp) | `.local/s2/checkpoint.json` |
-| 2 | S2b: danh sách làm lại từ ảnh cũ và 2 mẫu ảnh đầu mới | `lane-S2b-redo-image-samples.md` | high | 1 | | todo | |
+| 1 | T0 phân loại: lặp mỗi lần một bước cho tới khi xong và đã ghi danh sách | `lane-S2-t0-step.md` | high | — | | done | 640/640 đã xếp, danh sách đã ghi (Claude xác nhận 13:30) |
+| 2 | S2b: danh sách làm lại từ ảnh cũ và 2 mẫu ảnh đầu mới | `lane-S2b-redo-image-samples.md` | high | 1 | | doing 13:30 | |
 | 3 | Claude chạy Firefly cho danh sách từ ảnh cũ, rồi tạo đợt duyệt | — | — | 2 | C | todo (Claude) | |
 | 4 | Duyệt tầng A đợt làm lại (lặp mỗi đợt) | `lane-S2d-review-i2v.md` | high | 3 | | todo (lặp) | |
 | 5 | Anh duyệt 2 mẫu ảnh đầu mới | — | — | 2 | A | todo (anh) | |
