@@ -38,6 +38,21 @@ Codex đã chấm hơn 400 clip (làn C). Việc này hỏi Codex với vai **ng
 3. Trong hơn 400 clip, những clip nào dùng làm lớp nguồn tốt ngay bây giờ (tầng a đạt) dù điểm vẻ đẹp dưới 8? Liệt kê tối đa 30, kèm đoạn nên cắt.
 4. Ảnh đầu phải thế nào để image-to-video giữ hình, không phình và tan đúng: lề, nền, tư thế, độ sáng, số lớp.
 5. Nên chấm lại làn C theo 2 tầng không? Nếu có, sửa thước chấm thế nào cho gọn.
+6. **Chia việc sau khi chốt.** Anh (07/11 09:30):
+   - ảnh và video **về cơ bản đã đạt**, chỉ cần Blender hoặc chỉnh thêm để lên trên 8, thì **giữ lại cho Codex chỉnh**;
+   - cái nào **thực sự chưa đạt** thì **làm lại lần lượt từng cái**;
+   - chạy **3 luồng**, mỗi luồng có danh sách việc đầy đủ trong file.
+
+   Đề xuất cách phân loại mọi clip (và ảnh nguồn) thành các nhóm sau, kèm tiêu chí đo được:
+   - **GIỮ-CHỈNH:** tầng a đạt; nêu cụ thể cần chỉnh gì: cắt đoạn, nhịp engine, lớp Blender phụ, lọc nền…;
+   - **LÀM-LẠI-ẢNH:** có hình, cần ảnh đầu mới rồi image-to-video;
+   - **LÀM-LẠI-BLENDER:** chất liệu;
+   - **BỎ.**
+
+   Rồi đề xuất cách chia ba nhóm cần làm vào 3 luồng không đụng file của nhau, và thứ tự ưu tiên: thứ đang dùng trong lab trước.
+7. **Mẫu Blender D1** (`docs/codex-queue/laneD1-report.md`, `.local/blender-samples/`): có đáng làm lô không, hay chỉ dùng Blender làm lớp phụ (tia, bụi, khói) chồng lên clip Firefly?
+
+**Tự kiểm:** sau khi viết xong, tự phản biện bản trả lời một lượt. Sửa đến khi tự thấy đạt hai lần liên tiếp rồi mới kết thúc; ghi kết quả từng lần tự kiểm ở cuối file.
 
 ## Ranh giới
 Chỉ ghi `docs/work/consult/codex-path-to-8.md`. Không sửa media, mã hay hàng việc. Không lệnh git ghi, không mở cổng mạng, không mở trình duyệt.
