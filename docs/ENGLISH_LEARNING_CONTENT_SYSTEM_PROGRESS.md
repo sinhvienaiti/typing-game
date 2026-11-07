@@ -6,9 +6,9 @@ Status: SCALE_UP_ACTIVE
 
 - Working branch: `feature/english-learning-content-system`
 - Current HEAD: resolve the branch HEAD from GitHub at the start of every run. Do not hard-code the checkpoint file's own commit SHA because updating this file changes HEAD.
-- Latest E11 typing-text work: Slices 24, 25 and 26 add 72 digest-bound published decisions and 72 runtime examples, with 18 authoring shards and 18 review shards. Each slice was regenerated and selected sequentially after the preceding slice entered the ledger. All original source sentences and ordinals were verified; 52 documented edits improve standalone context or naturalness. Each review note records the source-file SHA-256 and sentence-level editorial rationale.
-- Latest verified remote CI baseline: Slice 23 HEAD `ef56237578949a7aa5ff1b391737f6b239882d47`; Platform CI `42274592802`, Master Plan Acceptance `42274593048` and Full Validation `42274583185` all succeeded on that SHA. The combined Slices 24–26 commit must receive fresh remote checks before its CI is claimed complete.
-- Published Slice 26 runtime snapshot: 1,825 example sentences, 3,713 total sentence records, 14,608 published rich records and 14,608 applied editorial decisions; dictionary 900, grammar 300 and phrases 9,695. See live generated manifests/reports before using these numbers in later work.
+- Latest E11 typing-text work: Slices 27, 28 and 29 add 72 digest-bound published decisions and 72 runtime examples, with 18 authoring shards and 18 review shards. Each slice was regenerated and selected sequentially after the preceding slice entered the ledger. All original source sentences and ordinals were verified; 57 documented edits improve standalone context, naturalness or capitalization. Each review note records the source-file SHA-256 and sentence-level editorial rationale.
+- Latest verified remote CI baseline: Slices 24–26 HEAD `4291cae513f6325de30ecb82c55190264c2c74d2`; Platform CI `42328189506`, Master Plan Acceptance `42328189471` and Full Validation `42328184226` all succeeded on that SHA. The combined Slices 27–29 commit must receive fresh remote checks before its CI is claimed complete.
+- Published Slice 29 runtime snapshot: 1,897 example sentences, 3,785 total sentence records, 14,680 published rich records and 14,680 applied editorial decisions; dictionary 900, grammar 300 and phrases 9,695. See live generated manifests/reports before using these numbers in later work.
 - Historical MultiWOZ slice-51 editorial checkpoint: `a6b1844774cb9a9b1826f4a7ed348af507f67868` — English Content Full Validation #913 passed the complete MultiWOZ E11 slice-51 editorial decision set. Its registration and generated-metadata commits were `b9400e88f2c498b8524137aa2317d32ab87b0f81` and `9803698754f07d7023bde774b13c249eb8309d91`.
 - MultiWOZ slice 51 is integrated: 22/22 candidates received explicit editorial decisions, with 9 edited records retained and 13 rejected. The registered runtime slice is `content/english/sentences/e11-multiwoz-dialogue-reviewed-slice-51.json`.
 - The pinned MultiWOZ 2.2 source coverage now includes the complete configured source set at immutable upstream commit `fe0c8e65cfcd8462bd33c86e35f21addc84ca82b`: train `dialogues_001.json` through `dialogues_017.json`, dev `dialogues_001.json` and `dialogues_002.json`, and test `dialogues_001.json` and `dialogues_002.json`. There is no configured or upstream-designed `test/dialogues_003.json` lane; never invent one.
@@ -17,14 +17,14 @@ Status: SCALE_UP_ACTIVE
 - PR: #48 — open, draft, mergeable
 - Published runtime release: `2026.10.0`
 
-### Slices 24–26 editorial summary
+### Slices 27–29 editorial summary
 
 | Slice | Published examples | A1 | A2 | B1 | B2 | Documented edits |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 24 | 24 | 2 | 5 | 12 | 5 | 14 |
-| 25 | 24 | 1 | 7 | 11 | 5 | 18 |
-| 26 | 24 | 0 | 2 | 9 | 13 | 20 |
-| Total | 72 | 3 | 14 | 32 | 23 | 52 |
+| 27 | 24 | 1 | 3 | 12 | 8 | 18 |
+| 28 | 24 | 0 | 4 | 16 | 4 | 18 |
+| 29 | 24 | 3 | 4 | 9 | 8 | 21 |
+| Total | 72 | 4 | 11 | 37 | 20 | 57 |
 
 The scheduled/manual worker must always resolve the newest branch HEAD and its workflows directly from GitHub before doing work. If a newer commit exists, adopt it, inspect its changes, preserve completed work, and never reset/revert/overwrite/duplicate it.
 
@@ -34,7 +34,7 @@ The scheduled/manual worker must always resolve the newest branch HEAD and its w
 - E03 controlled lexical pilot: complete — 300 lexemes + 300 linked primary senses + 300 usage sidecars
 - E04 phrase/pattern architecture + current reviewed publication: complete — 9,695 published records after scale-224
 - E05 grammar framework/runtime: complete — 300/300 topics (45 A1 + 50 A2 + 60 B1 + 60 B2 + 50 C1 + 35 C2)
-- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — historical pre-E11 scale-up baseline was 1,513 examples; current runtime after E11 Slice 26 contains 1,825 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
+- E06 controlled sentence/exercise/dialogue/mistake pilots: complete — historical pre-E11 scale-up baseline was 1,513 examples; current runtime after E11 Slice 29 contains 1,897 examples + 1,400 exercises + 100 dialogues + 388 reviewed common mistakes
 - E07–E09 parent runtime, `/english` launcher, and game capability integrations: complete
 - E10 controlled batch/review pipeline: complete and enforced
 - E11 readiness/reporting contracts: complete; corpus scale-up remains active work
@@ -128,10 +128,10 @@ Mandatory architecture/pilot implementation is complete. The active work is qual
 1. E04 scale-224 and its approved controlled phrase-family minimums remain complete. Do not create scale-225 merely to increase volume.
 2. Translation-pair expansion is below its locked E11 target, but the historically pinned Tatoeba raw cache bytes are unavailable through the reproducible repo path. Keep import checksum gates strict; mutable weekly-export URLs are source-intake probes, not replacements for an approved pin.
 3. The pinned MultiWOZ E11 lane is now `source-exhausted` in Full Validation run `42264784597`: 1,171 candidate dialogues, 547 rejected, 625 used, zero remaining and zero selected. It is not a justification to invent `test/dialogues_003.json`.
-4. Reproducible E11 typing-text review is the bounded fallback lane. Slices 24–26 retain project-original provenance, stable IDs and digest-bound review. All 72 sentences were verified against exact source wording and sentence ordinals before editing. Cross-authoring/runtime/new-slice exact dedup found zero duplicates; maximum token-Jaccard overlap was 0.3571, below the 0.86 review threshold. No source checksum or license gate was changed.
-5. After Slice 26 the deterministic next packet is a **candidate only**, for Slice 27: 1,000 queue candidates, 300 controlled, 612 reviewed decision IDs, 388 remaining before selection, 24 selected. Regenerate against the newest HEAD before reviewing it; candidate packets are not publication approval.
-6. The user authorized Slices 24, 25 and 26 together. Their bounded 24-record authoring/review sets remain separate; affected runtime, release and deterministic E10/E11/E12/acceptance/enrichment metadata are synchronized together. Keep reproducibility and reviewed-only publication gates strict.
-7. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on the pushed combined Slices 24–26 HEAD before opening Slice 27. Respect new HEADs, human-versus-bot PR event behavior and the current source-update policy.
+4. Reproducible E11 typing-text review is the bounded fallback lane. Slices 27–29 retain project-original provenance, stable IDs and digest-bound review. All 72 sentences were verified against exact source wording and ordinals before editing. Cross-authoring/runtime/new-slice exact dedup found zero duplicates; maximum token-Jaccard overlap was 0.3333, below the 0.86 review threshold. Source checksums, license gates and original typing-text passages remain unchanged.
+5. After Slice 29 the deterministic next packet is a **candidate only**, for Slice 30: 1,000 queue candidates, 300 controlled, 684 reviewed decision IDs, 316 remaining before selection, 24 selected. Regenerate against the newest HEAD before reviewing it; candidate packets are not publication approval.
+6. The user authorized Slices 27, 28 and 29 together. Their bounded 24-record authoring/review sets remain separate; affected runtime, release and deterministic E10/E11/E12/acceptance/enrichment metadata are synchronized together. Keep reproducibility and reviewed-only publication gates strict.
+7. Verify English Content Full Validation, Master Plan Acceptance and Platform CI on the pushed combined Slices 27–29 HEAD before opening Slice 30. Respect new HEADs, human-versus-bot PR event behavior and the current source-update policy.
 
 ## Known non-blocking enrichment debt
 
@@ -145,4 +145,4 @@ Many E04 items still lack `exampleIds`. These are not errors and must not be aut
 
 ## Next actionable task
 
-Verify all three required workflows on the pushed Slices 24–26 commit with synchronized runtime and metadata. If checks pass, resolve the newest branch HEAD and regenerate the deterministic typing-text packet for a separately requested Slice 27. Leave the already complete MultiWOZ and E04 lanes untouched.
+Verify all three required workflows on the pushed Slices 27–29 commit with synchronized runtime and metadata. If checks pass, resolve the newest branch HEAD and regenerate the deterministic typing-text packet for a separately requested Slice 30. Leave the already complete MultiWOZ and E04 lanes untouched.
