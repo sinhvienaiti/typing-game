@@ -34,8 +34,8 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 12 | R3-1 quái nhận đòn có lực | `lane-R3-1-foe-reaction.md` | high | 9 | ✅ 15:55 (anh duyệt) | done | `games/.wt-ic-lab-all`: phản ứng thân R3-1; 43 test đạt; chờ Claude đo/chấm #13; `docs/codex-queue/laneL1-report.md` |
 | 13 | ĐO R3-1 (Claude): cả chiêu ở góc chơi phải tăng | — | — | 12 | C | done 16:55: TRƯỢT hai lần (bc6077c, e132c92). Bảng 3 giám khảo mù: K = T = P, cả chiêu 6 = 6; nghiêng có chạy (20°) nhưng bị đĩa sao, cột sáng và số sát thương che; quái cao khoảng 20 px. Hiệu năng đạt (Δp95 −0,7 ms). Claude chốt: dừng hướng nghiêng, qua bước 2 | `docs/work/consult/r3-step1b-panel.md`, `r3-step1-verdict.md` |
 | 14 | R3-2 đường dẫn thành dải sét | `lane-R3-2-guide-strip.md` | high | 13 | ✅ 16:55 (Claude: #13 trượt hai lần, luật vòng 3 dừng khi hai bước liền không tăng) | done 16:43 | `games/.wt-ic-lab-all`: dải sét R3-2; 35 test + probe + TypeScript đạt; chờ Claude đo/chấm #15; `docs/codex-queue/laneL1-report.md` |
-| 15 | ĐO R3-2 (Claude) | — | — | 14 | C | doing (Claude): hiệu năng ĐẠT (Δp95 −1,0 ms, p95 8,7 ms); Codex chấm mù trên bộ nhãn mới D/R/W từ 17:15 (`lane-R3-2c-judge.md`) | |
-| 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | C: mở khi #15 đạt | todo | |
+| 15 | ĐO R3-2 (Claude) | — | — | 14 | C | done 17:20: ĐẠT. Codex chấm mù bộ D/R/W: pha bay nhịp và lực 3,5 → 5,5, tương tác 4,5 → 5,5, không trục nào tụt; cả chiêu 6,0 → 6,5. Hiệu năng ĐẠT (Δp95 −1,0 ms). Còn yếu: đầu sáng chưa nổi, đuôi chưa thon | `docs/work/consult/r3-step2-verdict.md` |
+| 16 | R3-3 dấu Lôi nguội trên mặt đất | `lane-R3-3-ground-mark.md` | high | 15 | ✅ 17:20 (#15 đạt) | todo | |
 | 17 | ĐO R3-3 và gửi anh (Claude) | — | — | 16 | C | todo (Claude) | |
 
 **Đạt** ở vòng 3 = pha được sửa tăng ≥ 1 ở trục mục tiêu **và cả chiêu ở góc chơi tăng**, không trục nào tụt, trong ngân sách. Cả chiêu không tăng qua hai bước liền thì dừng và báo anh.
