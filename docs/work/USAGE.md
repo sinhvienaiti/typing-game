@@ -14,5 +14,6 @@
 |---|---|---|---:|---:|---:|---|
 | 05/11 20:10 | Gemini 4 Argon Cao | 30 kỹ năng mở rộng (diện rộng, pháp tướng, thần thú, pháp bảo) | 3 vòng (FAIL, PASS, PASS) | chưa đo (trước khi nén ngữ cảnh) | — | — |
 | 05/11 22:22 | Gemini 4 Argon Cao | D60 bộ đếm chuỗi từ + D61 chiêu duy trì | 3 vòng (FAIL, PASS, PASS), khoảng 17 lượt gọi | ~1,1 M (ước) | ~0,5 M | có, trong rà soát 23:00 (tốn hơn ~0,6 M) |
+| 07/11 17:54 | Codex `gpt-6.1-sol` (gói plus) | Cả ngày sau lượt reset 05:30: 136 lượt chạy (làn 3: 46 lượt, 61,7 M; làn 1: 26 lượt, 22,5 M; làn 2: 11 lượt, 10,3 M; chấm mù: 9 lượt, 3,6 M; phiếu khác: 44 lượt, 65,0 M) | 136 lượt | 162,9 M token đầu vào | — | hết 100 % hạn mức tuần, mở lại 14/11 09:12; báo anh 18:00 |
 
 Luật: tốn hơn mức Claude tự làm, hoặc hơn 1,5 M, thì báo anh ngay (`README.md` luật 5).

@@ -46,7 +46,7 @@ Luật như vòng 3: mỗi bước đo xong mới làm bước kế; **đạt** 
 
 | # | Việc | Phiếu | Mức | Cần xong trước | Cổng | Trạng thái | Đầu ra |
 |---|---|---|---|---|---|---|---|
-| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | ✅ 17:55 (anh duyệt) | todo | |
+| 18 | R4-1 khung va chạm hệ Lôi thay ngôi sao mực | `lane-R4-1-thunder-impact-frame.md` | high | 17 | ✅ 17:55 (anh duyệt) | blocked: Codex hết hạn mức tuần 17:54 (lượt lane1-run-26 thoát vì giới hạn), mở lại 14/11 09:12 | |
 | 19 | ĐO R4-1 (Claude) | — | — | 18 | C | todo (Claude) | |
 | 20 | R4-3a vẽ 2 mẫu vết sét cháy | `lane-R4-3a-scorch-samples.md` | high | — | ✅ 17:55 (anh duyệt) | todo | |
 | 21 | Anh duyệt mẫu vết cháy | — | — | 20 | A | todo (anh) | |
