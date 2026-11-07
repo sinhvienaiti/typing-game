@@ -5413,24 +5413,289 @@
   }
  ],
  "status": {
-  "running": true,
+  "running": false,
   "stop": false,
-  "state": "generating",
-  "job": "i2v-abyssal-xuanwu-tortoise-i2v2",
-  "take": 1,
+  "state": "done",
+  "job": "i2v-glacial-moon-tide-i2v2",
+  "take": 2,
   "attempt": 1,
   "startedAt": "2026-11-07T07:01:05.111Z",
-  "updatedAt": "2026-11-07T07:01:05.181Z",
-  "saved": 0,
+  "updatedAt": "2026-11-07T07:43:53.013Z",
+  "saved": 20,
   "failedTakes": [],
-  "results": {},
+  "results": {
+   "i2v-abyssal-xuanwu-tortoise-i2v2#1": {
+    "bytes": 15536543,
+    "w": 1920,
+    "h": 1080,
+    "seed": "583207",
+    "secs": 103,
+    "saved": true
+   },
+   "i2v-abyssal-xuanwu-tortoise-i2v2#2": {
+    "bytes": 13943500,
+    "w": 1920,
+    "h": 1080,
+    "seed": "254306",
+    "secs": 93,
+    "saved": true
+   },
+   "i2v-all-knowing-baize-spirit-i2v2#1": {
+    "bytes": 10293301,
+    "w": 1920,
+    "h": 1080,
+    "seed": "655253",
+    "secs": 92,
+    "saved": true
+   },
+   "i2v-all-knowing-baize-spirit-i2v2#2": {
+    "bytes": 9013424,
+    "w": 1920,
+    "h": 1080,
+    "seed": "637748",
+    "secs": 87,
+    "saved": true
+   },
+   "i2v-astral-meteor-constellation-i2v2#1": {
+    "bytes": 8730240,
+    "w": 1920,
+    "h": 1080,
+    "seed": "247478",
+    "secs": 99,
+    "saved": true
+   },
+   "i2v-astral-meteor-constellation-i2v2#2": {
+    "bytes": 7975827,
+    "w": 1920,
+    "h": 1080,
+    "seed": "169486",
+    "secs": 93,
+    "saved": true
+   },
+   "i2v-asura-six-arms-avatar-i2v2#1": {
+    "bytes": 11477331,
+    "w": 1920,
+    "h": 1080,
+    "seed": "602911",
+    "secs": 103,
+    "saved": true
+   },
+   "i2v-asura-six-arms-avatar-i2v2#2": {
+    "bytes": 12879921,
+    "w": 1920,
+    "h": 1080,
+    "seed": "390736",
+    "secs": 104,
+    "saved": true
+   },
+   "i2v-auspicious-thunder-qilin-i2v2#1": {
+    "bytes": 7907367,
+    "w": 1920,
+    "h": 1080,
+    "seed": "564503",
+    "secs": 91,
+    "saved": true
+   },
+   "i2v-auspicious-thunder-qilin-i2v2#2": {
+    "bytes": 7183288,
+    "w": 1920,
+    "h": 1080,
+    "seed": "686415",
+    "secs": 92,
+    "saved": true
+   },
+   "i2v-azure-cloud-dragon-i2v2#1": {
+    "bytes": 8962604,
+    "w": 1920,
+    "h": 1080,
+    "seed": "850803",
+    "secs": 99,
+    "saved": true
+   },
+   "i2v-azure-cloud-dragon-i2v2#2": {
+    "bytes": 10403427,
+    "w": 1920,
+    "h": 1080,
+    "seed": "805090",
+    "secs": 99,
+    "saved": true
+   },
+   "i2v-blade-swallowing-immortal-gourd-i2v2#1": {
+    "bytes": 8963909,
+    "w": 1920,
+    "h": 1080,
+    "seed": "594625",
+    "secs": 116,
+    "saved": true
+   },
+   "i2v-blade-swallowing-immortal-gourd-i2v2#2": {
+    "bytes": 9408107,
+    "w": 1920,
+    "h": 1080,
+    "seed": "547120",
+    "secs": 92,
+    "saved": true
+   },
+   "i2v-firmament-sundering-cleave-i2v2#1": {
+    "bytes": 6380657,
+    "w": 1920,
+    "h": 1080,
+    "seed": "588556",
+    "secs": 94,
+    "saved": true
+   },
+   "i2v-firmament-sundering-cleave-i2v2#2": {
+    "bytes": 7671718,
+    "w": 1920,
+    "h": 1080,
+    "seed": "687371",
+    "secs": 115,
+    "saved": true
+   },
+   "i2v-five-element-heavenly-silk-i2v2#1": {
+    "bytes": 6950606,
+    "w": 1920,
+    "h": 1080,
+    "seed": "562475",
+    "secs": 97,
+    "saved": true
+   },
+   "i2v-five-element-heavenly-silk-i2v2#2": {
+    "bytes": 6319297,
+    "w": 1920,
+    "h": 1080,
+    "seed": "862872",
+    "secs": 99,
+    "saved": true
+   },
+   "i2v-glacial-moon-tide-i2v2#1": {
+    "bytes": 7479813,
+    "w": 1920,
+    "h": 1080,
+    "seed": "428596",
+    "secs": 86,
+    "saved": true
+   },
+   "i2v-glacial-moon-tide-i2v2#2": {
+    "bytes": 8821779,
+    "w": 1920,
+    "h": 1080,
+    "seed": "899764",
+    "secs": 97,
+    "saved": true
+   }
+  },
   "events": [
-   "14:01:05 driver start"
+   "14:01:05 driver start",
+   "14:01:11 click i2v-abyssal-xuanwu-tortoise-i2v2 take1 (attempt 1)",
+   "14:02:54 saved i2v-abyssal-xuanwu-tortoise-i2v2/take1.mp4 15536543 B 1920x1080 seed 583207 in 103 s",
+   "14:03:24 click i2v-abyssal-xuanwu-tortoise-i2v2 take2 (attempt 1)",
+   "14:04:58 saved i2v-abyssal-xuanwu-tortoise-i2v2/take2.mp4 13943500 B 1920x1080 seed 254306 in 93 s",
+   "14:05:27 click i2v-all-knowing-baize-spirit-i2v2 take1 (attempt 1)",
+   "14:07:00 saved i2v-all-knowing-baize-spirit-i2v2/take1.mp4 10293301 B 1920x1080 seed 655253 in 92 s",
+   "14:07:29 click i2v-all-knowing-baize-spirit-i2v2 take2 (attempt 1)",
+   "14:08:57 saved i2v-all-knowing-baize-spirit-i2v2/take2.mp4 9013424 B 1920x1080 seed 637748 in 87 s",
+   "14:09:25 click i2v-astral-meteor-constellation-i2v2 take1 (attempt 1)",
+   "14:11:05 saved i2v-astral-meteor-constellation-i2v2/take1.mp4 8730240 B 1920x1080 seed 247478 in 99 s",
+   "14:11:35 click i2v-astral-meteor-constellation-i2v2 take2 (attempt 1)",
+   "14:13:09 saved i2v-astral-meteor-constellation-i2v2/take2.mp4 7975827 B 1920x1080 seed 169486 in 93 s",
+   "14:13:39 click i2v-asura-six-arms-avatar-i2v2 take1 (attempt 1)",
+   "14:15:23 saved i2v-asura-six-arms-avatar-i2v2/take1.mp4 11477331 B 1920x1080 seed 602911 in 103 s",
+   "14:15:53 click i2v-asura-six-arms-avatar-i2v2 take2 (attempt 1)",
+   "14:17:38 saved i2v-asura-six-arms-avatar-i2v2/take2.mp4 12879921 B 1920x1080 seed 390736 in 104 s",
+   "14:18:09 click i2v-auspicious-thunder-qilin-i2v2 take1 (attempt 1)",
+   "14:19:41 saved i2v-auspicious-thunder-qilin-i2v2/take1.mp4 7907367 B 1920x1080 seed 564503 in 91 s",
+   "14:20:13 click i2v-auspicious-thunder-qilin-i2v2 take2 (attempt 1)",
+   "14:21:46 saved i2v-auspicious-thunder-qilin-i2v2/take2.mp4 7183288 B 1920x1080 seed 686415 in 92 s",
+   "14:22:15 click i2v-azure-cloud-dragon-i2v2 take1 (attempt 1)",
+   "14:23:55 saved i2v-azure-cloud-dragon-i2v2/take1.mp4 8962604 B 1920x1080 seed 850803 in 99 s",
+   "14:24:25 click i2v-azure-cloud-dragon-i2v2 take2 (attempt 1)",
+   "14:26:05 saved i2v-azure-cloud-dragon-i2v2/take2.mp4 10403427 B 1920x1080 seed 805090 in 99 s",
+   "14:26:38 click i2v-blade-swallowing-immortal-gourd-i2v2 take1 (attempt 1)",
+   "14:28:35 saved i2v-blade-swallowing-immortal-gourd-i2v2/take1.mp4 8963909 B 1920x1080 seed 594625 in 116 s",
+   "14:29:05 click i2v-blade-swallowing-immortal-gourd-i2v2 take2 (attempt 1)",
+   "14:30:38 saved i2v-blade-swallowing-immortal-gourd-i2v2/take2.mp4 9408107 B 1920x1080 seed 547120 in 92 s",
+   "14:31:08 click i2v-firmament-sundering-cleave-i2v2 take1 (attempt 1)",
+   "14:32:43 saved i2v-firmament-sundering-cleave-i2v2/take1.mp4 6380657 B 1920x1080 seed 588556 in 94 s",
+   "14:33:12 click i2v-firmament-sundering-cleave-i2v2 take2 (attempt 1)",
+   "14:35:08 saved i2v-firmament-sundering-cleave-i2v2/take2.mp4 7671718 B 1920x1080 seed 687371 in 115 s",
+   "14:35:41 click i2v-five-element-heavenly-silk-i2v2 take1 (attempt 1)",
+   "14:37:19 saved i2v-five-element-heavenly-silk-i2v2/take1.mp4 6950606 B 1920x1080 seed 562475 in 97 s",
+   "14:37:50 click i2v-five-element-heavenly-silk-i2v2 take2 (attempt 1)",
+   "14:39:30 saved i2v-five-element-heavenly-silk-i2v2/take2.mp4 6319297 B 1920x1080 seed 862872 in 99 s",
+   "14:39:58 click i2v-glacial-moon-tide-i2v2 take1 (attempt 1)",
+   "14:41:25 saved i2v-glacial-moon-tide-i2v2/take1.mp4 7479813 B 1920x1080 seed 428596 in 86 s",
+   "14:41:52 click i2v-glacial-moon-tide-i2v2 take2 (attempt 1)",
+   "14:43:30 saved i2v-glacial-moon-tide-i2v2/take2.mp4 8821779 B 1920x1080 seed 899764 in 97 s",
+   "14:43:53 queue finished"
   ],
   "consecutiveFails": 0,
   "queued": 513,
-  "doneTakes": 645
+  "doneTakes": 665,
+  "lastSettings": {
+   "model": "adobe:firefly:colligo:video1",
+   "res": "1080",
+   "ar": "{\"height\":1080,\"width\":1920}",
+   "fps": "24",
+   "dur": "5",
+   "transparent": false
+  },
+  "lastFrame": "i2v-glacial-moon-tide-i2v2-first.png",
+  "digests": {
+   "747e819b4046c84c": "i2v-abyssal-xuanwu-tortoise-i2v2",
+   "203a6875824f9690": "i2v-abyssal-xuanwu-tortoise-i2v2",
+   "88a2c7af56f00d76": "i2v-all-knowing-baize-spirit-i2v2",
+   "a98ff349cf8e7a5d": "i2v-all-knowing-baize-spirit-i2v2",
+   "38a151237fff1887": "i2v-astral-meteor-constellation-i2v2",
+   "49b5c67f3758b2d4": "i2v-astral-meteor-constellation-i2v2",
+   "d25a65a9408d6b15": "i2v-asura-six-arms-avatar-i2v2",
+   "a7981fe1ac2a83f6": "i2v-asura-six-arms-avatar-i2v2",
+   "01788a944788cc8d": "i2v-auspicious-thunder-qilin-i2v2",
+   "2296ea7a6f104c6b": "i2v-auspicious-thunder-qilin-i2v2",
+   "19a8dcabe816fbef": "i2v-azure-cloud-dragon-i2v2",
+   "62a9120754ad74cd": "i2v-azure-cloud-dragon-i2v2",
+   "8a02c56c16b94199": "i2v-blade-swallowing-immortal-gourd-i2v2",
+   "e0eee694bcbed5f8": "i2v-blade-swallowing-immortal-gourd-i2v2",
+   "78ec1afad4b912ee": "i2v-firmament-sundering-cleave-i2v2",
+   "f648f7cd97d07b2c": "i2v-firmament-sundering-cleave-i2v2",
+   "11c0503a8ef5d18a": "i2v-five-element-heavenly-silk-i2v2",
+   "78554a4bd42178e0": "i2v-five-element-heavenly-silk-i2v2",
+   "f6d3701ee4a1fc3c": "i2v-glacial-moon-tide-i2v2",
+   "177503343230a852": "i2v-glacial-moon-tide-i2v2"
+  },
+  "seeds": {
+   "169486": "i2v-astral-meteor-constellation-i2v2",
+   "247478": "i2v-astral-meteor-constellation-i2v2",
+   "254306": "i2v-abyssal-xuanwu-tortoise-i2v2",
+   "390736": "i2v-asura-six-arms-avatar-i2v2",
+   "428596": "i2v-glacial-moon-tide-i2v2",
+   "547120": "i2v-blade-swallowing-immortal-gourd-i2v2",
+   "562475": "i2v-five-element-heavenly-silk-i2v2",
+   "564503": "i2v-auspicious-thunder-qilin-i2v2",
+   "583207": "i2v-abyssal-xuanwu-tortoise-i2v2",
+   "588556": "i2v-firmament-sundering-cleave-i2v2",
+   "594625": "i2v-blade-swallowing-immortal-gourd-i2v2",
+   "602911": "i2v-asura-six-arms-avatar-i2v2",
+   "637748": "i2v-all-knowing-baize-spirit-i2v2",
+   "655253": "i2v-all-knowing-baize-spirit-i2v2",
+   "686415": "i2v-auspicious-thunder-qilin-i2v2",
+   "687371": "i2v-firmament-sundering-cleave-i2v2",
+   "805090": "i2v-azure-cloud-dragon-i2v2",
+   "850803": "i2v-azure-cloud-dragon-i2v2",
+   "862872": "i2v-five-element-heavenly-silk-i2v2",
+   "899764": "i2v-glacial-moon-tide-i2v2"
+  },
+  "lastResult": {
+   "job": "i2v-glacial-moon-tide-i2v2",
+   "take": 2,
+   "bytes": 8821779,
+   "w": 1920,
+   "h": 1080,
+   "seed": "899764",
+   "secs": 97,
+   "saved": true
+  }
  },
- "statusReceivedAt": "2026-11-07 14:01:05 +07",
+ "statusReceivedAt": "2026-11-07 14:43:53 +07",
  "held": []
 }

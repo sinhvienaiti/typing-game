@@ -6,7 +6,7 @@ Chạy bằng `lane-runner.md`. **Cổng:** A = anh duyệt; C = Claude chạy F
 |---|---|---|---|---|---|---|---|
 | 1 | T0 phân loại: lặp mỗi lần một bước cho tới khi xong và đã ghi danh sách | `lane-S2-t0-step.md` | high | — | | done | 640/640 đã xếp, danh sách đã ghi (Claude xác nhận 13:30) |
 | 2 | S2b: danh sách làm lại từ ảnh cũ và 2 mẫu ảnh đầu mới | `lane-S2b-redo-image-samples.md` | high | 1 | | done | `.local/s2/i2v-jobs.json` (133 việc; 27 needsCopy); 4 PNG + prompt; `.local/s2/still-samples-2.jpg`; đề xuất/kiểm: `.local/s2/still-samples-review.md` (chờ anh duyệt) |
-| 3 | Claude chạy Firefly cho danh sách từ ảnh cũ, rồi tạo đợt duyệt | — | — | 2 | C | doing (Claude): đợt 1 gồm 10 việc × 2 take, từ 14:01; còn 96 việc có ảnh và 27 việc cần chép ảnh | |
+| 3 | Claude chạy Firefly cho danh sách từ ảnh cũ, rồi tạo đợt duyệt | — | — | 2 | C | doing (Claude): đợt 1 xong 14:44 (10 việc, 20 take, đợt duyệt mới trong `.local/video-review/todo/`); đợt 2 chờ kết quả duyệt đợt 1 | |
 | 4 | Duyệt tầng A đợt làm lại (lặp mỗi đợt) | `lane-S2d-review-i2v.md` | high | 3 | | todo (lặp) | |
 | 5 | Anh duyệt 2 mẫu ảnh đầu mới | — | — | 2 | A | todo (anh): đã gửi tấm 14:05 | |
 | 6 | Vẽ ảnh đầu cho từng dòng còn lại (lặp mỗi lần một dòng) | `lane-S2c-still-row.md` | high | 5 | A | todo (lặp) | |
