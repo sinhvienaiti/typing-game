@@ -12,6 +12,7 @@ Living rule text: [ART_ACCEPTANCE.md](../../../../docs/games/ART_ACCEPTANCE.md) 
 - **Appeal is scored.** The owner, 01/11 evening: "đừng làm hình ảnh của game trở nên nhàm chán, đơn giản, thiếu đi sự hấp dẫn".
   - A clean, technically correct piece that is plain, simple or generic does not pass 8.5.
 - **VFX** must also meet the measured checks of [VFX_STANDARD.md](../../../../docs/games/VFX_STANDARD.md) (§5.6). The score bar is still 8.5.
+  - **Two tiers** (owner, 07/11/2026). VFX source layers (clips, renders, stills, flipbooks, sprites) are judged pass or fail on fitness. The 8.5 score is for the composited effect in the play host. A lone layer never has to reach 8 by itself.
 - **A piece already wired below the bar** is an open debt in `docs/games/QUALITY_RESCUE_2026-11-01.md`, not done work.
 - **Checkpoint at 7: report it with a demo video** (owner, 03/11: "mọi hình ảnh, hiệu ứng từ 7 trở lên thì cứ báo cáo tôi, gửi tôi video demo để tôi đánh giá"). It extends the 02/11 rule for motion.
   - As soon as both judges score a piece (image, VFX, model, map, UI, motion) at 7 or more, send the owner a real-speed demo video, with sound where the piece has sound.

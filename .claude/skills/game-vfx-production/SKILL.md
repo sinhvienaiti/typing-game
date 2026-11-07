@@ -46,6 +46,14 @@ What he liked came from real art: a Firefly Video flame flipbook ("rực cháy k
      - code never draws the shape.
    - Then [game-vfx-layered](../game-vfx-layered/SKILL.md) for phases and timing, and [game-hero-presence-vfx](../game-hero-presence-vfx/SKILL.md) for always-on layers.
 8. **Two blind judges ≥ 8.5** in the built play host. At 7 or more, send the owner a demo video, then keep going.
+   - **Judge in two tiers** (owner, 07/11/2026). A source layer (Firefly clip, Blender render, still, flipbook, sprite) is judged only pass or fail on fitness:
+     - right shape and role;
+     - inside the frame with margin;
+     - clean background with no stray objects;
+     - a usable segment;
+     - an end or loop the engine can shape (curves, erosion, phase offset).
+   - The 1–10 score and the 8.5 bar apply to the composited effect in the play host, never to one layer alone: in a commercial game a lone smoke or spark layer does not reach 8 either.
+   - Fix the weakest layer of the composite rather than regenerating every source.
 
 ## Hard rules
 
