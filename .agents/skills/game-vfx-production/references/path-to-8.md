@@ -102,7 +102,7 @@ The owner said, after round 1 of the pilot: "nên chia nhỏ ra, thử làm 1 v�
 - **Continue** only if the step raises its target axes, with no axis dropping and the budget kept. After two steps without a real gain, stop and rethink. Never build the whole effect and judge it only at the end.
 
 **Performance budget per effect:**
-- Measured on the M4 lab: 1920×1080, DPR 1, quality High, median of runs, with `scripts/visual/scenarios/lab-element-perf.mjs` or the same method.
+- Measured on the M4 lab: 1920×1080, DPR 1, quality High, median of runs, with `games/immortality-cultivation/scripts/visual/scenarios/lab-element-perf.mjs` or the same method.
 - **Frame time:** at most **+1.0 ms p95** over the same scene without the effect, and frame p95 stays **≤ 11.5 ms**.
 - **Memory:** extra GPU texture ≤ **64 MB**, with KTX2 when available. Atlases load lazily and free when unused.
 - **Draw calls and video:** ≤ **12 extra draw calls** per instance, pooled; **≤ 3 videos** at once.
