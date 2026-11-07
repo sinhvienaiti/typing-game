@@ -15,7 +15,7 @@ User instruction: execute the twelve agreed work items as four groups of three. 
 | Step | Deliverable and PASS criterion | Current reviewed state |
 | --- | --- | --- |
 | 1 | Review all 316 candidates remaining after Slice 29; publish only eligible records. Verify the final four-record slice and an exhausted next-review queue without replaying old records. All content/runtime/report/CI gates pass. | PASS — all 316 reviewed/published; three workflows passed on `565659b` |
-| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | IN PROGRESS — new pinned English-only intake and fifteen editorial batches integrated; 4,548 published examples. Candidate capacity is available; remaining editorial work is not approved. |
+| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | IN PROGRESS — new pinned English-only intake and eighteen editorial batches integrated; 4,966 published examples. Candidate capacity is available; remaining editorial work is not approved. |
 | 3 | Recover exact pinned Tatoeba EN/VI/link bytes, or complete a separately versioned, fully reviewed source upgrade with checksums, license and attribution. Import validation and reproducibility pass. | Queued behind Step 2; historical source bytes currently unavailable |
 
 The default typing-text candidate queue is bounded at 1,000 candidates. Exhausting that queue is Step 1 completion, not exhaustion of all original passages and not completion of Step 2.
@@ -61,13 +61,13 @@ Step 2 was then assessed with `node scripts/audit-english-example-source-capacit
 
 | Capacity measure | Count |
 | --- | ---: |
-| Reviewed published examples | 4,548 |
+| Reviewed published examples | 4,966 |
 | Required minimum | 100,000 |
-| Current published deficit | 95,452 |
+| Current published deficit | 95,034 |
 | Eligible unique raw sentences in the current original-source lane | 5,588 |
 | Raw sentences not yet reviewed | 4,588 |
-| Optimistic published upper bound using only remaining original-source raw sentences | 9,136 |
-| Additional source gap if restricted to that original lane | 90,864 |
+| Optimistic published upper bound using only remaining original-source raw sentences | 9,554 |
+| Additional source gap if restricted to that original lane | 90,446 |
 
 The upper bound covers this configured source lane only. It is not an assertion that no other upstream dataset exists. Further local review is possible, but does not make the full Step 2 deliverable achievable from these inputs alone; future rejection/dedup can reduce the bound. Other upstream sources require a reproducible, licensed, reviewed intake before their potential size can be counted.
 
@@ -77,7 +77,7 @@ The original-lane shortage is no longer an overall stop condition. Four official
 
 Pilot 01 explicitly reviewed 24 records: 20 published, four rejected and two edited. The digest-bound ledger, controlled source and per-record review report retain all outcomes, original/final texts, CEFR rationales and attribution. Rejections include a threat and context/factual-scope problems despite positive experimental source ratings. The queue skips these decisions permanently.
 
-After all 2,824 local decisions and excluding controlled IDs/texts and exact source duplicates, 119,362 candidates remain available. Combined with the original-source remainder, the optimistic intake bound is 128,498 examples before further editorial rejection and cross-source near dedup. Candidate availability does not establish that all of those examples will pass. The capacity report is now version 2 with separate original and new-source lanes, `editorial-review-required`, and every transition gate still false.
+After all 3,424 local decisions and excluding controlled IDs/texts and exact source duplicates, 118,762 candidates remain available. Combined with the original-source remainder, the optimistic intake bound is 128,316 examples before further editorial rejection and cross-source near dedup. Candidate availability does not establish that all of those examples will pass. The capacity report is now version 2 with separate original and new-source lanes, `editorial-review-required`, and every transition gate still false.
 
 Local validation: 112 content/tooling tests plus three runtime-count tests; complete schema/source/review/license checks, E10, actual published-runtime smoke, E11 record coverage/reconciliation, E12 and master-plan audit. The source snapshot also reproduces byte-for-byte from all four pinned upstream inputs. Compare the resulting remote HEAD's three workflow runs in PR #48 before signing off that implementation batch.
 
@@ -151,8 +151,25 @@ Prior checkpoint `80b46dcd9ba8185ccf6a4850b6007e1b9e726219` passed [Platform CI]
 
 Every candidate was read and given an individual decision. Review rejected unscoped current, scientific and health assertions, ambiguous or context-only wording, unsuitable general-learning material and pragmatic repeats. Cross-corpus review removed further paraphrases even below the numerical near-duplicate threshold, including the different cookie-crumbles/ball-bounces metaphors for the same acceptance sentiment. Fourteen disclosed edits repair tense consistency, fixed expressions, punctuation, collocations and explicit weather-forecast attribution while preserving source meaning. All final accepted texts were checked against active canonical records; no exact collision was found. Original/final text, rationale, source evidence, CEFR and digest-bound decisions remain traceable in the three per-record reports.
 
-Current English-only totals: 2,824 decisions, 2,335 published, 489 rejected and 63 disclosed edits. Full runtime: 4,548 examples, 6,436 sentence records and 17,331 rich records. Ledger: 17,820 decisions. All 2,335 approved English-only examples pass both adapters (4,670 checks), match runtime objects exactly and exclude rejected IDs. The next queue skips every reviewed ID and has 119,362 unreviewed candidates, beginning at `sent.tatoeba.41120`; English editorial batch 16 is next. The published deficit remains 95,452. Step 2 is IN PROGRESS; Steps 3–12 stay queued and PR #48 stays Draft.
+At the end of batches 13–15, English-only totals were: 2,824 decisions, 2,335 published, 489 rejected and 63 disclosed edits. Full runtime: 4,548 examples, 6,436 sentence records and 17,331 rich records. Ledger: 17,820 decisions. All 2,335 approved English-only examples pass both adapters (4,670 checks), match runtime objects exactly and exclude rejected IDs. That checkpoint queue skipped every reviewed ID and had 119,362 unreviewed candidates, beginning at `sent.tatoeba.41120`; English editorial batch 16 followed. The published deficit at that checkpoint was 95,452. Step 2 is IN PROGRESS; Steps 3–12 stay queued and PR #48 stays Draft.
 
 Local verification passed 112 configured content/tooling tests, ten additional MultiWOZ handoff/decision tests and three runtime-count tests, plus schema/source/review/license/E10, publication, exact/near dedup, published-runtime smoke, E12, E11 count freshness/ID coverage, capacity and master-plan reconciliation. Release/maintenance was refreshed before final E11 readiness/runtime generation. Regeneration and shard tracking are verified before pushing; record the final HEAD's three workflow results in PR #48.
 
 The verified preceding checkpoint `0d88f8272cbf868733cd6faa5f877d1867345ef8` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42379829061), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42379829041) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42379823439). Source/license pins, legacy vocabulary ABI and the historical translation lane remain unchanged. No CI result or candidate capacity count satisfies the 100,000-example requirement.
+
+### Editorial continuation within Step 2: English batches 16–18
+
+| English batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 16 | 200 | 103 | 97 | 2 |
+| 17 | 200 | 151 | 49 | 3 |
+| 18 | 200 | 164 | 36 | 4 |
+| Total | 600 | 418 | 182 | 9 |
+
+Every candidate received an individual reading, decision and rationale. Batch 16 had substantial context-only material; unspecified referents, unbounded assertions and unsuitable wording were rejected rather than supplied with invented contexts. Cross-corpus review also rejected semantic repeats below the numerical token-overlap threshold. Examples include repeated hearing-news/turning-pale scenes and a paraphrase of the published millionaire acquiring a masterpiece regardless of cost. Nine disclosed edits address conditional wording, natural collocations, a role term, compound punctuation, photo background wording and an empty-dish completion expression without adding source events. Edited final texts were checked against all active canonical sentence sources; no exact collision was found.
+
+Current English-only totals: 3,424 decisions, 2,753 published, 671 rejected and 72 disclosed edits. Full runtime: 4,966 examples, 6,854 sentence records and 17,749 rich records; ledger: 18,420 applied decisions. All 2,753 published English-only records match the approved controlled objects and pass both adapters (5,506 checks). Rejected records remain absent from runtime and future packets. The next queue skips every reviewed ID, contains 118,762 unreviewed candidates and begins at `sent.tatoeba.45621`; English editorial batch 19 is next. The target deficit is 95,034 reviewed publications.
+
+Local checks passed 112 configured content/tooling tests, ten additional MultiWOZ handoff/decision tests and three runtime-count tests, alongside schema/source/review/license/E10, publication, exact/near dedup, published-runtime smoke, E12, E11 freshness/exact ID coverage, capacity and master-plan reconciliation. E12 release/maintenance precedes final E11 readiness/runtime regeneration. Verify deterministic artifacts and tracked manifest shards before pushing, then record the final HEAD's three workflows in PR #48.
+
+The preceding checkpoint `754c83d9e0201e8038e62069c97cf36c9573fdf9` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42382049497), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42382049519) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42382044706). Source pins, legacy vocabulary ABI, locked targets and sequential gates are unchanged. Step 2 remains IN PROGRESS; Group 1 is incomplete, Steps 3–12 remain queued and PR #48 stays Draft. Candidate capacity and CI success are not completion of the 100,000-example deliverable.
