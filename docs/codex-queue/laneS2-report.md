@@ -33,3 +33,10 @@ Bảng tổng bước 3 (đếm việc, không đếm take; NEE là trạng thá
 
 - 2026-11-07T13:09:58+07:00: S2b — chờ T0. Chưa có dòng xác nhận “T0 xong” trong stream-2-image.md; checkpoint.json vẫn step=3, next_step=4. Chỉ kiểm tra điều kiện đầu vào; chưa xem ảnh, chưa tạo ảnh hay i2v-jobs.json, chưa đổi trạng thái. Giữ nguyên ảnh try2 đã duyệt và mọi tệp hiện có; tiếp tục sau khi T0 được xác nhận hoàn tất.
 - 2026-11-07T13:30 · Claude: T0 xong (640/640 key đã xếp, các danh sách trong vfx-streams đã ghi). S2b chạy được.
+
+07/11 13:37 · S2b xong: đúng một việc, dừng làn.
+Đầu ra: `.local/s2/i2v-jobs.json` — 133 việc, 106 URL PNG; 27 JPG có `needsCopy`, Claude chuyển trước Firefly.
+Đã vẽ 4 PNG + prompt trong `stills/skills/`; portal dùng v2 để giữ v1 đã duyệt, aura dùng v1.
+Tấm duyệt: `.local/s2/still-samples-2.jpg`; tự chấm/đo: `.local/s2/still-samples-review.md`, `s2b-checks.json`.
+Đề xuất portal v2-try2 và aura v1-try1; aura try2 FAIL lề 3,75%. Chờ anh duyệt, chưa vẽ thêm hay chạy video/build/test.
+Đã khoá bảng và cập nhật 133 dòng i2v-ready, 2 dòng sample-drawn; không mở cổng A/C.

@@ -25,3 +25,9 @@ Tiếp sau bước 1, đã được Claude đo và mở cổng trong `LANE-1.md`
 - `npx --no-install tsc --noEmit` sạch;
 - `npx --no-install vitest run --maxWorkers=4` qua toàn bộ;
 - báo cáo ghi số dòng thêm và điều Claude cần quay. Cảnh `TP` của `lab-pilot-ab.mjs` dùng lại được; thêm mốc khung của pha này nếu cần.
+
+## Claude chạy toàn bộ vitest (07/11 14:00): còn 2 test trượt vì bước này
+- `tests/lab/ambient-fx.test.ts` › lab ambient loops › wires real-time atmosphere before rendering and enables KTX2 on the default lab path
+- `tests/lab/charge-fill-fx.test.ts` › existing lab release timing › observes word changes before typing, updates the last letter before release, and draws before render
+
+Có lẽ thứ tự nối trong `skills-main.ts` đã đổi. Sửa cho qua, **không sửa test cũ để che lỗi**. Chạy riêng từng file bằng `npx --no-install vitest run tests/lab/ambient-fx.test.ts tests/lab/charge-fill-fx.test.ts tests/lab/five-phase-clip.test.ts`; chạy riêng từng file được trong sandbox. Ghi kết quả vào báo cáo.
