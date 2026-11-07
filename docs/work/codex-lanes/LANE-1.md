@@ -15,8 +15,8 @@ Chạy bằng `lane-runner.md`. Thứ tự, việc phải xong trước và cổ
 | 5 | ĐO R2-2 (Claude) | — | — | 4 | C | done | ĐẠT: bay +1,5/+2,5, cột +1,5/+0,5; cả chiêu 5,5 → 6,5 ở góc chơi; p95 9,8 ms (`docs/work/consult/r2-step2-verdict.md`) |
 | 6 | R2-3 chạm và phản ứng quái | `lane-R2-3-thunder.md` | high | 5 | ✅ 14:50 (#5 đạt) | done | commit (Claude chạy đủ vitest 15:00) |
 | 7 | ĐO R2-3 (Claude) | — | — | 6 | C | done | ĐẠT ngưỡng bước (chạm +1,0 nhịp/lực); cả chiêu vẫn 6,5; phản ứng quái chưa thấy rõ; p95 8,7 ms (`docs/work/consult/r2-step3-verdict.md`) |
-| 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | ✅ 15:15 (#7 đạt) | todo | |
-| 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | todo (Claude) | |
+| 8 | R2-4 dư âm | `lane-R2-4-thunder.md` | high | 7 | ✅ 15:15 (#7 đạt) | done | commit (Claude chạy đủ vitest 15:30) |
+| 9 | ĐO R2-4 và gửi anh (Claude) | — | — | 8 | C | doing (Claude): quay và đo từ 15:31 | |
 | 10 | Sửa phép đo cổng boss, vòng Huyết, tia trúng đòn | `lane-L1-measure-fixes.md` | high | — | ✅ 12:20 (quay xong) | done | commit (Claude chạy đủ vitest 13:30) |
 | 11 | Sửa vòng phản hồi Framebuffer (glError 1282) | `lane-L1-gl-feedback.md` | high | — | ✅ 12:20 (quay xong) | done | commit sửa screen-fx (Claude chạy đủ vitest) |
 

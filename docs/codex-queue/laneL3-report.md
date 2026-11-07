@@ -104,3 +104,29 @@ Tâm rỗng max0/255; hội tụ trôi1,287%; p99RGB1/255 trên cùng nền ngu�
 KTX2 5.007.313byte,13mip,gutter0,MAEROI0,824/255,GPU10,42MiB(fallbackRGBA8 41,68MiB);24/24mẫu khác nhau,preview cuốiRGB0. Xem7ảnh,dọn96PNG riêng;prune từ chối not-tmp.
 Anh/Claude xem `recipe.md`, `compare-6.jpg`, `package-native-1/2.jpg`, `package-bright-6.jpg`, `envelope-preview-1080p.mp4`; còn kiểm host tốc độ thật/upscale/cropband/mips/end/hiệu năng và tầngB. 1id glint phụ chuyểnS3 chờ cổng; mã hiện modulo không thay trực tiếp bằng finite clip.
 Không tạo AI art/Blender/browser/build/test hoặc sửa nguồn/mã/manifest đang dùng; chưa tích hợp. Dừng sau đúng một việc.
+
+
+**07/11/2026 15:03 · L3 #2 / T0 bổ sung `i2v-fire-comet__take1` · kế thừa A-PASS hàng 1.** Xong đúng một dòng; #2 giữ `todo (lặp)`, đã nhả hai khóa; không tạo job/chứng nhận T0 độc lập.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-fire-comet/v1/` — bổ sung `engine-envelope.json`, `t0-recheck.json`, recipe; đồng bộ alpha metadata và tính lại SHA-256; dùng lại MP4/atlas/KTX2, không đổi binary.
+Soi12tấm đủ nguồn/MP4f12–83;SHA video/prompt/ảnhđầu khớp,72/72mẫu/cellkhác nhau. Lề10,648%,trôi0,334%,đổi cỡ2,171/2,679%,p99/biênRGB0 theo evidence đã đối chiếu hash;không loop(seam2,363×).
+KTX2 2.241.538byte/13mip,gutter0,MAERGB0,317/255;GPUkhối 13.50MiB,fallbackRGBA8 54.00MiB. Envelope3s,alpha(f0,6,54,71)=(0,1,1,0),scale1,erosionf54–71;2idphụ ghi trongrecipe,chưa tạo lớp mới.
+Anh/Claude xem recipe và bản so6khung sẵn có; còn xem tốc độ/cănXY,mip,nền sáng/tối,quỹ đạo,hiệu năng và tầngB tronghost. Không build/test/browser/AIart/Blender hoặc sửa mã/manifest đang dùng;không tạoPNGthô,dọnRGBA kiểmKTX2 riêng.
+Dừng sau đúng một dòng; các việc/cổng khác giữ nguyên.
+
+**07/11 15:08 · L3 · i2v-fire-ground-mark__take2 · A-FAIL→S2.**
+Soi49khung nguồn và24MP4 trên11ảnh;thử[24,48)@24/1s. Còn mặt đá trong năng lượng,thiếu alpha đá;trôi2,607%>2%,lề7,315%,p99/biên0.
+Đầu ra: `games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-fire-ground-mark/v1` — MP4/atlas/KTX2,recipe,evidence,compare;KTX2 13mip/2034670byte,24mẫu thật.
+Đã chuyển đúng dòng sangS2,sửa ảnh tách đá/emissive;không tích hợp,không tạoảnh/Blender/Firefly hoặc chạy game/build/test. Đã xóa khung thô riêng;nguồn/hash giữ nguyên.
+Anh/Claude xem `compare-6.jpg` và recipe;chưa nghiệm thu host/tầngB. Hoàn tất một việc,rồi dừng.
+
+2026-11-07T15:09:50+07:00 · L3 · đúng một dòng T0:i2v-ult-ice-cold-silence (bổ sung hàng18): A-FAIL→S2.
+Đã đối soát 3 SHA-256 nguồn và 10 SHA-256 đầu ra; tái dùng recipe/gói thử take2, không tạo media hoặc duyệt take1 mới.
+Nhũ băng cắt mép dưới72/72khung, thiếu matte cảnh; dùng yêu cầu S1-18 sẵn ở stream-2-image.md, không thêm trùng.
+Bằng chứng: .local/s1/i2v-ult-ice-cold-silence__take2/t0-reconciliation.json; recipe: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-ice-cold-silence/v1/recipe.md.
+Anh/Claude xem lỗi contain và tách matte theo S1-18; chưa tích hợp/chấm tầngB. Làn giữ todo (lặp); dừng lượt, không build/test/browser.
+
+2026-11-07T15:11:29+07:00 · L3 · đúng một dòng T0:i2v-ult-thunder-nine-heavens (bổ sung hàng 19): A-FAIL→S2.
+Đã đối soát 3 SHA-256 nguồn, 10 SHA-256 đầu ra và 13 đường gọi; tái dùng recipe/gói thử take2, không tạo media hoặc duyệt take1 mới.
+Mây cắt mép trên 72/72 khung, thiếu matte mây tối; dùng S1-19 sẵn ở stream-2-image.md, không thêm trùng.
+Bằng chứng: .local/s1/i2v-ult-thunder-nine-heavens__take2/t0-reconciliation.json; recipe: games/immortality-cultivation/art-src/lab/vfx-redo-2026-11-07/keep/i2v-ult-thunder-nine-heavens/v1/recipe.md.
+Anh/Claude đối chiếu job v2 trước sửa contain/matte theo S1-19; chưa tích hợp/chấm tầng B. Làn giữ todo (lặp); dừng lượt, không build/test/browser.
