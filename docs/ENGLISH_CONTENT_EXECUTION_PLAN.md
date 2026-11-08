@@ -15,7 +15,7 @@ User instruction: execute the twelve agreed work items as four groups of three. 
 | Step | Deliverable and PASS criterion | Current reviewed state |
 | --- | --- | --- |
 | 1 | Review all 316 candidates remaining after Slice 29; publish only eligible records. Verify the final four-record slice and an exhausted next-review queue without replaying old records. All content/runtime/report/CI gates pass. | PASS — all 316 reviewed/published; three workflows passed on `565659b` |
-| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | IN PROGRESS — new pinned English-only intake and one hundred and ten editorial batches integrated; 21,603 published examples. Candidate capacity is available; remaining editorial work is not approved. |
+| 2 | Expand reviewed, published examples to the agreed minimum of 100,000 using reproducible, licensed source intake. Source capacity, editorial quality and runtime counts must independently support the result. | IN PROGRESS — new pinned English-only intake and two hundred editorial batches integrated; 38,595 published examples. Candidate capacity is available; remaining editorial work is not approved. |
 | 3 | Recover exact pinned Tatoeba EN/VI/link bytes, or complete a separately versioned, fully reviewed source upgrade with checksums, license and attribution. Import validation and reproducibility pass. | Queued behind Step 2; historical source bytes currently unavailable |
 
 The default typing-text candidate queue is bounded at 1,000 candidates. Exhausting that queue is Step 1 completion, not exhaustion of all original passages and not completion of Step 2.
@@ -61,9 +61,9 @@ Step 2 was then assessed with `node scripts/audit-english-example-source-capacit
 
 | Capacity measure | Count |
 | --- | ---: |
-| Reviewed published examples | 21,603 |
+| Reviewed published examples | 38,595 |
 | Required minimum | 100,000 |
-| Current published deficit | 78,397 |
+| Current published deficit | 61,405 |
 | Eligible unique raw sentences in the current original-source lane | 5,588 |
 | Raw sentences not yet reviewed | 4,588 |
 | Optimistic published upper bound using only remaining original-source raw sentences | 12,710 |
@@ -439,3 +439,109 @@ Local validation covers schema/source/review/license gates, E10 contracts and sm
 The preceding verified checkpoint `258069e4e7f10c8c45591fc2e66920d2af9179da` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42457074320), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42457076759) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42457070694). Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
 
 Continue English editorial batch 111 at `sent.tatoeba.803149` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 21,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+## English editorial continuation: batches 111–200
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 111 | 200 | 197 | 3 | 0 |
+| 112 | 200 | 200 | 0 | 0 |
+| 113 | 200 | 196 | 4 | 0 |
+| 114 | 200 | 199 | 1 | 0 |
+| 115 | 200 | 198 | 2 | 0 |
+| 116 | 200 | 199 | 1 | 0 |
+| 117 | 200 | 195 | 5 | 0 |
+| 118 | 200 | 196 | 4 | 0 |
+| 119 | 200 | 196 | 4 | 0 |
+| 120 | 200 | 191 | 9 | 0 |
+| 121 | 200 | 196 | 4 | 0 |
+| 122 | 200 | 197 | 3 | 0 |
+| 123 | 200 | 196 | 4 | 0 |
+| 124 | 200 | 192 | 8 | 0 |
+| 125 | 200 | 189 | 11 | 0 |
+| 126 | 200 | 197 | 3 | 0 |
+| 127 | 200 | 192 | 8 | 0 |
+| 128 | 200 | 191 | 9 | 0 |
+| 129 | 200 | 191 | 9 | 0 |
+| 130 | 200 | 179 | 21 | 0 |
+| 131 | 200 | 189 | 11 | 0 |
+| 132 | 200 | 192 | 8 | 0 |
+| 133 | 200 | 182 | 18 | 0 |
+| 134 | 200 | 184 | 16 | 0 |
+| 135 | 200 | 165 | 35 | 0 |
+| 136 | 200 | 169 | 31 | 0 |
+| 137 | 200 | 191 | 9 | 0 |
+| 138 | 200 | 175 | 25 | 0 |
+| 139 | 200 | 181 | 19 | 0 |
+| 140 | 200 | 195 | 5 | 0 |
+| 141 | 200 | 185 | 15 | 0 |
+| 142 | 200 | 180 | 20 | 0 |
+| 143 | 200 | 190 | 10 | 0 |
+| 144 | 200 | 188 | 12 | 0 |
+| 145 | 200 | 190 | 10 | 0 |
+| 146 | 200 | 178 | 22 | 0 |
+| 147 | 200 | 168 | 32 | 0 |
+| 148 | 200 | 199 | 1 | 0 |
+| 149 | 200 | 196 | 4 | 0 |
+| 150 | 200 | 193 | 7 | 0 |
+| 151 | 200 | 199 | 1 | 0 |
+| 152 | 200 | 193 | 7 | 0 |
+| 153 | 200 | 197 | 3 | 0 |
+| 154 | 200 | 196 | 4 | 0 |
+| 155 | 200 | 195 | 5 | 0 |
+| 156 | 200 | 198 | 2 | 0 |
+| 157 | 200 | 197 | 3 | 0 |
+| 158 | 200 | 184 | 16 | 0 |
+| 159 | 200 | 178 | 22 | 0 |
+| 160 | 200 | 189 | 11 | 0 |
+| 161 | 200 | 187 | 13 | 0 |
+| 162 | 200 | 183 | 17 | 0 |
+| 163 | 200 | 188 | 12 | 0 |
+| 164 | 200 | 171 | 29 | 0 |
+| 165 | 200 | 185 | 15 | 0 |
+| 166 | 200 | 185 | 15 | 0 |
+| 167 | 200 | 195 | 5 | 0 |
+| 168 | 200 | 190 | 10 | 0 |
+| 169 | 200 | 183 | 17 | 0 |
+| 170 | 200 | 186 | 14 | 0 |
+| 171 | 200 | 185 | 15 | 0 |
+| 172 | 200 | 191 | 9 | 0 |
+| 173 | 200 | 194 | 6 | 0 |
+| 174 | 200 | 192 | 8 | 0 |
+| 175 | 200 | 178 | 22 | 0 |
+| 176 | 200 | 184 | 16 | 0 |
+| 177 | 200 | 193 | 7 | 0 |
+| 178 | 200 | 183 | 17 | 0 |
+| 179 | 200 | 192 | 8 | 0 |
+| 180 | 200 | 187 | 13 | 0 |
+| 181 | 200 | 185 | 15 | 0 |
+| 182 | 200 | 194 | 6 | 0 |
+| 183 | 200 | 185 | 15 | 0 |
+| 184 | 200 | 191 | 9 | 0 |
+| 185 | 200 | 195 | 5 | 0 |
+| 186 | 200 | 184 | 16 | 0 |
+| 187 | 200 | 186 | 14 | 0 |
+| 188 | 200 | 182 | 18 | 0 |
+| 189 | 200 | 188 | 12 | 0 |
+| 190 | 200 | 195 | 5 | 0 |
+| 191 | 200 | 186 | 14 | 0 |
+| 192 | 200 | 186 | 14 | 0 |
+| 193 | 200 | 187 | 13 | 0 |
+| 194 | 200 | 184 | 16 | 0 |
+| 195 | 200 | 185 | 15 | 0 |
+| 196 | 200 | 190 | 10 | 0 |
+| 197 | 200 | 191 | 9 | 0 |
+| 198 | 200 | 189 | 11 | 0 |
+| 199 | 200 | 181 | 19 | 0 |
+| 200 | 200 | 193 | 7 | 0 |
+| Total | 18,000 | 16,992 | 1,008 | 0 |
+
+All 18,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Near duplicates and intra-slice duplicate variations were removed during review. All 1,008 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 39,824 decisions, 36,382 published, 3,442 rejected and 246 disclosed edits. Runtime: 38,595 examples, 40,483 sentence records and 51,378 rich records; ledger: 54,820 applied decisions (51,378 publication and 3,442 deprecated). This continuation adds 16,992 examples, leaving 61,405 more reviewed publications to reach 100,000. All 36,382 English-only approved objects match runtime exactly and pass both adapters (72,764 checks). Rejected IDs remain absent. Shard 043 was completed with 500 records, new shards `examples/044.json` through `examples/076.json` (500 records each), and `examples/077.json` (95 records) are registered in the manifest. There are 82,361 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 125,544 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `258069e4e7f10c8c45591fc2e66920d2af9179da` passed [Platform CI](https://github.com/sinhvienaiti/typing-game/actions/runs/42457074320), [Master Plan Acceptance](https://github.com/sinhvienaiti/typing-game/actions/runs/42457076759) and [Full Validation](https://github.com/sinhvienaiti/typing-game/actions/runs/42457070694). Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 201 at `sent.tatoeba.3597719` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 39,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
