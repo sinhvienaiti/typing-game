@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 17679,
+  "examplesScanned": 21603,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 56,
-    "withoutCandidates": 4944,
-    "coverage": 0.0112,
+    "withCandidates": 59,
+    "withoutCandidates": 4941,
+    "coverage": 0.0118,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -259,9 +259,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 240,
-    "withoutCandidates": 3945,
-    "coverage": 0.0573,
+    "withCandidates": 245,
+    "withoutCandidates": 3940,
+    "coverage": 0.0585,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -276,7 +276,10 @@
       {
         "id": "pv.00000002",
         "exampleIds": [
-          "sent.tatoeba.323200"
+          "sent.tatoeba.323200",
+          "sent.tatoeba.671855",
+          "sent.tatoeba.681515",
+          "sent.tatoeba.681567"
         ]
       },
       {
@@ -385,9 +388,9 @@
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 444,
-    "withoutCandidates": 66,
-    "coverage": 0.8706,
+    "withCandidates": 455,
+    "withoutCandidates": 55,
+    "coverage": 0.8922,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -462,7 +465,9 @@
       {
         "id": "pat.00000008",
         "exampleIds": [
-          "sent.tatoeba.309457"
+          "sent.tatoeba.309457",
+          "sent.tatoeba.542922",
+          "sent.tatoeba.681878"
         ]
       },
       {
@@ -489,17 +494,13 @@
     "sampleMissing": [
       "pat.00000047",
       "pat.00000081",
-      "pat.00000082",
       "pat.00000104",
       "pat.00000105",
       "pat.00000143",
-      "pat.00000176",
-      "pat.00000186",
       "pat.00000205",
       "pat.00000241",
       "pat.00000252",
       "pat.00000253",
-      "pat.00000254",
       "pat.00000256",
       "pat.00000257",
       "pat.00000265",
@@ -511,7 +512,11 @@
       "pat.00000286",
       "pat.00000288",
       "pat.00000289",
-      "pat.00000291"
+      "pat.00000291",
+      "pat.00000292",
+      "pat.00000293",
+      "pat.00000295",
+      "pat.00000296"
     ]
   }
 }
