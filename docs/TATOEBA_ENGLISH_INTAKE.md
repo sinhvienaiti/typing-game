@@ -84,8 +84,29 @@ A further 600 candidates received individual decisions: batch 16 published 103/r
 
 At the end of batches 16–18, English-only totals were: 3,424 decisions, 2,753 published, 671 rejected and 72 disclosed edits. Runtime: 4,966 examples, 6,854 sentence records and 17,749 rich records; ledger: 18,420 decisions. All 2,753 approved English-only records match runtime exactly and pass both Monkeytype and Karaoke adapters (5,506 checks). All rejected records remain absent. There are 118,762 unreviewed English-only candidates and 95,034 more reviewed publications are needed. English editorial batch 19 followed at `sent.tatoeba.45621`. This is still execution Step 2, with Steps 3–12 queued. The historical EN/VI/link pin, all source checksums and the legacy vocabulary ABI are unchanged.
 
-## English batches 19–21: current Step 2 checkpoint
+## English batches 19–21: preceding Step 2 checkpoint
 
 All 600 candidates received individual decisions: batch 19 published 159/rejected 41/edited six; batch 20 published 156/rejected 44/edited one; batch 21 published 142/rejected 58/edited two. Total: 457 published, 143 rejected and nine disclosed edits. Original/final wording, editorial rationale, explicit accepted-record CEFR, attribution, source evidence and digests remain in the three reports. Cross-corpus review rejected additional semantic repeats, including accident-cause paraphrases and a fifteen-member committee sentence whose wording differed from the existing record. Edited final text was also checked against all active canonical sources.
 
-Current English-only totals: 4,024 decisions, 3,210 published, 814 rejected and 81 disclosed edits. Runtime: 5,423 examples, 7,311 sentence records and 18,206 rich records; ledger: 19,020 decisions. All 3,210 approved English-only records match runtime exactly and pass both adapters (6,420 checks); rejected objects remain absent. The example manifest includes `examples/010.json`. There are 118,162 unreviewed English-only candidates and 94,577 more reviewed publications are needed. Continue English editorial batch 22 at `sent.tatoeba.49931` using `--limit 200`. This remains execution Step 2; Steps 3–12 stay queued. The historical EN/VI/link pin, source checksums and legacy vocabulary ABI are unchanged.
+At the end of batches 19–21, English-only totals were: 4,024 decisions, 3,210 published, 814 rejected and 81 disclosed edits. Runtime: 5,423 examples, 7,311 sentence records and 18,206 rich records; ledger: 19,020 decisions. All 3,210 approved English-only records match runtime exactly and pass both adapters (6,420 checks); rejected objects remain absent. The example manifest includes `examples/010.json`. There were 118,162 unreviewed English-only candidates and 94,577 more reviewed publications were needed. English editorial batch 22 followed at `sent.tatoeba.49931` using `--limit 200`. This remains execution Step 2; Steps 3–12 stay queued. The historical EN/VI/link pin, source checksums and legacy vocabulary ABI are unchanged.
+
+## English batches 22–30: current Step 2 checkpoint
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 22 | 200 | 143 | 57 | 2 |
+| 23 | 200 | 132 | 68 | 0 |
+| 24 | 200 | 121 | 79 | 1 |
+| 25 | 200 | 151 | 49 | 2 |
+| 26 | 200 | 136 | 64 | 1 |
+| 27 | 200 | 134 | 66 | 2 |
+| 28 | 200 | 137 | 63 | 2 |
+| 29 | 200 | 139 | 61 | 3 |
+| 30 | 200 | 129 | 71 | 4 |
+| Total | 1,800 | 1,222 | 578 | 17 |
+
+Every candidate received an individual reading, explicit outcome and rationale. Review checked grammar, naturalness, standalone use, CEFR, canonical source evidence, attribution, exact/near matches and semantic repeats. Seventeen accepted edits preserve source meaning and disclose original/final wording, `modified: true`, an edit description and a recomputed controlled-source digest. Examples include the standard participle shaken, natural duration expressions, word order, collocations and clarified geographic/language scope. Edited final texts were checked against all active canonical sentence records as well as approved runtime/new-batch records; no exact collision was retained. Rejections remain in authoring, ledger and per-record editorial reports. Grammar that can be repaired without changing source meaning is edited and reviewed; duplication, missing factual context or an unsupported claim is not repaired by inventing new source content.
+
+Current English-only totals: 5,824 decisions, 4,432 published, 1,392 rejected and 98 disclosed edits. Full runtime: 6,645 examples, 8,533 sentence records and 19,428 rich records; ledger: 20,820 applied decisions (19,428 publication and 1,392 deprecated). All 4,432 approved English-only records match runtime exactly and pass Monkeytype and Karaoke adapters (8,864 checks). Rejected IDs remain absent from runtime and future review packets. The example manifest now includes `examples/011.json`, `examples/012.json` and `examples/013.json`; the last shard contains 145 records. There are 116,362 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 127,595 before further rejection/dedup; none of this candidate capacity counts as publication. The reviewed-publication deficit is 93,355.
+
+Continue English editorial batch 31 at `sent.tatoeba.67208` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. This remains execution Group 1 Step 2. Steps 3–12 remain queued; PR #48 stays Draft. Source/license pins, the historical EN/VI/link lane and legacy vocabulary ABI remain unchanged.

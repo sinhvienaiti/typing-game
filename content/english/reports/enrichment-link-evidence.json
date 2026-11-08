@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 5423,
+  "examplesScanned": 6645,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 24,
-    "withoutCandidates": 4976,
-    "coverage": 0.0048,
+    "withCandidates": 28,
+    "withoutCandidates": 4972,
+    "coverage": 0.0056,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -175,7 +175,9 @@
         "exampleIds": [
           "sent.tt.l002-p009.018",
           "sent.tatoeba.33381",
-          "sent.tatoeba.33389"
+          "sent.tatoeba.33389",
+          "sent.tatoeba.50432",
+          "sent.tatoeba.54457"
         ]
       },
       {
@@ -215,9 +217,9 @@
         ]
       },
       {
-        "id": "col.00000062",
+        "id": "col.00000047",
         "exampleIds": [
-          "sent.grb2.07.02.1"
+          "sent.tatoeba.65899"
         ]
       }
     ],
@@ -251,9 +253,9 @@
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 113,
-    "withoutCandidates": 4072,
-    "coverage": 0.027,
+    "withCandidates": 141,
+    "withoutCandidates": 4044,
+    "coverage": 0.0337,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -266,7 +268,8 @@
         "exampleIds": [
           "sent.tt.l002-p006.003",
           "sent.tatoeba.6043",
-          "sent.tatoeba.34104"
+          "sent.tatoeba.34104",
+          "sent.tatoeba.52430"
         ]
       },
       {
@@ -289,7 +292,8 @@
       {
         "id": "pv.00000006",
         "exampleIds": [
-          "sent.tatoeba.33891"
+          "sent.tatoeba.33891",
+          "sent.tatoeba.61905"
         ]
       },
       {
@@ -297,7 +301,8 @@
         "exampleIds": [
           "sent.tt.l002-p005.009",
           "sent.tt.l001-p008.010",
-          "sent.tt.l002-p001.012"
+          "sent.tt.l002-p001.012",
+          "sent.tatoeba.54690"
         ]
       },
       {
@@ -310,20 +315,24 @@
       {
         "id": "pv.00000010",
         "exampleIds": [
-          "sent.tatoeba.48809"
+          "sent.tatoeba.48809",
+          "sent.tatoeba.56787"
         ]
       },
       {
         "id": "pv.00000011",
         "exampleIds": [
           "sent.tatoeba.18821",
-          "sent.tatoeba.40869"
+          "sent.tatoeba.40869",
+          "sent.tatoeba.64793"
         ]
       },
       {
         "id": "pv.00000012",
         "exampleIds": [
-          "sent.tt.l005-p002.013"
+          "sent.tt.l005-p002.013",
+          "sent.tatoeba.59218",
+          "sent.tatoeba.64468"
         ]
       }
     ],
@@ -332,34 +341,34 @@
       "pv.00000009",
       "pv.00000013",
       "pv.00000019",
-      "pv.00000021",
       "pv.00000022",
       "pv.00000023",
       "pv.00000024",
       "pv.00000028",
-      "pv.00000029",
       "pv.00000035",
       "pv.00000037",
       "pv.00000039",
       "pv.00000040",
-      "pv.00000041",
       "pv.00000042",
       "pv.00000043",
       "pv.00000044",
-      "pv.00000045",
       "pv.00000046",
       "pv.00000047",
       "pv.00000048",
       "pv.00000049",
       "chunk.00000001",
-      "chunk.00000002"
+      "chunk.00000002",
+      "chunk.00000003",
+      "chunk.00000006",
+      "chunk.00000011",
+      "chunk.00000013"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 363,
-    "withoutCandidates": 147,
-    "coverage": 0.7118,
+    "withCandidates": 392,
+    "withoutCandidates": 118,
+    "coverage": 0.7686,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -414,7 +423,8 @@
       {
         "id": "pat.00000006",
         "exampleIds": [
-          "sent.tatoeba.18269"
+          "sent.tatoeba.18269",
+          "sent.tatoeba.56285"
         ]
       },
       {
@@ -455,30 +465,30 @@
     ],
     "sampleMissing": [
       "pat.00000008",
-      "pat.00000029",
-      "pat.00000044",
       "pat.00000045",
       "pat.00000047",
-      "pat.00000056",
-      "pat.00000068",
-      "pat.00000073",
-      "pat.00000075",
       "pat.00000076",
       "pat.00000078",
       "pat.00000081",
       "pat.00000082",
       "pat.00000084",
       "pat.00000085",
-      "pat.00000089",
-      "pat.00000103",
       "pat.00000104",
       "pat.00000105",
-      "pat.00000106",
-      "pat.00000109",
       "pat.00000117",
       "pat.00000132",
       "pat.00000136",
-      "pat.00000138"
+      "pat.00000138",
+      "pat.00000143",
+      "pat.00000145",
+      "pat.00000148",
+      "pat.00000150",
+      "pat.00000176",
+      "pat.00000186",
+      "pat.00000190",
+      "pat.00000198",
+      "pat.00000199",
+      "pat.00000200"
     ]
   }
 }
