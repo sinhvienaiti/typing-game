@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 11926,
+  "examplesScanned": 13851,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 49,
-    "withoutCandidates": 4951,
-    "coverage": 0.0098,
+    "withCandidates": 50,
+    "withoutCandidates": 4950,
+    "coverage": 0.01,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -222,9 +222,9 @@
         ]
       },
       {
-        "id": "col.00000028",
+        "id": "col.00000025",
         "exampleIds": [
-          "sent.tt.l005-p002.012"
+          "sent.tatoeba.287098"
         ]
       }
     ],
@@ -244,7 +244,6 @@
       "col.00000021",
       "col.00000023",
       "col.00000024",
-      "col.00000025",
       "col.00000026",
       "col.00000027",
       "col.00000029",
@@ -253,14 +252,15 @@
       "col.00000032",
       "col.00000033",
       "col.00000034",
-      "col.00000035"
+      "col.00000035",
+      "col.00000037"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 206,
-    "withoutCandidates": 3979,
-    "coverage": 0.0492,
+    "withCandidates": 215,
+    "withoutCandidates": 3970,
+    "coverage": 0.0514,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -320,7 +320,8 @@
         "exampleIds": [
           "sent.tatoeba.16064",
           "sent.tatoeba.25330",
-          "sent.tatoeba.240433"
+          "sent.tatoeba.240433",
+          "sent.tatoeba.293122"
         ]
       },
       {
@@ -371,20 +372,20 @@
       "chunk.00000013",
       "chunk.00000014",
       "chunk.00000015",
-      "chunk.00000024",
       "chunk.00000026",
       "chunk.00000027",
       "chunk.00000028",
       "chunk.00000029",
       "chunk.00000030",
-      "chunk.00000031"
+      "chunk.00000031",
+      "chunk.00000033"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 436,
-    "withoutCandidates": 74,
-    "coverage": 0.8549,
+    "withCandidates": 439,
+    "withoutCandidates": 71,
+    "coverage": 0.8608,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -442,7 +443,8 @@
           "sent.tatoeba.18269",
           "sent.tatoeba.56285",
           "sent.tatoeba.238523",
-          "sent.tatoeba.280960"
+          "sent.tatoeba.280960",
+          "sent.tatoeba.288262"
         ]
       },
       {
