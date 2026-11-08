@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 192,
+  "rejected": 8,
+  "edited": 1,
+  "records": [
+    {
+      "id": "sent.tatoeba.2163161",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The mother and daughter represented two generations.",
+      "finalText": "The mother and daughter represented two generations.",
+      "intakeSourceDigest": "2540bcbfbdc8bf14b72b6f5bc773753b4fa3f99a9c3dc13230098b8cca7643e4",
+      "controlledSourceDigest": "6623004abaf9cbb51765a56cf3c3ea9c806e30efb0a48f3833f8fbcb3b2a5ca2",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681066",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.325740",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.245974",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2163162",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "The official dinner took place at the White House.",
+      "finalText": "The official dinner took place at the White House.",
+      "intakeSourceDigest": "6fb9c85b127a2466e6f9f643b65f34dc86ac044c8c5d6aa1d3b4f758f2ec651c",
+      "controlledSourceDigest": "3528602b43600190a782cac95989a24a78a0b93e02dccab5d0cb5f342c62b258",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.47220",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.47119",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.807580",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B2)."
+    },
+    {
+      "id": "sent.tatoeba.2163165",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The police persuaded the criminal to surrender his weapon.",
+      "finalText": "The police persuaded the criminal to surrender his weapon.",
+      "intakeSourceDigest": "ba62135720c5db0fe04fd69072286fe3cad328b192783bcfa3eca03ded9992ae",
+      "controlledSourceDigest": "5646effdf147b12a7bfdb8e3a90fc3db5af79a23f30a16281fd59ba845338f0e",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.44414",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.238330",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.265892",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Weapon surrender stand-off topic ('surrender his weapon') unsuitable for educational practice"
+    },
+    {
+      "id": "sent.tatoeba.2163167",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The present time is a good time.",
+      "finalText": "The present time is a good time.",
+      "intakeSourceDigest": "741839f3b34526ba26b9e5673b17e260dc07cf9f5ed26d55f5cec88317ecba48",
+      "controlledSourceDigest": "acf64491c464f1cf2762ca61b0bea1fbb9b18c00fc9a420ef7403088ef3c4c97",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1343239",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.242682",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.266784",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163168",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The president ignored the protesters outside his office.",
+      "finalText": "The president ignored the protesters outside his office.",
+      "intakeSourceDigest": "fb4ae7a8cf6484cea5f14fd278835303532258aad84ad4558b6794a2ecff41f5",
+      "controlledSourceDigest": "58ed74e90976d911d73e96ee70c55576ef770c57da89bcf932dee807507d0975",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2163169",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.265364",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.682068",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163169",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The president takes office tomorrow.",
+      "finalText": "The president takes office tomorrow.",
+      "intakeSourceDigest": "0f3b1f46cce3a4d47a5d4b870fc117749de9ae41b09ef657df0d232357c2edd2",
+      "controlledSourceDigest": "ed0db2a41a4e0b48479f1348731844d70a65111ef6438cd64bce791ca845fffd",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2163168",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.525314",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.425367",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163170",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The rebels sabotaged the railroad.",
+      "finalText": "The rebels sabotaged the railroad.",
+      "intakeSourceDigest": "3cc844052f97365f85e8396664f7009760c6420203b4318b9cca72922f83d6c2",
+      "controlledSourceDigest": "408b042212152be24337b246458ab771ffb6983a40cd4553e67b8d4653406868",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.803075",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.282756",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.802378",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Sabotage topic ('rebels sabotaged the railroad') unsuitable for general practice"
+    },
+    {
+      "id": "sent.tatoeba.2163171",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The report on the meeting is ready.",
+      "finalText": "The report on the meeting is ready.",
+      "intakeSourceDigest": "b6274c3af4a67f78a63606447b2eed06c3664817a5d137987286752f562816fe",
+      "controlledSourceDigest": "38b5014918229e0d3243d24ef071982ffd6b9c8158c9902c900c64e21baafd72",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.321169",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1526447",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1557599",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163173",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The storm had a serious effect on the economy.",
+      "finalText": "The storm had a serious effect on the economy.",
+      "intakeSourceDigest": "6a409ab08fc6ff0b4152119d733aeeaf3e12715b6f35cf86808e38a14484f6df",
+      "controlledSourceDigest": "6e1fa1019508a89bed6af0f11d5f051315adad24815b2352649828c9744ebfab",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.325303",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.240731",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.278896",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163174",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The sun was shining, yet it was cold.",
+      "finalText": "The sun was shining, yet it was cold.",
+      "intakeSourceDigest": "3d03a5177ae384fd90965aa2f592dae175a41041c0e20f0342d328f66e7c4240",
+      "controlledSourceDigest": "3b737e1d9d6871d1c528bbc35e58feac0e6d866957a3cbc618fbb08891326987",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680172",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.grb1.02.01.2",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.281055",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163175",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The talks should begin soon.",
+      "finalText": "The talks should begin soon.",
+      "intakeSourceDigest": "d282f3f186309d171e9d71d2f7baf87bdcbc5532e680bc8b0063f944908ef8f4",
+      "controlledSourceDigest": "bd5e4300b733e669adc61e1a245d82209996b4516d6409f5d783415f1bd17fc2",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.grb1.04.05.3",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tt.l001-p008.005",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.gra2.04.04.3",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163176",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The talks will deal with the problem of pollution.",
+      "finalText": "The talks will deal with the problem of pollution.",
+      "intakeSourceDigest": "4a49f526cb77bcb9ad1a6731066f205b11d9c8cf5945efb857e117f82c339300",
+      "controlledSourceDigest": "73eebb55252ad7f57e30067b57627a80425d2b9850533bd710078bf671c4b26b",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807617",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.280266",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.261759",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163177",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The talks will last three days.",
+      "finalText": "The talks will last three days.",
+      "intakeSourceDigest": "b300549c539b6185382cc411cc9fd026785cf88367c8fa4c5e179d47ddb74418",
+      "controlledSourceDigest": "0fef83a6b0b643803943474988097942e84cc5bb2d01109c622698393c1b9f7e",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807040",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.807110",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.508812",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163178",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The teacher demonstrated the idea with an experiment.",
+      "finalText": "The teacher demonstrated the idea with an experiment.",
+      "intakeSourceDigest": "20d1576575e9b4254fb3405e5cd91efb8110a924ad76d448a15540363fa22d74",
+      "controlledSourceDigest": "75799134a1344372262620a4d0eee4a4b498b92d7883170bb6c0b99babdbcaef",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681602",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.272920",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.370681",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2163179",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The test of the new engine takes place today.",
+      "finalText": "The test of the new engine takes place today.",
+      "intakeSourceDigest": "6aedab7a657766dddea1da245458e425e53baa9442b32e250ab2c776012c3898",
+      "controlledSourceDigest": "638677dd0521d2dfb315ec8d61763de1c2deb2386494f3f743c34258c6373c28",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681932",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1208728",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.243038",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163180",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The two men were business partners.",
+      "finalText": "The two men were business partners.",
+      "intakeSourceDigest": "6faed27bf4760bf3867a4d31a2fe0d6163258cf2c2d3c43b6d5ac47413987e83",
+      "controlledSourceDigest": "2c74a85300e26ef30cfeadce25a1432d7caf973e77956545888f5b45135a2fc9",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807039",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.807506",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.280912",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2163181",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "The two nations have strong trade ties.",
+      "finalText": "The two nations have strong trade ties.",
+      "intakeSourceDigest": "c845168649eab25b0bfbde22d1a7603d274acb4a90ac01a3604fcbe8a95ab562",
+      "controlledSourceDigest": "65402bfe4f54783d899db8bb2a3ea5c40ae4b1232a49c92e81bc92c5fd9bccb2",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.682186",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.682214",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.280855",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B2)."
+    },
+    {
+      "id": "sent.tatoeba.2163182",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The two sides hold talks this week.",
+      "finalText": "The two sides hold talks this week.",
+      "intakeSourceDigest": "6d2a2485e67110cb2bc5a4b23d4c26fcfa9aa9f9549b92395fb4a0b0566e0859",
+      "controlledSourceDigest": "a5b635d1b946204e04f9520c0a724d489ef1f22bb621dfda8ace5ffa6616c98c",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807200",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.807275",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.349801",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163183",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Their goods are of the highest quality.",
+      "finalText": "Their goods are of the highest quality.",
+      "intakeSourceDigest": "6b3114abf6aa858a6d58dca24015387593479a8506e59c8f4fb275391b0a3199",
+      "controlledSourceDigest": "8e41fe426508ad48ecea85e5d6fa515b0e1d8c50162602b952be3c2febcad543",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.306597",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1120652",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.33332",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163184",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "There was a list of available candidates.",
+      "finalText": "There was a list of available candidates.",
+      "intakeSourceDigest": "4dfda7328df23990af6347a55408247777c85e0c4e16c3d1c69fddf31cad2d68",
+      "controlledSourceDigest": "d544d2bc88e8515ed55d14f342bd92833e3fa549192f725525235e9bfa5f4d35",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.806926",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.807076",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.804190",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2163185",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "There was only one case of chicken pox at the school.",
+      "finalText": "There was only one case of chickenpox at the school.",
+      "intakeSourceDigest": "392d13358e7abcfb700c355752a4103f3939f98a4abe3e4f6ea15a7e5021b6f4",
+      "controlledSourceDigest": "4341f0984f48289fc15b63de0a634f0a3c4dc9766a572b5521d8b858eb005afe",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807389",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.1635531",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.43972",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Accepted for English example sentence practice with controlled editorial refinement (B1): Standardize spaced noun 'chicken pox' to canonical closed compound 'chickenpox'."
+    },
+    {
+      "id": "sent.tatoeba.2163186",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "These shoes fit my feet.",
+      "finalText": "These shoes fit my feet.",
+      "intakeSourceDigest": "79e672f319d1f0cd90f3243644a6acf3f001deb00d9b8db0f8c5b0541b00adb1",
+      "controlledSourceDigest": "a6be80ac9ce000740d89b9a80644efbccf700bec1d47cd9f7e77e7432ff08e6c",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1327292",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.269136",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.59581",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163190",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They called for an end to the fighting.",
+      "finalText": "They called for an end to the fighting.",
+      "intakeSourceDigest": "92a8fe247c140f44c84d913d8a3e13404a265f071bdaed458f86ab800b6bf392",
+      "controlledSourceDigest": "db9913a3d80d2daacc84e5d952ddf509ecba32036c23a4ae31958edbf8c9c9ec",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802638",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.280850",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.802366",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163191",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They formed a swim team.",
+      "finalText": "They formed a swim team.",
+      "intakeSourceDigest": "38e2f35ca587aca1b13f7ba948f75bc7c39aaa9d0d9f03df8bb088cc30a0256f",
+      "controlledSourceDigest": "04252a54778e810beae4f3bffef0c7460e9b96a4fb78e31611e0a09ac220cf24",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802374",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.306535",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1105703",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163193",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They plan to have a party.",
+      "finalText": "They plan to have a party.",
+      "intakeSourceDigest": "02b7a89a10d17eb48dc6c5e296e85e5bc5987a8bc9ff20c953a7b8dc9dff6be4",
+      "controlledSourceDigest": "34da91067a7cf65a117a44ad8bcb659fa8763acc0d7e88fd5bfa01ff301c7a68",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.307208",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.802582",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1105703",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163194",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "They survived, even though the building was destroyed.",
+      "finalText": "They survived, even though the building was destroyed.",
+      "intakeSourceDigest": "96c95caa219c7b4f11c34abd34d2349978e5f90db20efd96fd958871db53c73b",
+      "controlledSourceDigest": "1dd5454daea6f405d4218668920b52d4c5a34a2b28d11c0c6bf248a0e0ea99ed",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.67862",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.07.08.3",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.680680",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2163195",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They were members of the middle class.",
+      "finalText": "They were members of the middle class.",
+      "intakeSourceDigest": "915e0ba831f25654d34b636835f530c1259675d13703fe6c99abb53da9362a47",
+      "controlledSourceDigest": "bd0c7e3507d8a2e3ab9e5a07384cfae1e2e238d4c0237c629c62829187c2f17e",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802478",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.802443",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.886286",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163196",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They were responsible for the accident.",
+      "finalText": "They were responsible for the accident.",
+      "intakeSourceDigest": "3c3090090aa64e0b6abee78c1ee578d82cc16ea7b94f691b20a84f5a8252255f",
+      "controlledSourceDigest": "729df202989cace53bffddfa46f44a00c596cfe7b818312e0333811291c49e30",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802707",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.245705",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.305256",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163197",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They will hold talks tomorrow.",
+      "finalText": "They will hold talks tomorrow.",
+      "intakeSourceDigest": "1feddd3040093cfa75651107dc0db161ef8c986b1216db864416c96f8a57de30",
+      "controlledSourceDigest": "6b059ca73ea5fc48a5971e381bb377ddcb6e3fd426f4cc65cd5e8dc91999ccac",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1233148",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1493507",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1528559",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163198",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Water power turns the wheel.",
+      "finalText": "Water power turns the wheel.",
+      "intakeSourceDigest": "bb5b51ddf6f72bf6642cf32058e9f4d0e0940ac60eaa56ff2d8195eb93a9c004",
+      "controlledSourceDigest": "173de818b216d5cf63f1bb5316c5ad27dd10fd7b2eb76daff3ec28e75d5e2901",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.gra1.04.07.1",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.265644",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.282110",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163199",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We ask the teacher questions every day.",
+      "finalText": "We ask the teacher questions every day.",
+      "intakeSourceDigest": "8a48952f82572c86240f7c69708854383afc6ed52a2a3aa806255413563d9268",
+      "controlledSourceDigest": "57c6eda116a31509120b7df71bfdde6bb9f515bebbb0677967193e6fc398b487",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.272957",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1662189",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.397194",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163200",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We can talk about it in the future.",
+      "finalText": "We can talk about it in the future.",
+      "intakeSourceDigest": "24c1459a36e9219e7e54b0c0332fedb2812f9e3ead437ca143e2718879a944bd",
+      "controlledSourceDigest": "8125284366c30fdafa11d3983ce798d1d38e9eaf8c9de3af3599bdf78d21423f",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.47260",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.64250",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.680816",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163202",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We liked the food, especially the fish.",
+      "finalText": "We liked the food, especially the fish.",
+      "intakeSourceDigest": "93257d74f707591d4731cf1327ff3e486e2e4024d4c9055df7660d6dbe9b3a39",
+      "controlledSourceDigest": "ec941f17b72eeacfe7f780ebe7fa5ae98cb0aa5e417a26794c46eea43dfb8e03",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.262781",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1073082",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.1083980",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163205",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Which students will take the test?",
+      "finalText": "Which students will take the test?",
+      "intakeSourceDigest": "cb21458a4a233da66ef83511a11ced977c6e36ffabab2edd2af7a5be209ba3c4",
+      "controlledSourceDigest": "69b7b4f38ba4cbd2e966f6b91d9ccc4fbdd2c0ceab6a670fd0a626ff7a8a4323",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.gra2.03.08.3",
+          "score": 0.3
+        },
+        {
+          "id": "sent.gra2.04.03.3",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.238736",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2163206",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You must go to school.",
+      "finalText": "You must go to school.",
+      "intakeSourceDigest": "7debcd38a320cfeb72fa1165f8c14ea3ead68d4f480e278c682c0354754d3df2",
+      "controlledSourceDigest": "315aa86dc03fd8848af1f07fcdd58a5303ab5c4086d8d54ed85bbff8fc53e4c5",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.370683",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.69210",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.681536",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163429",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "She complains all the time.",
+      "finalText": "She complains all the time.",
+      "intakeSourceDigest": "3a4f039bd01b4c5238bdc4c8a018331134eb5421960ebdcbf76eaa3d72209224",
+      "controlledSourceDigest": "2cfdfe4924909fd1ac2ec60797846eee915329af80a5d1a9d72cb1c89f83043e",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.712859",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.315898",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1344029",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2163667",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You don't have to pay anything.",
+      "finalText": "You don't have to pay anything.",
+      "intakeSourceDigest": "3f9d866c111be9f446d8d900778b6de521db2f75d87538629a272cfca79c61bc",
+      "controlledSourceDigest": "ffa38fdabcd154641232dc8e976a6c4581365ff07471d5b839ee51776a727a52",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.gra2.04.03.2",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.264822",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5997",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2164542",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "His success is due more to his persistent hard work than to his talent.",
+      "finalText": "His success is due more to his persistent hard work than to his talent.",
+      "intakeSourceDigest": "d88789621f998e9b0057b51a7d16984b84c5cdeea0cc8b3e1284cfce56693cb1",
+      "controlledSourceDigest": "93c42684b58569845427e0f0500f05d3acf36e0cecd5473c2228e88caa02cb25",
+      "maximumTokenJaccard": 0.6154,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.327925",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.tatoeba.283898",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.286512",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2164596",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "She ran outside to see what had happened.",
+      "finalText": "She ran outside to see what had happened.",
+      "intakeSourceDigest": "9e4d825131ec71922ea3fdd52dd783c9a42eecffdf925779648895c0480ebd54",
+      "controlledSourceDigest": "17a5eba99365e8839c7f29975e9d78dc1ad84333fee8c6bc6d61d6fa5a491802",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2164598",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.313968",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.307956",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2164598",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "She ran outside half-naked.",
+      "finalText": "She ran outside half-naked.",
+      "intakeSourceDigest": "faba29557df54ceea231e1629c3a0e07f56e4436a3a73db9fd0f9422df5f8088",
+      "controlledSourceDigest": "ea7ba9f4eb2d2edfb962297d1458feef109be7f1e226578f91e8b96d7138a87b",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2164596",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.316653",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.grb1.04.02.1",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2164602",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I ran outside and the door locked itself behind me.",
+      "finalText": "I ran outside and the door locked itself behind me.",
+      "intakeSourceDigest": "fd7f17f93c6974d4f96ada9a8e486b216c06644b66ac0c253de09f10206e1e49",
+      "controlledSourceDigest": "43ea7bedd6c945cba541082a5c49fc048aa1d8d668b4df42b02c7ddee8ab4903",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681638",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.315558",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1740463",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2164625",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He has a butler and a cook.",
+      "finalText": "He has a butler and a cook.",
+      "intakeSourceDigest": "77b3d60eb472d1ede6fbb54e5a3b1553f711f06992caa9e92bd70d0673dd88e7",
+      "controlledSourceDigest": "d2443d9b0bba75f3caac7b484cfbf80ddd2e491f7900d698a282f3ab0cf05048",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.gra1.04.06.3",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1635393",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1949237",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2164638",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We can talk this through.",
+      "finalText": "We can talk this through.",
+      "intakeSourceDigest": "e0e456f2dea57ce939b748b337d930c134c6c7021e99a794c10ca994c4e0e0ce",
+      "controlledSourceDigest": "0b4f44a61281ae74c0cd7945ea6a4a3d9cedc7f9f832a15ca3757e683d6137a9",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.63863",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2163200",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.247972",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2165141",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "They're not quarreling, but rather rehearsing a play.",
+      "finalText": "They're not quarreling, but rather rehearsing a play.",
+      "intakeSourceDigest": "b7c9bf8ca16fbe2c5913426c6915b596ed94474081f5a54675bf9052e9c32b50",
+      "controlledSourceDigest": "d7d2ba55b2b2953d916afd594b9e8a83ea960e5395ec42b08e567f8aa32f9fa1",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1526515",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.238436",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.314485",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B2)."
+    },
+    {
+      "id": "sent.tatoeba.2166358",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why didn't they show up?",
+      "finalText": "Why didn't they show up?",
+      "intakeSourceDigest": "91205055107ce65cd64b981e529908e80097d2b54e6365ea2622c221b70fa4d8",
+      "controlledSourceDigest": "3864a8d9202d1b6978efd736553f6a0ad9ae31da1b68e8947a68d8b893d5d616",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.395264",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.308455",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1634946",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2166430",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "His grandfather died of cancer last year.",
+      "finalText": "His grandfather died of cancer last year.",
+      "intakeSourceDigest": "ce0e109b7019d3660377e3590ce1780784612d654373279e4487fa0a727a8bd9",
+      "controlledSourceDigest": "459a286029c87abaa60cf57cc78cd9ab96b99f67333cf2e138e6e8b4d96b1390",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1586724",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.266506",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.273857",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167308",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I only have personal items.",
+      "finalText": "I only have personal items.",
+      "intakeSourceDigest": "1af63e88fdf843035d5419a8013ef22273fe443aaa540acc3caf8b2c2ffd75ed",
+      "controlledSourceDigest": "41f019ce96867ca1e4b55117257fbc784193f2434e3a21b68c9bf522d5805a98",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167310",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2167312",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.250488",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167310",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I only have this briefcase.",
+      "finalText": "I only have this briefcase.",
+      "intakeSourceDigest": "ee259f3b04b4d905c40d3ce5483d884a89e6c9611937c4c4547b01953414fa8d",
+      "controlledSourceDigest": "5d5f34fcb20d8f30440c701016febbbef54958a4d6711e477613929bd6644872",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167312",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2167308",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1744727",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167312",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I only have this baggage.",
+      "finalText": "I only have this baggage.",
+      "intakeSourceDigest": "f821b811bd821f3b429925c563ca4538398a188293fb6dd5c750571bd99fad4a",
+      "controlledSourceDigest": "43e9ce878fb7ae2400fdd16bd239adcd11c42f94bf1df536a847584c9b3c2ab9",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167310",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2167308",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1744727",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167337",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Are you going to stay here in the hotel?",
+      "finalText": "Are you going to stay here in the hotel?",
+      "intakeSourceDigest": "d2c46fb6d4f9c9b519fa4f01a7aebed0a7c3b8785233d79c94b131ad6026b489",
+      "controlledSourceDigest": "a774e3d6697a7501281f670bc6635315f92966decb003c0733fe638c057adca6",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167339",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.16713",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.281930",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167338",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Are you going to have dinner here with me?",
+      "finalText": "Are you going to have dinner here with me?",
+      "intakeSourceDigest": "25e05a39a97ff792a0cf15fa114ab606d56f0bab0bf81648a479fad6ba26b711",
+      "controlledSourceDigest": "7abafddf1ad9937945a4790461dfff410c111053e3644a780dd41e9db7819b49",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.16713",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2213950",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1673252",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167339",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Are you going to wait here in the consulate?",
+      "finalText": "Are you going to wait here in the consulate?",
+      "intakeSourceDigest": "6a1ffba3d05f5a7f84946d2d7323a959ed3623354145eb8153fe669ac2e8c3ab",
+      "controlledSourceDigest": "378579150e6e0f31e0708e52dbd9b79b85273a457cbc57a00f6fe5c411d96dc4",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167337",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.281930",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.16713",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B2)."
+    },
+    {
+      "id": "sent.tatoeba.2167349",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Could you carry these suitcases for me?",
+      "finalText": "Could you carry these suitcases for me?",
+      "intakeSourceDigest": "feb9efb59233e8670ee69e202eb9b6487908589f5b4095f915c5a75061475522",
+      "controlledSourceDigest": "7aadcabfc3ea087ed9b862d07c806538bb815043d1c71c080772c1ebe48054c9",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167351",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1495371",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2167353",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2167351",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Could you carry this shopping bag for me?",
+      "finalText": "Could you carry this shopping bag for me?",
+      "intakeSourceDigest": "c2e75c86a4f6c9f24a04be83a0133e8316975df15ca38bd24fb6a991f51b946b",
+      "controlledSourceDigest": "bc4c3746563786548f0aaec592664c629d3e87750bd350b561cfed0402766a4c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167349",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2167353",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2167358",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167353",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Could you open this door for me?",
+      "finalText": "Could you open this door for me?",
+      "intakeSourceDigest": "bbc69eaf6420e09bf3d77e3a0387ab5a7ca875348f76e097e8469c731a8c3728",
+      "controlledSourceDigest": "c897983af3086ac412e758fea1816e8bd0f28ed00d98d96828333ae9c115917e",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167358",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2167351",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1821582",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167358",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Could you type this letter for me?",
+      "finalText": "Could you type this letter for me?",
+      "intakeSourceDigest": "a5c345f1dc9776851d6b82b03bffc6d03220ca8d119ae220768c540aeba1daee",
+      "controlledSourceDigest": "9cbc41901a999de3b3386d05c5ded90a59f98678c3d5adda04bcda1e2a4951c6",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2167353",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2167351",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1495371",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167362",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Someone is looking at me.",
+      "finalText": "Someone is looking at me.",
+      "intakeSourceDigest": "e73848eb2b761e089887e573da01bae1a805fa017d08ff42304411382ee04837",
+      "controlledSourceDigest": "d90f4d61c1f1ac414a8ecab3f8c375b86cb73d3aa6a7eb8bc0ddff3efe2cce16",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.06.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.38633",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1492899",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167391",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It was a good example.",
+      "finalText": "It was a good example.",
+      "intakeSourceDigest": "98af55050aa655b9b671ca78d7226590bb0adb2cd5a108f1ab3c89ef483cdc43",
+      "controlledSourceDigest": "7533edf5210fa82d77334246ebb973d077fddac05fc83ac69b0d419399e9d05e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1300616",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.805473",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1226628",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167392",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How many suitcases do you have?",
+      "finalText": "How many suitcases do you have?",
+      "intakeSourceDigest": "cd8eea6a5d04a3212e52b0fe480465efcb4e3e5c2a81627f01eedc4c7d50324a",
+      "controlledSourceDigest": "800f60f8e84c36284f345ffd93b94dcf0cdbc70fc2736919eaa92d751e99f4e4",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.04.1",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1655760",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.370728",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2167394",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many shopping bags do you have?",
+      "finalText": "How many shopping bags do you have?",
+      "intakeSourceDigest": "f1f804c33f3627da4e9994f5da7f90407d32768dbfe678b82840112ff1b224b4",
+      "controlledSourceDigest": "3060d7257f7f8630050588cc8d922100f2c516f7673d4bcafd86748572f568ac",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.04.1",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1655760",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2167392",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167400",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many plants did you buy?",
+      "finalText": "How many plants did you buy?",
+      "intakeSourceDigest": "fa97294ec0eb99f48a06dececbebfe2be587d089548dd11963fd6b6a5f22da70",
+      "controlledSourceDigest": "559a119bc807f0009d3b1fadca977f2a00a4b66b9035a1a40a2d3d2d9e39d923",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1820637",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2167402",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1673216",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167402",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many things did you buy?",
+      "finalText": "How many things did you buy?",
+      "intakeSourceDigest": "93680d6e44d2a32fbda5a7201ea8d13f730ae4ab1ecbacbdec12ca86eb3f7304",
+      "controlledSourceDigest": "7f04b9d4eeffb7a5adea97851fe75e9c35f37bbe1a762c8c754f8dd636122758",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1820637",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2167400",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1673216",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167413",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm only bringing two suitcases.",
+      "finalText": "I'm only bringing two suitcases.",
+      "intakeSourceDigest": "c083e4c16891913f6805eff00dd35b985e8901108734bd3894185e137abaddc3",
+      "controlledSourceDigest": "678c0b29669fa04f15977caf2445740d6a67d20292706c1ac9322cc5ee24c8e9",
+      "maximumTokenJaccard": 0.1818,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.329084",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.1634923",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.tatoeba.244990",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167423",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "What is the exchange rate for the dollar?",
+      "finalText": "What is the exchange rate for the dollar?",
+      "intakeSourceDigest": "dd941a54599803dc7dd572967535646deba7cba3fa2dbe084ccc980c972520ca",
+      "controlledSourceDigest": "ea8a79e6c00c7dc00eb3ca306ba21cb2da912daa4950e2880fab6edb030413cd",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.48747",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.239563",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.275762",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B2)."
+    },
+    {
+      "id": "sent.tatoeba.2167427",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Today I have to study.",
+      "finalText": "Today I have to study.",
+      "intakeSourceDigest": "90e5fb339bf3d62b0ef521929efeaf320c738ab65958c08ea3826984d05c1dba",
+      "controlledSourceDigest": "de3605f112bb4aea9efd8d5bb45f48013b11eb9782f845051c3a649ef3aa592f",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11759711",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1632044",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1210913",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167431",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "She didn't like the idea.",
+      "finalText": "She didn't like the idea.",
+      "intakeSourceDigest": "b252a255ba698f81b59c9f4f3992b258ecf8cb930bd9fdd5728863de79fadfce",
+      "controlledSourceDigest": "6ecc0a4341722920d8e0437cfe884a1b8d2942d2ccb4252173ab547781dcf1f8",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1005334",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1153224",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2179161",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167432",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They all wanted a taxi.",
+      "finalText": "They all wanted a taxi.",
+      "intakeSourceDigest": "54e3aa5eb00972dbac10eddebc89be41a8ba502b632fa241294ea4660d2bdbb4",
+      "controlledSourceDigest": "81b788cad721053c1c7b3a0d6b10f63525950550d3f54414f4b37e2eb03ed4d3",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.38320",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.802437",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.306078",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167434",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They didn't speak English very well.",
+      "finalText": "They didn't speak English very well.",
+      "intakeSourceDigest": "d3aeb16e1d2cc79c70b7292027d80b91b61cbb4c25fbf19dc3e8f94e81a29f57",
+      "controlledSourceDigest": "82eeda3210ac36d1907b058a057bb17cace401b76af6b748bf0e0d4b923b3c4b",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802606",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.293992",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.245244",
+          "score": 0.23076923076923078
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167435",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We had too much clothing.",
+      "finalText": "We had too much clothing.",
+      "intakeSourceDigest": "c0f6b774817371f37d2a9ce597d2877881bdc8532cc07dcd869b8e3c8b0c55f6",
+      "controlledSourceDigest": "d941d87f2cf42e835e79ac6b023066df0b70994b5af40588b6cee731fd2cb078",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1073082",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.881888",
+          "score": 0.3
+        },
+        {
+          "id": "sent.gra2.02.04.2",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2167443",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "We arrived at Viracopos at one o'clock in the morning.",
+      "finalText": "We arrived at Viracopos at one o'clock in the morning.",
+      "intakeSourceDigest": "57dd8573b5be6bf4d6e9b530ec8ec4ec923b44ffb115d80bcb878da2fa831747",
+      "controlledSourceDigest": "6269e00be7d6888ea6d857c639333e46aa606e17bf5afe992393e153766d4da1",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681564",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.grb2.08.02.1",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.301583",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2167444",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You have to meet my children.",
+      "finalText": "You have to meet my children.",
+      "intakeSourceDigest": "10896f6b57e2aca666972ba794b4be2686d7de160632fea95fb90061c0a1aae5",
+      "controlledSourceDigest": "143cd17c6d81d13eb5ed231e74d813e53cc16308fc529b001ad5f7e77f20564b",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.8245997",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.8245985",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.8245996",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2167445",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "She didn't stay because she had to go to the dentist.",
+      "finalText": "She didn't stay because she had to go to the dentist.",
+      "intakeSourceDigest": "98ae81dcaaa3468717257b0eb0dcbebeeb5c32431045d9bc54419bd396cf27bc",
+      "controlledSourceDigest": "7a4cd3741111332e6c4e117b2dcc30ceb38270e67dfdd794b322cca2e86c6815",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.282518",
+          "score": 0.375
+        },
+        {
+          "id": "sent.gra1.05.07.3",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1588719",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2168342",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They didn't specify the year.",
+      "finalText": "They didn't specify the year.",
+      "intakeSourceDigest": "4ad8bf2942ab5662546f8f850d103308bee092b3f7e306a6036f4b2f926123fe",
+      "controlledSourceDigest": "9e61c9c54eb574d5dc61904d83afe85ad13de1265e51a14b83a3f5e5df7e6741",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.gra1.05.07.3",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.307574",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.gra2.06.04.2",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168655",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom will have to do the work.",
+      "finalText": "Tom will have to do the work.",
+      "intakeSourceDigest": "890d546f0b5a9b80dd119f4ec24b4442ad711766892d3cc7e72633820b6dc7a7",
+      "controlledSourceDigest": "252e5fa086a55a3debac945578927696a2e33457179bb0f23c740df810964f12",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681334",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.52130",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.59107",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168715",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You can't do this to us.",
+      "finalText": "You can't do this to us.",
+      "intakeSourceDigest": "55d6cd155f458cf86f17256079e1705c2d97099f99949917e9049708e6b7ff12",
+      "controlledSourceDigest": "0b1302451b75b70f4e40564845409a5ef5a78004748de3eb5ecb47d59565e73b",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1739444",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.17858",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.376342",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168727",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's your duty to vote.",
+      "finalText": "It's your duty to vote.",
+      "intakeSourceDigest": "16020cf68401ae4487dbdeaa2775f7c27e08da55f80dd136ae0e2058bfba5f8f",
+      "controlledSourceDigest": "d58df4b31bf9fad45a85443b461940f8522f194b1889ae9f9f65c7f347b26540",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1654667",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.680334",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.70760",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168732",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I can live with that.",
+      "finalText": "I can live with that.",
+      "intakeSourceDigest": "c881d816ede1f06592a88dbe58c356105a70ab88200338ff27dd2cefb20cef0e",
+      "controlledSourceDigest": "11746c1ad7acc72d9c447ac236af1df7db00eeca68471ad49e3956ce7a640fb3",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.254856",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.401960",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.799200",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168737",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm not taking no for an answer.",
+      "finalText": "I'm not taking no for an answer.",
+      "intakeSourceDigest": "b065bfe3f0db6bed3a57dddecb0adc89ad14294f4fc8aa2c0e8a3c20096e9423",
+      "controlledSourceDigest": "a23cd185bc91a3ac525dc3820b8684c79886fd4b04c22f7f9a6e379d289a35e8",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18615",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.320371",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.826602",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168778",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We are currently experiencing heavy loads on our servers.",
+      "finalText": "We are currently experiencing heavy loads on our servers.",
+      "intakeSourceDigest": "19618f7637a3f79fc1f4b569d12ab40e8360b3d221d48640b12af1240455873a",
+      "controlledSourceDigest": "7bd766092c6168ab83a4570c89c4cff261dda9681cbe92f693c177c5840a49d6",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1370747",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1426340",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.23571",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168783",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have some very good news.",
+      "finalText": "I have some very good news.",
+      "intakeSourceDigest": "504efb8cfa7642839dceb83a6a48f37181b18ee229a72241c87e5afee8b8fff4",
+      "controlledSourceDigest": "6ad1f1ab6f3233ec88a2fd8a81c1c8b805d48748c726213c57532c9c60cdfd45",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.17368",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1574723",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.64976",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168784",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What does he want in return?",
+      "finalText": "What does he want in return?",
+      "intakeSourceDigest": "646043f16502207924f7970917ab08c9ffb141884cd48cab90618ba29bee9304",
+      "controlledSourceDigest": "083ee8e6d27820054112b2bf3c799091f511fd1197b8dde479d59267a4300bfe",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.836559",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.274137",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.289508",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168790",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You have lots of time.",
+      "finalText": "You have lots of time.",
+      "intakeSourceDigest": "1edd379c7bbf594c25f254f99281fe6f50a3803cf949f3033c5db5cf50ad3f72",
+      "controlledSourceDigest": "57245413d095b6fe0ceff69f6a9bb6de6402ea91e7394030008a9438050ca21b",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1638805",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1826236",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.239337",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168795",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "If you don't have any ideas of your own then you just have to steal some.",
+      "finalText": "If you don't have any ideas of your own then you just have to steal some.",
+      "intakeSourceDigest": "554854f884b8ca2aa2690b61713285d45842535f7f2caecf2b4405d2604b9a50",
+      "controlledSourceDigest": "ec7269070f760930648db1bb017664d05e21d6a6d195318d121ad6d5c63db4cb",
+      "maximumTokenJaccard": 0.2778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.41822",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.64581",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.680266",
+          "score": 0.2777777777777778
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2168802",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You are in very serious trouble.",
+      "finalText": "You are in very serious trouble.",
+      "intakeSourceDigest": "1906bfe20b914f36a6ffa997dcb3c9f9f4a8f4c2b7f6955eb5ed4f509ee074b2",
+      "controlledSourceDigest": "6fbdbd288b2f6ad0c0ec3e0a58931a621b47097d85ef77e062239071c61f9e97",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2168803",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.1345027",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1543903",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Intensifier duplicate of sent.tatoeba.2168803 ('very serious trouble')"
+    },
+    {
+      "id": "sent.tatoeba.2168803",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You are in serious trouble.",
+      "finalText": "You are in serious trouble.",
+      "intakeSourceDigest": "03032ff6a001702bd740892b5659faba7908cfbd4da3382483a2c9360a0e0c57",
+      "controlledSourceDigest": "7c8b84c5f9e7756899ace336d40a1c9c293d74b4253d1fddaa11a81e84d23452",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2168802",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.1345027",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1543903",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168824",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "He's not a bad kid.",
+      "finalText": "He's not a bad kid.",
+      "intakeSourceDigest": "79170c97e05770ee95e3c8b14221f6ecf8bd8e3f38dad15368e2cb83b2d3a21f",
+      "controlledSourceDigest": "7d62ebc71656f64bb4110daec837872b93989fc21f9447f40230e79eaae13fd4",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3729297",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.300583",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.4567809",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2168963",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You don't have to worry about me.",
+      "finalText": "You don't have to worry about me.",
+      "intakeSourceDigest": "1d992a778b1cf6f4a598f463c837662df355a741186c6f61afa0e278203fdef2",
+      "controlledSourceDigest": "d0007b728f3345594f84d0aee5024bb0908a165e0bf0e73feb02eb7abbcaf45e",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.263554",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.239293",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.41822",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168970",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have been here for one week.",
+      "finalText": "I have been here for one week.",
+      "intakeSourceDigest": "a5f5e995126b581de605cec8569b525a3299fde5a8eeb63c14f7c3840463f76a",
+      "controlledSourceDigest": "5363cdf4344d003486969d5f35b7994f301f23058d6aaed22f91933b5039dc76",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.264013",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.848778",
+          "score": 0.4
+        },
+        {
+          "id": "sent.00000014",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2168994",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How long have you been married?",
+      "finalText": "How long have you been married?",
+      "intakeSourceDigest": "4cb32d30312de602813e18427110cc905685164f2bbcc8f5b6264842443c098a",
+      "controlledSourceDigest": "929765a1de1a666c20af0f4b31476796a6f3109b8029f6bb53f8e0e3952ed627",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37601",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.70210",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.921807",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169019",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He has worked in the embassy for three months.",
+      "finalText": "He has worked in the embassy for three months.",
+      "intakeSourceDigest": "1a82e4baa3bf809dd314e88f5d4f4f0c22a71fb9bf0267b7934c2cd74b223f94",
+      "controlledSourceDigest": "51b39952b1f7289a9f396d4a2a2db7d6c9e3ac05943e06e05d184ccb2c495400",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2169041",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.288864",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1025294",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169021",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He hasn't eaten for three days.",
+      "finalText": "He hasn't eaten for three days.",
+      "intakeSourceDigest": "e8a2fc3598eb72238f277602fa2fe0e3c5f5b993775c821765dcd0dc90159d32",
+      "controlledSourceDigest": "22f2e8bef9237111e94a804b574c501cababbcd9caeff3c2b0eb8021e3b41530",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2169041",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2172744",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1562130",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169027",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He has been a teacher for four years.",
+      "finalText": "He has been a teacher for four years.",
+      "intakeSourceDigest": "9d5312c1658b9101add4a21204f39e2068c15cfac62486c6c8118abe066e11a3",
+      "controlledSourceDigest": "ec25498554a9aa0df5b2f570de4445f3e22472eda42e5da9b85c7aa4f605fbe3",
+      "maximumTokenJaccard": 0.5455,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.8778897",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.287164",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.288282",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169028",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I haven't felt well for two days.",
+      "finalText": "I haven't felt well for two days.",
+      "intakeSourceDigest": "ac15bab7165f499747b3042d67e1c262f2b4ab1bdb1f1c47ed9e437fcdc6cfe0",
+      "controlledSourceDigest": "210b103cd69a375a3a12e42744b8b4153897c87cf90cb962cdf6e5941432dcca",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.745278",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.262028",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.324349",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169029",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They have studied here for six months.",
+      "finalText": "They have studied here for six months.",
+      "intakeSourceDigest": "b0ba587c57e3ae9f7cebcca21f64baa571ba770f5e686a6dda04c01a9e9bce9d",
+      "controlledSourceDigest": "f39aba5a63e2e82864f098ea66023d653c4f158d9640654922929891b27f7225",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1210837",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.305611",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.72459",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169030",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They have been in Brazil for one year.",
+      "finalText": "They have been in Brazil for one year.",
+      "intakeSourceDigest": "4eb42f59efd59645049acef3c782c5552897dd80fc631d865f487885b032e78d",
+      "controlledSourceDigest": "3245fe956ca862eb36b1ea5e9f258952030e6b2ce01ad79daf201ffb3546680c",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.306701",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2168970",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.320215",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169033",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I have wanted to go to Brazil for many years.",
+      "finalText": "I have wanted to go to Brazil for many years.",
+      "intakeSourceDigest": "b2543621d80084c2d4a056ce09a3fa85f8d0e8b715f4a6e7f6fc0af3d2ce4dca",
+      "controlledSourceDigest": "c6d18ae0a41a52cdc939cb051c0c306e6a837b4a2b9240d660e724ee8fafd879",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1744809",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1745121",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1421916",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2169035",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "He has not been able to work for many years.",
+      "finalText": "He has not been able to work for many years.",
+      "intakeSourceDigest": "a21711b16e7495763cbb0d1b9c9676c9d67787c69eecc84733d3023f120328a6",
+      "controlledSourceDigest": "824fc076f1bf1d366c20bbc157490a8fba97a4848b3c59c07af6fc48a4f29ebf",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.289923",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2169027",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.288846",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2169041",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He has been here for three days.",
+      "finalText": "He has been here for three days.",
+      "intakeSourceDigest": "1ee56dcc2fbbfc008925795e111beee39b213c11701b72ef4b795c70b1c074c0",
+      "controlledSourceDigest": "75bbd60e0647ad94f1666b7001b3a83a5eb3a1f0850139ffee2f729ad1aa6213",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.287994",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.288282",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2169021",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169236",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It was a waste of time.",
+      "finalText": "It was a waste of time.",
+      "intakeSourceDigest": "7d7f7705a9585d710f03d14ad01fc510c2bb77567b1d2199d87b265a698e8f1d",
+      "controlledSourceDigest": "a468f464a72ae865020bf2ad0589d9abbd004a5ef369f33331cad8c102a3e5b9",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.42273",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.806852",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.682366",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169238",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What have you got to lose?",
+      "finalText": "What have you got to lose?",
+      "intakeSourceDigest": "b63c149a93f7d5a036fa6cff3830244d911d42208c1b39dc7d9844fd67949541",
+      "controlledSourceDigest": "af3041ec036cd6aaf4ffe685b715048ce81298acc6b10ad5c8416f2955900285",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1199450",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.264633",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.69324",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169370",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This is not my problem.",
+      "finalText": "This is not my problem.",
+      "intakeSourceDigest": "2e9a81b84b85ead869a2073c0870522b0a89c46fb2003d7e891bae0d9886699f",
+      "controlledSourceDigest": "e33c1ca79b944a38a05df4beb4cc62a0026741285973f5eb4122922e8222b764",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1769461",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1005358",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1087883",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2169577",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Where do you see yourself in five years?",
+      "finalText": "Where do you see yourself in five years?",
+      "intakeSourceDigest": "4b0b6f122bad0a6254f2632864c6d90118af8f17fb171ae665784f54d138735e",
+      "controlledSourceDigest": "e6653f291df1c70a4ced379eb1b474567c20786d78310b2354fe3e4a3f7ad004",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1118632",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.57995",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1912211",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169583",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't think your mother will like it.",
+      "finalText": "I don't think your mother will like it.",
+      "intakeSourceDigest": "eff5af283858ca14d701acfca8cc5575a953a187cc8f7f086613fd78c4994bb6",
+      "controlledSourceDigest": "f30df35cbea30fd8dc4ddd381d272be1b6a9367d5921f8d5f35dc781dbcc18ff",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1016963",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1517268",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.575305",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169627",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Please put your shirt on.",
+      "finalText": "Please put your shirt on.",
+      "intakeSourceDigest": "7f506034cd5512478d01794b7d60d8c3780cb8264df2f1bd4123b4ff08748d2f",
+      "controlledSourceDigest": "4735fcfd6a0daf5831f4b37b38853ff2bd46c69587ba1f2cdf93b5cb3ce6d540",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680114",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.318317",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.320428",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2169644",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'll get back to you on this.",
+      "finalText": "I'll get back to you on this.",
+      "intakeSourceDigest": "1e5741f385de591ecc8b2147b27e7ec8e2dca6272bc5bd9b1739714ad9ad2a92",
+      "controlledSourceDigest": "3c98d6def7d46f306b2957875d185cc1cad183b2d2c7905ed06b158c45064d07",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.60654",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.16063",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.246491",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169649",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It hurt, but I didn't cry.",
+      "finalText": "It hurt, but I didn't cry.",
+      "intakeSourceDigest": "46bc5ec9607394659c536fa9236aa9c484e8c950da9b160545e3bed01fca2ce7",
+      "controlledSourceDigest": "99a2ad5aaeba1e6d7bf414e15554eb30fc77c9b97607721963c2de85bb607528",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.256640",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2180700",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.256860",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169813",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I didn't try to go any further.",
+      "finalText": "I didn't try to go any further.",
+      "intakeSourceDigest": "50c5123543880ca37e2ff723793829dd55c2a44066506377f5865709772ea556",
+      "controlledSourceDigest": "225df96f24fa535bde66d47c321116266416b4d1ce2a52c2d852b00908dd0fc1",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11111966",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.322680",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1343733",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2169931",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Actinium is a radioactive element.",
+      "finalText": "Actinium is a radioactive element.",
+      "intakeSourceDigest": "e6870c16f3eb76fa47c14e02a6aec2fd2600c2b3b3af323245d91eab195d6b54",
+      "controlledSourceDigest": "b27e72edbfee01d30d4e4f77a1aa511e38ed3798845ae1d2d2652bc0c2949863",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2169939",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.13550298",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.299465",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2169939",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Actinium is a silvery metal.",
+      "finalText": "Actinium is a silvery metal.",
+      "intakeSourceDigest": "c0da4106dc96c51ee2ca0a03416636cda3b809807021c7e1b834c5533479abf4",
+      "controlledSourceDigest": "53d8d8fd26360f4d0d10a539b96a96e6980a98dc3f0831990b6531deda620bb7",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2169931",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.761152",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.8732342",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2170682",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He asked me if I were happy.",
+      "finalText": "He asked me if I were happy.",
+      "intakeSourceDigest": "1876e92f22063ceb4b29bebbb3a537c8d61ffa03a1c7d543e31ee9e368899f79",
+      "controlledSourceDigest": "d69fc23bdb48e6fd2fa18d5c1c63c7686030579bee7812462eca8f666b32b98f",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.grb1.05.04.2",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.430077",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.255664",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171064",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Criminals should go to jail.",
+      "finalText": "Criminals should go to jail.",
+      "intakeSourceDigest": "ccb95da9058d356e738f475b41319d2a0984ed0f3a24d55f81aae87226fe973e",
+      "controlledSourceDigest": "959a1a0e742400247fd480c1b084a762718f7f720c42ed4d9fc7fc1b2c17f1b3",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171065",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.758595",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.31123",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2171065",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Not all criminals should go to jail.",
+      "finalText": "Not all criminals should go to jail.",
+      "intakeSourceDigest": "8a811b59fe0cb9874e95f53bd914875c560aed1f9434063e25504692df28c52f",
+      "controlledSourceDigest": "b41a0c613a4f62842e26546661bf2c014dcbc626437ef22ef965e7286236a669",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171064",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.241095",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.758595",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171076",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You're not aiming high enough.",
+      "finalText": "You're not aiming high enough.",
+      "intakeSourceDigest": "05fd26ae185ff0ed0b298c17de87cfe00f50ee6569bb01ac03b6e0e8ff7120c3",
+      "controlledSourceDigest": "eaf0573a5603094ad2156839498d4ca781052ea79a69f09009b80e4b0d62f33f",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3177817",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.645939",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.806929",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2171092",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He told me just the opposite!",
+      "finalText": "He told me just the opposite!",
+      "intakeSourceDigest": "ac458af2c7a4b75ab676c826c37151771334b9f05375677e6907d8d9f42de4fd",
+      "controlledSourceDigest": "2f1a12c4c43100347fe4c81f0c109e1c31ebf347e70780f39cdaf3299ca7e0f3",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.293353",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.298080",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.374806",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171098",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Buying a new TV won't make you happy.",
+      "finalText": "Buying a new TV won't make you happy.",
+      "intakeSourceDigest": "e0d864f6751773d3c29d65ef146d1717f1608955fa0e54e5e5ec077838d0523f",
+      "controlledSourceDigest": "61607f3cb4bf6620b5b5534486591718747a93f93662d7fe7fbb0c68f622b8e0",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1170422",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1677141",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1677143",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171104",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Hey guys, it's getting late.",
+      "finalText": "Hey guys, it's getting late.",
+      "intakeSourceDigest": "299a8b75ecbbadf99b96bed93ac30259c358e1350307bcdde172ab427b7146bc",
+      "controlledSourceDigest": "c819109d735dfd34841d1f4759535a59a869044ca2d30f5a8a5acdec75d9c70e",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.372035",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1120375",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.323007",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2171124",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It keeps me up at night.",
+      "finalText": "It keeps me up at night.",
+      "intakeSourceDigest": "cd5bdd9fbb5bda1819e0e1992e19cd176368785c6bb634e1d22cbf2297ea2f3f",
+      "controlledSourceDigest": "414f54dc3f77f0af79905ed43f9f560a7e2818ab24324e8c74cca1877df60c3c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171125",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.297659",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.18215",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171125",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What keeps you up at night?",
+      "finalText": "What keeps you up at night?",
+      "intakeSourceDigest": "06b7409b5f1ab54f34cd648d53a2a91615261b8872ae31f3df48c4c2f625de20",
+      "controlledSourceDigest": "803d9bb6aed39cd8ae62d6749ed31217f9233989b12d2f8c096a5183a21fddce",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171124",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.16256",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.516639",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171153",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What difference does it make if people are looking at us?",
+      "finalText": "What difference does it make if people are looking at us?",
+      "intakeSourceDigest": "ae242187a69edaa5dca88a4d286f142b420b796f2d3ef0984a3177f4d2ea5ebb",
+      "controlledSourceDigest": "6c6f4ba17395130c896eee7bc22f6b28d4371794da08d419d231e47557f30080",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171154",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.16256",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1315774",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2171154",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "People are looking at us.",
+      "finalText": "People are looking at us.",
+      "intakeSourceDigest": "29545aa82f9ef979523ef9dcdc045060cb6cdf239a0f668fd30694fa12493215",
+      "controlledSourceDigest": "fe536102610976bb1f8a7c0c2cb995808b7464392c9e460fd3627da6a7c9ea07",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2171153",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.16256",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1116302",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2171180",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They don't have a car.",
+      "finalText": "They don't have a car.",
+      "intakeSourceDigest": "c0b645afe7f8f1d216b02fef6fc2494b986d1c5780569865b60fe874c86c21b3",
+      "controlledSourceDigest": "0d8482aee61a021bd8fe1183163707ed30b3031fc6895de58fe12501b8eefe7d",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.258208",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1105703",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.396751",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2171319",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What did he do to you?",
+      "finalText": "What did he do to you?",
+      "intakeSourceDigest": "7ac52ef95bfa2bfd9a50e35bcbc2dc4d6e00fdc4467d818242c39cc54d5a2cdb",
+      "controlledSourceDigest": "8a286cb185a49fb79e5694ce0680455a5ae674b086352d9eed4114b6057d37ca",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5270000",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.803062",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1218346",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2171834",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you like to play computer games?",
+      "finalText": "Do you like to play computer games?",
+      "intakeSourceDigest": "73096b4c97b39149789a6fcc5780efff2164f9977b957f6ac743e662bf4cd087",
+      "controlledSourceDigest": "39ad1e0ad9e82ec644d4c7bddeac5082d141f22f597b65d1ffc6a15b07da5235",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.370691",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.680161",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.15919",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2172035",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Quickly buy all required items.",
+      "finalText": "Quickly buy all required items.",
+      "intakeSourceDigest": "f05dfc1d7c9a3c75a4fe1d654be8ae84851c15987912622ff3dcf2dac1913dfc",
+      "controlledSourceDigest": "5bd568726257a1c18b47a603620b781ce6858acd097d4826274dc6fd933f7da4",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1816163",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.248992",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.2617238",
+          "score": 0.125
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2172039",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Purchase any necessary articles quickly.",
+      "finalText": "Purchase any necessary articles quickly.",
+      "intakeSourceDigest": "f83b80af0439df70743630e786f9ca3fa92ff5c4b826e0cb97ff412f509e0248",
+      "controlledSourceDigest": "c1a56c16f244271dc0cb5c5025d833fd27f21b62a981a4620fccb9927f306c42",
+      "maximumTokenJaccard": 0.125,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.9358542",
+          "score": 0.125
+        },
+        {
+          "id": "sent.tatoeba.1084435",
+          "score": 0.1111111111111111
+        },
+        {
+          "id": "sent.tatoeba.10871516",
+          "score": 0.1111111111111111
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2172714",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Sorry, I can't stay for long.",
+      "finalText": "Sorry, I can't stay for long.",
+      "intakeSourceDigest": "42ac7807d0259682562937ef70effc863319523f653a2e95a1d3515c7fac5c6e",
+      "controlledSourceDigest": "0c1b058aed2016865f0b15395faad20782334532a2ae905a4359f24db866b1d3",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1063963",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1437221",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.684013",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2172734",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "She asked me whether I know how to sew.",
+      "finalText": "She asked me whether I know how to sew.",
+      "intakeSourceDigest": "8d5191e7cd8c7f57157930b5a8fdb28426b237a4a5f427af520cba4e7fe8ce41",
+      "controlledSourceDigest": "98456ddffaadb85e5d05d8bafb35267646e781e1092fbacf05603aa90d0a7644",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.grb1.04.02.1",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.grb1.05.05.1",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.255052",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2172744",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It rained for three days.",
+      "finalText": "It rained for three days.",
+      "intakeSourceDigest": "df7030da2b3388c790e446557a508756a733feda0f9443a85b589346a20e3be4",
+      "controlledSourceDigest": "3a5d783e02697395e17200a1f6f669c117e60fe762c2183edbf2d0bbd14e5a27",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1819073",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.72642",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1211536",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2172859",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "They should be put in jail.",
+      "finalText": "They should be put in jail.",
+      "intakeSourceDigest": "83ea5192be7f1d92ff1305aa7a95f35039733b57015eacd1b0a7daf1593ccc09",
+      "controlledSourceDigest": "207e359d3789d7c4980654dec5561e3366691159d752afdee73003aa10c26f55",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802164",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1651960",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.802460",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173111",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I was young at the time.",
+      "finalText": "I was young at the time.",
+      "intakeSourceDigest": "a56a4a7e4a478999a7924a6ae32eb667123c441fb1f99355f63b8cdc268636cd",
+      "controlledSourceDigest": "cdd19fc5f39280c27bc9c96dd7495dc492b589891c6f2cb1c3510104f899f943",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.gra1.05.04.1",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.28996",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.44443",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173134",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you want to play with me?",
+      "finalText": "Do you want to play with me?",
+      "intakeSourceDigest": "b2bb614d358449ec20459bbe8c4a67548a22d8bc5f3db7b138c072004d7c1aac",
+      "controlledSourceDigest": "e2e921567e4781d2d2878ca020f39038b898702cbde93e14cfe2eddd31d59a1b",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1333574",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1540776",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1635453",
+          "score": 0.5454545454545454
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173150",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He got kicked off the team.",
+      "finalText": "He got kicked off the team.",
+      "intakeSourceDigest": "40d11041535edf45984b044d40cabb83dae70ced421b9506c85bca8c0de40485",
+      "controlledSourceDigest": "98b876318ea72e0a9d4a5b3b083cebe80c3d2c206610ca493197b27507d2f3b8",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.290800",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.327609",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.287636",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173233",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I gave you my word.",
+      "finalText": "I gave you my word.",
+      "intakeSourceDigest": "2f864e196bd61d058ca965880618c913585bbdbe4049ecf36d76ac782a1ef7eb",
+      "controlledSourceDigest": "6907776469e56d8d86fa9153b7849254e077cf57c91beaaedc4e1e7fc5a6d6f7",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1730720",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.17505",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.37647",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2173692",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "No one wanted to volunteer.",
+      "finalText": "No one wanted to volunteer.",
+      "intakeSourceDigest": "06f00aa8dda9a44703258969aa5029355afbfba25b321e4e66a7525c4b49ceb2",
+      "controlledSourceDigest": "ae7f8d6e7e5cc45dac49037b3f482e2cae66afffa535d38e2da177eb22dc7dcf",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.805310",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.805311",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.805304",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2173726",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "If this is the best of all possible worlds, what are the others like?",
+      "finalText": "If this is the best of all possible worlds, what are the others like?",
+      "intakeSourceDigest": "d5f1311926fd886a558512fafaf9025a18bc46e8f7a4659797907b1760c5f7fb",
+      "controlledSourceDigest": "32b19d07986c4db10159795b8b8569a383c40064f53e7925405dceb5acae811a",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.60171",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.256805",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.56315",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2173732",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "If you can't do it, I'll find someone who can.",
+      "finalText": "If you can't do it, I'll find someone who can.",
+      "intakeSourceDigest": "8fc8cd9f4b6d3d53690aba6e58e57faf3e006df924f512d3f95535783261f6e9",
+      "controlledSourceDigest": "5e44fb1a6128308408f109edf0ade624d6125e9c0e164275490a14e7322f65f6",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1641759",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.17551",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.264444",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2173738",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "She invited me over for coffee.",
+      "finalText": "She invited me over for coffee.",
+      "intakeSourceDigest": "163d0b61eccfacee000d286ea1af50f10e34b6880cd3a12477a2a2142b59cd4f",
+      "controlledSourceDigest": "05f902d7137f93e5853447738421ebfe455bbd189e35ffd5fe9b5ae81c46048c",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.314429",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.314461",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.314887",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173908",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I want to punch you in your face.",
+      "finalText": "I want to punch you in your face.",
+      "intakeSourceDigest": "cfb7c774dbf75f6dd2fb49248e55223ccded4e549ef7bd06945eb59610ac8cf9",
+      "controlledSourceDigest": "dcd5833da58c3ea6dfd5f511d63ac182a0a747697508960acfbf500d62fb7a9f",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2173909",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1062745",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1468930",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173909",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I wanted to punch him in the face.",
+      "finalText": "I wanted to punch him in the face.",
+      "intakeSourceDigest": "e45413121b583abdae78312031dad16b163debf98716a7eeb2275b3eb4e0fa61",
+      "controlledSourceDigest": "9ead96c95e5cedd4684a9bb9c00a2596e0b5f582813840ac5ff2645c6ccf47fd",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2173908",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.260476",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.807324",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2173921",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Where do I find that?",
+      "finalText": "Where do I find that?",
+      "intakeSourceDigest": "24434ac894288feffb09e2361aaf48cfd7afe7039e5cbd6233dd5102e1028305",
+      "controlledSourceDigest": "cdaf93cbb634198f2dd6e0b8fbd686e154b568a49a4975e51031eb9e0c129ac3",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1212459",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1641759",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1685973",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2173925",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It shouldn't be much longer.",
+      "finalText": "It shouldn't be much longer.",
+      "intakeSourceDigest": "42ccc4d74afa230f34be5c0b1f9e6621e8c832dff102af1d160660431dbe836b",
+      "controlledSourceDigest": "8114f4d63f397ef7312e1b459a001a571e3f5f89801c1e74c2c89e24799b698c",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.42583",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.21093",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.1170429",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2174992",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Actually they're richer than us.",
+      "finalText": "Actually they're richer than us.",
+      "intakeSourceDigest": "e7112f504eabf7896c74a807ec10d73c6fec5b4459ee7fcc30e116d6e8b9f4bd",
+      "controlledSourceDigest": "bfb51bdebccf925d1b5459dff8abc3beffc70a02cfcc4bd233fc083e25a222c2",
+      "maximumTokenJaccard": 0.2,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33969",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.627325",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.508255",
+          "score": 0.15384615384615385
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2175212",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Apparently, I got too drunk.",
+      "finalText": "Apparently, I got too drunk.",
+      "intakeSourceDigest": "dc75c5d5698ee60c0af0097d5294505a63197503a0b429c5e6626e177c864c0d",
+      "controlledSourceDigest": "d45fc15e15d591ea3555574ff60d8a294c5222fdc986c4539113c68aa432d7c8",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1244763",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1802923",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1873015",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Alcohol intoxication topic ('got too drunk') unsuitable for educational content"
+    },
+    {
+      "id": "sent.tatoeba.2175277",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you want to see my cat?",
+      "finalText": "Do you want to see my cat?",
+      "intakeSourceDigest": "629242e615d50f51be59168066ec6eb26dfee417d364e2f3d111b74477216977",
+      "controlledSourceDigest": "ad51e3c34d6817ccacfe8b74c84d08365b6f18a5356ad0e3194bdab2b0f8ce25",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175279",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.1912228",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1476754",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2175279",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you want to see my room?",
+      "finalText": "Do you want to see my room?",
+      "intakeSourceDigest": "d347aff742f7ee6133779dd179063999f3ef3d88c46649dbf7f4c6fc88fcf777",
+      "controlledSourceDigest": "aab7f326b03c01334c62b5b9a40d6a2944be6d14e2520386f3959640823a99b5",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175277",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.1912228",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1476754",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2175823",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't have time to relax.",
+      "finalText": "I don't have time to relax.",
+      "intakeSourceDigest": "99c8f087762d58188e0ede26ddd544031f262defc7fe645735f653ca4fdff8e3",
+      "controlledSourceDigest": "3f8dafcf5b3cee9a630bf843e7f307b7a54a287cd57984e1c5ba6b14a74720be",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1135532",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1989782",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.894921",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2175828",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The time to relax is when you don't have time for it.",
+      "finalText": "The time to relax is when you don't have time for it.",
+      "intakeSourceDigest": "75939ccf4e73f1dd9e28ddc34ed2ddbf297e78646890dcbf4a0a1f9d10d14ec1",
+      "controlledSourceDigest": "b0f8287fbee76b72ebbd04c4624583b69759266331b1596aa4c6f821d08ce8eb",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31666",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.47683",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2175823",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2175855",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "This is what happens when you don't pay attention to what you're doing.",
+      "finalText": "This is what happens when you don't pay attention to what you're doing.",
+      "intakeSourceDigest": "908d73cfaaa17f96177b5cae46b13bc5fbeb5074cbb17a633cee907e196cc883",
+      "controlledSourceDigest": "402312f80e76ce6631ffc80438a8693793f2c7188d8888d784d05ab0f0fa163b",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175860",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.249730",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.318511",
+          "score": 0.3125
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (B1)."
+    },
+    {
+      "id": "sent.tatoeba.2175860",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Pay attention to what you're doing.",
+      "finalText": "Pay attention to what you're doing.",
+      "intakeSourceDigest": "74d9dd4e411e3815ab56acd4a1b3bee4fa460fea62048732b2d9adda3e646f6c",
+      "controlledSourceDigest": "89bfb0cf1a1af68b31c2179816bf143d5f4c84745723592935c27a37538c7ab8",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2175855",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.955002",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2265863",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2175908",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He looks down on everybody else.",
+      "finalText": "He looks down on everybody else.",
+      "intakeSourceDigest": "3b4023d5ecb8d2db222aae133b204a207c987c6c9dc3ca77f7c62690d06f85d5",
+      "controlledSourceDigest": "f1de5f8c2b9a7b94a38b03b6eb37c330555372f0c867f81ebc4176b0c92b73a4",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.299473",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.289336",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.315653",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2175920",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I don't want to be rich. I just don't want to be poor.",
+      "finalText": "I don't want to be rich. I just don't want to be poor.",
+      "intakeSourceDigest": "61e23af12fcf7efce206bddd9e6a4b891bd592484e272043e0553e504b437a28",
+      "controlledSourceDigest": "70d808dfd461a4d43d3cd089e40bd031c1bba63c74c9328d0a7124911cff4581",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1064083",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1554502",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2323293",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Multi-sentence antithetical pair ('I don't want to be rich. I just don't want to be poor.')"
+    },
+    {
+      "id": "sent.tatoeba.2175947",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I want to be an astronaut.",
+      "finalText": "I want to be an astronaut.",
+      "intakeSourceDigest": "cf59121f46d31242d1defba8f8c724a76367dd7f8a056df66fac4e4b739e7f77",
+      "controlledSourceDigest": "8a86db77ccb1ed8c982bd20da3dc7ff7989d4168225b1cbbe58489a0f16a8333",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1064083",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1554502",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1821413",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2177017",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We need all the help we can get.",
+      "finalText": "We need all the help we can get.",
+      "intakeSourceDigest": "fb88ebcf9107cbf61ea2c48a9d54c2ac439ad79a72e524fa952a36c9bee1e2c7",
+      "controlledSourceDigest": "4a9b44b684291449d84814ce472ccf12a5ffa11bcb536d0a0d2458b1bcfbb9b2",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1153065",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.248334",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.247171",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2177165",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I deserve better than this.",
+      "finalText": "I deserve better than this.",
+      "intakeSourceDigest": "72ed89ba61676baccee3518d1c17b31406b1ecad02f5eb24eeca78b08819b258",
+      "controlledSourceDigest": "9f35cb2720381ab5a893906f06add6dd1cbb13c4ec655bc2fbda1601bf268dbb",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1137965",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.877846",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.56932",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2177695",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I will miss this place.",
+      "finalText": "I will miss this place.",
+      "intakeSourceDigest": "1b8d1dca5a7a8819ab96c2f957ed182083950b1b5d4af7f5768d5ba59fdccc75",
+      "controlledSourceDigest": "4dfb9f89969132b195462e30a0da1372c9fee9aaaedb1615c0c1fb718dd675dd",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.36047",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.32777",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1665105",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2178255",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "My aunt died of leukemia.",
+      "finalText": "My aunt died of leukemia.",
+      "intakeSourceDigest": "ade761a665a66ba10beb26786476663854feebbca570e38c30a2ce78dd708718",
+      "controlledSourceDigest": "53c035651b244153794886699558ffbf1d49db17e0790c306e304e04a2c0f126",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.273857",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.251605",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.266656",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2178281",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The silver is on the table.",
+      "finalText": "The silver is on the table.",
+      "intakeSourceDigest": "6de37a139d8b8fb2f8167f85d24c4fa355f5c9110afe483728a35e1234ddeed7",
+      "controlledSourceDigest": "bbd844b6af28205eef32be7b93525cc3855583dabe6b3024357b1c21a2d9c6d3",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1526447",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.897514",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.gra1.02.03.3",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2178806",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Is there any other way I can pay you?",
+      "finalText": "Is there any other way I can pay you?",
+      "intakeSourceDigest": "6858fc59f94a21ee76b05b4fb5c15c95e74dc5800551c51d843e39e404a1fd97",
+      "controlledSourceDigest": "1e7fc13a61be9e612cbbfa281a08f4efc04ae2f76d660fde44c1a1659e5440b1",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.282727",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1137460",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.869464",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2178868",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We should hang out sometime.",
+      "finalText": "We should hang out sometime.",
+      "intakeSourceDigest": "5e019e413db91787ae13119fb8b0436dca9737368906890420b705e70c6a4773",
+      "controlledSourceDigest": "b62dfb7967c40cb6c9a0f15ab21e06c98384f2fc80954d3d5d652787941a2fc4",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2178869",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.grb1.03.03.1",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1105336",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2178869",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We should hang out more.",
+      "finalText": "We should hang out more.",
+      "intakeSourceDigest": "a62bacadb6d4800a1cf21fd9cc445aaa5b37047015ea2094108fbdc3f3d5cbdf",
+      "controlledSourceDigest": "5ec3e761044fd9f6d69900d9b8cb30ffd93596f4c16533f36ff9d31956fb53c0",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2178868",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.285526",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.10537249",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179034",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Forward this to everyone you know.",
+      "finalText": "Forward this to everyone you know.",
+      "intakeSourceDigest": "152e6091d4768b3a8fecaaabe89543b22b859f1983574a51abf0413abbebd099",
+      "controlledSourceDigest": "46c6eea2474667e2fdfaa36d0917660e55417fb35f56f6e6d90a58f3c25b96f1",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11112638",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.59000",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.376342",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Chain message solicitation spam pattern ('Forward this to everyone you know.')"
+    },
+    {
+      "id": "sent.tatoeba.2179035",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please forward this to as many people as possible.",
+      "finalText": "Please forward this to as many people as possible.",
+      "intakeSourceDigest": "c561343f5704a2f59abd6972cf6a9ac85f60641d385da062046d312ba242fd48",
+      "controlledSourceDigest": "d3ab171d3308e9714b8df63acc8a8734ccd81a528549ea817410d1728a68eb24",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802598",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.48388",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.806999",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Chain message solicitation spam pattern ('forward this to as many people as possible')"
+    },
+    {
+      "id": "sent.tatoeba.2179038",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Please tell me you're joking.",
+      "finalText": "Please tell me you're joking.",
+      "intakeSourceDigest": "054412bb9d62f22e08d87f128d593ee5b3cacd5e9ba265d9b66a0e2cd02b7312",
+      "controlledSourceDigest": "1524d65c37c7f032388b0c9ea0d10d8de7d9e3e7787481af39a8ca55caa4ea25",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179040",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.492671",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.680243",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179040",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Please tell me you're kidding.",
+      "finalText": "Please tell me you're kidding.",
+      "intakeSourceDigest": "ed5c7dc28c72dd205675a2d767052bc2a07bb74ab25320331b0411be8d53824c",
+      "controlledSourceDigest": "e3c94c967542bd906d87993f085e6102a3f9cad18097afe33d2bd2edafa4d066",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179038",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.492671",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.680243",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179067",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll take that into consideration.",
+      "finalText": "I'll take that into consideration.",
+      "intakeSourceDigest": "acd5e71d4f7e3dcdbc0c3ccdf89de23fd5119f2d6610858400993415a23dd4e4",
+      "controlledSourceDigest": "c04fd183c3da54bc43530c60a137bd633e771c5c1eea555164140d9abbe986b8",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179068",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.41924",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.67949",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179068",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll take it into consideration.",
+      "finalText": "I'll take it into consideration.",
+      "intakeSourceDigest": "dd52a05346f187de46eeb29c006ce5e578962c072737e7a29d195becb098f17e",
+      "controlledSourceDigest": "b7897f20f6a9531792bb7a3cfc77c576ff50f3d6094f168c3e727c004769faa6",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179067",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.43454",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1170429",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179072",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's not a pyramid scheme.",
+      "finalText": "It's not a pyramid scheme.",
+      "intakeSourceDigest": "72094968dc7ffbf427634b911fe11a3f0989b5cd5373f3b1aea2ccce51da9b2d",
+      "controlledSourceDigest": "3afb5ac93fc5997565712b0668e4b1142a2f7554c145b1f237a9016fa3d36032",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.682391",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.4567809",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.681983",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179075",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I know this must come as a shock.",
+      "finalText": "I know this must come as a shock.",
+      "intakeSourceDigest": "8625995bf2bb9838aff1a2620eb7737997a76e77866fba9060d07ec8286359a6",
+      "controlledSourceDigest": "edf523f102e059bf1eff47b7bf192c4c17b48a12d153b8dc3f2bf738c6ef40f5",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.471431",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.70310",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.471251",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179082",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He loved me, but he doesn't love me anymore.",
+      "finalText": "He loved me, but he doesn't love me anymore.",
+      "intakeSourceDigest": "08045200d710aa1211d535a3e6b5493cec3ea8ef7f3ae025c90d6bb7a5c57f65",
+      "controlledSourceDigest": "ff149ef334339bf8e33f594f910b5ad223d2334530132c3cebeca9ece0b05ac9",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1813939",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1813957",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1813961",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179086",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I got one for Christmas.",
+      "finalText": "I got one for Christmas.",
+      "intakeSourceDigest": "6ee9c855c5e941515fb23b7622ae4b85890c76cc48f40818b2f7adb5431b924b",
+      "controlledSourceDigest": "976bd8b209e457bd220d25caf7597a3c20b1792ed4e74e5f5d396b1884f3acf8",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.257294",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2168970",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.249575",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179087",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Is there life on Mars?",
+      "finalText": "Is there life on Mars?",
+      "intakeSourceDigest": "65e580f0595b37027d06c45fce3c4c9c2926f581dcfe37b625bd26fe38971a71",
+      "controlledSourceDigest": "5f1549d0db9dc88bb5ac7d46d785d0159d86877bcd9763270adefddba9893e07",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.277151",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.271725",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1562150",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179105",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Do you have a shoehorn?",
+      "finalText": "Do you have a shoehorn?",
+      "intakeSourceDigest": "5e1d14b1cfc3a639dd97a8b2b66269f23b7d4dcf68896d989992cf4e4aced544",
+      "controlledSourceDigest": "91d05af7cda5ae8ffdd85e430a9cfb9fa0ebe1a2ba827a418aa93c966586d677",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1158069",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1798804",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.448770",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179113",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I thought I was cool.",
+      "finalText": "I thought I was cool.",
+      "intakeSourceDigest": "8b8b56ddd4989c7afe6816207faa05c070293068f8e3d2eaacd1ca1b7dc25c48",
+      "controlledSourceDigest": "ec0b2d3421943323a8ca7a73246e60c0b3d24bbde71fad3baa630cdd85aefd0c",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1961533",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.262174",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1300616",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179133",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have no problem with this.",
+      "finalText": "I have no problem with this.",
+      "intakeSourceDigest": "53f26247f92f8e90be9d2279f39826ce07507ab3774a1e5753856e44de558fe6",
+      "controlledSourceDigest": "ebb5efa94949418b7facf45c74144b4b63145b56ee3f0e7d036536739e792681",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1744994",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1745168",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.249790",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179141",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "She introduced me to her sister.",
+      "finalText": "She introduced me to her sister.",
+      "intakeSourceDigest": "7b516e94b43100551bbc31f787b2739e00fa01893d4fb06fa9f756297a54dcbc",
+      "controlledSourceDigest": "c674174136894ecc955d4b0d95b856914cec1bb275e37ae14215d02ff17e070b",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.761849",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.323009",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.249746",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179160",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "He paid the money back.",
+      "finalText": "He paid the money back.",
+      "intakeSourceDigest": "73304b3ce76c3808e870bb60ebb8a8c68c64bee68efdb17a3b2bebf555020678",
+      "controlledSourceDigest": "6527750b068aa477ae73056aac1b67f12405b3720548022a3f4770575a9218c6",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.295554",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.grb2.03.05.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.301276",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179161",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "She didn't pay back the money.",
+      "finalText": "She didn't pay back the money.",
+      "intakeSourceDigest": "e2614d35415227acaea7c4de7f62ab1ac810feaac409e17a571270e8db31d5a8",
+      "controlledSourceDigest": "6520b4a0f12844fef96ac38442e3e17e1e5b1e5f2217576efd056403d30ca418",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1005334",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2167431",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2179160",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179171",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm on my lunch break.",
+      "finalText": "I'm on my lunch break.",
+      "intakeSourceDigest": "2f30236f43da4df7eb71bd2a319cdc83f168e18022b3675d6af65dc99bb24f49",
+      "controlledSourceDigest": "861a21990d8d021b6a72391b5267a256eaafcf744ba7c0622dac518fc9eea497",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.270352",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1463504",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.1488496",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179385",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He was stunned by her beauty.",
+      "finalText": "He was stunned by her beauty.",
+      "intakeSourceDigest": "e9559f15983f0250aaf0d83dd5816a70a088521e1bfeb80d5950f35c94f7692e",
+      "controlledSourceDigest": "9dd9ffbb7748e31c90de40ce27e68b3a190452c5334f13340bdc392f5052b26e",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.302658",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.302838",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.287368",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179393",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He was distracted by the beautiful girl.",
+      "finalText": "He was distracted by the beautiful girl.",
+      "intakeSourceDigest": "6fa0c74a3609a2a10bec74dcbf267af3172eae9b640f6d68559531759906cde8",
+      "controlledSourceDigest": "986b59af23e658a3471c8213c5aa94c73a05950acb5947935b5c65ad0f87680f",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.291222",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.302658",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.291392",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179396",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I knew it would happen.",
+      "finalText": "I knew it would happen.",
+      "intakeSourceDigest": "1fac9e85085c20eac103414252956fadb545d1e149acae56d4a310a0f5b2adda",
+      "controlledSourceDigest": "7c01a23caf0500cf9bd881c4f65855ea80e611e8e0764784a3ced80a74b9f5be",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179400",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.276976",
+          "score": 0.5
+        },
+        {
+          "id": "sent.grb2.01.05.1",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2179400",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I knew it would happen sooner or later.",
+      "finalText": "I knew it would happen sooner or later.",
+      "intakeSourceDigest": "8e941fc270ed3c1794550b3a59a67b03c19b777e91b5b4f22927969d06825ffb",
+      "controlledSourceDigest": "354db2c46b261a6bfa76e292882fa622e682b02cc2f7a4f464b16f26db2c68ed",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2179396",
+          "score": 0.625
+        },
+        {
+          "id": "sent.grb2.01.05.1",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1127849",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179507",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think about her a lot.",
+      "finalText": "I think about her a lot.",
+      "intakeSourceDigest": "651890b235943ecf57b87394d8598e08e50658bbbca373f52948a98edf71c58a",
+      "controlledSourceDigest": "f02f222302e83ea1105a808248a914da4797d2ef5ff2d146bcae6a70a3c3fd01",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1230458",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1633598",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.484963",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2179911",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Thanks for all the fish.",
+      "finalText": "Thanks for all the fish.",
+      "intakeSourceDigest": "c05c015f6e2ff043f217db84d9000778363bef518a6e0ef3e75061c58beee2b5",
+      "controlledSourceDigest": "d9d050af3b3c607f022c9f3d455eae476ca40d93c174995cd06f18fe9ee38059",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.446641",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.268436",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.309998",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2180411",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do any of you know them?",
+      "finalText": "Do any of you know them?",
+      "intakeSourceDigest": "f007b7d297dae29a7945083d9e0e89023270bc04fe4f9ec1f41f632fc599681e",
+      "controlledSourceDigest": "ce0621667b296cef6be677ed7b1618b21feac4703dc495ffb32818d589b706ce",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.8765019",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.280899",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.283198",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2180481",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm giving them to him tomorrow.",
+      "finalText": "I'm giving them to him tomorrow.",
+      "intakeSourceDigest": "91cf7447758e40a486cb0647a6c9ba849dec8b3278d5233c50f5c9d65db174d0",
+      "controlledSourceDigest": "e5154d8c0287d8b4b7f9375da913d9a36a77983d149f457fb6cc88e47b5cf0fa",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2180483",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.698978",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.284204",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2180483",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'm giving them to her tomorrow.",
+      "finalText": "I'm giving them to her tomorrow.",
+      "intakeSourceDigest": "682244ddd5d37f3661d12b8411fdca87aede21a179ee7f0b5133f454de92a02b",
+      "controlledSourceDigest": "44c4701f2aa1f5fd572440d7c525b99010425b6efcd576619e6d0bc73b5d48ab",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2180481",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1331589",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.698978",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Trivial pronoun swap duplicate of sent.tatoeba.2180481 ('giving them to her tomorrow')"
+    },
+    {
+      "id": "sent.tatoeba.2180621",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'd rather get punched five times than shot once.",
+      "finalText": "I'd rather get punched five times than shot once.",
+      "intakeSourceDigest": "a9f1a759ab6747d67df4ecfec116c77d00932fc76fc7bc3f89c8d68ffbba5224",
+      "controlledSourceDigest": "f48e433714d6206050cd49431d37a8427b4039cb3c86c5171eeb365fd269365e",
+      "maximumTokenJaccard": 0.2308,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.764152",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.grb2.02.04.1",
+          "score": 0.16666666666666666
+        },
+        {
+          "id": "sent.grb2.02.04.2",
+          "score": 0.16666666666666666
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2180700",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I didn't understand it yet.",
+      "finalText": "I didn't understand it yet.",
+      "intakeSourceDigest": "389dcfe58ba944d5b402cd733a8280c3c0c2bb4e277ef6eb5a94afd4e5a08646",
+      "controlledSourceDigest": "cc8731397eb3bb30399448e2eda05c848d16fc1eb1743aaa9a698fadf80db81b",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1068550",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1680149",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2169649",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2181229",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He ogled a girl outside a pub.",
+      "finalText": "He ogled a girl outside a pub.",
+      "intakeSourceDigest": "4f8e2d86b5c0f51d7ca376ad8e59a6d6fa31f2ff9ee0b7ef7fa9ba8e960c8cdd",
+      "controlledSourceDigest": "f68fb9b7a1c7461e3d36c65d2652f75d8ffe2c69ce296bc0c2b55fae953d934e",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.298801",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.292237",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.299465",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2181295",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I never thought anything of it.",
+      "finalText": "I never thought anything of it.",
+      "intakeSourceDigest": "7f9f03dd2a0d88eba58b84d3c36d923770eb8cdf09cdee49fc4d48ba8c12ba6b",
+      "controlledSourceDigest": "a6d4a9ad0bc2e8018cc7cd57a9795cd2d1f3ac2f7f8480026e45f8546bcefb7d",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.70409",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.664243",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.54791",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2181362",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Humans are the only animals that wear clothes.",
+      "finalText": "Humans are the only animals that wear clothes.",
+      "intakeSourceDigest": "d762356012cf082b1dafbd0b679f1078ad18386620b42036b4f45bd879a9b906",
+      "controlledSourceDigest": "922b25419f9a02b6a2ed67f8e119ddcb2ceade07b435e755179c2344c2391586",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1174750",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.248921",
+          "score": 0.26666666666666666
+        },
+        {
+          "id": "sent.tatoeba.11003429",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2181901",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It won't happen to me.",
+      "finalText": "It won't happen to me.",
+      "intakeSourceDigest": "a5ab693aa810e5b7ea647d2187255b824f340f1e666ec69fc46ab59d4ea16d33",
+      "controlledSourceDigest": "3e7b073664a61bf2c0573ebf91039b5f37eabbda90216362fcb71b4452ab7dc9",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2182033",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.13132803",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1504710",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2181902",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The exact same thing happened to me.",
+      "finalText": "The exact same thing happened to me.",
+      "intakeSourceDigest": "311c3fcba38c4bcb97ee3a09ecc1b7f4cb4f63984c4e75de4a4bf9cc0b0b85b8",
+      "controlledSourceDigest": "acfe2e5d20a0ed9397f294dbed9bbac99d193dce3ef0fe3c0403576453a29a8f",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.309486",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1520635",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1449610",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2182012",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We know each other quite well.",
+      "finalText": "We know each other quite well.",
+      "intakeSourceDigest": "568eb4dc86adf3406b29229a89a155680c4d320fa7e65246dbfde060f5c834bd",
+      "controlledSourceDigest": "85e5e983a5a66416db0503b5f97101388527fc23c08beaae596f16ed6bc97937",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.242357",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.1350132",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.354283",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2182021",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "He sat beside her on her bed.",
+      "finalText": "He sat beside her on her bed.",
+      "intakeSourceDigest": "65fe34587943bb78a927554c61f7d688d06826252c62f7296f7b66d183fa4fe0",
+      "controlledSourceDigest": "8234c7a2112aead2ee53391622d5505c0c099f3e2c24ad5465990f6f80fc6afc",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.302768",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.302793",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.293417",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2182033",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I didn't think it could happen to me.",
+      "finalText": "I didn't think it could happen to me.",
+      "intakeSourceDigest": "86fb2300422190630d2c358bb555db7c9ea866585f38d40c11627bb5a3144e4d",
+      "controlledSourceDigest": "dd3120864bc845a3ec922cf82cbbea708036dd37da7a098f0e8936c51fef26ec",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2181901",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3728971",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.5840511",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A2)."
+    },
+    {
+      "id": "sent.tatoeba.2182043",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Your daughter is very pretty.",
+      "finalText": "Your daughter is very pretty.",
+      "intakeSourceDigest": "1645bac500033cb74e93cb308b4fc8e90fd16a6d981a588948c3fabf230e22af",
+      "controlledSourceDigest": "3dc9feb936be145f5f080111946f477838fd298610a04ad4f209ff7b675d340e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.934261",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1112734",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.886607",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2182058",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "She stretched out her legs.",
+      "finalText": "She stretched out her legs.",
+      "intakeSourceDigest": "7279e1de62e54e92286e10a2ddeabf10a1b6719df1d2c21877043f206ac98434",
+      "controlledSourceDigest": "578b0802ddf4cad6af8e335ab057398774e882c1b7227c371bc87c437e0d6ee0",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.310880",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1331382",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.301716",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    },
+    {
+      "id": "sent.tatoeba.2182066",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's a very stressful job.",
+      "finalText": "It's a very stressful job.",
+      "intakeSourceDigest": "6dc96202ea7fe4a4186bf3904b0dcba7d788cde7f6fb9c6d88600936624e26bd",
+      "controlledSourceDigest": "9f78053494b0d36bf9df4486badc5f497b942611e06ce8223c545ca0834539be",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1972115",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.42718",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1209508",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Accepted as natural, grammatically sound English example sentence (A1)."
+    }
+  ]
+}
