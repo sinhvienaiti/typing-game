@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 182,
+  "rejected": 18,
+  "edited": 0,
+  "records": [
+    {
+      "id": "sent.tatoeba.5603330",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom and Mary built a sand castle on the beach.",
+      "finalText": "Tom and Mary built a sand castle on the beach.",
+      "intakeSourceDigest": "8f708d08e4eaf5929dba97142de81fd5b87036d9e89c98165565af37cc7f059e",
+      "controlledSourceDigest": "799db93b224d54617a6cf5c7048350b06055330ea0a2b6f76f9a9d9e4849741b",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2881954",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2881954",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3419456",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5603334",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is the most handsome man I've ever met.",
+      "finalText": "Tom is the most handsome man I've ever met.",
+      "intakeSourceDigest": "c14c6ed393e528f82863947bb02a9fdce2b2645407998717918de78074878fd0",
+      "controlledSourceDigest": "d6e32d44e54ff80d7ffcfa25719ad3d08ba03ba2d2f45826b295e4446ece5417",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37338",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2980112",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2980112",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5603336",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "They don't make them like that anymore.",
+      "finalText": "They don't make them like that anymore.",
+      "intakeSourceDigest": "7e2710071b98b8937cc4922b29e4f3d852059019f57cc8c9110e0f8c76875c0d",
+      "controlledSourceDigest": "b28457a614523b989be4bb353e70dc843c1c6dcc64a1ba681d16107b8bf3ab9f",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3228658",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3228658",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3731667",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5603338",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I've never really thought about having children.",
+      "finalText": "I've never really thought about having children.",
+      "intakeSourceDigest": "d33473343e40518b7259bf3574ba539a11b498e8c027991753a6d0417a5dee76",
+      "controlledSourceDigest": "1879fcc79ed2bf87b812dbc0414f3f757105f922fdd5ad106a7bfe99549dc232",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2633447",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2633447",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2569574",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5603339",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I've never thought much about it.",
+      "finalText": "I've never thought much about it.",
+      "intakeSourceDigest": "2d8cbef7e60ff7d4a8d16be326e191af776a5c178d146055e66a66b04781c9d1",
+      "controlledSourceDigest": "45abbac1a2c4d911943319b98c8d97120b73f8170e26968e1b208f5a08cf3b1f",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2633447",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2633447",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2569574",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.8333) with sent.tatoeba.2633447; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5603344",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What exactly are you suggesting?",
+      "finalText": "What exactly are you suggesting?",
+      "intakeSourceDigest": "f32bf55447f5f0ed1c007dd69f29ab0f66fb0fb6d3f7dd880bdb051554a7f07e",
+      "controlledSourceDigest": "141fe80dde135e0ac4b743998442eb3e24c0bdde6562c9946ae12f641aeb5ee1",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2099993",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2099993",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.4951203",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5603360",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We've got a serious problem.",
+      "finalText": "We've got a serious problem.",
+      "intakeSourceDigest": "ded1f10cdadd7423034a861f5bb870bda852751caa8293de7e0d1b3a83f5b2a8",
+      "controlledSourceDigest": "dc0746869bbbadfa1c5f822db571063aba2ca3eaae59aee6a3e71cf883e6f5bb",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2199793",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2199793",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3730242",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5604610",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Have you ever seen Mary without makeup?",
+      "finalText": "Have you ever seen Mary without makeup?",
+      "intakeSourceDigest": "9fbd690e7a7e0c92a50ae16927fb564fd307754ff2c034787b4be7042e9ecb22",
+      "controlledSourceDigest": "903638102ef55918790528844036e6e97ecefd029f38205022a44c1435a35305",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1717357",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1717357",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.520129",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5604806",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I should've warned you earlier.",
+      "finalText": "I should've warned you earlier.",
+      "intakeSourceDigest": "5479667456f01f378a422123f921b10275378dab4cac2081bfe8433846e48a3d",
+      "controlledSourceDigest": "6a7e070346839e47f696e2566c0c47ad597095762f18c808a29f7f842e9fca4f",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726534",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3729215",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2406455",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5604809",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I have a lot of friends that can speak French well.",
+      "finalText": "I have a lot of friends that can speak French well.",
+      "intakeSourceDigest": "f51ac14da4cadb31a168492c6e51a896dbcd16a5323b2e2d8d28c6e1e50fc4b7",
+      "controlledSourceDigest": "88f7bf78d2f9883798f224cc46a8df6f6cc9b47272e3899bd089bb48fc3f3f11",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2484980",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.1826244",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.1826244",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5605007",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This might ruffle some feathers.",
+      "finalText": "This might ruffle some feathers.",
+      "intakeSourceDigest": "c6fd6eedcfa8a831869f1dadbcb41cbe3968a6b676a4d2cce14590546f4dce3c",
+      "controlledSourceDigest": "ccbb72deb5e572b3a4868257e39d2e620749899a211607ca7062e930bd0a36ad",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3727196",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.5561762",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3723752",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5605448",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom lives a secluded life.",
+      "finalText": "Tom lives a secluded life.",
+      "intakeSourceDigest": "88f0ad4308a5d5e790757d64e72bfd97ff81080642d6d7cec231a246071a54ad",
+      "controlledSourceDigest": "5e3ba08f03b7c45ee4643639f6b506e397648a535fbaf7de0be5388eb71e6509",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2735111",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2758596",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2961582",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5607264",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I never learned that in school.",
+      "finalText": "I never learned that in school.",
+      "intakeSourceDigest": "c6543fbde3e65e81332d94bf18ac3523f9249c873d06555121935fbc738efb7d",
+      "controlledSourceDigest": "bab5df27f28e53086fa1a0fbc6eb947a3bdb48bdbd99df64d4b8bd83957b3acb",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2580925",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3386009",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2580925",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5607265",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "They don't teach that in schools, but they should.",
+      "finalText": "They don't teach that in schools, but they should.",
+      "intakeSourceDigest": "5af17987b26b0cebbb75d19d9f3ca457f3f512ae2d3aeb6081eec2c310a85548",
+      "controlledSourceDigest": "f729ee9aba9ba46eecebcd28540f20891520bc7240f1b39bf31b57e993de4377",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3212855",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3212855",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.307324",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5607266",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This should be taught in schools.",
+      "finalText": "This should be taught in schools.",
+      "intakeSourceDigest": "0f5190aebf5368fe9a1c944064a7ee829e2e44f736f3429fcecc2ef2c629020f",
+      "controlledSourceDigest": "7c16f4f94a66f2f77e16a14689d1c67ddd0de0674b9595e4ed78a778ac345431",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.56687",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.56687",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2195102",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5608617",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We must leave this place.",
+      "finalText": "We must leave this place.",
+      "intakeSourceDigest": "e148a196a8646627626d4e7cb85d5fd76321ccbdfe6b2a167a0bb3b69ea29ce8",
+      "controlledSourceDigest": "90d90f73a1b7650b4d26067e724aa3500a92eb651e470dc6280c48010927ab0e",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.271241",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.271241",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.59874",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5608636",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why is this being taught in schools?",
+      "finalText": "Why is this being taught in schools?",
+      "intakeSourceDigest": "8de04e59bea05fe5cba62e508edd5b9bf1de73fa9960d33e54de5c009af866b5",
+      "controlledSourceDigest": "3a81aa89c7e4634ed13eedfb42cbde57390c481b4a809d4e1cb91df703ea3ec6",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5607266",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5476215",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3492746",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5609010",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The test results are still not in.",
+      "finalText": "The test results are still not in.",
+      "intakeSourceDigest": "2a4b583831794f2209afaa67f2cfb8ade832be139b0e49e5316395549fe48809",
+      "controlledSourceDigest": "7eebf365bba8e1ff1b5f6693cc30ec09f5ba069679cad9a5a39ed07787f97052",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1334976",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2259465",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1334976",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5609026",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I didn't read any of these books.",
+      "finalText": "I didn't read any of these books.",
+      "intakeSourceDigest": "c6683e0da3177aff681c53df948372b372a21a5001e12332b04d64cb675c8c40",
+      "controlledSourceDigest": "fd5ae06e4d5cb36dafdf93d48ae01601615571dc791ed57f91ed473e8c0a4647",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1678126",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1678126",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2439776",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5609030",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "A woman is walking towards us.",
+      "finalText": "A woman is walking towards us.",
+      "intakeSourceDigest": "f306dc736693e109b63cd5840a081334c01d9147f71faf77b9a5769237a17371",
+      "controlledSourceDigest": "1c9e86282da3b3d0dfb8131f4ec0280a55d4b18384b91bcd2ed0fd0f1d0b67a8",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.299465",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1120340",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1120340",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5609341",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We know our way around the city.",
+      "finalText": "We know our way around the city.",
+      "intakeSourceDigest": "0b9748d288aec92af582cf9fe31ef30b034e11e72273f33a307a681f6dc3ad8e",
+      "controlledSourceDigest": "98180c9bbab38f6a4c0478cbfd568f7a53a40e617e0bab717a07ac04f837e755",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680069",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3271002",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3271002",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5610162",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary is an ambitious young woman.",
+      "finalText": "Mary is an ambitious young woman.",
+      "intakeSourceDigest": "d18c427dbd457cb3e04cc513d39f96de90a7ad7c1eb74774720b6a8e4be8205b",
+      "controlledSourceDigest": "971d90709940575ec357779ff482371e03ca82f1d6bb17c8bae427c938a5b22e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5011003",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3608032",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.5483089",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5611710",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you know how to convert from Celsius to Fahrenheit?",
+      "finalText": "Do you know how to convert from Celsius to Fahrenheit?",
+      "intakeSourceDigest": "78aa491efb76afda7e0ebd3624ffda467924d73a4b9ca47ea25e495b4d75d41f",
+      "controlledSourceDigest": "27b496ae99c44e6b259eb528fca830529034a8f6d87414a363239d5aaad03758",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3423973",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2182814",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3423973",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5611741",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We watched an interesting movie.",
+      "finalText": "We watched an interesting movie.",
+      "intakeSourceDigest": "17a4cfc59ec8a059602f0c90e2e15108f9d44e3fc80d5f696449623cccbb676e",
+      "controlledSourceDigest": "2e64a92cbaedc08ee0ba1130b1768eb4f7f527ddc380864c784a28ea578f5034",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.68569",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.68569",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.680759",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5613522",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You're never satisfied with anything I do.",
+      "finalText": "You're never satisfied with anything I do.",
+      "intakeSourceDigest": "09dfd1d66924bc5e342eae4d8eab3c8eff8117c478014434e5003b424646c776",
+      "controlledSourceDigest": "c60fe86383d150581d8533322a89508c7c805745933283e12c715d257a2ab797",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3723867",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.742042",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.742042",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5613528",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Is there anything else troubling you?",
+      "finalText": "Is there anything else troubling you?",
+      "intakeSourceDigest": "79c05aee6daa4d0451094f623961b680a16663284ac5568d4f73604aa69253f7",
+      "controlledSourceDigest": "14f59f8da67fdb4ab805f897e931491e2a8a128abec34b1427109c3009c8b979",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2275759",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3399379",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2275759",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5613531",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Don't pretend you don't know what I mean.",
+      "finalText": "Don't pretend you don't know what I mean.",
+      "intakeSourceDigest": "5bef5edded5a071074f53eb34339cf989274d6c26e05b7c73573419e814fdafa",
+      "controlledSourceDigest": "276977c08dd3feef77cd89b83094ef7eaf087bf25f05e32a4ac566695e4a36e7",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3725405",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.869383",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.869383",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.3725405; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5613532",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's only a small setback.",
+      "finalText": "It's only a small setback.",
+      "intakeSourceDigest": "e86b42fb8cb520ca572357f8f95c2739d81ccf1eaed0d1b321426d6059ebc53c",
+      "controlledSourceDigest": "8849aa97c08c0ed27024483af6633db3db4e06b7b3cf77915735806cb0dadcaa",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.238411",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.4076862",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.897541",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5613535",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom took an anger management class.",
+      "finalText": "Tom took an anger management class.",
+      "intakeSourceDigest": "a51461bbf1f6a2c232feca66fbd86a6650dd96fb1bd0b89abbaa9a447e8053f2",
+      "controlledSourceDigest": "4e2c5d43a06f2a9aac252b60d6c9abf7a139b4c959046c3f41a6670c8d530433",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680199",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.680199",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.5357449",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5613543",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I've never felt that way before.",
+      "finalText": "I've never felt that way before.",
+      "intakeSourceDigest": "86765dbdcbb2944997e013446bd16c8c937aadced8f2ce990a649ba11b1ef8d9",
+      "controlledSourceDigest": "48751ffb7bb18c651ac9fbcd0ed0d5ce590e9bf669cecedc228edd68a20ec53a",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2216743",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2216743",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4751762",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5614682",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why can't you just be honest?",
+      "finalText": "Why can't you just be honest?",
+      "intakeSourceDigest": "eccabccb142d5a669882f58ce2d1a840f4556776b6097aa8180317e9c91cb91c",
+      "controlledSourceDigest": "777eef22565f09def5402b45b3cf072e11c5ac87b6777eb3065788c78ef5c12e",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4515651",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3382747",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4434956",
+          "score": 0.5
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.4515651; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5614683",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why can't you just be honest with me?",
+      "finalText": "Why can't you just be honest with me?",
+      "intakeSourceDigest": "43cde06ffc660e927b79a6dd5e8fd6e92debb418b549c0ea88c829e939269525",
+      "controlledSourceDigest": "437c65296fb0d1ab70f196d6b4528cd2045e9b6a13f21ec0329dece482b2b4ab",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4515651",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3730523",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3730519",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5614684",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why can't you just be honest about it?",
+      "finalText": "Why can't you just be honest about it?",
+      "intakeSourceDigest": "fe91215ed843936a82b473beb5b32f13c9922b78c67474bcb3ae304918c804f5",
+      "controlledSourceDigest": "68c930d5a43e0be748407a38752f0adea2114acbea5821f509f2142f1ce542e6",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5614683",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.4515651",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3723536",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5614688",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I've never been anything but honest with you.",
+      "finalText": "I've never been anything but honest with you.",
+      "intakeSourceDigest": "246337596626ce859a235a4b3b0ee9fddb31093a5da0f349f01e2ffbfce567c1",
+      "controlledSourceDigest": "cfd18cbc87ec3350cc2875aa5adaee03b05b2e65eefb87ed5bde1b0804539199",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3729121",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3731654",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2240385",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5614859",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This is only a symptom of a deeper problem.",
+      "finalText": "This is only a symptom of a deeper problem.",
+      "intakeSourceDigest": "eb448baec57443b82b227bf3bcc8693cf846ff9eea769f1b368b344bcf570d34",
+      "controlledSourceDigest": "5f63081f8c2a0fbfc127fa982d41c92edde0d9cb0ff1eed127abc7fcfd80d38c",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3725669",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.13138192",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.55568",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5614875",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This feels wrong to me.",
+      "finalText": "This feels wrong to me.",
+      "intakeSourceDigest": "2795ea9117ffe1031f3903694ca5c458ef1ef510533c6549197a53f20434a43c",
+      "controlledSourceDigest": "7b763f3750944457c98365a6eaeeff211a51714c16ebaa2a10a3757a27dd8f33",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2799044",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2990420",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2799044",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5614933",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many books are in your library?",
+      "finalText": "How many books are in your library?",
+      "intakeSourceDigest": "c4ad8b41b2e870210e489a430ddb550f9e41d422cc28034c7deef23883e49dc1",
+      "controlledSourceDigest": "b82e59fc3b6d4cad594195daf53f4a124ce15c9565e13de6570ef36c53a7387a",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.270512",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.16985",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.24505",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5615624",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Climate change is not a hoax.",
+      "finalText": "Climate change is not a hoax.",
+      "intakeSourceDigest": "e60a84125cbd323960a864b0d7ea9c7fd158e4aa2897e6d133bc444b29af050b",
+      "controlledSourceDigest": "5bd330106d3067f9800522453ceb728d5c163bfa9900ff8eea4a55e63d305f8e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3300229",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3300229",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4666920",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617351",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We need to come up with a plan, and fast.",
+      "finalText": "We need to come up with a plan, and fast.",
+      "intakeSourceDigest": "62472318e71643641ee297e724dc756853ddcc4e09b4c23926634d7de57b56b5",
+      "controlledSourceDigest": "2f86a871bab7afcf8ad2de6c271423e55996aa2d5c761d13a688456478522a95",
+      "maximumTokenJaccard": 0.6154,
+      "nearest": [
+        {
+          "id": "sent.grb2.06.08.1",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.grb2.06.08.1",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.tatoeba.41856",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617513",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't want to stay in bed any longer.",
+      "finalText": "I don't want to stay in bed any longer.",
+      "intakeSourceDigest": "5ec28ecebe40cb2d5a125cef366c82d6dbb15bc2dc81d74fc563e2b5b092d9cb",
+      "controlledSourceDigest": "3e3ac5a4b956f8671a5a932374af0a08dd602b4c5be633ed5dbdf5370ea0876e",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3727324",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2323293",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1611607",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617632",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Was that the girl who talked to you?",
+      "finalText": "Was that the girl who talked to you?",
+      "intakeSourceDigest": "7f248d499a1402e59083bd6f7578798d07db61c613cb86b19c3e9907ce8b589d",
+      "controlledSourceDigest": "e3605aea571a346703c92858d5bf3774ead77bcac4fa94431e41fcd45e5870f3",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2486590",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.2486590",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.3686465",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5617634",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Was that the girl who asked you to take a photo of her?",
+      "finalText": "Was that the girl who asked you to take a photo of her?",
+      "intakeSourceDigest": "5716817b48f10d5eda1621cac21693e8df5ec8c95dd991708994b91373617eed",
+      "controlledSourceDigest": "77c7a31aed6ad204c27268cdf1b2cdd7577578694b5a27af5a67f0364438ba18",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5617632",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.308305",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.308305",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5617637",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Was that the girl who was looking at you?",
+      "finalText": "Was that the girl who was looking at you?",
+      "intakeSourceDigest": "c27458515f08a5f0f58d84e5f523aa195defc7571e9eff01115b86995aa320a0",
+      "controlledSourceDigest": "d061d90410bd370f1e22987f765bf9c33e970daa0e54daa7b3af0926b847d5e8",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5617632",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.2486590",
+          "score": 0.5833333333333334
+        },
+        {
+          "id": "sent.tatoeba.2486590",
+          "score": 0.5833333333333334
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5617649",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What did you want to say to me yesterday?",
+      "finalText": "What did you want to say to me yesterday?",
+      "intakeSourceDigest": "599abdb1145ce993a70725361bc8d3232b2897746bb74c40ef02bacc0f37341f",
+      "controlledSourceDigest": "5ea7c9212c8c8ec3427c2cce991f764eedbcc8b2b8862826ab9dd43ecc64a8ee",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2298135",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.4728700",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2929436",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617658",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Am I so very different?",
+      "finalText": "Am I so very different?",
+      "intakeSourceDigest": "378c38b8df8380ad36edcaf4c6ee422f20eb3a6724aeea52c884c0078d397ef0",
+      "controlledSourceDigest": "001b389018f6284e2732f7c4b082d53ab1d4262892f99ed0a9ec834fbf02f369",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1825398",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2252350",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1825398",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5617661",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are a lot of things I want to learn.",
+      "finalText": "There are a lot of things I want to learn.",
+      "intakeSourceDigest": "66c4778cdff138e9bf4f7e73c744ca15dae6af98bc77027eaac11e6d99af3c8f",
+      "controlledSourceDigest": "92a795a36d6eb6c5bf3ecb8f6e445ecbf168bd2ce336c407750a72eb029e345f",
+      "maximumTokenJaccard": 0.5385,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1557602",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.1557602",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.3272298",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617667",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Who's that girl waving at me?",
+      "finalText": "Who's that girl waving at me?",
+      "intakeSourceDigest": "a6403369ba431adf5490995c61b455eab4a1eebe6395b74b39c8610350b8fde0",
+      "controlledSourceDigest": "efd841b4244943d83019dda4003ff38fe820e3029b88e1a7e8cf8bb069f12eca",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2207217",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2207217",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2267907",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5617816",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom feels at home in the jungle.",
+      "finalText": "Tom feels at home in the jungle.",
+      "intakeSourceDigest": "b94ce648e97ab0081d46477d84e2d31adda07fe7b9c6cb5a389b1daa381c358c",
+      "controlledSourceDigest": "f6f917951207fb3fbed6392544fdeb5339449da9b009a0e067be5ebdcd1f0da9",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681377",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.681377",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.316473",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617821",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Foxes, squirrels, hedgehogs, and many other small animals live in this forest.",
+      "finalText": "Foxes, squirrels, hedgehogs, and many other small animals live in this forest.",
+      "intakeSourceDigest": "aac9341c7ab59a19fa5df4259a52094a1a310b48583dbf8d0a8a4bf7a3d0ff98",
+      "controlledSourceDigest": "87e913992b12747621344858a018ca51740a6ec16484ecc9d10e5516c5bc5c6c",
+      "maximumTokenJaccard": 0.3571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.274798",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.274798",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.803307",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617884",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Every Sunday, at exactly six in the morning, the priest opens the church doors and rings the bell.",
+      "finalText": "Every Sunday, at exactly six in the morning, the priest opens the church doors and rings the bell.",
+      "intakeSourceDigest": "33969b501a107b28aa49c47edf1f97a1e95109bceb3ff8e962964da8d3b56b4d",
+      "controlledSourceDigest": "286d9da08e16d6efca17b13870a7ad25c044b16be12f09337166456100e7145a",
+      "maximumTokenJaccard": 0.2353,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2268467",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.2268467",
+          "score": 0.23529411764705882
+        },
+        {
+          "id": "sent.tatoeba.3765028",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5617889",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The seas are rough today.",
+      "finalText": "The seas are rough today.",
+      "intakeSourceDigest": "19f6cd75d6e88cfefd9f51b3871856cdc43678e302027b89d744713caf052076",
+      "controlledSourceDigest": "ab54d3769fc3d1f945729603059b9631bbd03330e95b3a15d1744de44acbfaac",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.870607",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.870607",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2184",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5617899",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It was a nice day so we went fishing.",
+      "finalText": "It was a nice day so we went fishing.",
+      "intakeSourceDigest": "ba2fbac070187844bf2fc353abc40c04be687f69dbe2b46c91f8f15769739f50",
+      "controlledSourceDigest": "3111b997b928df9014a2585fba66347e60604b72dad13086e1b64cb45a515f22",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.682358",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.682358",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.gra2.06.07.2",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617927",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What you did is immoral.",
+      "finalText": "What you did is immoral.",
+      "intakeSourceDigest": "2fc9c9a6cdd895ddd615ffd4a784ef8bb2882001dc17ce6a693cde83d2a71940",
+      "controlledSourceDigest": "e1ddfe98a6d82c3e4373750772f629aacb0716ddf0777e6fd2cd17ba14f42fb0",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2929436",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2929436",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3731090",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5617936",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why did you kill the snake?",
+      "finalText": "Why did you kill the snake?",
+      "intakeSourceDigest": "92404ddb77a0cc8f4f7ffc9bfd23d90c1495955e2d1994b346c1eae85e227474",
+      "controlledSourceDigest": "04052ce517d7b3dac66c2b4f532ccc6e860d8d834c993ff63adc6600c737dae7",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4136444",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5181060",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5085469",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617942",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "In the summer, ants gather food for the winter.",
+      "finalText": "In the summer, ants gather food for the winter.",
+      "intakeSourceDigest": "9a8faa65eb4f831923d56b56952fff703c68064a5d03e9ee41bc33c0c0060f3c",
+      "controlledSourceDigest": "9cfae75c6302be72208d3b2b88e13bd43269eb09061b1d6abe84cfb7ed82d3ea",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2258918",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2258918",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.805409",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617945",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Buy two pizzas and get a free soft drink.",
+      "finalText": "Buy two pizzas and get a free soft drink.",
+      "intakeSourceDigest": "d9c59684004dba2fb717169f900e7fd9c7316b4af9bfe06ea0d6e13d27b1fe51",
+      "controlledSourceDigest": "6435f1064be06f41ab9d55b40ce264b844e27cb5c05df679ee19f1be10074e77",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3724431",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3724433",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.240643",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5617961",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You were looking, weren't you?",
+      "finalText": "You were looking, weren't you?",
+      "intakeSourceDigest": "6ac06cc48ba2d1c8c3a2a9d71330ae9dbb84e52793b57820b7a3eb3d4a5eb167",
+      "controlledSourceDigest": "f97f94a4da4b3cc56712c0b264b206cbe4d5fc329b1be1cf5e62c47602078adf",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2499034",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2499034",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.69390",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5618183",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You swim better than I do.",
+      "finalText": "You swim better than I do.",
+      "intakeSourceDigest": "aa9e323fb2f9b9111a8fa3928b4e43b871d92c0463740fa0c1d35d74cc5edb46",
+      "controlledSourceDigest": "13d23185d29e7be18ea094d8bac86c88e7bcdc0c549a4aa2255768972857892d",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1137965",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1137965",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.5325368",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5618209",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Which one of the two brothers did you see?",
+      "finalText": "Which one of the two brothers did you see?",
+      "intakeSourceDigest": "2a7386e621ff1bc22f8adc54ae24c183de9c4f7a46f2088bd5a14fe515ee2a06",
+      "controlledSourceDigest": "822d3b4f067d0a26786463620ac0313ba97eff106b64052fd99e14160e162970",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3730301",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3731652",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.3731890",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5618352",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why are the windows open?",
+      "finalText": "Why are the windows open?",
+      "intakeSourceDigest": "3ff09a25baa5b358cbdb21c886e45f433ee7c5762beb25ca74208f5a7ac82311",
+      "controlledSourceDigest": "22b3ced76613214f68364d78755839e7f2dfd6d9c7200c1997e53aeefc7d7555",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1776745",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2675834",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2707300",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5618355",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Some people just never learn.",
+      "finalText": "Some people just never learn.",
+      "intakeSourceDigest": "39ce01fc1766559cc0e08b2b4ea9b2bd92520f003e7bcea4f68232d77469f136",
+      "controlledSourceDigest": "b17f827acd1130b37a16e7113b0c09ea0190850669d105a15ae7a3f9410d4df3",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2131055",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2131055",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3495024",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5618360",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I wish I was by your side right now.",
+      "finalText": "I wish I was by your side right now.",
+      "intakeSourceDigest": "27d1cb7ae88c408a5f496d3c50868037ebd0c964c07e6b22f35ecb00bf4250fe",
+      "controlledSourceDigest": "17547d9c576f181851da8a04816288a97130eaaab6b633dd080d3c7ecdaad3c3",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3721401",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2432231",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2432231",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5618365",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I can't go out because I have chores to do.",
+      "finalText": "I can't go out because I have chores to do.",
+      "intakeSourceDigest": "0ba50c386748fa75ace6e031718e1d3d8a6f17727286ec5e4e1fc9492c7c26c5",
+      "controlledSourceDigest": "3e5fd69e3e0487c1013a58ffadc1c369b8162811a171df4ba9b8a61d0ba4ea61",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.257421",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3299783",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3299783",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5618377",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "That happens often enough in the summer.",
+      "finalText": "That happens often enough in the summer.",
+      "intakeSourceDigest": "c4bba7a446c2cbea9cd2da64613871991029fd646b42129d7abbf142174fd90d",
+      "controlledSourceDigest": "3b59509f1140c2862e92ec4f492b40606cda91b960dad7650b664329541cc090",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2889626",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2889626",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3731687",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5618390",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't want to keep my friend waiting.",
+      "finalText": "I don't want to keep my friend waiting.",
+      "intakeSourceDigest": "d5244c5b13d7733d0ac54db643ef993890297973e8bbc466197793dba42437a6",
+      "controlledSourceDigest": "6fa0613485d4b96b3a33e8ca5ecb02bec4572ebaf5dfee619555c3608c2043ba",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2261258",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2282055",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2261258",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5618912",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "We should have stopped while we had the chance.",
+      "finalText": "We should have stopped while we had the chance.",
+      "intakeSourceDigest": "49b625a70d93121965a527f76a857ad54eaca287105dabfef80dd56057a20286",
+      "controlledSourceDigest": "f6ab745166dbc386994b9f1f45d93cdc9d31b94d5fa6d5b440325a083d9f1cb5",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2259789",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2259789",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2267471",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Upper-intermediate sentence structure with complex clause subordination, sophisticated vocabulary, or idiomatic phrasing."
+    },
+    {
+      "id": "sent.tatoeba.5618925",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Learning a foreign language is hard.",
+      "finalText": "Learning a foreign language is hard.",
+      "intakeSourceDigest": "c9eba2eeaf0281898fbbd9a43977f01e2bf3c8a442a2cb98fd9e3f91cb347a2f",
+      "controlledSourceDigest": "25ee6a8fb8baa5801a937e45d232b0385ce007f31b01608f56b4900b75da7c19",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.627265",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.627265",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2207418",
+          "score": 0.5
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.627265; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5618949",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Guess what I've got for you.",
+      "finalText": "Guess what I've got for you.",
+      "intakeSourceDigest": "37d603b135e756e1444df8da4a5b3753c91d4df30b8c83ae6067d6a04d30361b",
+      "controlledSourceDigest": "6020c07356ebd7d1ae57cbd60765d2ccd79e86fb8ead0ad7db31318fc5f720b6",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2769457",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2769457",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3723218",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5619092",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What does this image make you think of?",
+      "finalText": "What does this image make you think of?",
+      "intakeSourceDigest": "386e57690f91aad98dfc4f646a1f6b179a3035ffdfb519b84383bbd1c2732556",
+      "controlledSourceDigest": "3450b41da707ac7889d7aadacbc306b4d85420f9d0d66df3ffc99c9169f6d82f",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.54991",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.54991",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.29525",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5619124",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This isn't supposed to be possible.",
+      "finalText": "This isn't supposed to be possible.",
+      "intakeSourceDigest": "377d91ba401f506ab2b2fbe740da9dd42550bcf0ce036bc9a999af983b694235",
+      "controlledSourceDigest": "1ae3090b54ac00c39d9063fc70189177aef9a860a6016e904da1801e3d41835f",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5068017",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.10302687",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.10302687",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621024",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This is one of our top priorities.",
+      "finalText": "This is one of our top priorities.",
+      "intakeSourceDigest": "5b79e2759a5739a4752c54680fd19fb763fc149213416f2e009a5af37aae28f5",
+      "controlledSourceDigest": "8d041f189e44d325c727e1cc2ae5424ec3bdd02976c889a79dfdac069840d7c9",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.56670",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3754422",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.5320960",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621026",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This should be one of our top priorities.",
+      "finalText": "This should be one of our top priorities.",
+      "intakeSourceDigest": "4e4bf32c263b3f42c4acfbfe4673e02efd3c7576d7736abf052630b25a5cc5a4",
+      "controlledSourceDigest": "e69d62c65f7a684f74c3beb16039b2da7c43f5f4ad0741cd44ef5e6c178b7b1e",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5621024",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.59838",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.247555",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621513",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What an exciting time to be alive.",
+      "finalText": "What an exciting time to be alive.",
+      "intakeSourceDigest": "3b08ded263345e77613a5b5faf77428fb1032f5b6a1dd3a6d3338007b69e5c8f",
+      "controlledSourceDigest": "9c0401ee5b202c1387f4f44d9205fc033bdfc1fda283c04e3f482ee413bdd201",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1696937",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2847812",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2847812",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621824",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Many things can be bought at the market.",
+      "finalText": "Many things can be bought at the market.",
+      "intakeSourceDigest": "6b556c23de8df533afa97f7528401f720f5597805eb0b67b0a0b462e2f9a804f",
+      "controlledSourceDigest": "a7c034aef5422a39b9a82a228ce7375a75887d6b9a11d7e15321934d0f295db1",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3391158",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.3391158",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.680393",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621825",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "A blender lets you mix different foods together.",
+      "finalText": "A blender lets you mix different foods together.",
+      "intakeSourceDigest": "25d15e0efde995d253abcb7dab92653ce5295c50c40a0d81f1258a2e96a3cce3",
+      "controlledSourceDigest": "eb89f18de9cce6b27fe9eeef73e9d38f46d26d0dda6767abfd46d5338e59cdc4",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681499",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.681499",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.273253",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621857",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The mechanic fixed my car without charging me a dime.",
+      "finalText": "The mechanic fixed my car without charging me a dime.",
+      "intakeSourceDigest": "4674caeb72e9f7ec5d0ce0039ef35e661f284b478a539fe085c820c466da9f34",
+      "controlledSourceDigest": "5c2825a9455d91266bc0955bc62b064136c012e94a371dcb18b2fe3cca719f1f",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.682461",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.682461",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.65061",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5621923",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I don't see how I can help you.",
+      "finalText": "I don't see how I can help you.",
+      "intakeSourceDigest": "56312d37dc5b53d982e07905fee9a9b7a9517801db4c0d12f0ed620576cf3df4",
+      "controlledSourceDigest": "7b54937a9844f7765608cc276d71aa75ab7daf1e6e9d647b0acc8de4145f56e1",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1825320",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1825320",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1350575",
+          "score": 0.5
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.1825320; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5626269",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Guess how tall I am.",
+      "finalText": "Guess how tall I am.",
+      "intakeSourceDigest": "8bab6686507ec53a6c7c2c2204817ae5b38ebf898b9341d563f1b9fa1dc2dc78",
+      "controlledSourceDigest": "e5d812921653d84dce43b6ba7c6ee7a6e0313df420715629f083604479df12f0",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4755353",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3730663",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2950999",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5628209",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Sometimes trying your best just isn't good enough.",
+      "finalText": "Sometimes trying your best just isn't good enough.",
+      "intakeSourceDigest": "3407398e8b7a8b068e397a16351ad85e8a3f6c472f54897bb8a5d1ee812b3db9",
+      "controlledSourceDigest": "ab8842e7090c84fb887659b428f23a3436f1509f4f95f3cd54d1ff5ff27e8ba4",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3724200",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1341432",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1341432",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5628210",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Sometimes trying your best isn't good enough.",
+      "finalText": "Sometimes trying your best isn't good enough.",
+      "intakeSourceDigest": "1df5afc91b6ff61a629f0b7a84489f6ccf7982106e15f69527cf85f792ccba07",
+      "controlledSourceDigest": "6b849d64a6650f6c72bb0a1203f81349922c9b59fbfd868e3e89c760a51b1511",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5628209",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.3724200",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1341432",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.8750) with sent.tatoeba.5628209; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5628215",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It doesn't look like anything to me.",
+      "finalText": "It doesn't look like anything to me.",
+      "intakeSourceDigest": "36341430f32da6cf25269446cbbe950c9a533552255c0ec7fc03f046cc77b24d",
+      "controlledSourceDigest": "3447a8c2b516d6e5559a1c0ca54fbd299ab28cd85c08f5525fa223919b4941cb",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2074877",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3724164",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3878336",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5628233",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I shop here all the time.",
+      "finalText": "I shop here all the time.",
+      "intakeSourceDigest": "e3d3cf12caa1d577fc8147a2884c6bfbc672fecdf580543a2cc70d2108fb7780",
+      "controlledSourceDigest": "f00e6a7d83015150036c578373a7b1fc7499a8e222e0190c7fc712b5a6149457",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2194951",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3222530",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2194951",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5628420",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom works as a receptionist in a hotel.",
+      "finalText": "Tom works as a receptionist in a hotel.",
+      "intakeSourceDigest": "adfe10a5ee4fc10150dba3ff51c6a7ca5a28e7d78555d3aa03ea651851725117",
+      "controlledSourceDigest": "77049e311bca87b5baac86325ece078c6ab994dc0835d829c5746a717e1ab556",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3426429",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3426429",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3555035",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5628633",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You can catch more flies with honey than with vinegar.",
+      "finalText": "You can catch more flies with honey than with vinegar.",
+      "intakeSourceDigest": "2a5b1a2516d14452180f0699845ec0b11b01bfd0b71bebb2c52951d59fbb4e4d",
+      "controlledSourceDigest": "eb5d48d0b0c01415ee70ab9ee1ac60874d58001bdb505d1979af9f841b8686ad",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3123766",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.3123766",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.3723623",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.8889) with sent.tatoeba.3123766; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5629194",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This is my mobile phone.",
+      "finalText": "This is my mobile phone.",
+      "intakeSourceDigest": "b0004b1bb61d398863525748eb6f81b51fbc0954c949a4b58c35143b4dfebbef",
+      "controlledSourceDigest": "75869bf5c5252bcd774ae5dbd2ef515da3f9ae089e3b96d8fd4a18c167a38619",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.gra1.01.05.1",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.gra1.01.05.1",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.58909",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5629326",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You're not the only one with secrets.",
+      "finalText": "You're not the only one with secrets.",
+      "intakeSourceDigest": "2659394583e9cb7dc0f49f87a470e1d319025c67e13c2424cecc9bb8896c96a4",
+      "controlledSourceDigest": "5e8a5b52d4d2c6e6784f608b5f3ed9672cf9e0f09c55fda5fb30e0f0cbb8b7d7",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.246352",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3721281",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3726597",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5629334",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are some things you can't learn from books.",
+      "finalText": "There are some things you can't learn from books.",
+      "intakeSourceDigest": "f4e5a6b19919f41748dfbe831d2c612b0ff6827aac59151e22b687a4eaadb2ba",
+      "controlledSourceDigest": "2bc6a828ca2a2e5d9e3d2cf04e7d98b4cb73178c339cbd26b5ac15f6c25057f4",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.239712",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.239712",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2561572",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5629338",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Everyone in town is gossiping about us.",
+      "finalText": "Everyone in town is gossiping about us.",
+      "intakeSourceDigest": "e639c9ef96f1d147d34a65fa94fe289c0a826f62f20fa66d7ddfaa4464081cca",
+      "controlledSourceDigest": "1d28d7b802872740e8ca11dcd12f7b7498c697040dab60ecbd3dcf0de4fe87af",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.277903",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.277903",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2261082",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5629341",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Does this make you uncomfortable?",
+      "finalText": "Does this make you uncomfortable?",
+      "intakeSourceDigest": "110003bf3bbcb8e9b9a87f745fb8c4921a0d6a0cafdd40a319deccc888a6e91c",
+      "controlledSourceDigest": "77098d06ba15b4df42573b160fd17f1c49d27d04e23bab24214087ac420799d8",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5619092",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2845260",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3460357",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5629344",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This is a stupid idea.",
+      "finalText": "This is a stupid idea.",
+      "intakeSourceDigest": "e27bc76ae63672804394ddcd50b421af1951cdbd81e1a77cd463d77ae80b84f5",
+      "controlledSourceDigest": "d20c458936d1c4e6245c1b10f3416852a1bbcbf0dd6023b56866f70d822f6f52",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3712806",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3001030",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3001030",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5629361",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Mary is like a sister to me.",
+      "finalText": "Mary is like a sister to me.",
+      "intakeSourceDigest": "de7354da2d3710bdc57001db5c75f17f83910072baa29b0ea52524c2790c8e50",
+      "controlledSourceDigest": "ee255e3e1d13e27788694dec9656e71ed7f5fd834ee8485cfea4516f9ca90638",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3299597",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3299597",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.249745",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7500) with sent.tatoeba.3299597; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5629410",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm going to wash the dishes.",
+      "finalText": "I'm going to wash the dishes.",
+      "intakeSourceDigest": "6e1355f42ffbc00887c5249ef62b31d9457b3b5ff110e0ad1a49f2108fe01d98",
+      "controlledSourceDigest": "d1ede9562cacddd288937cd0f8895eba75212a372f0f2a4558a3543710b72d40",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5205392",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.34650",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.48741",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5629436",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Have you seen Tom's latest music video?",
+      "finalText": "Have you seen Tom's latest music video?",
+      "intakeSourceDigest": "432bacf09a22d838428470f02567ad192c0428d1f7ba2fb70ac4f30047d991d0",
+      "controlledSourceDigest": "316688fd750abcf767d6e12b470c16539e853ca8a8f9e84709b5c053e5e18c10",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5373765",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1717357",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2149117",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5629440",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You can shut up now.",
+      "finalText": "You can shut up now.",
+      "intakeSourceDigest": "3de1f8b59378abf927e9b3b8b45621906cb293e97d5babd8e32f3d299fb47806",
+      "controlledSourceDigest": "26adfdfa5251b8c8c419403c342b8903cf6136624290e86f8997d579fd6c8978",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3300208",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3300208",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2721972",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5629470",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How long have you been watching me?",
+      "finalText": "How long have you been watching me?",
+      "intakeSourceDigest": "0a232bb8cae53bed8135ecaeb1184b5ee988badf63eb384c537179307788d1d0",
+      "controlledSourceDigest": "c153a470dbe42a093068be5c99cfab10c0211dfbe067cf03109a65054263cff7",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.37601",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.70210",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.37601",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5630898",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This isn't like you at all.",
+      "finalText": "This isn't like you at all.",
+      "intakeSourceDigest": "f4a15904ba46d0733814e0ba92e318403125eb22f0ef8d71266b810794052aeb",
+      "controlledSourceDigest": "b005761e919bcacff9a01f667fe288c823635b73bbe0494451bfebd17275ed1d",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.60616",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.285335",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.60616",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5633545",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "That is different than what I had expected.",
+      "finalText": "That is different than what I had expected.",
+      "intakeSourceDigest": "b9569f260dad61af75951e59b0216141b5c8da58d03f55445ecb772d786ea1c0",
+      "controlledSourceDigest": "50113d947017fa4b85050c145f9279bc4f2f85f61688ef92b0de2a962eb2ca81",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3721714",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3570375",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.3570375",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5635878",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tell me why you're so upset.",
+      "finalText": "Tell me why you're so upset.",
+      "intakeSourceDigest": "11b673fefe7d2b0b876a80ef2204d1ac918a6df190d666c540649d36af70e6b0",
+      "controlledSourceDigest": "f04671fcc73e0ce30cf45b36bce73bd796860d3be5a1ffd7185078cd1e5f515b",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3722697",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2157524",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2179038",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5636011",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you want to have more children?",
+      "finalText": "Do you want to have more children?",
+      "intakeSourceDigest": "c1c981cab1d7c11fc07ab1171869007dcb7f317f09dead6166771aa9c0efb01c",
+      "controlledSourceDigest": "6549d5e2095f1fb50ef397abfd2a9a055e0f0a1e8539c78ac384667c13894eaa",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2888046",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2888046",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3044761",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5639047",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's one of the best books I've read in years.",
+      "finalText": "It's one of the best books I've read in years.",
+      "intakeSourceDigest": "e9af7c31adbe9fcdeadc71e32d3cccf81c058a385b15cb6021949ebb91d6cc97",
+      "controlledSourceDigest": "afb4977255488791ed4006a443158cbff0c1f5a65dcdd9a66a8e730efea7ccf2",
+      "maximumTokenJaccard": 0.5385,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1214151",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.1214151",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.2568449",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5639205",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm sorry, but you need to leave.",
+      "finalText": "I'm sorry, but you need to leave.",
+      "intakeSourceDigest": "7bea7cfcaf0a388746307e9bf97170d1a5acb29b6db5940c94327b4724c0d0f4",
+      "controlledSourceDigest": "cff4d705b23914a62737370fcaacbf8c37a6f01deac27e6941c19c78e9d4dd38",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3564974",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3564974",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.54757",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5639876",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Have a good day at school.",
+      "finalText": "Have a good day at school.",
+      "intakeSourceDigest": "4d8765b505b153256206ce1b9cc17852426ea1eea410720666f0ea8ee0df6fb4",
+      "controlledSourceDigest": "becae3a37e17aa17c8c019a57ab217494c2ee57aad23e207183e4f798d747689",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.268738",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.268738",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2266986",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5639877",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Have a good day at work.",
+      "finalText": "Have a good day at work.",
+      "intakeSourceDigest": "a43e323b46ae7ac76a8d9653673f055758b72b6e0e0b1d217555293cdde0d7d1",
+      "controlledSourceDigest": "f5d8c828597fe49db79d3ac0369a8c02f69e51eed32353d2c1a0c4843e225f45",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5639876",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.268738",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.268738",
+          "score": 0.4
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.5639876; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5640029",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knows all the hot spots in town.",
+      "finalText": "Tom knows all the hot spots in town.",
+      "intakeSourceDigest": "ed351a5257103f7e9ce6f4be4a1e1fa7a26d06bf1ad5244ba68d6ed736b9802f",
+      "controlledSourceDigest": "7746b2bf9dab51c5f7f7458f9f93408842c2aaa06c9bb0f8eef187b40d46a55f",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3723970",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3318841",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.3318841",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5640037",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I asked Tom to drop me off at the airport.",
+      "finalText": "I asked Tom to drop me off at the airport.",
+      "intakeSourceDigest": "eab8397f813b0dc1648aee4f4cc90831f539f498a7bb2252c45f673a5b86a096",
+      "controlledSourceDigest": "05fe59b5116ebae1403e614253db7afb72a37c1ee9951959f31f4c00e041a47f",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2298629",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2298629",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.325660",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5640206",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom didn't sign the contract.",
+      "finalText": "Tom didn't sign the contract.",
+      "intakeSourceDigest": "632f7ea59bd6e30b688ac0b67cf013fa0e31565a5e49f7a2cf2135b00c5f41d6",
+      "controlledSourceDigest": "8236e8e25e282ba51596ba17b4150ffc32a4655c1b42d3867761e7c498b9b086",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2642083",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2642083",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.4630602",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5640704",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom bought a gift for his girlfriend.",
+      "finalText": "Tom bought a gift for his girlfriend.",
+      "intakeSourceDigest": "16a3da4d7aaa86e9cabefbbf3731e86e40fb5aef7fbdd5735f013121ee7b8d86",
+      "controlledSourceDigest": "b213c00138276ab4eb3d812b8f3d11c8c41d41a10db960b72bbecaac29f73b5f",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3669338",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2485148",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2485148",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5640709",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Haven't you been watching the news?",
+      "finalText": "Haven't you been watching the news?",
+      "intakeSourceDigest": "84112ff222b5b454326cb00568dad2aba84ddcb25b34b87b5014af20858e6934",
+      "controlledSourceDigest": "0cab86ce5764defa7456a8dc44d60056ce235a72907007e8d92d87a8f7c4b686",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1634883",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1634883",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3729765",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5641210",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom's are not quite as clean as Mary's.",
+      "finalText": "Tom's are not quite as clean as Mary's.",
+      "intakeSourceDigest": "6a4a41994857cedca5c475eef54f9ba774b9f999a2aac268214b8688dc978e53",
+      "controlledSourceDigest": "1daffe7082c3ba8ce06c890b53611f7c0c66b8db5fbbbbc9d1e458894a1a2dcd",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4654426",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2608304",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2608304",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5642603",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I don't want to go anywhere today. It's cold outside and I have to get up early tomorrow.",
+      "finalText": "I don't want to go anywhere today. It's cold outside and I have to get up early tomorrow.",
+      "intakeSourceDigest": "34fe540113b9ff7c528f711ece11c2d8ee44ce38f26ecec7abac3cd7e14bb41a",
+      "controlledSourceDigest": "8b8662d0421d12645f65f1386bc2f8adcfc26e9970235bbe1a91a9831c8543e7",
+      "maximumTokenJaccard": 0.3889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3405577",
+          "score": 0.3888888888888889
+        },
+        {
+          "id": "sent.tatoeba.2258768",
+          "score": 0.3684210526315789
+        },
+        {
+          "id": "sent.tatoeba.2258768",
+          "score": 0.3684210526315789
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5643165",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom swept me off my feet.",
+      "finalText": "Tom swept me off my feet.",
+      "intakeSourceDigest": "37918db26130066e56b81c4a3c0f4398bd285c59083cfdec76ea5478210a11f1",
+      "controlledSourceDigest": "2bb8b0480750a00c0c5daa2207ebd1131410cfacb42c1ddb8de48e6c94476d7b",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2568604",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2568604",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2220500",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5644328",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There is no room for romance in my life.",
+      "finalText": "There is no room for romance in my life.",
+      "intakeSourceDigest": "58a70c8949dae6ac566097000ad608af6bcda61eb6f437ad7badda494b19a021",
+      "controlledSourceDigest": "a491d4c256fbff288b76a3475f14e821afd44e94c559f9ce70221d6fc6d191ce",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.251761",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3256299",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3256299",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5644345",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Let's go eat. I'm starving.",
+      "finalText": "Let's go eat. I'm starving.",
+      "intakeSourceDigest": "486ca98e44c3eba9abd7ddaeca77027d01c6350b050c8af1f5aa1c587ee16d20",
+      "controlledSourceDigest": "38bf3f56cdb9a3c41cc8195abac30e3f10d941ba9725f4755d54826670471ac5",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1344022",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1344022",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.47628",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5644441",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm a married woman now.",
+      "finalText": "I'm a married woman now.",
+      "intakeSourceDigest": "bcab6f4f9e4923344c80f17f3c3752cff99cca7cb2e9748418273e47bbeb0745",
+      "controlledSourceDigest": "4f2a6e0186e2fcd8da33646d0bf3ff6fe8de568634352758b05aec38c400e86e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.321702",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.321702",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3667395",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5644479",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm an actress, not a model.",
+      "finalText": "I'm an actress, not a model.",
+      "intakeSourceDigest": "6a8c847dceb90f37470557b354ce88dd23c4a3aea8ae5f69f915ca6f8e1604d3",
+      "controlledSourceDigest": "df903b801adcccf9d1e6007722ce6550869e50fbefa458f62a2bef73cc1c6cf0",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4567809",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.4567809",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.13134980",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5644755",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Freedom of speech is the cornerstone of democracy.",
+      "finalText": "Freedom of speech is the cornerstone of democracy.",
+      "intakeSourceDigest": "da0478ac5552ee88c5125461728e51056b5683c6283b5b85e54c67641f596699",
+      "controlledSourceDigest": "bfab5feb666f6341f0f57685c77ceaf3df2f24b298649543f2ce0b9788e7a700",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681013",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1787055",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.1787055",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5646526",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You know what needs to be done.",
+      "finalText": "You know what needs to be done.",
+      "intakeSourceDigest": "056cdebdccbade364aa6e0233659e3cd810d78e2a0d439ed881579196dd7f6eb",
+      "controlledSourceDigest": "301f43cf773fbfe24533ca3d37e466a6ecf3dcdfc0806192935d62649f81fac2",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2476139",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.2476139",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.2987984",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5648228",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is a real-estate developer.",
+      "finalText": "Tom is a real-estate developer.",
+      "intakeSourceDigest": "8618fe7f8d59aa93c6a46134453edf5d6e2deba171fb6803dcb829e35525cef9",
+      "controlledSourceDigest": "aa7d1acd4f1a780399e6c52e32b343ff13a8fb89dfc8d24d5b6270242fcd483c",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2721472",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2721472",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3633840",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649047",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't feel like going to the party.",
+      "finalText": "I don't feel like going to the party.",
+      "intakeSourceDigest": "59631f6a2bc715c7753c802ada541de27814f9d344c7085f3ad17ff7dcd86644",
+      "controlledSourceDigest": "462941e7aeefb9d2e184d6ce41da500754ce233483655124958fac7911f5b917",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2677606",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2677606",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.4731109",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649050",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They got along very well.",
+      "finalText": "They got along very well.",
+      "intakeSourceDigest": "6d348109cbdd5c6541262e2d004f01f8175db422a5b09309c6e42ba6ffbb6245",
+      "controlledSourceDigest": "14017f0424a5f0c2960b6a15f683bb2131ef580f1202a286251e269ab8751df1",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.305478",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.305479",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2167434",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5649103",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What's wrong with reading comic books?",
+      "finalText": "What's wrong with reading comic books?",
+      "intakeSourceDigest": "e4e995d65c2545f74ded22dfb91daa8a58d5387baca77701e9043b3330a5fcd0",
+      "controlledSourceDigest": "1195a5b425f828cf81817027dcc29f0c76c48627de868a1f4190e5e727b97540",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1665120",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2204519",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2724526",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649118",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Men should always treat women with respect.",
+      "finalText": "Men should always treat women with respect.",
+      "intakeSourceDigest": "efc086585fe010c2f4d6702183d22a87892eface90802a99182298bbbd82781c",
+      "controlledSourceDigest": "8d8e2e66a48b456f4e2c20435e957d694abbd39e537aa6c44b8f257cabc291b3",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.276920",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.276920",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.274868",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649188",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "February is the coldest month of the year.",
+      "finalText": "February is the coldest month of the year.",
+      "intakeSourceDigest": "23002e41f04cb1942a4766f8b6c518ceeb7fdd33102561194745899d8c40319a",
+      "controlledSourceDigest": "e5b062b4c821b0d1fcedafa8e8a099ee45334e22a11e1e89bb3ae336fdd0a319",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.266506",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.266506",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.681511",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649190",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Traditional hula dancers did not wear grass skirts.",
+      "finalText": "Traditional hula dancers did not wear grass skirts.",
+      "intakeSourceDigest": "f9b5282a6c8ab1d0bda1603670853a974df008070d01d9db130bb93de4a45231",
+      "controlledSourceDigest": "b6d24e15d43bd59a89509c5a8f8ec90ade295cc2fdc9ca5b1a0cd151c502efb8",
+      "maximumTokenJaccard": 0.1818,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.802178",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.802922",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.803022",
+          "score": 0.18181818181818182
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649226",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I made a lot of poor choices.",
+      "finalText": "I made a lot of poor choices.",
+      "intakeSourceDigest": "4407e368b8b300c23f449131a1a30c66ea782dfd9025b592df7027b26a19ffeb",
+      "controlledSourceDigest": "0f0209205cbb69a5e56fb1aa4659abb2e346c58b8a1eb6f798f0a8c71aa57335",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.246391",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.259644",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2209660",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649229",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is relatively fit and healthy.",
+      "finalText": "Tom is relatively fit and healthy.",
+      "intakeSourceDigest": "15d0e4b0118993f78202c72da9becc7b3c8526c2a9a2c0e788eda271cb619571",
+      "controlledSourceDigest": "806d28b682ee2f9646ce2fa6f3dbafcf7ec9f7da68eeeb13b7aa45c540f87011",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1692631",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2724095",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3069405",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649234",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you need help with your makeup?",
+      "finalText": "Do you need help with your makeup?",
+      "intakeSourceDigest": "572a8970a1464b3472bdf1140d5b55bc9b8d1e33d48c9d94303bc3876f553263",
+      "controlledSourceDigest": "d8357342c35e69727d25d018bfd07dd3edd3f57b5712cedcd7a515d96fab8836",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3774153",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1541824",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1541824",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649245",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Maybe this is what God intended.",
+      "finalText": "Maybe this is what God intended.",
+      "intakeSourceDigest": "76abf522f18d1166edf3da6f5d1ea142b0ef5f21e5f348aea5a116d270474f88",
+      "controlledSourceDigest": "bad484f8631c702763a98393411e3b4523fbd4eb80dfae866f938233165266f6",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.10717720",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.1445157",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3133927",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5649356",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't know how you sleep at night.",
+      "finalText": "I don't know how you sleep at night.",
+      "intakeSourceDigest": "23651d28b08cbb8f009721f91d5b8797420e624819fd08f327ebb0792e6d76cd",
+      "controlledSourceDigest": "0ade060c27e8074d8d8ea8fb9e7f26316726212917afb14720662a2d59ddd283",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.385727",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2436427",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2436427",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5650945",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It doesn't matter how much it costs.",
+      "finalText": "It doesn't matter how much it costs.",
+      "intakeSourceDigest": "67e38f5d75abba2ccbd3ccf5233cfb27b5b473c984fd0ad94a924e19a12781a2",
+      "controlledSourceDigest": "93e37fdd9dbc3b8502b0728d2144750a5b7acaef8f4cd5bad5a8fa56d31af4f3",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3390831",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3390831",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3724164",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651134",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Can life get any better than this?",
+      "finalText": "Can life get any better than this?",
+      "intakeSourceDigest": "88bf663f1a15276e543096da31904ce18129ce832b68216377638bce680386ed",
+      "controlledSourceDigest": "c03502d94f6e50ab332a4c7f8e9cefefa6a14c0e0a185cc341c8003b9e2b5bb7",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3439903",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2723917",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3439903",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651136",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom met a pretty girl at the party.",
+      "finalText": "Tom met a pretty girl at the party.",
+      "intakeSourceDigest": "be83689011dc1ccbfc7ced870eab2ea3dea5e9373002601fae6bcb86781e6c1d",
+      "controlledSourceDigest": "ef5518752beef7b268a8a17ce3a8526a7f81a0a8d77a8639cc95d9d892603644",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2646803",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2646803",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2980250",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651238",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary separated from her husband two years ago.",
+      "finalText": "Mary separated from her husband two years ago.",
+      "intakeSourceDigest": "5dcc6cbcd64afe9be7b1d861f05c286d767b8d3bebea218733109a04899cf90d",
+      "controlledSourceDigest": "5eff6687cf6be50d94e51d9bff8f4a729ae186003a5554904f142e3238e0051c",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5481134",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.309691",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.309691",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651255",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The truth is that it disgusts me.",
+      "finalText": "The truth is that it disgusts me.",
+      "intakeSourceDigest": "bb980910ee79f6c5680c2990e305f3f1dabc65230ec3413187d5d01bae28a62f",
+      "controlledSourceDigest": "4b8b4e83a1e0e1b8f9464913655899e8d0b2334101e4c36d8536b8cf655e8455",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28735",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.277096",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2898165",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5651288",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The cloning of human embryos is prohibited by law.",
+      "finalText": "The cloning of human embryos is prohibited by law.",
+      "intakeSourceDigest": "9ec00e1362d4135608bac7fb0b5376efae3e9a9e0189074022a34455171212d3",
+      "controlledSourceDigest": "3f65a305f40a52d651d44deb88317b282fcc8916a537791b99745131afded100",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3115512",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3115512",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.44004",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5651619",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The film had a great beginning, but the ending wasn't believable.",
+      "finalText": "The film had a great beginning, but the ending wasn't believable.",
+      "intakeSourceDigest": "f3ce8a61146f4f21eb757d88bae0fce45a262362237738c892f6b8f669379fa5",
+      "controlledSourceDigest": "d49c31281d16447ce3738e63f75060de3c2819a3dba911bc51ab079d50fbe10a",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.49528",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.289169",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.290497",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651798",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What are you so scared of?",
+      "finalText": "What are you so scared of?",
+      "intakeSourceDigest": "224eac5e4d42981f8e0e764400e6091f6cc2cd7d19a46ec23b229584a1217396",
+      "controlledSourceDigest": "38e3faed4430771a8f578e43d9c30a06a2d7d0363b4316521c7fb814f503ab7f",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2636022",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2636022",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.42982",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.2636022; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5651807",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom wants to go to graduate school.",
+      "finalText": "Tom wants to go to graduate school.",
+      "intakeSourceDigest": "11b8ef17db7188bc5130b3dbd4a85e39f4f6ee3cd08ce7d4f071f6ed2ed44060",
+      "controlledSourceDigest": "1f69fff3d73e3e2a4c5f62abf2eecb5ec06e5b66480d053f71fb4993184a107b",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3204724",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3439893",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3204724",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5651839",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What do you say we ditch this bozo and have some fun?",
+      "finalText": "What do you say we ditch this bozo and have some fun?",
+      "intakeSourceDigest": "3edd2f80636b37bf88bfe0bd5c08b53f8362d4d9c4c12f30500043f05b9dd8a3",
+      "controlledSourceDigest": "1c8a53d64ff74af25cb8f65c9a45e1d3d0161eba4f1e4b8c1a48ca6e00a8c4f0",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.56740",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.56740",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.52312",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5653490",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom is feeling really Christmassy.",
+      "finalText": "Tom is feeling really Christmassy.",
+      "intakeSourceDigest": "eb532cd576729613b577d24f1149db8eb1cc7dccac0230958346f80dff2d7544",
+      "controlledSourceDigest": "b6e8ba5ecb89eaea30877cd31625f4de1048a66b7ab6d5b91dbf4860620bc7c0",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3722374",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3938831",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.4104453",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5656516",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Everyone is insane, in his or her own way.",
+      "finalText": "Everyone is insane, in his or her own way.",
+      "intakeSourceDigest": "4d7ea15dc46720e9ff5446d3a60f48bd1ccccbd8ddce47814258153806afc21f",
+      "controlledSourceDigest": "98a50f7f227f9578f4d27e66c6dc290d9ff71ea979da8943efc9aab05afbfac6",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.40393",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.311679",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.311679",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5656546",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "How old is your brother?",
+      "finalText": "How old is your brother?",
+      "intakeSourceDigest": "90663b6c461abad51b11ca43496bf0f6b98008fe3b5bb8b4494ec4719747fc6f",
+      "controlledSourceDigest": "aed04c60647204ac0eb7101e00e4fad1aa9f410b62c2150e85c782dddc867e3d",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1859662",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2260585",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2556286",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5657451",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You can expect to receive a little something from us soon.",
+      "finalText": "You can expect to receive a little something from us soon.",
+      "intakeSourceDigest": "3818a22ef8e1b2912cd895ab75c57688366ffed6e2c168486f2e5aa09762afb4",
+      "controlledSourceDigest": "bb27b43f2e4c0144a6ee92adbf36cd82f2870e8ae91bdba3ff4c316e995040b0",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3727839",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3476733",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.3476733",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5659219",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'll do whatever I can to help out.",
+      "finalText": "I'll do whatever I can to help out.",
+      "intakeSourceDigest": "84e476734fc38b4b40f43ff12f692664ce4c57b773796136fb3adeab65a73ef7",
+      "controlledSourceDigest": "a0786caf35e0998e8b8e46621ba7d67e39754c17b2eb9c9ed073b94444b886d3",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1041646",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.1041646",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.3651807",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5659220",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'll do whatever I can to help you and Tom.",
+      "finalText": "I'll do whatever I can to help you and Tom.",
+      "intakeSourceDigest": "9429f7edf0936a1b2beb015f45e2587d83275269a50aa06ea9abdbd63a83f6a5",
+      "controlledSourceDigest": "c1de0827c11fc18118cc075bfaf90516921da4ee6834076c71965608d956c94d",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1041646",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.1041646",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.5659219",
+          "score": 0.6363636363636364
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5659279",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I swear this is true.",
+      "finalText": "I swear this is true.",
+      "intakeSourceDigest": "39cbf2157b2db604a738f1cddb0a88bf8ab80a1ad6a9d993ac1e27398ac67bc6",
+      "controlledSourceDigest": "1440115b1975346f5d828a3e26b43a2073b0114ba1d825e8fce0302dcbf2e2cf",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5313664",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2230337",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1823690",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5659286",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I swear to God this is true.",
+      "finalText": "I swear to God this is true.",
+      "intakeSourceDigest": "bb61065f114137e7a6997cbdb31c0816e0e42b897352b5b4017d41330b054ca7",
+      "controlledSourceDigest": "77a7f31920c09d94ae27db2859c1837d50cf86598a31956e8abe2250243335b1",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5659279",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.5313664",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1224950",
+          "score": 0.4
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.5659279; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5659287",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The stakes just got a whole lot higher.",
+      "finalText": "The stakes just got a whole lot higher.",
+      "intakeSourceDigest": "d83b779efb790e5fb921374e1134412dfd7e63822f790c8476388ad0b91e84fd",
+      "controlledSourceDigest": "122f61f4899c790a5d9e774f3f93ef2c60879a24321b27b9a65600c64efaab0f",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1972150",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1972150",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3722040",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5659288",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom is not a team player.",
+      "finalText": "Tom is not a team player.",
+      "intakeSourceDigest": "85c7cfcf3f2a0af08365b8c050e409c73e491b97ba79406ba87c508dbbf08bb2",
+      "controlledSourceDigest": "2034238b0978d978d268567ad3c9a52f9d5fb91e61efaaba7bd35c18cdc1cf45",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3091335",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3091335",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2199180",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.3091335; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5662163",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The family received discouraging news from the doctor about Tom's health.",
+      "finalText": "The family received discouraging news from the doctor about Tom's health.",
+      "intakeSourceDigest": "4e14628c4a971848ff0a4ffc3b94ed268858b9c858e5f452f4b427c872e8abce",
+      "controlledSourceDigest": "7ff5bded962bd566111fba7cf0a7a696868ed4539a9744ac3087476560365663",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3859987",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.5258319",
+          "score": 0.23076923076923078
+        },
+        {
+          "id": "sent.tatoeba.318497",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663098",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I understand now what you were trying to tell me.",
+      "finalText": "I understand now what you were trying to tell me.",
+      "intakeSourceDigest": "7d411702ff22f553660213e2affb0a58f37d5afd650e0c03b06db9aa82fe8b30",
+      "controlledSourceDigest": "d4401f39a029b12e21cfb9bb2b0f72cd1c883a3bd7010e1cef5ecba0fe3d0a7b",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3732013",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2583111",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.2583111",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663099",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I finally understand what you were trying to tell me.",
+      "finalText": "I finally understand what you were trying to tell me.",
+      "intakeSourceDigest": "eb99e54c9c494c5db99c956d616a686f562c8711704b80bea3b279453326088a",
+      "controlledSourceDigest": "9a54679faacbbe7db5aca4f103d00951ae4908f12dd7fdf223e58891b03b79b2",
+      "maximumTokenJaccard": 0.8182,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5663098",
+          "score": 0.8181818181818182
+        },
+        {
+          "id": "sent.tatoeba.2583111",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.2583111",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.8182) with sent.tatoeba.5663098; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5663100",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I understand what you're trying to tell me.",
+      "finalText": "I understand what you're trying to tell me.",
+      "intakeSourceDigest": "eb45fa679b5699399b662093d37d8c990d0a42546a2d0c2a39b6e0fffa7937de",
+      "controlledSourceDigest": "2303a289c4993ecbc4d9740c8984fc30e54f30da1138477989afdcd56c4590ff",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2266900",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.2266900",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.5663098",
+          "score": 0.6363636363636364
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663105",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I now finally understand what Tom was trying to tell me.",
+      "finalText": "I now finally understand what Tom was trying to tell me.",
+      "intakeSourceDigest": "16d774c279ec456efd97d882b9c202e6ae71b63613ec02eb0bde403865c8b8a9",
+      "controlledSourceDigest": "ada461d7b2f6d1899b1f01f7b15a2e26f1286b7c1f20db8e350c1d74dcc62f44",
+      "maximumTokenJaccard": 0.6154,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5663098",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.tatoeba.5663100",
+          "score": 0.5833333333333334
+        },
+        {
+          "id": "sent.tatoeba.3722734",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663109",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think I finally understand now.",
+      "finalText": "I think I finally understand now.",
+      "intakeSourceDigest": "e960d5e16b3078e3e9f8e86fb969ff0f213583974568f7227181b6ff57cc4620",
+      "controlledSourceDigest": "6f4e8ba7dbe9ded76056a5e947cca7a764f305f2502d17ec3e5e409ebce710e8",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1210637",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1520702",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1210637",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663111",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I just took it for granted that you would always be there for me no matter what.",
+      "finalText": "I just took it for granted that you would always be there for me no matter what.",
+      "intakeSourceDigest": "4d6a755204b5cba6a36ae626759d62b027794da47730c39727849d8e1aca6e8c",
+      "controlledSourceDigest": "20f3e94d9aa9cc7b2834900486cb413a7ff45df14ab2a70742060f59151de471",
+      "maximumTokenJaccard": 0.3889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.260101",
+          "score": 0.3888888888888889
+        },
+        {
+          "id": "sent.tatoeba.260101",
+          "score": 0.3888888888888889
+        },
+        {
+          "id": "sent.tatoeba.29043",
+          "score": 0.35294117647058826
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5663113",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I always just took it for granted that you would be there for me.",
+      "finalText": "I always just took it for granted that you would be there for me.",
+      "intakeSourceDigest": "ae4595b1b1a31f5b72bfc7a734d1918c380d253d167c562f6a4253eb3093d015",
+      "controlledSourceDigest": "38115ec391140e67b85f968d96f2eaea74c48ae1b5db8940e644a6f1b82bc061",
+      "maximumTokenJaccard": 0.8125,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5663111",
+          "score": 0.8125
+        },
+        {
+          "id": "sent.tatoeba.260101",
+          "score": 0.4666666666666667
+        },
+        {
+          "id": "sent.tatoeba.260101",
+          "score": 0.4666666666666667
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.8125) with sent.tatoeba.5663111; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5663144",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "At the time, I thought it was the right thing to do.",
+      "finalText": "At the time, I thought it was the right thing to do.",
+      "intakeSourceDigest": "bd89aef564a4e58f5bbd8ac9e4f3649c9e8952431ca6aff3687109bc71e84474",
+      "controlledSourceDigest": "a49ec63cc29cee758ba3b701cce72cfc14a0145b944b689823fedad10e4a69d9",
+      "maximumTokenJaccard": 0.6154,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3120893",
+          "score": 0.6153846153846154
+        },
+        {
+          "id": "sent.tatoeba.1961294",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1961294",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663159",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom pressed his cheek against my cheek.",
+      "finalText": "Tom pressed his cheek against my cheek.",
+      "intakeSourceDigest": "75048af14e9bb86b34d8f7da0ec11a01dc34d21be5e91408b753f6ec860ae6b4",
+      "controlledSourceDigest": "1954f2b9de525e0304395bbfcf4b038540cca597de4b937d836804fdbcaa6a11",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2978150",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2978150",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3726309",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663233",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom's life was totally ruined by drugs.",
+      "finalText": "Tom's life was totally ruined by drugs.",
+      "intakeSourceDigest": "e86158f684b095984285c50fb1f6afc09dea42cf5ca638309abfdc652835ed93",
+      "controlledSourceDigest": "9c98d3e32de9ad471f6270bca245ef5112e974cb09c42a433fe8af7622b40dd4",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5252346",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.5564267",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.681218",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663323",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I never meant for things to happen the way they did.",
+      "finalText": "I never meant for things to happen the way they did.",
+      "intakeSourceDigest": "582523a893d8e708332ef4d23747e93e0ea40246724dab1802bce553b63f3053",
+      "controlledSourceDigest": "32477c4332dca4091bf8d10650ab3fecc557e4a218345a2afdc7e292583c60bb",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.252765",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.252765",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3688490",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663325",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom bought drinks for everyone at the bar.",
+      "finalText": "Tom bought drinks for everyone at the bar.",
+      "intakeSourceDigest": "c64f03b5d455f089f335eaf8527ec93c7042a662fb0afc34d42eb385e2d89538",
+      "controlledSourceDigest": "d5e121c7701728cb78559a466c8f2eac652dc3675c728a653a3e2c712ec9fdd4",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4210127",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3724430",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3725297",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663362",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Do you want to make a snowman?",
+      "finalText": "Do you want to make a snowman?",
+      "intakeSourceDigest": "f54014cfd04a0048955d01f3cc2cd7696e3a51217c9736ed93035a982a99099a",
+      "controlledSourceDigest": "c33ded085b1a4002bacd81c9fe1e0b11561aa3e831a641207cc999b5e4a8f175",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731718",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3000796",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3282944",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7500) with sent.tatoeba.3731718; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5663375",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I never see you anymore.",
+      "finalText": "I never see you anymore.",
+      "intakeSourceDigest": "5952fb42d3ee9eb72ccad70b4fb3f2fcbf8a86fce5119f18999262a1a65cf8c9",
+      "controlledSourceDigest": "8cdf85a66da3dd8aff3191079adf2663f1c7ed7bc4002a7ecf1029fe873f1f02",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2967427",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2967427",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.10164327",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5663580",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I need to ask a favor.",
+      "finalText": "I need to ask a favor.",
+      "intakeSourceDigest": "e80dcae85c923a6339be9e5b7388584e2324093f9ab66947a3ef4ff7a0288d18",
+      "controlledSourceDigest": "0c439547b69610a33ece385d32473c7506e487039ae88ecdce1ebafa8a56775e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2258804",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2631685",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2631696",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663589",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I need to ask you for a favor.",
+      "finalText": "I need to ask you for a favor.",
+      "intakeSourceDigest": "a644866eba221728588585d379959e466d4c8ff558657be74c28bcfa82ea50a9",
+      "controlledSourceDigest": "a6d64f6f4bd5520db7e7f9d1534f0fbfa3cee7dbf75e64aeb2b969b214682d6b",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5663580",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3163294",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3163294",
+          "score": 0.5
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7500) with sent.tatoeba.5663580; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5663689",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't have any artistic talent.",
+      "finalText": "I don't have any artistic talent.",
+      "intakeSourceDigest": "678f51c6a4ffdc347e715403dfc204b66c394a772c8b000859a63bc51ad26f49",
+      "controlledSourceDigest": "6e565b9739d033f8984d34c5fec00327877f91beb727bf53778306b1d2303556",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2609454",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2682210",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2574440",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5663892",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom didn't have any presents to open.",
+      "finalText": "Tom didn't have any presents to open.",
+      "intakeSourceDigest": "41c5d6063b92f7620b4a1268ea64a16e79d3329215b29483c4d4a95624aad966",
+      "controlledSourceDigest": "3777920b851470a87ae585fb22879f3c1a872e86a6fc8aa97609db11e2870737",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731368",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3727643",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1744811",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5664718",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This dress is a good buy.",
+      "finalText": "This dress is a good buy.",
+      "intakeSourceDigest": "ce657feb44935aab69798943dac0334ab4496ebf3196ac3ebb6182ab123915bd",
+      "controlledSourceDigest": "db2d0be60421913b66b8418c460b3f8e6399805fdc7612cd1cb79ae9adaf3e22",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2774593",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2774593",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1559806",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5664730",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I still have so much to do.",
+      "finalText": "I still have so much to do.",
+      "intakeSourceDigest": "62f81907f250ed15d534837b621913c97502d25a2fd459b19236604512389d8f",
+      "controlledSourceDigest": "758afe05a06f56a685f7e5bc78e5ec1db7f51a2a73f9ef3755362d0f2731da74",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726355",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2630421",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3571929",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5664737",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom has unique musical abilities.",
+      "finalText": "Tom has unique musical abilities.",
+      "intakeSourceDigest": "51b875bd4d3c981122d6d439ac2ae2d4eec8c118b0ef9996f9f1443af85bc1e2",
+      "controlledSourceDigest": "8d3c22014404ec17fa18b7975b3624e992454e8e7ecf3f5cdf16af79c538accb",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.gra2.01.07.3",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.7794997",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.37067",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5664780",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Do you like comic books?",
+      "finalText": "Do you like comic books?",
+      "intakeSourceDigest": "aa50827149f5c672de408f10c286d6f98c7371372db1869cd045f627076d5a53",
+      "controlledSourceDigest": "362e32b2c7a5e8b90e67241a3b7074b935db626d2256ee00dace5e53f5e7c407",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680196",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.680256",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.698895",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5666397",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom isn't much of a basketball player.",
+      "finalText": "Tom isn't much of a basketball player.",
+      "intakeSourceDigest": "e439f36d4156facf68c263729000aa4dcb219287aa44d1ec1651de828216f993",
+      "controlledSourceDigest": "a4ad1b76e4fb989616d2c09b43e730497ec5c4fba73aa7c3d36f2b6c90530105",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726478",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.13134981",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.13134981",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5666402",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I know you're smarter than that.",
+      "finalText": "I know you're smarter than that.",
+      "intakeSourceDigest": "c16513181af4a893ab807e18b75ad39bfcf48dd3cfb23a3789a1b8ec898bec0f",
+      "controlledSourceDigest": "70bad2e2f8ca81949de3437e3bd662cd0994dc6928575b2cb95b0812f7bd315b",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.877846",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3412928",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.877846",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5666403",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is the fastest runner on our team.",
+      "finalText": "Tom is the fastest runner on our team.",
+      "intakeSourceDigest": "173ed844abe3a5e6d58aca8e88339a5da5ce179a3ff37994ceef2abc4b516c7c",
+      "controlledSourceDigest": "4dafed83f8e3f2734292ca12f7a6d73009938fa9410236b8f903214db0a66013",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.297378",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.297378",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.680360",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5666404",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I left the keys in the ignition.",
+      "finalText": "I left the keys in the ignition.",
+      "intakeSourceDigest": "989406f3c506b4f9de663624fea7ba660fcfc2ade2a027a69fe2e7ba6db1b72c",
+      "controlledSourceDigest": "1ffecdc9663baf12ac71cf4f592e652ed2fc5771c70704bf5e323a9660c09329",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3461208",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3461208",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.371568",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5666755",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I knew that it wasn't true.",
+      "finalText": "I knew that it wasn't true.",
+      "intakeSourceDigest": "9599c7737939c630ca058b4ff8bb15f7bed75b6d849d7a4d72b8d5ad1eb5c16c",
+      "controlledSourceDigest": "4e28eb61387517fb95745282fdb8d1f9f0c8063c8a030448f66847dfa42459b9",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3721763",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3727659",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3730270",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5667702",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Mary sipped her hot chocolate.",
+      "finalText": "Mary sipped her hot chocolate.",
+      "intakeSourceDigest": "7b2b780d6c194f8df5b3edc2c125ecc9f736fe76dfa1ced38a13ad580c035631",
+      "controlledSourceDigest": "5dd964cd3ef4f4f629bd1e8450620c746ac9974c1381b5c57cd0d1df8babfaf0",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680661",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.681188",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.681393",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5667712",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Mary looked at me and smiled.",
+      "finalText": "Mary looked at me and smiled.",
+      "intakeSourceDigest": "cfdae8cdb834e1b5d5b873f8dc4fdb8c9621280bef1e6d30eea6b39a1bbdfb0f",
+      "controlledSourceDigest": "afad573a1e1693a34b132d01d33906faa729e59dbf312742ae2b9c9216d56e11",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2148853",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2148853",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3539348",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5667742",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What's wrong? Why are you crying?",
+      "finalText": "What's wrong? Why are you crying?",
+      "intakeSourceDigest": "aded8ab0ca323feab9a60be060dfdc01534ef16ade6198beff75263b9f229ea8",
+      "controlledSourceDigest": "29be01e1df528367cec6001f9ec14f3ac7418b2fb9a12eb52702286e3f316f65",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3983921",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.4091918",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1938948",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "High token Jaccard similarity (1.0000) with sent.tatoeba.3983921; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5667749",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have to go. It's getting late.",
+      "finalText": "I have to go. It's getting late.",
+      "intakeSourceDigest": "790269bc0103ee2844e6b1d09681b0bdae62cab4a16fecd1dda80f8cafbc582e",
+      "controlledSourceDigest": "c21ddde020c856d1bde63f460c4a53ea7fd60e78af1361cb79750e527b605788",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3305918",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3305918",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1744809",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5667819",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom slept nearly the whole way.",
+      "finalText": "Tom slept nearly the whole way.",
+      "intakeSourceDigest": "95bf7fc5d001f3f9ce543988f23782cb0b8c64bf66b931d9efa5b029897decfa",
+      "controlledSourceDigest": "8db9008645a4658e1e5b57e9621d3a280cafec0543949e935ad25a1ba070fda3",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3722878",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3723548",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.4953940",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5667847",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The town is badly signposted.",
+      "finalText": "The town is badly signposted.",
+      "intakeSourceDigest": "deb4ae3c0bade96c82c414d747e60e3c90e5df3767052f33deb1b03280df9bc0",
+      "controlledSourceDigest": "768278135513a18d64bc918132676a327fbcc9647c2bb30a0c6ed61025b80c90",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3222101",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3222101",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3725911",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5667849",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom got lost because the route wasn't signposted.",
+      "finalText": "Tom got lost because the route wasn't signposted.",
+      "intakeSourceDigest": "fa6a54b094790fe8999a662881f84e9c1106817337ee8e2f8cd6b628b8c6b07f",
+      "controlledSourceDigest": "e0db30a754ae67f315dfbda16c53d67d65653f2a86d50c5dab0b229be3673a92",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2776367",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2776367",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.4278935",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5667910",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is a diamond in the rough.",
+      "finalText": "Tom is a diamond in the rough.",
+      "intakeSourceDigest": "6cdef23f990987e4ad2aaba4e39bebc46222cd94364df78a40480b5b071f405b",
+      "controlledSourceDigest": "91f35be473902f02be929794286ca2e306fd28370797fbfaa45d6338830abd13",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3093807",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3093807",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3723534",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5669161",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I laughed so hard I cried.",
+      "finalText": "I laughed so hard I cried.",
+      "intakeSourceDigest": "3cf48bd86fa0625d9551933c1c2a1ea65599f548002852234e77036024d076c0",
+      "controlledSourceDigest": "3df0a1f2e5c7d95e4068beb5da7eb21ff7d2cd95e49f5ec665c6a42ab51ce207",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1987725",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3303959",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1987725",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5669995",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm just venting my frustration.",
+      "finalText": "I'm just venting my frustration.",
+      "intakeSourceDigest": "2e7197c7a6e24f1bf5539406e790b42148779da4c7c9cad47c5fe3d8d86a9759",
+      "controlledSourceDigest": "77597313f3789af667f040254aae272bebd18041410cd9c78171391c54e2dad8",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726890",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2221140",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2221140",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5669997",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Mary pulled her knees up to her chest and rested her chin on them.",
+      "finalText": "Mary pulled her knees up to her chest and rested her chin on them.",
+      "intakeSourceDigest": "546e95354204edb4b2c27c06e75c736bdb3f84cac3782c686aab96c84b1ad806",
+      "controlledSourceDigest": "fe80d9d72f8a386a0354c7e049e8cb76a06d40fcf2524899e1896b284e54aca2",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3557409",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3557409",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3922374",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5670001",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The two countries are engaged in biological warfare.",
+      "finalText": "The two countries are engaged in biological warfare.",
+      "intakeSourceDigest": "2bf6388cd70982d23753250d499a30cd30e5abc266938dda2178027253919692",
+      "controlledSourceDigest": "8c38174c20cd6737ed19a48b9828b2374a855b8f919231c8f8f0b285b9b5f30f",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.50722",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.280845",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2259465",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5670655",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It was like a fairy tale.",
+      "finalText": "It was like a fairy tale.",
+      "intakeSourceDigest": "8a19384346b982ea0b4ba30d5dadada888ac7fc7fda66335c80381498cf4f6b2",
+      "controlledSourceDigest": "85d4a978a2988d9760e41f91dc2dcbf1c7655115780af4ac9cce0b0110f9f90f",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3601906",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3593359",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3593359",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5670658",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Mary wore her favorite necklace.",
+      "finalText": "Mary wore her favorite necklace.",
+      "intakeSourceDigest": "821748200dce217b0c311b399de44acbd13ac681cce6657b2c31e6cb06b99cb3",
+      "controlledSourceDigest": "2beadeb9b6fd399841c65b3b564a6bd56ffb45000c98732d17d0389b81ef4465",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2963403",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2963403",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.680661",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5670660",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom shoved his hands in his pockets.",
+      "finalText": "Tom shoved his hands in his pockets.",
+      "intakeSourceDigest": "98fbe70f9473ec4259a52470e8013f3da018991c307d28f6c38ae2321ed09cee",
+      "controlledSourceDigest": "628ee08dd4911a8bc6a398faafc620f5e7cb6ee1edc8c7eb1701b34a1cc593d4",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3485394",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3485394",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3726832",
+          "score": 0.5
+        }
+      ],
+      "rationale": "High token Jaccard similarity (0.7143) with sent.tatoeba.3485394; near-duplicate template."
+    },
+    {
+      "id": "sent.tatoeba.5670663",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I hope I didn't offend you.",
+      "finalText": "I hope I didn't offend you.",
+      "intakeSourceDigest": "556d926510b2e0dcebd907100e68ce694e02fc1f40103248c52b08c012f3f4d2",
+      "controlledSourceDigest": "3ed9ab80004b72ef2b374db5843cff9edf5a4019f984c9b7784841e2173f30da",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2854436",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2854436",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2282414",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5670665",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "God works in mysterious ways.",
+      "finalText": "God works in mysterious ways.",
+      "intakeSourceDigest": "5033225dc90a0f1f67ff1e8f4809828d328ea8a2fc61e77d954b97c0e5c41598",
+      "controlledSourceDigest": "89c372a9573c9dd979cbf9cc8170f0871a970b31856c4df0b0c56236a90fed32",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.506536",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.506536",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.484983",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5670667",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom wore a long-sleeved shirt.",
+      "finalText": "Tom wore a long-sleeved shirt.",
+      "intakeSourceDigest": "e1519a755978d08fc6311326f725ba9e52a6cd0d5ee03e9c3b1cc4f33cb99be5",
+      "controlledSourceDigest": "0829ddb90184c6fef49e1909f3db9e44d251ee04b8c4c64ab5920e86b9fa3184",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4006555",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2833372",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2833372",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5670676",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We were friends right from the start.",
+      "finalText": "We were friends right from the start.",
+      "intakeSourceDigest": "cd2d4c21c5ba6c765453ad856dd1b2292f68f1bf1bf6df5fae586400c620c55f",
+      "controlledSourceDigest": "b4d300623436caef424d9ef1d60c8d667e4d73b08204b37b306e98a131a18bd5",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.28814",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.28814",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2259783",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5670748",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Who has a better idea?",
+      "finalText": "Who has a better idea?",
+      "intakeSourceDigest": "f4268ee60c7a29be3602cdc23e1f75a1acdc288ef16f57be80b05dae080f1498",
+      "controlledSourceDigest": "f349e3687e7f34950dda65000cf6a482bc561a83984ed1a78cef429f268a2d13",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5109381",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3729100",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.324189",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Intermediate sentence structure with multi-clause syntax, modal/connective usage, or contextual vocabulary."
+    },
+    {
+      "id": "sent.tatoeba.5671855",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom tied the balloon to Mary's wrist.",
+      "finalText": "Tom tied the balloon to Mary's wrist.",
+      "intakeSourceDigest": "e3c772a10d3456c81e28893137c7181e7b549629866818238007e29b5e957ace",
+      "controlledSourceDigest": "9eab8f4a898d49ac6a16ff8cb3ffa36261c6ba5978bc09005fcb9c7b66f619be",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3605539",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3605541",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2260092",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    },
+    {
+      "id": "sent.tatoeba.5672026",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom didn't explain himself properly.",
+      "finalText": "Tom didn't explain himself properly.",
+      "intakeSourceDigest": "a354a84f6814400da9951d29064eb79f2076dd0c72549ad79903d584cb3252b4",
+      "controlledSourceDigest": "666eedfa8ded0cd912181168ec867d4bae334032382e50d784b0af4d37cbfc85",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3928404",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2853655",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.2853779",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Basic sentence structure with everyday vocabulary and high-frequency patterns."
+    },
+    {
+      "id": "sent.tatoeba.5672102",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom went to the university's open day.",
+      "finalText": "Tom went to the university's open day.",
+      "intakeSourceDigest": "b3392c37121d34e137867a7a99fc6cfd2b8be3d82006b1ec54024558ec35bbcd",
+      "controlledSourceDigest": "7a6d984a296b7d79c3f261f447bda5b50cc35f3e33b1245a3b96da8b9c77fda8",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3424258",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3424258",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3723046",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grammatically well-formed standalone sentence suitable for typing practice. Elementary sentence structure with everyday vocabulary and basic tenses."
+    }
+  ]
+}
