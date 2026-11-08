@@ -31,16 +31,36 @@ export async function loadExistingExampleCorpus(root) {
   return corpus;
 }
 
+function getTokens(item) {
+  if (!item.tokenSet) {
+    item.tokenSet = new Set(lexicalTokens(item.text));
+  }
+  return item.tokenSet;
+}
+
+function fastJaccard(targetTokens, otherTokens) {
+  if (targetTokens.size === 0 && otherTokens.size === 0) return 1;
+  if (targetTokens.size === 0 || otherTokens.size === 0) return 0;
+  let intersection = 0;
+  const smaller = targetTokens.size < otherTokens.size ? targetTokens : otherTokens;
+  const larger = targetTokens.size < otherTokens.size ? otherTokens : targetTokens;
+  for (const t of smaller) {
+    if (larger.has(t)) intersection++;
+  }
+  return intersection / (targetTokens.size + otherTokens.size - intersection);
+}
+
 export function computeNearestAndJaccard(targetId, targetText, corpus, intraSlice = []) {
+  const targetTokens = new Set(lexicalTokens(targetText));
   const scores = [];
   for (const item of corpus) {
     if (item.id === targetId) continue;
-    const score = tokenJaccard(targetText, item.text);
+    const score = fastJaccard(targetTokens, getTokens(item));
     scores.push({ id: item.id, score });
   }
   for (const item of intraSlice) {
     if (item.id === targetId) continue;
-    const score = tokenJaccard(targetText, item.text);
+    const score = fastJaccard(targetTokens, getTokens(item));
     scores.push({ id: item.id, score });
   }
   scores.sort((a, b) => b.score - a.score || a.id.localeCompare(b.id, "en"));

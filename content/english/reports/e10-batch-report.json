@@ -18339,18 +18339,61 @@
         "dedup-review",
         "license-review"
       ]
+    },
+    {
+      "id": "e11.tatoeba-english-reviewed-slice-51",
+      "phase": "E11",
+      "state": "draft",
+      "category": "sentences",
+      "records": 200,
+      "recordSets": [
+        {
+          "id": "reviewed-tatoeba-english-examples",
+          "path": "content/english/sentences/e11-tatoeba-english-reviewed-slice-51.json",
+          "generated": false,
+          "expectedCount": 200,
+          "actualCount": 200,
+          "byState": {
+            "draft": 200
+          },
+          "byCefr": {
+            "B1": 81,
+            "A2": 88,
+            "A1": 23,
+            "B2": 2
+          },
+          "digest": 430080
+        }
+      ],
+      "byState": {
+        "draft": 200
+      },
+      "byCefr": {
+        "B1": 81,
+        "A2": 88,
+        "A1": 23,
+        "B2": 2
+      },
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedup-review",
+        "license-review"
+      ]
     }
   ],
   "totals": {
-    "records": 24647,
+    "records": 24847,
     "byState": {
-      "draft": 24647
+      "draft": 24847
     },
     "byCefr": {
-      "A1": 1564,
-      "A2": 2935,
-      "B1": 5078,
-      "B2": 5126,
+      "A1": 1587,
+      "A2": 3023,
+      "B1": 5159,
+      "B2": 5128,
       "C1": 6960,
       "C2": 239
     }
