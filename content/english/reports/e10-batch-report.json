@@ -17499,18 +17499,141 @@
         "dedup-review",
         "license-review"
       ]
+    },
+    {
+      "id": "e11.tatoeba-english-reviewed-slice-31",
+      "phase": "E11",
+      "state": "draft",
+      "category": "sentences",
+      "records": 200,
+      "recordSets": [
+        {
+          "id": "reviewed-tatoeba-english-examples",
+          "path": "content/english/sentences/e11-tatoeba-english-reviewed-slice-31.json",
+          "generated": false,
+          "expectedCount": 200,
+          "actualCount": 200,
+          "byState": {
+            "draft": 200
+          },
+          "byCefr": {
+            "B2": 52,
+            "B1": 80,
+            "A2": 14
+          },
+          "digest": 428974
+        }
+      ],
+      "byState": {
+        "draft": 200
+      },
+      "byCefr": {
+        "B2": 52,
+        "B1": 80,
+        "A2": 14
+      },
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedup-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e11.tatoeba-english-reviewed-slice-32",
+      "phase": "E11",
+      "state": "draft",
+      "category": "sentences",
+      "records": 200,
+      "recordSets": [
+        {
+          "id": "reviewed-tatoeba-english-examples",
+          "path": "content/english/sentences/e11-tatoeba-english-reviewed-slice-32.json",
+          "generated": false,
+          "expectedCount": 200,
+          "actualCount": 200,
+          "byState": {
+            "draft": 200
+          },
+          "byCefr": {
+            "B1": 89,
+            "A2": 35,
+            "B2": 34
+          },
+          "digest": 428303
+        }
+      ],
+      "byState": {
+        "draft": 200
+      },
+      "byCefr": {
+        "B1": 89,
+        "A2": 35,
+        "B2": 34
+      },
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedup-review",
+        "license-review"
+      ]
+    },
+    {
+      "id": "e11.tatoeba-english-reviewed-slice-33",
+      "phase": "E11",
+      "state": "draft",
+      "category": "sentences",
+      "records": 200,
+      "recordSets": [
+        {
+          "id": "reviewed-tatoeba-english-examples",
+          "path": "content/english/sentences/e11-tatoeba-english-reviewed-slice-33.json",
+          "generated": false,
+          "expectedCount": 200,
+          "actualCount": 200,
+          "byState": {
+            "draft": 200
+          },
+          "byCefr": {
+            "B1": 93,
+            "B2": 47,
+            "A2": 16
+          },
+          "digest": 429066
+        }
+      ],
+      "byState": {
+        "draft": 200
+      },
+      "byCefr": {
+        "B1": 93,
+        "B2": 47,
+        "A2": 16
+      },
+      "requiredBeforePublish": [
+        "source-integrity-review",
+        "grammar-review",
+        "naturalness-review",
+        "cefr-review",
+        "dedup-review",
+        "license-review"
+      ]
     }
   ],
   "totals": {
-    "records": 20647,
+    "records": 21247,
     "byState": {
-      "draft": 20647
+      "draft": 21247
     },
     "byCefr": {
       "A1": 1469,
-      "A2": 2250,
-      "B1": 3424,
-      "B2": 4223,
+      "A2": 2315,
+      "B1": 3686,
+      "B2": 4356,
       "C1": 6960,
       "C2": 239
     }
