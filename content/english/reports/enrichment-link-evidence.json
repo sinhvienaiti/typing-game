@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 7105,
+  "examplesScanned": 8122,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 29,
-    "withoutCandidates": 4971,
-    "coverage": 0.0058,
+    "withCandidates": 34,
+    "withoutCandidates": 4966,
+    "coverage": 0.0068,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -178,6 +178,12 @@
           "sent.tatoeba.33389",
           "sent.tatoeba.50432",
           "sent.tatoeba.54457"
+        ]
+      },
+      {
+        "id": "col.00000012",
+        "exampleIds": [
+          "sent.tatoeba.240593"
         ]
       },
       {
@@ -216,12 +222,6 @@
         "exampleIds": [
           "sent.tatoeba.8613196"
         ]
-      },
-      {
-        "id": "col.00000047",
-        "exampleIds": [
-          "sent.tatoeba.65899"
-        ]
       }
     ],
     "sampleMissing": [
@@ -233,7 +233,6 @@
       "col.00000008",
       "col.00000009",
       "col.00000011",
-      "col.00000012",
       "col.00000013",
       "col.00000015",
       "col.00000017",
@@ -249,14 +248,15 @@
       "col.00000029",
       "col.00000030",
       "col.00000031",
-      "col.00000032"
+      "col.00000032",
+      "col.00000033"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 147,
-    "withoutCandidates": 4038,
-    "coverage": 0.0351,
+    "withCandidates": 162,
+    "withoutCandidates": 4023,
+    "coverage": 0.0387,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -310,7 +310,8 @@
         "id": "pv.00000008",
         "exampleIds": [
           "sent.tatoeba.16064",
-          "sent.tatoeba.25330"
+          "sent.tatoeba.25330",
+          "sent.tatoeba.240433"
         ]
       },
       {
@@ -325,7 +326,8 @@
         "exampleIds": [
           "sent.tatoeba.18821",
           "sent.tatoeba.40869",
-          "sent.tatoeba.64793"
+          "sent.tatoeba.64793",
+          "sent.tatoeba.243922"
         ]
       },
       {
@@ -333,7 +335,8 @@
         "exampleIds": [
           "sent.tt.l005-p002.013",
           "sent.tatoeba.59218",
-          "sent.tatoeba.64468"
+          "sent.tatoeba.64468",
+          "sent.tatoeba.241033"
         ]
       }
     ],
@@ -357,19 +360,19 @@
       "pv.00000048",
       "pv.00000049",
       "chunk.00000001",
-      "chunk.00000002",
       "chunk.00000003",
       "chunk.00000006",
       "chunk.00000011",
       "chunk.00000013",
-      "chunk.00000014"
+      "chunk.00000014",
+      "chunk.00000015"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 396,
-    "withoutCandidates": 114,
-    "coverage": 0.7765,
+    "withCandidates": 406,
+    "withoutCandidates": 104,
+    "coverage": 0.7961,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -425,7 +428,8 @@
         "id": "pat.00000006",
         "exampleIds": [
           "sent.tatoeba.18269",
-          "sent.tatoeba.56285"
+          "sent.tatoeba.56285",
+          "sent.tatoeba.238523"
         ]
       },
       {
@@ -450,7 +454,8 @@
         "id": "pat.00000010",
         "exampleIds": [
           "sent.grc1.01.02.1",
-          "sent.tatoeba.40732"
+          "sent.tatoeba.40732",
+          "sent.tatoeba.240606"
         ]
       },
       {
@@ -469,7 +474,6 @@
       "pat.00000045",
       "pat.00000047",
       "pat.00000076",
-      "pat.00000078",
       "pat.00000081",
       "pat.00000082",
       "pat.00000084",
@@ -478,18 +482,19 @@
       "pat.00000105",
       "pat.00000117",
       "pat.00000132",
-      "pat.00000138",
       "pat.00000143",
       "pat.00000145",
       "pat.00000148",
-      "pat.00000150",
       "pat.00000176",
       "pat.00000186",
       "pat.00000190",
       "pat.00000198",
       "pat.00000199",
       "pat.00000200",
-      "pat.00000205"
+      "pat.00000205",
+      "pat.00000227",
+      "pat.00000241",
+      "pat.00000251"
     ]
   }
 }
