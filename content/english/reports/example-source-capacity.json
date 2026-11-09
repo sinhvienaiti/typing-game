@@ -5,8 +5,8 @@
   "target": {
     "id": "example-sentences",
     "minimum": 100000,
-    "published": 78739,
-    "remainingPublishedDeficit": 21261
+    "published": 82739,
+    "remainingPublishedDeficit": 17261
   },
   "currentBoundedQueue": {
     "candidates": 1000,
@@ -18,8 +18,8 @@
     "passages": 300,
     "eligibleUniqueRawSentences": 5588,
     "unreviewedRawSentences": 4588,
-    "optimisticPublishedUpperBound": 83327,
-    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 16673,
+    "optimisticPublishedUpperBound": 87327,
+    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 12673,
     "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
   },
   "additionalPinnedLanes": [
@@ -52,9 +52,9 @@
         }
       ],
       "sourceEvidenceCandidates": 122212,
-      "availableAfterControlledExclusions": 38350,
-      "editorialDecisions": 83824,
-      "publishedExamples": 76526,
+      "availableAfterControlledExclusions": 34350,
+      "editorialDecisions": 87824,
+      "publishedExamples": 80526,
       "rejected": 7298,
       "approval": "candidate-evidence-only-unless-explicitly-reviewed"
     }
@@ -153,8 +153,8 @@
     }
   ],
   "currentEvidence": {
-    "sentenceManifestSha256": "0cf98f1f7507f190c921c2b088198a1bbab942ff92146bc74a00f7ab060841b1",
-    "reviewLedgerReportSha256": "c2c2c45536fd6db55950a8715bafd6efcb87e9b18c261383cefa0422524bf071"
+    "sentenceManifestSha256": "d999c68f17318af51096dce44afffe0d9fe2e23fb472f090c7f34fa7fd6d6a68",
+    "reviewLedgerReportSha256": "cd96d6fe3f2d20eb835a0175b62671401dcc5944b845ae80bd634af85baa9a81"
   },
   "transition": {
     "step2Pass": false,
