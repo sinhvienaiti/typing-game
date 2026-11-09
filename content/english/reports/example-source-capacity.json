@@ -5,8 +5,8 @@
   "target": {
     "id": "example-sentences",
     "minimum": 100000,
-    "published": 82739,
-    "remainingPublishedDeficit": 17261
+    "published": 86737,
+    "remainingPublishedDeficit": 13263
   },
   "currentBoundedQueue": {
     "candidates": 1000,
@@ -18,8 +18,8 @@
     "passages": 300,
     "eligibleUniqueRawSentences": 5588,
     "unreviewedRawSentences": 4588,
-    "optimisticPublishedUpperBound": 87327,
-    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 12673,
+    "optimisticPublishedUpperBound": 91325,
+    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 8675,
     "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
   },
   "additionalPinnedLanes": [
@@ -52,15 +52,15 @@
         }
       ],
       "sourceEvidenceCandidates": 122212,
-      "availableAfterControlledExclusions": 34350,
-      "editorialDecisions": 87824,
-      "publishedExamples": 80526,
-      "rejected": 7298,
+      "availableAfterControlledExclusions": 30350,
+      "editorialDecisions": 91824,
+      "publishedExamples": 84524,
+      "rejected": 7300,
       "approval": "candidate-evidence-only-unless-explicitly-reviewed"
     }
   ],
   "combinedCapacity": {
-    "optimisticPublishedUpperBound": 121677,
+    "optimisticPublishedUpperBound": 121675,
     "minimumAdditionalSourceGap": 0,
     "caveat": "Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval."
   },
@@ -153,8 +153,8 @@
     }
   ],
   "currentEvidence": {
-    "sentenceManifestSha256": "d999c68f17318af51096dce44afffe0d9fe2e23fb472f090c7f34fa7fd6d6a68",
-    "reviewLedgerReportSha256": "cd96d6fe3f2d20eb835a0175b62671401dcc5944b845ae80bd634af85baa9a81"
+    "sentenceManifestSha256": "87c9fdcf86c3425b24967eea3d1f92060112afe21069c52b7ec568de5e1e86b3",
+    "reviewLedgerReportSha256": "f5b9e9fc0680a4ce522c01f7d49ac71c646f0a5912296d5e5039dad2e7b4abeb"
   },
   "transition": {
     "step2Pass": false,
