@@ -1004,4 +1004,31 @@ The preceding verified checkpoint `44953d210057199108ecae7de66293273d009239` pas
 
 Continue English editorial batch 311 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 61,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
 
+### Editorial continuation within Step 2: English batches 311–320
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 311 | 200 | 185 | 15 | 3 |
+| 312 | 200 | 190 | 10 | 3 |
+| 313 | 200 | 190 | 10 | 3 |
+| 314 | 200 | 184 | 16 | 1 |
+| 315 | 200 | 189 | 11 | 3 |
+| 316 | 200 | 187 | 13 | 2 |
+| 317 | 200 | 179 | 21 | 1 |
+| 318 | 200 | 186 | 14 | 2 |
+| 319 | 200 | 180 | 20 | 1 |
+| 320 | 200 | 183 | 17 | 3 |
+| Total | 2,000 | 1,853 | 147 | 22 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Twenty-two accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 311: standardized colloquial adverb real to really, standardized comparative adjective riskier, supplied direct address comma in OK, Tom,; Batch 312: hyphenated compound modifier knee-deep, standardized colloquial adverb real to really, standardized adverb badly; Batch 313: supplied standard quotation marks and comma for direct speech, standardized closed compound adjective hardworking, standardized open spelling for predicate idiom off base; Batch 314: hyphenated compound noun game-changer; Batch 315: standardized colloquial adverb real to really, hyphenated compound noun crowd-pleaser, hyphenated compound noun joke-teller; Batch 316: standardized colloquial adverb real to really, standardized open spelling of predicate idiom off guard; Batch 317: hyphenated compound adverbial big-time; Batch 318: standardized closed compound noun holdup, supplied initial correlative adverb as in as good as usual; Batch 319: kept colloquial negative quantifier syntax as idiomatic; Batch 320: supplied standard preposition for in asked Tom for a favor, standardized closed compound noun curveball, standardized past participle beaten). Near duplicates, cross-corpus duplicates and intra-slice duplicate variations were removed during review. All 147 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 63,824 decisions, 57,374 published, 6,450 rejected and 1,077 disclosed edits. Runtime: 59,587 examples, 61,475 sentence records and 72,370 rich records; ledger: 78,820 applied decisions (72,370 publication and 6,450 deprecated). This continuation adds 1,853 examples across batches 311–320, leaving 40,413 more reviewed publications to reach 100,000. All 57,374 English-only approved objects match runtime exactly and pass both adapters (114,748 checks). Rejected IDs remain absent. Shard 115 was completed with 500 records, new shards `examples/116.json`, `117.json`, `118.json` (500 records each), and shard `examples/119.json` (87 records) are registered in the manifest. There are 58,350 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 122,525 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `a14d96384a51eec7a11ebc868ebdbceef9798ef0` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 321 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 63,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+
 
