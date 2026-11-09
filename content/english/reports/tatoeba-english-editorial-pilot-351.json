@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 185,
+  "rejected": 15,
+  "edited": 0,
+  "records": [
+    {
+      "id": "sent.tatoeba.7110462",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom didn't know anything about the murders.",
+      "finalText": "Tom didn't know anything about the murders.",
+      "intakeSourceDigest": "efa669b1b416eccc97294b5856ea7df01e029c260cbea645918dadb7d77e1923",
+      "controlledSourceDigest": "278a720c52fd53d8ac492fb73e9be73620b3355a1d61c2ee235cdf7dab378587",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731708",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5737867",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1632126",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Safety policy: homicide / murder reference."
+    },
+    {
+      "id": "sent.tatoeba.7110463",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We think Tom killed his wife for the insurance money.",
+      "finalText": "We think Tom killed his wife for the insurance money.",
+      "intakeSourceDigest": "c3a0716f104e8371978c70428f0a233055dcc4ff6ab28162436d87a882e8944d",
+      "controlledSourceDigest": "7627f57f2c687a92fa191d42e5fb5ec8e1e57c0bb434152b6dd53a411887ed19",
+      "maximumTokenJaccard": 0.9091,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110464",
+          "score": 0.9090909090909091
+        },
+        {
+          "id": "sent.tatoeba.3724351",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.5740534",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Safety policy: uxoricide / murder for insurance."
+    },
+    {
+      "id": "sent.tatoeba.7110464",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We think that Tom killed his wife for the insurance money.",
+      "finalText": "We think that Tom killed his wife for the insurance money.",
+      "intakeSourceDigest": "9927d59837971a07b43dc4d9e3d68513fd43daf1372cfc3ebd291cf687c8dafb",
+      "controlledSourceDigest": "27190fb6b261fb7857960f8a0715f872316b5f4aafe215ca13e0b0d1ebc0e608",
+      "maximumTokenJaccard": 0.9091,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110463",
+          "score": 0.9090909090909091
+        },
+        {
+          "id": "sent.tatoeba.3724351",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.5740534",
+          "score": 0.3076923076923077
+        }
+      ],
+      "rationale": "Safety policy: uxoricide / murder for insurance."
+    },
+    {
+      "id": "sent.tatoeba.7110465",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary better than anyone else.",
+      "finalText": "Tom knew Mary better than anyone else.",
+      "intakeSourceDigest": "f10d46daf1ab3a8a89ccaa8edb54baab611ebae7137128536d8401aa18f28757",
+      "controlledSourceDigest": "b0fea22e4ab8e9eba2eaa5758f3616e7303c49be3f99af028d5e5c92501d7c10",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110466",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.6710353",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.6434934",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary better than anyone else.\""
+    },
+    {
+      "id": "sent.tatoeba.7110466",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary better than anybody else.",
+      "finalText": "Tom knew Mary better than anybody else.",
+      "intakeSourceDigest": "ba3dbe76f8f0eab2f07b6b28b5158825c7700390294b4ebbc5efc0ab3a9f5076",
+      "controlledSourceDigest": "1fb593436bb0dcd18ff654dbeeef470c3cc3163981088917dbfef38a63fda600",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110465",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3723408",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.6434934",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary better than anybody else.\""
+    },
+    {
+      "id": "sent.tatoeba.7110467",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary wouldn't lie.",
+      "finalText": "Tom knew Mary wouldn't lie.",
+      "intakeSourceDigest": "948ef5c8f847f2924cb23400bbfcbad29b37af353b346fd6487e9c0703d0b1e3",
+      "controlledSourceDigest": "61c6c11482d968633e3a676f3bd35e51297fe92ee3eba91637cf64f82fe913ac",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110468",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110469",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110470",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary wouldn't lie.\""
+    },
+    {
+      "id": "sent.tatoeba.7110468",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that Mary wouldn't lie.",
+      "finalText": "Tom knew that Mary wouldn't lie.",
+      "intakeSourceDigest": "9c7d77520466897a09e5cf02f2d56d7e86a000a61abb50cdf04dc277ad26499c",
+      "controlledSourceDigest": "25017af08717ff55650db7d724c622caf5a157c654ca696535bd8a3a1b02ff38",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110467",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110470",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110471",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary wouldn't lie.\""
+    },
+    {
+      "id": "sent.tatoeba.7110469",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary wouldn't lie to him.",
+      "finalText": "Tom knew Mary wouldn't lie to him.",
+      "intakeSourceDigest": "ff6d353a31a19364e6a323c6fbe35906047fd0e1e2995bde7dcc1343d8298b8b",
+      "controlledSourceDigest": "666b60317781796b204714870edf6ee68901b4ed31def1acf09f2dbfc185b1a5",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110470",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110467",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110468",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary wouldn't lie to him.\""
+    },
+    {
+      "id": "sent.tatoeba.7110470",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that Mary wouldn't lie to him.",
+      "finalText": "Tom knew that Mary wouldn't lie to him.",
+      "intakeSourceDigest": "3cef57acbba1115c0dae53df88a6dfd38cba5064f254e63ffb17014a10410113",
+      "controlledSourceDigest": "1a1cdfa3ee7637dd87ae4b0be3b5d309acc34f91330c0b14144c951a94917f45",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110469",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110468",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110467",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary wouldn't lie to him.\""
+    },
+    {
+      "id": "sent.tatoeba.7110471",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary wouldn't lie about something like that.",
+      "finalText": "Tom knew Mary wouldn't lie about something like that.",
+      "intakeSourceDigest": "e34e94a9568abc3fa64bc56f293d26cdc8183fe770fc002172d6f0416430dc3f",
+      "controlledSourceDigest": "6930cb63f1228269523989a7ea817701ceabb755134f25ea70ab77bb10344810",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110472",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110468",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110467",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary wouldn't lie about something like that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110472",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that Mary wouldn't lie about something like that.",
+      "finalText": "Tom knew that Mary wouldn't lie about something like that.",
+      "intakeSourceDigest": "7d0ad946fa41d839dee8ad7f2360c2ad4b4ec61d2a2f7b4336e86a312bd40be6",
+      "controlledSourceDigest": "03540070d888c8811ff4c98fcd3e54133864c1a6c65b869bc0bbdef34abef60d",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110471",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110468",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110467",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary wouldn't lie about something like that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110473",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary was unlikely to cry.",
+      "finalText": "Tom knew Mary was unlikely to cry.",
+      "intakeSourceDigest": "6d2f70f5a67cf6b56e20b5341866e86c91d2c3da932b0c8fcc8a1dca9b6b5d17",
+      "controlledSourceDigest": "b652d14f83d6b693abb57be582034e9a3ed1aceaeaf4ec2d8a063ac7d88e5808",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5744134",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4588199",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5738081",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary was unlikely to cry.\""
+    },
+    {
+      "id": "sent.tatoeba.7110474",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew Mary had a husband.",
+      "finalText": "Tom knew Mary had a husband.",
+      "intakeSourceDigest": "986299a55628857d3954abf244371c0b1334e224c84720c2148bd0fcceeffe3f",
+      "controlledSourceDigest": "9766dc12fe6c90734d7456a4ebd9273776daf9402843c1714cebc19d9163ce3f",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110475",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.4630665",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3220496",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary had a husband.\""
+    },
+    {
+      "id": "sent.tatoeba.7110475",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew that Mary had a husband.",
+      "finalText": "Tom knew that Mary had a husband.",
+      "intakeSourceDigest": "47d29fc6245b752e4f6223565f5718ad6061df4a9bd6692d2e1e868d57b81a61",
+      "controlledSourceDigest": "0d681639816a80898709cb24c749041ba9555d47a6e910ea952b0de7e0525801",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110474",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7043561",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.4588199",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary had a husband.\""
+    },
+    {
+      "id": "sent.tatoeba.7110476",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew Mary didn't have much time.",
+      "finalText": "Tom knew Mary didn't have much time.",
+      "intakeSourceDigest": "fe713688cdaf8a41eae8dd76f79478bdf122cd78914df46cfd8348a2716469e3",
+      "controlledSourceDigest": "9d6a7cabd6912cbdf82a674eb4796e30aa19beb14b3169cd31be919e3e83a7f1",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110477",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.5729091",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5735577",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary didn't have much time.\""
+    },
+    {
+      "id": "sent.tatoeba.7110477",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that Mary didn't have much time.",
+      "finalText": "Tom knew that Mary didn't have much time.",
+      "intakeSourceDigest": "207a620cc0999f9bc590de6bcf8c3e2bd2eb4d548c2fc290e7d6db15460ebae0",
+      "controlledSourceDigest": "1d2f15e58b179be982f99f300581e9e76cf30b8bc93a9cd1a858be0dcbf4f8f5",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110476",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110479",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.6497913",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary didn't have much time.\""
+    },
+    {
+      "id": "sent.tatoeba.7110478",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew Mary couldn't have children.",
+      "finalText": "Tom knew Mary couldn't have children.",
+      "intakeSourceDigest": "6ae33401b31a8af02a4b478aa86315e82b6214e5cc232404fde061dcfa1b3ee4",
+      "controlledSourceDigest": "8a922c4dae7497e148a5c3c6545784e929ba2743e44503110d6012eb4fb5dc99",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110479",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.6691641",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.7110476",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew Mary couldn't have children.\""
+    },
+    {
+      "id": "sent.tatoeba.7110479",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew that Mary couldn't have children.",
+      "finalText": "Tom knew that Mary couldn't have children.",
+      "intakeSourceDigest": "cc85487cba582513ec4fc4ce8b63089a373ee16c83120bb2a50a461755cfa1b9",
+      "controlledSourceDigest": "d75792445fd15db67b44112a221e0920017979a2a9f31a999264f46fccd1cb93",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110478",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110477",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.6260961",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that Mary couldn't have children.\""
+    },
+    {
+      "id": "sent.tatoeba.7110480",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew I wouldn't laugh.",
+      "finalText": "Tom knew I wouldn't laugh.",
+      "intakeSourceDigest": "630eb8e9c204df28923510b6935f1ff6b846281a663e37012572641a7082f2c0",
+      "controlledSourceDigest": "1b4b489c0a8c995f8541ac010bdd211341102fe584d78b7dc93a31bbd2b96543",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110481",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.3724957",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3725311",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew I wouldn't laugh.\""
+    },
+    {
+      "id": "sent.tatoeba.7110481",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that I wouldn't laugh.",
+      "finalText": "Tom knew that I wouldn't laugh.",
+      "intakeSourceDigest": "3e07d5508bc0d173744d7752e66f7a600b90dfa4bf57864251e48daa880b2eca",
+      "controlledSourceDigest": "9ce3cb742604d370e8f0c0916c33bfe27fa7c6e0250720e924e833b2bbc83842",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110480",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110440",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110442",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that I wouldn't laugh.\""
+    },
+    {
+      "id": "sent.tatoeba.7110482",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew he wouldn't be replaced.",
+      "finalText": "Tom knew he wouldn't be replaced.",
+      "intakeSourceDigest": "5adf8133294699fb2d39a9b8d1e2d5cb453f140dfb97976c91055e450cf06922",
+      "controlledSourceDigest": "0a32aa7db39fd02d7b196ae9dda894c7d915205113cc4cd8562fd30e60c422d9",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110485",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110484",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew he wouldn't be replaced.\""
+    },
+    {
+      "id": "sent.tatoeba.7110483",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that he wouldn't be replaced.",
+      "finalText": "Tom knew that he wouldn't be replaced.",
+      "intakeSourceDigest": "647299b51dd306037f024c470961cddfab6bd2dae014fb11a915a5f9b4965e76",
+      "controlledSourceDigest": "35e8110a86c0578d9d8671d67401354298ebd7fafd232e59f92d2371f6d4c641",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110482",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110484",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110486",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that he wouldn't be replaced.\""
+    },
+    {
+      "id": "sent.tatoeba.7110484",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that he wouldn't be fired.",
+      "finalText": "Tom knew that he wouldn't be fired.",
+      "intakeSourceDigest": "32aeb56a62ee87556786b0fd6a087d419ee38aca953bb561fe34d4ba39fbe201",
+      "controlledSourceDigest": "2c040781631d6fa328cede73a051febb7d8eb1030b6603e56dc414c266f1d939",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110486",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110487",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that he wouldn't be fired.\""
+    },
+    {
+      "id": "sent.tatoeba.7110485",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew he wouldn't be expelled.",
+      "finalText": "Tom knew he wouldn't be expelled.",
+      "intakeSourceDigest": "176b9bea53d1cdddff322d2a546e2144baca9b017b60942fcf700976885d69d6",
+      "controlledSourceDigest": "dfaa43059d2e3e30b1bfbe03e00d5cdf3887cdd6784c7339e0faeb51e8685668",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110486",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110482",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew he wouldn't be expelled.\""
+    },
+    {
+      "id": "sent.tatoeba.7110486",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom knew that he wouldn't be expelled.",
+      "finalText": "Tom knew that he wouldn't be expelled.",
+      "intakeSourceDigest": "596664150a9dc73a2e4ef7aab60c131f01f96d7f53f7e0657fdb6de22bf0fd93",
+      "controlledSourceDigest": "1796dcab0ce870277d3847b19381357f342d275f3eacedd6fcc7f9fc70fc2546",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110485",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110484",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that he wouldn't be expelled.\""
+    },
+    {
+      "id": "sent.tatoeba.7110487",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom knew that he wouldn't be arrested.",
+      "finalText": "Tom knew that he wouldn't be arrested.",
+      "intakeSourceDigest": "0af7d0d02c95b4f916db7c60a93b4ba753d57f23f1339f5b70fe5e7e04fe7cca",
+      "controlledSourceDigest": "7f83d597d34b468c241c001a0bd18d9caee6057fe03861dd0aaa4818536bbe12",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110484",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110486",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Safety policy: criminal detention / arrest reference."
+    },
+    {
+      "id": "sent.tatoeba.7110488",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew he had to escape.",
+      "finalText": "Tom knew he had to escape.",
+      "intakeSourceDigest": "ba46d0bcc114cc3f0ae2b26eee75832fb92da67e5f3fcea654954ed4b9ce0f50",
+      "controlledSourceDigest": "5f30a2da943f3478947561b8a25c8ad57eb666c732bc0d4ebbcd5882d2bf2954",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110489",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5745264",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3725931",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew he had to escape.\""
+    },
+    {
+      "id": "sent.tatoeba.7110489",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knew that he had to escape.",
+      "finalText": "Tom knew that he had to escape.",
+      "intakeSourceDigest": "74a7bc39197d799adbf1aa6ceddf6837f81b60ffe459c83029c9dee750cbf404",
+      "controlledSourceDigest": "f27da1a3a6ccdf15a2acbafeaa1c12c091f8c38442a493a40cd3430cebf186aa",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110488",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.4630006",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5745264",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom knew that he had to escape.\""
+    },
+    {
+      "id": "sent.tatoeba.7110490",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom isn't as nosy as he used to be.",
+      "finalText": "Tom isn't as nosy as he used to be.",
+      "intakeSourceDigest": "17305825dc1295d7f7b01c826393049b1bad3ff690c057333361700cd76d5caa",
+      "controlledSourceDigest": "c065a7c56aa636eeb944ab6aa9d02b6825981a57d60fac82565e937f36475ad6",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110491",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7117402",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3927217",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom isn't as nosy as he used to be.\""
+    },
+    {
+      "id": "sent.tatoeba.7110491",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom isn't as nosey as he used to be.",
+      "finalText": "Tom isn't as nosey as he used to be.",
+      "intakeSourceDigest": "f3674c45bbe92ab77982fa10c380f0e12b8bbbfc65a7cbddf63f1da68c7b24ac",
+      "controlledSourceDigest": "c39b8f5cdde1e79d5a8e211a2348df02fd0ecb79c60dfef1b21f2840b5273313",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110490",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7117402",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3927217",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom isn't as nosey as he used to be.\""
+    },
+    {
+      "id": "sent.tatoeba.7110492",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom is scared to death that might happen.",
+      "finalText": "Tom is scared to death that might happen.",
+      "intakeSourceDigest": "4ab340eb7cfc3b2fd3475accbf88cd3b86167debf64a314182ad64ffe0c92c6b",
+      "controlledSourceDigest": "6e4724f433959f4a191808066b3c5e33aabd1a19f2be01940c21820b16ec7b7f",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110493",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.5735592",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3731090",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom is scared to death that might happen.\""
+    },
+    {
+      "id": "sent.tatoeba.7110493",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom is scared to death that that might happen.",
+      "finalText": "Tom is scared to death that that might happen.",
+      "intakeSourceDigest": "0b4a35f294a4eda67f90befea169f580e000aa099cadd7e67f1d44d608e1a987",
+      "controlledSourceDigest": "8781aac9929b29b517ecc14f0bab759c47415a69648b3c1a7b296d5af14c43b8",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110492",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.5735592",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3731090",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom is scared to death that that might happen.\""
+    },
+    {
+      "id": "sent.tatoeba.7110494",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom has never been scolded by his father.",
+      "finalText": "Tom has never been scolded by his father.",
+      "intakeSourceDigest": "f325d511ad0d5a95592fbf84a57b8ee3bda00afb9aa1bca02ef0e68f8b4823f9",
+      "controlledSourceDigest": "8f17c3909d6bb3a781a9578f123d7eb2160e9c30b14604deb2a90ecbf93658af",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110495",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.2289557",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5744309",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom has never been scolded by his father.\""
+    },
+    {
+      "id": "sent.tatoeba.7110495",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom hasn't ever been scolded by his father.",
+      "finalText": "Tom hasn't ever been scolded by his father.",
+      "intakeSourceDigest": "82128c3828c58225801cb1b3d93042261f7b6a1f5e0558a82bb1bc0ce63a9eeb",
+      "controlledSourceDigest": "f050f255c004528b9dc1e81c2233a46cdbe3e614346829ed282e7747457c162a",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110494",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.1741221",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.5732590",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom hasn't ever been scolded by his father.\""
+    },
+    {
+      "id": "sent.tatoeba.7110496",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why does everyone think that Tom and I are stupid?",
+      "finalText": "Why does everyone think that Tom and I are stupid?",
+      "intakeSourceDigest": "99d98fc14a0fda02d1aa7c18e1e30bbba09c64845eb272d97e2bdbc140e7e4ad",
+      "controlledSourceDigest": "1678a585b70c1995c63a9b3fbdc127a1262db0227622cc35c8931fb8b07b1982",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110498",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110499",
+          "score": 0.8181818181818182
+        },
+        {
+          "id": "sent.tatoeba.7110497",
+          "score": 0.7272727272727273
+        }
+      ],
+      "rationale": "Safety policy: derogatory insult / intelligence disparagement."
+    },
+    {
+      "id": "sent.tatoeba.7110497",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why does everybody think Tom and I are stupid?",
+      "finalText": "Why does everybody think Tom and I are stupid?",
+      "intakeSourceDigest": "02a0bbe15fde96736fd6d74a5a181d1fe53274b16d50dd09d55c5a07fa7487cc",
+      "controlledSourceDigest": "f078da96d444322baeae403325f19d0f6f5732dc94b9ee4bb60e8e0a75518b4c",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110499",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110498",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110496",
+          "score": 0.7272727272727273
+        }
+      ],
+      "rationale": "Safety policy: derogatory insult / intelligence disparagement."
+    },
+    {
+      "id": "sent.tatoeba.7110498",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why does everyone think Tom and I are stupid?",
+      "finalText": "Why does everyone think Tom and I are stupid?",
+      "intakeSourceDigest": "31e41f7996fad25efcb907cc8d57f1e1e09b005921f9b852d2fb0b8e21f7cea1",
+      "controlledSourceDigest": "2ce37efd2f84607476fb3136be45aa6a7cbf387a92500bcf5cbc6793194427a7",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110496",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110497",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110499",
+          "score": 0.7272727272727273
+        }
+      ],
+      "rationale": "Safety policy: derogatory insult / intelligence disparagement."
+    },
+    {
+      "id": "sent.tatoeba.7110499",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why does everybody think that Tom and I are stupid?",
+      "finalText": "Why does everybody think that Tom and I are stupid?",
+      "intakeSourceDigest": "2c55928e3ea93fa23f2b0a54c8eb2a54eb02c926418dd7cb4a48f1d98c9096fe",
+      "controlledSourceDigest": "599d524d13bafd6fd307a6b1326cfc301f738310eb72a259898fe169d1983bb7",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110497",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110496",
+          "score": 0.8181818181818182
+        },
+        {
+          "id": "sent.tatoeba.7110498",
+          "score": 0.7272727272727273
+        }
+      ],
+      "rationale": "Safety policy: derogatory insult / intelligence disparagement."
+    },
+    {
+      "id": "sent.tatoeba.7110500",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom wasn't able to impress anyone.",
+      "finalText": "Tom wasn't able to impress anyone.",
+      "intakeSourceDigest": "289e79f58957103e0018110d1b16a7f818b257ca625d2228f747a1ee63a52680",
+      "controlledSourceDigest": "a98529b42d46aee4eb11352d61283e877bcc599bd030fb380a84ffe60e6c2e24",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110501",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3665346",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5733211",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom wasn't able to impress anyone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110501",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom wasn't able to impress anybody.",
+      "finalText": "Tom wasn't able to impress anybody.",
+      "intakeSourceDigest": "0dfe1ea78697fca92d5d8d601a48d0b8d1ae8c1f85fd78ab8006232ee957d6c8",
+      "controlledSourceDigest": "65fa498610d4efb637ed299e177b3db2206c847a91b64c7e04e15529244ee4ef",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110500",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3665346",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5733211",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom wasn't able to impress anybody.\""
+    },
+    {
+      "id": "sent.tatoeba.7110502",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom thought it wasn't a big deal.",
+      "finalText": "Tom thought it wasn't a big deal.",
+      "intakeSourceDigest": "6a5a7f15101f0025484e005b7b6c652af7df0d924716073524a1815b132c817e",
+      "controlledSourceDigest": "8fe646d0fe43ca6b61bce4ad560418d970014653aa36cc17fff4c76a8cdd4063",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5729477",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5746060",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110503",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom thought it wasn't a big deal.\""
+    },
+    {
+      "id": "sent.tatoeba.7110503",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom didn't think it was a big deal.",
+      "finalText": "Tom didn't think it was a big deal.",
+      "intakeSourceDigest": "a1e460c05e6c39b77018f9f4be7ef6a177440e42859bfeec8125bb4da3b1bead",
+      "controlledSourceDigest": "0151b5def0dc7745089a379bedd1836c6f438e1220c1b1497cf80123c279fc8c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5746060",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2239660",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110502",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom didn't think it was a big deal.\""
+    },
+    {
+      "id": "sent.tatoeba.7110504",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom thought he heard a shot.",
+      "finalText": "Tom thought he heard a shot.",
+      "intakeSourceDigest": "0f47945fdecacc1acd6874ad8b31b9767627f1e49265e35e1298cb3505f4aa27",
+      "controlledSourceDigest": "64efb4d08074e05b76775f7665e15e6bcb539055f9680c0ae29670be89eac571",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110505",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5746601",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.298988",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Safety policy: firearm / gunfire reference."
+    },
+    {
+      "id": "sent.tatoeba.7110505",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Tom thought that he heard a shot.",
+      "finalText": "Tom thought that he heard a shot.",
+      "intakeSourceDigest": "f6d9546cfe6dbdd3546b19a4ff3fd3cb95b81a296eaaf3aad51b61f6978e84b4",
+      "controlledSourceDigest": "a114562b85dd1a8878c55ca9aa36591d022a574f96e3cac7c0d73c46b1be4d62",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110504",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5746601",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.7110575",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Safety policy: firearm / gunfire reference."
+    },
+    {
+      "id": "sent.tatoeba.7110506",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom isn't as efficient as Mary.",
+      "finalText": "Tom isn't as efficient as Mary.",
+      "intakeSourceDigest": "13a2b5c0839007b5caf6492598dd0c648419a9000fb50d4d764475a0720434cd",
+      "controlledSourceDigest": "2f15f2f73586aae60274912b4f7724ec594f21907bacffd63d51fbd51d59ad88",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110507",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.5748434",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2961542",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom isn't as efficient as Mary.\""
+    },
+    {
+      "id": "sent.tatoeba.7110507",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom isn't as efficient as Mary is.",
+      "finalText": "Tom isn't as efficient as Mary is.",
+      "intakeSourceDigest": "7d9ef0ae99c5c1d1aa988875e3da2970c2900346443a2f7fff01bcbe0295f2c5",
+      "controlledSourceDigest": "0ab249f1b0f864af1dc5ff0c79bc1e785124779ca6a75de25b35bfa5ebff04b4",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110506",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.5744217",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.6658312",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom isn't as efficient as Mary is.\""
+    },
+    {
+      "id": "sent.tatoeba.7110508",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I've never asked anyone for a favor.",
+      "finalText": "I've never asked anyone for a favor.",
+      "intakeSourceDigest": "f13b718e8eff99c8c244120f590c8b11dc8177864868d69a1cf6af853aebddeb",
+      "controlledSourceDigest": "34ae64fb7d8788d049f7cd6f006d181542457e8f0747b3c248a0fac9e7d85edd",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110509",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.5757445",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3109106",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I've never asked anyone for a favor.\""
+    },
+    {
+      "id": "sent.tatoeba.7110509",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I've never asked anybody for a favor.",
+      "finalText": "I've never asked anybody for a favor.",
+      "intakeSourceDigest": "b63ebfaf4750eee04f8d65dc59b8035449565dc6b88f7036383c64c04b36d128",
+      "controlledSourceDigest": "d6e7c2e58b32541b7203bb8ba839b71f8b33fe49804e21b107bda9206b59afc8",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110508",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.5757445",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3109106",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I've never asked anybody for a favor.\""
+    },
+    {
+      "id": "sent.tatoeba.7110510",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm trying hard to quit smoking.",
+      "finalText": "I'm trying hard to quit smoking.",
+      "intakeSourceDigest": "17883c35dc2b961af8e07e4843a73343a7ff57408bede64e2e9d8d194f5b43fb",
+      "controlledSourceDigest": "3e6c52a31e0ae2ecd6029f0452dce29b264266352b062d94cece6765a9ebbf2c",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110511",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.896156",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2150395",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm trying hard to quit smoking.\""
+    },
+    {
+      "id": "sent.tatoeba.7110511",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'm trying hard to give up smoking.",
+      "finalText": "I'm trying hard to give up smoking.",
+      "intakeSourceDigest": "4aa52fce7193eb11f8e05b964b97e35a4d73918fb4d8625fedeee7eef2775e95",
+      "controlledSourceDigest": "d9df208e80cf3cdf5f934449135afb151b40c754a4480eb8110e6a4390f7da4a",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110510",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3726228",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.6994045",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm trying hard to give up smoking.\""
+    },
+    {
+      "id": "sent.tatoeba.7110512",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You're not under any obligation to do that.",
+      "finalText": "You're not under any obligation to do that.",
+      "intakeSourceDigest": "5cc60f3916fc9075d4e9ded6d7d9670b7e0008a1936fe627a6d5762f85d733d0",
+      "controlledSourceDigest": "0d73149283bec0fb9f239f3be3d27a187d47e5b5e5b20c287fb72863c138e1ca",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110513",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.5737068",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3727960",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"You're not under any obligation to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110513",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You aren't under any obligation to do that.",
+      "finalText": "You aren't under any obligation to do that.",
+      "intakeSourceDigest": "0fe1ed6ae047eb925c6fd535de317ae331629ccd2dbdd1067050db884155fc05",
+      "controlledSourceDigest": "67cd44a65ee5f54f7cf7a89b6bb01280ba34072b5de100264fc1c26a426a1828",
+      "maximumTokenJaccard": 0.6,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110512",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.3728022",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3727965",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"You aren't under any obligation to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110514",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not trying to scare anybody.",
+      "finalText": "I'm not trying to scare anybody.",
+      "intakeSourceDigest": "fb29ef615f6bab5931b1266d6af06f9ab379512c42e64b6b21675733e6089200",
+      "controlledSourceDigest": "e9e1f9f285389d5d49d2537ea26334a575ca352733fabbb1565ad88d2b9b383e",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110515",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3001143",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3723059",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not trying to scare anybody.\""
+    },
+    {
+      "id": "sent.tatoeba.7110515",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not trying to scare anyone.",
+      "finalText": "I'm not trying to scare anyone.",
+      "intakeSourceDigest": "0d60228a668cc26972fe1e16299b066253fe8e142bc7e33a87c639c03f090b40",
+      "controlledSourceDigest": "df2a1ca7c09c602ed3ba1644fc1c38c6d8315d5e8e57002e4d590e6aee70ba6f",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3723059",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110514",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3001143",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not trying to scare anyone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110516",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not sure Tom didn't do that.",
+      "finalText": "I'm not sure Tom didn't do that.",
+      "intakeSourceDigest": "033ffb1e49a247fe49b2339295b79c453834e35c38a97429bae73704ad2dbd46",
+      "controlledSourceDigest": "2d56ce2ca8a248b45e3aab7e8d904a9f910f595066ffb1d4666cf36d75d758b7",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110517",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3243676",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3729672",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not sure Tom didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110517",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not sure that Tom didn't do that.",
+      "finalText": "I'm not sure that Tom didn't do that.",
+      "intakeSourceDigest": "ae399f913e48ad95bbe51d5e7d393a59f985395b2fb1f00f3195d0c733b6d151",
+      "controlledSourceDigest": "3f9136c422e536dc5c85c575d06331ffba6f8bf22e0c4559acf1f34695a6028a",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110516",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3243676",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3729672",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not sure that Tom didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110518",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm not looking to blame anybody.",
+      "finalText": "I'm not looking to blame anybody.",
+      "intakeSourceDigest": "33a175521e72fb270b985504ae743e4b8ca1b0ec451b4347b9fd2c02b845b651",
+      "controlledSourceDigest": "d1e30874a4efb1296d0e274999d090932135fda8922cc7da7e7e0731c14fab01",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110519",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110514",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1331589",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not looking to blame anybody.\""
+    },
+    {
+      "id": "sent.tatoeba.7110519",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm not looking to blame anyone.",
+      "finalText": "I'm not looking to blame anyone.",
+      "intakeSourceDigest": "8e60e73b07d3b05f8ef4787bfba1993afb063f4c57749f4bab98def7be8ca84a",
+      "controlledSourceDigest": "3e94f32a15b6c71bb14e11239de53a81230c54826c63c8df2e90343db9f60764",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110518",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3723059",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110515",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not looking to blame anyone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110520",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not going to pretend I know how to do that.",
+      "finalText": "I'm not going to pretend I know how to do that.",
+      "intakeSourceDigest": "0d44a642fc51b4576545c02eea751b905428063bf665c1b7e5f0d2e93559c771",
+      "controlledSourceDigest": "bf6f86a9c78a2382a45418ad6bc6c1da508f2b1d19070213f9a79752cd7cfec3",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110521",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3731226",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3725982",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not going to pretend I know how to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110521",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm not going to pretend that I know how to do that.",
+      "finalText": "I'm not going to pretend that I know how to do that.",
+      "intakeSourceDigest": "b2b6f8a6740ba871bd13dc93078b0a1ee2047c70c3df850b542edb4227b6099a",
+      "controlledSourceDigest": "faad0041d831431ac048e717b83e265c6774f3117c1bceec39d1499e64a1a3c2",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110520",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3731226",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3725982",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm not going to pretend that I know how to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110522",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm glad Tom is going to be OK.",
+      "finalText": "I'm glad Tom is going to be OK.",
+      "intakeSourceDigest": "058b6558693d7b30e081efc8b35de8f8d3a3956863b0e860c2ee98a557bcbd0c",
+      "controlledSourceDigest": "80e57cb1cecb7ace64395c20fe642967ee8de37aef59043552cefb0e39fb14b1",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110523",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.5746818",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3730286",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm glad Tom is going to be OK.\""
+    },
+    {
+      "id": "sent.tatoeba.7110523",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm glad that Tom is going to be OK.",
+      "finalText": "I'm glad that Tom is going to be OK.",
+      "intakeSourceDigest": "358d8f8746a94e92d21e81b35a583db132fe45dd8cd6d2047dd73e54878f5bd9",
+      "controlledSourceDigest": "3cf55a35053511cfc33df7159599e085f9e20bfe7a787496986f0b327cff2e50",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110522",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.5746818",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3730286",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm glad that Tom is going to be OK.\""
+    },
+    {
+      "id": "sent.tatoeba.7110524",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm glad Tom and I are making progress.",
+      "finalText": "I'm glad Tom and I are making progress.",
+      "intakeSourceDigest": "75b64cbedc883cd22adc821d06185384870ef8ff79fd7ac4460d150a1ed68426",
+      "controlledSourceDigest": "6857a39dfca349e31018b437fddb2de8cc3e4b40ec8727bcd97b22c5e773aacb",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110525",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.5216436",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5746021",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm glad Tom and I are making progress.\""
+    },
+    {
+      "id": "sent.tatoeba.7110525",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I'm glad that Tom and I are making progress.",
+      "finalText": "I'm glad that Tom and I are making progress.",
+      "intakeSourceDigest": "140d74e6196b7483041113c2b9d88fa0900f3e50186767d4a904f607baf10b15",
+      "controlledSourceDigest": "d6f605405fc91851fdf2cf4a6280ae5243b9b2caae28ba594ecab63a922123c6",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110524",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.5726711",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.5216436",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'm glad that Tom and I are making progress.\""
+    },
+    {
+      "id": "sent.tatoeba.7110526",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll go tell them that we're ready.",
+      "finalText": "I'll go tell them that we're ready.",
+      "intakeSourceDigest": "eb8929351a12946e246c44ec5b82eca4165e6a5443ba94052ace20681fc60696",
+      "controlledSourceDigest": "68036203f1670c4dcc298d155602ba6924179bd7a6e4d1eb9b74c70d67d269e0",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3457094",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3728380",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3728409",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I'll go tell them that we're ready.\""
+    },
+    {
+      "id": "sent.tatoeba.7110527",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I wonder if Tom was murdered.",
+      "finalText": "I wonder if Tom was murdered.",
+      "intakeSourceDigest": "1605ebe2ab3c0c1f129cf97994a1f44a221d7442dee1aa026473bb847c120c84",
+      "controlledSourceDigest": "0a676374a1b3e078d414e1cb4ceb2961ab3792a23071e7d88467bf95ddb52599",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110528",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110552",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.251203",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Safety policy: homicide / murder reference."
+    },
+    {
+      "id": "sent.tatoeba.7110528",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I wonder whether Tom was murdered.",
+      "finalText": "I wonder whether Tom was murdered.",
+      "intakeSourceDigest": "60f7ac6567239fe4dc50ca1c732604e02608e6df8e711f8643eded8150ad8005",
+      "controlledSourceDigest": "31ae01c68b5907496e1dc1b475c2ff5dec7a3b821463510c78e02f4898cdb927",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110527",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4708045",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Safety policy: homicide / murder reference."
+    },
+    {
+      "id": "sent.tatoeba.7110529",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom knows what to do.",
+      "finalText": "I wonder if Tom knows what to do.",
+      "intakeSourceDigest": "4661eea79d222cb2038fe057cd9bc5404ce8974fe7eef686e4aa7a31ca2fd6e8",
+      "controlledSourceDigest": "511139676affdfd531ac217906adf43a9c7eae7df51c3b6a720a9c3af6562a2e",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110530",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110531",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.3725013",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom knows what to do.\""
+    },
+    {
+      "id": "sent.tatoeba.7110530",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom knows what to do.",
+      "finalText": "I wonder whether Tom knows what to do.",
+      "intakeSourceDigest": "900f3be65fb1245981ce7a4ff8390e1a5b513832db24e835dab6c4e85db17759",
+      "controlledSourceDigest": "d3a2811ad6646a73e78e6a8d049a5239f29a1bba6e040eb358387e489e29233a",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110529",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110532",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.6524065",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom knows what to do.\""
+    },
+    {
+      "id": "sent.tatoeba.7110531",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom knows Mary didn't do that.",
+      "finalText": "I wonder if Tom knows Mary didn't do that.",
+      "intakeSourceDigest": "950abdda15d343805ac47fb9ebd2423dffbe4faad70160f442dc572e05b5e02d",
+      "controlledSourceDigest": "ad398f5d1ffcc986d4fa3496dd748fb3ee6433539f3606f3ec00b1fc87e2473f",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110532",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.6260961",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.7110529",
+          "score": 0.5454545454545454
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom knows Mary didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110532",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom knows Mary didn't do that.",
+      "finalText": "I wonder whether Tom knows Mary didn't do that.",
+      "intakeSourceDigest": "f46bc436ac48f7872e927161b8d61ef076ab04d139ca095ea253247d996c3401",
+      "controlledSourceDigest": "994fd15846e02b06829755cdf3723029027469aaa6e8013d0d63dd486119d672",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110531",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110530",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.6260961",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom knows Mary didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110533",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom really kissed Mary last night.",
+      "finalText": "I wonder whether Tom really kissed Mary last night.",
+      "intakeSourceDigest": "a8f5b5d43d3248dace8fbe591a738bd6062c25e9aadd4d844fb265ba3c4d38de",
+      "controlledSourceDigest": "87a3f3f3f4b5fe65e22cbc706ca25405e28b16aeea614a5b3d0439b6334b05db",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110532",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.7110528",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom really kissed Mary last night.\""
+    },
+    {
+      "id": "sent.tatoeba.7110534",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom is ever going to succeed.",
+      "finalText": "I wonder whether Tom is ever going to succeed.",
+      "intakeSourceDigest": "8e8f671f39d2f5402dd39f3eeeefb86e877d894507f3148a3024b9d3134389b6",
+      "controlledSourceDigest": "c7d29c8f7a369d6102f165e3163956b85af8e95b4370b6359693aca0ea000eef",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110535",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is ever going to succeed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110535",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom is ever going to succeed.",
+      "finalText": "I wonder if Tom is ever going to succeed.",
+      "intakeSourceDigest": "7765d151c6de41b3126a8940d2d53ed69b16c461a5054df1461e954b974c2d83",
+      "controlledSourceDigest": "c3a64a4bd2e8d78bf09b485715f89a2004ccf289c9b5f45f3e6ee305dc11ca53",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110534",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110552",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.6888626",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is ever going to succeed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110536",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom has died yet.",
+      "finalText": "I wonder whether Tom has died yet.",
+      "intakeSourceDigest": "eb2c5b0f4eb897f9efe81f09f8611ce453fb7bc54908528cecd61589d34edab9",
+      "controlledSourceDigest": "63c1074ed01e345d1199dfeb7b339c661c87b785c0b8122befe4c709ea94bda8",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110537",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110528",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom has died yet.\""
+    },
+    {
+      "id": "sent.tatoeba.7110537",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom has died yet.",
+      "finalText": "I wonder if Tom has died yet.",
+      "intakeSourceDigest": "f522cf8f98abce63585a31e001dada3c275175ea2ab18e5eb376fc5703059a88",
+      "controlledSourceDigest": "1e8e42d126e7eaa2475988b12828ad7385ac1322f913aae03d13e6bb4c8b9ee5",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110536",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110527",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.7110552",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom has died yet.\""
+    },
+    {
+      "id": "sent.tatoeba.7110538",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I wonder whether Tom got the hint.",
+      "finalText": "I wonder whether Tom got the hint.",
+      "intakeSourceDigest": "9d1a1497e797f4fbaee62db29a82c957c7db0858aee4bb809422b6dd1f05e02d",
+      "controlledSourceDigest": "8ffcf567dfec3516a590c68892b2512fe96043c9e98ca1d320a1e67eb05f7a84",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110528",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5736144",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom got the hint.\""
+    },
+    {
+      "id": "sent.tatoeba.7110539",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom and I are strong enough to do that.",
+      "finalText": "I wonder whether Tom and I are strong enough to do that.",
+      "intakeSourceDigest": "c4f55721c038401fa75ada7f3aac78e1db9f56afbdbc18935a25e83625b33815",
+      "controlledSourceDigest": "cb2cf063e92378ad6d6634ce54ea588370fae4fb7a624bf56fcce29d8d8ed39e",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110540",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110541",
+          "score": 0.6923076923076923
+        },
+        {
+          "id": "sent.tatoeba.7110542",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom and I are strong enough to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110540",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom and I are strong enough to do that.",
+      "finalText": "I wonder if Tom and I are strong enough to do that.",
+      "intakeSourceDigest": "4a36538bfa7980aff0419fcdd04323519a817b6aa4389d90d2363b37b0bb1c89",
+      "controlledSourceDigest": "5defb3ba00f1dcdba9faad6b2e9e2f47416e1f232f84b334141ccf9c75706465",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110539",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110542",
+          "score": 0.6923076923076923
+        },
+        {
+          "id": "sent.tatoeba.7110541",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom and I are strong enough to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110541",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom and I are really supposed to do that.",
+      "finalText": "I wonder whether Tom and I are really supposed to do that.",
+      "intakeSourceDigest": "acf03368bfdb7c59e2fda9e9a4460cf8db3a0448e447a4f40397a828c4b410f9",
+      "controlledSourceDigest": "c48d1a4fc0bc9844726f2fc1b9aac519c9fb63d2cf960a4f38d0227bac6b0242",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110542",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110539",
+          "score": 0.6923076923076923
+        },
+        {
+          "id": "sent.tatoeba.7110540",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom and I are really supposed to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110542",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom and I are really supposed to do that.",
+      "finalText": "I wonder if Tom and I are really supposed to do that.",
+      "intakeSourceDigest": "77716b011ebff7bd070b0d1ccf49b790153b2632fcb824d5617d7c02899ca179",
+      "controlledSourceDigest": "5696d5450f720d1086a346365749fc5c8ecebed8cb9ba4a29c864a9e2a9889d3",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110541",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110540",
+          "score": 0.6923076923076923
+        },
+        {
+          "id": "sent.tatoeba.7110539",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom and I are really supposed to do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110543",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether they realize what they're up against.",
+      "finalText": "I wonder whether they realize what they're up against.",
+      "intakeSourceDigest": "bbd9a27679bea60e650c539e3fa32551e09875446b11438b0cce27700baf54f3",
+      "controlledSourceDigest": "bd616d5038ecc4dc9dcf0bbb62734a6b042b82a00d99ca52439b191f9f7650ee",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731905",
+          "score": 0.4
+        },
+        {
+          "id": "sent.grb1.06.01.2",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.5391166",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether they realize what they're up against.\""
+    },
+    {
+      "id": "sent.tatoeba.7110544",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I wonder if Tom is still influential.",
+      "finalText": "I wonder if Tom is still influential.",
+      "intakeSourceDigest": "ae0cabd67421d06f9073ced87926db91797160192ad50d09da0b5a68a709f3d6",
+      "controlledSourceDigest": "df9a247ea7e9d35934d48379417572f2093c5c8456ee1b82c5a89d3fbd28b5a9",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110546",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110548",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is still influential.\""
+    },
+    {
+      "id": "sent.tatoeba.7110545",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I wonder whether Tom is still influential.",
+      "finalText": "I wonder whether Tom is still influential.",
+      "intakeSourceDigest": "4ef47f3245460fc13adfd271d19062306ec77ccca6848e271e0865460f04716f",
+      "controlledSourceDigest": "3b4cd6280ae007793bd7777b1383d8cc1383b1a92efe42e3572c81b994a38c57",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110544",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110547",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110549",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is still influential.\""
+    },
+    {
+      "id": "sent.tatoeba.7110546",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom is still motivated.",
+      "finalText": "I wonder if Tom is still motivated.",
+      "intakeSourceDigest": "9dc96c99c064e272e367d60abf793b5254bf2d5212993f6d390fed8174dc0111",
+      "controlledSourceDigest": "8b2a28e2458dfdcf2e08b034bcbf31d078e202cd5b63a1a2d145b7f3b8885295",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110552",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110544",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110547",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is still motivated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110547",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom is still motivated.",
+      "finalText": "I wonder whether Tom is still motivated.",
+      "intakeSourceDigest": "2687ab2af4d8b69109c9180f4126df6fd7f0231f24693f6cfc7dae919c714ff8",
+      "controlledSourceDigest": "9cf158f226f5c2af40f27c96f01989aaa368e957da1f1dbab127cb77672ae2f0",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110546",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is still motivated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110548",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I wonder if Tom is still gullible.",
+      "finalText": "I wonder if Tom is still gullible.",
+      "intakeSourceDigest": "cb12f9b894e45fed5b03d4b17a84fc58d7a15af71f0324f190e5fe2ed828395d",
+      "controlledSourceDigest": "ad285a31edd114c8d3c8a7a1624a3867e29c6b64ab56b1183cf4770278a9a33f",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110544",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110546",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110549",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is still gullible.\""
+    },
+    {
+      "id": "sent.tatoeba.7110549",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I wonder whether Tom is still gullible.",
+      "finalText": "I wonder whether Tom is still gullible.",
+      "intakeSourceDigest": "70a87b9dcee1ae5951e01db7d1b957ece2ea5d243b9f0eb08fe77b8ea4803a92",
+      "controlledSourceDigest": "762b93078a8e37a9ea0ac50a4b91cbd82e39588fea5d5aaf5ccd77026222fe66",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110547",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110548",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is still gullible.\""
+    },
+    {
+      "id": "sent.tatoeba.7110550",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom is still committed.",
+      "finalText": "I wonder if Tom is still committed.",
+      "intakeSourceDigest": "a142f7fcea687efa07ec92e4d5211e26b92c23d9be68b428f2024bef70453331",
+      "controlledSourceDigest": "151dda8e993b59111afbbc4b9f9bdb1ec1836ddd27f5f52f3cfe66a4a86db03a",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110544",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110546",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110548",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is still committed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110551",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom is still committed.",
+      "finalText": "I wonder whether Tom is still committed.",
+      "intakeSourceDigest": "90090804b6eceeb3e7a3f2f49a17e3d088fda4acf42a65aafc5f3eef39c44767",
+      "controlledSourceDigest": "24cbf5cad1f14a28964a46ddcf196042e099767f675b2dc7f53a72135caa3e3e",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110547",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110549",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is still committed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110552",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder if Tom is motivated.",
+      "finalText": "I wonder if Tom is motivated.",
+      "intakeSourceDigest": "c2457fa41f67062c3754951fd30331468c767c0175a17c04cf59d68be0e0114b",
+      "controlledSourceDigest": "684f65cd0ab80a01879205e8d493b63cd50615c462ee2615035473711281fb34",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110546",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110553",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110544",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder if Tom is motivated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110553",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wonder whether Tom is motivated.",
+      "finalText": "I wonder whether Tom is motivated.",
+      "intakeSourceDigest": "2de59c77eb159a6346f44bf7d998d0832f42aef51106de3223d0fbf93ee91beb",
+      "controlledSourceDigest": "a6ad73d58cc7b8b9a0e974c4e18f83476118ae21a63b9bb61f6dac3ca7000543",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110547",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110552",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110545",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wonder whether Tom is motivated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110554",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I was told that there'd be someone to meet me at the airport, but there wasn't.",
+      "finalText": "I was told that there'd be someone to meet me at the airport, but there wasn't.",
+      "intakeSourceDigest": "d8ca40f7560787a6f3b836798c156e55fcc25bfe22c5b31090b76b53da2d836f",
+      "controlledSourceDigest": "17243ca6857120357d194167419ebd93d60df5cfe97b0c7b256a1bdbc118729a",
+      "maximumTokenJaccard": 0.8824,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110555",
+          "score": 0.8823529411764706
+        },
+        {
+          "id": "sent.tatoeba.256999",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.5640037",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I was told that there'd be someone to meet me at the airport, but there wasn't.\""
+    },
+    {
+      "id": "sent.tatoeba.7110555",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I was told that there'd be somebody to meet me at the airport, but there wasn't.",
+      "finalText": "I was told that there'd be somebody to meet me at the airport, but there wasn't.",
+      "intakeSourceDigest": "a573759f32c5d8fb708e205a48e2d5a88064a3907e8f3a2c5ae5ec8564fd99fb",
+      "controlledSourceDigest": "7bdca9101572c0f4075424f4e04e7cdfd7172d19a0dfd3262a7bfc8ee3bfc8b5",
+      "maximumTokenJaccard": 0.8824,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110554",
+          "score": 0.8823529411764706
+        },
+        {
+          "id": "sent.tatoeba.256999",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.5640037",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I was told that there'd be somebody to meet me at the airport, but there wasn't.\""
+    },
+    {
+      "id": "sent.tatoeba.7110556",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I was surprised Tom didn't need to do that with us.",
+      "finalText": "I was surprised Tom didn't need to do that with us.",
+      "intakeSourceDigest": "269a178bfded8118fef3f0b14b2a392ac2ef47997f5ed96e410b31274b8010ae",
+      "controlledSourceDigest": "793f9880ec187f7b7a641a7d0fb226a50174d8b71ce3d3dfd7e1be3638367f7b",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110557",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.6663920",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.7110560",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I was surprised Tom didn't need to do that with us.\""
+    },
+    {
+      "id": "sent.tatoeba.7110557",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I was surprised that Tom didn't need to do that with us.",
+      "finalText": "I was surprised that Tom didn't need to do that with us.",
+      "intakeSourceDigest": "e851db63182a9fa1b980c4b00e5106f08c07dd1a4bd0c9b5425ac6ccadf951d7",
+      "controlledSourceDigest": "3844bc39875985151fd23d22625c2c91c8f5b21bb8ca30d73e1bdc698e3d23b4",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110556",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.6663920",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.7110560",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I was surprised that Tom didn't need to do that with us.\""
+    },
+    {
+      "id": "sent.tatoeba.7110558",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want you to know I didn't do that.",
+      "finalText": "I want you to know I didn't do that.",
+      "intakeSourceDigest": "a85ecc6294536e2991c3976cb23aac9c1cb396c9fb7dd6be553d779b1513a638",
+      "controlledSourceDigest": "a2fe8323f4606055aff4954fa23db85676e0beed8867f1e6cb20d28e0dfdbf7d",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110559",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.1887165",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3728029",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want you to know I didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110559",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want you to know that I didn't do that.",
+      "finalText": "I want you to know that I didn't do that.",
+      "intakeSourceDigest": "832e0edd7d750eb78a5ba1578f007962a6e1afde1acfa9a1674c360191be2ff6",
+      "controlledSourceDigest": "539c3d3a7e886ecf62b21abad312a2eb996a8f5f526cbbb061870bd0e0ca953d",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110558",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.1887165",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3728029",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want you to know that I didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110560",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wanted Tom to know I didn't do that.",
+      "finalText": "I wanted Tom to know I didn't do that.",
+      "intakeSourceDigest": "ed5e0112071b5be760e2161d9c4c35adb461cf19fe8a911a36352b5bd17f692a",
+      "controlledSourceDigest": "ed493ee34ba51ea3e3341fc12247be149f63de1434bd7bd7bef96eec76b790e1",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110561",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.6244488",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.6663920",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wanted Tom to know I didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110561",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I wanted Tom to know that I didn't do that.",
+      "finalText": "I wanted Tom to know that I didn't do that.",
+      "intakeSourceDigest": "f3643defa109d420f5f4221a1e13ed1eb3983d90a423e3ec5d722493cc3044eb",
+      "controlledSourceDigest": "75b25193cdc6831339605d08cab0ad099eb67d4a693b6c6509ae898deb3ee2b5",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110560",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.6244488",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.6663920",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I wanted Tom to know that I didn't do that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110562",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to let Tom know that he's not alone.",
+      "finalText": "I want to let Tom know that he's not alone.",
+      "intakeSourceDigest": "5735a7c62fdbc12509e4e6a3fd8adab9752ab3fa989b2cae9677c85e1e7dab01",
+      "controlledSourceDigest": "89b59229cf4371030ac4d4d06c59cd9f729c40a90f28a390907c2f5a3429ff0f",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110564",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110563",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110565",
+          "score": 0.5833333333333334
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want to let Tom know that he's not alone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110563",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to let Tom know that he isn't alone.",
+      "finalText": "I want to let Tom know that he isn't alone.",
+      "intakeSourceDigest": "93edcf93cca90cbaa36fd16dbadaa26a6b8d75d813bfbf1f4dcdd07684532d88",
+      "controlledSourceDigest": "eaa396ef1f3612a0936c96703a3f56fc89eadaf7fda28c1da975fa4e92b3809d",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110565",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110562",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110564",
+          "score": 0.5833333333333334
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want to let Tom know that he isn't alone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110564",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to let Tom know he's not alone.",
+      "finalText": "I want to let Tom know he's not alone.",
+      "intakeSourceDigest": "4629ab60ab04b93b2b7c8d2f5062e742b1192b26850e75e06652fbcc0482bf14",
+      "controlledSourceDigest": "881df7f8bd881a376e5a59413398b9d9472b7f9638ace98e389182dffa65522d",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110562",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110565",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.7110563",
+          "score": 0.5833333333333334
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want to let Tom know he's not alone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110565",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to let Tom know he isn't alone.",
+      "finalText": "I want to let Tom know he isn't alone.",
+      "intakeSourceDigest": "196c34222a74efa1b048f5353eef6d3f48f31b62f4171493f3213fbf053ca53f",
+      "controlledSourceDigest": "3e9c95aad8433fbf62ae175af45739ab360ae2f0085c3d4e92f1bffb186c7765",
+      "maximumTokenJaccard": 0.9,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110563",
+          "score": 0.9
+        },
+        {
+          "id": "sent.tatoeba.7110564",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.7110562",
+          "score": 0.5833333333333334
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I want to let Tom know he isn't alone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110566",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom usually doesn't listen to anyone.",
+      "finalText": "Tom usually doesn't listen to anyone.",
+      "intakeSourceDigest": "dc4ebbbf1261802f4383a8982d19f6a0b5d949a0f7b28a41f0a6dc4dacf89d39",
+      "controlledSourceDigest": "400a26753c950b78cdf1a6fb2d5a28b197943f37942616d3a80f6c87bb346aef",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110567",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.6319340",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3934317",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom usually doesn't listen to anyone.\""
+    },
+    {
+      "id": "sent.tatoeba.7110567",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom usually doesn't listen to anybody.",
+      "finalText": "Tom usually doesn't listen to anybody.",
+      "intakeSourceDigest": "9678d8cf31df03104d8d2264a9e302ae3974227d3ef22aa9b5b6163bfe5983f5",
+      "controlledSourceDigest": "2e1ff297b5738a0514ce24dd8edb34cde70ded0b31ec881f1f849ab8ca5d5400",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110566",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3934317",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3727881",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"Tom usually doesn't listen to anybody.\""
+    },
+    {
+      "id": "sent.tatoeba.7110568",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I understand the museum is closed on Monday.",
+      "finalText": "I understand the museum is closed on Monday.",
+      "intakeSourceDigest": "deebb4c7eae2750799ac14c69fb8dbbe2855a7b9efb6bde6f66b7c74e2d79134",
+      "controlledSourceDigest": "e54fb1f6791ba358e227f9eb6e85fea557713a3017083cad36992c93b7e30118",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110569",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.3419451",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5739554",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I understand the museum is closed on Monday.\""
+    },
+    {
+      "id": "sent.tatoeba.7110569",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I understand that the museum is closed on Monday.",
+      "finalText": "I understand that the museum is closed on Monday.",
+      "intakeSourceDigest": "30d037a700cbae65a2edfad57bae9ebce77593b9e849e243aba1add7a4a4abf9",
+      "controlledSourceDigest": "36712e41e83022105249d883e3f7af1529835219fdfa9e5defc411f1e49a5bc4",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110568",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.3419451",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5739554",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I understand that the museum is closed on Monday.\""
+    },
+    {
+      "id": "sent.tatoeba.7110570",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I thought Tom would kiss Mary yesterday.",
+      "finalText": "I thought Tom would kiss Mary yesterday.",
+      "intakeSourceDigest": "d9e99b4b9b06c39c43b33198b00872e6767af2ac1660cb179a35555f78cfce99",
+      "controlledSourceDigest": "1b91892509bc43b058ac43d239aa6c4d1295394930f98c981fb30829ad67f815",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110571",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.6584861",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.6509091",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I thought Tom would kiss Mary yesterday.\""
+    },
+    {
+      "id": "sent.tatoeba.7110571",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I thought that Tom would kiss Mary yesterday.",
+      "finalText": "I thought that Tom would kiss Mary yesterday.",
+      "intakeSourceDigest": "141601012ec93ce8e6d5e9a8e9ebe4868e81ecff8e38ed2955c44979647f5cfd",
+      "controlledSourceDigest": "823a211b34198b9d8fdc8e7421179ab9e66b0b46a148ffd547d7442808fd430b",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110570",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.5728935",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3064250",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I thought that Tom would kiss Mary yesterday.\""
+    },
+    {
+      "id": "sent.tatoeba.7110572",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I knew Tom was annoyed.",
+      "finalText": "I knew Tom was annoyed.",
+      "intakeSourceDigest": "7d0705c6f39da659723cd5c445b913c9317a0fc351a2e367376b9f7643836b92",
+      "controlledSourceDigest": "88dd0e079ed0f5b2aec64ebe7d8f98e52e02fd4cf996dc070fa499f49ffa6328",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110573",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110439",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110441",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I knew Tom was annoyed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110573",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I knew that Tom was annoyed.",
+      "finalText": "I knew that Tom was annoyed.",
+      "intakeSourceDigest": "f577f86fcf5294de35a062765a2f018daf93c57a02e0749f4dd0d03b6bbb33aa",
+      "controlledSourceDigest": "f12040277594c521c15df2478f1cca2aebdaeaef808655c8b5be8ac4ce625523",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110572",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110440",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110442",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I knew that Tom was annoyed.\""
+    },
+    {
+      "id": "sent.tatoeba.7110574",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I thought Tom was a goner.",
+      "finalText": "I thought Tom was a goner.",
+      "intakeSourceDigest": "22b55263a065b71bbdd9ffb76152072567995d215b2c6eb5a94935d772af4e1a",
+      "controlledSourceDigest": "11fe1e3997148550e8133760b73188cab081ca010e219427ece9a644ee588bd0",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110575",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5736114",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.5737801",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I thought Tom was a goner.\""
+    },
+    {
+      "id": "sent.tatoeba.7110575",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I thought that Tom was a goner.",
+      "finalText": "I thought that Tom was a goner.",
+      "intakeSourceDigest": "ff60db439d7b22cb0fb2c6f5d99d9d578ac19b57d1694d9f5ca7c69894dc8894",
+      "controlledSourceDigest": "510edb6cfad180b7e6948973ecff3eb7d410b1080a3549220db17eafafdbd891",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110574",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5732986",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5736114",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I thought that Tom was a goner.\""
+    },
+    {
+      "id": "sent.tatoeba.7110577",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're weird.",
+      "finalText": "I think that you're weird.",
+      "intakeSourceDigest": "2430f72ecdd360bf284971b244f31311e5ff90fc50aed85aa6d745052217c6e1",
+      "controlledSourceDigest": "f68a9b4d4574e26a65405419a2b0ccf5a227be5c419901b59d3af6e13a9f2263",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110591",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're weird.\""
+    },
+    {
+      "id": "sent.tatoeba.7110578",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think you're very smart.",
+      "finalText": "I think you're very smart.",
+      "intakeSourceDigest": "f54db648cac9c187243db4e6b5ffc4dbc97ecfc006f4c960d5929fe5fba6904d",
+      "controlledSourceDigest": "4d4c0b590ad2af32e2bcb516297754fdfa2d09a299961941556b775a71660ba4",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110579",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2752869",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3728722",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're very smart.\""
+    },
+    {
+      "id": "sent.tatoeba.7110579",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're very smart.",
+      "finalText": "I think that you're very smart.",
+      "intakeSourceDigest": "17f28eb0bbd16d3cc447b9ebba2173d5fd227b5ec8f994e18c9d13f57f303487",
+      "controlledSourceDigest": "7c9ae53358400338ca8b563d2c5c774b8b0deda0ff12b4d14f090c1d855847e9",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110578",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110593",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2752869",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're very smart.\""
+    },
+    {
+      "id": "sent.tatoeba.7110581",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I think that you're ugly.",
+      "finalText": "I think that you're ugly.",
+      "intakeSourceDigest": "4607c7798467e2efaa9a3990778a1447dac612694847f184e2ca3ab129dd038b",
+      "controlledSourceDigest": "b1fec5e4edf021f939aab850e45fea7b3ee9785cc5ec4931f53320acbc8b537c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110591",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Safety policy: body shaming / personal insult."
+    },
+    {
+      "id": "sent.tatoeba.7110582",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you're too outspoken.",
+      "finalText": "I think you're too outspoken.",
+      "intakeSourceDigest": "97afac29bd3e10633803f0aba8e595e2e88cdf2d9575bc7016cb269fb337f74d",
+      "controlledSourceDigest": "dd2c712f6b57705ed779957f2ff9aa9a5b89cab9ae2ceff045ef519a96fb9dc8",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110583",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110584",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110586",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're too outspoken.\""
+    },
+    {
+      "id": "sent.tatoeba.7110583",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're too outspoken.",
+      "finalText": "I think that you're too outspoken.",
+      "intakeSourceDigest": "a98ae9181a4aeae5cd2bdb1c1ee5c9fb261e468ed32901a125881ae2ac6c9dd9",
+      "controlledSourceDigest": "92a4c6f77d8dd446c84128a302797f120470331226a8f1336c597c2fb9316d83",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110582",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110585",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110587",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're too outspoken.\""
+    },
+    {
+      "id": "sent.tatoeba.7110584",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you're too demanding.",
+      "finalText": "I think you're too demanding.",
+      "intakeSourceDigest": "6182e8b64b80732779162033cfc50af8ed1842e24b056597a5f9435ba57c6b58",
+      "controlledSourceDigest": "6338a39a36e83d59bac4ee68139bf27860c1eeb2acd780b99f736910946cd7a5",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110585",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110582",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110586",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're too demanding.\""
+    },
+    {
+      "id": "sent.tatoeba.7110585",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're too demanding.",
+      "finalText": "I think that you're too demanding.",
+      "intakeSourceDigest": "2ace12437de0780d405d1e40256bdb06ee357683f34647bfbc0a651844a40422",
+      "controlledSourceDigest": "efcaad79582d87882df66bc359d030243b95f8aad61d573146140360ab375aa9",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110584",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110583",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110587",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're too demanding.\""
+    },
+    {
+      "id": "sent.tatoeba.7110586",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you're too competitive.",
+      "finalText": "I think you're too competitive.",
+      "intakeSourceDigest": "7af5bf685dac6d290d63a3bd79dd8b188562312518d973c72f678811bf0ef212",
+      "controlledSourceDigest": "b225b0accf1d8e77a8c211c94e9b53274401a7efbb7a2c01cca2a492bd6ed4ac",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110587",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110582",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110584",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're too competitive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110587",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're too competitive.",
+      "finalText": "I think that you're too competitive.",
+      "intakeSourceDigest": "b3f052f78a8d2d565cdd3613949885ebc89b6112225d0b64e22e2fe1632f5e46",
+      "controlledSourceDigest": "c43ba280bdb62f7cb2d12f091f01b2a4328a82c2edfd8985532b8a7e9b5abf1c",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110586",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110583",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110585",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're too competitive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110588",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you're stuck-up.",
+      "finalText": "I think you're stuck-up.",
+      "intakeSourceDigest": "5e785f43f17ebb647cfbdaa03c7073a9fab9b1c6a1cc2dbcdc81c015f60f2b37",
+      "controlledSourceDigest": "b620ebac0e238f341692e1ddf1a52a30083468a3f993fc4739e2967210afbc4b",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.2752869",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3727761",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're stuck-up.\""
+    },
+    {
+      "id": "sent.tatoeba.7110589",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're stuck-up.",
+      "finalText": "I think that you're stuck-up.",
+      "intakeSourceDigest": "df5d7a96bc4bc80000405ebfa40bfbf4c1842735f066d3be5c4eafde3d572d98",
+      "controlledSourceDigest": "6b7d5b312d138298e2566fc519729ece8c7c8b782cd41f60a75247a5ea287e38",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110588",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're stuck-up.\""
+    },
+    {
+      "id": "sent.tatoeba.7110591",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're stubborn.",
+      "finalText": "I think that you're stubborn.",
+      "intakeSourceDigest": "3f4bd62dc35803e0336b4f37a7824025df5787f1fc88342853209aa06374216a",
+      "controlledSourceDigest": "65edb2eaf07d744ced33d5b8664ac042d0c12c0767356abfc7871e051858b7e3",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're stubborn.\""
+    },
+    {
+      "id": "sent.tatoeba.7110592",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think you're really smart.",
+      "finalText": "I think you're really smart.",
+      "intakeSourceDigest": "582315918c26cec73be595a8557f47acecc35e2e655b1e217cb25a13e31326bc",
+      "controlledSourceDigest": "b139b0070894a454f7312d95517b86e9ba0da4cf185bbb258bdb933650c60487",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110593",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.3728721",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3728722",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're really smart.\""
+    },
+    {
+      "id": "sent.tatoeba.7110593",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're really smart.",
+      "finalText": "I think that you're really smart.",
+      "intakeSourceDigest": "ac92ad8664d9fa3ca4a5079f7ba7391b3b6368f6fdd0bf12b6702a43c429034f",
+      "controlledSourceDigest": "350123a129346afb261c01330e0bf59ae93bb1599d1f65fdc459a0a933785a2f",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110592",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.7110579",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3728721",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're really smart.\""
+    },
+    {
+      "id": "sent.tatoeba.7110594",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think you're just confused.",
+      "finalText": "I think you're just confused.",
+      "intakeSourceDigest": "faebb43d4c665a7fab290be938183b816d0efda07a32d854beedac23b086d02d",
+      "controlledSourceDigest": "9dceec132411fa3c5ccbc52f9ddcef6a4132a88935041b2bb868f40666f5390f",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110595",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.3722111",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.7110588",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're just confused.\""
+    },
+    {
+      "id": "sent.tatoeba.7110595",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're just confused.",
+      "finalText": "I think that you're just confused.",
+      "intakeSourceDigest": "dcd3c779effebdb1cb84516abbdb335dc4cccb6f2eaf73acc9bce85cd75a95c0",
+      "controlledSourceDigest": "2805e39f2b9b308d046dfb41a2ef3aed504875c88c60db4ac98733aea6e8ca60",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110594",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.5745095",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're just confused.\""
+    },
+    {
+      "id": "sent.tatoeba.7110596",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think you're jealous of me.",
+      "finalText": "I think you're jealous of me.",
+      "intakeSourceDigest": "88281ecd4a8e3f82dfaecfd2d7a6933320d049ea674f1deae2ff2a50b70b087b",
+      "controlledSourceDigest": "5ebe8c96c4e6e901a1eb52952168cfd26e42a91f633cfc7712f0ecb8eb7c4726",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110597",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.3722664",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5287326",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're jealous of me.\""
+    },
+    {
+      "id": "sent.tatoeba.7110597",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're jealous of me.",
+      "finalText": "I think that you're jealous of me.",
+      "intakeSourceDigest": "cf906731620b4975a9a668b5d87f270f0d4dd8ba69cb7a7efafe6ca978a09f00",
+      "controlledSourceDigest": "99db988e6cac8886198853a2f4eac85d52bfbc2c48025775d337b240c90ea034",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110596",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5751970",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're jealous of me.\""
+    },
+    {
+      "id": "sent.tatoeba.7110599",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're intelligent.",
+      "finalText": "I think that you're intelligent.",
+      "intakeSourceDigest": "4af137502d5fe0099bca3d66242bf0f07c0bf977e4a6050e83828abaf3168169",
+      "controlledSourceDigest": "779efcfaf1a5575ee754f10b5ad61ff2e8ee2f1d18277e2aeafdfc5047abda71",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're intelligent.\""
+    },
+    {
+      "id": "sent.tatoeba.7110601",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're incorrect.",
+      "finalText": "I think that you're incorrect.",
+      "intakeSourceDigest": "33121b8af68f3b1d2b4f5ac689b58263b8019eb1bff6e882198b310f58614576",
+      "controlledSourceDigest": "2222395a95d73d3d3815a69768ddcfcd51fd2f544a8e9bc2cb1541bb209ee18c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're incorrect.\""
+    },
+    {
+      "id": "sent.tatoeba.7110603",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I think that you're dying.",
+      "finalText": "I think that you're dying.",
+      "intakeSourceDigest": "07005b5c56f724f726cbe0a054cbedd1b54088f74f7b209b6e38fb4e313602d5",
+      "controlledSourceDigest": "ed01d3f355f131d76e2df3e48cd5ec3ee76a0cff8bcf847c411d5bbcf5a8d2ed",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Safety policy: morbid dying / fatal condition assertion."
+    },
+    {
+      "id": "sent.tatoeba.7110605",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I think that you're delusional.",
+      "finalText": "I think that you're delusional.",
+      "intakeSourceDigest": "55e6f2fdc56cb5ef901a8d5ee7678dbb4a9a30ebc2817d95c9255a43a3b724b4",
+      "controlledSourceDigest": "3666badac88845a9136c5e6e0192e4a6c52b508d8948c6dfbf838002cf5f18d8",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Safety policy: mental health disparagement."
+    },
+    {
+      "id": "sent.tatoeba.7110613",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you're creative.",
+      "finalText": "I think that you're creative.",
+      "intakeSourceDigest": "d241109e647ac03b825788c9733ddd3ec42151135d091bcf753b117dbb00a8ee",
+      "controlledSourceDigest": "41d9da4107693aee3af4076d42ab981aa5f00c3cb2eeb3e1eaab4ca4970a3161",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're creative.\""
+    },
+    {
+      "id": "sent.tatoeba.7110615",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're cool.",
+      "finalText": "I think that you're cool.",
+      "intakeSourceDigest": "2345d90bf2fce81c07a95a891994d8555330d7af8bfdfdedbba40f0268008265",
+      "controlledSourceDigest": "249495a4013a6588c5a18a5c7ae63b269c74bf39760b59d84dfa241e0b649c3b",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're cool.\""
+    },
+    {
+      "id": "sent.tatoeba.7110617",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think that you're conceited.",
+      "finalText": "I think that you're conceited.",
+      "intakeSourceDigest": "e89fc636af3e177bb41b86deb217e7c3d268b59809e8a37b55c7ad52805880f2",
+      "controlledSourceDigest": "d44f35150f46e974410ac60173ddb4a989835c9623e6303bc46ada2aecfe8c87",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're conceited.\""
+    },
+    {
+      "id": "sent.tatoeba.7110619",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're brilliant.",
+      "finalText": "I think that you're brilliant.",
+      "intakeSourceDigest": "0118cc9c1b617ff6be1737ae71393f29294d6dee0153b8c3b0aae4362024ad04",
+      "controlledSourceDigest": "bc6483688295213d61a436f2b788a7e7192afa8ca3efe733b83e685c4910c0f6",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're brilliant.\""
+    },
+    {
+      "id": "sent.tatoeba.7110621",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you're bossy.",
+      "finalText": "I think that you're bossy.",
+      "intakeSourceDigest": "0712b676f023699ab7d6a05480b3ffddfbbddda80ab229deb830766073b33b81",
+      "controlledSourceDigest": "a8bca3b7f5e9c9a81bab3b9a5d320a66d54ed5392f457dcf1637829851ae9b24",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110581",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110589",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're bossy.\""
+    },
+    {
+      "id": "sent.tatoeba.7110622",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think you're a very good player.",
+      "finalText": "I think you're a very good player.",
+      "intakeSourceDigest": "34ccd708bc313f4d44b144cfd0120388b7adc9043137d8b54c8ed2da85d4b198",
+      "controlledSourceDigest": "dab1f4689928ed3d83cf6989c9d97143bc0aac5463d740a958c4a4a16b299949",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110623",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.2752869",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110578",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're a very good player.\""
+    },
+    {
+      "id": "sent.tatoeba.7110623",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that you're a very good player.",
+      "finalText": "I think that you're a very good player.",
+      "intakeSourceDigest": "e9e20567f8313fcf125089bc1904138d7c40d380a21f21f3cb215e6fee49b152",
+      "controlledSourceDigest": "eebbbf628f24862cd7a1d9a79fb2969e9b53a5913cdab05c225028830b36f114",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110622",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110579",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110625",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're a very good player.\""
+    },
+    {
+      "id": "sent.tatoeba.7110624",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think you're a terrific kid.",
+      "finalText": "I think you're a terrific kid.",
+      "intakeSourceDigest": "a22870cba642eb46403a90ddafab02b2b6788b4a3b376b9eaf9cc4a393724ab4",
+      "controlledSourceDigest": "000d9e3e4bc86f15a00cda9ea5e17ea7bd7bcfbe01b4743ddb94d8203c00aed0",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110625",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110626",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110622",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're a terrific kid.\""
+    },
+    {
+      "id": "sent.tatoeba.7110625",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that you're a terrific kid.",
+      "finalText": "I think that you're a terrific kid.",
+      "intakeSourceDigest": "8541b8a8cc7dd58eb0b030b39138962d7835ec834a8e95b647d33edb877fcffc",
+      "controlledSourceDigest": "e9766d01b58ff49bf511e5b4976749617cec6eed247cb382b7f02222a6940b91",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110624",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110627",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're a terrific kid.\""
+    },
+    {
+      "id": "sent.tatoeba.7110626",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think you're a likable guy.",
+      "finalText": "I think you're a likable guy.",
+      "intakeSourceDigest": "61cb247df171b186730fd3c8c1e2790a6c319bf4538abf1db7adb03080aec413",
+      "controlledSourceDigest": "2904faf4fa93ea3bb4d9081ef03ff78623b3d3462dd5fad2220ba643d7b419bf",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110627",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.2282043",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.7110624",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you're a likable guy.\""
+    },
+    {
+      "id": "sent.tatoeba.7110627",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that you're a likable guy.",
+      "finalText": "I think that you're a likable guy.",
+      "intakeSourceDigest": "223a9f9ec71c45f431113b1efdf2f83b30a737d524584cecf17510bc04d686c2",
+      "controlledSourceDigest": "6af972e0f37d2c1d842584abb0318de1df4149776fa6fd651716ebc2673d82b2",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110626",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110625",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110577",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you're a likable guy.\""
+    },
+    {
+      "id": "sent.tatoeba.7110628",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think you'd make a good mother.",
+      "finalText": "I think you'd make a good mother.",
+      "intakeSourceDigest": "6b209a19e5db02ad9921cf38363a25bf375e85d12c7aba8cb67aa2c1ac798971",
+      "controlledSourceDigest": "a0843b6f4a03984cf6d8b03266560a02875f06a90c4652e0c4228051c14156e1",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110629",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.3725653",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5729464",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you'd make a good mother.\""
+    },
+    {
+      "id": "sent.tatoeba.7110629",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that you'd make a good mother.",
+      "finalText": "I think that you'd make a good mother.",
+      "intakeSourceDigest": "411c2881d267703ab861312ca0787a18765519b1c1e59e37f2a95b86204e7308",
+      "controlledSourceDigest": "3c8dc80f1824f5440f1f13b9ed672ec292c80ed0897b523b26ad65044faea0dc",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110628",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110623",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3725653",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you'd make a good mother.\""
+    },
+    {
+      "id": "sent.tatoeba.7110630",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think you should get your hair cut really short.",
+      "finalText": "I think you should get your hair cut really short.",
+      "intakeSourceDigest": "4c2f272db65f80edd489036c8887e58517615763071deb4e77d7bfed699e67d3",
+      "controlledSourceDigest": "5a6bbbf687f7fb32a74547a848d9fae7c8ed6aa77f3aa4a0647e7813afa6df76",
+      "maximumTokenJaccard": 0.9091,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110631",
+          "score": 0.9090909090909091
+        },
+        {
+          "id": "sent.tatoeba.3724355",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.3098671",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you should get your hair cut really short.\""
+    },
+    {
+      "id": "sent.tatoeba.7110631",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that you should get your hair cut really short.",
+      "finalText": "I think that you should get your hair cut really short.",
+      "intakeSourceDigest": "0d57f4f9ab13ebd13c3ec578edb9d5be78df916827e70ea7e127227cb0eec9db",
+      "controlledSourceDigest": "0fdf1c3465573b0db5e3465e70bfa361653307543ed88d32524edd9aa3f62d32",
+      "maximumTokenJaccard": 0.9091,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110630",
+          "score": 0.9090909090909091
+        },
+        {
+          "id": "sent.tatoeba.3724355",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.3728924",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you should get your hair cut really short.\""
+    },
+    {
+      "id": "sent.tatoeba.7110632",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think you should decline Tom's invitation.",
+      "finalText": "I think you should decline Tom's invitation.",
+      "intakeSourceDigest": "98b3dcc7ff63fd949db41ca309327840282f1a5bca79740f7e85051398bb0a7d",
+      "controlledSourceDigest": "89e4ccb1ec83f5faca63653773be39d3ddae36fdd52de92e1bc7002d76ab6cf9",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110633",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110634",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5050114",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you should decline Tom's invitation.\""
+    },
+    {
+      "id": "sent.tatoeba.7110633",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that you should decline Tom's invitation.",
+      "finalText": "I think that you should decline Tom's invitation.",
+      "intakeSourceDigest": "d5500809af9a2e59bbdea9b829ca916d674a68ba13cddd7bcae7ec2cfd12b87d",
+      "controlledSourceDigest": "ce8f64335379648048e3bd6da74e40710734f0e7ba958a7f1dd10e63c7347b5e",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110632",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110635",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.7110634",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you should decline Tom's invitation.\""
+    },
+    {
+      "id": "sent.tatoeba.7110634",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think you should accept Tom's resignation.",
+      "finalText": "I think you should accept Tom's resignation.",
+      "intakeSourceDigest": "b50c95860e65a4c3a5e18a8f87ff54f66516b65c13a0092d78c7c80664920834",
+      "controlledSourceDigest": "54793a488bfe1a27a4ac8321a38bf3f66d937c24c6d766f7731710def0bf771b",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110635",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110632",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5050114",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you should accept Tom's resignation.\""
+    },
+    {
+      "id": "sent.tatoeba.7110635",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think that you should accept Tom's resignation.",
+      "finalText": "I think that you should accept Tom's resignation.",
+      "intakeSourceDigest": "12728a2b50974cdffc312db03684d8f004839f58985629db94c849735817da18",
+      "controlledSourceDigest": "dccb0830270b47ceeba515440a57aef39fc2d5c309ab3fc49d003c3109a89db8",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110634",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110633",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.7110632",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you should accept Tom's resignation.\""
+    },
+    {
+      "id": "sent.tatoeba.7110636",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think you can do that if you put your mind to it.",
+      "finalText": "I think you can do that if you put your mind to it.",
+      "intakeSourceDigest": "9664511bb5ae252c3177fed0f3676aad58197d4e1f351a95c104670dbf65ddbc",
+      "controlledSourceDigest": "eda84c439b7847e3521c5e34a6417316d964413c5adc788dcce335117513d49b",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110637",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3330385",
+          "score": 0.6428571428571429
+        },
+        {
+          "id": "sent.tatoeba.17326",
+          "score": 0.4666666666666667
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think you can do that if you put your mind to it.\""
+    },
+    {
+      "id": "sent.tatoeba.7110637",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that you can do that if you put your mind to it.",
+      "finalText": "I think that you can do that if you put your mind to it.",
+      "intakeSourceDigest": "983917112fdd5902ac8b03a4d4cb75a5bb131033f8bb7f9f5d0dc99710aa1aaf",
+      "controlledSourceDigest": "41612e71df64f60d3fc90094f8b6478c17c06e9abd459582fd94d7cabbfe978c",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110636",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.3330385",
+          "score": 0.6428571428571429
+        },
+        {
+          "id": "sent.tatoeba.17326",
+          "score": 0.4666666666666667
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that you can do that if you put your mind to it.\""
+    },
+    {
+      "id": "sent.tatoeba.7110638",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think we'll find it.",
+      "finalText": "I think we'll find it.",
+      "intakeSourceDigest": "b300b68366a06c29dae678b67ee5e3ca0a45f16e2607f74fed36b4b31b062b5a",
+      "controlledSourceDigest": "4c4d9e3f9af2386648874437d672ce216c22d90e4d1f8c72f758f853729de219",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110639",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.6924033",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2407757",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we'll find it.\""
+    },
+    {
+      "id": "sent.tatoeba.7110639",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that we'll find it.",
+      "finalText": "I think that we'll find it.",
+      "intakeSourceDigest": "c068fe6421122f689d11929bb897330cac28d6a8d0d79403d9d890df8c9acb55",
+      "controlledSourceDigest": "1698715b2414946a8595a407a4d2b027a09a0ae9c0c989052a04f6c6f377f555",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110638",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2564672",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3724048",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we'll find it.\""
+    },
+    {
+      "id": "sent.tatoeba.7110640",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think we'll be competitive.",
+      "finalText": "I think we'll be competitive.",
+      "intakeSourceDigest": "11123bc241a2e4c955193c66cb365865f0dc3678e12881f480f0f2fac47fbbc6",
+      "controlledSourceDigest": "0822dd2ba11be23dab728f584c2e16d5469f4c3dba446f90174620977938d0b7",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110641",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.6255162",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3724100",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we'll be competitive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110641",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that we'll be competitive.",
+      "finalText": "I think that we'll be competitive.",
+      "intakeSourceDigest": "f3e84cb49f95fa59375e1995d7345f05069955d93be523bbfdb6ecf8ffc2c82f",
+      "controlledSourceDigest": "0356a7216b91ceef0ab3e7b5f360501f49586435fbf9ed26b72a63506df48357",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110640",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.6255162",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.4828592",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we'll be competitive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110642",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that we should go to Boston.",
+      "finalText": "I think that we should go to Boston.",
+      "intakeSourceDigest": "9471d76ddc1ebd69c003ea4b87dfcdbcb9d0fd8daa98a214c5ebd353cef652fb",
+      "controlledSourceDigest": "e1ff0e19b995d5314d2f99894bb926d4a2953e88b5af3e0551c3ba7d91d731df",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110644",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110646",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110648",
+          "score": 0.7777777777777778
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we should go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110643",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think we ought to go to Boston.",
+      "finalText": "I think we ought to go to Boston.",
+      "intakeSourceDigest": "a2e8e42d268ceab2c14b3f246d2cb4b75eaf038cbe1248f340be620181fa39d6",
+      "controlledSourceDigest": "5d978538af5e0451b937072f7b4decc92da68d509a21ee7b6ebca061563f0e0f",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110644",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110645",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110647",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we ought to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110644",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that we ought to go to Boston.",
+      "finalText": "I think that we ought to go to Boston.",
+      "intakeSourceDigest": "41a562aa640c5c90928d4793667ae869721b33fc040d55cd882049d6913c6c61",
+      "controlledSourceDigest": "e35639714e83001eef249a61f58c35e7fd722fb66359d1f4e0abd65ff07851b5",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110643",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110642",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110646",
+          "score": 0.7777777777777778
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we ought to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110645",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think we need to go to Boston.",
+      "finalText": "I think we need to go to Boston.",
+      "intakeSourceDigest": "d5b8c34b9e4fb34bbec41b54d7f385212cc043e7560e35452fdb0799db4d3f32",
+      "controlledSourceDigest": "da8c4d2a9a0dd9d07d65e76afa6ff886c13173cac5c4a9ef424490a21ccb5281",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110646",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110643",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110647",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we need to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110646",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that we need to go to Boston.",
+      "finalText": "I think that we need to go to Boston.",
+      "intakeSourceDigest": "69304bf6a08f0249ea669fc4fa9df28e9bd8ff352ba33582210cc7e5c3e67656",
+      "controlledSourceDigest": "135387e6233c3c0f8baaf59976105b794dda482b1391b46ca0a25327f40c0d3a",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110645",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110642",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110644",
+          "score": 0.7777777777777778
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we need to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110647",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think we have to go to Boston.",
+      "finalText": "I think we have to go to Boston.",
+      "intakeSourceDigest": "849768633fff431b702add2eeb28df4929d513430717b3e1e4ac7f99cdbb3170",
+      "controlledSourceDigest": "087e55e806e12691c5e9a64f0ec52111c138d14b831576ef4ec9f4046f1f6dde",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110648",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110643",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110645",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we have to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110648",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I think that we have to go to Boston.",
+      "finalText": "I think that we have to go to Boston.",
+      "intakeSourceDigest": "2d9e41e24c0cf361a767b83c7e44b817d60c1df77fbd7178606547a5fab76791",
+      "controlledSourceDigest": "b7b3b9b2b14538c17711be970102fc9713469d211d4f7785f1cd435103053ebe",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110647",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.7110642",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.7110644",
+          "score": 0.7777777777777778
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we have to go to Boston.\""
+    },
+    {
+      "id": "sent.tatoeba.7110649",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think we have a role to play.",
+      "finalText": "I think we have a role to play.",
+      "intakeSourceDigest": "d9b3e63ce73ac98be1882c6e82bb74c535bfe07d44d37b6bdc95734ed7c750dd",
+      "controlledSourceDigest": "c4d5010b5b4b7bf450777cf92416a38e7d7d7ebff9f848ab2c5344902a8dfa87",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110650",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.3726561",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.5737179",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we have a role to play.\""
+    },
+    {
+      "id": "sent.tatoeba.7110650",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that we have a role to play.",
+      "finalText": "I think that we have a role to play.",
+      "intakeSourceDigest": "9f79e6b21281dbdf98a60cb9b85b0b688515d475665fc4716b19f0e52e5acc72",
+      "controlledSourceDigest": "17614f8dee5bf0fb5c534565b3685589e552cb8eacbf8376ca8b3a19a1fc41d9",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110649",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.7110648",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.3726561",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we have a role to play.\""
+    },
+    {
+      "id": "sent.tatoeba.7110651",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think we complement each other.",
+      "finalText": "I think we complement each other.",
+      "intakeSourceDigest": "c6fe55b636f4a0cddf2f2f24edd76c3217dca5e2d193d4908ca53cc6403567ea",
+      "controlledSourceDigest": "d996484d136b7338429daf74421e722cb62a1a91664d386bc27ff536fac40d3d",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110652",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.3724195",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3723344",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think we complement each other.\""
+    },
+    {
+      "id": "sent.tatoeba.7110652",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that we complement each other.",
+      "finalText": "I think that we complement each other.",
+      "intakeSourceDigest": "0929412b4b9e9f7cd5c618e0ba36f1aae4b67d734f7a10902a1067e756017136",
+      "controlledSourceDigest": "1e872f9f46e59cbfacdb5a00238620a0111b84a828181de5ea86b304d3b5d586",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110651",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.2573607",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3724195",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that we complement each other.\""
+    },
+    {
+      "id": "sent.tatoeba.7110653",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom probably wouldn't trust Mary.",
+      "finalText": "I think Tom probably wouldn't trust Mary.",
+      "intakeSourceDigest": "a4d3368e68202598eb32f2712119fdc6a872d623b7a6ef0ebe3121b3266b4ea6",
+      "controlledSourceDigest": "ce870aefc89c3f1271415dca5a626aa459c0088da4d4d28927baf139ec923084",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110654",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.3730134",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.6518818",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom probably wouldn't trust Mary.\""
+    },
+    {
+      "id": "sent.tatoeba.7110654",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom probably wouldn't trust Mary.",
+      "finalText": "I think that Tom probably wouldn't trust Mary.",
+      "intakeSourceDigest": "9eeb2c7332f79b8cd729d94e74280545745803e268077a7f0c687729414ef2d8",
+      "controlledSourceDigest": "8e8b2b9f95e8a6dad1c658d94ffd3585cb3efae75aa79d9c5cd063a38689a8d6",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110653",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.3727887",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3730134",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom probably wouldn't trust Mary.\""
+    },
+    {
+      "id": "sent.tatoeba.7110655",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom wouldn't be thrilled if he knew what was happening.",
+      "finalText": "I think Tom wouldn't be thrilled if he knew what was happening.",
+      "intakeSourceDigest": "1dd0d543c44a408943e93d1250bdd1ef9949960c8cafab7a60c50dfab3103509",
+      "controlledSourceDigest": "12bb7c686fbdd16d1b4433b28329e8ba9e5b9f9158e7ee6966ee45037358be14",
+      "maximumTokenJaccard": 0.9231,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110656",
+          "score": 0.9230769230769231
+        },
+        {
+          "id": "sent.tatoeba.7110482",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.7110485",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom wouldn't be thrilled if he knew what was happening.\""
+    },
+    {
+      "id": "sent.tatoeba.7110656",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom wouldn't be thrilled if he knew what was happening.",
+      "finalText": "I think that Tom wouldn't be thrilled if he knew what was happening.",
+      "intakeSourceDigest": "72a3bd755e4abd9eae7e6dde7bbcbdb020f50d3f658fb0ba2d8728b392054eda",
+      "controlledSourceDigest": "be510f8f306bef30543229622af46350f88c9a742f9f00a1b1c8ee7486d2be02",
+      "maximumTokenJaccard": 0.9231,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110655",
+          "score": 0.9230769230769231
+        },
+        {
+          "id": "sent.tatoeba.7110483",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.7110484",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom wouldn't be thrilled if he knew what was happening.\""
+    },
+    {
+      "id": "sent.tatoeba.7110657",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom would like to be forgiven.",
+      "finalText": "I think Tom would like to be forgiven.",
+      "intakeSourceDigest": "139d2a0f4ffb46ab2c449f382094db9290b763f75d147fb774aaa433442ce285",
+      "controlledSourceDigest": "9f8ce214c6708695130fb886ae53ba84484fe9a7b565097b1adfb0c7f09b4f35",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110658",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.5748137",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would like to be forgiven.\""
+    },
+    {
+      "id": "sent.tatoeba.7110658",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom would like to be forgiven.",
+      "finalText": "I think that Tom would like to be forgiven.",
+      "intakeSourceDigest": "cafa571ccdc8d68832432847d346ef638bf1cbf84c4a024653c22fc0534787e9",
+      "controlledSourceDigest": "8f0c69c0582988bd9cf7152eb499291f161ede21d87d18837b024880bdc37502",
+      "maximumTokenJaccard": 0.8889,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110657",
+          "score": 0.8888888888888888
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would like to be forgiven.\""
+    },
+    {
+      "id": "sent.tatoeba.7110659",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think Tom would be unfazed by that.",
+      "finalText": "I think Tom would be unfazed by that.",
+      "intakeSourceDigest": "3cacaf98758fff893b89357c749350fb6812393b1995fc063c510a616a94940b",
+      "controlledSourceDigest": "93c670d0da25bfc6db051296d54ae154c25b81be5289c7b3e171f7e425adc0e6",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110660",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be unfazed by that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110660",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think that Tom would be unfazed by that.",
+      "finalText": "I think that Tom would be unfazed by that.",
+      "intakeSourceDigest": "16df5e0ab69a0e341243545550f669fc9ef142c24706c27cd59335dbded46143",
+      "controlledSourceDigest": "ab0b4d93c9467e0e21e12ac4e3e965fd924623f18c5694cad7931550e21e6f04",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110659",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be unfazed by that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110661",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom would be thrilled.",
+      "finalText": "I think Tom would be thrilled.",
+      "intakeSourceDigest": "5b3486391893cc63ddefd83115c499c4ec76dd53bff275f043b219b6f9bf50b6",
+      "controlledSourceDigest": "ef2cf22d194c00d27951b1a723fc465143eca42b04ed345cc9a0c18b2bdcee39",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110667",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be thrilled.\""
+    },
+    {
+      "id": "sent.tatoeba.7110662",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom would be thrilled.",
+      "finalText": "I think that Tom would be thrilled.",
+      "intakeSourceDigest": "898c35268df63f9a8967520ffe5c4ee0660cf7ffd630d05dc1f3367113fce6cd",
+      "controlledSourceDigest": "dba47eab64f6cb926c8c255aa2e6ea2bad2ac6aa7b56f68bf2947dcd3a19ccda",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110668",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be thrilled.\""
+    },
+    {
+      "id": "sent.tatoeba.7110663",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be supportive.",
+      "finalText": "I think Tom would be supportive.",
+      "intakeSourceDigest": "ead555e8696429723d1f75f28f82173b69a75cdfe3f2d8d50ad9da8f07e391f3",
+      "controlledSourceDigest": "03b78dd945a06771071ef958313eb18b7c2307aa2535ea8d3e53b1622abf24b9",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110667",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be supportive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110664",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that Tom would be supportive.",
+      "finalText": "I think that Tom would be supportive.",
+      "intakeSourceDigest": "c81be9fe780bfeebe5008a5cb7618bc2302f862ed9b588855650db7767ab3a39",
+      "controlledSourceDigest": "5efe05f999f0dbd7df578bd7845760637e6398557220a0647a791e29e8e2225f",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110668",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be supportive.\""
+    },
+    {
+      "id": "sent.tatoeba.7110665",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom would be sensible about that.",
+      "finalText": "I think Tom would be sensible about that.",
+      "intakeSourceDigest": "363a29d46e496f86b5a0c2c18ff779e43cdb9ddc7494fac6c3ce8ec218675372",
+      "controlledSourceDigest": "4296835d581a982a46bcb8b64b07007f14bb925edca3efcb36d607b82f6de3ff",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110666",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be sensible about that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110666",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom would be sensible about that.",
+      "finalText": "I think that Tom would be sensible about that.",
+      "intakeSourceDigest": "9fde205ab0340e757eeae182920238187680ac0b8176729a3445f090650d2e38",
+      "controlledSourceDigest": "5a9072daf27ca5eacec885642d126f74dfc14a06e2d9f7a8d150d47ce34d9dd7",
+      "maximumTokenJaccard": 1,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110665",
+          "score": 1
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.6666666666666666
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be sensible about that.\""
+    },
+    {
+      "id": "sent.tatoeba.7110667",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think Tom would be self-conscious.",
+      "finalText": "I think Tom would be self-conscious.",
+      "intakeSourceDigest": "1fe6efa8decf5cd01b55dfd97ac6e5fab39735c830e70699fe0dd5a02114ce30",
+      "controlledSourceDigest": "11077a391f6d8fea076d3e90ee199dcf1416d65bd379e588cc28d5f43c15f30a",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110668",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be self-conscious.\""
+    },
+    {
+      "id": "sent.tatoeba.7110668",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I think that Tom would be self-conscious.",
+      "finalText": "I think that Tom would be self-conscious.",
+      "intakeSourceDigest": "86f0f2ba0185ac1fdc0e9e484c7c3bede3c4f61279a3f55a5bf1bd30bb56bad3",
+      "controlledSourceDigest": "23f300db6c24628561696e7917c6627d064352753e0ea29da7a861686e3a0ae1",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110667",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be self-conscious.\""
+    },
+    {
+      "id": "sent.tatoeba.7110669",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think Tom would be offended.",
+      "finalText": "I think Tom would be offended.",
+      "intakeSourceDigest": "0cbe9bc01524e5f34d5ee1606ca9d66118ac954fa04b87d6633e2401b7a6af45",
+      "controlledSourceDigest": "7dbc85e55bc88b6aa813851d9831b25b4cf45fd770c1b66a9d9432ec09932b03",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110670",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be offended.\""
+    },
+    {
+      "id": "sent.tatoeba.7110670",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think that Tom would be offended.",
+      "finalText": "I think that Tom would be offended.",
+      "intakeSourceDigest": "cf6212e6b59361958bcb0e6598ca81aec12639a15a68da84f55e21d40369cd46",
+      "controlledSourceDigest": "56fd95692fabc00ea3e5a7ef49985d701c29b91f52ead4cd132e396f068ed9c4",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110669",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be offended.\""
+    },
+    {
+      "id": "sent.tatoeba.7110671",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be obedient.",
+      "finalText": "I think Tom would be obedient.",
+      "intakeSourceDigest": "907782f29a48c134c0b1f8b041d8139120ce346c9ecdbc78f0ab19115193c136",
+      "controlledSourceDigest": "16f805a2aa84275e196ece0b70aad1dd2873da0ebac5f1d50162282e0f4e432c",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110672",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be obedient.\""
+    },
+    {
+      "id": "sent.tatoeba.7110672",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that Tom would be obedient.",
+      "finalText": "I think that Tom would be obedient.",
+      "intakeSourceDigest": "edd7de1066b6089fc5af307e98e4776bd15d81779d3924fe55532af8ced82baa",
+      "controlledSourceDigest": "e93199aaf4884a7162f655bdbed7df62a1fc0bcb3777ec4ce8f32f29d4adf9d2",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110671",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be obedient.\""
+    },
+    {
+      "id": "sent.tatoeba.7110673",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be irritated.",
+      "finalText": "I think Tom would be irritated.",
+      "intakeSourceDigest": "a158635e2245de7580abe2fd43e18cc99a4423695d1d23a6e90be8fd78cce3fd",
+      "controlledSourceDigest": "7cf331767f5f1112ddb96ae8e0d09301be0b68f42c301b194a4fd3dd4137e19b",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110674",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be irritated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110674",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that Tom would be irritated.",
+      "finalText": "I think that Tom would be irritated.",
+      "intakeSourceDigest": "da912e827a2a5afba2fea50ee7388cd1c1b0764e21581052f5e6d57507f47427",
+      "controlledSourceDigest": "43811fb4184947209032f53246af4f228789af945332f776cafebf136052afb4",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110673",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be irritated.\""
+    },
+    {
+      "id": "sent.tatoeba.7110675",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be horrified.",
+      "finalText": "I think Tom would be horrified.",
+      "intakeSourceDigest": "9204f2d7ee5846ae731b38522b307cebbae89c338f7125d6c1451de1fc292ef4",
+      "controlledSourceDigest": "140a69a7fbf08bca70eea5835b98654b5163193789aa35d4747ada1ebf6de496",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110676",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be horrified.\""
+    },
+    {
+      "id": "sent.tatoeba.7110676",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that Tom would be horrified.",
+      "finalText": "I think that Tom would be horrified.",
+      "intakeSourceDigest": "dd6dbbdc60a501d7a18438554bea39bbba5390c5079e7a1a5a8baeebf4e29c74",
+      "controlledSourceDigest": "12757134b1041ac8dc334183fc3119c01938ad056ebda0cb70390b2f7bbb7085",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110675",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be horrified.\""
+    },
+    {
+      "id": "sent.tatoeba.7110677",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be furious.",
+      "finalText": "I think Tom would be furious.",
+      "intakeSourceDigest": "6f7f6bcd1641591707b1a831b99f839df032c7c3e45db48b75399ae1de3c7dc8",
+      "controlledSourceDigest": "7604fc8bc975f282e8bead95b50d1d0ba5d30b2dfe9cba92283254c837a83985",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110678",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be furious.\""
+    },
+    {
+      "id": "sent.tatoeba.7110678",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think that Tom would be furious.",
+      "finalText": "I think that Tom would be furious.",
+      "intakeSourceDigest": "1121f79022b0ac5b3883d4a0e9004e955a54ace4eb7270ecd2f316260fabe360",
+      "controlledSourceDigest": "ec7744ba57977c893d21e29bb0f14cb2d7a78924915424e4e13c54705396fa13",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110677",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.7110662",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.7110664",
+          "score": 0.75
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think that Tom would be furious.\""
+    },
+    {
+      "id": "sent.tatoeba.7110679",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think Tom would be distressed.",
+      "finalText": "I think Tom would be distressed.",
+      "intakeSourceDigest": "e42d1a78ba4eb757c103e496babf79b0afaba43ec93dcb796ed1679fc7380c45",
+      "controlledSourceDigest": "92039175947e1933d6e8bec7bd127addf2c87d387c90a5101eb391636db18f08",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.7110661",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110663",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.7110667",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Natural and clear everyday English: \"I think Tom would be distressed.\""
+    }
+  ]
+}
