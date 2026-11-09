@@ -1029,6 +1029,33 @@ The preceding verified checkpoint `f6d99b82d7531c0bf2bb694e26b41f45168e4a82` pas
 
 Continue English editorial batch 371 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 73,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
 
+## English editorial continuation: batches 371–380
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 371 | 200 | 185 | 15 | 2 |
+| 372 | 200 | 185 | 15 | 3 |
+| 373 | 200 | 187 | 13 | 1 |
+| 374 | 200 | 184 | 16 | 1 |
+| 375 | 200 | 191 | 9 | 2 |
+| 376 | 200 | 187 | 13 | 0 |
+| 377 | 200 | 184 | 16 | 2 |
+| 378 | 200 | 187 | 13 | 1 |
+| 379 | 200 | 186 | 14 | 0 |
+| 380 | 200 | 188 | 12 | 1 |
+| Total | 2,000 | 1,864 | 136 | 13 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Thirteen accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 371: inserted comma after introductory copular clause 'The question is' and corrected terminal question mark across two candidate records in The question is, do you want it? and The question is, how did Tom do that?; Batch 372: supplied missing indefinite article a in idiom a chip off the old block, inserted comma after introductory copular clause 'The main question is' and corrected terminal question mark in The main question is, will Tom do his work well?, inserted comma before coordinating conjunction and connecting independent clauses in The dining room is downstairs, and the library is on the third floor.; Batch 373: standardized open compound 'Some day' to adverb 'Someday' and inserted comma after introductory temporal adverb in Someday, when it's convenient for you, let's do that.; Batch 374: hyphenated compound modifier for-sale before noun sign in Is that a for-sale sign?; Batch 375: inserted comma after interjection 'No' before vocative direct address Tom in No, Tom, actually you're wrong., hyphenated compound noun thumbs-up in Tom responded with a thumbs-up.; Batch 377: hyphenated compound modifier common-sense before noun approach in It's a common-sense approach., hyphenated compound adjective tax-friendly in How tax-friendly is your state?; Batch 378: inserted comma before coordinating conjunction and connecting independent clauses in It was warm, and the weather was good.; Batch 380: inserted comma before coordinating conjunction and connecting independent clauses in My patients are waiting for me, and I'm stuck in a traffic jam.). Near duplicates, cross-corpus duplicates and intra-slice duplicate variations were removed during review. All 136 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 75,824 decisions, 68,796 published, 7,028 rejected and 1,174 disclosed edits. Runtime: 71,009 examples, 72,897 sentence records and 83,792 rich records; ledger: 90,820 applied decisions (83,792 publication and 7,028 deprecated). This continuation adds 1,864 examples across batches 371–380, leaving 28,991 more reviewed publications to reach 100,000. All 68,796 English-only approved objects match runtime exactly and pass both adapters (137,592 checks). Rejected IDs remain absent. Shard 138 was completed with 500 records, new shards `examples/139.json`, `140.json`, `141.json` (500 records each), and shard `examples/142.json` (9 records) are registered in the manifest. There are 46,350 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 121,947 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `27d8ed6bfc2c656c1c37c82eec4f4034b45069bb` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 381 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 75,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+
 
 
 
