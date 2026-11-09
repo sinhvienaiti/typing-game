@@ -85,11 +85,18 @@ if (topics.length!==300||examples.length!==expectedExampleCount||exercises.lengt
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
 if (tatoebaExamples.length!==300+tatoebaEnglishPublished.length||tatoebaTranslations.length!==300) errors.push("published Tatoeba runtime must include the historical 300 pairs and exactly the newly approved English-only examples");
+const exampleById=new Map();
+const exampleCounts=new Map();
+for (const record of examples) {
+  exampleById.set(record.id,record);
+  exampleCounts.set(record.id,(exampleCounts.get(record.id)||0)+1);
+}
 for (const controlled of tatoebaEnglishControlled) {
-  const matches=examples.filter(record=>record.id===controlled.id);
+  const count=exampleCounts.get(controlled.id)||0;
+  const match=exampleById.get(controlled.id);
   if (controlled.quality.state==="published") {
-    if (matches.length!==1||JSON.stringify(matches[0])!==JSON.stringify(controlled)) errors.push(controlled.id+": runtime differs from digest-bound approved source");
-  } else if (matches.length!==0) errors.push(controlled.id+": unapproved source leaked into runtime");
+    if (count!==1||JSON.stringify(match)!==JSON.stringify(controlled)) errors.push(controlled.id+": runtime differs from digest-bound approved source");
+  } else if (count!==0) errors.push(controlled.id+": unapproved source leaked into runtime");
 }
 const typingTextExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tt."));
 const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith("ex.cloze.tt."));

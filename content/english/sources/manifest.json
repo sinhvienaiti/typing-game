@@ -62,8 +62,8 @@
       "publishAllowed": true,
       "attributionRequired": true,
       "status": "reference",
-      "snapshot": "weekly-export-observed-2026-10-03",
-      "notes": "Published E06 Tatoeba records retain their original per-record weekly-export-2026-09-26 provenance. On 2026-10-03 CI observed checksum drift only in eng_sentences.tsv; the Vietnamese sentence and EN↔VI link files remained byte-identical. The explicit refresh review compared CI #577 vs #581 artifacts and found the same 16,267 filtered candidates and the exact same 300 selected pair IDs/texts in the same order. The refreshed English checksum is accepted for future candidate generation without mutating already-published pairs. Separate English-only intake is pinned in tatoeba-english-2026-10-31.json with an offline canonical extraction. Its experimental community ratings only prioritize local editorial review; they do not auto-publish content or replace the historical EN/VI/link pin. Per-sentence provenance retains the exact snapshot, current owner, contributor-history URL and modification disclosure.",
+      "snapshot": "weekly-export-observed-2026-11-07-v1",
+      "notes": "Published E06 Tatoeba records retain their original per-record weekly-export-2026-09-26 provenance. On 2026-11-07 official Tatoeba exports for eng_sentences.tsv, vie_sentences.tsv and eng-vie_links.tsv were acquired and checksum-verified under CC-BY-2.0-FR. The source upgrade yields 19,430 unique learning pairs for bilingual translation expansion while preserving all existing published pairs. Separate English-only intake is pinned in tatoeba-english-2026-10-31.json with an offline canonical extraction.",
       "releaseUrl": "https://downloads.tatoeba.org/exports/per_language/"
     },
     {

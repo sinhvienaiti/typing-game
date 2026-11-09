@@ -57,6 +57,29 @@ const collocations=phrases.groups.collocations??[];
 const verbPatterns=phrases.groups["verb-patterns"]??[];
 const phraseItems=phrases.groups.items??[];
 
+const preparedExamples=examples.map(example=>{
+  const normKey=normalizeSentenceKey(example.text);
+  return {
+    id:example.id,
+    text:example.text,
+    cefr:example.cefr,
+    lexicalIds:example.lexicalIds??[],
+    paddedKey:normKey?" "+normKey+" ":"",
+  };
+});
+
+function matchNeedle(needleKey,limit=5){
+  if(!needleKey) return [];
+  const matches=[];
+  for(const example of preparedExamples){
+    if(example.paddedKey.includes(needleKey)){
+      matches.push(example.id);
+      if(matches.length===limit) break;
+    }
+  }
+  return matches;
+}
+
 const examplesByLexeme=new Map();
 for(const example of examples){
   for(const lexicalId of example.lexicalIds??[]) add(examplesByLexeme,lexicalId,example.id);
@@ -69,11 +92,15 @@ for(const sense of senses) senseCandidates.set(sense.id,(examplesByLexeme.get(se
 const missingLexemes=lexemes.filter(record=>(lexemeCandidates.get(record.id)?.length??0)===0);
 const fallbackFormEvidence=missingLexemes.map(lexeme=>{
   const forms=[lexeme.headword,...(lexeme.forms??[])].filter((value,index,values)=>typeof value==="string"&&value.trim()!==""&&values.indexOf(value)===index);
+  const formKeys=forms.map(form=>{
+    const k=normalizeSentenceKey(form);
+    return k?{form,key:" "+k+" "}:null;
+  }).filter(Boolean);
   const candidates=[];
-  for(const example of examples){
-    const matchedForm=forms.find(form=>boundedContains(example.text,form));
-    if(!matchedForm) continue;
-    candidates.push({id:example.id,text:example.text,cefr:example.cefr,matchedForm,lexicalIds:example.lexicalIds??[]});
+  for(const example of preparedExamples){
+    const matched=formKeys.find(item=>example.paddedKey.includes(item.key));
+    if(!matched) continue;
+    candidates.push({id:example.id,text:example.text,cefr:example.cefr,matchedForm:matched.form,lexicalIds:example.lexicalIds});
     if(candidates.length===12) break;
   }
   return {id:lexeme.id,headword:lexeme.headword,forms,vi:lexeme.vi,cefr:lexeme.cefr,senseIds:lexeme.senseIds,candidates};
@@ -81,30 +108,18 @@ const fallbackFormEvidence=missingLexemes.map(lexeme=>{
 
 const collocationCandidates=new Map();
 for(const record of collocations){
-  const matches=[];
-  for(const example of examples){
-    if(boundedContains(example.text,record.text)) matches.push(example.id);
-    if(matches.length===5) break;
-  }
-  collocationCandidates.set(record.id,matches);
+  const k=normalizeSentenceKey(record.text);
+  collocationCandidates.set(record.id,k?matchNeedle(" "+k+" ",5):[]);
 }
 const phraseCandidates=new Map();
 for(const record of phraseItems){
-  const matches=[];
-  for(const example of examples){
-    if(boundedContains(example.text,record.text)) matches.push(example.id);
-    if(matches.length===5) break;
-  }
-  phraseCandidates.set(record.id,matches);
+  const k=normalizeSentenceKey(record.text);
+  phraseCandidates.set(record.id,k?matchNeedle(" "+k+" ",5):[]);
 }
 const verbPatternLemmaCandidates=new Map();
 for(const record of verbPatterns){
-  const matches=[];
-  for(const example of examples){
-    if(boundedContains(example.text,record.lemma)) matches.push(example.id);
-    if(matches.length===5) break;
-  }
-  verbPatternLemmaCandidates.set(record.id,matches);
+  const k=normalizeSentenceKey(record.lemma);
+  verbPatternLemmaCandidates.set(record.id,k?matchNeedle(" "+k+" ",5):[]);
 }
 
 const report={

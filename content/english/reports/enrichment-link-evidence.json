@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 86737,
+  "examplesScanned": 114727,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,9 +153,9 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 95,
-    "withoutCandidates": 4905,
-    "coverage": 0.019,
+    "withCandidates": 106,
+    "withoutCandidates": 4894,
+    "coverage": 0.0212,
     "sampleMatched": [
       {
         "id": "col.00000001",
@@ -208,7 +208,9 @@
         "id": "col.00000012",
         "exampleIds": [
           "sent.tatoeba.240593",
-          "sent.tatoeba.5725221"
+          "sent.tatoeba.5725221",
+          "sent.tatoeba.10117545",
+          "sent.tatoeba.11695220"
         ]
       },
       {
@@ -216,7 +218,9 @@
         "exampleIds": [
           "sent.tatoeba.1740676",
           "sent.tatoeba.1762536",
-          "sent.tatoeba.7842169"
+          "sent.tatoeba.7842169",
+          "sent.tatoeba.10908692",
+          "sent.tatoeba.11119957"
         ]
       },
       {
@@ -229,13 +233,11 @@
         ]
       },
       {
-        "id": "col.00000016",
+        "id": "col.00000015",
         "exampleIds": [
-          "sent.grb2.07.01.2",
-          "sent.tatoeba.269846",
-          "sent.tatoeba.3727379",
-          "sent.tatoeba.5353542",
-          "sent.tatoeba.5730916"
+          "sent.tatoeba.10110299",
+          "sent.tatoeba.10110300",
+          "sent.tatoeba.10110304"
         ]
       }
     ],
@@ -245,7 +247,6 @@
       "col.00000007",
       "col.00000008",
       "col.00000009",
-      "col.00000015",
       "col.00000018",
       "col.00000019",
       "col.00000030",
@@ -254,7 +255,6 @@
       "col.00000033",
       "col.00000035",
       "col.00000037",
-      "col.00000038",
       "col.00000048",
       "col.00000049",
       "col.00000050",
@@ -264,14 +264,16 @@
       "col.00000055",
       "col.00000056",
       "col.00000058",
-      "col.00000059"
+      "col.00000059",
+      "col.00000060",
+      "col.00000061"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 322,
-    "withoutCandidates": 3863,
-    "coverage": 0.0769,
+    "withCandidates": 350,
+    "withoutCandidates": 3835,
+    "coverage": 0.0836,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -377,12 +379,10 @@
     "sampleMissing": [
       "pv.00000035",
       "pv.00000039",
-      "pv.00000044",
       "chunk.00000003",
       "chunk.00000006",
       "chunk.00000011",
       "chunk.00000028",
-      "chunk.00000030",
       "chunk.00000031",
       "idiom.00000001",
       "idiom.00000002",
@@ -399,14 +399,16 @@
       "idiom.00000014",
       "pv.00000066",
       "chunk.00000047",
-      "idiom.00000016"
+      "idiom.00000016",
+      "idiom.00000017",
+      "idiom.00000018"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 481,
-    "withoutCandidates": 29,
-    "coverage": 0.9431,
+    "withCandidates": 488,
+    "withoutCandidates": 22,
+    "coverage": 0.9569,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -510,13 +512,8 @@
       }
     ],
     "sampleMissing": [
-      "pat.00000047",
-      "pat.00000105",
-      "pat.00000241",
       "pat.00000252",
-      "pat.00000253",
       "pat.00000256",
-      "pat.00000257",
       "pat.00000265",
       "pat.00000266",
       "pat.00000269",
@@ -531,10 +528,12 @@
       "pat.00000363",
       "pat.00000364",
       "pat.00000431",
-      "pat.00000436",
       "pat.00000437",
       "pat.00000475",
-      "pat.00000495"
+      "pat.00000495",
+      "pat.00000497",
+      "pat.00000499",
+      "pat.00000510"
     ]
   }
 }
