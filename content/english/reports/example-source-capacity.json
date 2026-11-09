@@ -5,7 +5,7 @@
   "target": {
     "id": "example-sentences",
     "minimum": 100000,
-    "published": 106732,
+    "published": 110729,
     "remainingPublishedDeficit": 0
   },
   "currentBoundedQueue": {
@@ -18,7 +18,7 @@
     "passages": 300,
     "eligibleUniqueRawSentences": 5588,
     "unreviewedRawSentences": 4588,
-    "optimisticPublishedUpperBound": 111320,
+    "optimisticPublishedUpperBound": 115317,
     "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 0,
     "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
   },
@@ -52,15 +52,15 @@
         }
       ],
       "sourceEvidenceCandidates": 122212,
-      "availableAfterControlledExclusions": 10350,
-      "editorialDecisions": 111824,
-      "publishedExamples": 104519,
-      "rejected": 7305,
+      "availableAfterControlledExclusions": 6350,
+      "editorialDecisions": 115824,
+      "publishedExamples": 108516,
+      "rejected": 7308,
       "approval": "candidate-evidence-only-unless-explicitly-reviewed"
     }
   ],
   "combinedCapacity": {
-    "optimisticPublishedUpperBound": 121670,
+    "optimisticPublishedUpperBound": 121667,
     "minimumAdditionalSourceGap": 0,
     "caveat": "Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval."
   },
@@ -153,8 +153,8 @@
     }
   ],
   "currentEvidence": {
-    "sentenceManifestSha256": "5544886c2326cbca9665e1113cd98260715a774c003a254de609fc84d4f94fa7",
-    "reviewLedgerReportSha256": "4e819c4ea6366011a080f6639a8486285d2466fc485845aaf820b162e479435e"
+    "sentenceManifestSha256": "4c3619dd7f1a2010bf735a33f610f716a0e8db00c3e85588aa6f24297b141160",
+    "reviewLedgerReportSha256": "39902dd910524d45c7801d5eaa8ea86f11d681c2d3ed232e4c4f7f990eb06963"
   },
   "transition": {
     "step2Pass": false,
