@@ -1072,6 +1072,33 @@ The preceding verified checkpoint `27d8ed6bfc2c656c1c37c82eec4f4034b45069bb` pas
 
 Continue English editorial batch 381 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 75,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
 
+## English editorial continuation: batches 381–390
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 381 | 200 | 185 | 15 | 1 |
+| 382 | 200 | 186 | 14 | 1 |
+| 383 | 200 | 185 | 15 | 1 |
+| 384 | 200 | 187 | 13 | 2 |
+| 385 | 200 | 185 | 15 | 1 |
+| 386 | 200 | 180 | 20 | 1 |
+| 387 | 200 | 173 | 27 | 0 |
+| 388 | 200 | 173 | 27 | 1 |
+| 389 | 200 | 171 | 29 | 1 |
+| 390 | 200 | 184 | 16 | 2 |
+| Total | 2,000 | 1,809 | 191 | 11 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Eleven accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 381: capitalized proper holiday noun Valentine's Day in How can I dump my girlfriend on Valentine's Day?; Batch 382: corrected third-person singular present verb consume to consumes in How much sugar do you think the average person consumes every day?; Batch 383: hyphenated compound adjective last-ditch preceding noun in Tom and Mary are making a last-ditch effort to avoid a divorce.; Batch 384: inserted missing infinitive marker to before catch up in Tom wasn't walking too fast for Mary to catch up with him., corrected singular noun week to plural weeks following quantifier three in Tom went to Boston, where he stayed for three weeks.; Batch 385: inserted missing indefinite article a in quantifier phrase quite a lot in Tom seemed to know quite a lot about baseball.; Batch 386: corrected hyphenated straight-forward to standard closed compound straightforward in Tom is an honest, straightforward guy.; Batch 388: hyphenated compound age adjective three-year-old before noun in Tom is a three-year-old Canadian boy.; Batch 389: corrected plural possessive arms' to singular arm's in idiom at arm's length in Tom kept most of us at arm's length.; Batch 390: hyphenated compound idiom scot-free in Tom is likely to get off scot-free., inserted comma after introductory adverbial clause in Every time I think about it, I get choked up.). Near duplicates, cross-corpus duplicates and intra-slice duplicate variations were removed during review. All 191 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 77,824 decisions, 70,605 published, 7,219 rejected and 1,185 disclosed edits. Runtime: 72,818 examples, 74,706 sentence records and 85,601 rich records; ledger: 92,820 applied decisions (85,601 publication and 7,219 deprecated). This continuation adds 1,809 examples across batches 381–390, leaving 27,182 more reviewed publications to reach 100,000. All 70,605 English-only approved objects match runtime exactly and pass both adapters (141,210 checks). Rejected IDs remain absent. Shard 142 was completed with 500 records, new shards `examples/143.json`, `144.json` (500 records each), and shard `examples/145.json` (318 records) are registered in the manifest. There are 44,350 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 121,756 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `9b744f2e54c0f9201636a087b35c6c27ac7901c4` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 391 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 77,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+
 
 
 
