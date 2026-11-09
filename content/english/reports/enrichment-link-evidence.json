@@ -7,7 +7,7 @@
     "collocationAndPhrase": "normalized whole-phrase boundary match against published examples",
     "verbPattern": "lemma-only candidate discovery; NOT safe for automatic linking without frame review"
   },
-  "examplesScanned": 13851,
+  "examplesScanned": 86737,
   "lexemes": {
     "total": 300,
     "withCandidates": 300,
@@ -153,22 +153,31 @@
   "e03FallbackFormEvidence": [],
   "collocations": {
     "total": 5000,
-    "withCandidates": 50,
-    "withoutCandidates": 4950,
-    "coverage": 0.01,
+    "withCandidates": 95,
+    "withoutCandidates": 4905,
+    "coverage": 0.019,
     "sampleMatched": [
       {
         "id": "col.00000001",
         "exampleIds": [
           "sent.tatoeba.17786",
-          "sent.tatoeba.29107"
+          "sent.tatoeba.29107",
+          "sent.tatoeba.2802889",
+          "sent.tatoeba.6392868"
+        ]
+      },
+      {
+        "id": "col.00000003",
+        "exampleIds": [
+          "sent.tatoeba.807437"
         ]
       },
       {
         "id": "col.00000004",
         "exampleIds": [
           "sent.tatoeba.16202",
-          "sent.tatoeba.269787"
+          "sent.tatoeba.269787",
+          "sent.tatoeba.2267178"
         ]
       },
       {
@@ -188,79 +197,81 @@
         ]
       },
       {
+        "id": "col.00000011",
+        "exampleIds": [
+          "sent.tatoeba.2298173",
+          "sent.tatoeba.4600089",
+          "sent.tatoeba.7130084"
+        ]
+      },
+      {
         "id": "col.00000012",
         "exampleIds": [
-          "sent.tatoeba.240593"
+          "sent.tatoeba.240593",
+          "sent.tatoeba.5725221"
+        ]
+      },
+      {
+        "id": "col.00000013",
+        "exampleIds": [
+          "sent.tatoeba.1740676",
+          "sent.tatoeba.1762536",
+          "sent.tatoeba.7842169"
         ]
       },
       {
         "id": "col.00000014",
         "exampleIds": [
-          "sent.tt.l003-p002.002"
+          "sent.tt.l003-p002.002",
+          "sent.tatoeba.2562135",
+          "sent.tatoeba.2966113",
+          "sent.tatoeba.5617634"
         ]
       },
       {
         "id": "col.00000016",
         "exampleIds": [
           "sent.grb2.07.01.2",
-          "sent.tatoeba.269846"
-        ]
-      },
-      {
-        "id": "col.00000020",
-        "exampleIds": [
-          "sent.tatoeba.29167",
-          "sent.tatoeba.68760",
-          "sent.tatoeba.249414",
-          "sent.tatoeba.275797"
-        ]
-      },
-      {
-        "id": "col.00000022",
-        "exampleIds": [
-          "sent.tatoeba.271617"
-        ]
-      },
-      {
-        "id": "col.00000025",
-        "exampleIds": [
-          "sent.tatoeba.287098"
+          "sent.tatoeba.269846",
+          "sent.tatoeba.3727379",
+          "sent.tatoeba.5353542",
+          "sent.tatoeba.5730916"
         ]
       }
     ],
     "sampleMissing": [
       "col.00000002",
-      "col.00000003",
       "col.00000005",
       "col.00000007",
       "col.00000008",
       "col.00000009",
-      "col.00000011",
-      "col.00000013",
       "col.00000015",
-      "col.00000017",
       "col.00000018",
       "col.00000019",
-      "col.00000021",
-      "col.00000023",
-      "col.00000024",
-      "col.00000026",
-      "col.00000027",
-      "col.00000029",
       "col.00000030",
       "col.00000031",
       "col.00000032",
       "col.00000033",
-      "col.00000034",
       "col.00000035",
-      "col.00000037"
+      "col.00000037",
+      "col.00000038",
+      "col.00000048",
+      "col.00000049",
+      "col.00000050",
+      "col.00000051",
+      "col.00000053",
+      "col.00000054",
+      "col.00000055",
+      "col.00000056",
+      "col.00000058",
+      "col.00000059"
     ]
   },
   "phraseItems": {
     "total": 4185,
-    "withCandidates": 215,
-    "withoutCandidates": 3970,
-    "coverage": 0.0514,
+    "withCandidates": 322,
+    "withoutCandidates": 3863,
+    "coverage": 0.0769,
     "sampleMatched": [
       {
         "id": "pv.00000001",
@@ -273,19 +284,33 @@
         ]
       },
       {
+        "id": "pv.00000002",
+        "exampleIds": [
+          "sent.tatoeba.323200",
+          "sent.tatoeba.671855",
+          "sent.tatoeba.681515",
+          "sent.tatoeba.681567",
+          "sent.tatoeba.1230476"
+        ]
+      },
+      {
         "id": "pv.00000003",
         "exampleIds": [
           "sent.tt.l002-p006.003",
           "sent.tatoeba.6043",
           "sent.tatoeba.34104",
-          "sent.tatoeba.52430"
+          "sent.tatoeba.52430",
+          "sent.tatoeba.2561564"
         ]
       },
       {
         "id": "pv.00000004",
         "exampleIds": [
           "sent.gra1.02.01.2",
-          "sent.tatoeba.22357"
+          "sent.tatoeba.22357",
+          "sent.tatoeba.319598",
+          "sent.tatoeba.322740",
+          "sent.tatoeba.1740487"
         ]
       },
       {
@@ -302,7 +327,10 @@
         "id": "pv.00000006",
         "exampleIds": [
           "sent.tatoeba.33891",
-          "sent.tatoeba.61905"
+          "sent.tatoeba.61905",
+          "sent.tatoeba.947442",
+          "sent.tatoeba.1499415",
+          "sent.tatoeba.1744757"
         ]
       },
       {
@@ -321,7 +349,8 @@
           "sent.tatoeba.16064",
           "sent.tatoeba.25330",
           "sent.tatoeba.240433",
-          "sent.tatoeba.293122"
+          "sent.tatoeba.293122",
+          "sent.tatoeba.320839"
         ]
       },
       {
@@ -339,53 +368,45 @@
         "exampleIds": [
           "sent.tatoeba.48809",
           "sent.tatoeba.56787",
-          "sent.tatoeba.269471"
-        ]
-      },
-      {
-        "id": "pv.00000011",
-        "exampleIds": [
-          "sent.tatoeba.18821",
-          "sent.tatoeba.40869",
-          "sent.tatoeba.64793",
-          "sent.tatoeba.243922",
-          "sent.tatoeba.259408"
+          "sent.tatoeba.269471",
+          "sent.tatoeba.300940",
+          "sent.tatoeba.307142"
         ]
       }
     ],
     "sampleMissing": [
-      "pv.00000002",
-      "pv.00000013",
-      "pv.00000023",
       "pv.00000035",
-      "pv.00000037",
       "pv.00000039",
-      "pv.00000042",
       "pv.00000044",
-      "pv.00000046",
-      "pv.00000047",
-      "pv.00000049",
-      "chunk.00000001",
       "chunk.00000003",
       "chunk.00000006",
       "chunk.00000011",
-      "chunk.00000013",
-      "chunk.00000014",
-      "chunk.00000015",
-      "chunk.00000026",
-      "chunk.00000027",
       "chunk.00000028",
-      "chunk.00000029",
       "chunk.00000030",
       "chunk.00000031",
-      "chunk.00000033"
+      "idiom.00000001",
+      "idiom.00000002",
+      "idiom.00000003",
+      "idiom.00000005",
+      "idiom.00000006",
+      "idiom.00000007",
+      "idiom.00000010",
+      "chunk.00000041",
+      "chunk.00000042",
+      "chunk.00000045",
+      "idiom.00000012",
+      "idiom.00000013",
+      "idiom.00000014",
+      "pv.00000066",
+      "chunk.00000047",
+      "idiom.00000016"
     ]
   },
   "verbPatternsLemmaEvidence": {
     "total": 510,
-    "withCandidates": 439,
-    "withoutCandidates": 71,
-    "coverage": 0.8608,
+    "withCandidates": 481,
+    "withoutCandidates": 29,
+    "coverage": 0.9431,
     "sampleMatched": [
       {
         "id": "pat.00000001",
@@ -458,6 +479,16 @@
         ]
       },
       {
+        "id": "pat.00000008",
+        "exampleIds": [
+          "sent.tatoeba.309457",
+          "sent.tatoeba.542922",
+          "sent.tatoeba.681878",
+          "sent.tatoeba.803341",
+          "sent.tatoeba.1540774"
+        ]
+      },
+      {
         "id": "pat.00000009",
         "exampleIds": [
           "sent.tt.l005-p001.008",
@@ -476,44 +507,34 @@
           "sent.tatoeba.259151",
           "sent.tatoeba.268894"
         ]
-      },
-      {
-        "id": "pat.00000011",
-        "exampleIds": [
-          "sent.00000016",
-          "sent.gra2.05.02.1",
-          "sent.grb2.01.07.1",
-          "sent.tt.l001-p004.002",
-          "sent.tt.l001-p004.016"
-        ]
       }
     ],
     "sampleMissing": [
-      "pat.00000008",
       "pat.00000047",
-      "pat.00000081",
-      "pat.00000082",
-      "pat.00000084",
-      "pat.00000104",
       "pat.00000105",
-      "pat.00000143",
-      "pat.00000176",
-      "pat.00000186",
-      "pat.00000205",
       "pat.00000241",
       "pat.00000252",
       "pat.00000253",
-      "pat.00000254",
       "pat.00000256",
       "pat.00000257",
-      "pat.00000259",
       "pat.00000265",
       "pat.00000266",
       "pat.00000269",
       "pat.00000271",
-      "pat.00000272",
-      "pat.00000276",
-      "pat.00000283"
+      "pat.00000283",
+      "pat.00000286",
+      "pat.00000292",
+      "pat.00000293",
+      "pat.00000296",
+      "pat.00000315",
+      "pat.00000353",
+      "pat.00000363",
+      "pat.00000364",
+      "pat.00000431",
+      "pat.00000436",
+      "pat.00000437",
+      "pat.00000475",
+      "pat.00000495"
     ]
   }
 }
