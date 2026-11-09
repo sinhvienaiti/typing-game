@@ -925,5 +925,31 @@ The preceding verified checkpoint `52c8023dc1fd4f1e434a83c5336c6668b3f388cc` pas
 
 Continue English editorial batch 331 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 65,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
 
+## English editorial continuation: batches 331–340
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 331 | 200 | 193 | 7 | 1 |
+| 332 | 200 | 192 | 8 | 1 |
+| 333 | 200 | 189 | 11 | 3 |
+| 334 | 200 | 190 | 10 | 2 |
+| 335 | 200 | 196 | 4 | 1 |
+| 336 | 200 | 189 | 11 | 1 |
+| 337 | 200 | 191 | 9 | 1 |
+| 338 | 200 | 195 | 5 | 1 |
+| 339 | 200 | 194 | 6 | 2 |
+| 340 | 200 | 197 | 3 | 1 |
+| Total | 2,000 | 1,926 | 74 | 14 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Fourteen accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 331: supplied definite article and expanded contraction in The kettle is on. What do you fancy?; Batch 332: expanded contracted verb in I think the pizza is here.; Batch 333: standardized unhyphenated compound noun toaster oven, inserted comma after introductory prepositional phrase in In spite of his considerable wealth,, corrected adverb involuntarily to adjective involuntary in Blushing is an involuntary reaction.; Batch 334: standardized closed compound noun potbelly, corrected plural noun adjunct midterms to singular midterm; Batch 335: inserted missing dummy pronoun it in coordinate clause; Batch 336: hyphenated compound modifier billion-dollar; Batch 337: standardized US spelling jewelry; Batch 338: standardized closed compound noun takeout; Batch 339: supplied missing initial correlative adverb as in as happy as a fish in water, standardized open compound noun dish towel; Batch 340: standardized lowercase spelling tai chi). Near duplicates, cross-corpus duplicates and intra-slice duplicate variations were removed during review. All 74 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 67,824 decisions, 61,215 published, 6,609 rejected and 1,109 disclosed edits. Runtime: 63,428 examples, 65,316 sentence records and 76,211 rich records; ledger: 82,820 applied decisions (76,211 publication and 6,609 deprecated). This continuation adds 1,926 examples across batches 331–340, leaving 36,572 more reviewed publications to reach 100,000. All 61,215 English-only approved objects match runtime exactly and pass both adapters (122,430 checks). Rejected IDs remain absent. Shard 123 was completed with 500 records, new shards `examples/124.json`, `125.json` (500 records each), and shard `examples/126.json` (428 records) are registered in the manifest. There are 54,350 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 122,366 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `8e33d4c9b5773ef32b392a93887758964bbbf306` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 341 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 67,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
 
 
