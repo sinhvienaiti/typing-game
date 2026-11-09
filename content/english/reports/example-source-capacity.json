@@ -5,8 +5,8 @@
   "target": {
     "id": "example-sentences",
     "minimum": 100000,
-    "published": 52086,
-    "remainingPublishedDeficit": 47914
+    "published": 53964,
+    "remainingPublishedDeficit": 46036
   },
   "currentBoundedQueue": {
     "candidates": 1000,
@@ -18,8 +18,8 @@
     "passages": 300,
     "eligibleUniqueRawSentences": 5588,
     "unreviewedRawSentences": 4588,
-    "optimisticPublishedUpperBound": 56674,
-    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 43326,
+    "optimisticPublishedUpperBound": 58552,
+    "minimumAdditionalSourceGapEvenIfEveryRemainingRawSentencePasses": 41448,
     "caveat": "Upper bound for this configured project-original lane only; ignores future QA rejection and cross-source dedup. Other upstream sources require their own reproducible intake and review; their potential size is not credited as published content."
   },
   "additionalPinnedLanes": [
@@ -52,15 +52,15 @@
         }
       ],
       "sourceEvidenceCandidates": 122212,
-      "availableAfterControlledExclusions": 66353,
-      "editorialDecisions": 55824,
-      "publishedExamples": 49873,
-      "rejected": 5951,
+      "availableAfterControlledExclusions": 64353,
+      "editorialDecisions": 57824,
+      "publishedExamples": 51751,
+      "rejected": 6073,
       "approval": "candidate-evidence-only-unless-explicitly-reviewed"
     }
   ],
   "combinedCapacity": {
-    "optimisticPublishedUpperBound": 123027,
+    "optimisticPublishedUpperBound": 122905,
     "minimumAdditionalSourceGap": 0,
     "caveat": "Includes pinned but unreviewed candidates, before further editorial rejection and cross-source near dedup. This is potential intake capacity, not published content or step approval."
   },
@@ -153,7 +153,7 @@
     }
   ],
   "currentEvidence": {
-    "sentenceManifestSha256": "2bd203ee16b3120224b8a37edba89c5301191ac317e955ff77a76c9ced12d0f6",
+    "sentenceManifestSha256": "51dacf7ce9a855aa3607be2a565268cec57cbfa45fa5b2c82813753bb6e5ff0f",
     "reviewLedgerReportSha256": "345e4f0fea506ee3ae0bee4c0a23f4822bb99a8858af52a761f4ab81a8170f86"
   },
   "transition": {
