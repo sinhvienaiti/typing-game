@@ -149,6 +149,14 @@ const e11Transformations=[];
 for (const f of e11TransformationSliceFiles) {
   e11Transformations.push(...await loadRecords(path.join("content/english/sentences",f)));
 }
+
+const e11MistakeSliceFiles=sentenceDirFiles
+  .filter(f=>/^e11-mistake-slice-\d+\.json$/.test(f))
+  .sort((a,b)=>a.localeCompare(b,"en"));
+const e11Mistakes=[];
+for (const f of e11MistakeSliceFiles) {
+  e11Mistakes.push(...await loadRecords(path.join("content/english/sentences",f)));
+}
 const e04Collocations=[];
 const e04VerbPatterns=[];
 const e04Phrases=[];
@@ -195,7 +203,7 @@ results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences
   {id:"examples",dir:"examples",records:allPublishedExamples},
   {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze,...e11Cloze,...e11Transformations]},
   {id:"dialogues",dir:"dialogues",records:allDialogueRecords},
-  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
+  {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes,...e11Mistakes]}
 ]}));
 results.push(await publishDataset({dataset:"phrases",baseDir:"shared/phrases",groups:[
   {id:"collocations",dir:"collocations",records:collocationEnrichment.records},

@@ -199,6 +199,8 @@ function manifestSources(targetId) {
           sources.push({ path: relative, collection: "records" });
         } else if (targetId === "sentence-transformations" && (setId === "transformations" || setId === "reviewed-transformations")) {
           sources.push({ path: relative, collection: "records" });
+        } else if (targetId === "common-mistakes" && (setId === "mistakes" || setId === "reviewed-mistakes")) {
+          sources.push({ path: relative, collection: "records" });
         }
       }
     }

@@ -70,9 +70,17 @@ for (const f of e11TransformationFiles) {
   e11TransformationsCount+=doc.records?.length??0;
 }
 
+const e11MistakeFiles=sentenceDirFiles.filter(f=>/^e11-mistake-slice-\d+\.json$/.test(f));
+let e11MistakesCount=0;
+for (const f of e11MistakeFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11MistakesCount+=doc.records?.length??0;
+}
+
 const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount+e11TransformationsCount;
 const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount+e11TransformationsCount;
+const expectedMistakesCount=388+e11MistakesCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount+e11TransformationsCount+e11MistakesCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -123,8 +131,8 @@ if (dictionaryManifest.count!==900) errors.push("published dictionary runtime mu
 if (lexemes.length!==300||senses.length!==300||usages.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
 if (sentenceManifest.count!==expectedSentenceManifestCount) errors.push("published sentence runtime must contain "+expectedSentenceManifestCount+" reviewed records");
-if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==expectedExerciseCount||dialogues.length!==expectedDialogueCount||commonMistakes.length!==388) {
-  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + "+expectedExerciseCount+" exercises + "+expectedDialogueCount+" dialogues + 388 common mistakes");
+if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==expectedExerciseCount||dialogues.length!==expectedDialogueCount||commonMistakes.length!==expectedMistakesCount) {
+  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + "+expectedExerciseCount+" exercises + "+expectedDialogueCount+" dialogues + "+expectedMistakesCount+" common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -241,6 +249,7 @@ try {
   errors.push("published runtime activity smoke failed: "+error.message);
 }
 
+let monkeyCorrectionCount = 0;
 try {
   for (const [gameId,capability] of [["recall-typing","recall"],["vocab-shooter","shooter"],["space-typing","space"]]) {
     const vocabulary=await buildPublishedGameEnglishActivityDataset(
@@ -278,8 +287,8 @@ try {
     errors.push("published activity source must return 5 bounded Karaoke translation items");
   }
 
-  const monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
-  if(monkeyCorrectionCount!==488) errors.push("published Monkeytype error-correction activity must expose 100 corrections + 388 common mistakes");
+  monkeyCorrectionCount=await countPublishedEnglishActivityRecords(fileRuntimeLoader,"error-correction");
+  if(monkeyCorrectionCount!==(100+expectedMistakesCount)) errors.push("published Monkeytype error-correction activity must expose 100 corrections + "+expectedMistakesCount+" common mistakes");
   const monkeyCorrection=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,"monkeytype","monkeytype","error-correction","runtime-source-monkey-correction",
     {limit:5,createdAt:"2026-10-03T00:00:00.000Z"},
@@ -379,7 +388,7 @@ const report={
     spaceGrammar:5,
     karaokeTranslation:5,
     monkeyCorrection:5,
-    monkeyCorrectionRecords:488,
+    monkeyCorrectionRecords:monkeyCorrectionCount,
     monkeyTransformation:5,
     karaokeExamples:5,
     karaokeDialogues:dialogues.length,
