@@ -133,6 +133,14 @@ for (const f of e11MultiwozFiles) {
 for (const f of e11DialogueSliceFiles) {
   allDialogueRecords.push(...await loadRecords(path.join("content/english/sentences",f)));
 }
+
+const e11ClozeSliceFiles=sentenceDirFiles
+  .filter(f=>/^e11-cloze-slice-\d+\.json$/.test(f))
+  .sort((a,b)=>a.localeCompare(b,"en"));
+const e11Cloze=[];
+for (const f of e11ClozeSliceFiles) {
+  e11Cloze.push(...await loadRecords(path.join("content/english/sentences",f)));
+}
 const e04Collocations=[];
 const e04VerbPatterns=[];
 const e04Phrases=[];
@@ -177,7 +185,7 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:allPublishedExamples},
-  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze,...e11Cloze]},
   {id:"dialogues",dir:"dialogues",records:allDialogueRecords},
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
 ]}));

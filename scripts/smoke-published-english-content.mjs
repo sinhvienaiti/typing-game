@@ -56,9 +56,16 @@ for (const f of e11DialogueSliceFiles) {
 }
 const expectedDialogueCount=100+e11DialoguesCount;
 
-const expectedExerciseCount=1400+e11TranslationsCount;
+const e11ClozeFiles=sentenceDirFiles.filter(f=>/^e11-cloze-slice-\d+\.json$/.test(f));
+let e11ClozeCount=0;
+for (const f of e11ClozeFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11ClozeCount+=doc.records?.length??0;
+}
+
+const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount;
 const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount;
 const errors=[];
 
 const fileRuntimeLoader={
