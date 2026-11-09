@@ -1,0 +1,557 @@
+{
+  "schemaVersion": 1,
+  "step": 11,
+  "timestamp": "2026-11-09T20:58:33.095Z",
+  "games": {
+    "monkeytype": {
+      "gameId": "monkeytype",
+      "activitiesTested": 14,
+      "results": {
+        "grammar-topic": {
+          "status": "pass",
+          "publishedCount": 300,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Present Simple: habits and routines — Describe rep",
+          "sampleAnswer": "I work at home on Fridays.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 93.9
+          }
+        },
+        "example-typing": {
+          "status": "pass",
+          "publishedCount": 129813,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "I usually study in the afternoon.",
+          "sampleAnswer": "I usually study in the afternoon.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.7
+          }
+        },
+        "translation": {
+          "status": "pass",
+          "publishedCount": 20592,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Tôi kiểm tra email mỗi sáng.",
+          "sampleAnswer": "I check my email every morning.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.2
+          }
+        },
+        "cloze": {
+          "status": "pass",
+          "publishedCount": 50600,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "She ___ the bus to work on weekdays.",
+          "sampleAnswer": "takes",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 84.8
+          }
+        },
+        "error-correction": {
+          "status": "pass",
+          "publishedCount": 10488,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "I checks my email every morning.",
+          "sampleAnswer": "I check my email every morning.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 94.9
+          }
+        },
+        "sentence-building": {
+          "status": "pass",
+          "publishedCount": 0,
+          "contractMode": "contract-simulation",
+          "loadedCount": 1,
+          "datasetItemsCount": 1,
+          "samplePrompt": "We / are / learning / English.",
+          "sampleAnswer": "We are learning English.",
+          "playSimulation": {
+            "itemsPlayed": 1,
+            "allCorrect": true,
+            "averageWpm": 93.5
+          }
+        },
+        "transformation": {
+          "status": "pass",
+          "publishedCount": 30100,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Rewrite as a negative Present Simple sentence. Sou",
+          "sampleAnswer": "I do not check my email every morning.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.2
+          }
+        },
+        "listening-typing": {
+          "status": "pass",
+          "publishedCount": 129813,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Listen and type the sentence",
+          "sampleAnswer": "I usually study in the afternoon.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.7
+          }
+        },
+        "contextual-usage": {
+          "status": "pass",
+          "publishedCount": 0,
+          "contractMode": "contract-simulation",
+          "loadedCount": 1,
+          "datasetItemsCount": 1,
+          "samplePrompt": "He [decide] to study abroad.",
+          "sampleAnswer": "He decided to study abroad.",
+          "playSimulation": {
+            "itemsPlayed": 1,
+            "allCorrect": true,
+            "averageWpm": 94.2
+          }
+        },
+        "collocation": {
+          "status": "pass",
+          "publishedCount": 5000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "đưa ra quyết định",
+          "sampleAnswer": "make a decision",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 88.8
+          }
+        },
+        "verb-pattern": {
+          "status": "pass",
+          "publishedCount": 510,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Dùng want + to V để diễn tả điều người nói muốn là",
+          "sampleAnswer": "want · verb + to-infinitive",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 94.3
+          }
+        },
+        "phrasal-verb": {
+          "status": "pass",
+          "publishedCount": 1000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "thức dậy; đứng dậy",
+          "sampleAnswer": "get up",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.2
+          }
+        },
+        "idiom": {
+          "status": "pass",
+          "publishedCount": 1185,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "phá tan sự ngượng ngùng ban đầu",
+          "sampleAnswer": "break the ice",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 89.9
+          }
+        },
+        "chunk": {
+          "status": "pass",
+          "publishedCount": 2000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "nhân tiện; tiện thể",
+          "sampleAnswer": "by the way",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 86
+          }
+        }
+      }
+    },
+    "recall": {
+      "gameId": "recall-typing",
+      "activitiesTested": 6,
+      "results": {
+        "vocabulary": {
+          "status": "pass",
+          "publishedCount": 300,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "không; chẳng",
+          "sampleAnswer": "not",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.4
+          }
+        },
+        "collocation": {
+          "status": "pass",
+          "publishedCount": 5000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "đưa ra quyết định",
+          "sampleAnswer": "make a decision",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 88.8
+          }
+        },
+        "phrasal-verb": {
+          "status": "pass",
+          "publishedCount": 1000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "thức dậy; đứng dậy",
+          "sampleAnswer": "get up",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.2
+          }
+        },
+        "chunk": {
+          "status": "pass",
+          "publishedCount": 2000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "nhân tiện; tiện thể",
+          "sampleAnswer": "by the way",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 86
+          }
+        },
+        "listening-typing": {
+          "status": "pass",
+          "publishedCount": 129813,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Listen and type the sentence",
+          "sampleAnswer": "I usually study in the afternoon.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.7
+          }
+        },
+        "contextual-usage": {
+          "status": "pass",
+          "publishedCount": 0,
+          "contractMode": "contract-simulation",
+          "loadedCount": 1,
+          "datasetItemsCount": 1,
+          "samplePrompt": "He [decide] to study abroad.",
+          "sampleAnswer": "He decided to study abroad.",
+          "playSimulation": {
+            "itemsPlayed": 1,
+            "allCorrect": true,
+            "averageWpm": 94.2
+          }
+        }
+      }
+    },
+    "shooter": {
+      "gameId": "vocab-shooter",
+      "activitiesTested": 5,
+      "results": {
+        "vocabulary": {
+          "status": "pass",
+          "publishedCount": 300,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "không; chẳng",
+          "sampleAnswer": "not",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.4
+          }
+        },
+        "collocation": {
+          "status": "pass",
+          "publishedCount": 5000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "đưa ra quyết định",
+          "sampleAnswer": "make a decision",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 88.8
+          }
+        },
+        "phrasal-verb": {
+          "status": "pass",
+          "publishedCount": 1000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "thức dậy; đứng dậy",
+          "sampleAnswer": "get up",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.2
+          }
+        },
+        "chunk": {
+          "status": "pass",
+          "publishedCount": 2000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "nhân tiện; tiện thể",
+          "sampleAnswer": "by the way",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 86
+          }
+        },
+        "contextual-usage": {
+          "status": "pass",
+          "publishedCount": 0,
+          "contractMode": "contract-simulation",
+          "loadedCount": 1,
+          "datasetItemsCount": 1,
+          "samplePrompt": "He [decide] to study abroad.",
+          "sampleAnswer": "He decided to study abroad.",
+          "playSimulation": {
+            "itemsPlayed": 1,
+            "allCorrect": true,
+            "averageWpm": 94.2
+          }
+        }
+      }
+    },
+    "karaoke": {
+      "gameId": "karaoke-typing",
+      "activitiesTested": 4,
+      "results": {
+        "example-typing": {
+          "status": "pass",
+          "publishedCount": 129813,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "I usually study in the afternoon.",
+          "sampleAnswer": "I usually study in the afternoon.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.7
+          }
+        },
+        "dialogue": {
+          "status": "pass",
+          "publishedCount": 10125,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 32,
+          "samplePrompt": "Finding and booking a restaurant · Learner",
+          "sampleAnswer": "I'm looking for a particular restaurant called Tra",
+          "playSimulation": {
+            "itemsPlayed": 32,
+            "allCorrect": true,
+            "averageWpm": 96.8
+          }
+        },
+        "listening-typing": {
+          "status": "pass",
+          "publishedCount": 129813,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Listen and type the sentence",
+          "sampleAnswer": "I usually study in the afternoon.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.7
+          }
+        },
+        "translation": {
+          "status": "pass",
+          "publishedCount": 20592,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Tôi kiểm tra email mỗi sáng.",
+          "sampleAnswer": "I check my email every morning.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 95.2
+          }
+        }
+      }
+    },
+    "space": {
+      "gameId": "space-typing",
+      "activitiesTested": 6,
+      "results": {
+        "vocabulary": {
+          "status": "pass",
+          "publishedCount": 300,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "không; chẳng",
+          "sampleAnswer": "not",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.4
+          }
+        },
+        "collocation": {
+          "status": "pass",
+          "publishedCount": 5000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "đưa ra quyết định",
+          "sampleAnswer": "make a decision",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 88.8
+          }
+        },
+        "phrasal-verb": {
+          "status": "pass",
+          "publishedCount": 1000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "thức dậy; đứng dậy",
+          "sampleAnswer": "get up",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 80.2
+          }
+        },
+        "chunk": {
+          "status": "pass",
+          "publishedCount": 2000,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "nhân tiện; tiện thể",
+          "sampleAnswer": "by the way",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 86
+          }
+        },
+        "grammar-challenge": {
+          "status": "pass",
+          "publishedCount": 300,
+          "contractMode": "published-runtime",
+          "loadedCount": 5,
+          "datasetItemsCount": 5,
+          "samplePrompt": "Present Simple: habits and routines — Describe rep",
+          "sampleAnswer": "I work at home on Fridays.",
+          "playSimulation": {
+            "itemsPlayed": 5,
+            "allCorrect": true,
+            "averageWpm": 93.9
+          }
+        },
+        "contextual-usage": {
+          "status": "pass",
+          "publishedCount": 0,
+          "contractMode": "contract-simulation",
+          "loadedCount": 1,
+          "datasetItemsCount": 1,
+          "samplePrompt": "He [decide] to study abroad.",
+          "sampleAnswer": "He decided to study abroad.",
+          "playSimulation": {
+            "itemsPlayed": 1,
+            "allCorrect": true,
+            "averageWpm": 94.2
+          }
+        }
+      }
+    }
+  },
+  "adaptiveMix": {
+    "status": "pass",
+    "planItemsCount": 1,
+    "segmentsCount": 1,
+    "activitiesInvolved": [
+      null
+    ]
+  },
+  "mixedReview": {
+    "status": "pass",
+    "planItemsCount": 4,
+    "segmentsCount": 3,
+    "gamesInvolved": [
+      null
+    ]
+  },
+  "learningProfileIntegration": {
+    "status": "pass",
+    "eventsApplied": 4,
+    "profileVocabularyCount": 1,
+    "profileSentenceCount": 2,
+    "profileGrammarCount": 1
+  },
+  "status": "pass",
+  "summary": {
+    "totalCombinationsTested": 35,
+    "totalItemsVerified": 182,
+    "allGamesPassed": true
+  }
+}
+

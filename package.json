@@ -93,7 +93,8 @@
     "english-content:e03:morphology": "node scripts/report-english-content-simplewiktionary.mjs",
     "english-content:review:validate": "node scripts/validate-english-content-reviews.mjs",
     "english-content:runtime:smoke": "node scripts/smoke-published-english-content.mjs",
-    "english-content:e11:english:next": "node scripts/prepare-tatoeba-english-review.mjs"
+    "english-content:e11:english:next": "node scripts/prepare-tatoeba-english-review.mjs",
+    "english-content:e11:games": "node scripts/verify-step11-game-integration.mjs"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
