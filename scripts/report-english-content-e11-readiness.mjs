@@ -137,6 +137,14 @@ function manifestSources(targetId) {
           sources.push({path:relative,collection:"records"});
         }
       }
+
+      if (batch?.phase==="E11") {
+        if (targetId==="translation-pairs"&&(setId==="translations"||setId==="reviewed-translations")) {
+          sources.push({path:relative,collection:"records"});
+        } else if (targetId==="example-sentences"&&(setId==="translation-sentences"||setId==="reviewed-translation-sentences")) {
+          sources.push({path:relative,collection:"records"});
+        }
+      }
     }
   }
   return sources;
@@ -222,8 +230,8 @@ for (const target of targetDoc.targets??[]) {
 
 const expected={
   "grammar-topics":[300,320],"verb-patterns":[500,1000],"collocations":[5000,null],"phrasal-verbs":[1000,null],
-  "idioms-chunks":[2000,null],"common-mistakes":[2000,null],"example-sentences":[100000,null],"translation-pairs":[20000,null],
-  "cloze-exercises":[30000,null],"sentence-transformations":[10000,null],"dialogue-examples":[10000,null],
+  "idioms-chunks":[2000,null],"common-mistakes":[10000,null],"example-sentences":[100000,null],"translation-pairs":[20000,null],
+  "cloze-exercises":[50000,null],"sentence-transformations":[30000,null],"dialogue-examples":[10000,null],
 };
 for (const [id,[minimum,maximum]] of Object.entries(expected)) {
   const target=targetDoc.targets?.find(item=>item.id===id);

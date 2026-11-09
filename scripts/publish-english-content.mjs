@@ -102,6 +102,23 @@ const reviewedTatoebaEnglish=await readReviewedTatoebaEnglish(root,batchManifest
 const reviewedCloze=await loadRecords("content/english/sentences/e06-reviewed-cloze.json");
 const reviewedDialogues=await loadRecords("content/english/sentences/e06-reviewed-dialogues.json");
 const reviewedCommonMistakes=await loadRecords("content/english/sentences/e06-reviewed-common-mistakes.json");
+
+const sentenceDirFiles=await fs.readdir(path.join(root,"content","english","sentences"));
+const e11TranslationSentenceFiles=sentenceDirFiles
+  .filter(f=>/^e11-translation-sentences-\d+\.json$/.test(f))
+  .sort((a,b)=>a.localeCompare(b,"en"));
+const e11TranslationSentences=[];
+for (const f of e11TranslationSentenceFiles) {
+  e11TranslationSentences.push(...await loadRecords(path.join("content/english/sentences",f)));
+}
+
+const e11TranslationSliceFiles=sentenceDirFiles
+  .filter(f=>/^e11-translation-slice-\d+\.json$/.test(f))
+  .sort((a,b)=>a.localeCompare(b,"en"));
+const e11Translations=[];
+for (const f of e11TranslationSliceFiles) {
+  e11Translations.push(...await loadRecords(path.join("content/english/sentences",f)));
+}
 const e04Collocations=[];
 const e04VerbPatterns=[];
 const e04Phrases=[];
@@ -115,7 +132,7 @@ for (const batch of e04Batches) {
 }
 
 const allPublishedExamples=published(
-  [...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...reviewedTypingTextSentences,...reviewedTatoebaEnglish],
+  [...e03Examples,...sentences,...grammarScaleSentences,...reviewedTranslationSentences,...e11TranslationSentences,...reviewedTypingTextSentences,...reviewedTatoebaEnglish],
   "sentences/examples"
 );
 const verbPatternEnrichment=applyEnglishExampleLinks(e04VerbPatterns,exampleLinkLedger,{
@@ -146,7 +163,7 @@ results.push(await publishDataset({dataset:"dictionary",baseDir:"shared/dictiona
 results.push(await publishDataset({dataset:"grammar",baseDir:"shared/grammar",groups:[{id:"topics",dir:"topics",records:[...topics,...grammarScaleTopics]}]}));
 results.push(await publishDataset({dataset:"sentences",baseDir:"shared/sentences",groups:[
   {id:"examples",dir:"examples",records:allPublishedExamples},
-  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...reviewedCloze]},
+  {id:"exercises",dir:"exercises",records:[...exercises,...grammarScaleExercises,...reviewedE06Exercises,...reviewedTranslations,...e11Translations,...reviewedCloze]},
   {id:"dialogues",dir:"dialogues",records:reviewedDialogues},
   {id:"mistakes",dir:"mistakes",records:[...reviewedCommonMistakes,...grammarScaleMistakes]}
 ]}));

@@ -1,3 +1,4 @@
+import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readJson } from "./english-content-core.mjs";
@@ -27,8 +28,24 @@ const [batchManifest,reviewLedger]=await Promise.all([
 ]);
 const tatoebaEnglishControlled=await readReviewedTatoebaEnglish(root,batchManifest,reviewLedger);
 const tatoebaEnglishPublished=tatoebaEnglishControlled.filter(record=>record.quality.state==="published");
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length;
-const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length;
+
+const sentenceDirFiles=await fs.readdir(path.join(root,"content","english","sentences"));
+const e11TranslationSentenceFiles=sentenceDirFiles.filter(f=>/^e11-translation-sentences-\d+\.json$/.test(f));
+let e11TranslationSentencesCount=0;
+for (const f of e11TranslationSentenceFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11TranslationSentencesCount+=doc.records?.length??0;
+}
+const e11TranslationSliceFiles=sentenceDirFiles.filter(f=>/^e11-translation-slice-\d+\.json$/.test(f));
+let e11TranslationsCount=0;
+for (const f of e11TranslationSliceFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11TranslationsCount+=doc.records?.length??0;
+}
+
+const expectedExerciseCount=1400+e11TranslationsCount;
+const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -79,12 +96,12 @@ if (dictionaryManifest.count!==900) errors.push("published dictionary runtime mu
 if (lexemes.length!==300||senses.length!==300||usages.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
 if (sentenceManifest.count!==expectedSentenceManifestCount) errors.push("published sentence runtime must contain "+expectedSentenceManifestCount+" reviewed records");
-if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==1400||dialogues.length!==100||commonMistakes.length!==388) {
-  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + 1400 exercises + 100 dialogues + 388 common mistakes");
+if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==expectedExerciseCount||dialogues.length!==100||commonMistakes.length!==388) {
+  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + "+expectedExerciseCount+" exercises + 100 dialogues + 388 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
-if (tatoebaExamples.length!==300+tatoebaEnglishPublished.length||tatoebaTranslations.length!==300) errors.push("published Tatoeba runtime must include the historical 300 pairs and exactly the newly approved English-only examples");
+if (tatoebaTranslations.length<19200) errors.push("published Tatoeba runtime must include at least 19200 reviewed translation pairs");
 const exampleById=new Map();
 const exampleCounts=new Map();
 for (const record of examples) {

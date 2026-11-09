@@ -187,6 +187,14 @@ function manifestSources(targetId) {
           sources.push({ path: relative, collection: "records" });
         }
       }
+
+      if (batch?.phase === "E11") {
+        if (targetId === "translation-pairs" && (setId === "translations" || setId === "reviewed-translations")) {
+          sources.push({ path: relative, collection: "records" });
+        } else if (targetId === "example-sentences" && (setId === "translation-sentences" || setId === "reviewed-translation-sentences")) {
+          sources.push({ path: relative, collection: "records" });
+        }
+      }
     }
   }
   return sources;
