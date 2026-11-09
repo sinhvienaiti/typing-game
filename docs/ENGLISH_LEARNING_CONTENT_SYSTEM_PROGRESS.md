@@ -964,9 +964,36 @@ Current English-only totals: 67,824 decisions, 61,215 published, 6,609 rejected 
 
 Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
 
-The preceding verified checkpoint `8e33d4c9b5773ef32b392a93887758964bbbf306` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+The preceding verified checkpoint `47e88b12` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
 
 Continue English editorial batch 341 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 67,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
+## English editorial continuation: batches 341–350
+
+| English editorial batch | Reviewed | Published | Rejected | Disclosed edits |
+| --- | ---: | ---: | ---: | ---: |
+| 341 | 200 | 198 | 2 | 4 |
+| 342 | 200 | 199 | 1 | 4 |
+| 343 | 200 | 198 | 2 | 3 |
+| 344 | 200 | 196 | 4 | 3 |
+| 345 | 200 | 198 | 2 | 3 |
+| 346 | 200 | 197 | 3 | 2 |
+| 347 | 200 | 195 | 5 | 2 |
+| 348 | 200 | 196 | 4 | 2 |
+| 349 | 200 | 196 | 4 | 2 |
+| 350 | 200 | 196 | 4 | 2 |
+| Total | 2,000 | 1,969 | 31 | 27 |
+
+All 2,000 candidates received individual readings and explicit decisions for grammar, naturalness, standalone use, CEFR, source suitability and semantic repetition. Pinned canonical evidence, attribution, license and digest identity were verified separately from upstream ratings. Twenty-seven accepted edits preserve source meaning and disclose original/final text, modified provenance, the change description and a recomputed digest (Batch 341: standardized compound windowsill, standardized quotation punctuation, supplied missing definite article the in benefit of the doubt, restored missing subject pronoun you; Batch 342: supplied missing indefinite article a in when I was a kid, supplied missing comma in conditional introductory clause, standardized preposition with in obsessed with; Batch 343: standardized compound noun toenails, supplied missing definite article the, corrected past tense sang and standardized spelling a cappella; Batch 344: standardized closed compound takeaway, corrected auxiliary verb word order in question, capitalized Midwest; Batch 345: supplied definite article the before piano, supplied missing preposition of in a lot of, hyphenated compound color adjective yellowish-gray; Batch 346: standardized ellipsis to three periods, hyphenated compound modifier two-drink; Batch 347: standardized spelling footsie, removed informal interrobang sequence; Batch 348: corrected word order of adverb just, standardized adverb form differently; Batch 349: capitalized genus name Cyclospora, standardized adverb form quickly; Batch 350: hyphenated compound numerical modifier one-hour, standardized informal contraction wanna to want to). Near duplicates, cross-corpus duplicates and intra-slice duplicate variations were removed during review. All 31 rejections remain in source authoring, ledger and per-record reports without a CEFR or runtime object. Authoring stays draft; only the matching digest-bound publication overlay allows runtime publication.
+
+Current English-only totals: 69,824 decisions, 63,184 published, 6,640 rejected and 1,136 disclosed edits. Runtime: 65,397 examples, 67,285 sentence records and 78,180 rich records; ledger: 84,820 applied decisions (78,180 publication and 6,640 deprecated). This continuation adds 1,969 examples across batches 341–350, leaving 34,603 more reviewed publications to reach 100,000. All 63,184 English-only approved objects match runtime exactly and pass both adapters (126,368 checks). Rejected IDs remain absent. Shard 126 was completed with 500 records, new shards `examples/127.json`, `128.json`, `129.json` (500 records each), and shard `examples/130.json` (397 records) are registered in the manifest. There are 52,350 unreviewed English-only candidates and 4,588 unreviewed project-original raw sentences. The optimistic combined bound is 122,335 before rejection/dedup, not publication approval.
+
+Local validation covers schema/source/review/license gates, E10 contracts and smoke, 112 configured content/tooling tests, 10 handoff/decision tests, three runtime-count tests, generation/publication, dedup, published-runtime smoke, E11 freshness/exact coverage, capacity and master-plan checks. E12 release/maintenance precedes final E11 reconciliation. Verify byte-identical regeneration for every changed/new artifact and include every manifest shard in Git before push; then verify the three workflows on the final HEAD. Adapter checks do not replace the queued Step 11 integrated UI review.
+
+The preceding verified checkpoint `47e88b12` passed local validation and full audit suite. Current continuation-HEAD evidence belongs in PR #48; retain this preceding SHA here to avoid a self-referential SHA-only commit.
+
+Continue English editorial batch 351 at candidate in `content/english/review-queues/tatoeba-english-next-review.json` with `node scripts/prepare-tatoeba-english-review.mjs --limit 200`. All 69,824 reviewed IDs stay excluded and pending candidates have no CEFR. This remains Group 1 Step 2; Steps 3–12 stay queued and PR #48 stays Draft. Historical EN/VI/link pins, source checksums, legacy vocabulary ABI, E04 scale-224 and all completed batches are unchanged.
+
 
 
 
