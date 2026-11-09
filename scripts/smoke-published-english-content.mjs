@@ -43,9 +43,22 @@ for (const f of e11TranslationSliceFiles) {
   e11TranslationsCount+=doc.records?.length??0;
 }
 
+const e11MultiwozFiles=sentenceDirFiles.filter(f=>/^e11-multiwoz-dialogue-reviewed-slice-\d+\.json$/.test(f));
+let e11DialoguesCount=0;
+for (const f of e11MultiwozFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11DialoguesCount+=doc.records?.length??0;
+}
+const e11DialogueSliceFiles=sentenceDirFiles.filter(f=>/^e11-dialogue-slice-\d+\.json$/.test(f));
+for (const f of e11DialogueSliceFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11DialoguesCount+=doc.records?.length??0;
+}
+const expectedDialogueCount=100+e11DialoguesCount;
+
 const expectedExerciseCount=1400+e11TranslationsCount;
 const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -96,8 +109,8 @@ if (dictionaryManifest.count!==900) errors.push("published dictionary runtime mu
 if (lexemes.length!==300||senses.length!==300||usages.length!==300) errors.push("published E03 runtime split must be 300 lexemes + 300 senses + 300 usages");
 if (grammarManifest.count!==300) errors.push("published grammar runtime must contain 300 reviewed grammar topics");
 if (sentenceManifest.count!==expectedSentenceManifestCount) errors.push("published sentence runtime must contain "+expectedSentenceManifestCount+" reviewed records");
-if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==expectedExerciseCount||dialogues.length!==100||commonMistakes.length!==388) {
-  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + "+expectedExerciseCount+" exercises + 100 dialogues + 388 common mistakes");
+if (topics.length!==300||examples.length!==expectedExampleCount||exercises.length!==expectedExerciseCount||dialogues.length!==expectedDialogueCount||commonMistakes.length!==388) {
+  errors.push("published runtime split must be 300 topics + "+expectedExampleCount+" examples + "+expectedExerciseCount+" exercises + "+expectedDialogueCount+" dialogues + 388 common mistakes");
 }
 const tatoebaExamples=examples.filter(record=>String(record.id??"").startsWith("sent.tatoeba."));
 const tatoebaTranslations=exercises.filter(record=>String(record.id??"").startsWith("ex.translation.tatoeba."));
@@ -280,8 +293,8 @@ try {
     fileRuntimeLoader,
     "dialogue",
   );
-  if(karaokeDialogueCount!==100) {
-    errors.push("published Karaoke dialogue activity must expose 100 reviewed dialogues");
+  if(karaokeDialogueCount!==expectedDialogueCount) {
+    errors.push("published Karaoke dialogue activity must expose "+expectedDialogueCount+" reviewed dialogues");
   }
   const karaokeDialogue=await buildPublishedGameEnglishActivityDataset(
     fileRuntimeLoader,
@@ -355,7 +368,7 @@ const report={
     monkeyCorrectionRecords:488,
     monkeyTransformation:5,
     karaokeExamples:5,
-    karaokeDialogues:100,
+    karaokeDialogues:dialogues.length,
     recallCollocations:560,
     verbPatterns:510,
     phrasalVerbs:280,

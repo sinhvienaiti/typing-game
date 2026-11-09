@@ -193,6 +193,8 @@ function manifestSources(targetId) {
           sources.push({ path: relative, collection: "records" });
         } else if (targetId === "example-sentences" && (setId === "translation-sentences" || setId === "reviewed-translation-sentences")) {
           sources.push({ path: relative, collection: "records" });
+        } else if (targetId === "dialogue-examples" && (setId === "dialogues" || setId === "reviewed-dialogues")) {
+          sources.push({ path: relative, collection: "records" });
         }
       }
     }
