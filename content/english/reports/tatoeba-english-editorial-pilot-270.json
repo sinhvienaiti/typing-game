@@ -1,0 +1,5010 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshot": "english-only-weekly-2026-10-31-observed-2026-11-07-v1",
+  "reviewed": 200,
+  "published": 160,
+  "rejected": 40,
+  "edited": 9,
+  "records": [
+    {
+      "id": "sent.tatoeba.5502014",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I went over the itinerary with my co-workers.",
+      "finalText": "I went over the itinerary with my co-workers.",
+      "intakeSourceDigest": "dd67af6e1146d3e650fdbe3d31a7e1bd745271ad339725b140a53a4e9a2160ca",
+      "controlledSourceDigest": "22f01bd718762040beb6f36bfb1ca356837163476b4a3c260e73784b8bbf35d3",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.257148",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3469911",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.258109",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "Business travel planning went over the itinerary"
+    },
+    {
+      "id": "sent.tatoeba.5504058",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "I feel relieved after having said all that I wanted to say.",
+      "finalText": "I feel relieved after having said all that I wanted to say.",
+      "intakeSourceDigest": "90fc9352e43de63f79fa2e064c2eb1584b35d7b1a7bf8925874837c49b089fca",
+      "controlledSourceDigest": "5f2779d596637edeb18aca3c4c9673978cf9857dc27ace780f917395e5328a17",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.239655",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2240475",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.3727329",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Perfect participle construction after having said all that I wanted"
+    },
+    {
+      "id": "sent.tatoeba.5504302",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There can be only one explanation.",
+      "finalText": "There can be only one explanation.",
+      "intakeSourceDigest": "0c71dc964da2f80d0dea8d115dc8b3e52568419ec694fe36a62a4f474cc3dae3",
+      "controlledSourceDigest": "ca327b2c250bea60c6a4d592888d4c3da53bbf6f53a34debb2b848503e7e8717",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5504304",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.5504305",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3214409",
+          "score": 0.7142857142857143
+        }
+      ],
+      "rationale": "Modal deduction only one explanation"
+    },
+    {
+      "id": "sent.tatoeba.5504304",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "There can be only one explanation for it.",
+      "finalText": "There can be only one explanation for it.",
+      "intakeSourceDigest": "8acc6ddc0449f803e20a0694bd9229d7648910eff1b072196859431c13cfe7c0",
+      "controlledSourceDigest": "ecbaea8b6c4103cfaaa569e29fb162e9858f54a67f20b0177829a573b15a883c",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5504305",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5504302",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3214409",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5504302"
+    },
+    {
+      "id": "sent.tatoeba.5504305",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "There can be only one explanation for that.",
+      "finalText": "There can be only one explanation for that.",
+      "intakeSourceDigest": "dba5955f0600c15c8f93fb834a64bf7a6cf04dbf37524af844659fa0f395c7c6",
+      "controlledSourceDigest": "2617904b8aed7bcc7d719273a3f7b2b5c78dc3ca87e63104568bd41594f2cb60",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5504304",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5504302",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3214409",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5504302"
+    },
+    {
+      "id": "sent.tatoeba.5504311",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We are good friends now, but there was a time when we didn't like each other.",
+      "finalText": "We are good friends now, but there was a time when we didn't like each other.",
+      "intakeSourceDigest": "d03aa9df595e092b678d795378cff9ca39f37960edf4ca628c60933e9e10a8dc",
+      "controlledSourceDigest": "58c966a2b142dd6d9fc3f4a092448559a48b755f1de9ad1e3dab40cab0cfe874",
+      "maximumTokenJaccard": 0.35,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2682667",
+          "score": 0.35
+        },
+        {
+          "id": "sent.tatoeba.3684906",
+          "score": 0.2777777777777778
+        },
+        {
+          "id": "sent.tatoeba.2799145",
+          "score": 0.2631578947368421
+        }
+      ],
+      "rationale": "Temporal relative clause there was a time when"
+    },
+    {
+      "id": "sent.tatoeba.5504329",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We'll never be able to play any better.",
+      "finalText": "We'll never be able to play any better.",
+      "intakeSourceDigest": "60e68ca971e8e1bfb1effb58c76859709238a6db25deada46feb9a24a616a68d",
+      "controlledSourceDigest": "56f48cab5e996d0145f855e45f66d66959307b615f7338e64f412cf25dcfb7b2",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3721460",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3722852",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3723048",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Future modal ability never be able to play any better"
+    },
+    {
+      "id": "sent.tatoeba.5506378",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It's always important to have money in your wallet.",
+      "finalText": "It's always important to have money in your wallet.",
+      "intakeSourceDigest": "652412a2486ecfa5a68f0dfef94f2039ca7c92a0f231fa74a20e40258d27e969",
+      "controlledSourceDigest": "f5576220480e859a0e8098d949b16f2a232ae13d7e919fa64d33570f1cdcc752",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680334",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2460822",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.10899964",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Practical advice money in your wallet"
+    },
+    {
+      "id": "sent.tatoeba.5506379",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm saving up for a new car.",
+      "finalText": "I'm saving up for a new car.",
+      "intakeSourceDigest": "0fe0b98fb4326a0511d672262c6067a1a2ff9c27238657f176f0a86ed7b4e6ab",
+      "controlledSourceDigest": "a7ce0412351f18d5c83e3384926480e39d4662839173387c89833ad0fae205de",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1272789",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1728986",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1742492",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Phrasal verb saving up for a new car"
+    },
+    {
+      "id": "sent.tatoeba.5506382",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I want to be a teenager forever.",
+      "finalText": "I want to be a teenager forever.",
+      "intakeSourceDigest": "c82a06b504e006cfcb263068b975b292de73234a1ff2627d4fc4dee8d9b232fc",
+      "controlledSourceDigest": "3fdaeca0332726c34fb99f7b99516cb08a60d46633905b071dd371dddfb3a3a2",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1821413",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.271381",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2723077",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Youthful wish teenager forever"
+    },
+    {
+      "id": "sent.tatoeba.5506391",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Wheelchairs give people with physical disabilities more mobility.",
+      "finalText": "Wheelchairs give people with physical disabilities more mobility.",
+      "intakeSourceDigest": "c48306c9d5e744cb84bd00ac6edc9d557aadb409e949bb0260000c0d4ab21ebc",
+      "controlledSourceDigest": "a64d0d9729a30fc9c23fd3f82662110838c8938fc87b2655f4f2ac3df4af5d59",
+      "maximumTokenJaccard": 0.1875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.275829",
+          "score": 0.1875
+        },
+        {
+          "id": "sent.tatoeba.1114698",
+          "score": 0.18181818181818182
+        },
+        {
+          "id": "sent.tatoeba.1783196",
+          "score": 0.18181818181818182
+        }
+      ],
+      "rationale": "Accessibility vocabulary physical disabilities mobility"
+    },
+    {
+      "id": "sent.tatoeba.5506394",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Turkey is usually eaten on Thanksgiving.",
+      "finalText": "Turkey is usually eaten on Thanksgiving.",
+      "intakeSourceDigest": "6c4b4882ce6cebc17e4a204d09dd8deb8814b8e0f7df3819ea13748bedfd8761",
+      "controlledSourceDigest": "c809ef0575ba1ce79e502658b79cbd6bf1eed2ccf316a8f6f9b88223ed90bac7",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1526447",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.1557599",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.1663215",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Passive cultural tradition eaten on Thanksgiving"
+    },
+    {
+      "id": "sent.tatoeba.5506399",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Thanks for coming to my party.",
+      "finalText": "Thanks for coming to my party.",
+      "intakeSourceDigest": "9c3b0d17e651cb8e75cf3cf4e9b257613f821d7f6ea8fec471bd569bd9145647",
+      "controlledSourceDigest": "e67bd879561ae10f9de22c7e8bcea5d24e4bcf5c73702611797943e3efc11d12",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1508583",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3722236",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.35656",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Social gratitude thanks for coming to my party"
+    },
+    {
+      "id": "sent.tatoeba.5506400",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'm happy that you were able to come to my party.",
+      "finalText": "I'm happy that you were able to come to my party.",
+      "intakeSourceDigest": "1c8c10a03bf9e6eff5e09da9e248e3d9a8a28aece616df200e54f4efe9561aa0",
+      "controlledSourceDigest": "8ffb3a900f666b410c404e6227c805666161fd0c5c208bbc22ef810ecf078783",
+      "maximumTokenJaccard": 0.4667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4787105",
+          "score": 0.4666666666666667
+        },
+        {
+          "id": "sent.tatoeba.599648",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.1466930",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506399"
+    },
+    {
+      "id": "sent.tatoeba.5506424",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Do you like to drive fast cars?",
+      "finalText": "Do you like to drive fast cars?",
+      "intakeSourceDigest": "b6488be10afb29cad279af1b2c27c2b22d4dc200ad365ea9f232edc80a48b5fe",
+      "controlledSourceDigest": "846c18295232269971969aac32733f91159904a29bd438a3cc4786064e5776c4",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2010244",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2980034",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.370691",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Driving preference drive fast cars"
+    },
+    {
+      "id": "sent.tatoeba.5506426",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What do you study in school?",
+      "finalText": "What do you study in school?",
+      "intakeSourceDigest": "08156ceb7493a3539ce942563a4236c2ded407bc15f90714e407b2ac4814ab91",
+      "controlledSourceDigest": "2be2ec291a5315556760abacb0f66b715d324f711d17aac1078d908b6032f11f",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.21611",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.320992",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1696801",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Academic inquiry study in school"
+    },
+    {
+      "id": "sent.tatoeba.5506428",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "When is the party going to be?",
+      "finalText": "When is the party going to be?",
+      "intakeSourceDigest": "ab8a5867f5ac9a6d22b31451668c5f5a047427d9a6b919495a48d9c2348b5f8f",
+      "controlledSourceDigest": "0b861036743989a7fa32cb20d5c09559b23586e2385ebcff6db66aabfba43352",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1493787",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.238731",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4754501",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Party timing inquiry going to be"
+    },
+    {
+      "id": "sent.tatoeba.5506429",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you get along with your siblings?",
+      "finalText": "Do you get along with your siblings?",
+      "intakeSourceDigest": "cde3e7bc173773a6fb6b288293b109f75152dff2031ced5fad18d455117316ad",
+      "controlledSourceDigest": "317f85802508bb3c87a3f44d9e247231f65f8f60a38d42e0e972fe2c1e7b33c7",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506431",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2134178",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2219782",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Phrasal verb get along with your siblings"
+    },
+    {
+      "id": "sent.tatoeba.5506431",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Do you hang out with your siblings a lot?",
+      "finalText": "Do you hang out with your siblings a lot?",
+      "intakeSourceDigest": "fe9874b46e1f192379d9fe291fb4e84911fabe8a973f619ae1814f923a1c9fc1",
+      "controlledSourceDigest": "f4d23f00f1335e531ce3c9873f53aa448f15cae364fd790f33c7c8e55e781050",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506429",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.4692307",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2446810",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506429"
+    },
+    {
+      "id": "sent.tatoeba.5506434",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Don't be such a party pooper.",
+      "finalText": "Don't be such a party-pooper.",
+      "intakeSourceDigest": "758836027adf5be2095d28d20d45e3060f7ea70df3894b2543f8a156c843c4c8",
+      "controlledSourceDigest": "89b54a36fbec86f50c1b77ed9b21a44499c8d335fc31a324b39e88213c1578dc",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2258176",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.326582",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2264769",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Standardized hyphenated compound noun party-pooper"
+    },
+    {
+      "id": "sent.tatoeba.5506442",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Call me when you get off of work.",
+      "finalText": "Call me when you get off work.",
+      "intakeSourceDigest": "500e40451a4d4c20b628b5e6ef485c7098f879aa2f1418cf81cf8085bf186dd5",
+      "controlledSourceDigest": "ca265c94ecdc296c3dfc192b1f781b26ecbb4faf22b6da9c73d415f8e6f14397",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506443",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3722352",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3723832",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Standardized natural prepositional phrase get off work"
+    },
+    {
+      "id": "sent.tatoeba.5506443",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Call me when you leave work.",
+      "finalText": "Call me when you leave work.",
+      "intakeSourceDigest": "fa6cd4916b3a5f2413f7b96bd3dfe074b3719107e4e44df06adaf04ab688b68d",
+      "controlledSourceDigest": "5782f4d8a6ab3b6ca0d8d9732b718e9667ff13b9d2027e77cbd87d92c67195c0",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506442",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3723832",
+          "score": 0.5
+        },
+        {
+          "id": "sent.gra1.03.08.1",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506442"
+    },
+    {
+      "id": "sent.tatoeba.5506444",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Call me after you talk to your parents.",
+      "finalText": "Call me after you talk to your parents.",
+      "intakeSourceDigest": "1a9a14eb243517231eb14a931badf9b5f7346e3560416597e6f0a9b29fd6658d",
+      "controlledSourceDigest": "8d58dff9a78c5c0ae136f62e9f6d0d296ca5b7c0c4b4a38889b481c35092ade4",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506451",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1324765",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.grb1.03.05.2",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Temporal condition call me after you talk"
+    },
+    {
+      "id": "sent.tatoeba.5506447",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You are one of the most despicable people it has ever been my displeasure to meet.",
+      "finalText": "You are one of the most despicable people it has ever been my displeasure to meet.",
+      "intakeSourceDigest": "579688518e940d799985541e9ce9d8c5df2e9affdba8b1c7e0741e59318f3cfd",
+      "controlledSourceDigest": "6d886513e82e6964d89066090bf8b6af1b44ba824e886d9e0eb15e37e7967da1",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2149113",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.3419421",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2724347",
+          "score": 0.28
+        }
+      ],
+      "rationale": "Extreme personal insult and vitriol"
+    },
+    {
+      "id": "sent.tatoeba.5506449",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Text me when you get back home.",
+      "finalText": "Text me when you get back home.",
+      "intakeSourceDigest": "29a5cd8aa9657aafa8a1152cda1eea6499727bdb70078eb7577608d2e02306dc",
+      "controlledSourceDigest": "1ce00408709c85c51773a8d8ab3f73349483eda84281ab63699da71117f1af42",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2006365",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3729129",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3729843",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Arrival instruction text me when you get back home"
+    },
+    {
+      "id": "sent.tatoeba.5506450",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Text me after your flight lands.",
+      "finalText": "Text me after your flight lands.",
+      "intakeSourceDigest": "953cc4979a1dad0570f764af56e7168b11aa1b036c2b46c51a5d98689202dc65",
+      "controlledSourceDigest": "7e284652cd01797e14676ba4cb7cde08c52515587426836c467f21eebe97d8d6",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506451",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.5506444",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.70143",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Flight arrival text me after your flight lands"
+    },
+    {
+      "id": "sent.tatoeba.5506451",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Text me after you get to your destination.",
+      "finalText": "Text me after you get to your destination.",
+      "intakeSourceDigest": "92a1981a19441a8c2802022f344617e169d77e6b47b89b66cade70f6508a9ace",
+      "controlledSourceDigest": "3bb8f34f84d98b2eef9429dcfc74424e57eb6fe7bdcc45d1ae7e8ad91a1b4d72",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506444",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3729129",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.5506450",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506449"
+    },
+    {
+      "id": "sent.tatoeba.5506452",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Do you enjoy comedy TV shows?",
+      "finalText": "Do you enjoy comedy TV shows?",
+      "intakeSourceDigest": "3673b51c2bfea7c99ea571eb677bce9570cbe046109e95858c43a1f4c24006d4",
+      "controlledSourceDigest": "1bc4c73d449d529fb3709a218efcd8733f343ffb30cf00e44a9ba8de93937417",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2130892",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3007285",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3732078",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Media entertainment comedy TV shows"
+    },
+    {
+      "id": "sent.tatoeba.5506453",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What's your favorite type of restaurant to go to?",
+      "finalText": "What's your favorite type of restaurant to go to?",
+      "intakeSourceDigest": "1cb565d212bb9908192b48cdfc5094e1cf105be65673a3ff2e12a9b2ad68e4af",
+      "controlledSourceDigest": "83b3ceff49462aa540fe73131428831e3faec280e0e81b8d0b18efda75422eb9",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.680255",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.681126",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.681053",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Dining preference favorite type of restaurant"
+    },
+    {
+      "id": "sent.tatoeba.5506455",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Where did you get your shirt?",
+      "finalText": "Where did you get your shirt?",
+      "intakeSourceDigest": "9c9910c412f607ad6820d4faff56cf01190d8dbb1afb8b4a3c89393d3e6b0522",
+      "controlledSourceDigest": "b518d51453ab8d893a2e1fc97b5c95d4873371d338be3c8306fc5820175ed052",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1635376",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1645704",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1673213",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Clothing inquiry where did you get your shirt"
+    },
+    {
+      "id": "sent.tatoeba.5506456",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Where did you buy your pants?",
+      "finalText": "Where did you buy your pants?",
+      "intakeSourceDigest": "5e4be5be31a6ae8feffbb501913416e2ed04e63c855581e0a70d1f58982d98bf",
+      "controlledSourceDigest": "74fb59ce3823e74e6417776022a34669554312f200b3d139c019069846a63d8c",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1673213",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.816976",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.1879340",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Intra-batch duplicate clothing variant subsumed by sent.tatoeba.5506455"
+    },
+    {
+      "id": "sent.tatoeba.5506457",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Where did you get those shoes?",
+      "finalText": "Where did you get those shoes?",
+      "intakeSourceDigest": "c8f98c1f3cce28611a0917ef991c5dd7868c022a38cf1fe77d1796f2ef0ffd3c",
+      "controlledSourceDigest": "7540008f75c871785a43bfae90a285f16343e26c62f1d923057a88b26019b0f5",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1635376",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2555690",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2903635",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Intra-batch duplicate clothing variant subsumed by sent.tatoeba.5506455"
+    },
+    {
+      "id": "sent.tatoeba.5506464",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What music do you find interesting?",
+      "finalText": "What music do you find interesting?",
+      "intakeSourceDigest": "b83b9ea9daf6b59f55f2c1cedaa9bac7bd7945b6243fbdbfc596d0856ca99096",
+      "controlledSourceDigest": "8a36effb4d5162eb689cdde8d49589002faa6299ba3ecd629d3717b0425c0189",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2474691",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3728934",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1696836",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Musical interest music do you find interesting"
+    },
+    {
+      "id": "sent.tatoeba.5506465",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I love going to concerts.",
+      "finalText": "I love going to concerts.",
+      "intakeSourceDigest": "1e8274eeac9f7b8758b042cd44c9988d1910ee17c6bacf8004c0cba6d615b78f",
+      "controlledSourceDigest": "64afd21d68f78b2081f78a3c65eae9e378c3c736ad41d76cdbd4afae4ba7ba10",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1343733",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2300126",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2354544",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Leisure hobby love going to concerts"
+    },
+    {
+      "id": "sent.tatoeba.5506481",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Who was your first crush?",
+      "finalText": "Who was your first crush?",
+      "intakeSourceDigest": "51466e4af9181c211c9b7b107b5aa9e5cb3892fa16f3991f1458f3585a186248",
+      "controlledSourceDigest": "e84c53038550f3aa409252fa4e3a4c9a9002fadc468fb702ef10243c8218396e",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3392263",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.5506486",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3986566",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Adolescent milestone first crush"
+    },
+    {
+      "id": "sent.tatoeba.5506482",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How old were you when you had your first crush?",
+      "finalText": "How old were you when you had your first crush?",
+      "intakeSourceDigest": "36e26d396fffff8e23ccc0e547558e4471219fde4642ac7d939a755d941409ad",
+      "controlledSourceDigest": "bb566349984abb03e98fff1a7b81fe9ab0661c21f3b5011a6499b5b8420f7654",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506485",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.57856",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.273277",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506481"
+    },
+    {
+      "id": "sent.tatoeba.5506485",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How old were you when you had your first date?",
+      "finalText": "How old were you when you had your first date?",
+      "intakeSourceDigest": "7de60524e9cb204b9b23132a501eb9b561e677049a370b5b2097e14ed437d150",
+      "controlledSourceDigest": "f3ac462231d4901928474411bdd8ac7386c30e2333ac4d13c56232587511ef31",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506482",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.57856",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.273277",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Dating milestone first date"
+    },
+    {
+      "id": "sent.tatoeba.5506486",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What was your first date like?",
+      "finalText": "What was your first date like?",
+      "intakeSourceDigest": "c16ed2263369b9c33fe0038acde7c9bd8a781b551c85201476bcbfac87c4c648",
+      "controlledSourceDigest": "73d8a8f4976c445ed1a07d4543d1095db3482190dccc0965465fc092a8381241",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3392263",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.5506487",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4635403",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506485"
+    },
+    {
+      "id": "sent.tatoeba.5506487",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What was your thirteenth birthday like?",
+      "finalText": "What was your thirteenth birthday like?",
+      "intakeSourceDigest": "462fb32261f311935f2dc444618e09561c9cf08feff88e507a9a93d1131c2349",
+      "controlledSourceDigest": "537de36094b5c357026cf0077dfded5602e91f5e5a12d7962fbcb36e0286e53c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506486",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3392263",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.4828481",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Birthday recollection thirteenth birthday"
+    },
+    {
+      "id": "sent.tatoeba.5506499",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "What type of movies make you laugh?",
+      "finalText": "What types of movies make you laugh?",
+      "intakeSourceDigest": "0dd67804e106e7473ab213e267cb932978875fa7cbeec604f9933f257cf34a95",
+      "controlledSourceDigest": "2edb9c734edfe623ed67dbedd7e8db82f0c0591dbf4cb04a6d91cb39109ca0e8",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.307762",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.54991",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3731907",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Standardized plural count noun types of movies"
+    },
+    {
+      "id": "sent.tatoeba.5506518",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Prove that you love me.",
+      "finalText": "Prove that you love me.",
+      "intakeSourceDigest": "8585da7176648a9ce04b4ef4c18048a7aac38b319f0cb8dd0580ba79f35ebffc",
+      "controlledSourceDigest": "d33fc4a110c79791cc83fd67103b047b73b3161f936dc7f3ddcb9437c92cc7e1",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3133703",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.4571221",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.4952260",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Imperative demand prove that you love me"
+    },
+    {
+      "id": "sent.tatoeba.5506578",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Drinking water is one of the best things that you can do.",
+      "finalText": "Drinking water is one of the best things that you can do.",
+      "intakeSourceDigest": "01b8a286c623bf453e3b01e52d4cfefc12d32001a5cecdae7ff50bff5a3d1936",
+      "controlledSourceDigest": "83075ac203d1e9bac9b2dc9f47c5c9f167b245c9a9dbd44518c2ac1c9c8b647d",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2903769",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.3390184",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3291573",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Health recommendation drinking water"
+    },
+    {
+      "id": "sent.tatoeba.5506602",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You're the best friend I've ever had.",
+      "finalText": "You're the best friend I've ever had.",
+      "intakeSourceDigest": "bf2774a0aed8d486cab58e7f2997f35049386db7d27dfcecf2f95998eb1e5b68",
+      "controlledSourceDigest": "807ed09e6d0c0fae9d47135d5ab923146091df8e1dd37a27c6923c7883e04a56",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2240379",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2980112",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3344263",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Friendship superlative best friend I've ever had"
+    },
+    {
+      "id": "sent.tatoeba.5506605",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'd love to go to the fair with you.",
+      "finalText": "I'd love to go to the fair with you.",
+      "intakeSourceDigest": "004e92b333772641f72406ec2c827bf718e58a5341c00e0c003d6a536fbfbf34",
+      "controlledSourceDigest": "90224cb6fea85704d958e2e41cd5ebf7632196567a0a0340cd4533b604a97712",
+      "maximumTokenJaccard": 0.5455,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2220251",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.2220254",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.4728707",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Social invitation go to the fair with you"
+    },
+    {
+      "id": "sent.tatoeba.5506607",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You should be on my side.",
+      "finalText": "You should be on my side.",
+      "intakeSourceDigest": "36af13c6792ee245e6f64ae4b87c29c8b137d23d6df8d60e0d2940037bd000a5",
+      "controlledSourceDigest": "f8eb68547769e0d805a5a4bc4aa05b4b0211ae3740b8caab899f255c51651a9e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3044429",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1886543",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2195103",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Loyalty appeal on my side"
+    },
+    {
+      "id": "sent.tatoeba.5506617",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I don't understand you sometimes.",
+      "finalText": "I don't understand you sometimes.",
+      "intakeSourceDigest": "62170044623a606f530d4e1c2a9ba64aaf7e315576c220ac61327a596659a6bc",
+      "controlledSourceDigest": "2c6d1e0eb976dc7d19cf5c784688e2fcfff1a3d271768c9e26454cf7bff76b93",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3729213",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3341630",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3725154",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Conversational puzzle don't understand you sometimes"
+    },
+    {
+      "id": "sent.tatoeba.5506622",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Can you do my hair for me?",
+      "finalText": "Can you do my hair for me?",
+      "intakeSourceDigest": "aa613b611505a176456f44fbe1805794559ff1d0a7a0e23378ef7a374ea5f4c9",
+      "controlledSourceDigest": "5063662565d523ee17fe0f94c2788c40f56a19f6f40c7bcbdef24f692cff1674",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2924908",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1343415",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1675186",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Grooming request do my hair for me"
+    },
+    {
+      "id": "sent.tatoeba.5506623",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Can I have some soda, please?",
+      "finalText": "Can I have some soda, please?",
+      "intakeSourceDigest": "e3f162df3b12b6c0ab340cceabfc94d19d39316d3b6c06b56af898adf19153ee",
+      "controlledSourceDigest": "4b601f98dcdb2cffe5951f6988c0b8f34a1dbca3efa1f7f6c68016746a96605d",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731681",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.53213",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.6044821",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Polite beverage request have some soda"
+    },
+    {
+      "id": "sent.tatoeba.5506624",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "May I have a napkin?",
+      "finalText": "May I have a napkin?",
+      "intakeSourceDigest": "b18f06ac7629d703592447385cd82153afe8587e6041fa4264b8b14665d0484d",
+      "controlledSourceDigest": "1e5c24e4ff50114d265aae5d2d793ea45bcdcda5d7235df9e4b3454390c01f11",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.05.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1678354",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1740455",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Dining etiquette may I have a napkin"
+    },
+    {
+      "id": "sent.tatoeba.5506627",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Don't worry because everything is going to be okay.",
+      "finalText": "Don't worry because everything is going to be okay.",
+      "intakeSourceDigest": "50b85df0ec622ef8749aee6e61d2726623e461ca396ce6d1c79190f26ce11e4b",
+      "controlledSourceDigest": "f2186abd66050eb8697f692d102ea198842300570d2b654dc3c5fab144655e2d",
+      "maximumTokenJaccard": 0.5385,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506628",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.2567711",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.13245307",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Reassurance everything is going to be okay"
+    },
+    {
+      "id": "sent.tatoeba.5506628",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Everything is going to be okay so there's no need to worry.",
+      "finalText": "Everything is going to be okay so there's no need to worry.",
+      "intakeSourceDigest": "e462f360979fdbea48a658d33a4a5711daf42768aa194022dd6593cd06cfb9db",
+      "controlledSourceDigest": "420c7f8dfcb97461b3ee152afe72e12e50339841a8b7921f85399d090284d2a4",
+      "maximumTokenJaccard": 0.5385,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5506627",
+          "score": 0.5384615384615384
+        },
+        {
+          "id": "sent.tatoeba.2756890",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.2966861",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5506627"
+    },
+    {
+      "id": "sent.tatoeba.5506629",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's not as simple as it seems.",
+      "finalText": "It's not as simple as it seems.",
+      "intakeSourceDigest": "da0a0f48afa12a6da189af144464f82912feab268ba3d59a40685ff5f5cf4f1f",
+      "controlledSourceDigest": "417e073d45965ca0edb035740e6460fe88d1f82799b367cc2cc54e9ed1d6822c",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3555615",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1867365",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2280545",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Equative comparison not as simple as it seems"
+    },
+    {
+      "id": "sent.tatoeba.5506630",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's more complicated than it looks.",
+      "finalText": "It's more complicated than it looks.",
+      "intakeSourceDigest": "5887b222d6535b6e36b3f1eaae21ddd10e5456deb914d9f02411cdb0da3c2633",
+      "controlledSourceDigest": "7a42b8f70e6bf21186bcd2f775a6bb3151eea339db5f473181e4a9a9e83430b2",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2156421",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2156422",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3428701",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Comparative evaluation more complicated than it looks"
+    },
+    {
+      "id": "sent.tatoeba.5506632",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Curling my hair takes a lot of time.",
+      "finalText": "Curling my hair takes a lot of time.",
+      "intakeSourceDigest": "ffee64fb149e90cc1f43b5f1648417c9a330fa639f1b2c05f68ad2f5a2fa47a0",
+      "controlledSourceDigest": "a9bca6eb2b7cfcb94848b6c71ab2439639e7c46dacd89315e71a58db5fb7c544",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.240505",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1638805",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.894912",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Personal styling duration curling my hair takes a lot of time"
+    },
+    {
+      "id": "sent.tatoeba.5506633",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I've never dyed my hair before.",
+      "finalText": "I've never dyed my hair before.",
+      "intakeSourceDigest": "0f0793140cd86da08ea1ac7487a61ab89a7486c4174c509b54d29fb24ae2d740",
+      "controlledSourceDigest": "31fd0fb963247593501d7876c0ba10f4e1fa0deadebd2b5d2f355f56aecc6747",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2220313",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3330651",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.4481947",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Experiential present perfect never dyed my hair before"
+    },
+    {
+      "id": "sent.tatoeba.5508563",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I, too, am not a student.",
+      "finalText": "I am not a student either.",
+      "intakeSourceDigest": "1d30a9096cfb7706af5a038af92869ed3a1d7a836299a79991c94d0d430f6cce",
+      "controlledSourceDigest": "6a35f3c0ef803d23c1bf3310d00e6fde8f3c428ce94df2ad2570b3113830114b",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1444878",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1326216",
+          "score": 0.5
+        },
+        {
+          "id": "sent.gra1.01.01.1",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Standardized natural negative adverbial clause either"
+    },
+    {
+      "id": "sent.tatoeba.5509127",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The show is on Monday.",
+      "finalText": "The show is on Monday.",
+      "intakeSourceDigest": "28f8710bcc57bf938dece6afcae0abcf7d2cd2c293e42fdb5f298f0b7d155d44",
+      "controlledSourceDigest": "9610faade8ccd55c9d0983451e129216c63a33ae4e03226f081bed740c8b27ae",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509219",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.321169",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.grb2.01.06.2",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Event scheduling show is on Monday"
+    },
+    {
+      "id": "sent.tatoeba.5509147",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Be there or be square.",
+      "finalText": "Be there or be square.",
+      "intakeSourceDigest": "ce70955bb666028ebefb16a8411cca9065f17dd3abfd8a1454df657875a4096d",
+      "controlledSourceDigest": "bd937238badfe93caeb62c63aadc413da32b2349f12ef08ae131dc6268bba3e4",
+      "maximumTokenJaccard": 0.2857,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1120495",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.2941906",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.3015884",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Rhyming idiom be there or be square"
+    },
+    {
+      "id": "sent.tatoeba.5509152",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This can't really be happening, can it?",
+      "finalText": "This can't really be happening, can it?",
+      "intakeSourceDigest": "fe9dc891e0b038ec2bd9e9fde41aeaa050613561f7f5058f66b7c656c5732aad",
+      "controlledSourceDigest": "0f050de56585750dd66bfabe63c41abca3860fc50f1d4d772f0cf8b431a17480",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519202",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2582693",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3168570",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Tag question disbelief can't really be happening"
+    },
+    {
+      "id": "sent.tatoeba.5509153",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please tell me this isn't happening.",
+      "finalText": "Please tell me this isn't happening.",
+      "intakeSourceDigest": "49952a3047a5110f1eb432095c81e61caffc0781e1c7ea4858fd64f7798600dc",
+      "controlledSourceDigest": "d5395683d74d4d90dd5f18fe67e293cbc8c6da59ba0a38962a7ccc7428f5219b",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509154",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.3722027",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3726209",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509152"
+    },
+    {
+      "id": "sent.tatoeba.5509154",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please tell me this isn't really happening.",
+      "finalText": "Please tell me this isn't really happening.",
+      "intakeSourceDigest": "045bf77f84342ea2b03ae75f239eac3a268f91de0970054597ba1d3ccd32c13b",
+      "controlledSourceDigest": "057cb3ebe1cc413252f0eb57c7cbff43daa3bda12f5d6b87c2d5628335f52983",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509153",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.3722027",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5509155",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509152"
+    },
+    {
+      "id": "sent.tatoeba.5509155",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I hope this isn't really happening.",
+      "finalText": "I hope this isn't really happening.",
+      "intakeSourceDigest": "80869eab7a249aa47f7f30abd3203abff4cab88d76fa6adac27cd84391d23c67",
+      "controlledSourceDigest": "e5b8280d2d50b3f3865b5b22f366102c491bfa6ea60cd4e39ce3d3e8d4e5e7f6",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2837555",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.5509154",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3554561",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509152"
+    },
+    {
+      "id": "sent.tatoeba.5509160",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What color are the tiles?",
+      "finalText": "What color are the tiles?",
+      "intakeSourceDigest": "c333868d6d03a0dd267eceb6b1efcc121973957af8c684e09b70a99b864cbef4",
+      "controlledSourceDigest": "2df670b3abf5cdd39c9b4b76d427daaf39ca2e552289b16bd335b72460933b0d",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.682354",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3222802",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3731224",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Interior decoration color of the tiles"
+    },
+    {
+      "id": "sent.tatoeba.5509162",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How many tiles will we need?",
+      "finalText": "How many tiles will we need?",
+      "intakeSourceDigest": "0c33c1283a9c368862449117667b37543eafb5a14fb208f69d3c18de5c3a56be",
+      "controlledSourceDigest": "b9b79375470934aca368149116aa7c2804b8010de9fab350f5ce373ddd3b3a73",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509163",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5509164",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2911951",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Renovation quantity how many tiles will we need"
+    },
+    {
+      "id": "sent.tatoeba.5509163",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How many tiles do you need?",
+      "finalText": "How many tiles do you need?",
+      "intakeSourceDigest": "352f72c07b8007e0d3cab2b9701e97f90201cc73b2494f8d69b7d451e2e91b26",
+      "controlledSourceDigest": "fcdd45536825b0fee322833d154a86877d9f840489c68f3343cc96118903eeb0",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.04.1",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1655760",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2167392",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509162"
+    },
+    {
+      "id": "sent.tatoeba.5509164",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How many tiles should we buy?",
+      "finalText": "How many tiles should we buy?",
+      "intakeSourceDigest": "dc9bbe464ba5936723df7e1088ebb1b67654150afbff4f5afd692be1b845371e",
+      "controlledSourceDigest": "254ceb487239aca65d87215754e25ad9ea876276e49d4dc893c8379ef738859d",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509162",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1820637",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2167400",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509162"
+    },
+    {
+      "id": "sent.tatoeba.5509185",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Who can I call to fix my plumbing?",
+      "finalText": "Who can I call to fix my plumbing?",
+      "intakeSourceDigest": "cd8bb76a32098df3c222120875c3beca01af5c705caea99ef87c8028dba0dcac",
+      "controlledSourceDigest": "964eacaa1d38657feeb1c0e86fc575bbe9c0e9bbfa263ccce72051e687823a8b",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509186",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.1744859",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2701493",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Home maintenance who can I call to fix my plumbing"
+    },
+    {
+      "id": "sent.tatoeba.5509186",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Who should I call to fix my plumbing?",
+      "finalText": "Who should I call to fix my plumbing?",
+      "intakeSourceDigest": "b732d60d2004496a608472391a8d791e20321f62c09ed70fe0d0a733bbfb46bd",
+      "controlledSourceDigest": "e282880560b478d8f823be4cfc881783e6ad52ef44180e5ca834b935886a5db5",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509185",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.1744859",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2270207",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509185"
+    },
+    {
+      "id": "sent.tatoeba.5509187",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I have a leaky faucet.",
+      "finalText": "I have a leaky faucet.",
+      "intakeSourceDigest": "fb8fa34fcf2932c2e15aea1728b3bd0a384a287d72a7d55a1f410561e5e457b8",
+      "controlledSourceDigest": "5c8a2d5de7136c2060595fc8e0760381f6e232f90e465127073fe6bac92ba065",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.05.1",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1678354",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2182797",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Plumbing issue leaky faucet"
+    },
+    {
+      "id": "sent.tatoeba.5509188",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How can I fix my leaky faucet?",
+      "finalText": "How can I fix my leaky faucet?",
+      "intakeSourceDigest": "7678e5c37e9db8502d608a05fdf262d418c24cb09f8fccfad6ebb0fabb14d457",
+      "controlledSourceDigest": "0082918be83ecf49e643c5493c5ed7905ed4b3d085039cb576dc307fb9831ace",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509185",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1806705",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1806713",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509187"
+    },
+    {
+      "id": "sent.tatoeba.5509191",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "People are so competitive nowadays.",
+      "finalText": "People are so competitive nowadays.",
+      "intakeSourceDigest": "a49097b78cc7f26096d765b6ff483145693684a61b0289b0bdf8f7ed6a0d18c3",
+      "controlledSourceDigest": "63c6bab0fccbaa73f13342b893eeb4a2363c215122baf7fb11874f0f51fea8dc",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1193413",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1426731",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2908491",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Social observation competitive nowadays"
+    },
+    {
+      "id": "sent.tatoeba.5509192",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It was better in the old days.",
+      "finalText": "It was better in the old days.",
+      "intakeSourceDigest": "32903b536d0a95e8588ad83b4d1bb540cfeba889e24b9024c55c2524377d134b",
+      "controlledSourceDigest": "1bcf2d501dcd1573b817ec95b96d2cfc2431d8bd7692d92190fee38163e29f3d",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4284623",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2195186",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.326472",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Nostalgic comparison better in the old days"
+    },
+    {
+      "id": "sent.tatoeba.5509198",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Why is it okay for women to wear earrings, but not men?",
+      "finalText": "Why is it okay for women to wear earrings, but not men?",
+      "intakeSourceDigest": "1ec228476fb4b7dcda05cce874031df84b9c011b8d9e15b05616a7ed1f0a1758",
+      "controlledSourceDigest": "9834f66b97e7a98bd5b04152f0622a4469fc182b5e14eaa30573999a7ec404c9",
+      "maximumTokenJaccard": 0.3125,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.308179",
+          "score": 0.3125
+        },
+        {
+          "id": "sent.tatoeba.267289",
+          "score": 0.29411764705882354
+        },
+        {
+          "id": "sent.tatoeba.63269",
+          "score": 0.29411764705882354
+        }
+      ],
+      "rationale": "Social norms inquiry wear earrings"
+    },
+    {
+      "id": "sent.tatoeba.5509205",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "What would you do if you were in my position?",
+      "finalText": "What would you do if you were in my position?",
+      "intakeSourceDigest": "0e03c86a1f9c90e9925170358602c40925278ba4294b6c40f94761a87505d16c",
+      "controlledSourceDigest": "696c2c7e0fcd3e300883cfcac499698b574d05953a05b63591f31329fd843e65",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.31092",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.2700626",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5509207",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Second conditional advice what would you do"
+    },
+    {
+      "id": "sent.tatoeba.5509207",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "What would you do, if you were me?",
+      "finalText": "What would you do, if you were me?",
+      "intakeSourceDigest": "8417dd9542b7ecf5acb58b9a3476f6db8d41585ceadfe63581bc9e41fba15a82",
+      "controlledSourceDigest": "39182a944df928aa04cf61c14e8637d07125a46c18a13f109b20a2e8d5275e8c",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2134224",
+          "score": 0.625
+        },
+        {
+          "id": "sent.00000018",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.31092",
+          "score": 0.6
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509205"
+    },
+    {
+      "id": "sent.tatoeba.5509209",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are a lot of things that could go wrong with that.",
+      "finalText": "There are a lot of things that could go wrong with that.",
+      "intakeSourceDigest": "d9abbd838dcac47bd40affb0fc247fd515204d6cd9b31530a9fe4ebf64aac368",
+      "controlledSourceDigest": "a5a9d51216090fea981555a362684e1a955275ff83ead5a7982fa155edad747e",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.gra2.02.04.3",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.1761397",
+          "score": 0.35714285714285715
+        },
+        {
+          "id": "sent.tatoeba.281289",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Prudential caution could go wrong"
+    },
+    {
+      "id": "sent.tatoeba.5509212",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't care what society thinks.",
+      "finalText": "I don't care what society thinks.",
+      "intakeSourceDigest": "41191b6575359ca8975fc3d94d262fc2ebb08d6067fd5104e786dd16d3f74308",
+      "controlledSourceDigest": "7c4c200d6d22d54f13d4a522d9025ea4944ab64cfd4502e2bce797fffda81045",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509216",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2311289",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2311290",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Individualism don't care what society thinks"
+    },
+    {
+      "id": "sent.tatoeba.5509216",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Why should I care what society thinks?",
+      "finalText": "Why should I care what society thinks?",
+      "intakeSourceDigest": "004087aad114a8ec21a699515cdea4fd8b63bc1392710e98a93e0903f4724c44",
+      "controlledSourceDigest": "7d308d17f0437ddc4a2abb05a12d5bc3b5b48161f7508f54c603f0071873f19a",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509212",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3525116",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3104454",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509212"
+    },
+    {
+      "id": "sent.tatoeba.5509217",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Crime rates are the lowest they've been in decades.",
+      "finalText": "Crime rates are the lowest they've been in decades.",
+      "intakeSourceDigest": "dad4441085bce7d0bdd979a9a367a3f6adbe87a6b31d3d779a64522a3140b8df",
+      "controlledSourceDigest": "0dff1cfd1e6c02ea4532c812cedc7e6ffd0924cd6bd2d0b521c796194819769d",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2268166",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.3377878",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.35089",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Sociological trends crime rates lowest in decades"
+    },
+    {
+      "id": "sent.tatoeba.5509219",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "The event is on Monday.",
+      "finalText": "The event is on Monday.",
+      "intakeSourceDigest": "35a73b376e6389a4fe5d912741eada2be3a96ba0b509239f14a6cba331303dc2",
+      "controlledSourceDigest": "c083c69f1fc6334d1f0dcbc7c1e00f7ace20408f25d94c2e6d6e2ec80ebc223f",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509127",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.321169",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.grb2.01.06.2",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Event calendar event is on Monday"
+    },
+    {
+      "id": "sent.tatoeba.5509251",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Please tell me you didn't actually do it.",
+      "finalText": "Please tell me you didn't actually do it.",
+      "intakeSourceDigest": "3759cb40b61c3ff62fe69a4cf4ceb6026c87acfe8e1e4c3ad4aff7b12a5145d3",
+      "controlledSourceDigest": "2e24827595e102a1ad5306351c48e78ff839a408a4226f42a5522fa653b9e8c9",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3724564",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.5519183",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.2246724",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Skeptical plea didn't actually do it"
+    },
+    {
+      "id": "sent.tatoeba.5509273",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I woke up at three.",
+      "finalText": "I woke up at three.",
+      "intakeSourceDigest": "e9142ce856a330702a5d0755ff4df83a9c3b4cd0291a99c02afbf3e63e61ec7a",
+      "controlledSourceDigest": "68d9759bf9e6a55ad8a53cd1b7139c80486cf8a6f62d6d6657c9952be2a72906",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509274",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2267146",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2612082",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Time waking woke up at three"
+    },
+    {
+      "id": "sent.tatoeba.5509274",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I woke up at three o'clock.",
+      "finalText": "I woke up at three o'clock.",
+      "intakeSourceDigest": "e388d9f64f571a885d3dd46e171621b496af092b79ff3956a7b8ab5803e6b3ed",
+      "controlledSourceDigest": "39e63911a48b2857ffbc9ef46c4cae1543e16279f62205120f3f374b7aa62aa3",
+      "maximumTokenJaccard": 0.8333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509273",
+          "score": 0.8333333333333334
+        },
+        {
+          "id": "sent.tatoeba.2267146",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2612082",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509273"
+    },
+    {
+      "id": "sent.tatoeba.5509275",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You can't possibly be serious.",
+      "finalText": "You can't possibly be serious.",
+      "intakeSourceDigest": "2f3a8966435e9a698244e90c37251858ea915fb7380ce6a18d269a154274d950",
+      "controlledSourceDigest": "5187555d0735d80f68be9199550848d946d05149b2a7701290531bb3806bad05",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1055414",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3723163",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3723182",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Disbelief idiom can't possibly be serious"
+    },
+    {
+      "id": "sent.tatoeba.5511212",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I cried myself to sleep almost every night.",
+      "finalText": "I cried myself to sleep almost every night.",
+      "intakeSourceDigest": "5701f428214e73f70ae0a5a1f3c6865c85f3955ab85086ad1f51a89b6b3ebccb",
+      "controlledSourceDigest": "484f1a844c3cd28008d8201ad8aa66154ababa2079a53e2fa3d10ad4c3e887f0",
+      "maximumTokenJaccard": 0.875,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3584885",
+          "score": 0.875
+        },
+        {
+          "id": "sent.tatoeba.1740412",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.66055",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Emotional idiom cried myself to sleep"
+    },
+    {
+      "id": "sent.tatoeba.5511668",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The Greek question mark looks like a semicolon.",
+      "finalText": "The Greek question mark looks like a semicolon.",
+      "intakeSourceDigest": "5ab6ddbc3b7aa71259e511008af02a69c9669ea4920d0bc7780393e5f04fc152",
+      "controlledSourceDigest": "3d83518379035c0f0e5e7738b66c63b823e11a76fbdc41fb91a2ab3e4f2a7068",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.18264",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.238777",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.2258411",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Punctuation trivia Greek question mark looks like a semicolon"
+    },
+    {
+      "id": "sent.tatoeba.5511737",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I need you to be honest.",
+      "finalText": "I need you to be honest.",
+      "intakeSourceDigest": "f0a83b53b3cbfbcab736504c8514583a79312f5bd39bb7d4a965a7ce97e7a653",
+      "controlledSourceDigest": "ccc46c2493ccad80574b8482edbb43538fd9f25bd71f1ef4d9a00c18785a6983",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726880",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3729066",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3010266",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Candor appeal need you to be honest"
+    },
+    {
+      "id": "sent.tatoeba.5512036",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "How do they want to receive their money?",
+      "finalText": "How do they want to receive their money?",
+      "intakeSourceDigest": "616d1ba9e9c7c486aa7162ca83458d17f51bb061fbe6185e8af41de05cafb0ad",
+      "controlledSourceDigest": "c86ea128a864f91b54816468bcb17954d08f27d69624800df7d90fce862bbccf",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5512037",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.680767",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3731972",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Financial transaction receive their money"
+    },
+    {
+      "id": "sent.tatoeba.5512037",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "How do they wish to receive their money?",
+      "finalText": "How do they wish to receive their money?",
+      "intakeSourceDigest": "c8dbf1dca91c666a15bb836b7b47fbf9cc6d61a2c0bde3b0e22b7e5f49d0d48a",
+      "controlledSourceDigest": "ba9c1ef8ddd370bfca3a3fd07a49e4347842e59fd3365e8e892d91aae49c477b",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5512036",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.3270895",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3731972",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5512036"
+    },
+    {
+      "id": "sent.tatoeba.5512038",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why don't you say anything?",
+      "finalText": "Why don't you say anything?",
+      "intakeSourceDigest": "6970217227d891ca8b612a73a9035e3c1e76cc0b2ff3736c289cba8161ed81b0",
+      "controlledSourceDigest": "63e1b8e3c33b90420bc4d02ef7ac671480041dd3ab59ea5761e3f344691d6d40",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3009145",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.4826141",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1084551",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Conversational silence why don't you say anything"
+    },
+    {
+      "id": "sent.tatoeba.5512312",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You are a mechanical engineer and I am a software developer.",
+      "finalText": "You are a mechanical engineer, and I am a software developer.",
+      "intakeSourceDigest": "642fc44540d6fc1153c557c2227ab99eea3fd8f4bfa25b927825f40f0ab814b7",
+      "controlledSourceDigest": "a28cbb45f37a581df2ff57c23459e51dc3f1be27811e3bafc7bea335eb468d8b",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.9597",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.71205",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2715921",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Coordinating comma between independent clauses"
+    },
+    {
+      "id": "sent.tatoeba.5513270",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "The building was scorched by the fire.",
+      "finalText": "The building was scorched by the fire.",
+      "intakeSourceDigest": "30d221fd815c5041322dba57c8ecc74659f56dfb07d83644ab058faaee27bfdb",
+      "controlledSourceDigest": "383d2d48732e8b0e842336338eb5d86493bcc58add76ef4e3d4bb6aee700ca18",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.273790",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.67862",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1739754",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Passive damage scorched by the fire"
+    },
+    {
+      "id": "sent.tatoeba.5513272",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Once again, my plans have been thwarted.",
+      "finalText": "Once again, my plans have been thwarted.",
+      "intakeSourceDigest": "e863be910919eaedee9160ae5927eaf4634e0254cf91cb692827e3288a8f40bb",
+      "controlledSourceDigest": "ab1c631306b10c33e376672385672b40f82603fb88c5f87620ad5c0c7df9fee4",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.327475",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2845888",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.310665",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Formal passive idiom plans have been thwarted"
+    },
+    {
+      "id": "sent.tatoeba.5513499",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are just too many choices to pick from.",
+      "finalText": "There are just too many choices to pick from.",
+      "intakeSourceDigest": "c6fba27f7a2ee10619b44d3f6bc97cd4268347e99b50eb8d588c545a07d55cff",
+      "controlledSourceDigest": "593718b05e8bef03fd60decded658f1793a6b694b3cd923dc4c219563d83706d",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726949",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2720722",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3077921",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Preposition stranding too many choices to pick from"
+    },
+    {
+      "id": "sent.tatoeba.5514023",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "You shouldn't give in to temptation.",
+      "finalText": "You shouldn't give in to temptation.",
+      "intakeSourceDigest": "96a8d3f350cc74c34ce87488b9d114e0d3a3a450d4375e8e2c570188cc40387c",
+      "controlledSourceDigest": "018a20305705a87f06a6ec54143ebdec78c8e056951c911985d39cb4946a68cb",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2666500",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.268625",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.4588046",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Phrasal verb give in to temptation"
+    },
+    {
+      "id": "sent.tatoeba.5514027",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You can't smoke in school.",
+      "finalText": "You can't smoke in school.",
+      "intakeSourceDigest": "3a66e1046dab13bd102193e8dc36c3a14bb0b1cd9f59bffc56d740a66760d39b",
+      "controlledSourceDigest": "27671e72c3ab3518a7e9e3a897bedcc3ad366e912869098f14130585d2e378ea",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2436428",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3752922",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.5506426",
+          "score": 0.375
+        }
+      ],
+      "rationale": "School prohibition can't smoke in school"
+    },
+    {
+      "id": "sent.tatoeba.5514029",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "It was a difficult game.",
+      "finalText": "It was a difficult game.",
+      "intakeSourceDigest": "e546cf16ec872e84d53bdc3b8692422c69f14a8a948778aec2b2d2d763b3553b",
+      "controlledSourceDigest": "f545db3dbc041c2ae23ad6fe47fe28c2cbf0abbdab8770340d753148dffe9a6b",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.807117",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3148051",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1300798",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Sports difficulty difficult game"
+    },
+    {
+      "id": "sent.tatoeba.5514190",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I think I already wrote to you.",
+      "finalText": "I think I already wrote to you.",
+      "intakeSourceDigest": "b80edd97bde2b9742e6d69cdf5c8051b6e2a398bf49d22f134458e42e8914d5e",
+      "controlledSourceDigest": "9c87053921237dad40e9134f5ca3b0559f7f12c2af56f5e524d63a177ba83053",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3724424",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.713284",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3729394",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Correspondence recollection already wrote to you"
+    },
+    {
+      "id": "sent.tatoeba.5515389",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "My salary is very low.",
+      "finalText": "My salary is very low.",
+      "intakeSourceDigest": "02c3c12b88f98cca16f4ef81f1f98b92bad8fcf61d5c693bea66e75d6665d7ec",
+      "controlledSourceDigest": "71de209f27989de588cbb4ae0ff22b94a876de12b80e447472ad98de23308656",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.245571",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2478894",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3093805",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Personal economics salary is very low"
+    },
+    {
+      "id": "sent.tatoeba.5515393",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm hungry. I'm going to eat something.",
+      "finalText": "I'm hungry. I'm going to eat something.",
+      "intakeSourceDigest": "80c32f55642e7aa13c0e7fdeeb530b28afd44e3786dff72a87febf7669a6b7ac",
+      "controlledSourceDigest": "59b3e81f92a8b22926f9f9ab7be7794953aeddd19fd13720a01c308c29976a4e",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.372009",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3724089",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1370756",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Everyday hunger going to eat something"
+    },
+    {
+      "id": "sent.tatoeba.5515401",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's your fault that we arrived late.",
+      "finalText": "It's your fault that we arrived late.",
+      "intakeSourceDigest": "5b112fa860b31e6071e8f3293aa9bb1973c1b0ecb727caa84ba1310f5ec5a4b2",
+      "controlledSourceDigest": "81f1a71b685d484b6d921a7e4564e9cb68c5b93d3b999c48c1155e143fd879cf",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2776247",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3724410",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.873071",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Causal attribution your fault that we arrived late"
+    },
+    {
+      "id": "sent.tatoeba.5515449",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You can't smoke during work hours.",
+      "finalText": "You can't smoke during work hours.",
+      "intakeSourceDigest": "f169cd227c2ac9ddd20c4d152ecbf1388793d4bc7bc8e590a5b5b86c5c05c761",
+      "controlledSourceDigest": "04225fce1a7e21fad7c9f0936365a82530d416f43214f61673f4d4e1e831b229",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5514027",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2211142",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.320406",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Workplace rule during work hours"
+    },
+    {
+      "id": "sent.tatoeba.5515457",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I see you going by my house every day.",
+      "finalText": "I see you going by my house every day.",
+      "intakeSourceDigest": "5393d709ef15d669555f0331b603cf86bb9c0dd2f72b78c26cd3aa6d212a000d",
+      "controlledSourceDigest": "ede0905169bad40496978861515f5486657bae3166c60a446dff3dbecc9ffaa1",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3259250",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.4563313",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.1740161",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Perception verb going by my house"
+    },
+    {
+      "id": "sent.tatoeba.5515464",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Please don't put it on the table.",
+      "finalText": "Please don't put it on the table.",
+      "intakeSourceDigest": "9c65ca8ec2271f1c81365908f60055ea290ae5bbb9137812911ea97396c4e429",
+      "controlledSourceDigest": "584fa13d0217f31ebebd77b5747378660ab99d0bce4a7c3fc0f6a2925a55db89",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5515465",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.2647629",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.35482",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Placement imperative don't put it on the table"
+    },
+    {
+      "id": "sent.tatoeba.5515465",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please don't put that on the table.",
+      "finalText": "Please don't put that on the table.",
+      "intakeSourceDigest": "0e8e671f91ca67b7e7429dfb2ab051bb4374406a69cb6cc7b962e9993d80934e",
+      "controlledSourceDigest": "8cbd7e4f987a7350735d825c7675eda036f9f915789037338e21d95ffec96f8b",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5515466",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.5515464",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.2688171",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5515464"
+    },
+    {
+      "id": "sent.tatoeba.5515466",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Don't put that on the table.",
+      "finalText": "Don't put that on the table.",
+      "intakeSourceDigest": "331b1f6bb29d1aaf3661ea3583239c74b290f553d606e1c09745d407b751e46b",
+      "controlledSourceDigest": "3009ec5b20477af61ac3a52c46adf8f4b6278d8fe201acba20ab34ca1fc3250f",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5515465",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.2688171",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.5515464",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5515464"
+    },
+    {
+      "id": "sent.tatoeba.5515484",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll give you my car.",
+      "finalText": "I'll give you my car.",
+      "intakeSourceDigest": "a99c022e330bc79e1fb90ae9e1958cf86d4726264e3643a4f9f5ad4654126b79",
+      "controlledSourceDigest": "101ec92a26bb7543dd880c66b091d918e602248ca9f4799106bc978e9e65f27b",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2983968",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3722177",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.265472",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Ditransitive offer give you my car"
+    },
+    {
+      "id": "sent.tatoeba.5515485",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I have to organize my schedule before the end of the month.",
+      "finalText": "I have to organize my schedule before the end of the month.",
+      "intakeSourceDigest": "741aa5e4866b2da552bb3ef76d4625dcd3526347c0e3c18278adea5c9e8816cc",
+      "controlledSourceDigest": "3ba6ad3ca680ee3c652bb820db67275e438e90a09ec5f232dc43470b0f06d18a",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.242028",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.680701",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1394648",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Time management organize my schedule"
+    },
+    {
+      "id": "sent.tatoeba.5515487",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "The light here's not good for reading.",
+      "finalText": "The light here is not good for reading.",
+      "intakeSourceDigest": "224b262b309bb27802d9c1c47bdbd5ec9f90702a3eb8787e52d551d5255d45a0",
+      "controlledSourceDigest": "87a4abaeb33567bd7b687a0b6fb6bd869a260cdd0cd390f8a85aa04622924bdd",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.323217",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.280608",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.4000800",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Standardized predicate negative is not good for reading"
+    },
+    {
+      "id": "sent.tatoeba.5515971",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I think this is a conversation for a much later time.",
+      "finalText": "I think this is a conversation for a much later time.",
+      "intakeSourceDigest": "c0d7d5365ed327bc4b8f58da0f57c8b1c395285041cf5651bffd5e3c9a646eb9",
+      "controlledSourceDigest": "6557484f59e18b00b55f662923c6a7d73017f8ea2081301efcad079710a53074",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3476232",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.3137809",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.56447",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Temporal deferral conversation for a much later time"
+    },
+    {
+      "id": "sent.tatoeba.5516039",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Don't be afraid, I'm here.",
+      "finalText": "Don't be afraid. I'm here.",
+      "intakeSourceDigest": "e5f1a83e9ed8c39d52a1ee317ff2fccf4f702422b20e1c168c4535fd86b1bdb6",
+      "controlledSourceDigest": "cbdffb519be358247ebb0304faab89cce420a7292d4e9420973303baa9e20779",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3938865",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.20858",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.3143675",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Standardized two independent sentences to prevent comma splice"
+    },
+    {
+      "id": "sent.tatoeba.5516118",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Miraculously, he guided the full team of oxen through the raging river, unscathed.",
+      "finalText": "Miraculously, he guided the full team of oxen through the raging river, unscathed.",
+      "intakeSourceDigest": "32884239a9de8287ffc6b7660196928ccc6d08d073b7fd2fc566417caf6c02be",
+      "controlledSourceDigest": "35bc98c54451ba76a5d154ebed18d35517080551b186531586e44b329a8e8ff4",
+      "maximumTokenJaccard": 0.2143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2268178",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.273168",
+          "score": 0.21428571428571427
+        },
+        {
+          "id": "sent.tatoeba.303638",
+          "score": 0.21428571428571427
+        }
+      ],
+      "rationale": "Literary narrative oxen through the raging river unscathed"
+    },
+    {
+      "id": "sent.tatoeba.5516202",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Sorry, I only meant it as a joke.",
+      "finalText": "Sorry, I only meant it as a joke.",
+      "intakeSourceDigest": "39341b335dd8d186b194d70d7889a87c5fe35acdfc591bf99df121fc266180df",
+      "controlledSourceDigest": "eca1a1913989c9cd5f48dd4c17004edb97ce02307dbdeb60ac6b11ab65e3998d",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3725718",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3606977",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1546061",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Conversational clarification meant it as a joke"
+    },
+    {
+      "id": "sent.tatoeba.5516203",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "If we don't hurry, we'll be late.",
+      "finalText": "If we don't hurry, we'll be late.",
+      "intakeSourceDigest": "59b1c93044abad523e26eec5e21a9e862b9d65e0cea36db8dd51b47ea324a351",
+      "controlledSourceDigest": "2836c64a17d6eb1f3d4817daf8661db1a028c1fdec03f6b87f8ae1178efa743c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2476333",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2267258",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3665237",
+          "score": 0.4166666666666667
+        }
+      ],
+      "rationale": "First conditional urgency if we don't hurry"
+    },
+    {
+      "id": "sent.tatoeba.5516208",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Do you know what PDF stands for?",
+      "finalText": "Do you know what PDF stands for?",
+      "intakeSourceDigest": "8274596ca3ab81db84ca49c57f1f45f13d934f07b9a73d88c89ed998b599fbfc",
+      "controlledSourceDigest": "c2f012da8429e939a0f74edbd7117bac046d5947f763558ed1c97e45b0733da5",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731515",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4758823",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2126162",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Acronym inquiry what PDF stands for"
+    },
+    {
+      "id": "sent.tatoeba.5516209",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is from a rural area.",
+      "finalText": "Tom is from a rural area.",
+      "intakeSourceDigest": "cfe910664f68e108429027e838f6c746e951776b89517c9308e1251307a733ba",
+      "controlledSourceDigest": "fab54f3252a99cf6d25dc5bfff40ab4d408dc0432ffa4c7fdb74d1a0aa740959",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3727556",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.1025041",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3726605",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Demographic origin rural area"
+    },
+    {
+      "id": "sent.tatoeba.5516210",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "How about doing a bit of research on your own before asking for help?",
+      "finalText": "How about doing a bit of research on your own before asking for help?",
+      "intakeSourceDigest": "fc6b05c730ba2ea93c15ee7cb976a0883f99d7016380f41ad5d37066d07f336a",
+      "controlledSourceDigest": "06f5fefdd67eeea178272e93d3066d55d3f49883e3e00afddd8c042d102f3851",
+      "maximumTokenJaccard": 0.25,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2653243",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3724151",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.478582",
+          "score": 0.23809523809523808
+        }
+      ],
+      "rationale": "Self-reliance suggestion doing a bit of research on your own"
+    },
+    {
+      "id": "sent.tatoeba.5516226",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Let's have a little fun.",
+      "finalText": "Let's have a little fun.",
+      "intakeSourceDigest": "a629426b108364929d30b9e40c94f46ac187dfc444d4227f6b5a7a62d3ed8d0a",
+      "controlledSourceDigest": "8853d43ec3442c2d5b312725648282567f714322d2f00694944a7dc2287544d0",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2843470",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.4873721",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1275006",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Social suggestion have a little fun"
+    },
+    {
+      "id": "sent.tatoeba.5516244",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Were you up all night?",
+      "finalText": "Were you up all night?",
+      "intakeSourceDigest": "03cc4a783bca292ff39bd64205d281365bcc9ea036cc1b66d29593d4c52d6251",
+      "controlledSourceDigest": "b7f88a44e9fffe6abed83c96c06455c68217acf72a4b38df5c4c4f3365f3c487",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3305872",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.256105",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2171125",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Sleep inquiry were you up all night"
+    },
+    {
+      "id": "sent.tatoeba.5516258",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom taught Mary how to fly a kite.",
+      "finalText": "Tom taught Mary how to fly a kite.",
+      "intakeSourceDigest": "81d287ded898a2352640482650f9ab72c9ff6dc9178b8c58bf8bcba9a466a134",
+      "controlledSourceDigest": "5af9b9ba90991aba340040ec2e398617df1184bb8889c2d54e3613dd642d0fb0",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2961590",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.1751937",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3901933",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Outdoor recreation taught Mary how to fly a kite"
+    },
+    {
+      "id": "sent.tatoeba.5516929",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Thank God you found me.",
+      "finalText": "Thank God you found me.",
+      "intakeSourceDigest": "9696014f46902026c5793f1d120774caa8ff54e34e7bd59878a959cff37082b6",
+      "controlledSourceDigest": "0aa785bf3b5cb11214ff13b10a28ad176b52b82f63cbfdab681a4fd567a40a2b",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.gra2.05.05.2",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1718998",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1341463",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Exclamation of relief thank God you found me"
+    },
+    {
+      "id": "sent.tatoeba.5516950",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "That's one way of looking at it, I suppose.",
+      "finalText": "That's one way of looking at it, I suppose.",
+      "intakeSourceDigest": "ebf7395c085cd93bb66c18ca18776ddd27cade52330e3c237c471d995f9fbec9",
+      "controlledSourceDigest": "33ff5d5b7b7af0b74aaf0ae324396ceebd7d301d57ee9bf8f8969acbd814127b",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3728287",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2267929",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3729674",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Conversational stance one way of looking at it"
+    },
+    {
+      "id": "sent.tatoeba.5516959",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Afghanistan is a landlocked country.",
+      "finalText": "Afghanistan is a landlocked country.",
+      "intakeSourceDigest": "644a56ab82585434168e92d48859f51642ab85b40fcfc3e6b1cb36eec73b10b4",
+      "controlledSourceDigest": "235dfeeede8f5676753f2ee44d2d4c4165258f442545c5b92719bcba7405b4d2",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1802713",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2230447",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2276558",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Geographical fact Afghanistan landlocked country"
+    },
+    {
+      "id": "sent.tatoeba.5516974",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom knows the capital of each state in the United States.",
+      "finalText": "Tom knows the capital of each state in the United States.",
+      "intakeSourceDigest": "26d84b081e8230b2341157371bc33920a8f82d83e2ec9a2e5fe16254e4e62c32",
+      "controlledSourceDigest": "14d54e954766fa8983f0cca96309fcdba4f2e5531126feb327eaffcaa9fc15c7",
+      "maximumTokenJaccard": 0.3846,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3629893",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.680512",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.2883407",
+          "score": 0.35714285714285715
+        }
+      ],
+      "rationale": "Geographical knowledge capital of each state"
+    },
+    {
+      "id": "sent.tatoeba.5517468",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You should find a job.",
+      "finalText": "You should find a job.",
+      "intakeSourceDigest": "45924a2611089aae5f6bd00961a09b1909686fef18d04bbfe4974945f24358ab",
+      "controlledSourceDigest": "05e19b4c77d02420e269cb0f761d53923d2eb3b106a29287cf1b8ac57733ba3a",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1632065",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2654826",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2961209",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Practical advice should find a job"
+    },
+    {
+      "id": "sent.tatoeba.5517476",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Why is it so difficult to change?",
+      "finalText": "Why is it so difficult to change?",
+      "intakeSourceDigest": "f1daed6e02177b633b3fa37a5a51da9171dac7b15ecf5f19a074d75e49d0f5c2",
+      "controlledSourceDigest": "638b76542a376da2882516ec15bf568747e272661f37791f66b5ba8ce085e862",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1929390",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2782652",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3584872",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Personal reflection difficult to change"
+    },
+    {
+      "id": "sent.tatoeba.5517481",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I can't figure out why someone would do something like that.",
+      "finalText": "I can't figure out why someone would do something like that.",
+      "intakeSourceDigest": "4375c4c2e0da56e48a6c615fca37adb20377689f4308a2c57761eb39365d6044",
+      "controlledSourceDigest": "fef821d55c38cccabb0a304c8bcb5743378c39f20d9231d54b2b9a38f82844fb",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1857579",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2980400",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3709107",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Phrasal verb can't figure out why"
+    },
+    {
+      "id": "sent.tatoeba.5518317",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Who else have you asked?",
+      "finalText": "Who else have you asked?",
+      "intakeSourceDigest": "cfb4d1c883c68b6fea89604c5b0fd5ee14ef6be6527eb7aa8b75241101f36988",
+      "controlledSourceDigest": "db6037ae5dba9d7b1c134ff4a50b361a5f6fd009901688ac7fff00bc49b92dc4",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3731626",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.819202",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3302649",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Network inquiry who else have you asked"
+    },
+    {
+      "id": "sent.tatoeba.5518318",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's not like I have anything else to do.",
+      "finalText": "It's not like I have anything else to do.",
+      "intakeSourceDigest": "f017245d679fa30f5a07c44382892be12c5d2bd42d7acb60a5936d7a1827eb7a",
+      "controlledSourceDigest": "5dc70e5b63aeb73ad6c09492e2fd8978a77c28ae5bca1ad3a4a49c71c9e72802",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4826262",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.5518319",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.5521387",
+          "score": 0.8
+        }
+      ],
+      "rationale": "Colloquial defense not like I have anything else to do"
+    },
+    {
+      "id": "sent.tatoeba.5518319",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "It's not like you have anything else to do.",
+      "finalText": "It's not like you have anything else to do.",
+      "intakeSourceDigest": "abcce2f5b01ef200c6825b90b8c6e6a400306163ed12dcbefed44b345b7bf98a",
+      "controlledSourceDigest": "a16058c71e465c9d21e1d2b60cfbf8fe8702ff2e199d6d37c8f6569e6b658ca2",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4826264",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.5518318",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.5521387",
+          "score": 0.8
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5518318"
+    },
+    {
+      "id": "sent.tatoeba.5518322",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't want to think about anything else right now.",
+      "finalText": "I don't want to think about anything else right now.",
+      "intakeSourceDigest": "0fe7adcb252f7a42962bb87908818b8f41ad310a7432c0559a6f498a311bebc6",
+      "controlledSourceDigest": "453e52edf55e23cdba7d0f87e668a82625d18fecdc5fe551cc36ce7b6591cf6d",
+      "maximumTokenJaccard": 0.5833,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2194398",
+          "score": 0.5833333333333334
+        },
+        {
+          "id": "sent.tatoeba.2573233",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.3728902",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Mental focus don't want to think about anything else"
+    },
+    {
+      "id": "sent.tatoeba.5518324",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Diabetes is an expensive disease to treat.",
+      "finalText": "Diabetes is an expensive disease to treat.",
+      "intakeSourceDigest": "a7e9f2598b46d7528782bddd11295486808aed446b488d3967b8d0473e42e23d",
+      "controlledSourceDigest": "9435039086dd03aea6d9440690cce5cc5e1775d4d959d4c5b5a4f3ae1fdc9ff0",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3476648",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.251935",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.2731141",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Healthcare economics diabetes expensive disease"
+    },
+    {
+      "id": "sent.tatoeba.5518337",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I didn't have anything else to do so I thought I'd make myself useful.",
+      "finalText": "I didn't have anything else to do, so I thought I'd make myself useful.",
+      "intakeSourceDigest": "5d95e4936e67fc586c365b80dad051ce5a74a638a2b034ed7510976cf6472e0f",
+      "controlledSourceDigest": "c8c83e50b24f72d53d8df3408afc4a28e8dc44909875be5f532710579051dd5a",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4826060",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.5518345",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.5518318",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Coordinating comma between independent clauses before so"
+    },
+    {
+      "id": "sent.tatoeba.5518345",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I don't have anything else to do.",
+      "finalText": "I don't have anything else to do.",
+      "intakeSourceDigest": "118c04cc61fab646344d238f6caada2862145d63916f5b0670f3fc0dee9f342f",
+      "controlledSourceDigest": "f6b857fc3fce2abca2f2d2a9da5e772b5d199fc534c8a49cb81f08dac9a41d5b",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5518349",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.5518353",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2478785",
+          "score": 0.625
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5518318"
+    },
+    {
+      "id": "sent.tatoeba.5518349",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't have anything else to add.",
+      "finalText": "I don't have anything else to add.",
+      "intakeSourceDigest": "c8edd8688091119df551bfb1697f5727100a92246080368a4d7fb04cc464f9ec",
+      "controlledSourceDigest": "0a50af814cacacf2835dc305842aa352a70fc3cbecd2854df7b51d3f8be6e94a",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5518345",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.2573233",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.4826141",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Meeting closure don't have anything else to add"
+    },
+    {
+      "id": "sent.tatoeba.5518353",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't know how to do anything else.",
+      "finalText": "I don't know how to do anything else.",
+      "intakeSourceDigest": "46084d10fe1a6dbb671fd3319fd5ff36949df5b702786eaeb01a49bebe9e7f99",
+      "controlledSourceDigest": "1df7a55ccae879e49233cef645087be284a0f52317a2a593b9d2ec436b15dff1",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5518345",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1318837",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.1443",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Personal skill limitation don't know how to do anything else"
+    },
+    {
+      "id": "sent.tatoeba.5518378",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "This new technology looks very promising.",
+      "finalText": "This new technology looks very promising.",
+      "intakeSourceDigest": "631453f269774981773352c6b7ccd66ed88399bb7eae8bd89e2c1b6bb9bf104c",
+      "controlledSourceDigest": "71263ab457ff5624230f3d21856e128c4b4ce8521c87a5ff7fbd693df93bd77a",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3571967",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.680931",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.1115643",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Technology assessment looks very promising"
+    },
+    {
+      "id": "sent.tatoeba.5518402",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "No one wants to be a sucker.",
+      "finalText": "No one wants to be a sucker.",
+      "intakeSourceDigest": "8226db1872887d6175ed162b7100a3c18a1763db6e452ac47b541e579d4ba6df",
+      "controlledSourceDigest": "6632f9cb0fb7348a9fd5d3f050baec457eff7b1837edff0fbfc2883f43588e9a",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.805316",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.1821426",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3390236",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Colloquial noun wants to be a sucker"
+    },
+    {
+      "id": "sent.tatoeba.5518779",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Do I look like an actress?",
+      "finalText": "Do I look like an actress?",
+      "intakeSourceDigest": "0fcb31cc8c0d4881070510ebefeabac97c3a8eebaf54440bbe8b68e71bde2cb1",
+      "controlledSourceDigest": "fd6def17189d033b8839c24431962ecb4f5cffd57fc164bbb5ab7aa355afe77b",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3551513",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3385970",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3731974",
+          "score": 0.4
+        }
+      ],
+      "rationale": "Appearance question look like an actress"
+    },
+    {
+      "id": "sent.tatoeba.5518857",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "How are we going to fix this?",
+      "finalText": "How are we going to fix this?",
+      "intakeSourceDigest": "8884bc32962ead5258ce5102425aa05218bc523e368e707804d1b4250424c1f6",
+      "controlledSourceDigest": "f742da02a9463f33c6bbca43bb2041a9564f916b55fa13a130b4a94b54cc34bb",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3305863",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.1463539",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2193973",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Problem solving how are we going to fix this"
+    },
+    {
+      "id": "sent.tatoeba.5519171",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Don't tell me you actually believe that nonsense.",
+      "finalText": "Don't tell me you actually believe that nonsense.",
+      "intakeSourceDigest": "dba64b2f907277a8974aa1ed681689187bd1653de78b95bf515ed426ea078857",
+      "controlledSourceDigest": "a6dfd95ca1f7f1b29c9545376435530e0831bf15399294e479d9b86337a932e7",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519176",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5519183",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5519172",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Skepticism idiom actually believe that nonsense"
+    },
+    {
+      "id": "sent.tatoeba.5519172",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "You don't really believe that nonsense, do you?",
+      "finalText": "You don't really believe that nonsense, do you?",
+      "intakeSourceDigest": "d1b856272d6ef27d28c7c798544250c76530431d86adee642591119ba276b09b",
+      "controlledSourceDigest": "f783c5936014450cd5f3e0ba0b7e7d119152d02c2fdf6eaa7832c8feeb4a80d4",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11115134",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3368058",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3513555",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5519171"
+    },
+    {
+      "id": "sent.tatoeba.5519176",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Don't tell me they actually believe that nonsense.",
+      "finalText": "Don't tell me they actually believe that nonsense.",
+      "intakeSourceDigest": "caf8b7888069296286cc09af41a359ef4b3cd2d7efcac53247f93d1e3edd26d2",
+      "controlledSourceDigest": "e9a88f39b19c0c645cccac916f4463b228ff1e9aca2af45606799f498130a536",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519171",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5519183",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.12153901",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5519171"
+    },
+    {
+      "id": "sent.tatoeba.5519183",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Please tell me you don't actually believe that.",
+      "finalText": "Please tell me you don't actually believe that.",
+      "intakeSourceDigest": "688e5fb6079f14eaa81acd5696eabe631a95f65c7150f6039c25b132192d483a",
+      "controlledSourceDigest": "24cd7af92dcad91f43aeca5aa2e64eabfafdec71e3fcfb1fab1271513c22e383",
+      "maximumTokenJaccard": 0.7778,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519171",
+          "score": 0.7777777777777778
+        },
+        {
+          "id": "sent.tatoeba.5519176",
+          "score": 0.6
+        },
+        {
+          "id": "sent.tatoeba.3728011",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5519171"
+    },
+    {
+      "id": "sent.tatoeba.5519187",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "If you're not with us, you're against us.",
+      "finalText": "If you're not with us, you're against us.",
+      "intakeSourceDigest": "a41e0d047bc37e5ca621852bafa6d28cbef8f926f818eea6030b54a1f7adc4a2",
+      "controlledSourceDigest": "4820273037c2f6f447e6b2b500fb95fe774ad752e3984b1416979c5013e2825d",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.635732",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.635734",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2817696",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Political polarization proverb if you're not with us you're against us"
+    },
+    {
+      "id": "sent.tatoeba.5519202",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "This can't possibly be happening.",
+      "finalText": "This can't possibly be happening.",
+      "intakeSourceDigest": "c530f483b375f44b74e8e3a88bb5d29479b8163ba17c487f45e083eec30fb1c5",
+      "controlledSourceDigest": "fa386337fa68429366b2914e557cafcd654d9f2b7023c5cd04c16d0ea997d278",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5509152",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3168570",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.5509275",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5509152"
+    },
+    {
+      "id": "sent.tatoeba.5519236",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This watch is better than that one.",
+      "finalText": "This watch is better than that one.",
+      "intakeSourceDigest": "1d74b50748422fa39e798dac182d6190a34d4e72768c45cc134339455231a33d",
+      "controlledSourceDigest": "c32df21d1ab0c3473a6036952234df67ea77d7e542bdc544776167e984d9231a",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3349326",
+          "score": 0.75
+        },
+        {
+          "id": "sent.gra2.02.07.1",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.2258796",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Comparative demonstration this watch is better than that one"
+    },
+    {
+      "id": "sent.tatoeba.5519284",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'd like a little more tea.",
+      "finalText": "I'd like a little more tea.",
+      "intakeSourceDigest": "593e296a56398508a3e89c0c371ed66ab68418015d7eb6a17061a840afb0e980",
+      "controlledSourceDigest": "beb7737a0e68c180ca34240409d5e9d507602fbfccca77a3e936ec5c295a2298",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3868383",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2411658",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2857352",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Polite hospitality request little more tea"
+    },
+    {
+      "id": "sent.tatoeba.5519286",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Why is life so hard?",
+      "finalText": "Why is life so hard?",
+      "intakeSourceDigest": "cd397918c21f61ac577b82193b35f90787976751957d7f87229c88112b6c79c4",
+      "controlledSourceDigest": "205333a5a41709f77861a0d86917a4c5329ad900c1e429d87dee629cf932a188",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3584872",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2751486",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1155610",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Existential question why is life so hard"
+    },
+    {
+      "id": "sent.tatoeba.5519293",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "We can't cut down that tree.",
+      "finalText": "We can't cut down that tree.",
+      "intakeSourceDigest": "036d8f69517774af74eccd87dbf37029df4366ef5b8672e413a99f8a49627597",
+      "controlledSourceDigest": "fba2d699daf135a6f5f39d59deb7cde4cc5ac8aecea630a047df2db3ba0565f6",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.11822385",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2719661",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.3329418",
+          "score": 0.3
+        }
+      ],
+      "rationale": "Environmental protection can't cut down that tree"
+    },
+    {
+      "id": "sent.tatoeba.5519303",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Protestors destroyed a police car and looted several businesses.",
+      "finalText": "Protestors destroyed a police car and looted several businesses.",
+      "intakeSourceDigest": "42ccf929efbcb9ffae83545ca631a5273f52b57159ce036080fd256ca270e517",
+      "controlledSourceDigest": "573edd740f70955022435cf3adb3746845956cadd5984bd54aa19e444dae5257",
+      "maximumTokenJaccard": 0.2,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.681406",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tt.l004-p001.008",
+          "score": 0.2
+        },
+        {
+          "id": "sent.tatoeba.275515",
+          "score": 0.1875
+        }
+      ],
+      "rationale": "Civil unrest, looting, and vehicle destruction"
+    },
+    {
+      "id": "sent.tatoeba.5519751",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Don't forget to tip the waiter.",
+      "finalText": "Don't forget to tip the waiter.",
+      "intakeSourceDigest": "70a02a937be0cd275dde8dd8910ed7f4a5199052e1efc0a1b147cc6bcd1c6c40",
+      "controlledSourceDigest": "a05b2d618baf8d3c13a49298c2d6cb7ebbad3e8bf8ec4ece536901c8e13cbc0d",
+      "maximumTokenJaccard": 0.4545,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.33740",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3667566",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2265879",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Dining custom tip the waiter"
+    },
+    {
+      "id": "sent.tatoeba.5519754",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "I got an anonymous tip.",
+      "finalText": "I got an anonymous tip.",
+      "intakeSourceDigest": "65d300b203408efba9c2863dd09a99efe6f3e5643a5fe5b35b8232debd8e0ae7",
+      "controlledSourceDigest": "d38054437549038eb04784daac0f8bb8ef3ba9cbbb5740009acc45ce70bb187c",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519761",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.73168",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.2266978",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Investigative idiom anonymous tip"
+    },
+    {
+      "id": "sent.tatoeba.5519761",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We got an anonymous tip.",
+      "finalText": "We got an anonymous tip.",
+      "intakeSourceDigest": "3504299fe5c845570e59784bac0ef614cbd62a733a654ad2b64b15d258cf1326",
+      "controlledSourceDigest": "c77d051ac8ce1a89557d7aa8040f4b29c2191affa2e709c0e2fa247098c249a0",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5519754",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2259777",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3725761",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5519754"
+    },
+    {
+      "id": "sent.tatoeba.5519921",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I can't decide that for you.",
+      "finalText": "I can't decide that for you.",
+      "intakeSourceDigest": "94273d63d4be44682f9dc409cbb89734a39c9190146d3a7d7347f499132e5e7a",
+      "controlledSourceDigest": "11e19326a557cb687ae7f2d1741a8ab72512c52a1af59c62ade417b89a6479b8",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4059228",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.3722786",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3729160",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Decision autonomy can't decide that for you"
+    },
+    {
+      "id": "sent.tatoeba.5519937",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "This is not at all what I had expected.",
+      "finalText": "This is not at all what I had expected.",
+      "intakeSourceDigest": "18c5bf489ed69f3b05e7813e13782c03e36cfc203f2f66f41cf89358278f5953",
+      "controlledSourceDigest": "642d9936cdc9a15bd4c5ccd275fbef65e3a36d8c87148186879623a5af45d30d",
+      "maximumTokenJaccard": 0.4167,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2439702",
+          "score": 0.4166666666666667
+        },
+        {
+          "id": "sent.tatoeba.1120646",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.3716241",
+          "score": 0.36363636363636365
+        }
+      ],
+      "rationale": "Past perfect expectation not at all what I had expected"
+    },
+    {
+      "id": "sent.tatoeba.5520041",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "They both want the same thing.",
+      "finalText": "They both want the same thing.",
+      "intakeSourceDigest": "4c81b75fdee0c7ab030ee1ae5a33e555cb509a5f24dc128dd3dd1f2082bb5030",
+      "controlledSourceDigest": "7eff8b67fb755de27c45001e538c59b72711694d8b80834a658bf11dafa6f1cf",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.1230781",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1535765",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2977952",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Common goal both want the same thing"
+    },
+    {
+      "id": "sent.tatoeba.5520417",
+      "outcome": "publish",
+      "cefr": "B2",
+      "originalText": "Tom's old car has finally given up the ghost.",
+      "finalText": "Tom's old car has finally given up the ghost.",
+      "intakeSourceDigest": "b00acd0683057789d066a407fd7dc647bae7317447894a4b09caafc340a43827",
+      "controlledSourceDigest": "fb3e88d9db69a16d58c607bffa3c1e6c9f1df66b14cf28baa48ae463fa5f36fb",
+      "maximumTokenJaccard": 0.2727,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.622821",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.239102",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.2542735",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Idiomatic mechanical failure given up the ghost"
+    },
+    {
+      "id": "sent.tatoeba.5520474",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You've got it all wrong.",
+      "finalText": "You've got it all wrong.",
+      "intakeSourceDigest": "3d8bd6c196da21eaa39d2d54056876adc7f0a8c5336eec4fc0181a9dd8e42c75",
+      "controlledSourceDigest": "a883d9201410561fe3213efa0e1a34310e6b79afc50fe2ae0a53ded5be1b4dc5",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.273831",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.3724116",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2342547",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Misunderstanding correction got it all wrong"
+    },
+    {
+      "id": "sent.tatoeba.5520478",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "This is my home now.",
+      "finalText": "This is my home now.",
+      "intakeSourceDigest": "43ab8e749703c8761b72489bf4152ffef2c26489c98be4bedaf66ce34a6b9541",
+      "controlledSourceDigest": "b7a9a7e04648d3df83a45a6acd07c8facea34c1c3ae9690efdf44c1c2cf97d27",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5520480",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2090624",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1005358",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Belonging statement this is my home now"
+    },
+    {
+      "id": "sent.tatoeba.5520480",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Boston is my home now.",
+      "finalText": "Boston is my home now.",
+      "intakeSourceDigest": "d7039dfe9cabdc57161953e611f122bbc00a765a62407a3a7f75c23b6d567349",
+      "controlledSourceDigest": "fe0d4562edef4502f1a57c855dced20de6e4ceac6cf50e5e7bc8db194457d76d",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5520478",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2941646",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2090624",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5520478"
+    },
+    {
+      "id": "sent.tatoeba.5520532",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "That's not my strong suit.",
+      "finalText": "That's not my strong suit.",
+      "intakeSourceDigest": "f4a15dfc29f1606c55b7322f8fca31013c164b2c0d1bcf49b2229fde79a056db",
+      "controlledSourceDigest": "6996a1a4092b556d992e9a8d27b1d58d0719c388fa879d44e0e14c26106875eb",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3722848",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.327205",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.1766115",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Idiom not my strong suit"
+    },
+    {
+      "id": "sent.tatoeba.5520534",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Thank you so much for helping me.",
+      "finalText": "Thank you so much for helping me.",
+      "intakeSourceDigest": "b83396db8c6b6b116ea27250e1d950a9398f4ea4bf8551d4df517f88734b0cef",
+      "controlledSourceDigest": "a564697b60fb6de48039dd1d63ecbd680346079612d1c0aefb82dbd1350d49f7",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.gra2.05.05.2",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2804280",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2812101",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Gratitude expression thank you so much for helping me"
+    },
+    {
+      "id": "sent.tatoeba.5520684",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I feel like today is going to be one of those days.",
+      "finalText": "I feel like today is going to be one of those days.",
+      "intakeSourceDigest": "c01ea03363e313be33435681c29a96b800d4e1037a263b0f6fc05c74c9b6329c",
+      "controlledSourceDigest": "fa5da7cc8b31163b21631352900179b48517af615f9c5679aee710fd37eaa8d6",
+      "maximumTokenJaccard": 0.4,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3299713",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.3492778",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2838675",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Idiomatic premonition one of those days"
+    },
+    {
+      "id": "sent.tatoeba.5520688",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Let me know when it's done.",
+      "finalText": "Let me know when it's done.",
+      "intakeSourceDigest": "3d93215100d7d47f339754a46a1830ccc3a48ee5978773d774ad589795577f2c",
+      "controlledSourceDigest": "e89f56cbbcc642afb336d875381ed8a3f36519931c58ddc7821a5e31a0630943",
+      "maximumTokenJaccard": 0.7143,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4726355",
+          "score": 0.7142857142857143
+        },
+        {
+          "id": "sent.tatoeba.2990908",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.284061",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Notification request let me know when it's done"
+    },
+    {
+      "id": "sent.tatoeba.5520696",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "So, will you do it?",
+      "finalText": "So, will you do it?",
+      "intakeSourceDigest": "91269c0e5aaa207f2c4033d8dae681b972b5e485143d4455c73574aa8f589a2c",
+      "controlledSourceDigest": "1efbe0dee1b837a33164810f109c894b1c240611227a3cba67c21aafb4c20638",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2769113",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3724673",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.2270619",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Decision question will you do it"
+    },
+    {
+      "id": "sent.tatoeba.5520743",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Could I speak to you, in private, please?",
+      "finalText": "Could I speak to you in private, please?",
+      "intakeSourceDigest": "dbac6b7f9f836ba88622b399e55b07ca3fb4f8875f791199168aecd2c29d0f18",
+      "controlledSourceDigest": "5a6a1d36cc71e2c753f5ae8f74f550a6951fe916ee2c9dc00009a682420a01a1",
+      "maximumTokenJaccard": 0.4444,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3728958",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3731966",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.4079970",
+          "score": 0.38461538461538464
+        }
+      ],
+      "rationale": "Removed superfluous parenthetical commas around adverbial phrase in private"
+    },
+    {
+      "id": "sent.tatoeba.5520755",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You're not going to get away with this.",
+      "finalText": "You're not going to get away with this.",
+      "intakeSourceDigest": "ef353fb5727821aa2587ce65437806b18028bf6cbcf1a0abb5d6f693115f67df",
+      "controlledSourceDigest": "abf5f063943806f91ed7106b324aee7c76967c1f65be8dc3fa05e6085ab1f0a9",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3260943",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.2182817",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.3361123",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Accountability warning not going to get away with this"
+    },
+    {
+      "id": "sent.tatoeba.5520880",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Stop crying. You'll ruin your mascara.",
+      "finalText": "Stop crying. You'll ruin your mascara.",
+      "intakeSourceDigest": "b818b80721cbab87c2e2633aea10734d5b632a1650f42c481e9389e9a288092e",
+      "controlledSourceDigest": "994bd19370c833d978209e7afaad5722076a885ef247a3ead034656c075350c0",
+      "maximumTokenJaccard": 0.2222,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2768997",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.3724081",
+          "score": 0.2222222222222222
+        },
+        {
+          "id": "sent.tatoeba.3724885",
+          "score": 0.2222222222222222
+        }
+      ],
+      "rationale": "Cosmetic reassurance ruin your mascara"
+    },
+    {
+      "id": "sent.tatoeba.5520886",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'll see you down at the beach.",
+      "finalText": "I'll see you down at the beach.",
+      "intakeSourceDigest": "acee1d827cb8c080206dbbc0982e245904fd81b7c17822fcc38e855afadbd287",
+      "controlledSourceDigest": "5c30bc972ce4a89af2312328b484f0c75aca44492cdd9e9f5a5d08e4ef989276",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3212851",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3726558",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3218368",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Recreational meeting down at the beach"
+    },
+    {
+      "id": "sent.tatoeba.5520916",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "Tom almost cracked my ribs when he hugged me.",
+      "finalText": "Tom almost cracked my ribs when he hugged me.",
+      "intakeSourceDigest": "6956bd25d400fd766fc2eb485fc730d9f2bb0c83ffdfc7d7cc95f4b42805ba8f",
+      "controlledSourceDigest": "7539f07ed0ae8c0bcecc73c2da445141bb7c3dba9c150fda4c702bb91a38f4ee",
+      "maximumTokenJaccard": 0.3077,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3722811",
+          "score": 0.3076923076923077
+        },
+        {
+          "id": "sent.tatoeba.1526500",
+          "score": 0.2727272727272727
+        },
+        {
+          "id": "sent.tatoeba.2568604",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Affectionate hyperbole almost cracked my ribs"
+    },
+    {
+      "id": "sent.tatoeba.5520990",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "A lot can happen between now and then.",
+      "finalText": "A lot can happen between now and then.",
+      "intakeSourceDigest": "8f082c4e149ad95d8b6ea660f666d6e54ac3bbaa9d430ee942d27b7667ff7284",
+      "controlledSourceDigest": "548e0dec7b14f33db26774f8ca6824cad9ad81fff23d4bfcb77c35f13d2a254c",
+      "maximumTokenJaccard": 0.3,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4834890",
+          "score": 0.3
+        },
+        {
+          "id": "sent.tatoeba.54553",
+          "score": 0.2857142857142857
+        },
+        {
+          "id": "sent.tatoeba.2258503",
+          "score": 0.2727272727272727
+        }
+      ],
+      "rationale": "Temporal phrase between now and then"
+    },
+    {
+      "id": "sent.tatoeba.5520992",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It took me a long time to get over it.",
+      "finalText": "It took me a long time to get over it.",
+      "intakeSourceDigest": "c86cb51b30d17b2ca579c956d5d09d20121db151366993a901a377969d65053a",
+      "controlledSourceDigest": "58e6be6da14d510040b2262f94e2c0413f2f44be6fd2e42ca66fa95798a3d96f",
+      "maximumTokenJaccard": 0.6364,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2499041",
+          "score": 0.6363636363636364
+        },
+        {
+          "id": "sent.tatoeba.309057",
+          "score": 0.4666666666666667
+        },
+        {
+          "id": "sent.tatoeba.319790",
+          "score": 0.46153846153846156
+        }
+      ],
+      "rationale": "Phrasal verb get over it"
+    },
+    {
+      "id": "sent.tatoeba.5520998",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I'm sure we'll find something to do.",
+      "finalText": "I'm sure we'll find something to do.",
+      "intakeSourceDigest": "2c9e494f043a770bf3f9152b666721a652b145aaac2792237b6165cb0106e553",
+      "controlledSourceDigest": "5073a0f931c381ac9f947be095bb884be76a9d4d4950135b771a28a1dc219643",
+      "maximumTokenJaccard": 0.3636,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2366686",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.2812054",
+          "score": 0.36363636363636365
+        },
+        {
+          "id": "sent.tatoeba.20957",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Optimistic recreation find something to do"
+    },
+    {
+      "id": "sent.tatoeba.5521156",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We were supposed to go together.",
+      "finalText": "We were supposed to go together.",
+      "intakeSourceDigest": "55809f55dcc7d4b3afaf1e281e1a25b03ec24040f0576aa791d397b721e72d34",
+      "controlledSourceDigest": "71e3db43252544c9a2c2c90891ee8cfbf67d424187b9a810de197cd01068092f",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4010308",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.13245815",
+          "score": 0.4
+        },
+        {
+          "id": "sent.tatoeba.2275713",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Unfulfilled expectation supposed to go together"
+    },
+    {
+      "id": "sent.tatoeba.5521229",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I'd say yes if I were you.",
+      "finalText": "I'd say yes if I were you.",
+      "intakeSourceDigest": "fb681f213ba4cf3e944c3314ac74a08c7685eca63dc2edd8230318e7f87cb87f",
+      "controlledSourceDigest": "60e5cc696495046401e6d99ed7e00e9213bfeb6ed3f4f57623ea6d94cc552333",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5521230",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.3728955",
+          "score": 0.45454545454545453
+        },
+        {
+          "id": "sent.tatoeba.3774051",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Second conditional advice say yes if I were you"
+    },
+    {
+      "id": "sent.tatoeba.5521230",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "I'd say no if I were you.",
+      "finalText": "I'd say no if I were you.",
+      "intakeSourceDigest": "59aa45d597e0722344d76efb27a472b3b9f6eca4539e8a21269864de348a18e6",
+      "controlledSourceDigest": "bf5c0aa15d6c8e39cf5ac2b5a68360fdec206f83c748fafd3086e5fd175d004a",
+      "maximumTokenJaccard": 0.75,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5521229",
+          "score": 0.75
+        },
+        {
+          "id": "sent.tatoeba.2834412",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3728955",
+          "score": 0.45454545454545453
+        }
+      ],
+      "rationale": "Intra-batch duplicate polarity flip of sent.tatoeba.5521229"
+    },
+    {
+      "id": "sent.tatoeba.5521250",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "What else did you two do?",
+      "finalText": "What else did you two do?",
+      "intakeSourceDigest": "53d3004616da060adc23b4fc356d93f95b00a7ce9e54656e86e52402f2f18a36",
+      "controlledSourceDigest": "6a9927279abd4690564ac7a25ab87a6ca6798b3591dc5a433e1cb0542ef81063",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2474691",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.274613",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.3044167",
+          "score": 0.5714285714285714
+        }
+      ],
+      "rationale": "Activity inquiry what else did you two do"
+    },
+    {
+      "id": "sent.tatoeba.5521302",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Tom put his arms around me.",
+      "finalText": "Tom put his arms around me.",
+      "intakeSourceDigest": "45a4ded8728333dd38da31616129cd72c24ffb19744c89122b6d83c464635382",
+      "controlledSourceDigest": "b710fe0bcb6629ede967cc2a4337349b8193994de46084293b713bda8b473cfe",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3730067",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.2198725",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.4570973",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Affectionate action put his arms around me"
+    },
+    {
+      "id": "sent.tatoeba.5521334",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "I won't say anything to anyone.",
+      "finalText": "I won't say anything to anyone.",
+      "intakeSourceDigest": "f062f6a72b4c5382bc0e00f34e316d75c9c00212105d9d2cd22b2a4189fe9416",
+      "controlledSourceDigest": "8ea9c7e9820e499cf0414c175274d12cfcf7443fb703aa2292828a393bf3a96e",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3074279",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2252848",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3693728",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Confidentiality pledge won't say anything to anyone"
+    },
+    {
+      "id": "sent.tatoeba.5521335",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Let's go back to the party.",
+      "finalText": "Let's go back to the party.",
+      "intakeSourceDigest": "cd8562d98b59ef9e36c101a6d9ce1297f0f1bfb4ca394c6629e995986f212908",
+      "controlledSourceDigest": "64e06c6285a7e41df0041d41108daa52afd3fd5259e9599d421ab7ed595d0042",
+      "maximumTokenJaccard": 0.5714,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3259447",
+          "score": 0.5714285714285714
+        },
+        {
+          "id": "sent.tatoeba.1867347",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2267523",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Social return let's go back to the party"
+    },
+    {
+      "id": "sent.tatoeba.5521354",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "You promised you'd be there.",
+      "finalText": "You promised you'd be there.",
+      "intakeSourceDigest": "c202dfa196f3d059231d95e75f9df1ce58e8414905eaccab0903e5658d226bf4",
+      "controlledSourceDigest": "9496d17dbb852dfecdb88491e0335535e2e8083c8d602e82c88896bfa9c72026",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.4719412",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.2263318",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.427720",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Broken promise promised you'd be there"
+    },
+    {
+      "id": "sent.tatoeba.5521387",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "It's not like we have anything else to do.",
+      "finalText": "It's not like we have anything else to do.",
+      "intakeSourceDigest": "44b88ddedc25b84f072143c3494e8c6868eb171ef8ccb02fa04d57256e58e51a",
+      "controlledSourceDigest": "367ea43713ce01ccbd87e484912c9b225fc286820bd836b31f03472c9e62c19e",
+      "maximumTokenJaccard": 0.8,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5518318",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.5518319",
+          "score": 0.8
+        },
+        {
+          "id": "sent.tatoeba.4826262",
+          "score": 0.6363636363636364
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5518318"
+    },
+    {
+      "id": "sent.tatoeba.5521389",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Good luck. You're going to need it.",
+      "finalText": "Good luck. You're going to need it.",
+      "intakeSourceDigest": "9c81f5652c6e1d3ab8247a68f2246444294c698501587b8902f4221a0d579dc9",
+      "controlledSourceDigest": "d8c3ee898d72feca2c156703cd094bfa1343563b04c19b37f8f1d01db99244ff",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3728435",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2929263",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.3724221",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Sardonic encouragement you're going to need it"
+    },
+    {
+      "id": "sent.tatoeba.5521780",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Would you mind looking after my kids?",
+      "finalText": "Would you mind looking after my kids?",
+      "intakeSourceDigest": "9a215ed4f7c94bbc96559377fd58c4f3aca1c835a05362a2f4a20e73ffcfa756",
+      "controlledSourceDigest": "f33d5d3166887b557ffee2650bfd4369137c0cea585c5ae096f259840a06855b",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5521787",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1820675",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.31447",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Childcare request looking after my kids"
+    },
+    {
+      "id": "sent.tatoeba.5521787",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Would you mind babysitting my kids?",
+      "finalText": "Would you mind babysitting my kids?",
+      "intakeSourceDigest": "245c3e0908b27f1718e02249a4fbf23daebed2c917fc62958d7e9a77d5c5e896",
+      "controlledSourceDigest": "89c654b3c8a2674a9a96e4b0615e72fd3f49708c9eff0c378276ecddf3ad662d",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.5521780",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1820675",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.326585",
+          "score": 0.375
+        }
+      ],
+      "rationale": "Intra-batch duplicate variant subsumed by sent.tatoeba.5521780"
+    },
+    {
+      "id": "sent.tatoeba.5521791",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "The smell of dirty socks makes me want to throw up.",
+      "finalText": "The smell of dirty socks makes me want to throw up.",
+      "intakeSourceDigest": "207b7fb1f7816809f5ee9f8d80f30bfdf47d2ceaab6c4c1e6c946d405dcd8386",
+      "controlledSourceDigest": "719416cf586fd216aecbc3dcb2df70d44c323117a67108f15761c38e17157886",
+      "maximumTokenJaccard": 0.4615,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2334873",
+          "score": 0.46153846153846156
+        },
+        {
+          "id": "sent.tatoeba.268737",
+          "score": 0.38461538461538464
+        },
+        {
+          "id": "sent.tatoeba.2460778",
+          "score": 0.2857142857142857
+        }
+      ],
+      "rationale": "Crude visceral disgust reference"
+    },
+    {
+      "id": "sent.tatoeba.5523470",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "You don't snore, do you?",
+      "finalText": "You don't snore, do you?",
+      "intakeSourceDigest": "e4167e696d3edbaa0b04217ef936264968ba91a8f30d26b307bf540612338a19",
+      "controlledSourceDigest": "6a479085142970cdc9e5219a09377052045b444f86a4f02994f45dcda6157518",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2211127",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2211129",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.2864644",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Sleep habit tag question you don't snore do you"
+    },
+    {
+      "id": "sent.tatoeba.5523546",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "There are many different types of kisses.",
+      "finalText": "There are many different types of kisses.",
+      "intakeSourceDigest": "563fd976e26a111fd0099920ad702e9b05cc2538f575fca0d1d65c15a20a4f65",
+      "controlledSourceDigest": "1eaf3a5a6c491ab5ccf8477903fac5822041488070f602b75aaeb9c65f95dd9c",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3547470",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.680345",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.68772",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Affection category types of kisses"
+    },
+    {
+      "id": "sent.tatoeba.5523548",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "It's just a stupid rumor.",
+      "finalText": "It's just a stupid rumor.",
+      "intakeSourceDigest": "d9d2cbf79021842217d40077b39bb114ea35f0306fb48561d1f4ff1853b034fe",
+      "controlledSourceDigest": "3cffaf8409c6ff62adc63ee030123476c82313ac47cc8853cb04983c3fa10595",
+      "maximumTokenJaccard": 0.4286,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2243460",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3727577",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.3730168",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Gossip dismissal just a stupid rumor"
+    },
+    {
+      "id": "sent.tatoeba.5523735",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "We don't get many visitors around here.",
+      "finalText": "We don't get many visitors around here.",
+      "intakeSourceDigest": "94c9e8f7b1039835c8558bf6689212d64b25c69e2369ab62dd7b44335257209f",
+      "controlledSourceDigest": "cce17e1ab58e10c386580c52e41db7719212a517df1e1d2cde26ca1e7ccba7dd",
+      "maximumTokenJaccard": 0.8571,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2125122",
+          "score": 0.8571428571428571
+        },
+        {
+          "id": "sent.tatoeba.2194384",
+          "score": 0.4444444444444444
+        },
+        {
+          "id": "sent.tatoeba.2125130",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Quiet location don't get many visitors"
+    },
+    {
+      "id": "sent.tatoeba.5523912",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I don't remember inviting you here.",
+      "finalText": "I don't remember inviting you here.",
+      "intakeSourceDigest": "af85ff043a221d4f2241fd4584c085d78a8f2ba2c0c77cee7fd8ef4426ebd4e7",
+      "controlledSourceDigest": "e77ea63437e228c6b13de694d369a09c6d0f9a7fc950b53e9b840f6777faa4c6",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2835867",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3366536",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3727540",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Confrontation don't remember inviting you"
+    },
+    {
+      "id": "sent.tatoeba.5523913",
+      "outcome": "publish",
+      "cefr": "A1",
+      "originalText": "Can I go to my room now?",
+      "finalText": "Can I go to my room now?",
+      "intakeSourceDigest": "0a9f8bae661c3e0e039121e42d30e528054927cb2608eaca58f44dba6209109f",
+      "controlledSourceDigest": "c78e1a36f1e8a45e7b9a5af29e220002036084c2a1837127d213a3c0e4e08808",
+      "maximumTokenJaccard": 0.625,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.2701493",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.3283434",
+          "score": 0.625
+        },
+        {
+          "id": "sent.tatoeba.1121842",
+          "score": 0.5555555555555556
+        }
+      ],
+      "rationale": "Permission request go to my room now"
+    },
+    {
+      "id": "sent.tatoeba.5523976",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I swear I'll make it up to you.",
+      "finalText": "I swear I'll make it up to you.",
+      "intakeSourceDigest": "833de801d5681c2029c3a769a386a0f3d604bef64b26845bdd0fa2a5d37db64a",
+      "controlledSourceDigest": "00b3f18724c868b15606d41c12c5a2e87d990f72db678c794540b5ca50fb5f05",
+      "maximumTokenJaccard": 0.5556,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3729136",
+          "score": 0.5555555555555556
+        },
+        {
+          "id": "sent.tatoeba.38304",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1439092",
+          "score": 0.4444444444444444
+        }
+      ],
+      "rationale": "Phrasal verb pledge make it up to you"
+    },
+    {
+      "id": "sent.tatoeba.5525686",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "I can't believe you did this to me.",
+      "finalText": "I can't believe you did this to me.",
+      "intakeSourceDigest": "263f8ed500b6c4791799e78c61d877dc2b808115d200435fcc459929b01c5f8a",
+      "controlledSourceDigest": "4021a8854721b439738bf6add0e762736ae60c397fec1db33585d570ddd3f4f7",
+      "maximumTokenJaccard": 0.5455,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3991891",
+          "score": 0.5454545454545454
+        },
+        {
+          "id": "sent.tatoeba.3726177",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.3727105",
+          "score": 0.5
+        }
+      ],
+      "rationale": "Interpersonal betrayal can't believe you did this to me"
+    },
+    {
+      "id": "sent.tatoeba.5525691",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "We were both a bit drunk.",
+      "finalText": "We were both a bit drunk.",
+      "intakeSourceDigest": "95a84b950c40820f85f82d68f22a13531e1931896b1758753e68b199e6f23469",
+      "controlledSourceDigest": "d724c7adc48e65bff02f6e1a5147b0c96459686bb1d629485acfc1e0a17c6eca",
+      "maximumTokenJaccard": 0.375,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726787",
+          "score": 0.375
+        },
+        {
+          "id": "sent.tatoeba.2214064",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.2259795",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Alcohol intoxication reference"
+    },
+    {
+      "id": "sent.tatoeba.5526609",
+      "outcome": "publish",
+      "cefr": "B1",
+      "originalText": "With the closure of the bridge, it will take a lot longer to get to the airport.",
+      "finalText": "With the closure of the bridge, it will take a lot longer to get to the airport.",
+      "intakeSourceDigest": "475285bdc130dfbbfaa8f85a7c0cddb62f1a765adad6f54aec7a423d76543592",
+      "controlledSourceDigest": "5eb12eba50c436ac27150cecda8dc6a786e869e6fd2852a0b53aa383a8f763e7",
+      "maximumTokenJaccard": 0.3529,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.46121",
+          "score": 0.35294117647058826
+        },
+        {
+          "id": "sent.tatoeba.43974",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.277959",
+          "score": 0.3157894736842105
+        }
+      ],
+      "rationale": "Transit disruption with the closure of the bridge"
+    },
+    {
+      "id": "sent.tatoeba.5526880",
+      "outcome": "reject",
+      "cefr": null,
+      "originalText": "Mary claims you stole her pearls.",
+      "finalText": "Mary claims you stole her pearls.",
+      "intakeSourceDigest": "accc5fbd671dd39a1a01b2439c9314a202a36ef59478ed9370a7fa382726ca78",
+      "controlledSourceDigest": "303a653992936f00e297c9ad1cd6d521625dc1442bd14d5572bb942369a73e14",
+      "maximumTokenJaccard": 0.6667,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3667163",
+          "score": 0.6666666666666666
+        },
+        {
+          "id": "sent.tatoeba.2858959",
+          "score": 0.25
+        },
+        {
+          "id": "sent.tatoeba.3234479",
+          "score": 0.25
+        }
+      ],
+      "rationale": "Criminal theft accusation"
+    },
+    {
+      "id": "sent.tatoeba.5529151",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "Tom is a math nerd.",
+      "finalText": "Tom is a math nerd.",
+      "intakeSourceDigest": "14420a37f81212431387bd855a5c8d293c239f3394e3a12d63af41836aedc62e",
+      "controlledSourceDigest": "aff5275fc245c23eb4b110a19a39b28d6294b934ccb18a987da8fb4707db7925",
+      "maximumTokenJaccard": 0.5,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.3726605",
+          "score": 0.5
+        },
+        {
+          "id": "sent.tatoeba.1660845",
+          "score": 0.42857142857142855
+        },
+        {
+          "id": "sent.tatoeba.1660856",
+          "score": 0.42857142857142855
+        }
+      ],
+      "rationale": "Informal persona label math nerd"
+    },
+    {
+      "id": "sent.tatoeba.5529384",
+      "outcome": "publish",
+      "cefr": "A2",
+      "originalText": "This gym has a climbing wall.",
+      "finalText": "This gym has a climbing wall.",
+      "intakeSourceDigest": "d341a6054634db7f13e7f630a72e42f90f288aef79b27e46e4f8a0bebf614f1f",
+      "controlledSourceDigest": "0c7f0a8c101bd4504b294404c9dc3a4668bc800fca6e1b119be36a88252fbf2e",
+      "maximumTokenJaccard": 0.3333,
+      "nearest": [
+        {
+          "id": "sent.tatoeba.10600142",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1588713",
+          "score": 0.3333333333333333
+        },
+        {
+          "id": "sent.tatoeba.1689505",
+          "score": 0.3333333333333333
+        }
+      ],
+      "rationale": "Recreational facility climbing wall"
+    }
+  ]
+}
