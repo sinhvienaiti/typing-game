@@ -63,9 +63,16 @@ for (const f of e11ClozeFiles) {
   e11ClozeCount+=doc.records?.length??0;
 }
 
-const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount;
+const e11TransformationFiles=sentenceDirFiles.filter(f=>/^e11-transformation-slice-\d+\.json$/.test(f));
+let e11TransformationsCount=0;
+for (const f of e11TransformationFiles) {
+  const doc=await readJson(path.join(root,"content","english","sentences",f));
+  e11TransformationsCount+=doc.records?.length??0;
+}
+
+const expectedExerciseCount=1400+e11TranslationsCount+e11ClozeCount+e11TransformationsCount;
 const expectedExampleCount=1513+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount;
-const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount;
+const expectedSentenceManifestCount=3401+e11TypingTextExpansionCount+tatoebaEnglishPublished.length+e11TranslationSentencesCount+e11TranslationsCount+e11DialoguesCount+e11ClozeCount+e11TransformationsCount;
 const errors=[];
 
 const fileRuntimeLoader={
@@ -140,8 +147,8 @@ const typingTextCloze=exercises.filter(record=>String(record.id??"").startsWith(
 if (typingTextExamples.length!==expectedTypingTextExampleCount||typingTextCloze.length!==300) errors.push("published typing-text slices must expose "+expectedTypingTextExampleCount+" examples + 300 pilot cloze exercises");
 const correctionExercises=exercises.filter(record=>record.type==="error-correction");
 const transformationExercises=exercises.filter(record=>record.type==="transformation");
-if (correctionExercises.length!==100||transformationExercises.length!==100) {
-  errors.push("published E06 reviewed slice must expose 100 correction + 100 transformation exercises");
+if (correctionExercises.length!==100||transformationExercises.length!==(100+e11TransformationsCount)) {
+  errors.push("published E06 reviewed slice must expose 100 correction + "+(100+e11TransformationsCount)+" transformation exercises");
 }
 
 const senseIds=new Set(senses.map(record=>record.id));

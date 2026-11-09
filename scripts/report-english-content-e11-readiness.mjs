@@ -147,6 +147,8 @@ function manifestSources(targetId) {
           sources.push({path:relative,collection:"records"});
         } else if (targetId==="cloze-exercises"&&(setId==="cloze"||setId==="reviewed-cloze")) {
           sources.push({path:relative,collection:"records"});
+        } else if (targetId==="sentence-transformations"&&(setId==="transformations"||setId==="reviewed-transformations")) {
+          sources.push({path:relative,collection:"records"});
         }
       }
     }
